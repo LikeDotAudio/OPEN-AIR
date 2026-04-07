@@ -19,7 +19,7 @@ from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()  # Get the singleton instance
 
-from oaComMQTT.Methods.mqtt_controller_util import MqttControllerUtility
+from oaComProtocols.oaComMQTT.Methods.mqtt_controller_util import MqttControllerUtility
 from oaOchestration.Constants.project_paths import MARKERS_JSON_PATH, MARKERS_CSV_PATH # NEW: Import paths
 
 

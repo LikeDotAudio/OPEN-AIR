@@ -33,12 +33,12 @@ from ..Core.logger import initialize_logging, get_logger, quarantine_logger # As
 # We need to import the MQTT router to subscribe to topics.
 # Assuming it's structured like this, adjust if needed.
 try:
-    from oaComMQTT.Managers.mqtt_subscriber_router import MqttSubscriberRouter
+    from oaComProtocols.oaComMQTT.Managers.mqtt_subscriber_router import MqttSubscriberRouter
 except ImportError:
     logger.error("MqttSubscriberRouter not found. Dynamic log filtering will not function.")
     MqttSubscriberRouter = None # Placeholder to prevent further errors
 
-from oaComMQTT.Core.mqtt_message import MqttMessage
+from oaComProtocols.oaComMQTT.Core.mqtt_message import MqttMessage
 
 # Global instance to manage filters and the MQTT router
 _log_filter_engine = None

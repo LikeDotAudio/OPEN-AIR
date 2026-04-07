@@ -13,12 +13,12 @@ LOCAL_DEBUG = False
 from loguru import logger
 from oaLogging.Core.logger import SYSTEM_LOGGER as sys_logger
 from oaConfigurationManager.FileReaders.config_reader import Config
-from oaComMQTT.Core.mqtt_message import MqttMessage
+from oaComProtocols.oaComMQTT.Core.mqtt_message import MqttMessage
 
 app_constants = Config.get_instance()  # Get the singleton instance
 
-from oaComMQTT.Core.mqtt_publisher_service import publish_payload
-from oaComMQTT.Managers.mqtt_subscriber_router import MqttSubscriberRouter
+from oaComProtocols.oaComMQTT.Core.mqtt_publisher_service import publish_payload
+from oaComProtocols.oaComMQTT.Managers.mqtt_subscriber_router import MqttSubscriberRouter
 
 # Static context for this module
 VERSION = "20260323.1700.1"

@@ -20,7 +20,7 @@ class DebugCrashInterceptingResult(CrashInterceptingResult):
 
 def run_repro():
     # Setup test
-    from oaComMQTT.Tests.test_mqtt_manager import TestMqttManager
+    from oaComProtocols.oaComMQTT.Tests.test_mqtt_manager import TestMqttManager
     suite = unittest.TestSuite()
     suite.addTest(TestMqttManager('test_attempt_reconnect_failed_connection'))
 

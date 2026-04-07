@@ -1,5 +1,5 @@
 # text_table/Table_CSV_check.py
-from oaGuiFramework.Methods.i18n_utils import get_text
+from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 20250821.200641.1
 #
@@ -20,8 +20,8 @@ app_constants = Config.get_instance()
 
 from .Table_CSV_Reader import TableCsvReader
 from .Table_CSV_Writer import TableCsvWriter
-from oaComMQTT.Core import mqtt_publisher_service
-from oaComMQTT.Methods.mqtt_topic_utils import get_topic
+from oaComProtocols.oaComMQTT.Core import mqtt_publisher_service
+from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic
 
 
 class TableCsvCheck:

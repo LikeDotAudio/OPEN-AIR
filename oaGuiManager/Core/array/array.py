@@ -20,7 +20,7 @@ from oaConfigurationManager.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
 from oaGuiManager.Core.context.widget_context import WidgetContext
-from oaGuiFramework.Workers.async_grid_renderer import AsyncGridRenderer
+from oaGui.Workers.async_grid_renderer import AsyncGridRenderer
 
 class ViewManager:
     def __init__(self, root_widget):

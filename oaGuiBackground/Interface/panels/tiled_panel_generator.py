@@ -10,7 +10,7 @@ import math
 import time
 from oaGuiElements.Methods.utils import PanelUtils
 from .panel_generator import PanelGenerator
-from oaTranslator.Core.work_stealing_pool import WorkStealingPool
+from oaStateCache.Core.work_stealing_pool import WorkStealingPool
 from oaLogging.Core.logger import builder_logger
 
 LOCAL_DEBUG = False

@@ -1,5 +1,5 @@
 # text_table/table_editing_inplace_mixin.py
-from oaGuiFramework.Methods.i18n_utils import get_text
+from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 20250821.200641.1
 #
@@ -20,7 +20,7 @@ from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
 
-from oaComMQTT.Methods.mqtt_topic_utils import get_topic
+from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic
 
 
 class TableEditingInplaceMixin:

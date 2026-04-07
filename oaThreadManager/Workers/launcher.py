@@ -32,7 +32,7 @@ from oaConfigurationManager.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
 # --- Core/Mandatory Imports Only ---
-from oaComMQTT.Entry import MqttConnectionManager, MqttSubscriberRouter, MqttManager
+from oaComProtocols.oaComMQTT.Entry import MqttConnectionManager, MqttSubscriberRouter, MqttManager
 from oaComBroker.Entry import ProtocolRouter
 
 class CriticalModuleMissingError(Exception): pass
@@ -72,14 +72,14 @@ def launch_core_managers(state_cache_manager, mqtt_connection_manager):
 
     aes70_manager = None
     osc_manager = _load_protocol_manager(
-        "oaComOSC.Entry", "get_manager",
+        "oaComProtocols.oaComOSC.Entry", "get_manager",
         state_cache_manager=state_cache_manager, mqtt_connection_manager=mqtt_connection_manager, run_bridge=True
     )
 
     snmp_manager = None
     if getattr(app_constants, "SCAN_SNMP", False):
         snmp_manager = _load_protocol_manager(
-            "oaComSNMP.Entry", "get_manager",
+            "oaComProtocols.oaComSNMP.Entry", "get_manager",
             state_cache_manager=state_cache_manager, 
             mqtt_connection_manager=mqtt_connection_manager, 
             subscriber_router=subscriber_router,
@@ -90,21 +90,21 @@ def launch_core_managers(state_cache_manager, mqtt_connection_manager):
     midi_manager = None
     if getattr(app_constants, "SCAN_MIDI", False):
         midi_manager = _load_protocol_manager(
-            "oaComMidi.Entry", "get_manager",
+            "oaComProtocols.oaComMidi.Entry", "get_manager",
             state_cache_manager=state_cache_manager, run_bridge=True
         )
 
     rest_manager = _load_protocol_manager(
-        "oaComREST.Entry", "get_manager",
+        "oaComProtocols.oaComREST.Entry", "get_manager",
         state_cache_manager=state_cache_manager, protocol_router=protocol_router
     )
     
-    visa_entry_path = "oaComVisa.Entry"
+    visa_entry_path = "oaComProtocols.oaComVisa.Entry"
     if importlib.util.find_spec(visa_entry_path):
         visa_entry = importlib.import_module(visa_entry_path)
         STATE_VISA_FLEET_manager = visa_entry.get_discovery_orchestrator(manager_ref=None, aes70_manager=aes70_manager)
     else:
-        raise CriticalModuleMissingError("❌ Critical module missing: oaComVisa.Entry")
+        raise CriticalModuleMissingError("❌ Critical module missing: oaComProtocols.oaComVisa.Entry")
     
     yak_entry_path = "oaTranslator.Entry"
     if importlib.util.find_spec(yak_entry_path):
@@ -135,13 +135,17 @@ def launch_core_managers(state_cache_manager, mqtt_connection_manager):
 
 
     # SMPTE2138 Bridge (Internal Actions -> External st2138 Protobuf)
-    smpte2138_entry_path = "oaComSMPTE2138.Entry"
+    smpte2138_entry_path = "oaComProtocols.oaComSMPTE2138.Entry"
     smpte2138_manager = None
     if importlib.util.find_spec(smpte2138_entry_path):
         smpte2138_entry = importlib.import_module(smpte2138_entry_path)
         smpte2138_manager = smpte2138_entry.start_bridge(mqtt_connection_manager, subscriber_router)
     else:
-        matrix_log("core", "launcher", "launch_core_managers", "⚠️ SMPTE2138 Bridge module (oaComSMPTE2138) not found. Skipping.", "WARNING")
+        matrix_log("core", "launcher", "launch_core_managers", "⚠️ SMPTE2138 Bridge module (oaComProtocols.oaComSMPTE2138) not found. Skipping.", "WARNING")
+
+    # NMOS IS-07 Bridge
+    from oaComBroker.Managers.nmos_manager import NmosManager
+    nmos_manager = NmosManager(registrar_url=getattr(app_constants, "NMOS_REGISTRAR", "http://localhost:4000"))
 
     # --- 2. Linking Phase ---
     matrix_log("core", "launcher", "launch_core_managers", "🚀⚙️🔗 [LAUNCHER] Linking cross-dependent managers...", "DEBUG")
@@ -154,6 +158,8 @@ def launch_core_managers(state_cache_manager, mqtt_connection_manager):
     
     if hasattr(protocol_router, "set_osc_manager") and osc_manager: protocol_router.set_osc_manager(osc_manager)
     if hasattr(protocol_router, "set_midi_manager") and midi_manager: protocol_router.set_midi_manager(midi_manager)
+    if hasattr(protocol_router, "set_snmp_manager") and snmp_manager: protocol_router.set_snmp_manager(snmp_manager)
+    if hasattr(protocol_router, "set_nmos_manager") and nmos_manager: protocol_router.set_nmos_manager(nmos_manager)
     if hasattr(protocol_router, "set_smpte2138_manager") and smpte2138_manager: protocol_router.set_smpte2138_manager(smpte2138_manager)
     
     def splinker_mqtt_wrapper(msg):
@@ -166,6 +172,7 @@ def launch_core_managers(state_cache_manager, mqtt_connection_manager):
     if aes70_manager: aes70_manager.start()
     if osc_manager: osc_manager.start()
     if midi_manager: midi_manager.start()
+    if nmos_manager: nmos_manager.start()
     if rest_manager: rest_manager.start()
     
     if hasattr(STATE_VISA_FLEET_manager, "start"): STATE_VISA_FLEET_manager.start()
@@ -203,6 +210,7 @@ def launch_core_managers(state_cache_manager, mqtt_connection_manager):
         "fleet_status_monitor": fleet_status_monitor,
         "ptp_manager": ptp_manager,
         "mqtt_manager": mqtt_manager,
+        "nmos_manager": nmos_manager,
         "protocol_router": protocol_router,
         "smpte2138_manager": smpte2138_manager,
         "start_network_services": start_network_services,

@@ -2,18 +2,26 @@
 
 ![Python Version](https://img.shields.io/badge/python-3.10%2B-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Status](![Status](https://img.shields.io/badge/status-active-success)
+![Status](https://img.shields.io/badge/status-active-success)
 
 ## 💡 Why OPEN-AIR?
 **Traditional instrument software is rigid, vendor-locked, and visually dated.** 
 
-OPEN-AIR was created to bridge the gap between raw hardware capabilities and high-fidelity, user-centric visualization. It transforms your laboratory into a professional, photorealistic cockpit, allowing you to orchestrate a fleet of instruments with the same ease as a single device.
+OPEN-AIR was created to bridge the gap between raw hardware capabilities and 
+high-fidelity, user-centric visualization. It transforms your laboratory into 
+a professional, photorealistic cockpit, allowing you to orchestrate a fleet of 
+instruments with the same ease as a single device.
 
-### The Three Pillars:
-1.  **Freedom from Vendor Lock-in:** Use one interface to control multiple brands of hardware through the YAK command abstraction.
-2.  **Your Folders are Your Interface:** No complex UI designers. Reorganizing your `oaGuiDefinitions/` folders instantly redraws your dashboard.
-3.  **Photorealistic "Next Gen" Visuals:** High-fidelity vintage meters and industrial aesthetics provide a tactile, professional monitoring experience.
-4.  **Hierarchical Forensic Observability:** A refined, matrix-based logging system that allows for surgical debugging and dynamic runtime control.
+### The Four Pillars:
+1.  **Freedom from Vendor Lock-in:** Use one interface to control multiple 
+    brands of hardware through the YAK command abstraction.
+2.  **Partitioned Architecture (Core/UI):** High-performance separation of 
+    real-time hardware logic from the visual rendering engine.
+3.  **Your Folders are Your Interface:** No complex UI designers. 
+    Reorganizing your `oaGui/Assets/` folders instantly redraws your 
+    dashboard via the new Widget Registry.
+4.  **Photorealistic Industrial Aesthetics:** High-fidelity vintage meters and 
+    industrial design provide a tactile, professional monitoring experience.
 
 ---
 
@@ -21,10 +29,11 @@ OPEN-AIR was created to bridge the gap between raw hardware capabilities and hig
 For detailed information, please refer to the modular documentation:
 
 - **[User Manual](oaDocumentation/Manual/01_Introduction.md)**: Start here to learn how to use the software.
+- **[Translator Module](oaTranslator/Documentation/Summary.md)**: Details on the YAK Command Translation and State Mirroring.
 - **[Logging Matrix](oaConfigurationManager/Documentation/logging_matrix.md)**: Learn how the hierarchical debug system works.
 - **[Installation Guide](oaDocumentation/Landmarks/Installation_Guide.md)**: Setup, dependencies, and environment configuration.
 - **[Documentation Map](oaDocumentation/Project_Map/Documentation_Map.md)**: Deep dive into the project structure and modules.
-- **[SMPTE2138 Bridge](oaComSMPTE2138/Documentation/Summary.md)**: Details on the SMPTE ST 2138 (SMPTE2138) Protobuf interface.
+- **[SMPTE2138 Bridge](oaComProtocols/oaComSMPTE2138/Documentation/Summary.md)**: Details on the SMPTE ST 2138 Protobuf interface.
 - **[Communication Broker](oaComBroker/Documentation/README.md)**: Details on the Protocol Router and Unified Message Schema.
 - **[Patent Details](oaDocumentation/Patent/01_abstract.md)**: Technical descriptions of the novel architecture.
 
@@ -33,17 +42,17 @@ For detailed information, please refer to the modular documentation:
 ## 🚀 Quick Start
 ```bash
 # Clone and setup
-git clone https://github.com/LikeDotAudio/OPEN-AIR
+git clone https://github.com/APKaudio/OPEN-AIR
 cd OPEN-AIR
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 
-# Launch the full system
-python3 OpenAir.py
+# Launch the full system (Supervisor Mode)
+python3 openair.py
 ```
 
-*Developed by LikeDotAudio*
+*Developed by Anthony Peter Kuzub (LikeDotAudio)*
 
 
 ## MIT License

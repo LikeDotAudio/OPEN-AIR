@@ -7,7 +7,7 @@
 import orjson
 import inspect
 from typing import Dict, Any, Tuple, Optional
-from oaComMQTT.Core.mqtt_message import MqttMessage
+from oaComProtocols.oaComMQTT.Core.mqtt_message import MqttMessage
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Core.logger import initialize_logging, set_log_directory

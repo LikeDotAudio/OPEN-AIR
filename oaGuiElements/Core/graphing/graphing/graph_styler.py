@@ -1,5 +1,5 @@
 # graphing/graph_styler.py
-from oaGuiFramework.Methods.i18n_utils import get_text
+from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 20250821.200641.1
 #

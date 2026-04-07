@@ -7,7 +7,7 @@
 import unittest
 from unittest.mock import MagicMock, patch
 import tkinter as tk
-from oaTranslator.Core.state_mirror_engine import StateMirrorEngine
+from oaStateCache.Core.state_mirror_engine import StateMirrorEngine
 
 class TestStateMirrorEngine(unittest.TestCase):
     def setUp(self):
@@ -55,7 +55,7 @@ class TestStateMirrorEngine(unittest.TestCase):
         self.assertEqual(topic, "OPEN-AIR/Tab1/custom/path")
         self.assertIn("widget1", self.engine.registered_widgets)
 
-    @patch("oaComMQTT.Core.mqtt_publisher_service.publish_payload")
+    @patch("oaComProtocols.oaComMQTT.Core.mqtt_publisher_service.publish_payload")
     def test_broadcast_gui_change(self, mock_publish):
         """Test that GUI changes trigger MQTT publication."""
         if self.root is None: self.skipTest("No GUI root available")

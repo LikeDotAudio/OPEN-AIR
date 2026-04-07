@@ -1,5 +1,5 @@
 # circular_motion_displacement_potentiometer/circular_motion_displacement_potentiometer.py
-from oaGuiFramework.Methods.i18n_utils import get_text
+from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 20260315.Modular.1
 #

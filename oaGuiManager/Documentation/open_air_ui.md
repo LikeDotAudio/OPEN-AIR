@@ -10,11 +10,11 @@
 The **Dynamic UI Partition** for OPEN-AIR. This module orchestrates the entire graphical environment, handling GUI rendering, state mirroring, and user interaction. It is architecturally decoupled from the **System Core** and communicates via MQTT, ensuring that UI crashes or hangs do not compromise hardware safety or data logging.
 
 ### The Dynamic GUI Building Process
-OPEN-AIR utilizes a "Filesystem-as-Architecture" approach, where the structure of the `oaGuiDefinitions/` directory directly dictates the layout and hierarchy of the user interface.
+OPEN-AIR utilizes a "Filesystem-as-Architecture" approach, where the structure of the `oaGui/Assets/` directory directly dictates the layout and hierarchy of the user interface.
 
 #### Process Flowchart
 ```text
-[ oaGuiDefinitions/ Root ]
+[ oaGui/Assets/ Root ]
        |
        v
 +-----------------+      +-----------------------+
@@ -70,7 +70,7 @@ OPEN-AIR utilizes a "Filesystem-as-Architecture" approach, where the structure o
 The lifecycle begins in `open_air_ui.py`. After initializing the Tkinter environment and showing the `SplashScreen`, control is handed to the `AsyncBootstrapEngine`. This engine initializes asynchronous communication services (MQTT, State Cache, Mirror Engine) before launching the main `Application` class.
 
 #### 2. Architectural Discovery (Directory Crawling)
-The `Application` class (found in `gui_display.py`) initiates a recursive build starting from the `oaGuiDefinitions/` root. This process is managed by the `DirectoryBuilderMixin`.
+The `Application` class (found in `gui_display.py`) initiates a recursive build starting from the `oaGui/Assets/` root. This process is managed by the `DirectoryBuilderMixin`.
 - **Crawl & Scan:** The system walks the directory tree.
 - **Layout Parsing:** The `LayoutParser` analyzes folder names and `layout.json` files to determine the structural container for each branch.
 

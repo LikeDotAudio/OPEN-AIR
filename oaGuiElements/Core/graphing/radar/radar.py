@@ -21,10 +21,10 @@ from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
 
-from oaComMQTT.Methods.mqtt_topic_utils import get_topic
-from oaComMQTT.Core import mqtt_publisher_service
+from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic
+from oaComProtocols.oaComMQTT.Core import mqtt_publisher_service
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
-from oaGuiFramework.Methods.i18n_utils import get_text
+from oaGui.Methods.i18n_utils import get_text
 
 class BuilderDataRadarCreator(TransparencyMixin):
     """

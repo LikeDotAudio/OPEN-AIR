@@ -29,7 +29,7 @@ class DebugCrashInterceptingResult(CrashInterceptingResult):
 def run_all_mqtt_tests():
     # Discover tests
     loader = unittest.TestLoader()
-    suite = loader.discover("oaComMQTT/Tests", pattern="test_*.py")
+    suite = loader.discover("oaComProtocols.oaComMQTT/Tests", pattern="test_*.py")
 
     # Run with CrashInterceptingResult
     runner = TestRunner()

@@ -13,7 +13,7 @@
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-# Version 20260330.1200.1
+# Version 20260406.1935.1
 
 import os
 import sys
@@ -21,25 +21,27 @@ from loguru import logger
 from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
 
+# --- RUST ACCELERATION LAYER (PyO3) ---
 try:
-    from oaTranslator.Core.oaTranslatorCore_rs import compiler_hook
+    from oaStateCache.Core.oaTranslatorCore_rs import compiler_hook
     compiler_hook.ensure_compiled()
     from oatranslatorcore_rs import *
     HAS_RUST = True
 except ImportError:
-    logger.warning("⚠️ [TRANSLATOR] oatranslatorcore_rs not found. Pure Rust mode is mandatory, but continuing for stability.")
+    logger.warning("⚠️ [TRANSLATOR] oatranslatorcore_rs not found. "
+                   "Pure Rust mode is preferred for performance.")
     HAS_RUST = False
 except Exception as e:
-    logger.error(f"❌ [TRANSLATOR] Failed to initialize Rust Translator Core: {e}")
+    logger.error(f"❌ [TRANSLATOR] Failed to initialize Rust Core: {e}")
     HAS_RUST = False
-import inspect
+
 import orjson
 import pathlib
 import re
 import time
 import random
 from typing import Any
-from oaComMQTT.Core.mqtt_message import MqttMessage
+from oaComProtocols.oaComMQTT.Core.mqtt_message import MqttMessage
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Core.logger import initialize_logging, set_log_directory
@@ -47,8 +49,8 @@ from oaLogging.Core.logger import initialize_logging, set_log_directory
 from oaConfigurationManager.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
-from oaComMQTT.Managers.mqtt_connection import MqttConnectionManager
-from oaComMQTT.Managers.mqtt_subscriber_router import MqttSubscriberRouter
+from oaComProtocols.oaComMQTT.Managers.mqtt_connection import MqttConnectionManager
+from oaComProtocols.oaComMQTT.Managers.mqtt_subscriber_router import MqttSubscriberRouter
 from oaOchestration.Constants.project_paths import YAKETY_YAK_REPO_PATH
 
 class YakTranslator:
@@ -58,6 +60,17 @@ class YakTranslator:
     This manager maintains an in-memory repository of command definitions 
     and handles the transformation of MQTT-triggered events into instrument-
     specific messages.
+
+    Responsibilities:
+        - Command Repository Management: Loads and caches YAK JSON definitions.
+        - SCPI Orchestration: Renders templates into hardware-ready strings.
+        - Transaction Correlation: Tracks IDs to link async instrument replies.
+        - Interface Isolation: Maps UI-neutral YAK paths to Core-level SCPI.
+
+    Constraints:
+        - Operates within the UI Partition (Translation Layer).
+        - Requires 'YAKETY_YAK_REPO_PATH' to be accessible for initialization.
+        - Depends on 'oaComProtocols.oaComMQTT' for trigger ingress.
     """
 
     def __init__(
@@ -71,6 +84,10 @@ class YakTranslator:
         Args:
             mqtt_connection_manager: The manager handling MQTT connectivity.
             subscriber_router: Router for managing MQTT topic subscriptions.
+
+        Side Effects:
+            - Performs blocking I/O to load the YAK repository from disk.
+            - Registers global MQTT filters.
         """
         self.mqtt_util = mqtt_connection_manager
         self.subscriber_router = subscriber_router
@@ -80,14 +97,16 @@ class YakTranslator:
         self._load_yak_repository()
         self._setup_mqtt_subscriptions()
 
-        matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, "✅ YakTranslator initialized and ready.", level="SUCCESS")
+        matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, 
+                   "✅ YakTranslator initialized and ready.", level="SUCCESS")
 
     def _load_yak_repository(self):
         """
         Loads YAK command definitions from the filesystem into memory.
         
-        This method ensures the repository directory exists and attempts 
-        to parse the JSON definition file.
+        Navigates to the project-defined repository path and ingests the 
+        JSON command schema. If missing, attempts to initialize a skeletal 
+        defaults file.
         """
         repo_path = YAKETY_YAK_REPO_PATH
 
@@ -98,10 +117,14 @@ class YakTranslator:
             with open(repo_path, "rb") as f:
                 self.yak_repository = orjson.loads(f.read())
             
-            matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, f"📡📥📥 [CONFIG] YAK repository loaded: {repo_path}", level="DEBUG")
+            matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, 
+                       f"📡📥📥 [CONFIG] YAK repository loaded: {repo_path}", 
+                       level="DEBUG")
         else:
-            # ⚡ RESILIENCE: Create an empty repository if it doesn't exist
-            matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, f"⚠️ YAK repository missing. Creating default empty at: {repo_path}", level="WARNING")
+            # ⚡ RESILIENCE: Handle missing repository with graceful fallback.
+            matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, 
+                       f"⚠️ YAK repository missing. Creating default.", 
+                       level="WARNING")
             self.yak_repository = {}
             try:
                 with open(repo_path, "wb") as f:
@@ -110,14 +133,14 @@ class YakTranslator:
                 logger.error(f"❌ Failed to create default YAK repository: {e}")
 
     def _setup_mqtt_subscriptions(self):
-        """
-        Registers MQTT topic filters for incoming YAK command triggers.
-        """
+        """Registers the primary MQTT trigger filter for the translator."""
         trigger_topic_filter = "OPEN-AIR/yak/commands/#"
         self.subscriber_router.subscribe_to_topic(
             trigger_topic_filter, self._on_yak_trigger_message
         )
-        matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, f"🎧 [LISTEN] Subscribed to triggers: '{trigger_topic_filter}'", level="DEBUG")
+        matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, 
+                   f"🎧 [LISTEN] Subscribed to triggers: '{trigger_topic_filter}'", 
+                   level="DEBUG")
 
     def _on_yak_trigger_message(self, msg: MqttMessage):
         """
@@ -129,11 +152,15 @@ class YakTranslator:
         
         Args:
             msg: The incoming MqttMessage object containing topic and payload.
+
+        Side Effects:
+            - Publishes a translated SCPI payload to 'OPEN-AIR/Proxy/Tx_Inbox'.
+            - Updates the internal context store for correlation.
         """
         topic = msg.topic
         payload = msg.payload
         
-        # Extract command path from topic hierarchy
+        # Strip the prefix to resolve the relative YAK path hierarchy.
         yak_command_path = topic.replace("OPEN-AIR/yak/commands/", "").split("/")
 
         declaration = self._get_command_declaration(yak_command_path)
@@ -141,7 +168,7 @@ class YakTranslator:
             logger.error(f"❌ Unknown YAK command path: {yak_command_path}")
             return
 
-        # Handle payload parsing (bytes/str/dict)
+        # Handle various incoming formats; prefer pre-parsed dict if available.
         payload_parsed = orjson.loads(payload) if isinstance(payload, (bytes, str)) else payload
 
         scpi_template = declaration.get("scpi_template")
@@ -154,9 +181,10 @@ class YakTranslator:
             return
 
         is_query = declaration.get("is_query", False)
+        # Generate a lightweight 16-bit correlation ID for async tracking.
         correlation_id = f"{random.getrandbits(16):04X}"
 
-        # Persist context for asynchronous response correlation
+        # Persist command context to map instrument responses back to original path.
         self.command_context_store[correlation_id] = {
             "path_parts": yak_command_path,
             "command_details": declaration.get("Outputs", {}),
@@ -175,17 +203,19 @@ class YakTranslator:
             retain=False,
         )
         
-        matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, f"📡📤📤 [TRANSLATE] SCPI: '{final_scpi_command}' (ID: {correlation_id})", level="DEBUG")
+        matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, 
+                   f"📡📤📤 [TRANSLATE] SCPI: '{final_scpi_command}' "
+                   f"(ID: {correlation_id})", level="DEBUG")
 
     def _get_command_declaration(self, path_parts: list):
         """
-        Navigates the internal repository to find a specific command node.
+        Navigates the internal repository tree to locate a command node.
         
         Args:
-            path_parts: A list of keys representing the command hierarchy.
+            path_parts: Ordered list of keys representing the command path.
             
         Returns:
-            The command declaration dictionary if found, otherwise None.
+            dict: The command declaration node if found, otherwise None.
         """
         node = self.yak_repository
         for part in path_parts:
@@ -196,29 +226,29 @@ class YakTranslator:
 
     def _render_scpi_command(self, scpi_template: str, params: dict):
         """
-        Interpolates parameters into an SCPI template string.
+        Interpolates parameters into a hardware-specific SCPI template.
         
         Args:
-            scpi_template: The raw SCPI string containing {placeholder} tokens.
-            params: Dictionary of values to substitute.
+            scpi_template: Raw SCPI string containing brace-wrapped tokens.
+            params: Key-value pairs for string interpolation.
             
         Returns:
-            The rendered SCPI command string.
+            str: The rendered, ready-to-transmit SCPI command.
         """
         return scpi_template.format(**params)
 
     def retrieve_command_context(self, correlation_id: str):
         """
-        Retrieves and clears context associated with a correlation ID.
+        Retrieves and purges context associated with a specific transaction.
         
-        Used by the RX manager to map instrument responses back to original 
-        requests.
+        Used by the RX manager to bridge instrument responses back to the 
+        originating YAK command path and UI state updates.
         
         Args:
-            correlation_id: The unique hex ID for the command transaction.
+            correlation_id: The unique transaction identifier.
             
         Returns:
-            The stored context dictionary, or None if not found.
+            dict: The stored context dictionary, or None on ID mismatch.
         """
         if correlation_id in self.command_context_store:
             return self.command_context_store.pop(correlation_id)

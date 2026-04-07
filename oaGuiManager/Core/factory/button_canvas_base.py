@@ -8,7 +8,7 @@ import tkinter as tk
 from PIL import Image, ImageTk, ImageDraw, ImageFont
 from loguru import logger
 import math
-from oaGuiFramework.Methods.i18n_utils import get_text
+from oaGui.Methods.i18n_utils import get_text
 
 class CanvasButton(tk.Canvas):
     """

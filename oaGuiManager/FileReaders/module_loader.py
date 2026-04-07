@@ -21,7 +21,7 @@ from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
 
-from oaComMQTT.Methods.mqtt_topic_utils import generate_topic_path_from_filepath
+from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import generate_topic_path_from_filepath
 from oaGuiManager.Core.loader.gui_from_json import UniversalGuiLoader
 from oaOchestration.Core.path_initializer import GLOBAL_PROJECT_ROOT
 from oaGuiBuilder.Workers.builder import DynamicGuiBuilder
@@ -57,7 +57,7 @@ class ModuleLoader:
         try:
             matrix_log("ui", "gui_builder", "load_module_from_path", f"📂 Loading GUI module from: {path.name}", "DEBUG")
             # ⚡ OPTIMIZATION: Derive package name to support relative imports
-            # Example: 'oaGuiDefinitions.Assets.right_50.bottom_90.2_monitors.1588_PTP_Monitor.ptp_monitor'
+            # Example: 'oaGui/Assets.Assets.right_50.bottom_90.2_monitors.1588_PTP_Monitor.ptp_monitor'
             try:
                 rel_path = path.resolve().relative_to(GLOBAL_PROJECT_ROOT)
                 package_parts = list(rel_path.with_suffix("").parts)

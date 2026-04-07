@@ -12,7 +12,7 @@ import pathlib
 from unittest.mock import MagicMock, patch
 
 # --- UI & Widget Construction ---
-from oaGuiFramework.Core.layout_parser import LayoutParser
+from oaGui.Core.layout_parser import LayoutParser
 from oaGuiEditorWYSIWYG.Core.state import StateManager
 
 # --- Data & Processing Utilities ---

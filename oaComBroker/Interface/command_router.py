@@ -14,6 +14,7 @@ import time
 from loguru import logger
 from oaConfigurationManager.FileReaders.config_reader import Config
 from oaComBroker.Core.protocol_router.manager import ProtocolRouter
+from .protocol_matrix import ProtocolMatrix
 
 app_constants = Config.get_instance()
 
@@ -53,6 +54,9 @@ class CommandRouter(tk.Frame):
         
         self.status_var = tk.StringVar(value=f"Instance Identity: {self.router.GUID}")
         tk.Label(header, textvariable=self.status_var, font=("Courier", 10, "bold"), fg="#00ff00", bg="#2b2b2b").pack(side=tk.RIGHT, padx=20)
+
+        # ⚡ PROTOCOL ENABLEMENT MATRIX
+        self._setup_protocol_matrix()
 
         # 2. Split View (Monitor + Investigation)
         self.paned = ttk.PanedWindow(self, orient=tk.VERTICAL)
@@ -191,6 +195,11 @@ class CommandRouter(tk.Frame):
         ttk.Button(btn_frame, text="Clear Firehose", command=self.clear_log).pack(side=tk.LEFT, padx=20)
         self.autoscroll_var = tk.BooleanVar(value=True)
         ttk.Checkbutton(btn_frame, text="Auto-Scroll", variable=self.autoscroll_var).pack(side=tk.LEFT)
+
+    def _setup_protocol_matrix(self):
+        """Creates the matrix of checkboxes to enable/disable protocol inputs and outputs."""
+        self.matrix = ProtocolMatrix(self)
+        self.matrix.pack(side=tk.TOP, fill=tk.X, padx=10, pady=(0, 10))
 
     def on_router_event(self, msg):
         """Callback from ProtocolRouter ingest loop."""
@@ -331,7 +340,7 @@ class CommandRouter(tk.Frame):
             return match["val"] if match else None
 
     def _find_app_instance(self):
-        from oaGuiFramework.Managers.gui_display import Application
+        from oaGui.Managers.gui_display import Application
         curr = self.master
         while curr:
             if isinstance(curr, Application):

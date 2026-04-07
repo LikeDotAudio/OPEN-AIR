@@ -17,7 +17,7 @@ app_constants = Config.get_instance()
 from oaGuiManager.Core.factory.button_canvas_base import CanvasButton
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
-from oaGuiFramework.Methods.i18n_utils import get_text
+from oaGui.Methods.i18n_utils import get_text
 
 # --- EXTRACTED CORE MODULES ---
 from .Core.actuator_interaction_mixin import ActuatorInteractionMixin

@@ -67,8 +67,59 @@ class ProtocolRouter:
         self.osc_manager = None
         self.midi_manager = None
         self.snmp_manager = None
+        self.nmos_manager = None
         self.smpte2138_manager = None
         
+        # ⚡ PROTOCOL ROUTING MATRIX (N x N): 
+        # Controls which source protocols (Rows) are allowed to dispatch to destination protocols (Cols).
+        # "anything can route to anything but itself" - Standard loopback prevention.
+        self.protocols = ["MQTT", "OSC", "MIDI", "SNMP", "REST", "SMPTE2138", "AES70", "EMBER", "NMOS", "VISA", "GUI", "CACHE"]
+        
+        # Emoji mapping for strategy generation
+        self.protocol_emojis = {
+            "MQTT": "🚀", "OSC": "🅾️", "MIDI": "🎹", "SNMP": "Ⓢ", "REST": "🌐",
+            "SMPTE2138": "🔗", "AES70": "70", "EMBER": "🔥", "NMOS": "N", "VISA": "V",
+            "GUI": "Ⓖ", "CACHE": "💾"
+        }
+
+        # ⚡ PROTOCOL TOPIC PREFIXES: Used to auto-detect logical source from MQTT topics.
+        self.protocol_prefixes = {
+            "GUI": "OPEN-AIR/GUI",
+            "MIDI": "OPEN-AIR/MIDI",
+            "NMOS": "OPEN-AIR/NMOS",
+            "AES70": "OPEN-AIR/AES70",
+            "SMPTE2138": "OPEN-AIR/SMPTE2138",
+            "EMBER": "OPEN-AIR/EMBER"
+        }
+
+        self.routing_matrix = {src: {dest: True for dest in self.protocols} for src in self.protocols}
+        
+        # Default: Prevent self-routing (Diagonal = False)
+        for p in self.protocols:
+            self.routing_matrix[p][p] = False
+            
+        # ⚡ TOPIC ROUTING: Stores specific topic mappings/filters for cross-points.
+        # { (src, dest): {"send": topic, "subscribe": topic} }
+        self.topic_routing = {
+            # Source GUI (internal) maps to the OPEN-AIR/GUI/ namespace on MQTT
+            ("GUI", "MQTT"): {"send": "OPEN-AIR/GUI"},
+            
+            # Source MIDI hardware maps to the OPEN-AIR/MIDI namespace on MQTT
+            ("MIDI", "MQTT"): {"send": "OPEN-AIR/MIDI"},
+            
+            # Source NMOS maps to its namespace
+            ("NMOS", "MQTT"): {"send": "OPEN-AIR/NMOS"},
+            
+            # AES70 maps to its namespace
+            ("AES70", "MQTT"): {"send": "OPEN-AIR/AES70"},
+            
+            # SMPTE2138 maps to its namespace
+            ("SMPTE2138", "MQTT"): {"send": "OPEN-AIR/SMPTE2138"},
+            
+            # EMBER maps to its namespace
+            ("EMBER", "MQTT"): {"send": "OPEN-AIR/EMBER"},
+        }
+
         self.state_cache = None
         self.is_active = True 
 
@@ -132,18 +183,81 @@ class ProtocolRouter:
     def set_osc_manager(self, m): self.osc_manager = m
     def set_midi_manager(self, m): self.midi_manager = m
     def set_snmp_manager(self, m): self.snmp_manager = m
+    def set_nmos_manager(self, m): self.nmos_manager = m
     def set_smpte2138_manager(self, m): self.smpte2138_manager = m
     def set_state_cache(self, c): self.state_cache = c
+
+    def set_routing_state(self, source, dest, enabled):
+        """Updates the routing matrix for a specific source-to-destination path."""
+        s_up, d_up = str(source).upper(), str(dest).upper()
+        if s_up in self.routing_matrix and d_up in self.routing_matrix[s_up]:
+            self.routing_matrix[s_up][d_up] = enabled
+            matrix_log("comms", "broker", "set_routing_state", f"🔄 [ROUTING] {s_up} >> {d_up} set to {enabled}.", "INFO")
+
+    def set_topic_routing(self, source, dest, send_topic=None, sub_topic=None):
+        """Configures topic mapping/filtering for a cross-point."""
+        s_up, d_up = str(source).upper(), str(dest).upper()
+        if s_up in self.protocols and d_up in self.protocols:
+            self.topic_routing[(s_up, d_up)] = {
+                "send": send_topic,
+                "subscribe": sub_topic
+            }
+            matrix_log("comms", "broker", "set_topic_routing", f"🔄 [TOPIC] {s_up} >> {d_up}: Send='{send_topic}', Sub='{sub_topic}'", "INFO")
+
+    def get_topic_routing(self, source, dest):
+        """Retrieves topic configuration for a cross-point."""
+        return self.topic_routing.get((str(source).upper(), str(dest).upper()), {"send": None, "subscribe": None})
+
+    def get_strategy_for_source(self, source):
+        """Returns the emoji strategy string for a given logical source based on the matrix."""
+        s_up = str(source).upper()
+        if s_up not in self.routing_matrix:
+            return ""
+        
+        enabled_dests = [d for d, enabled in self.routing_matrix[s_up].items() if enabled]
+        emojis = [self.protocol_emojis.get(d, d) for d in enabled_dests]
+        return " ".join(emojis)
+
+    def calculate_strategy_for_msg(self, source, topic):
+        """
+        Calculates the emoji strategy for a specific message.
+        Checks both the N x N enablement and the 'Subscribe' topic filters.
+        """
+        s_up = str(source).upper()
+        if s_up not in self.routing_matrix:
+            return ""
+
+        import fnmatch
+        emojis = []
+        for dest, enabled in self.routing_matrix[s_up].items():
+            if not enabled:
+                continue
+            
+            # Check for 'Subscribe' filter (Inbound Topic Filter)
+            cfg = self.topic_routing.get((s_up, dest), {})
+            sub_filter = cfg.get("subscribe")
+            
+            if sub_filter:
+                # If a filter is defined, the topic must match (glob pattern support)
+                if not fnmatch.fnmatch(topic, sub_filter):
+                    continue
+            
+            emojis.append(self.protocol_emojis.get(dest, dest))
+            
+        return " ".join(emojis)
 
     def register_cache_observer(self, cb): self.monitor.register_cache_observer(cb)
     def unregister_cache_observer(self, cb): self.monitor.remove_observer(cb)
     def remove_observer(self, cb): self.monitor.remove_observer(cb)
 
     def ingest(self, transport_source, topic, value, metadata=None):
+        # ⚡ ARCHITECTURAL CHOICE: Allow all ingest so messages appear in the firehose.
+        # Routing gating is now handled at the Dispatch phase via the N x N matrix.
         normalize_and_ingest(
             transport_source, topic, value, metadata, 
             self.GUID, self.settle_manager, self.inbound_queue,
-            self._ingest_silent, self.state_cache, self.rust_router
+            self._ingest_silent, self.state_cache, self.rust_router,
+            self.is_active
         )
 
     def _ingest_silent(self, transport_source, topic, value, meta):
@@ -211,13 +325,15 @@ class ProtocolRouter:
                     "osc": self.osc_manager,
                     "midi": self.midi_manager,
                     "snmp": self.snmp_manager,
+                    "nmos": self.nmos_manager,
                     "smpte2138": self.smpte2138_manager
                 }
                 
                 if self._running:
                     self._executor.submit(
                         dispatch_message, 
-                        msg, managers
+                        msg, managers, self.routing_matrix, self.topic_routing,
+                        self.is_active
                     )
             except RuntimeError as e:
                 # ⚡ TEARDOWN SAFETY: Ignore executor shutdown errors during exit

@@ -8,17 +8,17 @@ These modules provide the foundational communication and orchestration layers fo
 ├-----**oaComBroker/**<br>
      ├----> [oaComBroker](oaComBroker/Documentation/README.md) — *Communication Broker & Protocol Router*<br>
      ├----> [Summary](oaComBroker/Documentation/Summary.md) — *The Unified Nerve Center Narrative*<br>
-├-----**oaComMidi/**<br>
-     ├----> [oaComMidi](oaComMidi/Documentation/README.md) — *MIDI Communication Module*<br>
-     ├----> [Summary](oaComMidi/Documentation/Summary.md) — *Narrative of Tactile Harmony*<br>
-├-----**oaComMQTT/**<br>
-     ├----> [oaComMQTT](oaComMQTT/Documentation/README.md) — *MQTT Communication Module*<br>
-├-----**oaComOSC/**<br>
-     ├----> [oaComOSC](oaComOSC/Documentation/README.md) — *OSC Communication Module*<br>
-     ├----> [Summary](oaComOSC/Documentation/Summary.md) — *Narrative of Reactive Bridging*<br>
-├-----**oaComSNMP/**<br>
-     ├----> [oaComSNMP](oaComSNMP/Documentation/README.md) — *SNMP Communication Module*<br>
-     ├----> [Summary](oaComSNMP/Documentation/Summary.md) — *Narrative of Legacy Integration*<br>
+├-----**oaComProtocols.oaComMidi/**<br>
+     ├----> [oaComProtocols.oaComMidi](oaComProtocols.oaComMidi/Documentation/README.md) — *MIDI Communication Module*<br>
+     ├----> [Summary](oaComProtocols.oaComMidi/Documentation/Summary.md) — *Narrative of Tactile Harmony*<br>
+├-----**oaComProtocols.oaComMQTT/**<br>
+     ├----> [oaComProtocols.oaComMQTT](oaComProtocols.oaComMQTT/Documentation/README.md) — *MQTT Communication Module*<br>
+├-----**oaComProtocols.oaComOSC/**<br>
+     ├----> [oaComProtocols.oaComOSC](oaComProtocols.oaComOSC/Documentation/README.md) — *OSC Communication Module*<br>
+     ├----> [Summary](oaComProtocols.oaComOSC/Documentation/Summary.md) — *Narrative of Reactive Bridging*<br>
+├-----**oaComProtocols.oaComSNMP/**<br>
+     ├----> [oaComProtocols.oaComSNMP](oaComProtocols.oaComSNMP/Documentation/README.md) — *SNMP Communication Module*<br>
+     ├----> [Summary](oaComProtocols.oaComSNMP/Documentation/Summary.md) — *Narrative of Legacy Integration*<br>
 ├-----**oaConfigurationManager/**<br>
      ├----> [Summary](oaConfigurationManager/Documentation/Summary.md) — *Narrative of Control*<br>
      ├----> [Config Builder](oaConfigurationManager/Documentation/config.md) — *Default Settings Generator*<br>
@@ -221,10 +221,10 @@ Workers are active background processes for data acquisition and system monitori
      ├----> **fader_linear_travelling_potentiometer/**<br>
         |   -> [README](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/builder/fader_linear_travelling_potentiometer/README.md) — *Readme*<br>
         |   -> [fader_linear_travelling_potentiometer](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/builder/fader_linear_travelling_potentiometer/fader_linear_travelling_potentiometer.md) — *Fader Linear Travelling Potentiometer*<br>
-     ├----> **images_animation_oaGuiDefinitions/**<br>
-        |   -> [images_animation_display](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/builder/images_animation_oaGuiDefinitions/images_animation_display.md) — *Images Animation Display*<br>
-     ├----> **images_image_oaGuiDefinitions/**<br>
-        |   -> [images_image_display](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/builder/images_image_oaGuiDefinitions/images_image_display.md) — *Images Image Display*<br>
+     ├----> **images_animation_oaGui/Assets/**<br>
+        |   -> [images_animation_display](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/builder/images_animation_oaGui/Assets/images_animation_display.md) — *Images Animation Display*<br>
+     ├----> **images_image_oaGui/Assets/**<br>
+        |   -> [images_image_display](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/builder/images_image_oaGui/Assets/images_image_display.md) — *Images Image Display*<br>
      ├----> **images_progress_bar/**<br>
         |   -> [images_progress_bar](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/builder/images_progress_bar/images_progress_bar.md) — *Images Progress Bar*<br>
      ├----> **input_directional_buttons/**<br>

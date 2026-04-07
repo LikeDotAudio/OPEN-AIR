@@ -7,7 +7,7 @@
 import threading
 import logging
 from pathlib import Path
-from oaTranslator.Core.oaTranslatorCore_rs.compiler_hook import ensure_compiled
+from oaStateCache.Core.oaTranslatorCore_rs.compiler_hook import ensure_compiled
 
 try:
     ensure_compiled()

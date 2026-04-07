@@ -2,7 +2,7 @@
 # Author: Anthony Peter Kuzub
 # Version: 20250821.200641.1
 #
-# Description: images_image_oaGuiDefinitions/dynamic_guimake_images_image_display.py
+# Description: images_image_oaGui/Assets/dynamic_guimake_images_image_display.py
 
 import tkinter as tk
 from oaLogging.Methods.matrix_gate import matrix_log
@@ -20,9 +20,9 @@ from oaConfigurationManager.FileReaders.config_reader import Config
 app_constants = Config.get_instance()  # Get the singleton instance
 
 from oaOchestration.Core.path_initializer import GLOBAL_PROJECT_ROOT
-from oaComMQTT.Methods.mqtt_topic_utils import get_topic  # Import get_topic
+from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic  # Import get_topic
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
-from oaGuiFramework.Methods.i18n_utils import get_text
+from oaGui.Methods.i18n_utils import get_text
 from oaStyle.Core.style import THEMES, DEFAULT_THEME
 
 # --- Standard Debug Logging Setup ---

@@ -17,7 +17,7 @@ from loguru import logger
 from oaConfigurationManager.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
-from oaComMQTT.Methods.mqtt_controller_util import MqttControllerUtility
+from oaComProtocols.oaComMQTT.Methods.mqtt_controller_util import MqttControllerUtility
 
 # --- EXTRACTED CORE MODULES ---
 from oaGuiTelemetry.Core.instrument_controller import InstrumentController

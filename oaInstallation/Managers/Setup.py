@@ -116,7 +116,7 @@ class SetupManager:
             subprocess.run(['sudo', 'apt-get', 'install', 'snmpd', 'snmp', 'snmp-mibs-downloader', '-y'], check=True)
             
             # 2. Use SNMPManager to generate the master installer script
-            from oaComSNMP.Managers.snmp_manager import SNMPManager
+            from oaComProtocols.oaComSNMP.Managers.snmp_manager import SNMPManager
             snmp_mgr = SNMPManager(run_bridge=True)
             snmp_mgr.tree_builder.generate_master_script()
             installer_bash = snmp_mgr.get_installer_script()

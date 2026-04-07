@@ -1,5 +1,5 @@
 # integration/state_linker.py
-from oaGuiFramework.Methods.i18n_utils import get_text
+from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
@@ -18,7 +18,7 @@ from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
 
-from oaComMQTT.Methods.mqtt_topic_utils import get_topic
+from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic
 
 class StateLinker:
     def __init__(self, state_mirror_engine, subscriber_router, config, base_topic_path, master=None):

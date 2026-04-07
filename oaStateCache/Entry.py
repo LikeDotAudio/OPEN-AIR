@@ -1,19 +1,26 @@
 # oaStateCache/Entry.py
-# Author: Anthony Peter Kuzub
-# Version: 1.0.0
 #
-# Description: Brief summary of purpose
+# The sole orchestrator for the State Cache Module. It manages the 
+# lifecycle of the StateRegistry and StateMirrorEngine.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20260406.2000.1
 
 """
 oaStateCache/Entry.py - The sole orchestrator for the State Cache Module.
-
-Purpose:
-This file is the public entry point for 'oaStateCache'. It manages the 
-lifecycle of the StateRegistry and provides high-level 
-monitoring and control interfaces for state persistence.
 """
 
 from .Core.state_cache import StateRegistry
+from .Core.state_mirror_engine import StateMirrorEngine
 
 _instance = None
 
@@ -46,6 +53,7 @@ def status():
 # Standardized exports
 __all__ = [
     "StateRegistry",
+    "StateMirrorEngine",
     "get_registry",
     "start",
     "stop",

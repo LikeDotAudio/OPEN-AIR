@@ -2,7 +2,7 @@ import os
 import json
 import glob
 
-assets_dir = '/home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/Assets'
+assets_dir = '/home/anthony/Documents/OPEN-AIR/oaGui/Assets/Assets'
 files = glob.glob(os.path.join(assets_dir, '**', '*.json'), recursive=True)
 
 unique_strings = set()

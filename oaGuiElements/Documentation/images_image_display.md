@@ -5,7 +5,7 @@
 
 ## 📖 Description & Purpose
 ### File Level
-images_image_oaGuiDefinitions/dynamic_guimake_images_image_display.py
+images_image_oaGui/Assets/dynamic_guimake_images_image_display.py
 
 A mixin for creating an image display widget that dynamically loads and displays
 images based on a state-aware path.

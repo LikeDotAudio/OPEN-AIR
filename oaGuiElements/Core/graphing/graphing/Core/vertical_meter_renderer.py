@@ -1,5 +1,5 @@
 # Core/vertical_meter_renderer.py
-from oaGuiFramework.Methods.i18n_utils import get_text
+from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
@@ -13,8 +13,8 @@ import time
 import orjson
 import re
 from loguru import logger
-from oaComMQTT.Core.mqtt_publisher_service import publish_payload
-from oaComMQTT.Methods.mqtt_topic_utils import get_topic
+from oaComProtocols.oaComMQTT.Core.mqtt_publisher_service import publish_payload
+from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic
 
 class VerticalMeterRenderer(ttk.Frame):
     """A Tkinter widget to simulate a multi-channel vertical meter display."""

@@ -5,7 +5,7 @@
 
 ## 📖 Description & Purpose
 ### File Level
-oaGuiDefinitions/layout_parser.py
+oaGui/Assets/layout_parser.py
 
 This module provides the LayoutParser class, which analyzes directory structures
 to determine the GUI layout (e.g., PanedWindow, Notebook).

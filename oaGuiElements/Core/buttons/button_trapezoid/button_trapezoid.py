@@ -16,7 +16,7 @@ app_constants = Config.get_instance()
 
 from oaStyle.Core.style import THEMES, DEFAULT_THEME
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
-from oaGuiFramework.Methods.i18n_utils import get_text
+from oaGui.Methods.i18n_utils import get_text
 from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
 
 # --- EXTRACTED CORE MODULES ---

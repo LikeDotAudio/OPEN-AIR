@@ -33,7 +33,7 @@ from oaTests.Workers.collate_data import collate_extra_tabs
 from oaTests.Workers.run_report_builder import ReportGenerator
 from oaTests.Workers.TestRunner import DiscoverTests
 from oaTests.Managers.AuditRunner import run_all_audits
-from oaComMQTT.Entry import get_connection_manager
+from oaComProtocols.oaComMQTT.Entry import get_connection_manager
 from oaInstallation.Core.SystemStats import SystemStatsProvider
 from oaLogging.Entry import TEST_LOGGER
 

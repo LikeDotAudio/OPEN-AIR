@@ -1,5 +1,5 @@
 # Core/table_sync_engine.py
-from oaGuiFramework.Methods.i18n_utils import get_text
+from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
@@ -10,8 +10,8 @@ from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
 import tkinter as tk
 from loguru import logger
-from oaComMQTT.Methods.mqtt_topic_utils import get_topic
-from oaComMQTT.Core import mqtt_publisher_service
+from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic
+from oaComProtocols.oaComMQTT.Core import mqtt_publisher_service
 
 class TableSyncEngine:
     """Orchestrates MQTT synchronization logic for the table widget."""

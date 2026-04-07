@@ -12,17 +12,17 @@ from loguru import logger
 # --- Standard Debug Logging Setup ---
 
 # --- Framework Imports ---
-from oaComMQTT.Managers.mqtt_connection import MqttConnectionManager
-from oaComMQTT.Managers.mqtt_subscriber_router import MqttSubscriberRouter
+from oaComProtocols.oaComMQTT.Managers.mqtt_connection import MqttConnectionManager
+from oaComProtocols.oaComMQTT.Managers.mqtt_subscriber_router import MqttSubscriberRouter
 from oaStateCache.Core.state_cache import StateRegistry
-from oaTranslator.Core.state_mirror_engine import StateMirrorEngine
+from oaStateCache.Core.state_mirror_engine import StateMirrorEngine
 from oaComBroker.Core.protocol_router.manager import ProtocolRouter
 
 # --- External Managers ---
-from oaComOSC.Managers.osc_manager import OSCManager
-from oaComSNMP.Managers.snmp_manager import SNMPManager
-from oaComMidi.Managers.midi_manager import MidiManager
-from oaComREST.Managers.rest_manager import RESTManager
+from oaComProtocols.oaComOSC.Managers.osc_manager import OSCManager
+from oaComProtocols.oaComSNMP.Managers.snmp_manager import SNMPManager
+from oaComProtocols.oaComMidi.Managers.midi_manager import MidiManager
+from oaComProtocols.oaComREST.Managers.rest_manager import RESTManager
 from oaSplinker.Core.splinker import ControlBroker
 
 class UICompositionRoot:
@@ -91,7 +91,7 @@ class UICompositionRoot:
             self.services["osc_manager"] = OSCManager(state_cache, mqtt_conn, run_bridge=True)
         
         if self.app_constants.SCAN_SNMP:
-            import oaComSNMP.Entry as snmp_entry
+            import oaComProtocols.oaComSNMP.Entry as snmp_entry
             self.services["snmp_manager"] = snmp_entry.get_manager(
                 state_cache_manager=state_cache, 
                 mqtt_connection_manager=mqtt_conn, 
@@ -103,7 +103,7 @@ class UICompositionRoot:
         self.services["rest_manager"] = RESTManager(state_cache, protocol_router)
 
         # ST 2138 SMPTE2138 Monitor Logic
-        import oaComSMPTE2138.Entry as smpte2138_monitor_entry
+        import oaComProtocols.oaComSMPTE2138.Entry as smpte2138_monitor_entry
         self.services["smpte2138_monitor_manager"] = smpte2138_monitor_entry.start_monitor(mqtt_conn, sub_router)
 
         matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, "✅ [ROOT] UI Service Graph Composed.", level="SUCCESS")

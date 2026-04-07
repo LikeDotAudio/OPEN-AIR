@@ -6,7 +6,7 @@
 
 import orjson
 from loguru import logger
-from oaComMQTT.Methods.mqtt_topic_utils import TOPIC_DELIMITER
+from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import TOPIC_DELIMITER
 
 class ListboxOptionsManager:
     """Manages the internal model of listbox options and processes remote MQTT updates."""

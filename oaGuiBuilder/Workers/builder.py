@@ -25,10 +25,10 @@ from oaStyle.Core.style import DEFAULT_THEME, THEMES
 # --- 1. CORE MIXINS ---
 from oaStyle.Core.gui_style import GuiStyleMixin
 from oaGuiManager.Core.factory.gui_widget_factory import GuiWidgetFactoryMixin
-from oaGuiFramework.Managers.gui_mqtt import GuiMqttManagerMixin
+from oaGui.Managers.gui_mqtt import GuiMqttManagerMixin
 from oaGuiManager.FileReaders.gui_file_loader import GuiFileLoaderMixin
-from oaGuiFramework.Managers.gui_re import GuiRebuilderMixin
-from oaGuiFramework.Managers.gui_batch import GuiBatchBuilderMixin
+from oaGui.Managers.gui_re import GuiRebuilderMixin
+from oaGui.Managers.gui_batch import GuiBatchBuilderMixin
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 
 # --- EXTRACTED CORE MODULES ---

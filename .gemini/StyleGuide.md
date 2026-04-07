@@ -4,7 +4,7 @@
 The **OPEN-AIR** system is built on a modular, partitioned architecture. Every module must adhere to the following structural and organizational rules:
 
 ### 1. The 12-Subfolder Standard
-Every `oa*` module (e.g., `oaComMQTT`, `oaGuiBuilder`) must contain these specific subdirectories:
+Every `oa*` module (e.g., `oaComProtocols.oaComMQTT`, `oaGuiBuilder`) must contain these specific subdirectories:
 - `Core`: Low-level logic, data models, and foundational services.
 - `Workers`: Background processes, threaded tasks, and long-running services.
 - `Managers`: High-level orchestrators and state management.

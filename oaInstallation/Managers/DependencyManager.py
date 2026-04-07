@@ -51,6 +51,7 @@ EXTERNAL_PACKAGES = {
     "uvicorn": "uvicorn",
     "protobuf": "google.protobuf",
     "grpcio-tools": "grpc_tools.protoc",
+    "websocket-client": "websocket",
 }
 
 # BUILTIN_PACKAGES: Standard library modules verified for baseline environment.
@@ -137,6 +138,7 @@ def action_check_dependancies(console_print_func, debug_log_func,
         elif friendly_name == "python-rtmidi": package_name_for_pip = "python-rtmidi"
         elif friendly_name == "protobuf": package_name_for_pip = "protobuf"
         elif friendly_name == "grpcio-tools": package_name_for_pip = "grpcio-tools"
+        elif friendly_name == "websocket-client": package_name_for_pip = "websocket-client"
 
         try:
             module = __import__(import_name)

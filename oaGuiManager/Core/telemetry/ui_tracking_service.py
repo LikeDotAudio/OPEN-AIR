@@ -10,8 +10,8 @@ import inspect
 import orjson
 import tkinter as tk
 from loguru import logger
-from oaComMQTT.Methods.mqtt_topic_utils import get_topic
-from oaComMQTT.Core.mqtt_publisher_service import is_connected
+from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic
+from oaComProtocols.oaComMQTT.Core.mqtt_publisher_service import is_connected
 
 
 class UITrackingService:

@@ -2,7 +2,7 @@
 # Author: Gemini (Collaborator)
 # Version: 20260405.2230.1
 #
-# Description: Verifies the consolidated oaGuiFramework ignition.
+# Description: Verifies the consolidated oaGui ignition.
 
 import tkinter as tk
 from tkinter import ttk
@@ -17,11 +17,11 @@ if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
 def test_ignition():
-    print("🚀 [TEST] Starting oaGuiFramework Ignition Test...")
+    print("🚀 [TEST] Starting oaGui Ignition Test...")
     
     try:
-        from oaGuiFramework.Entry import Application
-        print("✅ [TEST] Successfully imported Application from oaGuiFramework.")
+        from oaGui.Entry import Application
+        print("✅ [TEST] Successfully imported Application from oaGui.")
     except ImportError as e:
         print(f"❌ [TEST] Failed to import Application: {e}")
         return False

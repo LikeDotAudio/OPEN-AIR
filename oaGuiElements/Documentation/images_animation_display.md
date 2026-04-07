@@ -5,7 +5,7 @@
 
 ## 📖 Description & Purpose
 ### File Level
-images_animation_oaGuiDefinitions/dynamic_guimake_images_animation_display.py
+images_animation_oaGui/Assets/dynamic_guimake_images_animation_display.py
 
 A mixin for creating an animation display widget from a GIF file.
 

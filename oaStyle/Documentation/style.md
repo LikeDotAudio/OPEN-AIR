@@ -5,7 +5,7 @@
 
 ## 📖 Description & Purpose
 ### File Level
-oaGuiDefinitions/styling/style.py
+oaGui/Assets/styling/style.py
 
 Defines the color palettes for different UI themes, providing a centralized
 source for application-wide style configurations.

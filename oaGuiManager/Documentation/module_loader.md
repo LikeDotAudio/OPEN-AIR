@@ -5,7 +5,7 @@
 
 ## 📖 Description & Purpose
 ### File Level
-oaGuiDefinitions/module_loader.py
+oaGui/Assets/module_loader.py
 
 Handles dynamic loading of Python modules and instantiation of GUI classes.
 Updated to wrap pure Python modules in a DynamicGuiBuilder for background

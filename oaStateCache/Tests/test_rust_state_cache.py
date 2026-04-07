@@ -38,7 +38,7 @@ class TestRustStateCache(unittest.TestCase):
         topic = "TEST/RUST/TOPIC"
         val = {"val": 42, "status": "OK"}
         
-        with patch("oaTranslator.Core.manifest.builder.create_manifest", return_value=val):
+        with patch("oaStateCache.Core.manifest.builder.create_manifest", return_value=val):
             with patch("oaComBroker.Core.protocol_router.manager.ProtocolRouter.get_instance"):
                 registry.handle_external_update(topic, 42)
         

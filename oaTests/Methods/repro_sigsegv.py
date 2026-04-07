@@ -1,7 +1,7 @@
 import time
 from oaComBroker.Core.protocol_router.manager import ProtocolRouter
 from oaStateCache.Core.state_cache import StateRegistry
-from oaComMQTT.Managers.mqtt_connection import MqttConnectionManager
+from oaComProtocols.oaComMQTT.Managers.mqtt_connection import MqttConnectionManager
 
 def reproduce_crash():
     print("🚀 Starting reproduction test...")

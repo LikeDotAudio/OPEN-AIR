@@ -1,5 +1,5 @@
 # text_table/text_table.py
-from oaGuiFramework.Methods.i18n_utils import get_text
+from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 20260315.Modular.1
 #
@@ -17,7 +17,7 @@ from oaLogging.Core.logger import builder_logger
 from oaConfigurationManager.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
-from oaComMQTT.Core import mqtt_publisher_service
+from oaComProtocols.oaComMQTT.Core import mqtt_publisher_service
 from .table_editing import TableEditingManager
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 from oaGuiManager.Core.factory.widget_registry import WidgetRegistry

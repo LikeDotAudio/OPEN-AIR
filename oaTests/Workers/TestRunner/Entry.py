@@ -62,12 +62,12 @@ def main():
         if router:
             router.stop()
             
-        from oaComMQTT.Managers.mqtt_connection import MqttConnectionManager
+        from oaComProtocols.oaComMQTT.Managers.mqtt_connection import MqttConnectionManager
         mqtt = MqttConnectionManager()
         if mqtt:
             mqtt.disconnect()
 
-        from oaComMidi.Managers.midi_manager import MidiManager
+        from oaComProtocols.oaComMidi.Managers.midi_manager import MidiManager
         midi = MidiManager()
         if midi:
             midi.stop()

@@ -4,7 +4,7 @@ prompt = """
 You are the Systems Compliance Engineer for the OPEN-AIR project. Your goal is to enforce the **'Entry.py' Based Design** for all `oa*` modules and eliminate reliance on `__init__.py` files for anything other than basic package markers.
 
 ### **The Standard for 'Entry.py' Based Modules:**
-1. **The Gatekeeper (Entry.py)**: Every `oa*` module (e.g., `oaComMQTT`, `oaGuiBuilder`) must have an `Entry.py` file in its root. This file is the **sole** public API and orchestrator.
+1. **The Gatekeeper (Entry.py)**: Every `oa*` module (e.g., `oaComProtocols.oaComMQTT`, `oaGuiBuilder`) must have an `Entry.py` file in its root. This file is the **sole** public API and orchestrator.
 2. **The Root Rule**: No files other than `Entry.py` are permitted in the root of an `oa*` directory.
 3. **The 12-Subfolder Rule**: Every `oa*` module must contain: `Core`, `Workers`, `Managers`, `Methods`, `Constants`, `Tests`, `Documentation`, `Assets`, `Interface`, `Hooks`, `FileReaders`, `FileWriters`.
 4. **__init__.py Logic Prohibition**: Root-level `__init__.py` files should ideally be empty or only contain basic metadata. They **must not** perform imports, define logic, or handle orchestration. All such logic belongs in `Entry.py`.

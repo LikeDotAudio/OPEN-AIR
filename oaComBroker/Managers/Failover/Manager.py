@@ -42,9 +42,10 @@ class FailoverManager:
         self.FAILOVER_TIMEOUT = 3.5    
         
         self.topic_root = "OPEN-AIR/System/Failover"
-        self.heartbeat_topic = f"{self.topic_root}/Heartbeat/{self.guid}"
-        self.discovery_topic = f"{self.topic_root}/Heartbeat/#"
-        self.status_topic = f"{self.topic_root}/Status/{self.guid}"
+        self.partition = app_constants.PARTITION_ID
+        self.heartbeat_topic = f"{self.topic_root}/{self.partition}/Heartbeat/{self.guid}"
+        self.discovery_topic = f"{self.topic_root}/{self.partition}/Heartbeat/#"
+        self.status_topic = f"{self.topic_root}/{self.partition}/Status/{self.guid}"
         self._start_ts = time.time()
 
     def start(self):

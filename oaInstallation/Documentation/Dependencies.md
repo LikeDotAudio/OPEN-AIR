@@ -24,6 +24,7 @@ This suite of packages forms the physical communication bridge to external hardw
 *   **scapy**: A highly capable network packet manipulation tool, useful for network scanning, routing mapping, or debugging low-level network instrument connections.
 *   **paho-mqtt**: A synchronous MQTT client used for lightweight, publish-subscribe network messaging, often utilized in IoT device communication.
 *   **aiomqtt**: The asynchronous version of an MQTT client, allowing the application to handle network messaging without blocking the main event loop or UI.
+*   **websocket-client**: Implements the WebSocket protocol, used for real-time bidirectional communication, particularly in NMOS IS-07 event transport.
 *   **python-osc**: Implements the Open Sound Control (OSC) protocol. OSC is highly optimized for modern networking technology and is frequently used to share real-time control data between audio software and synthesizers.
 
 ## 🎹 Audio & MIDI Integration

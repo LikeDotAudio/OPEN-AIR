@@ -8,8 +8,8 @@ import time
 from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
 import orjson
-from oaComMQTT.Methods.mqtt_topic_utils import get_topic
-from oaComMQTT.Core.mqtt_publisher_service import is_connected
+from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic
+from oaComProtocols.oaComMQTT.Core.mqtt_publisher_service import is_connected
 from loguru import logger
 
 

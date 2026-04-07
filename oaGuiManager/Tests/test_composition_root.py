@@ -21,13 +21,13 @@ class TestUICompositionRoot(unittest.TestCase):
         
         self.comp_root = UICompositionRoot(self.mock_root, self.mock_constants)
 
-    @patch('oaComMQTT.Managers.mqtt_connection.MqttConnectionManager')
-    @patch('oaComMQTT.Managers.mqtt_subscriber_router.MqttSubscriberRouter')
+    @patch('oaComProtocols.oaComMQTT.Managers.mqtt_connection.MqttConnectionManager')
+    @patch('oaComProtocols.oaComMQTT.Managers.mqtt_subscriber_router.MqttSubscriberRouter')
     @patch('oaStateCache.Core.state_cache.StateRegistry')
-    @patch('oaTranslator.Core.state_mirror_engine.StateMirrorEngine')
+    @patch('oaStateCache.Core.state_mirror_engine.StateMirrorEngine')
     @patch('oaComBroker.Core.protocol_router.manager.ProtocolRouter.get_instance')
-    @patch('oaComOSC.Managers.osc_manager.OSCManager')
-    @patch('oaComREST.Managers.rest_manager.RESTManager')
+    @patch('oaComProtocols.oaComOSC.Managers.osc_manager.OSCManager')
+    @patch('oaComProtocols.oaComREST.Managers.rest_manager.RESTManager')
     @patch('oaSplinker.Core.splinker.ControlBroker.get_instance')
     def test_build_services_wires_all_layers(self, mock_splinker, mock_rest, mock_osc, mock_proto_get, mock_mirror, mock_cache, mock_router, mock_mqtt):
         """OPERATE: Build services. CHECK: Verify service graph is constructed and mapped."""

@@ -2,14 +2,14 @@
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
-# Description: Brief summary of purpose
+# Description: Interactive MIDI Keyboard Visualizer & Input Component.
 
 import tkinter as tk
 from loguru import logger
+from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # Resistor Color Code Mapping & MIDI Channel Logic
-# 1: Brown, 2: Red, 3: Orange, 4: Yellow, 5: Green, 6: Blue, 7: Violet, 8: Gray, 9: White
-# Channels 10-16: ROYGBIVW (Red, Orange, Yellow, Green, Blue, Indigo, Violet, White)
 RESISTOR_COLORS = {
     0: "#000000", # Black (used for off/bg)
     1: "#8B4513", # Brown
@@ -36,10 +36,9 @@ WRAP_COLORS = [
 ]
 
 def get_midi_color(channel):
-    """Returns the color based on MIDI channel (1-16 typically)."""
-    # Channel is usually 0-15 in mido, but 1-16 in user terms.
-    # We'll treat the input as 0-indexed if it's from msg.channel
-    ch = channel + 1 # Convert to 1-indexed for logic
+    """Returns the color based on MIDI channel (0-15 typical in mido)."""
+    # Map to 1-indexed for the resistor color logic
+    ch = channel + 1
     
     if 1 <= ch <= 9:
         return RESISTOR_COLORS.get(ch, "#FFFFFF")
@@ -48,36 +47,49 @@ def get_midi_color(channel):
         idx = (ch - 10) % len(WRAP_COLORS)
         return WRAP_COLORS[idx]
 
+@WidgetRegistry.register("MidiKeyboard", "MIDI_KEYBOARD")
 class MidiKeyboard(tk.Canvas):
     """
-    A 6-octave MIDI Keyboard Visualizer.
+    A 6-octave MIDI Keyboard Visualizer & Input Component.
     Octaves: C1 to C7 (73 keys total for 6 full octaves + high C).
     Highlights keys using resistor color codes based on MIDI channel.
+    Supports mouse interaction for generating MIDI-like events.
     """
     def __init__(self, parent, **kwargs):
+        self.config_data = kwargs.pop("config", {})
         self.width = kwargs.get("width", 800)
         self.height = kwargs.get("height", 100)
+        
+        # Callbacks for interactivity (passed via config or kwargs)
+        self.on_note_on = self.config_data.get("on_note_on") or kwargs.get("on_note_on")
+        self.on_note_off = self.config_data.get("on_note_off") or kwargs.get("on_note_off")
+
         super().__init__(parent, width=self.width, height=self.height, bg="#1a1a1a", highlightthickness=0, bd=0)
         
         self.num_octaves = 6
         self.start_note = 36 # C1
         self.num_keys = (self.num_octaves * 12) + 1 # 73 keys
         
-        self.white_keys = []
-        self.black_keys = []
         self.key_map = {} # MIDI Note -> Canvas ID
+        self.id_to_note = {} # Canvas ID -> MIDI Note
+        self.active_mouse_notes = set() # Currently pressed notes via mouse
         
         self._setup_keys()
         self.bind("<Configure>", self._on_resize)
+        
+        # Interactivity Bindings
+        self.bind("<Button-1>", self._on_mouse_press)
+        self.bind("<ButtonRelease-1>", self._on_mouse_release)
+        self.bind("<B1-Motion>", self._on_mouse_motion)
 
     def _setup_keys(self):
         self.delete("all")
         self.key_map.clear()
+        self.id_to_note.clear()
         
         # Determine dimensions
-        # Total white keys in 6 octaves + 1 high C
         num_white_keys = (self.num_octaves * 7) + 1
-        kw = self.width / num_white_keys
+        kw = self.width / num_white_keys if num_white_keys > 0 else 10
         kh = self.height
         
         # 1. Draw White Keys first (Bottom Layer)
@@ -93,11 +105,11 @@ class MidiKeyboard(tk.Canvas):
                     fill="#ffffff", outline="#333333", tags=("white", f"note_{note}")
                 )
                 self.key_map[note] = rect
+                self.id_to_note[rect] = note
                 current_x += kw
 
         # 2. Draw Black Keys (Top Layer)
         current_x = 0
-        white_key_index = 0
         for i in range(self.num_keys):
             note = self.start_note + i
             note_in_octave = note % 12
@@ -105,21 +117,64 @@ class MidiKeyboard(tk.Canvas):
             
             if is_black:
                 # Black keys are positioned between white keys
-                # Shift slightly back to center over the gap
                 bx = current_x - (kw * 0.3)
                 rect = self.create_rectangle(
                     bx, 0, bx + (kw * 0.6), kh * 0.6,
                     fill="#000000", outline="#333333", tags=("black", f"note_{note}")
                 )
                 self.key_map[note] = rect
+                self.id_to_note[rect] = note
             else:
                 current_x += kw
-                white_key_index += 1
 
     def _on_resize(self, event):
         self.width = event.width
         self.height = event.height
         self._setup_keys()
+
+    # --- Mouse Interaction ---
+
+    def _on_mouse_press(self, event):
+        items = self.find_closest(event.x, event.y)
+        if not items: return
+        item = items[0]
+        note = self.id_to_note.get(item)
+        if note and note not in self.active_mouse_notes:
+            self.active_mouse_notes.add(note)
+            if self.on_note_on:
+                self.on_note_on(note)
+            # Visual feedback is handled via handle_midi if looped back, 
+            # or we can force it here for immediate response.
+            self.note_on(note, "#00ffff") # Cyan for mouse-over/press
+
+    def _on_mouse_release(self, event):
+        for note in list(self.active_mouse_notes):
+            if self.on_note_off:
+                self.on_note_off(note)
+            self.note_off(note)
+        self.active_mouse_notes.clear()
+
+    def _on_mouse_motion(self, event):
+        items = self.find_closest(event.x, event.y)
+        if not items: return
+        item = items[0]
+        note = self.id_to_note.get(item)
+        
+        if note and note not in self.active_mouse_notes:
+            # Release old notes
+            for old_note in list(self.active_mouse_notes):
+                if self.on_note_off:
+                    self.on_note_off(old_note)
+                self.note_off(old_note)
+            self.active_mouse_notes.clear()
+            
+            # Press new note
+            self.active_mouse_notes.add(note)
+            if self.on_note_on:
+                self.on_note_on(note)
+            self.note_on(note, "#00ffff")
+
+    # --- MIDI Handling ---
 
     def handle_midi(self, msg):
         """Processes a mido message or a dict mirror."""
@@ -130,28 +185,24 @@ class MidiKeyboard(tk.Canvas):
             velocity = 0
             
             if isinstance(msg, dict):
-                # It's a mirror from Core
-                raw = msg.get("raw", "")
-                # Poor man's parse if object not available, 
-                # but we should have channel/note in internal mapping if we updated midi_manager.
-                # Let's assume we might need to parse the raw string or use the dict fields.
-                # If we updated midi_manager correctly, we can pass better info.
-                
-                # Check if we have pre-parsed fields (if I add them to midi_manager)
                 channel = msg.get("channel", 0)
                 note = msg.get("note", 0)
                 velocity = msg.get("velocity", 0)
-                m_type = msg.get("type", "note_on" if "note_on" in raw else "note_off")
-                
-                # Fallback parse raw string if needed
-                if note == 0 and "note=" in raw:
-                    parts = raw.split()
-                    for p in parts:
-                        if p.startswith("channel="): channel = int(p.split("=")[1])
-                        if p.startswith("note="): note = int(p.split("=")[1])
-                        if p.startswith("velocity="): velocity = int(p.split("=")[1])
+                # Fallback to parsing 'raw' if fields are missing
+                if note == 0 and "raw" in msg:
+                    raw = msg["raw"]
+                    m_type = "note_on" if "note_on" in raw else "note_off"
+                    # Simple regex-like extraction
+                    import re
+                    n_match = re.search(r"note=(\d+)", raw)
+                    if n_match: note = int(n_match.group(1))
+                    c_match = re.search(r"channel=(\d+)", raw)
+                    if c_match: channel = int(c_match.group(1))
+                    v_match = re.search(r"velocity=(\d+)", raw)
+                    if v_match: velocity = int(v_match.group(1))
+                else:
+                    m_type = msg.get("type", "note_on" if velocity > 0 else "note_off")
             else:
-                # It's a real mido message
                 m_type = msg.type
                 channel = msg.channel if hasattr(msg, "channel") else 0
                 note = msg.note if hasattr(msg, "note") else 0
@@ -159,7 +210,6 @@ class MidiKeyboard(tk.Canvas):
 
             if m_type in ["note_on", "note_off"]:
                 color = get_midi_color(channel)
-                
                 if m_type == "note_on" and velocity > 0:
                     self.note_on(note, color)
                 else:
@@ -173,8 +223,11 @@ class MidiKeyboard(tk.Canvas):
 
     def note_off(self, note):
         if note in self.key_map:
-            # Revert to original
+            # Revert to original color (black or white)
             note_in_octave = note % 12
             is_black = note_in_octave in [1, 3, 6, 8, 10]
             orig_fill = "#000000" if is_black else "#ffffff"
             self.itemconfig(self.key_map[note], fill=orig_fill)
+
+def get_gui_class():
+    return MidiKeyboard

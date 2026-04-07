@@ -42,7 +42,8 @@ def normalize_and_ingest(
     inbound_queue,
     silent_ingest_callback,
     state_cache=None,
-    rust_router=None
+    rust_router=None,
+    is_active=True
 ):
     """
     Normalizes raw data into the Unified Message Schema and appends to queue.
@@ -58,6 +59,7 @@ def normalize_and_ingest(
         silent_ingest_callback (fn): Handler for boot-time traffic.
         state_cache (Cache, optional): Global state for dead-band checks.
         rust_router (CoreRouter, optional): High-performance Rust router.
+        is_active (bool, optional): Whether this instance is the primary broker.
 
         
     Side Effects:
@@ -104,6 +106,18 @@ def normalize_and_ingest(
     full_id = meta.get("full_id") or app_constants.FULL_INSTANCE_ID
     
     logical_source = transport_source
+    
+    # ⚡ PROTOCOL AUTO-DETECTION:
+    # If the transport is MQTT, we check the topic prefix to see if it belongs
+    # to a specific logical protocol partition (GUI, MIDI, etc.)
+    if transport_source == "MQTT":
+        from .manager import ProtocolRouter
+        p_prefixes = ProtocolRouter.get_instance().protocol_prefixes
+        for p_name, prefix in p_prefixes.items():
+            if str(topic).startswith(prefix):
+                logical_source = p_name
+                break
+
     logical_guid = session_guid
     
     id_src = meta.get("source") or meta.get("logical_source")
@@ -186,9 +200,19 @@ def normalize_and_ingest(
     # They must NOT be settled to prevent recursive feedback loops.
     is_settleable = not any(x in str(topic) for x in ["/Control/", "/Status/", "/MIDI/", "/Failover/"])
     
-    if msg_type == "SPLICE_ACTION" and is_settleable:
-        settle_manager.lock_parameter(topic, full_id)
-        settle_manager.schedule_settling(topic, msg)
+    # ⚡ SHADOW GATING: 
+    # Only the active broker (PRIMARY) settles messages arriving from MQTT.
+    # This ensures that only one instance in a failover group issues the 
+    # final LINK_FEEDBACK for external commands.
+    # Non-MQTT sources (hardware, local UI) are always settled by the local 
+    # broker that received them.
+    should_settle = (msg_type == "SPLICE_ACTION" and is_settleable and not is_settled)
+    if should_settle:
+        is_mqtt = (transport_source == "MQTT")
+        
+        if not is_mqtt or (is_mqtt and is_active):
+            settle_manager.lock_parameter(topic, full_id)
+            settle_manager.schedule_settling(topic, msg)
 
 def create_silent_msg(transport_source, topic, value, meta, local_guid, rust_router=None):
     """

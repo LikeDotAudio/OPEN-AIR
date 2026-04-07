@@ -21,9 +21,9 @@ from oaConfigurationManager.FileReaders.config_reader import Config
 app_constants = Config.get_instance()  # Get the singleton instance
 
 from oaOchestration.Methods.widget_event_binder import bind_variable_trace
-from oaComMQTT.Methods.mqtt_topic_utils import get_topic
+from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
-from oaGuiFramework.Methods.i18n_utils import get_text
+from oaGui.Methods.i18n_utils import get_text
 
 # --- Global Scope Variables ---
 current_file = f"{os.path.basename(__file__)}"

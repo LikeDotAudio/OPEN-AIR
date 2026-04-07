@@ -96,7 +96,7 @@ def localize_obj(obj):
         for item in obj:
             localize_obj(item)
 
-assets_dir = '/home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/Assets'
+assets_dir = '/home/anthony/Documents/OPEN-AIR/oaGui/Assets/Assets'
 files = glob.glob(os.path.join(assets_dir, '**', '*.json'), recursive=True)
 
 for fpath in files:

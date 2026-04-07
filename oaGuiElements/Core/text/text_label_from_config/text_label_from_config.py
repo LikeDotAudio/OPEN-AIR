@@ -1,5 +1,5 @@
 # text_label_from_config/text_label_from_config.py
-from oaGuiFramework.Methods.i18n_utils import get_text
+from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 20260221.Proxy.1
 #

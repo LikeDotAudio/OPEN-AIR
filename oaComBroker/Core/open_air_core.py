@@ -51,10 +51,10 @@ LOCAL_DEBUG = False
 from oaOchestration.Core.path_initializer import initialize_paths, DATA_LOGS_DIR
 from oaConfigurationManager.Methods.console_encoder import configure_console_encoding
 import oaWatchdog.Managers.watchdog as watchdog
-from oaComMQTT.Managers.mqtt_connection import MqttConnectionManager
+from oaComProtocols.oaComMQTT.Managers.mqtt_connection import MqttConnectionManager
 from oaStateCache.Core.state_cache import StateRegistry
 from oaComBroker.Managers.Failover.Manager import FailoverManager
-from oaComMQTT.Core.mqtt_publisher_service import shutdown_publisher_worker
+from oaComProtocols.oaComMQTT.Core.mqtt_publisher_service import shutdown_publisher_worker
 # LOCAL_DEBUG: Toggles verbose tracing for the core boot sequence.
 
 def main():

@@ -17,7 +17,7 @@ app_constants = Config.get_instance()
 
 from oaStyle.Core.style import THEMES, DEFAULT_THEME
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
-from oaGuiFramework.Methods.i18n_utils import get_text
+from oaGui.Methods.i18n_utils import get_text
 from oaGuiManager.Core.transparency.transparency import TransparencyManager
 from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
 
@@ -121,7 +121,7 @@ class BuilderFaderGangedControlledArrayCreator(TransparencyMixin):
     
     @staticmethod
     def make(parent_widget, config_data, context=None, **kwargs):
-        label = get_text(config.get("label_active"), "Composite")
+        label = get_text(config_data.get("label_active"), "Composite")
         path = config_data.get("path", "")
         
         if context:

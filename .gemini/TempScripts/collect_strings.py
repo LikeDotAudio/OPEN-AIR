@@ -2,7 +2,7 @@
 import os
 import json
 
-target_dir = "/home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/Assets/right_50/bottom_90/9_Zoo"
+target_dir = "/home/anthony/Documents/OPEN-AIR/oaGui/Assets/Assets/right_50/bottom_90/9_Zoo"
 unique_strings = set()
 
 def find_en_strings(data):

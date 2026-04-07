@@ -32,14 +32,7 @@ def calculate_strategy(msg):
     Determines the routing strategy for a message using emoji tokens.
     
     This function analyzes the message origin and logical source to assign 
-    a destination strategy. It enforces critical loop prevention by rejecting 
-    messages that reflect back from the MQTT broker with the same Instance ID.
-    
-    Args:
-        msg (dict): The normalized message packet to analyze.
-        
-    Returns:
-        str: An emoji strategy string (e.g., 'Ⓖ 🚀 💾 Ⓜ️') or 'IGNORE'.
+    a destination strategy based on the dynamic N x N routing matrix.
     """
     topic = msg.get("topic")
     source = msg["source"]
@@ -47,23 +40,23 @@ def calculate_strategy(msg):
     full_id = msg.get("full_id")
     
     # --- Loop Prevention: Network Reflection Rejection ---
-    # If a message arrives from MQTT carrying our own GUID, it is a 
-    # reflection of our own outbound traffic and must be dropped.
-    # EXCEPTION: We ALLOW reflections for Status and Monitor topics, as these
-    # carry critical state updates from CORE to UI (which may share IDs).
+    from .constants import app_constants
     if source == "MQTT" and full_id == app_constants.FULL_INSTANCE_ID:
         is_status = ("/Status/" in topic or "/Monitor/" in topic)
         if not is_status:
             return "IGNORE (REFLECT)"
         
-    # --- Local GUI Logic: Full Broadcast ---
-    # Actions originating from the local user interface are always 
-    # broadcast to all registered transport managers.
-    if logical_source == "GUI":
-        return "Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹" 
+    # --- Dynamic Matrix Routing ---
+    from .manager import ProtocolRouter
+    router = ProtocolRouter.get_instance()
+    
+    strategy = router.calculate_strategy_for_msg(logical_source, topic)
+    
+    if not strategy:
+        # Default fallback for untracked sources
+        return "Ⓖ 🚀 💾"
         
-    # Default to the pre-defined strategy map for external protocols.
-    return SINK_STRATEGIES.get(logical_source, f"{logical_source} 🚀 💾 Ⓖ")
+    return strategy
 
 def calculate_ui_tags(msg, local_guid):
     """

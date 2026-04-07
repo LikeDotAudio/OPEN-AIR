@@ -7,7 +7,7 @@ from oaLogging.Methods.matrix_gate import matrix_log
 
 import inspect
 from typing import Dict, Any, Optional
-from oaComMQTT.Core.mqtt_message import MqttMessage
+from oaComProtocols.oaComMQTT.Core.mqtt_message import MqttMessage
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Core.logger import initialize_logging, set_log_directory

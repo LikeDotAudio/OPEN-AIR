@@ -1,3 +1,41 @@
+## [20260406.2020.1] - 2026-04-06
+### Added
+- Implemented N x N Cross-Point Routing Matrix in 'ProtocolRouter' Core and 'CommandRouter' GUI.
+- Added granular source-to-destination routing control ("Anything to Anything").
+- Integrated loopback prevention (diagonal False by default) while allowing user override.
+- Updated 'dispatch.py' to perform cross-point enablement checks before outbound transmission.
+
+## [20260406.2010.1] - 2026-04-06
+### Fixed
+- Resolved 'ModuleNotFoundError' in MIDI GUI Assets by standardizing imports via the 'oaComProtocols.oaComMidi.Interface' package.
+- Updated 'Interface/__init__.py' to export 'get_input_gui' and 'get_output_gui' for robust cross-module access.
+- Corrected ProtocolMatrix instantiation error by safely handling 'config' and 'json_path' arguments in the constructor.
+
+## [20260406.2005.1] - 2026-04-06
+### Changed
+- Modularized the Protocol Router Interface Matrix into a standalone component 'ProtocolMatrix' in 'oaComBroker/Interface/'.
+- Refactored 'CommandRouter' to utilize the new 'ProtocolMatrix' component.
+- Added a dedicated GUI Asset pointer at 'oaGui/Assets/right_50/bottom_90/3_Commands/1_Router/2_Matrix/' for the Protocol Matrix.
+
+## [20260406.2000.1] - 2026-04-06
+### Added
+- Protocol Enablement Matrix in 'CommandRouter' GUI for granular control of protocol Ingest and Dispatch.
+- Added 'protocol_enablement' state to 'ProtocolRouter' to gate communication traffic.
+- Integrated protocol gating into 'router.py' and 'dispatch.py'.
+
+## [20260406.1955.1] - 2026-04-06
+### Changed
+- Split 'oaComProtocols.oaComMidi/Interface' into 'Input' and 'Output' subdirectories for better organization.
+- Updated 'Entry.py' and 'Interface/__init__.py' to reflect the new directory structure.
+- Updated relative imports in 'midi_output_generator.py', 'midi_feed.py', and 'midi.py'.
+- Added and updated mandatory file headers in the moved Interface files.
+- Replaced hardcoded 'LOCAL_DEBUG' flags with dynamic 'is_debug_allowed()' checks across several protocol managers to respect the 'config.ini' debug matrix.
+
+## [20260406.1950.1] - 2026-04-06
+### Fixed
+- Handled KeyboardInterrupt in UI partition (oaGuiManager) to ensure graceful shutdown without tracebacks.
+- Added synchronous shutdown() method to ShutdownCoordinator to handle non-GUI-event-driven termination.
+
 ## [20260404.2245.1] - 2026-04-04
 - Fixed redundant traceback logging in Bootstrap sequence.
 - Standardized shutdown calls in AsyncBootstrapEngine using root.after.

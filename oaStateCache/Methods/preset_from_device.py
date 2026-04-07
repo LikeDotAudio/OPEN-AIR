@@ -25,7 +25,7 @@ import threading
 import time
 
 # --- Module Imports ---
-from oaComMQTT.Methods.mqtt_controller_util import MqttControllerUtility
+from oaComProtocols.oaComMQTT.Methods.mqtt_controller_util import MqttControllerUtility
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 LOCAL_DEBUG = False

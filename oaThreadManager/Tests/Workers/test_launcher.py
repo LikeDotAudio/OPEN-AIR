@@ -82,7 +82,7 @@ class TestLauncher(unittest.TestCase):
         # This setup is complex because of the dynamic import logic
         # We need to mock both find_spec and import_module to simulate module presence
         def import_side_effect(module_path):
-            if "oaComSNMP" in module_path:
+            if "oaComProtocols.oaComSNMP" in module_path:
                 return mock_snmp_module
             return MagicMock() # Return a generic mock for other imports
             

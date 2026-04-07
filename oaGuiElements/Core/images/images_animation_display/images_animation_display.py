@@ -22,9 +22,9 @@ app_constants = Config.get_instance()  # Get the singleton instance
 from oaOchestration.Core.path_initializer import (
     GLOBAL_PROJECT_ROOT,
 )  # Import GLOBAL_PROJECT_ROOT
-from oaComMQTT.Methods.mqtt_topic_utils import get_topic  # Import get_topic
+from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic  # Import get_topic
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
-from oaGuiFramework.Methods.i18n_utils import get_text
+from oaGui.Methods.i18n_utils import get_text
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Methods.matrix_gate import is_debug_allowed
@@ -198,7 +198,7 @@ class BuilderImagesAnimationDisplayCreator(TransparencyMixin):
             # Extract widget path from topic
             expected_prefix = self.state_mirror_engine.calculate_topic("", self.base_mqtt_topic_from_path)
             if topic.startswith(expected_prefix):
-                from oaComMQTT.Methods.mqtt_topic_utils import TOPIC_DELIMITER
+                from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import TOPIC_DELIMITER
                 widget_path = topic[len(expected_prefix) :].strip(TOPIC_DELIMITER)
             else:
                 return

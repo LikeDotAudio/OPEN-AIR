@@ -42,48 +42,59 @@ from oaGuiManager.Core.composition_root import UICompositionRoot
 
 def main():
     """Orchestrates the startup, execution, and shutdown of the OPEN-AIR UI."""
-    # 1. Environment Initialization
-    initialize_paths()
-    set_log_directory(DATA_LOGS_DIR, partition="UI")
-    configure_console_encoding()
-    app_constants = Config.get_instance()
-    
-    matrix_log("ui", "system", "main", "🖥️🎨 [UI] Starting OpenAir UI Service...", "DEBUG")
-
-    # 2. Tkinter Environment Setup
-    root = UIWindowManager.create_root_window()
-
-    # 3. Splash Screen Initiation (IMMEDIATE)
-    # Launch splash screen first to provide instant user feedback.
-    splash = SplashScreen(root, app_constants.CURRENT_VERSION, app_constants.global_settings["debug_enabled"])
-    splash.set_status("Composing Service Graph...")
-
-    # 4. Composition Root (Orchestrates service creation)
-    composition_root = UICompositionRoot(root, app_constants)
-    shared_services = composition_root.build_services()
-
-    # 5. Shutdown Coordinator
-    shutdown_coordinator = ShutdownCoordinator(root, shared_services, True)
-    shutdown_coordinator.attach_to_root()
-
-    # 6. Resource Management
-    def _periodic_gc():
-        import gc; gc.collect()
-        if not getattr(root, '_shutdown', False): root.after(30000, _periodic_gc)
-    _periodic_gc()
-
-    # 7. Bootstrap Engine (Consumes injected services)
-    bootstrap_engine = AsyncBootstrapEngine(root, splash, shared_services, app_constants, shutdown_coordinator)
-    threading.Thread(target=bootstrap_engine.run, daemon=True).start()
-    
-    matrix_log("ui", "system", "main", "🖥️🎨 [UI] Entering Tkinter MainLoop.", "DEBUG")
-    root.mainloop()
-    
-    matrix_log("ui", "system", "main", "🖥️🎨 [UI] MainLoop exited. Destroying root...", "DEBUG")
+    shutdown_coordinator = None
+    root = None
     try:
-        root.destroy()
-    except Exception as e:
-        matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"Error during root.destroy(): {e}", level="TRACE")
+        # 1. Environment Initialization
+        initialize_paths()
+        set_log_directory(DATA_LOGS_DIR, partition="UI")
+        configure_console_encoding()
+        app_constants = Config.get_instance()
+        
+        matrix_log("ui", "system", "main", "🖥️🎨 [UI] Starting OpenAir UI Service...", "DEBUG")
+
+        # 2. Tkinter Environment Setup
+        root = UIWindowManager.create_root_window()
+
+        # 3. Splash Screen Initiation (IMMEDIATE)
+        # Launch splash screen first to provide instant user feedback.
+        splash = SplashScreen(root, app_constants.CURRENT_VERSION, app_constants.global_settings["debug_enabled"])
+        splash.set_status("Composing Service Graph...")
+
+        # 4. Composition Root (Orchestrates service creation)
+        composition_root = UICompositionRoot(root, app_constants)
+        shared_services = composition_root.build_services()
+
+        # 5. Shutdown Coordinator
+        shutdown_coordinator = ShutdownCoordinator(root, shared_services, True)
+        shutdown_coordinator.attach_to_root()
+
+        # 6. Resource Management
+        def _periodic_gc():
+            import gc; gc.collect()
+            if not getattr(root, '_shutdown', False): root.after(30000, _periodic_gc)
+        _periodic_gc()
+
+        # 7. Bootstrap Engine (Consumes injected services)
+        bootstrap_engine = AsyncBootstrapEngine(root, splash, shared_services, app_constants, shutdown_coordinator)
+        threading.Thread(target=bootstrap_engine.run, daemon=True).start()
+        
+        matrix_log("ui", "system", "main", "🖥️🎨 [UI] Entering Tkinter MainLoop.", "DEBUG")
+        root.mainloop()
+        
+    except KeyboardInterrupt:
+        matrix_log("ui", "system", "main", "🛑 Keyboard Interrupt detected in UI partition. Initiating shutdown...", "WARNING")
+        if shutdown_coordinator:
+            shutdown_coordinator.shutdown()
+        else:
+            sys.exit(0)
+    
+    matrix_log("ui", "system", "main", "🖥️🎨 [UI] MainLoop exited. Finalizing...", "DEBUG")
+    if root:
+        try:
+            root.destroy()
+        except Exception as e:
+            matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"Error during root.destroy(): {e}", level="TRACE")
     
     sys.exit(0)
 

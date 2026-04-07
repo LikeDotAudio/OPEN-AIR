@@ -22,7 +22,7 @@ class TestStateCache(unittest.TestCase):
         
         with patch("oaComBroker.Core.protocol_router.manager.ProtocolRouter.get_instance") as mock_router_get:
             mock_router = mock_router_get.return_value
-            with patch("oaTranslator.Core.manifest.builder.create_manifest", return_value={"val": 42}):
+            with patch("oaStateCache.Core.manifest.builder.create_manifest", return_value={"val": 42}):
                 
                 self.registry.handle_external_update("TEST/TOPIC", 42, source="GUI")
                 

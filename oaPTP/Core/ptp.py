@@ -33,7 +33,7 @@ import inspect
 from .ptp_packet_schema import PTP, SCAPY_AVAILABLE
 from .ptp_packet_parser import PTPPacketParser
 from .ptp_observer_registry import PTPObserverRegistry
-from oaComMQTT.Core.mqtt_message import MqttMessage
+from oaComProtocols.oaComMQTT.Core.mqtt_message import MqttMessage
 
 
 def register_ptp_callback(cb): PTPObserverRegistry.register(cb)

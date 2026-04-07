@@ -1,5 +1,5 @@
 # status_light/status_light.py
-from oaGuiFramework.Methods.i18n_utils import get_text
+from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 20250821.200641.4
 #
@@ -20,8 +20,8 @@ from oaConfigurationManager.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
-from oaComMQTT.Methods.mqtt_topic_utils import get_topic
-from oaComMQTT.Core.mqtt_message import MqttMessage
+from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic
+from oaComProtocols.oaComMQTT.Core.mqtt_message import MqttMessage
 
 class StatusLightWidget(tk.Frame):
     """

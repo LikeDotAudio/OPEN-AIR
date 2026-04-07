@@ -11,7 +11,7 @@
             "badge": "📂"
         },
         {
-            "path": "OPEN-AIR/oaComAES70/",
+            "path": "OPEN-AIR/oaComProtocols.oaComAES70/",
             "badge": "☎️"
         },
         {
@@ -19,35 +19,35 @@
             "badge": "☎️"
         },
         {
-            "path": "OPEN-AIR/oaComEmber/",
+            "path": "OPEN-AIR/oaComProtocols.oaComEmber/",
             "badge": "☎️"
         },
         {
-            "path": "OPEN-AIR/oaComMidi/",
+            "path": "OPEN-AIR/oaComProtocols.oaComMidi/",
             "badge": "☎️"
         },
         {
-            "path": "OPEN-AIR/oaComMQTT/",
+            "path": "OPEN-AIR/oaComProtocols.oaComMQTT/",
             "badge": "☎️"
         },
         {
-            "path": "OPEN-AIR/oaComOSC/",
+            "path": "OPEN-AIR/oaComProtocols.oaComOSC/",
             "badge": "☎️"
         },
         {
-            "path": "OPEN-AIR/oaComREST/",
+            "path": "OPEN-AIR/oaComProtocols.oaComREST/",
             "badge": "☎️"
         },
         {
-            "path": "OPEN-AIR/oaComSMPTE2138/",
+            "path": "OPEN-AIR/oaComProtocols.oaComSMPTE2138/",
             "badge": "☎️"
         },
         {
-            "path": "OPEN-AIR/oaComSNMP/",
+            "path": "OPEN-AIR/oaComProtocols.oaComSNMP/",
             "badge": "☎️"
         },
         {
-            "path": "OPEN-AIR/oaComVisa/",
+            "path": "OPEN-AIR/oaComProtocols.oaComVisa/",
             "badge": "☎️"
         },
         {

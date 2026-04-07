@@ -4,8 +4,6 @@ import sys
 project_root = pathlib.Path(__file__).resolve().parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
-
-
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
 # openair.py
@@ -103,8 +101,19 @@ def main():
     log(f"Launching OPEN-AIR Partitions... (Mission Critical: {is_mission_critical})")
 
     python_executable = sys.executable
-    core_script = os.path.join(project_root, "oaComBroker", "Core", "open_air_core.py")
-    ui_script = os.path.join(project_root, "oaGuiManager", "Managers", "open_air_ui.py")
+    core_script = project_root / "oaComBroker" / "Core" / "open_air_core.py"
+    ui_script = project_root / "oaGuiManager" / "Managers" / "open_air_ui.py"
+
+    # ⚡ VALIDATION: Ensure critical scripts exist before spawning.
+    if not core_script.exists():
+        log(f"🛑 CRITICAL FAILURE: Core script not found at {core_script}")
+        sys.exit(1)
+    if not ui_script.exists():
+        log(f"🛑 CRITICAL FAILURE: UI script not found at {ui_script}")
+        sys.exit(1)
+
+    core_script = str(core_script)
+    ui_script = str(ui_script)
 
     def get_host_guid():
         """Generates a non-persistent, 64-bit session identifier."""

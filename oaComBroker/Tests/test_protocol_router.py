@@ -18,6 +18,8 @@ class TestProtocolRouter(unittest.TestCase):
         # ⚡ OPTIMIZATION: Prevent infinite MagicMock ingest loops
         self.mock_rust.pop_inbound.return_value = None
         self.mock_rust.pop_outbound.return_value = None
+        self.mock_rust.inbound_len.return_value = 0
+        self.mock_rust.outbound_len.return_value = 0
         
         self.router = ProtocolRouter.get_instance(force_reload=True)
         self.mqtt_manager = MagicMock()

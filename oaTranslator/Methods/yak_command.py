@@ -92,9 +92,9 @@ class YakFleetCommandBuilder:
                     matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, f"🔍 Searching for YAK tabs for Model: {model}...", level="DEBUG")
 
                     # Search for the specific device directory
-                    # Structure: oaGuiDefinitions/left_50/top_100/<Category>/10_YAK/<Any_Number>_<Model>
+                    # Structure: oaGui/Assets/left_50/top_100/<Category>/10_YAK/<Any_Number>_<Model>
                     # We use a glob to be flexible with the Category folder name and the Model prefix
-                    search_pattern = f"oaGuiDefinitions/left_50/top_100/*/10_YAK/*_{model}"
+                    search_pattern = f"oaGui/Assets/left_50/top_100/*/10_YAK/*_{model}"
                     found_dirs = list(GLOBAL_PROJECT_ROOT.glob(search_pattern))
                     
                     if not found_dirs:

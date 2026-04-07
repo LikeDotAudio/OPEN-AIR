@@ -2,7 +2,7 @@
 # Author: Anthony Peter Kuzub
 # Version: 20251127.000000.1
 #
-# Description: oaGuiDefinitions/styling/style.py
+# Description: oaGui/Assets/styling/style.py
 
 import os
 import copy

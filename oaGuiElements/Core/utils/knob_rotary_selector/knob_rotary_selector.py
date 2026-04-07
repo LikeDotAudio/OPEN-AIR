@@ -15,9 +15,9 @@ from loguru import logger
 
 from oaGuiElements.Core.utils.knob.knob import CustomKnobFrame
 from oaStyle.Core.style import THEMES, DEFAULT_THEME
-from oaComMQTT.Methods.mqtt_topic_utils import get_topic
+from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic
 from oaGuiManager.Core.transparency.transparency import TransparencyManager
-from oaGuiFramework.Methods.i18n_utils import get_text
+from oaGui.Methods.i18n_utils import get_text
 from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
 
 # Core Modules for Knob Rendering

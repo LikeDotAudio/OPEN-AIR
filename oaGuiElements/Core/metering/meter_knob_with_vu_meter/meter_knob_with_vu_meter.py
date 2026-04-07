@@ -1,5 +1,5 @@
 # meter_knob_with_vu_meter/meter_knob_with_vu_meter.py
-from oaGuiFramework.Methods.i18n_utils import get_text
+from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 20260115.Composite.1
 #

@@ -69,5 +69,30 @@ class TestMidiManager(unittest.TestCase):
         self.assertTrue(any("ActiveInputs" in c[0][0] for c in calls))
         self.assertTrue(any("ActiveOutputs" in c[0][0] for c in calls))
 
+    def test_echo_suppression_and_transmission(self):
+        """
+        Test that MidiManager handles incoming protocol events correctly and prevents loops.
+        """
+        # To test the actual logic inside publish, we use the real method but mock the ports
+        self.midi._running = True
+        mock_out = MagicMock()
+        self.midi.ports.outports = [mock_out]
+        self.midi.lock_manager = MagicMock()
+        self.midi.lock_manager.is_locked.return_value = False
+        self.midi.mapper = MagicMock()
+        
+        # 1. Message from GUI (External source) should be processed and sent
+        self.midi.publish("OPEN-AIR/MIDI/test", 0.5, {"origin_source": "GUI"})
+        self.midi.mapper.topic_to_midi.assert_called_once()
+        
+        # Reset mocks
+        self.midi.mapper.topic_to_midi.reset_mock()
+        mock_out.send.reset_mock()
+        
+        # 2. Message from MIDI (Echo) should be dropped inside publish
+        self.midi.publish("OPEN-AIR/MIDI/test", 0.5, {"origin_source": "MIDI"})
+        self.midi.mapper.topic_to_midi.assert_not_called()
+        mock_out.send.assert_not_called()
+
 if __name__ == "__main__":
     unittest.main()

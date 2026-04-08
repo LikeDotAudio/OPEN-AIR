@@ -54,9 +54,15 @@ class CrashInterceptingResult(unittest.TestResult):
             exctype, value, tb = err
             if tb:
                 tblist = traceback.extract_tb(tb)
-                if tblist:
-                    filename, line, func, text = tblist[-1]
-                    return f"{value}<br><small><i>At {os.path.basename(filename)}:{line} in {func} -> {text}</i></small>"
+                # Filter out unittest internal frames for cleaner reporting
+                relevant_frames = [f for f in tblist if "unittest/case.py" not in f.filename]
+                if not relevant_frames and tblist:
+                    relevant_frames = tblist
+                
+                if relevant_frames:
+                    filename, line, func, text = relevant_frames[-1]
+                    # Using \n for breaks, let CSS white-space: pre-wrap or markdown handle it
+                    return f"{value}\nAt {os.path.basename(filename)}:{line} in {func} -> {text}"
             return str(value)
         except:
             return "Unknown Failure Cause"

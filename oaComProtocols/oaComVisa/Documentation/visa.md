@@ -3,6 +3,33 @@
 ![Python Version](https://img.shields.io/badge/python-3.10%2B-blue)
 ![Documentation](https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen)
 
+# 🏷️ Manager Visa: Bonjour & Proxy Module
+
+The **VISA** module provides query/response control for SCPI-compatible laboratory and broadcast hardware. In V3.1.0, it is enhanced with **Bonjour** Zero-Conf discovery to automatically map IP-based instruments.
+
+---
+
+## 1. V3.1.0 Behavioral Matrix
+| Feature | Implementation |
+| :--- | :--- |
+| **Bonjour Zero-Conf** | Periodically browses for mDNS services and populates the `Proxy/` path with available IP/Ports. |
+| **Asynchronous Query** | All SCPI commands are non-blocking; responses are returned via a dedicated `LINK_FEEDBACK` thread. |
+| **Timeout Protection** | Individual device timeouts prevent a single slow instrument from hanging the entire proxy bridge. |
+
+---
+
+## 2. Core Functional Role
+*   **Proxy Discovery:** The VISA module acts as a bridge between the physical instrument and the MQTT backbone, ensuring that discovered hardware is instantly controllable via the `OPEN-AIR/Proxy/` namespace.
+*   **Stateless Control:** It handles the translation of high-level MQTT "Intents" into low-level SCPI strings.
+
+---
+
+## 3. Topic Mapping
+*   **Primary Path:** `OPEN-AIR/Proxy/#`
+*   **Discovery Path:** `OPEN-AIR/Discovery/Bonjour/[DeviceID]`
+
+---
+
 ## 📖 Description & Purpose
 ### File Level
 managers/VisaScipi/manager_visa.py

@@ -176,6 +176,9 @@ class MidiManager:
     def publish(self, topic, val, meta=None):
         if not self._running or not self.run_bridge: return
         meta = meta or {}
+        
+        # The Asynchronous "Listen-and-Filter" Loop
+        # Discard the message (Echo Removal) if the origin is MIDI
         if self.lock_manager.is_locked(topic) or meta.get("origin_source") == "MIDI": return
         if meta.get("msg_type") == "LINK_FEEDBACK" and not meta.get("is_settled"): return
 
@@ -208,38 +211,34 @@ class MidiManager:
     def _on_protocol_event(self, msg):
         topic, val = str(msg.get("topic", "")), msg.get("val")
         meta = msg.get("meta", {})
+        source = msg.get("source", "UNKNOWN").upper()
         
         # 1. Hardware Status Updates
-        # ⚡ FIX: Handle list types correctly without calling .get()
         if topic == "OPEN-AIR/System/Status/MIDI/ActiveInputs": 
             self._active_in_names = val if isinstance(val, list) else (val.get("val", []) if isinstance(val, dict) else [])
         elif topic == "OPEN-AIR/System/Status/MIDI/ActiveOutputs": 
             self._active_out_names = val if isinstance(val, list) else (val.get("val", []) if isinstance(val, dict) else [])
         
         # 2. Activity Monitoring
-        # We listen for any MIDI topic traffic to update the visualizers.
+        # ⚡ V3.1.8 MONITOR REFLECTION:
+        # We listen for MIDI topic traffic to update visualizers.
+        # We allow self-authored reflections (Source: MQTT, same GUID) to proceed 
+        # to the monitor, but we do NOT send them to hardware (handled in publish).
         is_midi_topic = "/MIDI/" in topic
         is_midi_source = msg.get("logical_source") in ["MIDI", "MIDI-TX"]
         
         if is_midi_topic or is_midi_source:
-            matrix_log("comms", "midi", "_on_protocol_event", 
-                       f"🎹 [MIDI-MGR] MIDI event detected on {topic} (Source: {msg.get('logical_source')})", "TRACE")
-            
             # Determine direction
-            # If it comes from MIDI but it's a feedback or acknowledgement, it's TX
             is_tx = msg.get("logical_source") == "MIDI-TX" or meta.get("midi_raw") is not None
             direction = "TX" if is_tx else "RX"
             
-            # ⚡ ENHANCEMENT: Prefer enriched metadata from MQTT if available
-            # This ensures the UI dashboard gets full MIDI details (raw, note, channel)
+            # Prefer enriched metadata from MQTT if available
             if isinstance(meta, dict) and "raw" in meta:
                 self._notify_monitor(direction, meta)
             elif isinstance(val, dict) and "raw" in val:
                 self._notify_monitor(direction, val)
             elif isinstance(val, (int, float, dict)) and is_midi_topic:
-                # Fallback for simple values or manifests on MIDI topics
                 real_val = val.get("val") if isinstance(val, dict) else val
-                # Try to derive note from topic if possible
                 note_match = re.search(r"note(\d+)", topic)
                 note = int(note_match.group(1)) if note_match else 0
                 

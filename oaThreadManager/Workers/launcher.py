@@ -98,6 +98,7 @@ def launch_core_managers(state_cache_manager, mqtt_connection_manager):
         "oaComProtocols.oaComREST.Entry", "get_manager",
         state_cache_manager=state_cache_manager, protocol_router=protocol_router
     )
+    if rest_manager: rest_manager.start()
     
     visa_entry_path = "oaComProtocols.oaComVisa.Entry"
     if importlib.util.find_spec(visa_entry_path):

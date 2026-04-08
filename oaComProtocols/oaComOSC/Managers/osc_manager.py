@@ -284,7 +284,20 @@ class OSCManager:
             )
 
         from oaComBroker.Core.protocol_router.manager import ProtocolRouter
-        ProtocolRouter.get_instance().ingest("OSC-TX", f"OPEN-AIR/OSC{address}", value, {
+        
+        # ⚡ V3.1.12 TOPIC MAPPING (FIXED):
+        # Strip leading OSC/ from address to avoid duplication
+        clean_addr = address
+        if clean_addr.startswith("/OSC/"):
+            clean_addr = clean_addr[4:]
+        elif clean_addr.startswith("OSC/"):
+            clean_addr = "/" + clean_addr[3:]
+
+        if any(clean_addr.upper().startswith(x) for x in ["/MIDI/", "/GUI/", "/OAGUI/", "/SYSTEM/"]):
+            tx_topic = f"OPEN-AIR{clean_addr}"
+        else:
+            tx_topic = f"OPEN-AIR/OSC{clean_addr}"
+        ProtocolRouter.get_instance().ingest("OSC-TX", tx_topic, value, {
             "osc_address": address, 
             "partition": app_constants.PARTITION_ID,
             "msg_guid": meta.get("msg_guid"),
@@ -295,7 +308,6 @@ class OSCManager:
         self._notify_monitor("TX", address, value)
 
     def _on_protocol_event(self, msg):
-        """Callback for all router traffic. Handles OSC status and re-transmission."""
         with self._state_lock:
             if not self._running: return
         
@@ -305,56 +317,89 @@ class OSCManager:
         val = msg.get("val")
         meta = msg.get("meta", {})
         
-        # ⚡ LOOP PREVENTION: Ignore our own reflections from the broker
-        if source == "MQTT" and msg.get("full_id") == app_constants.FULL_INSTANCE_ID:
+        # --- LOOP PREVENTION & FILTERING (V3.1.8 MONITOR REFLECTION) ---
+        # We no longer drop MQTT reflections here because we want local monitors 
+        # to see the traffic. Hardware-level loops are handled by origin_source checks.
+        is_self_reflection = (source == "MQTT" and msg.get("full_id") == app_constants.FULL_INSTANCE_ID)
+
+        # Determine if the message is OSC-related
+        is_osc_related_by_tag = (logical_source == "OSC" or source == "OSC" or source == "OSC-TX")
+        is_osc_related_by_topic = topic.startswith("OPEN-AIR/OSC/")
+        is_osc_dest = any(dest == "OSC" for dest in msg.get("strategy", "").split())
+
+        if (is_osc_related_by_tag or is_osc_related_by_topic or is_osc_dest):
+            # For re-transmission to hardware, we still need strict rules.
+            # If it's a reflection, we only re-transmit if it's a settled state update.
+            if is_self_reflection and not meta.get("is_settled"):
+                pass # Allow to continue to monitor but skip re-send logic if needed
+
+        # Skip SYSTEM, GUI, and internal topics.
+        if source == "SYSTEM" or any(topic.startswith(x) for x in ["OPEN-AIR/System/", "OPEN-AIR/GUI/", "OPEN-AIR/oaGui/"]):
+            return
+            
+        # Skip monitor topics.
+        if "/Monitor/" in topic:
             return
 
-        # ⚡ BRIDGE LOGIC: Re-transmit non-OSC traffic to the OSC client
-        if self.run_bridge:
-            # Skip SYSTEM internal topics
-            if source == "SYSTEM":
-                return
+        # --- MESSAGE PROCESSING ---
+        # Map the topic to an OSC address (if not found, construct fallback).
+        with self._state_lock:
+            osc_address = self.topic_to_osc.get(topic)
             
-            # Skip topics that originated from OSC to prevent recursive loops
-            if logical_source == "OSC" or source == "OSC" or source == "OSC-TX":
-                return
-                
-            # Skip monitor topics to avoid flooding the OSC client with UI feedback
-            if "/Monitor/" in topic:
-                return
+        if not osc_address:
+            # Fallback logic for topic to OSC address mapping.
+            # Ensure that /OSC is only prepended if it's not already present in a way that
+            # would create redundancy, and that the base topic is correctly formed.
+            base_topic = topic.replace("OPEN-AIR/", "").lstrip("/")
+            if base_topic.startswith("OSC/"):
+                osc_address = "/" + base_topic
+            else:
+                osc_address = "/OSC/" + base_topic
+            
+            # Clean up potential double slashes or leading/trailing slashes after mapping
+            osc_address = osc_address.replace("//", "/").strip("/")
+            if not osc_address.startswith("/"):
+                osc_address = "/" + osc_address
+            
+            # If the resulting address is just "/OSC" or "/", it's likely an invalid mapping.
+            if osc_address == "/OSC" or osc_address == "/":
+                osc_address = None # Invalidate the address to prevent sending.
 
-            # Map the topic to an OSC address
-            # Check if we have a registered route first, otherwise use the topic path
-            with self._state_lock:
-                osc_address = self.topic_to_osc.get(topic)
-                
-            if not osc_address:
-                # Fallback: /OPEN-AIR/System/Config -> /System/Config
-                osc_address = "/" + topic.replace("OPEN-AIR/", "").lstrip("/")
-
+        if osc_address: # Only proceed if a valid OSC address was determined
             real_val = val
             if isinstance(val, dict) and "val" in val:
-                # Handle standard OPEN-AIR payload wrapping
                 real_val = val["val"]
             
-            # ⚡ OPTIMIZATION: Only send if value is a basic type or list (OSC compatible)
-            if isinstance(real_val, (int, float, str, bool, list)):
-                self.send(osc_address, real_val, meta)
+            origin_source = meta.get("origin_source", "UNKNOWN")
             
-            return
+            # The Asynchronous "Listen-and-Filter" Loop
+            # ⚡ V3.1.8 MONITOR REFLECTION:
+            # We only re-transmit to hardware if the message is NOT a self-reflection
+            # OR if it's a settled status update. This prevents hardware loops while 
+            # allowing local monitors to see the reflections.
+            should_send = (origin_source != "OSC" and not is_self_reflection) or meta.get("is_settled")
+            
+            if should_send and self.run_bridge:
+                if isinstance(real_val, (int, float, str, bool, list)):
+                    self.send(osc_address, real_val, meta)
+        else:
+            osc_logger.warning(f"Skipping OSC re-transmission: No valid OSC address mapped for topic '{topic}'")
         
-        # Monitor/Observer mode (non-bridge)
-        if not self.run_bridge:
-            if logical_source == "OSC":
-                direction = meta.get("direction", "RX")
-                address = meta.get("address", meta.get("osc_address", topic))
-                real_val = val.get("val") if isinstance(val, dict) and "val" in val and "address" in val else val
-                self._notify_monitor(direction, address, real_val, topic)
-            elif source == "OSC-TX":
-                self._notify_monitor("TX", meta.get("osc_address", topic), val, topic)
-            elif logical_source == "MQTT" or source == "MQTT":
-                self._notify_monitor("MQTT", topic, val, topic)
-            return
+        # Monitor/Observer mode (executed for both bridge and non-bridge)
+        if logical_source == "OSC":
+            direction = meta.get("direction", "RX")
+            address = meta.get("address", meta.get("osc_address", topic))
+            # Extract real value safely
+            r_val = val.get("val") if (isinstance(val, dict) and "val" in val and "address" in val) else val
+            self._notify_monitor(direction, address, r_val, topic)
+        elif source == "OSC-TX":
+            self._notify_monitor("TX", meta.get("osc_address", topic), val, topic)
+        elif logical_source == "MQTT" or source == "MQTT":
+            # Show MQTT reflections in the monitor
+            addr = meta.get("osc_address", topic)
+            self._notify_monitor("MQTT", addr, val, topic)
+        
+        return
 
     def register_route(self, osc_address: str, topic: str):
         with self._state_lock:

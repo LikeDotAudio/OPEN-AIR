@@ -203,7 +203,8 @@ class CommandRouter(tk.Frame):
         utp = f"{msg['ts']:.6f}"
         source = msg["source"]             # Transport (e.g. MQTT)
         logical_source = msg.get("logical_source", source) # Identity (e.g. MIDI)
-        guid = msg.get("logical_guid", msg["guid"])        # Identity (e.g. 32_0/3)
+        # ⚡ V3.1.5 HARDENING: Ensure 'guid' exists before access to prevent Tkinter KeyError
+        guid = msg.get("logical_guid", msg.get("guid", "UNKNOWN"))
         
         strategy = msg.get("strategy", "BROADCAST")
         topic = msg["topic"]

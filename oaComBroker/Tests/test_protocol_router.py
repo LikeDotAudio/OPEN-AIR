@@ -57,5 +57,32 @@ class TestProtocolRouter(unittest.TestCase):
         self.router.stop()
         self.assertFalse(self.router._running)
 
+    def test_echo_suppression_strategy(self):
+        """Test that MQTT messages from our own instance are assigned IGNORE strategy to prevent loops."""
+        from oaComBroker.Core.protocol_router.strategy import calculate_strategy
+        from oaComBroker.Core.protocol_router.constants import app_constants
+        
+        # 1. External message (Different full_id) should get a valid strategy
+        ext_msg = {
+            "source": "MQTT",
+            "logical_source": "MQTT",
+            "topic": "OPEN-AIR/GUI/test",
+            "val": 1.0,
+            "full_id": "different_instance_id"
+        }
+        ext_strategy = calculate_strategy(ext_msg)
+        self.assertNotEqual(ext_strategy, "IGNORE (REFLECT)")
+        
+        # 2. Echo message (Same full_id) should be IGNORED
+        echo_msg = {
+            "source": "MQTT",
+            "logical_source": "MQTT",
+            "topic": "OPEN-AIR/GUI/test",
+            "val": 1.0,
+            "full_id": app_constants.FULL_INSTANCE_ID
+        }
+        echo_strategy = calculate_strategy(echo_msg)
+        self.assertEqual(echo_strategy, "IGNORE (REFLECT)")
+
 if __name__ == "__main__":
     unittest.main()

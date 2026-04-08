@@ -40,6 +40,13 @@ def process_traffic(
     """
     topic = msg.topic
     
+    # --- HEARTBEAT FILTER (V3.0.0 Refinement) ---
+    # Exclude high-frequency/volatile data from the persistent state cache.
+    # This prevents 'Heartbeat' or 'Status' messages from thrashing disk I/O.
+    volatile_patterns = ["/Heartbeat/", "/Status/Monitor/", "/Firehose/", "/Monitor/Telemetry/"]
+    if any(pattern in topic for pattern in volatile_patterns):
+        return False, None
+
     try:
         # 1. Decode original payload
         raw_payload = msg.get_json_payload()

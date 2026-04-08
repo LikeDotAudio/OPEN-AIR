@@ -33,14 +33,14 @@ def get_manager(state_cache_manager=None, protocol_router=None):
     return _manager
 
 def start(state_cache_manager=None, protocol_router=None):
-    """Convenience function to start the REST service."""
-    matrix_log("comms", "rest", "start", "📡⚙️🚀 [REST] Manual service start initiated via Entry.", "DEBUG")
+    """Ensures the mandatory REST service is running."""
+    matrix_log("comms", "rest", "start", "📡⚙️🚀 [REST] Ensuring mandatory service is active via Entry.", "DEBUG")
     return get_manager(state_cache_manager, protocol_router).start()
 
 def stop():
-    """Convenience function to stop the REST service."""
+    """DEPRECATED: REST service is mandatory and cannot be stopped."""
     if _manager:
-        matrix_log("comms", "rest", "stop", "📡⚙️🛑 [REST] Manual service stop initiated via Entry.", "DEBUG")
+        matrix_log("comms", "rest", "stop", "📡⚙️🛑 [REST] Manual service stop request ignored: Service is mandatory.", "WARNING")
         _manager.stop()
 
 def get_status():

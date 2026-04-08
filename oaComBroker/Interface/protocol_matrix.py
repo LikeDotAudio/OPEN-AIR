@@ -84,15 +84,19 @@ class ProtocolMatrix(tk.Frame):
                 cell_frame = tk.Frame(container, bg="#1a1a1a", bd=1, relief="flat")
                 cell_frame.grid(row=r+1, column=c+1, padx=1, pady=1)
                 
-                # Enable Checkbox
-                var = tk.BooleanVar(value=initial_enabled)
-                cb = tk.Checkbutton(
-                    cell_frame, variable=var, bg="#1a1a1a", selectcolor="#000000",
-                    command=lambda s=src, d=dest, v=var: self._on_toggle_route(s, d, v)
-                )
-                cb.pack()
-                
-                self.matrix_vars[(src, dest)] = var
+                if not is_diagonal:
+                    # Enable Checkbox
+                    var = tk.BooleanVar(value=initial_enabled)
+                    cb = tk.Checkbutton(
+                        cell_frame, variable=var, bg="#1a1a1a", selectcolor="#000000",
+                        command=lambda s=src, d=dest, v=var: self._on_toggle_route(s, d, v)
+                    )
+                    cb.pack()
+                    
+                    self.matrix_vars[(src, dest)] = var
+                else:
+                    # ✖ Deny the user from selecting self-routing
+                    tk.Label(cell_frame, text="✖", font=("Courier", 8), fg="#444444", bg="#1a1a1a").pack()
 
             # 3. Strategy Preview Column
             preview_var = tk.StringVar(value=self.router.get_strategy_for_source(src))

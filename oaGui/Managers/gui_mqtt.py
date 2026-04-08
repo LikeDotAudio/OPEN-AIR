@@ -38,9 +38,9 @@ class GuiMqttManagerMixin:
         self, json_filepath, app_constants, base_mqtt_topic_from_path=None
     ):
         if json_filepath is None:
-            self.base_mqtt_topic_from_path = "GENERIC_GUI_TOPIC"
+            self.base_mqtt_topic_from_path = "GUI"
         elif GLOBAL_PROJECT_ROOT is None:
-            self.base_mqtt_topic_from_path = "FALLBACK_TOPIC"
+            self.base_mqtt_topic_from_path = "GUI"
         else:
             self.base_mqtt_topic_from_path = generate_topic_path_from_filepath(
                 json_filepath, GLOBAL_PROJECT_ROOT

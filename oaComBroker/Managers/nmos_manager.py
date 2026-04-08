@@ -57,7 +57,10 @@ class NmosManager:
             source_id=meta.get("source_id", "00000000-0000-0000-0000-000000000000"),
             flow_id=meta.get("flow_id", "00000000-0000-0000-0000-000000000000")
         )
-        timing = Timing(origin_timestamp=meta.get("ts", time.strftime("%Y-%m-%dT%H:%M:%SZ")))
+        timing = Timing(
+            creation_timestamp=meta.get("ts", time.strftime("%Y-%m-%dT%H:%M:%SZ")),
+            origin_timestamp=meta.get("ts", time.strftime("%Y-%m-%dT%H:%M:%SZ"))
+        )
         
         # Determine event type based on value
         if isinstance(val, bool):

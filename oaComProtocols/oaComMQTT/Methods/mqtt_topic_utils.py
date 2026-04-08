@@ -31,8 +31,13 @@ def generate_topic_path_from_filepath(file_path: Path, project_root: Path) -> st
 
         filtered_parts = []
         for part in path_parts:
+            # ⚡ V3.1.9 NAMESPACE CONSOLIDATION: Map 'oaGui' to 'GUI'
+            if part.lower() == "oagui":
+                part = "GUI"
+
             # ⚡ FILTER 1: Skip known structural layout tokens
-            if part.lower() in ["display", "gui", "left", "right", "top", "bottom"]:
+            # We now KEEP 'GUI' as it is the primary namespace.
+            if part.lower() in ["display", "left", "right", "top", "bottom"]:
                 continue
             
             # ⚡ FILTER 2: Skip pure digits (standalone sorting numbers like '50', '100', '1')

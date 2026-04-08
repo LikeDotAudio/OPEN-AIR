@@ -19,11 +19,12 @@ from .constants import LOCAL_DEBUG, app_constants
 from oaLogging.Methods.matrix_gate import matrix_log
 from oaOchestration.Managers.protocol_guard import protocol_guard
 
-def dispatch_message(msg, managers, enablement=None, topic_routing=None, is_active=True):
+def dispatch_message(msg, managers, topic_routing=None, is_active=True):
     """
     Executes transport-specific publication based on the routing strategy.
     """
-    matrix = enablement or {}
+    from oaComBroker.Core.protocol_router.manager import ProtocolRouter
+    router = ProtocolRouter.get_instance()
     t_routing = topic_routing or {}
     
     # Normalize Source Name for Matrix Lookup
@@ -38,53 +39,105 @@ def dispatch_message(msg, managers, enablement=None, topic_routing=None, is_acti
     # Helper to resolve topic override or prefixing
     def get_topic(dest):
         cfg = t_routing.get((src, dest))
+        
+        # ⚡ V3.1.15 OSC ADDRESS GUARD:
+        # OSC typically uses its own address mapping. Do not force-prefix 
+        # unless a specific 'send' override is defined in the routing matrix.
+        if dest == "OSC" and not (cfg and cfg.get("send")):
+            return topic
+
         if cfg and cfg.get("send"):
-            prefix = cfg["send"]
-            if str(topic).startswith(prefix):
+            prefix = cfg["send"].rstrip("/")
+            
+            # ⚡ V3.1.13 PREFIX GUARD:
+            # Do not prefix topics that already belong to System or Monitor namespaces.
+            if "/System/" in topic or "/Monitor/" in topic:
                 return topic
-            # If it's a prefix, we append the topic (removing existing OPEN-AIR/ if redundant)
-            suffix = topic.replace("OPEN-AIR/", "")
-            return f"{prefix.rstrip('/')}/{suffix.lstrip('/')}"
+
+            # ⚡ V3.1.14 RECURSION GUARD:
+            # If the topic already starts with the intended prefix, return as-is.
+            if topic.startswith(prefix + "/"):
+                return topic
+
+            # If it's a prefix, we strip ALL known protocol roots and existing 'OPEN-AIR/' 
+            # substrings to prevent recursive bloat (e.g., OPEN-AIR/OSC/OSC/MIDI).
+            suffix = topic
+            roots = ["OPEN-AIR/GUI", "OPEN-AIR/oaGui", "OPEN-AIR/MIDI", "OPEN-AIR/OSC", 
+                     "OPEN-AIR/NMOS", "OPEN-AIR/AES70", "OPEN-AIR/SMPTE2138", "OPEN-AIR/EMBER",
+                     "OPEN-AIR"]
+            
+            for root in roots:
+                # Aggressively remove redundant root prefixes
+                while suffix.startswith(root):
+                    suffix = suffix[len(root):].lstrip("/")
+            
+            return f"{prefix}/{suffix.lstrip('/')}"
         return topic
+
+    # --- V3.0.0 SELF-FILTER / ECHO REMOVER ---
+    # Acts as a gatekeeper for Output Commands. 
+    # It compares the incoming message's 'src' tag against the local module ID.
+    msg_src_id = msg.get("meta", {}).get("src") or msg.get("full_id")
+    
+    if msg_src_id == app_constants.FULL_INSTANCE_ID:
+        # ⚡ EXCEPTION: MQTT Broadcast (🚀) and Cache (💾) must always proceed 
+        # for self-authored messages to ensure global state synchronization.
+        # Status and Monitor topics are also exempt to ensure visibility.
+        is_status = ("/Status/" in topic or "/Monitor/" in topic)
+        if not is_status and "🚀" not in strategy and "Ⓜ️" not in strategy and "💾" not in strategy:
+            if app_constants.ROUTER_DISPATCH_LOGS:
+                matrix_log("comms", "broker", "dispatch_message", f"🛡️ [ECHO] Dropping self-authored message for {topic}.", "TRACE")
+            return
+
+    router = ProtocolRouter.get_instance()
 
     # --- MQTT Dispatch ---
     if "🚀" in strategy or "Ⓜ️" in strategy:
-        if is_active and matrix.get(src, {}).get("MQTT", True):
+        if is_active and ProtocolRouter.get_instance().egress_enabled.get("MQTT", True):
             mqtt_manager = managers.get("mqtt")
             if mqtt_manager and msg["source"] != "MQTT" and msg.get("logical_source") != "MQTT":
                 _dispatch_mqtt(mqtt_manager, get_topic("MQTT"), msg, val_str)
 
     # --- OSC Dispatch ---
     if "🅾️" in strategy:
-        if is_active and matrix.get(src, {}).get("OSC", True):
+        if is_active and router.egress_enabled.get("OSC", True):
             osc_manager = managers.get("osc")
             if osc_manager and msg["source"] not in ["OSC", "OSC-TX"] and msg.get("logical_source") not in ["OSC", "OSC-TX"]:
-                _dispatch_osc(osc_manager, get_topic("OSC"), val, msg, val_str)
+                # ⚡ V3.1.12 NAMESPACE EXCLUSION:
+                is_gui = any(x in topic.upper() for x in ["/GUI/", "/OAGUI/"])
+                is_system = "/SYSTEM/" in topic.upper()
+                is_midi = "/MIDI/" in topic.upper()
+                has_address = bool(msg.get("meta", {}).get("osc_address"))
+                
+                if (is_gui or is_system or is_midi) and not has_address:
+                    pass 
+                else:
+                    _dispatch_osc(osc_manager, get_topic("OSC"), val, msg, val_str)
 
     # --- MIDI Dispatch ---
     if "🎹" in strategy:
-        if is_active and matrix.get(src, {}).get("MIDI", True):
+        if is_active and router.egress_enabled.get("MIDI", True):
             midi_manager = managers.get("midi")
             if midi_manager and msg["source"] not in ["MIDI", "MIDI-TX"] and msg.get("logical_source") not in ["MIDI", "MIDI-TX"]:
                 _dispatch_midi(midi_manager, get_topic("MIDI"), val, msg, val_str)
 
     # --- SNMP Dispatch ---
     if "Ⓢ" in strategy:
-        if is_active and matrix.get(src, {}).get("SNMP", True):
+        if is_active and router.egress_enabled.get("SNMP", True):
             snmp_manager = managers.get("snmp")
             if snmp_manager and msg["source"] not in ["SNMP", "SNMP-TX"] and msg.get("logical_source") not in ["SNMP", "SNMP-TX"]:
                 _dispatch_snmp(snmp_manager, get_topic("SNMP"), val, val_str)
 
     # --- NMOS Dispatch ---
     if "N" in strategy or "NMOS" in strategy:
-        if is_active and matrix.get(src, {}).get("NMOS", True):
+        if is_active and router.egress_enabled.get("NMOS", True):
             nmos_manager = managers.get("nmos")
             if nmos_manager and msg["source"] != "NMOS" and msg.get("logical_source") != "NMOS":
                 _dispatch_nmos(nmos_manager, get_topic("NMOS"), val, msg, val_str)
 
     # --- SMPTE 2138 Dispatch ---
     if "🔗" in strategy or "🚀" in strategy:
-        if is_active and matrix.get(src, {}).get("SMPTE2138", True):
+        if is_active and router.egress_enabled.get("SMPTE2138", True):
             smpte_manager = managers.get("smpte2138")
             if smpte_manager and msg["source"] != "SMPTE2138" and msg.get("logical_source") != "SMPTE2138":
                 _dispatch_smpte2138(smpte_manager, get_topic("SMPTE2138"), val, msg, val_str)
@@ -97,11 +150,11 @@ def _dispatch_mqtt(mqtt_manager, topic, msg, val_str):
     }
     if isinstance(msg.get("meta"), dict): payload.update(msg["meta"])
     
+    # ⚡ V3.1.12 ACKNOWLEDGEMENT REMOVAL:
+    # Automatic /Tx/ namespace prefixing has been permanently removed to 
+    # prevent topic tree clutter. Standard topic paths are preserved.
     tx_topic = topic
-    base = app_constants.MQTT_BASE_TOPIC
-    if base in topic and f"{base}/Cmd/" not in topic and f"{base}/Tx/" not in topic:
-        tx_topic = topic.replace(base, f"{base}/Tx")
-        
+    
     # ⚡ OPTIMIZATION: Retain status and monitor topics for late-joining observers
     retain = ("/Status/" in topic or "/Monitor/" in topic)
     

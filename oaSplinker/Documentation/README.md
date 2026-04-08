@@ -1,35 +1,46 @@
-# 🔗 SPLINKER: The Bidirectional Command Broker
+# 🔗 SPLINKER: The Micro-Logic Event Lifecycle
 
-The Splinker system is a decoupled brokerage engine designed to create dynamic, bidirectional communication links between any two points (topics) in the OPEN-AIR ecosystem. It allows for hardware-to-hardware, GUI-to-hardware, or logic-to-logic "splices" with real-time value transformation.
+The **Splinker** system is the core behavioral engine of OPEN-AIR. It manages the physical reality of control events, ensuring that asynchronous MQTT messages do not cause hardware jitter or conflicting states. It specifically handles the lifecycle of a "move" through three primary micro-logic gates: **SPLICE**, **LINK**, and **SPLINKER**.
 
-## Core Concepts
+---
 
-### 1. The Splink
-A **Splink** is a persistent configuration object that defines a relationship between a **Source** and a **Destination**.
-- **Source**: The topic that triggers an action.
-- **Destination**: The topic that receives the brokered value.
-- **Sub-paths**: Splinker supports granular linking using the `Topic:Key` syntax, allowing you to link specific values within a JSON dictionary.
+## 1. The Micro-Logic Gates
 
-### 2. Modes of Operation
-- **SPLICE**: One-way flow. Source updates the Destination.
-- **LINK**: One-way flow. Destination updates the Source (Feedback loop).
-- **BOTH**: Bidirectional flow. Both topics stay in sync.
+### A. The SPLICE (Update Partner)
+*   **Role:** The entry gate for a new event.
+*   **Behavior:** It identifies the `origin_source` and pairs it with its intended `target_parameter`.
+*   **Action:** It triggers the **Ghost Touch Unlock**. 
+    *   *Logic:* If a user physically touches a motorized fader, the system "unlocks" software control to prevent the motor from fighting the human hand.
 
-### 3. Processing Pipeline
-Every Splink can have a chain of **Handlers** that modify the value as it passes through the broker.
-- **Scaling**: Map a 0-127 MIDI value to a 0-100% GUI fader.
-- **Deadband**: Filter out jitter or small changes.
-- **Debounce**: Prevent rapid-fire messaging (Rate limiting).
-- **Inversion**: Flip a toggle or invert a range.
+### B. The LINK (The Payload Generator)
+*   **Role:** The data packager.
+*   **Behavior:** It creates a unique `msg_guid` and attaches critical state flags to the event envelope.
+*   **State Flags:**
+    *   `is_locked`: Prevents low-priority sources from interrupting this specific stream.
+    *   `is_settled`: Communicates whether the value is currently moving (False) or has reached its final destination (True).
+*   **Output:** An **Event Stamp** with a high-resolution timestamp, published to the MQTT backbone.
 
-## Architecture
+### C. The SPLINKER (Consumer Update)
+*   **Role:** The distribution engine.
+*   **Behavior:** Receives the **Update Stamp** from MQTT and acts as the "Master Consumer."
+*   **Action:** It splits the update into two distinct paths:
+    1.  **Maker Update:** Informs the GUI and other status displays that the value has changed in real-time.
+    2.  **Consumer Update:** Physically commands the hardware (e.g., moves a motorized fader) but only after passing through **Ghost Touch Lock** logic to ensure the fader is safe to move.
 
-- **SplinkerManager**: The central singleton that manages the lifecycle of all Splinks, handles persistence (saving to `oaDataRunningFiles/splink/`), and routes events from the `ProtocolRouter`.
-- **SplinkPipeline**: A transient object created for each event to execute the chain of handlers.
-- **Handlers**: Modular logic blocks that implement specific value transformations.
+---
 
-## Direct Creation
-Splinks can be created on-the-fly via the Command Router's "Direct Splink" feature, which publishes to `OPEN-AIR/System/Control/Splinker/DirectCreate`.
+## 2. Narrative: The "Splinker" Flow in Action
 
-## Persistence
-All Splinks are stored as individual JSON files in `oaDataRunningFiles/splink/`, allowing them to persist across system restarts.
+1.  **Generation:** A user moves a MIDI Fader. The **MIDI Receiver** triggers a **SPLICE**.
+2.  **Logic Gate:** **SPLICE** identifies the `origin_source` as a physical move and triggers **Ghost Touch Unlock**, signaling the motor driver to release hold.
+3.  **Transit:** **LINK** generates a `msg_guid`, sets `is_settled: false`, and stamps the event for publication to **MQTT Storage**.
+4.  **Distribution:** The **SPLINKER** picks up the message. Seeing `is_locked: true` and `is_settled: false`, it prioritizes this stream.
+5.  **Feedback:** It sends a **Maker Update** to the **GUI**, allowing the screen fader to follow the physical hand in real-time.
+6.  **Resolution:** Once the user releases the fader, a final message with `is_settled: true` is sent. The **SPLINKER** then triggers **Ghost Touch Lock**, returning the fader to automated control readiness.
+
+---
+
+## 3. Benefits of the Splinker Architecture
+*   **Hardware Safety:** Ghost Touch logic prevents mechanical wear and motor fighting.
+*   **Deterministic State:** `is_settled` and `is_locked` flags ensure that automated moves don't jitter during manual overrides.
+*   **Decoupled Feedback:** Makers (GUIs) and Consumers (Hardware) are updated independently, ensuring the UI remains responsive even if hardware response is delayed.

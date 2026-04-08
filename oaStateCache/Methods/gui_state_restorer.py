@@ -62,9 +62,15 @@ def restore_timeline(cache_data: Dict[str, Any], state_mirror_engine: Any) -> No
 
             matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"⏪🔄 Topic='{topic}'{val_str}", "TRACE")
             # ⚡ REFACTORED: Wrap in MqttMessage for Partitioned Architecture compatibility
-            msg = MqttMessage(topic=topic, payload=payload)
-            state_mirror_engine.sync_incoming_mqtt_to_gui(msg)
-            
+            # Only process if the topic is MQTT-originated as per user's directive.
+            if topic.startswith("OPEN-AIR/MQTT/"):
+                msg = MqttMessage(topic=topic, payload=payload)
+                state_mirror_engine.sync_incoming_mqtt_to_gui(msg)
+            else:
+                # Log or handle non-MQTT data if necessary, but for now, skip it based on user's rule.
+                # This prevents non-MQTT cached data from affecting OSC/GUI state restoration directly.
+                matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Skipping non-MQTT topic in cache: {topic}", "DEBUG")
+
             # ⚡ STABILITY: Replaying state directly into the GUI is expensive (redraws, reslices).
             # Throttle to 2ms per message to prevent overwhelming the main thread.
             import time

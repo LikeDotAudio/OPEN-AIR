@@ -26,7 +26,9 @@
 
 import threading
 import orjson
+import time
 from .constants import SOURCE_DESCRIPTIONS, EMOJI_TO_WORD, app_constants
+from oaLogging.Methods.matrix_gate import matrix_log
 
 class Monitor:
     """
@@ -46,6 +48,17 @@ class Monitor:
         self.firehose = []
         self._firehose_lock = threading.Lock()
         self._observers = []
+
+        # Telemetry Initialization
+        self._msg_count = 0
+        self._byte_count = 0
+        self._last_telemetry_ts = time.time()
+        self._telemetry = {
+            "pps": 0,
+            "bps": 0,
+            "latency_ms": 0,
+            "total_msgs": 0
+        }
 
     def register_cache_observer(self, callback):
         """
@@ -74,6 +87,47 @@ class Monitor:
             self.firehose.insert(0, msg)
             if len(self.firehose) > 2000:
                 self.firehose.pop()
+
+        # Update Telemetry Counters
+        self._msg_count += 1
+        try:
+            # Rough estimation of packet size for bit-rate
+            self._byte_count += len(orjson.dumps(msg))
+        except:
+            self._byte_count += 100 # Fallback constant
+
+        # Calculate Latency (Ingest TS vs Current TS)
+        if "ts" in msg:
+            latency = (time.time() - msg["ts"]) * 1000
+            self._telemetry["latency_ms"] = (self._telemetry["latency_ms"] * 0.9) + (latency * 0.1)
+
+        # Publish telemetry once per second
+        now = time.time()
+        if now - self._last_telemetry_ts >= 1.0:
+            self._publish_telemetry(now)
+
+    def _publish_telemetry(self, now):
+        elapsed = now - self._last_telemetry_ts
+        if elapsed <= 0: return
+
+        self._telemetry["pps"] = int(self._msg_count / elapsed)
+        self._telemetry["bps"] = int((self._byte_count * 8) / elapsed)
+        self._telemetry["total_msgs"] += self._msg_count
+        
+        # Reset interval counters
+        self._msg_count = 0
+        self._byte_count = 0
+        self._last_telemetry_ts = now
+        
+        # Broadcast to observers (UI)
+        telemetry_msg = {
+            "ts": now,
+            "source": "SYSTEM",
+            "topic": "OPEN-AIR/System/Monitor/Telemetry",
+            "val": self._telemetry.copy(),
+            "meta": {"msg_type": "TELEMETRY", "is_settled": True}
+        }
+        self.broadcast_to_observers(telemetry_msg)
 
     def get_splink_relationship(self, msg_ts):
         """

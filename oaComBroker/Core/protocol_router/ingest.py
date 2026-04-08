@@ -45,6 +45,13 @@ def normalize_and_ingest(
     rust_router=None,
     is_active=True
 ):
+    # ⚡ HUB-AND-SPOKE: Ingress Gate
+    # Access the ProtocolRouter singleton to check if this source is permitted
+    from oaComBroker.Core.protocol_router.manager import ProtocolRouter
+    router = ProtocolRouter.get_instance()
+    if not router.ingest_enabled.get(transport_source, True):
+        return None # Silently drop traffic from disabled protocols
+
     """
     Normalizes raw data into the Unified Message Schema and appends to queue.
 
@@ -111,12 +118,26 @@ def normalize_and_ingest(
     # If the transport is MQTT, we check the topic prefix to see if it belongs
     # to a specific logical protocol partition (GUI, MIDI, etc.)
     if transport_source == "MQTT":
-        from .manager import ProtocolRouter
+        from .router import ProtocolRouter
         p_prefixes = ProtocolRouter.get_instance().protocol_prefixes
         for p_name, prefix in p_prefixes.items():
-            if str(topic).startswith(prefix):
+            # Support both single prefix string and list of prefixes
+            prefixes = [prefix] if isinstance(prefix, str) else prefix
+            if any(str(topic).startswith(p) for p in prefixes):
                 logical_source = p_name
                 break
+    
+    # --- V3.1.5 TOPIC SANITIZATION (AGGRESSIVE) ---
+    # Prevent recursive protocol prefixing (e.g., OPEN-AIR/OSC/OSC/OSC/...)
+    # This logic identifies repeated protocol tokens and collapses them.
+    if any(x + "/" + x + "/" in str(topic) for x in ["OSC", "MIDI", "GUI", "oaGui"]):
+        parts = str(topic).split("/")
+        unique_parts = []
+        for p in parts:
+            if p in ["OSC", "MIDI", "GUI", "oaGui"] and unique_parts and unique_parts[-1] == p:
+                continue
+            unique_parts.append(p)
+        topic = "/".join(unique_parts)
 
     logical_guid = session_guid
     
@@ -150,6 +171,22 @@ def normalize_and_ingest(
     if is_settled is None:
         is_settled = False
     
+    # --- V3.0.0 METADATA HARDENING ---
+    # Ensure 'src' (Source Identity) is explicitly tagged for Echo Cancellation.
+    # If not provided by transport, we inject the local full_id.
+    msg_src_id = meta.get("src")
+    if isinstance(value, dict):
+        msg_src_id = msg_src_id or value.get("src")
+    
+    msg_src_id = msg_src_id or full_id
+    
+    # ⚡ V3.1.16 REFLECTION IDENTIFICATION
+    is_reflection = meta.get("is_reflection") or (msg_src_id == full_id and transport_source == "MQTT")
+    
+    if is_reflection:
+        if app_constants.ROUTER_INGEST_LOGS:
+            matrix_log("comms", "broker", "normalize_and_ingest", f"🛡️ [ECHO] Reflection identified for {topic} (Src: {msg_src_id})", "TRACE")
+
     # INTERACTION LOCK (BROKER LEVEL): 
     # Prevents self-reflection loops when a parameter is actively being 
     # modified by a user on this instance.
@@ -174,7 +211,9 @@ def normalize_and_ingest(
         "msg_guid": msg_guid,
         "msg_type": msg_type,
         "origin_source": origin_source,
-        "is_settled": is_settled
+        "is_settled": is_settled,
+        "src": msg_src_id,
+        "is_reflection": is_reflection
     }
     
     # Update metadata dictionary for downstream consumers.
@@ -183,7 +222,9 @@ def normalize_and_ingest(
         "msg_type": msg_type,
         "origin_source": origin_source,
         "is_settled": is_settled,
-        "full_id": full_id
+        "full_id": full_id,
+        "src": msg_src_id,
+        "is_reflection": is_reflection
     })
     
     inbound_queue.put(msg)

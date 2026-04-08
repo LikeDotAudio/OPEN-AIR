@@ -170,6 +170,9 @@ class HTMLGenerator:
         .error-log {{ border-left: 5px solid #e74c3c; }}
     </style>
     <script>
+        if (typeof marked !== 'undefined') {{
+            marked.setOptions({{ breaks: true }});
+        }}
         function renderMarkdown() {{
             if (typeof marked === 'undefined') return;
             document.querySelectorAll('.markdown-content').forEach(el => {{

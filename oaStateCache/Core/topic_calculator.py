@@ -25,9 +25,11 @@ class TopicCalculator:
         # Standardize hierarchical delimiters and strip structural tokens
         widget_id_str = str(widget_id).replace(".fields.", ".").replace(".", "/")
         
-        # ⚡ OPTIMIZATION: Strip structural tokens like 'display' or 'Assets'
-        # The user's plan requires stripping forbidden layout tokens.
+        # ⚡ V3.1.9 NAMESPACE CONSOLIDATION: Map 'oaGui' to 'GUI'
         parts = widget_id_str.split("/")
+        parts = ["GUI" if p == "oaGui" else p for p in parts]
+        
+        # ⚡ OPTIMIZATION: Strip structural tokens like 'display' or 'Assets'
         filtered_parts = [p for p in parts if p not in ["display", "Assets", "oaGuiElements"]]
         widget_id_str = "/".join(filtered_parts)
         
@@ -37,6 +39,9 @@ class TopicCalculator:
         else:
             # Also filter tab_name
             tab_parts = str(tab_name).split("/")
+            # ⚡ V3.1.9 NAMESPACE CONSOLIDATION: Map 'oaGui' to 'GUI'
+            tab_parts = ["GUI" if p == "oaGui" else p for p in tab_parts]
+            
             clean_tab_parts = [p for p in tab_parts if p not in ["display", "Assets", "oaGuiElements"]]
             clean_tab = "/".join(clean_tab_parts)
 

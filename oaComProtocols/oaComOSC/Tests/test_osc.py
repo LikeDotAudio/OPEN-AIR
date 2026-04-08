@@ -54,5 +54,33 @@ class TestOSCManager(unittest.TestCase):
         
         callback.assert_called_with("RX", "/test/osc", 0.75, unittest.mock.ANY)
 
+    def test_echo_suppression_and_transmission(self):
+        """Test that OSCManager handles incoming protocol events correctly."""
+        self.manager.register_route("/test/osc", "OPEN-AIR/test/topic")
+        self.manager.send = MagicMock()
+        
+        # 1. Message from GUI (External source) should be transmitted to OSC
+        gui_msg = {
+            "source": "MQTT",
+            "logical_source": "GUI",
+            "topic": "OPEN-AIR/test/topic",
+            "val": 0.5,
+            "meta": {"origin_source": "GUI"}
+        }
+        self.manager._on_protocol_event(gui_msg)
+        self.manager.send.assert_called_with("/test/osc", 0.5, {"origin_source": "GUI"})
+        self.manager.send.reset_mock()
+        
+        # 2. Message from OSC (Echo) should be dropped
+        osc_msg = {
+            "source": "MQTT",
+            "logical_source": "OSC",
+            "topic": "OPEN-AIR/test/topic",
+            "val": 0.5,
+            "meta": {"origin_source": "OSC"}
+        }
+        self.manager._on_protocol_event(osc_msg)
+        self.manager.send.assert_not_called()
+
 if __name__ == "__main__":
     unittest.main()

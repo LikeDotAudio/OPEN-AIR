@@ -215,15 +215,11 @@ class StateRegistry:
 
         current_cache = self.rust_cache.to_dict()
         if current_cache:
-            from oaComBroker.Core.protocol_router.manager import ProtocolRouter
-            router = ProtocolRouter.get_instance()
-            for topic, payload in current_cache.items():
-                val = payload.get("val") if isinstance(payload, dict) else payload
-                router.ingest("DISK", topic, val, 
-                              {"msg_type": "LINK_FEEDBACK", "is_settled": True, 
-                               "origin_source": "DISK", "boot": True})
-                # ⚡ STABILITY: Throttle ingestion to protect router threads.
-                time.sleep(0.001) 
+            # ⚡ V3.1.18 ARCHITECTURAL PURITY:
+            # The State Cache is NOT a router input. We populate the local memory
+            # and search engine, but we do NOT ingest these values into the 
+            # Protocol Router's event pipeline.
+            # Mirroring to UI remains for immediate visibility.
             gui_state_restorer.restore_timeline(current_cache, 
                                                 self.state_mirror_engine)
 
@@ -318,9 +314,25 @@ class StateRegistry:
         try:
             source, value, metadata, raw_payload = self._parse_mqtt_payload(msg)
 
+            # ⚡ V3.1.16 REFLECTION DETECTION
+            # Identify if this message was authored by the local instance.
+            msg_src_id = metadata.get("src") or metadata.get("full_id")
+            is_reflection = (msg_src_id == app_constants.FULL_INSTANCE_ID)
+            
+            if is_reflection:
+                metadata["is_reflection"] = True
+                if app_constants.ROUTER_INGEST_LOGS:
+                    matrix_log("core", "data", "handle_incoming_mqtt", f"🛡️ [ECHO] Reflection detected for {topic}. Ingesting for visibility.", "TRACE")
+
             from oaComBroker.Core.protocol_router.manager import ProtocolRouter
             ProtocolRouter.get_instance().ingest("MQTT", topic, value, metadata)
             self.observers.notify(topic, raw_payload)
+
+            # --- CACHE POLICY ---
+            # Self-reflections are NOT committed to the local cache because we 
+            # already have the definitive state in memory (or will soon).
+            if is_reflection:
+                return
 
             should_process, new_payload = cache_traffic_controller.process_traffic(
                 msg, self.rust_cache)

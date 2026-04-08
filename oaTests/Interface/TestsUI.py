@@ -218,7 +218,16 @@ class TestsApp(App):
                 elif status == "failed": self.summary["failed"] += 1
                 elif status == "error": self.summary["errors"] += 1
                 elif status == "skipped": self.summary["skipped"] += 1
-                self.test_results.append({"classname": str(test.__class__.__name__), "name": str(test), "status": status, "message": message, "cause": cause, "duration": f"{duration:.4f}s"})
+                desc = test.shortDescription() or message or "No description provided."
+                self.test_results.append({
+                    "classname": str(test.__class__.__name__), 
+                    "name": str(test), 
+                    "status": status, 
+                    "description": desc,
+                    "message": message, 
+                    "cause": cause, 
+                    "duration": f"{duration:.4f}s"
+                })
                 self.safe_write_log(f"   {'✅' if status == 'passed' else '❌'} {test}: [bold]{status}[/]")
             found_dirs = DiscoverTests.identify_test_directories(self.project_root)
             runner = TestRunner(record_result)

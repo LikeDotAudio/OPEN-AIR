@@ -32,7 +32,7 @@ def check_fastapi_availability():
         matrix_log("comms", "rest", "check_fastapi_availability", f"❌ [REST] Dependency check failed: {e}", "ERROR")
         return False
 
-from ..Constants.rest_constants import LOCAL_DEBUG, REST_HOST, REST_PORT, REST_CORS_ORIGINS
+from ..Constants.rest_constants import LOCAL_DEBUG, REST_BIND_HOST, REST_REPORT_HOST, REST_PORT, REST_CORS_ORIGINS
 from ..Workers.uvicorn_worker import UvicornWorker
 from ..Interface.routes import create_router
 from ..Methods.port_utils import zap_port, get_process_on_port, is_friendly_process
@@ -40,8 +40,11 @@ from ..Methods.port_utils import zap_port, get_process_on_port, is_friendly_proc
 class RESTManager:
     """
     Manages the lifecycle of the FastAPI REST service.
+    
+    Mandate: Always Online. The REST API is a core system service and 
+    cannot be disabled while the module is present.
     """
-    STATE_TOPIC = "OPEN-AIR/System/Config/REST/Enabled"
+    STATE_TOPIC = "OPEN-AIR/System/Config/REST/Status" # Changed from Enabled to Status
 
     def __init__(self, state_cache_manager, protocol_router):
         self.state_cache = state_cache_manager
@@ -50,32 +53,20 @@ class RESTManager:
         self.worker = None
         self.monitor_callbacks = []
         self._initialized = False
-        self._should_run = True # ⚡ AUTO-START: Default to active on boot
+        self._should_run = True # ⚡ MANDATORY: Always active on boot
         self._health_thread = None
         self._sibling_active = False
 
         # 1. Dependency Check
         self._initialized = self._try_initialize()
         
-        # 2. State Integration
+        # 2. State Integration (Read-only status now)
         if self.state_cache:
-            self.state_cache.register_cache_observer(self._on_global_state_change)
-            initial = self.state_cache.get_cached_value(self.STATE_TOPIC)
-            if initial is not None:
-                self._should_run = bool(initial)
+            # We no longer listen for 'Enabled' toggles; REST is mandatory.
+            self.state_cache.handle_external_update(self.STATE_TOPIC, True, source="REST-INIT")
 
         # 3. Launch Monitor
         self._start_health_monitor()
-
-    def _on_global_state_change(self, topic, payload):
-        if topic != self.STATE_TOPIC: return
-        value = payload.get("val") if isinstance(payload, dict) else payload
-        new_state = bool(value)
-        if new_state != self._should_run:
-            matrix_log("comms", "rest", "_on_global_state_change", f"📡⚙️🔄 [REST] Global state toggle: {new_state}", "INFO")
-            self._should_run = new_state
-            if not new_state: self._shutdown_local_worker()
-            else: self._launch_instance()
 
     def _try_initialize(self):
         if not check_fastapi_availability(): return False
@@ -122,17 +113,23 @@ class RESTManager:
     def _health_loop(self):
         while True:
             try:
-                if self._should_run:
-                    is_local = self.is_running()
-                    proc = get_process_on_port(REST_PORT)
-                    is_sibling = proc and is_friendly_process(proc) and not is_local
-                    if is_local: self._sibling_active = False
-                    elif is_sibling: self._sibling_active = True
-                    else:
-                        self._sibling_active = False
-                        self._launch_instance()
+                # ⚡ MANDATORY: Always attempt to keep the service alive
+                is_local = self.is_running()
+                proc = get_process_on_port(REST_PORT)
+                is_sibling = proc and is_friendly_process(proc) and not is_local
+                
+                if is_local: 
+                    self._sibling_active = False
+                elif is_sibling: 
+                    self._sibling_active = True
                 else:
-                    if self.is_running(): self._shutdown_local_worker()
+                    self._sibling_active = False
+                    self._launch_instance()
+                    
+                # Update status in cache
+                if self.state_cache:
+                    self.state_cache.handle_external_update(self.STATE_TOPIC, self.is_running() or self._sibling_active, source="REST-HB")
+
             except Exception as e: 
                 matrix_log("comms", "rest", "_health_loop", f"❌ [REST] Health loop error: {e}", "ERROR")
             time.sleep(2.0)
@@ -147,33 +144,27 @@ class RESTManager:
             elif not zap_port(REST_PORT): return
 
         try:
-            self.worker = UvicornWorker(self.app, host=REST_HOST, port=REST_PORT)
-            matrix_log("comms", "rest", "_launch_instance", f"🌐 [REST] Launching API Service on {REST_HOST}:{REST_PORT}...", "INFO")
+            self.worker = UvicornWorker(self.app, host=REST_BIND_HOST, port=REST_PORT)
+            matrix_log("comms", "rest", "_launch_instance", f"🌐 [REST] Launching Mandatory API Service on {REST_BIND_HOST}:{REST_PORT} (URL: http://{REST_REPORT_HOST}:{REST_PORT})...", "INFO")
             self.worker.start()
         except Exception as e: 
             matrix_log("comms", "rest", "_launch_instance", f"❌ [REST] Launch failed: {e}", "ERROR")
 
     def _shutdown_local_worker(self):
-        if self.worker and self.worker.is_alive():
-            matrix_log("comms", "rest", "_shutdown_local_worker", "🌐 [REST] Shutting down local instance.", "INFO")
-            self.worker.stop()
-            self.worker.join(timeout=2.0)
+        """DEPRECATED: REST API is mandatory and cannot be shut down manually."""
+        matrix_log("comms", "rest", "_shutdown_local_worker", "⚠️ [REST] Shutdown request ignored: Service is mandatory.", "WARNING")
 
     def start(self):
+        """Ensures the service is running. Always returns True as it is mandatory."""
         if not self._initialized:
             if not self._try_initialize(): return False
-        if self.state_cache:
-            self.state_cache.handle_external_update(self.STATE_TOPIC, True, source="REST-CTRL")
-        self._should_run = True
         self._launch_instance()
         return True
 
     def stop(self):
-        if self.state_cache:
-            self.state_cache.handle_external_update(self.STATE_TOPIC, False, source="REST-CTRL")
-        self._should_run = False
-        self._shutdown_local_worker()
-        return True
+        """DEPRECATED: REST API is mandatory and cannot be stopped."""
+        matrix_log("comms", "rest", "stop", "ℹ️ [REST] Service is mandatory and remains active.", "INFO")
+        return False
 
     def is_running(self):
         return self.worker is not None and self.worker.is_alive()
@@ -185,10 +176,10 @@ class RESTManager:
             "sibling_host": self._sibling_active,
             "should_run": self._should_run,
             "initialized": self._initialized,
-            "host": REST_HOST,
+            "host": REST_REPORT_HOST,
             "port": REST_PORT,
-            "url": f"http://{REST_HOST}:{REST_PORT}",
-            "docs_url": f"http://{REST_HOST}:{REST_PORT}/docs",
+            "url": f"http://{REST_REPORT_HOST}:{REST_PORT}",
+            "docs_url": f"http://{REST_REPORT_HOST}:{REST_PORT}/docs",
             "routes": []
         }
         if self.app:

@@ -73,18 +73,18 @@ class ProtocolRouter:
         # ⚡ PROTOCOL ROUTING MATRIX (N x N): 
         # Controls which source protocols (Rows) are allowed to dispatch to destination protocols (Cols).
         # "anything can route to anything but itself" - Standard loopback prevention.
-        self.protocols = ["MQTT", "OSC", "MIDI", "SNMP", "REST", "SMPTE2138", "AES70", "EMBER", "NMOS", "VISA", "GUI", "CACHE"]
+        self.protocols = ["MQTT", "OSC", "MIDI", "SNMP", "REST", "SMPTE2138", "AES70", "EMBER", "NMOS", "VISA", "GUI", "oaGui"]
         
         # Emoji mapping for strategy generation
         self.protocol_emojis = {
             "MQTT": "🚀", "OSC": "🅾️", "MIDI": "🎹", "SNMP": "Ⓢ", "REST": "🌐",
             "SMPTE2138": "🔗", "AES70": "70", "EMBER": "🔥", "NMOS": "N", "VISA": "V",
-            "GUI": "Ⓖ", "CACHE": "💾"
+            "GUI": "Ⓖ", "oaGui": "Ⓖ"
         }
 
         # ⚡ PROTOCOL TOPIC PREFIXES: Used to auto-detect logical source from MQTT topics.
         self.protocol_prefixes = {
-            "GUI": "OPEN-AIR/GUI",
+            "GUI": ["OPEN-AIR/GUI", "OPEN-AIR/oaGui"],
             "MIDI": "OPEN-AIR/MIDI",
             "NMOS": "OPEN-AIR/NMOS",
             "AES70": "OPEN-AIR/AES70",
@@ -92,34 +92,12 @@ class ProtocolRouter:
             "EMBER": "OPEN-AIR/EMBER"
         }
 
-        self.routing_matrix = {src: {dest: True for dest in self.protocols} for src in self.protocols}
+        self.ingest_enabled = {p: True for p in self.protocols}
+        self.egress_enabled = {p: True for p in self.protocols}
         
-        # Default: Prevent self-routing (Diagonal = False)
-        for p in self.protocols:
-            self.routing_matrix[p][p] = False
-            
-        # ⚡ TOPIC ROUTING: Stores specific topic mappings/filters for cross-points.
-        # { (src, dest): {"send": topic, "subscribe": topic} }
-        self.topic_routing = {
-            # Source GUI (internal) maps to the OPEN-AIR/GUI/ namespace on MQTT
-            ("GUI", "MQTT"): {"send": "OPEN-AIR/GUI"},
-            
-            # Source MIDI hardware maps to the OPEN-AIR/MIDI namespace on MQTT
-            ("MIDI", "MQTT"): {"send": "OPEN-AIR/MIDI"},
-            
-            # Source NMOS maps to its namespace
-            ("NMOS", "MQTT"): {"send": "OPEN-AIR/NMOS"},
-            
-            # AES70 maps to its namespace
-            ("AES70", "MQTT"): {"send": "OPEN-AIR/AES70"},
-            
-            # SMPTE2138 maps to its namespace
-            ("SMPTE2138", "MQTT"): {"send": "OPEN-AIR/SMPTE2138"},
-            
-            # EMBER maps to its namespace
-            ("EMBER", "MQTT"): {"send": "OPEN-AIR/EMBER"},
-        }
-
+        # ⚡ PROTOCOL ROUTING (DEPRECATED: Replaced by Hub-and-Spoke model)
+        self.topic_routing = {}
+        
         self.state_cache = None
         self.is_active = True 
 
@@ -158,7 +136,7 @@ class ProtocolRouter:
         self._running = False
         # ⚡ STABILITY: Wait for pending dispatch tasks to finish before closing native resources
         if self._executor: self._executor.shutdown(wait=True)
-        matrix_log("comms", "broker", "stop", "⏹️ [STOP] Protocol Router Offline.", "WARNING")
+        matrix_log("comms", "broker", "stop", "⏹️ [STOP] Protocol Router Offline.", "INFO")
 
     def set_active_state(self, active):
         if self.is_active == active: return
@@ -188,11 +166,20 @@ class ProtocolRouter:
     def set_state_cache(self, c): self.state_cache = c
 
     def set_routing_state(self, source, dest, enabled):
-        """Updates the routing matrix for a specific source-to-destination path."""
-        s_up, d_up = str(source).upper(), str(dest).upper()
-        if s_up in self.routing_matrix and d_up in self.routing_matrix[s_up]:
-            self.routing_matrix[s_up][d_up] = enabled
-            matrix_log("comms", "broker", "set_routing_state", f"🔄 [ROUTING] {s_up} >> {d_up} set to {enabled}.", "INFO")
+        """Updates the Hub-and-Spoke enablement maps."""
+        # Note: In the new architecture, we treat 'dest' as the spoke being enabled/disabled.
+        s_up = str(source).upper() # Left for compatibility, but deprecated
+        d_up = str(dest).upper()
+        
+        # Enable/Disable Egress to the destination
+        if d_up in self.egress_enabled:
+            self.egress_enabled[d_up] = enabled
+        
+        # Enable/Disable Ingress from the source
+        if s_up in self.ingest_enabled:
+            self.ingest_enabled[s_up] = enabled
+            
+        matrix_log("comms", "broker", "set_routing_state", f"🔄 [ROUTING] {source} -> {dest} set to {enabled}.", "INFO")
 
     def set_topic_routing(self, source, dest, send_topic=None, sub_topic=None):
         """Configures topic mapping/filtering for a cross-point."""
@@ -221,16 +208,14 @@ class ProtocolRouter:
     def calculate_strategy_for_msg(self, source, topic):
         """
         Calculates the emoji strategy for a specific message.
-        Checks both the N x N enablement and the 'Subscribe' topic filters.
+        Checks egress enablement and the 'Subscribe' topic filters.
         """
         s_up = str(source).upper()
-        if s_up not in self.routing_matrix:
-            return ""
-
+        
         import fnmatch
         emojis = []
-        for dest, enabled in self.routing_matrix[s_up].items():
-            if not enabled:
+        for dest in self.protocols:
+            if not self.egress_enabled.get(dest, True):
                 continue
             
             # Check for 'Subscribe' filter (Inbound Topic Filter)
@@ -261,8 +246,11 @@ class ProtocolRouter:
         )
 
     def _ingest_silent(self, transport_source, topic, value, meta):
+        # ⚡ V3.1.5 PIPELINE SYNC:
+        # Silent messages (Boot sequence) must still pass through the pipeline 
+        # to ensure they are normalized with GUIDs and UI tags for the Command Router.
         msg = create_silent_msg(transport_source, topic, value, meta, self.GUID, self.rust_router)
-        self.inbound_queue.put(msg)
+        self._process_message_pipeline(msg)
 
     def _fetch_next_inbound(self):
         # ⚡ DRAIN: If messages are in the Rust router, we must drain them to prevent leaks.
@@ -332,7 +320,7 @@ class ProtocolRouter:
                 if self._running:
                     self._executor.submit(
                         dispatch_message, 
-                        msg, managers, self.routing_matrix, self.topic_routing,
+                        msg, managers, self.topic_routing,
                         self.is_active
                     )
             except RuntimeError as e:

@@ -373,13 +373,14 @@ class OSCManager:
             origin_source = meta.get("origin_source", "UNKNOWN")
             
             # The Asynchronous "Listen-and-Filter" Loop
-            # ⚡ V3.1.8 MONITOR REFLECTION:
-            # We only re-transmit to hardware if the message is NOT a self-reflection
-            # OR if it's a settled status update. This prevents hardware loops while 
-            # allowing local monitors to see the reflections.
+            # ⚡ V3.2.0 FILTERING: Prevent reflection of non-OSC sources back into the Hub
             should_send = (origin_source != "OSC" and not is_self_reflection) or meta.get("is_settled")
             
-            if should_send and self.run_bridge:
+            # ONLY allow reflection if the original source is actually OSC-related.
+            # This stops MIDI/REST/etc traffic from being wrapped in an OSC address.
+            is_valid_source = (logical_source == "OSC" or source == "OSC" or source == "OSC-TX")
+            
+            if should_send and self.run_bridge and is_valid_source:
                 if isinstance(real_val, (int, float, str, bool, list)):
                     self.send(osc_address, real_val, meta)
         else:

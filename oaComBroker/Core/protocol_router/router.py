@@ -96,7 +96,6 @@ class ProtocolRouter:
         self.egress_enabled = {p: True for p in self.protocols}
         
         # ⚡ PROTOCOL ROUTING (DEPRECATED: Replaced by Hub-and-Spoke model)
-        self.topic_routing = {}
         
         self.state_cache = None
         self.is_active = True 
@@ -182,26 +181,17 @@ class ProtocolRouter:
         matrix_log("comms", "broker", "set_routing_state", f"🔄 [ROUTING] {source} -> {dest} set to {enabled}.", "INFO")
 
     def set_topic_routing(self, source, dest, send_topic=None, sub_topic=None):
-        """Configures topic mapping/filtering for a cross-point."""
-        s_up, d_up = str(source).upper(), str(dest).upper()
-        if s_up in self.protocols and d_up in self.protocols:
-            self.topic_routing[(s_up, d_up)] = {
-                "send": send_topic,
-                "subscribe": sub_topic
-            }
-            matrix_log("comms", "broker", "set_topic_routing", f"🔄 [TOPIC] {s_up} >> {d_up}: Send='{send_topic}', Sub='{sub_topic}'", "INFO")
+        """Deprecated."""
+        pass
 
     def get_topic_routing(self, source, dest):
-        """Retrieves topic configuration for a cross-point."""
-        return self.topic_routing.get((str(source).upper(), str(dest).upper()), {"send": None, "subscribe": None})
+        """Deprecated."""
+        return {"send": None, "subscribe": None}
 
     def get_strategy_for_source(self, source):
-        """Returns the emoji strategy string for a given logical source based on the matrix."""
+        """Returns the emoji strategy string for a given logical source."""
         s_up = str(source).upper()
-        if s_up not in self.routing_matrix:
-            return ""
-        
-        enabled_dests = [d for d, enabled in self.routing_matrix[s_up].items() if enabled]
+        enabled_dests = [d for d in self.protocols if self.egress_enabled.get(d, True)]
         emojis = [self.protocol_emojis.get(d, d) for d in enabled_dests]
         return " ".join(emojis)
 
@@ -218,15 +208,7 @@ class ProtocolRouter:
             if not self.egress_enabled.get(dest, True):
                 continue
             
-            # Check for 'Subscribe' filter (Inbound Topic Filter)
-            cfg = self.topic_routing.get((s_up, dest), {})
-            sub_filter = cfg.get("subscribe")
-            
-            if sub_filter:
-                # If a filter is defined, the topic must match (glob pattern support)
-                if not fnmatch.fnmatch(topic, sub_filter):
-                    continue
-            
+            # (No topic filtering in hub-and-spoke model)
             emojis.append(self.protocol_emojis.get(dest, dest))
             
         return " ".join(emojis)
@@ -320,7 +302,7 @@ class ProtocolRouter:
                 if self._running:
                     self._executor.submit(
                         dispatch_message, 
-                        msg, managers, self.topic_routing,
+                        msg, managers,
                         self.is_active
                     )
             except RuntimeError as e:

@@ -177,9 +177,12 @@ class MidiManager:
         if not self._running or not self.run_bridge: return
         meta = meta or {}
         
-        # The Asynchronous "Listen-and-Filter" Loop
+        # ⚡ V3.2.0 FILTERING: Prevent reflection of non-MIDI sources back into the Hub
+        origin_source = meta.get("origin_source", "UNKNOWN")
+        if origin_source == "MIDI": return
+
         # Discard the message (Echo Removal) if the origin is MIDI
-        if self.lock_manager.is_locked(topic) or meta.get("origin_source") == "MIDI": return
+        if self.lock_manager.is_locked(topic): return
         if meta.get("msg_type") == "LINK_FEEDBACK" and not meta.get("is_settled"): return
 
         rv = val.get("val") if (isinstance(val, dict) and "val" in val) else val

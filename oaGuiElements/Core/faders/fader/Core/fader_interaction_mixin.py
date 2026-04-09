@@ -64,7 +64,8 @@ class FaderInteractionMixin:
                 extra_payload={"SETTLED": True, "LOCKED": False}
             )
             
-        self.canvas.after(500, lambda: self._clear_sliding_state())
+        if hasattr(self.canvas, "winfo_exists") and self.canvas.winfo_exists():
+            self.canvas.after(500, lambda: self._clear_sliding_state())
 
     def _clear_sliding_state(self):
         self.is_sliding = False

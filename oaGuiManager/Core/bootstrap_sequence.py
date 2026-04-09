@@ -61,7 +61,7 @@ class AsyncBootstrapEngine:
             ))
 
         except Exception:
-            logger.exception("🖥️🎨 [UI] Bootstrap Failure")
+            logger.exception("🖥️🏗️🎨 [UI] Bootstrap Failure")
             self.root.after(0, self.shutdown_coordinator.on_closing)
 
     def _connect_communication_services(self, mqtt_conn, sub_router, state_cache):
@@ -107,6 +107,7 @@ class AsyncBootstrapEngine:
         """
         Final phase: Build the Workspace and reveal.
         """
+        app = None
         try:
             self.splash.set_status(message="Building Workspace...")
             from oaGui.Entry import Application
@@ -124,9 +125,13 @@ class AsyncBootstrapEngine:
                     remaining_time = max(0, self.MIN_SPLASH_TIME - elapsed_time)
                     
                     def _finish():
-                        self.splash.set_status(message="Ignition Complete!")
-                        UIWindowManager.reveal_main_window(self.root, self.splash, self.app_constants.global_settings["debug_enabled"])
-                        mirror_engine._schedule_queue_processing()
+                        try:
+                            self.splash.set_status(message="Ignition Complete!")
+                            UIWindowManager.reveal_main_window(self.root, self.splash, self.app_constants.global_settings["debug_enabled"])
+                            mirror_engine._schedule_queue_processing()
+                        except Exception:
+                            logger.exception("🖥️🏗️🎨 [UI] Ignition Finalization Failure")
+                            self.root.after(0, self.shutdown_coordinator.on_closing)
                     
                     # Split the remaining time into 3 "Ignition" phases for visual feedback
                     phase_duration = remaining_time / 3.0
@@ -156,15 +161,15 @@ class AsyncBootstrapEngine:
                         on_complete=_on_ignition_complete
                     )
                     app.pack(fill=tk.BOTH, expand=True)
-                except tk.TclError as e:
-                    logger.error(f"🖥️🎨 [UI] TclError during Application build: {e}")
-                    # Attempt a final rescue deiconify
-                    self.root.deiconify()
+                except tk.TclError:
+                    logger.exception("🖥️🏗️🎨 [UI] TclError during Application build")
+                    # Re-raise to trigger the coordinated shutdown below
+                    raise
                 
                 # Register main app back to services
                 self.services["app"] = app
                 self.root.update_idletasks()
                 
         except Exception:
-            logger.exception("🖥️🎨 [UI] App Launch Failure")
+            logger.exception("🖥️🏗️🎨 [UI] App Launch Failure")
             self.root.after(0, self.shutdown_coordinator.on_closing)

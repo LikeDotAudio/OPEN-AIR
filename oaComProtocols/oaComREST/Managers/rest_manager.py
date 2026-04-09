@@ -111,7 +111,7 @@ class RESTManager:
         self._health_thread.start()
 
     def _health_loop(self):
-        while True:
+        while self._should_run:
             try:
                 # ⚡ MANDATORY: Always attempt to keep the service alive
                 is_local = self.is_running()
@@ -124,7 +124,8 @@ class RESTManager:
                     self._sibling_active = True
                 else:
                     self._sibling_active = False
-                    self._launch_instance()
+                    if self._should_run:
+                        self._launch_instance()
                     
                 # Update status in cache
                 if self.state_cache:
@@ -132,10 +133,14 @@ class RESTManager:
 
             except Exception as e: 
                 matrix_log("comms", "rest", "_health_loop", f"❌ [REST] Health loop error: {e}", "ERROR")
-            time.sleep(2.0)
+            
+            # Use short sleeps to be responsive to _should_run changes
+            for _ in range(20):
+                if not self._should_run: break
+                time.sleep(0.1)
 
     def _launch_instance(self):
-        if not self._initialized: return
+        if not self._initialized or not self._should_run: return
         proc = get_process_on_port(REST_PORT)
         if proc:
             if is_friendly_process(proc):
@@ -151,20 +156,29 @@ class RESTManager:
             matrix_log("comms", "rest", "_launch_instance", f"❌ [REST] Launch failed: {e}", "ERROR")
 
     def _shutdown_local_worker(self):
-        """DEPRECATED: REST API is mandatory and cannot be shut down manually."""
-        matrix_log("comms", "rest", "_shutdown_local_worker", "⚠️ [REST] Shutdown request ignored: Service is mandatory.", "WARNING")
+        """Signals the local uvicorn worker to stop."""
+        if self.worker:
+            matrix_log("comms", "rest", "_shutdown_local_worker", "🛑 [REST] Stopping local worker service...", "INFO")
+            self.worker.stop()
+            self.worker.join(timeout=2.0)
+            self.worker = None
 
     def start(self):
         """Ensures the service is running. Always returns True as it is mandatory."""
+        self._should_run = True
         if not self._initialized:
             if not self._try_initialize(): return False
         self._launch_instance()
         return True
 
     def stop(self):
-        """DEPRECATED: REST API is mandatory and cannot be stopped."""
-        matrix_log("comms", "rest", "stop", "ℹ️ [REST] Service is mandatory and remains active.", "INFO")
-        return False
+        """Signals the REST service and its monitor to shut down."""
+        matrix_log("comms", "rest", "stop", "🛑 [REST] Service shutdown initiated.", "INFO")
+        self._should_run = False
+        self._shutdown_local_worker()
+        if self._health_thread and self._health_thread.is_alive():
+            self._health_thread.join(timeout=1.0)
+        return True
 
     def is_running(self):
         return self.worker is not None and self.worker.is_alive()

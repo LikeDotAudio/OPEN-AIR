@@ -1,3 +1,9 @@
+## [V3.1.14] - 2026-04-09
+### GUI Manager Logging & Stability
+- **Blueprint Validation Fix:** Demoted `FileNotFoundError` (missing blueprint) in `UniversalGuiLoader` from `ERROR` to `WARNING`. This prevents CI/CD log clutter for handled validation failures while maintaining visibility in the UI.
+- **Logging Standardization:** Standardized all logs in `oaGuiManager/Core/loader/gui_from_json.py` to use `matrix_log` with the "exactly three emojis" visual grepping rule and bracketed categories (e.g., `[VALIDATION]`, `[BUILDER]`, `[SUCCESS]`, `[CATASTROPHIC]`).
+- **Improved Error Visibility:** Enhanced the `Exception` block in `_construct_dynamic_gui` to follow the project's visual standards while preserving full tracebacks via `logger.exception`.
+
 ## [V3.1.13] - 2026-04-07
 ### Cross-Protocol Namespace Hardening
 - **ST2138 Reflection Fix:** Modified `smpte2138_bridge_manager.py` to explicitly ignore the `System/` and `Monitor/` namespaces. This prevents internal MIDI status and core telemetry from being mirrored onto the SMPTE 2138 bus.
@@ -63,6 +69,82 @@
 - **Topic Sanitization:** Implemented a recursive prefix filter in `ingest.py` to prevent redundant protocol strings (e.g., `OSC/OSC/`).
 - **Namespace Exclusion:** Modified `dispatch.py` to exclude `OSC`, `GUI`, and `Monitor` namespaces from automatic `/Tx/` (Acknowledgement) topic suffixing.
 - **Monitor Forensic Fix:** Resolved `AttributeError` in the Monitor class by properly initializing telemetry counters and importing the `time` module.
+
+## [V3.1.27] - 2026-04-09
+### Fixed
+- **Supervisor Log Scrubbing:** Implemented ANSI escape sequence removal in the `openair.py` supervisor. This prevents "command not found" errors in the terminal caused by the shell misinterpreting console color codes.
+
+## [V3.2.4] - 2026-04-09
+### Fixed
+- **Test Discovery:** Fixed `ImportError` during automated test runs by ensuring all `Tests` directories and their sub-packages (e.g., `oaComNmos/Core/IS12`) contain mandatory `__init__.py` files. 
+- **Package Integrity:** Standardized the presence of package markers across the module tree to ensure reliable `unittest` discovery.
+
+## [V3.2.3] - 2026-04-09
+### Fixed
+- **Log Noise Reduction (Layout):** Downgraded file-path fallback warnings in `layout_parser.py` to `DEBUG`. This prevents log bloat during GUI construction for directories using numerical file naming.
+- **Log Noise Reduction (YAK):** Downgraded YAK repository creation message to `INFO`. 
+- **Log Noise Reduction (PTP):** Downgraded PTP permission denied message to `INFO` for non-root users, acknowledging this as a standard deployment state.
+
+## [V3.2.2] - 2026-04-09
+### Deprecated & Consolidated
+- **oaGui Namespace Deprecation:** Formally deprecated the `oaGui` entry in the Protocol Matrix. 
+- **Unified GUI Source:** Consolidated all User Interface traffic into a single logical source: `GUI`.
+- **Backward Compatibility:** Maintained auto-mapping for `OPEN-AIR/oaGui` topic roots to the `GUI` source to ensure legacy asset folders and third-party integrations continue to function without modification.
+- **Config Cleanup:** Removed redundant `ingest_oagui` and `egress_oagui` keys from `config.ini`.
+
+## [V3.2.1] - 2026-04-09
+### Iron Oxide - Phase 2: Stateless Logic
+- **High-Speed Manifest Generation:** Replaced Python's `create_manifest` builder with a high-performance native Rust extension (`oaManifestGen_rs`).
+- **UUID & Float Offloading:** Moved UUIDv4 generation, epoch timestamping, and aggressive float conversion off the Python GIL into Rust, drastically reducing payload construction latency during heavy `SPLICE/LINK` events.
+
+## [V3.2.0] - 2026-04-08
+### Iron Oxide - Phase 1: Zero-Risk Sandbox
+- **Universal Rust Gating:** Finalized `oaLoggingGate_rs` integration across all protocols.
+- **Global Filter Injection:** Implemented `rust_gate_filter` directly into Loguru's `initialize_logging` pipeline, ensuring every system-wide `logger.debug` or `logger.info` call is evaluated by nanosecond-latency Rust checks before reaching the sinks.
+
+## [V3.1.26] - 2026-04-08
+### Enhanced
+- **UI Persistence:** Implemented automatic window geometry persistence. The application now saves its window size and screen position upon user exit and restores them on the next boot.
+- **Layout Caching:** Integrated `layout_cache.json` for lightweight UI state management, separate from the functional device state cache.
+
+## [V3.1.25] - 2026-04-08
+### Fixed
+- **Code Integrity (SNMP):** Fixed a critical `IndentationError` in `snmp_manager.py` that caused a system-wide startup crash.
+- **Architectural Restoration:** Restored the `routing_matrix` N x N data structure to the `ProtocolRouter` class. This ensures compatibility with diagnostic UI components that require granular cross-point visualization.
+- **Boot Stability:** Resolved several cascading instantiation errors during the UI composition phase.
+
+## [V3.1.24] - 2026-04-08
+### Fixed
+- **SNMP Visibility:** Fixed a bug where SNMP status and activity were missing from the UI when running in Observer mode.
+- **Status Reporting:** Moved MQTT status publishing to the base `SNMPManager` class, ensuring consistent reporting across both Bridge and Observer modes.
+- **Activity Monitoring:** Standardized activity notification logic to ensure SNMP-originated topics are correctly displayed in the diagnostic UI.
+
+## [V3.1.23] - 2026-04-08
+### Fixed
+- **Recursive Topic Guard:** Implemented a definitive block in `StateRegistry` (`set_value`) to prevent any topics with repeated protocol segments (e.g., `OSC/OSC/`) from ever entering the cache.
+- **Cache Purification:** Updated system initialization to automatically filter and remove legacy corrupted topics during the disk-load phase.
+- **Ingest Hardening:** Standardized all ingestion paths (`MQTT`, `DISK`, `EXTERNAL`) to use the new guarded commit logic.
+
+## [V3.1.22] - 2026-04-08
+### Fixed
+- **State Cache Flush:** Manually purged the corrupted `device_state_cache.json` to eliminate legacy bloated topics.
+- **Restoration Guard:** Hardened `gui_state_restorer.py` with a recursion filter to automatically skip any cached topics containing repeated protocol segments (e.g., `OSC/OSC/`).
+- **Topic Matching:** Refined restoration logic to correctly replay all valid `OPEN-AIR/` functional state topics while excluding volatile System and Monitor paths.
+### Deprecated
+- **JSON Lines Sink:** Disabled and deprecated the high-volume JSON Lines (`.jsonl`) logging sink. Structured log files are no longer generated in `oaDataLogs/JsonLines/`.
+
+## [V3.1.21] - 2026-04-08
+### Fixed
+- **Infinite Loop / Reflection Purge:** Fixed a critical bug where self-authored Status and Monitor messages from MQTT were re-dispatched, causing infinite feedback loops and GUI freezes.
+- **Strategy Hardening:** Updated `strategy.py` to tag ALL reflections from MQTT as `IGNORE (REFLECT)`, blocking them from the outbound queue while preserving Firehose visibility.
+- **Echo Remover Hardening:** Removed `Status/Monitor` topic exemptions from the `Echo Remover` in `dispatch.py` to ensure reflections are dropped before reaching hardware drivers.
+
+## [V3.1.20] - 2026-04-07
+### Enhanced
+- **Log Rotation:** Implemented 1-minute file rotation for all application, error, and protocol logs.
+- **TOD Timestamping:** Modified log filenames to use Time of Day (TOD) based timestamps in `YYYYMMDDHHMM` format.
+- **Log Segregation:** Introduced protocol-specific log routing. Communications for **OSC**, **MIDI**, **MQTT**, **SNMP**, **VISA**, **AES70**, **REST**, **EMBER**, **SMPTE2138**, and the **BROKER** are now stored in dedicated, timestamped folders within `oaDataLogs/Comms/`.
+- **Batch Processing:** Updated `BatchLogSink` to dynamically handle rotating file patterns while maintaining high-performance asynchronous writes.
 
 ## [V3.1.19] - 2026-04-07
 ### Fixed

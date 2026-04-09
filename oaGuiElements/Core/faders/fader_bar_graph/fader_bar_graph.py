@@ -19,6 +19,7 @@ from oaStyle.Core.style import THEMES, DEFAULT_THEME
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 from oaGuiManager.Core.transparency.transparency import TransparencyManager
 from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
+from oaGui.Methods.safe_after_mixin import SafeAfterMixin
 
 # --- EXTRACTED CORE MODULES ---
 from .Core.fader_bar_renderer_mixin import FaderBarRendererMixin
@@ -31,9 +32,11 @@ class FaderWithBarGraphFrame(
     TransparencyMixin,
     FaderBarRendererMixin,
     FaderBarInteractionMixin,
-    FaderBarStateMixin
+    FaderBarStateMixin,
+    SafeAfterMixin
 ):
     def __init__(self, master, config, path, state_mirror_engine, subscriber_router, base_mqtt_topic, builder_instance=None):
+        self._init_safe_after()
         colors = THEMES.get(DEFAULT_THEME, THEMES["dark"])
         super().__init__(master, bd=0, highlightthickness=0)
         
@@ -68,7 +71,7 @@ class FaderWithBarGraphFrame(
         self.right_var.trace_add("write", lambda *a: self._update_meter("right"))
         
         self.canvas.bind("<Button-1>", self._on_press); self.canvas.bind("<B1-Motion>", self._on_drag); self.canvas.bind("<Configure>", self._on_resize)
-        self.canvas.after(10, self._draw_static); self.canvas.after(20, self._draw_dynamic)
+        self.safe_after(10, self._draw_static); self.safe_after(20, self._draw_dynamic)
 
     def render(self): self._draw_static(); self._draw_dynamic()
     def _update_fader_pos(self):

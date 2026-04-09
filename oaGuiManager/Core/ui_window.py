@@ -9,7 +9,10 @@ from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
 import tkinter as tk
 import traceback
+import json
+import os
 from loguru import logger
+from oaOchestration.Constants.project_paths import LAYOUT_CACHE_PATH
 
 # --- Standard Debug Logging Setup ---
 
@@ -42,8 +45,58 @@ class UIWindowManager:
         root.minsize(WINDOW_MIN_WIDTH, WINDOW_MIN_HEIGHT)
         matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"Enforced minimum window size: {WINDOW_MIN_WIDTH}x{WINDOW_MIN_HEIGHT}", level="DEBUG")
     
+        # ⚡ V3.1.26 GEOMETRY RESTORATION:
+        UIWindowManager.restore_window_geometry(root)
+
         # root.withdraw() # Removed as per BUG_20260404_225000.md to fix X11 BadValue error.
         return root
+
+    @staticmethod
+    def restore_window_geometry(root):
+        """Loads last known window size and position from disk."""
+        try:
+            if os.path.exists(LAYOUT_CACHE_PATH):
+                with open(LAYOUT_CACHE_PATH, "r") as f:
+                    cache = json.load(f)
+                    geom = cache.get("window_geometry")
+                    if geom:
+                        root.geometry(geom)
+                        matrix_log("UI", "GUI_MANAGER", "restore_window_geometry", f"Restored window geometry: {geom}", level="INFO")
+                        return
+            
+            # Default center if no cache
+            sw, sh = root.winfo_screenwidth(), root.winfo_screenheight()
+            ww, wh = 1200, 800
+            x, y = (sw // 2) - (ww // 2), (sh // 2) - (wh // 2)
+            root.geometry(f"{ww}x{wh}+{x}+{y}")
+        except Exception as e:
+            logger.warning(f"⚠️ Failed to restore window geometry: {e}")
+
+    @staticmethod
+    def save_window_geometry(root):
+        """Saves current window size and position to disk."""
+        try:
+            # Do not save if window is minimized or zoomed (we want normal restore)
+            if root.state() != "normal":
+                return
+
+            geom = root.geometry()
+            
+            cache = {}
+            if os.path.exists(LAYOUT_CACHE_PATH):
+                with open(LAYOUT_CACHE_PATH, "r") as f:
+                    try: cache = json.load(f)
+                    except: pass
+            
+            cache["window_geometry"] = geom
+            
+            os.makedirs(os.path.dirname(LAYOUT_CACHE_PATH), exist_ok=True)
+            with open(LAYOUT_CACHE_PATH, "w") as f:
+                json.dump(cache, f, indent=4)
+                
+            matrix_log("UI", "GUI_MANAGER", "save_window_geometry", f"Saved window geometry: {geom}", level="DEBUG")
+        except Exception as e:
+            logger.warning(f"⚠️ Failed to save window geometry: {e}")
 
     @staticmethod
     def reveal_main_window(root, splash, debug_enabled):

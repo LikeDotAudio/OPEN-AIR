@@ -35,10 +35,15 @@ class ShutdownCoordinator:
         from oaLogging.Core.logger import shutdown_logging
         shutdown_logging()
 
-    def on_closing(self):
+    def on_closing(self, run_async=True):
         """Gracefully terminates all UI and Communication sub-processes via a thread."""
         if self._shutdown_in_progress:
             return
+        
+        # ⚡ V3.1.26 PERSISTENCE: Save window position and size before closing
+        from .ui_window import UIWindowManager
+        UIWindowManager.save_window_geometry(self.root)
+
         self._shutdown_in_progress = True
         
         # ⚡ USER INTENT: Log clearly that the exit was requested by the user
@@ -59,7 +64,10 @@ class ShutdownCoordinator:
             matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, "🖥️🎨 [UI] Managers signaled to stop. Finalizing logout...", level="DEBUG")
             self.root.after(0, self.root.quit)
 
-        threading.Thread(target=_threaded_shutdown, daemon=True).start()
+        if run_async:
+            threading.Thread(target=_threaded_shutdown, daemon=True).start()
+        else:
+            _threaded_shutdown()
 
     def shutdown(self):
         """Synchronous shutdown for non-GUI-event-driven termination (e.g., KeyboardInterrupt)."""
@@ -69,7 +77,13 @@ class ShutdownCoordinator:
         
         matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, "🛑 [EXIT] Synchronous shutdown triggered.", level="INFO")
         self._stop_all_managers()
-        matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, "🖥️🎨 [UI] Shutdown complete.", level="DEBUG")
+        matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, "🖥️🎨 [UI] Shutdown complete. Quitting mainloop.", level="DEBUG")
+        
+        try:
+            self.root.after(0, self.root.quit)
+        except Exception:
+            # Fallback if root is already dead or mainloop not running
+            sys.exit(0)
 
     def attach_to_root(self):
         self.root.protocol("WM_DELETE_WINDOW", self.on_closing)

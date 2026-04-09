@@ -23,14 +23,16 @@ class GraphThrottleMixin:
         self._last_csv_data = {}
         self._last_settings_vals = {}
         self._force_redraw = False
+        self._after_id = None
 
     def _schedule_update(self):
         if self._update_pending: return
         self._update_pending = True
         elapsed = (time.time() * 1000) - self._last_draw_time
-        self.after(max(1, self._THROTTLE_MS - int(elapsed)), self._perform_scheduled_update)
+        self._after_id = self.after(max(1, self._THROTTLE_MS - int(elapsed)), self._perform_scheduled_update)
 
     def _perform_scheduled_update(self):
+        self._after_id = None
         self._update_pending = False
         self._last_draw_time = time.time() * 1000
         has_changes = False
@@ -49,3 +51,17 @@ class GraphThrottleMixin:
             else:
                 graph_updater.autoscale_and_redraw(self.ax, self.canvas)
             self._force_redraw = False
+
+    def destroy(self):
+        """Cleanup method to cancel pending after tasks."""
+        if hasattr(self, "_after_id") and self._after_id:
+            try:
+                self.after_cancel(self._after_id)
+            except Exception:
+                pass
+            self._after_id = None
+        # Call parent destroy if it exists (for tk widgets)
+        try:
+            super().destroy()
+        except AttributeError:
+            pass

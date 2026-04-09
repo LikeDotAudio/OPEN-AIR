@@ -61,7 +61,8 @@ class ActuatorInteractionMixin:
                 self.master.clipboard_clear()
                 self.master.clipboard_append(scpi_msg)
                 self.set_text("PASTE copied text into terminal")
-                self.after(3000, lambda: self.set_text(self.text_inactive))
+                if hasattr(self, "winfo_exists") and self.winfo_exists():
+                    self.after(3000, lambda: self.set_text(self.text_inactive))
             except Exception as e:
                 logger.error(f"❌ Clipboard error: {e}")
             return True

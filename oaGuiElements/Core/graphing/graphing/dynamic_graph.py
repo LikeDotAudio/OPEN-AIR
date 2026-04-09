@@ -27,6 +27,7 @@ from .Core.graph_patina_mixin import GraphPatinaMixin
 from .Core.graph_throttle_mixin import GraphThrottleMixin
 from .Core.graph_interaction_mixin import GraphInteractionMixin
 from .Core.graph_state_mixin import GraphStateMixin
+from oaGui.Methods.safe_after_mixin import SafeAfterMixin
 
 class GraphPlotter(
     tk.Frame,
@@ -34,13 +35,15 @@ class GraphPlotter(
     GraphPatinaMixin,
     GraphThrottleMixin,
     GraphInteractionMixin,
-    GraphStateMixin
+    GraphStateMixin,
+    SafeAfterMixin
 ):
     """
     A high-performance Matplotlib graph widget refactored into modular components.
     """
 
     def __init__(self, parent, config: Dict[str, Any], base_mqtt_topic_from_path: str, widget_id: str, builder_instance=None, **kwargs):
+        self._init_safe_after()
         self.subscriber_router = kwargs.pop("subscriber_router", None)
         self.state_mirror_engine = kwargs.pop("state_mirror_engine", None)
         context = kwargs.pop("context", None)
@@ -152,9 +155,9 @@ class GraphPlotter(
         if abs(event.width - last_w) <= 2 and abs(event.height - last_h) <= 2: return
         
         self._last_resize_dim = (event.width, event.height)
-        if hasattr(self, "_resize_timer") and self._resize_timer: self.after_cancel(self._resize_timer)
+        if hasattr(self, "_resize_timer") and self._resize_timer: self.safe_after_cancel(self._resize_timer)
         # ⚡ DEBOUNCE: Use 100ms for responsiveness while avoiding vibration
-        self._resize_timer = self.after(100, lambda: self._perform_resize(event.width, event.height))
+        self._resize_timer = self.safe_after(100, lambda: self._perform_resize(event.width, event.height))
 
     def _perform_resize(self, w, h):
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] GraphPlotter '{self.widget_id}' performing resize to {w}x{h}", level="DEBUG")
@@ -208,3 +211,22 @@ class GraphPlotter(
     def _on_add_marker(self, m_type, val):
         cur = self.marker_var.get(); line = f"{m_type},{val:.4f},red,1,UserMarker_{int(time.time())}"
         self.marker_var.set(f"{cur}\n{line}" if cur else line)
+
+    def destroy(self):
+        """Cleanup method to cancel pending after tasks and release resources."""
+        self._cleanup_safe_after()
+        if hasattr(self, "_resize_timer") and self._resize_timer:
+            self.safe_after_cancel(self._resize_timer)
+
+        # Explicitly call GraphThrottleMixin.destroy
+        GraphThrottleMixin.destroy(self)
+
+        # Cleanup Matplotlib resources
+        if hasattr(self, "fig"):
+            try:
+                import matplotlib.pyplot as plt
+                plt.close(self.fig)
+            except Exception:
+                pass
+
+        super().destroy()

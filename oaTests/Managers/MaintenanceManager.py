@@ -64,3 +64,32 @@ class MaintenanceManager:
 
     def clear_cache(self):
         self._run_task(purge_cache, "🌪️ [PURGE] Nuking local cache and running state...", "✨ [SUCCESS] Cache purged and structure re-initialized.")
+
+    def clear_config(self):
+        """Deletes the main configuration file."""
+        config_path = "/home/anthony/Documents/OPEN-AIR/config.ini"
+        def task():
+            try:
+                if os.path.exists(config_path):
+                    os.remove(config_path)
+                    self.log_callback("✨ [SUCCESS] config.ini deleted.")
+                else:
+                    self.log_callback("⚠️ [SKIP] config.ini not found.")
+            except Exception as e:
+                self.log_callback(f"💥 [ERROR] Failed to delete config.ini: {e}")
+        
+        thread = threading.Thread(target=task, daemon=True)
+        thread.start()
+
+    def clear_all(self):
+        """Executes the full suite of maintenance and cleanup tasks."""
+        self.log_callback("🚀 [GLOBAL CLEANUP] Starting full system sweep...")
+        self.clear_logs()
+        self.clear_audits()
+        self.clear_reports()
+        self.clear_jsonlines()
+        self.clear_mqtt()
+        self.clear_flamegraph()
+        self.clear_cache()
+        self.clear_config()
+        self.log_callback("✨ [GLOBAL CLEANUP] Full sweep initiated.")

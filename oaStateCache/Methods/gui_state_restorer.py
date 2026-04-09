@@ -61,15 +61,22 @@ def restore_timeline(cache_data: Dict[str, Any], state_mirror_engine: Any) -> No
                 matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Cosmetic: Failed to extract 'val' for replaying log: {e}", "TRACE")
 
             matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"⏪🔄 Topic='{topic}'{val_str}", "TRACE")
+            
+            # ⚡ V3.1.22 RECURSION GUARD (RESTORE PHASE):
+            # Skip topics that have recursive protocol segments (corrupted paths).
+            if any(x + "/" + x + "/" in str(topic) for x in ["OSC", "MIDI", "GUI", "oaGui", "MQTT"]):
+                matrix_log("core", "system", "restore_timeline", f"🛡️ [GUARD] Skipping corrupted recursive topic: {topic}", "DEBUG")
+                continue
+
             # ⚡ REFACTORED: Wrap in MqttMessage for Partitioned Architecture compatibility
-            # Only process if the topic is MQTT-originated as per user's directive.
-            if topic.startswith("OPEN-AIR/MQTT/"):
+            # Only process valid functional state topics (Exclude System/Monitor/Heartbeat)
+            volatile = any(x in str(topic) for x in ["/System/", "/Monitor/", "/Heartbeat/"])
+            if topic.startswith("OPEN-AIR/") and not volatile:
                 msg = MqttMessage(topic=topic, payload=payload)
                 state_mirror_engine.sync_incoming_mqtt_to_gui(msg)
             else:
-                # Log or handle non-MQTT data if necessary, but for now, skip it based on user's rule.
-                # This prevents non-MQTT cached data from affecting OSC/GUI state restoration directly.
-                matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Skipping non-MQTT topic in cache: {topic}", "DEBUG")
+                # Log or handle non-functional data if necessary
+                matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Skipping non-functional topic in cache: {topic}", "DEBUG")
 
             # ⚡ STABILITY: Replaying state directly into the GUI is expensive (redraws, reslices).
             # Throttle to 2ms per message to prevent overwhelming the main thread.

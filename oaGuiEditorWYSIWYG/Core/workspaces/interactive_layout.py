@@ -13,16 +13,18 @@ from oaLogging.Core.logger import GUI_LOGGER as logger
 
 from ..event_bus import event_bus
 from ..state import state_manager
+from oaGui.Methods.safe_after_mixin import SafeAfterMixin
 
 # --- EXTRACTED CORE MODULES ---
 from .Core.layout.preview_engine import PreviewEngine
 from .Core.layout.focus import FocusManager
 from .Core.layout.overlay import OverlayManager
 
-class InteractiveLayout(tk.Frame):
+class InteractiveLayout(tk.Frame, SafeAfterMixin):
     """The visual workspace where users interact with the GUI layout."""
 
     def __init__(self, parent, *args, **kwargs):
+        self._init_safe_after()
         kwargs.pop("bg", None)
         super().__init__(parent, bg="#1a1a1a", *args, **kwargs)
         matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "InteractiveLayout: Initializing workspace...", "DEBUG")
@@ -68,7 +70,7 @@ class InteractiveLayout(tk.Frame):
         # Call _toggle_auto_rebuild to set up initial subscription state
         self._toggle_auto_rebuild() 
 
-        self.after(100, self._initial_startup_sync)
+        self.safe_after(100, self._initial_startup_sync)
 
     def _initial_startup_sync(self):
         self._manual_rebuild()
@@ -77,7 +79,8 @@ class InteractiveLayout(tk.Frame):
 
     def _on_destroy(self, event):
         if event.widget == self:
-            if self._refresh_timer: self.after_cancel(self._refresh_timer)
+            self._cleanup_safe_after()
+            if self._refresh_timer: self.safe_after_cancel(self._refresh_timer)
             event_bus.unsubscribe("STATE_UPDATED", self._on_state_updated)
             event_bus.unsubscribe("FOCUS_REQUESTED", self._on_external_focus)
 

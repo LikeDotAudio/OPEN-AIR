@@ -376,9 +376,9 @@ class OSCManager:
             # ⚡ V3.2.0 FILTERING: Prevent reflection of non-OSC sources back into the Hub
             should_send = (origin_source != "OSC" and not is_self_reflection) or meta.get("is_settled")
             
-            # ONLY allow reflection if the original source is actually OSC-related.
-            # This stops MIDI/REST/etc traffic from being wrapped in an OSC address.
-            is_valid_source = (logical_source == "OSC" or source == "OSC" or source == "OSC-TX")
+            # ⚡ V3.2.1 UPDATE: Allow MQTT and GUI sources to be bridged to OSC devices.
+            is_valid_source = (logical_source in ["OSC", "GUI", "MQTT", "UNKNOWN"] or 
+                               source in ["OSC", "OSC-TX", "MQTT"])
             
             if should_send and self.run_bridge and is_valid_source:
                 if isinstance(real_val, (int, float, str, bool, list)):

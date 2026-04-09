@@ -82,25 +82,22 @@ def dispatch_message(msg, managers, topic_routing=None, is_active=True):
     if msg_src_id == app_constants.FULL_INSTANCE_ID:
         # ⚡ EXCEPTION: MQTT Broadcast (🚀) and Cache (💾) must always proceed 
         # for self-authored messages to ensure global state synchronization.
-        # Status and Monitor topics are also exempt to ensure visibility.
-        is_status = ("/Status/" in topic or "/Monitor/" in topic)
-        if not is_status and "🚀" not in strategy and "Ⓜ️" not in strategy and "💾" not in strategy:
+        # Hardware modules (MIDI, OSC, SNMP) must NEVER re-dispatch reflections.
+        if "🚀" not in strategy and "Ⓜ️" not in strategy and "💾" not in strategy:
             if app_constants.ROUTER_DISPATCH_LOGS:
                 matrix_log("comms", "broker", "dispatch_message", f"🛡️ [ECHO] Dropping self-authored message for {topic}.", "TRACE")
             return
 
-    router = ProtocolRouter.get_instance()
-
     # --- MQTT Dispatch ---
     if "🚀" in strategy or "Ⓜ️" in strategy:
-        if is_active and ProtocolRouter.get_instance().egress_enabled.get("MQTT", True):
+        if is_active and matrix.get(src, {}).get("MQTT", True):
             mqtt_manager = managers.get("mqtt")
             if mqtt_manager and msg["source"] != "MQTT" and msg.get("logical_source") != "MQTT":
                 _dispatch_mqtt(mqtt_manager, get_topic("MQTT"), msg, val_str)
 
     # --- OSC Dispatch ---
     if "🅾️" in strategy:
-        if is_active and router.egress_enabled.get("OSC", True):
+        if is_active and matrix.get(src, {}).get("OSC", True):
             osc_manager = managers.get("osc")
             if osc_manager and msg["source"] not in ["OSC", "OSC-TX"] and msg.get("logical_source") not in ["OSC", "OSC-TX"]:
                 # ⚡ V3.1.12 NAMESPACE EXCLUSION:
@@ -116,28 +113,28 @@ def dispatch_message(msg, managers, topic_routing=None, is_active=True):
 
     # --- MIDI Dispatch ---
     if "🎹" in strategy:
-        if is_active and router.egress_enabled.get("MIDI", True):
+        if is_active and matrix.get(src, {}).get("MIDI", True):
             midi_manager = managers.get("midi")
             if midi_manager and msg["source"] not in ["MIDI", "MIDI-TX"] and msg.get("logical_source") not in ["MIDI", "MIDI-TX"]:
                 _dispatch_midi(midi_manager, get_topic("MIDI"), val, msg, val_str)
 
     # --- SNMP Dispatch ---
     if "Ⓢ" in strategy:
-        if is_active and router.egress_enabled.get("SNMP", True):
+        if is_active and matrix.get(src, {}).get("SNMP", True):
             snmp_manager = managers.get("snmp")
             if snmp_manager and msg["source"] not in ["SNMP", "SNMP-TX"] and msg.get("logical_source") not in ["SNMP", "SNMP-TX"]:
                 _dispatch_snmp(snmp_manager, get_topic("SNMP"), val, val_str)
 
     # --- NMOS Dispatch ---
     if "N" in strategy or "NMOS" in strategy:
-        if is_active and router.egress_enabled.get("NMOS", True):
+        if is_active and matrix.get(src, {}).get("NMOS", True):
             nmos_manager = managers.get("nmos")
             if nmos_manager and msg["source"] != "NMOS" and msg.get("logical_source") != "NMOS":
                 _dispatch_nmos(nmos_manager, get_topic("NMOS"), val, msg, val_str)
 
     # --- SMPTE 2138 Dispatch ---
     if "🔗" in strategy or "🚀" in strategy:
-        if is_active and router.egress_enabled.get("SMPTE2138", True):
+        if is_active and matrix.get(src, {}).get("SMPTE2138", True):
             smpte_manager = managers.get("smpte2138")
             if smpte_manager and msg["source"] != "SMPTE2138" and msg.get("logical_source") != "SMPTE2138":
                 _dispatch_smpte2138(smpte_manager, get_topic("SMPTE2138"), val, msg, val_str)

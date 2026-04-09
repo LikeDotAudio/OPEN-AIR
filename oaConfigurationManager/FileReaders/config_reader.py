@@ -27,6 +27,7 @@ class Config(ConfigDefaults):
     def __init__(self):
         if hasattr(self, "_initialized") and self._initialized: return
         self._initialized = True
+        self._config = None # ⚡ CACHE: Store the ConfigParser object
         
         # 1. Initialize Identity
         ids = IdentityManager.initialize()
@@ -59,7 +60,11 @@ class Config(ConfigDefaults):
         """Helper to get and parse config values with fallbacks."""
         if sec not in config: return fallback
         if parser == "bool": return config[sec].getboolean(key, fallback)
-        if parser == "int": return int(config[sec].get(key, fallback))
+        if parser == "int": 
+            try:
+                return int(config[sec].get(key, fallback))
+            except (ValueError, TypeError):
+                return fallback
         return config[sec].get(key, fallback)
 
     def _parse_debug_settings(self, config):
@@ -163,11 +168,12 @@ class Config(ConfigDefaults):
         config_path = GLOBAL_PROJECT_ROOT / "config.ini"
         setup_path = GLOBAL_PROJECT_ROOT / "oaInstallation" / "Setup.py"
         
-        config = ConfigLoader.load(config_path, setup_path, LOCAL_DEBUG)
-        if not config: 
+        self._config = ConfigLoader.load(config_path, setup_path, LOCAL_DEBUG)
+        if not self._config: 
             logger.error(f"❌ [CONFIG] Failed to load configuration from {config_path} or {setup_path}.")
             return
 
+        config = self._config
         self.CURRENT_VERSION = self._s_get(config, "Version", "CURRENT_VERSION", self.CURRENT_VERSION)
         self.MISSION_CRITICAL_MODE = self._s_get(config, "System", "MISSION_CRITICAL_MODE", self.MISSION_CRITICAL_MODE, "bool")
         self.LANGUAGE_SELECTION = self._s_get(config, "System", "language_selection", self.LANGUAGE_SELECTION)
@@ -203,22 +209,18 @@ class Config(ConfigDefaults):
             logger.debug(f"📜 [CONFIG] Loaded: Version {self.CURRENT_VERSION}, Debug: {self.ENABLE_DEBUG_MODE}")
 
     def get(self, section, key, default=None):
-        """Returns a string value from the configuration."""
-        from oaOchestration.Core.path_initializer import GLOBAL_PROJECT_ROOT
-        config_path = GLOBAL_PROJECT_ROOT / "config.ini"
-        setup_path = GLOBAL_PROJECT_ROOT / "oaInstallation" / "Setup.py"
-        config = ConfigLoader.load(config_path, setup_path, LOCAL_DEBUG)
-        if not config: return default
-        return self._s_get(config, section, key, default)
+        """Returns a string value from the cached configuration."""
+        if self._config is None:
+            self.read_config()
+        if not self._config: return default
+        return self._s_get(self._config, section, key, default)
 
     def get_boolean(self, section, key, default=False):
-        """Returns a boolean value from the configuration."""
-        from oaOchestration.Core.path_initializer import GLOBAL_PROJECT_ROOT
-        config_path = GLOBAL_PROJECT_ROOT / "config.ini"
-        setup_path = GLOBAL_PROJECT_ROOT / "oaInstallation" / "Setup.py"
-        config = ConfigLoader.load(config_path, setup_path, LOCAL_DEBUG)
-        if not config: return default
-        return self._s_get(config, section, key, default, "bool")
+        """Returns a boolean value from the cached configuration."""
+        if self._config is None:
+            self.read_config()
+        if not self._config: return default
+        return self._s_get(self._config, section, key, default, "bool")
 
     def get_mqtt_base_topic(self):
         """Returns the MQTT root topic for the application."""

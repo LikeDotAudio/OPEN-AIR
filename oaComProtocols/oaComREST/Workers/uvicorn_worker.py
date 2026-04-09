@@ -37,6 +37,7 @@ class UvicornWorker(threading.Thread):
         self.host = host
         self.port = port
         self.server = None
+        self._should_run = True
 
     def run(self):
         """Executes the Uvicorn server loop with retry logic for port collisions."""
@@ -47,7 +48,7 @@ class UvicornWorker(threading.Thread):
         retry_delay = 5.0
         current_port = self.port
 
-        while True:
+        while self._should_run:
             if LOCAL_DEBUG:
                 matrix_log("comms", "rest", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"📡⚙️🚀 [REST] Starting Uvicorn on {self.host}:{current_port}", "DEBUG")
             
@@ -64,7 +65,7 @@ class UvicornWorker(threading.Thread):
                 # server.run() is blocking
                 self.server.run()
                 # If we exit normally (not via should_exit), we might want to restart
-                if self.server and self.server.should_exit:
+                if (self.server and self.server.should_exit) or not self._should_run:
                     break
             except (OSError, SystemExit) as e:
                 # Check for "Address already in use" (Errno 98)
@@ -78,12 +79,14 @@ class UvicornWorker(threading.Thread):
             except Exception as e:
                 logger.error(f"📡⚙️❌ [REST] Unexpected Uvicorn error: {e}")
 
-            time.sleep(retry_delay)
+            if self._should_run:
+                time.sleep(retry_delay)
             # ⚡ RESILIENCE: Reset port for next attempt in case it was incremented or crashed
             current_port = self.port
 
     def stop(self):
         """Signals the Uvicorn server to shut down."""
+        self._should_run = False
         if self.server:
             if LOCAL_DEBUG:
                 matrix_log("comms", "rest", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "📡⚙️🛑 [REST] Stopping Uvicorn server...", "DEBUG")

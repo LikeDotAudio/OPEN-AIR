@@ -5,6 +5,7 @@
 # Description: Brief summary of purpose
 
 """
+import sys
 oaStyle/Entry.py - The sole orchestrator for the Styling Module.
 
 Purpose:

@@ -5,6 +5,8 @@
 # Description: Gatekeeper for the consolidated GUI Framework.
 # Combines structural assembly, directory scanning, and layout parsing.
 
+import sys
+from pathlib import Path
 from .Managers.gui_display import Application
 from .Managers.gui_batch import GuiBatchBuilderMixin
 from .Managers.gui_mqtt import GuiMqttManagerMixin
@@ -25,11 +27,9 @@ def run_tests():
     """
     import unittest
     import pathlib
-    import os
-    import sys
     
     print(f"🔍 Discovering and running tests for oaGui...")
-    test_dir = pathlib.Path(__file__).parent / "Tests"
+    test_dir = pathlib.Path(__file__).parent.parent / "Tests"
     if not test_dir.is_dir():
         print("❌ No 'Tests/' directory found.")
         return

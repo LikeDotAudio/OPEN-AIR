@@ -4,11 +4,11 @@
 #
 # Description: Brief summary of purpose
 
+import sys
+import os
 import unittest
 from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
-import os
-import sys
 from io import StringIO
 
 """

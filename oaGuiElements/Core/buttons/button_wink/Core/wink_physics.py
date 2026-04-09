@@ -32,8 +32,9 @@ def update_physics(canvas, state, config, draw_visuals_callback):
     is_at_target = abs(state["current_open"] - target) < 0.001
     
     if (moved or state["is_pressed"]) and not is_at_target:
-        canvas.after(16, lambda: update_physics(canvas, state, config, 
-                                                draw_visuals_callback))
+        if hasattr(canvas, "winfo_exists") and canvas.winfo_exists():
+            canvas.after(16, lambda: update_physics(canvas, state, config, 
+                                                    draw_visuals_callback))
     else:
         state["animating"] = False
         # Ensure terminal value is exact
@@ -57,6 +58,7 @@ def blink_loop(canvas, state, config, value_var, draw_visuals_callback):
 
     # ⚡ OVERLAP PROTECTION: Cancel existing blink timer if present (handled by logic flow)
     # The canvas.after approach means only one chain lives per button.
-    canvas.after(config["blink_interval"], lambda: blink_loop(canvas, state, 
-                                                             config, value_var, 
-                                                             draw_visuals_callback))
+    if hasattr(canvas, "winfo_exists") and canvas.winfo_exists():
+        canvas.after(config["blink_interval"], lambda: blink_loop(canvas, state, 
+                                                                 config, value_var, 
+                                                                 draw_visuals_callback))

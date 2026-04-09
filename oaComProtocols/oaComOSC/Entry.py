@@ -19,6 +19,9 @@
 # operations. It manages the singleton OSCManager and exposes high-level 
 # methods for control and interaction.
 
+import sys
+import os
+from pathlib import Path
 from .Managers.osc_manager import OSCManager
 from .Workers.osc_rx_server import OscRxServer
 from .Workers.osc_tx_client import OscTxClient

@@ -67,25 +67,41 @@ class BatchLogSink:
     Reduces I/O overhead and lock contention on the hot path.
     Now supports Native Rust Asynchronous offloading.
     """
-    def __init__(self, file_path, format_str, batch_size=50, interval=2):
-        self.file_path = file_path
+    def __init__(self, file_path_pattern, format_str, batch_size=50, interval=2):
+        self.file_path_pattern = file_path_pattern # Now a pattern with {time}
         self.format_str = format_str
         self.batch_size = batch_size
         self.interval = interval
         self.buffer = deque()
-        self._lock = threading.RLock() # ⚡ FIX: Use RLock to prevent deadlock on flush
+        self._lock = threading.RLock()
         self._is_running = True
+        self._current_file = None
+        self._current_minute = ""
         
         if not HAS_RUST_SINK:
             # Start the background flusher thread if Rust is unavailable.
-            self._flush_thread = threading.Thread(target=self._flush_loop, daemon=True, name=f"LogBatchFlusher-{os.path.basename(file_path)}")
+            self._flush_thread = threading.Thread(target=self._flush_loop, daemon=True, name=f"LogBatchFlusher-{os.path.basename(file_path_pattern)}")
             self._flush_thread.start()
+
+    def _get_current_file(self):
+        """Calculates the target filename for the current minute (YYYYMMDDHHMM)."""
+        now = datetime.now()
+        minute_str = now.strftime("%Y%m%d%H%M")
+        
+        if minute_str != self._current_minute:
+            self._current_minute = minute_str
+            # Pattern expected like ".../Application_{time}.log"
+            self._current_file = self.file_path_pattern.replace("{time}", minute_str)
+            # Ensure directory exists for new minute file
+            os.makedirs(os.path.dirname(self._current_file), exist_ok=True)
+            
+        return self._current_file
 
     def write(self, message):
         """Standard Loguru sink write method."""
         if HAS_RUST_SINK:
             # Direct handoff to Rust for non-blocking I/O
-            _rust_async_sink.write(str(self.file_path), str(message))
+            _rust_async_sink.write(str(self._get_current_file()), str(message))
             return
 
         with self._lock:
@@ -98,17 +114,18 @@ class BatchLogSink:
         if not self.buffer:
             return
             
-        # Swap buffer to minimize lock time
+        target_file = self._get_current_file()
+            
         with self._lock:
             lines_to_write = list(self.buffer)
             self.buffer.clear()
             
         try:
-            with open(self.file_path, "a", encoding="utf-8") as f:
+            with open(target_file, "a", encoding="utf-8") as f:
                 f.writelines(lines_to_write)
         except Exception as e:
             # This critical error should always be visible
-            print(f"CRITICAL: Log batch write to {self.file_path} failed: {e}", file=sys.stderr)
+            print(f"CRITICAL: Log batch write to {target_file} failed: {e}", file=sys.stderr)
 
     def _flush_loop(self):
         """Background thread to ensure logs are flushed periodically."""
@@ -203,7 +220,29 @@ def shutdown_logging():
         except Exception:
             pass
 
+def rust_gate_filter(record):
+    """
+    ⚡ IRON OXIDE - PHASE 1: Universal Rust Gating
+    Ensures every log call is gated by nanosecond-latency Rust checks.
+    """
+    if record["extra"].get("category") == "🚫 QUARANTINE":
+        return False
+        
+    # Always allow high-gravity logs
+    if record["level"].name in ["WARNING", "ERROR", "CRITICAL"]:
+        return True
+        
+    # Extract clean partition and category names
+    raw_part = record["extra"].get("partition", "")
+    partition = raw_part.split()[-1].lower() if raw_part else "system"
+    category = record["extra"].get("category", "").lower()
+    func_name = record.get("function", "")
+    
+    from oaLogging.Methods.matrix_gate import is_debug_allowed
+    return is_debug_allowed(partition, category, func_name)
+
 def initialize_logging(config, log_dir=None, partition="SYS"):
+
     """
     Configures the global Loguru infrastructure and sinks.
 
@@ -223,9 +262,10 @@ def initialize_logging(config, log_dir=None, partition="SYS"):
     partition_with_emoji = f"{get_emoji(partition)} {partition}"
 
     # Configure global defaults for the 'extra' dictionary.
+    # ⚡ V3.1.20 PROTOCOL ROUTING: Added 'protocol' tag for segregated sinks.
     logger.configure(
         patcher=ptp_patcher,
-        extra={"category": "SYSTEM", "partition": partition_with_emoji}
+        extra={"category": "SYSTEM", "partition": partition_with_emoji, "protocol": None}
     )
     
     # Remove existing handlers to avoid duplicate output.
@@ -247,7 +287,6 @@ def initialize_logging(config, log_dir=None, partition="SYS"):
     # --- Log Formats ---
     # Primary format for colorized terminal output. Includes emojis for partition and category.
     # ⚡ DYNAMIC FORMATTING: Only include timestamp if enabled.
-    config = _get_cached_config()
     show_ts = config.global_settings.get("timestamp_logs", True)
     ts_fmt = "<green>{extra[ptp_time]}</green>|" if show_ts else ""
 
@@ -282,7 +321,7 @@ def initialize_logging(config, log_dir=None, partition="SYS"):
         format=log_format_console, 
         level=console_level,
         enqueue=False, # ⚡ OPTIMIZATION: Direct write to stderr
-        filter=lambda record: record["extra"].get("category") != "🚫 QUARANTINE",
+        filter=rust_gate_filter,
         diagnose=False
     )
 
@@ -294,43 +333,49 @@ def initialize_logging(config, log_dir=None, partition="SYS"):
         os.makedirs(log_dir, exist_ok=True)
         run_log_dir = os.path.join(log_dir, "ApplicationRunLog")
         error_log_dir = os.path.join(log_dir, "Errors")
-        jsonl_log_dir = os.path.join(log_dir, "JsonLines")
+        comms_log_dir = os.path.join(log_dir, "Comms") # New directory for protocol logs
         
         os.makedirs(run_log_dir, exist_ok=True)
         os.makedirs(error_log_dir, exist_ok=True)
-        os.makedirs(jsonl_log_dir, exist_ok=True)
+        os.makedirs(comms_log_dir, exist_ok=True)
         
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M") if config.global_settings.get("timestamp_logs", True) else "current"
-        
-        # 2. --- Application Log Sink ---
-        app_log_path = os.path.join(run_log_dir, f"Application_{timestamp}.log")
+        # 2. --- Application Log Sink (1-minute rotation) ---
+        app_log_pattern = os.path.join(run_log_dir, "Application_{time}.log")
         logger.add(
-            BatchLogSink(app_log_path, format_str=file_format_plain, batch_size=50, interval=2),
+            BatchLogSink(app_log_pattern, format_str=file_format_plain, batch_size=50, interval=2),
             format=file_format_plain, level=file_level,
-            filter=lambda record: record["extra"].get("category") != "🚫 QUARANTINE",
+            filter=rust_gate_filter,
             backtrace=True, diagnose=True
         )
 
-        # 3. --- Isolated Error Log Sink ---
-        error_log_path = os.path.join(error_log_dir, f"errors_{timestamp}.log")
+        # 3. --- Isolated Error Log Sink (1-minute rotation) ---
+        error_log_pattern = os.path.join(error_log_dir, "errors_{time}.log")
         logger.add(
-            BatchLogSink(error_log_path, format_str=file_format_plain, batch_size=10, interval=2),
+            BatchLogSink(error_log_pattern, format_str=file_format_plain, batch_size=10, interval=2),
             format=file_format_plain, level="WARNING",
-            filter=lambda record: record["extra"].get("category") != "🚫 QUARANTINE",
+            filter=rust_gate_filter,
             backtrace=True, diagnose=True
         )
         
-        # 4. --- JSON Lines Sink ---
-        jsonl_log_path = os.path.join(jsonl_log_dir, f"structured_{timestamp}.jsonl")
-        logger.add(
-            jsonl_log_path,
-            format=jsonl_format,
-            level="TRACE" if debug_enabled else "INFO",
-            filter=lambda record: record["extra"].get("category") != "🚫 QUARANTINE",
-            rotation="10 MB",
-            compression="zip",
-            catch=True
-        )
+        # 4. --- Protocol and Broker Segregated Sinks (1-minute rotation) ---
+        # ⚡ V3.1.20 SEGREGATION: Dynamically route comms to protocol-specific folders.
+        protocols = ["OSC", "MIDI", "MQTT", "SNMP", "VISA", "AES70", "REST", "EMBER", "SMPTE2138", "BROKER", "GUI"]
+        for proto in protocols:
+            proto_dir = os.path.join(comms_log_dir, proto)
+            os.makedirs(proto_dir, exist_ok=True)
+            # Use {time} pattern for BatchLogSink minute rotation
+            proto_pattern = os.path.join(proto_dir, f"{proto}_{{time}}.log")
+            
+            # Use a closure for the filter to correctly capture 'proto'
+            def make_filter(p):
+                return lambda record: record["extra"].get("protocol") == p and rust_gate_filter(record)
+            
+            logger.add(
+                BatchLogSink(proto_pattern, format_str=file_format_plain, batch_size=20, interval=2),
+                format=file_format_plain, level=file_level,
+                filter=make_filter(proto),
+                backtrace=True, diagnose=True
+            )
 
     except Exception as e:
         print(f"CRITICAL: Logging filesystem initialization failed: {e}", 

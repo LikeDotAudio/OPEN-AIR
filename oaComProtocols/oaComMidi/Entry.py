@@ -15,6 +15,9 @@
 # Version 20260328.1410.1
 
 """
+import sys
+import os
+from pathlib import Path
 oaComProtocols.oaComMidi/Entry.py - The sole orchestrator for the MIDI Communication Module.
 """
 

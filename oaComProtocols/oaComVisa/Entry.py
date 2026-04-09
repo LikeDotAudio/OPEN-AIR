@@ -5,6 +5,9 @@
 # Description: VISA Communication Module Entry Point.
 
 """
+import sys
+import os
+from pathlib import Path
 oaComProtocols.oaComVisa/Entry.py - The sole orchestrator for the VISA Communication Module.
 
 Purpose:

@@ -61,7 +61,7 @@ class PtpManager:
             return
         
         if self.permission_error_reported:
-            matrix_log("core", "ptp", "start", "⏱️ PTP Sniffer: [PERMISSION DENIED] Run as root/sudo for raw capture. Sniffer disabled.", "WARNING")
+            matrix_log("core", "ptp", "start", "ℹ️ PTP Sniffer: [PERMISSION DENIED] Run as root/sudo for raw capture. Sniffer disabled.", "INFO")
             return
 
         self.sniffer_thread = threading.Thread(target=self._run_sniffer, daemon=True, name="PTP_Sniffer")

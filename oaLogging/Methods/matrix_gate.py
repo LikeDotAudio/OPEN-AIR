@@ -71,16 +71,31 @@ def matrix_log(system: str, element: str = None, func_name: str = None,
 
     from oaLogging.Core.logger import get_logger
     
+    protocol_tag = None
     # ⚡ STANDARDIZATION: If system is "comms", ensure 📡 emoji and unified naming
     if system.lower() == "comms":
         category = element.upper() if element else "COMMS"
         # We don't need to specify 'COMM: ' here as get_logger adds it for comms elements
         context_logger = get_logger(category, emoji_prefix="📡")
+        
+        # ⚡ V3.1.20 SEGREGATION: Assign protocol tag for sink filtering
+        if element:
+            el_up = element.upper()
+            if el_up == "BROKER":
+                protocol_tag = "BROKER"
+            elif el_up in ["OSC", "MIDI", "MQTT", "SNMP", "VISA", "AES70", "REST", "EMBER", "SMPTE2138", "GUI"]:
+                protocol_tag = el_up
     else:
-        context_logger = get_logger(element.upper() if element else system.upper())
+        cat_name = element.upper() if element else system.upper()
+        context_logger = get_logger(cat_name)
+        
+        # ⚡ V3.1.20 GUI/BROKER DETECTION:
+        if cat_name in ["GUI", "OAGUI"]: protocol_tag = "GUI"
+        if cat_name == "BROKER": protocol_tag = "BROKER"
 
         
-    log_func = getattr(context_logger.opt(depth=1), level.lower(), context_logger.debug)
+    log_func = getattr(context_logger.opt(depth=1).bind(protocol=protocol_tag), 
+                        level.lower(), context_logger.debug)
     log_func(message)
 
 

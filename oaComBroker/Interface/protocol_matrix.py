@@ -70,55 +70,43 @@ class ProtocolMatrix(tk.Frame):
         # Strategy Header
         tk.Label(container, text="CURRENT STRATEGY", font=("Helvetica", 8, "bold"), fg="#ffffff", bg="#333333", width=20).grid(row=0, column=len(protocols)+1, padx=10)
 
-        # 2. Rows (Sources)
-        for r, src in enumerate(protocols):
+        # ⚡ HUB-AND-SPOKE: 2-Column Enablement List
+        tk.Label(container, text="INGEST ENABLED", font=("Helvetica", 8, "bold"), fg="#ffff00", bg="#333333", width=20).grid(row=0, column=1, padx=5, pady=5)
+        tk.Label(container, text="EGRESS ENABLED", font=("Helvetica", 8, "bold"), fg="#ffff00", bg="#333333", width=20).grid(row=0, column=2, padx=5, pady=5)
+
+        self.ingest_vars = {}
+        self.egress_vars = {}
+
+        for r, proto in enumerate(protocols):
             # Row Header
-            src_emoji = self.router.protocol_emojis.get(src, "")
-            lbl = tk.Label(container, text=f"{src} {src_emoji}", font=("Courier", 8, "bold"), fg="#00ff00", bg="#1a1a1a", width=12, anchor="e")
+            emoji = self.router.protocol_emojis.get(proto, "")
+            lbl = tk.Label(container, text=f"{proto} {emoji}", font=("Courier", 8, "bold"), fg="#00ff00", bg="#1a1a1a", width=15, anchor="e")
             lbl.grid(row=r+1, column=0, padx=10, pady=2)
-            
-            for c, dest in enumerate(protocols):
-                is_diagonal = (src == dest)
-                initial_enabled = self.router.routing_matrix.get(src, {}).get(dest, True)
-                
-                cell_frame = tk.Frame(container, bg="#1a1a1a", bd=1, relief="flat")
-                cell_frame.grid(row=r+1, column=c+1, padx=1, pady=1)
-                
-                if not is_diagonal:
-                    # Enable Checkbox
-                    var = tk.BooleanVar(value=initial_enabled)
-                    cb = tk.Checkbutton(
-                        cell_frame, variable=var, bg="#1a1a1a", selectcolor="#000000",
-                        command=lambda s=src, d=dest, v=var: self._on_toggle_route(s, d, v)
-                    )
-                    cb.pack()
-                    
-                    self.matrix_vars[(src, dest)] = var
-                else:
-                    # ✖ Deny the user from selecting self-routing
-                    tk.Label(cell_frame, text="✖", font=("Courier", 8), fg="#444444", bg="#1a1a1a").pack()
 
-            # 3. Strategy Preview Column
-            preview_var = tk.StringVar(value=self.router.get_strategy_for_source(src))
-            lbl_preview = tk.Label(container, textvariable=preview_var, font=("Segoe UI Emoji", 10), fg="#00ffff", bg="#000000", width=20)
-            lbl_preview.grid(row=r+1, column=len(protocols)+1, padx=10)
-            self.strategy_previews[src] = preview_var
+            # Ingest Toggle
+            ingest_var = tk.BooleanVar(value=self.router.ingest_enabled.get(proto, True))
+            cb_ingest = tk.Checkbutton(container, variable=ingest_var, bg="#1a1a1a", selectcolor="#000000",
+                                       command=lambda p=proto, v=ingest_var: self._on_toggle_ingest(p, v))
+            cb_ingest.grid(row=r+1, column=1, padx=2, pady=2)
+            self.ingest_vars[proto] = ingest_var
 
-    def _on_toggle_route(self, src, dest, var):
-        """Handler for checkbox toggles in the cross-point matrix."""
+            # Egress Toggle
+            egress_var = tk.BooleanVar(value=self.router.egress_enabled.get(proto, True))
+            cb_egress = tk.Checkbutton(container, variable=egress_var, bg="#1a1a1a", selectcolor="#000000",
+                                       command=lambda p=proto, v=egress_var: self._on_toggle_egress(p, v))
+            cb_egress.grid(row=r+1, column=2, padx=2, pady=2)
+            self.egress_vars[proto] = egress_var
+
+    def _on_toggle_ingest(self, proto, var):
         enabled = var.get()
-        self.router.set_routing_state(src, dest, enabled)
-        
-        # Update Preview
-        self.strategy_previews[src].set(self.router.get_strategy_for_source(src))
-        
-        # ⚡ FORENSIC TELEMETRY
-        self.router.ingest(
-            transport_source="SYSTEM", 
-            topic=f"OPEN-AIR/System/Router/Route/{src}/{dest}", 
-            value="ENABLED" if enabled else "DISABLED",
-            metadata={"msg_type": "ROUTING_GATE", "is_settled": True}
-        )
+        self.router.ingest_enabled[proto] = enabled
+        self.router._save_routing_config(proto, "ingest", enabled)
+        matrix_log("comms", "broker", "ui_ingress", f"🔄 [ROUTING] {proto} Ingest: {enabled}", "INFO")
 
+    def _on_toggle_egress(self, proto, var):
+        enabled = var.get()
+        self.router.egress_enabled[proto] = enabled
+        self.router._save_routing_config(proto, "egress", enabled)
+        matrix_log("comms", "broker", "ui_egress", f"🔄 [ROUTING] {proto} Egress: {enabled}", "INFO")
 def get_gui_class():
     return ProtocolMatrix

@@ -85,8 +85,7 @@ if __name__ == "__main__":
             command_result="Success",
             data={"current_volume": 50}
         )
-        print("
-Created Success Response Message:")
+        print("Created Success Response Message:")
         print(response_success.model_dump_json(indent=2))
 
         # Example of creating a command response message (failure)
@@ -97,8 +96,7 @@ Created Success Response Message:")
             command_result="Failure",
             error={"error_code": 400, "error_message": "Invalid parameter value."}
         )
-        print("
-Created Failure Response Message:")
+        print("Created Failure Response Message:")
         print(response_failure.model_dump_json(indent=2))
 
         # Example of creating a subscription message
@@ -111,8 +109,7 @@ Created Failure Response Message:")
             event_types=["property_changed"],
             filter={"parameter": "volume"}
         )
-        print("
-Created Subscription Message:")
+        print("Created Subscription Message:")
         print(subscription_msg.model_dump_json(indent=2))
 
     except Exception as e:

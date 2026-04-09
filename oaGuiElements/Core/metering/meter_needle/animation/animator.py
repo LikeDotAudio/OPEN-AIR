@@ -122,10 +122,15 @@ class MeterAnimator:
                     self.frame.anim_hold_start = time.time() * 1000
                 else:
                     self.frame.anim_mode = "decaying"
-                self.canvas.after(int(dt), self.animate)
+                
+                # ⚡ SAFETY: Check if canvas still exists before scheduling next frame
+                if hasattr(self.canvas, "winfo_exists") and self.canvas.winfo_exists():
+                    self.canvas.after(int(dt), self.animate)
             elif self.frame.anim_mode == "decaying":
                 # Reached resting_point (decay complete)
                 self.frame.anim_mode = "idle"
                 self.frame.anim_running = False
         else:
-            self.canvas.after(int(dt), self.animate)
+            # ⚡ SAFETY: Check if canvas still exists before scheduling next frame
+            if hasattr(self.canvas, "winfo_exists") and self.canvas.winfo_exists():
+                self.canvas.after(int(dt), self.animate)

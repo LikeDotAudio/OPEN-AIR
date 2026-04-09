@@ -202,7 +202,8 @@ class LayoutParser:
         # If path is a file, treat it as a single GUI component.
         # This prevents errors if _parse_directory_listing is mistakenly called with a file.
         if path.is_file():
-            LAYOUT_LOGGER.warning(f"Warning: _parse_directory_listing called with a file path: {path}. Treating as single GUI file.")
+            # ⚡ V3.2.3 LOG NOISE REDUCTION: Downgraded to DEBUG as this is a handled fallback.
+            matrix_log("UI", "GUI_MANAGER", "_parse_directory_listing", f"ℹ️ Handled fallback: _parse_directory_listing called with a file path: {path}. Treating as single GUI file.", level="DEBUG")
             if path.suffix in [".json", ".py"]:
                 return {
                     "type": "directory_listing",

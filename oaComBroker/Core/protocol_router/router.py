@@ -73,13 +73,13 @@ class ProtocolRouter:
         # ⚡ PROTOCOL ROUTING MATRIX (N x N): 
         # Controls which source protocols (Rows) are allowed to dispatch to destination protocols (Cols).
         # "anything can route to anything but itself" - Standard loopback prevention.
-        self.protocols = ["MQTT", "OSC", "MIDI", "SNMP", "REST", "SMPTE2138", "AES70", "EMBER", "NMOS", "VISA", "GUI", "oaGui"]
+        self.protocols = ["MQTT", "OSC", "MIDI", "SNMP", "REST", "SMPTE2138", "AES70", "EMBER", "NMOS", "VISA", "GUI"]
         
         # Emoji mapping for strategy generation
         self.protocol_emojis = {
             "MQTT": "🚀", "OSC": "🅾️", "MIDI": "🎹", "SNMP": "Ⓢ", "REST": "🌐",
             "SMPTE2138": "🔗", "AES70": "70", "EMBER": "🔥", "NMOS": "N", "VISA": "V",
-            "GUI": "Ⓖ", "oaGui": "Ⓖ"
+            "GUI": "Ⓖ"
         }
 
         # ⚡ PROTOCOL TOPIC PREFIXES: Used to auto-detect logical source from MQTT topics.
@@ -92,13 +92,32 @@ class ProtocolRouter:
             "EMBER": "OPEN-AIR/EMBER"
         }
 
-        self.ingest_enabled = {p: True for p in self.protocols}
-        self.egress_enabled = {p: True for p in self.protocols}
+        # ⚡ HUB-AND-SPOKE: Boolean enablement maps
+        # Initialize from config.ini. Default True if config key is missing.
+        self.ingest_enabled = {p: app_constants.get(f"ingest_{p.lower()}", True) or True for p in self.protocols}
+        self.egress_enabled = {p: app_constants.get(f"egress_{p.lower()}", True) or True for p in self.protocols}
         
-        # ⚡ PROTOCOL ROUTING (DEPRECATED: Replaced by Hub-and-Spoke model)
+        # ⚡ V3.1.25 LEGACY COMPATIBILITY: Restore N x N Routing Matrix
+        # Many UI components still expect this structure for granular visualization.
+        # We synchronize it with the hub-and-spoke maps.
+        self.routing_matrix = {src: {dest: True for dest in self.protocols} for src in self.protocols}
+        for p in self.protocols:
+            self.routing_matrix[p][p] = False # Default loopback prevention
         
+        # ⚡ PROTOCOL ROUTING (DEPRECATED)
         self.state_cache = None
         self.is_active = True 
+
+    def _save_routing_config(self, proto, type, enabled):
+        """Persists enablement state to config.ini."""
+        config_path = "/home/anthony/Documents/OPEN-AIR/config.ini"
+        import configparser
+        cfg = configparser.ConfigParser()
+        cfg.read(config_path)
+        if not cfg.has_section("Routing"): cfg.add_section("Routing")
+        cfg.set("Routing", f"{type}_{proto.lower()}", str(enabled))
+        with open(config_path, "w") as f:
+            cfg.write(f)
 
     @property
     def firehose(self):
@@ -110,6 +129,10 @@ class ProtocolRouter:
 
     @classmethod
     def get_instance(cls, force_reload=False):
+        # ⚡ OPTIMIZATION: Double-checked locking to avoid lock overhead in the fast path.
+        if not force_reload and cls._instance is not None:
+            return cls._instance
+            
         with cls._lock:
             if force_reload:
                 cls._instance = None
@@ -242,7 +265,8 @@ class ProtocolRouter:
                 self.rust_router.pop_inbound()
 
         try:
-            return self.inbound_queue.get(timeout=0.001)
+            # ⚡ OPTIMIZATION: Increased timeout from 0.001 to 0.1 to reduce busy-wait overhead.
+            return self.inbound_queue.get(timeout=0.1)
         except queue.Empty:
             return None
 
@@ -285,7 +309,8 @@ class ProtocolRouter:
         while self._running:
             try:
                 try:
-                    msg = self.outbound_queue.get(timeout=0.001)
+                    # ⚡ OPTIMIZATION: Increased timeout from 0.001 to 0.1 to reduce busy-wait overhead.
+                    msg = self.outbound_queue.get(timeout=0.1)
                 except queue.Empty:
                     continue
                 

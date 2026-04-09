@@ -5,6 +5,9 @@
 # Description: Brief summary of purpose
 
 """
+import sys
+import os
+from pathlib import Path
 oaFileImportCSV/Entry.py - The sole orchestrator for the CSV Import Module.
 """
 from .FileReaders.from_csv_unknown import Marker_convert_csv_unknow_report_to_csv
@@ -37,12 +40,12 @@ def run_tests():
         print(f"\n--- Running: {test_file.name} ---")
         try:
             # Get the module path relative to the project root for the test runner
-            relative_test_file_path = test_file.relative_to(Path(__file__).parent.parent.parent) # Path from OPEN-AIR root
+            relative_test_file_path = test_file.relative_to(Path(__file__).parent.parent) # Path from OPEN-AIR root
             module_path_for_runner = str(relative_test_file_path).replace(os.sep, '.')[:-3] # Remove .py extension
 
             # Ensure the current directory is the project root so Python can find modules
             original_cwd = os.getcwd()
-            os.chdir(Path(__file__).parent.parent.parent) 
+            os.chdir(Path(__file__).parent.parent) 
 
             result = subprocess.run(
                 [sys.executable, "-m", "unittest", module_path_for_runner],

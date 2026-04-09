@@ -123,8 +123,8 @@ class YakTranslator:
         else:
             # ⚡ RESILIENCE: Handle missing repository with graceful fallback.
             matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, 
-                       f"⚠️ YAK repository missing. Creating default.", 
-                       level="WARNING")
+                       f"ℹ️ YAK repository missing. Creating default.", 
+                       level="INFO")
             self.yak_repository = {}
             try:
                 with open(repo_path, "wb") as f:

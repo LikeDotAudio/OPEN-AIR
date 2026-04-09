@@ -11,7 +11,8 @@ import cProfile
 import pstats
 import threading
 import gc
-from oaLogging.Entry import matrix_log, TEST_LOGGER
+from oaLogging.Methods.matrix_gate import matrix_log
+from oaLogging.Entry import TEST_LOGGER
 
 def kill_all_profilers():
     """Safety cleanup: stops any dangling profilers in the environment."""

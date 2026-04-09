@@ -15,7 +15,7 @@ from oaGuiElements.Core.metering.meter_needle.constants import (
 from oaGuiElements.Methods.oaProceduralArt_rs.compiler_hook import ensure_compiled
 try:
     ensure_compiled()
-    from oaproceduralart_rs.oaproceduralart_rs import ProceduralArtEngine
+    from oaproceduralart_rs import ProceduralArtEngine
     _rust_engine = ProceduralArtEngine()
     HAS_RUST = True
 except Exception as e:

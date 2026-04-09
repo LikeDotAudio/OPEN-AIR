@@ -19,18 +19,21 @@ from oaGuiBuilder.Core.base_widget_creator import BaseWidgetCreator
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 from oaGuiManager.Core.transparency.transparency import TransparencyManager
 
+from oaGui.Methods.safe_after_mixin import SafeAfterMixin
+
 # Core Modules
 from .Core.knob_config import extract_knob_config
 from .Core.knob_state import create_knob_state
 from .Core.knob_interaction_mixin import KnobInteractionMixin
 from .Core.knob_renderer_mixin import KnobRendererMixin
 
-class CustomKnobFrame(tk.Canvas, KnobInteractionMixin, KnobRendererMixin):
+class CustomKnobFrame(tk.Canvas, KnobInteractionMixin, KnobRendererMixin, SafeAfterMixin):
     """
     A self-contained, stateful Rotary Knob widget.
     Follows SRP: Handles its own interactions, state, and rendering via mixins.
     """
     def __init__(self, parent, variable, config, state, path, state_mirror_engine, label_text, **kwargs):
+        self._init_safe_after()
         # 1. Geometry Normalization
         if "width" in kwargs: kwargs["width"] = max(kwargs["width"], 10)
         if "height" in kwargs: kwargs["height"] = max(kwargs["height"], 10)
@@ -63,7 +66,7 @@ class CustomKnobFrame(tk.Canvas, KnobInteractionMixin, KnobRendererMixin):
         self.variable.trace_add("write", lambda *a: self._draw_visuals())
         
         # Initial Render
-        self.after(50, self._draw_visuals)
+        self.safe_after(50, self._draw_visuals)
 
     def _broadcast_cb(self):
         """Helper for mixin to trigger MQTT updates."""

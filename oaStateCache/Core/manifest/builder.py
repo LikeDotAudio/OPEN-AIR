@@ -6,10 +6,21 @@
 
 import time
 import uuid
+import logging
 from typing import Any, Dict
 from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
+
+# --- Native Rust Optimization ---
+from oaTranslator.Methods.oaManifestGen_rs.compiler_hook import ensure_compiled
+try:
+    ensure_compiled()
+    from oamanifestgen_rs import create_manifest as rust_create_manifest
+    HAS_RUST_MANIFEST = True
+except Exception as e:
+    HAS_RUST_MANIFEST = False
+    logging.warning(f"⚠️ [MANIFEST] Rust manifest builder not found or failed to load: {e}. Using pure Python fallback.")
 
 def create_manifest(
     value: Any, 
@@ -29,6 +40,12 @@ def create_manifest(
     Outputs:
         Dict: The formatted manifest.
     """
+    if HAS_RUST_MANIFEST:
+        return dict(rust_create_manifest(
+            value, topic, source, metadata, 
+            app_constants.FULL_INSTANCE_ID, app_constants.PARTITION_ID
+        ))
+        
     now = time.time()
     
     # ⚡ MODULAR LOGIC: Resolve origin_source based on system state

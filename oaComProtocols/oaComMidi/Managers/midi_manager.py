@@ -110,12 +110,6 @@ class MidiManager:
         matrix_log("comms", "midi", "_midi_listen_loop", 
                    f"▶️ [MIDI-LISTEN] Started listening on port: {port.name}", "DEBUG")
         
-        # ⚡ SAFETY: Skip loop if real MIDI is disabled to avoid environmental crashes
-        import os
-        if os.environ.get("OPEN_AIR_SKIP_REAL_MIDI") == "1":
-            matrix_log("comms", "midi", "_midi_listen_loop", "⚠️ [MIDI-LISTEN] Safety skip active. Exiting loop.", "WARNING")
-            return
-
         last_heartbeat = 0
         while self._running:
             try:

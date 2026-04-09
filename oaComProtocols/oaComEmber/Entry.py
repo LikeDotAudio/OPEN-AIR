@@ -4,11 +4,9 @@
 #
 # Description: Ember Communication Module Entry Point with Singleton Manager.
 
-import os
-import sys
-from pathlib import Path
 
 """
+import sys
 oaComProtocols.oaComEmber/Entry.py - The sole orchestrator for the Ember Communication Module.
 
 Purpose:

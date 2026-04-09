@@ -40,9 +40,22 @@ def purge_cache():
         project_root / ".pytest_cache" / "RUN",
         project_root / "DATA" # Legacy compatibility
     ]
+    
+    # Specific files to remove
+    target_files = [
+        project_root / "oaDataCache" / "device_state_cache.json",
+        project_root / "oaDataCache" / "layout_cache.json"
+    ]
 
     matrix_log("core", "system", "purge_cache", "📡📤📤 [CLEAR_CACHE] Starting local cache and state purge...", "INFO")
 
+    # 1. Clean individual files
+    for f in target_files:
+        if f.exists():
+            f.unlink()
+            matrix_log("core", "system", "purge_cache", f"🗑️  Deleted: {f.name}", "INFO")
+
+    # 2. Clean directories
     for data_dir in data_dirs:
         if data_dir.exists():
             matrix_log("core", "system", "purge_cache", f"🗑️  Nuking contents of: {data_dir.name}", "INFO")

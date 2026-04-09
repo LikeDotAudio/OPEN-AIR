@@ -3,6 +3,7 @@
 // Version: 20260402.0010.1
 
 use pyo3::prelude::*;
+use pyo3::IntoPyObjectExt;
 use pyo3::types::{PyBytes, PyDict, PyList};
 use image::{Rgba, RgbaImage};
 use rand::{Rng, SeedableRng};
@@ -81,16 +82,15 @@ impl ProceduralArtEngine {
                 let dist = (dx*dx + dy*dy).sqrt();
                 
                 if dist <= radius {
-                    let mut light_factor = 1.0;
-                    if head_type == "fillister" {
+                    let light_factor = if head_type == "fillister" {
                         let specular_offset = radius * 0.3;
                         let lx = dx + specular_offset;
                         let ly = dy + specular_offset;
                         let ldist = (lx*lx + ly*ly).sqrt();
-                        light_factor = 0.5 + 0.5 * (1.0 - (ldist / (radius * 1.5)).clamp(0.0, 1.0));
+                        0.5 + 0.5 * (1.0 - (ldist / (radius * 1.5)).clamp(0.0, 1.0))
                     } else {
-                        light_factor = 0.7;
-                    }
+                        0.7
+                    };
                     
                     let mut r = (base_rgb[0] as f64 * light_factor) as u8;
                     let mut g = (base_rgb[1] as f64 * light_factor) as u8;
@@ -192,8 +192,5 @@ impl ProceduralArtEngine {
 #[pymodule]
 fn oaproceduralart_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<ProceduralArtEngine>()?;
-    Ok(())
-}
->()?;
     Ok(())
 }

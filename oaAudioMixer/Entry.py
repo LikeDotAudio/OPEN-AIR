@@ -7,9 +7,9 @@
 
 import sys
 import os
+from pathlib import Path
 import json
 import time
-from pathlib import Path
 
 # Add the parent directory of oaAudioMixer to sys.path
 script_dir = Path(__file__).parent
@@ -139,12 +139,12 @@ def run_tests():
             # A more robust solution might involve explicitly setting up sys.path for subprocess
             
             # Get the module path relative to the project root for the test runner
-            relative_test_file_path = test_file.relative_to(Path(__file__).parent.parent.parent) # Path from OPEN-AIR root
+            relative_test_file_path = test_file.relative_to(Path(__file__).parent.parent) # Path from OPEN-AIR root
             module_path_for_runner = str(relative_test_file_path).replace(os.sep, '.')[:-3] # Remove .py extension
 
             # Ensure the current directory is the project root so Python can find modules
             original_cwd = os.getcwd()
-            os.chdir(Path(__file__).parent.parent.parent) 
+            os.chdir(Path(__file__).parent.parent) 
 
             result = subprocess.run(
                 [sys.executable, "-m", "unittest", module_path_for_runner],

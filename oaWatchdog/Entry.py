@@ -5,6 +5,7 @@
 # Description: Brief summary of purpose
 
 """
+import sys
 oaWatchdog/Entry.py - The sole orchestrator for the Watchdog Module.
 """
 from .Managers.watchdog import *

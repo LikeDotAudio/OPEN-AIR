@@ -23,24 +23,37 @@ def get_process_on_port(port):
 
 def is_friendly_process(proc):
     """
-    Determines if a process is part of the OPEN-AIR ecosystem.
-    Checks PID, Parent PID, and Command Line strings.
+    Determines if a process is part of the SAME OPEN-AIR supervisor session.
+    Checks PID, Parent PID, and the OPEN_AIR_INSTANCE_GUID environment variable.
     """
     current_pid = os.getpid()
     if proc.pid == current_pid:
         return True
         
     try:
-        # Check for shared parent (Supervisor)
-        my_parent = psutil.Process(current_pid).parent()
-        if my_parent and proc.parent() and my_parent.pid == proc.parent().pid:
+        # 1. Check for shared parent (Supervisor)
+        my_proc = psutil.Process(current_pid)
+        my_parent = my_proc.parent()
+        proc_parent = proc.parent()
+        if my_parent and proc_parent and my_parent.pid == proc_parent.pid:
             return True
             
-        # Check command line for project markers
-        cmdline = " ".join(proc.cmdline()).lower()
-        if "openair" in cmdline or "oa" in cmdline:
+        # 2. Check for Session Identity GUID (Environment Injection)
+        # This is the most reliable way to identify siblings from the same run.
+        my_env = my_proc.environ()
+        proc_env = proc.environ()
+        
+        my_guid = my_env.get("OPEN_AIR_INSTANCE_GUID")
+        proc_guid = proc_env.get("OPEN_AIR_INSTANCE_GUID")
+        
+        if my_guid and proc_guid and my_guid == proc_guid:
             return True
-    except:
+
+        # ⚡ V3.1.28 STRICTNESS: 
+        # We NO LONGER consider any process with "openair" in the cmdline as friendly.
+        # This allows a new supervisor run to "Zap" orphans from a previous crashed run.
+        
+    except (psutil.AccessDenied, psutil.NoSuchProcess):
         pass
     return False
 

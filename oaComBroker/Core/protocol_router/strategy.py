@@ -40,17 +40,12 @@ def calculate_strategy(msg):
     full_id = msg.get("full_id")
     
     # --- Loop Prevention: Network Reflection Rejection ---
-    # ⚡ V3.1.8 MONITOR REFLECTION:
-    # We allow reflected messages to pass through to observers (Monitors) 
-    # even if they originated from this node. The Echo Remover in 
-    # dispatch.py will handle the actual hardware-level gating.
-    from .constants import app_constants
+    # ⚡ V3.1.21 REFLECTION PURGE:
+    # All messages arriving from MQTT that were authored by this instance 
+    # must be tagged for IGNORE. They still reach the local Monitor/Firehose 
+    # via the ingest pipeline but are blocked from re-dispatch.
     if source == "MQTT" and full_id == app_constants.FULL_INSTANCE_ID:
-        is_status = ("/Status/" in topic or "/Monitor/" in topic)
-        is_protocol = any(x in topic.upper() for x in ["/MIDI/", "/OSC/", "/GUI/", "/OAGUI/"])
-        
-        if not is_status and not is_protocol:
-            return "IGNORE (REFLECT)"
+        return "IGNORE (REFLECT)"
         
     # --- Dynamic Matrix Routing ---
     from .manager import ProtocolRouter

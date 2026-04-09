@@ -7,6 +7,8 @@ Entry point for the oaComProtocols.oaComNmos IS-12 module.
 Handles the NMOS Control Protocol.
 """
 
+from typing import Optional, List, Dict, Any
+from pydantic import BaseModel
 from .Interface.schemas import (
     IS12CommandMessage,
     IS12CommandResponseMessage,

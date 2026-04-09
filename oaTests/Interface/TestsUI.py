@@ -166,7 +166,7 @@ class TestsApp(App):
         elif bid == "btn_report": self.perform_report_generation()
         # Screens
         elif bid == "btn_debug_matrix": self.push_screen(DebugMatrixScreen())
-        elif bid == "btn_clear_menu": self.push_screen(MaintenanceClearScreen())
+        elif bid == "btn_clear_menu": self.push_screen(MaintenanceClearScreen(self.maintenance))
         # Maintenance (via Manager)
         elif bid == "btn_clear_logs": self.maintenance.clear_logs()
         elif bid == "btn_clear_audits": self.maintenance.clear_audits()

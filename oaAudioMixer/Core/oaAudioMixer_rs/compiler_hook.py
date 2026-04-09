@@ -51,7 +51,7 @@ def ensure_compiled():
             wheels = glob.glob(os.path.join(module_dir, "target", "wheels", "*.whl"))
 
         if wheels:
-            subprocess.check_call([python_exec, "-m", "pip", "install", "--user", "--force-reinstall", wheels[0]], 
+            subprocess.check_call([python_exec, "-m", "pip", "install", "--user", "--force-reinstall", "--break-system-packages", wheels[0]], 
                                   cwd=module_dir, env=env, 
                                   stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
             

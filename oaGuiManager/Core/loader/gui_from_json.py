@@ -62,22 +62,28 @@ class UniversalGuiLoader(tk.Frame):
             if not self.json_path.exists():
                 raise FileNotFoundError(f"Blueprint missing! {self.json_path}")
 
-            matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"🏗️ Constructing '{self.module_name}' via DynamicGuiBuilder...", level="DEBUG")
+            matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, 
+                       f"🏗️🏗️🏗️ [BUILDER] Constructing '{self.module_name}' via DynamicGuiBuilder...", 
+                       level="DEBUG")
 
             # 2. Execution
             self._instantiate_builder()
 
             # 3. Success
-            matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"✅ It works! {self.module_name} is fully operational!", level="SUCCESS")
+            matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, 
+                       f"✅✅✅ [SUCCESS] It works! {self.module_name} is fully operational!", 
+                       level="SUCCESS")
 
         except FileNotFoundError as e:
             # 4a. Expected Validation Failure - No noisy traceback
-            logger.error(f"❌ Blueprint missing! Module: {self.module_name} | Path: {self.json_path}")
+            matrix_log("UI", "GUI_MANAGER", "_construct_dynamic_gui", 
+                       f"⚠️⚠️⚠️ [VALIDATION] Blueprint missing! Module: {self.module_name} | Path: {self.json_path}", 
+                       level="WARNING")
             self._handle_build_error(e)
 
         except Exception as e:
             # 4b. Catastrophic Failure Handling - Full traceback for unexpected errors
-            logger.exception(f"💥 The Flux Capacitocracked while building {self.module_name}! Error: {e}")
+            logger.exception(f"💥💥💥 [CATASTROPHIC] The Flux Capacitocracked while building {self.module_name}! Error: {e}")
             self._handle_build_error(e)
 
     def _instantiate_builder(self):

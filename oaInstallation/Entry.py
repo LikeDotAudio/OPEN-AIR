@@ -5,9 +5,9 @@
 # Description: This file acts as the public API and orchestrator for the installation module.
 # It initializes the Textual UI for the installation process.
 
+
 import sys
 import os
-
 def _inject_project_root():
     """Calculates and injects the project root into sys.path."""
     # Current file: project_root/oaInstallation/Entry.py

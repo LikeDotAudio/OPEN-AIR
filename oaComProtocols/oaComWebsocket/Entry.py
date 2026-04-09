@@ -3,13 +3,13 @@
 # Version: 20260405.1548.2 (updated)
 
 """
+import sys
+import os
 Entry point for the oaComProtocols.oaComWebsocket module.
 Provides reusable WebSocket client and server functionalities.
 """
 
-import sys
 import subprocess
-import os
 import glob
 
 import websocket # For WebSocket client

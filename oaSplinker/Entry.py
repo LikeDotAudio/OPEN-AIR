@@ -5,6 +5,7 @@
 # Description: Brief summary of purpose
 
 """
+import sys
 oaSplinker/Entry.py - The sole orchestrator for the Splinker Module.
 
 Purpose:

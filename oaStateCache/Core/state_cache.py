@@ -44,7 +44,12 @@ except Exception as e:
 class PythonStateRegistry:
     """Standard Python dictionary fallback for environments lacking Rust."""
     def __init__(self): self._data = {}
-    def set(self, k, v): self._data[k] = v
+    def set(self, k, v): 
+        # ⚡ V3.1.23 RECURSION GUARD:
+        # Block corrupted topics with repeated protocol tokens.
+        if any(x + "/" + x + "/" in str(k) for x in ["OSC", "MIDI", "GUI", "oaGui", "MQTT"]):
+            return
+        self._data[k] = v
     def get(self, k): return self._data.get(k)
     def len(self): return len(self._data)
     def clear(self): self._data.clear()
@@ -147,6 +152,23 @@ class StateRegistry:
         entry = self.rust_cache.get(topic)
         return entry.get("val") if isinstance(entry, dict) else entry
 
+    def set_value(self, topic: str, payload: Any) -> bool:
+        """
+        Commits a topic and payload to the registry with a recursion guard.
+        
+        Returns:
+            bool: True if the value was committed, False if rejected by guard.
+        """
+        # ⚡ V3.1.23 RECURSION GUARD:
+        # Block corrupted topics with repeated protocol tokens (e.g., OSC/OSC/).
+        if any(x + "/" + x + "/" in str(topic) for x in ["OSC", "MIDI", "GUI", "oaGui", "MQTT"]):
+            if app_constants.ROUTER_INGEST_LOGS:
+                matrix_log("core", "data", "set_value", f"🛡️ [GUARD] Rejecting corrupted recursive topic: {topic}", "DEBUG")
+            return False
+            
+        self.rust_cache.set(topic, payload)
+        return True
+
     def save_preset(self, name: str):
         """
         Exports the current global state to a JSON preset file.
@@ -193,34 +215,42 @@ class StateRegistry:
 
         Side Effects:
             - Performs blocking I/O.
-            - Ingests loaded values into the global Protocol Router.
             - Updates the StateMirrorEngine if attached.
         """
         try:
             loaded_cache = cache_io_handler.load_cache()
             self.rust_cache.clear()
-            self.rust_cache.update(loaded_cache)
+            
+            # ⚡ V3.1.23 PURITY CHECK:
+            # Filter the loaded cache to remove any legacy recursive entries.
+            clean_cache = {}
+            for t, p in loaded_cache.items():
+                if self.set_value(t, p):
+                    clean_cache[t] = p
+            
         except FileNotFoundError:
             matrix_log("core", "data", "initialize_state", 
                        "🪣 [CACHE] No cache to initialize.", "INFO")
             self.rust_cache.clear()
+            clean_cache = {}
         except CacheLoadError as e:
             matrix_log("core", "data", "initialize_state", 
                        f"🔥 [OUTAGE] Cache Corruption: {e}.", "ERROR")
             self.rust_cache.clear()
+            clean_cache = {}
         except Exception as e: 
             matrix_log("core", "data", "initialize_state", 
                        f"❌ [INIT] State failure: {e}", "ERROR")
             self.rust_cache.clear()
+            clean_cache = {}
 
-        current_cache = self.rust_cache.to_dict()
-        if current_cache:
-            # ⚡ V3.1.18 ARCHITECTURAL PURITY:
+        if clean_cache:
+            # ⚡ ARCHITECTURAL PURITY:
             # The State Cache is NOT a router input. We populate the local memory
             # and search engine, but we do NOT ingest these values into the 
             # Protocol Router's event pipeline.
             # Mirroring to UI remains for immediate visibility.
-            gui_state_restorer.restore_timeline(current_cache, 
+            gui_state_restorer.restore_timeline(clean_cache, 
                                                 self.state_mirror_engine)
 
     def handle_external_update(self, topic: str, value: Any, 
@@ -268,7 +298,9 @@ class StateRegistry:
 
     def _update_cache_entry(self, topic, payload):
         """Internal atomic update for local memory and search tree."""
-        self.rust_cache.set(topic, payload)
+        if not self.set_value(topic, payload):
+            return
+            
         self.search_engine.add_topic(topic)
         self.save_engine.schedule_save(topic, payload)
         self._updates_since_last_log += 1
@@ -337,7 +369,10 @@ class StateRegistry:
             should_process, new_payload = cache_traffic_controller.process_traffic(
                 msg, self.rust_cache)
             if should_process:
-                self._update_cache_entry(topic, new_payload)
+                if self.set_value(topic, new_payload):
+                    self.search_engine.add_topic(topic)
+                    self.save_engine.schedule_save(topic, new_payload)
+                    self._updates_since_last_log += 1
                 
         except Exception as e:
             import traceback

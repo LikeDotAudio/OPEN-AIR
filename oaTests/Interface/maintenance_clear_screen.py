@@ -9,6 +9,10 @@ from oaOchestration.Core.path_initializer import DATA_LOGS_DIR, GLOBAL_PROJECT_R
 
 class MaintenanceClearScreen(Screen):
     """A dedicated screen for system cleanup and maintenance operations with verification."""
+    
+    def __init__(self, maintenance_manager, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.maintenance_manager = maintenance_manager
 
     CSS = """
     MaintenanceClearScreen {
@@ -52,7 +56,9 @@ class MaintenanceClearScreen(Screen):
             yield Button("CLEAR MQTT (--)", id="btn_clear_mqtt", variant="warning")
             yield Button("CLEAR FLAMEGRAPH (--)", id="btn_clear_flame", variant="warning")
             yield Button("DELETE CACHE (--)", id="btn_clear_cache", variant="error")
-            
+            yield Button("DELETE CONFIG (--)", id="btn_clear_config", variant="error")
+            yield Button("--- CLEAR ALL ---", id="btn_clear_all", variant="error")
+
             yield Button("CLOSE & RETURN", id="btn_close", variant="success")
         yield Footer()
 
@@ -119,8 +125,24 @@ class MaintenanceClearScreen(Screen):
     def on_button_pressed(self, event: Button.Pressed) -> None:
         if event.button.id == "btn_close":
             self.app.pop_screen()
-        else:
-            # Delegate the actual work back to the main app
-            self.app.on_button_pressed(event)
-            # Schedule a refresh after a short delay to allow file I/O to finish
-            self.set_timer(1.0, self.refresh_all_counts)
+        elif event.button.id == "btn_clear_logs":
+            self.maintenance_manager.clear_logs()
+        elif event.button.id == "btn_clear_audits":
+            self.maintenance_manager.clear_audits()
+        elif event.button.id == "btn_clear_reports":
+            self.maintenance_manager.clear_reports()
+        elif event.button.id == "btn_clear_jsonlines":
+            self.maintenance_manager.clear_jsonlines()
+        elif event.button.id == "btn_clear_mqtt":
+            self.maintenance_manager.clear_mqtt()
+        elif event.button.id == "btn_clear_flame":
+            self.maintenance_manager.clear_flamegraph()
+        elif event.button.id == "btn_clear_cache":
+            self.maintenance_manager.clear_cache()
+        elif event.button.id == "btn_clear_config":
+            self.maintenance_manager.clear_config()
+        elif event.button.id == "btn_clear_all":
+            self.maintenance_manager.clear_all()
+        
+        # Schedule a refresh after a short delay to allow file I/O to finish
+        self.set_timer(1.0, self.refresh_all_counts)

@@ -16,6 +16,7 @@
 # Version 20260406.2005.1
 
 """
+import sys
 oaTranslator/Entry.py - The sole orchestrator for the Translator Module.
 """
 

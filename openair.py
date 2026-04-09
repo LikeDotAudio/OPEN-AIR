@@ -94,8 +94,16 @@ def main():
 
     def log(msg):
         """Internal helper for consistent supervisor console output."""
-        print(f"[SUPERVISOR] {msg}")
+        # ⚡ V3.1.27 LOG SCRUBBING:
+        # Remove ANSI escape sequences from the message before printing to the console.
+        # This prevents terminal feedback loops if the output is being captured/piped.
+        import re
+        ansi_escape = re.compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])')
+        clean_msg = ansi_escape.sub('', str(msg))
+        
+        print(f"[SUPERVISOR] {clean_msg}")
         if _DEBUG: 
+            # Keep original message for matrix_log as it supports colorization
             matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🚀 SUPERVISOR: {msg}", "DEBUG")
 
     log(f"Launching OPEN-AIR Partitions... (Mission Critical: {is_mission_critical})")
@@ -142,10 +150,12 @@ def main():
     # Use a flag for graceful shutdown instead of catching KeyboardInterrupt
     shutdown_requested = [False]
     def signal_handler(sig, frame):
-        log("🛑 Keyboard Interrupt (Signal). Initiating graceful shutdown...")
+        sig_name = "SIGINT" if sig == signal.SIGINT else "SIGTERM"
+        log(f"🛑 {sig_name} received. Initiating graceful shutdown...")
         shutdown_requested[0] = True
 
     signal.signal(signal.SIGINT, signal_handler)
+    signal.signal(signal.SIGTERM, signal_handler)
 
     # 1. Launch UI Partition (Handles User Feedback/Splash Screen).
     log("Spawning Partition B (UI)...")

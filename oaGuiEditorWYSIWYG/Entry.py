@@ -5,6 +5,7 @@
 # Description: Gatekeeper for the oaGuiEditorWYSIWYG module.
 
 """
+import sys
 oaGuiEditorWYSIWYG/Entry.py - Gatekeeper for oaGuiEditorWYSIWYG
 """
 

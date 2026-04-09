@@ -97,6 +97,16 @@ def main():
     # The heartbeat thread ensures the system can be reset by hardware if the
     # software becomes unresponsive.
     watchdog.start_heartbeat(app_constants)
+
+    # ⚡ V3.1.28 TERMINATION: Handle SIGTERM (from supervisor) as a KeyboardInterrupt 
+    # to trigger the graceful cleanup in the 'finally' block.
+    import signal
+    def handle_sigterm(signum, frame):
+        if LOCAL_DEBUG:
+            matrix_log("comms", "broker", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "SIGTERM received. Triggering cleanup...", "DEBUG")
+        raise KeyboardInterrupt
+    
+    signal.signal(signal.SIGTERM, handle_sigterm)
     
     # 3. --- Core Manager Lifecycle ---
     mqtt_connection_manager = MqttConnectionManager()

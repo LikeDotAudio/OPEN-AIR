@@ -165,7 +165,22 @@ class SNMPManager:
         router = ProtocolRouter.get_instance()
         router.register_cache_observer(self.handle_protocol_event)
         
+        # ⚡ V3.1.24 STATUS VISIBILITY: Ensure all modes (Bridge/Observer) publish status.
+        if self.context.mqtt_connection_manager:
+            self._status_update_thread = threading.Thread(target=self._mqtt_status_loop, daemon=True, name="SNMP-MqttStatus")
+            self._status_update_thread.start()
+
         self._start_specifics(router)
+
+    def _mqtt_status_loop(self):
+        while self._running:
+            self._publish_status()
+            time.sleep(5)
+
+    def _publish_status(self, force_script=False):
+        if not self.context.mqtt_connection_manager: return
+        status = self.get_status()
+        self.context.mqtt_connection_manager.publish("OPEN-AIR/System/Status/SNMP/Bridge", status)
 
     def _start_specifics(self, router):
         pass
@@ -287,10 +302,8 @@ class SNMPBridge(SNMPManager):
             if hasattr(router, "set_snmp_manager"):
                 router.set_snmp_manager(self)
             
-            if self.context.mqtt_connection_manager and self.context.subscriber_router:
+            if self.context.subscriber_router:
                 self.context.subscriber_router.subscribe_to_topic("OPEN-AIR/System/Control/SNMP/GenerateScript", self._handle_mqtt_command)
-                self._status_update_thread = threading.Thread(target=self._mqtt_status_loop, daemon=True, name="SNMP-MqttStatus")
-                self._status_update_thread.start()
                 
             self.save_current_mib()
             if is_debug_allowed("comms", "snmp"): snmp_logger.success(f"SNMP Bridge Active on {self._socket_info}")
@@ -301,13 +314,3 @@ class SNMPBridge(SNMPManager):
         if "GenerateScript" in msg.topic:
             self.tree_builder.generate_master_script()
             self._publish_status(force_script=True)
-
-    def _mqtt_status_loop(self):
-        while self._running:
-            self._publish_status()
-            time.sleep(5)
-
-    def _publish_status(self, force_script=False):
-        if not self.context.mqtt_connection_manager: return
-        status = self.get_status()
-        self.context.mqtt_connection_manager.publish("OPEN-AIR/System/Status/SNMP/Bridge", status)

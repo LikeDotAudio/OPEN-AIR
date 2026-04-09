@@ -11,10 +11,6 @@ from oaComProtocols.oaComMidi.Managers.midi_manager import MidiManager
 
 class TestMidiStandalone(unittest.TestCase):
     def setUp(self):
-        import os
-        if os.environ.get("OPEN_AIR_SKIP_REAL_MIDI") == "1":
-            self.skipTest("Skipping real MIDI test in safety mode")
-            
         # Initialize without state manager (Standalone)
         with patch("oaComBroker.Core.protocol_router.manager.ProtocolRouter.get_instance"):
             self.midi = MidiManager(state_cache_manager=None, run_bridge=True)
@@ -26,10 +22,6 @@ class TestMidiStandalone(unittest.TestCase):
 
     def test_monitor_notification_no_mqtt(self):
         """Test that local monitors are notified even if MQTT is not available."""
-        import os
-        if os.environ.get("OPEN_AIR_SKIP_REAL_MIDI") == "1":
-            self.skipTest("Skipping real MIDI test in safety mode")
-            
         monitor_cb = MagicMock()
         self.midi.add_monitor_callback(monitor_cb)
         

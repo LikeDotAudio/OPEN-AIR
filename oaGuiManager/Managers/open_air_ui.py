@@ -69,6 +69,14 @@ def main():
         shutdown_coordinator = ShutdownCoordinator(root, shared_services, True)
         shutdown_coordinator.attach_to_root()
 
+        # ⚡ V3.1.28 TERMINATION: Handle SIGTERM (from supervisor) via ShutdownCoordinator
+        import signal
+        def handle_sigterm(signum, frame):
+            matrix_log("ui", "system", "main", "🛑 SIGTERM received in UI partition. Initiating shutdown...", "WARNING")
+            shutdown_coordinator.shutdown()
+        
+        signal.signal(signal.SIGTERM, handle_sigterm)
+
         # 6. Resource Management
         def _periodic_gc():
             import gc; gc.collect()

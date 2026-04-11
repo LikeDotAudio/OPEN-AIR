@@ -25,11 +25,21 @@ import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
 from loguru import logger
 from oaLogging.Entry import logger as logger_oa
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
+from loguru import logger
 import tkinter as tk
 from tkinter import ttk
 import datetime
 from pathlib import Path
+
+# --- GUI FALLBACKS (V3.2.1 Decoupling) ---
+try:
+    from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+except ImportError:
+    class TransparencyMixin:
+        """Fallback mixin for standalone execution without GUI manager."""
+        def render(self): pass
 
 # --- Import the OSC Entry point for manager access ---
 import oaComProtocols.oaComOSC.Entry as OSC_MODULE
@@ -57,7 +67,8 @@ class OscDashboardImplementation(tk.Frame, TransparencyMixin):
         # ⚡ STANDALONE: Ensure the OSC manager is initialized with GUI-provided managers if possible.
         try:
             state_cache = self.config_data.get("state_cache_manager")
-            mqtt_conn = self.config_data.get("mqtt_connection_manager") or  (getattr(self.config_data.get("app_instance"), "mqtt_connection_manager", None) if self.config_data.get("app_instance") else None)
+            app_inst = self.config_data.get("app_instance")
+            mqtt_conn = self.config_data.get("mqtt_connection_manager") or (getattr(app_inst, "mqtt_connection_manager", None) if app_inst else None)
             
             # This will initialize or update the singleton instance
             OSC_MODULE.get_manager(state_cache_manager=state_cache, mqtt_connection_manager=mqtt_conn)
@@ -81,16 +92,19 @@ class OscDashboardImplementation(tk.Frame, TransparencyMixin):
             self.after(2000, self._schedule_refresh)
 
     def _find_builder_instance(self, widget):
-        """Recursively searches for a DynamicGuiBuilder in the parent hierarchy."""
-        try:
-            from oaGuiBuilder.Workers.builder import DynamicGuiBuilder
-            curr = widget
-            while curr:
-                if isinstance(curr, DynamicGuiBuilder):
-                    return curr
-                curr = curr.master
-        except Exception:
-            pass
+        """
+        ⚡ DECOUPLED: Searches the widget tree for a builder instance without 
+        direct dependency on oaGuiBuilder classes.
+        """
+        curr = widget
+        while curr:
+            # Check for generic 'builder' or 'app_instance'
+            if hasattr(curr, 'builder'):
+                return getattr(curr, 'builder')
+            if hasattr(curr, 'app_instance'):
+                return curr
+            try: curr = curr.master
+            except: break
         return None
 
     def _setup_ui(self):

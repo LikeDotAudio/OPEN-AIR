@@ -23,6 +23,9 @@ class VisaManagerOrchestrator:
         )
         self.gui_publisher = VisaGuiPublisher(mqtt_controller=mqtt_connection_manager)
 
+        # ⚡ TELEMETRY: Broadcast proxy availability on startup
+        self.gui_publisher._publish_proxy_status("CONNECTED")
+
         # Instantiate the logic workers
         self.device_searcher = VisaDeviceSearcher()
         self.connector = VisaConnector(

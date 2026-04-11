@@ -42,8 +42,8 @@ class MidiDashboard(tk.Frame):
         self._setup_ui()
 
         if self.midi_manager:
-            logger.info("🎹 [MIDI-DASH] MidiManager found successfully.")
-            matrix_log("comms", "midi", "__init__", "🎹 [MIDI-DASH] MidiManager found. Registering callback.", "SUCCESS")
+            logger.info(f"🎹 [MIDI-DASH] MidiManager found: {self.midi_manager}")
+            matrix_log("comms", "midi", "__init__", f"🎹 [MIDI-DASH] MidiManager found ({'Bridge' if self.midi_manager.run_bridge else 'Observer'}). Registering callback.", "SUCCESS")
             # Add a local callback for the dashboard monitor
             self.midi_manager.add_monitor_callback(self.on_midi_activity)
             self._refresh_ui()
@@ -56,30 +56,39 @@ class MidiDashboard(tk.Frame):
             ProtocolRouter.get_instance().register_cache_observer(self._on_protocol_event)
 
     def _find_midi_manager(self, widget):
-        # ⚡ NEW: Check config_data first (Direct Injection)
+        # 1. Check direct configuration first
         if self.config_data.get("midi_manager"):
             return self.config_data.get("midi_manager")
         
-        # ⚡ NEW: Check app_instance from config_data
+        # 2. Check app_instance from configuration
         app = self.config_data.get("app_instance")
         if app and hasattr(app, "midi_manager"):
-            return app.midi_manager
+            m = getattr(app, "midi_manager", None)
+            if m: return m
 
+        # 3. Traverse the widget tree upwards
         curr = widget
         while curr:
-            if hasattr(curr, 'midi_manager'):
-                m = getattr(curr, 'midi_manager', None)
-                if m: return m
+            # Check for direct attribute
+            m = getattr(curr, 'midi_manager', None)
+            if m: return m
             
-            app = getattr(curr, 'app_instance', None)
-            if app and hasattr(app, 'midi_manager'):
-                m = getattr(app, 'midi_manager', None)
+            # Check for nested app_instance
+            a = getattr(curr, 'app_instance', None)
+            if a and hasattr(a, 'midi_manager'):
+                m = getattr(a, 'midi_manager', None)
                 if m: return m
                 
             try:
+                if curr == curr.master: break # Reached root
                 curr = curr.master
             except Exception: break
-        return None
+            
+        # 4. Global Lookup fallback (Last Resort)
+        try:
+            from oaComProtocols.oaComMidi.Entry import get_manager
+            return get_manager()
+        except: return None
 
     def _on_protocol_event(self, msg):
         """Observer callback for ProtocolRouter traffic."""
@@ -122,6 +131,12 @@ class MidiDashboard(tk.Frame):
         self.hw_search = MidiHardwareSearch(header_frame, refresh_callback=self._refresh_ui)
         self.hw_search.pack(side=tk.RIGHT, padx=20)
 
+        # ⚡ NEW: Keyboard Visualizer at the TOP (as requested)
+        kb_frame = tk.LabelFrame(self, text="Keyboard Visualizer (C1-C7)", bg="#2b2b2b", fg="#888888")
+        kb_frame.pack(side=tk.TOP, fill=tk.X, padx=15, pady=5)
+        self.keyboard = MidiKeyboard(kb_frame, height=80) 
+        self.keyboard.pack(fill=tk.X, expand=True, padx=5, pady=5)
+
         # 2. Main Content Area
         content_pane = tk.Frame(self, bg="#2b2b2b")
         content_pane.pack(fill=tk.BOTH, expand=True, padx=10, pady=5)
@@ -140,14 +155,9 @@ class MidiDashboard(tk.Frame):
         self.conn_mgr = MidiConnectionManager(conn_frame)
         self.conn_mgr.pack(fill=tk.BOTH, expand=True)
 
-        # Right Column: Visualizer & Feed
+        # Right Column: Feed Only (Visualizer moved to top)
         right_col = tk.Frame(content_pane, bg="#2b2b2b")
         right_col.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5)
-
-        kb_frame = tk.LabelFrame(right_col, text="Keyboard Visualizer (C1-C7)", bg="#2b2b2b", fg="#888888")
-        kb_frame.pack(side=tk.TOP, fill=tk.X, pady=5)
-        self.keyboard = MidiKeyboard(kb_frame, height=100)
-        self.keyboard.pack(fill=tk.X, expand=True, padx=5, pady=5)
 
         feed_frame = tk.LabelFrame(right_col, text="Live MIDI Feed", bg="#2b2b2b", fg="#888888")
         feed_frame.pack(side=tk.TOP, fill=tk.BOTH, expand=True, pady=5)
@@ -161,6 +171,7 @@ class MidiDashboard(tk.Frame):
         self.conn_mgr.update_connections(info)
 
     def _process_activity(self, direction, msg):
+        matrix_log("comms", "midi", "_process_activity", f"🎹 [DASH] Processing activity: {direction} {msg}", "DEBUG")
         # ⚡ CRITICAL: The visualizer needs the full message (dict or object)
         self.keyboard.handle_midi(msg)
         

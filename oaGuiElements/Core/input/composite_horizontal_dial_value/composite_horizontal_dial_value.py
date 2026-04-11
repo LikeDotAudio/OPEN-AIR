@@ -40,26 +40,18 @@ class BuilderCompositeHorizontalDialValueCreator(
     @staticmethod
     def make(parent_widget, config_data, context=None, **kwargs):
         """Unified entry point for composite horizontal dial value."""
-        creator = BuilderCompositeHorizontalDialValueCreator()
-        return creator.make_composite_horizontal_dial_value(parent_widget, config_data, context, **kwargs)
+        return BuilderCompositeHorizontalDialValueCreator.build(parent_widget, config_data, context, **kwargs)
 
-    def make_composite_horizontal_dial_value(self, parent_widget, config_data, context=None, **kwargs):
+    def _assemble_ui(self, parent_widget, config_data, context, **kwargs):
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️🔀 [BUILDER] Creating composite horizontal dial value.", level="TRACE")
         
         label, path = get_text(config_data.get("label_active"), get_text(config_data.get("label"), "Composite")), config_data.get("path", "")
         
         # Context extraction
-        if context:
-            state_mirror_engine = context.state_mirror_engine
-            subscriber_router = context.subscriber_router
-            base_mqtt_topic = context.base_mqtt_topic_from_path
-            builder_instance = context.builder_instance
-        else:
-            state_mirror_engine = getattr(self, 'state_mirror_engine', None)
-            subscriber_router = getattr(self, 'subscriber_router', None)
-            base_mqtt_topic = kwargs.get("base_mqtt_topic_from_path")
-            builder_instance = kwargs.get("builder_instance") or self
-            context = WidgetContext(state_mirror_engine=state_mirror_engine, subscriber_router=subscriber_router, base_mqtt_topic_from_path=base_mqtt_topic, app_instance=getattr(self, 'app_instance', None), builder_instance=builder_instance, on_focus_widget=getattr(self, 'on_focus_widget', None))
+        state_mirror_engine = getattr(context, 'state_mirror_engine', None)
+        subscriber_router = getattr(context, 'subscriber_router', None)
+        base_mqtt_topic = getattr(context, 'base_mqtt_topic_from_path', None)
+        builder_instance = getattr(context, 'builder_instance', None)
 
         try:
             p_bg = parent_widget.cget("bg") if hasattr(parent_widget, 'cget') and parent_widget.cget("bg").startswith("#") else "#2b2b2b"
@@ -150,16 +142,11 @@ class BuilderCompositeHorizontalDialValueCreator(
             sub_frame.render = sub_frame._draw = sync_bg
             update_from_main()
 
-            if path:
-                topic = state_mirror_engine.register_widget(path, main_value_var, base_mqtt_topic, config_data)
-                bind_variable_trace(main_value_var, lambda: state_mirror_engine.broadcast_gui_change_to_mqtt(path))
-                if subscriber_router and topic: subscriber_router.subscribe_to_topic(topic, state_mirror_engine.sync_incoming_mqtt_to_gui)
-                state_mirror_engine.initialize_widget_state(path)
-
-            return sub_frame
+            sub_frame.variable = main_value_var
+            return sub_frame, sub_frame
         except Exception as e:
             if BUILDER_DEBUG: logger.exception(f"❌🚫🛑 [ERROR] Critical failure creating composite '{label}'")
-            return None
+            return None, None
 
     def make_knob(self, parent_widget, config_data, context=None, **kwargs):
         return BuilderKnobCreator.make(parent_widget, config_data, context, builder_instance=kwargs.pop('builder_instance', self), **kwargs)

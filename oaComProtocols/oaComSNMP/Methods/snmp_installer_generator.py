@@ -72,9 +72,6 @@ class InstallerGenerator:
             "sudo systemctl enable snmpd",
             "",
             'echo "[SNMP] Setup Complete!"',
-            f'echo "[SNMP] Testing: snmpwalk -v2c -c public localhost {base_oid.lstrip(".")}"',
-            "sleep 1",
-            f'snmpwalk -v2c -c public localhost {base_oid.lstrip(".")}',
         ]
         
         return '\n'.join(installer_lines)

@@ -30,11 +30,19 @@ class Aes70DashboardImplementation(tk.Frame):
             self._refresh_ui()
 
     def _find_aes_manager(self, widget):
-        from oaGuiBuilder.Workers.builder import DynamicGuiBuilder
+        """
+        ⚡ DECOUPLED: Searches the widget tree for an AES70 manager without 
+        direct dependency on oaGuiBuilder classes.
+        """
         curr = widget
         while curr:
-            if isinstance(curr, DynamicGuiBuilder) and hasattr(curr, 'app_instance'):
-                return getattr(curr.app_instance, 'aes70_manager', None)
+            # Check for direct attribute or app_instance
+            app = getattr(curr, 'app_instance', None)
+            if app and hasattr(app, 'aes70_manager'):
+                return getattr(app, 'aes70_manager')
+            if hasattr(curr, 'aes70_manager'):
+                return getattr(curr, 'aes70_manager')
+                
             try: curr = curr.master
             except: break
         return None

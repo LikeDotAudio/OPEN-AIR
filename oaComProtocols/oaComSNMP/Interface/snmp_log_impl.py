@@ -6,15 +6,13 @@
 
 import tkinter as tk
 from tkinter import ttk
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
-import os
-import sys
-import pathlib
-from pathlib import Path
-import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
-from loguru import logger
-import orjson
+# --- GUI FALLBACKS (V3.2.1 Decoupling) ---
+try:
+    from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+except ImportError:
+    class TransparencyMixin:
+        """Fallback mixin for standalone execution without GUI manager."""
+        def render(self): pass
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = False
@@ -35,6 +33,13 @@ class SnmpLogImplementation(tk.Frame, TransparencyMixin):
             self.snmp_manager = getattr(self.app_instance, 'snmp_manager', None)
         else:
             self.snmp_manager = self._find_snmp_manager(parent)
+        
+        # Fallback: Find manager via ProtocolRouter if still not found
+        if not self.snmp_manager:
+            try:
+                from oaComProtocols.oaComSNMP.Entry import get_manager
+                self.snmp_manager = get_manager()
+            except Exception: pass
         
         # State tracking: { OID: last_value }
         self._last_values = {}
@@ -66,19 +71,23 @@ class SnmpLogImplementation(tk.Frame, TransparencyMixin):
             self.snmp_manager.add_monitor_callback(self.on_snmp_traffic)
 
     def _find_snmp_manager(self, widget):
-        from oaGuiBuilder.Workers.builder import DynamicGuiBuilder
-        from oaLogging.Methods.matrix_gate import matrix_log
+        """
+        ⚡ DECOUPLED: Searches the widget tree for an SNMP manager without 
+        direct dependency on oaGuiBuilder classes.
+        """
         curr = widget
         while curr:
-            if isinstance(curr, DynamicGuiBuilder):
-                manager = getattr(curr.app_instance, 'snmp_manager', None)
-                if LOCAL_DEBUG:
-                    matrix_log("ui", "snmp", "_find_snmp_manager", f"📡 [DEBUG] SnmpLog: Found DynamicGuiBuilder. App instance has snmp_manager: {manager is not None}")
-                return manager
+            # 1. Direct Attribute Check
+            if hasattr(curr, 'snmp_manager'):
+                return getattr(curr, 'snmp_manager')
+            
+            # 2. App Instance Check (Generic pattern)
+            app = getattr(curr, 'app_instance', None)
+            if app and hasattr(app, 'snmp_manager'):
+                return getattr(app, 'snmp_manager')
+                
             try: curr = curr.master
             except: break
-        if LOCAL_DEBUG:
-            matrix_log("ui", "snmp", "_find_snmp_manager", "?? [DEBUG] SnmpLog: Failed to find snmp_manager in ancestor chain.", "WARNING")
         return None
 
     def _setup_ui(self):

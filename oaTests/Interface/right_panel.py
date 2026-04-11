@@ -13,3 +13,4 @@ class RightPanel(Vertical):
         
         yield Label("System Maintenance", classes="status-label")
         yield Button("CLEAR MENU", id="btn_clear_menu", variant="warning")
+        yield Button("OPEN GUI EDITOR", id="btn_open_gui_editor", classes="violet-button")

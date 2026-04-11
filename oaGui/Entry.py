@@ -39,5 +39,20 @@ def run_tests():
     runner = unittest.TextTestRunner(verbosity=2)
     runner.run(suite)
 
+def start_gui():
+    """Starts the main application GUI."""
+    import tkinter as tk
+    root = tk.Tk()
+    root.title("OPEN-AIR GUI TESTER")
+    root.geometry("1600x1000")
+    
+    app = Application(root, root=root)
+    app.pack(fill="both", expand=True)
+    
+    root.mainloop()
+
 if __name__ == "__main__":
-    run_tests()
+    if "gui" in sys.argv:
+        start_gui()
+    else:
+        run_tests()

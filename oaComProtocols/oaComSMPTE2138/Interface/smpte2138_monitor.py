@@ -20,8 +20,16 @@ from oaComProtocols.oaComSMPTE2138.Managers.smpte2138_monitor_manager import SMP
 # --- Standard OPEN-AIR GUI Imports ---
 from oaLogging.Methods.matrix_gate import matrix_log
 from oaStyle.Core.style import THEMES, DEFAULT_THEME
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 from oaComProtocols.oaComMQTT.Core import mqtt_publisher_service
+
+# --- GUI FALLBACKS (V3.2.1 Decoupling) ---
+try:
+    from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+except ImportError:
+    class TransparencyMixin:
+        """Fallback mixin for standalone execution without GUI manager."""
+        def render(self): pass
+        def _apply_transparency(self, *args, **kwargs): pass
 
 LOCAL_DEBUG = False
 
@@ -48,8 +56,10 @@ class SMPTE2138MonitorImplementation(tk.Frame, TransparencyMixin):
         if builder:
             self._apply_transparency(self, None, {}, builder)
         
-        from oaGuiEditorWYSIWYG.Core.event_bus import event_bus
-        event_bus.subscribe("SMPTE2138_TRAFFIC", self._on_bus_update)
+        try:
+            from oaGuiEditorWYSIWYG.Core.event_bus import event_bus
+            event_bus.subscribe("SMPTE2138_TRAFFIC", self._on_bus_update)
+        except ImportError: pass
         
         self._update_status_loop()
         
@@ -57,10 +67,17 @@ class SMPTE2138MonitorImplementation(tk.Frame, TransparencyMixin):
             matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🖥️ [UI] Elite ST 2138 Monitor Online.", "DEBUG")
 
     def _find_builder(self, widget):
-        from oaGuiBuilder.Workers.builder import DynamicGuiBuilder
+        """
+        ⚡ DECOUPLED: Searches the widget tree for a builder instance without 
+        direct dependency on oaGuiBuilder classes.
+        """
         curr = widget
         while curr:
-            if isinstance(curr, DynamicGuiBuilder): return curr
+            # Check for generic 'builder' or 'app_instance'
+            if hasattr(curr, 'builder'):
+                return getattr(curr, 'builder')
+            if hasattr(curr, 'app_instance'):
+                return curr
             try: curr = curr.master
             except: break
         return None

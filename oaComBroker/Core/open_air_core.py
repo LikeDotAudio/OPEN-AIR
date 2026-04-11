@@ -1,6 +1,7 @@
 import pathlib
 import os
 import sys
+import threading
 current_dir = pathlib.Path(__file__).resolve().parent
 project_root = current_dir.parent.parent
 if str(project_root) not in sys.path:
@@ -98,13 +99,14 @@ def main():
     # software becomes unresponsive.
     watchdog.start_heartbeat(app_constants)
 
-    # ⚡ V3.1.28 TERMINATION: Handle SIGTERM (from supervisor) as a KeyboardInterrupt 
-    # to trigger the graceful cleanup in the 'finally' block.
+    # ⚡ V3.1.29 GRACEFUL SHUTDOWN: Use an event instead of raising an interrupt 
+    # to allow the main thread to finish its current work and enter cleanup safely.
     import signal
+    shutdown_event = threading.Event()
     def handle_sigterm(signum, frame):
         if LOCAL_DEBUG:
-            matrix_log("comms", "broker", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "SIGTERM received. Triggering cleanup...", "DEBUG")
-        raise KeyboardInterrupt
+            matrix_log("comms", "broker", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "SIGTERM received. Signaling graceful stop...", "DEBUG")
+        shutdown_event.set()
     
     signal.signal(signal.SIGTERM, handle_sigterm)
     
@@ -113,7 +115,8 @@ def main():
     state_cache_manager = StateRegistry(mqtt_connection_manager)
 
     from oaComBroker.Core.protocol_router.manager import ProtocolRouter
-    ProtocolRouter.get_instance().set_state_cache(state_cache_manager)
+    router = ProtocolRouter.get_instance()
+    router.set_state_cache(state_cache_manager)
     # launch_core_managers returns a registry of active services.
     managers = launch_core_managers(state_cache_manager, mqtt_connection_manager)
     
@@ -134,7 +137,7 @@ def main():
 
     # 5. --- Primary Execution Loop ---
     try:
-        while True:
+        while not shutdown_event.is_set():
             # Continually "pet" the watchdog to confirm process health.
             watchdog.kick_watchdog()
             # Sleep yields CPU to other processes while maintaining responsiveness.
@@ -150,6 +153,14 @@ def main():
         if LOCAL_DEBUG:
             matrix_log("comms", "broker", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Initiating teardown sequence...", "DEBUG")
         
+        # ⚡ V3.1.29 ORDER OF OPERATIONS: Shutdown the router FIRST to clear observers
+        # and prevent 'main thread not in main loop' errors from UI components.
+        if router:
+            try:
+                router.shutdown()
+            except Exception as e:
+                CORE_LOGGER.error(f"Error during router shutdown: {e}")
+
         # Stop all registered managers to ensure clean socket/thread closure.
         if managers:
             for name, manager in managers.items():

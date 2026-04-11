@@ -16,28 +16,21 @@ app_constants = Config.get_instance()
 from oaGuiManager.Core.factory.button_canvas_base import CanvasButton
 from oaGui.Methods.i18n_utils import get_text
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
-from oaOchestration.Methods.widget_event_binder import bind_variable_trace
-from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic
 from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
+from oaGuiBuilder.Core.base_widget_creator import BaseWidgetCreator
 
 class ToggleButton(CanvasButton):
     """
     A self-contained, stateful Toggle Button.
     Flips between two boolean states and maintains visual consistency.
     """
-    def __init__(self, parent, config, path, state_mirror_engine, base_mqtt_topic, subscriber_router, builder_instance, variable=None, **kwargs):
+    def __init__(self, parent, config, builder_instance, variable=None, **kwargs):
         self.label = get_text(config.get("label"), "Toggle")
-        self.path = path
         self.config_data = config
-        self.state_mirror_engine = state_mirror_engine
-        self.base_mqtt_topic = base_mqtt_topic
-        self.subscriber_router = subscriber_router
         self.builder = builder_instance
         
         # Parse Options for Text
         options_map = config.get("options", {})
-        on_config = options_map.get("ON", {})
-        off_config = options_map.get("OFF", {})
         self.on_text = get_text(config.get("label_active"), self.label if self.label else "ON")
         self.off_text = get_text(config.get("label_inactive"), self.label if self.label else "OFF")
 
@@ -71,15 +64,6 @@ class ToggleButton(CanvasButton):
         self.variable.trace_add("write", self._update_visual_state)
         self._update_visual_state()
 
-        # Registration
-        if self.path and self.state_mirror_engine:
-            topic = self.state_mirror_engine.register_widget(self.path, self.variable, self.base_mqtt_topic, config, instance=self)
-            bind_variable_trace(self.variable, lambda: self.state_mirror_engine.broadcast_gui_change_to_mqtt(self.path))
-            
-            if self.subscriber_router and topic:
-                self.subscriber_router.subscribe_to_topic(topic, self.state_mirror_engine.sync_incoming_mqtt_to_gui)
-            self.state_mirror_engine.initialize_widget_state(self.path)
-
     def _on_toggle(self, event=None):
         """Toggle the boolean state."""
         self.variable.set(not self.variable.get())
@@ -91,17 +75,18 @@ class ToggleButton(CanvasButton):
         self.set_text(self.on_text if is_on else self.off_text)
 
 @WidgetRegistry.register("_GuiButtonToggle", "_SmartToggle", "_ButtonToggle")
-class BuilderButtonToggleCreator(TransparencyMixin):
+class BuilderButtonToggleCreator(BaseWidgetCreator, TransparencyMixin):
     """Factory for creating Toggle Buttons."""
 
-    def make_button_toggle(self, parent_widget, config_data, context=None, **kwargs):
+    def _assemble_ui(self, parent_widget, config_data, context, **kwargs):
+        """
+        Implementation of the Template Method for Toggle Button assembly.
+        """
         ctx = context if context else type('obj', (object,), kwargs)()
-        b_inst = ctx.builder_instance if hasattr(ctx, 'builder_instance') else ctx.app_instance
+        b_inst = getattr(ctx, 'builder_instance', None) or getattr(ctx, 'app_instance', None) or kwargs.get('builder_instance')
         
-        path, b_topic = config_data.get("path"), ctx.base_mqtt_topic_from_path
         label = get_text(config_data.get('label'), "")
 
-        # Main Canvas Container (if label exists)
         if label:
             btn_w = max(1, int(config_data.get("layout", {}).get("width", 100)))
             btn_h = max(1, int(config_data.get("layout", {}).get("height", 50)))
@@ -109,8 +94,6 @@ class BuilderButtonToggleCreator(TransparencyMixin):
                 parent_widget, bd=0, highlightthickness=0, relief="flat",
                 width=btn_w + 10, height=btn_h + 25
             )
-            if hasattr(b_inst, '_apply_transparency'):
-                b_inst._apply_transparency(container, container, config_data, b_inst)
             
             def redraw_labels():
                 if not container.winfo_exists(): return
@@ -129,8 +112,7 @@ class BuilderButtonToggleCreator(TransparencyMixin):
             parent_for_button = parent_widget
 
         button = ToggleButton(
-            parent_for_button, config_data, path, 
-            ctx.state_mirror_engine, b_topic, ctx.subscriber_router, b_inst,
+            parent_for_button, config_data, b_inst,
             variable=kwargs.get("variable")
         )
 
@@ -141,11 +123,15 @@ class BuilderButtonToggleCreator(TransparencyMixin):
                 if hasattr(button, "_draw"): button._draw()
             container._draw = sync_bg
             container.render = sync_bg
-            return container
+            container.variable = button.variable
+            return container, container
         
-        return button
+        return button, button
 
     @staticmethod
     def make(parent_widget, config_data, context=None, **kwargs):
-        creator = BuilderButtonToggleCreator()
-        return creator.make_button_toggle(parent_widget, config_data, context, **kwargs)
+        return BuilderButtonToggleCreator.build(parent_widget, config_data, context, **kwargs)
+
+    def make_button_toggle(self, parent_widget, config_data, context=None, **kwargs):
+        """Legacy compatibility wrapper."""
+        return self.build(parent_widget, config_data, context, **kwargs)

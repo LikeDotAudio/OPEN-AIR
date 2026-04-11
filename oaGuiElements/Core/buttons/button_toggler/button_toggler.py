@@ -16,9 +16,8 @@ app_constants = Config.get_instance()
 from oaGuiManager.Core.factory.button_canvas_base import CanvasButton
 from oaGui.Methods.i18n_utils import get_text
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
-from oaOchestration.Methods.widget_event_binder import bind_variable_trace
-from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic
 from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
+from oaGuiBuilder.Core.base_widget_creator import BaseWidgetCreator
 
 class TogglerButton(CanvasButton):
     """
@@ -86,23 +85,22 @@ class TogglerButton(CanvasButton):
         self.set_text(self.on_text if is_sel else self.off_text)
 
 @WidgetRegistry.register("_GuiButtonToggler", "_SmartToggleGroup", "_ButtonToggler")
-class BuilderButtonTogglerCreator(TransparencyMixin):
+class BuilderButtonTogglerCreator(BaseWidgetCreator, TransparencyMixin):
     """Factory for creating Button Toggler groups."""
 
-    def make_button_toggler(self, parent_widget, config_data, context=None, **kwargs):
+    def _assemble_ui(self, parent_widget, config_data, context, **kwargs):
+        """
+        Implementation of the Template Method for Toggler group assembly.
+        """
         ctx = context if context else type('obj', (object,), kwargs)()
-        b_inst = ctx.builder_instance if hasattr(ctx, 'builder_instance') else ctx.app_instance
+        b_inst = getattr(ctx, 'builder_instance', None) or getattr(ctx, 'app_instance', None) or kwargs.get('builder_instance')
         
-        path, b_topic = config_data.get("path"), ctx.base_mqtt_topic_from_path
+        path = config_data.get("path")
         label = get_text(config_data.get('label'), "")
 
         # 1. Main Canvas Container
         group_canvas = tk.Canvas(parent_widget, bd=0, highlightthickness=0, relief="flat")
-        group_canvas._oca_path = path
         
-        if hasattr(self, '_apply_transparency'):
-            self._apply_transparency(group_canvas, group_canvas, config_data, b_inst)
-
         def redraw_labels():
             if not group_canvas.winfo_exists(): return
             group_canvas.delete("industrial_text")
@@ -124,6 +122,7 @@ class BuilderButtonTogglerCreator(TransparencyMixin):
 
         initial_selected_key = next((k for k, opt in options_data.items() if str(opt.get("selected", "no")).lower() in ["yes", "true"]), "")
         selected_keys_var = kwargs.get("variable") or tk.StringVar(master=parent_widget, value=initial_selected_key)
+        group_canvas.variable = selected_keys_var
 
         layout = config_data.get("layout", {})
         max_cols = int(layout.get("max_cols", 4))
@@ -166,18 +165,10 @@ class BuilderButtonTogglerCreator(TransparencyMixin):
             button.grid(row=row_num, column=col_num, padx=grid_padx, pady=grid_pady, sticky="nsew")
             group_canvas.grid_columnconfigure(col_num, weight=1)
             buttons[option_key] = button
-            if idx == 0 and path: button._oca_path = path 
             
             col_num += 1
             if col_num >= max_cols:
                 col_num, row_num = 0, row_num + 1
-
-        if path and ctx.state_mirror_engine:
-            topic = ctx.state_mirror_engine.register_widget(path, selected_keys_var, b_topic, config_data)
-            bind_variable_trace(selected_keys_var, lambda: ctx.state_mirror_engine.broadcast_gui_change_to_mqtt(path))
-            if ctx.subscriber_router and topic:
-                ctx.subscriber_router.subscribe_to_topic(topic, ctx.state_mirror_engine.sync_incoming_mqtt_to_gui)
-            ctx.state_mirror_engine.initialize_widget_state(path)
 
         def sync_bg():
             redraw_labels()
@@ -187,9 +178,12 @@ class BuilderButtonTogglerCreator(TransparencyMixin):
         group_canvas.render = sync_bg
 
         redraw_labels()
-        return group_canvas
+        return group_canvas, group_canvas
 
     @staticmethod
     def make(parent_widget, config_data, context=None, **kwargs):
-        creator = BuilderButtonTogglerCreator()
-        return creator.make_button_toggler(parent_widget, config_data, context, **kwargs)
+        return BuilderButtonTogglerCreator.build(parent_widget, config_data, context, **kwargs)
+
+    def make_button_toggler(self, parent_widget, config_data, context=None, **kwargs):
+        """Legacy compatibility wrapper."""
+        return self.build(parent_widget, config_data, context, **kwargs)

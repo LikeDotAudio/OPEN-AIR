@@ -9,6 +9,8 @@ import os
 import sys
 import pathlib
 from pathlib import Path
+import tkinter as tk
+from tkinter import ttk
 
 # --- Path Guard: Ensure project root is in sys.path ---
 current_path = Path(__file__).resolve()
@@ -25,16 +27,19 @@ import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
 from loguru import logger
 from oaLogging.Entry import logger as logger_oa
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
-import tkinter as tk
-from tkinter import ttk
-import datetime
 
-# --- Import the Ember Entry point for manager access ---
 try:
     import oaComProtocols.oaComEmber.Entry as EMBER_MODULE
 except ImportError:
     EMBER_MODULE = None
+
+# --- GUI FALLBACKS (V3.2.1 Decoupling) ---
+try:
+    from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+except ImportError:
+    class TransparencyMixin:
+        """Fallback mixin for standalone execution without GUI manager."""
+        def render(self): pass
 
 class EmberDashboardImplementation(tk.Frame, TransparencyMixin):
     """

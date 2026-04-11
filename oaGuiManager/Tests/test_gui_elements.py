@@ -36,44 +36,42 @@ class TestGuiElements(unittest.TestCase):
         config = {
             "label": "TestToggle",
             "path": "test/toggle",
-            "width": 100,
-            "height": 50,
+            "layout": {"width": 100, "height": 50},
             "options": {
                 "ON": {"label_active": "ACTIVE", "selected": True}
             }
         }
-        
+
         # We don't patch Canvas.__init__ here because we have a real root.
         # But we patch Canvas drawing methods to avoid Tcl errors in headless env.
         with patch('tkinter.Canvas.create_text'):
             with patch('oaGuiManager.Core.factory.button_canvas_base.CanvasButton._draw'):
-                creator = BuilderButtonToggleCreator()
-                widget = creator.make_button_toggle(self.root, config, context=self.mock_context)
-                
+                # ⚡ FIXED: Use the standard .build classmethod
+                widget = BuilderButtonToggleCreator.build(self.root, config, context=self.mock_context)
+
                 # Verify we got a Canvas container (because label is present)
                 self.assertIsInstance(widget, tk.Canvas)
-                
+
                 widget.destroy()
 
     def test_toggle_button_logic(self):
         """OPERATE: Toggle the button. CHECK: Verify state and variable updates."""
         config = {"label": "Toggle", "path": "path"}
-        
+
         with patch('oaGuiManager.Core.factory.button_canvas_base.CanvasButton._draw'):
-            # Create the button directly
+            # ⚡ FIXED: Create the button directly with CORRECT signature
+            # def __init__(self, parent, config, builder_instance, variable=None, **kwargs):
             btn = ToggleButton(
-                self.root, config, "path", 
-                self.mock_context.state_mirror_engine, "topic", 
-                self.mock_context.subscriber_router, self.mock_builder
+                self.root, config, self.mock_builder
             )
-            
+
             # Initial state (default False)
             self.assertFalse(btn.variable.get())
-            
+
             # Toggle
             btn._on_toggle()
             self.assertTrue(btn.variable.get())
-            
+
             btn.destroy()
 
 if __name__ == '__main__':

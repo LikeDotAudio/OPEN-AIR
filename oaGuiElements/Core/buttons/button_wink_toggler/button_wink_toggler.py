@@ -24,9 +24,17 @@ from oaGuiElements.Core.buttons.button_wink.button_wink import BuilderButtonWink
 class BuilderButtonWinkTogglerCreator(BuilderButtonWinkCreator):
     """A mixin to create a radio-group of Wink buttons."""
 
+    @staticmethod
+    def make(parent_widget, config_data, context=None, **kwargs):
+        return BuilderButtonWinkTogglerCreator.build(parent_widget, config_data, context, **kwargs)
+
     def make_button_wink_toggler(self, parent_widget, config_data, context=None, **kwargs):
+        """Legacy compatibility wrapper."""
+        return self.build(parent_widget, config_data, context, **kwargs)
+
+    def _assemble_ui(self, parent_widget, config_data, context, **kwargs):
         """Creates a group of Wink buttons where only one can be active."""
-        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️🔘 [BUILDER] Entering make_button_wink_toggler", level="TRACE")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️🔘 [BUILDER] Entering _assemble_ui", level="TRACE")
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📜📑💻 [CONFIG] Raw config received: {config_data}", level="DEBUG")
     
         # Extract config
@@ -95,8 +103,8 @@ class BuilderButtonWinkTogglerCreator(BuilderButtonWinkCreator):
         def sync_bg():
             redraw_group_labels()
             # Background cache might need a kick
-            if hasattr(container, "_apply_transparency"):
-                self._apply_transparency(container, container, config, self)
+            if hasattr(builder_instance, '_apply_transparency'):
+                builder_instance._apply_transparency(container, container, config, builder_instance)
         
         container._draw = sync_bg
         container.render = sync_bg
@@ -212,4 +220,4 @@ class BuilderButtonWinkTogglerCreator(BuilderButtonWinkCreator):
 
         redraw_group_labels()
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"✅🆗🔘 [SUCCESS] The wink toggler group '{label}' has materialized!", level="SUCCESS")
-        return container
+        return container, container

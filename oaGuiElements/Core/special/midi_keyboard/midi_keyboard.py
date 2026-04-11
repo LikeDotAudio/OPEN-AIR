@@ -184,6 +184,8 @@ class MidiKeyboard(tk.Canvas):
             note = 0
             velocity = 0
             
+            matrix_log("comms", "midi", "handle_midi", f"🎹 [KEYBOARD] Incoming MIDI: {msg}", "DEBUG")
+
             if isinstance(msg, dict):
                 channel = msg.get("channel", 0)
                 note = msg.get("note", 0)
@@ -210,11 +212,13 @@ class MidiKeyboard(tk.Canvas):
 
             if m_type in ["note_on", "note_off"]:
                 color = get_midi_color(channel)
+                matrix_log("comms", "midi", "handle_midi", f"🎹 [KEYBOARD] Dispatching: type={m_type}, note={note}, channel={channel}, color={color}", "DEBUG")
                 if m_type == "note_on" and velocity > 0:
                     self.note_on(note, color)
                 else:
                     self.note_off(note)
         except Exception as e:
+            matrix_log("comms", "midi", "handle_midi", f"🎹 ❌ Keyboard Visualizer Error: {e}", "ERROR")
             logger.error(f"🎹 Keyboard Visualizer Error: {e}")
 
     def note_on(self, note, color):

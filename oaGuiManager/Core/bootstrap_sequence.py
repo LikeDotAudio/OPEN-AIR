@@ -60,8 +60,23 @@ class AsyncBootstrapEngine:
                 state_cache=services["state_cache"]
             ))
 
-        except Exception:
-            logger.exception("🖥️🏗️🎨 [UI] Bootstrap Failure")
+        except Exception as e:
+            # Only log the full traceback if LOCAL_DEBUG is explicitly enabled to avoid spam during tests
+            local_debug = False
+            try:
+                if hasattr(self.app_constants, 'LOCAL_DEBUG'):
+                    val = getattr(self.app_constants, 'LOCAL_DEBUG')
+                    # If it's a MagicMock, it will be truthy but not True.
+                    # We only want to trigger exception() if it's explicitly True.
+                    if val is True:
+                        local_debug = True
+            except: pass
+
+            if local_debug:
+                logger.exception("🖥️🏗️🎨 [UI] Bootstrap Failure")
+            else:
+                logger.error(f"🖥️🏗️🎨 [UI] Bootstrap Failure: {e}")
+            
             self.root.after(0, self.shutdown_coordinator.on_closing)
 
     def _connect_communication_services(self, mqtt_conn, sub_router, state_cache):

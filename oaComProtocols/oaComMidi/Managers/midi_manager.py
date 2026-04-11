@@ -34,8 +34,9 @@ from ..Core.midi_protocol_mapper import MIDIProtocolMapper
 class MidiManager:
     """Manages bidirectional MIDI communication across ALL available ports."""
 
-    def __init__(self, state_cache_manager=None, run_bridge=True):
+    def __init__(self, state_cache_manager=None, run_bridge=True, auto_start=True):
         self.run_bridge, self.state_cache_manager = run_bridge, state_cache_manager
+        self.auto_start = auto_start
         self._running = False
         
         # ⚡ THREAD SAFETY: Protect shared mutable state
@@ -90,7 +91,10 @@ class MidiManager:
             info = self.get_port_info()
             matrix_log("comms", "midi", "start", 
                        f"🎹 [MIDI-MGR] Found {len(info.get('inputs', []))} inputs, {len(info.get('outputs', []))} outputs.", "INFO")
-            self.ports.open_all(info, self._midi_listen_loop)
+            
+            if self.auto_start:
+                self.ports.open_all(info, self._midi_listen_loop)
+            
             self._broadcast_status()
         else:
             # In Observer mode, we rely on Core to broadcast status over MQTT.
@@ -106,12 +110,13 @@ class MidiManager:
             for p, n in [("Inputs", [p.name for p in self.ports.inports]), ("Outputs", [p.name for p in self.ports.outports])]:
                 self.state_cache_manager.handle_external_update(f"OPEN-AIR/System/Status/MIDI/Active{p}", n, source="MIDI")
 
-    def _midi_listen_loop(self, port):
+    def _midi_listen_loop(self, port, _one_shot=False):
         matrix_log("comms", "midi", "_midi_listen_loop", 
                    f"▶️ [MIDI-LISTEN] Started listening on port: {port.name}", "DEBUG")
         
         last_heartbeat = 0
         while self._running:
+            if not self._running: break
             try:
                 # Periodic heartbeat to prove loop is alive (every 30s)
                 if time.time() - last_heartbeat > 30:
@@ -165,6 +170,7 @@ class MidiManager:
             except Exception as e:
                 midi_logger.error(f"Listen Error on {port.name}: {e}")
             
+            if _one_shot: break
             time.sleep(0.001)
 
     def publish(self, topic, val, meta=None):
@@ -233,15 +239,24 @@ class MidiManager:
             if isinstance(meta, dict) and "raw" in meta:
                 self._notify_monitor(direction, meta)
             elif isinstance(val, dict) and "raw" in val:
+                # ⚡ V3.2.1 ENHANCEMENT: If payload is a full MIDI mirror, pass it as-is
                 self._notify_monitor(direction, val)
-            elif isinstance(val, (int, float, dict)) and is_midi_topic:
+            elif is_midi_topic:
+                # Fallback for primitive MQTT value updates
                 real_val = val.get("val") if isinstance(val, dict) else val
                 note_match = re.search(r"note(\d+)", topic)
                 note = int(note_match.group(1)) if note_match else 0
                 
+                # Try to extract channel from topic as well
+                channel_match = re.search(r"ch(\d+)", topic)
+                channel = int(channel_match.group(1)) if channel_match else 0
+
                 self._notify_monitor(direction, {
                     "val": real_val, 
                     "topic": topic, 
                     "note": note,
-                    "type": "note_on" if real_val > 0 else "note_off"
+                    "channel": channel,
+                    "velocity": real_val if real_val <= 127 else 127,
+                    "type": "note_on" if real_val > 0 else "note_off",
+                    "raw": f"note={note} channel={channel} velocity={real_val}"
                 })

@@ -7,7 +7,14 @@
 import tkinter as tk
 from tkinter import ttk
 import json
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+
+# --- GUI FALLBACKS (V3.2.1 Decoupling) ---
+try:
+    from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+except ImportError:
+    class TransparencyMixin:
+        """Fallback mixin for standalone execution without GUI manager."""
+        def render(self): pass
 
 class SnmpStatusImplementation(tk.Frame, TransparencyMixin):
     """
@@ -28,6 +35,16 @@ class SnmpStatusImplementation(tk.Frame, TransparencyMixin):
         if not self.mqtt_client or not self.subscriber_router:
             self.mqtt_client, self.subscriber_router = self._find_mqtt_services(parent)
         
+        # Fallback: Find MQTT services via ProtocolRouter if still not found
+        if not self.mqtt_client:
+            try:
+                from oaComBroker.Core.protocol_router.manager import ProtocolRouter
+                router = ProtocolRouter.get_instance()
+                self.mqtt_client = getattr(router, "mqtt_manager", None)
+                if not self.subscriber_router:
+                    self.subscriber_router = getattr(self.mqtt_client, "subscriber_router", None)
+            except Exception: pass
+
         self._flash_state = False
         self._is_offline = True
         self._last_status = {}
@@ -41,14 +58,20 @@ class SnmpStatusImplementation(tk.Frame, TransparencyMixin):
             self.refresh_script()
 
     def _find_mqtt_services(self, widget):
-        from oaGuiBuilder.Workers.builder import DynamicGuiBuilder
+        """
+        ⚡ DECOUPLED: Searches the widget tree for MQTT services without 
+        direct dependency on oaGuiBuilder classes.
+        """
         curr = widget
         while curr:
-            if isinstance(curr, DynamicGuiBuilder) and hasattr(curr, 'app_instance'):
-                app = curr.app_instance
+            # Check for direct attributes or app_instance
+            app = getattr(curr, 'app_instance', None)
+            if app:
                 mqtt_conn = getattr(app, 'mqtt_connection_manager', None)
                 sub_router = getattr(app, 'subscriber_router', None)
-                return mqtt_conn, sub_router
+                if mqtt_conn:
+                    return mqtt_conn, sub_router
+            
             try: curr = curr.master
             except: break
         return None, None

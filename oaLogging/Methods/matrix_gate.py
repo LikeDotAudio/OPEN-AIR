@@ -6,6 +6,7 @@
 # Optimized with native Rust oalogginggate_rs for nanosecond checks.
 
 import functools
+import inspect
 from typing import Any, Callable
 from loguru import logger
 
@@ -70,12 +71,10 @@ def matrix_log(system: str, element: str = None, func_name: str = None,
         return
 
     from oaLogging.Core.logger import get_logger
-    
     protocol_tag = None
     # ⚡ STANDARDIZATION: If system is "comms", ensure 📡 emoji and unified naming
     if system.lower() == "comms":
         category = element.upper() if element else "COMMS"
-        # We don't need to specify 'COMM: ' here as get_logger adds it for comms elements
         context_logger = get_logger(category, emoji_prefix="📡")
         
         # ⚡ V3.1.20 SEGREGATION: Assign protocol tag for sink filtering
@@ -83,19 +82,23 @@ def matrix_log(system: str, element: str = None, func_name: str = None,
             el_up = element.upper()
             if el_up == "BROKER":
                 protocol_tag = "BROKER"
-            elif el_up in ["OSC", "MIDI", "MQTT", "SNMP", "VISA", "AES70", "REST", "EMBER", "SMPTE2138", "GUI"]:
+            elif el_up in ["OSC", "MIDI", "MQTT", "SNMP", "VISA", "AES70", "REST", "EMBER", "SMPTE2138", "BROKER", "GUI", "WYSIWYG"]:
                 protocol_tag = el_up
     else:
         cat_name = element.upper() if element else system.upper()
         context_logger = get_logger(cat_name)
         
-        # ⚡ V3.1.20 GUI/BROKER DETECTION:
+        # ⚡ V3.1.20 GUI/BROKER/WYSIWYG DETECTION:
         if cat_name in ["GUI", "OAGUI"]: protocol_tag = "GUI"
-        if cat_name == "BROKER": protocol_tag = "BROKER"
+        elif cat_name == "BROKER": protocol_tag = "BROKER"
+        elif "WYSIWYG" in cat_name: protocol_tag = "WYSIWYG"
 
+    # Use .opt(depth=1) to ensure the caller's filename/line is preserved
+    bound_logger = context_logger.opt(depth=1)
+    if protocol_tag:
+        bound_logger = bound_logger.bind(protocol=protocol_tag)
         
-    log_func = getattr(context_logger.opt(depth=1).bind(protocol=protocol_tag), 
-                        level.lower(), context_logger.debug)
+    log_func = getattr(bound_logger, level.lower(), bound_logger.debug)
     log_func(message)
 
 

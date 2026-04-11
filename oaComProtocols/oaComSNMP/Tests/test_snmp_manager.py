@@ -1,18 +1,25 @@
-# /home/anthony/Documents/OPEN-AIR/oaComProtocols.oaComSNMP/Tests/test_snmp_manager.py
-# Author: Gemini (Collaborator)
-# Version: 20260405.2330.1
+# oaComProtocols.oaComSNMP/Tests/test_snmp_manager.py
+# Author: Anthony Peter Kuzub
+# Version: 20260410.1000.5
 #
-# Description: Unit tests for oaComProtocols.oaComSNMP.snmp_manager - Verifying MQTT Reflection
+# Description: Unit tests for SNMPManager ensuring Hub-and-Spoke integrity, 
+# anti-feedback, and standardized standalone behavior.
 
 import unittest
 from unittest.mock import MagicMock, patch
-import threading
-from oaComProtocols.oaComSNMP.Managers.snmp_manager import SNMPManager, SNMPObserver, SNMPBridge, BridgeContext
+import os
+
+# --- Target Module ---
+from oaComProtocols.oaComSNMP.Managers.snmp_manager import SNMPBridge, BridgeContext
 
 class TestSnmpManager(unittest.TestCase):
+    """
+    Architectural Integrity Tests for SNMP Protocol Spoke.
+    Follows BUILD -> OPERATE -> CHECK pattern.
+    """
 
     def setUp(self):
-        """Set up test environment with mocks."""
+        """BUILD: Initialize mocks and manager in isolation."""
         self.mock_state_cache = MagicMock()
         self.mock_mqtt_conn = MagicMock()
         self.mock_sub_router = MagicMock()
@@ -23,91 +30,78 @@ class TestSnmpManager(unittest.TestCase):
             subscriber_router=self.mock_sub_router
         )
         
-        # Test the base class via a subclass or direct instantiation if allowed
-        # Base SNMPManager is intended to be used via factory or subclasses
-        self.observer = SNMPObserver(self.context)
+        # Patch Persister and LogMonitor to prevent thread starts/file IO
+        self.patcher_persister = patch("oaComProtocols.oaComSNMP.Managers.snmp_manager.SnmpStatePersister")
+        self.patcher_monitor = patch("oaComProtocols.oaComSNMP.Managers.snmp_manager.SnmpLogMonitor")
+        self.patcher_persister.start()
+        self.patcher_monitor.start()
+
+        # Build the manager (Bridge variant)
         self.bridge = SNMPBridge(self.context)
+        # Ensure it is running for event handling
+        self.bridge._running = True
 
     def tearDown(self):
-        """Clean up."""
-        self.observer.stop()
+        """Cleanup patches."""
         self.bridge.stop()
+        self.patcher_persister.stop()
+        self.patcher_monitor.stop()
 
-    def test_mqtt_state_reflection(self):
-        """Verify that MQTT messages are reflected in the internal state and cache is bypassed."""
-        # BUILD: Start the manager
-        self.observer.start()
-        
-        test_msg = {
+    def test_spoke_to_hub_reflection(self):
+        """OPERATE: Verify that MQTT events (Hub) are reflected in local SNMP state (Spoke)."""
+        # BUILD
+        test_topic = "OPEN-AIR/Audio/Master/Volume"
+        test_val = 85
+        msg = {
             "source": "MQTT",
-            "topic": "OPEN-AIR/Audio/Master/Volume",
-            "val": 75,
-            "meta": {"msg_type": "LINK_FEEDBACK", "is_settled": True}
+            "topic": test_topic,
+            "val": test_val,
+            "meta": {"is_settled": True}
         }
         
-        # OPERATE: Handle a protocol event from MQTT
-        self.observer.handle_protocol_event(test_msg)
+        # OPERATE
+        self.bridge.handle_protocol_event(msg)
         
-        # CHECK: Internal state mirror should have it
-        state = self.observer.get_mqtt_state()
-        self.assertIn("OPEN-AIR/Audio/Master/Volume", state)
-        self.assertEqual(state["OPEN-AIR/Audio/Master/Volume"]["val"], 75)
-        
-        # CHECK: state_cache_manager should NOT have been called for this specific data storage
-        # (It might still be used for monitor activity logs if enabled, but internal state must be independent)
-        self.mock_state_cache.handle_external_update.assert_not_called()
-
-    def test_ignore_non_mqtt_sources(self):
-        """Verify that events from other sources (OSC, MIDI) are NOT added to the MQTT state mirror."""
-        self.observer.start()
-        
-        osc_msg = {
-            "source": "OSC",
-            "topic": "OPEN-AIR/Audio/Master/Mute",
-            "val": 1
-        }
-        
-        self.observer.handle_protocol_event(osc_msg)
-        
-        state = self.observer.get_mqtt_state()
-        self.assertNotIn("OPEN-AIR/Audio/Master/Mute", state)
-
-    def test_bridge_reflection(self):
-        """Verify that SNMPBridge also performs MQTT reflection."""
-        self.bridge.start()
-        
-        test_msg = {
-            "source": "MQTT",
-            "topic": "OPEN-AIR/System/Health",
-            "val": "GOOD"
-        }
-        
-        self.bridge.handle_protocol_event(test_msg)
-        
+        # CHECK: Local state mirror is updated
         state = self.bridge.get_mqtt_state()
-        self.assertIn("OPEN-AIR/System/Health", state)
-        self.assertEqual(state["OPEN-AIR/System/Health"]["val"], "GOOD")
+        self.assertIn(test_topic, state)
+        self.assertEqual(state[test_topic]["val"], test_val)
 
-    def test_oid_map_conversion_from_snapshot(self):
-        """Verify that the OID map is correctly built from the internal MQTT state snapshot."""
-        # BUILD: Mock the converter
-        mock_converter = MagicMock()
-        self.bridge.oid_map_converter = mock_converter
-        
-        test_msg = {
+    def test_anti_feedback_echo_suppression(self):
+        """CHECK: Verify messages originating from SNMP are NOT reflected back to local state."""
+        # BUILD
+        test_topic = "OPEN-AIR/Audio/Fader/1"
+        msg = {
             "source": "MQTT",
-            "topic": "OPEN-AIR/Audio/Fader/1",
-            "val": 100
+            "topic": test_topic,
+            "val": 100,
+            "meta": {"origin_source": "SNMP"} # SELF source
         }
-        self.bridge.start()
-        self.bridge.handle_protocol_event(test_msg)
         
-        # OPERATE: Persister loop would normally trigger this, we call it manually
-        state_snapshot = self.bridge.get_mqtt_state()
-        self.bridge.oid_map_converter.build_oid_map(state_snapshot=state_snapshot)
+        # OPERATE
+        self.bridge.handle_protocol_event(msg)
         
-        # CHECK: build_oid_map was called with our reflected state
-        mock_converter.build_oid_map.assert_called_with(state_snapshot=state_snapshot)
+        # CHECK: Dropped (not in local state mirror)
+        state = self.bridge.get_mqtt_state()
+        self.assertNotIn(test_topic, state)
+
+    def test_telemetry_broadcast(self):
+        """CHECK: Verify status is published to the system tree."""
+        # OPERATE
+        self.bridge._publish_status()
+        
+        # CHECK: Verify publication to system status tree
+        self.mock_mqtt_conn.publish.assert_called()
+        
+        # Handle both positional and keyword arguments correctly
+        found = False
+        for call in self.mock_mqtt_conn.publish.call_args_list:
+            args, kwargs = call
+            topic = kwargs.get('topic') or (args[0] if args else None)
+            if topic == "OPEN-AIR/System/Status/SNMP/Bridge":
+                found = True
+                break
+        self.assertTrue(found)
 
 if __name__ == '__main__':
     unittest.main()

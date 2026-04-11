@@ -268,3 +268,11 @@ class Monitor:
                 cb(msg)
             except Exception as e:
                 matrix_log("comms", "broker", "broadcast_to_observers", f"BROADCAST ERROR to {cb}: {e}", "ERROR")
+
+    def shutdown(self):
+        """
+        ⚡ V3.1.29 GRACEFUL SHUTDOWN: Clears all observers to prevent 
+        'main thread is not in main loop' errors during system teardown.
+        """
+        self._observers = []
+        matrix_log("comms", "broker", "shutdown", "Monitor observers cleared.", "DEBUG")

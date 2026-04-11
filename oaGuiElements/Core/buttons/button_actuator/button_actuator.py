@@ -23,6 +23,8 @@ from oaGui.Methods.i18n_utils import get_text
 from .Core.actuator_interaction_mixin import ActuatorInteractionMixin
 from .Core.actuator_state_mixin import ActuatorStateMixin
 
+from oaGuiBuilder.Core.base_widget_creator import BaseWidgetCreator
+
 class ActuatorButton(CanvasButton, ActuatorInteractionMixin, ActuatorStateMixin):
     """
     A self-contained, stateful Momentary Actuator Button.
@@ -76,37 +78,33 @@ class ActuatorButton(CanvasButton, ActuatorInteractionMixin, ActuatorStateMixin)
                 self.subscriber_router.unsubscribe_from_topic(self._status_topic, self._on_mqtt_state_update)
 
 @WidgetRegistry.register("_GuiActuator", "_SmartActuator", "_ButtonActuator", "_GuiButton")
-class BuilderButtonActuatorCreator(TransparencyMixin):
+class BuilderButtonActuatorCreator(BaseWidgetCreator, TransparencyMixin):
     """Factory for creating Actuator Buttons."""
 
-    def make_button_actuator(self, parent_widget, config_data, context=None, **kwargs):
-        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️🔘 [BUILDER] Creating ActuatorButton.", level="TRACE")
+    def _assemble_ui(self, parent_widget, config_data, context, **kwargs):
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️🔘 [BUILDER] Entering _assemble_ui", level="TRACE")
         
         ctx = context if context else type('obj', (object,), kwargs)()
-        b_inst = ctx.builder_instance if hasattr(ctx, 'builder_instance') else ctx.app_instance
+        b_inst = getattr(ctx, 'builder_instance', None) or getattr(ctx, 'app_instance', None) or kwargs.get('builder_instance')
         
         label, path = get_text(config_data.get("label")), config_data.get("path")
-        b_topic = ctx.base_mqtt_topic_from_path
+        b_topic = getattr(ctx, 'base_mqtt_topic_from_path', None) or kwargs.get('base_mqtt_topic_from_path')
         
         button = ActuatorButton(
             parent_widget, config_data, path, 
-            ctx.state_mirror_engine, b_topic, ctx.subscriber_router, b_inst
+            getattr(ctx, 'state_mirror_engine', None) or kwargs.get('state_mirror_engine'),
+            b_topic,
+            getattr(ctx, 'subscriber_router', None) or kwargs.get('subscriber_router'),
+            b_inst
         )
 
-        # Layout Application (Grid)
-        lay = config_data.get("layout", {})
-        if "row" in lay and "column" in lay:
-            button.grid(
-                row=lay["row"], column=lay["column"],
-                columnspan=lay.get("col_span", 1), rowspan=lay.get("row_span", 1),
-                padx=lay.get("padx", 5), pady=lay.get("pady", 2),
-                sticky=lay.get("sticky", "")
-            )
-
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"✅🆗🔘 [SUCCESS] The actuator '{get_text(config_data.get('label'), 'Unknown')}' has materialized!", level="SUCCESS")
-        return button
+        return button, button
 
     @staticmethod
     def make(parent_widget, config_data, context=None, **kwargs):
-        creator = BuilderButtonActuatorCreator()
-        return creator.make_button_actuator(parent_widget, config_data, context, **kwargs)
+        return BuilderButtonActuatorCreator.build(parent_widget, config_data, context, **kwargs)
+
+    def make_button_actuator(self, parent_widget, config_data, context=None, **kwargs):
+        """Legacy compatibility wrapper."""
+        return self.build(parent_widget, config_data, context, **kwargs)

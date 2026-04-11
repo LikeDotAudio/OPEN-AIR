@@ -90,14 +90,14 @@ class UICompositionRoot:
         if self.app_constants.SCAN_OSC:
             self.services["osc_manager"] = OSCManager(state_cache, mqtt_conn, run_bridge=True)
         
-        if self.app_constants.SCAN_SNMP:
-            import oaComProtocols.oaComSNMP.Entry as snmp_entry
-            self.services["snmp_manager"] = snmp_entry.get_manager(
-                state_cache_manager=state_cache, 
-                mqtt_connection_manager=mqtt_conn, 
-                subscriber_router=sub_router, 
-                run_bridge=False
-            )
+        # if self.app_constants.SCAN_SNMP:
+        #     import oaComProtocols.oaComSNMP.Entry as snmp_entry
+        #     self.services["snmp_manager"] = snmp_entry.get_manager(
+        #         state_cache_manager=state_cache, 
+        #         mqtt_connection_manager=mqtt_conn, 
+        #         subscriber_router=sub_router, 
+        #         run_bridge=False
+        #     )
             
         self.services["midi_manager"] = MidiManager(state_cache, run_bridge=False)
         self.services["rest_manager"] = RESTManager(state_cache, protocol_router)

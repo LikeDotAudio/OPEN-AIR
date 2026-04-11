@@ -7,7 +7,14 @@
 
 import tkinter as tk
 from tkinter import ttk
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+
+# --- GUI FALLBACKS (V3.2.1 Decoupling) ---
+try:
+    from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+except ImportError:
+    class TransparencyMixin:
+        """Fallback mixin for standalone execution without GUI manager."""
+        def render(self): pass
 
 class SnmpVerifyOidImplementation(tk.Frame, TransparencyMixin):
     """
@@ -16,15 +23,40 @@ class SnmpVerifyOidImplementation(tk.Frame, TransparencyMixin):
     """
     def __init__(self, parent, json_path=None, config=None, **kwargs):
         super().__init__(parent, **kwargs)
-        self.snmp_manager = self._find_snmp_manager(parent)
+        self.config = config or {}
+        
+        # ? DEPENDENCY INJECTION: Use the app_instance from the config if available
+        self.app_instance = self.config.get("app_instance")
+        if self.app_instance:
+            self.snmp_manager = getattr(self.app_instance, 'snmp_manager', None)
+        else:
+            self.snmp_manager = self._find_snmp_manager(parent)
+        
+        # Fallback: Find manager via ProtocolRouter if still not found
+        if not self.snmp_manager:
+            try:
+                from oaComProtocols.oaComSNMP.Entry import get_manager
+                self.snmp_manager = get_manager()
+            except Exception: pass
+
         self._setup_ui()
 
     def _find_snmp_manager(self, widget):
-        from oaGuiBuilder.Workers.builder import DynamicGuiBuilder
+        """
+        ⚡ DECOUPLED: Searches the widget tree for an SNMP manager without 
+        direct dependency on oaGuiBuilder classes.
+        """
         curr = widget
         while curr:
-            if isinstance(curr, DynamicGuiBuilder) and hasattr(curr, 'app_instance'):
-                return getattr(curr.app_instance, 'snmp_manager', None)
+            # 1. Direct Attribute Check
+            if hasattr(curr, 'snmp_manager'):
+                return getattr(curr, 'snmp_manager')
+            
+            # 2. App Instance Check (Generic pattern)
+            app = getattr(curr, 'app_instance', None)
+            if app and hasattr(app, 'snmp_manager'):
+                return getattr(app, 'snmp_manager')
+                
             try: curr = curr.master
             except: break
         return None

@@ -6,7 +6,8 @@
 
 import tkinter as tk
 from tkinter import ttk
-from loguru import logger
+from oaLogging.Core.logger import WYSIWYG_LOGGER
+logger = WYSIWYG_LOGGER.bind(protocol="WYSIWYG")
 from oaLogging.Methods.matrix_gate import matrix_log
 
 class PaletteManager(tk.Frame):

@@ -18,8 +18,9 @@ from oaComProtocols.oaComNmos.Core.utils import gen_id, get_ip
 from oaComProtocols.oaComNmos.Core.nmos_builder import build_node, build_device
 from oaComProtocols.oaComNmos.Constants import settings
 from oaComProtocols.oaComNmos.Managers import registration_manager
-from oaComProtocols.oaComNmos.Workers import sap_listener_worker, heartbeat_worker
-from oaComProtocols.oaComNmos import Interface # Import the interface module to access its components
+from oaComProtocols.oaComNmos.Workers.sap_listener_worker import sap_listener_worker, heartbeat_worker
+from oaComProtocols.oaComNmos import Interface
+from oaComProtocols.oaComNmos.Interface import connection_api
 
 # --- Test Runner Logic ---
 def run_module_tests():
@@ -69,7 +70,6 @@ def run_module_tests():
         print(f"No 'Tests' directory found for module '{os.path.basename(module_root)}' at {tests_dir}. Skipping test execution.")
 
 # --- Global State Management ---
-# A dictionary to hold all mutable shared states accessible by threads and modules.
 global_state = {
     "NODE_ID": None,
     "DEVICE_ID": None,
@@ -78,21 +78,78 @@ global_state = {
     "SOURCES": {},
     "FLOWS": {},
     "SENDERS": {},
-    "STREAMS": {}, # Shared state for SAP listener and Connection API
-    "REGISTRAR_URL": None,
-    "RUNNING": True, # Flag to control worker thread loops
+    "STREAMS": {},
+    "REGISTRAR_URL": "http://localhost:4000",
+    "RUNNING": False,
 }
 
-# Global variable to hold the HTTP server instance for graceful shutdown.
 httpd_server = None
+
+def start(registrar_url=None):
+    """Standardized start command for NMOS bridge."""
+    global httpd_server
+    if global_state["RUNNING"]: return
+    
+    if registrar_url:
+        global_state["REGISTRAR_URL"] = registrar_url
+        
+    global_state["RUNNING"] = True
+    host_ip = get_ip()
+    global_state["NODE_ID"] = gen_id()
+    global_state["DEVICE_ID"] = gen_id()
+    
+    global_state["NODE"] = build_node(global_state["NODE_ID"], host_ip, settings.PORT)
+    global_state["DEVICE"] = build_device(global_state["DEVICE_ID"], global_state["NODE_ID"], host_ip, settings.PORT)
+
+    registration_manager.register_all_resources(
+        global_state["REGISTRAR_URL"],
+        global_state["NODE"],
+        global_state["DEVICE"],
+        global_state["SOURCES"],
+        global_state["FLOWS"],
+        global_state["SENDERS"]
+    )
+
+    # Start Workers
+    threading.Thread(target=sap_listener_worker, args=(global_state["REGISTRAR_URL"], global_state["NODE_ID"], global_state["DEVICE_ID"], host_ip, global_state, registration_manager), daemon=True).start()
+    threading.Thread(target=heartbeat_worker, args=(global_state["REGISTRAR_URL"], global_state["NODE_ID"], global_state, registration_manager), daemon=True).start()
+
+    # Start API Server
+    connection_api.NODE = global_state["NODE"]
+    connection_api.DEVICE = global_state["DEVICE"]
+    connection_api.SOURCES = global_state["SOURCES"]
+    connection_api.FLOWS = global_state["FLOWS"]
+    connection_api.SENDERS = global_state["SENDERS"]
+    connection_api.STREAMS = global_state["STREAMS"]
+
+    server_address = ("0.0.0.0", settings.PORT)
+    httpd_server = HTTPServer(server_address, connection_api.NmosConnectionApiHandler)
+    threading.Thread(target=httpd_server.serve_forever, daemon=True).start()
+    print(f"🚀 [NMOS] NMOS Bridge & API Server active on {host_ip}:{settings.PORT}")
+
+def stop():
+    """Standardized stop command."""
+    global httpd_server
+    global_state["RUNNING"] = False
+    if httpd_server:
+        httpd_server.shutdown()
+        httpd_server = None
+    print("🛑 [NMOS] NMOS Bridge & API Server stopped.")
+
+def status():
+    """Standardized status command."""
+    return {
+        "running": global_state["RUNNING"],
+        "node_id": global_state["NODE_ID"],
+        "registrar": global_state["REGISTRAR_URL"]
+    }
 
 def shutdown_handler(sig, frame):
     """
     Gracefully handles shutdown signals (SIGINT, SIGTERM) by setting the RUNNING
     flag to False and shutting down the HTTP server.
     """
-    print("
-[Entry] Shutdown signal received. Stopping services...")
+    print("[Entry] Shutdown signal received. Stopping services...")
     global_state["RUNNING"] = False # Signal worker threads to stop their loops
 
     # Attempt to shut down the HTTP server gracefully if it's running.
@@ -191,8 +248,8 @@ def main():
     # Instantiate and start the HTTP server for the Connection API.
     # We run it in a separate thread so the main thread can manage signals and keep alive.
     server_address = ("0.0.0.0", settings.PORT)
-    # Use HTTPServer from connection_api module, assuming it's correctly imported.
-    httpd_server = connection_api.HTTPServer(server_address, connection_api.NmosConnectionApiHandler)
+    # Use locally imported HTTPServer for easier patching
+    httpd_server = HTTPServer(server_address, connection_api.NmosConnectionApiHandler)
     
     server_runner_thread = threading.Thread(target=httpd_server.serve_forever, name="ConnectionAPIServerThread")
     server_runner_thread.daemon = True
@@ -261,3 +318,5 @@ if __name__ == "__main__":
 
     # If tests passed or were skipped, proceed with the original main execution logic.
     main()
+
+__all__ = ["start", "stop", "status", "main", "run_module_tests"]

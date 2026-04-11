@@ -1,7 +1,7 @@
 # oaComSMPTE2138 Protocol Shifter Documentation
 
 ## 1. Incoming Message (Hardware/Spoke)
-*   **Format**: Raw data packet from the transport (e.g., MIDI Bytes, OSC UDP datagram).
+*   **Format**: Raw data packet from the transport (e.g., Binary Bytes, UDP datagram).
 *   **Action**: Ingested by the Spoke Manager, normalized into the internal Unified Message Schema.
 *   **Metadata**: Identity (GUID), timestamp, and transport-specific parameters are extracted.
 
@@ -23,7 +23,7 @@
 *   **Filtering**: `is_settled` or reflection logic applied.
 
 ## 4. Transmitted Message (Outbound Hardware)
-*   **Format**: Transport-native data (e.g., binary SysEx, OSC address string).
+*   **Format**: Transport-native data (e.g., binary payload, address string).
 *   **Action**: Final payload is mapped from the MQTT topic to the protocol address and emitted to physical hardware.
 
 ## Data Movement Pipeline

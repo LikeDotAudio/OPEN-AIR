@@ -92,18 +92,13 @@ class SMPTE2138BridgeManager:
 
     def _setup_subscriptions(self):
         """Registers listeners for internal actions and remote control."""
-        # As per requirements, ST2138 should NOT publish commands it gets from other protocols.
-        # It should ONLY MQTT publish what it receives via SMPTE 2138.
         # 1. Action Triggers (Raw MQTT fallback)
         # self.router.subscribe_to_topic("oa/action/#", self._on_internal_action)
         
-        # 2. MIDI Triggers (Direct MQTT bridge)
-        # self.router.subscribe_to_topic("OPEN-AIR/MIDI/#", self._on_internal_action)
-        
-        # 3. Remote Bridge Control (from GUI)
+        # 2. Remote Bridge Control (from GUI)
         self.router.subscribe_to_topic("OPEN-AIR/System/Control/SMPTE2138/Bridge", self._on_remote_control)
         
-        matrix_log("comms", "smpte2138", "_setup_subscriptions", "👂 [LISTEN] Bridge active and listening for control (Actions & MIDI).", "DEBUG")
+        matrix_log("comms", "smpte2138", "_setup_subscriptions", "👂 [LISTEN] Bridge active and listening for control (Actions & Status).", "DEBUG")
 
 
     def handle_router_event(self, topic, val, meta=None):
@@ -151,12 +146,13 @@ class SMPTE2138BridgeManager:
         if block_name and field_name:
             oid = f"{block_name}/{field_name}"
         
-        # ⚡ MIDI FALLBACK: If it's a MIDI topic, generate a dynamic OID based on path
-        if not oid and "OPEN-AIR/MIDI/" in topic:
+        # ⚡ GENERIC FALLBACK: If no OID is mapped, use a portion of the topic path.
+        if not oid:
+            # We strip the root namespace to create a relative OID
             oid = topic.replace("OPEN-AIR/", "")
         
         if not oid: 
-            # Silent skip for unmapped non-MIDI topics
+            # Silent skip for unmapped or empty topics
             return
         
         try:

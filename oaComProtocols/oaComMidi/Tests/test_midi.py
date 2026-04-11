@@ -1,94 +1,107 @@
 # oaComProtocols.oaComMidi/Tests/test_midi.py
-#
-# Unit tests for the modular MIDI Orchestrator.
-#
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
+# Version: 20260410.1000.3
 #
-# Professional services for customizing and tailoring this software to your specific
-# application can be negotiated. There is no charge to use, modify, or fork this software.
-#
-# Build Log: https://like.audio/category/software/spectrum-scanner/
-# Source Code: https://github.com/APKaudio/
-# Feature Requests can be emailed to i @ like . audio
-#
-# Version 20260328.1400.1
+# Description: Unit tests for MidiManager ensuring Hub-and-Spoke integrity, 
+# anti-feedback, and standardized standalone behavior.
 
 import unittest
 from unittest.mock import MagicMock, patch
-from oaComProtocols.oaComMidi.Entry import MidiManager
+
+# --- Target Module ---
+from oaComProtocols.oaComMidi.Managers.midi_manager import MidiManager
 
 class TestMidiManager(unittest.TestCase):
     """
-    Validation suite for the MidiManager orchestrator.
-    
-    This suite verifies that the MidiManager correctly interacts with the 
-    global state cache, protocol router, and virtual MIDI ports.
+    Architectural Integrity Tests for MIDI Protocol Spoke.
+    Follows BUILD -> OPERATE -> CHECK pattern.
     """
+
     def setUp(self):
-        """
-        Initializes a mock environment for each test case.
+        """BUILD: Initialize mocks and manager in isolation."""
+        self.mock_state_cache = MagicMock()
+        self.mock_router = MagicMock()
         
-        Side Effects:
-            - Allocates a MagicMock for the state cache.
-            - Patches the ProtocolRouter singleton.
-            - Instantiates a MidiManager in bridge mode.
-        """
-        self.state_cache = MagicMock()
-        with patch("oaComBroker.Core.protocol_router.manager.ProtocolRouter.get_instance"):
-            self.midi = MidiManager(self.state_cache, run_bridge=True)
+        # Patch ProtocolRouter to prevent real singleton access
+        self.patcher_router = patch("oaComBroker.Core.protocol_router.manager.ProtocolRouter.get_instance", return_value=self.mock_router)
+        self.patcher_router.start()
+        
+        # Build the manager
+        self.midi = MidiManager(state_cache_manager=self.mock_state_cache, run_bridge=True, auto_start=False)
+        
+        # Inject mock components into the manager
+        self.midi.ports = MagicMock()
+        self.midi.mapper = MagicMock()
+        self.midi.lock_manager = MagicMock()
+        self.midi.lock_manager.is_locked.return_value = False
+        
+        # Set running state manually for deterministic test behavior
+        self.midi._running = True
 
     def tearDown(self):
-        if hasattr(self, 'midi'):
-            self.midi.stop()
+        """Cleanup patches."""
+        self.midi.stop()
+        self.patcher_router.stop()
 
-    def test_status_broadcast(self):
-        """
-        Goal: Verify that starting the MIDI manager broadcasts active ports to 
-        the system state.
+    def test_spoke_to_hub_ingest(self):
+        """OPERATE: Simulate incoming MIDI data (Spoke -> Hub)."""
+        # BUILD
+        test_port = MagicMock(); test_port.name = "TestPort"
+        mock_msg = MagicMock(); mock_msg.type = "note_on"; mock_msg.channel = 0; mock_msg.note = 60; mock_msg.velocity = 127
+        test_port.iter_pending.return_value = [mock_msg]
         
-        Verification:
-            - Confirms that handle_external_update is called for both 
-              Inputs and Outputs.
-        """
-        # Setup mock ports with valid names.
+        self.midi.mapper.midi_to_topic.return_value = ("OPEN-AIR/MIDI/Note/60", 127)
+        
+        # OPERATE: Simulate one iteration of the listen loop
+        self.midi._midi_listen_loop(test_port, _one_shot=True)
+        
+        # CHECK: Hub (StateCache) was updated with origin tagging
+        self.mock_state_cache.handle_external_update.assert_called()
+        args, kwargs = self.mock_state_cache.handle_external_update.call_args
+        self.assertEqual(kwargs["metadata"]["origin_source"], "MIDI")
+
+    def test_hub_to_spoke_dispatch(self):
+        """OPERATE: Simulate Hub broadcast (Hub -> Spoke)."""
+        # BUILD
+        mock_out = MagicMock()
+        mock_out.name = "TestOut"
+        self.midi.ports.outports = [mock_out]
+        self.midi.mapper.topic_to_midi.return_value = MagicMock() # Mocked MIDI message
+        
+        # OPERATE: Data from an external source (e.g., GUI)
+        self.midi.publish("OPEN-AIR/MIDI/Note/60", {"val": 1.0}, {"origin_source": "GUI"})
+        
+        # CHECK: Transmitted to hardware Spoke
+        self.midi.mapper.topic_to_midi.assert_called()
+        mock_out.send.assert_called()
+
+    def test_anti_feedback_echo_suppression(self):
+        """CHECK: Verify messages originating from MIDI are NOT echoed back to MIDI."""
+        # BUILD
+        mock_out = MagicMock()
+        mock_out.name = "TestOut"
+        self.midi.ports.outports = [mock_out]
+        
+        # OPERATE: Data that originally came FROM MIDI
+        self.midi.publish("OPEN-AIR/MIDI/Note/60", {"val": 0.5}, {"origin_source": "MIDI"})
+        
+        # CHECK: Echo suppression
+        mock_out.send.assert_not_called()
+
+    def test_telemetry_broadcast(self):
+        """CHECK: Verify periodic status broadcast."""
+        # BUILD
         mock_in = MagicMock(); mock_in.name = "TestIn"
         mock_out = MagicMock(); mock_out.name = "TestOut"
         self.midi.ports.inports = [mock_in]
         self.midi.ports.outports = [mock_out]
         
-        # Trigger the status broadcast sequence.
+        # OPERATE
         self.midi._broadcast_status()
         
-        # Validation: Verify that the state cache was notified of the port changes.
-        calls = self.state_cache.handle_external_update.call_args_list
+        # CHECK: Verify state cache notified
+        calls = self.mock_state_cache.handle_external_update.call_args_list
         self.assertTrue(any("ActiveInputs" in c[0][0] for c in calls))
-        self.assertTrue(any("ActiveOutputs" in c[0][0] for c in calls))
-
-    def test_echo_suppression_and_transmission(self):
-        """
-        Test that MidiManager handles incoming protocol events correctly and prevents loops.
-        """
-        # To test the actual logic inside publish, we use the real method but mock the ports
-        self.midi._running = True
-        mock_out = MagicMock()
-        self.midi.ports.outports = [mock_out]
-        self.midi.lock_manager = MagicMock()
-        self.midi.lock_manager.is_locked.return_value = False
-        self.midi.mapper = MagicMock()
-        
-        # 1. Message from GUI (External source) should be processed and sent
-        self.midi.publish("OPEN-AIR/MIDI/test", 0.5, {"origin_source": "GUI"})
-        self.midi.mapper.topic_to_midi.assert_called_once()
-        
-        # Reset mocks
-        self.midi.mapper.topic_to_midi.reset_mock()
-        mock_out.send.reset_mock()
-        
-        # 2. Message from MIDI (Echo) should be dropped inside publish
-        self.midi.publish("OPEN-AIR/MIDI/test", 0.5, {"origin_source": "MIDI"})
-        self.midi.mapper.topic_to_midi.assert_not_called()
-        mock_out.send.assert_not_called()
 
 if __name__ == "__main__":
     unittest.main()

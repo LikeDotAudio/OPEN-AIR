@@ -35,14 +35,14 @@ graph TD
 ## Lifecycle & Logic
 1. **Start**: The manager initializes as a Spoke, registering with the `ProtocolRouter` Hub.
 2. **Ingest (Spoke -> Hub)**:
-   - Event triggered (MIDI note, OSC addr, etc).
+   - Event triggered (SNMP SET, agent update, etc).
    - **Ingest Gate**: Router checks `ingest_enabled` for this Spoke.
    - **Hub**: Data is validated and committed to `MQTT Storage`.
 3. **Dispatch (Hub -> Spoke)**:
    - MQTT Hub broadcasts state changes to all connected Spokes.
    - **Dispatch Gate**: Router checks `egress_enabled` for this protocol.
    - **Filter**: Echo removal (origin-source guard) ensures no self-reflection.
-4. **Transmit**: Validated data is rendered to the local physical interface (MIDI Out, OSC Out, etc).
+4. **Transmit**: Validated data is rendered to the local physical interface (SNMP response, trap, etc).
 
 ## System Tree Reporting (Heartbeats & Status)
 All protocol managers are required to report their operational status to the central monitoring hierarchy. This ensures the Hub maintains an accurate, real-time view of system health and failover eligibility.

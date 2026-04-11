@@ -217,22 +217,6 @@ class OSCManager:
                 source="OSC", 
                 metadata=meta
             )
-            
-            # 3. Update Monitor Feed (UI Decoration)
-            if "/Monitor/" not in address:
-                monitor_payload = {
-                    "val": value,
-                    "source": "OSC",
-                    "address": address,
-                    "direction": "RX"
-                }
-                monitor_payload.update(meta)
-
-                self.state_cache_manager.handle_external_update(
-                    "OPEN-AIR/System/Monitor/OSC/Activity", 
-                    monitor_payload, 
-                    source="OSC"
-                )
         else:
             from oaComBroker.Core.protocol_router.manager import ProtocolRouter
             ProtocolRouter.get_instance().ingest("OSC", topic, value, meta)
@@ -263,48 +247,6 @@ class OSCManager:
         
         self.tx_client.send_message(address, value)
         
-        if self.run_bridge and self.state_cache_manager and "/Monitor/" not in address: 
-            monitor_payload = {
-                "val": value,
-                "source": "OSC",
-                "address": address,
-                "direction": "TX",
-                "ts": time.time(),
-                "GUID": app_constants.FULL_INSTANCE_ID,
-                "partition": app_constants.PARTITION_ID
-            }
-            monitor_payload["msg_guid"] = meta.get("msg_guid")
-            monitor_payload["msg_type"] = meta.get("msg_type")
-            monitor_payload["origin_source"] = origin_source
-
-            self.state_cache_manager.handle_external_update(
-                "OPEN-AIR/System/Monitor/OSC/Activity",
-                monitor_payload,
-                source="OSC"
-            )
-
-        from oaComBroker.Core.protocol_router.manager import ProtocolRouter
-        
-        # ⚡ V3.1.12 TOPIC MAPPING (FIXED):
-        # Strip leading OSC/ from address to avoid duplication
-        clean_addr = address
-        if clean_addr.startswith("/OSC/"):
-            clean_addr = clean_addr[4:]
-        elif clean_addr.startswith("OSC/"):
-            clean_addr = "/" + clean_addr[3:]
-
-        if any(clean_addr.upper().startswith(x) for x in ["/MIDI/", "/GUI/", "/OAGUI/", "/SYSTEM/"]):
-            tx_topic = f"OPEN-AIR{clean_addr}"
-        else:
-            tx_topic = f"OPEN-AIR/OSC{clean_addr}"
-        ProtocolRouter.get_instance().ingest("OSC-TX", tx_topic, value, {
-            "osc_address": address, 
-            "partition": app_constants.PARTITION_ID,
-            "msg_guid": meta.get("msg_guid"),
-            "msg_type": msg_type,
-            "origin_source": origin_source
-        })
-
         self._notify_monitor("TX", address, value)
 
     def _on_protocol_event(self, msg):

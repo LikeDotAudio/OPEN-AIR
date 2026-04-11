@@ -23,6 +23,8 @@ from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
 from .Core.trapezoid_renderer_mixin import TrapezoidRendererMixin
 from .Core.trapezoid_interaction_mixin import TrapezoidInteractionMixin
 
+from oaGuiBuilder.Core.base_widget_creator import BaseWidgetCreator
+
 class TrapezoidButton(tk.Canvas, TrapezoidRendererMixin, TrapezoidInteractionMixin):
     """
     A self-contained Trapezoid Button widget that manages its own state and interaction.
@@ -106,28 +108,25 @@ class TrapezoidButton(tk.Canvas, TrapezoidRendererMixin, TrapezoidInteractionMix
         self.render_trapezoid_button(self, self.config_data, current_state)
 
 @WidgetRegistry.register("_TrapezoidButton")
-class BuilderButtonTrapezoidCreator(TransparencyMixin):
+class BuilderButtonTrapezoidCreator(BaseWidgetCreator, TransparencyMixin):
     """Factory for creating TrapezoidButton instances."""
 
-    def make_button_trapezoid(self, parent_widget, config_data, context=None, **kwargs):
-        """Creates a trapezoidal button widget."""
-        label = get_text(get_text(config_data.get('label_active'))) or get_text(get_text(config_data.get('label')), "")
+    def _assemble_ui(self, parent_widget, config_data, context, **kwargs):
+        """Implementation of the Template Method for Trapezoid Button assembly."""
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️🔘 [BUILDER] Entering _assemble_ui", level="TRACE")
+        
+        label = get_text(get_text(config_data.get('label_active')), get_text(config_data.get('label'), ""))
         button_text = config_data.get("button_text", "")
         if button_text: config_data["button_text"] = button_text[:3]
         
         path = config_data.get("path")
 
         # Context Extraction
-        if context:
-            state_mirror_engine = context.state_mirror_engine
-            subscriber_router = context.subscriber_router
-            base_mqtt_topic_from_path = context.base_mqtt_topic_from_path
-            builder_instance = context.builder_instance
-        else:
-            state_mirror_engine = kwargs.get("state_mirror_engine")
-            subscriber_router = kwargs.get("subscriber_router")
-            base_mqtt_topic_from_path = kwargs.get("base_mqtt_topic_from_path")
-            builder_instance = kwargs.get("builder_instance") or self
+        ctx = context if context else type('obj', (object,), kwargs)()
+        state_mirror_engine = getattr(ctx, 'state_mirror_engine', None) or kwargs.get('state_mirror_engine')
+        subscriber_router = getattr(ctx, 'subscriber_router', None) or kwargs.get('subscriber_router')
+        base_mqtt_topic_from_path = getattr(ctx, 'base_mqtt_topic_from_path', None) or kwargs.get('base_mqtt_topic_from_path')
+        builder_instance = getattr(ctx, 'builder_instance', None) or getattr(ctx, 'app_instance', None) or kwargs.get('builder_instance')
 
         initial_state = bool(config_data.get("value_default", False))
         state_var = kwargs.get("variable") or tk.BooleanVar(master=parent_widget, value=initial_state)
@@ -138,12 +137,12 @@ class BuilderButtonTrapezoidCreator(TransparencyMixin):
             state_mirror_engine, base_mqtt_topic_from_path, subscriber_router
         )
 
-        if hasattr(self, '_apply_transparency'):
-            self._apply_transparency(button, button, config_data, builder_instance)
-
-        return button
+        return button, button
 
     @staticmethod
     def make(parent_widget, config_data, context=None, **kwargs):
-        creator = BuilderButtonTrapezoidCreator()
-        return creator.make_button_trapezoid(parent_widget, config_data, context, **kwargs)
+        return BuilderButtonTrapezoidCreator.build(parent_widget, config_data, context, **kwargs)
+
+    def make_button_trapezoid(self, parent_widget, config_data, context=None, **kwargs):
+        """Legacy compatibility wrapper."""
+        return self.build(parent_widget, config_data, context, **kwargs)

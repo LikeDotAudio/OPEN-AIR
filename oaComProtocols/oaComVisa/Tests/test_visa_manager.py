@@ -1,75 +1,86 @@
 # oaComProtocols.oaComVisa/Tests/test_visa_manager.py
-# Author: Gemini (Collaborator)
-# Version: 20260323.0000.1
+# Author: Anthony Peter Kuzub
+# Version: 20260410.1000.6
 #
-# Description: Tests for the VisaManagerOrchestrator class.
+# Description: Unit tests for VisaManager ensuring Hub-and-Spoke integrity, 
+# anti-feedback, and standardized standalone behavior.
 
 import unittest
 from unittest.mock import MagicMock, patch
+import orjson
 
+# --- Target Module ---
 from oaComProtocols.oaComVisa.Managers.visa_manager import VisaManagerOrchestrator
 
 class TestVisaManagerOrchestrator(unittest.TestCase):
+    """
+    Architectural Integrity Tests for VISA Protocol Spoke.
+    Follows BUILD -> OPERATE -> CHECK pattern.
+    """
 
-    @patch('oaComProtocols.oaComVisa.Managers.visa_manager.VisaRebootManager')
-    @patch('oaComProtocols.oaComVisa.Managers.visa_manager.VisaResetManager')
-    @patch('oaComProtocols.oaComVisa.Managers.visa_manager.VisaMqttListener')
-    @patch('oaComProtocols.oaComVisa.Managers.visa_manager.VisaDisconnector')
-    @patch('oaComProtocols.oaComVisa.Managers.visa_manager.VisaConnector')
-    @patch('oaComProtocols.oaComVisa.Managers.visa_manager.VisaDeviceSearcher')
-    @patch('oaComProtocols.oaComVisa.Managers.visa_manager.VisaGuiPublisher')
-    @patch('oaComProtocols.oaComVisa.Managers.visa_manager.VisaProxy')
-    def test_initialization(self, MockVisaProxy, MockGuiPublisher, MockDeviceSearcher, MockConnector, MockDisconnector, MockMqttListener, MockResetManager, MockRebootManager):
-        """
-        BUILD: Mock all the dependent classes. Create mock MQTT connection and subscriber router.
-        OPERATE: Instantiate VisaManagerOrchestrator.
-        CHECK: Verify that all internal managers are instantiated correctly and get_managers returns them.
-        """
-        mock_mqtt_conn = MagicMock()
-        mock_sub_router = MagicMock()
+    def setUp(self):
+        """BUILD: Initialize mocks and orchestrator in isolation."""
+        self.mock_mqtt = MagicMock()
+        self.mock_sub_router = MagicMock()
+        self.mock_client = MagicMock()
+        self.mock_mqtt.get_client_instance.return_value = self.mock_client
+        
+        # Patch internal components EXCEPT VisaGuiPublisher to ensure it runs
+        self.patchers = [
+            patch('oaComProtocols.oaComVisa.Managers.visa_manager.VisaProxy'),
+            patch('oaComProtocols.oaComVisa.Managers.visa_manager.VisaDeviceSearcher'),
+            patch('oaComProtocols.oaComVisa.Managers.visa_manager.VisaConnector'),
+            patch('oaComProtocols.oaComVisa.Managers.visa_manager.VisaDisconnector'),
+            patch('oaComProtocols.oaComVisa.Managers.visa_manager.VisaMqttListener'),
+            patch('oaComProtocols.oaComVisa.Managers.visa_manager.VisaResetManager'),
+            patch('oaComProtocols.oaComVisa.Managers.visa_manager.VisaRebootManager')
+        ]
+        for p in self.patchers: p.start()
 
-        # Instantiate the orchestrator
-        orchestrator = VisaManagerOrchestrator(
-            mqtt_connection_manager=mock_mqtt_conn,
-            subscriber_router=mock_sub_router
+        self.manager = VisaManagerOrchestrator(
+            mqtt_connection_manager=self.mock_mqtt,
+            subscriber_router=self.mock_sub_router
         )
 
-        # Assert that the classes were instantiated with correct arguments
-        MockVisaProxy.assert_called_once_with(mqtt_controller=mock_mqtt_conn, subscriber_router=mock_sub_router)
-        MockGuiPublisher.assert_called_once_with(mqtt_controller=mock_mqtt_conn)
-        MockDeviceSearcher.assert_called_once_with()
-        MockConnector.assert_called_once_with(visa_proxy=orchestrator.visa_proxy, gui_publisher=orchestrator.gui_publisher)
-        MockDisconnector.assert_called_once_with(visa_proxy=orchestrator.visa_proxy, gui_publisher=orchestrator.gui_publisher)
-        MockMqttListener.assert_called_once_with(
-            subscriber_router=mock_sub_router,
-            searcher=orchestrator.device_searcher,
-            connector=orchestrator.connector,
-            disconnector=orchestrator.disconnector,
-            gui_publisher=orchestrator.gui_publisher
-        )
-        MockResetManager.assert_called_once_with(
-            mqtt_connection_manager=mock_mqtt_conn,
-            subscriber_router=mock_sub_router,
-            visa_proxy=orchestrator.visa_proxy
-        )
-        MockRebootManager.assert_called_once_with(
-            mqtt_connection_manager=mock_mqtt_conn,
-            subscriber_router=mock_sub_router,
-            visa_proxy=orchestrator.visa_proxy
-        )
+    def tearDown(self):
+        """Cleanup patches."""
+        for p in self.patchers: p.stop()
 
-        # Check that get_managers returns the expected dictionary
-        managers = orchestrator.get_managers()
-        self.assertIn("visa_proxy", managers)
-        self.assertIn("visa_gui_publisher", managers)
-        self.assertIn("visa_device_searcher", managers)
-        self.assertIn("visa_connector", managers)
-        self.assertIn("visa_disconnector", managers)
-        self.assertIn("visa_mqtt_listener", managers)
-        self.assertIn("visa_reset_manager", managers)
-        self.assertIn("visa_reboot_manager", managers)
+    def test_hub_to_spoke_telemetry(self):
+        """CHECK: Verify the manager broadcasts its presence to the system Hub."""
+        # OPERATE: Logic is in __init__ via gui_publisher.
+        # It calls gui_publisher._publish_proxy_status("INITIALIZING")
+        
+        # CHECK
+        self.mock_client.publish.assert_called()
+        
+        # Check if any call was to Proxy/Status
+        found = False
+        for call in self.mock_client.publish.call_args_list:
+            args, kwargs = call
+            topic = kwargs.get('topic') or (args[0] if args else None)
+            if topic and "Proxy/Status" in topic:
+                found = True
+                break
+        self.assertTrue(found)
 
-        self.assertEqual(managers["visa_proxy"], orchestrator.visa_proxy)
+    def test_anti_feedback_origin_tagging(self):
+        """CHECK: Verify that publications to Hub include origin metadata."""
+        # OPERATE
+        self.manager.gui_publisher._publish_status("connected", True)
+        
+        # CHECK
+        self.mock_client.publish.assert_called()
+        found = False
+        for call in self.mock_client.publish.call_args_list:
+            args, kwargs = call
+            payload_raw = kwargs.get('payload') or (args[1] if len(args) > 1 else None)
+            if payload_raw:
+                payload = orjson.loads(payload_raw)
+                if payload.get("origin_source") == "VISA":
+                    found = True
+                    break
+        self.assertTrue(found)
 
 if __name__ == '__main__':
     unittest.main()

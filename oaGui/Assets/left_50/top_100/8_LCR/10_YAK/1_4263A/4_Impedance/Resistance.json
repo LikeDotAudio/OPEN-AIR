@@ -1,0 +1,59 @@
+{
+  "HP_4263A_CONFIG": {
+    "type": "OcaBin",
+    "id": "4263A.CONF.001",
+    "blocks": {
+      "Signal_Setup": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Test Signal & Timing",
+          "Fr": "Signal de test et synchronisation",
+          "De": "Testsignal & Timing",
+          "Es": "Señal de prueba y sincronización"
+        },
+        "fields": {
+          "Frequency": {
+            "type": "_GuiActuator",
+            "label_inactive": {
+              "En": "1 kHz",
+              "Fr": "1 kHz",
+              "De": "1 kHz",
+              "Es": "1 kHz"
+            },
+            "message": ":FREQ 1KHZ"
+          },
+          "Level": {
+            "type": "_GuiActuator",
+            "label_inactive": {
+              "En": "1V Level",
+              "Fr": "1V Niveau",
+              "De": "1V Pegel",
+              "Es": "1V Nivel"
+            },
+            "message": ":VOLT 1V"
+          },
+          "Speed_Fast": {
+            "type": "_GuiActuator",
+            "label_inactive": {
+              "En": "Fast (Short)",
+              "Fr": "Rapide (Court)",
+              "De": "Schnell (Kurz)",
+              "Es": "Rápido (Corto)"
+            },
+            "message": ":APER SHOR"
+          },
+          "DC_Bias": {
+            "type": "_GuiActuator",
+            "label_inactive": {
+              "En": "Bias ON",
+              "Fr": "Biais ACTIVÉ",
+              "De": "Bias AN",
+              "Es": "Polarización ACTIVADA"
+            },
+            "message": ":BIAS:STAT ON"
+          }
+        }
+      }
+    }
+  }
+}

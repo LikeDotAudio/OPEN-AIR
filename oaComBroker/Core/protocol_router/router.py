@@ -160,6 +160,16 @@ class ProtocolRouter:
         if self._executor: self._executor.shutdown(wait=True)
         matrix_log("comms", "broker", "stop", "⏹️ [STOP] Protocol Router Offline.", "INFO")
 
+    def shutdown(self):
+        """
+        ⚡ V3.1.29 GRACEFUL SHUTDOWN: Orchestrates the teardown of internal 
+        monitoring and dispatch subsystems.
+        """
+        self.stop()
+        if hasattr(self, 'monitor'):
+            self.monitor.shutdown()
+        matrix_log("comms", "broker", "shutdown", "Protocol Router shutdown sequence complete.", "DEBUG")
+
     def set_active_state(self, active):
         if self.is_active == active: return
         self.is_active = active

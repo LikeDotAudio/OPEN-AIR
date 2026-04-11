@@ -19,6 +19,7 @@ from oaGui.Methods.safe_after_mixin import SafeAfterMixin
 from .Core.layout.preview_engine import PreviewEngine
 from .Core.layout.focus import FocusManager
 from .Core.layout.overlay import OverlayManager
+from .Core.layout.ruler import Ruler
 
 class InteractiveLayout(tk.Frame, SafeAfterMixin):
     """The visual workspace where users interact with the GUI layout."""
@@ -52,9 +53,19 @@ class InteractiveLayout(tk.Frame, SafeAfterMixin):
         
         self._build_ui()
         
-        # Initialize render_area after header to ensure correct packing order
+        # --- Ruler Containers ---
+        self.ruler_corner = tk.Frame(self, bg="#1a1a1a", width=20, height=20)
+        self.ruler_corner.place(x=0, y=35) # Below header
+        
+        self.h_ruler = Ruler(self, orient="horizontal")
+        self.h_ruler.place(x=20, y=35, relwidth=1, width=-20, height=20)
+        
+        self.v_ruler = Ruler(self, orient="vertical")
+        self.v_ruler.place(x=0, y=55, width=20, relheight=1, height=-55)
+
+        # Initialize render_area after rulers
         self.render_area = tk.Frame(self, bg="#2b2b2b")
-        self.render_area.pack(fill="both", expand=True)
+        self.render_area.place(x=20, y=55, relwidth=1, relheight=1, width=-20, height=-55)
         
         # Engines
         self.focus_mgr = FocusManager(self)
@@ -177,19 +188,62 @@ class InteractiveLayout(tk.Frame, SafeAfterMixin):
         for text, var in reversed(controls):
             ttk.Checkbutton(header, text=text, variable=var, command=self._force_overlay_refresh).pack(side="right", padx=5)
 
-        self.render_area = tk.Frame(self, bg="#2b2b2b"); self.render_area.pack(fill="both", expand=True)
+    def _sync_rulers(self, event=None):
+        """Syncs ruler offsets and center points with the preview canvas."""
+        if not self.preview_builder: return
+        
+        # Get canvas scroll offsets
+        x_scroll = self.preview_builder.canvas.xview()
+        y_scroll = self.preview_builder.canvas.yview()
+        
+        # Calculate pixel offsets
+        # scrollregion is (x1, y1, x2, y2)
+        sr = self.preview_builder.canvas.cget("scrollregion")
+        if not sr: return
+        
+        sr_parts = [float(p) for p in sr.split()]
+        full_w = sr_parts[2] - sr_parts[0]
+        full_h = sr_parts[3] - sr_parts[1]
+        
+        off_x = int(x_scroll[0] * full_w)
+        off_y = int(y_scroll[0] * full_h)
+        
+        self.h_ruler.set_offset(off_x)
+        self.v_ruler.set_offset(off_y)
+        
+        # Set centers
+        self.h_ruler.set_center(full_w // 2)
+        self.v_ruler.set_center(full_h // 2)
+
+    def _refresh_preview(self):
+        """Throttled refresh of the preview."""
+        if self._refresh_timer:
+            self.safe_after_cancel(self._refresh_timer)
+        self._refresh_timer = self.safe_after(200, self._perform_refresh)
+
+    def _perform_refresh(self):
+        self._refresh_timer = None
+        self.preview_builder = self.preview_engine.refresh(
+            state_manager.get_state(),
+            render_tier=self.render_tier_var.get().lower(),
+            superficial_pad=self.superficial_pad_var.get()
+        )
+        # Bind scroll events for ruler syncing
+        if self.preview_builder:
+            self.preview_builder.canvas.bind("<Configure>", lambda e: self.safe_after(100, self._sync_rulers), add="+")
+            # We also need to catch the actual scrolling.
+            # Using <Motion> and <Button-1> as proxies for interaction that might cause scrolling
+            self.preview_builder.canvas.bind("<Motion>", self._sync_rulers, add="+")
+            self.preview_builder.canvas.bind("<Button-1>", self._sync_rulers, add="+")
+            self._sync_rulers()
 
     def _toggle_background_visibility(self):
         """Toggles the visibility of the background in the preview."""
-        # The actual logic to show/hide the background will depend on how the background is implemented
-        # in the preview_builder. For now, this method ensures the command doesn't raise an error.
-        # If background is a widget, e.g., self.preview_builder.background_widget,
-        # then it might be self.preview_builder.background_widget.pack_forget() or .pack()
-        # or self.preview_builder.background_widget.grid_forget() or .grid()
-        # For now, we ensure the method exists.
         matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Background visibility toggled to: {self.show_background_var.get()}", "DEBUG")
-        # Placeholder: actual background visibility logic needs to be implemented if it affects preview rendering.
-        pass
+        if self.preview_builder:
+            # Explicitly trigger background update in the builder
+            if hasattr(self.preview_builder, '_update_background'):
+                self.preview_builder._update_background()
 
     def _update_rebuild_ui(self):
         self.counter_lbl.config(text=f"CHANGES MADE: {self.pending_changes}")
@@ -209,17 +263,3 @@ class InteractiveLayout(tk.Frame, SafeAfterMixin):
             # Explicitly trigger background update in the builder
             if hasattr(self.preview_builder, '_update_background'):
                 self.preview_builder._update_background()
-
-    def _refresh_preview(self, json_data=None):
-        if not self.winfo_exists() or not hasattr(self, 'render_area'): return
-        if json_data is None: json_data = state_manager.get_state()
-        
-        # Determine internal tier
-        render_tier_map = {"High-Res": "high_res", "Fast": "fast", "Ghost": "ghost"}
-        internal_tier = render_tier_map.get(self.render_tier_var.get(), "fast")
-
-        self.preview_builder = self.preview_engine.refresh(json_data, render_tier=internal_tier, superficial_pad=self.superficial_pad_var.get())
-        # Raise the event blocker canvas above the newly rendered preview_builder
-        if self.overlay_mgr.event_blocker_canvas:
-            self.tk.call('raise', self.overlay_mgr.event_blocker_canvas._w)
-        self.after(250, lambda: self.overlay_mgr.apply_outlines(self.preview_builder.scroll_frame))

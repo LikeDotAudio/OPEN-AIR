@@ -189,27 +189,16 @@ class BuilderKnobCreator(BaseWidgetCreator, TransparencyMixin):
     def _assemble_ui(self, parent_widget, config_data, context, **kwargs):
         """Assembles the Knob UI elements."""
         config = extract_knob_config(config_data)
-        label = get_text(get_text(config_data.get('label_active'))) or get_text(get_text(config_data.get('label')), "Unknown")
+        label = get_text(config_data.get('label_active')) or get_text(config_data.get('label'), "Unknown")
         path = config_data.get("path")
         
         knob_var = kwargs.get("variable") or tk.DoubleVar(master=parent_widget, value=config["value_default"])
         state = create_knob_state(config)
         
         s_engine = getattr(context, 'state_mirror_engine', None) or kwargs.get('state_mirror_engine')
-        s_router = getattr(context, 'subscriber_router', None) or kwargs.get('subscriber_router')
-        b_topic = getattr(context, 'base_mqtt_topic_from_path', None) or kwargs.get('base_mqtt_topic_from_path', "")
-        b_inst = getattr(context, 'builder_instance', None) or kwargs.get('builder_instance') or self
-
+        
         frame = CustomKnobFrame(parent_widget, knob_var, config, state, path, s_engine, label, width=config["width"], height=config["height"])
         
-        if hasattr(b_inst, '_apply_transparency') and hasattr(frame, 'canvas'):
-            TransparencyManager.apply_transparency(frame, frame.canvas, config_data, b_inst)
-
-        if path and s_engine:
-            topic = s_engine.register_widget(path, knob_var, b_topic, config_data, instance=frame)
-            if s_router and topic: s_router.subscribe_to_topic(topic, s_engine.sync_incoming_mqtt_to_gui)
-            s_engine.initialize_widget_state(path)
-
         return frame, getattr(frame, 'canvas', None)
 
     @staticmethod
@@ -217,4 +206,4 @@ class BuilderKnobCreator(BaseWidgetCreator, TransparencyMixin):
         return BuilderKnobCreator.build(parent_widget, config_data, context, **kwargs)
 
     def make_knob(self, parent_widget, config_data, context=None, **kwargs):
-        return BuilderKnobCreator.build(parent_widget, config_data, context, **kwargs)
+        return self.build(parent_widget, config_data, context, **kwargs)

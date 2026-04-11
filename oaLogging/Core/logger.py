@@ -359,7 +359,7 @@ def initialize_logging(config, log_dir=None, partition="SYS"):
         
         # 4. --- Protocol and Broker Segregated Sinks (1-minute rotation) ---
         # ⚡ V3.1.20 SEGREGATION: Dynamically route comms to protocol-specific folders.
-        protocols = ["OSC", "MIDI", "MQTT", "SNMP", "VISA", "AES70", "REST", "EMBER", "SMPTE2138", "BROKER", "GUI"]
+        protocols = ["OSC", "MIDI", "MQTT", "SNMP", "VISA", "AES70", "REST", "EMBER", "SMPTE2138", "BROKER", "GUI", "WYSIWYG"]
         for proto in protocols:
             proto_dir = os.path.join(comms_log_dir, proto)
             os.makedirs(proto_dir, exist_ok=True)
@@ -477,6 +477,7 @@ ANALYTICS_LOGGER = get_logger("ANALYTICS")
 MOBILE_LOGGER    = get_logger("MOBILE")
 BROWSER_LOGGER   = get_logger("BROWSER")
 LAYOUT_LOGGER    = get_logger("LAYOUT")
+WYSIWYG_LOGGER   = get_logger("WYSIWYG")
 
 AI_ML_LOGGER     = get_logger("AI/ML")
 COMPUTE_LOGGER   = get_logger("COMPUTE")
@@ -525,6 +526,7 @@ table_logger   = TABLE_LOGGER
 cache_logger   = CACHE_LOGGER
 layer_logger   = LAYER_LOGGER
 factory_logger = FACTORY_LOGGER
+wysiwyg_logger = WYSIWYG_LOGGER
 parser_logger  = PARSER_LOGGER
 test_logger    = TEST_LOGGER
 quarantine_logger = QUARANTINE_LOGGER

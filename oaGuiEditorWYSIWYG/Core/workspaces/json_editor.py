@@ -191,7 +191,7 @@ class JsonEditor(tk.Frame):
         
         matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"JsonEditor: Focus synchronization for path: {path} (Source: {source.__class__.__name__ if source else 'Unknown'})", "INFO")
         
-        self.focused_path = path # Store the path for potential future use (e.g., in detached windows)
+        self.focused_path = path # Store the path for potential future use
 
         full_state = state_manager.get_state()
         if not full_state:
@@ -200,49 +200,52 @@ class JsonEditor(tk.Frame):
             self._update_line_numbers()
             return
 
+        def resolve_path(data, segments):
+            curr = data
+            for seg in segments:
+                if isinstance(curr, dict) and seg in curr:
+                    curr = curr[seg]
+                elif isinstance(curr, list):
+                    try:
+                        idx = int(seg)
+                        curr = curr[idx]
+                    except (ValueError, IndexError): return None
+                else:
+                    return None
+            return curr
+
         # Navigate to the specific path
-        try:
-            current_data = full_state
-            path_segments = path.split('.')
-            
-            # Handle cases where path is empty or refers to the root
-            if not path or path == "":
-                target_data = full_state
-            else:
-                for segment in path_segments:
-                    if isinstance(current_data, dict):
-                        current_data = current_data[segment]
-                    elif isinstance(current_data, list):
-                        try:
-                            index = int(segment)
-                            current_data = current_data[index]
-                        except (ValueError, IndexError):
-                            logger.error(f"❌ JsonEditor: Invalid index '{segment}' in path '{path}'.")
-                            self.text_area.delete("1.0", "end")
-                            self._update_line_numbers()
-                            return
-                    else:
-                        logger.error(f"❌ JsonEditor: Cannot access segment '{segment}' on non-dict/list type.")
-                        self.text_area.delete("1.0", "end")
-                        self._update_line_numbers()
-                        return
-                target_data = current_data
+        path_segments = path.split('.') if path else []
+        target_data = None
+        
+        # ⚡ STRATEGY 1: Direct Resolution
+        target_data = resolve_path(full_state, path_segments)
+        
+        # ⚡ STRATEGY 2: Strip First Segment (Handle file-name-prefixed paths)
+        if target_data is None and len(path_segments) > 1:
+            target_data = resolve_path(full_state, path_segments[1:])
+            if target_data is not None:
+                matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name, f"JsonEditor: Resolved path by stripping prefix: {path_segments[0]}", "DEBUG")
 
-            # Display the targeted JSON data
-            self.text_area.delete("1.0", "end")
-            self.text_area.insert("1.0", orjson.dumps(target_data, option=orjson.OPT_INDENT_2).decode())
-            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"JsonEditor: Displaying JSON for path: {path}", "DEBUG")
-            self._apply_highlight()
-            self._update_line_numbers()
+        # ⚡ STRATEGY 3: Parent Fallback (Show containing block if leaf is missing)
+        if target_data is None and len(path_segments) > 1:
+            for i in range(1, len(path_segments)):
+                parent_path = path_segments[:-i]
+                target_data = resolve_path(full_state, parent_path)
+                if target_data is not None:
+                    matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name, f"JsonEditor: Falling back to parent path: {'.'.join(parent_path)}", "DEBUG")
+                    break
 
-        except KeyError:
-            logger.error(f"❌ JsonEditor: Key not found in path: {path}")
-            self.text_area.delete("1.0", "end")
-            self._update_line_numbers()
-        except Exception as e:
-            logger.exception(f"❌ JsonEditor: Error processing focus request for path {path}: {e}")
-            self.text_area.delete("1.0", "end")
-            self._update_line_numbers()
+        if target_data is None:
+            # Final Fallback to Root
+            target_data = full_state
+            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name, "JsonEditor: Path resolution failed. Defaulting to Root JSON.", "WARNING")
+
+        # Display the targeted JSON data
+        self.text_area.delete("1.0", "end")
+        self.text_area.insert("1.0", orjson.dumps(target_data, option=orjson.OPT_INDENT_2).decode())
+        self._apply_highlight()
+        self._update_line_numbers()
 
     def _on_key_release(self, event):
         """Updates highlighting on key release."""

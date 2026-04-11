@@ -54,14 +54,15 @@ class PropertyRendererMixin:
                 else:
                     # If section structure changed or it's new, destroy old and create new
                     if existing_widget: # Destroy old section widget if it was a container
-                         # Ensure proper cleanup if it was a frame or similar
                         if hasattr(existing_widget, 'destroy'):
                             existing_widget.destroy()
-                        # Remove from cache
                         widget_cache.pop(full_path, None)
                     child_container = tk.Frame(parent, bg="#2b2b2b", padx=15)
                     child_container.pack(fill="x")
-                    widget_cache[full_path] = {"widget": child_container, "schema_type": value.get("type", value.get("widget_type"))}
+                
+                # Track the container in the new cache
+                if new_widget_cache is not None:
+                    new_widget_cache[full_path] = {"widget": child_container, "schema_type": value.get("type", value.get("widget_type"))}
 
                 self._render_section(parent, key, value, full_path, is_virtual, depth, actual_data, child_container, widget_cache, new_widget_cache)
             
@@ -77,110 +78,107 @@ class PropertyRendererMixin:
                     if new_widget_cache is not None:
                         new_widget_cache[full_path] = {"widget": editor_widget}
 
-
-        
-
-
-
     def _render_section(self, parent, key, value, full_path, is_virtual, depth, actual_data, child_container=None, widget_cache=None, new_widget_cache=None):
+        # 1. Handle Header Cache & Lifecycle to prevent leaks and stale bindings
+        header_key = full_path + "#header"
+        existing_header_info = widget_cache.get(header_key)
+        existing_header = existing_header_info.get("widget") if existing_header_info else None
         
+        # Persist expansion state if possible
+        is_expanded_val = True
+        if existing_header_info and "is_expanded" in existing_header_info:
+            is_expanded_val = existing_header_info["is_expanded"].get()
+            
+        if existing_header and existing_header.winfo_exists():
+            existing_header.destroy() # Recreate header to ensure fresh bindings
+            
         h_frame = tk.Frame(parent, bg="#3a3a3a", pady=2)
         h_frame.pack(fill="x", pady=(5, 2))
         
-        is_expanded = tk.BooleanVar(value=True)
+        is_expanded = tk.BooleanVar(value=is_expanded_val)
         
+        # Re-sync UI state with initial expansion value
+        if not is_expanded_val:
+            child_container.pack_forget()
+
         w_type = value.get("type", value.get("widget_type", ""))
         type_emoji = "📦" if w_type == "OcaBlock" else "🔹"
         fg_col = "#aaaaaa" if not is_virtual else "#666666"
         
-        toggle_lbl = tk.Label(h_frame, text="▼", bg="#3a3a3a", fg="#33A1FD", font=("Arial", 8))
+        toggle_char = "▼" if is_expanded_val else "▶"
+        toggle_lbl = tk.Label(h_frame, text=toggle_char, bg="#3a3a3a", fg="#33A1FD", font=("Arial", 8))
         toggle_lbl.pack(side="left", padx=(5, 2))
         tk.Label(h_frame, text=type_emoji, bg="#3a3a3a", font=("Arial", 8)).pack(side="left", padx=(0, 5))
         title_lbl = tk.Label(h_frame, text=key.upper(), bg="#3a3a3a", fg=fg_col, font=("Arial", 8, "bold"), cursor="hand2")
         title_lbl.pack(side="left")
 
-        # Store the header frame itself as the "widget" for this section in the cache
         if new_widget_cache is not None:
-            new_widget_cache[full_path] = {"widget": h_frame, "schema_type": w_type}
+            new_widget_cache[header_key] = {"widget": h_frame, "is_expanded": is_expanded}
 
         if is_virtual:
             tk.Button(h_frame, text="+ ADD SECTION", bg="#2ecc71", fg="white", relief="flat", font=("Arial", 6, "bold"),
                       command=lambda p=full_path, v=value: self._add_state_item(p, v)).pack(side="right", padx=5)
         else:
-            # Add reorder buttons if applicable (e.g., within .fields. or root level)
             if ".fields." in full_path or full_path.count(".") == 0:
                 ctrl = tk.Frame(h_frame, bg="#3a3a3a")
                 ctrl.pack(side="right", padx=5)
                 ttk.Button(ctrl, text="↑", width=2, command=lambda p=full_path: self._reorder(p, "up")).pack(side="left", padx=1)
                 ttk.Button(ctrl, text="↓", width=2, command=lambda p=full_path: self._reorder(p, "down")).pack(side="left", padx=1)
         
-        # Child container logic: Reuse if possible, create if not or if schema changed
-        if child_container is None: # Create if it doesn't exist from parent's cache
-            child_container = tk.Frame(parent, bg="#2b2b2b", padx=15)
-            child_container.pack(fill="x")
-            
-        # Store the child_container for potential reuse by the recursive call
-        if new_widget_cache is not None:
-            new_widget_cache[full_path] = {"widget": child_container, "schema_type": w_type}
-
         def toggle(e):
-            if is_expanded.get(): child_container.pack_forget(); toggle_lbl.config(text="▶"); is_expanded.set(False)
-            else: child_container.pack(fill="x"); toggle_lbl.config(text="▼"); is_expanded.set(True)
+            if not child_container.winfo_exists(): return
+            if is_expanded.get(): 
+                child_container.pack_forget()
+                toggle_lbl.config(text="▶")
+                is_expanded.set(False)
+            else: 
+                child_container.pack(fill="x")
+                toggle_lbl.config(text="▼")
+                is_expanded.set(True)
         
         title_lbl.bind("<Button-1>", toggle); toggle_lbl.bind("<Button-1>", toggle)
         
-        # Recursive call, passing down the cache and ensuring child_container is provided
         self._render_recursive_properties(value, child_container, prefix=full_path, depth=depth + 1, actual_data=actual_data.get(key, {}), widget_cache=widget_cache, new_widget_cache=new_widget_cache)
 
     def _render_list_info(self, parent, key, value, full_path, existing_widget=None, widget_cache=None, new_widget_cache=None):
-        # For lists, we might not have complex widgets to cache or update.
-        # If a list property changes, we might need to rebuild its representation.
-        # For now, we'll treat it like a simple leaf and potentially update text.
+        if existing_widget and existing_widget.winfo_exists():
+            existing_widget.destroy()
+
         f = tk.Frame(parent, bg="#2b2b2b")
         f.pack(fill="x", pady=2)
         tk.Label(f, text=f"{key}:", bg="#2b2b2b", fg="#888888", width=15, anchor="e").pack(side="left")
         list_text = f"[List: {len(value)} items]"
+        lbl = tk.Label(f, text=list_text, bg="#2b2b2b", fg="#666666")
+        lbl.pack(side="left", padx=10)
         
-        if existing_widget and isinstance(existing_widget, tk.Label):
-            existing_widget.config(text=list_text)
-            if new_widget_cache is not None:
-                new_widget_cache[full_path] = {"widget": existing_widget}
-        else:
-            lbl = tk.Label(f, text=list_text, bg="#2b2b2b", fg="#666666")
-            lbl.pack(side="left", padx=10)
-            if new_widget_cache is not None:
-                new_widget_cache[full_path] = {"widget": lbl}
+        if new_widget_cache is not None:
+            new_widget_cache[full_path] = {"widget": f}
 
     def _render_virtual_leaf(self, parent, key, value, full_path, existing_widget=None, widget_cache=None, new_widget_cache=None):
+        if existing_widget and existing_widget.winfo_exists():
+            existing_widget.destroy()
+
         f = tk.Frame(parent, bg="#2b2b2b")
         f.pack(fill="x", pady=2)
         tk.Label(f, text=f"{key}:", bg="#2b2b2b", fg="#555555", width=15, anchor="e").pack(side="left")
         
-        # Add button logic: if it exists, update it, else create it.
-        if existing_widget and isinstance(existing_widget, tk.Button) and existing_widget.cget("text") == "+ ADD":
-            # It's an existing ADD button, no need to recreate. Just ensure it's cached.
-            pass # Already exists, no action needed for the button itself.
-        else:
-            # Create a new ADD button if it doesn't exist or is not the right type.
-            add_button = tk.Button(f, text="+ ADD", bg="#3a3a3a", fg="#aaaaaa", relief="flat", font=("Arial", 7, "bold"),
-                                   command=lambda p=full_path, v=value: self._add_state_item(p, v))
-            add_button.pack(side="left", padx=10)
-            existing_widget = add_button # Update existing_widget to the new button if created
+        add_button = tk.Button(f, text="+ ADD", bg="#3a3a3a", fg="#aaaaaa", relief="flat", font=("Arial", 7, "bold"),
+                               command=lambda p=full_path, v=value: self._add_state_item(p, v))
+        add_button.pack(side="left", padx=10)
 
         tk.Label(f, text=f"({value})", bg="#2b2b2b", fg="#444444", font=("Arial", 7, "italic")).pack(side="left")
 
-        if new_widget_cache is not None and existing_widget:
-            new_widget_cache[full_path] = {"widget": existing_widget}
+        if new_widget_cache is not None:
+            new_widget_cache[full_path] = {"widget": f}
 
     def _add_state_item(self, path, value):
         state_manager.update_state(value, path=path, source=self)
-        # Refresh content to reflect the added item
-        if hasattr(self, '_refresh_content'): # Ensure method exists in context
+        if hasattr(self, '_refresh_content'):
             self._refresh_content()
 
-    # Placeholder for reorder functionality, assuming it exists in a mixin
     def _reorder(self, path, direction):
-        print(f"Reordering {path} {direction}") # Placeholder
+        print(f"Reordering {path} {direction}")
+
 
 # --- The following methods were in the original PropertyRendererMixin and are kept ---
 

@@ -47,6 +47,7 @@ from .center_panel import CenterPanel
 from .right_panel import RightPanel
 from .debug_matrix_screen import DebugMatrixScreen
 from .maintenance_clear_screen import MaintenanceClearScreen
+from oaGuiEditorWYSIWYG.Entry import launch_editor
 
 class TestsApp(App):
     """A Textual app to manage the OPEN-AIR test suite."""
@@ -75,6 +76,14 @@ class TestsApp(App):
     #btn_debug_on:hover, #btn_debug_off:hover, #btn_clear_logs:hover, #btn_clear_audits:hover, #btn_clear_reports:hover, #btn_clear_jsonlines:hover, #btn_clear_mqtt:hover, #btn_clear_flame:hover, #btn_clear_cache:hover,
     #btn_deps:hover, #btn_clean:hover, #btn_infra:hover, #btn_desktop:hover, #btn_tests_install:hover, #btn_full:hover {
         background: #ff0000; color: #F4902C;
+    }
+    .violet-button {
+        background: #8A2BE2;
+        color: white;
+        text-style: bold;
+    }
+    .violet-button:hover {
+        background: #9400D3;
     }
     Log { background: #000000; border: solid #F4902C; height: 1fr; margin-top: 1; }
     """
@@ -167,6 +176,7 @@ class TestsApp(App):
         # Screens
         elif bid == "btn_debug_matrix": self.push_screen(DebugMatrixScreen())
         elif bid == "btn_clear_menu": self.push_screen(MaintenanceClearScreen(self.maintenance))
+        elif bid == "btn_open_gui_editor": self.perform_launch_editor()
         # Maintenance (via Manager)
         elif bid == "btn_clear_logs": self.maintenance.clear_logs()
         elif bid == "btn_clear_audits": self.maintenance.clear_audits()
@@ -182,6 +192,19 @@ class TestsApp(App):
         elif bid == "btn_desktop": self.installation.perform_desktop_setup()
         elif bid == "btn_tests_install": self.installation.perform_install_validation()
         elif bid == "btn_full": self.installation.perform_full_installation(lambda: self.log_lines)
+
+    def perform_launch_editor(self):
+        self.write_log("🚀 [EDITOR] Launching standalone GUI Designer...")
+        def task():
+            try:
+                import tkinter as tk
+                root = tk.Tk()
+                # Call launch_editor(root, is_standalone=True) so that the created root window is used as the visible editor window.
+                launch_editor(root, is_standalone=True)
+                root.mainloop()
+            except Exception as e:
+                self.safe_write_log(f"💥 [ERROR] Failed to launch editor: {e}")
+        threading.Thread(target=task, daemon=True).start()
 
     def perform_start_openair(self):
         if self.openair_process and self.openair_process.poll() is None:

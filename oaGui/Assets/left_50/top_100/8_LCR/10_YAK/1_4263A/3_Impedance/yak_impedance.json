@@ -1,0 +1,68 @@
+{
+  "LCR_YAK_4263A_Impedance": {
+    "type": "OcaBin",
+    "id": "50.100.8.10.1.3",
+    "geometry": { "anchor": "NSEW" },
+    "behavior": { "fluid_ew": true },
+    "blocks": {
+      "Impedance_Settings": {
+        "type": "OcaBlock",
+        "description": { "En": "Impedance & Admittance" },
+        "fields": {
+          "Impedance Mode": {
+            "type": "_GuiActuator",
+            "label": {
+              "En": "Set Mode",
+              "Fr": "Définir le mode",
+              "De": "Modus einstellen",
+              "Es": "Establecer modo"
+            },
+            "label_active": {
+              "En": "Set Mode",
+              "Fr": "Définir le mode",
+              "De": "Modus einstellen",
+              "Es": "Establecer modo"
+            },
+            "AES70": "OcaBooleanActuator",
+            "message": ":SENSe:FUNCtion:ON \"{value}\"",
+            "options": ["ZTD", "ZTR", "YTD", "YTR"]
+          },
+          "Test Frequency": {
+            "type": "_GuiActuator",
+            "label": {
+              "En": "Set Frequency",
+              "Fr": "Définir la fréquence",
+              "De": "Frequenz einstellen",
+              "Es": "Establecer frecuencia"
+            },
+            "label_active": {
+              "En": "Set Frequency",
+              "Fr": "Définir la fréquence",
+              "De": "Frequenz einstellen",
+              "Es": "Establecer frecuencia"
+            },
+            "message": ":SENSe:FREQuency:CW {value}",
+            "options": ["100", "120", "1k", "10k", "100k"]
+          },
+          "Auto Voltage Range": {
+            "type": "_GuiActuator",
+            "label": {
+              "En": "Auto Voltage",
+              "Fr": "Tension automatique",
+              "De": "Auto-Spannung",
+              "Es": "Voltaje automático"
+            },
+            "label_active": {
+              "En": "Auto Voltage",
+              "Fr": "Tension automatique",
+              "De": "Auto-Spannung",
+              "Es": "Voltaje automático"
+            },
+            "message": ":SENSe:VOLTage:RANGe:AUTO {value}",
+            "options": ["ON", "OFF"]
+          }
+        }
+      }
+    }
+  }
+}

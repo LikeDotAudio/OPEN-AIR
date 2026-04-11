@@ -9,17 +9,29 @@ from oaLogging.Methods.matrix_gate import matrix_log
 import orjson
 import shutil
 import datetime
+import tkinter as tk
+from tkinter import filedialog
 from pathlib import Path
 from .state import state_manager
 from oaLogging.Core.logger import initialize_logging, set_log_directory
-
-
 
 class FileIOHandler:
     """Manages file persistence and backups for the editor."""
 
     @staticmethod
+    def open_file():
+        """Opens a file dialog to select a JSON file and loads it."""
+        filepath = filedialog.askopenfilename(
+            title="Open GUI Definition",
+            filetypes=[("JSON Files", "*.json"), ("All Files", "*.*")]
+        )
+        if filepath:
+            return FileIOHandler.load_file(filepath)
+        return False
+
+    @staticmethod
     def load_file(filepath):
+
         """Loads a JSON file and initializes the state manager."""
         path = Path(filepath)
         matrix_log(

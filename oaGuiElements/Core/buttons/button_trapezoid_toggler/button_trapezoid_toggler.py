@@ -24,6 +24,11 @@ from oaGuiElements.Core.buttons.button_trapezoid.button_trapezoid import Builder
 class BuilderButtonTrapezoidTogglerCreator(BuilderButtonTrapezoidCreator):
     """A mixin to create a radio-group of trapezoid buttons."""
 
+    @staticmethod
+    def make(parent_widget, config_data, context=None, **kwargs):
+        creator = BuilderButtonTrapezoidTogglerCreator()
+        return creator.make_button_trapezoid_toggler(parent_widget, config_data, context, **kwargs)
+
     # Creates a group of trapezoid buttons that function as a radio group.
     # This method arranges multiple trapezoid buttons where only one can be active at a time.
     # It manages the group's state and connects it to the state management engine.
@@ -33,54 +38,48 @@ class BuilderButtonTrapezoidTogglerCreator(BuilderButtonTrapezoidCreator):
     #     **kwargs: Additional keyword arguments.
     # Outputs:
     #     tk.Canvas: The created container canvas for the button group.
-    def make_button_trapezoid_toggler(
-        self, parent_widget, config_data, context=None, **kwargs
-    ):  # Updated signature
+    def make_button_trapezoid_toggler(self, parent_widget, config_data, context=None, **kwargs):
+        """Legacy compatibility wrapper."""
+        return self.build(parent_widget, config_data, context, **kwargs)
+
+    def _assemble_ui(self, parent_widget, config_data, context, **kwargs):
         """Creates a group of trapezoid buttons where only one can be active."""
-        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️🔳 [BUILDER] Entering make_button_trapezoid_toggler", level="TRACE")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️🔳 [BUILDER] Entering _assemble_ui", level="TRACE")
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📜📑💻 [CONFIG] Raw config received: {config_data}", level="DEBUG")
 
         # Extract widget-specific config from config_data
-        label = get_text(get_text(config_data.get('label_active'))) or get_text(get_text(config_data.get('label')), "")
+        label = get_text(get_text(config_data.get('label_active')), get_text(config_data.get('label'), ""))
         config = config_data  # config_data is the config
         path = config_data.get("path")
 
         # ⚡ HARDENED INTERFACE: Extract from context if available
-        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🔗🗂️⚙️ [CONTEXT] Extracting engine and router context...", level="TRACE")
-        if context:
-            state_mirror_engine = context.state_mirror_engine
-            subscriber_router = context.subscriber_router
-            base_mqtt_topic_from_path = context.base_mqtt_topic_from_path
-            builder_instance = context.builder_instance
-            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "✅🆗💻 [CONTEXT] Successfully extracted from WidgetContext object.", level="DEBUG")
-        else:
-            state_mirror_engine = self.state_mirror_engine
-            subscriber_router = self.subscriber_router
-            base_mqtt_topic_from_path = kwargs.get("base_mqtt_topic_from_path")
-            builder_instance = kwargs.get("builder_instance") or self
-            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "⚠️🔔🖱️ [CONTEXT] Context missing; fell back to self/kwargs.", level="DEBUG")
+        ctx = context if context else type('obj', (object,), kwargs)()
+        state_mirror_engine = getattr(ctx, 'state_mirror_engine', None) or kwargs.get('state_mirror_engine')
+        subscriber_router = getattr(ctx, 'subscriber_router', None) or kwargs.get('subscriber_router')
+        base_mqtt_topic_from_path = getattr(ctx, 'base_mqtt_topic_from_path', None) or kwargs.get('base_mqtt_topic_from_path')
+        builder_instance = getattr(ctx, 'builder_instance', None) or getattr(ctx, 'app_instance', None) or kwargs.get('builder_instance')
 
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬⚡️🔳 [BUILDER] Spawning trapezoid toggler group for '{label}' at path '{path}'.", level="DEBUG")
 
         # 1. Root Container (Use Canvas for transparency)
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🏗️🪟🎨 [CONSTRUCT] Creating main canvas container for trapezoid toggler '{label}'", level="TRACE")
         container = tk.Canvas(parent_widget, bd=0, highlightthickness=0, relief="flat")
-        if hasattr(self, '_apply_transparency'):
+        if hasattr(builder_instance, '_apply_transparency'):
             # ⚡ Force transparency for the group container
             trans_config = config.copy()
             if "bg_color" not in trans_config: trans_config["transparent"] = True
             matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"👻🌀🪟 [ALPHA] Applying industrial transparency to toggler container '{label}'", level="TRACE")
-            self._apply_transparency(container, container, trans_config, builder_instance)
+            builder_instance._apply_transparency(container, container, trans_config, builder_instance)
 
         # 2. Group Frame (Use Canvas for transparency)
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🏗️🪟🎨 [CONSTRUCT] Creating internal group frame canvas for '{label}'", level="TRACE")
         group_frame = tk.Canvas(container, bd=0, highlightthickness=0, relief="flat")
-        if hasattr(self, '_apply_transparency'):
+        if hasattr(builder_instance, '_apply_transparency'):
             # ⚡ Force transparency for the group frame
             trans_config = config.copy()
             if "bg_color" not in trans_config: trans_config["transparent"] = True
             matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"👻🌀🪟 [ALPHA] Applying industrial transparency to internal group frame '{label}'", level="TRACE")
-            self._apply_transparency(group_frame, group_frame, trans_config, builder_instance)
+            builder_instance._apply_transparency(group_frame, group_frame, trans_config, builder_instance)
             
         # Add top padding if there is a label to avoid overlap
         pady_top = 25 if label else 0
@@ -232,7 +231,7 @@ class BuilderButtonTrapezoidTogglerCreator(BuilderButtonTrapezoidCreator):
 
         redraw_group_labels()
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"✅🆗🔘 [SUCCESS] The trapezoid toggler group '{label}' has materialized!", level="SUCCESS")
-        return container
+        return container, container
 
     @staticmethod
     def make(parent_widget, config_data, context=None, **kwargs):

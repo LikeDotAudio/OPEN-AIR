@@ -127,6 +127,27 @@ def run_tests():
     else:
         print("\n💔 Some tests for oaComProtocols.oaComVisa failed.")
 
+_instance = None
+
+def get_entry():
+    """Returns the singleton VisaComEntry instance."""
+    global _instance
+    if _instance is None:
+        _instance = VisaComEntry()
+    return _instance
+
+def start():
+    """Standardized start command."""
+    get_entry().start()
+
+def stop():
+    """Standardized stop command."""
+    get_entry().stop()
+
+def status():
+    """Standardized status command."""
+    return get_entry().status()
+
 if __name__ == "__main__":
     # If no arguments are provided, default to running tests.
     # Otherwise, assume specific commands are intended (e.g., start, stop).
@@ -148,5 +169,8 @@ __all__ = [
     "FleetOrchestrator",
     "get_discovery_orchestrator",
     "get_visa_manager",
-    "get_fleet_orchestrator"
+    "get_fleet_orchestrator",
+    "start",
+    "stop",
+    "status"
 ]

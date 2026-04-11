@@ -21,11 +21,20 @@ from pathlib import Path
 oaComProtocols.oaComMidi/Entry.py - The sole orchestrator for the MIDI Communication Module.
 """
 
+# --- OPTIONAL GUI EXPORTS (V3.2.1 Decoupling) ---
+try:
+    from .Interface import MidiDashboard, MidiKeyboard, get_midi_color
+    GUI_AVAILABLE = True
+except (ImportError, Exception):
+    MidiDashboard = None
+    MidiKeyboard = None
+    get_midi_color = None
+    GUI_AVAILABLE = False
+
 from .Managers.midi_manager import MidiManager
 from .Core.midi_port_controller import MIDIPortController
 from .Core.midi_hardware_lock import MIDIHardwareLock
 from .Core.midi_protocol_mapper import MIDIProtocolMapper
-from .Interface import MidiDashboard, MidiKeyboard, get_midi_color
 
 _instance = None
 

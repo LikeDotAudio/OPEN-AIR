@@ -11,10 +11,15 @@ if str(project_root) not in sys.path:
 
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
+from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Core.logger import initialize_logging
+
 # Managers/run_builder.py
 
 from oaGuiEditorWYSIWYG.Managers.wysiwyg_editor import WysiwygEditor
-from oaLogging.Core.logger import GUI_LOGGER as logger
+from oaLogging.Core.logger import WYSIWYG_LOGGER
+
+logger = WYSIWYG_LOGGER.bind(protocol="WYSIWYG")
 
 from oaStyle.Managers.theme_applier import apply_theme
 from oaOchestration.Core.path_initializer import initialize_paths
@@ -25,21 +30,42 @@ def main():
     # MANDATORY: Initialize paths so Config reader can find config.ini
     initialize_paths()
 
+    # Configure logging for this standalone process
+    config = Config.get_instance()
+    # Correctly get the log directory using the project's path initialization
+    from oaOchestration.Core.path_initializer import DATA_LOGS_DIR
+    from oaLogging.Core.logger import set_log_directory
+
+    set_log_directory(DATA_LOGS_DIR, partition="WYSIWYG")
+    initialize_logging(config, log_dir=DATA_LOGS_DIR, partition="WYSIWYG")
+
     if len(sys.argv) < 2:
         logger.error("Usage: python run_builder.py <json_file_path>")
         sys.exit(1)
 
     json_filepath = pathlib.Path(sys.argv[1])
-    
+
     # Initialize Root Window
     root = tk.Tk()
     root.title(f"OPEN-AIR: WYSIWYG Editor - {json_filepath.name}")
-    
+
     # APPLY THEME: Crucial for visual consistency in standalone process
-    matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Standalone Builder: Applying system theme...", "DEBUG")
+    matrix_log(
+        "ui",
+        "gui_builder",
+        inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown",
+        "Standalone Builder: Applying system theme...",
+        "DEBUG",
+    )
     apply_theme(root)
 
-    matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Standalone Builder: Starting for {json_filepath}", "INFO")
+    matrix_log(
+        "ui",
+        "gui_builder",
+        inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown",
+        f"Standalone Builder: Starting for {json_filepath}",
+        "INFO",
+    )
 
     if not json_filepath.exists():
         logger.error(f"Standalone Builder: File not found: {json_filepath}")
@@ -48,10 +74,20 @@ def main():
     # Load Initial Data
     try:
         if json_filepath.stat().st_size == 0:
-            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Standalone Builder: File is empty, initializing with empty dict: {json_filepath}", "WARNING")
+            matrix_log(
+                "ui",
+                "gui_builder",
+                (
+                    inspect.currentframe().f_code.co_name
+                    if "inspect" in globals()
+                    else "unknown"
+                ),
+                f"Standalone Builder: File is empty, initializing with empty dict: {json_filepath}",
+                "WARNING",
+            )
             config_data = {}
         else:
-            with open(json_filepath, 'rb') as f:
+            with open(json_filepath, "rb") as f:
                 config_data = orjson.loads(f.read())
     except Exception as e:
         logger.exception("Standalone Builder: Failed to read JSON")
@@ -59,43 +95,73 @@ def main():
 
     def on_test(new_data):
         """Publishes the new config to MQTT to trigger a live rebuild in the main application."""
-        matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Standalone Builder: 'Test' triggered for {json_filepath.name}", "INFO")
-        
+        matrix_log(
+            "ui",
+            "gui_builder",
+            (
+                inspect.currentframe().f_code.co_name
+                if "inspect" in globals()
+                else "unknown"
+            ),
+            f"Standalone Builder: 'Test' triggered for {json_filepath.name}",
+            "INFO",
+        )
+
         try:
             # LOCAL IMPORT: Avoid dependency requirement if not testing
             import paho.mqtt.client as mqtt
             from oaConfigurationManager.FileReaders.config_reader import Config
-            
+
             app_config = Config.get_instance()
             broker = getattr(app_config, "MQTT_BROKER_ADDRESS", "localhost")
             port = getattr(app_config, "MQTT_BROKER_PORT", 1883)
             user = getattr(app_config, "MQTT_USERNAME", None)
             pw = getattr(app_config, "MQTT_PASSWORD", None)
-            
+
             # VERSION 2 API: Suppress deprecation warnings
             client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
             if user and pw:
                 client.username_pw_set(user, pw)
-            
+
             # Use short timeout for testing
             client.connect(broker, port, 10)
-            
+
             rebuild_topic = "OPEN-AIR/System/Control/UI/Rebuild"
-            payload = {
-                "path": str(json_filepath.resolve()),
-                "config": new_data
-            }
-            
+            payload = {"path": str(json_filepath.resolve()), "config": new_data}
+
             client.publish(rebuild_topic, orjson.dumps(payload))
             client.disconnect()
-            
-            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Standalone Builder: Rebuild request published to MQTT.", "SUCCESS")
+
+            matrix_log(
+                "ui",
+                "gui_builder",
+                (
+                    inspect.currentframe().f_code.co_name
+                    if "inspect" in globals()
+                    else "unknown"
+                ),
+                "Standalone Builder: Rebuild request published to MQTT.",
+                "SUCCESS",
+            )
         except ImportError:
-            logger.error("Standalone Builder: 'paho-mqtt' library not found. Cannot push to main UI.")
+            logger.error(
+                "Standalone Builder: 'paho-mqtt' library not found. Cannot push to main UI."
+            )
         except Exception as e:
             logger.error(f"Standalone Builder: Failed to publish rebuild request: {e}")
+
     def on_save():
-        matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Standalone Builder: 'Save' operation completed.", "INFO")
+        matrix_log(
+            "ui",
+            "gui_builder",
+            (
+                inspect.currentframe().f_code.co_name
+                if "inspect" in globals()
+                else "unknown"
+            ),
+            "Standalone Builder: 'Save' operation completed.",
+            "INFO",
+        )
         pass
 
     # Launch the builder using 'root' as the primary window
@@ -105,16 +171,24 @@ def main():
         json_filepath=json_filepath,
         on_test_callback=on_test,
         on_save_callback=on_save,
-        is_standalone=True
+        is_standalone=True,
     )
 
     # Lifecycle Management
     def on_close():
-        matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Standalone Builder: Program exiting (Close requested).", "INFO")
+        matrix_log(
+            "ui",
+            "gui_builder",
+            (
+                inspect.currentframe().f_code.co_name
+                if "inspect" in globals()
+                else "unknown"
+            ),
+            "Standalone Builder: Program exiting (Close requested).",
+            "INFO",
+        )
         try:
-            # ⚡ CONSISTENCY: Call abandon_changes to ensure original state is restored if 'TEST UI' was used
-            app.abandon_changes()
-            # Explicitly kill process just in case
+            app.shutdown()
             sys.exit(0)
         except Exception as e:
             logger.warning(f"Standalone Builder: Error during shutdown: {e}")
@@ -122,8 +196,28 @@ def main():
 
     root.protocol("WM_DELETE_WINDOW", on_close)
 
+    # ⚡ V3.1.29 GRACEFUL SHUTDOWN: Handle SIGTERM and KeyboardInterrupt
+    import signal
+
+    def handle_signal(signum, frame):
+        matrix_log(
+            "ui",
+            "gui_builder",
+            "handle_signal",
+            f"Standalone Builder: Signal {signum} received. Initiating shutdown...",
+            "WARNING",
+        )
+        root.after(0, on_close)
+
+    signal.signal(signal.SIGTERM, handle_signal)
+    signal.signal(signal.SIGINT, handle_signal)
+
     # Start Event Loop
-    root.mainloop()
+    try:
+        root.mainloop()
+    except KeyboardInterrupt:
+        on_close()
+
 
 if __name__ == "__main__":
     main()

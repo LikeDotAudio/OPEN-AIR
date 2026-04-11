@@ -26,6 +26,8 @@ from oaComProtocols.oaComSNMP.Methods.snmp_utils import get_snmp_node_id, get_sn
 from oaComProtocols.oaComSNMP.Constants.snmp_constants import BASE_OID, STATE_SYNC_INTERVAL
 
 from oaLogging.Core.logger import SNMP_LOGGER as snmp_logger, is_debug_allowed
+from oaLogging.Methods.matrix_gate import matrix_log
+
 
 @dataclass
 class BridgeContext:
@@ -142,12 +144,17 @@ class SNMPManager:
             # ⚡ REFLECTION: Only update our internal state if the message originated from MQTT
             source = msg.get("source", "UNKNOWN").upper()
             if source == "MQTT":
+                # ⚡ ANTI-FEEDBACK SPEC: Drop messages that we published to prevent echo loops
+                meta = msg.get("meta", {})
+                if meta.get("origin_source") in ["oaComSNMP", "SNMP"]:
+                    return
+
                 topic = msg.get("topic")
                 if topic:
                     # Update local state mirror with the normalized router packet
                     self._mqtt_state[topic] = msg
 
-    def start(self):
+    def start(self, display_root=None):
         with self._state_lock:
             if self._running: return
             self._running = True
@@ -155,8 +162,15 @@ class SNMPManager:
         cfg = Config.get_instance()
         self._socket_info = f"{get_local_ip()}:{cfg.SNMP_PORT} (System Daemon Bridge)"
         
-        from oaOchestration.Core.path_initializer import GLOBAL_PROJECT_ROOT
-        initialize_oid_map(os.path.join(str(GLOBAL_PROJECT_ROOT), "oaGui", "Assets"))
+        # ⚡ STANDALONE: The OID map source is now decoupled from the protocol logic.
+        # We check for an explicit display_root, then a config override, then fallback.
+        oid_source = display_root or getattr(cfg, "OID_MAP_SOURCE", None)
+        
+        if oid_source and os.path.exists(oid_source):
+            initialize_oid_map(oid_source)
+            matrix_log("comms", "snmp", "start", f"📡 [SNMP] OID Map initialized from: {oid_source}", "SUCCESS")
+        else:
+            matrix_log("comms", "snmp", "start", "📡 [SNMP] No OID Map source found. Using default/flat topic mapping.", "WARNING")
 
         self.state_persister.start()
         self.log_monitor.start()
@@ -199,9 +213,16 @@ class SNMPManager:
             if is_debug_allowed("comms", "snmp"): snmp_logger.error(f"❌ [SNMP-UI] Failed to parse network activity: {e}")
 
     def stop(self):
-        with self._state_lock:
+        # ⚡ V3.1.29 RESILIENCE: Use a timed lock to avoid hanging during rapid shutdown/interruption
+        if not self._state_lock.acquire(timeout=1.0):
+            snmp_logger.warning("SNMP stop() timed out waiting for lock. Forcing shutdown.")
+        
+        try:
             if not self._running: return
             self._running = False
+        finally:
+            try: self._state_lock.release()
+            except RuntimeError: pass # Already released or not held
         
         snmp_logger.warning("SNMP Bridge Offline.")
         try:

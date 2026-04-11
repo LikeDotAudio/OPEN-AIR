@@ -1,0 +1,115 @@
+{
+  "LCR_YAK_4263A_System": {
+    "type": "OcaBin",
+    "id": "50.100.8.10.1.7",
+    "geometry": { "anchor": "NSEW" },
+    "behavior": { "fluid_ew": true },
+    "blocks": {
+      "System_Interface": {
+        "type": "OcaBlock",
+        "description": { "En": "System & Interface" },
+        "fields": {
+          "Identification": {
+            "type": "_GuiActuator",
+            "label": {
+              "En": "*IDN?",
+              "Fr": "*IDN?",
+              "De": "*IDN?",
+              "Es": "*IDN?"
+            },
+            "label_active": {
+              "En": "*IDN?",
+              "Fr": "*IDN?",
+              "De": "*IDN?",
+              "Es": "*IDN?"
+            },
+            "message": "*IDN?"
+          },
+          "Reset": {
+            "type": "_GuiActuator",
+            "label": {
+              "En": "Reset",
+              "Fr": "Réinitialiser",
+              "De": "Zurücksetzen",
+              "Es": "Reiniciar"
+            },
+            "label_active": {
+              "En": "Reset",
+              "Fr": "Réinitialiser",
+              "De": "Zurücksetzen",
+              "Es": "Reiniciar"
+            },
+            "message": "*RST"
+          },
+          "Beeper State": {
+            "type": "_GuiActuator",
+            "label": {
+              "En": "Beeper",
+              "Fr": "Avertisseur",
+              "De": "Beeper",
+              "Es": "Beeper"
+            },
+            "label_active": {
+              "En": "Beeper",
+              "Fr": "Avertisseur",
+              "De": "Beeper",
+              "Es": "Beeper"
+            },
+            "message": ":SYSTem:BEEPer:STATe {value}",
+            "options": ["ON", "OFF"]
+          },
+          "Key Lock": {
+            "type": "_GuiActuator",
+            "label": {
+              "En": "Key Lock",
+              "Fr": "Verrouillage des touches",
+              "De": "Tastensperre",
+              "Es": "Bloqueo de teclas"
+            },
+            "label_active": {
+              "En": "Key Lock",
+              "Fr": "Verrouillage des touches",
+              "De": "Tastensperre",
+              "Es": "Bloqueo de teclas"
+            },
+            "message": ":SYSTem:KLOCk {value}",
+            "options": ["ON", "OFF"]
+          },
+          "Display State": {
+            "type": "_GuiActuator",
+            "label": {
+              "En": "Display",
+              "Fr": "Écran",
+              "De": "Anzeige",
+              "Es": "Pantalla"
+            },
+            "label_active": {
+              "En": "Display",
+              "Fr": "Écran",
+              "De": "Anzeige",
+              "Es": "Pantalla"
+            },
+            "message": ":DISPlay:STATe {value}",
+            "options": ["ON", "OFF"]
+          },
+          "Error Query": {
+            "type": "_GuiActuator",
+            "label": {
+              "En": "Query Error",
+              "Fr": "Interroger l'erreur",
+              "De": "Fehler abfragen",
+              "Es": "Consultar error"
+            },
+            "label_active": {
+              "En": "Query Error",
+              "Fr": "Interroger l'erreur",
+              "De": "Fehler abfragen",
+              "Es": "Consultar error"
+            },
+            "message": ":SYSTem:ERRor?"
+          }
+        }
+      }
+    }
+  }
+}

@@ -263,3 +263,9 @@
 - 20260406.0235.1: Corrected potential UTF-8 encoding issue in router strategy and dispatch files by rewriting them. Ensured all managers are correctly subscribed.
 
 - 20260406.0240.1: Fixed message routing by updating OSC dispatch to handle complex payloads and adding the missing topic-to-OID mapping for center_freq_MHz in the SMPTE2138 bridge.
+
+## [20260411.0020.1] - 2026-04-11
+### Fixed
+- **SNMP Installer Noise:** Removed automated 'snmpwalk' test from the end of the generated SNMP installer script. This prevents raw telemetry data from being output to the console during installation, which was causing "command not found" errors in shells misinterpreting the output.
+- **SNMP Manager Scope:** Resolved a 'NameError' for 'matrix_log' in 'snmp_manager.py' by correctly importing it at the module level.
+- **SNMP Manager Syntax:** Fixed a syntax error in 'snmp_manager.py' imports (dots vs slashes).

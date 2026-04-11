@@ -22,6 +22,7 @@ from oaStyle.Core.style import THEMES, DEFAULT_THEME
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 from oaGuiManager.Core.transparency.transparency import TransparencyManager
 from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
+from oaGuiBuilder.Core.base_widget_creator import BaseWidgetCreator
 
 # --- EXTRACTED CORE MODULES ---
 from .Core.fader_interaction_mixin import FaderInteractionMixin
@@ -90,18 +91,21 @@ class CustomFaderFrame(
         )
 
 @WidgetRegistry.register("_Fader", "_SmartFader", "_CustomFader")
-class BuilderFaderCreator(TransparencyMixin):
+class BuilderFaderCreator(BaseWidgetCreator, TransparencyMixin):
     
-    @staticmethod
-    def make(parent_widget, config_data, context=None, **kwargs):
-        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬 BuilderFaderCreator.make: {config_data.get('path')}", level="TRACE")
+    def _assemble_ui(self, parent_widget, config_data, context, **kwargs):
+        """
+        Implementation of the Template Method for Fader assembly.
+        """
         ctx = context if context else type('obj', (object,), kwargs)()
-        b_inst = ctx.builder_instance if hasattr(ctx, 'builder_instance') else ctx.app_instance
+        b_inst = getattr(ctx, 'builder_instance', None) or getattr(ctx, 'app_instance', None) or kwargs.get('builder_instance')
         
         path = config_data.get("path")
         val_var = kwargs.get("variable") or tk.DoubleVar(master=parent_widget, value=float(config_data.get("value_default", 75.0)))
 
-        frame = CustomFaderFrame(parent_widget, val_var, config_data, path, ctx.state_mirror_engine, None)
+        # 1. Create Frame
+        frame = CustomFaderFrame(parent_widget, val_var, config_data, path, getattr(ctx, 'state_mirror_engine', None), None)
+        frame.variable = val_var
 
         try:
             l_cfg = config_data.get("layout", {})
@@ -111,8 +115,6 @@ class BuilderFaderCreator(TransparencyMixin):
             canvas.pack(fill=tk.BOTH, expand=True)
             frame.canvas = canvas # Inject canvas ref
             
-            if hasattr(b_inst, '_apply_transparency'): TransparencyManager.apply_transparency(frame, canvas, config_data, b_inst)
-
             # 3. Dynamic Handlers
             def _sync_pos(*a):
                 if not canvas.winfo_exists(): return
@@ -143,18 +145,15 @@ class BuilderFaderCreator(TransparencyMixin):
             canvas.bind("<Alt-Button-1>", frame._open_manual_entry)
             canvas.bind("<Configure>", _schedule_redraw)
 
-            # 5. State Setup
-            if path and ctx.state_mirror_engine:
-                rc = {**config_data, "value_min": frame.min_val, "value_max": frame.max_val}
-                topic = ctx.state_mirror_engine.register_widget(path, val_var, ctx.base_mqtt_topic_from_path, rc, instance=frame)
-                if ctx.subscriber_router and topic: ctx.subscriber_router.subscribe_to_topic(topic, ctx.state_mirror_engine.sync_incoming_mqtt_to_gui)
-                ctx.state_mirror_engine.initialize_widget_state(path)
-
             canvas.after(50, lambda: frame._draw_fader(w, h, val_var.get()))
-            return frame
+            return frame, canvas
         except Exception as e:
             logger.exception("🎚️❌ Error creating custom fader")
-            return None
+            return None, None
+
+    @staticmethod
+    def make(parent_widget, config_data, context=None, **kwargs):
+        return BuilderFaderCreator.build(parent_widget, config_data, context, **kwargs)
 
     def make_fader(self, parent_widget, config_data, context=None, **kwargs):
-        return BuilderFaderCreator.make(parent_widget, config_data, context, builder_instance=self, **kwargs)
+        return self.build(parent_widget, config_data, context, **kwargs)

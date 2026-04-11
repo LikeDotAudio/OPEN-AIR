@@ -24,6 +24,7 @@ from oaGui.Core.layout_parser import LayoutParser
 from oaStyle.Core.style import THEMES, DEFAULT_THEME
 from oaOchestration.Constants.project_paths import LAYOUT_CACHE_PATH
 from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
+from oaGuiEditorWYSIWYG.Managers.wysiwyg_editor import WysiwygEditor
 
 # --- EXTRACTED CORE MODULES ---
 from oaGui.Core.layout_cache import LayoutCacheManager
@@ -61,6 +62,16 @@ class Application(
         self.root = root
         self.app_constants = app_constants
         self.on_complete_callback = on_complete
+        
+        # --- TOP TOOLBAR ---
+        self.top_toolbar = tk.Frame(self, bg="#333333", height=30)
+        self.top_toolbar.pack(side="top", fill="x")
+        
+        tk.Label(self.top_toolbar, text="OPEN-AIR CORE", bg="#333333", fg="white", font=("Arial", 9, "bold")).pack(side="left", padx=10)
+        
+        tk.Button(self.top_toolbar, text="Launch WYSIWYG Editor", bg="#444444", fg="#00FF00", 
+                  font=("Arial", 8, "bold"), relief="flat", padx=10, 
+                  command=self._launch_wysiwyg_editor).pack(side="right", padx=10, pady=2)
 
         # ⚡ AUTO-DISCOVERY
         WidgetRegistry.scan_widgets()
@@ -169,3 +180,30 @@ class Application(
     
     def print_to_console(self, message: str):
         matrix_log("ui", "gui_shell", "print_to_console", f"🖥️💬 Observer's Log: {message}", "DEBUG")
+
+    def _launch_wysiwyg_editor(self):
+        """Launches the WYSIWYG editor for the currently loaded layout or a new one."""
+        matrix_log("ui", "gui_shell", "_launch_wysiwyg_editor", "🚀 [EDITOR] Launching WYSIWYG Designer...", "INFO")
+        
+        def _rebuild_main_ui(new_data=None):
+            """Callback for the editor to test new GUI definitions."""
+            matrix_log("ui", "gui_shell", "_rebuild_main_ui", "🏗️ [TEST] Rebuilding main application with editor state...", "INFO")
+            # For simplicity, we trigger a clean build from Assets
+            from oaOchestration.Core.path_initializer import GLOBAL_PROJECT_ROOT
+            root_dir = GLOBAL_PROJECT_ROOT / "oaGui" / "Assets"
+            
+            # Wipe current UI (Simplified)
+            for child in self.winfo_children():
+                if child != self.top_toolbar:
+                    child.destroy()
+            
+            # Re-initialize storage
+            self._notebooks = {}
+            self._frames_by_path = {}
+            
+            # If new_data is provided, we'd ideally pass it to _build_from_directory 
+            # to override the disk version. 
+            self._build_from_directory(path=root_dir, parent_widget=self, 
+                                       on_complete=self._on_initial_build_complete)
+
+        WysiwygEditor.launch(self.root, on_test_callback=_rebuild_main_ui)

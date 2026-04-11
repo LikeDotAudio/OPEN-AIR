@@ -7,8 +7,8 @@
 import orjson
 import os
 from pathlib import Path
-from oaLogging.Core.logger import initialize_logging, set_log_directory
-from loguru import logger
+from oaLogging.Core.logger import WYSIWYG_LOGGER
+logger = WYSIWYG_LOGGER.bind(protocol="WYSIWYG")
 
 LOCAL_DEBUG = False    # Set to False in production, True for dev on this file
 

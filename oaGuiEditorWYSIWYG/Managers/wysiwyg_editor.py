@@ -9,7 +9,8 @@
 import tkinter as tk
 from tkinter import ttk
 import pathlib
-from loguru import logger
+from oaLogging.Core.logger import WYSIWYG_LOGGER
+logger = WYSIWYG_LOGGER.bind(protocol="WYSIWYG")
 from oaLogging.Methods.matrix_gate import matrix_log
 
 # Import Modular Components
@@ -71,9 +72,11 @@ class WysiwygEditor:
             self.window = self.parent
         else:
             self.window = tk.Toplevel(self.parent)
-            self.window.title(f"WYSIWYG Editor - {state_manager.get_file_path() or 'Unsaved'}")
-            self.window.geometry("1400x900")
-            self.window.configure(bg="#2b2b2b")
+            
+        # Standard Window Configuration
+        self.window.title(f"WYSIWYG Editor - {state_manager.get_file_path().name if state_manager.get_file_path() else 'Unsaved'}")
+        self.window.geometry("1400x900")
+        self.window.configure(bg="#2b2b2b")
         
         # INTERCEPT WM_DELETE_WINDOW to ensure clean cleanup
         self.window.protocol("WM_DELETE_WINDOW", self.close_window)
@@ -83,6 +86,7 @@ class WysiwygEditor:
         toolbar = ttk.Frame(self.window)
         toolbar.pack(side="top", fill="x", padx=5, pady=5)
         
+        ttk.Button(toolbar, text="OPEN", command=self.open_workspace).pack(side="left", padx=2)
         ttk.Button(toolbar, text="Save & Backup", command=self.save_workspace).pack(side="left", padx=2)
         ttk.Separator(toolbar, orient=tk.VERTICAL).pack(side="left", fill="y", padx=10)
         
@@ -174,6 +178,28 @@ class WysiwygEditor:
                 self.status_lbl.config(text="SAVE FAILED! Check logs.", foreground="#ff3333")
             return False
 
+    def open_workspace(self):
+        """Triggers the File IO handler to open a file and refreshes the UI."""
+        matrix_log("ui", "gui_builder", "open_workspace", "WysiwygEditor: Open operation triggered.", "INFO")
+        if FileIOHandler.open_file():
+            # The file is loaded into StateManager. 
+            # InteractiveLayout and other workspaces are subscribed to STATE_UPDATED 
+            # but StateManager.initialize broadcasts it already.
+            # We just update the window title.
+            new_path = state_manager.get_file_path()
+            if not self.is_standalone:
+                self.window.title(f"WYSIWYG Editor - {new_path.name if new_path else 'Unsaved'}")
+            
+            if self.status_lbl.winfo_exists():
+                self.status_lbl.config(text=f"Opened: {new_path.name if new_path else 'Unknown'}", foreground="#33A1FD")
+            
+            # Force a rebuild of the interactive layout
+            if hasattr(self, 'layout_view'):
+                self.layout_view._manual_rebuild()
+            
+            return True
+        return False
+
     def _save_and_close(self):
         """Saves the file and then closes the editor."""
         matrix_log("ui", "gui_builder", "_save_and_close", "WysiwygEditor: 'SAVE AND CLOSE' triggered.", "INFO")
@@ -201,3 +227,11 @@ class WysiwygEditor:
             self.on_test(state_manager.get_state())
             if self.status_lbl.winfo_exists():
                 self.status_lbl.config(text="Main UI Rebuilt", foreground="#FF9900")
+
+    def shutdown(self):
+        """
+        ⚡ V3.1.29 GRACEFUL SHUTDOWN: Orchestrates the safe termination of the 
+        editor, ensuring original states are restored if needed.
+        """
+        matrix_log("ui", "gui_builder", "shutdown", "WysiwygEditor: Shutdown sequence initiated.", "INFO")
+        self.abandon_changes()

@@ -197,6 +197,10 @@ class DynamicGuiBuilder(
         self.scrollbar_v.grid(row=0, column=1, sticky="ns")
         self.scrollbar_h.grid(row=1, column=0, sticky="ew")
         
+        # ⚡ EDITOR AIDS: Draw grid and center line if in editor mode
+        if self.is_editor:
+            self._draw_editor_grid()
+
         if app_constants.RELOAD_CONFIG_DISPLAYED:
             self.button_frame = ttk.Frame(self)
             self.button_frame.grid(row=2, column=0, columnspan=2, sticky="ew", pady=(5, 10), padx=10)
@@ -226,6 +230,36 @@ class DynamicGuiBuilder(
         if self._resize_timer:
             self.after_cancel(self._resize_timer)
         self._resize_timer = self.after(RESIZE_THROTTLE_DELAY, self._perform_canvas_resize, width)
+        
+        # ⚡ EDITOR REDRAW: Ensure grid and center line are redrawn on canvas resize
+        if self.is_editor:
+            self.after(RESIZE_THROTTLE_DELAY + 10, self._draw_editor_grid)
+
+    def _draw_editor_grid(self):
+        """Draws a 100px grid and a center line on the canvas."""
+        if not self.is_editor or not self.canvas.winfo_exists():
+            return
+            
+        self.canvas.delete("editor_grid")
+        
+        w = max(self.canvas.winfo_width(), self.scroll_frame.winfo_reqwidth())
+        h = max(self.canvas.winfo_height(), self.scroll_frame.winfo_reqheight())
+        
+        # 1. 100px Grid
+        grid_color = "#333333"
+        for x in range(0, w, 100):
+            self.canvas.create_line(x, 0, x, h, fill=grid_color, dash=(2, 4), tags="editor_grid")
+        for y in range(0, h, 100):
+            self.canvas.create_line(0, y, w, y, fill=grid_color, dash=(2, 4), tags="editor_grid")
+            
+        # 2. Center Lines
+        center_x = w // 2
+        center_y = h // 2
+        self.canvas.create_line(center_x, 0, center_x, h, fill="#FF9900", width=1, dash=(5, 5), tags="editor_grid")
+        self.canvas.create_line(0, center_y, w, center_y, fill="#FF00FF", width=1, dash=(5, 5), tags="editor_grid")
+        
+        # Lower them so they don't cover widgets
+        self.canvas.tag_lower("editor_grid")
 
     def _perform_canvas_resize(self, width):
         self._resize_timer = None

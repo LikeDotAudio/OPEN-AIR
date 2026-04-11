@@ -39,7 +39,14 @@ import oaComProtocols.oaComREST.Entry as REST_MODULE
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Entry import logger
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+
+# --- GUI FALLBACKS (V3.2.1 Decoupling) ---
+try:
+    from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+except ImportError:
+    class TransparencyMixin:
+        """Fallback mixin for standalone execution without GUI manager."""
+        def render(self): pass
 
 class RestDashboard(tk.Frame, TransparencyMixin):
     """

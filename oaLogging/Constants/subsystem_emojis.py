@@ -20,4 +20,5 @@ SUBSYSTEM_EMOJIS = {
     "FAILURE": "🚨🔴",
     "SNMP": "📡", "MIDI": "📡", "OSC": "📡",
     "SMPTE2138": "📡", "REST": "📡", "EMBER": "📡", "AES70": "📡",
+    "WYSIWYG": "🎨",
 }

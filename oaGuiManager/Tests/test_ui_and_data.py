@@ -18,7 +18,7 @@ from oaGuiEditorWYSIWYG.Core.state import StateManager
 # --- Data & Processing Utilities ---
 from oaGuiShowtime.Methods.group import group_markers
 from oaGuiEditorWYSIWYG.Core.file_io_handler import FileIOHandler
-from oaGuiEditorWYSIWYG.Core.event_bus import event_bus
+from oaComBroker.Core.event_bus import event_bus
 
 class TestUIAndData(unittest.TestCase):
     def setUp(self):

@@ -6,7 +6,7 @@ import time
 import threading
 from dataclasses import dataclass
 from typing import Any, Optional
-from loguru import logger
+from oaLogging.Core.logger import SNMP_LOGGER as logger
 from oaConfigurationManager.FileReaders.config_reader import Config
 from oaComProtocols.oaComSNMP.Core.snmp_tree import SNMPTreeBuilder
 from oaOchestration.Methods.network_utils import get_local_ip
@@ -201,6 +201,9 @@ class SNMPManager:
 
     def _handle_network_activity(self, msg):
         try:
+            if not msg.payload:
+                return
+
             import orjson
             payload = msg.payload.decode() if isinstance(msg.payload, bytes) else msg.payload
             data = orjson.loads(payload)
@@ -325,9 +328,19 @@ class SNMPBridge(SNMPManager):
             
             if self.context.subscriber_router:
                 self.context.subscriber_router.subscribe_to_topic("OPEN-AIR/System/Control/SNMP/GenerateScript", self._handle_mqtt_command)
+
+                # ⚡ RACE CONDITION FIX: Give the router time to populate the state mirror
+                # before generating the initial MIB. We run this in a thread to avoid 
+                # blocking the main startup sequence in launcher.py.
+                def delayed_mib_sync():
+                    snmp_logger.info("SNMP Bridge: Delaying initial MIB generation for 5 seconds to allow state sync...")
+                    time.sleep(5)
+                    self.save_current_mib()
+                    if is_debug_allowed("comms", "snmp"): 
+                        snmp_logger.success(f"SNMP Bridge Active on {self._socket_info}")
                 
-            self.save_current_mib()
-            if is_debug_allowed("comms", "snmp"): snmp_logger.success(f"SNMP Bridge Active on {self._socket_info}")
+                threading.Thread(target=delayed_mib_sync, daemon=True, name="SNMP-InitialSync").start()
+
         except Exception as e:
             snmp_logger.error(f"SNMP Bridge Start Failed: {e}")
 

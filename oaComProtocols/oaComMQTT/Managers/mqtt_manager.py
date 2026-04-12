@@ -146,6 +146,8 @@ class MqttManager:
     def _handle_service_command(self, msg: MqttMessage):
         try:
             payload = msg.payload
+            if not payload:
+                return
             data = orjson.loads(payload) if isinstance(payload, (bytes, str)) else payload
             action = data.get("action")
             service_name = data.get("service")

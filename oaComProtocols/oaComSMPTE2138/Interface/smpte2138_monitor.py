@@ -57,7 +57,7 @@ class SMPTE2138MonitorImplementation(tk.Frame, TransparencyMixin):
             self._apply_transparency(self, None, {}, builder)
         
         try:
-            from oaGuiEditorWYSIWYG.Core.event_bus import event_bus
+            from oaComBroker.Core.event_bus import event_bus
             event_bus.subscribe("SMPTE2138_TRAFFIC", self._on_bus_update)
         except ImportError: pass
         
@@ -166,9 +166,9 @@ class SMPTE2138MonitorImplementation(tk.Frame, TransparencyMixin):
                                      show="headings", style="SMPTE.Treeview")
         
         for c in cols:
-            self.log_tree.heading(c, text=c)
+            self.log_tree.heading(c, text=c, command=lambda _c=c: self._sort_column(_c, False))
             self.log_tree.column(c, width=100 if c!="Value" else 200)
-            
+
         sy = ttk.Scrollbar(self.log_container, orient=tk.VERTICAL, 
                            command=self.log_tree.yview)
         self.log_tree.configure(yscrollcommand=sy.set)
@@ -191,6 +191,23 @@ class SMPTE2138MonitorImplementation(tk.Frame, TransparencyMixin):
                             command=self.dissector.yview)
         self.dissector.configure(yscrollcommand=dsy.set)
         dsy.pack(side=tk.RIGHT, fill=tk.Y)
+
+    def _sort_column(self, col, reverse):
+        """Sorts the treeview by the given column."""
+        l = [(self.log_tree.set(k, col), k) for k in self.log_tree.get_children('')]
+        
+        # Try numeric sort if applicable
+        try:
+            l.sort(key=lambda t: float(t[0]), reverse=reverse)
+        except ValueError:
+            l.sort(reverse=reverse)
+
+        # Rearrange items in sorted order
+        for index, (val, k) in enumerate(l):
+            self.log_tree.move(k, '', index)
+
+        # Reverse sort next time
+        self.log_tree.heading(col, command=lambda: self._sort_column(col, not reverse))
 
     def _send_bridge_cmd(self, active: bool):
         """Dispatches a remote control message to the bridge."""
@@ -272,7 +289,7 @@ class SMPTE2138MonitorImplementation(tk.Frame, TransparencyMixin):
         self.style.configure("SMPTE.TLabel", background=bg)
 
     def destroy(self):
-        from oaGuiEditorWYSIWYG.Core.event_bus import event_bus
+        from oaComBroker.Core.event_bus import event_bus
         event_bus.unsubscribe("SMPTE2138_TRAFFIC", self._on_bus_update)
         super().destroy()
 

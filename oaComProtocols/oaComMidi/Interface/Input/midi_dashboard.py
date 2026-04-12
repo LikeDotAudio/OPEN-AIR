@@ -34,11 +34,12 @@ class MidiDashboard(tk.Frame):
         # Extract non-Tkinter arguments
         self.config_data = kwargs.pop("config", {})
         self.json_path = kwargs.pop("json_path", None)
+        passed_manager = kwargs.pop("midi_manager", None)
 
         logger.info("🎹 [MIDI-DASH] __init__ called. Instantiating dashboard...")
         matrix_log("comms", "midi", "__init__", "🎹 [MIDI-DASH] Instantiating MidiDashboard...", "INFO")
         super().__init__(parent, **kwargs)
-        self.midi_manager = self._find_midi_manager(parent)
+        self.midi_manager = passed_manager or self._find_midi_manager(parent)
         self._setup_ui()
 
         if self.midi_manager:
@@ -110,15 +111,30 @@ class MidiDashboard(tk.Frame):
                 self.on_midi_activity(direction, val)
             elif is_midi_topic:
                 real_val = val.get("val") if isinstance(val, dict) else val
+                import re
+                note_match = re.search(r"note(\d+)", topic)
+                note = int(note_match.group(1)) if note_match else 0
+                ch_match = re.search(r"ch(\d+)", topic)
+                channel = (int(ch_match.group(1)) - 1) if ch_match else 0
+                
+                m_type = "note_on" if real_val > 0 else "note_off"
                 self.on_midi_activity(direction, {
                     "val": real_val, 
                     "topic": topic,
-                    "type": "note_on" if real_val > 0 else "note_off"
+                    "note": note,
+                    "channel": channel,
+                    "velocity": real_val if real_val <= 127 else 127,
+                    "type": m_type,
+                    "raw": f"{m_type} note={note} channel={channel} velocity={real_val}"
                 })
 
     def on_midi_activity(self, direction, msg):
         """Called when MIDI traffic occurs."""
-        self.after(0, lambda: self._process_activity(direction, msg))
+        try:
+            # ⚡ Robustness: Ensure we pass current values, not late-binding closures
+            self.after(0, lambda d=direction, m=msg: self._process_activity(d, m))
+        except tk.TclError:
+            pass # App is closing
 
     def _setup_ui(self):
         self.configure(bg="#2b2b2b")

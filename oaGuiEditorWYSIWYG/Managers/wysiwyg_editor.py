@@ -14,7 +14,7 @@ logger = WYSIWYG_LOGGER.bind(protocol="WYSIWYG")
 from oaLogging.Methods.matrix_gate import matrix_log
 
 # Import Modular Components
-from ..Core.event_bus import event_bus
+from oaComBroker.Core.event_bus import event_bus
 from ..Core.state import state_manager
 from ..Core.file_io_handler import FileIOHandler
 from ..Core.workspaces.interactive_layout import InteractiveLayout

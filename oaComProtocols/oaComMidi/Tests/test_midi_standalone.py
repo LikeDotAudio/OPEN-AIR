@@ -54,7 +54,10 @@ class TestMidiStandalone(unittest.TestCase):
         self.assertTrue(monitor_cb.called)
         direction, received_msg = monitor_cb.call_args[0]
         self.assertEqual(direction, "RX")
-        self.assertEqual(received_msg, msg)
+        # received_msg is now a dict containing 'raw', 'port', etc.
+        self.assertIsInstance(received_msg, dict)
+        self.assertEqual(received_msg['raw'], str(msg))
+        self.assertEqual(received_msg['port'], mock_port.name)
 
 if __name__ == "__main__":
     unittest.main()

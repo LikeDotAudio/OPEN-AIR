@@ -189,7 +189,7 @@ class MidiKeyboard(tk.Canvas):
             if isinstance(msg, dict):
                 channel = msg.get("channel", 0)
                 note = msg.get("note", 0)
-                velocity = msg.get("velocity", 0)
+                velocity = msg.get("velocity", msg.get("val", 0))
                 # Fallback to parsing 'raw' if fields are missing
                 if note == 0 and "raw" in msg:
                     raw = msg["raw"]

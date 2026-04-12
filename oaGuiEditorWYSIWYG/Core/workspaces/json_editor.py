@@ -10,7 +10,7 @@ import tkinter as tk
 from tkinter import ttk
 import orjson
 import re
-from ..event_bus import event_bus
+from oaComBroker.Core.event_bus import event_bus
 from ..state import state_manager
 
 # --- Standard Debug Logging Setup ---
@@ -177,25 +177,39 @@ class JsonEditor(tk.Frame):
         if source == self or not self.winfo_exists():
             return
         
-        matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"JsonEditor: Remote state update from {source.__class__.__name__ if source else 'External'}. Syncing text area.", "INFO")
-        # Check if text_area exists (should be true if _build_ui finished)
-        if hasattr(self, 'text_area'):
-            self.text_area.delete("1.0", "end")
-            self.text_area.insert("1.0", orjson.dumps(json_data, option=orjson.OPT_INDENT_2).decode())
-            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "JsonEditor: Applying syntax highlighting after sync...", "DEBUG")
-            self._apply_highlight()
+        matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"JsonEditor: Remote state update from {source.__class__.__name__ if source else 'External'}.", "INFO")
+        
+        # If a specific element is focused, re-run the focus logic to get its updated data
+        if hasattr(self, 'focused_path') and self.focused_path:
+            self._on_focus_requested(self.focused_path, source="StateUpdate", new_state=json_data)
+        else:
+            # Otherwise, just show the full updated JSON
+            if hasattr(self, 'text_area'):
+                self.text_area.delete("1.0", "end")
+                self.text_area.insert("1.0", orjson.dumps(json_data, option=orjson.OPT_INDENT_2).decode())
+                self._apply_highlight()
 
-    def _on_focus_requested(self, path, source=None):
+    def _on_focus_requested(self, path, source=None, new_state=None):
         """Locates and displays the JSON for the specified path."""
         if not self.winfo_exists() or not hasattr(self, 'text_area'): return
         
+        # Update the focused path
+        self.focused_path = path
+        
         matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"JsonEditor: Focus synchronization for path: {path} (Source: {source.__class__.__name__ if source else 'Unknown'})", "INFO")
         
-        self.focused_path = path # Store the path for potential future use
+        # If no path is provided, revert to showing the full JSON
+        if not path:
+            full_state = new_state or state_manager.get_state()
+            self.text_area.delete("1.0", "end")
+            if full_state:
+                self.text_area.insert("1.0", orjson.dumps(full_state, option=orjson.OPT_INDENT_2).decode())
+            self._apply_highlight()
+            self._update_line_numbers()
+            return
 
-        full_state = state_manager.get_state()
+        full_state = new_state or state_manager.get_state()
         if not full_state:
-            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "JsonEditor: No full state available. Clearing editor.", "WARNING")
             self.text_area.delete("1.0", "end")
             self._update_line_numbers()
             return
@@ -214,34 +228,13 @@ class JsonEditor(tk.Frame):
                     return None
             return curr
 
-        # Navigate to the specific path
-        path_segments = path.split('.') if path else []
-        target_data = None
-        
-        # ⚡ STRATEGY 1: Direct Resolution
+        path_segments = path.split('.')
         target_data = resolve_path(full_state, path_segments)
         
-        # ⚡ STRATEGY 2: Strip First Segment (Handle file-name-prefixed paths)
-        if target_data is None and len(path_segments) > 1:
-            target_data = resolve_path(full_state, path_segments[1:])
-            if target_data is not None:
-                matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name, f"JsonEditor: Resolved path by stripping prefix: {path_segments[0]}", "DEBUG")
-
-        # ⚡ STRATEGY 3: Parent Fallback (Show containing block if leaf is missing)
-        if target_data is None and len(path_segments) > 1:
-            for i in range(1, len(path_segments)):
-                parent_path = path_segments[:-i]
-                target_data = resolve_path(full_state, parent_path)
-                if target_data is not None:
-                    matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name, f"JsonEditor: Falling back to parent path: {'.'.join(parent_path)}", "DEBUG")
-                    break
-
         if target_data is None:
-            # Final Fallback to Root
             target_data = full_state
             matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name, "JsonEditor: Path resolution failed. Defaulting to Root JSON.", "WARNING")
 
-        # Display the targeted JSON data
         self.text_area.delete("1.0", "end")
         self.text_area.insert("1.0", orjson.dumps(target_data, option=orjson.OPT_INDENT_2).decode())
         self._apply_highlight()

@@ -24,7 +24,7 @@ class TestMidiTx(unittest.TestCase):
     def test_publish_cc_to_midi(self):
         """Test that a system CC topic is correctly translated and sent to MIDI ports."""
         mock_out = MagicMock()
-        mock_out.name = "MockPort"
+        mock_out.name = "my_device"
         self.midi.ports.outports = [mock_out]
         
         topic = "OPEN-AIR/MIDI/my_device/ch0/cc7"
@@ -44,7 +44,7 @@ class TestMidiTx(unittest.TestCase):
     def test_publish_note_to_midi(self):
         """Test that a system Note topic is correctly translated and sent to MIDI ports."""
         mock_out = MagicMock()
-        mock_out.name = "MockPort"
+        mock_out.name = "my_device"
         self.midi.ports.outports = [mock_out]
         
         topic = "OPEN-AIR/MIDI/my_device/ch2/note60"

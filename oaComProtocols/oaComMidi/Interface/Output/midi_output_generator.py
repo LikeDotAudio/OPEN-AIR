@@ -3,7 +3,7 @@
 # MIDI Output Generator GUI.
 #
 # Author: Anthony Peter Kuzub
-# Version: 20260406.1955.1
+# Version: 20260412.0015.1
 
 import tkinter as tk
 from tkinter import ttk
@@ -12,15 +12,16 @@ from oaLogging.Methods.matrix_gate import matrix_log
 from ..Input.midi_keyboard import MidiKeyboard, get_midi_color
 
 class MidiOutputGenerator(tk.Frame):
-
     """
     MIDI Output Generator with interactive keyboard and channel selection.
     """
-    def __init__(self, parent, **kwargs):
+    def __init__(self, parent, midi_manager=None, **kwargs):
         self.config_data = kwargs.pop("config", {})
+        self.midi_manager = midi_manager
         super().__init__(parent, **kwargs)
         
-        self.midi_manager = self._find_midi_manager(parent)
+        if not self.midi_manager:
+            self.midi_manager = self._find_midi_manager(parent)
         
         self.selected_channels = [tk.BooleanVar(value=False) for _ in range(16)]
         self.selected_channels[0].set(True) # Default Ch 1
@@ -41,7 +42,9 @@ class MidiOutputGenerator(tk.Frame):
             if app and hasattr(app, 'midi_manager'):
                 m = getattr(app, 'midi_manager', None)
                 if m: return m
-            try: curr = curr.master
+            try:
+                if curr == curr.master: break
+                curr = curr.master
             except: break
         return None
 
@@ -53,14 +56,22 @@ class MidiOutputGenerator(tk.Frame):
         header.pack(side=tk.TOP, fill=tk.X, pady=10)
         tk.Label(header, text="🎹 MIDI OUTPUT GENERATOR", font=("Helvetica", 14, "bold"), fg="#ffffff", bg="#2b2b2b").pack(side=tk.LEFT, padx=20)
         
-        # Global Send Toggle
         tk.Checkbutton(header, text="ENABLE MIDI OUT", variable=self.send_enabled_var, 
                        bg="#2b2b2b", fg="#00ff00", selectcolor="#000000", font=("Helvetica", 10, "bold")).pack(side=tk.RIGHT, padx=20)
 
         main_pane = tk.Frame(self, bg="#2b2b2b")
         main_pane.pack(fill=tk.BOTH, expand=True, padx=10, pady=5)
 
-        # --- TOP: Output Selection ---
+        # --- TOP: Interactive Keyboard ---
+        kb_frame = tk.LabelFrame(main_pane, text="Interactive Keyboard (Touch to Play)", bg="#2b2b2b", fg="#888888")
+        kb_frame.pack(side=tk.TOP, fill=tk.X, padx=5, pady=5)
+        
+        self.keyboard = MidiKeyboard(kb_frame, height=300, 
+                                     on_note_on=self._generate_note_on, 
+                                     on_note_off=self._generate_note_off)
+        self.keyboard.pack(fill=tk.X, expand=True, padx=10, pady=10)
+
+        # --- MIDDLE: Output Selection ---
         out_frame = tk.LabelFrame(main_pane, text="Output Hardware Selector", bg="#2b2b2b", fg="#888888")
         out_frame.pack(side=tk.TOP, fill=tk.X, padx=5, pady=5)
         
@@ -68,11 +79,10 @@ class MidiOutputGenerator(tk.Frame):
         self.port_combo.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=10, pady=10)
         ttk.Button(out_frame, text="Refresh", command=self._refresh_ports).pack(side=tk.RIGHT, padx=10)
 
-        # --- MIDDLE: Channel Selector ---
+        # --- BOTTOM: Channel Selector ---
         ch_frame = tk.LabelFrame(main_pane, text="MIDI Channel Selector", bg="#2b2b2b", fg="#888888")
         ch_frame.pack(side=tk.TOP, fill=tk.X, padx=5, pady=5)
         
-        # Channels 1-16 in a grid
         grid_frame = tk.Frame(ch_frame, bg="#2b2b2b")
         grid_frame.pack(padx=10, pady=10)
         
@@ -84,15 +94,6 @@ class MidiOutputGenerator(tk.Frame):
             
         tk.Checkbutton(ch_frame, text="SELECT ALL CHANNELS", variable=self.all_channels_var, command=self._on_all_channels_toggle,
                        bg="#2b2b2b", fg="#ffffff", selectcolor="#000000").pack(pady=(0,10))
-
-        # --- BOTTOM: Interactive Keyboard ---
-        kb_frame = tk.LabelFrame(main_pane, text="Interactive Keyboard (Touch to Play)", bg="#2b2b2b", fg="#888888")
-        kb_frame.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=5, pady=5)
-        
-        self.keyboard = MidiKeyboard(kb_frame, height=120, 
-                                     on_note_on=self._generate_note_on, 
-                                     on_note_off=self._generate_note_off)
-        self.keyboard.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
 
     def _refresh_ports(self):
         if not self.midi_manager: return
@@ -121,35 +122,27 @@ class MidiOutputGenerator(tk.Frame):
         channels = [i for i, v in enumerate(self.selected_channels) if v.get()]
         if not channels: return
         
-        # ⚡ LOCAL VISUALIZATION FIRST
-        # Highlight all selected channels colors on the keyboard? 
-        # For now, just use the first selected channel for color.
         color = get_midi_color(channels[0])
         if m_type == "note_on": self.keyboard.note_on(note, color)
         else: self.keyboard.note_off(note)
 
-        # ⚡ GENERATE OUTBOUND TRAFFIC
         port = self.selected_output_port.get()
         for ch in channels:
             topic = f"OPEN-AIR/MIDI/gui_out/ch{ch+1}/note{note}"
             pld = {
-                "val": velocity,
-                "channel": ch,
-                "note": note,
-                "velocity": velocity,
-                "type": m_type,
-                "raw": f"{m_type} channel={ch} note={note} velocity={velocity}"
+                "val": velocity, "channel": ch, "note": note, "velocity": velocity,
+                "type": m_type, "raw": f"{m_type} channel={ch} note={note} velocity={velocity}"
             }
-            # Add target port to metadata so ProtocolRouter knows where to send it
             meta = {
-                "origin_source": "MIDI-TX", # Mark as outbound
-                "target_port": port,
-                "midi_type": m_type
+                "origin_source": "MIDI-TX", "target_port": port, "midi_type": m_type
             }
-            
-            # Send to ProtocolRouter (Core) to handle actual hardware TX
-            from oaComBroker.Core.protocol_router.manager import ProtocolRouter
-            ProtocolRouter.get_instance().ingest("MIDI-TX", topic, pld, meta)
+            import mido
+            midi_msg = mido.Message(m_type, channel=ch, note=note, velocity=velocity)
+            try:
+                # ⚡ REFACTORED: MidiManager.publish expects (port_name, mido_msg)
+                self.midi_manager.publish(port, midi_msg)
+            except Exception as e:
+                logger.error(f"Failed to publish MIDI message: {e}")
 
 def get_gui_class():
     return MidiOutputGenerator

@@ -7,7 +7,7 @@
 # --- Standard Debug Logging Setup ---
 from oaLogging.Core.logger import GUI_LOGGER as logger
 
-from ....event_bus import event_bus
+from oaComBroker.Core.event_bus import event_bus
 from ....state import state_manager
 
 class FocusManager:

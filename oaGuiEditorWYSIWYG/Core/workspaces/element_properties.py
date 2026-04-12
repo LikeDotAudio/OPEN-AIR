@@ -6,7 +6,7 @@
 
 import tkinter as tk
 from tkinter import ttk, messagebox
-from ..event_bus import event_bus
+from oaComBroker.Core.event_bus import event_bus
 from ..state import state_manager
 from ...FileReaders.grab_bag_loader import GrabBagLoader
 # --- Standard Debug Logging Setup ---

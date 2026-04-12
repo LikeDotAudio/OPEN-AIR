@@ -202,7 +202,7 @@ class StateRegistry:
         if self.mqtt:
             base = app_constants.MQTT_BASE_TOPIC
             roots = [f"{base}/Cmd/#", f"{base}/Tx/#", f"{base}/System/Status/#", 
-                     f"{base}/System/Monitor/#"]
+                     f"{base}/System/Monitor/#", f"{base}/System/Control/#"]
             
             for root in roots:
                 matrix_log("core", "data", "subscribe_to_all_topics", 

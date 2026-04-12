@@ -8,7 +8,7 @@ from oaLogging.Methods.matrix_gate import matrix_log
 
 import tkinter as tk
 from tkinter import ttk
-from ..event_bus import event_bus
+from oaComBroker.Core.event_bus import event_bus
 from ..state import state_manager
 
 # --- Standard Debug Logging Setup ---

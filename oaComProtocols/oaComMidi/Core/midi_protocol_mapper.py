@@ -60,6 +60,35 @@ class MIDIProtocolMapper:
         if "/MIDI/" not in topic: return None
         
         try:
+            # ⚡ Support for JSON dictionary payloads
+            if isinstance(val, dict):
+                real_val = int(val.get('val', val.get('velocity', val.get('value', 0))))
+            else:
+                real_val = int(val)
+
+            # ⚡ V3.2.5 GUI_OUT ALIGNMENT:
+            # Handle topics from the Output Generator: OPEN-AIR/MIDI/gui_out/chX/noteY
+            if "/gui_out/" in topic:
+                # Use regex to find the relevant parts regardless of exact indices
+                ch_match = re.search(r'/ch(\d+)', topic)
+                note_match = re.search(r'/note(\d+)', topic)
+                cc_match = re.search(r'/cc(\d+)', topic)
+                
+                if not ch_match: return None
+                channel = int(ch_match.group(1)) - 1
+                
+                import mido
+                if note_match:
+                    note = int(note_match.group(1))
+                    velocity = real_val
+                    m_type = 'note_on' if velocity > 0 else 'note_off'
+                    return mido.Message(m_type, channel=channel, note=note, velocity=velocity)
+                elif cc_match:
+                    control = int(cc_match.group(1))
+                    return mido.Message('control_change', channel=channel, control=control, value=real_val)
+                
+                return None
+
             parts = topic.split('/')
             if len(parts) < 5: return None
             
@@ -70,11 +99,11 @@ class MIDIProtocolMapper:
             import mido
             if "cc" in type_str:
                 control = oamidimapper_rs.parse_channel_and_val(type_str)
-                return mido.Message('control_change', channel=channel, control=control, value=int(val))
+                return mido.Message('control_change', channel=channel, control=control, value=real_val)
             
             if "note" in type_str:
                 note = oamidimapper_rs.parse_channel_and_val(type_str)
-                velocity = int(val)
+                velocity = real_val
                 m_type = 'note_on' if velocity > 0 else 'note_off'
                 return mido.Message(m_type, channel=channel, note=note, velocity=velocity)
                 

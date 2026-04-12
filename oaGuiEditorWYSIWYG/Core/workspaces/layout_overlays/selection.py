@@ -5,7 +5,7 @@
 # Description: Brief summary of purpose
 
 import tkinter as tk
-from ...event_bus import event_bus
+from oaComBroker.Core.event_bus import event_bus
 from ...state import state_manager
 from ..Core.layout.snap_logic import snap_to_grid
 

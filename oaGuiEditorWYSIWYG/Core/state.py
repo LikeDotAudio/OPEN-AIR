@@ -7,7 +7,7 @@
 import orjson
 import copy
 import inspect
-from .event_bus import event_bus
+from oaComBroker.Core.event_bus import event_bus
 from oaLogging.Methods.matrix_gate import matrix_log
 
 from .oaEditorState_rs.compiler_hook import ensure_compiled

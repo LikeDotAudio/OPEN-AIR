@@ -30,7 +30,30 @@ class PropertyRendererMixin:
         for key, value in data.items():
             full_path = f"{prefix}.{key}"
             is_virtual = (key not in actual_data)
-            
+
+            # Special handling for language fields under 'text'
+            if key == 'text' and isinstance(value, dict):
+                # Create a master frame for all language text entries
+                lang_container = tk.Frame(parent, bg="#2b2b2b")
+                lang_container.pack(fill="x", pady=2, padx=15)
+                tk.Label(lang_container, text="Text Content:", bg="#2b2b2b", fg="#888888").pack(fill="x", anchor="w")
+
+                # This frame will hold the vertical stack of editors
+                editors_frame = tk.Frame(lang_container, bg="#2b2b2b")
+                editors_frame.pack(fill="x")
+
+                for lang_key, lang_value in value.items():
+                    lang_full_path = f"{full_path}.{lang_key}"
+                    
+                    # Each editor will be in its own row, but the rows will stack vertically
+                    row_frame = tk.Frame(editors_frame, bg="#2b2b2b")
+                    row_frame.pack(fill="x", side="top") # Stack rows vertically
+                    
+                    editor_widget = LeafEditorFactory.create(row_frame, lang_key, lang_value, lang_full_path, self)
+                    if new_widget_cache is not None:
+                        new_widget_cache[lang_full_path] = {"widget": editor_widget}
+                continue # Skip the default dictionary handling
+
             # Check if a widget for this path already exists in the cache
             existing_widget_info = widget_cache.get(full_path)
             existing_widget = existing_widget_info.get("widget") if existing_widget_info else None

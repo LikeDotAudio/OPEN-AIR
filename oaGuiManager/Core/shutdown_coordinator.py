@@ -47,7 +47,8 @@ class ShutdownCoordinator:
         self._shutdown_in_progress = True
         
         # ⚡ USER INTENT: Log clearly that the exit was requested by the user
-        matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, "👋 [EXIT] User is requesting to exit application.", level="INFO")
+        root_name = getattr(self.root, 'winfo_name', lambda: str(self.root))()
+        matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"👋 [EXIT] User is requesting to exit application (Root: {root_name}).", level="INFO")
         
         # ⚡ DEBUG: Identify who called on_closing
         if self.debug_enabled:

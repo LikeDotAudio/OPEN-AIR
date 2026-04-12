@@ -56,7 +56,7 @@ with (patch('tkinter.Frame', mock_tk_frame_class),
     import tkinter.ttk as ttk
 
     # --- Import modules after patching ---
-    from oaGuiEditorWYSIWYG.Core.event_bus import event_bus
+    from oaComBroker.Core.event_bus import event_bus
     from oaGuiEditorWYSIWYG.Core.state import StateManager
     from oaGuiEditorWYSIWYG.Core.workspaces.Core.layout.overlay import OverlayManager
 
@@ -125,12 +125,12 @@ with (patch('tkinter.Frame', mock_tk_frame_class),
             retrieved_state["a"]["b"] = 2
             self.assertEqual(self.state_manager.get_state()["a"]["b"], 1)
 
-        @patch('oaGuiEditorWYSIWYG.Core.event_bus.event_bus.publish')
+        @patch('oaComBroker.Core.event_bus.event_bus.publish')
         def test_update_state_broadcasts_state_updated(self, mock_publish):
             self.state_manager.update_state({"new": "data"}, path="root", source="test")
             mock_publish.assert_called_once_with("STATE_UPDATED", json_data=self.state_manager.get_state(), source="test")
 
-        @patch('oaGuiEditorWYSIWYG.Core.event_bus.event_bus.publish')
+        @patch('oaComBroker.Core.event_bus.event_bus.publish')
         def test_add_component_request_handler(self, mock_publish):
             mock_component_schema = {"type": "button", "props": {"text": "Hello"}}
             self.state_manager._handle_add_component_request(

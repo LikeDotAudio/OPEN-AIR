@@ -55,10 +55,11 @@ class OidMapConverter:
         matrix_log("comms", "snmp", "build_oid_map", 
                    f"OidMapConverter: Updating OID map. Input size: {len(state_snapshot)}", "DEBUG")
 
+        # for topic, payload in state_snapshot.items():
+        #     # ⚡ FILTER: Skip System control/status, Router, and large Blobs
+        #     if any(x in topic for x in ["/System/", "/Control/", "/Status/", "/Router/"]):
+        #         continue
         for topic, payload in state_snapshot.items():
-            # ⚡ FILTER: Skip System control/status, Router, and large Blobs
-            if any(x in topic for x in ["/System/", "/Control/", "/Status/", "/Router/"]):
-                continue
                 
             # ⚡ FILTER: Skip GUI Initialization and Discovery metadata
             source = str(payload.get("source", "")).upper() if isinstance(payload, dict) else ""
@@ -66,10 +67,16 @@ class OidMapConverter:
                 continue
                 
             val = payload.get("val") if isinstance(payload, dict) else payload
-            val_str = str(val) if val is not None else ""
             
-            # ⚡ PERFORMANCE: Skip massive blobs and nested structures
-            if len(val_str) > OID_MAP_STR_LIMIT or "{" in val_str or "[" in val_str:
+            # ⚡ PERFORMANCE: Gracefully handle complex types instead of skipping
+            if isinstance(val, dict):
+                val_str = "DICT"
+            elif isinstance(val, list):
+                val_str = "LIST"
+            else:
+                val_str = str(val) if val is not None else ""
+
+            if len(val_str) > OID_MAP_STR_LIMIT:
                 continue
 
             parts = topic.split('/')

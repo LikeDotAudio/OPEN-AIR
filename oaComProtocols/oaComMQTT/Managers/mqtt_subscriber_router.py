@@ -34,6 +34,8 @@ class MqttSubscriberRouter:
         self._roots = {
             "Cmd": f"{self._base_topic}/Cmd/#",
             "Tx": f"{self._base_topic}/Tx/#",
+            "Assets": f"{self._base_topic}/Assets/#",
+            "Spectrum": f"{self._base_topic}/Spectrum/#",
             "Status": f"{self._base_topic}/System/Status/#",
             "Monitor": f"{self._base_topic}/System/Monitor/#",
             "Control": f"{self._base_topic}/System/Control/#"
@@ -55,16 +57,23 @@ class MqttSubscriberRouter:
         with self._lock:
             # Determining global root logic
             if topic_filter.startswith(f"{self._base_topic}/"):
-                root_to_use = self._roots["Cmd"]
-                if "/Tx/" in topic_filter: root_to_use = self._roots["Tx"]
+                root_to_use = None
+                if "/Cmd/" in topic_filter: root_to_use = self._roots["Cmd"]
+                elif "/Tx/" in topic_filter: root_to_use = self._roots["Tx"]
+                elif "/Assets/" in topic_filter: root_to_use = self._roots["Assets"]
+                elif "/Spectrum/" in topic_filter: root_to_use = self._roots["Spectrum"]
                 elif "/Status/" in topic_filter: root_to_use = self._roots["Status"]
                 elif "/Monitor/" in topic_filter: root_to_use = self._roots["Monitor"]
                 elif "/Control/" in topic_filter: root_to_use = self._roots["Control"]
                 
-                if root_to_use not in self._active_broker_subscriptions:
-                    self._active_broker_subscriptions.add(root_to_use)
+                # ⚡ OPTIMIZATION: If it matches a root, use the root. 
+                # Otherwise, subscribe to the specific filter.
+                sub_target = root_to_use or topic_filter
+                
+                if sub_target not in self._active_broker_subscriptions:
+                    self._active_broker_subscriptions.add(sub_target)
                     from .mqtt_connection import MqttConnectionManager
-                    MqttConnectionManager().subscribe(root_to_use)
+                    MqttConnectionManager().subscribe(sub_target)
                 return
 
             if topic_filter not in self._active_broker_subscriptions:
@@ -105,12 +114,22 @@ class MqttSubscriberRouter:
     async def resubscribe_all_topics(self, client):
         """Async resubscription for global roots and external filters."""
         with self._lock:
-            self._active_broker_subscriptions.clear()
-            for root in self._roots.values():
-                await client.subscribe(root)
-                self._active_broker_subscriptions.add(root)
+            # ⚡ RESILIENCE: We must re-subscribe to everything that was previously
+            # active to ensure continuity across network interruptions.
+            subscriptions_to_restore = list(self._active_broker_subscriptions)
             
-            # Note: We'd need to track external filters separately if we wanted 
-            # to resubscribe them here. For now, focus on core roots.
+            # Ensure the core roots are always present in the restoration list
+            for root in self._roots.values():
+                if root not in subscriptions_to_restore:
+                    subscriptions_to_restore.append(root)
+            
+            self._active_broker_subscriptions.clear()
+            for root in subscriptions_to_restore:
+                try:
+                    await client.subscribe(root)
+                    self._active_broker_subscriptions.add(root)
+                    matrix_log("comms", "mqtt", "resubscribe_all_topics", f"aiomqtt: Restored subscription to {root}", "DEBUG")
+                except Exception as e:
+                    MQTT_LOGGER.error(f"aiomqtt: Failed to restore subscription to {root}: {e}")
         
-        matrix_log("comms", "mqtt", "resubscribe_all_topics", "aiomqtt: Resubscribed to global roots.", "DEBUG")
+        matrix_log("comms", "mqtt", "resubscribe_all_topics", "aiomqtt: All topics resubscribed.", "DEBUG")

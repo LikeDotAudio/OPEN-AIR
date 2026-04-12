@@ -270,9 +270,12 @@ class ProtocolRouter:
     def _fetch_next_inbound(self):
         # ⚡ DRAIN: If messages are in the Rust router, we must drain them to prevent leaks.
         # For now, we still use the Python inbound_queue as the primary source of truth.
-        if self.rust_router and self.rust_router.inbound_len() > 0:
-            while self.rust_router.inbound_len() > 0:
-                self.rust_router.pop_inbound()
+        
+        # TODO: BUG: The rust_router drain loop causes the ingest pipeline to hang for
+        # some message types (e.g. MIDI). Disabling until the Rust component can be fixed.
+        # if self.rust_router and self.rust_router.inbound_len() > 0:
+        #     while self.rust_router.inbound_len() > 0:
+        #         self.rust_router.pop_inbound()
 
         try:
             # ⚡ OPTIMIZATION: Increased timeout from 0.001 to 0.1 to reduce busy-wait overhead.
@@ -287,10 +290,10 @@ class ProtocolRouter:
         strategy = calculate_strategy(msg)
         msg["strategy"] = strategy
 
-        if self.splinker_manager:
-            try: self.splinker_manager.process_router_event(msg)
-            except Exception as e: 
-                matrix_log("comms", "broker", "_process_pipeline", f"🔗🚫🛑 [ROUTER] Splinker Error: {e}", "ERROR")
+        # if self.splinker_manager:
+        #     try: self.splinker_manager.process_router_event(msg)
+        #     except Exception as e: 
+        #         matrix_log("comms", "broker", "_process_pipeline", f"🔗🚫🛑 [ROUTER] Splinker Error: {e}", "ERROR")
 
         msg["ui_tags"] = calculate_ui_tags(msg, self.GUID)
         

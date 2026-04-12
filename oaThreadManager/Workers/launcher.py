@@ -21,7 +21,7 @@ import pathlib
 import sys
 import importlib
 import importlib.util
-from loguru import logger
+from oaLogging.Core.logger import logger
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Core.logger import initialize_logging, set_log_directory
@@ -175,6 +175,7 @@ def launch_core_managers(state_cache_manager, mqtt_connection_manager):
     if midi_manager: midi_manager.start()
     if nmos_manager: nmos_manager.start()
     if rest_manager: rest_manager.start()
+    if smpte2138_manager: smpte2138_manager.start()
     
     if hasattr(STATE_VISA_FLEET_manager, "start"): STATE_VISA_FLEET_manager.start()
     if ptp_manager: ptp_manager.start()

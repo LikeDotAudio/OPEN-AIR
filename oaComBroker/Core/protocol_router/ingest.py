@@ -230,8 +230,10 @@ def normalize_and_ingest(
     inbound_queue.put(msg)
     
     # ⚡ RUST NATIVE ACCELERATION: Push to Rust router for high-speed numeric paths
-    if rust_router:
-        rust_router.push_inbound(msg)
+    # TODO: BUG: The rust_router integration causes the ingest pipeline to hang.
+    # Disabling until the Rust component can be fixed.
+    # if rust_router:
+    #     rust_router.push_inbound(msg)
     
     # TERMINAL SETTLING:
     # If this is a primary action, lock the parameter and schedule a 
@@ -269,7 +271,8 @@ def create_silent_msg(transport_source, topic, value, meta, local_guid, rust_rou
         "msg_type": "LINK_FEEDBACK", "is_settled": True
     }
     
-    if rust_router:
-        rust_router.push_inbound(msg)
+    # TODO: BUG: The rust_router integration causes the ingest pipeline to hang.
+    # if rust_router:
+    #     rust_router.push_inbound(msg)
         
     return msg

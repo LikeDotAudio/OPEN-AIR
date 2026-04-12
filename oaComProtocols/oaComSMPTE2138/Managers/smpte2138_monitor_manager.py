@@ -31,9 +31,10 @@ from oaComProtocols.oaComSMPTE2138.Interface import device_pb2
 
 # --- OPEN-AIR Imports ---
 from oaLogging.Core.logger import SMPTE2138_LOGGER
+from oaLogging.Methods.matrix_gate import matrix_log
 from oaComProtocols.oaComMQTT.Managers.mqtt_connection import MqttConnectionManager
 from oaComProtocols.oaComMQTT.Managers.mqtt_subscriber_router import MqttSubscriberRouter
-from oaGuiEditorWYSIWYG.Core.event_bus import event_bus
+from oaComBroker.Core.event_bus import event_bus
 
 def _is_debug():
     from oaLogging.Methods.matrix_gate import is_debug_allowed
@@ -67,39 +68,37 @@ class SMPTE2138MonitorManager:
         self._observers = [] # For lazy loading
 
     def start(self):
-        """Lazy start: thread is started by the first observer."""
-        pass
+        """Starts the monitor heartbeat and enables processing."""
+        if not self._is_running:
+            self._is_running = True
+            self._heartbeat_thread = threading.Thread(target=self._heartbeat_loop, daemon=True, name="SMPTE2138-MonitorHeartbeat")
+            self._heartbeat_thread.start()
+            self.stats["status"] = "RUNNING"
+            matrix_log("comms", "smpte2138", "monitor_start", "✅ [MONITOR] SMPTE2138 Monitor engine started and running.", "SUCCESS")
 
     def stop(self):
-        """Stops the heartbeat thread."""
+        """Signals the monitor to stop but retains its initialized state."""
         self._is_running = False
-        if self._heartbeat_thread and self._heartbeat_thread.is_alive():
-            self._heartbeat_thread.join(timeout=1.0)
+        # Do not join to avoid blocking the main thread during shutdown
         self.stats["status"] = "STOPPED"
         
     def add_observer(self, callback: callable):
-        """Adds an observer and starts the thread if it's the first one."""
+        """Registers a listener for decoded traffic."""
         if callback not in self._observers:
             self._observers.append(callback)
-            if not self._is_running:
-                self._is_running = True
-                self._heartbeat_thread = threading.Thread(target=self._heartbeat_loop, daemon=True, name="SMPTE2138-MonitorHeartbeat")
-                self._heartbeat_thread.start()
-                if LOCAL_DEBUG: SMPTE2138_LOGGER.success("✅ [MONITOR] SMPTE2138 Monitor thread started on first observer.")
 
     def _setup_subscriptions(self):
         """
-        Subscribes to the entire SMPTE2138 external tree and bridge health.
+        Subscribes to the entire SMPTE2138 external tree, internal events, and bridge health.
         """
-        # 1. Traffic Monitoring
-        smpte2138_wildcard = "st2138/#"
-        self.router.subscribe_to_topic(smpte2138_wildcard, self._on_smpte2138_traffic)
+        # 1. Traffic Monitoring (External + Internal)
+        self.router.subscribe_to_topic("st2138/#", self._on_smpte2138_traffic)
+        self.router.subscribe_to_topic("OPEN-AIR/#", self._on_smpte2138_traffic)
         
         # 2. Bridge Status Monitoring
         self.router.subscribe_to_topic("OPEN-AIR/System/Status/SMPTE2138/Bridge", self._on_bridge_status)
         
-        if LOCAL_DEBUG:
-            SMPTE2138_LOGGER.debug(f"🎧 [LISTEN] Monitoring SMPTE2138 tree and status.")
+        matrix_log("comms", "smpte2138", "_setup_subscriptions", "👂 [LISTEN] Monitor active and listening for st2138/# and OPEN-AIR/#.", "DEBUG")
 
     def _on_bridge_status(self, msg):
         """Updates internal status from bridge broadcasts."""

@@ -21,4 +21,5 @@ The **SNMP** module provides legacy industrial monitoring for the OPEN-AIR ecosy
 
 ## 3. Topic Mapping
 *   **Primary Path:** `OPEN-AIR/SNMP/#`
+*   **Output Path:** `OPEN-AIR/SNMP/gui_out/[OID]`
 *   **Trap Path:** `OPEN-AIR/SNMP/Trap/[AlertLevel]`

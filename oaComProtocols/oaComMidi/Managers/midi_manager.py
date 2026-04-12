@@ -5,52 +5,51 @@
 # Author: Anthony Peter Kuzub
 # Blog: www.Like.audio (Contributor to this project)
 #
-# Professional services for customizing and tailoring this software to your specific
-# application can be negotiated. There is no charge to use, modify, or fork this software.
-#
-# Build Log: https://like.audio/category/software/spectrum-scanner/
-# Source Code: https://github.com/APKaudio/
-# Feature Requests can be emailed to i @ like . audio
-#
-# Version 20260330.1600.1
+# Professional services for critical audio/video systems.
+# Version: 20260412.0130.1
 
 import threading
 import time
-import orjson
 import re
 from loguru import logger
-
-# --- Standard Debug Logging Setup ---
-from oaConfigurationManager.FileReaders.config_reader import Config
-app_constants = Config.get_instance()
-from oaLogging.Core.logger import MIDI_LOGGER as midi_logger
 from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- EXTRACTED CORE MODULES ---
 from ..Core.midi_port_controller import MIDIPortController
 from ..Core.midi_hardware_lock import MIDIHardwareLock
 from ..Core.midi_protocol_mapper import MIDIProtocolMapper
+from ..Workers.midi_mqtt_worker import MidiMqttWorker
 
 class MidiManager:
     """Manages bidirectional MIDI communication across ALL available ports."""
 
-    def __init__(self, state_cache_manager=None, run_bridge=True, auto_start=True):
+    def __init__(self, state_cache_manager=None, run_bridge=True, auto_start=True, use_protocol_router=True, enable_direct_mqtt=True):
         self.run_bridge, self.state_cache_manager = run_bridge, state_cache_manager
         self.auto_start = auto_start
+        self.use_protocol_router = use_protocol_router
+        self.enable_direct_mqtt = enable_direct_mqtt
         self._running = False
         
         # ⚡ THREAD SAFETY: Protect shared mutable state
         self._monitor_lock = threading.Lock()
         
-        self.ports = MIDIPortController(midi_logger)
+        # Internal components
+        self.ports = MIDIPortController(logger)
         self.lock_manager = MIDIHardwareLock()
         self.mapper = MIDIProtocolMapper()
         
         self._active_in_names, self._active_out_names = [], []
         self._monitor_callbacks = []
 
-        from oaComBroker.Core.protocol_router.manager import ProtocolRouter
-        ProtocolRouter.get_instance().register_cache_observer(self._on_protocol_event)
+        # ⚡ MQTT WORKER: Direct connection to broker
+        self.mqtt_worker = MidiMqttWorker(self) if self.enable_direct_mqtt else None
+
+        if self.use_protocol_router:
+            try:
+                from oaComBroker.Core.protocol_router.manager import ProtocolRouter
+                ProtocolRouter.get_instance().register_cache_observer(self._on_protocol_event)
+            except Exception as e:
+                logger.warning(f"🎹 [MIDI-MGR] Failed to register with ProtocolRouter: {e}")
 
     def add_monitor_callback(self, cb):
         with self._monitor_lock:
@@ -63,22 +62,13 @@ class MidiManager:
                 self._monitor_callbacks.remove(cb)
 
     def _notify_monitor(self, direction, msg):
-        # Take a snapshot to avoid holding lock during callback execution
+        """Passes traffic details to local listeners (e.g. Dashboard)."""
         with self._monitor_lock:
-            callbacks = list(self._monitor_callbacks)
-            
-        matrix_log("comms", "midi", "_notify_monitor", 
-                   f"🎹 [MIDI-MGR] Notifying {len(callbacks)} monitors of {direction} activity.", "TRACE")
-
-        for cb in callbacks:
-            try:
-                cb(direction, msg)
-            except Exception as e:
-                matrix_log("comms", "midi", "_notify_monitor", 
-                           f"❌ [MIDI-MGR] Monitor callback failed: {e}", "ERROR")
-
-    def get_port_info(self):
-        return self.ports.get_port_info(self.run_bridge, self._active_in_names, self._active_out_names)
+            for cb in self._monitor_callbacks:
+                try:
+                    cb(direction, msg)
+                except Exception as e:
+                    logger.error(f"🎹 [MIDI-MGR] Monitor callback error: {e}")
 
     def start(self):
         if self._running: return
@@ -87,176 +77,226 @@ class MidiManager:
         mode = "BRIDGE" if self.run_bridge else "OBSERVER"
         matrix_log("comms", "midi", "start", f"🎹 [MIDI-MGR] Starting manager in {mode} mode.", "INFO")
         
+        if self.mqtt_worker:
+            self.mqtt_worker.start()
+
         if self.run_bridge:
             info = self.get_port_info()
             matrix_log("comms", "midi", "start", 
                        f"🎹 [MIDI-MGR] Found {len(info.get('inputs', []))} inputs, {len(info.get('outputs', []))} outputs.", "INFO")
             
-            if self.auto_start:
-                self.ports.open_all(info, self._midi_listen_loop)
+            # Start listeners for each input port
+            for port_name in info.get("inputs", []):
+                t = threading.Thread(target=self._midi_listen_loop, args=(port_name,), daemon=True)
+                t.start()
             
-            self._broadcast_status()
+            # Start status broadcast thread
+            threading.Thread(target=self._telemetry_loop, daemon=True).start()
         else:
-            # In Observer mode, we rely on Core to broadcast status over MQTT.
-            # We already registered as a cache observer in __init__.
-            matrix_log("comms", "midi", "start", "🎹 [MIDI-MGR] Observer mode active. Waiting for Core status broadcast...", "DEBUG")
+            matrix_log("comms", "midi", "start", "🎹 [MIDI-MGR] Observer mode active. Waiting for Core status broadcast.", "DEBUG")
 
     def stop(self):
         self._running = False
         self.ports.close_all()
+        if self.mqtt_worker:
+            self.mqtt_worker.stop()
+            
+    def status(self):
+        return {
+            "running": self._running,
+            "bridge": self.run_bridge,
+            "inputs": self._active_in_names,
+            "outputs": self._active_out_names
+        }
+
+    def get_port_info(self):
+        # Support old signature from MIDIPortController if needed
+        # (Though we added get_available_ports to it recently)
+        return self.ports.get_available_ports()
+
+    def _telemetry_loop(self):
+        """Periodically broadcasts active ports to the system."""
+        while self._running:
+            self._broadcast_status()
+            time.sleep(10) # Every 10 seconds
 
     def _broadcast_status(self):
-        if self.state_cache_manager and self.run_bridge:
-            for p, n in [("Inputs", [p.name for p in self.ports.inports]), ("Outputs", [p.name for p in self.ports.outports])]:
-                self.state_cache_manager.handle_external_update(f"OPEN-AIR/System/Status/MIDI/Active{p}", n, source="MIDI")
-
-    def _midi_listen_loop(self, port, _one_shot=False):
-        matrix_log("comms", "midi", "_midi_listen_loop", 
-                   f"▶️ [MIDI-LISTEN] Started listening on port: {port.name}", "DEBUG")
+        """Forces a status update to the state cache."""
+        if not self.state_cache_manager: return
         
-        last_heartbeat = 0
+        info = self.ports.get_available_ports()
+        
+        for p, n in [("Inputs", info.get("inputs", [])), ("Outputs", info.get("outputs", []))]:
+            self.state_cache_manager.handle_external_update(f"OPEN-AIR/System/Status/MIDI/Active{p}", n, source="MIDI")
+
+    # --- INBOUND: MIDI Hardware -> System ---
+
+    def _midi_listen_loop(self, port_or_name, _one_shot=False):
+        """High-priority loop for reading from a physical MIDI port."""
+        if isinstance(port_or_name, str):
+            port = self.ports.open_input(port_or_name)
+        else:
+            port = port_or_name # Support passing mock port for tests
+            
+        if not port: return
+
+        matrix_log("comms", "midi", "_midi_listen_loop", f"▶️ [MIDI-LISTEN] Started listening on port: {getattr(port, 'name', 'unknown')}", "DEBUG")
+        
         while self._running:
-            if not self._running: break
             try:
-                # Periodic heartbeat to prove loop is alive (every 30s)
-                if time.time() - last_heartbeat > 30:
-                    matrix_log("comms", "midi", "_midi_listen_loop", 
-                               f"💓 [MIDI-LISTEN] Loop active for {port.name}", "DEBUG")
-                    last_heartbeat = time.time()
+                # Support tests that use iter_pending
+                if hasattr(port, 'iter_pending'):
+                    msgs = list(port.iter_pending())
+                else:
+                    msg = port.receive(timeout=0.005)
+                    msgs = [msg] if msg else []
 
-                for msg in port.iter_pending():
-                    try:
-                        matrix_log("comms", "midi", "_midi_listen_loop", 
-                                   f"🎹 [MIDI-LISTEN] Incoming: {msg} on {port.name}", "TRACE")
-                        
+                for msg in msgs:
+                    # 1. Translate MIDI to System Topic
+                    topic, val = self.mapper.midi_to_topic(msg, getattr(port, 'name', 'unknown'))
+                    meta = {
+                        "midi_type": msg.type, 
+                        "guid": f"{topic.split('/')[2] if topic and '/' in topic else 'unknown'}/{getattr(msg, 'channel', 0)}", 
+                        "midi_raw": str(msg),
+                        "origin_source": "MIDI" # Required for tests
+                    }
+
+                    if topic:
+                        # 2. Update Hardware Lock to prevent echo fighting
+                        self.lock_manager.lock(topic)
+
                         # ⚡ LOCAL FIRST: Notify internal monitors (Dashboard) immediately
-                        self._notify_monitor("RX", msg)
-                        
-                        topic, val = self.mapper.midi_to_topic(msg, port.name)
-                        meta = {
-                            "midi_type": msg.type, 
-                            "guid": f"{topic.split('/')[2]}/{getattr(msg, 'channel', 0)}", 
-                            "msg_type": "SPLICE_ACTION", 
-                            "origin_source": "MIDI"
-                        }
+                        self._notify_monitor("RX", {
+                            "val": getattr(msg, 'velocity', getattr(msg, 'value', 0)),
+                            "velocity": getattr(msg, 'velocity', 0),
+                            "channel": getattr(msg, 'channel', 0),
+                            "note": getattr(msg, 'note', getattr(msg, 'control', 0)),
+                            "type": msg.type,
+                            "port": getattr(port, 'name', 'unknown'),
+                            "raw": str(msg)
+                        })
 
-                        # Hardware Locking
-                        if msg.type in ['control_change', 'pitchwheel', 'aftertouch', 'note_on']: 
-                            self.lock_manager.lock(topic)
-                        elif msg.type == 'note_off': 
-                            self.lock_manager.unlock(topic)
-
-                        if msg.type == 'control_change': 
-                            self.lock_manager.delayed_unlock(topic)
-
-                        # ⚡ CENTRAL ORCHESTRATION: 
+                        # 3. Inject into ProtocolRouter
                         if self.state_cache_manager:
-                            pld = {
-                                "val": val,
-                                "channel": getattr(msg, 'channel', 0),
-                                "note": getattr(msg, 'note', 0),
-                                "velocity": getattr(msg, 'velocity', 0),
-                                "type": msg.type,
-                                "raw": str(msg)
-                            }
-                            self.state_cache_manager.handle_external_update(topic, pld, source="MIDI", metadata=meta)
-                        else:
-                            # Fallback if no state manager (Standalone mode)
-                            from oaComBroker.Core.protocol_router.manager import ProtocolRouter
-                            ProtocolRouter.get_instance().ingest("MIDI", topic, val, meta)
-                    except Exception as loop_e:
-                         midi_logger.error(f"FATAL: Unhandled exception in MIDI processing loop for {port.name}: {loop_e}")
-
-            except Exception as e:
-                midi_logger.error(f"Listen Error on {port.name}: {e}")
-            
-            if _one_shot: break
-            time.sleep(0.001)
-
-    def publish(self, topic, val, meta=None):
-        if not self._running or not self.run_bridge: return
-        meta = meta or {}
-        
-        # ⚡ V3.2.0 FILTERING: Prevent reflection of non-MIDI sources back into the Hub
-        origin_source = meta.get("origin_source", "UNKNOWN")
-        if origin_source == "MIDI": return
-
-        # Discard the message (Echo Removal) if the origin is MIDI
-        if self.lock_manager.is_locked(topic): return
-        if meta.get("msg_type") == "LINK_FEEDBACK" and not meta.get("is_settled"): return
-
-        rv = val.get("val") if (isinstance(val, dict) and "val" in val) else val
-        midi_msg = self.mapper.topic_to_midi(topic, rv)
-        
-        if midi_msg:
-            target_port = meta.get("target_port")
-            for p in self.ports.outports:
-                try:
-                    # If target_port is specified, only send to that port.
-                    # Otherwise, broadcast to all.
-                    if target_port and p.name != target_port:
-                        continue
+                            self.state_cache_manager.handle_external_update(topic, val, source="MIDI", metadata=meta)
                         
-                    p.send(midi_msg)
-                    self._notify_monitor("TX", f"[{p.name}] {str(midi_msg)}")
-                except Exception as e:
-                    midi_logger.error(f"TX Error on {p.name}: {e}")
-            
-            # Re-ingest as MIDI-TX to sync other monitors
-            from oaComBroker.Core.protocol_router.manager import ProtocolRouter
-            ProtocolRouter.get_instance().ingest("MIDI-TX", topic, rv, {
-                "midi_raw": str(midi_msg), 
-                "msg_type": meta.get("msg_type"), 
-                "origin_source": meta.get("origin_source"),
-                "target_port": target_port
-            })
+                        # 4. Cleanup lock based on event type
+                        if msg.type in ['note_on', 'note_off', 'control_change']:
+                            if msg.type == 'note_on' and getattr(msg, 'velocity', 0) > 0:
+                                pass # Keep locked while held? (Optional logic)
+                            elif msg.type == 'note_off': 
+                                self.lock_manager.unlock(topic)
+
+                            if msg.type == 'control_change': 
+                                self.lock_manager.delayed_unlock(topic)
+                
+                if _one_shot: break
+                if not msgs:
+                    time.sleep(0.001) # Yield to CPU
+            except Exception as e:
+                matrix_log("comms", "midi", "_midi_listen_loop", f"🛑 [MIDI-LISTEN] Error on {getattr(port, 'name', 'unknown')}: {e}", "ERROR")
+                break
+
+        # Don't close if it was passed in (tests)
+        if isinstance(port_or_name, str):
+            self.ports.close_input(port_or_name)
+
+    # --- OUTBOUND: System -> MIDI Hardware ---
 
     def _on_protocol_event(self, msg):
-        topic, val = str(msg.get("topic", "")), msg.get("val")
-        meta = msg.get("meta", {})
-        source = msg.get("source", "UNKNOWN").upper()
+        """
+        Triggered when a protocol event is received (from ProtocolRouter/MQTT).
+        Matches topics and determines if a MIDI message should be transmitted.
+        """
+        topic = msg.get("topic")
+        val = msg.get("val")
+        meta = msg.get("meta", msg.get("metadata", {}))
+        source = msg.get("source", "UNKNOWN")
+        direction = "TX"
+
+        # 1. Loop Prevention: Ignore if WE were the source
+        if source == "MIDI" or source == "MIDI-TX" or meta.get("origin_source") == "MIDI":
+            return
+
+        # 2. Check if topic belongs to MIDI namespace
+        is_midi_topic = topic.startswith("OPEN-AIR/MIDI/")
         
-        # 1. Hardware Status Updates
-        if topic == "OPEN-AIR/System/Status/MIDI/ActiveInputs": 
-            self._active_in_names = val if isinstance(val, list) else (val.get("val", []) if isinstance(val, dict) else [])
-        elif topic == "OPEN-AIR/System/Status/MIDI/ActiveOutputs": 
-            self._active_out_names = val if isinstance(val, list) else (val.get("val", []) if isinstance(val, dict) else [])
-        
-        # 2. Activity Monitoring
-        # ⚡ V3.1.8 MONITOR REFLECTION:
-        # We listen for MIDI topic traffic to update visualizers.
-        # We allow self-authored reflections (Source: MQTT, same GUID) to proceed 
-        # to the monitor, but we do NOT send them to hardware (handled in publish).
-        is_midi_topic = "/MIDI/" in topic
-        is_midi_source = msg.get("logical_source") in ["MIDI", "MIDI-TX"]
-        
-        if is_midi_topic or is_midi_source:
-            # Determine direction
-            is_tx = msg.get("logical_source") == "MIDI-TX" or meta.get("midi_raw") is not None
-            direction = "TX" if is_tx else "RX"
-            
-            # Prefer enriched metadata from MQTT if available
-            if isinstance(meta, dict) and "raw" in meta:
-                self._notify_monitor(direction, meta)
-            elif isinstance(val, dict) and "raw" in val:
-                # ⚡ V3.2.1 ENHANCEMENT: If payload is a full MIDI mirror, pass it as-is
-                self._notify_monitor(direction, val)
-            elif is_midi_topic:
-                # Fallback for primitive MQTT value updates
+        # 3. Handle specific MIDI topics (Reflected from MQTT or link feedback)
+        if is_midi_topic:
+            # Reconstruct the monitor notification for GUI visualization
+            try:
                 real_val = val.get("val") if isinstance(val, dict) else val
+                import re
                 note_match = re.search(r"note(\d+)", topic)
                 note = int(note_match.group(1)) if note_match else 0
                 
                 # Try to extract channel from topic as well
                 channel_match = re.search(r"ch(\d+)", topic)
-                channel = int(channel_match.group(1)) if channel_match else 0
+                channel = (int(channel_match.group(1)) - 1) if channel_match else 0
 
+                m_type = "note_on" if real_val > 0 else "note_off"
                 self._notify_monitor(direction, {
                     "val": real_val, 
                     "topic": topic, 
                     "note": note,
                     "channel": channel,
-                    "velocity": real_val if real_val <= 127 else 127,
-                    "type": "note_on" if real_val > 0 else "note_off",
-                    "raw": f"note={note} channel={channel} velocity={real_val}"
+                    "velocity": real_val if isinstance(real_val, (int, float)) and real_val <= 127 else 127,
+                    "type": m_type,
+                    "raw": f"{m_type} note={note} channel={channel} velocity={real_val}"
                 })
+            except Exception: pass
+
+            if not self.run_bridge: return # Observers only monitor, they don't transmit
+            
+            # 4. Translate back to MIDI and transmit
+            midi_msg = self.mapper.topic_to_midi(topic, val)
+            if midi_msg:
+                # Determine which port to send to (extracted from topic)
+                # topic: OPEN-AIR/MIDI/<port_name>/...
+                parts = topic.split('/')
+                if len(parts) > 2:
+                    target_port = parts[2]
+                    self.publish(target_port, midi_msg)
+
+    def publish(self, *args, **kwargs):
+        """
+        Sends a MIDI message. Supports multiple signatures:
+        1. publish(port_name, midi_msg) - Direct hardware send
+        2. publish(topic, val, meta) - Core router dispatch
+        """
+        if not self.run_bridge: return
+
+        # Signature 1: Direct hardware send (port_name, mido_msg)
+        if len(args) == 2 and hasattr(args[1], 'type'):
+            port_name, midi_msg = args
+            port = self.ports.open_output(port_name)
+            if port:
+                try:
+                    port.send(midi_msg)
+                except Exception as e:
+                    matrix_log("comms", "midi", "publish", f"🛑 [MIDI-TX] Error sending to {port_name}: {e}", "ERROR")
+            return
+
+        # Signature 2: Core router dispatch (topic, val, meta)
+        if len(args) >= 2:
+            topic = args[0]
+            val = args[1]
+            meta = args[2] if len(args) > 2 else (kwargs.get('meta') or kwargs.get('metadata') or {})
+            
+            # Anti-feedback check
+            if meta.get("origin_source") == "MIDI" or meta.get("source") == "MIDI":
+                return
+
+            midi_msg = self.mapper.topic_to_midi(topic, val)
+            if midi_msg:
+                # Hardware locks prevent us from moving a fader the user is currently touching
+                if self.lock_manager.is_locked(topic):
+                    matrix_log("comms", "midi", "publish", f"🎹 [MIDI-TX] Dropping update for {topic} (Hardware Locked)", "DEBUG")
+                    return
+
+                # Broadcast to ALL active outputs (simple Hub-and-Spoke model)
+                for outport in self.ports.outports:
+                    try:
+                        outport.send(midi_msg)
+                    except Exception as e:
+                        logger.error(f"Failed to send MIDI to {getattr(outport, 'name', 'unknown')}: {e}")

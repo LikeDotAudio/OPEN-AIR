@@ -1,0 +1,44 @@
+description = "Runs all available audit commands sequentially and forces the use of a flash model."
+model = "flash"
+prompt = """
+You are the master auditor. Your task is to execute all available audit commands in the OPEN-AIR project to perform a comprehensive review.
+
+Execute the following audit commands one by one. Each of these are separate commands that you need to execute.
+
+- `/AuditAgenticActions`
+- `/AuditArchitecture`
+- `/AuditClassObjects`
+- `/AuditCodeQLInfrastructure`
+- `/AuditComments`
+- `/AuditConfiguration`
+- `/AuditContractSecurity`
+- `/AuditDimensionalAnalysis`
+- `/AuditDocumentationRefferences`
+- `/AuditEntryPackages`
+- `/AuditErrorHandling`
+- `/AuditFileFolderNames`
+- `/AuditFunctions`
+- `/AuditInfrastructureSupplyChain`
+- `/AuditLogging`
+- `/AuditModernPython`
+- `/AuditNames`
+- `/AuditNamingConventions`
+- `/AuditPerformance`
+- `/AuditProcessHumanFactor`
+- `/AuditProtocolAnalysis`
+- `/AuditPythonJunk`
+- `/AuditRequirements`
+- `/AuditRust`
+- `/AuditSBOM`
+- `/AuditSecurity`
+- `/AuditSemgrepRuleCreator`
+- `/AuditSystem`
+- `/AuditThreading`
+- `/AuditUnitTests`
+- `/AuditVerificationSuite`
+- `/AuditVulnerabilityAnalysis`
+- `/AuditZeroizePipeline`
+
+For each command, wait for it to complete before starting the next one.
+Summarize the results of all audits at the end.
+"""

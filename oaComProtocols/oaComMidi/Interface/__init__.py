@@ -7,9 +7,10 @@
 from .Input.midi_dashboard import MidiDashboard
 from .Input.midi_keyboard import MidiKeyboard, get_midi_color
 from .Input.midi import get_gui_class as get_input_gui
-from .Output.midi_output import MidiOutput
-from .Output.midi_output import get_gui_class as get_output_gui
-from .Output.midi_output_generator import MidiOutputGenerator
+from .Output.midi_output_generator import MidiOutputGenerator, get_gui_class as get_output_gui
+
+# Map MidiOutput to the generator for backward compatibility
+MidiOutput = MidiOutputGenerator
 
 __all__ = [
     "MidiDashboard", 

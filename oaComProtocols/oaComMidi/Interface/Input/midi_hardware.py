@@ -20,6 +20,9 @@ class MidiHardware(tk.Frame):
     def _setup_ui(self):
         self.configure(bg="#2b2b2b")
         self.port_tree = ttk.Treeview(self, columns=("Type", "Status"), show="tree headings", height=8)
+        self.port_tree.column("#0", width=150, stretch=tk.YES) # Device Name
+        self.port_tree.column("Type", width=80, stretch=tk.NO)  # Type
+        self.port_tree.column("Status", width=100, stretch=tk.NO) # Status
         self.port_tree.heading("#0", text="Device Name")
         self.port_tree.heading("Type", text="Type")
         self.port_tree.heading("Status", text="Status")

@@ -115,8 +115,18 @@ def dispatch_message(msg, managers, topic_routing=None, is_active=True):
     if "🎹" in strategy:
         if is_active and router.routing_matrix.get(src, {}).get("MIDI", True):
             midi_manager = managers.get("midi")
-            if midi_manager and msg["source"] not in ["MIDI", "MIDI-TX"] and msg.get("logical_source") not in ["MIDI", "MIDI-TX"]:
-                _dispatch_midi(midi_manager, get_topic("MIDI"), val, msg, val_str)
+            if midi_manager:
+                # ⚡ V3.2.2 ROUTING UPDATE: 
+                # Allow MIDI dispatch if the message is an intent (SPLICE_ACTION).
+                # This ensures that GUI-generated MIDI events (which carry the MIDI topic prefix)
+                # are correctly routed to the hardware managers in the CORE partition.
+                # We only block messages that are direct feedback (LINK_FEEDBACK) 
+                # from the MIDI hardware itself to prevent infinite loops.
+                is_midi_hw = (msg["source"] == "MIDI")
+                is_feedback = (msg.get("msg_type") == "LINK_FEEDBACK")
+                
+                if not (is_midi_hw or is_feedback):
+                    _dispatch_midi(midi_manager, get_topic("MIDI"), val, msg, val_str)
 
     # --- SNMP Dispatch ---
     if "Ⓢ" in strategy:

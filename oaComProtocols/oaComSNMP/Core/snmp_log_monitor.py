@@ -91,7 +91,7 @@ class SnmpLogMonitor:
 
                                 ProtocolRouter.get_instance().ingest("SNMP", oid, val, meta)
 
-                                topic = f"OPEN-AIR/SNMP/{oid}"
+                                topic = f"OPEN-AIR/SNMP/gui_out/{oid}"
                                 self._notify_monitor("RX_SET", oid, val, topic, meta)
                                 if self.state_cache_manager:
                                     self.state_cache_manager.handle_external_update(topic, val, source="SNMP", metadata=meta)

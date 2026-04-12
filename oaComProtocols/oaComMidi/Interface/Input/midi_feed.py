@@ -20,7 +20,7 @@ class MidiFeed(tk.Frame):
 
     def _setup_ui(self):
         self.configure(bg="#2b2b2b")
-        self.log_text = tk.Text(self, bg="#000000", fg="#00ff00", font=("Courier", 10), height=14, borderwidth=0)
+        self.log_text = tk.Text(self, bg="#000000", fg="#00ff00", font=("Courier", 10), height=14, borderwidth=0, wrap='word')
         self.log_text.pack(fill=tk.BOTH, expand=True, padx=2, pady=2)
 
     def add_log(self, direction, msg_str, channel=0):

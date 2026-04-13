@@ -1,0 +1,16 @@
+[build-system]
+requires = ["maturin>=1.0,<2.0"]
+build-backend = "maturin"
+
+[project]
+name = "oaRustCore"
+version = "0.1.0"
+description = "Centralized high-performance Rust core for the OPEN-AIR project."
+authors = [{name = "Anthony Peter Kuzub"}]
+dependencies = [
+    "numpy",
+]
+
+[tool.maturin]
+module-name = "oaRustCore"
+features = ["pyo3/extension-module"]

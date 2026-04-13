@@ -94,19 +94,30 @@ def main():
 
     def log(msg):
         """Internal helper for consistent supervisor console output."""
-        # ⚡ V3.1.27 LOG SCRUBBING:
-        # Remove ANSI escape sequences from the message before printing to the console.
-        # This prevents terminal feedback loops if the output is being captured/piped.
         import re
         ansi_escape = re.compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])')
         clean_msg = ansi_escape.sub('', str(msg))
         
         print(f"[SUPERVISOR] {clean_msg}")
         if _DEBUG: 
-            # Keep original message for matrix_log as it supports colorization
             matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🚀 SUPERVISOR: {msg}", "DEBUG")
 
     log(f"Launching OPEN-AIR Partitions... (Mission Critical: {is_mission_critical})")
+
+    # ⚡ NATIVE PIPELINE CHECK: Ensure the centralized Rust core is built.
+    rust_core_dir = project_root / "oaRustCore"
+    if rust_core_dir.exists():
+        log("🏗️ [NATIVE] Verifying high-performance Rust core...")
+        try:
+            env = os.environ.copy()
+            env["PIP_BREAK_SYSTEM_PACKAGES"] = "1"
+            # Build once in develop mode to ensure imports work globally
+            subprocess.check_call([sys.executable, "-m", "maturin", "develop"], 
+                                  cwd=str(rust_core_dir), env=env,
+                                  stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+            log("✨ [NATIVE] Rust pipeline verified and active.")
+        except Exception as e:
+            log(f"⚠️ [WARNING] Rust build check failed: {e}. System will attempt to run with graceful fallbacks.")
 
     python_executable = sys.executable
     core_script = project_root / "oaComBroker" / "Core" / "open_air_core.py"

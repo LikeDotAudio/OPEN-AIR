@@ -161,6 +161,26 @@ class SetupManager:
             if callback: callback(f"💀 [FAILURE] Desktop integration crashed: {e}")
             return False
 
+    def setup_rust_core(self, callback=None):
+        """Builds and installs the centralized high-performance Rust core."""
+        rust_core_dir = os.path.join(getattr(self, 'project_root', PROJECT_ROOT), "oaRustCore")
+        
+        if not os.path.exists(rust_core_dir):
+            if callback: callback("⚠️ [SKIP] oaRustCore directory not found. Skipping native build.")
+            return True
+
+        if callback: callback("🏗️ [BUILD] Compiling centralized Rust core... this may take a moment.")
+        try:
+            # ⚡ PERFORMANCE: We use 'maturin develop' for local JIT-like compilation
+            env = os.environ.copy()
+            env["PIP_BREAK_SYSTEM_PACKAGES"] = "1"
+            subprocess.check_call(["maturin", "develop"], cwd=rust_core_dir, env=env)
+            if callback: callback("✨ [SUCCESS] High-performance Rust pipeline is now active.")
+            return True
+        except Exception as e:
+            if callback: callback(f"💀 [FAILURE] Rust compilation failed: {e}")
+            return False
+
 def main():
     """Primary entry point for the Setup utility."""
     manager = SetupManager(project_root=PROJECT_ROOT)
@@ -169,6 +189,9 @@ def main():
     if not manager.check_dependencies():
         logger.error("🛑 [CRITICAL] Dependency check failed. Setup aborted.")
         sys.exit(EXIT_CODE_CRITICAL)
+
+    matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🛠️⚙️📦 [SETUP] Starting Stage: Native Rust Core", "INFO")
+    manager.setup_rust_core(lambda m: logger.info(m))
 
     matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🛠️⚙️📦 [SETUP] Starting Stage: {STAGE_MQTT_INFRA}", "INFO")
     manager.setup_mqtt()

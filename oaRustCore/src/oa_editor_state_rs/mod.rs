@@ -84,7 +84,7 @@ impl EditorState {
 }
 
 #[pymodule]
-fn oaeditorstate_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn oaeditorstate_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<EditorState>()?;
     Ok(())
 }

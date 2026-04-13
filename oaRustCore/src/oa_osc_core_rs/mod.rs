@@ -212,7 +212,7 @@ impl OscClient {
 }
 
 #[pymodule]
-fn oaosccore_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn oaosccore_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<OscServer>()?;
     m.add_class::<OscClient>()?;
     Ok(())

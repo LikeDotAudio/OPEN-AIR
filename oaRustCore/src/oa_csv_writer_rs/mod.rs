@@ -51,7 +51,7 @@ fn dump_async(py: Python<'_>, data: Bound<'_, PyList>, filepath: String) -> PyRe
 }
 
 #[pymodule]
-fn oacsvwriter_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn oacsvwriter_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(dump_async, m)?)?;
     Ok(())
 }

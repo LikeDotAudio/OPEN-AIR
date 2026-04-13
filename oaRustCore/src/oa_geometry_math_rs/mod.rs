@@ -45,7 +45,7 @@ fn get_angle(px: f64, py: f64, cx: f64, cy: f64) -> f64 {
 }
 
 #[pymodule]
-fn oageometrymath_rs(_py: Python, m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn oageometrymath_rs(_py: Python, m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(normalize_value, m)?)?;
     m.add_function(wrap_pyfunction!(value_to_pixel, m)?)?;
     m.add_function(wrap_pyfunction!(rotate_point, m)?)?;

@@ -34,7 +34,7 @@ impl PDFEngine {
 }
 
 #[pymodule]
-fn oapdfparser_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn oapdfparser_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<PDFEngine>()?;
     Ok(())
 }

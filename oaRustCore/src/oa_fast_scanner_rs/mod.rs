@@ -34,7 +34,7 @@ impl FastScanner {
 }
 
 #[pymodule]
-fn oafastscanner_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn oafastscanner_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<FastScanner>()?;
     Ok(())
 }

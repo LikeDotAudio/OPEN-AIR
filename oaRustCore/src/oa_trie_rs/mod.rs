@@ -54,7 +54,7 @@ impl TopicTrie {
 }
 
 #[pymodule]
-fn oatrie_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn oatrie_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<TopicTrie>()?;
     Ok(())
 }

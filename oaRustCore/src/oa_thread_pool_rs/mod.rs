@@ -28,7 +28,7 @@ impl NativeThreadPool {
 }
 
 #[pymodule]
-fn oathreadpool_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn oathreadpool_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<NativeThreadPool>()?;
     Ok(())
 }

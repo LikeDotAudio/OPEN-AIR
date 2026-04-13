@@ -50,7 +50,7 @@ impl TaskPool {
 }
 
 #[pymodule]
-fn oataskpool_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn oataskpool_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<TaskPool>()?;
     Ok(())
 }

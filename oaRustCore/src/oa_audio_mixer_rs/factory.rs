@@ -1,14 +1,14 @@
 // oaAudioMixer/Core/oaAudioMixer_rs/src/factory.rs
-use crate::manager::AudioConnectionManager;
+use crate::oa_audio_mixer_rs::manager::AudioConnectionManager;
 
 #[cfg(target_os = "windows")]
-use crate::windows_backend::WindowsAudioManager;
+use crate::oa_audio_mixer_rs::windows_backend::WindowsAudioManager;
 
 #[cfg(target_os = "linux")]
-use crate::linux_backend::LinuxAudioManager;
+use crate::oa_audio_mixer_rs::linux_backend::LinuxAudioManager;
 
 #[cfg(target_os = "macos")]
-use crate::macos_backend::MacosAudioManager;
+use crate::oa_audio_mixer_rs::macos_backend::MacosAudioManager;
 
 // The Factory Function
 pub fn get_os_manager() -> Box<dyn AudioConnectionManager> {

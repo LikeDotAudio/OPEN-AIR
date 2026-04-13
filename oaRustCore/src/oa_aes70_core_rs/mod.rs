@@ -98,7 +98,7 @@ fn parse_pdu(input: &[u8]) -> IResult<&[u8], OcaPdu> {
 }
 
 #[pymodule]
-fn oaaes70core_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn oaaes70core_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<OcaParser>()?;
     Ok(())
 }

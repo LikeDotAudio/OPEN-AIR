@@ -196,7 +196,7 @@ impl SplinkRegistry {
 }
 
 #[pymodule]
-fn oasplinkregistry_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn oasplinkregistry_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<SplinkRegistry>()?;
     Ok(())
 }

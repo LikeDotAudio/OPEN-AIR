@@ -33,7 +33,7 @@ impl SystemClock {
 }
 
 #[pymodule]
-fn oaclocksync_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn oaclocksync_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<SystemClock>()?;
     Ok(())
 }

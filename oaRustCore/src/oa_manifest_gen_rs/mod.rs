@@ -76,7 +76,7 @@ fn create_manifest<'py>(
 }
 
 #[pymodule]
-fn oamanifestgen_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn oamanifestgen_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(create_manifest, m)?)?;
     Ok(())
 }

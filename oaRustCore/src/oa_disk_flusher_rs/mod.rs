@@ -110,7 +110,7 @@ impl DiskFlusher {
 }
 
 #[pymodule]
-fn oadiskflusher_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn oadiskflusher_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<DiskFlusher>()?;
     Ok(())
 }

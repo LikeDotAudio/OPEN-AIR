@@ -6,7 +6,7 @@ fn hello() -> PyResult<String> {
 }
 
 #[pymodule]
-fn oaTimeSeriesDB_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn oaTimeSeriesDB_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(hello, m)?)?;
     Ok(())
 }

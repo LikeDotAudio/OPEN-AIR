@@ -208,7 +208,7 @@ fn sum_as_string(a: usize, b: usize) -> PyResult<String> {
 }
 
 #[pymodule]
-fn oameteringengine_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn oameteringengine_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<BallisticsEngine>()?;
     m.add_function(wrap_pyfunction!(sum_as_string, m)?)?;
     Ok(())

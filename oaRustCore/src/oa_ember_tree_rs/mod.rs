@@ -145,7 +145,7 @@ fn parse_ber_tlv(input: &[u8]) -> IResult<&[u8], BerTlv> {
 }
 
 #[pymodule]
-fn oaembertree_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn oaembertree_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<EmberParser>()?;
     Ok(())
 }

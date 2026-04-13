@@ -194,7 +194,7 @@ impl NeedleEngine {
 }
 
 #[pymodule]
-fn oaneedleengine_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn oaneedleengine_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<NeedleEngine>()?;
     Ok(())
 }

@@ -67,7 +67,7 @@ fn parse_packet(py: Python, payload: &[u8], src_ip: String, dst_ip: String, udp_
 }
 
 #[pymodule]
-fn oaptpparser_rs(_py: Python, m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn oaptpparser_rs(_py: Python, m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(parse_packet, m)?)?;
     Ok(())
 }

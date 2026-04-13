@@ -50,7 +50,7 @@ impl AsyncSink {
 }
 
 #[pymodule]
-fn oaasyncsink_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn oaasyncsink_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<AsyncSink>()?;
     Ok(())
 }

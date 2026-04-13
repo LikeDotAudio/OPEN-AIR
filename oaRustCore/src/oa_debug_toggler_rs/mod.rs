@@ -64,7 +64,7 @@ fn toggle_debug_flags_rs(project_root: String, target_state: bool) -> PyResult<b
 }
 
 #[pymodule]
-fn oadebugtoggler_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn oadebugtoggler_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(toggle_debug_flags_rs, m)?)?;
     Ok(())
 }

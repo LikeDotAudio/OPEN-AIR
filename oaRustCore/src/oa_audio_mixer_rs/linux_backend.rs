@@ -19,7 +19,7 @@ impl LinuxAudioManager {
         Ok(())
     }
 
-    fn parse_devices_from_section(&self, status: &str, section_header: &str) -> Vec<crate::manager::AudioDevice> {
+    fn parse_devices_from_section(&self, status: &str, section_header: &str) -> Vec<crate::oa_audio_mixer_rs::manager::AudioDevice> {
         let mut devices = Vec::new();
         let mut in_section = false;
         for line in status.lines() {
@@ -38,7 +38,7 @@ impl LinuxAudioManager {
                         }
                         desc = desc[..v_idx].trim().to_string();
                     }
-                    devices.push(crate::manager::AudioDevice {
+                    devices.push(crate::oa_audio_mixer_rs::manager::AudioDevice {
                         name: id.to_string(),
                         description: desc,
                         sample_rate: 48000,
@@ -54,7 +54,7 @@ impl LinuxAudioManager {
 }
 
 #[cfg(target_os = "linux")]
-impl crate::manager::AudioConnectionManager for LinuxAudioManager {
+impl crate::oa_audio_mixer_rs::manager::AudioConnectionManager for LinuxAudioManager {
     fn get_master_volume(&self) -> Result<f32, String> {
         let status = self.run_wpctl_status()?;
         for line in status.lines() {
@@ -81,7 +81,7 @@ impl crate::manager::AudioConnectionManager for LinuxAudioManager {
         self.run_wpctl_set_volume(&id.to_string(), level)
     }
 
-    fn get_connected_software(&self) -> Result<Vec<crate::manager::AudioApp>, String> {
+    fn get_connected_software(&self) -> Result<Vec<crate::oa_audio_mixer_rs::manager::AudioApp>, String> {
         let status = self.run_wpctl_status()?;
         let mut apps = Vec::new();
         let mut in_streams = false;
@@ -101,7 +101,7 @@ impl crate::manager::AudioConnectionManager for LinuxAudioManager {
                         name = name[..v_idx].trim().to_string();
                     }
                     if let Ok(id) = id_str.parse::<u32>() {
-                        apps.push(crate::manager::AudioApp {
+                        apps.push(crate::oa_audio_mixer_rs::manager::AudioApp {
                             name,
                             pid: id,
                             driver: "PipeWire".to_string(),
@@ -115,11 +115,11 @@ impl crate::manager::AudioConnectionManager for LinuxAudioManager {
         Ok(apps)
     }
 
-    fn get_available_devices(&self) -> Result<Vec<crate::manager::AudioDevice>, String> {
+    fn get_available_devices(&self) -> Result<Vec<crate::oa_audio_mixer_rs::manager::AudioDevice>, String> {
         Ok(self.parse_devices_from_section(&self.run_wpctl_status()?, "Sinks:"))
     }
 
-    fn get_available_sources(&self) -> Result<Vec<crate::manager::AudioDevice>, String> {
+    fn get_available_sources(&self) -> Result<Vec<crate::oa_audio_mixer_rs::manager::AudioDevice>, String> {
         Ok(self.parse_devices_from_section(&self.run_wpctl_status()?, "Sources:"))
     }
 }

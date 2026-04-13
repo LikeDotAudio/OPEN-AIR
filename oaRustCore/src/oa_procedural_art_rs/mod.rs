@@ -190,7 +190,7 @@ impl ProceduralArtEngine {
 }
 
 #[pymodule]
-fn oaproceduralart_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn oaproceduralart_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<ProceduralArtEngine>()?;
     Ok(())
 }

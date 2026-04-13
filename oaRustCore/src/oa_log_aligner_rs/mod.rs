@@ -68,7 +68,7 @@ impl LogAligner {
 }
 
 #[pymodule]
-fn oalogaligner_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn oalogaligner_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<LogAligner>()?;
     Ok(())
 }

@@ -55,7 +55,7 @@ impl VisaScanner {
 }
 
 #[pymodule]
-fn oavisascanner_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn oavisascanner_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<VisaScanner>()?;
     Ok(())
 }

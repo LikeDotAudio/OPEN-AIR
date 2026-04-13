@@ -57,7 +57,7 @@ impl St2138Codec {
 }
 
 #[pymodule]
-fn oast2138codec_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn oast2138codec_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<St2138Codec>()?;
     Ok(())
 }

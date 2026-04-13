@@ -45,7 +45,7 @@ fn scrape_tables(py: Python<'_>, html_content: String) -> PyResult<Py<PyAny>> {
 }
 
 #[pymodule]
-fn oahtmlscraper_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn oahtmlscraper_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(scrape_tables, m)?)?;
     Ok(())
 }

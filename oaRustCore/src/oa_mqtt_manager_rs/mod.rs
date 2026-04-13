@@ -86,7 +86,7 @@ fn matches_mqtt(regex_str: &str, topic: &str) -> bool {
 }
 
 #[pymodule]
-fn oamqttmanager_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn oamqttmanager_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<MqttRouter>()?;
     Ok(())
 }

@@ -35,7 +35,7 @@ fn unpack_showfile(py: Python<'_>, file_path: String) -> PyResult<Py<PyAny>> {
 }
 
 #[pymodule]
-fn oashowfileunpacker_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn oashowfileunpacker_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(unpack_showfile, m)?)?;
     Ok(())
 }

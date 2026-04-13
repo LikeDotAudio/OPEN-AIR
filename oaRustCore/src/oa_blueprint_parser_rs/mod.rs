@@ -12,7 +12,7 @@ impl BlueprintParser {
 }
 
 #[pymodule]
-fn oablueprintparser_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn oablueprintparser_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<BlueprintParser>()?;
     m.add("__all__", vec!["BlueprintParser"])?;
     Ok(())

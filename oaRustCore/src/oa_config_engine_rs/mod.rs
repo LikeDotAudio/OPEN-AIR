@@ -47,7 +47,7 @@ impl ConfigValidator {
 }
 
 #[pymodule]
-fn oaconfigengine_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn oaconfigengine_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<ConfigValidator>()?;
     Ok(())
 }

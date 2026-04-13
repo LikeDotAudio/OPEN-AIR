@@ -65,7 +65,7 @@ fn process_log_file(file_path: String, max_lines: usize) -> PyResult<String> {
 }
 
 #[pymodule]
-fn oalogprocessor_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn oalogprocessor_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(process_log_file, m)?)?;
     Ok(())
 }

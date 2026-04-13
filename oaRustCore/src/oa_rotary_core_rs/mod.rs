@@ -78,7 +78,7 @@ impl RotaryCore {
 }
 
 #[pymodule]
-fn oarotarycore_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn oarotarycore_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<RotaryCore>()?;
     Ok(())
 }

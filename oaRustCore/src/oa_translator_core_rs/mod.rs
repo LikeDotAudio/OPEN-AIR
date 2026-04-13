@@ -197,7 +197,7 @@ impl JSONDiffer {
 }
 
 #[pymodule]
-fn oatranslatorcore_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn oatranslatorcore_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<SplinkerLock>()?;
     m.add_class::<SettleLock>()?;
     m.add_class::<WidgetRegistry>()?;

@@ -1,8 +1,8 @@
 // oaAudioMixer/Core/oaAudioMixer_rs/src/lib.rs
 use pyo3::prelude::*;
 use pyo3::types::PyList;
-use crate::factory::get_os_manager;
-use crate::manager::AudioConnectionManager;
+use crate::oa_audio_mixer_rs::factory::get_os_manager;
+use crate::oa_audio_mixer_rs::manager::AudioConnectionManager;
 
 mod manager;
 mod factory;
@@ -45,7 +45,7 @@ impl AudioMixer {
 }
 
 impl AudioMixer {
-    fn get_devices_list<'py>(&self, py: Python<'py>, devices: Vec<crate::manager::AudioDevice>) -> PyResult<Bound<'py, PyList>> {
+    fn get_devices_list<'py>(&self, py: Python<'py>, devices: Vec<crate::oa_audio_mixer_rs::manager::AudioDevice>) -> PyResult<Bound<'py, PyList>> {
         let list = PyList::empty(py);
         for d in devices {
             let dict = pyo3::types::PyDict::new(py);
@@ -58,4 +58,4 @@ impl AudioMixer {
     }
 }
 
-#[pymodule] fn oaaudiomixer_rs(m: &Bound<'_, PyModule>) -> PyResult<()> { m.add_class::<AudioMixer>()?; Ok(()) }
+#[pymodule] pub fn oaaudiomixer_rs(m: &Bound<'_, PyModule>) -> PyResult<()> { m.add_class::<AudioMixer>()?; Ok(()) }

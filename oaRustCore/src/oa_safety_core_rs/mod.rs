@@ -21,7 +21,7 @@ fn validate_json(data: Bound<'_, PyDict>) -> PyResult<bool> {
 }
 
 #[pymodule]
-fn oasafetycore_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn oasafetycore_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(validate_json, m)?)?;
     Ok(())
 }

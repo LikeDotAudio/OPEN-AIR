@@ -546,7 +546,7 @@ impl NeedleGeometry {
 }
 
 #[pymodule]
-fn oaneedlegeometry_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn oaneedlegeometry_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<NeedleGeometry>()?;
     Ok(())
 }

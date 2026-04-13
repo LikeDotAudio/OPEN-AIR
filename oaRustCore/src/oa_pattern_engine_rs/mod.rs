@@ -396,7 +396,7 @@ impl PatternEngine {
 }
 
 #[pymodule]
-fn oapatternengine_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn oapatternengine_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<PatternEngine>()?;
     Ok(())
 }

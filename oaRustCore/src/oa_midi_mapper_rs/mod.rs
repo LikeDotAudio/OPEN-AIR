@@ -53,7 +53,7 @@ fn parse_channel_and_val(topic_part: String) -> PyResult<u8> {
 }
 
 #[pymodule]
-fn oamidimapper_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn oamidimapper_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(sanitize_id, m)?)?;
     m.add_function(wrap_pyfunction!(midi_to_topic, m)?)?;
     m.add_function(wrap_pyfunction!(parse_channel_and_val, m)?)?;

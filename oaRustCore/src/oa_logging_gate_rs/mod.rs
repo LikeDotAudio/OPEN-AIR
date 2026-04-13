@@ -56,7 +56,7 @@ fn is_debug_allowed(system: String, element: Option<String>, func_name: Option<S
 }
 
 #[pymodule]
-fn oalogginggate_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn oalogginggate_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(is_debug_allowed, m)?)?;
     m.add_function(wrap_pyfunction!(set_gate_state, m)?)?;
     m.add_function(wrap_pyfunction!(set_master_toggle, m)?)?;

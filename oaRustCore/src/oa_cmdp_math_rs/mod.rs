@@ -126,7 +126,7 @@ impl CMDPMath {
 }
 
 #[pymodule]
-fn oacmdpmath_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn oacmdpmath_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<CMDPMath>()?;
     Ok(())
 }

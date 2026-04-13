@@ -7,11 +7,9 @@
 LOCAL_DEBUG = False
 
 import logging
-from .oaEmberTree_rs.compiler_hook import ensure_compiled
 
 try:
-    ensure_compiled()
-    from oaembertree_rs import EmberParser as RustEmberParser
+    from oaRustCore.oa_ember_tree_rs import EmberParser as RustEmberParser
     HAS_RUST = True
 except ImportError:
     logging.warning("⚠️ [EMBER] oaembertree_rs not found. Ember parsing will be disabled.")

@@ -14,10 +14,8 @@ import os as _os
 import traceback
 
 # --- Native Rust Optimization ---
-from oaWatchdog.Methods.oaClockSync_rs.compiler_hook import ensure_compiled
 try:
-    ensure_compiled()
-    from oaclocksync_rs.oaclocksync_rs import SystemClock
+    from oaRustCore.oa_clock_sync_rs import SystemClock
     _rust_clock = SystemClock()
     HAS_RUST_CLOCK = True
 except Exception:

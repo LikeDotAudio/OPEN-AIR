@@ -22,12 +22,12 @@ class MaintenanceManager:
         self.project_root = project_root
         self.log_callback = log_callback
 
-    def _run_task(self, task_func, start_msg, end_msg, *args):
-        self.log_callback(start_msg)
+    def _run_task(self, task_func, start_message, end_message, *args):
+        self.log_callback(start_message)
         def thread_wrapper():
             try:
                 task_func(*args)
-                self.log_callback(end_msg)
+                self.log_callback(end_message)
             except Exception as e:
                 self.log_callback(f"💥 [ERROR] Maintenance task failed: {e}")
         

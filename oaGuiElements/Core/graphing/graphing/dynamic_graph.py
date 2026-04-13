@@ -179,8 +179,8 @@ class GraphPlotter(
             for l in lines:
                 ps = l.split(",")
                 if len(ps) < 2: continue
-                m_type, val, col, label = ps[0].lower().strip(), float(ps[1]), ps[2].strip() or "red", ps[4] if len(ps)>4 else ""
-                obj = self.ax.axvline(x=val, color=col, linewidth=1, label=label, picker=5) if m_type == 'x' else self.ax.axhline(y=val, color=col, linewidth=1, label=label, picker=5)
+                m_type, value, col, label = ps[0].lower().strip(), float(ps[1]), ps[2].strip() or "red", ps[4] if len(ps)>4 else ""
+                obj = self.ax.axvline(x=value, color=col, linewidth=1, label=label, picker=5) if m_type == 'x' else self.ax.axhline(y=value, color=col, linewidth=1, label=label, picker=5)
                 self.marker_objects.append(obj)
             self.canvas.draw_idle()
         except Exception:
@@ -208,8 +208,8 @@ class GraphPlotter(
             else: nls.append(line)
         if upd: self.marker_var.set("\n".join(nls))
 
-    def _on_add_marker(self, m_type, val):
-        cur = self.marker_var.get(); line = f"{m_type},{val:.4f},red,1,UserMarker_{int(time.time())}"
+    def _on_add_marker(self, m_type, value):
+        cur = self.marker_var.get(); line = f"{m_type},{value:.4f},red,1,UserMarker_{int(time.time())}"
         self.marker_var.set(f"{cur}\n{line}" if cur else line)
 
     def destroy(self):

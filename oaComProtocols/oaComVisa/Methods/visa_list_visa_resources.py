@@ -59,8 +59,8 @@ def list_visa_resources():
         matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 Found VISA resources (Reordered): {resources}.", "DEBUG")
         return list(resources)
     except Exception as e:
-        error_msg = f"💳 ❌ Error listing VISA resources: {e}."
+        error_message = f"💳 ❌ Error listing VISA resources: {e}."
 
         if LOCAL_DEBUG:
-            logger.debug(error_msg)
+            logger.debug(error_message)
         return []

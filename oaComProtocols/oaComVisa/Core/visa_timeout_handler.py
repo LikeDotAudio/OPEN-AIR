@@ -15,9 +15,9 @@ def visa_timeout_handler(proxy_instance, command, exception):
     logger.error(f"💳🚢🚫 [VISA TIMEOUT] Device {serial} failed on command: {command}")
     logger.error(f"  └─ Reason: {exception}")
 
-    error_msg = f"VISA I/O Error: {exception}"
+    error_message = f"VISA I/O Error: {exception}"
     proxy_instance.manager._notify_error(
-        serial=serial, message=error_msg, command=command
+        serial=serial, message=error_message, command=command
     )
 
     # Recovery Strategy: Mark offline and attempt a reset if appropriate

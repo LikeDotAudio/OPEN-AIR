@@ -66,15 +66,15 @@ class OidMapConverter:
             if source in ["GUI-INIT", "GUI-LOAD", "SYSTEM-CONFIG"]:
                 continue
                 
-            val = payload.get("val") if isinstance(payload, dict) else payload
+            value = payload.get("value") if isinstance(payload, dict) else payload
             
             # ⚡ PERFORMANCE: Gracefully handle complex types instead of skipping
-            if isinstance(val, dict):
+            if isinstance(value, dict):
                 val_str = "DICT"
-            elif isinstance(val, list):
+            elif isinstance(value, list):
                 val_str = "LIST"
             else:
-                val_str = str(val) if val is not None else ""
+                val_str = str(value) if value is not None else ""
 
             if len(val_str) > OID_MAP_STR_LIMIT:
                 continue
@@ -95,7 +95,7 @@ class OidMapConverter:
             
             new_oid_map[full_oid] = {
                 "topic": topic, 
-                "val": val_str, 
+                "value": val_str, 
                 "descriptor": descriptor,
                 "path_parts": parts # Keep original path parts for context if needed
             }

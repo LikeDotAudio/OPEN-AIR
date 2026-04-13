@@ -6,11 +6,9 @@
 
 import logging
 import multiprocessing
-from .oaTaskPool_rs.compiler_hook import ensure_compiled
 
 try:
-    ensure_compiled()
-    from .oaTaskPool_rs.oataskpool_rs import TaskPool as RustTaskPool
+    from oaRustCore.oa_task_pool_rs import TaskPool as RustTaskPool
     HAS_RUST = True
 except Exception as e:
     logging.error(f"oaTranslator: Failed to load Rust Task Pool: {e}")

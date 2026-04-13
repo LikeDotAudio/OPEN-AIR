@@ -110,7 +110,7 @@ def create_router(state_cache_manager, protocol_router):
         value = state_cache_manager.get_cached_value(topic_path)
         if value is not None:
             if not is_html:
-                return {"type": "leaf", "topic": topic_path, "val": value}
+                return {"type": "leaf", "topic": topic_path, "value": value}
             
             # Simple HTML Leaf View
             return HTMLResponse(f"""
@@ -157,9 +157,9 @@ def create_router(state_cache_manager, protocol_router):
 
     @router.post("/{topic_path:path}")
     async def dynamic_post(topic_path: str = Path(...), payload: Any = Body(...)):
-        val = payload.get("val", payload) if isinstance(payload, dict) else payload
-        protocol_router.ingest(transport_source="REST", topic=topic_path, value=val)
-        return {"status": "success", "topic": topic_path, "val": val}
+        value = payload.get("value", payload) if isinstance(payload, dict) else payload
+        protocol_router.ingest(transport_source="REST", topic=topic_path, value=value)
+        return {"status": "success", "topic": topic_path, "value": value}
 
     @router.get("/api/v1/system/status")
     async def get_system_status():

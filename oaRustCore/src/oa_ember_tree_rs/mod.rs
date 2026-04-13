@@ -48,17 +48,17 @@ enum BerValue<'a> {
 
 impl<'a> BerTlv<'a> {
     fn to_py_dict<'py>(&self, py: Python<'py>) -> PyResult<Bound<'py, PyDict>> {
-        let dict = PyDict::new(py);
+        let dict = PyDict::new_bound(py);
         dict.set_item("tag", self.tag)?;
         dict.set_item("is_constructed", self.is_constructed)?;
         dict.set_item("class", self.class)?;
         
         match &self.value {
             BerValue::Primitive(p) => {
-                dict.set_item("value", PyBytes::new(py, p))?;
+                dict.set_item("value", PyBytes::new_bound(py, p))?;
             }
             BerValue::Constructed(c) => {
-                let list = PyList::empty(py);
+                let list = PyList::empty_bound(py);
                 for item in c {
                     list.append(item.to_py_dict(py)?)?;
                 }

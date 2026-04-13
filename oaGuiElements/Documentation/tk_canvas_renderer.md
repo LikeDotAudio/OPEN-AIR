@@ -42,12 +42,12 @@ Specialized renderer for drawing SmartMeter elements onto a Tkinter Canvas.
 **Side Effects & Thread-Safety:**
 - [TODO: Note any locks, I/O, or global state.]
 
-##### `draw_static(self, layout, cfg)`
+##### `draw_static(self, layout, configuration)`
 Draws the static portions of the meter (track, ticks, grid, labels).
 
 **Parameters:**
 - `layout`: [TODO: Detail meaning, valid ranges, special cases]
-- `cfg`: [TODO: Detail meaning, valid ranges, special cases]
+- `configuration`: [TODO: Detail meaning, valid ranges, special cases]
 
 **Returns:**
 - [TODO: Define success and error returns.]
@@ -55,13 +55,13 @@ Draws the static portions of the meter (track, ticks, grid, labels).
 **Side Effects & Thread-Safety:**
 - [TODO: Note any locks, I/O, or global state.]
 
-##### `update_dynamic(self, dyn_data, overload_factor, cfg)`
+##### `update_dynamic(self, dyn_data, overload_factor, configuration)`
 Updates positions and colors of moving elements.
 
 **Parameters:**
 - `dyn_data`: [TODO: Detail meaning, valid ranges, special cases]
 - `overload_factor`: [TODO: Detail meaning, valid ranges, special cases]
-- `cfg`: [TODO: Detail meaning, valid ranges, special cases]
+- `configuration`: [TODO: Detail meaning, valid ranges, special cases]
 
 **Returns:**
 - [TODO: Define success and error returns.]

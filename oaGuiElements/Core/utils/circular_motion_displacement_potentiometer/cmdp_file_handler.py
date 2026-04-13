@@ -50,7 +50,7 @@ class CMDPFileHandler:
                     if self.w.mixin_ref.state_mirror_engine:
                         sme = self.w.mixin_ref.state_mirror_engine
                         fp = f"{self.w.path}/ch{idx}"
-                        for p_name in ["val", "rot", "angle", "mute"]:
+                        for p_name in ["value", "rot", "angle", "mute"]:
                             sme.broadcast_gui_change_to_mqtt(f"{fp}/{p_name}")
                     self.w.update_tree(f)
             

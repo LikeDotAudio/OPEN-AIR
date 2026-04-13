@@ -120,8 +120,8 @@ Managers are passive components that handle state and control logic.
 ├-----**yak/**<br>
      ├----> **Documentation/**<br>
         |   -> [How to make a yak json](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/yak/Documentation/How%20to%20make%20a%20yak%20json.md) — *How To Make A Yak Json*<br>
-     ├----> [manager_yak_rx](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/yak/yak_rx.md) — *Manager Yak Rx*<br>
-     ├----> [manager_yak_tx](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/yak/yak_tx.md) — *Manager Yak Tx*<br>
+     ├----> [manager_yak_receiver](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/yak/yak_receiver.md) — *Manager Yak Receiver*<br>
+     ├----> [manager_yak_transmitter](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/yak/yak_transmitter.md) — *Manager Yak Transmitter*<br>
      ├----> [manager_yakety_yak](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/yak/yakety_yak.md) — *Manager Yakety Yak*<br>
      ├----> [yak_command_builder](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/yak/yak_command.md) — *Yak Command Builder*<br>
      ├----> [yak_repository_parser](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/yak/yak_repository_parser.md) — *Yak Repository Parser*<br>

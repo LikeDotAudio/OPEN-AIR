@@ -68,8 +68,8 @@ class DualFaderRendererMixin:
         is_vert = self.orientation == "vertical"
         dim = h if is_vert else w
         
-        def get_p(val):
-            n = (val - self.min_val) / (self.max_val - self.min_val) if (self.max_val - self.min_val) else 0
+        def get_p(value):
+            n = (value - self.min_val) / (self.max_val - self.min_val) if (self.max_val - self.min_val) else 0
             dn = max(0.0, min(1.0, n)) ** (1.0 / self.log_exponent)
             return (dim - 40.0) * (1.0 - dn if is_vert else dn) + 20.0
             

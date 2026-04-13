@@ -5,11 +5,9 @@
 # Description: Wrapper for High-Performance Rust Geometry Math
 
 import logging
-from .oaGeometryMath_rs import compiler_hook
 
 try:
-    compiler_hook.ensure_compiled()
-    import oageometrymath_rs
+    from oaRustCore import oa_geometry_math_rs as oageometrymath_rs
     HAS_RUST = True
 except ImportError:
     logging.warning("⚠️ [GUI_BUILDER] oageometrymath_rs not found. Falling back to (missing) slow Python geometry math.")
@@ -25,31 +23,31 @@ class UIGeometryMath:
     """Centralized math utilities for UI coordinate and value transformations using Rust."""
 
     @staticmethod
-    def normalize_value(val, min_val, max_val):
+    def normalize_value(value, min_val, max_val):
         """Normalizes a value to a 0.0 - 1.0 range via Rust."""
         if not HAS_RUST:
             try:
                 if max_val == min_val: return 0.0
-                return (float(val) - float(min_val)) / (float(max_val) - float(min_val))
+                return (float(value) - float(min_val)) / (float(max_val) - float(min_val))
             except (TypeError, ValueError, ZeroDivisionError):
                 return 0.0
 
         try:
-            return oageometrymath_rs.normalize_value(float(val), float(min_val), float(max_val))
+            return oageometrymath_rs.normalize_value(float(value), float(min_val), float(max_val))
         except (TypeError, ValueError):
             return 0.0
 
     @staticmethod
-    def value_to_pixel(val, min_val, max_val, pixel_length, reverse=False):
+    def value_to_pixel(value, min_val, max_val, pixel_length, reverse=False):
         """Maps a value to a pixel position within a given length via Rust."""
         if not HAS_RUST:
             # Simple Python fallback
-            norm = UIGeometryMath.normalize_value(val, min_val, max_val)
+            norm = UIGeometryMath.normalize_value(value, min_val, max_val)
             if reverse: norm = 1.0 - norm
             return norm * float(pixel_length)
 
         try:
-            return oageometrymath_rs.value_to_pixel(float(val), float(min_val), float(max_val), float(pixel_length), bool(reverse))
+            return oageometrymath_rs.value_to_pixel(float(value), float(min_val), float(max_val), float(pixel_length), bool(reverse))
         except (TypeError, ValueError):
             return 0.0
 

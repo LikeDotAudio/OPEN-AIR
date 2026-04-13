@@ -91,26 +91,26 @@ class MidiDashboard(tk.Frame):
             return get_manager()
         except: return None
 
-    def _on_protocol_event(self, msg):
+    def _on_protocol_event(self, message):
         """Observer callback for ProtocolRouter traffic."""
-        topic = str(msg.get("topic", ""))
+        topic = str(message.get("topic", ""))
         is_midi_topic = "/MIDI/" in topic
-        is_midi_source = msg.get("logical_source") in ["MIDI", "MIDI-TX"]
+        is_midi_source = message.get("logical_source") in ["MIDI", "MIDI-TX"]
         
-        matrix_log("comms", "midi", "_on_protocol_event", f"🎹 [DASH] Protocol Event: topic={topic}, source={msg.get('logical_source')}, is_midi={is_midi_topic or is_midi_source}", "DEBUG")
+        matrix_log("comms", "midi", "_on_protocol_event", f"🎹 [DASH] Protocol Event: topic={topic}, source={message.get('logical_source')}, is_midi={is_midi_topic or is_midi_source}", "DEBUG")
 
         if is_midi_topic or is_midi_source:
-            meta = msg.get("meta", {})
-            val = msg.get("val")
-            is_tx = msg.get("logical_source") == "MIDI-TX" or meta.get("midi_raw") is not None
+            meta = message.get("meta", {})
+            value = message.get("value")
+            is_tx = message.get("logical_source") == "MIDI-TX" or meta.get("midi_raw") is not None
             direction = "TX" if is_tx else "RX"
             
             if isinstance(meta, dict) and "raw" in meta:
                 self.on_midi_activity(direction, meta)
-            elif isinstance(val, dict) and "raw" in val:
-                self.on_midi_activity(direction, val)
+            elif isinstance(value, dict) and "raw" in value:
+                self.on_midi_activity(direction, value)
             elif is_midi_topic:
-                real_val = val.get("val") if isinstance(val, dict) else val
+                real_val = value.get("value") if isinstance(value, dict) else value
                 import re
                 note_match = re.search(r"note(\d+)", topic)
                 note = int(note_match.group(1)) if note_match else 0
@@ -119,7 +119,7 @@ class MidiDashboard(tk.Frame):
                 
                 m_type = "note_on" if real_val > 0 else "note_off"
                 self.on_midi_activity(direction, {
-                    "val": real_val, 
+                    "value": real_val, 
                     "topic": topic,
                     "note": note,
                     "channel": channel,
@@ -128,11 +128,11 @@ class MidiDashboard(tk.Frame):
                     "raw": f"{m_type} note={note} channel={channel} velocity={real_val}"
                 })
 
-    def on_midi_activity(self, direction, msg):
+    def on_midi_activity(self, direction, message):
         """Called when MIDI traffic occurs."""
         try:
             # ⚡ Robustness: Ensure we pass current values, not late-binding closures
-            self.after(0, lambda d=direction, m=msg: self._process_activity(d, m))
+            self.after(0, lambda d=direction, m=message: self._process_activity(d, m))
         except tk.TclError:
             pass # App is closing
 
@@ -186,27 +186,27 @@ class MidiDashboard(tk.Frame):
         self.midi_hardware.update_ports(info)
         self.conn_mgr.update_connections(info)
 
-    def _process_activity(self, direction, msg):
-        matrix_log("comms", "midi", "_process_activity", f"🎹 [DASH] Processing activity: {direction} {msg}", "DEBUG")
+    def _process_activity(self, direction, message):
+        matrix_log("comms", "midi", "_process_activity", f"🎹 [DASH] Processing activity: {direction} {message}", "DEBUG")
         # ⚡ CRITICAL: The visualizer needs the full message (dict or object)
-        self.keyboard.handle_midi(msg)
+        self.keyboard.handle_midi(message)
         
         channel = 0
-        msg_str = ""
+        message_str = ""
         
-        if isinstance(msg, dict):
-            channel = msg.get("channel", 0)
-            msg_str = msg.get("raw", str(msg))
+        if isinstance(message, dict):
+            channel = message.get("channel", 0)
+            message_str = message.get("raw", str(message))
             # Fallback for topic-only messages
-            if not msg_str and msg.get("topic"):
-                msg_str = f"{msg.get('type', 'event')} on {msg.get('topic')}"
-        elif hasattr(msg, "channel"):
-            channel = msg.channel
-            msg_str = str(msg)
+            if not message_str and message.get("topic"):
+                message_str = f"{message.get('type', 'event')} on {message.get('topic')}"
+        elif hasattr(message, "channel"):
+            channel = message.channel
+            message_str = str(message)
         else:
-            msg_str = str(msg)
+            message_str = str(message)
             
-        self.midi_feed.add_log(direction, msg_str, channel)
+        self.midi_feed.add_log(direction, message_str, channel)
 
     def destroy(self):
         if self.midi_manager:

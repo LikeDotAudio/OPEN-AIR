@@ -33,13 +33,13 @@ and available size.
 **Side Effects & Thread-Safety:**
 - [TODO: Note any locks, I/O, or global state.]
 
-##### `calculate(self, w, h, cfg)`
+##### `calculate(self, w, h, configuration)`
 Computes the full coordinate set for the current widget dimensions.
 
 **Parameters:**
 - `w`: [TODO: Detail meaning, valid ranges, special cases]
 - `h`: [TODO: Detail meaning, valid ranges, special cases]
-- `cfg`: [TODO: Detail meaning, valid ranges, special cases]
+- `configuration`: [TODO: Detail meaning, valid ranges, special cases]
 
 **Returns:**
 - [TODO: Define success and error returns.]
@@ -47,14 +47,14 @@ Computes the full coordinate set for the current widget dimensions.
 **Side Effects & Thread-Safety:**
 - [TODO: Note any locks, I/O, or global state.]
 
-##### `get_dynamic_coords(self, current_val, peak_val, overload_factor, cfg, layout)`
+##### `get_dynamic_coords(self, current_val, peak_val, overload_factor, configuration, layout)`
 Calculates coordinates for elements that change every frame.
 
 **Parameters:**
 - `current_val`: [TODO: Detail meaning, valid ranges, special cases]
 - `peak_val`: [TODO: Detail meaning, valid ranges, special cases]
 - `overload_factor`: [TODO: Detail meaning, valid ranges, special cases]
-- `cfg`: [TODO: Detail meaning, valid ranges, special cases]
+- `configuration`: [TODO: Detail meaning, valid ranges, special cases]
 - `layout`: [TODO: Detail meaning, valid ranges, special cases]
 
 **Returns:**

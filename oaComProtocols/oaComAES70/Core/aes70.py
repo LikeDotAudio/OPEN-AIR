@@ -100,16 +100,16 @@ class AES70Manager:
             aes_logger.debug(f"📻📡📥 [AES70] Inbound PDU: Version {pdu['version']}, {pdu['message_count']} messages.")
         
         # Process individual messages (Dispatching to state cache, etc.)
-        for msg in pdu['messages']:
-            self._handle_message(msg)
+        for message in pdu['messages']:
+            self._handle_message(message)
             
         return pdu
 
-    def _handle_message(self, msg):
+    def _handle_message(self, message):
         """Dispatches an OcaMessage to the appropriate handler."""
         # This is where the MethodID and ONo mapping happens
         if LOCAL_DEBUG:
-            aes_logger.debug(f"📻📡📥 [AES70] MSG: Handle {msg['handle']} -> ONo {msg['target_ono']} Method {msg['method_id']}")
+            aes_logger.debug(f"📻📡📥 [AES70] MSG: Handle {message['handle']} -> ONo {message['target_ono']} Method {message['method_id']}")
         
         # ⚡ Example: Handle specific method/ONo combinations
         # If ONo is 1 (DeviceManager) and Method is some Set property...

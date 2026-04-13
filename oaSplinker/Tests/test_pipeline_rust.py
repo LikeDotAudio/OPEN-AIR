@@ -34,7 +34,7 @@ class TestPipelineRust(unittest.TestCase):
     def test_rust_scale(self):
         """Test the Rust SplinkPipeline with scale handler."""
         try:
-            from oasplinkcore_rs import SplinkPipeline as RustSplinkPipeline
+            from oaRustCore.oa_splink_core_rs import SplinkPipeline as RustSplinkPipeline
         except ImportError:
             self.skipTest("Rust oasplinkcore_rs not installed.")
 
@@ -48,7 +48,7 @@ class TestPipelineRust(unittest.TestCase):
     def test_deadband_state_rust(self):
         """Test the Rust SplinkPipeline with deadband handler."""
         try:
-            from oasplinkcore_rs import SplinkPipeline as RustSplinkPipeline
+            from oaRustCore.oa_splink_core_rs import SplinkPipeline as RustSplinkPipeline
         except ImportError:
             self.skipTest("Rust oasplinkcore_rs not installed.")
 

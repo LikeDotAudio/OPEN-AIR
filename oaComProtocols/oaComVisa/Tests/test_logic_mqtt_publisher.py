@@ -41,7 +41,7 @@ class TestVisaGuiPublisher(unittest.TestCase):
         
         self.assertEqual(kwargs['topic'], expected_topic)
         payload = orjson.loads(kwargs['payload'])
-        self.assertEqual(payload["val"], True)
+        self.assertEqual(payload["value"], True)
         self.assertEqual(payload["src"], "VISA")
         self.assertEqual(payload["GUID"], self.publisher.GUID)
         self.assertTrue(kwargs['retain'])

@@ -176,7 +176,7 @@ class YakMonitor(tk.Frame, TransparencyMixin):
         self.btn_jump_latest = ttk.Button(self.dissect_header_frame, text="Jump to Latest", command=self.jump_to_latest_message)
         self.btn_jump_latest.pack(side=tk.RIGHT, padx=2)
 
-        self.btn_jump_val = ttk.Button(self.dissect_header_frame, text="Jump to Latest 'val:'", command=self.jump_to_latest_val_msg)
+        self.btn_jump_val = ttk.Button(self.dissect_header_frame, text="Jump to Latest 'value:'", command=self.jump_to_latest_val_message)
         self.btn_jump_val.pack(side=tk.RIGHT, padx=2)
 
         self.dissector_tree = ttk.Treeview(self.dissector_frame, columns=("Value"), show="tree headings")
@@ -229,8 +229,8 @@ class YakMonitor(tk.Frame, TransparencyMixin):
         try:
             data = orjson.loads(payload)
             if isinstance(data, dict):
-                if "val" in data:
-                    val_display = str(data["val"])
+                if "value" in data:
+                    val_display = str(data["value"])
                     tags = ("green_row")
                 elif "message" in data:
                     val_display = data["message"]
@@ -295,15 +295,15 @@ class YakMonitor(tk.Frame, TransparencyMixin):
             self.log_tree.focus(item_id)
             self.on_log_select()
 
-    def jump_to_latest_val_msg(self):
-        """Finds the most recent log entry containing a 'val' key and selects it."""
+    def jump_to_latest_val_message(self):
+        """Finds the most recent log entry containing a 'value' key and selects it."""
         for item_id in self.log_tree.get_children():
             values = self.log_tree.item(item_id, "values")
             if values and len(values) >= 7:
                 payload = values[6]
                 try:
                     data = orjson.loads(payload)
-                    if isinstance(data, dict) and "val" in data:
+                    if isinstance(data, dict) and "value" in data:
                         # Select and focus
                         self.log_tree.selection_set(item_id)
                         self.log_tree.see(item_id)
@@ -312,7 +312,7 @@ class YakMonitor(tk.Frame, TransparencyMixin):
                         self.on_log_select()
                         return
                 except Exception as e:
-                    matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Skipping log entry in jump_to_latest_val_msg: {e}", "TRACE")
+                    matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Skipping log entry in jump_to_latest_val_message: {e}", "TRACE")
                     continue
 
     def _populate_dissector(self, parent, data):

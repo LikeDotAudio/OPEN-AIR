@@ -21,7 +21,7 @@ class TestRustCSVParser(unittest.TestCase):
     def test_rust_csv_parsing(self):
         """Test CSV parsing with the mandatory Rust backend."""
         try:
-            import oacsvparser_rs
+            from oaRustCore import oa_csv_parser_rs as oacsvparser_rs
         except ImportError:
             self.skipTest("Rust oacsvparser_rs not installed.")
             

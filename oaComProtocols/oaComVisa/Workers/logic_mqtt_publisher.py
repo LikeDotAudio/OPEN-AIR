@@ -63,16 +63,16 @@ class VisaGuiPublisher:
                     device_name = resources[i - 1]
                     options_array.append({
                         "index": i,
-                        "active": {"val": True, "src": "system", "ts": time.time(), "GUID": self.GUID},
-                        "label_active": {"val": device_name, "src": "system", "ts": time.time(), "GUID": self.GUID},
-                        "label_inactive": {"val": device_name, "src": "system", "ts": time.time(), "GUID": self.GUID}
+                        "active": {"value": True, "src": "system", "timestamp": time.time(), "GUID": self.GUID},
+                        "label_active": {"value": device_name, "src": "system", "timestamp": time.time(), "GUID": self.GUID},
+                        "label_inactive": {"value": device_name, "src": "system", "timestamp": time.time(), "GUID": self.GUID}
                     })
                 else:
                     options_array.append({
                         "index": i,
-                        "active": {"val": False, "src": "system", "ts": time.time(), "GUID": self.GUID},
-                        "label_active": {"val": "", "src": "system", "ts": time.time(), "GUID": self.GUID},
-                        "label_inactive": {"val": "", "src": "system", "ts": time.time(), "GUID": self.GUID}
+                        "active": {"value": False, "src": "system", "timestamp": time.time(), "GUID": self.GUID},
+                        "label_active": {"value": "", "src": "system", "timestamp": time.time(), "GUID": self.GUID},
+                        "label_inactive": {"value": "", "src": "system", "timestamp": time.time(), "GUID": self.GUID}
                     })
 
             self.mqtt_util.get_client_instance().publish(
@@ -86,7 +86,7 @@ class VisaGuiPublisher:
             if resources:
                 first_device_topic = f"{base_topic}/options/1/selected"
                 payload_selected_true = orjson.dumps(
-                    {"val": True, "src": "system", "ts": time.time(), "GUID": self.GUID}
+                    {"value": True, "src": "system", "timestamp": time.time(), "GUID": self.GUID}
                 )
                 self.mqtt_util.get_client_instance().publish(
                     topic=first_device_topic,
@@ -123,11 +123,11 @@ class VisaGuiPublisher:
             # ⚡ ANTI-FEEDBACK SPEC: Define identity and origin to prevent
             # recursive message loops.
             payload_data = {
-                "val": value,
+                "value": value,
                 "src": "VISA",
-                "ts": time.time(),
+                "timestamp": time.time(),
                 "GUID": self.GUID,
-                "msg_type": "SPLICE_ACTION",
+                "message_type": "SPLICE_ACTION",
                 "origin_source": "VISA"
             }
             self.mqtt_util.get_client_instance().publish(

@@ -143,11 +143,11 @@ class VisaProxy:
         self.subscriber_router.subscribe_to_topic(topic, self._on_tx_inbox_message)
         matrix_log("comms", "visa", "_setup_mqtt_subscriptions", f"💳 ℹ️ Proxy Log: 💳Subscribed to '{topic}' for inbound proxy commands.", "DEBUG")
 
-    def _on_tx_inbox_message(self, msg: MqttMessage):
+    def _on_tx_inbox_message(self, message: MqttMessage):
         """Handles inbound MQTT messages intended for instrument execution.
 
         Parameters:
-        - msg: The MqttMessage object containing the command payload.
+        - message: The MqttMessage object containing the command payload.
 
         Returns:
         - None.
@@ -156,10 +156,10 @@ class VisaProxy:
         - Enqueues command information for the background worker thread.
         """
         current_function_name = inspect.currentframe().f_code.co_name
-        matrix_log("comms", "visa", current_function_name, f"💳 📡📡⬇️⬇️ PROXY IN: Tx_Inbox message received on Topic: '{msg.topic}', Payload: '{msg.payload}'. Proxy will process this as a raw SCPI command.", "TRACE")
+        matrix_log("comms", "visa", current_function_name, f"💳 📡📡⬇️⬇️ PROXY IN: Tx_Inbox message received on Topic: '{message.topic}', Payload: '{message.payload}'. Proxy will process this as a raw SCPI command.", "TRACE")
 
         # Extract command parameters from the hardened messaging interface.
-        payload_data = msg.get_json_payload()
+        payload_data = message.get_json_payload()
         command = payload_data.get("command")
         query = payload_data.get("query", False)
         correlation_id = payload_data.get("correlation_id", "N/A")
@@ -175,7 +175,7 @@ class VisaProxy:
             matrix_log("comms", "visa", current_function_name, f"💳 ℹ️ Proxy Log: 💳Command '{command}' enqueued. Query: {query}", "TRACE")
         else:
             self._publish_proxy_error(
-                message="Received empty command in Tx_Inbox.", command=msg.decode_payload()
+                message="Received empty command in Tx_Inbox.", command=message.decode_payload()
             )
 
     def _publish_proxy_error(self, message: str, command: str = "N/A"):

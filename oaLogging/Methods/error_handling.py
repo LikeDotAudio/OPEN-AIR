@@ -46,11 +46,11 @@ def vocal_failure_handler(
             except Exception as e:
                 # 1. Capture forensic detail
                 tb = traceback.format_exc()
-                error_msg = f"❌🔴 [FAILURE] {message} in '{func.__name__}': {e}"
+                error_message = f"❌🔴 [FAILURE] {message} in '{func.__name__}': {e}"
                 
                 # 2. Vocal Logging
                 FAILURE_LOGGER.bind(category=f"{get_emoji('FAILURE')} {category}").error(
-                    f"{error_msg}\n\n🕵️ FORENSIC TRACE:\n{tb}"
+                    f"{error_message}\n\n🕵️ FORENSIC TRACE:\n{tb}"
                 )
                 
                 # 3. Visual 'Red Screen of Warning' (if widget provided)

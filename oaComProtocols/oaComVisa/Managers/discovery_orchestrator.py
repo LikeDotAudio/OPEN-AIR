@@ -48,7 +48,7 @@ class DiscoveryOrchestrator:
 
         if not silent: print(f"[2/4] PROBING {len(potential_targets)} POTENTIAL TARGETS...")
         
-        for idx, target in enumerate(potential_targets):
+        for index, target in enumerate(potential_targets):
             raw_res = target["Resource"]
             display_res = clean_string_for_display(raw_res)
             
@@ -56,7 +56,7 @@ class DiscoveryOrchestrator:
             idn = self.scanner.query_device_safe(raw_res)
             
             device_entry = {
-                "id": str(idx + 1),
+                "id": str(index + 1),
                 "type": target["Type"],
                 "resource_string": display_res,
                 "ip_address": conn_details["IP"],
@@ -78,7 +78,7 @@ class DiscoveryOrchestrator:
                     "device_type": "Unknown", "notes": "Connection Timed Out"
                 })
             
-            self.inventory[str(idx + 1)] = device_entry
+            self.inventory[str(index + 1)] = device_entry
 
         return self.inventory
 

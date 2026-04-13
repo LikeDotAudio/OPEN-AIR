@@ -57,11 +57,11 @@ class HeartbeatGenerator:
             try:
                 if self.mqtt:
                     payload = {
-                        "ts": time.time(),
+                        "timestamp": time.time(),
                         "src": "HEARTBEAT",
-                        "val": "PULSE",
+                        "value": "PULSE",
                         "guid": app_constants.INSTANCE_GUID,
-                        "msg_type": "HEARTBEAT"
+                        "message_type": "HEARTBEAT"
                     }
                     # Heartbeats bypass the router and go direct to MQTT
                     self.mqtt.publish(self.topic, orjson.dumps(payload).decode(), retain=False)

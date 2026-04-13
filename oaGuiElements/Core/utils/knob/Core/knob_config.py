@@ -7,9 +7,9 @@ from oaGui.Methods.i18n_utils import get_text
 
 from oaStyle.Core.style import THEMES, DEFAULT_THEME
 
-def _to_float(val, default=0.0):
+def _to_float(value, default=0.0):
     try:
-        return float(val)
+        return float(value)
     except (ValueError, TypeError):
         return default
 

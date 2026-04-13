@@ -39,12 +39,12 @@ class BrokerMonitor:
         if callback in self._observers:
             self._observers.remove(callback)
 
-    def _on_sys_message(self, msg: MqttMessage):
+    def _on_sys_message(self, message: MqttMessage):
         """
         Callback for MQTT messages. Updates the internal stats dictionary.
         """
-        topic = msg.topic
-        payload = msg.decode_payload()
+        topic = message.topic
+        payload = message.decode_payload()
         
         # Clean up the topic to be a nice key (e.g. "$SYS/broker/clients/connected" -> "clients/connected")
         key = topic.replace("$SYS/broker/", "")

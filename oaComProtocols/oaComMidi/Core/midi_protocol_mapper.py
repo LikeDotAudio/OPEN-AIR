@@ -19,13 +19,13 @@ import sys
 from pathlib import Path
 
 # --- Iron Oxide Distributed Binary Standard ---
-from .oaMidiMapper_rs.compiler_hook import ensure_compiled
-ensure_compiled()
 try:
-    import oamidimapper_rs
+    from oaRustCore import oa_midi_mapper_rs as oamidimapper_rs
+    HAS_RUST_MIDI = True
 except ImportError:
-    # CRITICAL: Pure Rust mandate. Fallback prohibited.
-    raise ImportError("🚀❌ [FATAL] oaMidiMapper-rs binary missing. Iron Oxide mode mandatory.")
+    import logging
+    logging.warning("🚀⚠️ [MIDI] oaMidiMapper-rs missing. MIDI mapping will be non-functional.")
+    HAS_RUST_MIDI = False
 
 class MIDIProtocolMapper:
     """Handles bidirectional mapping between MIDI messages and system topics (RUST ACCELERATED)."""
@@ -33,8 +33,8 @@ class MIDIProtocolMapper:
     def __init__(self):
         self._dev_id_cache = {}
 
-    def midi_to_topic(self, msg, port_name):
-        if not msg: return "OPEN-AIR/MIDI/unknown/error", 0
+    def midi_to_topic(self, message, port_name):
+        if not message: return "OPEN-AIR/MIDI/unknown/error", 0
         
         # 1. Device ID Sanitization (Rust)
         if port_name in self._dev_id_cache: 
@@ -44,27 +44,27 @@ class MIDIProtocolMapper:
             self._dev_id_cache[port_name] = dev_id
         
         # 2. Topic Mapping (Rust)
-        ch = msg.channel if hasattr(msg, 'channel') else 0
+        ch = message.channel if hasattr(message, 'channel') else 0
         note_or_cc = 0
-        if hasattr(msg, 'note'): note_or_cc = msg.note
-        elif hasattr(msg, 'control'): note_or_cc = msg.control
+        if hasattr(message, 'note'): note_or_cc = message.note
+        elif hasattr(message, 'control'): note_or_cc = message.control
         
-        val = 0
-        if hasattr(msg, 'velocity'): val = msg.velocity
-        elif hasattr(msg, 'value'): val = msg.value
+        value = 0
+        if hasattr(message, 'velocity'): value = message.velocity
+        elif hasattr(message, 'value'): value = message.value
         
-        return oamidimapper_rs.midi_to_topic(dev_id, msg.type, ch, note_or_cc, val)
+        return oamidimapper_rs.midi_to_topic(dev_id, message.type, ch, note_or_cc, value)
 
-    def topic_to_midi(self, topic, val):
+    def topic_to_midi(self, topic, value):
         """Logic for reverse mapping Internal -> MIDI (Mixed Mode)."""
         if "/MIDI/" not in topic: return None
         
         try:
             # ⚡ Support for JSON dictionary payloads
-            if isinstance(val, dict):
-                real_val = int(val.get('val', val.get('velocity', val.get('value', 0))))
+            if isinstance(value, dict):
+                real_val = int(value.get('value', value.get('velocity', value.get('value', 0))))
             else:
-                real_val = int(val)
+                real_val = int(value)
 
             # ⚡ V3.2.5 GUI_OUT ALIGNMENT:
             # Handle topics from the Output Generator: OPEN-AIR/MIDI/gui_out/chX/noteY

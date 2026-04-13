@@ -10,11 +10,11 @@ def handle_panic(self, trigger_splink_id=None):
     """Emergency shutdown of all splinks."""
     self.panic_active = True
     
-    msg = f"🆘 SPLINKER PANIC TRIGGERED! Emergency stop active."
+    message = f"🆘 SPLINKER PANIC TRIGGERED! Emergency stop active."
     if trigger_splink_id:
-        msg = f"🆘 SPLINKER PANIC TRIGGERED by splink [{trigger_splink_id}]! High-frequency loop detected."
+        message = f"🆘 SPLINKER PANIC TRIGGERED by splink [{trigger_splink_id}]! High-frequency loop detected."
     
-    splinker_logger.critical(msg)
+    splinker_logger.critical(message)
     
     # Deactivate all splinks
     for s in self.splinks:
@@ -26,7 +26,7 @@ def handle_panic(self, trigger_splink_id=None):
 
     # Notify UI/MQTT
     import orjson
-    panic_payload = {"val": True, "trigger_id": trigger_splink_id}
+    panic_payload = {"value": True, "trigger_id": trigger_splink_id}
     
     self.notify_monitor("panic", panic_payload)
     if self.mqtt_manager:
@@ -46,7 +46,7 @@ def _reset_panic(self):
     self.panic_active = False
     splinker_logger.info("✅ SPLINKER PANIC RESET. Ready for operation.")
     
-    reset_payload = {"val": False}
+    reset_payload = {"value": False}
     self.notify_monitor("panic", reset_payload)
     if self.mqtt_manager:
         self.mqtt_manager.publish(

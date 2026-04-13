@@ -5,9 +5,9 @@
 
 ## 📖 Description & Purpose
 ### File Level
-Proxy/yak_manager/manager_yak_rx.py
+Proxy/yak_manager/manager_yak_receiver.py
 
-This file (manager_yak_rx.py) processes the response from an SCPI query and
+This file (manager_yak_receiver.py) processes the response from an SCPI query and
 publishes the parsed output values to MQTT.
 REFACTORED for Partitioned Architecture (Core Only).
 
@@ -20,7 +20,7 @@ Version 20260221.Partition.1
 ## 📚 API Reference
 
 ### Classes
-#### `class YakRxManager`
+#### `class YakReceiverManager`
 Processes responses from the instrument and publishes outputs to MQTT.
 
 ##### `__init__(self, mqtt_connection_manager, subscriber_router, yak_translator, state_cache_manager)`

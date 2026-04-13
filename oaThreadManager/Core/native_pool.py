@@ -5,11 +5,9 @@
 # Description: High-performance parallel execution engine using native Rust.
 
 import logging
-from ..Methods.oaThreadPool_rs.compiler_hook import ensure_compiled
 
 try:
-    ensure_compiled()
-    from oathreadpool_rs.oathreadpool_rs import NativeThreadPool
+    from oaRustCore.oa_thread_pool_rs import NativeThreadPool
     HAS_RUST = True
 except Exception as e:
     logging.warning(f"oaThreadManager: NativeThreadPool unavailable: {e}")

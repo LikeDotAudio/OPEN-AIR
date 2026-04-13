@@ -7,11 +7,9 @@
 import threading
 import logging
 from pathlib import Path
-from oaStateCache.Core.oaTranslatorCore_rs.compiler_hook import ensure_compiled
 
 try:
-    ensure_compiled()
-    from oatranslatorcore_rs import SplinkerLock as RustSplinkerLock
+    from oaRustCore.oa_translator_core_rs import SplinkerLock as RustSplinkerLock
     HAS_RUST = True
 except Exception as e:
     logging.warning(f"oaSplinker: Failed to load Rust SplinkerLock: {e}")

@@ -1,65 +1,72 @@
-// oaComBroker/Methods/oaCoreRouter_rs/src/lib.rs
+// oaComBroker/Methods/oaCoreRouter_rs/mod.rs
 // Author: Anthony Peter Kuzub (via Gemini)
-// Version: 20260402.0015.2
+// Version: 20260413.0010.1
+//
+// Description: High-performance asynchronous message router. Utilizes Rust's 
+// lock-free crossbeam channels to manage inbound and outbound traffic between
+// Python protocol managers and the central MQTT bus without blocking the GIL.
 
 use pyo3::prelude::*;
 use crossbeam_channel::{unbounded, Receiver, Sender};
 
 #[pyclass]
 struct CoreRouter {
-    inbound_tx: Sender<Py<PyAny>>,
-    inbound_rx: Receiver<Py<PyAny>>,
-    outbound_tx: Sender<Py<PyAny>>,
-    outbound_rx: Receiver<Py<PyAny>>,
+    // Unbounded channels are used to prevent backpressure from stalling the 
+    // protocol managers. The memory overhead is acceptable as the Python-side
+    // supervisor (openair.py) monitors queue lengths for system health.
+    inbound_transmitter: Sender<Py<PyAny>>,
+    inbound_receiver: Receiver<Py<PyAny>>,
+    outbound_transmitter: Sender<Py<PyAny>>,
+    outbound_receiver: Receiver<Py<PyAny>>,
 }
 
 #[pymethods]
 impl CoreRouter {
     #[new]
     fn new() -> Self {
-        let (in_tx, in_rx) = unbounded();
-        let (out_tx, out_rx) = unbounded();
+        let (inbound_transmitter, inbound_receiver) = unbounded();
+        let (outbound_transmitter, outbound_receiver) = unbounded();
         CoreRouter {
-            inbound_tx: in_tx,
-            inbound_rx: in_rx,
-            outbound_tx: out_tx,
-            outbound_rx: out_rx,
+            inbound_transmitter,
+            inbound_receiver,
+            outbound_transmitter,
+            outbound_receiver,
         }
     }
 
-    fn push_inbound(&self, msg: Py<PyAny>) {
-        let _ = self.inbound_tx.send(msg);
+    // Inbound traffic (Protocol -> Global Bus)
+    fn push_inbound(&self, message: Py<PyAny>) {
+        // Send is non-blocking on unbounded channels. Failure to send implies
+        // a catastrophic channel closure, handled at the supervisor level.
+        let _ = self.inbound_transmitter.send(message);
     }
 
     fn pop_inbound(&self, py: Python<'_>) -> Option<Py<PyAny>> {
-        self.inbound_rx.try_recv().ok().map(|msg| msg.clone_ref(py))
+        // try_recv ensures we don't hang the calling thread if no messages are pending.
+        self.inbound_receiver.try_recv().ok().map(|message| message.clone_ref(py))
     }
 
-    fn push_outbound(&self, msg: Py<PyAny>) {
-        let _ = self.outbound_tx.send(msg);
+    // Outbound traffic (Global Bus -> Protocol)
+    fn push_outbound(&self, message: Py<PyAny>) {
+        let _ = self.outbound_transmitter.send(message);
     }
 
     fn pop_outbound(&self, py: Python<'_>) -> Option<Py<PyAny>> {
-        self.outbound_rx.try_recv().ok().map(|msg| msg.clone_ref(py))
+        self.outbound_receiver.try_recv().ok().map(|message| message.clone_ref(py))
     }
 
+    // Queue monitoring for performance metrics (PPS/BPS) and watchdog safety checks.
     fn inbound_len(&self) -> usize {
-        self.inbound_rx.len()
+        self.inbound_receiver.len()
     }
 
     fn outbound_len(&self) -> usize {
-        self.outbound_rx.len()
+        self.outbound_receiver.len()
     }
-}
-
-#[pyfunction]
-fn sum_as_string(a: usize, b: usize) -> PyResult<String> {
-    Ok((a + b).to_string())
 }
 
 #[pymodule]
 pub fn oacorerouter_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<CoreRouter>()?;
-    m.add_function(wrap_pyfunction!(sum_as_string, m)?)?;
     Ok(())
 }

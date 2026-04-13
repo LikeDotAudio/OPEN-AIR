@@ -52,34 +52,34 @@ class TestSnmpManager(unittest.TestCase):
         # BUILD
         test_topic = "OPEN-AIR/Audio/Master/Volume"
         test_val = 85
-        msg = {
+        message = {
             "source": "MQTT",
             "topic": test_topic,
-            "val": test_val,
+            "value": test_val,
             "meta": {"is_settled": True}
         }
         
         # OPERATE
-        self.bridge.handle_protocol_event(msg)
+        self.bridge.handle_protocol_event(message)
         
         # CHECK: Local state mirror is updated
         state = self.bridge.get_mqtt_state()
         self.assertIn(test_topic, state)
-        self.assertEqual(state[test_topic]["val"], test_val)
+        self.assertEqual(state[test_topic]["value"], test_val)
 
     def test_anti_feedback_echo_suppression(self):
         """CHECK: Verify messages originating from SNMP are NOT reflected back to local state."""
         # BUILD
         test_topic = "OPEN-AIR/Audio/Fader/1"
-        msg = {
+        message = {
             "source": "MQTT",
             "topic": test_topic,
-            "val": 100,
+            "value": 100,
             "meta": {"origin_source": "SNMP"} # SELF source
         }
         
         # OPERATE
-        self.bridge.handle_protocol_event(msg)
+        self.bridge.handle_protocol_event(message)
         
         # CHECK: Dropped (not in local state mirror)
         state = self.bridge.get_mqtt_state()

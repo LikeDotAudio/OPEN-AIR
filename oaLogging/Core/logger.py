@@ -1,6 +1,6 @@
-# Core/logger.py
+# oaLogging/Core/logger.py
 # Author: Anthony Peter Kuzub
-# Version: 20260323.1700.1
+# Version: 20260413.1000.1
 #
 # Description: High-Performance Logging Framework for OPEN-AIR.
 
@@ -12,257 +12,59 @@ Purpose:
     based on the Loguru library. It integrates Precision Time Protocol (PTP)
     derived timestamps to ensure perfect log correlation across distributed
     system partitions (UI, Core, Hardware).
-
-Responsibilities:
-    - Configure global logging sinks (Console, Rotating File, Error Archive, JSON Lines).
-    - Patch log records with high-precision TAI timestamps derived from PTP.
-    - Provide category-bound logger instances with emoji prefixes for subsystem tracing.
-    - Implement caching for configuration and time lookups to minimize
-      overhead in high-frequency telemetry paths.
-
-Constraints:
-    - Requires 'oaGuiShowtime.ptp_time' for clock synchronization.
-    - Asynchronous sinking (enqueue=True) relies on internal thread pools.
-    - File-based sinks require valid write permissions in 'log_dir'.
 """
 
 import sys
 import os
-import threading
-import time
-from collections import deque
 from loguru import logger
 from datetime import datetime
+
+# --- Constants ---
 from oaLogging.Constants.subsystem_emojis import SUBSYSTEM_EMOJIS
+from oaLogging.Constants.logging_constants import (
+    LOG_FORMAT_CONSOLE,
+    FILE_FORMAT_PLAIN,
+    JSONL_FORMAT,
+    COMMS_ELEMENTS,
+    PROTOCOLS,
+    APP_LOG_BATCH_SIZE,
+    APP_LOG_INTERVAL,
+    ERROR_LOG_BATCH_SIZE,
+    ERROR_LOG_INTERVAL,
+    PROTOCOL_LOG_BATCH_SIZE,
+    PROTOCOL_LOG_INTERVAL,
+    TEST_LOG_BATCH_SIZE,
+    TEST_LOG_INTERVAL
+)
 
-try:
-    from oaGuiShowtime.Methods.ptp_time import get_ptp_time
-except ImportError:
-    # Fallback for when ptp_time might not be available during early init
-    def get_ptp_time():
-        return time.time()
+# --- Sinks and Bridges ---
+from oaLogging.Workers.batch_sink import BatchLogSink
+from oaLogging.Core.rust_sink_bridge import teardown_rust_sink
 
-# --- Global State and Caches ---
-_config_instance_cache = None
-_last_ptp_second = -1
-_cached_hhmmss = ""
+# --- Methods and Helpers ---
+from oaLogging.Methods.config_retrieval import _get_cached_config
+from oaLogging.Methods.log_patchers import ptp_patcher
+from oaLogging.Methods.log_filters import rust_gate_filter
 
 def get_emoji(key: str) -> str:
     """Safely retrieves an emoji for a given key, defaulting to a generic one."""
     return SUBSYSTEM_EMOJIS.get(key.upper(), "❓")
 
-# --- Native Rust Optimization ---
-from oaLogging.Core.oaAsyncSink_rs.compiler_hook import ensure_compiled
-try:
-    ensure_compiled()
-    from oaasyncsink_rs.oaasyncsink_rs import AsyncSink
-    _rust_async_sink = AsyncSink()
-    HAS_RUST_SINK = True
-except Exception:
-    HAS_RUST_SINK = False
-
-class BatchLogSink:
-    """
-    ⚡ HIGH PERFORMANCE SINK: Caches logs in memory and writes in batches.
-    Reduces I/O overhead and lock contention on the hot path.
-    Now supports Native Rust Asynchronous offloading.
-    """
-    def __init__(self, file_path_pattern, format_str, batch_size=50, interval=2):
-        self.file_path_pattern = file_path_pattern # Now a pattern with {time}
-        self.format_str = format_str
-        self.batch_size = batch_size
-        self.interval = interval
-        self.buffer = deque()
-        self._lock = threading.RLock()
-        self._is_running = True
-        self._current_file = None
-        self._current_minute = ""
-        
-        if not HAS_RUST_SINK:
-            # Start the background flusher thread if Rust is unavailable.
-            self._flush_thread = threading.Thread(target=self._flush_loop, daemon=True, name=f"LogBatchFlusher-{os.path.basename(file_path_pattern)}")
-            self._flush_thread.start()
-
-    def _get_current_file(self):
-        """Calculates the target filename for the current minute (YYYYMMDDHHMM)."""
-        now = datetime.now()
-        minute_str = now.strftime("%Y%m%d%H%M")
-        
-        if minute_str != self._current_minute:
-            self._current_minute = minute_str
-            # Pattern expected like ".../Application_{time}.log"
-            self._current_file = self.file_path_pattern.replace("{time}", minute_str)
-            # Ensure directory exists for new minute file
-            os.makedirs(os.path.dirname(self._current_file), exist_ok=True)
-            
-        return self._current_file
-
-    def write(self, message):
-        """Standard Loguru sink write method."""
-        if HAS_RUST_SINK:
-            # Direct handoff to Rust for non-blocking I/O
-            _rust_async_sink.write(str(self._get_current_file()), str(message))
-            return
-
-        with self._lock:
-            self.buffer.append(message)
-            if len(self.buffer) >= self.batch_size:
-                self._trigger_flush()
-
-    def _trigger_flush(self):
-        """Internal helper to write the buffer to disk."""
-        if not self.buffer:
-            return
-            
-        target_file = self._get_current_file()
-            
-        with self._lock:
-            lines_to_write = list(self.buffer)
-            self.buffer.clear()
-            
-        try:
-            with open(target_file, "a", encoding="utf-8") as f:
-                f.writelines(lines_to_write)
-        except Exception as e:
-            # This critical error should always be visible
-            print(f"CRITICAL: Log batch write to {target_file} failed: {e}", file=sys.stderr)
-
-    def _flush_loop(self):
-        """Background thread to ensure logs are flushed periodically."""
-        while self._is_running:
-            try:
-                time.sleep(self.interval)
-                self._trigger_flush()
-            except Exception as e:
-                print(f"CRITICAL: Log flush loop error for {self.file_path}: {e}", file=sys.stderr)
-
-    def stop(self):
-        """Stops the flusher thread and flushes remaining logs."""
-        self._is_running = False
-        self._trigger_flush()
-
-def _get_cached_config():
-    """
-    Retrieves the application configuration singleton with local caching.
-
-    Lead with action: Fetches the 'Config' instance to determine verbosity
-    and feature flags. Uses a local cache to avoid redundant singleton
-    accesses during early boot phases.
-
-    Inputs:
-        None.
-
-    Outputs:
-        Config: The active configuration instance, or a 'DummyConfig' fallback.
-    """
-    global _config_instance_cache
-    if _config_instance_cache:
-        return _config_instance_cache
-    
-    try:
-        from oaConfigurationManager.FileReaders.config_reader import Config
-        if Config._instance:
-            _config_instance_cache = Config._instance
-            return _config_instance_cache
-    except ImportError:
-        pass
-    
-    # Fallback to allow logging before the configuration system is fully online.
-    class DummyConfig:
-        ENABLE_DEBUG_MODE = True 
-        ENABLE_DEBUG_SCREEN = True
-        global_settings = {"debug_enabled": True}
-    return DummyConfig()
-
-def ptp_patcher(record):
-    """
-    Instruments log records with high-precision PTP (TAI) timestamps.
-    Respects the global 'timestamp_logs' setting.
-    """
-    global _last_ptp_second, _cached_hhmmss
-    
-    config = _get_cached_config()
-    if not config.global_settings.get("timestamp_logs", True):
-        record["extra"]["ptp_time"] = "000000.000"
-        return
-
-    ptp_now = get_ptp_time()
-    current_second = int(ptp_now)
-    
-    # Cache the HHMMSS string and only update when the integer second changes.
-    if current_second != _last_ptp_second:
-        dt = datetime.fromtimestamp(ptp_now)
-        _cached_hhmmss = dt.strftime("%H%M%S")
-        _last_ptp_second = current_second
-    
-    # Append milliseconds using fast f-string formatting.
-    ms = int((ptp_now - current_second) * 1000)
-    record["extra"]["ptp_time"] = f"{_cached_hhmmss}.{ms:03d}"
-
 def shutdown_logging():
     """
     Safely shuts down the logging system, flushing all asynchronous sinks.
     """
-    global _rust_async_sink
-    # logger.info("📡📤📤 [LOGGING] Initiating global logging shutdown...")
-    
-    # 1. Stop all BatchLogSink instances (Python-side threads)
-    # Note: Handlers are not easily accessible from Loguru directly without tracking them.
-    # However, logger.remove() will trigger stop() if it's a class-based sink.
     logger.remove()
-    
-    # 2. Rust Sink Teardown (if active)
-    if HAS_RUST_SINK:
-        try:
-            # If the Rust side has a dedicated close/flush, call it here.
-            # Assuming just clearing the reference allows garbage collection and safe C-teardown.
-            _rust_async_sink = None
-        except Exception:
-            pass
-
-def rust_gate_filter(record):
-    """
-    ⚡ IRON OXIDE - PHASE 1: Universal Rust Gating
-    Ensures every log call is gated by nanosecond-latency Rust checks.
-    """
-    if record["extra"].get("category") == "🚫 QUARANTINE":
-        return False
-        
-    # Always allow high-gravity logs
-    if record["level"].name in ["WARNING", "ERROR", "CRITICAL"]:
-        return True
-        
-    # Extract clean partition and category names
-    raw_part = record["extra"].get("partition", "")
-    partition = raw_part.split()[-1].lower() if raw_part else "system"
-    category = record["extra"].get("category", "").lower()
-    func_name = record.get("function", "")
-    
-    from oaLogging.Methods.matrix_gate import is_debug_allowed
-    return is_debug_allowed(partition, category, func_name)
+    teardown_rust_sink()
 
 def initialize_logging(config, log_dir=None, partition="SYS"):
-
     """
     Configures the global Loguru infrastructure and sinks.
-
-    Lead with action: Clears default handlers and instantiates custom sinks
-    for the console, filesystem (application & error), and JSON Lines
-    based on the provided configuration.
-
-    Inputs:
-        config (Config): The application configuration object.
-        log_dir (str, optional): The base directory for log persistence.
-        partition (str): The logical system partition identifier.
-
-    Outputs:
-        None.
     """
     # Ensure partition has an emoji prefix if available
     partition_with_emoji = f"{get_emoji(partition)} {partition}"
 
     # Configure global defaults for the 'extra' dictionary.
-    # ⚡ V3.1.20 PROTOCOL ROUTING: Added 'protocol' tag for segregated sinks.
     logger.configure(
         patcher=ptp_patcher,
         extra={"category": "SYSTEM", "partition": partition_with_emoji, "protocol": None}
@@ -275,52 +77,28 @@ def initialize_logging(config, log_dir=None, partition="SYS"):
     console_level = "TRACE" if debug_enabled else "INFO"
     file_level = "TRACE" if debug_enabled else "INFO"
     
-    # ⚡ PARTITION MUTING: Check if this entire partition is suppressed in the matrix.
-    # If sys_core = False, we elevate the console level to WARNING to hide INFO/SUCCESS.
+    # ⚡ PARTITION MUTING
     if hasattr(config, "DEBUG_MATRIX"):
         partition_toggle = config.DEBUG_MATRIX.get(f"SYS_{partition.upper()}")
-        # We explicitly check for False, as None/Missing should default to showing logs.
         if partition_toggle is False:
             console_level = "WARNING"
 
-    
     # --- Log Formats ---
-    # Primary format for colorized terminal output. Includes emojis for partition and category.
-    # ⚡ DYNAMIC FORMATTING: Only include timestamp if enabled.
     show_ts = config.global_settings.get("timestamp_logs", True)
     ts_fmt = "<green>{extra[ptp_time]}</green>|" if show_ts else ""
-
-    log_format_console = (
-        f"{ts_fmt}"
-        "<level>{level: <8}</level>|"
-        "<yellow>{extra[partition]: <9}</yellow>|"
-        "<magenta>{extra[category]: <18}</magenta>|"
-        "<cyan>{name: <20}</cyan>|"
-        "<level>{message}</level>"
-    )
+    log_format_console = f"{ts_fmt}{LOG_FORMAT_CONSOLE}"
     
-    # Simplified format for disk-based log files.
     ts_fmt_plain = "{extra[ptp_time]} | " if show_ts else ""
-    file_format_plain = (
-        f"{ts_fmt_plain}"
-        "{level: <8} | {extra[partition]: <9} | "
-        "{extra[category]: <18} | {name: <20} | {message}"
-    )
+    file_format_plain = f"{ts_fmt_plain}{FILE_FORMAT_PLAIN}"
     
-    # JSON Lines format for structured logging.
-    # ⚡ FIX: Escaped curly braces for literal interpretation in format_map
-    jsonl_format = (
-        '{{"timestamp": "{extra[ptp_time]}", "level": "{level}", "partition": "{extra[partition]}", '
-        '"category": "{extra[category]}", "name": "{name}", "message": "{message}", '
-        '"process_id": "{process}", "thread_id": "{thread}"}}'
-    )
+    jsonl_format = JSONL_FORMAT
 
     # 1. --- Console Sink ---
     logger.add(
         sys.stderr, 
         format=log_format_console, 
         level=console_level,
-        enqueue=False, # ⚡ OPTIMIZATION: Direct write to stderr
+        enqueue=False,
         filter=rust_gate_filter,
         diagnose=False
     )
@@ -333,37 +111,34 @@ def initialize_logging(config, log_dir=None, partition="SYS"):
         os.makedirs(log_dir, exist_ok=True)
         run_log_dir = os.path.join(log_dir, "ApplicationRunLog")
         error_log_dir = os.path.join(log_dir, "Errors")
-        comms_log_dir = os.path.join(log_dir, "Comms") # New directory for protocol logs
+        comms_log_dir = os.path.join(log_dir, "Comms")
         
         os.makedirs(run_log_dir, exist_ok=True)
         os.makedirs(error_log_dir, exist_ok=True)
         os.makedirs(comms_log_dir, exist_ok=True)
         
-        # 2. --- Application Log Sink (1-minute rotation) ---
+        # 2. --- Application Log Sink ---
         app_log_pattern = os.path.join(run_log_dir, "Application_{time}.log")
         logger.add(
-            BatchLogSink(app_log_pattern, format_str=file_format_plain, batch_size=50, interval=2),
+            BatchLogSink(app_log_pattern, format_str=file_format_plain, batch_size=APP_LOG_BATCH_SIZE, interval=APP_LOG_INTERVAL),
             format=file_format_plain, level=file_level,
             filter=rust_gate_filter,
             backtrace=True, diagnose=True
         )
 
-        # 3. --- Isolated Error Log Sink (1-minute rotation) ---
+        # 3. --- Isolated Error Log Sink ---
         error_log_pattern = os.path.join(error_log_dir, "errors_{time}.log")
         logger.add(
-            BatchLogSink(error_log_pattern, format_str=file_format_plain, batch_size=10, interval=2),
+            BatchLogSink(error_log_pattern, format_str=file_format_plain, batch_size=ERROR_LOG_BATCH_SIZE, interval=ERROR_LOG_INTERVAL),
             format=file_format_plain, level="WARNING",
             filter=rust_gate_filter,
             backtrace=True, diagnose=True
         )
         
-        # 4. --- Protocol and Broker Segregated Sinks (1-minute rotation) ---
-        # ⚡ V3.1.20 SEGREGATION: Dynamically route comms to protocol-specific folders.
-        protocols = ["OSC", "MIDI", "MQTT", "SNMP", "VISA", "AES70", "REST", "EMBER", "SMPTE2138", "BROKER", "GUI", "WYSIWYG"]
-        for proto in protocols:
+        # 4. --- Protocol and Broker Segregated Sinks ---
+        for proto in PROTOCOLS:
             proto_dir = os.path.join(comms_log_dir, proto)
             os.makedirs(proto_dir, exist_ok=True)
-            # Use {time} pattern for BatchLogSink minute rotation
             proto_pattern = os.path.join(proto_dir, f"{proto}_{{time}}.log")
             
             # Use a closure for the filter to correctly capture 'proto'
@@ -371,51 +146,35 @@ def initialize_logging(config, log_dir=None, partition="SYS"):
                 return lambda record: record["extra"].get("protocol") == p and rust_gate_filter(record)
             
             logger.add(
-                BatchLogSink(proto_pattern, format_str=file_format_plain, batch_size=20, interval=2),
+                BatchLogSink(proto_pattern, format_str=file_format_plain, batch_size=PROTOCOL_LOG_BATCH_SIZE, interval=PROTOCOL_LOG_INTERVAL),
                 format=file_format_plain, level=file_level,
                 filter=make_filter(proto),
                 backtrace=True, diagnose=True
             )
 
     except Exception as e:
-        print(f"CRITICAL: Logging filesystem initialization failed: {e}", 
-              file=sys.stderr)
+        print(f"CRITICAL: Logging filesystem initialization failed: {e}", file=sys.stderr)
 
 def set_log_directory(directory: str, partition="SYS"):
-    """
-    Simplified entry point for directory-based logging initialization.
-
-    Inputs:
-        directory (str): The target path for log files.
-        partition (str): The logical partition name.
-    """
+    """Simplified entry point for directory-based logging initialization."""
     c = _get_cached_config()
     initialize_logging(c, log_dir=directory, partition=partition)
 
 def initialize_test_logging(log_dir: str):
-    """
-    Configures a dedicated sink for test run logs.
-
-    Inputs:
-        log_dir (str): The directory where test logs will be stored.
-    """
+    """Configures a dedicated sink for test run logs."""
     os.makedirs(log_dir, exist_ok=True)
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     test_log_path = os.path.join(log_dir, f"TestRun_{timestamp}.log")
     
-    file_format_plain = (
-        "{extra[ptp_time]} | {level: <8} | {extra[partition]: <9} | "
-        "{extra[category]: <18} | {name: <20} | {message}"
-    )
+    file_format_plain = "{extra[ptp_time]} | " + FILE_FORMAT_PLAIN
 
-    # ⚡ FIX: Ensure ptp_patcher and default extras are active
     logger.configure(
         patcher=ptp_patcher,
         extra={"partition": "🧪 TEST", "category": "TEST"}
     )
     
     logger.add(
-        BatchLogSink(test_log_path, format_str=file_format_plain, batch_size=1, interval=1), # Flush immediately for tests
+        BatchLogSink(test_log_path, format_str=file_format_plain, batch_size=TEST_LOG_BATCH_SIZE, interval=TEST_LOG_INTERVAL),
         format=file_format_plain, level="TRACE",
         filter=lambda record: "TEST" in record["extra"].get("category", ""),
         backtrace=True, diagnose=True
@@ -424,33 +183,17 @@ def initialize_test_logging(log_dir: str):
     return test_log_path
 
 def get_logger(category: str, emoji_prefix: str = None):
-    """
-    Returns a bound logger instance for a specific subsystem, ensuring emoji prefix.
-
-    Inputs:
-        category (str): The subsystem identifier (e.g., 'MQTT').
-        emoji_prefix (str, optional): Explicit emoji to use. If None, uses mapping.
-    """
-    # ⚡ STANDARDIZATION: Comms elements should always use the 📡 emoji
-    comms_elements = {
-        "MQTT", "OSC", "MIDI", "SNMP", "VISA", "AES70", "REST", 
-        "EMBER", "SMPTE2138", "ROUTER", "BROKER", "COMM", "COMMS"
-    }
-    
-    if emoji_prefix is None and category.upper() in comms_elements:
+    """Returns a bound logger instance for a specific subsystem."""
+    if emoji_prefix is None and category.upper() in COMMS_ELEMENTS:
         emoji = "📡"
-        # ⚡ BRANDING: Comms logs should explicitly state they are comms
         cat_name = f"COMM: {category.upper()}"
     else:
         emoji = emoji_prefix if emoji_prefix else get_emoji(category)
         cat_name = category.upper()
         
-    # ⚡ REFINEMENT: Ensure padding doesn't truncate important text
     full_category = f"{emoji} {cat_name}"
     padded_category = full_category.ljust(18)
     return logger.bind(category=padded_category)
-
-
 
 # --- Subsystem-Specific Bound Instances ---
 SYSTEM_LOGGER    = get_logger("SYSTEM")

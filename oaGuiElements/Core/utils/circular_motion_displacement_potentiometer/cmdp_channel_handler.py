@@ -10,7 +10,7 @@ import math
 from loguru import logger
 
 try:
-    from oacmdpmath_rs import CMDPMath
+    from oaRustCore.oa_cmdp_math_rs import CMDPMath
     cmdp_math_rs = CMDPMath()
 except ImportError:
     cmdp_math_rs = None

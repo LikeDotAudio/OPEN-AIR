@@ -5,12 +5,10 @@
 # Description: Pure Rust PTP Clock listener (No Python fallback).
 
 import logging
-from .oaPTPClock_rs.compiler_hook import ensure_compiled
 
 HAS_RUST = False
 try:
-    ensure_compiled()
-    from oaptpclock_rs import PtpEngine as RustPtpEngine
+    from oaRustCore.oa_ptp_clock_rs import PtpEngine as RustPtpEngine
     HAS_RUST = True
 except (ImportError, ModuleNotFoundError):
     logging.warning("⚠️ [PTP] oaptpclock_rs not found. PTP Clock will be disabled.")

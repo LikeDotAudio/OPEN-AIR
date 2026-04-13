@@ -170,13 +170,13 @@ class BuilderDataRadarCreator(TransparencyMixin):
             if plot_style in ["area", "line"]: redraw_full()
             else:
                 for idx in list(radar_state["dirty_indices"]):
-                    val = radar_state["data_buffer"][idx]
-                    r = ((val - min_val) / (max_val - min_val)) * radar_state["radius"]
+                    value = radar_state["data_buffer"][idx]
+                    r = ((value - min_val) / (max_val - min_val)) * radar_state["radius"]
                     px, py = get_pos(idx, r)
                     tag = f"slice_{idx}"
                     items = canvas.find_withtag(tag)
                     if items: canvas.coords(items[0], radar_state["cx"], radar_state["cy"], px, py)
-                    else: canvas.create_line(radar_state["cx"], radar_state["cy"], px, py, fill=get_color(val), width=2, tags=("data", tag))
+                    else: canvas.create_line(radar_state["cx"], radar_state["cy"], px, py, fill=get_color(value), width=2, tags=("data", tag))
                 radar_state["dirty_indices"].clear()
             
             lx, ly = get_pos(radar_state["current_angle_idx"], radar_state["radius"])
@@ -211,7 +211,7 @@ class BuilderDataRadarCreator(TransparencyMixin):
             radar_value_var.set(new_val)
             
             if path and radar_state["mqtt_topic"]:
-                payload = {"val": new_val, "pulse": True}
+                payload = {"value": new_val, "pulse": True}
                 mqtt_publisher_service.publish_payload(radar_state["mqtt_topic"], orjson.dumps(payload).decode())
 
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🖱️👆🔗 [EVENTS] Binding interaction protocols for radar eye.", level="TRACE")

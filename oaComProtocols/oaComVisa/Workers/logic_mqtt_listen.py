@@ -95,7 +95,7 @@ class VisaMqttListener:
                 return
 
             payload_data = orjson.loads(payload)
-            if payload_data.get("val") is True:
+            if payload_data.get("value") is True:
                 matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Processing Search for devices initiated from GUI.", "DEBUG")
                 
                 # Execution of search might be slow, but results must be stored safely

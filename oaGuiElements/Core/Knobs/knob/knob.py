@@ -173,9 +173,9 @@ class CustomKnobFrame(tk.Frame, KnobInteractionMixin, KnobRendererMixin):
 
     def _submit_manual_entry(self, event):
         try:
-            val = float(self.temp_entry.get())
-            if self.min_val <= val <= self.max_val:
-                self.variable.set(val); self._broadcast_cb()
+            value = float(self.temp_entry.get())
+            if self.min_val <= value <= self.max_val:
+                self.variable.set(value); self._broadcast_cb()
         except ValueError: pass
         self._destroy_manual_entry(None)
 

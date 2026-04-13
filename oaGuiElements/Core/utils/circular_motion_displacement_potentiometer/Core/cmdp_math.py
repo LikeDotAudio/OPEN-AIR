@@ -6,11 +6,9 @@
 
 import math
 import logging
-from oaGuiElements.Methods.oaCMDPMath_rs.compiler_hook import ensure_compiled
 
 try:
-    ensure_compiled()
-    from oacmdpmath_rs import CMDPMath
+    from oaRustCore.oa_cmdp_math_rs import CMDPMath
     _rust_engine = CMDPMath()
     HAS_RUST = True
 except Exception as e:
@@ -41,9 +39,9 @@ class CircularMath:
             return _rust_engine.calculate_position(angle_deg, distance, center_x, center_y)
             
         rad = math.radians(angle_deg)
-        x = center_x + distance * math.cos(rad)
-        y = center_y + distance * math.sin(rad)
-        return x, y
+        coordinate_x = center_x + distance * math.cos(rad)
+        coordinate_y = center_y + distance * math.sin(rad)
+        return coordinate_x, coordinate_y
 
     @staticmethod
     def get_angle(px, py, cx=600, cy=450):

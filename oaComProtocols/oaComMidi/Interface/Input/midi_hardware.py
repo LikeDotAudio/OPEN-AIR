@@ -37,8 +37,8 @@ class MidiHardware(tk.Frame):
             self.port_tree.delete(item)
             
         if not info or info.get("error"):
-            err = info.get("error") if info else "No info"
-            self.port_tree.insert("", "end", text="ERROR", values=("FAIL", err))
+            error = info.get("error") if info else "No info"
+            self.port_tree.insert("", "end", text="ERROR", values=("FAIL", error))
             return
 
         # Populate Inputs

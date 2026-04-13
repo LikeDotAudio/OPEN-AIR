@@ -16,17 +16,17 @@ class GridTopologyConfigurator:
         if all_fields:
             if num_cols <= 0:
                 for item in all_fields:
-                    val = item[1] if isinstance(item, tuple) and len(item) == 2 else item
-                    if isinstance(val, dict):
-                        lay = val.get("layout", {})
+                    value = item[1] if isinstance(item, tuple) and len(item) == 2 else item
+                    if isinstance(value, dict):
+                        lay = value.get("layout", {})
                         max_c = max(max_c, lay.get("column", 0) + lay.get("col_span", 1) - 1)
                 num_cols = max_c + 1
 
             r, c = 0, 0
             for item in all_fields:
-                val = item[1] if isinstance(item, tuple) and len(item) == 2 else item
-                if isinstance(val, dict):
-                    lay = val.get("layout", {})
+                value = item[1] if isinstance(item, tuple) and len(item) == 2 else item
+                if isinstance(value, dict):
+                    lay = value.get("layout", {})
                     cr = lay.get("row", r)
                     cc = lay.get("column", c)
                     cs = int(lay.get("col_span", 1))

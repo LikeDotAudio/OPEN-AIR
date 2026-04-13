@@ -57,8 +57,8 @@ class SMPTE2138MonitorManager:
             "params_processed": 0,
             "cmds_processed": 0,
             "start_time": time.time(),
-            "last_msg_ts": 0,
-            "throughput_msg_sec": 0.0,
+            "last_message_ts": 0,
+            "throughput_message_sec": 0.0,
             "status": "STOPPED"
         }
         
@@ -100,14 +100,14 @@ class SMPTE2138MonitorManager:
         
         matrix_log("comms", "smpte2138", "_setup_subscriptions", "👂 [LISTEN] Monitor active and listening for st2138/# and OPEN-AIR/#.", "DEBUG")
 
-    def _on_bridge_status(self, msg):
+    def _on_bridge_status(self, message):
         """Updates internal status from bridge broadcasts."""
         try:
-            data = msg.get_json_payload()
+            data = message.get_json_payload()
             if "status" in data:
                 self.stats["status"] = data["status"]
                 # Trigger a broadcast to update GUI immediately
-                self._broadcast("STATUS_UPDATE", {"_msg_type": "STATUS", "_stats": self.get_telemetry()})
+                self._broadcast("STATUS_UPDATE", {"_message_type": "STATUS", "_stats": self.get_telemetry()})
         except Exception: pass
 
     def _heartbeat_loop(self):
@@ -118,23 +118,23 @@ class SMPTE2138MonitorManager:
                 now = time.time()
                 elapsed = now - self.stats["start_time"]
                 if elapsed > 0:
-                    self.stats["throughput_msg_sec"] = round(self.stats["total_messages"] / elapsed, 2)
+                    self.stats["throughput_message_sec"] = round(self.stats["total_messages"] / elapsed, 2)
                 
                 # Push telemetry to GUI
-                self._broadcast("HEARTBEAT", {"_msg_type": "HEARTBEAT", "_stats": self.get_telemetry()})
+                self._broadcast("HEARTBEAT", {"_message_type": "HEARTBEAT", "_stats": self.get_telemetry()})
             except Exception: pass
             time.sleep(1.0)
 
-    def _on_smpte2138_traffic(self, msg):
+    def _on_smpte2138_traffic(self, message):
         """
         Intercepts binary SMPTE2138 traffic and updates performance metrics.
         """
-        topic = msg.topic
-        payload = msg.payload
+        topic = message.topic
+        payload = message.payload
         now = time.time()
         
         self.stats["total_messages"] += 1
-        self.stats["last_msg_ts"] = now
+        self.stats["last_message_ts"] = now
         
         decoded_data = None
         message_type = "Unknown"
@@ -163,7 +163,7 @@ class SMPTE2138MonitorManager:
                 }
             
             if decoded_data:
-                decoded_data["_msg_type"] = message_type
+                decoded_data["_message_type"] = message_type
                 decoded_data["_topic"] = topic
                 decoded_data["_stats"] = self.get_telemetry()
                 self._broadcast(topic, decoded_data)
@@ -183,8 +183,8 @@ class SMPTE2138MonitorManager:
         uptime = time.time() - self.stats["start_time"]
         return {
             "uptime_s": round(uptime, 1),
-            "msg_count": self.stats["total_messages"],
-            "rate": self.stats["throughput_msg_sec"],
+            "message_count": self.stats["total_messages"],
+            "rate": self.stats["throughput_message_sec"],
             "broker": f"{self.mqtt.broker_address}:{self.mqtt.broker_port}",
             "connected": self.mqtt.is_connected(),
             "status": self.stats["status"]

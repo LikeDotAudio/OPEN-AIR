@@ -28,18 +28,18 @@ class TestMidiTx(unittest.TestCase):
         self.midi.ports.outports = [mock_out]
         
         topic = "OPEN-AIR/MIDI/my_device/ch0/cc7"
-        val = {"val": 127}
+        value = {"value": 127}
         
         with patch("oaComBroker.Core.protocol_router.manager.ProtocolRouter.get_instance"):
-            self.midi.publish(topic, val)
+            self.midi.publish(topic, value)
         
         # Verify mido.Message was sent
         self.assertTrue(mock_out.send.called)
-        msg = mock_out.send.call_args[0][0]
-        self.assertEqual(msg.type, 'control_change')
-        self.assertEqual(msg.channel, 0)
-        self.assertEqual(msg.control, 7)
-        self.assertEqual(msg.value, 127)
+        message = mock_out.send.call_args[0][0]
+        self.assertEqual(message.type, 'control_change')
+        self.assertEqual(message.channel, 0)
+        self.assertEqual(message.control, 7)
+        self.assertEqual(message.value, 127)
 
     def test_publish_note_to_midi(self):
         """Test that a system Note topic is correctly translated and sent to MIDI ports."""
@@ -48,18 +48,18 @@ class TestMidiTx(unittest.TestCase):
         self.midi.ports.outports = [mock_out]
         
         topic = "OPEN-AIR/MIDI/my_device/ch2/note60"
-        val = 100
+        value = 100
         
         with patch("oaComBroker.Core.protocol_router.manager.ProtocolRouter.get_instance"):
-            self.midi.publish(topic, val)
+            self.midi.publish(topic, value)
         
         # Verify mido.Message was sent
         self.assertTrue(mock_out.send.called)
-        msg = mock_out.send.call_args[0][0]
-        self.assertEqual(msg.type, 'note_on')
-        self.assertEqual(msg.channel, 2)
-        self.assertEqual(msg.note, 60)
-        self.assertEqual(msg.velocity, 100)
+        message = mock_out.send.call_args[0][0]
+        self.assertEqual(message.type, 'note_on')
+        self.assertEqual(message.channel, 2)
+        self.assertEqual(message.note, 60)
+        self.assertEqual(message.velocity, 100)
 
 if __name__ == "__main__":
     unittest.main()

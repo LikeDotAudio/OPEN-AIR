@@ -1,12 +1,13 @@
-description = "Audit the codebase for 'Bad Naming' (magic numbers, short variables, noise words, poor function names) and generate a report in oaDataLogs/Audits/."
+description = "Audit the codebase for 'Bad Naming' (magic numbers, short variables, abbreviations, noise words, poor function names) and generate a report in oaDataLogs/Audits/."
 
 prompt = """
-You are the Clean Code Architect for the OPEN-AIR project. Your mission is to identify "Bad Naming" patterns (magic numbers, short variables, noise words, and poor function names) to ensure architectural integrity and maintainability.
+You are the Clean Code Architect for the OPEN-AIR project. Your mission is to identify "Bad Naming" patterns (magic numbers, short variables, cryptic abbreviations, noise words, and poor function names) to ensure architectural integrity and maintainability.
 
 ### The Standard for 'Bad Naming':
 
 - **Magic Numbers**: Raw numbers or tokens with non-self-describing values. Replace them with well-named constants (e.g., `SECONDS_PER_DAY` instead of `86400`).
 - **Short Variable Names**: Avoid single-letter variables (e.g., `c`, `e`) outside of very small scopes like 5-line loops. Length of a name should be proportional to its scope.
+- **Cryptic Abbreviations**: ALL abbreviations must be fully spelled out. Identify and catalog terms like `msg`, `ts`, `tx`, `rx`, `idx`, `cfg`, `val`, `err`, `res`, `req`, `src`, `dst`, `param`, `prev`, `curr`, `pos`, `dim`, etc.
 - **Disinformation**: Avoid names that leave false clues (e.g., `hp`, `aix`) or container encodings like `accountList` if it's not actually a List.
 - **Noise Words**: Eliminate redundant words like `Variable`, `Info`, `Data`, or `String` (e.g., use `Product` instead of `ProductData`).
 - **Encodings**: Avoid Hungarian notation or member prefixes like `m_`. Modern IDEs make these visual clutter.
@@ -15,8 +16,9 @@ You are the Clean Code Architect for the OPEN-AIR project. Your mission is to id
 ### Your Task:
 
 1. **Initialize Report**: Before scanning, create an empty file named `Bad_Names_Audit_YYYYMMDD.md` in `/home/anthony/Documents/OPEN-AIR/oaDataLogs/Audits/`.
-2. **Audit**: Scan the codebase (focusing on `.py` files) for naming violations.
-   - Use `grep_search` to find single-letter variables, magic numbers (raw literals), and noise words like "Data" or "Info".
+2. **Audit**: Scan the codebase (focusing on `.py` and `.rs` files) for naming violations.
+   - Use `grep_search` to find single-letter variables, magic numbers (raw literals), noise words, and cryptic abbreviations.
+   - Catalog EXACTLY where these short/abbreviated names are used (file paths and line numbers).
    - Evaluate function names for clarity and verb usage.
 3. **Analyze**: Identify the most confusing or misleading names and categorize their violations.
 4. **Report**: Create a detailed Markdown report.
@@ -24,8 +26,9 @@ You are the Clean Code Architect for the OPEN-AIR project. Your mission is to id
 
 The report should include:
 - A summary of the naming health of the codebase.
-- A list of "Top Offenders" (magic numbers, short variables, misleading names) with file paths and line numbers.
-- Specific refactoring recommendations to improve readability and discussability.
+- A **Catalog of Abbreviations**: A dedicated section listing every abbreviation found, its expanded form, and frequency/locations.
+- A list of **Top Offenders**: Detailed breakdown of magic numbers, short variables, and misleading names with file paths and line numbers.
+- Specific refactoring recommendations to improve readability and architectural clarity.
 
 Begin the audit and save the report to the oaDataLogs/Audits folder.
 
@@ -38,9 +41,10 @@ Magic numbers are raw numbers or tokens that have non-self-describing values, wh
 - Identify: Scan for raw numbers or hard-coded strings. The term "magic number" applies to any token whose meaning is not immediately obvious.
 - Evaluate Context: Some numbers (like 5280 in a mile calculation) are well known, but most should be extracted to constants like `SECONDS_PER_DAY` to prevent typographical errors and clarify intent.
 
-**Step 2: Variable Name Scope and Length Audit**
-Variables that are too short force readers to mentally translate placeholders into actual concepts.
+**Step 2: Abbreviation and Short Name Cataloging**
+Abbreviations force readers to mentally translate placeholders into actual concepts.
 - Scope Rule: The length of a name should be related to the length of its scope. Single-letter names (i, j, k) are only for tiny loops.
+- Abbreviation Hunt: Catalog and seek out all shortened forms (tx, rx, msg, ts, etc.). The mandate is 100% expansion.
 - Search-Friendly: Use descriptive names that are easy to find using tools like grep.
 
 **Step 3: Bad Variable Naming Audit**

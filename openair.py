@@ -92,15 +92,15 @@ def main():
     app_config = Config.get_instance()
     is_mission_critical = app_config.MISSION_CRITICAL_MODE
 
-    def log(msg):
+    def log(message):
         """Internal helper for consistent supervisor console output."""
         import re
         ansi_escape = re.compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])')
-        clean_msg = ansi_escape.sub('', str(msg))
+        clean_message = ansi_escape.sub('', str(message))
         
-        print(f"[SUPERVISOR] {clean_msg}")
+        print(f"[SUPERVISOR] {clean_message}")
         if _DEBUG: 
-            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🚀 SUPERVISOR: {msg}", "DEBUG")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🚀 SUPERVISOR: {message}", "DEBUG")
 
     log(f"Launching OPEN-AIR Partitions... (Mission Critical: {is_mission_critical})")
 

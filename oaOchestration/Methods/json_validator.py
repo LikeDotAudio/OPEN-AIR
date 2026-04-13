@@ -10,7 +10,7 @@ from loguru import logger
 
 # --- Native Rust Optimization ---
 try:
-    import oasafetycore_rs
+    from oaRustCore import oa_safety_core_rs as oasafetycore_rs
     RUST_ENABLED = True
 except ImportError:
     RUST_ENABLED = False

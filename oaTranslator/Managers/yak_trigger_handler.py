@@ -55,7 +55,7 @@ def unregister_monitor_callback(callback_func):
     if callback_func in _gui_observers:
         _gui_observers.remove(callback_func)
 
-def handle_yak_monitor_traffic(msg: MqttMessage):
+def handle_yak_monitor_traffic(message: MqttMessage):
     """
     Dispatches filtered MQTT traffic to all registered UI observers.
 
@@ -64,14 +64,14 @@ def handle_yak_monitor_traffic(msg: MqttMessage):
     kept in sync with background translation events.
 
     Args:
-        msg (MqttMessage): The incoming message containing topic and payload.
+        message (MqttMessage): The incoming message containing topic and payload.
 
     Warn:
         - Callbacks are executed sequentially; long-running callbacks will 
           block the router thread.
     """
-    topic = msg.topic
-    payload = msg.decode_payload()
+    topic = message.topic
+    payload = message.decode_payload()
     
     # Notify all registered GUI dashboards.
     for callback in _gui_observers:

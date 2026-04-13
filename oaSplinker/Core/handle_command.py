@@ -68,8 +68,8 @@ def _unwrap_payload(self, payload):
         if isinstance(payload, (bytes, str)):
             data = orjson.loads(payload)
         
-        if isinstance(data, dict) and "val" in data:
-            return data["val"]
+        if isinstance(data, dict) and "value" in data:
+            return data["value"]
         return data
     except Exception as e:
         splinker_logger.error(f"❌ Splinker: Failed to unwrap payload: {e}")

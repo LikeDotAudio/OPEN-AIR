@@ -22,8 +22,8 @@ fn dump_async(py: Python<'_>, data: Bound<'_, PyList>, filepath: String) -> PyRe
             
             let mut row = Vec::new();
             for key in &headers {
-                if let Ok(val) = dict.get_item(key) {
-                    if let Some(v) = val {
+                if let Ok(value) = dict.get_item(key) {
+                    if let Some(v) = value {
                         row.push(v.to_string());
                     } else {
                         row.push("".to_string());

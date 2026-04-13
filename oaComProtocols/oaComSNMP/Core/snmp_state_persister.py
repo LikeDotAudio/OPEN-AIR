@@ -120,19 +120,19 @@ class SnmpStatePersister:
 
                     # ⚡ ANTI-FEEDBACK SPEC: The Golden Rule for Transports
                     # Payloads from ProtocolRouter already have these normalized fields
-                    msg_type = payload.get("msg_type")
+                    message_type = payload.get("message_type")
                     origin_source = payload.get("origin_source")
                     is_settled = payload.get("is_settled", False)
                     
                     # 1. If it's LINK_FEEDBACK, we only push to SNMP if it's SETTLED (confirmed state)
-                    if msg_type == "LINK_FEEDBACK" and not is_settled:
+                    if message_type == "LINK_FEEDBACK" and not is_settled:
                         continue
                         
                     # 2. If the origin_source is SNMP, don't send it back to SNMP
                     if origin_source == "SNMP":
                         continue
 
-                    val_str = data['val']
+                    val_str = data['value']
                     lines.append(f"{oid}:{val_str}")
                     # Notify monitor about outgoing data
                     self._notify_monitor("TX_DUMP", oid, val_str, topic, data)

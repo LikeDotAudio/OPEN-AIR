@@ -13,7 +13,7 @@ def reproduce_crash():
     fake_data = {}
     for i in range(5000):
         topic = f"OPEN-AIR/System/Status/Test/Topic_{i}"
-        fake_data[topic] = {"val": i, "ts": time.time(), "source": "DISK", "boot": True}
+        fake_data[topic] = {"value": i, "timestamp": time.time(), "source": "DISK", "boot": True}
     
     # Inject it into the state registry's cache manually to trigger initialize_state-like behavior
     state.rust_cache.update(fake_data)

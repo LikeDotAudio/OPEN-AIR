@@ -4,15 +4,12 @@
 #
 # Description: Logging Module Entry Point.
 
-"""
 import sys
 import os
 from pathlib import Path
-oaLogging/Entry.py - The sole orchestrator for the Logging Module.
 
-Purpose:
-This file is the public entry point for 'oaLogging'. It manages the
-lifecycle of the logging system and provides access to logging utilities.
+"""
+oaLogging/Entry.py - The sole orchestrator for the Logging Module.
 """
 
 # --- Core Exports ---

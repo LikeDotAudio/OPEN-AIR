@@ -23,15 +23,15 @@ class MidiFeed(tk.Frame):
         self.log_text = tk.Text(self, bg="#000000", fg="#00ff00", font=("Courier", 10), height=14, borderwidth=0, wrap='word')
         self.log_text.pack(fill=tk.BOTH, expand=True, padx=2, pady=2)
 
-    def add_log(self, direction, msg_str, channel=0):
-        ts = datetime.datetime.now().strftime("%H:%M:%S")
+    def add_log(self, direction, message_str, channel=0):
+        timestamp = datetime.datetime.now().strftime("%H:%M:%S")
         color = get_midi_color(channel)
         
         # Create or reuse a tag for this specific color
         tag_name = f"ch_color_{color.replace('#', '')}"
         self.log_text.tag_configure(tag_name, foreground=color)
         
-        formatted_line = f"[{ts}] {direction} >> {msg_str}\n"
+        formatted_line = f"[{timestamp}] {direction} >> {message_str}\n"
         self.log_text.insert("1.0", formatted_line, tag_name)
         
         # Truncate

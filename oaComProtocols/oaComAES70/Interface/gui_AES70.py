@@ -100,7 +100,7 @@ class Aes70DashboardImplementation(tk.Frame):
         self.after(0, lambda: self._handle_event(event_type, details))
 
     def _handle_event(self, event_type, details):
-        ts = datetime.datetime.now().strftime("%H:%M:%S")
+        timestamp = datetime.datetime.now().strftime("%H:%M:%S")
         
         if event_type == "SCAN_COMPLETE":
             # Update Tree
@@ -108,10 +108,10 @@ class Aes70DashboardImplementation(tk.Frame):
                 self.device_tree.delete(item)
             for dev in details:
                 self.device_tree.insert("", "end", text=dev, values=("Online",))
-            self.log_text.insert("1.0", f"[{ts}] 📻 SCAN COMPLETE: Found {len(details)} devices.\n")
+            self.log_text.insert("1.0", f"[{timestamp}] 📻 SCAN COMPLETE: Found {len(details)} devices.\n")
         
         elif event_type == "STATE_SYNC":
-            self.log_text.insert("1.0", f"[{ts}] 📻 SYNC >> {details}\n")
+            self.log_text.insert("1.0", f"[{timestamp}] 📻 SYNC >> {details}\n")
 
         # Truncate log
         try:

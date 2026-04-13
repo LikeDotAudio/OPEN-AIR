@@ -41,10 +41,10 @@ def collate_extra_tabs(project_root):
         }
     except Exception as e:
         print(f"⚠️ Error during data collation: {e}")
-        err_msg = f"<p>Error loading tab: {e}</p>"
+        err_message = f"<p>Error loading tab: {e}</p>"
         return {
-            "audit": err_msg,
-            "changelog": err_msg,
-            "error": err_msg,
-            "runlog": err_msg
+            "audit": err_message,
+            "changelog": err_message,
+            "error": err_message,
+            "runlog": err_message
         }

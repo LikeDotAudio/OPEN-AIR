@@ -47,8 +47,8 @@ class TestMqttAsyncWorker(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(self.worker._parse_publish_item(item_tuple), item_tuple)
 
         # MqttMessage
-        msg = MqttMessage("test/topic", b"payload", 2, False)
-        self.assertEqual(self.worker._parse_publish_item(msg), ("test/topic", b"payload", 2, False))
+        message = MqttMessage("test/topic", b"payload", 2, False)
+        self.assertEqual(self.worker._parse_publish_item(message), ("test/topic", b"payload", 2, False))
 
         # Dict
         item_dict = {"topic": "test/topic", "payload": b"payload", "qos": 1, "retain": True}

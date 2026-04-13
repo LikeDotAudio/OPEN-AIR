@@ -74,7 +74,7 @@ prevent hardware collisions.
 ### 3. Unified Ingestion (`Core/protocol_router/ingest.py`)
 Normalizes all raw transport data (e.g., MIDI bytes, OSC bundles) into a unified 
 dictionary format containing:
-* `ts`: High-precision timestamp.
+* `timestamp`: High-precision timestamp.
 * `logical_source`: The protocol origin (MQTT, GUI, etc.).
 * `msg_guid`: Unique identifier for tracking a packet through its lifecycle.
 * `msg_type`: Categorizes the message (SPLICE_ACTION, LINK_FEEDBACK).
@@ -96,8 +96,8 @@ For a narrative "play-by-play" of how events flow through the system, see the
 ## 🔬 Forensics & Monitoring
 The router maintains a 2000-packet rolling buffer (the Firehose) and provides 
 forensic APIs for:
-* **`get_dpi_report(ts)`**: Detailed analysis of a specific packet.
-* **`get_splink_relationship(ts)`**: Correlation between patched parameters.
+* **`get_dpi_report(timestamp)`**: Detailed analysis of a specific packet.
+* **`get_splink_relationship(timestamp)`**: Correlation between patched parameters.
 
 ---
 

@@ -45,14 +45,14 @@ def apply_design_overlay(layout, widget, path, is_focused, design_elements):
 
     def sync(x, y, w, h):
         if layout.show_alignment.get():
-            val = (state_manager.get_value_at_path(f"{path}.layout.sticky") or "").lower()
+            value = (state_manager.get_value_at_path(f"{path}.layout.sticky") or "").lower()
             
             # Update colors based on state
-            alignment_handles["L"].config(bg="#33A1FD" if "w" in val else "#666666")
-            alignment_handles["R"].config(bg="#33A1FD" if "e" in val else "#666666")
-            alignment_handles["T"].config(bg="#33A1FD" if "n" in val else "#666666")
-            alignment_handles["B"].config(bg="#33A1FD" if "s" in val else "#666666")
-            alignment_handles["C"].config(bg="#33A1FD" if not val else "#666666")
+            alignment_handles["L"].config(bg="#33A1FD" if "w" in value else "#666666")
+            alignment_handles["R"].config(bg="#33A1FD" if "e" in value else "#666666")
+            alignment_handles["T"].config(bg="#33A1FD" if "n" in value else "#666666")
+            alignment_handles["B"].config(bg="#33A1FD" if "s" in value else "#666666")
+            alignment_handles["C"].config(bg="#33A1FD" if not value else "#666666")
 
             alignment_handles["L"].place(x=x, y=y + h//2 - 5, width=10, height=10)
             alignment_handles["R"].place(x=x + w - 10, y=y + h//2 - 5, width=10, height=10)

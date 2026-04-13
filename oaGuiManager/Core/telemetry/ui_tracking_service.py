@@ -114,7 +114,7 @@ class UITrackingService:
 
             payload = {
                 "width": w, "height": h, "x": x, "y": y,
-                "ts": time.time(),
+                "timestamp": time.time(),
                 "tab_name": meta["tab_name"],
             }
             meta["engine"].publish_command(meta["geo_topic"], orjson.dumps(payload).decode())
@@ -126,7 +126,7 @@ class UITrackingService:
         if not is_connected(): return
         payload = {
             "visible": is_visible,
-            "ts": time.time(),
+            "timestamp": time.time(),
             "tab_name": meta["tab_name"],
         }
         meta["engine"].publish_command(meta["vis_topic"], orjson.dumps(payload).decode())

@@ -5,6 +5,8 @@
 use pyo3::prelude::*;
 use std::f64::consts::PI;
 
+const FULL_CIRCLE_DEGREES: f64 = 360.0;
+
 #[pyclass]
 struct RotaryCore;
 
@@ -26,8 +28,8 @@ impl RotaryCore {
                 90.0 + (-1.0 * norm_from_center * 135.0)
             },
             "dial" => {
-                let mut val_extent = -360.0 * norm_val;
-                if val_extent.abs() >= 360.0 {
+                let mut val_extent = -FULL_CIRCLE_DEGREES * norm_val;
+                if val_extent.abs() >= FULL_CIRCLE_DEGREES {
                     val_extent = -359.9;
                 }
                 90.0 + val_extent
@@ -40,7 +42,7 @@ impl RotaryCore {
 
     fn get_poly_points(&self, center_x: f64, center_y: f64, radius: f64, sides: usize, start_angle: f64) -> Vec<f64> {
         let mut points = Vec::with_capacity(sides * 2);
-        let angle_step = 360.0 / (sides as f64);
+        let angle_step = FULL_CIRCLE_DEGREES / (sides as f64);
         
         for i in 0..sides {
             let degrees = (i as f64) * angle_step + start_angle;
@@ -55,7 +57,7 @@ impl RotaryCore {
         let points_per_tooth = 4;
         let num_segments = teeth * points_per_tooth;
         let inner_radius = radius * (1.0 - notch_depth);
-        let angle_step = 360.0 / (num_segments as f64);
+        let angle_step = FULL_CIRCLE_DEGREES / (num_segments as f64);
         
         let mut points = Vec::with_capacity(num_segments * 2);
         

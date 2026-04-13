@@ -8,7 +8,7 @@ LEXICON = {
     "lbl": "label", 
     "w": "width", 
     "h": "height", 
-    "val": "value_default", 
+    "value": "value_default", 
     "min": "min", 
     "max": "max",
     "bg": "bg_color", 

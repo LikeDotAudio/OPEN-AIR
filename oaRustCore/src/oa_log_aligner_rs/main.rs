@@ -1,8 +1,11 @@
-// oaStand_Alone_Utilities/Methods/oaLogAligner-rs/src/main.rs
+// oaStand_Alone_Utilities/Methods/oaLogAligner_rs/main.rs
 // Author: Anthony Peter Kuzub (via Gemini)
-// Version: 20260331.1200.1
+// Version: 20260413.0010.1
 //
-// Description: A high-performance Rust utility to ingest, sort, and merge log files.
+// Description: High-performance log realignment utility. Ingests fragmented 
+// log files from multiple subsystems, extracts UTP timestamps via regex, 
+// and performs a stable sort to reconstruct a chronologically accurate 
+// system-wide forensic trace.
 
 use clap::Parser;
 use regex::Regex;
@@ -31,8 +34,8 @@ struct LogLine {
 fn main() -> io::Result<()> {
     let args = Args::parse();
     
-    // The standardized OPEN-AIR log pattern
-    // r"^(?P<timestamp>\d+\.\d+)\s+\|\s+(?P<level>\w+)\s+\|\s+(?P<partition>\w+)\s+\|\s+(?P<process>\w+)\s+\|\s+(?P<function>[\w\.]+)\s+\|\s+(?P<message>.*)$"
+    // The standardized OPEN-AIR log pattern uses a leading float timestamp (UTP).
+    // We only capture the timestamp here as it is the primary sort key.
     let log_pattern = Regex::new(r"^(?P<timestamp>\d+\.\d+)\s+\|\s+").unwrap();
 
     let mut all_log_lines: Vec<LogLine> = Vec::new();
@@ -41,6 +44,7 @@ fn main() -> io::Result<()> {
 
     for entry in WalkDir::new(&args.dir).max_depth(1) {
         let entry = entry?;
+        // Only process .log files to avoid ingesting binary artifacts or reports.
         if entry.path().extension().and_then(|s| s.to_str()) == Some("log") {
             let file = File::open(entry.path())?;
             let reader = BufReader::new(file);
@@ -52,9 +56,9 @@ fn main() -> io::Result<()> {
                 }
 
                 if let Some(caps) = log_pattern.captures(&line) {
-                    if let Ok(ts) = caps["timestamp"].parse::<f64>() {
+                    if let Ok(timestamp) = caps["timestamp"].parse::<f64>() {
                         all_log_lines.push(LogLine {
-                            timestamp: ts,
+                            timestamp: timestamp,
                             content: line,
                         });
                     }
@@ -64,7 +68,7 @@ fn main() -> io::Result<()> {
     }
 
     println!("📡 [PROCESS] Sorting {} log lines...", all_log_lines.len());
-    // Sort by timestamp
+    // Stable sort by timestamp reconstructs the system-wide event timeline.
     all_log_lines.sort_by(|a, b| a.timestamp.partial_cmp(&b.timestamp).unwrap_or(std::cmp::Ordering::Equal));
 
     println!("📡📤📤 [OUTBOUND] Writing to: {:?}", args.output);

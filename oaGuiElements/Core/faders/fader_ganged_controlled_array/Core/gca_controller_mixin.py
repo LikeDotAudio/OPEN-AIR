@@ -52,7 +52,7 @@ class GCAControllerMixin:
 
     def _safe_get(self, var):
         try:
-            val = var.get()
-            if isinstance(val, str) and val.strip() == "": return self.min_val
-            return float(val)
+            value = var.get()
+            if isinstance(value, str) and value.strip() == "": return self.min_val
+            return float(value)
         except (tk.TclError, ValueError, TypeError): return self.min_val

@@ -7,11 +7,9 @@
 import threading
 import logging
 from typing import Callable, Any
-from ..oaTranslatorCore_rs.compiler_hook import ensure_compiled
 
 try:
-    ensure_compiled()
-    from ..oaTranslatorCore_rs.oatranslatorcore_rs import SettleLock as RustSettleLock
+    from oaRustCore.oa_translator_core_rs import SettleLock as RustSettleLock
     HAS_RUST = True
 except Exception as e:
     logging.warning(f"oaTranslator: Failed to load Rust SettleLock: {e}")

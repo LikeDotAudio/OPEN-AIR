@@ -7,11 +7,9 @@
 LOCAL_DEBUG = False
 
 import logging
-from .oaMQTTManager_rs.compiler_hook import ensure_compiled
 
 try:
-    ensure_compiled()
-    from oamqttmanager_rs import MqttRouter as RustMqttRouter
+    from oaRustCore.oa_mqtt_manager_rs import MqttRouter as RustMqttRouter
     HAS_RUST = True
 except ImportError:
     logging.warning("⚠️ [MQTT] oamqttmanager_rs not found. Using fallback logic (if any).")

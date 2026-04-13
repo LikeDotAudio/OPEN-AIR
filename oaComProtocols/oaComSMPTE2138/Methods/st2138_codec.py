@@ -3,10 +3,7 @@
 # Version: 20260331.1850.2
 #
 # Description: Pure Rust ST2138 Protobuf codec (No Python fallback).
-
-from .oaST2138Codec_rs.compiler_hook import ensure_compiled
-ensure_compiled()
-from .oaST2138Codec_rs.oast2138codec_rs import St2138Codec as RustSt2138Codec
+from oaRustCore.oa_st2138_codec_rs import St2138Codec as RustSt2138Codec
 
 LOCAL_DEBUG = False
 

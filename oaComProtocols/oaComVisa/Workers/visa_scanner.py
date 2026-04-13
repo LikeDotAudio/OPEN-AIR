@@ -47,9 +47,9 @@ class VisaScanner:
         with ThreadPoolExecutor(max_workers=50) as executor:
             futures = {executor.submit(check_host, ip): ip for ip in targets_to_scan}
             for future in futures:
-                res = future.result()
-                if res:
-                    ip, type_ = res
+                result = future.result()
+                if result:
+                    ip, type_ = result
                     if type_ == "GATEWAY":
                         gateways.append(ip)
                     else:
@@ -81,8 +81,8 @@ class VisaScanner:
     def get_gateway_inventory(self, ip):
         """Scrapes a VXI-11 gateway (like E5810A) for its instrument list."""
         from oaConfigurationManager.FileReaders.config_reader import Config
-        cfg = Config.get_instance()
-        url = f"{cfg.VISA_PROBE_PROTOCOL}://{ip}/{cfg.VISA_PROBE_PATH}"
+        configuration = Config.get_instance()
+        url = f"{configuration.VISA_PROBE_PROTOCOL}://{ip}/{configuration.VISA_PROBE_PATH}"
         params = {"whichbutton": "find", "timeout": "5"}
         full_url = f"{url}?{urllib.parse.urlencode(params)}"
         targets = []

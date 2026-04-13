@@ -53,11 +53,11 @@ class FailoverManager:
         self._running = True
         
         existing_callback = self.mqtt.on_message_callback
-        def failover_message_handler(client, userdata, msg):
+        def failover_message_handler(client, userdata, message):
             if existing_callback: 
-                try: existing_callback(client, userdata, msg)
+                try: existing_callback(client, userdata, message)
                 except Exception: pass
-            self._on_heartbeat(msg)
+            self._on_heartbeat(message)
             
         self.mqtt.on_message_callback = failover_message_handler
         self.mqtt.subscribe(self.discovery_topic)
@@ -83,15 +83,15 @@ class FailoverManager:
             except Exception: pass
             time.sleep(self.HEARTBEAT_INTERVAL)
 
-    def _on_heartbeat(self, msg):
-        if "System/Failover/Heartbeat/" in msg.topic:
+    def _on_heartbeat(self, message):
+        if "System/Failover/Heartbeat/" in message.topic:
             try:
-                data = orjson.loads(msg.payload)
+                data = orjson.loads(message.payload)
                 peer_guid = data.get("guid")
                 if peer_guid and peer_guid != self.guid:
                     with self._lock:
                         self._peers[peer_guid] = {
-                            "ts": time.time(),
+                            "timestamp": time.time(),
                             "start_ts": data.get("start_ts", time.time())
                         }
             except Exception: pass
@@ -101,7 +101,7 @@ class FailoverManager:
             now = time.time()
             with self._lock:
                 dead_peers = [g for g, p in self._peers.items() 
-                              if (now - p["ts"]) > self.FAILOVER_TIMEOUT]
+                              if (now - p["timestamp"]) > self.FAILOVER_TIMEOUT]
                 for g in dead_peers:
                     del self._peers[g]
                     if app_constants.ROUTER_FAILOVER_LOGS:

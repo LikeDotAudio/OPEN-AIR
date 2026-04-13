@@ -26,7 +26,7 @@ class InstallerGenerator:
         from oaConfigurationManager.FileReaders.config_reader import Config
         from oaOchestration.Core.path_initializer import GLOBAL_PROJECT_ROOT
         from oaOchestration.Constants.project_paths import DATA_SNMP_DIR
-        cfg = Config.get_instance()
+        configuration = Config.get_instance()
 
         # We must use absolute paths for the snmpd.conf 'pass' command 
         # because snmpd runs as a system service and won't know the project root.
@@ -58,7 +58,7 @@ class InstallerGenerator:
             "# Inject Fresh Master Bridge",
             "sudo tee -a $CONF_FILE > /dev/null <<EOT",
             "# --- BEGIN OPEN-AIR ---",
-            f"agentAddress udp:{cfg.SNMP_PORT}",
+            f"agentAddress udp:{configuration.SNMP_PORT}",
             "view   all   included   .1",
             "rocommunity public default -V all",
             "rwcommunity private default -V all",

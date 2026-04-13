@@ -45,10 +45,10 @@ class TestRustCoreCompilation(unittest.TestCase):
             )
             
             if result.returncode != 0:
-                error_msg = f"❌ [FAILURE] Native compilation failed:\n"
-                error_msg += f"STDOUT: {result.stdout}\n"
-                error_msg += f"STDERR: {result.stderr}"
-                self.fail(error_msg)
+                error_message = f"❌ [FAILURE] Native compilation failed:\n"
+                error_message += f"STDOUT: {result.stdout}\n"
+                error_message += f"STDERR: {result.stderr}"
+                self.fail(error_message)
             
             print("✅ [SUCCESS] oaRustCore compiled and installed successfully.")
             

@@ -32,9 +32,9 @@ class FaderStateMixin:
 
     def _submit_manual_entry(self, event=None):
         try:
-            val = float(self.temp_entry.get())
-            if self.min_val <= val <= self.max_val:
-                self.variable.set(val)
+            value = float(self.temp_entry.get())
+            if self.min_val <= value <= self.max_val:
+                self.variable.set(value)
                 if self.state_mirror_engine:
                     self.state_mirror_engine.broadcast_gui_change_to_mqtt(
                         self.path, 

@@ -13,8 +13,8 @@ class FaderBarInteractionMixin:
         self._on_drag(event)
 
     def _on_drag(self, event):
-        val = self._get_val_from_y(event.y, self.draw_h, self.top_m)
-        self.fader_var.set(max(self.min_val, min(self.max_val, val)))
+        value = self._get_val_from_y(event.y, self.draw_h, self.top_m)
+        self.fader_var.set(max(self.min_val, min(self.max_val, value)))
 
     def _get_val_from_y(self, y, draw_h, y_offset=0):
         norm = 1.0 - ((y - y_offset) / draw_h); norm = max(0.0, min(1.0, norm))

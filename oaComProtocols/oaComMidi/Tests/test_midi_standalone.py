@@ -30,15 +30,15 @@ class TestMidiStandalone(unittest.TestCase):
         mock_port.name = "StandalonePort"
         
         import mido
-        msg = mido.Message('control_change', channel=0, control=7, value=64)
-        mock_port.iter_pending.return_value = [msg]
+        message = mido.Message('control_change', channel=0, control=7, value=64)
+        mock_port.iter_pending.return_value = [message]
         
         # Manually trigger one iteration of the loop logic
         # We patch time.sleep to avoid waiting
         # We need to make it exit after one iteration
         def side_effect():
             # First call returns our message
-            yield [msg]
+            yield [message]
             # Then we stop the loop
             self.midi._running = False
             # Second call returns empty to let the loop proceed to check the flag
@@ -52,12 +52,12 @@ class TestMidiStandalone(unittest.TestCase):
             
         # Verify monitor was notified
         self.assertTrue(monitor_cb.called)
-        direction, received_msg = monitor_cb.call_args[0]
+        direction, received_message = monitor_cb.call_args[0]
         self.assertEqual(direction, "RX")
-        # received_msg is now a dict containing 'raw', 'port', etc.
-        self.assertIsInstance(received_msg, dict)
-        self.assertEqual(received_msg['raw'], str(msg))
-        self.assertEqual(received_msg['port'], mock_port.name)
+        # received_message is now a dict containing 'raw', 'port', etc.
+        self.assertIsInstance(received_message, dict)
+        self.assertEqual(received_message['raw'], str(message))
+        self.assertEqual(received_message['port'], mock_port.name)
 
 if __name__ == "__main__":
     unittest.main()

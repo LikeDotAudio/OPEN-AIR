@@ -128,8 +128,8 @@ class MeterRenderingEngine:
         config = ctx.config
         pivots = MeterRenderingEngine._get_pivots(ctx, val1, val2)
 
-        for i, (px, py, val, ccw) in enumerate(pivots):
-            if i > 0 and val is None: continue
+        for i, (px, py, value, ccw) in enumerate(pivots):
+            if i > 0 and value is None: continue
             
             if full_redraw:
                 # 1. Ticks & Numbers
@@ -144,7 +144,7 @@ class MeterRenderingEngine:
                 MeterRenderingEngine._tag_as_static(canvas, "vu_element")
 
             # 3. Peak & Dynamic Needle elements
-            MeterRenderingEngine._update_dynamic_elements(canvas, ctx, px, py, val, i, ccw, peak_on)
+            MeterRenderingEngine._update_dynamic_elements(canvas, ctx, px, py, value, i, ccw, peak_on)
 
             if full_redraw:
                 PivotDrawer.draw_pivot(canvas, px, py, config.pivot_size, config.pivot_colour, config.secondary_color, config.fg_color)
@@ -167,7 +167,7 @@ class MeterRenderingEngine:
         return pivots
 
     @staticmethod
-    def _update_dynamic_elements(canvas, ctx, px, py, val, index, ccw, peak_on):
+    def _update_dynamic_elements(canvas, ctx, px, py, value, index, ccw, peak_on):
         """Updates peak dot, shadow, and needle."""
         config = ctx.config
         vr = config.max_val - config.min_val
@@ -180,8 +180,8 @@ class MeterRenderingEngine:
         thick = config.needle_thickness if index == 0 else config.needle_thickness_2
         color = config.pointer_colour if index == 0 else config.pointer_colour_2
 
-        ShadowDrawer.draw_shadow(canvas, px, py, val, config.min_val, config.max_val, ctx.sang, ctx.eang, ctx.ext, ctx.base_r, SCALE_TEXT_OFFSET, style, thick, ccw, config.pivot_size, needle_scale=ctx.nsf, tag=f"vu_shadow_{index}")
-        NeedleDrawer.draw_needle(canvas, px, py, val, config.min_val, config.max_val, ctx.sang, ctx.eang, ctx.ext, ctx.base_r, SCALE_TEXT_OFFSET, color, style, thick, ccw, config.pivot_size, needle_scale=ctx.nsf, tag=f"vu_needle_{index}")
+        ShadowDrawer.draw_shadow(canvas, px, py, value, config.min_val, config.max_val, ctx.sang, ctx.eang, ctx.ext, ctx.base_r, SCALE_TEXT_OFFSET, style, thick, ccw, config.pivot_size, needle_scale=ctx.nsf, tag=f"vu_shadow_{index}")
+        NeedleDrawer.draw_needle(canvas, px, py, value, config.min_val, config.max_val, ctx.sang, ctx.eang, ctx.ext, ctx.base_r, SCALE_TEXT_OFFSET, color, style, thick, ccw, config.pivot_size, needle_scale=ctx.nsf, tag=f"vu_needle_{index}")
 
     @staticmethod
     def _tag_as_static(canvas, tag):

@@ -110,9 +110,9 @@ class BuilderInputDirectionalButtonsCreator(TransparencyMixin):
                     self.state_mirror_engine.base_topic, base_mqtt_topic_from_path, action_path
                 )
                 payload_data = {
-                    "val": True,
+                    "value": True,
                     "src": "gui",
-                    "ts": time.time(),
+                    "timestamp": time.time(),
                     "GUID": self.state_mirror_engine.GUID,
                 }
                 matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📡🔴📡 [MQTT] Publishing directional command '{action}' to topic: {topic}", level="DEBUG")

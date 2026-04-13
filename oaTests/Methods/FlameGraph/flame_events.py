@@ -132,7 +132,7 @@ def generate_table_rows(performance_stats):
         row = f'<tr data-layer="{layer}" data-roots="{" ".join(stat["roots"])}">'
         row += f'<td><div style="margin-bottom:4px"><span class="tag tag-layer-{layer}">{layer}</span>{tags_html}</div>'
         row += f'<span style="color:#fff">{safe_funcname}</span><br><span style="color:#666;font-size:11px">{os.path.basename(filename)}:{stat["lineno"]}</span></td>'
-        row += f'<td class="stat-val">{stat["ncalls"]}</td><td class="stat-val">{stat["tottime"]:.6f}s</td><td class="stat-val">{stat["cumtime"]:.6f}s</td><td class="stat-val">{stat["per_call"]:.6f}s</td>'
+        row += f'<td class="stat-value">{stat["ncalls"]}</td><td class="stat-value">{stat["tottime"]:.6f}s</td><td class="stat-value">{stat["cumtime"]:.6f}s</td><td class="stat-value">{stat["per_call"]:.6f}s</td>'
         row += f'<td><div style="width:{min(100, contrib):.1f}%;height:4px;background:#3498db;border-radius:2px"></div><span style="font-size:10px;color:#666">{contrib:.1f}%</span></td></tr>'
         rows.append(row)
         

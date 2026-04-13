@@ -8,11 +8,9 @@ import time
 import sys
 import os
 from loguru import logger
-from oaPTP.Methods.oaPtpParser_rs import compiler_hook
 
 try:
-    compiler_hook.ensure_compiled()
-    import oaptpparser_rs
+    from oaRustCore import oa_ptp_parser_rs as oaptpparser_rs
     HAS_RUST = True
 except ImportError:
     logger.warning("⚠️ [PTP] oaptpparser_rs not found. PTP parsing will be disabled.")

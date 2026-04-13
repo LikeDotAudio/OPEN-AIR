@@ -48,10 +48,10 @@ class CrashInterceptingResult(unittest.TestResult):
         self.runner._record(test, "passed", duration=duration)
         super().addSuccess(test)
 
-    def _get_failure_cause(self, err):
+    def _get_failure_cause(self, error):
         import traceback
         try:
-            exctype, value, tb = err
+            exctype, value, tb = error
             if tb:
                 tblist = traceback.extract_tb(tb)
                 # Filter out unittest internal frames for cleaner reporting
@@ -67,17 +67,17 @@ class CrashInterceptingResult(unittest.TestResult):
         except:
             return "Unknown Failure Cause"
 
-    def addFailure(self, test, err):
+    def addFailure(self, test, error):
         duration = time.time() - self.start_times.get(test, time.time())
-        cause = self._get_failure_cause(err)
-        self.runner._record(test, "failed", message=str(err[1]), cause=cause, duration=duration)
-        super().addFailure(test, err)
+        cause = self._get_failure_cause(error)
+        self.runner._record(test, "failed", message=str(error[1]), cause=cause, duration=duration)
+        super().addFailure(test, error)
 
-    def addError(self, test, err):
+    def addError(self, test, error):
         duration = time.time() - self.start_times.get(test, time.time())
-        cause = self._get_failure_cause(err)
-        self.runner._record(test, "error", message=str(err[1]), cause=cause, duration=duration)
-        super().addError(test, err)
+        cause = self._get_failure_cause(error)
+        self.runner._record(test, "error", message=str(error[1]), cause=cause, duration=duration)
+        super().addError(test, error)
 
     def addSkip(self, test, reason):
         duration = time.time() - self.start_times.get(test, time.time())

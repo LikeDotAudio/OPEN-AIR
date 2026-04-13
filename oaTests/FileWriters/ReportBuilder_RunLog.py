@@ -13,7 +13,7 @@ from loguru import logger
 
 # --- Native Rust Optimization ---
 try:
-    import oalogprocessor_rs
+    from oaRustCore import oa_log_processor_rs as oalogprocessor_rs
     RUST_ENABLED = True
 except ImportError:
     RUST_ENABLED = False

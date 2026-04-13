@@ -19,7 +19,7 @@ import time
 from typing import Any
 
 try:
-    from oaosccore_rs import OscServer
+    from oaRustCore.oa_osc_core_rs import OscServer
     HAS_OSC_RS = True
 except ImportError:
     HAS_OSC_RS = False
@@ -55,20 +55,20 @@ class OscRxServer:
         self._stop_event = threading.Event()
         self._use_rust = HAS_OSC_RS
 
-    def _msg_handler(self, address, args):
+    def _message_handler(self, address, args):
         """Dispatches incoming OSC messages to the state manager."""
         if _is_debug():
             osc_logger.debug(f"📥📡📥 [OSC-RS] RX: {address} -> {args}")
         # Typically OSC values are single floats or ints
-        val = args[0] if args else None
-        self.state_callback(address, val)
+        value = args[0] if args else None
+        self.state_callback(address, value)
 
-    def _legacy_msg_handler(self, address, *args):
+    def _legacy_message_handler(self, address, *args):
         """Legacy handler for python-osc."""
         if _is_debug():
             osc_logger.debug(f"📥📡📥 [OSC-PY] RX: {address} -> {args}")
-        val = args[0] if args else None
-        self.state_callback(address, val)
+        value = args[0] if args else None
+        self.state_callback(address, value)
 
     def start(self):
         """Starts the OSC server."""
@@ -81,7 +81,7 @@ class OscRxServer:
         """Starts the Pure Rust OSC server."""
         try:
             self.server = OscServer()
-            self.server.start(self.host, self.port, self._msg_handler)
+            self.server.start(self.host, self.port, self._message_handler)
             if _is_debug():
                 osc_logger.success(f"📡🆗✅ [OSC] Pure Rust RX Server listening on "
                                    f"{self.host}:{self.port}")
@@ -98,7 +98,7 @@ class OscRxServer:
             return
 
         dispatcher = Dispatcher()
-        dispatcher.map("/*", self._legacy_msg_handler)
+        dispatcher.map("/*", self._legacy_message_handler)
 
         try:
             class ReusableOSCServer(BlockingOSCUDPServer):

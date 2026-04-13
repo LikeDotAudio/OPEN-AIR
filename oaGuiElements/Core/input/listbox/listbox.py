@@ -83,8 +83,8 @@ class BuilderListboxCreator(TransparencyMixin):
             
             # Wildcard options update
             opt_prefix = ctx.state_mirror_engine.calculate_topic(f"{path}/options", ctx.base_mqtt_topic_from_path)
-            def _on_opt_mqtt(msg):
-                res = om.process_mqtt_update(msg.topic, msg.payload, opt_prefix)
+            def _on_opt_mqtt(message):
+                res = om.process_mqtt_update(message.topic, message.payload, opt_prefix)
                 if res:
                     rebuild_display()
                     if isinstance(res, str): var.set(om.options_map[res].get("value", res))

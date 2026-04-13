@@ -3,10 +3,7 @@
 # Version: 20260331.1730.2
 #
 # Description: Pure Rust MIDI Engine (No Python fallback).
-
-from .oaMidiEngine_rs.compiler_hook import ensure_compiled
-ensure_compiled()
-from .oaMidiEngine_rs.oamidiengine_rs import MidiEngine as RustMidiEngine
+from oaRustCore.oa_midi_engine_rs import MidiEngine as RustMidiEngine
 
 LOCAL_DEBUG = False
 

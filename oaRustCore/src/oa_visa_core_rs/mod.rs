@@ -6,7 +6,7 @@ fn hello() -> PyResult<String> {
 }
 
 #[pymodule]
-pub fn oavisacore_rs(_py: Python, m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn oavisacore_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(hello, m)?)?;
     Ok(())
 }

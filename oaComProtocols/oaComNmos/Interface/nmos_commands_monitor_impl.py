@@ -97,7 +97,7 @@ class NmosCommandsMonitorImplementation(tk.Frame, TransparencyMixin):
     def _sim_loop(self):
         # Simulate some NMOS events
         events = [
-            ("MQTT", "State Change", "source-1", {"val": True}),
+            ("MQTT", "State Change", "source-1", {"value": True}),
             ("WS", "Update", "flow-2", {"status": "active"}),
             ("MQTT", "Heartbeat", "node-0", {"health": "ok"}),
         ]
@@ -110,8 +110,8 @@ class NmosCommandsMonitorImplementation(tk.Frame, TransparencyMixin):
             time.sleep(10) # Low frequency simulation
 
     def _add_event(self, transport, etype, eid, payload):
-        ts = time.strftime("%H:%M:%S")
-        self.tree.insert("", 0, values=(ts, transport, etype, eid, json.dumps(payload)))
+        timestamp = time.strftime("%H:%M:%S")
+        self.tree.insert("", 0, values=(timestamp, transport, etype, eid, json.dumps(payload)))
         if len(self.tree.get_children()) > 100:
             self.tree.delete(self.tree.get_children()[-1])
 

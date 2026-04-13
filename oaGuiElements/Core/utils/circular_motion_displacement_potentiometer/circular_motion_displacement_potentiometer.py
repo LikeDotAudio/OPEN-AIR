@@ -106,10 +106,10 @@ class CMDPWidget(
 
     def revert_to_defaults(self):
         for i, f in enumerate(self.faders):
-            cfg = self.widget_config.get("channels", [])[i]
-            f.val_var.set(cfg.get("depth", 50.0)); f.rot_var.set(cfg.get("level", 50.0)); f.angle_var.set(cfg.get("angle", 0.0)); f.mute_var.set(False)
+            configuration = self.widget_config.get("channels", [])[i]
+            f.val_var.set(configuration.get("depth", 50.0)); f.rot_var.set(configuration.get("level", 50.0)); f.angle_var.set(configuration.get("angle", 0.0)); f.mute_var.set(False)
             if self.mixin_ref.state_mirror_engine:
-                for p in ["val", "rot", "angle", "mute"]: self.mixin_ref.state_mirror_engine.broadcast_gui_change_to_mqtt(f"{self.path}/ch{i}/{p}")
+                for p in ["value", "rot", "angle", "mute"]: self.mixin_ref.state_mirror_engine.broadcast_gui_change_to_mqtt(f"{self.path}/ch{i}/{p}")
             self.tm.refresh()
 
     def update_tree(self, f): self.tm.refresh()
@@ -140,7 +140,7 @@ class BuilderCircularMotionDisplacementPotentiometerCreator:
             f_path = f"{cmdp.path}/ch{i}"
             v, r, a, m = tk.DoubleVar(value=chan.get("depth", 50)), tk.DoubleVar(value=chan.get("level", 50)), tk.DoubleVar(value=chan.get("angle", 0)), tk.BooleanVar(value=chan.get("mute", False))
             if ctx.state_mirror_engine:
-                for p, var, t in [("val", v, "_CMDP_Val"), ("rot", r, "_CMDP_Rot"), ("angle", a, "_CMDP_Angle"), ("mute", m, "_GuiButtonToggle")]:
+                for p, var, t in [("value", v, "_CMDP_Val"), ("rot", r, "_CMDP_Rot"), ("angle", a, "_CMDP_Angle"), ("mute", m, "_GuiButtonToggle")]:
                     tp = f"{f_path}/{p}"; ctx.state_mirror_engine.register_widget(tp, var, ctx.base_mqtt_topic_from_path, {"type": t})
                     var.trace_add("write", lambda *a, path=tp: ctx.state_mirror_engine.broadcast_gui_change_to_mqtt(path))
                     topic = ctx.state_mirror_engine.get_widget_topic(tp)

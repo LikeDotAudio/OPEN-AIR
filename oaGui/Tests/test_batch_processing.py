@@ -36,7 +36,7 @@ class TestBatchProcessingEngine(unittest.TestCase):
         widgets = [{
             "path": "test.path.button",
             "r": 0, "c": 0, "padx": 5, "pady": 5, "sticky": "nsew",
-            "val": {
+            "value": {
                 "type": "OcaButton",
                 "geometry": {"width": 150, "height": 80}
             }
@@ -75,7 +75,7 @@ class TestBatchProcessingEngine(unittest.TestCase):
         widgets = [{
             "path": "test.pad",
             "r": 1, "c": 1, "padx": 5, "pady": 2, "sticky": "",
-            "val": {"type": "OcaLabel"}
+            "value": {"type": "OcaLabel"}
         }]
         
         state = {"pending": 1, "loop_done": False}
@@ -100,7 +100,7 @@ class TestBatchProcessingEngine(unittest.TestCase):
         widgets = [{
             "path": "test.real",
             "r": 0, "c": 0, "padx": 0, "pady": 0, "sticky": "",
-            "val": {"type": "FunctionalWidget"}
+            "value": {"type": "FunctionalWidget"}
         }]
         
         state = {"pending": 1, "loop_done": False}

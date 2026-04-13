@@ -88,13 +88,13 @@ class MqttAsyncWorker:
         try:
             async for message in client.messages:
                 if self.manager.on_message_callback:
-                    msg = MqttMessage(
+                    message = MqttMessage(
                         topic=str(message.topic),
                         payload=message.payload,
                         qos=message.qos,
                         retain=message.retain
                     )
-                    self.manager.on_message_callback(client, None, msg)
+                    self.manager.on_message_callback(client, None, message)
         except asyncio.CancelledError: pass
 
     async def _queue_task(self, client):

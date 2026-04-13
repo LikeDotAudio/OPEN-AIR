@@ -1,4 +1,4 @@
-# oaTranslator/Methods/yak_rx.py
+# oaTranslator/Methods/yak_receiver.py
 #
 # Processes responses from SCPI queries and publishes the parsed output 
 # values to MQTT. Maps instrument data back to the YAK hierarchy.
@@ -29,7 +29,7 @@ from loguru import logger
 from oaConfigurationManager.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
-class YakRxManager:
+class YakReceiverManager:
     """
     Handles instrument responses and dispatches data to the MQTT broker.
     
@@ -80,7 +80,7 @@ class YakRxManager:
                    f"✅ [INIT] YakRxManager listening on '{topic}'", 
                    level="SUCCESS")
 
-    def _on_rx_outbox_message(self, msg: MqttMessage):
+    def _on_rx_outbox_message(self, message: MqttMessage):
         """
         Callback for processing messages from the instrument proxy.
         
@@ -88,13 +88,13 @@ class YakRxManager:
         context, then hands off the raw response for parsing.
 
         Args:
-            msg: The MQTT message containing response, command, and ID.
+            message: The MQTT message containing response, command, and ID.
 
         Side Effects:
             - Purges correlation context from the YakTranslator on match.
         """
         try:
-            payload_data = msg.get_json_payload()
+            payload_data = message.get_json_payload()
         except Exception as e:
             logger.error(f"❌ [RX] Payload parse failure: {e}")
             return

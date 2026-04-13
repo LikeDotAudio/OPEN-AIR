@@ -81,10 +81,10 @@ class CompositeFaderFrame(
         # Initialize Children
         channel_config = config.get("channels", [])
         for i in range(self.num_channels):
-            val = float(channel_config[i].get("default", self.min_val)) if i < len(channel_config) else self.min_val
+            value = float(channel_config[i].get("default", self.min_val)) if i < len(channel_config) else self.min_val
             label = channel_config[i].get("label", f"{i+1}") if i < len(channel_config) else f"{i+1}"
             
-            var = tk.DoubleVar(value=val)
+            var = tk.DoubleVar(value=value)
             self.child_values.append(var)
             self.child_offsets.append(0.0)
             self.channel_labels.append(label)

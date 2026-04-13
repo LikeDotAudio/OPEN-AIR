@@ -24,18 +24,18 @@ def query_safe(proxy, command, correlation_id="N/A"):
 
     # ⚡ DEFENSIVE CHECK: Ensure session is still valid
     if not proxy.inst or not proxy.inst.session:
-        error_msg = "Instrument session lost. Cannot query command."
-        proxy._publish_proxy_error(message=error_msg, command=command)
+        error_message = "Instrument session lost. Cannot query command."
+        proxy._publish_proxy_error(message=error_message, command=command)
         return None
 
     if "<" in command or ">" in command:
-        error_msg = f"Query rejected. Unresolved placeholders found: '{command}'."
-        proxy._publish_proxy_error(message=error_msg, command=command)
+        error_message = f"Query rejected. Unresolved placeholders found: '{command}'."
+        proxy._publish_proxy_error(message=error_message, command=command)
         # Assuming MQTT publish is safe or fatal
         proxy.mqtt_util.get_client_instance().publish(
             topic="OPEN-AIR/Proxy/Error",
             payload=orjson.dumps(
-                {"error": error_msg, "command": command, "timestamp": time.time()}
+                {"error": error_message, "command": command, "timestamp": time.time()}
             ),
             qos=0,
             retain=False,
@@ -51,8 +51,8 @@ def query_safe(proxy, command, correlation_id="N/A"):
         time.sleep(0.01)
     
     if proxy.inst.bytes_in_buffer == 0:
-        error_msg = f"Timeout waiting for response to {command}"
-        proxy._publish_proxy_error(message=error_msg, command=command)
+        error_message = f"Timeout waiting for response to {command}"
+        proxy._publish_proxy_error(message=error_message, command=command)
         proxy._reset_device()
         return None
 

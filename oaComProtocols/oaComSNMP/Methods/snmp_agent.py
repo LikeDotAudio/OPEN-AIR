@@ -7,11 +7,9 @@
 LOCAL_DEBUG = False
 
 import logging
-from .oaSNMPAgent_rs.compiler_hook import ensure_compiled
 
 try:
-    ensure_compiled()
-    from oasnmpagent_rs import SnmpAgent as RustSnmpAgent
+    from oaRustCore.oa_snmp_agent_rs import SnmpAgent as RustSnmpAgent
     HAS_RUST = True
 except ImportError:
     logging.warning("⚠️ [SNMP] oasnmpagent_rs not found. SNMP functionality will be restricted.")

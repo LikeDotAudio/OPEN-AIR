@@ -5,11 +5,9 @@
 # Description: Python wrapper for the Rust Rotary Core engine.
 
 import logging
-from .oaRotaryCore_rs.compiler_hook import ensure_compiled
 
 try:
-    ensure_compiled()
-    from .oaRotaryCore_rs.oarotarycore_rs import RotaryCore as RustRotaryCore
+    from oaRustCore.oa_rotary_core_rs import RotaryCore as RustRotaryCore
     HAS_RUST = True
 except Exception as e:
     logging.error(f"oaGuiElements: Failed to load Rust Rotary Core: {e}")

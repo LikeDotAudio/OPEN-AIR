@@ -66,7 +66,7 @@ class IS12ErrorMessage(IS12BaseMessage):
 if __name__ == "__main__":
     try:
         # Example of creating a command message
-        command_msg = IS12CommandMessage(
+        command_message = IS12CommandMessage(
             message_id="cmd-123",
             timestamp="2026-04-05T15:47:00Z",
             version="1.0.1",
@@ -75,7 +75,7 @@ if __name__ == "__main__":
             parameters={"setting": "volume", "value": 50}
         )
         print("Created Command Message:")
-        print(command_msg.model_dump_json(indent=2))
+        print(command_message.model_dump_json(indent=2))
 
         # Example of creating a command response message (success)
         response_success = IS12CommandResponseMessage(
@@ -100,7 +100,7 @@ if __name__ == "__main__":
         print(response_failure.model_dump_json(indent=2))
 
         # Example of creating a subscription message
-        subscription_msg = IS12SubscriptionMessage(
+        subscription_message = IS12SubscriptionMessage(
             message_id="sub-abc",
             timestamp="2026-04-05T15:47:03Z",
             version="1.0.1",
@@ -110,7 +110,7 @@ if __name__ == "__main__":
             filter={"parameter": "volume"}
         )
         print("Created Subscription Message:")
-        print(subscription_msg.model_dump_json(indent=2))
+        print(subscription_message.model_dump_json(indent=2))
 
     except Exception as e:
         print(f"An error occurred during schema example generation: {e}")

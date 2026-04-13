@@ -16,12 +16,8 @@ import string
 import threading
 import socket
 
-from oaComProtocols.oaComVisa.Core.oaVisaCore_rs import compiler_hook as core_hook
-from oaComProtocols.oaComVisa.Methods.oaVisaScanner_rs import compiler_hook as scanner_hook
-
 try:
-    core_hook.ensure_compiled()
-    import oavisacore_rs
+    from oaRustCore import oa_visa_core_rs as oavisacore_rs
     HAS_RUST = True
 except ImportError:
     logging.warning("⚠️ [VISA] oavisacore_rs not found. Pure Rust mode is mandatory, but falling back to Python for stability.")
@@ -31,8 +27,7 @@ except Exception as e:
     HAS_RUST = False
 
 try:
-    scanner_hook.ensure_compiled()
-    from oavisascanner_rs import VisaScanner
+    from oaRustCore.oa_visa_scanner_rs import VisaScanner
     scanner_rs = VisaScanner()
     HAS_SCANNER_RS = True
 except ImportError:
@@ -65,7 +60,6 @@ def _get_lock_for_ip(ip_address):
         if ip_address not in _IP_LOCKS:
             _IP_LOCKS[ip_address] = threading.Lock()
         return _IP_LOCKS[ip_address]
-
 
 def probe_devices(resource_manager, potential_targets):
     """
@@ -117,7 +111,7 @@ def probe_devices(resource_manager, potential_targets):
             matrix_log("comms", "visa", "probe_devices", f"⚡ Reachability scan complete. {len(potential_targets)} targets remaining.", "SUCCESS")
 
     try:
-        for idx, target in enumerate(potential_targets):
+        for index, target in enumerate(potential_targets):
             raw_res = target["Resource"]
             display_res = VisaUtilityParser.clean_string_for_display(raw_res)
 
@@ -141,7 +135,7 @@ def probe_devices(resource_manager, potential_targets):
                 idn = None
 
             device_entry = {
-                # "id": str(idx + 1), # Will be replaced by serial or similar unique ID
+                # "id": str(index + 1), # Will be replaced by serial or similar unique ID
                 "type": target["Type"],
                 "resource_string": display_res,
                 "ip_address": conn_details["IP"],
@@ -241,7 +235,6 @@ def probe_devices(resource_manager, potential_targets):
 
     matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 🔍 manager_visa_Search: Finished probing. Returning {len(device_collection)} probed devices: {device_collection}", "DEBUG")
     return device_collection
-
 
 # For testing purposes (optional)
 if __name__ == "__main__":

@@ -90,8 +90,8 @@ impl OscServer {
 
 fn handle_packet(packet: OscPacket, callback: &Py<PyAny>) {
     match packet {
-        OscPacket::Message(msg) => {
-            dispatch_message(msg.addr, msg.args, callback);
+        OscPacket::Message(message) => {
+            dispatch_message(message.addr, message.args, callback);
         }
         OscPacket::Bundle(bundle) => {
             for packet in bundle.content {
@@ -103,18 +103,18 @@ fn handle_packet(packet: OscPacket, callback: &Py<PyAny>) {
 
 fn dispatch_message(addr: String, args: Vec<OscType>, callback: &Py<PyAny>) {
     Python::with_gil(|py| {
-        let py_args = pyo3::types::PyList::empty(py);
+        let py_args = pyo3::types::PyList::empty_bound(py);
         for arg in args {
             match arg {
                 OscType::Int(i) => { let _ = py_args.append(i); }
                 OscType::Float(f) => { let _ = py_args.append(f); }
                 OscType::String(s) => { let _ = py_args.append(s); }
-                OscType::Blob(b) => { let _ = py_args.append(pyo3::types::PyBytes::new(py, &b)); }
+                OscType::Blob(b) => { let _ = py_args.append(pyo3::types::PyBytes::new_bound(py, &b)); }
                 OscType::Long(l) => { let _ = py_args.append(l); }
                 OscType::Double(d) => { let _ = py_args.append(d); }
                 OscType::Char(c) => { let _ = py_args.append(c.to_string()); }
                 OscType::Color(c) => {
-                    let dict = PyDict::new(py);
+                    let dict = PyDict::new_bound(py);
                     let _ = dict.set_item("r", c.red);
                     let _ = dict.set_item("g", c.green);
                     let _ = dict.set_item("b", c.blue);
@@ -122,7 +122,7 @@ fn dispatch_message(addr: String, args: Vec<OscType>, callback: &Py<PyAny>) {
                     let _ = py_args.append(dict);
                 }
                 OscType::Midi(m) => {
-                    let dict = PyDict::new(py);
+                    let dict = PyDict::new_bound(py);
                     let _ = dict.set_item("port", m.port);
                     let _ = dict.set_item("status", m.status);
                     let _ = dict.set_item("data1", m.data1);
@@ -133,7 +133,7 @@ fn dispatch_message(addr: String, args: Vec<OscType>, callback: &Py<PyAny>) {
                 OscType::Nil => { let _ = py_args.append(py.None()); }
                 OscType::Inf => { let _ = py_args.append("INFINITY"); }
                 OscType::Time(t) => {
-                    let dict = PyDict::new(py);
+                    let dict = PyDict::new_bound(py);
                     let _ = dict.set_item("seconds", t.seconds);
                     let _ = dict.set_item("fraction", t.fractional);
                     let _ = py_args.append(dict);
@@ -195,11 +195,11 @@ impl OscClient {
                 args,
             });
             
-            let msg_buf = rosc::encoder::encode(&packet).map_err(|e| {
+            let message_buf = rosc::encoder::encode(&packet).map_err(|e| {
                 PyErr::new::<pyo3::exceptions::PyRuntimeError, _>(format!("OSC Encode error: {:?}", e))
             })?;
             
-            socket.send(&msg_buf).map_err(|e| {
+            socket.send(&message_buf).map_err(|e| {
                 PyErr::new::<pyo3::exceptions::PyIOError, _>(format!("OSC Send error: {}", e))
             })?;
         }

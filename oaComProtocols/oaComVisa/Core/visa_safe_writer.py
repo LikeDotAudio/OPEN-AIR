@@ -24,17 +24,17 @@ def write_safe(proxy, command):
 
     # ⚡ DEFENSIVE CHECK: Ensure session is still valid
     if not proxy.inst or not proxy.inst.session:
-        error_msg = "Instrument session lost. Cannot write command."
-        proxy._publish_proxy_error(message=error_msg, command=command)
+        error_message = "Instrument session lost. Cannot write command."
+        proxy._publish_proxy_error(message=error_message, command=command)
         return False
 
     if "<" in command or ">" in command:
-        error_msg = f"Command rejected. Unresolved placeholders found: '{command}'."
-        proxy._publish_proxy_error(message=error_msg, command=command)
+        error_message = f"Command rejected. Unresolved placeholders found: '{command}'."
+        proxy._publish_proxy_error(message=error_message, command=command)
         proxy.mqtt_util.get_client_instance().publish(
             topic="OPEN-AIR/Proxy/Error",
             payload=orjson.dumps(
-                {"error": error_msg, "command": command, "timestamp": time.time()}
+                {"error": error_message, "command": command, "timestamp": time.time()}
             ),
             qos=0,
             retain=False,

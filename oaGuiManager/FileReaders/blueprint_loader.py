@@ -31,11 +31,9 @@ Constraints:
 import sys
 import os
 from loguru import logger
-from .oaBlueprintParser_rs.compiler_hook import ensure_compiled
 
 try:
-    ensure_compiled()
-    from oablueprintparser_rs.oablueprintparser_rs import BlueprintParser as RustBlueprintParser
+    from oaRustCore.oa_blueprint_parser_rs import BlueprintParser as RustBlueprintParser
     HAS_RUST = True
 except ImportError:
     logger.warning("⚠️ [GUI_MANAGER] oablueprintparser_rs not found. Pure Rust mode is mandatory, but continuing for stability.")
@@ -120,7 +118,6 @@ class BlueprintLoader:
         
         return config_data, current_hash, True
 
-
     @staticmethod
     def _recursively_normalize(config, root=None):
         """
@@ -202,7 +199,6 @@ class BlueprintLoader:
             logger.warning(f"🟡 BlueprintLoader: default_panel.json missing or empty.")
             
         return {}
-
 
     @staticmethod
     def _recursive_merge(base, overrides):

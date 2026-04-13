@@ -133,9 +133,9 @@ class FileIOHandler:
             
             # 1. Create and Verify Backup
             if path.exists():
-                ts = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+                timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
                 # ⚡ REQUIREMENT: Backup should have the .old extension (archive style)
-                backup_path = path.with_name(f"{ts}_{path.stem}.old")
+                backup_path = path.with_name(f"{timestamp}_{path.stem}.old")
                 matrix_log(
                     system="UI",
                     element="FILE_IO",

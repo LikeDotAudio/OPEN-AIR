@@ -19,7 +19,7 @@ class LexiconExpander:
         "colspan": "col_span",
         "rowspan": "row_span",
         "pad": "padding",
-        "val": "value_default",
+        "value": "value_default",
         "min": "min",
         "max": "max",
         "unit": "units",
@@ -39,9 +39,9 @@ class LexiconExpander:
             return data
         
         new_data = {}
-        for k, v in data.items():
-            if isinstance(v, dict):
-                v = cls.expand(v)
+        for k, expanded_value in data.items():
+            if isinstance(expanded_value, dict):
+                expanded_value = cls.expand(expanded_value)
             
             target_key = cls.MAPPING.get(k, k)
             
@@ -58,6 +58,6 @@ class LexiconExpander:
                     target_key = "height" # Fallback for cap.y etc.
 
             if target_key not in new_data or target_key == k:
-                new_data[target_key] = v
+                new_data[target_key] = expanded_value
         
         return new_data

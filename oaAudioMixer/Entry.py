@@ -19,9 +19,7 @@ if str(project_root) not in sys.path:
 
 # Ensure the Rust module is compiled and importable
 try:
-    from oaAudioMixer.Core.oaAudioMixer_rs.compiler_hook import ensure_compiled
-    ensure_compiled()
-    import oaaudiomixer_rs
+    from oaRustCore import oa_audio_mixer_rs as oaaudiomixer_rs
 except ImportError as e:
     print(f"🛑 [FATAL] Rust oaaudiomixer_rs module missing or failed to compile: {e}")
     sys.exit(1)

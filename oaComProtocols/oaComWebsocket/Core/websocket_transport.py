@@ -165,10 +165,10 @@ class WebSocketEventTransport(EventTransport):
              matrix_log("comms", "websocket", "_on_error", f"📡❌ [WebSocketTransport] Error: {error}", "ERROR")
         self._is_connected = False
 
-    def _on_close(self, ws, close_status_code, close_msg):
+    def _on_close(self, ws, close_status_code, close_message):
         """Callback for WebSocket connection close."""
         if self._is_connected:
-            matrix_log("comms", "websocket", "_on_close", f"📡 [WebSocketTransport] Closed (Code: {close_status_code}, Msg: {close_msg}).", "INFO")
+            matrix_log("comms", "websocket", "_on_close", f"📡 [WebSocketTransport] Closed (Code: {close_status_code}, Message: {close_message}).", "INFO")
         
         self._is_connected = False
         # If it was an unexpected close, trigger reconnect if enabled

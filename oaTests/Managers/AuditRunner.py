@@ -80,11 +80,11 @@ def run_all_audits(console_print_func=None, cancel_event=None):
     """
     Runs all audit commands found in the AUDIT_DIR.
     """
-    def log(msg):
+    def log(message):
         if console_print_func:
-            console_print_func(msg)
+            console_print_func(message)
         else:
-            print(msg)
+            print(message)
 
     log(f"🚀 Starting Audits using {DEFAULT_MODEL}...")
     audit_path = pathlib.Path(AUDIT_DIR)

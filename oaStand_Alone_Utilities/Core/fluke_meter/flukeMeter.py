@@ -31,9 +31,9 @@ def select_serial_port():
     while True:
         try:
             selection = input("\nSelect a device number: ")
-            idx = int(selection) - 1
-            if 0 <= idx < len(ports):
-                selected_port = ports[idx].device
+            index = int(selection) - 1
+            if 0 <= index < len(ports):
+                selected_port = ports[index].device
                 print(f"[*] You selected: {selected_port}")
                 return selected_port
             else:

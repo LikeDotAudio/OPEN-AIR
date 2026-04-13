@@ -41,8 +41,8 @@ class SmartMeter(tk.Canvas, SafeAfterMixin):
         
         # 1. Initialize Components
         from .Core.config_parser import MeterConfig
-        self.cfg = MeterConfig.from_dict(raw_config)
-        self.physics = BallisticsEngine(self.cfg)
+        self.configuration = MeterConfig.from_dict(raw_config)
+        self.physics = BallisticsEngine(self.configuration)
         self.layout_calc = MeterLayoutCalculator()
         
         # 2. Build UI
@@ -66,7 +66,7 @@ class SmartMeter(tk.Canvas, SafeAfterMixin):
         self.value_var = kwargs.get("variable")
         if not self.value_var:
             try:
-                self.value_var = tk.DoubleVar(master=parent, value=self.cfg.value_default)
+                self.value_var = tk.DoubleVar(master=parent, value=self.configuration.value_default)
             except Exception:
                 # If tk.DoubleVar fails (e.g. headless), use a fallback mock
                 from unittest.mock import MagicMock
@@ -86,7 +86,7 @@ class SmartMeter(tk.Canvas, SafeAfterMixin):
 
     def _build_ui(self, **kwargs):
         # 1. Calculate Required Size
-        req_w, req_h = self.cfg.get_requested_dimensions()
+        req_w, req_h = self.configuration.get_requested_dimensions()
         p_bg = kwargs.get("p_bg", "#2b2b2b")
         
         # Canvas
@@ -97,7 +97,7 @@ class SmartMeter(tk.Canvas, SafeAfterMixin):
         # Apply Industrial Transparency
         apply_func = kwargs.get("apply_transparency_func")
         builder = kwargs.get("builder_instance")
-        raw_config = kwargs.get("raw_config", self.cfg.__dict__)
+        raw_config = kwargs.get("raw_config", self.configuration.__dict__)
         
         if apply_func and builder:
             # Ensure transparency is enabled if not explicitly disabled
@@ -117,7 +117,7 @@ class SmartMeter(tk.Canvas, SafeAfterMixin):
         self.canvas.bind("<B2-Motion>", self._on_debug_generate_random)
 
     def _initial_draw(self):
-        req_w, req_h = self.cfg.get_requested_dimensions()
+        req_w, req_h = self.configuration.get_requested_dimensions()
         self._perform_layout(req_w, req_h)
         # Start ballistics if we have a non-minimum initial value
         self._on_value_update()
@@ -143,8 +143,8 @@ class SmartMeter(tk.Canvas, SafeAfterMixin):
 
     def _perform_layout(self, w, h):
         if w <= 1 or h <= 1: return
-        self.current_layout = self.layout_calc.calculate(w, h, self.cfg)
-        self.renderer.draw_static(self.current_layout, self.cfg)
+        self.current_layout = self.layout_calc.calculate(w, h, self.configuration)
+        self.renderer.draw_static(self.current_layout, self.configuration)
         self._refresh_frame()
         
         # Reset resize flag after layout is complete and redraw is done
@@ -158,8 +158,8 @@ class SmartMeter(tk.Canvas, SafeAfterMixin):
             if not self.canvas.winfo_exists():
                 return
 
-            val = self.value_var.get()
-            self.physics.set_target(val)
+            value = self.value_var.get()
+            self.physics.set_target(value)
             if self._anim_timer_id is None:
                 self._last_anim_time = time.time() * 1000
                 self._animate()
@@ -182,12 +182,12 @@ class SmartMeter(tk.Canvas, SafeAfterMixin):
         dt = max(1.0, min(100.0, dt))
         current_v, peak_v, overload_f, is_running, reached_min = self.physics.update(dt)
         
-        dyn_data = self.layout_calc.get_dynamic_coords(current_v, peak_v, overload_f, self.cfg, self.current_layout)
-        self.renderer.update_dynamic(dyn_data, overload_f, self.cfg)
+        dyn_data = self.layout_calc.get_dynamic_coords(current_v, peak_v, overload_f, self.configuration, self.current_layout)
+        self.renderer.update_dynamic(dyn_data, overload_f, self.configuration)
 
         if reached_min:
-            if self.state_mirror and self.cfg.path:
-                self.state_mirror.broadcast_gui_change_to_mqtt(self.cfg.path)
+            if self.state_mirror and self.configuration.path:
+                self.state_mirror.broadcast_gui_change_to_mqtt(self.configuration.path)
         
         if is_running:
             self._anim_timer_id = self.safe_after(20, self._animate)
@@ -196,24 +196,24 @@ class SmartMeter(tk.Canvas, SafeAfterMixin):
         current_v = self.physics.current_value
         peak_v = self.physics.peak_value
         overload_f = self.physics.overload_fade_factor
-        dyn_data = self.layout_calc.get_dynamic_coords(current_v, peak_v, overload_f, self.cfg, self.current_layout)
-        self.renderer.update_dynamic(dyn_data, overload_f, self.cfg)
+        dyn_data = self.layout_calc.get_dynamic_coords(current_v, peak_v, overload_f, self.configuration, self.current_layout)
+        self.renderer.update_dynamic(dyn_data, overload_f, self.configuration)
 
     def _on_debug_generate_random(self, event):
-        new_val = random.uniform(self.cfg.min_val, self.cfg.max_val)
+        new_val = random.uniform(self.configuration.min_val, self.configuration.max_val)
         self.value_var.set(new_val)
         
         # Explicit broadcast for debug injection (which might not be traced by logic yet)
-        if self.state_mirror and self.cfg.path:
-            self.state_mirror.broadcast_gui_change_to_mqtt(self.cfg.path)
+        if self.state_mirror and self.configuration.path:
+            self.state_mirror.broadcast_gui_change_to_mqtt(self.configuration.path)
 
     # --- Helpers ---
     def _get_pack_side(self):
         mapping = {"top": tk.TOP, "bottom": tk.BOTTOM, "left": tk.LEFT, "right": tk.RIGHT}
-        return mapping.get(self.cfg.label_position, tk.TOP)
+        return mapping.get(self.configuration.label_position, tk.TOP)
 
     def _get_canvas_pack_side(self):
-        pos = self.cfg.label_position
+        pos = self.configuration.label_position
         if pos == "left": return tk.LEFT
         if pos == "right": return tk.RIGHT
         if pos == "bottom": return tk.BOTTOM
@@ -221,4 +221,4 @@ class SmartMeter(tk.Canvas, SafeAfterMixin):
 
     def _get_label_anchor(self):
         mapping = {"left": "e", "right": "w", "top": "s", "bottom": "n"}
-        return mapping.get(self.cfg.label_position, "center")
+        return mapping.get(self.configuration.label_position, "center")

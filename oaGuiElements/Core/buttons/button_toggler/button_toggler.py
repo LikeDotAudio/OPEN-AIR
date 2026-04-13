@@ -34,9 +34,9 @@ class TogglerButton(CanvasButton):
         self.on_text = self.option_data.get("label_active", self.label_base)
         self.off_text = self.option_data.get("label_inactive", self.label_base)
         
-        val, units = self.option_data.get("value"), self.option_data.get("units")
-        if val is not None or units is not None:
-            suffix = f"\n({val if val else ''}{units if units else ''})"
+        value, units = self.option_data.get("value"), self.option_data.get("units")
+        if value is not None or units is not None:
+            suffix = f"\n({value if value else ''}{units if units else ''})"
             # ⚡ I18N SUPPORT: Apply suffix to each language in the dict, or the flat string
             if isinstance(self.on_text, dict):
                 self.on_text = {lang: str(txt) + suffix for lang, txt in self.on_text.items()}

@@ -20,7 +20,7 @@ privileges. (GNU)]
 #### `class NeedleDrawer`
 No class description provided.
 
-##### `draw_needle(canvas, center_x, center_y, val, min_val, max_val, start_angle_deg, end_angle_deg, extent_deg, main_arc_radius, text_offset_from_arc, color, style, thick, counter_clockwise, pivot_size, needle_scale, tag)`
+##### `draw_needle(canvas, center_x, center_y, value, min_val, max_val, start_angle_deg, end_angle_deg, extent_deg, main_arc_radius, text_offset_from_arc, color, style, thick, counter_clockwise, pivot_size, needle_scale, tag)`
 Draws or updates the needle. Uses coords() if the tag already exists for
 performance.
 
@@ -28,7 +28,7 @@ performance.
 - `canvas`: [TODO: Detail meaning, valid ranges, special cases]
 - `center_x`: [TODO: Detail meaning, valid ranges, special cases]
 - `center_y`: [TODO: Detail meaning, valid ranges, special cases]
-- `val`: [TODO: Detail meaning, valid ranges, special cases]
+- `value`: [TODO: Detail meaning, valid ranges, special cases]
 - `min_val`: [TODO: Detail meaning, valid ranges, special cases]
 - `max_val`: [TODO: Detail meaning, valid ranges, special cases]
 - `start_angle_deg`: [TODO: Detail meaning, valid ranges, special cases]

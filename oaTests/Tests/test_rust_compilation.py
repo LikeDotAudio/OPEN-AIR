@@ -66,10 +66,10 @@ class TestRustCompilation(unittest.TestCase):
                 )
                 
                 if result.returncode != 0:
-                    error_msg = f"Failed to compile Rust project at {project_dir}\n"
-                    error_msg += f"STDOUT: {result.stdout}\n"
-                    error_msg += f"STDERR: {result.stderr}"
-                    self.fail(error_msg)
+                    error_message = f"Failed to compile Rust project at {project_dir}\n"
+                    error_message += f"STDOUT: {result.stdout}\n"
+                    error_message += f"STDERR: {result.stderr}"
+                    self.fail(error_message)
 
 if __name__ == "__main__":
     unittest.main()

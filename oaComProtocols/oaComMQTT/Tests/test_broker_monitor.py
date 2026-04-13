@@ -57,9 +57,9 @@ class TestBrokerMonitor(unittest.TestCase):
         OPERATE: Call _on_sys_message.
         CHECK: Assert the stats dict is updated correctly.
         """
-        msg = MqttMessage(topic="$SYS/broker/clients/connected", payload=b"42")
+        message = MqttMessage(topic="$SYS/broker/clients/connected", payload=b"42")
         
-        self.monitor._on_sys_message(msg)
+        self.monitor._on_sys_message(message)
         
         stats = self.monitor.get_stats()
         self.assertIn("clients/connected", stats)
@@ -74,8 +74,8 @@ class TestBrokerMonitor(unittest.TestCase):
         mock_callback = MagicMock()
         self.monitor.register_observer(mock_callback)
         
-        msg = MqttMessage(topic="$SYS/broker/messages/sent", payload=b"100")
-        self.monitor._on_sys_message(msg)
+        message = MqttMessage(topic="$SYS/broker/messages/sent", payload=b"100")
+        self.monitor._on_sys_message(message)
         
         mock_callback.assert_called_once_with({"messages/sent": "100"})
 
@@ -89,10 +89,10 @@ class TestBrokerMonitor(unittest.TestCase):
         mock_callback = MagicMock(side_effect=Exception("Test Exception"))
         self.monitor.register_observer(mock_callback)
         
-        msg = MqttMessage(topic="$SYS/broker/test", payload=b"test")
+        message = MqttMessage(topic="$SYS/broker/test", payload=b"test")
         
         # This should not raise an exception
-        self.monitor._on_sys_message(msg)
+        self.monitor._on_sys_message(message)
         
         mock_logger.exception.assert_called_once_with("Error notifying BrokerMonitor observer")
 

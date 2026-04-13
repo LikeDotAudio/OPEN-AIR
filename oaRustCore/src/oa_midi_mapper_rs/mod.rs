@@ -31,22 +31,22 @@ fn sanitize_id(port_name: Option<String>) -> PyResult<String> {
 }
 
 #[pyfunction]
-fn midi_to_topic(dev_id: String, msg_type: String, channel: u8, note_or_cc: u8, value: u8) -> PyResult<(String, u8)> {
+fn midi_to_topic(dev_id: String, message_type: String, channel: u8, note_or_cc: u8, value: u8) -> PyResult<(String, u8)> {
     let base = format!("OPEN-AIR/MIDI/{}/ch{}", dev_id, channel);
     
-    match msg_type.as_str() {
+    match message_type.as_str() {
         "control_change" => Ok((format!("{}/cc{}", base, note_or_cc), value)),
         "note_on" => Ok((format!("{}/note{}", base, note_or_cc), value)),
         "note_off" => Ok((format!("{}/note{}", base, note_or_cc), 0)),
-        _ => Ok((format!("{}/{}", base, msg_type), 0)),
+        _ => Ok((format!("{}/{}", base, message_type), 0)),
     }
 }
 
 #[pyfunction]
 fn parse_channel_and_val(topic_part: String) -> PyResult<u8> {
     if let Some(caps) = RE_DIGITS.find(&topic_part) {
-        if let Ok(val) = caps.as_str().parse::<u8>() {
-            return Ok(val);
+        if let Ok(value) = caps.as_str().parse::<u8>() {
+            return Ok(value);
         }
     }
     Ok(0)

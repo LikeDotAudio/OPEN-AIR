@@ -34,7 +34,7 @@ class TestButtonWinkToggler(unittest.TestCase):
             
         for p in self.patchers:
             p.start()
-        self.config = {'label_active': 'Test Wink Toggler', 'path': 'test/wink_toggler', 'options': {'A': {'label_active': 'A', 'val': 1}, 'B': {'label_active': 'B', 'val': 2}}}
+        self.config = {'label_active': 'Test Wink Toggler', 'path': 'test/wink_toggler', 'options': {'A': {'label_active': 'A', 'value': 1}, 'B': {'label_active': 'B', 'value': 2}}}
         self.mirror_engine = MagicMock()
         self.router = MagicMock()
         self.builder = MagicMock()

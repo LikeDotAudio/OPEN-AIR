@@ -3,10 +3,7 @@
 # Version: 20260331.2300.2
 #
 # Description: Pure Rust HTML scraper (No Python fallback).
-
-from .oaHTMLScraper_rs.compiler_hook import ensure_compiled
-ensure_compiled()
-from .oaHTMLScraper_rs import oahtmlscraper_rs
+from .oaHTMLScraper_rs from oaRustCore import oa_html_scraper_rs as oahtmlscraper_rs
 
 LOCAL_DEBUG = False
 

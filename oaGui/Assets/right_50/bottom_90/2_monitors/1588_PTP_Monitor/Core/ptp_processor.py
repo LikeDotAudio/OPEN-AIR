@@ -37,7 +37,7 @@ class PTPDataProcessor:
         ordered = {"Timestamp_Analysis": breakdown}
         ordered.update(data)
         
-        msg_type = data["message_type"]
-        tag = "Sync" if "Sync" in msg_type else ("Announce" if "Announce" in msg_type else ("Follow_Up" if "Follow_Up" in msg_type else ""))
+        message_type = data["message_type"]
+        tag = "Sync" if "Sync" in message_type else ("Announce" if "Announce" in message_type else ("Follow_Up" if "Follow_Up" in message_type else ""))
         
         return ordered, dt.strftime('%H:%M:%S.%f')[:-3], tag

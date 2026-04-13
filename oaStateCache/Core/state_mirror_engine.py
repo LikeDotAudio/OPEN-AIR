@@ -239,10 +239,10 @@ class StateMirrorEngine(RegistryMixin, SyncQueueMixin):
         if "SETTLED" not in metadata: metadata["SETTLED"] = is_settled
 
         # --- Structural Identity Injection ---
-        cfg = widget_info.get("config", {})
-        if "bin_id" in cfg: metadata["bin_id"] = cfg["bin_id"]
-        if "block_name" in cfg: metadata["block_name"] = cfg["block_name"]
-        if "field_name" in cfg: metadata["field_name"] = cfg["field_name"]
+        configuration = widget_info.get("config", {})
+        if "bin_id" in configuration: metadata["bin_id"] = configuration["bin_id"]
+        if "block_name" in configuration: metadata["block_name"] = configuration["block_name"]
+        if "field_name" in configuration: metadata["field_name"] = configuration["field_name"]
         
         now = time.time()
         # Global and per-widget throttling gates.
@@ -275,23 +275,23 @@ class StateMirrorEngine(RegistryMixin, SyncQueueMixin):
             mqtt_publisher_service.publish_payload(
                 widget_info["topic"], orjson.dumps(payload).decode())
 
-    def sync_incoming_mqtt_to_gui(self, msg: MqttMessage):
+    def sync_incoming_mqtt_to_gui(self, message: MqttMessage):
         """
         Parses an incoming MQTT message and updates the corresponding UI widget.
 
         Args:
-            msg (MqttMessage): The raw message from the broker.
+            message (MqttMessage): The raw message from the broker.
         """
-        if self.is_inert or not msg.payload: return
+        if self.is_inert or not message.payload: return
         try:
-            data = msg.payload if isinstance(msg.payload, (dict, list)) else orjson.loads(msg.payload)
+            data = message.payload if isinstance(message.payload, (dict, list)) else orjson.loads(message.payload)
             if not isinstance(data, dict): return
             
             # Prevent feedback loops from our own broadcasts.
             from oaStateCache.Core.manifest.echo_canceller import is_echo
             if is_echo(data): return
 
-            widget_id = self.topic_to_widget_id.get(msg.topic)
+            widget_id = self.topic_to_widget_id.get(message.topic)
             widget_info = self._get_widget_info(widget_id) if widget_id else None
             if not widget_info: return
             
@@ -324,7 +324,7 @@ class StateMirrorEngine(RegistryMixin, SyncQueueMixin):
                     
         except Exception as e:
             matrix_log("ui", "state_mirror", "sync_incoming_mqtt_to_gui", 
-                       f"❌ [SYNC] Sync failure for {msg.topic}: {e}", "ERROR")
+                       f"❌ [SYNC] Sync failure for {message.topic}: {e}", "ERROR")
 
     def _safe_execute_callback(self, callback, data, widget_id):
         """Executes a widget-level callback while suppressing trace triggers."""

@@ -157,15 +157,15 @@ class MqttEventTransport(EventTransport):
         print(f"[MQTTTransport] Disconnected from MQTT Broker with result code {rc}.")
         self._is_connected = False
 
-    def _on_message(self, client, userdata, msg):
+    def _on_message(self, client, userdata, message):
         """Callback for received MQTT messages."""
-        print(f"[MQTTTransport] Received message on topic {msg.topic}: {msg.payload.decode()}")
+        print(f"[MQTTTransport] Received message on topic {message.topic}: {message.payload.decode()}")
         if self._message_handler:
             try:
-                payload_data = json.loads(msg.payload.decode())
-                self._message_handler(msg.topic, payload_data)
+                payload_data = json.loads(message.payload.decode())
+                self._message_handler(message.topic, payload_data)
             except json.JSONDecodeError:
-                print(f"[MQTTTransport] Failed to decode JSON payload from topic {msg.topic}.")
+                print(f"[MQTTTransport] Failed to decode JSON payload from topic {message.topic}.")
             except Exception as e:
                 print(f"[MQTTTransport] Error processing received message: {e}")
 

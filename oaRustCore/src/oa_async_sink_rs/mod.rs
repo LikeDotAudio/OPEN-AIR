@@ -28,12 +28,12 @@ impl AsyncSink {
         static START: Lazy<bool> = Lazy::new(|| {
             let receiver = LOG_CHANNEL.1.clone();
             thread::spawn(move || {
-                while let Ok(msg) = receiver.recv() {
+                while let Ok(message) = receiver.recv() {
                     if let Ok(mut file) = OpenOptions::new()
                         .create(true)
                         .append(true)
-                        .open(&msg.file_path) {
-                        let _ = file.write_all(msg.content.as_bytes());
+                        .open(&message.file_path) {
+                        let _ = file.write_all(message.content.as_bytes());
                     }
                 }
             });

@@ -11,6 +11,8 @@ use noise::{NoiseFn, Perlin};
 use rayon::prelude::*;
 use std::f64::consts::PI;
 
+const COLOR_NORMALIZATION_FACTOR: f64 = 127.5;
+
 #[pyclass]
 struct PatternEngine;
 
@@ -22,7 +24,7 @@ impl PatternEngine {
     }
 
     /// Generates directional streaks (brushed metal effect).
-    fn generate_streaks(&self, py: Python<'_>, width: u32, height: u32, vertical: bool, sigma: f64, seed: u32) -> Py<PyAny> {
+    fn generate_streaks<'py>(&self, py: Python<'py>, width: u32, height: u32, vertical: bool, sigma: f64, seed: u32) -> Bound<'py, PyBytes> {
         let perlin = Perlin::new(seed);
 
         let (src_w, src_h) = if vertical {
@@ -32,76 +34,76 @@ impl PatternEngine {
         };
 
         let mut img = GrayImage::new(src_w, src_h);
-        for (x, y, pixel) in img.enumerate_pixels_mut() {
-            let val = perlin.get([x as f64 * sigma * 0.01, y as f64 * sigma * 0.01]);
-            let norm_val = ((val + 1.0) * 127.5) as u8;
-            *pixel = Luma([norm_val]);
+        for (pos_x, pos_y, pixel) in img.enumerate_pixels_mut() {
+            let value = perlin.get([pos_x as f64 * sigma * 0.01, pos_y as f64 * sigma * 0.01]);
+            let normalized_value = ((value + 1.0) * COLOR_NORMALIZATION_FACTOR) as u8;
+            *pixel = Luma([normalized_value]);
         }
 
         let resized = imageops::resize(&img, width, height, imageops::FilterType::Lanczos3);
         
         let mut rgba = RgbaImage::new(width, height);
-        for (x, y, pixel) in rgba.enumerate_pixels_mut() {
-            let gray = resized.get_pixel(x, y)[0];
+        for (pos_x, pos_y, pixel) in rgba.enumerate_pixels_mut() {
+            let gray = resized.get_pixel(pos_x, pos_y)[0];
             *pixel = Rgba([gray, gray, gray, 255]);
         }
 
-        PyBytes::new(py, rgba.as_raw()).into()
+        PyBytes::new_bound(py, rgba.as_raw())
     }
 
     /// Generates a hammered metal texture.
-    fn generate_hammered(&self, py: Python<'_>, width: u32, height: u32, seed: u32) -> Py<PyAny> {
-        let raw_pixels: Vec<u8> = (0..height).into_par_iter().flat_map(|y| {
+    fn generate_hammered<'py>(&self, py: Python<'py>, width: u32, height: u32, seed: u32) -> Bound<'py, PyBytes> {
+        let raw_pixels: Vec<u8> = (0..height).into_par_iter().flat_map(|pos_y| {
             let mut row = Vec::with_capacity((width * 4) as usize);
             let perlin_inner = Perlin::new(seed);
             let dimple_perlin = Perlin::new(seed + 1);
             
-            for x in 0..width {
-                let base = perlin_inner.get([x as f64 * 0.1, y as f64 * 0.1]);
-                let dimples = dimple_perlin.get([x as f64 * 0.02, y as f64 * 0.02]);
+            for pos_x in 0..width {
+                let base = perlin_inner.get([pos_x as f64 * 0.1, pos_y as f64 * 0.1]);
+                let dimples = dimple_perlin.get([pos_x as f64 * 0.02, pos_y as f64 * 0.02]);
                 
-                let combined = (base * 0.7 + dimples * 0.3 + 1.0) * 127.5;
-                let val = combined.clamp(0.0, 255.0) as u8;
+                let combined = (base * 0.7 + dimples * 0.3 + 1.0) * COLOR_NORMALIZATION_FACTOR;
+                let value = combined.clamp(0.0, 255.0) as u8;
                 
-                row.push(val); row.push(val); row.push(val); row.push(255);
+                row.push(value); row.push(value); row.push(value); row.push(255);
             }
             row
         }).collect();
 
-        PyBytes::new(py, &raw_pixels).into()
+        PyBytes::new_bound(py, &raw_pixels)
     }
 
-    fn generate_vignette(&self, py: Python<'_>, width: u32, height: u32, intensity: f64, depth: u32) -> Py<PyAny> {
+    fn generate_vignette<'py>(&self, py: Python<'py>, width: u32, height: u32, intensity: f64, depth: u32) -> Bound<'py, PyBytes> {
         let mut img = RgbaImage::new(width, height);
         let depth_f = depth as f64;
         
-        for i in 0..depth {
-            let progress = i as f64 / depth_f;
+        for index_i in 0..depth {
+            let progress = index_i as f64 / depth_f;
             let alpha_factor = 1.0 - ((1.0 - progress).powf(1.2) * intensity * 0.8);
-            let val = (255.0 * alpha_factor) as u8;
+            let value = (255.0 * alpha_factor) as u8;
             
-            // Draw a rectangle "outline" at depth i
-            for x in i..(width - i) {
-                img.put_pixel(x, i, Rgba([val, val, val, 255]));
-                img.put_pixel(x, height - 1 - i, Rgba([val, val, val, 255]));
+            // Draw a rectangle "outline" at depth index_i
+            for pos_x in index_i..(width - index_i) {
+                img.put_pixel(pos_x, index_i, Rgba([value, value, value, 255]));
+                img.put_pixel(pos_x, height - 1 - index_i, Rgba([value, value, value, 255]));
             }
-            for y in i..(height - i) {
-                img.put_pixel(i, y, Rgba([val, val, val, 255]));
-                img.put_pixel(width - 1 - i, y, Rgba([val, val, val, 255]));
+            for pos_y in index_i..(height - index_i) {
+                img.put_pixel(index_i, pos_y, Rgba([value, value, value, 255]));
+                img.put_pixel(width - 1 - index_i, pos_y, Rgba([value, value, value, 255]));
             }
         }
         
         // Fill the center
-        for y in depth..(height.saturating_sub(depth)) {
-            for x in depth..(width.saturating_sub(depth)) {
-                img.put_pixel(x, y, Rgba([255, 255, 255, 255]));
+        for pos_y in depth..(height.saturating_sub(depth)) {
+            for pos_x in depth..(width.saturating_sub(depth)) {
+                img.put_pixel(pos_x, pos_y, Rgba([255, 255, 255, 255]));
             }
         }
 
-        PyBytes::new(py, img.as_raw()).into()
+        PyBytes::new_bound(py, img.as_raw())
     }
 
-    fn generate_scratches(&self, py: Python<'_>, width: u32, height: u32, config: &Bound<'_, PyDict>) -> PyResult<Py<PyAny>> {
+    fn generate_scratches<'py>(&self, py: Python<'py>, width: u32, height: u32, config: &Bound<'_, PyDict>) -> PyResult<Bound<'py, PyBytes>> {
         let intensity: f64 = config.get_item("intensity")?.and_then(|v| v.extract().ok()).unwrap_or(0.4);
         let count: u32 = config.get_item("count")?.and_then(|v| v.extract().ok()).unwrap_or(25);
         let min_len: u32 = config.get_item("min_length_px")?.and_then(|v| v.extract().ok()).unwrap_or(20);
@@ -124,14 +126,14 @@ impl PatternEngine {
             self.internal_draw_line(&mut img, x1 + 1.0, y1 + 1.0, x2 + 1.0, y2 + 1.0, [255, 255, 255, (255.0 * intensity * depth_highlight) as u8]);
         }
 
-        Ok(PyBytes::new(py, img.as_raw()).into())
+        Ok(PyBytes::new_bound(py, img.as_raw()))
     }
 
-    fn generate_metal_fold(&self, py: Python<'_>, width: u32, height: u32, config: &Bound<'_, PyDict>) -> PyResult<Py<PyAny>> {
+    fn generate_metal_fold<'py>(&self, py: Python<'py>, width: u32, height: u32, config: &Bound<'_, PyDict>) -> PyResult<Bound<'py, PyBytes>> {
         let mut img = RgbaImage::new(width, height);
         let thickness: u32 = config.get_item("width_px")?.and_then(|v| v.extract().ok()).unwrap_or(20);
         
-        let creases = config.get_item("creases")?.and_then(|v| v.downcast_into::<PyList>().ok()).unwrap_or_else(|| PyList::empty(py));
+        let creases = config.get_item("creases")?.and_then(|v| v.downcast_into::<PyList>().ok()).unwrap_or_else(|| PyList::empty_bound(py));
         
         let mut h_creases: Vec<f64> = Vec::new();
         let mut v_creases: Vec<f64> = Vec::new();
@@ -220,11 +222,11 @@ impl PatternEngine {
             }
         }
 
-        Ok(PyBytes::new(py, img.as_raw()).into())
+        Ok(PyBytes::new_bound(py, img.as_raw()))
     }
 
     /// Generates a high-fidelity procedural Robertson screw head.
-    fn generate_screw(&self, py: Python<'_>, size: u32, config: &Bound<'_, PyDict>) -> PyResult<Py<PyAny>> {
+    fn generate_screw<'py>(&self, py: Python<'py>, size: u32, config: &Bound<'_, PyDict>) -> PyResult<Bound<'py, PyBytes>> {
         let padding = (size as f64 * 0.4) as u32;
         let canvas_dim = size + padding * 2;
         let center = canvas_dim as f64 / 2.0;
@@ -337,7 +339,7 @@ impl PatternEngine {
             }
         }
 
-        Ok(PyBytes::new(py, img.as_raw()).into())
+        Ok(PyBytes::new_bound(py, img.as_raw()))
     }
 }
 

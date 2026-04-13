@@ -176,7 +176,7 @@ class MidiKeyboard(tk.Canvas):
 
     # --- MIDI Handling ---
 
-    def handle_midi(self, msg):
+    def handle_midi(self, message):
         """Processes a mido message or a dict mirror."""
         try:
             m_type = ""
@@ -184,15 +184,15 @@ class MidiKeyboard(tk.Canvas):
             note = 0
             velocity = 0
             
-            matrix_log("comms", "midi", "handle_midi", f"🎹 [KEYBOARD] Incoming MIDI: {msg}", "DEBUG")
+            matrix_log("comms", "midi", "handle_midi", f"🎹 [KEYBOARD] Incoming MIDI: {message}", "DEBUG")
 
-            if isinstance(msg, dict):
-                channel = msg.get("channel", 0)
-                note = msg.get("note", 0)
-                velocity = msg.get("velocity", msg.get("val", 0))
+            if isinstance(message, dict):
+                channel = message.get("channel", 0)
+                note = message.get("note", 0)
+                velocity = message.get("velocity", message.get("value", 0))
                 # Fallback to parsing 'raw' if fields are missing
-                if note == 0 and "raw" in msg:
-                    raw = msg["raw"]
+                if note == 0 and "raw" in message:
+                    raw = message["raw"]
                     m_type = "note_on" if "note_on" in raw else "note_off"
                     # Simple regex-like extraction
                     import re
@@ -203,12 +203,12 @@ class MidiKeyboard(tk.Canvas):
                     v_match = re.search(r"velocity=(\d+)", raw)
                     if v_match: velocity = int(v_match.group(1))
                 else:
-                    m_type = msg.get("type", "note_on" if velocity > 0 else "note_off")
+                    m_type = message.get("type", "note_on" if velocity > 0 else "note_off")
             else:
-                m_type = msg.type
-                channel = msg.channel if hasattr(msg, "channel") else 0
-                note = msg.note if hasattr(msg, "note") else 0
-                velocity = msg.velocity if hasattr(msg, "velocity") else 0
+                m_type = message.type
+                channel = message.channel if hasattr(message, "channel") else 0
+                note = message.note if hasattr(message, "note") else 0
+                velocity = message.velocity if hasattr(message, "velocity") else 0
 
             if m_type in ["note_on", "note_off"]:
                 color = get_midi_color(channel)

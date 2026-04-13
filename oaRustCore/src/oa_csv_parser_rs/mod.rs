@@ -4,7 +4,6 @@
 
 use pyo3::prelude::*;
 use pyo3::types::{PyDict, PyList};
-use pyo3::IntoPyAnyExt;
 use std::collections::HashMap;
 use csv::ReaderBuilder;
 use regex::Regex;
@@ -44,12 +43,12 @@ fn convert_csv_unknown(py: Python<'_>, file_path: String) -> PyResult<(Vec<Strin
         }
     }
 
-    let freq_regex = Regex::new(r"(?i)(?P<val>\d+(?:\.\d+)?)\s*(?:(?P<unit>k|m|g)?hz)?").unwrap();
-    let processed_data = PyList::empty(py);
+    let freq_regex = Regex::new(r"(?i)(?P<value>\d+(?:\.\d+)?)\s*(?:(?P<unit>k|m|g)?hz)?").unwrap();
+    let parsed_records = PyList::empty_bound(py);
 
     for result in reader.records() {
         let record = result.map_err(|e| PyErr::new::<pyo3::exceptions::PyIOError, _>(e.to_string()))?;
-        let row_dict = PyDict::new(py);
+        let row_dict = PyDict::new_bound(py);
 
         for std_header in &standard_headers {
             let mut value_obj = py.None();
@@ -58,43 +57,37 @@ fn convert_csv_unknown(py: Python<'_>, file_path: String) -> PyResult<(Vec<Strin
                     let trimmed = raw_value.trim();
                     if *std_header == "FREQ_MHZ" && !trimmed.is_empty() {
                         if let Some(caps) = freq_regex.captures(trimmed) {
-                            let val: f64 = caps["val"].parse().unwrap_or(0.0);
+                            let value: f64 = caps["value"].parse().unwrap_or(0.0);
                             let unit = caps.name("unit").map(|m| m.as_str().to_lowercase());
-                            let mut mhz_val = val;
+                            let mut mhz_val = value;
                             if let Some(u) = unit {
                                 if u == "k" { mhz_val /= 1000.0; }
                                 else if u == "g" { mhz_val *= 1000.0; }
                             }
-                            value_obj = mhz_val.into_py_any(py)?;
+                            value_obj = mhz_val.into_py(py);
                         } else {
-                            if let Ok(val) = trimmed.parse::<f64>() {
-                                value_obj = val.into_py_any(py)?;
+                            if let Ok(value) = trimmed.parse::<f64>() {
+                                value_obj = value.into_py(py);
                             } else {
-                                value_obj = trimmed.into_py_any(py)?;
+                                value_obj = trimmed.into_py(py);
                             }
                         }
                     } else {
-                        value_obj = trimmed.into_py_any(py)?;
+                        value_obj = trimmed.into_py(py);
                     }
                 }
             }
             let _ = row_dict.set_item(std_header, value_obj);
         }
-        let _ = processed_data.append(row_dict);
+        let _ = parsed_records.append(row_dict);
     }
 
     let std_headers_vec: Vec<String> = standard_headers.iter().map(|s| s.to_string()).collect();
-    Ok((std_headers_vec, processed_data.unbind()))
-}
-
-#[pyfunction]
-fn sum_as_string(a: usize, b: usize) -> PyResult<String> {
-    Ok((a + b).to_string())
+    Ok((std_headers_vec, parsed_records.unbind()))
 }
 
 #[pymodule]
 pub fn oacsvparser_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(convert_csv_unknown, m)?)?;
-    m.add_function(wrap_pyfunction!(sum_as_string, m)?)?;
     Ok(())
 }

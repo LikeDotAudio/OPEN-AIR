@@ -63,8 +63,8 @@ class TestVisaConnector(unittest.TestCase):
         mock_setup.return_value = mock_inst
         mock_inst.query.return_value = "TEKTRONIX,MSO2024B,SERIAL123,FV1.0"
         
-        res = "TCPIP::1.2.3.4::INSTR"
-        result = self.connector.connect_instrument_logic(res)
+        result_resource = "TCPIP::1.2.3.4::INSTR"
+        result = self.connector.connect_instrument_logic(result_resource)
         
         self.assertEqual(result, mock_inst)
         self.mock_proxy.set_instrument_instance.assert_called_with(inst=mock_inst)

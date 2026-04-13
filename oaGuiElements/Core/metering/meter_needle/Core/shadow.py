@@ -10,7 +10,7 @@ import math
 from .needle import NeedleConfig
 
 try:
-    from oaneedlegeometry_rs import NeedleGeometry
+    from oaRustCore.oa_needle_geometry_rs import NeedleGeometry
     needle_geo_rs = NeedleGeometry()
 except ImportError:
     needle_geo_rs = None
@@ -27,14 +27,14 @@ class ShadowDrawer:
 
     @staticmethod
     def draw_shadow(canvas, center_x, center_y, 
-                    val, min_val, max_val,
+                    value, min_val, max_val,
                     start_angle_deg, end_angle_deg, extent_deg,
                     main_arc_radius, text_offset_from_arc,
                     style, thick, counter_clockwise, pivot_size,
                     needle_scale=1.0, tag="vu_shadow"):
         """Legacy wrapper for draw_with_config."""
         config = NeedleConfig(
-            val=val, min_val=min_val, max_val=max_val,
+            value=value, min_val=min_val, max_val=max_val,
             start_angle_deg=start_angle_deg, end_angle_deg=end_angle_deg, extent_deg=extent_deg,
             main_arc_radius=main_arc_radius, text_offset_from_arc=text_offset_from_arc,
             color=ShadowDrawer.FILL_COLOR, style=style, thick=thick, 
@@ -87,9 +87,9 @@ class ShadowDrawer:
             return
 
         # 1. Prepare values
-        val = max(min(config.val, config.max_val), config.min_val)
+        value = max(min(config.value, config.max_val), config.min_val)
         range_val = config.max_val - config.min_val
-        norm_val = (val - config.min_val) / range_val if range_val != 0 else 0
+        norm_val = (value - config.min_val) / range_val if range_val != 0 else 0
 
         angle_deg = config.end_angle_deg + (norm_val * config.extent_deg) if config.counter_clockwise \
                     else config.start_angle_deg - (norm_val * config.extent_deg)

@@ -63,10 +63,10 @@ class FleetStatusMonitor:
     # This method updates the internal state to "RED" and publishes this color
     # to the GUI status light, indicating that a scan is in progress.
     # Inputs:
-    #     msg (MqttMessage): The MQTT message object.
+    #     message (MqttMessage): The MQTT message object.
     # Outputs:
     #     None.
-    def _on_scan_start(self, msg: MqttMessage):
+    def _on_scan_start(self, message: MqttMessage):
         self.current_state = "RED"
         self._publish_color("red")
         if LOCAL_DEBUG: sys_logger.debug("Fleet Scan Started - Status Red")
@@ -75,11 +75,11 @@ class FleetStatusMonitor:
     # This method processes the scan completion payload, checks the number of devices found,
     # and updates the GUI status light to GREEN if devices were found, or RED otherwise.
     # Inputs:
-    #     msg (MqttMessage): The MQTT message object.
+    #     message (MqttMessage): The MQTT message object.
     # Outputs:
     #     None.
-    def _on_scan_complete(self, msg: MqttMessage):
-        payload = msg.payload
+    def _on_scan_complete(self, message: MqttMessage):
+        payload = message.payload
         try:
             if isinstance(payload, (bytes, str)):
                 data = orjson.loads(payload)
@@ -114,5 +114,5 @@ class FleetStatusMonitor:
     def _publish_color(self, color):
         """Tells the GUI Status Light what color to be."""
         target_topic = "OPEN-AIR/GUI/Global/Header/StatusLight"
-        payload = {"color": color, "ts": time.time()}
+        payload = {"color": color, "timestamp": time.time()}
         publish_payload(target_topic, orjson.dumps(payload).decode())

@@ -119,7 +119,7 @@ impl NeedleGeometry {
             _ => (Vec::new(), false),
         };
 
-        let flat_pts = PyList::empty(py);
+        let flat_pts = PyList::empty_bound(py);
         for (px, py_val) in pts {
             let _ = flat_pts.append(cx + px);
             let _ = flat_pts.append(cy - py_val);
@@ -129,7 +129,7 @@ impl NeedleGeometry {
     }
 
     fn calculate_shadow_geometry<'py>(&self, py: Python<'py>, cx: f64, cy: f64, config: &Bound<'py, PyDict>) -> PyResult<Bound<'py, PyDict>> {
-        let val: f64 = config.get_item("val")?.unwrap().extract()?;
+        let value: f64 = config.get_item("value")?.unwrap().extract()?;
         let min_val: f64 = config.get_item("min_val")?.unwrap().extract()?;
         let max_val: f64 = config.get_item("max_val")?.unwrap().extract()?;
         let start_angle_deg: f64 = config.get_item("start_angle_deg")?.unwrap().extract()?;
@@ -143,7 +143,7 @@ impl NeedleGeometry {
         let pivot_size: f64 = config.get_item("pivot_size")?.unwrap().extract()?;
         let needle_scale: f64 = config.get_item("needle_scale")?.map(|v| v.extract().unwrap_or(1.0)).unwrap_or(1.0);
 
-        let bounded_val = val.clamp(min_val, max_val);
+        let bounded_val = value.clamp(min_val, max_val);
         let range_val = max_val - min_val;
         let norm_val = if range_val != 0.0 { (bounded_val - min_val) / range_val } else { 0.0 };
 
@@ -159,8 +159,8 @@ impl NeedleGeometry {
         let tip_x = cx + length * angle_rad.cos();
         let tip_y = cy - length * angle_rad.sin();
 
-        let result = PyDict::new(py);
-        let coords_list = PyList::empty(py);
+        let result = PyDict::new_bound(py);
+        let coords_list = PyList::empty_bound(py);
         
         let get_shadow_pt = |px: f64, py_val: f64| -> (f64, f64) {
             let d = ((px - cx).powi(2) + (py_val - cy).powi(2)).sqrt();

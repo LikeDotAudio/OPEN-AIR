@@ -13,12 +13,12 @@ class PTPDissectorEngine:
     def populate(tree, parent, data):
         """Recursively inserts dictionary/list data into the Treeview."""
         if isinstance(data, dict):
-            for key, val in data.items():
-                if isinstance(val, (dict, list)):
+            for key, value in data.items():
+                if isinstance(value, (dict, list)):
                     node = tree.insert(parent, "end", text=key, open=True)
-                    PTPDissectorEngine.populate(tree, node, val)
+                    PTPDissectorEngine.populate(tree, node, value)
                 else:
-                    tree.insert(parent, "end", text=key, values=(val))
+                    tree.insert(parent, "end", text=key, values=(value))
         elif isinstance(data, list):
             for i, item in enumerate(data):
                 if isinstance(item, (dict, list)):

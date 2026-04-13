@@ -5,11 +5,9 @@
 # Description: Python wrapper for the Rust Needle Engine.
 
 import logging
-from .oaNeedleEngine_rs.compiler_hook import ensure_compiled
 
 try:
-    ensure_compiled()
-    from .oaNeedleEngine_rs.oaneedleengine_rs import NeedleEngine as RustNeedleEngine
+    from oaRustCore.oa_needle_engine_rs import NeedleEngine as RustNeedleEngine
     HAS_RUST = True
 except Exception as e:
     logging.error(f"oaGuiElements: Failed to load Rust Needle Engine: {e}")

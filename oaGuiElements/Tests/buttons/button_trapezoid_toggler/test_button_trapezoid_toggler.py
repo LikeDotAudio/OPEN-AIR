@@ -21,8 +21,8 @@ class TestButtonTrapezoidToggler(unittest.TestCase):
             "label": "Test Trapezoid Toggler",
             "path": "test/trapezoid_toggler",
             "options": {
-                "A": {"label_active": "A", "val": 1},
-                "B": {"label_active": "B", "val": 2}
+                "A": {"label_active": "A", "value": 1},
+                "B": {"label_active": "B", "value": 2}
             }
         }
         self.mirror_engine = MagicMock()

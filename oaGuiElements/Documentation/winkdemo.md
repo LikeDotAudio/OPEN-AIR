@@ -82,12 +82,12 @@ Draws the bottom layer (The Color)
 **Side Effects & Thread-Safety:**
 - [TODO: Note any locks, I/O, or global state.]
 
-##### `set_pressure(self, val)`
+##### `set_pressure(self, value)`
 [TODO: Brief verb-first description. Start with action (e.g., 'Allocates...',
 'Parses...').]
 
 **Parameters:**
-- `val`: [TODO: Detail meaning, valid ranges, special cases]
+- `value`: [TODO: Detail meaning, valid ranges, special cases]
 
 **Returns:**
 - [TODO: Define success and error returns.]

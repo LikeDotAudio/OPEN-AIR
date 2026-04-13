@@ -28,10 +28,8 @@ from ..FileReaders.config_reader import Config
 from loguru import logger
 
 # --- Native Rust Optimization ---
-from oaConfigurationManager.Methods.oaConfigEngine_rs.compiler_hook import ensure_compiled
 try:
-    ensure_compiled()
-    from oaconfigengine_rs.oaconfigengine_rs import ConfigValidator
+    from oaRustCore.oa_config_engine_rs import ConfigValidator
     _rust_validator = ConfigValidator()
     HAS_RUST = True
 except Exception as e:
@@ -41,7 +39,6 @@ except Exception as e:
 LOCAL_DEBUG = False
 
 app_constants = Config.get_instance()  # Get the singleton instance
-
 
 def validate_configuration(print_func):
     """

@@ -60,8 +60,8 @@ class WinkSwitch:
         
         self.update_visuals()
 
-    def set_pressure(self, val):
-        self.target_open = max(0.0, min(1.0, float(val)))
+    def set_pressure(self, value):
+        self.target_open = max(0.0, min(1.0, float(value)))
 
     def update_visuals(self):
         # Clear moving parts
@@ -161,8 +161,8 @@ def run_app():
     lbl.pack()
 
     # Slider
-    def on_slider(val):
-        float_val = float(val) / 100
+    def on_slider(value):
+        float_val = float(value) / 100
         for sw in switches:
             sw.set_pressure(float_val)
 

@@ -6,19 +6,19 @@
 
 from ..Constants.constants import Splinker_debug_enabled, splinker_logger
 
-def broker_link(self, splink, val, original_source, original_msg=None):
+def broker_link(self, splink, value, original_source, original_message=None):
     if not self.state_cache_manager: return
     src_topic, src_key = self.parse_splink_path(splink["source"])
     
     if not src_topic: return
     
-    target_val = val
+    target_val = value
     if src_key:
         current_dict = self.state_cache_manager.get(src_topic)
         if not isinstance(current_dict, dict):
             current_dict = {}
         new_dict = current_dict.copy()
-        new_dict[src_key] = val
+        new_dict[src_key] = value
         target_val = new_dict
         
     cached_val = self.state_cache_manager.get(src_topic)
@@ -29,7 +29,7 @@ def broker_link(self, splink, val, original_source, original_msg=None):
 
     # ⚡ ANTI-FEEDBACK SPEC: Brokered messages are LINK_FEEDBACK
     meta = {
-        "msg_type": "LINK_FEEDBACK",
+        "message_type": "LINK_FEEDBACK",
         "is_settled": False,
         "splink_id": splink["id"],
         "splinker_source": splink["id"],
@@ -39,13 +39,13 @@ def broker_link(self, splink, val, original_source, original_msg=None):
         "splink_label": splink.get("label", "Splink (REVERSE)")
     }
     
-    if original_msg:
-        orig_guid = original_msg.get("msg_guid") or original_msg.get("logical_guid") or original_msg.get("guid")
-        orig_source = original_msg.get("origin_source") or original_source
-        orig_ts = original_msg.get("ts")
+    if original_message:
+        orig_guid = original_message.get("message_guid") or original_message.get("logical_guid") or original_message.get("guid")
+        orig_source = original_message.get("origin_source") or original_source
+        orig_ts = original_message.get("timestamp")
         
         # ⚡ ANTI-FEEDBACK SPEC: Preserve original Identity
-        meta["msg_guid"] = orig_guid
+        meta["message_guid"] = orig_guid
         meta["origin_source"] = orig_source
         
         # Store derivation context
@@ -54,6 +54,6 @@ def broker_link(self, splink, val, original_source, original_msg=None):
         
         # Legacy GUID support
         meta["GUID"] = f"{orig_guid}-SPLINK"
-        meta["ts"] = orig_ts
+        meta["timestamp"] = orig_ts
 
     self.state_cache_manager.handle_external_update(src_topic, target_val, source="SPLINKER", metadata=meta)

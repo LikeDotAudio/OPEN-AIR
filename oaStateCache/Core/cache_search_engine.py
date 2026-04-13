@@ -9,10 +9,8 @@ from typing import Any
 from loguru import logger
 
 # --- Native Rust Optimization ---
-from oaStateCache.Core.oaTrie_rs.compiler_hook import ensure_compiled
 try:
-    ensure_compiled()
-    import oatrie_rs
+    from oaRustCore import oa_trie_rs as oatrie_rs
     RUST_ENABLED = True
 except ImportError:
     RUST_ENABLED = False

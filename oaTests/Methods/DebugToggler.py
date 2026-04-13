@@ -33,10 +33,8 @@ from pathlib import Path
 from loguru import logger
 
 # --- Native Rust Acceleration ---
-from .oaDebugToggler_rs.compiler_hook import ensure_compiled
 try:
-    ensure_compiled()
-    from oadebugtoggler_rs import toggle_debug_flags_rs as toggle_debug_flags_rs_native
+    from oaRustCore.oa_debug_toggler_rs import toggle_debug_flags_rs as toggle_debug_flags_rs_native
     RUST_ENABLED = True
 except ImportError:
     RUST_ENABLED = False
@@ -54,9 +52,9 @@ def _set_debug_state(project_root, target_state: bool, console_print_func=None):
     Scans the codebase and forces all debug flags to the specified state.
     Utilizes Rust-native acceleration if available.
     """
-    def log(msg):
-        if console_print_func: console_print_func(msg)
-        else: logger.info(msg)
+    def log(message):
+        if console_print_func: console_print_func(message)
+        else: logger.info(message)
 
     target_state_str = str(target_state)
     action = "ENABLING" if target_state else "DISABLING"

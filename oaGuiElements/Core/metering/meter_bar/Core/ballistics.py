@@ -9,16 +9,18 @@ from loguru import logger
 from oaConfigurationManager.Entry import Config
 
 try:
-    from oameteringengine_rs import BallisticsEngine as RustBallisticsEngine
-except ImportError as e:
-    logger.critical("🚀❌ [FATAL] Rust Metering Engine module missing. Pure Rust mode is mandatory.")
-    raise e
+    from oaRustCore.oa_metering_engine_rs import BallisticsEngine as RustBallisticsEngine
+    HAS_RUST_METERING = True
+except ImportError:
+    logger.warning("🚀⚠️ [GUI] Rust Metering Engine missing. Falling back to slow Python ballistics.")
+    HAS_RUST_METERING = False
 
 class BallisticsEngine:
-    """Handles the physics math for meter movement strictly via the Rust engine."""
+    """Handles the physics math for meter movement."""
     
     def __init__(self, config):
-        self.cfg = config
+        self._engine = RustBallisticsEngine(config) if HAS_RUST_METERING else None
+        self.configuration = config
         try:
             self.rust_engine = RustBallisticsEngine(config)
         except Exception as e:

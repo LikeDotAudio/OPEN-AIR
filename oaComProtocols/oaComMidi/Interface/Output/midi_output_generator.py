@@ -104,9 +104,9 @@ class MidiOutputGenerator(tk.Frame):
             self.selected_output_port.set(outputs[0])
 
     def _on_all_channels_toggle(self):
-        val = self.all_channels_var.get()
+        value = self.all_channels_var.get()
         for var in self.selected_channels:
-            var.set(val)
+            var.set(value)
 
     def _generate_note_on(self, note):
         if not self.send_enabled_var.get(): return
@@ -130,17 +130,17 @@ class MidiOutputGenerator(tk.Frame):
         for ch in channels:
             topic = f"OPEN-AIR/MIDI/gui_out/ch{ch+1}/note{note}"
             pld = {
-                "val": velocity, "channel": ch, "note": note, "velocity": velocity,
+                "value": velocity, "channel": ch, "note": note, "velocity": velocity,
                 "type": m_type, "raw": f"{m_type} channel={ch} note={note} velocity={velocity}"
             }
             meta = {
                 "origin_source": "MIDI-TX", "target_port": port, "midi_type": m_type
             }
             import mido
-            midi_msg = mido.Message(m_type, channel=ch, note=note, velocity=velocity)
+            midi_message = mido.Message(m_type, channel=ch, note=note, velocity=velocity)
             try:
-                # ⚡ REFACTORED: MidiManager.publish expects (port_name, mido_msg)
-                self.midi_manager.publish(port, midi_msg)
+                # ⚡ REFACTORED: MidiManager.publish expects (port_name, mido_message)
+                self.midi_manager.publish(port, midi_message)
             except Exception as e:
                 logger.error(f"Failed to publish MIDI message: {e}")
 

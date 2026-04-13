@@ -31,7 +31,7 @@ fn get_message_type(m_id: u8) -> &'static str {
 
 #[pyfunction]
 fn parse_packet(py: Python, payload: &[u8], src_ip: String, dst_ip: String, udp_port: u16) -> PyResult<Py<PyAny>> {
-    let dict = PyDict::new(py);
+    let dict = PyDict::new_bound(py);
     
     let now = SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_secs_f64();
     dict.set_item("timestamp", now)?;
@@ -63,11 +63,11 @@ fn parse_packet(py: Python, payload: &[u8], src_ip: String, dst_ip: String, udp_
         dict.set_item("clock_identity", "Unknown")?;
     }
     
-    Ok(dict.into())
+    Ok(dict.into_any().unbind())
 }
 
 #[pymodule]
-pub fn oaptpparser_rs(_py: Python, m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn oaptpparser_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(parse_packet, m)?)?;
     Ok(())
 }

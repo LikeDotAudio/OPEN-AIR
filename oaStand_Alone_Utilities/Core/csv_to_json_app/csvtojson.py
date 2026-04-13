@@ -88,10 +88,10 @@ class CSVToJSONApp(tk.Tk):
         try:
             df = pd.read_csv(self.csv_filepath, keep_default_na=False)
             h_map = self.header_ui.get_config_map()
-            sort_cols = [h for h, cfg in h_map.items() if cfg["role"] in ["Hierarchical Key", "Value as Key", "Key Name and Value"]]
+            sort_cols = [h for h, configuration in h_map.items() if configuration["role"] in ["Hierarchical Key", "Value as Key", "Key Name and Value"]]
             df.sort_values(by=sort_cols, inplace=True, kind="stable")
-            res = CSVConverterEngine.build_hierarchy(df, h_map, "root", self.headers)
-            return {self.root_en.get(): res}
+            result = CSVConverterEngine.build_hierarchy(df, h_map, "root", self.headers)
+            return {self.root_en.get(): result}
         except Exception as e:
             logger.exception(f"Generation failed: {e}")
             messagebox.showerror("Error", f"Generation failed: {e}")

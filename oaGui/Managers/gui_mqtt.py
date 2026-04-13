@@ -61,9 +61,9 @@ class GuiMqttManagerMixin:
             
         rebuild_topic = "OPEN-AIR/System/Control/UI/Rebuild"
         
-        def _handle_rebuild_request(msg):
+        def _handle_rebuild_request(message):
             # ⚡ ZERO EXCEPTION: Structural validation before processing
-            payload = msg.payload
+            payload = message.payload
             if not payload: return
             
             # Simple check for JSON-like structure
@@ -101,9 +101,9 @@ class GuiMqttManagerMixin:
         """Publishes the entire JSON data to the base topic."""
         # ⚡ ICE: User requested to stop GUI from announcing itself
         #     payload = {
-        #         "val": json_data,
+        #         "value": json_data,
         #         "source": "GUI-INIT",
-        #         "ts": time.time(),
+        #         "timestamp": time.time(),
         #         "GUID": self.state_mirror_engine.GUID,
         #     }
         #     # ⚡ CONSISTENCY: Use engine to calculate absolute topic
@@ -136,9 +136,9 @@ class GuiMqttManagerMixin:
                 # ⚡ CONSISTENCY: Use engine to calculate absolute topic
                 topic = self.state_mirror_engine.calculate_topic(widget_name, self.base_mqtt_topic_from_path)
                 payload = {
-                    "val": value,
+                    "value": value,
                     "src": "gui",
-                    "ts": time.time(),
+                    "timestamp": time.time(),
                     "GUID": self.state_mirror_engine.GUID,
                 }
                 self.state_mirror_engine.publish_command(topic, orjson.dumps(payload).decode())

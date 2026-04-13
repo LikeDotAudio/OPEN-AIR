@@ -89,14 +89,14 @@ class MqttSubscriberRouter:
         with self._lock:
             self._active_broker_subscriptions.discard(topic_filter)
 
-    def _on_message(self, client, userdata, msg: MqttMessage):
+    def _on_message(self, client, userdata, message: MqttMessage):
         """Dispatches incoming messages using the Rust router."""
-        topic = msg.topic
+        topic = message.topic
 
         # 1. SPECIAL ROUTING: Yak Monitor
         if "yak" in topic.lower():
             from oaTranslator.Managers.yak_trigger_handler import handle_yak_monitor_traffic
-            handle_yak_monitor_traffic(msg)
+            handle_yak_monitor_traffic(message)
 
         # 2. RUST MATCHING (O(1) exact, optimized wildcards)
         callbacks_to_invoke = self.router.match_topic(topic)
@@ -104,7 +104,7 @@ class MqttSubscriberRouter:
         # ⚡ THREAD SAFETY: Call callbacks outside any Python locks
         for callback_func in callbacks_to_invoke:
             try:
-                callback_func(msg)
+                callback_func(message)
             except Exception:
                 MQTT_LOGGER.exception(f"Error in MQTT callback for topic {topic}")
 

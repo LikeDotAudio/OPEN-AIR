@@ -46,7 +46,7 @@ def restore_timeline(cache_data: Dict[str, Any], state_mirror_engine: Any) -> No
     try:
         import orjson
         for topic, payload in cache_data.items():
-            # ⚡ OPTIMIZATION: Extract 'val' for cleaner replaying logs
+            # ⚡ OPTIMIZATION: Extract 'value' for cleaner replaying logs
             val_str = ""
             try:
                 if isinstance(payload, (str, bytes)):
@@ -54,11 +54,11 @@ def restore_timeline(cache_data: Dict[str, Any], state_mirror_engine: Any) -> No
                 else:
                     data = payload # Already parsed/dict
                 
-                if isinstance(data, dict) and "val" in data:
-                    val_str = f" Val={data['val']}"
+                if isinstance(data, dict) and "value" in data:
+                    val_str = f" Val={data['value']}"
             except Exception as e:
                 # ⚡ VOCAL: Cosmetic failure (just for cleaner logging), so trace is sufficient
-                matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Cosmetic: Failed to extract 'val' for replaying log: {e}", "TRACE")
+                matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Cosmetic: Failed to extract 'value' for replaying log: {e}", "TRACE")
 
             matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"⏪🔄 Topic='{topic}'{val_str}", "TRACE")
             
@@ -72,8 +72,8 @@ def restore_timeline(cache_data: Dict[str, Any], state_mirror_engine: Any) -> No
             # Only process valid functional state topics (Exclude System/Monitor/Heartbeat)
             volatile = any(x in str(topic) for x in ["/System/", "/Monitor/", "/Heartbeat/"])
             if topic.startswith("OPEN-AIR/") and not volatile:
-                msg = MqttMessage(topic=topic, payload=payload)
-                state_mirror_engine.sync_incoming_mqtt_to_gui(msg)
+                message = MqttMessage(topic=topic, payload=payload)
+                state_mirror_engine.sync_incoming_mqtt_to_gui(message)
             else:
                 # Log or handle non-functional data if necessary
                 matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Skipping non-functional topic in cache: {topic}", "DEBUG")

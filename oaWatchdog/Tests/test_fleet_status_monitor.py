@@ -63,8 +63,8 @@ class TestFleetStatusMonitor(unittest.TestCase):
         self.monitor.current_state = "GREEN"
         self.mock_publish.reset_mock()
         
-        msg = MqttMessage(topic="OPEN-AIR/System/Status/Fleet/Start", payload=b"{}")
-        self.monitor._on_scan_start(msg)
+        message = MqttMessage(topic="OPEN-AIR/System/Status/Fleet/Start", payload=b"{}")
+        self.monitor._on_scan_start(message)
         
         self.assertEqual(self.monitor.current_state, "RED")
         args, _ = self.mock_publish.call_args
@@ -81,8 +81,8 @@ class TestFleetStatusMonitor(unittest.TestCase):
         self.mock_publish.reset_mock()
         
         data = {"num_devices": 5}
-        msg = MqttMessage(topic="OPEN-AIR/System/Status/Fleet/Complete", payload=orjson.dumps(data))
-        self.monitor._on_scan_complete(msg)
+        message = MqttMessage(topic="OPEN-AIR/System/Status/Fleet/Complete", payload=orjson.dumps(data))
+        self.monitor._on_scan_complete(message)
         
         self.assertEqual(self.monitor.current_state, "GREEN")
         args, _ = self.mock_publish.call_args
@@ -99,8 +99,8 @@ class TestFleetStatusMonitor(unittest.TestCase):
         self.mock_publish.reset_mock()
         
         data = {"num_devices": 0}
-        msg = MqttMessage(topic="OPEN-AIR/System/Status/Fleet/Complete", payload=orjson.dumps(data))
-        self.monitor._on_scan_complete(msg)
+        message = MqttMessage(topic="OPEN-AIR/System/Status/Fleet/Complete", payload=orjson.dumps(data))
+        self.monitor._on_scan_complete(message)
         
         self.assertEqual(self.monitor.current_state, "RED")
         args, _ = self.mock_publish.call_args
@@ -116,8 +116,8 @@ class TestFleetStatusMonitor(unittest.TestCase):
         self.monitor.current_state = "GREEN"
         self.mock_publish.reset_mock()
         
-        msg = MqttMessage(topic="OPEN-AIR/System/Status/Fleet/Complete", payload=b"invalid json")
-        self.monitor._on_scan_complete(msg)
+        message = MqttMessage(topic="OPEN-AIR/System/Status/Fleet/Complete", payload=b"invalid json")
+        self.monitor._on_scan_complete(message)
         
         self.assertEqual(self.monitor.current_state, "RED")
         args, _ = self.mock_publish.call_args

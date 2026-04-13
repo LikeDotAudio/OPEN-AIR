@@ -61,7 +61,7 @@ class HiddenVisibilityManagerMixin:
 
         # payload = {
         #     "visible": is_visible,
-        #     "ts": time.time(),
+        #     "timestamp": time.time(),
         #     "tab_name": getattr(self, "tab_name", "Unknown"),
         # }
         # self.state_mirror_engine.publish_command(

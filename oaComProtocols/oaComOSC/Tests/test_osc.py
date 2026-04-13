@@ -92,14 +92,14 @@ class TestOSCManager(unittest.TestCase):
         mock_tx_instance = self.mock_tx_class.return_value
         
         # OPERATE: Data from an external source (e.g., GUI)
-        msg = {
+        message = {
             "source": "MQTT",
             "logical_source": "GUI",
             "topic": "OPEN-AIR/Mixer/Fader",
-            "val": 1.0,
+            "value": 1.0,
             "meta": {"origin_source": "GUI"}
         }
-        self.manager._on_protocol_event(msg)
+        self.manager._on_protocol_event(message)
         
         # CHECK: Transmitted to hardware Spoke
         mock_tx_instance.send_message.assert_called_with("/test/fader", 1.0)
@@ -111,14 +111,14 @@ class TestOSCManager(unittest.TestCase):
         mock_tx_instance = self.mock_tx_class.return_value
         
         # OPERATE: Data that originally came FROM OSC
-        msg = {
+        message = {
             "source": "MQTT",
             "logical_source": "OSC",
             "topic": "OPEN-AIR/Mixer/Fader",
-            "val": 0.5,
+            "value": 0.5,
             "meta": {"origin_source": "OSC"}
         }
-        self.manager._on_protocol_event(msg)
+        self.manager._on_protocol_event(message)
         
         # CHECK: Echo suppression (should NOT call send_message)
         mock_tx_instance.send_message.assert_not_called()

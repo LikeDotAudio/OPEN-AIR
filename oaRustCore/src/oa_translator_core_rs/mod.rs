@@ -1,7 +1,7 @@
 use pyo3::prelude::*;
 use pyo3::types::PyDict;
 use serde_json::Value;
-use pythonize::{depythonize, pythonize};
+use pythonize::{depythonize_bound, pythonize};
 use std::collections::HashMap;
 use dashmap::DashMap;
 use std::sync::{Arc, Mutex};
@@ -134,20 +134,20 @@ impl WidgetRegistry {
         self.topic_map.get(&topic).map(|v| v.clone())
     }
 
-    fn all_widgets(&self, py: Python<'_>) -> PyResult<Py<PyDict>> {
-        let result = PyDict::new(py);
+    fn all_widgets<'py>(&self, py: Python<'py>) -> PyResult<Bound<'py, PyDict>> {
+        let result = PyDict::new_bound(py);
         for entry in self.widgets.iter() {
-            result.set_item(entry.key(), entry.value().clone_ref(py))?;
+            result.set_item(entry.key(), entry.value().bind(py).clone())?;
         }
-        Ok(result.unbind())
+        Ok(result)
     }
 
-    fn all_topics(&self, py: Python<'_>) -> PyResult<Py<PyDict>> {
-        let result = PyDict::new(py);
+    fn all_topics<'py>(&self, py: Python<'py>) -> PyResult<Bound<'py, PyDict>> {
+        let result = PyDict::new_bound(py);
         for entry in self.topic_map.iter() {
             result.set_item(entry.key(), entry.value().clone())?;
         }
-        Ok(result.unbind())
+        Ok(result)
     }
 }
 
@@ -182,15 +182,15 @@ impl JSONDiffer {
 
     /// Compares two dictionaries and returns a dictionary of differences.
     fn compare<'py>(&self, py: Python<'py>, old: &Bound<'py, PyDict>, new: &Bound<'py, PyDict>) -> PyResult<Bound<'py, PyDict>> {
-        let old_val: Value = depythonize(old).map_err(|e| PyErr::new::<pyo3::exceptions::PyValueError, _>(e.to_string()))?;
-        let new_val: Value = depythonize(new).map_err(|e| PyErr::new::<pyo3::exceptions::PyValueError, _>(e.to_string()))?;
+        let old_val: Value = depythonize_bound(old.clone().into_any()).map_err(|e| PyErr::new::<pyo3::exceptions::PyValueError, _>(e.to_string()))?;
+        let new_val: Value = depythonize_bound(new.clone().into_any()).map_err(|e| PyErr::new::<pyo3::exceptions::PyValueError, _>(e.to_string()))?;
         
         let mut diffs = HashMap::new();
         internal_diff_values("", &old_val, &new_val, &mut diffs);
         
-        let result = PyDict::new(py);
-        for (key, val) in diffs {
-            result.set_item(key, pythonize(py, &val).map_err(|e| PyErr::new::<pyo3::exceptions::PyRuntimeError, _>(e.to_string()))?)?;
+        let result = PyDict::new_bound(py);
+        for (key, value) in diffs {
+            result.set_item(key, pythonize(py, &value).map_err(|e| PyErr::new::<pyo3::exceptions::PyRuntimeError, _>(e.to_string()))?)?;
         }
         Ok(result)
     }

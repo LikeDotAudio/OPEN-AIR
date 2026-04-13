@@ -38,11 +38,11 @@ class TestRustIntegrity(unittest.TestCase):
                     stray_cargo_files.append(str(rel_path))
 
         if stray_cargo_files:
-            error_msg = f"❌ [FAILURE] Found {len(stray_cargo_files)} stray 'Cargo.toml' files that must be purged:\n"
+            error_message = f"❌ [FAILURE] Found {len(stray_cargo_files)} stray 'Cargo.toml' files that must be purged:\n"
             for f in stray_cargo_files:
-                error_msg += f"  - {f}\n"
-            error_msg += "💡 Hint: These legacy paths should have been cleaned by the migration script."
-            self.fail(error_msg)
+                error_message += f"  - {f}\n"
+            error_message += "💡 Hint: These legacy paths should have been cleaned by the migration script."
+            self.fail(error_message)
         else:
             print("✅ [SUCCESS] All legacy 'Cargo.toml' files have been purged.")
 
@@ -59,11 +59,11 @@ class TestRustIntegrity(unittest.TestCase):
             dirs[:] = [d for d in dirs if d not in self.ignored_dirs]
 
         if stray_target_dirs:
-            error_msg = f"❌ [FAILURE] Found {len(stray_target_dirs)} stray 'target/' build artifacts:\n"
+            error_message = f"❌ [FAILURE] Found {len(stray_target_dirs)} stray 'target/' build artifacts:\n"
             for d in stray_target_dirs:
-                error_msg += f"  - {d}\n"
-            error_msg += "💡 Hint: These are taking up massive disk space and must be purged."
-            self.fail(error_msg)
+                error_message += f"  - {d}\n"
+            error_message += "💡 Hint: These are taking up massive disk space and must be purged."
+            self.fail(error_message)
         else:
             print("✅ [SUCCESS] No loose build artifacts detected.")
 
@@ -81,11 +81,11 @@ class TestRustIntegrity(unittest.TestCase):
                         stray_so_files.append(os.path.join(rel_path, f))
 
         if stray_so_files:
-            error_msg = f"❌ [FAILURE] Found {len(stray_so_files)} loose compiled libraries:\n"
+            error_message = f"❌ [FAILURE] Found {len(stray_so_files)} loose compiled libraries:\n"
             for f in stray_so_files:
-                error_msg += f"  - {f}\n"
-            error_msg += "💡 Hint: Compiled libraries should reside only in the build core or site-packages."
-            self.fail(error_msg)
+                error_message += f"  - {f}\n"
+            error_message += "💡 Hint: Compiled libraries should reside only in the build core or site-packages."
+            self.fail(error_message)
         else:
             print("✅ [SUCCESS] No loose compiled extensions detected.")
 

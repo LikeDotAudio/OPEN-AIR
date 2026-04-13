@@ -32,8 +32,8 @@ def on_tree_double_click(tab, event):
     idx = int(cid[1:]) - 1
     if idx < 0 or idx >= len(tab.tree_headers): return
     
-    val = tab.marker_tree.item(iid, "values")[idx]
-    start_editing_cell(tab, iid, idx, initial_value=val)
+    value = tab.marker_tree.item(iid, "values")[idx]
+    start_editing_cell(tab, iid, idx, initial_value=value)
 
 def start_editing_cell(tab, item, col_idx, initial_value=""):
     """Spawns the in-place editor and sets up navigation callbacks."""

@@ -41,10 +41,10 @@ def disconnect_instrument(inst):
             matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳 Instrument connection closed. All done!", "DEBUG")
             return True
         except Exception as e:
-            error_msg = f"💳 ❌ An unexpected error occurred while disconnecting instrument: {e}."
+            error_message = f"💳 ❌ An unexpected error occurred while disconnecting instrument: {e}."
 
             if LOCAL_DEBUG:
-                logger.debug(error_msg)
+                logger.debug(error_message)
             return False
     matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳 No instrument to disconnect. Already gone!", "DEBUG")
     return False

@@ -167,19 +167,19 @@ class StandaloneOscMonitor:
         
         # Flatten value
         if len(args) == 1:
-            val = args[0]
-            if isinstance(val, float): val = round(val, 4)
+            value = args[0]
+            if isinstance(value, float): value = round(value, 4)
         else:
-            val = str(args)
+            value = str(args)
             
-        ts = datetime.now().strftime("%H:%M:%S.%f")[:-3]
+        timestamp = datetime.now().strftime("%H:%M:%S.%f")[:-3]
         
         # Schedule UI update on main thread
-        self.root.after(0, lambda: self._sync_ui(address, val, ts))
+        self.root.after(0, lambda: self._sync_ui(address, value, timestamp))
 
-    def _sync_ui(self, address, val, ts):
+    def _sync_ui(self, address, value, timestamp):
         # 1. Update Recent Activity Log (Top)
-        self.log_tree.insert("", 0, values=(ts, address, val))
+        self.log_tree.insert("", 0, values=(timestamp, address, value))
         # Keep only last 50 events
         if len(self.log_tree.get_children()) > 50:
             self.log_tree.delete(self.log_tree.get_children()[-1])
@@ -194,15 +194,15 @@ class StandaloneOscMonitor:
             
             if node_path not in self.nodes:
                 is_leaf = (i == len(parts) - 1)
-                display_val = val if is_leaf else ""
-                display_ts = ts if is_leaf else ""
+                display_val = value if is_leaf else ""
+                display_ts = timestamp if is_leaf else ""
                 
                 node_id = self.tree.insert(parent, "end", text=part, values=(display_val, display_ts), open=True)
                 self.nodes[node_path] = node_id
             else:
                 if i == len(parts) - 1:
                     node_id = self.nodes[node_path]
-                    self.tree.item(node_id, values=(val, ts))
+                    self.tree.item(node_id, values=(value, timestamp))
             
             parent = self.nodes[node_path]
 

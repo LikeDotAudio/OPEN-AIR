@@ -11,14 +11,7 @@ import os
 # Add the module path so we can import the rust core
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-# ⚡ OPTIMIZATION: Ensure the native module is compiled before import
-try:
-    from oaAudioMixer.Core.oaAudioMixer_rs.compiler_hook import ensure_compiled
-    ensure_compiled()
-except ImportError:
-    pass # Hook might be missing if path setup is weird, but we try
-
-import oaaudiomixer_rs as mixer_core
+from oaRustCore import oa_audio_mixer_rs as oaaudiomixer_rs
 
 class TestAudioMixerSmoke(unittest.TestCase):
     def test_core_loading(self):

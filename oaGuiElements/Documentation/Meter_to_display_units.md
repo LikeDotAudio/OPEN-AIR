@@ -8,7 +8,7 @@
 data_graphing/Meter_to_display_units.py
 
 A Tkinter widget that displays a numerical value with progress bars.
-Now publishes standard 'val' envelopes to the widget's root topic.
+Now publishes standard 'value' envelopes to the widget's root topic.
 
 Author: Anthony Peter Kuzub
 
@@ -27,7 +27,7 @@ Version 20250821.200641.1
 ### Classes
 #### `class HorizontalMeterWithText`
 A Tkinter widget that displays a numerical value with progress bars.
-Now publishes standard 'val' envelopes to the widget's root topic.
+Now publishes standard 'value' envelopes to the widget's root topic.
 
 ##### `__init__(self, parent, config, base_mqtt_topic_from_path, widget_id, **kwargs)`
 [TODO: Brief verb-first description. Start with action (e.g., 'Allocates...',
@@ -60,7 +60,7 @@ Callback for when meter_value_var changes (from internal or MQTT).
 
 #### `class VerticalMeter`
 A Tkinter widget to simulate a 4-channel vertical meter display.
-Now publishes standard 'val' envelopes to the widget's root topic.
+Now publishes standard 'value' envelopes to the widget's root topic.
 
 ##### `__init__(self, parent, config, base_mqtt_topic_from_path, widget_id, **kwargs)`
 [TODO: Brief verb-first description. Start with action (e.g., 'Allocates...',

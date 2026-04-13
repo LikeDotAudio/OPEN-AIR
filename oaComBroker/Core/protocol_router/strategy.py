@@ -27,17 +27,17 @@
 
 from .constants import SINK_STRATEGIES, app_constants
 
-def calculate_strategy(msg):
+def calculate_strategy(message):
     """
     Determines the routing strategy for a message using emoji tokens.
     
     This function analyzes the message origin and logical source to assign 
     a destination strategy based on the dynamic N x N routing matrix.
     """
-    topic = msg.get("topic")
-    source = msg["source"]
-    logical_source = msg.get("logical_source", source)
-    full_id = msg.get("full_id")
+    topic = message.get("topic")
+    source = message["source"]
+    logical_source = message.get("logical_source", source)
+    full_id = message.get("full_id")
     
     # --- Loop Prevention: Network Reflection Rejection ---
     # ⚡ V3.1.21 REFLECTION PURGE:
@@ -51,7 +51,7 @@ def calculate_strategy(msg):
     from .manager import ProtocolRouter
     router = ProtocolRouter.get_instance()
     
-    strategy = router.calculate_strategy_for_msg(logical_source, topic)
+    strategy = router.calculate_strategy_for_message(logical_source, topic)
     
     if not strategy:
         # Default fallback for untracked sources
@@ -59,7 +59,7 @@ def calculate_strategy(msg):
         
     return strategy
 
-def calculate_ui_tags(msg, local_guid):
+def calculate_ui_tags(message, local_guid):
     """
     Pre-calculates metadata tags for UI treeview categorization.
     
@@ -67,15 +67,15 @@ def calculate_ui_tags(msg, local_guid):
     origin, or functional type (e.g., MUTATION, SPLINK).
     
     Args:
-        msg (dict): The normalized message packet.
+        message (dict): The normalized message packet.
         local_guid (str): The GUID of the local instance.
         
     Returns:
         list[str]: A list of uppercase tag tokens.
     """
-    logical_source = msg.get("logical_source", msg["source"])
-    is_local = (msg["guid"] == local_guid)
-    is_mutation = msg["meta"].get("mutation", False)
+    logical_source = message.get("logical_source", message["source"])
+    is_local = (message["guid"] == local_guid)
+    is_mutation = message["meta"].get("mutation", False)
     
     tags = []
     
@@ -94,7 +94,7 @@ def calculate_ui_tags(msg, local_guid):
     if is_mutation:
         # Flag hardware control events (YAK).
         tags.append("MUTATION")
-    if msg["meta"].get("splink_active") or msg["meta"].get("splinker_source"): 
+    if message["meta"].get("splink_active") or message["meta"].get("splinker_source"): 
         # Flag patched/linked parameters.
         tags.append("SPLINK")
         

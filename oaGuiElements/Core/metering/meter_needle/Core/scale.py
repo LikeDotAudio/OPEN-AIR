@@ -12,10 +12,8 @@ from oaGuiElements.Core.metering.meter_needle.constants import (
     SCALE_SUB_TICK_WIDTH, SCALE_MAIN_TICK_WIDTH
 )
 
-from oaGuiElements.Methods.oaProceduralArt_rs.compiler_hook import ensure_compiled
 try:
-    ensure_compiled()
-    from oaproceduralart_rs import ProceduralArtEngine
+    from oaRustCore.oa_procedural_art_rs import ProceduralArtEngine
     _rust_engine = ProceduralArtEngine()
     HAS_RUST = True
 except Exception as e:

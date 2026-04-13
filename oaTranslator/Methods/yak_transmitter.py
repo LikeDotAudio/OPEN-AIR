@@ -1,8 +1,8 @@
-# Methods/yak_tx.py
+# oaTranslator/Methods/yak_transmitter.py
 # Author: Anthony Peter Kuzub
-# Version: 20260218.1
+# Version: 20260413.0010.1
 #
-# Description: This file (manager_yak_tx.py) is responsible for transmitting the final SCPI command to the device via the ScpiDispatcher.
+# Description: This file (yak_transmitter.py) is responsible for transmitting the final SCPI command to the device via the ScpiDispatcher.
 
 import os
 from oaLogging.Methods.matrix_gate import matrix_log
@@ -15,7 +15,7 @@ from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
 
-class YakTxManager:
+class YakTransmitterManager:
     """
     Transmits SCPI commands to the instrument using the ScpiDispatcher.
     """

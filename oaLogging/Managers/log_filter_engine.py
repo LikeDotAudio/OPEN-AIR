@@ -68,15 +68,15 @@ class LogFilterEngine:
         self.logger.info(f"Setting up MQTT subscription for dynamic log filtering on topic: {self.topic}")
         self.mqtt_router.subscribe_to_topic(self.topic, self.handle_filter_update)
 
-    def handle_filter_update(self, msg: MqttMessage):
+    def handle_filter_update(self, message: MqttMessage):
         """
         Handles incoming MQTT messages for log filter updates.
 
         Args:
-            msg (MqttMessage): The standardized MQTT message container.
+            message (MqttMessage): The standardized MQTT message container.
         """
         try:
-            filter_rules = msg.get_json_payload()
+            filter_rules = message.get_json_payload()
             self.logger.debug(f"Received log filter update: {filter_rules}")
 
             # Validate and update filters
@@ -187,8 +187,8 @@ if __name__ == "__main__":
     if _log_filter_engine:
         mock_logger_for_engine.info("Simulating MQTT message...")
         test_payload = '{"Manager.Display": "WARNING", "Worker.Logic": "TRACE"}'
-        mock_msg = MqttMessage(topic="OPEN-AIR/system/logger/filter/set", payload=test_payload)
-        _log_filter_engine.handle_filter_update(mock_msg)
+        mock_message = MqttMessage(topic="OPEN-AIR/system/logger/filter/set", payload=test_payload)
+        _log_filter_engine.handle_filter_update(mock_message)
 
     # Add a message that should be filtered out by the simulated rules
     mock_logger_for_engine.trace("This is a trace message for Worker.Logic (should be filtered out by simulated rule)")

@@ -200,8 +200,8 @@ class PresetPusherWorker:
         attenuation = preset_dict.get("Attenuation")
         preamp = preset_dict.get("PreAmp")
         if all(
-            val is not None and val.lower() != "null"
-            for val in [ref_level, attenuation, preamp]
+            value is not None and value.lower() != "null"
+            for value in [ref_level, attenuation, preamp]
         ):
             self.mqtt_controller.publish_message(
                 topic=AMP_REF_LEVEL, subtopic="", value=ref_level
@@ -223,7 +223,7 @@ class PresetPusherWorker:
 
         # --- Conditional: Set Trace Modes ---
         trace_modes = [preset_dict.get(f"Trace{i}Mode") for i in range(1, 5)]
-        if all(val is not None and val.lower() != "null" for val in trace_modes):
+        if all(value is not None and value.lower() != "null" for value in trace_modes):
             self.mqtt_controller.publish_message(
                 topic=TRACE_MODE_1_INPUT, subtopic="", value=trace_modes[0]
             )

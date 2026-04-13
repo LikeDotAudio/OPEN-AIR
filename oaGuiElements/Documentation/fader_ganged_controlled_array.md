@@ -169,12 +169,12 @@ No class description provided.
 **Side Effects & Thread-Safety:**
 - [TODO: Note any locks, I/O, or global state.]
 
-##### `_get_y_from_val(self, val)`
+##### `_get_y_from_val(self, value)`
 [TODO: Brief verb-first description. Start with action (e.g., 'Allocates...',
 'Parses...').]
 
 **Parameters:**
-- `val`: [TODO: Detail meaning, valid ranges, special cases]
+- `value`: [TODO: Detail meaning, valid ranges, special cases]
 
 **Returns:**
 - [TODO: Define success and error returns.]

@@ -26,8 +26,8 @@ Version 20250821.200641.1
 
 ### Global Functions
 #### `should_update(incoming_topic, incoming_payload, cached_state)`
-Compare timestamps (ts). If incoming > cached, return True.
-If ts is missing (or in cache missing), compare the entire payload for parity.
+Compare timestamps (timestamp). If incoming > cached, return True.
+If timestamp is missing (or in cache missing), compare the entire payload for parity.
 
 **Parameters:**
 - `incoming_topic`: [TODO: Detail the precise meaning, valid ranges, and special cases]

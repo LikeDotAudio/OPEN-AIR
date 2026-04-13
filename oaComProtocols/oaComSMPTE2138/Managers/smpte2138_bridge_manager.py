@@ -127,7 +127,7 @@ class SMPTE2138BridgeManager:
         matrix_log("comms", "smpte2138", "_setup_subscriptions", "👂 [LISTEN] Bridge active and listening for OPEN-AIR/# Actions and Control.", "DEBUG")
 
 
-    def handle_router_event(self, topic, val, meta=None):
+    def handle_router_event(self, topic, value, meta=None):
         """
         Direct entry point from ProtocolRouter dispatch.
         Bypasses raw MQTT subscription for higher reliability.
@@ -150,14 +150,14 @@ class SMPTE2138BridgeManager:
             return
             
         # ⚡ ENHANCEMENT: Handle enriched payloads (e.g., from MIDI or REST)
-        # If val is a dict, extract the primary numeric or boolean value.
-        real_val = val
-        if isinstance(val, dict) and "val" in val:
-            real_val = val["val"]
+        # If value is a dict, extract the primary numeric or boolean value.
+        real_val = value
+        if isinstance(value, dict) and "value" in value:
+            real_val = value["value"]
             # Merge dictionary into metadata if it's not already there
             meta = meta or {}
-            for k, v in val.items():
-                if k != "val": meta[k] = v
+            for k, v in value.items():
+                if k != "value": meta[k] = v
 
         meta = meta or {}
         bin_id = meta.get("bin_id")
@@ -187,7 +187,7 @@ class SMPTE2138BridgeManager:
         
         # ⚡ DEBUG: Log resolved OID
         if _is_debug():
-            matrix_log("comms", "smpte2138", "handle_router_event", f"📝 [ST2138-OID] oid={oid} val={real_val} type={type(real_val)}", "DEBUG")
+            matrix_log("comms", "smpte2138", "handle_router_event", f"📝 [ST2138-OID] oid={oid} value={real_val} type={type(real_val)}", "DEBUG")
 
         try:
             if isinstance(real_val, (int, float, bool)):
@@ -252,25 +252,25 @@ class SMPTE2138BridgeManager:
         )
         matrix_log("comms", "smpte2138", "_publish_command", f"🚀📤📤 [SMPTE2138] Published COMMAND to {smpte2138_topic} ({value})", "INFO")
 
-    def _on_remote_control(self, msg):
+    def _on_remote_control(self, message):
         """Processes remote start/stop commands."""
         try:
-            if not msg.payload: return
-            data = msg.get_json_payload()
+            if not message.payload: return
+            data = message.get_json_payload()
             
             if "active" in data:
                 new_state = bool(data["active"])
                 
                 # 🛡️ RESILIENCE: If it's a retained message and it's trying to disable us, 
                 # we ignore it to ensure we start in an ACTIVE state.
-                if msg.retain and not new_state:
+                if message.retain and not new_state:
                     matrix_log("comms", "smpte2138", "_on_remote_control", "🛡️ [BRIDGE] Ignoring retained DISABLE command on startup.", "DEBUG")
                     return
 
                 if new_state != self.bridge_enabled:
                     self.bridge_enabled = new_state
-                    status_msg = "ENABLED" if self.bridge_enabled else "DISABLED"
-                    matrix_log("comms", "smpte2138", "_on_remote_control", f"🔄 [BRIDGE] Bridge translation is now {status_msg}.", "INFO")
+                    status_message = "ENABLED" if self.bridge_enabled else "DISABLED"
+                    matrix_log("comms", "smpte2138", "_on_remote_control", f"🔄 [BRIDGE] Bridge translation is now {status_message}.", "INFO")
                     self._publish_bridge_status()
         except Exception as e:
             SMPTE2138_LOGGER.error(f"❌ [BRIDGE] Remote control failure: {e}")
@@ -280,7 +280,7 @@ class SMPTE2138BridgeManager:
         status_payload = {
             "active": self.bridge_enabled,
             "status": "RUNNING" if self.bridge_enabled else "STOPPED",
-            "ts": time.time()
+            "timestamp": time.time()
         }
         self.mqtt.publish(
             topic="OPEN-AIR/System/Status/SMPTE2138/Bridge",
@@ -289,25 +289,25 @@ class SMPTE2138BridgeManager:
             retain=True
         )
 
-    def _on_internal_action(self, msg):
+    def _on_internal_action(self, message):
         """Fallback handler for raw MQTT actions."""
         if not self.bridge_enabled: return
         
         # ⚡ V3.1.22 FEEDBACK LOOP PREVENTION:
         # Ignore messages that are explicitly linked feedback to prevent loops.
         try:
-            if not msg.payload: return
-            data = msg.get_json_payload()
+            if not message.payload: return
+            data = message.get_json_payload()
             
             # Extract actual value if it's a dict
-            val = data
+            value = data
             meta = {}
             if isinstance(data, dict):
-                if data.get("msg_type") == "LINK_FEEDBACK":
+                if data.get("message_type") == "LINK_FEEDBACK":
                     return
-                val = data.get("val", data)
+                value = data.get("value", data)
                 meta = data
             
-            self.handle_router_event(msg.topic, val, meta)
+            self.handle_router_event(message.topic, value, meta)
         except Exception as e:
             SMPTE2138_LOGGER.error(f"❌ [BRIDGE] MQTT Internal action handling failure: {e}")

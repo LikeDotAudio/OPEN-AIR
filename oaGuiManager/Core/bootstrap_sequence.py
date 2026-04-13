@@ -65,10 +65,10 @@ class AsyncBootstrapEngine:
             local_debug = False
             try:
                 if hasattr(self.app_constants, 'LOCAL_DEBUG'):
-                    val = getattr(self.app_constants, 'LOCAL_DEBUG')
+                    value = getattr(self.app_constants, 'LOCAL_DEBUG')
                     # If it's a MagicMock, it will be truthy but not True.
                     # We only want to trigger exception() if it's explicitly True.
-                    if val is True:
+                    if value is True:
                         local_debug = True
             except: pass
 
@@ -110,8 +110,8 @@ class AsyncBootstrapEngine:
 
     def _setup_control_links(self, sub_router, splinker):
         """Sets up specialized MQTT control topics for internal systems like Splinker."""
-        def splinker_mqtt_wrapper(msg): 
-            splinker.handle_mqtt_command(topic=msg.topic, payload=msg.payload)
+        def splinker_mqtt_wrapper(message): 
+            splinker.handle_mqtt_command(topic=message.topic, payload=message.payload)
         
         sub_router.subscribe_to_topic(
             topic_filter="OPEN-AIR/System/Control/Splinker/#", 

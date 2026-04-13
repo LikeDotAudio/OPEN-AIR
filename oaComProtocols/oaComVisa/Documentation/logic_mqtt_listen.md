@@ -60,7 +60,7 @@ Processes a request to search for available VISA instruments.
 
 **Parameters:**
 - `topic`: The MQTT topic where the trigger was received.
-- `payload`: JSON bytes containing a "val" key (True to trigger search).
+- `payload`: JSON bytes containing a "value" key (True to trigger search).
 
 **Returns:**
 - None.

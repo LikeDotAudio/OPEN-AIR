@@ -63,7 +63,7 @@ impl CMDPMath {
         let cos_t = t_ang_rad.cos();
         let sin_t = t_ang_rad.sin();
 
-        let result = PyDict::new(py);
+        let result = PyDict::new_bound(py);
 
         // 1. Hitbox Points
         let mut hitbox_pts = Vec::with_capacity(8);
@@ -75,9 +75,9 @@ impl CMDPMath {
         result.set_item("hitbox", hitbox_pts)?;
 
         // 2. Track Points
-        let ts = self.calculate_rotated_point(center_x, center_y - track_length/2.0, center_x, center_y, cos_t, sin_t);
+        let timestamp = self.calculate_rotated_point(center_x, center_y - track_length/2.0, center_x, center_y, cos_t, sin_t);
         let te = self.calculate_rotated_point(center_x, center_y + track_length/2.0, center_x, center_y, cos_t, sin_t);
-        result.set_item("track", vec![ts.0, ts.1, te.0, te.1])?;
+        result.set_item("track", vec![timestamp.0, timestamp.1, te.0, te.1])?;
 
         // 3. Tick Points
         let mut tick_pts = Vec::with_capacity(tick_count * 4);

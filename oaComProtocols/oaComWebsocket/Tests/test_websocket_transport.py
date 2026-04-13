@@ -51,7 +51,7 @@ class TestWebSocketTransport(unittest.TestCase):
         self.transport._is_connected = True
         self.transport.ws_app = MagicMock()
         
-        test_payload = {"val": 42, "topic": "test/path"}
+        test_payload = {"value": 42, "topic": "test/path"}
         
         # OPERATE
         self.transport.publish("test/path", test_payload)
@@ -62,13 +62,13 @@ class TestWebSocketTransport(unittest.TestCase):
     def test_spoke_to_hub_ingest(self):
         """OPERATE: Simulate incoming WebSocket data (Spoke -> Hub)."""
         # BUILD
-        test_msg = json.dumps({"val": 100, "topic": "remote/fader"})
+        test_message = json.dumps({"value": 100, "topic": "remote/fader"})
         
         # OPERATE: Manually trigger the _on_message callback
-        self.transport._on_message(None, test_msg)
+        self.transport._on_message(None, test_message)
         
         # CHECK: Data passed to the system handler (Hub)
-        self.mock_handler.assert_called_with("websocket", {"val": 100, "topic": "remote/fader"})
+        self.mock_handler.assert_called_with("websocket", {"value": 100, "topic": "remote/fader"})
 
 if __name__ == "__main__":
     unittest.main()

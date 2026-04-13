@@ -81,8 +81,8 @@ def _check_host(ip):
             if result == 0:
                 is_gateway = False
                 try:
-                    cfg = Config.get_instance()
-                    url = f"{cfg.VISA_PROBE_PROTOCOL}://{ip}/{cfg.VISA_PROBE_PATH}"
+                    configuration = Config.get_instance()
+                    url = f"{configuration.VISA_PROBE_PROTOCOL}://{ip}/{configuration.VISA_PROBE_PATH}"
                     with urllib.request.urlopen(url, timeout=1) as resp:
                         if "E5810" in resp.read().decode("utf-8", errors="ignore"):
                             is_gateway = True
@@ -124,9 +124,9 @@ def discover_ip_devices() -> Tuple[List[str], List[str]]:
         futures = [executor.submit(_check_host, ip) for ip in targets_to_scan]
         for future in futures:
             try:
-                res = future.result()
-                if res:
-                    ip, type_ = res
+                result = future.result()
+                if result:
+                    ip, type_ = result
                     if type_ == "GATEWAY": gateways.append(ip)
                     else: dedicated.append(ip)
             except Exception as e:

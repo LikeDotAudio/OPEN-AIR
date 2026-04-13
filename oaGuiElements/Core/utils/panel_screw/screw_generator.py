@@ -17,10 +17,8 @@ from oaLogging.Core.logger import initialize_logging, set_log_directory, builder
 from loguru import logger
 
 from oaGuiManager.Core.factory.asset_cache import AssetCacheManager
-from oaGuiElements.Methods.oaProceduralArt_rs.compiler_hook import ensure_compiled
 try:
-    ensure_compiled()
-    from oaproceduralart_rs import ProceduralArtEngine
+    from oaRustCore.oa_procedural_art_rs import ProceduralArtEngine
     _rust_engine = ProceduralArtEngine()
     HAS_RUST = True
 except Exception as e:

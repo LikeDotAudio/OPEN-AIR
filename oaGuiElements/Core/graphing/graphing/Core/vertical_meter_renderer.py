@@ -60,6 +60,6 @@ class VerticalMeterRenderer(ttk.Frame):
 
             if self.state_mirror_engine and not getattr(self.state_mirror_engine, '_silent_update', False):
                 topic = get_topic(self.state_mirror_engine.base_topic, self.base_mqtt_topic, self.widget_id)
-                payload = {"val": vals, "ts": time.time(), "GUID": self.GUID, "src": "VerticalMeter"}
+                payload = {"value": vals, "timestamp": time.time(), "GUID": self.GUID, "src": "VerticalMeter"}
                 publish_payload(topic, orjson.dumps(payload).decode(), retain=True)
         except Exception as e: matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"❌ Error processing array: {e}", level="DEBUG")

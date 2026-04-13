@@ -52,8 +52,8 @@ class MqttFleetBridge:
     def is_connected(self) -> bool:
         return self.mqtt_manager.is_connected() if self.mqtt_manager else False
 
-    def _on_scan_message(self, msg: MqttMessage):
-        payload = msg.decode_payload()
+    def _on_scan_message(self, message: MqttMessage):
+        payload = message.decode_payload()
         if payload == "TRIGGER":
             matrix_log("comms", "visa", "_on_scan_message", "MQTT Bridge received Scan Trigger!", "DEBUG")
             if self.on_scan_trigger:

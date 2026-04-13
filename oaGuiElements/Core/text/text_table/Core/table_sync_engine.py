@@ -48,9 +48,9 @@ class TableSyncEngine:
             self.csv_svc.save(cols, self.item_map)
         except Exception as e: self.logger.error(f"❌ Full table update failed: {e}")
 
-    def update_incremental(self, msg):
+    def update_incremental(self, message):
         """Processes a single row update or pulse event."""
-        topic, payload = msg.topic, msg.payload
+        topic, payload = message.topic, message.payload
         try:
             data = payload if isinstance(payload, (dict, list)) else orjson.loads(payload)
         except Exception as e:

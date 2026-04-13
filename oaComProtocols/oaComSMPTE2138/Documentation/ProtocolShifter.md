@@ -10,9 +10,9 @@
 *   **Example**:
     ```json
     {
-      "val": 127,
+      "value": 127,
       "source": "oaComSMPTE2138",
-      "ts": 1775681977.47,
+      "timestamp": 1775681977.47,
       "meta": { "msg_type": "SPLICE_ACTION", "origin_source": "oaComSMPTE2138" }
     }
     ```

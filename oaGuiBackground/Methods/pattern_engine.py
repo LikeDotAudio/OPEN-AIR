@@ -6,11 +6,9 @@
 
 import logging
 from PIL import Image
-from .oaPatternEngine_rs.compiler_hook import ensure_compiled
 
 try:
-    ensure_compiled()
-    from .oaPatternEngine_rs.oapatternengine_rs import PatternEngine as RustPatternEngine
+    from oaRustCore.oa_pattern_engine_rs import PatternEngine as RustPatternEngine
     HAS_RUST = True
 except Exception as e:
     logging.error(f"oaGuiBackground: Failed to load Rust Pattern Engine: {e}")

@@ -126,14 +126,14 @@ class SNMPManager:
         if self.run_bridge and self.context.state_cache_manager:
             if topic and "Monitor/SNMP" in topic: return
             monitor_payload = {
-                "val": value, "source": "SNMP", "oid": oid,
-                "topic": topic, "direction": direction, "ts": time.time(), "metadata": metadata
+                "value": value, "source": "SNMP", "oid": oid,
+                "topic": topic, "direction": direction, "timestamp": time.time(), "metadata": metadata
             }
             self.context.state_cache_manager.handle_external_update(
                 "OPEN-AIR/System/Monitor/SNMP/Activity", monitor_payload, source="SNMP"
             )
 
-    def handle_protocol_event(self, msg):
+    def handle_protocol_event(self, message):
         """
         Processes unified messages from the ProtocolRouter.
         Ensures SNMP state is a direct reflection of MQTT traffic.
@@ -142,29 +142,29 @@ class SNMPManager:
             if not self._running: return
             
             # ⚡ REFLECTION: Only update our internal state if the message originated from MQTT
-            source = msg.get("source", "UNKNOWN").upper()
+            source = message.get("source", "UNKNOWN").upper()
             if source == "MQTT":
                 # ⚡ ANTI-FEEDBACK SPEC: Drop messages that we published to prevent echo loops
-                meta = msg.get("meta", {})
+                meta = message.get("meta", {})
                 if meta.get("origin_source") in ["oaComSNMP", "SNMP"]:
                     return
 
-                topic = msg.get("topic")
+                topic = message.get("topic")
                 if topic:
                     # Update local state mirror with the normalized router packet
-                    self._mqtt_state[topic] = msg
+                    self._mqtt_state[topic] = message
 
     def start(self, display_root=None):
         with self._state_lock:
             if self._running: return
             self._running = True
         
-        cfg = Config.get_instance()
-        self._socket_info = f"{get_local_ip()}:{cfg.SNMP_PORT} (System Daemon Bridge)"
+        configuration = Config.get_instance()
+        self._socket_info = f"{get_local_ip()}:{configuration.SNMP_PORT} (System Daemon Bridge)"
         
         # ⚡ STANDALONE: The OID map source is now decoupled from the protocol logic.
         # We check for an explicit display_root, then a config override, then fallback.
-        oid_source = display_root or getattr(cfg, "OID_MAP_SOURCE", None)
+        oid_source = display_root or getattr(configuration, "OID_MAP_SOURCE", None)
         
         if oid_source and os.path.exists(oid_source):
             initialize_oid_map(oid_source)
@@ -199,19 +199,19 @@ class SNMPManager:
     def _start_specifics(self, router):
         pass
 
-    def _handle_network_activity(self, msg):
+    def _handle_network_activity(self, message):
         try:
-            if not msg.payload:
+            if not message.payload:
                 return
 
             import orjson
-            payload = msg.payload.decode() if isinstance(msg.payload, bytes) else msg.payload
+            payload = message.payload.decode() if isinstance(message.payload, bytes) else message.payload
             data = orjson.loads(payload)
-            synthetic_msg = {
-                "source": "MQTT", "logical_source": "SNMP", "topic": msg.topic,
-                "val": data, "meta": data.get("metadata", {})
+            synthetic_message = {
+                "source": "MQTT", "logical_source": "SNMP", "topic": message.topic,
+                "value": data, "meta": data.get("metadata", {})
             }
-            self.handle_protocol_event(synthetic_msg)
+            self.handle_protocol_event(synthetic_message)
         except Exception as e:
             if is_debug_allowed("comms", "snmp"): snmp_logger.error(f"❌ [SNMP-UI] Failed to parse network activity: {e}")
 
@@ -241,7 +241,7 @@ class SNMPManager:
         self.state_persister.stop()
         self.log_monitor.stop()
 
-    def publish(self, topic, val, meta=None):
+    def publish(self, topic, value, meta=None):
         pass
 
     def get_mib_content(self):
@@ -277,30 +277,30 @@ class SNMPObserver(SNMPManager):
         super().__init__(context)
         self.run_bridge = False
         
-    def handle_protocol_event(self, msg):
+    def handle_protocol_event(self, message):
         # 1. Update internal state (reflection)
-        super().handle_protocol_event(msg)
+        super().handle_protocol_event(message)
         
         with self._state_lock:
             if not self._running: return
 
-        source = msg.get("source", "UNKNOWN").upper()
-        logical_source = msg.get("logical_source", source).upper()
-        topic = str(msg.get("topic", ""))
-        val = msg.get("val")
-        meta = msg.get("meta", {})
+        source = message.get("source", "UNKNOWN").upper()
+        logical_source = message.get("logical_source", source).upper()
+        topic = str(message.get("topic", ""))
+        value = message.get("value")
+        meta = message.get("meta", {})
 
         if logical_source == "SNMP":
-            if topic == "OPEN-AIR/System/Monitor/SNMP/Activity" and isinstance(val, dict):
-                direction = val.get("direction", "RX")
-                oid = val.get("oid", "unknown")
-                real_val = val.get("val")
-                real_topic = val.get("topic")
-                metadata = val.get("metadata")
+            if topic == "OPEN-AIR/System/Monitor/SNMP/Activity" and isinstance(value, dict):
+                direction = value.get("direction", "RX")
+                oid = value.get("oid", "unknown")
+                real_val = value.get("value")
+                real_topic = value.get("topic")
+                metadata = value.get("metadata")
                 self._notify_monitor(direction, oid, real_val, real_topic, metadata)
             elif topic != "OPEN-AIR/System/Monitor/SNMP/Activity":
                 oid = meta.get("oid", topic.split("/")[-1])
-                self._notify_monitor("RX", oid, val, topic, meta)
+                self._notify_monitor("RX", oid, value, topic, meta)
 
     def _start_specifics(self, router):
         if self.context.subscriber_router:
@@ -316,9 +316,9 @@ class SNMPBridge(SNMPManager):
         self.run_bridge = True
         self.state_persister.run_bridge = True
 
-    def handle_protocol_event(self, msg):
+    def handle_protocol_event(self, message):
         # Update internal state (reflection)
-        super().handle_protocol_event(msg)
+        super().handle_protocol_event(message)
 
     def _start_specifics(self, router):
         try:
@@ -344,7 +344,7 @@ class SNMPBridge(SNMPManager):
         except Exception as e:
             snmp_logger.error(f"SNMP Bridge Start Failed: {e}")
 
-    def _handle_mqtt_command(self, msg):
-        if "GenerateScript" in msg.topic:
+    def _handle_mqtt_command(self, message):
+        if "GenerateScript" in message.topic:
             self.tree_builder.generate_master_script()
             self._publish_status(force_script=True)

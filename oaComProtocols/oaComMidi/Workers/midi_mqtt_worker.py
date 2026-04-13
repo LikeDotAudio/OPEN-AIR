@@ -71,32 +71,32 @@ class MidiMqttWorker:
         else:
             logger.error(f"📡 [MIDI-MQTT] Connection failed with code {rc}")
 
-    def _on_message(self, client, userdata, msg):
+    def _on_message(self, client, userdata, message):
         try:
-            if not msg.payload:
+            if not message.payload:
                 return
 
-            topic = msg.topic
-            payload = orjson.loads(msg.payload)
+            topic = message.topic
+            payload = orjson.loads(message.payload)
             
             # ⚡ ECHO PREVENTION: Identify if this message was authored by the local instance.
             meta = payload.get("meta", {}) if isinstance(payload, dict) else {}
-            msg_src_id = meta.get("src") or meta.get("full_id")
-            if msg_src_id == self.config.FULL_INSTANCE_ID:
+            message_src_id = meta.get("src") or meta.get("full_id")
+            if message_src_id == self.config.FULL_INSTANCE_ID:
                 return
 
             matrix_log("comms", "midi", "_on_message", f"📡 [MIDI-MQTT] Message RX: {topic}", "TRACE")
             
             # Forward to MidiManager to handle as an external event
             # Use 'MIDI-MQTT' to bypass the 'MQTT' echo prevention check in MidiManager
-            event_msg = {
+            event_message = {
                 "topic": topic,
-                "val": payload.get("val") if isinstance(payload, dict) else payload,
+                "value": payload.get("value") if isinstance(payload, dict) else payload,
                 "meta": meta,
                 "source": "MIDI-MQTT",
                 "logical_source": meta.get("origin_source", "MQTT") 
             }
-            self.midi_manager._on_protocol_event(event_msg)
+            self.midi_manager._on_protocol_event(event_message)
             
         except Exception as e:
             logger.error(f"📡 [MIDI-MQTT] Error processing MQTT message: {e}")
@@ -112,7 +112,7 @@ class MidiMqttWorker:
             m["full_id"] = self.config.FULL_INSTANCE_ID
             
             full_payload = {
-                "val": payload,
+                "value": payload,
                 "meta": m
             }
             

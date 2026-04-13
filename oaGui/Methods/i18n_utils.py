@@ -32,8 +32,8 @@ def get_text(data, fallback=""):
         return data["En"]
     
     # 3. Try any available non-empty value
-    for val in data.values():
-        if val:
-            return val
+    for value in data.values():
+        if value:
+            return value
             
     return fallback

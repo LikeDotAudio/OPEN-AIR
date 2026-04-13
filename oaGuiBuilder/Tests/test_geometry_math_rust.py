@@ -12,7 +12,7 @@ class TestGeometryMathRust(unittest.TestCase):
     def test_rust_normalize_value(self):
         """Test value normalization via Rust."""
         try:
-            import oageometrymath_rs
+            from oaRustCore import oa_geometry_math_rs as oageometrymath_rs
         except ImportError:
             self.skipTest("Rust oageometrymath_rs not installed.")
 
@@ -25,7 +25,7 @@ class TestGeometryMathRust(unittest.TestCase):
     def test_rust_rotate_point(self):
         """Test point rotation via Rust."""
         try:
-            import oageometrymath_rs
+            from oaRustCore import oa_geometry_math_rs as oageometrymath_rs
         except ImportError:
             self.skipTest("Rust oageometrymath_rs not installed.")
 
@@ -38,7 +38,7 @@ class TestGeometryMathRust(unittest.TestCase):
     def test_rust_get_position(self):
         """Test polar to cartesian conversion via Rust."""
         try:
-            import oageometrymath_rs
+            from oaRustCore import oa_geometry_math_rs as oageometrymath_rs
         except ImportError:
             self.skipTest("Rust oageometrymath_rs not installed.")
 
@@ -50,7 +50,7 @@ class TestGeometryMathRust(unittest.TestCase):
     def test_rust_get_angle(self):
         """Test cartesian to polar angle conversion via Rust."""
         try:
-            import oageometrymath_rs
+            from oaRustCore import oa_geometry_math_rs as oageometrymath_rs
         except ImportError:
             self.skipTest("Rust oageometrymath_rs not installed.")
 

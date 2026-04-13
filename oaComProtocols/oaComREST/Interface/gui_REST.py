@@ -165,7 +165,7 @@ class RestDashboard(tk.Frame, TransparencyMixin):
         help_text.insert(tk.END, "   GET http://HOST:PORT/PATH/TO/TOPIC\n\n")
         help_text.insert(tk.END, "2. SETTING STATE:\n")
         help_text.insert(tk.END, "   POST http://HOST:PORT/PATH/TO/TOPIC\n")
-        help_text.insert(tk.END, "   Body: { \"val\": NEW_VALUE }\n")
+        help_text.insert(tk.END, "   Body: { \"value\": NEW_VALUE }\n")
         help_text.tag_configure("bold", foreground="#ffffff", font=("Courier", 10, "bold"))
         help_text.configure(state="disabled")
 
@@ -206,14 +206,14 @@ class RestDashboard(tk.Frame, TransparencyMixin):
 
     def _add_log_entry(self, method, path, status_code, payload=None):
         now = datetime.datetime.now()
-        ts = now.strftime("%H:%M:%S.%f")[:-3]
+        timestamp = now.strftime("%H:%M:%S.%f")[:-3]
         
         tag = "2xx"
         if 400 <= status_code < 500: tag = "4xx"
         elif status_code >= 500: tag = "5xx"
         
         display_payload = str(payload) if payload else "-"
-        self.tree.insert("", 0, values=(ts, method, path, status_code, display_payload), tags=(tag,))
+        self.tree.insert("", 0, values=(timestamp, method, path, status_code, display_payload), tags=(tag,))
         
         if len(self.tree.get_children()) > 50:
             self.tree.delete(self.tree.get_children()[-1])

@@ -10,19 +10,19 @@ from .handle_learn import handle_learn
 from .handle_teach import handle_teach
 from .handle_panic import handle_panic
 
-def process_router_event(self, msg):
+def process_router_event(self, message):
     """
     Main entry point for events entering the Splinker module.
     RUST OPTIMIZED: Uses SplinkRegistry for matching and loop prevention.
     """
-    topic = msg.get("topic")
-    val = msg.get("val")
-    ts = msg.get("ts", int(time.time() * 1000))
-    source = msg.get("origin_source", "UNKNOWN")
+    topic = message.get("topic")
+    value = message.get("value")
+    timestamp = message.get("timestamp", int(time.time() * 1000))
+    source = message.get("origin_source", "UNKNOWN")
 
     # ⚡ COMMAND INTERCEPT: System controls
     if "OPEN-AIR/System/Control/Splinker/" in topic:
-        cmd_payload = {"val": val, "topic": topic, "origin_source": source}
+        cmd_payload = {"value": value, "topic": topic, "origin_source": source}
         self._handle_command(topic, cmd_payload)
         return
 
@@ -48,7 +48,7 @@ def process_router_event(self, msg):
             return
 
         # ⚡ LOOP PREVENTION (RUST)
-        if self.registry.mark_event_processed(ts, topic, splink_id):
+        if self.registry.mark_event_processed(timestamp, topic, splink_id):
             continue
 
         # ⚡ EXECUTION LOCK (RUST)
@@ -58,6 +58,6 @@ def process_router_event(self, msg):
         try:
             # Execute the link
             if s.get("mode") in ["BOTH", "SOURCE"]:
-                self._broker_link(s, val, msg)
+                self._broker_link(s, value, message)
         finally:
             self.registry.release_execution_lock(splink_id)

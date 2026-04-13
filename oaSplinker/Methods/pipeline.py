@@ -12,16 +12,18 @@ from oaLogging.Methods.matrix_gate import matrix_log, is_debug_allowed
 from oaConfigurationManager.Entry import Config
 
 try:
-    from oasplinkcore_rs import SplinkPipeline as RustSplinkPipeline
-except ImportError as e:
-    logger.critical("🚀❌ [FATAL] Rust Splink Core module missing. Pure Rust mode is mandatory.")
-    raise e
+    from oaRustCore.oa_splink_core_rs import SplinkPipeline as RustSplinkPipeline
+    HAS_RUST_SPLINK = True
+except ImportError:
+    logger.warning("🚀⚠️ [SPLINKER] Rust Splink Core missing. Falling back to slow Python pipeline.")
+    HAS_RUST_SPLINK = False
 
 def _is_debug():
     return is_debug_allowed(system="CORE", element="SPLINKER")
 
 class SplinkPipeline:
     def __init__(self, splink, splinker_manager):
+        self._rust_pipeline = RustSplinkPipeline(splink) if HAS_RUST_SPLINK else None
         self.splink = splink
         self.splinker_manager = splinker_manager
         self.rust_pipeline = None

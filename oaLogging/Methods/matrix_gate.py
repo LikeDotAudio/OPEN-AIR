@@ -11,15 +11,13 @@ from typing import Any, Callable
 from loguru import logger
 
 # --- Native Rust Optimization ---
-from .oaLoggingGate_rs.compiler_hook import ensure_compiled
 try:
-    ensure_compiled()
-    import oalogginggate_rs
+    from oaRustCore import oa_logging_gate_rs as oalogginggate_rs
     RUST_ENABLED = True
 except ImportError:
     # ⚠️ Fallback to Python if Rust is not compiled (not recommended for production)
     RUST_ENABLED = False
-    logger.warning("⚠️ [LOGGING] oalogginggate_rs not found. Falling back to slow Python matrix checks.")
+    logger.warning("⚠️ [LOGGING] oalogginggate_rs not found in oaRustCore. Falling back to slow Python matrix checks.")
 except Exception as e:
     RUST_ENABLED = False
     logger.error(f"❌ [LOGGING] Rust gate initialization failed: {e}")
@@ -100,8 +98,6 @@ def matrix_log(system: str, element: str = None, func_name: str = None,
         
     log_func = getattr(bound_logger, level.lower(), bound_logger.debug)
     log_func(message)
-
-
 
 # --- State Sync (Rust <-> Python) ---
 def set_master_toggle(enabled: bool):

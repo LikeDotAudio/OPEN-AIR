@@ -200,12 +200,12 @@ class EmberDashboardImplementation(tk.Frame, TransparencyMixin):
 
     def _add_log_entry(self, direction, path, value, node_type):
         now = datetime.datetime.now()
-        ts = now.strftime("%H:%M:%S.%f")[:-3]
+        timestamp = now.strftime("%H:%M:%S.%f")[:-3]
         
-        item_id = self.tree.insert("", 0, values=(ts, direction, path, value, node_type or "-"), tags=(direction,))
+        item_id = self.tree.insert("", 0, values=(timestamp, direction, path, value, node_type or "-"), tags=(direction,))
         
-        self._activity_cache[ts] = {
-            "ts": ts,
+        self._activity_cache[timestamp] = {
+            "timestamp": timestamp,
             "direction": direction,
             "path": path,
             "value": value,
@@ -223,12 +223,12 @@ class EmberDashboardImplementation(tk.Frame, TransparencyMixin):
         if not selected: return
         
         item = self.tree.item(selected[0])
-        ts = item["values"][0]
-        data = self._activity_cache.get(ts)
+        timestamp = item["values"][0]
+        data = self._activity_cache.get(timestamp)
         if not data: return
         
         self.inspect_text.delete("1.0", tk.END)
-        self.inspect_text.insert(tk.END, f"TIME     : {data['ts']}\n")
+        self.inspect_text.insert(tk.END, f"TIME     : {data['timestamp']}\n")
         self.inspect_text.insert(tk.END, f"DIR      : {data['direction']}\n")
         self.inspect_text.insert(tk.END, f"PATH     : {data['path']}\n")
         self.inspect_text.insert(tk.END, f"VALUE    : {data['value']}\n")

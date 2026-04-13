@@ -401,13 +401,13 @@ No class description provided.
 **Side Effects & Thread-Safety:**
 - [TODO: Note any locks, I/O, or global state.]
 
-##### `update_table(self, wid, val, rot, angle, x, y)`
+##### `update_table(self, wid, value, rot, angle, x, y)`
 [TODO: Brief verb-first description. Start with action (e.g., 'Allocates...',
 'Parses...').]
 
 **Parameters:**
 - `wid`: [TODO: Detail meaning, valid ranges, special cases]
-- `val`: [TODO: Detail meaning, valid ranges, special cases]
+- `value`: [TODO: Detail meaning, valid ranges, special cases]
 - `rot`: [TODO: Detail meaning, valid ranges, special cases]
 - `angle`: [TODO: Detail meaning, valid ranges, special cases]
 - `x`: [TODO: Detail meaning, valid ranges, special cases]

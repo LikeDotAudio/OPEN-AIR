@@ -33,7 +33,7 @@ class TestRustBallistics(unittest.TestCase):
     def test_rust_ballistics_initialization(self):
         """Test that BallisticsEngine initializes the Rust core."""
         try:
-            import oameteringengine_rs
+            from oaRustCore import oa_metering_engine_rs as oameteringengine_rs
         except ImportError:
             self.skipTest("Rust oameteringengine_rs not installed.")
 
@@ -43,7 +43,7 @@ class TestRustBallistics(unittest.TestCase):
     def test_rust_ballistics_movement(self):
         """Test movement through the Rust-backed BallisticsEngine."""
         try:
-            import oameteringengine_rs
+            from oaRustCore import oa_metering_engine_rs as oameteringengine_rs
         except ImportError:
             self.skipTest("Rust oameteringengine_rs not installed.")
 

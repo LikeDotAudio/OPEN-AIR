@@ -29,9 +29,9 @@ def apply_design_overlay(layout, widget, path, is_focused, design_elements):
 
     def sync(x, y, w, h):
         if layout.show_sticky.get():
-            val = (state_manager.get_value_at_path(f"{path}.layout.sticky") or "").lower()
+            value = (state_manager.get_value_at_path(f"{path}.layout.sticky") or "").lower()
             for d, handle in sticky_handles.items():
-                handle.config(bg="#00ff00" if d in val else "#444444")
+                handle.config(bg="#00ff00" if d in value else "#444444")
             
             sticky_handles["n"].place(x=x + (w//2) - 50, y=y, width=16, height=12)
             sticky_handles["s"].place(x=x + (w//2) - 50, y=y + h - 12, width=16, height=12)

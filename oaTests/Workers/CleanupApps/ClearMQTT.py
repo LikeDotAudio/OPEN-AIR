@@ -96,8 +96,8 @@ class MQTTSweeper:
         for topic in sorted(list(self.topics), reverse=True):
             # To delete a retained topic, publish a zero-length payload with retain=True
             matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"  Deleting MQTT topic: {topic}", "INFO")
-            msg_info = self.client.publish(topic, payload=None, qos=1, retain=True)
-            publish_handles.append(msg_info)
+            message_info = self.client.publish(topic, payload=None, qos=1, retain=True)
+            publish_handles.append(message_info)
             count += 1
             if count % 100 == 0:
                 matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"    ├─ Sent clear command for {count} topics...", "INFO")

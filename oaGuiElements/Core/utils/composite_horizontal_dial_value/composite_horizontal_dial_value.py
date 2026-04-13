@@ -108,8 +108,8 @@ class BuilderCompositeHorizontalDialValueCreator(
 
             def on_manual(e):
                 try: 
-                    val = round(float(entry_string_var.get()) / numerical_step) * numerical_step
-                    main_value_var.set(max(min_val, min(max_val, val)))
+                    value = round(float(entry_string_var.get()) / numerical_step) * numerical_step
+                    main_value_var.set(max(min_val, min(max_val, value)))
                 except: entry_string_var.set(fmt_str.format(main_value_var.get()))
 
             ui_ctx['on_manual_cb'] = on_manual

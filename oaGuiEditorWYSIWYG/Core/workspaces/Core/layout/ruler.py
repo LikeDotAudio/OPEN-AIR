@@ -31,9 +31,9 @@ class Ruler(tk.Canvas):
         self.offset = offset
         self.redraw()
 
-    def set_center(self, val):
+    def set_center(self, value):
         """Sets the center point value to mark on the ruler."""
-        self.center_val = val
+        self.center_val = value
         self.redraw()
         
     def redraw(self):
@@ -50,11 +50,11 @@ class Ruler(tk.Canvas):
                 if step < 1: step = 1
                 
                 for x in range(start, w, step):
-                    val = int(x + self.offset)
-                    if val % self.grid_size == 0:
+                    value = int(x + self.offset)
+                    if value % self.grid_size == 0:
                         self.create_line(x, h-10, x, h, fill="#888888")
-                        self.create_text(x + 2, 2, text=str(val), anchor="nw", fill="#888888", font=("Arial", 6))
-                    elif val % (self.grid_size // 2) == 0:
+                        self.create_text(x + 2, 2, text=str(value), anchor="nw", fill="#888888", font=("Arial", 6))
+                    elif value % (self.grid_size // 2) == 0:
                         self.create_line(x, h-6, x, h, fill="#555555")
                     else:
                         self.create_line(x, h-3, x, h, fill="#333333")
@@ -72,11 +72,11 @@ class Ruler(tk.Canvas):
                 if step < 1: step = 1
                 
                 for y in range(start, h, step):
-                    val = int(y + self.offset)
-                    if val % self.grid_size == 0:
+                    value = int(y + self.offset)
+                    if value % self.grid_size == 0:
                         self.create_line(w-10, y, w, y, fill="#888888")
-                        self.create_text(2, y + 2, text=str(val), anchor="nw", fill="#888888", font=("Arial", 6))
-                    elif val % (self.grid_size // 2) == 0:
+                        self.create_text(2, y + 2, text=str(value), anchor="nw", fill="#888888", font=("Arial", 6))
+                    elif value % (self.grid_size // 2) == 0:
                         self.create_line(w-6, y, w, y, fill="#555555")
                     else:
                         self.create_line(w-3, y, w, y, fill="#333333")

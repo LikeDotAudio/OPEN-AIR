@@ -72,9 +72,9 @@ class PtpManager:
         self.stop_event.set()
         if self.sniffer_thread: self.sniffer_thread.join(timeout=1.0)
 
-    def _on_external_data(self, msg: MqttMessage):
+    def _on_external_data(self, message: MqttMessage):
         """Bridge for PTP data received via MQTT (Core-to-UI)."""
-        payload = msg.payload
+        payload = message.payload
         if not payload: return
 
         data = None

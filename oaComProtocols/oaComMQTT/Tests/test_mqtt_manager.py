@@ -106,17 +106,17 @@ class TestMqttManager(unittest.TestCase):
     @patch('oaComProtocols.oaComMQTT.Managers.mqtt_manager.delete_open_air_tree')
     def test_handle_delete_command(self, mock_delete):
         """Verify _handle_delete_command calls delete_open_air_tree with correct args."""
-        msg_payload = orjson.dumps({"target": "all"})
-        msg = MqttMessage("OPEN-AIR/System/Control/Broker/Delete/all", msg_payload)
-        self.manager._handle_delete_command(msg)
+        message_payload = orjson.dumps({"target": "all"})
+        message = MqttMessage("OPEN-AIR/System/Control/Broker/Delete/all", message_payload)
+        self.manager._handle_delete_command(message)
         mock_delete.assert_called_once_with(self.mock_client, self.mock_cache)
 
     def test_handle_service_command_no_payload(self):
         """Test _handle_service_command with an empty payload."""
-        msg = MqttMessage("OPEN-AIR/System/Control/Broker/Service/status", b"{}")
+        message = MqttMessage("OPEN-AIR/System/Control/Broker/Service/status", b"{}")
         if hasattr(self.manager, '_update_service_status'):
             with patch.object(self.manager, '_update_service_status') as mock_update:
-                self.manager._handle_service_command(msg)
+                self.manager._handle_service_command(message)
                 mock_update.assert_not_called() 
 
     @patch('oaComProtocols.oaComMQTT.Managers.mqtt_manager.re_register_all_services')
@@ -124,8 +124,8 @@ class TestMqttManager(unittest.TestCase):
     def test_handle_service_command_register(self, mock_register_service, mock_re_register_all):
         """Test _handle_service_command for registration."""
         payload = {"service": "test_service", "action": "register", "data": {"ip": "192.168.1.100"}}
-        msg = MqttMessage("OPEN-AIR/System/Control/Broker/Service/register", orjson.dumps(payload))
-        self.manager._handle_service_command(msg)
+        message = MqttMessage("OPEN-AIR/System/Control/Broker/Service/register", orjson.dumps(payload))
+        self.manager._handle_service_command(message)
         mock_register_service.assert_called_once()
 
     @patch('oaComProtocols.oaComMQTT.Managers.mqtt_manager.re_register_all_services')
@@ -133,14 +133,14 @@ class TestMqttManager(unittest.TestCase):
     def test_handle_service_command_reregister_all(self, mock_register_service, mock_re_register_all):
         """Test _handle_service_command for re-registering all services."""
         payload = {"action": "reregister_all"}
-        msg = MqttMessage("OPEN-AIR/System/Control/Broker/Service/reregister_all", orjson.dumps(payload))
-        self.manager._handle_service_command(msg)
+        message = MqttMessage("OPEN-AIR/System/Control/Broker/Service/reregister_all", orjson.dumps(payload))
+        self.manager._handle_service_command(message)
         mock_re_register_all.assert_called_once_with(self.mock_client, self.mock_cache)
 
     def test_on_fleet_scan_complete_logging(self):
         """Verify scan complete logic executes without error and logs correctly."""
-        msg = MqttMessage("OPEN-AIR/System/Status/Fleet/Complete", b"{}")
-        self.manager._on_fleet_scan_complete(msg)
+        message = MqttMessage("OPEN-AIR/System/Status/Fleet/Complete", b"{}")
+        self.manager._on_fleet_scan_complete(message)
         self.mock_matrix_log.assert_called_with("comms", "mqtt", "_on_fleet_scan_complete", "✅ [MQTT] MqttManager: Fleet Scan Complete detected.", "INFO")
 
     def test_system_status_loop_when_connected(self):

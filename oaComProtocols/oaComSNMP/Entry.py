@@ -160,7 +160,7 @@ def main():
     from oaConfigurationManager.FileReaders.config_reader import Config
     
     initialize_paths()
-    cfg = Config.get_instance()
+    configuration = Config.get_instance()
     
     matrix_log("comms", "snmp", "main", "🚀 [SNMP] Launching Standalone SNMP Module...", "INFO")
     

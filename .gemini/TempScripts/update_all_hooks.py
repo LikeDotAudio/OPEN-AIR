@@ -14,8 +14,7 @@ import subprocess
 import sys
 import importlib
 import glob
-
-def ensure_compiled():
+:
     \"\"\"Build the Rust extension and install to user site-packages.\"\"\"
     try:
         import {module_name}
@@ -66,7 +65,6 @@ def ensure_compiled():
         pass
 
 if __name__ == \"__main__\":
-    ensure_compiled()
 """
 
 def find_module_name(dir_path):

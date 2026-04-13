@@ -44,8 +44,8 @@ def check_host(ip):
             is_gateway = False
             try:
                 from oaConfigurationManager.FileReaders.config_reader import Config
-                cfg = Config.get_instance()
-                url = f"{cfg.VISA_PROBE_PROTOCOL}://{ip}/{cfg.VISA_PROBE_PATH}"
+                configuration = Config.get_instance()
+                url = f"{configuration.VISA_PROBE_PROTOCOL}://{ip}/{configuration.VISA_PROBE_PATH}"
                 with urllib.request.urlopen(url, timeout=1) as resp:
                     if "E5810" in resp.read().decode("utf-8", errors="ignore"):
                         is_gateway = True

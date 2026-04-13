@@ -9,7 +9,7 @@ from dataclasses import dataclass
 from typing import List, Tuple
 
 try:
-    from oaneedlegeometry_rs import NeedleGeometry
+    from oaRustCore.oa_needle_geometry_rs import NeedleGeometry
     needle_geo_rs = NeedleGeometry()
 except ImportError:
     needle_geo_rs = None

@@ -12,8 +12,8 @@ def update_splink(self, splink_id, new_data):
         if s["id"] == splink_id:
             self.splinks[i].update(new_data)
             self.save_splink(self.splinks[i])
-            log_msg = f"🔗 Splinker: Splink {splink_id} Updated."
+            log_message = f"🔗 Splinker: Splink {splink_id} Updated."
             if Splinker_debug_enabled:
-                splinker_logger.info(log_msg)
-                self.notify_monitor("debug_log", log_msg)
+                splinker_logger.info(log_message)
+                self.notify_monitor("debug_log", log_message)
             return

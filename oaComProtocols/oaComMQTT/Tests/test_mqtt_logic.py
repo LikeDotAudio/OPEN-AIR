@@ -36,15 +36,15 @@ class TestMQTTLogic(unittest.TestCase):
         sweeper = MQTTSweeper("localhost", 1883, "OPEN-AIR")
         
         # Mock message objects
-        msg_in_root = MagicMock()
-        msg_in_root.topic = "OPEN-AIR/some/topic"
+        message_in_root = MagicMock()
+        message_in_root.topic = "OPEN-AIR/some/topic"
         
-        msg_outside = MagicMock()
-        msg_outside.topic = "OTHER-PROJECT/topic"
+        message_outside = MagicMock()
+        message_outside.topic = "OTHER-PROJECT/topic"
         
         # Trigger on_message
-        sweeper.on_message(None, None, msg_in_root)
-        sweeper.on_message(None, None, msg_outside)
+        sweeper.on_message(None, None, message_in_root)
+        sweeper.on_message(None, None, message_outside)
         
         # Check results
         self.assertIn("OPEN-AIR/some/topic", sweeper.topics)

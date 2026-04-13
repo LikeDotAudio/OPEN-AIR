@@ -24,20 +24,20 @@ impl OcaParser {
     fn decode<'py>(&self, py: Python<'py>, data: &'py [u8]) -> PyResult<Option<Bound<'py, PyDict>>> {
         match parse_pdu(data) {
             Ok((_, pdu)) => {
-                let dict = PyDict::new(py);
+                let dict = PyDict::new_bound(py);
                 dict.set_item("version", pdu.version)?;
                 dict.set_item("pdu_size", pdu.size)?;
                 dict.set_item("message_count", pdu.message_count)?;
                 
-                let messages = PyList::empty(py);
-                for msg in pdu.messages {
-                    let msg_dict = PyDict::new(py);
-                    msg_dict.set_item("size", msg.size)?;
-                    msg_dict.set_item("handle", msg.handle)?;
-                    msg_dict.set_item("target_ono", msg.target_ono)?;
-                    msg_dict.set_item("method_id", msg.method_id)?;
-                    msg_dict.set_item("parameters", PyBytes::new(py, msg.parameters))?;
-                    messages.append(msg_dict)?;
+                let messages = PyList::empty_bound(py);
+                for message in pdu.messages {
+                    let message_dict = PyDict::new_bound(py);
+                    message_dict.set_item("size", message.size)?;
+                    message_dict.set_item("handle", message.handle)?;
+                    message_dict.set_item("target_ono", message.target_ono)?;
+                    message_dict.set_item("method_id", message.method_id)?;
+                    message_dict.set_item("parameters", PyBytes::new_bound(py, message.parameters))?;
+                    messages.append(message_dict)?;
                 }
                 dict.set_item("messages", messages)?;
                 

@@ -21,8 +21,8 @@ class GraphContextMenu:
             # 1. Markers
             m_menu = tk.Menu(menu, tearoff=0); menu.add_cascade(label="Markers", menu=m_menu)
             def add_m(t):
-                val = event.xdata if t=='x' else event.ydata
-                if callbacks and "on_add_marker" in callbacks and val is not None: callbacks["on_add_marker"](t, val)
+                value = event.xdata if t=='x' else event.ydata
+                if callbacks and "on_add_marker" in callbacks and value is not None: callbacks["on_add_marker"](t, value)
             m_menu.add_command(label="Add Vertical Marker (X)", command=lambda: add_m('x'))
             m_menu.add_command(label="Add Horizontal Marker (Y)", command=lambda: add_m('y'))
 

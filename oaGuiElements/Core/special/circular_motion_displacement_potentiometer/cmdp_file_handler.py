@@ -31,8 +31,8 @@ class CMDPFileHandler:
                 if isinstance(d, dict):
                     if "channels" in d: return d
                     for v in d.values():
-                        res = find_data(v)
-                        if res: return res
+                        result = find_data(v)
+                        if result: return result
                 return None
             target = find_data(data)
             if not target: return
@@ -50,7 +50,7 @@ class CMDPFileHandler:
                     if self.w.mixin_ref.state_mirror_engine:
                         sme = self.w.mixin_ref.state_mirror_engine
                         fp = f"{self.w.path}/ch{idx}"
-                        for p_name in ["val", "rot", "angle", "mute"]:
+                        for p_name in ["value", "rot", "angle", "mute"]:
                             sme.broadcast_gui_change_to_mqtt(f"{fp}/{p_name}")
                     self.w.update_tree(f)
             

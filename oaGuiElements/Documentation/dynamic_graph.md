@@ -406,13 +406,13 @@ Callback for setting changes from the context menu.
 **Side Effects & Thread-Safety:**
 - [TODO: Note any locks, I/O, or global state.]
 
-##### `_on_add_marker(self, m_type, val)`
+##### `_on_add_marker(self, m_type, value)`
 [TODO: Brief verb-first description. Start with action (e.g., 'Allocates...',
 'Parses...').]
 
 **Parameters:**
 - `m_type`: [TODO: Detail meaning, valid ranges, special cases]
-- `val`: [TODO: Detail meaning, valid ranges, special cases]
+- `value`: [TODO: Detail meaning, valid ranges, special cases]
 
 **Returns:**
 - [TODO: Define success and error returns.]

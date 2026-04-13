@@ -72,11 +72,11 @@ class StatusLightWidget(tk.Frame):
                 matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📡📶🔄 [MQTT] Subscribing to INSTANCE status topic: {topic}", level="TRACE")
                 self.subscriber_router.subscribe_to_topic(topic, self._update_status_light)
 
-    def _update_status_light(self, msg: MqttMessage):
+    def _update_status_light(self, message: MqttMessage):
         """Callback function to update the status light's color based on MQTT messages."""
         try:
-            topic = msg.topic
-            payload = msg.payload
+            topic = message.topic
+            payload = message.payload
             matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📥📶🔄 [MQTT] Incoming status light update on: {topic}", level="TRACE")
 
             if isinstance(payload, bytes):
@@ -86,8 +86,8 @@ class StatusLightWidget(tk.Frame):
             else:
                 data = payload
 
-            # Support both 'color' and 'val' keys for status
-            color_val = data.get("color", data.get("val", "red"))
+            # Support both 'color' and 'value' keys for status
+            color_val = data.get("color", data.get("value", "red"))
             matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔋🔄✨ [STATE] Status light color command: {color_val}", level="DEBUG")
 
             # Determine final hex color

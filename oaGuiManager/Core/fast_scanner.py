@@ -7,11 +7,9 @@
 LOCAL_DEBUG = False
 
 import logging
-from .oaFastScanner_rs.compiler_hook import ensure_compiled
 
 try:
-    ensure_compiled()
-    from oafastscanner_rs import FastScanner as RustFastScanner
+    from oaRustCore.oa_fast_scanner_rs import FastScanner as RustFastScanner
     HAS_RUST = True
 except ImportError:
     logging.warning("⚠️ [GUI_MANAGER] oafastscanner_rs not found. Falling back to slow Python directory scanning (if implemented).")
@@ -49,5 +47,5 @@ class FastScanner:
         import pathlib
         path = pathlib.Path(root_path)
         if extension:
-            return [str(f) for f in path.rglob(f"*{extension}")]
-        return [str(f) for f in path.rglob("*")]
+            return [str(f) for f in path.rglob(f"*{extension}") if f.is_file()]
+        return [str(f) for f in path.rglob("*") if f.is_file()]

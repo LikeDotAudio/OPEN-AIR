@@ -87,7 +87,7 @@
             color: #778da9;
             font-weight: bold;
         }
-        .dim-val {
+        .dim-value {
             color: #fff;
             font-family: monospace;
             font-size: 1.1em;
@@ -166,10 +166,10 @@
             </div>
             
             <h2 style="margin-top: 40px;">Quick Conversions</h2>
-            <div class="dim-row"><span class="dim-label">Scale Ratio</span><span class="dim-val">1:87</span></div>
-            <div class="dim-row"><span class="dim-label">Total Height</span><span class="dim-val">6,360 mm</span></div>
-            <div class="dim-row"><span class="dim-label">Max Width</span><span class="dim-val">765.5 mm</span></div>
-            <div class="dim-row"><span class="dim-label">Main Pod Width</span><span class="dim-val">454.0 mm</span></div>
+            <div class="dim-row"><span class="dim-label">Scale Ratio</span><span class="dim-value">1:87</span></div>
+            <div class="dim-row"><span class="dim-label">Total Height</span><span class="dim-value">6,360 mm</span></div>
+            <div class="dim-row"><span class="dim-label">Max Width</span><span class="dim-value">765.5 mm</span></div>
+            <div class="dim-row"><span class="dim-label">Main Pod Width</span><span class="dim-value">454.0 mm</span></div>
         </div>
     </div>
 
@@ -201,8 +201,8 @@
 
                 // Update Side Panel
                 const formattedDims = dims.split('\n').map(line => {
-                    const [label, val] = line.split(': ');
-                    return `<div class="dim-row"><span class="dim-label">${label}</span><span class="dim-val">${val || ''}</span></div>`;
+                    const [label, value] = line.split(': ');
+                    return `<div class="dim-row"><span class="dim-label">${label}</span><span class="dim-value">${value || ''}</span></div>`;
                 }).join('');
                 
                 panelContent.innerHTML = `

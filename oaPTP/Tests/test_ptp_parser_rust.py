@@ -31,7 +31,7 @@ class TestPtpParserRust(unittest.TestCase):
     def test_rust_ptp_parsing_sync(self):
         """Test Sync message parsing via Rust."""
         try:
-            import oaptpparser_rs
+            from oaRustCore import oa_ptp_parser_rs as oaptpparser_rs
         except ImportError:
             self.skipTest("Rust oaptpparser_rs not installed.")
 
@@ -63,7 +63,7 @@ class TestPtpParserRust(unittest.TestCase):
     def test_rust_ptp_parsing_announce(self):
         """Test Announce message parsing via Rust."""
         try:
-            import oaptpparser_rs
+            from oaRustCore import oa_ptp_parser_rs as oaptpparser_rs
         except ImportError:
             self.skipTest("Rust oaptpparser_rs not installed.")
 

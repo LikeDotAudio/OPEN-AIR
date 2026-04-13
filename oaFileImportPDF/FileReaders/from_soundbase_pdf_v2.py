@@ -13,10 +13,8 @@ import numpy as np
 import pdfplumber
 
 # --- Native Rust Optimization ---
-from ..Methods.oaPDFParser_rs.compiler_hook import ensure_compiled
 try:
-    ensure_compiled()
-    from oapdfparser_rs.oapdfparser_rs import PDFEngine
+    from oaRustCore.oa_pdf_parser_rs import PDFEngine
     HAS_RUST_PARSER = True
     rust_pdf_engine = PDFEngine()
 except Exception:

@@ -31,16 +31,16 @@ def _write_safe_fleet(proxy_instance, command):
     matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ FleetProxy Log ({proxy_instance.device_serial}): 💳💳⬆️⬆️ Send Visa Command: Transmitting command: {command}", "TRACE")
 
     if not proxy_instance.inst or not proxy_instance.inst.session:
-        error_msg = f"Instrument {proxy_instance.device_serial} not connected. Cannot write command."
+        error_message = f"Instrument {proxy_instance.device_serial} not connected. Cannot write command."
         proxy_instance.manager._notify_error(
-            serial=proxy_instance.device_serial, message=error_msg, command=command
+            serial=proxy_instance.device_serial, message=error_message, command=command
         )
         return False
 
     if "<" in command or ">" in command:  # Basic check for placeholders
-        error_msg = f"Command rejected. Unresolved placeholders found in '{command}' for device {proxy_instance.device_serial}."
+        error_message = f"Command rejected. Unresolved placeholders found in '{command}' for device {proxy_instance.device_serial}."
         proxy_instance.manager._notify_error(
-            serial=proxy_instance.device_serial, message=error_msg, command=command
+            serial=proxy_instance.device_serial, message=error_message, command=command
         )
         return False
 
@@ -55,16 +55,16 @@ def _query_safe_fleet(proxy_instance, command, correlation_id="N/A"):
     matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ FleetProxy Log ({proxy_instance.device_serial}): 💳💳⬆️⬆️ Send Visa Command: Querying command: {command}", "TRACE")
 
     if not proxy_instance.inst or not proxy_instance.inst.session:
-        error_msg = f"Instrument {proxy_instance.device_serial} not connected. Cannot query command."
+        error_message = f"Instrument {proxy_instance.device_serial} not connected. Cannot query command."
         proxy_instance.manager._notify_error(
-            serial=proxy_instance.device_serial, message=error_msg, command=command
+            serial=proxy_instance.device_serial, message=error_message, command=command
         )
         return None
 
     if "<" in command or ">" in command:  # Basic check for placeholders
-        error_msg = f"Query rejected. Unresolved placeholders found: '{command}' for device {proxy_instance.device_serial}."
+        error_message = f"Query rejected. Unresolved placeholders found: '{command}' for device {proxy_instance.device_serial}."
         proxy_instance.manager._notify_error(
-            serial=proxy_instance.device_serial, message=error_msg, command=command
+            serial=proxy_instance.device_serial, message=error_message, command=command
         )
         return None
 

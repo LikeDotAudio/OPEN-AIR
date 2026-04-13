@@ -80,12 +80,12 @@ No class description provided.
 **Side Effects & Thread-Safety:**
 - [TODO: Note any locks, I/O, or global state.]
 
-##### `_get_pos_from_val(self, val, height)`
+##### `_get_pos_from_val(self, value, height)`
 [TODO: Brief verb-first description. Start with action (e.g., 'Allocates...',
 'Parses...').]
 
 **Parameters:**
-- `val`: [TODO: Detail meaning, valid ranges, special cases]
+- `value`: [TODO: Detail meaning, valid ranges, special cases]
 - `height`: [TODO: Detail meaning, valid ranges, special cases]
 
 **Returns:**

@@ -48,8 +48,8 @@ class TestMatrixGate(unittest.TestCase):
         def sample_func():
             return "executed"
             
-        res = sample_func()
-        self.assertEqual(res, "executed")
+        result = sample_func()
+        self.assertEqual(result, "executed")
         mock_allowed.assert_called()
 
     @patch("oaLogging.Methods.matrix_gate.is_debug_allowed")

@@ -1,14 +1,21 @@
-// oaStateCache/Methods/oaStateRegistry-rs/src/lib.rs
+// oaStateCache/Methods/oaStateRegistry_rs/mod.rs
 // Author: Anthony Peter Kuzub (via Gemini)
-// Version: 20260331.1840.1
+// Version: 20260413.0010.1
+//
+// Description: Thread-safe global state cache. Manages the system-wide
+// "Single Source of Truth" state tree in Rust using DashMap to allow 
+// concurrent updates from multiple protocol bridges (MIDI, OSC, MQTT) 
+// without GIL contention.
 
 use pyo3::prelude::*;
 use pyo3::types::{PyDict, PyList};
 use dashmap::DashMap;
-use pyo3::IntoPyObjectExt;
 
 #[pyclass]
 struct StateRegistryCore {
+    // DashMap is employed to ensure that high-frequency updates (e.g., 60Hz 
+    // metering or smooth fader movement) can occur on separate protocol 
+    // threads without locking the entire state tree.
     cache: DashMap<String, Py<PyAny>>,
 }
 
@@ -21,6 +28,8 @@ impl StateRegistryCore {
         }
     }
 
+    // Standard CRUD operations for the state tree. Each update is atomic
+    // at the DashMap level, ensuring data consistency across bridges.
     fn set(&self, topic: String, value: Py<PyAny>) {
         self.cache.insert(topic, value);
     }
@@ -34,7 +43,7 @@ impl StateRegistryCore {
     }
 
     fn get(&self, py: Python<'_>, topic: String) -> Option<Py<PyAny>> {
-        self.cache.get(&topic).map(|v| v.value().clone_ref(py))
+        self.cache.get(&topic).map(|value_entry| value_entry.value().clone_ref(py))
     }
 
     fn exists(&self, topic: String) -> bool {
@@ -42,7 +51,7 @@ impl StateRegistryCore {
     }
 
     fn remove(&self, py: Python<'_>, topic: String) -> Option<Py<PyAny>> {
-        self.cache.remove(&topic).map(|(_, v)| v.clone_ref(py))
+        self.cache.remove(&topic).map(|(_, value_entry)| value_entry.clone_ref(py))
     }
 
     fn clear(&self) {
@@ -53,64 +62,61 @@ impl StateRegistryCore {
         self.cache.len()
     }
 
+    // should_update implements a high-performance "Delta Engine." It prevents
+    // redundant MQTT publications and GUI re-renders by discarding incoming 
+    // payloads that match the existing cached state or have older timestamps.
     fn should_update(&self, py: Python<'_>, topic: String, incoming_payload: Py<PyAny>) -> bool {
         let cached = match self.cache.get(&topic) {
-            Some(v) => v,
-            None => return true, // Not in cache
+            Some(value_entry) => value_entry,
+            None => return true, // New topics always trigger an update.
         };
 
-        // Comparison logic matching state_comparator.py
         let incoming = incoming_payload.bind(py);
         let cached_val = cached.value().bind(py);
 
-        // 1. Timestamp comparison
-        if let (Ok(incoming_ts), Ok(cached_ts)) = (incoming.get_item("ts"), cached_val.get_item("ts")) {
-            if let (Ok(i_ts), Ok(c_ts)) = (incoming_ts.extract::<f64>(), cached_ts.extract::<f64>()) {
-                if i_ts > c_ts { return true; }
-                if i_ts <= c_ts { return false; }
+        // 1. Timestamp Guard: Protects against out-of-order network messages
+        // by ensuring only newer data (based on UTP/Epoch) can overwrite state.
+        if let (Ok(incoming_timestamp), Ok(cached_timestamp)) = (incoming.get_item("timestamp"), cached_val.get_item("timestamp")) {
+            if let (Ok(i_timestamp), Ok(c_timestamp)) = (incoming_timestamp.extract::<f64>(), cached_timestamp.extract::<f64>()) {
+                if i_timestamp > c_timestamp { return true; }
+                if i_timestamp <= c_timestamp { return false; }
             }
         }
 
-        // 2. Full content comparison
-        // We use Python's equality check here, but it's executed within the Rust extension.
-        // For deep comparison of massive objects, we could use serde_json diffing.
+        // 2. Value Guard: Only proceed if the data content has changed.
+        // For complex structures, Python's native equality is used via PyO3 to
+        // handle nested dictionaries and lists reliably.
         incoming.ne(cached_val).unwrap_or(true)
     }
 
-    fn items(&self, py: Python<'_>) -> PyResult<Py<PyList>> {
-        let list = PyList::empty(py);
+    fn items<'py>(&self, py: Python<'py>) -> PyResult<Bound<'py, PyList>> {
+        let list = PyList::empty_bound(py);
         for entry in self.cache.iter() {
-            let pair = (entry.key().clone(), entry.value().clone_ref(py));
-            list.append(pair.into_bound_py_any(py)?)?;
+            let pair = (entry.key().clone(), entry.value().bind(py).clone());
+            list.append(pair)?;
         }
-        Ok(list.unbind())
+        Ok(list)
     }
 
-    fn keys(&self, py: Python<'_>) -> PyResult<Py<PyList>> {
-        let list = PyList::empty(py);
+    fn keys<'py>(&self, py: Python<'py>) -> PyResult<Bound<'py, PyList>> {
+        let list = PyList::empty_bound(py);
         for entry in self.cache.iter() {
-            list.append(entry.key().clone().into_bound_py_any(py)?)?;
+            list.append(entry.key().clone())?;
         }
-        Ok(list.unbind())
+        Ok(list)
     }
 
-    fn to_dict(&self, py: Python<'_>) -> PyResult<Py<PyDict>> {
-        let dict = PyDict::new(py);
+    fn to_dict<'py>(&self, py: Python<'py>) -> PyResult<Bound<'py, PyDict>> {
+        let dict = PyDict::new_bound(py);
         for entry in self.cache.iter() {
-            dict.set_item(entry.key(), entry.value().clone_ref(py))?;
+            dict.set_item(entry.key(), entry.value().bind(py).clone())?;
         }
-        Ok(dict.unbind())
+        Ok(dict)
     }
-}
-
-#[pyfunction]
-fn sum_as_string(a: usize, b: usize) -> PyResult<String> {
-    Ok((a + b).to_string())
 }
 
 #[pymodule]
 pub fn oastateregistry_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<StateRegistryCore>()?;
-    m.add_function(wrap_pyfunction!(sum_as_string, m)?)?;
     Ok(())
 }

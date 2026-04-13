@@ -60,8 +60,8 @@ impl MidiEngine {
         }
         
         let port = &ports[port_index];
-        let conn = midi_in.connect(port, "OPEN-AIR-Input-Connection", move |ts, data, _| {
-            let _ = tx.send(MidiEvent { timestamp: ts, data: data.to_vec() });
+        let conn = midi_in.connect(port, "OPEN-AIR-Input-Connection", move |timestamp, data, _| {
+            let _ = tx.send(MidiEvent { timestamp: timestamp, data: data.to_vec() });
         }, ()).map_err(|e| PyErr::new::<pyo3::exceptions::PyRuntimeError, _>(e.to_string()))?;
         
         let mut conn_lock = self.input_conn.lock().unwrap();
@@ -70,12 +70,12 @@ impl MidiEngine {
     }
 
     fn get_buffered_events<'py>(&self, py: Python<'py>) -> PyResult<Bound<'py, PyList>> {
-        let list = PyList::empty(py);
+        let list = PyList::empty_bound(py);
         let receiver = self.receiver.lock().unwrap();
         while let Ok(event) = receiver.try_recv() {
-            let dict = PyDict::new(py);
+            let dict = PyDict::new_bound(py);
             dict.set_item("timestamp", event.timestamp)?;
-            dict.set_item("data", PyBytes::new(py, &event.data))?;
+            dict.set_item("data", PyBytes::new_bound(py, &event.data))?;
             list.append(dict)?;
         }
         Ok(list)

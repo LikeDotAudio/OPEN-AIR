@@ -24,9 +24,9 @@ impl DiskFlusher {
 
         if let Ok(dict) = obj.downcast::<PyDict>() {
             let mut map = Map::new();
-            for (key, val) in dict.iter() {
+            for (key, value) in dict.iter() {
                 let k_str = key.to_string();
-                let v_val = self.py_to_value(&val, depth + 1)?;
+                let v_val = self.py_to_value(&value, depth + 1)?;
                 map.insert(k_str, v_val);
             }
             Ok(Value::Object(map))

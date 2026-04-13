@@ -133,9 +133,9 @@ class SnmpStatusImplementation(tk.Frame, TransparencyMixin):
         self.text_area.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
         scroll.pack(side=tk.RIGHT, fill=tk.Y)
 
-    def _on_status_received(self, msg):
+    def _on_status_received(self, message):
         """Callback for MQTT status updates from CORE."""
-        payload = msg.payload
+        payload = message.payload
         if not isinstance(payload, dict):
             try:
                 import json

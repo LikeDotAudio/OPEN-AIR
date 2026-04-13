@@ -44,8 +44,8 @@ class TestMQTTIntegration(unittest.TestCase):
         self.client = mqtt.Client(callback_api_version=mqtt.CallbackAPIVersion.VERSION2)
         self.received_messages = []
 
-    def on_message(self, client, userdata, msg):
-        self.received_messages.append((msg.topic, msg.payload.decode()))
+    def on_message(self, client, userdata, message):
+        self.received_messages.append((message.topic, message.payload.decode()))
 
     def test_publish_subscribe_clear(self):
         """

@@ -62,7 +62,7 @@ class SnmpLogImplementation(tk.Frame, TransparencyMixin):
             # We buffer these to ensure the UI remains responsive during startup
             initial_map = getattr(self.snmp_manager.oid_map_converter, "oid_map", {})
             for oid, data in initial_map.items():
-                self._update_buffer.append((oid, data.get('val'), data.get('topic'), data))
+                self._update_buffer.append((oid, data.get('value'), data.get('topic'), data))
             
             if self._update_buffer:
                 self._update_scheduled = True

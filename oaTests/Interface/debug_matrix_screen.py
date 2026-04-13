@@ -79,9 +79,9 @@ class DebugMatrixScreen(Screen):
                 # 1. Global Debug Section
                 yield Label("GLOBAL DEBUG SETTINGS [Debug]", classes="section-label")
                 with Grid(classes="matrix-grid"):
-                    for key, val in setup["debug"].items():
+                    for key, value in setup["debug"].items():
                         chk_id = f"chk_dbg_{key.lower()}"
-                        yield Checkbox(f"{key.upper().replace('_', ' ')}", value=val, id=chk_id)
+                        yield Checkbox(f"{key.upper().replace('_', ' ')}", value=value, id=chk_id)
 
                 # 2. Matrix Master Switch
                 yield Label("DEBUG MATRIX CONTROL", classes="section-label")
@@ -90,16 +90,16 @@ class DebugMatrixScreen(Screen):
                 # 3. Systems
                 yield Label("Systems", classes="matrix-item")
                 with Grid(classes="matrix-grid"):
-                    for sys_name, val in setup["systems"].items():
+                    for sys_name, value in setup["systems"].items():
                         chk_id = f"chk_sys_{sys_name.lower()}"
-                        yield Checkbox(f"{sys_name}", value=val, id=chk_id)
+                        yield Checkbox(f"{sys_name}", value=value, id=chk_id)
 
                 # 4. Elements
                 yield Label("Elements", classes="matrix-item")
                 with Grid(classes="matrix-grid"):
-                    for el_name, val in setup["elements"].items():
+                    for el_name, value in setup["elements"].items():
                         chk_id = f"chk_el_{el_name.lower()}"
-                        yield Checkbox(f"{el_name}", value=val, id=chk_id)
+                        yield Checkbox(f"{el_name}", value=value, id=chk_id)
             
             yield Button("CLOSE & RETURN", id="btn_close", variant="success")
         yield Footer()

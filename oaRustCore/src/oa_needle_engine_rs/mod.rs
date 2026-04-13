@@ -18,7 +18,7 @@ impl NeedleEngine {
 
     /// Calculates coordinates for a needle given a configuration dictionary.
     fn calculate_geometry<'py>(&self, py: Python<'py>, cx: f64, cy: f64, config: &Bound<'py, PyDict>) -> PyResult<Bound<'py, PyDict>> {
-        let val: f64 = config.get_item("val")?.unwrap().extract()?;
+        let value: f64 = config.get_item("value")?.unwrap().extract()?;
         let min_val: f64 = config.get_item("min_val")?.unwrap().extract()?;
         let max_val: f64 = config.get_item("max_val")?.unwrap().extract()?;
         let start_angle_deg: f64 = config.get_item("start_angle_deg")?.unwrap().extract()?;
@@ -32,7 +32,7 @@ impl NeedleEngine {
         let pivot_size: f64 = config.get_item("pivot_size")?.unwrap().extract()?;
         let needle_scale: f64 = config.get_item("needle_scale")?.map(|v| v.extract().unwrap_or(1.0)).unwrap_or(1.0);
 
-        let bounded_val = val.clamp(min_val, max_val);
+        let bounded_val = value.clamp(min_val, max_val);
         let range_val = max_val - min_val;
         let norm_val = if range_val != 0.0 { (bounded_val - min_val) / range_val } else { 0.0 };
 
@@ -48,12 +48,12 @@ impl NeedleEngine {
         let tip_x = cx + length * angle_rad.cos();
         let tip_y = cy - length * angle_rad.sin();
 
-        let result = PyDict::new(py);
+        let result = PyDict::new_bound(py);
         result.set_item("tip_x", tip_x)?;
         result.set_item("tip_y", tip_y)?;
         result.set_item("angle_rad", angle_rad)?;
 
-        let coords_list = PyList::empty(py);
+        let coords_list = PyList::empty_bound(py);
         let mut draw_type = "line";
 
         match style.as_str() {

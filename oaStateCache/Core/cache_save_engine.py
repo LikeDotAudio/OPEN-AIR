@@ -11,7 +11,7 @@ from ..FileReaders import cache_io_handler
 import oaOchestration.Constants.project_paths as app_constants
 
 try:
-    from oadiskflusher_rs import DiskFlusher
+    from oaRustCore.oa_disk_flusher_rs import DiskFlusher
     flusher_instance = DiskFlusher()
 except ImportError:
     flusher_instance = None

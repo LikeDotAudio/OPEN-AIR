@@ -193,7 +193,7 @@ class BuilderImagesAnimationDisplayCreator(TransparencyMixin):
 
         try:
             payload_data = orjson.loads(payload)
-            value = payload_data.get("val")
+            value = payload_data.get("value")
 
             # Extract widget path from topic
             expected_prefix = self.state_mirror_engine.calculate_topic("", self.base_mqtt_topic_from_path)

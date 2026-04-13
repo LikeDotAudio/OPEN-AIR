@@ -3,7 +3,6 @@
 // Version: 20260402.0010.1
 
 use pyo3::prelude::*;
-use pyo3::IntoPyObjectExt;
 use pyo3::types::{PyBytes, PyDict, PyList};
 use image::{Rgba, RgbaImage};
 use rand::{Rng, SeedableRng};
@@ -23,7 +22,7 @@ impl ProceduralArtEngine {
 
     /// Generates a high-fidelity procedural Robertson screw head.
     /// Returns raw RGBA bytes.
-    fn generate_screw(&self, py: Python<'_>, size: u32, config: &Bound<'_, PyDict>) -> PyResult<(Py<PyAny>, u32)> {
+    fn generate_screw<'py>(&self, py: Python<'py>, size: u32, config: &Bound<'_, PyDict>) -> PyResult<(Bound<'py, PyBytes>, u32)> {
         let padding = (size as f64 * 0.4) as u32;
         let canvas_dim = size + padding * 2;
         let center = canvas_dim as f64 / 2.0;
@@ -137,7 +136,7 @@ impl ProceduralArtEngine {
             }
         }
 
-        Ok((PyBytes::new(py, img.as_raw()).into(), canvas_dim))
+        Ok((PyBytes::new_bound(py, img.as_raw()), canvas_dim))
     }
 
     /// Calculates coordinates for circular scale ticks using native trig math.
@@ -176,7 +175,7 @@ impl ProceduralArtEngine {
             results.push((x_start, y_start, x_end, y_end));
         }
 
-        Ok(results.into_py_any(py)?)
+        Ok(results.into_py(py))
     }
 
     fn convert_hex_to_rgb(&self, hex_string: &str) -> [u8; 3] {

@@ -24,9 +24,9 @@ class UIWindowManager:
         root = tk.Tk()
         root.configure(bg="#2b2b2b")
         
-        def _report_callback_exception(exc, val, tb):
+        def _report_callback_exception(exc, value, tb):
             import traceback
-            logger.error(f"🖥️🎨 [UI] CRITICAL: Tkinter Exception:\n{''.join(traceback.format_exception(exc, val, tb))}")
+            logger.error(f"🖥️🎨 [UI] CRITICAL: Tkinter Exception:\n{''.join(traceback.format_exception(exc, value, tb))}")
         
         root.report_callback_exception = _report_callback_exception
         

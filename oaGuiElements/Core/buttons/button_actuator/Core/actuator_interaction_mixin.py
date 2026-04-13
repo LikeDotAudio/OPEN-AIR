@@ -23,14 +23,14 @@ class ActuatorInteractionMixin:
         self.set_text(self.text_active)
         
         # Maintenance Command Handling
-        scpi_msg = str(self.config_data.get("message", self.config_data.get("value", self.config_data.get("domain", {}).get("value", ""))))
-        if self._handle_maintenance_command(scpi_msg):
+        scpi_message = str(self.config_data.get("message", self.config_data.get("value", self.config_data.get("domain", {}).get("value", ""))))
+        if self._handle_maintenance_command(scpi_message):
             return 
         
         # 2. Network Action
         if self.state_mirror_engine:
             topic = self.state_mirror_engine.calculate_topic(f"{self.path}/trigger", self.base_mqtt_topic)
-            payload = orjson.dumps({"val": True, "ts": time.time()})
+            payload = orjson.dumps({"value": True, "timestamp": time.time()})
             self.state_mirror_engine.publish_command(topic, payload)
 
     def _on_release(self, event):
@@ -43,23 +43,23 @@ class ActuatorInteractionMixin:
             self.set_text(self.text_inactive)
 
         # Maintenance check
-        scpi_msg = str(self.config_data.get("message", self.config_data.get("value", self.config_data.get("domain", {}).get("value", ""))))
-        if self._is_maintenance(scpi_msg):
+        scpi_message = str(self.config_data.get("message", self.config_data.get("value", self.config_data.get("domain", {}).get("value", ""))))
+        if self._is_maintenance(scpi_message):
             return
 
         # 2. Network Action
         if self.state_mirror_engine:
             topic = self.state_mirror_engine.calculate_topic(f"{self.path}/trigger", self.base_mqtt_topic)
-            payload = orjson.dumps({"val": False, "ts": time.time()})
+            payload = orjson.dumps({"value": False, "timestamp": time.time()})
             self.state_mirror_engine.publish_command(topic, payload)
 
-    def _handle_maintenance_command(self, scpi_msg):
+    def _handle_maintenance_command(self, scpi_message):
         """Checks if a command is a maintenance command and copies to clipboard if so."""
-        if self._is_maintenance(scpi_msg):
-            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📋⌨️✨ [MAINT] Maintenance command detected. Copying: {scpi_msg}", level="DEBUG")
+        if self._is_maintenance(scpi_message):
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📋⌨️✨ [MAINT] Maintenance command detected. Copying: {scpi_message}", level="DEBUG")
             try:
                 self.master.clipboard_clear()
-                self.master.clipboard_append(scpi_msg)
+                self.master.clipboard_append(scpi_message)
                 self.set_text("PASTE copied text into terminal")
                 if hasattr(self, "winfo_exists") and self.winfo_exists():
                     self.after(3000, lambda: self.set_text(self.text_inactive))
@@ -68,7 +68,7 @@ class ActuatorInteractionMixin:
             return True
         return False
 
-    def _is_maintenance(self, msg):
+    def _is_maintenance(self, message):
         """Predicate for maintenance commands."""
-        return (msg.startswith("*") or "SYSTem" in msg.upper() or 
-                msg.startswith("sudo ") or msg.startswith("pkill "))
+        return (message.startswith("*") or "SYSTem" in message.upper() or 
+                message.startswith("sudo ") or message.startswith("pkill "))

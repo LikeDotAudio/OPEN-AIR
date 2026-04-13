@@ -99,7 +99,7 @@ class SettleManager:
                 if not locked_set:
                     del self._locked_params_by_instance[instance_id]
 
-    def schedule_settling(self, topic, original_msg):
+    def schedule_settling(self, topic, original_message):
         """
         Schedules a terminal LINK_FEEDBACK after a period of silence.
         
@@ -109,7 +109,7 @@ class SettleManager:
         
         Args:
             topic (str): The parameter to settle.
-            original_msg (dict): The last message received for this topic.
+            original_message (dict): The last message received for this topic.
         """
         # Atomically cancel any existing timer for this specific topic.
         with self._settle_lock:
@@ -118,8 +118,8 @@ class SettleManager:
         
         # Prepare the final settling callback task.
         def _fire_settled():
-            settled_meta = original_msg["meta"].copy()
-            settled_meta["msg_type"] = "LINK_FEEDBACK"
+            settled_meta = original_message["meta"].copy()
+            settled_meta["message_type"] = "LINK_FEEDBACK"
             settled_meta["is_settled"] = True
             
             if app_constants.ROUTER_SETTLE_LOGS:
@@ -127,10 +127,10 @@ class SettleManager:
             
             # Unlock the parameter before re-ingesting to allow the feedback 
             # packet to pass through the router's filters.
-            self.unlock_parameter(topic, original_msg.get("full_id"))
+            self.unlock_parameter(topic, original_message.get("full_id"))
             
             # Re-ingest the message as "settled" to inform all network spokes.
-            self._ingest_callback("SYSTEM", topic, original_msg["val"], settled_meta)
+            self._ingest_callback("SYSTEM", topic, original_message["value"], settled_meta)
             
             # Cleanup the internal timer reference.
             with self._settle_lock:

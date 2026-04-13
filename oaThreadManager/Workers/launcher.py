@@ -111,8 +111,8 @@ def launch_core_managers(state_cache_manager, mqtt_connection_manager):
     if importlib.util.find_spec(yak_entry_path):
         yak_entry = importlib.import_module(yak_entry_path)
         yak_translator = yak_entry.YakTranslator(mqtt_connection_manager=mqtt_connection_manager, subscriber_router=subscriber_router)
-        yak_rx_module = importlib.import_module("oaTranslator.Methods.yak_rx")
-        yak_rx_manager = yak_rx_module.YakRxManager(mqtt_connection_manager=mqtt_connection_manager, subscriber_router=subscriber_router, yak_translator=yak_translator, state_cache_manager=state_cache_manager)
+        yak_receiver_module = importlib.import_module("oaTranslator.Methods.yak_receiver")
+        yak_receiver_manager = yak_receiver_module.YakReceiverManager(mqtt_connection_manager=mqtt_connection_manager, subscriber_router=subscriber_router, yak_translator=yak_translator, state_cache_manager=state_cache_manager)
     else:
         raise CriticalModuleMissingError("❌ Critical module missing: oaTranslator.Entry")
     
@@ -163,8 +163,8 @@ def launch_core_managers(state_cache_manager, mqtt_connection_manager):
     if hasattr(protocol_router, "set_nmos_manager") and nmos_manager: protocol_router.set_nmos_manager(nmos_manager)
     if hasattr(protocol_router, "set_smpte2138_manager") and smpte2138_manager: protocol_router.set_smpte2138_manager(smpte2138_manager)
     
-    def splinker_mqtt_wrapper(msg):
-        splinker_manager.handle_mqtt_command(msg.topic, msg.payload)
+    def splinker_mqtt_wrapper(message):
+        splinker_manager.handle_mqtt_command(message.topic, message.payload)
     subscriber_router.subscribe_to_topic("OPEN-AIR/System/Control/Splinker/#", splinker_mqtt_wrapper)
 
     # --- 3. Start Phase ---
@@ -208,7 +208,7 @@ def launch_core_managers(state_cache_manager, mqtt_connection_manager):
         "rest_manager": rest_manager,
         "STATE_VISA_FLEET_manager": STATE_VISA_FLEET_manager,
         "yak_translator": yak_translator,
-        "yak_rx_manager": yak_rx_manager,
+        "yak_receiver_manager": yak_receiver_manager,
         "fleet_status_monitor": fleet_status_monitor,
         "ptp_manager": ptp_manager,
         "mqtt_manager": mqtt_manager,

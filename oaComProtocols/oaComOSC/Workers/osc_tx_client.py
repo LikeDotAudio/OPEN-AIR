@@ -17,7 +17,7 @@
 from typing import Any
 
 try:
-    from oaosccore_rs import OscClient as RustOscClient
+    from oaRustCore.oa_osc_core_rs import OscClient as RustOscClient
     HAS_OSC_RS = True
 except ImportError:
     HAS_OSC_RS = False

@@ -67,7 +67,7 @@ class CMDPTreeManager:
             try:
                 var.set(float(ent.get()))
                 if self.w.mixin_ref.state_mirror_engine:
-                    p = "rot" if col == "#3" else "val" if col == "#4" else "angle"
+                    p = "rot" if col == "#3" else "value" if col == "#4" else "angle"
                     self.w.mixin_ref.state_mirror_engine.broadcast_gui_change_to_mqtt(f"{self.w.path}/ch{ch_idx}/{p}")
                 self.refresh()
             except: pass

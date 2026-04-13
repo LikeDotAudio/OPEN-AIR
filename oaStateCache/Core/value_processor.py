@@ -18,7 +18,7 @@ class ValueProcessor:
         data_key = config.get("key")
         if data_key and isinstance(data, dict):
             return data.get(data_key)
-        return data.get("val", data.get("pos", None))
+        return data.get("value", data.get("pos", None))
 
     @staticmethod
     def normalize(raw_value, tk_var, config):

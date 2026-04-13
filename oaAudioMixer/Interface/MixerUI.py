@@ -23,12 +23,10 @@ if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
 try:
-    import oaaudiomixer_rs
+    from oaRustCore import oa_audio_mixer_rs as oaaudiomixer_rs
 except ImportError:
     try:
-        from oaAudioMixer.Core.oaAudioMixer_rs.compiler_hook import ensure_compiled
-        ensure_compiled()
-        import oaaudiomixer_rs
+        from oaRustCore import oa_audio_mixer_rs as oaaudiomixer_rs
     except ImportError as e:
         print(f"🛑 [FATAL] Rust oaaudiomixer_rs module missing: {e}")
         sys.exit(1)

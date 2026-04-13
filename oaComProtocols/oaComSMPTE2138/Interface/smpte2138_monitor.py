@@ -129,12 +129,12 @@ class SMPTE2138MonitorImplementation(tk.Frame, TransparencyMixin):
         stats_frame.pack(side=tk.LEFT, expand=True)
         
         self.status_var = tk.StringVar(value="STATUS: UNKNOWN")
-        self.msg_total_var = tk.StringVar(value="MSGS: 0")
-        self.rate_var = tk.StringVar(value="RATE: 0.0 msg/s")
+        self.message_total_var = tk.StringVar(value="MSGS: 0")
+        self.rate_var = tk.StringVar(value="RATE: 0.0 message/s")
         
         ttk.Label(stats_frame, textvariable=self.status_var, 
                   style="SMPTE.Stat.TLabel").grid(row=0, column=0, padx=10)
-        ttk.Label(stats_frame, textvariable=self.msg_total_var, 
+        ttk.Label(stats_frame, textvariable=self.message_total_var, 
                   style="SMPTE.Stat.TLabel").grid(row=0, column=1, padx=10)
         ttk.Label(stats_frame, textvariable=self.rate_var, 
                   style="SMPTE.Stat.TLabel").grid(row=0, column=2, padx=10)
@@ -203,7 +203,7 @@ class SMPTE2138MonitorImplementation(tk.Frame, TransparencyMixin):
             l.sort(reverse=reverse)
 
         # Rearrange items in sorted order
-        for index, (val, k) in enumerate(l):
+        for index, (value, k) in enumerate(l):
             self.log_tree.move(k, '', index)
 
         # Reverse sort next time
@@ -234,8 +234,8 @@ class SMPTE2138MonitorImplementation(tk.Frame, TransparencyMixin):
         
         # Update Header
         self.status_var.set(f"ENGINE: {stats.get('status', 'N/A')}")
-        self.msg_total_var.set(f"TOTAL MSGS: {stats.get('msg_count', 0)}")
-        self.rate_var.set(f"RATE: {stats.get('rate', 0.0)} msg/s")
+        self.message_total_var.set(f"TOTAL MSGS: {stats.get('message_count', 0)}")
+        self.rate_var.set(f"RATE: {stats.get('rate', 0.0)} message/s")
         self.broker_var.set(f"NODE: {stats.get('broker', '-')}")
         
         # Update LED
@@ -243,14 +243,14 @@ class SMPTE2138MonitorImplementation(tk.Frame, TransparencyMixin):
         self.led_canvas.itemconfig(self.status_led, fill=color)
 
         # Update Log
-        msg_type = data.get("_msg_type", "N/A")
-        if msg_type in ["HEARTBEAT", "STATUS"]:
+        message_type = data.get("_message_type", "N/A")
+        if message_type in ["HEARTBEAT", "STATUS"]:
             return
 
-        ts = datetime.datetime.now().strftime("%H:%M:%S.%f")[:-3]
+        timestamp = datetime.datetime.now().strftime("%H:%M:%S.%f")[:-3]
         iid = self.log_tree.insert("", 0, values=(
-            ts, 
-            msg_type,
+            timestamp, 
+            message_type,
             data.get("slot", "-"),
             data.get("oid", "-"),
             data.get("value", "-")

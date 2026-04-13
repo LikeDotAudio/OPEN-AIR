@@ -161,7 +161,7 @@ class ElementProperties(
 
     def _deep_merge(self, template, actual):
         if not isinstance(template, dict) or not isinstance(actual, dict): return actual
-        res = template.copy()
+        result = template.copy()
         for k, v in actual.items():
-            res[k] = self._deep_merge(res[k], v) if k in res and isinstance(res[k], dict) and isinstance(v, dict) else v
-        return res
+            result[k] = self._deep_merge(result[k], v) if k in result and isinstance(result[k], dict) and isinstance(v, dict) else v
+        return result

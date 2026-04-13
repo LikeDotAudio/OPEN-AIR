@@ -44,7 +44,7 @@ class TestRESTProtocol:
         test_val = 0.5
         
         # OPERATE
-        response = client.post(f"/{test_topic}", json={"val": test_val})
+        response = client.post(f"/{test_topic}", json={"value": test_val})
         
         # CHECK: Data normalized and sent to Hub (ProtocolRouter)
         assert response.status_code == 200
@@ -65,7 +65,7 @@ class TestRESTProtocol:
         
         # CHECK: Correct value returned from Hub state
         assert response.status_code == 200
-        assert response.json()["val"] is True
+        assert response.json()["value"] is True
 
     def test_dynamic_system_status(self, api_client):
         """CHECK: Verify the dynamic system status endpoint works without hardcoded lists."""

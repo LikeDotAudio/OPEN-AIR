@@ -152,21 +152,21 @@ def normalize_and_ingest(
     if id_guid: logical_guid = id_guid
     
     # --- Unified Message Schema Extraction ---
-    msg_guid = meta.get("msg_guid")
-    msg_type = meta.get("msg_type")
+    message_guid = meta.get("message_guid")
+    message_type = meta.get("message_type")
     origin_source = meta.get("origin_source")
     is_settled = meta.get("is_settled")
     
     if isinstance(value, dict):
-        msg_guid = msg_guid or value.get("msg_guid")
-        msg_type = msg_type or value.get("msg_type")
+        message_guid = message_guid or value.get("message_guid")
+        message_type = message_type or value.get("message_type")
         origin_source = origin_source or value.get("origin_source")
         if is_settled is None:
             is_settled = value.get("is_settled")
 
-    msg_guid = (msg_guid or meta.get("GUID") or 
+    message_guid = (message_guid or meta.get("GUID") or 
                f"G-{int(time.time()*1000)}-{random.getrandbits(16)}")
-    msg_type = (msg_type or "SPLICE_ACTION").upper()
+    message_type = (message_type or "SPLICE_ACTION").upper()
     origin_source = origin_source or logical_source
     if is_settled is None:
         is_settled = False
@@ -174,66 +174,66 @@ def normalize_and_ingest(
     # --- V3.0.0 METADATA HARDENING ---
     # Ensure 'src' (Source Identity) is explicitly tagged for Echo Cancellation.
     # If not provided by transport, we inject the local full_id.
-    msg_src_id = meta.get("src")
+    message_src_id = meta.get("src")
     if isinstance(value, dict):
-        msg_src_id = msg_src_id or value.get("src")
+        message_src_id = message_src_id or value.get("src")
     
-    msg_src_id = msg_src_id or full_id
+    message_src_id = message_src_id or full_id
     
     # ⚡ V3.1.16 REFLECTION IDENTIFICATION
-    is_reflection = meta.get("is_reflection") or (msg_src_id == full_id and transport_source == "MQTT")
+    is_reflection = meta.get("is_reflection") or (message_src_id == full_id and transport_source == "MQTT")
     
     if is_reflection:
         if app_constants.ROUTER_INGEST_LOGS:
-            matrix_log("comms", "broker", "normalize_and_ingest", f"🛡️ [ECHO] Reflection identified for {topic} (Src: {msg_src_id})", "TRACE")
+            matrix_log("comms", "broker", "normalize_and_ingest", f"🛡️ [ECHO] Reflection identified for {topic} (Src: {message_src_id})", "TRACE")
 
     # INTERACTION LOCK (BROKER LEVEL): 
     # Prevents self-reflection loops when a parameter is actively being 
     # modified by a user on this instance.
-    if msg_type == "LINK_FEEDBACK":
+    if message_type == "LINK_FEEDBACK":
         if settle_manager.is_parameter_locked(topic, full_id):
             if app_constants.ROUTER_INGEST_LOGS:
                 matrix_log("comms", "broker", "normalize_and_ingest", f"🔒🚫🔒 [ROUTER] BLOCKADE: Rejecting self-reflection for locked parameter {topic}", "TRACE")
             return
 
     # Final Normalized Packet Construction.
-    msg = {
-        "ts": time.time(),
+    message = {
+        "timestamp": time.time(),
         "source": transport_source,
         "logical_source": logical_source,
         "topic": topic,
-        "val": value,
+        "value": value,
         "meta": meta,
         "guid": session_guid,
         "full_id": full_id,
         "logical_guid": logical_guid,
         "partition": partition,
-        "msg_guid": msg_guid,
-        "msg_type": msg_type,
+        "message_guid": message_guid,
+        "message_type": message_type,
         "origin_source": origin_source,
         "is_settled": is_settled,
-        "src": msg_src_id,
+        "src": message_src_id,
         "is_reflection": is_reflection
     }
     
     # Update metadata dictionary for downstream consumers.
     meta.update({
-        "msg_guid": msg_guid,
-        "msg_type": msg_type,
+        "message_guid": message_guid,
+        "message_type": message_type,
         "origin_source": origin_source,
         "is_settled": is_settled,
         "full_id": full_id,
-        "src": msg_src_id,
+        "src": message_src_id,
         "is_reflection": is_reflection
     })
     
-    inbound_queue.put(msg)
+    inbound_queue.put(message)
     
     # ⚡ RUST NATIVE ACCELERATION: Push to Rust router for high-speed numeric paths
     # TODO: BUG: The rust_router integration causes the ingest pipeline to hang.
     # Disabling until the Rust component can be fixed.
     # if rust_router:
-    #     rust_router.push_inbound(msg)
+    #     rust_router.push_inbound(message)
     
     # TERMINAL SETTLING:
     # If this is a primary action, lock the parameter and schedule a 
@@ -249,30 +249,30 @@ def normalize_and_ingest(
     # final LINK_FEEDBACK for external commands.
     # Non-MQTT sources (hardware, local UI) are always settled by the local 
     # broker that received them.
-    should_settle = (msg_type == "SPLICE_ACTION" and is_settleable and not is_settled)
+    should_settle = (message_type == "SPLICE_ACTION" and is_settleable and not is_settled)
     if should_settle:
         is_mqtt = (transport_source == "MQTT")
         
         if not is_mqtt or (is_mqtt and is_active):
             settle_manager.lock_parameter(topic, full_id)
-            settle_manager.schedule_settling(topic, msg)
+            settle_manager.schedule_settling(topic, message)
 
-def create_silent_msg(transport_source, topic, value, meta, local_guid, rust_router=None):
+def create_silent_message(transport_source, topic, value, meta, local_guid, rust_router=None):
     """
     Internal helper for low-priority/boot ingestion.
     
     Allocates a pre-settled message that bypasses the normal processing loops.
     """
-    msg = {
-        "ts": time.time(), "source": transport_source, "topic": topic,
-        "val": value, "meta": meta, "guid": local_guid,
+    message = {
+        "timestamp": time.time(), "source": transport_source, "topic": topic,
+        "value": value, "meta": meta, "guid": local_guid,
         "partition": app_constants.PARTITION_ID,
         "full_id": app_constants.FULL_INSTANCE_ID,
-        "msg_type": "LINK_FEEDBACK", "is_settled": True
+        "message_type": "LINK_FEEDBACK", "is_settled": True
     }
     
     # TODO: BUG: The rust_router integration causes the ingest pipeline to hang.
     # if rust_router:
-    #     rust_router.push_inbound(msg)
+    #     rust_router.push_inbound(message)
         
-    return msg
+    return message

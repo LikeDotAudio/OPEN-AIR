@@ -125,17 +125,17 @@ class TestsApp(App):
         self._start_ha_monitoring()
 
     def _start_ha_monitoring(self):
-        def on_msg(client, userdata, msg):
-            if "System/Failover/Status/" in msg.topic:
+        def on_message(client, userdata, message):
+            if "System/Failover/Status/" in message.topic:
                 try:
-                    data = msg.get_json_payload()
+                    data = message.get_json_payload()
                     role = data.get("role", "UNKNOWN")
                     from oaConfigurationManager.FileReaders.config_reader import Config
                     if data.get("guid") == Config.get_instance().INSTANCE_GUID:
                         color = "#00ff00" if role == "PRIMARY" else "#33A1FD"
                         self.call_from_thread(lambda: self.query_one("#role_label", Label).update(f"ROLE: [bold {color}]{role}[/]"))
                 except Exception: pass
-        self.mqtt_client.connect_to_broker(on_message_callback=on_msg)
+        self.mqtt_client.connect_to_broker(on_message_callback=on_message)
         self.mqtt_client.subscribe("OPEN-AIR/System/Failover/Status/#")
 
     def update_stats(self) -> None:
@@ -266,9 +266,11 @@ class TestsApp(App):
             if os.path.exists(flame_path):
                 try:
                     proc = subprocess.Popen(["python3", flame_path], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-                    out, err = proc.communicate()
+                    out, error = proc.communicate()
                     if out:
                         self.safe_write_log(out.strip())
+                    if error:
+                        self.safe_write_log(f"⚠️ {error.strip()}")
                     self.safe_write_log("✨ [SUCCESS] Flame graph data captured.")
                 except Exception as e:
                     self.safe_write_log(f"❌ [ERROR] Flame profiling failed: {e}")
@@ -291,12 +293,12 @@ class TestsApp(App):
         def task():
             if hasattr(self, "_flash_timer"): self._flash_timer.stop(); del self._flash_timer
             self.call_from_thread(lambda: self.query_one("#btn_report").remove_class("flashing"))
-            ts = datetime.now().strftime("%Y%m%d%H%M%S")
+            timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
             from oaOchestration.Core.path_initializer import DATA_REPORTS_DIR
             reports_dir = str(DATA_REPORTS_DIR)
             os.makedirs(reports_dir, exist_ok=True)
-            html_path = os.path.join(reports_dir, f'UnifiedReport_{ts}.html')
-            json_path = os.path.join(reports_dir, f'UnifiedReport_{ts}.json')
+            html_path = os.path.join(reports_dir, f'UnifiedReport_{timestamp}.html')
+            json_path = os.path.join(reports_dir, f'UnifiedReport_{timestamp}.json')
             extra_tabs = collate_extra_tabs(self.project_root)
             generator = ReportGenerator(html_path, json_path, datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
             generator.generate_json(self.summary, self.test_results)

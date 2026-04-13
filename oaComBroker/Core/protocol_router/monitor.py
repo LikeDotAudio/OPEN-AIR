@@ -52,14 +52,14 @@ class Monitor:
         self._observers = []
 
         # Telemetry Initialization
-        self._msg_count = 0
+        self._message_count = 0
         self._byte_count = 0
         self._last_telemetry_ts = time.time()
         self._telemetry = {
             "pps": 0,
             "bps": 0,
             "latency_ms": 0,
-            "total_msgs": 0
+            "total_messages": 0
         }
 
     def register_cache_observer(self, callback):
@@ -78,26 +78,26 @@ class Monitor:
         if callback in self._observers:
             self._observers.remove(callback)
 
-    def append_to_firehose(self, msg):
+    def append_to_firehose(self, message):
         """
         Maintains the rolling "firehose" buffer (last 2000 packets).
         
         Args:
-            msg (dict): The normalized message packet to store.
+            message (dict): The normalized message packet to store.
         """
         with self._firehose_lock:
             # ⚡ O(1) append to the left
-            self.firehose.appendleft(msg)
+            self.firehose.appendleft(message)
 
         # Update Telemetry Counters
-        self._msg_count += 1
+        self._message_count += 1
         # ⚡ OPTIMIZATION: Use a cheap estimation instead of orjson.dumps on every message.
         # This reduces CPU usage in the critical ingest path.
         self._byte_count += 256 # Assume 256 bytes per packet on average
 
         # Calculate Latency (Ingest TS vs Current TS)
-        if "ts" in msg:
-            latency = (time.time() - msg["ts"]) * 1000
+        if "timestamp" in message:
+            latency = (time.time() - message["timestamp"]) * 1000
             self._telemetry["latency_ms"] = (self._telemetry["latency_ms"] * 0.9) + (latency * 0.1)
 
         # Publish telemetry once per second
@@ -109,26 +109,26 @@ class Monitor:
         elapsed = now - self._last_telemetry_ts
         if elapsed <= 0: return
 
-        self._telemetry["pps"] = int(self._msg_count / elapsed)
+        self._telemetry["pps"] = int(self._message_count / elapsed)
         self._telemetry["bps"] = int((self._byte_count * 8) / elapsed)
-        self._telemetry["total_msgs"] += self._msg_count
+        self._telemetry["total_messages"] += self._message_count
         
         # Reset interval counters
-        self._msg_count = 0
+        self._message_count = 0
         self._byte_count = 0
         self._last_telemetry_ts = now
         
         # Broadcast to observers (UI)
-        telemetry_msg = {
-            "ts": now,
+        telemetry_message = {
+            "timestamp": now,
             "source": "SYSTEM",
             "topic": "OPEN-AIR/System/Monitor/Telemetry",
-            "val": self._telemetry.copy(),
-            "meta": {"msg_type": "TELEMETRY", "is_settled": True}
+            "value": self._telemetry.copy(),
+            "meta": {"message_type": "TELEMETRY", "is_settled": True}
         }
-        self.broadcast_to_observers(telemetry_msg)
+        self.broadcast_to_observers(telemetry_message)
 
-    def get_splink_relationship(self, msg_ts):
+    def get_splink_relationship(self, message_ts):
         """
         Correlates a message with its connected "Splink" partner.
         
@@ -137,14 +137,14 @@ class Monitor:
         in the firehose based on the metadata links.
         
         Args:
-            msg_ts (float/str): The timestamp of the message to investigate.
+            message_ts (float/str): The timestamp of the message to investigate.
             
         Returns:
             tuple: (source_ts, dest_ts) or (None, None).
         """
         with self._firehose_lock:
             match = next((m for m in self.firehose if 
-                          f"{m['ts']:.6f}" == msg_ts or m['ts'] == msg_ts), None)
+                          f"{m['timestamp']:.6f}" == message_ts or m['timestamp'] == message_ts), None)
             
             if not match:
                 return None, None
@@ -165,16 +165,16 @@ class Monitor:
                              m["meta"].get("splink_id") == s_id]
         
         if not candidates:
-            return (match["ts"] if is_active else None), (None if is_active else match["ts"])
+            return (match["timestamp"] if is_active else None), (None if is_active else match["timestamp"])
             
-        partner = min(candidates, key=lambda m: abs(m["ts"] - match["ts"]))
+        partner = min(candidates, key=lambda m: abs(m["timestamp"] - match["timestamp"]))
         
         if is_active:
-            return match["ts"], partner["ts"]
+            return match["timestamp"], partner["timestamp"]
         else:
-            return partner["ts"], match["ts"]
+            return partner["timestamp"], match["timestamp"]
 
-    def get_dpi_report(self, msg_ts):
+    def get_dpi_report(self, message_ts):
         """
         Generates a human-readable forensic report for a specific packet.
         
@@ -182,7 +182,7 @@ class Monitor:
         session ID, routing strategy, and DPI-enriched metadata.
         
         Args:
-            msg_ts (float/str): The timestamp of the packet to report on.
+            message_ts (float/str): The timestamp of the packet to report on.
             
         Returns:
             str: The formatted report.
@@ -190,7 +190,7 @@ class Monitor:
         match = None
         with self._firehose_lock:
             match = next((m for m in self.firehose if 
-                          f"{m['ts']:.6f}" == msg_ts or m['ts'] == msg_ts), None)
+                          f"{m['timestamp']:.6f}" == message_ts or m['timestamp'] == message_ts), None)
         
         if not match:
             return "Packet not found in firehose buffer."
@@ -200,7 +200,7 @@ class Monitor:
         src_desc = SOURCE_DESCRIPTIONS.get(source, f"❓ [{source}] - Unknown origin.")
         
         report.append("╔════════════ PACKET INVESTIGATION REPORT ════════════╗")
-        report.append(f"  TIME (UTP) : {match['ts']}")
+        report.append(f"  TIME (UTP) : {match['timestamp']}")
         
         p_id = match.get("partition", "UNKNOWN")
         is_local_session = (match['guid'] == self.local_guid)
@@ -214,7 +214,7 @@ class Monitor:
         report.append("╟──────────────────────────────────────────────────────╢")
         report.append(f"  SOURCE     : {src_desc}")
         report.append(f"  TOPIC/PATH : {match['topic']}")
-        report.append(f"  RAW VALUE  : {match['val']}")
+        report.append(f"  RAW VALUE  : {match['value']}")
         report.append("╟──────────────────────────────────────────────────────╢")
 
         strat = match.get("strategy", "BROADCAST")
@@ -248,9 +248,9 @@ class Monitor:
                 report.append(f"  {prefix}{k_disp}: {v}")
         
         try:
-            if isinstance(match['val'], dict):
+            if isinstance(match['value'], dict):
                 report.append("╟── PAYLOAD DISSECTION ────────────────────────────────╢")
-                pretty_json = orjson.dumps(match['val'], 
+                pretty_json = orjson.dumps(match['value'], 
                                            option=orjson.OPT_INDENT_2).decode()
                 report.append(f"{pretty_json}")
         except:
@@ -259,13 +259,13 @@ class Monitor:
         report.append("╚════════════════════════ END ════════════════════════╝")
         return "\n".join(report)
 
-    def broadcast_to_observers(self, msg):
+    def broadcast_to_observers(self, message):
         """
         Notifies all registered observers about a new message.
         """
         for cb in self._observers:
             try:
-                cb(msg)
+                cb(message)
             except Exception as e:
                 matrix_log("comms", "broker", "broadcast_to_observers", f"BROADCAST ERROR to {cb}: {e}", "ERROR")
 

@@ -21,7 +21,7 @@ class BatchProcessingEngine:
         chunk, rem = widgets[:chunk_size], widgets[chunk_size:]
         for w in chunk:
             try:
-                wd = w["val"]; wt = wd.get("type", wd.get("widget_type"))
+                wd = w["value"]; wt = wd.get("type", wd.get("widget_type"))
                 
                 # ⚡ FAST RENDER MODE: Use square placeholders instead of full functional widgets
                 render_tier = getattr(self.builder, '_render_tier', 'high_res')

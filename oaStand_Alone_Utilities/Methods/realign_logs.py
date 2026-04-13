@@ -14,10 +14,8 @@ LOG_PATTERN = re.compile(
     r"^(?P<timestamp>\d+\.\d+)\s+\|\s+(?P<level>\w+)\s+\|\s+(?P<partition>\w+)\s+\|\s+(?P<process>\w+)\s+\|\s+(?P<function>[\w\.]+)\s+\|\s+(?P<message>.*)$"
 )
 
-from .oaLogAligner_rs.compiler_hook import ensure_compiled
 try:
-    ensure_compiled()
-    from oalogaligner_rs.oalogaligner_rs import LogAligner
+    from oaRustCore.oa_log_aligner_rs import LogAligner
     _rust_aligner = LogAligner()
     HAS_RUST = True
 except Exception as e:
@@ -51,8 +49,8 @@ def realign_logs(input_dir, output_file):
                 if match:
                     # Store as (timestamp_float, original_line)
                     try:
-                        ts = float(match.group('timestamp'))
-                        all_log_lines.append((ts, line))
+                        timestamp = float(match.group('timestamp'))
+                        all_log_lines.append((timestamp, line))
                     except ValueError:
                         continue
                 else:

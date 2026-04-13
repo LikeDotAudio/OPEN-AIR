@@ -61,11 +61,11 @@ class HorizontalMeterRenderer(ttk.Frame):
             self.state_mirror_engine.initialize_widget_state(self.widget_id)
 
     def _on_value_change(self, *args):
-        val = self.meter_value_var.get()
-        self.label_value.config(text=f"Value: {val:.3f}", foreground="red" if val < 0 else "black")
+        value = self.meter_value_var.get()
+        self.label_value.config(text=f"Value: {value:.3f}", foreground="red" if value < 0 else "black")
         
-        trunc_val = math.trunc(val)
-        dec_part = abs(val - trunc_val) * 100
+        trunc_val = math.trunc(value)
+        dec_part = abs(value - trunc_val) * 100
         
         self.bar_graph_value1["value"] = min(abs(trunc_val), self.max_integer_value)
         self.label1.config(text=f"Int: {trunc_val}")
@@ -76,6 +76,6 @@ class HorizontalMeterRenderer(ttk.Frame):
         try:
             if self.state_mirror_engine and not getattr(self.state_mirror_engine, '_silent_update', False):
                 topic = get_topic(self.state_mirror_engine.base_topic, self.base_mqtt_topic, self.widget_id)
-                payload = {"val": val, "ts": time.time(), "GUID": self.GUID, "src": "HorizontalMeter"}
+                payload = {"value": value, "timestamp": time.time(), "GUID": self.GUID, "src": "HorizontalMeter"}
                 publish_payload(topic, orjson.dumps(payload).decode(), retain=True)
         except Exception as e: matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"❌ Publishing error: {e}", level="DEBUG")

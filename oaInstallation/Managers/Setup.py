@@ -147,9 +147,9 @@ class SetupManager:
         taskbar_script = os.path.join(getattr(self, 'project_root', PROJECT_ROOT), "oaInstallation", "Core", "TaskBarIcon.py")
         
         if not os.path.exists(taskbar_script):
-            error_msg = f"Error: {taskbar_script} not found."
-            if callback: callback(f"💀 [MISSING] {error_msg}")
-            logger.error(f"🛠️⚙️📦 [SETUP] {error_msg}")
+            error_message = f"Error: {taskbar_script} not found."
+            if callback: callback(f"💀 [MISSING] {error_message}")
+            logger.error(f"🛠️⚙️📦 [SETUP] {error_message}")
             return False
 
         try:

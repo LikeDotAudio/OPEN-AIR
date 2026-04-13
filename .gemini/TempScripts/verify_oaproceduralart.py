@@ -6,11 +6,11 @@ import os
 sys.path.append("/home/anthony/Documents/OPEN-AIR")
 
 try:
-    print("Attempting to import oaproceduralart_rs...")
-    import oaproceduralart_rs
+    print("Attempting to from oaRustCore import oa_procedural_art_rs as oaproceduralart_rs...")
+    from oaRustCore import oa_procedural_art_rs as oaproceduralart_rs
     print(f"Success! Imported oaproceduralart_rs from {oaproceduralart_rs.__file__}")
     
-    from oaproceduralart_rs import ProceduralArtEngine
+    from oaRustCore.oa_procedural_art_rs import ProceduralArtEngine
     engine = ProceduralArtEngine()
     print("Successfully instantiated ProceduralArtEngine")
     

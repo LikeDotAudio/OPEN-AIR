@@ -39,8 +39,8 @@ fn process_log_file(file_path: String, max_lines: usize) -> PyResult<String> {
         let module = encode_safe(parts[4]);
         
         let message = if parts.len() > 5 {
-            let msg_joined = parts[5..].join(" | ");
-            encode_safe(&msg_joined).to_string()
+            let message_joined = parts[5..].join(" | ");
+            encode_safe(&message_joined).to_string()
         } else {
             "".to_string()
         };

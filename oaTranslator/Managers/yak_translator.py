@@ -23,9 +23,7 @@ import inspect
 
 # --- RUST ACCELERATION LAYER (PyO3) ---
 try:
-    from oaStateCache.Core.oaTranslatorCore_rs import compiler_hook
-    compiler_hook.ensure_compiled()
-    from oatranslatorcore_rs import *
+    from oaRustCore.oa_translator_core_rs import *
     HAS_RUST = True
 except ImportError:
     logger.warning("⚠️ [TRANSLATOR] oatranslatorcore_rs not found. "
@@ -142,7 +140,7 @@ class YakTranslator:
                    f"🎧 [LISTEN] Subscribed to triggers: '{trigger_topic_filter}'", 
                    level="DEBUG")
 
-    def _on_yak_trigger_message(self, msg: MqttMessage):
+    def _on_yak_trigger_message(self, message: MqttMessage):
         """
         Processes incoming MQTT messages to trigger SCPI command generation.
         
@@ -151,14 +149,14 @@ class YakTranslator:
         payload parameters, and dispatches it to the Proxy Tx_Inbox.
         
         Args:
-            msg: The incoming MqttMessage object containing topic and payload.
+            message: The incoming MqttMessage object containing topic and payload.
 
         Side Effects:
             - Publishes a translated SCPI payload to 'OPEN-AIR/Proxy/Tx_Inbox'.
             - Updates the internal context store for correlation.
         """
-        topic = msg.topic
-        payload = msg.payload
+        topic = message.topic
+        payload = message.payload
         
         # Strip the prefix to resolve the relative YAK path hierarchy.
         yak_command_path = topic.replace("OPEN-AIR/yak/commands/", "").split("/")

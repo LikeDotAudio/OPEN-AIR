@@ -33,24 +33,24 @@ class CustomTestResult(unittest.TestResult):
             "traceback": None,
         })
 
-    def addFailure(self, test, err):
-        super().addFailure(test, err)
-        exc_type, exc_value, exc_traceback = err
+    def addFailure(self, test, error):
+        super().addFailure(test, error)
+        exc_type, exc_value, exc_traceback = error
         self.results.append({
             "test_name": f"{test.__module__}.{test._testMethodName}",
             "status": "FAILURE",
             "message": str(exc_value),
-            "traceback": "".join(self._stream.formatException(err)) if self._stream else None,
+            "traceback": "".join(self._stream.formatException(error)) if self._stream else None,
         })
 
-    def addError(self, test, err):
-        super().addError(test, err)
-        exc_type, exc_value, exc_traceback = err
+    def addError(self, test, error):
+        super().addError(test, error)
+        exc_type, exc_value, exc_traceback = error
         self.results.append({
             "test_name": f"{test.__module__}.{test._testMethodName}",
             "status": "ERROR",
             "message": str(exc_value),
-            "traceback": "".join(self._stream.formatException(err)) if self._stream else None,
+            "traceback": "".join(self._stream.formatException(error)) if self._stream else None,
         })
         
     def addSkip(self, test, reason):

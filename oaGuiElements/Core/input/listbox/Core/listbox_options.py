@@ -17,7 +17,7 @@ class ListboxOptionsManager:
     def process_mqtt_update(self, topic, payload, expected_prefix):
         """Updates the options map based on hierarchical MQTT property paths."""
         try:
-            data = orjson.loads(payload); value = data.get("val")
+            data = orjson.loads(payload); value = data.get("value")
             rel_path = topic[len(expected_prefix):].strip(TOPIC_DELIMITER)
             parts = rel_path.split(TOPIC_DELIMITER)
             if len(parts) < 2: return None

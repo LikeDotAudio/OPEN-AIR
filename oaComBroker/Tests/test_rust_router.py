@@ -18,7 +18,7 @@ class TestRustRouter(unittest.TestCase):
     def test_rust_router_ingest(self):
         """Test ingestion with the Rust-backed router."""
         try:
-            import oacorerouter_rs
+            from oaRustCore import oa_core_router_rs as oacorerouter_rs
         except ImportError:
             self.skipTest("Rust oacorerouter_rs not installed.")
 
@@ -32,9 +32,9 @@ class TestRustRouter(unittest.TestCase):
         # Note: We assume oacorerouter_rs.CoreRouter has inbound_len() and pop_inbound()
         # as suggested by the previous version of this test.
         self.assertEqual(router.rust_router.inbound_len(), 1)
-        msg_rs = router.rust_router.pop_inbound()
-        self.assertEqual(msg_rs["topic"], "test/rs")
-        self.assertEqual(msg_rs["val"], 200)
+        message_rs = router.rust_router.pop_inbound()
+        self.assertEqual(message_rs["topic"], "test/rs")
+        self.assertEqual(message_rs["value"], 200)
 
 if __name__ == "__main__":
     unittest.main()

@@ -74,19 +74,19 @@ class MeterConfig:
     def __getattr__(self, name):
         if name in self._MAPPINGS:
             src_name, key, default, t_cast = self._MAPPINGS[name]
-            val = getattr(self, src_name).get(key)
-            if val is None and src_name == "config":
-                val = self.style_overrides.get(key)
-                if val is None:
-                    val = self.pointer.get(key)
-            if val is None:
-                val = default
-            if val is None: return None
+            value = getattr(self, src_name).get(key)
+            if value is None and src_name == "config":
+                value = self.style_overrides.get(key)
+                if value is None:
+                    value = self.pointer.get(key)
+            if value is None:
+                value = default
+            if value is None: return None
             try:
                 if t_cast == str:
-                    v_str = str(val)
+                    v_str = str(value)
                     return v_str.lower() if name in ["pointer_style", "meter_mode"] else v_str
-                return t_cast(val)
+                return t_cast(value)
             except: return default
         raise AttributeError(f"'{type(self).__name__}' has no attribute '{name}'")
 

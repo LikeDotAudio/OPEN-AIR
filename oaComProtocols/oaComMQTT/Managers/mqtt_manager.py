@@ -71,7 +71,7 @@ class MqttManager:
     def _publish_status(self, status: str):
         """Publishes the connection status to the broker."""
         status_payload = {
-            "val": status,
+            "value": status,
             "status": status,
             "address": app_constants.MQTT_BROKER_ADDRESS,
             "port": str(app_constants.MQTT_BROKER_PORT)
@@ -109,12 +109,12 @@ class MqttManager:
         """Attempts to reconnect the MQTT client if disconnected."""
         matrix_log("comms", "mqtt", "_attempt_reconnect", "📡 [MQTT] Attempting to reconnect...", "INFO")
         try:
-            res = self.mqtt_client.connect(
+            result = self.mqtt_client.connect(
                 app_constants.MQTT_BROKER_ADDRESS,
                 app_constants.MQTT_BROKER_PORT,
                 app_constants.MQTT_CLIENT_ID
             )
-            if res == 0:
+            if result == 0:
                 self._publish_status("ONLINE")
                 self.mqtt_client.loop_start()
                 self._sync_state_on_reconnect()
@@ -139,13 +139,13 @@ class MqttManager:
             for topic, (callback, qos) in subs.items():
                 self.mqtt_client.subscribe(topic, qos)
 
-    def _handle_delete_command(self, msg: MqttMessage):
+    def _handle_delete_command(self, message: MqttMessage):
         matrix_log("comms", "mqtt", "_handle_delete_command", "🧨 [MQTT] MqttManager: Executing Topic Deletion.", "DEBUG")
         delete_open_air_tree(self.mqtt_client, self.state_cache_manager)
 
-    def _handle_service_command(self, msg: MqttMessage):
+    def _handle_service_command(self, message: MqttMessage):
         try:
-            payload = msg.payload
+            payload = message.payload
             if not payload:
                 return
             data = orjson.loads(payload) if isinstance(payload, (bytes, str)) else payload
@@ -172,5 +172,5 @@ class MqttManager:
         """Placeholder for updating service status."""
         matrix_log("comms", "mqtt", "_update_service_status", f"🔧 [MQTT] Updating status for {service} to {status}", "INFO")
 
-    def _on_fleet_scan_complete(self, msg: MqttMessage):
+    def _on_fleet_scan_complete(self, message: MqttMessage):
         matrix_log("comms", "mqtt", "_on_fleet_scan_complete", "✅ [MQTT] MqttManager: Fleet Scan Complete detected.", "INFO")

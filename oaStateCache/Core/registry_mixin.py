@@ -7,11 +7,9 @@
 import threading
 import logging
 from loguru import logger
-from .oaTranslatorCore_rs.compiler_hook import ensure_compiled
 
 try:
-    ensure_compiled()
-    from oatranslatorcore_rs import WidgetRegistry as RustWidgetRegistry
+    from oaRustCore.oa_translator_core_rs import WidgetRegistry as RustWidgetRegistry
     HAS_RUST = True
 except Exception as e:
     logging.warning(f"oaTranslator: Failed to load Rust WidgetRegistry: {e}")

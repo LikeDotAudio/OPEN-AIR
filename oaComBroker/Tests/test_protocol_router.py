@@ -41,15 +41,15 @@ class TestProtocolRouter(unittest.TestCase):
         
         # Verify push_inbound was called
         self.assertTrue(self.mock_rust.push_inbound.called)
-        msg = self.mock_rust.push_inbound.call_args[0][0]
+        message = self.mock_rust.push_inbound.call_args[0][0]
         
-        self.assertEqual(msg["topic"], "test/topic")
-        self.assertEqual(msg["val"], "test_value")
-        self.assertEqual(msg["source"], "MQTT")
+        self.assertEqual(message["topic"], "test/topic")
+        self.assertEqual(message["value"], "test_value")
+        self.assertEqual(message["source"], "MQTT")
         # Check Unified Message Schema fields
-        self.assertIn("msg_guid", msg)
-        self.assertIn("msg_type", msg)
-        self.assertIn("ts", msg)
+        self.assertIn("message_guid", message)
+        self.assertIn("message_type", message)
+        self.assertIn("timestamp", message)
 
     def test_router_stop_stops_threads(self):
         """Test that stop() correctly resets the running flag."""
@@ -64,25 +64,25 @@ class TestProtocolRouter(unittest.TestCase):
         from oaComBroker.Core.protocol_router.constants import app_constants
         
         # 1. External message (Different full_id) should get a valid strategy
-        ext_msg = {
+        ext_message = {
             "source": "MQTT",
             "logical_source": "MQTT",
             "topic": "OPEN-AIR/GUI/test",
-            "val": 1.0,
+            "value": 1.0,
             "full_id": "different_instance_id"
         }
-        ext_strategy = calculate_strategy(ext_msg)
+        ext_strategy = calculate_strategy(ext_message)
         self.assertNotEqual(ext_strategy, "IGNORE (REFLECT)")
         
         # 2. Echo message (Same full_id) should be IGNORED
-        echo_msg = {
+        echo_message = {
             "source": "MQTT",
             "logical_source": "MQTT",
             "topic": "OPEN-AIR/GUI/test",
-            "val": 1.0,
+            "value": 1.0,
             "full_id": app_constants.FULL_INSTANCE_ID
         }
-        echo_strategy = calculate_strategy(echo_msg)
+        echo_strategy = calculate_strategy(echo_message)
         self.assertEqual(echo_strategy, "IGNORE (REFLECT)")
 
 if __name__ == "__main__":

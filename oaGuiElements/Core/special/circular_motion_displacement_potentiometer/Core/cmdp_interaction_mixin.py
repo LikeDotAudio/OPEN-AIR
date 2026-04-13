@@ -10,49 +10,49 @@ class CMDPInteractionMixin:
     """Handles canvas-level mouse and scroll interactions for the CMDP widget."""
 
     def on_click(self, e):
-        f = self.get_fader_at(e.x, e.y)
-        if f:
-            self.active_fader = f; f.dragging = True; self.canvas.lift(f.widget_id)
-            f.start_val, f.start_x, f.start_y = float(f.val_var.get()), e.x, e.y
+        active_fader = self.get_fader_at(e.x, e.y)
+        if active_fader:
+            self.active_fader = active_fader; active_fader.dragging = True; self.canvas.lift(active_fader.widget_id)
+            active_fader.start_val, active_fader.start_x, active_fader.start_y = float(active_fader.val_var.get()), e.x, e.y
 
     def on_drag(self, e):
-        f = self.active_fader
-        if f and f.dragging:
+        active_fader = self.active_fader
+        if active_fader and active_fader.dragging:
             if (e.state & 0x0008) or (e.state & 0x20000): # Alt
-                f.angle_var.set(math.degrees(math.atan2(e.y-self.center_y, e.x-self.center_x)))
+                active_fader.angle_var.set(math.degrees(math.atan2(e.y-self.center_y, e.x-self.center_x)))
             else:
-                rad = math.radians(float(f.angle_var.get()))
-                proj = (e.x-f.start_x)*math.cos(rad) + (e.y-f.start_y)*math.sin(rad)
-                f.val_var.set(max(0, min(100, f.start_val - (proj/f.track_len)*100)))
-            self.update_tree(f)
+                rad = math.radians(float(active_fader.angle_var.get()))
+                proj = (e.x-active_fader.start_x)*math.cos(rad) + (e.y-active_fader.start_y)*math.sin(rad)
+                active_fader.val_var.set(max(0, min(100, active_fader.start_val - (proj/active_fader.track_len)*100)))
+            self.update_tree(active_fader)
 
     def on_mid_click(self, e):
-        f = self.get_fader_at(e.x, e.y)
-        if f: self.active_fader = f; f.dragging = True
+        active_fader = self.get_fader_at(e.x, e.y)
+        if active_fader: self.active_fader = active_fader; active_fader.dragging = True
 
     def on_mid_drag(self, e):
-        f = self.active_fader
-        if f and f.dragging:
-            f.angle_var.set(math.degrees(math.atan2(e.y-self.center_y, e.x-self.center_x)))
-            self.update_tree(f)
+        active_fader = self.active_fader
+        if active_fader and active_fader.dragging:
+            active_fader.angle_var.set(math.degrees(math.atan2(e.y-self.center_y, e.x-self.center_x)))
+            self.update_tree(active_fader)
 
     def on_release(self, e):
         if self.active_fader: self.active_fader.dragging = False; self.active_fader = None
 
     def on_motion(self, e):
-        f = self.get_fader_at(e.x, e.y)
-        if f != self.hovered_fader:
+        active_fader = self.get_fader_at(e.x, e.y)
+        if active_fader != self.hovered_fader:
             if self.hovered_fader: self.hovered_fader.set_hover(False)
-            if f: f.set_hover(True); self.hovered_fader = f
+            if active_fader: active_fader.set_hover(True); self.hovered_fader = active_fader
 
     def on_scroll(self, e):
-        f = self.get_fader_at(e.x, e.y)
-        if f:
-            self.canvas.lift(f.widget_id); delta = 1 if (e.num == 4 or (hasattr(e, 'delta') and e.delta > 0)) else -1
+        active_fader = self.get_fader_at(e.x, e.y)
+        if active_fader:
+            self.canvas.lift(active_fader.widget_id); delta = 1 if (e.num == 4 or (hasattr(e, 'delta') and e.delta > 0)) else -1
             is_alt = (e.state & 0x0008) or (e.state & 0x20000)
-            if is_alt: f.angle_var.set(float(f.angle_var.get()) + delta * 3)
-            else: f.rot_var.set(max(0, min(100, float(f.rot_var.get()) + delta * 5)))
-            self.update_tree(f)
+            if is_alt: active_fader.angle_var.set(float(active_fader.angle_var.get()) + delta * 3)
+            else: active_fader.rot_var.set(max(0, min(100, float(active_fader.rot_var.get()) + delta * 5)))
+            self.update_tree(active_fader)
 
     def get_fader_at(self, x, y):
         ids = self.canvas.find_closest(x, y, halo=20)

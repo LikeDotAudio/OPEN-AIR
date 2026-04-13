@@ -94,11 +94,11 @@ class TestMeterNeedle(unittest.TestCase):
                 }
             }
         }
-        cfg = MeterConfig(test_config)
-        self.assertEqual(cfg.meter_viewable_angle, 120.0)
-        self.assertEqual(cfg.meter_center_angle, 270.0)
+        configuration = MeterConfig(test_config)
+        self.assertEqual(configuration.meter_viewable_angle, 120.0)
+        self.assertEqual(configuration.meter_center_angle, 270.0)
         # Should pull from style_overrides first
-        self.assertEqual(cfg.pivot_crop, 0.5)
+        self.assertEqual(configuration.pivot_crop, 0.5)
 
         test_config_2 = {
             "cosmetics": {

@@ -45,7 +45,7 @@ class NmosManager:
         self._is_running = False
         matrix_log("comms", "nmos", "stop", "⏹️ NMOS IS-07 Bridge Stopped.", "WARNING")
 
-    def handle_router_event(self, topic, val, meta):
+    def handle_router_event(self, topic, value, meta):
         """
         Translates internal Protocol Router events to NMOS IS-07 state changes.
         """
@@ -58,14 +58,14 @@ class NmosManager:
             flow_id=meta.get("flow_id", "00000000-0000-0000-0000-000000000000")
         )
         timing = Timing(
-            creation_timestamp=meta.get("ts", time.strftime("%Y-%m-%dT%H:%M:%SZ")),
-            origin_timestamp=meta.get("ts", time.strftime("%Y-%m-%dT%H:%M:%SZ"))
+            creation_timestamp=meta.get("timestamp", time.strftime("%Y-%m-%dT%H:%M:%SZ")),
+            origin_timestamp=meta.get("timestamp", time.strftime("%Y-%m-%dT%H:%M:%SZ"))
         )
         
         # Determine event type based on value
-        if isinstance(val, bool):
+        if isinstance(value, bool):
             etype = "boolean"
-        elif isinstance(val, (int, float)):
+        elif isinstance(value, (int, float)):
             etype = "number"
         else:
             etype = "string"
@@ -75,7 +75,7 @@ class NmosManager:
             identity=identity,
             timing=timing,
             event_type=etype,
-            payload=val,
+            payload=value,
             transport_topic=topic,
             transport_type="websocket"
         )
@@ -84,7 +84,7 @@ class NmosManager:
             identity=identity,
             timing=timing,
             event_type=etype,
-            payload=val,
+            payload=value,
             transport_topic=topic,
             transport_type="mqtt"
         )

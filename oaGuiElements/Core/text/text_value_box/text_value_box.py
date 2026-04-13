@@ -217,8 +217,8 @@ class BuilderTextValueBoxCreator(TransparencyMixin):
 
             # --- Event Binding ---
             def on_return(event):
-                val = entry_value.get()
-                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"⌨️🔢🆗 [INPUT] Manual entry for value box '{label}': '{val}'", level="INFO")
+                value = entry_value.get()
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"⌨️🔢🆗 [INPUT] Manual entry for value box '{label}': '{value}'", level="INFO")
                 if state_mirror_engine:
                     matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📡🔴📡 [MQTT] Broadcasting manual entry for '{path}'", level="TRACE")
                     state_mirror_engine.broadcast_gui_change_to_mqtt(path)

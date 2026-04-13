@@ -5,11 +5,9 @@
 # Description: Python wrapper for the Rust Splink Registry (Lock-Free).
 
 import logging
-from .oaSplinkRegistry_rs.compiler_hook import ensure_compiled
 
 try:
-    ensure_compiled()
-    from .oaSplinkRegistry_rs.oasplinkregistry_rs import SplinkRegistry as RustSplinkRegistry
+    from oaRustCore.oa_splink_registry_rs import SplinkRegistry as RustSplinkRegistry
     HAS_RUST = True
 except Exception as e:
     logging.error(f"oaSplinker: Failed to load Rust Splink Registry: {e}")

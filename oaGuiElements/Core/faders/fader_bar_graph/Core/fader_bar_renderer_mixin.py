@@ -60,24 +60,24 @@ class FaderBarRendererMixin:
         cap_w = self.widget_config.get("cap_width", f_w + (self.meter_width * 2) + (self.bar_padding * 2) + 4)
         
         self.cap_img = FaderBarAssetGenerator.get_3d_cap(int(cap_w), int(cap_h), self.fader_grip_color, self.fader_track_color)
-        val = self.fader_var.get()
+        value = self.fader_var.get()
         # Use centralized geometry math for value-to-pixel mapping
-        y = self.top_m + UIGeometryMath.value_to_pixel(val, self.min_val, self.max_val, self.draw_h, reverse=True)
+        y = self.top_m + UIGeometryMath.value_to_pixel(value, self.min_val, self.max_val, self.draw_h, reverse=True)
         self.canvas.create_image(self.cx, y, image=self.cap_img, tags=("dynamic", "cap"))
         
         text_col = "white" if self.fader_grip_color.lower() in ["black", "#000000", "#222222"] else "black"
-        self.canvas.create_text(self.cx, y, text=f"{val:.1f}", fill=text_col, font=("Arial", 7, "bold"), tags=("dynamic", "cap_text"))
+        self.canvas.create_text(self.cx, y, text=f"{value:.1f}", fill=text_col, font=("Arial", 7, "bold"), tags=("dynamic", "cap_text"))
 
     def _update_meter(self, side):
         tag = f"fill_{side}"
         self.canvas.delete(tag)
         x = self.x_left if side == "left" else self.x_right
-        val = self.left_var.get() if side == "left" else self.right_var.get()
+        value = self.left_var.get() if side == "left" else self.right_var.get()
         style = self.left_style if side == "left" else self.right_style
         
         meter_w = self.meter_width
         # Use centralized geometry math for value-to-pixel mapping
-        val_h = UIGeometryMath.value_to_pixel(val, self.min_val, self.max_val, self.draw_h)
+        val_h = UIGeometryMath.value_to_pixel(value, self.min_val, self.max_val, self.draw_h)
         fy = self.top_m + (self.draw_h - val_h)
         
         # Ranges

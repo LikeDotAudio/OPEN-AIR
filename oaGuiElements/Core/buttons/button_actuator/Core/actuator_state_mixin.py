@@ -13,12 +13,12 @@ from loguru import logger
 class ActuatorStateMixin:
     """Handles remote state synchronization for the Actuator button."""
 
-    def _on_mqtt_state_update(self, msg):
+    def _on_mqtt_state_update(self, message):
         """Syncs the button's visual state with remote MQTT triggers."""
         try:
-            payload = msg.payload
+            payload = message.payload
             data = orjson.loads(payload) if isinstance(payload, (bytes, str)) else payload
-            is_active = data.get("val")
+            is_active = data.get("value")
 
             matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"✨🔄🎨 [SYNC] Updating actuator '{self.path}' visual state to: {is_active}", level="DEBUG")
             self.set_active(is_active)

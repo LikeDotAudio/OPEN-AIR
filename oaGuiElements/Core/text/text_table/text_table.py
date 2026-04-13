@@ -91,7 +91,7 @@ class BuilderTextTableCreator(TransparencyMixin):
             sel = tree.selection()
             if sel and path:
                 sd = item_map.get(sel[0]); tp = ctx.state_mirror_engine.calculate_topic(f"{path}/selected", ctx.base_mqtt_topic_from_path)
-                mqtt_publisher_service.publish_payload(tp, orjson.dumps({"val": sd}).decode())
+                mqtt_publisher_service.publish_payload(tp, orjson.dumps({"value": sd}).decode())
         tree.bind("<<TreeviewSelect>>", _on_select)
 
         if path:

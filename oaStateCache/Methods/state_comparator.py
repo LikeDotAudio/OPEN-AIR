@@ -17,8 +17,8 @@ current_version_hash = 20251230 * 230100 * 1
 
 
 # Compares an incoming MQTT payload with a cached state to determine if an update is needed.
-# This function prioritizes comparison by timestamp (`ts`) if available, updating only
-# the value (`val`) of the payload.
+# This function prioritizes comparison by timestamp (`timestamp`) if available, updating only
+# the value (`value`) of the payload.
 # Inputs:
 #     incoming_topic (str): The MQTT topic of the incoming message.
 #     incoming_payload (Dict): The dictionary payload of the incoming message.
@@ -29,8 +29,8 @@ def should_update(
     incoming_topic: str, incoming_payload: Any, cached_state: Any
 ) -> bool:
     """
-    Compare timestamps (ts). If incoming > cached, return True.
-    If ts is missing (or in cache missing), compare the entire payload for parity.
+    Compare timestamps (timestamp). If incoming > cached, return True.
+    If timestamp is missing (or in cache missing), compare the entire payload for parity.
     Supports Rust-backed StateRegistryCore for high-speed comparison.
     """
     # 1. Use Rust if available
@@ -40,7 +40,7 @@ def should_update(
     # --- Python Fallback ---
     # Normalize incoming_payload to a dict if it's a primitive
     if not isinstance(incoming_payload, dict):
-        incoming_payload = {"val": incoming_payload}
+        incoming_payload = {"value": incoming_payload}
 
     cached_payload = cached_state.get(incoming_topic)
     if not cached_payload:
@@ -48,10 +48,10 @@ def should_update(
 
     # Normalize cached_payload to a dict if it's a primitive
     if not isinstance(cached_payload, dict):
-        cached_payload = {"val": cached_payload}
+        cached_payload = {"value": cached_payload}
 
-    incoming_ts = incoming_payload.get("ts")
-    cached_ts = cached_payload.get("ts")
+    incoming_ts = incoming_payload.get("timestamp")
+    cached_ts = cached_payload.get("timestamp")
 
     # 1. Primary: Timestamp comparison (for historical replay safety)
     if incoming_ts and cached_ts:

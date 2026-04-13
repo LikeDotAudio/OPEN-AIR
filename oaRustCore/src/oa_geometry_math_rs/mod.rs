@@ -1,16 +1,16 @@
 use pyo3::prelude::*;
 
 #[pyfunction]
-fn normalize_value(val: f64, min_val: f64, max_val: f64) -> f64 {
+fn normalize_value(value: f64, min_val: f64, max_val: f64) -> f64 {
     if (max_val - min_val).abs() < f64::EPSILON {
         return 0.0;
     }
-    (val - min_val) / (max_val - min_val)
+    (value - min_val) / (max_val - min_val)
 }
 
 #[pyfunction]
-fn value_to_pixel(val: f64, min_val: f64, max_val: f64, pixel_length: f64, reverse: bool) -> f64 {
-    let norm = normalize_value(val, min_val, max_val);
+fn value_to_pixel(value: f64, min_val: f64, max_val: f64, pixel_length: f64, reverse: bool) -> f64 {
+    let norm = normalize_value(value, min_val, max_val);
     if reverse {
         (1.0 - norm) * pixel_length
     } else {
@@ -45,7 +45,7 @@ fn get_angle(px: f64, py: f64, cx: f64, cy: f64) -> f64 {
 }
 
 #[pymodule]
-pub fn oageometrymath_rs(_py: Python, m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn oageometrymath_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(normalize_value, m)?)?;
     m.add_function(wrap_pyfunction!(value_to_pixel, m)?)?;
     m.add_function(wrap_pyfunction!(rotate_point, m)?)?;

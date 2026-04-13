@@ -141,7 +141,7 @@ Registers a callback function for state changes.
 
 ##### `get(self, topic)`
 Public API to retrieve a value from the cache.
-Returns the unwrapped 'val' or None if the topic doesn't exist.
+Returns the unwrapped 'value' or None if the topic doesn't exist.
 
 **Parameters:**
 - `topic`: [TODO: Detail meaning, valid ranges, special cases]

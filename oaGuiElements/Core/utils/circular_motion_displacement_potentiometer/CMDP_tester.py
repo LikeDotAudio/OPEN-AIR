@@ -112,9 +112,9 @@ class MultiFaderApp(tk.Tk, CMDPInteractionMixin, CMDPGroupMixin):
         self.canvas.create_oval(cx-r, cy-r, cx+r, cy+r, fill="#444", outline=ACCENT_COLOR, width=2, tags="head")
         self.canvas.create_polygon(cx, cy-r-15, cx-10, cy-r+5, cx+10, cy-r+5, fill=ACCENT_COLOR, tags="head")
 
-    def update_table(self, wid, val, rot, angle):
+    def update_table(self, wid, value, rot, angle):
         if self.tree.exists(str(wid)):
-            self.tree.item(str(wid), values=(wid+1, self.faders[wid].label, int(val), int(rot), int(angle)))
+            self.tree.item(str(wid), values=(wid+1, self.faders[wid].label, int(value), int(rot), int(angle)))
 
 if __name__ == "__main__":
     MultiFaderApp().mainloop()

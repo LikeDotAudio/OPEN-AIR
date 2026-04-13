@@ -56,10 +56,10 @@ class LeafEditorFactory:
             self.entry.bind("<FocusOut>", self._update_state_from_entry)
 
         def _pick_color(self, e):
-            res = colorchooser.askcolor(title=f"Color: {self.key}", initialcolor=self.entry.get() or "#fff")
-            if res[1]:
-                self.set_value(res[1])
-                state_manager.update_state(res[1], path=self.full_path, source=self.source)
+            result = colorchooser.askcolor(title=f"Color: {self.key}", initialcolor=self.entry.get() or "#fff")
+            if result[1]:
+                self.set_value(result[1])
+                state_manager.update_state(result[1], path=self.full_path, source=self.source)
         
         def _update_state_from_entry(self, e):
             current_value = self.entry.get()

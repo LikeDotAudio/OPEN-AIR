@@ -40,10 +40,10 @@ impl SnmpAgent {
         // Find the first OID strictly greater than the target
         for (o, v) in tree.range(parsed_oid.clone()..) {
             if o > &parsed_oid {
-                let dict = PyDict::new(py);
+                let dict = PyDict::new_bound(py);
                 let _ = dict.set_item("oid", format_oid(o));
                 let _ = dict.set_item("value", v);
-                return Some(dict.into());
+                return Some(dict.into_any().unbind());
             }
         }
         None

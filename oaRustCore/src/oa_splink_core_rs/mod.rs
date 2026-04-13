@@ -4,7 +4,6 @@
 
 use pyo3::prelude::*;
 use pyo3::types::{PyDict, PyList, PyInt};
-use pyo3::IntoPyAnyExt;
 
 #[derive(Clone, Debug)]
 enum HandlerType {
@@ -53,7 +52,7 @@ impl SplinkPipeline {
             
             let params = config_dict.get_item("params")?
                 .and_then(|v| v.downcast_into::<PyDict>().ok())
-                .unwrap_or_else(|| PyDict::new(config_dict.py()));
+                .unwrap_or_else(|| PyDict::new_bound(config_dict.py()));
 
             match h_type.as_str() {
                 "scale" => {
@@ -116,23 +115,23 @@ impl SplinkPipeline {
                         };
 
                         if *is_int {
-                            value = (scaled_value.round() as i64).into_py_any(py)?;
+                            value = (scaled_value.round() as i64).into_py(py);
                         } else {
-                            value = scaled_value.into_py_any(py)?;
+                            value = scaled_value.into_py(py);
                         }
                     }
                 },
                 HandlerType::Invert { min, max } => {
                     if let Ok(val_bool) = value.extract::<bool>(py) {
-                        value = (!val_bool).into_py_any(py)?;
+                        value = (!val_bool).into_py(py);
                     } else if let Ok(val_float) = value.extract::<f64>(py) {
                         let inverted_val = (max + min) - val_float;
                         // Use Bound for downcasting to check for int
                         let value_bound = value.bind(py);
                         if value_bound.is_instance_of::<PyInt>() {
-                            value = (inverted_val.round() as i64).into_py_any(py)?;
+                            value = (inverted_val.round() as i64).into_py(py);
                         } else {
-                            value = inverted_val.into_py_any(py)?;
+                            value = inverted_val.into_py(py);
                         }
                     }
                 },

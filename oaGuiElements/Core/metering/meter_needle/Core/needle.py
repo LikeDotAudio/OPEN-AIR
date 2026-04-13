@@ -16,7 +16,7 @@ _engine = NeedleEngine()
 
 @dataclass
 class NeedleConfig:
-    val: float
+    value: float
     min_val: float
     max_val: float
     start_angle_deg: float
@@ -35,7 +35,7 @@ class NeedleConfig:
 class NeedleDrawer:
     @staticmethod
     def draw_needle(canvas, center_x, center_y, 
-                    val, min_val, max_val,
+                    value, min_val, max_val,
                     start_angle_deg, end_angle_deg, extent_deg,
                     main_arc_radius, text_offset_from_arc,
                     color, style, thick, counter_clockwise, pivot_size,
@@ -44,7 +44,7 @@ class NeedleDrawer:
         Draws or updates the needle. Legacy wrapper for draw_with_config.
         """
         config = NeedleConfig(
-            val=val, min_val=min_val, max_val=max_val,
+            value=value, min_val=min_val, max_val=max_val,
             start_angle_deg=start_angle_deg, end_angle_deg=end_angle_deg, extent_deg=extent_deg,
             main_arc_radius=main_arc_radius, text_offset_from_arc=text_offset_from_arc,
             color=color, style=style, thick=thick, counter_clockwise=counter_clockwise,

@@ -59,14 +59,14 @@ class AsyncGridRenderer:
                 try:
                     parent_frame.grid_propagate(False)
                     if hasattr(parent_frame, 'pack_propagate'): parent_frame.pack_propagate(False)
-                    w = data.get("width") or geom.get("width")
-                    h = data.get("height") or geom.get("height")
+                    width = data.get("width") or geom.get("width")
+                    height = data.get("height") or geom.get("height")
                     # ⚡ HARDENING: Enforce 1px floor and handle type conversion safely
-                    if w:
-                        w_val = max(1, int(float(w)))
+                    if width:
+                        w_val = max(1, int(float(width)))
                         parent_frame.config(width=w_val)
-                    if h:
-                        h_val = max(1, int(float(h)))
+                    if height:
+                        h_val = max(1, int(float(height)))
                         parent_frame.config(height=h_val)
                 except (tk.TclError, ValueError, TypeError) as e:
                     # 🛡️ Catching TclError (X11) and conversion errors
@@ -132,12 +132,12 @@ class AsyncGridRenderer:
 
         while field_idx < len(field_list):
             if not parent.winfo_exists(): state["aborted"] = True; break
-            key, val = field_list[field_idx]
+            key, value = field_list[field_idx]
             
-            if key in ["layout", "type", "geometry", "column_sizing", "background"] or not isinstance(val, dict):
+            if key in ["layout", "type", "geometry", "column_sizing", "background"] or not isinstance(value, dict):
                 field_idx += 1; continue
             
-            path_key = key or val.get("id") or val.get("label") or f"item_{field_idx}"
+            path_key = key or value.get("id") or value.get("label") or f"item_{field_idx}"
             
             p_sfx = ""
             if parent_data:
@@ -147,31 +147,31 @@ class AsyncGridRenderer:
             raw_path = f"{prefix}.{p_sfx}.{path_key}"
             cur_path = ".".join([part for part in raw_path.split(".") if part])
             
-            w_type = val.get("type", val.get("widget_type"))
+            w_type = value.get("type", value.get("widget_type"))
             if not w_type: field_idx += 1; continue
 
             # Inject Identity Metadata for leaf widgets
             if w_type not in STRUCT:
-                val["bin_id"] = bin_id
-                val["block_name"] = block_name
-                val["field_name"] = key or path_key
+                value["bin_id"] = bin_id
+                value["block_name"] = block_name
+                value["field_name"] = key or path_key
 
-            lay = val.get("layout", {}); cs, rs = int(lay.get("col_span", 1)), int(lay.get("row_span", 1))
+            lay = value.get("layout", {}); cs, rs = int(lay.get("col_span", 1)), int(lay.get("row_span", 1))
             st = lay.get("sticky", "nsew" if w_type in STRUCT else "")
             cr, cc = lay.get("row", row_idx), lay.get("column", col_idx)
 
             if w_type in STRUCT:
                 if w_type == "OcaBlock":
-                    target = StructuralAssembler.create_block(parent, val, self.builder)
+                    target = StructuralAssembler.create_block(parent, value, self.builder)
                     target._oca_path = cur_path
                     if hasattr(self.builder, 'bind_to_widget'):
                         self.builder.bind_to_widget(target)
                     target.grid(row=cr, column=cc, columnspan=cs, rowspan=rs, sticky=st)
                     state["pending"] += 1
                     # Pass the key of this block as the block_name for its children
-                    self.render(target, val, cur_path, on_complete=lambda: (state.update({"pending": state["pending"]-1}), _check_done()), parent_bg_pil=bg_pil, context=context, bin_id=bin_id, block_name=key or path_key)
+                    self.render(target, value, cur_path, on_complete=lambda: (state.update({"pending": state["pending"]-1}), _check_done()), parent_bg_pil=bg_pil, context=context, bin_id=bin_id, block_name=key or path_key)
                 elif w_type == "OcaBin":
-                    hull, inner = StructuralAssembler.create_bin(parent, val, self.builder)
+                    hull, inner = StructuralAssembler.create_bin(parent, value, self.builder)
                     hull._oca_path = cur_path
                     inner._oca_path = f"{cur_path}.fields"
                     if hasattr(self.builder, 'bind_to_widget'):
@@ -180,11 +180,11 @@ class AsyncGridRenderer:
                     hull.grid(row=cr, column=cc, columnspan=cs, rowspan=rs, sticky=st)
                     state["pending"] += 1
                     # A Bin resets or updates the bin_id for its children
-                    self.render(inner, val, cur_path, on_complete=lambda: (state.update({"pending": state["pending"]-1}), _check_done()), parent_bg_pil=bg_pil, context=context, bin_id=val.get("id") or bin_id, block_name=block_name)
+                    self.render(inner, value, cur_path, on_complete=lambda: (state.update({"pending": state["pending"]-1}), _check_done()), parent_bg_pil=bg_pil, context=context, bin_id=value.get("id") or bin_id, block_name=block_name)
                 else:
                     state["pending"] += 1; creator = self.builder.widget_factory.get(w_type)
                     if creator:
-                        target = creator(parent_widget=parent, config_data=val, context=context)
+                        target = creator(parent_widget=parent, config_data=value, context=context)
                         if target: 
                             target._oca_path = cur_path
                             if hasattr(self.builder, 'bind_to_widget'):
@@ -194,7 +194,7 @@ class AsyncGridRenderer:
             else:
                 state["pending"] += 1
                 deferred.append({
-                    "r": cr, "c": cc, "val": val, "path": cur_path, "sticky": st, 
+                    "r": cr, "c": cc, "value": value, "path": cur_path, "sticky": st, 
                     "padx": lay.get("padx", 0), "pady": lay.get("pady", 0)
                 })
 

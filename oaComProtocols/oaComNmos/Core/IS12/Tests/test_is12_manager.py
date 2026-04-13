@@ -24,14 +24,14 @@ from oaComProtocols.oaComNmos.Core.IS12.Interface.schemas import (
 
 def test_schema_base_message_valid():
     """Test valid creation of IS12BaseMessage."""
-    base_msg = IS12BaseMessage(
+    base_message = IS12BaseMessage(
         message_id="test-id-1",
         timestamp="2026-04-05T15:49:00Z",
         version="1.0.1"
     )
-    assert base_msg.message_id == "test-id-1"
-    assert base_msg.timestamp == "2026-04-05T15:49:00Z"
-    assert base_msg.version == "1.0.1"
+    assert base_message.message_id == "test-id-1"
+    assert base_message.timestamp == "2026-04-05T15:49:00Z"
+    assert base_message.version == "1.0.1"
 
 def test_schema_base_message_invalid():
     """Test invalid creation of IS12BaseMessage (missing fields)."""
@@ -44,7 +44,7 @@ def test_schema_base_message_invalid():
 
 def test_schema_command_message_valid():
     """Test valid creation of IS12CommandMessage."""
-    cmd_msg = IS12CommandMessage(
+    cmd_message = IS12CommandMessage(
         message_id="cmd-test-1",
         timestamp="2026-04-05T15:49:01Z",
         version="1.0.1",
@@ -52,9 +52,9 @@ def test_schema_command_message_valid():
         resource_id="device-abc",
         parameters={"volume": 50, "mute": False}
     )
-    assert cmd_msg.operation == "Set"
-    assert cmd_msg.resource_id == "device-abc"
-    assert cmd_msg.parameters == {"volume": 50, "mute": False}
+    assert cmd_message.operation == "Set"
+    assert cmd_message.resource_id == "device-abc"
+    assert cmd_message.parameters == {"volume": 50, "mute": False}
 
 def test_schema_command_message_invalid():
     """Test invalid creation of IS12CommandMessage (missing operation)."""
@@ -70,33 +70,33 @@ def test_schema_command_message_invalid():
 
 def test_schema_command_response_message_valid_success():
     """Test valid creation of IS12CommandResponseMessage (success)."""
-    response_msg = IS12CommandResponseMessage(
+    response_message = IS12CommandResponseMessage(
         message_id="resp-test-1",
         timestamp="2026-04-05T15:49:03Z",
         version="1.0.1",
         command_result="Success",
         data={"current_volume": 50}
     )
-    assert response_msg.command_result == "Success"
-    assert response_msg.data == {"current_volume": 50}
-    assert response_msg.error is None
+    assert response_message.command_result == "Success"
+    assert response_message.data == {"current_volume": 50}
+    assert response_message.error is None
 
 def test_schema_command_response_message_valid_failure():
     """Test valid creation of IS12CommandResponseMessage (failure)."""
-    response_msg = IS12CommandResponseMessage(
+    response_message = IS12CommandResponseMessage(
         message_id="resp-test-2",
         timestamp="2026-04-05T15:49:04Z",
         version="1.0.1",
         command_result="Failure",
         error={"error_code": 400, "error_message": "Invalid parameter"}
     )
-    assert response_msg.command_result == "Failure"
-    assert response_msg.error == {"error_code": 400, "error_message": "Invalid parameter"}
-    assert response_msg.data is None
+    assert response_message.command_result == "Failure"
+    assert response_message.error == {"error_code": 400, "error_message": "Invalid parameter"}
+    assert response_message.data is None
 
 def test_schema_subscription_message_valid():
     """Test valid creation of IS12SubscriptionMessage."""
-    sub_msg = IS12SubscriptionMessage(
+    sub_message = IS12SubscriptionMessage(
         message_id="sub-test-1",
         timestamp="2026-04-05T15:49:05Z",
         version="1.0.1",
@@ -105,10 +105,10 @@ def test_schema_subscription_message_valid():
         event_types=["property_changed"],
         filter={"parameter": "volume"}
     )
-    assert sub_msg.subscription_id == "sub-id-123"
-    assert sub_msg.resource_ids == ["device-a", "device-b"]
-    assert sub_msg.event_types == ["property_changed"]
-    assert sub_msg.filter == {"parameter": "volume"}
+    assert sub_message.subscription_id == "sub-id-123"
+    assert sub_message.resource_ids == ["device-a", "device-b"]
+    assert sub_message.event_types == ["property_changed"]
+    assert sub_message.filter == {"parameter": "volume"}
 
 # --- IS12Manager Tests ---
 

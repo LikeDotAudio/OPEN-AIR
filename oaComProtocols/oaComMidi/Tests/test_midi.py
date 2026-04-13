@@ -47,8 +47,8 @@ class TestMidiManager(unittest.TestCase):
         """OPERATE: Simulate incoming MIDI data (Spoke -> Hub)."""
         # BUILD
         test_port = MagicMock(); test_port.name = "TestPort"
-        mock_msg = MagicMock(); mock_msg.type = "note_on"; mock_msg.channel = 0; mock_msg.note = 60; mock_msg.velocity = 127
-        test_port.iter_pending.return_value = [mock_msg]
+        mock_message = MagicMock(); mock_message.type = "note_on"; mock_message.channel = 0; mock_message.note = 60; mock_message.velocity = 127
+        test_port.iter_pending.return_value = [mock_message]
         
         self.midi.mapper.midi_to_topic.return_value = ("OPEN-AIR/MIDI/Note/60", 127)
         
@@ -69,7 +69,7 @@ class TestMidiManager(unittest.TestCase):
         self.midi.mapper.topic_to_midi.return_value = MagicMock() # Mocked MIDI message
         
         # OPERATE: Data from an external source (e.g., GUI)
-        self.midi.publish("OPEN-AIR/MIDI/Note/60", {"val": 1.0}, {"origin_source": "GUI"})
+        self.midi.publish("OPEN-AIR/MIDI/Note/60", {"value": 1.0}, {"origin_source": "GUI"})
         
         # CHECK: Transmitted to hardware Spoke
         self.midi.mapper.topic_to_midi.assert_called()
@@ -83,7 +83,7 @@ class TestMidiManager(unittest.TestCase):
         self.midi.ports.outports = [mock_out]
         
         # OPERATE: Data that originally came FROM MIDI
-        self.midi.publish("OPEN-AIR/MIDI/Note/60", {"val": 0.5}, {"origin_source": "MIDI"})
+        self.midi.publish("OPEN-AIR/MIDI/Note/60", {"value": 0.5}, {"origin_source": "MIDI"})
         
         # CHECK: Echo suppression
         mock_out.send.assert_not_called()

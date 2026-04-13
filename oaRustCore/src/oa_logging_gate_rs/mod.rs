@@ -1,17 +1,25 @@
-// oaLogging/Methods/oaLoggingGate_rs/src/lib.rs
+// oaLogging/Methods/oaLoggingGate_rs/mod.rs
 // Author: Gemini Architect
-// Version: 20260401.1955.3
+// Version: 20260413.0010.1
+//
+// Description: High-speed native logging filter. Intercepts Python logger 
+// calls to determine if a message should reach a sink based on a global 
+// matrix. This offloads string-formatting and log-IO from the Python side 
+// for disabled trace levels.
 
 use pyo3::prelude::*;
 use dashmap::DashMap;
 use once_cell::sync::Lazy;
 use std::sync::atomic::{AtomicBool, Ordering};
 
-// Global static for high-speed master toggle
+// AtomicBool is used for the master toggle to ensure thread-safe, zero-lock 
+// evaluation during high-frequency log bursts (e.g., protocol firehose).
 static MASTER_LOG_ENABLED: AtomicBool = AtomicBool::new(true);
 
-// High-speed map of enabled systems and elements
-static LOG_MATRIX: Lazy<DashMap<String, bool>> = Lazy::new(DashMap::new);
+// DashMap provides lock-free concurrent reads for system-specific gates,
+// allowing multiple threads to evaluate logging levels simultaneously 
+// without contention on the Global Interpreter Lock (GIL).
+static LOGGING_MATRIX: Lazy<DashMap<String, bool>> = Lazy::new(DashMap::new);
 
 #[pyfunction]
 fn set_master_toggle(enabled: bool) {
@@ -22,36 +30,39 @@ fn set_master_toggle(enabled: bool) {
 #[pyo3(signature = (system, element=None, enabled=true))]
 fn set_gate_state(system: String, element: Option<String>, enabled: bool) {
     let key = match element {
-        Some(e) => format!("{}:{}", system, e),
+        Some(element_name) => format!("{}:{}", system, element_name),
         None => system,
     };
-    LOG_MATRIX.insert(key, enabled);
+    LOGGING_MATRIX.insert(key, enabled);
 }
 
 #[pyfunction]
 #[pyo3(signature = (system, element=None, func_name=None))]
 fn is_debug_allowed(system: String, element: Option<String>, func_name: Option<String>) -> bool {
-    let _ = func_name; // Avoid unused variable warning
-    
-    // 1. Check Master Toggle
+    // Master kill-switch evaluation is the fastest path. If the system is 
+    // in PRODUCTION mode, all trace/debug logs are dropped here.
+    let _ = func_name;
     if !MASTER_LOG_ENABLED.load(Ordering::Relaxed) {
         return false;
     }
 
-    // 2. Check Element-specific gate
-    if let Some(e) = &element {
-        let key = format!("{}:{}", system, e);
-        if let Some(enabled) = LOG_MATRIX.get(&key) {
+    // Element-specific gating allows for "surgical" debugging of a single 
+    // widget or fader without flooding the console with other system traffic.
+    if let Some(element_name) = &element {
+        let key = format!("{}:{}", system, element_name);
+        if let Some(enabled) = LOGGING_MATRIX.get(&key) {
             return *enabled;
         }
     }
 
-    // 3. Fallback to System-wide gate
-    if let Some(enabled) = LOG_MATRIX.get(&system) {
+    // System-wide fallback ensures that protocol-level logs (e.g., all MIDI)
+    // are controlled if no specific element is targeted.
+    if let Some(enabled) = LOGGING_MATRIX.get(&system) {
         return *enabled;
     }
 
-    // 4. Default to enabled
+    // Default to enabled ensures no logs are lost if a module hasn't 
+    // explicitly registered with the gate.
     true
 }
 

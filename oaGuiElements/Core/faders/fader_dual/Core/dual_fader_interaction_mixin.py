@@ -12,8 +12,8 @@ class DualFaderInteractionMixin:
         if w <= 1: w, h = self.width, self.height
         is_vert = self.orientation == "vertical"
         
-        def get_dist(val):
-            n = (val - self.min_val) / (self.max_val - self.min_val) if (self.max_val - self.min_val) else 0
+        def get_dist(value):
+            n = (value - self.min_val) / (self.max_val - self.min_val) if (self.max_val - self.min_val) else 0
             dn = n ** (1.0 / self.log_exponent)
             dim = h if is_vert else w
             pos = (dim - 40.0) * (1.0 - dn if is_vert else dn) + 20.0
@@ -38,8 +38,8 @@ class DualFaderInteractionMixin:
         norm = (event.y - 20.0) / (h - 40.0) if is_v else (event.x - 20.0) / (w - 40.0)
         if is_v: norm = 1.0 - norm
         
-        val = self.min_val + (max(0, min(1, norm)) ** self.log_exponent) * (self.max_val - self.min_val)
-        (self.v1_var if self.active_fader == "V1" else self.v2_var).set(val)
+        value = self.min_val + (max(0, min(1, norm)) ** self.log_exponent) * (self.max_val - self.min_val)
+        (self.v1_var if self.active_fader == "V1" else self.v2_var).set(value)
         
         if self.state_mirror_engine:
             self.state_mirror_engine.broadcast_gui_change_to_mqtt(f"{self.path}/{self.active_fader}")

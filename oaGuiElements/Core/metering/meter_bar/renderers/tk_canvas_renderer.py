@@ -22,7 +22,7 @@ class TkCanvasRenderer:
                 self.canvas.delete(item)
         self.ids = {}
 
-    def draw_static(self, layout, cfg):
+    def draw_static(self, layout, configuration):
         """Draws the static portions of the meter (track, ticks, grid, labels)."""
         self.clear()
         
@@ -34,58 +34,58 @@ class TkCanvasRenderer:
         height = int(self.canvas.cget("height"))
 
         # 0.1 Main Widget Label (Floating)
-        if cfg.label and cfg.show_label:
+        if configuration.label and configuration.show_label:
             lx, ly, l_anchor = width/2, 10, "n"
-            if cfg.label_position == "bottom": ly, l_anchor = height - 10, "s"
-            elif cfg.label_position == "left": lx, ly, l_anchor = 5, height/2, "w"
-            elif cfg.label_position == "right": lx, ly, l_anchor = width - 5, height/2, "e"
+            if configuration.label_position == "bottom": ly, l_anchor = height - 10, "s"
+            elif configuration.label_position == "left": lx, ly, l_anchor = 5, height/2, "w"
+            elif configuration.label_position == "right": lx, ly, l_anchor = width - 5, height/2, "e"
             
             self.canvas.create_text(
-                lx, ly, text=cfg.label, fill=cfg.label_colour,
+                lx, ly, text=configuration.label, fill=configuration.label_colour,
                 font=("Helvetica", 10, "bold"), anchor=l_anchor, tags="industrial_text"
             )
 
         # 1. Bar Track
-        self._create_shape('bg', layout.bar_track, fill=cfg.bar_track_bg, outline="")
+        self._create_shape('bg', layout.bar_track, fill=configuration.bar_track_bg, outline="")
         
         # 2. Zones (initial draw)
-        self.ids['z1'] = self._create_shape('z1', layout.zone1, fill=cfg.lower_colour, outline="")
-        self.ids['z2'] = self._create_shape('z2', layout.zone2, fill=cfg.middle_colour, outline="")
-        self.ids['z3'] = self._create_shape('z3', layout.zone3, fill=cfg.upper_colour, outline="")
+        self.ids['z1'] = self._create_shape('z1', layout.zone1, fill=configuration.lower_colour, outline="")
+        self.ids['z2'] = self._create_shape('z2', layout.zone2, fill=configuration.middle_colour, outline="")
+        self.ids['z3'] = self._create_shape('z3', layout.zone3, fill=configuration.upper_colour, outline="")
         
         # 3. Grid Lines (Drawn behind ticks but above zones)
         for x1, y1, x2, y2, is_sub in layout.grid_lines:
-            self.canvas.create_line(x1, y1, x2, y2, fill=cfg.grid_colour, width=1, tags="grid")
+            self.canvas.create_line(x1, y1, x2, y2, fill=configuration.grid_colour, width=1, tags="grid")
             
         # 4. Ticks
         for x1, y1, x2, y2, is_sub in layout.ticks:
-            color = cfg.sub_tick_colour if is_sub else cfg.tick_colour
+            color = configuration.sub_tick_colour if is_sub else configuration.tick_colour
             width = 1 if is_sub else 2
             self.canvas.create_line(x1, y1, x2, y2, fill=color, width=width)
             
         # 5. Scale Labels
         for x, y, text, anchor in layout.scale_labels:
-            self.canvas.create_text(x, y, text=text, fill=cfg.scale_text_colour, 
-                                    font=("Helvetica", cfg.font_size), anchor=anchor)
+            self.canvas.create_text(x, y, text=text, fill=configuration.scale_text_colour, 
+                                    font=("Helvetica", configuration.font_size), anchor=anchor)
             
         # 6. Dynamic Element Placeholders
-        self.ids['indicator'] = self._create_shape('indicator', layout.indicator, fill=cfg.pointer_colour, outline="")
+        self.ids['indicator'] = self._create_shape('indicator', layout.indicator, fill=configuration.pointer_colour, outline="")
         
-        if cfg.peak_display:
+        if configuration.peak_display:
             # We draw peak as a line or rect based on style
             # For "line", get_poly with 0 width returns a collapsed poly. 
             # In update, we'll handle the actual coordinate mapping.
-            self.ids['peak'] = self._create_shape('peak', [0,0,0,0], fill=cfg.peak_display_colour, outline="")
-            if cfg.peak_flag:
-                self.ids['peak_flag'] = self.canvas.create_polygon(0,0,0,0,0,0, fill=cfg.peak_display_colour, outline="")
+            self.ids['peak'] = self._create_shape('peak', [0,0,0,0], fill=configuration.peak_display_colour, outline="")
+            if configuration.peak_flag:
+                self.ids['peak_flag'] = self.canvas.create_polygon(0,0,0,0,0,0, fill=configuration.peak_display_colour, outline="")
                 
-        if cfg.show_peak_hold:
+        if configuration.show_peak_hold:
             self.ids['peak_led'] = self.canvas.create_rectangle(*layout.peak_led, fill="#444444", outline="black")
 
         if self.canvas.find_withtag("grid"):
             self.canvas.tag_raise("grid")
 
-    def update_dynamic(self, dyn_data, overload_factor, cfg):
+    def update_dynamic(self, dyn_data, overload_factor, configuration):
         """Updates positions and colors of moving elements."""
         
         # Check if grid exists once for optimization
@@ -116,11 +116,11 @@ class TkCanvasRenderer:
         # 4. Update Overload LED color (Fade)
         if 'peak_led' in self.ids:
             if overload_factor >= 1.0:
-                self.canvas.itemconfig(self.ids['peak_led'], fill=cfg.peak_display_colour)
+                self.canvas.itemconfig(self.ids['peak_led'], fill=configuration.peak_display_colour)
             elif overload_factor <= 0.0:
                 self.canvas.itemconfig(self.ids['peak_led'], fill="#444444")
             else:
-                fade_color = self._interpolate_color(cfg.peak_display_colour, "#444444", 1.0 - overload_factor)
+                fade_color = self._interpolate_color(configuration.peak_display_colour, "#444444", 1.0 - overload_factor)
                 self.canvas.itemconfig(self.ids['peak_led'], fill=fade_color)
 
     def _create_shape(self, tag, coords, **kwargs):

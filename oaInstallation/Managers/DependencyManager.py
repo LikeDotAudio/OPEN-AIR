@@ -102,14 +102,14 @@ def _execute_pip_command(action, package_name, console_print_func,
                     "permission denied" in stderr_lower):
                     return True 
             
-            error_msg = f"❌ [ERROR] Pip {action} failed for {package_name}: {result.stderr.strip()}"
-            console_print_func(error_msg)
-            logger.error(f"🔍📦🔗 [DEPENDENCY] {error_msg}")
+            error_message = f"❌ [ERROR] Pip {action} failed for {package_name}: {result.stderr.strip()}"
+            console_print_func(error_message)
+            logger.error(f"🔍📦🔗 [DEPENDENCY] {error_message}")
             return False
     except Exception as e:
-        error_msg = f"💥 [CRITICAL] Pip execution error: {e}"
-        console_print_func(error_msg)
-        logger.error(f"🔍📦🔗 [DEPENDENCY] {error_msg}")
+        error_message = f"💥 [CRITICAL] Pip execution error: {e}"
+        console_print_func(error_message)
+        logger.error(f"🔍📦🔗 [DEPENDENCY] {error_message}")
         return False
 
 def action_check_dependancies(console_print_func, debug_log_func, 

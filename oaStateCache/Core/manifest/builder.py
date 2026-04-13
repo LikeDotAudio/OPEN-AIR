@@ -13,10 +13,8 @@ from oaConfigurationManager.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
 # --- Native Rust Optimization ---
-from oaTranslator.Methods.oaManifestGen_rs.compiler_hook import ensure_compiled
 try:
-    ensure_compiled()
-    from oamanifestgen_rs import create_manifest as rust_create_manifest
+    from oaRustCore.oa_manifest_gen_rs import create_manifest as rust_create_manifest
     HAS_RUST_MANIFEST = True
 except Exception as e:
     HAS_RUST_MANIFEST = False
@@ -57,7 +55,7 @@ def create_manifest(
     payload = {
         # ⚡ THE IMMUTABLE MANIFEST
         "origin_source": origin,
-        "msg_guid": str(uuid.uuid4()),
+        "message_guid": str(uuid.uuid4()),
         "timestamp": now,
         "target_parameter": topic,
         "value": float(value) if isinstance(value, (int, float)) else value,
@@ -65,9 +63,9 @@ def create_manifest(
         "is_settled": metadata.get("SETTLED", True) if metadata else True,
         
         # Backward Compatibility Layer
-        "val": value, 
+        "value": value, 
         "source": source, 
-        "ts": now, 
+        "timestamp": now, 
         "GUID": app_constants.FULL_INSTANCE_ID,
         "partition": app_constants.PARTITION_ID,
         "full_id": app_constants.FULL_INSTANCE_ID

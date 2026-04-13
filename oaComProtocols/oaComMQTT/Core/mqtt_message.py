@@ -44,7 +44,7 @@ class MqttMessage:
             return orjson.loads(decoded)
         except orjson.JSONDecodeError:
             # Fallback for non-JSON payloads
-            return {"val": decoded}
+            return {"value": decoded}
 
     def to_dict(self) -> Dict[str, Any]:
         """Converts to a dictionary for publishing."""

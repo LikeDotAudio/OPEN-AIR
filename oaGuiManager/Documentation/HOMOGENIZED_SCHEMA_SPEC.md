@@ -28,7 +28,7 @@ To reduce payload size and eliminate string parsing overhead, use these standard
 | **x-pos** | `x` | pixels | geometry | Horizontal offset. |
 | **y-pos** | `y` | pixels | geometry | Vertical offset. |
 | **padding** | `pad` | pixels | geometry | Internal margin. |
-| **value** | `val` | float/int | domain | Current functional state. |
+| **value** | `value` | float/int | domain | Current functional state. |
 | **minimum** | `min` | float/int | domain | Lower threshold. |
 | **maximum** | `max` | float/int | domain | Upper threshold. |
 | **unit** | `unit` | string | domain | Engineering unit (e.g., "dBm", "Hz"). |
@@ -57,7 +57,7 @@ To reduce payload size and eliminate string parsing overhead, use these standard
     "pad": 10
   },
   "domain": {
-    "val": 0.0,
+    "value": 0.0,
     "min": 0.0,
     "max": 100.0,
     "unit": "unit"

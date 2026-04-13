@@ -38,11 +38,11 @@ class TestVisaMqttListener(unittest.TestCase):
     def test_on_search_request_valid(self):
         """
         BUILD: Mock searcher to return resources.
-        OPERATE: Call _on_search_request with val=True.
+        OPERATE: Call _on_search_request with value=True.
         CHECK: Assert searcher is called and GUI is updated.
         """
         self.mock_searcher.search_resources.return_value = ["DEV1", "DEV2"]
-        payload = orjson.dumps({"val": True})
+        payload = orjson.dumps({"value": True})
         
         self.listener._on_search_request(MQTT_TOPIC_SEARCH_TRIGGER, payload)
         

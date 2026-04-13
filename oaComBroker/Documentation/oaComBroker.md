@@ -73,8 +73,8 @@ The router never hides its work. The `Monitor` class maintains a 2000-message
 rolling buffer (the `firehose`). 
 
 It exposes tools for UI dashboards, including:
-*   **`get_dpi_report(ts)`**: Generates a formatted, human-readable forensic 
+*   **`get_dpi_report(timestamp)`**: Generates a formatted, human-readable forensic 
     report for any specific packet, showing its lifecycle, session origin, and 
     pretty-printed JSON payload.
-*   **`get_splink_relationship(ts)`**: Correlates a message with its connected 
+*   **`get_splink_relationship(timestamp)`**: Correlates a message with its connected 
     "Splink" partner across the network.

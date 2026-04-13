@@ -61,12 +61,12 @@ class MidiManager:
             if cb in self._monitor_callbacks:
                 self._monitor_callbacks.remove(cb)
 
-    def _notify_monitor(self, direction, msg):
+    def _notify_monitor(self, direction, message):
         """Passes traffic details to local listeners (e.g. Dashboard)."""
         with self._monitor_lock:
             for cb in self._monitor_callbacks:
                 try:
-                    cb(direction, msg)
+                    cb(direction, message)
                 except Exception as e:
                     logger.error(f"🎹 [MIDI-MGR] Monitor callback error: {e}")
 
@@ -146,18 +146,18 @@ class MidiManager:
             try:
                 # Support tests that use iter_pending
                 if hasattr(port, 'iter_pending'):
-                    msgs = list(port.iter_pending())
+                    messages = list(port.iter_pending())
                 else:
-                    msg = port.receive(timeout=0.005)
-                    msgs = [msg] if msg else []
+                    message = port.receive(timeout=0.005)
+                    messages = [message] if message else []
 
-                for msg in msgs:
+                for message in messages:
                     # 1. Translate MIDI to System Topic
-                    topic, val = self.mapper.midi_to_topic(msg, getattr(port, 'name', 'unknown'))
+                    topic, value = self.mapper.midi_to_topic(message, getattr(port, 'name', 'unknown'))
                     meta = {
-                        "midi_type": msg.type, 
-                        "guid": f"{topic.split('/')[2] if topic and '/' in topic else 'unknown'}/{getattr(msg, 'channel', 0)}", 
-                        "midi_raw": str(msg),
+                        "midi_type": message.type, 
+                        "guid": f"{topic.split('/')[2] if topic and '/' in topic else 'unknown'}/{getattr(message, 'channel', 0)}", 
+                        "midi_raw": str(message),
                         "origin_source": "MIDI" # Required for tests
                     }
 
@@ -167,31 +167,31 @@ class MidiManager:
 
                         # ⚡ LOCAL FIRST: Notify internal monitors (Dashboard) immediately
                         self._notify_monitor("RX", {
-                            "val": getattr(msg, 'velocity', getattr(msg, 'value', 0)),
-                            "velocity": getattr(msg, 'velocity', 0),
-                            "channel": getattr(msg, 'channel', 0),
-                            "note": getattr(msg, 'note', getattr(msg, 'control', 0)),
-                            "type": msg.type,
+                            "value": getattr(message, 'velocity', getattr(message, 'value', 0)),
+                            "velocity": getattr(message, 'velocity', 0),
+                            "channel": getattr(message, 'channel', 0),
+                            "note": getattr(message, 'note', getattr(message, 'control', 0)),
+                            "type": message.type,
                             "port": getattr(port, 'name', 'unknown'),
-                            "raw": str(msg)
+                            "raw": str(message)
                         })
 
                         # 3. Inject into ProtocolRouter
                         if self.state_cache_manager:
-                            self.state_cache_manager.handle_external_update(topic, val, source="MIDI", metadata=meta)
+                            self.state_cache_manager.handle_external_update(topic, value, source="MIDI", metadata=meta)
                         
                         # 4. Cleanup lock based on event type
-                        if msg.type in ['note_on', 'note_off', 'control_change']:
-                            if msg.type == 'note_on' and getattr(msg, 'velocity', 0) > 0:
+                        if message.type in ['note_on', 'note_off', 'control_change']:
+                            if message.type == 'note_on' and getattr(message, 'velocity', 0) > 0:
                                 pass # Keep locked while held? (Optional logic)
-                            elif msg.type == 'note_off': 
+                            elif message.type == 'note_off': 
                                 self.lock_manager.unlock(topic)
 
-                            if msg.type == 'control_change': 
+                            if message.type == 'control_change': 
                                 self.lock_manager.delayed_unlock(topic)
                 
                 if _one_shot: break
-                if not msgs:
+                if not messages:
                     time.sleep(0.001) # Yield to CPU
             except Exception as e:
                 matrix_log("comms", "midi", "_midi_listen_loop", f"🛑 [MIDI-LISTEN] Error on {getattr(port, 'name', 'unknown')}: {e}", "ERROR")
@@ -203,15 +203,15 @@ class MidiManager:
 
     # --- OUTBOUND: System -> MIDI Hardware ---
 
-    def _on_protocol_event(self, msg):
+    def _on_protocol_event(self, message):
         """
         Triggered when a protocol event is received (from ProtocolRouter/MQTT).
         Matches topics and determines if a MIDI message should be transmitted.
         """
-        topic = msg.get("topic")
-        val = msg.get("val")
-        meta = msg.get("meta", msg.get("metadata", {}))
-        source = msg.get("source", "UNKNOWN")
+        topic = message.get("topic")
+        value = message.get("value")
+        meta = message.get("meta", message.get("metadata", {}))
+        source = message.get("source", "UNKNOWN")
         direction = "TX"
 
         # 1. Loop Prevention: Ignore if WE were the source
@@ -225,7 +225,7 @@ class MidiManager:
         if is_midi_topic:
             # Reconstruct the monitor notification for GUI visualization
             try:
-                real_val = val.get("val") if isinstance(val, dict) else val
+                real_val = value.get("value") if isinstance(value, dict) else value
                 import re
                 note_match = re.search(r"note(\d+)", topic)
                 note = int(note_match.group(1)) if note_match else 0
@@ -236,7 +236,7 @@ class MidiManager:
 
                 m_type = "note_on" if real_val > 0 else "note_off"
                 self._notify_monitor(direction, {
-                    "val": real_val, 
+                    "value": real_val, 
                     "topic": topic, 
                     "note": note,
                     "channel": channel,
@@ -249,46 +249,46 @@ class MidiManager:
             if not self.run_bridge: return # Observers only monitor, they don't transmit
             
             # 4. Translate back to MIDI and transmit
-            midi_msg = self.mapper.topic_to_midi(topic, val)
-            if midi_msg:
+            midi_message = self.mapper.topic_to_midi(topic, value)
+            if midi_message:
                 # Determine which port to send to (extracted from topic)
                 # topic: OPEN-AIR/MIDI/<port_name>/...
                 parts = topic.split('/')
                 if len(parts) > 2:
                     target_port = parts[2]
-                    self.publish(target_port, midi_msg)
+                    self.publish(target_port, midi_message)
 
     def publish(self, *args, **kwargs):
         """
         Sends a MIDI message. Supports multiple signatures:
-        1. publish(port_name, midi_msg) - Direct hardware send
-        2. publish(topic, val, meta) - Core router dispatch
+        1. publish(port_name, midi_message) - Direct hardware send
+        2. publish(topic, value, meta) - Core router dispatch
         """
         if not self.run_bridge: return
 
-        # Signature 1: Direct hardware send (port_name, mido_msg)
+        # Signature 1: Direct hardware send (port_name, mido_message)
         if len(args) == 2 and hasattr(args[1], 'type'):
-            port_name, midi_msg = args
+            port_name, midi_message = args
             port = self.ports.open_output(port_name)
             if port:
                 try:
-                    port.send(midi_msg)
+                    port.send(midi_message)
                 except Exception as e:
                     matrix_log("comms", "midi", "publish", f"🛑 [MIDI-TX] Error sending to {port_name}: {e}", "ERROR")
             return
 
-        # Signature 2: Core router dispatch (topic, val, meta)
+        # Signature 2: Core router dispatch (topic, value, meta)
         if len(args) >= 2:
             topic = args[0]
-            val = args[1]
+            value = args[1]
             meta = args[2] if len(args) > 2 else (kwargs.get('meta') or kwargs.get('metadata') or {})
             
             # Anti-feedback check
             if meta.get("origin_source") == "MIDI" or meta.get("source") == "MIDI":
                 return
 
-            midi_msg = self.mapper.topic_to_midi(topic, val)
-            if midi_msg:
+            midi_message = self.mapper.topic_to_midi(topic, value)
+            if midi_message:
                 # Hardware locks prevent us from moving a fader the user is currently touching
                 if self.lock_manager.is_locked(topic):
                     matrix_log("comms", "midi", "publish", f"🎹 [MIDI-TX] Dropping update for {topic} (Hardware Locked)", "DEBUG")
@@ -297,6 +297,6 @@ class MidiManager:
                 # Broadcast to ALL active outputs (simple Hub-and-Spoke model)
                 for outport in self.ports.outports:
                     try:
-                        outport.send(midi_msg)
+                        outport.send(midi_message)
                     except Exception as e:
                         logger.error(f"Failed to send MIDI to {getattr(outport, 'name', 'unknown')}: {e}")

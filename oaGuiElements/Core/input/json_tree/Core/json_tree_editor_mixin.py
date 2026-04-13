@@ -44,13 +44,13 @@ class JsonTreeEditorMixin:
         entry.bind("<FocusOut>", save_edit)
         entry.bind("<Escape>", lambda e: entry.destroy())
 
-    def _parse_typed_value(self, val):
-        if val.lower() == "true": return True
-        if val.lower() == "false": return False
+    def _parse_typed_value(self, value):
+        if value.lower() == "true": return True
+        if value.lower() == "false": return False
         try:
-            if "." in val: return float(val)
-            return int(val)
-        except ValueError: return val
+            if "." in value: return float(value)
+            return int(value)
+        except ValueError: return value
 
     def _update_data_from_tree_id(self, item_id, new_value):
         path = []

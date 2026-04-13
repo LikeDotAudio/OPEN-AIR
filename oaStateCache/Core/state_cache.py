@@ -25,13 +25,11 @@ import orjson
 import logging
 
 # --- RUST ACCELERATION LAYER (PyO3) ---
-from oaStateCache.Methods.oaStateRegistry_rs.compiler_hook import ensure_compiled
 
 LOCAL_DEBUG = False
 
 try:
-    ensure_compiled()
-    from oastateregistry_rs import StateRegistryCore as RustStateRegistry
+    from oaRustCore.oa_state_registry_rs import StateRegistryCore as RustStateRegistry
     HAS_RUST = True
 except ImportError:
     logging.warning("⚠️ [STATE_CACHE] oastateregistry_rs not found. "
@@ -147,10 +145,10 @@ class StateRegistry:
             topic (str): The canonical MQTT topic key.
 
         Returns:
-            Any: The literal value ('val' field) or raw payload.
+            Any: The literal value ('value' field) or raw payload.
         """
         entry = self.rust_cache.get(topic)
-        return entry.get("val") if isinstance(entry, dict) else entry
+        return entry.get("value") if isinstance(entry, dict) else entry
 
     def set_value(self, topic: str, payload: Any) -> bool:
         """
@@ -276,17 +274,17 @@ class StateRegistry:
 
         self.observers.notify(topic, payload)
 
-    def _parse_mqtt_payload(self, msg: MqttMessage):
+    def _parse_mqtt_payload(self, message: MqttMessage):
         """Standardizes MQTT payload extraction into source, value, and metadata."""
-        raw = msg.get_json_payload()
+        raw = message.get_json_payload()
         source, value, metadata = "MQTT", raw, {}
         
         if isinstance(raw, dict):
-            if "val" in raw or "value" in raw:
+            if "value" in raw or "value" in raw:
                 source = str(raw.get("source", "MQTT")).upper()
-                value = raw.get("val") if "val" in raw else raw.get("value")
+                value = raw.get("value") if "value" in raw else raw.get("value")
                 metadata = raw.copy()
-                for field in ["msg_type", "msg_guid", "origin_source", 
+                for field in ["message_type", "message_guid", "origin_source", 
                               "is_settled", "full_id", "boot"]:
                     if field in raw: metadata[field] = raw[field]
             else:
@@ -312,7 +310,7 @@ class StateRegistry:
                        "variables.", "SUCCESS")
             self._last_log_time, self._updates_since_last_log = time.time(), 0
 
-    def handle_incoming_mqtt(self, client, userdata, msg: MqttMessage) -> None:
+    def handle_incoming_mqtt(self, client, userdata, message: MqttMessage) -> None:
         """
         Primary MQTT ingestion hook.
 
@@ -320,9 +318,9 @@ class StateRegistry:
         cache based on traffic controller policy.
 
         Args:
-            msg (MqttMessage): Incoming network package.
+            message (MqttMessage): Incoming network package.
         """
-        topic = msg.topic
+        topic = message.topic
         base = app_constants.MQTT_BASE_TOPIC
         normalized = False
         if f"{base}/Cmd/" in topic:
@@ -333,23 +331,23 @@ class StateRegistry:
             normalized = True
 
         if normalized:
-            msg = MqttMessage(topic=topic, payload=msg.payload, 
-                              qos=msg.qos, retain=msg.retain)
+            message = MqttMessage(topic=topic, payload=message.payload, 
+                              qos=message.qos, retain=message.retain)
             
         if self.subscriber_router: 
-            self.subscriber_router._on_message(client, userdata, msg)
+            self.subscriber_router._on_message(client, userdata, message)
             
         # ⚡ EXCLUSION: Skip state ingestion for high-bandwidth ST2138 traffic.
         if topic.startswith("st2138/"):
             return
 
         try:
-            source, value, metadata, raw_payload = self._parse_mqtt_payload(msg)
+            source, value, metadata, raw_payload = self._parse_mqtt_payload(message)
 
             # ⚡ V3.1.16 REFLECTION DETECTION
             # Identify if this message was authored by the local instance.
-            msg_src_id = metadata.get("src") or metadata.get("full_id")
-            is_reflection = (msg_src_id == app_constants.FULL_INSTANCE_ID)
+            message_src_id = metadata.get("src") or metadata.get("full_id")
+            is_reflection = (message_src_id == app_constants.FULL_INSTANCE_ID)
             
             if is_reflection:
                 metadata["is_reflection"] = True
@@ -367,7 +365,7 @@ class StateRegistry:
                 return
 
             should_process, new_payload = cache_traffic_controller.process_traffic(
-                msg, self.rust_cache)
+                message, self.rust_cache)
             if should_process:
                 if self.set_value(topic, new_payload):
                     self.search_engine.add_topic(topic)
@@ -376,6 +374,6 @@ class StateRegistry:
                 
         except Exception as e:
             import traceback
-            error_msg = f"🔥 Error handling MQTT for {topic}: {e}\n" \
+            error_message = f"🔥 Error handling MQTT for {topic}: {e}\n" \
                         f"{traceback.format_exc()}"
-            matrix_log("core", "data", "handle_incoming_mqtt", error_msg, "ERROR")
+            matrix_log("core", "data", "handle_incoming_mqtt", error_message, "ERROR")

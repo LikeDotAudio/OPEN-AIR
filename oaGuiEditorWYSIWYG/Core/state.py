@@ -10,11 +10,8 @@ import inspect
 from oaComBroker.Core.event_bus import event_bus
 from oaLogging.Methods.matrix_gate import matrix_log
 
-from .oaEditorState_rs.compiler_hook import ensure_compiled
-
 try:
-    ensure_compiled()
-    from oaeditorstate_rs import EditorState as RustEditorState
+    from oaRustCore.oa_editor_state_rs import EditorState as RustEditorState
     HAS_RUST = True
 except ImportError:
     matrix_log(
@@ -36,16 +33,16 @@ except Exception as e:
     HAS_RUST = False
 
 class SMLogger:
-    def info(self, msg):
-        matrix_log(system='UI', element='STATE_MANAGER', level='info', message=f"🧠💡🔄 {msg}", func_name=inspect.currentframe().f_code.co_name)
-    def success(self, msg):
-        matrix_log(system='UI', element='STATE_MANAGER', level='success', message=f"🧠💡🔄 {msg}", func_name=inspect.currentframe().f_code.co_name)
-    def warning(self, msg):
-        matrix_log(system='UI', element='STATE_MANAGER', level='warning', message=f"🧠💡🔄 {msg}", func_name=inspect.currentframe().f_code.co_name)
-    def error(self, msg):
-        matrix_log(system='UI', element='STATE_MANAGER', level='error', message=f"🧠💡🔄 {msg}", func_name=inspect.currentframe().f_code.co_name)
-    def trace(self, msg):
-        matrix_log(system='UI', element='STATE_MANAGER', level='trace', message=f"🧠💡🔄 {msg}", func_name=inspect.currentframe().f_code.co_name)
+    def info(self, message):
+        matrix_log(system='UI', element='STATE_MANAGER', level='info', message=f"🧠💡🔄 {message}", func_name=inspect.currentframe().f_code.co_name)
+    def success(self, message):
+        matrix_log(system='UI', element='STATE_MANAGER', level='success', message=f"🧠💡🔄 {message}", func_name=inspect.currentframe().f_code.co_name)
+    def warning(self, message):
+        matrix_log(system='UI', element='STATE_MANAGER', level='warning', message=f"🧠💡🔄 {message}", func_name=inspect.currentframe().f_code.co_name)
+    def error(self, message):
+        matrix_log(system='UI', element='STATE_MANAGER', level='error', message=f"🧠💡🔄 {message}", func_name=inspect.currentframe().f_code.co_name)
+    def trace(self, message):
+        matrix_log(system='UI', element='STATE_MANAGER', level='trace', message=f"🧠💡🔄 {message}", func_name=inspect.currentframe().f_code.co_name)
 
 sm_logger = SMLogger()
 
@@ -209,7 +206,6 @@ class StateManager:
         )
         event_bus.publish("STATE_UPDATED", json_data=self.get_state(), source=source)
 
-
     def batch_update(self, updates, source=None):
         """
         Performs multiple updates and broadcasts a single STATE_UPDATED event.
@@ -308,8 +304,8 @@ class StateManager:
     def move_element(self, path, target_parent_path, source=None):
         """Moves an element from its current location to a new parent."""
         sm_logger.info(f"📦 StateManager: MOVE OPERATION: {path} -> {target_parent_path}")
-        val = self.get_value_at_path(path)
-        if val is None: 
+        value = self.get_value_at_path(path)
+        if value is None: 
             sm_logger.error(f"❌ StateManager: Move failed. Source value at '{path}' not found.")
             return
         
@@ -330,7 +326,7 @@ class StateManager:
             if part not in target_parent: target_parent[part] = {}
             target_parent = target_parent[part]
         
-        target_parent[key] = val
+        target_parent[key] = value
         sm_logger.trace(f"  ↳ Inserted '{key}' into target parent '{'.'.join(target_parent_path)}'")
         
         sm_logger.trace("📦 StateManager: Move sequence complete. Broadcasting updated state_manager.")

@@ -205,7 +205,7 @@ class OSCManager:
         # ⚡ ANTI-FEEDBACK SPEC: Define identity at transport ingress
         meta = {
             "osc_address": address,
-            "msg_type": "SPLICE_ACTION",
+            "message_type": "SPLICE_ACTION",
             "origin_source": "OSC"
         }
 
@@ -235,10 +235,10 @@ class OSCManager:
             return
 
         meta = meta or {}
-        msg_type = meta.get("msg_type", "SPLICE_ACTION")
+        message_type = meta.get("message_type", "SPLICE_ACTION")
         origin_source = meta.get("origin_source", "UNKNOWN")
 
-        if msg_type == "LINK_FEEDBACK" and not meta.get("is_settled"):
+        if message_type == "LINK_FEEDBACK" and not meta.get("is_settled"):
             return
         if origin_source == "OSC":
             return
@@ -249,25 +249,25 @@ class OSCManager:
         
         self._notify_monitor("TX", address, value)
 
-    def _on_protocol_event(self, msg):
+    def _on_protocol_event(self, message):
         with self._state_lock:
             if not self._running: return
         
-        source = msg.get("source", "UNKNOWN").upper()
-        logical_source = msg.get("logical_source", source).upper()
-        topic = str(msg.get("topic", ""))
-        val = msg.get("val")
-        meta = msg.get("meta", {})
+        source = message.get("source", "UNKNOWN").upper()
+        logical_source = message.get("logical_source", source).upper()
+        topic = str(message.get("topic", ""))
+        value = message.get("value")
+        meta = message.get("meta", {})
         
         # --- LOOP PREVENTION & FILTERING (V3.1.8 MONITOR REFLECTION) ---
         # We no longer drop MQTT reflections here because we want local monitors 
         # to see the traffic. Hardware-level loops are handled by origin_source checks.
-        is_self_reflection = (source == "MQTT" and msg.get("full_id") == app_constants.FULL_INSTANCE_ID)
+        is_self_reflection = (source == "MQTT" and message.get("full_id") == app_constants.FULL_INSTANCE_ID)
 
         # Determine if the message is OSC-related
         is_osc_related_by_tag = (logical_source == "OSC" or source == "OSC" or source == "OSC-TX")
         is_osc_related_by_topic = topic.startswith("OPEN-AIR/OSC/")
-        is_osc_dest = any(dest == "OSC" for dest in msg.get("strategy", "").split())
+        is_osc_dest = any(dest == "OSC" for dest in message.get("strategy", "").split())
 
         if (is_osc_related_by_tag or is_osc_related_by_topic or is_osc_dest):
             # For re-transmission to hardware, we still need strict rules.
@@ -308,9 +308,9 @@ class OSCManager:
                 osc_address = None # Invalidate the address to prevent sending.
 
         if osc_address: # Only proceed if a valid OSC address was determined
-            real_val = val
-            if isinstance(val, dict) and "val" in val:
-                real_val = val["val"]
+            real_val = value
+            if isinstance(value, dict) and "value" in value:
+                real_val = value["value"]
             
             origin_source = meta.get("origin_source", "UNKNOWN")
             
@@ -333,14 +333,14 @@ class OSCManager:
             direction = meta.get("direction", "RX")
             address = meta.get("address", meta.get("osc_address", topic))
             # Extract real value safely
-            r_val = val.get("val") if (isinstance(val, dict) and "val" in val and "address" in val) else val
+            r_val = value.get("value") if (isinstance(value, dict) and "value" in value and "address" in value) else value
             self._notify_monitor(direction, address, r_val, topic)
         elif source == "OSC-TX":
-            self._notify_monitor("TX", meta.get("osc_address", topic), val, topic)
+            self._notify_monitor("TX", meta.get("osc_address", topic), value, topic)
         elif logical_source == "MQTT" or source == "MQTT":
             # Show MQTT reflections in the monitor
             addr = meta.get("osc_address", topic)
-            self._notify_monitor("MQTT", addr, val, topic)
+            self._notify_monitor("MQTT", addr, value, topic)
         
         return
 

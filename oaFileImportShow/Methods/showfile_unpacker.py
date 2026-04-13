@@ -5,9 +5,7 @@
 # Description: Pure Rust showfile unpacker (No Python fallback).
 
 import orjson
-from .oaShowfileUnpacker_rs.compiler_hook import ensure_compiled
-ensure_compiled()
-from .oaShowfileUnpacker_rs import oashowfileunpacker_rs
+from .oaShowfileUnpacker_rs from oaRustCore import oa_showfile_unpacker_rs as oashowfileunpacker_rs
 
 LOCAL_DEBUG = False
 

@@ -43,8 +43,8 @@ impl LogAligner {
                     if let Ok(line) = line_res {
                         if let Some(caps) = re.captures(&line) {
                             if let Some(ts_match) = caps.name("timestamp") {
-                                if let Ok(ts) = ts_match.as_str().parse::<f64>() {
-                                    lines.push((ts, line));
+                                if let Ok(timestamp) = ts_match.as_str().parse::<f64>() {
+                                    lines.push((timestamp, line));
                                 }
                             }
                         }

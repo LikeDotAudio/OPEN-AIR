@@ -201,25 +201,25 @@ class CommandRouter(tk.Frame):
         self.matrix = ProtocolMatrix(self)
         self.matrix.pack(side=tk.TOP, fill=tk.X, padx=10, pady=(0, 10))
 
-    def on_router_event(self, msg):
+    def on_router_event(self, message):
         """Callback from ProtocolRouter ingest loop."""
-        self.after(0, lambda: self._add_entry(msg))
+        self.after(0, lambda: self._add_entry(message))
 
-    def _add_entry(self, msg):
+    def _add_entry(self, message):
         if not self.tree.winfo_exists(): return
 
         # Machine Time (UTP)
-        utp = f"{msg['ts']:.6f}"
-        source = msg["source"]             # Transport (e.g. MQTT)
-        logical_source = msg.get("logical_source", source) # Identity (e.g. MIDI)
-        guid = msg.get("logical_guid", msg["guid"])        # Identity (e.g. 32_0/3)
+        utp = f"{message['timestamp']:.6f}"
+        source = message["source"]             # Transport (e.g. MQTT)
+        logical_source = message.get("logical_source", source) # Identity (e.g. MIDI)
+        guid = message.get("logical_guid", message["guid"])        # Identity (e.g. 32_0/3)
         
-        strategy = msg.get("strategy", "BROADCAST")
-        topic = msg["topic"]
-        val = msg["val"]
+        strategy = message.get("strategy", "BROADCAST")
+        topic = message["topic"]
+        value = message["value"]
         
         # Tags are now pre-calculated by the router (no brains in GUI)
-        tags = msg.get("ui_tags", [])
+        tags = message.get("ui_tags", [])
 
         # ⚡ DISPLAY ENRICHMENT: Add emoji for visual confirmation in the tree ONLY
         display_source = logical_source
@@ -227,7 +227,7 @@ class CommandRouter(tk.Frame):
             display_source = f"🔗 {logical_source}"
 
         # ⚡ STACK BEHAVIOR: Insert at TOP (index 0)
-        item_id = self.tree.insert("", 0, values=(utp, display_source, guid, strategy, topic, val), tags=tuple(tags))
+        item_id = self.tree.insert("", 0, values=(utp, display_source, guid, strategy, topic, value), tags=tuple(tags))
         
         if len(self.tree.get_children()) > 100:
             self.tree.delete(self.tree.get_children()[-1])
@@ -336,8 +336,8 @@ class CommandRouter(tk.Frame):
         """Finds the raw value for a specific machine time in the firehose."""
         if not utp: return None
         with self.router.monitor._firehose_lock:
-            match = next((m for m in self.router.firehose if f"{m['ts']:.6f}" == utp), None)
-            return match["val"] if match else None
+            match = next((m for m in self.router.firehose if f"{m['timestamp']:.6f}" == utp), None)
+            return match["value"] if match else None
 
     def _find_app_instance(self):
         from oaGui.Managers.gui_display import Application

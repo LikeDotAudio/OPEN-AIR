@@ -58,7 +58,7 @@ class OscDashboardImplementation(tk.Frame, TransparencyMixin):
         
         super().__init__(parent, **kwargs)
         
-        # Activity cache for investigation: { ts_ms_str: msg_dict }
+        # Activity cache for investigation: { ts_ms_str: message_dict }
         self._activity_cache = {}
         
         self._setup_ui()
@@ -220,14 +220,14 @@ class OscDashboardImplementation(tk.Frame, TransparencyMixin):
 
     def _add_log_entry(self, direction, address, value, topic):
         now = datetime.datetime.now()
-        ts = now.strftime("%H:%M:%S.%f")[:-3]
+        timestamp = now.strftime("%H:%M:%S.%f")[:-3]
         
         # ⚡ STACK BEHAVIOR: Insert at TOP
-        item_id = self.tree.insert("", 0, values=(ts, direction, address, value, topic or "-"), tags=(direction,))
+        item_id = self.tree.insert("", 0, values=(timestamp, direction, address, value, topic or "-"), tags=(direction,))
         
         # Cache for investigation
-        self._activity_cache[ts] = {
-            "ts": ts,
+        self._activity_cache[timestamp] = {
+            "timestamp": timestamp,
             "direction": direction,
             "address": address,
             "value": value,
@@ -246,14 +246,14 @@ class OscDashboardImplementation(tk.Frame, TransparencyMixin):
         if not selected: return
         
         item = self.tree.item(selected[0])
-        ts = item["values"][0]
-        data = self._activity_cache.get(ts)
+        timestamp = item["values"][0]
+        data = self._activity_cache.get(timestamp)
         
         if not data: return
         
         self.inspect_text.delete("1.0", tk.END)
         self.inspect_text.insert(tk.END, "╔════════════ OSC MESSAGE DISSECTION ════════════╗", "header")
-        self.inspect_text.insert(tk.END, f"  TIME       : {data['ts']}")
+        self.inspect_text.insert(tk.END, f"  TIME       : {data['timestamp']}")
         self.inspect_text.insert(tk.END, f"  DIRECTION  : {data['direction']} ({'Incoming' if data['direction'] == 'RX' else 'Outgoing'})")
         self.inspect_text.insert(tk.END, "╟──────────────────────────────────────────────────╢")
         self.inspect_text.insert(tk.END, f"  OSC ADDR   : {data['address']}")

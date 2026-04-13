@@ -34,8 +34,8 @@ def discover_gateway_devices(gateway_ips):
     gateway_resources = []
     for ip in gateway_ips:
         matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"   👉 Scraping Gateway {ip}...", "DEBUG")
-        cfg = Config.get_instance()
-        url = f"{cfg.VISA_PROBE_PROTOCOL}://{ip}/{cfg.VISA_PROBE_PATH}"
+        configuration = Config.get_instance()
+        url = f"{configuration.VISA_PROBE_PROTOCOL}://{ip}/{configuration.VISA_PROBE_PATH}"
         params = {"whichbutton": "find", "timeout": "5"}
         full_url = f"{url}?{urllib.parse.urlencode(params)}"
         targets = []

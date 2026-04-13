@@ -1,5 +1,5 @@
 import pytest
-import oasplinkcore_rs
+from oaRustCore import oa_splink_core_rs as oasplinkcore_rs
 
 def test_sum_as_string():
     # Attempt to get sum_as_string from various possible locations in the package

@@ -80,14 +80,14 @@ def write_scan_data_to_csv(
                     function=current_function,
                 )
         except OSError as e:
-            error_msg = (
+            error_message = (
                 f"❌ Error creating directory '{output_dir}': {e}. This is a disaster!"
             )
             # WRAPPED WITH after() to prevent cross-thread access
-            app_instance_ref.after(0, lambda: console_print_func(error_msg))
+            app_instance_ref.after(0, lambda: console_print_func(error_message))
             if LOCAL_DEBUG:
                 logger.debug(
-                    error_msg,
+                    error_message,
                     file=__file__,
                     version=current_version,
                     function=current_function,
@@ -135,26 +135,26 @@ def write_scan_data_to_csv(
                 function=current_function,
             )
     except IOError as e:
-        error_msg = (
+        error_message = (
             f"❌ I/O Error writing to CSV file {file_path}: {e}. This is a disaster!"
         )
         # WRAPPED WITH after() to prevent cross-thread access
-        app_instance_ref.after(0, lambda: console_print_func(error_msg))
+        app_instance_ref.after(0, lambda: console_print_func(error_message))
         if LOCAL_DEBUG:
             logger.debug(
-                error_msg,
+                error_message,
                 file=__file__,
                 version=current_version,
                 function=current_function,
             )
         raise  # Re-raise to allow higher-level error handling
     except Exception as e:
-        error_msg = f"❌ An unexpected error occurred while writing to CSV file {file_path}: {e}. What a mess!"
+        error_message = f"❌ An unexpected error occurred while writing to CSV file {file_path}: {e}. What a mess!"
         # WRAPPED WITH after() to prevent cross-thread access
-        app_instance_ref.after(0, lambda: console_print_func(error_msg))
+        app_instance_ref.after(0, lambda: console_print_func(error_message))
         if LOCAL_DEBUG:
             logger.debug(
-                error_msg,
+                error_message,
                 file=__file__,
                 version=current_version,
                 function=current_function,

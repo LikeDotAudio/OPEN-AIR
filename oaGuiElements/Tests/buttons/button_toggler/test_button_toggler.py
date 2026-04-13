@@ -21,8 +21,8 @@ class TestButtonToggler(unittest.TestCase):
             "label": "Test Toggler",
             "path": "test/toggler",
             "options": {
-                "A": {"label_active": "A", "val": 1},
-                "B": {"label_active": "B", "val": 2}
+                "A": {"label_active": "A", "value": 1},
+                "B": {"label_active": "B", "value": 2}
             },
             "layout": {"width": 100, "height": 50}
         }

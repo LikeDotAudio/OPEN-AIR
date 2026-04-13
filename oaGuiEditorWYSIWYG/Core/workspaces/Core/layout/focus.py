@@ -26,9 +26,9 @@ class FocusManager:
         parts = str(path).split(".")
         for i in range(len(parts)):
             sub_path = ".".join(parts[:i+1])
-            val = state_manager.get_value_at_path(sub_path)
+            value = state_manager.get_value_at_path(sub_path)
             
-            if isinstance(val, dict) and val.get("type") == "OcaArray":
+            if isinstance(value, dict) and value.get("type") == "OcaArray":
                 if len(parts) > i + 3 and parts[i+1] == "fields" and parts[i+3] == "fields":
                     path = f"{sub_path}.blueprint.{'.'.join(parts[i+3:])}"
                     break

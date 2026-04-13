@@ -79,22 +79,22 @@ class SnmpLogMonitor:
                         for line in lines:
                             parts = line.split()
                             if len(parts) >= MIN_LOG_PARTS and parts[0] == "-s":
-                                oid, val = parts[1], parts[2]
+                                oid, value = parts[1], parts[2]
                                 
                                 matrix_log("comms", "snmp", "_log_monitoring_loop", 
-                                           f"SnmpLogMonitor: RX SET: {oid} -> {val}", "DEBUG")
+                                           f"SnmpLogMonitor: RX SET: {oid} -> {value}", "DEBUG")
                                 
                                 meta = {
-                                    "msg_type": "SPLICE_ACTION",
+                                    "message_type": "SPLICE_ACTION",
                                     "origin_source": "SNMP_SET"
                                 }
 
-                                ProtocolRouter.get_instance().ingest("SNMP", oid, val, meta)
+                                ProtocolRouter.get_instance().ingest("SNMP", oid, value, meta)
 
                                 topic = f"OPEN-AIR/SNMP/gui_out/{oid}"
-                                self._notify_monitor("RX_SET", oid, val, topic, meta)
+                                self._notify_monitor("RX_SET", oid, value, topic, meta)
                                 if self.state_cache_manager:
-                                    self.state_cache_manager.handle_external_update(topic, val, source="SNMP", metadata=meta)
+                                    self.state_cache_manager.handle_external_update(topic, value, source="SNMP", metadata=meta)
                         f.seek(0)
                         f.truncate()
             except FileNotFoundError:

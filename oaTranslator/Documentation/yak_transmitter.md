@@ -5,9 +5,9 @@
 
 ## 📖 Description & Purpose
 ### File Level
-managers/yak/yak_tx.py
+managers/yak/yak_transmitter.py
 
-This file (manager_yak_tx.py) is responsible for transmitting the final SCPI
+This file (manager_yak_transmitter.py) is responsible for transmitting the final SCPI
 command to the device via the ScpiDispatcher.
 A complete and comprehensive pre-amble that describes the file and the functions
 within.
@@ -22,7 +22,7 @@ Version 20260218.1
 ## 📚 API Reference
 
 ### Classes
-#### `class YakTxManager`
+#### `class YakTransmitterManager`
 Transmits SCPI commands to the instrument using the ScpiDispatcher.
 
 ##### `__init__(self, dispatcher_instance)`

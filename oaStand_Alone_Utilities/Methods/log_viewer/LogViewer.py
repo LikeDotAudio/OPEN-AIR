@@ -17,13 +17,13 @@ LOG_PATTERN = re.compile(
     r"^(?P<timestamp>\d+\.\d+)\s+\|\s+(?P<level>\w+)\s+\|\s+(?P<partition>\w+)\s+\|\s+(?P<process>\w+)\s+\|\s+(?P<function>[\w\.]+)\s+\|\s+(?P<message>.*)$"
 )
 
-def extract_type(msg):
-    match = re.search(r'\[(.*?)\]', msg)
+def extract_type(message):
+    match = re.search(r'\[(.*?)\]', message)
     return match.group(1) if match else "UNKNOWN"
 
-def extract_emojis(msg):
+def extract_emojis(message):
     """Returns a list of all emojis found in the message string."""
-    return [char for char in msg if emoji.is_emoji(char)]
+    return [char for char in message if emoji.is_emoji(char)]
 
 def parse_log_file(decoded_contents):
     data = []

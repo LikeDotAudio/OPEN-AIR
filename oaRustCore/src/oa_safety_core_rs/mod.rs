@@ -5,17 +5,16 @@
 use pyo3::prelude::*;
 use pyo3::types::PyDict;
 use serde_json::Value;
-use pythonize::depythonize;
 
 #[pyfunction]
 fn validate_json(data: Bound<'_, PyDict>) -> PyResult<bool> {
     // 1. Convert PyDict to serde_json::Value (The correct way to validate structure)
-    let val: Value = depythonize(&data.into_any())
+    let value: Value = pythonize::depythonize_bound(data.into_any())
         .map_err(|e| PyErr::new::<pyo3::exceptions::PyTypeError, _>(format!("Serialization error: {}", e)))?;
 
-    // 2. val is now a strictly compliant Serde Value. 
+    // 2. value is now a strictly compliant Serde Value. 
     // If it reached here, it's valid JSON data.
-    let _ = val;
+    let _ = value;
 
     Ok(true)
 }

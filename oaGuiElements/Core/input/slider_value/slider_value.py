@@ -173,8 +173,8 @@ class BuilderSliderValueCreator(TransparencyMixin):
                 slider.set(min_val)
             # --- Layout Refactor: End ---
 
-            def on_slider_move(val):
-                entry_value.set(f"{float(val):.2f}")
+            def on_slider_move(value):
+                entry_value.set(f"{float(value):.2f}")
 
             def on_entry_change(event):
                 try:

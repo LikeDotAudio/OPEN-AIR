@@ -131,14 +131,14 @@ class TreeRefactor(ttk.Frame):
         
         # Handle List (e.g. OcaArray.data)
         if isinstance(data, list):
-            for i, val in enumerate(data):
+            for i, value in enumerate(data):
                 node_text = f"[{i}]"
                 node_type = "Data"
                 
                 # Heuristic: try to find an id or description for the list item
-                if isinstance(val, dict):
-                    node_type = val.get("type", val.get("id", "Item"))
-                    node_text = f"[{i}] {val.get('description', val.get('id', 'Item'))}"
+                if isinstance(value, dict):
+                    node_type = value.get("type", value.get("id", "Item"))
+                    node_text = f"[{i}] {value.get('description', value.get('id', 'Item'))}"
 
                 # Path construction for list item
                 parent_path = ""
@@ -149,8 +149,8 @@ class TreeRefactor(ttk.Frame):
                 full_path = f"{parent_path}.{i}" if parent_path else str(i)
                 
                 node_id = self.tree.insert(parent_node, "end", text=node_text, values=(full_path, node_type), open=True)
-                if isinstance(val, (dict, list)):
-                    self._populate_tree(node_id, val)
+                if isinstance(value, (dict, list)):
+                    self._populate_tree(node_id, value)
             return
 
         if not isinstance(data, dict): return
@@ -178,8 +178,8 @@ class TreeRefactor(ttk.Frame):
             found_standard = False
             for ck in container_keys:
                 if ck in data:
-                    val = data[ck]
-                    items.append((ck, val, ck))
+                    value = data[ck]
+                    items.append((ck, value, ck))
                     found_standard = True
             
             # If NO standard container keys found, and it's not a leaf (widgets might be leaves)
@@ -191,12 +191,12 @@ class TreeRefactor(ttk.Frame):
                     if k not in exclude and isinstance(v, (dict, list)):
                         items.append((k, v, k))
 
-        for key, val, relative_path in items:
+        for key, value, relative_path in items:
             node_text = key
             node_type = "Element"
             
-            if isinstance(val, dict):
-                node_type = val.get("type", "Block")
+            if isinstance(value, dict):
+                node_type = value.get("type", "Block")
                 node_text = f"{key} ({node_type})"
             
             # Full path for state manager operations
@@ -210,8 +210,8 @@ class TreeRefactor(ttk.Frame):
             node_id = self.tree.insert(parent_node, "end", text=node_text, values=(full_path, node_type), open=True)
             
             # Recurse if it's a container
-            if isinstance(val, (dict, list)):
-                self._populate_tree(node_id, val)
+            if isinstance(value, (dict, list)):
+                self._populate_tree(node_id, value)
 
     def _on_tree_select(self, event):
         """Syncs selection with the global focus."""

@@ -77,7 +77,7 @@ def run_demo():
         if traffic:
             topic, payload = traffic[0]
             print(f"\n🔍 [VERIFICATION] Outbound message count (traffic): {len(traffic)}")
-            print(f"✅ [SUCCESS] Monitor decoded {len([p for p in decoded_packets if p[1].get('_msg_type') != 'HEARTBEAT'])} packet(s).")
+            print(f"✅ [SUCCESS] Monitor decoded {len([p for p in decoded_packets if p[1].get('_message_type') != 'HEARTBEAT'])} packet(s).")
         else:
             print("\n🔍 [VERIFICATION] Only status messages detected.")
     else:

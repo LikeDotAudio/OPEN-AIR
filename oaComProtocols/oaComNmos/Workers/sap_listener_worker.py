@@ -45,11 +45,11 @@ def extract_sdp_from_sap(data):
         str or None: The extracted SDP content as a string, or None if not found.
     """
     marker = b"application/sdp\x00"
-    idx = data.find(marker)
-    if idx == -1:
+    index = data.find(marker)
+    if index == -1:
         return None
     # Decode the SDP, ignoring potential errors for robustness
-    return data[idx + len(marker):].decode(errors="ignore")
+    return data[index + len(marker):].decode(errors="ignore")
 
 def register_new_stream(
     sdp_content,

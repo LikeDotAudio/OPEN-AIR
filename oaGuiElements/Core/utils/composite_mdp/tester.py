@@ -265,8 +265,8 @@ class MultiFaderApp(tk.Tk):
                 fader.render()
             self.update_table(fader.widget_id, fader.val_current, fader.rot_current, fader.angle, fader.x, fader.y)
 
-    def update_table(self, wid, val, rot, angle, x, y):
-        self.tree.item(str(wid), values=(wid, f"{val:.1f}", f"{rot:.1f}", f"{angle:.1f}", int(x), int(y)))
+    def update_table(self, wid, value, rot, angle, x, y):
+        self.tree.item(str(wid), values=(wid, f"{value:.1f}", f"{rot:.1f}", f"{angle:.1f}", int(x), int(y)))
 
 if __name__ == "__main__":
     app = MultiFaderApp()

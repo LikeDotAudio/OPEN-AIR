@@ -8,6 +8,8 @@ use parking_lot::RwLock;
 use std::thread;
 use std::time::{SystemTime, UNIX_EPOCH};
 
+const PTP_MULTICAST_ADDRESS: &str = "224.0.1.129";
+
 #[pyclass]
 struct PtpEngine {
     current_nanos: Arc<RwLock<u64>>,
@@ -36,8 +38,9 @@ impl PtpEngine {
         
         thread::spawn(move || {
             // In a real implementation, this would use SO_TIMESTAMPING 
-            // and listen on the PTP multicast address (224.0.1.129).
+            // and listen on the PTP multicast address (e.g., 224.0.1.129).
             // For this project context, we'll simulate nanosecond tracking.
+            // Using constant PTP_MULTICAST_ADDRESS for future binding.
             
             while *running_clone.read() {
                 let now = SystemTime::now().duration_since(UNIX_EPOCH).unwrap();
@@ -65,14 +68,8 @@ impl PtpEngine {
     }
 }
 
-#[pyfunction]
-fn sum_as_string(a: usize, b: usize) -> PyResult<String> {
-    Ok((a + b).to_string())
-}
-
 #[pymodule]
 pub fn oaptpclock_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<PtpEngine>()?;
-    m.add_function(wrap_pyfunction!(sum_as_string, m)?)?;
     Ok(())
 }

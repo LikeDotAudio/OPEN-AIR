@@ -30,11 +30,11 @@ fn create_manifest<'py>(
         source
     };
 
-    let payload = PyDict::new(py);
-    let msg_guid = Uuid::new_v4().to_string(); // UUID is more robust for global scope
+    let payload = PyDict::new_bound(py);
+    let message_guid = Uuid::new_v4().to_string(); // UUID is more robust for global scope
 
     payload.set_item("origin_source", origin)?;
-    payload.set_item("msg_guid", msg_guid)?;
+    payload.set_item("message_guid", message_guid)?;
     payload.set_item("timestamp", now)?;
     payload.set_item("target_parameter", topic)?;
     
@@ -65,9 +65,9 @@ fn create_manifest<'py>(
     payload.set_item("is_locked", is_locked)?;
     payload.set_item("is_settled", is_settled)?;
     
-    payload.set_item("val", value)?;
+    payload.set_item("value", value)?;
     payload.set_item("source", source)?;
-    payload.set_item("ts", now)?;
+    payload.set_item("timestamp", now)?;
     payload.set_item("GUID", fid)?;
     payload.set_item("partition", partition.unwrap_or("SYS"))?;
     payload.set_item("full_id", fid)?;

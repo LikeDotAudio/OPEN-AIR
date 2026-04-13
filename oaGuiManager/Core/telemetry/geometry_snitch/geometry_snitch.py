@@ -63,7 +63,7 @@ class HiddenGeometryManagerMixin:
             "height": height,
             "x": x,
             "y": y,
-            "ts": time.time(),
+            "timestamp": time.time(),
             "tab_name": getattr(self, "tab_name", "Unknown"),
         }
 

@@ -16,16 +16,15 @@ from oaLogging.Core.logger import router_logger, logger
 from oaLogging.Methods.matrix_gate import matrix_log
 from oaConfigurationManager.Entry import Config
 
-from oaComBroker.Methods.oaCoreRouter_rs.compiler_hook import ensure_compiled
 try:
-    ensure_compiled()
-    from oacorerouter_rs import CoreRouter as RustCoreRouter
-except ImportError as e:
-    logger.critical("🚀❌ [FATAL] Rust Core Router module missing. Pure Rust mode is mandatory.")
-    raise e
+    from oaRustCore.oa_core_router_rs import CoreRouter as RustCoreRouter
+    HAS_RUST_ROUTER = True
+except ImportError:
+    logger.warning("🚀⚠️ [ROUTER] Rust Core Router missing. Falling back to slow Python routing.")
+    HAS_RUST_ROUTER = False
 
 # Modular Subsystem Imports
-from .ingest import normalize_and_ingest, create_silent_msg
+from .ingest import normalize_and_ingest, create_silent_message
 from .dispatch import dispatch_message
 from .settle import SettleManager
 from .strategy import calculate_strategy, calculate_ui_tags
@@ -50,7 +49,7 @@ class ProtocolRouter:
         self.outbound_queue = queue.Queue()
         
         # ⚡ NATIVE ACCELERATION: Rust core router for high-speed paths.
-        self.rust_router = RustCoreRouter()
+        self.rust_router = RustCoreRouter() if HAS_RUST_ROUTER else None
 
         self._running = False
         self._dispatch_threads = 4
@@ -112,12 +111,12 @@ class ProtocolRouter:
         """Persists enablement state to config.ini."""
         config_path = "/home/anthony/Documents/OPEN-AIR/config.ini"
         import configparser
-        cfg = configparser.ConfigParser()
-        cfg.read(config_path)
-        if not cfg.has_section("Routing"): cfg.add_section("Routing")
-        cfg.set("Routing", f"{type}_{proto.lower()}", str(enabled))
+        configuration = configparser.ConfigParser()
+        configuration.read(config_path)
+        if not configuration.has_section("Routing"): configuration.add_section("Routing")
+        configuration.set("Routing", f"{type}_{proto.lower()}", str(enabled))
         with open(config_path, "w") as f:
-            cfg.write(f)
+            configuration.write(f)
 
     @property
     def firehose(self):
@@ -228,7 +227,7 @@ class ProtocolRouter:
         emojis = [self.protocol_emojis.get(d, d) for d in enabled_dests]
         return " ".join(emojis)
 
-    def calculate_strategy_for_msg(self, source, topic):
+    def calculate_strategy_for_message(self, source, topic):
         """
         Calculates the emoji strategy for a specific message.
         Checks egress enablement and the 'Subscribe' topic filters.
@@ -264,8 +263,8 @@ class ProtocolRouter:
         # ⚡ V3.1.5 PIPELINE SYNC:
         # Silent messages (Boot sequence) must still pass through the pipeline 
         # to ensure they are normalized with GUIDs and UI tags for the Command Router.
-        msg = create_silent_msg(transport_source, topic, value, meta, self.GUID, self.rust_router)
-        self._process_message_pipeline(msg)
+        message = create_silent_message(transport_source, topic, value, meta, self.GUID, self.rust_router)
+        self._process_message_pipeline(message)
 
     def _fetch_next_inbound(self):
         # ⚡ DRAIN: If messages are in the Rust router, we must drain them to prevent leaks.
@@ -283,38 +282,37 @@ class ProtocolRouter:
         except queue.Empty:
             return None
 
-
-    def _process_message_pipeline(self, msg):
-        investigate_packet(msg, self.mib_cache)
+    def _process_message_pipeline(self, message):
+        investigate_packet(message, self.mib_cache)
         
-        strategy = calculate_strategy(msg)
-        msg["strategy"] = strategy
+        strategy = calculate_strategy(message)
+        message["strategy"] = strategy
 
         # if self.splinker_manager:
-        #     try: self.splinker_manager.process_router_event(msg)
+        #     try: self.splinker_manager.process_router_event(message)
         #     except Exception as e: 
         #         matrix_log("comms", "broker", "_process_pipeline", f"🔗🚫🛑 [ROUTER] Splinker Error: {e}", "ERROR")
 
-        msg["ui_tags"] = calculate_ui_tags(msg, self.GUID)
+        message["ui_tags"] = calculate_ui_tags(message, self.GUID)
         
-        self.monitor.append_to_firehose(msg)
-        self.monitor.broadcast_to_observers(msg)
+        self.monitor.append_to_firehose(message)
+        self.monitor.broadcast_to_observers(message)
         
-        val_str = str(msg['val'])[:100] + ("..." if len(str(msg['val'])) > 100 else "")
-        matrix_log("comms", "broker", "_process_pipeline", f"📥📡📤 [ROUTER] {strategy} >> {msg['topic']}: {val_str}", "DEBUG")
+        val_str = str(message['value'])[:100] + ("..." if len(str(message['value'])) > 100 else "")
+        matrix_log("comms", "broker", "_process_pipeline", f"📥📡📤 [ROUTER] {strategy} >> {message['topic']}: {val_str}", "DEBUG")
         
-        self._dispatch_by_strategy(strategy, msg)
+        self._dispatch_by_strategy(strategy, message)
 
-    def _dispatch_by_strategy(self, strategy, msg):
+    def _dispatch_by_strategy(self, strategy, message):
         if "IGNORE" not in strategy:
-            self.outbound_queue.put(msg)
+            self.outbound_queue.put(message)
 
     def _ingest_loop(self):
         while self._running:
             try:
-                msg = self._fetch_next_inbound()
-                if msg is None: continue
-                self._process_message_pipeline(msg)
+                message = self._fetch_next_inbound()
+                if message is None: continue
+                self._process_message_pipeline(message)
             except Exception as e: 
                 matrix_log("comms", "broker", "_ingest_loop", f"📥🚫🛑 [ROUTER] Ingest Error: {e}", "ERROR")
 
@@ -323,7 +321,7 @@ class ProtocolRouter:
             try:
                 try:
                     # ⚡ OPTIMIZATION: Increased timeout from 0.001 to 0.1 to reduce busy-wait overhead.
-                    msg = self.outbound_queue.get(timeout=0.1)
+                    message = self.outbound_queue.get(timeout=0.1)
                 except queue.Empty:
                     continue
                 
@@ -340,7 +338,7 @@ class ProtocolRouter:
                 if self._running:
                     self._executor.submit(
                         dispatch_message, 
-                        msg, managers,
+                        message, managers,
                         self.is_active
                     )
             except RuntimeError as e:
@@ -356,7 +354,7 @@ class ProtocolRouter:
         """Retrieves a complete message from the firehose by its UTP."""
         if not utp: return None
         with self.monitor._firehose_lock:
-            return next((m for m in self.monitor.firehose if f"{m['ts']:.6f}" == utp), None)
+            return next((m for m in self.monitor.firehose if f"{m['timestamp']:.6f}" == utp), None)
 
     def publish_splinker_direct(self, s_topic, d_topic, s_val=None, d_val=None):
         payload = {"source": s_topic, "dest": d_topic, "source_val": s_val, "dest_val": d_val}

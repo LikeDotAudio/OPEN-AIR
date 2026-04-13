@@ -3,22 +3,22 @@
 # Version: 20260331.2030.2
 #
 # Description: Pure Rust VISA SCPI formatter (No Python fallback).
-
-from .oaVisaFormat_rs.compiler_hook import ensure_compiled
-ensure_compiled()
-from .oaVisaFormat_rs.oavisaformat_rs import VisaFormatter as RustVisaFormatter
+try:
+    from oaRustCore.oa_visa_format_rs import VisaFormatter as RustVisaFormatter
+    HAS_RUST_VISA = True
+except ImportError:
+    HAS_RUST_VISA = False
 
 LOCAL_DEBUG = False
 
 class VisaFormatter:
     """
     High-performance VISA SCPI command formatter.
-    MANDATORY Rust implementation.
     """
     def __init__(self):
         if LOCAL_DEBUG:
-            print("💳🛠️🔗 [VISA] Using PURE RUST formatter.")
-        self._formatter = RustVisaFormatter()
+            print("💳🛠️🔗 [VISA] Using Rust formatter.")
+        self._formatter = RustVisaFormatter() if HAS_RUST_VISA else None
 
     def format_command(self, cmd: str, value: float):
         return self._formatter.format_command(cmd, value)

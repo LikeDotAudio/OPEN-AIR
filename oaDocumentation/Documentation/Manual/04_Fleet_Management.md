@@ -20,9 +20,9 @@ A key feature of OPEN-AIR is the **YakFleetCommandBuilder**. Once a scan is comp
 
 ### Monitoring Yak Traffic
 The **Yak Monitor** provides a live feed of all instrument traffic.
-- **Color Coding:** Messages containing valid data (`val:`) are highlighted in **green**, while general messages appear in **orange**.
+- **Color Coding:** Messages containing valid data (`value:`) are highlighted in **green**, while general messages appear in **orange**.
 - **Message Dissection:** Click on any message to see its full breakdown, including the device type, model, and the specific SCPI command being sent.
-- **Jump to Latest:** Use the "Jump to Latest 'val:'" button to quickly find and inspect the most recent data payload received from the fleet.
+- **Jump to Latest:** Use the "Jump to Latest 'value:'" button to quickly find and inspect the most recent data payload received from the fleet.
 
 ### Deleting Fleet Topics
 If you need to clear the MQTT state, a **"DELETE OPEN-AIR TOPIC"** button is available in the MQTT setup panel. This will recursively remove all retained messages from the `OPEN-AIR` topic tree.

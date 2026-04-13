@@ -15,13 +15,13 @@ class ListboxSyncEngine:
     @staticmethod
     def sync_listbox_to_var(listbox, var, options_map):
         """Updates the Listbox selection highlight to match the StringVar value."""
-        val = var.get()
+        value = var.get()
         listbox.select_clear(0, tk.END)
-        if not val: return
+        if not value: return
 
         target_lbl = None
         for k, opt in options_map.items():
-            if str(opt.get("value", k)) == str(val):
+            if str(opt.get("value", k)) == str(value):
                 target_lbl = opt.get("label_active", k); opt["selected"] = "true"
             else: opt["selected"] = "false"
 
@@ -39,12 +39,12 @@ class ListboxSyncEngine:
         selected_key = next((k for k, opt in options_map.items() if opt.get("label_active", k) == lbl), None)
         if not selected_key: return
 
-        val = options_map[selected_key].get("value", selected_key)
+        value = options_map[selected_key].get("value", selected_key)
         
         # 1. Update selection status for ALL options via MQTT
         for k, opt in options_map.items():
             tp = engine.calculate_topic(f"{path}/options/{k}/selected", base_topic)
-            engine.publish_command(tp, orjson.dumps({"val": k == selected_key, "ts": time.time()}).decode())
+            engine.publish_command(tp, orjson.dumps({"value": k == selected_key, "timestamp": time.time()}).decode())
 
         # 2. Update main variable
-        var.set(val)
+        var.set(value)

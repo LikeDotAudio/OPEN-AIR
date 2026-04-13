@@ -48,14 +48,14 @@ def main():
     
     # 5. Wildcard Subscription (Anything and Everything)
     # The user wants to subscribe to "#" but NOT REST topics.
-    def filtered_mqtt_handler(client, userdata, msg):
-        topic = msg.topic
+    def filtered_mqtt_handler(client, userdata, message):
+        topic = message.topic
         # ⚡ EXCLUSION: Skip REST-specific control and status topics to avoid loops or noise
         if "REST" in topic.upper():
             return
             
         # Standard state ingestion for everything else
-        state_cache.handle_incoming_mqtt(client, userdata, msg)
+        state_cache.handle_incoming_mqtt(client, userdata, message)
 
     # 6. Connect to MQTT
     print("📡 [REST-HUB] Connecting to MQTT Broker and subscribing to ALL (#)...")

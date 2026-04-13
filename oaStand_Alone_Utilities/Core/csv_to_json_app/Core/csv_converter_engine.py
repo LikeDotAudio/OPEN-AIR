@@ -39,10 +39,10 @@ class CSVConverterEngine:
                 for _, row in df.iterrows():
                     node = {}
                     for h_cfg in simple_configs:
-                        val = row[h_cfg["original_header"]]
-                        if pd.notna(val) and val != "":
-                            if isinstance(val, bool): val = str(val).lower()
-                            node[h_cfg["json_key"]] = val
+                        value = row[h_cfg["original_header"]]
+                        if pd.notna(value) and value != "":
+                            if isinstance(value, bool): value = str(value).lower()
+                            node[h_cfg["json_key"]] = value
                     if node: output_list.append(node)
             return output_list
 

@@ -1,5 +1,4 @@
-from .oaStateRegistry_rs import *
-
+from oaRustCore.oa_state_registry_rs import *
 
 __doc__ = oaStateRegistry_rs.__doc__
 if hasattr(oaStateRegistry_rs, "__all__"):

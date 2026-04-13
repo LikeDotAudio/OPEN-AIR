@@ -86,15 +86,31 @@ def run_migration():
         module_dir = os.path.join(core_src_dir, snake_name)
         os.makedirs(module_dir, exist_ok=True)
         
-        # 2. Physical File Copy (lib.rs becomes mod.rs)
-        source_file = os.path.join(crate_path, "src", "lib.rs")
-        dest_file = os.path.join(module_dir, "mod.rs")
+        # 2. Recursive Copy of the entire src directory (lib.rs becomes mod.rs)
+        source_src = os.path.join(crate_path, "src")
         
-        if os.path.exists(source_file):
-            shutil.copy2(source_file, dest_file)
-            print(f"Migrated: {original_name} -> {snake_name}/mod.rs")
+        if os.path.exists(source_src):
+            # Clear target first to avoid dirty migration
+            if os.path.exists(module_dir):
+                shutil.rmtree(module_dir)
+            os.makedirs(module_dir, exist_ok=True)
+            
+            for item in os.listdir(source_src):
+                s = os.path.join(source_src, item)
+                d = os.path.join(module_dir, item)
+                if os.path.isdir(s):
+                    shutil.copytree(s, d, dirs_exist_ok=True)
+                else:
+                    shutil.copy2(s, d)
+            
+            # Special Case: lib.rs in the submodule folder should be mod.rs for the parent
+            legacy_lib = os.path.join(module_dir, "lib.rs")
+            if os.path.exists(legacy_lib):
+                os.rename(legacy_lib, os.path.join(module_dir, "mod.rs"))
+                
+            print(f"Migrated full source: {original_name} -> {snake_name}/")
         else:
-            print(f"WARNING: File not found - {source_file}")
+            print(f"WARNING: Source src not found - {source_src}")
             
         # 3. Build master lib.rs strings
         lib_rs_content.append(f"pub mod {snake_name};")

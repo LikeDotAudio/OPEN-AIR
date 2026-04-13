@@ -1,3 +1,11 @@
+## [V3.3.0] - 2026-04-12
+### GitHub Actions CI/CD Integration
+- **Automated Workflow:** Implemented `.github/workflows/ci.yml` for automated testing, linting, and structural auditing on every push and pull request.
+- **Structural Audit:** Created `.github/scripts/structural_audit.py` to enforce the "12-subfolder standard" and the "Entry.py Gatekeeper" mandate across all `oa*` modules.
+- **Native Build Pipeline:** Added `.github/scripts/build_rust_modules.py` to automatically find and build all Rust-based extensions using `maturin develop --release`.
+- **Ruff Standardization:** Introduced `.ruff.toml` with strict rules for complexity and style, ensuring adherence to the project's single-responsibility and named-argument mandates.
+- **CI Caching:** Implemented Cargo registry caching to significantly reduce build times for native components in the CI environment.
+
 ## [V3.1.14] - 2026-04-09
 ### GUI Manager Logging & Stability
 - **Blueprint Validation Fix:** Demoted `FileNotFoundError` (missing blueprint) in `UniversalGuiLoader` from `ERROR` to `WARNING`. This prevents CI/CD log clutter for handled validation failures while maintaining visibility in the UI.

@@ -1,0 +1,32 @@
+# .ruff.toml
+# Author: Gemini CLI
+# Version: 20260412.1200.1
+#
+# Description: Ruff configuration for OPEN-AIR. 
+# Adheres to the single-responsibility and named-argument mandates.
+
+line-length = 120
+target-version = "py312"
+
+[lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "C90", # mccabe
+    "B",   # flake8-bugbear
+    "UP",  # pyupgrade
+]
+ignore = [
+    "E501", # line length handled by black/ruff
+]
+
+[lint.mccabe]
+max-complexity = 10
+
+[format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"

@@ -21,7 +21,7 @@ from oaComProtocols.oaComSNMP.Core.snmp_mqtt_client import SnmpMqttClient
 
 _instance = None
 
-def get_manager(run_bridge=None):
+def get_manager(state_cache_manager=None, mqtt_connection_manager=None, subscriber_router=None, run_bridge=None, **kwargs):
     """
     Singleton getter for the SNMP Manager.
     """

@@ -34,7 +34,7 @@ from oaLogging.Core.logger import SMPTE2138_LOGGER
 from oaLogging.Methods.matrix_gate import matrix_log
 from oaComProtocols.oaComMQTT.Managers.mqtt_connection import MqttConnectionManager
 from oaComProtocols.oaComMQTT.Managers.mqtt_subscriber_router import MqttSubscriberRouter
-from oaComBroker.Core.event_bus import event_bus
+# from oaComBroker.Core.event_bus import event_bus
 
 def _is_debug():
     from oaLogging.Methods.matrix_gate import is_debug_allowed
@@ -192,4 +192,5 @@ class SMPTE2138MonitorManager:
 
     def _broadcast(self, topic, data):
         """Notifies all registered observers of the decoded packet and stats."""
-        event_bus.publish("SMPTE2138_TRAFFIC", topic=topic, data=data)
+        # event_bus.publish("SMPTE2138_TRAFFIC", topic=topic, data=data)
+        pass

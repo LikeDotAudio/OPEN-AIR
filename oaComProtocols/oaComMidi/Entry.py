@@ -184,18 +184,18 @@ def main():
         try:
             from oaComProtocols.oaComMQTT.Managers.mqtt_connection import MqttConnectionManager
             from oaStateCache.Core.state_cache import StateRegistry
-            from oaComBroker.Core.protocol_router.manager import ProtocolRouter
+            # from oaComBroker.Core.protocol_router.manager import ProtocolRouter
 
-            router = ProtocolRouter.get_instance()
+            router = None # ProtocolRouter.get_instance()
             mqtt_conn = MqttConnectionManager()
             state_cache = StateRegistry(mqtt_conn)
             
-            router.set_state_cache(state_cache)
-            router.set_mqtt_manager(mqtt_conn)
+            # router.set_state_cache(state_cache)
+            # router.set_mqtt_manager(mqtt_conn)
             
             mqtt_conn.connect_to_broker(on_message_callback=state_cache.handle_incoming_mqtt)
             mqtt_conn.subscribe("OPEN-AIR/MIDI/#")
-            router.start()
+            # router.start()
         except ImportError:
             print("⚠️ System mode requested but dependencies missing. Falling back to PURE.")
             state_cache = StandaloneState()
@@ -273,11 +273,6 @@ __all__ = [
     "MidiDashboard",
     "get_midi_color",
     "get_manager",
-    "start",
-    "stop",
-    "status"
-]
-"get_manager",
     "start",
     "stop",
     "status"

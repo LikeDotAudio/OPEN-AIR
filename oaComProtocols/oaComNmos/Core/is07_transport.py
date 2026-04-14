@@ -277,7 +277,7 @@ class Is07MqttTransport(EventTransport):
             self.client = None
             self._is_connected = False
 
-    def _on_connect(self, client, userdata, flags, rc):
+    def _on_connect(self, client, userdata, flags, rc, properties=None):
         if rc == 0:
             matrix_log("comms", "nmos_mqtt", "connect", "📡✅ [NMOS-MQTT] Connection established.", "SUCCESS")
             self._is_connected = True
@@ -285,7 +285,7 @@ class Is07MqttTransport(EventTransport):
             matrix_log("comms", "nmos_mqtt", "connect", f"📡❌ [NMOS-MQTT] Connection Failed (RC: {rc})", "ERROR")
             self._is_connected = False
 
-    def _on_disconnect(self, client, userdata, rc):
+    def _on_disconnect(self, client, userdata, rc, properties=None):
         if self._is_connected:
             matrix_log("comms", "nmos_mqtt", "disconnect", f"📡 [NMOS-MQTT] Connection Closed (RC: {rc})", "INFO")
         self._is_connected = False

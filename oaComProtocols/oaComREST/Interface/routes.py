@@ -99,9 +99,9 @@ def create_router(state_cache_manager, protocol_router):
 
     @router.get("/api/v1/system/status")
     async def get_system_status():
-        from oaComBroker.Core.protocol_router.manager import ProtocolRouter
-        router_inst = ProtocolRouter.get_instance()
-        active = getattr(router_inst, "protocols", ["MQTT", "REST"])
+        # from oaComBroker.Core.protocol_router.manager import ProtocolRouter
+        router_inst = None # ProtocolRouter.get_instance()
+        active = ["MQTT", "REST"]
         return {
             "status": "operational", 
             "partition": "CORE", 

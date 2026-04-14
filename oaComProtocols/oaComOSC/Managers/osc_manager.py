@@ -44,8 +44,8 @@ class OSCManager:
                    "Initializing Mandatory OSC Bridge...", "INFO")
         
         # ⚡ STANDALONE: Fallback to global singletons if not injected
-        from oaComBroker.Core.protocol_router.manager import ProtocolRouter
-        self.protocol_router = ProtocolRouter.get_instance()
+        # from oaComBroker.Core.protocol_router.manager import ProtocolRouter
+        self.protocol_router = None # ProtocolRouter.get_instance()
         
         self.state_cache_manager = state_cache_manager or (context.state_cache_manager if context else None)
         self.mqtt_connection_manager = mqtt_connection_manager or (context.mqtt_connection_manager if context else None)
@@ -212,7 +212,7 @@ class OSCManager:
         if not self.mqtt_connection_manager:
             self.mqtt_transport.set_message_handler(self._on_transport_message)
             connection_params = {
-                "destination_host": getattr(app_constants, "MQTT_BROKER_HOST", "localhost"),
+                "destination_host": getattr(app_constants, "MQTT_BROKER_ADDRESS", "localhost"),
                 "destination_port": getattr(app_constants, "MQTT_BROKER_PORT", 1883),
                 "client_id": f"OSC-CORE-{app_constants.FULL_INSTANCE_ID[:8]}"
             }

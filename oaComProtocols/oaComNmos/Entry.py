@@ -306,4 +306,3 @@ if __name__ == "__main__":
             print("🚫 Standalone launch aborted due to test failures.")
 
 __all__ = ["start", "stop", "status", "main", "run_tests", "global_state", "Is07MqttTransport", "Is07WebSocketTransport"]
-op", "status", "main", "run_tests", "global_state"]

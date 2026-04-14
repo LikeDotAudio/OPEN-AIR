@@ -11,7 +11,7 @@ import json
 import time
 from pathlib import Path
 from oaLogging.Methods.matrix_gate import matrix_log
-from oaComBroker.Core.event_bus import event_bus
+# from oaComBroker.Core.event_bus import event_bus
 
 try:
     from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
@@ -33,9 +33,10 @@ class MqttExplorerImplementation(tk.Frame, TransparencyMixin):
         
         # Subscribe to state changes if available
         try:
-            event_bus.subscribe("STATE_CHANGED", self._on_state_change)
+            # event_bus.subscribe("STATE_CHANGED", self._on_state_change)
             # Also subscribe to registry readiness to prime the tree
-            event_bus.subscribe("REGISTRY_READY", self._prime_tree)
+            # event_bus.subscribe("REGISTRY_READY", self._prime_tree)
+            pass
         except Exception:
             pass
             

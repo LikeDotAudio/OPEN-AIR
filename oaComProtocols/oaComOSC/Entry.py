@@ -252,7 +252,3 @@ __all__ = [
     "set_bridge_mode",
     "main"
 ]
-nitor_callback",
-    "set_bridge_mode",
-    "main"
-]

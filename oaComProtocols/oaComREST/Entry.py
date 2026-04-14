@@ -152,9 +152,9 @@ def main():
         try:
             from oaComProtocols.oaComMQTT.Managers.mqtt_connection import MqttConnectionManager
             from oaStateCache.Core.state_cache import StateRegistry
-            from oaComBroker.Core.protocol_router.manager import ProtocolRouter
+            # from oaComBroker.Core.protocol_router.manager import ProtocolRouter
             
-            router = ProtocolRouter.get_instance()
+            router = MinimalProtocolRouter() # ProtocolRouter.get_instance()
             mqtt_conn = MqttConnectionManager()
             state_cache = StateRegistry(mqtt_conn)
             router.set_state_cache(state_cache)

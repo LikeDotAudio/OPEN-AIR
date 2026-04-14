@@ -53,8 +53,8 @@ class MidiDashboard(tk.Frame):
             matrix_log("comms", "midi", "__init__", "🎹 [MIDI-DASH] ❌ CRITICAL: MidiManager NOT found in widget tree. Fallback to ProtocolRouter.", "WARNING")
             
             # Fallback: Listen to the ProtocolRouter directly for MIDI traffic
-            from oaComBroker.Core.protocol_router.manager import ProtocolRouter
-            ProtocolRouter.get_instance().register_cache_observer(self._on_protocol_event)
+            # from oaComBroker.Core.protocol_router.manager import ProtocolRouter
+            # ProtocolRouter.get_instance().register_cache_observer(self._on_protocol_event)
 
     def _find_midi_manager(self, widget):
         # 1. Check direct configuration first
@@ -214,8 +214,9 @@ class MidiDashboard(tk.Frame):
             except: pass
         else:
             try:
-                from oaComBroker.Core.protocol_router.manager import ProtocolRouter
-                ProtocolRouter.get_instance().unregister_cache_observer(self._on_protocol_event)
+                pass
+                # from oaComBroker.Core.protocol_router.manager import ProtocolRouter
+                # ProtocolRouter.get_instance().unregister_cache_observer(self._on_protocol_event)
             except: pass
         super().destroy()
 

@@ -50,11 +50,7 @@ class MidiManager:
         self.mqtt_worker = MidiMqttWorker(self, transport=self.mqtt_transport) if self.enable_direct_mqtt else None
 
         if self.use_protocol_router:
-            try:
-                from oaComBroker.Core.protocol_router.manager import ProtocolRouter
-                ProtocolRouter.get_instance().register_cache_observer(self._on_protocol_event)
-            except Exception as e:
-                logger.warning(f"🎹 [MIDI-MGR] Failed to register with ProtocolRouter: {e}")
+            pass # ProtocolRouter dependency removed
 
     def add_monitor_callback(self, cb):
         with self._monitor_lock:

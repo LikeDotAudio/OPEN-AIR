@@ -182,7 +182,7 @@ class RESTManager:
         # ⚡ STANDALONE: Setup core MQTT transport for status reporting
         if not self.mqtt_transport.is_connected():
             connection_params = {
-                "destination_host": getattr(app_constants, "MQTT_BROKER_HOST", "localhost"),
+                "destination_host": getattr(app_constants, "MQTT_BROKER_ADDRESS", "localhost"),
                 "destination_port": getattr(app_constants, "MQTT_BROKER_PORT", 1883),
                 "client_id": f"oaRestCore_{app_constants.FULL_INSTANCE_ID[:8]}"
             }

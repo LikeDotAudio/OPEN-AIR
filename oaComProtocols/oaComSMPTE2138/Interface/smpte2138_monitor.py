@@ -57,8 +57,9 @@ class SMPTE2138MonitorImplementation(tk.Frame, TransparencyMixin):
             self._apply_transparency(self, None, {}, builder)
         
         try:
-            from oaComBroker.Core.event_bus import event_bus
-            event_bus.subscribe("SMPTE2138_TRAFFIC", self._on_bus_update)
+            # from oaComBroker.Core.event_bus import event_bus
+            # event_bus.subscribe("SMPTE2138_TRAFFIC", self._on_bus_update)
+            pass
         except ImportError: pass
         
         self._update_status_loop()
@@ -289,8 +290,8 @@ class SMPTE2138MonitorImplementation(tk.Frame, TransparencyMixin):
         self.style.configure("SMPTE.TLabel", background=bg)
 
     def destroy(self):
-        from oaComBroker.Core.event_bus import event_bus
-        event_bus.unsubscribe("SMPTE2138_TRAFFIC", self._on_bus_update)
+        # from oaComBroker.Core.event_bus import event_bus
+        # event_bus.unsubscribe("SMPTE2138_TRAFFIC", self._on_bus_update)
         super().destroy()
 
 def get_gui_class():

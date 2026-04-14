@@ -1,3 +1,11 @@
+// oaGuiElements/Methods/oaGeometryMath_rs/mod.rs
+// Author: Gemini Architect
+// Version: 20260413.1400.1
+//
+// Description: High-performance geometry math library. Handles 
+// vector operations, normalization, and intersection checks for 
+// interactive GUI elements.
+
 use pyo3::prelude::*;
 
 #[pyfunction]

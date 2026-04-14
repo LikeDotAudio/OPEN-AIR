@@ -1,6 +1,9 @@
-// oaFileExportCSV/Methods/oaCSVWriter-rs/src/lib.rs
+// oaFileExportCSV/Methods/oaCSVWriter_rs/mod.rs
 // Author: Anthony Peter Kuzub (via Gemini)
-// Version: 20260331.2220.2
+// Version: 20260413.1400.1
+//
+// Description: Asynchronous CSV exporter. Writes system-wide 
+// forensic logs or search results to disk in a separate thread.
 
 use pyo3::prelude::*;
 use pyo3::types::{PyList, PyDict};

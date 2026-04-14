@@ -30,9 +30,7 @@ class TestNMOSManager(unittest.TestCase):
             patch('oaComProtocols.oaComNmos.Entry.get_ip', return_value="127.0.0.1"),
             patch('oaComProtocols.oaComNmos.Entry.gen_id', return_value="test-uuid"),
             patch('oaComProtocols.oaComNmos.Entry.registration_manager'),
-            patch('oaComProtocols.oaComNmos.Entry.HTTPServer'),
-            patch('oaComProtocols.oaComNmos.Entry.connection_api.HTTPServer'),
-            patch('oaComProtocols.oaComNmos.Interface.connection_api.HTTPServer'),
+            patch('oaComProtocols.oaComNmos.Entry.connection_api.run_server'),
             patch('oaComProtocols.oaComNmos.Entry.sap_listener_worker'),
             patch('oaComProtocols.oaComNmos.Entry.heartbeat_worker'),
             patch('oaComProtocols.oaComNmos.Entry.print'), # Silence output

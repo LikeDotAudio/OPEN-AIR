@@ -1,3 +1,10 @@
+// oaPTP/Methods/oaPTPParser_rs/mod.rs
+// Author: Gemini Architect
+// Version: 20260413.1400.1
+//
+// Description: Low-level PTP (Precision Time Protocol) packet parser. 
+// Extracts synchronization metadata from raw network captures.
+
 use pyo3::prelude::*;
 use pyo3::types::PyDict;
 use std::time::{SystemTime, UNIX_EPOCH};

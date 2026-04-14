@@ -1,4 +1,10 @@
-// oaAudioMixer/Core/oaAudioMixer_rs/src/factory.rs
+// oaAudioMixer/Core/oaAudioMixer_rs/factory.rs
+// Author: Gemini Architect
+// Version: 20260413.1400.1
+//
+// Description: Factory for cross-platform audio manager instantiation. 
+// Dispatches to OS-specific backends (Linux, Windows, MacOS).
+
 use crate::oa_audio_mixer_rs::manager::AudioConnectionManager;
 
 #[cfg(target_os = "windows")]

@@ -154,18 +154,18 @@ class MeterLayoutCalculator:
         for i in range(num_main + 1):
             norm = i / num_main
             value = configuration.min_val + norm * (configuration.max_val - configuration.min_val)
-            pos = norm * b_len
+            position = norm * b_len
             
             if not configuration.is_vertical:
-                tx1, ty1 = bar_x + pos, tick_start
-                tx2, ty2 = bar_x + pos, tick_start + (tick_height_val * tick_dir)
-                gx1, gy1, gx2, gy2 = bar_x + pos, bar_y, bar_x + pos, bar_y + b_thick
+                tx1, ty1 = bar_x + position, tick_start
+                tx2, ty2 = bar_x + position, tick_start + (tick_height_val * tick_dir)
+                gx1, gy1, gx2, gy2 = bar_x + position, bar_y, bar_x + position, bar_y + b_thick
                 label_x, label_y = tx2, ty2 + (5 * tick_dir)
                 anchor = "n" if configuration.scale_position == "bottom" else "s"
             else:
-                tx1, ty1 = tick_start, bar_y + (b_len - pos)
-                tx2, ty2 = tick_start + (tick_height_val * tick_dir), bar_y + (b_len - pos)
-                gx1, gy1, gx2, gy2 = bar_x, bar_y + (b_len - pos), bar_x + b_thick, bar_y + (b_len - pos)
+                tx1, ty1 = tick_start, bar_y + (b_len - position)
+                tx2, ty2 = tick_start + (tick_height_val * tick_dir), bar_y + (b_len - position)
+                gx1, gy1, gx2, gy2 = bar_x, bar_y + (b_len - position), bar_x + b_thick, bar_y + (b_len - position)
                 label_x, label_y = tx2 + (5 * tick_dir), ty2
                 anchor = "w" if configuration.scale_position in ["bottom", "right"] else "e"
             
@@ -178,25 +178,25 @@ class MeterLayoutCalculator:
                 opp_dir = -tick_dir
                 if not configuration.is_vertical:
                     opp_start = bar_y if tick_dir == 1 else bar_y + b_thick
-                    ticks.append((bar_x + pos, opp_start, bar_x + pos, opp_start + (tick_height_val * opp_dir), False))
+                    ticks.append((bar_x + position, opp_start, bar_x + position, opp_start + (tick_height_val * opp_dir), False))
                 else:
                     opp_start = bar_x if tick_dir == 1 else bar_x + b_thick
-                    ticks.append((opp_start, bar_y + (b_len - pos), opp_start + (tick_height_val * opp_dir), bar_y + (b_len - pos), False))
+                    ticks.append((opp_start, bar_y + (b_len - position), opp_start + (tick_height_val * opp_dir), bar_y + (b_len - position), False))
 
             # Subticks
             if i < num_main and configuration.sub_ticks > 0:
                 step = b_len / num_main
                 sub_step = step / (configuration.sub_ticks + 1)
                 for j in range(1, configuration.sub_ticks + 1):
-                    spos = pos + (j * sub_step)
+                    sub_position = position + (j * sub_step)
                     if not configuration.is_vertical:
-                        stx1, sty1 = bar_x + spos, tick_start
-                        stx2, sty2 = bar_x + spos, tick_start + ((tick_height_val * 0.5) * tick_dir)
-                        sgx1, sgy1, sgx2, sgy2 = bar_x + spos, bar_y, bar_x + spos, bar_y + b_thick
+                        stx1, sty1 = bar_x + sub_position, tick_start
+                        stx2, sty2 = bar_x + sub_position, tick_start + ((tick_height_val * 0.5) * tick_dir)
+                        sgx1, sgy1, sgx2, sgy2 = bar_x + sub_position, bar_y, bar_x + sub_position, bar_y + b_thick
                     else:
-                        stx1, sty1 = tick_start, bar_y + (b_len - spos)
-                        stx2, sty2 = tick_start + ((tick_height_val * 0.5) * tick_dir), bar_y + (b_len - spos)
-                        sgx1, sgy1, sgx2, sgy2 = bar_x, bar_y + (b_len - spos), bar_x + b_thick, bar_y + (b_len - spos)
+                        stx1, sty1 = tick_start, bar_y + (b_len - sub_position)
+                        stx2, sty2 = tick_start + ((tick_height_val * 0.5) * tick_dir), bar_y + (b_len - sub_position)
+                        sgx1, sgy1, sgx2, sgy2 = bar_x, bar_y + (b_len - sub_position), bar_x + b_thick, bar_y + (b_len - sub_position)
                     
                     if configuration.show_ticks: ticks.append((stx1, sty1, stx2, sty2, True))
                     if configuration.tick_sub_grid_overlay: grid_lines.append((sgx1, sgy1, sgx2, sgy2, True))
@@ -205,10 +205,10 @@ class MeterLayoutCalculator:
                         opp_dir = -tick_dir
                         if not configuration.is_vertical:
                             opp_start = bar_y if tick_dir == 1 else bar_y + b_thick
-                            ticks.append((bar_x + spos, opp_start, bar_x + spos, opp_start + ((tick_height_val * 0.5) * opp_dir), True))
+                            ticks.append((bar_x + sub_position, opp_start, bar_x + sub_position, opp_start + ((tick_height_val * 0.5) * opp_dir), True))
                         else:
                             opp_start = bar_x if tick_dir == 1 else bar_x + b_thick
-                            ticks.append((opp_start, bar_y + (b_len - spos), opp_start + ((tick_height_val * 0.5) * opp_dir), bar_y + (b_len - spos), True))
+                            ticks.append((opp_start, bar_y + (b_len - sub_position), opp_start + ((tick_height_val * 0.5) * opp_dir), bar_y + (b_len - sub_position), True))
 
         # Add "Rails" to grid if grid is enabled
         if configuration.tick_grid_overlay:
@@ -235,8 +235,8 @@ class MeterLayoutCalculator:
         """Calculates coordinates for elements that change every frame."""
         def norm(v): return (v - configuration.min_val) / (configuration.max_val - configuration.min_val)
         
-        pos = max(0, min(layout.base_len, norm(current_val) * layout.base_len))
-        px_pos = max(0, min(layout.base_len, norm(peak_val) * layout.base_len))
+        position = max(0, min(layout.base_len, norm(current_val) * layout.base_len))
+        peak_position = max(0, min(layout.base_len, norm(peak_val) * layout.base_len))
         
         # Recalculate poly helper locally
         def get_poly(v_start, v_end, t_start, t_end):
@@ -253,21 +253,21 @@ class MeterLayoutCalculator:
             points = [(x1, y1), (x2, y1), (x2, y2), (x1, y2)]
             rad = math.radians(configuration.rotation_angle)
             c, s = math.cos(rad), math.sin(rad)
-            res = []
+            coordinates_list = []
             for px, py in points:
                 tx, ty = px - cx, py - cy
-                res.extend([cx + tx*c - ty*s, cy + tx*s + ty*c])
-            return res
+                coordinates_list.extend([cx + tx*c - ty*s, cy + tx*s + ty*c])
+            return coordinates_list
 
         # 1. Update Fills
-        z1_end = min(pos, (configuration.middle_range - configuration.min_val) / (configuration.max_val - configuration.min_val) * layout.base_len)
+        z1_end = min(position, (configuration.middle_range - configuration.min_val) / (configuration.max_val - configuration.min_val) * layout.base_len)
         if configuration.fill_with_value:
-            z1_end = pos
+            z1_end = position
         
         z2_start = (configuration.middle_range - configuration.min_val) / (configuration.max_val - configuration.min_val) * layout.base_len
-        z2_end = max(z2_start, min(pos, (configuration.upper_range - configuration.min_val) / (configuration.max_val - configuration.min_val) * layout.base_len))
+        z2_end = max(z2_start, min(position, (configuration.upper_range - configuration.min_val) / (configuration.max_val - configuration.min_val) * layout.base_len))
         z3_start = (configuration.upper_range - configuration.min_val) / (configuration.max_val - configuration.min_val) * layout.base_len
-        z3_end = max(z3_start, min(pos, layout.base_len))
+        z3_end = max(z3_start, min(position, layout.base_len))
 
         
         if not configuration.fill_with_value:
@@ -285,13 +285,13 @@ class MeterLayoutCalculator:
             fs = 5
             if not configuration.is_vertical:
                 tip_y = layout.bar_y + layout.bar_thick if configuration.scale_position == "bottom" else layout.bar_y
-                tip_x = layout.bar_x + px_pos
+                tip_x = layout.bar_x + peak_position
                 if configuration.scale_position == "bottom":
                     flag_points = [tip_x, tip_y, tip_x - fs/2, tip_y + fs, tip_x + fs/2, tip_y + fs]
                 else:
                     flag_points = [tip_x, tip_y, tip_x - fs/2, tip_y - fs, tip_x + fs/2, tip_y - fs]
             else:
-                tip_y = layout.bar_y + layout.base_len - px_pos
+                tip_y = layout.bar_y + layout.base_len - peak_position
                 if configuration.scale_position in ["bottom", "right"]:
                     tip_x = layout.bar_x + layout.bar_thick
                     flag_points = [tip_x, tip_y, tip_x + fs, tip_y - fs/2, tip_x + fs, tip_y + fs/2]
@@ -303,7 +303,7 @@ class MeterLayoutCalculator:
             "z1": get_poly(0, z1_end, 0, layout.bar_thick),
             "z2": get_poly(z2_start, z2_end, 0, layout.bar_thick),
             "z3": get_poly(z3_start, z3_end, 0, layout.bar_thick),
-            "indicator": get_poly(pos - 2.5, pos + 2.5, thick1, thick2),
-            "peak": get_poly(px_pos, px_pos, 0, layout.bar_thick),
+            "indicator": get_poly(position - 2.5, position + 2.5, thick1, thick2),
+            "peak": get_poly(peak_position, peak_position, 0, layout.bar_thick),
             "peak_flag": flag_points
         }

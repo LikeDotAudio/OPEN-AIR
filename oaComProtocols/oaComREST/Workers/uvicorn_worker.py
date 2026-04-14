@@ -71,6 +71,8 @@ class UvicornWorker(threading.Thread):
                 # Check for "Address already in use" (Errno 98)
                 if isinstance(e, OSError) and e.errno == 98:
                     logger.warning(f"📡⚙️⚠️ [REST] Port {current_port} in use. Waiting to retry...")
+                elif isinstance(e, SystemExit) and e.code == 1:
+                    logger.warning(f"📡⚙️⚠️ [REST] Uvicorn failed to start on {self.host}:{current_port} (SystemExit 1). Port likely in use. Waiting to retry...")
                 else:
                     logger.error(f"📡⚙️❌ [REST] Uvicorn failed to start on {self.host}:{current_port}. Error: {e}")
                 

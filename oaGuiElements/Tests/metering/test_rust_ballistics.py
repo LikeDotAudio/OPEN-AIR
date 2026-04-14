@@ -38,7 +38,7 @@ class TestRustBallistics(unittest.TestCase):
             self.skipTest("Rust oameteringengine_rs not installed.")
 
         engine = BallisticsEngine(self.config)
-        self.assertIsNotNone(engine.rust_engine)
+        self.assertIsNotNone(engine._engine)
 
     def test_rust_ballistics_movement(self):
         """Test movement through the Rust-backed BallisticsEngine."""

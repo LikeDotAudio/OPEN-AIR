@@ -1,6 +1,9 @@
-// oaFileImportShow/Methods/oaShowfileUnpacker-rs/src/lib.rs
+// oaFileImportShow/Methods/oaShowfileUnpacker_rs/mod.rs
 // Author: Anthony Peter Kuzub (via Gemini)
-// Version: 20260331.2320.1
+// Version: 20260413.1400.1
+//
+// Description: Optimized showfile extraction utility. Unpacks 
+// compressed project archives and indexes JSON metadata in Rust.
 
 use pyo3::prelude::*;
 use pyo3::types::PyDict;

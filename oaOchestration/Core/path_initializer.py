@@ -45,7 +45,7 @@ def initialize_paths():
     DATA_RUNNING_DIR = GLOBAL_PROJECT_ROOT / "oaDataRunningFiles"
     DATA_LOGS_DIR = GLOBAL_PROJECT_ROOT / "oaDataLogs"
     DATA_CACHE_DIR = GLOBAL_PROJECT_ROOT / "oaDataCache"
-    DATA_SNMP_DIR = GLOBAL_PROJECT_ROOT / "oaDataLogs" / "SNMP"
+    DATA_SNMP_DIR = GLOBAL_PROJECT_ROOT / "oaComProtocols" / "oaComSNMP" / "Assets"
     DATA_SPLINKS_DIR = GLOBAL_PROJECT_ROOT / "oaDataSplinks"
     DATA_REPORTS_DIR = GLOBAL_PROJECT_ROOT / "oaDataLogs" / "Reports"
 

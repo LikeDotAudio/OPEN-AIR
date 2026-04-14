@@ -38,25 +38,25 @@ class GuiBatchBuilderMixin:
         if wid in self._coord_cache:
             return self._coord_cache[wid]
 
-        rx, ry = 0, 0
-        curr = widget
+        relative_x, relative_y = 0, 0
+        current_widget = widget
         ref_path = ref_widget._w if ref_widget else ""
 
-        while curr:
-            curr_path = curr._w
+        while current_widget:
+            curr_path = current_widget._w
             if curr_path == ref_path:
                 break
-            rx += curr.winfo_x()
-            ry += curr.winfo_y()
+            relative_x += current_widget.winfo_x()
+            relative_y += current_widget.winfo_y()
             
-            parent_path = curr.winfo_parent()
+            parent_path = current_widget.winfo_parent()
             if not parent_path: break
-            curr = curr.nametowidget(parent_path)
+            current_widget = current_widget.nametowidget(parent_path)
         
         if widget.winfo_ismapped():
-            self._coord_cache[wid] = (rx, ry)
+            self._coord_cache[wid] = (relative_x, relative_y)
             
-        return rx, ry
+        return relative_x, relative_y
 
     def _clear_coord_cache(self):
         """Clears the coordinate cache (call on resize)."""

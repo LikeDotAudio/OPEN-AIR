@@ -35,6 +35,8 @@ class MIDIProtocolMapper:
 
     def midi_to_topic(self, message, port_name):
         if not message: return "OPEN-AIR/MIDI/unknown/error", 0
+        if not HAS_RUST_MIDI:
+            return "OPEN-AIR/MIDI/unknown/no_rust", 0
         
         # 1. Device ID Sanitization (Rust)
         if port_name in self._dev_id_cache: 
@@ -88,6 +90,8 @@ class MIDIProtocolMapper:
                     return mido.Message('control_change', channel=channel, control=control, value=real_val)
                 
                 return None
+
+            if not HAS_RUST_MIDI: return None
 
             parts = topic.split('/')
             if len(parts) < 5: return None

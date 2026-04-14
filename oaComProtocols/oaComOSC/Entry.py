@@ -21,28 +21,50 @@
 
 import sys
 import os
+import pathlib
+import argparse
 from pathlib import Path
-from .Managers.osc_manager import OSCManager
-from .Workers.osc_rx_server import OscRxServer
-from .Workers.osc_tx_client import OscTxClient
+
+# Ensure root directory is in the search path
+current_dir = pathlib.Path(__file__).resolve().parent
+project_root = current_dir.parent.parent
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
+
+from oaComProtocols.oaComOSC.Managers.osc_manager import OSCManager
+from oaComProtocols.oaComOSC.Workers.osc_rx_server import OscRxServer
+from oaComProtocols.oaComOSC.Workers.osc_tx_client import OscTxClient
 
 _instance = None
 
-def get_manager(state_cache_manager=None, mqtt_connection_manager=None, run_bridge=True):
+def get_manager(context=None, state_cache_manager=None, mqtt_connection_manager=None, run_bridge=True):
     """
     Returns the singleton OSCManager instance.
     If not already initialized, it creates it with the provided managers.
-    If called without managers, it relies on OSCManager's internal fallbacks.
     """
     global _instance
+    
+    # ⚡ ROBUST SINGLETON: Check if the manager is already initialized in another 
+    # copy of this module (happens when run as __main__ and imported as a package)
+    if _instance is None:
+        try:
+            import oaComProtocols.oaComOSC.Entry as osc_entry
+            if osc_entry is not sys.modules[__name__] and osc_entry._instance:
+                _instance = osc_entry._instance
+        except (ImportError, AttributeError):
+            pass
+
     if _instance is None:
         _instance = OSCManager(
+            context=context,
             state_cache_manager=state_cache_manager, 
             mqtt_connection_manager=mqtt_connection_manager, 
             run_bridge=run_bridge
         )
     else:
-        # ⚡ STANDALONE: Update existing instance if new dependencies are provided
+        # Update existing instance if new dependencies are provided
+        if context:
+            _instance.context = context
         if state_cache_manager:
             _instance.state_cache_manager = state_cache_manager
         if mqtt_connection_manager:
@@ -93,15 +115,15 @@ def run_tests():
     Discovers and runs all tests within the oaComProtocols.oaComOSC/Tests/ directory.
     """
     print("🔍 Discovering and running tests for oaComProtocols.oaComOSC...")
-    test_dir = Path(__file__).parent / "Tests"
+    test_dir = pathlib.Path(__file__).parent / "Tests"
     if not test_dir.is_dir():
         print("❌ No 'Tests/' directory found.")
-        return
+        return True
 
     test_files = sorted([f for f in test_dir.glob("test_*.py")])
     if not test_files:
         print("❌ No test files found (expected pattern: test_*.py).")
-        return
+        return True
 
     print(f"Found {len(test_files)} test files. Executing...")
     
@@ -109,15 +131,15 @@ def run_tests():
     
     all_tests_passed = True
     for test_file in test_files:
-        print(f"\n--- Running: {test_file.name} ---")
+        print(f"--- Running: {test_file.name} ---")
         try:
             # Get the module path relative to the project root for the test runner
-            relative_test_file_path = test_file.relative_to(Path(__file__).parent.parent.parent) # Path from OPEN-AIR root
-            module_path_for_runner = str(relative_test_file_path).replace(os.sep, '.')[:-3] # Remove .py extension
+            relative_test_file_path = test_file.relative_to(project_root)
+            module_path_for_runner = str(relative_test_file_path).replace(os.sep, '.')[:-3]
 
             # Ensure the current directory is the project root so Python can find modules
             original_cwd = os.getcwd()
-            os.chdir(Path(__file__).parent.parent.parent) 
+            os.chdir(project_root) 
 
             result = subprocess.run(
                 [sys.executable, "-m", "unittest", module_path_for_runner],
@@ -143,19 +165,75 @@ def run_tests():
             os.chdir(original_cwd)
 
     if all_tests_passed:
-        print("\n🎉 All tests for oaComProtocols.oaComOSC passed!")
+        print("🎉 All tests for oaComProtocols.oaComOSC passed!")
     else:
-        print("\n💔 Some tests for oaComProtocols.oaComOSC failed.")
+        print("💔 Some tests for oaComProtocols.oaComOSC failed.")
+    return all_tests_passed
+
+def main():
+    """
+    Main entry point for running the OSC module as a standalone application.
+    Runs tests first, then launches the GUI.
+    """
+    # 1. Parse Arguments
+    parser = argparse.ArgumentParser(description="OPEN-AIR OSC Module Standalone")
+    parser.add_argument("--skip-tests", action="store_true", help="Skip pre-flight unit tests")
+    args, unknown = parser.parse_known_args()
+
+    # 2. Run Tests First
+    if not args.skip_tests and not run_tests():
+        print("🛑 Tests failed. Aborting GUI launch.")
+        return
+
+    # 3. Initialize Paths and Logging
+    from oaLogging.Core.logger import initialize_logging, set_log_directory
+    from oaOchestration.Core.path_initializer import initialize_paths, DATA_LOGS_DIR
+
+    initialize_paths()
+    set_log_directory(DATA_LOGS_DIR, partition="OSC-STANDALONE")
+
+    # 4. Start OSC Manager (Standalone mode will auto-activate internal MQTT relay)
+    manager = get_manager()
+    
+    # 5. Launch GUI
+    try:
+        import tkinter as tk
+        from tkinter import ttk
+        from oaComProtocols.oaComOSC.Interface.gui_OSC import OscDashboardImplementation
+
+        root = tk.Tk()
+        root.title("OPEN-AIR | OSC Control Hub (STANDALONE)")
+        root.geometry("1100x850")
+        root.configure(bg="#2b2b2b")
+
+        def on_closing():
+            stop()
+            root.destroy()
+
+        root.protocol("WM_DELETE_WINDOW", on_closing)
+
+        # ⚡ DASHBOARD: Host directly in the root for a unified view
+        gui = OscDashboardImplementation(root, config={})
+        gui.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
+
+        print("✅ [OSC] Standalone Control Hub deployed (Integrated MQTT Relay).")
+        root.mainloop()
+
+    except KeyboardInterrupt:
+        pass
+    except Exception as e:
+        print(f"❌ [OSC] Critical error in GUI main loop: {e}")
+        import traceback
+        traceback.print_exc()
+    finally:
+        try:
+            stop()
+        except Exception as e:
+            print(f"❌ [OSC] Error during cleanup: {e}")
+        print("🏁 [OSC] Standalone shutdown complete.")
 
 if __name__ == "__main__":
-    # If no arguments are provided, default to running tests.
-    # Otherwise, assume specific commands are intended (e.g., start, stop, send).
-    if len(sys.argv) > 1:
-        print("Executing command...")
-        # In a real application, you'd parse sys.argv and call the appropriate functions.
-        # For this task, we assume direct execution without specific arguments implies testing.
-    else:
-        run_tests()
+    main()
 
 
 # Standardized exports
@@ -170,5 +248,6 @@ __all__ = [
     "send",
     "add_monitor_callback",
     "remove_monitor_callback",
-    "set_bridge_mode"
+    "set_bridge_mode",
+    "main"
 ]

@@ -28,7 +28,6 @@ The following patterns are excluded from functional analysis and context, as def
 - oaDataLogs/Audits/
 - oaDataCache/
 - oaDataLogs/
-- oaDataLogs/SNMP/
 - oaDataSplinks/
 - oaDataRunningFiles/
 - .pytest_cache/

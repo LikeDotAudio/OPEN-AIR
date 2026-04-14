@@ -9,6 +9,8 @@ try:
 except ImportError:
     HAS_RUST_AES70 = False
 
+LOCAL_DEBUG = False
+
 class OcaParser:
     """
     Handles decoding of AES70 OCP.1 (TCP/IP) packets.

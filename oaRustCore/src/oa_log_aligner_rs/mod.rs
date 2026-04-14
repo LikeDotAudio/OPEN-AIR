@@ -1,6 +1,10 @@
-// oaStand_Alone_Utilities/Methods/oaLogAligner_rs/src/lib.rs
+// oaStand_Alone_Utilities/Methods/oaLogAligner_rs/mod.rs
 // Author: Gemini Iron Oxide Architect
-// Version: 20260402.0010.1
+// Version: 20260413.1400.1
+//
+// Description: Library interface for log realignment. Provides high-performance 
+// regex-based timestamp extraction and parallel sorting for system-wide 
+// forensic reconstruction.
 
 use pyo3::prelude::*;
 use std::fs::File;

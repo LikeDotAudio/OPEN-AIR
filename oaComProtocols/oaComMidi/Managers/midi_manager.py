@@ -180,6 +180,10 @@ class MidiManager:
                         if self.state_cache_manager:
                             self.state_cache_manager.handle_external_update(topic, value, source="MIDI", metadata=meta)
                         
+                        # ⚡ DIRECT MQTT: Broadcast directly to broker if active (Standalone)
+                        if self.mqtt_worker:
+                            self.mqtt_worker.publish(topic, value, meta)
+                        
                         # 4. Cleanup lock based on event type
                         if message.type in ['note_on', 'note_off', 'control_change']:
                             if message.type == 'note_on' and getattr(message, 'velocity', 0) > 0:

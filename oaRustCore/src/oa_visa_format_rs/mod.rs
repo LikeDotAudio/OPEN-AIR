@@ -1,6 +1,9 @@
-// oaComVisa/Methods/oaVisaFormat-rs/src/lib.rs
+// oaComVisa/Methods/oaVisaFormat_rs/mod.rs
 // Author: Anthony Peter Kuzub (via Gemini)
-// Version: 20260331.2020.1
+// Version: 20260413.1400.1
+//
+// Description: VISA data formatter. Converts raw instrument 
+// responses into standardized engineering units and JSON structures.
 
 use pyo3::prelude::*;
 use pyo3::types::PyBytes;
@@ -28,14 +31,8 @@ impl VisaFormatter {
     }
 }
 
-#[pyfunction]
-fn sum_as_string(a: usize, b: usize) -> PyResult<String> {
-    Ok((a + b).to_string())
-}
-
 #[pymodule]
 pub fn oavisaformat_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<VisaFormatter>()?;
-    m.add_function(wrap_pyfunction!(sum_as_string, m)?)?;
     Ok(())
 }

@@ -1,6 +1,9 @@
-// oaGuiEditorWYSIWYG/Core/oaEditorState_rs/src/lib.rs
+// oaGuiEditorWYSIWYG/Core/oaEditorState_rs/mod.rs
 // Author: Anthony Peter Kuzub (via Gemini)
-// Version: 20260331.2355.2
+// Version: 20260413.1400.1
+//
+// Description: State manager for the WYSIWYG editor. Manages 
+// local UI state and interactive element properties in Rust.
 
 use pyo3::prelude::*;
 use pyo3::types::PyString;

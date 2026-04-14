@@ -1,6 +1,6 @@
 # oaComProtocols.oaComNmos/Interface/nmos_connection_monitor_impl.py
 # Author: Gemini (Collaborator)
-# Version: 20260405.2145.1
+# Version: 20260414.0020.1
 #
 # Description: NMOS Connection Monitor Implementation.
 # Shows registration status with the NMOS registry and HTTP server status.
@@ -28,12 +28,12 @@ class NmosConnectionMonitorImplementation(tk.Frame, TransparencyMixin):
     def __init__(self, parent, json_path=None, config=None, **kwargs):
         super().__init__(parent, **kwargs)
         self.config = config or {}
-        self.app_instance = self.config.get("app_instance")
+        self.global_state = self.config.get("global_state", {})
         
         # Default values
-        self.registrar_url = "http://localhost:4000"
-        self.node_id = "Unknown"
-        self.device_id = "Unknown"
+        self.registrar_url = self.global_state.get("REGISTRAR_URL", "http://localhost:4000")
+        self.node_id = self.global_state.get("NODE_ID", "Unknown")
+        self.device_id = self.global_state.get("DEVICE_ID", "Unknown")
         self.host_ip = "0.0.0.0"
         self.is_registered = False
         self.is_server_running = False
@@ -86,22 +86,32 @@ class NmosConnectionMonitorImplementation(tk.Frame, TransparencyMixin):
             time.sleep(5)
 
     def _update_status(self):
-        # Placeholder for actual status check
-        # We'll try to reach the local NMOS API
+        # Pull actual status from global_state
         try:
-            # Check if Node API is responsive
-            # This is just a simulation of checking local connection_api
-            self.is_server_running = True # Assume true for this demo if logic exists
+            self.is_server_running = self.global_state.get("RUNNING", False)
+            self.node_id = self.global_state.get("NODE_ID", "Unknown")
+            self.device_id = self.global_state.get("DEVICE_ID", "Unknown")
             
-            # Simulated IDs
-            self.node_id = "00000000-0000-0000-0000-000000000000"
-            self.device_id = "11111111-1111-1111-1111-111111111111"
-            self.host_ip = "127.0.0.1"
+            # Simple IP discovery or from state
+            from oaComProtocols.oaComNmos.Core.utils import get_ip
+            self.host_ip = get_ip()
             
-            self.after(0, self._refresh_ui)
-        except Exception:
+            # For registration status, we'd need to check the manager, 
+            # but for now we assume if it's running it's attempting registration.
+            self.is_registered = self.is_server_running 
+            
+            if self.winfo_exists():
+                self.after(0, self._refresh_ui)
+        except (RuntimeError, tk.TclError):
+            # Main thread exited or widget gone
+            self.running = False
+        except Exception as e:
+            matrix_log("ui", "nmos", "conn_monitor_error", f"Error updating NMOS status: {e}", "ERROR")
             self.is_server_running = False
-            self.after(0, self._refresh_ui)
+            try:
+                if self.winfo_exists():
+                    self.after(0, self._refresh_ui)
+            except: pass
 
     def _refresh_ui(self):
         for item in self.status_tree.get_children():

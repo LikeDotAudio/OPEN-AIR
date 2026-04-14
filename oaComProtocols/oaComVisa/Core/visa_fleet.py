@@ -2,9 +2,9 @@ import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
 # Core/visa_fleet.py
 # Author: Anthony Peter Kuzub
-# Version: 20260315.Modular.1
+# Version: 2.0.0
 #
-# Description: Modularized VISA Fleet Manager.
+# Description: Refactored VISA Fleet Manager (Composition over Inheritance).
 
 import threading
 from loguru import logger
@@ -20,12 +20,12 @@ from ..FileWriters.visa_json import VisaJsonBuilder
 from ..Managers.fleet_mqtt_bridge import MqttFleetBridge
 from ..FileWriters.visa_csv import VisaCsvBuilder
 
-# --- EXTRACTED CORE MODULES ---
-from .fleet_command_queue_mixin import FleetCommandQueueMixin
-from .fleet_inventory_mixin import FleetInventoryMixin
-from .fleet_scan_mixin import FleetScanMixin
+# --- Refactored Core Managers ---
+from .fleet_command_manager import CommandQueueManager
+from .fleet_inventory_manager import InventoryManager
+from .fleet_scan_manager import ScanManager
 
-class FleetOrchestrator(FleetCommandQueueMixin, FleetInventoryMixin, FleetScanMixin):
+class FleetOrchestrator:
     """Commander for the VISA instrument fleet, managing discovery and communication."""
     
     def __init__(self, mqtt_connection_manager=None, subscriber_router=None, aes70_manager=None):
@@ -48,10 +48,41 @@ class FleetOrchestrator(FleetCommandQueueMixin, FleetInventoryMixin, FleetScanMi
         self._current_inventory = self.json_builder.load_inventory_from_json()
         self.discovery_orchestrator = DiscoveryOrchestrator(manager_ref=self, aes70_manager=aes70_manager)
         
+        # Initialize Composed Managers
+        self._command_manager = CommandQueueManager(self)
+        self._inventory_manager = InventoryManager(self)
+        self._scan_manager = ScanManager(self)
+
         self._running = False
-        self.initial_scan_complete_event = threading.Event()
 
         matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "✅ [SUCCESS] FleetOrchestrator initialized.", "SUCCESS")
+
+    # --- Delegated Properties and Methods (Public API Compatibility) ---
+    
+    @property
+    def current_inventory(self):
+        return self._inventory_manager.current_inventory
+
+    @property
+    def initial_scan_complete_event(self):
+        return self._scan_manager.initial_scan_complete_event
+
+    def enqueue_command(self, *args, **kwargs):
+        return self._command_manager.enqueue_command(*args, **kwargs)
+
+    def trigger_scan(self):
+        return self._scan_manager.trigger_scan()
+
+    def wait_for_initial_scan(self, *args, **kwargs):
+        return self._scan_manager.wait_for_initial_scan(*args, **kwargs)
+
+    # Internal notification methods for discovery_orchestrator
+    def _notify_inventory(self, data): self._inventory_manager.notify_inventory(data)
+    def _notify_response(self, *args): self._inventory_manager.notify_response(*args)
+    def _notify_error(self, *args): self._inventory_manager.notify_error(*args)
+    def _notify_status(self, *args): self._inventory_manager.notify_status(*args)
+
+    # --- Lifecycle Methods ---
 
     def set_callbacks(self, on_inventory_update, on_device_response, on_device_error, on_proxy_status):
         self.cb_inventory = on_inventory_update

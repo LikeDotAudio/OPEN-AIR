@@ -67,10 +67,16 @@ def build_device(device_id, node_id, host_ip, port):
         "node_id": node_id,
         "senders": [],
         "receivers": [],
-        "controls": [{
-            "href": f"http://{host_ip}:{port}/x-nmos/connection/v1.1/",
-            "type": "urn:x-nmos:control:sr-ctrl/v1.1"
-        }]
+        "controls": [
+            {
+                "href": f"http://{host_ip}:{port}/x-nmos/connection/v1.1/",
+                "type": "urn:x-nmos:control:sr-ctrl/v1.1"
+            },
+            {
+                "href": f"ws://{host_ip}:{port}/is07",
+                "type": "urn:x-nmos:control:ncp/v1.0"
+            }
+        ]
     }
 
 def build_source(source_id, device_id, sdp_data):

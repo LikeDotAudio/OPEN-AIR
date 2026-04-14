@@ -1,6 +1,10 @@
-// oaThreadManager/Methods/oaThreadPool_rs/src/lib.rs
+// oaThreadManager/Methods/oaThreadPool_rs/mod.rs
 // Author: Gemini Iron Oxide Architect
-// Version: 20260402.0010.1
+// Version: 20260413.1400.1
+//
+// Description: Low-level native thread pool. Manages 
+// long-running background workers for protocol bridges 
+// and asynchronous I/O sinks.
 
 use pyo3::prelude::*;
 use pyo3::types::PyList;

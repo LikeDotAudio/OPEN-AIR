@@ -1,0 +1,2000 @@
+OPENAIR-MIB DEFINITIONS ::= BEGIN
+
+IMPORTS
+    MODULE-IDENTITY, OBJECT-TYPE, enterprises FROM SNMPv2-SMI
+    DisplayString FROM SNMPv2-TC;
+
+openAirMIB MODULE-IDENTITY
+    LAST-UPDATED "202604140104Z"
+    ORGANIZATION "OPEN-AIR Project"
+    CONTACT-INFO "Anthony Peter Kuzub"
+    DESCRIPTION "MQTT-Aligned OID Tree for OPEN-AIR."
+    REVISION "202604140104Z"
+    DESCRIPTION "Strictly unique path-aligned generation."
+    ::= { enterprises 65300 }
+
+v1 OBJECT IDENTIFIER ::= { openAirMIB 1 }
+
+powerab8a OBJECT IDENTIFIER ::= { v1 416 }
+powerInstrumentbb35 OBJECT IDENTIFIER ::= { powerab8a 27435 }
+powerInstrumentFourinstruments4ffa OBJECT IDENTIFIER ::= { powerInstrumentbb35 9161 }
+powerInstrumentFourinstrumentsPowerInstrumentfourinstrumentsa050 OBJECT IDENTIFIER ::= { powerInstrumentFourinstruments4ffa 58577 }
+powerInstrumentFourinstrumentsPowerInstrumentfourinstruments2eaf OBJECT IDENTIFIER ::= { powerInstrumentFourinstrumentsPowerInstrumentfourinstrumentsa050 9595 }
+powerInstrumentFourinstrumentsPowerInstrumentfourinstrumentsb3ad OBJECT IDENTIFIER ::= { powerInstrumentFourinstrumentsPowerInstrumentfourinstruments2eaf 56674 }
+powerInstrumentFourinstrumentsPowerInstrumentfourinstruments4686 OBJECT IDENTIFIER ::= { powerInstrumentFourinstrumentsPowerInstrumentfourinstrumentsb3ad 20046 }
+powerInstrumentFourinstrumentsPowerInstrumentfourinstruments7bd6 OBJECT IDENTIFIER ::= { powerInstrumentFourinstrumentsPowerInstrumentfourinstruments4686 3549 }
+-- MQTT: OPEN-AIR/Power/Instrument/four_instruments/Power_Instrument_four_instruments/blocks/Quad_PSU_Station/Unit_4_Delta/Meters_4/P_Meter_4
+powerInstrumentFourinstrumentsPowerInstrumentfourinstrumentsadd4 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Power/Instrument/four_instruments/Power_Instrument_four_instruments/blocks/Quad_PSU_Station/Unit_4_Delta/Meters_4/P_Meter_4"
+    ::= { powerInstrumentFourinstrumentsPowerInstrumentfourinstruments7bd6 61842 }
+
+powerInstrumentFourinstrumentsPowerInstrumentfourinstruments8207 OBJECT IDENTIFIER ::= { powerInstrumentFourinstrumentsPowerInstrumentfourinstruments4686 44501 }
+-- MQTT: OPEN-AIR/Power/Instrument/four_instruments/Power_Instrument_four_instruments/blocks/Quad_PSU_Station/Unit_4_Delta/Controls_4/Amps_Set_4
+powerInstrumentFourinstrumentsPowerInstrumentfourinstrumentscbd6 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Power/Instrument/four_instruments/Power_Instrument_four_instruments/blocks/Quad_PSU_Station/Unit_4_Delta/Controls_4/Amps_Set_4"
+    ::= { powerInstrumentFourinstrumentsPowerInstrumentfourinstruments8207 57406 }
+
+powerInstrumentFourinstrumentsPowerInstrumentfourinstrumentsd121 OBJECT IDENTIFIER ::= { powerInstrumentFourinstrumentsPowerInstrumentfourinstrumentsb3ad 24168 }
+powerInstrumentFourinstrumentsPowerInstrumentfourinstrumentsea8d OBJECT IDENTIFIER ::= { powerInstrumentFourinstrumentsPowerInstrumentfourinstrumentsd121 39271 }
+-- MQTT: OPEN-AIR/Power/Instrument/four_instruments/Power_Instrument_four_instruments/blocks/Quad_PSU_Station/Unit_3_Gamma/Meters_3/I_Meter_3
+powerInstrumentFourinstrumentsPowerInstrumentfourinstruments7c8d OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Power/Instrument/four_instruments/Power_Instrument_four_instruments/blocks/Quad_PSU_Station/Unit_3_Gamma/Meters_3/I_Meter_3"
+    ::= { powerInstrumentFourinstrumentsPowerInstrumentfourinstrumentsea8d 2753 }
+
+powerInstrumentFourinstrumentsPowerInstrumentfourinstrumentsfc6e OBJECT IDENTIFIER ::= { powerInstrumentFourinstrumentsPowerInstrumentfourinstrumentsb3ad 34715 }
+powerInstrumentFourinstrumentsPowerInstrumentfourinstruments571e OBJECT IDENTIFIER ::= { powerInstrumentFourinstrumentsPowerInstrumentfourinstrumentsfc6e 33006 }
+-- MQTT: OPEN-AIR/Power/Instrument/four_instruments/Power_Instrument_four_instruments/blocks/Quad_PSU_Station/Unit_2_Beta/Controls_2/Amps_Set_2
+powerInstrumentFourinstrumentsPowerInstrumentfourinstrumentsddc3 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Power/Instrument/four_instruments/Power_Instrument_four_instruments/blocks/Quad_PSU_Station/Unit_2_Beta/Controls_2/Amps_Set_2"
+    ::= { powerInstrumentFourinstrumentsPowerInstrumentfourinstruments571e 36193 }
+
+powerInstrumentFourinstrumentsPowerInstrumentfourinstruments521d OBJECT IDENTIFIER ::= { powerInstrumentFourinstrumentsPowerInstrumentfourinstrumentsb3ad 42586 }
+powerInstrumentFourinstrumentsPowerInstrumentfourinstruments7846 OBJECT IDENTIFIER ::= { powerInstrumentFourinstrumentsPowerInstrumentfourinstruments521d 16548 }
+-- MQTT: OPEN-AIR/Power/Instrument/four_instruments/Power_Instrument_four_instruments/blocks/Quad_PSU_Station/Unit_1_Alpha/Controls_1/Volts_Set_1
+powerInstrumentFourinstrumentsPowerInstrumentfourinstruments6df6 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Power/Instrument/four_instruments/Power_Instrument_four_instruments/blocks/Quad_PSU_Station/Unit_1_Alpha/Controls_1/Volts_Set_1"
+    ::= { powerInstrumentFourinstrumentsPowerInstrumentfourinstruments7846 17476 }
+
+powerInstrumentFourinstrumentsPowerInstrumentfourinstrumentsdf2d OBJECT IDENTIFIER ::= { powerInstrumentFourinstrumentsPowerInstrumentfourinstruments521d 46768 }
+-- MQTT: OPEN-AIR/Power/Instrument/four_instruments/Power_Instrument_four_instruments/blocks/Quad_PSU_Station/Unit_1_Alpha/Meters_1/V_Meter_1
+powerInstrumentFourinstrumentsPowerInstrumentfourinstruments5169 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Power/Instrument/four_instruments/Power_Instrument_four_instruments/blocks/Quad_PSU_Station/Unit_1_Alpha/Meters_1/V_Meter_1"
+    ::= { powerInstrumentFourinstrumentsPowerInstrumentfourinstrumentsdf2d 21110 }
+
+-- MQTT: OPEN-AIR/Power/Instrument/four_instruments/Power_Instrument_four_instruments/blocks/Quad_PSU_Station/Unit_1_Alpha/Meters_1/I_Meter_1
+powerInstrumentFourinstrumentsPowerInstrumentfourinstruments2210 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Power/Instrument/four_instruments/Power_Instrument_four_instruments/blocks/Quad_PSU_Station/Unit_1_Alpha/Meters_1/I_Meter_1"
+    ::= { powerInstrumentFourinstrumentsPowerInstrumentfourinstrumentsdf2d 57302 }
+
+powerInstrumentAlld07f OBJECT IDENTIFIER ::= { powerInstrumentbb35 27895 }
+powerInstrumentAllPowerInstrumentAll82408 OBJECT IDENTIFIER ::= { powerInstrumentAlld07f 1641 }
+powerInstrumentAllPowerInstrumentAll8Blocksce13 OBJECT IDENTIFIER ::= { powerInstrumentAllPowerInstrumentAll82408 15187 }
+powerInstrumentAllPowerInstrumentAll8BlocksOctoPSUMonitord567 OBJECT IDENTIFIER ::= { powerInstrumentAllPowerInstrumentAll8Blocksce13 47184 }
+powerInstrumentAllPowerInstrumentAll8BlocksOctoPSUMonitorUniadf6 OBJECT IDENTIFIER ::= { powerInstrumentAllPowerInstrumentAll8BlocksOctoPSUMonitord567 36462 }
+powerInstrumentAllPowerInstrumentAll8BlocksOctoPSUMonitorUnifd64 OBJECT IDENTIFIER ::= { powerInstrumentAllPowerInstrumentAll8BlocksOctoPSUMonitorUniadf6 37391 }
+-- MQTT: OPEN-AIR/Power/Instrument/All/Power_Instrument_All 8/blocks/Octo_PSU_Monitor/Unit_6_Monitor/Meters_6/W6
+powerInstrumentAllPowerInstrumentAll8BlocksOctoPSUMonitorUni6160 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Power/Instrument/All/Power_Instrument_All 8/blocks/Octo_PSU_Monitor/Unit_6_Monitor/Meters_6/W6"
+    ::= { powerInstrumentAllPowerInstrumentAll8BlocksOctoPSUMonitorUnifd64 43134 }
+
+powerInstrumentAllPowerInstrumentAll8BlocksOctoPSUMonitorUni8300 OBJECT IDENTIFIER ::= { powerInstrumentAllPowerInstrumentAll8BlocksOctoPSUMonitord567 42728 }
+powerInstrumentAllPowerInstrumentAll8BlocksOctoPSUMonitorUni5ab9 OBJECT IDENTIFIER ::= { powerInstrumentAllPowerInstrumentAll8BlocksOctoPSUMonitorUni8300 45607 }
+powerInstrumentAllPowerInstrumentAll8BlocksOctoPSUMonitorUni519d OBJECT IDENTIFIER ::= { powerInstrumentAllPowerInstrumentAll8BlocksOctoPSUMonitorUni5ab9 14626 }
+-- MQTT: OPEN-AIR/Power/Instrument/All/Power_Instrument_All 8/blocks/Octo_PSU_Monitor/Unit_4_Monitor/Graph_4/settings/show_grid
+powerInstrumentAllPowerInstrumentAll8BlocksOctoPSUMonitorUnib11f OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Power/Instrument/All/Power_Instrument_All 8/blocks/Octo_PSU_Monitor/Unit_4_Monitor/Graph_4/settings/show_grid"
+    ::= { powerInstrumentAllPowerInstrumentAll8BlocksOctoPSUMonitorUni519d 52534 }
+
+powerInstrumentAllPowerInstrumentAll8BlocksOctoPSUMonitorUni947b OBJECT IDENTIFIER ::= { powerInstrumentAllPowerInstrumentAll8BlocksOctoPSUMonitord567 45739 }
+powerInstrumentAllPowerInstrumentAll8BlocksOctoPSUMonitorUni8eeb OBJECT IDENTIFIER ::= { powerInstrumentAllPowerInstrumentAll8BlocksOctoPSUMonitorUni947b 7895 }
+-- MQTT: OPEN-AIR/Power/Instrument/All/Power_Instrument_All 8/blocks/Octo_PSU_Monitor/Unit_5_Monitor/Meters_5/V5
+powerInstrumentAllPowerInstrumentAll8BlocksOctoPSUMonitorUni88d9 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Power/Instrument/All/Power_Instrument_All 8/blocks/Octo_PSU_Monitor/Unit_5_Monitor/Meters_5/V5"
+    ::= { powerInstrumentAllPowerInstrumentAll8BlocksOctoPSUMonitorUni8eeb 58760 }
+
+powerInstrumentAllPowerInstrumentAll8BlocksOctoPSUMonitorUniaa18 OBJECT IDENTIFIER ::= { powerInstrumentAllPowerInstrumentAll8BlocksOctoPSUMonitorUni947b 18930 }
+powerInstrumentAllPowerInstrumentAll8BlocksOctoPSUMonitorUni2b62 OBJECT IDENTIFIER ::= { powerInstrumentAllPowerInstrumentAll8BlocksOctoPSUMonitorUniaa18 57267 }
+-- MQTT: OPEN-AIR/Power/Instrument/All/Power_Instrument_All 8/blocks/Octo_PSU_Monitor/Unit_5_Monitor/Graph_5/oaDataRunningFiles/MARKERS
+powerInstrumentAllPowerInstrumentAll8BlocksOctoPSUMonitorUni6f4e OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Power/Instrument/All/Power_Instrument_All 8/blocks/Octo_PSU_Monitor/Unit_5_Monitor/Graph_5/oaDataRunningFiles/MARKERS"
+    ::= { powerInstrumentAllPowerInstrumentAll8BlocksOctoPSUMonitorUni2b62 48497 }
+
+powerInstrumentAllPowerInstrumentAll8BlocksOctoPSUMonitorUnie761 OBJECT IDENTIFIER ::= { powerInstrumentAllPowerInstrumentAll8BlocksOctoPSUMonitord567 52001 }
+powerInstrumentAllPowerInstrumentAll8BlocksOctoPSUMonitorUnie44f OBJECT IDENTIFIER ::= { powerInstrumentAllPowerInstrumentAll8BlocksOctoPSUMonitorUnie761 23503 }
+powerInstrumentAllPowerInstrumentAll8BlocksOctoPSUMonitorUni6681 OBJECT IDENTIFIER ::= { powerInstrumentAllPowerInstrumentAll8BlocksOctoPSUMonitorUnie44f 46490 }
+-- MQTT: OPEN-AIR/Power/Instrument/All/Power_Instrument_All 8/blocks/Octo_PSU_Monitor/Unit_3_Monitor/Graph_3/oaDataRunningFiles/MARKERS
+powerInstrumentAllPowerInstrumentAll8BlocksOctoPSUMonitorUni9602 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Power/Instrument/All/Power_Instrument_All 8/blocks/Octo_PSU_Monitor/Unit_3_Monitor/Graph_3/oaDataRunningFiles/MARKERS"
+    ::= { powerInstrumentAllPowerInstrumentAll8BlocksOctoPSUMonitorUni6681 8819 }
+
+powerInstrumentAllPowerInstrumentAll8BlocksOctoPSUMonitorUnif01a OBJECT IDENTIFIER ::= { powerInstrumentAllPowerInstrumentAll8BlocksOctoPSUMonitord567 57186 }
+powerInstrumentAllPowerInstrumentAll8BlocksOctoPSUMonitorUni14ee OBJECT IDENTIFIER ::= { powerInstrumentAllPowerInstrumentAll8BlocksOctoPSUMonitorUnif01a 40986 }
+powerInstrumentAllPowerInstrumentAll8BlocksOctoPSUMonitorUni635d OBJECT IDENTIFIER ::= { powerInstrumentAllPowerInstrumentAll8BlocksOctoPSUMonitorUni14ee 38100 }
+-- MQTT: OPEN-AIR/Power/Instrument/All/Power_Instrument_All 8/blocks/Octo_PSU_Monitor/Unit_2_Monitor/Graph_2/settings/xlim
+powerInstrumentAllPowerInstrumentAll8BlocksOctoPSUMonitorUni892a OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Power/Instrument/All/Power_Instrument_All 8/blocks/Octo_PSU_Monitor/Unit_2_Monitor/Graph_2/settings/xlim"
+    ::= { powerInstrumentAllPowerInstrumentAll8BlocksOctoPSUMonitorUni635d 4633 }
+
+oscilloscope78be OBJECT IDENTIFIER ::= { v1 1356 }
+oscilloscopeInstrument64be OBJECT IDENTIFIER ::= { oscilloscope78be 6672 }
+oscilloscopeInstrumentChannel8986 OBJECT IDENTIFIER ::= { oscilloscopeInstrument64be 44937 }
+oscilloscopeInstrumentChannelOscilloscopeInstrument2Channel13ba7 OBJECT IDENTIFIER ::= { oscilloscopeInstrumentChannel8986 48689 }
+oscilloscopeInstrumentChannelOscilloscopeInstrument2Channel1104f OBJECT IDENTIFIER ::= { oscilloscopeInstrumentChannelOscilloscopeInstrument2Channel13ba7 16917 }
+oscilloscopeInstrumentChannelOscilloscopeInstrument2Channel1aae9 OBJECT IDENTIFIER ::= { oscilloscopeInstrumentChannelOscilloscopeInstrument2Channel1104f 2923 }
+oscilloscopeInstrumentChannelOscilloscopeInstrument2Channel1ce60 OBJECT IDENTIFIER ::= { oscilloscopeInstrumentChannelOscilloscopeInstrument2Channel1aae9 17416 }
+-- MQTT: OPEN-AIR/Oscilloscope/Instrument/Channel/Oscilloscope_Instrument_2_Channel_1/blocks/Oscilloscope_Main_Station/Display_Sector/Device_Identity
+oscilloscopeInstrumentChannelOscilloscopeInstrument2Channel11e54 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Oscilloscope/Instrument/Channel/Oscilloscope_Instrument_2_Channel_1/blocks/Oscilloscope_Main_Station/Display_Sector/Device_Identity"
+    ::= { oscilloscopeInstrumentChannelOscilloscopeInstrument2Channel1ce60 21093 }
+
+oscilloscopeInstrumentChannelOscilloscopeInstrument2Channel1da5a OBJECT IDENTIFIER ::= { oscilloscopeInstrumentChannelOscilloscopeInstrument2Channel1ce60 29609 }
+oscilloscopeInstrumentChannelOscilloscopeInstrument2Channel1e8a3 OBJECT IDENTIFIER ::= { oscilloscopeInstrumentChannelOscilloscopeInstrument2Channel1da5a 62512 }
+-- MQTT: OPEN-AIR/Oscilloscope/Instrument/Channel/Oscilloscope_Instrument_2_Channel_1/blocks/Oscilloscope_Main_Station/Display_Sector/Main_Graph_Display/oaDataRunningFiles/MARKERS
+oscilloscopeInstrumentChannelOscilloscopeInstrument2Channel1b410 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Oscilloscope/Instrument/Channel/Oscilloscope_Instrument_2_Channel_1/blocks/Oscilloscope_Main_Station/Display_Sector/Main_Graph_Display/oaDataRunningFiles/MARKERS"
+    ::= { oscilloscopeInstrumentChannelOscilloscopeInstrument2Channel1e8a3 3380 }
+
+oscilloscopeInstrumentChannelOscilloscopeInstrument2Channel1be7d OBJECT IDENTIFIER ::= { oscilloscopeInstrumentChannelOscilloscopeInstrument2Channel1aae9 65487 }
+-- MQTT: OPEN-AIR/Oscilloscope/Instrument/Channel/Oscilloscope_Instrument_2_Channel_1/blocks/Oscilloscope_Main_Station/Vertical_Control_Deck/Ch1_Offset
+oscilloscopeInstrumentChannelOscilloscopeInstrument2Channel1c63c OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Oscilloscope/Instrument/Channel/Oscilloscope_Instrument_2_Channel_1/blocks/Oscilloscope_Main_Station/Vertical_Control_Deck/Ch1_Offset"
+    ::= { oscilloscopeInstrumentChannelOscilloscopeInstrument2Channel1be7d 6217 }
+
+oscilloscopeInstrumentChannelOscilloscopeInstrument1Channel1a245 OBJECT IDENTIFIER ::= { oscilloscopeInstrumentChannel8986 55344 }
+oscilloscopeInstrumentChannelOscilloscopeInstrument1Channel1fac9 OBJECT IDENTIFIER ::= { oscilloscopeInstrumentChannelOscilloscopeInstrument1Channel1a245 40823 }
+oscilloscopeInstrumentChannelOscilloscopeInstrument1Channel1d491 OBJECT IDENTIFIER ::= { oscilloscopeInstrumentChannelOscilloscopeInstrument1Channel1fac9 17357 }
+oscilloscopeInstrumentChannelOscilloscopeInstrument1Channel17688 OBJECT IDENTIFIER ::= { oscilloscopeInstrumentChannelOscilloscopeInstrument1Channel1d491 35109 }
+-- MQTT: OPEN-AIR/Oscilloscope/Instrument/Channel/Oscilloscope_Instrument_1_Channel_1/blocks/Oscilloscope_Main_Station/Trigger_Systems/Force_Trigger
+oscilloscopeInstrumentChannelOscilloscopeInstrument1Channel12194 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Oscilloscope/Instrument/Channel/Oscilloscope_Instrument_1_Channel_1/blocks/Oscilloscope_Main_Station/Trigger_Systems/Force_Trigger"
+    ::= { oscilloscopeInstrumentChannelOscilloscopeInstrument1Channel17688 23060 }
+
+oscilloscopeInstrumentChannelOscilloscopeInstrument1Channel1e80e OBJECT IDENTIFIER ::= { oscilloscopeInstrumentChannelOscilloscopeInstrument1Channel1d491 44429 }
+-- MQTT: OPEN-AIR/Oscilloscope/Instrument/Channel/Oscilloscope_Instrument_1_Channel_1/blocks/Oscilloscope_Main_Station/Horizontal_Control_Deck/Time_Div
+oscilloscopeInstrumentChannelOscilloscopeInstrument1Channel1b55e OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Oscilloscope/Instrument/Channel/Oscilloscope_Instrument_1_Channel_1/blocks/Oscilloscope_Main_Station/Horizontal_Control_Deck/Time_Div"
+    ::= { oscilloscopeInstrumentChannelOscilloscopeInstrument1Channel1e80e 42017 }
+
+systemc94d OBJECT IDENTIFIER ::= { v1 4491 }
+systemStatus87e6 OBJECT IDENTIFIER ::= { systemc94d 246 }
+systemStatusSMPTE213844ab OBJECT IDENTIFIER ::= { systemStatus87e6 31735 }
+-- MQTT: OPEN-AIR/System/Status/SMPTE2138/Bridge
+systemStatusSMPTE2138Bridgeaf9e OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/System/Status/SMPTE2138/Bridge"
+    ::= { systemStatusSMPTE213844ab 41103 }
+
+systemStatusSNMP20ff OBJECT IDENTIFIER ::= { systemStatus87e6 50469 }
+-- MQTT: OPEN-AIR/System/Status/SNMP/Bridge
+systemStatusSNMPBridgecad5 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/System/Status/SNMP/Bridge"
+    ::= { systemStatusSNMP20ff 51641 }
+
+systemStatusMIDI20df OBJECT IDENTIFIER ::= { systemStatus87e6 57477 }
+-- MQTT: OPEN-AIR/System/Status/MIDI/ActiveOutputs
+systemStatusMIDIActiveOutputs2ebd OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/System/Status/MIDI/ActiveOutputs"
+    ::= { systemStatusMIDI20df 14639 }
+
+-- MQTT: OPEN-AIR/System/Status/MIDI/ActiveInputs
+systemStatusMIDIActiveInputsc9e1 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/System/Status/MIDI/ActiveInputs"
+    ::= { systemStatusMIDI20df 27384 }
+
+systemStatusOSC92c2 OBJECT IDENTIFIER ::= { systemStatus87e6 64812 }
+-- MQTT: OPEN-AIR/System/Status/OSC/Bridge
+systemStatusOSCBridge59ae OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/System/Status/OSC/Bridge"
+    ::= { systemStatusOSC92c2 62348 }
+
+systemConfig286c OBJECT IDENTIFIER ::= { systemc94d 19094 }
+systemConfigRESTef9c OBJECT IDENTIFIER ::= { systemConfig286c 18179 }
+-- MQTT: OPEN-AIR/System/Config/REST/Status
+systemConfigRESTStatusd704 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/System/Config/REST/Status"
+    ::= { systemConfigRESTef9c 59778 }
+
+systemMonitora136 OBJECT IDENTIFIER ::= { systemc94d 29830 }
+systemMonitorSNMP7327 OBJECT IDENTIFIER ::= { systemMonitora136 42037 }
+-- MQTT: OPEN-AIR/System/Monitor/SNMP/Activity
+systemMonitorSNMPActivitybf1a OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/System/Monitor/SNMP/Activity"
+    ::= { systemMonitorSNMP7327 39801 }
+
+systemControladf8 OBJECT IDENTIFIER ::= { systemc94d 49480 }
+systemControlSNMP382a OBJECT IDENTIFIER ::= { systemControladf8 47201 }
+-- MQTT: OPEN-AIR/System/Control/SNMP/GenerateScript
+systemControlSNMPGenerateScript8ffc OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/System/Control/SNMP/GenerateScript"
+    ::= { systemControlSNMP382a 27549 }
+
+systemControlUIb578 OBJECT IDENTIFIER ::= { systemControladf8 52340 }
+-- MQTT: OPEN-AIR/System/Control/UI/Rebuild
+systemControlUIRebuild1c99 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/System/Control/UI/Rebuild"
+    ::= { systemControlUIb578 38883 }
+
+spectrumff5d OBJECT IDENTIFIER ::= { v1 4582 }
+spectrumInstrument36ce OBJECT IDENTIFIER ::= { spectrumff5d 59555 }
+spectrumInstrumentAmplitudea555 OBJECT IDENTIFIER ::= { spectrumInstrument36ce 33244 }
+spectrumInstrumentAmplitudeSpectrumInstrumentamplitude5e63 OBJECT IDENTIFIER ::= { spectrumInstrumentAmplitudea555 45921 }
+spectrumInstrumentAmplitudeSpectrumInstrumentamplitudeBlocks9f69 OBJECT IDENTIFIER ::= { spectrumInstrumentAmplitudeSpectrumInstrumentamplitude5e63 61782 }
+spectrumInstrumentAmplitudeSpectrumInstrumentamplitudeBlocks6ffc OBJECT IDENTIFIER ::= { spectrumInstrumentAmplitudeSpectrumInstrumentamplitudeBlocks9f69 12556 }
+spectrumInstrumentAmplitudeSpectrumInstrumentamplitudeBlocksb3ba OBJECT IDENTIFIER ::= { spectrumInstrumentAmplitudeSpectrumInstrumentamplitudeBlocks6ffc 55167 }
+-- MQTT: OPEN-AIR/Spectrum/Instrument/amplitude/Spectrum_Instrument_amplitude/blocks/Reference Level/ref_level_dBm/dial_config
+spectrumInstrumentAmplitudeSpectrumInstrumentamplitudeBlocks3881 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Spectrum/Instrument/amplitude/Spectrum_Instrument_amplitude/blocks/Reference Level/ref_level_dBm/dial_config"
+    ::= { spectrumInstrumentAmplitudeSpectrumInstrumentamplitudeBlocksb3ba 31585 }
+
+spectrumInstrumentFrequencye887 OBJECT IDENTIFIER ::= { spectrumInstrument36ce 41438 }
+spectrumInstrumentFrequencySpectrumInstrumentfrequency7dc9 OBJECT IDENTIFIER ::= { spectrumInstrumentFrequencye887 42633 }
+spectrumInstrumentFrequencySpectrumInstrumentfrequencyBlocks742d OBJECT IDENTIFIER ::= { spectrumInstrumentFrequencySpectrumInstrumentfrequency7dc9 3561 }
+spectrumInstrumentFrequencySpectrumInstrumentfrequencyBlocks2e10 OBJECT IDENTIFIER ::= { spectrumInstrumentFrequencySpectrumInstrumentfrequencyBlocks742d 547 }
+-- MQTT: OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Quick Span/Span
+spectrumInstrumentFrequencySpectrumInstrumentfrequencyBlocksc85a OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Quick Span/Span"
+    ::= { spectrumInstrumentFrequencySpectrumInstrumentfrequencyBlocks2e10 31513 }
+
+spectrumInstrumentFrequencySpectrumInstrumentfrequencyBlocks9226 OBJECT IDENTIFIER ::= { spectrumInstrumentFrequencySpectrumInstrumentfrequencyBlocks742d 17133 }
+-- MQTT: OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz
+spectrumInstrumentFrequencySpectrumInstrumentfrequencyBlocks5c5f OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz"
+    ::= { spectrumInstrumentFrequencySpectrumInstrumentfrequencyBlocks9226 25465 }
+
+-- MQTT: OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz
+spectrumInstrumentFrequencySpectrumInstrumentfrequencyBlocksde28 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz"
+    ::= { spectrumInstrumentFrequencySpectrumInstrumentfrequencyBlocks9226 30134 }
+
+spectrumInstrumentFrequencySpectrumInstrumentfrequencyBlocksdd46 OBJECT IDENTIFIER ::= { spectrumInstrumentFrequencySpectrumInstrumentfrequencyBlocks742d 57029 }
+-- MQTT: OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/span_freq_MHz
+spectrumInstrumentFrequencySpectrumInstrumentfrequencyBlocksab37 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/span_freq_MHz"
+    ::= { spectrumInstrumentFrequencySpectrumInstrumentfrequencyBlocksdd46 2413 }
+
+-- MQTT: OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz
+spectrumInstrumentFrequencySpectrumInstrumentfrequencyBlocksceb3 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz"
+    ::= { spectrumInstrumentFrequencySpectrumInstrumentfrequencyBlocksdd46 4552 }
+
+spectrumInstrumentBandwidth44f1 OBJECT IDENTIFIER ::= { spectrumInstrument36ce 52386 }
+spectrumInstrumentBandwidthSpectrumInstrumentbandwidth6f64 OBJECT IDENTIFIER ::= { spectrumInstrumentBandwidth44f1 14112 }
+spectrumInstrumentBandwidthSpectrumInstrumentbandwidthBlocks2839 OBJECT IDENTIFIER ::= { spectrumInstrumentBandwidthSpectrumInstrumentbandwidth6f64 39553 }
+spectrumInstrumentBandwidthSpectrumInstrumentbandwidthBlocksedb8 OBJECT IDENTIFIER ::= { spectrumInstrumentBandwidthSpectrumInstrumentbandwidthBlocks2839 13295 }
+spectrumInstrumentBandwidthSpectrumInstrumentbandwidthBlocksef31 OBJECT IDENTIFIER ::= { spectrumInstrumentBandwidthSpectrumInstrumentbandwidthBlocksedb8 64626 }
+-- MQTT: OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/vbw_MHz/dial_config
+spectrumInstrumentBandwidthSpectrumInstrumentbandwidthBlocks8910 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/vbw_MHz/dial_config"
+    ::= { spectrumInstrumentBandwidthSpectrumInstrumentbandwidthBlocksef31 12936 }
+
+spectrumInstrumentBandwidthSpectrumInstrumentbandwidthBlocks4ff2 OBJECT IDENTIFIER ::= { spectrumInstrumentBandwidthSpectrumInstrumentbandwidthBlocks2839 15347 }
+spectrumInstrumentBandwidthSpectrumInstrumentbandwidthBlocksfbe2 OBJECT IDENTIFIER ::= { spectrumInstrumentBandwidthSpectrumInstrumentbandwidthBlocks4ff2 39899 }
+-- MQTT: OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Sweep Time/sweep_time_setting/dial_config
+spectrumInstrumentBandwidthSpectrumInstrumentbandwidthBlocks50aa OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Sweep Time/sweep_time_setting/dial_config"
+    ::= { spectrumInstrumentBandwidthSpectrumInstrumentbandwidthBlocksfbe2 6285 }
+
+-- MQTT: OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Sweep Time/sweep_time_setting/fader_config
+spectrumInstrumentBandwidthSpectrumInstrumentbandwidthBlocks9986 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Sweep Time/sweep_time_setting/fader_config"
+    ::= { spectrumInstrumentBandwidthSpectrumInstrumentbandwidthBlocksfbe2 24320 }
+
+spectrumInstrumentBandwidthSpectrumInstrumentbandwidthBlocksbba6 OBJECT IDENTIFIER ::= { spectrumInstrumentBandwidthSpectrumInstrumentbandwidthBlocks2839 16920 }
+spectrumInstrumentBandwidthSpectrumInstrumentbandwidthBlocks5597 OBJECT IDENTIFIER ::= { spectrumInstrumentBandwidthSpectrumInstrumentbandwidthBlocksbba6 26181 }
+-- MQTT: OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/RBW/dial_config
+spectrumInstrumentBandwidthSpectrumInstrumentbandwidthBlocksab15 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/RBW/dial_config"
+    ::= { spectrumInstrumentBandwidthSpectrumInstrumentbandwidthBlocks5597 29766 }
+
+-- MQTT: OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/RBW/fader_config
+spectrumInstrumentBandwidthSpectrumInstrumentbandwidthBlocks95cb OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/RBW/fader_config"
+    ::= { spectrumInstrumentBandwidthSpectrumInstrumentbandwidthBlocks5597 64340 }
+
+righttop23ea OBJECT IDENTIFIER ::= { v1 9234 }
+righttopBlocks6729 OBJECT IDENTIFIER ::= { righttop23ea 47033 }
+righttopBlocksControlButtons38f3 OBJECT IDENTIFIER ::= { righttopBlocks6729 61896 }
+-- MQTT: OPEN-AIR/right_top/blocks/Control_Buttons/Pause
+righttopBlocksControlButtonsPause60c4 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/right_top/blocks/Control_Buttons/Pause"
+    ::= { righttopBlocksControlButtons38f3 39909 }
+
+gUId4ff OBJECT IDENTIFIER ::= { v1 20728 }
+gUIGlobalc513 OBJECT IDENTIFIER ::= { gUId4ff 10528 }
+gUIGlobalHeaderf2e4 OBJECT IDENTIFIER ::= { gUIGlobalc513 365 }
+-- MQTT: OPEN-AIR/GUI/Global/Header/StatusLight
+gUIGlobalHeaderStatusLight85b4 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Global/Header/StatusLight"
+    ::= { gUIGlobalHeaderf2e4 17987 }
+
+gUIVisibility8deb OBJECT IDENTIFIER ::= { gUId4ff 38215 }
+-- MQTT: OPEN-AIR/GUI/visibility/visible
+gUIVisibilityVisible9f59 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/visibility/visible"
+    ::= { gUIVisibility8deb 38329 }
+
+-- MQTT: OPEN-AIR/GUI/visibility/geometry
+gUIVisibilityGeometry352b OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/visibility/geometry"
+    ::= { gUIVisibility8deb 43438 }
+
+gUIAssets54c7 OBJECT IDENTIFIER ::= { gUId4ff 57133 }
+gUIAssetsLoad8ca0 OBJECT IDENTIFIER ::= { gUIAssets54c7 11814 }
+gUIAssetsLoadYAKd930 OBJECT IDENTIFIER ::= { gUIAssetsLoad8ca0 14711 }
+gUIAssetsLoadYAK6060Bd0b1 OBJECT IDENTIFIER ::= { gUIAssetsLoadYAKd930 7666 }
+gUIAssetsLoadYAK6060BMEASure710f OBJECT IDENTIFIER ::= { gUIAssetsLoadYAK6060Bd0b1 45955 }
+gUIAssetsLoadYAK6060BMEASureVisibilityf866 OBJECT IDENTIFIER ::= { gUIAssetsLoadYAK6060BMEASure710f 56560 }
+-- MQTT: OPEN-AIR/GUI/Assets/Load/YAK/6060B/MEASure/visibility/visible
+gUIAssetsLoadYAK6060BMEASureVisibilityVisible9749 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Load/YAK/6060B/MEASure/visibility/visible"
+    ::= { gUIAssetsLoadYAK6060BMEASureVisibilityf866 4628 }
+
+-- MQTT: OPEN-AIR/GUI/Assets/Load/YAK/6060B/MEASure/visibility/geometry
+gUIAssetsLoadYAK6060BMEASureVisibilityGeometry9dd2 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Load/YAK/6060B/MEASure/visibility/geometry"
+    ::= { gUIAssetsLoadYAK6060BMEASureVisibilityf866 51836 }
+
+gUIAssetsLoadYAK6060BMODE1a41 OBJECT IDENTIFIER ::= { gUIAssetsLoadYAK6060Bd0b1 51884 }
+gUIAssetsLoadYAK6060BMODEVisibility7c8f OBJECT IDENTIFIER ::= { gUIAssetsLoadYAK6060BMODE1a41 28107 }
+-- MQTT: OPEN-AIR/GUI/Assets/Load/YAK/6060B/MODE/visibility/visible
+gUIAssetsLoadYAK6060BMODEVisibilityVisiblebcc1 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Load/YAK/6060B/MODE/visibility/visible"
+    ::= { gUIAssetsLoadYAK6060BMODEVisibility7c8f 17715 }
+
+-- MQTT: OPEN-AIR/GUI/Assets/Load/YAK/6060B/MODE/visibility/geometry
+gUIAssetsLoadYAK6060BMODEVisibilityGeometry38f3 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Load/YAK/6060B/MODE/visibility/geometry"
+    ::= { gUIAssetsLoadYAK6060BMODEVisibility7c8f 63296 }
+
+gUIAssetsLoadInstrumentA49c7 OBJECT IDENTIFIER ::= { gUIAssetsLoad8ca0 36255 }
+gUIAssetsLoadInstrumentAVisibility7f87 OBJECT IDENTIFIER ::= { gUIAssetsLoadInstrumentA49c7 53743 }
+-- MQTT: OPEN-AIR/GUI/Assets/Load/Instrument_A/visibility/geometry
+gUIAssetsLoadInstrumentAVisibilityGeometryd3cc OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Load/Instrument_A/visibility/geometry"
+    ::= { gUIAssetsLoadInstrumentAVisibility7f87 56270 }
+
+-- MQTT: OPEN-AIR/GUI/Assets/Load/Instrument_A/visibility/visible
+gUIAssetsLoadInstrumentAVisibilityVisible8ddb OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Load/Instrument_A/visibility/visible"
+    ::= { gUIAssetsLoadInstrumentAVisibility7f87 62710 }
+
+gUIAssetsLoadInstrument7e5b OBJECT IDENTIFIER ::= { gUIAssetsLoad8ca0 45016 }
+gUIAssetsLoadInstrumentVisibility68f5 OBJECT IDENTIFIER ::= { gUIAssetsLoadInstrument7e5b 58656 }
+-- MQTT: OPEN-AIR/GUI/Assets/Load/Instrument/visibility/geometry
+gUIAssetsLoadInstrumentVisibilityGeometryd011 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Load/Instrument/visibility/geometry"
+    ::= { gUIAssetsLoadInstrumentVisibility68f5 47601 }
+
+-- MQTT: OPEN-AIR/GUI/Assets/Load/Instrument/visibility/visible
+gUIAssetsLoadInstrumentVisibilityVisiblee65b OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Load/Instrument/visibility/visible"
+    ::= { gUIAssetsLoadInstrumentVisibility68f5 51060 }
+
+gUIAssetsLoadInstrumentBd0ce OBJECT IDENTIFIER ::= { gUIAssetsLoad8ca0 56357 }
+gUIAssetsLoadInstrumentBVisibility8190 OBJECT IDENTIFIER ::= { gUIAssetsLoadInstrumentBd0ce 799 }
+-- MQTT: OPEN-AIR/GUI/Assets/Load/Instrument_B/visibility/geometry
+gUIAssetsLoadInstrumentBVisibilityGeometrya8d2 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Load/Instrument_B/visibility/geometry"
+    ::= { gUIAssetsLoadInstrumentBVisibility8190 22829 }
+
+-- MQTT: OPEN-AIR/GUI/Assets/Load/Instrument_B/visibility/visible
+gUIAssetsLoadInstrumentBVisibilityVisible2272 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Load/Instrument_B/visibility/visible"
+    ::= { gUIAssetsLoadInstrumentBVisibility8190 47420 }
+
+gUIAssetsDistortion138b OBJECT IDENTIFIER ::= { gUIAssets54c7 19609 }
+gUIAssetsDistortionYAKc1b2 OBJECT IDENTIFIER ::= { gUIAssetsDistortion138b 2889 }
+gUIAssetsDistortionYAKPortaonee3a2 OBJECT IDENTIFIER ::= { gUIAssetsDistortionYAKc1b2 9860 }
+gUIAssetsDistortionYAKPortaoneMeasurements7326 OBJECT IDENTIFIER ::= { gUIAssetsDistortionYAKPortaonee3a2 38254 }
+gUIAssetsDistortionYAKPortaoneMeasurementsVisibility3af3 OBJECT IDENTIFIER ::= { gUIAssetsDistortionYAKPortaoneMeasurements7326 29250 }
+-- MQTT: OPEN-AIR/GUI/Assets/Distortion/YAK/Porta_one/Measurements/visibility/geometry
+gUIAssetsDistortionYAKPortaoneMeasurementsVisibilityGeometrya557 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Distortion/YAK/Porta_one/Measurements/visibility/geometry"
+    ::= { gUIAssetsDistortionYAKPortaoneMeasurementsVisibility3af3 12797 }
+
+-- MQTT: OPEN-AIR/GUI/Assets/Distortion/YAK/Porta_one/Measurements/visibility/visible
+gUIAssetsDistortionYAKPortaoneMeasurementsVisibilityVisibleca70 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Distortion/YAK/Porta_one/Measurements/visibility/visible"
+    ::= { gUIAssetsDistortionYAKPortaoneMeasurementsVisibility3af3 22454 }
+
+gUIAssetsDistortionYAKHP8903B8434 OBJECT IDENTIFIER ::= { gUIAssetsDistortionYAKc1b2 30449 }
+gUIAssetsDistortionYAKHP8903BConnectiona328 OBJECT IDENTIFIER ::= { gUIAssetsDistortionYAKHP8903B8434 34400 }
+gUIAssetsDistortionYAKHP8903BConnectionVisibility6ac3 OBJECT IDENTIFIER ::= { gUIAssetsDistortionYAKHP8903BConnectiona328 52769 }
+-- MQTT: OPEN-AIR/GUI/Assets/Distortion/YAK/HP_8903B/Connection/visibility/visible
+gUIAssetsDistortionYAKHP8903BConnectionVisibilityVisible4fa8 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Distortion/YAK/HP_8903B/Connection/visibility/visible"
+    ::= { gUIAssetsDistortionYAKHP8903BConnectionVisibility6ac3 7516 }
+
+-- MQTT: OPEN-AIR/GUI/Assets/Distortion/YAK/HP_8903B/Connection/visibility/geometry
+gUIAssetsDistortionYAKHP8903BConnectionVisibilityGeometrye50d OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Distortion/YAK/HP_8903B/Connection/visibility/geometry"
+    ::= { gUIAssetsDistortionYAKHP8903BConnectionVisibility6ac3 58065 }
+
+gUIAssetsDistortionInstrument913e OBJECT IDENTIFIER ::= { gUIAssetsDistortion138b 19443 }
+gUIAssetsDistortionInstrumentVisibilitybf45 OBJECT IDENTIFIER ::= { gUIAssetsDistortionInstrument913e 45982 }
+-- MQTT: OPEN-AIR/GUI/Assets/Distortion/Instrument/visibility/geometry
+gUIAssetsDistortionInstrumentVisibilityGeometryecb0 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Distortion/Instrument/visibility/geometry"
+    ::= { gUIAssetsDistortionInstrumentVisibilitybf45 15240 }
+
+-- MQTT: OPEN-AIR/GUI/Assets/Distortion/Instrument/visibility/visible
+gUIAssetsDistortionInstrumentVisibilityVisible443d OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Distortion/Instrument/visibility/visible"
+    ::= { gUIAssetsDistortionInstrumentVisibilitybf45 28496 }
+
+gUIAssetsPower1a28 OBJECT IDENTIFIER ::= { gUIAssets54c7 20046 }
+gUIAssetsPowerYAK8543 OBJECT IDENTIFIER ::= { gUIAssetsPower1a28 2441 }
+gUIAssetsPowerYAK66101A379a OBJECT IDENTIFIER ::= { gUIAssetsPowerYAK8543 35276 }
+gUIAssetsPowerYAK66101AINSTrumentc0c6 OBJECT IDENTIFIER ::= { gUIAssetsPowerYAK66101A379a 50670 }
+gUIAssetsPowerYAK66101AINSTrumentVisibility9649 OBJECT IDENTIFIER ::= { gUIAssetsPowerYAK66101AINSTrumentc0c6 37178 }
+-- MQTT: OPEN-AIR/GUI/Assets/Power/YAK/66101A/INSTrument/visibility/visible
+gUIAssetsPowerYAK66101AINSTrumentVisibilityVisible890b OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Power/YAK/66101A/INSTrument/visibility/visible"
+    ::= { gUIAssetsPowerYAK66101AINSTrumentVisibility9649 9117 }
+
+-- MQTT: OPEN-AIR/GUI/Assets/Power/YAK/66101A/INSTrument/visibility/geometry
+gUIAssetsPowerYAK66101AINSTrumentVisibilityGeometry9a8b OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Power/YAK/66101A/INSTrument/visibility/geometry"
+    ::= { gUIAssetsPowerYAK66101AINSTrumentVisibility9649 46025 }
+
+gUIAssetsPowerInstrument71c9 OBJECT IDENTIFIER ::= { gUIAssetsPower1a28 50164 }
+gUIAssetsPowerInstrumentOneinstrumentf8d1 OBJECT IDENTIFIER ::= { gUIAssetsPowerInstrument71c9 8695 }
+gUIAssetsPowerInstrumentOneinstrumentVisibilitye372 OBJECT IDENTIFIER ::= { gUIAssetsPowerInstrumentOneinstrumentf8d1 41231 }
+-- MQTT: OPEN-AIR/GUI/Assets/Power/Instrument/One_instrument/visibility/geometry
+gUIAssetsPowerInstrumentOneinstrumentVisibilityGeometry1948 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Power/Instrument/One_instrument/visibility/geometry"
+    ::= { gUIAssetsPowerInstrumentOneinstrumentVisibilitye372 2291 }
+
+-- MQTT: OPEN-AIR/GUI/Assets/Power/Instrument/One_instrument/visibility/visible
+gUIAssetsPowerInstrumentOneinstrumentVisibilityVisibleb3ca OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Power/Instrument/One_instrument/visibility/visible"
+    ::= { gUIAssetsPowerInstrumentOneinstrumentVisibilitye372 17159 }
+
+gUIAssetsPowerInstrumentAllba9b OBJECT IDENTIFIER ::= { gUIAssetsPowerInstrument71c9 19711 }
+gUIAssetsPowerInstrumentAllVisibility5dac OBJECT IDENTIFIER ::= { gUIAssetsPowerInstrumentAllba9b 33667 }
+-- MQTT: OPEN-AIR/GUI/Assets/Power/Instrument/All/visibility/visible
+gUIAssetsPowerInstrumentAllVisibilityVisible68bf OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Power/Instrument/All/visibility/visible"
+    ::= { gUIAssetsPowerInstrumentAllVisibility5dac 12301 }
+
+-- MQTT: OPEN-AIR/GUI/Assets/Power/Instrument/All/visibility/geometry
+gUIAssetsPowerInstrumentAllVisibilityGeometryf946 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Power/Instrument/All/visibility/geometry"
+    ::= { gUIAssetsPowerInstrumentAllVisibility5dac 38046 }
+
+gUIAssetsPowerInstrumentFourinstruments5ce1 OBJECT IDENTIFIER ::= { gUIAssetsPowerInstrument71c9 28608 }
+gUIAssetsPowerInstrumentFourinstrumentsVisibility6266 OBJECT IDENTIFIER ::= { gUIAssetsPowerInstrumentFourinstruments5ce1 57639 }
+-- MQTT: OPEN-AIR/GUI/Assets/Power/Instrument/four_instruments/visibility/geometry
+gUIAssetsPowerInstrumentFourinstrumentsVisibilityGeometry4f81 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Power/Instrument/four_instruments/visibility/geometry"
+    ::= { gUIAssetsPowerInstrumentFourinstrumentsVisibility6266 38149 }
+
+-- MQTT: OPEN-AIR/GUI/Assets/Power/Instrument/four_instruments/visibility/visible
+gUIAssetsPowerInstrumentFourinstrumentsVisibilityVisiblec993 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Power/Instrument/four_instruments/visibility/visible"
+    ::= { gUIAssetsPowerInstrumentFourinstrumentsVisibility6266 38450 }
+
+gUIAssetsPowerModules1f23 OBJECT IDENTIFIER ::= { gUIAssetsPower1a28 58809 }
+gUIAssetsPowerModulesModule6400 OBJECT IDENTIFIER ::= { gUIAssetsPowerModules1f23 33759 }
+gUIAssetsPowerModulesModuleVisibility9d3e OBJECT IDENTIFIER ::= { gUIAssetsPowerModulesModule6400 57781 }
+-- MQTT: OPEN-AIR/GUI/Assets/Power/Modules/Module/visibility/geometry
+gUIAssetsPowerModulesModuleVisibilityGeometrybb9c OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Power/Modules/Module/visibility/geometry"
+    ::= { gUIAssetsPowerModulesModuleVisibility9d3e 24611 }
+
+-- MQTT: OPEN-AIR/GUI/Assets/Power/Modules/Module/visibility/visible
+gUIAssetsPowerModulesModuleVisibilityVisibled3e1 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Power/Modules/Module/visibility/visible"
+    ::= { gUIAssetsPowerModulesModuleVisibility9d3e 57636 }
+
+gUIAssetsVisibility223f OBJECT IDENTIFIER ::= { gUIAssets54c7 25634 }
+-- MQTT: OPEN-AIR/GUI/Assets/visibility/visible
+gUIAssetsVisibilityVisible282f OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/visibility/visible"
+    ::= { gUIAssetsVisibility223f 23669 }
+
+-- MQTT: OPEN-AIR/GUI/Assets/visibility/geometry
+gUIAssetsVisibilityGeometrya7d8 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/visibility/geometry"
+    ::= { gUIAssetsVisibility223f 65020 }
+
+gUIAssetsScan6d15 OBJECT IDENTIFIER ::= { gUIAssets54c7 31125 }
+gUIAssetsScanVisibilityc342 OBJECT IDENTIFIER ::= { gUIAssetsScan6d15 41115 }
+-- MQTT: OPEN-AIR/GUI/Assets/scan/visibility/geometry
+gUIAssetsScanVisibilityGeometryed54 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/scan/visibility/geometry"
+    ::= { gUIAssetsScanVisibilityc342 47931 }
+
+-- MQTT: OPEN-AIR/GUI/Assets/scan/visibility/visible
+gUIAssetsScanVisibilityVisible7bcc OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/scan/visibility/visible"
+    ::= { gUIAssetsScanVisibilityc342 55825 }
+
+gUIAssetsSpectrum1318 OBJECT IDENTIFIER ::= { gUIAssets54c7 32243 }
+gUIAssetsSpectrumInstrument576c OBJECT IDENTIFIER ::= { gUIAssetsSpectrum1318 4786 }
+gUIAssetsSpectrumInstrumentBandwidth58df OBJECT IDENTIFIER ::= { gUIAssetsSpectrumInstrument576c 41684 }
+gUIAssetsSpectrumInstrumentBandwidthVisibility93b1 OBJECT IDENTIFIER ::= { gUIAssetsSpectrumInstrumentBandwidth58df 50885 }
+-- MQTT: OPEN-AIR/GUI/Assets/Spectrum/Instrument/bandwidth/visibility/geometry
+gUIAssetsSpectrumInstrumentBandwidthVisibilityGeometry1858 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Spectrum/Instrument/bandwidth/visibility/geometry"
+    ::= { gUIAssetsSpectrumInstrumentBandwidthVisibility93b1 41040 }
+
+-- MQTT: OPEN-AIR/GUI/Assets/Spectrum/Instrument/bandwidth/visibility/visible
+gUIAssetsSpectrumInstrumentBandwidthVisibilityVisible7813 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Spectrum/Instrument/bandwidth/visibility/visible"
+    ::= { gUIAssetsSpectrumInstrumentBandwidthVisibility93b1 58950 }
+
+gUIAssetsSpectrumInstrumentFrequencyf4a9 OBJECT IDENTIFIER ::= { gUIAssetsSpectrumInstrument576c 53160 }
+gUIAssetsSpectrumInstrumentFrequencyVisibility3dcb OBJECT IDENTIFIER ::= { gUIAssetsSpectrumInstrumentFrequencyf4a9 49581 }
+-- MQTT: OPEN-AIR/GUI/Assets/Spectrum/Instrument/frequency/visibility/visible
+gUIAssetsSpectrumInstrumentFrequencyVisibilityVisibledb14 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Spectrum/Instrument/frequency/visibility/visible"
+    ::= { gUIAssetsSpectrumInstrumentFrequencyVisibility3dcb 27798 }
+
+-- MQTT: OPEN-AIR/GUI/Assets/Spectrum/Instrument/frequency/visibility/geometry
+gUIAssetsSpectrumInstrumentFrequencyVisibilityGeometry9e28 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Spectrum/Instrument/frequency/visibility/geometry"
+    ::= { gUIAssetsSpectrumInstrumentFrequencyVisibility3dcb 29966 }
+
+gUIAssetsSpectrumInstrumentAmplitudeb97b OBJECT IDENTIFIER ::= { gUIAssetsSpectrumInstrument576c 61354 }
+gUIAssetsSpectrumInstrumentAmplitudeVisibilitya293 OBJECT IDENTIFIER ::= { gUIAssetsSpectrumInstrumentAmplitudeb97b 50495 }
+-- MQTT: OPEN-AIR/GUI/Assets/Spectrum/Instrument/amplitude/visibility/geometry
+gUIAssetsSpectrumInstrumentAmplitudeVisibilityGeometry20b1 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Spectrum/Instrument/amplitude/visibility/geometry"
+    ::= { gUIAssetsSpectrumInstrumentAmplitudeVisibilitya293 4618 }
+
+-- MQTT: OPEN-AIR/GUI/Assets/Spectrum/Instrument/amplitude/visibility/visible
+gUIAssetsSpectrumInstrumentAmplitudeVisibilityVisiblef175 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Spectrum/Instrument/amplitude/visibility/visible"
+    ::= { gUIAssetsSpectrumInstrumentAmplitudeVisibilitya293 49490 }
+
+gUIAssetsSpectrumPresets3f73 OBJECT IDENTIFIER ::= { gUIAssetsSpectrum1318 32356 }
+gUIAssetsSpectrumPresetsDataSet2989 OBJECT IDENTIFIER ::= { gUIAssetsSpectrumPresets3f73 25650 }
+gUIAssetsSpectrumPresetsDataSetVisibility4822 OBJECT IDENTIFIER ::= { gUIAssetsSpectrumPresetsDataSet2989 30773 }
+-- MQTT: OPEN-AIR/GUI/Assets/Spectrum/Presets/DataSet/visibility/geometry
+gUIAssetsSpectrumPresetsDataSetVisibilityGeometryeb0b OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Spectrum/Presets/DataSet/visibility/geometry"
+    ::= { gUIAssetsSpectrumPresetsDataSetVisibility4822 10002 }
+
+-- MQTT: OPEN-AIR/GUI/Assets/Spectrum/Presets/DataSet/visibility/visible
+gUIAssetsSpectrumPresetsDataSetVisibilityVisible92e5 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Spectrum/Presets/DataSet/visibility/visible"
+    ::= { gUIAssetsSpectrumPresetsDataSetVisibility4822 60500 }
+
+gUIAssetsOscilloscope7a06 OBJECT IDENTIFIER ::= { gUIAssets54c7 34230 }
+gUIAssetsOscilloscopeYAK1dde OBJECT IDENTIFIER ::= { gUIAssetsOscilloscope7a06 9748 }
+gUIAssetsOscilloscopeYAK54641D8fd4 OBJECT IDENTIFIER ::= { gUIAssetsOscilloscopeYAK1dde 17949 }
+gUIAssetsOscilloscopeYAK54641DRoote1c9 OBJECT IDENTIFIER ::= { gUIAssetsOscilloscopeYAK54641D8fd4 22486 }
+gUIAssetsOscilloscopeYAK54641DRootVisibility2bdb OBJECT IDENTIFIER ::= { gUIAssetsOscilloscopeYAK54641DRoote1c9 52910 }
+-- MQTT: OPEN-AIR/GUI/Assets/Oscilloscope/YAK/54641D/Root/visibility/geometry
+gUIAssetsOscilloscopeYAK54641DRootVisibilityGeometryccd4 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Oscilloscope/YAK/54641D/Root/visibility/geometry"
+    ::= { gUIAssetsOscilloscopeYAK54641DRootVisibility2bdb 9775 }
+
+-- MQTT: OPEN-AIR/GUI/Assets/Oscilloscope/YAK/54641D/Root/visibility/visible
+gUIAssetsOscilloscopeYAK54641DRootVisibilityVisible4fa5 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Oscilloscope/YAK/54641D/Root/visibility/visible"
+    ::= { gUIAssetsOscilloscopeYAK54641DRootVisibility2bdb 31525 }
+
+gUIAssetsOscilloscopeInstrument584e OBJECT IDENTIFIER ::= { gUIAssetsOscilloscope7a06 18689 }
+gUIAssetsOscilloscopeInstrumentChannel5ae9 OBJECT IDENTIFIER ::= { gUIAssetsOscilloscopeInstrument584e 8584 }
+gUIAssetsOscilloscopeInstrumentChannelVisibilityf329 OBJECT IDENTIFIER ::= { gUIAssetsOscilloscopeInstrumentChannel5ae9 34049 }
+-- MQTT: OPEN-AIR/GUI/Assets/Oscilloscope/Instrument/Channel/visibility/geometry
+gUIAssetsOscilloscopeInstrumentChannelVisibilityGeometry8eb2 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Oscilloscope/Instrument/Channel/visibility/geometry"
+    ::= { gUIAssetsOscilloscopeInstrumentChannelVisibilityf329 27 }
+
+-- MQTT: OPEN-AIR/GUI/Assets/Oscilloscope/Instrument/Channel/visibility/visible
+gUIAssetsOscilloscopeInstrumentChannelVisibilityVisible9b1b OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Oscilloscope/Instrument/Channel/visibility/visible"
+    ::= { gUIAssetsOscilloscopeInstrumentChannelVisibilityf329 8972 }
+
+gUIAssetsRouter2d19 OBJECT IDENTIFIER ::= { gUIAssets54c7 40725 }
+gUIAssetsRouterSwitcheraa57 OBJECT IDENTIFIER ::= { gUIAssetsRouter2d19 31881 }
+gUIAssetsRouterSwitcherCoax75d0 OBJECT IDENTIFIER ::= { gUIAssetsRouterSwitcheraa57 33302 }
+gUIAssetsRouterSwitcherCoaxVisibility98e3 OBJECT IDENTIFIER ::= { gUIAssetsRouterSwitcherCoax75d0 59634 }
+-- MQTT: OPEN-AIR/GUI/Assets/Router/Switcher/Coax/visibility/visible
+gUIAssetsRouterSwitcherCoaxVisibilityVisible5e0f OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Router/Switcher/Coax/visibility/visible"
+    ::= { gUIAssetsRouterSwitcherCoaxVisibility98e3 26126 }
+
+-- MQTT: OPEN-AIR/GUI/Assets/Router/Switcher/Coax/visibility/geometry
+gUIAssetsRouterSwitcherCoaxVisibilityGeometry6079 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Router/Switcher/Coax/visibility/geometry"
+    ::= { gUIAssetsRouterSwitcherCoaxVisibility98e3 30066 }
+
+gUIAssetsLCR5433 OBJECT IDENTIFIER ::= { gUIAssets54c7 43982 }
+gUIAssetsLCRYAKff61 OBJECT IDENTIFIER ::= { gUIAssetsLCR5433 2804 }
+gUIAssetsLCRYAK4263A5e32 OBJECT IDENTIFIER ::= { gUIAssetsLCRYAKff61 29397 }
+gUIAssetsLCRYAK4263ACapacitance956a OBJECT IDENTIFIER ::= { gUIAssetsLCRYAK4263A5e32 35412 }
+gUIAssetsLCRYAK4263ACapacitanceVisibility5b8a OBJECT IDENTIFIER ::= { gUIAssetsLCRYAK4263ACapacitance956a 26442 }
+-- MQTT: OPEN-AIR/GUI/Assets/LCR/YAK/4263A/Capacitance/visibility/geometry
+gUIAssetsLCRYAK4263ACapacitanceVisibilityGeometry908c OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/LCR/YAK/4263A/Capacitance/visibility/geometry"
+    ::= { gUIAssetsLCRYAK4263ACapacitanceVisibility5b8a 58797 }
+
+-- MQTT: OPEN-AIR/GUI/Assets/LCR/YAK/4263A/Capacitance/visibility/visible
+gUIAssetsLCRYAK4263ACapacitanceVisibilityVisiblea40c OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/LCR/YAK/4263A/Capacitance/visibility/visible"
+    ::= { gUIAssetsLCRYAK4263ACapacitanceVisibility5b8a 64926 }
+
+gUIAssetsLCRYAK4263AImpedance5fa5 OBJECT IDENTIFIER ::= { gUIAssetsLCRYAK4263A5e32 40890 }
+gUIAssetsLCRYAK4263AImpedanceVisibility6356 OBJECT IDENTIFIER ::= { gUIAssetsLCRYAK4263AImpedance5fa5 12833 }
+-- MQTT: OPEN-AIR/GUI/Assets/LCR/YAK/4263A/Impedance/visibility/visible
+gUIAssetsLCRYAK4263AImpedanceVisibilityVisibleaccd OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/LCR/YAK/4263A/Impedance/visibility/visible"
+    ::= { gUIAssetsLCRYAK4263AImpedanceVisibility6356 43120 }
+
+-- MQTT: OPEN-AIR/GUI/Assets/LCR/YAK/4263A/Impedance/visibility/geometry
+gUIAssetsLCRYAK4263AImpedanceVisibilityGeometryd736 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/LCR/YAK/4263A/Impedance/visibility/geometry"
+    ::= { gUIAssetsLCRYAK4263AImpedanceVisibility6356 60295 }
+
+gUIAssetsLCRInstrumentc561 OBJECT IDENTIFIER ::= { gUIAssetsLCR5433 15405 }
+gUIAssetsLCRInstrumentVisibility8a7e OBJECT IDENTIFIER ::= { gUIAssetsLCRInstrumentc561 40281 }
+-- MQTT: OPEN-AIR/GUI/Assets/LCR/Instrument/visibility/geometry
+gUIAssetsLCRInstrumentVisibilityGeometry2239 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/LCR/Instrument/visibility/geometry"
+    ::= { gUIAssetsLCRInstrumentVisibility8a7e 17115 }
+
+-- MQTT: OPEN-AIR/GUI/Assets/LCR/Instrument/visibility/visible
+gUIAssetsLCRInstrumentVisibilityVisibleaca0 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/LCR/Instrument/visibility/visible"
+    ::= { gUIAssetsLCRInstrumentVisibility8a7e 41767 }
+
+gUIAssetsGeneratora79f OBJECT IDENTIFIER ::= { gUIAssets54c7 56055 }
+gUIAssetsGeneratorInstrumentfcb9 OBJECT IDENTIFIER ::= { gUIAssetsGeneratora79f 50499 }
+gUIAssetsGeneratorInstrumentVisibility51d8 OBJECT IDENTIFIER ::= { gUIAssetsGeneratorInstrumentfcb9 11331 }
+-- MQTT: OPEN-AIR/GUI/Assets/Generator/Instrument/visibility/geometry
+gUIAssetsGeneratorInstrumentVisibilityGeometry5d09 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Generator/Instrument/visibility/geometry"
+    ::= { gUIAssetsGeneratorInstrumentVisibility51d8 22197 }
+
+-- MQTT: OPEN-AIR/GUI/Assets/Generator/Instrument/visibility/visible
+gUIAssetsGeneratorInstrumentVisibilityVisiblef6b9 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Generator/Instrument/visibility/visible"
+    ::= { gUIAssetsGeneratorInstrumentVisibility51d8 30315 }
+
+gUIAssetsGeneratorYAK177e OBJECT IDENTIFIER ::= { gUIAssetsGeneratora79f 61435 }
+gUIAssetsGeneratorYAK33210A28ab OBJECT IDENTIFIER ::= { gUIAssetsGeneratorYAK177e 25888 }
+gUIAssetsGeneratorYAK33210AAPPLyc67f OBJECT IDENTIFIER ::= { gUIAssetsGeneratorYAK33210A28ab 6421 }
+gUIAssetsGeneratorYAK33210AAPPLyVisibility5b2e OBJECT IDENTIFIER ::= { gUIAssetsGeneratorYAK33210AAPPLyc67f 24980 }
+-- MQTT: OPEN-AIR/GUI/Assets/Generator/YAK/33210A/APPLy/visibility/geometry
+gUIAssetsGeneratorYAK33210AAPPLyVisibilityGeometry39c2 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Generator/YAK/33210A/APPLy/visibility/geometry"
+    ::= { gUIAssetsGeneratorYAK33210AAPPLyVisibility5b2e 33276 }
+
+-- MQTT: OPEN-AIR/GUI/Assets/Generator/YAK/33210A/APPLy/visibility/visible
+gUIAssetsGeneratorYAK33210AAPPLyVisibilityVisible56c6 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Generator/YAK/33210A/APPLy/visibility/visible"
+    ::= { gUIAssetsGeneratorYAK33210AAPPLyVisibility5b2e 65394 }
+
+gUIAssetsConsole109d OBJECT IDENTIFIER ::= { gUIAssets54c7 64631 }
+gUIAssetsConsole17d5b9 OBJECT IDENTIFIER ::= { gUIAssetsConsole109d 17919 }
+gUIAssetsConsole17Visibility475b OBJECT IDENTIFIER ::= { gUIAssetsConsole17d5b9 45179 }
+-- MQTT: OPEN-AIR/GUI/Assets/Console/17/visibility/geometry
+gUIAssetsConsole17VisibilityGeometrycaf0 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Console/17/visibility/geometry"
+    ::= { gUIAssetsConsole17Visibility475b 48683 }
+
+gUIAssetsConsole1d66e OBJECT IDENTIFIER ::= { gUIAssetsConsole109d 27443 }
+gUIAssetsConsole1Visibilitybb16 OBJECT IDENTIFIER ::= { gUIAssetsConsole1d66e 5820 }
+-- MQTT: OPEN-AIR/GUI/Assets/Console/1/visibility/visible
+gUIAssetsConsole1VisibilityVisible57f2 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Console/1/visibility/visible"
+    ::= { gUIAssetsConsole1Visibilitybb16 4382 }
+
+-- MQTT: OPEN-AIR/GUI/Assets/Console/1/visibility/geometry
+gUIAssetsConsole1VisibilityGeometry7dc7 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Console/1/visibility/geometry"
+    ::= { gUIAssetsConsole1Visibilitybb16 39009 }
+
+gUIAssetsConsole25109a OBJECT IDENTIFIER ::= { gUIAssetsConsole109d 30480 }
+gUIAssetsConsole25Visibility5584 OBJECT IDENTIFIER ::= { gUIAssetsConsole25109a 16938 }
+-- MQTT: OPEN-AIR/GUI/Assets/Console/25/visibility/geometry
+gUIAssetsConsole25VisibilityGeometry174c OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Console/25/visibility/geometry"
+    ::= { gUIAssetsConsole25Visibility5584 4630 }
+
+-- MQTT: OPEN-AIR/GUI/Assets/Console/25/visibility/visible
+gUIAssetsConsole25VisibilityVisible6c58 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Console/25/visibility/visible"
+    ::= { gUIAssetsConsole25Visibility5584 37903 }
+
+gUIAssetsConsole9d8b5 OBJECT IDENTIFIER ::= { gUIAssetsConsole109d 58113 }
+gUIAssetsConsole9Visibility6b76 OBJECT IDENTIFIER ::= { gUIAssetsConsole9d8b5 24642 }
+-- MQTT: OPEN-AIR/GUI/Assets/Console/9/visibility/geometry
+gUIAssetsConsole9VisibilityGeometry5835 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Console/9/visibility/geometry"
+    ::= { gUIAssetsConsole9Visibility6b76 37143 }
+
+-- MQTT: OPEN-AIR/GUI/Assets/Console/9/visibility/visible
+gUIAssetsConsole9VisibilityVisibleca29 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/GUI/Assets/Console/9/visibility/visible"
+    ::= { gUIAssetsConsole9Visibility6b76 51116 }
+
+-- MQTT: OPEN-AIR/status
+status7b00 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/status"
+    ::= { v1 25884 }
+
+distortion603a OBJECT IDENTIFIER ::= { v1 27579 }
+distortionInstrument9f8f OBJECT IDENTIFIER ::= { distortion603a 10209 }
+distortionInstrumentDistortionInstrumente51c OBJECT IDENTIFIER ::= { distortionInstrument9f8f 63976 }
+distortionInstrumentDistortionInstrumentBlocks9dd5 OBJECT IDENTIFIER ::= { distortionInstrumentDistortionInstrumente51c 51704 }
+distortionInstrumentDistortionInstrumentBlocksDCLoadPanel94ce OBJECT IDENTIFIER ::= { distortionInstrumentDistortionInstrumentBlocks9dd5 27705 }
+distortionInstrumentDistortionInstrumentBlocksDCLoadPanelMod4ac9 OBJECT IDENTIFIER ::= { distortionInstrumentDistortionInstrumentBlocksDCLoadPanel94ce 19535 }
+-- MQTT: OPEN-AIR/Distortion/Instrument/Distortion_Instrument/blocks/DC_Load_Panel/Mode_Control/mode_set
+distortionInstrumentDistortionInstrumentBlocksDCLoadPanelMod4d82 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Distortion/Instrument/Distortion_Instrument/blocks/DC_Load_Panel/Mode_Control/mode_set"
+    ::= { distortionInstrumentDistortionInstrumentBlocksDCLoadPanelMod4ac9 28375 }
+
+mIDI9af1 OBJECT IDENTIFIER ::= { v1 30514 }
+mIDIArturiamicrolab90e4 OBJECT IDENTIFIER ::= { mIDI9af1 22285 }
+mIDIArturiamicrolabCh049fd OBJECT IDENTIFIER ::= { mIDIArturiamicrolab90e4 33098 }
+-- MQTT: OPEN-AIR/MIDI/arturia_microlab/ch0/note59
+mIDIArturiamicrolabCh0Note59b95f OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/arturia_microlab/ch0/note59"
+    ::= { mIDIArturiamicrolabCh049fd 530 }
+
+-- MQTT: OPEN-AIR/MIDI/arturia_microlab/ch0/note48
+mIDIArturiamicrolabCh0Note48d743 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/arturia_microlab/ch0/note48"
+    ::= { mIDIArturiamicrolabCh049fd 965 }
+
+-- MQTT: OPEN-AIR/MIDI/arturia_microlab/ch0/note65
+mIDIArturiamicrolabCh0Note659bc4 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/arturia_microlab/ch0/note65"
+    ::= { mIDIArturiamicrolabCh049fd 7674 }
+
+-- MQTT: OPEN-AIR/MIDI/arturia_microlab/ch0/note56
+mIDIArturiamicrolabCh0Note5629e0 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/arturia_microlab/ch0/note56"
+    ::= { mIDIArturiamicrolabCh049fd 8067 }
+
+-- MQTT: OPEN-AIR/MIDI/arturia_microlab/ch0/note64
+mIDIArturiamicrolabCh0Note64ecc3 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/arturia_microlab/ch0/note64"
+    ::= { mIDIArturiamicrolabCh049fd 11628 }
+
+-- MQTT: OPEN-AIR/MIDI/arturia_microlab/ch0/note57
+mIDIArturiamicrolabCh0Note575ee7 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/arturia_microlab/ch0/note57"
+    ::= { mIDIArturiamicrolabCh049fd 12053 }
+
+-- MQTT: OPEN-AIR/MIDI/arturia_microlab/ch0/note58
+mIDIArturiamicrolabCh0Note58ce58 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/arturia_microlab/ch0/note58"
+    ::= { mIDIArturiamicrolabCh049fd 12932 }
+
+-- MQTT: OPEN-AIR/MIDI/arturia_microlab/ch0/note66
+mIDIArturiamicrolabCh0Note662cd4 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/arturia_microlab/ch0/note66"
+    ::= { mIDIArturiamicrolabCh049fd 19520 }
+
+-- MQTT: OPEN-AIR/MIDI/arturia_microlab/ch0/note55
+mIDIArturiamicrolabCh0Note55b0e9 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/arturia_microlab/ch0/note55"
+    ::= { mIDIArturiamicrolabCh049fd 20025 }
+
+-- MQTT: OPEN-AIR/MIDI/arturia_microlab/ch0/note69
+mIDIArturiamicrolabCh0Note699272 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/arturia_microlab/ch0/note69"
+    ::= { mIDIArturiamicrolabCh049fd 20945 }
+
+-- MQTT: OPEN-AIR/MIDI/arturia_microlab/ch0/note68
+mIDIArturiamicrolabCh0Note68e575 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/arturia_microlab/ch0/note68"
+    ::= { mIDIArturiamicrolabCh049fd 24903 }
+
+-- MQTT: OPEN-AIR/MIDI/arturia_microlab/ch0/note67
+mIDIArturiamicrolabCh0Note6775ca OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/arturia_microlab/ch0/note67"
+    ::= { mIDIArturiamicrolabCh049fd 31958 }
+
+-- MQTT: OPEN-AIR/MIDI/arturia_microlab/ch0/note54
+mIDIArturiamicrolabCh0Note54c7ee OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/arturia_microlab/ch0/note54"
+    ::= { mIDIArturiamicrolabCh049fd 32431 }
+
+-- MQTT: OPEN-AIR/MIDI/arturia_microlab/ch0/note62
+mIDIArturiamicrolabCh0Note625a08 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/arturia_microlab/ch0/note62"
+    ::= { mIDIArturiamicrolabCh049fd 34905 }
+
+-- MQTT: OPEN-AIR/MIDI/arturia_microlab/ch0/note51
+mIDIArturiamicrolabCh0Note51b784 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/arturia_microlab/ch0/note51"
+    ::= { mIDIArturiamicrolabCh049fd 35360 }
+
+-- MQTT: OPEN-AIR/MIDI/arturia_microlab/ch0/note63
+mIDIArturiamicrolabCh0Note6372a7 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/arturia_microlab/ch0/note63"
+    ::= { mIDIArturiamicrolabCh049fd 47311 }
+
+-- MQTT: OPEN-AIR/MIDI/arturia_microlab/ch0/note50
+mIDIArturiamicrolabCh0Note50c083 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/arturia_microlab/ch0/note50"
+    ::= { mIDIArturiamicrolabCh049fd 47798 }
+
+-- MQTT: OPEN-AIR/MIDI/arturia_microlab/ch0/note70
+mIDIArturiamicrolabCh0Note70f2b5 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/arturia_microlab/ch0/note70"
+    ::= { mIDIArturiamicrolabCh049fd 55348 }
+
+-- MQTT: OPEN-AIR/MIDI/arturia_microlab/ch0/note61
+mIDIArturiamicrolabCh0Note619ca9 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/arturia_microlab/ch0/note61"
+    ::= { mIDIArturiamicrolabCh049fd 55779 }
+
+-- MQTT: OPEN-AIR/MIDI/arturia_microlab/ch0/note52
+mIDIArturiamicrolabCh0Note522e8d OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/arturia_microlab/ch0/note52"
+    ::= { mIDIArturiamicrolabCh049fd 56218 }
+
+-- MQTT: OPEN-AIR/MIDI/arturia_microlab/ch0/note71
+mIDIArturiamicrolabCh0Note7185b2 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/arturia_microlab/ch0/note71"
+    ::= { mIDIArturiamicrolabCh049fd 59554 }
+
+-- MQTT: OPEN-AIR/MIDI/arturia_microlab/ch0/note60
+mIDIArturiamicrolabCh0Note60ebae OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/arturia_microlab/ch0/note60"
+    ::= { mIDIArturiamicrolabCh049fd 59765 }
+
+-- MQTT: OPEN-AIR/MIDI/arturia_microlab/ch0/note53
+mIDIArturiamicrolabCh0Note53598a OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/arturia_microlab/ch0/note53"
+    ::= { mIDIArturiamicrolabCh049fd 60172 }
+
+mIDIMidithrough2cdf OBJECT IDENTIFIER ::= { mIDI9af1 27729 }
+mIDIMidithroughCh01e7d OBJECT IDENTIFIER ::= { mIDIMidithrough2cdf 11198 }
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note39
+mIDIMidithroughCh0Note39208f OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note39"
+    ::= { mIDIMidithroughCh01e7d 3679 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note93
+mIDIMidithroughCh0Note933ab5 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note93"
+    ::= { mIDIMidithroughCh01e7d 4043 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note41
+mIDIMidithroughCh0Note416115 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note41"
+    ::= { mIDIMidithroughCh01e7d 4266 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note50
+mIDIMidithroughCh0Note50f091 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note50"
+    ::= { mIDIMidithroughCh01e7d 4477 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note102
+mIDIMidithroughCh0Note1023367 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note102"
+    ::= { mIDIMidithroughCh01e7d 4673 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note72
+mIDIMidithroughCh0Note72d331 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note72"
+    ::= { mIDIMidithroughCh01e7d 4819 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note63
+mIDIMidithroughCh0Note63bd2d OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note63"
+    ::= { mIDIMidithroughCh01e7d 4868 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note36
+mIDIMidithroughCh0Note36b030 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note36"
+    ::= { mIDIMidithroughCh01e7d 5070 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note40
+mIDIMidithroughCh0Note401612 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note40"
+    ::= { mIDIMidithroughCh01e7d 8252 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note51
+mIDIMidithroughCh0Note51780e OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note51"
+    ::= { mIDIMidithroughCh01e7d 8683 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note73
+mIDIMidithroughCh0Note73a436 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note73"
+    ::= { mIDIMidithroughCh01e7d 8773 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note103
+mIDIMidithroughCh0Note1034460 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note103"
+    ::= { mIDIMidithroughCh01e7d 8919 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note37
+mIDIMidithroughCh0Note37c737 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note37"
+    ::= { mIDIMidithroughCh01e7d 9048 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note62
+mIDIMidithroughCh0Note62ca2a OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note62"
+    ::= { mIDIMidithroughCh01e7d 9106 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note83
+mIDIMidithroughCh0Note8323ae OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note83"
+    ::= { mIDIMidithroughCh01e7d 16010 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note92
+mIDIMidithroughCh0Note924db2 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note92"
+    ::= { mIDIMidithroughCh01e7d 16221 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note53
+mIDIMidithroughCh0Note539600 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note53"
+    ::= { mIDIMidithroughCh01e7d 16583 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note42
+mIDIMidithroughCh0Note42f81c OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note42"
+    ::= { mIDIMidithroughCh01e7d 16656 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note60
+mIDIMidithroughCh0Note602424 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note60"
+    ::= { mIDIMidithroughCh01e7d 17086 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note71
+mIDIMidithroughCh0Note714a38 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note71"
+    ::= { mIDIMidithroughCh01e7d 17257 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note101
+mIDIMidithroughCh0Note101aa6e OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note101"
+    ::= { mIDIMidithroughCh01e7d 17403 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note90
+mIDIMidithroughCh0Note90a3bc OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note90"
+    ::= { mIDIMidithroughCh01e7d 24177 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note81
+mIDIMidithroughCh0Note81cda0 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note81"
+    ::= { mIDIMidithroughCh01e7d 24486 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note91
+mIDIMidithroughCh0Note91d4bb OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note91"
+    ::= { mIDIMidithroughCh01e7d 28391 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note80
+mIDIMidithroughCh0Note80baa7 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note80"
+    ::= { mIDIMidithroughCh01e7d 28464 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note52
+mIDIMidithroughCh0Note52e107 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note52"
+    ::= { mIDIMidithroughCh01e7d 28753 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note61
+mIDIMidithroughCh0Note615323 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note61"
+    ::= { mIDIMidithroughCh01e7d 29224 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note100
+mIDIMidithroughCh0Note100dd69 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note100"
+    ::= { mIDIMidithroughCh01e7d 29549 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note70
+mIDIMidithroughCh0Note703d3f OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note70"
+    ::= { mIDIMidithroughCh01e7d 29695 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note57
+mIDIMidithroughCh0Note57916d OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note57"
+    ::= { mIDIMidithroughCh01e7d 34014 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note46
+mIDIMidithroughCh0Note46ff71 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note46"
+    ::= { mIDIMidithroughCh01e7d 34057 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note64
+mIDIMidithroughCh0Note642349 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note64"
+    ::= { mIDIMidithroughCh01e7d 34471 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note75
+mIDIMidithroughCh0Note754d55 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note75"
+    ::= { mIDIMidithroughCh01e7d 34672 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note105
+mIDIMidithroughCh0Note105ad03 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note105"
+    ::= { mIDIMidithroughCh01e7d 34786 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note49
+mIDIMidithroughCh0Note496fce OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note49"
+    ::= { mIDIMidithroughCh01e7d 39064 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note58
+mIDIMidithroughCh0Note581d29 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note58"
+    ::= { mIDIMidithroughCh01e7d 39247 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note94
+mIDIMidithroughCh0Note94a4d1 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note94"
+    ::= { mIDIMidithroughCh01e7d 39528 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note85
+mIDIMidithroughCh0Note85cacd OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note85"
+    ::= { mIDIMidithroughCh01e7d 39871 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note48
+mIDIMidithroughCh0Note4818c9 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note48"
+    ::= { mIDIMidithroughCh01e7d 43022 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note59
+mIDIMidithroughCh0Note5976d5 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note59"
+    ::= { mIDIMidithroughCh01e7d 43481 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note95
+mIDIMidithroughCh0Note95d3d6 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note95"
+    ::= { mIDIMidithroughCh01e7d 43774 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note84
+mIDIMidithroughCh0Note84bdca OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note84"
+    ::= { mIDIMidithroughCh01e7d 43817 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note47
+mIDIMidithroughCh0Note478876 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note47"
+    ::= { mIDIMidithroughCh01e7d 46495 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note65
+mIDIMidithroughCh0Note65544e OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note65"
+    ::= { mIDIMidithroughCh01e7d 46641 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note104
+mIDIMidithroughCh0Note104da04 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note104"
+    ::= { mIDIMidithroughCh01e7d 46964 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note74
+mIDIMidithroughCh0Note743a52 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note74"
+    ::= { mIDIMidithroughCh01e7d 47078 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note86
+mIDIMidithroughCh0Note8653c4 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note86"
+    ::= { mIDIMidithroughCh01e7d 51717 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note68
+mIDIMidithroughCh0Note682aff OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note68"
+    ::= { mIDIMidithroughCh01e7d 51852 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note79
+mIDIMidithroughCh0Note7944e3 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note79"
+    ::= { mIDIMidithroughCh01e7d 52059 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note54
+mIDIMidithroughCh0Note54864d OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note54"
+    ::= { mIDIMidithroughCh01e7d 54628 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note98
+mIDIMidithroughCh0Note98ad67 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note98"
+    ::= { mIDIMidithroughCh01e7d 54851 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note106
+mIDIMidithroughCh0Note106340a OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note106"
+    ::= { mIDIMidithroughCh01e7d 54872 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note76
+mIDIMidithroughCh0Note76d45c OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note76"
+    ::= { mIDIMidithroughCh01e7d 54986 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note67
+mIDIMidithroughCh0Note67ba40 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note67"
+    ::= { mIDIMidithroughCh01e7d 55069 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note89
+mIDIMidithroughCh0Note89c37b OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note89"
+    ::= { mIDIMidithroughCh01e7d 55188 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note44
+mIDIMidithroughCh0Note44117f OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note44"
+    ::= { mIDIMidithroughCh01e7d 58405 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note77
+mIDIMidithroughCh0Note77a35b OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note77"
+    ::= { mIDIMidithroughCh01e7d 58972 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note107
+mIDIMidithroughCh0Note107430d OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note107"
+    ::= { mIDIMidithroughCh01e7d 59086 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note88
+mIDIMidithroughCh0Note88b47c OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note88"
+    ::= { mIDIMidithroughCh01e7d 59138 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note66
+mIDIMidithroughCh0Note66cd47 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note66"
+    ::= { mIDIMidithroughCh01e7d 59275 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note69
+mIDIMidithroughCh0Note695df8 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note69"
+    ::= { mIDIMidithroughCh01e7d 64026 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note87
+mIDIMidithroughCh0Note8724c3 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note87"
+    ::= { mIDIMidithroughCh01e7d 64147 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note96
+mIDIMidithroughCh0Note964adf OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note96"
+    ::= { mIDIMidithroughCh01e7d 64324 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note108
+mIDIMidithroughCh0Note108d3b2 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note108"
+    ::= { mIDIMidithroughCh01e7d 64351 }
+
+-- MQTT: OPEN-AIR/MIDI/midi_through/ch0/note78
+mIDIMidithroughCh0Note7833e4 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/MIDI/midi_through/ch0/note78"
+    ::= { mIDIMidithroughCh01e7d 64461 }
+
+generatorcaae OBJECT IDENTIFIER ::= { v1 31600 }
+generatorYAK5c1d OBJECT IDENTIFIER ::= { generatorcaae 19577 }
+generatorYAK33210A424f OBJECT IDENTIFIER ::= { generatorYAK5c1d 17704 }
+generatorYAK33210AAPPLyf7b0 OBJECT IDENTIFIER ::= { generatorYAK33210A424f 11493 }
+generatorYAK33210AAPPLyGeneratorYAK33210AAPPLydaf0 OBJECT IDENTIFIER ::= { generatorYAK33210AAPPLyf7b0 36377 }
+generatorYAK33210AAPPLyGeneratorYAK33210AAPPLyBlocksc970 OBJECT IDENTIFIER ::= { generatorYAK33210AAPPLyGeneratorYAK33210AAPPLydaf0 1989 }
+generatorYAK33210AAPPLyGeneratorYAK33210AAPPLyBlocksRig9ae3 OBJECT IDENTIFIER ::= { generatorYAK33210AAPPLyGeneratorYAK33210AAPPLyBlocksc970 40984 }
+generatorYAK33210AAPPLyGeneratorYAK33210AAPPLyBlocksRigQuick1625 OBJECT IDENTIFIER ::= { generatorYAK33210AAPPLyGeneratorYAK33210AAPPLyBlocksRig9ae3 51793 }
+generatorYAK33210AAPPLyGeneratorYAK33210AAPPLyBlocksRigQuickcaee OBJECT IDENTIFIER ::= { generatorYAK33210AAPPLyGeneratorYAK33210AAPPLyBlocksRigQuick1625 47938 }
+generatorYAK33210AAPPLyGeneratorYAK33210AAPPLyBlocksRigQuickd62d OBJECT IDENTIFIER ::= { generatorYAK33210AAPPLyGeneratorYAK33210AAPPLyBlocksRigQuickcaee 25717 }
+-- MQTT: OPEN-AIR/Generator/YAK/33210A/APPLy/Generator_YAK_33210A_APPLy/blocks/rig/Quick_Setup_Apply/Apply_Pulse/Input/freq
+generatorYAK33210AAPPLyGeneratorYAK33210AAPPLyBlocksRigQuick9182 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Generator/YAK/33210A/APPLy/Generator_YAK_33210A_APPLy/blocks/rig/Quick_Setup_Apply/Apply_Pulse/Input/freq"
+    ::= { generatorYAK33210AAPPLyGeneratorYAK33210AAPPLyBlocksRigQuickd62d 15776 }
+
+generatorInstrument965d OBJECT IDENTIFIER ::= { generatorcaae 58699 }
+generatorInstrumentGeneratorInstrument1d7b2 OBJECT IDENTIFIER ::= { generatorInstrument965d 47288 }
+generatorInstrumentGeneratorInstrument1Blocksef31 OBJECT IDENTIFIER ::= { generatorInstrumentGeneratorInstrument1d7b2 59483 }
+generatorInstrumentGeneratorInstrument1BlocksSet8d55 OBJECT IDENTIFIER ::= { generatorInstrumentGeneratorInstrument1Blocksef31 27994 }
+generatorInstrumentGeneratorInstrument1BlocksSetSetMainParamfc2c OBJECT IDENTIFIER ::= { generatorInstrumentGeneratorInstrument1BlocksSet8d55 51324 }
+generatorInstrumentGeneratorInstrument1BlocksSetSetMainParam930f OBJECT IDENTIFIER ::= { generatorInstrumentGeneratorInstrument1BlocksSetSetMainParamfc2c 6466 }
+generatorInstrumentGeneratorInstrument1BlocksSetSetMainParamd164 OBJECT IDENTIFIER ::= { generatorInstrumentGeneratorInstrument1BlocksSetSetMainParam930f 39905 }
+-- MQTT: OPEN-AIR/Generator/Instrument/Generator_Instrument_1/blocks/set/Set_Main_Parameters/Set_Frequency/Input/freq
+generatorInstrumentGeneratorInstrument1BlocksSetSetMainParam5b0b OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Generator/Instrument/Generator_Instrument_1/blocks/set/Set_Main_Parameters/Set_Frequency/Input/freq"
+    ::= { generatorInstrumentGeneratorInstrument1BlocksSetSetMainParamd164 39433 }
+
+scanc4b3 OBJECT IDENTIFIER ::= { v1 45998 }
+scanScanc81a OBJECT IDENTIFIER ::= { scanc4b3 45562 }
+scanScanBlocks5387 OBJECT IDENTIFIER ::= { scanScanc81a 20061 }
+scanScanBlocksMultidatasetgraph2af6 OBJECT IDENTIFIER ::= { scanScanBlocks5387 9825 }
+scanScanBlocksMultidatasetgraphOaDataRunningFilesc463 OBJECT IDENTIFIER ::= { scanScanBlocksMultidatasetgraph2af6 24572 }
+-- MQTT: OPEN-AIR/scan/scan/blocks/multi_dataset_graph/oaDataRunningFiles/MARKERS
+scanScanBlocksMultidatasetgraphOaDataRunningFilesMARKERS763d OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/scan/scan/blocks/multi_dataset_graph/oaDataRunningFiles/MARKERS"
+    ::= { scanScanBlocksMultidatasetgraphOaDataRunningFilesc463 1129 }
+
+-- MQTT: OPEN-AIR/scan/scan/blocks/multi_dataset_graph/oaDataRunningFiles/ref_linear
+scanScanBlocksMultidatasetgraphOaDataRunningFilesReflinearb56a OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/scan/scan/blocks/multi_dataset_graph/oaDataRunningFiles/ref_linear"
+    ::= { scanScanBlocksMultidatasetgraphOaDataRunningFilesc463 44547 }
+
+scanScanBlocksMultidatasetgraphSettingseebe OBJECT IDENTIFIER ::= { scanScanBlocksMultidatasetgraph2af6 61941 }
+-- MQTT: OPEN-AIR/scan/scan/blocks/multi_dataset_graph/settings/y_label
+scanScanBlocksMultidatasetgraphSettingsYlabelcb7f OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/scan/scan/blocks/multi_dataset_graph/settings/y_label"
+    ::= { scanScanBlocksMultidatasetgraphSettingseebe 1860 }
+
+-- MQTT: OPEN-AIR/scan/scan/blocks/multi_dataset_graph/settings/x_label
+scanScanBlocksMultidatasetgraphSettingsXlabel6d08 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/scan/scan/blocks/multi_dataset_graph/settings/x_label"
+    ::= { scanScanBlocksMultidatasetgraphSettingseebe 3312 }
+
+-- MQTT: OPEN-AIR/scan/scan/blocks/multi_dataset_graph/settings/xlim
+scanScanBlocksMultidatasetgraphSettingsXlim5cfa OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/scan/scan/blocks/multi_dataset_graph/settings/xlim"
+    ::= { scanScanBlocksMultidatasetgraphSettingseebe 39779 }
+
+-- MQTT: OPEN-AIR/scan/scan/blocks/multi_dataset_graph/settings/show_grid
+scanScanBlocksMultidatasetgraphSettingsShowgridae09 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/scan/scan/blocks/multi_dataset_graph/settings/show_grid"
+    ::= { scanScanBlocksMultidatasetgraphSettingseebe 41642 }
+
+-- MQTT: OPEN-AIR/scan/scan/blocks/multi_dataset_graph/settings/title
+scanScanBlocksMultidatasetgraphSettingsTitlec4f6 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/scan/scan/blocks/multi_dataset_graph/settings/title"
+    ::= { scanScanBlocksMultidatasetgraphSettingseebe 44146 }
+
+-- MQTT: OPEN-AIR/scan/scan/blocks/multi_dataset_graph/settings/ylim
+scanScanBlocksMultidatasetgraphSettingsYlime446 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/scan/scan/blocks/multi_dataset_graph/settings/ylim"
+    ::= { scanScanBlocksMultidatasetgraphSettingseebe 64518 }
+
+lCR4e57 OBJECT IDENTIFIER ::= { v1 49954 }
+lCRInstrumentc68a OBJECT IDENTIFIER ::= { lCR4e57 46210 }
+lCRInstrumentLoadInstrument5be9 OBJECT IDENTIFIER ::= { lCRInstrumentc68a 24233 }
+lCRInstrumentLoadInstrumentBlocks6c97 OBJECT IDENTIFIER ::= { lCRInstrumentLoadInstrument5be9 28903 }
+lCRInstrumentLoadInstrumentBlocksDCLoadStation6e87 OBJECT IDENTIFIER ::= { lCRInstrumentLoadInstrumentBlocks6c97 32564 }
+lCRInstrumentLoadInstrumentBlocksDCLoadStationModeLogicSecto7c31 OBJECT IDENTIFIER ::= { lCRInstrumentLoadInstrumentBlocksDCLoadStation6e87 17767 }
+-- MQTT: OPEN-AIR/LCR/Instrument/Load_Instrument/blocks/DC_Load_Station/Mode_Logic_Sector/Mode_Selector
+lCRInstrumentLoadInstrumentBlocksDCLoadStationModeLogicSectoe2cc OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/LCR/Instrument/Load_Instrument/blocks/DC_Load_Station/Mode_Logic_Sector/Mode_Selector"
+    ::= { lCRInstrumentLoadInstrumentBlocksDCLoadStationModeLogicSecto7c31 55459 }
+
+lCRInstrumentLoadInstrumentBlocksDCLoadStationTransientLab7351 OBJECT IDENTIFIER ::= { lCRInstrumentLoadInstrumentBlocksDCLoadStation6e87 57377 }
+-- MQTT: OPEN-AIR/LCR/Instrument/Load_Instrument/blocks/DC_Load_Station/Transient_Lab/Level_A
+lCRInstrumentLoadInstrumentBlocksDCLoadStationTransientLabLe22b6 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/LCR/Instrument/Load_Instrument/blocks/DC_Load_Station/Transient_Lab/Level_A"
+    ::= { lCRInstrumentLoadInstrumentBlocksDCLoadStationTransientLab7351 41526 }
+
+console3603 OBJECT IDENTIFIER ::= { v1 53174 }
+console9b584 OBJECT IDENTIFIER ::= { console3603 17030 }
+console9Fieldsac22 OBJECT IDENTIFIER ::= { console9b584 2165 }
+console9FieldsCh11b09a OBJECT IDENTIFIER ::= { console9Fieldsac22 44046 }
+console9FieldsCh11Pan2b7a OBJECT IDENTIFIER ::= { console9FieldsCh11b09a 7350 }
+console9FieldsCh11PanButtons370b OBJECT IDENTIFIER ::= { console9FieldsCh11Pan2b7a 60531 }
+-- MQTT: OPEN-AIR/Console/9/fields/ch11/pan/buttons/pfl
+console9FieldsCh11PanButtonsPfl787c OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Console/9/fields/ch11/pan/buttons/pfl"
+    ::= { console9FieldsCh11PanButtons370b 45828 }
+
+console25632b OBJECT IDENTIFIER ::= { console3603 20530 }
+console25Fieldsc74e OBJECT IDENTIFIER ::= { console25632b 11860 }
+console25FieldsCh32a599 OBJECT IDENTIFIER ::= { console25Fieldsc74e 59720 }
+console25FieldsCh32Aux14be46 OBJECT IDENTIFIER ::= { console25FieldsCh32a599 38706 }
+console25FieldsCh32Aux14Aux1170c OBJECT IDENTIFIER ::= { console25FieldsCh32Aux14be46 50798 }
+console25FieldsCh32Aux14Aux1Buttons54ea OBJECT IDENTIFIER ::= { console25FieldsCh32Aux14Aux1170c 26250 }
+-- MQTT: OPEN-AIR/Console/25/fields/ch32/aux_1_4/aux1/buttons/on_off
+console25FieldsCh32Aux14Aux1ButtonsOnoffe86a OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Console/25/fields/ch32/aux_1_4/aux1/buttons/on_off"
+    ::= { console25FieldsCh32Aux14Aux1Buttons54ea 26493 }
+
+console17a608 OBJECT IDENTIFIER ::= { console3603 25309 }
+console17Fieldsbce6 OBJECT IDENTIFIER ::= { console17a608 5612 }
+console17FieldsCh2139b6 OBJECT IDENTIFIER ::= { console17Fieldsbce6 6435 }
+console17FieldsCh21Aux14b5b5 OBJECT IDENTIFIER ::= { console17FieldsCh2139b6 27892 }
+console17FieldsCh21Aux14Aux4422a OBJECT IDENTIFIER ::= { console17FieldsCh21Aux14b5b5 43646 }
+console17FieldsCh21Aux14Aux4Buttons7ea1 OBJECT IDENTIFIER ::= { console17FieldsCh21Aux14Aux4422a 63524 }
+-- MQTT: OPEN-AIR/Console/17/fields/ch21/aux_1_4/aux4/buttons/pr_po
+console17FieldsCh21Aux14Aux4ButtonsPrpoa5cf OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Console/17/fields/ch21/aux_1_4/aux4/buttons/pr_po"
+    ::= { console17FieldsCh21Aux14Aux4Buttons7ea1 38316 }
+
+console1bb5f OBJECT IDENTIFIER ::= { console3603 51892 }
+console1Fields7fc7 OBJECT IDENTIFIER ::= { console1bb5f 5056 }
+console1FieldsCh2da5b OBJECT IDENTIFIER ::= { console1Fields7fc7 31529 }
+console1FieldsCh2SummingGroupse391 OBJECT IDENTIFIER ::= { console1FieldsCh2da5b 14481 }
+-- MQTT: OPEN-AIR/Console/1/fields/ch2/Summing_Groups/s3
+console1FieldsCh2SummingGroupsS31bd4 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Console/1/fields/ch2/Summing_Groups/s3"
+    ::= { console1FieldsCh2SummingGroupse391 24289 }
+
+load2506 OBJECT IDENTIFIER ::= { v1 58397 }
+loadYAK3575 OBJECT IDENTIFIER ::= { load2506 21858 }
+loadYAK6060Bee09 OBJECT IDENTIFIER ::= { loadYAK3575 38237 }
+loadYAK6060BMEASure82b8 OBJECT IDENTIFIER ::= { loadYAK6060Bee09 29607 }
+loadYAK6060BMEASureLoadYAK6060BMEASure6447 OBJECT IDENTIFIER ::= { loadYAK6060BMEASure82b8 58012 }
+loadYAK6060BMEASureLoadYAK6060BMEASureBlocksf6c5 OBJECT IDENTIFIER ::= { loadYAK6060BMEASureLoadYAK6060BMEASure6447 57372 }
+loadYAK6060BMEASureLoadYAK6060BMEASureBlocksMeasuref6fa OBJECT IDENTIFIER ::= { loadYAK6060BMEASureLoadYAK6060BMEASureBlocksf6c5 49473 }
+loadYAK6060BMEASureLoadYAK6060BMEASureBlocksMeasureMeasureAl3052 OBJECT IDENTIFIER ::= { loadYAK6060BMEASureLoadYAK6060BMEASureBlocksMeasuref6fa 10070 }
+loadYAK6060BMEASureLoadYAK6060BMEASureBlocksMeasureMeasureAl5a53 OBJECT IDENTIFIER ::= { loadYAK6060BMEASureLoadYAK6060BMEASureBlocksMeasureMeasureAl3052 51585 }
+-- MQTT: OPEN-AIR/Load/YAK/6060B/MEASure/Load_YAK_6060B_MEASure/blocks/Measure/Measure_All/Outputs/volts
+loadYAK6060BMEASureLoadYAK6060BMEASureBlocksMeasureMeasureAl1807 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Load/YAK/6060B/MEASure/Load_YAK_6060B_MEASure/blocks/Measure/Measure_All/Outputs/volts"
+    ::= { loadYAK6060BMEASureLoadYAK6060BMEASureBlocksMeasureMeasureAl5a53 3255 }
+
+loadInstrumentA5f61 OBJECT IDENTIFIER ::= { load2506 48754 }
+loadInstrumentALoadInstrumentAa386 OBJECT IDENTIFIER ::= { loadInstrumentA5f61 48341 }
+loadInstrumentALoadInstrumentABlocks2e3d OBJECT IDENTIFIER ::= { loadInstrumentALoadInstrumentAa386 44773 }
+loadInstrumentALoadInstrumentABlocksBatteryStressChamber8274 OBJECT IDENTIFIER ::= { loadInstrumentALoadInstrumentABlocks2e3d 53021 }
+loadInstrumentALoadInstrumentABlocksBatteryStressChamberTele433a OBJECT IDENTIFIER ::= { loadInstrumentALoadInstrumentABlocksBatteryStressChamber8274 17250 }
+loadInstrumentALoadInstrumentABlocksBatteryStressChamberTeleeb15 OBJECT IDENTIFIER ::= { loadInstrumentALoadInstrumentABlocksBatteryStressChamberTele433a 7892 }
+-- MQTT: OPEN-AIR/Load/Instrument_A/Load_Instrument_A/blocks/Battery_Stress_Chamber/Telemetry_Dashboard/Capacity_Readout/Ah_Counter
+loadInstrumentALoadInstrumentABlocksBatteryStressChamberTelec939 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Load/Instrument_A/Load_Instrument_A/blocks/Battery_Stress_Chamber/Telemetry_Dashboard/Capacity_Readout/Ah_Counter"
+    ::= { loadInstrumentALoadInstrumentABlocksBatteryStressChamberTeleeb15 14344 }
+
+loadInstrumentALoadInstrumentABlocksBatteryStressChamberTelebe30 OBJECT IDENTIFIER ::= { loadInstrumentALoadInstrumentABlocksBatteryStressChamberTele433a 23275 }
+loadInstrumentALoadInstrumentABlocksBatteryStressChamberTelecf00 OBJECT IDENTIFIER ::= { loadInstrumentALoadInstrumentABlocksBatteryStressChamberTelebe30 287 }
+-- MQTT: OPEN-AIR/Load/Instrument_A/Load_Instrument_A/blocks/Battery_Stress_Chamber/Telemetry_Dashboard/Discharge_Curve/settings/y_label
+loadInstrumentALoadInstrumentABlocksBatteryStressChamberTele6170 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Load/Instrument_A/Load_Instrument_A/blocks/Battery_Stress_Chamber/Telemetry_Dashboard/Discharge_Curve/settings/y_label"
+    ::= { loadInstrumentALoadInstrumentABlocksBatteryStressChamberTelecf00 28805 }
+
+loadInstrumentALoadInstrumentABlocksBatteryStressChamberMixi606d OBJECT IDENTIFIER ::= { loadInstrumentALoadInstrumentABlocksBatteryStressChamber8274 55775 }
+loadInstrumentALoadInstrumentABlocksBatteryStressChamberMixi3deb OBJECT IDENTIFIER ::= { loadInstrumentALoadInstrumentABlocksBatteryStressChamberMixi606d 47275 }
+-- MQTT: OPEN-AIR/Load/Instrument_A/Load_Instrument_A/blocks/Battery_Stress_Chamber/Mixing_Desk_Deck/Transient_Load_Col/Transient_Fader
+loadInstrumentALoadInstrumentABlocksBatteryStressChamberMixibcd5 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Load/Instrument_A/Load_Instrument_A/blocks/Battery_Stress_Chamber/Mixing_Desk_Deck/Transient_Load_Col/Transient_Fader"
+    ::= { loadInstrumentALoadInstrumentABlocksBatteryStressChamberMixi3deb 2275 }
+
+router45d2 OBJECT IDENTIFIER ::= { v1 61989 }
+routerSwitcher4ccf OBJECT IDENTIFIER ::= { router45d2 10616 }
+routerSwitcherCoax1f34 OBJECT IDENTIFIER ::= { routerSwitcher4ccf 41502 }
+routerSwitcherCoaxRouterSwitcherCoaxbe1f OBJECT IDENTIFIER ::= { routerSwitcherCoax1f34 50463 }
+routerSwitcherCoaxRouterSwitcherCoaxBlocks1418 OBJECT IDENTIFIER ::= { routerSwitcherCoaxRouterSwitcherCoaxbe1f 63498 }
+routerSwitcherCoaxRouterSwitcherCoaxBlocksCard001CoaxRouting95ec OBJECT IDENTIFIER ::= { routerSwitcherCoaxRouterSwitcherCoaxBlocks1418 53519 }
+-- MQTT: OPEN-AIR/Router/Switcher/Coax/Router_Switcher_Coax/blocks/Card_001_Coax_Routing/Scopes_Toggler
+routerSwitcherCoaxRouterSwitcherCoaxBlocksCard001CoaxRoutingde21 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Router/Switcher/Coax/Router_Switcher_Coax/blocks/Card_001_Coax_Routing/Scopes_Toggler"
+    ::= { routerSwitcherCoaxRouterSwitcherCoaxBlocksCard001CoaxRouting95ec 35810 }
+
+END

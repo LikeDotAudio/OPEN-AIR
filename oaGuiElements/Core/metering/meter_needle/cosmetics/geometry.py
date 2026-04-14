@@ -71,17 +71,17 @@ class BezelGeometry:
         if needle_geo_rs:
             return needle_geo_rs.get_bezel_points(cx, cy, w, h, shape, line_width, shrink_px)
 
-        req = BezelRequest(cx, cy, w, h, shape, line_width, shrink_px)
-        return BezelGeometry._calculate_points(req)
+        request = BezelRequest(cx, cy, w, h, shape, line_width, shrink_px)
+        return BezelGeometry._calculate_points(request)
 
     @staticmethod
-    def _calculate_points(req: BezelRequest) -> Tuple[List[float], bool]:
+    def _calculate_points(request: BezelRequest) -> Tuple[List[float], bool]:
         # 1. Get scaling parameters
-        radius, global_y_shift, shape_key = BezelGeometry.get_scaling_params(req.w, req.h, req.shape, req.line_width)
+        radius, global_y_shift, shape_key = BezelGeometry.get_scaling_params(request.w, request.h, request.shape, request.line_width)
         
         # 2. Apply shrink_px to the radius safely
         m_w, m_h = SHAPE_MULTIPLIERS.get(shape_key, SHAPE_MULTIPLIERS["default"])
-        radius -= (req.shrink_px / max(m_w, m_h))
+        radius -= (request.shrink_px / max(m_w, m_h))
         if radius < 1: radius = 1
 
         handlers = {
@@ -112,8 +112,8 @@ class BezelGeometry:
 
         flat_pts = []
         for x, y in pts_user:
-            flat_pts.append(req.cx + x)
-            flat_pts.append(req.cy - y) 
+            flat_pts.append(request.cx + x)
+            flat_pts.append(request.cy - y) 
             
         return flat_pts, is_smooth
 

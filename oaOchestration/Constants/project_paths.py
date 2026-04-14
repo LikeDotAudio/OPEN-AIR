@@ -56,6 +56,7 @@ SNMP_TEMP_MIB = SNMP_DATA_DIR / "OPENAIR-MIB.txt"
 
 # --- Persistent MIB Management ---
 SNMP_CURRENT_MIB = SNMP_DATA_DIR / "current.mib"
+SNMP_OPENAIR_MIB = SNMP_DATA_DIR / "OPEN-AIR.mib"
 SNMP_BRIDGE_SCRIPT = SNMP_DATA_DIR / "master_snmp_bridge.sh"
 
 # Ensure SNMP data root exists

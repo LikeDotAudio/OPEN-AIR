@@ -17,8 +17,8 @@ class Direction(Enum):
 
 def parse_message(message, direction, table) -> Cell:
     """Parses the midi message and returns the corresponding cell in the table
-    :param message: The midi message to parse
-    :param table: The table to search
+    :parameter message: The midi message to parse
+    :parameter table: The table to search
     :return: The cell corresponding to the midi message
     """
 
@@ -39,8 +39,8 @@ def parse_message(message, direction, table) -> Cell:
 
 def get_row_num(row_name: str, table) -> int:
     """Returns the row number of the row with the given name
-    :param row_name: The name of the row to find
-    :param table: The table to search
+    :parameter row_name: The name of the row to find
+    :parameter table: The table to search
     :return: The row number of the row with the given name
     """
 
@@ -57,7 +57,7 @@ def get_row_num(row_name: str, table) -> int:
 
 def get_message_value(message) -> int:
     """Returns the value of the midi message
-    :param message: The midi message to parse
+    :parameter message: The midi message to parse
     :return: The value associated with the midi message
     """
 
@@ -75,7 +75,7 @@ def get_message_value(message) -> int:
 
 def message_data_to_int(data: tuple) -> int:
     """Converts a tuple of bytes to an int
-    :param data: The tuple of bytes to convert
+    :parameter data: The tuple of bytes to convert
     :return: The int value of the tuple of bytes
     """
 
@@ -88,7 +88,7 @@ def message_data_to_int(data: tuple) -> int:
 
 def get_column(message) -> int:
     """Returns the table column number of the midi message
-    :param message: The midi message to parse
+    :parameter message: The midi message to parse
     :return: The column number of the midi message
     """
 
@@ -105,7 +105,7 @@ def get_column(message) -> int:
 
 def get_row_name(message, direction: Direction) -> str:
     """Returns the corresponding row identifier of the midi message
-    :param message: The midi message to parse
+    :parameter message: The midi message to parse
     :return: The row identifier of the midi message
     """
 
@@ -127,8 +127,8 @@ def get_row_name(message, direction: Direction) -> str:
 
 def parse_table(table, cell: Cell) -> tuple[str, int]:
     """Returns the midi message corresponding to the cell in the table. Basically the inverse of parse_message
-    :param table: The table to search
-    :param cell: The cell to find
+    :parameter table: The table to search
+    :parameter cell: The cell to find
     :return: The midi message corresponding to the cell
     """
 

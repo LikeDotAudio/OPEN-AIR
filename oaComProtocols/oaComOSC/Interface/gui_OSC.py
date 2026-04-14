@@ -64,17 +64,13 @@ class OscDashboardImplementation(tk.Frame, TransparencyMixin):
         self._setup_ui()
         
         # --- Standalone Initialization ---
-        # ⚡ STANDALONE: Ensure the OSC manager is initialized with GUI-provided managers if possible.
+        # ⚡ STANDALONE: Link to existing OSC manager instance.
         try:
-            state_cache = self.config_data.get("state_cache_manager")
-            app_inst = self.config_data.get("app_instance")
-            mqtt_conn = self.config_data.get("mqtt_connection_manager") or (getattr(app_inst, "mqtt_connection_manager", None) if app_inst else None)
-            
-            # This will initialize or update the singleton instance
-            OSC_MODULE.get_manager(state_cache_manager=state_cache, mqtt_connection_manager=mqtt_conn)
+            # Simply retrieve the existing singleton (it should already be initialized by Entry.py)
+            manager = OSC_MODULE.get_manager()
             matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🅾️ OscDashboard: OSCManager linked successfully.", "INFO")
         except Exception as e:
-            logger.error(f"🅾️ OscDashboard: Standalone setup failed: {e}")
+            logger.error(f"🅾️ OscDashboard: Standalone link failed: {e}")
 
         # Register for activity callbacks via the Entry point
         try:
@@ -120,23 +116,38 @@ class OscDashboardImplementation(tk.Frame, TransparencyMixin):
         self.status_lbl = tk.Label(header, text="Status: LOADING...", font=("Courier", 10, "bold"), fg="#ffff00", bg="#2b2b2b")
         self.status_lbl.pack(side=tk.RIGHT, padx=20)
 
-        # 2. Control Bar (Simplified: No Start/Stop/Restart/Toggle as OSC is now always online)
-        ctrl_bar = tk.Frame(self, bg="#333333", height=40)
-        ctrl_bar.pack(side=tk.TOP, fill=tk.X, padx=10, pady=5)
+        # 2. Network & Routing Status (FIXED SIZE - TOP)
+        status_frame = tk.LabelFrame(self, text=" Network & Routing Status ", bg="#2b2b2b", fg="#888888")
+        status_frame.pack(side=tk.TOP, fill=tk.X, expand=False, padx=15, pady=5)
+
+        self.info_tree = ttk.Treeview(status_frame, columns=("Value"), show="tree", height=4)
+        self.info_tree.heading("#0", text="Property")
+        self.info_tree.column("#0", width=200)
+        self.info_tree.pack(fill=tk.X, expand=True, padx=5, pady=5)
+
+        # 3. OSC Message Dissector (FIXED SIZE - BOTTOM)
+        # We pack this BEFORE the middle section to ensure it stays at the bottom
+        inspect_frame = tk.Frame(self, bg="#000000", bd=1, relief="sunken", height=200)
+        inspect_frame.pack(side=tk.BOTTOM, fill=tk.X, padx=15, pady=(5, 10))
+        inspect_frame.pack_propagate(False) # Force fixed height
+
+        inspect_header = tk.Frame(inspect_frame, bg="#1a1a1a")
+        inspect_header.pack(side=tk.TOP, fill=tk.X)
+        tk.Label(inspect_header, text="🔍 OSC MESSAGE DISSECTOR", font=("Helvetica", 10, "bold"), fg="#888888", bg="#1a1a1a").pack(side=tk.LEFT, padx=5)
         
-        tk.Label(ctrl_bar, text="MANDATORY SYSTEM SERVICE: ALWAYS ONLINE", 
-                 font=("Helvetica", 9, "bold italic"), fg="#00ff00", bg="#333333").pack(side=tk.LEFT, padx=10, pady=10)
+        tk.Button(inspect_header, text="CLEAR LOG", bg="#333333", fg="#ffffff", font=("Helvetica", 7), 
+                  command=self._clear_monitor, bd=1).pack(side=tk.RIGHT, padx=5, pady=2)
 
-        # 3. Split View (Monitor + Investigation)
-        self.paned = ttk.PanedWindow(self, orient=tk.VERTICAL)
-        self.paned.pack(fill=tk.BOTH, expand=True, padx=10, pady=5)
+        self.inspect_text = tk.Text(inspect_frame, bg="#000000", fg="#00ff00", font=("Courier", 10), bd=0, highlightthickness=0)
+        self.inspect_text.pack(fill=tk.BOTH, expand=True, padx=10, pady=5)
+        self.inspect_text.tag_configure("header", foreground="#ffffff", font=("Courier", 10, "bold"))
 
-        # --- TOP: Live Monitor ---
-        monitor_frame = tk.Frame(self.paned, bg="#2b2b2b")
-        self.paned.add(monitor_frame, weight=3)
+        # 4. Live Monitor (STRETCHABLE - MIDDLE)
+        monitor_frame = tk.Frame(self, bg="#2b2b2b")
+        monitor_frame.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=15, pady=5)
 
         cols = ("Time", "Dir", "Address", "Value", "Topic")
-        self.tree = ttk.Treeview(monitor_frame, columns=cols, show="headings", style="SMPTE.Treeview")
+        self.tree = ttk.Treeview(monitor_frame, columns=cols, show="headings")
         for col in cols:
             self.tree.heading(col, text=col)
             self.tree.column(col, width=100 if col!="Value" and col!="Address" else 200)
@@ -157,30 +168,6 @@ class OscDashboardImplementation(tk.Frame, TransparencyMixin):
         vsb.pack(side=tk.RIGHT, fill=tk.Y)
 
         self.tree.bind("<<TreeviewSelect>>", self.on_select_packet)
-
-        # --- BOTTOM: Investigation Pane ---
-        inspect_frame = tk.Frame(self.paned, bg="#000000", bd=1, relief="sunken")
-        self.paned.add(inspect_frame, weight=2)
-
-        inspect_header = tk.Frame(inspect_frame, bg="#1a1a1a")
-        inspect_header.pack(side=tk.TOP, fill=tk.X)
-        tk.Label(inspect_header, text="🔍 OSC MESSAGE DISSECTOR", font=("Helvetica", 10, "bold"), fg="#888888", bg="#1a1a1a").pack(side=tk.LEFT, padx=5)
-        
-        tk.Button(inspect_header, text="CLEAR LOG", bg="#333333", fg="#ffffff", font=("Helvetica", 7), 
-                  command=self._clear_monitor, bd=1).pack(side=tk.RIGHT, padx=5, pady=2)
-
-        self.inspect_text = tk.Text(inspect_frame, bg="#000000", fg="#00ff00", font=("Courier", 10), bd=0, highlightthickness=0)
-        self.inspect_text.pack(fill=tk.BOTH, expand=True, padx=10, pady=5)
-        self.inspect_text.tag_configure("header", foreground="#ffffff", font=("Courier", 10, "bold"))
-
-        # 4. Bottom Port Status
-        status_frame = tk.LabelFrame(self, text="Network & Routing Status", bg="#2b2b2b", fg="#888888")
-        status_frame.pack(side=tk.BOTTOM, fill=tk.X, expand=False, padx=15, pady=(5, 10))
-
-        self.info_tree = ttk.Treeview(status_frame, columns=("Value"), show="tree", height=4)
-        self.info_tree.heading("#0", text="Property")
-        self.info_tree.column("#0", width=200)
-        self.info_tree.pack(fill=tk.X, expand=True, padx=5, pady=5)
 
     def _clear_monitor(self):
         for item in self.tree.get_children():

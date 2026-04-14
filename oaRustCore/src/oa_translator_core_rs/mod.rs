@@ -1,3 +1,11 @@
+// oaTranslator/Core/oaTranslatorCore_rs/mod.rs
+// Author: Gemini Architect
+// Version: 20260413.1400.1
+//
+// Description: The central translation and protocol bridge core. 
+// Manages the conversion of disparate protocol messages (MQTT, OSC, MIDI) 
+// into unified system state updates.
+
 use pyo3::prelude::*;
 use pyo3::types::PyDict;
 use serde_json::Value;

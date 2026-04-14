@@ -1,6 +1,6 @@
 # oaComProtocols.oaComREST/Interface/routes.py
 # Author: Anthony Peter Kuzub
-# Version: 20260328.1400.1
+# Version: 20260414.1000.1
 #
 # Description: Dynamic API routes with an interactive HTML Tree Explorer.
 
@@ -97,6 +97,27 @@ def create_router(state_cache_manager, protocol_router):
         """
         return HTMLResponse(content=html_content)
 
+    @router.get("/api/v1/system/status")
+    async def get_system_status():
+        from oaComBroker.Core.protocol_router.manager import ProtocolRouter
+        router_inst = ProtocolRouter.get_instance()
+        active = getattr(router_inst, "protocols", ["MQTT", "REST"])
+        return {
+            "status": "operational", 
+            "partition": "CORE", 
+            "active_protocols": active,
+            "instance_id": getattr(router_inst, "GUID", "UNKNOWN")
+        }
+
+    @router.get("/api/v1/system/tree")
+    async def get_full_tree():
+        """Returns the entire system state as a single JSON object."""
+        try:
+            # ⚡ PERFORMANCE: Directly retrieve the Rust cache items
+            return state_cache_manager.rust_cache.to_dict()
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=f"Failed to retrieve tree: {e}")
+
     @router.get("/{topic_path:path}")
     async def dynamic_get(request: Request, topic_path: str = Path(..., description="The MQTT topic path")):
         """
@@ -160,17 +181,5 @@ def create_router(state_cache_manager, protocol_router):
         value = payload.get("value", payload) if isinstance(payload, dict) else payload
         protocol_router.ingest(transport_source="REST", topic=topic_path, value=value)
         return {"status": "success", "topic": topic_path, "value": value}
-
-    @router.get("/api/v1/system/status")
-    async def get_system_status():
-        from oaComBroker.Core.protocol_router.manager import ProtocolRouter
-        router_inst = ProtocolRouter.get_instance()
-        active = getattr(router_inst, "protocols", ["MQTT", "REST"])
-        return {
-            "status": "operational", 
-            "partition": "CORE", 
-            "active_protocols": active,
-            "instance_id": getattr(router_inst, "GUID", "UNKNOWN")
-        }
 
     return router

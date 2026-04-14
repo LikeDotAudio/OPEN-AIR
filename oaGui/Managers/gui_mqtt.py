@@ -137,7 +137,7 @@ class GuiMqttManagerMixin:
                 topic = self.state_mirror_engine.calculate_topic(widget_name, self.base_mqtt_topic_from_path)
                 payload = {
                     "value": value,
-                    "src": "gui",
+                    "source": "gui",
                     "timestamp": time.time(),
                     "GUID": self.state_mirror_engine.GUID,
                 }

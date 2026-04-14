@@ -9,7 +9,7 @@ import sys
 import os
 
 # Add the module path so we can import the rust core
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
 from oaRustCore import oa_audio_mixer_rs as oaaudiomixer_rs
 
@@ -20,8 +20,8 @@ class TestAudioMixerSmoke(unittest.TestCase):
         OPERATE: Import/Check the rust core module.
         CHECK: Verify it exists and is callable.
         """
-        self.assertIsNotNone(mixer_core, "Rust core failed to load.")
-        self.assertTrue(hasattr(mixer_core, "__doc__"), "Core module seems malformed.")
+        self.assertIsNotNone(oaaudiomixer_rs, "Rust core failed to load.")
+        self.assertTrue(hasattr(oaaudiomixer_rs, "__doc__"), "Core module seems malformed.")
 
 if __name__ == '__main__':
     unittest.main()

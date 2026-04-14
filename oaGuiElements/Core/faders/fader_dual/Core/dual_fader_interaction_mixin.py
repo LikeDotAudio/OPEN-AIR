@@ -15,9 +15,9 @@ class DualFaderInteractionMixin:
         def get_dist(value):
             n = (value - self.min_val) / (self.max_val - self.min_val) if (self.max_val - self.min_val) else 0
             dn = n ** (1.0 / self.log_exponent)
-            dim = h if is_vert else w
-            pos = (dim - 40.0) * (1.0 - dn if is_vert else dn) + 20.0
-            return abs(y - pos) if is_vert else abs(x - pos)
+            dimension = h if is_vert else w
+            position = (dimension - 40.0) * (1.0 - dn if is_vert else dn) + 20.0
+            return abs(y - position) if is_vert else abs(x - position)
             
         d1, d2 = get_dist(self.v1_var.get()), get_dist(self.v2_var.get())
         if d1 < 20 and d1 < d2: return "V1"

@@ -1,4 +1,10 @@
-// oaAudioMixer/Core/oaAudioMixer_rs/src/windows_backend.rs
+// oaAudioMixer/Core/oaAudioMixer_rs/windows_backend.rs
+// Author: Gemini Architect
+// Version: 20260413.1400.1
+//
+// Description: Windows-specific audio backend. Interface for 
+// WASAPI/MMDevice volume control and session management.
+
 #[cfg(target_os = "windows")]
 pub struct WindowsAudioManager {}
 #[cfg(target_os = "windows")]

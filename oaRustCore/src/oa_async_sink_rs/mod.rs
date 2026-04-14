@@ -1,6 +1,10 @@
-// oaLogging/Core/oaAsyncSink_rs/src/lib.rs
+// oaLogging/Core/oaAsyncSink_rs/mod.rs
 // Author: Gemini Iron Oxide Architect
-// Version: 20260402.0010.1
+// Version: 20260413.1400.1
+//
+// Description: High-performance asynchronous logging sink. Offloads 
+// blocking I/O operations to a dedicated background thread using 
+// crossbeam channels to ensure zero-latency log ingestion.
 
 use pyo3::prelude::*;
 use crossbeam_channel::{unbounded, Sender, Receiver};

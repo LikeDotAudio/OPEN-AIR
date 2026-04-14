@@ -1,6 +1,9 @@
-// oaGuiElements/Methods/oaNeedleGeometry_rs/src/lib.rs
+// oaGuiElements/Methods/oaNeedleGeometry_rs/mod.rs
 // Author: Anthony Peter Kuzub (via Gemini)
-// Version: 20260401.1000.1
+// Version: 20260413.1400.1
+//
+// Description: Geometric engine for needle-based meters. 
+// Calculates arc segments and rotation matrices for VU and PPM scales.
 
 use pyo3::prelude::*;
 use pyo3::types::{PyDict, PyList};

@@ -36,7 +36,7 @@ class TopicCalculator:
         
         if (widget_id_str.startswith(base_topic_str + "/") or 
             widget_id_str.startswith("/")):
-            res = widget_id_str.lstrip("/")
+            result_topic = widget_id_str.lstrip("/")
         else:
             # Also filter tab_name
             tab_parts = str(tab_name).split("/")
@@ -50,8 +50,8 @@ class TopicCalculator:
                 clean_tab.startswith(base_topic_str)):
                 clean_tab = clean_tab[len(base_topic_str) :].strip("/")
             
-            res = "/".join([p for p in [base_topic_str, clean_tab, 
+            result_topic = "/".join([p for p in [base_topic_str, clean_tab, 
                             widget_id_str.lstrip("/")] if p]).replace("//", "/")
         
-        self._cache[cache_key] = res
-        return res
+        self._cache[cache_key] = result_topic
+        return result_topic

@@ -1,12 +1,13 @@
-use pyo3::prelude::*;
+// oaStyle/Methods/oaCSSParser_rs/mod.rs
+// Author: Gemini Architect
+// Version: 20260413.1400.1
+//
+// Description: Native CSS parser for OPEN-AIR. Extracts style 
+// properties and themes from external stylesheets for GUI injection.
 
-#[pyfunction]
-fn hello() -> PyResult<String> {
-    Ok("Hello from oaCSSParser-rs!".to_string())
-}
+use pyo3::prelude::*;
 
 #[pymodule]
 pub fn oaCSSParser_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
-    m.add_function(wrap_pyfunction!(hello, m)?)?;
     Ok(())
 }

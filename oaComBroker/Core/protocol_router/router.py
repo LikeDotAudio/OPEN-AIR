@@ -85,6 +85,8 @@ class ProtocolRouter:
         self.protocol_prefixes = {
             "GUI": ["OPEN-AIR/GUI", "OPEN-AIR/oaGui"],
             "MIDI": "OPEN-AIR/MIDI",
+            "OSC": "OPEN-AIR/OSC",
+            "SNMP": "OPEN-AIR/System/Monitor/SNMP",
             "NMOS": "OPEN-AIR/NMOS",
             "AES70": "OPEN-AIR/AES70",
             "SMPTE2138": "OPEN-AIR/SMPTE2138",
@@ -92,16 +94,17 @@ class ProtocolRouter:
         }
 
         # ⚡ HUB-AND-SPOKE: Boolean enablement maps
-        # Initialize from config.ini. Default True if config key is missing.
-        self.ingest_enabled = {p: app_constants.get(f"ingest_{p.lower()}", True) or True for p in self.protocols}
-        self.egress_enabled = {p: app_constants.get(f"egress_{p.lower()}", True) or True for p in self.protocols}
+        # Disconnect all routing by default as per user request.
+        # This allows protocols to free-run asynchronously without central bridging.
+        self.ingest_enabled = {p: False for p in self.protocols}
+        self.egress_enabled = {p: False for p in self.protocols}
         
         # ⚡ V3.1.25 LEGACY COMPATIBILITY: Restore N x N Routing Matrix
         # Many UI components still expect this structure for granular visualization.
-        # We synchronize it with the hub-and-spoke maps.
-        self.routing_matrix = {src: {dest: True for dest in self.protocols} for src in self.protocols}
+        self.routing_matrix = {source: {destination: False for destination in self.protocols} for source in self.protocols}
+        # Standard loopback prevention
         for p in self.protocols:
-            self.routing_matrix[p][p] = False # Default loopback prevention
+            self.routing_matrix[p][p] = False
         
         # ⚡ PROTOCOL ROUTING (DEPRECATED)
         self.state_cache = None
@@ -196,11 +199,11 @@ class ProtocolRouter:
     def set_smpte2138_manager(self, m): self.smpte2138_manager = m
     def set_state_cache(self, c): self.state_cache = c
 
-    def set_routing_state(self, source, dest, enabled):
+    def set_routing_state(self, source, destination, enabled):
         """Updates the Hub-and-Spoke enablement maps."""
-        # Note: In the new architecture, we treat 'dest' as the spoke being enabled/disabled.
+        # Note: In the new architecture, we treat 'destination' as the spoke being enabled/disabled.
         s_up = str(source).upper() # Left for compatibility, but deprecated
-        d_up = str(dest).upper()
+        d_up = str(destination).upper()
         
         # Enable/Disable Egress to the destination
         if d_up in self.egress_enabled:
@@ -210,13 +213,13 @@ class ProtocolRouter:
         if s_up in self.ingest_enabled:
             self.ingest_enabled[s_up] = enabled
             
-        matrix_log("comms", "broker", "set_routing_state", f"🔄 [ROUTING] {source} -> {dest} set to {enabled}.", "INFO")
+        matrix_log("comms", "broker", "set_routing_state", f"🔄 [ROUTING] {source} -> {destination} set to {enabled}.", "INFO")
 
-    def set_topic_routing(self, source, dest, send_topic=None, sub_topic=None):
+    def set_topic_routing(self, source, destination, send_topic=None, sub_topic=None):
         """Deprecated."""
         pass
 
-    def get_topic_routing(self, source, dest):
+    def get_topic_routing(self, source, destination):
         """Deprecated."""
         return {"send": None, "subscribe": None}
 
@@ -236,12 +239,15 @@ class ProtocolRouter:
         
         import fnmatch
         emojis = []
-        for dest in self.protocols:
-            if not self.egress_enabled.get(dest, True):
+        for destination in self.protocols:
+            if not self.egress_enabled.get(destination, False):
                 continue
             
             # (No topic filtering in hub-and-spoke model)
-            emojis.append(self.protocol_emojis.get(dest, dest))
+            emojis.append(self.protocol_emojis.get(destination, destination))
+            
+        if not emojis:
+            return "IGNORE (ROUTING DISABLED)"
             
         return " ".join(emojis)
 
@@ -250,6 +256,11 @@ class ProtocolRouter:
     def remove_observer(self, cb): self.monitor.remove_observer(cb)
 
     def ingest(self, transport_source, topic, value, metadata=None):
+        # ⚡ USER REQUEST: Disconnect Command Router.
+        # If all ingest is disabled, we drop the packet before it even enters the pipeline.
+        if not any(self.ingest_enabled.values()):
+            return
+
         # ⚡ ARCHITECTURAL CHOICE: Allow all ingest so messages appear in the firehose.
         # Routing gating is now handled at the Dispatch phase via the N x N matrix.
         normalize_and_ingest(

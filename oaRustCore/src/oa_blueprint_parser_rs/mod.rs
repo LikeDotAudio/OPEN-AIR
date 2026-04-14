@@ -1,3 +1,11 @@
+// oaGuiBuilder/FileReaders/oaBlueprintParser_rs/mod.rs
+// Author: Gemini Architect
+// Version: 20260413.1400.1
+//
+// Description: Native GUI blueprint parser. Ingests JSON-based 
+// interface definitions and converts them into optimized layout 
+// structures for the UI builder.
+
 use pyo3::prelude::*;
 
 #[pyclass(name = "BlueprintParser")]

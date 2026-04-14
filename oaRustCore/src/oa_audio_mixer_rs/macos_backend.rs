@@ -1,4 +1,10 @@
-// oaAudioMixer/Core/oaAudioMixer_rs/src/macos_backend.rs
+// oaAudioMixer/Core/oaAudioMixer_rs/macos_backend.rs
+// Author: Gemini Architect
+// Version: 20260413.1400.1
+//
+// Description: MacOS-specific audio backend. Interface for 
+// CoreAudio volume control and device discovery.
+
 #[cfg(target_os = "macos")]
 pub struct MacosAudioManager {}
 #[cfg(target_os = "macos")]

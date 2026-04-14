@@ -31,6 +31,10 @@ class SnmpTester:
         temp_mib = str(SNMP_TEMP_MIB)
         active_mib_path = mib_path
         
+        # ⚡ TARGET PLUMPING: If walking the absolute root, append .1 to reach the populated v1 tree
+        if base_oid == ".1.3.6.1.4.1.65300":
+            base_oid = f"{base_oid}.1"
+
         # --- RAW MODE: No MIB provided ---
         if not active_mib_path and not mib_content:
             # -Cc: Continue on error (sometimes helpful for walk)

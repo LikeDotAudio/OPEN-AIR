@@ -10,7 +10,7 @@ from oaLogging.Methods.matrix_gate import matrix_log
 import tkinter as tk
 from tkinter import ttk
 from loguru import logger
-from oaOchestration.Constants.project_paths import SNMP_CURRENT_MIB
+from oaOchestration.Constants.project_paths import SNMP_CURRENT_MIB, SNMP_OPENAIR_MIB
 
 # --- GUI FALLBACKS (V3.2.1 Decoupling) ---
 try:
@@ -142,10 +142,16 @@ class SnmpMibImplementation(tk.Frame, TransparencyMixin):
     def save_mib_as(self):
         from tkinter import filedialog
         mib_content = self.text_area.get("1.0", tk.END)
+        
+        # Default to the Assets folder and standard filename
+        initial_dir = os.path.dirname(str(SNMP_OPENAIR_MIB))
+        initial_file = os.path.basename(str(SNMP_OPENAIR_MIB))
+        
         file_path = filedialog.asksaveasfilename(
             defaultextension=".mib",
             filetypes=[("MIB Files", "*.mib"), ("Text Files", "*.txt")],
-            initialfile="OPEN-AIR.mib"
+            initialdir=initial_dir,
+            initialfile=initial_file
         )
         if file_path:
             try:

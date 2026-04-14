@@ -1,6 +1,9 @@
-// oaTests/Methods/oaLogProcessor_rs/src/lib.rs
+// oaTests/Methods/oaLogProcessor_rs/mod.rs
 // Author: Gemini Iron Oxide Architect
-// Version: 20260401.2330.1
+// Version: 20260413.1400.1
+//
+// Description: Automated log analysis engine for F.I.R.S.T. testing. 
+// Scans real-time logs for error patterns and performance regressions.
 
 use pyo3::prelude::*;
 use std::fs::File;

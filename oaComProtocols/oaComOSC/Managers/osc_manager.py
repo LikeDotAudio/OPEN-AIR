@@ -14,8 +14,8 @@ from loguru import logger
 from oaLogging.Core.logger import OSC_LOGGER as osc_logger
 from oaLogging.Methods.matrix_gate import matrix_log
 from oaConfigurationManager.FileReaders.config_reader import Config
-from ..Workers.osc_rx_server import OscRxServer
-from ..Workers.osc_tx_client import OscTxClient
+from oaComProtocols.oaComOSC.Workers.osc_rx_server import OscRxServer
+from oaComProtocols.oaComOSC.Workers.osc_tx_client import OscTxClient
 from oaOchestration.Methods.network_utils import get_local_ip
 
 app_constants = Config.get_instance()
@@ -28,12 +28,13 @@ class OSCManager:
     Centralizes all OSC logic away from the UI.
     """
 
-    def __init__(self, state_cache_manager=None, mqtt_connection_manager=None, 
+    def __init__(self, context=None, state_cache_manager=None, mqtt_connection_manager=None, 
                  run_bridge=True):
         # ⚡ ALWAYS ONLINE: OSC Bridge is now a mandatory system service.
         # We ignore the run_bridge parameter and force it to True where safe.
         partition_id = os.environ.get("OPEN_AIR_PARTITION_ID", "CORE")
         
+        self.context = context
         self.run_bridge = True
         if partition_id == "UI":
              matrix_log("comms", "osc", "__init__",
@@ -45,8 +46,8 @@ class OSCManager:
         from oaComBroker.Core.protocol_router.manager import ProtocolRouter
         self.protocol_router = ProtocolRouter.get_instance()
         
-        self.state_cache_manager = state_cache_manager
-        self.mqtt_connection_manager = mqtt_connection_manager
+        self.state_cache_manager = state_cache_manager or (context.state_cache_manager if context else None)
+        self.mqtt_connection_manager = mqtt_connection_manager or (context.mqtt_connection_manager if context else None)
         
         # ⚡ STANDALONE: Attempt to deduce managers if missing
         if not self.state_cache_manager:
@@ -79,15 +80,98 @@ class OSCManager:
         # Monitor callbacks for GUI
         self._monitor_callbacks = []
         
+        # ⚡ STANDALONE MQTT TRANSPORT:
+        # We use an internal MQTT client for standalone mode to relay commands.
+        self._internal_mqtt = None
+        self._internal_mqtt_connected = False
+
         # ⚡ THREAD SAFETY: Protect shared mutable state
         self._state_lock = threading.RLock()
 
         # Protocol Router Sync Logic: Listen for remote/local activity
-        from oaComBroker.Core.protocol_router.manager import ProtocolRouter
-        ProtocolRouter.get_instance().register_cache_observer(self._on_protocol_event)
+        try:
+            from oaComBroker.Core.protocol_router.manager import ProtocolRouter
+            ProtocolRouter.get_instance().register_cache_observer(self._on_protocol_event)
+        except Exception:
+            pass
 
-        # ⚡ AUTO-START: OSC is now always online
+        # ⚡ AUTO-START: OSC is a mandatory system service and must be online immediately.
         self.start()
+
+    def _setup_internal_mqtt(self):
+        """
+        Initializes a private MQTT client for the OSC module.
+        Used primarily in standalone mode to relay commands from the MQTT fabric.
+        """
+        try:
+            import paho.mqtt.client as mqtt
+            from oaComProtocols.oaComMQTT.Core.mqtt_message import MqttMessage
+            
+            client_id = f"OSC-STANDALONE-{int(time.time())}"
+            
+            # ⚡ VERSION GUARD: Support both Paho v1.x and v2.x
+            if hasattr(mqtt, 'CallbackVersion'):
+                self._internal_mqtt = mqtt.Client(callback_api_version=mqtt.CallbackVersion.VERSION2, client_id=client_id)
+            else:
+                self._internal_mqtt = mqtt.Client(client_id=client_id)
+            
+            def on_connect(client, userdata, flags, rc, properties=None):
+                # Handle both v1 and v2 callback signatures
+                # In v1, rc is passed directly. In v2, it's properties.
+                # rc == 0 means success
+                if rc == 0:
+                    self._internal_mqtt_connected = True
+                    matrix_log("comms", "osc", "mqtt_connect", "✅ [OSC] Internal MQTT Connected.", "SUCCESS")
+                    client.subscribe("OPEN-AIR/#")
+                else:
+                    matrix_log("comms", "osc", "mqtt_connect", f"❌ [OSC] Internal MQTT Connection Failed: {rc}", "ERROR")
+
+            def on_message(client, userdata, msg):
+                # Relay to internal handler
+                try:
+                    message = MqttMessage(topic=msg.topic, payload=msg.payload, qos=msg.qos, retain=msg.retain)
+                    self._handle_mqtt_activity(message)
+                except Exception as e:
+                    logger.error(f"[OSC] MQTT Internal handling failure: {e}")
+
+            self._internal_mqtt.on_connect = on_connect
+            self._internal_mqtt.on_message = on_message
+            
+            # Use background thread for MQTT loop
+            host = getattr(app_constants, "MQTT_BROKER_HOST", "localhost")
+            port = getattr(app_constants, "MQTT_BROKER_PORT", 1883)
+            
+            self._internal_mqtt.connect_async(host, port, 60)
+            self._internal_mqtt.loop_start()
+            
+        except Exception as e:
+            matrix_log("comms", "osc", "mqtt_init", f"⚠️ [OSC] Internal MQTT initialization failed: {e}", "WARNING")
+
+    def _handle_mqtt_activity(self, message):
+        """Standardizes MQTT activity for the protocol event handler."""
+        if not self._running: return
+        
+        topic = message.topic
+        payload = message.get_json_payload()
+        
+        # Determine logical source from payload if present
+        source = "MQTT"
+        value = payload
+        meta = {}
+        
+        if isinstance(payload, dict):
+            source = payload.get("source", "MQTT").upper()
+            value = payload.get("value") if "value" in payload else payload
+            meta = payload.get("metadata", payload)
+
+        synthetic_message = {
+            "source": "MQTT",
+            "logical_source": source,
+            "topic": topic,
+            "value": value,
+            "meta": meta
+        }
+        self._on_protocol_event(synthetic_message)
 
     def _broadcast_status_loop(self):
         """Periodically publishes OSC bridge status to MQTT for UI sync."""
@@ -95,13 +179,17 @@ class OSCManager:
             with self._state_lock:
                 if not self._running: break
                 
-            if self.state_cache_manager:
+            if self.state_cache_manager and hasattr(self.state_cache_manager, 'handle_external_update'):
                 status = self.get_status()
                 self.state_cache_manager.handle_external_update(
                     "OPEN-AIR/System/Status/OSC/Bridge", 
                     status, 
                     source="OSC-STATUS"
                 )
+            elif self.mqtt_connection_manager and hasattr(self.mqtt_connection_manager, 'publish'):
+                status = self.get_status()
+                self.mqtt_connection_manager.publish("OPEN-AIR/System/Status/OSC/Bridge", status)
+                
             time.sleep(5.0)
 
     def get_status(self):
@@ -188,10 +276,38 @@ class OSCManager:
             self._running = True
         
         self._start_workers()
+        
+        # ⚡ STANDALONE: If we don't have a context or managers, we act as a standalone bridge
+        if not self.mqtt_connection_manager:
+            self._setup_internal_mqtt()
 
     def stop(self):
-        """DEPRECATED: OSC Bridge is now always online."""
-        osc_logger.warning("OSC Bridge Stop Request Ignored: Always Online.")
+        """Stops the OSC bridge services and internal MQTT."""
+        with self._state_lock:
+            if not self._running: return
+            self._running = False
+            
+        # Stop internal MQTT if active
+        if self._internal_mqtt:
+            try:
+                self._internal_mqtt.loop_stop()
+                self._internal_mqtt.disconnect()
+                matrix_log("comms", "osc", "stop", "🛑 [OSC] Internal MQTT Disconnected.", "INFO")
+            except Exception: pass
+            self._internal_mqtt = None
+
+        # Terminate workers
+        if self.rx_server:
+            try: self.rx_server.stop()
+            except: pass
+            self.rx_server = None
+            
+        if self.tx_client:
+            try: self.tx_client.stop()
+            except: pass
+            self.tx_client = None
+            
+        matrix_log("comms", "osc", "stop", "🛑 [OSC] Bridge Services Offline.", "INFO")
 
 
     def handle_incoming_osc(self, address, value):
@@ -218,8 +334,19 @@ class OSCManager:
                 metadata=meta
             )
         else:
-            from oaComBroker.Core.protocol_router.manager import ProtocolRouter
-            ProtocolRouter.get_instance().ingest("OSC", topic, value, meta)
+            try:
+                from oaComBroker.Core.protocol_router.manager import ProtocolRouter
+                ProtocolRouter.get_instance().ingest("OSC", topic, value, meta)
+            except Exception:
+                pass
+        
+        # 3. ⚡ STANDALONE RELAY: If we have an internal MQTT client, publish there too
+        if self._internal_mqtt and self._internal_mqtt_connected:
+            try:
+                payload = {"value": value, "source": "OSC", "timestamp": time.time()}
+                self._internal_mqtt.publish(topic, orjson.dumps(payload).decode())
+            except Exception as e:
+                logger.error(f"[OSC] Failed to relay to internal MQTT: {e}")
         
         self._notify_monitor("RX", address, value, topic)
 

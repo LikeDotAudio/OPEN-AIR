@@ -57,6 +57,7 @@ class SnmpStatePersister:
 
         self.state_file = str(SNMP_STATE_FILE)
         self._last_topic_count = 0
+        self._last_persisted_values = {} # ⚡ DELTA TRACKING: Only notify monitor on change
 
     def start(self):
         """Starts the background thread for state persistence."""
@@ -111,6 +112,7 @@ class SnmpStatePersister:
 
                 sorted_items = sorted(oid_map_data, key=lambda x: x[1]['topic'])
                 lines = []
+                current_values = {} # Build fresh map for this loop
 
                 for oid, data in sorted_items:
                     topic = data['topic']
@@ -134,8 +136,15 @@ class SnmpStatePersister:
 
                     val_str = data['value']
                     lines.append(f"{oid}:{val_str}")
-                    # Notify monitor about outgoing data
-                    self._notify_monitor("TX_DUMP", oid, val_str, topic, data)
+                    current_values[oid] = val_str
+                    
+                    # ⚡ DELTA NOTIFICATION: Only notify monitor if the value has changed
+                    # This prevents the Activity MQTT topic from being flooded every second.
+                    if self._last_persisted_values.get(oid) != val_str:
+                        self._notify_monitor("TX_DUMP", oid, val_str, topic, data)
+                
+                # Update tracking for next loop
+                self._last_persisted_values = current_values
                 
                 # Only perform file operations if the bridge is active and there's data
                 if self.run_bridge and lines:

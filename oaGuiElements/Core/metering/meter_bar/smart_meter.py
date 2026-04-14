@@ -213,10 +213,10 @@ class SmartMeter(tk.Canvas, SafeAfterMixin):
         return mapping.get(self.configuration.label_position, tk.TOP)
 
     def _get_canvas_pack_side(self):
-        pos = self.configuration.label_position
-        if pos == "left": return tk.LEFT
-        if pos == "right": return tk.RIGHT
-        if pos == "bottom": return tk.BOTTOM
+        position = self.configuration.label_position
+        if position == "left": return tk.LEFT
+        if position == "right": return tk.RIGHT
+        if position == "bottom": return tk.BOTTOM
         return tk.TOP
 
     def _get_label_anchor(self):

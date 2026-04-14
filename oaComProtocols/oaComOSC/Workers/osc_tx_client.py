@@ -48,6 +48,7 @@ class OscTxClient:
         self.port = port
         self.client = None
         self._use_rust = HAS_OSC_RS
+        self._last_err_time = 0.0
 
     def start(self):
         """Initializes the OSC client."""
@@ -90,7 +91,15 @@ class OscTxClient:
                 if _is_debug():
                     osc_logger.debug(f"📤📡📤 [OSC] TX: {address} -> {value}")
             except Exception as e:
-                osc_logger.error(f"❌🚫🛑 [OSC] TX Error: {e}")
+                import time
+                err_str = str(e).lower()
+                if "connection refused" in err_str or "os error 111" in err_str:
+                    now = time.time()
+                    if now - self._last_err_time > 5.0:
+                        osc_logger.warning(f"⚠️📡🛑 [OSC] TX Target offline: {self.host}:{self.port} (Connection Refused). Suppressing further warnings for 5s.")
+                        self._last_err_time = now
+                else:
+                    osc_logger.error(f"❌🚫🛑 [OSC] TX Error: {e}")
 
     def stop(self):
         """Stops the OSC client."""

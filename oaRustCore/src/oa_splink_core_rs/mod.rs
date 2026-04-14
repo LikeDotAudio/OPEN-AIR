@@ -1,6 +1,9 @@
-// oaSplinker/Methods/oaSplinkCore-rs/src/lib.rs
+// oaSplinker/Methods/oaSplinkCore_rs/mod.rs
 // Author: Anthony Peter Kuzub (via Gemini)
-// Version: 20260331.1440.1
+// Version: 20260413.1400.1
+//
+// Description: Native SPLINK calculation engine. Handles 
+// high-frequency fader curves and parameter translation in Rust.
 
 use pyo3::prelude::*;
 use pyo3::types::{PyDict, PyList, PyInt};
@@ -162,14 +165,8 @@ impl SplinkPipeline {
     }
 }
 
-#[pyfunction]
-fn sum_as_string(a: usize, b: usize) -> PyResult<String> {
-    Ok((a + b).to_string())
-}
-
 #[pymodule]
 pub fn oasplinkcore_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<SplinkPipeline>()?;
-    m.add_function(wrap_pyfunction!(sum_as_string, m)?)?;
     Ok(())
 }

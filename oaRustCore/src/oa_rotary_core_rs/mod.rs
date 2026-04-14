@@ -1,6 +1,9 @@
-// oaGuiElements/Methods/oaRotaryCore_rs/src/lib.rs
+// oaGuiElements/Methods/oaRotaryCore_rs/mod.rs
 // Author: Anthony Peter Kuzub (via Gemini)
-// Version: 20260331.2355.1
+// Version: 20260413.1400.1
+//
+// Description: Native rotary encoder logic. Handles angle 
+// calculations and ballistic smoothing for virtual knobs.
 
 use pyo3::prelude::*;
 use std::f64::consts::PI;

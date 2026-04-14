@@ -73,11 +73,9 @@ class MarkerGoGetterWorker:
         self.repository.on_marker_update(topic, payload)
 
     def _handle_start_stop(self, topic, payload):
+        """Processes START/STOP commands with robust payload normalization."""
         try:
-            try:
-                is_start_command = str(orjson.loads(payload).get("value")).lower() == "true"
-            except:
-                is_start_command = str(payload).lower() == "true"
+            is_start_command = self._is_payload_true(payload)
 
             if is_start_command and (self.processing_thread is None or not self.processing_thread.is_alive()):
                 matrix_log("ui", "telemetry", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🟢 START command received. Beginning peak hunter loop.", "DEBUG")
@@ -92,6 +90,22 @@ class MarkerGoGetterWorker:
                 self.processing_thread = None
         except Exception as e:
             logger.error(f"❌ Error in start/stop handler: {e}")
+
+    def _is_payload_true(self, payload) -> bool:
+        """Unifies JSON and raw-string truth evaluation for MQTT payloads."""
+        if not payload: return False
+        
+        # 1. Attempt JSON parsing (primary)
+        try:
+            data = orjson.loads(payload)
+            if isinstance(data, dict):
+                return str(data.get("value", "")).lower() == "true"
+        except (orjson.JSONDecodeError, TypeError, ValueError):
+            pass
+            
+        # 2. Fallback to raw string evaluation
+        raw_str = payload.decode("utf-8") if isinstance(payload, bytes) else str(payload)
+        return raw_str.lower() == "true"
 
     def _set_instrument_frequency_span(self):
         """Calculates and updates instrument span with buffer."""

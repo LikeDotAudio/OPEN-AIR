@@ -4,28 +4,6 @@ from pathlib import Path
 
 # 1. Setup Environment
 current_path = Path(__file__).resolve()
-# project_root/oaGui/Assets/Assets/right_50/bottom_90/44_REST/gui_REST.py
-# -> project_root is 6 levels up
-root_path = current_path.parents[5]
-if str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
-
-import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
-# 44_REST/gui_REST.py
-# Author: Anthony Peter Kuzub
-# Version: 20260328.1430.1
-#
-# Description: Advanced REST API Monitor & Control Hub with Payload Logging.
-
-import tkinter as tk
-from tkinter import ttk
-import datetime
-import webbrowser
-from pathlib import Path
-
-# --- Path Guard: Ensure project root is in sys.path ---
-current_path = Path(__file__).resolve()
 root_path = current_path
 for parent in current_path.parents:
     if (parent / "oaComBroker").exists() and (parent / "oaGui/Assets").exists():
@@ -34,6 +12,20 @@ for parent in current_path.parents:
 
 if str(root_path) not in sys.path:
     sys.path.insert(0, str(root_path))
+
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
+# 44_REST/gui_REST.py
+# Author: Anthony Peter Kuzub
+# Version: 20260414.0020.1
+#
+# Description: Advanced REST API Monitor & Control Hub.
+
+import tkinter as tk
+from tkinter import ttk
+import datetime
+import webbrowser
+from pathlib import Path
 
 import oaComProtocols.oaComREST.Entry as REST_MODULE
 
@@ -56,6 +48,7 @@ class RestDashboard(tk.Frame, TransparencyMixin):
         # Extract non-Tkinter arguments
         self.config_data = kwargs.pop("config", {})
         self.json_path = kwargs.pop("json_path", None)
+        self._destroyed = False
         
         super().__init__(parent, **kwargs)
         
@@ -64,7 +57,7 @@ class RestDashboard(tk.Frame, TransparencyMixin):
         # --- Standalone Initialization ---
         try:
             state_cache = self.config_data.get("state_cache_manager")
-            protocol_router = self.config_data.get("protocol_router") or (getattr(self.config_data.get("app_instance"), "protocol_router", None) if self.config_data.get("app_instance") else None)
+            protocol_router = self.config_data.get("protocol_router")
             
             REST_MODULE.get_manager(state_cache_manager=state_cache, protocol_router=protocol_router)
             matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🌐 RestDashboard: RESTManager linked successfully.", "INFO")
@@ -78,6 +71,13 @@ class RestDashboard(tk.Frame, TransparencyMixin):
             logger.error(f"RestDashboard: Failed to register callback: {e}")
             
         self._refresh_ui()
+        self._schedule_refresh()
+
+    def _schedule_refresh(self):
+        """Schedules a periodic status check."""
+        self._refresh_ui()
+        if not self._destroyed:
+            self.after(2000, self._schedule_refresh)
 
     def _setup_ui(self):
         self.pack(fill=tk.BOTH, expand=True)
@@ -114,7 +114,6 @@ class RestDashboard(tk.Frame, TransparencyMixin):
 
         tk.Label(monitor_frame, text="📡 LIVE TRAFFIC", font=("Helvetica", 8, "bold"), fg="#888888", bg="#2b2b2b").pack(anchor="w")
 
-        # ⚡ ADDED 'Payload' column
         cols = ("Time", "Method", "Path", "Status", "Payload")
         self.tree = ttk.Treeview(monitor_frame, columns=cols, show="headings", height=8)
         for col in cols:
@@ -137,7 +136,7 @@ class RestDashboard(tk.Frame, TransparencyMixin):
         self.tree.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
         vsb.pack(side=tk.RIGHT, fill=tk.Y)
 
-        # --- BOTTOM: Routes & Tutorial ---
+        # --- BOTTOM: Routes & Status ---
         info_frame = tk.Frame(self.paned, bg="#2b2b2b")
         self.paned.add(info_frame, weight=4)
 
@@ -154,22 +153,15 @@ class RestDashboard(tk.Frame, TransparencyMixin):
         self.routes_tree.column("Methods", width=150)
         self.routes_tree.pack(fill=tk.BOTH, expand=True)
 
-        tutorial_frame = tk.Frame(tabs, bg="#1a1a1a")
-        tabs.add(tutorial_frame, text=" QUICK START GUIDE ")
-        
-        help_text = tk.Text(tutorial_frame, bg="#1a1a1a", fg="#cccccc", font=("Courier", 9), bd=0, padx=10, pady=10)
-        help_text.pack(fill=tk.BOTH, expand=True)
-        help_text.insert(tk.END, "OPEN-AIR REST API TUTORIAL\n", "bold")
-        help_text.insert(tk.END, "==========================\n\n")
-        help_text.insert(tk.END, "1. GETTING STATE:\n")
-        help_text.insert(tk.END, "   GET http://HOST:PORT/PATH/TO/TOPIC\n\n")
-        help_text.insert(tk.END, "2. SETTING STATE:\n")
-        help_text.insert(tk.END, "   POST http://HOST:PORT/PATH/TO/TOPIC\n")
-        help_text.insert(tk.END, "   Body: { \"value\": NEW_VALUE }\n")
-        help_text.tag_configure("bold", foreground="#ffffff", font=("Courier", 10, "bold"))
-        help_text.configure(state="disabled")
+        # 4. Footer Info / Network Status
+        status_frame = tk.LabelFrame(self, text="Network & Routing Status", bg="#2b2b2b", fg="#888888")
+        status_frame.pack(side=tk.BOTTOM, fill=tk.X, expand=False, padx=15, pady=(5, 10))
 
-        # 4. Footer Info
+        self.info_tree = ttk.Treeview(status_frame, columns=("Value"), show="tree", height=4)
+        self.info_tree.heading("#0", text="Property")
+        self.info_tree.column("#0", width=200)
+        self.info_tree.pack(fill=tk.X, expand=True, padx=5, pady=5)
+
         self.footer_lbl = tk.Label(self, text="Server URL: -", bg="#2b2b2b", fg="#888888", font=("Helvetica", 8))
         self.footer_lbl.pack(side=tk.BOTTOM, fill=tk.X, padx=10, pady=2)
 
@@ -187,24 +179,34 @@ class RestDashboard(tk.Frame, TransparencyMixin):
         status = REST_MODULE.get_status()
         
         if status.get("running"):
-            self.status_lbl.configure(text=f"ACTIVE: {status['host']}:{status['port']}", fg="#00ff00")
+            self.status_lbl.configure(text=f"🟢 ONLINE | PORT: {status['port']}", fg="#00ff00")
             self.footer_lbl.configure(text=f"Server URL: {status['url']} (Swagger Docs: {status['docs_url']})")
         else:
-            self.status_lbl.configure(text="OFFLINE", fg="#ff4444")
+            self.status_lbl.configure(text="🔴 OFFLINE", fg="#ff4444")
             self.footer_lbl.configure(text="Server URL: OFFLINE")
 
-        # Update Routes Tree
+        # Update Detail Tree
         for item in self.routes_tree.get_children():
             self.routes_tree.delete(item)
             
         for route in status.get("routes", []):
             self.routes_tree.insert("", "end", text=route["path"], values=(", ".join(route["methods"]),))
 
+        # Update Network Status (Footer section)
+        for item in self.info_tree.get_children():
+            self.info_tree.delete(item)
+            
+        self.info_tree.insert("", "end", text="Listening Host", values=(status["host"],))
+        self.info_tree.insert("", "end", text="REST Port", values=(status["port"],))
+        self.info_tree.insert("", "end", text="Service Status", values=("Running" if status["running"] else "Stopped",))
+        self.info_tree.insert("", "end", text="Initialization", values=("Success" if status["initialized"] else "Failed",))
+
     def on_rest_activity(self, method, path, status_code, payload=None):
         """Callback for real-time traffic."""
         self.after(0, lambda: self._add_log_entry(method, path, status_code, payload))
 
     def _add_log_entry(self, method, path, status_code, payload=None):
+        if self._destroyed: return
         now = datetime.datetime.now()
         timestamp = now.strftime("%H:%M:%S.%f")[:-3]
         
@@ -221,6 +223,7 @@ class RestDashboard(tk.Frame, TransparencyMixin):
     def render(self): pass
 
     def destroy(self):
+        self._destroyed = True
         try: 
             REST_MODULE.remove_monitor_callback(self.on_rest_activity)
         except Exception: pass

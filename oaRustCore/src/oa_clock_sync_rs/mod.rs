@@ -1,6 +1,10 @@
-// oaWatchdog/Methods/oaClockSync_rs/src/lib.rs
+// oaWatchdog/Methods/oaClockSync_rs/mod.rs
 // Author: Gemini Iron Oxide Architect
-// Version: 20260402.0010.1
+// Version: 20260413.1400.1
+//
+// Description: System clock synchronization utility. Provides 
+// high-precision UTP (Universal Time Protocol) timestamps for 
+// event-driven observability.
 
 use pyo3::prelude::*;
 use std::time::{SystemTime, UNIX_EPOCH};

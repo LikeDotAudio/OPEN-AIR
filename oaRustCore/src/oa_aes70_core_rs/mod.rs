@@ -1,6 +1,10 @@
-// oaComAES70/Methods/oaAES70Core-rs/src/lib.rs
+// oaComAES70/Methods/oaAES70Core_rs/mod.rs
 // Author: Anthony Peter Kuzub (via Gemini)
-// Version: 20260331.1520.2
+// Version: 20260413.1400.1
+//
+// Description: Native AES70 protocol implementation. Handles 
+// binary OCP.1 packet framing and parsing for professional 
+// audio control networks.
 
 use pyo3::prelude::*;
 use pyo3::types::{PyDict, PyBytes, PyList};

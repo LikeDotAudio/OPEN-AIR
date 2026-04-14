@@ -1,6 +1,9 @@
-// oaGuiBackground/Methods/oaPatternEngine_rs/src/lib.rs
+// oaGuiBackground/Methods/oaPatternEngine_rs/mod.rs
 // Author: Anthony Peter Kuzub (via Gemini)
-// Version: 20260331.2300.4
+// Version: 20260413.1400.1
+//
+// Description: Procedural background generation engine. 
+// Utilizes Perlin noise and deterministic RNG for dynamic UI textures.
 
 use pyo3::prelude::*;
 use pyo3::types::{PyBytes, PyDict, PyList};
@@ -34,8 +37,8 @@ impl PatternEngine {
         };
 
         let mut img = GrayImage::new(src_w, src_h);
-        for (pos_x, pos_y, pixel) in img.enumerate_pixels_mut() {
-            let value = perlin.get([pos_x as f64 * sigma * 0.01, pos_y as f64 * sigma * 0.01]);
+        for (position_x, position_y, pixel) in img.enumerate_pixels_mut() {
+            let value = perlin.get([position_x as f64 * sigma * 0.01, position_y as f64 * sigma * 0.01]);
             let normalized_value = ((value + 1.0) * COLOR_NORMALIZATION_FACTOR) as u8;
             *pixel = Luma([normalized_value]);
         }
@@ -43,8 +46,8 @@ impl PatternEngine {
         let resized = imageops::resize(&img, width, height, imageops::FilterType::Lanczos3);
         
         let mut rgba = RgbaImage::new(width, height);
-        for (pos_x, pos_y, pixel) in rgba.enumerate_pixels_mut() {
-            let gray = resized.get_pixel(pos_x, pos_y)[0];
+        for (position_x, position_y, pixel) in rgba.enumerate_pixels_mut() {
+            let gray = resized.get_pixel(position_x, position_y)[0];
             *pixel = Rgba([gray, gray, gray, 255]);
         }
 
@@ -53,14 +56,14 @@ impl PatternEngine {
 
     /// Generates a hammered metal texture.
     fn generate_hammered<'py>(&self, py: Python<'py>, width: u32, height: u32, seed: u32) -> Bound<'py, PyBytes> {
-        let raw_pixels: Vec<u8> = (0..height).into_par_iter().flat_map(|pos_y| {
+        let raw_pixels: Vec<u8> = (0..height).into_par_iter().flat_map(|position_y| {
             let mut row = Vec::with_capacity((width * 4) as usize);
             let perlin_inner = Perlin::new(seed);
             let dimple_perlin = Perlin::new(seed + 1);
             
-            for pos_x in 0..width {
-                let base = perlin_inner.get([pos_x as f64 * 0.1, pos_y as f64 * 0.1]);
-                let dimples = dimple_perlin.get([pos_x as f64 * 0.02, pos_y as f64 * 0.02]);
+            for position_x in 0..width {
+                let base = perlin_inner.get([position_x as f64 * 0.1, position_y as f64 * 0.1]);
+                let dimples = dimple_perlin.get([position_x as f64 * 0.02, position_y as f64 * 0.02]);
                 
                 let combined = (base * 0.7 + dimples * 0.3 + 1.0) * COLOR_NORMALIZATION_FACTOR;
                 let value = combined.clamp(0.0, 255.0) as u8;
@@ -83,20 +86,20 @@ impl PatternEngine {
             let value = (255.0 * alpha_factor) as u8;
             
             // Draw a rectangle "outline" at depth index_i
-            for pos_x in index_i..(width - index_i) {
-                img.put_pixel(pos_x, index_i, Rgba([value, value, value, 255]));
-                img.put_pixel(pos_x, height - 1 - index_i, Rgba([value, value, value, 255]));
+            for position_x in index_i..(width - index_i) {
+                img.put_pixel(position_x, index_i, Rgba([value, value, value, 255]));
+                img.put_pixel(position_x, height - 1 - index_i, Rgba([value, value, value, 255]));
             }
-            for pos_y in index_i..(height - index_i) {
-                img.put_pixel(index_i, pos_y, Rgba([value, value, value, 255]));
-                img.put_pixel(width - 1 - index_i, pos_y, Rgba([value, value, value, 255]));
+            for position_y in index_i..(height - index_i) {
+                img.put_pixel(index_i, position_y, Rgba([value, value, value, 255]));
+                img.put_pixel(width - 1 - index_i, position_y, Rgba([value, value, value, 255]));
             }
         }
         
         // Fill the center
-        for pos_y in depth..(height.saturating_sub(depth)) {
-            for pos_x in depth..(width.saturating_sub(depth)) {
-                img.put_pixel(pos_x, pos_y, Rgba([255, 255, 255, 255]));
+        for position_y in depth..(height.saturating_sub(depth)) {
+            for position_x in depth..(width.saturating_sub(depth)) {
+                img.put_pixel(position_x, position_y, Rgba([255, 255, 255, 255]));
             }
         }
 
@@ -141,11 +144,11 @@ impl PatternEngine {
         for item in creases.iter() {
             let dict = item.downcast::<PyDict>()?;
             let orientation: String = dict.get_item("orientation")?.and_then(|v| v.extract::<String>().ok()).unwrap_or_else(|| "horizontal".to_string());
-            let pos: f64 = dict.get_item("position_pct")?.and_then(|v| v.extract::<f64>().ok()).unwrap_or(0.5);
+            let position: f64 = dict.get_item("position_pct")?.and_then(|v| v.extract::<f64>().ok()).unwrap_or(0.5);
             if orientation == "horizontal" {
-                h_creases.push(pos);
+                h_creases.push(position);
             } else {
-                v_creases.push(pos);
+                v_creases.push(position);
             }
         }
         
@@ -209,8 +212,8 @@ impl PatternEngine {
             }
         }
         
-        for pos in v_creases {
-            let x = (width as f64 * pos) as u32;
+        for position in v_creases {
+            let x = (width as f64 * position) as u32;
             if x > 0 && x < width - 1 {
                 for y in 0..height {
                     self.internal_blend_pixel(img.get_pixel_mut(x - 1, y), [255, 255, 255, 60]);
@@ -325,7 +328,7 @@ impl PatternEngine {
                         }
                     }
 
-                    // Composite
+                    // Compositionite
                     let pixel = img.get_pixel(x, y).0;
                     if pixel[3] == 0 {
                         img.put_pixel(x, y, Rgba([r, g, b, 255]));
@@ -349,7 +352,7 @@ impl PatternEngine {
         let dy = (y2 - y1).abs();
         let sx = if x1 < x2 { 1.0 } else { -1.0 };
         let sy = if y1 < y2 { 1.0 } else { -1.0 };
-        let mut err = dx - dy;
+        let mut error_accumulator = dx - dy;
 
         let mut x = x1;
         let mut y = y1;
@@ -360,27 +363,27 @@ impl PatternEngine {
             }
 
             if (x - x2).abs() < 0.1 && (y - y2).abs() < 0.1 { break; }
-            let e2 = 2.0 * err;
+            let e2 = 2.0 * error_accumulator;
             if e2 > -dy {
-                err -= dy;
+                error_accumulator -= dy;
                 x += sx;
             }
             if e2 < dx {
-                err += dx;
+                error_accumulator += dx;
                 y += sy;
             }
         }
     }
 
-    fn internal_blend_pixel(&self, pixel: &mut Rgba<u8>, src: [u8; 4]) {
-        let alpha_src = src[3] as f32 / 255.0;
+    fn internal_blend_pixel(&self, pixel: &mut Rgba<u8>, source: [u8; 4]) {
+        let alpha_src = source[3] as f32 / 255.0;
         let alpha_dst = pixel[3] as f32 / 255.0;
         
         let out_alpha = alpha_src + alpha_dst * (1.0 - alpha_src);
         if out_alpha > 0.0 {
-            pixel[0] = ((src[0] as f32 * alpha_src + pixel[0] as f32 * alpha_dst * (1.0 - alpha_src)) / out_alpha) as u8;
-            pixel[1] = ((src[1] as f32 * alpha_src + pixel[1] as f32 * alpha_dst * (1.0 - alpha_src)) / out_alpha) as u8;
-            pixel[2] = ((src[2] as f32 * alpha_src + pixel[2] as f32 * alpha_dst * (1.0 - alpha_src)) / out_alpha) as u8;
+            pixel[0] = ((source[0] as f32 * alpha_src + pixel[0] as f32 * alpha_dst * (1.0 - alpha_src)) / out_alpha) as u8;
+            pixel[1] = ((source[1] as f32 * alpha_src + pixel[1] as f32 * alpha_dst * (1.0 - alpha_src)) / out_alpha) as u8;
+            pixel[2] = ((source[2] as f32 * alpha_src + pixel[2] as f32 * alpha_dst * (1.0 - alpha_src)) / out_alpha) as u8;
             pixel[3] = (out_alpha * 255.0) as u8;
         }
     }

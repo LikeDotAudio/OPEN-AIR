@@ -1,6 +1,10 @@
-// oaComREST/Methods/oaFastAPI-rs/src/lib.rs
+// oaComREST/Methods/oaFastAPI_rs/mod.rs
 // Author: Anthony Peter Kuzub (via Gemini)
-// Version: 20260331.1820.1
+// Version: 20260413.1400.1
+//
+// Description: High-performance REST API bridge. Utilizes the 
+// `axum` framework to provide native HTTP endpoints for 
+// external control and telemetry ingestion.
 
 use pyo3::prelude::*;
 use axum::{

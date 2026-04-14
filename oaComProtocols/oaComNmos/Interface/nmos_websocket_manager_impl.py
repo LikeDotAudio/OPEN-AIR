@@ -1,6 +1,6 @@
 # oaComProtocols.oaComNmos/Interface/nmos_websocket_manager_impl.py
 # Author: Gemini (Collaborator)
-# Version: 20260405.2145.2
+# Version: 20260414.0020.1
 #
 # Description: NMOS WebSocket Manager Implementation.
 # Provides controls to start/stop the IS-07 WebSocket transport.
@@ -27,17 +27,15 @@ class NmosWebsocketManagerImplementation(tk.Frame, TransparencyMixin):
     def __init__(self, parent, json_path=None, config=None, **kwargs):
         super().__init__(parent, **kwargs)
         self.config = config or {}
+        self.global_state = self.config.get("global_state", {})
         
         # ⚡ MANDATE: NMOS WebSocket must ALWAYS be online.
-        # Initializing as active.
-        self.is_connected = True
+        self.is_connected = False
         self.ws_url = "ws://localhost:8080/is07"
-        self.client_count = 1
+        self.client_count = 0
         
         self._setup_ui()
         self._start_monitor_thread()
-        # Trigger initial start logic
-        self._start_ws()
 
     def _setup_ui(self):
         self.pack(fill=tk.BOTH, expand=True)
@@ -78,8 +76,22 @@ class NmosWebsocketManagerImplementation(tk.Frame, TransparencyMixin):
 
     def _monitor_loop(self):
         while self.running:
-            # Simulate monitoring logic
-            self.after(0, self._refresh_ui)
+            try:
+                # Check bridge status
+                bridge = self.global_state.get("BRIDGE")
+                if bridge:
+                    self.is_connected = bridge.is_running
+                    # In a real impl we'd check active clients from the transport
+                    self.client_count = 1 if bridge.is_running else 0
+                
+                if self.winfo_exists():
+                    self.after(0, self._refresh_ui)
+            except (RuntimeError, tk.TclError):
+                # Main loop not running or widget destroyed
+                break
+            except Exception as e:
+                matrix_log("ui", "nmos", "ws_monitor_error", f"Error in WS monitor: {e}", "ERROR")
+            
             time.sleep(2)
 
     def _refresh_ui(self):
@@ -95,14 +107,16 @@ class NmosWebsocketManagerImplementation(tk.Frame, TransparencyMixin):
 
     def _start_ws(self):
         matrix_log("ui", "nmos", "start_ws", "Starting IS-07 WebSocket transport...", "INFO")
-        self.is_connected = True
-        self.client_count = 1 # Simulate a client connecting
+        bridge = self.global_state.get("BRIDGE")
+        if bridge:
+            bridge.start()
         self._refresh_ui()
 
     def _stop_ws(self):
         matrix_log("ui", "nmos", "stop_ws", "Stopping IS-07 WebSocket transport...", "WARNING")
-        self.is_connected = False
-        self.client_count = 0
+        bridge = self.global_state.get("BRIDGE")
+        if bridge:
+            bridge.stop()
         self._refresh_ui()
 
     def render(self):

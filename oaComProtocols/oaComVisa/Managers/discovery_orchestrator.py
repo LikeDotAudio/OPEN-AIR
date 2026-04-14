@@ -40,9 +40,9 @@ class DiscoveryOrchestrator:
         # C. USB/Local
         try:
             local_res = self.scanner.rm.list_resources("?*")
-            for res in local_res:
-                if "TCPIP" not in res and "ASRL" not in res:
-                    potential_targets.append({"Type": "LOCAL", "Resource": res})
+            for resource in local_res:
+                if "TCPIP" not in resource and "ASRL" not in resource:
+                    potential_targets.append({"Type": "LOCAL", "Resource": resource})
         except:
             pass
 

@@ -23,13 +23,14 @@ def apply_design_overlay(layout, widget, path, is_focused, design_elements):
         design_elements.append(h)
 
     def _show_resize_tooltip(event, x_root, y_root, val1, val2, label1="W", label2="H"):
+        toplevel = layout.winfo_toplevel()
         if not hasattr(layout, 'resize_tooltip') or not layout.resize_tooltip or not layout.resize_tooltip.winfo_exists():
-            layout.resize_tooltip = tk.Label(layout.winfo_toplevel(), bg="#FF9900", fg="black", 
+            layout.resize_tooltip = tk.Label(toplevel, bg="#FF9900", fg="black", 
                                           font=("Arial", 8, "bold"), padx=5, pady=2, relief="solid", bd=1)
             layout.resize_tooltip._is_design_overlay = True
         
         layout.resize_tooltip.config(text=f"{label1}: {int(val1)} {label2}: {int(val2)}" if label2 else f"{label1}: {int(val1)}")
-        root_x, root_y = layout.winfo_toplevel().winfo_rootx(), layout.winfo_toplevel().winfo_rooty()
+        root_x, root_y = toplevel.winfo_rootx(), toplevel.winfo_rooty()
         layout.resize_tooltip.place(x=x_root - root_x + 25, y=y_root - root_y + 25)
 
     def _show_ghost_box(w, h):

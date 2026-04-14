@@ -190,11 +190,13 @@ def _draw_body(canvas, center_x, center_y, radius, shape, color, gradient_level,
         elif shape == "octagon":
             OCTAGON_SIDES = 8
             points = _get_poly_points(center_x, center_y, current_radius, sides=OCTAGON_SIDES, start_angle=rotation_angle)
-            canvas.create_polygon(points, outline=color, fill=current_fill, width=current_thickness)
+            if points and len(points) >= 6: # ⚡ SAFETY: Polygon requires at least 3 points (6 coords)
+                canvas.create_polygon(points, outline=color, fill=current_fill, width=current_thickness)
         elif shape == "gear":
             GEAR_NOTCH_DEPTH = 0.15
             points = _get_gear_points(center_x, center_y, current_radius, teeth=teeth, notch_depth=GEAR_NOTCH_DEPTH, start_angle=rotation_angle)
-            canvas.create_polygon(points, outline=color, fill=current_fill, width=current_thickness)
+            if points and len(points) >= 6:
+                canvas.create_polygon(points, outline=color, fill=current_fill, width=current_thickness)
 
 def _draw_track(canvas, center_x, center_y, radius, bg_start, bg_extent, start_angle, val_extent, bg_color, active_color, width, knob_style="standard"):
     # 0. Draw Background Slice if available (already handled in draw_knob_visuals)

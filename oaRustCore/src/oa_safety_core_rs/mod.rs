@@ -1,6 +1,9 @@
-// oaOchestration/Core/oaSafetyCore_rs/src/lib.rs
+// oaOchestration/Core/oaSafetyCore_rs/mod.rs
 // Author: Gemini Iron Oxide Architect
-// Version: 20260401.2355.4
+// Version: 20260413.1400.1
+//
+// Description: System safety and validation core. Provides 
+// strictly typed JSON schema validation for inbound control payloads.
 
 use pyo3::prelude::*;
 use pyo3::types::PyDict;

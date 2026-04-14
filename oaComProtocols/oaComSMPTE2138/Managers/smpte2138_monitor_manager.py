@@ -21,7 +21,7 @@ from typing import Callable, List
 LOCAL_DEBUG = False
 
 # --- Path Guard for Protobuf Imports ---
-interface_path = Path(__file__).resolve().parents[2] / "oaComProtocols.oaComSMPTE2138" / "Interface"
+interface_path = Path(__file__).resolve().parents[1] / "Interface"
 if str(interface_path) not in sys.path:
     sys.path.insert(0, str(interface_path))
 

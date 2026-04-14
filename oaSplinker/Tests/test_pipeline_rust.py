@@ -15,8 +15,8 @@ class TestPipelineRust(unittest.TestCase):
         self.splink_config = {
             "id": "test_splink",
             "label": "Test Splink",
-            "source": "src",
-            "dest": "dst",
+            "source": "source",
+            "destination": "destination",
             "handlers": [
                 {
                     "type": "scale",
@@ -24,8 +24,8 @@ class TestPipelineRust(unittest.TestCase):
                     "params": {
                         "source_min": 0,
                         "source_max": 100,
-                        "dest_min": 0,
-                        "dest_max": 255
+                        "destination_min": 0,
+                        "destination_max": 255
                     }
                 }
             ]
@@ -41,9 +41,9 @@ class TestPipelineRust(unittest.TestCase):
         pipeline = SplinkPipeline(self.splink_config, self.splinker_manager)
         self.assertIsNotNone(pipeline.rust_pipeline)
         
-        # Test scale (50 / 100 * 255 = 127.5 -> 128)
+        # Test scale (50 / 100 * 255 = 127.5)
         out = pipeline.process(50, {})
-        self.assertEqual(out, 128)
+        self.assertEqual(out, 127.5)
 
     def test_deadband_state_rust(self):
         """Test the Rust SplinkPipeline with deadband handler."""

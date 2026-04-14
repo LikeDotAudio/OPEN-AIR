@@ -25,7 +25,7 @@ if str(project_root) not in sys.path:
 from oaComProtocols.oaComSMPTE2138.Managers.smpte2138_bridge_manager import SMPTE2138BridgeManager
 from oaComProtocols.oaComSMPTE2138.Managers.smpte2138_monitor_manager import SMPTE2138MonitorManager
 
-__all__ = ["SMPTE2138BridgeManager", "SMPTE2138MonitorManager"]
+__all__ = ["SMPTE2138BridgeManager", "SMPTE2138MonitorManager", "main"]
 
 def start_bridge(mqtt_connection, subscriber_router):
     """
@@ -106,12 +106,10 @@ def run_tests():
         print("\n💔 Some tests for oaComProtocols.oaComSMPTE2138 failed.")
     return all_tests_passed
 
-if __name__ == "__main__":
-    # If run directly and no specific arguments are provided, run tests then launch standalone.
-    if len(sys.argv) > 1 and sys.argv[1] == "--test-only":
-        run_tests()
-        sys.exit(0)
-    
+def main():
+    """
+    Main execution entry point for standalone mode.
+    """
     # 1. Run Tests first
     if not run_tests():
         print("🛑 Tests failed. Aborting standalone startup.")
@@ -138,6 +136,10 @@ if __name__ == "__main__":
     # Managers
     bridge = SMPTE2138BridgeManager(mqtt_conn, sub_router)
     monitor_manager = SMPTE2138MonitorManager(mqtt_conn, sub_router)
+    
+    # ⚡ START: Activate the lifecycle of both managers
+    bridge.start()
+    monitor_manager.start()
     
     # Connect to MQTT
     print("📡 [ST2138] Connecting to MQTT Broker...")
@@ -170,4 +172,12 @@ if __name__ == "__main__":
 
     print("✅ [ST2138] Service is active and online.")
     root.mainloop()
+
+if __name__ == "__main__":
+    # If run directly and no specific arguments are provided, run tests then launch standalone.
+    if len(sys.argv) > 1 and sys.argv[1] == "--test-only":
+        run_tests()
+        sys.exit(0)
+    
+    main()
 

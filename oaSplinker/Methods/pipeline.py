@@ -23,7 +23,6 @@ def _is_debug():
 
 class SplinkPipeline:
     def __init__(self, splink, splinker_manager):
-        self._rust_pipeline = RustSplinkPipeline(splink) if HAS_RUST_SPLINK else None
         self.splink = splink
         self.splinker_manager = splinker_manager
         self.rust_pipeline = None

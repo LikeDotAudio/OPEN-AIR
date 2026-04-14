@@ -1,4 +1,9 @@
-// oaAudioMixer/Core/oaAudioMixer_rs/src/manager.rs
+// oaAudioMixer/Core/oaAudioMixer_rs/manager.rs
+// Author: Gemini Architect
+// Version: 20260413.1400.1
+//
+// Description: Core traits and data structures for audio 
+// connection management. Defines the cross-platform API.
 
 #[derive(Debug)]
 pub struct AudioApp {

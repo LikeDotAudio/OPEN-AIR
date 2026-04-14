@@ -25,10 +25,10 @@ SEGMENTS_PER_LCD = 7   # number of segments in each lcd section
 
 def handle_midi_input(input_port_name: str, output_port_name: str, table: list[list[int]], direction: Direction) -> None:
     """Handles input from the device and updates the shared table accordingly
-    :param input_port_name: The name of the midi input port to read from
-    :param output_port_name: The name of the midi output port to write to
-    :param table: The table to update
-    :param direction: The direction of the midi message (incoming from or outgoing to rtp)
+    :parameter input_port_name: The name of the midi input port to read from
+    :parameter output_port_name: The name of the midi output port to write to
+    :parameter table: The table to update
+    :parameter direction: The direction of the midi message (incoming from or outgoing to rtp)
     """
     
     try:
@@ -69,9 +69,9 @@ def listen_to_midi(input_port, output_port, table, direction: Direction) -> None
 
 def update_table(table: list[list[int]], message, direction: Direction) -> None:
     """Updates the table based on the midi message
-    :param table: The table to update
-    :param message: The midi message to parse
-    :param direction: The direction of the midi message (incoming from or outgoing to rtp)
+    :parameter table: The table to update
+    :parameter message: The midi message to parse
+    :parameter direction: The direction of the midi message (incoming from or outgoing to rtp)
     """
 
     if message.type == 'sysex':
@@ -90,41 +90,41 @@ def update_table(table: list[list[int]], message, direction: Direction) -> None:
 
 def update_table_lcd(table: list[list[int]], message, direction: Direction) -> None:
     """Updates the lcd portion of the table based on the midi message
-    :param table: The table to update
-    :param message: The midi message to parse
-    :param direction: The direction of the midi message (incoming from or outgoing to rtp)
+    :parameter table: The table to update
+    :parameter message: The midi message to parse
+    :parameter direction: The direction of the midi message (incoming from or outgoing to rtp)
     """
 
     length = (len(message.data) - 1) - LCD_POSITION_INDEX
-    starting_pos = message.data[LCD_POSITION_INDEX] # This is the "id" of the starting lcd segment
+    starting_position = message.data[LCD_POSITION_INDEX] # This is the "id" of the starting lcd segment
 
-    pos = starting_pos
+    position = starting_position
 
     # Parses through the message.data and upates each affected character in the table induvidually
     for char_index in range(LCD_POSITION_INDEX + 1, LCD_POSITION_INDEX + length + 1): # for each ascii character in the message
 
-        cell = lcd_seg_to_cell(table, pos)
+        cell = lcd_seg_to_cell(table, position)
         
         new_char = chr(message.data[char_index])
 
-        seg = pos % SEGMENTS_PER_LCD
+        seg = position % SEGMENTS_PER_LCD
 
         # replace the character at the position seg in the string
         str_val = table[cell.row][cell.column]
         str_val = str_val[:seg] + new_char + str_val[seg + 1:]
         table[cell.row][cell.column] = str_val
 
-        pos += 1
+        position += 1
 
 
-def lcd_seg_to_cell(table: list[list[int]], pos: int) -> Cell:
+def lcd_seg_to_cell(table: list[list[int]], position: int) -> Cell:
     """Returns the cell corresponding to the lcd segment
-    :param table: The table containing the lcd text data
-    :param pos: The position of the lcd segment
+    :parameter table: The table containing the lcd text data
+    :parameter position: The position of the lcd segment
     :return: The cell corresponding to the lcd segment
     """
 
-    lcd_section = pos // SEGMENTS_PER_LCD # the lcd section (1-8 is first row, 9-16 is second row)
+    lcd_section = position // SEGMENTS_PER_LCD # the lcd section (1-8 is first row, 9-16 is second row)
  
     lcd_row_index = midiParser.get_row_num('lcd_line_' + str(lcd_section // LCDS_PER_ROW), table)
     lcd_column_index = lcd_section % LCDS_PER_ROW
@@ -139,8 +139,8 @@ def lcd_seg_to_cell(table: list[list[int]], pos: int) -> Cell:
 
 def init_device_from_table(table: list[list[int]], output_port_name: str) -> None:
     """Sets all the faders to the values in the table
-    :param table: The table to read from
-    :param output_port_name: The name of the output port to write to
+    :parameter table: The table to read from
+    :parameter output_port_name: The name of the output port to write to
     """
 
     try:
@@ -189,8 +189,8 @@ def init_device_from_table(table: list[list[int]], output_port_name: str) -> Non
 
 def update_csv(csv_path: str, table: list[list[int]], period: int) -> None:
     """Updates the csv file periodically
-    :param csv_path: The path to the csv file
-    :param table: The table to write to the csv file
+    :parameter csv_path: The path to the csv file
+    :parameter table: The table to write to the csv file
     """
 
     while not stop_flag.is_set():

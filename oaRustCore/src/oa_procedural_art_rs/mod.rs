@@ -1,6 +1,10 @@
-// oaGuiElements/Methods/oaProceduralArt_rs/src/lib.rs
+// oaGuiElements/Methods/oaProceduralArt_rs/mod.rs
 // Author: Gemini Iron Oxide Architect
-// Version: 20260402.0010.1
+// Version: 20260413.1400.1
+//
+// Description: Native procedural art engine. Generates complex 
+// visual patterns and textures in Rust to offload high-frequency 
+// GUI rendering tasks from the Python GIL.
 
 use pyo3::prelude::*;
 use pyo3::types::{PyBytes, PyDict, PyList};
@@ -96,16 +100,16 @@ impl ProceduralArtEngine {
                     let mut b = (base_rgb[2] as f64 * light_factor) as u8;
                     
                     let drive_size = radius * 0.55;
-                    let rx = dx * rotation_rad.cos() - dy * rotation_rad.sin();
-                    let ry = dx * rotation_rad.sin() + dy * rotation_rad.cos();
+                    let rotated_x = dx * rotation_rad.cos() - dy * rotation_rad.sin();
+                    let rotated_y = dx * rotation_rad.sin() + dy * rotation_rad.cos();
                     
-                    if rx.abs() < drive_size / 2.0 && ry.abs() < drive_size / 2.0 {
+                    if rotated_x.abs() < drive_size / 2.0 && rotated_y.abs() < drive_size / 2.0 {
                         r = 20; g = 20; b = 20;
                         let edge_thresh = 1.0;
-                        if ry < -drive_size/2.0 + edge_thresh { r = 100; g = 100; b = 100; }
-                        else if rx < -drive_size/2.0 + edge_thresh { r = 80; g = 80; b = 80; }
-                        else if rx > drive_size/2.0 - edge_thresh { r = 10; g = 10; b = 10; }
-                        else if ry > drive_size/2.0 - edge_thresh { r = 0; g = 0; b = 0; }
+                        if rotated_y < -drive_size/2.0 + edge_thresh { r = 100; g = 100; b = 100; }
+                        else if rotated_x < -drive_size/2.0 + edge_thresh { r = 80; g = 80; b = 80; }
+                        else if rotated_x > drive_size/2.0 - edge_thresh { r = 10; g = 10; b = 10; }
+                        else if rotated_y > drive_size/2.0 - edge_thresh { r = 0; g = 0; b = 0; }
                     } else {
                         if damage_intensity > 0.0 {
                             if rng.gen_bool(damage_intensity * 0.02) {

@@ -1,6 +1,10 @@
-// oaGuiElements/Methods/oaCMDPMath_rs/src/lib.rs
+// oaGuiElements/Methods/oaCMDPMath_rs/mod.rs
 // Author: Anthony Peter Kuzub (via Gemini)
-// Version: 20260401.1100.1
+// Version: 20260413.1400.1
+//
+// Description: Specialized math library for CMDP (Control Message 
+// Display Protocol). Handles coordinate transformations and 
+// fader-curve calculations.
 
 use pyo3::prelude::*;
 use pyo3::types::{PyDict, PyList};

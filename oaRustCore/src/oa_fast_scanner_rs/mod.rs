@@ -1,6 +1,9 @@
-// oaGuiManager/Core/oaFastScanner_rs/src/lib.rs
+// oaGuiManager/Core/oaFastScanner_rs/mod.rs
 // Author: Anthony Peter Kuzub (via Gemini)
-// Version: 20260331.2350.1
+// Version: 20260413.1400.1
+//
+// Description: Native GUI resource scanner. Locates and indexes 
+// icons, fonts, and stylesheets to accelerate application startup.
 
 use pyo3::prelude::*;
 use walkdir::WalkDir;

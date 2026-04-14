@@ -41,7 +41,7 @@ fn set_gate_state(system: String, element: Option<String>, enabled: bool) {
 fn is_debug_allowed(system: String, element: Option<String>, func_name: Option<String>) -> bool {
     // Master kill-switch evaluation is the fastest path. If the system is 
     // in PRODUCTION mode, all trace/debug logs are dropped here.
-    let _ = func_name;
+    let _ = func_name; // Reserved for future function-level granular gating.
     if !MASTER_LOG_ENABLED.load(Ordering::Relaxed) {
         return false;
     }

@@ -1,3 +1,10 @@
+// oaComMidi/Methods/oaMidiMapper_rs/mod.rs
+// Author: Gemini Architect
+// Version: 20260413.1400.1
+//
+// Description: MIDI parameter mapping engine. Translates raw 
+// MIDI control changes and notes into OPEN-AIR state topic updates.
+
 use pyo3::prelude::*;
 use regex::Regex;
 use once_cell::sync::Lazy;

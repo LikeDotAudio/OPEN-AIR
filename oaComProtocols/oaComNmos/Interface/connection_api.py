@@ -1,167 +1,179 @@
 # FolderName/FileName.py
 # Author: Gemini (Collaborator)
-# Version: 20260405.1315.7
+# Version: 20260414.1200.1
+#
+# Description: NMOS Connection & Node API using FastAPI.
+# ⚡ STANDALONE: Includes IS-07 WebSocket server support.
 
 import json
-from http.server import HTTPServer, BaseHTTPRequestHandler
-from urllib.parse import urlparse, parse_qs
+import asyncio
+from typing import Dict, List, Any, Optional
+from fastapi import FastAPI, WebSocket, WebSocketDisconnect, HTTPException, Request
+from fastapi.responses import JSONResponse, Response
+import uvicorn
 
 from oaComProtocols.oaComNmos.Core.utils import now_ts, get_ip
 from oaComProtocols.oaComNmos.Core.sdp_parser import parse_sdp
 from oaComProtocols.oaComNmos.Constants import settings
+from oaLogging.Methods.matrix_gate import matrix_log
 
-# --- Global State for NMOS Resources ---
-# These will be managed and populated by the main orchestrator.
-# They are made module-level globals here for simplicity of the handler.
-NODE = {}
-DEVICE = {}
-SOURCES = {}
-FLOWS = {}
-SENDERS = {}
-STREAMS = {} # Stores {hash: {"sdp": str, "sender_id": str, "last": float}}
+# --- Shared State (Populated by Orchestrator) ---
+STATE = {
+    "NODE": {},
+    "DEVICE": {},
+    "SOURCES": {},
+    "FLOWS": {},
+    "SENDERS": {},
+    "STREAMS": {}
+}
 
-def build_connection_active(sender_id):
-    """
-    Builds the NMOS Connection API 'active' payload for a given sender.
+app = FastAPI(title="OPEN-AIR NMOS API")
 
-    Args:
-        sender_id (str): The ID of the sender.
+# --- Helper Functions ---
 
-    Returns:
-        dict or None: The active status payload or None if sender/stream not found.
-    """
-    sender_resource = SENDERS.get(sender_id)
+def build_connection_active(sender_id: str) -> Optional[Dict[str, Any]]:
+    sender_resource = STATE["SENDERS"].get(sender_id)
     if not sender_resource:
-        print(f"[ConnectionAPI] Sender not found for ID: {sender_id}")
         return None
 
-    # Find the stream associated with this sender
-    stream_data = next((s for s in STREAMS.values() if s.get("sender_id") == sender_id), None)
+    stream_data = next((s for s in STATE["STREAMS"].values() if s.get("sender_id") == sender_id), None)
     if not stream_data:
-        print(f"[ConnectionAPI] Stream data not found for sender ID: {sender_id}")
         return None
 
     sdp_content = stream_data.get("sdp")
     if not sdp_content:
-        print(f"[ConnectionAPI] SDP content missing for sender ID: {sender_id}")
         return None
 
     parsed_sdp = parse_sdp(sdp_content)
-
-    # Use IP from parsed SDP, fallback to host's IP if not available in SDP
     destination_ip = parsed_sdp.get("ip")
-    if not destination_ip:
-        print(f"[ConnectionAPI] Destination IP not found in SDP for sender {sender_id}, falling back.")
-        # Fallback strategy: could use get_ip() if specific destination not in SDP,
-        # but usually destination_ip is crucial for multicast.
-        # For now, we'll assume it must be in SDP for valid transport params.
-        # If it's truly missing, the transport params might be incomplete.
-        pass 
 
     return {
         "activation": {
             "activation_time": now_ts(),
-            "mode": None, # Auto-generated, no specific mode set here
-            "requested_time": None # Not specified
+            "mode": None,
+            "requested_time": None
         },
-        "master_enable": True, # Assuming master enable is true by default
-        "receiver_id": None, # No specific receiver is being targeted here
+        "master_enable": True,
+        "receiver_id": None,
         "transport_params": [{
-            "destination_port": parsed_sdp.get("port", 5004), # Default to 5004 if not in SDP
-            "source_port": parsed_sdp.get("port", 5004), # Typically same as destination for multicast
-            "source_ip": parsed_sdp.get("src_ip", get_ip()), # Use SDP source IP, fallback to host IP
+            "destination_port": parsed_sdp.get("port", 5004),
+            "source_port": parsed_sdp.get("port", 5004),
+            "source_ip": parsed_sdp.get("src_ip", get_ip()),
             "destination_ip": destination_ip,
             "rtp_enabled": True
         }]
     }
 
-class NmosConnectionApiHandler(BaseHTTPRequestHandler):
-    """
-    Handles incoming HTTP requests for the NMOS Connection API.
-    Serves sender status and transport files.
-    """
-    def send_json(self, data, status_code=200):
-        """Sends a JSON response."""
-        self.send_response(status_code)
-        self.send_header("Content-Type", "application/json")
-        self.end_headers()
-        self.wfile.write(json.dumps(data, indent=4).encode('utf-8'))
+# --- NMOS Node API ---
 
-    def send_sdp(self, sdp_content):
-        """Sends an SDP response."""
-        self.send_response(200)
-        self.send_header("Content-Type", "application/sdp")
-        self.end_headers()
-        self.wfile.write(sdp_content.encode('utf-8'))
+@app.get("/x-nmos/node/v1.3")
+async def node_base():
+    return ["self", "devices", "sources", "flows", "senders"]
 
-    def do_GET(self):
-        """Handles GET requests for NMOS API endpoints."""
-        parsed_url = urlparse(self.path)
-        path = parsed_url.path.rstrip("/")
+@app.get("/x-nmos/node/v1.3/self")
+async def node_self():
+    return STATE["NODE"]
 
-        # NMOS Node API Endpoints
-        if path == "/x-nmos/node/v1.3":
-            self.send_json(["self", "devices", "sources", "flows", "senders"])
-        elif path == "/x-nmos/node/v1.3/self":
-            self.send_json(NODE)
-        elif path == "/x-nmos/node/v1.3/devices":
-            self.send_json([DEVICE] if DEVICE else [])
-        elif path == "/x-nmos/node/v1.3/sources":
-            self.send_json(list(SOURCES.values()))
-        elif path == "/x-nmos/node/v1.3/flows":
-            self.send_json(list(FLOWS.values()))
-        elif path == "/x-nmos/node/v1.3/senders":
-            self.send_json(list(SENDERS.values()))
+@app.get("/x-nmos/node/v1.3/devices")
+async def node_devices():
+    return [STATE["DEVICE"]] if STATE["DEVICE"] else []
 
-        # NMOS Connection API Endpoints
-        elif path == "/x-nmos/connection/v1.1/single/senders":
-            # List of sender IDs available via connection API
-            self.send_json(list(SENDERS.keys()))
+@app.get("/x-nmos/node/v1.3/sources")
+async def node_sources():
+    return list(STATE["SOURCES"].values())
 
-        elif path.startswith("/x-nmos/connection/v1.1/single/senders/"):
-            sender_id = path.split('/')[-2] # Extract sender ID from path
-            
-            if path.endswith("/active"):
-                # Get active status for a specific sender
-                active_data = build_connection_active(sender_id)
-                if active_data:
-                    self.send_json(active_data)
-                else:
-                    self.send_response(404)
-                    self.end_headers()
-            
-            elif path.endswith("/transportfile"):
-                # Get the transport file (SDP) for a specific sender
-                stream_data = next((s for s in STREAMS.values() if s.get("sender_id") == sender_id), None)
-                if stream_data and stream_data.get("sdp"):
-                    self.send_sdp(stream_data["sdp"])
-                else:
-                    self.send_response(404)
-                    self.end_headers()
-        
-        # Manifest endpoints (often served by registration, but here for completeness if needed)
-        # This part might be redundant if manifest_href points to registration,
-        # but the original script served it.
-        for stream_id, s in STREAMS.items():
-            manifest_path = f"/x-manifest/senders/{s['sender_id']}/manifest"
-            if path == manifest_path:
-                self.send_sdp(s["sdp"])
-                return
+@app.get("/x-nmos/node/v1.3/flows")
+async def node_flows():
+    return list(STATE["FLOWS"].values())
 
-        # If no path matched
-        self.send_response(404)
-        self.end_headers()
+@app.get("/x-nmos/node/v1.3/senders")
+async def node_senders():
+    return list(STATE["SENDERS"].values())
 
-def run_connection_api_server(host="0.0.0.0", port=settings.PORT):
-    """Starts the NMOS Connection API HTTP server."""
-    server_address = (host, port)
-    httpd = HTTPServer(server_address, NmosConnectionApiHandler)
-    print(f"[ConnectionAPI] Starting server on {host}:{port}...")
+# --- NMOS Connection API ---
+
+@app.get("/x-nmos/connection/v1.1/single/senders")
+async def connection_senders():
+    return list(STATE["SENDERS"].keys())
+
+@app.get("/x-nmos/connection/v1.1/single/senders/{sender_id}/active")
+async def connection_active(sender_id: str):
+    data = build_connection_active(sender_id)
+    if data:
+        return data
+    raise HTTPException(status_code=404, detail="Sender or stream not found")
+
+@app.get("/x-nmos/connection/v1.1/single/senders/{sender_id}/transportfile")
+async def connection_transportfile(sender_id: str):
+    stream_data = next((s for s in STATE["STREAMS"].values() if s.get("sender_id") == sender_id), None)
+    if stream_data and stream_data.get("sdp"):
+        return Response(content=stream_data["sdp"], media_type="application/sdp")
+    raise HTTPException(status_code=404, detail="Transport file not found")
+
+@app.get("/x-manifest/senders/{sender_id}/manifest")
+async def manifest_sender(sender_id: str):
+    stream_data = next((s for s in STATE["STREAMS"].values() if s.get("sender_id") == sender_id), None)
+    if stream_data and stream_data.get("sdp"):
+        return Response(content=stream_data["sdp"], media_type="application/sdp")
+    raise HTTPException(status_code=404, detail="Manifest not found")
+
+# --- IS-07 WebSocket Server ---
+
+class ConnectionManager:
+    def __init__(self):
+        self.active_connections: List[WebSocket] = []
+
+    async def connect(self, websocket: WebSocket):
+        await websocket.accept()
+        self.active_connections.append(websocket)
+        matrix_log("comms", "is07_ws", "connect", f"📡✅ [IS07-WS] Client connected. Total: {len(self.active_connections)}", "SUCCESS")
+
+    def disconnect(self, websocket: WebSocket):
+        if websocket in self.active_connections:
+            self.active_connections.remove(websocket)
+            matrix_log("comms", "is07_ws", "disconnect", f"📡 [IS07-WS] Client disconnected. Remaining: {len(self.active_connections)}", "INFO")
+
+    async def broadcast(self, message: str):
+        for connection in self.active_connections:
+            try:
+                await connection.send_text(message)
+            except Exception as e:
+                print(f"[IS07-WS] Error broadcasting to client: {e}")
+
+manager = ConnectionManager()
+
+@app.websocket("/is07")
+async def websocket_endpoint(websocket: WebSocket):
+    await manager.connect(websocket)
     try:
-        httpd.serve_forever()
+        while True:
+            data = await websocket.receive_text()
+            # Handle incoming IS-07 commands here if needed
+            # For now, we just log and potentially echo or broadcast
+            matrix_log("comms", "is07_ws", "receive", f"📡📥 [IS07-WS] Received: {data[:100]}", "DEBUG")
+            
+            # Simple Echo for testing
+            # await websocket.send_text(f"Message received: {data}")
+    except WebSocketDisconnect:
+        manager.disconnect(websocket)
     except Exception as e:
-        print(f"[ConnectionAPI] Server error: {e}")
-    finally:
-        httpd.server_close()
-        print("[ConnectionAPI] Server stopped.")
+        matrix_log("comms", "is07_ws", "error", f"📡❌ [IS07-WS] WebSocket Error: {e}", "ERROR")
+        manager.disconnect(websocket)
 
+# --- Server Management ---
+
+def run_server(host="0.0.0.0", port=settings.PORT):
+    """Starts the NMOS API and IS-07 WebSocket server using uvicorn."""
+    config = uvicorn.Config(app, host=host, port=port, log_level="warning")
+    server = uvicorn.Server(config)
+    
+    matrix_log("comms", "nmos_api", "run", f"🚀 [NMOS-API] Starting FastAPI server on {host}:{port}", "INFO")
+    
+    try:
+        loop = asyncio.get_running_loop()
+        loop.create_task(server.serve())
+    except RuntimeError:
+        asyncio.run(server.serve())
+
+if __name__ == "__main__":
+    run_server()

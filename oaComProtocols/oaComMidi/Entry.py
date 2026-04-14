@@ -12,29 +12,30 @@
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-# Version 20260411.1515.2 (Refactored for Dual Windows)
+# Version 20260413.2355.1 (Consolidated to Single Window with Tabs)
 
 import sys
 import os
+import pathlib
+import argparse
+import threading
 from pathlib import Path
 
-# --- PROJECT ROOT INITIALIZATION ---
-# This allows running the module directly as a script from within its own directory.
-# It ensures that 'oaLogging', 'oaComBroker', etc., are found in sys.path.
-project_root = Path(__file__).resolve().parent.parent.parent
+# Ensure root directory is in the search path
+current_dir = pathlib.Path(__file__).resolve().parent
+project_root = current_dir.parent.parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
-import tkinter as tk # Added for GUI
-import time # Added for standalone mode loop
-from loguru import logger # Added for logging in Application class
-from oaLogging.Methods.matrix_gate import matrix_log # Added for logging
+import tkinter as tk
+from tkinter import ttk
+import time
+from loguru import logger
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- OPTIONAL GUI EXPORTS (V3.2.1 Decoupling) ---
 try:
-    # Import necessary GUI components for the Application class
     from oaComProtocols.oaComMidi.Interface import MidiDashboard, MidiOutputGenerator
-    # MidiKeyboard, get_midi_color might still be needed by the views themselves
     from oaComProtocols.oaComMidi.Interface.Input.midi_keyboard import MidiKeyboard, get_midi_color
     GUI_AVAILABLE = True
 except (ImportError, Exception) as e:
@@ -52,7 +53,17 @@ from oaComProtocols.oaComMidi.Core.midi_protocol_mapper import MIDIProtocolMappe
 
 _instance = None
 
+class StandaloneState:
+    """Mock state registry for pure standalone mode."""
+    def handle_external_update(self, topic, value, source="MIDI", metadata=None):
+        pass
+    def shutdown(self):
+        pass
+
 def get_manager(state_cache_manager=None, run_bridge=True, use_protocol_router=True, enable_direct_mqtt=True):
+    """
+    Returns the singleton MIDI manager.
+    """
     global _instance
     if _instance is None:
         _instance = MidiManager(
@@ -64,14 +75,18 @@ def get_manager(state_cache_manager=None, run_bridge=True, use_protocol_router=T
     return _instance
 
 def start():
+    """Starts the MIDI bridge service."""
     manager = get_manager()
     manager.start()
 
 def stop():
-    manager = get_manager()
-    manager.stop()
+    """Stops the MIDI bridge service."""
+    global _instance
+    if _instance:
+        _instance.stop()
 
 def status():
+    """Returns the current status of the MIDI bridge."""
     manager = get_manager()
     return manager.get_port_info()
 
@@ -80,15 +95,15 @@ def run_tests():
     Discovers and runs all tests within the oaComProtocols.oaComMidi/Tests/ directory.
     """
     print("🔍 Discovering and running tests for oaComProtocols.oaComMidi...")
-    test_dir = Path(__file__).parent / "Tests"
+    test_dir = pathlib.Path(__file__).parent / "Tests"
     if not test_dir.is_dir():
         print("❌ No 'Tests/' directory found.")
-        return
+        return True
 
     test_files = sorted([f for f in test_dir.glob("test_*.py")])
     if not test_files:
         print("❌ No test files found (expected pattern: test_*.py).")
-        return
+        return True
 
     print(f"Found {len(test_files)} test files. Executing...")
     
@@ -98,13 +113,11 @@ def run_tests():
     for test_file in test_files:
         print(f"--- Running: {test_file.name} ---")
         try:
-            # Get the module path relative to the project root for the test runner
-            relative_test_file_path = test_file.relative_to(Path(__file__).parent.parent.parent) # Path from OPEN-AIR root
-            module_path_for_runner = str(relative_test_file_path).replace(os.sep, '.')[:-3] # Remove .py extension
+            relative_test_file_path = test_file.relative_to(project_root)
+            module_path_for_runner = str(relative_test_file_path).replace(os.sep, '.')[:-3]
 
-            # Ensure the current directory is the project root so Python can find modules
             original_cwd = os.getcwd()
-            os.chdir(Path(__file__).parent.parent.parent) 
+            os.chdir(project_root) 
 
             result = subprocess.run(
                 [sys.executable, "-m", "unittest", module_path_for_runner],
@@ -135,97 +148,121 @@ def run_tests():
         print("💔 Some tests for oaComProtocols.oaComMidi failed.")
     return all_tests_passed
 
-# --- Dual Window Application Structure ---
+def main():
+    """
+    Standalone entry point for MIDI with GUI support.
+    """
+    # 1. Parse Arguments
+    parser = argparse.ArgumentParser(description="OPEN-AIR MIDI Module Standalone")
+    parser.add_argument("--pure", action="store_true", help="Run without MQTT or State Cache dependencies")
+    parser.add_argument("--skip-tests", action="store_true", help="Skip pre-flight unit tests")
+    args, unknown = parser.parse_known_args()
 
-class OutputWindow(tk.Toplevel):
-    """Separate window for MIDI Output controls."""
-    def __init__(self, master, midi_manager):
-        super().__init__(master)
-        self.title("OPEN-AIR MIDI Output Generator")
-        self.geometry("900x700") # Larger default size, no fixed offset
-        self.configure(bg="#2b2b2b")
-        self.midi_manager = midi_manager
-        
-        # Ensure it stays on top initially or at least is visible
-        self.lift()
-        self.focus_force()
-        
-        self.output_view = MidiOutputGenerator(self, midi_manager=self.midi_manager)
-        self.output_view.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
-        
-        # Refresh ports multiple times to ensure hardware is caught
-        self.after(500, self.output_view._refresh_ports)
-        self.after(2000, self.output_view._refresh_ports)
+    # 2. Run Tests First
+    if not args.skip_tests and not run_tests():
+        print("🛑 Tests failed. Aborting GUI launch.")
+        return
 
-class StandaloneMidiApp(tk.Tk):
-    """Main MIDI Controller window (Input View)."""
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.title("OPEN-AIR MIDI Controller (Input)")
-        self.geometry("1000x800") # Larger default size
-        self.configure(bg="#2b2b2b")
+    # 3. Initialize Paths and Logging
+    from oaLogging.Core.logger import initialize_logging, set_log_directory
+    from oaOchestration.Core.path_initializer import initialize_paths, DATA_LOGS_DIR
+    
+    initialize_paths()
+    set_log_directory(DATA_LOGS_DIR, partition="MIDI-STANDALONE")
+    
+    matrix_log("comms", "midi", "main", "🚀 [MIDI] Launching Standalone MIDI Module...", "INFO")
 
-        # Master Hardware Controller (Disconnected from ProtocolRouter)
-        # enable_direct_mqtt=True ensures it broadcasts to MQTT directly
-        self.midi_manager = get_manager(state_cache_manager=None, run_bridge=True, use_protocol_router=False, enable_direct_mqtt=True)
-        self.midi_manager.start()
+    # 4. Initialize Background Services
+    mqtt_conn = None
+    state_cache = None
+    router = None
+    
+    if args.pure:
+        print("🕊️  [MIDI] Running in PURE STANDALONE mode.")
+        state_cache = StandaloneState()
+    else:
+        try:
+            from oaComProtocols.oaComMQTT.Managers.mqtt_connection import MqttConnectionManager
+            from oaStateCache.Core.state_cache import StateRegistry
+            from oaComBroker.Core.protocol_router.manager import ProtocolRouter
 
-        # Instantiate Input View in the main window
-        self.input_view = MidiDashboard(self, midi_manager=self.midi_manager, config={"app_instance": self})
-        self.input_view.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
+            router = ProtocolRouter.get_instance()
+            mqtt_conn = MqttConnectionManager()
+            state_cache = StateRegistry(mqtt_conn)
+            
+            router.set_state_cache(state_cache)
+            router.set_mqtt_manager(mqtt_conn)
+            
+            mqtt_conn.connect_to_broker(on_message_callback=state_cache.handle_incoming_mqtt)
+            mqtt_conn.subscribe("OPEN-AIR/MIDI/#")
+            router.start()
+        except ImportError:
+            print("⚠️ System mode requested but dependencies missing. Falling back to PURE.")
+            state_cache = StandaloneState()
 
-        # Launch the Output Window after a short delay to ensure root is mapped
-        self.output_window = None
-        self.after(100, self._launch_output_window)
-        
-        # Initial UI refresh for input view
-        self.after(500, self.input_view._refresh_ui)
-        self.after(2000, self.input_view._refresh_ui)
+    # 5. Start MIDI Manager
+    # If in PURE mode, enable_direct_mqtt=True will use the internal MidiMqttWorker
+    manager = get_manager(
+        state_cache_manager=state_cache, 
+        run_bridge=True, 
+        use_protocol_router=(not args.pure), 
+        enable_direct_mqtt=True
+    )
+    if router:
+        router.set_snmp_manager(manager) # Standard pattern
+    manager.start()
+    
+    # 6. Launch GUI
+    if GUI_AVAILABLE:
+        try:
+            root = tk.Tk()
+            root.title(f"OPEN-AIR | MIDI Controller ({'PURE' if args.pure else 'SYSTEM'} mode)")
+            root.geometry("1100x850")
+            root.configure(bg="#2b2b2b")
+            
+            style = ttk.Style()
+            style.theme_use('clam')
+            style.configure("TNotebook", background="#2b2b2b", borderwidth=0)
+            style.configure("TNotebook.Tab", background="#3c3f41", foreground="#ffffff", padding=[15, 5])
+            style.map("TNotebook.Tab", background=[("selected", "#4b6eaf")])
 
-        # Ensure manager is stopped when main window is closed
-        self.protocol("WM_DELETE_WINDOW", self.on_closing)
+            notebook = ttk.Notebook(root)
+            notebook.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
+            
+            def on_closing():
+                root.quit()
+                root.destroy()
+            root.protocol("WM_DELETE_WINDOW", on_closing)
+            
+            # Tab 1: Input
+            tab1 = tk.Frame(notebook, bg="#2b2b2b")
+            notebook.add(tab1, text=" 🎹 MIDI INPUT ")
+            input_view = MidiDashboard(tab1, midi_manager=manager, config={"app_instance": root})
+            input_view.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
 
-    def _launch_output_window(self):
-        """Creates the secondary Toplevel window."""
-        logger.info("🎹 [MIDI-ENTRY] Launching Output Window...")
-        self.output_window = OutputWindow(self, self.midi_manager)
+            # Tab 2: Output
+            tab2 = tk.Frame(notebook, bg="#2b2b2b")
+            notebook.add(tab2, text=" 📤 MIDI OUTPUT ")
+            output_view = MidiOutputGenerator(tab2, midi_manager=manager)
+            output_view.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
 
-    def on_closing(self):
-        """Handles cleanup when the application window is closed."""
-        if self.midi_manager:
-            logger.info("Stopping MIDI manager before closing application.")
-            self.midi_manager.stop()
-        self.destroy()
+            print(f"✅ [MIDI] Standalone GUI deployed.")
+            root.mainloop()
 
-# --- End of Dual Window Application Structure ---
+        except KeyboardInterrupt:
+            pass
+        finally:
+            manager.stop()
+            if router: router.stop()
+            if mqtt_conn: mqtt_conn.disconnect()
+            state_cache.shutdown()
+            print("🏁 [MIDI] Standalone shutdown complete.")
+    else:
+        print("❌ GUI components not available. Shutdown.")
+        manager.stop()
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        command = sys.argv[1]
-        if command == "run-gui":
-            if GUI_AVAILABLE:
-                app = StandaloneMidiApp() 
-                app.mainloop()
-            else:
-                print("GUI components are not available.")
-        elif command == "start-standalone":
-            manager = get_manager(state_cache_manager=None, run_bridge=True)
-            manager.start()
-            try:
-                while True: time.sleep(1)
-            except KeyboardInterrupt:
-                manager.stop()
-        elif command == "status":
-            print(status())
-        else:
-            print(f"Unknown command: {command}")
-    else:
-        tests_passed = run_tests()
-        if tests_passed and GUI_AVAILABLE: 
-            app = StandaloneMidiApp() 
-            app.mainloop()
-        elif GUI_AVAILABLE:
-            print("Tests failed. GUI not launched.")
+    main()
 
 __all__ = [
     "MidiManager",

@@ -1,6 +1,10 @@
-// oaComEmber/Methods/oaEmberTree-rs/src/lib.rs
+// oaComEmber/Methods/oaEmberTree_rs/mod.rs
 // Author: Anthony Peter Kuzub (via Gemini)
-// Version: 20260331.1620.1
+// Version: 20260413.1400.1
+//
+// Description: Native Ember+ tree parser and manager. Handles 
+// hierarchical data structures and parameter synchronization 
+// for broadcast control networks.
 
 use pyo3::prelude::*;
 use pyo3::types::{PyDict, PyBytes, PyList};

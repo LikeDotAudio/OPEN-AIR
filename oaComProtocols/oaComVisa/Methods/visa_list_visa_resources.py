@@ -44,13 +44,13 @@ def list_visa_resources():
         tcpip_resources = []
         other_resources = []
 
-        for res in all_resources:
-            if res.startswith("USB"):
-                usb_resources.append(res)
-            elif res.startswith("TCPIP"):
-                tcpip_resources.append(res)
+        for resource in all_resources:
+            if resource.startswith("USB"):
+                usb_resources.append(resource)
+            elif resource.startswith("TCPIP"):
+                tcpip_resources.append(resource)
             else:  # Catches ASRL, GPIB, etc.
-                other_resources.append(res)
+                other_resources.append(resource)
 
         # Prioritize list: USB -> TCPIP -> Other (ASRL). 
         # USB is typically most stable for local use.

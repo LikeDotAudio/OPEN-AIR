@@ -134,10 +134,10 @@ class IS12Manager:
         """
         # Subscription messages are typically sent to a subscription endpoint
         subscription_message = IS12SubscriptionMessage(
-            message_id=f"sub-req-{hash(str(resource_ids) + str(event_types))}", # Simple unique ID
+            message_id=f"sub-request-{hash(str(resource_ids) + str(event_types))}", # Simple unique ID
             timestamp="2026-04-05T15:47:03Z", # Example timestamp
             version="1.0.1",
-            subscription_id=f"sub-{hash(str(resource_ids) + str(event_types) + 'req')}", # Unique subscription ID
+            subscription_id=f"sub-{hash(str(resource_ids) + str(event_types) + 'request')}", # Unique subscription ID
             resource_ids=resource_ids,
             event_types=event_types,
             filter=filter_params

@@ -191,6 +191,15 @@ class StateRegistry:
                        "ERROR")
             return False
 
+    def clear_all_state(self):
+        """
+        Wipes the in-memory state registry and rebuilds the search engine.
+        Used by system purge routines to ensure memory doesn't overwrite a deleted disk cache.
+        """
+        self.rust_cache.clear()
+        self.search_engine.rebuild({})
+        matrix_log("core", "data", "clear_all_state", "🗑️ [CACHE] In-memory state registry cleared.", "INFO")
+
     def shutdown(self): 
         """Gracefully terminates the save engine threads."""
         self.save_engine.shutdown()
@@ -199,8 +208,14 @@ class StateRegistry:
         """Standardized subscription to system-critical MQTT roots."""
         if self.mqtt:
             base = app_constants.MQTT_BASE_TOPIC
-            roots = [f"{base}/Cmd/#", f"{base}/Tx/#", f"{base}/System/Status/#", 
-                     f"{base}/System/Monitor/#", f"{base}/System/Control/#"]
+            roots = [
+                f"{base}/Cmd/#", f"{base}/Tx/#", f"{base}/System/Status/#", 
+                f"{base}/System/Monitor/#", f"{base}/System/Control/#",
+                f"{base}/Assets/#", f"{base}/Spectrum/#", f"{base}/GUI/#", 
+                f"{base}/oaGui/#", f"{base}/MIDI/#", f"{base}/OSC/#", 
+                f"{base}/NMOS/#", f"{base}/AES70/#", f"{base}/SMPTE2138/#", 
+                f"{base}/EMBER/#"
+            ]
             
             for root in roots:
                 matrix_log("core", "data", "subscribe_to_all_topics", 
@@ -343,6 +358,14 @@ class StateRegistry:
 
         try:
             source, value, metadata, raw_payload = self._parse_mqtt_payload(message)
+
+            # ⚡ V3.1.25 GLOBAL PURGE COMMAND
+            if topic.endswith("/System/Control/ClearCache"):
+                if str(value).lower() in ["true", "1"]:
+                    if app_constants.ROUTER_INGEST_LOGS:
+                        matrix_log("core", "data", "handle_incoming_mqtt", "📡🗑️ [CACHE] Received global clear cache command over MQTT. Wiping memory.", "WARNING")
+                    self.clear_all_state()
+                return
 
             # ⚡ V3.1.16 REFLECTION DETECTION
             # Identify if this message was authored by the local instance.

@@ -13,7 +13,8 @@ from oaOchestration.Methods.network_utils import get_local_ip
 from oaOchestration.Constants.project_paths import (
     SNMP_STATE_FILE, 
     SNMP_SET_LOG, 
-    SNMP_CURRENT_MIB
+    SNMP_CURRENT_MIB,
+    SNMP_OPENAIR_MIB
 )
 
 from oaComProtocols.oaComSNMP.Core.oid_map_converter import OidMapConverter
@@ -125,9 +126,12 @@ class SNMPManager:
 
         if self.run_bridge and self.context.state_cache_manager:
             if topic and "Monitor/SNMP" in topic: return
+            
+            # ⚡ ANTI-LOOP: Tag our outgoing activity logs so we don't ingest them back
             monitor_payload = {
                 "value": value, "source": "SNMP", "oid": oid,
-                "topic": topic, "direction": direction, "timestamp": time.time(), "metadata": metadata
+                "topic": topic, "direction": direction, "timestamp": time.time(), "metadata": metadata,
+                "origin_source": "oaComSNMP"
             }
             self.context.state_cache_manager.handle_external_update(
                 "OPEN-AIR/System/Monitor/SNMP/Activity", monitor_payload, source="SNMP"
@@ -142,17 +146,34 @@ class SNMPManager:
             if not self._running: return
             
             # ⚡ REFLECTION: Only update our internal state if the message originated from MQTT
+            # OR if we are the bridge and this is a direct dispatch (logical_source is NOT SNMP)
             source = message.get("source", "UNKNOWN").upper()
-            if source == "MQTT":
-                # ⚡ ANTI-FEEDBACK SPEC: Drop messages that we published to prevent echo loops
-                meta = message.get("meta", {})
-                if meta.get("origin_source") in ["oaComSNMP", "SNMP"]:
-                    return
+            is_reflection = message.get("is_reflection", False)
+            
+            # If it's a reflection of our own authorship, ignore it
+            meta = message.get("meta", {})
+            if is_reflection or meta.get("origin_source") in ["oaComSNMP", "SNMP"]:
+                return
 
+            if source == "MQTT" or (self.run_bridge and source != "SNMP"):
                 topic = message.get("topic")
                 if topic:
                     # Update local state mirror with the normalized router packet
                     self._mqtt_state[topic] = message
+
+    def publish(self, topic, value, meta=None):
+        """
+        Direct dispatch entry point for the ProtocolRouter.
+        Standardizes the incoming data into a synthetic router packet for the state mirror.
+        """
+        synthetic_message = {
+            "source": "INTERNAL",
+            "logical_source": "ROUTER",
+            "topic": topic,
+            "value": value,
+            "meta": meta or {}
+        }
+        self.handle_protocol_event(synthetic_message)
 
     def start(self, display_root=None):
         with self._state_lock:
@@ -167,13 +188,40 @@ class SNMPManager:
         oid_source = display_root or getattr(configuration, "OID_MAP_SOURCE", None)
         
         if oid_source and os.path.exists(oid_source):
+            start_oid = time.time()
+            matrix_log("comms", "snmp", "start", f"📡 [SNMP] Initializing OID Map from: {oid_source}...", "DEBUG")
             initialize_oid_map(oid_source)
-            matrix_log("comms", "snmp", "start", f"📡 [SNMP] OID Map initialized from: {oid_source}", "SUCCESS")
+            end_oid = time.time()
+            matrix_log("comms", "snmp", "start", f"📡 [SNMP] OID Map initialized from: {oid_source} in {end_oid - start_oid:.4f}s.", "SUCCESS")
         else:
             matrix_log("comms", "snmp", "start", "📡 [SNMP] No OID Map source found. Using default/flat topic mapping.", "WARNING")
 
+        matrix_log("comms", "snmp", "start", "📡 [SNMP] Starting persistence and monitoring workers...", "DEBUG")
         self.state_persister.start()
         self.log_monitor.start()
+
+        # ⚡ PRIME STATE: Initialize our internal mirror from the global state cache
+        if self.context.state_cache_manager:
+            with self._state_lock:
+                start_time = time.time()
+                matrix_log("comms", "snmp", "start", "📡 [SNMP] Priming state mirror from cache...", "DEBUG")
+                
+                # ⚡ PERFORMANCE: Directly iterate over Rust cache items to avoid deepcopy/dict conversion
+                items = self.context.state_cache_manager.rust_cache.items()
+                mid_time = time.time()
+                matrix_log("comms", "snmp", "start", f"📡 [SNMP] Cache items retrieved in {mid_time - start_time:.4f}s. Normalizing {len(items)} entries...", "DEBUG")
+                
+                for topic, payload in items:
+                    if topic not in self._mqtt_state:
+                        # Normalize cached entries into router-like packets
+                        self._mqtt_state[topic] = {
+                            "source": "CACHE",
+                            "topic": topic,
+                            "value": payload.get("value") if isinstance(payload, dict) else payload,
+                            "meta": payload if isinstance(payload, dict) else {}
+                        }
+                end_time = time.time()
+                matrix_log("comms", "snmp", "start", f"📡 [SNMP] Primed state mirror in {end_time - mid_time:.4f}s. Total: {end_time - start_time:.4f}s.", "INFO")
 
         from oaComBroker.Core.protocol_router.manager import ProtocolRouter
         router = ProtocolRouter.get_instance()
@@ -241,9 +289,6 @@ class SNMPManager:
         self.state_persister.stop()
         self.log_monitor.stop()
 
-    def publish(self, topic, value, meta=None):
-        pass
-
     def get_mib_content(self):
         state_snapshot = self.get_mqtt_state()
         oid_map_data = self.oid_map_converter.build_oid_map(state_snapshot=state_snapshot)
@@ -254,9 +299,17 @@ class SNMPManager:
         try:
             os.makedirs(os.path.dirname(SNMP_CURRENT_MIB), exist_ok=True)
             content = self.get_mib_content()
+            
+            # Write to 'current.mib' for internal tracking
             with open(SNMP_CURRENT_MIB, "w", encoding="utf-8") as f:
                 f.write(content)
-            if is_debug_allowed("comms", "snmp"): snmp_logger.success(f"MIB Synchronized to {SNMP_CURRENT_MIB}")
+            
+            # Write to 'OPEN-AIR.mib' for external delivery as requested
+            with open(SNMP_OPENAIR_MIB, "w", encoding="utf-8") as f:
+                f.write(content)
+                
+            if is_debug_allowed("comms", "snmp"): 
+                snmp_logger.success(f"MIB Synchronized to {SNMP_CURRENT_MIB} and {SNMP_OPENAIR_MIB}")
             return True
         except Exception as e:
             snmp_logger.error(f"Failed to save MIB: {e}")

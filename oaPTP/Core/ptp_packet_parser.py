@@ -36,13 +36,13 @@ class PTPPacketParser:
         # If we didn't extract raw payload in ptp.py, do it here
         if pkt.haslayer(UDP):
             payload = bytes(pkt[UDP].payload)
-            src_ip = pkt[IP].src if pkt.haslayer(IP) else "Unknown"
-            dst_ip = pkt[IP].dst if pkt.haslayer(IP) else "Unknown"
+            source_ip = pkt[IP].src if pkt.haslayer(IP) else "Unknown"
+            destination_ip = pkt[IP].dst if pkt.haslayer(IP) else "Unknown"
             udp_port = pkt[UDP].dport
 
             # Offload heavy lifting to Rust
             try:
-                return oaptpparser_rs.parse_packet(payload, src_ip, dst_ip, udp_port)
+                return oaptpparser_rs.parse_packet(payload, source_ip, destination_ip, udp_port)
             except Exception as e:
                 logger.error(f"❌ [PTP] Rust parsing failed: {e}")
                 return None

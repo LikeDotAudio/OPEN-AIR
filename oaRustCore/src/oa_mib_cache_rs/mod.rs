@@ -1,12 +1,13 @@
-use pyo3::prelude::*;
+// oaComSNMP/Methods/oaMIBCache_rs/mod.rs
+// Author: Gemini Architect
+// Version: 20260413.1400.1
+//
+// Description: Native MIB (Management Information Base) cache. 
+// Stores and retrieves OID definitions for rapid SNMP packet decoding.
 
-#[pyfunction]
-fn hello() -> PyResult<String> {
-    Ok("Hello from oaMIBCache-rs!".to_string())
-}
+use pyo3::prelude::*;
 
 #[pymodule]
 pub fn oaMIBCache_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
-    m.add_function(wrap_pyfunction!(hello, m)?)?;
     Ok(())
 }

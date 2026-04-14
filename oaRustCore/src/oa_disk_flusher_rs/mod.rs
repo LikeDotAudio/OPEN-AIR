@@ -1,6 +1,9 @@
-// oaStateCache/Core/oaDiskFlusher_rs/src/lib.rs
+// oaStateCache/Core/oaDiskFlusher_rs/mod.rs
 // Author: Anthony Peter Kuzub (via Gemini)
-// Version: 20260401.1200.1
+// Version: 20260413.1400.1
+//
+// Description: State persistence engine. Atomically flushes the 
+// state registry to disk using temporary files and atomic moves.
 
 use pyo3::prelude::*;
 use pyo3::types::{PyDict, PyList, PyBool, PyFloat, PyInt, PyString, PyBytes};

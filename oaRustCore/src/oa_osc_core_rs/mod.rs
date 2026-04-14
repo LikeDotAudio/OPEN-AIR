@@ -1,6 +1,10 @@
-// oaComOSC/Methods/oaOSCCore_rs/src/lib.rs
+// oaComOSC/Methods/oaOSCCore_rs/mod.rs
 // Author: Anthony Peter Kuzub (via Gemini)
-// Version: 20260401.1500.3
+// Version: 20260413.1400.1
+//
+// Description: High-performance OSC (Open Sound Control) core. 
+// Provides low-level UDP packet parsing and construction for 
+// high-frequency fader and metering updates.
 
 use pyo3::prelude::*;
 use pyo3::types::PyDict;

@@ -61,7 +61,7 @@ class RESTManager:
         self._initialized = self._try_initialize()
         
         # 2. State Integration (Read-only status now)
-        if self.state_cache:
+        if self.state_cache and hasattr(self.state_cache, 'handle_external_update'):
             # We no longer listen for 'Enabled' toggles; REST is mandatory.
             self.state_cache.handle_external_update(self.STATE_TOPIC, True, source="REST-INIT")
 
@@ -128,7 +128,7 @@ class RESTManager:
                         self._launch_instance()
                     
                 # Update status in cache
-                if self.state_cache:
+                if self.state_cache and hasattr(self.state_cache, 'handle_external_update'):
                     self.state_cache.handle_external_update(self.STATE_TOPIC, self.is_running() or self._sibling_active, source="REST-HB")
 
             except Exception as e: 

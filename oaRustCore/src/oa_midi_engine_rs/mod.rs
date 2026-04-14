@@ -1,6 +1,10 @@
-// oaComMidi/Methods/oaMidiEngine-rs/src/lib.rs
+// oaComMidi/Methods/oaMidiEngine_rs/mod.rs
 // Author: Anthony Peter Kuzub (via Gemini)
-// Version: 20260403.2300.1
+// Version: 20260413.1400.1
+//
+// Description: Low-latency MIDI I/O engine. Utilizes `midir` for 
+// platform-agnostic device management and provides an asynchronous 
+// event bridge to the central Python orchestrator.
 
 use pyo3::prelude::*;
 use pyo3::types::{PyList, PyDict, PyBytes};
@@ -53,15 +57,15 @@ impl MidiEngine {
             return Err(PyErr::new::<pyo3::exceptions::PyValueError, _>("Port index out of range"));
         }
         
-        let (tx, rx) = unbounded();
+        let (transmitter, receiver) = unbounded();
         {
             let mut receiver_lock = self.receiver.lock().unwrap();
-            *receiver_lock = rx;
+            *receiver_lock = receiver;
         }
         
         let port = &ports[port_index];
         let conn = midi_in.connect(port, "OPEN-AIR-Input-Connection", move |timestamp, data, _| {
-            let _ = tx.send(MidiEvent { timestamp: timestamp, data: data.to_vec() });
+            let _ = transmitter.send(MidiEvent { timestamp: timestamp, data: data.to_vec() });
         }, ()).map_err(|e| PyErr::new::<pyo3::exceptions::PyRuntimeError, _>(e.to_string()))?;
         
         let mut conn_lock = self.input_conn.lock().unwrap();

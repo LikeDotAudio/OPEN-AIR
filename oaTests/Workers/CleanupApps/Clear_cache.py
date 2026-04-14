@@ -35,7 +35,6 @@ def purge_cache():
         project_root / "oaDataCache",
         project_root / "oaDataRunningFiles",
         project_root / "oaDataSplinks",
-        project_root / "oaDataLogs" / "SNMP",
         project_root / "oaDataLogs" / "Reports",
         project_root / ".pytest_cache" / "RUN",
         project_root / "DATA" # Legacy compatibility
@@ -44,7 +43,12 @@ def purge_cache():
     # Specific files to remove
     target_files = [
         project_root / "oaDataCache" / "device_state_cache.json",
-        project_root / "oaDataCache" / "layout_cache.json"
+        project_root / "oaDataCache" / "layout_cache.json",
+        project_root / "oaComProtocols" / "oaComSNMP" / "Assets" / "current.mib",
+        project_root / "oaComProtocols" / "oaComSNMP" / "Assets" / "OPEN-AIR.mib",
+        project_root / "oaComProtocols" / "oaComSNMP" / "Assets" / "openair_snmp_objects.txt",
+        project_root / "oaComProtocols" / "oaComSNMP" / "Assets" / "openair_snmp_set.log",
+        project_root / "oaComProtocols" / "oaComSNMP" / "Assets" / "bridge_debug.log"
     ]
 
     matrix_log("core", "system", "purge_cache", "📡📤📤 [CLEAR_CACHE] Starting local cache and state purge...", "INFO")
@@ -88,6 +92,25 @@ def purge_cache():
         matrix_log("core", "system", "purge_cache", "✨ Directory structure integrity verified.", "INFO")
     except Exception as e:
         logger.error(f"❌ Failed to initialize paths: {e}")
+
+    # 3. Clear in-memory state cache to prevent automatic recreation with old data
+    try:
+        import oaStateCache.Entry as StateCacheEntry
+        registry = StateCacheEntry.get_registry()
+        if registry and hasattr(registry, "clear_all_state"):
+            matrix_log("core", "system", "purge_cache", "🧠 Wiping in-memory State Registry...", "INFO")
+            registry.clear_all_state()
+            matrix_log("core", "system", "purge_cache", "🧠 In-memory State Registry wiped.", "INFO")
+    except Exception as e:
+        logger.error(f"  └─ ❌ Failed to clear in-memory state cache: {e}")
+
+    # 4. Notify distributed processes via MQTT
+    try:
+        import paho.mqtt.publish as publish
+        matrix_log("core", "system", "purge_cache", "📡 Broadcasting global cache clear command...", "INFO")
+        publish.single("OPEN-AIR/System/Control/ClearCache", "true", hostname="localhost", port=1883)
+    except Exception as e:
+        logger.warning(f"  └─ ⚠️ Failed to broadcast MQTT clear cache command: {e}")
 
     matrix_log("core", "system", "purge_cache", "📡📤📤 [CLEAR_CACHE] Cache purge complete.", "INFO")
 

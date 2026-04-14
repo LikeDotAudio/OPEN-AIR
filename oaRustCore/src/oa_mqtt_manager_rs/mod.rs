@@ -1,6 +1,9 @@
-// oaComMQTT/Core/oaMQTTManager_rs/src/lib.rs
+// oaComMQTT/Core/oaMQTTManager_rs/mod.rs
 // Author: Anthony Peter Kuzub (via Gemini)
-// Version: 20260331.2350.2
+// Version: 20260413.1400.1
+//
+// Description: Native MQTT subscription and routing manager. 
+// Handles high-frequency message distribution using lock-free DashMaps.
 
 use pyo3::prelude::*;
 use dashmap::DashMap;

@@ -188,24 +188,24 @@ class DirectoryBuilderMixin:
                         total_weight = sum(max(1, p.get("weight", 1)) for p in panels)
                         if total_weight == 0: return
                         cumulative_size = 0
-                        last_pos = 0
+                        last_position = 0
                         
                         try:
                             for i in range(len(panels) - 1):
                                 weight = max(1, panels[i].get("weight", 1))
                                 if orientation == tk.HORIZONTAL:
                                     cumulative_size += (w * weight) / total_weight
-                                    pos = max(last_pos + 1, min(int(w) - (len(panels) - i), int(cumulative_size)))
-                                    # ⚡ HARDENING: Ensure pos is at least 1 and within bounds before calling sashpos
-                                    pos = max(1, int(pos))
-                                    paned_window.sashpos(i, pos)
+                                    position = max(last_position + 1, min(int(w) - (len(panels) - i), int(cumulative_size)))
+                                    # ⚡ HARDENING: Ensure position is at least 1 and within bounds before calling sashpos
+                                    position = max(1, int(position))
+                                    paned_window.sashpos(i, position)
                                 else:
                                     cumulative_size += (h * weight) / total_weight
-                                    pos = max(last_pos + 1, min(int(h) - (len(panels) - i), int(cumulative_size)))
-                                    # ⚡ HARDENING: Ensure pos is at least 1 and within bounds before calling sashpos
-                                    pos = max(1, int(pos))
-                                    paned_window.sashpos(i, pos)
-                                last_pos = pos
+                                    position = max(last_position + 1, min(int(h) - (len(panels) - i), int(cumulative_size)))
+                                    # ⚡ HARDENING: Ensure position is at least 1 and within bounds before calling sashpos
+                                    position = max(1, int(position))
+                                    paned_window.sashpos(i, position)
+                                last_position = position
                         except tk.TclError as e:
                             # 🛡️ RECURSION GUARD: Catch TclErrors to prevent X11 BadValue (0x0) crashes 
                             # during rapid layout changes or initial settling.
@@ -253,21 +253,21 @@ class DirectoryBuilderMixin:
                         slot.grid(row=i, column=0, sticky="nsew")
                         slots.append(slot)
 
-                    def _process_recursive(idx=0):
-                        if idx >= len(all_items):
+                    def _process_recursive(item_index=0):
+                        if item_index >= len(all_items):
                             if on_complete: on_complete()
                             return
                         
-                        item = all_items[idx]
-                        slot = slots[idx]
+                        item = all_items[item_index]
+                        slot = slots[item_index]
                         if isinstance(item, dict):
-                            self._build_from_directory(path=path, parent_widget=slot, on_complete=lambda: self.after(1, lambda: _process_recursive(idx + 1)), layout_override=item)
+                            self._build_from_directory(path=path, parent_widget=slot, on_complete=lambda: self.after(1, lambda: _process_recursive(item_index + 1)), layout_override=item)
                         elif isinstance(item, (str, pathlib.Path)):
                             instance = self.module_loader.load_and_instantiate_gui(path=item, parent_widget=slot)
                             if instance: instance.pack(fill=tk.BOTH, expand=True)
-                            self.after(1, lambda: _process_recursive(idx + 1))
+                            self.after(1, lambda: _process_recursive(item_index + 1))
                         else:
-                            self.after(1, lambda: _process_recursive(idx + 1))
+                            self.after(1, lambda: _process_recursive(item_index + 1))
                     
                     _process_recursive(0)
                 elif on_complete: on_complete()

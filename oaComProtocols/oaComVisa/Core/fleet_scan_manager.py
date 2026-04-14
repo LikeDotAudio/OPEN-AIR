@@ -1,17 +1,22 @@
-import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
-# Core/fleet_scan_mixin.py
+# Core/fleet_scan_manager.py
 # Author: Anthony Peter Kuzub
-# Version: 1.0.0
+# Version: 2.0.0
 #
-# Description: Brief summary of purpose
+# Description: Refactored Scan Manager (Composition over Inheritance).
 
+import inspect
 import orjson
 import traceback
+import threading
 from loguru import logger
+from oaLogging.Methods.matrix_gate import matrix_log
 
-class FleetScanMixin:
+class ScanManager:
     """Manages the discovery scan sequence and MQTT status broadcasting."""
+
+    def __init__(self, orchestrator):
+        self._orchestrator = orchestrator
+        self.initial_scan_complete_event = threading.Event()
 
     def trigger_scan(self):
         """Initiates a comprehensive network scan for VISA instruments."""
@@ -20,7 +25,7 @@ class FleetScanMixin:
             
         self._publish_scan_status("Start", {"status": "scanning"})
         try:
-            num_devices_found = self.discovery_orchestrator.scan_and_manage_fleet()
+            num_devices_found = self._orchestrator.discovery_orchestrator.scan_and_manage_fleet()
             self._publish_scan_status("Complete", {"status": "ready", "num_devices": num_devices_found})
         except Exception as e:
             logger.exception(f"💳🚢🔍 [VISA] CRITICAL: Fleet scan failed.\nForensic Report:\n{traceback.format_exc()}")
@@ -39,7 +44,8 @@ class FleetScanMixin:
 
     def _publish_scan_status(self, status, payload):
         """Sends scan progress information to the MQTT status topic."""
-        if self.mqtt_bridge and self.mqtt_bridge.is_connected:
+        bridge = self._orchestrator.mqtt_bridge
+        if bridge and bridge.is_connected:
             topic = f"OPEN-AIR/System/Status/Fleet/{status}"
-            self.mqtt_bridge.mqtt_manager.publish(topic, orjson.dumps(payload).decode())
+            bridge.mqtt_manager.publish(topic, orjson.dumps(payload).decode())
             matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Published scan status '{status}' to '{topic}'", "DEBUG")

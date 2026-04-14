@@ -82,9 +82,9 @@ def probe_devices(resource_manager, potential_targets):
         tcp_map = {}
         probe_list = []
         for target in potential_targets:
-            res = target["Resource"]
-            if "TCPIP" in res:
-                parts = res.split("::")
+            resource = target["Resource"]
+            if "TCPIP" in resource:
+                parts = resource.split("::")
                 if len(parts) > 1:
                     ip = parts[1]
                     tcp_map[ip] = target
@@ -98,13 +98,13 @@ def probe_devices(resource_manager, potential_targets):
             
             filtered = []
             for target in potential_targets:
-                res = target["Resource"]
-                if "TCPIP" in res:
-                    parts = res.split("::")
+                resource = target["Resource"]
+                if "TCPIP" in resource:
+                    parts = resource.split("::")
                     if len(parts) > 1 and parts[1] in reachable_ips:
                         filtered.append(target)
                     else:
-                        matrix_log("comms", "visa", "probe_devices", f"   ⏭️ Skipping unreachable host: {res}", "DEBUG")
+                        matrix_log("comms", "visa", "probe_devices", f"   ⏭️ Skipping unreachable host: {resource}", "DEBUG")
                 else:
                     filtered.append(target)
             potential_targets = filtered

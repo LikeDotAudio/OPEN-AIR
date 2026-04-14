@@ -1,6 +1,9 @@
-// oaTranslator/Methods/oaManifestGen_rs/src/lib.rs
+// oaTranslator/Methods/oaManifestGen_rs/mod.rs
 // Author: Anthony Peter Kuzub (via Gemini)
-// Version: 20260409.1200.1
+// Version: 20260413.1400.1
+//
+// Description: Project manifest generator. Creates cryptographically 
+// signed JSON manifests for module integrity verification.
 
 use pyo3::prelude::*;
 use pyo3::types::PyDict;

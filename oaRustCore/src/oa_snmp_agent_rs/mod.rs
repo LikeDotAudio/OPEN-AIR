@@ -1,6 +1,10 @@
-// oaComSNMP/Methods/oaSNMPAgent_rs/src/lib.rs
+// oaComSNMP/Methods/oaSNMPAgent_rs/mod.rs
 // Author: Anthony Peter Kuzub (via Gemini)
-// Version: 20260331.1920.2
+// Version: 20260413.1400.1
+//
+// Description: Native SNMP agent responder. Manages OID trees 
+// and MIB responses in Rust to ensure consistent performance 
+// regardless of Python GIL load.
 
 use pyo3::prelude::*;
 use pyo3::types::PyDict;
@@ -67,14 +71,8 @@ fn format_oid(oid: &[u32]) -> String {
     format!(".{}", parts.join("."))
 }
 
-#[pyfunction]
-fn sum_as_string(a: usize, b: usize) -> PyResult<String> {
-    Ok((a + b).to_string())
-}
-
 #[pymodule]
 pub fn oasnmpagent_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<SnmpAgent>()?;
-    m.add_function(wrap_pyfunction!(sum_as_string, m)?)?;
     Ok(())
 }

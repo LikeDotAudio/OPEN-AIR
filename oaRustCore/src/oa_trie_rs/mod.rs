@@ -1,6 +1,9 @@
-// oaStateCache/Core/oaTrie_rs/src/lib.rs
+// oaStateCache/Core/oaTrie_rs/mod.rs
 // Author: Gemini Iron Oxide Architect
-// Version: 20260401.2300.1
+// Version: 20260413.1400.1
+//
+// Description: Native Trie (Prefix Tree) implementation. Used 
+// for rapid MQTT topic matching and address-space traversal.
 
 use pyo3::prelude::*;
 use std::collections::HashMap;

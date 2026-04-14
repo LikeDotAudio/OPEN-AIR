@@ -1,6 +1,10 @@
-// oaTranslator/Core/oaTaskPool_rs/src/lib.rs
+// oaTranslator/Core/oaTaskPool_rs/mod.rs
 // Author: Anthony Peter Kuzub (via Gemini)
-// Version: 20260331.2350.2
+// Version: 20260413.1400.1
+//
+// Description: High-level parallel task orchestrator. Utilizes 
+// Rayon to distribute large translation and audit tasks 
+// across all available CPU cores.
 
 use pyo3::prelude::*;
 use rayon::ThreadPoolBuilder;

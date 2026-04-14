@@ -38,7 +38,15 @@ class MqttSubscriberRouter:
             "Spectrum": f"{self._base_topic}/Spectrum/#",
             "Status": f"{self._base_topic}/System/Status/#",
             "Monitor": f"{self._base_topic}/System/Monitor/#",
-            "Control": f"{self._base_topic}/System/Control/#"
+            "Control": f"{self._base_topic}/System/Control/#",
+            "GUI": f"{self._base_topic}/GUI/#",
+            "oaGui": f"{self._base_topic}/oaGui/#",
+            "MIDI": f"{self._base_topic}/MIDI/#",
+            "OSC": f"{self._base_topic}/OSC/#",
+            "NMOS": f"{self._base_topic}/NMOS/#",
+            "AES70": f"{self._base_topic}/AES70/#",
+            "SMPTE2138": f"{self._base_topic}/SMPTE2138/#",
+            "EMBER": f"{self._base_topic}/EMBER/#"
         }
         
         # Track what we've actually asked the broker for
@@ -65,6 +73,14 @@ class MqttSubscriberRouter:
                 elif "/Status/" in topic_filter: root_to_use = self._roots["Status"]
                 elif "/Monitor/" in topic_filter: root_to_use = self._roots["Monitor"]
                 elif "/Control/" in topic_filter: root_to_use = self._roots["Control"]
+                elif "/GUI/" in topic_filter: root_to_use = self._roots["GUI"]
+                elif "/oaGui/" in topic_filter: root_to_use = self._roots["oaGui"]
+                elif "/MIDI/" in topic_filter: root_to_use = self._roots["MIDI"]
+                elif "/OSC/" in topic_filter: root_to_use = self._roots["OSC"]
+                elif "/NMOS/" in topic_filter: root_to_use = self._roots["NMOS"]
+                elif "/AES70/" in topic_filter: root_to_use = self._roots["AES70"]
+                elif "/SMPTE2138/" in topic_filter: root_to_use = self._roots["SMPTE2138"]
+                elif "/EMBER/" in topic_filter: root_to_use = self._roots["EMBER"]
                 
                 # ⚡ OPTIMIZATION: If it matches a root, use the root. 
                 # Otherwise, subscribe to the specific filter.

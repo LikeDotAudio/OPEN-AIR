@@ -1,6 +1,9 @@
-// oaGuiElements/Methods/oaNeedleEngine_rs/src/lib.rs
+// oaGuiElements/Methods/oaNeedleEngine_rs/mod.rs
 // Author: Anthony Peter Kuzub (via Gemini)
-// Version: 20260331.2355.1
+// Version: 20260413.1400.1
+//
+// Description: Ballistic engine for virtual analog needles. 
+// Simulates physical mass and damping for realistic meter movement.
 
 use pyo3::prelude::*;
 use pyo3::types::{PyDict, PyList};

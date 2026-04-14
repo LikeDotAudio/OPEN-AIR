@@ -140,11 +140,11 @@ def packet_callback(pkt):
     Process captured network packets and extract PTP-specific information.
     """
     ptp_layer = None
-    src = "Unknown"
+    source = "Unknown"
     dport = 0
 
     if pkt.haslayer(UDP):
-        src = pkt[IP].src if IP in pkt else "Unknown"
+        source = pkt[IP].src if IP in pkt else "Unknown"
         dport = pkt[UDP].dport
         
         # Determine if the packet contains a recognized PTP layer.
@@ -157,7 +157,7 @@ def packet_callback(pkt):
                 ptp_layer = PTP(payload)
 
     if ptp_layer:
-        matrix_log("CORE", "PTP", inspect.currentframe().f_code.co_name, f"\n[+] Captured PTP Packet from {src} on port {dport}", level="INFO")
+        matrix_log("CORE", "PTP", inspect.currentframe().f_code.co_name, f"\n[+] Captured PTP Packet from {source} on port {dport}", level="INFO")
         ptp_layer.show()
         
         # Relay the captured metrics to the system-wide MQTT bus.
@@ -174,7 +174,7 @@ def packet_callback(pkt):
 
             data = {
                 "timestamp": time.time(),
-                "source_ip": src,
+                "source_ip": source,
                 "udp_port": dport,
                 "message_type": m_type,
                 "domain": domain,
@@ -184,7 +184,7 @@ def packet_callback(pkt):
             mqtt_client.publish(MQTT_TOPIC, orjson.dumps(data).decode())
     elif pkt.haslayer(UDP):
         # Provide diagnostic feedback for unexpected traffic on PTP ports.
-        matrix_log("CORE", "PTP", inspect.currentframe().f_code.co_name, f"\n[+] Captured UDP Packet from {src} on port {dport}", level="INFO")
+        matrix_log("CORE", "PTP", inspect.currentframe().f_code.co_name, f"\n[+] Captured UDP Packet from {source} on port {dport}", level="INFO")
         payload = bytes(pkt[UDP].payload)
         matrix_log("CORE", "PTP", inspect.currentframe().f_code.co_name, f"Raw Payload (Hex): {payload.hex()}", level="INFO")
         matrix_log("CORE", "PTP", inspect.currentframe().f_code.co_name, f"Raw Payload (Length): {len(payload)} bytes", level="INFO")

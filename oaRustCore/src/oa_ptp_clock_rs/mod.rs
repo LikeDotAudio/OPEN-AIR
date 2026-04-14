@@ -1,6 +1,10 @@
-// oaPTP/Methods/oaPTPClock-rs/src/lib.rs
+// oaPTP/Methods/oaPTPClock_rs/mod.rs
 // Author: Anthony Peter Kuzub (via Gemini)
-// Version: 20260331.2120.1
+// Version: 20260413.1400.1
+//
+// Description: Native PTP clock synchronization interface. Manages 
+// nanosecond-precision hardware and software timestamps for 
+// chronologically aligned media events.
 
 use pyo3::prelude::*;
 use std::sync::Arc;

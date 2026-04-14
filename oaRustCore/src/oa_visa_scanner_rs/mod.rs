@@ -1,6 +1,10 @@
-// oaComVisa/Methods/oaVisaScanner_rs/src/lib.rs
+// oaComVisa/Methods/oaVisaScanner_rs/mod.rs
 // Author: Anthony Peter Kuzub (via Gemini)
-// Version: 20260401.1600.1
+// Version: 20260413.1400.1
+//
+// Description: High-speed VISA network resource scanner. Performs 
+// parallel TCP probing to identify reachable T&M equipment across 
+// specified IP ranges.
 
 use pyo3::prelude::*;
 use pyo3::types::{PyDict, PyList};
@@ -40,8 +44,8 @@ impl VisaScanner {
         });
 
         let py_results = PyList::empty_bound(py);
-        for res in results {
-            if let Some((ip, port, reachable)) = res {
+        for result in results {
+            if let Some((ip, port, reachable)) = result {
                 let dict = PyDict::new_bound(py);
                 let _ = dict.set_item("ip", ip);
                 let _ = dict.set_item("port", port);

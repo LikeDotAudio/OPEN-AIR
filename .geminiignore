@@ -10,10 +10,4 @@
 
 # Ignore all Open-Air Data directories
 oaData*/
-oaDataAudits/
-oaDataCache/
-oaDataLogs/
-oaDataLogs/SNMP/
-oaDataSplinks/
-oaDataRunningFiles/
 .pytest_cache/

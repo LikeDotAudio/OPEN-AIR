@@ -1,6 +1,9 @@
-// oaGuiElements/Core/metering/oaMeteringEngine-rs/src/lib.rs
+// oaGuiElements/Core/metering/oaMeteringEngine_rs/mod.rs
 // Author: Anthony Peter Kuzub (via Gemini)
-// Version: 20260331.1700.1
+// Version: 20260413.1400.1
+//
+// Description: High-speed metering calculation engine. Processes 
+// raw audio level data into peak/RMS values for GUI visualization.
 
 use pyo3::prelude::*;
 use std::time::{SystemTime, UNIX_EPOCH};
@@ -202,14 +205,8 @@ impl BallisticsEngine {
     fn overload_fade_factor(&self) -> f64 { self.overload_fade_factor }
 }
 
-#[pyfunction]
-fn sum_as_string(a: usize, b: usize) -> PyResult<String> {
-    Ok((a + b).to_string())
-}
-
 #[pymodule]
 pub fn oameteringengine_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<BallisticsEngine>()?;
-    m.add_function(wrap_pyfunction!(sum_as_string, m)?)?;
     Ok(())
 }

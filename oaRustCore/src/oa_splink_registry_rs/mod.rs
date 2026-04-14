@@ -1,6 +1,10 @@
-// oaSplinker/Core/oaSplinkRegistry_rs/src/lib.rs
+// oaSplinker/Core/oaSplinkRegistry_rs/mod.rs
 // Author: Anthony Peter Kuzub (via Gemini)
-// Version: 20260331.2340.4
+// Version: 20260413.1400.1
+//
+// Description: Thread-safe SPLINK registration store. Manages 
+// active cross-fades and parameter links using DashMap for 
+// concurrent protocol access.
 
 use pyo3::prelude::*;
 use pyo3::types::PyDict;

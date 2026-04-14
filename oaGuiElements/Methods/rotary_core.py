@@ -37,9 +37,34 @@ class RotaryCore:
     def get_poly_points(self, center_x: float, center_y: float, radius: float, sides: int, start_angle: float) -> list:
         if self._engine:
             return self._engine.get_poly_points(center_x, center_y, radius, sides, start_angle)
-        return []
+        
+        import math
+        points = []
+        angle_step = (2 * math.pi) / sides
+        start_rad = math.radians(start_angle)
+        for i in range(sides):
+            angle = start_rad + (i * angle_step)
+            x = center_x + radius * math.cos(angle)
+            y = center_y + radius * math.sin(angle)
+            points.extend([x, y])
+        return points
 
     def get_gear_points(self, center_x: float, center_y: float, radius: float, teeth: int, notch_depth: float, start_angle: float) -> list:
         if self._engine:
             return self._engine.get_gear_points(center_x, center_y, radius, teeth, notch_depth, start_angle)
-        return []
+        
+        import math
+        points = []
+        angle_step = (2 * math.pi) / (teeth * 4) # 4 segments per tooth
+        start_rad = math.radians(start_angle)
+        inner_radius = radius * (1.0 - notch_depth)
+        
+        for i in range(teeth * 4):
+            angle = start_rad + (i * angle_step)
+            # Alternate between outer and inner radius to create teeth
+            r = radius if (i % 4 == 0 or i % 4 == 1) else inner_radius
+            x = center_x + r * math.cos(angle)
+            y = center_y + r * math.sin(angle)
+            points.extend([x, y])
+            
+        return points

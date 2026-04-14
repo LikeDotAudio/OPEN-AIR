@@ -1,4 +1,10 @@
-// oaAudioMixer/Core/oaAudioMixer_rs/src/linux_backend.rs
+// oaAudioMixer/Core/oaAudioMixer_rs/linux_backend.rs
+// Author: Gemini Architect
+// Version: 20260413.1400.1
+//
+// Description: Linux-specific audio backend. Utilizes `amixer` and 
+// ALSA commands to control system and application volume.
+
 use std::process::Command;
 
 #[cfg(target_os = "linux")]

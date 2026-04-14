@@ -86,10 +86,18 @@ class UICompositionRoot:
             "splinker_manager": splinker
         })
 
-        # 5. Optional Managers (Conditional based on config)
+        # Optional Managers (Conditional based on config)
         if self.app_constants.SCAN_OSC:
             self.services["osc_manager"] = OSCManager(state_cache, mqtt_conn, run_bridge=True)
-        
+            if hasattr(self.services["osc_manager"], "start"): self.services["osc_manager"].start()
+
+        if self.app_constants.SCAN_SNMP:
+            import oaComProtocols.oaComSNMP.Entry as snmp_entry
+            snmp_mgr = snmp_entry.get_manager(state_cache, mqtt_conn, sub_router, run_bridge=False)
+            self.services["snmp_manager"] = snmp_mgr
+            snmp_mgr.start()
+            protocol_router.set_snmp_manager(snmp_mgr)
+
         if self.app_constants.SCAN_MIDI:
             import oaComProtocols.oaComMidi.Entry as midi_entry
             self.services["midi_manager"] = midi_entry.get_manager(state_cache, run_bridge=False)

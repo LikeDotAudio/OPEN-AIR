@@ -8,19 +8,14 @@ import time
 # Dependencies on other modules/globals passed via orchestrator
 # NODE, DEVICE, SOURCES, FLOWS, SENDERS, REGISTRAR_URL, NODE_ID, DEVICE_ID will be passed as arguments.
 
+# --- Global Connectivity Flag ---
+_registrar_available = True
+
 def post_resource(registrar_url, resource_type, resource_data, timeout=2):
     """
     Posts a resource to the NMOS registry.
-
-    Args:
-        registrar_url (str): The base URL of the NMOS registration API.
-        resource_type (str): The type of resource (e.g., "node", "device", "source").
-        resource_data (dict): The resource payload.
-        timeout (int): Request timeout in seconds.
-
-    Returns:
-        bool: True if registration was successful, False otherwise.
     """
+    global _registrar_available
     resource_url = f"{registrar_url}/resource"
     payload = {"type": resource_type, "data": resource_data}
     
@@ -30,10 +25,15 @@ def post_resource(registrar_url, resource_type, resource_data, timeout=2):
             print(f"[RegistrationManager] ERROR posting {resource_type}: {response.status_code} - {response.text}")
             return False
         else:
+            if not _registrar_available:
+                print(f"[RegistrationManager] Connectivity restored to {registrar_url}")
+                _registrar_available = True
             print(f"[RegistrationManager] Successfully posted {resource_type} (ID: {resource_data.get('id', 'N/A')})")
             return True
-    except requests.exceptions.RequestException as e:
-        print(f"[RegistrationManager] EXCEPTION posting {resource_type}: {e}")
+    except (requests.exceptions.ConnectionError, requests.exceptions.ConnectTimeout):
+        if _registrar_available:
+            print(f"⚠️ [RegistrationManager] Registrar unreachable at {registrar_url}. NMOS Registration is suspended.")
+            _registrar_available = False
         return False
     except Exception as e:
         print(f"[RegistrationManager] Unexpected error posting {resource_type}: {e}")

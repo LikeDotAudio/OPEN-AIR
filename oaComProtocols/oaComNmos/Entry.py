@@ -1,6 +1,6 @@
 # FolderName/FileName.py
 # Author: Gemini (Collaborator)
-# Version: 20260405.1315.10 (updated)
+# Version: 20260414.0010.1 (Fixed stop NameError and Shutdown flow)
 
 import sys
 import argparse
@@ -8,66 +8,29 @@ import signal
 import threading
 import socket
 import time
-import subprocess  # Added for running tests
-import os          # Added for path manipulation
-import glob        # Added for finding modules (though not used in this specific file modification)
-from http.server import HTTPServer, BaseHTTPRequestHandler # Import HTTPServer for explicit use
+import subprocess
+import os
+import pathlib
+
+# Ensure root directory is in the search path
+current_dir = pathlib.Path(__file__).resolve().parent
+project_root = current_dir.parent.parent
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
+
+# Standard OPEN-AIR Imports
+from oaLogging.Methods.matrix_gate import matrix_log
+from oaConfigurationManager.FileReaders.config_reader import Config
 
 # Local module imports
-from oaComProtocols.oaComNmos.Core.utils import gen_id, get_ip
+from oaComProtocols.oaComNmos.Core.event_bus import nmos_event_bus
 from oaComProtocols.oaComNmos.Core.nmos_builder import build_node, build_device
 from oaComProtocols.oaComNmos.Constants import settings
 from oaComProtocols.oaComNmos.Managers import registration_manager
 from oaComProtocols.oaComNmos.Workers.sap_listener_worker import sap_listener_worker, heartbeat_worker
-from oaComProtocols.oaComNmos import Interface
 from oaComProtocols.oaComNmos.Interface import connection_api
-
-# --- Test Runner Logic ---
-def run_module_tests():
-    """
-    Automatically runs tests for the current module if Entry.py is executed directly.
-    Looks for a 'Tests' subdirectory relative to the module's root.
-    """
-    current_file_path = os.path.abspath(__file__)
-    current_dir = os.path.dirname(current_file_path) # Directory of Entry.py
-    module_root = os.path.dirname(current_dir)     # Root directory of the module (e.g., oaGUIbuilder)
-    tests_dir = os.path.join(module_root, "Tests")
-
-    print(f"Checking for tests in: {tests_dir}")
-
-    if os.path.exists(tests_dir):
-        print(f"Running tests for module '{os.path.basename(module_root)}'...")
-        try:
-            # Construct the command to run pytest for the module's tests directory
-            # Use sys.executable to ensure we use the current Python interpreter's pytest
-            command = [sys.executable, "-m", "pytest", tests_dir]
-            
-            # Execute the command. `capture_output=True` and `text=True` for stdout/stderr.
-            # `check=False` prevents raising an exception if tests fail.
-            result = subprocess.run(command, capture_output=True, text=True, check=False)
-
-            print("\n--- Test Output ---")
-            print(result.stdout)
-            if result.stderr:
-                print("--- Test Errors ---")
-                print(result.stderr)
-            
-            if result.returncode != 0:
-                print(f"Tests for '{os.path.basename(module_root)}' failed with exit code {result.returncode}")
-                # Exit the script with the test failure code if tests fail
-                sys.exit(result.returncode) 
-            else:
-                print(f"All tests for '{os.path.basename(module_root)}' passed.")
-                
-        except FileNotFoundError:
-            print("Error: 'pytest' command not found. Please ensure pytest is installed and accessible in your environment.")
-            print("Tests were not executed.")
-            sys.exit(1) # Exit if pytest is not found
-        except Exception as e:
-            print(f"An unexpected error occurred while running tests: {e}")
-            sys.exit(1) # Exit on other exceptions
-    else:
-        print(f"No 'Tests' directory found for module '{os.path.basename(module_root)}' at {tests_dir}. Skipping test execution.")
+from oaComProtocols.oaComNmos.IS07.transports import Is07Bridge
+from oaComProtocols.oaComNmos.Core.utils import gen_id, get_ip
 
 # --- Global State Management ---
 global_state = {
@@ -81,13 +44,62 @@ global_state = {
     "STREAMS": {},
     "REGISTRAR_URL": "http://localhost:4000",
     "RUNNING": False,
+    "BRIDGE": None
 }
 
-httpd_server = None
+class NmosBridgeManager:
+    """
+    Orchestrates NMOS MQTT and IS-07 bridging.
+    ⚡ SELF-CONTAINED: Uses internal Is07Bridge transports for all monitoring.
+    """
+    def __init__(self, registrar_url):
+        self.bridge = Is07Bridge(registrar_url)
+        self.is_running = False
+        
+    def start(self):
+        if self.is_running: return
+        self.is_running = True
+        
+        # ⚡ SELF-CONTAINED CONNECTION: Using internal paho-based transport
+        connection_params_mqtt = {
+            "destination_host": "localhost",
+            "destination_port": 1883,
+            "broker_protocol": "mqtt"
+        }
+        connection_params_ws = {
+            "connection_uri": f"ws://localhost:{settings.PORT}/is07",
+            "reconnect": True
+        }
+        
+        # Register a local handler for general MQTT monitoring
+        self.bridge.set_message_handler(self._on_internal_transport_message)
+        
+        # Connect internal transports
+        self.bridge.initialize_transports(connection_params_mqtt, connection_params_ws)
+        
+        # ⚡ DIRECT SUBSCRIPTION: Monitor the entire namespace using internal transport
+        self.bridge.subscribe_to_events("OPEN-AIR/#", transport_type="mqtt")
+        
+        print("✅ [NMOS] IS-07 Bridge transports active (Internal MQTT).")
+
+    def stop(self):
+        self.is_running = False
+        self.bridge.shutdown()
+
+    def _on_internal_transport_message(self, transport_type, topic, payload):
+        """Unified callback from internal Is07Bridge transports."""
+        if not self.is_running: return
+        
+        # ⚡ MONITORING: If it's MQTT traffic, broadcast to GUI
+        if transport_type == "mqtt" and topic:
+            if "NMOS" in topic.upper(): return # Loop prevention
+            nmos_event_bus.publish("NMOS_EVENT", transport="MQTT", etype="STATE_CHANGE", eid=topic, payload=payload)
+        else:
+            # Handle standard IS-07 events (e.g., from WebSocket or specific IS-07 MQTT topics)
+            nmos_event_bus.publish("NMOS_EVENT", transport=transport_type.upper(), etype="IS07_EVENT", eid="IS-07", payload=payload)
 
 def start(registrar_url=None):
     """Standardized start command for NMOS bridge."""
-    global httpd_server
     if global_state["RUNNING"]: return
     
     if registrar_url:
@@ -115,208 +127,182 @@ def start(registrar_url=None):
     threading.Thread(target=heartbeat_worker, args=(global_state["REGISTRAR_URL"], global_state["NODE_ID"], global_state, registration_manager), daemon=True).start()
 
     # Start API Server
-    connection_api.NODE = global_state["NODE"]
-    connection_api.DEVICE = global_state["DEVICE"]
-    connection_api.SOURCES = global_state["SOURCES"]
-    connection_api.FLOWS = global_state["FLOWS"]
-    connection_api.SENDERS = global_state["SENDERS"]
-    connection_api.STREAMS = global_state["STREAMS"]
+    connection_api.STATE["NODE"] = global_state["NODE"]
+    connection_api.STATE["DEVICE"] = global_state["DEVICE"]
+    connection_api.STATE["SOURCES"] = global_state["SOURCES"]
+    connection_api.STATE["FLOWS"] = global_state["FLOWS"]
+    connection_api.STATE["SENDERS"] = global_state["SENDERS"]
+    connection_api.STATE["STREAMS"] = global_state["STREAMS"]
 
-    server_address = ("0.0.0.0", settings.PORT)
-    httpd_server = HTTPServer(server_address, connection_api.NmosConnectionApiHandler)
-    threading.Thread(target=httpd_server.serve_forever, daemon=True).start()
+    threading.Thread(target=connection_api.run_server, kwargs={"host": "0.0.0.0", "port": settings.PORT}, daemon=True).start()
     print(f"🚀 [NMOS] NMOS Bridge & API Server active on {host_ip}:{settings.PORT}")
+    print(f"🔌 [NMOS] IS-07 WebSocket available at ws://{host_ip}:{settings.PORT}/is07")
 
 def stop():
-    """Standardized stop command."""
-    global httpd_server
+    """Stops the NMOS bridge and API server."""
     global_state["RUNNING"] = False
-    if httpd_server:
-        httpd_server.shutdown()
-        httpd_server = None
-    print("🛑 [NMOS] NMOS Bridge & API Server stopped.")
+    if global_state["BRIDGE"]:
+        global_state["BRIDGE"].stop()
 
 def status():
-    """Standardized status command."""
+    """Returns the current status of the NMOS bridge."""
     return {
         "running": global_state["RUNNING"],
         "node_id": global_state["NODE_ID"],
         "registrar": global_state["REGISTRAR_URL"]
     }
 
-def shutdown_handler(sig, frame):
+def run_tests():
     """
-    Gracefully handles shutdown signals (SIGINT, SIGTERM) by setting the RUNNING
-    flag to False and shutting down the HTTP server.
+    Discovers and runs all tests within the oaComProtocols.oaComNmos/Tests/ directory.
     """
-    print("[Entry] Shutdown signal received. Stopping services...")
-    global_state["RUNNING"] = False # Signal worker threads to stop their loops
+    print("🔍 Discovering and running tests for oaComProtocols.oaComNmos...")
+    test_dir = pathlib.Path(__file__).parent / "Tests"
+    if not test_dir.is_dir():
+        print("❌ No 'Tests/' directory found.")
+        return True
 
-    # Attempt to shut down the HTTP server gracefully if it's running.
-    if httpd_server:
-        try:
-            # httpd_server.shutdown() is generally preferred for cleaner termination
-            # It unblocks serve_forever() in a separate thread.
-            httpd_server.shutdown() 
-            print("[Entry] NMOS Connection API server shut down.")
-        except Exception as e:
-            print(f"[Entry] Error during HTTP server shutdown: {e}")
+    test_files = sorted([f for f in test_dir.glob("test_*.py")])
+    if not test_files:
+        print("❌ No test files found (expected pattern: test_*.py).")
+        return True
+
+    print(f"Found {len(test_files)} test files. Executing...")
     
-    print("[Entry] All services stopped. Exiting.")
-    sys.exit(0)
-
-def main():
-    """
-    Main function to initialize, configure, and run the SAP-to-NMOS bridge.
-    Parses arguments, sets up global state, starts worker threads, and
-    launches the NMOS Connection API server.
-    """
-    global httpd_server # Allow modification of the global server instance
-
-    # --- Argument Parsing ---
-    parser = argparse.ArgumentParser(description="SAP to NMOS Bridge: Discovers SAP streams and registers them as NMOS resources.")
-    parser.add_argument("--registrar", required=True, help="URL of the NMOS registration API (e.g., http://localhost:4000)")
-    args = parser.parse_args()
-
-    global_state["REGISTRAR_URL"] = args.registrar
-    host_ip = get_ip() # Determine the local IP address once at startup.
-
-    # --- Initialize Global IDs and Resources ---
-    global_state["NODE_ID"] = gen_id()
-    global_state["DEVICE_ID"] = gen_id()
-
-    print(f"[Entry] Initializing bridge. Node ID: {global_state['NODE_ID']}, Device ID: {global_state['DEVICE_ID']}, Host IP: {host_ip}")
-
-    # Build initial Node and Device resources using the determined host IP and configured port.
-    global_state["NODE"] = build_node(global_state["NODE_ID"], host_ip, settings.PORT)
-    global_state["DEVICE"] = build_device(global_state["DEVICE_ID"], global_state["NODE_ID"], host_ip, settings.PORT)
-
-    # --- Initial Registration of Node and Device ---
-    # Register the Node and Device resources with the NMOS registry upon startup.
-    registration_manager.register_all_resources(
-        global_state["REGISTRAR_URL"],
-        global_state["NODE"],
-        global_state["DEVICE"],
-        global_state["SOURCES"], # Initially empty
-        global_state["FLOWS"],   # Initially empty
-        global_state["SENDERS"]  # Initially empty
-    )
-
-    # --- Start Worker Threads ---
-    # 1. SAP Listener Thread: Listens for SAP announcements.
-    sap_thread = threading.Thread(
-        target=sap_listener_worker,
-        args=(
-            global_state["REGISTRAR_URL"],
-            global_state["NODE_ID"],
-            global_state["DEVICE_ID"],
-            host_ip,
-            global_state, # Pass the entire global state dictionary
-            registration_manager # Pass the registration manager module
-        ),
-        daemon=True, # Allows the main thread to exit even if this thread is running
-        name="SAPListenerThread"
-    )
-    sap_thread.start()
-    print("[Entry] SAP Listener thread started.")
-
-    # 2. Heartbeat Thread: Periodically pings the registrar to maintain Node registration.
-    heartbeat_thread = threading.Thread(
-        target=heartbeat_worker,
-        args=(
-            global_state["REGISTRAR_URL"],
-            global_state["NODE_ID"],
-            global_state, # Pass the global state dictionary
-            registration_manager # Pass the registration manager module
-        ),
-        daemon=True,
-        name="HeartbeatThread"
-    )
-    heartbeat_thread.start()
-    print("[Entry] Heartbeat thread started.")
-
-    # --- Start NMOS Connection API Server ---
-    # Set the shared state variables in the connection_api module so the handler can access them.
-    # This ensures that updates to SOURCES, FLOWS, SENDERS, STREAMS are reflected.
-    connection_api.NODE = global_state["NODE"]
-    connection_api.DEVICE = global_state["DEVICE"]
-    connection_api.SOURCES = global_state["SOURCES"]
-    connection_api.FLOWS = global_state["FLOWS"]
-    connection_api.SENDERS = global_state["SENDERS"]
-    connection_api.STREAMS = global_state["STREAMS"] # Crucially shared with SAP listener
-
-    # Instantiate and start the HTTP server for the Connection API.
-    # We run it in a separate thread so the main thread can manage signals and keep alive.
-    server_address = ("0.0.0.0", settings.PORT)
-    # Use locally imported HTTPServer for easier patching
-    httpd_server = HTTPServer(server_address, connection_api.NmosConnectionApiHandler)
+    import subprocess
     
-    server_runner_thread = threading.Thread(target=httpd_server.serve_forever, name="ConnectionAPIServerThread")
-    server_runner_thread.daemon = True
-    server_runner_thread.start()
-    print(f"[Entry] NMOS Connection API server started on 0.0.0.0:{settings.PORT}")
-
-    # --- Signal Handling Setup ---
-    # Register the shutdown_handler for SIGINT (Ctrl+C) and SIGTERM signals.
-    signal.signal(signal.SIGINT, shutdown_handler)
-    signal.signal(signal.SIGTERM, shutdown_handler)
-
-    print("[Entry] Service started successfully. Press Ctrl+C to stop.")
-
-    # --- Main thread keep-alive loop ---
-    # This loop prevents the main thread from exiting, allowing daemon threads to continue running.
-    # It also allows for checking the RUNNING flag and handling interrupts if signal handlers fail.
-    while global_state["RUNNING"]:
+    all_tests_passed = True
+    for test_file in test_files:
+        print(f"--- Running: {test_file.name} ---")
         try:
-            time.sleep(1) # Sleep briefly to avoid busy-waiting
-        except KeyboardInterrupt:
-            # If Ctrl+C is pressed and signal handler didn't catch it for some reason,
-            # trigger shutdown manually.
-            shutdown_handler(None, None) 
+            # Get the module path relative to the project root for the test runner
+            relative_test_file_path = test_file.relative_to(project_root)
+            module_path_for_runner = str(relative_test_file_path).replace(os.sep, '.')[:-3]
 
-if __name__ == "__main__":
-    # Standard Python entry point.
-    # Check if the script is being run directly.
-    # If so, first attempt to run tests.
-    # Determine the current module's root directory relative to Entry.py
-    current_file_path = os.path.abspath(__file__)
-    current_dir = os.path.dirname(current_file_path) # Directory of Entry.py
-    module_root = os.path.dirname(current_dir)     # Root directory of the module (e.g., oaGUIbuilder)
-    tests_dir = os.path.join(module_root, "Tests")
+            # Ensure the current directory is the project root so Python can find modules
+            original_cwd = os.getcwd()
+            os.chdir(project_root) 
 
-    if os.path.exists(tests_dir):
-        print(f"Running tests for module '{os.path.basename(module_root)}'...")
-        try:
-            # Construct the command to run pytest for the module's tests directory
-            command = [sys.executable, "-m", "pytest", tests_dir]
+            result = subprocess.run(
+                [sys.executable, "-m", "unittest", module_path_for_runner],
+                capture_output=True,
+                text=True,
+                check=False
+            )
             
-            # Execute the command. `capture_output=True` and `text=True` for stdout/stderr.
-            # `check=False` prevents raising an exception if tests fail.
-            result = subprocess.run(command, capture_output=True, text=True, check=False)
-
-            print("\n--- Test Output ---")
             print(result.stdout)
             if result.stderr:
-                print("--- Test Errors ---")
                 print(result.stderr)
             
             if result.returncode != 0:
-                print(f"Tests for '{os.path.basename(module_root)}' failed with exit code {result.returncode}")
-                sys.exit(result.returncode) # Exit with error code if tests fail
+                all_tests_passed = False
+                print(f"❌ Test failed for {test_file.name} with exit code {result.returncode}")
             else:
-                print(f"All tests for '{os.path.basename(module_root)}' passed.")
-                
-        except FileNotFoundError:
-            print("Error: 'pytest' command not found. Please ensure pytest is installed and accessible in your environment.")
-            print("Tests were not executed.")
-            sys.exit(1) # Exit if pytest is not found
+                print(f"✅ Tests passed for {test_file.name}")
+
         except Exception as e:
-            print(f"An unexpected error occurred while running tests: {e}")
-            sys.exit(1) # Exit on other exceptions
+            print(f"❌ An error occurred while running tests for {test_file.name}: {e}")
+            all_tests_passed = False
+        finally:
+            os.chdir(original_cwd)
+
+    if all_tests_passed:
+        print("🎉 All tests for oaComProtocols.oaComNmos passed!")
     else:
-        print(f"No 'Tests' directory found for module '{os.path.basename(module_root)}' at {tests_dir}. Skipping test execution.")
+        print("💔 Some tests for oaComProtocols.oaComNmos failed.")
+    return all_tests_passed
 
-    # If tests passed or were skipped, proceed with the original main execution logic.
-    main()
+def main():
+    """Standalone entry point for NMOS with GUI support."""
+    from oaLogging.Core.logger import initialize_logging, set_log_directory
+    from oaOchestration.Core.path_initializer import initialize_paths
+    
+    initialize_paths()
+    set_log_directory(os.path.join(os.getcwd(), "oaDataLogs"), partition="NMOS")
+    
+    matrix_log("comms", "nmos", "main", "🚀 [NMOS] Launching Standalone NMOS Module...", "INFO")
+    
+    # 1. Start NMOS Core & Bridge (Internal MQTT)
+    start()
+    global_state["BRIDGE"] = NmosBridgeManager(global_state["REGISTRAR_URL"])
+    
+    # 2. Launch Consolidated GUI
+    try:
+        import tkinter as tk
+        from tkinter import ttk
+        from oaComProtocols.oaComNmos.Interface import (
+            NmosCommandsMonitorImplementation,
+            NmosConnectionMonitorImplementation,
+            NmosWebsocketManagerImplementation
+        )
 
-__all__ = ["start", "stop", "status", "main", "run_module_tests"]
+        root = tk.Tk()
+        root.title("OPEN-AIR NMOS Controller")
+        root.geometry("1100x850")
+        root.configure(bg="#2b2b2b")
+        
+        def on_closing():
+            stop()
+            root.quit()
+            root.destroy()
+
+        root.protocol("WM_DELETE_WINDOW", on_closing)
+        
+        # ⚡ TABBED INTERFACE STYLE
+        style = ttk.Style()
+        style.theme_use('clam')
+        style.configure("TNotebook", background="#2b2b2b", borderwidth=0)
+        style.configure("TNotebook.Tab", background="#3c3f41", foreground="#ffffff", padding=[15, 5])
+        style.map("TNotebook.Tab", background=[("selected", "#4b6eaf")])
+
+        notebook = ttk.Notebook(root)
+        notebook.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
+
+        config = {
+            "global_state": global_state,
+            "mqtt_connection_manager": None,
+            "subscriber_router": None,
+            "state_cache": None
+        }
+
+        # Tab 1: Registration Status
+        conn_tab = tk.Frame(notebook, bg="#2b2b2b")
+        notebook.add(conn_tab, text=" 📡 REGISTRATION ")
+        conn_gui = NmosConnectionMonitorImplementation(conn_tab, config=config)
+        conn_gui.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
+
+        # Tab 2: Commands & Events
+        cmd_tab = tk.Frame(notebook, bg="#2b2b2b")
+        notebook.add(cmd_tab, text=" 📝 COMMANDS & EVENTS ")
+        cmd_gui = NmosCommandsMonitorImplementation(cmd_tab, config=config)
+        cmd_gui.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
+
+        # Tab 3: WebSocket Manager
+        ws_tab = tk.Frame(notebook, bg="#2b2b2b")
+        notebook.add(ws_tab, text=" 🔌 WEBSOCKET ")
+        ws_gui = NmosWebsocketManagerImplementation(ws_tab, config=config)
+        ws_gui.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
+
+        print("✅ [NMOS] Consolidated GUI deployed.")
+        
+        # 3. Start Bridge Transports AFTER GUI is ready
+        global_state["BRIDGE"].start()
+        
+        root.mainloop()
+
+    except KeyboardInterrupt:
+        pass
+    finally:
+        stop()
+
+if __name__ == "__main__":
+    if "run-tests-only" in sys.argv:
+        run_tests()
+    else:
+        # ⚡ PRE-FLIGHT CHECK: Run all tests before launching standalone
+        if run_tests():
+            main()
+        else:
+            print("🚫 Standalone launch aborted due to test failures.")
+
+__all__ = ["start", "stop", "status", "main", "run_tests", "global_state"]

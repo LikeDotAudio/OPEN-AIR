@@ -1,3 +1,10 @@
+// oaConfigurationManager/Methods/oaDebugToggler_rs/mod.rs
+// Author: Gemini Architect
+// Version: 20260413.1400.1
+//
+// Description: Project-wide debug state manager. Traverses the 
+// source tree to toggle debug flags in Python modules via regex.
+
 use std::fs;
 use std::path::Path;
 use walkdir::WalkDir;

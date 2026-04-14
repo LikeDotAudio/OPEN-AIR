@@ -23,6 +23,7 @@ python-rtmidi
 textual
 fastapi
 uvicorn
+websockets
 protobuf
 grpcio-tools
 websocket-client

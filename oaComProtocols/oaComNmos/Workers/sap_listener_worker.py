@@ -15,7 +15,7 @@ from oaComProtocols.oaComNmos.Core.utils import gen_id, get_ip, hash_sdp, now_ts
 from oaComProtocols.oaComNmos.Core.sdp_parser import parse_sdp
 from oaComProtocols.oaComNmos.Core.nmos_builder import build_source, build_flow, build_sender
 from oaComProtocols.oaComNmos.Managers.sender_cache_manager import find_existing_sender
-from oaComProtocols.oaComNmos.Interface.connection_api import STREAMS # Access module-level global
+from oaComProtocols.oaComNmos.Interface.connection_api import STATE # Access shared state dictionary
 from oaComProtocols.oaComNmos.Constants import settings
 
 # These are global states managed by the orchestrator and passed to this worker.
@@ -213,34 +213,34 @@ def sap_listener_worker(registrar_url, node_id, device_id, host_ip, global_state
 
 def heartbeat_worker(registrar_url, node_id, global_state, registration_manager):
     """
-    Worker function that periodically sends heartbeat requests to the NMOS registrar
-    to maintain the node's registration.
-
-    Args:
-        registrar_url (str): The NMOS registrar URL.
-        node_id (str): The ID of the NMOS node to send heartbeats for.
-        global_state (dict): Dictionary containing shared states like RUNNING.
-        registration_manager: An object/module with 'register_all' method.
+    Worker function that periodically sends heartbeat requests to the NMOS registrar.
     """
+    last_reachable = True
     while global_state.get("RUNNING", True):
         try:
             health_check_url = f"{registrar_url}/health/nodes/{node_id}"
-            print(f"[Heartbeat] Sending health check to {health_check_url}")
             response = requests.post(health_check_url, timeout=2)
 
             if response.status_code != 200:
-                print(f"[Heartbeat] Health check failed ({response.status_code}) → Re-registering node.")
-                registration_manager.register_all(registrar_url, global_state["NODE"], global_state["DEVICE"], global_state["SOURCES"], global_state["FLOWS"], global_state["SENDERS"])
+                if last_reachable:
+                    print(f"[Heartbeat] Health check failed ({response.status_code}) → Attempting re-registration.")
+                registration_manager.register_all_resources(registrar_url, global_state["NODE"], global_state["DEVICE"], global_state["SOURCES"], global_state["FLOWS"], global_state["SENDERS"])
+                last_reachable = True
             else:
-                print("[Heartbeat] OK")
-        except requests.exceptions.RequestException as e:
-            print(f"[Heartbeat] Request exception ({e}) → Re-registering node.")
-            registration_manager.register_all(registrar_url, global_state["NODE"], global_state["DEVICE"], global_state["SOURCES"], global_state["FLOWS"], global_state["SENDERS"])
+                if not last_reachable:
+                    print("[Heartbeat] Registrar connectivity restored.")
+                last_reachable = True
+                # print("[Heartbeat] OK") # Silence OK to reduce noise
+        except (requests.exceptions.ConnectionError, requests.exceptions.ConnectTimeout):
+            if last_reachable:
+                print(f"⚠️ [Heartbeat] Registrar at {registrar_url} is unreachable. Suspending heartbeats.")
+            last_reachable = False
         except Exception as e:
-            print(f"[Heartbeat] Unexpected error ({e}) → Re-registering node.")
-            registration_manager.register_all(registrar_url, global_state["NODE"], global_state["DEVICE"], global_state["SOURCES"], global_state["FLOWS"], global_state["SENDERS"])
+            if last_reachable:
+                print(f"[Heartbeat] Unexpected error ({e})")
+            last_reachable = False
 
-        time.sleep(settings.HB_INTERVAL)
+        time.sleep(settings.HB_INTERVAL if last_reachable else settings.HB_INTERVAL * 2)
     
     print("[Heartbeat] Worker shutting down.")
 

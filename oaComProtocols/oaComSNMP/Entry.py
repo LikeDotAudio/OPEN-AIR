@@ -207,6 +207,7 @@ def main():
     # 4. Launch GUI Interfaces
     try:
         import tkinter as tk
+        from tkinter import ttk
         from oaComProtocols.oaComSNMP.Interface.snmp_log_impl import SnmpLogImplementation
         from oaComProtocols.oaComSNMP.Interface.snmp_mib_impl import SnmpMibImplementation
         from oaComProtocols.oaComSNMP.Interface.snmp_status_impl import SnmpStatusImplementation
@@ -214,7 +215,16 @@ def main():
         from oaComProtocols.oaComSNMP.Interface.snmp_verify_oid_impl import SnmpVerifyOidImplementation
 
         root = tk.Tk()
-        root.withdraw() 
+        root.title("OPEN-AIR | SNMP Suite")
+        root.geometry("1200x800")
+        
+        # Style setup for the notebook
+        style = ttk.Style()
+        style.configure("TNotebook", padding=5)
+        style.configure("TNotebook.Tab", padding=[10, 5], font=("Arial", 10, "bold"))
+
+        notebook = ttk.Notebook(root)
+        notebook.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
         
         config = {
             "app_instance": type('App', (), {'snmp_manager': manager})(),
@@ -223,28 +233,27 @@ def main():
         }
         
         def on_closing():
+            root.quit()
             root.destroy()
 
         root.protocol("WM_DELETE_WINDOW", on_closing)
         
         interfaces = [
-            ("SNMP Bridge Status", SnmpStatusImplementation, "800x600+50+50"),
-            ("SNMP Delta Monitor", SnmpLogImplementation, "1000x700+100+100"),
-            ("Persistent MIB Definition", SnmpMibImplementation, "800x800+150+150"),
-            ("External MIB Verification", SnmpVerifyWithMibImplementation, "900x600+200+200"),
-            ("Raw OID Verification", SnmpVerifyOidImplementation, "900x600+250+250")
+            ("Status", SnmpStatusImplementation),
+            ("Delta Monitor", SnmpLogImplementation),
+            ("MIB Definition", SnmpMibImplementation),
+            ("MIB Verification", SnmpVerifyWithMibImplementation),
+            ("OID Verification", SnmpVerifyOidImplementation)
         ]
         
-        for i, (title, cls, geometry) in enumerate(interfaces):
-            win = root if i == 0 else tk.Toplevel(root)
-            if i == 0: win.deiconify()
-            win.title(f"OPEN-AIR | {title}")
-            win.geometry(geometry)
-            gui = cls(win, config=config)
+        for title, cls in interfaces:
+            tab = tk.Frame(notebook, bg="#2b2b2b")
+            notebook.add(tab, text=title)
+            
+            gui = cls(tab, config=config)
             gui.pack(fill=tk.BOTH, expand=True)
-            win.lift()
 
-        matrix_log("comms", "snmp", "main", "✅ [SNMP] All GUI interfaces deployed.", "SUCCESS")
+        matrix_log("comms", "snmp", "main", "✅ [SNMP] Tabbed GUI interface deployed.", "SUCCESS")
         root.mainloop()
 
     except KeyboardInterrupt:

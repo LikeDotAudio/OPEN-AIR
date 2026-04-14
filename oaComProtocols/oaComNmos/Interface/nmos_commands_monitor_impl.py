@@ -30,7 +30,29 @@ class NmosCommandsMonitorImplementation(tk.Frame, TransparencyMixin):
         self.config = config or {}
         
         self._setup_ui()
-        self._start_simulation()
+        
+        from oaComProtocols.oaComNmos.Core.event_bus import nmos_event_bus
+        nmos_event_bus.subscribe("NMOS_EVENT", self._on_nmos_event)
+
+        # ⚡ PRIME FROM CACHE: If state_cache is provided, populate the view
+        if self.config.get("state_cache"):
+            self.prime_from_cache(self.config["state_cache"])
+
+    def prime_from_cache(self, state_cache):
+        """Populates the tree with current values from the global state cache."""
+        try:
+            # Get a snapshot of the current state
+            cache_snapshot = state_cache.rust_cache.to_dict()
+            for topic, payload in cache_snapshot.items():
+                if "NMOS" in topic.upper(): continue
+                # Normalize payload
+                data = payload.get("value") if isinstance(payload, dict) else payload
+                self._add_event("CACHE", "INITIAL_STATE", topic, data)
+        except Exception as e:
+            matrix_log("comms", "nmos", "prime_from_cache", f"Failed to prime NMOS monitor: {e}", "WARNING")
+
+    def _on_nmos_event(self, transport, etype, eid, payload):
+        self.after(0, lambda: self._add_event(transport, etype, eid, payload))
 
     def _setup_ui(self):
         self.pack(fill=tk.BOTH, expand=True)
@@ -88,26 +110,6 @@ class NmosCommandsMonitorImplementation(tk.Frame, TransparencyMixin):
         for item in self.tree.get_children():
             self.tree.delete(item)
         self.detail_text.delete("1.0", tk.END)
-
-    def _start_simulation(self):
-        self.running = True
-        self.sim_thread = threading.Thread(target=self._sim_loop, daemon=True)
-        self.sim_thread.start()
-
-    def _sim_loop(self):
-        # Simulate some NMOS events
-        events = [
-            ("MQTT", "State Change", "source-1", {"value": True}),
-            ("WS", "Update", "flow-2", {"status": "active"}),
-            ("MQTT", "Heartbeat", "node-0", {"health": "ok"}),
-        ]
-        i = 0
-        while self.running:
-            if i < len(events):
-                evt = events[i]
-                self.after(0, lambda e=evt: self._add_event(*e))
-                i += 1
-            time.sleep(10) # Low frequency simulation
 
     def _add_event(self, transport, etype, eid, payload):
         timestamp = time.strftime("%H:%M:%S")

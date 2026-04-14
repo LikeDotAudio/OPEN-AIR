@@ -117,8 +117,8 @@ class TestVisaScanner(unittest.TestCase):
 
     def test_parse_resource_details_tcpip(self):
         """Test parse_resource_details for TCPIP resources."""
-        res = "TCPIP0::192.168.1.100::gpib0,1::INSTR"
-        details = self.scanner.parse_resource_details(res)
+        resource = "TCPIP0::192.168.1.100::gpib0,1::INSTR"
+        details = self.scanner.parse_resource_details(resource)
         
         self.assertEqual(details["IP"], "192.168.1.100")
         self.assertEqual(details["Interface"], "gpib0")
@@ -126,8 +126,8 @@ class TestVisaScanner(unittest.TestCase):
 
     def test_parse_resource_details_usb(self):
         """Test parse_resource_details for USB resources."""
-        res = "USB0::0x1234::0x5678::SERIAL::0::INSTR"
-        details = self.scanner.parse_resource_details(res)
+        resource = "USB0::0x1234::0x5678::SERIAL::0::INSTR"
+        details = self.scanner.parse_resource_details(resource)
         
         self.assertEqual(details["Interface"], "USB")
         self.assertEqual(details["IP"], "USB")

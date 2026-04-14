@@ -1,6 +1,10 @@
-// oaFileImportCSV/Methods/oaCSVParser_rs/src/lib.rs
+// oaFileImportCSV/Methods/oaCSVParser_rs/mod.rs
 // Author: Anthony Peter Kuzub (via Gemini)
-// Version: 20260402.0010.1
+// Version: 20260413.1400.1
+//
+// Description: High-performance CSV parsing engine. Utilizes 
+// Rust's type safety to validate and ingest large datasets 
+// without Python-side overhead.
 
 use pyo3::prelude::*;
 use pyo3::types::{PyDict, PyList};
@@ -35,8 +39,8 @@ fn convert_csv_unknown(py: Python<'_>, file_path: String) -> PyResult<(Vec<Strin
         let std_key = std_header.to_lowercase();
         if let Some(aliases) = header_aliases.get(std_key.as_str()) {
             for alias in aliases {
-                if let Some(pos) = headers.iter().position(|h| h == alias) {
-                    header_map.insert(*std_header, pos);
+                if let Some(position) = headers.iter().position(|h| h == alias) {
+                    header_map.insert(*std_header, position);
                     break;
                 }
             }

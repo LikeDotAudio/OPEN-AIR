@@ -1,18 +1,21 @@
 # oaComProtocols/oaComNmos/Core/is07_transport.py
 # Author: Gemini (Collaborator)
-# Version: 20260414.1600.1
+# Version: 20260414.1700.1
 #
-# Description: Native NMOS IS-07 WebSocket transport implementation.
-# ⚡ CORE: This is a foundational service for NMOS IS-07 messaging.
+# Description: Native NMOS IS-07 WebSocket and MQTT transport implementations.
+# ⚡ CORE: Foundational services for NMOS IS-07 messaging.
 
 import websocket
 import threading
 import json
 import time
+import ssl
+import paho.mqtt.client as mqtt
 from typing import Optional, Callable, Dict, Any
 from abc import ABC, abstractmethod
 
 from oaLogging.Methods.matrix_gate import matrix_log
+from oaComProtocols.oaComNmos.Core.utils import gen_id
 
 class EventTransport(ABC):
     """Abstract base class for IS-07 event transport mechanisms."""
@@ -27,6 +30,10 @@ class EventTransport(ABC):
 
     @abstractmethod
     def subscribe(self, topic: str, qos: int = 0) -> bool:
+        pass
+
+    @abstractmethod
+    def unsubscribe(self, topic: str) -> bool:
         pass
 
     @abstractmethod
@@ -72,6 +79,10 @@ class Is07WebSocketTransport(EventTransport):
 
     def subscribe(self, topic: str, qos: int = 0) -> bool:
         # IS-07 over WS usually subscribes via messages after connection
+        return True
+
+    def unsubscribe(self, topic: str) -> bool:
+        # Conceptual for WebSocket
         return True
 
     def connect(self, connection_params: Dict[str, Any]) -> bool:
@@ -172,3 +183,122 @@ class Is07WebSocketTransport(EventTransport):
             matrix_log("comms", "nmos_ws", "close", f"📡 [NMOS-WS] Connection Closed.", "INFO")
         self._is_connected = False
         self.ws_app = None
+
+class Is07MqttTransport(EventTransport):
+    """
+    Native NMOS implementation of IS-07 event transport over MQTT.
+    ⚡ CORE: Foundational transport for IS-07 within the NMOS module.
+    """
+    def __init__(self):
+        super().__init__()
+        self.client: Optional[mqtt.Client] = None
+        matrix_log("comms", "nmos_mqtt", "__init__", "📡 [NMOS-MQTT] Core Transport Initialized.", "DEBUG")
+
+    def publish(self, topic: str, payload: Dict[str, Any], retain: bool = False, qos: int = 0) -> bool:
+        if not self.is_connected() or not self.client:
+            matrix_log("comms", "nmos_mqtt", "publish", "📡 [NMOS-MQTT] Not connected. Cannot publish.", "WARNING")
+            return False
+        try:
+            payload_str = json.dumps(payload)
+            matrix_log("comms", "nmos_mqtt", "publish", f"📡📤 [NMOS-MQTT] Sending to {topic}: {payload_str[:100]}", "DEBUG")
+            info = self.client.publish(topic, payload_str, qos=qos, retain=retain)
+            return info.rc == mqtt.MQTT_ERR_SUCCESS
+        except Exception as e:
+            matrix_log("comms", "nmos_mqtt", "publish", f"📡❌ [NMOS-MQTT] Send Error: {e}", "ERROR")
+            return False
+
+    def subscribe(self, topic: str, qos: int = 0) -> bool:
+        if not self.is_connected() or not self.client:
+            matrix_log("comms", "nmos_mqtt", "subscribe", "📡 [NMOS-MQTT] Not connected. Cannot subscribe.", "WARNING")
+            return False
+        try:
+            matrix_log("comms", "nmos_mqtt", "subscribe", f"📡📥 [NMOS-MQTT] Subscribing to {topic}", "INFO")
+            result, mid = self.client.subscribe(topic, qos=qos)
+            return result == mqtt.MQTT_ERR_SUCCESS
+        except Exception as e:
+            matrix_log("comms", "nmos_mqtt", "subscribe", f"📡❌ [NMOS-MQTT] Subscribe Error: {e}", "ERROR")
+            return False
+
+    def unsubscribe(self, topic: str) -> bool:
+        if not self.is_connected() or not self.client:
+            matrix_log("comms", "nmos_mqtt", "unsubscribe", "📡 [NMOS-MQTT] Not connected. Cannot unsubscribe.", "WARNING")
+            return False
+        try:
+            matrix_log("comms", "nmos_mqtt", "unsubscribe", f"📡📥 [NMOS-MQTT] Unsubscribing from {topic}", "INFO")
+            result, mid = self.client.unsubscribe(topic)
+            return result == mqtt.MQTT_ERR_SUCCESS
+        except Exception as e:
+            matrix_log("comms", "nmos_mqtt", "unsubscribe", f"📡❌ [NMOS-MQTT] Unsubscribe Error: {e}", "ERROR")
+            return False
+
+    def connect(self, connection_params: Dict[str, Any]) -> bool:
+        host = connection_params.get("destination_host", "localhost")
+        port = connection_params.get("destination_port", 1883)
+        protocol = connection_params.get("broker_protocol", "mqtt")
+        username = connection_params.get("username")
+        password = connection_params.get("password")
+        client_id = connection_params.get("client_id", gen_id())
+
+        matrix_log("comms", "nmos_mqtt", "connect", f"📡📥 [NMOS-MQTT] Connecting to {host}:{port}.", "INFO")
+
+        self.client = mqtt.Client(client_id=client_id)
+        self.client.on_connect = self._on_connect
+        self.client.on_message = self._on_message
+        self.client.on_disconnect = self._on_disconnect
+
+        if protocol == "secure-mqtt":
+            self.client.tls_set(tls_version=ssl.PROTOCOL_TLS)
+        if username and password:
+            self.client.username_pw_set(username, password)
+        
+        try:
+            self.client.connect(host, port, 60)
+            self.client.loop_start()
+            
+            # Wait for connection
+            start_time = time.time()
+            while time.time() - start_time < 2.0:
+                if self._is_connected:
+                    return True
+                time.sleep(0.1)
+                
+            return self._is_connected
+        except Exception as e:
+            matrix_log("comms", "nmos_mqtt", "connect", f"📡❌ [NMOS-MQTT] Connection Error: {e}", "ERROR")
+            self.client = None
+            self._is_connected = False
+            return False
+
+    def disconnect(self):
+        if self.client:
+            matrix_log("comms", "nmos_mqtt", "disconnect", "📡 [NMOS-MQTT] Disconnecting...", "INFO")
+            self.client.loop_stop()
+            self.client.disconnect()
+            self.client = None
+            self._is_connected = False
+
+    def _on_connect(self, client, userdata, flags, rc):
+        if rc == 0:
+            matrix_log("comms", "nmos_mqtt", "connect", "📡✅ [NMOS-MQTT] Connection established.", "SUCCESS")
+            self._is_connected = True
+        else:
+            matrix_log("comms", "nmos_mqtt", "connect", f"📡❌ [NMOS-MQTT] Connection Failed (RC: {rc})", "ERROR")
+            self._is_connected = False
+
+    def _on_disconnect(self, client, userdata, rc):
+        if self._is_connected:
+            matrix_log("comms", "nmos_mqtt", "disconnect", f"📡 [NMOS-MQTT] Connection Closed (RC: {rc})", "INFO")
+        self._is_connected = False
+
+    def _on_message(self, client, userdata, message):
+        matrix_log("comms", "nmos_mqtt", "message", f"📡📥 [NMOS-MQTT] Received on {message.topic}", "DEBUG")
+        if self._message_handler:
+            try:
+                payload_str = message.payload.decode()
+                try:
+                    payload_data = json.loads(payload_str)
+                except json.JSONDecodeError:
+                    payload_data = payload_str
+                self._message_handler(message.topic, payload_data)
+            except Exception as e:
+                matrix_log("comms", "nmos_mqtt", "message", f"📡❌ [NMOS-MQTT] Handler Error: {e}", "ERROR")

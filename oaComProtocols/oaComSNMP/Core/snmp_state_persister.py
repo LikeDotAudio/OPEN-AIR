@@ -82,6 +82,12 @@ class SnmpStatePersister:
                 snmp_logger.warning("SnmpStatePersister: Thread did not terminate gracefully.")
         matrix_log("comms", "snmp", "stop", "SnmpStatePersister: Stopped.", "INFO")
 
+    def reset_delta_tracking(self):
+        """⚡ MONITOR SYNC: Clears the last seen values to force a full re-notification of current state."""
+        with self._state_lock:
+            self._last_persisted_values.clear()
+            matrix_log("comms", "snmp", "reset_delta_tracking", "📡 [SNMP] Delta tracking reset. Full monitor refresh scheduled.", "DEBUG")
+
     def _persistence_loop(self):
         """The main loop for periodically saving SNMP state to a file."""
         while self._running:

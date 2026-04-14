@@ -241,6 +241,7 @@ __all__ = [
     "OSCManager",
     "OscRxServer",
     "OscTxClient",
+    "OscMqttTransport",
     "get_manager",
     "start",
     "stop",
@@ -248,6 +249,10 @@ __all__ = [
     "send",
     "add_monitor_callback",
     "remove_monitor_callback",
+    "set_bridge_mode",
+    "main"
+]
+nitor_callback",
     "set_bridge_mode",
     "main"
 ]

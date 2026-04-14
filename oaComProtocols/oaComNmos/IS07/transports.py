@@ -18,7 +18,7 @@ from abc import ABC, abstractmethod
 from typing import Optional, List, Dict, Any, Callable
 
 # ⚡ NATIVE CORE TRANSPORTS
-from oaComProtocols.oaComNmos.Core.is07_transport import EventTransport, Is07WebSocketTransport
+from oaComProtocols.oaComNmos.Core.is07_transport import EventTransport, Is07WebSocketTransport, Is07MqttTransport
 
 from oaComProtocols.oaComNmos.Core.utils import gen_id, get_ip, hash_sdp, now_ts
 from oaComProtocols.oaComNmos.Core.sdp_parser import parse_sdp
@@ -31,144 +31,6 @@ from oaComProtocols.oaComNmos.Interface.connection_api import STATE # Access sha
 
 # --- Abstract Base Classes for Transports ---
 
-# --- MQTT Transport Implementation ---
-
-class MqttEventTransport(EventTransport):
-    """
-    Implements IS-07 event transport over MQTT.
-    Requires 'paho-mqtt' library.
-    """
-    def __init__(self):
-        super().__init__()
-        self.client: Optional[mqtt.Client] = None
-        self._on_connect_callback = self._on_connect
-        self._on_message_callback = self._on_message
-        self._on_disconnect_callback = self._on_disconnect
-        print("[MQTTTransport] Initialized.")
-
-    def publish(self, topic: str, payload: Dict[str, Any], retain: bool = False, qos: int = 0) -> bool:
-        """Publishes a message to an MQTT topic."""
-        if not self.is_connected() or not self.client:
-            print("[MQTTTransport] Not connected. Cannot publish.")
-            return False
-        try:
-            payload_str = json.dumps(payload)
-            print(f"[MQTTTransport] Publishing to '{topic}' (retain={retain}, qos={qos}): {payload_str}")
-            info = self.client.publish(topic, payload_str, qos=qos, retain=retain)
-            return info.rc == mqtt.MQTT_ERR_SUCCESS
-        except Exception as e:
-            print(f"[MQTTTransport] Error publishing message: {e}")
-            return False
-
-    def subscribe(self, topic: str, qos: int = 0) -> bool:
-        """Subscribes to an MQTT topic."""
-        if not self.is_connected() or not self.client:
-            print("[MQTTTransport] Not connected. Cannot subscribe.")
-            return False
-        try:
-            print(f"[MQTTTransport] Subscribing to '{topic}' with QoS {qos}.")
-            result, mid = self.client.subscribe(topic, qos=qos)
-            return result == mqtt.MQTT_ERR_SUCCESS
-        except Exception as e:
-            print(f"[MQTTTransport] Error subscribing to topic '{topic}': {e}")
-            return False
-
-    def unsubscribe(self, topic: str) -> bool:
-        """Unsubscribes from an MQTT topic."""
-        if not self.is_connected() or not self.client:
-            print("[MQTTTransport] Not connected. Cannot unsubscribe.")
-            return False
-        try:
-            print(f"[MQTTTransport] Unsubscribing from '{topic}'.")
-            result, mid = self.client.unsubscribe(topic)
-            return result == mqtt.MQTT_ERR_SUCCESS
-        except Exception as e:
-            print(f"[MQTTTransport] Error unsubscribing from topic '{topic}': {e}")
-            return False
-
-    def connect(self, connection_params: Dict[str, Any]) -> bool:
-        """Connects to the MQTT broker."""
-        host = connection_params.get("destination_host", "localhost")
-        port = connection_params.get("destination_port", 1883)
-        protocol = connection_params.get("broker_protocol", "mqtt")
-        auth = connection_params.get("broker_authorization", False)
-        username = connection_params.get("username")
-        password = connection_params.get("password")
-        client_id = connection_params.get("client_id", gen_id()) # Allow specifying client_id
-
-        print(f"[MQTTTransport] Attempting to connect to broker at {host}:{port} (protocol: {protocol}, auth: {auth}, client_id: {client_id}).")
-
-        self.client = mqtt.Client(client_id=client_id)
-        self.client.on_connect = self._on_connect_callback
-        self.client.on_message = self._on_message_callback
-        self.client.on_disconnect = self._on_disconnect_callback
-
-        if protocol == "secure-mqtt":
-            # Configure TLS - this is a basic example, real usage might need certs
-            self.client.tls_set(tls_version=ssl.PROTOCOL_TLS)
-        if auth and username and password:
-            self.client.username_pw_set(username, password)
-        
-        try:
-            self.client.connect(host, port, 60)
-            self.client.loop_start() # Start network loop in a background thread
-            # Give it a moment to connect
-            time.sleep(1) 
-            return self._is_connected # Return status after connection attempt
-        except Exception as e:
-            print(f"[MQTTTransport] Connection failed: {e}")
-            self.client = None
-            self._is_connected = False
-            return False
-
-    def disconnect(self):
-        """Disconnects from the MQTT broker."""
-        if self.client:
-            print("[MQTTTransport] Disconnecting from broker.")
-            self.client.loop_stop()
-            self.client.disconnect()
-            self.client = None
-            self._is_connected = False
-        else:
-            print("[MQTTTransport] Not connected.")
-
-    def set_message_handler(self, handler: Callable[[str, Dict[str, Any]], None]):
-        """Sets the callback for handling incoming messages."""
-        self._message_handler = handler
-        print("[MQTTTransport] Message handler set.")
-
-    def _on_connect(self, client, userdata, flags, rc):
-        """Callback for MQTT connection."""
-        if rc == 0:
-            print("[MQTTTransport] Connected successfully to MQTT Broker.")
-            self._is_connected = True
-            # This is where subscriptions should ideally happen after successful connection
-            # For now, subscriptions are initiated by the caller.
-        else:
-            print(f"[MQTTTransport] Connection failed with result code {rc}.")
-            self._is_connected = False
-
-    def _on_disconnect(self, client, userdata, rc):
-        """Callback for MQTT disconnection."""
-        print(f"[MQTTTransport] Disconnected from MQTT Broker with result code {rc}.")
-        self._is_connected = False
-
-    def _on_message(self, client, userdata, message):
-        """Callback for received MQTT messages."""
-        # ⚡ MONITORING SPEC: Pass raw topic and payload to handler
-        if self._message_handler:
-            try:
-                payload_data = json.loads(message.payload.decode())
-                # If we have a complex handler that expects (topic, payload), call it
-                # Otherwise fallback to standard IS-07 dispatch
-                self._message_handler(message.topic, payload_data)
-            except json.JSONDecodeError:
-                # Fallback for non-JSON payloads during general monitoring
-                self._message_handler(message.topic, message.payload.decode())
-            except Exception as e:
-                print(f"[MQTTTransport] Error processing received message: {e}")
-
-
 # --- IS-07 Core Logic ---
 
 class Is07Bridge:
@@ -178,7 +40,7 @@ class Is07Bridge:
     """
     def __init__(self, registrar_url: str):
         self.registrar_url = registrar_url
-        self.mqtt_transport = MqttEventTransport()
+        self.mqtt_transport = Is07MqttTransport()
         # Instantiate native NMOS Core WebSocket transport
         self.websocket_transport = Is07WebSocketTransport() 
         self._message_handler: Optional[Callable[[str, Dict[str, Any]], None]] = None
@@ -284,6 +146,16 @@ class Is07Bridge:
             return True # Assume success for now, actual message sending is a publish action
         else:
             print(f"[IS07Bridge] Unsupported transport type for subscribing: {transport_type}")
+            return False
+
+    def unsubscribe_from_events(self, topic: str, transport_type: str = "mqtt") -> bool:
+        """Unsubscribes from event messages. Returns True on success, False otherwise."""
+        if transport_type == "mqtt":
+            return self.mqtt_transport.unsubscribe(topic)
+        elif transport_type == "websocket":
+            return True
+        else:
+            print(f"[IS07Bridge] Unsupported transport type for unsubscribing: {transport_type}")
             return False
 
     # --- Integration Point ---

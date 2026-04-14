@@ -1,9 +1,8 @@
 # oaComProtocols.oaComSNMP/Tests/test_snmp_manager.py
 # Author: Anthony Peter Kuzub
-# Version: 20260410.1000.5
+# Version: 20260414.225.1
 #
-# Description: Unit tests for SNMPManager ensuring Hub-and-Spoke integrity, 
-# anti-feedback, and standardized standalone behavior.
+# Description: Unit tests for 100% Independent SNMPManager.
 
 import unittest
 from unittest.mock import MagicMock, patch
@@ -14,20 +13,15 @@ from oaComProtocols.oaComSNMP.Managers.snmp_manager import SNMPBridge, BridgeCon
 
 class TestSnmpManager(unittest.TestCase):
     """
-    Architectural Integrity Tests for SNMP Protocol Spoke.
-    Follows BUILD -> OPERATE -> CHECK pattern.
+    Architectural Integrity Tests for Standalone SNMP Protocol Spoke.
     """
 
     def setUp(self):
         """BUILD: Initialize mocks and manager in isolation."""
-        self.mock_state_cache = MagicMock()
-        self.mock_mqtt_conn = MagicMock()
-        self.mock_sub_router = MagicMock()
+        self.mock_mqtt_client = MagicMock()
         
         self.context = BridgeContext(
-            state_cache_manager=self.mock_state_cache,
-            mqtt_connection_manager=self.mock_mqtt_conn,
-            subscriber_router=self.mock_sub_router
+            mqtt_client=self.mock_mqtt_client
         )
         
         # Patch Persister and LogMonitor to prevent thread starts/file IO
@@ -42,25 +36,19 @@ class TestSnmpManager(unittest.TestCase):
         self.bridge._running = True
 
     def tearDown(self):
-        """Cleanup patches."""
+        """Cleanup."""
         self.bridge.stop()
         self.patcher_persister.stop()
         self.patcher_monitor.stop()
 
-    def test_spoke_to_hub_reflection(self):
-        """OPERATE: Verify that MQTT events (Hub) are reflected in local SNMP state (Spoke)."""
+    def test_mqtt_reflection(self):
+        """OPERATE: Verify that MQTT events are reflected in local SNMP state."""
         # BUILD
         test_topic = "OPEN-AIR/Audio/Master/Volume"
         test_val = 85
-        message = {
-            "source": "MQTT",
-            "topic": test_topic,
-            "value": test_val,
-            "meta": {"is_settled": True}
-        }
         
         # OPERATE
-        self.bridge.handle_protocol_event(message)
+        self.bridge.handle_mqtt_message(test_topic, {"value": test_val})
         
         # CHECK: Local state mirror is updated
         state = self.bridge.get_mqtt_state()
@@ -71,15 +59,13 @@ class TestSnmpManager(unittest.TestCase):
         """CHECK: Verify messages originating from SNMP are NOT reflected back to local state."""
         # BUILD
         test_topic = "OPEN-AIR/Audio/Fader/1"
-        message = {
-            "source": "MQTT",
-            "topic": test_topic,
+        payload = {
             "value": 100,
-            "meta": {"origin_source": "SNMP"} # SELF source
+            "origin_source": "SNMP" # SELF source
         }
         
         # OPERATE
-        self.bridge.handle_protocol_event(message)
+        self.bridge.handle_mqtt_message(test_topic, payload)
         
         # CHECK: Dropped (not in local state mirror)
         state = self.bridge.get_mqtt_state()
@@ -90,18 +76,33 @@ class TestSnmpManager(unittest.TestCase):
         # OPERATE
         self.bridge._publish_status()
         
-        # CHECK: Verify publication to system status tree
-        self.mock_mqtt_conn.publish.assert_called()
+        # CHECK: Verify publication to system status tree via native client
+        self.mock_mqtt_client.publish.assert_called()
         
-        # Handle both positional and keyword arguments correctly
         found = False
-        for call in self.mock_mqtt_conn.publish.call_args_list:
+        for call in self.mock_mqtt_client.publish.call_args_list:
             args, kwargs = call
-            topic = kwargs.get('topic') or (args[0] if args else None)
+            # Handle positional or keyword 'topic'
+            topic = args[0] if len(args) > 0 else kwargs.get('topic')
             if topic == "OPEN-AIR/System/Status/SNMP/Bridge":
                 found = True
                 break
-        self.assertTrue(found)
+        self.assertTrue(found, "Status topic not found in publish calls.")
+
+    def test_run_verification_delegation(self):
+        """CHECK: Verify run_verification correctly delegates to SnmpTester."""
+        # BUILD
+        test_mib = "/tmp/test.mib"
+        
+        # OPERATE: Patch SnmpTester to avoid subprocess execution
+        with patch("oaComProtocols.oaComSNMP.Workers.snmp_tester.SnmpTester.verify_oid_tree") as mock_tester:
+            mock_tester.return_value = "SUCCESS"
+            
+            output = self.bridge.run_verification(mib_path=test_mib)
+            
+            # CHECK
+            mock_tester.assert_called_once_with(base_oid=self.bridge.base_oid, mib_path=test_mib)
+            self.assertEqual(output, "SUCCESS")
 
 if __name__ == '__main__':
     unittest.main()

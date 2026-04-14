@@ -24,6 +24,7 @@ if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
 from oaComProtocols.oaComREST.Managers.rest_manager import RESTManager
+from oaComProtocols.oaComREST.Core.rest_mqtt_transport import RestMqttTransport
 from oaComProtocols.oaComREST.Constants.rest_constants import LOCAL_DEBUG
 from oaLogging.Methods.matrix_gate import matrix_log
 
@@ -222,4 +223,4 @@ def main():
 if __name__ == "__main__":
     main()
 
-__all__ = ["RESTManager", "get_manager", "start", "stop", "get_status", "run_tests", "main"]
+__all__ = ["RESTManager", "RestMqttTransport", "get_manager", "start", "stop", "get_status", "run_tests", "main"]

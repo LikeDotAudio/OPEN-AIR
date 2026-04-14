@@ -200,9 +200,8 @@ class ProtocolRouter:
     def set_state_cache(self, c): self.state_cache = c
 
     def set_routing_state(self, source, destination, enabled):
-        """Updates the Hub-and-Spoke enablement maps."""
-        # Note: In the new architecture, we treat 'destination' as the spoke being enabled/disabled.
-        s_up = str(source).upper() # Left for compatibility, but deprecated
+        """Updates the Hub-and-Spoke enablement maps and the routing matrix."""
+        s_up = str(source).upper()
         d_up = str(destination).upper()
         
         # Enable/Disable Egress to the destination
@@ -212,8 +211,12 @@ class ProtocolRouter:
         # Enable/Disable Ingress from the source
         if s_up in self.ingest_enabled:
             self.ingest_enabled[s_up] = enabled
+
+        # ⚡ LEGACY COMPATIBILITY: Update the N x N routing matrix
+        if s_up in self.routing_matrix and d_up in self.routing_matrix[s_up]:
+            self.routing_matrix[s_up][d_up] = enabled
             
-        matrix_log("comms", "broker", "set_routing_state", f"🔄 [ROUTING] {source} -> {destination} set to {enabled}.", "INFO")
+        matrix_log("comms", "broker", "set_routing_state", f"🔄 [ROUTING] {s_up} -> {d_up} set to {enabled}.", "INFO")
 
     def set_topic_routing(self, source, destination, send_topic=None, sub_topic=None):
         """Deprecated."""

@@ -269,9 +269,15 @@ __all__ = [
     "MIDIPortController",
     "MIDIHardwareLock",
     "MIDIProtocolMapper",
+    "MidiMqttTransport",
     "MidiDashboard",
     "get_midi_color",
     "get_manager",
+    "start",
+    "stop",
+    "status"
+]
+"get_manager",
     "start",
     "stop",
     "status"

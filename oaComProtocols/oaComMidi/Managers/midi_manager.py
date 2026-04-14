@@ -18,6 +18,7 @@ from oaLogging.Methods.matrix_gate import matrix_log
 from ..Core.midi_port_controller import MIDIPortController
 from ..Core.midi_hardware_lock import MIDIHardwareLock
 from ..Core.midi_protocol_mapper import MIDIProtocolMapper
+from ..Core.midi_mqtt_transport import MidiMqttTransport
 from ..Workers.midi_mqtt_worker import MidiMqttWorker
 
 class MidiManager:
@@ -41,8 +42,12 @@ class MidiManager:
         self._active_in_names, self._active_out_names = [], []
         self._monitor_callbacks = []
 
-        # ⚡ MQTT WORKER: Direct connection to broker
-        self.mqtt_worker = MidiMqttWorker(self) if self.enable_direct_mqtt else None
+        # ⚡ CORE TRANSPORT: Native MIDI MQTT Transport
+        self.mqtt_transport = MidiMqttTransport() if self.enable_direct_mqtt else None
+        
+        # ⚡ MQTT WORKER: Legacy wrapper for background operations if needed, 
+        # but we'll prioritize the core transport.
+        self.mqtt_worker = MidiMqttWorker(self, transport=self.mqtt_transport) if self.enable_direct_mqtt else None
 
         if self.use_protocol_router:
             try:

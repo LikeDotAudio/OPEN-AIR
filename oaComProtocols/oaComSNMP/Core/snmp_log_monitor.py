@@ -25,25 +25,20 @@ from oaLogging.Core.logger import SNMP_LOGGER as snmp_logger
 from oaComProtocols.oaComSNMP.Constants.snmp_constants import THREAD_JOIN_TIMEOUT, LOG_POLLING_INTERVAL, MIN_LOG_PARTS
 from oaLogging.Methods.matrix_gate import matrix_log
 
-# Import ProtocolRouter and other dependencies
-from oaComBroker.Core.protocol_router.manager import ProtocolRouter 
-
-# LOCAL_DEBUG can be set or passed if needed
-
 class SnmpLogMonitor:
     """
     Monitors the SNMP SET log file for incoming commands and translates them
-    into system events via the Protocol Router and State Cache.
+    into system events via the direct MQTT client.
     """
 
-    def __init__(self, state_cache_manager, thread_lock: threading.RLock, notify_monitor_callback, running_flag_getter):
+    def __init__(self, thread_lock: threading.RLock, notify_monitor_callback, running_flag_getter, mqtt_client=None):
         """
         Initializes the log monitor.
         """
-        self.state_cache_manager = state_cache_manager
         self._state_lock = thread_lock 
         self._notify_monitor = notify_monitor_callback
         self._running_flag_getter = running_flag_getter 
+        self._mqtt_client = mqtt_client
 
         self._thread = None
         self.log_file = str(SNMP_SET_LOG)
@@ -86,15 +81,14 @@ class SnmpLogMonitor:
                                 
                                 meta = {
                                     "message_type": "SPLICE_ACTION",
-                                    "origin_source": "SNMP_SET"
+                                    "origin_source": "oaComSNMP"
                                 }
 
-                                ProtocolRouter.get_instance().ingest("SNMP", oid, value, meta)
+                                if self._mqtt_client:
+                                    topic = f"OPEN-AIR/SNMP/gui_out/{oid}"
+                                    self._mqtt_client.publish(topic, {"value": value, "origin_source": "oaComSNMP"})
 
-                                topic = f"OPEN-AIR/SNMP/gui_out/{oid}"
-                                self._notify_monitor("RX_SET", oid, value, topic, meta)
-                                if self.state_cache_manager:
-                                    self.state_cache_manager.handle_external_update(topic, value, source="SNMP", metadata=meta)
+                                self._notify_monitor("RX_SET", oid, value, None, meta)
                         f.seek(0)
                         f.truncate()
             except FileNotFoundError:

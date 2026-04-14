@@ -80,10 +80,9 @@ def dispatch_message(message, managers, topic_routing=None, is_active=True):
     message_source_id = message.get("meta", {}).get("source") or message.get("full_id")
     
     if message_source_id == app_constants.FULL_INSTANCE_ID:
-        # ⚡ EXCEPTION: MQTT Broadcast (🚀) and Cache (💾) must always proceed 
+        # ⚡ EXCEPTION: MQTT Broadcast (🚀), Cache (💾), and SNMP (Ⓢ) must proceed 
         # for self-authored messages to ensure global state synchronization.
-        # Hardware modules (MIDI, OSC, SNMP) must NEVER re-dispatch reflections.
-        if "🚀" not in strategy and "Ⓜ️" not in strategy and "💾" not in strategy:
+        if "🚀" not in strategy and "Ⓜ️" not in strategy and "💾" not in strategy and "Ⓢ" not in strategy:
             if app_constants.ROUTER_DISPATCH_LOGS:
                 matrix_log("comms", "broker", "dispatch_message", f"🛡️ [ECHO] Dropping self-authored message for {topic}.", "TRACE")
             return
@@ -92,7 +91,11 @@ def dispatch_message(message, managers, topic_routing=None, is_active=True):
     if "🚀" in strategy or "Ⓜ️" in strategy:
         if is_active and router.routing_matrix.get(source, {}).get("MQTT", True):
             mqtt_manager = managers.get("mqtt")
-            if mqtt_manager and message["source"] != "MQTT" and message.get("logical_source") != "MQTT":
+            # ⚡ V3.1.26 DISPATCH UPDATE: 
+            # Allow MQTT dispatch if explicitly requested by strategy (🚀), 
+            # even if the source was MQTT (for broadcasts/activity logs).
+            # We only block standard loopback if NO broadcast strategy is present.
+            if mqtt_manager:
                 _dispatch_mqtt(mqtt_manager, get_topic("MQTT"), message, val_str)
 
     # --- OSC Dispatch ---

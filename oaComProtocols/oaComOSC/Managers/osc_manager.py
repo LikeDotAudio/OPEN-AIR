@@ -1,12 +1,12 @@
 # Managers/osc_manager.py
-# Author: Anthony P. Kuzub (Refactored)
-# Version: 20260330.1600.1
+# Author: Gemini (Collaborator)
+# Version: 20260414.1900.1
 #
 # Description: Dedicated orchestrator for OSC (Open Sound Control) traffic.
+# ⚡ REFACTORED: Now utilizes native Core OscMqttTransport.
 
 import threading
 import time
-import orjson
 import os
 
 # --- Standard Debug Logging Setup ---
@@ -16,6 +16,7 @@ from oaLogging.Methods.matrix_gate import matrix_log
 from oaConfigurationManager.FileReaders.config_reader import Config
 from oaComProtocols.oaComOSC.Workers.osc_rx_server import OscRxServer
 from oaComProtocols.oaComOSC.Workers.osc_tx_client import OscTxClient
+from oaComProtocols.oaComOSC.Core.osc_mqtt_transport import OscMqttTransport
 from oaOchestration.Methods.network_utils import get_local_ip
 
 app_constants = Config.get_instance()
@@ -31,7 +32,6 @@ class OSCManager:
     def __init__(self, context=None, state_cache_manager=None, mqtt_connection_manager=None, 
                  run_bridge=True):
         # ⚡ ALWAYS ONLINE: OSC Bridge is now a mandatory system service.
-        # We ignore the run_bridge parameter and force it to True where safe.
         partition_id = os.environ.get("OPEN_AIR_PARTITION_ID", "CORE")
         
         self.context = context
@@ -42,6 +42,7 @@ class OSCManager:
 
         matrix_log("comms", "osc", "__init__",
                    "Initializing Mandatory OSC Bridge...", "INFO")
+        
         # ⚡ STANDALONE: Fallback to global singletons if not injected
         from oaComBroker.Core.protocol_router.manager import ProtocolRouter
         self.protocol_router = ProtocolRouter.get_instance()
@@ -52,7 +53,6 @@ class OSCManager:
         # ⚡ STANDALONE: Attempt to deduce managers if missing
         if not self.state_cache_manager:
             try:
-                from oaStateCache.Core.state_cache import StateRegistry
                 self.state_cache_manager = getattr(self.protocol_router, "state_cache_manager", None)
             except Exception:
                 pass
@@ -80,96 +80,33 @@ class OSCManager:
         # Monitor callbacks for GUI
         self._monitor_callbacks = []
         
-        # ⚡ STANDALONE MQTT TRANSPORT:
-        # We use an internal MQTT client for standalone mode to relay commands.
-        self._internal_mqtt = None
-        self._internal_mqtt_connected = False
+        # ⚡ NATIVE CORE TRANSPORT:
+        # We use a core MQTT transport for standalone mode to relay commands.
+        self.mqtt_transport = OscMqttTransport()
 
         # ⚡ THREAD SAFETY: Protect shared mutable state
         self._state_lock = threading.RLock()
 
         # Protocol Router Sync Logic: Listen for remote/local activity
         try:
-            from oaComBroker.Core.protocol_router.manager import ProtocolRouter
-            ProtocolRouter.get_instance().register_cache_observer(self._on_protocol_event)
+            self.protocol_router.register_cache_observer(self._on_protocol_event)
         except Exception:
             pass
 
         # ⚡ AUTO-START: OSC is a mandatory system service and must be online immediately.
         self.start()
 
-    def _setup_internal_mqtt(self):
-        """
-        Initializes a private MQTT client for the OSC module.
-        Used primarily in standalone mode to relay commands from the MQTT fabric.
-        """
-        try:
-            import paho.mqtt.client as mqtt
-            from oaComProtocols.oaComMQTT.Core.mqtt_message import MqttMessage
-            
-            client_id = f"OSC-STANDALONE-{int(time.time())}"
-            
-            # ⚡ VERSION GUARD: Support both Paho v1.x and v2.x
-            if hasattr(mqtt, 'CallbackVersion'):
-                self._internal_mqtt = mqtt.Client(callback_api_version=mqtt.CallbackVersion.VERSION2, client_id=client_id)
-            else:
-                self._internal_mqtt = mqtt.Client(client_id=client_id)
-            
-            def on_connect(client, userdata, flags, rc, properties=None):
-                # Handle both v1 and v2 callback signatures
-                # In v1, rc is passed directly. In v2, it's properties.
-                # rc == 0 means success
-                if rc == 0:
-                    self._internal_mqtt_connected = True
-                    matrix_log("comms", "osc", "mqtt_connect", "✅ [OSC] Internal MQTT Connected.", "SUCCESS")
-                    client.subscribe("OPEN-AIR/#")
-                else:
-                    matrix_log("comms", "osc", "mqtt_connect", f"❌ [OSC] Internal MQTT Connection Failed: {rc}", "ERROR")
-
-            def on_message(client, userdata, msg):
-                # Relay to internal handler
-                try:
-                    message = MqttMessage(topic=msg.topic, payload=msg.payload, qos=msg.qos, retain=msg.retain)
-                    self._handle_mqtt_activity(message)
-                except Exception as e:
-                    logger.error(f"[OSC] MQTT Internal handling failure: {e}")
-
-            self._internal_mqtt.on_connect = on_connect
-            self._internal_mqtt.on_message = on_message
-            
-            # Use background thread for MQTT loop
-            host = getattr(app_constants, "MQTT_BROKER_HOST", "localhost")
-            port = getattr(app_constants, "MQTT_BROKER_PORT", 1883)
-            
-            self._internal_mqtt.connect_async(host, port, 60)
-            self._internal_mqtt.loop_start()
-            
-        except Exception as e:
-            matrix_log("comms", "osc", "mqtt_init", f"⚠️ [OSC] Internal MQTT initialization failed: {e}", "WARNING")
-
-    def _handle_mqtt_activity(self, message):
-        """Standardizes MQTT activity for the protocol event handler."""
+    def _on_transport_message(self, topic, payload):
+        """Unified callback from Core MQTT Transport."""
         if not self._running: return
         
-        topic = message.topic
-        payload = message.get_json_payload()
-        
-        # Determine logical source from payload if present
-        source = "MQTT"
-        value = payload
-        meta = {}
-        
-        if isinstance(payload, dict):
-            source = payload.get("source", "MQTT").upper()
-            value = payload.get("value") if "value" in payload else payload
-            meta = payload.get("metadata", payload)
-
+        # Relay to protocol event handler
         synthetic_message = {
             "source": "MQTT",
-            "logical_source": source,
+            "logical_source": payload.get("source", "MQTT").upper() if isinstance(payload, dict) else "MQTT",
             "topic": topic,
-            "value": value,
-            "meta": meta
+            "value": payload.get("value") if isinstance(payload, dict) and "value" in payload else payload,
+            "meta": payload.get("metadata", payload) if isinstance(payload, dict) else {}
         }
         self._on_protocol_event(synthetic_message)
 
@@ -179,16 +116,15 @@ class OSCManager:
             with self._state_lock:
                 if not self._running: break
                 
+            status = self.get_status()
+            topic = "OPEN-AIR/System/Status/OSC/Bridge"
+
             if self.state_cache_manager and hasattr(self.state_cache_manager, 'handle_external_update'):
-                status = self.get_status()
-                self.state_cache_manager.handle_external_update(
-                    "OPEN-AIR/System/Status/OSC/Bridge", 
-                    status, 
-                    source="OSC-STATUS"
-                )
+                self.state_cache_manager.handle_external_update(topic, status, source="OSC-STATUS")
             elif self.mqtt_connection_manager and hasattr(self.mqtt_connection_manager, 'publish'):
-                status = self.get_status()
-                self.mqtt_connection_manager.publish("OPEN-AIR/System/Status/OSC/Bridge", status)
+                self.mqtt_connection_manager.publish(topic, status)
+            elif self.mqtt_transport and self.mqtt_transport.is_connected():
+                self.mqtt_transport.publish(topic, {"value": status, "source": "OSC-STATUS"})
                 
             time.sleep(5.0)
 
@@ -200,7 +136,7 @@ class OSCManager:
                 "rx_socket": self._rx_addr,
                 "tx_socket": self._tx_addr,
                 "routes_count": len(self.osc_to_topic),
-                "bridge_mode": True # Always True now
+                "bridge_mode": True 
             }
 
     def add_monitor_callback(self, callback):
@@ -214,7 +150,6 @@ class OSCManager:
                 self._monitor_callbacks.remove(callback)
 
     def _notify_monitor(self, direction, address, value, topic=None):
-        # Take snapshot to avoid holding lock during callback execution
         with self._state_lock:
             callbacks = list(self._monitor_callbacks)
             
@@ -266,10 +201,6 @@ class OSCManager:
         except Exception as e:
             osc_logger.error(f"Bridge Workers Start Failed: {e}")
 
-    def _stop_workers(self):
-        """DEPRECATED: OSC Bridge is now always online."""
-        osc_logger.warning("OSC Workers Stop Request Ignored: Always Online.")
-
     def start(self):
         with self._state_lock:
             if self._running: return
@@ -277,24 +208,26 @@ class OSCManager:
         
         self._start_workers()
         
-        # ⚡ STANDALONE: If we don't have a context or managers, we act as a standalone bridge
+        # ⚡ STANDALONE: Setup core MQTT transport if system manager is missing
         if not self.mqtt_connection_manager:
-            self._setup_internal_mqtt()
+            self.mqtt_transport.set_message_handler(self._on_transport_message)
+            connection_params = {
+                "destination_host": getattr(app_constants, "MQTT_BROKER_HOST", "localhost"),
+                "destination_port": getattr(app_constants, "MQTT_BROKER_PORT", 1883),
+                "client_id": f"OSC-CORE-{app_constants.FULL_INSTANCE_ID[:8]}"
+            }
+            if self.mqtt_transport.connect(connection_params):
+                self.mqtt_transport.subscribe("OPEN-AIR/#")
 
     def stop(self):
-        """Stops the OSC bridge services and internal MQTT."""
+        """Stops the OSC bridge services and core transport."""
         with self._state_lock:
             if not self._running: return
             self._running = False
             
-        # Stop internal MQTT if active
-        if self._internal_mqtt:
-            try:
-                self._internal_mqtt.loop_stop()
-                self._internal_mqtt.disconnect()
-                matrix_log("comms", "osc", "stop", "🛑 [OSC] Internal MQTT Disconnected.", "INFO")
-            except Exception: pass
-            self._internal_mqtt = None
+        # Stop core transport
+        if self.mqtt_transport:
+            self.mqtt_transport.disconnect()
 
         # Terminate workers
         if self.rx_server:
@@ -311,50 +244,36 @@ class OSCManager:
 
 
     def handle_incoming_osc(self, address, value):
-        # 1. Route Map
         with self._state_lock:
             topic = self.osc_to_topic.get(address, f"OPEN-AIR/OSC{address}")
         
         matrix_log("comms", "osc", "handle_incoming_osc", 
                    f"RX: {address} -> {value} (Topic: {topic})", "DEBUG")
         
-        # ⚡ ANTI-FEEDBACK SPEC: Define identity at transport ingress
         meta = {
             "osc_address": address,
             "message_type": "SPLICE_ACTION",
             "origin_source": "OSC"
         }
 
-        # 2. Update HUB and State (Internal Sync)
+        # 2. Update HUB and State
         if self.state_cache_manager:
-            self.state_cache_manager.handle_external_update(
-                topic, 
-                value, 
-                source="OSC", 
-                metadata=meta
-            )
+            self.state_cache_manager.handle_external_update(topic, value, source="OSC", metadata=meta)
         else:
             try:
-                from oaComBroker.Core.protocol_router.manager import ProtocolRouter
-                ProtocolRouter.get_instance().ingest("OSC", topic, value, meta)
+                self.protocol_router.ingest("OSC", topic, value, meta)
             except Exception:
                 pass
         
-        # 3. ⚡ STANDALONE RELAY: If we have an internal MQTT client, publish there too
-        if self._internal_mqtt and self._internal_mqtt_connected:
-            try:
-                payload = {"value": value, "source": "OSC", "timestamp": time.time()}
-                self._internal_mqtt.publish(topic, orjson.dumps(payload).decode())
-            except Exception as e:
-                logger.error(f"[OSC] Failed to relay to internal MQTT: {e}")
+        # 3. ⚡ CORE RELAY: Relay to core MQTT if standalone
+        if self.mqtt_transport and self.mqtt_transport.is_connected():
+            payload = {"value": value, "source": "OSC", "timestamp": time.time(), "meta": meta}
+            self.mqtt_transport.publish(topic, payload)
         
         self._notify_monitor("RX", address, value, topic)
 
     def send(self, address, value, meta=None):
-        """
-        Explicit publication method called by ProtocolRouter.
-        Handles Internal -> External OSC Sync (OSC Out).
-        """
+        """Handles Internal -> External OSC Sync (OSC Out)."""
         with self._state_lock:
             running = self._running
             
@@ -362,18 +281,13 @@ class OSCManager:
             return
 
         meta = meta or {}
-        message_type = meta.get("message_type", "SPLICE_ACTION")
-        origin_source = meta.get("origin_source", "UNKNOWN")
-
-        if message_type == "LINK_FEEDBACK" and not meta.get("is_settled"):
+        if meta.get("message_type") == "LINK_FEEDBACK" and not meta.get("is_settled"):
             return
-        if origin_source == "OSC":
+        if meta.get("origin_source") == "OSC":
             return
 
         matrix_log("comms", "osc", "send", f"TX: {address} <- {value}", "DEBUG")
-        
         self.tx_client.send_message(address, value)
-        
         self._notify_monitor("TX", address, value)
 
     def _on_protocol_event(self, message):
@@ -386,88 +300,42 @@ class OSCManager:
         value = message.get("value")
         meta = message.get("meta", {})
         
-        # --- LOOP PREVENTION & FILTERING (V3.1.8 MONITOR REFLECTION) ---
-        # We no longer drop MQTT reflections here because we want local monitors 
-        # to see the traffic. Hardware-level loops are handled by origin_source checks.
         is_self_reflection = (source == "MQTT" and message.get("full_id") == app_constants.FULL_INSTANCE_ID)
 
-        # Determine if the message is OSC-related
-        is_osc_related_by_tag = (logical_source == "OSC" or source == "OSC" or source == "OSC-TX")
-        is_osc_related_by_topic = topic.startswith("OPEN-AIR/OSC/")
-        is_osc_dest = any(dest == "OSC" for dest in message.get("strategy", "").split())
-
-        if (is_osc_related_by_tag or is_osc_related_by_topic or is_osc_dest):
-            # For re-transmission to hardware, we still need strict rules.
-            # If it's a reflection, we only re-transmit if it's a settled state update.
-            if is_self_reflection and not meta.get("is_settled"):
-                pass # Allow to continue to monitor but skip re-send logic if needed
-
-        # Skip SYSTEM, GUI, and internal topics.
+        # Skip non-OSC system/gui traffic
         if source == "SYSTEM" or any(topic.startswith(x) for x in ["OPEN-AIR/System/", "OPEN-AIR/GUI/", "OPEN-AIR/oaGui/"]):
-            return
+            if "OSC" not in topic: return # Keep status updates
             
-        # Skip monitor topics.
-        if "/Monitor/" in topic:
-            return
+        if "/Monitor/" in topic: return
 
-        # --- MESSAGE PROCESSING ---
-        # Map the topic to an OSC address (if not found, construct fallback).
+        # Map topic to OSC address
         with self._state_lock:
             osc_address = self.topic_to_osc.get(topic)
             
         if not osc_address:
-            # Fallback logic for topic to OSC address mapping.
-            # Ensure that /OSC is only prepended if it's not already present in a way that
-            # would create redundancy, and that the base topic is correctly formed.
             base_topic = topic.replace("OPEN-AIR/", "").lstrip("/")
-            if base_topic.startswith("OSC/"):
-                osc_address = "/" + base_topic
-            else:
-                osc_address = "/OSC/" + base_topic
-            
-            # Clean up potential double slashes or leading/trailing slashes after mapping
+            osc_address = "/" + base_topic if base_topic.startswith("OSC/") else "/OSC/" + base_topic
             osc_address = osc_address.replace("//", "/").strip("/")
-            if not osc_address.startswith("/"):
-                osc_address = "/" + osc_address
-            
-            # If the resulting address is just "/OSC" or "/", it's likely an invalid mapping.
-            if osc_address == "/OSC" or osc_address == "/":
-                osc_address = None # Invalidate the address to prevent sending.
+            if not osc_address.startswith("/"): osc_address = "/" + osc_address
+            if osc_address in ["/OSC", "/"]: osc_address = None
 
-        if osc_address: # Only proceed if a valid OSC address was determined
-            real_val = value
-            if isinstance(value, dict) and "value" in value:
-                real_val = value["value"]
-            
+        if osc_address:
+            real_val = value.get("value") if isinstance(value, dict) and "value" in value else value
             origin_source = meta.get("origin_source", "UNKNOWN")
             
-            # The Asynchronous "Listen-and-Filter" Loop
-            # ⚡ V3.2.0 FILTERING: Prevent reflection of non-OSC sources back into the Hub
             should_send = (origin_source != "OSC" and not is_self_reflection) or meta.get("is_settled")
-            
-            # ⚡ V3.2.1 UPDATE: Allow MQTT and GUI sources to be bridged to OSC devices.
-            is_valid_source = (logical_source in ["OSC", "GUI", "MQTT", "UNKNOWN"] or 
-                               source in ["OSC", "OSC-TX", "MQTT"])
+            is_valid_source = (logical_source in ["OSC", "GUI", "MQTT", "UNKNOWN"] or source in ["OSC", "OSC-TX", "MQTT"])
             
             if should_send and self.run_bridge and is_valid_source:
                 if isinstance(real_val, (int, float, str, bool, list)):
                     self.send(osc_address, real_val, meta)
-        else:
-            osc_logger.warning(f"Skipping OSC re-transmission: No valid OSC address mapped for topic '{topic}'")
         
-        # Monitor/Observer mode (executed for both bridge and non-bridge)
+        # Monitor Updates
         if logical_source == "OSC":
-            direction = meta.get("direction", "RX")
-            address = meta.get("address", meta.get("osc_address", topic))
-            # Extract real value safely
-            r_val = value.get("value") if (isinstance(value, dict) and "value" in value and "address" in value) else value
-            self._notify_monitor(direction, address, r_val, topic)
-        elif source == "OSC-TX":
-            self._notify_monitor("TX", meta.get("osc_address", topic), value, topic)
-        elif logical_source == "MQTT" or source == "MQTT":
-            # Show MQTT reflections in the monitor
-            addr = meta.get("osc_address", topic)
-            self._notify_monitor("MQTT", addr, value, topic)
+            self._notify_monitor(meta.get("direction", "RX"), meta.get("osc_address", topic), 
+                                 value.get("value") if isinstance(value, dict) and "value" in value else value, topic)
+        elif source in ["OSC-TX", "MQTT"]:
+            self._notify_monitor(source.replace("-TX", ""), meta.get("osc_address", topic), value, topic)
         
         return
 

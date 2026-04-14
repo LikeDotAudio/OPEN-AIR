@@ -1,18 +1,6 @@
 # oaComProtocols.oaComSNMP/Entry.py
-#
-# The sole orchestrator and public gatekeeper for the SNMP Communication Module.
-#
-# Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
-#
-# Professional services for customizing and tailoring this software to your specific
-# application can be negotiated. There is no charge to use, modify, or fork this software.
-#
-# Build Log: https://like.audio/category/software/spectrum-scanner/
-# Source Code: https://github.com/APKaudio/
-# Feature Requests can be emailed to i @ like . audio
-#
-# Version 20260405.2300.1
+# ⚡ STANDALONE: 100% independent SNMP Orchestrator.
+# No dependencies on ProtocolRouter, StateCache, or shared MQTT Managers.
 
 import sys
 import os
@@ -20,7 +8,6 @@ from pathlib import Path
 import pathlib
 import threading
 import time
-import inspect
 
 # Ensure the root directory is in the search path
 current_dir = pathlib.Path(__file__).resolve().parent
@@ -30,13 +17,11 @@ if str(project_root) not in sys.path:
 
 from oaLogging.Methods.matrix_gate import matrix_log
 from oaComProtocols.oaComSNMP.Managers.snmp_manager import SNMPManager, BridgeContext
-from oaComProtocols.oaComSNMP.Workers.snmp_tester import SnmpTester
-from oaComProtocols.oaComSNMP.Methods.snmp_mib_generator import MibGenerator
-from oaComProtocols.oaComSNMP.Methods.snmp_installer_generator import InstallerGenerator
+from oaComProtocols.oaComSNMP.Core.snmp_mqtt_client import SnmpMqttClient
 
 _instance = None
 
-def get_manager(state_cache_manager=None, mqtt_connection_manager=None, subscriber_router=None, run_bridge=None):
+def get_manager(run_bridge=None):
     """
     Singleton getter for the SNMP Manager.
     """
@@ -48,28 +33,14 @@ def get_manager(state_cache_manager=None, mqtt_connection_manager=None, subscrib
             ident = IdentityManager.initialize()
             partition = ident.get("PARTITION_ID", "STANDALONE")
             run_bridge = (partition in ["CORE", "STANDALONE"])
-        except Exception:
+        except:
             run_bridge = True
 
     if _instance is None:
-        if state_cache_manager is None:
-            from oaSplinker.Core.splinker import ControlBroker
-            broker = ControlBroker.get_instance()
-            state_cache_manager = getattr(broker, 'state_cache_manager', None)
+        # ⚡ NATIVE MQTT CLIENT
+        mqtt_client = SnmpMqttClient(client_id=f"SNMP-Standalone-{'Bridge' if run_bridge else 'Observer'}")
         
-        if mqtt_connection_manager is None:
-            from oaComProtocols.oaComMQTT.Managers.mqtt_connection import MqttConnectionManager
-            mqtt_connection_manager = MqttConnectionManager()
-            
-        if subscriber_router is None:
-            from oaComProtocols.oaComMQTT.Managers.mqtt_subscriber_router import MqttSubscriberRouter
-            subscriber_router = getattr(mqtt_connection_manager, 'subscriber_router', None)
-
-        context = BridgeContext(
-            state_cache_manager=state_cache_manager,
-            mqtt_connection_manager=mqtt_connection_manager,
-            subscriber_router=subscriber_router
-        )
+        context = BridgeContext(mqtt_client=mqtt_client)
         _instance = SNMPManager.create(context, run_bridge)
         
     return _instance
@@ -77,12 +48,16 @@ def get_manager(state_cache_manager=None, mqtt_connection_manager=None, subscrib
 def start():
     """Starts the SNMP bridge service."""
     manager = get_manager()
+    if manager.context.mqtt_client:
+        manager.context.mqtt_client.connect()
     manager.start()
 
 def stop():
     """Stops the SNMP bridge service."""
     manager = get_manager()
     manager.stop()
+    if manager.context.mqtt_client:
+        manager.context.mqtt_client.disconnect()
 
 def status():
     """Returns the current status of the SNMP bridge."""
@@ -90,200 +65,83 @@ def status():
     return manager.get_status()
 
 def run_tests():
-    """
-    Discovers and runs all tests within the oaComProtocols.oaComSNMP/Tests/ directory.
-    """
     print("🔍 Discovering and running tests for oaComProtocols.oaComSNMP...")
     test_dir = Path(__file__).parent / "Tests"
-    if not test_dir.is_dir():
-        print("❌ No 'Tests/' directory found.")
-        return
+    if not test_dir.is_dir(): return
 
-    test_files = sorted([f for f in test_dir.glob("test_*.py")])
-    if not test_files:
-        print("❌ No test files found (expected pattern: test_*.py).")
-        return
-
-    print(f"Found {len(test_files)} test files. Executing...")
-    
     import subprocess
-    
-    all_tests_passed = True
+    test_files = sorted([f for f in test_dir.glob("test_*.py")])
     for test_file in test_files:
         print(f"\n--- Running: {test_file.name} ---")
         try:
-            relative_test_file_path = test_file.relative_to(project_root)
-            module_path_for_runner = str(relative_test_file_path).replace(os.sep, '.')[:-3]
-
-            original_cwd = os.getcwd()
-            os.chdir(project_root) 
-
-            result = subprocess.run(
-                [sys.executable, "-m", "unittest", module_path_for_runner],
-                capture_output=True,
-                text=True,
-                check=False
-            )
-            
-            print(result.stdout)
-            if result.stderr:
-                print(result.stderr)
-            
-            if result.returncode != 0:
-                all_tests_passed = False
-                print(f"❌ Test failed for {test_file.name}")
-            else:
-                print(f"✅ Tests passed for {test_file.name}")
-
+            relative_path = test_file.relative_to(project_root)
+            module_path = str(relative_path).replace(os.sep, '.')[:-3]
+            subprocess.run([sys.executable, "-m", "unittest", module_path], check=False)
         except Exception as e:
-            print(f"❌ An error occurred: {e}")
-            all_tests_passed = False
-        finally:
-            os.chdir(original_cwd)
-
-    if all_tests_passed:
-        print("\n🎉 All tests for oaComProtocols.oaComSNMP passed!")
-    else:
-        print("\n💔 Some tests for oaComProtocols.oaComSNMP failed.")
+            print(f"❌ Error: {e}")
 
 def main():
-    """
-    Main entry point for running the SNMP Bridge as a standalone module.
-    Runs tests first, then launches background services and GUI interfaces.
-    """
-    # 1. Run Tests First
+    """Standalone entry point."""
     run_tests()
     
-    # 2. Initialize Paths and Config
-    from oaLogging.Core.logger import SNMP_LOGGER
     from oaOchestration.Core.path_initializer import initialize_paths
-    from oaConfigurationManager.FileReaders.config_reader import Config
-    
     initialize_paths()
-    configuration = Config.get_instance()
     
-    matrix_log("comms", "snmp", "main", "🚀 [SNMP] Launching Standalone SNMP Module...", "INFO")
+    matrix_log("comms", "snmp", "main", "🚀 [SNMP] Launching 100% Standalone SNMP Module...", "INFO")
     
-    # 3. Initialize Background Services
-    from oaComProtocols.oaComMQTT.Managers.mqtt_connection import MqttConnectionManager
-    from oaComProtocols.oaComMQTT.Managers.mqtt_subscriber_router import MqttSubscriberRouter
-    from oaStateCache.Core.state_cache import StateRegistry
-    from oaComBroker.Core.protocol_router.manager import ProtocolRouter
-
-    router = ProtocolRouter.get_instance()
-    mqtt_conn = MqttConnectionManager()
-    sub_router = MqttSubscriberRouter()
-    state_cache = StateRegistry(mqtt_conn)
-    state_cache.subscriber_router = sub_router
+    manager = get_manager(run_bridge=True)
     
-    router.set_state_cache(state_cache)
-    router.set_mqtt_manager(mqtt_conn)
-    
-    mqtt_conn.connect_to_broker(
-        on_message_callback=state_cache.handle_incoming_mqtt,
-        subscriber_router=sub_router
-    )
-    
-    state_cache.subscribe_to_all_topics()
-    router.start()
-
-    context = BridgeContext(
-        state_cache_manager=state_cache,
-        mqtt_connection_manager=mqtt_conn,
-        subscriber_router=sub_router
-    )
-    manager = get_manager(
-        state_cache_manager=state_cache,
-        mqtt_connection_manager=mqtt_conn,
-        subscriber_router=sub_router,
-        run_bridge=True
-    )
-    
-    router.set_snmp_manager(manager)
+    # ⚡ CONNECT NATIVE MQTT
+    if manager.context.mqtt_client:
+        manager.context.mqtt_client.connect()
     
     matrix_log("comms", "snmp", "main", "⚙️ [SNMP] Starting background services thread...", "INFO")
-    threading.Thread(target=manager.start, daemon=True, name="SNMP-Manager-Start").start()
+    manager.start()
     
-    # 4. Launch GUI Interfaces
+    # Launch GUI
     try:
         import tkinter as tk
         from tkinter import ttk
         from oaComProtocols.oaComSNMP.Interface.snmp_log_impl import SnmpLogImplementation
         from oaComProtocols.oaComSNMP.Interface.snmp_mib_impl import SnmpMibImplementation
         from oaComProtocols.oaComSNMP.Interface.snmp_status_impl import SnmpStatusImplementation
-        from oaComProtocols.oaComSNMP.Interface.snmp_verify_mib_impl import SnmpVerifyWithMibImplementation
+        from oaComProtocols.oaComSNMP.Interface.snmp_verify_mib_impl import SnmpVerifyMibImplementation
         from oaComProtocols.oaComSNMP.Interface.snmp_verify_oid_impl import SnmpVerifyOidImplementation
 
         root = tk.Tk()
-        root.title("OPEN-AIR | SNMP Suite")
+        root.title("OPEN-AIR | SNMP Standalone")
         root.geometry("1200x800")
         
-        # Style setup for the notebook
-        style = ttk.Style()
-        style.configure("TNotebook", padding=5)
-        style.configure("TNotebook.Tab", padding=[10, 5], font=("Arial", 10, "bold"))
-
         notebook = ttk.Notebook(root)
         notebook.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
         
         config = {
             "app_instance": type('App', (), {'snmp_manager': manager})(),
-            "mqtt_connection_manager": mqtt_conn,
-            "subscriber_router": sub_router
+            "mqtt_client": manager.context.mqtt_client
         }
-        
-        def on_closing():
-            root.quit()
-            root.destroy()
-
-        root.protocol("WM_DELETE_WINDOW", on_closing)
         
         interfaces = [
             ("Status", SnmpStatusImplementation),
             ("Delta Monitor", SnmpLogImplementation),
             ("MIB Definition", SnmpMibImplementation),
-            ("MIB Verification", SnmpVerifyWithMibImplementation),
-            ("OID Verification", SnmpVerifyOidImplementation)
+            ("MIB Verify", SnmpVerifyMibImplementation),
+            ("OID Verify", SnmpVerifyOidImplementation)
         ]
         
         for title, cls in interfaces:
             tab = tk.Frame(notebook, bg="#2b2b2b")
             notebook.add(tab, text=title)
-            
             gui = cls(tab, config=config)
             gui.pack(fill=tk.BOTH, expand=True)
 
-        matrix_log("comms", "snmp", "main", "✅ [SNMP] Tabbed GUI interface deployed.", "SUCCESS")
+        matrix_log("comms", "snmp", "main", "✅ [SNMP] Standalone GUI deployed.", "SUCCESS")
         root.mainloop()
 
-    except KeyboardInterrupt:
-        SNMP_LOGGER.warning("👋 [SNMP] Standalone shutdown requested via KeyboardInterrupt.")
-    except Exception as e:
-        SNMP_LOGGER.error(f"❌ [SNMP] Critical error in main loop: {e}")
-        import traceback
-        SNMP_LOGGER.error(traceback.format_exc())
+    except KeyboardInterrupt: pass
     finally:
-        matrix_log("comms", "snmp", "main", "🧹 [SNMP] Cleaning up resources...", "INFO")
-        try:
-            manager.stop()
-            mqtt_conn.disconnect()
-            router.stop()
-        except Exception as e:
-            SNMP_LOGGER.error(f"❌ [SNMP] Error during cleanup: {e}")
-        matrix_log("comms", "snmp", "main", "🏁 [SNMP] Standalone shutdown complete.", "SUCCESS")
-
-__all__ = [
-    "SNMPManager",
-    "SnmpTester",
-    "MibGenerator",
-    "InstallerGenerator",
-    "get_manager",
-    "start",
-    "stop",
-    "status",
-    "main",
-    "run_tests"
-]
+        manager.stop()
+        if manager.context.mqtt_client:
+            manager.context.mqtt_client.disconnect()
 
 if __name__ == "__main__":
     main()

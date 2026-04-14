@@ -28,22 +28,21 @@ class SnmpStatusImplementation(tk.Frame, TransparencyMixin):
         
         super().__init__(parent, **kwargs)
         
-        # ⚡ DEPENDENCY INJECTION: Prioritize injected config
-        self.mqtt_client = self.config_data.get("mqtt_connection_manager")
-        self.subscriber_router = self.config_data.get("subscriber_router")
+        # ⚡ STANDALONE: Prioritize injected services
+        self.snmp_manager = None
+        app = self.config_data.get("app_instance")
+        if app:
+            self.snmp_manager = getattr(app, "snmp_manager", None)
+        self.mqtt_client = self.config_data.get("mqtt_client")
         
-        if not self.mqtt_client or not self.subscriber_router:
-            self.mqtt_client, self.subscriber_router = self._find_mqtt_services(parent)
-        
-        # Fallback: Find MQTT services via ProtocolRouter if still not found
-        if not self.mqtt_client:
+        if not self.snmp_manager:
             try:
-                from oaComBroker.Core.protocol_router.manager import ProtocolRouter
-                router = ProtocolRouter.get_instance()
-                self.mqtt_client = getattr(router, "mqtt_manager", None)
-                if not self.subscriber_router:
-                    self.subscriber_router = getattr(self.mqtt_client, "subscriber_router", None)
+                from oaComProtocols.oaComSNMP.Entry import get_manager
+                self.snmp_manager = get_manager()
             except Exception: pass
+
+        if not self.mqtt_client and self.snmp_manager:
+            self.mqtt_client = self.snmp_manager.context.mqtt_client
 
         self._flash_state = False
         self._is_offline = True
@@ -51,9 +50,10 @@ class SnmpStatusImplementation(tk.Frame, TransparencyMixin):
         
         self._setup_ui()
         
-        if self.subscriber_router:
-            # Subscribe to SNMP bridge status updates from CORE
-            self.subscriber_router.subscribe_to_topic("OPEN-AIR/System/Status/SNMP/Bridge", self._on_status_received)
+        if self.snmp_manager:
+            # Register for status updates via the manager
+            self.snmp_manager.register_mqtt_listener(self._on_status_received)
+            
             # Initial request for a script generate to populate UI
             self.refresh_script()
 
@@ -133,9 +133,8 @@ class SnmpStatusImplementation(tk.Frame, TransparencyMixin):
         self.text_area.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
         scroll.pack(side=tk.RIGHT, fill=tk.Y)
 
-    def _on_status_received(self, message):
-        """Callback for MQTT status updates from CORE."""
-        payload = message.payload
+    def _on_status_received(self, topic, payload):
+        """Callback for MQTT status updates."""
         if not isinstance(payload, dict):
             try:
                 import json
@@ -145,12 +144,12 @@ class SnmpStatusImplementation(tk.Frame, TransparencyMixin):
 
         self._last_status = payload
         # Use .after() to update UI from MQTT thread safely
-        self.after(0, self._refresh_ui)
+        self.after(0, lambda: self._update_ui_with_status(payload))
 
-    def _refresh_ui(self):
-        """Update diagnostics from the last received MQTT status."""
-        status = self._last_status
-        if not status: return
+    def _update_ui_with_status(self, status):
+        """Update diagnostics from the provided status."""
+        is_running = status.get("running", False)
+
         
         # ⚡ HEALTH CHECK: Only show offline if it's explicitly not running.
         is_running = status.get("running", False)
@@ -185,5 +184,10 @@ class SnmpStatusImplementation(tk.Frame, TransparencyMixin):
 
     def render(self):
         self.configure(bg=self.cget("bg"))
+
+    def destroy(self):
+        if self.snmp_manager:
+            self.snmp_manager.remove_mqtt_listener(self._on_status_received)
+        super().destroy()
 
 __all__ = ["SnmpStatusImplementation"]

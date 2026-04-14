@@ -1,94 +1,64 @@
 # oaComProtocols.oaComMidi/Workers/midi_mqtt_worker.py
 #
-# Standalone MQTT Worker for the MIDI Module.
-# Enables direct MQTT publishing and subscribing without ProtocolRouter.
+# Standalone MQTT Worker wrapper for the MIDI Module.
+# ⚡ REFACTORED: Now wraps the Native Core MidiMqttTransport.
 #
-# Author: Gemini CLI
-# Version: 20260411.1530.1
+# Author: Gemini CLI (Collaborator)
+# Version: 20260414.1810.1
 
-import threading
-import paho.mqtt.client as mqtt
 from loguru import logger
 from oaLogging.Methods.matrix_gate import matrix_log
 from oaConfigurationManager.FileReaders.config_reader import Config
-import orjson
+from ..Core.midi_mqtt_transport import MidiMqttTransport
 
 class MidiMqttWorker:
     """
     Handles direct MQTT communication for the MIDI module when in standalone mode.
+    Acts as a worker wrapper around the Core MidiMqttTransport.
     """
-    def __init__(self, midi_manager):
+    def __init__(self, midi_manager, transport=None):
         self.midi_manager = midi_manager
         self.config = Config.get_instance()
-        self.client = None
+        self.transport = transport or MidiMqttTransport()
         self._running = False
-        self._thread = None
-        
-        # Connection Settings from config.ini
-        self.broker = self.config.MQTT_BROKER_ADDRESS
-        self.port = self.config.MQTT_BROKER_PORT
-        self.username = self.config.MQTT_USERNAME
-        self.password = self.config.MQTT_PASSWORD
-        self.retain = self.config.MQTT_RETAIN_BEHAVIOR
         
         # Base topic for MIDI
         self.base_topic = "OPEN-AIR/MIDI/#"
 
     def start(self):
         if self._running: return
-        self._running = True
         
-        self.client = mqtt.Client(client_id=f"oaMidiStandalone_{threading.get_ident()}")
-        if self.username and self.password:
-            self.client.username_pw_set(self.username, self.password)
-            
-        self.client.on_connect = self._on_connect
-        self.client.on_message = self._on_message
+        # Setup message handler before connecting
+        self.transport.set_message_handler(self._on_transport_message)
         
-        matrix_log("comms", "midi", "start", f"📡 [MIDI-MQTT] Connecting to {self.broker}:{self.port}...", "INFO")
+        connection_params = {
+            "destination_host": self.config.MQTT_BROKER_ADDRESS,
+            "destination_port": self.config.MQTT_BROKER_PORT,
+            "username": self.config.MQTT_USERNAME,
+            "password": self.config.MQTT_PASSWORD,
+            "client_id": f"oaMidiWorker_{self.config.FULL_INSTANCE_ID[:8]}"
+        }
         
-        try:
-            self.client.connect(self.broker, self.port, 60)
-            self._thread = threading.Thread(target=self.client.loop_forever, daemon=True)
-            self._thread.start()
-        except Exception as e:
-            logger.error(f"📡 [MIDI-MQTT] Connection Failed: {e}")
-            self._running = False
+        if self.transport.connect(connection_params):
+            self._running = True
+            self.transport.subscribe(self.base_topic)
+            matrix_log("comms", "midi", "start", "📡 [MIDI-WORKER] Worker started with Core Transport.", "SUCCESS")
+        else:
+            logger.error("📡 [MIDI-WORKER] Failed to start Core Transport.")
 
     def stop(self):
         self._running = False
-        if self.client:
-            self.client.disconnect()
-            self.client.loop_stop()
-        if self._thread:
-            self._thread.join(timeout=1.0)
+        if self.transport:
+            self.transport.disconnect()
 
-    def _on_connect(self, client, userdata, flags, rc):
-        if rc == 0:
-            matrix_log("comms", "midi", "_on_connect", "📡 [MIDI-MQTT] Connected to broker.", "SUCCESS")
-            client.subscribe(self.base_topic)
-            matrix_log("comms", "midi", "_on_connect", f"📡 [MIDI-MQTT] Subscribed to {self.base_topic}", "INFO")
-        else:
-            logger.error(f"📡 [MIDI-MQTT] Connection failed with code {rc}")
-
-    def _on_message(self, client, userdata, message):
+    def _on_transport_message(self, topic, payload):
+        """Unified callback from Core Transport."""
         try:
-            if not message.payload:
-                return
-
-            topic = message.topic
-            payload = orjson.loads(message.payload)
+            # ⚡ EFFICIENT ROUTING: Forward to MidiManager
+            # The core transport already handled JSON decoding and echo prevention (src check)
             
-            # ⚡ ECHO PREVENTION: Identify if this message was authored by the local instance.
             meta = payload.get("meta", {}) if isinstance(payload, dict) else {}
-            message_src_id = meta.get("src") or meta.get("full_id")
-            if message_src_id == self.config.FULL_INSTANCE_ID:
-                return
-
-            matrix_log("comms", "midi", "_on_message", f"📡 [MIDI-MQTT] Message RX: {topic}", "TRACE")
             
-            # Forward to MidiManager to handle as an external event
-            # Use 'MIDI-MQTT' to bypass the 'MQTT' echo prevention check in MidiManager
             event_message = {
                 "topic": topic,
                 "value": payload.get("value") if isinstance(payload, dict) else payload,
@@ -99,25 +69,17 @@ class MidiMqttWorker:
             self.midi_manager._on_protocol_event(event_message)
             
         except Exception as e:
-            logger.error(f"📡 [MIDI-MQTT] Error processing MQTT message: {e}")
+            logger.error(f"📡 [MIDI-WORKER] Error processing transport message: {e}")
 
     def publish(self, topic, payload, meta=None):
-        if not self.client or not self._running: return
+        """Legacy publish shim that delegates to core transport."""
+        if not self.transport: return
         
-        try:
-            # Standardized payload structure
-            m = meta or {}
-            # ⚡ ESSENTIAL: Inject local identity for echo prevention
-            m["src"] = self.config.FULL_INSTANCE_ID
-            m["full_id"] = self.config.FULL_INSTANCE_ID
-            
-            full_payload = {
-                "value": payload,
-                "meta": m
-            }
-            
-            encoded_payload = orjson.dumps(full_payload)
-            self.client.publish(topic, encoded_payload, retain=self.retain)
-            matrix_log("comms", "midi", "publish", f"📡 [MIDI-MQTT] Published to {topic}", "TRACE")
-        except Exception as e:
-            logger.error(f"📡 [MIDI-MQTT] Publish failed: {e}")
+        # Standardized payload structure
+        m = meta or {}
+        # Core transport handles src injection if we pass a dict correctly
+        full_payload = {
+            "value": payload,
+            "meta": m
+        }
+        self.transport.publish(topic, full_payload, retain=self.config.MQTT_RETAIN_BEHAVIOR)

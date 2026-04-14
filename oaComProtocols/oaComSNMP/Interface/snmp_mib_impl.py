@@ -29,14 +29,14 @@ class SnmpMibImplementation(tk.Frame, TransparencyMixin):
         super().__init__(parent, **kwargs)
         self.config = config or {}
         
-        # ? DEPENDENCY INJECTION: Use the app_instance from the config if available
+        # ⚡ STANDALONE: Prioritize injected manager
         self.app_instance = self.config.get("app_instance")
         if self.app_instance:
             self.snmp_manager = getattr(self.app_instance, 'snmp_manager', None)
         else:
             self.snmp_manager = self._find_snmp_manager(parent)
         
-        # Fallback: Find manager via ProtocolRouter if still not found
+        # Fallback: Find manager via Entry if still not found
         if not self.snmp_manager:
             try:
                 from oaComProtocols.oaComSNMP.Entry import get_manager
@@ -173,6 +173,10 @@ class SnmpMibImplementation(tk.Frame, TransparencyMixin):
 
     def render(self):
         self.configure(bg=self.cget("bg"))
+
+    def destroy(self):
+        # Implementation if needed
+        super().destroy()
 
     def destroy(self):
         self._shutdown = True

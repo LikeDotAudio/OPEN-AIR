@@ -21,6 +21,9 @@ import time
 import os
 from loguru import logger
 from oaLogging.Methods.matrix_gate import matrix_log
+from oaConfigurationManager.FileReaders.config_reader import Config
+
+app_constants = Config.get_instance()
 
 def check_fastapi_availability():
     """Checks if FastAPI and its required dependencies are installed."""
@@ -36,6 +39,7 @@ from ..Constants.rest_constants import LOCAL_DEBUG, REST_BIND_HOST, REST_REPORT_
 from ..Workers.uvicorn_worker import UvicornWorker
 from ..Interface.routes import create_router
 from ..Methods.port_utils import zap_port, get_process_on_port, is_friendly_process
+from ..Core.rest_mqtt_transport import RestMqttTransport
 
 class RESTManager:
     """
@@ -56,6 +60,9 @@ class RESTManager:
         self._should_run = True # ⚡ MANDATORY: Always active on boot
         self._health_thread = None
         self._sibling_active = False
+        
+        # ⚡ CORE TRANSPORT: Native REST MQTT Transport
+        self.mqtt_transport = RestMqttTransport()
 
         # 1. Dependency Check
         self._initialized = self._try_initialize()
@@ -128,8 +135,11 @@ class RESTManager:
                         self._launch_instance()
                     
                 # Update status in cache
+                status_value = self.is_running() or self._sibling_active
                 if self.state_cache and hasattr(self.state_cache, 'handle_external_update'):
-                    self.state_cache.handle_external_update(self.STATE_TOPIC, self.is_running() or self._sibling_active, source="REST-HB")
+                    self.state_cache.handle_external_update(self.STATE_TOPIC, status_value, source="REST-HB")
+                elif self.mqtt_transport and self.mqtt_transport.is_connected():
+                    self.mqtt_transport.publish(self.STATE_TOPIC, {"value": status_value, "source": "REST-HB"})
 
             except Exception as e: 
                 matrix_log("comms", "rest", "_health_loop", f"❌ [REST] Health loop error: {e}", "ERROR")
@@ -168,6 +178,16 @@ class RESTManager:
         self._should_run = True
         if not self._initialized:
             if not self._try_initialize(): return False
+            
+        # ⚡ STANDALONE: Setup core MQTT transport for status reporting
+        if not self.mqtt_transport.is_connected():
+            connection_params = {
+                "destination_host": getattr(app_constants, "MQTT_BROKER_HOST", "localhost"),
+                "destination_port": getattr(app_constants, "MQTT_BROKER_PORT", 1883),
+                "client_id": f"oaRestCore_{app_constants.FULL_INSTANCE_ID[:8]}"
+            }
+            self.mqtt_transport.connect(connection_params)
+
         self._launch_instance()
         return True
 
@@ -176,6 +196,11 @@ class RESTManager:
         matrix_log("comms", "rest", "stop", "🛑 [REST] Service shutdown initiated.", "INFO")
         self._should_run = False
         self._shutdown_local_worker()
+        
+        # Disconnect core transport
+        if self.mqtt_transport:
+            self.mqtt_transport.disconnect()
+
         if self._health_thread and self._health_thread.is_alive():
             self._health_thread.join(timeout=1.0)
         return True

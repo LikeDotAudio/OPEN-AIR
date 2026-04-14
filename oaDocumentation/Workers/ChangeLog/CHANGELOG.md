@@ -1,3 +1,21 @@
+## [V3.3.2] - 2026-04-14
+### REST Core MQTT Transport Integration
+- **Native REST MQTT:** Implemented `RestMqttTransport` in `oaComREST/Core/rest_mqtt_transport.py` and a common `EventTransport` base class.
+- **Manager Refactoring:** Updated `RESTManager` to utilize the core transport for heartbeat status reporting when system-level managers are missing (Standalone Mode).
+- **Public API Hardening:** Updated `oaComREST/Core/__init__.py` and `oaComREST/Entry.py` to properly export the new core transport.
+
+## [V3.3.1] - 2026-04-14
+### Fixed
+- **SNMP Manager Attribute Error:** Resolved `AttributeError: 'SNMPBridge' object has no attribute 'run_verification'` by implementing the `run_verification` method in the `SNMPManager` base class. This method correctly delegates verification tasks to the `SnmpTester.verify_oid_tree` worker, restoring functionality to the MIB and OID verification UI tabs.
+
+### Core MQTT Transport Integration
+- **Native Core Transports:** Integrated MQTT into the `Core` of `oaComNmos`, `oaComMidi`, and `oaComOSC` modules to maintain architectural consistency and fulfill the "Gatekeeper" mandate.
+- **NMOS Core:** Added `Is07MqttTransport` to `oaComNmos/Core/is07_transport.py` and updated `IS07/transports.py` to utilize the core implementation.
+- **MIDI Core:** Implemented `MidiMqttTransport` in `oaComMidi/Core/midi_mqtt_transport.py` and refactored `MidiMqttWorker` into a slim wrapper for the core transport.
+- **OSC Core:** Implemented `OscMqttTransport` in `oaComOSC/Core/osc_mqtt_transport.py` and refactored `OSCManager` to eliminate internal MQTT client logic in favor of the new core transport.
+- **Public API Hardening:** Updated `Entry.py` and `Core/__init__.py` for all three modules to properly export the new core transports, ensuring they are recognized as part of the module's public API.
+- **Verification:** Created `test_is07_transport.py` for NMOS and verified all communication modules pass their respective test suites.
+
 ## [V3.3.0] - 2026-04-12
 **************************************
 Commit: a7d35765be7c921d7a33275cb4f4a66137781d25

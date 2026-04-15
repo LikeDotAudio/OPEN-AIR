@@ -1,3 +1,11 @@
+## [V3.3.3] - 2026-04-15
+### Critical System Recovery & Protocol Initialization Fixes
+- **Syntax Error Remediation:** Fixed multiple `SyntaxError: unterminated string literal` and `unterminated f-string literal` across `oaComManager` and all protocol `Entry.py` modules (Midi, REST, SMPTE2138, SNMP, NMOS) caused by inappropriate newlines in print/log calls.
+- **Architectural & Path Corrections:** Fixed `project_root` calculation in `oaComManager` to correctly point two levels up, enabling proper dynamic module discovery and registration.
+- **Namespace & Attribute Hardening:** Resolved `AttributeError` by initializing core dependencies (`state_cache_manager`, `protocol_router`, etc.) to `None` in the `ComProtocolManager` constructor. Fixed `NameError` for `matrix_log` and `DEVICE` in several modules.
+- **Interface & Dependency Integrity:** Standardized `start()` signatures across protocols to accept `mqtt_connection_manager` and `subscriber_router`. Updated `MqttConnectionManager` and `Is07Bridge` with required lifecycle methods (`start`, `stop`, `is_running`).
+- **Supervisor Refactoring:** Refactored `openair.py` to use the centralized `start_all_protocols()` entry point, simplifying the bootstrap sequence and ensuring consistent dependency injection.
+
 ## [V3.3.2] - 2026-04-14
 ### REST Core MQTT Transport Integration
 - **Native REST MQTT:** Implemented `RestMqttTransport` in `oaComREST/Core/rest_mqtt_transport.py` and a common `EventTransport` base class.

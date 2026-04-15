@@ -101,9 +101,9 @@ class SNMPManager:
     def start(self, display_root=None):
         if self._running: return
         self._running = True
-        
+
         configuration = Config.get_instance()
-        
+
         # ⚡ STANDALONE OID Mapping
         oid_source = display_root or getattr(configuration, "OID_MAP_SOURCE", None)
         if oid_source and os.path.exists(oid_source):
@@ -117,14 +117,18 @@ class SNMPManager:
 
         # ⚡ NATIVE STANDALONE MQTT
         if self.context.mqtt_client:
-            self.context.mqtt_client.set_on_message_callback(self.handle_mqtt_message)
+            if hasattr(self.context.mqtt_client, 'set_on_message_callback'):
+                self.context.mqtt_client.set_on_message_callback(self.handle_mqtt_message)
+            else:
+                self.context.mqtt_client.on_message_callback = self.handle_mqtt_message
+                
             self.context.mqtt_client.subscribe("OPEN-AIR/#")
-            
+
             self._status_update_thread = threading.Thread(target=self._mqtt_status_loop, daemon=True, name="SNMP-MqttStatus")
             self._status_update_thread.start()
 
-        self._start_specifics()
-
+        # ⚡ OPTIMIZATION: Non-blocking specific initialization
+        threading.Thread(target=self._start_specifics, daemon=True, name="SNMP-StartSpecifics").start()
     def handle_mqtt_message(self, topic: str, payload: Any):
         """Processes raw MQTT messages to maintain the SNMP state mirror."""
         if not self._running: return
@@ -278,11 +282,14 @@ class SNMPBridge(SNMPManager):
 
     def _start_specifics(self):
         self.tree_builder.generate_master_script()
-        threading.Thread(target=self.delayed_mib_sync, daemon=True).start()
+        # ⚡ OPTIMIZATION: Trigger immediate MIB sync, then follow up if needed
+        self.delayed_mib_sync(immediate=True)
 
-    def delayed_mib_sync(self):
+    def delayed_mib_sync(self, immediate=False):
         try:
-            time.sleep(5)
+            if not immediate:
+                time.sleep(5)
+            
             if self._running:
                 self.tree_builder.generate_master_script()
                 self.save_current_mib()

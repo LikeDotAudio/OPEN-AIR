@@ -61,10 +61,9 @@ class EmberDashboardImplementation(tk.Frame, TransparencyMixin):
         # --- Standalone Initialization ---
         if EMBER_MODULE and hasattr(EMBER_MODULE, "get_manager"):
             try:
-                state_cache = self.config_data.get("state_cache_manager")
                 mqtt_conn = self.config_data.get("mqtt_connection_manager") or (getattr(self.config_data.get("app_instance"), "mqtt_connection_manager", None) if self.config_data.get("app_instance") else None)
                 
-                EMBER_MODULE.get_manager(state_cache_manager=state_cache, mqtt_connection_manager=mqtt_conn)
+                EMBER_MODULE.get_manager(mqtt_connection_manager=mqtt_conn)
                 matrix_log("core", "system", "EmberDashboard", "🧬 EmberDashboard: EmberManager linked successfully.", "INFO")
             except Exception as e:
                 logger.error(f"🧬 EmberDashboard: Standalone setup failed: {e}")

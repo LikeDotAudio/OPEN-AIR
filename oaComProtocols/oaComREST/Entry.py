@@ -1,226 +1,172 @@
 # oaComProtocols.oaComREST/Entry.py
-#
-# Public entry point for the REST API module. Orchestrates the lifecycle 
-# of the REST manager and exposes the public monitoring API.
-#
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
+# Version: 20260414.1000.1
 #
-# Version 20260414.0020.1 (Refactored for TRUE STANDALONE - Zero External Dependencies)
+# Description: Gatekeeper for the REST Communication Module.
+# Manages the FastAPI application lifecycle and related services.
+# Refactored for centralized management by ComProtocolManager.
 
 import sys
 import os
 import pathlib
-import argparse
 import threading
 import time
+import subprocess
+import argparse
 from pathlib import Path
-from loguru import logger
 
-# Ensure root directory is in the search path
+# Ensure project root is in sys.path for direct execution
 current_dir = pathlib.Path(__file__).resolve().parent
 project_root = current_dir.parent.parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
-from oaComProtocols.oaComREST.Managers.rest_manager import RESTManager
-from oaComProtocols.oaComREST.Core.rest_mqtt_transport import RestMqttTransport
-from oaComProtocols.oaComREST.Constants.rest_constants import LOCAL_DEBUG
 from oaLogging.Methods.matrix_gate import matrix_log
+from oaConfigurationManager.FileReaders.config_reader import Config
+from oaOchestration.Core.path_initializer import initialize_paths, DATA_LOGS_DIR
 
-_manager = None
+# --- Core Components ---
+# These managers will be instantiated and managed by the ComProtocolManager
+# FastAPI app, Uvicorn worker, MQTT transport, etc.
 
-class MinimalStateRegistry:
+_rest_manager = None # Placeholder for the REST manager instance
+
+# Mock dependencies if not provided by the manager
+class MockStateCache:
+    def handle_external_update(self, *args, **kwargs): pass
+    def shutdown(self): pass
+
+class MockMqttConnectionManager:
+    def connect_to_broker(self, *args, **kwargs): pass
+    def disconnect(self): pass
+    def subscribe(self, *args, **kwargs): pass
+    def publish(self, *args, **kwargs): pass
+
+class MockSubscriberRouter:
+    def add_handler(self, *args, **kwargs): pass
+
+def get_rest_manager(state_cache_manager=None, mqtt_connection_manager=None, subscriber_router=None, protocol_router=None, run_bridge=True):
     """
-    A ultra-lightweight, zero-dependency state registry for standalone mode.
-    Replaces StateRegistry and rust_cache when MQTT is disabled.
+    Returns the singleton REST Manager instance.
+    Dependencies should be passed externally.
     """
-    def __init__(self):
-        self._state = {}
-        self.rust_cache = type('RustCache', (), {
-            'keys': lambda: self._state.keys(),
-            'to_dict': lambda: dict(self._state)
-        })()
-
-    def handle_external_update(self, topic, value, source="REST", metadata=None):
-        self._state[topic] = value
+    global _rest_manager
+    if _rest_manager is None:
+        from oaComProtocols.oaComREST.Managers.rest_manager import RESTManager
+        # Provide mocks if not supplied by the orchestrator
+        state_cache = state_cache_manager if state_cache_manager else MockStateCache()
+        protocol_router = protocol_router if protocol_router else MockProtocolRouter()
         
-    def get_cached_value(self, topic):
-        return self._state.get(topic)
-        
-    def check_prefix_exists(self, prefix):
-        if not prefix.endswith('/'): prefix += '/'
-        return any(k.startswith(prefix) for k in self._state.keys())
+        _rest_manager = RESTManager(
+            state_cache_manager=state_cache,
+            protocol_router=protocol_router
+        )
+        matrix_log("comms", "rest", "get_rest_manager", "REST Manager initialized.", "DEBUG")
+    return _rest_manager
 
-    def shutdown(self):
-        self._state.clear()
-
-class MinimalProtocolRouter:
-    """Mock router for standalone REST operation."""
-    def ingest(self, transport_source, topic, value):
-        matrix_log("comms", "rest", "ingest", f"Standalone Ingest: {topic} = {value}", "DEBUG")
-    def stop(self): pass
-
-def get_manager(state_cache_manager=None, protocol_router=None):
+def start(state_cache_manager=None, mqtt_connection_manager=None, subscriber_router=None, protocol_router=None, run_bridge=True):
     """
-    Singleton accessor for the RESTManager.
+    Initializes and starts the REST API service, accepting external dependencies.
     """
-    global _manager
-    if _manager is None:
-        matrix_log("comms", "rest", "get_manager", "📡⚙️🔗 [REST] Creating singleton RESTManager instance.", "DEBUG")
-        _manager = RESTManager(state_cache_manager, protocol_router)
-    else:
-        if state_cache_manager: _manager.state_cache = state_cache_manager
-        if protocol_router: _manager.router = protocol_router
-            
-    return _manager
-
-def start(state_cache_manager=None, protocol_router=None):
-    """Ensures the REST service is running."""
-    return get_manager(state_cache_manager, protocol_router).start()
+    matrix_log("comms", "rest", "start", "🚀 [REST] Starting REST API service...", "INFO")
+    
+    manager = get_rest_manager(
+        state_cache_manager=state_cache_manager,
+        mqtt_connection_manager=mqtt_connection_manager,
+        subscriber_router=subscriber_router,
+        protocol_router=protocol_router,
+        run_bridge=run_bridge
+    )
+    
+    # The start() method of RESTManager handles internal initialization (like FastAPI app)
+    # and launching the Uvicorn worker.
+    manager.start()
+    matrix_log("comms", "rest", "start", "✅ REST API service started.", "SUCCESS")
+    return manager # Return the manager for external control
 
 def stop():
-    """Signals the REST service to shut down."""
-    global _manager
-    if _manager:
-        _manager.stop()
+    """Stops the REST API service."""
+    global _rest_manager
+    if _rest_manager:
+        matrix_log("comms", "rest", "stop", "🛑 [REST] Stopping REST API service...", "INFO")
+        _rest_manager.stop()
+        _rest_manager = None
+        matrix_log("comms", "rest", "stop", "✅ REST API service stopped.", "INFO")
 
-def get_status():
-    """Convenience function to get the current REST service status."""
-    if _manager: return _manager.get_status()
-    from oaComProtocols.oaComREST.Constants.rest_constants import REST_BIND_HOST, REST_PORT
-    return {"running": False, "initialized": False, "host": REST_BIND_HOST, "port": REST_PORT, "routes": []}
-
-def add_monitor_callback(callback):
-    if _manager: _manager.add_monitor_callback(callback)
-
-def remove_monitor_callback(callback):
-    if _manager: _manager.remove_monitor_callback(callback)
+def status():
+    """Returns the current status of the REST API service."""
+    manager = get_rest_manager()
+    if manager:
+        return manager.get_status()
+    return {"running": False, "error": "REST manager not initialized"}
 
 def run_tests():
-    """Standalone unit test runner."""
+    """
+    Discovers and runs all tests within the oaComProtocols.oaComREST/Tests/ directory.
+    """
     print("🔍 Discovering and running tests for oaComProtocols.oaComREST...")
     test_dir = pathlib.Path(__file__).parent / "Tests"
-    if not test_dir.is_dir(): return True
-    test_files = sorted([f for f in test_dir.glob("test_*.py")])
-    if not test_files: return True
-
-    import subprocess
-    all_tests_passed = True
-    for test_file in test_files:
-        print(f"--- Running: {test_file.name} ---")
-        try:
-            module_path = str(test_file.relative_to(project_root)).replace(os.sep, '.')[:-3]
-            original_cwd = os.getcwd()
-            os.chdir(project_root) 
-            result = subprocess.run([sys.executable, "-m", "unittest", module_path], capture_output=True, text=True)
-            print(result.stdout)
-            if result.stderr: print(result.stderr)
-            if result.returncode != 0: all_tests_passed = False
-        except Exception as e:
-            print(f"❌ Error: {e}")
-            all_tests_passed = False
-        finally: os.chdir(original_cwd)
-    return all_tests_passed
-
-def main():
-    parser = argparse.ArgumentParser(description="OPEN-AIR REST Module Standalone")
-    parser.add_argument("--pure", action="store_true", help="Run without MQTT or State Cache dependencies")
-    parser.add_argument("--skip-tests", action="store_true", help="Skip pre-flight unit tests")
-    args, unknown = parser.parse_known_args()
-
-    if not args.skip_tests and not run_tests():
-        print("🛑 Tests failed. Aborting launch.")
+    if not test_dir.is_dir():
+        print("❌ No 'Tests/' directory found.")
         return
 
-    from oaLogging.Core.logger import initialize_logging, set_log_directory
-    from oaOchestration.Core.path_initializer import initialize_paths, DATA_LOGS_DIR
-    initialize_paths()
-    set_log_directory(DATA_LOGS_DIR, partition="REST-STANDALONE")
+    test_files = sorted([f for f in test_dir.glob("test_*.py")])
+    if not test_files:
+        print("❌ No test files found (expected pattern: test_*.py).")
+        return
+
+    print(f"Found {len(test_files)} test files. Executing...")
     
-    mqtt_conn = None
-    state_cache = None
-    router = None
+    import subprocess
     
-    if args.pure:
-        # ⚡ PURE STANDALONE: Zero dependencies on external modules
-        print("🕊️  [REST] Running in PURE STANDALONE mode (No MQTT/Global State).")
-        state_cache = MinimalStateRegistry()
-        router = MinimalProtocolRouter()
-    else:
-        # SYSTEM MODE: Use standard OPEN-AIR infrastructure
+    all_tests_passed = True
+    for test_file in test_files:
+        print(f"\n--- Running: {test_file.name} ---")
         try:
-            from oaComProtocols.oaComMQTT.Managers.mqtt_connection import MqttConnectionManager
-            from oaStateCache.Core.state_cache import StateRegistry
-            # from oaComBroker.Core.protocol_router.manager import ProtocolRouter
+            # Get the module path relative to the project root for the test runner
+            relative_test_file_path = test_file.relative_to(project_root)
+            module_path_for_runner = str(relative_test_file_path).replace(os.sep, '.')[:-3] # Remove .py extension
+
+            # Ensure the current directory is the project root so Python can find modules
+            original_cwd = os.getcwd()
+            os.chdir(project_root) 
+
+            result = subprocess.run(
+                [sys.executable, "-m", "unittest", module_path_for_runner],
+                capture_output=True,
+                text=True,
+                check=False
+            )
             
-            router = MinimalProtocolRouter() # ProtocolRouter.get_instance()
-            mqtt_conn = MqttConnectionManager()
-            state_cache = StateRegistry(mqtt_conn)
-            router.set_state_cache(state_cache)
-            router.set_mqtt_manager(mqtt_conn)
+            print(result.stdout)
+            if result.stderr:
+                print(result.stderr)
             
-            mqtt_conn.connect_to_broker(on_message_callback=state_cache.handle_incoming_mqtt)
-            mqtt_conn.subscribe("#")
-            router.start()
-        except ImportError as e:
-            print(f"⚠️ [REST] System mode requested but dependencies missing ({e}). Falling back to PURE.")
-            state_cache = MinimalStateRegistry()
-            router = MinimalProtocolRouter()
+            if result.returncode != 0:
+                all_tests_passed = False
+                print(f"❌ Test failed for {test_file.name} with exit code {result.returncode}")
+            else:
+                print(f"✅ Tests passed for {test_file.name}")
 
-    # Start REST Manager
-    manager = get_manager(state_cache_manager=state_cache, protocol_router=router)
-    manager.start()
-    
-    # Launch GUI
-    try:
-        import tkinter as tk
-        from tkinter import ttk
-        from oaComProtocols.oaComREST.Interface.gui_REST import RestDashboard
-        from oaComProtocols.oaComREST.Interface.gui_REST_tree import RestTreeImplementation
+        except Exception as e:
+            print(f"❌ An error occurred while running tests for {test_file.name}: {e}")
+            all_tests_passed = False
+        finally:
+            os.chdir(original_cwd)
 
-        root = tk.Tk()
-        root.title(f"OPEN-AIR | REST Hub ({'PURE' if args.pure else 'SYSTEM'} MODE)")
-        root.geometry("1100x850")
-        root.configure(bg="#2b2b2b")
-        
-        style = ttk.Style()
-        style.theme_use('clam')
-        style.configure("TNotebook", background="#2b2b2b", borderwidth=0)
-        style.configure("TNotebook.Tab", background="#3c3f41", foreground="#ffffff", padding=[15, 5])
-        style.map("TNotebook.Tab", background=[("selected", "#4b6eaf")])
+    if all_tests_passed:
+        print("\n🎉 All tests for oaComProtocols.oaComREST passed!")
+    else:
+        print("\n💔 Some tests for oaComProtocols.oaComREST failed.")
+    return all_tests_passed
 
-        notebook = ttk.Notebook(root)
-        notebook.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
-        
-        def on_closing():
-            root.quit()
-            root.destroy()
-        root.protocol("WM_DELETE_WINDOW", on_closing)
-        
-        tab1 = tk.Frame(notebook, bg="#2b2b2b")
-        notebook.add(tab1, text=" 🌍 REST DASHBOARD ")
-        RestDashboard(tab1, config={"state_cache_manager": state_cache, "protocol_router": router}).pack(fill=tk.BOTH, expand=True)
+# Standalone main() function is removed.
+# def main(): ...
 
-        tab2 = tk.Frame(notebook, bg="#2b2b2b")
-        notebook.add(tab2, text=" 🌲 API TREE ")
-        RestTreeImplementation(tab2, config={"state_cache_manager": state_cache, "protocol_router": router}).pack(fill=tk.BOTH, expand=True)
-
-        print(f"✅ [REST] Standalone GUI active.")
-        root.mainloop()
-
-    except KeyboardInterrupt: pass
-    except Exception as e:
-        print(f"❌ [REST] Error: {e}")
-        import traceback; traceback.print_exc()
-    finally:
-        manager.stop()
-        if hasattr(router, 'stop'): router.stop()
-        if mqtt_conn: mqtt_conn.disconnect()
-        if hasattr(state_cache, 'shutdown'): state_cache.shutdown()
-        print("🏁 [REST] Standalone shutdown complete.")
-
-if __name__ == "__main__":
-    main()
-
-__all__ = ["RESTManager", "RestMqttTransport", "get_manager", "start", "stop", "get_status", "run_tests", "main"]
+__all__ = [
+    "RESTManager",
+    "start",
+    "stop",
+    "status",
+    "run_tests"
+]

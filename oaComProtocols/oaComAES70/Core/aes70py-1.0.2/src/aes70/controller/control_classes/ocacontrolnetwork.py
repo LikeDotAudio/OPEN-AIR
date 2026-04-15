@@ -1,0 +1,35 @@
+from ...ocp1.ocanetworkcontrolprotocol import OcaNetworkControlProtocol
+from ..make_control_class import make_control_class
+from .ocaapplicationnetwork import OcaApplicationNetwork
+
+# @extends OcaApplicationNetwork
+# @class OcaControlNetwork
+OcaControlNetwork = make_control_class(
+    'OcaControlNetwork',
+    3,
+    '\u0001\u0004\u0001',
+    1,
+    OcaApplicationNetwork,
+    [
+        ['GetControlProtocol', 3, 1, [], [OcaNetworkControlProtocol]],
+    ],
+    [
+      ['Protocol', [OcaNetworkControlProtocol], 3, 1, False, False, ['ControlProtocol']],
+    ],
+    []
+)
+
+# Gets the network's Protocol property. Return status indicates whether the
+# operation was successful.
+#
+# @method OcaControlNetwork#GetControlProtocol
+# @returns {Promise<int>}
+#   A promise which resolves to a single value of type ``int``.
+# This event is emitted when the property ``Protocol`` changes in the remote object.
+# The property ``Protocol`` is described in the AES70 standard as follows.
+# Type of control protocol used by the network (OCAnn). Read-only property.
+#
+# @member {PropertyEvent<int>} OcaControlNetwork#OnProtocolChanged
+# An alias for OnProtocolChanged
+#
+# @member {PropertyEvent<int>} OcaControlNetwork#OnControlProtocolChanged

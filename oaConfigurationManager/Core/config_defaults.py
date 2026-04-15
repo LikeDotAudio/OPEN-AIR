@@ -56,6 +56,7 @@ class ConfigDefaults:
 
     # SNMP Settings
     SNMP_PORT = 161
+    OID_MAP_SOURCE = None
 
     # OSC Settings
     OSC_RX_PORT = 8000

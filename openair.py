@@ -48,8 +48,22 @@ from loguru import logger
 from oaOchestration.Core.path_initializer import initialize_paths
 from oaConfigurationManager.FileReaders.config_reader import Config
 
+# --- Centralized Protocol Management ---
+# Import the ComProtocolManager entry point
+from oaComProtocols.oaComManager.Entry import ComProtocolManager, start_all_protocols, stop_all_protocols, status as get_protocol_status
+
 # _DEBUG: Internal flag to toggle verbose supervisor logging.
 _DEBUG = False
+
+def log(message):
+    """Internal helper for consistent supervisor console output."""
+    import re
+    ansi_escape = re.compile(r'\x1B(?:[@-Z\-_]|\[[0-?]*[ -/]*[@-~])')
+    clean_message = ansi_escape.sub('', str(message))
+    
+    print(f"[SUPERVISOR] {clean_message}")
+    if _DEBUG: 
+        matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🚀 SUPERVISOR: {message}", "DEBUG")
 
 def main():
     """
@@ -91,16 +105,6 @@ def main():
     
     app_config = Config.get_instance()
     is_mission_critical = app_config.MISSION_CRITICAL_MODE
-
-    def log(message):
-        """Internal helper for consistent supervisor console output."""
-        import re
-        ansi_escape = re.compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])')
-        clean_message = ansi_escape.sub('', str(message))
-        
-        print(f"[SUPERVISOR] {clean_message}")
-        if _DEBUG: 
-            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🚀 SUPERVISOR: {message}", "DEBUG")
 
     log(f"Launching OPEN-AIR Partitions... (Mission Critical: {is_mission_critical})")
 
@@ -168,6 +172,26 @@ def main():
     signal.signal(signal.SIGINT, signal_handler)
     signal.signal(signal.SIGTERM, signal_handler)
 
+    # --- Centralized Protocol Initialization ---
+    protocol_manager = None
+    try:
+        log("Initializing Communication Protocol Manager...")
+        protocol_manager = start_all_protocols()
+        log("All communication protocols started successfully.")
+
+    except Exception as e:
+        log(f"🛑 CRITICAL ERROR during protocol initialization: {e}")
+        # Not exiting here as other partitions might still run, though degraded.
+        pass
+        import traceback
+        traceback.print_exc()
+        # Attempt graceful shutdown if protocols were partially started
+        if protocol_manager:
+            protocol_manager.stop_all()
+        sys.exit(1)
+    # --- End Centralized Protocol Initialization ---
+
+
     # 1. Launch UI Partition (Handles User Feedback/Splash Screen).
     log("Spawning Partition B (UI)...")
     p_ui = subprocess.Popen([python_executable, ui_script], env=ui_env)
@@ -206,7 +230,8 @@ def main():
                 processes[0] = p_core
             else:
                 log(f"🛑 The Core engine has exited ({desc}). Shutting down the entire system.")
-                break
+                shutdown_requested[0] = True # Initiate shutdown
+                break # Exit loop to proceed with shutdown
         
         # Check UI partition liveness.
         if p_ui.poll() is not None:
@@ -223,7 +248,8 @@ def main():
                     log("👋 The User Interface was closed normally. System complete.")
                 else:
                     log(f"🚨 The User Interface has exited unexpectedly ({desc}).")
-                break
+                shutdown_requested[0] = True # Initiate shutdown
+                break # Exit loop to proceed with shutdown
 
     # --- Finalization and Cleanup ---
     log("Terminating child processes...")
@@ -240,6 +266,19 @@ def main():
                 p.kill()
                 p.wait() # Final wait to clean up zombie
     
+    # --- Centralized Protocol Shutdown ---
+    log("Shutting down communication protocols...")
+    try:
+        # Use the manager instance to stop all protocols
+        protocol_manager = ComProtocolManager.get_instance() # Get singleton instance
+        if protocol_manager:
+            protocol_manager.stop_all()
+        else:
+            log("⚠️ Protocol manager not initialized, cannot stop protocols.", "WARNING")
+    except Exception as e:
+        log(f"❌ Error during protocol shutdown: {e}", "ERROR")
+    # --- End Centralized Protocol Shutdown ---
+
     # --- FINAL LOGGING FLUSH ---
     from oaLogging.Core.logger import shutdown_logging
     shutdown_logging()

@@ -72,7 +72,7 @@ class ProtocolRouter:
         # ⚡ PROTOCOL ROUTING MATRIX (N x N): 
         # Controls which source protocols (Rows) are allowed to dispatch to destination protocols (Cols).
         # "anything can route to anything but itself" - Standard loopback prevention.
-        self.protocols = ["MQTT", "OSC", "MIDI", "SNMP", "REST", "SMPTE2138", "AES70", "EMBER", "NMOS", "VISA", "GUI"]
+        self.protocols = ["MQTT", "OSC", "MIDI", "SNMP", "REST", "SMPTE2138", "AES70", "EMBER", "NMOS", "VISA", "GUI", "CUSTOM"]
         
         # Emoji mapping for strategy generation
         self.protocol_emojis = {

@@ -5,21 +5,14 @@
 # Author: Anthony Peter Kuzub (Original), Gemini CLI (Refactored)
 # Blog: www.Like.audio (Contributor to this project)
 #
-# Professional services for customizing and tailoring this software to your specific
-# application can be negotiated. There is no charge to use, modify, or fork this software.
-#
-# Build Log: https://like.audio/category/software/spectrum-scanner/
-# Source Code: https://github.com/APKaudio/
-# Feature Requests can be emailed to i @ like . audio
-#
 # Version 20260413.2355.1 (Consolidated to Single Window with Tabs)
 
 import sys
 import os
 import pathlib
 import argparse
-import threading
 from pathlib import Path
+import threading
 
 # Ensure root directory is in the search path
 current_dir = pathlib.Path(__file__).resolve().parent
@@ -27,69 +20,99 @@ project_root = current_dir.parent.parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
-import tkinter as tk
+import tkinter as tk # GUI imports will be handled by the central manager or run conditionally
 from tkinter import ttk
 import time
 from loguru import logger
 from oaLogging.Methods.matrix_gate import matrix_log
 
-# --- OPTIONAL GUI EXPORTS (V3.2.1 Decoupling) ---
-try:
-    from oaComProtocols.oaComMidi.Interface import MidiDashboard, MidiOutputGenerator
-    from oaComProtocols.oaComMidi.Interface.Input.midi_keyboard import MidiKeyboard, get_midi_color
-    GUI_AVAILABLE = True
-except (ImportError, Exception) as e:
-    logger.error(f"GUI components not available: {e}")
-    MidiDashboard = None
-    MidiOutputGenerator = None
-    MidiKeyboard = None
-    get_midi_color = None
-    GUI_AVAILABLE = False
+# --- Core Components ---
+# These managers will be instantiated and managed by the ComProtocolManager
+# MidiManager, MIDIPortController, MIDIHardwareLock, MIDIProtocolMapper
 
-from oaComProtocols.oaComMidi.Managers.midi_manager import MidiManager
-from oaComProtocols.oaComMidi.Core.midi_port_controller import MIDIPortController
-from oaComProtocols.oaComMidi.Core.midi_hardware_lock import MIDIHardwareLock
-from oaComProtocols.oaComMidi.Core.midi_protocol_mapper import MIDIProtocolMapper
+_manager_instance = None
 
-_instance = None
+# Mock dependencies if not provided by the manager
+class MockStateCache:
+    def handle_external_update(self, *args, **kwargs): pass
+    def shutdown(self): pass
 
-class StandaloneState:
-    """Mock state registry for pure standalone mode."""
-    def handle_external_update(self, topic, value, source="MIDI", metadata=None):
-        pass
-    def shutdown(self):
-        pass
+class MockMqttConnectionManager:
+    def connect_to_broker(self, *args, **kwargs): pass
+    def disconnect(self): pass
+    def subscribe(self, *args, **kwargs): pass
+    def publish(self, *args, **kwargs): pass
 
-def get_manager(state_cache_manager=None, run_bridge=True, use_protocol_router=True, enable_direct_mqtt=True):
+class MockSubscriberRouter:
+    def add_handler(self, *args, **kwargs): pass
+
+def get_manager(**kwargs):
     """
-    Returns the singleton MIDI manager.
+    Singleton getter for the MIDI Manager.
+    Dependencies (state_cache_manager, mqtt_connection_manager, etc.) should be passed via kwargs.
+    If mqtt_connection_manager is not provided, MidiManager will manage its own internal connection.
     """
-    global _instance
-    if _instance is None:
-        _instance = MidiManager(
-            state_cache_manager=state_cache_manager, 
+    global _manager_instance
+    if _manager_instance is None:
+        from oaComProtocols.oaComMidi.Managers.midi_manager import MidiManager
+        
+        # Provide default mock dependencies if not passed, for basic structure
+        state_cache = kwargs.get("state_cache_manager", MockStateCache())
+        # MIDI Manager now needs its own MQTT connection, not necessarily a shared one.
+        # If it requires connection details, they should be passed or configured externally.
+        # For self-containment, it will initialize its own MQTT connection if not provided.
+        mqtt_conn = kwargs.get("mqtt_connection_manager", None) 
+        sub_router = kwargs.get("subscriber_router", MockSubscriberRouter())
+        run_bridge = kwargs.get("run_bridge", True)
+        use_protocol_router = kwargs.get("use_protocol_router", True)
+        enable_direct_mqtt = kwargs.get("enable_direct_mqtt", True)
+
+        # If MQTT connection is not provided externally, MidiManager should handle its own connection internally.
+        _manager_instance = MidiManager(
+            state_cache_manager=state_cache,
             run_bridge=run_bridge,
             use_protocol_router=use_protocol_router,
             enable_direct_mqtt=enable_direct_mqtt
         )
-    return _instance
+        matrix_log("comms", "midi", "get_manager", "MIDI Manager initialized.", "DEBUG")
+    else:
+        # Update existing instance if new dependencies are provided
+        for key, value in kwargs.items():
+            if hasattr(_manager_instance, key):
+                setattr(_manager_instance, key, value)
+    return _manager_instance
 
-def start():
-    """Starts the MIDI bridge service."""
-    manager = get_manager()
+def start(state_cache_manager=None, mqtt_connection_manager=None, subscriber_router=None, run_bridge=True, use_protocol_router=True, enable_direct_mqtt=True):
+    """
+    Starts the MIDI bridge service, accepting external dependencies.
+    If mqtt_connection_manager is not provided, MidiManager should handle its own connection internally.
+    """
+    matrix_log("comms", "midi", "start", "🚀 [MIDI] Starting MIDI bridge service...", "INFO")
+    manager = get_manager(
+        state_cache_manager=state_cache_manager,
+        mqtt_connection_manager=mqtt_connection_manager,
+        subscriber_router=subscriber_router,
+        run_bridge=run_bridge,
+        use_protocol_router=use_protocol_router,
+        enable_direct_mqtt=enable_direct_mqtt
+    )
     manager.start()
+    matrix_log("comms", "midi", "start", "MIDI Manager started.", "INFO")
 
 def stop():
     """Stops the MIDI bridge service."""
-    global _instance
-    if _instance:
-        _instance.stop()
+    global _manager_instance
+    if _manager_instance:
+        _manager_instance.stop()
+        _manager_instance = None # Allow re-initialization if needed
+        matrix_log("comms", "midi", "stop", "MIDI Manager stopped.", "INFO")
 
 def status():
     """Returns the current status of the MIDI bridge."""
-    manager = get_manager()
+    manager = get_manager() # Get instance, assume it exists if manager was ever used
     return manager.get_port_info()
 
+# run_tests function remains useful for module-specific testing
 def run_tests():
     """
     Discovers and runs all tests within the oaComProtocols.oaComMidi/Tests/ directory.
@@ -111,7 +134,7 @@ def run_tests():
     
     all_tests_passed = True
     for test_file in test_files:
-        print(f"--- Running: {test_file.name} ---")
+        print(f"\n--- Running: {test_file.name} ---")
         try:
             relative_test_file_path = test_file.relative_to(project_root)
             module_path_for_runner = str(relative_test_file_path).replace(os.sep, '.')[:-3]
@@ -143,137 +166,15 @@ def run_tests():
             os.chdir(original_cwd)
 
     if all_tests_passed:
-        print("🎉 All tests for oaComProtocols.oaComMidi passed!")
+        print("\n🎉 All tests for oaComProtocols.oaComMidi passed!")
     else:
-        print("💔 Some tests for oaComProtocols.oaComMidi failed.")
+        print("\n💔 Some tests for oaComProtocols.oaComMidi failed.")
     return all_tests_passed
 
-def main():
-    """
-    Standalone entry point for MIDI with GUI support.
-    """
-    # 1. Parse Arguments
-    parser = argparse.ArgumentParser(description="OPEN-AIR MIDI Module Standalone")
-    parser.add_argument("--pure", action="store_true", help="Run without MQTT or State Cache dependencies")
-    parser.add_argument("--skip-tests", action="store_true", help="Skip pre-flight unit tests")
-    args, unknown = parser.parse_known_args()
-
-    # 2. Run Tests First
-    if not args.skip_tests and not run_tests():
-        print("🛑 Tests failed. Aborting GUI launch.")
-        return
-
-    # 3. Initialize Paths and Logging
-    from oaLogging.Core.logger import initialize_logging, set_log_directory
-    from oaOchestration.Core.path_initializer import initialize_paths, DATA_LOGS_DIR
-    
-    initialize_paths()
-    set_log_directory(DATA_LOGS_DIR, partition="MIDI-STANDALONE")
-    
-    matrix_log("comms", "midi", "main", "🚀 [MIDI] Launching Standalone MIDI Module...", "INFO")
-
-    # 4. Initialize Background Services
-    mqtt_conn = None
-    state_cache = None
-    router = None
-    
-    if args.pure:
-        print("🕊️  [MIDI] Running in PURE STANDALONE mode.")
-        state_cache = StandaloneState()
-    else:
-        try:
-            from oaComProtocols.oaComMQTT.Managers.mqtt_connection import MqttConnectionManager
-            from oaStateCache.Core.state_cache import StateRegistry
-            # from oaComBroker.Core.protocol_router.manager import ProtocolRouter
-
-            router = None # ProtocolRouter.get_instance()
-            mqtt_conn = MqttConnectionManager()
-            state_cache = StateRegistry(mqtt_conn)
-            
-            # router.set_state_cache(state_cache)
-            # router.set_mqtt_manager(mqtt_conn)
-            
-            mqtt_conn.connect_to_broker(on_message_callback=state_cache.handle_incoming_mqtt)
-            mqtt_conn.subscribe("OPEN-AIR/MIDI/#")
-            # router.start()
-        except ImportError:
-            print("⚠️ System mode requested but dependencies missing. Falling back to PURE.")
-            state_cache = StandaloneState()
-
-    # 5. Start MIDI Manager
-    # If in PURE mode, enable_direct_mqtt=True will use the internal MidiMqttWorker
-    manager = get_manager(
-        state_cache_manager=state_cache, 
-        run_bridge=True, 
-        use_protocol_router=(not args.pure), 
-        enable_direct_mqtt=True
-    )
-    if router:
-        router.set_snmp_manager(manager) # Standard pattern
-    manager.start()
-    
-    # 6. Launch GUI
-    if GUI_AVAILABLE:
-        try:
-            root = tk.Tk()
-            root.title(f"OPEN-AIR | MIDI Controller ({'PURE' if args.pure else 'SYSTEM'} mode)")
-            root.geometry("1100x850")
-            root.configure(bg="#2b2b2b")
-            
-            style = ttk.Style()
-            style.theme_use('clam')
-            style.configure("TNotebook", background="#2b2b2b", borderwidth=0)
-            style.configure("TNotebook.Tab", background="#3c3f41", foreground="#ffffff", padding=[15, 5])
-            style.map("TNotebook.Tab", background=[("selected", "#4b6eaf")])
-
-            notebook = ttk.Notebook(root)
-            notebook.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
-            
-            def on_closing():
-                root.quit()
-                root.destroy()
-            root.protocol("WM_DELETE_WINDOW", on_closing)
-            
-            # Tab 1: Input
-            tab1 = tk.Frame(notebook, bg="#2b2b2b")
-            notebook.add(tab1, text=" 🎹 MIDI INPUT ")
-            input_view = MidiDashboard(tab1, midi_manager=manager, config={"app_instance": root})
-            input_view.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
-
-            # Tab 2: Output
-            tab2 = tk.Frame(notebook, bg="#2b2b2b")
-            notebook.add(tab2, text=" 📤 MIDI OUTPUT ")
-            output_view = MidiOutputGenerator(tab2, midi_manager=manager)
-            output_view.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
-
-            print(f"✅ [MIDI] Standalone GUI deployed.")
-            root.mainloop()
-
-        except KeyboardInterrupt:
-            pass
-        finally:
-            manager.stop()
-            if router: router.stop()
-            if mqtt_conn: mqtt_conn.disconnect()
-            state_cache.shutdown()
-            print("🏁 [MIDI] Standalone shutdown complete.")
-    else:
-        print("❌ GUI components not available. Shutdown.")
-        manager.stop()
-
-if __name__ == "__main__":
-    main()
+# Standalone main() function is removed.
+# def main(): ...
 
 __all__ = [
-    "MidiManager",
-    "MIDIPortController",
-    "MIDIHardwareLock",
-    "MIDIProtocolMapper",
-    "MidiMqttTransport",
-    "MidiDashboard",
-    "get_midi_color",
-    "get_manager",
-    "start",
-    "stop",
-    "status"
+    "MidiManager", "MIDIPortController", "MIDIHardwareLock", "MIDIProtocolMapper",
+    "get_manager", "start", "stop", "status"
 ]

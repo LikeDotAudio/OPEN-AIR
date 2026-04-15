@@ -108,6 +108,7 @@ class Config(ConfigDefaults):
 
     def _parse_snmp_settings(self, config):
         self.SNMP_PORT = self._s_get(config, "SNMP", "snmp_port", self.SNMP_PORT, "int")
+        self.OID_MAP_SOURCE = self._s_get(config, "SNMP", "oid_map_source", self.OID_MAP_SOURCE)
 
     def _parse_osc_settings(self, config):
         self.OSC_RX_PORT = self._s_get(config, "OSC", "osc_rx_port", self.OSC_RX_PORT, "int")
@@ -149,10 +150,13 @@ class Config(ConfigDefaults):
                 section = config[section_name]
                 for key in section:
                     # ⚡ FIX: Skip known string-based keys to avoid ValueError
-                    if key.lower() in ["mute_functions", "force_functions"]:
+                    if key.lower() in ["mute_functions", "force_functions", "oid_map_source"]:
                         continue
                     # Store all keys in uppercase for consistent matrix lookup
-                    self.DEBUG_MATRIX[key.upper()] = section.getboolean(key, False)
+                    try:
+                        self.DEBUG_MATRIX[key.upper()] = section.getboolean(key, False)
+                    except ValueError:
+                        logger.warning(f"Config: Key '{key}' in '{section_name}' is not boolean. Skipping.")
         
         # Special case for comma-separated strings (usually in DEBUG_MATRIX)
         if "DEBUG_MATRIX" in config:

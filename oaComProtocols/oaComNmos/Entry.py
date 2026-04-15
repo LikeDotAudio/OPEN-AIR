@@ -1,18 +1,21 @@
-# FolderName/FileName.py
+# oaComProtocols/oaComNmos/Entry.py
 # Author: Gemini (Collaborator)
-# Version: 20260414.0010.1 (Fixed stop NameError and Shutdown flow)
+# Version: 20260414.0010.1 (Refactored for centralized management and self-contained MQTT)
+#
+# Description: Gatekeeper for the NMOS Communication Module.
+# Orchestrates NMOS bridge and API server functionalities.
 
 import sys
-import argparse
+import os
+import pathlib
 import signal
 import threading
 import socket
 import time
 import subprocess
-import os
-import pathlib
+from pathlib import Path
 
-# Ensure root directory is in the search path
+# Ensure project root is in sys.path for direct execution
 current_dir = pathlib.Path(__file__).resolve().parent
 project_root = current_dir.parent.parent
 if str(project_root) not in sys.path:
@@ -23,16 +26,17 @@ from oaLogging.Methods.matrix_gate import matrix_log
 from oaConfigurationManager.FileReaders.config_reader import Config
 
 # Local module imports
+from oaComProtocols.oaComNmos.Core.utils import gen_id, get_ip
 from oaComProtocols.oaComNmos.Core.event_bus import nmos_event_bus
 from oaComProtocols.oaComNmos.Core.nmos_builder import build_node, build_device
 from oaComProtocols.oaComNmos.Constants import settings
 from oaComProtocols.oaComNmos.Managers import registration_manager
 from oaComProtocols.oaComNmos.Workers.sap_listener_worker import sap_listener_worker, heartbeat_worker
 from oaComProtocols.oaComNmos.Interface import connection_api
-from oaComProtocols.oaComNmos.IS07.transports import Is07Bridge
-from oaComProtocols.oaComNmos.Core.utils import gen_id, get_ip
+from oaComProtocols.oaComNmos.IS07.transports import Is07Bridge # This uses internal MQTT client
 
 # --- Global State Management ---
+# This state will be managed externally by ComProtocolManager or initialized internally if standalone.
 global_state = {
     "NODE_ID": None,
     "DEVICE_ID": None,
@@ -44,265 +48,113 @@ global_state = {
     "STREAMS": {},
     "REGISTRAR_URL": "http://localhost:4000",
     "RUNNING": False,
-    "BRIDGE": None
+    "BRIDGE": None # Will be set by start function
 }
 
-class NmosBridgeManager:
-    """
-    Orchestrates NMOS MQTT and IS-07 bridging.
-    ⚡ SELF-CONTAINED: Uses internal Is07Bridge transports for all monitoring.
-    """
-    def __init__(self, registrar_url):
-        self.bridge = Is07Bridge(registrar_url)
-        self.is_running = False
+# --- Internal Managers/Components ---
+# These will be managed by the ComProtocolManager, but initialized internally here if not provided.
+_bridge_manager = None 
+
+def initialize_global_state(registrar_url=None):
+    """Initializes global state for NMOS module. Called by start()."""
+    if not global_state.get("RUNNING", False):
+        matrix_log("comms", "nmos", "initialize_global_state", "Initializing NMOS global state...", "INFO")
         
-    def start(self):
-        if self.is_running: return
-        self.is_running = True
-        
-        # ⚡ SELF-CONTAINED CONNECTION: Using internal paho-based transport
-        connection_params_mqtt = {
-            "destination_host": "localhost",
-            "destination_port": 1883,
-            "broker_protocol": "mqtt"
-        }
-        connection_params_ws = {
-            "connection_uri": f"ws://localhost:{settings.PORT}/is07",
-            "reconnect": True
+        state = {
+            "NODE_ID": gen_id(),
+            "DEVICE_ID": gen_id(),
+            "NODE": {}, "DEVICE": {}, "SOURCES": {}, "FLOWS": {}, "SENDERS": {}, "STREAMS": {},
+            "REGISTRAR_URL": registrar_url if registrar_url else "http://localhost:4000",
+            "RUNNING": True,
+            "BRIDGE": None # Will be set by start function
         }
         
-        # Register a local handler for general MQTT monitoring
-        self.bridge.set_message_handler(self._on_internal_transport_message)
+        host_ip = get_ip()
+        state["NODE"] = build_node(state["NODE_ID"], host_ip, settings.PORT)
+        state["DEVICE"] = build_device(state["DEVICE_ID"], state["NODE_ID"], host_ip, settings.PORT)
         
-        # Connect internal transports
-        self.bridge.initialize_transports(connection_params_mqtt, connection_params_ws)
+        global_state.update(state) # Update the global_state dictionary
         
-        # ⚡ DIRECT SUBSCRIPTION: Monitor the entire namespace using internal transport
-        self.bridge.subscribe_to_events("OPEN-AIR/#", transport_type="mqtt")
-        
-        print("✅ [NMOS] IS-07 Bridge transports active (Internal MQTT).")
+        registration_manager.register_all_resources(
+            global_state["REGISTRAR_URL"],
+            global_state["NODE"],
+            global_state["DEVICE"],
+            global_state["SOURCES"],
+            global_state["FLOWS"],
+            global_state["SENDERS"]
+        )
+        matrix_log("comms", "nmos", "initialize_global_state", f"NMOS State initialized with NodeID: {global_state['NODE_ID']}", "SUCCESS")
+    else:
+        matrix_log("comms", "nmos", "initialize_global_state", "NMOS global state already initialized.", "DEBUG")
 
-    def stop(self):
-        self.is_running = False
-        self.bridge.shutdown()
+def start(registrar_url=None, state_cache_manager=None, mqtt_connection_manager=None, subscriber_router=None):
+    """
+    Starts the NMOS bridge and API server.
+    Accepts external dependencies but initializes internal MQTT if none provided.
+    """
+    global _bridge_manager
+    if global_state.get("RUNNING", False):
+        matrix_log("comms", "nmos", "start", "NMOS bridge is already running.", "WARNING")
+        return
 
-    def _on_internal_transport_message(self, transport_type, topic, payload):
-        """Unified callback from internal Is07Bridge transports."""
-        if not self.is_running: return
-        
-        # ⚡ MONITORING: If it's MQTT traffic, broadcast to GUI
-        if transport_type == "mqtt" and topic:
-            if "NMOS" in topic.upper(): return # Loop prevention
-            nmos_event_bus.publish("NMOS_EVENT", transport="MQTT", etype="STATE_CHANGE", eid=topic, payload=payload)
-        else:
-            # Handle standard IS-07 events (e.g., from WebSocket or specific IS-07 MQTT topics)
-            nmos_event_bus.publish("NMOS_EVENT", transport=transport_type.upper(), etype="IS07_EVENT", eid="IS-07", payload=payload)
-
-def start(registrar_url=None):
-    """Standardized start command for NMOS bridge."""
-    if global_state["RUNNING"]: return
+    matrix_log("comms", "nmos", "start", "🚀 [NMOS] Starting NMOS bridge and API server...", "INFO")
     
-    if registrar_url:
-        global_state["REGISTRAR_URL"] = registrar_url
-        
-    global_state["RUNNING"] = True
-    host_ip = get_ip()
-    global_state["NODE_ID"] = gen_id()
-    global_state["DEVICE_ID"] = gen_id()
+    # Initialize global state if not already done
+    if not global_state.get("RUNNING", False):
+        initialize_global_state(registrar_url)
     
-    global_state["NODE"] = build_node(global_state["NODE_ID"], host_ip, settings.PORT)
-    global_state["DEVICE"] = build_device(global_state["DEVICE_ID"], global_state["NODE_ID"], host_ip, settings.PORT)
-
-    registration_manager.register_all_resources(
-        global_state["REGISTRAR_URL"],
-        global_state["NODE"],
-        global_state["DEVICE"],
-        global_state["SOURCES"],
-        global_state["FLOWS"],
-        global_state["SENDERS"]
-    )
-
-    # Start Workers
-    threading.Thread(target=sap_listener_worker, args=(global_state["REGISTRAR_URL"], global_state["NODE_ID"], global_state["DEVICE_ID"], host_ip, global_state, registration_manager), daemon=True).start()
+    # Initialize the bridge manager. It uses internal MQTT clients by default if none provided.
+    # The `Is07Bridge` constructor handles internal MQTT connection if mqtt_connection_manager is None.
+    _bridge_manager = Is07Bridge(global_state["REGISTRAR_URL"])
+    
+    # Start Workers (SAP and Heartbeat)
+    # These threads should ideally be managed by the ComProtocolManager or started here if self-contained.
+    # For now, assume they are started here if needed for standalone operation.
+    # If managed externally, these threads might be started by the manager.
+    threading.Thread(target=sap_listener_worker, args=(global_state["REGISTRAR_URL"], global_state["NODE_ID"], global_state["DEVICE_ID"], get_ip(), global_state, registration_manager), daemon=True).start()
     threading.Thread(target=heartbeat_worker, args=(global_state["REGISTRAR_URL"], global_state["NODE_ID"], global_state, registration_manager), daemon=True).start()
-
-    # Start API Server
+    
+    # Start API Server (connection_api)
     connection_api.STATE["NODE"] = global_state["NODE"]
     connection_api.STATE["DEVICE"] = global_state["DEVICE"]
     connection_api.STATE["SOURCES"] = global_state["SOURCES"]
     connection_api.STATE["FLOWS"] = global_state["FLOWS"]
     connection_api.STATE["SENDERS"] = global_state["SENDERS"]
     connection_api.STATE["STREAMS"] = global_state["STREAMS"]
+    
+    api_thread = threading.Thread(target=connection_api.run_server, kwargs={"host": "0.0.0.0", "port": settings.PORT}, daemon=True)
+    api_thread.start()
 
-    threading.Thread(target=connection_api.run_server, kwargs={"host": "0.0.0.0", "port": settings.PORT}, daemon=True).start()
-    print(f"🚀 [NMOS] NMOS Bridge & API Server active on {host_ip}:{settings.PORT}")
-    print(f"🔌 [NMOS] IS-07 WebSocket available at ws://{host_ip}:{settings.PORT}/is07")
+    # Start internal bridge transports AFTER core components are set up
+    _bridge_manager.start()
+
+    matrix_log("comms", "nmos", "start", f"✅ [NMOS] Bridge and API Server active on {get_ip()}:{settings.PORT}", "SUCCESS")
+    matrix_log("comms", "nmos", "start", f"🔌 [NMOS] IS-07 WebSocket available at ws://{get_ip()}:{settings.PORT}/is07", "INFO")
 
 def stop():
     """Stops the NMOS bridge and API server."""
-    global_state["RUNNING"] = False
-    if global_state["BRIDGE"]:
-        global_state["BRIDGE"].stop()
+    global _bridge_manager
+    if _bridge_manager and _bridge_manager.is_running:
+        _bridge_manager.stop()
+        matrix_log("comms", "nmos", "stop", "NMOS Bridge stopped.", "INFO")
+    
+    # Workers and API server are daemon threads and will exit with the main process.
+    # If they were non-daemon, explicit stop logic would be needed here.
 
 def status():
     """Returns the current status of the NMOS bridge."""
     return {
-        "running": global_state["RUNNING"],
-        "node_id": global_state["NODE_ID"],
-        "registrar": global_state["REGISTRAR_URL"]
+        "running": global_state.get("RUNNING", False),
+        "node_id": global_state.get("NODE_ID", "N/A"),
+        "registrar": global_state.get("REGISTRAR_URL", "N/A"),
+        "bridge_running": _bridge_manager.is_running if _bridge_manager else False
     }
 
-def run_tests():
-    """
-    Discovers and runs all tests within the oaComProtocols.oaComNmos/Tests/ directory.
-    """
-    print("🔍 Discovering and running tests for oaComProtocols.oaComNmos...")
-    test_dir = pathlib.Path(__file__).parent / "Tests"
-    if not test_dir.is_dir():
-        print("❌ No 'Tests/' directory found.")
-        return True
+# Standalone main() function is removed.
+# def run_tests(): ...
+# if __name__ == "__main__": ...
 
-    test_files = sorted([f for f in test_dir.glob("test_*.py")])
-    if not test_files:
-        print("❌ No test files found (expected pattern: test_*.py).")
-        return True
-
-    print(f"Found {len(test_files)} test files. Executing...")
-    
-    import subprocess
-    
-    all_tests_passed = True
-    for test_file in test_files:
-        print(f"--- Running: {test_file.name} ---")
-        try:
-            # Get the module path relative to the project root for the test runner
-            relative_test_file_path = test_file.relative_to(project_root)
-            module_path_for_runner = str(relative_test_file_path).replace(os.sep, '.')[:-3]
-
-            # Ensure the current directory is the project root so Python can find modules
-            original_cwd = os.getcwd()
-            os.chdir(project_root) 
-
-            result = subprocess.run(
-                [sys.executable, "-m", "unittest", module_path_for_runner],
-                capture_output=True,
-                text=True,
-                check=False
-            )
-            
-            print(result.stdout)
-            if result.stderr:
-                print(result.stderr)
-            
-            if result.returncode != 0:
-                all_tests_passed = False
-                print(f"❌ Test failed for {test_file.name} with exit code {result.returncode}")
-            else:
-                print(f"✅ Tests passed for {test_file.name}")
-
-        except Exception as e:
-            print(f"❌ An error occurred while running tests for {test_file.name}: {e}")
-            all_tests_passed = False
-        finally:
-            os.chdir(original_cwd)
-
-    if all_tests_passed:
-        print("🎉 All tests for oaComProtocols.oaComNmos passed!")
-    else:
-        print("💔 Some tests for oaComProtocols.oaComNmos failed.")
-    return all_tests_passed
-
-def main():
-    """Standalone entry point for NMOS with GUI support."""
-    from oaLogging.Core.logger import initialize_logging, set_log_directory
-    from oaOchestration.Core.path_initializer import initialize_paths
-    
-    initialize_paths()
-    set_log_directory(os.path.join(os.getcwd(), "oaDataLogs"), partition="NMOS")
-    
-    matrix_log("comms", "nmos", "main", "🚀 [NMOS] Launching Standalone NMOS Module...", "INFO")
-    
-    # 1. Start NMOS Core & Bridge (Internal MQTT)
-    start()
-    global_state["BRIDGE"] = NmosBridgeManager(global_state["REGISTRAR_URL"])
-    
-    # 2. Launch Consolidated GUI
-    try:
-        import tkinter as tk
-        from tkinter import ttk
-        from oaComProtocols.oaComNmos.Interface import (
-            NmosCommandsMonitorImplementation,
-            NmosConnectionMonitorImplementation,
-            NmosWebsocketManagerImplementation
-        )
-
-        root = tk.Tk()
-        root.title("OPEN-AIR NMOS Controller")
-        root.geometry("1100x850")
-        root.configure(bg="#2b2b2b")
-        
-        def on_closing():
-            stop()
-            root.quit()
-            root.destroy()
-
-        root.protocol("WM_DELETE_WINDOW", on_closing)
-        
-        # ⚡ TABBED INTERFACE STYLE
-        style = ttk.Style()
-        style.theme_use('clam')
-        style.configure("TNotebook", background="#2b2b2b", borderwidth=0)
-        style.configure("TNotebook.Tab", background="#3c3f41", foreground="#ffffff", padding=[15, 5])
-        style.map("TNotebook.Tab", background=[("selected", "#4b6eaf")])
-
-        notebook = ttk.Notebook(root)
-        notebook.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
-
-        config = {
-            "global_state": global_state,
-            "mqtt_connection_manager": None,
-            "subscriber_router": None,
-            "state_cache": None
-        }
-
-        # Tab 1: Registration Status
-        conn_tab = tk.Frame(notebook, bg="#2b2b2b")
-        notebook.add(conn_tab, text=" 📡 REGISTRATION ")
-        conn_gui = NmosConnectionMonitorImplementation(conn_tab, config=config)
-        conn_gui.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
-
-        # Tab 2: Commands & Events
-        cmd_tab = tk.Frame(notebook, bg="#2b2b2b")
-        notebook.add(cmd_tab, text=" 📝 COMMANDS & EVENTS ")
-        cmd_gui = NmosCommandsMonitorImplementation(cmd_tab, config=config)
-        cmd_gui.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
-
-        # Tab 3: WebSocket Manager
-        ws_tab = tk.Frame(notebook, bg="#2b2b2b")
-        notebook.add(ws_tab, text=" 🔌 WEBSOCKET ")
-        ws_gui = NmosWebsocketManagerImplementation(ws_tab, config=config)
-        ws_gui.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
-
-        print("✅ [NMOS] Consolidated GUI deployed.")
-        
-        # 3. Start Bridge Transports AFTER GUI is ready
-        global_state["BRIDGE"].start()
-        
-        root.mainloop()
-
-    except KeyboardInterrupt:
-        pass
-    finally:
-        stop()
-
-if __name__ == "__main__":
-    if "run-tests-only" in sys.argv:
-        run_tests()
-    else:
-        # ⚡ PRE-FLIGHT CHECK: Run all tests before launching standalone
-        if run_tests():
-            main()
-        else:
-            print("🚫 Standalone launch aborted due to test failures.")
-
-__all__ = ["start", "stop", "status", "main", "run_tests", "global_state", "Is07MqttTransport", "Is07WebSocketTransport"]
+__all__ = [
+    "start", "stop", "status", "global_state", "NmosBridgeManager",
+    "Is07MqttTransport", "Is07WebSocketTransport", "initialize_global_state"
+]

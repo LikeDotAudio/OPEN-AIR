@@ -131,10 +131,10 @@ def register_new_stream(
     SENDERS[sender_id] = new_sender
 
     # Update the device's sender list if this is a new sender
-    if sender_id not in DEVICE.get("senders", []):
-        DEVICE.get("senders", []).append(sender_id)
-        DEVICE["version"] = now_ts()
-        registration_manager.post(registrar_url, "device", DEVICE)
+    if sender_id not in global_state["DEVICE"].get("senders", []):
+        global_state["DEVICE"].get("senders", []).append(sender_id)
+        global_state["DEVICE"]["version"] = now_ts()
+        registration_manager.post(registrar_url, "device", global_state["DEVICE"])
 
     # Register new resources with the NMOS registry
     registration_manager.post(registrar_url, "source", new_source)

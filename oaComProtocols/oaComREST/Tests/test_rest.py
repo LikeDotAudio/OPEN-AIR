@@ -8,14 +8,14 @@
 import unittest
 from unittest.mock import MagicMock, patch
 
+import sys
+sys.path.insert(0, '/home/anthony/Documents/OPEN-AIR')
+
 # Note: These tests require 'fastapi' and 'httpx' to be installed.
-try:
-    from fastapi import FastAPI
-    from fastapi.testclient import TestClient
-    from oaComProtocols.oaComREST.Interface.routes import create_router
-    DEPENDENCIES_AVAILABLE = True
-except ImportError:
-    DEPENDENCIES_AVAILABLE = False
+from fastapi import FastAPI
+from fastapi.testclient import TestClient
+from oaComProtocols.oaComREST.Interface.routes import create_router
+DEPENDENCIES_AVAILABLE = True
 
 class TestRESTProtocol(unittest.TestCase):
     """

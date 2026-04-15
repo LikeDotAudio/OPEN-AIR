@@ -59,6 +59,27 @@ class Is07Bridge:
         if ws_connected:
             self.websocket_transport.set_message_handler(self._handle_incoming_message)
 
+    def start(self):
+        """Starts the bridge and its transports with default parameters."""
+        # Use default connection parameters for standalone operation
+        mqtt_params = {
+            "destination_host": "localhost",
+            "destination_port": 1883
+        }
+        ws_params = {
+            "connection_uri": f"ws://localhost:{settings.PORT}/is07"
+        }
+        self.initialize_transports(mqtt_params, ws_params)
+
+    def stop(self):
+        """Stops the bridge and its transports."""
+        self.shutdown()
+
+    @property
+    def is_running(self) -> bool:
+        """Returns True if the bridge is currently running (any transport connected)."""
+        return self.mqtt_transport.is_connected() or self.websocket_transport.is_connected()
+
     def shutdown(self):
         """Shuts down transport connections."""
         print("[IS07Bridge] Shutting down transports.")

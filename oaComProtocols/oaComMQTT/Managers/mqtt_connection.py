@@ -34,17 +34,18 @@ class MqttConnectionManager:
                     cls._instance = super().__new__(cls)
         return cls._instance
 
-    def __init__(self):
+    def __init__(self, address=None, port=None, username=None, password=None, client_id=None):
         if hasattr(self, "initialized"): return
         self.initialized = True
         self.client = None
         self._connected = False
         
         # Connection Config
-        self.broker_address = None
-        self.broker_port = None
-        self.username = app_constants.MQTT_USERNAME
-        self.password = app_constants.MQTT_PASSWORD
+        self.broker_address = address
+        self.broker_port = port
+        self.username = username or app_constants.MQTT_USERNAME
+        self.password = password or app_constants.MQTT_PASSWORD
+        self.client_id = client_id
         
         # Callbacks & Routing
         self.on_message_callback: Optional[Callable[[MqttMessage], None]] = None

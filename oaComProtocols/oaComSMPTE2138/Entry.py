@@ -2,11 +2,7 @@
 #
 # Gatekeeper for the SMPTE ST 2138 (SMPTE2138) Communication Module. 
 # Orchestrates translation (Bridge) and observation (Monitor) services.
-#
-# Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
-#
-# Version 20260330.1600.1
+# Refactored for centralized management by ComProtocolManager.
 
 import sys
 import os
@@ -22,43 +18,111 @@ if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
 # Absolute imports for robustness in standalone mode
-from oaComProtocols.oaComSMPTE2138.Managers.smpte2138_bridge_manager import SMPTE2138BridgeManager
-from oaComProtocols.oaComSMPTE2138.Managers.smpte2138_monitor_manager import SMPTE2138MonitorManager
+from oaLogging.Methods.matrix_gate import matrix_log
 
-__all__ = ["SMPTE2138BridgeManager", "SMPTE2138MonitorManager", "main"]
+# These managers will be instantiated and managed by the ComProtocolManager
+# from oaComProtocols.oaComSMPTE2138.Managers.smpte2138_bridge_manager import SMPTE2138BridgeManager
+# from oaComProtocols.oaComSMPTE2138.Managers.smpte2138_monitor_manager import SMPTE2138MonitorManager
 
-def start_bridge(mqtt_connection, subscriber_router):
-    """
-    Initializes and starts the SMPTE2138 Bridge Manager (Internal -> External).
-    Used in the Core Partition.
-    """
-    mgr = SMPTE2138BridgeManager(mqtt_connection, subscriber_router)
-    mgr.start()
-    return mgr
+# Mock dependencies if not provided by the manager
+class MockMqttConnectionManager:
+    def connect_to_broker(self, *args, **kwargs): pass
+    def disconnect(self): pass
+    def subscribe(self, *args, **kwargs): pass
+    def publish(self, *args, **kwargs): pass
 
-def start_monitor(mqtt_connection, subscriber_router):
+class MockSubscriberRouter:
+    def add_handler(self, *args, **kwargs): pass
+
+_bridge_manager = None
+_monitor_manager = None
+
+def start_bridge(mqtt_connection_manager=None, subscriber_router=None):
+    """Initializes and starts the SMPTE2138 Bridge manager."""
+    global _bridge_manager
+    if _bridge_manager is None:
+        from oaComProtocols.oaComSMPTE2138.Managers.smpte2138_bridge_manager import SMPTE2138BridgeManager
+        # Handle missing dependencies if not provided by the manager
+        mqtt_conn = mqtt_connection_manager if mqtt_connection_manager else MockMqttConnectionManager()
+        sub_router = subscriber_router if subscriber_router else MockSubscriberRouter()
+        
+        _bridge_manager = SMPTE2138BridgeManager(mqtt_conn, sub_router)
+        _bridge_manager.start()
+        matrix_log("comms", "smpte2138", "start_bridge", "✅ SMPTE2138 Bridge started.", "SUCCESS")
+    return _bridge_manager
+
+def start_monitor(mqtt_connection_manager=None, subscriber_router=None):
+    """Initializes and starts the SMPTE2138 Monitor manager."""
+    global _monitor_manager
+    if _monitor_manager is None:
+        from oaComProtocols.oaComSMPTE2138.Managers.smpte2138_monitor_manager import SMPTE2138MonitorManager
+        # Handle missing dependencies if not provided by the manager
+        mqtt_conn = mqtt_connection_manager if mqtt_connection_manager else MockMqttConnectionManager()
+        sub_router = subscriber_router if subscriber_router else MockSubscriberRouter()
+
+        _monitor_manager = SMPTE2138MonitorManager(mqtt_conn, sub_router)
+        _monitor_manager.start()
+        matrix_log("comms", "smpte2138", "start_monitor", "✅ SMPTE2138 Monitor started.", "SUCCESS")
+    return _monitor_manager
+
+def start(mqtt_connection_manager=None, subscriber_router=None, **kwargs):
     """
-    Initializes and starts the SMPTE2138 Monitor Manager (External -> Human Readable).
-    Used in the UI Partition.
+    Initializes and starts the SMPTE2138 Bridge and Monitor managers.
+    Accepts external MQTT connection and subscriber router.
     """
-    mgr = SMPTE2138MonitorManager(mqtt_connection, subscriber_router)
-    mgr.start()
-    return mgr
+    matrix_log("comms", "smpte2138", "start", "🚀 [ST2138] Starting SMPTE2138 services...", "INFO")
+    start_bridge(mqtt_connection_manager, subscriber_router)
+    start_monitor(mqtt_connection_manager, subscriber_router)
+    matrix_log("comms", "smpte2138", "start", "✅ SMPTE2138 services started.", "SUCCESS")
+
+def stop():
+    """
+    Stops the SMPTE2138 Bridge and Monitor managers.
+    """
+    global _bridge_manager, _monitor_manager
+    
+    matrix_log("comms", "smpte2138", "stop", "🛑 [ST2138] Stopping Bridge and Monitor managers...", "INFO")
+    
+    if _bridge_manager:
+        _bridge_manager.stop()
+        _bridge_manager = None
+    if _monitor_manager:
+        _monitor_manager.stop()
+        _monitor_manager = None
+    
+    matrix_log("comms", "smpte2138", "stop", "✅ SMPTE2138 managers stopped.", "INFO")
+
+def status():
+    """
+    Returns the current status of the SMPTE 2138 managers.
+    """
+    status_report = {}
+    if _bridge_manager:
+        status_report["bridge"] = _bridge_manager.get_status()
+    else:
+        status_report["bridge"] = {"running": False, "message": "Not initialized"}
+        
+    if _monitor_manager:
+        status_report["monitor"] = _monitor_manager.get_status()
+    else:
+        status_report["monitor"] = {"running": False, "message": "Not initialized"}
+    
+    return status_report
 
 def run_tests():
     """
     Discovers and runs all tests within the oaComProtocols.oaComSMPTE2138/Tests/ directory.
     """
     print("🔍 Discovering and running tests for oaComProtocols.oaComSMPTE2138...")
-    test_dir = Path(__file__).parent / "Tests"
+    test_dir = pathlib.Path(__file__).parent / "Tests"
     if not test_dir.is_dir():
         print("❌ No 'Tests/' directory found.")
-        return
+        return True
 
     test_files = sorted([f for f in test_dir.glob("test_*.py")])
     if not test_files:
         print("❌ No test files found (expected pattern: test_*.py).")
-        return
+        return True
 
     print(f"Found {len(test_files)} test files. Executing...")
     
@@ -68,12 +132,9 @@ def run_tests():
     for test_file in test_files:
         print(f"\n--- Running: {test_file.name} ---")
         try:
-            # Get the module path relative to the project root for the test runner
-            # Adjust to project root (OPEN-AIR)
             relative_test_file_path = test_file.relative_to(project_root)
-            module_path_for_runner = str(relative_test_file_path).replace(os.sep, '.')[:-3] # Remove .py extension
+            module_path_for_runner = str(relative_test_file_path).replace(os.sep, '.')[:-3]
 
-            # Ensure the current directory is the project root so Python can find modules
             original_cwd = os.getcwd()
             os.chdir(project_root) 
 
@@ -106,78 +167,7 @@ def run_tests():
         print("\n💔 Some tests for oaComProtocols.oaComSMPTE2138 failed.")
     return all_tests_passed
 
-def main():
-    """
-    Main execution entry point for standalone mode.
-    """
-    # 1. Run Tests first
-    if not run_tests():
-        print("🛑 Tests failed. Aborting standalone startup.")
-        sys.exit(1)
+# Standalone main() function is removed.
+# def main(): ...
 
-    print("\n🚀 [ST2138] Starting Standalone SMPTE 2138 Service...")
-    
-    # Imports needed for standalone execution
-    import tkinter as tk
-    from oaComProtocols.oaComMQTT.Managers.mqtt_connection import MqttConnectionManager
-    from oaComProtocols.oaComMQTT.Managers.mqtt_subscriber_router import MqttSubscriberRouter
-    from oaComProtocols.oaComSMPTE2138.Interface.smpte2138_monitor import SMPTE2138MonitorImplementation
-    from oaLogging.Core.logger import initialize_logging, set_log_directory
-    from oaOchestration.Core.path_initializer import initialize_paths, DATA_LOGS_DIR
-
-    # Environment Setup
-    initialize_paths()
-    set_log_directory(DATA_LOGS_DIR, partition="ST2138")
-    
-    # Infrastructure
-    mqtt_conn = MqttConnectionManager()
-    sub_router = MqttSubscriberRouter()
-    
-    # Managers
-    bridge = SMPTE2138BridgeManager(mqtt_conn, sub_router)
-    monitor_manager = SMPTE2138MonitorManager(mqtt_conn, sub_router)
-    
-    # ⚡ START: Activate the lifecycle of both managers
-    bridge.start()
-    monitor_manager.start()
-    
-    # Connect to MQTT
-    print("📡 [ST2138] Connecting to MQTT Broker...")
-    mqtt_conn.connect_to_broker(subscriber_router=sub_router)
-
-    # Launch GUI
-    print("🖥️ [ST2138] Launching Monitor GUI...")
-    root = tk.Tk()
-    root.title("OPEN-AIR: SMPTE ST 2138 Monitor")
-    root.geometry("1000x700")
-    
-    app = SMPTE2138MonitorImplementation(root)
-    app.pack(fill=tk.BOTH, expand=True)
-    
-    def on_closing():
-        print("\n🛑 [ST2138] Stopping service...")
-        bridge.stop()
-        monitor_manager.stop()
-        root.destroy()
-        sys.exit(0)
-
-    root.protocol("WM_DELETE_WINDOW", on_closing)
-    
-    # Handle signals
-    def signal_handler(sig, frame):
-        root.after(0, on_closing)
-
-    signal.signal(signal.SIGINT, signal_handler)
-    signal.signal(signal.SIGTERM, signal_handler)
-
-    print("✅ [ST2138] Service is active and online.")
-    root.mainloop()
-
-if __name__ == "__main__":
-    # If run directly and no specific arguments are provided, run tests then launch standalone.
-    if len(sys.argv) > 1 and sys.argv[1] == "--test-only":
-        run_tests()
-        sys.exit(0)
-    
-    main()
-
+__all__ = ["start_bridge", "start_monitor", "stop", "status", "run_tests"]

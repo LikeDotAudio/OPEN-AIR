@@ -4,6 +4,9 @@
 #
 # Description: Dynamic API routes with an interactive HTML Tree Explorer.
 
+import sys
+sys.path.insert(0, '/home/anthony/Documents/OPEN-AIR')
+
 try:
     from fastapi import APIRouter, HTTPException, Path, Body, Request
     from fastapi.responses import HTMLResponse, JSONResponse
@@ -13,6 +16,7 @@ except ImportError:
 from typing import Any, Dict, List
 from ..Constants.rest_constants import LOCAL_DEBUG
 from loguru import logger
+from oaComBroker.Core.protocol_router.router import ProtocolRouter # Import ProtocolRouter
 
 def create_router(state_cache_manager, protocol_router):
     """
@@ -69,7 +73,7 @@ def create_router(state_cache_manager, protocol_router):
                 .folder {{ font-weight: bold; color: #33A1FD; cursor: pointer; }}
                 .leaf {{ color: #6a9955; }}
                 .topic-link {{ text-decoration: none; color: inherit; }}
-                .topic-link:hover {{ text-decoration: underline; }}
+                .topic-Shover {{ text-decoration: underline; }}
                 .meta {{ font-size: 11px; color: #888; font-family: monospace; }}
             </style>
         </head>
@@ -99,15 +103,16 @@ def create_router(state_cache_manager, protocol_router):
 
     @router.get("/api/v1/system/status")
     async def get_system_status():
-        # from oaComBroker.Core.protocol_router.manager import ProtocolRouter
-        router_inst = None # ProtocolRouter.get_instance()
-        active = ["MQTT", "REST"]
-        return {
-            "status": "operational", 
-            "partition": "CORE", 
-            "active_protocols": active,
-            "instance_id": getattr(router_inst, "GUID", "UNKNOWN")
-        }
+
+            # from oaComBroker.Core.protocol_router.manager import ProtocolRouter
+            router_inst = ProtocolRouter.get_instance()
+            active = router_inst.protocols if router_inst else ["MQTT", "REST"] # Fallback if router not found
+            return {
+                "status": "operational", 
+                "partition": "CORE", 
+                "active_protocols": active,
+                "instance_id": getattr(router_inst, "GUID", "UNKNOWN")
+            }
 
     @router.get("/api/v1/system/tree")
     async def get_full_tree():

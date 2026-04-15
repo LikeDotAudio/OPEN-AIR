@@ -183,8 +183,7 @@ class RESTManager:
         if not self.mqtt_transport.is_connected():
             connection_params = {
                 "destination_host": getattr(app_constants, "MQTT_BROKER_ADDRESS", "localhost"),
-                "destination_port": getattr(app_constants, "MQTT_BROKER_PORT", 1883),
-                "client_id": f"oaRestCore_{app_constants.FULL_INSTANCE_ID[:8]}"
+                "destination_port": getattr(app_constants, "MQTT_BROKER_PORT", 1883)
             }
             self.mqtt_transport.connect(connection_params)
 

@@ -12,6 +12,7 @@ import pathlib
 import threading
 import subprocess
 import unittest
+import random
 from pathlib import Path
 
 # Ensure project root is in sys.path for direct execution
@@ -36,12 +37,17 @@ def get_connection_manager(**kwargs):
     """Returns the singleton MqttConnectionManager instance. Manages its own connection."""
     global _connection_manager
     if _connection_manager is None:
+        # ⚡ UNIQUE IDENTITY: Prevent Client ID collisions in multi-partition environments
+        partition_id = os.environ.get("OPEN_AIR_PARTITION_ID", "SUP")
+        random_suffix = f"{random.getrandbits(16):04x}"
+        default_client_id = f"OPENAIR-{partition_id}-MQTT-{os.getpid()}-{random_suffix}"
+
         # Default parameters, will be overridden by manager if provided via kwargs
         broker_address = kwargs.get("broker_address", Config.get_instance().get("MQTT_BROKER_ADDRESS", "localhost"))
         broker_port = kwargs.get("broker_port", Config.get_instance().get("MQTT_BROKER_PORT", 1883))
         username = kwargs.get("username", Config.get_instance().get("MQTT_USERNAME", "guest"))
         password = kwargs.get("password", Config.get_instance().get("MQTT_PASSWORD", "guest"))
-        client_id = kwargs.get("client_id", f"OPENAIR-MQTT-{os.getpid()}")
+        client_id = kwargs.get("client_id", default_client_id)
         
         _connection_manager = MqttConnectionManager(
             address=broker_address,

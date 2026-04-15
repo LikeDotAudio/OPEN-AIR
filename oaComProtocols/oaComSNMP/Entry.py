@@ -166,4 +166,35 @@ def run_tests():
 # Standalone main() function is removed.
 # def main(): ...
 
-__all__ = ["start", "stop", "status", "run_tests"]
+
+def main():
+    """
+    Main function to run the SNMP bridge service in standalone mode.
+    """
+    matrix_log("comms", "snmp", "main", "⚡ [SNMP] Starting SNMP in standalone mode...", "INFO")
+    
+    # Run tests first
+    matrix_log("comms", "snmp", "main", "Running self-tests...", "INFO")
+    if not run_tests():
+        matrix_log("comms", "snmp", "main", "Self-tests failed. Aborting startup.", "ERROR")
+        return
+    matrix_log("comms", "snmp", "main", "Self-tests passed.", "INFO")
+    manager = None
+    try:
+        manager = start(run_bridge=True)
+        matrix_log("comms", "snmp", "main", "SNMP Manager is running. Press Ctrl+C to stop.", "INFO")
+        while True:
+            time.sleep(1) # Keep main thread alive
+    except KeyboardInterrupt:
+        matrix_log("comms", "snmp", "main", "Ctrl+C detected. Stopping SNMP manager...", "INFO")
+    except Exception as e:
+        matrix_log("comms", "snmp", "main", f"An error occurred: {e}", "ERROR")
+    finally:
+        if manager:
+            stop()
+            matrix_log("comms", "snmp", "main", "SNMP manager stopped.", "INFO")
+
+if __name__ == "__main__":
+    main()
+
+__all__ = ["start", "stop", "status", "run_tests", "main"]

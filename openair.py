@@ -175,9 +175,19 @@ def main():
     # --- Centralized Protocol Initialization ---
     protocol_manager = None
     try:
-        log("Initializing Communication Protocol Manager...")
-        protocol_manager = start_all_protocols()
-        log("All communication protocols started successfully.")
+        log("Initializing Communication Protocol Manager (Supervisor Mode)...")
+        # Ensure manager instance exists
+        config = Config.get_instance()
+        protocol_manager = ComProtocolManager.get_instance(config=config)
+        
+        # Discover modules but do NOT start them in the supervisor process.
+        # Starting them here would create "ghost" services competing for ports.
+        protocol_manager.discover_and_register_protocols()
+        
+        # We still initialize common dependencies if supervisor needs them for status checks
+        protocol_manager.initialize_common_dependencies()
+        
+        log("Protocol Manager initialized. Services will be launched by child partitions.")
 
     except Exception as e:
         log(f"🛑 CRITICAL ERROR during protocol initialization: {e}")

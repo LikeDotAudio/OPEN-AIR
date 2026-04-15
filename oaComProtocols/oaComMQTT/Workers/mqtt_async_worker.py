@@ -46,6 +46,7 @@ class MqttAsyncWorker:
             "hostname": self.manager.broker_address,
             "port": self.manager.broker_port,
             "timeout": 10,
+            "identifier": self.manager.client_id,
             "will": aiomqtt.Will(TOPIC_STATUS, payload=PAYLOAD_OFFLINE, qos=1, retain=True)
         }
         

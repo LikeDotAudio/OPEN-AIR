@@ -8,6 +8,8 @@
 import threading
 import json
 import ssl
+import os
+import random
 import paho.mqtt.client as mqtt
 from typing import Optional, Callable, Dict, Any
 from .abc import EventTransport
@@ -64,9 +66,14 @@ class RestMqttTransport(EventTransport):
         port = connection_params.get("destination_port", 1883)
         username = connection_params.get("username")
         password = connection_params.get("password")
-        client_id = connection_params.get("client_id", f"oaRestCore_{int(threading.get_ident())}")
+        
+        # ⚡ UNIQUE IDENTITY: Prevent Client ID collisions in multi-partition environments
+        partition_id = os.environ.get("OPEN_AIR_PARTITION_ID", "SUP")
+        random_suffix = f"{random.getrandbits(16):04x}"
+        default_client_id = f"OPENAIR-{partition_id}-REST-{os.getpid()}-{random_suffix}"
+        client_id = connection_params.get("client_id", default_client_id)
 
-        matrix_log("comms", "rest_mqtt", "connect", f"📡📥 [REST-MQTT] Connecting to {host}:{port}.", "INFO")
+        matrix_log("comms", "rest_mqtt", "connect", f"📡📥 [REST-MQTT] Connecting to {host}:{port} as {client_id}.", "INFO")
 
         # Support both Paho v1.x and v2.x
         if hasattr(mqtt, 'CallbackVersion'):

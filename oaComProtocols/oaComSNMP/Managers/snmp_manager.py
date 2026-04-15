@@ -109,11 +109,15 @@ class SNMPManager:
         if oid_source and os.path.exists(oid_source):
             initialize_oid_map(oid_source)
         else:
-            matrix_log("comms", "snmp", "start", "📡 [SNMP] No OID Map source found. Using default mapping.", "WARNING")
+            matrix_log("comms", "snmp", "start", "📡 [SNMP] No OID Map source found. Using default mapping.", "DEBUG")
 
-        matrix_log("comms", "snmp", "start", "📡 [SNMP] Starting persistence and monitoring workers...", "DEBUG")
-        self.state_persister.start()
-        self.log_monitor.start()
+        # ⚡ OPTIMIZATION: Only start local workers if we are the master bridge
+        if self.run_bridge:
+            matrix_log("comms", "snmp", "start", "📡 [SNMP] Starting persistence and monitoring workers (Bridge Mode)...", "DEBUG")
+            self.state_persister.start()
+            self.log_monitor.start()
+        else:
+            matrix_log("comms", "snmp", "start", "📡 [SNMP] Observer active. Local workers suppressed.", "DEBUG")
 
         # ⚡ NATIVE STANDALONE MQTT
         if self.context.mqtt_client:
@@ -169,14 +173,17 @@ class SNMPManager:
         pass
 
     def stop(self):
-        if not self._state_lock.acquire(timeout=1.0):
-            snmp_logger.warning("SNMP stop() timed out waiting for lock.")
+        # ⚡ SIGNAL SHUTDOWN FIRST: Ensure background threads see _running=False and release the lock.
+        self._running = False
         
-        try:
-            self._running = False
-        finally:
-            try: self._state_lock.release()
-            except: pass
+        if not self._state_lock.acquire(timeout=2.0):
+            snmp_logger.warning("SNMP stop() timed out waiting for lock. Forcing thread termination.")
+        else:
+            try:
+                # Any final state-protected cleanup here
+                pass
+            finally:
+                self._state_lock.release()
         
         self.state_persister.stop()
         self.log_monitor.stop()

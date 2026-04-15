@@ -16,8 +16,9 @@ singleton EmberManager and exposes high-level methods for control and interactio
 
 # Placeholder for actual manager - would normally import from .Managers.ember_manager
 class EmberManager:
-    def __init__(self, mqtt_connection_manager=None):
+    def __init__(self, mqtt_connection_manager=None, state_cache_manager=None):
         self.mqtt_connection_manager = mqtt_connection_manager
+        self.state_cache_manager = state_cache_manager
         self.running = False
         self.target_ip = None
         self.target_port = None

@@ -8,6 +8,8 @@
 import threading
 import json
 import ssl
+import os
+import random
 import paho.mqtt.client as mqtt
 from typing import Optional, Callable, Dict, Any
 from .abc import EventTransport
@@ -28,7 +30,8 @@ class MidiMqttTransport(EventTransport):
 
     def publish(self, topic: str, payload: Any, retain: bool = False, qos: int = 0) -> bool:
         if not self.is_connected() or not self.client:
-            matrix_log("comms", "midi_mqtt", "publish", "📡 [MIDI-MQTT] Not connected. Cannot publish.", "WARNING")
+            # Demote to TRACE to avoid log flooding during startup handshake
+            matrix_log("comms", "midi_mqtt", "publish", "📡 [MIDI-MQTT] Not connected. Cannot publish.", "TRACE")
             return False
         try:
             # ⚡ EFFICIENT ENCODING: Use json for core transport compatibility
@@ -48,7 +51,7 @@ class MidiMqttTransport(EventTransport):
 
     def subscribe(self, topic: str, qos: int = 0) -> bool:
         if not self.is_connected() or not self.client:
-            matrix_log("comms", "midi_mqtt", "subscribe", "📡 [MIDI-MQTT] Not connected. Cannot subscribe.", "WARNING")
+            matrix_log("comms", "midi_mqtt", "subscribe", "📡 [MIDI-MQTT] Not connected. Cannot subscribe.", "TRACE")
             return False
         try:
             matrix_log("comms", "midi_mqtt", "subscribe", f"📡📥 [MIDI-MQTT] Subscribing to {topic}", "INFO")
@@ -74,9 +77,14 @@ class MidiMqttTransport(EventTransport):
         port = connection_params.get("destination_port", self.config.MQTT_BROKER_PORT)
         username = connection_params.get("username", self.config.MQTT_USERNAME)
         password = connection_params.get("password", self.config.MQTT_PASSWORD)
-        client_id = connection_params.get("client_id", f"oaMidiCore_{threading.get_ident()}")
+        
+        # ⚡ UNIQUE IDENTITY: Prevent Client ID collisions in multi-partition environments
+        partition_id = os.environ.get("OPEN_AIR_PARTITION_ID", "SUP")
+        random_suffix = f"{random.getrandbits(16):04x}"
+        default_client_id = f"OPENAIR-{partition_id}-MIDI-{os.getpid()}-{random_suffix}"
+        client_id = connection_params.get("client_id", default_client_id)
 
-        matrix_log("comms", "midi_mqtt", "connect", f"📡📥 [MIDI-MQTT] Connecting to {host}:{port}.", "INFO")
+        matrix_log("comms", "midi_mqtt", "connect", f"📡📥 [MIDI-MQTT] Connecting to {host}:{port} as {client_id}.", "INFO")
 
         self.client = mqtt.Client(client_id=client_id)
         self.client.on_connect = self._on_connect

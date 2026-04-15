@@ -6,6 +6,8 @@
 # Author: Gemini CLI (Collaborator)
 # Version: 20260414.1810.1
 
+import os
+import random
 from loguru import logger
 from oaLogging.Methods.matrix_gate import matrix_log
 from oaConfigurationManager.FileReaders.config_reader import Config
@@ -31,12 +33,17 @@ class MidiMqttWorker:
         # Setup message handler before connecting
         self.transport.set_message_handler(self._on_transport_message)
         
+        # ⚡ UNIQUE IDENTITY: Prevent Client ID collisions in multi-partition environments
+        partition_id = os.environ.get("OPEN_AIR_PARTITION_ID", "SUP")
+        random_suffix = f"{random.getrandbits(16):04x}"
+        client_id = f"OPENAIR-{partition_id}-MIDIWORKER-{os.getpid()}-{random_suffix}"
+
         connection_params = {
             "destination_host": self.config.MQTT_BROKER_ADDRESS,
             "destination_port": self.config.MQTT_BROKER_PORT,
             "username": self.config.MQTT_USERNAME,
             "password": self.config.MQTT_PASSWORD,
-            "client_id": f"oaMidiWorker_{self.config.FULL_INSTANCE_ID[:8]}"
+            "client_id": client_id
         }
         
         if self.transport.connect(connection_params):

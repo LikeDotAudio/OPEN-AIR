@@ -115,14 +115,35 @@ class Config(ConfigDefaults):
         self.OSC_TX_PORT = self._s_get(config, "OSC", "osc_tx_port", self.OSC_TX_PORT, "int")
         self.OSC_REMOTE_IP = self._s_get(config, "OSC", "osc_remote_ip", self.OSC_REMOTE_IP)
 
+        # ⚡ MULTI-PROCESS SAFETY: 
+        # If randomize_ports is True, we must ensure different partitions use different offsets.
+        # Core gets offset A, UI gets offset B.
         if self._s_get(config, "System", "randomize_ports", False, "bool"):
-            import random
-            offset = random.randint(1, 100)
-            # Apply randomization to the ports read from config.ini (8000, 9000)
+            import os
+            partition_id = os.environ.get("OPEN_AIR_PARTITION_ID", "SUP")
+            
+            # Static seeds for partition consistency within a run
+            # but still randomized across different runs if needed.
+            # For now, let's use fixed offsets based on partition to prevent collision.
+            partition_offsets = {
+                "SUP": 0,
+                "CORE": 10,
+                "UI": 20
+            }
+            offset = partition_offsets.get(partition_id, 30)
+            
+            # Apply partition-specific offset to the base ports
             self.OSC_RX_PORT += offset
             self.OSC_TX_PORT += offset
+            
+            # ⚡ LOOPBACK SYNC: In UI partition, TX Target should point to Core's RX Port
+            if partition_id == "UI":
+                self.OSC_TX_PORT = self._s_get(config, "OSC", "osc_rx_port", 8000, "int") + partition_offsets["CORE"]
+                if LOCAL_DEBUG:
+                    logger.info(f"🔊 [CONFIG] UI Partition: Pointing OSC TX to CORE RX on {self.OSC_TX_PORT}")
+
             if LOCAL_DEBUG:
-                logger.info(f"🔊 [CONFIG] Randomized OSC ports: RX={self.OSC_RX_PORT}, TX={self.OSC_TX_PORT}")
+                logger.info(f"🔊 [CONFIG] Partition {partition_id} OSC ports: RX={self.OSC_RX_PORT}, TX={self.OSC_TX_PORT}")
         else:
             if LOCAL_DEBUG:
                 logger.debug(f"🔊 [CONFIG] Using configured OSC ports: RX={self.OSC_RX_PORT}, TX={self.OSC_TX_PORT}")

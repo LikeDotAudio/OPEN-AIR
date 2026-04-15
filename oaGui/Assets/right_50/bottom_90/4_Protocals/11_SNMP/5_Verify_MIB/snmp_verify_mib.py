@@ -7,9 +7,9 @@
 
 import tkinter as tk
 # Import the actual GUI implementation class from its new location
-from oaComProtocols.oaComSNMP.Interface.snmp_verify_mib_impl import SnmpVerifyWithMibImplementation
+from oaComProtocols.oaComSNMP.Interface.snmp_verify_mib_impl import SnmpVerifyMibImplementation
 
-class SnmpVerifyWithMibGUI(SnmpVerifyWithMibImplementation):
+class SnmpVerifyWithMibGUI(SnmpVerifyMibImplementation):
     """
     A wrapper class pointing to the SNMP Verify MIB GUI implementation.
     This class is discovered by ModuleLoader and instantiated.

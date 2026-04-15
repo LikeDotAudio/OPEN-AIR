@@ -43,7 +43,7 @@ class NmosManager:
         if not self._is_running: return
         self.bridge.shutdown()
         self._is_running = False
-        matrix_log("comms", "nmos", "stop", "⏹️ NMOS IS-07 Bridge Stopped.", "WARNING")
+        matrix_log("comms", "nmos", "stop", "⏹️ NMOS IS-07 Bridge Stopped.", "INFO")
 
     def handle_router_event(self, topic, value, meta):
         """

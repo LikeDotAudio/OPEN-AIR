@@ -45,6 +45,13 @@ class MockMqttConnectionManager:
 class MockSubscriberRouter:
     def add_handler(self, *args, **kwargs): pass
 
+def get_manager(state_cache_manager=None, mqtt_connection_manager=None, subscriber_router=None, protocol_router=None, run_bridge=True):
+    """
+    Returns the singleton REST Manager instance.
+    Alias for get_rest_manager() to match system patterns.
+    """
+    return get_rest_manager(state_cache_manager, mqtt_connection_manager, subscriber_router, protocol_router, run_bridge)
+
 def get_rest_manager(state_cache_manager=None, mqtt_connection_manager=None, subscriber_router=None, protocol_router=None, run_bridge=True):
     """
     Returns the singleton REST Manager instance.
@@ -55,7 +62,6 @@ def get_rest_manager(state_cache_manager=None, mqtt_connection_manager=None, sub
         from oaComProtocols.oaComREST.Managers.rest_manager import RESTManager
         # Provide mocks if not supplied by the orchestrator
         state_cache = state_cache_manager if state_cache_manager else MockStateCache()
-        protocol_router = protocol_router if protocol_router else MockProtocolRouter()
         
         _rest_manager = RESTManager(
             state_cache_manager=state_cache,
@@ -63,6 +69,16 @@ def get_rest_manager(state_cache_manager=None, mqtt_connection_manager=None, sub
         )
         matrix_log("comms", "rest", "get_rest_manager", "REST Manager initialized.", "DEBUG")
     return _rest_manager
+
+def get_status():
+    """Returns the current status of the REST API service. Alias for status()."""
+    return status()
+
+def add_monitor_callback(cb):
+    """Registers a callback for REST activity monitoring."""
+    manager = get_rest_manager()
+    if manager:
+        manager.add_monitor_callback(cb)
 
 def start(state_cache_manager=None, mqtt_connection_manager=None, subscriber_router=None, protocol_router=None, run_bridge=True):
     """
@@ -165,6 +181,9 @@ def run_tests():
 
 __all__ = [
     "RESTManager",
+    "get_manager",
+    "get_status",
+    "add_monitor_callback",
     "start",
     "stop",
     "status",

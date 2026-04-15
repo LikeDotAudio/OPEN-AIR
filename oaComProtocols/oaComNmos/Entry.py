@@ -138,6 +138,8 @@ def stop():
         _bridge_manager.stop()
         matrix_log("comms", "nmos", "stop", "NMOS Bridge stopped.", "INFO")
     
+    global_state["RUNNING"] = False
+    
     # Workers and API server are daemon threads and will exit with the main process.
     # If they were non-daemon, explicit stop logic would be needed here.
 

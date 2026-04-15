@@ -47,8 +47,8 @@ class OSCManager:
         # from oaComBroker.Core.protocol_router.manager import ProtocolRouter
         self.protocol_router = None # ProtocolRouter.get_instance()
         
-        self.state_cache_manager = state_cache_manager or (context.state_cache_manager if context else None)
-        self.mqtt_connection_manager = mqtt_connection_manager or (context.mqtt_connection_manager if context else None)
+        self.state_cache_manager = state_cache_manager or (getattr(context, "state_cache_manager", None) if context else None)
+        self.mqtt_connection_manager = mqtt_connection_manager or (getattr(context, "mqtt_connection_manager", None) if context else None)
         
         # ⚡ STANDALONE: Attempt to deduce managers if missing
         if not self.state_cache_manager:

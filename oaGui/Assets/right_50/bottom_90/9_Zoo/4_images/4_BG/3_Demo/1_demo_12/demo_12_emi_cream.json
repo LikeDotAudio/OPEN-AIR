@@ -1,15 +1,39 @@
 {
-  "Zoo_images_BG_Demo_demo_12": {
-    "type": "OcaBin",
-    "id": "50.90.9.4.4.3.1.12",
-    "geometry": {
-      "anchor": "NSEW"
-    },
-    "behavior": {
-      "overflow_ns": "auto",
-      "overflow_ew": "auto",
-      "fluid_ew": true
-    },
-    "blocks": {}
+  "type": "OcaBin",
+  "id": "50.90.9.4.4.3.1.12",
+  "geometry": {
+    "anchor": "NSEW"
+  },
+  "behavior": {
+    "overflow": "auto",
+    "fluid_ew": true
+  },
+  "blocks": {
+    "fields": {
+      "Background_Summary_Label": {
+        "type": "_Label",
+        "label": {
+          "En": "Patina: 12 Emi Cream | Base: #f5f5dc (flat)",
+          "Fr": "Patina: 12 Emi Cream | Base: #f5f5dc (flat)",
+          "De": "Patina: 12 Emi Cream | Base: #f5f5dc (flat)",
+          "Es": "Patina: 12 Emi Cream | Base: #f5f5dc (flat)"
+        },
+        "layout": {
+          "font": 14,
+          "colour": "#00ff00",
+          "sticky": "nsew",
+          "row": 0,
+          "column": 0
+        }
+      }
+    }
+  },
+  "background": {
+    "parameters": {
+      "base_material": {
+        "color": "#f5f5dc",
+        "texture_type": "flat"
+      }
+    }
   }
 }

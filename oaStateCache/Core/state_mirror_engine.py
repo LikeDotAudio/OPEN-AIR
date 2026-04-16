@@ -147,7 +147,8 @@ class StateMirrorEngine(RegistryMixin, SyncQueueMixin):
             if not self._silent_update and not self._binding_suspended:
                  self.broadcast_gui_change_to_mqtt(widget_id)
         
-        tk_variable.trace_add("write", _auto_broadcast)
+        if tk_variable:
+            tk_variable.trace_add("write", _auto_broadcast)
         self._registration_queue.put(widget_id)
         return full_topic
 

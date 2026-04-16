@@ -1,7 +1,7 @@
 import sys
 sys.path.insert(0, '/home/anthony/Documents/OPEN-AIR')
 import tkinter as tk
-from oaGuiElements.Core.graphing.graphing.dynamic_graph import GraphPlotter
+from oaGuiElements.Core.graphing.Methods.dynamic_graph import GraphPlotter
 from unittest.mock import MagicMock
 import json
 

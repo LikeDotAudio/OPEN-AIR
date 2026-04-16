@@ -76,7 +76,11 @@ class TestAsyncBootstrapEngine(unittest.TestCase):
         mock_after = MagicMock(side_effect=lambda delay, func: func())
         self.mock_root.after = mock_after
         
-        self.engine.run()
+        # Use patch to suppress logging for this expected failure
+        with patch('oaGuiManager.Core.bootstrap_sequence.logger') as mock_logger:
+            self.engine.run()
+            # Verify the error was logged
+            mock_logger.error.assert_called()
         
         # Verify that on_closing was scheduled to be called
         mock_after.assert_called_with(0, self.mock_shutdown.on_closing)

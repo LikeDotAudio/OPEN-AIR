@@ -75,22 +75,26 @@ class PanelGenerator:
         Generates a PIL Image based on detailed physical parameters.
         Includes disk caching to prevent redundant generation.
         """
+        #prefer the 'parameters' key if it exists, otherwise use the top-level dict
+        settings = configuration_data.get("parameters", configuration_data)
+        
+        # ⚡ RESOLUTION CONTROL: Extract scale_factor (default 1.0)
+        scale_factor = float(settings.get("scale_factor", 1.0))
+
         # --- 0. Check Cache First ---
-        if BUILDER_DEBUG: builder_logger.trace(f"📦🔍✨ [CACHE] Checking for procedural panel in cache: {width}x{height}")
+        if BUILDER_DEBUG: builder_logger.trace(f"📦🔍✨ [CACHE] Checking for procedural panel in cache: {width}x{height} (Scale: {scale_factor})")
         cached_image = AssetCacheManager.load_from_cache("panel", width, height, configuration_data)
         if cached_image:
             if BUILDER_DEBUG: builder_logger.debug(f"📦🆗✅ [CACHE] Retaining procedural panel from disk cache.")
             return cached_image
 
         # --- 1. Extract Parameters ---
-        # Prefer the 'parameters' key if it exists, otherwise use the top-level dict
-        settings = configuration_data.get("parameters", configuration_data)
         random_seed = settings.get("random_seed")
         if not random_seed:
             random_seed = random.randint(1, MAX_RANDOM_SEED)
         random.seed(random_seed)
         
-        if BUILDER_DEBUG: builder_logger.info(f"🎨🏗️🌀 [BUILDER] Generating NEW Procedural Panel ({width}x{height}) Seed: {random_seed}")
+        if BUILDER_DEBUG: builder_logger.info(f"🎨🏗️🌀 [BUILDER] Generating NEW Procedural Panel ({width}x{height}) Scale: {scale_factor} Seed: {random_seed}")
 
         # --- 2. Layer Configs ---
         base_material_settings = settings.get("base_material", {})
@@ -115,27 +119,33 @@ class PanelGenerator:
         
         if texture_type == "hammered":
             if BUILDER_DEBUG: builder_logger.trace("🔨🎨✨ [LAYER] Applying hammered texture.")
-            hammered_texture = SubstrateFactory.generate_hammered(width, height, grain_intensity).convert("RGBA")
+            hammered_texture = SubstrateFactory.generate_hammered(width, height, grain_intensity, scale_factor=scale_factor).convert("RGBA")
             panel_image = ImageChops.multiply(panel_image, hammered_texture)
         elif texture_type == "wrinkle":
             if BUILDER_DEBUG: builder_logger.trace("🌀🎨✨ [LAYER] Applying wrinkle noise texture.")
-            wrinkle_texture = Image.effect_noise((width, height), sigma=WRINKLE_SIGMA).convert("RGBA")
+            # Wrinkle noise at target res
+            noise_w, noise_h = int(width * scale_factor), int(height * scale_factor)
+            wrinkle_texture = Image.effect_noise((noise_w, noise_h), sigma=WRINKLE_SIGMA).convert("RGBA")
+            if scale_factor > 1.0:
+                wrinkle_texture = wrinkle_texture.resize((width, height), resample=Image.LANCZOS)
             panel_image = ImageChops.multiply(panel_image, wrinkle_texture)
         elif texture_type == "crosshatch":
             if BUILDER_DEBUG: builder_logger.trace("🧺🎨✨ [LAYER] Weaving crosshatch streaks.")
-            horizontal_streaks = SubstrateFactory.generate_streaks(width, height, vertical=False, sigma=STREAK_SIGMA_CROSSHATCH)
-            vertical_streaks = SubstrateFactory.generate_streaks(width, height, vertical=True, sigma=STREAK_SIGMA_CROSSHATCH)
+            horizontal_streaks = SubstrateFactory.generate_streaks(width, height, vertical=False, sigma=STREAK_SIGMA_CROSSHATCH, scale_factor=scale_factor)
+            vertical_streaks = SubstrateFactory.generate_streaks(width, height, vertical=True, sigma=STREAK_SIGMA_CROSSHATCH, scale_factor=scale_factor)
             crosshatch_weave = ImageChops.multiply(horizontal_streaks, vertical_streaks).convert("RGBA")
             panel_image = ImageChops.multiply(panel_image, crosshatch_weave)
         elif texture_type == "enamel":
             if BUILDER_DEBUG: builder_logger.trace("✨🎨✨ [LAYER] Applying enamel peel texture.")
-            peel_texture = Image.effect_noise((width // ENAMEL_RESIZE_FACTOR, height // ENAMEL_RESIZE_FACTOR), sigma=STREAK_SIGMA_CROSSHATCH).resize((width, height), Image.BICUBIC).convert("RGBA")
+            # Adjusted resize factor based on scale
+            adj_enamel_factor = max(1, ENAMEL_RESIZE_FACTOR / scale_factor)
+            peel_texture = Image.effect_noise((int(width // adj_enamel_factor), int(height // adj_enamel_factor)), sigma=STREAK_SIGMA_CROSSHATCH).resize((width, height), Image.BICUBIC).convert("RGBA")
             panel_image = ImageChops.soft_light(panel_image, peel_texture)
         else:
             streak_sigma = STREAK_SIGMA_BRUSHED if texture_type == "brushed" else STREAK_SIGMA_DEFAULT
             if BUILDER_DEBUG: builder_logger.trace(f"🖌️🎨✨ [LAYER] Applying {texture_type} streak texture.")
             is_vertical = (base_material_settings.get("grain_direction") == "vertical")
-            directional_streaks = SubstrateFactory.generate_streaks(width, height, vertical=is_vertical, sigma=streak_sigma).convert("RGBA")
+            directional_streaks = SubstrateFactory.generate_streaks(width, height, vertical=is_vertical, sigma=streak_sigma, scale_factor=scale_factor).convert("RGBA")
             panel_image = ImageChops.multiply(panel_image, directional_streaks)
 
         # --- Layer 2: The Paint Layer ---

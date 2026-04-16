@@ -28,11 +28,12 @@ class AutoScrollbar(ttk.Scrollbar):
 class GrabBagView(tk.Frame):
     """A palette of draggable/selectable GUI components."""
 
-    def __init__(self, parent, *args, **kwargs):
+    def __init__(self, parent, library_cache=None, *args, **kwargs):
         kwargs.pop("bg", None)
         super().__init__(parent, bg="#2b2b2b", *args, **kwargs)
         matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "GrabBagView: Initializing palette...", "DEBUG")
         self.loader = GrabBagLoader()
+        self.library = library_cache if library_cache is not None else self.loader.scan_library()
         self.last_focused_path = None
         self._build_ui()
         
@@ -106,11 +107,13 @@ class GrabBagView(tk.Frame):
 
     def _refresh_library(self):
         """Reloads components from disk and rebuilds the UI."""
-        matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "GrabBag: Refreshing component library from disk...", "INFO")
+        matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "GrabBag: Refreshing component library...", "INFO")
         for child in self.scroll_frame.winfo_children():
             child.destroy()
             
-        library = self.loader.scan_library()
+        library = getattr(self, 'library', None)
+        if library is None:
+            library = self.loader.scan_library()
         matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"GrabBag: Scan complete. Found {len(library)} component templates.", "INFO")
         
         for name, info in library.items():

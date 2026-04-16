@@ -47,32 +47,19 @@ class BackgroundSlicer:
         self.widget_name = widget_name
 
     def perform_slice(self, source_bg_pil=None, scroll_ref=None, scroll_root_x=None, scroll_root_y=None):
-        if not self.widget.winfo_exists(): return
+        if not self.widget.winfo_exists(): return False
         
         rendering_target = self.canvas if self.canvas and self.canvas.winfo_exists() else self.widget
         background_source = source_bg_pil or getattr(self.builder, 'panel_bg_pil', None)
         
         if not background_source:
+            # [ ... rest of the existing fallback logic remains mostly same but using the same improved color check ...]
             background_config = getattr(self.builder, 'config_data', {}).get("background")
-            
-            # ⚡ ROBUSTNESS: Use getattr to safely check for show_background_var on app_instance
-            show_bg_toggle = getattr(self.builder.app_instance, 'show_background_var', None)
-            if show_bg_toggle and not show_bg_toggle.get():
-                background_config = "none"
+            app_inst = getattr(self.builder, 'app_instance', None)
+            show_bg_toggle = getattr(app_inst, 'show_background_var', None)
+            if show_bg_toggle and not show_bg_toggle.get(): background_config = "none"
+            if background_config == "none": return False
 
-            if background_config == "none": return 
-
-            target_width, target_height = 0, 0
-            if rendering_target.winfo_exists():
-                target_width = rendering_target.winfo_width()
-                target_height = rendering_target.winfo_height()
-                
-            is_builder_busy = getattr(self.builder, '_is_rebuilding', False) or \
-                              (getattr(self.builder, '_bg_task_id', 0) > 0 and getattr(self.builder, 'panel_bg_pil', None) is None)
-            
-            if not is_builder_busy and target_width > PRE_LAYOUT_DIMENSION_LIMIT and target_height > PRE_LAYOUT_DIMENSION_LIMIT:
-                matrix_log("ui", "transparency", "perform_slice", f"TransparencyManager: No source image for {self.widget_name}. Using theme fallback.", "TRACE")
-            
             theme_background = DEFAULT_THEME_BACKGROUND
             if hasattr(self.builder, 'theme_colors'):
                 theme_background = self.builder.theme_colors.get("bg", theme_background)
@@ -80,104 +67,83 @@ class BackgroundSlicer:
             try:
                 if self.widget.winfo_exists() and self.widget.cget("bg") != theme_background:
                     self.widget.configure(bg=theme_background)
-            except tk.TclError: pass
-
-            try:
                 if self.canvas and self.canvas.winfo_exists() and self.canvas.cget("bg") != theme_background:
                     self.canvas.configure(bg=theme_background)
             except tk.TclError: pass
-            return
+            return False
 
-        coord_cache = getattr(self.builder, '_root_coord_cache', None)
+        # ⚡ PIXEL-PERFECT COORDINATE CALCULATION
+        # winfo_rootx/y returns 0 for unmapped widgets. We traverse up to the scroll_frame
+        # to calculate absolute offsets that are stable during the build phase.
         
-        widget_root_x, widget_root_y = 0, 0
-        if rendering_target.winfo_exists():
-            if coord_cache is not None and id(rendering_target) in coord_cache:
-                widget_root_x, widget_root_y = coord_cache[id(rendering_target)]
-            else:
-                widget_root_x = rendering_target.winfo_rootx()
-                widget_root_y = rendering_target.winfo_rooty()
-                if coord_cache is not None: 
-                    coord_cache[id(rendering_target)] = (widget_root_x, widget_root_y)
-        else: return
-        
-        scroll_x, scroll_y = 0, 0
-        if scroll_root_x is not None and scroll_root_y is not None:
-            scroll_x, scroll_y = scroll_root_x, scroll_root_y
-        else:
-            if coord_cache is not None and "scroll_root" in coord_cache:
-                scroll_x, scroll_y = coord_cache["scroll_root"]
-            else:
-                container_ref = scroll_ref or getattr(self.builder, 'scroll_frame', None)
-                if not container_ref or not container_ref.winfo_exists(): 
-                    return
-                scroll_x = container_ref.winfo_rootx()
-                scroll_y = container_ref.winfo_rooty()
-                if coord_cache is not None: 
-                    coord_cache["scroll_root"] = (scroll_x, scroll_y)
+        container_ref = scroll_ref or getattr(self.builder, 'scroll_frame', None)
+        if not container_ref or not container_ref.winfo_exists(): return False
 
-        relative_x, relative_y = widget_root_x - scroll_x, widget_root_y - scroll_y
+        def get_relative_pos(w, root):
+            curr = w
+            rx, ry = 0, 0
+            while curr and curr != root:
+                rx += curr.winfo_x()
+                ry += curr.winfo_y()
+                parent_path = curr.winfo_parent()
+                if not parent_path: break
+                curr = curr.nametowidget(parent_path)
+            return rx, ry
+
+        relative_x, relative_y = get_relative_pos(rendering_target, container_ref)
         current_width = rendering_target.winfo_width()
         current_height = rendering_target.winfo_height()
         
+        # If dimensions are 1x1 or less, we use requested size as a hint for early slicing
+        if current_width <= 1: current_width = rendering_target.winfo_reqwidth()
+        if current_height <= 1: current_height = rendering_target.winfo_reqheight()
+        
         if current_width <= PRE_LAYOUT_DIMENSION_LIMIT or current_height <= PRE_LAYOUT_DIMENSION_LIMIT: 
-            return
+            return False
 
         previous_state = getattr(rendering_target, '_last_slice_state', (None, None, 0, 0, 0))
         last_rel_x, last_rel_y, last_width, last_height, last_image_id = previous_state
         
-        if last_image_id == id(background_source) and current_width == last_width and current_height == last_height and last_rel_x is not None:
-            delta_x = abs(relative_x - last_rel_x)
-            delta_y = abs(relative_y - last_rel_y)
-            if delta_x < JITTER_THRESHOLD_PIXELS and delta_y < JITTER_THRESHOLD_PIXELS:
-                return
+        if last_image_id == id(background_source) and current_width == last_width and current_height == last_height and last_rel_x == relative_x and last_rel_y == relative_y:
+            return False
 
         current_slice_state = (relative_x, relative_y, current_width, current_height, id(background_source))
         source_width, source_height = background_source.size
         
+        # ⚡ CLAMPING: Ensure we stay within the source image bounds
         crop_x1 = max(0, min(source_width - 1, relative_x))
         crop_y1 = max(0, min(source_height - 1, relative_y))
         crop_x2 = max(crop_x1 + 1, min(source_width, relative_x + current_width))
         crop_y2 = max(crop_y1 + 1, min(source_height, relative_y + current_height))
         
         if crop_x2 > crop_x1 and crop_y2 > crop_y1:
-            image_slice = background_source.crop((crop_x1, crop_y1, crop_x2, crop_y2))
-            pixel_val = image_slice.getpixel(((crop_x2 - crop_x1) // CENTER_SAMPLE_DIVISOR, (crop_y2 - crop_y1) // CENTER_SAMPLE_DIVISOR))
-            
-            # ⚡ ROBUSTNESS: Handle both RGB/RGBA tuples and grayscale integers
-            if isinstance(pixel_val, tuple):
-                hex_background_color = '#%02x%02x%02x' % pixel_val[:3]
-            else:
-                hex_background_color = '#%02x%02x%02x' % (pixel_val, pixel_val, pixel_val)
-            
             try:
-                if self.widget.winfo_exists() and self.widget.cget("bg") != hex_background_color:
-                    self.widget.configure(bg=hex_background_color)
-            except tk.TclError: pass
+                image_slice = background_source.crop((crop_x1, crop_y1, crop_x2, crop_y2))
+                pixel_val = image_slice.getpixel((0, 0)) # Sample top-left for bg color fallback
                 
-            try:
-                if rendering_target != self.widget and rendering_target.winfo_exists() and rendering_target.cget("bg") != hex_background_color:
+                if isinstance(pixel_val, tuple):
+                    hex_background_color = '#%02x%02x%02x' % pixel_val[:3]
+                else:
+                    hex_background_color = '#%02x%02x%02x' % (pixel_val, pixel_val, pixel_val)
+                
+                if self.widget.winfo_exists(): self.widget.configure(bg=hex_background_color)
+                if rendering_target != self.widget and rendering_target.winfo_exists():
                     rendering_target.configure(bg=hex_background_color)
-            except tk.TclError: pass
 
-            if isinstance(rendering_target, tk.Canvas) and rendering_target.winfo_exists():
-                tkinter_image = ImageTk.PhotoImage(image_slice)
-                rendering_target.panel_bg_image = tkinter_image
-                rendering_target.panel_bg_pil_slice = image_slice
-                rendering_target.panel_bg_pil = background_source
+                if isinstance(rendering_target, tk.Canvas) and rendering_target.winfo_exists():
+                    tkinter_image = ImageTk.PhotoImage(image_slice)
+                    rendering_target.panel_bg_image = tkinter_image
+                    rendering_target.delete("panel_bg_slice")
+                    rendering_target.create_image(0, 0, image=tkinter_image, anchor="nw", tags="panel_bg_slice")
+                    rendering_target.tag_lower("panel_bg_slice")
                 
-                if self.widget != rendering_target and self.widget.winfo_exists():
-                    self.widget.panel_bg_image = tkinter_image
-                    self.widget.panel_bg_pil_slice = image_slice
-                    self.widget.panel_bg_pil = background_source
-                    
-                rendering_target.delete("panel_bg_slice")
-                rendering_target.create_image(0, 0, image=tkinter_image, anchor="nw", tags="panel_bg_slice")
-                rendering_target.tag_lower("panel_bg_slice")
-            
-            rendering_target._last_slice_state = current_slice_state
-            if hasattr(self.widget, 'render'): self.widget.render()
-            elif hasattr(self.widget, '_draw'): self.widget._draw()
+                rendering_target._last_slice_state = current_slice_state
+                if hasattr(self.widget, 'render'): self.widget.render()
+                return True
+            except Exception as e:
+                matrix_log("ui", "transparency", "perform_slice", f"Slice failed for {self.widget_name}: {e}", "DEBUG")
+                return False
+        return False
 
 class TransparencyManager:
     @staticmethod
@@ -190,6 +156,11 @@ class TransparencyManager:
     @staticmethod
     def apply_transparency(widget, canvas, configuration, builder):
         if not widget or not builder: return
+        # ⚡ HARDENING: If builder is a widget, it's a legacy call or mis-injection.
+        # We must avoid treating it as a builder object to prevent cget(0) errors.
+        if isinstance(builder, tk.Widget):
+            return
+
         widget_name = getattr(widget, 'path', type(widget).__name__)
         
         try:

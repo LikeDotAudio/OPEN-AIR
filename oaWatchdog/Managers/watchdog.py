@@ -1,17 +1,13 @@
 import sys
-
 import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
-# Managers/watchdog.py
-# Author: Anthony Peter Kuzub
-# Version: 1.0.0
-#
-# Description: Primary Purpose:
-
 import threading
 import time
 import os as _os
 import traceback
+from loguru import logger
+from oaLogging.Methods.matrix_gate import matrix_log
+from oaLogging.Core.logger import initialize_logging, set_log_directory
+from oaConfigurationManager.FileReaders.config_reader import Config
 
 # --- Native Rust Optimization ---
 try:
@@ -28,44 +24,17 @@ def get_precise_time():
     return time.time()
 
 # --- Standard Debug Logging Setup ---
-# LOCAL_DEBUG: Toggles verbose watchdog state reporting to the terminal.
 LOCAL_DEBUG = False
-from oaLogging.Core.logger import initialize_logging, set_log_directory
-from loguru import logger
-
-from oaConfigurationManager.FileReaders.config_reader import Config
-
-# Retrieve the global configuration singleton.
 app_constants = Config.get_instance()
 
 # --- Global Watchdog State ---
-# WATCHDOG_RUNNING: Controls the execution of the background monitoring loop.
 WATCHDOG_RUNNING = True
-# LAST_HEARTBEAT_TIME: Unix timestamp of the most recent 'kick'.
 LAST_HEARTBEAT_TIME = get_precise_time()
-# TIMEOUT_THRESHOLD: Duration (seconds) of silence before triggering a panic.
 TIMEOUT_THRESHOLD = 120.0
-# PANIC_CALLBACKS: List of functions to execute immediately before termination.
 PANIC_CALLBACKS = []
 
 def _get_main_thread_stack():
-    """
-    Retrieves the current execution stack of the application's main thread.
-
-    Lead with action: Iterates through all active threads to find the main
-    thread, then extracts its current frame to format a readable stack trace.
-
-    Inputs:
-        None.
-
-    Outputs:
-        str: A formatted stack trace of the main thread if successful; 
-             otherwise, an error message string.
-
-    Side Effects:
-        - Accesses 'sys._current_frames()', which may have slight performance
-          implications if called at high frequency (not an issue for panics).
-    """
+    """Retrieves the current execution stack of the application's main thread."""
     for thread in threading.enumerate():
         if thread is threading.main_thread():
             frame = sys._current_frames().get(thread.ident)
@@ -74,43 +43,12 @@ def _get_main_thread_stack():
     return "Could not retrieve main thread stack."
 
 def kick_watchdog():
-    """
-    Signals that the main thread is still active and responsive.
-
-    Lead with action: Updates the global 'LAST_HEARTBEAT_TIME' with the current
-    monotonic time. 
-
-    Inputs:
-        None.
-
-    Outputs:
-        None.
-
-    Side Effects:
-        - Updates the shared 'LAST_HEARTBEAT_TIME' global variable.
-
-    Note:
-        This function MUST be called from the primary event loop (e.g., within
-        a Tkinter '.after()' callback or a main 'while' loop).
-    """
+    """Signals that the main thread is still active and responsive."""
     global LAST_HEARTBEAT_TIME
     LAST_HEARTBEAT_TIME = get_precise_time()
 
 def start_heartbeat(app_constants_instance=None):
-    """
-    Initializes and starts the background monitoring thread.
-
-    Inputs:
-        app_constants_instance (Config, optional): Instance of the config
-            reader. Defaults to the global singleton if NULL.
-
-    Outputs:
-        None.
-
-    Side Effects:
-        - Resets the watchdog state.
-        - Spawns a new daemon thread running '_heartbeat_loop'.
-    """
+    """Initializes and starts the background monitoring thread."""
     global WATCHDOG_RUNNING, LAST_HEARTBEAT_TIME
     WATCHDOG_RUNNING = True
     LAST_HEARTBEAT_TIME = get_precise_time()
@@ -123,50 +61,37 @@ def start_heartbeat(app_constants_instance=None):
     thread.start()
     
     if LOCAL_DEBUG:
-        logger.debug(
-            f"🐕⏳🔋 [WATCHDOG] Started (Timeout: {TIMEOUT_THRESHOLD}s)"
-        )
+        logger.debug(f"🐕⏳🔋 [WATCHDOG] Started (Timeout: {TIMEOUT_THRESHOLD}s)")
 
 def stop_heartbeat():
-    """
-    Signals the watchdog monitoring thread to terminate gracefully.
-    """
+    """Signals the watchdog monitoring thread to terminate gracefully."""
     global WATCHDOG_RUNNING
     WATCHDOG_RUNNING = False
 
 def register_panic_callback(callback):
-    """
-    Adds a function to the emergency execution list.
-
-    Inputs:
-        callback (function): A callable that takes no arguments. This function
-            will be executed if the watchdog triggers a panic.
-    """
+    """Adds a function to the emergency execution list."""
     if callback not in PANIC_CALLBACKS:
         PANIC_CALLBACKS.append(callback)
 
-def _heartbeat_loop(app_constants_instance):
+def trigger_system_panic(reason="Manual Trigger"):
     """
-    Background monitoring loop for the watchdog subsystem.
-
-    Lead with action: Periodically checks the time elapsed since the last
-    heartbeat. If the elapsed time exceeds the threshold, it initiates
-    a system panic.
-
-    Inputs:
-        app_constants_instance (Config): Configuration context for logging.
-
-    Outputs:
-        None.
-
-    Side Effects:
-        - Writes diagnostics to 'sys.stdout' and 'sys.stderr'.
-        - Triggers a hard exit of the entire process group via '_os._exit(1)'.
+    Forcefully initiates a system panic and termination.
+    """
+    logger.critical(f"💀🐕🛑 [CRITICAL] Watchdog: System PANIC triggered! Reason: {reason}")
+    sys.stdout.write(f"\n🔥 [WATCHDOG] PANIC: {reason}\n")
     
-    Implementation Note:
-        The loop sleeps for 10 seconds between checks. This provides a balance
-        between monitoring precision and CPU overhead.
-    """
+    if PANIC_CALLBACKS:
+        for cb in PANIC_CALLBACKS:
+            try:
+                cb()
+            except Exception as e:
+                logger.error(f"🐕⏳❌ [ERROR] Watchdog: Callback failed: {e}")
+    
+    sys.stdout.flush()
+    _os._exit(1)
+
+def _heartbeat_loop(app_constants_instance):
+    """Background monitoring loop for the watchdog subsystem."""
     counter = 0
     while WATCHDOG_RUNNING:
         time.sleep(10.0)
@@ -175,78 +100,65 @@ def _heartbeat_loop(app_constants_instance):
         current_time = get_precise_time()
         elapsed = current_time - LAST_HEARTBEAT_TIME
 
-        # CRITICAL FAILURE DETECTED:
-        # If the main thread has not checked in within the timeout threshold,
-        # we assume a deadlock or a heavy blocking operation has occurred.
         if elapsed > TIMEOUT_THRESHOLD:
-            logger.error(
-                f"🐕⏳❌ [ERROR] WATCHDOG CRITICAL: Main thread frozen "
-                f"for {elapsed:.1f}s!"
-            )
-            sys.stdout.write(f"\n🔥 [WATCHDOG] CRITICAL: Main thread frozen "
-                             f"for {elapsed:.1f}s!\n")
+            logger.error(f"🐕⏳❌ [ERROR] WATCHDOG CRITICAL: Main thread frozen for {elapsed:.1f}s!")
+            sys.stdout.write(f"\n🔥 [WATCHDOG] CRITICAL: Main thread frozen for {elapsed:.1f}s!\n")
             sys.stdout.write("💀 [WATCHDOG] Current Stack Trace:\n")
-            sys.stdout.write("----------------------------------------\n")
             try:
                 stack = _get_main_thread_stack()
                 sys.stdout.write(stack)
             except Exception as e:
-                logger.error(
-                    f"🐕⏳❌ [ERROR] Watchdog: Error retrieving stack: {e}"
-                )
                 sys.stdout.write(f"Error retrieving stack: {e}")
-            sys.stdout.write("\n----------------------------------------\n")
             
-            # Execute Panic Callbacks:
-            # This is the final opportunity for the system to perform 
-            # cleanup or emergency telemetry (e.g., flamegraph generation).
-            if PANIC_CALLBACKS:
-                logger.error(
-                    f"🐕⏳🚑 [ERROR] WATCHDOG: Executing "
-                    f"{len(PANIC_CALLBACKS)} panic callbacks..."
-                )
-                sys.stdout.write(f"🚑 [WATCHDOG] Executing "
-                                 f"{len(PANIC_CALLBACKS)} callbacks...\n")
-                sys.stdout.flush()
-                for cb in PANIC_CALLBACKS:
-                    try:
-                        cb()
-                    except Exception as e:
-                        logger.error(
-                            f"🐕⏳❌ [ERROR] Watchdog: Callback failed: {e}"
-                        )
-                        sys.stdout.write(f"❌ [WATCHDOG] Callback failed: {e}\n")
-            
-            logger.critical("💀🐕🛑 [CRITICAL] Watchdog: Forcefully terminating.")
-            sys.stdout.write("💀 [WATCHDOG] Forcefully terminating...\n")
-            sys.stdout.flush()
-            
-            # Use _os._exit(1) to bypass Python's standard 'sys.exit()' 
-            # cleanup handlers, which might themselves be deadlocked.
-            _os._exit(1)
+            trigger_system_panic("Main thread frozen")
 
-        # Health Grading:
-        # Provide graduated warnings before reaching the hard timeout.
-        status_text = "Healthy"
+        # Health Grading
         if elapsed > TIMEOUT_THRESHOLD * 0.9:
-            status_text = "FAILING!"
-            logger.warning(f"🐕⏳⚠️ [WARNING] Watchdog: System {status_text} ({elapsed:.1f}s)")
+            logger.warning(f"🐕⏳⚠️ [WARNING] Watchdog: System FAILING! ({elapsed:.1f}s)")
         elif elapsed > TIMEOUT_THRESHOLD * 0.8:
-            status_text = "In Trouble"
-            logger.warning(f"🐕⏳⚠️ [WARNING] Watchdog: System {status_text} ({elapsed:.1f}s)")
+            logger.warning(f"🐕⏳⚠️ [WARNING] Watchdog: System In Trouble ({elapsed:.1f}s)")
         elif elapsed > TIMEOUT_THRESHOLD * 0.5:
-            status_text = "Unresponsive"
-            logger.warning(f"🐕⏳⚠️ [WARNING] Watchdog: System {status_text} ({elapsed:.1f}s)")
+            logger.warning(f"🐕⏳⚠️ [WARNING] Watchdog: System Unresponsive ({elapsed:.1f}s)")
 
-        if LOCAL_DEBUG:
-            sys.stdout.write(f"\r🐕 [WATCHDOG] Tick {counter}: System "
-                             f"{status_text} (Last Kick: {elapsed:.1f}s ago)")
-            sys.stdout.flush()
+class WatchdogManager:
+    """
+    High-level orchestrator for the watchdog system.
+    Follows singleton pattern.
+    """
+    _instance = None
+    _lock = threading.Lock()
 
-        # Log heartbeat status occasionally to the file logger.
-        if counter % 5 == 0:
-            try:
-                if LOCAL_DEBUG:
-                    matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🐕💓🐕 [WATCHDOG] Heartbeat {counter}", "DEBUG")
-            except:
-                pass
+    def __init__(self, mqtt_connection_manager=None, subscriber_router=None):
+        self.mqtt_connection_manager = mqtt_connection_manager
+        self.subscriber_router = subscriber_router
+        self._running = False
+
+    @classmethod
+    def get_instance(cls, mqtt_connection_manager=None, subscriber_router=None):
+        if cls._instance is None:
+            with cls._lock:
+                if cls._instance is None:
+                    cls._instance = cls(mqtt_connection_manager, subscriber_router)
+        return cls._instance
+
+    def start(self):
+        """Starts the watchdog monitoring."""
+        if not self._running:
+            start_heartbeat(app_constants)
+            self._running = True
+            matrix_log("core", "system", "watchdog", "🚀 Watchdog monitoring active.", "INFO")
+
+    def stop(self):
+        """Stops the watchdog monitoring."""
+        if self._running:
+            stop_heartbeat()
+            self._running = False
+            matrix_log("core", "system", "watchdog", "⏹️ Watchdog monitoring deactivated.", "INFO")
+
+    def status(self):
+        """Returns the status of the watchdog."""
+        return "running" if self._running else "stopped"
+
+    def is_alive(self):
+        """Checks if the watchdog is alive."""
+        return self._running

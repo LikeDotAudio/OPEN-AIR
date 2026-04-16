@@ -16,192 +16,165 @@
 # Version 20260330.1600.1
 
 import tkinter as tk
-from loguru import logger
+import time
+import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
-
-# --- EXTRACTED CORE MODULES ---
-from ..Core.grid_topology_configurator import GridTopologyConfigurator
-from ..Core.structural_assembler import StructuralAssembler
-from ..Core.batch_processing_engine import BatchProcessingEngine
-LOCAL_DEBUG = False
-
-renderer_logger = logger.bind(subsystem="RENDERER")
+from loguru import logger
+from oaGui.Core.grid_topology_configurator import GridTopologyConfigurator
+from oaGui.Core.structural_assembler import StructuralAssembler
 
 class AsyncGridRenderer:
-    """
-    Asynchronous recursive Grid renderer.
-    """
+    """Asynchronous Grid Layout Engine."""
 
-    def __init__(self, builder_instance):
-        self.builder = builder_instance
-        self.batch_engine = BatchProcessingEngine(builder_instance, renderer_logger, LOCAL_DEBUG)
+    def __init__(self, factory, batch_engine):
+        self.factory = factory
+        self.batch_engine = batch_engine
 
-    def render(self, parent_frame, data, path_prefix="", override_cols=None, 
-               on_complete=None, parent_bg_pil=None, context=None, 
-               bin_id=None, block_name=None):
-        try:
-            if not isinstance(data, dict):
-                if on_complete: on_complete()
-                return
-
-            matrix_log("ui", "gui_shell", "render", f"🏗️ Rendering branch '{path_prefix}' (Bin: {bin_id}, Block: {block_name})", "DEBUG")
-            
-            # Extract Bin/Block Identity if this is a structural node
-            w_type = data.get("type", data.get("widget_type"))
-            if w_type == "OcaBin":
-                bin_id = data.get("id") or bin_id
-            elif w_type == "OcaBlock":
-                # If we have a label or specific identity on the block, use it
-                block_name = data.get("id") or data.get("label") or block_name
-
-            geom = data.get("geometry", {})
-            if any(data.get(k) or geom.get(k) for k in ["width", "height"]):
-                try:
-                    parent_frame.grid_propagate(False)
-                    if hasattr(parent_frame, 'pack_propagate'): parent_frame.pack_propagate(False)
-                    width = data.get("width") or geom.get("width")
-                    height = data.get("height") or geom.get("height")
-                    # ⚡ HARDENING: Enforce 1px floor and handle type conversion safely
-                    if width:
-                        w_val = max(1, int(float(width)))
-                        parent_frame.config(width=w_val)
-                    if height:
-                        h_val = max(1, int(float(height)))
-                        parent_frame.config(height=h_val)
-                except (tk.TclError, ValueError, TypeError) as e:
-                    # 🛡️ Catching TclError (X11) and conversion errors
-                    matrix_log("ui", "gui_shell", "render", f"⚠️ Geometry configuration skipped: {e}", "TRACE")
-
-            fields = data.get("fields", data.get("blocks"))
-            
-            if fields is None:
-                if not data.get("type"):
-                    fields = data
-                else:
-                    if on_complete: on_complete()
-                    return
-            
-            if isinstance(fields, dict):
-                all_fields = list(fields.items())
-            elif isinstance(fields, list):
-                all_fields = []
-                for item in fields:
-                    if isinstance(item, dict):
-                        if len(item) == 1 and not any(k in ["type", "widget_type"] for k in item.keys()):
-                            all_fields.extend(item.items())
-                        else:
-                            item_key = item.get("id") or item.get("label") or item.get("label_active")
-                            all_fields.append((item_key, item))
-                    else:
-                        all_fields.append((None, item))
-            else:
-                all_fields = []
-
-            num_cols = GridTopologyConfigurator.configure(parent_frame, data, all_fields)
-            
-            eff_bg = parent_bg_pil or getattr(self.builder, 'panel_bg_pil', None)
-            if context is None and hasattr(self.builder, '_get_widget_context'):
-                context = self.builder._get_widget_context()
-
-            self._process_fields(parent_frame, all_fields, path_prefix, num_cols, on_complete, eff_bg, data, context, bin_id, block_name)
-            
-        except Exception as e:
-            matrix_log("ui", "gui_shell", "render", f"❌ Synchronized build error in '{path_prefix}': {e}", "ERROR")
+    def render(self, parent, data, path_prefix="", override_cols=None, on_complete=None, parent_bg_pil=None, context=None):
+        """Asynchronously renders a GUI branch into the parent frame."""
+        if not data:
             if on_complete: on_complete()
+            return
 
-    def _process_fields(self, parent, field_list, prefix, max_cols, on_complete, bg_pil, parent_data, context, bin_id, block_name):
-        field_idx = col_idx = row_idx = 0
-        STRUCT = ["OcaBlock", "OcaBin", "OcaArray", "OcaBreakLine"]
-        deferred = []; state = {"pending": 0, "loop_done": False, "aborted": False}
+        branch_name = data.get("id", data.get("path", "root"))
+        matrix_log("ui", "gui_shell", "render", f"🏗️ Rendering branch '{branch_name}' (Bin: {data.get('id')}, Block: {data.get('type') if data.get('type') != 'OcaBin' else 'None'})", "DEBUG")
+
+        # 1. Geometry Normalization
+        if "geometry" in data:
+            geom = data["geometry"]
+            try:
+                if "width" in geom: parent.config(width=int(geom["width"]))
+                if "height" in geom: parent.config(height=int(geom["height"]))
+            except (tk.TclError, ValueError) as e:
+                matrix_log("ui", "gui_shell", "render", f"⚠️ Geometry configuration skipped: {e}", "TRACE")
+
+        # 2. ⚡ DEEP NESTING RESOLUTION:
+        # Find the actual widget fields, descending through 'blocks' or 'fields' containers.
+        fields = data.get("fields", data.get("blocks"))
+        
+        # If the level has no 'type', it's an anonymous container (likely the top-level dict).
+        if fields is None and not data.get("type"):
+            fields = data
+
+        # ⚡ RECURSIVE DESCEND: Handle 'blocks -> fields' redundant nesting.
+        while isinstance(fields, dict) and len(fields) == 1:
+            key = next(iter(fields))
+            if key in ["fields", "blocks"]:
+                fields = fields[key]
+            else:
+                break
+        
+        if not fields or not isinstance(fields, (dict, list)):
+            if on_complete: on_complete()
+            return
+
+        # 3. Grid Configuration
+        all_items = list(fields.items()) if isinstance(fields, dict) else list(enumerate(fields))
+        num_cols = GridTopologyConfigurator.configure(parent, data, all_items)
+
+        # 4. Batched Field Processing
+        state = {"count": 0, "aborted": False, "loop_done": False}
+        deferred = []
+        field_idx = 0
+        row_idx, col_idx = 0, 0
 
         def _check_done():
-            if state["loop_done"] and state["pending"] <= 0:
-                if parent.winfo_exists() and prefix == "" and hasattr(self.builder, '_trigger_reslice_all'):
-                    self.builder._trigger_reslice_all()
+            if state["loop_done"] and not state["aborted"] and not deferred and state["count"] == 0:
+                if on_complete: on_complete()
+
+        def _process_fields(batch):
+            nonlocal row_idx, col_idx, field_idx
+            for item in batch:
+                if state["aborted"]: break
                 
-                if prefix == "" and hasattr(self.builder, '_force_background_to_back'):
-                    self.builder._force_background_to_back()
-
-                if on_complete:
-                    try:
-                        parent.after(1, on_complete)
-                    except Exception as e:
-                        matrix_log("ui", "gui_shell", "_process_fields", 
-                                   f"Deferred completion callback failed: {e}", "TRACE")
-                        on_complete()
-
-        while field_idx < len(field_list):
-            if not parent.winfo_exists(): state["aborted"] = True; break
-            key, value = field_list[field_idx]
-            
-            if key in ["layout", "type", "geometry", "column_sizing", "background"] or not isinstance(value, dict):
-                field_idx += 1; continue
-            
-            path_key = key or value.get("id") or value.get("label") or f"item_{field_idx}"
-            
-            p_sfx = ""
-            if parent_data:
-                if "fields" in parent_data: p_sfx = "fields"
-                elif "blocks" in parent_data: p_sfx = "blocks"
-            
-            raw_path = f"{prefix}.{p_sfx}.{path_key}"
-            cur_path = ".".join([part for part in raw_path.split(".") if part])
-            
-            w_type = value.get("type", value.get("widget_type"))
-            if not w_type: field_idx += 1; continue
-
-            # Inject Identity Metadata for leaf widgets
-            if w_type not in STRUCT:
-                value["bin_id"] = bin_id
-                value["block_name"] = block_name
-                value["field_name"] = key or path_key
-
-            lay = value.get("layout", {}); cs, rs = int(lay.get("col_span", 1)), int(lay.get("row_span", 1))
-            st = lay.get("sticky", "nsew" if w_type in STRUCT else "")
-            cr, cc = lay.get("row", row_idx), lay.get("column", col_idx)
-
-            if w_type in STRUCT:
-                if w_type == "OcaBlock":
-                    target = StructuralAssembler.create_block(parent, value, self.builder)
-                    target._oca_path = cur_path
-                    if hasattr(self.builder, 'bind_to_widget'):
-                        self.builder.bind_to_widget(target)
-                    target.grid(row=cr, column=cc, columnspan=cs, rowspan=rs, sticky=st)
-                    state["pending"] += 1
-                    # Pass the key of this block as the block_name for its children
-                    self.render(target, value, cur_path, on_complete=lambda: (state.update({"pending": state["pending"]-1}), _check_done()), parent_bg_pil=bg_pil, context=context, bin_id=bin_id, block_name=key or path_key)
-                elif w_type == "OcaBin":
-                    hull, inner = StructuralAssembler.create_bin(parent, value, self.builder)
-                    hull._oca_path = cur_path
-                    inner._oca_path = f"{cur_path}.fields"
-                    if hasattr(self.builder, 'bind_to_widget'):
-                        self.builder.bind_to_widget(hull)
-                        self.builder.bind_to_widget(inner)
-                    hull.grid(row=cr, column=cc, columnspan=cs, rowspan=rs, sticky=st)
-                    state["pending"] += 1
-                    # A Bin resets or updates the bin_id for its children
-                    self.render(inner, value, cur_path, on_complete=lambda: (state.update({"pending": state["pending"]-1}), _check_done()), parent_bg_pil=bg_pil, context=context, bin_id=value.get("id") or bin_id, block_name=block_name)
+                # ⚡ ROBUSTNESS: Normalize (key, config) regardless of source (dict.items or enumerate)
+                if isinstance(item, tuple) and len(item) == 2:
+                    key, config = item
                 else:
-                    state["pending"] += 1; creator = self.builder.widget_factory.get(w_type)
-                    if creator:
-                        target = creator(parent_widget=parent, config_data=value, context=context)
-                        if target: 
-                            target._oca_path = cur_path
-                            if hasattr(self.builder, 'bind_to_widget'):
-                                self.builder.bind_to_widget(target)
-                            target.grid(row=cr, column=cc, columnspan=cs, rowspan=rs, sticky=st)
-                    state["pending"] -= 1; _check_done()
-            else:
-                state["pending"] += 1
-                deferred.append({
-                    "r": cr, "c": cc, "value": value, "path": cur_path, "sticky": st, 
-                    "padx": lay.get("padx", 0), "pady": lay.get("pady", 0)
-                })
+                    # Fallback for unexpected formats
+                    key, config = f"field_{field_idx}", item
 
-            col_idx += cs
-            if col_idx >= max_cols: col_idx = 0; row_idx += rs
-            field_idx += 1
+                # Recursively resolve nested fields for this specific item if needed
+                # (Ensures internal OcaBlock/OcaBin fields are also discovered)
+                item_config = config
+                if not isinstance(item_config, dict):
+                    continue
 
-        state["loop_done"] = True
-        if deferred and not state["aborted"]: self.batch_engine.process(parent, deferred, 25, context, state, _check_done)
-        else: _check_done()
+                while isinstance(item_config, dict) and len(item_config) == 1 and not item_config.get("type"):
+                    inner_key = next(iter(item_config))
+                    if inner_key in ["fields", "blocks"]:
+                        item_config = item_config[inner_key]
+                    else:
+                        break
+
+                w_type = item_config.get("type")
+                STRUCTURAL_TYPES = ["OcaBin", "Bin", "OcaBlock", "Block"]
+                if not isinstance(w_type, str) or (w_type not in self.factory and w_type not in STRUCTURAL_TYPES):
+                    # Skip items with unknown types that are not structural
+                    continue
+
+                # 5. Widget Instantiation
+                widget = None
+                try:
+                    # Handle structural types (Bin/Block) vs standard widgets
+                    if w_type in ["OcaBin", "Bin"]:
+                        builder = getattr(context, 'builder_instance', self.factory)
+                        hull, inner = StructuralAssembler.create_bin(parent, item_config, builder)
+                        self._apply_grid(hull, item_config, row_idx, col_idx)
+                        widget = hull # Represent the hull for overlays
+                        # Recursive call for children
+                        state["count"] += 1
+                        self.render(inner, item_config, path_prefix=f"{path_prefix}.{key}", context=context, on_complete=lambda: (state.update({"count": state["count"]-1}), _check_done()))
+                    elif w_type in ["OcaBlock", "Block"]:
+                        builder = getattr(context, 'builder_instance', self.factory)
+                        hull, inner = StructuralAssembler.create_block(parent, item_config, builder)
+                        self._apply_grid(hull, item_config, row_idx, col_idx)
+                        widget = hull # Represent the hull for overlays
+                        # Recursive call for children
+                        state["count"] += 1
+                        self.render(inner, item_config, path_prefix=f"{path_prefix}.{key}", context=context, on_complete=lambda: (state.update({"count": state["count"]-1}), _check_done()))
+                    else:
+                        widget = self.factory[w_type](parent, item_config, context)
+                        if widget:
+                            self._apply_grid(widget, item_config, row_idx, col_idx)
+                    
+                    # ⚡ DESIGN INJECTION: Attach the path for the overlay system
+                    if widget:
+                        full_widget_path = f"{path_prefix}.{key}".strip(".")
+                        widget._oca_path = full_widget_path
+                        
+                except Exception as e:
+                    logger.exception(f"❌ Failed to render widget '{key}' of type '{w_type}': {e}")
+
+                # Update Grid Markers
+                rs = int(item_config.get("layout", {}).get("row_span", 1))
+                cs = int(item_config.get("layout", {}).get("col_span", 1))
+                col_idx += cs
+                if col_idx >= num_cols:
+                    col_idx = 0; row_idx += rs
+                field_idx += 1
+
+            state["loop_done"] = True
+            if deferred and not state["aborted"]: 
+                self.batch_engine.process(parent, deferred, 25, context, state, _check_done)
+            else: 
+                _check_done()
+
+        # Kick off processing
+        _process_fields(all_items)
+
+    def _apply_grid(self, widget, config, row, col):
+        """Applies grid layout to a widget based on its configuration."""
+        layout = config.get("layout", {})
+        r = layout.get("row", row)
+        c = layout.get("column", col)
+        rs = layout.get("row_span", 1)
+        cs = layout.get("col_span", 1)
+        px = layout.get("padx", 5)
+        py = layout.get("pady", 5)
+        sticky = layout.get("sticky", "nsew")
+
+        try:
+            widget.grid(row=r, column=c, rowspan=rs, columnspan=cs, padx=px, pady=py, sticky=sticky)
+        except tk.TclError as e:
+            matrix_log("ui", "gui_shell", "_apply_grid", f"⚠️ Grid placement failed: {e}", "TRACE")

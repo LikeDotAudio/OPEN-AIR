@@ -52,17 +52,21 @@ class TestTransparency(unittest.TestCase):
         """OPERATE: Perform slice. CHECK: Verify crop coordinates and image creation."""
         slicer = BackgroundSlicer(self.mock_widget, self.mock_canvas, self.mock_builder, "TestWidget")
         
-        # Mock geometry
+        # Mock hierarchical geometry for get_relative_pos
+        # rendering_target (mock_canvas) -> scroll_frame (mock_builder.scroll_frame)
         self.mock_canvas.winfo_exists.return_value = True
         self.mock_canvas.winfo_width.return_value = 100
         self.mock_canvas.winfo_height.return_value = 50
-        self.mock_canvas.winfo_rootx.return_value = 200
-        self.mock_canvas.winfo_rooty.return_value = 100
+        self.mock_canvas.winfo_x.return_value = 200
+        self.mock_canvas.winfo_y.return_value = 100
+        self.mock_canvas.winfo_parent.return_value = ".scroll_frame"
         
         # Mock scroll root
-        self.mock_builder.scroll_frame.winfo_rootx.return_value = 0
-        self.mock_builder.scroll_frame.winfo_rooty.return_value = 0
+        self.mock_builder.scroll_frame._w = ".scroll_frame"
         self.mock_builder.scroll_frame.winfo_exists.return_value = True
+        
+        # Mock nametowidget to resolve the parent path
+        self.mock_canvas.nametowidget.return_value = self.mock_builder.scroll_frame
         
         # Ensure we don't have id collisions in coord_cache
         self.mock_builder._root_coord_cache = {}

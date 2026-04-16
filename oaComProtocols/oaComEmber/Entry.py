@@ -1,9 +1,12 @@
-# oaComProtocols.oaComEmber/Entry.py
-# Author: Gemini (Collaborator)
-# Version: 20260407.1110.1
+# oaComEmber/Entry.py
+# Author: Anthony Peter Kuzub
+# Version: 20260415.2150.1
 #
-# Description: Ember Communication Module Entry Point with Singleton Manager.
+# Description: Gatekeeper for the oaComEmber module.
 
+import os
+import subprocess
+from pathlib import Path
 
 """
 import sys
@@ -97,17 +100,6 @@ def remove_monitor_callback(callback):
     """Unregisters a monitoring callback."""
     get_manager().remove_monitor_callback(callback)
 
-def run_tests():
-    """
-    Discovers and runs all tests within the oaComProtocols.oaComEmber/Tests/ directory.
-    """
-    print("🔍 Discovering and running tests for oaComProtocols.oaComEmber...")
-    # ... (rest of test runner logic)
-    pass
-
-if __name__ == "__main__":
-    run_tests()
-
 __all__ = [
     "EmberManager",
     "get_manager",
@@ -116,5 +108,72 @@ __all__ = [
     "connect",
     "status",
     "add_monitor_callback",
-    "remove_monitor_callback"
+    "remove_monitor_callback",
+    "run_tests",
 ]
+
+def run_tests():
+    """
+    Discover and run tests in the local Tests/ directory using unittest via subprocess.
+    Ensures isolation and proper sys.path handling.
+    """
+    import subprocess
+    import sys
+    import os
+    from pathlib import Path
+
+    print(f"📡📥📥 [TEST] {Path(__file__).parent.name}: Starting automated test discovery...")
+    current_dir = Path(__file__).parent.absolute()
+    test_dir = current_dir / "Tests"
+    
+    if not test_dir.exists():
+        return True
+
+    project_root = current_dir
+    while project_root.parent != project_root:
+        if (project_root / "GEMINI.md").exists():
+            break
+        project_root = project_root.parent
+    
+    env = os.environ.copy()
+    env["PYTHONPATH"] = str(project_root) + os.pathsep + env.get("PYTHONPATH", "")
+    
+    try:
+        rel_test_dir = os.path.relpath(test_dir, project_root)
+        result = subprocess.run(
+            [sys.executable, "-m", "unittest", "discover", "-s", rel_test_dir, "-p", "test_*.py"],
+            cwd=str(project_root),
+            env=env,
+            capture_output=False
+        )
+        if result.returncode == 0:
+            print(f"📡📤📤 [TEST] {Path(__file__).parent.name}: All tests PASSED.")
+            return True
+        else:
+            print(f"📡📤📤 [TEST] {Path(__file__).parent.name}: Tests FAILED.")
+            return False
+    except Exception as e:
+        print(f"🛑 [ERROR] {Path(__file__).parent.name}: Test discovery failed: {e}")
+        return False
+
+if __name__ == "__main__":
+    # Absolute FIRST action: run tests
+    if not run_tests():
+        print("❌ [CRITICAL] Tests failed. Aborting execution.")
+        sys.exit(1)
+    
+    # Standalone execution logic
+    if len(sys.argv) > 1:
+        cmd = sys.argv[1].lower()
+        if cmd == "--start":
+            start()
+        elif cmd == "--stop":
+            stop()
+        elif cmd == "--status":
+            print(f"Status: {status()}")
+        else:
+            print(f"Unknown command: {cmd}")
+    else:
+        # Default standalone action if no args
+        start()
+

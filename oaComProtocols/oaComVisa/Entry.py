@@ -1,60 +1,55 @@
-# oaComProtocols.oaComVisa/Entry.py
+# oaComVisa/Entry.py
 # Author: Anthony Peter Kuzub
-# Version: 20260330.1000.1 # Updated version for structure change
+# Version: 20260415.2225.1
 #
-# Description: VISA Communication Module Entry Point.
+# Description: Gatekeeper for the oaComVisa module.
 
-"""
-import sys
 import os
+import sys
+import subprocess
+import time
 from pathlib import Path
-oaComProtocols.oaComVisa/Entry.py - The sole orchestrator for the VISA Communication Module.
 
-Purpose:
-This file is the public entry point for 'oaComProtocols.oaComVisa'. It manages the
-lifecycle of VISA instrument connections.
-"""
+# Add the project root to sys.path for absolute imports
+current_dir = Path(__file__).parent.absolute()
+project_root = current_dir
+while project_root.parent != project_root:
+    if (project_root / "GEMINI.md").exists():
+        break
+    project_root = project_root.parent
 
-from .Managers.discovery_orchestrator import DiscoveryOrchestrator
-from .Managers.visa_manager import VisaManagerOrchestrator
-from .Core.visa_proxy import VisaProxy
-from .Core.visa_proxy_fleet import VisaProxyFleet
-from .Core.visa_fleet import FleetOrchestrator
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
+
+# --- Absolute Imports for Standalone Support ---
+from oaComProtocols.oaComVisa.Managers.discovery_orchestrator import DiscoveryOrchestrator
+from oaComProtocols.oaComVisa.Managers.visa_manager import VisaManagerOrchestrator
+from oaComProtocols.oaComVisa.Core.visa_proxy import VisaProxy
+from oaComProtocols.oaComVisa.Core.visa_proxy_fleet import VisaProxyFleet
+from oaComProtocols.oaComVisa.Core.visa_fleet import FleetOrchestrator
 
 class VisaComEntry:
     """Entry point for VISA communication management."""
     def __init__(self):
         print("📡📥📥 [INBOUND] Initializing VisaComEntry...")
-        # Placeholder for initialization logic, e.g., setting up managers
         self.discovery_orchestrator = None
         self.visa_manager = None
         self.fleet_orchestrator = None
-        pass
 
     def start(self):
         """Starts the VISA communication services."""
         print("🚀 [VISA] Starting VISA communication...")
-        # Example: Initialize managers if they aren't already
-        # if not self.discovery_orchestrator:
-        #     self.discovery_orchestrator = DiscoveryOrchestrator(...)
-        # if not self.visa_manager:
-        #     self.visa_manager = VisaManagerOrchestrator(...)
-        # if not self.fleet_orchestrator:
-        #     self.fleet_orchestrator = FleetOrchestrator(...)
-        # ... actual start logic ...
         pass
 
     def stop(self):
         """Stops the VISA communication services."""
         print("🛑 [VISA] Stopping VISA communication...")
-        # Placeholder for actual stop logic
         pass
 
     def status(self):
         """Returns the current status of the VISA communication services."""
         print("ℹ️ [VISA] Checking VISA communication status...")
-        # Placeholder for actual status check logic
-        return "idle" # Example status
+        return "idle"
 
 def get_discovery_orchestrator(manager_ref, aes70_manager=None):
     """Returns a new DiscoveryOrchestrator instance."""
@@ -67,65 +62,6 @@ def get_visa_manager(mqtt_connection_manager, subscriber_router):
 def get_fleet_orchestrator(mqtt_connection_manager=None, subscriber_router=None, aes70_manager=None):
     """Returns a new FleetOrchestrator instance."""
     return FleetOrchestrator(mqtt_connection_manager, subscriber_router, aes70_manager)
-
-def run_tests():
-    """
-    Discovers and runs all tests within the oaComProtocols.oaComVisa/Tests/ directory.
-    """
-    print("🔍 Discovering and running tests for oaComProtocols.oaComVisa...")
-    test_dir = Path(__file__).parent / "Tests"
-    if not test_dir.is_dir():
-        print("❌ No 'Tests/' directory found.")
-        return
-
-    test_files = sorted([f for f in test_dir.glob("test_*.py")])
-    if not test_files:
-        print("❌ No test files found (expected pattern: test_*.py).")
-        return
-
-    print(f"Found {len(test_files)} test files. Executing...")
-    
-    import subprocess
-    
-    all_tests_passed = True
-    for test_file in test_files:
-        print(f"\n--- Running: {test_file.name} ---")
-        try:
-            # Get the module path relative to the project root for the test runner
-            relative_test_file_path = test_file.relative_to(Path(__file__).parent.parent.parent) # Path from OPEN-AIR root
-            module_path_for_runner = str(relative_test_file_path).replace(os.sep, '.')[:-3] # Remove .py extension
-
-            # Ensure the current directory is the project root so Python can find modules
-            original_cwd = os.getcwd()
-            os.chdir(Path(__file__).parent.parent.parent) 
-
-            result = subprocess.run(
-                [sys.executable, "-m", "unittest", module_path_for_runner],
-                capture_output=True,
-                text=True,
-                check=False
-            )
-            
-            print(result.stdout)
-            if result.stderr:
-                print(result.stderr)
-            
-            if result.returncode != 0:
-                all_tests_passed = False
-                print(f"❌ Test failed for {test_file.name} with exit code {result.returncode}")
-            else:
-                print(f"✅ Tests passed for {test_file.name}")
-
-        except Exception as e:
-            print(f"❌ An error occurred while running tests for {test_file.name}: {e}")
-            all_tests_passed = False
-        finally:
-            os.chdir(original_cwd)
-
-    if all_tests_passed:
-        print("\n🎉 All tests for oaComProtocols.oaComVisa passed!")
-    else:
-        print("\n💔 Some tests for oaComProtocols.oaComVisa failed.")
 
 _instance = None
 
@@ -148,17 +84,70 @@ def status():
     """Standardized status command."""
     return get_entry().status()
 
-if __name__ == "__main__":
-    # If no arguments are provided, default to running tests.
-    # Otherwise, assume specific commands are intended (e.g., start, stop).
-    if len(sys.argv) > 1:
-        print("Executing command...")
-        # In a real application, you'd parse sys.argv and call the appropriate methods
-        # of VisaComEntry. For this task, we assume direct execution without specific
-        # arguments implies testing.
-    else:
-        run_tests()
+def run_tests():
+    """
+    Discover and run tests in the local Tests/ directory using unittest via subprocess.
+    Ensures isolation and proper sys.path handling.
+    """
+    print(f"📡📥📥 [TEST] {Path(__file__).parent.name}: Starting automated test discovery...")
+    test_dir = current_dir / "Tests"
+    
+    if not test_dir.exists():
+        print(f"⚠️ [TEST] {Path(__file__).parent.name}: No Tests/ directory found.")
+        return True
 
+    env = os.environ.copy()
+    env["PYTHONPATH"] = str(project_root) + os.pathsep + env.get("PYTHONPATH", "")
+    
+    try:
+        rel_test_dir = os.path.relpath(test_dir, project_root)
+        result = subprocess.run(
+            [sys.executable, "-m", "unittest", "discover", "-s", rel_test_dir, "-p", "test_*.py"],
+            cwd=str(project_root),
+            env=env,
+            capture_output=False
+        )
+        if result.returncode in [0, 5]:
+            if result.returncode == 5:
+                print(f"📡📤📤 [TEST] {Path(__file__).parent.name}: No tests found, but discovery succeeded.")
+            else:
+                print(f"📡📤📤 [TEST] {Path(__file__).parent.name}: All tests PASSED.")
+            return True
+        else:
+            print(f"📡📤📤 [TEST] {Path(__file__).parent.name}: Tests FAILED.")
+            return False
+    except Exception as e:
+        print(f"🛑 [ERROR] {Path(__file__).parent.name}: Test discovery failed: {e}")
+        return False
+
+if __name__ == "__main__":
+    # Absolute FIRST action: run tests
+    if not run_tests():
+        print("❌ [CRITICAL] Tests failed. Aborting execution.")
+        sys.exit(1)
+    
+    # Standalone execution logic
+    if len(sys.argv) > 1:
+        cmd = sys.argv[1].lower()
+        if cmd == "--start":
+            start()
+            try:
+                while True: time.sleep(1)
+            except KeyboardInterrupt:
+                stop()
+        elif cmd == "--stop":
+            stop()
+        elif cmd == "--status":
+            print(f"Status: {status()}")
+        else:
+            print(f"Unknown command: {cmd}")
+    else:
+        # Default standalone action if no args
+        start()
+        try:
+            while True: time.sleep(1)
+        except KeyboardInterrupt:
+            stop()
 
 __all__ = [
     "VisaComEntry",
@@ -172,5 +161,6 @@ __all__ = [
     "get_fleet_orchestrator",
     "start",
     "stop",
-    "status"
+    "status",
+    "run_tests",
 ]

@@ -1,249 +1,245 @@
-# array/array.py
+# Core/array/array.py
 # Author: Anthony Peter Kuzub
-# Version: 1.0.0
+# Version: 20260415.2355.1
 #
-# Description: Brief summary of purpose
+# Description: Generates a data-driven grid of widgets by expanding a blueprint.
 
 import tkinter as tk
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
-from tkinter import ttk
 import orjson
-import os
-
-# --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory
+from typing import Dict, Any, List, Optional
 from loguru import logger
 
+from oaLogging.Methods.matrix_gate import matrix_log
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaGuiManager.Core.context.widget_context import WidgetContext
+from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 
 app_constants = Config.get_instance()
 
-from oaGuiManager.Core.context.widget_context import WidgetContext
-from oaGui.Workers.async_grid_renderer import AsyncGridRenderer
-
 class ViewManager:
-    def __init__(self, root_widget):
-        self.groups = {}  # { "aux1": [widget_instance, ...] }
-        self.states = {}  # { "aux1": "expanded" }
-        self.vars = {}    # { "aux1": tk.BooleanVar }
+    """Manages visibility groups and right-click toggle menus for collapsible sections."""
+    def __init__(self, root_widget: tk.Widget):
+        self.groups = {}
+        self.vars = {}
         self.menu = tk.Menu(root_widget, tearoff=0)
-        self.root = root_widget
 
-    def register(self, group_name, widget):
+    def register(self, group_name: str, widget: tk.Widget):
+        """Registers a widget into a visibility group."""
         if group_name not in self.groups:
-            self.groups[group_name] = []
-            self.states[group_name] = "expanded"
-            
-            # Create BooleanVar for menu
-            var = tk.BooleanVar(value=True)
-            self.vars[group_name] = var
-            
-            # Add to menu
-            self.menu.add_checkbutton(
-                label=f"Show {group_name}",
-                variable=var,
-                command=lambda g=group_name: self._on_menu_click(g)
-            )
-            
+            self._initialize_group(group_name)
         self.groups[group_name].append(widget)
 
-    def _on_menu_click(self, group_name):
-        # Toggle state based on var
-        is_checked = self.vars[group_name].get()
-        new_state = "expanded" if is_checked else "collapsed"
-        self.set_state(group_name, new_state)
+    def _initialize_group(self, group_name: str):
+        self.groups[group_name] = []
+        var = tk.BooleanVar(value=True)
+        self.vars[group_name] = var
+        self.menu.add_checkbutton(
+            label=f"Show {group_name}",
+            variable=var,
+            command=lambda g=group_name: self._toggle_group(g)
+        )
 
-    def set_state(self, group_name, state):
-        self.states[group_name] = state
-        
-        # Update var if changed programmatically
-        if group_name in self.vars:
-            self.vars[group_name].set(state == "expanded")
-
-        widgets = self.groups.get(group_name, [])
-        for w in widgets:
-            if hasattr(w, "set_view_state"):
-                w.set_view_state(state)
+    def _toggle_group(self, group_name: str):
+        is_visible = self.vars[group_name].get()
+        state = "expanded" if is_visible else "collapsed"
+        for widget in self.groups.get(group_name, []):
+            if hasattr(widget, "set_view_state"):
+                widget.set_view_state(state)
 
     def show_menu(self, event):
+        """Displays the visibility toggle menu."""
         try:
             self.menu.tk_popup(event.x_root, event.y_root)
         finally:
             self.menu.grab_release()
 
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
-
-class BuilderArrayCreator(TransparencyMixin):
+class GridColumnConfigurator:
+    """Encapsulates Tkinter grid column management logic."""
     @staticmethod
-    def make(parent_widget, config_data, context: WidgetContext = None, **kwargs):
-        """Standardized factory entry point."""
-        # Use existing instance if passed, otherwise create creator instance
-        builder_inst = context.builder_instance if context else kwargs.get("builder_instance")
-        return BuilderArrayCreator().make_array(parent_widget, config_data, context=context, **kwargs)
+    def apply_sizing(container: tk.Widget, num_columns: int, sizing_info: List[Dict]):
+        """Configures grid weights and minimum sizes for the target container."""
+        for col_idx in range(num_columns):
+            info = sizing_info[col_idx] if col_idx < len(sizing_info) else {}
+            weight = info.get("weight", 1)
+            minwidth = info.get("minwidth", 0)
+            maxwidth = info.get("maxwidth", 0)
 
-    def make_array(self, parent_widget, config_data, context: WidgetContext = None, **kwargs):
-        matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"🔬 Entering make_array with config: {config_data}", level="TRACE")
-        """
-        Generates a grid of widgets based on a blueprint and a data array.
-        Supports collapsible rows (OcaCollapsibleBlock) managed by a ViewManager.
-        """
-        # ⚡ HARDENED INTERFACE: Extract from context if available
-        on_complete = context.on_complete if context else kwargs.get("on_complete")
-        builder_instance = context.builder_instance if context else kwargs.get("builder_instance")
-        
-        # Fallback to self if no builder provided (unlikely in normal flow)
-        if not builder_instance:
-            builder_instance = self
-
-        # 1. Main Container
-        p_bg = "#2b2b2b"
-        try: p_bg = parent_widget.cget("bg")
-        except: pass
-        main_container = tk.Canvas(parent_widget, bd=0, highlightthickness=0, relief="flat", bg=p_bg)
-        
-        # ⚡ DIMENSION ENFORCEMENT: Ensure main container respects explicit sizes
-        geom = config_data.get("geometry", {})
-        w = config_data.get("width") or geom.get("width")
-        h = config_data.get("height") or geom.get("height")
-        if w or h:
-            main_container.grid_propagate(False)
-            main_container.pack_propagate(False)
-            if w: main_container.config(width=w)
-            if h: main_container.config(height=h)
-
-        main_container.grid_rowconfigure(0, weight=1)
-        main_container.grid_columnconfigure(0, weight=1)
-
-        if hasattr(self, '_apply_transparency'):
-            self._apply_transparency(main_container, main_container, config_data, builder_instance)
-
-        # 2. Initialize ViewManager attached to this container
-        view_manager = ViewManager(main_container)
-        
-        # Bind Right-Click to Main Container
-        main_container.bind("<Button-3>", view_manager.show_menu)
-
-        # 3. Content Grid Container
-        grid_container = tk.Canvas(main_container, bd=0, highlightthickness=0, relief="flat")
-        grid_container.grid(row=0, column=0, sticky="nsew")
-
-        if hasattr(self, '_apply_transparency'):
-            self._apply_transparency(grid_container, grid_container, config_data, builder_instance)
-        
-        # Bind Right-Click to Grid Container as well
-        grid_container.bind("<Button-3>", view_manager.show_menu)
-
-        # Get Data and Blueprint
-        blueprint = config_data.get("blueprint", {})
-        data_array = config_data.get("data", [])
-        blocks = config_data.get("blocks") or config_data.get("fields")
-        layout_cols = config_data.get("layout_columns", 8)
-        
-        # ⚡ COMPOSITION FIX: Ensure we use an instance of this creator for internal helpers
-        # because 'self' when called via factory wrapper is actually the DynamicGuiBuilder.
-        creator_instance = BuilderArrayCreator()
-
-        # Configure Grid Container Columns
-        column_sizing = config_data.get("column_sizing", [])
-        for col_idx in range(layout_cols):
-            sizing_info = column_sizing[col_idx] if col_idx < len(column_sizing) else {}
-            weight = sizing_info.get("weight", 1)
-            minwidth = sizing_info.get("minwidth", 0)
-            maxwidth = sizing_info.get("maxwidth", 0)
-            
-            # ⚡ OPTIMIZATION: If maxwidth is specified, enforce it by clamping minsize 
-            # and disabling expansion (weight=0) if it's meant to be a fixed/max column.
+            # ⚡ CONSTRAINT: Enforce fixed width if maxwidth is specified
             if maxwidth > 0:
                 minwidth = maxwidth
                 weight = 0
 
-            grid_container.grid_columnconfigure(col_idx, weight=weight, minsize=minwidth)
+            container.grid_columnconfigure(col_idx, weight=weight, minsize=minwidth)
 
-        # 5. Construct fields and Inject Data
+class BlueprintDataInjector:
+    """Handles recursive injection of data and view managers into JSON blueprints."""
+    @classmethod
+    def inject(cls, config: Any, data: Dict, view_manager: Optional[ViewManager] = None):
+        """Recursively injects data context and view manager into the configuration."""
+        if isinstance(config, dict):
+            cls._inject_into_dict(config, data, view_manager)
+        elif isinstance(config, list):
+            cls._inject_into_list(config, data, view_manager)
+
+    @classmethod
+    def _inject_into_dict(cls, config: Dict, data: Dict, vm: Optional[ViewManager]):
+        # Specific injection for collapsible blocks
+        if config.get("type") == "OcaCollapsibleBlock" and vm:
+            config["_view_manager"] = vm
+
+        for key, value in config.items():
+            if isinstance(value, (dict, list)):
+                cls.inject(value, data, vm)
+            elif isinstance(value, str) and "{{" in value:
+                config[key] = cls._resolve_string_placeholders(value, data)
+
+    @classmethod
+    def _inject_into_list(cls, config: List, data: Dict, vm: Optional[ViewManager]):
+        for i, value in enumerate(config):
+            if isinstance(value, (dict, list)):
+                cls.inject(value, data, vm)
+            elif isinstance(value, str) and "{{" in value:
+                config[i] = cls._resolve_string_placeholders(value, data)
+
+    @staticmethod
+    def _resolve_string_placeholders(text: str, data: Dict) -> Any:
+        """Replaces {{key}} placeholders with values from the data context."""
+        for key, val in data.items():
+            placeholder = f"{{{{{key}}}}}"
+            if text == placeholder:
+                return val
+            if placeholder in text:
+                text = text.replace(placeholder, str(val))
+        return text
+
+class ArrayDataExpander:
+    """Orchestrates the expansion of a blueprint into a data-mapped item set."""
+    @staticmethod
+    def expand_blueprint(blueprint: Dict, data_array: List[Dict], view_manager: ViewManager) -> Dict[str, Any]:
+        """Creates a collection of item configurations by mapping data to a blueprint."""
         synthetic_fields = {}
-        current_path = config_data.get("path", "")
+        # Use orjson for optimized string template generation
+        blueprint_template = orjson.dumps(blueprint).decode()
 
-        if data_array:
-            # ⚡ OPTIMIZATION: Use orjson for deep copy of blueprint
-            blueprint_json = orjson.dumps(blueprint).decode()
-
-            matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"🧱 ArrayCreator: Expanding blueprint for {len(data_array)} elements in {config_data.get('path', 'root')}", level="DEBUG")
-
-            for idx, item in enumerate(data_array):
-                item_id = item.get("id", f"item_{idx}")
-                matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"  └─ 💠 Processing Array Element [{idx}]: ID='{item_id}'", level="TRACE")
-                
-                try:
-                    item_config = orjson.loads(blueprint_json)
-                except Exception as e:
-                    logger.error(f"  └─ ❌ FAILED to deep-copy blueprint for element {idx}: {e}")
-                    continue
-                
-                # Inject generic data
-                matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"    ├─ 💉 Injecting data contexts into element '{item_id}'", level="TRACE")
-                creator_instance._inject_data(item_config, item)
-                
-                # Pass ViewManager reference via a special key
-                creator_instance._inject_view_manager(item_config, view_manager)
-
-                synthetic_fields[str(item_id)] = item_config
-                matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"    └─ ✅ Element '{item_id}' ready for batch build.", level="TRACE")
-        elif blocks:
-            matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"🧱 ArrayCreator: No data array, but found 'blocks' or 'fields' in {current_path}. Using structural render.", level="DEBUG")
-            synthetic_fields = blocks
-        else:
-             matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"🧱 ArrayCreator: No data and no blocks found in {current_path}.", level="WARNING")
-             if on_complete: on_complete()
-             return main_container
-
-        # 6. Create configuration for batch builder
-        container_config = {
-            "type": "OcaBlock", 
-            "layout_columns": layout_cols,
-            "column_sizing": config_data.get("column_sizing", []),
-            "fields": synthetic_fields,
-            "show_label": False,
-            "layout": config_data.get("layout", {}) 
-        }
+        for idx, item in enumerate(data_array):
+            item_id = str(item.get("id", f"item_{idx}"))
+            try:
+                # Materialize item configuration from template
+                item_config = orjson.loads(blueprint_template)
+                BlueprintDataInjector.inject(item_config, item, view_manager)
+                synthetic_fields[item_id] = item_config
+            except Exception as e:
+                logger.error(f"ArrayExpander: Failed to materialize element {idx}: {e}")
         
-        matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"🚀 ArrayCreator: Handing off synthetic container '{current_path}' to BatchBuilder...", level="DEBUG")
-        builder_instance._create_dynamic_widgets(
-            grid_container, container_config, 
-            path_prefix=current_path, 
-            on_complete=on_complete,
-            context=context
-        )
+        return synthetic_fields
+
+class BuilderArrayCreator(TransparencyMixin):
+    """
+    Main orchestrator for data-driven Array widgets.
+    Coordinates container setup, data expansion, and batch rendering handoff.
+    """
+    
+    @staticmethod
+    def make(parent_widget, config_data, context: WidgetContext = None, **kwargs):
+        """Factory entry point."""
+        return BuilderArrayCreator().create(parent_widget, config_data, context, **kwargs)
+
+    def create(self, parent_widget, config_data, context: WidgetContext = None, **kwargs):
+        """Orchestrates the full lifecycle of array widget creation."""
+        matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, 
+                   f"🧱 ArrayCreator: Initializing data-driven array at {config_data.get('path')}", level="DEBUG")
+
+        # 1. Scaffolding
+        main_container = self._setup_scaffolding(parent_widget, config_data, context, **kwargs)
+        view_manager = ViewManager(main_container)
+        main_container.bind("<Button-3>", view_manager.show_menu)
+
+        # 2. Grid Management
+        grid_container = self._setup_grid_container(main_container, config_data, context, view_manager, **kwargs)
         
+        # 3. Data-Driven Expansion
+        synthetic_fields = self._expand_data_to_fields(config_data, view_manager)
+        
+        # 4. Asynchronous Build Handoff
+        self._dispatch_batch_build(grid_container, config_data, synthetic_fields, context, **kwargs)
+
         return main_container
 
-    def _inject_data(self, config, data_context):
-        if isinstance(config, dict):
-            for key, value in config.items():
-                if isinstance(value, (dict, list)):
-                    self._inject_data(value, data_context)
-                elif isinstance(value, str) and "{{" in value:
-                    config[key] = self._resolve_placeholder(value, data_context)
-        elif isinstance(config, list):
-            for i, value in enumerate(config):
-                if isinstance(value, (dict, list)):
-                    self._inject_data(value, data_context)
-                elif isinstance(value, str) and "{{" in value:
-                    config[i] = self._resolve_placeholder(value, data_context)
-    
-    def _inject_view_manager(self, config, manager):
-        """Recursively inject _view_manager into OcaCollapsibleBlocks"""
-        if isinstance(config, dict):
-            if config.get("type") == "OcaCollapsibleBlock":
-                config["_view_manager"] = manager
-            for value in config.values():
-                self._inject_view_manager(value, manager)
+    def _setup_scaffolding(self, parent, config, context, **kwargs) -> tk.Canvas:
+        """Creates and configures the outer shell container."""
+        p_bg = "#2b2b2b"
+        try: p_bg = parent.cget("bg")
+        except: pass
 
-    def _resolve_placeholder(self, value, data_context):
-        for data_key, data_val in data_context.items():
-            placeholder = f"{{{{{data_key}}}}}"
-            if value == placeholder:
-                return data_val
-            if placeholder in value:
-                value = value.replace(placeholder, str(data_val))
-        return value
+        container = tk.Canvas(parent, bd=0, highlightthickness=0, relief="flat", bg=p_bg)
+        
+        # Enforce geometry constraints if provided
+        geom = config.get("geometry", {})
+        width = config.get("width") or geom.get("width")
+        height = config.get("height") or geom.get("height")
+        
+        if width or height:
+            container.grid_propagate(False)
+            container.pack_propagate(False)
+            if width: container.config(width=width)
+            if height: container.config(height=height)
+
+        container.grid_rowconfigure(0, weight=1)
+        container.grid_columnconfigure(0, weight=1)
+
+        builder = getattr(context, 'builder_instance', kwargs.get('builder_instance', self))
+        self._apply_transparency(container, container, config, builder)
+        return container
+
+    def _setup_grid_container(self, parent, config, context, view_manager, **kwargs) -> tk.Canvas:
+        """Creates the inner grid container and configures its columns."""
+        grid_container = tk.Canvas(parent, bd=0, highlightthickness=0, relief="flat")
+        grid_container.grid(row=0, column=0, sticky="nsew")
+        grid_container.bind("<Button-3>", view_manager.show_menu)
+        
+        builder = getattr(context, 'builder_instance', kwargs.get('builder_instance'))
+        self._apply_transparency(grid_container, grid_container, config, builder)
+
+        # Separate column logic from array expansion
+        layout_cols = config.get("layout_columns", 8)
+        GridColumnConfigurator.apply_sizing(grid_container, layout_cols, config.get("column_sizing", []))
+        
+        return grid_container
+
+    def _expand_data_to_fields(self, config: Dict, view_manager: ViewManager) -> Dict:
+        """Transforms data array into a set of item configurations using the blueprint."""
+        data_array = config.get("data", [])
+        blueprint = config.get("blueprint", {})
+        blocks = config.get("blocks") or config.get("fields")
+
+        if data_array:
+            return ArrayDataExpander.expand_blueprint(blueprint, data_array, view_manager)
+        
+        # Fallback to static blocks if no data array is provided
+        return blocks or {}
+
+    def _dispatch_batch_build(self, container, config, fields, context, **kwargs):
+        """Hands off the expanded item set to the BatchBuilder engine."""
+        if not fields:
+            on_complete = getattr(context, 'on_complete', kwargs.get('on_complete'))
+            if on_complete: on_complete()
+            return
+
+        batch_config = {
+            "type": "OcaBlock", 
+            "layout_columns": config.get("layout_columns", 8),
+            "column_sizing": config.get("column_sizing", []),
+            "fields": fields,
+            "show_label": False,
+            "layout": config.get("layout", {}) 
+        }
+
+        builder = getattr(context, 'builder_instance', kwargs.get('builder_instance'))
+        if builder:
+            builder._create_dynamic_widgets(
+                container, batch_config, 
+                path_prefix=config.get("path", ""), 
+                on_complete=getattr(context, 'on_complete', kwargs.get('on_complete')),
+                context=context
+            )

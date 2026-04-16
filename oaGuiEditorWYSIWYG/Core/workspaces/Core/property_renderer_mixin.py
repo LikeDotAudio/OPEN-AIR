@@ -25,7 +25,11 @@ class PropertyRendererMixin:
             tk.Label(parent, text="... (Depth Limit Reached)", bg="#2b2b2b", fg="#ffaa00").pack(fill="x")
             return
 
-
+        # 🛡️ TYPE GUARD: Ensure data is a dictionary before attempting to call .items()
+        if not isinstance(data, dict):
+            if isinstance(data, list):
+                 self._render_list_info(parent, "LIST_CONTENT", data, f"{prefix}.LIST", None, widget_cache, new_widget_cache)
+            return
 
         for key, value in data.items():
             full_path = f"{prefix}.{key}"
@@ -115,8 +119,8 @@ class PropertyRendererMixin:
         if existing_header and existing_header.winfo_exists():
             existing_header.destroy() # Recreate header to ensure fresh bindings
             
-        h_frame = tk.Frame(parent, bg="#3a3a3a", pady=2)
-        h_frame.pack(fill="x", pady=(5, 2))
+        h_frame = tk.Frame(parent, bg="#2d2d2d", pady=2)
+        h_frame.pack(fill="x", pady=(8, 2))
         
         is_expanded = tk.BooleanVar(value=is_expanded_val)
         
@@ -124,42 +128,32 @@ class PropertyRendererMixin:
         if not is_expanded_val:
             child_container.pack_forget()
 
-        w_type = value.get("type", value.get("widget_type", ""))
-        type_emoji = "📦" if w_type == "OcaBlock" else "🔹"
-        fg_col = "#aaaaaa" if not is_virtual else "#666666"
-        
+        fg_col = "#33A1FD" if not is_virtual else "#666666"
         toggle_char = "▼" if is_expanded_val else "▶"
-        toggle_lbl = tk.Label(h_frame, text=toggle_char, bg="#3a3a3a", fg="#33A1FD", font=("Arial", 8))
-        toggle_lbl.pack(side="left", padx=(5, 2))
-        tk.Label(h_frame, text=type_emoji, bg="#3a3a3a", font=("Arial", 8)).pack(side="left", padx=(0, 5))
-        title_lbl = tk.Label(h_frame, text=key.upper(), bg="#3a3a3a", fg=fg_col, font=("Arial", 8, "bold"), cursor="hand2")
-        title_lbl.pack(side="left")
+        
+        title_lbl = tk.Label(h_frame, text=f"{toggle_char} {key.upper()}", bg="#2d2d2d", fg=fg_col, 
+                             font=("Arial", 8, "bold"), cursor="hand2", anchor="w")
+        title_lbl.pack(side="left", fill="x", expand=True)
 
         if new_widget_cache is not None:
             new_widget_cache[header_key] = {"widget": h_frame, "is_expanded": is_expanded}
 
         if is_virtual:
-            tk.Button(h_frame, text="+ ADD SECTION", bg="#2ecc71", fg="white", relief="flat", font=("Arial", 6, "bold"),
+            tk.Button(h_frame, text="+", bg="#37373d", fg="#aaaaaa", relief="flat", font=("Arial", 7, "bold"),
                       command=lambda p=full_path, v=value: self._add_state_item(p, v)).pack(side="right", padx=5)
-        else:
-            if ".fields." in full_path or full_path.count(".") == 0:
-                ctrl = tk.Frame(h_frame, bg="#3a3a3a")
-                ctrl.pack(side="right", padx=5)
-                ttk.Button(ctrl, text="↑", width=2, command=lambda p=full_path: self._reorder(p, "up")).pack(side="left", padx=1)
-                ttk.Button(ctrl, text="↓", width=2, command=lambda p=full_path: self._reorder(p, "down")).pack(side="left", padx=1)
         
         def toggle(e):
             if not child_container.winfo_exists(): return
             if is_expanded.get(): 
                 child_container.pack_forget()
-                toggle_lbl.config(text="▶")
+                title_lbl.config(text=f"▶ {key.upper()}")
                 is_expanded.set(False)
             else: 
                 child_container.pack(fill="x")
-                toggle_lbl.config(text="▼")
+                title_lbl.config(text=f"▼ {key.upper()}")
                 is_expanded.set(True)
         
-        title_lbl.bind("<Button-1>", toggle); toggle_lbl.bind("<Button-1>", toggle)
+        title_lbl.bind("<Button-1>", toggle)
         
         self._render_recursive_properties(value, child_container, prefix=full_path, depth=depth + 1, actual_data=actual_data.get(key, {}), widget_cache=widget_cache, new_widget_cache=new_widget_cache)
 

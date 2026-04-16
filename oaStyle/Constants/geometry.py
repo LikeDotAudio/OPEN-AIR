@@ -36,7 +36,7 @@ DEFAULT_THEME_BACKGROUND = "#2b2b2b"
 # Structural widget types that default to transparency
 STRUCTURAL_WIDGET_TYPES = [
     "OcaBlock", "OcaBin", "OcaArray", "OcaCollapsibleBlock", 
-    "Block", "Array", "Bin"
+    "Block", "Array", "Bin", "_Label", "_SmartLabel", "_GuiLabel", "Label"
 ]
 
 # Standard background colors for theme matching

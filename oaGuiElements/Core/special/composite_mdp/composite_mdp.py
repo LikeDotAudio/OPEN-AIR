@@ -15,7 +15,7 @@ from oaLogging.Core.logger import builder_logger
 from oaConfigurationManager.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
-from oaGuiElements.Core.graphing.graphing.dynamic_graph import GraphPlotter
+from oaGuiElements.Core.graphing.Methods.dynamic_graph import GraphPlotter
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
 

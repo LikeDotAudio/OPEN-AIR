@@ -5,9 +5,14 @@
 
 ## 📖 Description & Purpose
 ### File Level
-`managers/PTP/PTPtester.py`
+`oaPTP/Methods/PTPtester.py`
 
 A diagnostic utility for sniffing and reporting PTP (Precision Time Protocol) traffic to the OPEN-AIR system via MQTT.
+
+**Usage:**
+```bash
+sudo PYTHONPATH=$(python3 -m site --user-site):. python3 oaPTP/Methods/PTPtester.py --broker localhost --port 1883
+```
 
 **Primary Responsibilities:**
 - Sniffs PTP event and general messages (UDP 319/320).

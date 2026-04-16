@@ -1,15 +1,43 @@
 {
-  "Zoo_images_BG_Demo_6": {
-    "type": "OcaBin",
-    "id": "50.90.9.4.4.2.2.2",
-    "geometry": {
-      "anchor": "NSEW"
-    },
-    "behavior": {
-      "overflow_ns": "auto",
-      "overflow_ew": "auto",
-      "fluid_ew": true
-    },
-    "blocks": {}
+  "type": "OcaBin",
+  "id": "50.90.9.4.4.2.2.2",
+  "geometry": {
+    "anchor": "NSEW"
+  },
+  "behavior": {
+    "overflow": "auto",
+    "fluid_ew": true
+  },
+  "blocks": {
+    "fields": {
+      "Background_Summary_Label": {
+        "type": "_Label",
+        "label": {
+          "En": "Patina: 2 6 Oily Tactical | Base: #1a1a1a (brushed) | Grime: 15 stains",
+          "Fr": "Patina: 2 6 Oily Tactical | Base: #1a1a1a (brushed) | Grime: 15 stains",
+          "De": "Patina: 2 6 Oily Tactical | Base: #1a1a1a (brushed) | Grime: 15 stains",
+          "Es": "Patina: 2 6 Oily Tactical | Base: #1a1a1a (brushed) | Grime: 15 stains"
+        },
+        "layout": {
+          "font": 14,
+          "colour": "#00ff00",
+          "sticky": "nsew",
+          "row": 0,
+          "column": 0
+        }
+      }
+    }
+  },
+  "background": {
+    "parameters": {
+      "base_material": {
+        "color": "#1a1a1a",
+        "texture_type": "brushed"
+      },
+      "grime": {
+        "stain_count": 15,
+        "opacity": 0.5
+      }
+    }
   }
 }

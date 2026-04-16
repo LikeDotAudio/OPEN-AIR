@@ -1,6 +1,6 @@
 # Methods/PTPtester.py
 # Author: Anthony Peter Kuzub
-# Version: 1.0.0
+# Version: 20260415.2255.1
 #
 # Description: !/usr/bin/env python3
 
@@ -25,120 +25,32 @@ Assumptions and Constraints:
 """
 
 import sys
-from oaLogging.Methods.matrix_gate import matrix_log
+import os
 import inspect
 import orjson
 import time
 import argparse
-
-# Allow user configuration of broker and port for varied network environments.
-parser = argparse.ArgumentParser(
-    description="PTP Traffic Sniffer and MQTT Reporter"
-)
-parser.add_argument(
-    "--broker", default="localhost", 
-    help="MQTT Broker address (default: localhost)"
-)
-parser.add_argument(
-    "--port", type=int, default=1883, 
-    help="MQTT Broker port (default: 1883)"
-)
-args = parser.parse_args()
-
 import importlib.util
-import os
+from pathlib import Path
 
-# Allow user configuration of broker and port for varied network environments.
-parser = argparse.ArgumentParser(
-    description="PTP Traffic Sniffer and MQTT Reporter"
-)
-parser.add_argument(
-    "--broker", default="localhost", 
-    help="MQTT Broker address (default: localhost)"
-)
-parser.add_argument(
-    "--port", type=int, default=1883, 
-    help="MQTT Broker port (default: 1883)"
-)
-args = parser.parse_args()
+# --- Project Path Setup ---
+current_dir = Path(__file__).parent.absolute()
+project_root = current_dir
+while project_root.parent != project_root:
+    if (project_root / "GEMINI.md").exists():
+        break
+    project_root = project_root.parent
 
-# Initialize MQTT communication to bridge packet data to the OPEN-AIR system.
-MQTT_AVAILABLE = importlib.util.find_spec("paho.mqtt") is not None
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
 
-MQTT_BROKER = args.broker
-MQTT_PORT = args.port
-MQTT_TOPIC = "OPEN-AIR/System/PTP/Capture"
+from oaLogging.Methods.matrix_gate import matrix_log
 
-mqtt_client = None
-if MQTT_AVAILABLE:
-    import paho.mqtt.client as mqtt
-    # Ensure compatibility with both legacy and modern Paho MQTT versions.
-    if hasattr(mqtt, "CallbackAPIVersion"):
-        mqtt_client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION1)
-    else:
-        mqtt_client = mqtt.Client()
-        
-    # We assume the broker is reachable or fatal if not. 
-    # Optional: check_mqtt_port(MQTT_BROKER, MQTT_PORT)
-    mqtt_client.connect(MQTT_BROKER, MQTT_PORT, 60)
-    mqtt_client.loop_start()
-
-# ⚡ DEPENDENCY RESOLUTION: Scapy check
-SCAPY_SPEC = importlib.util.find_spec("scapy")
-if SCAPY_SPEC is None:
-    matrix_log("CORE", "PTP", inspect.currentframe().f_code.co_name, "Error: Scapy not installed. Run 'pip install scapy' "
-          "(might need sudo/--break-system-packages)", level="INFO")
-    if mqtt_client:
-        mqtt_client.loop_stop()
-        mqtt_client.disconnect()
-    sys.exit(1)
-
-from scapy.all import (sniff, UDP, IP, Packet, ByteField, ShortField,
-                        XShortField, LongField, StrFixedLenField, BitField,
-                        bind_layers)
-
-# Attempt to load specialized PTP definitions from Scapy's contribution library.
-PTP_SPEC = importlib.util.find_spec("scapy.contrib.ptp")
-if PTP_SPEC:
-    from scapy.contrib.ptp import PTP
-    HAS_PTP = True
-else:
-    # Provide a fallback PTP structure if the contrib module is unavailable.
-    class PTP(Packet):
-        name = "PTP"
-        fields_desc = [
-            BitField("transportSpecific", 0, 4),
-            BitField("messageType", 0, 4),
-            BitField("reserved", 0, 4),
-            BitField("versionPTP", 2, 4),
-            ShortField("messageLength", 34),
-            ByteField("domainNumber", 0),
-            ByteField("reserved1", 0),
-            XShortField("flagField", 0),
-            LongField("correctionField", 0),
-            ByteField("reserved2", 0),
-            ByteField("reserved3", 0),
-            ByteField("reserved4", 0),
-            ByteField("reserved5", 0),
-            StrFixedLenField("sourcePortIdentity", b"\x00"*10, 10),
-            ShortField("sequenceId", 0),
-            ByteField("controlField", 0),
-            ByteField("logMessageInterval", 0)
-        ]
-        def guess_payload_class(self, payload):
-            return Packet.guess_payload_class(self, payload)
-    HAS_PTP = True
-
-# Enable Scapy's automatic protocol identification for PTP traffic.
-bind_layers(UDP, PTP, dport=319)
-bind_layers(UDP, PTP, dport=320)
-bind_layers(UDP, PTP, sport=319)
-bind_layers(UDP, PTP, sport=320)
-
-def packet_callback(pkt):
+def packet_callback(pkt, PTP, mqtt_client, MQTT_TOPIC):
     """
     Process captured network packets and extract PTP-specific information.
     """
+    from scapy.all import UDP, IP
     ptp_layer = None
     source = "Unknown"
     dport = 0
@@ -189,25 +101,115 @@ def packet_callback(pkt):
         matrix_log("CORE", "PTP", inspect.currentframe().f_code.co_name, f"Raw Payload (Hex): {payload.hex()}", level="INFO")
         matrix_log("CORE", "PTP", inspect.currentframe().f_code.co_name, f"Raw Payload (Length): {len(payload)} bytes", level="INFO")
 
-# ⚡ PRIVILEGE VALIDATION: Root check
-if os.geteuid() != 0:
-    matrix_log("CORE", "PTP", inspect.currentframe().f_code.co_name, "Error: Permission denied. Packet sniffing requires root privileges. "
-          "Try 'sudo python3 managers/PTP/PTPtester.py'", level="INFO")
-    if mqtt_client:
-        mqtt_client.loop_stop()
-        mqtt_client.disconnect()
-    sys.exit(1)
+def main():
+    parser = argparse.ArgumentParser(
+        description="PTP Traffic Sniffer and MQTT Reporter"
+    )
+    parser.add_argument(
+        "--broker", default="localhost", 
+        help="MQTT Broker address (default: localhost)"
+    )
+    parser.add_argument(
+        "--port", type=int, default=1883, 
+        help="MQTT Broker port (default: 1883)"
+    )
+    args = parser.parse_args()
 
-# Notify the user of the sniffer's current operational state.
-matrix_log("CORE", "PTP", inspect.currentframe().f_code.co_name, "Listening for PTP traffic (UDP 319/320)...", level="INFO")
-matrix_log("CORE", "PTP", inspect.currentframe().f_code.co_name, f"Scapy PTP Layer Status: {'Available' if HAS_PTP else 'Not Available'}", level="INFO")
-matrix_log("CORE", "PTP", inspect.currentframe().f_code.co_name, f"MQTT Feedback: {'Active (' + MQTT_TOPIC + ', level="INFO")' if mqtt_client else 'Disabled'}")
+    # ⚡ PRIVILEGE VALIDATION: Root check
+    if os.geteuid() != 0:
+        matrix_log("CORE", "PTP", "main", "Error: Permission denied. Packet sniffing requires root privileges. "
+              "Try 'sudo python3 oaPTP/Methods/PTPtester.py'", level="INFO")
+        sys.exit(1)
 
-# Execute the packet capture engine with a filter for PTP ports.
-sniff(filter="udp port 319 or udp port 320", prn=packet_callback, store=0)
+    # Initialize MQTT communication to bridge packet data to the OPEN-AIR system.
+    MQTT_AVAILABLE = importlib.util.find_spec("paho.mqtt") is not None
 
-# Clean up communication resources upon script termination.
-if mqtt_client:
-    mqtt_client.loop_stop()
-    mqtt_client.disconnect()
+    MQTT_BROKER = args.broker
+    MQTT_PORT = args.port
+    MQTT_TOPIC = "OPEN-AIR/System/PTP/Capture"
 
+    mqtt_client = None
+    if MQTT_AVAILABLE:
+        import paho.mqtt.client as mqtt
+        # Ensure compatibility with both legacy and modern Paho MQTT versions.
+        if hasattr(mqtt, "CallbackAPIVersion"):
+            mqtt_client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION1)
+        else:
+            mqtt_client = mqtt.Client()
+            
+        mqtt_client.connect(MQTT_BROKER, MQTT_PORT, 60)
+        mqtt_client.loop_start()
+
+    # ⚡ DEPENDENCY RESOLUTION: Scapy check
+    SCAPY_SPEC = importlib.util.find_spec("scapy")
+    if SCAPY_SPEC is None:
+        matrix_log("CORE", "PTP", "main", "Error: Scapy not installed. Run 'pip install scapy' ", level="INFO")
+        if mqtt_client:
+            mqtt_client.loop_stop()
+            mqtt_client.disconnect()
+        sys.exit(1)
+
+    from scapy.all import (sniff, UDP, Packet, ByteField, ShortField,
+                            XShortField, LongField, StrFixedLenField, BitField,
+                            bind_layers)
+
+    # Attempt to load specialized PTP definitions from Scapy's contribution library.
+    PTP_SPEC = importlib.util.find_spec("scapy.contrib.ptp")
+    if PTP_SPEC:
+        from scapy.contrib.ptp import PTP
+        HAS_PTP = True
+    else:
+        # Provide a fallback PTP structure if the contrib module is unavailable.
+        class PTP(Packet):
+            name = "PTP"
+            fields_desc = [
+                BitField("transportSpecific", 0, 4),
+                BitField("messageType", 0, 4),
+                BitField("reserved", 0, 4),
+                BitField("versionPTP", 2, 4),
+                ShortField("messageLength", 34),
+                ByteField("domainNumber", 0),
+                ByteField("reserved1", 0),
+                XShortField("flagField", 0),
+                LongField("correctionField", 0),
+                ByteField("reserved2", 0),
+                ByteField("reserved3", 0),
+                ByteField("reserved4", 0),
+                ByteField("reserved5", 0),
+                StrFixedLenField("sourcePortIdentity", b"\x00"*10, 10),
+                ShortField("sequenceId", 0),
+                ByteField("controlField", 0),
+                ByteField("logMessageInterval", 0)
+            ]
+            def guess_payload_class(self, payload):
+                return Packet.guess_payload_class(self, payload)
+        HAS_PTP = True
+
+    # Enable Scapy's automatic protocol identification for PTP traffic.
+    bind_layers(UDP, PTP, dport=319)
+    bind_layers(UDP, PTP, dport=320)
+    bind_layers(UDP, PTP, sport=319)
+    bind_layers(UDP, PTP, sport=320)
+
+    # Notify the user of the sniffer's current operational state.
+    matrix_log("CORE", "PTP", "main", "Listening for PTP traffic (UDP 319/320)...", level="INFO")
+    matrix_log("CORE", "PTP", "main", f"Scapy PTP Layer Status: {'Available' if HAS_PTP else 'Not Available'}", level="INFO")
+    
+    mqtt_status = f"Active ({MQTT_TOPIC})" if mqtt_client else "Disabled"
+    matrix_log("CORE", "PTP", "main", f"MQTT Feedback: {mqtt_status}", level="INFO")
+
+    # Execute the packet capture engine with a filter for PTP ports.
+    try:
+        sniff(filter="udp port 319 or udp port 320", 
+              prn=lambda pkt: packet_callback(pkt, PTP, mqtt_client, MQTT_TOPIC), 
+              store=0)
+    except KeyboardInterrupt:
+        pass
+    finally:
+        # Clean up communication resources upon script termination.
+        if mqtt_client:
+            mqtt_client.loop_stop()
+            mqtt_client.disconnect()
+
+if __name__ == "__main__":
+    main()

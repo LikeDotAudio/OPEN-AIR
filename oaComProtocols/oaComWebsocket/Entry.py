@@ -1,27 +1,34 @@
-# oaComProtocols.oaComWebsocket/Entry.py
-# Author: Gemini (Collaborator)
-# Version: 20260405.1548.2 (updated)
+# oaComWebsocket/Entry.py
+# Author: Anthony Peter Kuzub
+# Version: 20260415.2220.1
+#
+# Description: Gatekeeper for the oaComWebsocket module.
 
-"""
-import sys
 import os
-Entry point for the oaComProtocols.oaComWebsocket module.
-Provides reusable WebSocket client and server functionalities.
-"""
-
+import sys
 import subprocess
-import glob
-
-import websocket # For WebSocket client
-import threading # For threading
-import json
 import time
+from pathlib import Path
 from typing import Optional, Callable, Dict, Any
 
-# Import the actual WebSocketEventTransport class
-from .Core.websocket_transport import WebSocketEventTransport
-# Import the EventTransport ABC if it's used directly in Entry.py
-from .Core.abc import EventTransport
+# Add the project root to sys.path for absolute imports
+current_dir = Path(__file__).parent.absolute()
+project_root = current_dir
+while project_root.parent != project_root:
+    if (project_root / "GEMINI.md").exists():
+        break
+    project_root = project_root.parent
+
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
+
+# Absolute imports with fallback
+try:
+    from oaComProtocols.oaComWebsocket.Core.websocket_transport import WebSocketEventTransport
+    from oaComProtocols.oaComWebsocket.Core.abc import EventTransport
+except ImportError:
+    from Core.websocket_transport import WebSocketEventTransport
+    from Core.abc import EventTransport
 
 # Placeholder for a higher-level WebSocket manager
 class WebSocketManager:
@@ -32,63 +39,89 @@ class WebSocketManager:
         print("WebSocketManager initialized.")
         pass
 
-# --- Test Runner Logic ---
-def run_module_tests():
+def run_tests():
     """
-    Automatically runs tests for the current module if Entry.py is executed directly.
-    Looks for a 'Tests' subdirectory relative to the module's root.
+    Discover and run tests in the local Tests/ directory using unittest via subprocess.
+    Ensures isolation and proper sys.path handling.
     """
-    current_file_path = os.path.abspath(__file__)
-    current_dir = os.path.dirname(current_file_path) # Directory of Entry.py
-    module_root = os.path.dirname(current_dir)     # Root directory of the module (e.g., oaComProtocols.oaComWebsocket)
-    tests_dir = os.path.join(module_root, "Tests")
+    print(f"📡📥📥 [TEST] {Path(__file__).parent.name}: Starting automated test discovery...")
+    test_dir = current_dir / "Tests"
+    
+    if not test_dir.exists():
+        print(f"⚠️ [TEST] {Path(__file__).parent.name}: No Tests/ directory found.")
+        return True
 
-    print(f"Checking for tests in: {tests_dir}")
-
-    if os.path.exists(tests_dir):
-        print(f"Running tests for module '{os.path.basename(module_root)}'...")
-        try:
-            # Construct the command to run pytest for the module's tests directory
-            # Use sys.executable to ensure we use the current Python interpreter's pytest
-            command = [sys.executable, "-m", "pytest", tests_dir]
-            
-            # Execute the command. `capture_output=True` and `text=True` for stdout/stderr.
-            # `check=False` prevents raising an exception if tests fail.
-            result = subprocess.run(command, capture_output=True, text=True, check=False)
-
-            print("\n--- Test Output ---")
-            print(result.stdout)
-            if result.stderr:
-                print("--- Test Errors ---")
-                print(result.stderr)
-            
-            if result.returncode != 0:
-                print(f"Tests for '{os.path.basename(module_root)}' failed with exit code {result.returncode}")
-                # Exit the script with the test failure code if tests fail
-                sys.exit(result.returncode) 
+    env = os.environ.copy()
+    env["PYTHONPATH"] = str(project_root) + os.pathsep + env.get("PYTHONPATH", "")
+    
+    try:
+        rel_test_dir = os.path.relpath(test_dir, project_root)
+        result = subprocess.run(
+            [sys.executable, "-m", "unittest", "discover", "-s", rel_test_dir, "-p", "test_*.py"],
+            cwd=str(project_root),
+            env=env,
+            capture_output=False
+        )
+        if result.returncode in [0, 5]:
+            if result.returncode == 5:
+                print(f"📡📤📤 [TEST] {Path(__file__).parent.name}: No tests found, but discovery succeeded.")
             else:
-                print(f"All tests for '{os.path.basename(module_root)}' passed.")
-                
-        except FileNotFoundError:
-            print("Error: 'pytest' command not found. Please ensure pytest is installed and accessible in your environment.")
-            print("Tests were not executed.")
-            sys.exit(1) # Exit if pytest is not found
-        except Exception as e:
-            print(f"An unexpected error occurred while running tests: {e}")
-            sys.exit(1) # Exit on other exceptions
+                print(f"📡📤📤 [TEST] {Path(__file__).parent.name}: All tests PASSED.")
+            return True
+        else:
+            print(f"📡📤📤 [TEST] {Path(__file__).parent.name}: Tests FAILED.")
+            return False
+    except Exception as e:
+        print(f"🛑 [ERROR] {Path(__file__).parent.name}: Test discovery failed: {e}")
+        return False
+
+def start():
+    """Start the module services."""
+    print(f"🚀 [START] Starting {Path(__file__).parent.name} services...")
+
+def stop():
+    """Stop the module services."""
+    print(f"🛑 [STOP] Stopping {Path(__file__).parent.name} services...")
+
+def status():
+    """Get the module status."""
+    print(f"📊 [STATUS] Checking {Path(__file__).parent.name} status...")
+    return "Running"
+
+if __name__ == "__main__":
+    # Absolute FIRST action: run tests
+    if not run_tests():
+        print("❌ [CRITICAL] Tests failed. Aborting execution.")
+        sys.exit(1)
+    
+    # Standalone execution logic
+    if len(sys.argv) > 1:
+        cmd = sys.argv[1].lower()
+        if cmd == "--start":
+            start()
+            try:
+                while True: time.sleep(1)
+            except KeyboardInterrupt:
+                stop()
+        elif cmd == "--stop":
+            stop()
+        elif cmd == "--status":
+            print(f"Status: {status()}")
+        else:
+            print(f"Unknown command: {cmd}")
     else:
-        print(f"No 'Tests' directory found for module '{os.path.basename(module_root)}' at {tests_dir}. Skipping test execution.")
+        # Default standalone action if no args
+        start()
+        try:
+            while True: time.sleep(1)
+        except KeyboardInterrupt:
+            stop()
 
 __all__ = [
     "WebSocketEventTransport",
     "WebSocketManager",
+    "start",
+    "stop",
+    "status",
+    "run_tests",
 ]
-
-# If this script is run directly, execute the tests first.
-if __name__ == "__main__":
-    run_module_tests()
-    # If tests pass or are skipped, we should ideally call a module-specific main function
-    # or simply allow the script to exit if there's no direct execution logic.
-    # Since this module mainly defines classes for import, we'll just pass.
-    print("Entry point executed after tests.")
-    pass 

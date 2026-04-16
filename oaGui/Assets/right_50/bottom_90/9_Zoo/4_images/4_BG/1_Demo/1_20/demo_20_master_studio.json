@@ -1,125 +1,44 @@
 {
-  "Zoo_images_BG_Demo_20": {
-    "type": "OcaBin",
-    "id": "50.90.9.4.4.1.1.20",
-    "geometry": {
-      "anchor": "NSEW"
-    },
-    "behavior": {
-      "overflow_ns": "auto",
-      "overflow_ew": "auto",
-      "fluid_ew": true
-    },
-    "blocks": {
-      "layout_columns": 3,
-      "column_sizing": [
-        {
-          "weight": 1
+  "type": "OcaBin",
+  "id": "50.90.9.4.4.1.1.20",
+  "geometry": {
+    "anchor": "NSEW"
+  },
+  "behavior": {
+    "overflow": "auto",
+    "fluid_ew": true
+  },
+  "blocks": {
+    "fields": {
+      "Background_Summary_Label": {
+        "type": "_Label",
+        "label": {
+          "En": "Patina: 20 Master Studio | Base: #1e1e1e (flat)",
+          "Fr": "Patina: 20 Master Studio | Base: #1e1e1e (flat)",
+          "De": "Patina: 20 Master Studio | Base: #1e1e1e (flat)",
+          "Es": "Patina: 20 Master Studio | Base: #1e1e1e (flat)"
         },
-        {
-          "weight": 1
-        },
-        {
-          "weight": 1
+        "layout": {
+          "font": 14,
+          "colour": "#00ff00",
+          "sticky": "nsew",
+          "row": 0,
+          "column": 0
         }
-      ],
-      "fields": {
-        "Meter_1": {
-          "type": "_NeedleVUMeter",
-          "label": {
-            "En": "Squircle 1",
-            "Fr": "Squircle 1",
-            "De": "Squircle 1",
-            "Es": "Squircle 1"
-          },
-          "geometry": {
-            "width": 300,
-            "height": 250
-          },
-          "domain": {
-            "primary": {
-              "min": -20.0,
-              "max": 3.0,
-              "value_default": -10.0
-            }
-          },
-          "cosmetics": {
-            "colors": {
-              "bezel": "#111111",
-              "background": "transparent"
-            },
-            "style_overrides": {
-              "bezel_shape": "squircle",
-              "bezel_width": 6,
-              "Pointer_Style": "teardrop",
-              "overlay_style": "aperture_mask"
-            }
-          }
-        },
-        "Meter_2": {
-          "type": "_NeedleVUMeter",
-          "label": {
-            "En": "Octagon 2",
-            "Fr": "Octagon 2",
-            "De": "Octagon 2",
-            "Es": "Octagon 2"
-          },
-          "geometry": {
-            "width": 250,
-            "height": 250
-          },
-          "domain": {
-            "primary": {
-              "min": -20.0,
-              "max": 3.0,
-              "value_default": -8.0
-            }
-          },
-          "cosmetics": {
-            "colors": {
-              "bezel": "#111111",
-              "background": "transparent"
-            },
-            "style_overrides": {
-              "bezel_shape": "octagon",
-              "bezel_width": 6,
-              "Pointer_Style": "knife-edge",
-              "overlay_style": "dome"
-            }
-          }
-        },
-        "Meter_3": {
-          "type": "_NeedleVUMeter",
-          "label": {
-            "En": "Trapezoid 3",
-            "Fr": "Trapezoid 3",
-            "De": "Trapezoid 3",
-            "Es": "Trapezoid 3"
-          },
-          "geometry": {
-            "width": 300,
-            "height": 250
-          },
-          "domain": {
-            "primary": {
-              "min": -20.0,
-              "max": 3.0,
-              "value_default": -6.0
-            }
-          },
-          "cosmetics": {
-            "colors": {
-              "bezel": "#111111",
-              "background": "transparent"
-            },
-            "style_overrides": {
-              "bezel_shape": "trapezoid",
-              "bezel_width": 6,
-              "Pointer_Style": "knife-edge",
-              "overlay_style": "dome"
-            }
-          }
-        }
+      }
+    }
+  },
+  "background": {
+    "parameters": {
+      "base_material": {
+        "color": "#1e1e1e"
+      },
+      "studio_haze": {
+        "enabled": true,
+        "intensity": 0.1
+      },
+      "screws": {
+        "enabled": true
       }
     }
   }

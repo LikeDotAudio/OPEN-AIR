@@ -122,6 +122,7 @@ class OscRxServer:
                 self.server.stop()
             else:
                 self.server.shutdown()
+                self.server.server_close()
                 if self._thread:
                     self._thread.join(timeout=2.0)
             if _is_debug():

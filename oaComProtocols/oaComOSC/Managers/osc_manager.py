@@ -30,15 +30,19 @@ class OSCManager:
     """
 
     def __init__(self, context=None, state_cache_manager=None, mqtt_connection_manager=None, 
-                 run_bridge=True):
-        # ⚡ ALWAYS ONLINE: OSC Bridge is now a mandatory system service.
-        partition_id = os.environ.get("OPEN_AIR_PARTITION_ID", "CORE")
+                 run_bridge=None):
+        # ⚡ PARTITION AWARENESS: Default run_bridge based on environment if not explicit.
+        partition_id = os.environ.get("OPEN_AIR_PARTITION_ID", "STANDALONE")
         
+        if run_bridge is None:
+            self.run_bridge = (partition_id in ["CORE", "STANDALONE"])
+        else:
+            self.run_bridge = run_bridge
+
         self.context = context
-        self.run_bridge = True
         if partition_id == "UI":
              matrix_log("comms", "osc", "__init__",
-                        "ℹ️ OSC Bridge active in UI partition. Ensure port 8888 is available.", "INFO")
+                        "ℹ️ OSC Bridge active in UI partition (Observer Mode).", "INFO")
 
         matrix_log("comms", "osc", "__init__",
                    "Initializing Mandatory OSC Bridge...", "INFO")
@@ -166,9 +170,18 @@ class OSCManager:
 
     def _start_workers(self):
         """Internal helper to start RX/TX workers."""
+        if not self.run_bridge:
+            matrix_log("comms", "osc", "_start_workers", 
+                       "ℹ️ OSC Bridge in Observer Mode. Hardware workers will NOT be started.", "INFO")
+            return
+
         rx_port = getattr(app_constants, "OSC_RX_PORT", 8888)
         tx_host = getattr(app_constants, "OSC_REMOTE_IP", "127.0.0.1")
         tx_port = getattr(app_constants, "OSC_TX_PORT", 9000)
+
+        # ⚡ PORT CONFLICT RESOLUTION: Zap any unauthorized process holding our RX port.
+        from oaComProtocols.oaComREST.Methods.port_utils import zap_port
+        zap_port(rx_port)
 
         try:
             # RX Server

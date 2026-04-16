@@ -9,7 +9,7 @@ from unittest.mock import MagicMock, patch
 import tkinter as tk
 import matplotlib
 matplotlib.use('Agg')
-from oaGuiElements.Core.graphing.graphing.dynamic_graph import GraphPlotter
+from oaGuiElements.Core.graphing.Methods.dynamic_graph import GraphPlotter
 
 class TestGraphPlotter(unittest.TestCase):
 
@@ -32,7 +32,7 @@ class TestGraphPlotter(unittest.TestCase):
             mock_frame.winfo_exists.return_value = True
             self.patchers.append(patch('tkinter.Frame', return_value=mock_frame))
             mock_canvas_agg = MagicMock()
-            self.patchers.append(patch('oaGuiElements.Core.graphing.graphing.graph.FigureCanvasTkAgg', return_value=mock_canvas_agg))
+            self.patchers.append(patch('oaGuiElements.Core.graphing.graph.FigureCanvasTkAgg', return_value=mock_canvas_agg))
             for p in self.patchers:
                 p.start()
         if isinstance(self.root, MagicMock):

@@ -1,15 +1,43 @@
 {
-  "Zoo_images_BG_Demo_3": {
-    "type": "OcaBin",
-    "id": "50.90.9.4.4.2.2.2",
-    "geometry": {
-      "anchor": "NSEW"
-    },
-    "behavior": {
-      "overflow_ns": "auto",
-      "overflow_ew": "auto",
-      "fluid_ew": true
-    },
-    "blocks": {}
+  "type": "OcaBin",
+  "id": "50.90.9.4.4.2.2.2",
+  "geometry": {
+    "anchor": "NSEW"
+  },
+  "behavior": {
+    "overflow": "auto",
+    "fluid_ew": true
+  },
+  "blocks": {
+    "fields": {
+      "Background_Summary_Label": {
+        "type": "_Label",
+        "label": {
+          "En": "Patina: 2 3 Black Gloss Enamel | Base: #050505 (flat) | Paint: N/A (0.8)",
+          "Fr": "Patina: 2 3 Black Gloss Enamel | Base: #050505 (flat) | Paint: N/A (0.8)",
+          "De": "Patina: 2 3 Black Gloss Enamel | Base: #050505 (flat) | Paint: N/A (0.8)",
+          "Es": "Patina: 2 3 Black Gloss Enamel | Base: #050505 (flat) | Paint: N/A (0.8)"
+        },
+        "layout": {
+          "font": 14,
+          "colour": "#00ff00",
+          "sticky": "nsew",
+          "row": 0,
+          "column": 0
+        }
+      }
+    }
+  },
+  "background": {
+    "parameters": {
+      "base_material": {
+        "color": "#050505",
+        "texture_type": "flat"
+      },
+      "paint_layer": {
+        "opacity": 0.8,
+        "gradient_intensity": 0.4
+      }
+    }
   }
 }

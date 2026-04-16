@@ -6,15 +6,16 @@
 
 import orjson
 import os
+import inspect
 from pathlib import Path
 from oaLogging.Core.logger import WYSIWYG_LOGGER
+from oaLogging.Methods.matrix_gate import matrix_log
+
 logger = WYSIWYG_LOGGER.bind(protocol="WYSIWYG")
-
-LOCAL_DEBUG = False    # Set to False in production, True for dev on this file
-
 
 class GrabBagLoader:
     """Discovers and loads modular UI components from the builder library."""
+    _global_library_cache = None
 
     def __init__(self, builder_root=None):
         # ⚡ AUTONOMY: Resolve project-standard path if not provided
@@ -28,7 +29,13 @@ class GrabBagLoader:
             
         self.builder_root = Path(builder_root)
         self.library = {}
-        if LOCAL_DEBUG: logger.debug(f"🎒 GrabBagLoader: Initialized. Scanning root: {self.builder_root}")
+        matrix_log(
+            system="ui", 
+            element="grab_bag", 
+            func_name=inspect.currentframe().f_code.co_name,
+            message=f"📦📦📦 [PACKAGE] GrabBagLoader: Initialized. Scanning root: {self.builder_root}",
+            level="DEBUG"
+        )
 
     def scan_library(self):
         """Crawls the builder directory for folders containing sample.json."""
@@ -39,7 +46,13 @@ class GrabBagLoader:
             logger.error(f"❌ GrabBagLoader: Builder root '{self.builder_root}' does not exist.")
             return self.library
 
-        if LOCAL_DEBUG: logger.info(f"🎒 GrabBagLoader: Starting library scan in {self.builder_root}...")
+        matrix_log(
+            system="ui", 
+            element="grab_bag", 
+            func_name=inspect.currentframe().f_code.co_name,
+            message=f"📦📦📦 [PACKAGE] GrabBagLoader: Starting library scan in {self.builder_root}...",
+            level="INFO"
+        )
         
         # We need to scan recursively since oaGuiElements has subfolders (Core/utils, etc.)
         for sample_file in self.builder_root.rglob("sample.json"):
@@ -66,7 +79,8 @@ class GrabBagLoader:
                                 break
                     
                     if not widget_type:
-                        if LOCAL_DEBUG: logger.warning(f"  ⚠️ Skipping {item.name}: No valid widget type found in sample.")
+                        # MANDATE: Warnings are NOT gated.
+                        logger.warning(f"⚠️ GrabBagLoader: Skipping {item.name}: No valid widget type found in sample.")
                         continue
 
                     # Use directory name as component name (e.g., 'builder_knob' -> 'knob')
@@ -76,11 +90,23 @@ class GrabBagLoader:
                         "schema": widget_config,
                         "type": widget_type
                     }
-                    if LOCAL_DEBUG: logger.debug(f"  ↳ Found Component: '{name}' (Type: {widget_type})")
+                    matrix_log(
+                        system="ui", 
+                        element="grab_bag", 
+                        func_name=inspect.currentframe().f_code.co_name,
+                        message=f"📦📦📦 [PACKAGE]   ↳ Found Component: '{name}' (Type: {widget_type})",
+                        level="DEBUG"
+                    )
             except Exception as e:
                 logger.exception(f"❌ GrabBagLoader: Error loading sample from {item.name}")
         
-        if LOCAL_DEBUG: logger.success(f"✅ GrabBagLoader: Scan complete. Found {len(self.library)} valid components.")
+        matrix_log(
+            system="ui", 
+            element="grab_bag", 
+            func_name=inspect.currentframe().f_code.co_name,
+            message=f"📦📦📦 [PACKAGE] GrabBagLoader: Scan complete. Found {len(self.library)} valid components.",
+            level="SUCCESS"
+        )
         return self.library
 
     def get_component(self, name):

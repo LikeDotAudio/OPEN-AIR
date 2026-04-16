@@ -116,6 +116,7 @@ class TreeRefactor(ttk.Frame):
         
         # Selection binding for focus sync
         self.tree.bind("<<TreeviewSelect>>", self._on_tree_select)
+        self.tree.bind("<<TreeviewOpen>>", self._on_tree_open)
 
     def _on_state_updated(self, json_data, source=None):
         """Refreshes the tree when the master state changes."""
@@ -148,9 +149,9 @@ class TreeRefactor(ttk.Frame):
                 
                 full_path = f"{parent_path}.{i}" if parent_path else str(i)
                 
-                node_id = self.tree.insert(parent_node, "end", text=node_text, values=(full_path, node_type), open=True)
-                if isinstance(value, (dict, list)):
-                    self._populate_tree(node_id, value)
+                node_id = self.tree.insert(parent_node, "end", text=node_text, values=(full_path, node_type), open=False)
+                if isinstance(value, (dict, list)) and len(value) > 0:
+                    self.tree.insert(node_id, "end", text="Loading...", values=("dummy", "dummy"))
             return
 
         if not isinstance(data, dict): return
@@ -207,11 +208,24 @@ class TreeRefactor(ttk.Frame):
             
             full_path = f"{parent_path}.{relative_path}" if parent_path else relative_path
 
-            node_id = self.tree.insert(parent_node, "end", text=node_text, values=(full_path, node_type), open=True)
+            node_id = self.tree.insert(parent_node, "end", text=node_text, values=(full_path, node_type), open=False)
             
-            # Recurse if it's a container
-            if isinstance(value, (dict, list)):
-                self._populate_tree(node_id, value)
+            # Add dummy node if it's a container to allow lazy loading
+            if isinstance(value, (dict, list)) and len(value) > 0:
+                self.tree.insert(node_id, "end", text="Loading...", values=("dummy", "dummy"))
+
+    def _on_tree_open(self, event):
+        """Lazy loads children when a node is expanded."""
+        node_id = self.tree.focus()
+        children = self.tree.get_children(node_id)
+        if len(children) == 1 and self.tree.item(children[0], "values")[0] == "dummy":
+            # Remove dummy node
+            self.tree.delete(children[0])
+            # Fetch data and populate
+            path = self.tree.item(node_id, "values")[0]
+            data = state_manager.get_value_at_path(path)
+            if data is not None:
+                self._populate_tree(node_id, data)
 
     def _on_tree_select(self, event):
         """Syncs selection with the global focus."""

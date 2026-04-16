@@ -1,179 +1,45 @@
 {
-  "Zoo_images_BG_Demo_11": {
-    "type": "OcaBin",
-    "id": "50.90.9.4.4.1.1.11",
-    "geometry": {
-      "anchor": "NSEW"
-    },
-    "behavior": {
-      "overflow_ns": "auto",
-      "overflow_ew": "auto",
-      "fluid_ew": true
-    },
-    "blocks": {
-      "fields": {
-        "Meter_1": {
-          "type": "_NeedleVUMeter",
-          "label": {
-            "En": "Octagon 1",
-            "Fr": "Octagon 1",
-            "De": "Octagon 1",
-            "Es": "Octagon 1"
-          },
-          "geometry": {
-            "width": 300,
-            "height": 300
-          },
-          "domain": {
-            "primary": {
-              "min": -20.0,
-              "max": 3.0,
-              "value_default": -10.0
-            }
-          },
-          "cosmetics": {
-            "colors": {
-              "bezel": "#111111"
-            },
-            "style_overrides": {
-              "bezel_shape": "octagon",
-              "bezel_width": 6,
-              "Pointer_Style": "knife-edge",
-              "overlay_style": "dome"
-            }
-          },
-          "label_active": {
-            "En": "Octagon 1",
-            "Fr": "Octagon 1",
-            "De": "Octagon 1",
-            "Es": "Octagon 1"
-          },
-          "background_color": "transparent",
-          "width": 400,
-          "height": 200,
-          "Orientation": "vertical",
-          "layout": {},
-          "bezel_shape": "octagon",
-          "bezel_width": 6,
-          "Pointer_Style": "knife-edge",
-          "overlay_style": "dome",
-          "min": -20.0,
-          "value_min": -20.0,
-          "max": 3.0,
-          "value_max": 3.0,
-          "value_default": -10.0,
-          "value": -10.0,
-          "default_value": -10.0,
-          "path": "Meter_1"
+  "type": "OcaBin",
+  "id": "50.90.9.4.4.1.1.11",
+  "geometry": {
+    "anchor": "NSEW"
+  },
+  "behavior": {
+    "overflow": "auto",
+    "fluid_ew": true
+  },
+  "blocks": {
+    "fields": {
+      "Background_Summary_Label": {
+        "type": "_Label",
+        "label": {
+          "En": "Patina: 11 Neve Grey | Base: #8b8d8e (flat)",
+          "Fr": "Patina: 11 Neve Grey | Base: #8b8d8e (flat)",
+          "De": "Patina: 11 Neve Grey | Base: #8b8d8e (flat)",
+          "Es": "Patina: 11 Neve Grey | Base: #8b8d8e (flat)"
         },
-        "Meter_2": {
-          "type": "_NeedleVUMeter",
-          "label": {
-            "En": "Hex 2",
-            "Fr": "Hex 2",
-            "De": "Hex 2",
-            "Es": "Hex 2"
-          },
-          "geometry": {
-            "width": 400,
-            "height": 300
-          },
-          "domain": {
-            "primary": {
-              "min": -20.0,
-              "max": 3.0,
-              "value_default": -8.0
-            }
-          },
-          "cosmetics": {
-            "colors": {
-              "bezel": "#111111"
-            },
-            "style_overrides": {
-              "bezel_shape": "hex",
-              "bezel_width": 6,
-              "Pointer_Style": "knife-edge",
-              "overlay_style": "dome"
-            }
-          },
-          "label_active": {
-            "En": "Hex 2",
-            "Fr": "Hex 2",
-            "De": "Hex 2",
-            "Es": "Hex 2"
-          },
-          "background_color": "transparent",
-          "width": 400,
-          "height": 200,
-          "Orientation": "vertical",
-          "layout": {},
-          "bezel_shape": "hex",
-          "bezel_width": 6,
-          "Pointer_Style": "knife-edge",
-          "overlay_style": "dome",
-          "min": -20.0,
-          "value_min": -20.0,
-          "max": 3.0,
-          "value_max": 3.0,
-          "value_default": -8.0,
-          "value": -8.0,
-          "default_value": -8.0,
-          "path": "Meter_2"
-        },
-        "Meter_3": {
-          "type": "_NeedleVUMeter",
-          "label": {
-            "En": "Hotdog 3",
-            "Fr": "Hotdog 3",
-            "De": "Hotdog 3",
-            "Es": "Hotdog 3"
-          },
-          "geometry": {
-            "width": 250,
-            "height": 250
-          },
-          "domain": {
-            "primary": {
-              "min": -20.0,
-              "max": 3.0,
-              "value_default": -6.0
-            }
-          },
-          "cosmetics": {
-            "colors": {
-              "bezel": "#111111"
-            },
-            "style_overrides": {
-              "bezel_shape": "hotdog",
-              "bezel_width": 6,
-              "Pointer_Style": "knife-edge",
-              "overlay_style": "dome"
-            }
-          },
-          "label_active": {
-            "En": "Hotdog 3",
-            "Fr": "Hotdog 3",
-            "De": "Hotdog 3",
-            "Es": "Hotdog 3"
-          },
-          "background_color": "transparent",
-          "width": 250,
-          "height": 250,
-          "Orientation": "vertical",
-          "layout": {},
-          "bezel_shape": "hotdog",
-          "bezel_width": 6,
-          "Pointer_Style": "knife-edge",
-          "overlay_style": "dome",
-          "min": -20.0,
-          "value_min": -20.0,
-          "max": 3.0,
-          "value_max": 3.0,
-          "value_default": -6.0,
-          "value": -6.0,
-          "default_value": -6.0,
-          "path": "Meter_3"
+        "layout": {
+          "font": 14,
+          "colour": "#00ff00",
+          "sticky": "nsew",
+          "row": 0,
+          "column": 0
         }
+      }
+    }
+  },
+  "background": {
+    "parameters": {
+      "base_material": {
+        "color": "#8b8d8e",
+        "texture_type": "flat"
+      },
+      "screws": {
+        "enabled": true,
+        "locations": [
+          "top",
+          "bottom"
+        ]
       }
     }
   }

@@ -49,6 +49,10 @@ class UvicornWorker(threading.Thread):
         current_port = self.port
 
         while self._should_run:
+            # ⚡ PORT CONFLICT RESOLUTION: Zap any unauthorized process holding our REST port.
+            from ..Methods.port_utils import zap_port
+            zap_port(current_port)
+
             if LOCAL_DEBUG:
                 matrix_log("comms", "rest", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"📡⚙️🚀 [REST] Starting Uvicorn on {self.host}:{current_port}", "DEBUG")
             

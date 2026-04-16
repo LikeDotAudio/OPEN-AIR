@@ -67,19 +67,35 @@ def zap_port(port):
         return False
 
     if is_friendly_process(proc):
-        matrix_log("comms", "rest", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"ℹ️ [PORT] Port {port} is held by a friendly/sibling process ({proc.pid}). Skipping zap.", "DEBUG")
+        matrix_log("comms", "rest", "zap_port", f"ℹ️ [PORT] Port {port} is held by a friendly/sibling process ({proc.pid}). Skipping zap.", "DEBUG")
         return False
 
     try:
-        logger.warning(f"⚡ [PORT] Zapping UNAUTHORIZED process {proc.pid} ({proc.name()}) on port {port}...")
+        pid = proc.pid
+        name = proc.name()
+        logger.warning(f"⚡ [PORT] Zapping UNAUTHORIZED process {pid} ({name}) on port {port}...")
+
         proc.terminate()
-        proc.wait(timeout=3)
-        return True
-    except Exception as e:
-        logger.error(f"❌ [PORT] Failed to zap unauthorized process: {e}")
         try:
-            proc.kill()
+            # ⚡ INCREASED TIMEOUT: Give process more time to close files/sockets
+            proc.wait(timeout=3)
             return True
-        except:
-            pass
+        except psutil.TimeoutExpired:
+            logger.warning(f"⚠️ [PORT] Process {pid} did not terminate gracefully. Escalating to SIGKILL...")
+            proc.kill()
+            try:
+                proc.wait(timeout=2)
+                # Small sleep to allow OS to actually release the port binding
+                import time
+                time.sleep(0.5)
+                return True
+            except psutil.TimeoutExpired:
+                logger.error(f"❌ [PORT] Failed to zap unauthorized process: timeout after wait (pid={pid}, name='{name}')")
+                return False
+
+    except (psutil.NoSuchProcess, psutil.AccessDenied) as e:
+        logger.error(f"❌ [PORT] Access denied or process vanished while zapping {port}: {e}")
+    except Exception as e:
+        logger.error(f"❌ [PORT] Unexpected failure zapping {port}: {e}")
+
     return False

@@ -30,9 +30,9 @@ from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
 
 # --- EXTRACTED CORE MODULES ---
-from .ptp_packet_schema import PTP, SCAPY_AVAILABLE
-from .ptp_packet_parser import PTPPacketParser
-from .ptp_observer_registry import PTPObserverRegistry
+from oaPTP.Core.ptp_packet_schema import PTP, SCAPY_AVAILABLE
+from oaPTP.Core.ptp_packet_parser import PTPPacketParser
+from oaPTP.Core.ptp_observer_registry import PTPObserverRegistry
 from oaComProtocols.oaComMQTT.Core.mqtt_message import MqttMessage
 
 

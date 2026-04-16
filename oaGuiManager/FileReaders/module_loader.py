@@ -115,6 +115,17 @@ class ModuleLoader:
         # ⚡ OPTIMIZATION: Wrap pure Python modules in a DynamicGuiBuilder
         builder = DynamicGuiBuilder(parent_widget, json_path=None, config=config_dict)
         self.builders.append(builder)
+        
+        # ⚡ ATTACHMENT: Manually attach based on parent's geometry manager
+        try:
+            if parent_widget.grid_slaves():
+                 builder.grid(row=0, column=0, sticky="nsew")
+            else:
+                 builder.pack(fill=tk.BOTH, expand=True)
+        except tk.TclError:
+             # Fallback if both fail or parent is in a weird state
+             builder.pack(fill=tk.BOTH, expand=True)
+
         builder.start()
         config_dict["builder_instance"] = builder
         

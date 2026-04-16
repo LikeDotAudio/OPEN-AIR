@@ -1,43 +1,30 @@
 # oaGui/Entry.py
-# Author: Gemini (Collaborator)
-# Version: 20260405.2215.1
+# Author: Anthony Peter Kuzub
+# Version: 20260415.2210.1
 #
-# Description: Gatekeeper for the consolidated GUI Framework.
-# Combines structural assembly, directory scanning, and layout parsing.
+# Description: Gatekeeper for the oaGui module.
 
 import sys
+import os
 from pathlib import Path
-from .Managers.gui_display import Application
-from .Managers.gui_batch import GuiBatchBuilderMixin
-from .Managers.gui_mqtt import GuiMqttManagerMixin
-from .Core.layout_parser import LayoutParser
-from .Core.directory import DirectoryBuilderMixin
 
-__all__ = [
-    "Application",
-    "GuiBatchBuilderMixin",
-    "GuiMqttManagerMixin",
-    "LayoutParser",
-    "DirectoryBuilderMixin"
-]
+# Standard project_root resolution
+current_dir = Path(__file__).parent.absolute()
+project_root = current_dir
+while project_root.parent != project_root:
+    if (project_root / "GEMINI.md").exists():
+        break
+    project_root = project_root.parent
 
-def run_tests():
-    """
-    Standard test runner for the module.
-    """
-    import unittest
-    import pathlib
-    
-    print(f"🔍 Discovering and running tests for oaGui...")
-    test_dir = pathlib.Path(__file__).parent.parent / "Tests"
-    if not test_dir.is_dir():
-        print("❌ No 'Tests/' directory found.")
-        return
+# Ensure the project root is in sys.path for absolute imports
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
 
-    loader = unittest.TestLoader()
-    suite = loader.discover(str(test_dir), pattern='test_*.py')
-    runner = unittest.TextTestRunner(verbosity=2)
-    runner.run(suite)
+from oaGui.Managers.gui_display import Application
+from oaGui.Managers.gui_batch import GuiBatchBuilderMixin
+from oaGui.Managers.gui_mqtt import GuiMqttManagerMixin
+from oaGui.Core.layout_parser import LayoutParser
+from oaGui.Core.directory import DirectoryBuilderMixin
 
 def start_gui():
     """Starts the main application GUI."""
@@ -51,8 +38,90 @@ def start_gui():
     
     root.mainloop()
 
+
+def run_tests():
+    """
+    Discover and run tests in the local Tests/ directory using unittest via subprocess.
+    Ensures isolation and proper sys.path handling.
+    """
+    import subprocess
+    
+    print(f"📡📥📥 [TEST] {Path(__file__).parent.name}: Starting automated test discovery...")
+    test_dir = current_dir / "Tests"
+    
+    if not test_dir.exists():
+        print(f"📡📤📤 [TEST] {Path(__file__).parent.name}: No Tests/ directory found.")
+        return True
+
+    env = os.environ.copy()
+    env["PYTHONPATH"] = str(project_root) + os.pathsep + env.get("PYTHONPATH", "")
+    
+    try:
+        rel_test_dir = os.path.relpath(test_dir, project_root)
+        result = subprocess.run(
+            [sys.executable, "-m", "unittest", "discover", "-s", rel_test_dir, "-p", "test_*.py"],
+            cwd=str(project_root),
+            env=env,
+            capture_output=False
+        )
+        if result.returncode == 0:
+            print(f"📡📤📤 [TEST] {Path(__file__).parent.name}: All tests PASSED.")
+            return True
+        else:
+            print(f"📡📤📤 [TEST] {Path(__file__).parent.name}: Tests FAILED.")
+            return False
+    except Exception as e:
+        print(f"🛑 [ERROR] {Path(__file__).parent.name}: Test discovery failed: {e}")
+        return False
+
+def start():
+    """Start the module services."""
+    print(f"🚀 [START] Starting {Path(__file__).parent.name} services...")
+    # Optional: If this is the main GUI entry, start the GUI
+    # start_gui()
+
+def stop():
+    """Stop the module services."""
+    print(f"🛑 [STOP] Stopping {Path(__file__).parent.name} services...")
+
+def status():
+    """Get the module status."""
+    print(f"📊 [STATUS] Checking {Path(__file__).parent.name} status...")
+    return "Running"
+
 if __name__ == "__main__":
-    if "gui" in sys.argv:
-        start_gui()
+    # Absolute FIRST action: run tests
+    if not run_tests():
+        print("❌ [CRITICAL] Tests failed. Aborting execution.")
+        sys.exit(1)
+    
+    # Standalone execution logic
+    if len(sys.argv) > 1:
+        cmd = sys.argv[1].lower()
+        if cmd == "--start":
+            start()
+        elif cmd == "--stop":
+            stop()
+        elif cmd == "--status":
+            print(f"Status: {status()}")
+        elif cmd == "--gui":
+            start_gui()
+        else:
+            print(f"Unknown command: {cmd}")
     else:
-        run_tests()
+        # Default standalone action if no args
+        start()
+
+# Standardized exports
+__all__ = [
+    "Application",
+    "GuiBatchBuilderMixin",
+    "GuiMqttManagerMixin",
+    "LayoutParser",
+    "DirectoryBuilderMixin",
+    "start",
+    "stop",
+    "status",
+    "run_tests",
+    "start_gui"
+]

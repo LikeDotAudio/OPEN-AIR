@@ -1,19 +1,27 @@
 # oaLogging/Entry.py
 # Author: Anthony Peter Kuzub
-# Version: 20260330.1030.1 # Fixed exports and removed nonexistent Logger class
+# Version: 20260415.2210.1
 #
-# Description: Logging Module Entry Point.
+# Description: Gatekeeper for the oaLogging module.
 
 import sys
 import os
 from pathlib import Path
 
-"""
-oaLogging/Entry.py - The sole orchestrator for the Logging Module.
-"""
+# Standard project_root resolution
+current_dir = Path(__file__).parent.absolute()
+project_root = current_dir
+while project_root.parent != project_root:
+    if (project_root / "GEMINI.md").exists():
+        break
+    project_root = project_root.parent
+
+# Ensure the project root is in sys.path for absolute imports
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
 
 # --- Core Exports ---
-from .Core.logger import (
+from oaLogging.Core.logger import (
     logger,
     initialize_logging,
     initialize_test_logging,
@@ -36,7 +44,7 @@ from .Core.logger import (
 )
 
 # --- Exception Exports ---
-from .Core.exceptions import (
+from oaLogging.Core.exceptions import (
     OpenAirError,
     VocalError,
     ConfigurationError,
@@ -49,10 +57,10 @@ from .Core.exceptions import (
 )
 
 # --- Manager Exports ---
-from .Managers.log_filter_engine import LogFilterEngine
+from oaLogging.Managers.log_filter_engine import LogFilterEngine
 
 # --- Method Exports ---
-from .Methods.error_handling import (
+from oaLogging.Methods.error_handling import (
     vocal_failure_handler,
     vocal_capture
 )
@@ -60,7 +68,6 @@ from .Methods.error_handling import (
 class LoggingEntry:
     """Entry point for logging management services."""
     def __init__(self):
-        # print("📡📥📥 [INBOUND] Initializing LoggingEntry...")
         self.log_filter_engine = LogFilterEngine()
 
     def start(self, config=None, log_dir=None, partition="SYS"):
@@ -70,16 +77,82 @@ class LoggingEntry:
 
     def stop(self):
         """Stops the logging service."""
-        # Loguru doesn't require explicit stop for basic sinks, 
-        # but if we use custom sinks with threads (like BatchLogSink),
-        # we might need to handle cleanup if we had references to them.
         pass
 
     def status(self):
         """Returns the current status of the logging service."""
         return "active"
 
-# Standardized exports for the Gatekeeper pattern.
+def run_tests():
+    """
+    Discover and run tests in the local Tests/ directory using unittest via subprocess.
+    Ensures isolation and proper sys.path handling.
+    """
+    import subprocess
+    
+    print(f"📡📥📥 [TEST] {Path(__file__).parent.name}: Starting automated test discovery...")
+    test_dir = current_dir / "Tests"
+    
+    if not test_dir.exists():
+        print(f"📡📤📤 [TEST] {Path(__file__).parent.name}: No Tests/ directory found.")
+        return True
+
+    env = os.environ.copy()
+    env["PYTHONPATH"] = str(project_root) + os.pathsep + env.get("PYTHONPATH", "")
+    
+    try:
+        rel_test_dir = os.path.relpath(test_dir, project_root)
+        result = subprocess.run(
+            [sys.executable, "-m", "unittest", "discover", "-s", rel_test_dir, "-p", "test_*.py"],
+            cwd=str(project_root),
+            env=env,
+            capture_output=False
+        )
+        if result.returncode == 0:
+            print(f"📡📤📤 [TEST] {Path(__file__).parent.name}: All tests PASSED.")
+            return True
+        else:
+            print(f"📡📤📤 [TEST] {Path(__file__).parent.name}: Tests FAILED.")
+            return False
+    except Exception as e:
+        print(f"🛑 [ERROR] {Path(__file__).parent.name}: Test discovery failed: {e}")
+        return False
+
+def start():
+    """Start the module services."""
+    print(f"🚀 [START] Starting {Path(__file__).parent.name} services...")
+
+def stop():
+    """Stop the module services."""
+    print(f"🛑 [STOP] Stopping {Path(__file__).parent.name} services...")
+
+def status():
+    """Get the module status."""
+    print(f"📊 [STATUS] Checking {Path(__file__).parent.name} status...")
+    return "Running"
+
+if __name__ == "__main__":
+    # Absolute FIRST action: run tests
+    if not run_tests():
+        print("❌ [CRITICAL] Tests failed. Aborting execution.")
+        sys.exit(1)
+    
+    # Standalone execution logic
+    if len(sys.argv) > 1:
+        cmd = sys.argv[1].lower()
+        if cmd == "--start":
+            start()
+        elif cmd == "--stop":
+            stop()
+        elif cmd == "--status":
+            print(f"Status: {status()}")
+        else:
+            print(f"Unknown command: {cmd}")
+    else:
+        # Default standalone action if no args
+        start()
+
+# Standardized exports
 __all__ = [
     "LoggingEntry",
     "logger",
@@ -112,75 +185,9 @@ __all__ = [
     "OSC_LOGGER",
     "ROUTER_LOGGER",
     "FAILURE_LOGGER",
-    "TEST_LOGGER"
+    "TEST_LOGGER",
+    "start",
+    "stop",
+    "status",
+    "run_tests"
 ]
-
-def run_tests():
-    """
-    Discovers and runs all tests within the oaLogging/Tests/ directory.
-    """
-    print("🔍 Discovering and running tests for oaLogging...")
-    test_dir = Path(__file__).parent / "Tests"
-    if not test_dir.is_dir():
-        print("❌ No 'Tests/' directory found.")
-        return
-
-    test_files = sorted([f for f in test_dir.glob("test_*.py")])
-    if not test_files:
-        print("❌ No test files found (expected pattern: test_*.py).")
-        return
-
-    print(f"Found {len(test_files)} test files. Executing...")
-    
-    import subprocess
-    
-    all_tests_passed = True
-    for test_file in test_files:
-        print(f"\n--- Running: {test_file.name} ---")
-        try:
-            # Get the module path relative to the project root for the test runner
-            relative_test_file_path = test_file.relative_to(Path(__file__).parent.parent) # Path from OPEN-AIR root
-            module_path_for_runner = str(relative_test_file_path).replace(os.sep, '.')[:-3] # Remove .py extension
-
-            # Ensure the current directory is the project root so Python can find modules
-            original_cwd = os.getcwd()
-            os.chdir(Path(__file__).parent.parent) 
-
-            result = subprocess.run(
-                [sys.executable, "-m", "unittest", module_path_for_runner],
-                capture_output=True,
-                text=True,
-                check=False
-            )
-            
-            print(result.stdout)
-            if result.stderr:
-                print(result.stderr)
-            
-            if result.returncode != 0:
-                all_tests_passed = False
-                print(f"❌ Test failed for {test_file.name} with exit code {result.returncode}")
-            else:
-                print(f"✅ Tests passed for {test_file.name}")
-
-        except Exception as e:
-            print(f"❌ An error occurred while running tests for {test_file.name}: {e}")
-            all_tests_passed = False
-        finally:
-            os.chdir(original_cwd)
-
-    if all_tests_passed:
-        print("\n🎉 All tests for oaLogging passed!")
-    else:
-        print("\n💔 Some tests for oaLogging failed.")
-
-if __name__ == "__main__":
-    # If no arguments are provided, default to running tests.
-    # Otherwise, assume specific commands are intended.
-    if len(sys.argv) > 1:
-        print("Executing command...")
-        # In a real application, you'd parse sys.argv and call the appropriate functions.
-        # For this task, we assume direct execution without specific arguments implies testing.
-    else:
-        run_tests()
-

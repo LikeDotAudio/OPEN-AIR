@@ -3,7 +3,7 @@
 # Version: 20260331.2230.2
 #
 # Description: Pure Rust asynchronous CSV writer (No Python fallback).
-from .oaCSVWriter_rs from oaRustCore import oa_csv_writer_rs as oacsvwriter_rs
+from oaRustCore import oa_csv_writer_rs as oacsvwriter_rs
 
 LOCAL_DEBUG = False
 

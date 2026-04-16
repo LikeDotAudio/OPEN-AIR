@@ -1,28 +1,61 @@
 {
-    "master_volume": 0.4300000071525574,
+    "master_volume": 0.5400000214576721,
     "available_devices": [
         {
-            "name": "pw_id_35",
-            "description": "GP104 High Definition Audio Controller Digital Stereo (HDMI 2)",
-            "sample_rate": 48000,
-            "channels": 2,
-            "volume": 0.4300000071525574,
-            "is_default": true
-        },
-        {
-            "name": "pw_id_54",
+            "name": "54",
             "description": "Mbox 2 Analog Stereo",
             "sample_rate": 48000,
             "channels": 2,
             "volume": 0.7599999904632568,
             "is_default": false
+        },
+        {
+            "name": "65",
+            "description": "GP104 High Definition Audio Controller Digital Stereo (HDMI 2)",
+            "sample_rate": 48000,
+            "channels": 2,
+            "volume": 0.5400000214576721,
+            "is_default": true
+        },
+        {
+            "name": "39",
+            "description": "Mbox 2 Analog Stereo",
+            "sample_rate": 48000,
+            "channels": 2,
+            "volume": 1.0,
+            "is_default": true
+        },
+        {
+            "name": "77",
+            "description": "Google Chrome",
+            "sample_rate": 48000,
+            "channels": 2,
+            "volume": 1.0,
+            "is_default": false
+        },
+        {
+            "name": "73",
+            "description": "output_FR       > HDMI 1:playback_FR\t[active]",
+            "sample_rate": 48000,
+            "channels": 2,
+            "volume": 1.0,
+            "is_default": false
+        },
+        {
+            "name": "83",
+            "description": "output_FL       > HDMI 1:playback_FL\t[active]",
+            "sample_rate": 48000,
+            "channels": 2,
+            "volume": 1.0,
+            "is_default": false
         }
     ],
     "connected_software": [
         {
-            "name": "System Sounds",
-            "pid": 0,
+            "name": "Google Chrome",
+            "pid": 77,
             "driver": "PipeWire",
+            "volume": 1.0,
             "is_active": true
         }
     ]

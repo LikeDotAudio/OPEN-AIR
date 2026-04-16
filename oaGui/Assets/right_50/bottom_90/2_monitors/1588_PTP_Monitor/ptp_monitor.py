@@ -136,9 +136,8 @@ class PtpMonitor(tk.Frame, TransparencyMixin):
         self.packet_tree.delete(*self.packet_tree.get_children()); self.dissector_tree.delete(*self.dissector_tree.get_children()); self._packet_data_cache = {}
 
     def copy_sniffer_command(self):
-        p = Path(__file__).resolve().parents[5] / "oaPTP" / "PTPtester.py"
-        c = f"sudo PYTHONPATH=$(python3 -m site --user-site) python3 {p} --broker {app_constants.MQTT_BROKER_ADDRESS} --port {app_constants.MQTT_BROKER_PORT}"
-        self.clipboard_clear(); self.clipboard_append(c)
+        cmd = f"sudo PYTHONPATH=$(python3 -m site --user-site):. python3 oaPTP/Methods/PTPtester.py --broker {app_constants.MQTT_BROKER_ADDRESS} --port {app_constants.MQTT_BROKER_PORT}"
+        self.clipboard_clear(); self.clipboard_append(cmd)
         ot = self.btn_copy.cget("text"); self.btn_copy.config(text="PASTE copied text into terminal")
         self.after(3000, lambda: self.btn_copy.config(text=ot))
 

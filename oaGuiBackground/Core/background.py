@@ -165,6 +165,7 @@ class BuilderBackgroundManagerMixin:
         """Calculates settled dimensions and triggers background regeneration."""
         if not self.winfo_exists(): return
         
+        # ⚡ BYPASS: If force is True, we proceed even if rebuilding (critical for editor updates)
         if not force and getattr(self, '_is_rebuilding', False):
             matrix_log("ui", "gui_builder", "_trigger_background_sync", 
                        f"🎨📐🔳 [LAYOUT] BG Sync BLOCKED for '{getattr(self, 'tab_name', 'Unknown')}': Rebuild in progress.", "TRACE")
@@ -216,6 +217,14 @@ class BuilderBackgroundManagerMixin:
                 if "random_seed" not in params:
                     import random
                     params["random_seed"] = random.randint(1, 1000000)
+                
+                # ⚡ RESOLUTION INJECTION: Driven by _render_tier
+                render_tier = getattr(self, '_render_tier', 'fast')
+                if render_tier == 'high_res':
+                    params["scale_factor"] = 2.0
+                else:
+                    params["scale_factor"] = 1.0
+
             self._apply_panel_background(bg_config, w, h)
         else:
             self._clear_panel_background()

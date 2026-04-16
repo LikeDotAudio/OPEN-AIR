@@ -23,6 +23,25 @@ class FocusManager:
             self.workspace._force_overlay_refresh()
             return
 
+        # ⚡ FORENSIC LOGGING: Track selection resolution
+        matrix_log("ui", "gui_builder", "handle_focus_request", f"🖱️🖱️🖱️ [ACTION] FocusManager: Resolving path: {path}", "DEBUG")
+
+        # Normalize path: The state_manager state might be { "root_key": { ... } }
+        # If the path starts with the root key of the state, we keep it.
+        # Otherwise, we might need to prepend or adjust.
+        
+        full_state = state_manager.get_state()
+        root_keys = list(full_state.keys())
+        
+        # If the path doesn't start with a root key, and there is only one root key,
+        # we might need to prepend it if state_manager.get_value_at_path(path) fails.
+        if state_manager.get_value_at_path(path) is None:
+            if len(root_keys) == 1 and not path.startswith(root_keys[0]):
+                candidate_path = f"{root_keys[0]}.{path}"
+                if state_manager.get_value_at_path(candidate_path) is not None:
+                    path = candidate_path
+                    matrix_log("ui", "gui_builder", "handle_focus_request", f"🖱️🖱️🖱️ [ACTION] FocusManager: Prepended root key. New path: {path}", "DEBUG")
+
         parts = str(path).split(".")
         for i in range(len(parts)):
             sub_path = ".".join(parts[:i+1])

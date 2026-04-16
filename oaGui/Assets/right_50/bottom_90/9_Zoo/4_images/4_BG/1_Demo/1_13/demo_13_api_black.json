@@ -1,113 +1,38 @@
 {
-  "Zoo_images_BG_Demo_13": {
-    "type": "OcaBin",
-    "id": "50.90.9.4.4.1.1.13",
-    "geometry": {
-      "anchor": "NSEW"
-    },
-    "behavior": {
-      "overflow_ns": "auto",
-      "overflow_ew": "auto",
-      "fluid_ew": true
-    },
-    "blocks": {
-      "fields": {
-        "Meter_1": {
-          "type": "_NeedleVUMeter",
-          "label": {
-            "En": "Squircle 1",
-            "Fr": "Squircle 1",
-            "De": "Squircle 1",
-            "Es": "Squircle 1"
-          },
-          "geometry": {
-            "width": 250,
-            "height": 250
-          },
-          "domain": {
-            "primary": {
-              "min": -20.0,
-              "max": 3.0,
-              "value_default": -10.0
-            }
-          },
-          "cosmetics": {
-            "colors": {
-              "bezel": "#111111",
-              "background": "transparent"
-            },
-            "style_overrides": {
-              "bezel_shape": "squircle",
-              "bezel_width": 6,
-              "Pointer_Style": "needle",
-              "overlay_style": "aperture_mask"
-            }
-          }
+  "type": "OcaBin",
+  "id": "50.90.9.4.4.1.1.13",
+  "geometry": {
+    "anchor": "NSEW"
+  },
+  "behavior": {
+    "overflow": "auto",
+    "fluid_ew": true
+  },
+  "blocks": {
+    "fields": {
+      "Background_Summary_Label": {
+        "type": "_Label",
+        "label": {
+          "En": "Patina: 13 Api Black | Base: #0a0a0a (brushed)",
+          "Fr": "Patina: 13 Api Black | Base: #0a0a0a (brushed)",
+          "De": "Patina: 13 Api Black | Base: #0a0a0a (brushed)",
+          "Es": "Patina: 13 Api Black | Base: #0a0a0a (brushed)"
         },
-        "Meter_2": {
-          "type": "_NeedleVUMeter",
-          "label": {
-            "En": "Crest 2",
-            "Fr": "Crest 2",
-            "De": "Crest 2",
-            "Es": "Crest 2"
-          },
-          "geometry": {
-            "width": 250,
-            "height": 250
-          },
-          "domain": {
-            "primary": {
-              "min": -20.0,
-              "max": 3.0,
-              "value_default": -8.0
-            }
-          },
-          "cosmetics": {
-            "colors": {
-              "bezel": "#111111",
-              "background": "transparent"
-            },
-            "style_overrides": {
-              "bezel_shape": "crest",
-              "bezel_width": 6,
-              "Pointer_Style": "needle",
-              "overlay_style": "dome"
-            }
-          }
-        },
-        "Meter_3": {
-          "type": "_NeedleVUMeter",
-          "label": {
-            "En": "Trapezoid 3",
-            "Fr": "Trapezoid 3",
-            "De": "Trapezoid 3",
-            "Es": "Trapezoid 3"
-          },
-          "geometry": {
-            "width": 250,
-            "height": 250
-          },
-          "domain": {
-            "primary": {
-              "min": -20.0,
-              "max": 3.0,
-              "value_default": -6.0
-            }
-          },
-          "cosmetics": {
-            "colors": {
-              "bezel": "#111111",
-              "background": "transparent"
-            },
-            "style_overrides": {
-              "bezel_shape": "trapezoid",
-              "bezel_width": 6,
-              "Pointer_Style": "spade",
-              "overlay_style": "dome"
-            }
-          }
+        "layout": {
+          "font": 14,
+          "colour": "#00ff00",
+          "sticky": "nsew",
+          "row": 0,
+          "column": 0
         }
+      }
+    }
+  },
+  "background": {
+    "parameters": {
+      "base_material": {
+        "color": "#0a0a0a",
+        "texture_type": "brushed"
       }
     }
   }

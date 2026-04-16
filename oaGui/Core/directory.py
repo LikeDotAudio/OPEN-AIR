@@ -55,11 +55,16 @@ class DirectoryBuilderMixin:
             manager = parent.winfo_children()[0].winfo_manager()
         
         if manager == "grid":
+            parent.grid_columnconfigure(0, weight=1)
+            parent.grid_rowconfigure(index, weight=1)
             instance.grid(row=index, column=0, sticky="nsew")
         elif manager == "pack":
             instance.pack(fill=tk.BOTH, expand=True)
         else:
-            instance.pack(fill=tk.BOTH, expand=True)
+            # Default to grid with expansion for first-child scenario
+            parent.grid_columnconfigure(0, weight=1)
+            parent.grid_rowconfigure(index, weight=1)
+            instance.grid(row=index, column=0, sticky="nsew")
 
     def _build_from_directory(self, path: pathlib.Path, parent_widget, on_complete=None, layout_override=None):
         """Recursively builds the GUI."""
@@ -264,7 +269,7 @@ class DirectoryBuilderMixin:
                             self._build_from_directory(path=path, parent_widget=slot, on_complete=lambda: self.after(1, lambda: _process_recursive(item_index + 1)), layout_override=item)
                         elif isinstance(item, (str, pathlib.Path)):
                             instance = self.module_loader.load_and_instantiate_gui(path=item, parent_widget=slot)
-                            if instance: instance.pack(fill=tk.BOTH, expand=True)
+                            self._add_instance_to_parent(slot, instance, 0)
                             self.after(1, lambda: _process_recursive(item_index + 1))
                         else:
                             self.after(1, lambda: _process_recursive(item_index + 1))

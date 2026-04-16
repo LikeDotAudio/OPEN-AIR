@@ -1,48 +1,42 @@
 {
-  "Zoo_images_BG_Demo_4": {
-    "type": "OcaBin",
-    "id": "50.90.9.4.4.1.1.4",
-    "geometry": {
-      "anchor": "NSEW"
-    },
-    "behavior": {
-      "overflow_ns": "auto",
-      "overflow_ew": "auto",
-      "fluid_ew": true
-    },
-    "blocks": {
-      "fields": {
-        "Meter_1": {
-          "type": "_NeedleVUMeter",
-          "label": {
-            "En": "Crest 1",
-            "Fr": "Crest 1",
-            "De": "Crest 1",
-            "Es": "Crest 1"
-          },
-          "geometry": {
-            "width": 250,
-            "height": 250
-          },
-          "domain": {
-            "primary": {
-              "min": -20.0,
-              "max": 3.0,
-              "value_default": -10.0
-            }
-          },
-          "cosmetics": {
-            "colors": {
-              "bezel": "#111111"
-            },
-            "style_overrides": {
-              "bezel_shape": "crest",
-              "bezel_width": 6,
-              "Pointer_Style": "knife-edge",
-              "overlay_style": "dome"
-            }
-          }
+  "type": "OcaBin",
+  "id": "50.90.9.4.4.1.1.4",
+  "geometry": {
+    "anchor": "NSEW"
+  },
+  "behavior": {
+    "overflow": "auto",
+    "fluid_ew": true
+  },
+  "blocks": {
+    "fields": {
+      "Background_Summary_Label": {
+        "type": "_Label",
+        "label": {
+          "En": "Patina: 4 Oily Shop | Base: #1a1a1a (brushed) | Grime: 15 stains",
+          "Fr": "Patina: 4 Oily Shop | Base: #1a1a1a (brushed) | Grime: 15 stains",
+          "De": "Patina: 4 Oily Shop | Base: #1a1a1a (brushed) | Grime: 15 stains",
+          "Es": "Patina: 4 Oily Shop | Base: #1a1a1a (brushed) | Grime: 15 stains"
+        },
+        "layout": {
+          "font": 14,
+          "colour": "#00ff00",
+          "sticky": "nsew",
+          "row": 0,
+          "column": 0
         }
+      }
+    }
+  },
+  "background": {
+    "parameters": {
+      "base_material": {
+        "color": "#1a1a1a",
+        "texture_type": "brushed"
+      },
+      "grime": {
+        "stain_count": 15,
+        "opacity": 0.5
       }
     }
   }

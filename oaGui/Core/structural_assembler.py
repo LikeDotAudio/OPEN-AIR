@@ -1,8 +1,8 @@
 # Core/structural_assembler.py
 # Author: Anthony Peter Kuzub
-# Version: 1.0.0
+# Version: 1.0.1
 #
-# Description: Brief summary of purpose
+# Description: Manages the immediate creation of structural containers (OcaBlock, OcaBin).
 
 import tkinter as tk
 from oaGuiManager.Core.transparency.transparency import TransparencyManager
@@ -12,33 +12,31 @@ class StructuralAssembler:
 
     @staticmethod
     def create_block(parent, value, builder):
+        # Blocks are typically transparent canvases
         target = tk.Canvas(parent, bd=0, relief="flat", highlightthickness=0, bg="#2b2b2b", width=10, height=10)
         if builder and hasattr(builder, 'show_structure') and builder.show_structure.get():
             target.config(highlightbackground="red", highlightthickness=1)
+        
         TransparencyManager.apply_transparency(target, target, value, builder)
-        return target
+        return target, target
 
     @staticmethod
     def create_bin(parent, value, builder):
-        # ⚡ EXPANSION FIX: The hull frame must fill the parent
+        # ⚡ HULL: The outer frame gridded into the parent
         hull = tk.Frame(parent, bg="#2b2b2b", bd=0, highlightthickness=0)
-        hull.grid_rowconfigure(0, weight=1); hull.grid_columnconfigure(0, weight=1)
+        hull.grid_rowconfigure(0, weight=1)
+        hull.grid_columnconfigure(0, weight=1)
         
-        # 📏 GEOMETRY: Extract explicit size from config or geometry block
+        # 📏 GEOMETRY: Extract explicit size or default to 200x200
         geom = value.get("geometry", {})
         w = value.get("width") or geom.get("width") or 200
         h = value.get("height") or geom.get("height") or 200
         
-        from oaLogging.Methods.matrix_gate import matrix_log
-        parent_w = parent.winfo_width()
-        parent_h = parent.winfo_height()
-        matrix_log("gui", "gui_builder", "create_bin", f"📦 [BIN] Creating hull for {value.get('id', 'unnamed')} (Target: {w}x{h}, Parent current: {parent_w}x{parent_h})", "DEBUG")
-        
-        # ⚡ Viewport Canvas with Scrollbar Support
+        # ⚡ VIEWPORT: The scrollable canvas
         viewport = tk.Canvas(hull, bd=0, highlightthickness=0, bg="#2b2b2b", width=w, height=h)
         viewport.grid(row=0, column=0, sticky="nsew")
         
-        # ⚡ Add Auto-hiding Scrollbars to the Bin
+        # ⚡ SCROLLBARS: Auto-hiding scrollbars
         from oaGuiBuilder.Workers.builder import AutoScrollbar
         vsb = AutoScrollbar(hull, orient=tk.VERTICAL, command=viewport.yview)
         hsb = AutoScrollbar(hull, orient=tk.HORIZONTAL, command=viewport.xview)
@@ -47,13 +45,16 @@ class StructuralAssembler:
         vsb.grid(row=0, column=1, sticky="ns")
         hsb.grid(row=1, column=0, sticky="ew")
         
-        matrix_log("gui", "gui_builder", "create_bin", f"  ├─ Viewport initialized with scrollbars (Sticky: nsew)", "TRACE")
-        
-        # ⚡ Inner frame holds the children
-        inner = tk.Frame(viewport, bg="#2b2b2b", bd=0, highlightthickness=0, width=w, height=h)
+        # ⚡ INNER: The content frame inside the canvas
+        inner = tk.Frame(viewport, bg="#2b2b2b", bd=0, highlightthickness=0)
         inner_id = viewport.create_window((0, 0), window=inner, anchor="nw")
         
-        # When the inner content resizes, just update the scrollable area
+        # ⚡ RESPONSIVE SYNC: Re-enable width tracking to allow inner frame to fill canvas
+        def _on_canvas_configure(event):
+            # Only track width for horizontal stretching
+            viewport.itemconfig(inner_id, width=event.width)
+            
+        viewport.bind("<Configure>", _on_canvas_configure, add="+")
         inner.bind("<Configure>", lambda e: viewport.configure(scrollregion=viewport.bbox("all")))
         
         TransparencyManager.apply_transparency(hull, viewport, value, builder)

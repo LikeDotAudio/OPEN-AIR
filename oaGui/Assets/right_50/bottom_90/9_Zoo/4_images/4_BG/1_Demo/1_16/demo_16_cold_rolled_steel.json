@@ -1,79 +1,38 @@
 {
-  "Zoo_images_BG_Demo_16": {
-    "type": "OcaBin",
-    "id": "50.90.9.4.4.1.1.16",
-    "geometry": {
-      "anchor": "NSEW"
-    },
-    "behavior": {
-      "overflow_ns": "auto",
-      "overflow_ew": "auto",
-      "fluid_ew": true
-    },
-    "blocks": {
-      "fields": {
-        "Meter_1": {
-          "type": "_NeedleVUMeter",
-          "label": {
-            "En": "Squircle 1",
-            "Fr": "Squircle 1",
-            "De": "Squircle 1",
-            "Es": "Squircle 1"
-          },
-          "geometry": {
-            "width": 400,
-            "height": 200
-          },
-          "domain": {
-            "primary": {
-              "min": -20.0,
-              "max": 3.0,
-              "value_default": -10.0
-            }
-          },
-          "cosmetics": {
-            "colors": {
-              "bezel": "#111111"
-            },
-            "style_overrides": {
-              "bezel_shape": "squircle",
-              "bezel_width": 6,
-              "Pointer_Style": "needle",
-              "overlay_style": "aperture_mask"
-            }
-          }
+  "type": "OcaBin",
+  "id": "50.90.9.4.4.1.1.16",
+  "geometry": {
+    "anchor": "NSEW"
+  },
+  "behavior": {
+    "overflow": "auto",
+    "fluid_ew": true
+  },
+  "blocks": {
+    "fields": {
+      "Background_Summary_Label": {
+        "type": "_Label",
+        "label": {
+          "En": "Patina: 16 Cold Rolled Steel | Base: #777b7e (brushed)",
+          "Fr": "Patina: 16 Cold Rolled Steel | Base: #777b7e (brushed)",
+          "De": "Patina: 16 Cold Rolled Steel | Base: #777b7e (brushed)",
+          "Es": "Patina: 16 Cold Rolled Steel | Base: #777b7e (brushed)"
         },
-        "Meter_2": {
-          "type": "_NeedleVUMeter",
-          "label": {
-            "En": "Trapezoid 2",
-            "Fr": "Trapezoid 2",
-            "De": "Trapezoid 2",
-            "Es": "Trapezoid 2"
-          },
-          "geometry": {
-            "width": 400,
-            "height": 200
-          },
-          "domain": {
-            "primary": {
-              "min": -20.0,
-              "max": 3.0,
-              "value_default": -8.0
-            }
-          },
-          "cosmetics": {
-            "colors": {
-              "bezel": "#111111"
-            },
-            "style_overrides": {
-              "bezel_shape": "trapezoid",
-              "bezel_width": 6,
-              "Pointer_Style": "teardrop",
-              "overlay_style": "dome"
-            }
-          }
+        "layout": {
+          "font": 14,
+          "colour": "#00ff00",
+          "sticky": "nsew",
+          "row": 0,
+          "column": 0
         }
+      }
+    }
+  },
+  "background": {
+    "parameters": {
+      "base_material": {
+        "color": "#777b7e",
+        "texture_type": "brushed"
       }
     }
   }

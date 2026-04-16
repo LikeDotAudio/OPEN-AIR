@@ -100,6 +100,8 @@ class DynamicGuiBuilder(
         self.app_instance = config.get("app_instance")
         self.on_focus_widget = config.get("on_focus_widget")
         self.is_editor = config.get("is_editor", False)
+        # ⚡ NEW: Control horizontal scrolling
+        self.allow_horizontal_scroll = config.get("allow_horizontal_scroll", True)
         
         self.json_filepath = Path(json_path) if json_path else None
         self.config_data = {}
@@ -131,8 +133,6 @@ class DynamicGuiBuilder(
 
     def _init_scaffolding(self, use_grid):
         self.config(style="Dark.TFrame")
-        if not use_grid:
-            self.pack(fill=tk.BOTH, expand=True)
         
         self.grid_rowconfigure(0, weight=1)
         self.grid_columnconfigure(0, weight=1)
@@ -284,7 +284,7 @@ class DynamicGuiBuilder(
                 w_cfg = max(1, int(new_width))
                 h_cfg = max(1, int(new_height))
                 self.canvas.itemconfig(self.canvas_window_id, width=w_cfg, height=h_cfg)
-                self._trigger_background_sync()
+                self._trigger_background_sync(force=True)
             except tk.TclError as e:
                 matrix_log("gui", "gui_builder", "_perform_canvas_resize", f"⚠️ Canvas item configuration skipped: {e}", "TRACE")
 

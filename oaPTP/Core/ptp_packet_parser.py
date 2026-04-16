@@ -22,6 +22,19 @@ except Exception as e:
 class PTPPacketParser:
     """Standardizes the extraction of PTP header fields into structured data using Rust."""
 
+    MSG_TYPES = {
+        0: "Sync",
+        1: "Delay_Req",
+        2: "Pdelay_Req",
+        3: "Pdelay_Resp",
+        8: "Follow_Up",
+        9: "Delay_Resp",
+        10: "Pdelay_Resp_Follow_Up",
+        11: "Announce",
+        12: "Signaling",
+        13: "Management"
+    }
+
     @classmethod
     def tear_apart(cls, pkt, ptp_layer=None):
         """

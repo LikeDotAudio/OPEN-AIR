@@ -1,83 +1,98 @@
 # oaGuiBuilder/Entry.py
 # Author: Anthony Peter Kuzub
-# Version: 1.0.0
+# Version: 20260415.2150.1
 #
-# Description: Brief summary of purpose
+# Description: Gatekeeper for the oaGuiBuilder module.
 
-"""
+
+
 import sys
 import os
 from pathlib import Path
-oaGuiBuilder/Entry.py - Gatekeeper for oaGuiBuilder
-"""
+#oaGuiBuilder/Entry.py - Gatekeeper for oaGuiBuilder
+
+
 
 def run_tests():
     """
-    Discovers and runs all tests within the oaGuiBuilder/Tests/ directory.
+    Discover and run tests in the local Tests/ directory using unittest via subprocess.
+    Ensures isolation and proper sys.path handling.
     """
-    print("🔍 Discovering and running tests for oaGuiBuilder...")
-    test_dir = Path(__file__).parent / "Tests"
-    if not test_dir.is_dir():
-        print("❌ No 'Tests/' directory found.")
-        return
-
-    test_files = sorted([f for f in test_dir.glob("test_*.py")])
-    if not test_files:
-        print("❌ No test files found (expected pattern: test_*.py).")
-        return
-
-    print(f"Found {len(test_files)} test files. Executing...")
-    
     import subprocess
+    import sys
+    import os
+    from pathlib import Path
+
+    print(f"📡📥📥 [TEST] {Path(__file__).parent.name}: Starting automated test discovery...")
+    current_dir = Path(__file__).parent.absolute()
+    test_dir = current_dir / "Tests"
     
-    all_tests_passed = True
-    for test_file in test_files:
-        print(f"\n--- Running: {test_file.name} ---")
-        try:
-            # Get the module path relative to the project root for the test runner
-            relative_test_file_path = test_file.relative_to(Path(__file__).parent.parent) # Path from OPEN-AIR root
-            module_path_for_runner = str(relative_test_file_path).replace(os.sep, '.')[:-3] # Remove .py extension
+    if not test_dir.exists():
+        return True
 
-            # Ensure the current directory is the project root so Python can find modules
-            original_cwd = os.getcwd()
-            os.chdir(Path(__file__).parent.parent) 
+    project_root = current_dir
+    while project_root.parent != project_root:
+        if (project_root / "GEMINI.md").exists():
+            break
+        project_root = project_root.parent
+    
+    env = os.environ.copy()
+    env["PYTHONPATH"] = str(project_root) + os.pathsep + env.get("PYTHONPATH", "")
+    
+    try:
+        rel_test_dir = os.path.relpath(test_dir, project_root)
+        result = subprocess.run(
+            [sys.executable, "-m", "unittest", "discover", "-s", rel_test_dir, "-p", "test_*.py"],
+            cwd=str(project_root),
+            env=env,
+            capture_output=False
+        )
+        if result.returncode == 0:
+            print(f"📡📤📤 [TEST] {Path(__file__).parent.name}: All tests PASSED.")
+            return True
+        else:
+            print(f"📡📤📤 [TEST] {Path(__file__).parent.name}: Tests FAILED.")
+            return False
+    except Exception as e:
+        print(f"🛑 [ERROR] {Path(__file__).parent.name}: Test discovery failed: {e}")
+        return False
 
-            result = subprocess.run(
-                [sys.executable, "-m", "unittest", module_path_for_runner],
-                capture_output=True,
-                text=True,
-                check=False
-            )
-            
-            print(result.stdout)
-            if result.stderr:
-                print(result.stderr)
-            
-            if result.returncode != 0:
-                all_tests_passed = False
-                print(f"❌ Test failed for {test_file.name} with exit code {result.returncode}")
-            else:
-                print(f"✅ Tests passed for {test_file.name}")
+def start():
+    """Start the module services."""
+    print(f"🚀 [START] Starting {Path(__file__).parent.name} services...")
 
-        except Exception as e:
-            print(f"❌ An error occurred while running tests for {test_file.name}: {e}")
-            all_tests_passed = False
-        finally:
-            os.chdir(original_cwd)
+def stop():
+    """Stop the module services."""
+    print(f"🛑 [STOP] Stopping {Path(__file__).parent.name} services...")
 
-    if all_tests_passed:
-        print("\n🎉 All tests for oaGuiBuilder passed!")
-    else:
-        print("\n💔 Some tests for oaGuiBuilder failed.")
+def status():
+    """Get the module status."""
+    print(f"📊 [STATUS] Checking {Path(__file__).parent.name} status...")
+    return "Running"
 
 if __name__ == "__main__":
-    # If no arguments are provided, default to running tests.
-    # Otherwise, assume specific commands are intended.
+    # Absolute FIRST action: run tests
+    if not run_tests():
+        print("❌ [CRITICAL] Tests failed. Aborting execution.")
+        sys.exit(1)
+    
+    # Standalone execution logic
     if len(sys.argv) > 1:
-        print("Executing command...")
-        # In a real application, you'd parse sys.argv and call the appropriate functions.
-        # For this task, we assume direct execution without specific arguments implies testing.
+        cmd = sys.argv[1].lower()
+        if cmd == "--start":
+            start()
+        elif cmd == "--stop":
+            stop()
+        elif cmd == "--status":
+            print(f"Status: {status()}")
+        else:
+            print(f"Unknown command: {cmd}")
     else:
-        run_tests()
+        # Default standalone action if no args
+        start()
 
-
+    "start",
+    "stop",
+    "status",
+    "run_tests",
+__all__ = ["start", "stop", "status", "run_tests"]

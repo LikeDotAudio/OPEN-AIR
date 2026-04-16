@@ -31,14 +31,14 @@ class ElementProperties(
 ):
     """Refactored properties workspace with modular components."""
 
-    def __init__(self, parent, *args, **kwargs):
+    def __init__(self, parent, library_cache=None, *args, **kwargs):
         kwargs.pop("bg", None)
         super().__init__(parent, bg="#2b2b2b", *args, **kwargs)
         
         self.focused_path = None
         self.scrub_start_val, self.scrub_start_x = 0, 0
         self._refresh_job = None
-        self.library = GrabBagLoader().scan_library()
+        self.library = library_cache if library_cache is not None else GrabBagLoader().scan_library()
         self.widget_cache = {} # Cache to store rendered widgets by path
 
         self._setup_styles()
@@ -52,6 +52,12 @@ class ElementProperties(
         style = ttk.Style()
         style.configure("Property.TEntry", fieldbackground="#1e1e1e", foreground="#dcdcdc", 
                         insertcolor="white", bordercolor="#444444")
+
+    def highlight_item(self, element_id):
+        """Visual feedback when an item is clicked on the canvas."""
+        # Flash the border to indicate focus
+        self.config(highlightbackground="#007acc", highlightthickness=2)
+        self.after(500, lambda: self.config(highlightthickness=0))
 
     def _build_ui(self):
         header = tk.Frame(self, bg="#333333", height=35)
@@ -100,6 +106,10 @@ class ElementProperties(
     def _refresh_content(self):
         if not self.focused_path or not self.winfo_exists(): return
         
+        # ⚡ CLEANUP: Clear existing content before rendering new state
+        for child in self.scroll_frame.winfo_children():
+            child.destroy()
+
         self.path_lbl.config(text=f"Path: {self.focused_path}")
 
         actual_data = state_manager.get_value_at_path(self.focused_path)

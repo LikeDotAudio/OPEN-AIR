@@ -8,6 +8,7 @@ from oaGui.Methods.i18n_utils import get_text
 import tkinter as tk
 from loguru import logger
 from ..Workers.async_grid_renderer import AsyncGridRenderer
+from ..Core.batch_processing_engine import BatchProcessingEngine
 
 from oaLogging.Methods.matrix_gate import is_debug_allowed, matrix_log
 
@@ -24,7 +25,9 @@ class GuiBatchBuilderMixin:
         """Initialize mixin state."""
         self._coord_cache = {}
         # We can instantiate the renderer here or on demand
-        self._async_renderer = AsyncGridRenderer(self)
+        batch_engine = BatchProcessingEngine(self, logger, _is_debug())
+        factory = getattr(self, 'widget_factory', {})
+        self._async_renderer = AsyncGridRenderer(factory, batch_engine)
 
     def _get_relative_coords(self, widget, ref_widget):
         """
@@ -68,8 +71,20 @@ class GuiBatchBuilderMixin:
         Public entry point for creating dynamic widgets using a single-pass synchronized system.
         Delegates to AsyncGridRenderer.
         """
+        if context is None:
+            from oaGuiManager.Core.context.widget_context import WidgetContext
+            context = WidgetContext(
+                state_mirror_engine=getattr(self, 'state_mirror_engine', None),
+                subscriber_router=getattr(self, 'subscriber_router', None),
+                base_mqtt_topic_from_path=getattr(self, 'base_mqtt_topic_from_path', ""),
+                app_instance=getattr(self, 'app_instance', None),
+                builder_instance=self
+            )
+
         if not hasattr(self, '_async_renderer'):
-            self._async_renderer = AsyncGridRenderer(self)
+            batch_engine = BatchProcessingEngine(self, logger, _is_debug())
+            factory = getattr(self, 'widget_factory', {})
+            self._async_renderer = AsyncGridRenderer(factory, batch_engine)
             
         self._async_renderer.render(
             parent_frame, 

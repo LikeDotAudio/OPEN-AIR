@@ -1,47 +1,28 @@
 {
-  "Master_Layout_Bin": {
-    "type": "OcaBin",
-    "geometry": {
-      "anchor": "NSEW"
-    },
-    "behavior": {
-      "overflow_ns": "auto",
-      "overflow_ew": "auto",
-      "fluid_ew": true
-    },
-    "blocks": {
-      "fields": {
-        "Master_Meter": {
-          "type": "_NeedleVUMeter",
-          "label": {
-            "En": "Master Studio Output",
-            "Fr": "Master Studio Sortie",
-            "De": "Master Studio Ausgang",
-            "Es": "Maestro Studio Salida"
-          },
-          "geometry": {
-            "width": 400,
-            "height": 250
-          },
-          "domain": {
-            "primary": {
-              "min": -20.0,
-              "max": 3.0,
-              "value_default": -7.0
-            }
-          },
-          "cosmetics": {
-            "colors": {
-              "bezel": "#111111",
-              "meter_face_colour": "transparent"
-            },
-            "style_overrides": {
-              "bezel_shape": "hotdog",
-              "bezel_width": 8,
-              "Pointer_Style": "knife-edge",
-              "overlay_style": "dome"
-            }
-          }
+  "type": "OcaBin",
+  "geometry": {
+    "anchor": "NSEW"
+  },
+  "behavior": {
+    "overflow": "auto",
+    "fluid_ew": true
+  },
+  "blocks": {
+    "fields": {
+      "Background_Summary_Label": {
+        "type": "_Label",
+        "label": {
+          "En": "Patina: 202602072324 Gui Bg | Base: #2a2a2a (flat)",
+          "Fr": "Patina: 202602072324 Gui Bg | Base: #2a2a2a (flat)",
+          "De": "Patina: 202602072324 Gui Bg | Base: #2a2a2a (flat)",
+          "Es": "Patina: 202602072324 Gui Bg | Base: #2a2a2a (flat)"
+        },
+        "layout": {
+          "font": 14,
+          "colour": "#00ff00",
+          "sticky": "nsew",
+          "row": 0,
+          "column": 0
         }
       }
     }

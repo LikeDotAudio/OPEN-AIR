@@ -53,14 +53,18 @@ class FileIOHandler:
             return False
             
         try:
+            file_size = path.stat().st_size
             matrix_log(
                 system="UI",
                 element="FILE_IO",
                 func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown",
-                message=f"💾📁✏️ [FILE_IO] Reading file content ({path.stat().st_size} bytes)...",
+                message=f"💾📁✏️ [FILE_IO] Reading file content ({file_size} bytes)...",
                 level="debug",
             )
-            if path.stat().st_size == 0:
+            if file_size > 50 * 1024 * 1024:
+                matrix_log(system="UI", element="FILE_IO", level="error", message="💾📁✏️ [FILE_IO] File exceeds 50MB safety limit.", func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown")
+                return False
+            if file_size == 0:
                 matrix_log(
                     system="UI",
                     element="FILE_IO",

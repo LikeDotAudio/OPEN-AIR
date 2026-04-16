@@ -20,6 +20,7 @@ from .Core.layout.preview_engine import PreviewEngine
 from .Core.layout.focus import FocusManager
 from .Core.layout.overlay import OverlayManager
 from .Core.layout.ruler import Ruler
+from .Core.layout.ghost_overlay import GhostOverlay
 
 class InteractiveLayout(tk.Frame, SafeAfterMixin):
     """The visual workspace where users interact with the GUI layout."""
@@ -54,18 +55,24 @@ class InteractiveLayout(tk.Frame, SafeAfterMixin):
         self._build_ui()
         
         # --- Ruler Containers ---
+        # ⚡ ADJUSTED: Rulers now start at y=0 as the header is removed.
         self.ruler_corner = tk.Frame(self, bg="#1a1a1a", width=20, height=20)
-        self.ruler_corner.place(x=0, y=35) # Below header
+        self.ruler_corner.place(x=0, y=0) 
         
         self.h_ruler = Ruler(self, orient="horizontal")
-        self.h_ruler.place(x=20, y=35, relwidth=1, width=-20, height=20)
+        self.h_ruler.place(x=20, y=0, relwidth=1, width=-20, height=20)
         
         self.v_ruler = Ruler(self, orient="vertical")
-        self.v_ruler.place(x=0, y=55, width=20, relheight=1, height=-55)
+        self.v_ruler.place(x=0, y=20, width=20, relheight=1, height=-20)
 
         # Initialize render_area after rulers
         self.render_area = tk.Frame(self, bg="#2b2b2b")
-        self.render_area.place(x=20, y=55, relwidth=1, relheight=1, width=-20, height=-55)
+        self.render_area.place(x=20, y=20, relwidth=1, relheight=1, width=-20, height=-20)
+        
+        # 👻 GHOST LAYER: High-speed interaction layer
+        self.ghost_overlay = GhostOverlay(self.render_area)
+        # ⚡ HIDDEN BY DEFAULT: So it doesn't block clicks on the grid
+        self.ghost_overlay.place_forget() 
         
         # Engines
         self.focus_mgr = FocusManager(self)
@@ -136,57 +143,8 @@ class InteractiveLayout(tk.Frame, SafeAfterMixin):
             self._update_rebuild_ui() # Refresh UI to reflect cleared pending changes
 
     def _build_ui(self):
-        header = tk.Frame(self, bg="#333333", height=35)
-        header.pack(side="top", fill="x")
-        
-        tk.Label(header, text="INTERACTIVE LAYOUT", bg="#333333", fg="white", font=("Arial", 9, "bold")).pack(side="left", padx=10, pady=5)
-
-        # --- New Render Tier Dropdown ---
-        render_tier_frame = tk.Frame(header, bg="#333333")
-        render_tier_frame.pack(side="left", padx=10)
-        tk.Label(render_tier_frame, text="Render:", bg="#333333", fg="#aaaaaa", font=("Arial", 8, "bold")).pack(side="left", padx=2)
-        self.render_tier_combo = ttk.Combobox(
-            render_tier_frame, 
-            textvariable=self.render_tier_var, 
-            values=["High-Res", "Fast", "Ghost"], 
-            state="readonly", 
-            width=10,
-            background="#333333", # Set background for combobox
-            foreground="#aaaaaa" # Set foreground for combobox
-        )
-        self.render_tier_combo.pack(side="left", padx=2)
-        self.render_tier_combo.bind("<<ComboboxSelected>>", self._on_render_tier_change)
-        
-        # --- New Auto-Rebuild Checkbox ---
-        self.auto_rebuild_cb = ttk.Checkbutton(header, text="Auto-Rebuild", variable=self.auto_rebuild_var, command=self._toggle_auto_rebuild, onvalue=True, offvalue=False)
-        self.auto_rebuild_cb.pack(side="left", padx=10)
-
-        # --- New PAD Control ---
-        pad_frame = tk.Frame(header, bg="#333333")
-        pad_frame.pack(side="left", padx=10)
-        tk.Label(pad_frame, text="PAD:", bg="#333333", fg="#aaaaaa", font=("Arial", 8, "bold")).pack(side="left", padx=2)
-        self.pad_spin = tk.Spinbox(pad_frame, from_=0, to=10, width=3, textvariable=self.superficial_pad_var, 
-                                   command=self._manual_rebuild, bg="#222222", fg="#00ff00", bd=0)
-        self.pad_spin.pack(side="left", padx=2)
-        self.pad_spin.bind("<Return>", lambda e: self._manual_rebuild())
-
-        # --- New Background Visibility Toggle ---
-        self.background_visibility_cb = ttk.Checkbutton(header, text="Background", variable=self.show_background_var, command=self._toggle_background_visibility, onvalue=True, offvalue=False)
-        self.background_visibility_cb.pack(side="left", padx=10)
-
-        # --- Rebuild Controls ---
-        rebuild_frame = tk.Frame(header, bg="#333333")
-        rebuild_frame.pack(side="left", padx=10)
-        
-        self.rebuild_btn = tk.Button(rebuild_frame, text="REBUILD", bg="black", fg="#00ff00", font=("Arial", 8, "bold"), relief="flat", padx=10, command=self._manual_rebuild)
-        self.rebuild_btn.pack(side="left", padx=5)
-        
-        self.counter_lbl = tk.Label(rebuild_frame, text="CHANGES MADE: 0", bg="#333333", fg="#aaaaaa", font=("Arial", 8, "bold"))
-        self.counter_lbl.pack(side="left", padx=5)
-
-        controls = [("Structure", self.show_structure), ("Blocks", self.show_blocks), ("Columns", self.show_columns), ("Sizing", self.show_sizing), ("Sticky", self.show_sticky), ("Alignment", self.show_alignment), ("Colors", self.show_colors)]
-        for text, var in reversed(controls):
-            ttk.Checkbutton(header, text=text, variable=var, command=self._force_overlay_refresh).pack(side="right", padx=5)
+        """Headers are now managed by the main application menu."""
+        pass
 
     def _sync_rulers(self, event=None):
         """Syncs ruler offsets and center points with the preview canvas."""
@@ -246,9 +204,77 @@ class InteractiveLayout(tk.Frame, SafeAfterMixin):
                 self.preview_builder._update_background()
 
     def _update_rebuild_ui(self):
-        self.counter_lbl.config(text=f"CHANGES MADE: {self.pending_changes}")
-        if self.pending_changes > 0: self.counter_lbl.config(fg="#FF9900"); self.rebuild_btn.config(bg="#222222")
-        else: self.counter_lbl.config(fg="#aaaaaa"); self.rebuild_btn.config(bg="black")
+        # ⚡ STANDALONE: Update labels/buttons only if they exist (they moved to Menu)
+        if hasattr(self, 'counter_lbl') and self.counter_lbl.winfo_exists():
+            self.counter_lbl.config(text=f"CHANGES MADE: {self.pending_changes}")
+            if self.pending_changes > 0: self.counter_lbl.config(fg="#FF9900")
+            else: self.counter_lbl.config(fg="#aaaaaa")
+        
+        # We can also notify the main editor status bar via EventBus if needed
+        event_bus.publish("CHANGES_PENDING", count=self.pending_changes)
+
+    def fill_menus(self, menubar):
+        """Populates the provided menubar with layout-specific controls."""
+        # 1. RENDER Menu
+        render_menu = tk.Menu(menubar, tearoff=0)
+        render_menu.add_command(label="Force Rebuild", command=self._manual_rebuild, accelerator="Ctrl+R")
+        render_menu.add_separator()
+        
+        # Render Tier Submenu
+        tier_menu = tk.Menu(render_menu, tearoff=0)
+        for tier in ["High-Res", "Fast", "Ghost"]:
+            tier_menu.add_radiobutton(label=tier, variable=self.render_tier_var, 
+                                      value=tier, command=self._on_render_tier_change)
+        render_menu.add_cascade(label="Render Tier", menu=tier_menu)
+        
+        render_menu.add_checkbutton(label="Auto-Rebuild", variable=self.auto_rebuild_var, 
+                                    command=self._toggle_auto_rebuild)
+        render_menu.add_checkbutton(label="Show Background", variable=self.show_background_var, 
+                                    command=self._toggle_background_visibility)
+        menubar.add_cascade(label="RENDER", menu=render_menu)
+        
+        # 2. GRID Menu
+        grid_menu = tk.Menu(menubar, tearoff=0)
+        pad_menu = tk.Menu(grid_menu, tearoff=0)
+        for i in range(11):
+            pad_menu.add_radiobutton(label=f"PAD {i}px", variable=self.superficial_pad_var, 
+                                     value=i, command=self._manual_rebuild)
+        grid_menu.add_cascade(label="Spacing (PAD)", menu=pad_menu)
+        menubar.add_cascade(label="GRID", menu=grid_menu)
+        
+        # 3. VIEW Menu (Overlays)
+        view_menu = tk.Menu(menubar, tearoff=0)
+        
+        # VIEW ALL TOGGLE
+        self.view_all_var = tk.BooleanVar(value=False)
+        view_menu.add_checkbutton(label="VIEW ALL", variable=self.view_all_var, 
+                                  command=self._toggle_all_overlays, font=("Arial", 9, "bold"))
+        view_menu.add_separator()
+
+        controls = [
+            ("Structure", self.show_structure), 
+            ("Blocks", self.show_blocks), 
+            ("Columns", self.show_columns), 
+            ("Sizing", self.show_sizing), 
+            ("Sticky", self.show_sticky), 
+            ("Alignment", self.show_alignment), 
+            ("Colors", self.show_colors)
+        ]
+        for text, var in controls:
+            view_menu.add_checkbutton(label=text, variable=var, command=self._force_overlay_refresh)
+        menubar.add_cascade(label="VIEW", menu=view_menu)
+
+    def _toggle_all_overlays(self):
+        """Toggles all design overlays at once."""
+        state = self.view_all_var.get()
+        self.show_structure.set(state)
+        self.show_blocks.set(state)
+        self.show_columns.set(state)
+        self.show_sizing.set(state)
+        self.show_sticky.set(state)
+        self.show_alignment.set(state)
+        self.show_colors.set(state)
+        self._force_overlay_refresh()
 
     def _manual_rebuild(self):
         self.pending_changes = 0; self._update_rebuild_ui(); self._refresh_preview()

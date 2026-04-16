@@ -1,125 +1,42 @@
 {
-  "Zoo_images_BG_Demo_2": {
-    "type": "OcaBin",
-    "id": "50.90.9.4.4.1.1.2",
-    "geometry": {
-      "anchor": "NSEW"
-    },
-    "behavior": {
-      "overflow_ns": "auto",
-      "overflow_ew": "auto",
-      "fluid_ew": true
-    },
-    "blocks": {
-      "fields": {
-        "Meter_1": {
-          "type": "_NeedleVUMeter",
-          "label": {
-            "En": "Gem 1",
-            "Fr": "Gem 1",
-            "De": "Gem 1",
-            "Es": "Gem 1"
-          },
-          "geometry": {
-            "width": 400,
-            "height": 200
-          },
-          "domain": {
-            "primary": {
-              "min": -20.0,
-              "max": 3.0,
-              "value_default": -10.0
-            }
-          },
-          "cosmetics": {
-            "colors": {
-              "bezel": "#111111",
-              "background": "transparent"
-            },
-            "style_overrides": {
-              "bezel_shape": "gem",
-              "bezel_width": 6,
-              "Pointer_Style": "teardrop",
-              "overlay_style": "aperture_mask"
-            }
-          },
-          "label_active": {
-            "En": "Gem 1",
-            "Fr": "Gem 1",
-            "De": "Gem 1",
-            "Es": "Gem 1"
-          },
-          "width": 400,
-          "height": 200,
-          "Orientation": "vertical",
-          "layout": {},
-          "bezel_shape": "gem",
-          "bezel_width": 6,
-          "Pointer_Style": "teardrop",
-          "overlay_style": "aperture_mask",
-          "min": -20.0,
-          "value_min": -20.0,
-          "max": 3.0,
-          "value_max": 3.0,
-          "value_default": -10.0,
-          "value": -10.0,
-          "default_value": -10.0,
-          "path": "Meter_1",
-          "background_color": "transparent"
+  "type": "OcaBin",
+  "id": "50.90.9.4.4.1.1.2",
+  "geometry": {
+    "anchor": "NSEW"
+  },
+  "behavior": {
+    "overflow": "auto",
+    "fluid_ew": true
+  },
+  "blocks": {
+    "fields": {
+      "Background_Summary_Label": {
+        "type": "_Label",
+        "label": {
+          "En": "Patina: 2 Heavy Rust | Base: #2a2a2a (hammered) | Rust: 0.8",
+          "Fr": "Patina: 2 Heavy Rust | Base: #2a2a2a (hammered) | Rust: 0.8",
+          "De": "Patina: 2 Heavy Rust | Base: #2a2a2a (hammered) | Rust: 0.8",
+          "Es": "Patina: 2 Heavy Rust | Base: #2a2a2a (hammered) | Rust: 0.8"
         },
-        "Meter_2": {
-          "type": "_NeedleVUMeter",
-          "label": {
-            "En": "Gem 1",
-            "Fr": "Gem 1",
-            "De": "Gem 1",
-            "Es": "Gem 1"
-          },
-          "geometry": {
-            "width": 300,
-            "height": 200
-          },
-          "domain": {
-            "primary": {
-              "min": -20.0,
-              "max": 3.0,
-              "value_default": -10.0
-            }
-          },
-          "cosmetics": {
-            "colors": {
-              "bezel": "#111111"
-            },
-            "style_overrides": {
-              "bezel_shape": "gem",
-              "bezel_width": 6,
-              "Pointer_Style": "teardrop",
-              "overlay_style": "aperture_mask"
-            }
-          },
-          "label_active": {
-            "En": "Gem 1",
-            "Fr": "Gem 1",
-            "De": "Gem 1",
-            "Es": "Gem 1"
-          },
-          "width": 400,
-          "height": 200,
-          "Orientation": "vertical",
-          "layout": {},
-          "bezel_shape": "gem",
-          "bezel_width": 6,
-          "Pointer_Style": "teardrop",
-          "overlay_style": "aperture_mask",
-          "min": -20.0,
-          "value_min": -20.0,
-          "max": 3.0,
-          "value_max": 3.0,
-          "value_default": -10.0,
-          "value": -10.0,
-          "default_value": -10.0,
-          "path": "Meter_2"
+        "layout": {
+          "font": 14,
+          "colour": "#00ff00",
+          "sticky": "nsew",
+          "row": 0,
+          "column": 0
         }
+      }
+    }
+  },
+  "background": {
+    "parameters": {
+      "base_material": {
+        "color": "#2a2a2a",
+        "texture_type": "hammered"
+      },
+      "rust": {
+        "enabled": true,
+        "intensity": 0.8
       }
     }
   }

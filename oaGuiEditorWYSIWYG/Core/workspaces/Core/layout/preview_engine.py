@@ -47,7 +47,8 @@ class PreviewEngine:
                 "state_mirror_engine": inert_engine,
                 "subscriber_router": None,
                 "on_focus_widget": self.on_focus_callback,
-                "is_editor": True
+                "is_editor": True,
+                "allow_horizontal_scroll": False
             }
             self.preview_builder = DynamicGuiBuilder(self.render_area, config=builder_config, tab_name="InteractivePreview")
             self.preview_builder.start()

@@ -45,3 +45,16 @@ class WidgetContext:
         geometry["width"] = max(1, int(geometry.get("width", 1)))
         geometry["height"] = max(1, int(geometry.get("height", 1)))
         return geometry
+
+# Description: Brief summary of purpose
+
+import tkinter as tk
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
+from tkinter import ttk
+import orjson
+import os
+
+# --- Standard Debug Logging Setup ---
+from oaLogging.Core.logger import initialize_logging, set_log_directory
+from loguru import logger

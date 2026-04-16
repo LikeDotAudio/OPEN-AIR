@@ -31,7 +31,7 @@ import asyncio
 from oaTests.Workers.TestRunner.TestRunner import TestRunner
 from oaTests.Workers.collate_data import collate_extra_tabs
 from oaTests.Workers.run_report_builder import ReportGenerator
-from oaTests.Workers.TestRunner import DiscoverTests
+from oaTests.Workers.TestRunner.Workers import DiscoverTests
 from oaTests.Managers.AuditRunner import run_all_audits
 from oaComProtocols.oaComMQTT.Entry import get_connection_manager
 from oaInstallation.Core.SystemStats import SystemStatsProvider

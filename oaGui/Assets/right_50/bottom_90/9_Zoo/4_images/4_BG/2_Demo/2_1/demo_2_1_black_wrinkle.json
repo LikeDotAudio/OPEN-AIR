@@ -1,15 +1,39 @@
 {
-  "Zoo_images_BG_Demo_1": {
-    "type": "OcaBin",
-    "id": "50.90.9.4.4.2.2.2",
-    "geometry": {
-      "anchor": "NSEW"
-    },
-    "behavior": {
-      "overflow_ns": "auto",
-      "overflow_ew": "auto",
-      "fluid_ew": true
-    },
-    "blocks": {}
+  "type": "OcaBin",
+  "id": "50.90.9.4.4.2.2.2",
+  "geometry": {
+    "anchor": "NSEW"
+  },
+  "behavior": {
+    "overflow": "auto",
+    "fluid_ew": true
+  },
+  "blocks": {
+    "fields": {
+      "Background_Summary_Label": {
+        "type": "_Label",
+        "label": {
+          "En": "Patina: 2 1 Black Wrinkle | Base: #111111 (wrinkle)",
+          "Fr": "Patina: 2 1 Black Wrinkle | Base: #111111 (wrinkle)",
+          "De": "Patina: 2 1 Black Wrinkle | Base: #111111 (wrinkle)",
+          "Es": "Patina: 2 1 Black Wrinkle | Base: #111111 (wrinkle)"
+        },
+        "layout": {
+          "font": 14,
+          "colour": "#00ff00",
+          "sticky": "nsew",
+          "row": 0,
+          "column": 0
+        }
+      }
+    }
+  },
+  "background": {
+    "parameters": {
+      "base_material": {
+        "color": "#111111",
+        "texture_type": "wrinkle"
+      }
+    }
   }
 }

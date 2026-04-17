@@ -5,7 +5,7 @@
 
 ## 📖 Description & Purpose
 ### File Level
-workers/wysiwyg_editor/workspaces/interactive_layout.py
+Interface/Tabs/InteractiveLayout/interactive_layout.py
 
 The Interactive Layout Workspace.
 Orchestrates modular overlays for Selection, Structure, Blocks,

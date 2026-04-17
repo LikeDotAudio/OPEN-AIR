@@ -5,7 +5,7 @@
 
 ## 📖 Description & Purpose
 ### File Level
-workers/wysiwyg_editor/workspaces/json_editor.py
+Interface/Tabs/JsonEditor/json_editor.py
 
 The Code-level JSON Editor Workspace.
 Provides a text area with syntax highlighting for direct JSON manipulation.

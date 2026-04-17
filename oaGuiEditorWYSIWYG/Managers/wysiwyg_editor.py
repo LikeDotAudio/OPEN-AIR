@@ -12,8 +12,8 @@ from oaComBroker.Core.event_bus import event_bus
 from ..Core.state import state_manager
 from ..FileReaders.file_reader import FileReader
 from ..FileWriters.file_writer import FileWriter
-from ..Interface.builders.editor_layout import EditorLayoutBuilder
-from ..Interface.builders.editor_menus import EditorMenuBuilder
+from ..Interface.Window.editor_layout import EditorLayoutBuilder
+from ..Interface.Window.editor_menus import EditorMenuBuilder
 
 class WysiwygEditor:
     """
@@ -108,6 +108,29 @@ class WysiwygEditor:
             self.status_bar.set_status("Saved successfully!", "#00ff00")
             return True
         self.status_bar.set_status("SAVE FAILED!", "#ff3333")
+        return False
+
+    def new_workspace(self):
+        """Forces the user to Save As, then creates an empty canvas."""
+        matrix_log("ui", "gui_builder", "new", "🖱️🖱️🖱️ [ACTION] WysiwygEditor: NEW WORKSPACE triggered.", "INFO")
+        
+        # 1. Force Save As (User MUST pick a file name)
+        if FileWriter.save_as(on_save_callback=self.on_save):
+            # 2. Reset State to empty structure
+            state_manager.initialize({}, state_manager.get_file_path())
+            
+            # 3. Update UI
+            new_path = state_manager.get_file_path()
+            if not self.is_standalone:
+                self.window.title(f"WYSIWYG Editor - {new_path.name if new_path else 'Unsaved'}")
+            self.status_bar.set_status(f"New Workspace: {new_path.name if new_path else 'Unknown'}", "#00ffcc")
+            
+            if hasattr(self, 'layout_view'):
+                self.layout_view._manual_rebuild()
+            return True
+        
+        # User cancelled Save As or it failed
+        self.status_bar.set_status("NEW WORKSPACE CANCELLED - Save required.", "#ff8800")
         return False
 
     def _save_and_close(self):

@@ -8,7 +8,7 @@
 workers/wysiwyg_editor/wysiwyg_editor.py
 
 The main Entry Point for the new Modular WYSIWYG Definition Builder.
-Assembles all workspaces into a multi-tabbed interactive editor.
+Assembles all tabs into a multi-tabbed interactive editor.
 
 Author: Gemini CLI
 

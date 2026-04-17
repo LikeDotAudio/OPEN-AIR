@@ -18,6 +18,7 @@ app_constants = Config.get_instance()
 from oaGuiElements.Core.graphing.Methods.dynamic_graph import GraphPlotter
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
+from oaGuiBuilder.Core.base_widget_creator import BaseWidgetCreator
 
 # --- EXTRACTED CORE MODULES ---
 from .Core.mdp_ltp_component import MDPLTPComponent
@@ -30,20 +31,28 @@ class MDPFrame(tk.Frame, TransparencyMixin):
         self.active_fader = self.hovered_fader = None
 
 @WidgetRegistry.register("_MDP")
-class BuilderCompositeMdpCreator(TransparencyMixin, MDPInteractionMixin):
-    @staticmethod
-    def make(parent_widget, config_data, context=None, **kwargs):
+class BuilderCompositeMdpCreator(BaseWidgetCreator, TransparencyMixin, MDPInteractionMixin):
+    
+    is_composite = True
+
+    def _assemble_ui(self, parent_widget, config_data, context, **kwargs):
+        """Assembles the MDP UI."""
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️🕹️ [BUILDER] Creating MDP widget.", level="TRACE")
         
         ctx = context if context else type('obj', (object,), kwargs)()
-        b_inst = ctx.builder_instance if hasattr(ctx, 'builder_instance') else ctx.app_instance
+        b_inst = getattr(ctx, 'builder_instance', None) or getattr(ctx, 'app_instance', None) or kwargs.get('builder_instance')
         
         mdp_frame = MDPFrame(parent_widget, builder_instance=b_inst, config=config_data)
         
         # 1. Graph Background
         g_cfg = config_data.get("graph", {"show_grid": True, "xlim": [0, 10], "ylim": [0, 10]})
-        plotter = GraphPlotter(mdp_frame, g_cfg, ctx.base_mqtt_topic_from_path, f"{config_data.get('path')}/graph", 
-                              subscriber_router=ctx.subscriber_router, state_mirror_engine=ctx.state_mirror_engine, builder_instance=b_inst)
+        
+        s_engine = getattr(ctx, 'state_mirror_engine', None) or kwargs.get('state_mirror_engine')
+        b_topic = getattr(ctx, 'base_mqtt_topic_from_path', None) or kwargs.get('base_mqtt_topic_from_path', "")
+        s_router = getattr(ctx, 'subscriber_router', None) or kwargs.get('subscriber_router')
+
+        plotter = GraphPlotter(mdp_frame, g_cfg, b_topic, f"{config_data.get('path')}/graph", 
+                              subscriber_router=s_router, state_mirror_engine=s_engine, builder_instance=b_inst)
         plotter.pack(fill=tk.BOTH, expand=True)
         
         tk_canvas = plotter.canvas.get_tk_widget()
@@ -60,15 +69,15 @@ class BuilderCompositeMdpCreator(TransparencyMixin, MDPInteractionMixin):
         lin_var = tk.DoubleVar(value=float(ltp_cfg.get("value_default", 50.0)))
         rot_var = tk.DoubleVar(value=float(ltp_cfg.get("rotation_default", 0.0)))
         
-        if ctx.state_mirror_engine:
-            ctx.state_mirror_engine.register_widget(ltp_path, lin_var, ctx.base_mqtt_topic_from_path, ltp_cfg)
-            ctx.state_mirror_engine.initialize_widget_state(ltp_path)
-            lin_var.trace_add("write", lambda *a: ctx.state_mirror_engine.broadcast_gui_change_to_mqtt(ltp_path))
+        if s_engine:
+            s_engine.register_widget(ltp_path, lin_var, b_topic, ltp_cfg)
+            s_engine.initialize_widget_state(ltp_path)
+            lin_var.trace_add("write", lambda *a: s_engine.broadcast_gui_change_to_mqtt(ltp_path))
             
             r_path = f"{ltp_path}/rotation"
-            ctx.state_mirror_engine.register_widget(r_path, rot_var, ctx.base_mqtt_topic_from_path, ltp_cfg)
-            ctx.state_mirror_engine.initialize_widget_state(r_path)
-            rot_var.trace_add("write", lambda *a: ctx.state_mirror_engine.broadcast_gui_change_to_mqtt(r_path))
+            s_engine.register_widget(r_path, rot_var, b_topic, ltp_cfg)
+            s_engine.initialize_widget_state(r_path)
+            rot_var.trace_add("write", lambda *a: s_engine.broadcast_gui_change_to_mqtt(r_path))
 
         fader = MDPLTPComponent(tk_canvas, "0", config_data.get("initial_x", 150), config_data.get("initial_y", 150), lin_var, rot_var, ltp_cfg)
         mdp_frame.faders.append(fader)
@@ -85,7 +94,11 @@ class BuilderCompositeMdpCreator(TransparencyMixin, MDPInteractionMixin):
         tk_canvas.bind("<Button-5>", lambda e: BuilderCompositeMdpCreator._mdp_on_scroll(e, mdp_frame), add="+")
         tk_canvas.bind("<Motion>", lambda e: BuilderCompositeMdpCreator._mdp_on_motion(e, mdp_frame), add="+")
         
-        return mdp_frame
+        return mdp_frame, tk_canvas
+
+    @staticmethod
+    def make(parent_widget, config_data, context=None, **kwargs):
+        return BuilderCompositeMdpCreator.build(parent_widget, config_data, context, **kwargs)
 
     def make_composite_mdp(self, parent_widget, config_data, context=None, **kwargs):
-        return BuilderCompositeMdpCreator.make(parent_widget, config_data, context, builder_instance=self, **kwargs)
+        return BuilderCompositeMdpCreator.build(parent_widget, config_data, context, **kwargs)

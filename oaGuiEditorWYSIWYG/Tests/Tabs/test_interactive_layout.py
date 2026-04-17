@@ -15,7 +15,7 @@
 #
 #        self.root.destroy()
 #
-#    @patch('oaGuiEditorWYSIWYG.workspaces.interactive_layout.DynamicGuiBuilder')
+#    @patch('oaGuiEditorWYSIWYG.Tabs.interactive_layout.DynamicGuiBuilder')
 #        """Test that the layout view is created and builds the initial GUI."""
 #        mock_builder_instance = MockGuiBuilder.return_value
 #        layout_view = InteractiveLayout(self.root, self.mock_event_bus)
@@ -26,7 +26,7 @@
 #        # It should build an initial empty structure
 #        mock_builder_instance.build_gui.assert_called_once()
 #
-#    @patch('oaGuiEditorWYSIWYG.workspaces.interactive_layout.DynamicGuiBuilder')
+#    @patch('oaGuiEditorWYSIWYG.Tabs.interactive_layout.DynamicGuiBuilder')
 #        """Test that receiving a 'json_updated' event triggers a GUI rebuild."""
 #        mock_builder_instance = MockGuiBuilder.return_value
 #        layout_view = InteractiveLayout(self.root, self.mock_event_bus)

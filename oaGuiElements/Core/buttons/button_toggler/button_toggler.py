@@ -87,6 +87,8 @@ class TogglerButton(CanvasButton):
 @WidgetRegistry.register("_GuiButtonToggler", "_SmartToggleGroup", "_ButtonToggler")
 class BuilderButtonTogglerCreator(BaseWidgetCreator, TransparencyMixin):
     """Factory for creating Button Toggler groups."""
+    
+    is_composite = True
 
     def _assemble_ui(self, parent_widget, config_data, context, **kwargs):
         """

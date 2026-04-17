@@ -5,7 +5,7 @@
 
 ## 📖 Description & Purpose
 ### File Level
-workers/wysiwyg_editor/workspaces/element_properties.py
+Interface/Tabs/ElementProperties/element_properties.py
 
 The Element Properties Workspace.
 Provides a high-level UI for adjusting parameters of the focused element.

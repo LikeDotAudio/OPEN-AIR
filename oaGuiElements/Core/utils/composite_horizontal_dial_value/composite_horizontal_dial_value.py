@@ -37,6 +37,8 @@ BUILDER_DEBUG = is_debug_allowed(system="UI", element="GUI_BUILDER")
 class BuilderCompositeHorizontalDialValueCreator(
     BuilderFaderHorizontalCreator, BuilderKnobCreator, TransparencyMixin
 ):
+    is_composite = True
+
     @staticmethod
     def make(parent_widget, config_data, context=None, **kwargs):
         """Unified entry point for composite horizontal dial value."""
@@ -61,7 +63,16 @@ class BuilderCompositeHorizontalDialValueCreator(
             w_req, h_req = int(float(config_data.get("width", l_cfg.get("width", 400)))), int(float(config_data.get("height", l_cfg.get("height", 100))))
 
             sub_frame = tk.Canvas(parent_widget, bd=0, highlightthickness=0, relief="flat", bg=p_bg, width=w_req, height=h_req)
-            sub_frame._oca_path = path; sub_frame.grid_propagate(False)
+            sub_frame._oca_path = path
+            
+            # ⚡ PROPAGATION SAFETY: If we are in ghost/preview mode, we MUST propagate
+            # otherwise the container collapses to 1x1 if width/height were stripped.
+            render_tier = getattr(builder_instance, '_render_tier', 'high_res')
+            if render_tier in ['ghost', 'fast'] or not (w_req and h_req):
+                sub_frame.grid_propagate(True)
+            else:
+                sub_frame.grid_propagate(False)
+
             TransparencyManager.apply_transparency(sub_frame, sub_frame, config_data, builder_instance)
 
             safe_knob_dim, v_width_limit = GridManager.configure(sub_frame, config_data, w_req)
@@ -96,14 +107,14 @@ class BuilderCompositeHorizontalDialValueCreator(
             f_cfg = config_data.copy()
             f_cfg.update(config_data.get("fader_config", {}))
             f_cfg.update({"value_min": str(min_val), "value_max": str(max_val), "value_default": str(init_val), "label_active": "", "show_label": False, "tick_interval": f_cfg.get("tick_interval", step_coarse), "path": f"{path}.fader_config" if "fader_config" in config_data else path, "width": w_req * 0.8 if w_req > 0 else 320, "height": h_req * 0.7 if h_req > 0 else 70, "cap_height": f_cfg.get("cap_height", 55)})
-            fader_widget = self.make_fader_horizontal(sub_frame, f_cfg, context=context)
+            fader_widget, _ = self.make_fader_horizontal(sub_frame, f_cfg, context=context)
             fader_widget.grid(row=1, column=0, sticky="nsew", padx=(5, 0), pady=(0, 5)); fader_widget._oca_path = f_cfg["path"]
 
             # Dial
             d_cfg = config_data.copy()
             d_cfg.update(config_data.get("dial_config", {}))
             d_cfg.update({"label_active": "", "show_label": False, "min": "0", "max": "999", "knob_style": d_cfg.get("knob_style", "dial"), "path": f"{path}.dial_config" if "dial_config" in config_data else path, "width": safe_knob_dim, "height": safe_knob_dim})
-            dial_widget = self.make_knob(sub_frame, d_cfg, context=context)
+            dial_widget, _ = self.make_knob(sub_frame, d_cfg, context=context)
             dial_widget.grid(row=0, column=1, rowspan=2, sticky="nsew", padx=5); dial_widget._oca_path = d_cfg["path"]
 
             def on_manual(e):

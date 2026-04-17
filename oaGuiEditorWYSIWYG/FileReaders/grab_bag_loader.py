@@ -79,16 +79,20 @@ class GrabBagLoader:
                                 break
                     
                     if not widget_type:
-                        # MANDATE: Warnings are NOT gated.
-                        logger.warning(f"⚠️ GrabBagLoader: Skipping {item.name}: No valid widget type found in sample.")
-                        continue
+                        continue # Silently skip metadata-only entries in scan
 
                     # Use directory name as component name (e.g., 'builder_knob' -> 'knob')
                     name = item.name.replace("builder_", "").replace("_", " ").title()
+                    
+                    # ⚡ CATEGORIZATION: Use the parent folder name as the category
+                    category = item.parent.name.replace("builder_", "").replace("_", " ").title()
+                    if category == "Core": category = "General" # Flatten Core to General
+                    
                     self.library[name] = {
                         "folder": item.name,
                         "schema": widget_config,
-                        "type": widget_type
+                        "type": widget_type,
+                        "category": category
                     }
                     matrix_log(
                         system="ui", 

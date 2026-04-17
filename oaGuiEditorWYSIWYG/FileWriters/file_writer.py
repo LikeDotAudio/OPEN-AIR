@@ -8,11 +8,51 @@ import orjson
 import shutil
 import datetime
 import inspect
+import tkinter as tk
+from tkinter import filedialog
+from pathlib import Path
 from oaLogging.Methods.matrix_gate import matrix_log
 from ..Core.state import state_manager
 
 class FileWriter:
     """Manages file writing and backups for the editor."""
+
+    @staticmethod
+    def save_as(on_save_callback=None):
+        """Prompts the user for a file location and saves the current state."""
+        matrix_log(
+            system="UI",
+            element="FILE_IO",
+            func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown",
+            message="💾📁✏️ [FILE_IO] SAVE AS SEQUENCE INITIATED.",
+            level="info",
+        )
+        
+        initial_path = state_manager.get_file_path()
+        initial_dir = initial_path.parent if initial_path else "."
+        initial_file = initial_path.name if initial_path else "new_gui.json"
+        
+        file_path = filedialog.asksaveasfilename(
+            initialdir=initial_dir,
+            initialfile=initial_file,
+            defaultextension=".json",
+            filetypes=[("JSON files", "*.json"), ("All files", "*.*")]
+        )
+        
+        if not file_path:
+            matrix_log(
+                system='UI',
+                element='FILE_IO',
+                level="info",
+                message="💾📁✏️ [FILE_IO] SAVE AS CANCELLED by user.",
+                func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown"
+            )
+            return False
+            
+        new_path = Path(file_path)
+        state_manager.set_file_path(new_path)
+        
+        return FileWriter.save_file(on_save_callback=on_save_callback)
 
     @staticmethod
     def save_file(on_save_callback=None):

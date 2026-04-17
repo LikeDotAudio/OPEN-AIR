@@ -373,19 +373,12 @@ Workers are active background processes for data acquisition and system monitori
      ├----> **grab_bag/**<br>
         |   -> [grab_bag_loader](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/wysiwyg_editor/grab_bag/grab_bag_loader.md) — *Grab Bag Loader*<br>
         |   -> [grab_bag_view](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/wysiwyg_editor/grab_bag/grab_bag_view.md) — *Grab Bag View*<br>
-     ├----> **workspaces/**<br>
-        |   -> **layout_overlays/**<br>
-             ├------->[alignment](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/wysiwyg_editor/workspaces/layout_overlays/alignment.md) — *Alignment*<br>
-             ├------->[blocks](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/wysiwyg_editor/workspaces/layout_overlays/blocks.md) — *Blocks*<br>
-             ├------->[colors](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/wysiwyg_editor/workspaces/layout_overlays/colors.md) — *Colors*<br>
-             ├------->[columns](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/wysiwyg_editor/workspaces/layout_overlays/columns.md) — *Columns*<br>
-             ├------->[selection](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/wysiwyg_editor/workspaces/layout_overlays/selection.md) — *Selection*<br>
-             ├------->[sizing](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/wysiwyg_editor/workspaces/layout_overlays/sizing.md) — *Sizing*<br>
-             ├------->[sticky](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/wysiwyg_editor/workspaces/layout_overlays/sticky.md) — *Sticky*<br>
-             ├------->[structure](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/wysiwyg_editor/workspaces/layout_overlays/structure.md) — *Structure*<br>
-        |   -> [element_properties](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/wysiwyg_editor/workspaces/element_properties.md) — *Element Properties*<br>
-        |   -> [interactive_layout](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/wysiwyg_editor/workspaces/interactive_layout.md) — *Interactive Layout*<br>
-        |   -> [json_editor](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/wysiwyg_editor/workspaces/json_editor.md) — *Json Editor*<br>
+     ├----> **Tabs/**<br>
+        |   -> [ElementProperties](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/wysiwyg_editor/Interface/Tabs/ElementProperties/element_properties.md) — *Element Properties*<br>
+        |   -> [InteractiveLayout](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/wysiwyg_editor/Interface/Tabs/InteractiveLayout/interactive_layout.md) — *Interactive Layout*<br>
+        |   -> [JsonEditor](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/wysiwyg_editor/Interface/Tabs/JsonEditor/json_editor.md) — *Json Editor*<br>
+        |   -> [GrabBagView](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/wysiwyg_editor/Interface/Tabs/GrabBagView/grab_bag_view.md) — *Grab Bag View*<br>
+        |   -> [TreeRefactor](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/wysiwyg_editor/Interface/Tabs/TreeRefactor/tree_refactor.md) — *Tree Refactor*<br>
      ├----> [run_builder](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/wysiwyg_editor/run.md) — *Run Builder*<br>
      ├----> [wysiwyg_editor](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/wysiwyg_editor/wysiwyg_editor.md) — *Wysiwyg Editor*<br>
     ├----> [Worker_Launcher](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/Launcher.md) — *Worker Launcher*<br>

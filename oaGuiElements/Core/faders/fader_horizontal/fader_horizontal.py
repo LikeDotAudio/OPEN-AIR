@@ -18,6 +18,7 @@ app_constants = Config.get_instance()
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 from oaGuiManager.Core.transparency.transparency import TransparencyManager
 from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
+from oaGuiBuilder.Core.base_widget_creator import BaseWidgetCreator
 
 # --- EXTRACTED CORE MODULES ---
 from .Core.horizontal_fader_renderer_mixin import HorizontalFaderRendererMixin
@@ -78,26 +79,34 @@ class CustomHorizontalFaderFrame(
     def _draw(self): self.render()
 
 @WidgetRegistry.register("_CustomHorizontalFader")
-class BuilderFaderHorizontalCreator(TransparencyMixin):
-    @staticmethod
-    def make(parent_widget, config_data, context=None, **kwargs):
+class BuilderFaderHorizontalCreator(BaseWidgetCreator, TransparencyMixin):
+    
+    def _assemble_ui(self, parent_widget, config_data, context, **kwargs):
+        """Assembles the Horizontal Fader UI."""
         ctx = context if context else type('obj', (object,), kwargs)()
-        b_inst = ctx.builder_instance if hasattr(ctx, 'builder_instance') else ctx.app_instance
+        b_inst = getattr(ctx, 'builder_instance', None) or getattr(ctx, 'app_instance', None) or kwargs.get('builder_instance')
         
         val_var = tk.DoubleVar(master=parent_widget, value=float(config_data.get("value_default", config_data.get("value", 50.0))))
-        frame = CustomHorizontalFaderFrame(parent_widget, val_var, config_data, config_data.get("path"), ctx.state_mirror_engine)
+        frame = CustomHorizontalFaderFrame(parent_widget, val_var, config_data, config_data.get("path"), getattr(ctx, 'state_mirror_engine', None) or kwargs.get('state_mirror_engine'))
         
         if hasattr(b_inst, '_apply_transparency'):
             TransparencyManager.apply_transparency(frame, frame.canvas, config_data, b_inst)
             TransparencyManager.apply_transparency(frame, frame, config_data, b_inst)
         
-        if frame.path and ctx.state_mirror_engine:
-            topic = ctx.state_mirror_engine.register_widget(frame.path, val_var, ctx.base_mqtt_topic_from_path, config_data, instance=frame)
-            if ctx.subscriber_router and topic:
-                ctx.subscriber_router.subscribe_to_topic(topic, ctx.state_mirror_engine.sync_incoming_mqtt_to_gui)
-            ctx.state_mirror_engine.initialize_widget_state(frame.path)
+        path = config_data.get("path")
+        s_engine = getattr(ctx, 'state_mirror_engine', None) or kwargs.get('state_mirror_engine')
+        if path and s_engine:
+            b_topic = getattr(ctx, 'base_mqtt_topic_from_path', None) or kwargs.get('base_mqtt_topic_from_path', "")
+            topic = s_engine.register_widget(path, val_var, b_topic, config_data, instance=frame)
+            if getattr(ctx, 'subscriber_router', None) and topic:
+                ctx.subscriber_router.subscribe_to_topic(topic, s_engine.sync_incoming_mqtt_to_gui)
+            s_engine.initialize_widget_state(path)
 
-        return frame
+        return frame, frame.canvas
+
+    @staticmethod
+    def make(parent_widget, config_data, context=None, **kwargs):
+        return BuilderFaderHorizontalCreator.build(parent_widget, config_data, context, **kwargs)
 
     def make_fader_horizontal(self, parent_widget, config_data, context=None, **kwargs):
-        return BuilderFaderHorizontalCreator.make(parent_widget, config_data, context, builder_instance=self, **kwargs)
+        return BuilderFaderHorizontalCreator.build(parent_widget, config_data, context, **kwargs)

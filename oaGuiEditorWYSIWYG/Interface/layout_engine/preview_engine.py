@@ -63,7 +63,7 @@ class PreviewEngine:
             "on_focus_widget": self.on_focus_callback,
             "app_instance": self.workspace,
             "is_editor": True,
-            "allow_horizontal_scroll": False
+            "allow_horizontal_scroll": True
         }
         self.preview_builder = DynamicGuiBuilder(self.render_area, config=builder_config, tab_name="InteractivePreview")
         self.preview_builder.start()

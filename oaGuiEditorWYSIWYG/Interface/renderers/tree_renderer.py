@@ -5,7 +5,7 @@
 # Description: Core recursive engine for rendering the property tree.
 
 import tkinter as tk
-from ..factories.leaf_editor_factory import LeafEditorFactory
+from ..PropertyEditor.property_leaf import PropertyLeaf
 from .section_renderer import SectionRenderer
 from .info_renderer import InfoRenderer
 
@@ -50,7 +50,7 @@ class TreeRenderer:
                     row_frame = tk.Frame(editors_frame, bg="#2b2b2b")
                     row_frame.pack(fill="x", side="top")
                     
-                    editor_widget = LeafEditorFactory.create(row_frame, lang_key, lang_value, lang_full_path, mixin_ref)
+                    editor_widget = PropertyLeaf.create(row_frame, lang_key, lang_value, lang_full_path, mixin_ref)
                     new_widget_cache[lang_full_path] = {"widget": editor_widget}
                 continue
 
@@ -94,7 +94,7 @@ class TreeRenderer:
                     f = InfoRenderer.render_virtual_leaf(parent, key, value, lambda p=full_path, v=value: mixin_ref._add_state_item(p, v))
                     new_widget_cache[full_path] = {"widget": f}
                 else:
-                    editor_widget = LeafEditorFactory.create(parent, key, value, full_path, mixin_ref, existing_widget=existing_widget)
+                    editor_widget = PropertyLeaf.create(parent, key, value, full_path, mixin_ref, existing_widget=existing_widget)
                     new_widget_cache[full_path] = {"widget": editor_widget}
 
     @staticmethod
@@ -118,7 +118,14 @@ class TreeRenderer:
         def on_add():
             mixin_ref._add_state_item(full_path, value)
 
-        h_frame, is_expanded = SectionRenderer.render(parent, key, full_path, is_virtual, is_expanded_val, on_toggle, on_add)
+        # ⚡ MESSAGE INSPECTION: Check if this section contains message data
+        msg_callback = None
+        # Support both 'message' and 'message_details' as per library standards
+        msg_data = value.get("message") or value.get("message_details")
+        if msg_data and mixin_ref:
+            msg_callback = lambda p=full_path, d=msg_data: mixin_ref._show_message_details(p, d)
+
+        h_frame, is_expanded = SectionRenderer.render(parent, key, full_path, is_virtual, is_expanded_val, on_toggle, on_add, message_callback=msg_callback)
         
         if not is_expanded_val:
             child_container.pack_forget()

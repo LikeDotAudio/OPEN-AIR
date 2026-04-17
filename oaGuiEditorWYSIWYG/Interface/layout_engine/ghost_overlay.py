@@ -50,9 +50,20 @@ class GhostOverlay(tk.Canvas):
         else:
             self.create_line(0, pos, 5000, pos, fill=color, width=1, dash=(2, 2), tags="guide")
 
+    def draw_insertion_line(self, x1, y1, x2, y2, color="#00FF00"):
+        """Draws a solid line to indicate an insertion point (Drop Target)."""
+        self.delete("insertion")
+        self.create_line(x1, y1, x2, y2, fill=color, width=3, tags="insertion")
+        self.tag_raise("insertion")
+
+    def clear_insertion(self):
+        """Clears the insertion point visual."""
+        self.delete("insertion")
+
     def clear(self):
         """Clears all temporary design feedback elements from the overlay."""
         self.delete("ghost")
         self.delete("handle")
         self.delete("guide")
+        self.delete("insertion")
         self.active_ghost = None

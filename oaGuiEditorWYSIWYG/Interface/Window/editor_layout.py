@@ -1,4 +1,4 @@
-# Interface/builders/editor_layout.py
+# Interface/Window/editor_layout.py
 # Author: Anthony Peter Kuzub
 # Version: 20260416.Interface.1
 #
@@ -7,11 +7,11 @@
 import tkinter as tk
 from tkinter import ttk
 from oaLogging.Methods.matrix_gate import matrix_log
-from ..workspaces.interactive_layout import InteractiveLayout
-from ..workspaces.json_editor import JsonTreeWorkspace, JsonCodeWorkspace
-from ..workspaces.tree_refactor import TreeRefactor
-from ..workspaces.element_properties import ElementProperties
-from ..workspaces.grab_bag_view import GrabBagView
+from ..Tabs.InteractiveLayout.interactive_layout import InteractiveLayout
+from ..Tabs.JsonEditor.json_editor import JsonTreeWorkspace, JsonCodeWorkspace
+from ..Tabs.TreeRefactor.Entry import TreeRefactor
+from ..Tabs.ElementProperties.element_properties import ElementProperties
+from ..Tabs.GrabBagView.grab_bag_view import GrabBagView
 
 class EditorLayoutBuilder:
     """Orchestrates the assembly of the WYSIWYG Editor UI."""
@@ -43,7 +43,7 @@ class SidebarBuilder:
     def build_left(editor):
         """Builds the left navigation sidebar with Structure, Code, and Library tabs."""
         editor.left_sidebar = tk.Frame(editor.main_pane, bg="#252526")
-        editor.main_pane.add(editor.left_sidebar, width=250)
+        editor.main_pane.add(editor.left_sidebar, width=250, stretch="never")
         
         editor.left_notebook = ttk.Notebook(editor.left_sidebar)
         editor.left_notebook.pack(fill="both", expand=True)
@@ -89,11 +89,17 @@ class SashManager:
     @staticmethod
     def setup(editor):
         """Sets up the initial sash positions after the window is mapped."""
-        editor.window.bind("<Map>", lambda e: editor.window.after(100, lambda: SashManager.set_initial(editor)), add="+")
+        def _on_map(e):
+            # ⚡ [UI] Unbind after first map to prevent "snapping back" on minimize/restore
+            if hasattr(editor, 'window') and editor.window.winfo_exists():
+                editor.window.unbind("<Map>", map_id)
+            editor.window.after(100, lambda: SashManager.set_initial(editor))
+            
+        map_id = editor.window.bind("<Map>", _on_map, add="+")
 
     @staticmethod
     def set_initial(editor):
-        """Calculates and applies the initial sash positions."""
+        """Calculates and applies the initial sash positions using percentage-based logic."""
         try:
             editor.main_pane.update_idletasks()
             width = editor.main_pane.winfo_width()
@@ -102,8 +108,15 @@ class SashManager:
                 return
 
             matrix_log("ui", "gui_builder", "layout", f"📐 Setting initial sashes for width: {width}", "DEBUG")
-            editor.main_pane.sash_place(0, 250, 0)
-            editor.main_pane.sash_place(1, max(251, width - 300), 0)
+            
+            # 1. Left Sidebar: 20% of width
+            left_pos = int(width * 0.20)
+            
+            # 2. Right Sidebar: 15% of width (measured from the right)
+            right_pos = int(width * (1.0 - 0.15))
+            
+            editor.main_pane.sash_place(0, left_pos, 0)
+            editor.main_pane.sash_place(1, right_pos, 0)
         except Exception as e: 
             matrix_log("ui", "gui_builder", "layout", f"⚠️ Sash placement failed: {e}", "TRACE")
 

@@ -14,6 +14,10 @@ class BaseWidgetCreator(TransparencyMixin):
     Template Method orchestrator for constructing GUI widgets.
     Decomposes monolithic build logic into specialized initialization phases.
     """
+    
+    # ⚡ COMPOSITE FLAG: Subclasses can set this to True to bypass automatic ghost box
+    # generation and handle ghosting recursively in their _assemble_ui.
+    is_composite = False
 
     @classmethod
     def build(cls, parent_widget, config_data, context=None, **kwargs):
@@ -25,14 +29,18 @@ class BaseWidgetCreator(TransparencyMixin):
         
         # 1. Resolve Construction Context
         ctx = cls._resolve_context(context, kwargs)
-        render_tier = kwargs.get('render_tier') or getattr(ctx['builder'], '_render_tier', 'high_res')
+        
+        # ⚡ ROBUSTNESS: Handle case where ctx['builder'] might be None
+        builder = ctx.get('builder')
+        render_tier = kwargs.get('render_tier') or (getattr(builder, '_render_tier', 'high_res') if builder else 'high_res')
         
         path = config_data.get("path")
         label = config_data.get("label_active") or config_data.get("label", "Unknown")
 
         try:
             # 2. UI Assembly Phase
-            if render_tier == 'ghost':
+            # ⚡ GHOST BYPASS: Standard widgets show a box; composite widgets descend.
+            if render_tier == 'ghost' and not instance.is_composite:
                 widget, canvas = instance._assemble_ghost_ui(parent_widget, config_data, context, **kwargs)
             else:
                 widget, canvas = instance._assemble_ui(parent_widget, config_data, context, **kwargs)

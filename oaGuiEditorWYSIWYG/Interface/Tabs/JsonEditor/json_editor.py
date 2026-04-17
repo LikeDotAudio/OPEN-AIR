@@ -1,3 +1,4 @@
+# Interface/Tabs/JsonEditor/json_editor.py
 import tkinter as tk
 from tkinter import ttk
 from tkinter import colorchooser
@@ -5,7 +6,7 @@ import orjson
 import re
 import inspect
 from oaComBroker.Core.event_bus import event_bus
-from ...Core.state import state_manager
+from ....Core.state import state_manager
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Core.logger import GUI_LOGGER as logger
@@ -18,22 +19,93 @@ class JsonTreeWorkspace(tk.Frame):
         self.current_json_data = {}
         self._build_ui()
         event_bus.subscribe("STATE_UPDATED", self._on_state_updated)
+        event_bus.subscribe("FOCUS_REQUESTED", self._on_focus_requested)
         current_state = state_manager.get_state()
         if current_state: self._on_state_updated(current_state)
 
+    def _on_focus_requested(self, path, source=None):
+        """Syncs the tree selection when an element is focused elsewhere."""
+        if source == self or not path: return
+        
+        # Paths in this tree are prefixed with 'root.' based on _populate_tree
+        # but the node_id logic in _populate_tree is:
+        # node_id = f"{path}.{key}" if path else str(key)
+        
+        # We need to find the node that matches the path. 
+        # Since _populate_tree uses the actual data keys, we can try to find it.
+        # Let's check if the path exists in the tree.
+        if self.tree.exists(path):
+            self.tree.selection_set(path)
+            self.tree.see(path)
+        elif self.tree.exists(f"root.{path}"):
+            self.tree.selection_set(f"root.{path}")
+            self.tree.see(f"root.{path}")
+
     def _build_ui(self):
+        # 1. Header with Level Controls
+        header = tk.Frame(self, bg="#333333", height=30)
+        header.pack(side="top", fill="x")
+        
+        tk.Label(header, text="STRUCTURE", bg="#333333", fg="white", font=("Arial", 8, "bold")).pack(side="left", padx=10)
+        
+        btn_frame = tk.Frame(header, bg="#333333")
+        btn_frame.pack(side="right", padx=5)
+        
+        # Level Buttons
+        for lvl in [3, 4, 5, 6]:
+            btn = tk.Button(btn_frame, text=f"L{lvl}", bg="#444444", fg="#dcdcdc", relief="flat", 
+                            font=("Arial", 7), width=3, command=lambda level=lvl: self._expand_to_level(level))
+            btn.pack(side="left", padx=2)
+        
+        tk.Button(btn_frame, text="EXPAND ALL", bg="#444444", fg="#00ffcc", relief="flat",
+                  font=("Arial", 7, "bold"), command=lambda: self._expand_to_level(99), padx=5).pack(side="left", padx=2)
+
+        # 2. Main Tree Area
         self.paned = ttk.PanedWindow(self, orient="vertical")
         self.paned.pack(fill="both", expand=True)
         tree_frame = tk.Frame(self.paned, bg="#1e1e1e")
         self.paned.add(tree_frame, weight=3)
-        self.tree = ttk.Treeview(tree_frame, columns=("value",), selectmode="browse")
-        self.tree.heading("#0", text="Hierarchy"); self.tree.column("#0", width=250)
+        
+        # Add Scrollbars to Treeview (No "value" column as requested)
+        self.tree = ttk.Treeview(tree_frame, columns=(), selectmode="browse")
+        vsb = ttk.Scrollbar(tree_frame, orient="vertical", command=self.tree.yview)
+        hsb = ttk.Scrollbar(tree_frame, orient="horizontal", command=self.tree.xview)
+        self.tree.configure(yscrollcommand=vsb.set, xscrollcommand=hsb.set)
+        
+        vsb.pack(side="right", fill="y")
+        hsb.pack(side="bottom", fill="x")
         self.tree.pack(side="left", fill="both", expand=True)
+        
+        self.tree.heading("#0", text="Hierarchy"); self.tree.column("#0", width=250)
         self.tree.bind("<<TreeviewSelect>>", self._on_tree_select)
         self.props_frame = tk.Frame(self.paned, bg="#252526")
         self.paned.add(self.props_frame, weight=2)
-        self.props_scrollable_frame = tk.Frame(self.props_frame, bg="#252526")
-        self.props_scrollable_frame.pack(fill="both", expand=True)
+        
+        # Make the properties panel scrollable
+        self.props_canvas = tk.Canvas(self.props_frame, bg="#252526", bd=0, highlightthickness=0)
+        vsb = ttk.Scrollbar(self.props_frame, orient="vertical", command=self.props_canvas.yview)
+        self.props_scrollable_frame = tk.Frame(self.props_canvas, bg="#252526")
+        
+        self.props_canvas.configure(yscrollcommand=vsb.set)
+        vsb.pack(side="right", fill="y")
+        self.props_canvas.pack(side="left", fill="both", expand=True)
+        
+        self.props_canvas_win = self.props_canvas.create_window((0, 0), window=self.props_scrollable_frame, anchor="nw")
+        self.props_scrollable_frame.bind("<Configure>", lambda e: self.props_canvas.configure(scrollregion=self.props_canvas.bbox("all")))
+        self.props_canvas.bind("<Configure>", lambda e: self.props_canvas.itemconfig(self.props_canvas_win, width=e.width))
+
+    def _expand_to_level(self, max_depth):
+        """Expands tree nodes up to a specific depth."""
+        def _recurse(item, current_depth):
+            if current_depth < max_depth:
+                self.tree.item(item, open=True)
+                for child in self.tree.get_children(item):
+                    _recurse(child, current_depth + 1)
+            else:
+                self.tree.item(item, open=False)
+
+        for root_item in self.tree.get_children(''):
+            _recurse(root_item, 1)
 
     def _on_state_updated(self, json_data, source=None):
         if source == self: return
@@ -42,12 +114,19 @@ class JsonTreeWorkspace(tk.Frame):
         self._populate_tree("", "root", json_data)
 
     def _populate_tree(self, parent, key, value, path=""):
+        # We only want to see parents and their children (hierarchy)
+        # Primitives/values are shown in the bottom panel
         node_id = f"{path}.{key}" if path else str(key)
-        item = self.tree.insert(parent, "end", iid=node_id, text=str(key))
-        if isinstance(value, dict):
-            for k, v in value.items(): self._populate_tree(item, k, v, node_id)
-        elif isinstance(value, list):
-            for i, v in enumerate(value): self._populate_tree(item, i, v, node_id)
+        
+        if isinstance(value, (dict, list)):
+            item = self.tree.insert(parent, "end", iid=node_id, text=str(key))
+            if isinstance(value, dict):
+                for k, v in value.items(): self._populate_tree(item, k, v, node_id)
+            elif isinstance(value, list):
+                for i, v in enumerate(value): self._populate_tree(item, i, v, node_id)
+        else:
+            # We don't insert primitives into the tree anymore as per request
+            pass
 
     def _on_tree_select(self, event):
         selected = self.tree.selection()
@@ -81,8 +160,11 @@ class JsonTreeWorkspace(tk.Frame):
         else: self._build_primitive_editor(node_id, curr)
 
     def _build_properties_panel(self, parent_id, data_dict):
-        for k, v in data_dict.items():
-            if isinstance(v, (dict, list)): continue
+        # Sort keys so they appear consistently
+        for k in sorted(data_dict.keys()):
+            v = data_dict[k]
+            if isinstance(v, (dict, list)): continue # Hierarchy is in the tree
+            
             row = tk.Frame(self.props_scrollable_frame, bg="#252526")
             row.pack(fill="x", pady=1)
             tk.Label(row, text=k, width=15, anchor="w", bg="#252526", fg="#dcdcdc", font=("Consolas", 8)).pack(side="left")
@@ -131,8 +213,35 @@ class JsonCodeWorkspace(tk.Frame):
         self._build_ui()
         
         event_bus.subscribe("STATE_UPDATED", self._on_state_updated)
+        event_bus.subscribe("FOCUS_REQUESTED", self._on_focus_requested)
+        
         current_state = state_manager.get_state()
         if current_state: self._on_state_updated(current_state)
+
+    def _on_focus_requested(self, path, source=None):
+        """Scrolls the editor to the specified path and highlights it."""
+        if source == self or not path: return
+        
+        content = self.text_area.get("1.0", "end-1c")
+        # Simple heuristic to find the path in the JSON string
+        # Paths are like 'root.element.property'
+        # We look for '"element":' at the correct indentation (simplified)
+        parts = path.split('.')
+        target_key = f'"{parts[-1]}":'
+        
+        self.text_area.tag_remove("search_highlight", "1.0", "end")
+        
+        idx = "1.0"
+        while True:
+            idx = self.text_area.search(target_key, idx, nocase=False, stopindex="end")
+            if not idx: break
+            
+            # TODO: Add indentation check to ensure it's the CORRECT key for the path
+            # For now, we'll just go to the first match for simplicity
+            self.text_area.tag_add("search_highlight", idx, f"{idx} + {len(target_key)} chars")
+            self.text_area.tag_configure("search_highlight", background="#4b4b00")
+            self.text_area.see(idx)
+            break
 
     def _build_ui(self):
         # 1. Main Header
@@ -148,7 +257,7 @@ class JsonCodeWorkspace(tk.Frame):
         tk.Label(fold_controls, text="FOLD:", bg="#2d2d2d", fg="#888888", font=("Arial", 7, "bold")).pack(side="left", padx=(10, 5))
         
         # Level Buttons
-        for lvl in [1, 2, 3, 4, 5]:
+        for lvl in [3, 4, 5, 6]:
             tk.Button(fold_controls, text=f"L{lvl}", bg="#3c3c3c", fg="#dcdcdc", bd=0, 
                       font=("Arial", 7), command=lambda l=lvl: self.fold_to_level(l), width=3).pack(side="left", padx=1)
         
@@ -165,13 +274,21 @@ class JsonCodeWorkspace(tk.Frame):
                               font=("Consolas", 11), padx=2, bd=0, state="disabled", wrap="none")
         self.gutter.pack(side="left", fill="y")
         
-        self.text_area = tk.Text(container, bg="#1e1e1e", fg="#dcdcdc", insertbackground="white",
+        # We need a nested frame for the text area and its horizontal scrollbar
+        text_frame = tk.Frame(container, bg="#1e1e1e")
+        text_frame.pack(side="left", fill="both", expand=True)
+
+        self.text_area = tk.Text(text_frame, bg="#1e1e1e", fg="#dcdcdc", insertbackground="white",
                                  font=("Consolas", 11), wrap="none", undo=True, bd=0)
-        self.text_area.pack(side="left", fill="both", expand=True)
         
-        scrollbar = ttk.Scrollbar(container, orient="vertical", command=self._sync_scroll)
-        self.text_area.configure(yscrollcommand=self._sync_scroll_move)
-        scrollbar.pack(side="right", fill="y")
+        vsb = ttk.Scrollbar(container, orient="vertical", command=self._sync_scroll)
+        hsb = ttk.Scrollbar(text_frame, orient="horizontal", command=self.text_area.xview)
+        
+        self.text_area.configure(yscrollcommand=self._sync_scroll_move, xscrollcommand=hsb.set)
+        
+        vsb.pack(side="right", fill="y")
+        hsb.pack(side="bottom", fill="x")
+        self.text_area.pack(side="top", fill="both", expand=True)
 
         self.text_area.tag_configure("folded", elide=True)
         self.text_area.tag_configure("key", foreground="#9CDCFE")

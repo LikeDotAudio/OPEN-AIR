@@ -1,6 +1,6 @@
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
-# Interface/factories/leaf_editor_factory.py
+# Interface/PropertyEditor/property_leaf.py
 # Author: Anthony Peter Kuzub
 # Version: 20260416.Interface.1
 #
@@ -10,7 +10,7 @@ import tkinter as tk
 from tkinter import ttk, colorchooser
 from ...Core.state import state_manager
 
-class LeafEditorFactory:
+class PropertyLeaf:
     """Spawns specialized editor widgets for leaf JSON properties."""
 
     @staticmethod
@@ -18,9 +18,9 @@ class LeafEditorFactory:
         is_color = "color" in key.lower() or "colour" in key.lower() or (isinstance(value, str) and value.startswith("#") and len(value) in [4, 7])
 
         if is_color:
-            editor = LeafEditorFactory._create_color_editor(parent, key, value, full_path, source_instance, existing_widget)
+            editor = PropertyLeaf._create_color_editor(parent, key, value, full_path, source_instance, existing_widget)
         else:
-            editor = LeafEditorFactory._create_text_editor(parent, key, value, full_path, source_instance, existing_widget)
+            editor = PropertyLeaf._create_text_editor(parent, key, value, full_path, source_instance, existing_widget)
             
         return editor
 
@@ -33,13 +33,12 @@ class LeafEditorFactory:
             self.source = source
 
             self.pack(fill="x", pady=2, padx=10)
-            self.columnconfigure(0, weight=0)  # Label column
-            self.columnconfigure(1, weight=1)  # Editor column
+            self.columnconfigure(0, weight=1)
 
-            tk.Label(self, text=f"{key}:", bg="#2b2b2b", fg="#cccccc", width=15, anchor="e").grid(row=0, column=0, sticky="e", padx=(0, 10))
+            tk.Label(self, text=f"{key}:", bg="#2b2b2b", fg="#cccccc", font=("Arial", 8), anchor="w").grid(row=0, column=0, sticky="w")
 
             editor_frame = tk.Frame(self, bg="#2b2b2b")
-            editor_frame.grid(row=0, column=1, sticky="we")
+            editor_frame.grid(row=1, column=0, sticky="we")
 
             bg_color = str(value).lower()
             if not bg_color.startswith("#"): bg_color = "#2b2b2b"
@@ -78,10 +77,10 @@ class LeafEditorFactory:
 
     @staticmethod
     def _create_color_editor(parent, key, value, full_path, source, existing_widget=None):
-        if existing_widget and isinstance(existing_widget, LeafEditorFactory._ColorEditorWidget):
+        if existing_widget and isinstance(existing_widget, PropertyLeaf._ColorEditorWidget):
             existing_widget.set_value(value)
             return existing_widget
-        return LeafEditorFactory._ColorEditorWidget(parent, key, value, full_path, source)
+        return PropertyLeaf._ColorEditorWidget(parent, key, value, full_path, source)
 
     
     class _TextEditorWidget(tk.Frame):
@@ -92,15 +91,14 @@ class LeafEditorFactory:
             self.source = source
 
             self.pack(fill="x", pady=2, padx=10) # Pack the main frame
-            self.columnconfigure(0, weight=0)  # Label column
-            self.columnconfigure(1, weight=1)  # Entry column
+            self.columnconfigure(0, weight=1)
             
-            self.lbl = tk.Label(self, text=f"{key}:", bg="#2b2b2b", fg="#cccccc", width=15, anchor="e")
-            self.lbl.grid(row=0, column=0, sticky="e", padx=(0, 10))
+            self.lbl = tk.Label(self, text=f"{key}:", bg="#2b2b2b", fg="#cccccc", font=("Arial", 8), anchor="w")
+            self.lbl.grid(row=0, column=0, sticky="w")
 
             self.entry = ttk.Entry(self, style="Property.TEntry")
             self.entry.insert(0, str(value))
-            self.entry.grid(row=0, column=1, sticky="we")
+            self.entry.grid(row=1, column=0, sticky="we")
 
             self.entry.bind("<Return>", self._update_state_from_entry)
             self.entry.bind("<FocusOut>", self._update_state_from_entry)
@@ -123,7 +121,7 @@ class LeafEditorFactory:
                 state_manager.update_state(new_value, path=self.full_path, source=self.source)
                 self.set_value(new_value)
             except ValueError:
-                matrix_log("ui", "gui_builder", "LeafEditorFactory", f"Invalid numeric input: {current_value_str}", "WARNING")
+                matrix_log("ui", "gui_builder", "PropertyLeaf", f"Invalid numeric input: {current_value_str}", "WARNING")
                 # Revert to last good value
                 self.set_value(self.scrub_start_val)
 
@@ -161,10 +159,10 @@ class LeafEditorFactory:
 
     @staticmethod
     def _create_text_editor(parent, key, value, full_path, source, existing_widget=None):
-        if existing_widget and isinstance(existing_widget, LeafEditorFactory._TextEditorWidget):
+        if existing_widget and isinstance(existing_widget, PropertyLeaf._TextEditorWidget):
             existing_widget.set_value(value)
             return existing_widget
-        return LeafEditorFactory._TextEditorWidget(parent, key, value, full_path, source)
+        return PropertyLeaf._TextEditorWidget(parent, key, value, full_path, source)
 
     @staticmethod
     def _bind_entry_focus(frame, entry, lbl, full_path, old_val, source):

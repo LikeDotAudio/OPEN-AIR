@@ -1,4 +1,4 @@
-# Interface/builders/editor_menus.py
+# Interface/Window/editor_menus.py
 # Author: Anthony Peter Kuzub
 # Version: 20260416.Interface.1
 #
@@ -15,6 +15,11 @@ class EditorMenuBuilder:
         editor.menubar = tk.Menu(editor.window)
         editor.window.config(menu=editor.menubar)
 
+        # Bind shortcuts
+        editor.window.bind("<Control-n>", lambda e: editor.new_workspace())
+        editor.window.bind("<Control-o>", lambda e: editor.open_workspace())
+        editor.window.bind("<Control-s>", lambda e: editor.save_workspace())
+
         EditorMenuBuilder._build_file_menu(editor)
         EditorMenuBuilder._build_test_menu(editor)
         EditorMenuBuilder._build_language_menu(editor)
@@ -22,8 +27,9 @@ class EditorMenuBuilder:
 
     @staticmethod
     def _build_file_menu(editor):
-        """Builds the FILE menu with open, save, and exit actions."""
+        """Builds the FILE menu with new, open, save, and exit actions."""
         file_menu = tk.Menu(editor.menubar, tearoff=0)
+        file_menu.add_command(label="New", command=editor.new_workspace, accelerator="Ctrl+N")
         file_menu.add_command(label="Open", command=editor.open_workspace, accelerator="Ctrl+O")
         file_menu.add_command(label="Save & Backup", command=editor.save_workspace, accelerator="Ctrl+S")
         file_menu.add_separator()

@@ -1,4 +1,4 @@
-# oaGuiEditorWYSIWYG/Tests/workspaces/Core/layout/test_overlay.py
+# oaGuiEditorWYSIWYG/Tests/Tabs/Core/layout/test_overlay.py
 # Author: Gemini (Collaborator)
 # Version: 20260322.1430.1
 #
@@ -9,8 +9,8 @@ import unittest
 from unittest.mock import MagicMock, call
 
 # Placeholder for actual imports if classes were available in the project.
-# from oaGuiEditorWYSIWYG.workspaces.Core.layout.design_mode_overlay import DesignModeOverlay
-# from oaGuiEditorWYSIWYG.workspaces.Core.layout.element_behind import ElementBehind # Example placeholder
+# from oaGuiEditorWYSIWYG.Tabs.Core.layout.design_mode_overlay import DesignModeOverlay
+# from oaGuiEditorWYSIWYG.Tabs.Core.layout.element_behind import ElementBehind # Example placeholder
 
 class TestDesignModeOverlay(unittest.TestCase):
     """

@@ -11,7 +11,7 @@
 #
 #        self.root = tk.Tk()
 #        self.root.withdraw()
-#        self.factory = LeafEditorFactory()
+#        self.factory = PropertyLeaf()
 #
 #        self.root.destroy()
 #

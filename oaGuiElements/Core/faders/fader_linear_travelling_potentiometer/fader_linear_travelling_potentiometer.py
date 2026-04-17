@@ -20,6 +20,7 @@ from oaStyle.Core.style import THEMES, DEFAULT_THEME
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 from oaGuiManager.Core.transparency.transparency import TransparencyManager
 from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
+from oaGuiBuilder.Core.base_widget_creator import BaseWidgetCreator
 
 # --- EXTRACTED CORE MODULES ---
 from .Core.ltp_renderer_mixin import LTPRendererMixin
@@ -33,7 +34,6 @@ ROTATION_MIN = -100.0
 ROTATION_MAX = 100.0
 
 class CustomLTPFrame(tk.Frame, LTPRendererMixin, LTPInteractionMixin):
-    # Added **kwargs to the signature
     def __init__(self, master, config, path, state_mirror_engine, subscriber_router, base_mqtt_topic, **kwargs):
         colors = THEMES.get(DEFAULT_THEME, THEMES["dark"])
         f_cfg, k_cfg, s_cfg = config.get("fader_config", config), config.get("knob_config", config), config.get("style", config)
@@ -72,7 +72,6 @@ class CustomLTPFrame(tk.Frame, LTPRendererMixin, LTPInteractionMixin):
         self.accent_color, self.value_color = colors.get("accent"), colors.get("accent")
 
         # 3. State
-        # Corrected to use 'master' and access 'kwargs' properly
         self.linear_var = kwargs.get("linear_variable") or tk.DoubleVar(master=master, value=float(f_cfg.get("value_default", 0.0)))
         self.rotation_var = kwargs.get("rotation_variable") or tk.DoubleVar(master=master, value=float(k_cfg.get("rotation_default", 0.0)))
         self.is_sliding, self.is_hovered = False, False
@@ -91,36 +90,32 @@ class CustomLTPFrame(tk.Frame, LTPRendererMixin, LTPInteractionMixin):
         self.rotation_var.trace_add("write", lambda *a: self.redraw(self.canvas))
 
 @WidgetRegistry.register("_CustomLTP")
-class BuilderFaderLinearTravellingPotentiometerCreator(TransparencyMixin):
-    @staticmethod
-    def make(parent_widget, config_data, context=None, **kwargs):
-        # This line creates a context object 'ctx' where attributes are derived from 'kwargs' if 'context' is None.
-        # This implies that essential components like state_mirror_engine and subscriber_router
-        # might be passed via kwargs if context is not provided.
+class BuilderFaderLinearTravellingPotentiometerCreator(BaseWidgetCreator, TransparencyMixin):
+    
+    is_composite = True
+
+    def _assemble_ui(self, parent_widget, config_data, context, **kwargs):
+        """Assembles the LTP UI."""
         ctx = context if context else type('obj', (object,), kwargs)()
+        b_inst = getattr(ctx, 'builder_instance', None) or getattr(ctx, 'app_instance', None) or kwargs.get('builder_instance')
         
-        # Pass **kwargs to CustomLTPFrame to provide linear_variable and rotation_variable.
-        # Also, use ctx.subscriber_router and ctx.base_mqtt_topic_from_path for proper initialization.
+        path = config_data.get("path")
+        s_engine = getattr(ctx, 'state_mirror_engine', None) or kwargs.get('state_mirror_engine')
+        b_topic = getattr(ctx, 'base_mqtt_topic_from_path', None) or kwargs.get('base_mqtt_topic_from_path', "")
+        s_router = getattr(ctx, 'subscriber_router', None) or kwargs.get('subscriber_router')
+
         frame = CustomLTPFrame(
-            parent_widget, 
-            config_data, 
-            config_data.get("path"), 
-            ctx.state_mirror_engine, 
-            ctx.subscriber_router,  # Use ctx.subscriber_router instead of None
-            ctx.base_mqtt_topic_from_path, # Use ctx.base_mqtt_topic_from_path
-            **kwargs # Pass captured kwargs to CustomLTPFrame
+            parent_widget, config_data, path, s_engine, s_router, b_topic, **kwargs
         )
         
-        if hasattr(ctx.builder_instance, '_apply_transparency'):
-            TransparencyManager.apply_transparency(frame, frame.canvas, config_data, ctx.builder_instance)
+        if hasattr(b_inst, '_apply_transparency'):
+            TransparencyManager.apply_transparency(frame, frame.canvas, config_data, b_inst)
         
-        # Ensure frame.path and ctx.state_mirror_engine are valid before proceeding.
-        if frame.path and ctx.state_mirror_engine:
+        if path and s_engine:
             lin_cfg = {**config_data, **config_data.get("fader_config", {})}
-            ctx.state_mirror_engine.register_widget(frame.path, frame.linear_var, ctx.base_mqtt_topic_from_path, lin_cfg)
+            s_engine.register_widget(path, frame.linear_var, b_topic, lin_cfg)
             
-            rot_path = f"{frame.path}.rotation"
-            # Ensure rotation_min and rotation_max are accessible from frame's attributes if not in config
+            rot_path = f"{path}.rotation"
             rot_cfg = {
                 **config_data, 
                 **config_data.get("knob_config", {}), 
@@ -128,12 +123,16 @@ class BuilderFaderLinearTravellingPotentiometerCreator(TransparencyMixin):
                 "value_min": frame.rotation_min, 
                 "value_max": frame.rotation_max
             }
-            ctx.state_mirror_engine.register_widget(rot_path, frame.rotation_var, ctx.base_mqtt_topic_from_path, rot_cfg)
+            s_engine.register_widget(rot_path, frame.rotation_var, b_topic, rot_cfg)
             
-            ctx.state_mirror_engine.initialize_widget_state(frame.path)
-            ctx.state_mirror_engine.initialize_widget_state(rot_path)
+            s_engine.initialize_widget_state(path)
+            s_engine.initialize_widget_state(rot_path)
 
-        return frame
+        return frame, frame.canvas
+
+    @staticmethod
+    def make(parent_widget, config_data, context=None, **kwargs):
+        return BuilderFaderLinearTravellingPotentiometerCreator.build(parent_widget, config_data, context, **kwargs)
 
     def make_fader_linear_travelling_potentiometer(self, parent_widget, config_data, context=None, **kwargs):
-        return BuilderFaderLinearTravellingPotentiometerCreator.make(parent_widget, config_data, context, **kwargs)
+        return BuilderFaderLinearTravellingPotentiometerCreator.build(parent_widget, config_data, context, **kwargs)

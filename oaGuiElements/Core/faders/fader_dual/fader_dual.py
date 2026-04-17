@@ -19,6 +19,7 @@ from oaStyle.Core.style import THEMES, DEFAULT_THEME
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 from oaGuiManager.Core.transparency.transparency import TransparencyManager
 from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
+from oaGuiBuilder.Core.base_widget_creator import BaseWidgetCreator
 
 # --- EXTRACTED CORE MODULES ---
 from .Core.dual_fader_renderer_mixin import DualFaderRendererMixin
@@ -72,29 +73,40 @@ class CustomDualFaderFrame(tk.Frame, DualFaderRendererMixin, DualFaderInteractio
     def _draw(self): self.render()
 
 @WidgetRegistry.register("_CustomDualHorizontalFader", "_CustomDualVerticalFader")
-class BuilderFaderDualCreator(TransparencyMixin):
+class BuilderFaderDualCreator(BaseWidgetCreator, TransparencyMixin):
     
-    @staticmethod
-    def make(parent_widget, config_data, context=None, **kwargs):
+    is_composite = True
+
+    def _assemble_ui(self, parent_widget, config_data, context, **kwargs):
+        """Assembles the Dual Fader UI."""
         ctx = context if context else type('obj', (object,), kwargs)()
-        b_inst = ctx.builder_instance if hasattr(ctx, 'builder_instance') else ctx.app_instance
+        b_inst = getattr(ctx, 'builder_instance', None) or getattr(ctx, 'app_instance', None) or kwargs.get('builder_instance')
         
         path = config_data.get("path")
         orientation = "vertical" if "_CustomDualVerticalFader" in config_data.get("type", "") else "horizontal"
-        frame = CustomDualFaderFrame(parent_widget, config_data, path, ctx.state_mirror_engine, ctx.base_mqtt_topic_from_path, ctx.subscriber_router, orientation)
+        
+        s_engine = getattr(ctx, 'state_mirror_engine', None) or kwargs.get('state_mirror_engine')
+        b_topic = getattr(ctx, 'base_mqtt_topic_from_path', None) or kwargs.get('base_mqtt_topic_from_path', "")
+        s_router = getattr(ctx, 'subscriber_router', None) or kwargs.get('subscriber_router')
+
+        frame = CustomDualFaderFrame(parent_widget, config_data, path, s_engine, b_topic, s_router, orientation)
         
         if hasattr(b_inst, '_apply_transparency'):
             TransparencyManager.apply_transparency(frame, frame.canvas, config_data, b_inst)
         
-        if path and ctx.state_mirror_engine:
+        if path and s_engine:
             for v_id, var in [("V1", frame.v1_var), ("V2", frame.v2_var)]:
                 v_path = f"{path}/{v_id}"
-                topic = ctx.state_mirror_engine.register_widget(v_path, var, ctx.base_mqtt_topic_from_path, config_data)
-                if ctx.subscriber_router and topic:
-                    ctx.subscriber_router.subscribe_to_topic(topic, ctx.state_mirror_engine.sync_incoming_mqtt_to_gui)
-                ctx.state_mirror_engine.initialize_widget_state(v_path)
+                topic = s_engine.register_widget(v_path, var, b_topic, config_data)
+                if s_router and topic:
+                    s_router.subscribe_to_topic(topic, s_engine.sync_incoming_mqtt_to_gui)
+                s_engine.initialize_widget_state(v_path)
                 
-        return frame
+        return frame, frame.canvas
+
+    @staticmethod
+    def make(parent_widget, config_data, context=None, **kwargs):
+        return BuilderFaderDualCreator.build(parent_widget, config_data, context, **kwargs)
 
     def make_fader_dual(self, parent_widget, config_data, context=None, **kwargs):
-        return BuilderFaderDualCreator.make(parent_widget, config_data, context, builder_instance=self, **kwargs)
+        return BuilderFaderDualCreator.build(parent_widget, config_data, context, **kwargs)

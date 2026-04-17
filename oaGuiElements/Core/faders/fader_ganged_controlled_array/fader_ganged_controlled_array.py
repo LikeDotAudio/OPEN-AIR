@@ -20,6 +20,7 @@ from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 from oaGui.Methods.i18n_utils import get_text
 from oaGuiManager.Core.transparency.transparency import TransparencyManager
 from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
+from oaGuiBuilder.Core.base_widget_creator import BaseWidgetCreator
 
 # --- EXTRACTED CORE MODULES ---
 from oaGuiElements.Core.faders.fader_ganged_controlled_array.Core.gca_controller_mixin import GCAControllerMixin
@@ -117,43 +118,43 @@ class CompositeFaderFrame(
         self._draw()
 
 @WidgetRegistry.register("_CompositeFader")
-class BuilderFaderGangedControlledArrayCreator(TransparencyMixin):
+class BuilderFaderGangedControlledArrayCreator(BaseWidgetCreator, TransparencyMixin):
     
-    @staticmethod
-    def make(parent_widget, config_data, context=None, **kwargs):
-        label = get_text(config_data.get("label_active"), "Composite")
-        path = config_data.get("path", "")
-        
-        if context:
-            state_mirror_engine = context.state_mirror_engine
-            subscriber_router = context.subscriber_router
-            base_mqtt_topic_from_path = context.base_mqtt_topic_from_path
-            builder_instance = context.builder_instance
-        else:
-            state_mirror_engine = kwargs.get("state_mirror_engine")
-            subscriber_router = kwargs.get("subscriber_router")
-            base_mqtt_topic_from_path = kwargs.get("base_mqtt_topic_from_path", "")
-            builder_instance = kwargs.get("builder_instance")
+    is_composite = True
 
-        frame = CompositeFaderFrame(parent_widget, config_data, path, state_mirror_engine, subscriber_router, base_mqtt_topic_from_path)
+    def _assemble_ui(self, parent_widget, config_data, context, **kwargs):
+        """Assembles the GCA Fader UI."""
+        ctx = context if context else type('obj', (object,), kwargs)()
+        b_inst = getattr(ctx, 'builder_instance', None) or getattr(ctx, 'app_instance', None) or kwargs.get('builder_instance')
         
-        if hasattr(builder_instance, '_apply_transparency'):
-            TransparencyManager.apply_transparency(frame, frame.canvas, config_data, builder_instance)
+        path = config_data.get("path", "")
+        s_engine = getattr(ctx, 'state_mirror_engine', None) or kwargs.get('state_mirror_engine')
+        b_topic = getattr(ctx, 'base_mqtt_topic_from_path', None) or kwargs.get('base_mqtt_topic_from_path', "")
+        s_router = getattr(ctx, 'subscriber_router', None) or kwargs.get('subscriber_router')
+
+        frame = CompositeFaderFrame(parent_widget, config_data, path, s_engine, s_router, b_topic)
         
-        if path and state_mirror_engine:
-            topic = state_mirror_engine.register_widget(path, frame.master_value, base_mqtt_topic_from_path, config_data)
-            if subscriber_router and topic:
-                subscriber_router.subscribe_to_topic(topic, state_mirror_engine.sync_incoming_mqtt_to_gui)
-            state_mirror_engine.initialize_widget_state(path)
+        if hasattr(b_inst, '_apply_transparency'):
+            TransparencyManager.apply_transparency(frame, frame.canvas, config_data, b_inst)
+        
+        if path and s_engine:
+            topic = s_engine.register_widget(path, frame.master_value, b_topic, config_data)
+            if s_router and topic:
+                s_router.subscribe_to_topic(topic, s_engine.sync_incoming_mqtt_to_gui)
+            s_engine.initialize_widget_state(path)
             
             for i in range(frame.num_channels):
                 child_path = f"{path}/ch_{i+1}"
-                child_topic = state_mirror_engine.register_widget(child_path, frame.child_values[i], base_mqtt_topic_from_path, config_data)
-                if subscriber_router and child_topic:
-                    subscriber_router.subscribe_to_topic(child_topic, state_mirror_engine.sync_incoming_mqtt_to_gui)
-                state_mirror_engine.initialize_widget_state(child_path)
+                child_topic = s_engine.register_widget(child_path, frame.child_values[i], b_topic, config_data)
+                if s_router and child_topic:
+                    s_router.subscribe_to_topic(child_topic, s_engine.sync_incoming_mqtt_to_gui)
+                s_engine.initialize_widget_state(child_path)
 
-        return frame
+        return frame, frame.canvas
+
+    @staticmethod
+    def make(parent_widget, config_data, context=None, **kwargs):
+        return BuilderFaderGangedControlledArrayCreator.build(parent_widget, config_data, context, **kwargs)
 
     def make_fader_ganged_controlled_array(self, parent_widget, config_data, context=None, **kwargs):
-        return BuilderFaderGangedControlledArrayCreator.make(parent_widget, config_data, context, builder_instance=self, **kwargs)
+        return BuilderFaderGangedControlledArrayCreator.build(parent_widget, config_data, context, **kwargs)

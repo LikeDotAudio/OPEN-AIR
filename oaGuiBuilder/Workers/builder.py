@@ -40,11 +40,19 @@ from oaGuiElements.Core.input.input_mousewheel_mixin.input_mousewheel_mixin impo
 
 class AutoScrollbar(ttk.Scrollbar):
     """An industrial scrollbar that manages its own visibility based on content scale."""
+    def __init__(self, master=None, **kwargs):
+        self.grid_kwargs = {}
+        super().__init__(master, **kwargs)
+
+    def grid(self, **kwargs):
+        self.grid_kwargs.update(kwargs)
+        super().grid(**kwargs)
+
     def set(self, lo, hi):
         if float(lo) <= 0.0 and float(hi) >= 1.0:
             self.grid_remove()
         else:
-            self.grid()
+            self.grid(**self.grid_kwargs)
         ttk.Scrollbar.set(self, lo, hi)
 
 class DynamicGuiBuilder(
@@ -127,10 +135,23 @@ class DynamicGuiBuilder(
         if self.is_editor: self._draw_editor_grid()
 
     def _setup_scrolling(self):
-        """Wires up the vertical industrial scrollbar. Horizontal scrolling is disabled."""
+        """Wires up the industrial scrollbars. Horizontal scrolling depends on allow_horizontal_scroll."""
         self.scrollbar_v = AutoScrollbar(self.main_content_frame, orient=tk.VERTICAL, command=self.canvas.yview)
         self.canvas.configure(yscrollcommand=self._on_scroll_v)
         self.scrollbar_v.grid(row=0, column=1, sticky="ns")
+
+        if self.allow_horizontal_scroll:
+            self.scrollbar_h = AutoScrollbar(self.main_content_frame, orient=tk.HORIZONTAL, command=self.canvas.xview)
+            self.canvas.configure(xscrollcommand=self._on_scroll_h)
+            self.scrollbar_h.grid(row=1, column=0, sticky="ew")
+
+    def _on_scroll_v(self, *args):
+        self.scrollbar_v.set(*args)
+        self._trigger_scroll_sync()
+
+    def _on_scroll_h(self, *args):
+        self.scrollbar_h.set(*args)
+        self._trigger_scroll_sync()
 
     def _setup_event_bindings(self):
         """Standardizes lifecycle and resizing event handlers."""
@@ -147,14 +168,10 @@ class DynamicGuiBuilder(
         else:
             self._rebuild_gui()
 
-    def _on_scroll_v(self, *args):
-        self.scrollbar_v.set(*args)
-        self._trigger_scroll_sync()
-
     def _trigger_scroll_sync(self):
         """Debounces reslicing notifications during continuous scrolling."""
-        if self._is_rebuilding or self._resize_timer: return
-        if not self._scroll_timer:
+        if self._is_rebuilding or getattr(self, '_resize_timer', None): return
+        if not getattr(self, '_scroll_timer', None):
             self._scroll_timer = self.after(SCROLL_SYNC_DELAY, self._perform_scroll_sync)
 
     def _perform_scroll_sync(self):
@@ -177,15 +194,14 @@ class DynamicGuiBuilder(
         self._resize_timer = None
         if width <= 1 or not self.canvas_window_id: return
 
-        # ⚡ HORIZONTAL LOCK: Content frame width always matches visible canvas width.
-        req_h = self.scroll_frame.winfo_reqheight()
-        new_h = max(self.canvas.winfo_height(), req_h)
+        # ⚡ HORIZONTAL LOCK: Content frame width matches visible canvas width UNLESS horizontal scroll is allowed.
+        req_w = self.scroll_frame.winfo_reqwidth()
+        new_w = width if not self.allow_horizontal_scroll else max(width, req_w)
         
-        if width <= 1 or new_h <= 1: return # X11 safety
+        if new_w <= 1: return # X11 safety
 
         try:
-            # itemconfig width=width forces the scroll_frame to stay within visible bounds.
-            self.canvas.itemconfig(self.canvas_window_id, width=int(width), height=int(new_h))
+            self.canvas.itemconfig(self.canvas_window_id, width=int(new_w))
             self._trigger_background_sync(force=True)
         except tk.TclError: pass
 

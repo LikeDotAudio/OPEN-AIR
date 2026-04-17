@@ -1,6 +1,6 @@
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
-# Interface/workspaces/interactive_layout.py
+# Interface/Tabs/InteractiveLayout/interactive_layout.py
 # Author: Anthony Peter Kuzub
 # Version: 20260416.Interface.1
 #
@@ -10,15 +10,15 @@ import tkinter as tk
 from tkinter import ttk
 from oaLogging.Core.logger import GUI_LOGGER as logger
 from oaComBroker.Core.event_bus import event_bus
-from ...Core.state import state_manager
+from ....Core.state import state_manager
 from oaGui.Methods.safe_after_mixin import SafeAfterMixin
 
 # --- MODULAR CORE COMPONENTS ---
-from ..layout_engine.preview_engine import PreviewEngine
-from ..layout_engine.focus import FocusManager
-from ..layout_engine.overlay_manager import OverlayManager
-from ..layout_engine.ruler import Ruler
-from ..layout_engine.ghost_overlay import GhostOverlay
+from ...layout_engine.preview_engine import PreviewEngine
+from ...layout_engine.focus import FocusManager
+from ...layout_engine.overlay_manager import OverlayManager
+from ...layout_engine.ruler import Ruler
+from ...layout_engine.ghost_overlay import GhostOverlay
 
 class InteractiveLayout(tk.Frame, SafeAfterMixin):
     """The visual workspace where users interact with the GUI layout."""
@@ -52,6 +52,8 @@ class InteractiveLayout(tk.Frame, SafeAfterMixin):
         
         event_bus.subscribe("STATE_UPDATED", self._on_state_updated)
         event_bus.subscribe("FOCUS_REQUESTED", self._on_external_focus)
+        event_bus.subscribe("COMPONENT_DRAGGING", self._on_component_dragging)
+        event_bus.subscribe("COMPONENT_DROPPED", self._on_component_dropped_global)
         
         self.bind("<Destroy>", self._on_destroy)
         self.bind("<Configure>", self._on_layout_configure)
@@ -204,6 +206,27 @@ class InteractiveLayout(tk.Frame, SafeAfterMixin):
 
     def _manual_rebuild(self):
         self.pending_changes = 0; self._update_rebuild_ui(); self._refresh_preview()
+
+    def _on_component_dragging(self, x, y, name):
+        """Handles real-time feedback for components being dragged from the Grab Bag."""
+        if not self.winfo_exists(): return
+        
+        # 1. Ensure ghost overlay is visible
+        self.ghost_overlay.place(x=0, y=0, relwidth=1, relheight=1)
+        
+        # 2. Find target and update visuals
+        target = self.focus_mgr.find_drop_target_at(x, y)
+        if target:
+            tw, tp, tmode, tcoords = target
+            self.ghost_overlay.draw_insertion_line(*tcoords)
+        else:
+            self.ghost_overlay.clear_insertion()
+
+    def _on_component_dropped_global(self, x, y, name, schema):
+        """Clears drag feedback when a component is dropped."""
+        if not self.winfo_exists(): return
+        self.ghost_overlay.clear()
+        self.ghost_overlay.place_forget()
 
     def _on_widget_focused(self, path):
         event_bus.publish("FOCUS_REQUESTED", path=path, source=self)

@@ -97,12 +97,22 @@ class StandaloneRunner:
         """Gracefully stops all editor services and exits."""
         matrix_log("ui", "gui_builder", "exit", "🚀 [LAUNCHING] Standalone Builder: Program exiting.", "INFO")
         try:
-            if self.app:
+            if hasattr(self, 'app') and self.app:
                 self.app.shutdown()
+            
             if self.root:
-                self.root.destroy()
+                # Check if root still exists before destroying
+                try:
+                    if self.root.winfo_exists():
+                        self.root.destroy()
+                except tk.TclError:
+                    pass # Already destroyed
+            
             sys.exit(0)
-        except Exception:
+        except SystemExit:
+            raise
+        except Exception as e:
+            matrix_log("ui", "gui_builder", "exit", f"❌ Error during shutdown: {e}", "ERROR")
             sys.exit(1)
 
 def main():

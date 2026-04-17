@@ -14,6 +14,8 @@ class StructuralAssembler:
     def create_block(parent, value, builder):
         # Blocks are typically transparent canvases
         target = tk.Canvas(parent, bd=0, relief="flat", highlightthickness=0, bg="#2b2b2b", width=10, height=10)
+        target.grid_propagate(True) # ⚡ PROPAGATION: Allow canvas to grow to fit gridded children
+        
         if builder and hasattr(builder, 'show_structure') and builder.show_structure.get():
             target.config(highlightbackground="red", highlightthickness=1)
         

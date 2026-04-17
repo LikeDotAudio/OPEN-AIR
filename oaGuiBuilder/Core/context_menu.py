@@ -1,134 +1,106 @@
-# Core/context_menu.py
+# oaGuiBuilder/Core/context_menu.py
 # Author: Anthony Peter Kuzub
-# Version: 1.0.0
+# Version: 20260416.Modular.1
 #
-# Description: Brief summary of purpose
+# Description: Context Menu orchestrator for the Dynamic Builder.
+# Handles interactive designer tools (WYSIWYG) and dependency auditing.
 
-import os
-import time
+import subprocess
+import sys
 import tkinter as tk
-from tkinter import ttk
 from pathlib import Path
-
-# --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False
 from oaLogging.Core.logger import builder_logger
 
 class BuilderContextMenuMixin:
     """
-    Handles context menu operations for the DynamicGuiBuilder,
-    including launching the WYSIWYG editor and checking dependencies.
+    Mixin providing right-click design-time tools.
+    Encapsulates external process management for the WYSIWYG editor.
     """
     _editor_process = None
     _editor_file = None
 
     def _setup_context_menu(self):
-        if LOCAL_DEBUG: builder_logger.trace("🍔🔽🖱️ [UI] Configuring right-click context menu.")
+        """Initializes the Tkinter Menu and binds physical button events."""
         self.context_menu = tk.Menu(self, tearoff=0)
-        self.context_menu.add_command(label="WYSIWYG Editor", command=self._show_wysiwyg_editor)
-        self.context_menu.add_command(label="Check Dependencies", command=self._check_dependencies)
+        self.context_menu.add_command(label="WYSIWYG Editor", command=self._launch_wysiwyg_editor)
+        self.context_menu.add_command(label="Check Dependencies", command=self._run_dependency_audit)
         self.context_menu.add_separator()
-        self.context_menu.add_command(label="Reload", command=self._force_rebuild_gui)
+        self.context_menu.add_command(label="Reload UI", command=self._force_rebuild_gui)
         
-        # Bind right-click to canvas and scroll frame
-        if hasattr(self, 'canvas'):
-            self.canvas.bind("<Button-3>", self._on_right_click)
-        if hasattr(self, 'scroll_frame'):
-            self.scroll_frame.bind("<Button-3>", self._on_right_click)
+        # Physical Bindings
+        target_widgets = [w for w in ['canvas', 'scroll_frame'] if hasattr(self, w)]
+        for attr in target_widgets:
+            getattr(self, attr).bind("<Button-3>", self._on_right_click)
 
-    def bind_to_widget(self, widget):
-        """Binds the context menu to a specific widget."""
+    def bind_context_menu(self, widget):
+        """Standard API to attach the builder context menu to any UI element."""
         if hasattr(self, 'context_menu') and self.context_menu:
             widget.bind("<Button-3>", self._on_right_click, add="+")
 
     def _on_right_click(self, event):
-        """Displays context menu on right click."""
-        if LOCAL_DEBUG:
-            builder_logger.debug(f"🍔🔽🖱️ Right-click detected on widget: {event.widget}")
+        """Displays the popup menu at the mouse pointer root coordinates."""
         try:
             self.context_menu.tk_popup(event.x_root, event.y_root)
         except Exception as e:
-            builder_logger.exception(f"🍔🔽🖱️💥 Failed to show context menu: {e}")
+            builder_logger.error(f"🍔🔽🖱️ Context Menu Failure: {e}")
         finally:
             self.context_menu.grab_release()
 
-    def _show_wysiwyg_editor(self):
-        """Opens the WYSIWYG Editor in a separate process, ensuring only ONE instance exists system-wide."""
-        import subprocess
-        import sys
-        
+    def _launch_wysiwyg_editor(self):
+        """
+        Orchestrates the spawning of the external WYSIWYG editor process.
+        Ensures a singleton process per file.
+        """
         if not hasattr(self, 'json_filepath') or not self.json_filepath:
-            builder_logger.error("🏗️🚫🛑 [BUILDER] DynamicGuiBuilder: Cannot launch editor without a valid JSON file path.")
+            builder_logger.error("🏗️🚫 Editor launch failed: No target JSON file found.")
             return
 
-        # ⚡ SINGLETON CHECK: Verify if an editor process is already running
-        if BuilderContextMenuMixin._editor_process:
-            # Check if process is still alive
-            if BuilderContextMenuMixin._editor_process.poll() is None:
-                # Still running. Is it the same file?
-                if str(BuilderContextMenuMixin._editor_file) == str(self.json_filepath):
-                    if LOCAL_DEBUG: builder_logger.info(f"🏗️📂⚠️ [BUILDER] Editor already active for '{self.json_filepath.name}'. Refocusing is up to the OS.")
-                    return
-                else:
-                    # Different file requested. Close the old one first.
-                    if LOCAL_DEBUG: builder_logger.info(f"🏗️📂♻️ [BUILDER] Closing previous editor for '{BuilderContextMenuMixin._editor_file.name}' to open '{self.json_filepath.name}'.")
-                    try:
-                        BuilderContextMenuMixin._editor_process.terminate()
-                        BuilderContextMenuMixin._editor_process.wait(timeout=1.0)
-                    except Exception as e:
-                        builder_logger.warning(f"🏗️🚫⚠️ [BUILDER] Failed to gracefully close previous editor: {e}")
-                        BuilderContextMenuMixin._editor_process.kill()
-            
-            # Clear state for a fresh spawn
-            BuilderContextMenuMixin._editor_process = None
-            BuilderContextMenuMixin._editor_file = None
+        if self._is_editor_active():
+            if str(self._editor_file) == str(self.json_filepath):
+                return # Already editing this file
+            self._terminate_active_editor()
 
-        if LOCAL_DEBUG: builder_logger.info(f"🏗️🚀💻 [BUILDER] DynamicGuiBuilder: Launching standalone WYSIWYG Editor process for {self.json_filepath}")
-        
-        # Path to the standalone runner
-        # ⚡ CORRECTED: Point to the actual location in oaGuiEditorWYSIWYG
+        self._spawn_editor_process()
+
+    def _is_editor_active(self):
+        """Checks if a previously spawned editor is still running."""
+        return self._editor_process and self._editor_process.poll() is None
+
+    def _terminate_active_editor(self):
+        """Gracefully shuts down the current editor process."""
+        try:
+            self._editor_process.terminate()
+            self._editor_process.wait(timeout=1.0)
+        except Exception:
+            self._editor_process.kill()
+        self._editor_process = None
+
+    def _spawn_editor_process(self):
+        """Physical execution of the subprocess call for the editor."""
         runner_path = Path(__file__).resolve().parent.parent.parent / "oaGuiEditorWYSIWYG" / "Managers" / "run_builder.py"
         
-        # ⚡ GRAVITY OF ERRORS: Explicit check before spawning
         if not runner_path.exists():
-            builder_logger.error(f"🏗️🚫🛑 [BUILDER] CRITICAL: Standalone runner not found at {runner_path}")
+            builder_logger.error(f"🏗️🚫 Orchestrator runner missing: {runner_path}")
             return
 
         try:
-            # Launch as a separate process and track it globally
             BuilderContextMenuMixin._editor_process = subprocess.Popen([
-                sys.executable, 
-                str(runner_path), 
-                str(self.json_filepath)
+                sys.executable, str(runner_path), str(self.json_filepath)
             ])
             BuilderContextMenuMixin._editor_file = self.json_filepath
-            
-            if LOCAL_DEBUG: builder_logger.success("🏗️🆗✅ [BUILDER] DynamicGuiBuilder: Standalone process spawned successfully.")
         except Exception as e:
-            # ⚡ GRAVITY OF ERRORS: Log regardless of LOCAL_DEBUG
-            builder_logger.exception("🏗️🚫🛑 [ERROR] DynamicGuiBuilder Error: Failed to launch standalone editor")
-            BuilderContextMenuMixin._editor_process = None
-            BuilderContextMenuMixin._editor_file = None
+            builder_logger.exception(f"🏗️🚫 Process spawn failure: {e}")
 
-    def _check_dependencies(self):
-        """Manually triggers the Installation/Setup script to verify dependencies."""
+    def _run_dependency_audit(self):
+        """Triggers the global installation script to verify system state."""
         from oaOchestration.Core.path_initializer import GLOBAL_PROJECT_ROOT
-        setup_path = GLOBAL_PROJECT_ROOT / "oaInstallation" / "Entry.py"
+        audit_script = GLOBAL_PROJECT_ROOT / "oaInstallation" / "Entry.py"
         
-        if not setup_path.exists():
-            builder_logger.error(f"🏗️🚫🛑 [BUILDER] Setup script not found at {setup_path}")
+        if not audit_script.exists():
+            builder_logger.error("🏗️🚫 Audit script not found.")
             return
 
-        if LOCAL_DEBUG: builder_logger.info("🏗️🚀📦 [BUILDER] Launching Installation/Setup.py...")
-        
-        import subprocess
-        import sys
         try:
-            # Run setup and wait for completion
-            result = subprocess.run([sys.executable, str(setup_path)], check=False)
-            if result.returncode == 0:
-                if LOCAL_DEBUG: builder_logger.success("🏗️🆗✅ [BUILDER] Dependency check/Setup completed successfully.")
-            else:
-                builder_logger.error(f"🏗️🚫🛑 [BUILDER] Setup failed with exit code {result.returncode}")
+            subprocess.run([sys.executable, str(audit_script)], check=False)
         except Exception as e:
-            builder_logger.exception("🏗️🚫🛑 [ERROR] DynamicGuiBuilder: Failed to launch setup script")
+            builder_logger.error(f"🏗️🚫 Dependency audit failed: {e}")

@@ -59,6 +59,14 @@ class BuilderBackgroundManagerMixin:
         """Generates and applies a procedural patina panel via background thread."""
         import threading
         
+        # ⚡ RENDER TIER BYPASS: Skip procedural generation in Fast/Ghost modes
+        render_tier = getattr(self, '_render_tier', 'high_res')
+        if render_tier in ['fast', 'ghost']:
+            matrix_log("ui", "gui_builder", "_apply_panel_background", 
+                       f"🎨⚡✨ [RENDER] Skipping procedural background for Tier: {render_tier}", "DEBUG")
+            self._clear_panel_background()
+            return
+
         if panel_config == "none":
             self._clear_panel_background()
             return

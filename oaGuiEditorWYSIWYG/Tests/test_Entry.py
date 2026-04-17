@@ -39,7 +39,7 @@ class TestWysiwygEditorEntry(unittest.TestCase):
         self.assertTrue(hasattr(editor, 'window'), "Editor should have a window attribute")
         
         # Verify core components are initialized
-        self.assertTrue(hasattr(editor, 'tree_tab'), "Editor should have a structure tab")
+        self.assertTrue(hasattr(editor, 'json_tab'), "Editor should have a structure tab (JsonTree)")
         self.assertTrue(hasattr(editor, 'code_tab'), "Editor should have a JSON code tab")
         self.assertTrue(hasattr(editor, 'props_tab'), "Editor should have a properties tab")
         self.assertTrue(hasattr(editor, 'grab_tab'), "Editor should have a library tab")

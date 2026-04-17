@@ -1,223 +1,113 @@
+# oaGuiEditorWYSIWYG/Managers/run_builder.py
+# Author: Anthony Peter Kuzub
+# Version: 20260416.0230.1
+#
+# Description: Main entry point for the standalone WYSIWYG editor application.
+
 import sys
 import pathlib
 import orjson
 import tkinter as tk
+import signal
 
-# 1. Setup Environment: Ensure the project root is in sys.path
-current_dir = pathlib.Path(__file__).resolve().parent
-project_root = current_dir.parent.parent
-if str(project_root) not in sys.path:
-    sys.path.insert(0, str(project_root))
-
-import inspect
+from .runner.runner_env import RunnerEnvironment
+from .runner.mqtt_tester import MqttTester
+from .wysiwyg_editor import WysiwygEditor
+from oaStyle.Managers.theme_applier import apply_theme
 from oaLogging.Methods.matrix_gate import matrix_log
-from oaConfigurationManager.FileReaders.config_reader import Config
-from oaLogging.Core.logger import initialize_logging
-
-# Managers/run_builder.py
-
-from oaGuiEditorWYSIWYG.Managers.wysiwyg_editor import WysiwygEditor
 from oaLogging.Core.logger import WYSIWYG_LOGGER
 
-logger = WYSIWYG_LOGGER.bind(protocol="WYSIWYG")
+class StandaloneRunner:
+    """Orchestrates the boot sequence and lifecycle of the Standalone WYSIWYG Builder."""
+    
+    def __init__(self):
+        self.root = None
+        self.app = None
+        self.json_path = None
+        self.logger = WYSIWYG_LOGGER.bind(protocol="WYSIWYG")
 
-from oaStyle.Managers.theme_applier import apply_theme
-from oaOchestration.Core.path_initializer import initialize_paths
-
-
-def main():
-    """Main entry point for the standalone editor program."""
-    # MANDATORY: Initialize paths so Config reader can find config.ini
-    initialize_paths()
-
-    # Configure logging for this standalone process
-    config = Config.get_instance()
-    # Correctly get the log directory using the project's path initialization
-    from oaOchestration.Core.path_initializer import DATA_LOGS_DIR
-    from oaLogging.Core.logger import set_log_directory
-
-    set_log_directory(DATA_LOGS_DIR, partition="WYSIWYG")
-    initialize_logging(config, log_dir=DATA_LOGS_DIR, partition="WYSIWYG")
-
-    if len(sys.argv) < 2:
-        logger.error("Usage: python run_builder.py <json_file_path>")
-        sys.exit(1)
-
-    json_filepath = pathlib.Path(sys.argv[1])
-
-    # Initialize Root Window
-    root = tk.Tk()
-    root.title(f"OPEN-AIR: WYSIWYG Editor - {json_filepath.name}")
-
-    # APPLY THEME: Crucial for visual consistency in standalone process
-    matrix_log(
-        "ui",
-        "gui_builder",
-        inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown",
-        "Standalone Builder: Applying system theme...",
-        "DEBUG",
-    )
-    apply_theme(root)
-
-    matrix_log(
-        "ui",
-        "gui_builder",
-        inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown",
-        f"Standalone Builder: Starting for {json_filepath}",
-        "INFO",
-    )
-
-    if not json_filepath.exists():
-        logger.error(f"Standalone Builder: File not found: {json_filepath}")
-        sys.exit(1)
-
-    # Load Initial Data
-    try:
-        if json_filepath.stat().st_size == 0:
-            matrix_log(
-                "ui",
-                "gui_builder",
-                (
-                    inspect.currentframe().f_code.co_name
-                    if "inspect" in globals()
-                    else "unknown"
-                ),
-                f"Standalone Builder: File is empty, initializing with empty dict: {json_filepath}",
-                "WARNING",
-            )
-            config_data = {}
-        else:
-            with open(json_filepath, "rb") as f:
-                config_data = orjson.loads(f.read())
-    except Exception as e:
-        logger.exception("Standalone Builder: Failed to read JSON")
-        sys.exit(1)
-
-    def on_test(new_data):
-        """Publishes the new config to MQTT to trigger a live rebuild in the main application."""
-        matrix_log(
-            "ui",
-            "gui_builder",
-            (
-                inspect.currentframe().f_code.co_name
-                if "inspect" in globals()
-                else "unknown"
-            ),
-            f"Standalone Builder: 'Test' triggered for {json_filepath.name}",
-            "INFO",
-        )
-
+    def run(self):
+        """Main execution flow."""
+        self._initialize_env()
+        self._parse_args()
+        config = self._load_json_data()
+        
+        self._setup_main_window()
+        self._launch_app(config)
+        self._bind_signals()
+        
         try:
-            # LOCAL IMPORT: Avoid dependency requirement if not testing
-            import paho.mqtt.client as mqtt
-            from oaConfigurationManager.FileReaders.config_reader import Config
+            self.root.mainloop()
+        except KeyboardInterrupt:
+            self.shutdown()
 
-            app_config = Config.get_instance()
-            broker = getattr(app_config, "MQTT_BROKER_ADDRESS", "localhost")
-            port = getattr(app_config, "MQTT_BROKER_PORT", 1883)
-            user = getattr(app_config, "MQTT_USERNAME", None)
-            pw = getattr(app_config, "MQTT_PASSWORD", None)
+    def _initialize_env(self):
+        """Bootstraps paths and logging via the environment service."""
+        RunnerEnvironment.setup()
 
-            # VERSION 2 API: Suppress deprecation warnings
-            client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
-            if user and pw:
-                client.username_pw_set(user, pw)
-
-            # Use short timeout for testing
-            client.connect(broker, port, 10)
-
-            rebuild_topic = "OPEN-AIR/System/Control/UI/Rebuild"
-            payload = {"path": str(json_filepath.resolve()), "config": new_data}
-
-            client.publish(rebuild_topic, orjson.dumps(payload))
-            client.disconnect()
-
-            matrix_log(
-                "ui",
-                "gui_builder",
-                (
-                    inspect.currentframe().f_code.co_name
-                    if "inspect" in globals()
-                    else "unknown"
-                ),
-                "Standalone Builder: Rebuild request published to MQTT.",
-                "SUCCESS",
-            )
-        except ImportError:
-            logger.error(
-                "Standalone Builder: 'paho-mqtt' library not found. Cannot push to main UI."
-            )
-        except Exception as e:
-            logger.error(f"Standalone Builder: Failed to publish rebuild request: {e}")
-
-    def on_save():
-        matrix_log(
-            "ui",
-            "gui_builder",
-            (
-                inspect.currentframe().f_code.co_name
-                if "inspect" in globals()
-                else "unknown"
-            ),
-            "Standalone Builder: 'Save' operation completed.",
-            "INFO",
-        )
-        pass
-
-    # Launch the builder using 'root' as the primary window
-    app = WysiwygEditor(
-        parent_window=root,
-        config_data=config_data,
-        json_filepath=json_filepath,
-        on_test_callback=on_test,
-        on_save_callback=on_save,
-        is_standalone=True,
-    )
-
-    # Lifecycle Management
-    def on_close():
-        matrix_log(
-            "ui",
-            "gui_builder",
-            (
-                inspect.currentframe().f_code.co_name
-                if "inspect" in globals()
-                else "unknown"
-            ),
-            "Standalone Builder: Program exiting (Close requested).",
-            "INFO",
-        )
-        try:
-            app.shutdown()
-            sys.exit(0)
-        except Exception as e:
-            logger.warning(f"Standalone Builder: Error during shutdown: {e}")
+    def _parse_args(self):
+        """Extracts the target JSON file from command line arguments."""
+        if len(sys.argv) < 2:
+            print("Usage: python run_builder.py <json_file_path>")
+            sys.exit(1)
+        self.json_path = pathlib.Path(sys.argv[1])
+        if not self.json_path.exists():
+            self.logger.error(f"Standalone Builder: File not found: {self.json_path}")
             sys.exit(1)
 
-    root.protocol("WM_DELETE_WINDOW", on_close)
+    def _load_json_data(self):
+        """Loads and parses the target GUI definition file."""
+        try:
+            if self.json_path.stat().st_size > 0:
+                with open(self.json_path, "rb") as f:
+                    return orjson.loads(f.read())
+            return {}
+        except Exception as e:
+            self.logger.exception(f"Standalone Builder: Load failed: {e}")
+            sys.exit(1)
 
-    # ⚡ V3.1.29 GRACEFUL SHUTDOWN: Handle SIGTERM and KeyboardInterrupt
-    import signal
+    def _setup_main_window(self):
+        """Initializes the Tkinter root window and applies the global theme."""
+        self.root = tk.Tk()
+        self.root.title(f"OPEN-AIR: WYSIWYG Editor - {self.json_path.name}")
+        self.root.geometry("1400x900")
+        apply_theme(self.root)
 
-    def handle_signal(signum, frame):
-        matrix_log(
-            "ui",
-            "gui_builder",
-            "handle_signal",
-            f"Standalone Builder: Signal {signum} received. Initiating shutdown...",
-            "WARNING",
+    def _launch_app(self, config_data):
+        """Instantiates the core editor controller."""
+        self.app = WysiwygEditor(
+            parent_window=self.root,
+            config_data=config_data,
+            json_filepath=self.json_path,
+            on_test_callback=self._handle_test_request,
+            is_standalone=True,
         )
-        root.after(0, on_close)
 
-    signal.signal(signal.SIGTERM, handle_signal)
-    signal.signal(signal.SIGINT, handle_signal)
+    def _handle_test_request(self, new_data):
+        """Relays editor 'Test' events to the MQTT test bridge."""
+        MqttTester.publish_rebuild(self.json_path, new_data)
 
-    # Start Event Loop
-    try:
-        root.mainloop()
-    except KeyboardInterrupt:
-        on_close()
+    def _bind_signals(self):
+        """Wires up OS signals and window close events for clean shutdown."""
+        self.root.protocol("WM_DELETE_WINDOW", self.shutdown)
+        signal.signal(signal.SIGTERM, lambda s, f: self.root.after(0, self.shutdown))
+        signal.signal(signal.SIGINT, lambda s, f: self.root.after(0, self.shutdown))
 
+    def shutdown(self):
+        """Gracefully stops all editor services and exits."""
+        matrix_log("ui", "gui_builder", "exit", "🚀 [LAUNCHING] Standalone Builder: Program exiting.", "INFO")
+        try:
+            if self.app:
+                self.app.shutdown()
+            if self.root:
+                self.root.destroy()
+            sys.exit(0)
+        except Exception:
+            sys.exit(1)
+
+def main():
+    runner = StandaloneRunner()
+    runner.run()
 
 if __name__ == "__main__":
     main()

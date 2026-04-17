@@ -5,7 +5,7 @@
 # Description: Unit tests for snap_logic utility.
 
 import unittest
-from oaGuiEditorWYSIWYG.Core.workspaces.Core.layout.snap_logic import snap_to_grid, snap_geometry
+from oaGuiEditorWYSIWYG.Interface.layout_engine.snap_logic import snap_to_grid, snap_geometry
 
 class TestSnapLogic(unittest.TestCase):
     def test_snap_to_grid(self):

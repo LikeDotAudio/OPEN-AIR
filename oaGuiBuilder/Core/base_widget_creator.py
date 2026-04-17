@@ -1,41 +1,37 @@
-# Core/base_widget_creator.py
+# oaGuiBuilder/Core/base_widget_creator.py
 # Author: Anthony Peter Kuzub
-# Version: 1.0.0
+# Version: 20260416.Modular.1
 #
-# Description: Brief summary of purpose
+# Description: Template Method base class for all UI widget creators.
+# Standardizes extraction, registration, and industrial background synchronization.
 
 import tkinter as tk
 from oaLogging.Core.logger import BUILDER_LOGGER
-from loguru import logger
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 
 class BaseWidgetCreator(TransparencyMixin):
     """
-    Template Method base class for all UI widget creators.
-    Centralizes common extraction, registration, and error handling.
+    Template Method orchestrator for constructing GUI widgets.
+    Decomposes monolithic build logic into specialized initialization phases.
     """
 
     @classmethod
     def build(cls, parent_widget, config_data, context=None, **kwargs):
         """
-        Template Method for constructing a widget.
+        Main entry point for widget construction.
+        Coordinates assembly, synchronization, and system registration.
         """
         instance = cls()
         
-        # 1. Standard Context Extraction
-        builder_instance = getattr(context, 'builder_instance', None) if context else kwargs.get('builder_instance')
-        state_mirror_engine = getattr(context, 'state_mirror_engine', None) if context else kwargs.get('state_mirror_engine')
-        subscriber_router = getattr(context, 'subscriber_router', None) if context else kwargs.get('subscriber_router')
-        base_mqtt_topic = getattr(context, 'base_mqtt_topic_from_path', None) if context else kwargs.get('base_mqtt_topic_from_path')
-        
-        # ⚡ RENDER TIER: Detect if we are in ghost mode for WYSIWYG editing.
-        render_tier = kwargs.get('render_tier') or getattr(builder_instance, '_render_tier', 'high_res')
+        # 1. Resolve Construction Context
+        ctx = cls._resolve_context(context, kwargs)
+        render_tier = kwargs.get('render_tier') or getattr(ctx['builder'], '_render_tier', 'high_res')
         
         path = config_data.get("path")
         label = config_data.get("label_active") or config_data.get("label", "Unknown")
 
         try:
-            # 2. Call subclass implementation to assemble UI elements
+            # 2. UI Assembly Phase
             if render_tier == 'ghost':
                 widget, canvas = instance._assemble_ghost_ui(parent_widget, config_data, context, **kwargs)
             else:
@@ -44,24 +40,14 @@ class BaseWidgetCreator(TransparencyMixin):
             if not widget:
                 return None
 
-            # 3. Centralized Background Synchronization and Transparency
+            # 3. Post-Assembly Lifecycle
             if render_tier != 'ghost':
-                # widget and canvas are already unpacked from the assembly tuple above
+                # Industrial Background Sync
                 instance.register_for_bg_sync(widget, canvas, config_data, context)
-
-            # 4. Standard MQTT and State Mirror Registration
-            # Note: widget here is already unpacked from the assembly tuple
-            if path and state_mirror_engine and render_tier != 'ghost':
-                variable = getattr(widget, 'variable', None) or kwargs.get('variable')
-                if variable:
-                    topic = state_mirror_engine.register_widget(
-                        path, variable, base_mqtt_topic, config_data, instance=widget
-                    )
-                    if subscriber_router and topic:
-                        subscriber_router.subscribe_to_topic(
-                            topic, state_mirror_engine.sync_incoming_mqtt_to_gui
-                        )
-                    state_mirror_engine.initialize_widget_state(path)
+                
+                # Global State & Communication Registration
+                if path and ctx['mirror']:
+                    cls._register_with_system(widget, path, config_data, ctx, kwargs)
 
             return widget
 
@@ -69,31 +55,52 @@ class BaseWidgetCreator(TransparencyMixin):
             BUILDER_LOGGER.exception(f"{cls.__name__}: Error building widget '{label}' at {path}: {e}")
             return None
 
+    @staticmethod
+    def _resolve_context(context, kwargs):
+        """Extracts and standardizes various engine references from the construction context."""
+        return {
+            "builder": getattr(context, 'builder_instance', None) if context else kwargs.get('builder_instance'),
+            "mirror": getattr(context, 'state_mirror_engine', None) if context else kwargs.get('state_mirror_engine'),
+            "router": getattr(context, 'subscriber_router', None) if context else kwargs.get('subscriber_router'),
+            "topic": getattr(context, 'base_mqtt_topic_from_path', None) if context else kwargs.get('base_mqtt_topic_from_path')
+        }
+
+    @classmethod
+    def _register_with_system(cls, widget, path, config, ctx, kwargs):
+        """Registers the widget variable with the State Mirror and MQTT router."""
+        variable = getattr(widget, 'variable', None) or kwargs.get('variable')
+        if not variable:
+            return
+
+        topic = ctx['mirror'].register_widget(
+            path, variable, ctx['topic'], config, instance=widget
+        )
+        
+        if ctx['router'] and topic:
+            ctx['router'].subscribe_to_topic(
+                topic, ctx['mirror'].sync_incoming_mqtt_to_gui
+            )
+        
+        ctx['mirror'].initialize_widget_state(path)
+
     def _assemble_ui(self, parent_widget, config_data, context, **kwargs):
         """Subclasses MUST implement this to return (widget, main_canvas_or_none)."""
         raise NotImplementedError("Subclasses must implement _assemble_ui")
 
     def _assemble_ghost_ui(self, parent_widget, config_data, context, **kwargs):
         """
-        Default implementation for Ghost Item rendering.
-        Renders a simple box with the name and dimensions of the element.
+        Industrial Placeholder Rendering (Ghost Mode).
+        Renders a lightweight high-contrast box for design-time interaction.
         """
-        geometry = config_data.get("geometry", {})
-        width = geometry.get("width", 100)
-        height = geometry.get("height", 100)
+        geom = config_data.get("geometry", {})
+        w, h = geom.get("width", 100), geom.get("height", 100)
         label = config_data.get("label", config_data.get("_type", "Unknown"))
         
-        # Create a frame as the ghost container
-        ghost_frame = tk.Frame(parent_widget, width=width, height=height, bg="#333333", 
-                               highlightbackground="#00FF00", highlightthickness=1)
-        ghost_frame.pack_propagate(False)
+        ghost = tk.Frame(parent_widget, width=w, height=h, bg="#333333", 
+                         highlightbackground="#00FF00", highlightthickness=1)
+        ghost.pack_propagate(False)
         
-        # Add label for the name
-        name_lbl = tk.Label(ghost_frame, text=label, fg="#00FF00", bg="#333333", font=("Arial", 8, "bold"))
-        name_lbl.pack(pady=(height//4, 0))
+        tk.Label(ghost, text=label, fg="#00FF00", bg="#333333", font=("Arial", 8, "bold")).pack(pady=(h//4, 0))
+        tk.Label(ghost, text=f"{w}x{h}", fg="#aaaaaa", bg="#333333", font=("Arial", 7)).pack()
         
-        # Add label for dimensions
-        dim_lbl = tk.Label(ghost_frame, text=f"{width}x{height}", fg="#aaaaaa", bg="#333333", font=("Arial", 7))
-        dim_lbl.pack()
-        
-        return ghost_frame, None
+        return ghost, None

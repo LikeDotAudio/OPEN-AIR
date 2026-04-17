@@ -1,3 +1,25 @@
+## [V3.3.7] - 2026-04-16
+### Fixed
+- **WYSIWYG Menu Bindings:** Resolved `AttributeError: 'WysiwygEditor' object has no attribute '_save_and_close'` by implementing the missing method in the main controller.
+- **Core Test Restoration:** Corrected `ModuleNotFoundError` in `test_core_components.py` by aligning import paths and mock patches with the recent `overlay_manager` modularization.
+
+## [V3.3.6] - 2026-04-16
+### Fixed
+- **TreeRefactor Initialization Race:** Resolved `AttributeError: 'TreeRefactor' object has no attribute '_last_clean_path'` by reordering the constructor sequence. All internal state variables are now defined before triggering any downstream logic or UI updates.
+- **Boot Stability:** Ensured standard attribute availability for all UI components during the bootstrap sequence.
+
+## [V3.3.5] - 2026-04-16
+### Fixed
+- **UI Path Resolution Hardening:** Resolved systemic focus synchronization failures across `JsonEditor`, `ElementProperties`, and `TreeRefactor` caused by inconsistent path formatting (e.g., leading dots or missing root keys).
+- **Unified Normalization Logic:** Implemented a robust path-cleaning heuristic that standardizes dot-notation and automatically resolves root-key mismatches based on the current state.
+- **Tree View Sync:** Enhanced `TreeRefactor` to visually mirror selections made in the interactive layout by subscribing to global focus events and implementing automatic node expansion.
+
+## [V3.3.4] - 2026-04-16
+### Fixed
+- **WYSIWYG Editor ModuleNotFoundError:** Resolved `ModuleNotFoundError: No module named 'oaGuiEditorWYSIWYG.Interface.Core'` caused by broken relative imports after the `Interface` directory reorganization.
+- **Import Standardization:** Surgically updated `oaGuiEditorWYSIWYG/Interface/overlays/selection.py` to point to the new `layout_engine` location.
+- **Test Suite Hardening:** Updated absolute import paths and patch targets in `Tests/Core/test_snap_logic.py` and `Tests/test_core_components.py` to align with the new modular hierarchy.
+
 ## [V3.3.3] - 2026-04-15
 ### Critical System Recovery & Protocol Initialization Fixes
 - **Syntax Error Remediation:** Fixed multiple `SyntaxError: unterminated string literal` and `unterminated f-string literal` across `oaComManager` and all protocol `Entry.py` modules (Midi, REST, SMPTE2138, SNMP, NMOS) caused by inappropriate newlines in print/log calls.

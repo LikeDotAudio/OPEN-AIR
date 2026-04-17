@@ -161,6 +161,20 @@ class TransparencyManager:
         if isinstance(builder, tk.Widget):
             return
 
+        # ⚡ RENDER TIER BYPASS: Skip transparency registration in Fast/Ghost modes
+        render_tier = getattr(builder, '_render_tier', 'high_res')
+        if render_tier in ['fast', 'ghost']:
+            # Set default theme background for safety
+            theme_background = DEFAULT_THEME_BACKGROUND
+            if hasattr(builder, 'theme_colors'):
+                theme_background = builder.theme_colors.get("bg", theme_background)
+            
+            try:
+                if widget.winfo_exists(): widget.configure(bg=theme_background)
+                if canvas and canvas.winfo_exists(): canvas.configure(bg=theme_background)
+            except: pass
+            return
+
         widget_name = getattr(widget, 'path', type(widget).__name__)
         
         try:

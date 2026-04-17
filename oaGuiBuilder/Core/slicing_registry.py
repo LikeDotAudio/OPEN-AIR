@@ -1,24 +1,12 @@
-# Core/slicing_registry.py
-#
-# Manages the registry of transparent widgets and handles bulk reslicing
-# when the background or scroll position changes. Optimized for 
-# high-performance UI synchronization.
-#
+# oaGuiBuilder/Core/slicing_registry.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
+# Version: 20260416.Modular.1
 #
-# Professional services for customizing and tailoring this software to your specific
-# application can be negotiated. There is no charge to use, modify, or fork this software.
-#
-# Build Log: https://like.audio/category/software/spectrum-scanner/
-# Source Code: https://github.com/APKaudio/
-# Feature Requests can be emailed to i @ like . audio
-#
-# Version 20260330.1600.1
+# Description: Orchestrates background-aware transparency slicing for widgets.
+# Handles batched reslicing, fold detection, and dynamic background updates.
 
-import time
 import tkinter as tk
-from loguru import logger
+from oaLogging.Methods.matrix_gate import matrix_log
 from oaGuiBuilder.Constants.builder_constants import (
     SLICING_REGEN_THRESHOLD, 
     SLICING_POSITION_EPSILON, 
@@ -26,167 +14,119 @@ from oaGuiBuilder.Constants.builder_constants import (
     SLICING_DELAY_NORMAL
 )
 
-# --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import builder_logger
-from oaLogging.Methods.matrix_gate import matrix_log
-
 class BuilderSlicingRegistryMixin:
     """
-    Registry for widgets requiring background-aware transparency slicing.
+    Registry and synchronization engine for transparent UI components.
+    Ensures industrial backgrounds remain pixel-aligned during scrolling or resizing.
     """
 
     def register_for_slicing(self, callback):
-        """Adds a callback to be executed when the background is updated."""
+        """Standard API for widgets to subscribe to background update notifications."""
         if not hasattr(self, '_slicing_registry'):
             self._slicing_registry = []
             
         if callback not in self._slicing_registry:
-            matrix_log("ui", "gui_builder", "register_for_slicing", 
-                       f"👻🔗✨ [ALPHA] Registering widget for transparency slicing in '{getattr(self, 'tab_name', 'Unknown')}'", "TRACE")
             self._slicing_registry.append(callback)
-            
-            if hasattr(self, 'panel_bg_pil') and self.panel_bg_pil:
-                try:
-                    rx, ry = None, None
-                    if hasattr(self, 'scroll_frame') and self.scroll_frame:
-                        rx, ry = self.scroll_frame.winfo_rootx(), self.scroll_frame.winfo_rooty()
-                    
-                    callback(
-                        source_bg_pil=self.panel_bg_pil,
-                        scroll_ref=self.scroll_frame,
-                        scroll_root_x=rx,
-                        scroll_root_y=ry
-                    )
-                except Exception as e:
-                    matrix_log("ui", "gui_builder", "register_for_slicing", 
-                               f"Immediate slice failed: {e}", "DEBUG")
+            self._trigger_immediate_slice(callback)
+
+    def _trigger_immediate_slice(self, callback):
+        """Performs a slice operation for a newly registered widget if the background is ready."""
+        if hasattr(self, 'panel_bg_pil') and self.panel_bg_pil:
+            try:
+                rx, ry = self.scroll_frame.winfo_rootx(), self.scroll_frame.winfo_rooty()
+                callback(source_bg_pil=self.panel_bg_pil, scroll_ref=self.scroll_frame, 
+                         scroll_root_x=rx, scroll_root_y=ry)
+            except Exception:
+                pass
 
     def _trigger_reslice_all(self, force=False):
-        """Triggers a batched reslice operation with debouncing."""
+        """Orchestrates a debounced batch reslice for all registered subscribers."""
         if hasattr(self, '_reslice_trigger_id') and self._reslice_trigger_id:
-            try:
-                self.after_cancel(self._reslice_trigger_id)
-            except Exception as e:
-                matrix_log("ui", "gui_builder", "_trigger_reslice_all", 
-                           f"Failed to cancel reslice trigger: {e}", "TRACE")
+            try: self.after_cancel(self._reslice_trigger_id)
+            except Exception: pass
         
         delay = SLICING_DELAY_REBUILD if getattr(self, '_is_rebuilding', False) else SLICING_DELAY_NORMAL
         self._reslice_trigger_id = self.after(delay, self._perform_batch_reslice)
 
-    def _clear_coord_cache(self):
-        """Internal optimization: clears cached screen coordinates."""
-        self._root_coord_cache = {}
-
     def _perform_batch_reslice(self):
-        """Executes the actual reslice for all widgets using cached shared context."""
+        """Top-level batch reslice execution."""
         self._reslice_trigger_id = None
         if not self.winfo_exists(): return
         
-        if not hasattr(self, "_bg_regen_count"): self._bg_regen_count = 0
-        self._clear_coord_cache()
+        # 1. Fold Detection and Background Alignment
+        self._sync_background_folds()
 
-        folds_detected = []
-        scroll_ry = 0
-        wh = 0
-        if hasattr(self, 'scroll_frame') and self.scroll_frame:
-            scroll_ry = self.scroll_frame.winfo_rooty()
-            wh = self.scroll_frame.winfo_height()
-            
-            for child in self.scroll_frame.winfo_children():
-                is_fold = False
-                if hasattr(child, '_oca_path'):
-                    path_segments = child._oca_path.split('.')
-                    if len(path_segments) == 1 and any('Fold' in s or 'fold' in s for s in path_segments):
-                        is_fold = True
-                
-                if is_fold:
-                    try:
-                        child_h = child.winfo_height()
-                        child_ry = child.winfo_rooty() + (child_h / 2 if child_h > 1 else 0)
-                        wy = child_ry - scroll_ry
-                        if wh > 0:
-                            pos_pct = wy / wh
-                            if 0.0 <= pos_pct <= 1.0:
-                                folds_detected.append({"position_pct": pos_pct, "orientation": "horizontal"})
-                    except Exception as e:
-                        matrix_log("ui", "gui_builder", "_perform_batch_reslice", 
-                                   f"Failed to calculate fold position: {e}", "TRACE")
-
-        folds_detected.sort(key=lambda x: x["position_pct"])
-
-        bg_config = getattr(self, 'config_data', {}).get("background")
-        if bg_config and isinstance(bg_config, dict):
-            params = bg_config.get("parameters", bg_config)
-            fold_params = params.get("metal_fold", {})
-            existing_creases = [c for c in fold_params.get("creases", []) if c.get('orientation') == 'horizontal']
-            
-            needs_update = len(folds_detected) != len(existing_creases)
-            if not needs_update and folds_detected:
-                for f, e in zip(folds_detected, existing_creases):
-                    if abs(f["position_pct"] - float(e["position_pct"])) > SLICING_POSITION_EPSILON:
-                        needs_update = True
-                        break
-            
-            if needs_update:
-                if self._bg_regen_count > SLICING_REGEN_THRESHOLD:
-                    matrix_log("ui", "gui_builder", "_perform_batch_reslice", 
-                               f"🛑 [BUILDER] '{getattr(self, 'tab_name', 'Unknown')}': Background regeneration loop detected and suppressed.", "WARNING")
-                    self._bg_regen_count = 0
-                else:
-                    self._bg_regen_count += 1
-                    matrix_log("ui", "gui_builder", "_perform_batch_reslice", 
-                               f"📐📏🔄 [BUILDER] '{getattr(self, 'tab_name', 'Unknown')}': Injecting {len(folds_detected)} OcaFold positions into background config.", "INFO")
-                    fold_params["enabled"] = True
-                    v_creases = [c for c in fold_params.get("creases", []) if c.get('orientation') == 'vertical']
-                    fold_params["creases"] = v_creases + folds_detected
-                    params["metal_fold"] = fold_params
-                    
-                    if hasattr(self, 'scroll_frame') and self.scroll_frame:
-                        full_w = max(self.scroll_frame.winfo_width(), self.scroll_frame.winfo_reqwidth())
-                        full_h = max(self.scroll_frame.winfo_height(), self.scroll_frame.winfo_reqheight())
-                        if hasattr(self, '_apply_panel_background'):
-                            self._apply_panel_background(bg_config, full_w, full_h)
-                        return
-            else:
-                self._bg_regen_count = 0
-            
+        # 2. Coordinate Extraction
         bg_pil = getattr(self, 'panel_bg_pil', None)
         scroll_ref = getattr(self, 'scroll_frame', None)
-        
-        root_x, root_y = None, None
-        if scroll_ref:
-            try:
-                root_x = scroll_ref.winfo_rootx()
-                root_y = scroll_ref.winfo_rooty()
-            except Exception as e:
-                matrix_log("ui", "gui_builder", "_perform_batch_reslice", 
-                           f"🧩🚫🛑 [ERROR] Batch Reslice: Error updating root coords: {e}", "ERROR")
+        root_x, root_y = (scroll_ref.winfo_rootx(), scroll_ref.winfo_rooty()) if scroll_ref else (None, None)
 
-        if bg_pil is None and getattr(self, '_bg_task_id', 0) > 0:
-            matrix_log("ui", "gui_builder", "_perform_batch_reslice", 
-                       f"🧩⏳🌀 [SYNC] Batch reslice for '{getattr(self, 'tab_name', 'Unknown')}' deferred: Background generation in progress.", "TRACE")
-            return
-
+        # 3. Notification Dispatch
         registry = getattr(self, '_slicing_registry', [])
-        matrix_log("ui", "gui_builder", "_perform_batch_reslice", 
-                   f"🧩🏗️✨ [SYNC] Executing batch reslice for {len(registry)} widgets in '{getattr(self, 'tab_name', 'Unknown')}'", "DEBUG")
-        
-        skipped = 0
-        processed = 0
-        
         for callback in registry:
             try:
-                work_done = callback(
-                    source_bg_pil=bg_pil, 
-                    scroll_ref=scroll_ref,
-                    scroll_root_x=root_x,
-                    scroll_root_y=root_y
-                )
-                if work_done is False: skipped += 1
-                else: processed += 1
+                callback(source_bg_pil=bg_pil, scroll_ref=scroll_ref, 
+                         scroll_root_x=root_x, scroll_root_y=root_y)
             except Exception as e:
-                matrix_log("ui", "gui_builder", "_perform_batch_reslice", 
-                           f"🧩🚫🛑 [ERROR] Batch Reslice: Error in callback: {e}", "ERROR")
+                matrix_log("ui", "gui_builder", "reslice", f"🧩🚫 Callback error: {e}", "TRACE")
+
+    def _sync_background_folds(self):
+        """Detects OcaFold widgets and updates the panel background creases."""
+        folds = self._detect_visual_folds()
+        if not folds: return
+
+        bg_config = getattr(self, 'config_data', {}).get("background")
+        if not bg_config or not isinstance(bg_config, dict): return
+
+        if self._folds_require_update(folds, bg_config):
+            self._apply_updated_folds(folds, bg_config)
+
+    def _detect_visual_folds(self):
+        """Scans children for widgets defining a physical layout fold."""
+        folds = []
+        if not hasattr(self, 'scroll_frame'): return folds
         
-        matrix_log("ui", "gui_builder", "_perform_batch_reslice", 
-                   f"🧩🆗✅ [BUILDER] Reslice COMPLETE: {processed} updated, {skipped} skipped (Jitter Filter) for '{getattr(self, 'tab_name', 'Unknown')}'.", "INFO")
+        s_ry = self.scroll_frame.winfo_rooty()
+        wh = self.scroll_frame.winfo_height()
+        if wh <= 0: return folds
+
+        for child in self.scroll_frame.winfo_children():
+            if self._is_fold_widget(child):
+                wy = child.winfo_rooty() + (child.winfo_height() / 2) - s_ry
+                folds.append({"position_pct": wy / wh, "orientation": "horizontal"})
+        
+        folds.sort(key=lambda x: x["position_pct"])
+        return folds
+
+    def _is_fold_widget(self, widget):
+        """Heuristic check for fold/separator components."""
+        path = getattr(widget, '_oca_path', '')
+        return any(s in path for s in ['Fold', 'fold', 'Separator'])
+
+    def _folds_require_update(self, new_folds, bg_config):
+        """Determines if the detected folds differ from the current background configuration."""
+        fold_params = bg_config.get("parameters", bg_config).get("metal_fold", {})
+        existing = [c for c in fold_params.get("creases", []) if c.get('orientation') == 'horizontal']
+        
+        if len(new_folds) != len(existing): return True
+        for f, e in zip(new_folds, existing):
+            if abs(f["position_pct"] - float(e["position_pct"])) > SLICING_POSITION_EPSILON:
+                return True
+        return False
+
+    def _apply_updated_folds(self, folds, bg_config):
+        """Triggers a background regeneration with the new fold positions."""
+        params = bg_config.get("parameters", bg_config)
+        fold_p = params.get("metal_fold", {})
+        fold_p["enabled"] = True
+        
+        # Preserve vertical creases
+        v_creases = [c for c in fold_p.get("creases", []) if c.get('orientation') == 'vertical']
+        fold_p["creases"] = v_creases + folds
+        params["metal_fold"] = fold_p
+        
+        # Physical Regen
+        w = max(self.scroll_frame.winfo_width(), self.scroll_frame.winfo_reqwidth())
+        h = max(self.scroll_frame.winfo_height(), self.scroll_frame.winfo_reqheight())
+        if hasattr(self, '_apply_panel_background'):
+            self._apply_panel_background(bg_config, w, h)

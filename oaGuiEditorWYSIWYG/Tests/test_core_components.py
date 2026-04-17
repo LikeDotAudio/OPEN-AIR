@@ -58,7 +58,7 @@ with (patch('tkinter.Frame', mock_tk_frame_class),
     # --- Import modules after patching ---
     from oaComBroker.Core.event_bus import event_bus
     from oaGuiEditorWYSIWYG.Core.state import StateManager
-    from oaGuiEditorWYSIWYG.Core.workspaces.Core.layout.overlay import OverlayManager
+    from oaGuiEditorWYSIWYG.Interface.layout_engine.overlay_manager import OverlayManager
 
 
     class TestEventBus(unittest.TestCase):
@@ -157,8 +157,8 @@ with (patch('tkinter.Frame', mock_tk_frame_class),
             
             # Patch tk.Canvas and tk.Frame within the overlay module
             # (Note: tk and ttk are imported as aliases in overlay.py)
-            self.patch_canvas = patch('oaGuiEditorWYSIWYG.Core.workspaces.Core.layout.overlay.tk.Canvas', mock_tk_canvas_class)
-            self.patch_frame = patch('oaGuiEditorWYSIWYG.Core.workspaces.Core.layout.overlay.tk.Frame', mock_tk_frame_class)
+            self.patch_canvas = patch('oaGuiEditorWYSIWYG.Interface.layout_engine.overlay_manager.tk.Canvas', mock_tk_canvas_class)
+            self.patch_frame = patch('oaGuiEditorWYSIWYG.Interface.layout_engine.overlay_manager.tk.Frame', mock_tk_frame_class)
             
             self.mock_canvas = self.patch_canvas.start()
             self.mock_frame = self.patch_frame.start()

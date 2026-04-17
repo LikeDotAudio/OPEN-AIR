@@ -8,7 +8,7 @@ from oaGui.Methods.i18n_utils import get_text
 import tkinter as tk
 from tkinter import ttk
 import math
-from oaGuiElements.Core.metering.meter_needle.constants import (
+from oaGuiElements.Core.metering.meter_needle.Core.constants import (
     NUMBER_FONT_FAMILY, 
     LAYOUT_PADDING_DEFAULT, LAYOUT_LABEL_PADDING_X, LAYOUT_LABEL_PAD_Y_TOP, LAYOUT_LABEL_PAD_Y_BOTTOM,
     LAYOUT_CANVAS_MARGIN_W, LAYOUT_CANVAS_MARGIN_H,

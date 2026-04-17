@@ -8,7 +8,7 @@ from tkinter import ttk
 import os
 os.environ['OPEN_AIR_LOG_PATH'] = '/tmp/open_air_tests'
 
-from oaGuiElements.Core.utils.slider_value.slider_value import BuilderSliderValueCreator
+from oaGuiElements.Core.utils.slider_value.Core.slider_value import BuilderSliderValueCreator
 
 class TestSliderValueCreator(unittest.TestCase):
 

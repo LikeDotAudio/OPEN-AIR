@@ -172,7 +172,7 @@ class WysiwygEditor:
         from oaConfigurationManager.FileReaders.config_reader import Config
         config = Config.get_instance()
         config.SYSTEM_LANGUAGE = lang_code
-        matrix_log("ui", "gui_builder", "language", f"🌐 [CONFIG] System language changed to: {lang_code}", "INFO")
+        matrix_log("ui", "gui_builder", "language", f"🌐🌐🌐 [CONFIG] System language changed to: {lang_code}", "INFO")
         
         # Trigger a rebuild of the interactive layout to see translations
         if hasattr(self, 'layout_view'):

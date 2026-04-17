@@ -11,7 +11,7 @@ import json
 import os
 import tkinter as tk
 from unittest.mock import MagicMock, patch
-from oaGuiElements.Core.metering.meter_needle.meter_needle import BuilderMeterNeedleCreator
+from oaGuiElements.Core.metering.meter_needle.Core.meter_needle import BuilderMeterNeedleCreator
 
 class TestMeterNeedleBatch(unittest.TestCase):
     def setUp(self):

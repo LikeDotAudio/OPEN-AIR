@@ -7,7 +7,7 @@
 import unittest
 from unittest.mock import MagicMock, patch
 import tkinter as tk
-from oaGuiElements.Core.buttons.button_toggler.button_toggler import BuilderButtonTogglerCreator
+from oaGuiElements.Core.buttons.button_toggler.Core.button_toggler import BuilderButtonTogglerCreator
 
 class TestButtonToggler(unittest.TestCase):
     def setUp(self):

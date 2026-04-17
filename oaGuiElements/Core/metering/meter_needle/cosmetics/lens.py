@@ -6,7 +6,7 @@
 
 import tkinter as tk
 from oaGuiElements.Core.metering.meter_needle.cosmetics.geometry import BezelGeometry
-from oaGuiElements.Core.metering.meter_needle.constants import (
+from oaGuiElements.Core.metering.meter_needle.Core.constants import (
     LENS_GLOW_STEPS, LENS_GLOW_SHRINK_MAX, LENS_SHADOW_STEPS, LENS_SHADOW_DEPTH
 )
 

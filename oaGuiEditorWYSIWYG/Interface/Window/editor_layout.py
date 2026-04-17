@@ -12,6 +12,7 @@ from ..Tabs.JsonEditor.json_editor import JsonTreeWorkspace, JsonCodeWorkspace
 from ..Tabs.TreeRefactor.Entry import TreeRefactor
 from ..Tabs.ElementProperties.Entry import ElementProperties
 from ..Tabs.GrabBagView.grab_bag_view import GrabBagView
+from .editor_toolbar import EditorToolbar
 
 class EditorLayoutBuilder:
     """Orchestrates the assembly of the WYSIWYG Editor UI."""
@@ -23,6 +24,10 @@ class EditorLayoutBuilder:
         
         # 1. Status Bar
         editor.status_bar = EditorStatusBar(editor.window)
+
+        # 1.5 Global Toolbar
+        editor.toolbar = EditorToolbar(editor.window, editor)
+        editor.toolbar.pack(side="top", fill="x")
         
         # 2. Main Container (PanedWindow)
         editor.main_pane = tk.PanedWindow(editor.window, orient=tk.HORIZONTAL, bg="#2b2b2b", sashwidth=6, bd=0)

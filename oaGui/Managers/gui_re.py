@@ -67,7 +67,7 @@ class GuiRebuilderMixin:
         def on_build_complete():
             if not self.winfo_exists(): return
             matrix_log("ui", "gui_re", "on_build_complete", 
-                       f"♻️ Rebuilder: Build sequence FINISHED for '{getattr(self, 'tab_name', 'Unknown')}'", "DEBUG")
+                       f"♻️🆗✅ [RENDER] Rebuilder: Build sequence FINISHED for '{getattr(self, 'tab_name', 'Unknown')}'", "INFO")
             
 
             def _final_settle():

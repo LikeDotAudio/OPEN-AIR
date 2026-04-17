@@ -57,6 +57,9 @@ class GrabBagLoader:
         # We need to scan recursively since oaGuiElements has subfolders (Core/utils, etc.)
         for sample_file in self.builder_root.rglob("sample.json"):
             item = sample_file.parent
+            if item.name == "Assets":
+                item = item.parent
+            
             try:
                 with open(sample_file, 'r') as f:
                     sample_data = orjson.loads(f.read())
@@ -90,6 +93,7 @@ class GrabBagLoader:
                     
                     self.library[name] = {
                         "folder": item.name,
+                        "full_path": str(item),
                         "schema": widget_config,
                         "type": widget_type,
                         "category": category

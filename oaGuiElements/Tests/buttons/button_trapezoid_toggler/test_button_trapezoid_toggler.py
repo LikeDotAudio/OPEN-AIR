@@ -7,7 +7,7 @@
 import unittest
 from unittest.mock import MagicMock, patch
 import tkinter as tk
-from oaGuiElements.Core.buttons.button_trapezoid_toggler.button_trapezoid_toggler import BuilderButtonTrapezoidTogglerCreator
+from oaGuiElements.Core.buttons.button_trapezoid_toggler.Core.button_trapezoid_toggler import BuilderButtonTrapezoidTogglerCreator
 
 class TestButtonTrapezoidToggler(unittest.TestCase):
     def setUp(self):
@@ -37,7 +37,7 @@ class TestButtonTrapezoidToggler(unittest.TestCase):
 
     def test_builder_creator_make(self):
         """Goal: Verify that BuilderButtonTrapezoidTogglerCreator creates a group."""
-        from oaGuiElements.Core.buttons.button_trapezoid.button_trapezoid import TrapezoidButton
+        from oaGuiElements.Core.buttons.button_trapezoid.Core.button_trapezoid import TrapezoidButton
         creator = BuilderButtonTrapezoidTogglerCreator()
         with patch.object(TrapezoidButton, 'winfo_width', return_value=80), \
              patch.object(TrapezoidButton, 'winfo_height', return_value=50):

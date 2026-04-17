@@ -7,7 +7,7 @@
 import unittest
 from unittest.mock import MagicMock, patch
 import tkinter as tk
-from oaGuiElements.Core.text.text_value_box.text_value_box import BuilderTextValueBoxCreator
+from oaGuiElements.Core.text.text_value_box.Core.text_value_box import BuilderTextValueBoxCreator
 
 class TestTextValueBox(unittest.TestCase):
     def setUp(self):

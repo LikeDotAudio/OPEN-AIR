@@ -7,7 +7,7 @@
 import unittest
 from unittest.mock import MagicMock, patch
 import tkinter as tk
-from oaGuiElements.Core.faders.fader_linear_travelling_potentiometer.fader_linear_travelling_potentiometer import CustomLTPFrame, BuilderFaderLinearTravellingPotentiometerCreator
+from oaGuiElements.Core.faders.fader_linear_travelling_potentiometer.Core.fader_linear_travelling_potentiometer import CustomLTPFrame, BuilderFaderLinearTravellingPotentiometerCreator
 
 class TestFaderLinearTravellingPotentiometer(unittest.TestCase):
     def setUp(self):

@@ -103,6 +103,47 @@ class ElementProperties(
         matrix_log("ui", "gui_builder", "element_properties", f"🖱️🖱️🖱️ [ACTION] ElementProperties: Focus synchronization for path: {path} (Clean: {clean_path})", "INFO")
         self._refresh_content()
 
+    def launch_bespoke_editor(self):
+        """Dynamically loads and launches the bespoke editor for the selected element."""
+        if not self.focused_path: return
+        
+        info = self.refresh_mgr.bespoke_editor_info
+        if not info: return
+
+        matrix_log("ui", "gui_builder", "element_properties", f"🚀🚀🚀 [LAUNCHING] Bespoke Editor: {info['class_name']}", "INFO")
+
+        try:
+            import importlib
+            # 1. Import the module
+            if info["module_path"]:
+                module = importlib.import_module(info["module_path"])
+            else:
+                # Fallback to loading from file path if module path fails
+                import importlib.util
+                spec = importlib.util.spec_from_file_location(info["class_name"], info["file_path"])
+                module = importlib.util.module_from_spec(spec)
+                spec.loader.exec_module(module)
+
+            # 2. Get the Editor Class
+            editor_class = getattr(module, info["class_name"])
+
+            # 3. Get Current Data
+            config_data = state_manager.get_value_at_path(self.focused_path)
+            
+            # 4. Define Save Callback
+            def on_bespoke_save(new_config):
+                matrix_log("ui", "gui_builder", "element_properties", f"💾💾💾 [SAVE] Bespoke Editor: Applying changes to {self.focused_path}", "SUCCESS")
+                state_manager.update_state(self.focused_path, new_config, source=self)
+                self._refresh_content()
+
+            # 5. Launch
+            editor_class.launch(self.winfo_toplevel(), config_data, on_bespoke_save)
+
+        except Exception as e:
+            matrix_log("ui", "gui_builder", "element_properties", f"❌🤦‍♂️ [ERROR] Bespoke Editor Launch Failed: {e}", "ERROR")
+            import traceback
+            traceback.print_exc()
+
     def _request_debounced_refresh(self, delay=1500):
         if self._refresh_job: self.after_cancel(self._refresh_job)
         self._refresh_job = self.after(delay, self._refresh_content)

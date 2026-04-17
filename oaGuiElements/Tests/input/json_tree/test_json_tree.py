@@ -7,7 +7,7 @@
 import unittest
 from unittest.mock import MagicMock, patch
 import tkinter as tk
-from oaGuiElements.Core.input.json_tree.json_tree import BuilderDataJsonTreeCreator, JsonTreeWidget
+from oaGuiElements.Core.input.json_tree.Core.json_tree import BuilderDataJsonTreeCreator, JsonTreeWidget
 
 class TestJsonTree(unittest.TestCase):
 

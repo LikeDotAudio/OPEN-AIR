@@ -20,7 +20,7 @@ from oaConfigurationManager.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
 from oaGuiElements.Core.metering.meter_needle.cosmetics.geometry import BezelGeometry
-from oaGuiElements.Core.metering.meter_needle.constants import (
+from oaGuiElements.Core.metering.meter_needle.Core.constants import (
     GEM_BEZEL_EXPANSION, GEM_BASE_HEIGHT, SHAPE_Y_SHIFTS, HILL_CONFIGS
 )
 

@@ -8,7 +8,7 @@ import unittest
 import unittest
 from unittest.mock import MagicMock, patch
 import tkinter as tk
-from oaGuiElements.Core.buttons.button_toggle.button_toggle import BuilderButtonToggleCreator
+from oaGuiElements.Core.buttons.button_toggle.Core.button_toggle import BuilderButtonToggleCreator
 
 class TestButtonToggle(unittest.TestCase):
     def setUp(self):

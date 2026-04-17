@@ -5,6 +5,8 @@
 # Description: Coordinates the rendering and caching of property editors.
 
 import tkinter as tk
+from pathlib import Path
+import importlib
 from oaLogging.Methods.matrix_gate import matrix_log
 from ..Methods.data_merger import deep_merge
 from .....Core.state import state_manager
@@ -18,6 +20,7 @@ class PropertiesRefreshManager:
         self.ui = ui
         self.library = library
         self.widget_cache = {}
+        self.bespoke_editor_info = None
 
     def refresh(self, focused_path):
         """Clears existing content and renders the recursive property tree for the given path."""
@@ -27,14 +30,19 @@ class PropertiesRefreshManager:
 
         self.ui.clear_content()
         self.ui.update_path_display(focused_path)
+        self.bespoke_editor_info = None
 
         actual_data = state_manager.get_value_at_path(focused_path)
         if actual_data is None: 
             tk.Label(self.ui.scroll_frame, text="Selected element not found in state.", bg="#2b2b2b", fg="#ff4444").pack(pady=50)
+            self.ui.show_bespoke_button(False)
             return
 
         # 1. Prepare rendering data (Merge with Schema)
         display_data = self._prepare_display_data(actual_data)
+
+        # ⚡ BESPOKE EDITOR CHECK
+        self._check_bespoke_editor(actual_data)
 
         # 2. Render quick tools (alignment, sticky) if it's a widget
         self._render_quick_tools(actual_data)
@@ -46,6 +54,46 @@ class PropertiesRefreshManager:
         # 4. Lifecycle management: Destroy unused widgets from previous cache
         self._cleanup_unused_widgets(new_widget_cache)
         self.widget_cache = new_widget_cache
+
+    def _check_bespoke_editor(self, actual_data):
+        if not isinstance(actual_data, dict):
+            self.ui.show_bespoke_button(False)
+            return
+
+        w_type = actual_data.get("type") or actual_data.get("widget_type")
+        if not w_type:
+            self.ui.show_bespoke_button(False)
+            return
+
+        # Find the component in the library
+        component = next((c for n, c in self.library.items() if c["type"] == w_type), None)
+        if component and "full_path" in component:
+            full_path = Path(component["full_path"])
+            editor_file = full_path / f"{component['folder']}_editor.py"
+            if editor_file.exists():
+                matrix_log("ui", "gui_builder", "element_properties", f"🎯 [BESPOKE] Found bespoke editor at {editor_file}", "DEBUG")
+                
+                # Derive class name from folder name (e.g. button_toggler -> ButtonTogglerEditor)
+                class_name = "".join(x.capitalize() for x in component['folder'].split('_')) + "Editor"
+                
+                self.bespoke_editor_info = {
+                    "file_path": str(editor_file),
+                    "class_name": class_name
+                }
+                
+                # Try to derive a module path for dynamic import
+                from oaOchestration.Core.path_initializer import GLOBAL_PROJECT_ROOT
+                try:
+                    rel_path = editor_file.relative_to(GLOBAL_PROJECT_ROOT)
+                    self.bespoke_editor_info["module_path"] = ".".join(rel_path.with_suffix("").parts)
+                except Exception:
+                    # Fallback to absolute file loading if not in project tree
+                    self.bespoke_editor_info["module_path"] = None
+
+                self.ui.show_bespoke_button(True)
+                return
+
+        self.ui.show_bespoke_button(False)
 
     def _prepare_display_data(self, actual_data):
         if not isinstance(actual_data, dict): return actual_data

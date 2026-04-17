@@ -9,7 +9,7 @@ import math
 from dataclasses import dataclass
 
 from oaGuiElements.Core.metering.meter_needle.cosmetics.geometry import BezelGeometry
-from oaGuiElements.Core.metering.meter_needle.constants import (
+from oaGuiElements.Core.metering.meter_needle.Core.constants import (
     GEM_BEZEL_EXPANSION, GEM_BASE_HEIGHT, SHAPE_Y_SHIFTS, HILL_CONFIGS
 )
 

@@ -1,5 +1,4 @@
 # panels/panel_generator.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
@@ -203,7 +202,7 @@ class PanelGenerator:
             lighting_gradient = VignetteLayer.generate_linear_gradient(width, height, gradient_intensity)
             panel_image = ImageChops.multiply(panel_image, lighting_gradient)
 
-        # --- Layer 3: Studio Haze ---
+        # --- Layer 3: Studio Haze ---4
         if haze_settings.get("enabled", False):
             matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name, "Layer 3. Infusing warm studio haze.", "trace".upper())
             haze_alpha = int(MAX_OPACITY_VALUE * float(haze_settings.get("intensity", DEFAULT_HAZE_INTENSITY)))

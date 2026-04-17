@@ -7,7 +7,7 @@
 import unittest
 from unittest.mock import MagicMock, patch
 import tkinter as tk
-from oaGuiElements.Core.text.text_table.text_table import BuilderTextTableCreator
+from oaGuiElements.Core.text.text_table.Core.text_table import BuilderTextTableCreator
 
 class TestTextTable(unittest.TestCase):
     def setUp(self):

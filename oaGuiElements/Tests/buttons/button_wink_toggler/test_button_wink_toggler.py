@@ -7,7 +7,7 @@
 import unittest
 from unittest.mock import MagicMock, patch
 import tkinter as tk
-from oaGuiElements.Core.buttons.button_wink_toggler.button_wink_toggler import BuilderButtonWinkTogglerCreator
+from oaGuiElements.Core.buttons.button_wink_toggler.Core.button_wink_toggler import BuilderButtonWinkTogglerCreator
 
 class TestButtonWinkToggler(unittest.TestCase):
 
@@ -49,7 +49,7 @@ class TestButtonWinkToggler(unittest.TestCase):
         'Goal: Verify that BuilderButtonWinkTogglerCreator creates a group.'
         # Patch the renderer to avoid image issues during creation test
         # These are handled by drawing logic that requires real Tk context for images
-        with patch('oaGuiElements.Core.buttons.button_wink.button_wink.draw_wink_visuals'):
+        with patch('oaGuiElements.Core.buttons.button_wink.Core.button_wink.draw_wink_visuals'):
             creator = BuilderButtonWinkTogglerCreator()
             widget = creator.make_button_wink_toggler(parent_widget=self.root, config_data=self.config, context=self.context)
             self.assertIsNotNone(widget, 'Expected widget to be not None')

@@ -36,9 +36,22 @@ class PropertiesUI:
                   font=("Arial", 7, "bold"), relief="flat", padx=5, 
                   command=self.delete_command).pack(side="right", padx=5)
 
+        self.bespoke_btn = tk.Button(header, text="Launch element editor", bg="#33A1FD", fg="white", 
+                                     font=("Arial", 7, "bold"), relief="flat", padx=5, 
+                                     command=lambda: self.parent.launch_bespoke_editor())
+        self.bespoke_btn.pack(side="right", padx=5)
+        self.bespoke_btn.pack_forget() # Hidden initially
+
         self.path_lbl = tk.Label(header, text="No Selection", bg="#333333", 
                                  fg="#33A1FD", font=("Arial", 8))
         self.path_lbl.pack(side="right", padx=10)
+
+    def show_bespoke_button(self, visible=True):
+        """Toggles visibility of the bespoke editor button."""
+        if visible:
+            self.bespoke_btn.pack(side="right", padx=5, before=self.path_lbl)
+        else:
+            self.bespoke_btn.pack_forget()
 
     def _build_scrollable_area(self):
         # Main Workspace Container

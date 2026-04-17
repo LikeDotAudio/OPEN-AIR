@@ -4,7 +4,7 @@ import tkinter as tk
 import os
 import json
 
-from oaGuiElements.Core.Knobs.knob_rotary_selector.knob_rotary_selector import BuilderKnobRotarySelectorCreator, RotarySelectorSwitch
+from oaGuiElements.Core.Knobs.knob_rotary_selector.Core.knob_rotary_selector import BuilderKnobRotarySelectorCreator, RotarySelectorSwitch
 
 def load_sample_config():
     # Correctly locate the sample.json relative to this test file
@@ -29,7 +29,7 @@ class TestRotarySelector(unittest.TestCase):
             self.root.tk = MagicMock()
             
             # Patch classes in the TARGET module
-            SELECTOR_MODULE = 'oaGuiElements.Core.Knobs.knob_rotary_selector.knob_rotary_selector'
+            SELECTOR_MODULE = 'oaGuiElements.Core.Knobs.knob_rotary_selector.Core.knob_rotary_selector'
             self.patchers.append(patch(f'{SELECTOR_MODULE}.tk.Canvas'))
             self.patchers.append(patch(f'{SELECTOR_MODULE}.tk.Frame'))
             

@@ -6,7 +6,7 @@ from oaGui.Methods.i18n_utils import get_text
 # Description: Brief summary of purpose
 
 from oaStyle.Core.style import THEMES, DEFAULT_THEME
-from oaGuiElements.Core.metering.meter_needle.constants import COLOR_WHITE, COLOR_BLACK, NEEDLE_SCALES, SCALE_PADDINGS
+from oaGuiElements.Core.metering.meter_needle.Core.constants import COLOR_WHITE, COLOR_BLACK, NEEDLE_SCALES, SCALE_PADDINGS
 
 class MeterConfig:
     """Dynamically maps configuration attributes from JSON payload to Python properties."""

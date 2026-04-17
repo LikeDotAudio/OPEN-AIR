@@ -7,8 +7,8 @@
 import unittest
 from unittest.mock import MagicMock, patch
 import tkinter as tk
-from oaGuiElements.Core.metering.meter_bar.meter_bar import BuilderMeterBarCreator
-from oaGuiElements.Core.metering.meter_bar.smart_meter import SmartMeter
+from oaGuiElements.Core.metering.meter_bar.Core.meter_bar import BuilderMeterBarCreator
+from oaGuiElements.Core.metering.meter_bar.Core.smart_meter import SmartMeter
 
 class TestMeterBar(unittest.TestCase):
     def setUp(self):
@@ -32,7 +32,7 @@ class TestMeterBar(unittest.TestCase):
             self.root.tk = MagicMock()
             
             # Patch classes in the TARGET module to return mocks
-            METER_MODULE = 'oaGuiElements.Core.metering.meter_bar.smart_meter'
+            METER_MODULE = 'oaGuiElements.Core.metering.meter_bar.Core.smart_meter'
             self.patchers.append(patch(f'{METER_MODULE}.tk.Canvas'))
             self.patchers.append(patch(f'{METER_MODULE}.tk.DoubleVar', return_value=MagicMock()))
             

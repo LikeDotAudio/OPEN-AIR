@@ -7,7 +7,7 @@
 import unittest
 from unittest.mock import MagicMock, patch
 import tkinter as tk
-from oaGuiElements.Core.faders.fader_dual.fader_dual import CustomDualFaderFrame, BuilderFaderDualCreator
+from oaGuiElements.Core.faders.fader_dual.Core.fader_dual import CustomDualFaderFrame, BuilderFaderDualCreator
 
 class TestFaderDual(unittest.TestCase):
     def setUp(self):
@@ -20,7 +20,7 @@ class TestFaderDual(unittest.TestCase):
             self.root.winfo_exists.return_value = True
             self.root.cget.return_value = "#2b2b2b"
             
-            MODULE = 'oaGuiElements.Core.faders.fader_dual.fader_dual'
+            MODULE = 'oaGuiElements.Core.faders.fader_dual.Core.fader_dual'
             self.patchers.append(patch(f'{MODULE}.tk.DoubleVar'))
             self.patchers.append(patch(f'{MODULE}.tk.Canvas'))
             self.patchers.append(patch(f'{MODULE}.tk.Frame'))

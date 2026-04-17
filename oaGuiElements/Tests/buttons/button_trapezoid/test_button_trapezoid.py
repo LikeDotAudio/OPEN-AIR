@@ -7,7 +7,7 @@
 import unittest
 from unittest.mock import MagicMock, patch
 import tkinter as tk
-from oaGuiElements.Core.buttons.button_trapezoid.button_trapezoid import TrapezoidButton
+from oaGuiElements.Core.buttons.button_trapezoid.Core.button_trapezoid import TrapezoidButton
 
 class TestButtonTrapezoid(unittest.TestCase):
     def setUp(self):

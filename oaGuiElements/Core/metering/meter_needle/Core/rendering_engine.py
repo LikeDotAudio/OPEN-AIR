@@ -133,7 +133,19 @@ class MeterRenderingEngine:
             
             if full_redraw:
                 # 1. Ticks & Numbers
-                t_vals = ScaleDrawer.draw_ticks(canvas, px, py, config.min_val, config.max_val, ctx.sang, ctx.eang, ctx.ext, ctx.base_r, config.curve_thickness, ctx.tl, ctx.stl, config.fg_color, config.ticks_visible, config.custom_ticks, config.tick_step, config.anchor_point, config.sub_ticks, config.sub_tick_style, ccw, tick_radius=ctx.tick_r)
+                geom_ctx = GeometryContext(
+                    center_x=px, center_y=py, min_val=config.min_val, max_val=config.max_val,
+                    start_angle_deg=ctx.sang, end_angle_deg=ctx.eang, extent_deg=ctx.ext,
+                    main_arc_radius=ctx.base_r, arc_thickness=config.curve_thickness, tick_radius=ctx.tick_r
+                )
+                tick_style = TickStyle(
+                    tick_length=ctx.tl, sub_tick_length=ctx.stl, fg_color=config.fg_color,
+                    ticks_visible=config.ticks_visible, custom_ticks=config.custom_ticks,
+                    tick_step=config.tick_step, anchor_point=config.anchor_point,
+                    sub_ticks=config.sub_ticks, sub_tick_style=config.sub_tick_style,
+                    counter_clockwise=ccw
+                )
+                t_vals = ScaleDrawer.draw_ticks(canvas, geom_ctx, tick_style)
                 MeterRenderingEngine._tag_as_static(canvas, "vu_element")
 
                 NumberDrawer.draw_labels(canvas, px, py, t_vals, config.min_val, config.max_val, ctx.sang, ctx.eang, ctx.ext, ctx.base_r, SCALE_TEXT_OFFSET, config.scale_label_color, config.scale_numbers, config.label_overrides, ccw, label_radius=ctx.lab_r)

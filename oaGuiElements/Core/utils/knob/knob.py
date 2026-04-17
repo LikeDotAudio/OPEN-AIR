@@ -22,10 +22,10 @@ from oaGuiManager.Core.transparency.transparency import TransparencyManager
 from oaGui.Methods.safe_after_mixin import SafeAfterMixin
 
 # Core Modules
-from .Core.knob_config import extract_knob_config
-from .Core.knob_state import create_knob_state
-from .Core.knob_interaction_mixin import KnobInteractionMixin
-from .Core.knob_renderer_mixin import KnobRendererMixin
+from .knob_config import extract_knob_config
+from .knob_state import create_knob_state
+from .knob_interaction_mixin import KnobInteractionMixin
+from .knob_renderer_mixin import KnobRendererMixin
 
 class CustomKnobFrame(tk.Canvas, KnobInteractionMixin, KnobRendererMixin, SafeAfterMixin):
     """

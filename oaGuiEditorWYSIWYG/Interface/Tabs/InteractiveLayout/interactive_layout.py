@@ -29,6 +29,7 @@
 import tkinter as tk
 from tkinter import ttk
 from oaLogging.Core.logger import GUI_LOGGER as logger
+from oaLogging.Methods.matrix_gate import matrix_log
 from oaComBroker.Core.event_bus import event_bus
 from ....Core.state import state_manager
 from oaGui.Methods.safe_after_mixin import SafeAfterMixin
@@ -229,6 +230,7 @@ class InteractiveLayout(tk.Frame, SafeAfterMixin):
         self._force_overlay_refresh()
 
     def _manual_rebuild(self):
+        matrix_log("ui", "gui_builder", "layout", "🔨🔨🔨 [BUILDING] InteractiveLayout: Manual rebuild triggered.", "INFO")
         self.pending_changes = 0; self._update_rebuild_ui(); self._refresh_preview()
 
     def _on_component_dragging(self, x, y, name):

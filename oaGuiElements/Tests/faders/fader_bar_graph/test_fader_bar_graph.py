@@ -7,7 +7,7 @@
 import unittest
 from unittest.mock import MagicMock, patch
 import tkinter as tk
-from oaGuiElements.Core.faders.fader_bar_graph.fader_bar_graph import FaderWithBarGraphFrame, BuilderFaderBarGraphCreator
+from oaGuiElements.Core.faders.fader_bar_graph.Core.fader_bar_graph import FaderWithBarGraphFrame, BuilderFaderBarGraphCreator
 
 class TestFaderBarGraph(unittest.TestCase):
     def setUp(self):

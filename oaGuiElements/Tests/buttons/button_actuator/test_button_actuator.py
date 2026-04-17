@@ -7,7 +7,7 @@
 import unittest
 from unittest.mock import MagicMock, patch
 import tkinter as tk
-from oaGuiElements.Core.buttons.button_actuator.button_actuator import ActuatorButton, BuilderButtonActuatorCreator
+from oaGuiElements.Core.buttons.button_actuator.Core.button_actuator import ActuatorButton, BuilderButtonActuatorCreator
 
 class TestButtonActuator(unittest.TestCase):
     def setUp(self):

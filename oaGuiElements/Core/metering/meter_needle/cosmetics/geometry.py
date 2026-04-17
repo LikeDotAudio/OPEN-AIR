@@ -14,7 +14,7 @@ try:
 except ImportError:
     needle_geo_rs = None
 
-from oaGuiElements.Core.metering.meter_needle.constants import (
+from oaGuiElements.Core.metering.meter_needle.Core.constants import (
     SAFE_MARGIN, SHAPE_MULTIPLIERS, SHAPE_Y_SHIFTS,
     SQUIRCLE_N, SQUIRCLE_WIDTH_FACTOR, SQUIRCLE_HEIGHT_FACTOR, 
     SQUECTANGLE_WIDTH_FACTOR, SQUECTANGLE_HEIGHT_FACTOR,

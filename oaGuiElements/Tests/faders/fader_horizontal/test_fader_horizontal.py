@@ -7,7 +7,7 @@
 import unittest
 from unittest.mock import MagicMock, patch
 import tkinter as tk
-from oaGuiElements.Core.faders.fader_horizontal.fader_horizontal import CustomHorizontalFaderFrame, BuilderFaderHorizontalCreator
+from oaGuiElements.Core.faders.fader_horizontal.Core.fader_horizontal import CustomHorizontalFaderFrame, BuilderFaderHorizontalCreator
 
 class TestFaderHorizontal(unittest.TestCase):
     def setUp(self):

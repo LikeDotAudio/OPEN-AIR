@@ -37,7 +37,7 @@ class AsyncGridRenderer:
             return
 
         branch_name = data.get("id", data.get("path", "root"))
-        matrix_log("ui", "gui_shell", "render", f"🏗️ Rendering branch '{branch_name}' (Bin: {data.get('id')}, Block: {data.get('type') if data.get('type') != 'OcaBin' else 'None'})", "DEBUG")
+        matrix_log("ui", "gui_shell", "render", f"🔨🔨🔨 [BUILDING] Rendering branch '{branch_name}' (Bin: {data.get('id')}, Block: {data.get('type') if data.get('type') != 'OcaBin' else 'None'})", "INFO")
 
         # 1. Geometry Normalization
         if "geometry" in data:

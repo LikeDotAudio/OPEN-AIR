@@ -1,7 +1,4 @@
 import pathlib
-from oaGui.Methods.i18n_utils import get_text
-
-import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
 # Core/directory.py
 # Author: Anthony Peter Kuzub

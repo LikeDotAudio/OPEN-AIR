@@ -10,8 +10,8 @@ from unittest.mock import MagicMock, patch
 import time
 
 # Import components
-from oaGuiElements.Core.faders.fader.fader import CustomFaderFrame
-from oaGuiElements.Core.text.text_value_box.text_value_box import BuilderTextValueBoxCreator
+from oaGuiElements.Core.faders.fader.Core.fader import CustomFaderFrame
+from oaGuiElements.Core.text.text_value_box.Core.text_value_box import BuilderTextValueBoxCreator
 
 class TestRobustness(unittest.TestCase):
     def setUp(self):

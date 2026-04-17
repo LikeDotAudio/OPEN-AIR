@@ -7,7 +7,7 @@ from oaGui.Methods.i18n_utils import get_text
 
 import tkinter as tk
 import math
-from oaGuiElements.Core.metering.meter_needle.constants import (
+from oaGuiElements.Core.metering.meter_needle.Core.constants import (
     NUMBER_FONT_FAMILY, NUMBER_FONT_SIZE
 )
 

@@ -3,7 +3,7 @@ from unittest.mock import MagicMock, patch
 import tkinter as tk
 import os
 
-from oaGuiElements.Core.Knobs.knob.knob import BuilderKnobCreator, CustomKnobFrame
+from oaGuiElements.Core.Knobs.knob.Core.knob import BuilderKnobCreator, CustomKnobFrame
 from oaGuiElements.Core.Knobs.knob.Core.knob_config import extract_knob_config
 from oaGuiElements.Tests.utils.test_utils import load_sample_config
 
@@ -23,7 +23,7 @@ class TestKnobWidget(unittest.TestCase):
             self.root.tk = MagicMock()
             
             # Patch classes in the TARGET module
-            KNOB_MODULE = 'oaGuiElements.Core.Knobs.knob.knob'
+            KNOB_MODULE = 'oaGuiElements.Core.Knobs.knob.Core.knob'
             self.patchers.append(patch(f'{KNOB_MODULE}.tk.DoubleVar'))
             self.patchers.append(patch(f'{KNOB_MODULE}.tk.Canvas'))
             self.patchers.append(patch(f'{KNOB_MODULE}.tk.Frame'))

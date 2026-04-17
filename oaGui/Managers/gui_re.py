@@ -92,8 +92,23 @@ class GuiRebuilderMixin:
             self.after(200, _wrap_settle)
 
         matrix_log("ui", "gui_re", "_rebuild_gui", "♻️ Rebuilder: Handing off to BatchBuilder for creation pass.", "DEBUG")
+        
+        # ⚡ ROOT PATH RESOLUTION
+        # Determine the initial prefix. If data is the whole project state, 
+        # we need the root key as prefix.
+        path_prefix = ""
+        if isinstance(self.config_data, dict) and len(self.config_data) == 1:
+            root_key = next(iter(self.config_data))
+            if isinstance(self.config_data[root_key], dict) and "type" not in self.config_data[root_key]:
+                path_prefix = root_key
+
         if hasattr(self, '_create_dynamic_widgets'):
-            self._create_dynamic_widgets(self.scroll_frame, self.config_data, on_complete=on_build_complete)
+            self._create_dynamic_widgets(
+                self.scroll_frame, 
+                self.config_data, 
+                path_prefix=path_prefix,
+                on_complete=on_build_complete
+            )
         else:
             matrix_log("ui", "gui_re", "_rebuild_gui", f"❌ Rebuilder: Missing _create_dynamic_widgets in {self}", "ERROR")
             self._is_rebuilding = False

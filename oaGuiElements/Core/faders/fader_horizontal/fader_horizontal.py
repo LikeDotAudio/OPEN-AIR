@@ -25,12 +25,12 @@ from .Core.horizontal_fader_renderer_mixin import HorizontalFaderRendererMixin
 from .Core.horizontal_fader_interaction_mixin import HorizontalFaderInteractionMixin
 
 class CustomHorizontalFaderFrame(
-    tk.Canvas,
+    tk.Frame,
     HorizontalFaderRendererMixin,
     HorizontalFaderInteractionMixin
 ):
     def __init__(self, master, variable, config, path, state_mirror_engine):
-        super().__init__(master, bd=0, highlightthickness=0, relief="flat")
+        super().__init__(master, bd=0, highlightthickness=0)
         
         self.variable, self.path, self.config_data, self.state_mirror_engine = variable, path, config, state_mirror_engine
         

@@ -13,7 +13,11 @@ class GhostOverlay(tk.Canvas):
     """
     def __init__(self, parent, **kwargs):
         # ⚡ PERFORMANCE: Use borderless, highlight-free canvas
-        super().__init__(parent, highlightthickness=0, bd=0, **kwargs)
+        # Attempt to inherit background for pseudo-transparency
+        bg = "#2b2b2b"
+        try: bg = parent.cget("bg")
+        except: pass
+        super().__init__(parent, highlightthickness=0, bd=0, bg=bg, **kwargs)
         self.active_ghost = None
         self.handles = []
         self.guides = []

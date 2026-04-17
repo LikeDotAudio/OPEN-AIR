@@ -35,6 +35,7 @@ For detailed information, please refer to the modular documentation:
 - **[Documentation Map](oaDocumentation/Project_Map/Documentation_Map.md)**: Deep dive into the project structure and modules.
 - **[SMPTE2138 Bridge](oaComProtocols/oaComSMPTE2138/Documentation/Summary.md)**: Details on the SMPTE ST 2138 Protobuf interface.
 - **[Communication Broker](oaComBroker/Documentation/README.md)**: Details on the Protocol Router and Unified Message Schema.
+- **[WYSIWYG Editor](oaGuiEditorWYSIWYG/Documentation/wysiwyg_editor.md)**: Learn how to interactively design and build GUI definitions.
 - **[Patent Details](oaDocumentation/Patent/01_abstract.md)**: Technical descriptions of the novel architecture.
 
 ---

@@ -25,12 +25,12 @@ class PaletteVisibilityService:
     def _show_panel(self, name, widget):
         widget.pack(in_=self.container, fill="both", expand=True)
         self.visibility_tracker[name] = True
-        matrix_log("ui", "palette_manager", "toggle", f"Palette: Showing panel {name}", "DEBUG")
+        matrix_log("ui", "palette_manager", "toggle", f"🎨👁️🖱️ [RENDER] Palette: Showing panel {name}", "DEBUG")
 
     def _hide_panel(self, name, widget):
         widget.pack_forget()
         self.visibility_tracker[name] = False
-        matrix_log("ui", "palette_manager", "toggle", f"Palette: Hiding panel {name}", "DEBUG")
+        matrix_log("ui", "palette_manager", "toggle", f"🎨🛌💤 [RENDER] Palette: Hiding panel {name}", "DEBUG")
 
     def hide_all(self, tool_panels):
         """Ensures all panels are removed from the display stack."""

@@ -1,8 +1,30 @@
 # Interface/Tabs/TreeRefactor/Entry.py
-# Author: Gemini CLI
-# Version: 20260417.001.0
 #
-# Description: Gatekeeper for the TreeRefactor module. Orchestrates UI, state, and interactions.
+# Hierarchical tree view for GUI structure refactoring.
+# Enables logical movement and pruning of the GUI definition tree.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20260417.0100.1
+#
+# Responsibilities (UI Partition):
+# - Render a deep-nested Treeview representing the current JSON state.
+# - Handle drag-and-drop relocation of nodes between containers (Blocks/Bins).
+# - Dispatch reordering and deletion commands to the state_manager.
+# - Orchestrate lazy loading of children nodes for performance on massive files.
+#
+# Hard Constraints:
+# - All operations must be mirrored in the state_manager for real-time sync.
+# - Depends on oaComBroker for publishing focus synchronization events.
+
 
 import tkinter as tk
 from tkinter import ttk

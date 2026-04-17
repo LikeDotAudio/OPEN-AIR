@@ -43,7 +43,12 @@ class BaseWidgetCreator(TransparencyMixin):
             if render_tier == 'ghost' and not instance.is_composite:
                 widget, canvas = instance._assemble_ghost_ui(parent_widget, config_data, context, **kwargs)
             else:
-                widget, canvas = instance._assemble_ui(parent_widget, config_data, context, **kwargs)
+                result = instance._assemble_ui(parent_widget, config_data, context, **kwargs)
+                # Subclasses should return (widget, canvas) or just widget
+                if isinstance(result, tuple):
+                    widget, canvas = result
+                else:
+                    widget, canvas = result, None
             
             if not widget:
                 return None

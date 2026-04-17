@@ -1,8 +1,30 @@
 # oaGuiEditorWYSIWYG/Entry.py
-# Author: Anthony Peter Kuzub
-# Version: 20260416.0150.1
 #
-# Description: Gatekeeper for the oaGuiEditorWYSIWYG module.
+# Primary gatekeeper and orchestrator for the WYSIWYG Definition Builder.
+# Handles environment bootstrapping, module-level services, and test discovery.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20260417.0100.1
+#
+# Responsibilities:
+# - Detect project root and inject into sys.path for absolute imports.
+# - Provide high-level API for launching the editor (launch_editor).
+# - Execute automated integration tests via unittest subprocess.
+# - Orchestrate standalone application startup.
+#
+# Hard Constraints:
+# - Assumes presence of GEMINI.md for project root resolution.
+# - Requires oaComBroker for Event Bus communication in running sub-modules.
+
 
 import sys
 import os

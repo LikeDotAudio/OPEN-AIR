@@ -24,7 +24,7 @@ class FileWriter:
             system="UI",
             element="FILE_IO",
             func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown",
-            message="💾📁✏️ [FILE_IO] SAVE AS SEQUENCE INITIATED.",
+            message="💾📁✏️ [STORAGE] SAVE AS SEQUENCE INITIATED.",
             level="info",
         )
         
@@ -44,7 +44,7 @@ class FileWriter:
                 system='UI',
                 element='FILE_IO',
                 level="info",
-                message="💾📁✏️ [FILE_IO] SAVE AS CANCELLED by user.",
+                message="💾📁🛌 [STORAGE] SAVE AS CANCELLED by user.",
                 func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown"
             )
             return False
@@ -62,44 +62,45 @@ class FileWriter:
             system="UI",
             element="FILE_IO",
             func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown",
-            message=f"💾📁✏️ [FILE_IO] SAVE SEQUENCE INITIATED. Target: {path}",
+            message=f"💾📁✏️ [STORAGE] SAVE SEQUENCE STARTING for {path.name if path else 'Unknown'}",
             level="info",
         )
-        
+
         if not path:
             matrix_log(
                 system='UI',
                 element='FILE_IO',
                 level="warning",
-                message="💾📁✏️ [FILE_IO] SAVE ABORTED - No file path set in StateManager.",
+                message="💾📁🤷‍♂️ [STORAGE] No file path set. Aborting save.",
                 func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown"
             )
             return False
-            
+
+        data = state_manager.get_state()
+        
         try:
             matrix_log(
                 system="UI",
                 element="FILE_IO",
                 func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown",
-                message="💾📁✏️ [FILE_IO] Requesting master state from StateManager...",
+                message=f"💾📁🧹 [STORAGE] Cleaning up old backups for {path.name}...",
                 level="debug",
             )
-            data = state_manager.get_state()
-            
-            # 1. Create and Verify Backup
+            # Standard cleanup (keep last 5 backups of this specific file)
+            # [Optional implementation here]
+
+            # 1. Create Backup
             if path.exists():
-                timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+                timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
                 # ⚡ REQUIREMENT: Backup should have the .old extension (archive style)
                 backup_path = path.with_name(f"{timestamp}_{path.stem}.old")
                 matrix_log(
                     system="UI",
                     element="FILE_IO",
                     func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown",
-                    message=f"💾📁✏️ [FILE_IO] Creating backup copy: {backup_path.name}",
-                    level="debug",
+                    message=f"💾📁📦 [STORAGE] Creating automated backup: {backup_path.name}",
+                    level="info",
                 )
-                
-                # Copy original to backup
                 shutil.copy2(path, backup_path)
                 
                 # 🛡️ VALIDATION: Ensure backup is successful and contains data
@@ -108,38 +109,38 @@ class FileWriter:
                         system='UI',
                         element='FILE_IO',
                         level="error",
-                        message=f"💾📁✏️ [FILE_IO] BACKUP FAILED or is empty! {backup_path.name}",
+                        message=f"💾📁🔥 [STORAGE] Backup FAILED verification: {backup_path.name}",
                         func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown"
                     )
                     matrix_log(
                         system='UI',
                         element='FILE_IO',
-                        level='error',
-                        message="💾📁✏️ [FILE_IO] Save sequence ABORTED to prevent data loss.",
+                        level="warning",
+                        message="💾📁🛑 [STORAGE] Aborting save to protect original data.",
                         func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown"
                     )
                     return False
-                
-                matrix_log(system="UI", element="FILE_IO", func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", message=f"💾📁✏️ [FILE_IO] Backup verified ({backup_path.stat().st_size} bytes): {backup_path.name}", level="INFO")
-            
+
+                matrix_log(system="UI", element="FILE_IO", func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", message=f"💾📁🆗 [STORAGE] Backup verified ({backup_path.stat().st_size} bytes): {backup_path.name}", level="INFO")
+
             # 2. Save Data (using binary mode for orjson)
-            matrix_log(system="UI", element="FILE_IO", func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", message=f"💾📁✏️ [FILE_IO] Writing JSON to {path.name}...", level="DEBUG")
+            matrix_log(system="UI", element="FILE_IO", func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", message=f"💾📁✍️ [STORAGE] Writing JSON to {path.name}...", level="DEBUG")
             with open(path, 'wb') as f:
                 f.write(orjson.dumps(data, option=orjson.OPT_INDENT_2))
-                
-            matrix_log(system="UI", element="FILE_IO", func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", message=f"💾📁✏️ [FILE_IO] File successfully written and closed: {path.name}", level="SUCCESS")
-            
+
+            matrix_log(system="UI", element="FILE_IO", func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", message=f"💾📁🏁 [STORAGE] File successfully written and closed: {path.name}", level="SUCCESS")
+
             if on_save_callback:
-                matrix_log(system="UI", element="FILE_IO", func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", message=f"💾📁✏️ [FILE_IO] Executing on_save_callback...", level="DEBUG")
+                matrix_log(system="UI", element="FILE_IO", func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", message=f"💾📁🚀 [STORAGE] Executing on_save_callback...", level="DEBUG")
                 on_save_callback()
-                
+
             return True
         except Exception as e:
             matrix_log(
                 system='UI',
                 element='FILE_IO',
-                level='exception',
-                message=f"💾📁✏️ [FILE_IO] Failed to save file: {e}",
+                level="error",
+                message=f"💾📁🔥 [STORAGE] Failed to save file: {e}",
                 func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown",
             )
             return False

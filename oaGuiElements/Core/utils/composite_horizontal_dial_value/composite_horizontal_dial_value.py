@@ -23,6 +23,7 @@ from oaGuiElements.Core.utils.knob.knob import BuilderKnobCreator
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 from oaGuiManager.Core.transparency.transparency import TransparencyManager
 from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
+from oaGuiBuilder.Core.base_widget_creator import BaseWidgetCreator
 
 # --- EXTRACTED CORE MODULES ---
 from .Core.grid import GridManager
@@ -35,7 +36,7 @@ BUILDER_DEBUG = is_debug_allowed(system="UI", element="GUI_BUILDER")
 
 @WidgetRegistry.register("_Horizontal_with_dial_Value", "OcaCompositeFaderKnob")
 class BuilderCompositeHorizontalDialValueCreator(
-    BuilderFaderHorizontalCreator, BuilderKnobCreator, TransparencyMixin
+    BaseWidgetCreator, TransparencyMixin
 ):
     is_composite = True
 
@@ -107,14 +108,14 @@ class BuilderCompositeHorizontalDialValueCreator(
             f_cfg = config_data.copy()
             f_cfg.update(config_data.get("fader_config", {}))
             f_cfg.update({"value_min": str(min_val), "value_max": str(max_val), "value_default": str(init_val), "label_active": "", "show_label": False, "tick_interval": f_cfg.get("tick_interval", step_coarse), "path": f"{path}.fader_config" if "fader_config" in config_data else path, "width": w_req * 0.8 if w_req > 0 else 320, "height": h_req * 0.7 if h_req > 0 else 70, "cap_height": f_cfg.get("cap_height", 55)})
-            fader_widget, _ = self.make_fader_horizontal(sub_frame, f_cfg, context=context)
+            fader_widget = self.make_fader_horizontal(sub_frame, f_cfg, context=context)
             fader_widget.grid(row=1, column=0, sticky="nsew", padx=(5, 0), pady=(0, 5)); fader_widget._oca_path = f_cfg["path"]
 
             # Dial
             d_cfg = config_data.copy()
             d_cfg.update(config_data.get("dial_config", {}))
             d_cfg.update({"label_active": "", "show_label": False, "min": "0", "max": "999", "knob_style": d_cfg.get("knob_style", "dial"), "path": f"{path}.dial_config" if "dial_config" in config_data else path, "width": safe_knob_dim, "height": safe_knob_dim})
-            dial_widget, _ = self.make_knob(sub_frame, d_cfg, context=context)
+            dial_widget = self.make_knob(sub_frame, d_cfg, context=context)
             dial_widget.grid(row=0, column=1, rowspan=2, sticky="nsew", padx=5); dial_widget._oca_path = d_cfg["path"]
 
             def on_manual(e):
@@ -128,22 +129,27 @@ class BuilderCompositeHorizontalDialValueCreator(
             unit_label, draw_unit_label = CompositeUIComponents.build_unit_label(ui_ctx)
 
             # 4. State Synchronization
-            dial_widget._prev_dial_val_for_wrap_detection = CompositeStateSync.calculate_initial_fine(init_val, step_coarse, numerical_step)
+            # ⚡ GHOST AWARENESS: Only wire up synchronization if sub-widgets are fully functional (have .variable)
+            is_ghost = not hasattr(fader_widget, 'variable') or not hasattr(dial_widget, 'variable')
+            
+            if not is_ghost:
+                dial_widget._prev_dial_val_for_wrap_detection = CompositeStateSync.calculate_initial_fine(init_val, step_coarse, numerical_step)
 
-            def update_from_main(*args): CompositeStateSync.sync_from_main(main_value_var.get(), step_coarse, numerical_step, fmt_str, entry_string_var, fader_widget.variable, dial_widget)
-            def on_f_change(*args): main_value_var.set(CompositeStateSync.calc_from_fader(fader_widget.variable.get(), main_value_var.get(), step_coarse, numerical_step, min_val, max_val))
-            def on_d_change(*args):
-                ctx = {
-                    'curr_dial': dial_widget.variable.get(), 'main_val': main_value_var.get(),
-                    'fader_var': fader_widget.variable, 'dial_widget': dial_widget,
-                    'step_coarse': step_coarse, 'numerical_step': numerical_step,
-                    'min_val': min_val, 'max_val': max_val
-                }
-                main_value_var.set(CompositeStateSync.calc_from_dial(ctx))
+                def update_from_main(*args): CompositeStateSync.sync_from_main(main_value_var.get(), step_coarse, numerical_step, fmt_str, entry_string_var, fader_widget.variable, dial_widget)
+                def on_f_change(*args): main_value_var.set(CompositeStateSync.calc_from_fader(fader_widget.variable.get(), main_value_var.get(), step_coarse, numerical_step, min_val, max_val))
+                def on_d_change(*args):
+                    sync_ctx = {
+                        'curr_dial': dial_widget.variable.get(), 'main_val': main_value_var.get(),
+                        'fader_var': fader_widget.variable, 'dial_widget': dial_widget,
+                        'step_coarse': step_coarse, 'numerical_step': numerical_step,
+                        'min_val': min_val, 'max_val': max_val
+                    }
+                    main_value_var.set(CompositeStateSync.calc_from_dial(sync_ctx))
 
-            fader_widget.variable.trace_add("write", on_f_change)
-            dial_widget.variable.trace_add("write", on_d_change)
-            main_value_var.trace_add("write", update_from_main)
+                fader_widget.variable.trace_add("write", on_f_change)
+                dial_widget.variable.trace_add("write", on_d_change)
+                main_value_var.trace_add("write", update_from_main)
+                update_from_main()
 
             def sync_bg():
                 sync_entry_style(); draw_f_label(); draw_unit_label()
@@ -151,7 +157,6 @@ class BuilderCompositeHorizontalDialValueCreator(
                 if hasattr(dial_widget, "render"): dial_widget.render()
             
             sub_frame.render = sub_frame._draw = sync_bg
-            update_from_main()
 
             sub_frame.variable = main_value_var
             return sub_frame, sub_frame
@@ -160,4 +165,9 @@ class BuilderCompositeHorizontalDialValueCreator(
             return None, None
 
     def make_knob(self, parent_widget, config_data, context=None, **kwargs):
-        return BuilderKnobCreator.make(parent_widget, config_data, context, builder_instance=kwargs.pop('builder_instance', self), **kwargs)
+        """Internal factory call for knob component."""
+        return BuilderKnobCreator.build(parent_widget, config_data, context=context, **kwargs)
+
+    def make_fader_horizontal(self, parent_widget, config_data, context=None, **kwargs):
+        """Internal factory call for fader component."""
+        return BuilderFaderHorizontalCreator.build(parent_widget, config_data, context=context, **kwargs)

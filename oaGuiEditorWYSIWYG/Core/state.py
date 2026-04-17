@@ -18,7 +18,7 @@ except ImportError:
         system='ui',
         element='state_manager',
         level='warning',
-        message="🧠🧠🧠 [COMPUTE] oaeditorstate_rs not found. Falling back to slow Python state management.",
+        message="🧠🔀🐌 [COMPUTE] oaeditorstate_rs not found. Falling back to slow Python state management.",
         func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown"
     )
     HAS_RUST = False
@@ -27,26 +27,26 @@ except Exception as e:
         system='ui',
         element='state_manager',
         level='error',
-        message=f"🧠🧠🧠 [COMPUTE] Failed to initialize Rust Editor State: {e}",
+        message=f"🧠🔥👽 [COMPUTE] Failed to initialize Rust Editor State: {e}",
         func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown"
     )
     HAS_RUST = False
 
 class SMLogger:
     def info(self, message):
-        matrix_log(system='ui', element='state_manager', level='info', message=f"🧠🧠🧠 [COMPUTE] {message}", func_name=inspect.currentframe().f_code.co_name)
+        matrix_log(system='ui', element='state_manager', level='info', message=f"🧠⚙️⚙️ [COMPUTE] {message}", func_name=inspect.currentframe().f_code.co_name)
     def success(self, message):
-        matrix_log(system='ui', element='state_manager', level='success', message=f"🧠🧠🧠 [COMPUTE] {message}", func_name=inspect.currentframe().f_code.co_name)
+        matrix_log(system='ui', element='state_manager', level='success', message=f"🧠🆗✅ [COMPUTE] {message}", func_name=inspect.currentframe().f_code.co_name)
     def warning(self, message):
         # MANDATE: Warnings are NOT gated. Standard logger for warnings.
         from oaLogging.Core.logger import WYSIWYG_LOGGER
-        WYSIWYG_LOGGER.warning(f"⚠️ StateManager: {message}")
+        WYSIWYG_LOGGER.warning(f"⚠️🧠🤷‍♂️ [COMPUTE] StateManager: {message}")
     def error(self, message):
         # MANDATE: Errors are NOT gated.
         from oaLogging.Core.logger import WYSIWYG_LOGGER
-        WYSIWYG_LOGGER.error(f"❌ StateManager: {message}")
+        WYSIWYG_LOGGER.error(f"❌🧠🤦‍♂️ [COMPUTE] StateManager: {message}")
     def trace(self, message):
-        matrix_log(system='ui', element='state_manager', level='trace', message=f"🧠🧠🧠 [COMPUTE] {message}", func_name=inspect.currentframe().f_code.co_name)
+        matrix_log(system='ui', element='state_manager', level='trace', message=f"🧠🔬🔍 [COMPUTE] {message}", func_name=inspect.currentframe().f_code.co_name)
 
 sm_logger = SMLogger()
 
@@ -65,7 +65,7 @@ class StateManager:
                         system='ui',
                         element='state_manager',
                         level='error',
-                        message=f"🧠🧠🧠 [COMPUTE] Rust state instantiation failed: {e}",
+                        message=f"🧠🔥👻 [COMPUTE] Rust state instantiation failed: {e}",
                         func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown"
                     )
                     cls._instance._rust_state = None
@@ -81,7 +81,7 @@ class StateManager:
                 system='ui',
                 element='state_manager',
                 level='trace',
-                message=f"🧠🧠🧠 [COMPUTE] Singleton Instance Created ({'RUST' if HAS_RUST else 'PYTHON'}).",
+                message=f"🧠✨🏗️ [COMPUTE] Singleton Instance Created ({'RUST' if HAS_RUST else 'PYTHON'}).",
                 func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown"
             )
         return cls._instance
@@ -92,7 +92,7 @@ class StateManager:
             system='ui',
             element='state_manager',
             level='info',
-            message=f"🧠🧠🧠 [COMPUTE] Initialization started. Path: {file_path}",
+            message=f"🧠🛠️⚙️ [COMPUTE] Initialization started. Path: {file_path}",
             func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown"
         )
         self._original_state = copy.deepcopy(initial_data if initial_data is not None else {})
@@ -111,7 +111,7 @@ class StateManager:
             system='ui',
             element='state_manager',
             level='info',
-            message=f"🧠🧠🧠 [COMPUTE] State loaded with {len(root_keys)} root elements.",
+            message=f"🧠⚖️📦 [COMPUTE] State loaded with {len(root_keys)} root elements.",
             func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown"
         )
         
@@ -119,7 +119,7 @@ class StateManager:
             system='ui',
             element='state_manager',
             level='debug',
-            message="🧠🧠🧠 [COMPUTE] Broadcasting initial STATE_UPDATED event...",
+            message="🧠📡📤 [COMPUTE] Broadcasting initial STATE_UPDATED event...",
             func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown"
         )
         event_bus.publish("STATE_UPDATED", json_data=parsed_data)
@@ -127,7 +127,7 @@ class StateManager:
             system='ui',
             element='state_manager',
             level='success',
-            message="🧠🧠🧠 [COMPUTE] StateManager: Initialization complete.",
+            message="🧠🆗✅ [COMPUTE] StateManager: Initialization complete.",
             func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown"
         )
 
@@ -137,7 +137,7 @@ class StateManager:
             system='ui',
             element='state_manager',
             level='info',
-            message="🧠🧠🧠 [COMPUTE] Wiping internal state memory (Reset).",
+            message="🧠🔥🧹 [COMPUTE] Wiping internal state memory (Reset).",
             func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown"
         )
         if self._rust_state:
@@ -167,7 +167,7 @@ class StateManager:
             system='ui',
             element='state_manager',
             level='info',
-            message=f"🧠🧠🧠 [COMPUTE] Update requested from {source_name}. Path: {path}",
+            message=f"🧠⚖️🔨 [COMPUTE] Update requested from {source_name}. Path: {path}",
             func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown"
         )
         
@@ -196,13 +196,13 @@ class StateManager:
             except Exception as e:
                 # MANDATE: Exceptions are NOT gated.
                 from oaLogging.Core.logger import WYSIWYG_LOGGER
-                WYSIWYG_LOGGER.exception(f"❌ StateManager: Failed to update path {path} in Rust: {e}")
+                WYSIWYG_LOGGER.exception(f"❌🧠🔥 [COMPUTE] StateManager: Failed to update path {path} in Rust: {e}")
             
         matrix_log(
             system='ui',
             element='state_manager',
             level='trace',
-            message="🧠🧠🧠 [COMPUTE] Broadcasting STATE_UPDATED event to subscribers.",
+            message="🧠📡📤 [COMPUTE] Broadcasting STATE_UPDATED event to subscribers.",
             func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown"
         )
         event_bus.publish("STATE_UPDATED", json_data=self.get_state(), source=source)
@@ -217,7 +217,7 @@ class StateManager:
             system='ui',
             element='state_manager',
             level='info',
-            message=f"🧠🧠🧠 [COMPUTE] Batch update started from {source_name} ({len(updates)} changes).",
+            message=f"🧠🧮🔨 [COMPUTE] Batch update started from {source_name} ({len(updates)} changes).",
             func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown"
         )
         for i, (new_data, path) in enumerate(updates):
@@ -233,13 +233,13 @@ class StateManager:
             except Exception as e:
                 # MANDATE: Errors are NOT gated.
                 from oaLogging.Core.logger import WYSIWYG_LOGGER
-                WYSIWYG_LOGGER.error(f"❌ StateManager: Batch Error: Failed to update path {path}: {e}")
+                WYSIWYG_LOGGER.error(f"❌🧠🔥 [COMPUTE] StateManager: Batch Error: Failed to update path {path}: {e}")
         
         matrix_log(
             system='ui',
             element='state_manager',
             level='info',
-            message=f"🧠🧠🧠 [COMPUTE] Batch update complete.",
+            message=f"🧠🆗✅ [COMPUTE] Batch update complete.",
             func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown"
         )
         event_bus.publish("STATE_UPDATED", json_data=self.get_state(), source=source)
@@ -250,7 +250,7 @@ class StateManager:
             system='ui',
             element='state_manager',
             level='info',
-            message=f"🧠🧠🧠 [COMPUTE] Reorder requested for '{path}' direction: {direction}",
+            message=f"🧠⚖️🔀 [COMPUTE] Reorder requested for '{path}' direction: {direction}",
             func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown"
         )
         if isinstance(path, str): path = path.split(".")

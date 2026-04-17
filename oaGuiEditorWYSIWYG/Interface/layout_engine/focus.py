@@ -18,21 +18,28 @@ class FocusManager:
 
     def _on_component_dropped(self, x, y, name, schema):
         """Finds the widget under the drop point and adds the new component."""
-        matrix_log("ui", "gui_builder", "drop", f"🎯 [DROP] Component '{name}' dropped at ({x}, {y})", "INFO")
+        matrix_log("ui", "gui_builder", "drop", f"🎯🖱️🔨 [ACTION] FocusManager: Dropping component '{name}' at ({x}, {y})", "INFO")
         
         target = self.find_drop_target_at(x, y)
-        if not target: return
+        if not target: 
+            matrix_log("ui", "gui_builder", "drop", "🎯 [DROP] No valid target found at coordinates.", "WARNING")
+            return
         
         tw, tp, tmode, tcoords = target
         
         if tp is not None:
-            matrix_log("ui", "gui_builder", "drop", f"🎯 [DROP] resolved target path: '{tp}'", "DEBUG")
+            matrix_log("ui", "gui_builder", "drop", f"🎯 [DROP] target path: '{tp}' mode: {tmode}", "DEBUG")
             
-            # Final target resolution (append .fields if Block)
+            # Final target resolution
             final_target_parent = tp
             t_val = state_manager.get_value_at_path(tp)
-            if isinstance(t_val, dict) and "Block" in t_val.get("type", ""):
-                if "fields" not in tp: final_target_parent = f"{tp}.fields"
+            
+            if isinstance(t_val, dict):
+                w_type = t_val.get("type", "")
+                if ("Block" in w_type or "Container" in w_type) and "fields" not in tp:
+                    final_target_parent = f"{tp}.fields"
+                elif "Table" in w_type and "rows" not in tp:
+                    final_target_parent = f"{tp}.rows.0"
             
             # Generate a unique key
             base_key = name.lower().replace(" ", "_")
@@ -45,6 +52,7 @@ class FocusManager:
                 counter += 1
                 
             final_path = f"{final_target_parent}.{key}" if final_target_parent else key
+            matrix_log("ui", "gui_builder", "drop", f"🎯 [DROP] Final insertion path: '{final_path}'", "SUCCESS")
             state_manager.update_state(schema, path=final_path, source=self.workspace)
             self.workspace._manual_rebuild()
 
@@ -58,20 +66,27 @@ class FocusManager:
         curr = target_widget
         path = None
         while curr:
-            if hasattr(curr, '_oca_path'):
-                path = curr._oca_path
+            path = getattr(curr, '_oca_path', getattr(curr, 'oa_path', None))
+            if path: break
+            # 🛡️ SAFETY: If we hit the InteractiveLayout or RENDER_AREA, stop and handle as empty space
+            if curr == self.workspace or curr == getattr(self.workspace, 'render_area', None):
                 break
             curr = curr.master
             
         if not path:
             # Check if dropped on empty workspace area
             is_child = False; temp = target_widget
+            render_area = getattr(self.workspace, 'render_area', None)
             while temp:
-                if temp == self.workspace: is_child = True; break
+                if temp == render_area or temp == self.workspace: 
+                    is_child = True; break
                 temp = temp.master
-            if is_child:
+            
+            if is_child and render_area:
                 full_state = state_manager.get_state()
-                path = list(full_state.keys())[0] if full_state else ""
+                if not full_state: return None
+                path = list(full_state.keys())[0]
+                curr = render_area
             else:
                 return None
 
@@ -81,35 +96,52 @@ class FocusManager:
             # Leaf -> Move to parent container
             path = ".".join(path.split(".")[:-1])
             val = state_manager.get_value_at_path(path)
-            temp = curr
+            # Find the actual parent widget for this container path
+            temp = target_widget
+            found = False
             while temp:
-                if getattr(temp, '_oca_path', None) == path:
-                    curr = temp; break
+                tp = getattr(temp, '_oca_path', getattr(temp, 'oa_path', None))
+                if tp == path:
+                    curr = temp; found = True; break
                 temp = temp.master
+            if not found: curr = render_area # Fallback to canvas
 
         if not isinstance(val, dict): return None
 
-        # 3. Calculate visuals
-        ox = self.workspace.render_area.winfo_rootx()
-        oy = self.workspace.render_area.winfo_rooty()
+        # 3. Calculate visuals (RELATIVE TO GHOST OVERLAY which matches RENDER_AREA)
+        # 🛡️ SAFETY: Ensure render_area exists, is mapped, and has valid geometry
+        if not render_area or not render_area.winfo_exists():
+            return None
+
+        try:
+            render_area.update_idletasks()
+            ox = render_area.winfo_rootx()
+            oy = render_area.winfo_rooty()
+        except (tk.TclError, AttributeError):
+            return None
+
+        # Ensure target widget still exists
+        if not curr or not curr.winfo_exists():
+            curr = render_area # Absolute fallback
 
         w_type = val.get("type", "")
-        if w_type in ["OcaBlock", "OcaBin", "OcaArray"]:
-            # Container -> Append visual
+        try:
+            curr.update_idletasks()
             wx1 = curr.winfo_rootx(); wy1 = curr.winfo_rooty()
             ww = curr.winfo_width(); wh = curr.winfo_height()
-            return (curr, path, "append", (wx1-ox, wy1+wh-5-oy, wx1+ww-ox, wy1+wh-5-oy))
-        else:
-            # Widget -> Sibling insertion visual
-            container_path = ".".join(path.split(".")[:-1])
-            container_val = state_manager.get_value_at_path(container_path)
-            if isinstance(container_val, dict) and container_val.get("type") in ["OcaBlock", "OcaBin", "OcaArray"]:
-                cx1 = curr.winfo_rootx(); cy1 = curr.winfo_rooty()
-                cw = curr.winfo_width(); ch = curr.winfo_height()
-                if y < cy1 + (ch // 2):
-                    return (curr.master, container_path, "before", (cx1-ox, cy1-oy, cx1+cw-ox, cy1-oy))
+            
+            if w_type in ["OcaBlock", "OcaBin", "OcaArray", "OcaContainer"]:
+                # Container -> Append visual (bottom of container)
+                return (curr, path, "append", (wx1-ox, wy1+wh-5-oy, wx1+ww-ox, wy1+wh-5-oy))
+            else:
+                # Widget -> Sibling insertion visual (top or bottom of widget)
+                p_path = ".".join(path.split(".")[:-1])
+                if y < wy1 + (wh // 2):
+                    return (curr, p_path, "before", (wx1-ox, wy1-oy, wx1+ww-ox, wy1-oy))
                 else:
-                    return (curr.master, container_path, "after", (cx1-ox, cy1+ch-oy, cx1+cw-ox, cy1+ch-oy))
+                    return (curr, p_path, "after", (wx1-ox, wy1+wh-oy, wx1+ww-ox, wy1+wh-oy))
+        except (tk.TclError, AttributeError):
+            return None
         return None
 
     def _find_path_at_widget(self, widget):

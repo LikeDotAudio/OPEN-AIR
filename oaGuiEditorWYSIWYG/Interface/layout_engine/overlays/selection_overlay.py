@@ -55,7 +55,18 @@ class SelectionOverlay(BaseOverlay):
         self._drag_start_x = event.x_root
         self._drag_start_y = event.y_root
         
-        new_path = None if self.is_focused else self.path
+        if self.is_focused:
+            new_path = None
+        else:
+            # ⚡ ROBUST PATH RESOLUTION:
+            # If the path doesn't exist in the state (e.g. sub-component of a composite),
+            # walk up until we find a valid selectable element.
+            new_path = self.path
+            while new_path and state_manager.get_value_at_path(new_path) is None:
+                if '.' not in new_path: 
+                    new_path = None; break
+                new_path = ".".join(new_path.split(".")[:-1])
+
         self.workspace._on_widget_focused(new_path)
         return "break"
 

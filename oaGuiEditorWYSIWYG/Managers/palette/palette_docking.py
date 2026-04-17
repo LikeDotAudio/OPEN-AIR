@@ -51,11 +51,11 @@ class PaletteDockingService:
         
         self.detached_windows[panel_name] = top_level
         self.visibility_tracker[panel_name] = True
-        matrix_log("ui", "palette_manager", "undock_panel", f"PaletteManager: Undocked panel: {panel_name}", "INFO")
-
+        matrix_log("ui", "palette_manager", "undock_panel", f"📱🎨🖱️ [MOBILE] PaletteManager: Undocked panel: {panel_name}", "INFO")
+        
     def _handle_detached_close(self, panel_name, top_level, panel_widget):
         """Cleans up state when a detached window is closed by the user."""
-        matrix_log("ui", "palette_manager", "on_toplevel_close", f"PaletteManager: Detached window for {panel_name} closed.", "INFO")
+        matrix_log("ui", "palette_manager", "on_toplevel_close", f"📱🎨🛌 [MOBILE] PaletteManager: Detached window for {panel_name} closed.", "INFO")
         panel_widget.pack_forget()
         self.visibility_tracker[panel_name] = False 
         if panel_name in self.detached_windows:

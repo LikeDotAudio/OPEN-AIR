@@ -9,13 +9,7 @@ import pathlib
 import orjson
 import tkinter as tk
 import signal
-
-from .runner.runner_env import RunnerEnvironment
-from .runner.mqtt_tester import MqttTester
-from .wysiwyg_editor import WysiwygEditor
-from oaStyle.Managers.theme_applier import apply_theme
 from oaLogging.Methods.matrix_gate import matrix_log
-from oaLogging.Core.logger import WYSIWYG_LOGGER
 
 class StandaloneRunner:
     """Orchestrates the boot sequence and lifecycle of the Standalone WYSIWYG Builder."""
@@ -24,26 +18,44 @@ class StandaloneRunner:
         self.root = None
         self.app = None
         self.json_path = None
-        self.logger = WYSIWYG_LOGGER.bind(protocol="WYSIWYG")
 
     def run(self):
         """Main execution flow."""
-        self._initialize_env()
-        self._parse_args()
-        config = self._load_json_data()
+        # 1. Bootstrap Environment (Crucial: must happen BEFORE other imports)
+        from .runner.runner_env import RunnerEnvironment
+        config = RunnerEnvironment.setup()
         
-        self._setup_main_window()
-        self._launch_app(config)
+        # 2. Lazy Imports of project modules
+        from .wysiwyg_editor import WysiwygEditor
+        from oaStyle.Managers.theme_applier import apply_theme
+        from oaLogging.Methods.matrix_gate import matrix_log
+        from oaLogging.Core.logger import WYSIWYG_LOGGER
+        
+        self.logger = WYSIWYG_LOGGER.bind(protocol="WYSIWYG")
+
+        self._parse_args()
+        
+        # 3. GUI Setup
+        self.root = tk.Tk()
+        self.root.title(f"OPEN-AIR: WYSIWYG Editor - {self.json_path.name}")
+        self.root.geometry("1400x900")
+        apply_theme(self.root)
+
+        # 4. Launch App
+        self.app = WysiwygEditor(
+            parent_window=self.root,
+            config_data=self._load_json_data(),
+            json_filepath=self.json_path,
+            on_test_callback=self._handle_test_request,
+            is_standalone=True,
+        )
+        
         self._bind_signals()
         
         try:
             self.root.mainloop()
         except KeyboardInterrupt:
             self.shutdown()
-
-    def _initialize_env(self):
-        """Bootstraps paths and logging via the environment service."""
-        RunnerEnvironment.setup()
 
     def _parse_args(self):
         """Extracts the target JSON file from command line arguments."""
@@ -52,7 +64,7 @@ class StandaloneRunner:
             sys.exit(1)
         self.json_path = pathlib.Path(sys.argv[1])
         if not self.json_path.exists():
-            self.logger.error(f"Standalone Builder: File not found: {self.json_path}")
+            print(f"❌ Standalone Builder: File not found: {self.json_path}")
             sys.exit(1)
 
     def _load_json_data(self):
@@ -63,28 +75,12 @@ class StandaloneRunner:
                     return orjson.loads(f.read())
             return {}
         except Exception as e:
-            self.logger.exception(f"Standalone Builder: Load failed: {e}")
+            print(f"❌ Standalone Builder: Load failed: {e}")
             sys.exit(1)
-
-    def _setup_main_window(self):
-        """Initializes the Tkinter root window and applies the global theme."""
-        self.root = tk.Tk()
-        self.root.title(f"OPEN-AIR: WYSIWYG Editor - {self.json_path.name}")
-        self.root.geometry("1400x900")
-        apply_theme(self.root)
-
-    def _launch_app(self, config_data):
-        """Instantiates the core editor controller."""
-        self.app = WysiwygEditor(
-            parent_window=self.root,
-            config_data=config_data,
-            json_filepath=self.json_path,
-            on_test_callback=self._handle_test_request,
-            is_standalone=True,
-        )
 
     def _handle_test_request(self, new_data):
         """Relays editor 'Test' events to the MQTT test bridge."""
+        from .runner.mqtt_tester import MqttTester
         MqttTester.publish_rebuild(self.json_path, new_data)
 
     def _bind_signals(self):
@@ -95,7 +91,7 @@ class StandaloneRunner:
 
     def shutdown(self):
         """Gracefully stops all editor services and exits."""
-        matrix_log("ui", "gui_builder", "exit", "🚀 [LAUNCHING] Standalone Builder: Program exiting.", "INFO")
+        matrix_log("ui", "gui_builder", "exit", "🚀🚀🚀 [LAUNCHING] Standalone Builder: Program exiting.", "INFO")
         try:
             if hasattr(self, 'app') and self.app:
                 self.app.shutdown()
@@ -112,7 +108,7 @@ class StandaloneRunner:
         except SystemExit:
             raise
         except Exception as e:
-            matrix_log("ui", "gui_builder", "exit", f"❌ Error during shutdown: {e}", "ERROR")
+            matrix_log("ui", "gui_builder", "exit", f"👽🤦‍♂️🔥 [UNKNOWN] Error during shutdown: {e}", "ERROR")
             sys.exit(1)
 
 def main():

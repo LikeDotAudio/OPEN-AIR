@@ -194,7 +194,7 @@ class JsonTreeWorkspace(tk.Frame):
         if isinstance(curr, dict): curr[key] = new_value
         elif isinstance(curr, list): curr[int(key)] = new_value
 
-        matrix_log("ui", "gui_builder", "json_tree", f"💾 [SAVE] JsonTree: Updated {key} to {new_value}", "SUCCESS")
+        matrix_log("ui", "gui_builder", "json_tree", f"💾📁🏁 [STORAGE] JsonTree: Updated {key} to {new_value}", "SUCCESS")
         state_manager.update_state(self.current_json_data, source=self)
 
 
@@ -410,7 +410,7 @@ class JsonCodeWorkspace(tk.Frame):
             data = orjson.loads(self.text_area.get("1.0", "end-1c"))
             state_manager.update_state(data, source=self)
         except Exception as e:
-            logger.error(f"❌ JsonCode: Syntax Error: {e}")
+            logger.error(f"❌📂🤦‍♂️ [STORAGE] JsonCode: Syntax Error: {e}")
 
     def _format_json(self):
         try:

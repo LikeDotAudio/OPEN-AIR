@@ -26,7 +26,6 @@ class TransparencyMixin:
         """
         builder_instance = context.builder_instance if context else None
         parent = widget.master
-        matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"parent is {parent}", level="DEBUG")
 
         def perform_sync(event=None):
             if not widget.winfo_exists(): return
@@ -40,7 +39,6 @@ class TransparencyMixin:
 
             try:
                 p_bg = parent.cget("bg")
-                matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"p_bg is {p_bg}", level="DEBUG")
                 if widget.cget("bg") != p_bg:
                     widget.configure(bg=p_bg)
                 if canvas and canvas.winfo_exists() and canvas.cget("bg") != p_bg:

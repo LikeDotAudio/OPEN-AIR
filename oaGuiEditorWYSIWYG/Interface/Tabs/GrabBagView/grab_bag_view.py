@@ -38,26 +38,26 @@ class GrabBagView(tk.Frame):
     def __init__(self, parent, library_cache=None, *args, **kwargs):
         kwargs.pop("bg", None)
         super().__init__(parent, bg="#2b2b2b", *args, **kwargs)
-        matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "GrabBagView: Initializing palette...", "DEBUG")
+        matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🎨🎨🎨 [RENDER] GrabBagView: Initializing palette...", "DEBUG")
         self.loader = GrabBagLoader()
         self.library = library_cache if library_cache is not None else self.loader.scan_library()
         self.last_focused_path = None
         self._build_ui()
         
         # Track selection to know where to insert
-        matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "GrabBagView: Subscribing to FOCUS_REQUESTED...", "DEBUG")
+        matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🎧👂🎧 [LISTENING] GrabBagView: Subscribing to FOCUS_REQUESTED...", "DEBUG")
         event_bus.subscribe("FOCUS_REQUESTED", self._on_focus_requested)
         
         self.bind("<Destroy>", self._on_destroy)
 
     def _on_destroy(self, event):
         if event.widget == self:
-            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "GrabBagView: Workspace destroyed. Cleaning up subscriptions and bindings.", "INFO")
+            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🛑🛑🛑 [STOPPED] GrabBagView: Workspace destroyed. Cleaning up subscriptions.", "INFO")
             event_bus.unsubscribe("FOCUS_REQUESTED", self._on_focus_requested)
             
             # CRITICAL: Cleanup bind_all to prevent memory leaks and crashes on relaunch
             try:
-                matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "GrabBagView: Unbinding global mousewheel events...", "DEBUG")
+                matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🧹🧹🧹 [SWEEPING] GrabBagView: Unbinding global mousewheel events...", "DEBUG")
                 self.canvas.unbind_all("<MouseWheel>")
                 self.canvas.unbind_all("<Button-4>")
                 self.canvas.unbind_all("<Button-5>")
@@ -120,6 +120,7 @@ class GrabBagView(tk.Frame):
 
     def _refresh_library(self):
         """Reloads components and rebuilds the UI with categorization."""
+        matrix_log("ui", "gui_builder", "grab_bag", "📦🔬🔍 [PACKAGE] Refreshing component library with grouping...", "INFO")
         for child in self.scroll_frame.winfo_children():
             child.destroy()
             
@@ -165,7 +166,7 @@ class GrabBagView(tk.Frame):
             lbl.pack(side="left")
             tk.Label(btn_frame, text=desc, bg="#333333", fg="#888888", font=("Arial", 7)).pack(side="left", padx=10)
             
-            ttk.Button(btn_frame, text="Gen", width=5, command=lambda t=w_type: self._generate_structure(t)).pack(side="right")
+            ttk.Button(btn_frame, text="PLACE", width=7, command=lambda t=w_type: self._generate_structure(t)).pack(side="right")
 
             # 🖱️ DRAG BINDINGS
             mock_info = {"schema": self._get_boilerplate(w_type)}
@@ -194,7 +195,7 @@ class GrabBagView(tk.Frame):
             lbl.pack(side="left")
             tk.Label(comp_frame, text=f"({info['type']})", bg="#333333", fg="#888888", font=("Arial", 7)).pack(side="left", padx=5)
             
-            btn = ttk.Button(comp_frame, text="Add", width=8, command=lambda n=name: self._add_component(n))
+            btn = ttk.Button(comp_frame, text="PLACE", width=7, command=lambda n=name: self._add_component(n))
             btn.pack(side="right")
 
             # 🖱️ DRAG BINDINGS
@@ -238,6 +239,7 @@ class GrabBagView(tk.Frame):
             del self.proxy
             
             # Publish drop event
+            matrix_log("ui", "gui_builder", "grab_bag", f"🎯🖱️🔨 [ACTION] GrabBag: Dropping component '{self.drag_data['name']}'", "INFO")
             event_bus.publish("COMPONENT_DROPPED", 
                               x=event.x_root, 
                               y=event.y_root, 
@@ -268,20 +270,47 @@ class GrabBagView(tk.Frame):
 
     def _generate_structure(self, w_type):
         """Generates complex structural boilerplates."""
+        matrix_log("ui", "gui_builder", "grab_bag", f"🏗️⚙️🔨 [ACTION] GrabBag: Generating structural boilerplate for '{w_type}'", "INFO")
         schema = self._get_boilerplate(w_type)
+        target = self._resolve_insertion_path()
         
         event_bus.publish("ADD_COMPONENT_REQUESTED", 
                           component_name=w_type, 
                           component_schema=schema, 
-                          target_path=self.last_focused_path,
+                          target_path=target,
                           source=self)
 
     def _add_component(self, name):
         """Adds component to state."""
+        matrix_log("ui", "gui_builder", "grab_bag", f"🖱️🔨➕ [ACTION] GrabBag: Adding component '{name}' via button click.", "INFO")
         component = self.loader.get_component(name)
         if component:
+            target = self._resolve_insertion_path()
             event_bus.publish("ADD_COMPONENT_REQUESTED", 
                               component_name=name, 
                               component_schema=component['schema'], 
-                              target_path=self.last_focused_path,
+                              target_path=target,
                               source=self)
+
+    def _resolve_insertion_path(self):
+        """Helper to find the best path for programmatic insertion (Button Clicks)."""
+        path = self.last_focused_path
+        
+        if not path:
+            # Default to root
+            full_state = state_manager.get_state()
+            if full_state:
+                path = list(full_state.keys())[0]
+            else:
+                return "" # Pure root
+
+        # Resolve container sub-path if needed
+        val = state_manager.get_value_at_path(path)
+        if isinstance(val, dict):
+            w_type = val.get("type", "")
+            if "Block" in w_type and "fields" not in path:
+                return f"{path}.fields"
+            if "Table" in w_type and "rows" not in path:
+                return f"{path}.rows.0"
+        
+        return path

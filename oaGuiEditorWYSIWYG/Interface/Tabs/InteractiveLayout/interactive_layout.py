@@ -1,10 +1,30 @@
-import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
 # Interface/Tabs/InteractiveLayout/interactive_layout.py
-# Author: Anthony Peter Kuzub
-# Version: 20260416.Interface.1
 #
-# Description: Refactored Interactive Layout Workspace with modular components.
+# High-speed asynchronous rendering stage for real-time GUI manipulation.
+# Orchestrates modular overlays, ghost layers, and skeleton-first rendering.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20260417.0100.1
+#
+# Responsibilities (UI Partition):
+# - Construct the primary design canvas with rulers and background support.
+# - Subscribe to global STATE_UPDATED events to trigger debounced rebuilds.
+# - Provide real-time feedback for drag-and-drop via the GhostOverlay.
+# - Coordinate between FocusManager and OverlayManager for active element selection.
+#
+# Hard Constraints:
+# - Must be instantiated within a Tkinter thread.
+# - Depends on state_manager for initial data and path validation.
+
 
 import tkinter as tk
 from tkinter import ttk
@@ -111,7 +131,11 @@ class InteractiveLayout(tk.Frame, SafeAfterMixin):
         if not self.winfo_exists() or source == self: return
         self.pending_changes += 1
         self._update_rebuild_ui()
-        if self.auto_rebuild_var.get():
+        
+        # ⚡ AUTO-REFRESH: If we are in Ghost mode, we always refresh to provide 
+        # immediate visual feedback on structural changes.
+        is_ghost = self.render_tier_var.get().lower() == "ghost"
+        if self.auto_rebuild_var.get() or is_ghost:
             self._refresh_preview()
 
     def _on_external_focus(self, path, source=None):
@@ -124,7 +148,7 @@ class InteractiveLayout(tk.Frame, SafeAfterMixin):
         tier_map = {"High-Res": "high_res", "Fast": "fast", "Ghost": "ghost"}
         tier = tier_map.get(self.render_tier_var.get(), "high_res")
         if self.preview_engine.preview_builder:
-            self.preview_engine.refresh(state_manager.get_state(), render_tier=tier)
+            self._manual_rebuild()
             self.overlay_mgr.apply_outlines(self.preview_engine.preview_builder.scroll_frame) 
         
     def _toggle_auto_rebuild(self):
@@ -211,10 +235,18 @@ class InteractiveLayout(tk.Frame, SafeAfterMixin):
         """Handles real-time feedback for components being dragged from the Grab Bag."""
         if not self.winfo_exists(): return
         
-        # 1. Ensure ghost overlay is visible
+        # 1. ⚡ GHOST MODE: Temporarily switch to ghost tier if not already there
+        # This provides immediate structural feedback.
+        if self.render_tier_var.get() != "Ghost":
+            self._previous_tier = self.render_tier_var.get()
+            self.render_tier_var.set("Ghost")
+            self._on_render_tier_change()
+
+        # 2. Ensure ghost overlay is visible and on top
         self.ghost_overlay.place(x=0, y=0, relwidth=1, relheight=1)
+        tk.Widget.tkraise(self.ghost_overlay)
         
-        # 2. Find target and update visuals
+        # 3. Find target and update visuals
         target = self.focus_mgr.find_drop_target_at(x, y)
         if target:
             tw, tp, tmode, tcoords = target
@@ -227,6 +259,15 @@ class InteractiveLayout(tk.Frame, SafeAfterMixin):
         if not self.winfo_exists(): return
         self.ghost_overlay.clear()
         self.ghost_overlay.place_forget()
+        
+        # ⚡ RESTORE MODE: Switch back to the previous rendering quality
+        if hasattr(self, '_previous_tier'):
+            self.render_tier_var.set(self._previous_tier)
+            del self._previous_tier
+            self._on_render_tier_change()
+        else:
+            # Force rebuild anyway to show the new component
+            self._manual_rebuild()
 
     def _on_widget_focused(self, path):
         event_bus.publish("FOCUS_REQUESTED", path=path, source=self)

@@ -10,7 +10,7 @@ from oaLogging.Methods.matrix_gate import matrix_log
 from ..Tabs.InteractiveLayout.interactive_layout import InteractiveLayout
 from ..Tabs.JsonEditor.json_editor import JsonTreeWorkspace, JsonCodeWorkspace
 from ..Tabs.TreeRefactor.Entry import TreeRefactor
-from ..Tabs.ElementProperties.element_properties import ElementProperties
+from ..Tabs.ElementProperties.Entry import ElementProperties
 from ..Tabs.GrabBagView.grab_bag_view import GrabBagView
 
 class EditorLayoutBuilder:
@@ -62,6 +62,22 @@ class SidebarBuilder:
         editor.grab_tab = GrabBagView(editor.left_notebook, library_cache=editor.global_library)
         editor.left_notebook.add(editor.grab_tab, text=" Library ")
 
+        # ⚡ BINDING: Auto-switch render tier based on active tab
+        def _on_tab_changed(event):
+            tab_id = editor.left_notebook.index("current")
+            tier_map = {
+                0: "Fast",      # Structure
+                1: "High-Res",  # Code
+                2: "Ghost"      # Library
+            }
+            target_tier = tier_map.get(tab_id)
+            if target_tier and hasattr(editor, 'layout_view'):
+                matrix_log("ui", "gui_builder", "layout", f"🎯 [ACTION] Tab Switch: Updating render tier to {target_tier}", "DEBUG")
+                editor.layout_view.render_tier_var.set(target_tier)
+                editor.layout_view._on_render_tier_change()
+
+        editor.left_notebook.bind("<<NotebookTabChanged>>", _on_tab_changed)
+
     @staticmethod
     def build_right(editor):
         """Builds the right sidebar containing the property editor."""
@@ -107,7 +123,7 @@ class SashManager:
                 editor.window.after(200, lambda: SashManager.set_initial(editor))
                 return
 
-            matrix_log("ui", "gui_builder", "layout", f"📐 Setting initial sashes for width: {width}", "DEBUG")
+            matrix_log("ui", "gui_builder", "layout", f"📐📐📐 [RENDER] Setting initial sashes for width: {width}", "DEBUG")
             
             # 1. Left Sidebar: 20% of width
             left_pos = int(width * 0.20)
@@ -118,7 +134,7 @@ class SashManager:
             editor.main_pane.sash_place(0, left_pos, 0)
             editor.main_pane.sash_place(1, right_pos, 0)
         except Exception as e: 
-            matrix_log("ui", "gui_builder", "layout", f"⚠️ Sash placement failed: {e}", "TRACE")
+            matrix_log("ui", "gui_builder", "layout", f"⚠️🎨🤦‍♂️ [RENDER] Sash placement failed: {e}", "TRACE")
 
 class EditorStatusBar:
     """Encapsulates the status bar UI and feedback logic."""

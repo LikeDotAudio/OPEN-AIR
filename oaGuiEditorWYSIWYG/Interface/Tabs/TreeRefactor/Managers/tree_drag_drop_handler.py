@@ -47,7 +47,7 @@ class TreeDragDropHandler:
             target_parent_path = ".".join(target_parent_path.split(".")[:-1])
 
         if target_parent_path == source_parent_path:
-             matrix_log("ui", "gui_builder", "on_drag_stop", "🌳 TreeRefactor: Drop target is same as source parent. Use UP/DOWN buttons for reordering.", "INFO")
+             matrix_log("ui", "gui_builder", "on_drag_stop", "🌳🔀🛑 [BRANCH] TreeRefactor: Drop target is same as source parent. Use UP/DOWN buttons for reordering.", "INFO")
         else:
             # Note: We need to append '.fields' if target is a Block to match our schema
             target_val = self.state_manager.get_value_at_path(target_parent_path)

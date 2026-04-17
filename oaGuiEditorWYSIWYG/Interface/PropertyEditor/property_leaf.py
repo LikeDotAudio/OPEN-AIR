@@ -121,7 +121,7 @@ class PropertyLeaf:
                 state_manager.update_state(new_value, path=self.full_path, source=self.source)
                 self.set_value(new_value)
             except ValueError:
-                matrix_log("ui", "gui_builder", "PropertyLeaf", f"Invalid numeric input: {current_value_str}", "WARNING")
+                matrix_log("ui", "gui_builder", "PropertyLeaf", f"⚠️🤷‍♂️🤦‍♂️ [ACTION] Invalid numeric input: {current_value_str}", "WARNING")
                 # Revert to last good value
                 self.set_value(self.scrub_start_val)
 

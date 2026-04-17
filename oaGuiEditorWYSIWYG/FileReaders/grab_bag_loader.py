@@ -33,7 +33,7 @@ class GrabBagLoader:
             system="ui", 
             element="grab_bag", 
             func_name=inspect.currentframe().f_code.co_name,
-            message=f"📦📦📦 [PACKAGE] GrabBagLoader: Initialized. Scanning root: {self.builder_root}",
+            message=f"📦🔬🔍 [PACKAGE] GrabBagLoader: Initialized. Scanning root: {self.builder_root}",
             level="DEBUG"
         )
 
@@ -43,14 +43,14 @@ class GrabBagLoader:
         
         # ⚡ ROBUSTNESS: If the root is a standard folder but doesn't exist, log and exit
         if not self.builder_root.exists():
-            logger.error(f"❌ GrabBagLoader: Builder root '{self.builder_root}' does not exist.")
+            logger.error(f"❌📦🤦‍♂️ [PACKAGE] GrabBagLoader: Builder root '{self.builder_root}' does not exist.")
             return self.library
 
         matrix_log(
             system="ui", 
             element="grab_bag", 
             func_name=inspect.currentframe().f_code.co_name,
-            message=f"📦📦📦 [PACKAGE] GrabBagLoader: Starting library scan in {self.builder_root}...",
+            message=f"📦🔬🔍 [PACKAGE] GrabBagLoader: Starting library scan in {self.builder_root}...",
             level="INFO"
         )
         
@@ -98,17 +98,17 @@ class GrabBagLoader:
                         system="ui", 
                         element="grab_bag", 
                         func_name=inspect.currentframe().f_code.co_name,
-                        message=f"📦📦📦 [PACKAGE]   ↳ Found Component: '{name}' (Type: {widget_type})",
+                        message=f"📦🆗✅ [PACKAGE]   ↳ Found Component: '{name}' (Type: {widget_type})",
                         level="DEBUG"
                     )
             except Exception as e:
-                logger.exception(f"❌ GrabBagLoader: Error loading sample from {item.name}")
+                logger.exception(f"❌📦🤦‍♂️ [PACKAGE] GrabBagLoader: Error loading sample from {item.name}: {e}")
         
         matrix_log(
             system="ui", 
             element="grab_bag", 
             func_name=inspect.currentframe().f_code.co_name,
-            message=f"📦📦📦 [PACKAGE] GrabBagLoader: Scan complete. Found {len(self.library)} valid components.",
+            message=f"📦🏁🏁 [PACKAGE] GrabBagLoader: Scan complete. Found {len(self.library)} valid components.",
             level="SUCCESS"
         )
         return self.library

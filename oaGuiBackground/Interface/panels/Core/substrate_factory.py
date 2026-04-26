@@ -4,8 +4,9 @@
 #
 # Description: Brief summary of purpose
 
-from oaGuiBackground.Methods.pattern_engine import PatternEngine
 import random
+
+from oaGuiBackground.Methods.pattern_engine import PatternEngine
 
 _engine = PatternEngine()
 
@@ -16,7 +17,7 @@ class SubstrateFactory:
         # ⚡ RESOLUTION FIX: Leverage Rust engine with scaled dimensions
         scaled_w = int(width * scale_factor)
         scaled_h = int(height * scale_factor)
-        
+
         img = _engine.generate_streaks(scaled_w, scaled_h, vertical, float(sigma), seed)
         if img and scale_factor > 1.0:
             return img.resize((width, height), resample=Image.LANCZOS)
@@ -28,7 +29,7 @@ class SubstrateFactory:
         # ⚡ RESOLUTION FIX: Leverage Rust engine with scaled dimensions
         scaled_w = int(width * scale_factor)
         scaled_h = int(height * scale_factor)
-        
+
         img = _engine.generate_hammered(scaled_w, scaled_h, seed)
         if img and scale_factor > 1.0:
             return img.resize((width, height), resample=Image.LANCZOS)

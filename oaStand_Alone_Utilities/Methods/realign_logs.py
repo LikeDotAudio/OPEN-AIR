@@ -4,9 +4,8 @@
 #
 # Description: A utility to ingest dozens of log files, sort them by microsecond timestamps, and merge them.
 
-import os
-import re
 import argparse
+import re
 from pathlib import Path
 
 # The standardized OPEN-AIR log pattern
@@ -27,20 +26,20 @@ def realign_logs(input_dir, output_file):
     Ingests all .log files in the input_dir, sorts them by timestamp, and merges them.
     """
     if HAS_RUST:
-        print(f"🦀 Using Rust LogAligner for high-speed merge...")
+        print("🦀 Using Rust LogAligner for high-speed merge...")
         count = _rust_aligner.realign(str(input_dir), str(output_file))
         print(f"✅ Processed {count} lines.")
         return True
 
     all_log_lines = []
-    
+
     input_path = Path(input_dir)
     if not input_path.is_dir():
         print(f"Error: {input_dir} is not a directory.")
         return False
 
     for log_file in input_path.glob("*.log"):
-        with open(log_file, 'r', encoding='utf-8', errors='ignore') as f:
+        with open(log_file, encoding='utf-8', errors='ignore') as f:
             for line in f:
                 line = line.strip()
                 if not line:
@@ -65,7 +64,7 @@ def realign_logs(input_dir, output_file):
     with open(output_file, 'w', encoding='utf-8') as f:
         for _, line in all_log_lines:
             f.write(line + '\n')
-            
+
     return True
 
 def main():

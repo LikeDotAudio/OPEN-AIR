@@ -1,4 +1,5 @@
 import array
+
 from .createtype import Type, create_type
 
 # Encode an array in which each element may be independently typed.

@@ -9,7 +9,7 @@ def normalize_path(path, state_manager):
     if not path: return ""
     normalized = str(path).strip().strip('.')
     if normalized.lower() == "root": return ""
-    
+
     # If path is already valid, return as is
     if state_manager.get_value_at_path(normalized) is not None:
         return normalized

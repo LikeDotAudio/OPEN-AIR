@@ -4,9 +4,10 @@
 #
 # Description: Brief summary of purpose
 
-import tkinter as tk
 from tkinter import ttk
-from ..Core.style import THEMES, DEFAULT_THEME
+
+from ..Core.style import DEFAULT_THEME, THEMES
+
 
 def apply_theme(widget_or_root, theme_name=DEFAULT_THEME):
     """Applies global TTK styles to a Tkinter instance."""
@@ -34,7 +35,7 @@ def apply_theme(widget_or_root, theme_name=DEFAULT_THEME):
 
     # Button styles
     dark_grey = colors.get("secondary", "#4e5254")
-    
+
     # Safely get toggle style
     toggle_style = THEMES[theme_name].get("button_style_toggle", {})
     selected_orange = toggle_style.get("Button_Selected_Bg", "#f4902c")
@@ -99,7 +100,7 @@ def apply_theme(widget_or_root, theme_name=DEFAULT_THEME):
         darkcolor="black",
         lightcolor="black",
     )
-    
+
     # 2. Tab Element Styling & State Mapping (TNotebook.Tab)
     style.configure(
         "TNotebook.Tab",
@@ -156,7 +157,7 @@ def apply_theme(widget_or_root, theme_name=DEFAULT_THEME):
         background=[("selected", "#333333")],
         foreground=[("selected", "#ff9900")]
     )
-    
+
     # 2026-02-24 00:40:00 - UI Flattening End
 
     return colors

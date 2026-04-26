@@ -2,10 +2,11 @@
 # Author: Gemini (Collaborator)
 # Version: 20260405.1315.6
 
-import requests
 import time
-from oaComProtocols.oaComNmos.Core.utils import get_ip # Not directly used here but might be useful
-from oaComProtocols.oaComNmos.Core.sdp_parser import parse_sdp, build_match_key
+
+import requests
+
+from oaComProtocols.oaComNmos.Core.sdp_parser import build_match_key, parse_sdp
 
 # --- Global State for Sender Cache ---
 # These variables will be managed and potentially initialized by an orchestrator.
@@ -150,7 +151,7 @@ def get_existing_senders_map(registrar_url):
         rebuild_sender_key_cache(registrar_url)
     else:
         print("[SenderCache] Using existing cached sender map.")
-        
+
     return SENDER_KEY_CACHE
 
 
@@ -181,5 +182,5 @@ def find_existing_sender(sdp_content, registrar_url):
         print(f"[SenderCache] FOUND existing sender: {sender_resource.get('id')}")
     else:
         print("[SenderCache] No existing sender found matching the SDP.")
-    
+
     return sender_resource

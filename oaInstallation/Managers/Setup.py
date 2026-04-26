@@ -1,6 +1,5 @@
-import sys
 import os
-import pathlib
+import sys
 
 # 1. Setup Environment: Ensure the project root is in sys.path
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -9,16 +8,18 @@ if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
 import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
+import shutil
+
 # Managers/Setup.py
 # Author: Anthony Peter Kuzub
 # Version: 20260323.1830.1
 #
 # Description: Primary installation orchestrator for the OPEN-AIR system environment.
 # This script ensures all Python dependencies and system infrastructure are present.
-
 import subprocess
-import shutil
+
+from oaLogging.Methods.matrix_gate import matrix_log
+
 
 # --- Path Injection ---
 # We resolve the project root and inject it into sys.path immediately to ensure
@@ -62,7 +63,7 @@ class SetupManager:
         try:
             # Import DependencyManager from the local Managers directory
             from oaInstallation.Managers import DependencyManager as dependancy_checker
-            
+
             def log_proxy(message, **kwargs):
                 if callback: callback(message)
                 elif self.debug: logger.debug(f"🛠️⚙️📦 [SETUP] {message}")
@@ -84,7 +85,7 @@ class SetupManager:
         if shutil.which('mosquitto'):
             if callback: callback("⚡ [POWER] Mosquitto broker is buzzing with energy!")
             return True
-        
+
         if callback: callback("📡 [SEARCH] Mosquitto missing. Attempting heroic install...")
         try:
             # We use check=False for update as it might fail on some networks but
@@ -102,37 +103,37 @@ class SetupManager:
         if shutil.which('snmpd'):
             # Check if our 'pass' configuration exists in snmpd.conf
             try:
-                with open('/etc/snmp/snmpd.conf', 'r') as f:
+                with open('/etc/snmp/snmpd.conf') as f:
                     if 'pass .1.3.6.1.4.1.65300' in f.read():
                         if callback: callback("📡 [RADAR] SNMP daemon is active and configured!")
                         return True
             except Exception:
                 pass # Proceed to install/re-config
-        
+
         if callback: callback("🛠️ [REPAIR] SNMP missing or unconfigured. Initiating deployment sequence...")
         try:
             # 1. Ensure packages are present
             subprocess.run(['sudo', 'apt-get', 'update'], check=False)
             subprocess.run(['sudo', 'apt-get', 'install', 'snmpd', 'snmp', 'snmp-mibs-downloader', '-y'], check=True)
-            
+
             # 2. Use SNMPManager to generate the master installer script
             from oaComProtocols.oaComSNMP.Managers.snmp_manager import SNMPManager
             snmp_mgr = SNMPManager(run_bridge=True)
             snmp_mgr.tree_builder.generate_master_script()
             installer_bash = snmp_mgr.get_installer_script()
-            
+
             installer_path = os.path.join(getattr(self, 'project_root', PROJECT_ROOT), "oaComProtocols", "oaComSNMP", "Assets", "snmp_install_tmp.sh")
             os.makedirs(os.path.dirname(installer_path), exist_ok=True)
-            
+
             with open(installer_path, "w") as f:
                 f.write(installer_bash)
             os.chmod(installer_path, 0o755)
-            
+
             # 3. Execute the installer
             if callback: callback("⚙️ [CONFIG] Applying master OID tree configuration...")
             # We must run this as root since it touches /etc/snmp/
             subprocess.run(['sudo', installer_path], cwd=getattr(self, 'project_root', PROJECT_ROOT), check=True)
-            
+
             if callback: callback("✨ [SUCCESS] SNMP infrastructure deployed and configured.")
             return True
         except Exception as e:
@@ -145,7 +146,7 @@ class SetupManager:
         """
         # TaskBarIcon.py is located in the sibling Core directory
         taskbar_script = os.path.join(getattr(self, 'project_root', PROJECT_ROOT), "oaInstallation", "Core", "TaskBarIcon.py")
-        
+
         if not os.path.exists(taskbar_script):
             error_message = f"Error: {taskbar_script} not found."
             if callback: callback(f"💀 [MISSING] {error_message}")
@@ -164,7 +165,7 @@ class SetupManager:
     def setup_rust_core(self, callback=None):
         """Builds and installs the centralized high-performance Rust core."""
         rust_core_dir = os.path.join(getattr(self, 'project_root', PROJECT_ROOT), "oaRustCore")
-        
+
         if not os.path.exists(rust_core_dir):
             if callback: callback("⚠️ [SKIP] oaRustCore directory not found. Skipping native build.")
             return True
@@ -184,13 +185,13 @@ class SetupManager:
 def main():
     """Primary entry point for the Setup utility."""
     manager = SetupManager(project_root=PROJECT_ROOT)
-    
+
     matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🛠️⚙️📦 [SETUP] Starting Stage: {STAGE_PYTHON_DEPS}", "INFO")
     if not manager.check_dependencies():
         logger.error("🛑 [CRITICAL] Dependency check failed. Setup aborted.")
         sys.exit(EXIT_CODE_CRITICAL)
 
-    matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🛠️⚙️📦 [SETUP] Starting Stage: Native Rust Core", "INFO")
+    matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🛠️⚙️📦 [SETUP] Starting Stage: Native Rust Core", "INFO")
     manager.setup_rust_core(lambda m: logger.info(m))
 
     matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🛠️⚙️📦 [SETUP] Starting Stage: {STAGE_MQTT_INFRA}", "INFO")

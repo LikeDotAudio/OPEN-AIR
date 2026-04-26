@@ -4,7 +4,6 @@
 #
 # Description: Brief summary of purpose
 
-import tkinter as tk
 
 def create_wink_state(config, initial_value):
     """Initializes the state for a Wink Button."""
@@ -17,7 +16,7 @@ def create_wink_state(config, initial_value):
         "is_hovering": False,
         "shutter_ids": [],
         "animating": False,
-        "blink_open": True, 
+        "blink_open": True,
         "is_blinking_active": False,
         "last_click_was_alt": False,
         "dims": {"w": config.get("width"), "h": config.get("height")},

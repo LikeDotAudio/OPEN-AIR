@@ -6,7 +6,9 @@
 
 import unittest
 from unittest.mock import MagicMock
+
 from oaSplinker.Core.splinker import ControlBroker
+
 
 class TestSplinker(unittest.TestCase):
     def setUp(self):
@@ -36,7 +38,7 @@ class TestSplinker(unittest.TestCase):
         callback = MagicMock()
         self.broker.add_monitor_callback(callback)
         self.assertIn(callback, self.broker._monitor_callbacks)
-        
+
         # Cleanup
         self.broker.remove_monitor_callback(callback)
         self.assertNotIn(callback, self.broker._monitor_callbacks)

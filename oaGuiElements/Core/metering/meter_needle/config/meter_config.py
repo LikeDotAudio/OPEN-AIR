@@ -1,16 +1,21 @@
 # config/meter_config.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: Brief summary of purpose
 
-from oaStyle.Core.style import THEMES, DEFAULT_THEME
-from oaGuiElements.Core.metering.meter_needle.Core.constants import COLOR_WHITE, COLOR_BLACK, NEEDLE_SCALES, SCALE_PADDINGS
+from oaGuiElements.Core.metering.meter_needle.Core.constants import (
+    COLOR_BLACK,
+    COLOR_WHITE,
+    NEEDLE_SCALES,
+    SCALE_PADDINGS,
+)
+from oaStyle.Core.style import DEFAULT_THEME, THEMES
+
 
 class MeterConfig:
     """Dynamically maps configuration attributes from JSON payload to Python properties."""
-    
+
     # Simple attribute mapping: (source_dict_name, key, default_val, type_caster)
     _MAPPINGS = {
         "label": ("config", "label_active", None, str),

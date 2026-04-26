@@ -1,5 +1,4 @@
 # standardizers/lexicon_expander.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
@@ -37,14 +36,14 @@ class LexiconExpander:
         """
         if not isinstance(data, dict):
             return data
-        
+
         new_data = {}
         for k, expanded_value in data.items():
             if isinstance(expanded_value, dict):
                 expanded_value = cls.expand(expanded_value)
-            
+
             target_key = cls.MAPPING.get(k, k)
-            
+
             # ⚡ SPECIAL HANDLING: x/y should ONLY be row/column in a layout context
             if k == "x":
                 if any(key in data for key in ["sticky", "weight", "col_span"]):
@@ -59,5 +58,5 @@ class LexiconExpander:
 
             if target_key not in new_data or target_key == k:
                 new_data[target_key] = expanded_value
-        
+
         return new_data

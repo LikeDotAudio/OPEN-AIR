@@ -1,7 +1,7 @@
-from typing import Tuple, Any
+from struct import pack_into, unpack_from
+from typing import Any
 
 from .createtype import Type, create_type
-from struct import pack_into, unpack_from
 
 
 def uint16_decode_from(data: bytearray, pos: int) -> tuple[Any, ...]:

@@ -5,7 +5,8 @@
 # Description: External MIB Verification Tool Implementation.
 
 import tkinter as tk
-from tkinter import ttk, filedialog
+from tkinter import filedialog, ttk
+
 from oaOchestration.Constants.project_paths import SNMP_CURRENT_MIB
 
 # --- GUI FALLBACKS (V3.2.1 Decoupling) ---
@@ -24,14 +25,14 @@ class SnmpVerifyMibImplementation(tk.Frame, TransparencyMixin):
     def __init__(self, parent, json_path=None, config=None, **kwargs):
         super().__init__(parent, **kwargs)
         self.config = config or {}
-        
+
         # ⚡ STANDALONE: Prioritize injected manager
         self.app_instance = self.config.get("app_instance")
         if self.app_instance:
             self.snmp_manager = getattr(self.app_instance, 'snmp_manager', None)
         else:
             self.snmp_manager = self._find_snmp_manager(parent)
-        
+
         # Fallback: Find manager via Entry if still not found
         if not self.snmp_manager:
             try:
@@ -51,20 +52,20 @@ class SnmpVerifyMibImplementation(tk.Frame, TransparencyMixin):
         while curr:
             # 1. Direct Attribute Check
             if hasattr(curr, 'snmp_manager'):
-                return getattr(curr, 'snmp_manager')
-            
+                return curr.snmp_manager
+
             # 2. App Instance Check (Generic pattern)
             app = getattr(curr, 'app_instance', None)
             if app and hasattr(app, 'snmp_manager'):
-                return getattr(app, 'snmp_manager')
-                
+                return app.snmp_manager
+
             try: curr = curr.master
             except: break
         return None
 
     def _setup_ui(self):
         self.pack(fill=tk.BOTH, expand=True)
-        
+
         # Header Frame
         header_frame = tk.Frame(self, bg=self.cget("bg"))
         header_frame.pack(side=tk.TOP, fill=tk.X, pady=5)
@@ -83,10 +84,10 @@ class SnmpVerifyMibImplementation(tk.Frame, TransparencyMixin):
         # Footer (Buttons)
         btn_frame = tk.Frame(self, bg=self.cget("bg"))
         btn_frame.pack(side=tk.BOTTOM, fill=tk.X, pady=10)
-        
+
         ttk.Button(btn_frame, text="Select MIB File...", command=self.browse_mib).pack(side=tk.LEFT, padx=10)
         ttk.Button(btn_frame, text="Run snmpwalk with this MIB", command=self.run_test).pack(side=tk.LEFT, padx=10)
-        
+
         # Filter Logic
         filter_frame = tk.Frame(btn_frame, bg=self.cget("bg"))
         filter_frame.pack(side=tk.LEFT, padx=10)
@@ -105,7 +106,7 @@ class SnmpVerifyMibImplementation(tk.Frame, TransparencyMixin):
         self.text_area = tk.Text(display_frame, bg="#1e1e1e", fg="#00ff00", font=("Courier", 10), padx=10, pady=10)
         scroll = ttk.Scrollbar(display_frame, orient=tk.VERTICAL, command=self.text_area.yview)
         self.text_area.configure(yscrollcommand=scroll.set)
-        
+
         self.text_area.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=(10,0))
         scroll.pack(side=tk.RIGHT, fill=tk.Y, padx=(0,10))
 
@@ -128,9 +129,9 @@ class SnmpVerifyMibImplementation(tk.Frame, TransparencyMixin):
         self.text_area.insert(tk.END, f"Executing walk using MIB file: {mib_path}...\n")
         self.text_area.insert(tk.END, "-"*40 + "\n")
         self.update()
-        
+
         output = self.snmp_manager.run_verification(mib_path=mib_path)
-        
+
         # Apply Filter
         filter_str = self.filter_var.get()
         if filter_str:

@@ -7,7 +7,9 @@
 
 import unittest
 from unittest.mock import MagicMock, patch
+
 from oaComProtocols.oaComMidi.Managers.midi_manager import MidiManager
+
 
 class TestMidiStandalone(unittest.TestCase):
     def setUp(self):
@@ -24,15 +26,15 @@ class TestMidiStandalone(unittest.TestCase):
         """Test that local monitors are notified even if MQTT is not available."""
         monitor_cb = MagicMock()
         self.midi.add_monitor_callback(monitor_cb)
-        
+
         # Simulate a fake port and message
         mock_port = MagicMock()
         mock_port.name = "StandalonePort"
-        
+
         import mido
         message = mido.Message('control_change', channel=0, control=7, value=64)
         mock_port.iter_pending.return_value = [message]
-        
+
         # Manually trigger one iteration of the loop logic
         # We patch time.sleep to avoid waiting
         # We need to make it exit after one iteration
@@ -49,7 +51,7 @@ class TestMidiStandalone(unittest.TestCase):
         # Manually trigger one iteration of the loop logic
         with patch("time.sleep"):
             self.midi._midi_listen_loop(mock_port)
-            
+
         # Verify monitor was notified
         self.assertTrue(monitor_cb.called)
         direction, received_message = monitor_cb.call_args[0]

@@ -4,9 +4,10 @@
 #
 # Description: Brief summary of purpose
 
-import os
 import json
+
 from oaTests.FileWriters.generate_html import HTMLGenerator
+
 
 class ReportGenerator:
     def __init__(self, html_path, json_path, timestamp):
@@ -20,9 +21,9 @@ class ReportGenerator:
 
     def generate_html(self, summary, details, extra_tabs):
         HTMLGenerator.render(
-            self.html_path, 
-            self.timestamp, 
-            summary, 
-            details, 
+            self.html_path,
+            self.timestamp,
+            summary,
+            details,
             extra_tabs
         )

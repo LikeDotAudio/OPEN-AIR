@@ -1,19 +1,17 @@
 # graphing/graph_styler.py
-from oaGui.Methods.i18n_utils import get_text
+import inspect
+
 # Author: Anthony Peter Kuzub
 # Version: 20250821.200641.1
 #
 # Description: This module provides functions for applying visual styles and themes to Matplotlib graphs.
-
-from typing import Dict, Any
-from oaLogging.Methods.matrix_gate import matrix_log
-import inspect
-from loguru import logger
-
-# --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
+from typing import Any
 
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaGui.Methods.i18n_utils import get_text
+
+# --- Standard Debug Logging Setup ---
+from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
@@ -29,13 +27,13 @@ app_constants = Config.get_instance()
 # Outputs:
 #     None.
 def apply_style(
-    ax: object, fig: object, style_config: Dict[str, Any], theme: Dict[str, Any]
+    ax: object, fig: object, style_config: dict[str, Any], theme: dict[str, Any]
 ):
     """
     Applies colors, grid visibility, and axis visibility.
     Supports nested 'style' and 'axis' configurations.
     """
-    matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] graph_styler: Applying visual styles to axis.", level="DEBUG")
+    matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🔬🏗️📊 [BUILDER] graph_styler: Applying visual styles to axis.", level="DEBUG")
 
     # Resolve 'style' dictionary
     nested_style = style_config.get("style", {})
@@ -170,7 +168,7 @@ def toggle_axis(ax: object, x_visible: bool, y_visible: bool):
 #     theme_name (str): The name of the theme to retrieve (e.g., 'dark').
 # Outputs:
 #     Dict[str, Any]: A dictionary containing color and text settings for the specified theme.
-def get_theme_style(theme_name: str) -> Dict[str, Any]:
+def get_theme_style(theme_name: str) -> dict[str, Any]:
     # In a real application, this would load from a style file.
     # For now, we'll use a hardcoded default.
     if theme_name == "dark":

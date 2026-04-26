@@ -4,12 +4,15 @@
 #
 # Description: Brief summary of purpose
 
+import tkinter as tk
 import unittest
 from unittest.mock import MagicMock, patch
-import tkinter as tk
+
 import matplotlib
+
 matplotlib.use('Agg')
 from oaGuiElements.Core.graphing.Methods.dynamic_graph import GraphPlotter
+
 
 class TestGraphPlotter(unittest.TestCase):
 

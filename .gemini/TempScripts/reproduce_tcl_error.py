@@ -1,6 +1,6 @@
 
-import sys
 import os
+import sys
 import tkinter as tk
 from unittest.mock import MagicMock, patch
 
@@ -10,6 +10,7 @@ if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
 from oaGuiManager.Core.bootstrap_sequence import AsyncBootstrapEngine
+
 
 def main():
     root = tk.Tk()
@@ -26,9 +27,9 @@ def main():
     }
     mock_app_constants = MagicMock()
     mock_app_constants.global_settings = {"debug_enabled": False}
-    
+
     engine = AsyncBootstrapEngine(root, mock_splash, mock_services, mock_app_constants, mock_shutdown)
-    
+
     print("Testing IMPROVED TclError handling in _launch_app...")
     # Mock Application to raise TclError
     with patch("oaGui.Entry.Application", side_effect=tk.TclError("Simulated TclError")):
@@ -44,13 +45,13 @@ def main():
         except tk.TclError:
             print("❌ FAILURE: TclError escaped! It should have been caught and logged (and shutdown triggered) inside _launch_app.")
         except Exception as e:
-            # Note: _launch_app catches Exception and calls on_closing, it doesn't re-raise to the caller 
+            # Note: _launch_app catches Exception and calls on_closing, it doesn't re-raise to the caller
             # unless we changed it. Wait, I didn't remove the outer except Exception in _launch_app.
             # So it should NOT reach here.
             print(f"❌ ERROR: Caught unexpected exception: {type(e).__name__}: {e}")
         else:
             print("✅ SUCCESS: No exception escaped _launch_app. Shutdown should have been triggered internally.")
-    
+
     root.destroy()
 
 if __name__ == "__main__":

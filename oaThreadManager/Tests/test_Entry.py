@@ -1,5 +1,6 @@
 import unittest
 
+
 class TestEntry(unittest.TestCase):
     def test_placeholder(self):
         """

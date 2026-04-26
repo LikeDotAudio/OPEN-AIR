@@ -4,7 +4,6 @@
 #
 # Description: Brief summary of purpose
 
-from loguru import logger
 
 class LyricManager:
     """Handles rotating lines of text for display during startup."""

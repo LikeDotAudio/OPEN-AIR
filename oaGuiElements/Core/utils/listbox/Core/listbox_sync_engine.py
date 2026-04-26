@@ -1,13 +1,14 @@
 # Core/listbox_sync_engine.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: Brief summary of purpose
 
-import tkinter as tk
 import time
+import tkinter as tk
+
 import orjson
+
 
 class ListboxSyncEngine:
     """Orchestrates synchronization between tk.StringVar, the Listbox widget, and MQTT topics."""
@@ -35,12 +36,12 @@ class ListboxSyncEngine:
         sel = listbox.curselection()
         if not sel: return
         lbl = listbox.get(sel[0])
-        
+
         selected_key = next((k for k, opt in options_map.items() if opt.get("label_active", k) == lbl), None)
         if not selected_key: return
 
         value = options_map[selected_key].get("value", selected_key)
-        
+
         # 1. Update selection status for ALL options via MQTT
         for k, opt in options_map.items():
             tp = engine.calculate_topic(f"{path}/options/{k}/selected", base_topic)

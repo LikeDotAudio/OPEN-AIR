@@ -9,7 +9,9 @@
 # Version 20260417.0125.1
 
 import tkinter as tk
+
 from oaLogging.Methods.matrix_gate import matrix_log
+
 
 class EditorMenuBuilder:
     """Orchestrates the construction of the Editor's menu system."""
@@ -18,7 +20,7 @@ class EditorMenuBuilder:
     def build(editor):
         """Builds the main menubar and attaches it to the editor window."""
         matrix_log("ui", "gui_builder", "menu", "🎨🎨🎨 [RENDER] Building Main Menu Bar", "DEBUG")
-        
+
         editor.menubar = tk.Menu(editor.window)
         editor.window.config(menu=editor.menubar)
 

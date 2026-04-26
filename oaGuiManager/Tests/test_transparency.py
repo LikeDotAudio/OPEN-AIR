@@ -4,10 +4,12 @@
 #
 # Description: Unit tests for transparency.py logic.
 
+import tkinter as tk
 import unittest
 from unittest.mock import MagicMock, patch
-import tkinter as tk
-from oaGuiManager.Core.transparency.transparency import TransparencyConfig, BackgroundSlicer, TransparencyManager
+
+from oaGuiManager.Core.transparency.transparency import BackgroundSlicer, TransparencyConfig, TransparencyManager
+
 
 class TestTransparency(unittest.TestCase):
     """Verifies that the transparency engine correctly parses config and slices backgrounds."""
@@ -17,11 +19,11 @@ class TestTransparency(unittest.TestCase):
         self.mock_widget = MagicMock(spec=tk.Widget)
         self.mock_widget.winfo_exists.return_value = True
         self.mock_widget.cget.return_value = "#ffffff"
-        
+
         self.mock_canvas = MagicMock(spec=tk.Canvas)
         self.mock_canvas.winfo_exists.return_value = True
         self.mock_canvas.cget.return_value = "#ffffff"
-        
+
         self.mock_builder = MagicMock()
         self.mock_builder.panel_bg_pil = MagicMock()
         self.mock_builder.panel_bg_pil.size = (1920, 1080)
@@ -34,12 +36,12 @@ class TestTransparency(unittest.TestCase):
         config1 = {"transparent": True}
         bg, solid, trans = TransparencyConfig.parse_configuration(config1, self.mock_widget)
         self.assertTrue(trans, "Failed to detect explicit 'transparent': True")
-        
+
         # 2. Structural type (e.g. OcaBlock from geometry.py)
         config2 = {"type": "OcaBlock"}
         bg, solid, trans = TransparencyConfig.parse_configuration(config2, self.mock_canvas)
         self.assertTrue(trans, "Failed to detect structural type 'OcaBlock'")
-        
+
         # 3. Explicitly solid hex
         config3 = {"bg_color": "#ff0000"}
         bg, solid, trans = TransparencyConfig.parse_configuration(config3, self.mock_widget)
@@ -51,7 +53,7 @@ class TestTransparency(unittest.TestCase):
     def test_background_slicer_perform_slice(self, mock_photo):
         """OPERATE: Perform slice. CHECK: Verify crop coordinates and image creation."""
         slicer = BackgroundSlicer(self.mock_widget, self.mock_canvas, self.mock_builder, "TestWidget")
-        
+
         # Mock hierarchical geometry for get_relative_pos
         # rendering_target (mock_canvas) -> scroll_frame (mock_builder.scroll_frame)
         self.mock_canvas.winfo_exists.return_value = True
@@ -60,19 +62,19 @@ class TestTransparency(unittest.TestCase):
         self.mock_canvas.winfo_x.return_value = 200
         self.mock_canvas.winfo_y.return_value = 100
         self.mock_canvas.winfo_parent.return_value = ".scroll_frame"
-        
+
         # Mock scroll root
         self.mock_builder.scroll_frame._w = ".scroll_frame"
         self.mock_builder.scroll_frame.winfo_exists.return_value = True
-        
+
         # Mock nametowidget to resolve the parent path
         self.mock_canvas.nametowidget.return_value = self.mock_builder.scroll_frame
-        
+
         # Ensure we don't have id collisions in coord_cache
         self.mock_builder._root_coord_cache = {}
-        
+
         slicer.perform_slice()
-        
+
         # Verify crop coordinates: (200, 100, 300, 150)
         self.mock_builder.panel_bg_pil.crop.assert_called_with((200, 100, 300, 150))
 
@@ -80,7 +82,7 @@ class TestTransparency(unittest.TestCase):
         """OPERATE: Apply transparency. CHECK: Verify it's registered with the builder."""
         config = {"transparent": True}
         TransparencyManager.apply_transparency(self.mock_widget, self.mock_canvas, config, self.mock_builder)
-        
+
         # Verify builder.register_for_slicing was called
         self.mock_builder.register_for_slicing.assert_called_once()
 

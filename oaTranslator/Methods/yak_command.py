@@ -4,24 +4,21 @@
 #
 # Description: Brief summary of purpose
 
-import os
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
-import inspect
-import orjson
-import pathlib
 import tkinter as tk
 
+import orjson
+
 # --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
-from oaOchestration.Constants.project_paths import GLOBAL_PROJECT_ROOT
 from oaGuiManager.Core.loader.gui_from_json import UniversalGuiLoader
+from oaOchestration.Constants.project_paths import GLOBAL_PROJECT_ROOT
 
 
 def render_scpi_command(scpi_command_template: str, Input: dict):
@@ -60,6 +57,7 @@ def render_scpi_command(scpi_command_template: str, Input: dict):
 
 import oaOchestration.Constants.project_paths as app_paths
 
+
 class YakFleetCommandBuilder:
     def __init__(self, mqtt_connection_manager, subscriber_router):
         self.mqtt_manager = mqtt_connection_manager
@@ -77,18 +75,18 @@ class YakFleetCommandBuilder:
         try:
             with open(self.fleet_path, "rb") as f:
                 fleet_data = orjson.loads(f.read())
-            
+
             matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, f"🚀 YakFleetCommandBuilder: Processing fleet data from {self.fleet_path}...", level="DEBUG")
 
             # Iterate categories (e.g., Spectrum, DMM)
             for category, cat_data in fleet_data.items():
                 matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, f"📂 Processing Category: {category}", level="DEBUG")
                 yak_data = cat_data.get("YAK", {})
-                
+
                 # Iterate Models (e.g., 34401A, N9340B)
                 for model, model_data in yak_data.items():
                     if model == "Unknown": continue
-                    
+
                     matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, f"🔍 Searching for YAK tabs for Model: {model}...", level="DEBUG")
 
                     # Search for the specific device directory
@@ -96,18 +94,18 @@ class YakFleetCommandBuilder:
                     # We use a glob to be flexible with the Category folder name and the Model prefix
                     search_pattern = f"oaGui/Assets/left_50/top_100/*/10_YAK/*_{model}"
                     found_dirs = list(GLOBAL_PROJECT_ROOT.glob(search_pattern))
-                    
+
                     if not found_dirs:
                         matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, f"⚠️ No YAK directory found for model {model}", level="DEBUG")
                         continue
-                    
+
                     for device_dir in found_dirs:
                         matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, f"✅ Found device directory: {device_dir}", level="SUCCESS")
                         self._load_tabs_for_device(device_dir, model)
-            
+
             matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, "🏁 YakFleetCommandBuilder: Fleet processing complete.", level="DEBUG")
 
-        except Exception as e:
+        except Exception:
             logger.exception("❌ Error processing fleet")
 
     def _load_tabs_for_device(self, device_dir, model):
@@ -116,7 +114,7 @@ class YakFleetCommandBuilder:
         Uses a staggered queue to prevent GUI freeze.
         """
         json_files = sorted(list(device_dir.rglob("*.json")))
-        
+
         if not json_files:
              matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, f"⚠️ No JSON tabs found in {device_dir}", level="DEBUG")
              return
@@ -145,23 +143,23 @@ class YakFleetCommandBuilder:
         json_path = queue.pop(0)
         try:
             matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, f"🐂 Serial Loading: {json_path.name}", level="DEBUG")
-            
+
             # Define completion callback to trigger next item in queue
             def on_tab_complete():
                 # Schedule next load with a small gap for breathing room
                 hidden_window.after(100, lambda: self._process_staggered_queue(hidden_window, queue, model))
 
             UniversalGuiLoader(
-                hidden_window, 
-                str(json_path), 
+                hidden_window,
+                str(json_path),
                 config={
-                    "app_instance": self.app_instance, 
+                    "app_instance": self.app_instance,
                     "state_mirror_engine": getattr(self.app_instance, 'state_mirror_engine', None),
                     "subscriber_router": getattr(self.app_instance, 'subscriber_router', None),
                     "on_complete": on_tab_complete # PASS THE CALLBACK
                 }
             )
-        except Exception as e:
+        except Exception:
             logger.exception("❌ Failed to load tab {json_path.name}")
             # Continue queue on failure
             hidden_window.after(100, lambda: self._process_staggered_queue(hidden_window, queue, model))

@@ -6,31 +6,32 @@
 # ⚡ STANDALONE: 100% independent of ProtocolRouter and StateCache.
 
 import os
-import time
 import threading
+import time
+from collections.abc import Callable
 from dataclasses import dataclass
-from typing import Any, Optional, List, Dict, Callable
+from typing import Any
 
-from oaLogging.Core.logger import SNMP_LOGGER as snmp_logger
-from oaLogging.Methods.matrix_gate import matrix_log, is_debug_allowed
-from oaConfigurationManager.Entry import Config
-from oaComProtocols.oaComSNMP.Constants.snmp_constants import BASE_OID, THREAD_JOIN_TIMEOUT
-from oaComProtocols.oaComSNMP.Methods.snmp_utils import initialize_oid_map
-from oaComProtocols.oaComSNMP.Core.snmp_tree import SNMPTreeBuilder
-from oaComProtocols.oaComSNMP.Core.snmp_state_persister import SnmpStatePersister
-from oaComProtocols.oaComSNMP.Core.snmp_log_monitor import SnmpLogMonitor
+from oaComProtocols.oaComSNMP.Constants.snmp_constants import BASE_OID
 from oaComProtocols.oaComSNMP.Core.oid_map_converter import OidMapConverter
+from oaComProtocols.oaComSNMP.Core.snmp_log_monitor import SnmpLogMonitor
 from oaComProtocols.oaComSNMP.Core.snmp_mqtt_client import SnmpMqttClient
-
+from oaComProtocols.oaComSNMP.Core.snmp_state_persister import SnmpStatePersister
+from oaComProtocols.oaComSNMP.Core.snmp_tree import SNMPTreeBuilder
 from oaComProtocols.oaComSNMP.Methods.snmp_mib_generator import MibGenerator
+from oaComProtocols.oaComSNMP.Methods.snmp_utils import initialize_oid_map
+from oaConfigurationManager.Entry import Config
+from oaLogging.Core.logger import SNMP_LOGGER as snmp_logger
+from oaLogging.Methods.matrix_gate import matrix_log
+
 
 @dataclass
 class BridgeContext:
-    mqtt_client: Optional[SnmpMqttClient] = None
+    mqtt_client: SnmpMqttClient | None = None
 
 class SNMPManager:
     """Factory and base interface for SNMP Managers."""
-    
+
     @staticmethod
     def create(context: BridgeContext, run_bridge: bool):
         if run_bridge:
@@ -41,27 +42,23 @@ class SNMPManager:
         self.context = context
         self._running = False
         self.run_bridge = False
-        
-        from oaOchestration.Constants.project_paths import (
-            SNMP_STATE_FILE, 
-            SNMP_CURRENT_MIB,
-            SNMP_BRIDGE_SCRIPT
-        )
+
+        from oaOchestration.Constants.project_paths import SNMP_BRIDGE_SCRIPT, SNMP_CURRENT_MIB, SNMP_STATE_FILE
         self.state_file = SNMP_STATE_FILE
         self.mib_path = SNMP_CURRENT_MIB
         self.master_script_path = SNMP_BRIDGE_SCRIPT
         self.base_oid = BASE_OID
         self._socket_info = "None"
-        
+
         self.tree_builder = SNMPTreeBuilder(base_oid=self.base_oid)
         self.tree_builder.master_script_path = self.master_script_path
-        
+
         self.oid_map = {}
         self._mqtt_state = {} # ⚡ REFLECTION: Local mirror of MQTT state
         self._monitor_callbacks = []
         self._mqtt_listeners = []
         self._state_lock = threading.RLock()
-        
+
         self._initialize_workers()
 
     def register_mqtt_listener(self, callback: Callable[[str, Any], None]):
@@ -84,7 +81,7 @@ class SNMPManager:
     def _initialize_workers(self):
         self.oid_map_converter = OidMapConverter(self.base_oid, self._state_lock)
         self.state_persister = SnmpStatePersister(
-            state_provider=self, 
+            state_provider=self,
             thread_lock=self._state_lock,
             notify_monitor_callback=self._notify_monitor,
             run_bridge=self.run_bridge,
@@ -125,7 +122,7 @@ class SNMPManager:
                 self.context.mqtt_client.set_on_message_callback(self.handle_mqtt_message)
             else:
                 self.context.mqtt_client.on_message_callback = self.handle_mqtt_message
-                
+
             self.context.mqtt_client.subscribe("OPEN-AIR/#")
 
             self._status_update_thread = threading.Thread(target=self._mqtt_status_loop, daemon=True, name="SNMP-MqttStatus")
@@ -136,7 +133,7 @@ class SNMPManager:
     def handle_mqtt_message(self, topic: str, payload: Any):
         """Processes raw MQTT messages to maintain the SNMP state mirror."""
         if not self._running: return
-        
+
         # ⚡ PROPAGATE: Notify external listeners (e.g. UI tabs)
         with self._state_lock:
             listeners = list(self._mqtt_listeners)
@@ -175,7 +172,7 @@ class SNMPManager:
     def stop(self):
         # ⚡ SIGNAL SHUTDOWN FIRST: Ensure background threads see _running=False and release the lock.
         self._running = False
-        
+
         if not self._state_lock.acquire(timeout=2.0):
             snmp_logger.warning("SNMP stop() timed out waiting for lock. Forcing thread termination.")
         else:
@@ -184,7 +181,7 @@ class SNMPManager:
                 pass
             finally:
                 self._state_lock.release()
-        
+
         self.state_persister.stop()
         self.log_monitor.stop()
 
@@ -211,7 +208,7 @@ class SNMPManager:
 
         if self.run_bridge and self.context.mqtt_client:
             if topic and "Monitor/SNMP" in topic: return
-            
+
             monitor_payload = {
                 "value": value, "source": "SNMP", "oid": oid,
                 "topic": topic, "direction": direction, "timestamp": time.time(), "metadata": metadata,
@@ -263,10 +260,10 @@ class SNMPObserver(SNMPManager):
     def __init__(self, context: BridgeContext):
         super().__init__(context)
         self.run_bridge = False
-        
+
     def handle_mqtt_message(self, topic: str, payload: Any):
         super().handle_mqtt_message(topic, payload)
-        
+
         if not self._running: return
 
         value = payload.get("value") if isinstance(payload, dict) else payload
@@ -296,10 +293,10 @@ class SNMPBridge(SNMPManager):
         try:
             if not immediate:
                 time.sleep(5)
-            
+
             if self._running:
                 self.tree_builder.generate_master_script()
                 self.save_current_mib()
-                snmp_logger.success(f"SNMP Bridge Active")
+                snmp_logger.success("SNMP Bridge Active")
         except Exception as e:
             snmp_logger.error(f"SNMP Bridge sync failed: {e}")

@@ -16,6 +16,7 @@
 
 import os
 
+
 class InstallerGenerator:
     @staticmethod
     def generate(base_oid, master_script_path):
@@ -24,15 +25,14 @@ class InstallerGenerator:
         Ensures path references are absolute and robust for snmpd access.
         """
         from oaConfigurationManager.FileReaders.config_reader import Config
-        from oaOchestration.Core.path_initializer import GLOBAL_PROJECT_ROOT
         from oaOchestration.Constants.project_paths import DATA_SNMP_DIR
         configuration = Config.get_instance()
 
-        # We must use absolute paths for the snmpd.conf 'pass' command 
+        # We must use absolute paths for the snmpd.conf 'pass' command
         # because snmpd runs as a system service and won't know the project root.
         abs_master_path = os.path.abspath(master_script_path)
         abs_data_dir = os.path.abspath(DATA_SNMP_DIR)
-        
+
         installer_lines = [
             "#!/bin/bash",
             "# OPEN-AIR SNMP Master Bridge: Automated Installer",
@@ -73,5 +73,5 @@ class InstallerGenerator:
             "",
             'echo "[SNMP] Setup Complete!"',
         ]
-        
+
         return '\n'.join(installer_lines)

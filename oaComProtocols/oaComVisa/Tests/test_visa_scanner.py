@@ -5,10 +5,10 @@
 # Description: Tests for the VisaScanner worker class.
 
 import unittest
-from unittest.mock import MagicMock, patch, mock_open
-import pyvisa
+from unittest.mock import MagicMock, patch
 
 from oaComProtocols.oaComVisa.Workers.visa_scanner import VisaScanner
+
 
 class TestVisaScanner(unittest.TestCase):
 
@@ -35,10 +35,10 @@ class TestVisaScanner(unittest.TestCase):
         CHECK: Assert it processes targets and returns lists of dedicated/gateway IPs.
         """
         mock_get_ip.return_value = "192.168.1.50"
-        
+
         # Mock executor context manager and its submit/result flow
         executor = MockExecutor.return_value.__enter__.return_value
-        
+
         # Simulate check_host results
         def mock_submit(fn, ip):
             mock_future = MagicMock()
@@ -51,13 +51,13 @@ class TestVisaScanner(unittest.TestCase):
             return mock_future
 
         executor.submit.side_effect = mock_submit
-        
+
         # We need to simulate the dictionary of futures returned in hunt_for_devices
-        # Since we're mocking the executor, we'll just mock the loop in the function 
+        # Since we're mocking the executor, we'll just mock the loop in the function
         # but that's complex. Let's simplify and mock the return of the executor logic.
-        
+
         dedicated, gateways = self.scanner.hunt_for_devices()
-        
+
         self.assertIn("192.168.1.100", dedicated)
         self.assertIn("192.168.1.1", gateways)
 
@@ -70,9 +70,9 @@ class TestVisaScanner(unittest.TestCase):
         mock_inst = MagicMock()
         self.mock_rm.open_resource.return_value = mock_inst
         mock_inst.query.return_value = "TEKTRONIX,MSO2024B,C012345,v1.23\n"
-        
+
         idn = self.scanner.query_device_safe("TCPIP::192.168.1.100::INSTR")
-        
+
         self.assertEqual(idn, "TEKTRONIX,MSO2024B,C012345,v1.23")
         mock_inst.query.assert_called_with("*IDN?")
         mock_inst.close.assert_called()
@@ -84,9 +84,9 @@ class TestVisaScanner(unittest.TestCase):
         CHECK: Assert it returns None.
         """
         self.mock_rm.open_resource.side_effect = Exception("Connection Failed")
-        
+
         idn = self.scanner.query_device_safe("TCPIP::192.168.1.100::INSTR")
-        
+
         self.assertIsNone(idn)
 
     @patch('urllib.request.urlopen')
@@ -107,9 +107,9 @@ class TestVisaScanner(unittest.TestCase):
         mock_response.read.return_value = sample_html.encode('utf-8')
         mock_response.__enter__.return_value = mock_response
         mock_urlopen.return_value = mock_response
-        
+
         targets = self.scanner.get_gateway_inventory("192.168.1.1")
-        
+
         self.assertEqual(len(targets), 2)
         self.assertIn("GPIB0,1", targets)
         self.assertIn("GPIB0,2", targets)
@@ -119,7 +119,7 @@ class TestVisaScanner(unittest.TestCase):
         """Test parse_resource_details for TCPIP resources."""
         resource = "TCPIP0::192.168.1.100::gpib0,1::INSTR"
         details = self.scanner.parse_resource_details(resource)
-        
+
         self.assertEqual(details["IP"], "192.168.1.100")
         self.assertEqual(details["Interface"], "gpib0")
         self.assertEqual(details["GPIB_Addr"], "1")
@@ -128,7 +128,7 @@ class TestVisaScanner(unittest.TestCase):
         """Test parse_resource_details for USB resources."""
         resource = "USB0::0x1234::0x5678::SERIAL::0::INSTR"
         details = self.scanner.parse_resource_details(resource)
-        
+
         self.assertEqual(details["Interface"], "USB")
         self.assertEqual(details["IP"], "USB")
 
@@ -136,7 +136,7 @@ class TestVisaScanner(unittest.TestCase):
         """Test parse_idn with standard strings."""
         idn = "TEKTRONIX,MSO2024B,C012345,v1.23"
         mfg, model, serial, firm = self.scanner.parse_idn(idn)
-        
+
         self.assertEqual(mfg, "TEKTRONIX")
         self.assertEqual(model, "MSO2024B")
         self.assertEqual(serial, "C012345")
@@ -147,7 +147,7 @@ class TestVisaScanner(unittest.TestCase):
         """Test augment_device_details with a known device."""
         entry = {"model": "MSO2024B"}
         augmented = self.scanner.augment_device_details(entry)
-        
+
         self.assertEqual(augmented["device_type"], "Oscilloscope")
         self.assertEqual(augmented["notes"], "Tested")
 

@@ -6,6 +6,7 @@
 
 import math
 
+
 class CircularMath:
     """Helper for polar and cartesian coordinate transformations."""
 

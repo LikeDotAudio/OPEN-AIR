@@ -11,11 +11,11 @@ class CMDPRendererMixin:
         self.canvas.delete("static_ui")
         cx, cy, n, f = self.center_x, self.center_y, self.near_radius, self.far_radius
         accent = "#f4902c"
-        
+
         # Guides
         self.canvas.create_oval(cx-n, cy-n, cx+n, cy+n, outline=accent, dash=(5,5), width=2, tags="static_ui")
         self.canvas.create_oval(cx-f, cy-f, cx+f, cy+f, outline=accent, dash=(5,5), width=2, tags="static_ui")
-        
+
         # Center Icon (Head)
         r = 40
         self.canvas.create_oval(cx-r-10, cy-15, cx-r+5, cy+15, fill="#444", outline=accent, width=2, tags="static_ui")

@@ -4,11 +4,12 @@
 #
 # Description: Brief summary of purpose
 
-import math
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
-from PIL import Image, ImageDraw, ImageTk, ImageFilter
-from oaLogging.Core.logger import builder_logger
+import math
+
+from PIL import Image, ImageDraw, ImageFilter, ImageTk
+
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- Standard Debug Logging Setup ---
 _LTP_ASSET_CACHE = {}
@@ -23,7 +24,7 @@ class LTPAssetGenerator:
             return _LTP_ASSET_CACHE[cache_key]
 
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🏗️🖼️🎨 [ASSET] Generating NEW 3D LTP knob asset: {radius}px", level="TRACE")
-        
+
         def hex_to_rgb(hex_str):
             if not isinstance(hex_str, str) or not hex_str.startswith("#"): return (40,40,40)
             h = hex_str.lstrip('#')
@@ -39,7 +40,7 @@ class LTPAssetGenerator:
         full_w, full_h = diameter + pad*2, diameter + pad*2
         base = Image.new("RGBA", (full_w, full_h), (0,0,0,0))
         cx, cy = full_w // 2, full_h // 2
-        
+
         def draw_shape(draw_obj, r, fill=None, outline=None, width=1, offset=(0,0)):
             ocx, ocy = cx + offset[0], cy + offset[1]
             if shape == "octagon":
@@ -58,14 +59,14 @@ class LTPAssetGenerator:
         shadow = Image.new("RGBA", (full_w, full_h), (0,0,0,0))
         draw_shape(ImageDraw.Draw(shadow), radius, fill=(0,0,0,150), offset=(4,5))
         base = Image.alpha_composite(base, shadow.filter(ImageFilter.GaussianBlur(radius=5)))
-        
+
         # 2. Main Body
         body = Image.new("RGBA", (full_w, full_h), (0,0,0,0))
         b_draw = ImageDraw.Draw(body)
         draw_shape(b_draw, radius, fill=fill_col, outline=outline_color, width=1)
         draw_shape(b_draw, radius-2, outline=(255,255,255,60), width=1)
         base = Image.alpha_composite(base, body)
-        
+
         # 3. Top Face (Gloss)
         face = Image.new("RGBA", (full_w, full_h), (0,0,0,0))
         draw_shape(ImageDraw.Draw(face), radius-4, fill=(255,255,255,15))

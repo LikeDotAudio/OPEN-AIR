@@ -1,19 +1,20 @@
 # Core/graph_patina_mixin.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: Brief summary of purpose
 
-import numpy as np
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
+
+import numpy as np
 from PIL import Image
-from oaLogging.Core.logger import builder_logger
+
 from oaGuiElements.Core.graphing.Methods import graph_updater
+from oaLogging.Core.logger import builder_logger
 
 # --- Standard Debug Logging Setup ---
-from oaLogging.Methods.matrix_gate import is_debug_allowed
+from oaLogging.Methods.matrix_gate import is_debug_allowed, matrix_log
+
 BUILDER_DEBUG = is_debug_allowed(system="UI", element="GUI_BUILDER")
 
 # --- Standard Debug Logging Setup ---
@@ -27,7 +28,7 @@ class GraphPatinaMixin:
 
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📈💹🎨 [SYNC] Injecting patina into GraphPlotter '{self.widget_id}'", level="DEBUG")
         tk_canvas = self.canvas.get_tk_widget()
-        
+
         # 0. Clear Blit Cache
         fig_id = id(self.fig)
         if fig_id in graph_updater._bg_cache: del graph_updater._bg_cache[fig_id]
@@ -39,16 +40,16 @@ class GraphPatinaMixin:
                 has_patina = hasattr(tk_canvas, 'panel_bg_pil_slice')
                 self.fig.patch.set_facecolor(bg_hex)
                 self.ax.set_facecolor(bg_hex)
-                
+
                 is_trans = self.widget_config.get("transparent") is True or \
                            self.widget_config.get("style", {}).get("background_color") == "match_theme"
-                
+
                 # ⚡ FIX: Never hide the figure/axis patch if we want to see anything.
                 # Matplotlib needs these to be visible to correctly capture the 'background' for blitting.
                 # Instead of hiding them, we set their alpha or keep them as fallback.
                 self.fig.patch.set_visible(True)
                 self.ax.patch.set_visible(True)
-                
+
                 if has_patina or is_trans:
                     self.fig.patch.set_alpha(0.0)
                     self.ax.patch.set_alpha(0.0)

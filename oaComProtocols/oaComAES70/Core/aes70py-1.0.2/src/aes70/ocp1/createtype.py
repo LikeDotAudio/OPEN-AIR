@@ -1,6 +1,5 @@
-from typing import Callable, Tuple
 
-class Type():
+class Type:
     def __init__(self, **kwds):
         self.__dict__.update(kwds)
 

@@ -17,6 +17,7 @@
 import threading
 import time
 
+
 class MIDIHardwareLock:
     """Thread-safe management of hardware interaction locks."""
 

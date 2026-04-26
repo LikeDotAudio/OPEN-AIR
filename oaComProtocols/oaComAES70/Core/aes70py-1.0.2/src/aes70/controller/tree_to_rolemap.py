@@ -1,5 +1,6 @@
 import asyncio
 
+
 async def tree_to_rolemap(tree, s='/'):
     roles = {}
 

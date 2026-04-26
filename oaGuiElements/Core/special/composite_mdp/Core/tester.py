@@ -1,13 +1,12 @@
 # composite_mdp/tester.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: Brief summary of purpose
 
+import math
 import tkinter as tk
 from tkinter import ttk
-import math
 
 # --- UNBOUNDED FLOATING LTP (SINGLE CANVAS ARCHITECTURE) ---
 
@@ -36,11 +35,11 @@ class LTPObject:
         self.x = x
         self.y = y
         self.angle = 0.0
-        
+
         # State
         self.val_min, self.val_max, self.val_current = 0.0, PERCENT_MAX, 50.0
         self.rot_min, self.rot_max, self.rot_current = ROTATION_MIN_DEFAULT, ROTATION_MAX_DEFAULT, 0.0
-        
+
         # Style
         self.cap_color = "#333333"
         self.cap_outline_normal = "#888888"
@@ -48,17 +47,17 @@ class LTPObject:
         self.cap_outline = self.cap_outline_normal
         self.highlight_color = "#00bfff"
         self.track_len = DEFAULT_TRACK_LENGTH
-        
+
         self.on_change_cb = on_change_cb
         self.tag_root = f"fader_{self.widget_id}"
-        
+
         self.dragging = False
         self.hovered = False
-        
+
         self.start_x, self.start_y = 0, 0
         self.start_val, self.start_rot = 0, 0
         self.start_pos = (0, 0)
-        
+
         self.render_visuals()
 
     def calculate_rotated_point(self, px, py, cx, cy, angle_deg):
@@ -71,7 +70,7 @@ class LTPObject:
     def render_visuals(self):
         self.canvas.delete(self.tag_root)
         center_x, center_y, angle, track_length = self.x, self.y, self.angle, self.track_len
-        
+
         # Hitbox
         hitbox_width = HITBOX_WIDTH
         hitbox_points = [
@@ -88,7 +87,7 @@ class LTPObject:
         track_end = self.calculate_rotated_point(center_x, center_y + track_length/2, center_x, center_y, angle)
         self.canvas.create_line(track_start, track_end, fill="#000000", width=6, capstyle=tk.ROUND, tags=self.tag_root)
         self.canvas.create_line(track_start, track_end, fill="#222222", width=2, capstyle=tk.ROUND, tags=self.tag_root)
-        
+
         # Ticks
         for i in range(TICK_COUNT):
             local_y = (center_y + track_length/2) - (track_length * (i/TICK_DIVISOR))
@@ -103,18 +102,18 @@ class LTPObject:
         local_cap_y = (center_y + track_length/2) - (norm * track_length)
         cap_center_x, cap_center_y = self.calculate_rotated_point(center_x, local_cap_y, center_x, center_y, angle)
         radius = CAP_RADIUS
-        
+
         # Glow Effect
         outline_col = self.cap_outline_hover if self.hovered else self.cap_outline_normal
         outline_w = 3 if self.hovered else 2
-        
+
         self.canvas.create_oval(cap_center_x-radius, cap_center_y-radius, cap_center_x+radius, cap_center_y+radius, fill=self.cap_color, outline=outline_col, width=outline_w, tags=(self.tag_root, "cap"))
-        
+
         prad = math.radians(90 - self.rot_current - angle)
         pointer_x, pointer_y = cap_center_x + (radius-POINTER_OFFSET)*math.cos(prad), cap_center_y - (radius-POINTER_OFFSET)*math.sin(prad)
         self.canvas.create_line(cap_center_x, cap_center_y, pointer_x, pointer_y, fill=self.highlight_color, width=3, capstyle=tk.ROUND, tags=self.tag_root)
         self.canvas.create_oval(cap_center_x-3, cap_center_y-3, cap_center_x+3, cap_center_y+3, fill=self.highlight_color, outline="", tags=self.tag_root)
-        
+
         self.canvas.create_text(cap_center_x, cap_center_y-INDICATOR_OFFSET, text=f"{self.val_current:.1f}", fill="white", font=("Arial", 8), tags=self.tag_root)
         self.canvas.create_text(cap_center_x, cap_center_y+INDICATOR_OFFSET, text=f"R:{self.rot_current:.0f}", fill="#aaaaaa", font=("Arial", 7), tags=self.tag_root)
         self.canvas.create_text(center_x, center_y + track_length/2 + ID_LABEL_OFFSET, text=f"ID:{self.widget_id}", fill="#555555", font=("Arial", 8), tags=self.tag_root)
@@ -132,22 +131,22 @@ class MultiFaderApp(tk.Tk):
         self.title("Floating Transparent Faders (8 Units)")
         self.geometry("1200x900")
         self.configure(bg="#222222")
-        
+
         ctrl_frame = tk.Frame(self, bg="#333333", padx=10, pady=10)
         ctrl_frame.pack(side=tk.TOP, fill=tk.X)
-        tk.Label(ctrl_frame, text="Controls:\nMiddle-Drag = Move Widget | Alt+Scroll = Rotate Widget\nScroll (Hover) = Adjust Knob\nDrag Cap (Dual-Axis): Up/Down=Linear, Left/Right=Rotary", 
+        tk.Label(ctrl_frame, text="Controls:\nMiddle-Drag = Move Widget | Alt+Scroll = Rotate Widget\nScroll (Hover) = Adjust Knob\nDrag Cap (Dual-Axis): Up/Down=Linear, Left/Right=Rotary",
                  bg="#333333", fg="#eeeeee", justify="left").pack(side=tk.LEFT)
-        
+
         cols = ("ID", "Linear", "Rotary", "Angle", "X", "Y")
         self.tree = ttk.Treeview(ctrl_frame, columns=cols, show="headings", height=8)
         for col in cols:
             self.tree.heading(col, text=col)
             self.tree.column(col, width=80, anchor="center")
         self.tree.pack(side=tk.RIGHT, padx=20)
-        
+
         self.canvas = tk.Canvas(self, bg="#444444", highlightthickness=0)
         self.canvas.pack(fill=tk.BOTH, expand=True)
-        
+
         self.faders = []
         rows, cols = 2, 4
         start_x, start_y, gap_x, gap_y = 150, 200, 250, 300
@@ -162,17 +161,17 @@ class MultiFaderApp(tk.Tk):
         self.canvas.bind("<Button-1>", self.on_click)
         self.canvas.bind("<B1-Motion>", self.on_drag)
         self.canvas.bind("<ButtonRelease-1>", self.on_release)
-        
+
         self.canvas.bind("<Button-2>", self.on_mid_click)
         self.canvas.bind("<B2-Motion>", self.on_mid_drag)
         self.canvas.bind("<ButtonRelease-2>", self.on_release)
-        
+
         self.canvas.bind("<MouseWheel>", self.on_scroll)
         self.canvas.bind("<Button-4>", self.on_scroll)
         self.canvas.bind("<Button-5>", self.on_scroll)
-        
+
         self.canvas.bind("<Motion>", self.on_motion) # Hover detection
-        
+
         self.active_fader = None
         self.hovered_fader = None
 
@@ -211,19 +210,19 @@ class MultiFaderApp(tk.Tk):
             rad = math.radians(fader.angle)
             ldx = dx * math.cos(-rad) - dy * math.sin(-rad)
             ldy = dx * math.sin(-rad) + dy * math.cos(-rad)
-            
+
             # Dual-Axis Control
             # Vertical (ldy) -> Linear
             # Horizontal (ldx) -> Rotary
-            
+
             # Linear
             dv = -(ldy / fader.track_len) * (fader.val_max - fader.val_min)
             fader.val_current = max(fader.val_min, min(fader.val_max, fader.start_val + dv))
-            
+
             # Rotary (Sensitivity: 1 pixel = 1 degree roughly? Scale it)
             rot_sens = 1.0
             fader.rot_current = max(fader.rot_min, min(fader.rot_max, fader.start_rot + (ldx * rot_sens)))
-            
+
             fader.render()
             self.update_table(fader.widget_id, fader.val_current, fader.rot_current, fader.angle, fader.x, fader.y)
 
@@ -256,7 +255,7 @@ class MultiFaderApp(tk.Tk):
             if event.num == 4: delta = 1
             elif event.num == 5: delta = -1
             elif hasattr(event, "delta"): delta = 1 if event.delta > 0 else -1
-            
+
             if event.state & 0x0008: # Alt + Scroll -> Rotate Widget
                 fader.angle += delta * 3
                 fader.render()

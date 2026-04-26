@@ -6,37 +6,35 @@
 # Constructs a pixel-perfect, background-aware industrial UI from JSON state.
 
 import tkinter as tk
-from tkinter import ttk
 from pathlib import Path
+from tkinter import ttk
 
-# --- GLOBAL ARCHITECTURE ---
-from oaLogging.Methods.matrix_gate import matrix_log
 from oaConfigurationManager.FileReaders.config_reader import Config
-from oaStyle.Core.style import DEFAULT_THEME, THEMES
-from oaGuiManager.Core.context.widget_context import WidgetContext
-from oaGuiBuilder.Constants.builder_constants import (
-    SCROLL_SYNC_DELAY, RESIZE_THROTTLE_DELAY, RESIZE_WIDTH_THRESHOLD
-)
-
-# --- ENGINE SERVICES ---
-from oaGuiManager.Core.transparency.transparency import TransparencyManager
-from oaGuiManager.Core.telemetry.ui_tracking_service import UITrackingService
-
-# --- CORE MIXINS ---
-from oaStyle.Core.gui_style import GuiStyleMixin
-from oaGuiManager.Core.factory.gui_widget_factory import GuiWidgetFactoryMixin
-from oaGui.Managers.gui_mqtt import GuiMqttManagerMixin
-from oaGuiManager.FileReaders.gui_file_loader import GuiFileLoaderMixin
-from oaGui.Managers.gui_re import GuiRebuilderMixin
 from oaGui.Managers.gui_batch import GuiBatchBuilderMixin
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Managers.gui_mqtt import GuiMqttManagerMixin
+from oaGui.Managers.gui_re import GuiRebuilderMixin
+from oaGuiBackground.Core.background import BuilderBackgroundManagerMixin
+from oaGuiBuilder.Constants.builder_constants import RESIZE_THROTTLE_DELAY, RESIZE_WIDTH_THRESHOLD, SCROLL_SYNC_DELAY
+from oaGuiBuilder.Core.breakoff.window_breakoff_manager import WindowBreakoffManagerMixin
 
 # --- MODULAR MIXINS ---
 from oaGuiBuilder.Core.context_menu import BuilderContextMenuMixin
-from oaGuiBackground.Core.background import BuilderBackgroundManagerMixin
 from oaGuiBuilder.Core.slicing_registry import BuilderSlicingRegistryMixin
-from oaGuiBuilder.Core.breakoff.window_breakoff_manager import WindowBreakoffManagerMixin
 from oaGuiElements.Core.input.input_mousewheel_mixin.input_mousewheel_mixin import MousewheelScrollMixin
+from oaGuiManager.Core.context.widget_context import WidgetContext
+from oaGuiManager.Core.factory.gui_widget_factory import GuiWidgetFactoryMixin
+from oaGuiManager.Core.telemetry.ui_tracking_service import UITrackingService
+
+# --- ENGINE SERVICES ---
+from oaGuiManager.Core.transparency.transparency import TransparencyManager
+from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+from oaGuiManager.FileReaders.gui_file_loader import GuiFileLoaderMixin
+
+# --- GLOBAL ARCHITECTURE ---
+# --- CORE MIXINS ---
+from oaStyle.Core.gui_style import GuiStyleMixin
+from oaStyle.Core.style import DEFAULT_THEME, THEMES
+
 
 class AutoScrollbar(ttk.Scrollbar):
     """An industrial scrollbar that manages its own visibility based on content scale."""
@@ -63,7 +61,7 @@ class DynamicGuiBuilder(
     GuiFileLoaderMixin,
     GuiRebuilderMixin,
     GuiBatchBuilderMixin,
-    TransparencyMixin, 
+    TransparencyMixin,
     BuilderContextMenuMixin,
     BuilderBackgroundManagerMixin,
     BuilderSlicingRegistryMixin,
@@ -85,13 +83,13 @@ class DynamicGuiBuilder(
         """Standardizes internal variables and engine references."""
         self.tab_name = tab_name
         self.json_filepath = Path(path) if path else None
-        
+
         # External Engine Hooks
         self.state_mirror_engine = config.get("state_mirror_engine")
         self.subscriber_router = config.get("subscriber_router")
         self.app_instance = config.get("app_instance")
         self.on_focus_widget = config.get("on_focus_widget")
-        
+
         # Builder State
         self.is_editor = config.get("is_editor", False)
         self.allow_horizontal_scroll = config.get("allow_horizontal_scroll", True)
@@ -100,6 +98,8 @@ class DynamicGuiBuilder(
         self.topic_widgets = {}
         self._slicing_registry = []
         self._is_rebuilding = False
+        self.last_build_hash = None
+        self.gui_built = False
 
     def _initialize_builder_services(self, config):
         """Bootstraps telemetry and communication services."""
@@ -120,7 +120,7 @@ class DynamicGuiBuilder(
         # 🎨 THEME AWARE BACKGROUND
         theme = THEMES.get(DEFAULT_THEME, THEMES["dark"])
         bg = theme["bg"]
-        # Note: If show_background_var is False, we still use the theme color for the container 
+        # Note: If show_background_var is False, we still use the theme color for the container
         # but skip high-res background slice generation in the build loop.
 
         # 🏗️ CANVAS & SCROLLING
@@ -130,7 +130,7 @@ class DynamicGuiBuilder(
 
         self._setup_scrolling()
         self._setup_event_bindings()
-        
+
         self.canvas.grid(row=0, column=0, sticky="nsew")
         if self.is_editor: self._draw_editor_grid()
 
@@ -185,7 +185,7 @@ class DynamicGuiBuilder(
         w = event.width
         if abs(w - getattr(self, '_last_w', 0)) < RESIZE_WIDTH_THRESHOLD: return
         self._last_w = w
-        
+
         if self._resize_timer: self.after_cancel(self._resize_timer)
         self._resize_timer = self.after(RESIZE_THROTTLE_DELAY, self._perform_canvas_resize, w)
         if self.is_editor: self.after(RESIZE_THROTTLE_DELAY + 10, self._draw_editor_grid)
@@ -194,14 +194,27 @@ class DynamicGuiBuilder(
         self._resize_timer = None
         if width <= 1 or not self.canvas_window_id: return
 
-        # ⚡ HORIZONTAL LOCK: Content frame width matches visible canvas width UNLESS horizontal scroll is allowed.
+        # ⚡ GEOMETRY SYNC: Stretch the content frame to fill the viewport
+        # Width depends on allow_horizontal_scroll lock.
+        # Height ALWAYS stretches to at least viewport height to ensure background coverage.
         req_w = self.scroll_frame.winfo_reqwidth()
+        req_h = self.scroll_frame.winfo_reqheight()
+        canvas_h = self.canvas.winfo_height()
+
         new_w = width if not self.allow_horizontal_scroll else max(width, req_w)
+        new_h = max(canvas_h, req_h)
         
-        if new_w <= 1: return # X11 safety
+        from oaLogging.Methods.matrix_gate import matrix_log
+        matrix_log("gui", "gui_builder", "_perform_canvas_resize", 
+                   f"📏 [BUILDER_SIZE] Tab: {getattr(self, 'tab_name', '??')} | "
+                   f"MainFrame: {self.main_content_frame.winfo_width()}x{self.main_content_frame.winfo_height()} | "
+                   f"Canvas: {width}x{canvas_h} | ScrollFrame Req: {req_w}x{req_h} | "
+                   f"Target Window Size: {new_w}x{new_h}", "TRACE")
+
+        if new_w <= 1 or new_h <= 1: return # X11 safety
 
         try:
-            self.canvas.itemconfig(self.canvas_window_id, width=int(new_w))
+            self.canvas.itemconfig(self.canvas_window_id, width=int(new_w), height=int(new_h))
             self._trigger_background_sync(force=True)
         except tk.TclError: pass
 
@@ -209,15 +222,15 @@ class DynamicGuiBuilder(
         """Draws a 100px diagnostic grid for WYSIWYG alignment."""
         if not self.is_editor or not self.canvas.winfo_exists(): return
         self.canvas.delete("editor_grid")
-        
+
         w = max(self.canvas.winfo_width(), self.scroll_frame.winfo_reqwidth())
         h = max(self.canvas.winfo_height(), self.scroll_frame.winfo_reqheight())
-        
+
         for x in range(0, w, 100):
             self.canvas.create_line(x, 0, x, h, fill="#333333", dash=(2, 4), tags="editor_grid")
         for y in range(0, h, 100):
             self.canvas.create_line(0, y, w, y, fill="#333333", dash=(2, 4), tags="editor_grid")
-            
+
         self.canvas.create_line(w//2, 0, w//2, h, fill="#FF9900", width=1, dash=(5, 5), tags="editor_grid")
         self.canvas.create_line(0, h//2, w, h//2, fill="#FF00FF", width=1, dash=(5, 5), tags="editor_grid")
         self.canvas.tag_lower("editor_grid")
@@ -247,7 +260,7 @@ class DynamicGuiBuilder(
         theme_bg = THEMES.get(DEFAULT_THEME, THEMES["dark"])["bg"]
         # target = theme_bg if (not show or show.get()) else "" # Removed buggy line
         target = theme_bg
-        
+
         for w in [self.canvas, self.scroll_frame]:
             try:
                 if w.cget("bg" if w == self.scroll_frame else "background") != target:

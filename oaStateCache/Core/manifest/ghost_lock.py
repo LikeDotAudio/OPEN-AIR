@@ -4,9 +4,10 @@
 #
 # Description: Manages the "Ghost Touch Lock" logic for interaction priority.
 
-from typing import Dict, Any
+from typing import Any
 
-def is_ghost_touch_locked(payload: Dict, widget_instance: Any = None) -> bool:
+
+def is_ghost_touch_locked(payload: dict, widget_instance: Any = None) -> bool:
     """
     Checks if a network update should be blocked due to human interaction.
     
@@ -16,11 +17,11 @@ def is_ghost_touch_locked(payload: Dict, widget_instance: Any = None) -> bool:
     """
     if not isinstance(payload, dict):
         return False
-        
+
     # ⚡ HUMAN PRIORITY: If a human is touching the widget, the Ghost is locked out.
     if widget_instance and getattr(widget_instance, "is_locked", False):
         # ⚡ SETTLE CHECK: Only yield if the sender hasn't settled their movement.
         if not payload.get("is_settled", True):
             return True
-            
+
     return False

@@ -5,27 +5,30 @@
 # Description: Native NMOS IS-07 WebSocket and MQTT transport implementations.
 # ⚡ CORE: Foundational services for NMOS IS-07 messaging.
 
-import websocket
-import threading
 import json
-import time
 import ssl
-import paho.mqtt.client as mqtt
-from typing import Optional, Callable, Dict, Any
+import threading
+import time
 from abc import ABC, abstractmethod
+from collections.abc import Callable
+from typing import Any
 
-from oaLogging.Methods.matrix_gate import matrix_log
+import paho.mqtt.client as mqtt
+import websocket
+
 from oaComProtocols.oaComNmos.Core.utils import gen_id
+from oaLogging.Methods.matrix_gate import matrix_log
+
 
 class EventTransport(ABC):
     """Abstract base class for IS-07 event transport mechanisms."""
 
     def __init__(self):
-        self._message_handler: Optional[Callable[[str, Dict[str, Any]], None]] = None
+        self._message_handler: Callable[[str, dict[str, Any]], None] | None = None
         self._is_connected: bool = False
 
     @abstractmethod
-    def publish(self, topic: str, payload: Dict[str, Any], retain: bool = False, qos: int = 0) -> bool:
+    def publish(self, topic: str, payload: dict[str, Any], retain: bool = False, qos: int = 0) -> bool:
         pass
 
     @abstractmethod
@@ -37,14 +40,14 @@ class EventTransport(ABC):
         pass
 
     @abstractmethod
-    def connect(self, connection_params: Dict[str, Any]) -> bool:
+    def connect(self, connection_params: dict[str, Any]) -> bool:
         pass
 
     @abstractmethod
     def disconnect(self):
         pass
 
-    def set_message_handler(self, handler: Callable[[str, Dict[str, Any]], None]):
+    def set_message_handler(self, handler: Callable[[str, dict[str, Any]], None]):
         self._message_handler = handler
 
     def is_connected(self) -> bool:
@@ -57,14 +60,14 @@ class Is07WebSocketTransport(EventTransport):
     """
     def __init__(self):
         super().__init__()
-        self.ws_app: Optional[websocket.WebSocketApp] = None
-        self._ws_thread: Optional[threading.Thread] = None
-        self._reconnect_thread: Optional[threading.Thread] = None
+        self.ws_app: websocket.WebSocketApp | None = None
+        self._ws_thread: threading.Thread | None = None
+        self._reconnect_thread: threading.Thread | None = None
         self._should_reconnect: bool = False
-        self._connection_params: Dict[str, Any] = {}
+        self._connection_params: dict[str, Any] = {}
         matrix_log("comms", "nmos_ws", "__init__", "📡 [NMOS-WS] Core Transport Initialized.", "DEBUG")
 
-    def publish(self, topic: str, payload: Dict[str, Any], retain: bool = False, qos: int = 0) -> bool:
+    def publish(self, topic: str, payload: dict[str, Any], retain: bool = False, qos: int = 0) -> bool:
         if not self.is_connected() or not self.ws_app:
             matrix_log("comms", "nmos_ws", "publish", "📡 [NMOS-WS] Not connected. Cannot publish.", "WARNING")
             return False
@@ -85,21 +88,21 @@ class Is07WebSocketTransport(EventTransport):
         # Conceptual for WebSocket
         return True
 
-    def connect(self, connection_params: Dict[str, Any]) -> bool:
+    def connect(self, connection_params: dict[str, Any]) -> bool:
         self._connection_params = connection_params
         uri = connection_params.get("connection_uri", "ws://localhost:8085/is07")
         reconnect = connection_params.get("reconnect", True)
-        
+
         matrix_log("comms", "nmos_ws", "connect", f"📡📥 [NMOS-WS] Connecting to {uri} (reconnect: {reconnect}).", "INFO")
-        
+
         success = self._attempt_connect()
-        
+
         if not success and reconnect:
             self._should_reconnect = True
             if not self._reconnect_thread or not self._reconnect_thread.is_alive():
                 self._reconnect_thread = threading.Thread(target=self._reconnect_loop, daemon=True, name="NmosWsReconnect")
                 self._reconnect_thread.start()
-        
+
         return success
 
     def _attempt_connect(self) -> bool:
@@ -114,11 +117,11 @@ class Is07WebSocketTransport(EventTransport):
                                                 on_message=self._on_message,
                                                 on_error=self._on_error,
                                                 on_close=self._on_close)
-            
+
             self._ws_thread = threading.Thread(target=self.ws_app.run_forever)
-            self._ws_thread.daemon = True 
+            self._ws_thread.daemon = True
             self._ws_thread.start()
-            
+
             # Wait for connection or timeout
             start_time = time.time()
             while time.time() - start_time < 2.0:
@@ -127,7 +130,7 @@ class Is07WebSocketTransport(EventTransport):
                 if not self._ws_thread.is_alive():
                     break
                 time.sleep(0.1)
-                
+
             return self._is_connected
         except Exception as e:
             matrix_log("comms", "nmos_ws", "connect", f"📡❌ [NMOS-WS] Connection exception: {e}", "ERROR")
@@ -138,7 +141,7 @@ class Is07WebSocketTransport(EventTransport):
     def _reconnect_loop(self):
         interval = self._connection_params.get("reconnect_interval", 5.0)
         uri = self._connection_params.get("connection_uri", "ws://localhost:8085/is07")
-        
+
         while self._should_reconnect and not self._is_connected:
             matrix_log("comms", "nmos_ws", "reconnect", f"📡🔄 [NMOS-WS] Retrying {uri} in {interval}s...", "DEBUG")
             time.sleep(interval)
@@ -173,14 +176,14 @@ class Is07WebSocketTransport(EventTransport):
     def _on_error(self, ws, error):
         if "Connection refused" in str(error) or "404 Not Found" in str(error):
              level = "DEBUG" if self._should_reconnect else "WARNING"
-             matrix_log("comms", "nmos_ws", "error", f"📡⚠️ [NMOS-WS] Connection Refused/Not Found", level)
+             matrix_log("comms", "nmos_ws", "error", "📡⚠️ [NMOS-WS] Connection Refused/Not Found", level)
         else:
              matrix_log("comms", "nmos_ws", "error", f"📡❌ [NMOS-WS] Error: {error}", "ERROR")
         self._is_connected = False
 
     def _on_close(self, ws, close_status_code, close_message):
         if self._is_connected:
-            matrix_log("comms", "nmos_ws", "close", f"📡 [NMOS-WS] Connection Closed.", "INFO")
+            matrix_log("comms", "nmos_ws", "close", "📡 [NMOS-WS] Connection Closed.", "INFO")
         self._is_connected = False
         self.ws_app = None
 
@@ -191,10 +194,10 @@ class Is07MqttTransport(EventTransport):
     """
     def __init__(self):
         super().__init__()
-        self.client: Optional[mqtt.Client] = None
+        self.client: mqtt.Client | None = None
         matrix_log("comms", "nmos_mqtt", "__init__", "📡 [NMOS-MQTT] Core Transport Initialized.", "DEBUG")
 
-    def publish(self, topic: str, payload: Dict[str, Any], retain: bool = False, qos: int = 0) -> bool:
+    def publish(self, topic: str, payload: dict[str, Any], retain: bool = False, qos: int = 0) -> bool:
         if not self.is_connected() or not self.client:
             matrix_log("comms", "nmos_mqtt", "publish", "📡 [NMOS-MQTT] Not connected. Cannot publish.", "WARNING")
             return False
@@ -231,7 +234,7 @@ class Is07MqttTransport(EventTransport):
             matrix_log("comms", "nmos_mqtt", "unsubscribe", f"📡❌ [NMOS-MQTT] Unsubscribe Error: {e}", "ERROR")
             return False
 
-    def connect(self, connection_params: Dict[str, Any]) -> bool:
+    def connect(self, connection_params: dict[str, Any]) -> bool:
         host = connection_params.get("destination_host", "localhost")
         port = connection_params.get("destination_port", 1883)
         protocol = connection_params.get("broker_protocol", "mqtt")
@@ -250,18 +253,18 @@ class Is07MqttTransport(EventTransport):
             self.client.tls_set(tls_version=ssl.PROTOCOL_TLS)
         if username and password:
             self.client.username_pw_set(username, password)
-        
+
         try:
             self.client.connect(host, port, 60)
             self.client.loop_start()
-            
+
             # Wait for connection
             start_time = time.time()
             while time.time() - start_time < 2.0:
                 if self._is_connected:
                     return True
                 time.sleep(0.1)
-                
+
             return self._is_connected
         except Exception as e:
             matrix_log("comms", "nmos_mqtt", "connect", f"📡❌ [NMOS-MQTT] Connection Error: {e}", "ERROR")

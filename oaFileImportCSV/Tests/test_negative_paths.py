@@ -4,9 +4,8 @@
 #
 # Description: Negative and Sad Path testing for file ingestion.
 
-import unittest
-import os
 import tempfile
+import unittest
 from pathlib import Path
 
 # Assume we have a CSV parser to test
@@ -27,7 +26,7 @@ class TestNegativePaths(unittest.TestCase):
         malformed_path = self.project_root / "malformed.csv"
         with open(malformed_path, "w") as f:
             f.write("Header1,Header2\nValue1\nValue2,Value3,Value4") # Mismatched columns
-        
+
         # Test logic should handle this gracefully (e.g., raise exception or return empty)
         # Assuming a hypothetical function:
         # with self.assertRaises(ValueError):

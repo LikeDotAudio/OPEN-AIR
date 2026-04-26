@@ -1,21 +1,22 @@
 # Managers/mqtt_manager.py
 #
-# Manages MQTT-related system operations: Broker Monitoring, Topic Management, 
+# Manages MQTT-related system operations: Broker Monitoring, Topic Management,
 # and Service Control. Acts as the back-end orchestrator for system status.
 #
 # Author: Anthony Peter Kuzub
 # Version: 20260330.1600.2
 
-import time
-import orjson
 import threading
-from loguru import logger
+import time
 
-from oaConfigurationManager.FileReaders.config_reader import Config
+import orjson
+
+import oaOchestration.Constants.project_paths as app_paths
 from oaComProtocols.oaComMQTT.Core.mqtt_message import MqttMessage
 from oaComProtocols.oaComMQTT.Methods.delete_open_air import delete_open_air_tree
-import oaOchestration.Constants.project_paths as app_paths
-from oaLogging.Methods.matrix_gate import matrix_log, is_debug_allowed
+from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import is_debug_allowed, matrix_log
+
 
 def _is_debug():
     return is_debug_allowed(system="comms", element="mqtt")
@@ -40,22 +41,22 @@ class MqttManager:
         self.subscriber_router = subscriber_router
         self.mqtt_client = mqtt_client
         self.state_cache_manager = state_cache_manager
-        
+
         self._is_running = False
         self._thread = None
-        
+
         # Subscribe to Control Topics
         self.subscriber_router.subscribe_to_topic("OPEN-AIR/System/Control/Broker/Delete/#", self._handle_delete_command)
         self.subscriber_router.subscribe_to_topic("OPEN-AIR/System/Control/Broker/Service/#", self._handle_service_command)
         self.subscriber_router.subscribe_to_topic("OPEN-AIR/System/Status/Fleet/Complete", self._on_fleet_scan_complete)
-        
+
         matrix_log("comms", "mqtt", "__init__", "🚀 [MQTT] MqttManager initialized.", "DEBUG")
 
     def start(self):
         """Starts the MQTT manager background threads."""
         if self._is_running:
             return
-        
+
         self._is_running = True
         self._thread = threading.Thread(target=self._system_status_loop, daemon=True, name="MQTT-StatusPoller")
         self._thread.start()
@@ -85,7 +86,7 @@ class MqttManager:
             try:
                 if self.mqtt_client and self.mqtt_client.is_connected():
                     self._publish_status("ONLINE")
-                    
+
                     # Publish Paths
                     paths_payload = {
                         "root": str(app_paths.GLOBAL_PROJECT_ROOT),
@@ -102,7 +103,7 @@ class MqttManager:
 
             except Exception as e:
                 matrix_log("comms", "mqtt", "_system_status_loop", f"🚀 [MQTT] ERROR: Status loop failed: {e}", "ERROR")
-            
+
             time.sleep(5)
 
     def _attempt_reconnect(self):
@@ -132,7 +133,7 @@ class MqttManager:
         self.state_cache_manager.sync_state_from_all_sources()
         if hasattr(self.subscriber_router, 'resubscribe_all'):
             self.subscriber_router.resubscribe_all()
-        
+
         # Manually ensure all known subscriptions are active on the new client instance
         if hasattr(self.subscriber_router, 'get_all_subscriptions'):
             subs = self.subscriber_router.get_all_subscriptions()
@@ -151,9 +152,9 @@ class MqttManager:
             data = orjson.loads(payload) if isinstance(payload, (bytes, str)) else payload
             action = data.get("action")
             service_name = data.get("service")
-            
+
             matrix_log("comms", "mqtt", "_handle_service_command", f"🔧 [MQTT] MqttManager: Requested service {action}.", "DEBUG")
-            
+
             if action == "register" and service_name:
                 register_service(
                     self.mqtt_client, self.state_cache_manager,
@@ -164,7 +165,7 @@ class MqttManager:
                 re_register_all_services(self.mqtt_client, self.state_cache_manager)
             elif action == "status" and service_name:
                 self._update_service_status(service_name, data.get("status", "UNKNOWN"))
-                
+
         except Exception as e:
             matrix_log("comms", "mqtt", "_handle_service_command", f"MQTT: Service command parse error: {e}", "ERROR")
 

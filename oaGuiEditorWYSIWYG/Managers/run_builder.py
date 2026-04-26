@@ -4,16 +4,19 @@
 #
 # Description: Main entry point for the standalone WYSIWYG editor application.
 
-import sys
 import pathlib
-import orjson
-import tkinter as tk
 import signal
+import sys
+import tkinter as tk
+
+import orjson
+
 from oaLogging.Methods.matrix_gate import matrix_log
+
 
 class StandaloneRunner:
     """Orchestrates the boot sequence and lifecycle of the Standalone WYSIWYG Builder."""
-    
+
     def __init__(self):
         self.root = None
         self.app = None
@@ -24,17 +27,17 @@ class StandaloneRunner:
         # 1. Bootstrap Environment (Crucial: must happen BEFORE other imports)
         from .runner.runner_env import RunnerEnvironment
         config = RunnerEnvironment.setup()
-        
+
         # 2. Lazy Imports of project modules
-        from .wysiwyg_editor import WysiwygEditor
-        from oaStyle.Managers.theme_applier import apply_theme
-        from oaLogging.Methods.matrix_gate import matrix_log
         from oaLogging.Core.logger import WYSIWYG_LOGGER
-        
+        from oaStyle.Managers.theme_applier import apply_theme
+
+        from .wysiwyg_editor import WysiwygEditor
+
         self.logger = WYSIWYG_LOGGER.bind(protocol="WYSIWYG")
 
         self._parse_args()
-        
+
         # 3. GUI Setup
         self.root = tk.Tk()
         self.root.title(f"OPEN-AIR: WYSIWYG Editor - {self.json_path.name}")
@@ -49,9 +52,9 @@ class StandaloneRunner:
             on_test_callback=self._handle_test_request,
             is_standalone=True,
         )
-        
+
         self._bind_signals()
-        
+
         try:
             self.root.mainloop()
         except KeyboardInterrupt:
@@ -95,7 +98,7 @@ class StandaloneRunner:
         try:
             if hasattr(self, 'app') and self.app:
                 self.app.shutdown()
-            
+
             if self.root:
                 # Check if root still exists before destroying
                 try:
@@ -103,7 +106,7 @@ class StandaloneRunner:
                         self.root.destroy()
                 except tk.TclError:
                     pass # Already destroyed
-            
+
             sys.exit(0)
         except SystemExit:
             raise

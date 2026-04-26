@@ -6,6 +6,7 @@
 
 import tkinter as tk
 
+
 class BaseOverlay:
     """Standardized interface for all designer feedback overlays."""
 

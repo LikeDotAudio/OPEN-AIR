@@ -5,8 +5,8 @@
 # Description: Gatekeeper for the oaComVisa module.
 
 import os
-import sys
 import subprocess
+import sys
 import time
 from pathlib import Path
 
@@ -22,11 +22,12 @@ if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
 # --- Absolute Imports for Standalone Support ---
-from oaComProtocols.oaComVisa.Managers.discovery_orchestrator import DiscoveryOrchestrator
-from oaComProtocols.oaComVisa.Managers.visa_manager import VisaManagerOrchestrator
+from oaComProtocols.oaComVisa.Core.visa_fleet import FleetOrchestrator
 from oaComProtocols.oaComVisa.Core.visa_proxy import VisaProxy
 from oaComProtocols.oaComVisa.Core.visa_proxy_fleet import VisaProxyFleet
-from oaComProtocols.oaComVisa.Core.visa_fleet import FleetOrchestrator
+from oaComProtocols.oaComVisa.Managers.discovery_orchestrator import DiscoveryOrchestrator
+from oaComProtocols.oaComVisa.Managers.visa_manager import VisaManagerOrchestrator
+
 
 class VisaComEntry:
     """Entry point for VISA communication management."""
@@ -91,14 +92,14 @@ def run_tests():
     """
     print(f"📡📥📥 [TEST] {Path(__file__).parent.name}: Starting automated test discovery...")
     test_dir = current_dir / "Tests"
-    
+
     if not test_dir.exists():
         print(f"⚠️ [TEST] {Path(__file__).parent.name}: No Tests/ directory found.")
         return True
 
     env = os.environ.copy()
     env["PYTHONPATH"] = str(project_root) + os.pathsep + env.get("PYTHONPATH", "")
-    
+
     try:
         rel_test_dir = os.path.relpath(test_dir, project_root)
         result = subprocess.run(
@@ -125,7 +126,7 @@ if __name__ == "__main__":
     if not run_tests():
         print("❌ [CRITICAL] Tests failed. Aborting execution.")
         sys.exit(1)
-    
+
     # Standalone execution logic
     if len(sys.argv) > 1:
         cmd = sys.argv[1].lower()

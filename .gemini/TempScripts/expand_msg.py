@@ -2,6 +2,7 @@
 import os
 import re
 
+
 def expand_msg(text):
     # 1. Whole word 'msg' -> 'message'
     text = re.sub(r'\bmsg\b', 'message', text)
@@ -23,21 +24,21 @@ def expand_msg(text):
     text = re.sub(r'\bMsg_', 'Message_', text)
     # 10. '_Msg' at the end of a word -> '_Message'
     text = re.sub(r'_Msg\b', '_Message', text)
-    
+
     return text
 
 def process_files():
     directories = [
-        "oaAudioMixer", "oaComBroker", "oaComProtocols", "oaConfigurationManager", 
-        "oaDocumentation", "oaFileExportCSV", "oaFileImportCSV", "oaFileImportHTML", 
-        "oaFileImportPDF", "oaFileImportShow", "oaGui", "oaGuiBackground", 
-        "oaGuiBuilder", "oaGuiEditorWYSIWYG", "oaGuiElements", "oaGuiManager", 
-        "oaGuiMediaElements", "oaGuiShowtime", "oaGuiSplashScreen", "oaGuiTelemetry", 
-        "oaInstallation", "oaLogging", "oaOchestration", "oaPTP", "oaRustCore", 
-        "oaSplinker", "oaStand_Alone_Utilities", "oaStateCache", "oaStyle", "oaTests", 
+        "oaAudioMixer", "oaComBroker", "oaComProtocols", "oaConfigurationManager",
+        "oaDocumentation", "oaFileExportCSV", "oaFileImportCSV", "oaFileImportHTML",
+        "oaFileImportPDF", "oaFileImportShow", "oaGui", "oaGuiBackground",
+        "oaGuiBuilder", "oaGuiEditorWYSIWYG", "oaGuiElements", "oaGuiManager",
+        "oaGuiMediaElements", "oaGuiShowtime", "oaGuiSplashScreen", "oaGuiTelemetry",
+        "oaInstallation", "oaLogging", "oaOchestration", "oaPTP", "oaRustCore",
+        "oaSplinker", "oaStand_Alone_Utilities", "oaStateCache", "oaStyle", "oaTests",
         "oaThreadManager", "oaTranslator", "oaWatchdog", "openair.py"
     ]
-    
+
     for item in directories:
         if os.path.isfile(item):
             process_file(item)
@@ -49,11 +50,11 @@ def process_files():
 
 def process_file(file_path):
     try:
-        with open(file_path, 'r', encoding='utf-8') as f:
+        with open(file_path, encoding='utf-8') as f:
             content = f.read()
-        
+
         new_content = expand_msg(content)
-        
+
         if new_content != content:
             with open(file_path, 'w', encoding='utf-8') as f:
                 f.write(new_content)

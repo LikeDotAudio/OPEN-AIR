@@ -4,10 +4,12 @@
 #
 # Description: Unit tests for specific GUI elements and their creators.
 
+import tkinter as tk
 import unittest
 from unittest.mock import MagicMock, patch
-import tkinter as tk
+
 from oaGuiElements.Core.buttons.button_toggle.Core.button_toggle import BuilderButtonToggleCreator, ToggleButton
+
 
 class TestGuiElements(unittest.TestCase):
     """Verifies that GUI elements from oaGuiElements are correctly constructed."""
@@ -27,7 +29,7 @@ class TestGuiElements(unittest.TestCase):
         self.mock_context.state_mirror_engine = MagicMock()
         self.mock_context.subscriber_router = MagicMock()
         self.mock_context.base_mqtt_topic_from_path = "OPEN-AIR/mock"
-        
+
         self.mock_builder = MagicMock()
         self.mock_builder._apply_transparency = MagicMock()
 

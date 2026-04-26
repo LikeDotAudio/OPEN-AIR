@@ -1,11 +1,14 @@
-from typing import Callable, Set, List, Any
+from collections.abc import Callable
+from typing import Any
+
 from aes70.types.ocaevent import OcaEvent
 
+
 class BaseEvent:
-    def __init__(self, obj: Any, id: int, argument_types: List[type]):
+    def __init__(self, obj: Any, id: int, argument_types: list[type]):
         self.object = obj
         self.id = id
-        self.handlers: Set[Callable] = set()
+        self.handlers: set[Callable] = set()
         self.result = None
         self.argument_types = argument_types
 

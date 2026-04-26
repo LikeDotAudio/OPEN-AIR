@@ -4,12 +4,14 @@
 #
 # Description: SNMP MIB File Generator View Implementation.
 
-import os
 import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
+import os
 import tkinter as tk
 from tkinter import ttk
+
 from loguru import logger
+
+from oaLogging.Methods.matrix_gate import matrix_log
 from oaOchestration.Constants.project_paths import SNMP_CURRENT_MIB, SNMP_OPENAIR_MIB
 
 # --- GUI FALLBACKS (V3.2.1 Decoupling) ---
@@ -28,14 +30,14 @@ class SnmpMibImplementation(tk.Frame, TransparencyMixin):
     def __init__(self, parent, json_path=None, config=None, **kwargs):
         super().__init__(parent, **kwargs)
         self.config = config or {}
-        
+
         # ⚡ STANDALONE: Prioritize injected manager
         self.app_instance = self.config.get("app_instance")
         if self.app_instance:
             self.snmp_manager = getattr(self.app_instance, 'snmp_manager', None)
         else:
             self.snmp_manager = self._find_snmp_manager(parent)
-        
+
         # Fallback: Find manager via Entry if still not found
         if not self.snmp_manager:
             try:
@@ -45,7 +47,7 @@ class SnmpMibImplementation(tk.Frame, TransparencyMixin):
 
         self._last_mtime = 0
         self._setup_ui()
-        
+
         # Initial load
         self.load_mib_from_disk()
         # Start background update checker
@@ -60,20 +62,20 @@ class SnmpMibImplementation(tk.Frame, TransparencyMixin):
         while curr:
             # 1. Direct Attribute Check
             if hasattr(curr, 'snmp_manager'):
-                return getattr(curr, 'snmp_manager')
-            
+                return curr.snmp_manager
+
             # 2. App Instance Check (Generic pattern)
             app = getattr(curr, 'app_instance', None)
             if app and hasattr(app, 'snmp_manager'):
-                return getattr(app, 'snmp_manager')
-                
+                return app.snmp_manager
+
             try: curr = curr.master
             except: break
         return None
 
     def _setup_ui(self):
         self.pack(fill=tk.BOTH, expand=True)
-        
+
         # 1. Header Frame
         header_frame = tk.Frame(self, bg=self.cget("bg"))
         header_frame.pack(side=tk.TOP, fill=tk.X, pady=5)
@@ -88,7 +90,7 @@ class SnmpMibImplementation(tk.Frame, TransparencyMixin):
         # 2. Footer (Buttons at the bottom)
         btn_frame = tk.Frame(self, bg=self.cget("bg"))
         btn_frame.pack(side=tk.BOTTOM, fill=tk.X, pady=10)
-        
+
         ttk.Button(btn_frame, text="Force Refresh", command=self.refresh_mib).pack(side=tk.LEFT, padx=10)
         ttk.Button(btn_frame, text="Save As...", command=self.save_mib_as).pack(side=tk.LEFT, padx=10)
         ttk.Button(btn_frame, text="Load External MIB...", command=self.load_mib_dialog).pack(side=tk.LEFT)
@@ -100,7 +102,7 @@ class SnmpMibImplementation(tk.Frame, TransparencyMixin):
         self.text_area = tk.Text(display_frame, bg="#1e1e1e", fg="#33A1FD", font=("Courier", 10), padx=10, pady=10)
         scroll = ttk.Scrollbar(display_frame, orient=tk.VERTICAL, command=self.text_area.yview)
         self.text_area.configure(yscrollcommand=scroll.set)
-        
+
         self.text_area.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=(10,0))
         scroll.pack(side=tk.RIGHT, fill=tk.Y, padx=(0,10))
 
@@ -114,7 +116,7 @@ class SnmpMibImplementation(tk.Frame, TransparencyMixin):
                     self._last_mtime = mtime
                     self.status_var.set("Status: Auto-Updated")
             except: pass
-        
+
         if not getattr(self, '_shutdown', False):
             self.after(5000, self._check_for_disk_updates)
 
@@ -122,7 +124,7 @@ class SnmpMibImplementation(tk.Frame, TransparencyMixin):
         target = path or SNMP_CURRENT_MIB
         if target.exists():
             try:
-                with open(target, "r") as f:
+                with open(target) as f:
                     content = f.read()
                 self.text_area.delete("1.0", tk.END)
                 self.text_area.insert("1.0", content)
@@ -142,11 +144,11 @@ class SnmpMibImplementation(tk.Frame, TransparencyMixin):
     def save_mib_as(self):
         from tkinter import filedialog
         mib_content = self.text_area.get("1.0", tk.END)
-        
+
         # Default to the Assets folder and standard filename
         initial_dir = os.path.dirname(str(SNMP_OPENAIR_MIB))
         initial_file = os.path.basename(str(SNMP_OPENAIR_MIB))
-        
+
         file_path = filedialog.asksaveasfilename(
             defaultextension=".mib",
             filetypes=[("MIB Files", "*.mib"), ("Text Files", "*.txt")],

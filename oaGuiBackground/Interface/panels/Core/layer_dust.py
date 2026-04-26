@@ -4,8 +4,9 @@
 #
 # Description: Brief summary of purpose
 
-from PIL import Image
 import numpy as np
+from PIL import Image
+
 
 class DustLayer:
     @staticmethod

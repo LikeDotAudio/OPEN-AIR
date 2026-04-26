@@ -4,9 +4,11 @@
 #
 # Description: Defines the standardized MqttMessage dataclass for the application.
 
-from dataclasses import dataclass, field
-from typing import Any, Dict, Optional, Union, List
+from dataclasses import dataclass
+from typing import Any
+
 import orjson
+
 
 @dataclass(frozen=True)
 class MqttMessage:
@@ -15,10 +17,10 @@ class MqttMessage:
     Frozen to ensure immutability as it passes through the system.
     """
     topic: str
-    payload: Union[str, bytes, Dict[str, Any], List[Any]]
+    payload: str | bytes | dict[str, Any] | list[Any]
     qos: int = 0
     retain: bool = False
-    
+
     def decode_payload(self) -> str:
         """
         Helper to ensure payload is a string.
@@ -34,11 +36,11 @@ class MqttMessage:
             return orjson.dumps(self.payload).decode("utf-8")
         return str(self.payload)
 
-    def get_json_payload(self) -> Union[Dict[str, Any], List[Any]]:
+    def get_json_payload(self) -> dict[str, Any] | list[Any]:
         """Helper to ensure payload is a dictionary or list (parsed JSON)."""
         if isinstance(self.payload, (dict, list)):
             return self.payload
-        
+
         decoded = self.decode_payload()
         try:
             return orjson.loads(decoded)
@@ -46,7 +48,7 @@ class MqttMessage:
             # Fallback for non-JSON payloads
             return {"value": decoded}
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Converts to a dictionary for publishing."""
         return {
             "topic": self.topic,

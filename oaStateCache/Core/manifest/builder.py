@@ -4,10 +4,11 @@
 #
 # Description: Robust Builder for the Splinker "Shipping Manifest" (JSON Payload).
 
+import logging
 import time
 import uuid
-import logging
-from typing import Any, Dict
+from typing import Any
+
 from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
@@ -21,11 +22,11 @@ except Exception as e:
     logging.warning(f"⚠️ [MANIFEST] Rust manifest builder not found or failed to load: {e}. Using pure Python fallback.")
 
 def create_manifest(
-    value: Any, 
-    topic: str, 
-    source: str = "EXTERNAL", 
-    metadata: Dict = None
-) -> Dict:
+    value: Any,
+    topic: str,
+    source: str = "EXTERNAL",
+    metadata: dict = None
+) -> dict:
     """
     Constructs a standardized Splinker JSON manifest.
     
@@ -40,12 +41,12 @@ def create_manifest(
     """
     if HAS_RUST_MANIFEST:
         return dict(rust_create_manifest(
-            value, topic, source, metadata, 
+            value, topic, source, metadata,
             app_constants.FULL_INSTANCE_ID, app_constants.PARTITION_ID
         ))
-        
+
     now = time.time()
-    
+
     # ⚡ MODULAR LOGIC: Resolve origin_source based on system state
     if source == "GUI":
         origin = app_constants.FULL_INSTANCE_ID
@@ -61,17 +62,17 @@ def create_manifest(
         "value": float(value) if isinstance(value, (int, float)) else value,
         "is_locked": metadata.get("LOCKED", False) if metadata else False,
         "is_settled": metadata.get("SETTLED", True) if metadata else True,
-        
+
         # Backward Compatibility Layer
-        "value": value, 
-        "source": source, 
-        "timestamp": now, 
+        "value": value,
+        "source": source,
+        "timestamp": now,
         "GUID": app_constants.FULL_INSTANCE_ID,
         "partition": app_constants.PARTITION_ID,
         "full_id": app_constants.FULL_INSTANCE_ID
     }
-    
+
     if metadata:
         payload.update(metadata)
-        
+
     return payload

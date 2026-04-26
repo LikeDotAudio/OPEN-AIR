@@ -18,17 +18,17 @@
 #            "bbox": (10, 20, 110, 70),
 #            "grid_sticky": "nsew" # Sticky in all directions
 #        }
-#        
+#
 #        self.overlay.draw(widget_info)
-#        
+#
 #        # Expect 4 arrows (lines with arrowheads)
 #        self.assertEqual(self.canvas.create_line.call_count, 4)
-#        
+#
 #        # Check one of the arrows, e.g., north
 #        args, kwargs = self.canvas.create_line.call_args_list[0]
 #        self.assertEqual(kwargs['arrow'], 'last')
 #        self.assertEqual(kwargs['tags'], 'sticky_overlay')
-#        
+#
 #        widget_info = {
 #            "id": "w1",
 #            "bbox": (10, 20, 110, 70),

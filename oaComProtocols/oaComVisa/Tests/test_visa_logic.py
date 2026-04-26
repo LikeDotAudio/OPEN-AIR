@@ -6,8 +6,11 @@
 
 import unittest
 from unittest.mock import MagicMock, patch
+
 import pyvisa
+
 from oaComProtocols.oaComVisa.Core.visa_proxy import VisaProxy
+
 
 class TestVisaLogic(unittest.TestCase):
     def test_visa_resource_lister(self):
@@ -29,9 +32,9 @@ class TestVisaLogic(unittest.TestCase):
         """Check thread-safe command queue initialization."""
         mqtt_controller = MagicMock()
         subscriber_router = MagicMock()
-        
+
         proxy = VisaProxy(mqtt_controller, subscriber_router)
-        
+
         self.assertTrue(hasattr(proxy, 'command_queue'))
         self.assertFalse(proxy.shutdown_flag.is_set())
 

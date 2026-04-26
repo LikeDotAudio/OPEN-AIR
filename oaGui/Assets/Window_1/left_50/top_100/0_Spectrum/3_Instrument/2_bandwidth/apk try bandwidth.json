@@ -1,0 +1,1026 @@
+{
+  "Spectrum_Instrument_bandwidth": {
+    "behavior": {
+      "fluid_ew": true,
+      "overflow_ew": "auto",
+      "overflow_ns": "auto"
+    },
+    "blocks": {
+      "Fold_Sweep": {
+        "layout": {
+          "pady": 5,
+          "stretch": "width"
+        },
+        "type": "OcaFold"
+      },
+      "Fold_VBW": {
+        "layout": {
+          "pady": 5,
+          "stretch": "width"
+        },
+        "type": "OcaFold"
+      },
+      "Resolution Bandwidth": {
+        "description": {
+          "De": "Auflösung Bandwidth (RBW) settings.",
+          "En": "Resolution Bandwidth (RBW) settings.",
+          "Es": "Resolución Bandwidth (RBW) settings.",
+          "Fr": "Résolution Bandwidth (RBW) settings."
+        },
+        "fields": {
+          "RBW": {
+            "column_spacing": [
+              80,
+              10,
+              10
+            ],
+            "cosmetics": {
+              "colors": {
+                "background": "#2b2b2b",
+                "primary": "#FF9900",
+                "secondary": "#444444"
+              }
+            },
+            "default_value": "0.5",
+            "dial_config": {
+              "active_color": "#00ffff",
+              "bg_color": "#2b2b2b",
+              "knob_style": "dial",
+              "type": "_GuiKnob"
+            },
+            "fader_config": {
+              "active_color": "#FF9900",
+              "bar_color": "#333333",
+              "glow_intensity": 1.5,
+              "show_ticks": true,
+              "tick_interval": 1,
+              "type": "_GuiFaderHorizontal"
+            },
+            "handler": "set_rbw",
+            "label_active": {
+              "De": "Auflösung Bandwidth",
+              "En": "Resolution Bandwidth",
+              "Es": "Resolución Bandwidth",
+              "Fr": "Résolution Bandwidth"
+            },
+            "layout": {
+              "font": 20,
+              "height": 100,
+              "padx": 10,
+              "pady": 10,
+              "sticky": "ewn",
+              "width": 400
+            },
+            "max": "10",
+            "min": "0",
+            "show_label": true,
+            "step_coarse": "1",
+            "step_fine": "0.001",
+            "type": "_Horizontal_with_dial_Value",
+            "units": "MHz",
+            "value_config": {
+              "bg_color": "#1a1a1a",
+              "colour": "#ffffff",
+              "font": 18,
+              "height": 30,
+              "width": 12
+            },
+            "yak_handler": {
+              "command": "Set_RBW",
+              "converter": "mhz_to_hz",
+              "enable": true,
+              "input_name": "hz_value",
+              "sub_path": "Bandwidth",
+              "yak_type": "set"
+            }
+          },
+          "Resolution Band Width": {
+            "AES70": "OcaSwitch",
+            "Allow_Null": true,
+            "handler": "set_resolution_bandwidth",
+            "layout": {
+              "alpha": 0.9,
+              "font": 10,
+              "height": 50,
+              "max_cols": 3,
+              "padx": 2,
+              "pady": 2,
+              "stretch": "width",
+              "width": 160
+            },
+            "options": {
+              "1": {
+                "description": {
+                  "De": "Like a race car: fast sweep, low detail. Best for catching fleeting signals.",
+                  "En": "Like a race car: fast sweep, low detail. Best for catching fleeting signals.",
+                  "Es": "Like a race car: fast sweep, low detail. Best for catching fleeting signals.",
+                  "Fr": "Like a race car: fast sweep, low detail. Best for catching fleeting signals."
+                },
+                "label_active": {
+                  "De": "Schnell",
+                  "En": "Fast",
+                  "Es": "Rápido",
+                  "Fr": "Rapide"
+                },
+                "label_inactive": {
+                  "De": "Schnell",
+                  "En": "Fast",
+                  "Es": "Rápido",
+                  "Fr": "Rapide"
+                },
+                "selected": false,
+                "units": "MHz",
+                "value": "1"
+              },
+              "2": {
+                "description": {
+                  "De": "A jog through the spectrum; quick enough to see the sights without missing much.",
+                  "En": "A jog through the spectrum; quick enough to see the sights without missing much.",
+                  "Es": "A jog through the spectrum; quick enough to see the sights without missing much.",
+                  "Fr": "A jog through the spectrum; quick enough to see the sights without missing much."
+                },
+                "label_active": {
+                  "De": "Flott",
+                  "En": "Brisk",
+                  "Es": "Enérgico",
+                  "Fr": "Vif"
+                },
+                "label_inactive": {
+                  "De": "Flott",
+                  "En": "Brisk",
+                  "Es": "Enérgico",
+                  "Fr": "Vif"
+                },
+                "selected": false,
+                "units": "MHz",
+                "value": "0.3"
+              },
+              "3": {
+                "description": {
+                  "De": "The perfect balance of speed and fidelity. Not too fast, not too slow.",
+                  "En": "The perfect balance of speed and fidelity. Not too fast, not too slow.",
+                  "Es": "The perfect balance of speed and fidelity. Not too fast, not too slow.",
+                  "Fr": "The perfect balance of speed and fidelity. Not too fast, not too slow."
+                },
+                "label_active": {
+                  "De": "Bedächtig",
+                  "En": "Deliberate",
+                  "Es": "Deliberado",
+                  "Fr": "Délibéré"
+                },
+                "label_inactive": {
+                  "De": "Bedächtig",
+                  "En": "Deliberate",
+                  "Es": "Deliberado",
+                  "Fr": "Délibéré"
+                },
+                "selected": false,
+                "units": "MHz",
+                "value": "0.1"
+              },
+              "4": {
+                "description": {
+                  "De": "A calm stroll, giving you time to appreciate the finer signal details.",
+                  "En": "A calm stroll, giving you time to appreciate the finer signal details.",
+                  "Es": "A calm stroll, giving you time to appreciate the finer signal details.",
+                  "Fr": "A calm stroll, giving you time to appreciate the finer signal details."
+                },
+                "label_active": {
+                  "De": "Stabil",
+                  "En": "Steady",
+                  "Es": "Estable",
+                  "Fr": "Stable"
+                },
+                "label_inactive": {
+                  "De": "Stabil",
+                  "En": "Steady",
+                  "Es": "Estable",
+                  "Fr": "Stable"
+                },
+                "selected": false,
+                "units": "MHz",
+                "value": "0.03"
+              },
+              "5": {
+                "description": {
+                  "De": "A slow saunter through the noise floor, where every waveform is a work of art.",
+                  "En": "A slow saunter through the noise floor, where every waveform is a work of art.",
+                  "Es": "A slow saunter through the noise floor, where every waveform is a work of art.",
+                  "Fr": "A slow saunter through the noise floor, where every waveform is a work of art."
+                },
+                "label_active": {
+                  "De": "Leisurely",
+                  "En": "Leisurely",
+                  "Es": "Leisurely",
+                  "Fr": "Leisurely"
+                },
+                "label_inactive": {
+                  "De": "Leisurely",
+                  "En": "Leisurely",
+                  "Es": "Leisurely",
+                  "Fr": "Leisurely"
+                },
+                "selected": false,
+                "units": "MHz",
+                "value": "0.01"
+              },
+              "6": {
+                "description": {
+                  "De": "Für den geduldigen Wissenschaftler. Sie werden Dinge sehen, die sonst niemand sieht, aber es wird eine Weile dauern.",
+                  "En": "For the patient scientist. You'll see things nobody else can, but it'll take a while.",
+                  "Es": "Para el científico paciente. Verás cosas que nadie más puede ver, pero llevará un tiempo.",
+                  "Fr": "Pour le scientifique patient. Vous verrez des choses que personne d'autre ne peut voir, mais cela prendra un certain temps."
+                },
+                "label_active": {
+                  "De": "Unhurried",
+                  "En": "Unhurried",
+                  "Es": "Unhurried",
+                  "Fr": "Unhurried"
+                },
+                "label_inactive": {
+                  "De": "Unhurried",
+                  "En": "Unhurried",
+                  "Es": "Unhurried",
+                  "Fr": "Unhurried"
+                },
+                "selected": false,
+                "units": "MHz",
+                "value": "0.003"
+              },
+              "7": {
+                "description": {
+                  "De": "So slow you can practically see the electrons move. The highest fidelity, but you'll miss any quick events.",
+                  "En": "So slow you can practically see the electrons move. The highest fidelity, but you'll miss any quick events.",
+                  "Es": "So slow you can practically see the electrons move. The highest fidelity, but you'll miss any quick events.",
+                  "Fr": "So slow you can practically see the electrons move. The highest fidelity, but you'll miss any quick events."
+                },
+                "label_active": {
+                  "De": "Slothlike",
+                  "En": "Slothlike",
+                  "Es": "Slothlike",
+                  "Fr": "Slothlike"
+                },
+                "label_inactive": {
+                  "De": "Slothlike",
+                  "En": "Slothlike",
+                  "Es": "Slothlike",
+                  "Fr": "Slothlike"
+                },
+                "selected": false,
+                "units": "MHz",
+                "value": "0.001"
+              },
+              "8": {
+                "description": {
+                  "De": "So slow you can practically see the electrons move. The highest fidelity, but you'll miss any quick events.",
+                  "En": "So slow you can practically see the electrons move. The highest fidelity, but you'll miss any quick events.",
+                  "Es": "So slow you can practically see the electrons move. The highest fidelity, but you'll miss any quick events.",
+                  "Fr": "So slow you can practically see the electrons move. The highest fidelity, but you'll miss any quick events."
+                },
+                "label_active": {
+                  "De": "Slothlike",
+                  "En": "Slothlike",
+                  "Es": "Slothlike",
+                  "Fr": "Slothlike"
+                },
+                "label_inactive": {
+                  "De": "Slothlike",
+                  "En": "Slothlike",
+                  "Es": "Slothlike",
+                  "Fr": "Slothlike"
+                },
+                "selected": false,
+                "units": "MHz",
+                "value": "0.0003"
+              },
+              "UNSELECTED": {
+                "description": {
+                  "De": "Nein resolution bandwidth option is currently selected.",
+                  "En": "No resolution bandwidth option is currently selected.",
+                  "Es": "No resolution bandwidth option is currently selected.",
+                  "Fr": "Non resolution bandwidth option is currently selected."
+                },
+                "label_active": {
+                  "De": "Keine ausgewählt",
+                  "En": "None Selected",
+                  "Es": "Ninguno seleccionado",
+                  "Fr": "Aucun sélectionné"
+                },
+                "label_inactive": {
+                  "De": "Keine ausgewählt",
+                  "En": "None Selected",
+                  "Es": "Ninguno seleccionado",
+                  "Fr": "Aucun sélectionné"
+                },
+                "selected": true,
+                "units": "",
+                "value": "NONE"
+              }
+            },
+            "selection_mode": "radio",
+            "style": {
+              "active_bg_color": "#000000",
+              "active_color": "#FF9900",
+              "active_font_size": null,
+              "active_font_style": "bold",
+              "active_text_color": "#1a1a1a",
+              "bg_color": "#2b2b2b",
+              "glow_intensity": 1.944,
+              "inactive_font_size": null,
+              "inactive_font_style": "normal",
+              "text_color": "#888888"
+            },
+            "type": "_GuiButtonToggler",
+            "yak_handler": {
+              "command": "Set_RBW",
+              "converter": "mhz_to_hz",
+              "enable": true,
+              "input_name": "hz_value",
+              "sub_path": "Bandwidth",
+              "yak_type": "set"
+            }
+          }
+        },
+        "layout": {
+          "weight": 0
+        },
+        "show_label": false,
+        "type": "OcaBlock"
+      },
+      "Sweep Time": {
+        "description": {
+          "De": "Wobbelzeit settings.",
+          "En": "Sweep Time settings.",
+          "Es": "Tiempo de barrido settings.",
+          "Fr": "Temps de balayage settings."
+        },
+        "fields": {
+          "sweep_time_setting": {
+            "column_spacing": [
+              80,
+              10,
+              10
+            ],
+            "cosmetics": {
+              "colors": {
+                "background": "#2b2b2b",
+                "primary": "#FF9900",
+                "secondary": "#444444"
+              }
+            },
+            "default_value": "0",
+            "dial_config": {
+              "active_color": "#00ffff",
+              "bg_color": "#2b2b2b",
+              "knob_style": "dial",
+              "type": "_GuiKnob"
+            },
+            "fader_config": {
+              "active_color": "#FF9900",
+              "bar_color": "#333333",
+              "glow_intensity": 1.5,
+              "show_ticks": true,
+              "tick_interval": 1,
+              "type": "_GuiFaderHorizontal"
+            },
+            "handler": "set_sweep_time",
+            "label_active": {
+              "De": "Wobbelzeit",
+              "En": "Sweep Time",
+              "Es": "Tiempo de barrido",
+              "Fr": "Temps de balayage"
+            },
+            "label_inactive": {
+              "De": "Wobbelzeit",
+              "En": "Sweep Time",
+              "Es": "Tiempo de barrido",
+              "Fr": "Temps de balayage"
+            },
+            "layout": {
+              "font": 20,
+              "height": 100,
+              "padx": 10,
+              "pady": 10,
+              "sticky": "ewn",
+              "width": 400
+            },
+            "max": "50",
+            "min": "0",
+            "show_label": true,
+            "step_coarse": "1",
+            "step_fine": "0.1",
+            "type": "_Horizontal_with_dial_Value",
+            "units": "s",
+            "value_config": {
+              "bg_color": "#1a1a1a",
+              "colour": "#ffffff",
+              "font": 18,
+              "height": 30,
+              "width": 12
+            },
+            "yak_handler": {
+              "command": "Set_Sweep_time",
+              "converter": "float",
+              "enable": true,
+              "input_name": "s_value",
+              "sub_path": "Bandwidth",
+              "yak_type": "set"
+            }
+          }
+        },
+        "layout": {
+          "weight": 0
+        },
+        "show_label": false,
+        "type": "OcaBlock"
+      },
+      "Video Bandwidth": {
+        "description": {
+          "De": "Video Bandbreite (VBW) settings.",
+          "En": "Video Bandwidth (VBW) settings.",
+          "Es": "Video Ancho de banda (VBW) settings.",
+          "Fr": "Video Largeur de bande (VBW) settings."
+        },
+        "fields": {
+          "VBW_Automatic": {
+            "AES70": "OcaBooleanActuator",
+            "handler": "toggle_vbw_auto",
+            "label_active": {
+              "De": "VBW Auto On",
+              "En": "VBW Auto On",
+              "Es": "VBW Auto On",
+              "Fr": "VBW Auto On"
+            },
+            "label_inactive": {
+              "De": "VBW Auto On",
+              "En": "VBW Auto On",
+              "Es": "VBW Auto On",
+              "Fr": "VBW Auto On"
+            },
+            "layout": {
+              "font": 15,
+              "height": 50,
+              "stretch": "width",
+              "width": 200
+            },
+            "options": {
+              "OFF": {
+                "label_active": {
+                  "De": "Auto AUS",
+                  "En": "Auto OFF",
+                  "Es": "Auto DES",
+                  "Fr": "Auto OFF"
+                },
+                "label_inactive": {
+                  "De": "Auto AUS",
+                  "En": "Auto OFF",
+                  "Es": "Auto DES",
+                  "Fr": "Auto OFF"
+                },
+                "selected": false
+              },
+              "ON": {
+                "label_active": {
+                  "De": "Auto AN",
+                  "En": "Auto ON",
+                  "Es": "Auto ACTIVADO",
+                  "Fr": "Auto ACTIVÉ"
+                },
+                "label_inactive": {
+                  "De": "Auto AN",
+                  "En": "Auto ON",
+                  "Es": "Auto ACTIVADO",
+                  "Fr": "Auto ACTIVÉ"
+                },
+                "selected": true
+              }
+            },
+            "style": {
+              "active_bg_color": "#000000",
+              "active_color": "#FF9900",
+              "active_font_size": null,
+              "active_font_style": "bold",
+              "active_text_color": "#1a1a1a",
+              "bg_color": "#2b2b2b",
+              "glow_intensity": 1.944,
+              "inactive_font_size": null,
+              "inactive_font_style": "normal",
+              "text_color": "#888888"
+            },
+            "type": "_GuiButtonToggle",
+            "yak_handler": {
+              "command": "Set_VBW_Auto",
+              "converter": "bool_to_int",
+              "enable": true,
+              "input_name": "state_bool",
+              "sub_path": "Bandwidth",
+              "yak_type": "set"
+            }
+          },
+          "Video Band Width ": {
+            "AES70": "OcaSwitch",
+            "Allow_Null": true,
+            "handler": "set_video_bandwidth",
+            "layout": {
+              "alpha": 0.9,
+              "font": 10,
+              "height": 50,
+              "max_cols": 3,
+              "padx": 2,
+              "pady": 2,
+              "stretch": "width",
+              "width": 160
+            },
+            "options": {
+              "1": {
+                "description": {
+                  "De": "A lightning-fast sweep. Filters are wide open, letting everything through.",
+                  "En": "A lightning-fast sweep. Filters are wide open, letting everything through.",
+                  "Es": "A lightning-fast sweep. Filters are wide open, letting everything through.",
+                  "Fr": "A lightning-fast sweep. Filters are wide open, letting everything through."
+                },
+                "label_active": {
+                  "De": "Ultra Schnell",
+                  "En": "Ultra Fast",
+                  "Es": "Ultra Rápido",
+                  "Fr": "Ultra Rapide"
+                },
+                "label_inactive": {
+                  "De": "Ultra Schnell",
+                  "En": "Ultra Fast",
+                  "Es": "Ultra Rápido",
+                  "Fr": "Ultra Rapide"
+                },
+                "selected": false,
+                "units": "kHz",
+                "value": "1000"
+              },
+              "10": {
+                "description": {
+                  "De": "The scanner cries, but it's worth it. Filters out almost all random noise, giving you a crystal-clear, steady line.",
+                  "En": "The scanner cries, but it's worth it. Filters out almost all random noise, giving you a crystal-clear, steady line.",
+                  "Es": "The scanner cries, but it's worth it. Filters out almost all random noise, giving you a crystal-clear, steady line.",
+                  "Fr": "The scanner cries, but it's worth it. Filters out almost all random noise, giving you a crystal-clear, steady line."
+                },
+                "label_active": {
+                  "De": "Sub-Glazial",
+                  "En": "Sub-Glacial",
+                  "Es": "Sub-Glacial",
+                  "Fr": "Sub-Glacial"
+                },
+                "label_inactive": {
+                  "De": "Sub-Glazial",
+                  "En": "Sub-Glacial",
+                  "Es": "Sub-Glacial",
+                  "Fr": "Sub-Glacial"
+                },
+                "selected": false,
+                "units": "kHz",
+                "value": "0.03"
+              },
+              "11": {
+                "description": {
+                  "De": "The scanner cries, but it's worth it. Filters out almost all random noise, giving you a crystal-clear, steady line.",
+                  "En": "The scanner cries, but it's worth it. Filters out almost all random noise, giving you a crystal-clear, steady line.",
+                  "Es": "The scanner cries, but it's worth it. Filters out almost all random noise, giving you a crystal-clear, steady line.",
+                  "Fr": "The scanner cries, but it's worth it. Filters out almost all random noise, giving you a crystal-clear, steady line."
+                },
+                "label_active": {
+                  "De": "Sub-Glazial",
+                  "En": "Sub-Glacial",
+                  "Es": "Sub-Glacial",
+                  "Fr": "Sub-Glacial"
+                },
+                "label_inactive": {
+                  "De": "Sub-Glazial",
+                  "En": "Sub-Glacial",
+                  "Es": "Sub-Glacial",
+                  "Fr": "Sub-Glacial"
+                },
+                "selected": false,
+                "units": "kHz",
+                "value": "0.01"
+              },
+              "12": {
+                "description": {
+                  "De": "Zeit seems to stop. For the most patient scientists and signals with incredible stability. The ultimate low-pass filter.",
+                  "En": "Time seems to stop. For the most patient scientists and signals with incredible stability. The ultimate low-pass filter.",
+                  "Es": "Tiempo seems to stop. For the most patient scientists and signals with incredible stability. The ultimate low-pass filter.",
+                  "Fr": "Temps seems to stop. For the most patient scientists and signals with incredible stability. The ultimate low-pass filter."
+                },
+                "label_active": {
+                  "De": "Wahnsinnig langsam",
+                  "En": "Crazy Slow",
+                  "Es": "Locamente lento",
+                  "Fr": "Extrêmement lent"
+                },
+                "label_inactive": {
+                  "De": "Wahnsinnig langsam",
+                  "En": "Crazy Slow",
+                  "Es": "Locamente lento",
+                  "Fr": "Extrêmement lent"
+                },
+                "selected": false,
+                "units": "kHz",
+                "value": "0.003"
+              },
+              "13": {
+                "description": {
+                  "De": "Zeit seems to stop. For the most patient scientists and signals with incredible stability. The ultimate low-pass filter.",
+                  "En": "Time seems to stop. For the most patient scientists and signals with incredible stability. The ultimate low-pass filter.",
+                  "Es": "Tiempo seems to stop. For the most patient scientists and signals with incredible stability. The ultimate low-pass filter.",
+                  "Fr": "Temps seems to stop. For the most patient scientists and signals with incredible stability. The ultimate low-pass filter."
+                },
+                "label_active": {
+                  "De": "Wahnsinnig langsam",
+                  "En": "Crazy Slow",
+                  "Es": "Locamente lento",
+                  "Fr": "Extrêmement lent"
+                },
+                "label_inactive": {
+                  "De": "Wahnsinnig langsam",
+                  "En": "Crazy Slow",
+                  "Es": "Locamente lento",
+                  "Fr": "Extrêmement lent"
+                },
+                "selected": false,
+                "units": "kHz",
+                "value": "0.001"
+              },
+              "2": {
+                "description": {
+                  "De": "Ein schneller Durchlauf durch das Spektrum, ideal für sich schnell ändernde Signale.",
+                  "En": "A quick pass through the spectrum, ideal for fast-changing signals.",
+                  "Es": "Un paso rápido por el espectro, ideal para señales de cambio rápido.",
+                  "Fr": "Un passage rapide dans le spectre, idéal pour les signaux à changement rapide."
+                },
+                "label_active": {
+                  "De": "Very Schnell",
+                  "En": "Very Fast",
+                  "Es": "Very Rápido",
+                  "Fr": "Very Rapide"
+                },
+                "label_inactive": {
+                  "De": "Very Schnell",
+                  "En": "Very Fast",
+                  "Es": "Very Rápido",
+                  "Fr": "Very Rapide"
+                },
+                "selected": false,
+                "units": "kHz",
+                "value": "300"
+              },
+              "3": {
+                "description": {
+                  "De": "A balanced speed for general purpose monitoring and signal capture.",
+                  "En": "A balanced speed for general purpose monitoring and signal capture.",
+                  "Es": "A balanced speed for general purpose monitoring and signal capture.",
+                  "Fr": "A balanced speed for general purpose monitoring and signal capture."
+                },
+                "label_active": {
+                  "De": "Schnell",
+                  "En": "Fast",
+                  "Es": "Rápido",
+                  "Fr": "Rapide"
+                },
+                "label_inactive": {
+                  "De": "Schnell",
+                  "En": "Fast",
+                  "Es": "Rápido",
+                  "Fr": "Rapide"
+                },
+                "selected": false,
+                "units": "kHz",
+                "value": "100"
+              },
+              "4": {
+                "description": {
+                  "De": "Die Standardfiltereinstellung für die gängigsten Analyseaufgaben. Nicht zu viel, nicht zu wenig.",
+                  "En": "The standard filter setting for most common analysis tasks. Not too much, not too little.",
+                  "Es": "El ajuste de filtro estándar para las tareas de análisis más comunes. Ni mucho, ni poco.",
+                  "Fr": "Le réglage de filtre standard pour les tâches d'analyse les plus courantes. Ni trop, ni trop peu."
+                },
+                "label_active": {
+                  "De": "Normal",
+                  "En": "Normal",
+                  "Es": "Normal",
+                  "Fr": "Normal"
+                },
+                "label_inactive": {
+                  "De": "Normal",
+                  "En": "Normal",
+                  "Es": "Normal",
+                  "Fr": "Normal"
+                },
+                "selected": false,
+                "units": "kHz",
+                "value": "30"
+              },
+              "5": {
+                "description": {
+                  "De": "A gentle filter, giving you more time to appreciate the finer details of a waveform.",
+                  "En": "A gentle filter, giving you more time to appreciate the finer details of a waveform.",
+                  "Es": "A gentle filter, giving you more time to appreciate the finer details of a waveform.",
+                  "Fr": "A gentle filter, giving you more time to appreciate the finer details of a waveform."
+                },
+                "label_active": {
+                  "De": "Langsam",
+                  "En": "Slow",
+                  "Es": "Lento",
+                  "Fr": "Lent"
+                },
+                "label_inactive": {
+                  "De": "Langsam",
+                  "En": "Slow",
+                  "Es": "Lento",
+                  "Fr": "Lent"
+                },
+                "selected": false,
+                "units": "kHz",
+                "value": "10"
+              },
+              "6": {
+                "description": {
+                  "De": "For the meticulous scientist. You'll filter out fast noise and jitter, but at the cost of speed.",
+                  "En": "For the meticulous scientist. You'll filter out fast noise and jitter, but at the cost of speed.",
+                  "Es": "For the meticulous scientist. You'll filter out fast noise and jitter, but at the cost of speed.",
+                  "Fr": "For the meticulous scientist. You'll filter out fast noise and jitter, but at the cost of speed."
+                },
+                "label_active": {
+                  "De": "Very Langsam",
+                  "En": "Very Slow",
+                  "Es": "Very Lento",
+                  "Fr": "Very Lent"
+                },
+                "label_inactive": {
+                  "De": "Very Langsam",
+                  "En": "Very Slow",
+                  "Es": "Very Lento",
+                  "Fr": "Very Lent"
+                },
+                "selected": false,
+                "units": "kHz",
+                "value": "3"
+              },
+              "7": {
+                "description": {
+                  "De": "A meditative pace. So slow you can practically see the electrons move, offering maximum stability and noise reduction.",
+                  "En": "A meditative pace. So slow you can practically see the electrons move, offering maximum stability and noise reduction.",
+                  "Es": "A meditative pace. So slow you can practically see the electrons move, offering maximum stability and noise reduction.",
+                  "Fr": "A meditative pace. So slow you can practically see the electrons move, offering maximum stability and noise reduction."
+                },
+                "label_active": {
+                  "De": "Ultra Langsam",
+                  "En": "Ultra Slow",
+                  "Es": "Ultra Lento",
+                  "Fr": "Ultra Lent"
+                },
+                "label_inactive": {
+                  "De": "Ultra Langsam",
+                  "En": "Ultra Slow",
+                  "Es": "Ultra Lento",
+                  "Fr": "Ultra Lent"
+                },
+                "selected": false,
+                "units": "kHz",
+                "value": "1"
+              },
+              "8": {
+                "description": {
+                  "De": "Ein langsames Kriechen. Gut für sehr detaillierte Analysen von kontinuierlichen Signalen und zum Filtern von Einschwinggeräuschen.",
+                  "En": "A slow crawl. Good for very detailed analysis of continuous signals and filtering out transient noise.",
+                  "Es": "Un gateo lento. Bueno para análisis muy detallados de señales continuas y filtrado de ruido transitorio.",
+                  "Fr": "Un balayage lent. Idéal pour une analyse très détaillée des signaux continus et pour filtrer le bruit transitoire."
+                },
+                "label_active": {
+                  "De": "Glazial",
+                  "En": "Glacial",
+                  "Es": "Glacial",
+                  "Fr": "Glacial"
+                },
+                "label_inactive": {
+                  "De": "Glazial",
+                  "En": "Glacial",
+                  "Es": "Glacial",
+                  "Fr": "Glacial"
+                },
+                "selected": false,
+                "units": "kHz",
+                "value": "0.3"
+              },
+              "9": {
+                "description": {
+                  "De": "Ein langsames Kriechen. Gut für sehr detaillierte Analysen von kontinuierlichen Signalen und zum Filtern von Einschwinggeräuschen.",
+                  "En": "A slow crawl. Good for very detailed analysis of continuous signals and filtering out transient noise.",
+                  "Es": "Un gateo lento. Bueno para análisis muy detallados de señales continuas y filtrado de ruido transitorio.",
+                  "Fr": "Un balayage lent. Idéal pour une analyse très détaillée des signaux continus et pour filtrer le bruit transitoire."
+                },
+                "label_active": {
+                  "De": "Glazial",
+                  "En": "Glacial",
+                  "Es": "Glacial",
+                  "Fr": "Glacial"
+                },
+                "label_inactive": {
+                  "De": "Glazial",
+                  "En": "Glacial",
+                  "Es": "Glacial",
+                  "Fr": "Glacial"
+                },
+                "selected": false,
+                "units": "kHz",
+                "value": "0.1"
+              },
+              "UNSELECTED": {
+                "description": {
+                  "De": "Nein video bandwidth option is currently selected.",
+                  "En": "No video bandwidth option is currently selected.",
+                  "Es": "No video bandwidth option is currently selected.",
+                  "Fr": "Non video bandwidth option is currently selected."
+                },
+                "label_active": {
+                  "De": "Keine ausgewählt",
+                  "En": "None Selected",
+                  "Es": "Ninguno seleccionado",
+                  "Fr": "Aucun sélectionné"
+                },
+                "label_inactive": {
+                  "De": "Keine ausgewählt",
+                  "En": "None Selected",
+                  "Es": "Ninguno seleccionado",
+                  "Fr": "Aucun sélectionné"
+                },
+                "selected": true,
+                "units": "",
+                "value": "NONE"
+              }
+            },
+            "selection_mode": "radio",
+            "style": {
+              "active_bg_color": "#000000",
+              "active_color": "#FF9900",
+              "active_font_size": null,
+              "active_font_style": "bold",
+              "active_text_color": "#1a1a1a",
+              "bg_color": "#2b2b2b",
+              "glow_intensity": 1.944,
+              "inactive_font_size": null,
+              "inactive_font_style": "normal",
+              "text_color": "#888888"
+            },
+            "type": "_GuiButtonToggler",
+            "yak_handler": {
+              "command": "Set_VBW",
+              "converter": "khz_to_hz",
+              "enable": true,
+              "input_name": "hz_value",
+              "sub_path": "Bandwidth",
+              "yak_type": "set"
+            }
+          },
+          "vbw_MHz": {
+            "column_spacing": [
+              80,
+              10,
+              10
+            ],
+            "cosmetics": {
+              "colors": {
+                "background": "#2b2b2b",
+                "primary": "#FF9900",
+                "secondary": "#444444"
+              }
+            },
+            "default_locked": false,
+            "default_value": "0.5",
+            "dial_config": {
+              "active_color": "#00ffff",
+              "bg_color": "#2b2b2b",
+              "height": 70,
+              "knob_style": "dial",
+              "type": "_GuiKnob",
+              "width": 70
+            },
+            "fader_config": {
+              "active_color": "#FF9900",
+              "bar_color": "#333333",
+              "glow_intensity": 1.5,
+              "height": 65,
+              "show_ticks": true,
+              "tick_interval": 10,
+              "type": "_GuiFaderHorizontal",
+              "width": 300
+            },
+            "handler": "set_vbw",
+            "label_active": {
+              "De": "Videobandbreite",
+              "En": "Video Bandwidth",
+              "Es": "Ancho de banda de video",
+              "Fr": "Largeur de bande vidéo"
+            },
+            "layout": {
+              "font": 20,
+              "height": 100,
+              "padx": 10,
+              "pady": 10,
+              "sticky": "ewn",
+              "width": 400
+            },
+            "max": "1000",
+            "min": "0",
+            "show_label": true,
+            "step_coarse": "10",
+            "step_fine": "1",
+            "type": "_Horizontal_with_dial_Value",
+            "units": "kHz",
+            "value_config": {
+              "bg_color": "#1a1a1a",
+              "colour": "#ffffff",
+              "font": 18,
+              "height": 30,
+              "width": 12
+            },
+            "yak_handler": {
+              "command": "Set_VBW",
+              "converter": "mhz_to_hz",
+              "enable": true,
+              "input_name": "hz_value",
+              "sub_path": "Bandwidth",
+              "yak_type": "set"
+            }
+          }
+        },
+        "layout": {
+          "weight": 0
+        },
+        "show_label": false,
+        "type": "OcaBlock"
+      }
+    },
+    "button_toggler": {
+      "cosmetics": {
+        "active_color": "#33A1FD",
+        "alpha": 0.9,
+        "bg_color": "#1a1a1a",
+        "font": 10,
+        "glow_intensity": 1.2
+      },
+      "domain": {
+        "primary": {
+          "value_default": "LPF"
+        }
+      },
+      "dynamics": {
+        "path": "DSP/Filter/Type"
+      },
+      "geometry": {
+        "corner_radius": 6,
+        "height": 50,
+        "max_cols": 3,
+        "padx": 5,
+        "pady": 5,
+        "stretch": "width",
+        "width": 160
+      },
+      "identity": {
+        "id": "filter_group",
+        "label": "Filter Mode",
+        "notes": "A multi-state radio group with photorealistic buttons."
+      },
+      "interaction": {
+        "Allow_Multi_Alt_Select": true,
+        "Allow_Null": false,
+        "options": {
+          "BPF": {
+            "label_active": "BAND PASS",
+            "label_inactive": "BPF",
+            "selected": false
+          },
+          "HPF": {
+            "label_active": "HIGH PASS",
+            "label_inactive": "HPF",
+            "selected": false
+          },
+          "LPF": {
+            "active_color": "#00FF00",
+            "label_active": "LOW PASS",
+            "label_inactive": "LPF",
+            "selected": true
+          }
+        },
+        "selection_mode": "radio"
+      },
+      "layout": {
+        "padx": 10,
+        "pady": 10,
+        "sticky": "ew"
+      },
+      "type": "_SmartToggler"
+    },
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "id": "50.100.0.3.2",
+    "type": "OcaBin"
+  }
+}

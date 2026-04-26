@@ -4,13 +4,14 @@
 #
 # Description: Brief summary of purpose
 
-from loguru import logger
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
+
+from oaLogging.Methods.matrix_gate import matrix_log
+
 
 class PTPObserverRegistry:
     """Manages the registration and notification of PTP data observers."""
-    
+
     _observers = []
 
     @classmethod

@@ -1,5 +1,4 @@
 # Core/cmdp_tree.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
@@ -7,6 +6,7 @@ from oaGui.Methods.i18n_utils import get_text
 
 import tkinter as tk
 from tkinter import ttk
+
 
 class CMDPTreeManager:
     """Manages the channel tree pop-up window and its associated interactions."""
@@ -19,14 +19,14 @@ class CMDPTreeManager:
         if is_vis:
             self.w.tree_window = tk.Toplevel(self.w); self.w.tree_window.title("Channel Tree"); self.w.tree_window.geometry("600x700")
             self.w.tree_window.protocol("WM_DELETE_WINDOW", self.toggle)
-            
+
             s = ttk.Style(self.w.tree_window); s.configure("CMDP_Pop.Treeview", background="#2b2b2b", foreground="white", fieldbackground="#2b2b2b")
             cols = ("Name", "Mute", "Level", "Depth", "Angle", "ID")
             self.w.pop_tree = ttk.Treeview(self.w.tree_window, columns=cols, show="tree headings", style="CMDP_Pop.Treeview")
             self.w.pop_tree.heading("#0", text="Groups")
             for c in cols: self.w.pop_tree.heading(c, text=c); self.w.pop_tree.column(c, width=70, anchor="center")
             self.w.pop_tree.pack(fill=tk.BOTH, expand=True)
-            
+
             self.refresh()
             self.w.pop_tree.bind("<Button-1>", self._on_click)
             self.w.pop_tree.bind("<B1-Motion>", self._on_drag)

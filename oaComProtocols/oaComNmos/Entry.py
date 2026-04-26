@@ -156,8 +156,10 @@ def status():
 # def run_tests(): ...
 # if __name__ == "__main__": ...
 
+__all__ = [
     "start", "stop", "status", "global_state", "NmosBridgeManager",
-    "Is07MqttTransport", "Is07WebSocketTransport", "initialize_global_state"
+    "Is07MqttTransport", "Is07WebSocketTransport", "initialize_global_state",
+    "run_tests"
 ]
 
 def run_tests():
@@ -204,10 +206,6 @@ def run_tests():
         print(f"🛑 [ERROR] {Path(__file__).parent.name}: Test discovery failed: {e}")
         return False
 
-def start():
-    """Start the module services."""
-    print(f"🚀 [START] Starting {Path(__file__).parent.name} services...")
-
 if __name__ == "__main__":
     # Absolute FIRST action: run tests
     if not run_tests():
@@ -229,8 +227,3 @@ if __name__ == "__main__":
         # Default standalone action if no args
         start()
 
-    "start",
-    "stop",
-    "status",
-    "run_tests",
-__all__ = ["start", "stop", "status", "run_tests"]

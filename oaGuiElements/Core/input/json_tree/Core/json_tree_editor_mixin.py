@@ -1,5 +1,4 @@
 # Core/json_tree_editor_mixin.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
@@ -7,6 +6,7 @@ from oaGui.Methods.i18n_utils import get_text
 
 import tkinter as tk
 from tkinter import ttk
+
 
 class JsonTreeEditorMixin:
     """Encapsulates inline editing logic for the Treeview."""
@@ -18,21 +18,21 @@ class JsonTreeEditorMixin:
         item_id = self.tree.identify_row(event.y)
         column_id = self.tree.identify_column(event.x)
         if not item_id: return
-        
+
         # Only allow editing the 'value' column (index 1)
         col_idx = int(column_id.replace("#", ""))
-        if col_idx != 1: return 
-        
+        if col_idx != 1: return
+
         logical_col = "value"
         old_value = self.tree.set(item_id, logical_col)
         x, y, w, h = self.tree.bbox(item_id, column_id)
-        
+
         entry = ttk.Entry(self.tree)
         entry.insert(0, old_value)
         entry.select_range(0, tk.END)
         entry.focus_set()
         entry.place(x=x, y=y, width=w, height=h)
-        
+
         def save_edit(event=None):
             new_value = entry.get()
             typed_value = self._parse_typed_value(new_value)
@@ -62,5 +62,5 @@ class JsonTreeEditorMixin:
                 except: path.insert(0, text)
             else: path.insert(0, text)
             curr = self.tree.parent(curr)
-        
+
         self.data_manager.update_at_path(path, new_value)

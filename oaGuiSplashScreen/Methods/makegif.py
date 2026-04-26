@@ -4,21 +4,31 @@
 #
 # Description: This script generates a GIF animation of a dynamic wave pattern using Matplotlib, intended for splash screen display.
 
-import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib.animation as animation
-from matplotlib.colors import LinearSegmentedColormap
 import os
-from oaStyle.Constants.geometry import (
-    SPLASH_FRAMES as FRAMES, SPLASH_FPS as FPS, SPLASH_WIDTH as WIDTH, SPLASH_HEIGHT as HEIGHT,
-    SPLASH_Y_LIMIT_MAX as Y_LIMIT_MAX, SPLASH_NUM_BARS as NUM_BARS, SPLASH_BAR_WIDTH as BAR_WIDTH,
-    SPLASH_ENVELOPE_COEFFICIENT as ENVELOPE_COEFFICIENT, SPLASH_ENVELOPE_RANGE_LIMIT as ENVELOPE_RANGE_LIMIT,
-    SPLASH_SPIKE_TRIGGER_CENTER as SPIKE_TRIGGER_CENTER, SPLASH_SPIKE_TRIGGER_STEEPNESS as SPIKE_TRIGGER_STEEPNESS,
-    SPLASH_LINE_OFFSET_STANDARD as LINE_OFFSET_STANDARD, SPLASH_LINE_OFFSET_ELECTRIC as LINE_OFFSET_ELECTRIC,
-    SPLASH_BASE_HEIGHT_L1 as BASE_HEIGHT_LAYER1, SPLASH_BASE_HEIGHT_L2 as BASE_HEIGHT_LAYER2,
-    SPLASH_BASE_HEIGHT_L3 as BASE_HEIGHT_LAYER3, SPLASH_BASE_HEIGHT_L4 as BASE_HEIGHT_LAYER4,
-    SPLASH_BASE_HEIGHT_L5 as BASE_HEIGHT_LAYER5
-)
+
+import matplotlib.animation as animation
+import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib.colors import LinearSegmentedColormap
+
+from oaStyle.Constants.geometry import SPLASH_BAR_WIDTH as BAR_WIDTH
+from oaStyle.Constants.geometry import SPLASH_BASE_HEIGHT_L1 as BASE_HEIGHT_LAYER1
+from oaStyle.Constants.geometry import SPLASH_BASE_HEIGHT_L2 as BASE_HEIGHT_LAYER2
+from oaStyle.Constants.geometry import SPLASH_BASE_HEIGHT_L3 as BASE_HEIGHT_LAYER3
+from oaStyle.Constants.geometry import SPLASH_BASE_HEIGHT_L4 as BASE_HEIGHT_LAYER4
+from oaStyle.Constants.geometry import SPLASH_BASE_HEIGHT_L5 as BASE_HEIGHT_LAYER5
+from oaStyle.Constants.geometry import SPLASH_ENVELOPE_COEFFICIENT as ENVELOPE_COEFFICIENT
+from oaStyle.Constants.geometry import SPLASH_ENVELOPE_RANGE_LIMIT as ENVELOPE_RANGE_LIMIT
+from oaStyle.Constants.geometry import SPLASH_FPS as FPS
+from oaStyle.Constants.geometry import SPLASH_FRAMES as FRAMES
+from oaStyle.Constants.geometry import SPLASH_HEIGHT as HEIGHT
+from oaStyle.Constants.geometry import SPLASH_LINE_OFFSET_ELECTRIC as LINE_OFFSET_ELECTRIC
+from oaStyle.Constants.geometry import SPLASH_LINE_OFFSET_STANDARD as LINE_OFFSET_STANDARD
+from oaStyle.Constants.geometry import SPLASH_NUM_BARS as NUM_BARS
+from oaStyle.Constants.geometry import SPLASH_SPIKE_TRIGGER_CENTER as SPIKE_TRIGGER_CENTER
+from oaStyle.Constants.geometry import SPLASH_SPIKE_TRIGGER_STEEPNESS as SPIKE_TRIGGER_STEEPNESS
+from oaStyle.Constants.geometry import SPLASH_WIDTH as WIDTH
+from oaStyle.Constants.geometry import SPLASH_Y_LIMIT_MAX as Y_LIMIT_MAX
 
 # --- Configuration ---
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))

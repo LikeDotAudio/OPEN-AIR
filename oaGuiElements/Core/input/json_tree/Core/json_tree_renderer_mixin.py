@@ -1,11 +1,9 @@
 # Core/json_tree_renderer_mixin.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: Brief summary of purpose
 
-import tkinter as tk
 
 class JsonTreeRendererMixin:
     """Handles the iterative population and refreshing of the ttk.Treeview."""
@@ -13,7 +11,7 @@ class JsonTreeRendererMixin:
     def _insert_node_iterative(self, data, filter_text="", show_values=False, max_depth=5):
         """Iterative tree insertion with filtering support."""
         filter_text = filter_text.lower()
-        
+
         if isinstance(data, dict):
             stack = [("", k, v, 0) for k, v in reversed(list(data.items()))]
         elif isinstance(data, list):
@@ -27,7 +25,7 @@ class JsonTreeRendererMixin:
             text_key = str(key)
             is_container = isinstance(value, (dict, list))
             str_val = str(value) if not is_container else ""
-            
+
             matches = not filter_text or (filter_text in text_key.lower() or filter_text in str_val.lower())
             is_open = bool(filter_text and matches)
 
@@ -36,7 +34,7 @@ class JsonTreeRendererMixin:
                 if show_values and isinstance(value, dict):
                     for col in self.data_manager.dynamic_columns:
                         if col in value: self.tree.set(node_id, col, str(value[col]))
-                
+
                 if isinstance(value, dict):
                     for k, v in reversed(list(value.items())): stack.append((node_id, k, v, depth + 1))
                 else:

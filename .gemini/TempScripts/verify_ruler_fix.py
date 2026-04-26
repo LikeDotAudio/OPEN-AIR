@@ -1,6 +1,5 @@
 
 import sys
-import os
 from unittest.mock import MagicMock
 
 # Setup path to find module
@@ -12,25 +11,26 @@ sys.modules['tkinter.ttk'] = MagicMock()
 
 from oaGuiEditorWYSIWYG.Core.workspaces.Core.layout.ruler import Ruler
 
+
 def test_fix():
     print("📡 [TEST] Verifying Ruler redraw fix...")
-    
+
     # Create mock ruler
     ruler = Ruler(None, orient="horizontal")
-    
+
     # Mock winfo methods to return floats (the trigger)
     ruler.winfo_width = MagicMock(return_value=100.5)
     ruler.winfo_height = MagicMock(return_value=20.7)
-    
+
     # Mock canvas methods
     ruler.delete = MagicMock()
     ruler.create_line = MagicMock()
     ruler.create_text = MagicMock()
     ruler.create_polygon = MagicMock()
-    
+
     # Set float offset
     ruler.offset = 15.3
-    
+
     try:
         ruler.redraw()
         print("✅ [SUCCESS] redraw() completed without TypeError.")

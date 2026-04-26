@@ -4,30 +4,30 @@
 #
 # Description: A mixin for creating an animation display widget from a GIF file.
 
-import tkinter as tk
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
-from tkinter import ttk
-from PIL import Image, ImageTk, ImageSequence
 import os
+import tkinter as tk
 
-# --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
 from loguru import logger
+from PIL import Image, ImageSequence, ImageTk
 
 from oaConfigurationManager.FileReaders.config_reader import Config
 
+# --- Standard Debug Logging Setup ---
+from oaLogging.Core.logger import builder_logger
+from oaLogging.Methods.matrix_gate import matrix_log
+
 app_constants = Config.get_instance()  # Get the singleton instance
 
-from oaOchestration.Core.path_initializer import (
-    GLOBAL_PROJECT_ROOT,
-)  # Import GLOBAL_PROJECT_ROOT
-from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic  # Import get_topic
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 from oaGui.Methods.i18n_utils import get_text
+from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Methods.matrix_gate import is_debug_allowed
+from oaOchestration.Core.path_initializer import (
+    GLOBAL_PROJECT_ROOT,
+)  # Import GLOBAL_PROJECT_ROOT
+
 BUILDER_DEBUG = is_debug_allowed(system="UI", element="GUI_BUILDER")
 
 
@@ -46,7 +46,7 @@ class BuilderImagesAnimationDisplayCreator(TransparencyMixin):
         self, parent_widget, config_data, context=None, **kwargs
     ):  # Updated signature
         """Creates an animation display widget."""
-        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️🎞️ [BUILDER] Entering make_images_animation_display", level="TRACE")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🔬🏗️🎞️ [BUILDER] Entering make_images_animation_display", level="TRACE")
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📜📑💻 [CONFIG] Raw config received: {config_data}", level="DEBUG")
 
         current_function_name = "make_images_animation_display"
@@ -74,10 +74,10 @@ class BuilderImagesAnimationDisplayCreator(TransparencyMixin):
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬⚡️🎞️ [BUILDER] Animating display for '{label}' at path '{path}'.", level="DEBUG")
 
         frame = tk.Frame(parent_widget)  # Use parent_widget here
-        
+
         # Apply Industrial Transparency
         if hasattr(self, '_apply_transparency'):
-            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"👻🌀🪟 [ALPHA] Applying industrial transparency to animation frame.", level="TRACE")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "👻🌀🪟 [ALPHA] Applying industrial transparency to animation frame.", level="TRACE")
             self._apply_transparency(frame, None, config_data, builder_instance)
 
         if label:
@@ -135,14 +135,14 @@ class BuilderImagesAnimationDisplayCreator(TransparencyMixin):
 
         anim_label = tk.Label(frame)
         anim_label.pack(side=tk.LEFT)
-        
+
         def sync_bg():
-            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔄👻🎨 [SYNC] Syncing animation frame labels to background.", level="TRACE")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🔄👻🎨 [SYNC] Syncing animation frame labels to background.", level="TRACE")
             bg = frame.cget("bg")
             for child in frame.winfo_children():
                 if isinstance(child, tk.Label):
                     child.config(bg=bg)
-        
+
         frame._draw = sync_bg
 
         if frames:
@@ -181,15 +181,15 @@ class BuilderImagesAnimationDisplayCreator(TransparencyMixin):
                 )
 
             # Initialize state from cache or broadcast
-            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔄⏳🔋 [STATE] Initializing animation state from cache/broker.", level="TRACE")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🔄⏳🔋 [STATE] Initializing animation state from cache/broker.", level="TRACE")
             state_mirror_engine.initialize_widget_state(path)
-            
+
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"✅🆗🎞️ [SUCCESS] The animation for '{label}' has materialized!", level="SUCCESS")
         return frame
 
     # Callback function for updating the animation frame via incoming MQTT messages.
     def _on_animation_frame_update_mqtt(self, topic, payload):
-        import orjson 
+        import orjson
 
         try:
             payload_data = orjson.loads(payload)

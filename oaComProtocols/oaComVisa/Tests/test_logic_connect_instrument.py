@@ -6,10 +6,9 @@
 
 import unittest
 from unittest.mock import MagicMock, patch
-import pyvisa
-import datetime
 
 from oaComProtocols.oaComVisa.Workers.logic_connect_instrument import VisaConnector
+
 
 class TestVisaConnector(unittest.TestCase):
 
@@ -29,9 +28,9 @@ class TestVisaConnector(unittest.TestCase):
         mock_rm = MockRM.return_value
         mock_inst = MagicMock()
         mock_rm.open_resource.return_value = mock_inst
-        
+
         inst = self.connector.setup_visa_instrument("TCPIP::192.168.1.100::INSTR")
-        
+
         self.assertEqual(inst, mock_inst)
         self.assertEqual(inst.timeout, 5000)
         self.assertEqual(inst.read_termination, "\n")
@@ -47,9 +46,9 @@ class TestVisaConnector(unittest.TestCase):
         """
         mock_rm = MockRM.return_value
         mock_rm.open_resource.side_effect = Exception("Connect error")
-        
+
         inst = self.connector.setup_visa_instrument("TCPIP::invalid::INSTR")
-        
+
         self.assertIsNone(inst)
 
     @patch.object(VisaConnector, 'setup_visa_instrument')
@@ -62,14 +61,14 @@ class TestVisaConnector(unittest.TestCase):
         mock_inst = MagicMock()
         mock_setup.return_value = mock_inst
         mock_inst.query.return_value = "TEKTRONIX,MSO2024B,SERIAL123,FV1.0"
-        
+
         result_resource = "TCPIP::1.2.3.4::INSTR"
         result = self.connector.connect_instrument_logic(result_resource)
-        
+
         self.assertEqual(result, mock_inst)
         self.mock_proxy.set_instrument_instance.assert_called_with(inst=mock_inst)
         mock_inst.query.assert_called_with("*IDN?")
-        
+
         # Check some of the status publishes
         self.mock_publisher._publish_status.assert_any_call("brand", "TEKTRONIX")
         self.mock_publisher._publish_status.assert_any_call("device_model", "MSO2024B")
@@ -83,9 +82,9 @@ class TestVisaConnector(unittest.TestCase):
         CHECK: Assert it updates proxy with None and publishes failure status.
         """
         mock_setup.return_value = None
-        
+
         result = self.connector.connect_instrument_logic("INVALID")
-        
+
         self.assertFalse(result)
         self.mock_proxy.set_instrument_instance.assert_called_with(inst=None)
         self.mock_publisher._publish_status.assert_any_call("connected", False)
@@ -101,9 +100,9 @@ class TestVisaConnector(unittest.TestCase):
         mock_inst = MagicMock()
         mock_setup.return_value = mock_inst
         mock_inst.query.side_effect = Exception("Query timeout")
-        
+
         result = self.connector.connect_instrument_logic("TCPIP::1.2.3.4::INSTR")
-        
+
         self.assertFalse(result)
 
 if __name__ == '__main__':

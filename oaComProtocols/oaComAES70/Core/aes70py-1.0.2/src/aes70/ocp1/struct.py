@@ -1,8 +1,9 @@
-from typing import Any, Dict
-from aes70.ocp1.createtype import create_type, Type
+from typing import Any
+
+from aes70.ocp1.createtype import Type, create_type
 
 
-def Struct(types: Dict[str, Any], data_type: Any = None) -> Any:
+def Struct(types: dict[str, Any], data_type: Any = None) -> Any:
     def struct_decode_from(data: bytearray, pos: int):
         #print("Struct decode_from")
         vals = []

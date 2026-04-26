@@ -1,4 +1,3 @@
-import codecs
 
 def buffer_to_utf8(a8):
     """
@@ -117,7 +116,7 @@ def count_codepoints(s):
         int: The number of code points.
     """
     n = 0
-    
+
     for i in range(len(s)):
         c = ord(s[i])
         n += 1
@@ -126,7 +125,7 @@ def count_codepoints(s):
             c = ord(s[i])
             if not 0xDC00 <= c <= 0xDFFF:
                 raise TypeError("Expected valid unicode string.")
-    
+
     return n
 
 

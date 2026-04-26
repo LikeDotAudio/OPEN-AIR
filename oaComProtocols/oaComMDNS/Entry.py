@@ -4,23 +4,20 @@
 #
 # Description: Gatekeeper for the oaComMDNS module.
 
-import subprocess
-from pathlib import Path
-
-import sys
-import time
-import signal
 import os
 import pathlib
+import subprocess
+import sys
+from pathlib import Path
 
 current_dir = pathlib.Path(__file__).resolve().parent
 project_root = current_dir.parent.parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
-from oaLogging.Methods.matrix_gate import matrix_log
 # Core components are now managed externally, except for their own internal MQTT publisher
 from oaComProtocols.oaComMDNS.Core.mdns_listener import MDNSListener
+from oaLogging.Methods.matrix_gate import matrix_log
 
 _listener = None
 _publisher_instance = None
@@ -30,12 +27,12 @@ def start(rx_callback=None, tx_callback=None):
     global _listener, _publisher_instance
     if _listener is not None:
         return
-    
+
     # Module manages its own MQTT publisher and connection
     from oaComProtocols.oaComMDNS.Core.mqtt_publisher import StandaloneMqttPublisher
     _publisher_instance = StandaloneMqttPublisher(client_id="MDNS_Standalone", tx_callback=tx_callback)
     _publisher_instance.connect()
-    
+
     _listener = MDNSListener(_publisher_instance, rx_callback=rx_callback)
     _listener.start()
     matrix_log("comms", "mdns", "start", "🚀 [MDNS] Listener and self-contained MQTT publisher started.", "INFO")
@@ -65,15 +62,13 @@ def run_tests():
     Discover and run tests in the local Tests/ directory using unittest via subprocess.
     Ensures isolation and proper sys.path handling.
     """
-    import subprocess
     import sys
-    import os
     from pathlib import Path
 
     print(f"📡📥📥 [TEST] {Path(__file__).parent.name}: Starting automated test discovery...")
     current_dir = Path(__file__).parent.absolute()
     test_dir = current_dir / "Tests"
-    
+
     if not test_dir.exists():
         return True
 
@@ -82,10 +77,10 @@ def run_tests():
         if (project_root / "GEMINI.md").exists():
             break
         project_root = project_root.parent
-    
+
     env = os.environ.copy()
     env["PYTHONPATH"] = str(project_root) + os.pathsep + env.get("PYTHONPATH", "")
-    
+
     try:
         rel_test_dir = os.path.relpath(test_dir, project_root)
         result = subprocess.run(
@@ -114,7 +109,7 @@ if __name__ == "__main__":
     if not run_tests():
         print("❌ [CRITICAL] Tests failed. Aborting execution.")
         sys.exit(1)
-    
+
     # Standalone execution logic
     if len(sys.argv) > 1:
         cmd = sys.argv[1].lower()

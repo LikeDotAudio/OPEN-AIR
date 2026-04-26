@@ -14,37 +14,40 @@ Purpose:
     system partitions (UI, Core, Hardware).
 """
 
-import sys
 import os
-from loguru import logger
+import sys
 from datetime import datetime
+
+from loguru import logger
+
+from oaLogging.Constants.logging_constants import (
+    APP_LOG_BATCH_SIZE,
+    APP_LOG_INTERVAL,
+    COMMS_ELEMENTS,
+    ERROR_LOG_BATCH_SIZE,
+    ERROR_LOG_INTERVAL,
+    FILE_FORMAT_PLAIN,
+    JSONL_FORMAT,
+    LOG_FORMAT_CONSOLE,
+    PROTOCOL_LOG_BATCH_SIZE,
+    PROTOCOL_LOG_INTERVAL,
+    PROTOCOLS,
+    TEST_LOG_BATCH_SIZE,
+    TEST_LOG_INTERVAL,
+)
 
 # --- Constants ---
 from oaLogging.Constants.subsystem_emojis import SUBSYSTEM_EMOJIS
-from oaLogging.Constants.logging_constants import (
-    LOG_FORMAT_CONSOLE,
-    FILE_FORMAT_PLAIN,
-    JSONL_FORMAT,
-    COMMS_ELEMENTS,
-    PROTOCOLS,
-    APP_LOG_BATCH_SIZE,
-    APP_LOG_INTERVAL,
-    ERROR_LOG_BATCH_SIZE,
-    ERROR_LOG_INTERVAL,
-    PROTOCOL_LOG_BATCH_SIZE,
-    PROTOCOL_LOG_INTERVAL,
-    TEST_LOG_BATCH_SIZE,
-    TEST_LOG_INTERVAL
-)
-
-# --- Sinks and Bridges ---
-from oaLogging.Workers.batch_sink import BatchLogSink
 from oaLogging.Core.rust_sink_bridge import teardown_rust_sink
 
 # --- Methods and Helpers ---
 from oaLogging.Methods.config_retrieval import _get_cached_config
-from oaLogging.Methods.log_patchers import ptp_patcher
 from oaLogging.Methods.log_filters import rust_gate_filter
+from oaLogging.Methods.log_patchers import ptp_patcher
+
+# --- Sinks and Bridges ---
+from oaLogging.Workers.batch_sink import BatchLogSink
+
 
 def get_emoji(key: str) -> str:
     """Safely retrieves an emoji for a given key, defaulting to a generic one."""
@@ -69,14 +72,14 @@ def initialize_logging(config, log_dir=None, partition="SYS"):
         patcher=ptp_patcher,
         extra={"category": "SYSTEM", "partition": partition_with_emoji, "protocol": None}
     )
-    
+
     # Remove existing handlers to avoid duplicate output.
     logger.remove()
 
     debug_enabled = config.global_settings.get("debug_enabled", False)
     console_level = "TRACE" if debug_enabled else "INFO"
     file_level = "TRACE" if debug_enabled else "INFO"
-    
+
     # ⚡ PARTITION MUTING
     if hasattr(config, "DEBUG_MATRIX"):
         partition_toggle = config.DEBUG_MATRIX.get(f"SYS_{partition.upper()}")
@@ -87,16 +90,16 @@ def initialize_logging(config, log_dir=None, partition="SYS"):
     show_ts = config.global_settings.get("timestamp_logs", True)
     ts_fmt = "<green>{extra[ptp_time]}</green>|" if show_ts else ""
     log_format_console = f"{ts_fmt}{LOG_FORMAT_CONSOLE}"
-    
+
     ts_fmt_plain = "{extra[ptp_time]} | " if show_ts else ""
     file_format_plain = f"{ts_fmt_plain}{FILE_FORMAT_PLAIN}"
-    
+
     jsonl_format = JSONL_FORMAT
 
     # 1. --- Console Sink ---
     logger.add(
-        sys.stderr, 
-        format=log_format_console, 
+        sys.stderr,
+        format=log_format_console,
         level=console_level,
         enqueue=False,
         filter=rust_gate_filter,
@@ -112,11 +115,11 @@ def initialize_logging(config, log_dir=None, partition="SYS"):
         run_log_dir = os.path.join(log_dir, "ApplicationRunLog")
         error_log_dir = os.path.join(log_dir, "Errors")
         comms_log_dir = os.path.join(log_dir, "Comms")
-        
+
         os.makedirs(run_log_dir, exist_ok=True)
         os.makedirs(error_log_dir, exist_ok=True)
         os.makedirs(comms_log_dir, exist_ok=True)
-        
+
         # 2. --- Application Log Sink ---
         app_log_pattern = os.path.join(run_log_dir, "Application_{time}.log")
         logger.add(
@@ -134,17 +137,17 @@ def initialize_logging(config, log_dir=None, partition="SYS"):
             filter=rust_gate_filter,
             backtrace=True, diagnose=True
         )
-        
+
         # 4. --- Protocol and Broker Segregated Sinks ---
         for proto in PROTOCOLS:
             proto_dir = os.path.join(comms_log_dir, proto)
             os.makedirs(proto_dir, exist_ok=True)
             proto_pattern = os.path.join(proto_dir, f"{proto}_{{time}}.log")
-            
+
             # Use a closure for the filter to correctly capture 'proto'
             def make_filter(p):
                 return lambda record: record["extra"].get("protocol") == p and rust_gate_filter(record)
-            
+
             logger.add(
                 BatchLogSink(proto_pattern, format_str=file_format_plain, batch_size=PROTOCOL_LOG_BATCH_SIZE, interval=PROTOCOL_LOG_INTERVAL),
                 format=file_format_plain, level=file_level,
@@ -165,21 +168,21 @@ def initialize_test_logging(log_dir: str):
     os.makedirs(log_dir, exist_ok=True)
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     test_log_path = os.path.join(log_dir, f"TestRun_{timestamp}.log")
-    
+
     file_format_plain = "{extra[ptp_time]} | " + FILE_FORMAT_PLAIN
 
     logger.configure(
         patcher=ptp_patcher,
         extra={"partition": "🧪 TEST", "category": "TEST"}
     )
-    
+
     logger.add(
         BatchLogSink(test_log_path, format_str=file_format_plain, batch_size=TEST_LOG_BATCH_SIZE, interval=TEST_LOG_INTERVAL),
         format=file_format_plain, level="TRACE",
         filter=lambda record: "TEST" in record["extra"].get("category", ""),
         backtrace=True, diagnose=True
     )
-    
+
     return test_log_path
 
 def get_logger(category: str, emoji_prefix: str = None):
@@ -190,7 +193,7 @@ def get_logger(category: str, emoji_prefix: str = None):
     else:
         emoji = emoji_prefix if emoji_prefix else get_emoji(category)
         cat_name = category.upper()
-        
+
     full_category = f"{emoji} {cat_name}"
     padded_category = full_category.ljust(18)
     return logger.bind(category=padded_category)
@@ -291,4 +294,3 @@ def failure_log(message: str, *args, **kwargs):
 debug_log = debug_logger
 
 # --- Matrix-Aware Logging APIs ---
-from oaLogging.Methods.matrix_gate import is_debug_allowed, debug_matrix, matrix_log

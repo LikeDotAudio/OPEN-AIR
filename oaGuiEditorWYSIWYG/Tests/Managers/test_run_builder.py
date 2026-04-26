@@ -20,12 +20,12 @@
 #        """
 #        json_content = '{"type": "frame", "children": []}'
 #        mock_builder_instance = MockDynamicGuiBuilder.return_value
-#        
+#
 #        self.builder.build_gui_from_json(json_content)
 #
 #        # Verify DynamicGuiBuilder was instantiated with the correct root
 #        MockDynamicGuiBuilder.assert_called_once_with(self.mock_root, self.mock_event_bus)
-#        
+#
 #        # Verify the build process was started with the parsed JSON
 #        mock_builder_instance.build_gui.assert_called_once()
 #        args, kwargs = mock_builder_instance.build_gui.call_args
@@ -35,10 +35,10 @@
 #        Test that run_builder handles invalid JSON gracefully.
 #        """
 #        invalid_json = '{"type": "frame", "children": [}'
-#        
+#
 #        # Expecting a JSONDecodeError
 #            self.builder.build_gui_from_json(invalid_json)
-#        
+#
 #        # Check that the event bus was notified of the failure
 #        self.mock_event_bus.publish.assert_called_with("error", "Failed to decode JSON for builder.")
 #
@@ -51,11 +51,11 @@
 #
 #        # First build
 #        self.builder.build_gui_from_json(json_content)
-#        
+#
 #        # Check that destroy_widgets was called before the second build
 #        self.builder.build_gui_from_json(json_content)
 #        mock_builder_instance.destroy_widgets.assert_called_once()
-#        
+#
 #        self.assertEqual(mock_builder_instance.build_gui.call_count, 2)
 #
 #    unittest.main()

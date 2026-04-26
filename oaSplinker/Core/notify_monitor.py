@@ -6,6 +6,7 @@
 
 from ..Constants.constants import splinker_logger
 
+
 def notify_monitor(self, message_type, data):
     for cb in self._monitor_callbacks:
         try:

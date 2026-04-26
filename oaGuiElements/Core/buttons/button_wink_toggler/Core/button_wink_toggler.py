@@ -1,20 +1,17 @@
 # button_wink_toggler/button_wink_toggler.py
-from oaGui.Methods.i18n_utils import get_text
+import inspect
+
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: Brief summary of purpose
-
 import tkinter as tk
-from oaLogging.Methods.matrix_gate import matrix_log
-import inspect
-from tkinter import ttk
-
-# --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
-from loguru import logger
 
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaGui.Methods.i18n_utils import get_text
+
+# --- Standard Debug Logging Setup ---
+from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
@@ -34,9 +31,9 @@ class BuilderButtonWinkTogglerCreator(BuilderButtonWinkCreator):
 
     def _assemble_ui(self, parent_widget, config_data, context, **kwargs):
         """Creates a group of Wink buttons where only one can be active."""
-        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️🔘 [BUILDER] Entering _assemble_ui", level="TRACE")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🔬🏗️🔘 [BUILDER] Entering _assemble_ui", level="TRACE")
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📜📑💻 [CONFIG] Raw config received: {config_data}", level="DEBUG")
-    
+
         # Extract config
         label = get_text(get_text(config_data.get('label_active'))) or get_text(get_text(config_data.get('label')), "")
         config = config_data
@@ -67,11 +64,11 @@ class BuilderButtonWinkTogglerCreator(BuilderButtonWinkCreator):
         if hasattr(builder_instance, '_apply_transparency'):
             matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"👻🌀🪟 [ALPHA] Applying industrial transparency to toggler container '{label}'", level="TRACE")
             builder_instance._apply_transparency(container, container, config, builder_instance)
-        
+
         # 2. Group Frame (standard tk.Frame since container canvas handles the main bg)
         # Note: We use tk.Frame with bg="" or matching to ensure transparency mixin can handle it if needed
         group_frame = tk.Frame(container, bd=0, highlightthickness=0, relief="flat")
-        
+
         # Add top padding if there is a label to avoid overlap
         pady_top = 25 if label else 0
         group_frame.pack(fill="both", expand=True, pady=(pady_top, 0))
@@ -90,7 +87,7 @@ class BuilderButtonWinkTogglerCreator(BuilderButtonWinkCreator):
                 return
             if w <= 1: return
             container._last_redraw_size = (w, h)
-            
+
             matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔄🎨🔤 [REDRAW] Redrawing labels for wink toggler '{label}'", level="TRACE")
             container.delete("industrial_text")
             if label:
@@ -105,13 +102,13 @@ class BuilderButtonWinkTogglerCreator(BuilderButtonWinkCreator):
             # Background cache might need a kick
             if hasattr(builder_instance, '_apply_transparency'):
                 builder_instance._apply_transparency(container, container, config, builder_instance)
-        
+
         container._draw = sync_bg
         container.render = sync_bg
         container.bind("<Configure>", lambda e: redraw_group_labels(), add="+")
 
         options = config.get("options", {})
-        
+
         # Normalize options to dict if list
         if isinstance(options, list):
             matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"⚠️🔔🔡 [CONFIG] Options for wink toggler '{label}' is a list, converting to dict.", level="DEBUG")
@@ -125,32 +122,32 @@ class BuilderButtonWinkTogglerCreator(BuilderButtonWinkCreator):
             "value_default", next(iter(options.keys())) if options else None
         )
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔋🔘✨ [STATE] Initial selected wink key for '{label}': {value_default}", level="DEBUG")
-        
+
         layout_columns = int(config.get("layout_columns", 1))
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📐📏🔳 [LAYOUT] Columns: {layout_columns}", level="DEBUG")
 
         # Main Group Variable (Strings for Radio behavior)
         group_var = kwargs.get("variable") or tk.StringVar(master=parent_widget, value=value_default)
-        
+
         # Store refs to keep them alive
         self._toggle_refs = getattr(self, "_toggle_refs", [])
         self._toggle_refs.append(group_var)
 
         row, col = 0, 0
-        
+
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🏗️🔳🕹️ [CONSTRUCT] Iterating through options to create Wink buttons for '{label}' group.", level="TRACE")
         for key, button_config in options.items():
-            
+
             # Merge configs: Parent config is base, button_config overrides
             full_config = config.copy()
             full_config.update(button_config)
-            
+
             if path:
                 full_config["path"] = f"{path}/{key}"
-            
+
             # Create the BooleanVar for this button
             bool_var = tk.BooleanVar(master=parent_widget, value=(str(value_default) == str(key)))
-            
+
             # ... sync logic ...
             def sync_from_group(var_name, index, mode, k=key, bv=bool_var):
                 is_selected = (group_var.get() == str(k))
@@ -158,7 +155,7 @@ class BuilderButtonWinkTogglerCreator(BuilderButtonWinkCreator):
                     matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔄✨🔘 [SYNC] Syncing wink '{k}' from group variable: {is_selected}", level="TRACE")
                     bv.set(is_selected)
             group_var.trace_add("write", sync_from_group)
-            
+
             def sync_from_bool(var_name, index, mode, k=key, bv=bool_var):
                 if bv.get():
                     if group_var.get() != str(k):
@@ -170,12 +167,12 @@ class BuilderButtonWinkTogglerCreator(BuilderButtonWinkCreator):
             # To fix the "border" issue, we ensure each button gets its own transparency check
             btn_cell = tk.Frame(group_frame, bd=0, highlightthickness=0, relief="flat")
             btn_cell.grid(row=row, column=col, padx=2, pady=2, sticky="nsew")
-            
+
             if hasattr(builder_instance, '_apply_transparency'):
                 builder_instance._apply_transparency(btn_cell, btn_cell, full_config, builder_instance)
-            
+
             # Create Button Widget
-            full_config["latching"] = True 
+            full_config["latching"] = True
             widget = BuilderButtonWinkCreator.make(btn_cell, full_config, context=context, variable=bool_var, builder_instance=builder_instance)
             widget.pack(fill="both", expand=True)
 
@@ -183,11 +180,11 @@ class BuilderButtonWinkTogglerCreator(BuilderButtonWinkCreator):
             def sync_child_bg(wid=widget):
                 if hasattr(wid, "_draw"):
                     wid._draw()
-            
+
             if not hasattr(container, "_sync_list"):
                 container._sync_list = []
             container._sync_list.append(sync_child_bg)
-            
+
             col += 1
             if col >= layout_columns:
                 col = 0
@@ -208,13 +205,13 @@ class BuilderButtonWinkTogglerCreator(BuilderButtonWinkCreator):
             topic = state_mirror_engine.register_widget(
                 widget_id, group_var, base_mqtt_topic_from_path, config
             )
-            
+
             if subscriber_router and topic:
                 matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📥📶🔄 [MQTT] Subscribing to group topic: {topic}", level="DEBUG")
                 subscriber_router.subscribe_to_topic(
                     topic, state_mirror_engine.sync_incoming_mqtt_to_gui
                 )
-            
+
             matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔄⏳🔋 [STATE] Initializing group state from cache/broker for '{path}'", level="TRACE")
             state_mirror_engine.initialize_widget_state(path)
 

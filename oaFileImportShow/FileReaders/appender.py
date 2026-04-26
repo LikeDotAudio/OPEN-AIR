@@ -9,7 +9,6 @@ from tkinter import filedialog
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = False
-from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
 from oaConfigurationManager.FileReaders.config_reader import Config
@@ -21,12 +20,13 @@ from oaFileImportCSV.from_csv_unknown import (
 from oaFileImportHTML.from_ias_html import (
     Marker_convert_IAShtml_report_to_csv,
 )
-from oaFileImportShow.from_shure_wwb_shw import (
-    Marker_convert_WWB_SHW_File_report_to_csv,
-)
 from oaFileImportPDF.from_soundbase_pdf_v1 import (
     Marker_convert_SB_PDF_File_report_to_csv,
 )
+from oaFileImportShow.from_shure_wwb_shw import (
+    Marker_convert_WWB_SHW_File_report_to_csv,
+)
+
 from oaFileImportShow.FileReaders.saver import save_markers_file_internally
 
 
@@ -80,13 +80,13 @@ def append_ias_html_action(importer_tab_instance, editor_instance):
         )
         return
     try:
-        with open(file_path, "r", encoding="utf-8") as f:
+        with open(file_path, encoding="utf-8") as f:
             html_content = f.read()
         headers, new_data = Marker_convert_IAShtml_report_to_csv(html_content)
         if headers and new_data:
             editor_instance.import_data(new_data)
             save_markers_file_internally(importer_tab_instance)
-    except Exception as e:
+    except Exception:
         if LOCAL_DEBUG:
             logger.exception("❌ Error appending IAS HTML file",
                 file=importer_tab_instance.current_file,

@@ -4,5 +4,5 @@
 #
 # Description: Exposes worker sub-modules.
 
-from .TestRunner.Workers.DiscoverTests import identify_test_directories as DiscoverTests
-from .TestRunner.TestRunner import TestRunner
+from ..Core.Workers.TestRunner import TestRunner
+from ..Core.Workers.DiscoverTests import identify_test_directories as DiscoverTests

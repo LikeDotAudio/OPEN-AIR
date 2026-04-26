@@ -5,8 +5,9 @@
 # Description: Unit tests for the Hierarchical Debug Matrix logic.
 
 import unittest
-from unittest.mock import MagicMock, patch
+
 from oaConfigurationManager.Managers.LoggingManager.manager import LoggingMatrixManager
+
 
 class TestLoggingMatrixManager(unittest.TestCase):
     def setUp(self):
@@ -14,7 +15,7 @@ class TestLoggingMatrixManager(unittest.TestCase):
         # Reset singleton for testing
         LoggingMatrixManager._instance = None
         self.manager = LoggingMatrixManager.get_instance()
-        
+
         # Inject a known test matrix
         self.test_matrix = {
             "MASTER_DEBUG_ENABLE": True,
@@ -51,7 +52,7 @@ class TestLoggingMatrixManager(unittest.TestCase):
         """Check: Function inclusions/exclusions have highest priority."""
         # GUI is True, but noisy_loop is muted
         self.assertFalse(self.manager.is_debug_allowed("GUI", func_name="noisy_loop"))
-        
+
         # COMMS is False, but critical_init is forced
         self.assertTrue(self.manager.is_debug_allowed("COMMS", func_name="critical_init"))
 

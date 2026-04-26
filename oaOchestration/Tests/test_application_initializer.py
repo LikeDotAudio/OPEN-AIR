@@ -5,9 +5,10 @@
 # Description: Tests for the application_initializer.py functions.
 
 import unittest
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 
 from oaOchestration.Managers.application_initializer import initialize_app
+
 
 class TestApplicationInitializer(unittest.TestCase):
 
@@ -21,7 +22,7 @@ class TestApplicationInitializer(unittest.TestCase):
         # Set LOCAL_DEBUG to True in the module so logger calls are hit
         with patch('oaOchestration.Managers.application_initializer.LOCAL_DEBUG', True):
             result = initialize_app()
-            
+
             self.assertTrue(result)
             mock_logger.debug.assert_called()
             mock_logger.success.assert_called_with("🚀🏗️✅ [SUCCESS] Application initialization completed.")
@@ -33,13 +34,13 @@ class TestApplicationInitializer(unittest.TestCase):
         OPERATE: Call initialize_app().
         CHECK: Assert it handles the exception, logs the error, and returns False.
         """
-        # Force an exception by mocking something inside the function 
+        # Force an exception by mocking something inside the function
         # or in this case, since it does almost nothing, we'll patch logger.success to raise Exception
         mock_logger.success.side_effect = Exception("Forced error")
-        
+
         with patch('oaOchestration.Managers.application_initializer.LOCAL_DEBUG', True):
             result = initialize_app()
-            
+
             self.assertFalse(result)
             mock_logger.exception.assert_called()
             args, _ = mock_logger.exception.call_args

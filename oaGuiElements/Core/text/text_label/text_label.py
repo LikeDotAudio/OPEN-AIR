@@ -1,29 +1,23 @@
 # text_label/text_label.py
-from oaGui.Methods.i18n_utils import get_text
+import inspect
+
 # Author: Anthony Peter Kuzub
 # Version: 20260221.Standardized.1
 #
 # Description: A mixin class for the DynamicGuiBuilder that handles the creation of a label widget.
-
-import os
-from oaLogging.Methods.matrix_gate import matrix_log
-import inspect
 import tkinter as tk
-from tkinter import ttk
-import inspect
 
 # --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory
-from loguru import logger
-
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaGui.Methods.i18n_utils import get_text
+from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
-from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 from oaGuiBuilder.Core.base_widget_creator import BaseWidgetCreator
 from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
+from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+
 
 @WidgetRegistry.register("_Label", "_SmartLabel", "_GuiLabel")
 class BuilderTextLabelCreator(BaseWidgetCreator, TransparencyMixin):
@@ -34,12 +28,12 @@ class BuilderTextLabelCreator(BaseWidgetCreator, TransparencyMixin):
     def _assemble_ui(self, parent_widget, config_data, context, **kwargs):
         """Assembles the Text Label UI elements."""
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬 Entering _assemble_ui with config: {config_data}", level="TRACE")
-        
+
         config = config_data
         label = get_text(config.get("label_active"), get_text(config.get("label"), "Label"))
         value = config.get("value", "")
         units = config.get("units", config.get("unit_text", ""))
-        
+
         # Robust Background Inheritance
         try:
             p_bg = parent_widget.cget("bg")
@@ -68,14 +62,14 @@ class BuilderTextLabelCreator(BaseWidgetCreator, TransparencyMixin):
 
         label_var = kwargs.get("variable") or tk.StringVar(master=parent_widget, value=label_text)
         sub_frame.variable = label_var
-        
+
         def redraw_canvas_text(*args):
             if not sub_frame.winfo_exists(): return
             sub_frame.delete("industrial_text")
             w = sub_frame.winfo_width()
             h = sub_frame.winfo_height()
             if w <= 1: return
-            
+
             txt = label_var.get()
             sub_frame.create_text(
                 5, h/2, text=txt, anchor="w",
@@ -86,10 +80,10 @@ class BuilderTextLabelCreator(BaseWidgetCreator, TransparencyMixin):
         # Sync background hook
         def sync_bg():
             redraw_canvas_text()
-        
+
         sub_frame._draw = sync_bg
         sub_frame.render = sync_bg
-        
+
         label_var.trace_add("write", redraw_canvas_text)
         sub_frame.bind("<Configure>", redraw_canvas_text, add="+")
 

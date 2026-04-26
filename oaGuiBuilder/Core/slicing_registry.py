@@ -5,14 +5,13 @@
 # Description: Orchestrates background-aware transparency slicing for widgets.
 # Handles batched reslicing, fold detection, and dynamic background updates.
 
-import tkinter as tk
-from oaLogging.Methods.matrix_gate import matrix_log
 from oaGuiBuilder.Constants.builder_constants import (
-    SLICING_REGEN_THRESHOLD, 
-    SLICING_POSITION_EPSILON, 
-    SLICING_DELAY_REBUILD, 
-    SLICING_DELAY_NORMAL
+    SLICING_DELAY_NORMAL,
+    SLICING_DELAY_REBUILD,
+    SLICING_POSITION_EPSILON,
 )
+from oaLogging.Methods.matrix_gate import matrix_log
+
 
 class BuilderSlicingRegistryMixin:
     """
@@ -24,7 +23,7 @@ class BuilderSlicingRegistryMixin:
         """Standard API for widgets to subscribe to background update notifications."""
         if not hasattr(self, '_slicing_registry'):
             self._slicing_registry = []
-            
+
         if callback not in self._slicing_registry:
             self._slicing_registry.append(callback)
             self._trigger_immediate_slice(callback)
@@ -34,7 +33,7 @@ class BuilderSlicingRegistryMixin:
         if hasattr(self, 'panel_bg_pil') and self.panel_bg_pil:
             try:
                 rx, ry = self.scroll_frame.winfo_rootx(), self.scroll_frame.winfo_rooty()
-                callback(source_bg_pil=self.panel_bg_pil, scroll_ref=self.scroll_frame, 
+                callback(source_bg_pil=self.panel_bg_pil, scroll_ref=self.scroll_frame,
                          scroll_root_x=rx, scroll_root_y=ry)
             except Exception:
                 pass
@@ -44,7 +43,7 @@ class BuilderSlicingRegistryMixin:
         if hasattr(self, '_reslice_trigger_id') and self._reslice_trigger_id:
             try: self.after_cancel(self._reslice_trigger_id)
             except Exception: pass
-        
+
         delay = SLICING_DELAY_REBUILD if getattr(self, '_is_rebuilding', False) else SLICING_DELAY_NORMAL
         self._reslice_trigger_id = self.after(delay, self._perform_batch_reslice)
 
@@ -52,7 +51,7 @@ class BuilderSlicingRegistryMixin:
         """Top-level batch reslice execution."""
         self._reslice_trigger_id = None
         if not self.winfo_exists(): return
-        
+
         # 1. Fold Detection and Background Alignment
         self._sync_background_folds()
 
@@ -65,7 +64,7 @@ class BuilderSlicingRegistryMixin:
         registry = getattr(self, '_slicing_registry', [])
         for callback in registry:
             try:
-                callback(source_bg_pil=bg_pil, scroll_ref=scroll_ref, 
+                callback(source_bg_pil=bg_pil, scroll_ref=scroll_ref,
                          scroll_root_x=root_x, scroll_root_y=root_y)
             except Exception as e:
                 matrix_log("ui", "gui_builder", "reslice", f"🧩🚫 Callback error: {e}", "TRACE")
@@ -85,7 +84,7 @@ class BuilderSlicingRegistryMixin:
         """Scans children for widgets defining a physical layout fold."""
         folds = []
         if not hasattr(self, 'scroll_frame'): return folds
-        
+
         s_ry = self.scroll_frame.winfo_rooty()
         wh = self.scroll_frame.winfo_height()
         if wh <= 0: return folds
@@ -94,7 +93,7 @@ class BuilderSlicingRegistryMixin:
             if self._is_fold_widget(child):
                 wy = child.winfo_rooty() + (child.winfo_height() / 2) - s_ry
                 folds.append({"position_pct": wy / wh, "orientation": "horizontal"})
-        
+
         folds.sort(key=lambda x: x["position_pct"])
         return folds
 
@@ -107,7 +106,7 @@ class BuilderSlicingRegistryMixin:
         """Determines if the detected folds differ from the current background configuration."""
         fold_params = bg_config.get("parameters", bg_config).get("metal_fold", {})
         existing = [c for c in fold_params.get("creases", []) if c.get('orientation') == 'horizontal']
-        
+
         if len(new_folds) != len(existing): return True
         for f, e in zip(new_folds, existing):
             if abs(f["position_pct"] - float(e["position_pct"])) > SLICING_POSITION_EPSILON:
@@ -119,12 +118,12 @@ class BuilderSlicingRegistryMixin:
         params = bg_config.get("parameters", bg_config)
         fold_p = params.get("metal_fold", {})
         fold_p["enabled"] = True
-        
+
         # Preserve vertical creases
         v_creases = [c for c in fold_p.get("creases", []) if c.get('orientation') == 'vertical']
         fold_p["creases"] = v_creases + folds
         params["metal_fold"] = fold_p
-        
+
         # Physical Regen
         w = max(self.scroll_frame.winfo_width(), self.scroll_frame.winfo_reqwidth())
         h = max(self.scroll_frame.winfo_height(), self.scroll_frame.winfo_reqheight())

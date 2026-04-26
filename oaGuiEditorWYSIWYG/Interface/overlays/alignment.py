@@ -5,11 +5,13 @@
 # Description: Brief summary of purpose
 
 import tkinter as tk
+
 from ...Core.state import state_manager
+
 
 def apply_design_overlay(layout, widget, path, is_focused, design_elements):
     """Handles LRCTB alignment indicators."""
-    
+
     alignment_handles = {}
     for d in ["L", "R", "C", "T", "B"]:
         lbl = tk.Label(widget.master, text=d, bg="#666666", fg="white", font=("Arial", 5, "bold"), cursor="hand2")
@@ -21,9 +23,9 @@ def apply_design_overlay(layout, widget, path, is_focused, design_elements):
         def _toggle(event, mode=d):
             full_path = f"{path}.layout.sticky"
             current = str(state_manager.get_value_at_path(full_path) or "").lower()
-            
+
             new_sticky = current
-            if mode == "L": 
+            if mode == "L":
                 if "w" in new_sticky: new_sticky = new_sticky.replace("w", "")
                 else: new_sticky += "w"
             elif mode == "R":
@@ -37,7 +39,7 @@ def apply_design_overlay(layout, widget, path, is_focused, design_elements):
                 else: new_sticky += "s"
             elif mode == "C":
                 new_sticky = ""
-            
+
             new_sticky = "".join(sorted(list(set(new_sticky))))
             state_manager.update_state(new_sticky.upper(), path=full_path, source=layout)
 
@@ -46,7 +48,7 @@ def apply_design_overlay(layout, widget, path, is_focused, design_elements):
     def sync(x, y, w, h):
         if layout.show_alignment.get():
             value = (state_manager.get_value_at_path(f"{path}.layout.sticky") or "").lower()
-            
+
             # Update colors based on state
             alignment_handles["L"].config(bg="#33A1FD" if "w" in value else "#666666")
             alignment_handles["R"].config(bg="#33A1FD" if "e" in value else "#666666")

@@ -4,10 +4,10 @@
 #
 # Description: Brief summary of purpose
 
+import sys
+
 import serial
 import serial.tools.list_ports
-import time
-import sys
 
 
 def select_serial_port():

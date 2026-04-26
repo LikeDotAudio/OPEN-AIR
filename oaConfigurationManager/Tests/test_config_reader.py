@@ -4,10 +4,12 @@
 #
 # Description: Brief summary of purpose
 
-import unittest
 import configparser
-from unittest.mock import patch, MagicMock
+import unittest
+from unittest.mock import patch
+
 from oaConfigurationManager.FileReaders.config_reader import Config
+
 
 class TestConfigReader(unittest.TestCase):
     def test_singleton_integrity(self):
@@ -24,11 +26,11 @@ class TestConfigReader(unittest.TestCase):
         mock_config.add_section("MQTT")
         mock_config.set("MQTT", "BROKER_ADDRESS", "10.0.0.1")
         mock_load.return_value = mock_config
-        
+
         config = Config.get_instance()
         # Manually trigger read_config logic
         config.read_config()
-        
+
         self.assertEqual(config.MQTT_BROKER_ADDRESS, "10.0.0.1")
 
 if __name__ == "__main__":

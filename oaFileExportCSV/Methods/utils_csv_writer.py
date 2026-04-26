@@ -8,14 +8,15 @@ current_version = "20250810.134500.1"  # this variable should always be defined 
 current_version_hash = 20250810 * 134500 * 1  # Example hash, adjust as needed
 
 import csv
-import os
 import inspect  # Import inspect module
+import os
+
 from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()  # Get the singleton instance
 # Updated imports for new logging functions
-from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
+
 LOCAL_DEBUG = False
 
 
@@ -92,7 +93,7 @@ def write_scan_data_to_csv(
                     version=current_version,
                     function=current_function,
                 )
-            raise IOError(f"Failed to create directory {output_dir}") from e
+            raise OSError(f"Failed to create directory {output_dir}") from e
 
     try:
         # Determine the mode and if header needs to be written
@@ -134,7 +135,7 @@ def write_scan_data_to_csv(
                 version=current_version,
                 function=current_function,
             )
-    except IOError as e:
+    except OSError as e:
         error_message = (
             f"❌ I/O Error writing to CSV file {file_path}: {e}. This is a disaster!"
         )

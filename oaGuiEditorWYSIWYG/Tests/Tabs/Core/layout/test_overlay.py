@@ -6,7 +6,7 @@
 # intercept standard mouse and keyboard events.
 
 import unittest
-from unittest.mock import MagicMock, call
+from unittest.mock import MagicMock
 
 # Placeholder for actual imports if classes were available in the project.
 # from oaGuiEditorWYSIWYG.Tabs.Core.layout.design_mode_overlay import DesignModeOverlay
@@ -88,7 +88,7 @@ class TestDesignModeOverlay(unittest.TestCase):
         preventing it from reaching the element behind it.
         """
         mock_event_data = {"x": 100, "y": 200, "button": "left"}
-        print(f"TEST: Starting test_overlay_intercepts_click_event")
+        print("TEST: Starting test_overlay_intercepts_click_event")
 
         # Simulate a click event occurring
         self.overlay.handle_event("click", mock_event_data)
@@ -98,7 +98,7 @@ class TestDesignModeOverlay(unittest.TestCase):
 
         # Assert that the element behind was NOT called for a click event
         self.mock_element_behind.click.assert_not_called()
-        print(f"TEST: Finished test_overlay_intercepts_click_event")
+        print("TEST: Finished test_overlay_intercepts_click_event")
 
 
     def test_overlay_intercepts_mousemove_event(self):
@@ -106,7 +106,7 @@ class TestDesignModeOverlay(unittest.TestCase):
         Verify that the Design Mode Overlay successfully intercepts mousemove events.
         """
         mock_event_data = {"x": 150, "y": 250, "dx": 5, "dy": 5}
-        print(f"TEST: Starting test_overlay_intercepts_mousemove_event")
+        print("TEST: Starting test_overlay_intercepts_mousemove_event")
 
         # Simulate a mousemove event occurring
         self.overlay.handle_event("mousemove", mock_event_data)
@@ -116,31 +116,31 @@ class TestDesignModeOverlay(unittest.TestCase):
 
         # Assert that the element behind was NOT called for a mousemove event
         self.mock_element_behind.mousemove.assert_not_called()
-        print(f"TEST: Finished test_overlay_intercepts_mousemove_event")
+        print("TEST: Finished test_overlay_intercepts_mousemove_event")
 
     def test_overlay_intercepts_mousedown_event(self):
         """
         Verify that the Design Mode Overlay successfully intercepts mousedown events.
         """
         mock_event_data = {"x": 120, "y": 220, "button": "right"}
-        print(f"TEST: Starting test_overlay_intercepts_mousedown_event")
+        print("TEST: Starting test_overlay_intercepts_mousedown_event")
 
         self.overlay.handle_event("mousedown", mock_event_data)
         self.overlay_mousedown_handler.assert_called_once_with(**mock_event_data)
         self.mock_element_behind.mousedown.assert_not_called()
-        print(f"TEST: Finished test_overlay_intercepts_mousedown_event")
+        print("TEST: Finished test_overlay_intercepts_mousedown_event")
 
     def test_overlay_intercepts_mouseup_event(self):
         """
         Verify that the Design Mode Overlay successfully intercepts mouseup events.
         """
         mock_event_data = {"x": 130, "y": 230, "button": "left"}
-        print(f"TEST: Starting test_overlay_intercepts_mouseup_event")
+        print("TEST: Starting test_overlay_intercepts_mouseup_event")
 
         self.overlay.handle_event("mouseup", mock_event_data)
         self.overlay_mouseup_handler.assert_called_once_with(**mock_event_data)
         self.mock_element_behind.mouseup.assert_not_called()
-        print(f"TEST: Finished test_overlay_intercepts_mouseup_event")
+        print("TEST: Finished test_overlay_intercepts_mouseup_event")
 
     # The instruction specifically mentioned mouse events, but including keypress for thoroughness.
     # If keypress is not considered a "standard mouse event", this test could be omitted.
@@ -149,13 +149,13 @@ class TestDesignModeOverlay(unittest.TestCase):
         Verify that the Design Mode Overlay successfully intercepts keypress events.
         """
         mock_event_data = {"key": "Delete", "ctrlKey": False}
-        print(f"TEST: Starting test_overlay_intercepts_keypress_event")
+        print("TEST: Starting test_overlay_intercepts_keypress_event")
 
         self.overlay.handle_event("keypress", mock_event_data) # Assuming keypress is also handled via this method for simplicity
         self.overlay_keypress_handler.assert_called_once_with(**mock_event_data)
         # No direct assertion for element_behind keypress as it's not a mouse event,
         # but the principle is the same: if overlay handles it, element behind doesn't.
-        print(f"TEST: Finished test_overlay_intercepts_keypress_event")
+        print("TEST: Finished test_overlay_intercepts_keypress_event")
 
     def test_overlay_passes_event_when_inactive(self):
         """
@@ -163,7 +163,7 @@ class TestDesignModeOverlay(unittest.TestCase):
         """
         mock_event_data = {"x": 300, "y": 400}
         self.overlay.set_active(False) # Deactivate the overlay
-        print(f"TEST: Starting test_overlay_passes_event_when_inactive")
+        print("TEST: Starting test_overlay_passes_event_when_inactive")
 
         # Simulate a click event occurring
         self.overlay.handle_event("click", mock_event_data)
@@ -173,4 +173,4 @@ class TestDesignModeOverlay(unittest.TestCase):
 
         # Assert that the element behind WAS called for a click event
         self.mock_element_behind.click.assert_called_once_with(**mock_event_data)
-        print(f"TEST: Finished test_overlay_passes_event_when_inactive")
+        print("TEST: Finished test_overlay_passes_event_when_inactive")

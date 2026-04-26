@@ -4,13 +4,13 @@
 #
 # Description: Integration test to publish, read, and clear MQTT messages.
 
-import unittest
-import time
-import socket
-import paho.mqtt.client as mqtt
-from unittest.mock import MagicMock
 import os
+import socket
 import sys
+import time
+import unittest
+
+import paho.mqtt.client as mqtt
 
 # Ensure project root is in path for MQTTSweeper
 project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -18,6 +18,7 @@ if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
 from oaTests.Workers.CleanupApps.ClearMQTT import MQTTSweeper
+
 
 def is_mqtt_broker_reachable(host="localhost", port=1883):
     """Check if the MQTT broker is reachable."""
@@ -96,7 +97,7 @@ class TestMQTTIntegration(unittest.TestCase):
         self.received_messages = []
         self.client.connect(self.host, self.port)
         self.client.subscribe(f"{self.test_topic_root}/#")
-        
+
         self.client.loop_start()
         time.sleep(1.5)
         self.client.loop_stop()

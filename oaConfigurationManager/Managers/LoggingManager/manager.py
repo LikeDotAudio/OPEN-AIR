@@ -15,7 +15,7 @@
 # Version 20260330.1200.1
 
 import threading
-from loguru import logger
+
 
 class LoggingMatrixManager:
     """
@@ -82,7 +82,7 @@ class LoggingMatrixManager:
                 config_obj = Config.get_instance()
             except Exception:
                 pass
-        
+
         # ⚡ ROBUSTNESS: Use defaults if config system is not yet ready
         # Default to False for high-traffic systems unless explicitly enabled
         self._matrix = getattr(config_obj, "DEBUG_MATRIX", {
@@ -93,25 +93,25 @@ class LoggingMatrixManager:
             "SYS_GUI": True
         }).copy()
 
-        
+
         m_funcs = getattr(config_obj, "MUTE_FUNCTIONS", "")
         f_funcs = getattr(config_obj, "FORCE_FUNCTIONS", "")
-        
+
         self._mute_functions = {f.strip() for f in m_funcs.split(",") if f.strip()}
         self._force_functions = {f.strip() for f in f_funcs.split(",") if f.strip()}
-        
+
         if config_obj and hasattr(config_obj, "ENABLE_DEBUG_MODE"):
-            # Sync the master killswitch with the global debug mode if not 
+            # Sync the master killswitch with the global debug mode if not
             # explicitly set
             if "MASTER_DEBUG_ENABLE" not in self._matrix:
                 self._matrix["MASTER_DEBUG_ENABLE"] = config_obj.ENABLE_DEBUG_MODE
 
         # ⚡ SYNC TO RUST: Push matrix state to high-speed Rust gates
-        from oaLogging.Methods.matrix_gate import sync_gate_to_rust, set_master_toggle
-        
+        from oaLogging.Methods.matrix_gate import set_master_toggle, sync_gate_to_rust
+
         master_enable = self._matrix.get("MASTER_DEBUG_ENABLE", True)
         set_master_toggle(master_enable)
-        
+
         # Iterate through all matrix entries and sync systems/elements
         for key, enabled in self._matrix.items():
             k_lower = key.lower()
@@ -122,17 +122,17 @@ class LoggingMatrixManager:
                 # We also sync elements directly if they are used as system names in matrix_log
                 element_name = k_lower[8:]
                 sync_gate_to_rust(system=element_name, enabled=enabled)
-            
+
             # Also sync the raw key just in case it's used directly
             sync_gate_to_rust(system=k_lower, enabled=enabled)
-        
+
         # Explicitly sync critical router sub-groups if defined in Config
         if hasattr(config_obj, "ROUTER_INGEST_LOGS"):
             # The router often uses "comms" as system and "router" as element
             sync_gate_to_rust(system="comms", element="router", enabled=config_obj.ROUTER_INGEST_LOGS)
             # And sometimes just "router" as system
             sync_gate_to_rust(system="router", enabled=config_obj.ROUTER_INGEST_LOGS)
-        
+
         if master_enable:
             # If master is ON, but specific systems are OFF, we need to ensure Rust knows.
             # config.ini had sys_comms = False and sys_core = False
@@ -140,7 +140,7 @@ class LoggingMatrixManager:
 
 
 
-    def is_debug_allowed(self, system: str, element: str = None, 
+    def is_debug_allowed(self, system: str, element: str = None,
                          func_name: str = None) -> bool:
         """
         Evaluates if a debug log is permitted based on the current matrix.
@@ -177,7 +177,7 @@ class LoggingMatrixManager:
             granular_key = f"{system.upper()}_{element.upper()}"
             if granular_key in self._matrix:
                 return self._matrix[granular_key]
-            
+
             # ⚡ MAPPING: matrix_log("gui", "builder", ...) -> GUI_BUILDER
             if system.upper() == "GUI" and not granular_key.startswith("GUI_"):
                  gui_key = f"GUI_{element.upper()}"
@@ -189,7 +189,7 @@ class LoggingMatrixManager:
             el_key = f"ELEMENT_{element.upper()}"
             if el_key in self._matrix:
                 return self._matrix[el_key]
-            
+
             # ⚡ MAPPING: If element is "mqtt", check if COMMS_MQTT is enabled
             if system and system.upper() == "COMMS":
                 c_key = f"COMMS_{element.upper()}"
@@ -201,7 +201,7 @@ class LoggingMatrixManager:
         sys_key = f"SYS_{system.upper()}"
         if sys_key in self._matrix:
             return self._matrix[sys_key]
-            
+
         # 6. Fallback: If 'system' is used directly as a key (e.g., GUI_MANAGER)
         if system:
             s_key = system.upper()

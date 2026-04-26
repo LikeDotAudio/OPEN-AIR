@@ -1,7 +1,7 @@
 from ...ocp1.ocalist2d import OcaList2D
+from ...ocp1.ocauint8 import OcaUint8
 from ...ocp1.ocauint16 import OcaUint16
 from ...ocp1.ocauint32 import OcaUint32
-from ...ocp1.ocauint8 import OcaUint8
 from ..make_control_class import make_control_class
 from .ocaworker import OcaWorker
 

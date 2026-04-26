@@ -2,19 +2,21 @@
 # Author: Anthony Peter Kuzub
 # Version: 20260414.1000.1
 #
-# Description: Unit tests for RESTManager ensuring Hub-and-Spoke integrity, 
+# Description: Unit tests for RESTManager ensuring Hub-and-Spoke integrity,
 # anti-feedback, and standardized standalone behavior.
 
+import sys
 import unittest
 from unittest.mock import MagicMock, patch
 
-import sys
 sys.path.insert(0, '/home/anthony/Documents/OPEN-AIR')
 
 # Note: These tests require 'fastapi' and 'httpx' to be installed.
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
+
 from oaComProtocols.oaComREST.Interface.routes import create_router
+
 DEPENDENCIES_AVAILABLE = True
 
 class TestRESTProtocol(unittest.TestCase):
@@ -27,10 +29,10 @@ class TestRESTProtocol(unittest.TestCase):
         """BUILD: Initialize mock environment and FastAPI client."""
         if not DEPENDENCIES_AVAILABLE:
             self.skipTest("FastAPI or TestClient not installed")
-            
+
         self.mock_state_cache = MagicMock()
         self.mock_router = MagicMock()
-        
+
         # Setup FastAPI app with our router
         self.app = FastAPI()
         self.app.include_router(create_router(self.mock_state_cache, self.mock_router))
@@ -40,10 +42,10 @@ class TestRESTProtocol(unittest.TestCase):
         """OPERATE: Simulate incoming REST data (Spoke -> Hub)."""
         test_topic = "Audio/Fader/1"
         test_val = 0.5
-        
+
         # OPERATE
         response = self.client.post(f"/{test_topic}", json={"value": test_val})
-        
+
         # CHECK: Data normalized and sent to Hub (ProtocolRouter)
         self.assertEqual(response.status_code, 200)
         self.mock_router.ingest.assert_called_with(
@@ -56,10 +58,10 @@ class TestRESTProtocol(unittest.TestCase):
         """OPERATE: Simulate Spoke reading from Hub."""
         test_topic = "Audio/Mute"
         self.mock_state_cache.get_cached_value.return_value = True
-        
+
         # OPERATE
         response = self.client.get(f"/{test_topic}")
-        
+
         # CHECK: Correct value returned from Hub state
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()["value"], True)
@@ -72,10 +74,10 @@ class TestRESTProtocol(unittest.TestCase):
             mock_inst.protocols = ["MQTT", "REST", "CUSTOM"]
             mock_inst.GUID = "TEST-GUID"
             mock_get.return_value = mock_inst
-            
+
             # OPERATE
             response = self.client.get("/api/v1/system/status")
-            
+
             # CHECK
             self.assertEqual(response.status_code, 200)
             data = response.json()

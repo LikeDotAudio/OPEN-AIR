@@ -4,10 +4,12 @@
 #
 # Description: Brief summary of purpose
 
-import unittest
-from unittest.mock import MagicMock, patch
 import tkinter as tk
+import unittest
+from unittest.mock import MagicMock
+
 from oaGuiElements.Core.text.text_table.Core.text_table import BuilderTextTableCreator
+
 
 class TestTextTable(unittest.TestCase):
     def setUp(self):
@@ -16,7 +18,7 @@ class TestTextTable(unittest.TestCase):
             self.root.withdraw()
         except:
             self.root = MagicMock()
-        
+
         self.config = {
             "label_active": "Test Table",
             "path": "test/table",
@@ -25,7 +27,7 @@ class TestTextTable(unittest.TestCase):
         }
         self.mirror_engine = MagicMock()
         self.mirror_engine.calculate_topic.return_value = "test/topic"
-        
+
         self.context = MagicMock()
         self.context.state_mirror_engine = self.mirror_engine
         self.context.base_mqtt_topic_from_path = "test/base"
@@ -36,14 +38,14 @@ class TestTextTable(unittest.TestCase):
         """Goal: Verify that BuilderTextTableCreator creates a table widget."""
         # BUILD
         creator = BuilderTextTableCreator()
-        
+
         # OPERATE
         table_widget = creator.make_text_table(
             parent_widget=self.root,
             config_data=self.config,
             context=self.context
         )
-        
+
         # CHECK
         self.assertIsInstance(table_widget, tk.Canvas)
         self.mirror_engine.register_widget.assert_called()

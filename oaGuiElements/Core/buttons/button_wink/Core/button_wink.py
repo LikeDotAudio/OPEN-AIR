@@ -4,31 +4,28 @@
 #
 # Description: Brief summary of purpose
 
-import tkinter as tk
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
-from tkinter import ttk
-
-# --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
-from loguru import logger
+import tkinter as tk
 
 from oaConfigurationManager.FileReaders.config_reader import Config
 
+# --- Standard Debug Logging Setup ---
+from oaLogging.Methods.matrix_gate import matrix_log
+
 app_constants = Config.get_instance()
 
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 from oaGui.Methods.i18n_utils import get_text
+from oaGuiBuilder.Core.base_widget_creator import BaseWidgetCreator
 from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
+from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 
 # Core Modules
-from ..wink_config import extract_wink_config
-from ..wink_state import create_wink_state
-from ..wink_physics import update_physics, blink_loop
-from ..wink_renderer import draw_wink_visuals
-from ..wink_events import bind_wink_events
+from .wink_config import extract_wink_config
+from .wink_events import bind_wink_events
+from .wink_physics import blink_loop, update_physics
+from .wink_renderer import draw_wink_visuals
+from .wink_state import create_wink_state
 
-from oaGuiBuilder.Core.base_widget_creator import BaseWidgetCreator
 
 @WidgetRegistry.register("_WinkButton")
 class BuilderButtonWinkCreator(BaseWidgetCreator, TransparencyMixin):
@@ -40,13 +37,13 @@ class BuilderButtonWinkCreator(BaseWidgetCreator, TransparencyMixin):
 
     def _assemble_ui(self, parent_widget, config_data, context, **kwargs):
         """Assembles the Wink Button UI elements."""
-        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️🔘 [BUILDER] Entering _assemble_ui", level="TRACE")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🔬🏗️🔘 [BUILDER] Entering _assemble_ui", level="TRACE")
 
         # 1. Extract Config
         config = extract_wink_config(config_data)
         path = config_data.get("path")
         label = get_text(config_data.get('label_active'))
-        
+
         builder_instance = getattr(context, 'builder_instance', None) or kwargs.get('builder_instance') or self
         state_mirror_engine = getattr(context, 'state_mirror_engine', None) or kwargs.get('state_mirror_engine')
         subscriber_router = getattr(context, 'subscriber_router', None) or kwargs.get('subscriber_router')
@@ -63,36 +60,36 @@ class BuilderButtonWinkCreator(BaseWidgetCreator, TransparencyMixin):
 
         # 4. Container Frame
         frame = tk.Canvas(parent_widget, bd=0, highlightthickness=0, relief="flat", width=config["width"], height=config["height"])
-        frame.is_locked = False 
+        frame.is_locked = False
         frame.variable = value_var # Attach variable for BaseWidgetCreator to find it
-        
+
         # 6. Canvas (Inner drawing)
         canvas = tk.Canvas(
-            frame, 
-            width=config["width"], 
-            height=config["height"], 
-            bg=config["bezel_color"], 
+            frame,
+            width=config["width"],
+            height=config["height"],
+            bg=config["bezel_color"],
             highlightthickness=0,
             bd=0,
             relief="flat"
         )
         canvas.place(x=0, y=0)
-        
+
         # 7. Transparency
         if hasattr(builder_instance, '_apply_transparency'):
             builder_instance._apply_transparency(frame, canvas, config_data, builder_instance)
             builder_instance._apply_transparency(frame, frame, config_data, builder_instance)
-        
+
         def draw_visuals_callback():
             if hasattr(builder_instance, "is_visible") and not builder_instance.is_visible:
                 return
             draw_wink_visuals(canvas, state, config, label)
-            
+
         def sync_bg():
             draw_visuals_callback()
-        
+
         frame._draw = sync_bg
-        
+
         # 8. Events and Physics
         state["_last_value"] = value_var.get()
 
@@ -111,7 +108,7 @@ class BuilderButtonWinkCreator(BaseWidgetCreator, TransparencyMixin):
             else:
                 state["is_blinking_active"] = False
                 state["target_open"] = 1.0 if new_val else 0.0
-            
+
             if config["is_latching"] and not state["is_pressed"]:
                 state["is_latched"] = new_val
 
@@ -124,7 +121,7 @@ class BuilderButtonWinkCreator(BaseWidgetCreator, TransparencyMixin):
                  state_mirror_engine.broadcast_gui_change_to_mqtt(path, extra_payload=extra)
 
         value_var.trace_add("write", on_value_change)
-        
+
         # Initial Animation Setup
         if value_var.get() and config["blink_interval"] > 0:
              if not state.get("is_blinking_active"):
@@ -136,7 +133,7 @@ class BuilderButtonWinkCreator(BaseWidgetCreator, TransparencyMixin):
                 state["is_locked"] = data["LOCKED"]
                 draw_visuals_callback()
 
-        # Note: MQTT registration is now partially handled by BaseWidgetCreator, 
+        # Note: MQTT registration is now partially handled by BaseWidgetCreator,
         # but we keep custom callback logic here if needed.
         # Actually, BaseWidgetCreator doesn't support custom update_callback yet.
         # I'll let BaseWidgetCreator handle the basics and we can override if needed.

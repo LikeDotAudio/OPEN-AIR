@@ -26,7 +26,7 @@ class FastScanner:
         self._scanner = None
         if not HAS_RUST:
             return
-        
+
         try:
             self._scanner = RustFastScanner()
         except Exception as e:
@@ -42,7 +42,7 @@ class FastScanner:
                 return self._scanner.scan_directory(root_path, extension or "")
             except Exception as e:
                 logging.error(f"❌ [GUI_MANAGER] Rust scanning failed: {e}")
-        
+
         # Python fallback (Simple recursive scan)
         import pathlib
         path = pathlib.Path(root_path)

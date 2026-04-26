@@ -4,26 +4,22 @@
 #
 # Description: This manager provides a safe, low-level interface for executing SCPI write
 
-import os
 import inspect
-import pyvisa
-import orjson
-import time
 import queue
 import threading
-import _queue
-from oaComProtocols.oaComMQTT.Core.mqtt_message import MqttMessage
+import time
 
 # --- Standard OPEN-AIR Logging ---
 from loguru import logger
-from oaLogging.Methods.matrix_gate import matrix_log
 
+from oaComProtocols.oaComMQTT.Core.mqtt_message import MqttMessage
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
-from .visa_safe_writer import write_safe
 from .visa_safe_query import query_safe
+from .visa_safe_writer import write_safe
 
 
 class VisaProxy:
@@ -44,7 +40,7 @@ class VisaProxy:
         """
         current_function_name = inspect.currentframe().f_code.co_name
         matrix_log("comms", "visa", current_function_name, f"💳 🟢️️️🟢 ➡️➡️ {current_function_name}. The grand SCPI experiment begins!", "DEBUG")
-        
+
         # ⚡ PRECONDITION VALIDATION
         if not mqtt_controller or not subscriber_router:
             logger.error(f"💳 ❌ Critical: Missing MQTT controller or router in {current_function_name}")
@@ -106,9 +102,9 @@ class VisaProxy:
             if self.command_queue.empty():
                 time.sleep(0.1)
                 continue
-                
+
             command_info = self.command_queue.get()
-            
+
             if command_info is None: # The Poison Pill
                 break
 
@@ -129,7 +125,7 @@ class VisaProxy:
                 )
             finally:
                 self.command_queue.task_done()
-            
+
         matrix_log("comms", "visa", "_command_processor_worker", "💳 ℹ️ Proxy Log: VisaProxy command processor worker terminated.", "DEBUG")
 
 
@@ -219,7 +215,7 @@ class VisaProxy:
         - Manages the lifecycle of the background worker thread.
         """
         current_function_name = inspect.currentframe().f_code.co_name
-        matrix_log("comms", "visa", current_function_name, f"💳 🟢️️️🔵 Received new instrument instance. It's now my time to shine!", "DEBUG")
+        matrix_log("comms", "visa", current_function_name, "💳 🟢️️️🔵 Received new instrument instance. It's now my time to shine!", "DEBUG")
         self.inst = inst
         if self.inst:
             self.inst.timeout = 5000
@@ -247,7 +243,7 @@ class VisaProxy:
         """
         current_function_name = inspect.currentframe().f_code.co_name
         matrix_log("comms", "visa", current_function_name, "💳 ℹ️ Proxy Log: Attempting a system-wide reset!", "DEBUG")
-        
+
         logger.warning("💳 ℹ️ Proxy Log: ⚠️ Command failed. Attempting to reset the instrument with '*RST'...")
         reset_success = self.write_safe(command="*RST")
 

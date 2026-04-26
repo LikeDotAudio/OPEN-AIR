@@ -4,10 +4,12 @@
 #
 # Description: Brief summary of purpose
 
+import tkinter as tk
 import unittest
 from unittest.mock import MagicMock, patch
-import tkinter as tk
-from oaGuiElements.Core.faders.fader_dual.Core.fader_dual import CustomDualFaderFrame, BuilderFaderDualCreator
+
+from oaGuiElements.Core.faders.fader_dual.Core.fader_dual import BuilderFaderDualCreator, CustomDualFaderFrame
+
 
 class TestFaderDual(unittest.TestCase):
     def setUp(self):
@@ -19,18 +21,18 @@ class TestFaderDual(unittest.TestCase):
             self.root = MagicMock()
             self.root.winfo_exists.return_value = True
             self.root.cget.return_value = "#2b2b2b"
-            
+
             MODULE = 'oaGuiElements.Core.faders.fader_dual.Core.fader_dual'
             self.patchers.append(patch(f'{MODULE}.tk.DoubleVar'))
             self.patchers.append(patch(f'{MODULE}.tk.Canvas'))
             self.patchers.append(patch(f'{MODULE}.tk.Frame'))
-            
+
             for p in self.patchers:
                 mock_cls = p.start()
                 if hasattr(mock_cls, 'return_value'):
                     mock_cls.return_value.winfo_exists.return_value = True
                     mock_cls.return_value.cget.return_value = "#2b2b2b"
-        
+
         self.config = {
             "label_active": "Test Dual Fader",
             "path": "test/dual_fader",
@@ -39,7 +41,7 @@ class TestFaderDual(unittest.TestCase):
         }
         self.mirror_engine = MagicMock()
         self.router = MagicMock()
-        
+
         self.context = MagicMock()
         self.context.state_mirror_engine = self.mirror_engine
         self.context.subscriber_router = self.router

@@ -1,16 +1,18 @@
 import os
+
 project_root = os.getcwd()
 
 import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
+import logging
+
 # oaTests/Workers/CleanupApps/Clear_audits.py
 # Author: Anthony Peter Kuzub
 # Version: 20260323.2030.1
 #
 # Description: Maintenance script to purge all system audit logs.
-
 import shutil
-import logging
+
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # Configure standard logging
 logging.basicConfig(
@@ -23,9 +25,9 @@ logger = logging.getLogger("AuditCleanup")
 def cleanup_audits():
     """Purges all files from the audit data directory."""
     target = os.path.join(project_root, "oaDataLogs/Audits")
-    
-    matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"📡📤📤 [CLEAR_AUDITS] Starting System Audit cleanup...", "INFO")
-    
+
+    matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "📡📤📤 [CLEAR_AUDITS] Starting System Audit cleanup...", "INFO")
+
     if os.path.exists(target):
         items_purged = 0
         try:
@@ -42,7 +44,7 @@ def cleanup_audits():
                         items_purged += 1
                 except Exception as e:
                     logger.error(f"   ⚠️ Failed to delete {file_path}. Reason: {e}")
-            
+
             if items_purged > 0:
                 matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"   ✅ Purged {items_purged} items from: {os.path.relpath(target, project_root)}", "INFO")
             else:
@@ -52,7 +54,7 @@ def cleanup_audits():
     else:
         logger.warning(f"   ⚠️ Directory not found: {os.path.relpath(target, project_root)}")
 
-    matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"📡📤📤 [CLEAR_AUDITS] System Audit cleanup complete.", "INFO")
+    matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "📡📤📤 [CLEAR_AUDITS] System Audit cleanup complete.", "INFO")
 
 if __name__ == "__main__":
     cleanup_audits()

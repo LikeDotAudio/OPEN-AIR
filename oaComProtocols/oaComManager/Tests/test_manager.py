@@ -5,7 +5,9 @@
 # Description: Basic sanity test for ComProtocolManager.
 
 import unittest
+
 from oaComProtocols.oaComManager.Managers.manager import ComProtocolManager
+
 
 class TestComProtocolManagerSanity(unittest.TestCase):
     def test_singleton_instance(self):

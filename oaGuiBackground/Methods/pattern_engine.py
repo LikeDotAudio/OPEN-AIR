@@ -5,6 +5,7 @@
 # Description: Python wrapper for the Rust Pattern Engine.
 
 import logging
+
 from PIL import Image
 
 try:

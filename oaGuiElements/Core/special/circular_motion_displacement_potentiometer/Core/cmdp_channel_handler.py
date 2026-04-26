@@ -1,12 +1,12 @@
 # circular_motion_displacement_potentiometer/cmdp_channel_handler.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: Brief summary of purpose
 
-import tkinter as tk
 import math
+import tkinter as tk
+
 from loguru import logger
 
 try:
@@ -38,12 +38,12 @@ class CMDP_LTPObject:
     Handles rendering and interaction for a single fader in the CMDP array.
     Refactored for Modular SRP: Separates Coordinate Math from Canvas Rendering.
     """
-    def __init__(self, canvas, widget_id, color, group_idx, label, 
+    def __init__(self, canvas, widget_id, color, group_idx, label,
                  val_var, rot_var, angle_var, mute_var, on_change_cb, widget_ref):
         self.canvas, self.widget_id, self.color_highlight, self.group_index, self.label = canvas, widget_id, color, group_idx, label
         self.on_change_cb, self.widget_ref = on_change_cb, widget_ref
         self.val_var, self.rot_var, self.angle_var, self.mute_var = val_var, rot_var, angle_var, mute_var
-        
+
         self.group_name = "Default"
         self.x, self.y, self.track_len = 0, 0, DEFAULT_TRACK_LENGTH
         self.visible, self.val_min, self.val_max, self.rot_min, self.rot_max = True, 0.0, PERCENT_MAX, 0.0, PERCENT_MAX
@@ -51,13 +51,13 @@ class CMDP_LTPObject:
         self.tag_root = f"cmdp_fader_{self.widget_id}"
         self.dragging, self.hovered = False, False
         self.start_x, self.start_y, self.start_val, self.start_rot = 0, 0, 0, 0
-        
+
         # Local traces for visual updates
         self.val_var.trace_add("write", lambda *a: self.render_fader_visuals())
         self.rot_var.trace_add("write", lambda *a: self.render_fader_visuals())
         self.angle_var.trace_add("write", lambda *a: self.update_position_and_render())
         self.mute_var.trace_add("write", lambda *a: self.render_fader_visuals())
-        
+
         self.update_position()
         self.render_fader_visuals()
 
@@ -84,7 +84,7 @@ class CMDP_LTPObject:
         """
         # SRP REFACTOR: Step 1 - Recompute geometry
         self.update_position()
-        
+
         # SRP REFACTOR: Step 2 - Push to canvas
         self.render_fader_visuals()
 
@@ -100,7 +100,7 @@ class CMDP_LTPObject:
         """
         self.canvas.delete(self.tag_root)
         if not self.visible or self.mute_var.get(): return
-        
+
         try:
             ang, val_curr, rot_curr = float(self.angle_var.get()), float(self.val_var.get()), float(self.rot_var.get())
         except Exception as e:
@@ -118,31 +118,31 @@ class CMDP_LTPObject:
                 "far_radius": self.widget_ref.far_radius, "label_offset_base": LABEL_OFFSET_BASE, "label_offset_step": LABEL_OFFSET_STEP,
                 "widget_id": self.widget_id
             })
-            
+
             # Hitbox
             self.canvas.create_polygon(geo["hitbox"], fill="", outline="", tags=(self.tag_root, "hitbox"))
-            
+
             # Track & Ticks
             self.canvas.create_line(geo["track"], fill="#000000", width=TRACK_WIDTH_OUTER, capstyle=tk.ROUND, tags=self.tag_root)
             self.canvas.create_line(geo["track"], fill="#222222", width=TRACK_WIDTH_INNER, capstyle=tk.ROUND, tags=self.tag_root)
-            
+
             ticks = geo["ticks"]
             for i in range(0, len(ticks), 4):
                 self.canvas.create_line(ticks[i], ticks[i+1], ticks[i+2], ticks[i+3], fill="#888888", width=TRACK_WIDTH_INNER, tags=self.tag_root)
-                
+
             # Cap & Potentiometer
             cap_center_x, cap_center_y = geo["cap_center"]
             radius = CAP_RADIUS
             is_active = self.dragging or self.hovered
             outline_color, fill_color = (self.cap_outline_hover if is_active else self.cap_outline_normal), ("#555555" if is_active else self.cap_color)
             self.canvas.create_oval(cap_center_x-radius, cap_center_y-radius, cap_center_x+radius, cap_center_y+radius, fill=fill_color, outline=outline_color, width=2, tags=(self.tag_root, "cap"))
-            
-            self.canvas.create_arc(cap_center_x-radius+5, cap_center_y-radius+5, cap_center_x+radius-5, cap_center_y+radius-5, 
-                                  start=POTENTIOMETER_START_ANGLE, extent=-(POTENTIOMETER_START_ANGLE - geo["pot_degree"]), 
+
+            self.canvas.create_arc(cap_center_x-radius+5, cap_center_y-radius+5, cap_center_x+radius-5, cap_center_y+radius-5,
+                                  start=POTENTIOMETER_START_ANGLE, extent=-(POTENTIOMETER_START_ANGLE - geo["pot_degree"]),
                                   style=tk.ARC, outline=self.color_highlight, width=4, tags=self.tag_root)
-            
+
             self.canvas.create_line(geo["pointer"], fill=self.color_highlight, width=3, tags=self.tag_root)
-            
+
             # Label
             label_x, label_y = geo["label_pos"]
             if is_active:
@@ -150,21 +150,21 @@ class CMDP_LTPObject:
                 font_spec = ("Arial", 12, "bold")
             else:
                 font_spec = ("Arial", 10)
-            
+
             self.canvas.create_text(label_x, label_y, text=self.label, fill=self.color_highlight, font=font_spec, tags=self.tag_root)
             return
 
         center_x, center_y = self.x, self.y
         track_length, t_ang_rad = self.track_len, math.radians(ang + 90)
         cos_t, sin_t = math.cos(t_ang_rad), math.sin(t_ang_rad)
-        
+
         # Hitbox (for click detection)
         hitbox_width = HITBOX_WIDTH
         hitbox_points = [self.calculate_rotated_point(center_x - hitbox_width/2.0, center_y - track_length/2.0 - HITBOX_PADDING, center_x, center_y, cos_t, sin_t),
                self.calculate_rotated_point(center_x + hitbox_width/2.0, center_y - track_length/2.0 - HITBOX_PADDING, center_x, center_y, cos_t, sin_t),
                self.calculate_rotated_point(center_x + hitbox_width/2.0, center_y + track_length/2.0 + HITBOX_PADDING, center_x, center_y, cos_t, sin_t),
                self.calculate_rotated_point(center_x - hitbox_width/2.0, center_y + track_length/2.0 + HITBOX_PADDING, center_x, center_y, cos_t, sin_t)]
-        
+
         flat_hitbox_points = [coord for point in hitbox_points for coord in point]
         self.canvas.create_polygon(flat_hitbox_points, fill="", outline="", tags=(self.tag_root, "hitbox"))
 
@@ -173,7 +173,7 @@ class CMDP_LTPObject:
         track_end = self.calculate_rotated_point(center_x, center_y + track_length/2.0, center_x, center_y, cos_t, sin_t)
         self.canvas.create_line(track_start, track_end, fill="#000000", width=TRACK_WIDTH_OUTER, capstyle=tk.ROUND, tags=self.tag_root)
         self.canvas.create_line(track_start, track_end, fill="#222222", width=TRACK_WIDTH_INNER, capstyle=tk.ROUND, tags=self.tag_root)
-        
+
         # Batch draw ticks (Reduced complexity)
         for i in range(TICK_COUNT):
             local_y = (-track_length/2.0) + ((i/TICK_DIVISOR) * track_length)
@@ -186,19 +186,19 @@ class CMDP_LTPObject:
         v_norm = (val_curr - self.val_min) / denom if denom != 0.0 else 0
         cap_center_x, cap_center_y = self.calculate_rotated_point(center_x, center_y + (-track_length/2.0) + (v_norm * track_length), center_x, center_y, cos_t, sin_t)
         radius = CAP_RADIUS
-        
+
         is_active = self.dragging or self.hovered
         outline_color, fill_color = (self.cap_outline_hover if is_active else self.cap_outline_normal), ("#555555" if is_active else self.cap_color)
         self.canvas.create_oval(cap_center_x-radius, cap_center_y-radius, cap_center_x+radius, cap_center_y+radius, fill=fill_color, outline=outline_color, width=2, tags=(self.tag_root, "cap"))
-        
+
         # Fixed South orientation for pot gap
         pot_degree = POTENTIOMETER_START_ANGLE - (rot_curr / PERCENT_MAX) * POTENTIOMETER_EXTENT_MAX
         self.canvas.create_arc(cap_center_x-radius+5, cap_center_y-radius+5, cap_center_x+radius-5, cap_center_y+radius-5, start=POTENTIOMETER_START_ANGLE, extent=-(POTENTIOMETER_START_ANGLE-pot_degree), style=tk.ARC, outline=self.color_highlight, width=4, tags=self.tag_root)
-        
+
         pot_rad = math.radians(pot_degree)
-        pointer_x, pointer_y = cap_center_x + (radius-2) * math.cos(pot_rad), cap_center_y - (radius-2) * math.sin(pot_rad) 
+        pointer_x, pointer_y = cap_center_x + (radius-2) * math.cos(pot_rad), cap_center_y - (radius-2) * math.sin(pot_rad)
         self.canvas.create_line(cap_center_x, cap_center_y, pointer_x, pointer_y, fill=self.color_highlight, width=3, tags=self.tag_root)
-        
+
         # Label logic
         global_center_x, global_center_y = self.widget_ref.center_x, self.widget_ref.center_y
         if is_active:
@@ -207,7 +207,7 @@ class CMDP_LTPObject:
             label_dist = self.widget_ref.far_radius + LABEL_OFFSET_BASE + (self.widget_id % 2) * LABEL_OFFSET_STEP
             label_rad = math.radians(ang)
             label_x, label_y, font_spec = global_center_x + label_dist * math.cos(label_rad), global_center_y + label_dist * math.sin(label_rad), ("Arial", 10)
-            
+
         self.canvas.create_text(label_x, label_y, text=self.label, fill=self.color_highlight, font=font_spec, tags=self.tag_root)
 
     def set_hover(self, state):

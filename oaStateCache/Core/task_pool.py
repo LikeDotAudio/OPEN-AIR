@@ -23,7 +23,7 @@ class TaskPool:
     def __init__(self, num_threads=None):
         if num_threads is None:
             num_threads = multiprocessing.cpu_count()
-            
+
         if HAS_RUST:
             if LOCAL_DEBUG:
                 print(f"⚙️🛠️🔗 [TRANSLATOR] Using PURE RUST task pool ({num_threads} threads).")

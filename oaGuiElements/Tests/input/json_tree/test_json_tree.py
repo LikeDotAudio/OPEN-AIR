@@ -4,10 +4,12 @@
 #
 # Description: Brief summary of purpose
 
+import tkinter as tk
 import unittest
 from unittest.mock import MagicMock, patch
-import tkinter as tk
+
 from oaGuiElements.Core.input.json_tree.Core.json_tree import BuilderDataJsonTreeCreator, JsonTreeWidget
+
 
 class TestJsonTree(unittest.TestCase):
 
@@ -19,13 +21,13 @@ class TestJsonTree(unittest.TestCase):
         except:
             self.root = MagicMock()
             self.root.winfo_exists.return_value = True
-            
+
             # Patch variables if Tk fails
             self.patchers.append(patch("tkinter.StringVar", return_value=MagicMock()))
             self.patchers.append(patch("tkinter.DoubleVar", return_value=MagicMock()))
             self.patchers.append(patch("tkinter.BooleanVar", return_value=MagicMock()))
             self.patchers.append(patch("tkinter.IntVar", return_value=MagicMock()))
-            
+
             self.patchers.append(patch('tkinter.ttk.Treeview', return_value=MagicMock()))
             self.patchers.append(patch('tkinter.ttk.Scrollbar', return_value=MagicMock()))
             self.patchers.append(patch('tkinter.Canvas', return_value=MagicMock()))

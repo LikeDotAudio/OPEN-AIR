@@ -1,16 +1,14 @@
 
-import sys
-import os
 import pathlib
-import unittest
-import io
+import sys
 
 # Setup environment
 project_root = pathlib.Path(__file__).resolve().parent.parent.parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
-from oaLogging.Entry import initialize_test_logging, TEST_LOGGER
+from oaLogging.Entry import TEST_LOGGER, initialize_test_logging
+
 test_log_dir = project_root / "oaDataLogs" / "TestLog"
 path = initialize_test_logging(str(test_log_dir))
 print(f"DEBUG: initialize_test_logging returned: {path}")

@@ -2,14 +2,17 @@
 # Centralized engine for Industrial Transparency.
 
 import tkinter as tk
-from loguru import logger
+
 from PIL import ImageTk
+
 from oaLogging.Methods.matrix_gate import matrix_log
 from oaStyle.Constants.geometry import (
-    MIN_WIDGET_DIMENSION, PRE_LAYOUT_DIMENSION_LIMIT, JITTER_THRESHOLD_PIXELS,
-    CENTER_SAMPLE_DIVISOR, STRUCTURAL_WIDGET_TYPES, THEME_BACKGROUND_COLORS,
-    DEFAULT_THEME_BACKGROUND
+    DEFAULT_THEME_BACKGROUND,
+    PRE_LAYOUT_DIMENSION_LIMIT,
+    STRUCTURAL_WIDGET_TYPES,
+    THEME_BACKGROUND_COLORS,
 )
+
 
 class TransparencyConfig:
     @staticmethod
@@ -19,24 +22,24 @@ class TransparencyConfig:
             style_settings = configuration.get("style", {})
             if isinstance(style_settings, dict):
                 background_color = style_settings.get("background_color") or style_settings.get("bg_color") or style_settings.get("bg")
-        
+
         is_structural_type = any(configuration.get(key) in STRUCTURAL_WIDGET_TYPES for key in ["type", "widget_type"])
         is_virtual_container = is_structural_type and isinstance(widget, tk.Canvas)
-        
+
         background_string = str(background_color).lower() if background_color else ""
-        
+
         # Keywords that explicitly signal transparency
         trans_keywords = ["transparent", "none", "match_theme"]
-        
-        is_explicitly_solid = (background_color and 
-                               background_string not in THEME_BACKGROUND_COLORS and 
+
+        is_explicitly_solid = (background_color and
+                               background_string not in THEME_BACKGROUND_COLORS and
                                background_string not in trans_keywords)
-        
+
         is_explicitly_transparent = (background_string in trans_keywords) or \
                                     (configuration.get("transparent") is True) or \
                                     is_virtual_container or \
                                     is_structural_type
-                                    
+
         return background_string, is_explicitly_solid, is_explicitly_transparent
 
 class BackgroundSlicer:
@@ -48,10 +51,10 @@ class BackgroundSlicer:
 
     def perform_slice(self, source_bg_pil=None, scroll_ref=None, scroll_root_x=None, scroll_root_y=None):
         if not self.widget.winfo_exists(): return False
-        
+
         rendering_target = self.canvas if self.canvas and self.canvas.winfo_exists() else self.widget
         background_source = source_bg_pil or getattr(self.builder, 'panel_bg_pil', None)
-        
+
         if not background_source:
             # [ ... rest of the existing fallback logic remains mostly same but using the same improved color check ...]
             background_config = getattr(self.builder, 'config_data', {}).get("background")
@@ -63,7 +66,7 @@ class BackgroundSlicer:
             theme_background = DEFAULT_THEME_BACKGROUND
             if hasattr(self.builder, 'theme_colors'):
                 theme_background = self.builder.theme_colors.get("bg", theme_background)
-            
+
             try:
                 if self.widget.winfo_exists() and self.widget.cget("bg") != theme_background:
                     self.widget.configure(bg=theme_background)
@@ -75,7 +78,7 @@ class BackgroundSlicer:
         # ⚡ PIXEL-PERFECT COORDINATE CALCULATION
         # winfo_rootx/y returns 0 for unmapped widgets. We traverse up to the scroll_frame
         # to calculate absolute offsets that are stable during the build phase.
-        
+
         container_ref = scroll_ref or getattr(self.builder, 'scroll_frame', None)
         if not container_ref or not container_ref.winfo_exists(): return False
 
@@ -93,39 +96,39 @@ class BackgroundSlicer:
         relative_x, relative_y = get_relative_pos(rendering_target, container_ref)
         current_width = rendering_target.winfo_width()
         current_height = rendering_target.winfo_height()
-        
+
         # If dimensions are 1x1 or less, we use requested size as a hint for early slicing
         if current_width <= 1: current_width = rendering_target.winfo_reqwidth()
         if current_height <= 1: current_height = rendering_target.winfo_reqheight()
-        
-        if current_width <= PRE_LAYOUT_DIMENSION_LIMIT or current_height <= PRE_LAYOUT_DIMENSION_LIMIT: 
+
+        if current_width <= PRE_LAYOUT_DIMENSION_LIMIT or current_height <= PRE_LAYOUT_DIMENSION_LIMIT:
             return False
 
         previous_state = getattr(rendering_target, '_last_slice_state', (None, None, 0, 0, 0))
         last_rel_x, last_rel_y, last_width, last_height, last_image_id = previous_state
-        
+
         if last_image_id == id(background_source) and current_width == last_width and current_height == last_height and last_rel_x == relative_x and last_rel_y == relative_y:
             return False
 
         current_slice_state = (relative_x, relative_y, current_width, current_height, id(background_source))
         source_width, source_height = background_source.size
-        
+
         # ⚡ CLAMPING: Ensure we stay within the source image bounds
         crop_x1 = max(0, min(source_width - 1, relative_x))
         crop_y1 = max(0, min(source_height - 1, relative_y))
         crop_x2 = max(crop_x1 + 1, min(source_width, relative_x + current_width))
         crop_y2 = max(crop_y1 + 1, min(source_height, relative_y + current_height))
-        
+
         if crop_x2 > crop_x1 and crop_y2 > crop_y1:
             try:
                 image_slice = background_source.crop((crop_x1, crop_y1, crop_x2, crop_y2))
                 pixel_val = image_slice.getpixel((0, 0)) # Sample top-left for bg color fallback
-                
+
                 if isinstance(pixel_val, tuple):
                     hex_background_color = '#%02x%02x%02x' % pixel_val[:3]
                 else:
                     hex_background_color = '#%02x%02x%02x' % (pixel_val, pixel_val, pixel_val)
-                
+
                 if self.widget.winfo_exists(): self.widget.configure(bg=hex_background_color)
                 if rendering_target != self.widget and rendering_target.winfo_exists():
                     rendering_target.configure(bg=hex_background_color)
@@ -136,7 +139,7 @@ class BackgroundSlicer:
                     rendering_target.delete("panel_bg_slice")
                     rendering_target.create_image(0, 0, image=tkinter_image, anchor="nw", tags="panel_bg_slice")
                     rendering_target.tag_lower("panel_bg_slice")
-                
+
                 rendering_target._last_slice_state = current_slice_state
                 if hasattr(self.widget, 'render'): self.widget.render()
                 return True
@@ -168,7 +171,7 @@ class TransparencyManager:
             theme_background = DEFAULT_THEME_BACKGROUND
             if hasattr(builder, 'theme_colors'):
                 theme_background = builder.theme_colors.get("bg", theme_background)
-            
+
             try:
                 if widget.winfo_exists(): widget.configure(bg=theme_background)
                 if canvas and canvas.winfo_exists(): canvas.configure(bg=theme_background)
@@ -176,7 +179,7 @@ class TransparencyManager:
             return
 
         widget_name = getattr(widget, 'path', type(widget).__name__)
-        
+
         try:
             TransparencyManager._register_widget_for_slicing(widget, canvas, configuration, builder, widget_name)
         except Exception as e:
@@ -194,7 +197,7 @@ class TransparencyManager:
         slicer = BackgroundSlicer(widget, canvas, builder, widget_name)
 
         widget._perform_background_slice = slicer.perform_slice
-        
+
         if hasattr(builder, 'register_for_slicing'):
             builder.register_for_slicing(slicer.perform_slice)
         widget.bind("<Map>", lambda event: slicer.perform_slice(), add="+")

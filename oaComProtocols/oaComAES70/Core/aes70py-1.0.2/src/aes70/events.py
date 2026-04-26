@@ -1,8 +1,9 @@
-from typing import Callable, Dict, Set
+from collections.abc import Callable
+
 
 class Events:
     def __init__(self):
-        self.event_handlers: Dict[str, Set[Callable]] = {}
+        self.event_handlers: dict[str, set[Callable]] = {}
 
     def emit(self, name: str, *args):
         handlers = self.event_handlers.get(name)

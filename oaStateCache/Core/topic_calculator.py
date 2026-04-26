@@ -24,17 +24,17 @@ class TopicCalculator:
 
         # Standardize hierarchical delimiters and strip structural tokens
         widget_id_str = str(widget_id).replace(".fields.", ".").replace(".", "/")
-        
+
         # ⚡ V3.1.9 NAMESPACE CONSOLIDATION: Map 'oaGui' to 'GUI'
         parts = widget_id_str.split("/")
         # We don't map to GUI anymore to avoid it in the output path
         parts = [p for p in parts if p.lower() not in ["oagui", "gui"]]
-        
+
         # ⚡ OPTIMIZATION: Strip structural tokens like 'display', 'Assets', 'oaGuiElements'
         filtered_parts = [p for p in parts if p.lower() not in ["display", "assets", "oaguielements"]]
         widget_id_str = "/".join(filtered_parts)
-        
-        if (widget_id_str.startswith(base_topic_str + "/") or 
+
+        if (widget_id_str.startswith(base_topic_str + "/") or
             widget_id_str.startswith("/")):
             result_topic = widget_id_str.lstrip("/")
         else:
@@ -42,16 +42,16 @@ class TopicCalculator:
             tab_parts = str(tab_name).split("/")
             # ⚡ V3.1.9 NAMESPACE CONSOLIDATION: Strip GUI/oaGui
             tab_parts = [p for p in tab_parts if p.lower() not in ["oagui", "gui"]]
-            
+
             clean_tab_parts = [p for p in tab_parts if p.lower() not in ["display", "assets", "oaguielements"]]
             clean_tab = "/".join(clean_tab_parts)
 
-            if (base_topic_str and clean_tab and 
+            if (base_topic_str and clean_tab and
                 clean_tab.startswith(base_topic_str)):
                 clean_tab = clean_tab[len(base_topic_str) :].strip("/")
-            
-            result_topic = "/".join([p for p in [base_topic_str, clean_tab, 
+
+            result_topic = "/".join([p for p in [base_topic_str, clean_tab,
                             widget_id_str.lstrip("/")] if p]).replace("//", "/")
-        
+
         self._cache[cache_key] = result_topic
         return result_topic

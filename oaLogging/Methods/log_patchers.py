@@ -24,9 +24,9 @@ def ptp_patcher(record):
     Respects the global 'timestamp_logs' setting.
     """
     global _last_ptp_second, _cached_hhmmss
-    
+
     from oaLogging.Methods.config_retrieval import _get_cached_config
-    
+
     config = _get_cached_config()
     if not config.global_settings.get("timestamp_logs", True):
         record["extra"]["ptp_time"] = "000000.000"
@@ -34,13 +34,13 @@ def ptp_patcher(record):
 
     ptp_now = get_ptp_time()
     current_second = int(ptp_now)
-    
+
     # Cache the HHMMSS string and only update when the integer second changes.
     if current_second != _last_ptp_second:
         dt = datetime.fromtimestamp(ptp_now)
         _cached_hhmmss = dt.strftime("%H%M%S")
         _last_ptp_second = current_second
-    
+
     # Append milliseconds using fast f-string formatting.
     ms = int((ptp_now - current_second) * 1000)
     record["extra"]["ptp_time"] = f"{_cached_hhmmss}.{ms:03d}"

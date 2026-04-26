@@ -6,6 +6,7 @@
 
 import tkinter as tk
 
+
 class GhostOverlay(tk.Canvas):
     """
     Transparent overlay for drawing ghosts, handles, and snapping guides.
@@ -21,7 +22,7 @@ class GhostOverlay(tk.Canvas):
         self.active_ghost = None
         self.handles = []
         self.guides = []
-        
+
     def draw_ghost(self, x, y, width, height):
         """Draws a semi-transparent dashed outline of a target area."""
         self.delete("ghost")

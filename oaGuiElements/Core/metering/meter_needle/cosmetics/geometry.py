@@ -6,7 +6,6 @@
 
 import math
 from dataclasses import dataclass
-from typing import List, Tuple
 
 try:
     from oaRustCore.oa_needle_geometry_rs import NeedleGeometry
@@ -15,23 +14,57 @@ except ImportError:
     needle_geo_rs = None
 
 from oaGuiElements.Core.metering.meter_needle.Core.constants import (
-    SAFE_MARGIN, SHAPE_MULTIPLIERS, SHAPE_Y_SHIFTS,
-    SQUIRCLE_N, SQUIRCLE_WIDTH_FACTOR, SQUIRCLE_HEIGHT_FACTOR, 
-    SQUECTANGLE_WIDTH_FACTOR, SQUECTANGLE_HEIGHT_FACTOR,
+    CREST_BOTTOM_HEIGHT_FACTOR,
+    CREST_CURVE_STEPS,
+    CREST_TOP_HEIGHT_FACTOR,
+    CREST_TOP_WIDTH_FACTOR,
+    CYLINDER_CAP_CENTER_Y,
+    CYLINDER_CAP_RADIUS,
+    CYLINDER_STEPS,
+    CYLINDER_WIDTH_STRAIGHT,
+    GEM_BASE_HEIGHT,
+    GEM_BEZEL_EXPANSION,
+    GEM_PEAK_HEIGHT,
+    GEM_SHOULDER_HEIGHT,
+    GEM_SHOULDER_WIDTH,
+    GEM_WIDTH_FACTOR,
+    HEX_BEZEL_EXPANSION,
+    HEX_MID_HEIGHT,
+    HEX_MID_WIDTH,
+    HEX_TOP_HEIGHT,
+    HEX_TOP_WIDTH,
+    HOTDOG_CAP_CENTER_Y,
+    HOTDOG_CAP_RADIUS,
+    HOTDOG_WIDTH_STRAIGHT,
+    INTERSECTING_OVERLAY_CUTOUT_RADIUS,
+    INTERSECTING_OVERLAY_HEIGHT,
+    INTERSECTING_OVERLAY_SKEW,
+    INTERSECTING_OVERLAY_WIDTH,
+    OCTAGON_BEZEL_EXPANSION,
+    PARKING_METER_BEZEL_EXPANSION,
+    PYRAMID_BASE_WIDTH,
+    PYRAMID_BEZEL_EXPANSION,
+    PYRAMID_PEAK_HEIGHT,
+    SAFE_MARGIN,
+    SHAPE_MULTIPLIERS,
+    SHAPE_Y_SHIFTS,
+    SQUECTANGLE_HEIGHT_FACTOR,
+    SQUECTANGLE_WIDTH_FACTOR,
+    SQUIRCLE_HEIGHT_FACTOR,
+    SQUIRCLE_N,
     SQUIRCLE_STEPS,
-    CREST_CURVE_STEPS, CREST_TOP_WIDTH_FACTOR, CREST_TOP_HEIGHT_FACTOR, CREST_BOTTOM_HEIGHT_FACTOR,
-    HOTDOG_WIDTH_STRAIGHT, HOTDOG_HEIGHT_TOTAL, HOTDOG_CAP_RADIUS, HOTDOG_CAP_CENTER_Y,
-    CYLINDER_WIDTH_STRAIGHT, CYLINDER_HEIGHT_TOTAL, CYLINDER_CAP_RADIUS, CYLINDER_CAP_CENTER_Y, CYLINDER_STEPS,
-    GEM_WIDTH_FACTOR, GEM_BASE_HEIGHT, GEM_SHOULDER_WIDTH, GEM_SHOULDER_HEIGHT, GEM_PEAK_HEIGHT, GEM_BEZEL_EXPANSION,
-    HEX_BEZEL_EXPANSION, TRIANGLE_BEZEL_EXPANSION, PYRAMID_BEZEL_EXPANSION,
-    PARKING_METER_BEZEL_EXPANSION, OCTAGON_BEZEL_EXPANSION,
-    TRIANGLE_SHIFT_Y, TRIANGLE_BASE_WIDTH, TRIANGLE_PEAK_HEIGHT,
-    PYRAMID_BASE_WIDTH, PYRAMID_PEAK_HEIGHT,
-    HEX_MID_WIDTH, HEX_MID_HEIGHT, HEX_TOP_WIDTH, HEX_TOP_HEIGHT,
-    TRAPEZOID_TOP_WIDTH, TRAPEZOID_TOP_HEIGHT, TRAPEZOID_BOTTOM_WIDTH,
-    STEREO_DIAMOND_WIDTH, STEREO_DIAMOND_HEIGHT, STEREO_DIAMOND_FLAT_WIDTH,
-    INTERSECTING_OVERLAY_WIDTH, INTERSECTING_OVERLAY_HEIGHT, INTERSECTING_OVERLAY_SKEW, INTERSECTING_OVERLAY_CUTOUT_RADIUS
+    SQUIRCLE_WIDTH_FACTOR,
+    STEREO_DIAMOND_FLAT_WIDTH,
+    STEREO_DIAMOND_HEIGHT,
+    STEREO_DIAMOND_WIDTH,
+    TRAPEZOID_BOTTOM_WIDTH,
+    TRAPEZOID_TOP_HEIGHT,
+    TRAPEZOID_TOP_WIDTH,
+    TRIANGLE_BASE_WIDTH,
+    TRIANGLE_BEZEL_EXPANSION,
+    TRIANGLE_PEAK_HEIGHT,
 )
+
 
 @dataclass
 class BezelRequest:
@@ -53,17 +86,17 @@ class BezelGeometry:
             elif shape_key in ["cylinder", "hotdog"]: shape_key = "hotdog" if shape_key == "hotdog" else "cylinder"
             elif shape_key in ["trapezoid", "badge"]: shape_key = "trapezoid"
             else: shape_key = "default"
-            
+
         m_w, m_h = SHAPE_MULTIPLIERS.get(shape_key, SHAPE_MULTIPLIERS["default"])
         y_shift_factor = SHAPE_Y_SHIFTS.get(shape_key, 0.0)
 
         # SCALING STRATEGY
         avail_w = (w / 2.0) - (line_width / 2) - SAFE_MARGIN
-        avail_h = (h) - (line_width / 2) - SAFE_MARGIN 
-        
+        avail_h = (h) - (line_width / 2) - SAFE_MARGIN
+
         radius = min(avail_w / m_w, avail_h / m_h)
         global_y_shift = y_shift_factor * radius
-        
+
         return radius, global_y_shift, shape_key
 
     @staticmethod
@@ -75,10 +108,10 @@ class BezelGeometry:
         return BezelGeometry._calculate_points(request)
 
     @staticmethod
-    def _calculate_points(request: BezelRequest) -> Tuple[List[float], bool]:
+    def _calculate_points(request: BezelRequest) -> tuple[list[float], bool]:
         # 1. Get scaling parameters
         radius, global_y_shift, shape_key = BezelGeometry.get_scaling_params(request.w, request.h, request.shape, request.line_width)
-        
+
         # 2. Apply shrink_px to the radius safely
         m_w, m_h = SHAPE_MULTIPLIERS.get(shape_key, SHAPE_MULTIPLIERS["default"])
         radius -= (request.shrink_px / max(m_w, m_h))
@@ -113,20 +146,20 @@ class BezelGeometry:
         flat_pts = []
         for x, y in pts_user:
             flat_pts.append(request.cx + x)
-            flat_pts.append(request.cy - y) 
-            
+            flat_pts.append(request.cy - y)
+
         return flat_pts, is_smooth
 
     @staticmethod
     def _get_gem(radius, global_y_shift, shape_key):
         gem_rad = radius * GEM_BEZEL_EXPANSION
         pts = [
-            (0, GEM_BASE_HEIGHT * gem_rad + global_y_shift),                        
-            (GEM_WIDTH_FACTOR * gem_rad, GEM_BASE_HEIGHT * gem_rad + global_y_shift),             
-            (GEM_SHOULDER_WIDTH * gem_rad, GEM_SHOULDER_HEIGHT * gem_rad + global_y_shift),  
-            (0, GEM_PEAK_HEIGHT * gem_rad + global_y_shift),             
-            (-GEM_SHOULDER_WIDTH * gem_rad, GEM_SHOULDER_HEIGHT * gem_rad + global_y_shift), 
-            (-GEM_WIDTH_FACTOR * gem_rad, GEM_BASE_HEIGHT * gem_rad + global_y_shift)             
+            (0, GEM_BASE_HEIGHT * gem_rad + global_y_shift),
+            (GEM_WIDTH_FACTOR * gem_rad, GEM_BASE_HEIGHT * gem_rad + global_y_shift),
+            (GEM_SHOULDER_WIDTH * gem_rad, GEM_SHOULDER_HEIGHT * gem_rad + global_y_shift),
+            (0, GEM_PEAK_HEIGHT * gem_rad + global_y_shift),
+            (-GEM_SHOULDER_WIDTH * gem_rad, GEM_SHOULDER_HEIGHT * gem_rad + global_y_shift),
+            (-GEM_WIDTH_FACTOR * gem_rad, GEM_BASE_HEIGHT * gem_rad + global_y_shift)
         ]
         return pts, False
 
@@ -134,12 +167,12 @@ class BezelGeometry:
     def _get_super_gem(radius, global_y_shift, shape_key):
         gem_rad = radius * GEM_BEZEL_EXPANSION
         pts = [
-            (0, -(GEM_BASE_HEIGHT * gem_rad) + global_y_shift),                        
-            (GEM_WIDTH_FACTOR * gem_rad, -(GEM_BASE_HEIGHT * gem_rad) + global_y_shift),             
-            (GEM_SHOULDER_WIDTH * gem_rad, -(GEM_SHOULDER_HEIGHT * gem_rad) + global_y_shift),  
-            (0, -(GEM_PEAK_HEIGHT * gem_rad) + global_y_shift),             
-            (-GEM_SHOULDER_WIDTH * gem_rad, -(GEM_SHOULDER_HEIGHT * gem_rad) + global_y_shift), 
-            (-GEM_WIDTH_FACTOR * gem_rad, -(GEM_BASE_HEIGHT * gem_rad) + global_y_shift)             
+            (0, -(GEM_BASE_HEIGHT * gem_rad) + global_y_shift),
+            (GEM_WIDTH_FACTOR * gem_rad, -(GEM_BASE_HEIGHT * gem_rad) + global_y_shift),
+            (GEM_SHOULDER_WIDTH * gem_rad, -(GEM_SHOULDER_HEIGHT * gem_rad) + global_y_shift),
+            (0, -(GEM_PEAK_HEIGHT * gem_rad) + global_y_shift),
+            (-GEM_SHOULDER_WIDTH * gem_rad, -(GEM_SHOULDER_HEIGHT * gem_rad) + global_y_shift),
+            (-GEM_WIDTH_FACTOR * gem_rad, -(GEM_BASE_HEIGHT * gem_rad) + global_y_shift)
         ]
         return pts, False
 
@@ -151,7 +184,7 @@ class BezelGeometry:
         arc_radius = math.sqrt(w_val**2 + h_val**2)
         ang_start = math.atan2(h_val, w_val)
         ang_end = math.atan2(h_val, -w_val)
-        pts = [(0, 0 + global_y_shift)] 
+        pts = [(0, 0 + global_y_shift)]
         steps = 20
         for i in range(steps + 1):
             ang = ang_start + (ang_end - ang_start) * (i / steps)
@@ -175,9 +208,9 @@ class BezelGeometry:
     def _get_triangle(radius, global_y_shift, shape_key):
         tri_rad = radius * TRIANGLE_BEZEL_EXPANSION
         pts = [
-            (0, 0 + global_y_shift),                                   
-            (TRIANGLE_BASE_WIDTH * tri_rad, TRIANGLE_PEAK_HEIGHT * tri_rad + global_y_shift),  
-            (-TRIANGLE_BASE_WIDTH * tri_rad, TRIANGLE_PEAK_HEIGHT * tri_rad + global_y_shift)  
+            (0, 0 + global_y_shift),
+            (TRIANGLE_BASE_WIDTH * tri_rad, TRIANGLE_PEAK_HEIGHT * tri_rad + global_y_shift),
+            (-TRIANGLE_BASE_WIDTH * tri_rad, TRIANGLE_PEAK_HEIGHT * tri_rad + global_y_shift)
         ]
         return pts, False
 
@@ -185,9 +218,9 @@ class BezelGeometry:
     def _get_pyramid(radius, global_y_shift, shape_key):
         py_rad = radius * PYRAMID_BEZEL_EXPANSION
         pts = [
-            (0, PYRAMID_PEAK_HEIGHT * py_rad + global_y_shift),      
-            (PYRAMID_BASE_WIDTH * py_rad, 0 + global_y_shift),       
-            (-PYRAMID_BASE_WIDTH * py_rad, 0 + global_y_shift)       
+            (0, PYRAMID_PEAK_HEIGHT * py_rad + global_y_shift),
+            (PYRAMID_BASE_WIDTH * py_rad, 0 + global_y_shift),
+            (-PYRAMID_BASE_WIDTH * py_rad, 0 + global_y_shift)
         ]
         return pts, False
 
@@ -195,15 +228,15 @@ class BezelGeometry:
     def _get_hotdog_cylinder(radius, global_y_shift, shape_key):
         if shape_key == "hotdog":
             w_straight = HOTDOG_WIDTH_STRAIGHT * radius
-            r_cap = HOTDOG_CAP_RADIUS * radius 
+            r_cap = HOTDOG_CAP_RADIUS * radius
             cap_center_y = HOTDOG_CAP_CENTER_Y * radius
         else:
             w_straight = CYLINDER_WIDTH_STRAIGHT * radius
-            r_cap = CYLINDER_CAP_RADIUS * radius 
+            r_cap = CYLINDER_CAP_RADIUS * radius
             cap_center_y = CYLINDER_CAP_CENTER_Y * radius
-        
+
         pts = []
-        pts.append((0, 0 + global_y_shift)) 
+        pts.append((0, 0 + global_y_shift))
         pts.append((w_straight, 0 + global_y_shift))
         steps = CYLINDER_STEPS
         for i in range(steps+1):

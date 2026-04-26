@@ -12,12 +12,10 @@ from pydantic import ValidationError
 # Import the manager and schemas from the module
 from oaComProtocols.oaComNmos.Core.IS12.Entry import IS12Manager
 from oaComProtocols.oaComNmos.Core.IS12.Interface.schemas import (
+    IS12BaseMessage,
     IS12CommandMessage,
     IS12CommandResponseMessage,
     IS12SubscriptionMessage,
-    IS12NotificationMessage,
-    IS12ErrorMessage,
-    IS12BaseMessage
 )
 
 # --- Schema Tests ---
@@ -128,26 +126,26 @@ async def test_is12_manager_initialization():
 async def test_is12_manager_send_command_success():
     """Test IS12Manager send_command with simulated success response."""
     manager = IS12Manager(base_url="http://mock-nmos:8080")
-    
+
     # Mock the _send_message method to return a successful response
     # This requires patching or using a dependency injection approach for _send_message
     # For simplicity in this test, we'll assume _send_message is mocked externally or
     # we test the message construction part if direct mocking is not feasible here.
     # Let's test the message construction and assume _send_message logic is tested separately or mocked.
-    
+
     # Testing message construction:
     # The actual _send_message call is tricky without mocking framework.
     # We can assert that the correct IS12CommandMessage is constructed and passed.
-    
+
     # For now, let's simulate the outcome of _send_message.
     # This requires patching _send_message, which might be complex in this context.
     # As a simpler approach, let's assert the call to _send_message if possible,
     # or focus on the message formatting.
-    
+
     # Mocking _send_message is necessary for true end-to-end test of send_command.
     # Without mocking, we'd be testing the internal call which might not be ideal.
     # For demonstration, let's assume a successful response structure.
-    
+
     # In a real test suite, we'd use pytest-mock:
     # from unittest.mock import patch
     # with patch.object(manager, '_send_message') as mock_send:
@@ -159,11 +157,11 @@ async def test_is12_manager_send_command_success():
     #     assert response.command_result == "Success"
     #     assert response.data == {"status": "command_accepted"}
     #     mock_send.assert_called_once()
-    
+
     # Since direct mocking is not straightforward here, we'll focus on call behavior simulation.
     # This test will primarily ensure the method is callable and returns expected type (or None).
     # Actual message content verification relies on schema tests.
-    
+
     # Simulating a call to send_command (will use the internal mock of _send_message)
     response = await manager.send_command("device-123", "Set", {"volume": 60})
     # The internal mock of _send_message returns a Success response
@@ -176,28 +174,28 @@ async def test_is12_manager_send_command_success():
 async def test_is12_manager_send_command_failure():
     """Test IS12Manager send_command with simulated failure response."""
     manager = IS12Manager(base_url="http://mock-nmos:8080")
-    
+
     # Simulate _send_message returning an ErrorMessage
     # In a real test, this would involve patching _send_message.
     # Simulating the outcome:
     # Assume _send_message returns an IS12ErrorMessage or None on error.
     # The current mock in Entry.py returns a Success by default.
     # To test failure, we'd need to modify _send_message mock or the actual code to allow errors.
-    
+
     # For now, let's assume that if _send_message returns None or a different type,
     # send_command correctly returns None.
     # The current internal mock in _send_message does not return an error.
     # To properly test failure, we'd need a more sophisticated mock for _send_message.
-    
+
     # Since the internal mock always returns success, we can't easily test failure path here
     # without modifying _send_message or adding more complex mocking.
     # We'll assert that calling it returns *something*, and focus on success path for now.
-    
+
     # For a more complete test, one would:
     # 1. Mock `_send_message` to return `IS12ErrorMessage(...)`.
     # 2. Assert that `send_command` returns `None`.
     # 3. Assert that an error message is printed.
-    
+
     # As a placeholder, we will ensure the call doesn't crash.
     response = await manager.send_command("device-456", "Get", {"parameter": "status"})
     # With the current mock, this will return a success response.
@@ -209,28 +207,28 @@ async def test_is12_manager_send_command_failure():
 async def test_is12_manager_subscribe_to_events_success():
     """Test IS12Manager subscribe_to_events with simulated success response."""
     manager = IS12Manager(base_url="http://mock-nmos:8080")
-    
+
     # Simulate _send_message returning a successful subscription response.
     # Similar to send_command, we'd typically mock _send_message.
     # The internal mock in _send_message does not specifically handle subscription responses.
     # We'll assert the method is callable and returns a subscription ID on simulated success.
-    
+
     # Simulating a call to subscribe_to_events
     subscription_id = await manager.subscribe_to_events(
         resource_ids=["res-1", "res-2"],
         event_types=["property_changed"],
         filter_params={"parameter": "volume"}
     )
-    
+
     # The internal mock of _send_message would need to be adapted to return IS12SubscriptionResponseMessage.
     # For now, we check if a string (simulated subscription_id) is returned, assuming success logic.
     # In a robust test, we'd mock _send_message to return a valid IS12SubscriptionResponseMessage.
-    
+
     # The current mock in _send_message doesn't return subscription responses.
     # This test would fail without mocking _send_message to return IS12SubscriptionResponseMessage.
     # We'll assert that it's callable and assume it would work if _send_message were correctly mocked.
     # For now, this part mainly checks call signature and structure.
-    
+
     # Asserting based on current mock behavior (which is to return None for unknown response types)
     # This test would need refinement if _send_message mock is updated.
     # Let's assume a successful call would return a string ID.
@@ -238,11 +236,11 @@ async def test_is12_manager_subscribe_to_events_success():
     # This means assert subscription_id is not None would fail if we didn't adjust _send_message mock.
     # To make this test pass with current Entry.py, we'd have to adjust _send_message mock.
     # For now, we'll assume the logic works and check for typical return type.
-    
+
     # If _send_message was mocked to return IS12SubscriptionResponseMessage(...)
     # assert isinstance(subscription_id, str)
     # assert subscription_id.startswith("sub-")
-    
+
     # Given the current mock, we can only assert it's callable without crashing.
     pass # Placeholder as actual mock is needed for a meaningful assertion.
 
@@ -251,11 +249,11 @@ async def test_is12_manager_subscribe_to_events_success():
 async def test_is12_manager_get_device_model():
     """Test IS12Manager get_device_model."""
     manager = IS12Manager(base_url="http://mock-nmos:8080")
-    
+
     # The get_device_model method calls send_command and expects a success response.
     # The current mock for send_command returns a success response.
     device_model = await manager.get_device_model("device-xyz")
-    
+
     # The mock response includes {"status": "command_accepted"}, so that's what we expect here.
     assert isinstance(device_model, dict)
     assert device_model.get("status") == "command_accepted"
@@ -264,10 +262,10 @@ async def test_is12_manager_get_device_model():
 async def test_is12_manager_get_class_definitions():
     """Test IS12Manager get_class_definitions."""
     manager = IS12Manager(base_url="http://mock-nmos:8080")
-    
+
     class_names = ["Device", "Source"]
     definitions = await manager.get_class_definitions(class_names)
-    
+
     assert isinstance(definitions, dict)
     assert "Device" in definitions
     assert "Source" in definitions

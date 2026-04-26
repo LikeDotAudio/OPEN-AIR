@@ -6,10 +6,10 @@
 # Author: Gemini (Collaborator)
 # Version: 20260407.0045.1
 
-import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
-from oaComProtocols.oaComNmos.IS07.transports import Is07Bridge
 from oaComProtocols.oaComNmos.IS07.core_models import Identity, Timing
+from oaComProtocols.oaComNmos.IS07.transports import Is07Bridge
+from oaLogging.Methods.matrix_gate import matrix_log
+
 
 class NmosManager:
     """
@@ -18,7 +18,7 @@ class NmosManager:
     def __init__(self, registrar_url="http://localhost:4000"):
         self.bridge = Is07Bridge(registrar_url)
         self._is_running = False
-        
+
     def start(self):
         if self._is_running: return
         # In a real scenario, we'd fetch these from a central config or discovery service
@@ -31,7 +31,7 @@ class NmosManager:
             "destination_host": "localhost",
             "destination_port": 8080
         }
-        
+
         try:
             self.bridge.initialize_transports(connection_params_mqtt, connection_params_ws)
             self._is_running = True
@@ -50,7 +50,7 @@ class NmosManager:
         Translates internal Protocol Router events to NMOS IS-07 state changes.
         """
         if not self._is_running: return
-        
+
         # ⚡ MAPPING LOGIC: Map internal topics to NMOS Identities
         # This is a basic implementation; a real one would use a registry.
         identity = Identity(
@@ -61,7 +61,7 @@ class NmosManager:
             creation_timestamp=meta.get("timestamp", time.strftime("%Y-%m-%dT%H:%M:%SZ")),
             origin_timestamp=meta.get("timestamp", time.strftime("%Y-%m-%dT%H:%M:%SZ"))
         )
-        
+
         # Determine event type based on value
         if isinstance(value, bool):
             etype = "boolean"
@@ -79,7 +79,7 @@ class NmosManager:
             transport_topic=topic,
             transport_type="websocket"
         )
-        
+
         self.bridge.publish_state_change(
             identity=identity,
             timing=timing,

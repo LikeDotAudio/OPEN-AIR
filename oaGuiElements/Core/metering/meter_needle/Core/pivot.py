@@ -4,7 +4,6 @@
 #
 # Description: Brief summary of purpose
 
-import tkinter as tk
 
 class PivotDrawer:
     @staticmethod

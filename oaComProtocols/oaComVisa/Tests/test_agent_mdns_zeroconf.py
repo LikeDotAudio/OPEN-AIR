@@ -4,11 +4,16 @@
 #
 # Description: Tests for the mDNS and IP discovery functions in agent_mdns_zeroconf.py.
 
-import unittest
-from unittest.mock import MagicMock, patch, call
 import socket
+import unittest
+from unittest.mock import MagicMock, patch
 
-from oaComProtocols.oaComVisa.Workers.agent_mdns_zeroconf import AES70DiscoveryListener, discover_aes70_devices, discover_ip_devices
+from oaComProtocols.oaComVisa.Workers.agent_mdns_zeroconf import (
+    AES70DiscoveryListener,
+    discover_aes70_devices,
+    discover_ip_devices,
+)
+
 
 class TestAgentMdnsZeroconf(unittest.TestCase):
 
@@ -22,7 +27,7 @@ class TestAgentMdnsZeroconf(unittest.TestCase):
         mock_info.server = "test-server.local."
         mock_info.properties = {b"prop1": b"val1"}
         mock_zc.get_service_info.return_value = mock_info
-        
+
         # Test add_service
         listener.add_service(mock_zc, "_oca._tcp.local.", "TestDevice")
         self.assertIn("TestDevice", listener.found_devices)
@@ -30,7 +35,7 @@ class TestAgentMdnsZeroconf(unittest.TestCase):
         self.assertEqual(dev["ip"], "192.168.1.100")
         self.assertEqual(dev["port"], 1234)
         self.assertEqual(dev["properties"]["prop1"], "val1")
-        
+
         # Test remove_service
         listener.remove_service(mock_zc, "_oca._tcp.local.", "TestDevice")
         self.assertNotIn("TestDevice", listener.found_devices)
@@ -43,7 +48,7 @@ class TestAgentMdnsZeroconf(unittest.TestCase):
         # This is hard to test deeply without real zeroconf, but we can check the calls
         MockZeroconf.return_value = MagicMock()
         devices = discover_aes70_devices(timeout=0.1)
-        
+
         MockZeroconf.assert_called_once()
         MockBrowser.assert_called_once()
         mock_sleep.assert_called_with(0.1)
@@ -60,7 +65,7 @@ class TestAgentMdnsZeroconf(unittest.TestCase):
         CHECK: Assert it returns merged lists of dedicated and gateway IPs.
         """
         mock_get_ip.return_value = "192.168.1.50"
-        
+
         # Mock executor to return a dedicated device from port scan
         executor = MockExecutor.return_value.__enter__.return_value
         mock_future = MagicMock()
@@ -68,14 +73,14 @@ class TestAgentMdnsZeroconf(unittest.TestCase):
         executor.submit.return_value = mock_future
         # Simplify: assume only one target is scanned for this test to avoid massive mock loops
         with patch('oaComProtocols.oaComVisa.Workers.agent_mdns_zeroconf.range', return_value=[100]):
-            
+
             # Mock AES70 to return another device
             mock_discover_aes.return_value = {
                 "AES_DEV": {"ip": "192.168.1.200", "port": 1234}
             }
-            
+
             dedicated, gateways = discover_ip_devices()
-            
+
             self.assertIn("192.168.1.100", dedicated)
             self.assertIn("192.168.1.200", dedicated) # Merged from AES70
             self.assertEqual(len(dedicated), 2)
@@ -85,19 +90,19 @@ class TestAgentMdnsZeroconf(unittest.TestCase):
     def test_check_host_dedicated(self, mock_get_ip, mock_socket_cls):
         """Test _check_host for a dedicated device (Port 5025)."""
         from oaComProtocols.oaComVisa.Workers.agent_mdns_zeroconf import _check_host
-        
+
         # We need two different mock socket instances because they are created sequentially
         mock_sock1 = MagicMock()
         mock_sock1.__enter__.return_value = mock_sock1
         mock_sock1.connect_ex.return_value = 1 # Port 111 Fail
-        
+
         mock_sock2 = MagicMock()
         mock_sock2.__enter__.return_value = mock_sock2
         mock_sock2.connect_ex.return_value = 0 # Port 5025 Success
-        
+
         # When socket.socket() is called twice, return these two mocks
         mock_socket_cls.side_effect = [mock_sock1, mock_sock2]
-        
+
         result = _check_host("192.168.1.100")
         self.assertEqual(result, ("192.168.1.100", "DEDICATED"))
 

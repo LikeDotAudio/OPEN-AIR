@@ -8,6 +8,7 @@
 import unittest
 from pathlib import Path
 
+
 class TestHTMLReaderAsset(unittest.TestCase):
     def test_sample_html_exists(self):
         """CHECK: Ensure the real-world IAS report HTML is present."""

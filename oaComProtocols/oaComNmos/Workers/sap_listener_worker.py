@@ -5,18 +5,14 @@
 import socket
 import struct
 import time
-import threading
-import uuid
-import json
-import hashlib # Imported from utils, but good to have here if needed directly
+
 import requests
 
-from oaComProtocols.oaComNmos.Core.utils import gen_id, get_ip, hash_sdp, now_ts
-from oaComProtocols.oaComNmos.Core.sdp_parser import parse_sdp
-from oaComProtocols.oaComNmos.Core.nmos_builder import build_source, build_flow, build_sender
-from oaComProtocols.oaComNmos.Managers.sender_cache_manager import find_existing_sender
-from oaComProtocols.oaComNmos.Interface.connection_api import STATE # Access shared state dictionary
 from oaComProtocols.oaComNmos.Constants import settings
+from oaComProtocols.oaComNmos.Core.nmos_builder import build_flow, build_sender, build_source
+from oaComProtocols.oaComNmos.Core.sdp_parser import parse_sdp
+from oaComProtocols.oaComNmos.Core.utils import gen_id, hash_sdp, now_ts
+from oaComProtocols.oaComNmos.Managers.sender_cache_manager import find_existing_sender
 
 # These are global states managed by the orchestrator and passed to this worker.
 # Example:
@@ -98,8 +94,8 @@ def register_new_stream(
         return
 
     # Create new NMOS resources if no existing sender is found
-    print(f"[SAPListener] No existing sender found for stream, creating new NMOS resources.")
-    
+    print("[SAPListener] No existing sender found for stream, creating new NMOS resources.")
+
     # Generate unique IDs for new resources
     source_id = gen_id()
     flow_id = gen_id()
@@ -183,7 +179,7 @@ def sap_listener_worker(registrar_url, node_id, device_id, host_ip, global_state
     while global_state.get("RUNNING", True):
         try:
             # Set a timeout so the loop can check RUNNING flag periodically
-            sock.settimeout(1.0) 
+            sock.settimeout(1.0)
             data, _ = sock.recvfrom(2048)
 
             sdp = extract_sdp_from_sap(data)
@@ -200,7 +196,7 @@ def sap_listener_worker(registrar_url, node_id, device_id, host_ip, global_state
                     global_state["STREAMS"],
                     registration_manager
                 )
-        except socket.timeout:
+        except TimeoutError:
             # Timeout occurred, loop will check RUNNING flag and continue
             continue
         except Exception as e:
@@ -241,6 +237,6 @@ def heartbeat_worker(registrar_url, node_id, global_state, registration_manager)
             last_reachable = False
 
         time.sleep(settings.HB_INTERVAL if last_reachable else settings.HB_INTERVAL * 2)
-    
+
     print("[Heartbeat] Worker shutting down.")
 

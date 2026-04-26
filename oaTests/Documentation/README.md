@@ -14,7 +14,7 @@ A high-fidelity Textual application that serves as the UI layer for the test sui
 * **Maintenance Hub**: Direct access to cleanup scripts for logs, MQTT state, and flamegraphs.
 * **Telemetry**: Real-time display of system resources and High Availability (HA) roles.
 
-### 2. Test Runner (`Workers/TestRunner/`)
+### 2. Test Runner (`Core/`)
 A background service that executes F.I.R.S.T. principle tests and aggregates results into a unified summary.
 
 ### 3. Cleanup Utilities (`Workers/CleanupApps/`)

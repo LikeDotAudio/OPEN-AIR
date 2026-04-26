@@ -6,7 +6,6 @@
 
 import tkinter as tk
 from tkinter import ttk
-import json
 
 # --- GUI FALLBACKS (V3.2.1 Decoupling) ---
 try:
@@ -25,16 +24,16 @@ class SnmpStatusImplementation(tk.Frame, TransparencyMixin):
         # Extract non-Tkinter arguments
         self.config_data = kwargs.pop("config", {})
         self.json_path = kwargs.pop("json_path", None)
-        
+
         super().__init__(parent, **kwargs)
-        
+
         # ⚡ STANDALONE: Prioritize injected services
         self.snmp_manager = None
         app = self.config_data.get("app_instance")
         if app:
             self.snmp_manager = getattr(app, "snmp_manager", None)
         self.mqtt_client = self.config_data.get("mqtt_client")
-        
+
         if not self.snmp_manager:
             try:
                 from oaComProtocols.oaComSNMP.Entry import get_manager
@@ -47,13 +46,13 @@ class SnmpStatusImplementation(tk.Frame, TransparencyMixin):
         self._flash_state = False
         self._is_offline = True
         self._last_status = {}
-        
+
         self._setup_ui()
-        
+
         if self.snmp_manager:
             # Register for status updates via the manager
             self.snmp_manager.register_mqtt_listener(self._on_status_received)
-            
+
             # Initial request for a script generate to populate UI
             self.refresh_script()
 
@@ -71,7 +70,7 @@ class SnmpStatusImplementation(tk.Frame, TransparencyMixin):
                 sub_router = getattr(app, 'subscriber_router', None)
                 if mqtt_conn:
                     return mqtt_conn, sub_router
-            
+
             try: curr = curr.master
             except: break
         return None, None
@@ -84,11 +83,11 @@ class SnmpStatusImplementation(tk.Frame, TransparencyMixin):
         header = tk.Frame(self, bg="#2b2b2b")
         header.pack(side=tk.TOP, fill=tk.X, pady=10)
         tk.Label(header, text="🌐 SNMP BRIDGE (REMOTE STATUS)", font=("Helvetica", 14, "bold"), fg="#ffffff", bg="#2b2b2b").pack(side=tk.LEFT, padx=20)
-        
+
         # ⚡ VISIBILITY: Use a more contrasting color for the setup button
         self.re_setup_btn = tk.Button(
-            header, 
-            text="⚠️ RE-SETUP BRIDGE", 
+            header,
+            text="⚠️ RE-SETUP BRIDGE",
             command=self.refresh_script,
             font=("Helvetica", 10, "bold"),
             bg="#ffaa00",
@@ -120,7 +119,7 @@ class SnmpStatusImplementation(tk.Frame, TransparencyMixin):
         # Tool buttons
         tool_bar = tk.Frame(install_frame, bg="#2b2b2b")
         tool_bar.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
-        
+
         ttk.Button(tool_bar, text="Request Script", command=self.refresh_script).pack(side=tk.LEFT, padx=5)
         ttk.Button(tool_bar, text="Copy to Clipboard", command=self.copy_script).pack(side=tk.LEFT, padx=5)
         tk.Label(tool_bar, text="Paste this into your Linux Terminal", font=("Courier", 9), fg="#666666", bg="#2b2b2b").pack(side=tk.RIGHT, padx=10)
@@ -129,7 +128,7 @@ class SnmpStatusImplementation(tk.Frame, TransparencyMixin):
         self.text_area = tk.Text(install_frame, bg="#000000", fg="#00ff00", font=("Courier", 10), padx=10, pady=10, bd=0)
         scroll = ttk.Scrollbar(install_frame, orient=tk.VERTICAL, command=self.text_area.yview)
         self.text_area.configure(yscrollcommand=scroll.set)
-        
+
         self.text_area.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
         scroll.pack(side=tk.RIGHT, fill=tk.Y)
 
@@ -150,14 +149,14 @@ class SnmpStatusImplementation(tk.Frame, TransparencyMixin):
         """Update diagnostics from the provided status."""
         is_running = status.get("running", False)
 
-        
+
         # ⚡ HEALTH CHECK: Only show offline if it's explicitly not running.
         is_running = status.get("running", False)
         self._is_offline = not is_running
-        
+
         for item in self.tree.get_children():
             self.tree.delete(item)
-            
+
         self.tree.insert("", "end", text="Bridge Status", values=("ACTIVE" if is_running else "OFFLINE",))
         self.tree.insert("", "end", text="Socket Address", values=(status.get("socket", "Unknown"),))
         self.tree.insert("", "end", text="Root OID", values=(status.get("base_oid", "Unknown"),))

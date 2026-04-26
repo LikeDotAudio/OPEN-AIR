@@ -24,7 +24,7 @@ def _get_cached_config():
     global _config_instance_cache
     if _config_instance_cache:
         return _config_instance_cache
-    
+
     try:
         from oaConfigurationManager.FileReaders.config_reader import Config
         if hasattr(Config, "_instance") and Config._instance:
@@ -32,13 +32,13 @@ def _get_cached_config():
             return _config_instance_cache
     except ImportError:
         pass
-    
+
     # Fallback to allow logging before the configuration system is fully online.
     class DummyConfig:
-        ENABLE_DEBUG_MODE = True 
+        ENABLE_DEBUG_MODE = True
         ENABLE_DEBUG_SCREEN = True
         global_settings = {"debug_enabled": True}
         # Added DEBUG_MATRIX for matrix-aware logs
         DEBUG_MATRIX = {}
-        
+
     return DummyConfig()

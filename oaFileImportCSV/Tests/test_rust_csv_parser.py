@@ -6,9 +6,10 @@
 # Version: 20260401.1000.1
 
 import unittest
-from unittest.mock import patch, MagicMock
 from pathlib import Path
+
 from oaFileImportCSV.FileReaders.from_csv_unknown import Marker_convert_csv_unknow_report_to_csv
+
 
 class TestRustCSVParser(unittest.TestCase):
     def setUp(self):
@@ -24,15 +25,15 @@ class TestRustCSVParser(unittest.TestCase):
             from oaRustCore import oa_csv_parser_rs as oacsvparser_rs
         except ImportError:
             self.skipTest("Rust oacsvparser_rs not installed.")
-            
+
         headers, data = Marker_convert_csv_unknow_report_to_csv(str(self.asset_path))
-        
+
         self.assertGreater(len(data), 0)
         # Verify we have some standard headers (e.g., ZONE, NAME, FREQ_MHZ)
         self.assertIn("ZONE", headers)
         self.assertIn("NAME", headers)
         self.assertIn("FREQ_MHZ", headers)
-        
+
         # Verify data structure
         for row in data:
             self.assertEqual(len(row), len(headers))

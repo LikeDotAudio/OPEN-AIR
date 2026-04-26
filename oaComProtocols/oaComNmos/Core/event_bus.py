@@ -6,14 +6,15 @@
 # ⚡ DECOUPLED: Does not depend on oaComBroker.
 
 import threading
-from typing import Callable, Dict, List, Any
+from collections.abc import Callable
+
 
 class NmosEventBus:
     """
     A simple, thread-safe local event bus for the NMOS module.
     """
     def __init__(self):
-        self._subscribers: Dict[str, List[Callable]] = {}
+        self._subscribers: dict[str, list[Callable]] = {}
         self._lock = threading.Lock()
 
     def subscribe(self, event_type: str, callback: Callable):
@@ -35,7 +36,7 @@ class NmosEventBus:
         """Publishes an event to all subscribers of that type."""
         with self._lock:
             callbacks = self._subscribers.get(event_type, []).copy()
-        
+
         for callback in callbacks:
             try:
                 callback(*args, **kwargs)

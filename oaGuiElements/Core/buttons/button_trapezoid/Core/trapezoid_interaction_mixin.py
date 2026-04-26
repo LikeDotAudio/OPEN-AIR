@@ -4,7 +4,6 @@
 #
 # Description: Brief summary of purpose
 
-import tkinter as tk
 
 class TrapezoidInteractionMixin:
     """Handles mouse events (press, release, state toggle) for the Trapezoid Button."""

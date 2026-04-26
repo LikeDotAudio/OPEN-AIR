@@ -1,4 +1,4 @@
-from .OcaUint8 import OcaUint8;
+from .OcaUint8 import OcaUint8
 
 '''
  A set of 8 1-bit boolean flags. Used to signify (m) of (n)

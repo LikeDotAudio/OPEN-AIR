@@ -5,27 +5,24 @@
 # Description: Modularized Ganged Controlled Array (GCA) Fader.
 
 import tkinter as tk
-from oaLogging.Methods.matrix_gate import matrix_log
-import inspect
-from tkinter import ttk
-from loguru import logger
+
+from oaConfigurationManager.FileReaders.config_reader import Config
 
 # --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import builder_logger
-from oaConfigurationManager.FileReaders.config_reader import Config
+
 app_constants = Config.get_instance()
 
-from oaStyle.Core.style import THEMES, DEFAULT_THEME
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 from oaGui.Methods.i18n_utils import get_text
-from oaGuiManager.Core.transparency.transparency import TransparencyManager
-from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
 from oaGuiBuilder.Core.base_widget_creator import BaseWidgetCreator
 
 # --- EXTRACTED CORE MODULES ---
 from oaGuiElements.Core.faders.fader_ganged_controlled_array.Core.gca_controller_mixin import GCAControllerMixin
-from oaGuiElements.Core.faders.fader_ganged_controlled_array.Core.gca_renderer_mixin import GCARendererMixin
 from oaGuiElements.Core.faders.fader_ganged_controlled_array.Core.gca_interaction_mixin import GCAInteractionMixin
+from oaGuiElements.Core.faders.fader_ganged_controlled_array.Core.gca_renderer_mixin import GCARendererMixin
+from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
+from oaGuiManager.Core.transparency.transparency import TransparencyManager
+from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+from oaStyle.Core.style import DEFAULT_THEME, THEMES
 
 MIN_CHANNEL_WIDTH = 40
 
@@ -41,29 +38,29 @@ class CompositeFaderFrame(
         self.track_col = colors.get("secondary", "#444444")
         self.handle_col = colors.get("fg", "#dcdcdc")
         self.accent_col = colors.get("accent", "#f4902c")
-        
+
         super().__init__(master, bg=self.bg_color, bd=0, highlightthickness=0)
-        
+
         self.widget_config = config
         self.path = path
         self.state_mirror_engine = state_mirror_engine
         self.subscriber_router = subscriber_router
         self.base_mqtt_topic = base_mqtt_topic
-        
+
         # Configuration
         self.min_val = float(config.get("value_min", 0.0))
         self.max_val = float(config.get("value_max", 100.0))
         self.num_channels = int(config.get("num_channels", 4))
         self.label = get_text(config.get("label_active"), "Composite")
         self.is_rgb = config.get("is_rgb", False)
-        
+
         # Visual Config
         layout_config = config.get("layout", {})
         requested_w = int(layout_config.get("width", config.get("width", 100)))
         self.req_width = max(requested_w, self.num_channels * MIN_CHANNEL_WIDTH)
         self.req_height = int(layout_config.get("height", config.get("height", 400)))
         self.width, self.height = self.req_width, self.req_height
-        
+
         self.show_ticks = config.get("show_ticks", True)
         self.tick_thickness = int(config.get("tick_thickness", 1))
         self.tick_color = config.get("tick_color", "light grey")
@@ -74,22 +71,22 @@ class CompositeFaderFrame(
         self.channel_labels_rotation = config.get("channel_labels_rotation", 0)
 
         # State
-        self.mode = "macro" 
+        self.mode = "macro"
         self._lock_sync = False
         self.master_value = tk.DoubleVar(value=self.min_val)
         self.child_values, self.child_offsets, self.channel_labels = [], [], []
-        
+
         # Initialize Children
         channel_config = config.get("channels", [])
         for i in range(self.num_channels):
             value = float(channel_config[i].get("default", self.min_val)) if i < len(channel_config) else self.min_val
             label = channel_config[i].get("label", f"{i+1}") if i < len(channel_config) else f"{i+1}"
-            
+
             var = tk.DoubleVar(value=value)
             self.child_values.append(var)
             self.child_offsets.append(0.0)
             self.channel_labels.append(label)
-            
+
             if self.path:
                 self.state_mirror_engine.register_widget(f"{self.path}/ch_{i+1}", var, self.base_mqtt_topic, config)
             var.trace_add("write", lambda *args, idx=i: self._on_child_var_change(idx))
@@ -101,12 +98,12 @@ class CompositeFaderFrame(
         # UI
         self.canvas = tk.Canvas(self, width=self.width, height=self.height, bg=self.bg_color, highlightthickness=0)
         self.canvas.pack(fill=tk.BOTH, expand=True)
-        
+
         # Interaction State
         self.dragging_master = False
         self.dragging_child = -1
         self.start_y, self.start_val = 0, 0
-        
+
         # Bindings
         self.canvas.bind("<Button-1>", self._on_press)
         self.canvas.bind("<B1-Motion>", self._on_drag)
@@ -119,30 +116,30 @@ class CompositeFaderFrame(
 
 @WidgetRegistry.register("_CompositeFader")
 class BuilderFaderGangedControlledArrayCreator(BaseWidgetCreator, TransparencyMixin):
-    
+
     is_composite = True
 
     def _assemble_ui(self, parent_widget, config_data, context, **kwargs):
         """Assembles the GCA Fader UI."""
         ctx = context if context else type('obj', (object,), kwargs)()
         b_inst = getattr(ctx, 'builder_instance', None) or getattr(ctx, 'app_instance', None) or kwargs.get('builder_instance')
-        
+
         path = config_data.get("path", "")
         s_engine = getattr(ctx, 'state_mirror_engine', None) or kwargs.get('state_mirror_engine')
         b_topic = getattr(ctx, 'base_mqtt_topic_from_path', None) or kwargs.get('base_mqtt_topic_from_path', "")
         s_router = getattr(ctx, 'subscriber_router', None) or kwargs.get('subscriber_router')
 
         frame = CompositeFaderFrame(parent_widget, config_data, path, s_engine, s_router, b_topic)
-        
+
         if hasattr(b_inst, '_apply_transparency'):
             TransparencyManager.apply_transparency(frame, frame.canvas, config_data, b_inst)
-        
+
         if path and s_engine:
             topic = s_engine.register_widget(path, frame.master_value, b_topic, config_data)
             if s_router and topic:
                 s_router.subscribe_to_topic(topic, s_engine.sync_incoming_mqtt_to_gui)
             s_engine.initialize_widget_state(path)
-            
+
             for i in range(frame.num_channels):
                 child_path = f"{path}/ch_{i+1}"
                 child_topic = s_engine.register_widget(child_path, frame.child_values[i], b_topic, config_data)

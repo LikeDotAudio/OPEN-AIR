@@ -5,6 +5,7 @@
 # Description: Unit tests for oaTranslator.translator_worker
 
 import unittest
+
 # from oaTranslator.Workers.translator_worker import TranslatorWorker # Adjust import path as needed
 
 # Placeholder for the actual class/function to be tested.
@@ -37,15 +38,15 @@ class TestTranslatorWorker(unittest.TestCase):
         # Example:
         # test_param = "some_input"
         # expected_result = "action performed with some_input"
-        
+
         # OPERATE: Call the method/function being tested
         # Example:
         # actual_result = self.test_instance.perform_action(test_param)
-        
+
         # CHECK: Assert that the result is as expected
         # Example:
         # self.assertEqual(actual_result, expected_result)
-        
+
         self.assertTrue(True, "Replace this placeholder assertion with actual test logic.")
 
     # Add more test methods for different scenarios (edge cases, error conditions, etc.)

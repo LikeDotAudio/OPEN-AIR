@@ -6,6 +6,7 @@
 
 import csv
 
+
 def write_table(file_path, table):
     """
     Writes a 2D table to a CSV file.

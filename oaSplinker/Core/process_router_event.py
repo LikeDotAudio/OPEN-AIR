@@ -5,10 +5,7 @@
 # Description: Processes incoming events from the Protocol Router.
 
 import time
-from .handle_command import handle_command
-from .handle_learn import handle_learn
-from .handle_teach import handle_teach
-from .handle_panic import handle_panic
+
 
 def process_router_event(self, message):
     """
@@ -36,10 +33,10 @@ def process_router_event(self, message):
 
     # ⚡ RUST OPTIMIZED LOOKUP
     matching_splinks = self.registry.get_splinks_for_topic(topic)
-    
+
     for s in matching_splinks:
         if not s.get("active", False): continue
-        
+
         splink_id = s["id"]
 
         # ⚡ FEEDBACK DETECTION (RUST)
@@ -54,7 +51,7 @@ def process_router_event(self, message):
         # ⚡ EXECUTION LOCK (RUST)
         if not self.registry.try_acquire_execution_lock(splink_id):
             continue
-        
+
         try:
             # Execute the link
             if s.get("mode") in ["BOTH", "SOURCE"]:

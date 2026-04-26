@@ -7,7 +7,7 @@ project_root = Path("/home/anthony/Documents/OPEN-AIR")
 gui_elements_core = project_root / "oaGuiElements" / "Core"
 
 def read_file(path):
-    with open(path, 'r') as f: return f.read()
+    with open(path) as f: return f.read()
 
 def write_file(path, content):
     with open(path, 'w') as f: f.write(content)
@@ -21,34 +21,34 @@ for sample_file in sample_files:
     element_dir = sample_file.parent
     if element_dir.name == "Assets":
         element_dir = element_dir.parent
-    
+
     category = element_dir.parent.name
     element_name = element_dir.name
 
-    if category == "Core" or element_name == "Core": 
+    if category == "Core" or element_name == "Core":
         continue
-    
+
     print(f"Processing: {category}/{element_name}")
-    
+
     core_dir = element_dir / "Core"
     interface_dir = element_dir / "Interface"
     assets_dir = element_dir / "Assets"
-    
+
     core_dir.mkdir(exist_ok=True)
     interface_dir.mkdir(exist_ok=True)
     assets_dir.mkdir(exist_ok=True)
 
     (core_dir / "__init__.py").touch()
     (interface_dir / "__init__.py").touch()
-    
+
     if sample_file.parent != assets_dir:
         shutil.move(str(sample_file), str(assets_dir / "sample.json"))
-        
+
     for py_file in list(element_dir.glob("*.py")):
         if py_file.name == "__init__.py": continue
-        
+
         module_name = py_file.stem
-        
+
         if py_file.name.endswith("_editor.py"):
             shutil.move(str(py_file), str(interface_dir / py_file.name))
             old_mod = f"oaGuiElements.Core.{category}.{element_name}.{module_name}"
@@ -149,7 +149,7 @@ for py_file in all_py_files:
         if new_content != content:
             write_file(str(py_file), new_content)
             print(f"Updated imports in {py_file.relative_to(project_root)}")
-    except Exception as e:
+    except Exception:
         pass
 
 print("Homogenization complete.")

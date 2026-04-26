@@ -5,11 +5,14 @@
 # Description: Refactored Scan Manager (Composition over Inheritance).
 
 import inspect
-import orjson
-import traceback
 import threading
+import traceback
+
+import orjson
 from loguru import logger
+
 from oaLogging.Methods.matrix_gate import matrix_log
+
 
 class ScanManager:
     """Manages the discovery scan sequence and MQTT status broadcasting."""
@@ -22,14 +25,14 @@ class ScanManager:
         """Initiates a comprehensive network scan for VISA instruments."""
         self.initial_scan_complete_event.clear()
         matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳🚢🔍 [VISA] Scan Triggered via API.", "DEBUG")
-            
+
         self._publish_scan_status("Start", {"status": "scanning"})
         try:
             num_devices_found = self._orchestrator.discovery_orchestrator.scan_and_manage_fleet()
             self._publish_scan_status("Complete", {"status": "ready", "num_devices": num_devices_found})
-        except Exception as e:
+        except Exception:
             logger.exception(f"💳🚢🔍 [VISA] CRITICAL: Fleet scan failed.\nForensic Report:\n{traceback.format_exc()}")
-        
+
         self.initial_scan_complete_event.set()
 
     def wait_for_initial_scan(self, timeout=None):

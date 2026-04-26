@@ -5,8 +5,11 @@
 # Description: Brief summary of purpose
 
 import os
+
 from PIL import Image, ImageDraw, ImageFont
+
 import oaOchestration.Constants.project_paths as project_paths
+
 
 def create_bar_graph_image(
     value,
@@ -40,7 +43,7 @@ def create_bar_graph_image(
     # Draw the text
     try:
         font = ImageFont.truetype("arial.ttf", 10)
-    except IOError:
+    except OSError:
         font = ImageFont.load_default()
 
     draw.text((5, 5), text, font=font, fill=text_color)

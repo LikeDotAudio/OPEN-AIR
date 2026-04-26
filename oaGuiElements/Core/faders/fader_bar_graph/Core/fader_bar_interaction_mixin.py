@@ -4,7 +4,6 @@
 #
 # Description: Brief summary of purpose
 
-import tkinter as tk
 
 class FaderBarInteractionMixin:
     """Handles mouse and drag interactions for the composite fader."""

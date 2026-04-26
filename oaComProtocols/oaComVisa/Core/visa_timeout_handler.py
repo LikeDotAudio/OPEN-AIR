@@ -6,6 +6,7 @@
 
 from loguru import logger
 
+
 def visa_timeout_handler(proxy_instance, command, exception):
     """
     Dedicated handler for VISA I/O timeouts and connection errors.
@@ -27,5 +28,5 @@ def visa_timeout_handler(proxy_instance, command, exception):
     if command.strip().upper() not in ["*RST", ":SYSTem:POWer:RESe"]:
         logger.warning(f"💳🚢🔄 [RECOVERY] Attempting device-level reset for {serial}")
         proxy_instance._reset_device_fleet()
-    
+
     return None

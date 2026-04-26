@@ -1,6 +1,6 @@
 from ...ocp1.ocabitstring import OcaBitstring
-from ...ocp1.ocauint16 import OcaUint16
 from ...ocp1.ocauint8 import OcaUint8
+from ...ocp1.ocauint16 import OcaUint16
 from ..make_control_class import make_control_class
 from .ocabasicsensor import OcaBasicSensor
 

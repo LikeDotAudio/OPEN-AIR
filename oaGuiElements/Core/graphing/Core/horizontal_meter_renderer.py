@@ -1,20 +1,21 @@
 # Core/horizontal_meter_renderer.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: Brief summary of purpose
 
-import tkinter as tk
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
-from tkinter import ttk
-import time
 import math
+import time
+import tkinter as tk
+from tkinter import ttk
+
 import orjson
-from loguru import logger
+
 from oaComProtocols.oaComMQTT.Core.mqtt_publisher_service import publish_payload
 from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic
+from oaLogging.Methods.matrix_gate import matrix_log
+
 
 class HorizontalMeterRenderer(ttk.Frame):
     """A Tkinter widget that displays a numerical value with horizontal progress bars."""
@@ -23,7 +24,7 @@ class HorizontalMeterRenderer(ttk.Frame):
         self.subscriber_router = kwargs.pop("subscriber_router", None)
         self.state_mirror_engine = kwargs.pop("state_mirror_engine", None)
         super().__init__(parent, **kwargs)
-        
+
         self.widget_config, self.base_mqtt_topic, self.widget_id = config, base_mqtt_topic, widget_id
         self.GUID = self.state_mirror_engine.GUID if self.state_mirror_engine and hasattr(self.state_mirror_engine, "GUID") else "UNKNOWN_GUID"
 
@@ -63,13 +64,13 @@ class HorizontalMeterRenderer(ttk.Frame):
     def _on_value_change(self, *args):
         value = self.meter_value_var.get()
         self.label_value.config(text=f"Value: {value:.3f}", foreground="red" if value < 0 else "black")
-        
+
         trunc_val = math.trunc(value)
         dec_part = abs(value - trunc_val) * 100
-        
+
         self.bar_graph_value1["value"] = min(abs(trunc_val), self.max_integer_value)
         self.label1.config(text=f"Int: {trunc_val}")
-        
+
         self.bar_graph_value_dec["value"] = dec_part
         self.label_dec.config(text=f"Dec: {int(dec_part)}")
 

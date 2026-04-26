@@ -15,8 +15,11 @@ Responsibilities:
 
 import functools
 import traceback
-from typing import Any, Callable, Optional, Type
+from collections.abc import Callable
+from typing import Any
+
 from oaLogging.Core.logger import FAILURE_LOGGER, get_emoji
+
 
 def vocal_failure_handler(
     message: str = "Critical Failure Detected",
@@ -47,12 +50,12 @@ def vocal_failure_handler(
                 # 1. Capture forensic detail
                 tb = traceback.format_exc()
                 error_message = f"❌🔴 [FAILURE] {message} in '{func.__name__}': {e}"
-                
+
                 # 2. Vocal Logging
                 FAILURE_LOGGER.bind(category=f"{get_emoji('FAILURE')} {category}").error(
                     f"{error_message}\n\n🕵️ FORENSIC TRACE:\n{tb}"
                 )
-                
+
                 # 3. Visual 'Red Screen of Warning' (if widget provided)
                 if widget and hasattr(widget, 'config') and widget.winfo_exists():
                     try:
@@ -64,7 +67,7 @@ def vocal_failure_handler(
                         )
                     except:
                         pass # Don't let the warning trigger itself fail
-                
+
                 if re_raise:
                     raise e
                 return fallback

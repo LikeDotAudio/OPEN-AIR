@@ -6,6 +6,7 @@
 
 import tkinter as tk
 
+
 class StickyRenderer:
     """Renders the Quick Sticky (Stretch) button presets."""
 
@@ -29,13 +30,13 @@ class StickyRenderer:
         presets = [("EW", "width"), ("NS", "height"), ("NSEW", "both"), ("NONE", "")]
         for label, value in presets:
             active = (value in stretch) or (label == "NONE" and not stretch)
-            btn = tk.Button(btn_frame, text=label, width=5, 
-                            bg="#2ecc71" if active else "#444444", fg="white", 
-                            relief="flat", font=("Arial", 7, "bold"), 
+            btn = tk.Button(btn_frame, text=label, width=5,
+                            bg="#2ecc71" if active else "#444444", fg="white",
+                            relief="flat", font=("Arial", 7, "bold"),
                             command=lambda v=value: on_set_sticky_callback(v))
             btn.pack(side="left", padx=2)
             buttons[label] = btn
-            
+
         return buttons
 
     @staticmethod

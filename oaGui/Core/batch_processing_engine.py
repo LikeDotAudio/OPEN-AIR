@@ -1,11 +1,9 @@
 # Core/batch_processing_engine.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: Brief summary of purpose
 
-from loguru import logger
 
 class BatchProcessingEngine:
     """Orchestrates the asynchronous batch processing of functional widgets."""
@@ -22,23 +20,23 @@ class BatchProcessingEngine:
         for w in chunk:
             try:
                 wd = w["value"]; wt = wd.get("type", wd.get("widget_type"))
-                
+
                 # ⚡ FAST RENDER MODE: Use square placeholders instead of full functional widgets
                 render_tier = getattr(self.builder, '_render_tier', 'high_res')
                 s_pad = getattr(self.builder, 'superficial_pad', 0)
-                
+
                 if render_tier == 'fast':
                     import tkinter as tk
                     # ⚡ SIMPLIFIED FAST RENDER: No labels, just a sized placeholder box.
-                    
+
                     # Determine real size
                     geom = wd.get("geometry", {})
                     w_val = wd.get("width") or geom.get("width")
                     h_val = wd.get("height") or geom.get("height")
-                    
+
                     # Create frame with fixed size if specified
                     widget = tk.Frame(parent, bg="#3d3d3d", highlightbackground="#555555", highlightthickness=1)
-                    
+
                     if w_val:
                         try:
                             widget.config(width=max(1, int(float(w_val))))
@@ -47,7 +45,7 @@ class BatchProcessingEngine:
                         try:
                             widget.config(height=max(1, int(float(h_val))))
                         except (ValueError, TypeError): pass
-                    
+
                     # If size is specified, prevent grid from shrinking the frame
                     if w_val or h_val:
                         widget.grid_propagate(False)
@@ -62,7 +60,7 @@ class BatchProcessingEngine:
                                 padx=w["padx"] + s_pad, pady=w["pady"] + s_pad, sticky=w["sticky"])
                 else:
                     creator = self.builder.widget_factory.get(wt)
-                    
+
                     if self.debug: self.logger.debug(f"  └─ 🔨 Creating '{wt}' at '{w['path']}'")
                     if creator:
                         wd["path"] = w["path"] # Inject path for MQTT

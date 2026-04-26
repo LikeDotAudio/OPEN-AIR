@@ -26,8 +26,8 @@
 # - Requires oaComBroker for Event Bus communication in running sub-modules.
 
 
-import sys
 import os
+import sys
 from pathlib import Path
 
 # Standard project_root resolution
@@ -42,8 +42,9 @@ while project_root.parent != project_root:
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
-from oaLogging.Methods.matrix_gate import matrix_log
 from oaGuiEditorWYSIWYG.Managers.wysiwyg_editor import WysiwygEditor
+from oaLogging.Methods.matrix_gate import matrix_log
+
 
 def launch_editor(parent_window, **kwargs):
     """
@@ -58,17 +59,17 @@ def run_tests():
     Ensures isolation and proper sys.path handling.
     """
     import subprocess
-    
+
     matrix_log("ui", "gui_builder", "run_tests", f"🚦🚦🚦 [PIPELINE] {Path(__file__).parent.name}: Starting automated test discovery...", "INFO")
     test_dir = current_dir / "Tests"
-    
+
     if not test_dir.exists():
         matrix_log("ui", "gui_builder", "run_tests", f"🚦🚦🚦 [PIPELINE] {Path(__file__).parent.name}: No Tests/ directory found.", "WARNING")
         return True
 
     env = os.environ.copy()
     env["PYTHONPATH"] = str(project_root) + os.pathsep + env.get("PYTHONPATH", "")
-    
+
     try:
         rel_test_dir = os.path.relpath(test_dir, project_root)
         result = subprocess.run(
@@ -93,7 +94,7 @@ def start(json_path=None):
     Start the module services. Defaults to launching the Standalone GUI.
     """
     matrix_log("ui", "gui_builder", "start", f"🚀🚀🚀 [LAUNCHING] Starting {Path(__file__).parent.name} Standalone GUI...", "INFO")
-    
+
     # 1. Resolve target JSON path
     target_path = json_path
     if not target_path:
@@ -102,7 +103,7 @@ def start(json_path=None):
             if not arg.startswith("-"):
                 target_path = arg
                 break
-    
+
     # 2. Apply Defaults if no path provided
     if not target_path:
         # Default target for design work
@@ -119,11 +120,11 @@ def start(json_path=None):
 
     # 3. Hand-off to established run_builder logic
     from oaGuiEditorWYSIWYG.Managers.run_builder import main as launch_main
-    
+
     # We temporarily adjust sys.argv to satisfy run_builder's main() requirements
     original_argv = sys.argv[:]
     sys.argv = [sys.argv[0], str(target_path)]
-    
+
     try:
         launch_main()
     finally:
@@ -142,7 +143,7 @@ if __name__ == "__main__":
     if not run_tests():
         print("❌ [CRITICAL] Tests failed. Aborting execution.")
         sys.exit(1)
-    
+
     # Standalone execution logic
     if len(sys.argv) > 1:
         cmd = sys.argv[1].lower()

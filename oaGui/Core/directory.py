@@ -1,14 +1,16 @@
 import pathlib
-from oaLogging.Methods.matrix_gate import matrix_log
+
 # Core/directory.py
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: Brief summary of purpose
-
 import tkinter as tk
 from tkinter import ttk
+
 from loguru import logger
+
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = False
@@ -23,7 +25,7 @@ class DirectoryBuilderMixin:
         Retrieves layout information for a given path, using a cache to avoid redundant parsing.
         """
         path_str = str(path)
-        
+
         # ⚡ OPTIMIZATION: Check directory timestamp for invalidation
         try:
             current_mtime = path.stat().st_mtime
@@ -34,7 +36,7 @@ class DirectoryBuilderMixin:
             cached_entry = self._layout_cache[path_str]
             if cached_entry.get("mtime") == current_mtime:
                 # ⚡ CACHE HIT: Return already normalized layout info directly.
-                # Redundant re-normalization via parse_layout_data was causing failures 
+                # Redundant re-normalization via parse_layout_data was causing failures
                 # because the parser expects 'raw' input, not already-normalized results.
                 return cached_entry
 
@@ -50,7 +52,7 @@ class DirectoryBuilderMixin:
         manager = None
         if parent.winfo_children():
             manager = parent.winfo_children()[0].winfo_manager()
-        
+
         if manager == "grid":
             parent.grid_columnconfigure(0, weight=1)
             parent.grid_rowconfigure(index, weight=1)
@@ -67,17 +69,17 @@ class DirectoryBuilderMixin:
         """Recursively builds the GUI."""
         matrix_log("gui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🏗️ [BUILDER] Starting build for: {path}", "DEBUG")
         if isinstance(path, str): path = pathlib.Path(path)
-        
+
 
         layout_info = None
         if layout_override:
             layout_info = self.layout_parser.parse_layout_data(layout_override, source_path=path)
         else:
             layout_info = self._get_layout_info(path)
-        
+
         layout_type = layout_info["type"]
         layout_data = layout_info["data"]
-        
+
         matrix_log("gui", "gui_builder", "_build_from_directory", f"🏗️ [BUILDER] Path: {path} | Type: {layout_type}", "INFO")
 
         if layout_type == "error":
@@ -86,18 +88,59 @@ class DirectoryBuilderMixin:
             return
 
         try:
-            if layout_type in ["horizontal_split", "vertical_split"]:
+            if layout_type == "multi_window":
+                windows = layout_data.get("windows", [])
+                
+                def _process_windows(win_idx=0):
+                    if win_idx >= len(windows):
+                        if on_complete: on_complete()
+                        return
+                        
+                    win_data = windows[win_idx]
+                    path_to_build = win_data["path"]
+                    title = win_data["title"]
+                    
+                    if win_idx == 0:
+                        target_widget = parent_widget
+                        root = getattr(self, "root", None)
+                        if root and isinstance(root, tk.Tk):
+                            root.title(f"OPEN-AIR: {title}")
+                    else:
+                        root = getattr(self, "root", None)
+                        if root and isinstance(root, tk.Tk):
+                            target_window = tk.Toplevel(root)
+                        else:
+                            target_window = tk.Toplevel()
+                            
+                        target_window.title(f"OPEN-AIR: {title}")
+                        target_window.geometry("1024x768")
+                        target_window.configure(bg=self.theme_colors["bg"])
+                        
+                        target_widget = tk.Frame(target_window, bg=self.theme_colors["bg"])
+                        target_widget.pack(fill=tk.BOTH, expand=True)
+
+                    matrix_log("gui", "gui_builder", "_build_from_directory", f"🏗️ [BUILDER] Building Window {win_idx+1}: {title} at {path_to_build}", "INFO")
+
+                    self._build_from_directory(
+                        path=path_to_build, 
+                        parent_widget=target_widget, 
+                        on_complete=lambda: self.after(1, lambda: _process_windows(win_idx + 1))
+                    )
+
+                self.after(1, lambda: _process_windows(0))
+
+            elif layout_type in ["horizontal_split", "vertical_split"]:
                 orientation = layout_data.get("orientation", tk.HORIZONTAL if layout_type == "horizontal_split" else tk.VERTICAL)
                 matrix_log("gui", "gui_builder", "_build_from_directory", f"🏗️ [BUILDER] Creating SplitPane (Orient: {orientation})", "DEBUG")
                 paned_window = ttk.PanedWindow(parent_widget, orient=orientation)
-                
+
                 try:
                     paned_window.pack(fill=tk.BOTH, expand=True)
                 except tk.TclError as e:
                     matrix_log("gui", "gui_builder", "_build_from_directory", f"⚠️ PanedWindow pack skipped: {e}", "TRACE")
 
                 panels = layout_data.get("panels", [])
-                
+
                 # Retrieve overflow settings for the current split pane
                 # These are now parsed by LayoutParser and available in layout_data
                 panel_overflow_ew = layout_data.get("overflow_ew", "none")
@@ -105,30 +148,32 @@ class DirectoryBuilderMixin:
 
                 panel_widget_containers = [] # To store the widget that will contain the panel's content
                 panel_frames = [] # Keep track of the base frames for each panel
-                
+
                 for i, panel_data in enumerate(panels):
                     # Create a base frame for the panel within the PanedWindow
                     base_frame = tk.Frame(paned_window, borderwidth=0, relief="flat", bg=self.theme_colors["bg"], width=10, height=10)
+                    
+                    # ⚡ LAYOUT SAFETY: Ensure the base frame allows its children to expand
+                    base_frame.grid_rowconfigure(0, weight=1)
+                    base_frame.grid_columnconfigure(0, weight=1)
+                    
                     panel_frames.append(base_frame) # Keep track of the base frame
                     weight = int(panel_data.get("weight", 1))
                     matrix_log("gui", "gui_builder", "_build_from_directory", f"  ├─ Adding Panel {i}: Path={panel_data['path']}, Weight={weight}", "TRACE")
-                    
+
                     widget_to_build_into = base_frame # Default: build directly into the frame
-                    
+
                     # If overflow is 'auto' horizontally or vertically, create a scrollable canvas
                     if panel_overflow_ew == "auto" or panel_overflow_ns == "auto":
                         from oaGuiBuilder.Workers.builder import AutoScrollbar
                         # Create a canvas that will hold the scrollable content
                         canvas = tk.Canvas(base_frame, borderwidth=0, highlightthickness=0, relief="flat", bg=self.theme_colors["bg"])
-                        
-                        base_frame.grid_rowconfigure(0, weight=1)
-                        base_frame.grid_columnconfigure(0, weight=1)
-                        
+
                         h_scrollbar = None
                         if panel_overflow_ew == "auto":
                             h_scrollbar = AutoScrollbar(base_frame, orient=tk.HORIZONTAL, command=canvas.xview)
                             canvas.configure(xscrollcommand=h_scrollbar.set)
-                        
+
                         v_scrollbar = None
                         if panel_overflow_ns == "auto":
                             v_scrollbar = AutoScrollbar(base_frame, orient=tk.VERTICAL, command=canvas.yview)
@@ -139,7 +184,7 @@ class DirectoryBuilderMixin:
                         if v_scrollbar: v_scrollbar.grid(row=0, column=1, sticky="ns")
 
                         widget_to_build_into = canvas # Content will be built into the canvas
-                    
+
                     panel_widget_containers.append(widget_to_build_into) # Store the widget to build into for this panel
 
                     try:
@@ -153,15 +198,15 @@ class DirectoryBuilderMixin:
                     if panel_index >= len(panels):
                         if on_complete: on_complete()
                         return
-                    
-                    
-                    
+
+
+
                     panel_data = panels[panel_index]
                     panel_path = panel_data["path"]
-                    
+
                     # Use the correct widget to build into (frame or canvas)
                     widget_to_build_into = panel_widget_containers[panel_index]
-                    
+
                     # Pass down the overflow behavior settings for potential use by child widgets
                     behavior_override_for_panel = {
                         "behavior": {
@@ -169,9 +214,9 @@ class DirectoryBuilderMixin:
                             "overflow_ns": panel_overflow_ns
                         }
                     }
-                    
-                    self._build_from_directory(path=panel_path, parent_widget=widget_to_build_into, 
-                                               on_complete=lambda: _process_panels(panel_index + 1), 
+
+                    self._build_from_directory(path=panel_path, parent_widget=widget_to_build_into,
+                                               on_complete=lambda: _process_panels(panel_index + 1),
                                                layout_override=behavior_override_for_panel) # Pass override
 
                 # Initial call to start processing panels
@@ -182,7 +227,7 @@ class DirectoryBuilderMixin:
                 def configure_sash(event=None):
                     if not paned_window.winfo_exists(): return
                     if getattr(paned_window, "sash_config_in_progress", False): return
-                    
+
                     paned_window.sash_config_in_progress = True
                     try:
                         w, h = paned_window.winfo_width(), paned_window.winfo_height()
@@ -191,7 +236,7 @@ class DirectoryBuilderMixin:
                         if total_weight == 0: return
                         cumulative_size = 0
                         last_position = 0
-                        
+
                         try:
                             for i in range(len(panels) - 1):
                                 weight = max(1, panels[i].get("weight", 1))
@@ -209,12 +254,12 @@ class DirectoryBuilderMixin:
                                     paned_window.sashpos(i, position)
                                 last_position = position
                         except tk.TclError as e:
-                            # 🛡️ RECURSION GUARD: Catch TclErrors to prevent X11 BadValue (0x0) crashes 
+                            # 🛡️ RECURSION GUARD: Catch TclErrors to prevent X11 BadValue (0x0) crashes
                             # during rapid layout changes or initial settling.
                             matrix_log("gui", "gui_builder", "configure_sash", f"⚠️ Sash positioning skipped: {e}", "TRACE")
                     finally:
                         paned_window.sash_config_in_progress = False
-                
+
                 paned_window.bind("<Configure>", configure_sash, add="+")
                 self.after(50, configure_sash)
 
@@ -225,7 +270,7 @@ class DirectoryBuilderMixin:
 
                 if hasattr(self, 'window_manager'):
                     notebook.bind("<Control-Button-1>", self.window_manager.tear_off_tab)
-                
+
                 notebook.bind("<Button-3>", self._on_notebook_right_click)
                 notebook.bind("<<NotebookTabChanged>>", self._on_tab_change)
                 notebook.bind("<<NotebookTabChanged>>", self._handle_tab_visibility, add="+")
@@ -238,14 +283,14 @@ class DirectoryBuilderMixin:
                     tab_frame.is_populated = False
                     tab_frame.build_path = tab_path
                     notebook.add(tab_frame, text=display_name)
-                
+
                 if on_complete: on_complete()
 
             elif layout_type in ["monitors", "recursive_build"]:
                 container = tk.Frame(parent_widget, bg=self.theme_colors["bg"])
                 container.pack(fill=tk.BOTH, expand=True)
                 all_items = layout_data.get("gui_files", []) + layout_data.get("child_containers", [])
-                
+
                 if all_items:
                     container.grid_columnconfigure(0, weight=1)
                     slots = []
@@ -259,7 +304,7 @@ class DirectoryBuilderMixin:
                         if item_index >= len(all_items):
                             if on_complete: on_complete()
                             return
-                        
+
                         item = all_items[item_index]
                         slot = slots[item_index]
                         if isinstance(item, dict):
@@ -270,14 +315,14 @@ class DirectoryBuilderMixin:
                             self.after(1, lambda: _process_recursive(item_index + 1))
                         else:
                             self.after(1, lambda: _process_recursive(item_index + 1))
-                    
+
                     _process_recursive(0)
                 elif on_complete: on_complete()
-            
+
             else:
                 self._process_default_directory_items(path, parent_widget, on_complete)
 
-        except Exception as e:
+        except Exception:
             if LOCAL_DEBUG: logger.exception(f"❌🔴 Build failure for {path}")
             if on_complete: on_complete()
 
@@ -288,7 +333,7 @@ class DirectoryBuilderMixin:
         gui_files = layout_info["data"].get("gui_files", [])
 
         def _process_items(dir_idx=0, file_idx=0):
-            
+
             if dir_idx < len(sub_dirs):
                 sub_dir_path = sub_dirs[dir_idx]["path"]
                 self._build_from_directory(path=sub_dir_path, parent_widget=parent_widget, on_complete=lambda: _process_items(dir_idx + 1, file_idx))

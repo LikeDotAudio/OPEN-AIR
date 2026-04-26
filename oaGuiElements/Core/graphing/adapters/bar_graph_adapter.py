@@ -1,14 +1,15 @@
 # adapters/bar_graph_adapter.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: Brief summary of purpose
 
-from oaGuiElements.Core.graphing.dynamic_bar_graph import DynamicBarGraph
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
-from oaLogging.Core.logger import builder_logger
+
+from oaGuiElements.Core.graphing.dynamic_bar_graph import DynamicBarGraph
+
+from oaLogging.Methods.matrix_gate import matrix_log
+
 
 class BarGraphAdapter:
     """Adapter for creating Bar Graph widgets."""
@@ -27,9 +28,9 @@ class BarGraphAdapter:
             builder_instance = kwargs.get("builder_instance")
 
         widget_id = config_data.get("path", config_data.get("id", "bar_graph"))
-        
+
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] bar_graph_adapter: Spawning DynamicBarGraph '{widget_id}'.", level="DEBUG")
-        
+
         return DynamicBarGraph(
             parent=parent_widget,
             config=config_data,

@@ -1,7 +1,7 @@
-import os
 import ast
 import glob
 import json
+import os
 
 TARGET_DIR = '/home/anthony/Documents/OPEN-AIR/oaGuiElements'
 
@@ -33,7 +33,7 @@ bad_functions = []
 
 for file in files:
     try:
-        with open(file, 'r', encoding='utf-8') as f:
+        with open(file, encoding='utf-8') as f:
             lines = f.readlines()
         if len(lines) > 500:
             long_files.append({"file": file.replace(TARGET_DIR, ''), "lines": len(lines)})
@@ -45,15 +45,15 @@ for file in files:
                 args_count = len(node.args.args) + len(node.args.kwonlyargs)
                 if node.args.vararg: args_count += 1
                 if node.args.kwarg: args_count += 1
-                
+
                 line_count = getattr(node, 'end_lineno', node.lineno) - node.lineno + 1
                 complexity = get_complexity(node)
-                
+
                 issues = []
                 if complexity > 10: issues.append(f"Cyclomatic Complexity > 10 ({complexity})")
                 if args_count > 2: issues.append(f"Argument Overload ({args_count} arguments)")
                 if line_count > 50: issues.append(f"Mixed Abstraction / Long Function ({line_count} lines)")
-                
+
                 math_related = any(kw in name.lower() for kw in ['calc', 'math', 'balance', 'reward', 'fee', 'coord'])
                 if math_related:
                     math_ops = [n for n in ast.walk(node) if isinstance(n, (ast.BinOp, ast.Compare))]
@@ -78,7 +78,7 @@ for file in files:
 
 for file in rs_files:
     try:
-        with open(file, 'r', encoding='utf-8') as f:
+        with open(file, encoding='utf-8') as f:
             lines = f.readlines()
         if len(lines) > 500:
             long_files.append({"file": file.replace(TARGET_DIR, ''), "lines": len(lines)})

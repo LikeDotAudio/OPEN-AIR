@@ -15,15 +15,16 @@
 # Version 20260330.1600.1
 
 import os
-import time
 import threading
-from loguru import logger
+import time
+
+from oaComProtocols.oaComSNMP.Constants.snmp_constants import LOG_POLLING_INTERVAL, MIN_LOG_PARTS, THREAD_JOIN_TIMEOUT
+from oaLogging.Core.logger import SNMP_LOGGER as snmp_logger
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # Import necessary constants and logging
 from oaOchestration.Constants.project_paths import SNMP_SET_LOG
-from oaLogging.Core.logger import SNMP_LOGGER as snmp_logger
-from oaComProtocols.oaComSNMP.Constants.snmp_constants import THREAD_JOIN_TIMEOUT, LOG_POLLING_INTERVAL, MIN_LOG_PARTS
-from oaLogging.Methods.matrix_gate import matrix_log
+
 
 class SnmpLogMonitor:
     """
@@ -35,9 +36,9 @@ class SnmpLogMonitor:
         """
         Initializes the log monitor.
         """
-        self._state_lock = thread_lock 
+        self._state_lock = thread_lock
         self._notify_monitor = notify_monitor_callback
-        self._running_flag_getter = running_flag_getter 
+        self._running_flag_getter = running_flag_getter
         self._mqtt_client = mqtt_client
 
         self._thread = None
@@ -51,13 +52,13 @@ class SnmpLogMonitor:
 
         self._thread = threading.Thread(target=self._log_monitoring_loop, daemon=True, name="SNMP-LogMonitorLoop")
         self._thread.start()
-        matrix_log("comms", "snmp", "start", 
+        matrix_log("comms", "snmp", "start",
                    "SnmpLogMonitor: Started background log monitoring thread.", "INFO")
 
     def stop(self):
         """Signals the background thread to stop and waits for it to terminate."""
         if self._thread and self._thread.is_alive():
-            matrix_log("comms", "snmp", "stop", 
+            matrix_log("comms", "snmp", "stop",
                        "SnmpLogMonitor: Stopping background log monitoring thread...", "INFO")
             self._thread.join(timeout=THREAD_JOIN_TIMEOUT)
             if self._thread.is_alive():
@@ -75,10 +76,10 @@ class SnmpLogMonitor:
                             parts = line.split()
                             if len(parts) >= MIN_LOG_PARTS and parts[0] == "-s":
                                 oid, value = parts[1], parts[2]
-                                
-                                matrix_log("comms", "snmp", "_log_monitoring_loop", 
+
+                                matrix_log("comms", "snmp", "_log_monitoring_loop",
                                            f"SnmpLogMonitor: RX SET: {oid} -> {value}", "DEBUG")
-                                
+
                                 meta = {
                                     "message_type": "SPLICE_ACTION",
                                     "origin_source": "oaComSNMP"
@@ -95,5 +96,5 @@ class SnmpLogMonitor:
                 pass
             except Exception as e:
                 snmp_logger.error(f"SnmpLogMonitor: Log monitoring loop error: {e}")
-            
+
             time.sleep(LOG_POLLING_INTERVAL)

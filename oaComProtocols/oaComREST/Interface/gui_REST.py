@@ -1,5 +1,4 @@
 import sys
-import pathlib
 from pathlib import Path
 
 # 1. Setup Environment
@@ -13,24 +12,24 @@ for parent in current_path.parents:
 if str(root_path) not in sys.path:
     sys.path.insert(0, str(root_path))
 
+import datetime
 import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
+
 # 44_REST/gui_REST.py
 # Author: Anthony Peter Kuzub
 # Version: 20260414.0020.1
 #
 # Description: Advanced REST API Monitor & Control Hub.
-
 import tkinter as tk
-from tkinter import ttk
-import datetime
 import webbrowser
 from pathlib import Path
+from tkinter import ttk
 
 import oaComProtocols.oaComREST.Entry as REST_MODULE
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Entry import logger
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- GUI FALLBACKS (V3.2.1 Decoupling) ---
 try:
@@ -49,16 +48,16 @@ class RestDashboard(tk.Frame, TransparencyMixin):
         self.config_data = kwargs.pop("config", {})
         self.json_path = kwargs.pop("json_path", None)
         self._destroyed = False
-        
+
         super().__init__(parent, **kwargs)
-        
+
         self._setup_ui()
-        
+
         # --- Standalone Initialization ---
         try:
             state_cache = self.config_data.get("state_cache_manager")
             protocol_router = self.config_data.get("protocol_router")
-            
+
             REST_MODULE.get_manager(state_cache_manager=state_cache, protocol_router=protocol_router)
             matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🌐 RestDashboard: RESTManager linked successfully.", "INFO")
         except Exception as e:
@@ -69,7 +68,7 @@ class RestDashboard(tk.Frame, TransparencyMixin):
             REST_MODULE.add_monitor_callback(self.on_rest_activity)
         except Exception as e:
             logger.error(f"RestDashboard: Failed to register callback: {e}")
-            
+
         self._refresh_ui()
         self._schedule_refresh()
 
@@ -86,21 +85,21 @@ class RestDashboard(tk.Frame, TransparencyMixin):
         # 1. Header
         header = tk.Frame(self, bg="#2b2b2b")
         header.pack(side=tk.TOP, fill=tk.X, pady=(10, 5))
-        
+
         tk.Label(header, text="🌐 REST API CONTROL HUB", font=("Helvetica", 14, "bold"), fg="#ffffff", bg="#2b2b2b").pack(side=tk.LEFT, padx=20)
-        
+
         self.status_lbl = tk.Label(header, text="Status: LOADING...", font=("Courier", 10, "bold"), fg="#ffff00", bg="#2b2b2b")
         self.status_lbl.pack(side=tk.RIGHT, padx=20)
 
         # 2. Control Bar
         ctrl_bar = tk.Frame(self, bg="#333333", height=40)
         ctrl_bar.pack(side=tk.TOP, fill=tk.X, padx=10, pady=5)
-        
-        self.btn_explorer = tk.Button(ctrl_bar, text="🔭 EXPLORER", bg="#1a3a4a", fg="#ffffff", font=("Helvetica", 9, "bold"), 
+
+        self.btn_explorer = tk.Button(ctrl_bar, text="🔭 EXPLORER", bg="#1a3a4a", fg="#ffffff", font=("Helvetica", 9, "bold"),
                                      command=self._open_explorer, width=12, relief="raised", bd=2)
         self.btn_explorer.pack(side=tk.RIGHT, padx=5, pady=5)
 
-        self.btn_browser = tk.Button(ctrl_bar, text="🌍 API DOCS", bg="#333344", fg="#ffffff", font=("Helvetica", 9, "bold"), 
+        self.btn_browser = tk.Button(ctrl_bar, text="🌍 API DOCS", bg="#333344", fg="#ffffff", font=("Helvetica", 9, "bold"),
                                     command=self._open_browser, width=12, relief="raised", bd=2)
         self.btn_browser.pack(side=tk.RIGHT, padx=5, pady=5)
 
@@ -119,7 +118,7 @@ class RestDashboard(tk.Frame, TransparencyMixin):
         for col in cols:
             self.tree.heading(col, text=col)
             self.tree.column(col, width=80, anchor="center")
-        
+
         self.tree.column("Time", width=100)
         self.tree.column("Method", width=80)
         self.tree.column("Path", width=250, anchor="w")
@@ -145,7 +144,7 @@ class RestDashboard(tk.Frame, TransparencyMixin):
 
         self.routes_frame = tk.Frame(tabs, bg="#1a1a1a")
         tabs.add(self.routes_frame, text=" API ROUTES ")
-        
+
         self.routes_tree = ttk.Treeview(self.routes_frame, columns=("Methods"), show="tree headings", height=5)
         self.routes_tree.heading("#0", text="Endpoint Path")
         self.routes_tree.heading("Methods", text="Allowed Methods")
@@ -177,7 +176,7 @@ class RestDashboard(tk.Frame, TransparencyMixin):
 
     def _refresh_ui(self):
         status = REST_MODULE.get_status()
-        
+
         if status.get("running"):
             self.status_lbl.configure(text=f"🟢 ONLINE | PORT: {status['port']}", fg="#00ff00")
             self.footer_lbl.configure(text=f"Server URL: {status['url']} (Swagger Docs: {status['docs_url']})")
@@ -188,14 +187,14 @@ class RestDashboard(tk.Frame, TransparencyMixin):
         # Update Detail Tree
         for item in self.routes_tree.get_children():
             self.routes_tree.delete(item)
-            
+
         for route in status.get("routes", []):
             self.routes_tree.insert("", "end", text=route["path"], values=(", ".join(route["methods"]),))
 
         # Update Network Status (Footer section)
         for item in self.info_tree.get_children():
             self.info_tree.delete(item)
-            
+
         self.info_tree.insert("", "end", text="Listening Host", values=(status["host"],))
         self.info_tree.insert("", "end", text="REST Port", values=(status["port"],))
         self.info_tree.insert("", "end", text="Service Status", values=("Running" if status["running"] else "Stopped",))
@@ -209,14 +208,14 @@ class RestDashboard(tk.Frame, TransparencyMixin):
         if self._destroyed: return
         now = datetime.datetime.now()
         timestamp = now.strftime("%H:%M:%S.%f")[:-3]
-        
+
         tag = "2xx"
         if 400 <= status_code < 500: tag = "4xx"
         elif status_code >= 500: tag = "5xx"
-        
+
         display_payload = str(payload) if payload else "-"
         self.tree.insert("", 0, values=(timestamp, method, path, status_code, display_payload), tags=(tag,))
-        
+
         if len(self.tree.get_children()) > 50:
             self.tree.delete(self.tree.get_children()[-1])
 
@@ -224,7 +223,7 @@ class RestDashboard(tk.Frame, TransparencyMixin):
 
     def destroy(self):
         self._destroyed = True
-        try: 
+        try:
             REST_MODULE.remove_monitor_callback(self.on_rest_activity)
         except Exception: pass
         super().destroy()

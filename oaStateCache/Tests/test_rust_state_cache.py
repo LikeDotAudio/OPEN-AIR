@@ -7,7 +7,9 @@
 
 import unittest
 from unittest.mock import MagicMock, patch
+
 from oaStateCache.Core.state_cache import StateRegistry
+
 
 class TestRustStateCache(unittest.TestCase):
     def setUp(self):
@@ -22,7 +24,7 @@ class TestRustStateCache(unittest.TestCase):
 
         with patch("oaStateCache.Core.state_cache.cache_io_handler.load_cache", return_value={}):
             registry = StateRegistry(self.mqtt)
-        
+
         self.assertIsNotNone(registry.rust_cache)
 
     def test_rust_state_cache_update(self):
@@ -37,11 +39,11 @@ class TestRustStateCache(unittest.TestCase):
 
         topic = "TEST/RUST/TOPIC"
         value = {"value": 42, "status": "OK"}
-        
+
         with patch("oaStateCache.Core.manifest.builder.create_manifest", return_value=value):
             with patch("oaComBroker.Core.protocol_router.manager.ProtocolRouter.get_instance"):
                 registry.handle_external_update(topic, 42)
-        
+
         # Verify results
         self.assertEqual(registry.get_cached_value(topic), 42)
         # Check Rust-specific dict export

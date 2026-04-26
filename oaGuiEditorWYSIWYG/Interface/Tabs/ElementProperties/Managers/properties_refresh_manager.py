@@ -6,11 +6,13 @@
 
 import tkinter as tk
 from pathlib import Path
-import importlib
+
 from oaLogging.Methods.matrix_gate import matrix_log
-from ..Methods.data_merger import deep_merge
+
 from .....Core.state import state_manager
 from ....PropertyEditor.property_leaf import PropertyLeaf
+from ..Methods.data_merger import deep_merge
+
 
 class PropertiesRefreshManager:
     """Manages the lifecycle of rendering property editors for a focused element."""
@@ -25,7 +27,7 @@ class PropertiesRefreshManager:
     def refresh(self, focused_path):
         """Clears existing content and renders the recursive property tree for the given path."""
         if not focused_path or not self.workspace.winfo_exists(): return
-        
+
         matrix_log("ui", "gui_builder", "element_properties", f"🎨🎨🎨 [RENDER] ElementProperties: Refreshing content for {focused_path}", "DEBUG")
 
         self.ui.clear_content()
@@ -33,7 +35,7 @@ class PropertiesRefreshManager:
         self.bespoke_editor_info = None
 
         actual_data = state_manager.get_value_at_path(focused_path)
-        if actual_data is None: 
+        if actual_data is None:
             tk.Label(self.ui.scroll_frame, text="Selected element not found in state.", bg="#2b2b2b", fg="#ff4444").pack(pady=50)
             self.ui.show_bespoke_button(False)
             return
@@ -72,15 +74,15 @@ class PropertiesRefreshManager:
             editor_file = full_path / f"{component['folder']}_editor.py"
             if editor_file.exists():
                 matrix_log("ui", "gui_builder", "element_properties", f"🎯 [BESPOKE] Found bespoke editor at {editor_file}", "DEBUG")
-                
+
                 # Derive class name from folder name (e.g. button_toggler -> ButtonTogglerEditor)
                 class_name = "".join(x.capitalize() for x in component['folder'].split('_')) + "Editor"
-                
+
                 self.bespoke_editor_info = {
                     "file_path": str(editor_file),
                     "class_name": class_name
                 }
-                
+
                 # Try to derive a module path for dynamic import
                 from oaOchestration.Core.path_initializer import GLOBAL_PROJECT_ROOT
                 try:
@@ -97,7 +99,7 @@ class PropertiesRefreshManager:
 
     def _prepare_display_data(self, actual_data):
         if not isinstance(actual_data, dict): return actual_data
-        
+
         w_type = actual_data.get("type", actual_data.get("widget_type"))
         schema_template = next((c.get("schema", {}) for n, c in self.library.items() if c["type"] == w_type), {})
         if schema_template:
@@ -121,7 +123,7 @@ class PropertiesRefreshManager:
                 new_widget_cache=new_widget_cache
             )
         else:
-            PropertyLeaf.create(self.ui.scroll_frame, focused_path.split(".")[-1], 
+            PropertyLeaf.create(self.ui.scroll_frame, focused_path.split(".")[-1],
                                 display_data, focused_path, self.workspace)
 
     def _cleanup_unused_widgets(self, new_widget_cache):

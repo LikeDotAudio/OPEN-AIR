@@ -6,9 +6,9 @@
 
 import unittest
 from unittest.mock import MagicMock, patch
-import urllib.request
 
 from oaComProtocols.oaComVisa.Workers.agent_static_ip_prober import discover_gateway_devices
+
 
 class TestAgentStaticIpProber(unittest.TestCase):
 
@@ -30,10 +30,10 @@ class TestAgentStaticIpProber(unittest.TestCase):
         mock_response.read.return_value = sample_html.encode('utf-8')
         mock_response.__enter__.return_value = mock_response
         mock_urlopen.return_value = mock_response
-        
+
         gateway_ips = ["192.168.1.1", "192.168.1.2"]
         resources = discover_gateway_devices(gateway_ips)
-        
+
         # We expect 2 resources per gateway = 4 total
         self.assertEqual(len(resources), 4)
         self.assertIn("TCPIP::192.168.1.1::GPIB0,1::INSTR", resources)
@@ -50,11 +50,11 @@ class TestAgentStaticIpProber(unittest.TestCase):
         CHECK: Assert it continues and returns resources from other gateways if available.
         """
         mock_urlopen.side_effect = [Exception("Network error"), MagicMock()]
-        
+
         gateway_ips = ["192.168.1.1", "192.168.1.2"]
         # The second call will succeed but return no matches (default MagicMock mock_response)
         resources = discover_gateway_devices(gateway_ips)
-        
+
         self.assertEqual(len(resources), 0)
         self.assertEqual(mock_urlopen.call_count, 2)
 

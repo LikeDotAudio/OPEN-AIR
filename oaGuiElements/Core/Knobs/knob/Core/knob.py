@@ -2,27 +2,27 @@
 # Modularized Rotary Knob Widget.
 # Version 20260315.Modular.1
 
-import tkinter as tk
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
-from loguru import logger
+import tkinter as tk
 
 # --- Standard Debug Logging Setup ---
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import matrix_log
+
 app_constants = Config.get_instance()
 
-from oaStyle.Core.style import THEMES, DEFAULT_THEME
-from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
 from oaGui.Methods.i18n_utils import get_text
 from oaGuiBuilder.Core.base_widget_creator import BaseWidgetCreator
+from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
-from oaGuiManager.Core.transparency.transparency import TransparencyManager
+from oaStyle.Core.style import DEFAULT_THEME, THEMES
 
 # Core Modules
-from ..knob_config import extract_knob_config
-from ..knob_state import create_knob_state
-from ..knob_interaction_mixin import KnobInteractionMixin
-from ..knob_renderer_mixin import KnobRendererMixin
+from .knob_config import extract_knob_config
+from .knob_interaction_mixin import KnobInteractionMixin
+from .knob_renderer_mixin import KnobRendererMixin
+from .knob_state import create_knob_state
+
 
 class CustomKnobFrame(tk.Frame, KnobInteractionMixin, KnobRendererMixin):
     """
@@ -33,7 +33,7 @@ class CustomKnobFrame(tk.Frame, KnobInteractionMixin, KnobRendererMixin):
         # 1. Geometry Normalization
         width = max(kwargs.pop("width", config.get("width", 50)), 10)
         height = max(kwargs.pop("height", config.get("height", 50)), 10)
-        
+
         # 2. Background Inheritance
         p_bg = kwargs.pop("bg", None)
         if p_bg is None:
@@ -41,30 +41,30 @@ class CustomKnobFrame(tk.Frame, KnobInteractionMixin, KnobRendererMixin):
                 p_bg = parent.cget("bg")
             except:
                 p_bg = "#2b2b2b"
-        
-        if not isinstance(p_bg, str) or not p_bg.startswith("#"): 
+
+        if not isinstance(p_bg, str) or not p_bg.startswith("#"):
             p_bg = "#2b2b2b"
 
         # ⚡ HARDENED BASE: Filter common problematic keys for mocked environments
         kwargs.pop("bd", None); kwargs.pop("highlightthickness", None); kwargs.pop("relief", None)
-        
+
         try:
             super().__init__(parent, bd=0, highlightthickness=0, relief="flat", bg=p_bg, width=width, height=height)
         except Exception as e:
             matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"⚠️ CustomKnobFrame: super().__init__ failed (mock environment?): {e}", level="DEBUG")
             # ⚡ MOCK PROTECTION: Ensure essential Tkinter attributes exist for mixins/manager
-            if not hasattr(self, 'tk'): 
+            if not hasattr(self, 'tk'):
                 from unittest.mock import MagicMock
                 self.tk = MagicMock()
             if not hasattr(self, '_w'): self._w = f"mock_knob_{id(self)}"
             pass
-        
+
         try:
             if hasattr(self, "pack_propagate"):
                 self.pack_propagate(False)
         except:
             pass
-        
+
         # 3. State Anchoring (Directly on self as per Architect directive)
         self.variable = variable
         self.widget_config = config
@@ -73,21 +73,21 @@ class CustomKnobFrame(tk.Frame, KnobInteractionMixin, KnobRendererMixin):
         self.state_mirror_engine = state_mirror_engine
         self.label_text = str(label_text) if label_text is not None else ""
         self.theme_colors = THEMES.get(DEFAULT_THEME, THEMES["dark"])
-        
+
         self.min_val, self.max_val = config["min"], config["max"]
         self.reff_point = config["reff_point"]
-        self.is_locked = False 
+        self.is_locked = False
         self.temp_entry = None
 
         # 4. Canvas
         try:
             self.canvas = tk.Canvas(self, bd=0, highlightthickness=0, relief="flat", bg=p_bg, width=width, height=height)
             self.canvas.pack(fill="both", expand=True)
-            
+
             # 5. Lifecycle Bindings
             self._bind_knob_events()
             self.variable.trace_add("write", lambda *a: self._draw_visuals())
-            
+
             # Initial Render
             self.after(50, self._draw_visuals)
         except:
@@ -111,7 +111,7 @@ class CustomKnobFrame(tk.Frame, KnobInteractionMixin, KnobRendererMixin):
 
     def _broadcast_cb(self):
         """Helper for mixin to trigger MQTT updates."""
-        if self.state_mirror_engine and self.path: 
+        if self.state_mirror_engine and self.path:
             self.state_mirror_engine.broadcast_gui_change_to_mqtt(self.path)
 
     def _draw_cb(self):
@@ -124,8 +124,8 @@ class CustomKnobFrame(tk.Frame, KnobInteractionMixin, KnobRendererMixin):
             if not self.canvas.winfo_exists(): return
         except:
             return
-        
-        from ..knob_renderer import draw_knob_visuals
+
+        from .knob_renderer import draw_knob_visuals
         draw_knob_visuals(
             canvas=self.canvas,
             state=self.state,
@@ -185,20 +185,20 @@ class CustomKnobFrame(tk.Frame, KnobInteractionMixin, KnobRendererMixin):
 
 @WidgetRegistry.register("_Knob", "_SmartKnob")
 class BuilderKnobCreator(BaseWidgetCreator, TransparencyMixin):
-    
+
     def _assemble_ui(self, parent_widget, config_data, context, **kwargs):
         """Assembles the Knob UI elements."""
         config = extract_knob_config(config_data)
         label = get_text(config_data.get('label_active')) or get_text(config_data.get('label'), "Unknown")
         path = config_data.get("path")
-        
+
         knob_var = kwargs.get("variable") or tk.DoubleVar(master=parent_widget, value=config["value_default"])
         state = create_knob_state(config)
-        
+
         s_engine = getattr(context, 'state_mirror_engine', None) or kwargs.get('state_mirror_engine')
-        
+
         frame = CustomKnobFrame(parent_widget, knob_var, config, state, path, s_engine, label, width=config["width"], height=config["height"])
-        
+
         return frame, getattr(frame, 'canvas', None)
 
     @staticmethod

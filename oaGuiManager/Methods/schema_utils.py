@@ -4,12 +4,13 @@
 #
 # Description: Utility functions for schema manipulation and normalization.
 
-from oaGuiManager.Constants.schema_defaults import LEXICON, ANCHOR_MAP
+from oaGuiManager.Constants.schema_defaults import ANCHOR_MAP, LEXICON
+
 
 def deep_merge(target, source):
     """Deep merges source dict into target dict without erasing nested blocks."""
     for k, v in source.items():
-        if (isinstance(v, dict) and k in target and 
+        if (isinstance(v, dict) and k in target and
             isinstance(target[k], dict)):
             deep_merge(target[k], v)
         else:
@@ -20,12 +21,12 @@ def expand_abbreviations(data):
     """Recursively translates Lexicon Abbreviations to Engine Keys."""
     if not isinstance(data, dict):
         return data
-    
+
     new_data = {}
     for k, v in data.items():
         if isinstance(v, dict):
             v = expand_abbreviations(v)
-        
+
         target_key = LEXICON.get(k, k)
         new_data[target_key] = v
     return new_data
@@ -45,14 +46,14 @@ def calculate_sticky(geometry):
     sticky_parts = set()
     stretch = str(geometry.get("stretch", "")).lower()
     anchor = str(geometry.get("anchor", "")).lower()
-    
+
     if any(p in ["width", "fill", "nsew"] for p in stretch.split()):
         sticky_parts.update(["e", "w"])
     if any(p in ["height", "fill", "nsew"] for p in stretch.split()):
         sticky_parts.update(["n", "s"])
-        
+
     for p in anchor.split():
-        if p in ANCHOR_MAP: 
+        if p in ANCHOR_MAP:
             sticky_parts.add(ANCHOR_MAP[p])
-            
+
     return "".join(sorted(list(sticky_parts)))

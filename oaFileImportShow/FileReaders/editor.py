@@ -1,28 +1,26 @@
-import os
 
 import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
+
 # FileReaders/editor.py
 # Author: Anthony Peter Kuzub
 # Version: 20260315.Modular.1
 #
 # Description: Modularized Importer Editor Logic.
-
-import tkinter as tk
-from tkinter import ttk
-from loguru import logger
-
 # --- Standard Debug Logging Setup ---
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import matrix_log
+
 app_constants = Config.get_instance()
 
 from oaFileImportShow.FileReaders.saver import save_markers_file_internally
+
+from .Core.string_utils import StringUtils
 
 # --- EXTRACTED CORE MODULES ---
 from .Core.tree_cell_editor import TreeCellEditor
 from .Core.tree_navigation_engine import TreeNavigationEngine
 from .Core.tree_sorting_engine import TreeSortingEngine
-from .Core.string_utils import StringUtils
+
 
 def on_tree_double_click(tab, event):
     """Handles double-click to initiate cell editing."""
@@ -31,7 +29,7 @@ def on_tree_double_click(tab, event):
     if not iid or not cid: return
     idx = int(cid[1:]) - 1
     if idx < 0 or idx >= len(tab.tree_headers): return
-    
+
     value = tab.marker_tree.item(iid, "values")[idx]
     start_editing_cell(tab, iid, idx, initial_value=value)
 
@@ -54,7 +52,7 @@ def on_tree_header_click(tab, event):
     if tab.marker_tree.identify_region(event.x, event.y) == "heading":
         cid = tab.marker_tree.identify_column(event.x); idx = int(cid[1:]) - 1
         if idx < 0 or idx >= len(tab.tree_headers): return
-        
+
         name = tab.tree_headers[idx]
         if tab.sort_column == name: tab.sort_direction = not tab.sort_direction
         else: tab.sort_column, tab.sort_direction = name, True

@@ -4,7 +4,6 @@
 #
 # Description: Dedicated module for parsing the *IDN? string of VISA instruments.
 
-import re  # Potentially needed for future IDN parsing, though not used in current simple version.
 
 
 def parse_idn_string(idn_string):

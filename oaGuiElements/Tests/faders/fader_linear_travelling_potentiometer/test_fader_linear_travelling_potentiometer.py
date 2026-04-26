@@ -4,10 +4,15 @@
 #
 # Description: Brief summary of purpose
 
-import unittest
-from unittest.mock import MagicMock, patch
 import tkinter as tk
-from oaGuiElements.Core.faders.fader_linear_travelling_potentiometer.Core.fader_linear_travelling_potentiometer import CustomLTPFrame, BuilderFaderLinearTravellingPotentiometerCreator
+import unittest
+from unittest.mock import MagicMock
+
+from oaGuiElements.Core.faders.fader_linear_travelling_potentiometer.Core.fader_linear_travelling_potentiometer import (
+    BuilderFaderLinearTravellingPotentiometerCreator,
+    CustomLTPFrame,
+)
+
 
 class TestFaderLinearTravellingPotentiometer(unittest.TestCase):
     def setUp(self):
@@ -16,7 +21,7 @@ class TestFaderLinearTravellingPotentiometer(unittest.TestCase):
             self.root.withdraw()
         except:
             self.root = MagicMock()
-        
+
         self.config = {
             "label_active": "Test LTP",
             "path": "test/ltp",
@@ -33,7 +38,7 @@ class TestFaderLinearTravellingPotentiometer(unittest.TestCase):
         }
         self.mirror_engine = MagicMock()
         self.mirror_engine.calculate_topic.return_value = "test/topic"
-        
+
         self.context = MagicMock()
         self.context.state_mirror_engine = self.mirror_engine
         self.context.base_mqtt_topic_from_path = "test/base"
@@ -50,7 +55,7 @@ class TestFaderLinearTravellingPotentiometer(unittest.TestCase):
             subscriber_router=self.context.subscriber_router,
             base_mqtt_topic="test/base"
         )
-        
+
         # OPERATE & CHECK
         self.assertEqual(ltp.path, "test/ltp")
         self.assertEqual(ltp.min_val, 0.0)
@@ -66,7 +71,7 @@ class TestFaderLinearTravellingPotentiometer(unittest.TestCase):
             config_data=self.config,
             context=self.context
         )
-        
+
         # CHECK
         self.assertIsInstance(ltp, CustomLTPFrame)
         self.mirror_engine.register_widget.assert_called()

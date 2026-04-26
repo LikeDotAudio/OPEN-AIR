@@ -1,46 +1,43 @@
 # fader/fader.py
-from oaGui.Methods.i18n_utils import get_text
+
 # Author: Anthony Peter Kuzub
 # Version: 20260315.Modular.1
 #
 # Description: Modularized Vertical Fader Widget.
-
 import tkinter as tk
-from oaLogging.Methods.matrix_gate import matrix_log
-import inspect
-from tkinter import ttk
-import sys
-import os
+
+from loguru import logger
+
+from oaConfigurationManager.FileReaders.config_reader import Config
+from oaGui.Methods.i18n_utils import get_text
 
 # --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import builder_logger
-from loguru import logger
-from oaConfigurationManager.FileReaders.config_reader import Config
+
 app_constants = Config.get_instance()
 
-from oaStyle.Core.style import THEMES, DEFAULT_THEME
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
-from oaGuiManager.Core.transparency.transparency import TransparencyManager
-from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
 from oaGuiBuilder.Core.base_widget_creator import BaseWidgetCreator
+from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
+from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+from oaStyle.Core.style import DEFAULT_THEME, THEMES
 
 # --- EXTRACTED CORE MODULES ---
-from ..fader_interaction_mixin import FaderInteractionMixin
-from ..fader_renderer_mixin import FaderRendererMixin
-from ..fader_state_mixin import FaderStateMixin
+from .fader_interaction_mixin import FaderInteractionMixin
+from .fader_renderer_mixin import FaderRendererMixin
+from .fader_state_mixin import FaderStateMixin
+
 
 class CustomFaderFrame(
-    tk.Frame, 
-    FaderInteractionMixin, 
-    FaderRendererMixin, 
+    tk.Frame,
+    FaderInteractionMixin,
+    FaderRendererMixin,
     FaderStateMixin
 ):
     """Refactored Fader frame inheriting interaction, rendering, and state logic via mixins."""
-    
+
     def __init__(self, master, variable, config, path, state_mirror_engine, sync_callback):
         colors = THEMES.get(DEFAULT_THEME, THEMES["dark"])
         f_style = colors.get("fader_style", {})
-        
+
         self.bg_color = colors.get("bg", "#2b2b2b")
         self.accent_color = colors.get("accent", "#33A1FD")
         self.track_col = colors.get("secondary", "#444444")
@@ -51,20 +48,20 @@ class CustomFaderFrame(
         self.max_val = float(config.get("value_max", 0.0))
         self.log_exponent = float(config.get("log_exponent", 1.0))
         self.reff_point = float(config.get("reff_point", (self.min_val + self.max_val) / 2.0))
-        
+
         self.show_value = bool(config.get("show_value", True))
         self.show_units = bool(config.get("show_units", False))
         self.label_color = config.get("label_color", "white")
         self.label_text = get_text(config.get("label_active"), "")
-        self.unit_text, self.unit_position = config.get("unit_text", ""), config.get("unit_position", "right") 
-        
+        self.unit_text, self.unit_position = config.get("unit_text", ""), config.get("unit_position", "right")
+
         self.tick_size = float(config.get("tick_size", f_style.get("tick_size", 0.35)))
         self.fader_track_color = config.get("fader_track_color", config.get("fader_colour", self.track_col))
-        self.track_hover_color = config.get("track_hover_color", "#444444") 
+        self.track_hover_color = config.get("track_hover_color", "#444444")
         self.cap_color = config.get("cap_color", config.get("cap", self.handle_col))
         self.cap_highlight_color = config.get("cap_highlight_color", config.get("cap_highlights", None))
         self.value_highlight_color = config.get("value_highlight_color", f_style.get("value_highlight_color", "#f4902c"))
-        
+
         self.cap_width_override = config.get("cap_width")
         self.cap_height_override = config.get("cap_height")
         self.fader_cap_scale = float(config.get("fader_cap_scale", 1.0))
@@ -85,21 +82,21 @@ class CustomFaderFrame(
         self.sync_callback = sync_callback
 
         super().__init__(
-            master, bd=int(config.get("border_width", 0)), relief="solid", 
-            highlightbackground=config.get("border_color", "black"), 
+            master, bd=int(config.get("border_width", 0)), relief="solid",
+            highlightbackground=config.get("border_color", "black"),
             highlightthickness=int(config.get("border_width", 0)), bg=self.bg_color
         )
 
 @WidgetRegistry.register("_Fader", "_SmartFader", "_CustomFader")
 class BuilderFaderCreator(BaseWidgetCreator, TransparencyMixin):
-    
+
     def _assemble_ui(self, parent_widget, config_data, context, **kwargs):
         """
         Implementation of the Template Method for Fader assembly.
         """
         ctx = context if context else type('obj', (object,), kwargs)()
         b_inst = getattr(ctx, 'builder_instance', None) or getattr(ctx, 'app_instance', None) or kwargs.get('builder_instance')
-        
+
         path = config_data.get("path")
         val_var = kwargs.get("variable") or tk.DoubleVar(master=parent_widget, value=float(config_data.get("value_default", 75.0)))
 
@@ -114,7 +111,7 @@ class BuilderFaderCreator(BaseWidgetCreator, TransparencyMixin):
             canvas = tk.Canvas(frame, width=int(w), height=int(h), highlightthickness=0, bd=0, relief="flat", bg=frame.bg_color)
             canvas.pack(fill=tk.BOTH, expand=True)
             frame.canvas = canvas # Inject canvas ref
-            
+
             # 3. Dynamic Handlers
             def _sync_pos(*a):
                 if not canvas.winfo_exists(): return
@@ -147,7 +144,7 @@ class BuilderFaderCreator(BaseWidgetCreator, TransparencyMixin):
 
             canvas.after(50, lambda: frame._draw_fader(w, h, val_var.get()))
             return frame, canvas
-        except Exception as e:
+        except Exception:
             logger.exception("🎚️❌ Error creating custom fader")
             return None, None
 

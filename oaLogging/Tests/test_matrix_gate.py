@@ -6,10 +6,12 @@
 
 import unittest
 from unittest.mock import MagicMock, patch
-from oaLogging.Methods.matrix_gate import is_debug_allowed, debug_matrix, matrix_log
+
+from oaLogging.Methods.matrix_gate import debug_matrix, is_debug_allowed, matrix_log
+
 
 class TestMatrixGate(unittest.TestCase):
-    
+
     def setUp(self):
         # Force Rust off for these logic tests to ensure we hit the Python manager mocks
         self.rust_patch = patch("oaLogging.Methods.matrix_gate.RUST_ENABLED", False)
@@ -17,16 +19,16 @@ class TestMatrixGate(unittest.TestCase):
 
     def tearDown(self):
         self.rust_patch.stop()
-    
+
     @patch("oaConfigurationManager.Managers.LoggingManager.manager.LoggingMatrixManager.get_instance")
     def test_is_debug_allowed_delegation(self, mock_get_manager):
         """Check: is_debug_allowed correctly delegates to the manager."""
         mock_manager = MagicMock()
         mock_get_manager.return_value = mock_manager
         mock_manager.is_debug_allowed.return_value = True
-        
+
         result = is_debug_allowed("COMMS", "MQTT", "test_func")
-        
+
         self.assertTrue(result)
         mock_manager.is_debug_allowed.assert_called_with("COMMS", "MQTT", "test_func")
 
@@ -43,11 +45,11 @@ class TestMatrixGate(unittest.TestCase):
         # Note: The decorator always allows the FUNCTION to run, but we are testing
         # if the 'allowed' check is performed correctly.
         mock_allowed.return_value = True
-        
+
         @debug_matrix(system="GUI", element="Builder")
         def sample_func():
             return "executed"
-            
+
         result = sample_func()
         self.assertEqual(result, "executed")
         mock_allowed.assert_called()
@@ -59,11 +61,11 @@ class TestMatrixGate(unittest.TestCase):
         mock_allowed.return_value = False
         matrix_log("SYS", "EL", "FUNC", "Message")
         mock_get_logger.assert_not_called()
-        
+
         mock_allowed.return_value = True
         mock_context_logger = MagicMock()
         mock_get_logger.return_value = mock_context_logger
-        
+
         matrix_log("SYS", "EL", "FUNC", "Message")
         mock_get_logger.assert_called()
 

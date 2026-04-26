@@ -6,11 +6,12 @@
 
 import unittest
 from unittest.mock import MagicMock, patch
-import orjson
-import time
 
-from oaWatchdog.Managers.fleet_status_monitor import FleetStatusMonitor
+import orjson
+
 from oaComProtocols.oaComMQTT.Core.mqtt_message import MqttMessage
+from oaWatchdog.Managers.fleet_status_monitor import FleetStatusMonitor
+
 
 class TestFleetStatusMonitor(unittest.TestCase):
 
@@ -18,16 +19,16 @@ class TestFleetStatusMonitor(unittest.TestCase):
         """Set up the mock subscriber router and the FleetStatusMonitor instance."""
         self.mock_sme = MagicMock()
         self.mock_router = MagicMock()
-        
+
         # Patch app_constants used in mqtt_publisher_service
         self.patcher_const = patch('oaComProtocols.oaComMQTT.Core.mqtt_publisher_service.app_constants')
         self.mock_const = self.patcher_const.start()
         self.mock_const.MQTT_RETAIN_BEHAVIOR = False
-        
+
         # Patch publish_payload before instantiation as __init__ calls _publish_color
         self.patcher = patch('oaWatchdog.Managers.fleet_status_monitor.publish_payload')
         self.mock_publish = self.patcher.start()
-        
+
         self.monitor = FleetStatusMonitor(
             state_mirror_engine=self.mock_sme,
             subscriber_router=self.mock_router
@@ -46,7 +47,7 @@ class TestFleetStatusMonitor(unittest.TestCase):
         base = "OPEN-AIR/System/Status/Fleet"
         self.mock_router.subscribe_to_topic.assert_any_call(f"{base}/Start", self.monitor._on_scan_start)
         self.mock_router.subscribe_to_topic.assert_any_call(f"{base}/Complete", self.monitor._on_scan_complete)
-        
+
         # Initial publish during __init__
         self.mock_publish.assert_called_once()
         args, _ = self.mock_publish.call_args
@@ -62,10 +63,10 @@ class TestFleetStatusMonitor(unittest.TestCase):
         """
         self.monitor.current_state = "GREEN"
         self.mock_publish.reset_mock()
-        
+
         message = MqttMessage(topic="OPEN-AIR/System/Status/Fleet/Start", payload=b"{}")
         self.monitor._on_scan_start(message)
-        
+
         self.assertEqual(self.monitor.current_state, "RED")
         args, _ = self.mock_publish.call_args
         payload = orjson.loads(args[1])
@@ -79,11 +80,11 @@ class TestFleetStatusMonitor(unittest.TestCase):
         """
         self.monitor.current_state = "RED"
         self.mock_publish.reset_mock()
-        
+
         data = {"num_devices": 5}
         message = MqttMessage(topic="OPEN-AIR/System/Status/Fleet/Complete", payload=orjson.dumps(data))
         self.monitor._on_scan_complete(message)
-        
+
         self.assertEqual(self.monitor.current_state, "GREEN")
         args, _ = self.mock_publish.call_args
         payload = orjson.loads(args[1])
@@ -97,11 +98,11 @@ class TestFleetStatusMonitor(unittest.TestCase):
         """
         self.monitor.current_state = "GREEN"
         self.mock_publish.reset_mock()
-        
+
         data = {"num_devices": 0}
         message = MqttMessage(topic="OPEN-AIR/System/Status/Fleet/Complete", payload=orjson.dumps(data))
         self.monitor._on_scan_complete(message)
-        
+
         self.assertEqual(self.monitor.current_state, "RED")
         args, _ = self.mock_publish.call_args
         payload = orjson.loads(args[1])
@@ -115,10 +116,10 @@ class TestFleetStatusMonitor(unittest.TestCase):
         """
         self.monitor.current_state = "GREEN"
         self.mock_publish.reset_mock()
-        
+
         message = MqttMessage(topic="OPEN-AIR/System/Status/Fleet/Complete", payload=b"invalid json")
         self.monitor._on_scan_complete(message)
-        
+
         self.assertEqual(self.monitor.current_state, "RED")
         args, _ = self.mock_publish.call_args
         payload = orjson.loads(args[1])

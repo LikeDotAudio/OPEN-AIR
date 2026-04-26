@@ -6,8 +6,8 @@
 # The sole orchestrator for the Thread Manager Module.
 
 import os
-import sys
 import subprocess
+import sys
 import time
 from pathlib import Path
 
@@ -24,14 +24,14 @@ if str(project_root) not in sys.path:
 
 # --- Absolute Imports for Standalone Support ---
 try:
-    from oaThreadManager.Workers.launcher import *
     from oaThreadManager.Core.mqtt_subscriber_mixin import *
+    from oaThreadManager.Workers.launcher import *
 except ImportError:
     # Fallback if running from within the directory
     if str(current_dir.parent) not in sys.path:
         sys.path.insert(0, str(current_dir.parent))
-    from Workers.launcher import *
     from Core.mqtt_subscriber_mixin import *
+    from Workers.launcher import *
 
 def run_tests():
     """
@@ -40,14 +40,14 @@ def run_tests():
     """
     print(f"📡📥📥 [TEST] {Path(__file__).parent.name}: Starting automated test discovery...")
     test_dir = current_dir / "Tests"
-    
+
     if not test_dir.exists():
         print(f"📡📤📤 [TEST] {Path(__file__).parent.name}: No Tests/ directory found.")
         return True
 
     env = os.environ.copy()
     env["PYTHONPATH"] = str(project_root) + os.pathsep + env.get("PYTHONPATH", "")
-    
+
     try:
         rel_test_dir = os.path.relpath(test_dir, project_root)
         result = subprocess.run(
@@ -87,7 +87,7 @@ if __name__ == "__main__":
     if not run_tests():
         print("❌ [CRITICAL] Tests failed. Aborting execution.")
         sys.exit(1)
-    
+
     # Standalone execution logic
     if len(sys.argv) > 1:
         cmd = sys.argv[1].lower()

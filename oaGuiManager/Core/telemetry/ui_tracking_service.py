@@ -4,14 +4,14 @@
 #
 # Description: Centralized Telemetry Service for UI Visibility and Geometry.
 
-import time
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
+import time
+
 import orjson
-import tkinter as tk
-from loguru import logger
-from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic
+
 from oaComProtocols.oaComMQTT.Core.mqtt_publisher_service import is_connected
+from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic
+from oaLogging.Methods.matrix_gate import matrix_log
 
 
 class UITrackingService:
@@ -19,7 +19,7 @@ class UITrackingService:
     Centralized service to track widget visibility and geometry.
     Handles debouncing and MQTT publishing.
     """
-    
+
     def __init__(self):
         self._tracked_widgets = {} # widget -> metadata
 
@@ -38,7 +38,7 @@ class UITrackingService:
             base_mqtt_topic_from_path,
             "visibility/visible",
         )
-        
+
         geometry_topic = get_topic(
             state_mirror_engine.base_topic,
             base_mqtt_topic_from_path,
@@ -52,23 +52,23 @@ class UITrackingService:
             "geo_topic": geometry_topic,
             "geo_timer": None
         }
-        
+
         self._tracked_widgets[widget] = metadata
-        
+
         widget.bind("<Map>", lambda e: self._on_visible(widget, e), add="+")
         widget.bind("<Unmap>", lambda e: self._on_hidden(widget, e), add="+")
         widget.bind("<Destroy>", lambda e: self._on_destroy(widget, e), add="+")
         widget.bind("<Configure>", lambda e: self._on_geometry_change(widget, e), add="+")
-        
+
         matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"📡 UITrackingService: Tracking '{tab_name}'", level="TRACE")
 
     def _on_visible(self, widget, event):
         meta = self._tracked_widgets.get(widget)
         if not meta: return
-        
+
         # ⚡ VISIBILITY FLAG: Set local attribute for child widgets to check
         widget.is_visible = True
-        
+
         matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"👁️ UITrackingService: VISIBLE for {meta['tab_name']}", level="DEBUG")
         self._publish_visibility(meta, True)
         # Force geometry update on show
@@ -77,10 +77,10 @@ class UITrackingService:
     def _on_hidden(self, widget, event):
         meta = self._tracked_widgets.get(widget)
         if not meta: return
-        
+
         # ⚡ VISIBILITY FLAG: Set local attribute for child widgets to check
         widget.is_visible = False
-        
+
         matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"👁️ UITrackingService: HIDDEN for {meta['tab_name']}", level="DEBUG")
         self._publish_visibility(meta, False)
 
@@ -94,10 +94,10 @@ class UITrackingService:
     def _on_geometry_change(self, widget, event):
         meta = self._tracked_widgets.get(widget)
         if not meta: return
-        
+
         if meta["geo_timer"]:
             widget.after_cancel(meta["geo_timer"])
-            
+
         # Debounce
         meta["geo_timer"] = widget.after(500, lambda: self._perform_geometry_publish(widget))
 
@@ -105,11 +105,11 @@ class UITrackingService:
         meta = self._tracked_widgets.get(widget)
         if not meta: return
         meta["geo_timer"] = None
-        
+
         try:
             toplevel = widget.winfo_toplevel()
             w, h, x, y = toplevel.winfo_width(), toplevel.winfo_height(), toplevel.winfo_x(), toplevel.winfo_y()
-            
+
             if not is_connected(): return
 
             payload = {

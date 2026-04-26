@@ -1,11 +1,11 @@
-import os
-import json
 import glob
+import json
+import os
 import re
 
 # Load pre-translated chunk 1
 try:
-    with open('/home/anthony/Documents/OPEN-AIR/.gemini/TempScripts/translations_chunk_1.json', 'r', encoding='utf-8') as f:
+    with open('/home/anthony/Documents/OPEN-AIR/.gemini/TempScripts/translations_chunk_1.json', encoding='utf-8') as f:
         TRANSLATION_MAP = json.load(f)
 except FileNotFoundError:
     TRANSLATION_MAP = {}
@@ -59,28 +59,28 @@ def naive_translate(s, lang):
     if re.fullmatch(r'\{\{.*?\}\}', s): return s
     if s in TRANSLATION_MAP:
         return TRANSLATION_MAP[s].get(lang, s)
-    
+
     # Check for simple terms
     if s in TERMS:
         return TERMS[s].get(lang, s)
-    
+
     # Check for CH X or Channel X
     m = re.match(r'(CH|Channel|Canal)\s*(\d+)', s, re.I)
     if m:
         prefix = TERMS.get(m.group(1).title(), {}).get(lang, m.group(1))
         return f'{prefix} {m.group(2)}'
-    
+
     # Check for number + units
     m = re.match(r'(-?\d+\.?\d*)\s*(dB|Hz|kHz|MHz|GHz|V|A|Ohms|ms|s)', s, re.I)
     if m:
         return s # Units are usually the same
-    
+
     # If it is a known term with a number
     for term, trans in TERMS.items():
         if s.startswith(term + ' '):
             rest = s[len(term):]
             return trans.get(lang, term) + rest
-            
+
     return s # Fallback to English
 
 def localize_obj(obj):
@@ -101,14 +101,14 @@ files = glob.glob(os.path.join(assets_dir, '**', '*.json'), recursive=True)
 
 for fpath in files:
     try:
-        with open(fpath, 'r', encoding='utf-8') as f:
+        with open(fpath, encoding='utf-8') as f:
             data = json.load(f)
-        
+
         localize_obj(data)
-        
+
         with open(fpath, 'w', encoding='utf-8') as f:
             json.dump(data, f, indent=2, ensure_ascii=False)
-            
+
     except Exception as e:
         print(f'Error processing {fpath}: {e}')
 

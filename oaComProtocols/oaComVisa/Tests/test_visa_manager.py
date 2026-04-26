@@ -2,15 +2,17 @@
 # Author: Anthony Peter Kuzub
 # Version: 20260410.1000.6
 #
-# Description: Unit tests for VisaManager ensuring Hub-and-Spoke integrity, 
+# Description: Unit tests for VisaManager ensuring Hub-and-Spoke integrity,
 # anti-feedback, and standardized standalone behavior.
 
 import unittest
 from unittest.mock import MagicMock, patch
+
 import orjson
 
 # --- Target Module ---
 from oaComProtocols.oaComVisa.Managers.visa_manager import VisaManagerOrchestrator
+
 
 class TestVisaManagerOrchestrator(unittest.TestCase):
     """
@@ -24,7 +26,7 @@ class TestVisaManagerOrchestrator(unittest.TestCase):
         self.mock_sub_router = MagicMock()
         self.mock_client = MagicMock()
         self.mock_mqtt.get_client_instance.return_value = self.mock_client
-        
+
         # Patch internal components EXCEPT VisaGuiPublisher to ensure it runs
         self.patchers = [
             patch('oaComProtocols.oaComVisa.Managers.visa_manager.VisaProxy'),
@@ -50,10 +52,10 @@ class TestVisaManagerOrchestrator(unittest.TestCase):
         """CHECK: Verify the manager broadcasts its presence to the system Hub."""
         # OPERATE: Logic is in __init__ via gui_publisher.
         # It calls gui_publisher._publish_proxy_status("INITIALIZING")
-        
+
         # CHECK
         self.mock_client.publish.assert_called()
-        
+
         # Check if any call was to Proxy/Status
         found = False
         for call in self.mock_client.publish.call_args_list:
@@ -68,7 +70,7 @@ class TestVisaManagerOrchestrator(unittest.TestCase):
         """CHECK: Verify that publications to Hub include origin metadata."""
         # OPERATE
         self.manager.gui_publisher._publish_status("connected", True)
-        
+
         # CHECK
         self.mock_client.publish.assert_called()
         found = False

@@ -1,7 +1,6 @@
-import os
 
 import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
+
 # oaTests/Methods/FlameGraph/flame_html.py
 #
 # High-fidelity HTML report generator for performance intelligence.
@@ -27,9 +26,12 @@ from oaLogging.Methods.matrix_gate import matrix_log
 # Architectural Role:
 # - Report Orchestrator: Final stage of the FlameGraph pipeline.
 # - UI Component Assembler: Merges SVG and statistical data into a single file.
-
 from pathlib import Path
+
 from loguru import logger
+
+from oaLogging.Methods.matrix_gate import matrix_log
+
 
 def generate_final_html(svg_content, table_rows, root_buttons, wall_of_shame, wall_of_pitty, output_file):
     """
@@ -42,7 +44,7 @@ def generate_final_html(svg_content, table_rows, root_buttons, wall_of_shame, wa
             logger.error(f"? HTML Template not found at: {template_path}")
             return False
 
-        with open(template_path, "r", encoding="utf-8") as f:
+        with open(template_path, encoding="utf-8") as f:
             template = f.read()
 
         # Perform surgical string replacements
@@ -60,7 +62,7 @@ def generate_final_html(svg_content, table_rows, root_buttons, wall_of_shame, wa
 
         with open(output_file, 'w', encoding="utf-8") as f:
             f.write(content)
-            
+
         matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"? Standalone Performance Report generated: {output_file}", "SUCCESS")
         return True
 

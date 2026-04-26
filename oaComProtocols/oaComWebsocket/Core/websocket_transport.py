@@ -6,16 +6,18 @@
 WebSocket transport implementation for IS-07 events.
 """
 
-import websocket # For WebSocket client
-import threading
 import json
+import threading
 import time
-from typing import Optional, Callable, Dict, Any
+from typing import Any
 
-# Assuming EventTransport is imported from oaComProtocols.oaComWebsocket.Core.abc
-from .abc import EventTransport 
+import websocket  # For WebSocket client
 
 from oaLogging.Methods.matrix_gate import matrix_log
+
+# Assuming EventTransport is imported from oaComProtocols.oaComWebsocket.Core.abc
+from .abc import EventTransport
+
 
 class WebSocketEventTransport(EventTransport):
     """
@@ -24,15 +26,15 @@ class WebSocketEventTransport(EventTransport):
     """
     def __init__(self):
         super().__init__() # Call parent constructor
-        self.ws_app: Optional[websocket.WebSocketApp] = None
-        self._ws_thread: Optional[threading.Thread] = None
-        self._reconnect_thread: Optional[threading.Thread] = None
+        self.ws_app: websocket.WebSocketApp | None = None
+        self._ws_thread: threading.Thread | None = None
+        self._reconnect_thread: threading.Thread | None = None
         self._should_reconnect: bool = False
-        self._connection_params: Dict[str, Any] = {}
+        self._connection_params: dict[str, Any] = {}
         # _message_handler is managed by the parent class EventTransport
         matrix_log("comms", "websocket", "__init__", "📡 [WebSocketTransport] Initialized.", "DEBUG")
 
-    def publish(self, topic: str, payload: Dict[str, Any], retain: bool = False, qos: int = 0) -> bool:
+    def publish(self, topic: str, payload: dict[str, Any], retain: bool = False, qos: int = 0) -> bool:
         """Publishes a message to the WebSocket connection."""
         if not self.is_connected() or not self.ws_app:
             matrix_log("comms", "websocket", "publish", "📡 [WebSocketTransport] Not connected. Cannot publish.", "WARNING")
@@ -61,23 +63,23 @@ class WebSocketEventTransport(EventTransport):
         matrix_log("comms", "websocket", "unsubscribe", f"📡 [WebSocketTransport] Unsubscription from '{topic}' conceptual.", "DEBUG")
         return True
 
-    def connect(self, connection_params: Dict[str, Any]) -> bool:
+    def connect(self, connection_params: dict[str, Any]) -> bool:
         """Connects to the WebSocket server."""
         self._connection_params = connection_params
         uri = connection_params.get("connection_uri", "ws://localhost:8080")
         auth = connection_params.get("connection_authorization", False)
         reconnect = connection_params.get("reconnect", True)
-        
+
         matrix_log("comms", "websocket", "connect", f"📡📥 [WebSocketTransport] Attempting connection to {uri} (auth: {auth}, reconnect: {reconnect}).", "INFO")
-        
+
         success = self._attempt_connect()
-        
+
         if not success and reconnect:
             self._should_reconnect = True
             if not self._reconnect_thread or not self._reconnect_thread.is_alive():
                 self._reconnect_thread = threading.Thread(target=self._reconnect_loop, daemon=True, name="WebSocketReconnect")
                 self._reconnect_thread.start()
-        
+
         return success
 
     def _attempt_connect(self) -> bool:
@@ -93,11 +95,11 @@ class WebSocketEventTransport(EventTransport):
                                                 on_message=self._on_message,
                                                 on_error=self._on_error,
                                                 on_close=self._on_close)
-            
+
             self._ws_thread = threading.Thread(target=self.ws_app.run_forever)
-            self._ws_thread.daemon = True 
+            self._ws_thread.daemon = True
             self._ws_thread.start()
-            
+
             # Wait for either connection success or thread exit
             start_time = time.time()
             while time.time() - start_time < 2.0:
@@ -106,7 +108,7 @@ class WebSocketEventTransport(EventTransport):
                 if not self._ws_thread.is_alive():
                     break
                 time.sleep(0.1)
-                
+
             return self._is_connected
         except Exception as e:
             matrix_log("comms", "websocket", "connect", f"📡❌ [WebSocketTransport] Connection exception: {e}", "ERROR")
@@ -118,7 +120,7 @@ class WebSocketEventTransport(EventTransport):
         """Background loop for handling reconnections."""
         interval = self._connection_params.get("reconnect_interval", 5.0)
         uri = self._connection_params.get("connection_uri", "ws://localhost:8080")
-        
+
         while self._should_reconnect and not self._is_connected:
             matrix_log("comms", "websocket", "_reconnect_loop", f"📡🔄 [WebSocketTransport] Retrying connection to {uri} in {interval}s...", "DEBUG")
             time.sleep(interval)
@@ -169,7 +171,7 @@ class WebSocketEventTransport(EventTransport):
         """Callback for WebSocket connection close."""
         if self._is_connected:
             matrix_log("comms", "websocket", "_on_close", f"📡 [WebSocketTransport] Closed (Code: {close_status_code}, Message: {close_message}).", "INFO")
-        
+
         self._is_connected = False
         # If it was an unexpected close, trigger reconnect if enabled
         if self._should_reconnect and not self._is_connected:

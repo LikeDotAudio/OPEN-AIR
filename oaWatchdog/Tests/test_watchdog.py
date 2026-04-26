@@ -4,10 +4,12 @@
 #
 # Description: Brief summary of purpose
 
+import time
 import unittest
 from unittest.mock import MagicMock, patch
-import time
+
 import oaWatchdog.Managers.watchdog as watchdog
+
 
 class TestWatchdogFunctions(unittest.TestCase):
     def setUp(self):

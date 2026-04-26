@@ -4,8 +4,10 @@
 #
 # Description: Brief summary of purpose
 
+from collections.abc import Callable
 from dataclasses import dataclass
-from typing import Any, Optional, Callable, Dict
+from typing import Any
+
 
 @dataclass(frozen=True)
 class WidgetContext:
@@ -22,9 +24,9 @@ class WidgetContext:
     style_manager: Any = None
     transparency_manager: Any = None
     builder_instance: Any = None # ⚡ ADDED: The DynamicGuiBuilder instance for transparency
-    
-    on_focus_widget: Optional[Callable[[str], None]] = None
-    on_complete: Optional[Callable[[], None]] = None
+
+    on_focus_widget: Callable[[str], None] | None = None
+    on_complete: Callable[[], None] | None = None
 
     def get(self, key: str, default: Any = None) -> Any:
         """
@@ -34,27 +36,19 @@ class WidgetContext:
         return getattr(self, key, default)
 
     @staticmethod
-    def sanitize_geometry(geometry: Dict[str, Any]) -> Dict[str, Any]:
+    def sanitize_geometry(geometry: dict[str, Any]) -> dict[str, Any]:
         """
         ⚡ SANITIZATION: Enforce a minimum pixel size of 1x1 for all materialized containers.
         This prevents the 0x0 value from ever reaching the X11 backend (BadValue).
         """
         if not isinstance(geometry, dict):
             return {"width": 1, "height": 1}
-            
+
         geometry["width"] = max(1, int(geometry.get("width", 1)))
         geometry["height"] = max(1, int(geometry.get("height", 1)))
         return geometry
 
 # Description: Brief summary of purpose
 
-import tkinter as tk
-from oaLogging.Methods.matrix_gate import matrix_log
-import inspect
-from tkinter import ttk
-import orjson
-import os
 
 # --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory
-from loguru import logger

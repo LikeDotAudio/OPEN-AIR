@@ -4,11 +4,13 @@
 #
 # Description: Brief summary of purpose
 
-import tkinter as tk
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
+import tkinter as tk
+
 from loguru import logger
+
 from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- Standard Debug Logging Setup ---
 
@@ -32,13 +34,13 @@ class WidgetDiscoveryEngine:
                 if not hasattr(cls_ref, 'make'):
                     logger.warning(f"⚠️ Registry class {cls_ref} missing static 'make' method.")
                     return None
-                
+
                 # Ensure builder instance is passed if missing from context
                 if context and not hasattr(context, 'builder_instance'):
                     kwargs['builder_instance'] = builder_instance
                 elif not context:
                     kwargs['builder_instance'] = builder_instance
-                
+
                 # Registry widgets use static make(parent, config, context, **kwargs)
                 return cls_ref.make(parent_widget, config_data, context, **kwargs)
             except Exception as e:

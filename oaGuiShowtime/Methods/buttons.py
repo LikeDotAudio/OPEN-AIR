@@ -11,9 +11,10 @@ Current_iteration = 1  ## a running version number - incriments by one each time
 current_version = f"{Current_Date}.{Current_Time}.{Current_iteration}"
 current_version_hash = Current_Date * Current_Time * Current_iteration
 
-import tkinter as tk
 from tkinter import ttk
+
 from PIL import Image, ImageTk
+
 from oaGuiShowtime.Methods.draw_bargraph import create_bar_graph_image
 
 

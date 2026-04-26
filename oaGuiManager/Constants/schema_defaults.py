@@ -5,14 +5,14 @@
 # Description: Default schema mappings, lexicons, and structural constants.
 
 LEXICON = {
-    "lbl": "label", 
-    "w": "width", 
-    "h": "height", 
-    "value": "value_default", 
-    "min": "min", 
+    "lbl": "label",
+    "w": "width",
+    "h": "height",
+    "value": "value_default",
+    "min": "min",
     "max": "max",
-    "bg": "bg_color", 
-    "fg": "text_color", 
+    "bg": "bg_color",
+    "fg": "text_color",
     "unit": "units"
 }
 
@@ -22,9 +22,9 @@ STRUCT_TYPES = ["OcaBlock", "OcaBin", "OcaArray", "Block", "Array"]
 # Semantic Layout Constants
 DEFAULT_PANEL_PERCENTAGE = 50
 ANCHOR_MAP = {
-    "top": "n", 
-    "bottom": "s", 
-    "left": "w", 
+    "top": "n",
+    "bottom": "s",
+    "left": "w",
     "right": "e"
 }
 

@@ -4,10 +4,10 @@
 #
 # Description: Public API for the oaGuiBuilder Core components.
 
-from .ui_geometry_math import UIGeometryMath
 from .base_widget_creator import BaseWidgetCreator
 from .context_menu import BuilderContextMenuMixin
 from .slicing_registry import BuilderSlicingRegistryMixin
+from .ui_geometry_math import UIGeometryMath
 
 __all__ = [
     "UIGeometryMath",

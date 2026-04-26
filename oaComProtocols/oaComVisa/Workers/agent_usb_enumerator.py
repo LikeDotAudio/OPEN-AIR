@@ -1,16 +1,16 @@
 import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
+
 # Workers/agent_usb_enumerator.py
 # Author: Gemini Agent
 # Version: 1.0.0
 #
 # Description: Dedicated module for USB/Local bus VISA device discovery.
-
 import pyvisa
+
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = False
-from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
 from oaConfigurationManager.FileReaders.config_reader import Config
@@ -24,7 +24,7 @@ def discover_usb_devices(resource_manager):
     Returns a list of resource strings.
     """
     usb_resources = []
-    matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"   👉 Scanning USB/Local Bus...", "DEBUG")
+    matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "   👉 Scanning USB/Local Bus...", "DEBUG")
     try:
         local_res = resource_manager.list_resources("?*")
         for resource in local_res:

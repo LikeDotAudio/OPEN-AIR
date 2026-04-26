@@ -1,5 +1,6 @@
 from ..types.ocapropertyid import OcaPropertyID
 
+
 # /**
 #  * Class representing the collection of all properties in a remote object.
 #  * Returned by the {@link ObjectBase#get_properties} method inside of all remote control

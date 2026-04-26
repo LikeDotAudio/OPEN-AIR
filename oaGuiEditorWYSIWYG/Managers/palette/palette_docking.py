@@ -5,11 +5,13 @@
 # Description: Service for undocking/redocking tool panels into Toplevel windows.
 
 import tkinter as tk
+
 from oaLogging.Methods.matrix_gate import matrix_log
+
 
 class PaletteDockingService:
     """Handles the lifecycle of detached (Toplevel) palette panels."""
-    
+
     def __init__(self, container_widget, tool_panels_config, visibility_tracker):
         self.container = container_widget
         self.tool_panels = tool_panels_config
@@ -39,25 +41,25 @@ class PaletteDockingService:
         top_level = tk.Toplevel(self.container)
         top_level.title(f"Palette: {panel_name}")
         top_level.geometry("400x300")
-        
+
         # Reparenting logic
         panel_widget.pack_forget()
         panel_widget.pack(in_=top_level, fill="both", expand=True)
 
         def on_close():
             self._handle_detached_close(panel_name, top_level, panel_widget)
-            
+
         top_level.protocol("WM_DELETE_WINDOW", on_close)
-        
+
         self.detached_windows[panel_name] = top_level
         self.visibility_tracker[panel_name] = True
         matrix_log("ui", "palette_manager", "undock_panel", f"📱🎨🖱️ [MOBILE] PaletteManager: Undocked panel: {panel_name}", "INFO")
-        
+
     def _handle_detached_close(self, panel_name, top_level, panel_widget):
         """Cleans up state when a detached window is closed by the user."""
         matrix_log("ui", "palette_manager", "on_toplevel_close", f"📱🎨🛌 [MOBILE] PaletteManager: Detached window for {panel_name} closed.", "INFO")
         panel_widget.pack_forget()
-        self.visibility_tracker[panel_name] = False 
+        self.visibility_tracker[panel_name] = False
         if panel_name in self.detached_windows:
             del self.detached_windows[panel_name]
         top_level.destroy()

@@ -5,9 +5,11 @@
 # Description: Core recursive engine for rendering the property tree.
 
 import tkinter as tk
+
 from ..PropertyEditor.property_leaf import PropertyLeaf
-from .section_renderer import SectionRenderer
 from .info_renderer import InfoRenderer
+from .section_renderer import SectionRenderer
+
 
 class TreeRenderer:
     """Orchestrates the recursive generation of the property UI."""
@@ -49,24 +51,24 @@ class TreeRenderer:
                     lang_full_path = f"{full_path}.{lang_key}"
                     row_frame = tk.Frame(editors_frame, bg="#2b2b2b")
                     row_frame.pack(fill="x", side="top")
-                    
+
                     editor_widget = PropertyLeaf.create(row_frame, lang_key, lang_value, lang_full_path, mixin_ref)
                     new_widget_cache[lang_full_path] = {"widget": editor_widget}
                 continue
 
             existing_widget_info = widget_cache.get(full_path)
             existing_widget = existing_widget_info.get("widget") if existing_widget_info else None
-            
+
             if existing_widget and not existing_widget.winfo_exists():
                 existing_widget = None
                 widget_cache.pop(full_path, None)
-            
+
             if isinstance(value, dict):
                 schema_type_changed = (
                     existing_widget_info is None or
                     value.get("type", value.get("widget_type")) != existing_widget_info.get("schema_type")
                 )
-                
+
                 child_container = None
                 if existing_widget and not schema_type_changed:
                     child_container = existing_widget
@@ -76,14 +78,14 @@ class TreeRenderer:
                         widget_cache.pop(full_path, None)
                     child_container = tk.Frame(parent, bg="#2b2b2b", padx=15)
                     child_container.pack(fill="x")
-                
+
                 new_widget_cache[full_path] = {
-                    "widget": child_container, 
+                    "widget": child_container,
                     "schema_type": value.get("type", value.get("widget_type"))
                 }
 
                 TreeRenderer._render_section_with_header(parent, key, value, full_path, is_virtual, depth, actual_data, child_container, widget_cache, new_widget_cache, mixin_ref)
-            
+
             elif isinstance(value, list):
                 if existing_widget and existing_widget.winfo_exists(): existing_widget.destroy()
                 f = InfoRenderer.render_list(parent, key, value)
@@ -101,15 +103,15 @@ class TreeRenderer:
     def _render_section_with_header(parent, key, value, full_path, is_virtual, depth, actual_data, child_container, widget_cache, new_widget_cache, mixin_ref):
         header_key = full_path + "#header"
         existing_header_info = widget_cache.get(header_key)
-        
+
         is_expanded_val = True
         if existing_header_info and "is_expanded" in existing_header_info:
             is_expanded_val = existing_header_info["is_expanded"].get()
-            
+
         existing_header = existing_header_info.get("widget") if existing_header_info else None
         if existing_header and existing_header.winfo_exists():
             existing_header.destroy()
-            
+
         def on_toggle(new_state):
             if not child_container.winfo_exists(): return
             if new_state: child_container.pack(fill="x")
@@ -126,10 +128,10 @@ class TreeRenderer:
             msg_callback = lambda p=full_path, d=msg_data: mixin_ref._show_message_details(p, d)
 
         h_frame, is_expanded = SectionRenderer.render(parent, key, full_path, is_virtual, is_expanded_val, on_toggle, on_add, message_callback=msg_callback)
-        
+
         if not is_expanded_val:
             child_container.pack_forget()
 
         new_widget_cache[header_key] = {"widget": h_frame, "is_expanded": is_expanded}
-        
+
         TreeRenderer.render_recursive(value, child_container, prefix=full_path, depth=depth + 1, actual_data=actual_data.get(key, {}), widget_cache=widget_cache, new_widget_cache=new_widget_cache, mixin_ref=mixin_ref)

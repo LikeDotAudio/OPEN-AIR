@@ -1,14 +1,15 @@
 # Core/knob_renderer.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: Brief summary of purpose
 
-import tkinter as tk
 import math
-from ..effects.knob_3d_effects import draw_knob_3d_effects
+import tkinter as tk
+
 from oaGuiElements.Methods.rotary_core import RotaryCore
+
+from ..effects.knob_3d_effects import draw_knob_3d_effects
 
 _rotary = RotaryCore()
 
@@ -19,19 +20,19 @@ def draw_knob_visuals(canvas, state, config, value, label_text=None):
         tags = canvas.gettags(item)
         if "panel_bg_slice" not in tags:
             canvas.delete(item)
-    
+
     # 0. Draw Industrial Background (Fallback if slice doesn't exist)
     if hasattr(canvas, 'panel_bg_image') and not canvas.find_withtag("panel_bg_slice"):
         canvas.create_image(0, 0, image=canvas.panel_bg_image, anchor="nw", tags="panel_bg_slice")
-            
+
     width, height = state["dims"]["w"], state["dims"]["h"]
     # ⚡ MOCK PROTECTION: Ensure we have actual integers before comparing
-    if not isinstance(width, int) or width <= 1: 
+    if not isinstance(width, int) or width <= 1:
         width = config["width"]
-    if not isinstance(height, int) or height <= 1: 
+    if not isinstance(height, int) or height <= 1:
         height = config["height"]
     center_x, center_y = width / 2, height / 2
-    
+
     # Extract config
     arc_width = config["arc_width"]
     show_ticks = config["show_ticks"]
@@ -40,15 +41,15 @@ def draw_knob_visuals(canvas, state, config, value, label_text=None):
     indicator_color = config["indicator_color"]
     secondary_color = state["secondary_current"]
     knob_style = config["knob_style"]
-    
+
     # Reserve space for text if not inside
     # Using 15px instead of 20px to save space on small knobs
     DEFAULT_LABEL_FONT_SIZE = 9
     LABEL_RESERVE_PADDING = 12
-    
+
     top_reserve = LABEL_RESERVE_PADDING if config["text_pos"] == "top" and label_text and config["show_label"] else 0
     bottom_reserve = LABEL_RESERVE_PADDING if (config["text_pos"] == "bottom" and label_text and config["show_label"]) or (not config["text_inside"] and not config["no_center"]) else 0
-    
+
     # Calculate max radius
     # padding accounts for the arc stroke width, optional ticks, 3D depth, and soft shadows
     ARC_STROKE_PADDING = 2
@@ -56,7 +57,7 @@ def draw_knob_visuals(canvas, state, config, value, label_text=None):
     if show_ticks:
         TICK_BUFFER = 4
         padding += tick_length + TICK_BUFFER
-    
+
     # ⚡ ADDITIONAL SAFETY: Add a fixed margin for 3D depth offsets and blur/shadows
     # Increased to 10 for maximum safety against clipping
     SAFETY_MARGIN = 10
@@ -65,14 +66,14 @@ def draw_knob_visuals(canvas, state, config, value, label_text=None):
     # Use max available dimension but ensure we don't go negative
     usable_width = width - (padding * 2)
     usable_height = height - top_reserve - bottom_reserve - (padding * 2)
-    
+
     RADIUS_FRAME_RATIO = 0.8
     radius = (min(usable_width, usable_height) / 2) * RADIUS_FRAME_RATIO  # ⚡ 20% reduction for better framing
-    
+
     ABSOLUTE_MIN_RADIUS = 8
-    if radius < ABSOLUTE_MIN_RADIUS: 
+    if radius < ABSOLUTE_MIN_RADIUS:
         radius = ABSOLUTE_MIN_RADIUS # Increased absolute minimum floor for safety
-    
+
     # Adjusted Center for drawing knob (shift slightly to avoid overlapping labels)
     adjusted_center_y = (top_reserve + (height - bottom_reserve)) / 2
 
@@ -99,9 +100,9 @@ def draw_knob_visuals(canvas, state, config, value, label_text=None):
     bg_extent = 359.9 if knob_style == "dial" else -300
     if knob_style == "panner":
          bg_start, bg_extent = 225, -270
-    
+
     _draw_track(canvas, center_x, adjusted_center_y, radius, bg_start, bg_extent, start_angle, val_extent, secondary_color, indicator_color, arc_width, knob_style)
-    
+
     # 3. Draw Ticks
     if show_ticks:
         _draw_ticks(canvas, center_x, adjusted_center_y, radius, arc_width, tick_length, config["tick_style"], secondary_color, min_val, max_val)
@@ -118,11 +119,11 @@ def draw_knob_visuals(canvas, state, config, value, label_text=None):
         # 4.2 Draw the "Top Cap" - Offset NW
         cap_center_x, cap_center_y = center_x - DEPTH_OFFSET, adjusted_center_y - DEPTH_OFFSET
         _draw_body(canvas, cap_center_x, cap_center_y, radius, config["shape"], config["outline_color"], config["gradient_level"], pointer_angle_deg, config["outline_thickness"], config["fill_color"], config["teeth"])
-        
+
         # 4.3 Apply Fixed 3D Lighting Effects (Glint/Shadow) on the shifted Cap
         if config["fill_color"] or config["knob_style"] == "standard":
             draw_knob_3d_effects(canvas, cap_center_x, cap_center_y, radius, config["shape"], config["fill_color"])
-            
+
         # 5. Draw Pointer on the shifted Cap
         _draw_pointer(canvas, cap_center_x, cap_center_y, radius, arc_width, pointer_angle_deg, config["pointer_style"], indicator_color, config["pointer_length"], config["pointer_offset"], config["no_center"])
     else:
@@ -137,18 +138,18 @@ def draw_knob_visuals(canvas, state, config, value, label_text=None):
         # ⚡ TIGHT LAYOUT: Pad 4px from the visual elements
         TEXT_ELEMENT_PADDING = 4
         visual_radius = radius + (arc_width / 2)
-        if show_ticks: 
+        if show_ticks:
             TICK_VISUAL_BUFFER = 2
             visual_radius += tick_length + TICK_VISUAL_BUFFER
-        
+
         label_x, label_y, label_anchor = center_x, adjusted_center_y - visual_radius - TEXT_ELEMENT_PADDING, "s"
-        if config["text_pos"] == "bottom": 
+        if config["text_pos"] == "bottom":
             label_y, label_anchor = adjusted_center_y + visual_radius + TEXT_ELEMENT_PADDING, "n"
-        elif config["text_pos"] == "left": 
+        elif config["text_pos"] == "left":
             label_x, label_y, label_anchor = center_x - visual_radius - TEXT_ELEMENT_PADDING, adjusted_center_y, "e"
-        elif config["text_pos"] == "right": 
+        elif config["text_pos"] == "right":
             label_x, label_y, label_anchor = center_x + visual_radius + TEXT_ELEMENT_PADDING, adjusted_center_y, "w"
-        
+
         LABEL_FONT_SIZE = 9
         canvas.create_text(label_x, label_y, text=label_text, fill=foreground_color, font=("Helvetica", LABEL_FONT_SIZE, "bold"), anchor=label_anchor, tags=("industrial_text", "vu_static"))
 
@@ -162,16 +163,16 @@ def draw_knob_visuals(canvas, state, config, value, label_text=None):
     else:
         # ⚡ TIGHT VALUE: Center below the label or knob
         visual_radius = radius + (arc_width / 2)
-        if show_ticks: 
+        if show_ticks:
             visual_radius += tick_length + 2
-        
+
         VALUE_PADDING = 4
         value_y = adjusted_center_y + visual_radius + VALUE_PADDING
-        # If label is already at bottom, push value further or stack them? 
+        # If label is already at bottom, push value further or stack them?
         # Usually, if external value is on, label should be on top.
         LABEL_BOTTOM_STACK_OFFSET = 12
-        if config["text_pos"] == "bottom": 
-            value_y += LABEL_BOTTOM_STACK_OFFSET 
+        if config["text_pos"] == "bottom":
+            value_y += LABEL_BOTTOM_STACK_OFFSET
         canvas.create_text(center_x, value_y, text=val_str, fill=foreground_color, font=("Helvetica", VALUE_FONT_SIZE), anchor="n", tags=("industrial_text", "vu_static"))
 
 def _draw_body(canvas, center_x, center_y, radius, shape, color, gradient_level, rotation_angle=0, outline_thickness=0, fill_color="", teeth=8):
@@ -200,10 +201,10 @@ def _draw_body(canvas, center_x, center_y, radius, shape, color, gradient_level,
 
 def _draw_track(canvas, center_x, center_y, radius, bg_start, bg_extent, start_angle, val_extent, bg_color, active_color, width, knob_style="standard"):
     # 0. Draw Background Slice if available (already handled in draw_knob_visuals)
-    
+
     # 1. Background Arc
     canvas.create_arc(center_x - radius, center_y - radius, center_x + radius, center_y + radius, start=bg_start, extent=bg_extent, style=tk.ARC, outline=bg_color, width=width)
-    
+
     # 2. Active Arc
     arc_style = tk.ARC if knob_style != "dial" else tk.PIESLICE
     final_color = active_color
@@ -212,9 +213,9 @@ def _draw_track(canvas, center_x, center_y, radius, bg_start, bg_extent, start_a
 
     MIN_VISIBLE_EXTENT = 0.1
     if abs(val_extent) > MIN_VISIBLE_EXTENT:
-        canvas.create_arc(center_x - radius, center_y - radius, center_x + radius, center_y + radius, start=start_angle, extent=val_extent, style=arc_style, 
+        canvas.create_arc(center_x - radius, center_y - radius, center_x + radius, center_y + radius, start=start_angle, extent=val_extent, style=arc_style,
                           outline=final_color if arc_style==tk.ARC else "", fill=final_color if arc_style==tk.PIESLICE else "", width=width)
-    elif knob_style == "panner": 
+    elif knob_style == "panner":
         LINE_INDICATOR_OFFSET_TOP = 2
         LINE_INDICATOR_OFFSET_BOTTOM = 12
         LINE_INDICATOR_WIDTH = 2
@@ -225,18 +226,18 @@ def _draw_ticks(canvas, center_x, center_y, radius, arc_width, tick_length, styl
     TICK_TOTAL_EXTENT = 300
     TICK_STEP_DEG = 30
     end_angle = TICK_START_ANGLE - TICK_TOTAL_EXTENT
-    
+
     TICKS_PER_SPAN = 10.0
     value_step = (max_val - min_val) / TICKS_PER_SPAN
     current_angle, current_value = TICK_START_ANGLE, min_val
-    
+
     while current_angle >= end_angle - 1:
         radians = math.radians(current_angle)
         TICK_BASE_DIST = radius + (arc_width / 2) + 2
         ts_dist, te_dist = TICK_BASE_DIST, TICK_BASE_DIST + tick_length
         start_x, start_y = center_x + ts_dist * math.cos(radians), center_y - ts_dist * math.sin(radians)
         end_x, end_y = center_x + te_dist * math.cos(radians), center_y - te_dist * math.sin(radians)
-        
+
         if style == "dots":
             DOT_RADIUS = 1
             canvas.create_oval(end_x - DOT_RADIUS, end_y - DOT_RADIUS, end_x + DOT_RADIUS, end_y + DOT_RADIUS, fill=color, outline=color)
@@ -246,7 +247,7 @@ def _draw_ticks(canvas, center_x, center_y, radius, arc_width, tick_length, styl
         else:
             TICK_LINE_WIDTH = 1
             canvas.create_line(start_x, start_y, end_x, end_y, fill=color, width=TICK_LINE_WIDTH)
-        
+
         current_angle -= TICK_STEP_DEG
         current_value += value_step
 
@@ -254,7 +255,7 @@ def _draw_pointer(canvas, center_x, center_y, radius, arc_width, angle_deg, styl
     angle_rad = math.radians(angle_deg)
     pointer_start = offset
     pointer_end = (radius - arc_width / 2) if length is None else (offset + float(length))
-    
+
     if style == "triangle":
         tip_x, tip_y = center_x + pointer_end * math.cos(angle_rad), center_y - pointer_end * math.sin(angle_rad)
         TRI_WIDTH = 5

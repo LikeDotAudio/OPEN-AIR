@@ -4,11 +4,9 @@
 #
 # Description: Verifies the consolidated oaGui ignition.
 
-import tkinter as tk
-from tkinter import ttk
-import sys
-import os
 import pathlib
+import sys
+import tkinter as tk
 
 # Ensure project root is in sys.path
 current_dir = pathlib.Path(__file__).resolve().parent
@@ -18,7 +16,7 @@ if str(project_root) not in sys.path:
 
 def test_ignition():
     print("🚀 [TEST] Starting oaGui Ignition Test...")
-    
+
     try:
         from oaGui.Entry import Application
         print("✅ [TEST] Successfully imported Application from oaGui.")
@@ -28,7 +26,7 @@ def test_ignition():
 
     root = tk.Tk()
     root.withdraw() # Hide main window
-    
+
     print("🏗️ [TEST] Attempting to instantiate Application (Dry Run)...")
     try:
         # Mock dependencies
@@ -41,13 +39,13 @@ def test_ignition():
             state_cache_manager=None
         )
         print("✅ [TEST] Application instantiated successfully.")
-        
+
         # Check for key attributes/mixins
         if hasattr(app, '_build_from_directory'):
             print("✅ [TEST] DirectoryBuilderMixin detected.")
         else:
             print("❌ [TEST] DirectoryBuilderMixin MISSING!")
-            
+
         if hasattr(app, 'layout_parser'):
             print("✅ [TEST] LayoutParser detected.")
         else:

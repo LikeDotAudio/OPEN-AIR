@@ -1,9 +1,10 @@
-from aes70.controller.base_event import BaseEvent
 from logging import getLogger
+
+from aes70.controller.base_event import BaseEvent
 
 logger = getLogger(__name__)
 
-emptyBuffer = bytes()
+emptyBuffer = b""
 
 # /**
 #  * Class used to represent all events specified by the OCA standard.

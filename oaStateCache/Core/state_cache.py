@@ -1,6 +1,6 @@
 # oaStateCache/Core/state_cache.py
 #
-# Modularized State Cache Management. Acts as the central orchestrator 
+# Modularized State Cache Management. Acts as the central orchestrator
 # for application state caching, persistence, and distribution.
 #
 # Author: Anthony Peter Kuzub
@@ -16,13 +16,14 @@
 # Version 20260406.2010.1
 
 from __future__ import annotations
-import time
-import os
+
 import copy
-from typing import Any
-from loguru import logger
-import orjson
 import logging
+import os
+import time
+from typing import Any
+
+import orjson
 
 # --- RUST ACCELERATION LAYER (PyO3) ---
 
@@ -42,7 +43,7 @@ except Exception as e:
 class PythonStateRegistry:
     """Standard Python dictionary fallback for environments lacking Rust."""
     def __init__(self): self._data = {}
-    def set(self, k, v): 
+    def set(self, k, v):
         # ⚡ V3.1.23 RECURSION GUARD:
         # Block corrupted topics with repeated protocol tokens.
         if any(x + "/" + x + "/" in str(k) for x in ["OSC", "MIDI", "GUI", "oaGui", "MQTT"]):
@@ -56,20 +57,22 @@ class PythonStateRegistry:
     def items(self): return self._data.items()
 
 # --- Standard Debug Logging Setup ---
+from oaComProtocols.oaComMQTT.Core.mqtt_message import MqttMessage
+from oaConfigurationManager.FileReaders.config_reader import Config
 from oaLogging.Core.logger import data_logger
 from oaLogging.Methods.matrix_gate import matrix_log
-from oaConfigurationManager.FileReaders.config_reader import Config
-from oaComProtocols.oaComMQTT.Core.mqtt_message import MqttMessage
+
 app_constants = Config.get_instance()
 
 # --- EXTRACTED CORE MODULES ---
 from ..FileReaders import cache_io_handler
+from ..FileReaders.cache_io_handler import CacheLoadError
 from ..Managers import cache_traffic_controller
 from ..Methods import gui_state_restorer
-from ..FileReaders.cache_io_handler import CacheLoadError
+from .cache_observer_registry import CacheObserverRegistry
 from .cache_save_engine import CacheSaveEngine
 from .cache_search_engine import CacheSearchEngine
-from .cache_observer_registry import CacheObserverRegistry
+
 
 class StateRegistry:
     """
@@ -98,16 +101,16 @@ class StateRegistry:
         self.mqtt = mqtt_connection_manager
         self.state_mirror_engine = state_mirror_engine
         self.subscriber_router = None
-        
+
         # 1. Initialize High-Performance Storage
         if HAS_RUST:
             try:
                 self.rust_cache = RustStateRegistry()
-                matrix_log("core", "data", "__init__", 
-                           "🚀 [START] Using HIGH-PERFORMANCE RUST state cache.", 
+                matrix_log("core", "data", "__init__",
+                           "🚀 [START] Using HIGH-PERFORMANCE RUST state cache.",
                            "DEBUG")
             except Exception as e:
-                matrix_log("core", "data", "__init__", 
+                matrix_log("core", "data", "__init__",
                            f"🚀❌ [FATAL] Rust Cache init failed: {e}. "
                            "Falling back to Python.", "ERROR")
                 self.rust_cache = PythonStateRegistry()
@@ -115,28 +118,28 @@ class StateRegistry:
             self.rust_cache = PythonStateRegistry()
 
         self.initialize_state()
-            
+
         self.search_engine = CacheSearchEngine()
         self.search_engine.rebuild(self.rust_cache.to_dict())
-        
+
         # 2. Specialized Egress Engines
-        self.save_engine = CacheSaveEngine(self.rust_cache, data_logger, 
+        self.save_engine = CacheSaveEngine(self.rust_cache, data_logger,
                                           LOCAL_DEBUG)
         self.observers = CacheObserverRegistry()
-        
+
         self._last_log_time, self._updates_since_last_log = time.time(), 0
         cache_len = self.rust_cache.len()
-        matrix_log("core", "data", "__init__", 
+        matrix_log("core", "data", "__init__",
                    f"✅ [READY] Initialized with {cache_len} entries.", "DEBUG")
 
-    def check_prefix_exists(self, prefix: str) -> bool: 
+    def check_prefix_exists(self, prefix: str) -> bool:
         """Fast lookup for topic namespaces."""
         return self.search_engine.exists(prefix)
 
-    def register_cache_observer(self, callback: Any): 
+    def register_cache_observer(self, callback: Any):
         """Binds a listener to global state update events."""
         self.observers.register_observer(callback)
-    
+
     def get_cached_value(self, topic: str) -> Any:
         """
         Retrieves a value from the cache with dictionary unwrapping.
@@ -163,7 +166,7 @@ class StateRegistry:
             if app_constants.ROUTER_INGEST_LOGS:
                 matrix_log("core", "data", "set_value", f"🛡️ [GUARD] Rejecting corrupted recursive topic: {topic}", "DEBUG")
             return False
-            
+
         self.rust_cache.set(topic, payload)
         return True
 
@@ -181,13 +184,13 @@ class StateRegistry:
             path = os.path.join(app_constants.PRESET_REPO_PATH, f"{name}.json")
             os.makedirs(os.path.dirname(path), exist_ok=True)
             export_cache = self.rust_cache.to_dict()
-            with open(path, "wb") as f: 
+            with open(path, "wb") as f:
                 f.write(orjson.dumps(export_cache, option=orjson.OPT_INDENT_2))
-            matrix_log("core", "data", "save_preset", f"💾 [SAVE] Preset: {name}", 
+            matrix_log("core", "data", "save_preset", f"💾 [SAVE] Preset: {name}",
                        "SUCCESS")
             return True
-        except Exception as e: 
-            matrix_log("core", "data", "save_preset", f"❌ [SAVE] Failed: {e}", 
+        except Exception as e:
+            matrix_log("core", "data", "save_preset", f"❌ [SAVE] Failed: {e}",
                        "ERROR")
             return False
 
@@ -200,7 +203,7 @@ class StateRegistry:
         self.search_engine.rebuild({})
         matrix_log("core", "data", "clear_all_state", "🗑️ [CACHE] In-memory state registry cleared.", "INFO")
 
-    def shutdown(self): 
+    def shutdown(self):
         """Gracefully terminates the save engine threads."""
         self.save_engine.shutdown()
 
@@ -209,16 +212,16 @@ class StateRegistry:
         if self.mqtt:
             base = app_constants.MQTT_BASE_TOPIC
             roots = [
-                f"{base}/Cmd/#", f"{base}/Tx/#", f"{base}/System/Status/#", 
+                f"{base}/Cmd/#", f"{base}/Tx/#", f"{base}/System/Status/#",
                 f"{base}/System/Monitor/#", f"{base}/System/Control/#",
-                f"{base}/Assets/#", f"{base}/Spectrum/#", f"{base}/GUI/#", 
-                f"{base}/oaGui/#", f"{base}/MIDI/#", f"{base}/OSC/#", 
-                f"{base}/NMOS/#", f"{base}/AES70/#", f"{base}/SMPTE2138/#", 
+                f"{base}/Assets/#", f"{base}/Spectrum/#", f"{base}/GUI/#",
+                f"{base}/oaGui/#", f"{base}/MIDI/#", f"{base}/OSC/#",
+                f"{base}/NMOS/#", f"{base}/AES70/#", f"{base}/SMPTE2138/#",
                 f"{base}/EMBER/#"
             ]
-            
+
             for root in roots:
-                matrix_log("core", "data", "subscribe_to_all_topics", 
+                matrix_log("core", "data", "subscribe_to_all_topics",
                            f"🎧 [LISTEN] Root: {root}", "DEBUG")
                 self.mqtt.subscribe(root)
 
@@ -233,26 +236,26 @@ class StateRegistry:
         try:
             loaded_cache = cache_io_handler.load_cache()
             self.rust_cache.clear()
-            
+
             # ⚡ V3.1.23 PURITY CHECK:
             # Filter the loaded cache to remove any legacy recursive entries.
             clean_cache = {}
             for t, p in loaded_cache.items():
                 if self.set_value(t, p):
                     clean_cache[t] = p
-            
+
         except FileNotFoundError:
-            matrix_log("core", "data", "initialize_state", 
+            matrix_log("core", "data", "initialize_state",
                        "🪣 [CACHE] No cache to initialize.", "INFO")
             self.rust_cache.clear()
             clean_cache = {}
         except CacheLoadError as e:
-            matrix_log("core", "data", "initialize_state", 
+            matrix_log("core", "data", "initialize_state",
                        f"🔥 [OUTAGE] Cache Corruption: {e}.", "ERROR")
             self.rust_cache.clear()
             clean_cache = {}
-        except Exception as e: 
-            matrix_log("core", "data", "initialize_state", 
+        except Exception as e:
+            matrix_log("core", "data", "initialize_state",
                        f"❌ [INIT] State failure: {e}", "ERROR")
             self.rust_cache.clear()
             clean_cache = {}
@@ -260,13 +263,13 @@ class StateRegistry:
         if clean_cache:
             # ⚡ ARCHITECTURAL PURITY:
             # The State Cache is NOT a router input. We populate the local memory
-            # and search engine, but we do NOT ingest these values into the 
+            # and search engine, but we do NOT ingest these values into the
             # Protocol Router's event pipeline.
             # Mirroring to UI remains for immediate visibility.
-            gui_state_restorer.restore_timeline(clean_cache, 
+            gui_state_restorer.restore_timeline(clean_cache,
                                                 self.state_mirror_engine)
 
-    def handle_external_update(self, topic: str, value: Any, 
+    def handle_external_update(self, topic: str, value: Any,
                                source: str = "EXTERNAL", metadata: dict = None):
         """
         Wraps a raw update into a manifest and commits it to the registry.
@@ -279,11 +282,11 @@ class StateRegistry:
         """
         from oaStateCache.Core.manifest.builder import create_manifest
         payload = create_manifest(value, topic, source, metadata)
-        
+
         self.rust_cache.set(topic, payload)
         self.save_engine.schedule_save(topic, payload)
         self.search_engine.add_topic(topic)
-        
+
         from oaComBroker.Core.protocol_router.manager import ProtocolRouter
         ProtocolRouter.get_instance().ingest(source, topic, value, payload)
 
@@ -293,34 +296,34 @@ class StateRegistry:
         """Standardizes MQTT payload extraction into source, value, and metadata."""
         raw = message.get_json_payload()
         source, value, metadata = "MQTT", raw, {}
-        
+
         if isinstance(raw, dict):
             if "value" in raw or "value" in raw:
                 source = str(raw.get("source", "MQTT")).upper()
                 value = raw.get("value") if "value" in raw else raw.get("value")
                 metadata = raw.copy()
-                for field in ["message_type", "message_guid", "origin_source", 
+                for field in ["message_type", "message_guid", "origin_source",
                               "is_settled", "full_id", "boot"]:
                     if field in raw: metadata[field] = raw[field]
             else:
                 value = raw
                 source = "MQTT"
                 metadata = {}
-        
+
         return source, value, metadata, raw
 
     def _update_cache_entry(self, topic, payload):
         """Internal atomic update for local memory and search tree."""
         if not self.set_value(topic, payload):
             return
-            
+
         self.search_engine.add_topic(topic)
         self.save_engine.schedule_save(topic, payload)
         self._updates_since_last_log += 1
-        
+
         # Forensic logging throttle.
         if time.time() - self._last_log_time >= 5.0:
-            matrix_log("core", "data", "_update_cache_entry", 
+            matrix_log("core", "data", "_update_cache_entry",
                        f"🔄 [SYNC] Synchronized: {self._updates_since_last_log} "
                        "variables.", "SUCCESS")
             self._last_log_time, self._updates_since_last_log = time.time(), 0
@@ -346,12 +349,12 @@ class StateRegistry:
             normalized = True
 
         if normalized:
-            message = MqttMessage(topic=topic, payload=message.payload, 
+            message = MqttMessage(topic=topic, payload=message.payload,
                               qos=message.qos, retain=message.retain)
-            
-        if self.subscriber_router: 
+
+        if self.subscriber_router:
             self.subscriber_router._on_message(client, userdata, message)
-            
+
         # ⚡ EXCLUSION: Skip state ingestion for high-bandwidth ST2138 traffic.
         if topic.startswith("st2138/"):
             return
@@ -371,7 +374,7 @@ class StateRegistry:
             # Identify if this message was authored by the local instance.
             message_src_id = metadata.get("src") or metadata.get("full_id")
             is_reflection = (message_src_id == app_constants.FULL_INSTANCE_ID)
-            
+
             if is_reflection:
                 metadata["is_reflection"] = True
                 if app_constants.ROUTER_INGEST_LOGS:
@@ -382,7 +385,7 @@ class StateRegistry:
             self.observers.notify(topic, raw_payload)
 
             # --- CACHE POLICY ---
-            # Self-reflections are NOT committed to the local cache because we 
+            # Self-reflections are NOT committed to the local cache because we
             # already have the definitive state in memory (or will soon).
             if is_reflection:
                 return
@@ -394,7 +397,7 @@ class StateRegistry:
                     self.search_engine.add_topic(topic)
                     self.save_engine.schedule_save(topic, new_payload)
                     self._updates_since_last_log += 1
-                
+
         except Exception as e:
             import traceback
             error_message = f"🔥 Error handling MQTT for {topic}: {e}\n" \

@@ -4,13 +4,13 @@
 #
 # Description: Dedicated orchestrator for AES70 / OCA (Open Control Architecture) traffic.
 
-import threading
 import time
+
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = False
-from oaLogging.Core.logger import get_logger
-from oaConfigurationManager.FileReaders.config_reader import Config
 from oaComProtocols.oaComAES70.Methods.aes70_parser import OcaParser
+from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Core.logger import get_logger
 
 app_constants = Config.get_instance()
 # ⚡ SUBSYSTEM: AES70_BRIDGE
@@ -28,13 +28,13 @@ class AES70Manager:
         self._running = False
         self._discovered_devices = []
         self._parser = OcaParser()
-        
+
         # Monitor callbacks for GUI
         self._monitor_callbacks = []
-        
+
         if LOCAL_DEBUG:
             aes_logger.info("📻🛠️🔗 [AES70] Initializing AES70 Bridge...")
-        
+
         # Link to state cache if provided
         if state_cache_manager:
             self.state_cache_manager.register_cache_observer(self._on_state_update)
@@ -56,7 +56,7 @@ class AES70Manager:
     def start(self):
         if self._running: return
         self._running = True
-        
+
         if self.run_bridge:
             try:
                 # Observer is already added in __init__
@@ -89,20 +89,20 @@ class AES70Manager:
     def ingest_pdu(self, raw_data):
         """Processes raw bytes from the network socket using the high-performance parser."""
         if not raw_data: return None
-        
+
         pdu = self._parser.decode(raw_data)
         if not pdu:
             if LOCAL_DEBUG:
                 aes_logger.error("📻🚫🛑 [AES70] Malformed OCP.1 PDU.")
             return None
-        
+
         if LOCAL_DEBUG:
             aes_logger.debug(f"📻📡📥 [AES70] Inbound PDU: Version {pdu['version']}, {pdu['message_count']} messages.")
-        
+
         # Process individual messages (Dispatching to state cache, etc.)
         for message in pdu['messages']:
             self._handle_message(message)
-            
+
         return pdu
 
     def _handle_message(self, message):
@@ -110,7 +110,7 @@ class AES70Manager:
         # This is where the MethodID and ONo mapping happens
         if LOCAL_DEBUG:
             aes_logger.debug(f"📻📡📥 [AES70] MSG: Handle {message['handle']} -> ONo {message['target_ono']} Method {message['method_id']}")
-        
+
         # ⚡ Example: Handle specific method/ONo combinations
         # If ONo is 1 (DeviceManager) and Method is some Set property...
         pass

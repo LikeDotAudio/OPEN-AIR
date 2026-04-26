@@ -1,14 +1,16 @@
 # Core/state_sync.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: Brief summary of purpose
 
-import math
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
+import math
+
 from loguru import logger
+
+from oaLogging.Methods.matrix_gate import matrix_log
+
 
 class CompositeStateSync:
     """Manages the synchronization math between the main value, fader (coarse), and dial (fine)."""
@@ -83,7 +85,7 @@ class CompositeStateSync:
                     elif dial_widget._prev_dial_val_for_wrap_detection == 0 and curr_dial == 999:
                         fader_var.set(fader_var.get() - step_coarse)
                 dial_widget._prev_dial_val_for_wrap_detection = curr_dial
-                
+
                 base = math.floor(main_val / step_coarse) * step_coarse
                 eff_range = step_coarse - numerical_step if (step_coarse - numerical_step) > 0 else step_coarse
                 new_fine = round(((curr_dial / 999.0) * eff_range) / numerical_step) * numerical_step

@@ -6,6 +6,7 @@
 
 import pytest
 from PIL import Image, ImageChops
+
 from oaGuiBackground.Interface.panels.panel_generator import PanelGenerator
 from oaGuiBackground.Interface.panels.tiled_panel_generator import TiledPanelGenerator
 
@@ -96,13 +97,13 @@ def test_tiled_background_rendering(style):
 def test_rendering_consistency(style):
     """Verifies that Tiled and Standard rendering produce the same results for a fixed seed."""
     width, height = 256, 256
-    
+
     # 1. Standard Render
     img_std = PanelGenerator.generate_procedural_panel(width, height, style["config"])
-    
+
     # 2. Tiled Render
     img_tiled = TiledPanelGenerator.generate_tiled(width, height, style["config"], tile_size=128)
-    
+
     # 3. Compare (they should be identical because Tiled currently just crops the full render)
     diff = ImageChops.difference(img_std, img_tiled)
     assert diff.getbbox() is None, f"Rendering inconsistency detected in style: {style['name']}"

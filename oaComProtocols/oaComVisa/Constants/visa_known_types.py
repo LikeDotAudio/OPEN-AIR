@@ -8,7 +8,7 @@ KNOWN_DEVICES = {
     # =========================================================================
     #  HP / AGILENT / KEYSIGHT (The Standard)
     # =========================================================================
-    
+
 # --- Digital Multimeters (DMM) ---
     "34401A": {"type": "DMM", "notes": "6.5 Digit Benchtop Standard (Legacy)"},
     "34410A": {"type": "DMM", "notes": "6.5 Digit High Performance"},
@@ -72,7 +72,7 @@ KNOWN_DEVICES = {
     "66104A": {"type": "Power", "notes": "Module 60V / 2.5A (150W)"},
     "6632B":  {"type": "Power", "notes": "100W System Supply (20V/5A)"},
     "6032A":  {"type": "Power", "notes": "1000W Autoranging (60V/50A)"},
-    
+
     # --- Electronic Loads ---
     "6060B":  {"type": "Load", "notes": "DC Electronic Load (300W, 60V, 60A)"},
     "6063B":  {"type": "Load", "notes": "DC Electronic Load (250W, 240V, 10A)"},
@@ -138,7 +138,7 @@ KNOWN_DEVICES = {
     "MSO5074": {"type": "Oscilloscope", "notes": "70 MHz 4 Ch Mixed Signal (Touch)"},
     "DS7014":  {"type": "Oscilloscope", "notes": "100 MHz 4 Ch Performance"},
     "DHO804":  {"type": "Oscilloscope", "notes": "70 MHz 4 Ch (12-bit High Res)"},
-    
+
     # --- Function Generators ---
     "DG1022Z": {"type": "Generator", "notes": "25 MHz 2 Ch Arbitrary"},
     "DG4102":  {"type": "Generator", "notes": "100 MHz 2 Ch Arbitrary"},
@@ -152,7 +152,7 @@ KNOWN_DEVICES = {
     # --- Spectrum Analyzers ---
     "DSA815-TG": {"type": "Spectrum", "notes": "1.5 GHz Analyzer + Tracking Gen"},
     "DSA832":    {"type": "Spectrum", "notes": "3.2 GHz Spectrum Analyzer"},
-    
+
     # --- DMMs ---
     "DM3058":  {"type": "DMM", "notes": "5.5 Digit Benchtop"},
     "DM3068":  {"type": "DMM", "notes": "6.5 Digit Benchtop"},

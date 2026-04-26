@@ -1,28 +1,27 @@
 # meter_knob_with_vu_meter/meter_knob_with_vu_meter.py
-from oaGui.Methods.i18n_utils import get_text
+import copy
+import inspect
+import math
+
 # Author: Anthony Peter Kuzub
 # Version: 20260115.Composite.1
 #
 # Description: meter_knob_with_vu_meter/VU_Meter_Knob.py
-
 import tkinter as tk
-from oaLogging.Methods.matrix_gate import matrix_log
-import inspect
-from tkinter import ttk
-import copy
-import math
 
-# --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaGui.Methods.i18n_utils import get_text
+
+# --- Standard Debug Logging Setup ---
+from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
+from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 
-from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
 
 @WidgetRegistry.register("_VUMeterKnob")
 class BuilderMeterKnobWithVuMeterCreator(TransparencyMixin):
@@ -67,7 +66,7 @@ class BuilderMeterKnobWithVuMeterCreator(TransparencyMixin):
                 if key.startswith("knob_"):
                     new_key = key[5:]
                     knob_config[new_key] = value
-            
+
             # Force disable label on Knob (redundant if on top of VU)
             if "knob_label_active" not in config_data:
                 knob_config["show_label"] = False
@@ -87,7 +86,7 @@ class BuilderMeterKnobWithVuMeterCreator(TransparencyMixin):
                     if isinstance(child, tk.Canvas):
                         canvas = child
                         break
-            
+
             if not canvas:
                 return vu_widget
 
@@ -95,44 +94,44 @@ class BuilderMeterKnobWithVuMeterCreator(TransparencyMixin):
             # Retrieve dynamic offsets stored by the NeedleVUMeter builder
             center_x = getattr(vu_widget, "pivot_offset_x", 0)
             center_y = getattr(vu_widget, "pivot_offset_y", 0)
-            
+
             layout_config = vu_config.get("layout", {})
             size = int(layout_config.get("width", vu_config.get("size", 150)))
-            
+
             if center_x == 0 or center_y == 0:
                 center_x = size / 2
                 center_y = size / 2 + 10
-            
+
             # 4. Create Knob
             if "width" not in knob_config and "knob_width" not in config_data:
                  knob_config["width"] = 40
             if "height" not in knob_config and "knob_height" not in config_data:
                  knob_config["height"] = 40
-                 
+
             # Knob is embedded in the VU canvas
             from oaGuiElements.Core.utils.knob.Core.knob import BuilderKnobCreator
             knob_widget = BuilderKnobCreator.make(canvas, knob_config, context=context, builder_instance=builder_instance, **kwargs)
-            
+
             if knob_widget:
                 # 5. Check for Clipping and Resize Canvas if needed
                 knob_height = int(knob_config.get("height", 40))
                 knob_half_height = knob_height / 2
-                
+
                 # Check bottom overlap
                 meter_viewable_angle = float(vu_config.get("Meter_viewable_angle", 90.0))
                 half_angle = meter_viewable_angle / 2.0
                 start_angle = 90 + half_angle
                 end_angle = 90 - half_angle
                 main_arc_radius = (size - 20) / 2
-                
+
                 angles_to_check = [start_angle, end_angle]
                 if start_angle >= 270 or end_angle <= -90:
                     angles_to_check.append(270)
-                
+
                 min_sin = min([math.sin(math.radians(a)) for a in angles_to_check])
                 arc_depth_below_pivot = -min_sin * main_arc_radius if min_sin < 0 else 0
                 required_below_pivot = max(knob_half_height, arc_depth_below_pivot)
-                
+
                 current_h = int(canvas.cget("height"))
                 if center_y + required_below_pivot > current_h:
                     new_h = int(center_y + required_below_pivot + 10)
@@ -140,19 +139,19 @@ class BuilderMeterKnobWithVuMeterCreator(TransparencyMixin):
 
                 # 6. Position Knob
                 canvas.create_window(center_x, center_y, window=knob_widget, anchor="center", tags="knob_composite")
-                canvas.lift("knob_composite") 
-                
+                canvas.lift("knob_composite")
+
                 # Link redraw hooks
                 old_draw = getattr(vu_widget, "_draw", lambda: None)
                 def composite_draw():
                     old_draw()
                     if hasattr(knob_widget, "_draw"): knob_widget._draw()
-                
+
                 vu_widget._draw = composite_draw
                 vu_widget.render = composite_draw
 
             return vu_widget
 
-        except Exception as e:
+        except Exception:
             logger.exception("❌ VUMeterKnob creation failed")
             return None

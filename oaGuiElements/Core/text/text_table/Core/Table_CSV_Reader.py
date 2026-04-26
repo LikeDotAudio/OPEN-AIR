@@ -1,20 +1,16 @@
 # text_table/Table_CSV_Reader.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 20250821.200641.1
 #
 # Description: This module provides functionality to read data from CSV files into a list of dictionaries.
 
 import csv
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
 import os
 
 # --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory
-from loguru import logger
-
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
@@ -42,7 +38,7 @@ class TableCsvReader:
             raise FileNotFoundError(f"CSV file not found at {file_path}")
 
         try:
-            with open(file_path, "r", newline="", encoding="utf-8") as csvfile:
+            with open(file_path, newline="", encoding="utf-8") as csvfile:
                 reader = csv.DictReader(csvfile)
                 headers = reader.fieldnames
                 if headers is None:

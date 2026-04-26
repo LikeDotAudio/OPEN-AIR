@@ -1,17 +1,18 @@
 import os
+
 project_root = os.getcwd()
 
 import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
+import logging
+
 # oaTests/Workers/CleanupApps/Clear_reports.py
 # Author: Anthony Peter Kuzub
 # Version: 20260323.2045.1
 #
 # Description: Maintenance script to purge old reports while preserving the latest one.
-
 import shutil
-import logging
-from pathlib import Path
+
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # Configure standard logging
 logging.basicConfig(
@@ -27,30 +28,30 @@ def cleanup_reports():
     """
     from oaOchestration.Core.path_initializer import DATA_REPORTS_DIR
     target = str(DATA_REPORTS_DIR)
-    
-    matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"📡📤📤 [CLEAR_REPORTS] Starting Reports cleanup...", "INFO")
-    
+
+    matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "📡📤📤 [CLEAR_REPORTS] Starting Reports cleanup...", "INFO")
+
     if not os.path.exists(target):
         logger.warning(f"   ⚠️ Directory not found: {os.path.relpath(target, project_root)}")
         return
 
     try:
         # Get all files in the directory with their full paths
-        files = [os.path.join(target, f) for f in os.listdir(target) 
+        files = [os.path.join(target, f) for f in os.listdir(target)
                  if os.path.isfile(os.path.join(target, f))]
-        
+
         if not files:
             matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"   ℹ️ {os.path.relpath(target, project_root)} is already empty.", "INFO")
             return
 
         # Sort files by modification time (newest first)
         files.sort(key=os.path.getmtime, reverse=True)
-        
+
         latest_report = files[0]
         old_reports = files[1:]
-        
+
         matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"   💎 Preserving latest report: {os.path.basename(latest_report)}", "INFO")
-        
+
         files_purged = 0
         for file_path in old_reports:
             try:
@@ -59,7 +60,7 @@ def cleanup_reports():
                 files_purged += 1
             except Exception as e:
                 logger.error(f"   ⚠️ Failed to delete {file_path}. Reason: {e}")
-        
+
         # Also handle subdirectories if any (nuke them all)
         for item in os.listdir(target):
             item_path = os.path.join(target, item)

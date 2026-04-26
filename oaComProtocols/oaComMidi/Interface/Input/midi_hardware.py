@@ -8,6 +8,7 @@
 import tkinter as tk
 from tkinter import ttk
 
+
 class MidiHardware(tk.Frame):
     """
     Detected Hardware Ports list component.
@@ -27,7 +28,7 @@ class MidiHardware(tk.Frame):
         self.port_tree.heading("Type", text="Type")
         self.port_tree.heading("Status", text="Status")
         self.port_tree.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
-        
+
         self.port_tree.tag_configure("input", foreground="#00aaff")
         self.port_tree.tag_configure("output", foreground="#ffaa00")
 
@@ -35,7 +36,7 @@ class MidiHardware(tk.Frame):
         # Clear existing
         for item in self.port_tree.get_children():
             self.port_tree.delete(item)
-            
+
         if not info or info.get("error"):
             error = info.get("error") if info else "No info"
             self.port_tree.insert("", "end", text="ERROR", values=("FAIL", error))
@@ -45,7 +46,7 @@ class MidiHardware(tk.Frame):
         for name in info.get("inputs", []):
             status = "Active" if name in info.get("active_in", []) else "Available"
             self.port_tree.insert("", "end", text=name, values=("INPUT", status), tags=("input",))
-            
+
         # Populate Outputs
         for name in info.get("outputs", []):
             status = "Active" if name in info.get("active_out", []) else "Available"

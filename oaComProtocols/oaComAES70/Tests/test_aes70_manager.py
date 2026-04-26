@@ -2,14 +2,15 @@
 # Author: Anthony Peter Kuzub
 # Version: 20260410.1000.1
 #
-# Description: Unit tests for AES70Manager ensuring Hub-and-Spoke integrity, 
+# Description: Unit tests for AES70Manager ensuring Hub-and-Spoke integrity,
 # anti-feedback, and standardized standalone behavior.
 
 import unittest
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
 
 # --- Target Module ---
 from oaComProtocols.oaComAES70.Core.aes70 import AES70Manager
+
 
 class TestAES70Manager(unittest.TestCase):
     """
@@ -20,7 +21,7 @@ class TestAES70Manager(unittest.TestCase):
     def setUp(self):
         """BUILD: Initialize mocks and manager in isolation."""
         self.mock_state_cache = MagicMock()
-        
+
         # Build the manager
         self.manager = AES70Manager(state_cache_manager=self.mock_state_cache, run_bridge=True)
 
@@ -42,10 +43,10 @@ class TestAES70Manager(unittest.TestCase):
         mock_pdu = {"version": 1, "message_count": 1, "messages": [{"handle": 1, "target_ono": 1, "method_id": 1}]}
         self.manager._parser.decode = MagicMock(return_value=mock_pdu)
         self.manager._handle_message = MagicMock()
-        
+
         # OPERATE
         self.manager.ingest_pdu(test_data)
-        
+
         # CHECK: Data passed to handler
         self.manager._handle_message.assert_called_once()
 
@@ -54,10 +55,10 @@ class TestAES70Manager(unittest.TestCase):
         # BUILD
         mock_callback = MagicMock()
         self.manager.add_monitor_callback(mock_callback)
-        
+
         # OPERATE
         self.manager.trigger_scan()
-        
+
         # CHECK
         mock_callback.assert_called_with("SCAN_COMPLETE", unittest.mock.ANY)
 

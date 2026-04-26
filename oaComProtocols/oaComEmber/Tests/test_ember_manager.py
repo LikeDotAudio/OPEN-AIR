@@ -2,14 +2,15 @@
 # Author: Anthony Peter Kuzub
 # Version: 20260410.1000.1
 #
-# Description: Unit tests for EmberManager ensuring Hub-and-Spoke integrity, 
+# Description: Unit tests for EmberManager ensuring Hub-and-Spoke integrity,
 # anti-feedback, and standardized standalone behavior.
 
 import unittest
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
 
 # --- Target Module ---
-from oaComProtocols.oaComEmber.Entry import get_manager, EmberManager
+from oaComProtocols.oaComEmber.Entry import EmberManager
+
 
 class TestEmberManager(unittest.TestCase):
     """
@@ -21,7 +22,7 @@ class TestEmberManager(unittest.TestCase):
         """BUILD: Initialize mocks and manager in isolation."""
         self.mock_state_cache = MagicMock()
         self.mock_mqtt = MagicMock()
-        
+
         # Build the manager
         self.manager = EmberManager(
             state_cache_manager=self.mock_state_cache,
@@ -34,7 +35,7 @@ class TestEmberManager(unittest.TestCase):
         self.manager.start()
         # CHECK
         self.assertTrue(self.manager.running)
-        
+
         # OPERATE
         self.manager.stop()
         # CHECK
@@ -43,7 +44,7 @@ class TestEmberManager(unittest.TestCase):
     def test_connection_logic(self):
         """OPERATE: Simulate connecting to an external Spoke."""
         self.manager.connect("192.168.1.50", 9000)
-        
+
         # CHECK
         status = self.manager.get_status()
         self.assertEqual(status["connection"], "192.168.1.50:9000")
@@ -54,10 +55,10 @@ class TestEmberManager(unittest.TestCase):
         # BUILD
         mock_callback = MagicMock()
         self.manager.add_monitor_callback(mock_callback)
-        
+
         # OPERATE
         self.manager._trigger_callbacks("RX", "node/volume", 0.5)
-        
+
         # CHECK
         mock_callback.assert_called_with("RX", "node/volume", 0.5, None)
 

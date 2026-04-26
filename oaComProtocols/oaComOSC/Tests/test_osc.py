@@ -2,15 +2,15 @@
 # Author: Anthony Peter Kuzub
 # Version: 20260410.1000.1
 #
-# Description: Unit tests for OSCManager ensuring Hub-and-Spoke integrity, 
+# Description: Unit tests for OSCManager ensuring Hub-and-Spoke integrity,
 # anti-feedback, and standardized standalone behavior.
 
 import unittest
 from unittest.mock import MagicMock, patch
-import threading
 
 # --- Target Module ---
 from oaComProtocols.oaComOSC.Managers.osc_manager import OSCManager
+
 
 class TestOSCManager(unittest.TestCase):
     """
@@ -23,17 +23,17 @@ class TestOSCManager(unittest.TestCase):
         self.mock_state_cache = MagicMock()
         self.mock_mqtt = MagicMock()
         self.mock_router = MagicMock()
-        
+
         # Patch ProtocolRouter to prevent real singleton access and auto-start
         self.patcher_router = patch("oaComBroker.Core.protocol_router.manager.ProtocolRouter.get_instance", return_value=self.mock_router)
         self.patcher_router.start()
-        
+
         # Patch Workers to prevent socket binding
         self.patcher_rx = patch("oaComProtocols.oaComOSC.Managers.osc_manager.OscRxServer")
         self.patcher_tx = patch("oaComProtocols.oaComOSC.Managers.osc_manager.OscTxClient")
         self.mock_rx_class = self.patcher_rx.start()
         self.mock_tx_class = self.patcher_tx.start()
-        
+
         # Patch network utils
         self.patcher_ip = patch("oaComProtocols.oaComOSC.Managers.osc_manager.get_local_ip", return_value="127.0.0.1")
         self.patcher_ip.start()
@@ -67,16 +67,16 @@ class TestOSCManager(unittest.TestCase):
         test_addr = "/test/volume"
         test_val = 0.75
         self.manager.register_route(test_addr, "OPEN-AIR/Audio/Volume")
-        
+
         # OPERATE
         self.manager.handle_incoming_osc(test_addr, test_val)
-        
+
         # CHECK: Data normalized and sent to Hub (StateCache/ProtocolRouter)
         # Note: We use assert_any_call because start() triggers a status broadcast
         self.mock_state_cache.handle_external_update.assert_any_call(
             "OPEN-AIR/Audio/Volume", test_val, source="OSC", metadata=unittest.mock.ANY
         )
-        
+
         # Verify anti-feedback tag in the specific call
         found = False
         for call in self.mock_state_cache.handle_external_update.call_args_list:
@@ -90,7 +90,7 @@ class TestOSCManager(unittest.TestCase):
         # BUILD
         self.manager.register_route("/test/fader", "OPEN-AIR/Mixer/Fader")
         mock_tx_instance = self.mock_tx_class.return_value
-        
+
         # OPERATE: Data from an external source (e.g., GUI)
         message = {
             "source": "MQTT",
@@ -100,7 +100,7 @@ class TestOSCManager(unittest.TestCase):
             "meta": {"origin_source": "GUI"}
         }
         self.manager._on_protocol_event(message)
-        
+
         # CHECK: Transmitted to hardware Spoke
         mock_tx_instance.send_message.assert_called_with("/test/fader", 1.0)
 
@@ -109,7 +109,7 @@ class TestOSCManager(unittest.TestCase):
         # BUILD
         self.manager.register_route("/test/fader", "OPEN-AIR/Mixer/Fader")
         mock_tx_instance = self.mock_tx_class.return_value
-        
+
         # OPERATE: Data that originally came FROM OSC
         message = {
             "source": "MQTT",
@@ -119,7 +119,7 @@ class TestOSCManager(unittest.TestCase):
             "meta": {"origin_source": "OSC"}
         }
         self.manager._on_protocol_event(message)
-        
+
         # CHECK: Echo suppression (should NOT call send_message)
         mock_tx_instance.send_message.assert_not_called()
 
@@ -127,13 +127,13 @@ class TestOSCManager(unittest.TestCase):
         """CHECK: Verify periodic status broadcast for system monitoring."""
         # BUILD: Force a broadcast
         self.manager._broadcast_status_loop = MagicMock() # Stop the actual loop
-        
+
         # OPERATE
         status = self.manager.get_status()
         self.manager.state_cache_manager.handle_external_update(
             "OPEN-AIR/System/Status/OSC/Bridge", status, source="OSC-STATUS"
         )
-        
+
         # CHECK
         self.mock_state_cache.handle_external_update.assert_any_call(
             "OPEN-AIR/System/Status/OSC/Bridge", unittest.mock.ANY, source="OSC-STATUS"

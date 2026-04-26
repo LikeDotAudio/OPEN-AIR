@@ -5,18 +5,19 @@
 # Description: Dynamic API routes with an interactive HTML Tree Explorer.
 
 import sys
+
 sys.path.insert(0, '/home/anthony/Documents/OPEN-AIR')
 
 try:
-    from fastapi import APIRouter, HTTPException, Path, Body, Request
+    from fastapi import APIRouter, Body, HTTPException, Path, Request
     from fastapi.responses import HTMLResponse, JSONResponse
 except ImportError:
     pass
 
-from typing import Any, Dict, List
-from ..Constants.rest_constants import LOCAL_DEBUG
-from loguru import logger
-from oaComBroker.Core.protocol_router.router import ProtocolRouter # Import ProtocolRouter
+from typing import Any
+
+from oaComBroker.Core.protocol_router.router import ProtocolRouter  # Import ProtocolRouter
+
 
 def create_router(state_cache_manager, protocol_router):
     """
@@ -25,10 +26,10 @@ def create_router(state_cache_manager, protocol_router):
     """
     router = APIRouter()
 
-    def get_children(prefix: str) -> List[str]:
+    def get_children(prefix: str) -> list[str]:
         """Helper to find immediate sub-topics/children for a given prefix."""
         if prefix and not prefix.endswith('/'): prefix += '/'
-        
+
         children = set()
         for topic in state_cache_manager.rust_cache.keys():
             if topic.startswith(prefix):
@@ -41,7 +42,7 @@ def create_router(state_cache_manager, protocol_router):
     @router.get("/", response_class=HTMLResponse)
     async def root_explorer(request: Request):
         """Interactive HTML Tree Explorer for the OPEN-AIR System."""
-        
+
         # If client wants JSON (e.g. scripts), give them the raw root data
         if "text/html" not in request.headers.get("Accept", ""):
             roots = set()
@@ -55,7 +56,7 @@ def create_router(state_cache_manager, protocol_router):
 
         # Generate HTML Explorer
         roots = sorted(list(set(topic.split('/')[0] for topic in state_cache_manager.rust_cache.keys())))
-        
+
         html_content = f"""
         <!DOCTYPE html>
         <html>
@@ -108,8 +109,8 @@ def create_router(state_cache_manager, protocol_router):
             router_inst = ProtocolRouter.get_instance()
             active = router_inst.protocols if router_inst else ["MQTT", "REST"] # Fallback if router not found
             return {
-                "status": "operational", 
-                "partition": "CORE", 
+                "status": "operational",
+                "partition": "CORE",
                 "active_protocols": active,
                 "instance_id": getattr(router_inst, "GUID", "UNKNOWN")
             }
@@ -131,13 +132,13 @@ def create_router(state_cache_manager, protocol_router):
         - If FOLDER: Returns children (JSON or HTML Tree).
         """
         is_html = "text/html" in request.headers.get("Accept", "")
-        
+
         # 1. Check for Exact Match (Leaf Node)
         value = state_cache_manager.get_cached_value(topic_path)
         if value is not None:
             if not is_html:
                 return {"type": "leaf", "topic": topic_path, "value": value}
-            
+
             # Simple HTML Leaf View
             return HTMLResponse(f"""
                 <body style="background:#1a1a1a; color:#dcdcdc; font-family:sans-serif; padding:40px;">

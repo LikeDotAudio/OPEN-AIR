@@ -4,20 +4,18 @@
 #
 # Description: Homoginized photorealistic Button Toggler (Radio Group) based on Actuator design.
 
-import os
 import tkinter as tk
-from tkinter import ttk
-import inspect
-from loguru import logger
 
 from oaConfigurationManager.FileReaders.config_reader import Config
+
 app_constants = Config.get_instance()
 
-from oaGuiManager.Core.factory.button_canvas_base import CanvasButton
 from oaGui.Methods.i18n_utils import get_text
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
-from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
 from oaGuiBuilder.Core.base_widget_creator import BaseWidgetCreator
+from oaGuiManager.Core.factory.button_canvas_base import CanvasButton
+from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
+from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+
 
 class TogglerButton(CanvasButton):
     """
@@ -29,11 +27,11 @@ class TogglerButton(CanvasButton):
         self.on_click_callback = on_click_callback
         self.option_data = options_data.get(key, {})
         self.label_base = self.option_data.get("label", key)
-        
+
         # Derive text
         self.on_text = self.option_data.get("label_active", self.label_base)
         self.off_text = self.option_data.get("label_inactive", self.label_base)
-        
+
         value, units = self.option_data.get("value"), self.option_data.get("units")
         if value is not None or units is not None:
             suffix = f"\n({value if value else ''}{units if units else ''})"
@@ -42,7 +40,7 @@ class TogglerButton(CanvasButton):
                 self.on_text = {lang: str(txt) + suffix for lang, txt in self.on_text.items()}
             else:
                 self.on_text = str(self.on_text) + suffix
-                
+
             if isinstance(self.off_text, dict):
                 self.off_text = {lang: str(txt) + suffix for lang, txt in self.off_text.items()}
             else:
@@ -87,7 +85,7 @@ class TogglerButton(CanvasButton):
 @WidgetRegistry.register("_GuiButtonToggler", "_SmartToggleGroup", "_ButtonToggler")
 class BuilderButtonTogglerCreator(BaseWidgetCreator, TransparencyMixin):
     """Factory for creating Button Toggler groups."""
-    
+
     is_composite = True
 
     def _assemble_ui(self, parent_widget, config_data, context, **kwargs):
@@ -96,13 +94,13 @@ class BuilderButtonTogglerCreator(BaseWidgetCreator, TransparencyMixin):
         """
         ctx = context if context else type('obj', (object,), kwargs)()
         b_inst = getattr(ctx, 'builder_instance', None) or getattr(ctx, 'app_instance', None) or kwargs.get('builder_instance')
-        
+
         path = config_data.get("path")
         label = get_text(config_data.get('label'), "")
 
         # 1. Main Canvas Container
         group_canvas = tk.Canvas(parent_widget, bd=0, highlightthickness=0, relief="flat")
-        
+
         def redraw_labels():
             if not group_canvas.winfo_exists(): return
             group_canvas.delete("industrial_text")
@@ -140,7 +138,7 @@ class BuilderButtonTogglerCreator(BaseWidgetCreator, TransparencyMixin):
         def on_button_click(event, key):
             current_selected_keys = selected_keys_var.get().split(",") if selected_keys_var.get() else []
             is_multi = (selection_mode == "multi") or (allow_multi_alt and event and (event.state & 0x0008))
-            
+
             if is_multi:
                 if key in current_selected_keys:
                     current_selected_keys.remove(key)
@@ -152,7 +150,7 @@ class BuilderButtonTogglerCreator(BaseWidgetCreator, TransparencyMixin):
                     else: return
                 else:
                     current_selected_keys = [key]
-            
+
             selected_keys_var.set(",".join(current_selected_keys))
 
         row_num = 1 if label else 0
@@ -161,13 +159,13 @@ class BuilderButtonTogglerCreator(BaseWidgetCreator, TransparencyMixin):
 
         for idx, option_key in enumerate(options_data.keys()):
             button = TogglerButton(
-                group_canvas, option_key, options_data, config_data, 
+                group_canvas, option_key, options_data, config_data,
                 selected_keys_var, on_button_click, b_inst
             )
             button.grid(row=row_num, column=col_num, padx=grid_padx, pady=grid_pady, sticky="nsew")
             group_canvas.grid_columnconfigure(col_num, weight=1)
             buttons[option_key] = button
-            
+
             col_num += 1
             if col_num >= max_cols:
                 col_num, row_num = 0, row_num + 1

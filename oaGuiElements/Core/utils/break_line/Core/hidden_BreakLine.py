@@ -1,22 +1,17 @@
 # break_line/hidden_BreakLine.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 20260214.2
 #
 # Description: A mixin for creating a horizontal break line (Separator).
 
 import tkinter as tk
-from oaLogging.Methods.matrix_gate import matrix_log
-import inspect
-from tkinter import ttk
 
 # --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import builder_logger
-from loguru import logger
-
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
-from oaGuiManager.Core.transparency.transparency import TransparencyManager
 from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
+from oaGuiManager.Core.transparency.transparency import TransparencyManager
+from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+from oaLogging.Methods.matrix_gate import matrix_log
+
 
 @WidgetRegistry.register("OcaFold", "BreakLine", "_Separator", "OcaSeparator")
 class BuilderBreakLineCreator(TransparencyMixin):
@@ -26,7 +21,7 @@ class BuilderBreakLineCreator(TransparencyMixin):
     def make(parent_widget, config_data, context=None, **kwargs):
         """Creates a horizontal or vertical break line using a Canvas for alpha support."""
         path = config_data.get("path", "unspecified_path")
-        
+
         # ⚡ HARDENED INTERFACE: Extract from context if available
         if context:
             builder_instance = context.builder_instance
@@ -34,19 +29,19 @@ class BuilderBreakLineCreator(TransparencyMixin):
             builder_instance = kwargs.get("builder_instance")
 
         layout = config_data.get("layout", {})
-        
+
         # 📏 GEOMETRY PARSING
         orientation = config_data.get("Orientation") or layout.get("Orientation") or "horizontal"
         orientation = orientation.lower()
-        
+
         thickness = layout.get("thickness") or layout.get("height") if orientation == "horizontal" else layout.get("width")
         thickness = int(thickness) if thickness else 1
-        
+
         style = config_data.get("style", "normal").upper()
         if config_data.get("type") == "OcaFold": style = "FOLD"
 
         length = layout.get("width") if orientation == "horizontal" else layout.get("height")
-        
+
         padx = int(layout.get("padx", 0))
         pady = int(layout.get("pady", 0))
         line_color = layout.get("colour") or layout.get("color") or config_data.get("color") or "#888888"
@@ -60,7 +55,7 @@ class BuilderBreakLineCreator(TransparencyMixin):
 
         # 🏗️ CONSTRUCTION
         if style == "FOLD":
-            thickness = max(thickness, 4) 
+            thickness = max(thickness, 4)
 
         try:
             if orientation == "vertical":
@@ -88,9 +83,9 @@ class BuilderBreakLineCreator(TransparencyMixin):
             frame.delete("break_line")
             if hasattr(frame, 'panel_bg_image') and not frame.find_withtag("panel_bg_slice"):
                  frame.create_image(0, 0, image=frame.panel_bg_image, anchor="nw", tags="panel_bg_slice")
-            
+
             w, h = frame.winfo_width(), frame.winfo_height()
-            
+
             if style == "FOLD":
                 if getattr(builder_instance, "is_editor", False):
                     if orientation == "vertical":

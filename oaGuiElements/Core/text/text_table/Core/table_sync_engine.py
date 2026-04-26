@@ -1,17 +1,18 @@
 # Core/table_sync_engine.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: Brief summary of purpose
 
-import orjson
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
 import tkinter as tk
-from loguru import logger
-from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic
+
+import orjson
+
 from oaComProtocols.oaComMQTT.Core import mqtt_publisher_service
+from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic
+from oaLogging.Methods.matrix_gate import matrix_log
+
 
 class TableSyncEngine:
     """Orchestrates MQTT synchronization logic for the table widget."""
@@ -44,7 +45,7 @@ class TableSyncEngine:
                 self.item_map[iid], self.device_key_map[k] = v, iid
                 if self.abs_topic and not self.is_reading_csv and not suppress_mqtt:
                     mqtt_publisher_service.publish_payload(get_topic(self.abs_topic, "data", k), orjson.dumps(v).decode())
-            
+
             self.csv_svc.save(cols, self.item_map)
         except Exception as e: self.logger.error(f"❌ Full table update failed: {e}")
 
@@ -74,7 +75,7 @@ class TableSyncEngine:
 
         # 2. Handle Data Update
         if not self.abs_topic or "/data/" not in topic or not topic.startswith(self.abs_topic): return
-        
+
         # Extract the data key (dk) which is the part after the last "/data/"
         dk = topic.split("/data/")[-1]
         if "/" in dk: return # We only want flat IDs directly after a "/data/" segment

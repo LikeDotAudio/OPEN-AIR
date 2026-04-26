@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import sys
 
+
 def filter_and_check_files(file_list):
     """
     Filters a list of file paths and checks for files exceeding a line limit.
@@ -15,12 +16,12 @@ def filter_and_check_files(file_list):
             continue
 
         try:
-            with open(file_path, 'r', encoding='utf-8') as f:
+            with open(file_path, encoding='utf-8') as f:
                 line_count = sum(1 for line in f)
-            
+
             if line_count > 500:
                 long_files.append(file_path)
-        except (IOError, UnicodeDecodeError) as e:
+        except (OSError, UnicodeDecodeError):
             # Ignoring files that can't be read or have encoding issues
             # print(f"Could not process {file_path}: {e}", file=sys.stderr)
             pass
@@ -33,9 +34,9 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         all_files_str = sys.argv[1]
         files = all_files_str.splitlines()
-        
+
         violating_files = filter_and_check_files(files)
-        
+
         if violating_files:
             print("The following files have more than 500 lines:")
             for f in violating_files:

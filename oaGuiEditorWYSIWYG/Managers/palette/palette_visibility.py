@@ -6,9 +6,10 @@
 
 from oaLogging.Methods.matrix_gate import matrix_log
 
+
 class PaletteVisibilityService:
     """Manages the packing and unpacking of palette widgets within the stack."""
-    
+
     def __init__(self, container_widget, visibility_tracker):
         self.container = container_widget
         self.visibility_tracker = visibility_tracker
@@ -16,7 +17,7 @@ class PaletteVisibilityService:
     def toggle_visibility(self, panel_name, panel_widget):
         """Switches the packing state of a panel based on its tracked visibility."""
         is_visible = self.visibility_tracker.get(panel_name, False)
-        
+
         if is_visible:
             self._hide_panel(panel_name, panel_widget)
         else:

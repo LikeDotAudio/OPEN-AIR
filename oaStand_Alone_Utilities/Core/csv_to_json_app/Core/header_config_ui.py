@@ -7,6 +7,7 @@
 import tkinter as tk
 from tkinter import ttk
 
+
 class HeaderConfigUI:
     """Manages the dynamic row of widgets for each CSV header."""
 
@@ -19,13 +20,13 @@ class HeaderConfigUI:
 
     def _setup_table(self):
         for w in self.parent.winfo_children(): w.destroy()
-        
+
         cols = [("JSON Key Name", 0), ("Role", 1), ("Nested Under", 2), ("Part Name (e.g., 'contents')", 3)]
         for text, col in cols:
             tk.Label(self.parent, text=text, font=("Arial", 10, "bold")).grid(row=0, column=col, padx=5, pady=2)
 
         roles = ["Hierarchical Key", "Sub Key", "Simple Value", "Value as Key", "Key Name and Value", "Skip"]
-        
+
         for i, header in enumerate(self.headers):
             row = i + 1
             h_entry = tk.Entry(self.parent, width=20)

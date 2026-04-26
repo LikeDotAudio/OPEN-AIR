@@ -1,29 +1,24 @@
 # slider_value/slider_value.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 20250821.200641.1
 #
 # Description: slider_value/gui_slider_value.py
 
-import os
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
+import os
 import tkinter as tk
 from tkinter import ttk
-import inspect
 
 # --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()  # Get the singleton instance
 
-from oaOchestration.Methods.widget_event_binder import bind_variable_trace
-from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
-
+from oaOchestration.Methods.widget_event_binder import bind_variable_trace
 
 # --- Global Scope Variables ---
 current_file = f"{os.path.basename(__file__)}"
@@ -75,7 +70,7 @@ class BuilderSliderValueCreator(TransparencyMixin):
 
         try:
             sub_frame = tk.Frame(parent_widget, bd=0, highlightthickness=0, relief="flat")  # Use parent_widget here
-            
+
             # Apply Industrial Transparency
             if hasattr(self, '_apply_transparency'):
                 self._apply_transparency(sub_frame, None, config_data, builder_instance)
@@ -88,7 +83,7 @@ class BuilderSliderValueCreator(TransparencyMixin):
             # Line 1: Label, Textbox, Units
             top_info_frame = tk.Canvas(sub_frame, bd=0, highlightthickness=0, relief="flat", height=30)
             top_info_frame.pack(side=tk.TOP, fill=tk.X, expand=True)
-            
+
             # Apply Industrial Transparency to internal frames
             if hasattr(self, '_apply_transparency'):
                 self._apply_transparency(top_info_frame, top_info_frame, config_data, builder_instance)
@@ -103,19 +98,19 @@ class BuilderSliderValueCreator(TransparencyMixin):
                     return
                 if w <= 1: return
                 top_info_frame._last_redraw_size = (w, h)
-                
+
                 top_info_frame.delete("industrial_text")
-                
+
                 # Draw Main Label (Left)
                 top_info_frame.create_text(
-                    5, h/2, text=f"{label}:", anchor="w", 
+                    5, h/2, text=f"{label}:", anchor="w",
                     fill="white", font=custom_font, tags="industrial_text"
                 )
-                
+
                 # Draw Units (Right)
                 units_txt = config_data.get("units", "")
                 top_info_frame.create_text(
-                    w-5, h/2, text=units_txt, anchor="e", 
+                    w-5, h/2, text=units_txt, anchor="e",
                     fill="white", font=custom_font, tags="industrial_text"
                 )
 
@@ -137,7 +132,7 @@ class BuilderSliderValueCreator(TransparencyMixin):
 
             def sync_bg():
                 redraw_labels()
-            
+
             sub_frame._draw = sync_bg
             min_val = float(config_data.get("min", "0"))
             max_val = float(config_data.get("max", "100"))
@@ -145,7 +140,7 @@ class BuilderSliderValueCreator(TransparencyMixin):
             # 🟢️️️ New fix: Create a custom style for a thicker slider
             style = ttk.Style(sub_frame)
             style_name = f"Thicker.{font_size}.Horizontal.TScale"
-            
+
             slider_width = layout_config.get("width", 200)
             slider_height = layout_config.get("height", 40)
 
@@ -239,6 +234,6 @@ class BuilderSliderValueCreator(TransparencyMixin):
             matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"✅ SUCCESS! The slider '{label}' has materialized!", level="SUCCESS")
             return sub_frame
 
-        except Exception as e:
+        except Exception:
             logger.exception("💥 KABOOM! The slider contraption for '{label}' has malfunctioned! Error")
             return None

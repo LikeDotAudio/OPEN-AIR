@@ -1,22 +1,21 @@
 import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
+
 # Workers/agent_mdns_zeroconf.py
 # Author: Gemini Agent
 # Version: 1.0.0
 #
 # Description: Dedicated module for mDNS/ZeroConf discovery (critical for AES70 _oca._tcp).
-
 import socket
 import time
-from typing import List, Tuple, Dict
 from concurrent.futures import ThreadPoolExecutor
-from zeroconf import Zeroconf, ServiceBrowser, ServiceListener, ServiceInfo
 
-# --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
+from zeroconf import ServiceBrowser, ServiceListener, Zeroconf
 
 from oaConfigurationManager.FileReaders.config_reader import Config
+
+# --- Standard Debug Logging Setup ---
+from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
@@ -45,16 +44,16 @@ class AES70DiscoveryListener(ServiceListener):
             }
             matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"📻 AES70 Found: {name} at {ip}:{port}", "SUCCESS")
 
-def discover_aes70_devices(timeout: float = 2.0) -> Dict[str, dict]:
+def discover_aes70_devices(timeout: float = 2.0) -> dict[str, dict]:
     """Scans for AES70 devices using mDNS."""
     matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "📡 Starting mDNS scan for AES70 (_oca._tcp)...", "DEBUG")
     zc = Zeroconf()
     listener = AES70DiscoveryListener()
     browser = ServiceBrowser(zc, "_oca._tcp.local.", listener)
-    
+
     time.sleep(timeout)
     zc.close()
-    
+
     return listener.found_devices
 
 def _get_local_ip():
@@ -72,7 +71,7 @@ def _get_local_ip():
 def _check_host(ip):
     """Legacy: Checks for Port 111 (VXI-11) and Port 5025 (SCPI)."""
     import urllib.request
-    
+
     # 1. Port 111 (VXI-11)
     try:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
@@ -103,7 +102,7 @@ def _check_host(ip):
         pass
     return None
 
-def discover_ip_devices() -> Tuple[List[str], List[str]]:
+def discover_ip_devices() -> tuple[list[str], list[str]]:
     """
     Legacy: Hunts the local network for VISA/SCPI devices.
     Renamed internally to avoid conflict, but exported for orchestrator.
@@ -133,7 +132,7 @@ def discover_ip_devices() -> Tuple[List[str], List[str]]:
                 matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Error getting scan result: {e}", "TRACE")
                 pass
 
-    # Also trigger AES70 discovery here and merge if needed, 
+    # Also trigger AES70 discovery here and merge if needed,
     # but for now keeping them as separate return channels for the orchestrator.
     aes70_devices = discover_aes70_devices()
     for name, data in aes70_devices.items():

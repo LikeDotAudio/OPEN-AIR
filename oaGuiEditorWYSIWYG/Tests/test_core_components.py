@@ -5,7 +5,6 @@
 # Description: Unit tests for core GUI components: EventBus, StateManager, and OverlayManager.
 
 import unittest
-import copy
 from unittest.mock import MagicMock, patch
 
 # --- Patch tkinter classes with MagicMock directly ---
@@ -40,20 +39,18 @@ mock_ttk_button_class = MagicMock()
 mock_ttk_checkbutton_class = MagicMock()
 
 
-with (patch('tkinter.Frame', mock_tk_frame_class), 
-      patch('tkinter.Label', mock_tk_label_class), 
-      patch('tkinter.Canvas', mock_tk_canvas_class), 
-      patch('tkinter.BooleanVar', mock_tk_booleanvar_class), 
-      patch('tkinter.ttk.Entry', mock_ttk_entry_class), 
-      patch('tkinter.ttk.Button', mock_ttk_button_class), 
-      patch('tkinter.ttk.Checkbutton', mock_ttk_checkbutton_class), 
+with (patch('tkinter.Frame', mock_tk_frame_class),
+      patch('tkinter.Label', mock_tk_label_class),
+      patch('tkinter.Canvas', mock_tk_canvas_class),
+      patch('tkinter.BooleanVar', mock_tk_booleanvar_class),
+      patch('tkinter.ttk.Entry', mock_ttk_entry_class),
+      patch('tkinter.ttk.Button', mock_ttk_button_class),
+      patch('tkinter.ttk.Checkbutton', mock_ttk_checkbutton_class),
       patch('tkinter.ttk', MagicMock()) as MockTtkModule): # Patch the ttk module itself as well
 
 
 
     # Explicitly import patched modules for internal use
-    import tkinter as tk
-    import tkinter.ttk as ttk
 
     # --- Import modules after patching ---
     from oaComBroker.Core.event_bus import event_bus
@@ -154,12 +151,12 @@ with (patch('tkinter.Frame', mock_tk_frame_class),
     class TestOverlayManager(unittest.TestCase):
         def setUp(self):
             self.mock_workspace = MagicMock()
-            
+
             # Patch tk.Canvas and tk.Frame within the overlay module
             # (Note: tk and ttk are imported as aliases in overlay.py)
             self.patch_canvas = patch('oaGuiEditorWYSIWYG.Interface.layout_engine.overlay_manager.tk.Canvas', mock_tk_canvas_class)
             self.patch_frame = patch('oaGuiEditorWYSIWYG.Interface.layout_engine.overlay_manager.tk.Frame', mock_tk_frame_class)
-            
+
             self.mock_canvas = self.patch_canvas.start()
             self.mock_frame = self.patch_frame.start()
 
@@ -179,14 +176,14 @@ with (patch('tkinter.Frame', mock_tk_frame_class),
             self.mock_canvas.assert_called_once_with(mock_parent_widget, highlightthickness=0, bd=0)
             self.overlay_manager.event_blocker_canvas.bind.assert_called()
             self.overlay_manager.event_blocker_canvas.place_forget.assert_called_once()
-        
+
         def test_show_event_blocker(self):
             mock_parent_widget = MagicMock() # Simply a MagicMock
             mock_parent_widget.winfo_width.return_value = 100
             mock_parent_widget.winfo_height.return_value = 100
             self.overlay_manager.create_event_blocker(mock_parent_widget)
             self.overlay_manager.event_blocker_canvas.reset_mock() # Reset all mocks on event_blocker_canvas after initial hide
-            
+
             # Ensure the master of the canvas (parent) also returns valid dimensions
             self.overlay_manager.event_blocker_canvas.master.winfo_width.return_value = 100
             self.overlay_manager.event_blocker_canvas.master.winfo_height.return_value = 100

@@ -33,7 +33,7 @@ def validate_and_sanitize_json(data: dict) -> dict:
         except (TypeError, ValueError) as e:
             logger.error(f"❌ [RUST] JSON validation failed: {e}")
             return data
-    
+
     # --- Python Fallback Logic ---
     try:
         # Fallback to orjson serialization check

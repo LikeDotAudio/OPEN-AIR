@@ -1,11 +1,9 @@
 # cosmetics/label.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: Brief summary of purpose
 
-import tkinter as tk
 
 class BezelLabel:
     @staticmethod
@@ -19,10 +17,10 @@ class BezelLabel:
             return
 
         default_color = cosmetics.get("colors", {}).get("foreground", "white")
-        
+
         for label_cfg in labels:
             text = label_cfg.get("text", "")
-            
+
             # --- Implement Value Overlay Logic ---
             if label_cfg.get("value_overlay", False) and current_value is not None:
                 sig_fig = label_cfg.get("sig_fig", 3)
@@ -33,21 +31,21 @@ class BezelLabel:
 
             if not text:
                 continue
-                
+
             # Position relative to pivot (cx, cy)
             rel_x = label_cfg.get("x", 0)
             rel_y = label_cfg.get("y", 0)
-            
+
             x = cx + rel_x
             y = cy + rel_y
-            
+
             # Style
             font_family = label_cfg.get("font", "Helvetica")
             font_size = label_cfg.get("size", 10)
             font_weight = label_cfg.get("weight", "normal")
             color = label_cfg.get("color", default_color)
             anchor = label_cfg.get("anchor", "center")
-            
+
             font_spec = (font_family, font_size, font_weight)
-            
+
             canvas.create_text(x, y, text=text, fill=color, font=font_spec, anchor=anchor, tags="nextgen_foreground")

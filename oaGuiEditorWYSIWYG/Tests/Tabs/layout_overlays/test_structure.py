@@ -20,19 +20,19 @@
 #                {"id": "child2", "bbox": (250, 50, 350, 60)}
 #            ]
 #        }
-#        
+#
 #        self.overlay.draw(widget_tree)
-#        
+#
 #        # Expect two lines, one for each child
 #        self.assertEqual(self.canvas.create_line.call_count, 2)
-#        
+#
 #        # Check the line for the first child
 #        # from center of parent to center of child
 #        # parent center: (200, 15), child center: (100, 55)
 #        args, kwargs = self.canvas.create_line.call_args_list[0]
 #        self.assertEqual(args, (200.0, 15.0, 100.0, 55.0))
 #        self.assertEqual(kwargs['tags'], 'structure_overlay')
-#        
+#
 #        self.overlay.clear()
 #        self.canvas.delete.assert_called_once_with('structure_overlay')
 #

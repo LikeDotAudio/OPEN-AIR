@@ -4,7 +4,7 @@
 # Description: Bespoke editor for images_progress_bar.
 
 import tkinter as tk
-from tkinter import ttk
+
 
 class ImagesProgressBarEditor:
     """Standalone editor for images_progress_bar configuration."""
@@ -26,14 +26,14 @@ class ImagesProgressBarEditor:
     def _build_ui(self):
         header = tk.Frame(self.window, bg="#333333", height=40)
         header.pack(side="top", fill="x")
-        tk.Label(header, text="IMAGES PROGRESS BAR EDITOR", bg="#333333", fg="white", 
+        tk.Label(header, text="IMAGES PROGRESS BAR EDITOR", bg="#333333", fg="white",
                  font=("Arial", 10, "bold")).pack(side="left", padx=10, pady=10)
 
         container = tk.Frame(self.window, bg="#1e1e1e")
         container.pack(fill="both", expand=True, padx=10, pady=10)
-        
+
         tk.Label(container, text="Bespoke properties for images_progress_bar will appear here.", bg="#1e1e1e", fg="white").pack(pady=20)
-        
+
         row = tk.Frame(container, bg="#1e1e1e")
         row.pack(fill="x", pady=5)
         tk.Label(row, text="Label", bg="#1e1e1e", fg="#dcdcdc", width=15, anchor="w").pack(side="left")
@@ -45,11 +45,11 @@ class ImagesProgressBarEditor:
         footer = tk.Frame(self.window, bg="#333333", height=50)
         footer.pack(side="bottom", fill="x")
 
-        tk.Button(footer, text="SAVE", bg="#4CAF50", fg="white", 
+        tk.Button(footer, text="SAVE", bg="#4CAF50", fg="white",
                   font=("Arial", 9, "bold"), relief="flat", width=12,
                   command=self._on_save).pack(side="right", padx=10, pady=10)
-        
-        tk.Button(footer, text="DISCARD", bg="#f44336", fg="white", 
+
+        tk.Button(footer, text="DISCARD", bg="#f44336", fg="white",
                   font=("Arial", 9, "bold"), relief="flat", width=12,
                   command=self.window.destroy).pack(side="right", padx=10, pady=10)
 

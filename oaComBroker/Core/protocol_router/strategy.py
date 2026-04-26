@@ -25,7 +25,8 @@
 # - Implements network-level loop prevention (Reflection rejection).
 # - Decouples high-level routing policy from low-level transport management.
 
-from .constants import SINK_STRATEGIES, app_constants
+from .constants import app_constants
+
 
 def calculate_strategy(message):
     """
@@ -38,25 +39,25 @@ def calculate_strategy(message):
     source = message["source"]
     logical_source = message.get("logical_source", source)
     full_id = message.get("full_id")
-    
+
     # --- Loop Prevention: Network Reflection Rejection ---
     # ⚡ V3.1.21 REFLECTION PURGE:
-    # All messages arriving from MQTT that were authored by this instance 
-    # must be tagged for IGNORE. They still reach the local Monitor/Firehose 
+    # All messages arriving from MQTT that were authored by this instance
+    # must be tagged for IGNORE. They still reach the local Monitor/Firehose
     # via the ingest pipeline but are blocked from re-dispatch.
     if source == "MQTT" and full_id == app_constants.FULL_INSTANCE_ID:
         return "IGNORE (REFLECT)"
-        
+
     # --- Dynamic Matrix Routing ---
     from .manager import ProtocolRouter
     router = ProtocolRouter.get_instance()
-    
+
     strategy = router.calculate_strategy_for_message(logical_source, topic)
-    
+
     if not strategy:
         # Default fallback for untracked sources
         return "Ⓖ 🚀"
-        
+
     return strategy
 
 def calculate_ui_tags(message, local_guid):
@@ -76,11 +77,11 @@ def calculate_ui_tags(message, local_guid):
     logical_source = message.get("logical_source", message["source"])
     is_local = (message["guid"] == local_guid)
     is_mutation = message["meta"].get("mutation", False)
-    
+
     tags = []
-    
+
     # --- Protocol-Level Tagging ---
-    if "-" in logical_source: 
+    if "-" in logical_source:
         tags.append("SYSTEM")
     elif "MIDI" in logical_source:
         tags.append("MIDI")
@@ -89,13 +90,13 @@ def calculate_ui_tags(message, local_guid):
     else:
         # Geographic origin tagging.
         tags.append("HERE" if is_local else "REMOTE")
-        
+
     # --- Functional Tagging ---
     if is_mutation:
         # Flag hardware control events (YAK).
         tags.append("MUTATION")
-    if message["meta"].get("splink_active") or message["meta"].get("splinker_source"): 
+    if message["meta"].get("splink_active") or message["meta"].get("splinker_source"):
         # Flag patched/linked parameters.
         tags.append("SPLINK")
-        
+
     return tags

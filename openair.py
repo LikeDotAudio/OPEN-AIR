@@ -1,11 +1,14 @@
-import pathlib
 import os
+import pathlib
 import sys
+
 project_root = pathlib.Path(__file__).resolve().parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 import inspect
+
 from oaLogging.Methods.matrix_gate import matrix_log
+
 # openair.py
 # Author: Anthony Peter Kuzub
 # Version: 20260328.0.1
@@ -37,20 +40,19 @@ Constraints:
       'oaGuiManager/Managers/open_air_ui.py'.
 """
 
-import time
-import subprocess
 import signal
-
-# Ensure the root directory is in the search path for local module imports.
-# Since this script is in the project root, project_root IS the parent directory.
-from oaLogging.Core.logger import initialize_logging, set_log_directory
-from loguru import logger
-from oaOchestration.Core.path_initializer import initialize_paths
-from oaConfigurationManager.FileReaders.config_reader import Config
+import subprocess
+import time
 
 # --- Centralized Protocol Management ---
 # Import the ComProtocolManager entry point
-from oaComProtocols.oaComManager.Entry import ComProtocolManager, start_all_protocols, stop_all_protocols, status as get_protocol_status
+from oaComProtocols.oaComManager.Entry import ComProtocolManager
+from oaConfigurationManager.FileReaders.config_reader import Config
+
+# Ensure the root directory is in the search path for local module imports.
+# Since this script is in the project root, project_root IS the parent directory.
+from oaLogging.Core.logger import set_log_directory
+from oaOchestration.Core.path_initializer import initialize_paths
 
 # _DEBUG: Internal flag to toggle verbose supervisor logging.
 _DEBUG = False
@@ -60,9 +62,9 @@ def log(message):
     import re
     ansi_escape = re.compile(r'\x1B(?:[@-Z\-_]|\[[0-?]*[ -/]*[@-~])')
     clean_message = ansi_escape.sub('', str(message))
-    
+
     print(f"[SUPERVISOR] {clean_message}")
-    if _DEBUG: 
+    if _DEBUG:
         matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🚀 SUPERVISOR: {message}", "DEBUG")
 
 def main():
@@ -102,7 +104,7 @@ def main():
     GLOBAL_PROJECT_ROOT, data_dir = initialize_paths()
     log_dir = pathlib.Path(data_dir) / "oaDataLogs"
     set_log_directory(log_dir, partition="SUP")
-    
+
     app_config = Config.get_instance()
     is_mission_critical = app_config.MISSION_CRITICAL_MODE
 
@@ -116,7 +118,7 @@ def main():
             env = os.environ.copy()
             env["PIP_BREAK_SYSTEM_PACKAGES"] = "1"
             # Build once in develop mode to ensure imports work globally
-            subprocess.check_call([sys.executable, "-m", "maturin", "develop"], 
+            subprocess.check_call([sys.executable, "-m", "maturin", "develop"],
                                   cwd=str(rust_core_dir), env=env,
                                   stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
             log("✨ [NATIVE] Rust pipeline verified and active.")
@@ -144,7 +146,7 @@ def main():
 
     session_guid = get_host_guid()
     log(f"Session Identity established (Randomized): {session_guid}")
-    
+
     # Clone the current environment and inject the session GUID.
     child_env = os.environ.copy()
     child_env["OPEN_AIR_INSTANCE_GUID"] = session_guid
@@ -154,7 +156,7 @@ def main():
     # Define partition-specific environment variables.
     core_env = child_env.copy()
     core_env["OPEN_AIR_PARTITION_ID"] = "CORE"
-    
+
     ui_env = child_env.copy()
     ui_env["OPEN_AIR_PARTITION_ID"] = "UI"
 
@@ -179,14 +181,14 @@ def main():
         # Ensure manager instance exists
         config = Config.get_instance()
         protocol_manager = ComProtocolManager.get_instance(config=config)
-        
+
         # Discover modules but do NOT start them in the supervisor process.
         # Starting them here would create "ghost" services competing for ports.
         protocol_manager.discover_and_register_protocols()
-        
+
         # We still initialize common dependencies if supervisor needs them for status checks
         protocol_manager.initialize_common_dependencies()
-        
+
         log("Protocol Manager initialized. Services will be launched by child partitions.")
 
     except Exception as e:
@@ -206,13 +208,13 @@ def main():
     log("Spawning Partition B (UI)...")
     p_ui = subprocess.Popen([python_executable, ui_script], env=ui_env)
     processes.append(p_ui)
-    
+
     # 2. Launch Core Partition (Handles Hardware/Logic).
     log("Spawning Partition A (Core)...")
     p_core = subprocess.Popen([python_executable, core_script], env=core_env)
     # Core is prioritized in the monitoring list at index 0.
     processes.insert(0, p_core)
-    
+
     log("System Running. Monitoring child processes...")
 
     def interpret_exit_code(code):
@@ -227,7 +229,7 @@ def main():
     # --- Monitoring Loop ---
     while not shutdown_requested[0]:
         time.sleep(0.5) # Throttle loop to minimize CPU impact.
-        
+
         # Check Core partition liveness.
         if p_core.poll() is not None:
             code = p_core.returncode
@@ -235,14 +237,14 @@ def main():
             if is_mission_critical and not shutdown_requested[0]:
                 log(f"⚠️ The Core engine has stopped ({desc}). Restarting automatically...")
                 time.sleep(1.0) # ⚡ OPTIMIZATION: Throttled restart backoff
-                p_core = subprocess.Popen([python_executable, core_script], 
+                p_core = subprocess.Popen([python_executable, core_script],
                                             env=core_env)
                 processes[0] = p_core
             else:
                 log(f"🛑 The Core engine has exited ({desc}). Shutting down the entire system.")
                 shutdown_requested[0] = True # Initiate shutdown
                 break # Exit loop to proceed with shutdown
-        
+
         # Check UI partition liveness.
         if p_ui.poll() is not None:
             code = p_ui.returncode
@@ -250,7 +252,7 @@ def main():
             if is_mission_critical and not shutdown_requested[0]:
                 log(f"⚠️ The UI has stopped ({desc}). Restarting automatically...")
                 time.sleep(1.0) # ⚡ OPTIMIZATION: Throttled restart backoff
-                p_ui = subprocess.Popen([python_executable, ui_script], 
+                p_ui = subprocess.Popen([python_executable, ui_script],
                                             env=ui_env)
                 processes[1] = p_ui
             else:
@@ -270,12 +272,12 @@ def main():
             start_wait = time.time()
             while p.poll() is None and (time.time() - start_wait) < 2:
                 time.sleep(0.1)
-            
+
             if p.poll() is None:
                 # Force-kill if the process refuses to terminate within 2s.
                 p.kill()
                 p.wait() # Final wait to clean up zombie
-    
+
     # --- Centralized Protocol Shutdown ---
     log("Shutting down communication protocols...")
     try:
@@ -292,7 +294,7 @@ def main():
     # --- FINAL LOGGING FLUSH ---
     from oaLogging.Core.logger import shutdown_logging
     shutdown_logging()
-    
+
     log("Supervisor shutdown complete. Goodbye.")
 
 if __name__ == "__main__":

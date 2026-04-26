@@ -1,6 +1,6 @@
+import inspect
 import os
 import sys
-import inspect
 
 # --- Path Injection ---
 # We must calculate the project root and add it to sys.path to ensure that
@@ -12,6 +12,7 @@ if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
 from oaLogging.Methods.matrix_gate import matrix_log
+
 # Core/TaskBarIcon.py
 # Author: Anthony Peter Kuzub
 # Version: 20260314.002000.REV01
@@ -24,9 +25,9 @@ Provides automated installation of the OPEN-AIR application icon into the Linux
 desktop environment.
 """
 
+import ast
 import shutil
 import subprocess
-import ast
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = False
@@ -45,11 +46,11 @@ def install_icon():
     core_dir = os.path.dirname(os.path.abspath(__file__))
     assets_dir = os.path.abspath(os.path.join(core_dir, "..", "Assets"))
     source_desktop_file = os.path.join(assets_dir, DESKTOP_FILENAME)
-    
+
     # Standard location for per-user desktop entries on Linux.
     user_applications_dir = os.path.expanduser('~/.local/share/applications')
     dest_desktop_file = os.path.join(user_applications_dir, DESKTOP_FILENAME)
-    
+
     # 1. Install .desktop file
     if not os.path.exists(user_applications_dir):
         try:
@@ -65,7 +66,7 @@ def install_icon():
         logger.error(f"🖥️🖱️🎨 [DESKTOP] ERROR: Source file not found: "
                      f"{source_desktop_file}")
         return
-        
+
     if LOCAL_DEBUG:
         logger.debug(f"🖥️🖱️🎨 [DESKTOP] Installing {source_desktop_file} "
                      f"to {dest_desktop_file}...")
@@ -94,14 +95,14 @@ def install_icon():
             ['gsettings', 'get', 'org.gnome.shell', 'favorite-apps'],
             capture_output=True, text=True
         )
-        
+
         if result.returncode != 0:
             logger.error("🖥️🖱️🎨 [DESKTOP] ERROR: Could not retrieve GNOME "
                          "favorites.")
             return
 
         current_favorites_str = result.stdout.strip()
-        
+
         # Parse the gsettings string representation (which looks like a list).
         if not current_favorites_str or current_favorites_str == "@as []":
             current_favorites = []
@@ -124,15 +125,15 @@ def install_icon():
             current_favorites.append(DESKTOP_FILENAME)
             # Re-serialize the list back to the format gsettings expects.
             new_favorites_str = str(current_favorites)
-            
+
             subprocess.run(
-                ['gsettings', 'set', 'org.gnome.shell', 'favorite-apps', 
+                ['gsettings', 'set', 'org.gnome.shell', 'favorite-apps',
                  new_favorites_str],
                 check=True
             )
             if LOCAL_DEBUG:
                 matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "✅✅✅ [SUCCESS] Added to GNOME taskbar.", "SUCCESS")
-            
+
     except subprocess.CalledProcessError as process_error:
         logger.error(f"🖥️🖱️🎨 [DESKTOP] ERROR: gsettings failure: {process_error}")
     except Exception:

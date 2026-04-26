@@ -1,15 +1,16 @@
-import sys
 
 import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
+
 # oaComProtocols.oaComREST/Workers/uvicorn_worker.py
 # Author: Anthony Peter Kuzub
 # Version: 20260328.1200.1
 #
 # Description: Background thread for running the Uvicorn ASGI server.
-
 import threading
 import time
+
+from oaLogging.Methods.matrix_gate import matrix_log
+
 try:
     import uvicorn
     UVICORN_AVAILABLE = True
@@ -17,7 +18,9 @@ except ImportError:
     UVICORN_AVAILABLE = False
 
 from loguru import logger
+
 from ..Constants.rest_constants import LOCAL_DEBUG
+
 
 class UvicornWorker(threading.Thread):
     """
@@ -55,16 +58,16 @@ class UvicornWorker(threading.Thread):
 
             if LOCAL_DEBUG:
                 matrix_log("comms", "rest", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"📡⚙️🚀 [REST] Starting Uvicorn on {self.host}:{current_port}", "DEBUG")
-            
+
             config = uvicorn.Config(
-                app=self.app, 
-                host=self.host, 
-                port=current_port, 
+                app=self.app,
+                host=self.host,
+                port=current_port,
                 log_level="info" if LOCAL_DEBUG else "error",
                 loop="asyncio"
             )
             self.server = uvicorn.Server(config)
-            
+
             try:
                 # server.run() is blocking
                 self.server.run()
@@ -79,7 +82,7 @@ class UvicornWorker(threading.Thread):
                     logger.warning(f"📡⚙️⚠️ [REST] Uvicorn failed to start on {self.host}:{current_port} (SystemExit 1). Port likely in use. Waiting to retry...")
                 else:
                     logger.error(f"📡⚙️❌ [REST] Uvicorn failed to start on {self.host}:{current_port}. Error: {e}")
-                
+
                 if self.server:
                     self.server.should_exit = True
             except Exception as e:

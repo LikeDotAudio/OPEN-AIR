@@ -3,7 +3,7 @@ import asyncio
 from aes70.controller import tcp_connection
 from aes70.controller.remote_device import RemoteDevice
 from aes70.types.ocamutestate import OcaMuteState
-import sys
+
 
 class Main:
     device: RemoteDevice
@@ -67,8 +67,8 @@ class Main:
        z = y["Channels/Mute"]
        val = await z.GetState()
        print("=> current setting: ", val)
-       
-       # OcaMute controls are not booleans, but rather OcaMuteState enums, so 
+
+       # OcaMute controls are not booleans, but rather OcaMuteState enums, so
        # toggling is a bit of a hassle.
        if val == OcaMuteState.Muted:
          val = OcaMuteState.Unmuted

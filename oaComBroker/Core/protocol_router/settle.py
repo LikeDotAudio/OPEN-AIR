@@ -26,9 +26,11 @@
 # - Triggers final state synchronization (LINK_FEEDBACK) after silence.
 
 import threading
-import time
-from .constants import LOCAL_DEBUG, app_constants
+
 from oaLogging.Methods.matrix_gate import matrix_log
+
+from .constants import app_constants
+
 
 class SettleManager:
     """
@@ -115,32 +117,32 @@ class SettleManager:
         with self._settle_lock:
             if topic in self._settle_timers:
                 self._settle_timers[topic].cancel()
-        
+
         # Prepare the final settling callback task.
         def _fire_settled():
             settled_meta = original_message["meta"].copy()
             settled_meta["message_type"] = "LINK_FEEDBACK"
             settled_meta["is_settled"] = True
-            
+
             if app_constants.ROUTER_SETTLE_LOGS:
                 matrix_log("comms", "broker", "schedule_settling", f"⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for {topic}", "DEBUG")
-            
-            # Unlock the parameter before re-ingesting to allow the feedback 
+
+            # Unlock the parameter before re-ingesting to allow the feedback
             # packet to pass through the router's filters.
             self.unlock_parameter(topic, original_message.get("full_id"))
-            
+
             # Re-ingest the message as "settled" to inform all network spokes.
             self._ingest_callback("SYSTEM", topic, original_message["value"], settled_meta)
-            
+
             # Cleanup the internal timer reference.
             with self._settle_lock:
                 if self._settle_timers.get(topic) == t:
                     del self._settle_timers[topic]
-        
+
         # 50ms of silence is required to consider an interaction "settled."
         t = threading.Timer(0.050, _fire_settled)
-        
+
         with self._settle_lock:
             self._settle_timers[topic] = t
-            
+
         t.start()

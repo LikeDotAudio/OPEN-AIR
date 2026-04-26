@@ -6,13 +6,14 @@
 
 import tkinter as tk
 
+
 def apply_design_overlay(layout, widget, path, is_focused, design_elements):
     """Handles Column highlighting (Thick Orange Border) using an overlay."""
-    
+
     border = tk.Frame(widget.master, bg="orange", bd=0, highlightthickness=0)
     border._is_design_overlay = True
     design_elements.append(border)
-    
+
     lbl = tk.Label(widget.master, text="COLUMN", bg="orange", fg="black", font=("Arial", 6, "bold"))
     lbl._is_design_overlay = True
     design_elements.append(lbl)

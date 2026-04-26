@@ -5,49 +5,49 @@
 # Author: Anthony Peter Kuzub
 # Blog: www.Like.audio (Contributor to this project)
 #
-# Version 20260404.1415.1
+# Version 20260426.1348.1
 #
 # Description:
-# This module implements the main Textual application for managing the 
+# This module implements the main Textual application for managing the
 # OPEN-AIR test suite. It uses MaintenanceManager and InstallationManager
 # to handle specialized background tasks.
 
-from textual.app import App, ComposeResult
-from textual.widgets import Header, Footer, Static, Button, Log, Label, Checkbox
-from textual.containers import Container, Vertical, Horizontal
-from textual.binding import Binding
 import os
-import sys
-import webbrowser
-import time
-import subprocess
 import signal
-from typing import Any
-from datetime import datetime
+import subprocess
+import sys
 import threading
-import asyncio
+import webbrowser
+from datetime import datetime
 
 # Import worker logic
-from oaTests.Workers.TestRunner.TestRunner import TestRunner
-from oaTests.Workers.collate_data import collate_extra_tabs
-from oaTests.Workers.run_report_builder import ReportGenerator
-from oaTests.Workers.TestRunner.Workers import DiscoverTests
-from oaTests.Managers.AuditRunner import run_all_audits
+from oaTests.Core.Workers.TestRunner import TestRunner
+from textual.app import App, ComposeResult
+from textual.binding import Binding
+from textual.containers import Horizontal
+from textual.widgets import Button, Footer, Header, Label
+
 from oaComProtocols.oaComMQTT.Entry import get_connection_manager
+from oaGuiEditorWYSIWYG.Entry import launch_editor
 from oaInstallation.Core.SystemStats import SystemStatsProvider
 from oaLogging.Entry import TEST_LOGGER
+from oaTests.Managers.AuditRunner import run_all_audits
+from oaTests.Managers.InstallationManager import InstallationManager
 
 # Import Managers
 from oaTests.Managers.MaintenanceManager import MaintenanceManager
-from oaTests.Managers.InstallationManager import InstallationManager
+from oaTests.Workers.collate_data import collate_extra_tabs
+from oaTests.Workers.run_report_builder import ReportGenerator
+from oaTests.Core.Workers import identify_test_directories
+
+from .center_panel import CenterPanel
+from .debug_matrix_screen import DebugMatrixScreen
 
 # Import panel modules
 from .left_panel import LeftPanel
-from .center_panel import CenterPanel
-from .right_panel import RightPanel
-from .debug_matrix_screen import DebugMatrixScreen
 from .maintenance_clear_screen import MaintenanceClearScreen
-from oaGuiEditorWYSIWYG.Entry import launch_editor
+from .right_panel import RightPanel
+
 
 class TestsApp(App):
     """A Textual app to manage the OPEN-AIR test suite."""
@@ -243,19 +243,21 @@ class TestsApp(App):
                 elif status == "skipped": self.summary["skipped"] += 1
                 desc = test.shortDescription() or message or "No description provided."
                 self.test_results.append({
-                    "classname": str(test.__class__.__name__), 
-                    "name": str(test), 
-                    "status": status, 
+                    "classname": str(test.__class__.__name__),
+                    "name": str(test),
+                    "status": status,
                     "description": desc,
-                    "message": message, 
-                    "cause": cause, 
+                    "message": message,
+                    "cause": cause,
                     "duration": f"{duration:.4f}s"
                 })
                 self.safe_write_log(f"   {'✅' if status == 'passed' else '❌'} {test}: [bold]{status}[/]")
-            found_dirs = DiscoverTests.identify_test_directories(self.project_root)
+            found_dirs = identify_test_directories(self.project_root)
             runner = TestRunner(record_result)
             runner.run(found_dirs, top_level_dir=self.project_root)
             self.safe_write_log(f"🏁 [COMPLETE] Tests finished. Passed: {self.summary['passed']}")
+            # Trigger report generation automatically
+            self.perform_report_generation()
         threading.Thread(target=task, daemon=True).start()
 
     def perform_flame_graph(self):

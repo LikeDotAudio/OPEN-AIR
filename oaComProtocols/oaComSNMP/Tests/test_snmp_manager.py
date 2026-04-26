@@ -6,10 +6,10 @@
 
 import unittest
 from unittest.mock import MagicMock, patch
-import os
 
 # --- Target Module ---
-from oaComProtocols.oaComSNMP.Managers.snmp_manager import SNMPBridge, BridgeContext
+from oaComProtocols.oaComSNMP.Managers.snmp_manager import BridgeContext, SNMPBridge
+
 
 class TestSnmpManager(unittest.TestCase):
     """
@@ -19,11 +19,11 @@ class TestSnmpManager(unittest.TestCase):
     def setUp(self):
         """BUILD: Initialize mocks and manager in isolation."""
         self.mock_mqtt_client = MagicMock()
-        
+
         self.context = BridgeContext(
             mqtt_client=self.mock_mqtt_client
         )
-        
+
         # Patch Persister and LogMonitor to prevent thread starts/file IO
         self.patcher_persister = patch("oaComProtocols.oaComSNMP.Managers.snmp_manager.SnmpStatePersister")
         self.patcher_monitor = patch("oaComProtocols.oaComSNMP.Managers.snmp_manager.SnmpLogMonitor")
@@ -46,10 +46,10 @@ class TestSnmpManager(unittest.TestCase):
         # BUILD
         test_topic = "OPEN-AIR/Audio/Master/Volume"
         test_val = 85
-        
+
         # OPERATE
         self.bridge.handle_mqtt_message(test_topic, {"value": test_val})
-        
+
         # CHECK: Local state mirror is updated
         state = self.bridge.get_mqtt_state()
         self.assertIn(test_topic, state)
@@ -63,10 +63,10 @@ class TestSnmpManager(unittest.TestCase):
             "value": 100,
             "origin_source": "SNMP" # SELF source
         }
-        
+
         # OPERATE
         self.bridge.handle_mqtt_message(test_topic, payload)
-        
+
         # CHECK: Dropped (not in local state mirror)
         state = self.bridge.get_mqtt_state()
         self.assertNotIn(test_topic, state)
@@ -75,10 +75,10 @@ class TestSnmpManager(unittest.TestCase):
         """CHECK: Verify status is published to the system tree."""
         # OPERATE
         self.bridge._publish_status()
-        
+
         # CHECK: Verify publication to system status tree via native client
         self.mock_mqtt_client.publish.assert_called()
-        
+
         found = False
         for call in self.mock_mqtt_client.publish.call_args_list:
             args, kwargs = call
@@ -93,13 +93,13 @@ class TestSnmpManager(unittest.TestCase):
         """CHECK: Verify run_verification correctly delegates to SnmpTester."""
         # BUILD
         test_mib = "/tmp/test.mib"
-        
+
         # OPERATE: Patch SnmpTester to avoid subprocess execution
         with patch("oaComProtocols.oaComSNMP.Workers.snmp_tester.SnmpTester.verify_oid_tree") as mock_tester:
             mock_tester.return_value = "SUCCESS"
-            
+
             output = self.bridge.run_verification(mib_path=test_mib)
-            
+
             # CHECK
             mock_tester.assert_called_once_with(base_oid=self.bridge.base_oid, mib_path=test_mib)
             self.assertEqual(output, "SUCCESS")

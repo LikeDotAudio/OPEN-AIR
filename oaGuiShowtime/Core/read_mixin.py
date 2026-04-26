@@ -4,10 +4,11 @@
 #
 # Description: Brief summary of purpose
 
-from loguru import logger
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
+
 from oaFileImportShow.FileReaders.loader import maker_file_check_for_markers_file
+from oaLogging.Methods.matrix_gate import matrix_log
+
 
 class ShowtimeReadMixin:
     """

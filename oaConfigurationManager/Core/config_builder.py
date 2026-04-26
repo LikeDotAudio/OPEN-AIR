@@ -185,9 +185,9 @@ rest_port = 44845
 # Cross-Origin Resource Sharing (CORS) allowed origins (* for all)
 rest_cors_origins = *
 """
-    
+
     with open(config_path, "w") as configfile:
         configfile.write(config_content)
-    
+
     if not silent:
         print(f"📡📤📤 [CONFIG] Created default config.ini at {config_path}")

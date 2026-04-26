@@ -4,13 +4,13 @@
 #
 # Description: Legacy Mixin for Industrial Transparency.
 
-from .transparency import TransparencyManager
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
 
 # --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import GUI_LOGGER
-from loguru import logger
+from oaLogging.Methods.matrix_gate import matrix_log
+
+from .transparency import TransparencyManager
+
 
 class TransparencyMixin:
     """Legacy Mixin. Forwards to TransparencyManager."""
@@ -29,8 +29,8 @@ class TransparencyMixin:
 
         def perform_sync(event=None):
             if not widget.winfo_exists(): return
-            
-            # ⚡ ROBUSTNESS: Prevent X11 BadValue (0x0) errors by avoiding configuration 
+
+            # ⚡ ROBUSTNESS: Prevent X11 BadValue (0x0) errors by avoiding configuration
             # of widgets that have not yet been realized or have zero dimensions.
             try:
                 w, h = widget.winfo_width(), widget.winfo_height()
@@ -43,7 +43,7 @@ class TransparencyMixin:
                     widget.configure(bg=p_bg)
                 if canvas and canvas.winfo_exists() and canvas.cget("bg") != p_bg:
                     canvas.configure(bg=p_bg)
-                
+
                 # Use stored slice method if available
                 if hasattr(widget, '_perform_background_slice'):
                     widget._perform_background_slice()

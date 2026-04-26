@@ -2,11 +2,11 @@
 # Author: Gemini (Collaborator)
 # Version: 20260414.1100.1
 
-from zeroconf import ServiceBrowser, Zeroconf
-import threading
-import time
+import json  # For hashing payload
 import socket
-import json # For hashing payload
+
+from zeroconf import ServiceBrowser, Zeroconf
+
 
 class MDNSListener:
     """
@@ -21,9 +21,9 @@ class MDNSListener:
         self.known_services = {}
         # Common media, control, NMOS, RAVENNA, Apple, and Printer services
         self.services = [
-            "_http._tcp.local.", 
-            "_osc._udp.local.", 
-            "_nmos-query._tcp.local.", 
+            "_http._tcp.local.",
+            "_osc._udp.local.",
+            "_nmos-query._tcp.local.",
             "_nmos-node._tcp.local.",
             "_apple-midi._udp.local.",
             "_companion-link._tcp.local.", # Apple TV / HomeKit
@@ -39,16 +39,16 @@ class MDNSListener:
     def remove_service(self, zeroconf, type, name):
         topic = f"OPEN-AIR/MDNS/Removed/{name.split('.')[0]}"
         payload = {
-            "action": "removed", 
-            "type": type, 
-            "name": name, 
+            "action": "removed",
+            "type": type,
+            "name": name,
             "origin_source": "oaComMDNS"
         }
         self.known_services.pop(name, None)
         print(f"📉 [MDNS] Removed: {name} ({type})")
         if self.rx_callback:
             # Pass name as source, and type as summary for clarity
-            self.rx_callback(name, f"Removed {type}", payload) 
+            self.rx_callback(name, f"Removed {type}", payload)
         self.mqtt_publisher.publish(topic, payload)
 
     def add_service(self, zeroconf, type, name):
@@ -63,7 +63,7 @@ class MDNSListener:
                 except Exception as e:
                     print(f"⚠️ [MDNS] Could not convert addresses for {name}: {e}")
                     addresses = [] # Ensure addresses is a list
-                    
+
             properties = {}
             if info.properties:
                 for k, v in info.properties.items():
@@ -89,18 +89,18 @@ class MDNSListener:
                 "properties": properties, # This is the TXT record payload ("package")
                 "origin_source": "oaComMDNS"
             }
-            
+
             payload_hash = hash(json.dumps(payload, sort_keys=True))
             if self.known_services.get(name) == payload_hash:
                 return  # Skip republishing unchanged records
             self.known_services[name] = payload_hash
-            
+
             # Topic differentiates by the first part of the service name (e.g., "MyRavennaDevice")
             topic = f"OPEN-AIR/MDNS/Discovered/{name.split('.')[0]}"
             print(f"📈 [MDNS] Discovered/Updated: {name} ({type}) at {addresses}:{info.port}") # Enhanced print statement
             if self.rx_callback:
                 # Pass 'name' as source and 'type' as summary for better differentiation in the GUI
-                self.rx_callback(name, type, payload) 
+                self.rx_callback(name, type, payload)
             self.mqtt_publisher.publish(topic, payload)
 
     def update_service(self, zeroconf, type, name):

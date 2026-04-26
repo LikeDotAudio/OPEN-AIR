@@ -4,17 +4,15 @@
 #
 # Description: Mixin to safely manage Tkinter .after() calls and prevent "invalid command name" errors.
 
-import tkinter as tk
-from loguru import logger
 
 class SafeAfterMixin:
     """
     A mixin for Tkinter widgets that tracks all scheduled .after() tasks 
     and ensures they are cancelled when the widget is destroyed.
     """
-    
+
     def __init__(self, *args, **kwargs):
-        # Note: If this is used as a mixin, __init__ might not be called automatically 
+        # Note: If this is used as a mixin, __init__ might not be called automatically
         # depending on the MRO. We should ensure _init_safe_after is called.
         self._init_safe_after()
         super().__init__(*args, **kwargs)
@@ -26,7 +24,7 @@ class SafeAfterMixin:
             # Bind to the <Destroy> event to ensure cleanup
             try:
                 self.bind("<Destroy>", self._cleanup_safe_after, add="+")
-            except Exception as e:
+            except Exception:
                 # In case self is not a widget but a mixin on something that hasn't initialized yet
                 pass
 
@@ -43,9 +41,9 @@ class SafeAfterMixin:
             str: The after ID.
         """
         self._init_safe_after()
-        
+
         task_id = None
-        
+
         def wrapper(*f_args):
             if task_id in self._scheduled_tasks:
                 del self._scheduled_tasks[task_id]
@@ -71,7 +69,7 @@ class SafeAfterMixin:
         """Cancels all pending tasks. Triggered on <Destroy>."""
         if event and event.widget != self:
             return
-            
+
         if hasattr(self, "_scheduled_tasks"):
             for task_id in list(self._scheduled_tasks.keys()):
                 try:

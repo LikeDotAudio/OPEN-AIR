@@ -4,10 +4,9 @@
 #
 # Description: Temporary script to demonstrate standalone Tkinter GUI for SNMP modules.
 
-import tkinter as tk
-from tkinter import ttk
-import sys
 import os
+import sys
+import tkinter as tk
 
 # Ensure project root is in sys.path for direct execution
 current_dir = os.path.dirname(__file__)
@@ -16,8 +15,9 @@ if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
 # Import the SNMP GUI component
+from oaComProtocols.oaComSNMP.Entry import start, stop
 from oaComProtocols.oaComSNMP.Interface.snmp_log_impl import SnmpLogImplementation
-from oaComProtocols.oaComSNMP.Entry import start, stop, status, get_manager
+
 
 class SnmpGuiApp(tk.Tk):
     def __init__(self):
@@ -32,11 +32,11 @@ class SnmpGuiApp(tk.Tk):
             print("ERROR: Failed to start SNMP Manager. Exiting GUI.")
             self.destroy()
             return
-        
+
         # Instantiate the SnmpLogImplementation
         self.snmp_log_frame = SnmpLogImplementation(self, app_instance=self)
         self.snmp_log_frame.pack(fill=tk.BOTH, expand=True)
-        
+
         # Pass the manager to the GUI frame
         self.snmp_log_frame.snmp_manager = self.snmp_manager
 

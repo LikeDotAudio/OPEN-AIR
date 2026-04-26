@@ -4,9 +4,11 @@
 #
 # Description: Gathers system performance metrics for the installation interface.
 
-import psutil
-import shutil
 import os
+import shutil
+
+import psutil
+
 
 class SystemStatsProvider:
     """
@@ -48,7 +50,7 @@ class SystemStatsProvider:
         cores = self.get_cpu_cores()
         ram_p, ram_u, ram_t = self.get_ram_usage()
         disk_p, disk_f, disk_t = self.get_disk_space()
-        
+
         return {
             "cpu_mhz": cpu,
             "cpu_cores": cores,

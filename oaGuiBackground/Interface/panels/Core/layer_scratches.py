@@ -4,10 +4,11 @@
 #
 # Description: High-performance scratches using Rust.
 
-from PIL import Image, ImageDraw
-import random
 import math
-import logging
+import random
+
+from PIL import Image, ImageDraw
+
 from oaGuiBackground.Methods.pattern_engine import PatternEngine
 
 _engine = PatternEngine()

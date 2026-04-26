@@ -5,16 +5,19 @@
 # Description: Native OSC event transport over MQTT.
 # ⚡ CORE: Foundational transport for OSC within the module.
 
-import threading
 import json
-import ssl
 import os
 import random
+import ssl
+from typing import Any
+
 import paho.mqtt.client as mqtt
-from typing import Optional, Callable, Dict, Any
-from .abc import EventTransport
-from oaLogging.Methods.matrix_gate import matrix_log
+
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import matrix_log
+
+from .abc import EventTransport
+
 
 class OscMqttTransport(EventTransport):
     """
@@ -24,7 +27,7 @@ class OscMqttTransport(EventTransport):
     def __init__(self):
         super().__init__()
         self.config = Config.get_instance()
-        self.client: Optional[mqtt.Client] = None
+        self.client: mqtt.Client | None = None
         matrix_log("comms", "osc_mqtt", "__init__", "📡 [OSC-MQTT] Core Transport Initialized.", "DEBUG")
 
     def publish(self, topic: str, payload: Any, retain: bool = False, qos: int = 0) -> bool:
@@ -63,12 +66,12 @@ class OscMqttTransport(EventTransport):
             matrix_log("comms", "osc_mqtt", "unsubscribe", f"📡❌ [OSC-MQTT] Unsubscribe Error: {e}", "ERROR")
             return False
 
-    def connect(self, connection_params: Dict[str, Any]) -> bool:
+    def connect(self, connection_params: dict[str, Any]) -> bool:
         host = connection_params.get("destination_host", "localhost")
         port = connection_params.get("destination_port", 1883)
         username = connection_params.get("username")
         password = connection_params.get("password")
-        
+
         # ⚡ UNIQUE IDENTITY: Prevent Client ID collisions in multi-partition environments
         partition_id = os.environ.get("OPEN_AIR_PARTITION_ID", "SUP")
         random_suffix = f"{random.getrandbits(16):04x}"
@@ -91,11 +94,11 @@ class OscMqttTransport(EventTransport):
             self.client.tls_set(tls_version=ssl.PROTOCOL_TLS)
         if username and password:
             self.client.username_pw_set(username, password)
-        
+
         try:
             self.client.connect_async(host, port, 60)
             self.client.loop_start()
-            
+
             # Connection is async, status will update via callback
             import time
             start_time = time.time()
@@ -103,7 +106,7 @@ class OscMqttTransport(EventTransport):
                 if self._is_connected:
                     return True
                 time.sleep(0.1)
-                
+
             return self._is_connected
         except Exception as e:
             matrix_log("comms", "osc_mqtt", "connect", f"📡❌ [OSC-MQTT] Connection Error: {e}", "ERROR")
@@ -140,7 +143,7 @@ class OscMqttTransport(EventTransport):
                     payload_data = json.loads(payload_str)
                 except json.JSONDecodeError:
                     payload_data = payload_str
-                
+
                 self._message_handler(message.topic, payload_data)
             except Exception as e:
                 matrix_log("comms", "osc_mqtt", "message", f"📡❌ [OSC-MQTT] Handler Error: {e}", "ERROR")

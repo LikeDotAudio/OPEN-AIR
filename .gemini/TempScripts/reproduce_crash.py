@@ -1,7 +1,5 @@
 
 import sys
-import os
-import io
 import unittest
 
 # Inject project root
@@ -9,7 +7,8 @@ project_root = "/home/anthony/Documents/OPEN-AIR"
 if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
-from oaTests.Workers.TestRunner.TestRunner import TestRunner, CrashInterceptingResult
+from oaTests.Workers.TestRunner.TestRunner import CrashInterceptingResult, TestRunner
+
 
 class DebugCrashInterceptingResult(CrashInterceptingResult):
     def stopTest(self, test):
@@ -27,9 +26,10 @@ def run_repro():
     # Run with CrashInterceptingResult
     runner = TestRunner()
     result = DebugCrashInterceptingResult(runner)
-    
+
     # We need to mock TEST_LOGGER to avoid initialization issues in this script
     from unittest.mock import MagicMock
+
     import oaLogging.Entry
     oaLogging.Entry.TEST_LOGGER = MagicMock()
 
@@ -41,7 +41,7 @@ def run_repro():
         for test, err in result.failures:
             print(f"FAILURE in {test}: {err}")
             # If it's our intercepted error, it will say "Background crash detected in stderr"
-    
+
     # Check what was captured in the last stopTest
     # Since we only ran one test, we can check the buffer if we had a way to access it,
     # but the result object doesn't store it after stopTest.

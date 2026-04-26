@@ -1,6 +1,5 @@
-import os
 import json
-import sys
+import os
 
 TARGET_DIR = "/home/anthony/Documents/OPEN-AIR/oaGui/Assets/right_50/bottom_90/9_Zoo/4_images/4_BG"
 
@@ -45,17 +44,17 @@ def get_background(path):
         return STRATEGY["master_studio"] # fallback
     if "sci_fi" in path_lower or "apocalypse" in path_lower:
         return STRATEGY["heavy_rust"] # fallback
-    
+
     return STRATEGY["master_studio"] # default fallback
 
 def update_json(file_path):
     print(f"Processing: {file_path}")
     try:
-        with open(file_path, 'r') as f:
+        with open(file_path) as f:
             data = json.load(f)
-        
+
         bg_params = get_background(file_path)
-        
+
         updated = False
         # Iterate over top-level keys
         for key in list(data.keys()):
@@ -70,14 +69,14 @@ def update_json(file_path):
                 }
                 obj["background"] = bg_params
                 updated = True
-        
+
         if updated:
             with open(file_path, 'w') as f:
                 json.dump(data, f, indent=2)
             print(f"Updated: {file_path}")
         else:
             print(f"No objects to update in: {file_path}")
-            
+
     except Exception as e:
         print(f"Error processing {file_path}: {e}")
 

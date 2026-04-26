@@ -6,6 +6,7 @@
 
 import tkinter as tk
 
+
 class InfoRenderer:
     """Renders informational UI elements for lists and non-existent properties."""
 
@@ -25,7 +26,7 @@ class InfoRenderer:
         f = tk.Frame(parent, bg="#2b2b2b")
         f.pack(fill="x", pady=2)
         tk.Label(f, text=f"{key}:", bg="#2b2b2b", fg="#555555", width=15, anchor="e").pack(side="left")
-        
+
         tk.Button(f, text="+ ADD", bg="#3a3a3a", fg="#aaaaaa", relief="flat", font=("Arial", 7, "bold"),
                   command=on_add_callback).pack(side="left", padx=10)
 

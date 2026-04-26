@@ -4,10 +4,15 @@
 #
 # Description: Brief summary of purpose
 
-import unittest
-from unittest.mock import MagicMock, patch
 import tkinter as tk
-from oaGuiElements.Core.faders.fader_horizontal.Core.fader_horizontal import CustomHorizontalFaderFrame, BuilderFaderHorizontalCreator
+import unittest
+from unittest.mock import MagicMock
+
+from oaGuiElements.Core.faders.fader_horizontal.Core.fader_horizontal import (
+    BuilderFaderHorizontalCreator,
+    CustomHorizontalFaderFrame,
+)
+
 
 class TestFaderHorizontal(unittest.TestCase):
     def setUp(self):
@@ -16,7 +21,7 @@ class TestFaderHorizontal(unittest.TestCase):
             self.root.withdraw()
         except:
             self.root = MagicMock()
-        
+
         self.variable = tk.DoubleVar(master=self.root, value=50.0)
         self.config = {
             "label_active": "Test Horizontal Fader",
@@ -25,7 +30,7 @@ class TestFaderHorizontal(unittest.TestCase):
             "value_max": 100
         }
         self.mirror_engine = MagicMock()
-        
+
         self.context = MagicMock()
         self.context.state_mirror_engine = self.mirror_engine
         self.context.base_mqtt_topic_from_path = "test/topic"

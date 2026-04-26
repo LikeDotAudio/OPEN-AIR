@@ -1,5 +1,6 @@
-import tkinter as tk
 import sys
+import tkinter as tk
+
 sys.path.insert(0, '/home/anthony/Documents/OPEN-AIR')
 
 from oaGuiElements.Core.Knobs.knob.Core.knob_renderer import draw_knob_visuals

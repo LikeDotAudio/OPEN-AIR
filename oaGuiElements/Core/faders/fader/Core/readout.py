@@ -1,11 +1,9 @@
 # Core/readout.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: Brief summary of purpose
 
-import tkinter as tk
 
 class ReadoutDrawer:
     @staticmethod
@@ -33,5 +31,5 @@ class ReadoutDrawer:
                 val_text = f"{frame.unit_text} {val_text}"
             else:
                 val_text = f"{val_text} {frame.unit_text}"
-        
+
         value_label.config(text=val_text, foreground=active_color)

@@ -7,8 +7,9 @@
 import unittest
 from unittest.mock import MagicMock, patch
 
-from oaComProtocols.oaComMQTT.Workers.broker_monitor import BrokerMonitor
 from oaComProtocols.oaComMQTT.Core.mqtt_message import MqttMessage
+from oaComProtocols.oaComMQTT.Workers.broker_monitor import BrokerMonitor
+
 
 class TestBrokerMonitor(unittest.TestCase):
 
@@ -34,19 +35,19 @@ class TestBrokerMonitor(unittest.TestCase):
         CHECK: Assert it's in the list when registered and not when unregistered.
         """
         mock_callback = MagicMock()
-        
+
         # Register
         self.monitor.register_observer(mock_callback)
         self.assertIn(mock_callback, self.monitor._observers)
-        
+
         # Register again (should not duplicate)
         self.monitor.register_observer(mock_callback)
         self.assertEqual(len(self.monitor._observers), 1)
-        
+
         # Unregister
         self.monitor.unregister_observer(mock_callback)
         self.assertNotIn(mock_callback, self.monitor._observers)
-        
+
         # Unregister again (should not error)
         self.monitor.unregister_observer(mock_callback)
         self.assertEqual(len(self.monitor._observers), 0)
@@ -58,9 +59,9 @@ class TestBrokerMonitor(unittest.TestCase):
         CHECK: Assert the stats dict is updated correctly.
         """
         message = MqttMessage(topic="$SYS/broker/clients/connected", payload=b"42")
-        
+
         self.monitor._on_sys_message(message)
-        
+
         stats = self.monitor.get_stats()
         self.assertIn("clients/connected", stats)
         self.assertEqual(stats["clients/connected"], "42")
@@ -73,10 +74,10 @@ class TestBrokerMonitor(unittest.TestCase):
         """
         mock_callback = MagicMock()
         self.monitor.register_observer(mock_callback)
-        
+
         message = MqttMessage(topic="$SYS/broker/messages/sent", payload=b"100")
         self.monitor._on_sys_message(message)
-        
+
         mock_callback.assert_called_once_with({"messages/sent": "100"})
 
     @patch("oaComProtocols.oaComMQTT.Workers.broker_monitor.MQTT_LOGGER")
@@ -88,12 +89,12 @@ class TestBrokerMonitor(unittest.TestCase):
         """
         mock_callback = MagicMock(side_effect=Exception("Test Exception"))
         self.monitor.register_observer(mock_callback)
-        
+
         message = MqttMessage(topic="$SYS/broker/test", payload=b"test")
-        
+
         # This should not raise an exception
         self.monitor._on_sys_message(message)
-        
+
         mock_logger.exception.assert_called_once_with("Error notifying BrokerMonitor observer")
 
 if __name__ == '__main__':

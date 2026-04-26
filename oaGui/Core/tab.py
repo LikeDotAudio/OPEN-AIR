@@ -1,5 +1,4 @@
 # Core/tab.py
-from oaGui.Methods.i18n_utils import get_text
 #
 # Handles notebook tab changes, visibility events, and context menu actions.
 # Manages the lifecycle of tab populations and inter-widget communication.
@@ -16,9 +15,8 @@ from oaGui.Methods.i18n_utils import get_text
 #
 # Version 20260330.1600.1
 
-import tkinter as tk
 import pathlib
-from loguru import logger
+
 from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- Standard Debug Logging Setup ---
@@ -30,16 +28,16 @@ class TabManagerMixin:
 
     def _trigger_initial_tab_selection(self):
         """Triggers _on_tab_change for initially selected tabs."""
-        matrix_log("ui", "gui_shell", "_trigger_initial_tab_selection", 
+        matrix_log("ui", "gui_shell", "_trigger_initial_tab_selection",
                    "🔍🔵 Triggering initial tab selection for all notebooks.", "DEBUG")
-        
+
         notebooks = getattr(self, '_notebooks', {})
         for notebook_path, notebook_widget in list(notebooks.items()):
             try:
                 dummy_event = type("Event", (object,), {"widget": notebook_widget})()
                 self._on_tab_change(dummy_event)
             except Exception:
-                matrix_log("ui", "gui_shell", "_trigger_initial_tab_selection", 
+                matrix_log("ui", "gui_shell", "_trigger_initial_tab_selection",
                            f"❌🔴 Error during initial tab selection for {notebook_path}", "ERROR")
 
     def _on_tab_change(self, event):
@@ -50,7 +48,7 @@ class TabManagerMixin:
             if not selected_tab_id: return
             selected_tab_frame = notebook.nametowidget(selected_tab_id)
             newly_selected_tab_name = notebook.tab(selected_tab_id, "text")
-            
+
             matrix_log("ui", "gui_shell", "_on_tab_change", f"▶️ Tab Selected: {newly_selected_tab_name}", "DEBUG")
 
             if not getattr(selected_tab_frame, "is_populated", False) and \
@@ -77,7 +75,7 @@ class TabManagerMixin:
             if selected_tab_frame.winfo_children():
                 content_widget = selected_tab_frame.winfo_children()[0]
                 if hasattr(content_widget, "_on_tab_selected") and \
-                   callable(getattr(content_widget, "_on_tab_selected")):
+                   callable(content_widget._on_tab_selected):
                     content_widget._on_tab_selected(event)
         except Exception as e:
             matrix_log("ui", "gui_shell", "_on_tab_change", f"❌ Error in _on_tab_change: {e}", "ERROR")

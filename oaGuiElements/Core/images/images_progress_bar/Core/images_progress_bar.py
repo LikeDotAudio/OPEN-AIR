@@ -4,24 +4,22 @@
 #
 # Description: Brief summary of purpose
 
-import tkinter as tk
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
+import tkinter as tk
 from tkinter import ttk
 
-# --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
 from oaConfigurationManager.FileReaders.config_reader import Config
 
+# --- Standard Debug Logging Setup ---
+from oaLogging.Methods.matrix_gate import matrix_log
+
 app_constants = Config.get_instance()  # Get the singleton instance
 
-from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic
-import os
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 from oaGui.Methods.i18n_utils import get_text
 from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
+from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 
 
 @WidgetRegistry.register("ProgressBar", "_ProgressBar", "_SmartProgress")
@@ -66,7 +64,7 @@ class BuilderImagesProgressBarCreator(TransparencyMixin):
             relief="flat",
             height=30
         )
-        
+
         # Apply Industrial Transparency
         if hasattr(self, '_apply_transparency'):
             self._apply_transparency(canvas, canvas, config_data, builder_instance)
@@ -96,14 +94,14 @@ class BuilderImagesProgressBarCreator(TransparencyMixin):
                 w = canvas.winfo_width()
                 h = canvas.winfo_height()
                 if w <= 1: return
-                
+
                 # Draw Main Label (Left)
                 if label:
                     canvas.create_text(
                         10, h/2, text=f"{label}:", anchor="w",
                         fill="white", font=("Helvetica", 9), tags="industrial_text"
                     )
-                
+
                 # Draw Value Label (Right)
                 current_value = progress_var.get()
                 val_text = f"{current_value:.1f} {units}"
@@ -114,7 +112,7 @@ class BuilderImagesProgressBarCreator(TransparencyMixin):
 
             def sync_bg():
                 redraw_progress_text()
-            
+
             canvas._draw = sync_bg
             canvas.render = sync_bg
             canvas.bind("<Configure>", redraw_progress_text, add="+")
@@ -138,6 +136,6 @@ class BuilderImagesProgressBarCreator(TransparencyMixin):
 
             matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"✅ SUCCESS! The progress bar '{label}' has been successfully rendered!", level="SUCCESS")
             return canvas
-        except Exception as e:
+        except Exception:
             logger.exception("❌ The progress bar '{label}' has failed to materialize! Error")
             return None

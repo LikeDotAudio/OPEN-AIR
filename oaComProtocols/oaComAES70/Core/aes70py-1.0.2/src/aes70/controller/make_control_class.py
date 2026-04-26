@@ -1,13 +1,15 @@
-from .event import Event
-from .property_event import PropertyEvent
-from .property_sync import PropertySync
-from .properties import Properties
-from ..ocp1.commandrrq import CommandRrq
-from ..ocp1.ocaeventid import OcaEventID
 from aes70.types.ocapropertyid import OcaPropertyID
+
+from ..ocp1.commandrrq import CommandRrq
 from ..ocp1.encoded_arguments import EncodedArguments
 from ..ocp1.make_encoder import makeEncoder
+from ..ocp1.ocaeventid import OcaEventID
+from .event import Event
+from .properties import Properties
 from .property import Property
+from .property_event import PropertyEvent
+from .property_sync import PropertySync
+
 
 def createPropertySync(control_class):
     o = object.__new__(PropertySync)  # Equivalent to Object.create(PropertySync.prototype)
@@ -193,7 +195,7 @@ def make_control_class(name, level, class_id, class_version, baseclass, methods,
             return property_sync
 
         def __init__(self, device, ono):
-            super(ControlClass, self).__init__(device, ono)
+            super().__init__(device, ono)
             for i in range(0, len(properties)):
                 prop = properties[i]
                 setattr(self, '_On' + prop.name + 'Changed', None)
@@ -202,7 +204,7 @@ def make_control_class(name, level, class_id, class_version, baseclass, methods,
                 setattr(self, '_On' + ev[0], None)
 
         def Dispose(self):
-            super(ControlClass, self).Dispose()
+            super().Dispose()
             for i in range(0, len(properties)):
                 prop = properties[i]
                 event_instance = getattr(self, '_On' + prop.name + 'Changed')

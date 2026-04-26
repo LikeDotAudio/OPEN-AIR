@@ -8,6 +8,7 @@
 import unittest
 from pathlib import Path
 
+
 class TestShowReaderAsset(unittest.TestCase):
     def test_sample_shw_exists(self):
         """CHECK: Ensure the real-world WWB venue file is present."""

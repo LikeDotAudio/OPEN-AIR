@@ -2,12 +2,10 @@
 # Author: Anthony Peter Kuzub
 # Version: 20260326.1000.1
 #
-# Description: Advanced OSC Monitor & Control Hub. 
+# Description: Advanced OSC Monitor & Control Hub.
 # This file contains the primary implementation logic for the OSC GUI.
 
-import os
 import sys
-import pathlib
 from pathlib import Path
 
 # --- Path Guard: Ensure project root is in sys.path ---
@@ -21,17 +19,15 @@ for parent in current_path.parents:
 if str(root_path) not in sys.path:
     sys.path.insert(0, str(root_path))
 
-import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
-from loguru import logger
-from oaLogging.Entry import logger as logger_oa
-import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
-from loguru import logger
-import tkinter as tk
-from tkinter import ttk
 import datetime
+import inspect
+import tkinter as tk
 from pathlib import Path
+from tkinter import ttk
+
+from loguru import logger
+
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- GUI FALLBACKS (V3.2.1 Decoupling) ---
 try:
@@ -44,6 +40,7 @@ except ImportError:
 # --- Import the OSC Entry point for manager access ---
 import oaComProtocols.oaComOSC.Entry as OSC_MODULE
 
+
 # --- Define the actual GUI class ---
 class OscDashboardImplementation(tk.Frame, TransparencyMixin):
     """
@@ -55,14 +52,14 @@ class OscDashboardImplementation(tk.Frame, TransparencyMixin):
         # Extract non-Tkinter arguments
         self.config_data = kwargs.pop("config", {})
         self.json_path = kwargs.pop("json_path", None)
-        
+
         super().__init__(parent, **kwargs)
-        
+
         # Activity cache for investigation: { ts_ms_str: message_dict }
         self._activity_cache = {}
-        
+
         self._setup_ui()
-        
+
         # --- Standalone Initialization ---
         # ⚡ STANDALONE: Link to existing OSC manager instance.
         try:
@@ -77,7 +74,7 @@ class OscDashboardImplementation(tk.Frame, TransparencyMixin):
             OSC_MODULE.add_monitor_callback(self.on_osc_activity)
         except Exception as e:
             logger.error(f"OscDashboard: Failed to register callback: {e}")
-            
+
         self._refresh_ui()
         self._schedule_refresh()
 
@@ -96,7 +93,7 @@ class OscDashboardImplementation(tk.Frame, TransparencyMixin):
         while curr:
             # Check for generic 'builder' or 'app_instance'
             if hasattr(curr, 'builder'):
-                return getattr(curr, 'builder')
+                return curr.builder
             if hasattr(curr, 'app_instance'):
                 return curr
             try: curr = curr.master
@@ -110,9 +107,9 @@ class OscDashboardImplementation(tk.Frame, TransparencyMixin):
         # 1. Header
         header = tk.Frame(self, bg="#2b2b2b")
         header.pack(side=tk.TOP, fill=tk.X, pady=(10, 5))
-        
+
         tk.Label(header, text="🅾️ OSC CONTROL HUB", font=("Helvetica", 14, "bold"), fg="#ffffff", bg="#2b2b2b").pack(side=tk.LEFT, padx=20)
-        
+
         self.status_lbl = tk.Label(header, text="Status: LOADING...", font=("Courier", 10, "bold"), fg="#ffff00", bg="#2b2b2b")
         self.status_lbl.pack(side=tk.RIGHT, padx=20)
 
@@ -134,8 +131,8 @@ class OscDashboardImplementation(tk.Frame, TransparencyMixin):
         inspect_header = tk.Frame(inspect_frame, bg="#1a1a1a")
         inspect_header.pack(side=tk.TOP, fill=tk.X)
         tk.Label(inspect_header, text="🔍 OSC MESSAGE DISSECTOR", font=("Helvetica", 10, "bold"), fg="#888888", bg="#1a1a1a").pack(side=tk.LEFT, padx=5)
-        
-        tk.Button(inspect_header, text="CLEAR LOG", bg="#333333", fg="#ffffff", font=("Helvetica", 7), 
+
+        tk.Button(inspect_header, text="CLEAR LOG", bg="#333333", fg="#ffffff", font=("Helvetica", 7),
                   command=self._clear_monitor, bd=1).pack(side=tk.RIGHT, padx=5, pady=2)
 
         self.inspect_text = tk.Text(inspect_frame, bg="#000000", fg="#00ff00", font=("Courier", 10), bd=0, highlightthickness=0)
@@ -151,7 +148,7 @@ class OscDashboardImplementation(tk.Frame, TransparencyMixin):
         for col in cols:
             self.tree.heading(col, text=col)
             self.tree.column(col, width=100 if col!="Value" and col!="Address" else 200)
-        
+
         self.tree.column("Time", width=120)
         self.tree.column("Address", width=250, anchor="w")
         self.tree.column("Value", width=150)
@@ -182,7 +179,7 @@ class OscDashboardImplementation(tk.Frame, TransparencyMixin):
         except Exception as e:
             logger.error(f"OscDashboard: Failed to get status: {e}")
             return
-        
+
         # Update Header (Buttons are removed)
         if status["running"]:
             self.status_lbl.configure(text=f"ACTIVE: {status['rx_socket']}", fg="#00ff00")
@@ -192,7 +189,7 @@ class OscDashboardImplementation(tk.Frame, TransparencyMixin):
         # Update Detail Tree
         for item in self.info_tree.get_children():
             self.info_tree.delete(item)
-            
+
         self.info_tree.insert("", "end", text="RX Socket", values=(status["rx_socket"],))
         self.info_tree.insert("", "end", text="TX Socket", values=(status["tx_socket"],))
         self.info_tree.insert("", "end", text="Active Routes", values=(status["routes_count"],))
@@ -208,10 +205,10 @@ class OscDashboardImplementation(tk.Frame, TransparencyMixin):
     def _add_log_entry(self, direction, address, value, topic):
         now = datetime.datetime.now()
         timestamp = now.strftime("%H:%M:%S.%f")[:-3]
-        
+
         # ⚡ STACK BEHAVIOR: Insert at TOP
         item_id = self.tree.insert("", 0, values=(timestamp, direction, address, value, topic or "-"), tags=(direction,))
-        
+
         # Cache for investigation
         self._activity_cache[timestamp] = {
             "timestamp": timestamp,
@@ -231,13 +228,13 @@ class OscDashboardImplementation(tk.Frame, TransparencyMixin):
         """Populates the investigation pane with detailed OSC metadata."""
         selected = self.tree.selection()
         if not selected: return
-        
+
         item = self.tree.item(selected[0])
         timestamp = item["values"][0]
         data = self._activity_cache.get(timestamp)
-        
+
         if not data: return
-        
+
         self.inspect_text.delete("1.0", tk.END)
         self.inspect_text.insert(tk.END, "╔════════════ OSC MESSAGE DISSECTION ════════════╗", "header")
         self.inspect_text.insert(tk.END, f"  TIME       : {data['timestamp']}")
@@ -246,11 +243,11 @@ class OscDashboardImplementation(tk.Frame, TransparencyMixin):
         self.inspect_text.insert(tk.END, f"  OSC ADDR   : {data['address']}")
         self.inspect_text.insert(tk.END, f"  VALUE      : {data['value']}")
         self.inspect_text.insert(tk.END, f"  TYPE       : {type(data['value']).__name__}")
-        
+
         if data['topic']:
             self.inspect_text.insert(tk.END, "╟── ROUTING ───────────────────────────────────────╢")
             self.inspect_text.insert(tk.END, f"  MQTT TOPIC : {data['topic']}")
-            
+
             # Deduce if it's a standard mapping
             is_std = data['topic'].startswith("OPEN-AIR/")
             self.inspect_text.insert(tk.END, f"  MAPPING    : {'Standard Auto-Map' if is_std else 'Manual User Route'}")
@@ -264,7 +261,7 @@ class OscDashboardImplementation(tk.Frame, TransparencyMixin):
     def destroy(self):
         self._destroyed = True
         # Unregister via the Entry point
-        try: 
+        try:
             OSC_MODULE.remove_monitor_callback(self.on_osc_activity)
         except Exception as e:
             matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"OscDashboard: Failed to remove monitor callback: {e}", "TRACE")

@@ -1,7 +1,8 @@
-from typing import Tuple, Any
 
-from .createtype import create_type, Type
 from struct import pack_into, unpack_from
+
+from .createtype import Type, create_type
+
 
 # fixed length types just return the value, the wrapper will return the required tuple
 def uint8_decode_from(data: bytearray, pos: int) -> int:

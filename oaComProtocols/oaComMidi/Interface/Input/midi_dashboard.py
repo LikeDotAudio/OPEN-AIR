@@ -3,23 +3,22 @@
 # Version: 20260406.1955.1
 #
 # Description: MIDI Port & Activity Dashboard.
-# A modular dashboard that handles hardware discovery, connections, 
+# A modular dashboard that handles hardware discovery, connections,
 # live monitoring, and keyboard visualization.
 
 import tkinter as tk
-from tkinter import ttk
-import datetime
-import inspect
+
 from loguru import logger
+
 from oaLogging.Methods.matrix_gate import matrix_log
-from .midi_keyboard import MidiKeyboard, get_midi_color
+
+from .midi_connection_manager import MidiConnectionManager
 
 # --- Specialized Components ---
-
 from .midi_feed import MidiFeed
 from .midi_hardware import MidiHardware
 from .midi_hardware_search import MidiHardwareSearch
-from .midi_connection_manager import MidiConnectionManager
+from .midi_keyboard import MidiKeyboard
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = False
@@ -51,7 +50,7 @@ class MidiDashboard(tk.Frame):
         else:
             logger.error("🎹 [MIDI-DASH] ❌ CRITICAL: MidiManager NOT found in widget tree.")
             matrix_log("comms", "midi", "__init__", "🎹 [MIDI-DASH] ❌ CRITICAL: MidiManager NOT found in widget tree. Fallback to ProtocolRouter.", "WARNING")
-            
+
             # Fallback: Listen to the ProtocolRouter directly for MIDI traffic
             # from oaComBroker.Core.protocol_router.manager import ProtocolRouter
             # ProtocolRouter.get_instance().register_cache_observer(self._on_protocol_event)
@@ -60,7 +59,7 @@ class MidiDashboard(tk.Frame):
         # 1. Check direct configuration first
         if self.config_data.get("midi_manager"):
             return self.config_data.get("midi_manager")
-        
+
         # 2. Check app_instance from configuration
         app = self.config_data.get("app_instance")
         if app and hasattr(app, "midi_manager"):
@@ -73,18 +72,18 @@ class MidiDashboard(tk.Frame):
             # Check for direct attribute
             m = getattr(curr, 'midi_manager', None)
             if m: return m
-            
+
             # Check for nested app_instance
             a = getattr(curr, 'app_instance', None)
             if a and hasattr(a, 'midi_manager'):
                 m = getattr(a, 'midi_manager', None)
                 if m: return m
-                
+
             try:
                 if curr == curr.master: break # Reached root
                 curr = curr.master
             except Exception: break
-            
+
         # 4. Global Lookup fallback (Last Resort)
         try:
             from oaComProtocols.oaComMidi.Entry import get_manager
@@ -96,7 +95,7 @@ class MidiDashboard(tk.Frame):
         topic = str(message.get("topic", ""))
         is_midi_topic = "/MIDI/" in topic
         is_midi_source = message.get("logical_source") in ["MIDI", "MIDI-TX"]
-        
+
         matrix_log("comms", "midi", "_on_protocol_event", f"🎹 [DASH] Protocol Event: topic={topic}, source={message.get('logical_source')}, is_midi={is_midi_topic or is_midi_source}", "DEBUG")
 
         if is_midi_topic or is_midi_source:
@@ -104,7 +103,7 @@ class MidiDashboard(tk.Frame):
             value = message.get("value")
             is_tx = message.get("logical_source") == "MIDI-TX" or meta.get("midi_raw") is not None
             direction = "TX" if is_tx else "RX"
-            
+
             if isinstance(meta, dict) and "raw" in meta:
                 self.on_midi_activity(direction, meta)
             elif isinstance(value, dict) and "raw" in value:
@@ -116,10 +115,10 @@ class MidiDashboard(tk.Frame):
                 note = int(note_match.group(1)) if note_match else 0
                 ch_match = re.search(r"ch(\d+)", topic)
                 channel = (int(ch_match.group(1)) - 1) if ch_match else 0
-                
+
                 m_type = "note_on" if real_val > 0 else "note_off"
                 self.on_midi_activity(direction, {
-                    "value": real_val, 
+                    "value": real_val,
                     "topic": topic,
                     "note": note,
                     "channel": channel,
@@ -143,14 +142,14 @@ class MidiDashboard(tk.Frame):
         header_frame = tk.Frame(self, bg="#2b2b2b")
         header_frame.pack(side=tk.TOP, fill=tk.X, pady=(10, 5))
         tk.Label(header_frame, text="🎹 MIDI CONTROLLER HUB", font=("Helvetica", 14, "bold"), fg="#ffffff", bg="#2b2b2b").pack(side=tk.LEFT, padx=20)
-        
+
         self.hw_search = MidiHardwareSearch(header_frame, refresh_callback=self._refresh_ui)
         self.hw_search.pack(side=tk.RIGHT, padx=20)
 
         # ⚡ NEW: Keyboard Visualizer at the TOP (as requested)
         kb_frame = tk.LabelFrame(self, text="Keyboard Visualizer (C1-C7)", bg="#2b2b2b", fg="#888888")
         kb_frame.pack(side=tk.TOP, fill=tk.X, padx=15, pady=5)
-        self.keyboard = MidiKeyboard(kb_frame, height=80) 
+        self.keyboard = MidiKeyboard(kb_frame, height=80)
         self.keyboard.pack(fill=tk.X, expand=True, padx=5, pady=5)
 
         # 2. Main Content Area
@@ -190,10 +189,10 @@ class MidiDashboard(tk.Frame):
         matrix_log("comms", "midi", "_process_activity", f"🎹 [DASH] Processing activity: {direction} {message}", "DEBUG")
         # ⚡ CRITICAL: The visualizer needs the full message (dict or object)
         self.keyboard.handle_midi(message)
-        
+
         channel = 0
         message_str = ""
-        
+
         if isinstance(message, dict):
             channel = message.get("channel", 0)
             message_str = message.get("raw", str(message))
@@ -205,7 +204,7 @@ class MidiDashboard(tk.Frame):
             message_str = str(message)
         else:
             message_str = str(message)
-            
+
         self.midi_feed.add_log(direction, message_str, channel)
 
     def destroy(self):

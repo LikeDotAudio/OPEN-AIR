@@ -1,5 +1,4 @@
 # circular_motion_displacement_potentiometer/cmdp_group_handler.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
@@ -8,17 +7,18 @@ from oaGui.Methods.i18n_utils import get_text
 import tkinter as tk
 from tkinter import colorchooser, simpledialog
 
+
 class CMDPGroupHandler:
     """Handles group metadata, sidebar UI, and group-level actions."""
     def __init__(self, widget_ref):
         self.w = widget_ref # CMDPWidget reference
         self.group_mute_vars = {} # group_name -> BooleanVar
-        
+
         # UI Element storage moved here to ensure consistency
         self.group_buttons = {}      # Visibility buttons (Eye)
         self.group_mute_buttons = {}   # Mute buttons (Speaker)
         self.group_labels = {}       # Group name labels
-        
+
         # Initialize context menu
         self.groups_menu = tk.Menu(self.w, tearoff=0, bg="#333", fg="white", activebackground="#f4902c")
         self.groups_menu.add_command(label="Add Group", command=self.add_new_group_dialog)
@@ -29,11 +29,11 @@ class CMDPGroupHandler:
 
     def add_group_ui(self, group_name, color, initial_visible=True, initial_mute=False):
         if group_name in self.w.group_vars: return
-        
+
         vars = self._init_group_state(group_name, color, initial_visible, initial_mute)
         self._register_group_sme(group_name, vars)
         self._create_group_ui_row(group_name, vars)
-        
+
         self._apply_vis(group_name)
         self._apply_group_mute(group_name)
         self.w.refresh_pop_tree()
@@ -44,39 +44,39 @@ class CMDPGroupHandler:
         im = tk.BooleanVar(value=initial_mute)
         cv = tk.StringVar(value=color)
         nv = tk.StringVar(value=group_name)
-        
+
         self.w.group_vars[group_name] = iv
         self.group_mute_vars[group_name] = im
         self.w.group_color_vars[group_name] = cv
         self.w.group_name_vars[group_name] = nv
-        
+
         return {"visible": iv, "mute": im, "color": cv, "name": nv}
 
     def _register_group_sme(self, group_name, vars):
         """Handle State Mirror Engine registration and MQTT topic subscriptions."""
         if not self.w.mixin_ref.state_mirror_engine:
             return
-            
+
         sme = self.w.mixin_ref.state_mirror_engine
         bp = f"{self.w.path}/groups/{group_name}"
         iv, im, cv, nv = vars["visible"], vars["mute"], vars["color"], vars["name"]
-        
+
         sme.register_widget(f"{bp}/visible", iv, self.w.base_mqtt_topic, {"type": "_CMDP_GrpVis"})
         sme.register_widget(f"{bp}/mute", im, self.w.base_mqtt_topic, {"type": "_CMDP_GrpMute"})
         sme.register_widget(f"{bp}/color", cv, self.w.base_mqtt_topic, {"type": "_CMDP_GrpCol"})
         sme.register_widget(f"{bp}/name", nv, self.w.base_mqtt_topic, {"type": "_CMDP_GrpName"})
-        
+
         def _broadcast_change(p):
             if not getattr(sme, "_silent_update", False): sme.broadcast_gui_change_to_mqtt(p)
-            
+
         iv.trace_add("write", lambda *a: _broadcast_change(f"{bp}/visible"))
         im.trace_add("write", lambda *a: _broadcast_change(f"{bp}/mute"))
         cv.trace_add("write", lambda *a: _broadcast_change(f"{bp}/color"))
         nv.trace_add("write", lambda *a: _broadcast_change(f"{bp}/name"))
-        
+
         for p, v in [("visible", iv), ("mute", im), ("color", cv), ("name", nv)]:
             t = sme.get_widget_topic(f"{bp}/{p}")
-            if self.w.mixin_ref.subscriber_router and t: 
+            if self.w.mixin_ref.subscriber_router and t:
                 self.w.mixin_ref.subscriber_router.subscribe_to_topic(t, sme.sync_incoming_mqtt_to_gui)
             sme.initialize_widget_state(f"{bp}/{p}")
 
@@ -85,26 +85,26 @@ class CMDPGroupHandler:
         fr = tk.Frame(self.w.groups_container)
         fr.pack(fill=tk.X, padx=1, pady=1)
         fr.config(bg=self.w.groups_container.cget("bg"))
-        
+
         iv, im, cv, nv = vars["visible"], vars["mute"], vars["color"], vars["name"]
-        
+
         # Visibility & Mute Buttons
         self.group_buttons[group_name] = self._create_vis_btn(fr, group_name, iv)
         self.group_mute_buttons[group_name] = self._create_mute_btn(fr, group_name, im)
-        
+
         # Group Label
         lbl = tk.Label(fr, textvariable=nv, fg=cv.get(), anchor="w", cursor="hand2", font=("Arial", 8, "bold"))
         lbl.config(bg=fr.cget("bg"))
         lbl.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=(2, 0))
         self.group_labels[group_name] = lbl
-        
+
         # Bindings & Traces
         fr.sync_bg = lambda: self._sync_row_bg(fr, lbl)
         self._attach_group_traces(group_name, iv, im, cv, nv, lbl)
         self._attach_group_bindings(group_name, lbl)
 
     def _create_vis_btn(self, parent, group_name, var):
-        btn = tk.Button(parent, text="👁", bg="#f4902c", fg="black", width=1, bd=0, font=("Arial", 7), 
+        btn = tk.Button(parent, text="👁", bg="#f4902c", fg="black", width=1, bd=0, font=("Arial", 7),
                         command=lambda: var.set(not var.get()))
         btn.pack(side=tk.LEFT, padx=1)
         btn.bind("<Alt-Button-1>", lambda e: self.solo_group_visibility(group_name))
@@ -112,7 +112,7 @@ class CMDPGroupHandler:
         return btn
 
     def _create_mute_btn(self, parent, group_name, var):
-        btn = tk.Button(parent, text="🔊", bg="#f4902c", fg="black", width=1, bd=0, font=("Arial", 7), 
+        btn = tk.Button(parent, text="🔊", bg="#f4902c", fg="black", width=1, bd=0, font=("Arial", 7),
                         command=lambda: self.toggle_group_mute(group_name))
         btn.pack(side=tk.LEFT, padx=1)
         btn.bind("<Alt-Button-1>", lambda e: self.solo_group_mute(group_name))

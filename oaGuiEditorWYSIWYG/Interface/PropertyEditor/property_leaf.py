@@ -1,14 +1,15 @@
-import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
 # Interface/PropertyEditor/property_leaf.py
 # Author: Anthony Peter Kuzub
 # Version: 20260416.Interface.1
 #
 # Description: Specialized editor widgets for leaf JSON properties.
-
 import tkinter as tk
-from tkinter import ttk, colorchooser
+from tkinter import colorchooser, ttk
+
+from oaLogging.Methods.matrix_gate import matrix_log
+
 from ...Core.state import state_manager
+
 
 class PropertyLeaf:
     """Spawns specialized editor widgets for leaf JSON properties."""
@@ -21,10 +22,10 @@ class PropertyLeaf:
             editor = PropertyLeaf._create_color_editor(parent, key, value, full_path, source_instance, existing_widget)
         else:
             editor = PropertyLeaf._create_text_editor(parent, key, value, full_path, source_instance, existing_widget)
-            
+
         return editor
 
-    
+
     class _ColorEditorWidget(tk.Frame):
         def __init__(self, parent, key, value, full_path, source):
             super().__init__(parent, bg="#2b2b2b")
@@ -59,7 +60,7 @@ class PropertyLeaf:
             if result[1]:
                 self.set_value(result[1])
                 state_manager.update_state(result[1], path=self.full_path, source=self.source)
-        
+
         def _update_state_from_entry(self, e):
             current_value = self.entry.get()
             self.set_value(current_value)
@@ -82,7 +83,7 @@ class PropertyLeaf:
             return existing_widget
         return PropertyLeaf._ColorEditorWidget(parent, key, value, full_path, source)
 
-    
+
     class _TextEditorWidget(tk.Frame):
         def __init__(self, parent, key, value, full_path, source):
             super().__init__(parent, bg="#2b2b2b")
@@ -92,7 +93,7 @@ class PropertyLeaf:
 
             self.pack(fill="x", pady=2, padx=10) # Pack the main frame
             self.columnconfigure(0, weight=1)
-            
+
             self.lbl = tk.Label(self, text=f"{key}:", bg="#2b2b2b", fg="#cccccc", font=("Arial", 8), anchor="w")
             self.lbl.grid(row=0, column=0, sticky="w")
 
@@ -143,7 +144,7 @@ class PropertyLeaf:
 
         def set_value(self, new_value):
             if not self.winfo_exists() or not self.entry.winfo_exists(): return
-            
+
             value_to_set = new_value
             if self.is_numeric:
                 try:

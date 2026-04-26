@@ -4,7 +4,6 @@
 #
 # Description: Brief summary of purpose
 
-import tkinter as tk
 
 class LTPInteractionMixin:
     """Handles mouse and drag interactions for the Linear Travelling Potentiometer."""
@@ -16,12 +15,12 @@ class LTPInteractionMixin:
         w, h = canvas.winfo_width(), canvas.winfo_height()
         h_pos = self._get_handle_pos(h if self.orientation == "vertical" else w)
         r = self.cap_radius
-        
+
         if self.orientation == "vertical": in_zone = (w/2-r <= event.x <= w/2+r) and (h_pos-r <= event.y <= h_pos+r)
         else: in_zone = (h_pos-r <= event.x <= h_pos+r) and (h/2-r <= event.y <= h/2+r)
-        
+
         if not in_zone: self._set_linear_from_event(event, w, h)
-        
+
         self.drag_state.update({"active": True, "start_x": event.x, "start_y": event.y, "start_lin": self.linear_var.get(), "start_rot": self.rotation_var.get(), "is_ctrl": bool(event.state & 0x0004)})
         self.is_sliding = True
 
@@ -29,10 +28,10 @@ class LTPInteractionMixin:
         if not self.drag_state["active"]: return
         w, h = canvas.winfo_width(), canvas.winfo_height()
         ctrl = bool(event.state & 0x0004)
-        
+
         if ctrl != self.drag_state["is_ctrl"]:
             self.drag_state.update({"start_x": event.x, "start_y": event.y, "start_lin": self.linear_var.get(), "start_rot": self.rotation_var.get(), "is_ctrl": ctrl})
-        
+
         dx, dy = event.x - self.drag_state["start_x"], event.y - self.drag_state["start_y"]
         flen = (h if self.orientation == "vertical" else w) - 50
         mult = 2.0 if (self.freestyle and ctrl) else 1.0

@@ -5,13 +5,13 @@
 # Description: Tests for the MqttAsyncWorker class.
 
 import asyncio
-import unittest
-from unittest.mock import MagicMock, AsyncMock, patch
 import queue
-import aiomqtt
+import unittest
+from unittest.mock import AsyncMock, MagicMock, patch
 
-from oaComProtocols.oaComMQTT.Workers.mqtt_async_worker import MqttAsyncWorker
 from oaComProtocols.oaComMQTT.Core.mqtt_message import MqttMessage
+from oaComProtocols.oaComMQTT.Workers.mqtt_async_worker import MqttAsyncWorker
+
 
 class TestMqttAsyncWorker(unittest.IsolatedAsyncioTestCase):
 
@@ -23,16 +23,16 @@ class TestMqttAsyncWorker(unittest.IsolatedAsyncioTestCase):
         self.mock_manager.password = None
         self.mock_manager._connected = False
         self.mock_manager.subscriber_router = AsyncMock()
-        
+
         self.mock_queue_manager = MagicMock()
         self.mock_queue_manager._subscribe_queue = queue.Queue()
         self.mock_queue_manager._publish_queue = queue.Queue()
         self.mock_queue_manager._pending_subscriptions = set()
-        
+
         # MqttQueueManager methods
         self.mock_queue_manager.get_subscribe_request.side_effect = lambda: self.mock_queue_manager._subscribe_queue.get_nowait() if not self.mock_queue_manager._subscribe_queue.empty() else None
         self.mock_queue_manager.get_publish_message.side_effect = lambda: self.mock_queue_manager._publish_queue.get_nowait() if not self.mock_queue_manager._publish_queue.empty() else None
-        
+
         def remove_sub(topic):
             if topic in self.mock_queue_manager._pending_subscriptions:
                 self.mock_queue_manager._pending_subscriptions.remove(topic)
@@ -61,7 +61,7 @@ class TestMqttAsyncWorker(unittest.IsolatedAsyncioTestCase):
     async def test_receiver_task(self):
         """Test _receiver_task consumes messages and calls manager's callback."""
         mock_client = AsyncMock()
-        
+
         # Create a mock message iterator
         class MockMessageIterator:
             def __init__(self):
@@ -76,16 +76,16 @@ class TestMqttAsyncWorker(unittest.IsolatedAsyncioTestCase):
                 return self.messages.pop(0)
 
         mock_client.messages = MockMessageIterator()
-        
+
         self.mock_manager.on_message_callback = MagicMock()
-        
+
         task = asyncio.create_task(self.worker._receiver_task(mock_client))
         await asyncio.sleep(0.1) # Let the task run briefly
         task.cancel() # Cancel to avoid infinite loop (though iterator stops)
-        
+
         # Should have called callback twice
         self.assertEqual(self.mock_manager.on_message_callback.call_count, 2)
-        
+
         # Check args of first call
         args, _ = self.mock_manager.on_message_callback.call_args_list[0]
         self.assertEqual(args[0], mock_client) # client
@@ -103,7 +103,7 @@ class TestMqttAsyncWorker(unittest.IsolatedAsyncioTestCase):
         # Add a subscription job
         self.mock_queue_manager._subscribe_queue.put({"topic": "test/sub", "qos": 1})
         self.mock_queue_manager._pending_subscriptions.add("test/sub")
-        
+
         self.worker.kick_event.set() # Kick to process
 
         # Run for a tiny bit
@@ -123,7 +123,7 @@ class TestMqttAsyncWorker(unittest.IsolatedAsyncioTestCase):
 
         # Add a publication job
         self.mock_queue_manager._publish_queue.put({"topic": "test/pub", "payload": b"data", "qos": 0, "retain": False})
-        
+
         self.worker.kick_event.set() # Kick to process
 
         # Run for a tiny bit
@@ -141,16 +141,16 @@ class TestMqttAsyncWorker(unittest.IsolatedAsyncioTestCase):
         mock_client = AsyncMock()
         self.worker.stop_event = asyncio.Event()
         self.worker.kick_event = asyncio.Event()
-        
+
         # Configure mock_client.subscribe to raise the specific error
         mock_client.subscribe.side_effect = TypeError("'<' not supported between instances of 'method' and 'int'")
-        
+
         # Mock the logger
         with patch('oaComProtocols.oaComMQTT.Workers.mqtt_async_worker.MQTT_LOGGER') as MockLogger:
             # Add a subscription job
             self.mock_queue_manager._subscribe_queue.put({"topic": "test/sub", "qos": 1})
             self.mock_queue_manager._pending_subscriptions.add("test/sub")
-            
+
             self.worker.kick_event.set() # Kick to process
 
             # Run for a tiny bit

@@ -1,11 +1,10 @@
-import pathlib
-import sys
-import os
-
-import inspect
 import importlib
-from typing import Dict, Any, Type, Callable, Optional
+import inspect
+import os
+from typing import Any
+
 from loguru import logger
+
 from oaLogging.Methods.matrix_gate import matrix_log
 from oaOchestration.Core.path_initializer import GLOBAL_PROJECT_ROOT
 
@@ -43,7 +42,7 @@ class WidgetRegistry:
     """
     Registry for widget creators, facilitating a pluggable UI architecture.
     """
-    _registry: Dict[str, Any] = {}
+    _registry: dict[str, Any] = {}
     _initialized = False
 
     @classmethod
@@ -69,14 +68,14 @@ class WidgetRegistry:
         return decorator
 
     @classmethod
-    def get_registry(cls) -> Dict[str, Any]:
+    def get_registry(cls) -> dict[str, Any]:
         """
         Returns a copy of the current widget registry.
         """
         return cls._registry.copy()
 
     @classmethod
-    def get_creator(cls, widget_type: str) -> Optional[Any]:
+    def get_creator(cls, widget_type: str) -> Any | None:
         """
         Retrieves the creator class for a specific widget identifier.
 
@@ -118,7 +117,7 @@ class WidgetRegistry:
 
         # ⚡ AUTO-DISCOVERY: Resolve absolute path to ensure consistent discovery.
         base_path = GLOBAL_PROJECT_ROOT / "oaGuiElements"
-        
+
         if not base_path.exists():
             logger.error(f"❌ WidgetRegistry: Path not found: {base_path}")
             return
@@ -131,7 +130,7 @@ class WidgetRegistry:
 
         from ..fast_scanner import FastScanner
         scanner = FastScanner()
-        
+
         # High-performance recursive scan
         files = scanner.scan_directory(base_path_str, ".py")
 
@@ -142,7 +141,7 @@ class WidgetRegistry:
                 # Calculate the dot-notation module path relative to root.
                 rel_path = os.path.relpath(file_path, root_path_str)
                 module_path = rel_path.replace(os.path.sep, ".")[:-3]
-                
+
                 try:
                     # Importing the module triggers self-registration.
                     importlib.import_module(module_path)
@@ -150,6 +149,6 @@ class WidgetRegistry:
                 except Exception:
                     # Silently skip modules that fail to import.
                     pass
-        
+
         cls._initialized = True
         matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"✅ WidgetRegistry: Discovered {len(cls._registry)} types from {count} modules.", level="DEBUG")

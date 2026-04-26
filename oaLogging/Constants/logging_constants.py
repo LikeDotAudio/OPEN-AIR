@@ -32,13 +32,13 @@ JSONL_FORMAT = (
 # --- Subsystem Categorization ---
 # Elements that should always be treated as communications and use the 📡 emoji.
 COMMS_ELEMENTS = {
-    "MQTT", "OSC", "MIDI", "SNMP", "VISA", "AES70", "REST", 
+    "MQTT", "OSC", "MIDI", "SNMP", "VISA", "AES70", "REST",
     "EMBER", "SMPTE2138", "ROUTER", "BROKER", "COMM", "COMMS"
 }
 
 # Protocols that receive segregated log sinks.
 PROTOCOLS = [
-    "OSC", "MIDI", "MQTT", "SNMP", "VISA", "AES70", "REST", 
+    "OSC", "MIDI", "MQTT", "SNMP", "VISA", "AES70", "REST",
     "EMBER", "SMPTE2138", "BROKER", "GUI", "WYSIWYG"
 ]
 

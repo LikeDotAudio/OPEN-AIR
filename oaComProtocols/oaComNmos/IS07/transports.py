@@ -2,32 +2,17 @@
 # Author: Gemini (Collaborator)
 # Version: 20260405.1315.15 (updated)
 
-import socket
-import struct
-import time
-import uuid
-import json
-import hashlib
-import requests
-import ssl # For potential TLS in MQTT
 # Removed: import websocket # For WebSocket client
 # Removed: import threading # Only used by WebSocketEventTransport
-import paho.mqtt.client as mqtt # For MQTT client
 
-from abc import ABC, abstractmethod
-from typing import Optional, List, Dict, Any, Callable
+from collections.abc import Callable
+from typing import Any
+
+from oaComProtocols.oaComNmos.Constants import settings
 
 # ⚡ NATIVE CORE TRANSPORTS
-from oaComProtocols.oaComNmos.Core.is07_transport import EventTransport, Is07WebSocketTransport, Is07MqttTransport
-
-from oaComProtocols.oaComNmos.Core.utils import gen_id, get_ip, hash_sdp, now_ts
-from oaComProtocols.oaComNmos.Core.sdp_parser import parse_sdp
-from oaComProtocols.oaComNmos.Core.nmos_builder import build_source, build_flow, build_sender
-from oaComProtocols.oaComNmos.Managers.sender_cache_manager import find_existing_sender
-from oaComProtocols.oaComNmos.IS07.core_models import Message, EventCore, Identity, Timing, BooleanPayload, StringPayload, NumberPayload, ObjectPayload, GenericTypeDefinition
-from oaComProtocols.oaComNmos.Constants import settings
-from oaComProtocols.oaComNmos.Managers import registration_manager
-from oaComProtocols.oaComNmos.Interface.connection_api import STATE # Access shared state dict from connection_api
+from oaComProtocols.oaComNmos.Core.is07_transport import Is07MqttTransport, Is07WebSocketTransport
+from oaComProtocols.oaComNmos.IS07.core_models import EventCore, Identity, Timing
 
 # --- Abstract Base Classes for Transports ---
 
@@ -42,11 +27,11 @@ class Is07Bridge:
         self.registrar_url = registrar_url
         self.mqtt_transport = Is07MqttTransport()
         # Instantiate native NMOS Core WebSocket transport
-        self.websocket_transport = Is07WebSocketTransport() 
-        self._message_handler: Optional[Callable[[str, Dict[str, Any]], None]] = None
+        self.websocket_transport = Is07WebSocketTransport()
+        self._message_handler: Callable[[str, dict[str, Any]], None] | None = None
         print("[IS07Bridge] Initialized (Core Transports).")
 
-    def initialize_transports(self, connection_params_mqtt: Dict[str, Any], connection_params_ws: Dict[str, Any]):
+    def initialize_transports(self, connection_params_mqtt: dict[str, Any], connection_params_ws: dict[str, Any]):
         """Initializes and connects the transport clients."""
         # Connect MQTT
         mqtt_connected = self.mqtt_transport.connect(connection_params_mqtt)
@@ -86,7 +71,7 @@ class Is07Bridge:
         self.mqtt_transport.disconnect()
         self.websocket_transport.disconnect()
 
-    def set_message_handler(self, handler: Callable[[str, Any, Dict[str, Any]], None]):
+    def set_message_handler(self, handler: Callable[[str, Any, dict[str, Any]], None]):
         """
         Sets a global handler for all incoming IS-07 and monitoring messages.
         Expected signature: handler(transport_type, topic, payload)
@@ -101,7 +86,7 @@ class Is07Bridge:
         """
         if self._message_handler:
             try:
-                # ⚡ DISPATCH LOGIC: 
+                # ⚡ DISPATCH LOGIC:
                 # If topic_or_transport starts with OPEN-AIR, it's likely an MQTT topic
                 # Otherwise, it's a transport type label (e.g., 'websocket')
                 if topic_or_transport.startswith("OPEN-AIR/"):
@@ -123,7 +108,7 @@ class Is07Bridge:
         else:
             print(f"[IS07Bridge] Unsupported payload type for state change: {type(payload)}")
             return False
-            
+
         event_data = EventCore(identity=identity, timing=timing, event_type=event_type, payload=payload_data)
         message_dict = event_data.__dict__ # Convert dataclass to dict for JSON serialization
 
@@ -141,7 +126,7 @@ class Is07Bridge:
         if message_type not in ["reboot", "shutdown"]:
             print(f"[IS07Bridge] Invalid message_type for reboot/shutdown: {message_type}")
             return False
-            
+
         message_data = MessageShutdownReboot(identity=identity, timing=timing, message_type=message_type)
         message_dict = message_data.__dict__
 

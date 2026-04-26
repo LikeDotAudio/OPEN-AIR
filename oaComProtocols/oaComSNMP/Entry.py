@@ -5,13 +5,11 @@
 # Description: Gatekeeper for the oaComSNMP module.
 
 
-import sys
 import os
 import pathlib
-import threading
-import time
 import subprocess
-import unittest
+import sys
+import time
 from pathlib import Path
 
 # Ensure the root directory is in the search path
@@ -20,8 +18,9 @@ project_root = current_dir.parent.parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
+from oaConfigurationManager.FileReaders.config_reader import Config  # Config might be needed externally
 from oaLogging.Methods.matrix_gate import matrix_log
-from oaConfigurationManager.FileReaders.config_reader import Config # Config might be needed externally
+
 
 # Mock dependencies if not provided by the manager
 class MockMqttConnectionManager:
@@ -32,8 +31,6 @@ class MockMqttConnectionManager:
     def set_on_message_callback(self, *args, **kwargs): pass
 
 # --- Core Components ---
-from oaComProtocols.oaComSNMP.Managers.snmp_manager import SNMPManager, BridgeContext
-from oaComProtocols.oaComSNMP.Core.snmp_mqtt_client import SnmpMqttClient
 
 _instance = None
 
@@ -43,10 +40,9 @@ def get_manager(mqtt_connection_manager=None, subscriber_router=None, run_bridge
     Dependencies should be passed externally.
     """
     global _instance
-    
+
     if _instance is None:
-        from oaComProtocols.oaComSNMP.Managers.snmp_manager import SNMPManager, BridgeContext
-        from oaComProtocols.oaComSNMP.Core.snmp_mqtt_client import SnmpMqttClient
+        from oaComProtocols.oaComSNMP.Managers.snmp_manager import BridgeContext, SNMPManager
 
         matrix_log("comms", "snmp", "get_manager", "Initializing SNMP Manager...", "INFO")
 
@@ -62,11 +58,11 @@ def get_manager(mqtt_connection_manager=None, subscriber_router=None, run_bridge
         # Instantiate MQTT client and context using provided or default connection managers
         mqtt_client = mqtt_connection_manager if mqtt_connection_manager else MockMqttConnectionManager()
         # subscriber_router is not directly used by SNMPManager's init in this snippet
-        
+
         context = BridgeContext(mqtt_client=mqtt_client)
         _instance = SNMPManager.create(context, run_bridge)
         matrix_log("comms", "snmp", "get_manager", f"SNMP Manager created. Bridge mode: {run_bridge}", "INFO")
-        
+
     return _instance
 
 def start(mqtt_connection_manager=None, subscriber_router=None, run_bridge=None):
@@ -79,12 +75,12 @@ def start(mqtt_connection_manager=None, subscriber_router=None, run_bridge=None)
         subscriber_router=subscriber_router,
         run_bridge=run_bridge
     )
-    
+
     # Connect MQTT client if it's part of the manager's context
     if manager.context.mqtt_client and hasattr(manager.context.mqtt_client, 'connect'):
         matrix_log("comms", "snmp", "start", "Connecting to MQTT...", "INFO")
         manager.context.mqtt_client.connect()
-    
+
     manager.start() # Start the SNMP manager's background services
     matrix_log("comms", "snmp", "start", "✅ SNMP bridge service started.", "SUCCESS")
     return manager # Return manager for external control
@@ -116,7 +112,7 @@ def main():
     Main function to run the SNMP bridge service in standalone mode.
     """
     matrix_log("comms", "snmp", "main", "⚡ [SNMP] Starting SNMP in standalone mode...", "INFO")
-    
+
     # Run tests first
     matrix_log("comms", "snmp", "main", "Running self-tests...", "INFO")
     if not run_tests():
@@ -144,15 +140,13 @@ def run_tests():
     Discover and run tests in the local Tests/ directory using unittest via subprocess.
     Ensures isolation and proper sys.path handling.
     """
-    import subprocess
     import sys
-    import os
     from pathlib import Path
 
     print(f"📡📥📥 [TEST] {Path(__file__).parent.name}: Starting automated test discovery...")
     current_dir = Path(__file__).parent.absolute()
     test_dir = current_dir / "Tests"
-    
+
     if not test_dir.exists():
         return True
 
@@ -161,10 +155,10 @@ def run_tests():
         if (project_root / "GEMINI.md").exists():
             break
         project_root = project_root.parent
-    
+
     env = os.environ.copy()
     env["PYTHONPATH"] = str(project_root) + os.pathsep + env.get("PYTHONPATH", "")
-    
+
     try:
         rel_test_dir = os.path.relpath(test_dir, project_root)
         result = subprocess.run(
@@ -183,17 +177,12 @@ def run_tests():
         print(f"🛑 [ERROR] {Path(__file__).parent.name}: Test discovery failed: {e}")
         return False
 
-def start():
-    """Start the module services."""
-    print(f"🚀 [START] Starting {Path(__file__).parent.name} services...")
-    main()
-
 if __name__ == "__main__":
     # Absolute FIRST action: run tests
     if not run_tests():
         print("❌ [CRITICAL] Tests failed. Aborting execution.")
         sys.exit(1)
-    
+
     # Standalone execution logic
     if len(sys.argv) > 1:
         cmd = sys.argv[1].lower()
@@ -209,8 +198,3 @@ if __name__ == "__main__":
         # Default standalone action if no args
         start()
 
-    "start",
-    "stop",
-    "status",
-    "run_tests",
-__all__ = ["start", "stop", "status", "run_tests"]

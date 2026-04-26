@@ -5,7 +5,6 @@
 # Description: Brief summary of purpose
 
 import re
-import pathlib
 from pathlib import Path
 
 # --- Constants ---
@@ -39,23 +38,23 @@ def generate_topic_path_from_filepath(file_path: Path, project_root: Path) -> st
             # We now KEEP 'GUI' as it is the primary namespace.
             if part.lower() in ["display", "left", "right", "top", "bottom"]:
                 continue
-            
+
             # ⚡ FILTER 2: Skip pure digits (standalone sorting numbers like '50', '100', '1')
             if part.isdigit():
                 continue
-            
+
             # ⚡ CLEAN: Strip numeric prefix/suffix from mixed names (e.g. '1_Router' -> 'Router')
             # Handle both [-_] and just the number at the start/end
             clean = re.sub(r"^(\d+)[_-]?", "", part)
             clean = re.sub(r"[_-]?(\d+)$", "", clean)
-            
+
             # Clean up remaining underscores/spaces for topic uniformity
             clean = clean.replace(" ", "_")
-            
+
             # ⚡ DOUBLE-CHECK: If stripping the number left us with a layout token or nothing, skip it
             if not clean or clean.lower() in ["left", "right", "top", "bottom"]:
                 continue
-            
+
             if clean:
                 filtered_parts.append(clean)
 

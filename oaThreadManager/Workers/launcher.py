@@ -1,6 +1,6 @@
 # Workers/launcher.py
 #
-# Launches and initializes all application managers. Orchestrates the 
+# Launches and initializes all application managers. Orchestrates the
 # high-level linking phase and bootstrap sequence for the core partition.
 #
 # Author: Anthony Peter Kuzub
@@ -15,25 +15,23 @@
 #
 # Version 20260330.1600.1
 
-import os
-import threading
-import pathlib
-import sys
 import importlib
 import importlib.util
-from oaLogging.Core.logger import logger
+import threading
+
+from oaConfigurationManager.FileReaders.config_reader import Config
 
 # --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory
+from oaLogging.Core.logger import initialize_logging
 from oaLogging.Managers.log_filter_engine import initialize_filter_engine
 from oaLogging.Methods.matrix_gate import matrix_log
 
-from oaConfigurationManager.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
 # --- Core/Mandatory Imports Only ---
-from oaComProtocols.oaComMQTT.Entry import MqttConnectionManager, MqttSubscriberRouter, MqttManager
 from oaComBroker.Entry import ProtocolRouter
+from oaComProtocols.oaComMQTT.Entry import MqttManager, MqttSubscriberRouter
+
 
 class CriticalModuleMissingError(Exception): pass
 
@@ -41,11 +39,11 @@ def _load_protocol_manager(module_path, class_name, **kwargs):
     spec = importlib.util.find_spec(module_path)
     if spec is None:
         return None
-    
+
     module = importlib.import_module(module_path)
     if not hasattr(module, class_name):
         return None
-        
+
     manager_class = getattr(module, class_name)
     return manager_class(**kwargs)
 
@@ -54,9 +52,9 @@ def launch_core_managers(state_cache_manager, mqtt_connection_manager):
 
     subscriber_router = MqttSubscriberRouter()
     protocol_router = ProtocolRouter.get_instance()
-    
+
     initialize_filter_engine(mqtt_router=subscriber_router, logger_reconfigurator_callable=initialize_logging)
-    
+
     # Core Infrastructure
     splinker_entry_path = "oaSplinker.Entry"
     if importlib.util.find_spec(splinker_entry_path):
@@ -64,7 +62,7 @@ def launch_core_managers(state_cache_manager, mqtt_connection_manager):
         splinker_manager = splinker_entry.get_broker(state_cache_manager, mqtt_connection_manager)
     else:
         raise CriticalModuleMissingError("❌ Critical module missing: oaSplinker.Entry")
-    
+
     mqtt_manager = MqttManager(subscriber_router=subscriber_router, mqtt_client=mqtt_connection_manager, state_cache_manager=state_cache_manager)
 
     # --- Dynamic Protocol Injection ---
@@ -80,8 +78,8 @@ def launch_core_managers(state_cache_manager, mqtt_connection_manager):
     if getattr(app_constants, "SCAN_SNMP", False):
         snmp_manager = _load_protocol_manager(
             "oaComProtocols.oaComSNMP.Entry", "get_manager",
-            state_cache_manager=state_cache_manager, 
-            mqtt_connection_manager=mqtt_connection_manager, 
+            state_cache_manager=state_cache_manager,
+            mqtt_connection_manager=mqtt_connection_manager,
             subscriber_router=subscriber_router,
             run_bridge=True
         )
@@ -99,14 +97,14 @@ def launch_core_managers(state_cache_manager, mqtt_connection_manager):
         state_cache_manager=state_cache_manager, protocol_router=protocol_router
     )
     if rest_manager: rest_manager.start()
-    
+
     visa_entry_path = "oaComProtocols.oaComVisa.Entry"
     if importlib.util.find_spec(visa_entry_path):
         visa_entry = importlib.import_module(visa_entry_path)
         STATE_VISA_FLEET_manager = visa_entry.get_discovery_orchestrator(manager_ref=None, aes70_manager=aes70_manager)
     else:
         raise CriticalModuleMissingError("❌ Critical module missing: oaComProtocols.oaComVisa.Entry")
-    
+
     yak_entry_path = "oaTranslator.Entry"
     if importlib.util.find_spec(yak_entry_path):
         yak_entry = importlib.import_module(yak_entry_path)
@@ -115,14 +113,14 @@ def launch_core_managers(state_cache_manager, mqtt_connection_manager):
         yak_receiver_manager = yak_receiver_module.YakReceiverManager(mqtt_connection_manager=mqtt_connection_manager, subscriber_router=subscriber_router, yak_translator=yak_translator, state_cache_manager=state_cache_manager)
     else:
         raise CriticalModuleMissingError("❌ Critical module missing: oaTranslator.Entry")
-    
+
     watchdog_entry_path = "oaWatchdog.Entry"
     if importlib.util.find_spec(watchdog_entry_path):
         watchdog_entry = importlib.import_module(watchdog_entry_path)
         fleet_status_monitor = watchdog_entry.FleetStatusMonitor(state_mirror_engine=None, subscriber_router=subscriber_router)
     else:
         raise CriticalModuleMissingError("❌ Critical module missing: oaWatchdog.Entry")
-    
+
     ptp_entry_path = "oaPTP.Entry"
     ptp_manager = None
     if importlib.util.find_spec(ptp_entry_path):
@@ -152,17 +150,17 @@ def launch_core_managers(state_cache_manager, mqtt_connection_manager):
     matrix_log("core", "launcher", "launch_core_managers", "🚀⚙️🔗 [LAUNCHER] Linking cross-dependent managers...", "DEBUG")
 
     state_cache_manager.subscriber_router = subscriber_router
-    state_cache_manager.state_mirror_engine = None 
+    state_cache_manager.state_mirror_engine = None
 
     protocol_router.set_mqtt_manager(mqtt_connection_manager)
     protocol_router.set_splinker_manager(splinker_manager)
-    
+
     if hasattr(protocol_router, "set_osc_manager") and osc_manager: protocol_router.set_osc_manager(osc_manager)
     if hasattr(protocol_router, "set_midi_manager") and midi_manager: protocol_router.set_midi_manager(midi_manager)
     if hasattr(protocol_router, "set_snmp_manager") and snmp_manager: protocol_router.set_snmp_manager(snmp_manager)
     if hasattr(protocol_router, "set_nmos_manager") and nmos_manager: protocol_router.set_nmos_manager(nmos_manager)
     if hasattr(protocol_router, "set_smpte2138_manager") and smpte2138_manager: protocol_router.set_smpte2138_manager(smpte2138_manager)
-    
+
     def splinker_mqtt_wrapper(message):
         splinker_manager.handle_mqtt_command(message.topic, message.payload)
     subscriber_router.subscribe_to_topic("OPEN-AIR/System/Control/Splinker/#", splinker_mqtt_wrapper)
@@ -176,16 +174,16 @@ def launch_core_managers(state_cache_manager, mqtt_connection_manager):
     if nmos_manager: nmos_manager.start()
     if rest_manager: rest_manager.start()
     if smpte2138_manager: smpte2138_manager.start()
-    
+
     if hasattr(STATE_VISA_FLEET_manager, "start"): STATE_VISA_FLEET_manager.start()
     if ptp_manager: ptp_manager.start()
-    protocol_router.start() 
+    protocol_router.start()
 
     def start_network_services():
         matrix_log("core", "launcher", "start_network_services", "🚀⚙️🔗 [LAUNCHER] Connecting CORE MQTT Client to broker and running scans...", "DEBUG")
         mqtt_connection_manager.connect_to_broker(on_message_callback=state_cache_manager.handle_incoming_mqtt, subscriber_router=subscriber_router)
         state_cache_manager.subscribe_to_all_topics()
-        
+
         if hasattr(STATE_VISA_FLEET_manager, "trigger_scan"):
             scan_thread = threading.Thread(target=STATE_VISA_FLEET_manager.trigger_scan, daemon=True)
             scan_thread.start()

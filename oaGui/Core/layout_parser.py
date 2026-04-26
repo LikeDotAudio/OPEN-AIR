@@ -4,21 +4,19 @@
 #
 # Description: oaGui/Assets/layout_parser.py
 
-import orjson
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
 import os
-import inspect
 import pathlib
 import tkinter as tk
-from tkinter import ttk
 
-# --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import LAYOUT_LOGGER
-from loguru import logger
+import orjson
 
 from oaConfigurationManager.FileReaders.config_reader import Config
 from oaGuiManager.Constants.schema_defaults import DEFAULT_PANEL_PERCENTAGE
+
+# --- Standard Debug Logging Setup ---
+from oaLogging.Core.logger import LAYOUT_LOGGER
+from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()  # Get the singleton instance
 
@@ -144,7 +142,7 @@ class LayoutParser:
             parsed_data["orientation"] = orientation
             raw_panels = layout_data.get("panels", [])
             percentages = layout_data.get("percentages", [])
-            
+
             # Resolve relative paths and ensure weights are present
             resolved_panels = []
             for i, panel_item in enumerate(raw_panels):
@@ -157,7 +155,7 @@ class LayoutParser:
                     weight = percentages[i]
                 elif isinstance(panel_item, dict) and "weight" in panel_item:
                     weight = panel_item["weight"]
-                
+
                 resolved_panels.append({"path": resolved_path, "weight": weight})
 
             parsed_data["panels"] = resolved_panels
@@ -181,10 +179,10 @@ class LayoutParser:
                     child_containers.append(source_path / item)
                 elif isinstance(item, dict):
                     child_containers.append(item) # Keep nested dicts as-is
-            
+
             parsed_data["gui_files"] = gui_files
             parsed_data["child_containers"] = child_containers
-        
+
         else: # Default or unknown, parse as a directory listing
              return self._parse_directory_listing(source_path)
 
@@ -229,6 +227,14 @@ class LayoutParser:
             LAYOUT_LOGGER.error(f"Error: Directory not found for parsing: {path}")
             return {"type": "error", "data": {"error_message": "Directory not found."}}
 
+        # 0. Check for Multi-Window Layout
+        window_dirs = [d for d in sub_dirs if d.name.lower().startswith("window_")]
+        if window_dirs:
+            layout_type = "multi_window"
+            parsed_data = {"windows": [{"path": d, "title": d.name.replace("_", " ")} for d in sorted(window_dirs)]}
+            matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"Parsed '{layout_type}' from dir names '{path}'", level="DEBUG")
+            return {"type": layout_type, "data": parsed_data}
+
         # 1. Check for Split-Pane Layout
         layout_dirs = [d for d in sub_dirs if d.name.split("_")[0] in ["left", "right", "top", "bottom"]]
         if layout_dirs:
@@ -240,16 +246,16 @@ class LayoutParser:
 
             layout_type = "horizontal_split" if is_horizontal else "vertical_split"
             parsed_data = {
-                "panels": [], 
+                "panels": [],
                 "panel_percentages": [],
                 "orientation": tk.HORIZONTAL if is_horizontal else tk.VERTICAL
             }
-            
+
             # Sort panels correctly
             sort_order = ["left", "right"] if is_horizontal else ["top", "bottom"]
-            
+
             # We only sort the directories that match the convention
-            # Other directories will be ignored by the split layout logic 
+            # Other directories will be ignored by the split layout logic
             # (they should ideally be inside the split panels)
             sorted_layout_dirs = sorted(layout_dirs, key=lambda d: sort_order.index(d.name.split("_")[0]))
 
@@ -260,7 +266,7 @@ class LayoutParser:
                     percentage = DEFAULT_PANEL_PERCENTAGE
                 parsed_data["panels"].append({"path": sub_dir, "weight": percentage})
                 parsed_data["panel_percentages"].append(percentage)
-            
+
             matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"Parsed '{layout_type}' from dir names '{path}'", level="DEBUG")
             return {"type": layout_type, "data": parsed_data}
 
@@ -272,10 +278,10 @@ class LayoutParser:
             if valid_tab_dirs:
                 layout_type = "notebook"
                 parsed_data = {"tabs": []}
-                
+
                 # Sort numerically
                 sorted_tabs = sorted(valid_tab_dirs, key=lambda d: int(d.name.split("_")[0]))
-                
+
                 for tab_dir in sorted_tabs:
                     parts = tab_dir.name.split("_")
                     display_name = " ".join(parts[1:]).title() if len(parts) > 1 else tab_dir.name
@@ -289,7 +295,7 @@ class LayoutParser:
             [f for f in path.iterdir() if f.is_file() and (f.suffix == ".json" or f.suffix == ".py") and f.name != "layout.json" and not f.name.startswith("__")]
         )
         numerical_files = [f for f in gui_files if f.name and f.name[0].isdigit()]
-        
+
         if numerical_files and len(numerical_files) > 1:
             # If we have multiple numerical files, treat them as a vertical split
             layout_type = "vertical_split"
@@ -298,13 +304,13 @@ class LayoutParser:
                 "panel_percentages": [],
                 "orientation": tk.VERTICAL
             }
-            
+
             # Use 100/count as default weight for equal splitting
             weight = 100 // len(numerical_files)
             for f in numerical_files:
                 parsed_data["panels"].append({"path": f, "weight": weight})
                 parsed_data["panel_percentages"].append(weight)
-            
+
             matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"Parsed '{layout_type}' from file names in '{path}' for equal splitting.", level="DEBUG")
             return {"type": layout_type, "data": parsed_data}
 

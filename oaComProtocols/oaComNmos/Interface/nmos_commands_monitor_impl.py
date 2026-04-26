@@ -5,11 +5,11 @@
 # Description: NMOS Commands Monitor Implementation.
 # Displays a log of NMOS IS-07 events and resource updates.
 
+import json
+import time
 import tkinter as tk
 from tkinter import ttk
-import threading
-import time
-import json
+
 from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- GUI FALLBACKS (V3.2.1 Decoupling) ---
@@ -28,9 +28,9 @@ class NmosCommandsMonitorImplementation(tk.Frame, TransparencyMixin):
     def __init__(self, parent, json_path=None, config=None, **kwargs):
         super().__init__(parent, **kwargs)
         self.config = config or {}
-        
+
         self._setup_ui()
-        
+
         from oaComProtocols.oaComNmos.Core.event_bus import nmos_event_bus
         nmos_event_bus.subscribe("NMOS_EVENT", self._on_nmos_event)
 
@@ -70,17 +70,17 @@ class NmosCommandsMonitorImplementation(tk.Frame, TransparencyMixin):
 
         cols = ("Time", "Transport", "Type", "ID", "Payload")
         self.tree = ttk.Treeview(table_frame, columns=cols, show="headings", height=10)
-        
+
         for col in cols:
             self.tree.heading(col, text=col)
             self.tree.column(col, width=100)
-        
+
         self.tree.column("Payload", width=300)
         self.tree.column("ID", width=150)
 
         scroll = ttk.Scrollbar(table_frame, orient=tk.VERTICAL, command=self.tree.yview)
         self.tree.configure(yscrollcommand=scroll.set)
-        
+
         self.tree.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
         scroll.pack(side=tk.RIGHT, fill=tk.Y)
 

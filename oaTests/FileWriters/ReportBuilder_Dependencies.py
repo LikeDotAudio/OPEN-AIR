@@ -4,8 +4,6 @@
 #
 # Description: Generates HTML content for the Dependencies tab in the Unified Report.
 
-import os
-import sys
 import importlib
 
 # EXTERNAL_PACKAGES: Maps human-friendly names to actual Python import paths.
@@ -58,7 +56,7 @@ def build_tab():
             </thead>
             <tbody>
     """
-    
+
     for friendly, import_path in EXTERNAL_PACKAGES.items():
         try:
             module = importlib.import_module(import_path)
@@ -69,7 +67,7 @@ def build_tab():
             version = "N/A"
             status_class = "status-failed"
             status_text = "MISSING"
-            
+
         html += f"""
                 <tr>
                     <td>{friendly}</td>
@@ -78,7 +76,7 @@ def build_tab():
                     <td>{version}</td>
                 </tr>
         """
-        
+
     html += """
             </tbody>
         </table>

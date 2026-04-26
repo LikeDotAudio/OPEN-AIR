@@ -6,9 +6,11 @@
 
 import os
 import xml.etree.ElementTree as ET
+
 import numpy as np
 
 from oaLogging.Methods.matrix_gate import is_debug_allowed, matrix_log
+
 
 def _is_debug():
     return is_debug_allowed(system="UI", element="IMPORTER")
@@ -40,13 +42,13 @@ def _internal_convert_shure_wwb_shw_to_markers(xml_file_path):
     into a standardized marker format. All frequencies are converted to MHz for consistency.
     """
 
-    matrix_log("ui", "importer", "_internal_convert_shure_wwb_shw_to_markers", 
+    matrix_log("ui", "importer", "_internal_convert_shure_wwb_shw_to_markers",
                f"▶️ Starting SHW report conversion for '{os.path.basename(xml_file_path)}'.", "DEBUG")
 
     marker_data = []
 
     try:
-        with open(xml_file_path, "r", encoding="utf-8") as xml_file:
+        with open(xml_file_path, encoding="utf-8") as xml_file:
             tree = ET.parse(xml_file)
         root = tree.getroot()
 
@@ -89,7 +91,7 @@ def _internal_convert_shure_wwb_shw_to_markers(xml_file_path):
                 try:
                     # Convert kHz to MHz
                     freq_MHz = float(freq_str) / 1000.0
-                    matrix_log("ui", "importer", "_internal_convert_shure_wwb_shw_to_markers", 
+                    matrix_log("ui", "importer", "_internal_convert_shure_wwb_shw_to_markers",
                                f"↔️ SHW Freq conversion: '{freq_str}' kHz -> {freq_MHz} MHz", "DEBUG")
                 except ValueError:
                     logger.error(f"❌ SHW Freq conversion error: '{freq_str}'")
@@ -106,7 +108,7 @@ def _internal_convert_shure_wwb_shw_to_markers(xml_file_path):
                 }
             )
 
-        matrix_log("ui", "importer", "_internal_convert_shure_wwb_shw_to_markers", 
+        matrix_log("ui", "importer", "_internal_convert_shure_wwb_shw_to_markers",
                    f"✅ Finished SHW report conversion. Extracted {len(marker_data)} rows.", "SUCCESS")
         return HEADERS, marker_data
 

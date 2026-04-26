@@ -1,30 +1,25 @@
 # Core/rendering_engine.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: Brief summary of purpose
 
-import time
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
-import tkinter as tk
 from dataclasses import dataclass
-from typing import Optional, List, Tuple
 
-from oaLogging.Core.logger import builder_logger
-from oaLogging.Methods.matrix_gate import is_debug_allowed
+from oaLogging.Methods.matrix_gate import is_debug_allowed, matrix_log
+
 BUILDER_DEBUG = is_debug_allowed(system="UI", element="GUI_BUILDER")
 
-from .scale import ScaleDrawer
-from .number import NumberDrawer
+from .constants import NUMBER_FONT_FAMILY, SCALE_SUB_TICK_LENGTH, SCALE_TEXT_OFFSET, SCALE_TICK_LENGTH
+from oaGuiElements.Core.metering.meter_needle.cosmetics.geometry import BezelGeometry
+from .meter_modifyer import MeterModifier
 from .needle import NeedleDrawer
-from .shadow import ShadowDrawer
+from .number import NumberDrawer
 from .peak import PeakDrawer
 from .pivot import PivotDrawer
-from ..meter_modifyer import MeterModifier
-from ..cosmetics.geometry import BezelGeometry
-from ..constants import SCALE_TICK_LENGTH, SCALE_SUB_TICK_LENGTH, SCALE_TEXT_OFFSET, NUMBER_FONT_FAMILY
+from .scale import GeometryContext, ScaleDrawer, TickStyle
+from .shadow import ShadowDrawer
 
 # --- Standard Debug Logging Setup ---
 
@@ -76,9 +71,9 @@ class MeterRenderingEngine:
 
     @staticmethod
     def render(canvas, config, val1, val2, peak_on, center_x, center_y, full_redraw=False):
-        if BUILDER_DEBUG and full_redraw: 
+        if BUILDER_DEBUG and full_redraw:
             matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔄 Rendering full meter: {config.label}", level="TRACE")
-        
+
         ctx = RenderContext.from_config(config, center_x, center_y)
 
         if full_redraw:
@@ -114,7 +109,7 @@ class MeterRenderingEngine:
 
         # Main Label
         if config.label and config.show_label:
-            canvas.create_text(cw/2, 10, text=config.label, fill=config.widget_label_color, 
+            canvas.create_text(cw/2, 10, text=config.label, fill=config.widget_label_color,
                                font=(NUMBER_FONT_FAMILY, config.font_size, "bold"), anchor="n", tags=("industrial_text", "vu_static"))
 
         # Modifier faceplate elements
@@ -130,7 +125,7 @@ class MeterRenderingEngine:
 
         for i, (px, py, value, ccw) in enumerate(pivots):
             if i > 0 and value is None: continue
-            
+
             if full_redraw:
                 # 1. Ticks & Numbers
                 geom_ctx = GeometryContext(
@@ -163,7 +158,7 @@ class MeterRenderingEngine:
                 MeterRenderingEngine._tag_as_static(canvas, "vu_element")
 
     @staticmethod
-    def _get_pivots(ctx, val1, val2) -> List[Tuple[float, float, float, bool]]:
+    def _get_pivots(ctx, val1, val2) -> list[tuple[float, float, float, bool]]:
         """Determines pivot points based on meter mode and bezel shape."""
         cx1 = ctx.cx + ctx.config.pivot_offset_x
         cy1 = ctx.cy - ctx.config.pivot_offset_y
@@ -172,7 +167,7 @@ class MeterRenderingEngine:
 
         pivots = [(cx1, cy1, val1, ctx.config.counter_clockwise)]
         is_stereo = ctx.bezel_shape in ["stereo_diamond", "intersecting_overlay"] or ctx.config.meter_mode == "stereo"
-        
+
         if is_stereo:
             ccw2 = not ctx.config.counter_clockwise if ctx.bezel_shape == "stereo_diamond" else ctx.config.counter_clockwise
             pivots.append((cx2, cy2, val2, ccw2))
@@ -185,7 +180,7 @@ class MeterRenderingEngine:
         vr = config.max_val - config.min_val
         norm_p = (config.red_zone_start - config.min_val) / vr if vr != 0 else 0
         p_ang = (ctx.eang + (norm_p * ctx.ext)) if ccw else (ctx.sang - (norm_p * ctx.ext))
-        
+
         PeakDrawer.draw_peak_dot(canvas, px, py, p_ang, ctx.base_r, config.curve_thickness, peak_on, config.peak_flag, arc_radius=ctx.arc_r)
 
         style = config.pointer_style if index == 0 else config.pointer_style_2
@@ -209,18 +204,18 @@ class MeterRenderingEngine:
         config = ctx.config
         cw, ch = int(canvas.cget("width")), int(canvas.cget("height"))
         R, g_y, sk = BezelGeometry.get_scaling_params(cw, ch, ctx.bezel_shape, ctx.bezel_width)
-        
+
         # Draw background fill behind bezel if not transparent
         if sk != "super_gem" and not (hasattr(canvas, 'panel_bg_image') and canvas.panel_bg_image) and not config.is_transparent:
-            from ..constants import GEM_BEZEL_EXPANSION, GEM_BASE_HEIGHT, GEM_PEAK_HEIGHT
+            from .constants import GEM_BASE_HEIGHT, GEM_BEZEL_EXPANSION, GEM_PEAK_HEIGHT
             if sk == "gem": by = ctx.cy - ((GEM_BASE_HEIGHT * R * GEM_BEZEL_EXPANSION) + g_y)
             elif sk == "super_gem": by = ctx.cy - (-(GEM_PEAK_HEIGHT * R * GEM_BEZEL_EXPANSION) + g_y)
             elif sk == "octagon": by = ctx.cy - ((-0.923 * R * 1.4) + g_y)
             else: by = ctx.cy - g_y
-            
+
             bg = canvas.cget("bg")
             canvas.create_rectangle(0, by+1, cw, ch, fill=bg, outline=bg, tags="vu_static")
-        
+
         if config.cosmetics:
              MeterModifier.draw_glass_layer(canvas, ctx.cx, ctx.cy, cw, ch, config.cosmetics)
              MeterModifier.draw_foreground_overlay(canvas, ctx.cx, ctx.cy, cw, ch, config.cosmetics)
@@ -230,12 +225,12 @@ class MeterRenderingEngine:
         """Settles the Z-order of all layers."""
         order = ["panel_bg_slice", "nextgen_background", "vu_shadow", "vu_element", "nextgen_foreground", "industrial_text"]
         for i, t in enumerate(order):
-            try: 
+            try:
                 if i == 0:
                     canvas.tag_lower(t)
                 else:
                     prev = order[i-1]
                     canvas.tag_raise(t, prev)
-            except: 
+            except:
                 pass
         canvas._z_order_settled = True

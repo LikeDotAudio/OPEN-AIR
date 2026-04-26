@@ -1,27 +1,25 @@
 # text_table/Table_CSV_check.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 20250821.200641.1
 #
 # Description: This module provides functionality to check for and initialize CSV files for table widgets, seeding MQTT with existing data or creating new files.
 
-import os
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
+import os
+
 import orjson
 
 # --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory
-from loguru import logger
-
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
-from .Table_CSV_Reader import TableCsvReader
-from .Table_CSV_Writer import TableCsvWriter
 from oaComProtocols.oaComMQTT.Core import mqtt_publisher_service
 from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic
+
+from .Table_CSV_Reader import TableCsvReader
+from .Table_CSV_Writer import TableCsvWriter
 
 
 class TableCsvCheck:

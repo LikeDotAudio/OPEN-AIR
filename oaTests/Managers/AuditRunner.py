@@ -6,8 +6,8 @@
 # Now supports all .toml files regardless of 'Audit*' prefix.
 
 import os
-import subprocess
 import pathlib
+import subprocess
 from datetime import datetime
 
 # Directory containing the audit TOML files
@@ -41,7 +41,7 @@ def extract_prompt_from_toml(file_path):
     in_multiline = False
 
     try:
-        with open(file_path, 'r', encoding='utf-8') as f:
+        with open(file_path, encoding='utf-8') as f:
             for line in f:
                 stripped_line = line.strip()
 

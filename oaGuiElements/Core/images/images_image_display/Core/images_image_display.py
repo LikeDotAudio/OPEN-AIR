@@ -4,29 +4,28 @@
 #
 # Description: images_image_oaGui/Assets/dynamic_guimake_images_image_display.py
 
-import tkinter as tk
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
-from tkinter import ttk
-from PIL import Image, ImageTk
 import os
+import tkinter as tk
 
-# --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
-from loguru import logger
+from PIL import Image, ImageTk
 
 from oaConfigurationManager.FileReaders.config_reader import Config
 
+# --- Standard Debug Logging Setup ---
+from oaLogging.Core.logger import builder_logger
+from oaLogging.Methods.matrix_gate import matrix_log
+
 app_constants = Config.get_instance()  # Get the singleton instance
 
-from oaOchestration.Core.path_initializer import GLOBAL_PROJECT_ROOT
-from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic  # Import get_topic
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 from oaGui.Methods.i18n_utils import get_text
-from oaStyle.Core.style import THEMES, DEFAULT_THEME
+from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Methods.matrix_gate import is_debug_allowed
+from oaOchestration.Core.path_initializer import GLOBAL_PROJECT_ROOT
+from oaStyle.Core.style import DEFAULT_THEME, THEMES
+
 BUILDER_DEBUG = is_debug_allowed(system="UI", element="GUI_BUILDER")
 
 
@@ -48,7 +47,7 @@ class BuilderImagesImageDisplayCreator(TransparencyMixin):
         **kwargs
     ):  # Updated signature
         """Creates an image display widget that is state-aware."""
-        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️🖼️ [BUILDER] Entering make_images_image_display", level="TRACE")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🔬🏗️🖼️ [BUILDER] Entering make_images_image_display", level="TRACE")
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📜📑💻 [CONFIG] Raw config received: {config_data}", level="DEBUG")
 
         current_function_name = "make_images_image_display"
@@ -76,10 +75,10 @@ class BuilderImagesImageDisplayCreator(TransparencyMixin):
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬⚡️🖼️ [BUILDER] Forging image display frame for '{label}' at path '{path}'.", level="DEBUG")
 
         frame = tk.Frame(parent_widget)  # Use parent_widget here
-        
+
         # Apply Industrial Transparency
         if hasattr(self, '_apply_transparency'):
-            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"👻🌀🪟 [ALPHA] Applying industrial transparency to image frame.", level="TRACE")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "👻🌀🪟 [ALPHA] Applying industrial transparency to image frame.", level="TRACE")
             self._apply_transparency(frame, None, config_data, builder_instance)
 
         colors = THEMES.get(DEFAULT_THEME, THEMES["dark"])
@@ -91,14 +90,14 @@ class BuilderImagesImageDisplayCreator(TransparencyMixin):
         image_path_var = tk.StringVar(value=config.get("value_default", ""))
         image_label = tk.Label(frame)
         image_label.pack(side=tk.LEFT)
-        
+
         def sync_bg():
-            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔄👻🎨 [SYNC] Syncing image frame labels to background.", level="TRACE")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🔄👻🎨 [SYNC] Syncing image frame labels to background.", level="TRACE")
             bg = frame.cget("bg")
             for child in frame.winfo_children():
                 if isinstance(child, tk.Label):
                     child.config(bg=bg)
-        
+
         frame._draw = sync_bg
 
         def update_image(*args):
@@ -149,9 +148,9 @@ class BuilderImagesImageDisplayCreator(TransparencyMixin):
                     topic,
                     state_mirror_engine.sync_incoming_mqtt_to_gui,
                 )
-            
+
             # Initialize state from cache or broadcast
-            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔄⏳🔋 [STATE] Initializing image state from cache/broker.", level="TRACE")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🔄⏳🔋 [STATE] Initializing image state from cache/broker.", level="TRACE")
             state_mirror_engine.initialize_widget_state(path)
 
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"✅🆗🖼️ [SUCCESS] The image display '{label}' has materialized!", level="SUCCESS")

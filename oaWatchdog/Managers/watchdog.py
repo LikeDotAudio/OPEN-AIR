@@ -1,13 +1,13 @@
+import os as _os
 import sys
-import inspect
 import threading
 import time
-import os as _os
 import traceback
+
 from loguru import logger
-from oaLogging.Methods.matrix_gate import matrix_log
-from oaLogging.Core.logger import initialize_logging, set_log_directory
+
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- Native Rust Optimization ---
 try:
@@ -59,7 +59,7 @@ def start_heartbeat(app_constants_instance=None):
         daemon=True,
     )
     thread.start()
-    
+
     if LOCAL_DEBUG:
         logger.debug(f"🐕⏳🔋 [WATCHDOG] Started (Timeout: {TIMEOUT_THRESHOLD}s)")
 
@@ -79,14 +79,14 @@ def trigger_system_panic(reason="Manual Trigger"):
     """
     logger.critical(f"💀🐕🛑 [CRITICAL] Watchdog: System PANIC triggered! Reason: {reason}")
     sys.stdout.write(f"\n🔥 [WATCHDOG] PANIC: {reason}\n")
-    
+
     if PANIC_CALLBACKS:
         for cb in PANIC_CALLBACKS:
             try:
                 cb()
             except Exception as e:
                 logger.error(f"🐕⏳❌ [ERROR] Watchdog: Callback failed: {e}")
-    
+
     sys.stdout.flush()
     _os._exit(1)
 
@@ -96,7 +96,7 @@ def _heartbeat_loop(app_constants_instance):
     while WATCHDOG_RUNNING:
         time.sleep(10.0)
         counter += 1
-        
+
         current_time = get_precise_time()
         elapsed = current_time - LAST_HEARTBEAT_TIME
 
@@ -109,7 +109,7 @@ def _heartbeat_loop(app_constants_instance):
                 sys.stdout.write(stack)
             except Exception as e:
                 sys.stdout.write(f"Error retrieving stack: {e}")
-            
+
             trigger_system_panic("Main thread frozen")
 
         # Health Grading

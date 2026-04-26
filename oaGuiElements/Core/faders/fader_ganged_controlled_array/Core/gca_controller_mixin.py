@@ -6,6 +6,7 @@
 
 import tkinter as tk
 
+
 class GCAControllerMixin:
     """Handles synchronization logic for ganged faders (Master/Child sync)."""
 
@@ -38,7 +39,7 @@ class GCAControllerMixin:
     def _on_master_var_change(self, *args):
         if getattr(self, '_lock_sync', False): return
         self._lock_sync = True
-        self._update_children_from_master(broadcast=False) 
+        self._update_children_from_master(broadcast=False)
         self._lock_sync = False
         self._draw()
 

@@ -8,7 +8,6 @@ import tkinter as tk
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = False
-from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
 from oaConfigurationManager.FileReaders.config_reader import Config
@@ -37,6 +36,6 @@ def bind_variable_trace(tk_var: tk.Variable, callback):
         tk_var.trace_add("write", lambda *args: callback())
         # ⚡ OPTIMIZATION: Disabled logging for trace addition as it spams thousands of lines during GUI build.
         #     logger.debug(f"Trace added for variable {tk_var}")
-    except Exception as e:
+    except Exception:
         if LOCAL_DEBUG:
             logger.exception("❌ Error binding trace to variable {tk_var}")

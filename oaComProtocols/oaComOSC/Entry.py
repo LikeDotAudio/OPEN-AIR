@@ -4,14 +4,11 @@
 #
 # Description: Gatekeeper for the oaComOSC module.
 
-import subprocess
-
-import sys
 import os
 import pathlib
-import argparse
+import subprocess
+import sys
 from pathlib import Path
-import threading # For potential internal thread management if needed
 
 # Ensure root directory is in the search path
 current_dir = pathlib.Path(__file__).resolve().parent
@@ -29,11 +26,11 @@ _instance = None
 
 # Mock dependencies if not provided by the manager
 class MockContext: pass
-class MockStateCache: 
+class MockStateCache:
     def handle_external_update(self, *args, **kwargs): pass
     def shutdown(self): pass
 
-class MockMqttConnectionManager: 
+class MockMqttConnectionManager:
     def connect_to_broker(self, *args, **kwargs): pass
     def disconnect(self): pass
     def subscribe(self, *args, **kwargs): pass
@@ -50,8 +47,8 @@ def get_manager(context=None, state_cache_manager=None, mqtt_connection_manager=
     OSCManager will manage its own internal connection.
     """
     global _instance
-    
-    # ⚡ ROBUST SINGLETON: Check if the manager is already initialized in another 
+
+    # ⚡ ROBUST SINGLETON: Check if the manager is already initialized in another
     # copy of this module (happens when run as __main__ and imported as a package)
     if _instance is None:
         try:
@@ -64,17 +61,17 @@ def get_manager(context=None, state_cache_manager=None, mqtt_connection_manager=
 
     if _instance is None:
         from oaComProtocols.oaComOSC.Managers.osc_manager import OSCManager
-        
+
         # Provide mocks if not supplied by the orchestrator
         context = context if context else MockContext()
         state_cache = state_cache_manager if state_cache_manager else MockStateCache()
         # MQTT connection manager will be created internally if not provided
-        mqtt_conn = mqtt_connection_manager if mqtt_connection_manager else None 
+        mqtt_conn = mqtt_connection_manager if mqtt_connection_manager else None
         # subscriber_router is not directly used by OSCManager's init in this snippet
-            
+
         _instance = OSCManager(
             context=context,
-            state_cache_manager=state_cache, 
+            state_cache_manager=state_cache,
             mqtt_connection_manager=mqtt_conn, # Will be None if not provided externally
             run_bridge=run_bridge
         )
@@ -84,7 +81,7 @@ def get_manager(context=None, state_cache_manager=None, mqtt_connection_manager=
         if context: _instance.context = context
         if state_cache_manager: _instance.state_cache_manager = state_cache_manager
         if mqtt_connection_manager: _instance.mqtt_connection_manager = mqtt_connection_manager
-            
+
     return _instance
 
 def start(context=None, state_cache_manager=None, mqtt_connection_manager=None, subscriber_router=None, run_bridge=True):
@@ -165,15 +162,13 @@ def run_tests():
     Discover and run tests in the local Tests/ directory using unittest via subprocess.
     Ensures isolation and proper sys.path handling.
     """
-    import subprocess
     import sys
-    import os
     from pathlib import Path
 
     print(f"📡📥📥 [TEST] {Path(__file__).parent.name}: Starting automated test discovery...")
     current_dir = Path(__file__).parent.absolute()
     test_dir = current_dir / "Tests"
-    
+
     if not test_dir.exists():
         return True
 
@@ -182,10 +177,10 @@ def run_tests():
         if (project_root / "GEMINI.md").exists():
             break
         project_root = project_root.parent
-    
+
     env = os.environ.copy()
     env["PYTHONPATH"] = str(project_root) + os.pathsep + env.get("PYTHONPATH", "")
-    
+
     try:
         rel_test_dir = os.path.relpath(test_dir, project_root)
         result = subprocess.run(
@@ -213,7 +208,7 @@ if __name__ == "__main__":
     if not run_tests():
         print("❌ [CRITICAL] Tests failed. Aborting execution.")
         sys.exit(1)
-    
+
     # Standalone execution logic
     if len(sys.argv) > 1:
         cmd = sys.argv[1].lower()

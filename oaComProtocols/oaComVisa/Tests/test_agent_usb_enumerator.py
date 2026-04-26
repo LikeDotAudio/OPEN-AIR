@@ -9,6 +9,7 @@ from unittest.mock import MagicMock
 
 from oaComProtocols.oaComVisa.Workers.agent_usb_enumerator import discover_usb_devices
 
+
 class TestAgentUsbEnumerator(unittest.TestCase):
 
     def test_discover_usb_devices_success(self):
@@ -24,9 +25,9 @@ class TestAgentUsbEnumerator(unittest.TestCase):
             "ASRL1::INSTR",
             "USB0::0xAAAA::0xBBBB::SERIAL::0::INSTR"
         )
-        
+
         devices = discover_usb_devices(mock_rm)
-        
+
         self.assertEqual(len(devices), 2)
         self.assertIn("USB0::0x1234::0x5678::SERIAL::0::INSTR", devices)
         self.assertIn("USB0::0xAAAA::0xBBBB::SERIAL::0::INSTR", devices)
@@ -41,7 +42,7 @@ class TestAgentUsbEnumerator(unittest.TestCase):
         """
         mock_rm = MagicMock()
         mock_rm.list_resources.return_value = ()
-        
+
         devices = discover_usb_devices(mock_rm)
         self.assertEqual(devices, [])
 
@@ -53,7 +54,7 @@ class TestAgentUsbEnumerator(unittest.TestCase):
         """
         mock_rm = MagicMock()
         mock_rm.list_resources.side_effect = Exception("USB scan error")
-        
+
         devices = discover_usb_devices(mock_rm)
         self.assertEqual(devices, [])
 

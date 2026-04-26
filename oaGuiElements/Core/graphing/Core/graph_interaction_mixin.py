@@ -1,15 +1,14 @@
 # Core/graph_interaction_mixin.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: Brief summary of purpose
 
-import tkinter as tk
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
 from tkinter import simpledialog
-from loguru import logger
+
+from oaLogging.Methods.matrix_gate import matrix_log
+
 
 class GraphInteractionMixin:
     """Handles Matplotlib-specific interactions (Markers, Dragging, Renaming)."""
@@ -33,7 +32,7 @@ class GraphInteractionMixin:
                 if len(xd) == 2 and xd[0] == xd[1] and e.xdata is not None: self.dragging_marker.set_xdata([e.xdata, e.xdata])
                 elif len(yd) == 2 and yd[0] == yd[1] and e.ydata is not None: self.dragging_marker.set_ydata([e.ydata, e.ydata])
             self.canvas.draw_idle(); return
-        
+
         hit = next((m for m in self.marker_objects if m.contains(e)[0]), None)
         if hit:
             if self.highlighted_marker != hit:

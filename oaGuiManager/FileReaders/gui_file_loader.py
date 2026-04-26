@@ -4,9 +4,8 @@
 #
 # Description: Handles File I/O and Hash Verification.
 
-from pathlib import Path
-from loguru import logger
 from .blueprint_loader import BlueprintLoader
+
 
 class GuiFileLoaderMixin:
     """
@@ -16,17 +15,17 @@ class GuiFileLoaderMixin:
 
     def _load_and_build_from_file(self):
         """Loads JSON, checks hash, merges defaults, and triggers build."""
-        
+
         config_data, new_hash, is_changed = BlueprintLoader.load_blueprint(
-            self.json_filepath, 
-            self.tab_name, 
+            self.json_filepath,
+            self.tab_name,
             self.last_build_hash
         )
-        
+
         if not is_changed and self.json_filepath:
             return  # Content unchanged
 
-        if config_data is None: 
+        if config_data is None:
             # Error or empty
             if self.json_filepath: return
             config_data = {} # Fallback for no file
@@ -59,10 +58,10 @@ class GuiFileLoaderMixin:
         Analyzes the config_data and automatically populates 
         metal_fold creases if they are missing.
         """
-        # ⚡ DISABLED: We now rely on DynamicGuiBuilder's 'Fold Sync' engine 
+        # ⚡ DISABLED: We now rely on DynamicGuiBuilder's 'Fold Sync' engine
         # which detects explicit OcaFold widgets in real-time.
         # This prevents OcaBlocks with columns from generating phantom folds.
-        return 
+        return
 
     def _load_default_background(self):
         """Helper to specifically get the background config from the default panel."""

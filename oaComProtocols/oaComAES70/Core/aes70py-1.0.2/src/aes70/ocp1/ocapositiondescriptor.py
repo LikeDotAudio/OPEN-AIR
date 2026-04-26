@@ -2,13 +2,12 @@
 This file is part of aes70py.
 This file has been generated.
 """
+from ..types.ocapositiondescriptor import OcaPositionDescriptor as type
 from .fixedlengtharray import FixedLengthArray
 from .ocafloat32 import OcaFloat32
 from .ocapositioncoordinatesystem import OcaPositionCoordinateSystem
 from .ocapositiondescriptorfieldflags import OcaPositionDescriptorFieldFlags
 from .struct import Struct
-
-from ..types.ocapositiondescriptor import OcaPositionDescriptor as type
 
 OcaPositionDescriptor = Struct(
   {

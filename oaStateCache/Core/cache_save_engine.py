@@ -4,11 +4,13 @@
 #
 # Description: Brief summary of purpose
 
-import threading
 import queue
+import threading
 import time
-from ..FileReaders import cache_io_handler
+
 import oaOchestration.Constants.project_paths as app_constants
+
+from ..FileReaders import cache_io_handler
 
 try:
     from oaRustCore.oa_disk_flusher_rs import DiskFlusher
@@ -23,15 +25,15 @@ class CacheSaveEngine:
         self.cache = cache_ref
         self.logger = logger
         self.debug = debug
-        
+
         self.queue = queue.Queue()
         self.pending_deltas = {}
         self.delta_lock = threading.Lock()
-        
+
         self.last_activity_time = time.time()
         self.debounce_delay = 2.0
         self.max_stale_time = 30.0
-        
+
         self.thread = threading.Thread(target=self._worker, daemon=True, name="StateCache_Saver")
         self.thread.start()
 
@@ -60,19 +62,19 @@ class CacheSaveEngine:
                     if self.pending_deltas and (now - self.last_activity_time >= self.debounce_delay or now - last_commit >= self.max_stale_time):
                         cnt = len(self.pending_deltas)
                         self.cache.update(self.pending_deltas); self.pending_deltas.clear()
-                        
+
                         if flusher_instance:
                             # ⚡ FIX: Explicitly convert to dict and ensure it's a PyDict-compatible object
                             if hasattr(self.cache, 'to_dict'):
                                 cache_dict = self.cache.to_dict()
                             else:
                                 cache_dict = dict(self.cache.items()) if hasattr(self.cache, 'items') else dict(self.cache)
-                                
+
                             flusher_instance.flush_async(cache_dict, str(app_constants.DEVICE_STATE_CACHE_PATH))
                         else:
                             cache_dict = self.cache.to_dict() if hasattr(self.cache, 'to_dict') else self.cache
                             cache_io_handler.save_cache(cache_dict)
-                            
+
                         last_commit = now
                         if self.debug: self.logger.success(f"💾✍️ [CACHE] Debounced Commit: {cnt} deltas saved.")
             except Exception: self.logger.exception("🧠💾❌ [ERROR] State cache save worker failed")

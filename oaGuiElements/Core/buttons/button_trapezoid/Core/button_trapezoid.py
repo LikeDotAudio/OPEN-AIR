@@ -4,33 +4,33 @@
 #
 # Description: Modularized dynamic, theme-aware trapezoidal button.
 
-import tkinter as tk
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
-from loguru import logger
+import tkinter as tk
+
+from oaConfigurationManager.FileReaders.config_reader import Config
 
 # --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import builder_logger
-from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import matrix_log
+
 app_constants = Config.get_instance()
 
-from oaStyle.Core.style import THEMES, DEFAULT_THEME
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 from oaGui.Methods.i18n_utils import get_text
+from oaGuiBuilder.Core.base_widget_creator import BaseWidgetCreator
 from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
+from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+
+from .trapezoid_interaction_mixin import TrapezoidInteractionMixin
 
 # --- EXTRACTED CORE MODULES ---
-from ..trapezoid_renderer_mixin import TrapezoidRendererMixin
-from ..trapezoid_interaction_mixin import TrapezoidInteractionMixin
+from .trapezoid_renderer_mixin import TrapezoidRendererMixin
 
-from oaGuiBuilder.Core.base_widget_creator import BaseWidgetCreator
 
 class TrapezoidButton(tk.Canvas, TrapezoidRendererMixin, TrapezoidInteractionMixin):
     """
     A self-contained Trapezoid Button widget that manages its own state and interaction.
     Refactored to eliminate redundant parameter passing (Data Trampolining).
     """
-    def __init__(self, parent, variable, config, label, path, state_mirror_engine, 
+    def __init__(self, parent, variable, config, label, path, state_mirror_engine,
                  base_mqtt_topic_from_path, subscriber_router, **kwargs):
         self.config_data = config
         self.variable = variable
@@ -41,12 +41,12 @@ class TrapezoidButton(tk.Canvas, TrapezoidRendererMixin, TrapezoidInteractionMix
         self.subscriber_router = subscriber_router
         self.is_latching = config.get("latching", False)
         self._is_pressed = False
-        
+
         # Extract dimensions
         width = config.get("width", 80)
         height = config.get("height", 50)
         full_height = height + (25 if label else 0)
-        
+
         # Background handling
         p_bg = kwargs.pop("bg", None)
         if p_bg is None:
@@ -54,9 +54,9 @@ class TrapezoidButton(tk.Canvas, TrapezoidRendererMixin, TrapezoidInteractionMix
             except: p_bg = "#2b2b2b"
         if not p_bg or not p_bg.startswith("#"): p_bg = "#2b2b2b"
 
-        super().__init__(parent, bd=0, highlightthickness=0, relief="flat", 
+        super().__init__(parent, bd=0, highlightthickness=0, relief="flat",
                          width=width, height=full_height, bg=p_bg, **kwargs)
-        
+
         # Bindings
         self.bind("<Button-1>", self._on_press)
         self.bind("<ButtonRelease-1>", self._on_release)
@@ -64,7 +64,7 @@ class TrapezoidButton(tk.Canvas, TrapezoidRendererMixin, TrapezoidInteractionMix
 
         # State Sync
         self.variable.trace_add("write", lambda *a: self.render_and_broadcast())
-        
+
         if self.path and self.state_mirror_engine:
             topic = self.state_mirror_engine.register_widget(
                 self.path, self.variable, self.base_mqtt_topic_from_path, self.config_data)
@@ -89,7 +89,7 @@ class TrapezoidButton(tk.Canvas, TrapezoidRendererMixin, TrapezoidInteractionMix
     def _trigger_redraw(self):
         """Prepares state and calls the renderer mixin."""
         current_face = self.config_data.get("color", "#8B0000")
-        
+
         # Attempt to sample parent background for transparency-like feel
         try:
             p_bg = self.master.cget("bg")
@@ -113,12 +113,12 @@ class BuilderButtonTrapezoidCreator(BaseWidgetCreator, TransparencyMixin):
 
     def _assemble_ui(self, parent_widget, config_data, context, **kwargs):
         """Implementation of the Template Method for Trapezoid Button assembly."""
-        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️🔘 [BUILDER] Entering _assemble_ui", level="TRACE")
-        
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🔬🏗️🔘 [BUILDER] Entering _assemble_ui", level="TRACE")
+
         label = get_text(get_text(config_data.get('label_active')), get_text(config_data.get('label'), ""))
         button_text = config_data.get("button_text", "")
         if button_text: config_data["button_text"] = button_text[:3]
-        
+
         path = config_data.get("path")
 
         # Context Extraction
@@ -133,7 +133,7 @@ class BuilderButtonTrapezoidCreator(BaseWidgetCreator, TransparencyMixin):
 
         # Instantiate the specialized widget class
         button = TrapezoidButton(
-            parent_widget, state_var, config_data, label, path, 
+            parent_widget, state_var, config_data, label, path,
             state_mirror_engine, base_mqtt_topic_from_path, subscriber_router
         )
 

@@ -4,11 +4,14 @@
 #
 # Description: Unit tests for asset_cache.py
 
+import pathlib
 import unittest
 from unittest.mock import MagicMock, patch
-import pathlib
+
 from PIL import Image
-from oaGuiManager.Core.factory.asset_cache import AssetCacheManager, _MEMORY_ASSET_CACHE
+
+from oaGuiManager.Core.factory.asset_cache import _MEMORY_ASSET_CACHE, AssetCacheManager
+
 
 class TestAssetCacheManager(unittest.TestCase):
     """Verifies that procedurally generated assets are correctly cached to memory and disk."""
@@ -29,16 +32,16 @@ class TestAssetCacheManager(unittest.TestCase):
     def test_save_to_cache(self, mock_cache_dir, mock_mkdir):
         """OPERATE: Save image. CHECK: Verify it's in memory and saved to disk."""
         mock_cache_dir.__truediv__.return_value = pathlib.Path("/tmp/mock_asset.png")
-        
+
         mock_image = MagicMock(spec=Image.Image)
         config = {"color": "red"}
-        
+
         AssetCacheManager.save_to_cache("btn", 100, 50, config, mock_image)
-        
+
         # Verify memory cache
         asset_hash = AssetCacheManager.get_asset_hash("btn", 100, 50, config)
         self.assertIn(asset_hash, _MEMORY_ASSET_CACHE)
-        
+
         # Verify disk save call on the image object itself
         mock_image.save.assert_called_once()
 
@@ -49,12 +52,12 @@ class TestAssetCacheManager(unittest.TestCase):
         mock_image = MagicMock(spec=Image.Image)
         config = {"color": "red"}
         asset_hash = AssetCacheManager.get_asset_hash("btn", 100, 50, config)
-        
+
         # Manually seed memory cache
         _MEMORY_ASSET_CACHE[asset_hash] = mock_image
-        
+
         loaded = AssetCacheManager.load_from_cache("btn", 100, 50, config)
-        
+
         # Verify it came from memory
         self.assertEqual(loaded, mock_image)
         mock_open.assert_not_called()

@@ -7,14 +7,14 @@
 #
 # Version 20260331.2230.1
 
+import concurrent.futures
 import queue
 import threading
-import time
-import concurrent.futures
-from .constants import LOCAL_DEBUG, app_constants
-from oaLogging.Core.logger import router_logger, logger
+
+from oaLogging.Core.logger import logger
 from oaLogging.Methods.matrix_gate import matrix_log
-from oaConfigurationManager.Entry import Config
+
+from .constants import app_constants
 
 try:
     from oaRustCore.oa_core_router_rs import CoreRouter as RustCoreRouter
@@ -24,12 +24,13 @@ except ImportError:
     HAS_RUST_ROUTER = False
 
 # Modular Subsystem Imports
-from .ingest import normalize_and_ingest, create_silent_message
 from .dispatch import dispatch_message
+from .dpi import investigate_packet
+from .ingest import create_silent_message, normalize_and_ingest
+from .monitor import Monitor
 from .settle import SettleManager
 from .strategy import calculate_strategy, calculate_ui_tags
-from .dpi import investigate_packet
-from .monitor import Monitor
+
 
 class ProtocolRouter:
     """
@@ -42,25 +43,25 @@ class ProtocolRouter:
         if hasattr(self, "_initialized"):
             return
         self._initialized = True
-        
+
         # ⚡ STABILITY OVERRIDE: Use Python native queues for complex object passing
         # Rust core router is reserved for high-speed numeric/primitive paths.
         self.inbound_queue = queue.Queue()
         self.outbound_queue = queue.Queue()
-        
+
         # ⚡ NATIVE ACCELERATION: Rust core router for high-speed paths.
         self.rust_router = RustCoreRouter() if HAS_RUST_ROUTER else None
 
         self._running = False
         self._dispatch_threads = 4
         self._executor = None
-        
+
         self.mib_cache = {}
         self.osc_cache = {}
-        
+
         self.monitor = Monitor(self.GUID)
         self.settle_manager = SettleManager(self.ingest)
-        
+
         self.mqtt_manager = None
         self.splinker_manager = None
         self.osc_manager = None
@@ -68,12 +69,12 @@ class ProtocolRouter:
         self.snmp_manager = None
         self.nmos_manager = None
         self.smpte2138_manager = None
-        
-        # ⚡ PROTOCOL ROUTING MATRIX (N x N): 
+
+        # ⚡ PROTOCOL ROUTING MATRIX (N x N):
         # Controls which source protocols (Rows) are allowed to dispatch to destination protocols (Cols).
         # "anything can route to anything but itself" - Standard loopback prevention.
         self.protocols = ["MQTT", "OSC", "MIDI", "SNMP", "REST", "SMPTE2138", "AES70", "EMBER", "NMOS", "VISA", "GUI", "CUSTOM"]
-        
+
         # Emoji mapping for strategy generation
         self.protocol_emojis = {
             "MQTT": "🚀", "OSC": "🅾️", "MIDI": "🎹", "SNMP": "Ⓢ", "REST": "🌐",
@@ -98,17 +99,17 @@ class ProtocolRouter:
         # This allows protocols to free-run asynchronously without central bridging.
         self.ingest_enabled = {p: False for p in self.protocols}
         self.egress_enabled = {p: False for p in self.protocols}
-        
+
         # ⚡ V3.1.25 LEGACY COMPATIBILITY: Restore N x N Routing Matrix
         # Many UI components still expect this structure for granular visualization.
         self.routing_matrix = {source: {destination: False for destination in self.protocols} for source in self.protocols}
         # Standard loopback prevention
         for p in self.protocols:
             self.routing_matrix[p][p] = False
-        
+
         # ⚡ PROTOCOL ROUTING (DEPRECATED)
         self.state_cache = None
-        self.is_active = True 
+        self.is_active = True
 
     def _save_routing_config(self, proto, type, enabled):
         """Persists enablement state to config.ini."""
@@ -134,7 +135,7 @@ class ProtocolRouter:
         # ⚡ OPTIMIZATION: Double-checked locking to avoid lock overhead in the fast path.
         if not force_reload and cls._instance is not None:
             return cls._instance
-            
+
         with cls._lock:
             if force_reload:
                 cls._instance = None
@@ -145,15 +146,15 @@ class ProtocolRouter:
     def start(self):
         if self._running: return
         self._running = True
-        
+
         # ⚡ LEADERSHIP: Force initial active state to ensure all managers start as PRIMARY
         self.set_active_state(True)
-        
+
         self._executor = concurrent.futures.ThreadPoolExecutor(max_workers=self._dispatch_threads, thread_name_prefix="Router-Dispatch")
-        
+
         threading.Thread(target=self._ingest_loop, daemon=True, name="Router-Ingest").start()
         threading.Thread(target=self._dispatch_loop, daemon=True, name="Router-Dispatch-Master").start()
-        
+
         matrix_log("comms", "broker", "start", f"▶️▶️▶️ [START] Protocol Router Active (GUID: {self.GUID}).", "SUCCESS")
 
     def stop(self):
@@ -175,10 +176,10 @@ class ProtocolRouter:
     def set_active_state(self, active):
         if self.is_active == active: return
         self.is_active = active
-        
+
         state_label = "PRIMARY" if active else "SHADOW"
         matrix_log("comms", "broker", "set_active_state", f"🔄 [FAILOVER] Protocol Router transitioning to {state_label} mode.", "INFO")
-        
+
         managers = [self.osc_manager, self.midi_manager, self.snmp_manager, self.smpte2138_manager]
         for mgr in managers:
             if not mgr: continue
@@ -203,11 +204,11 @@ class ProtocolRouter:
         """Updates the Hub-and-Spoke enablement maps and the routing matrix."""
         s_up = str(source).upper()
         d_up = str(destination).upper()
-        
+
         # Enable/Disable Egress to the destination
         if d_up in self.egress_enabled:
             self.egress_enabled[d_up] = enabled
-        
+
         # Enable/Disable Ingress from the source
         if s_up in self.ingest_enabled:
             self.ingest_enabled[s_up] = enabled
@@ -215,7 +216,7 @@ class ProtocolRouter:
         # ⚡ LEGACY COMPATIBILITY: Update the N x N routing matrix
         if s_up in self.routing_matrix and d_up in self.routing_matrix[s_up]:
             self.routing_matrix[s_up][d_up] = enabled
-            
+
         matrix_log("comms", "broker", "set_routing_state", f"🔄 [ROUTING] {s_up} -> {d_up} set to {enabled}.", "INFO")
 
     def set_topic_routing(self, source, destination, send_topic=None, sub_topic=None):
@@ -239,19 +240,18 @@ class ProtocolRouter:
         Checks egress enablement and the 'Subscribe' topic filters.
         """
         s_up = str(source).upper()
-        
-        import fnmatch
+
         emojis = []
         for destination in self.protocols:
             if not self.egress_enabled.get(destination, False):
                 continue
-            
+
             # (No topic filtering in hub-and-spoke model)
             emojis.append(self.protocol_emojis.get(destination, destination))
-            
+
         if not emojis:
             return "IGNORE (ROUTING DISABLED)"
-            
+
         return " ".join(emojis)
 
     def register_cache_observer(self, cb): self.monitor.register_cache_observer(cb)
@@ -267,7 +267,7 @@ class ProtocolRouter:
         # ⚡ ARCHITECTURAL CHOICE: Allow all ingest so messages appear in the firehose.
         # Routing gating is now handled at the Dispatch phase via the N x N matrix.
         normalize_and_ingest(
-            transport_source, topic, value, metadata, 
+            transport_source, topic, value, metadata,
             self.GUID, self.settle_manager, self.inbound_queue,
             self._ingest_silent, self.state_cache, self.rust_router,
             self.is_active
@@ -275,7 +275,7 @@ class ProtocolRouter:
 
     def _ingest_silent(self, transport_source, topic, value, meta):
         # ⚡ V3.1.5 PIPELINE SYNC:
-        # Silent messages (Boot sequence) must still pass through the pipeline 
+        # Silent messages (Boot sequence) must still pass through the pipeline
         # to ensure they are normalized with GUIDs and UI tags for the Command Router.
         message = create_silent_message(transport_source, topic, value, meta, self.GUID, self.rust_router)
         self._process_message_pipeline(message)
@@ -283,7 +283,7 @@ class ProtocolRouter:
     def _fetch_next_inbound(self):
         # ⚡ DRAIN: If messages are in the Rust router, we must drain them to prevent leaks.
         # For now, we still use the Python inbound_queue as the primary source of truth.
-        
+
         # TODO: BUG: The rust_router drain loop causes the ingest pipeline to hang for
         # some message types (e.g. MIDI). Disabling until the Rust component can be fixed.
         # if self.rust_router and self.rust_router.inbound_len() > 0:
@@ -298,23 +298,23 @@ class ProtocolRouter:
 
     def _process_message_pipeline(self, message):
         investigate_packet(message, self.mib_cache)
-        
+
         strategy = calculate_strategy(message)
         message["strategy"] = strategy
 
         # if self.splinker_manager:
         #     try: self.splinker_manager.process_router_event(message)
-        #     except Exception as e: 
+        #     except Exception as e:
         #         matrix_log("comms", "broker", "_process_pipeline", f"🔗🚫🛑 [ROUTER] Splinker Error: {e}", "ERROR")
 
         message["ui_tags"] = calculate_ui_tags(message, self.GUID)
-        
+
         self.monitor.append_to_firehose(message)
         self.monitor.broadcast_to_observers(message)
-        
+
         val_str = str(message['value'])[:100] + ("..." if len(str(message['value'])) > 100 else "")
         matrix_log("comms", "broker", "_process_pipeline", f"📥📡📤 [ROUTER] {strategy} >> {message['topic']}: {val_str}", "DEBUG")
-        
+
         self._dispatch_by_strategy(strategy, message)
 
     def _dispatch_by_strategy(self, strategy, message):
@@ -327,7 +327,7 @@ class ProtocolRouter:
                 message = self._fetch_next_inbound()
                 if message is None: continue
                 self._process_message_pipeline(message)
-            except Exception as e: 
+            except Exception as e:
                 matrix_log("comms", "broker", "_ingest_loop", f"📥🚫🛑 [ROUTER] Ingest Error: {e}", "ERROR")
 
     def _dispatch_loop(self):
@@ -338,7 +338,7 @@ class ProtocolRouter:
                     message = self.outbound_queue.get(timeout=0.1)
                 except queue.Empty:
                     continue
-                
+
                 # Prepare manager registry for the dispatcher
                 managers = {
                     "mqtt": self.mqtt_manager,
@@ -348,10 +348,10 @@ class ProtocolRouter:
                     "nmos": self.nmos_manager,
                     "smpte2138": self.smpte2138_manager
                 }
-                
+
                 if self._running:
                     self._executor.submit(
-                        dispatch_message, 
+                        dispatch_message,
                         message, managers,
                         self.is_active
                     )

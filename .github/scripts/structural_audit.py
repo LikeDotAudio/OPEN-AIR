@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-import os
 import sys
 from pathlib import Path
 
@@ -10,8 +9,8 @@ from pathlib import Path
 # Description: Structural Architect: Deep Audit of oa* modules into the 12-folder Encapsulated Module standard.
 
 STANDARD_SUBFOLDERS = [
-    "Core", "Workers", "Managers", "Methods", "Constants", 
-    "Tests", "Documentation", "Assets", "Interface", 
+    "Core", "Workers", "Managers", "Methods", "Constants",
+    "Tests", "Documentation", "Assets", "Interface",
     "Hooks", "FileReaders", "FileWriters"
 ]
 
@@ -20,16 +19,16 @@ FORBIDDEN_ROOT_FILES = ["__init__.py"] # Though some modules have it, the mandat
 
 def audit_module(module_path: Path):
     errors = []
-    
+
     # 1. Check for standard subfolders
     for subfolder in STANDARD_SUBFOLDERS:
         if not (module_path / subfolder).is_dir():
             errors.append(f"Missing standard subfolder: {subfolder}")
-            
+
     # 2. Check for Entry.py
     if not (module_path / "Entry.py").is_file():
         errors.append("Missing Entry.py gatekeeper")
-        
+
     # 3. Check for unauthorized files in root
     root_files = [f for f in module_path.iterdir() if f.is_file()]
     for f in root_files:
@@ -37,26 +36,26 @@ def audit_module(module_path: Path):
             # We allow .gitignore or other hidden files if they exist, but GEMINI.md is strict.
             if not f.name.startswith('.'):
                 errors.append(f"Unauthorized file in module root: {f.name}")
-                
+
     return errors
 
 def main():
     project_root = Path(__file__).parent.parent.parent
     oa_modules = [d for d in project_root.iterdir() if d.is_dir() and d.name.startswith("oa")]
-    
+
     # Exclude Vaults as per UltraFolder.toml (they are flat)
-    VAULTS = ["oaGuiDefinitions", "oaDataRunningFiles", "oaDataLogs", "oaDataCache", "oaDataSplinks", "oaDataTests"]
-    
+    VAULTS = ["oaGuiDefinitions", "oaDataRunningFiles", "oaDataLogs", "oaDataCache", "oaDataSplinks", "oaDataTests", "oaRustCore"]
+
     # Filter out vaults and nested modules (like oaComProtocols.oaComVisa - wait, those are subdirs)
     # The session context shows oaComProtocols contains sub-modules.
-    
+
     all_errors = {}
-    
+
     modules_to_check = []
     for mod in oa_modules:
         if mod.name in VAULTS:
             continue
-        
+
         # Special handling for oaComProtocols which contains nested oa* modules
         if mod.name == "oaComProtocols":
             for submod in mod.iterdir():

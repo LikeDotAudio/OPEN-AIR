@@ -1,20 +1,19 @@
-from oaLogging.Methods.matrix_gate import matrix_log
+import datetime
+import inspect
+
 # oaComProtocols.oaComVisa/Workers/logic_connect_instrument.py
 # Author: Anthony Peter Kuzub
 # Version: 20260322.1130.1
 #
 # Description: Provides the logic for connecting to a VISA instrument, managing the lifecycle of the connection through PyVISA and instrument identification via SCPI *IDN? queries.
-
 import pyvisa
-import inspect
-import datetime
+
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = False
-from oaLogging.Core.logger import initialize_logging, set_log_directory, visa_logger
-from loguru import logger
-
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Core.logger import visa_logger
 
 app_constants = Config.get_instance()
 
@@ -129,7 +128,7 @@ class VisaConnector:
             )
             self.gui_publisher._publish_status("connected", True)
             self.gui_publisher._publish_status("disconnected", False)
-            self.gui_publisher._publish_status("CONNECTED", "CONNECTED") 
+            self.gui_publisher._publish_status("CONNECTED", "CONNECTED")
 
             return self.inst
         except Exception as e:

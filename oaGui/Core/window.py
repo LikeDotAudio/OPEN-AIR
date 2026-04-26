@@ -1,19 +1,17 @@
-from oaLogging.Methods.matrix_gate import matrix_log
-from oaGui.Methods.i18n_utils import get_text
+import inspect
+
 # Core/window.py
 # Author: Anthony Peter Kuzub
 # Version: 20250821.200641.1
 #
 # Description: oaGui/Assets/window_manager.py
-
 import tkinter as tk
 from tkinter import ttk
-import inspect
-import os
+
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = False
-from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
 from oaConfigurationManager.FileReaders.config_reader import Config
@@ -128,7 +126,7 @@ class WindowManager:
 
             matrix_log("ui", "gui_shell", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🖥️✅ Tab '{tab_text}' has been liberated into its own Toplevel window!", "SUCCESS")
 
-        except Exception as e:
+        except Exception:
             if LOCAL_DEBUG:
                 logger.exception("❌ Error tearing off tab")
 

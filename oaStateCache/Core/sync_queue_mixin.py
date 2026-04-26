@@ -7,7 +7,9 @@
 import queue
 import threading
 import tkinter as tk
+
 from loguru import logger
+
 
 class SyncQueueMixin:
     """Manages the UI update queue and the background registration worker."""
@@ -17,7 +19,7 @@ class SyncQueueMixin:
         self.update_queue = queue.Queue()
         self._processing_scheduled = False
         self._schedule_lock = threading.Lock()
-        
+
         self._reg_thread = threading.Thread(target=self._registration_worker, daemon=True)
         self._reg_thread.start()
 
@@ -58,6 +60,6 @@ class SyncQueueMixin:
                 try: tk_var.set(value)
                 finally: self._silent_update = False
             except queue.Empty: break
-        
+
         if not self.update_queue.empty():
             self._schedule_queue_processing()

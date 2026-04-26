@@ -1,19 +1,20 @@
-from typing import Optional
 from dataclasses import dataclass
-from aes70.ocp1.pdu import PDU
+from struct import pack_into, unpack_from
+
 from aes70.ocp1.encoded_arguments import EncodedArguments
-from struct import  pack_into, unpack_from
+from aes70.ocp1.pdu import PDU
+
 
 @dataclass
 class Response(PDU):
     handle: int
     status_code: int
     param_count: int
-    parameters: Optional[bytes]
+    parameters: bytes | None
 
     message_type: int = 3
 
-    def __init__(self, handle: int = 0, status_code: int = 0, param_count: int = 0, parameters: Optional[bytes] = None) -> None:
+    def __init__(self, handle: int = 0, status_code: int = 0, param_count: int = 0, parameters: bytes | None = None) -> None:
         self.handle = handle
         self.status_code = status_code
         self.param_count = param_count

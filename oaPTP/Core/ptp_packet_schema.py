@@ -5,7 +5,17 @@
 # Description: Brief summary of purpose
 
 try:
-    from scapy.all import UDP, Packet, ByteField, ShortField, XShortField, LongField, StrFixedLenField, BitField, bind_layers
+    from scapy.all import (
+        UDP,
+        BitField,
+        ByteField,
+        LongField,
+        Packet,
+        ShortField,
+        StrFixedLenField,
+        XShortField,
+        bind_layers,
+    )
     try:
         from scapy.contrib.ptp import PTP
         SCAPY_AVAILABLE = True
@@ -26,7 +36,7 @@ try:
             ]
             def guess_payload_class(self, payload): return Packet.guess_payload_class(self, payload)
         SCAPY_AVAILABLE = True
-    
+
     # Bind PTP to UDP ports 319 (event) and 320 (general)
     bind_layers(UDP, PTP, dport=319); bind_layers(UDP, PTP, dport=320)
     bind_layers(UDP, PTP, sport=319); bind_layers(UDP, PTP, sport=320)

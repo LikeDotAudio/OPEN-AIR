@@ -1,19 +1,18 @@
 # circular_motion_displacement_potentiometer/CMDP_tester.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 20260315.Modular.1
 #
 # Description: Modularized CMPD Tester Application.
 
+import random
 import tkinter as tk
 from tkinter import ttk
-import random
+
+from core.cmdp_group_mixin import CMDPGroupMixin
+from core.cmdp_interaction_mixin import CMDPInteractionMixin
 
 # --- EXTRACTED CORE MODULES ---
-from core.cmdp_math import CircularMath
-from core.ltp_fader import LTPFader, NEAR_RADIUS, FAR_RADIUS, ACCENT_COLOR
-from core.cmdp_interaction_mixin import CMDPInteractionMixin
-from core.cmdp_group_mixin import CMDPGroupMixin
+from core.ltp_fader import ACCENT_COLOR, FAR_RADIUS, NEAR_RADIUS, LTPFader
 
 GROUPS_DATA = [
     { "name": "Drums", "color": "#FF4444", "count": 12 },
@@ -42,12 +41,12 @@ class MultiFaderApp(tk.Tk, CMDPInteractionMixin, CMDPGroupMixin):
         super().__init__()
         self.title("CMPD - 48 Channel Array - Python Prototype")
         self.geometry("1400x900"); self.configure(bg="#222222")
-        
+
         self.groups = GROUPS_DATA
         self.center_x, self.center_y = 600, 450
         self.active_fader = None; self.hovered_fader = None
         self.selected_group = -1; self.group_drag_state = None
-        
+
         self._setup_sidebar()
         self._setup_canvas()
         self._initialize_faders()
@@ -55,21 +54,21 @@ class MultiFaderApp(tk.Tk, CMDPInteractionMixin, CMDPGroupMixin):
 
     def _setup_sidebar(self):
         sidebar = tk.Frame(self, bg="#333333", width=200); sidebar.pack(side=tk.RIGHT, fill=tk.Y)
-        
+
         # 1. Group List
         tk.Label(sidebar, text="GROUPS", bg="#333", fg=ACCENT_COLOR, font=("Arial", 10, "bold")).pack(pady=5)
         self.group_labels, self.group_vars, self.group_buttons = [], [], []
         for idx, grp in enumerate(self.groups):
             f = tk.Frame(sidebar, bg="#333"); f.pack(fill=tk.X, padx=2, pady=2)
             iv = tk.BooleanVar(value=True); self.group_vars.append(iv)
-            
+
             btn = tk.Button(f, text="👁", bg=ACCENT_COLOR, width=3, bd=0, command=lambda i=idx: self.click_group_vis(i))
             btn.pack(side=tk.LEFT, padx=2); btn.bind("<Double-1>", lambda e, i=idx: self.solo_group(i))
             self.group_buttons.append(btn)
-            
+
             lbl = tk.Label(f, text=grp["name"], bg="#333", fg=grp["color"], width=12, anchor="w", cursor="hand2")
             lbl.pack(side=tk.LEFT, fill=tk.X, expand=True); self.group_labels.append(lbl)
-            
+
             lbl.bind("<Button-2>", lambda e, i=idx: self.on_group_drag_start(e, i))
             lbl.bind("<B2-Motion>", self.on_group_drag_move)
             lbl.bind("<ButtonRelease-2>", lambda e: setattr(self, 'group_drag_state', None))

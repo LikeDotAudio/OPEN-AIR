@@ -1,19 +1,17 @@
 import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
+import time
+
 # Core/visa_safe_query.py
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: Brief summary of purpose
-
 import orjson
-import time
-
-# --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory
-from loguru import logger
 
 from oaConfigurationManager.FileReaders.config_reader import Config
+
+# --- Standard Debug Logging Setup ---
+from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
@@ -44,12 +42,12 @@ def query_safe(proxy, command, correlation_id="N/A"):
 
     # ⚡ DIRECT CALL: Split query into write + polling read for Zero Exception
     proxy.inst.write(command)
-    
+
     # Wait for data to arrive in buffer
     start_wait = time.time()
     while proxy.inst.bytes_in_buffer == 0 and (time.time() - start_wait) < (proxy.inst.timeout / 1000.0):
         time.sleep(0.01)
-    
+
     if proxy.inst.bytes_in_buffer == 0:
         error_message = f"Timeout waiting for response to {command}"
         proxy._publish_proxy_error(message=error_message, command=command)
@@ -57,7 +55,7 @@ def query_safe(proxy, command, correlation_id="N/A"):
         return None
 
     response = proxy.inst.read().strip()
-    
+
     matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ Proxy Log: ✅ Sent query: {command}", "SUCCESS")
     matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ Proxy Log: 💳💳⬇️⬇️ RX Visa Response: Received response: {response}", "DEBUG")
 

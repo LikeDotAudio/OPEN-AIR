@@ -6,28 +6,28 @@ MESSAGE_HEADER_SIZE = 10
 def calculate_message_length(pdus):
     length = MESSAGE_HEADER_SIZE
     message_type = pdus[0].message_type
-    
+
     for pdu in pdus:
         if pdu.message_type != message_type:
             raise ValueError('Cannot combine different types in one message.')
         length += pdu.encoded_length()
-    
+
     return length
 
 
 def encode_message_to(dst: bytearray, pos: int, pdus, offset=0, end=None):
     if end is None:
         end = len(pdus)
-    
+
     count = end - offset
     #print("sending " + str(count) + " pdus")
     #print("pos is ", pos)
     if not (count <= 0xFFFF):
         raise ValueError('Too many PDUs.')
-    
+
     dst[pos] = 0x3B
     pos += 1
-    
+
     start_pos = pos
     struct.pack_into('!H', dst, pos, 1)
     pos += 2
@@ -51,14 +51,14 @@ def encode_message_to(dst: bytearray, pos: int, pdus, offset=0, end=None):
 def encode_message(a):
     if not isinstance(a, list):
         a = [a]
-    
+
     length = calculate_message_length(a)
     buf = bytearray(length)
-    
+
     pos = encode_message_to(buf, 0, a)
-    
+
     if pos != length:
         raise ValueError('Message length mismatch.')
-    
+
     return buf
 

@@ -1,7 +1,10 @@
 # Required dependencies and imports
-from aes70.utf8 import utf8_encoded_length, utf8_codepoint_length, buffer_to_utf8, utf8_to_buffer
-from .createtype import Type, create_type
 from struct import pack_into, unpack_from
+
+from aes70.utf8 import buffer_to_utf8, utf8_codepoint_length, utf8_encoded_length, utf8_to_buffer
+
+from .createtype import Type, create_type
+
 
 def count_codepoints(value):
     # Return the number of Unicode codepoints in the string.

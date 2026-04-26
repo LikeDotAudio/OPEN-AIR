@@ -5,11 +5,9 @@
 # Description: Gatekeeper for the oaComSMPTE2138 module.
 
 
-import sys
 import os
 import pathlib
-import signal
-import time
+import sys
 from pathlib import Path
 
 # Ensure project root is in sys.path for direct execution
@@ -46,7 +44,7 @@ def start_bridge(mqtt_connection_manager=None, subscriber_router=None):
         # Handle missing dependencies if not provided by the manager
         mqtt_conn = mqtt_connection_manager if mqtt_connection_manager else MockMqttConnectionManager()
         sub_router = subscriber_router if subscriber_router else MockSubscriberRouter()
-        
+
         _bridge_manager = SMPTE2138BridgeManager(mqtt_conn, sub_router)
         _bridge_manager.start()
         matrix_log("comms", "smpte2138", "start_bridge", "✅ SMPTE2138 Bridge started.", "SUCCESS")
@@ -81,16 +79,16 @@ def stop():
     Stops the SMPTE2138 Bridge and Monitor managers.
     """
     global _bridge_manager, _monitor_manager
-    
+
     matrix_log("comms", "smpte2138", "stop", "🛑 [ST2138] Stopping Bridge and Monitor managers...", "INFO")
-    
+
     if _bridge_manager:
         _bridge_manager.stop()
         _bridge_manager = None
     if _monitor_manager:
         _monitor_manager.stop()
         _monitor_manager = None
-    
+
     matrix_log("comms", "smpte2138", "stop", "✅ SMPTE2138 managers stopped.", "INFO")
 
 def status():
@@ -102,12 +100,12 @@ def status():
         status_report["bridge"] = _bridge_manager.get_status()
     else:
         status_report["bridge"] = {"running": False, "message": "Not initialized"}
-        
+
     if _monitor_manager:
         status_report["monitor"] = _monitor_manager.get_status()
     else:
         status_report["monitor"] = {"running": False, "message": "Not initialized"}
-    
+
     return status_report
 
 # Standalone main() function is removed.
@@ -121,13 +119,12 @@ def run_tests():
     """
     import subprocess
     import sys
-    import os
     from pathlib import Path
 
     print(f"📡📥📥 [TEST] {Path(__file__).parent.name}: Starting automated test discovery...")
     current_dir = Path(__file__).parent.absolute()
     test_dir = current_dir / "Tests"
-    
+
     if not test_dir.exists():
         return True
 
@@ -136,10 +133,10 @@ def run_tests():
         if (project_root / "GEMINI.md").exists():
             break
         project_root = project_root.parent
-    
+
     env = os.environ.copy()
     env["PYTHONPATH"] = str(project_root) + os.pathsep + env.get("PYTHONPATH", "")
-    
+
     try:
         rel_test_dir = os.path.relpath(test_dir, project_root)
         result = subprocess.run(
@@ -168,7 +165,7 @@ if __name__ == "__main__":
     if not run_tests():
         print("❌ [CRITICAL] Tests failed. Aborting execution.")
         sys.exit(1)
-    
+
     # Standalone execution logic
     if len(sys.argv) > 1:
         cmd = sys.argv[1].lower()

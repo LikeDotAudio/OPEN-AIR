@@ -4,8 +4,8 @@
 #
 # Description: Gatekeeper for the oaFileImportCSV module.
 
-import sys
 import os
+import sys
 from pathlib import Path
 
 # Standard project_root resolution
@@ -22,23 +22,24 @@ if str(project_root) not in sys.path:
 
 from oaFileImportCSV.FileReaders.from_csv_unknown import Marker_convert_csv_unknow_report_to_csv
 
+
 def run_tests():
     """
     Discover and run tests in the local Tests/ directory using unittest via subprocess.
     Ensures isolation and proper sys.path handling.
     """
     import subprocess
-    
+
     print(f"📡📥📥 [TEST] {Path(__file__).parent.name}: Starting automated test discovery...")
     test_dir = current_dir / "Tests"
-    
+
     if not test_dir.exists():
         print(f"📡📤📤 [TEST] {Path(__file__).parent.name}: No Tests/ directory found.")
         return True
 
     env = os.environ.copy()
     env["PYTHONPATH"] = str(project_root) + os.pathsep + env.get("PYTHONPATH", "")
-    
+
     try:
         rel_test_dir = os.path.relpath(test_dir, project_root)
         result = subprocess.run(
@@ -75,7 +76,7 @@ if __name__ == "__main__":
     if not run_tests():
         print("❌ [CRITICAL] Tests failed. Aborting execution.")
         sys.exit(1)
-    
+
     # Standalone execution logic
     if len(sys.argv) > 1:
         cmd = sys.argv[1].lower()

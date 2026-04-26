@@ -4,9 +4,12 @@
 #
 # Description: Brief summary of purpose
 
-from PIL import Image, ImageDraw, ImageFilter
 import random
+
+from PIL import Image, ImageDraw, ImageFilter
+
 from oaGuiElements.Methods.utils import PanelUtils
+
 
 class StainsLayer:
     @staticmethod

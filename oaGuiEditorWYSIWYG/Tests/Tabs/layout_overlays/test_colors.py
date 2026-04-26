@@ -15,7 +15,7 @@
 #        self.overlay = ColorsOverlay(self.canvas)
 #
 #        self.root.destroy()
-#        
+#
 #        """Test drawing color swatches next to widgets."""
 #        widget_tree = {
 #            "id": "root", "bbox": (0, 0, 400, 400), "background": "#ffffff",
@@ -24,12 +24,12 @@
 #                {"id": "child2", "bbox": (210, 10, 390, 50), "foreground": "#00ff00"}
 #            ]
 #        }
-#        
+#
 #        self.overlay.draw(widget_tree)
-#        
+#
 #        # Should draw a rectangle for each color property found
 #        self.assertEqual(self.canvas.create_rectangle.call_count, 3)
-#        
+#
 #        # Check that the fill color was set correctly
 #        args, kwargs = self.canvas.create_rectangle.call_args_list[1] # child1
 #        self.assertEqual(kwargs['fill'], '#ff0000')

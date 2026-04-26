@@ -1,16 +1,17 @@
+import inspect
 import os
 
-import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
 # FileReaders/from_soundbase_pdf_v2.py
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: Logic for converting Sound Base PDF files (version 2) into standardized marker format.
-
 import re
+
 import numpy as np
 import pdfplumber
+
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- Native Rust Optimization ---
 try:
@@ -23,6 +24,7 @@ except Exception:
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = False
 from loguru import logger
+
 from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()

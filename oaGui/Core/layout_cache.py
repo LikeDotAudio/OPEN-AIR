@@ -5,6 +5,7 @@
 # Description: Brief summary of purpose
 
 import pathlib
+
 import orjson
 from loguru import logger
 
@@ -27,7 +28,7 @@ class LayoutCacheManager:
                 with open(self._cache_file, "rb") as f:
                     data = orjson.loads(f.read())
                 return self._restore_cache_paths(data)
-            except Exception as e:
+            except Exception:
                 if LOCAL_DEBUG:
                     logger.exception("⚠️ Failed to load layout cache")
         return {}
@@ -39,7 +40,7 @@ class LayoutCacheManager:
             serializable_cache = self._make_cache_serializable(layout_cache)
             with open(self._cache_file, "wb") as f:
                 f.write(orjson.dumps(serializable_cache))
-        except Exception as e:
+        except Exception:
              if LOCAL_DEBUG:
                  logger.exception("⚠️ Failed to save layout cache")
 

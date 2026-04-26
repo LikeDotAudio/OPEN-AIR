@@ -6,7 +6,9 @@
 
 import unittest
 from unittest.mock import MagicMock, patch
+
 from oaComBroker.Core.protocol_router.manager import ProtocolRouter
+
 
 class TestProtocolRouter(unittest.TestCase):
     @patch("oaComBroker.Core.protocol_router.router.RustCoreRouter")
@@ -14,13 +16,13 @@ class TestProtocolRouter(unittest.TestCase):
         # Reset singleton for testing
         ProtocolRouter._instance = None
         self.mock_rust = mock_rust_router.return_value
-        
+
         # ⚡ OPTIMIZATION: Prevent infinite MagicMock ingest loops
         self.mock_rust.pop_inbound.return_value = None
         self.mock_rust.pop_outbound.return_value = None
         self.mock_rust.inbound_len.return_value = 0
         self.mock_rust.outbound_len.return_value = 0
-        
+
         self.router = ProtocolRouter.get_instance(force_reload=True)
         self.mqtt_manager = MagicMock()
         self.router.set_mqtt_manager(self.mqtt_manager)
@@ -38,11 +40,11 @@ class TestProtocolRouter(unittest.TestCase):
     def test_ingest_pushes_to_rust_router(self):
         """Test that ingest pushes messages into the rust router with the correct schema."""
         self.router.ingest("MQTT", "test/topic", "test_value")
-        
+
         # Verify push_inbound was called
         self.assertTrue(self.mock_rust.push_inbound.called)
         message = self.mock_rust.push_inbound.call_args[0][0]
-        
+
         self.assertEqual(message["topic"], "test/topic")
         self.assertEqual(message["value"], "test_value")
         self.assertEqual(message["source"], "MQTT")
@@ -60,9 +62,9 @@ class TestProtocolRouter(unittest.TestCase):
 
     def test_echo_suppression_strategy(self):
         """Test that MQTT messages from our own instance are assigned IGNORE strategy to prevent loops."""
-        from oaComBroker.Core.protocol_router.strategy import calculate_strategy
         from oaComBroker.Core.protocol_router.constants import app_constants
-        
+        from oaComBroker.Core.protocol_router.strategy import calculate_strategy
+
         # 1. External message (Different full_id) should get a valid strategy
         ext_message = {
             "source": "MQTT",
@@ -73,7 +75,7 @@ class TestProtocolRouter(unittest.TestCase):
         }
         ext_strategy = calculate_strategy(ext_message)
         self.assertNotEqual(ext_strategy, "IGNORE (REFLECT)")
-        
+
         # 2. Echo message (Same full_id) should be IGNORED
         echo_message = {
             "source": "MQTT",

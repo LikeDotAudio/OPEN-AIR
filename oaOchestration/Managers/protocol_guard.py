@@ -5,7 +5,9 @@
 # Description: Brief summary of purpose
 
 import functools
+
 from oaLogging.Core.logger import router_logger
+
 
 def protocol_guard(protocol_name):
     """

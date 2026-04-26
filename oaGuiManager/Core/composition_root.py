@@ -4,26 +4,23 @@
 #
 # Description: Composition Root for the UI Partition.
 
-import tkinter as tk
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
-from loguru import logger
+
+from oaComBroker.Core.protocol_router.manager import ProtocolRouter
 
 # --- Standard Debug Logging Setup ---
-
 # --- Framework Imports ---
 from oaComProtocols.oaComMQTT.Managers.mqtt_connection import MqttConnectionManager
 from oaComProtocols.oaComMQTT.Managers.mqtt_subscriber_router import MqttSubscriberRouter
-from oaStateCache.Core.state_cache import StateRegistry
-from oaStateCache.Core.state_mirror_engine import StateMirrorEngine
-from oaComBroker.Core.protocol_router.manager import ProtocolRouter
 
 # --- External Managers ---
 from oaComProtocols.oaComOSC.Managers.osc_manager import OSCManager
-from oaComProtocols.oaComSNMP.Managers.snmp_manager import SNMPManager
-from oaComProtocols.oaComMidi.Managers.midi_manager import MidiManager
 from oaComProtocols.oaComREST.Managers.rest_manager import RESTManager
+from oaLogging.Methods.matrix_gate import matrix_log
 from oaSplinker.Core.splinker import ControlBroker
+from oaStateCache.Core.state_cache import StateRegistry
+from oaStateCache.Core.state_mirror_engine import StateMirrorEngine
+
 
 class UICompositionRoot:
     """
@@ -56,15 +53,15 @@ class UICompositionRoot:
         # 1. Base Communication Layer
         mqtt_conn = MqttConnectionManager()
         sub_router = MqttSubscriberRouter()
-        
+
         # 2. State & Mirroring Layer
         state_cache = StateRegistry(mqtt_conn)
         state_cache.subscriber_router = sub_router
-        
+
         mirror_engine = StateMirrorEngine(
-            base_topic="OPEN-AIR", 
-            subscriber_router=sub_router, 
-            root=self.root, 
+            base_topic="OPEN-AIR",
+            subscriber_router=sub_router,
+            root=self.root,
             state_cache_manager=state_cache
         )
         state_cache.state_mirror_engine = mirror_engine
@@ -72,7 +69,7 @@ class UICompositionRoot:
         # 3. Protocol Routing & Specialized Managers
         protocol_router = ProtocolRouter.get_instance()
         protocol_router.set_mqtt_manager(mqtt_conn)
-        
+
         splinker = ControlBroker.get_instance(state_cache, mqtt_conn)
         protocol_router.set_splinker_manager(splinker)
 
@@ -101,7 +98,7 @@ class UICompositionRoot:
         if self.app_constants.SCAN_MIDI:
             import oaComProtocols.oaComMidi.Entry as midi_entry
             self.services["midi_manager"] = midi_entry.get_manager(state_cache_manager=state_cache, run_bridge=False)
-        
+
         # self.services["midi_manager"] = MidiManager(state_cache, run_bridge=False)
         self.services["rest_manager"] = RESTManager(state_cache, protocol_router)
 

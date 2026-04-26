@@ -4,9 +4,10 @@
 #
 # Description: Brief summary of purpose
 
-from loguru import logger
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
+
+from oaLogging.Methods.matrix_gate import matrix_log
+
 
 class ShowtimeInteractionMixin:
     """
@@ -16,7 +17,7 @@ class ShowtimeInteractionMixin:
     def on_zone_toggle(self, zone_name):
         """Updates selection when a zone button is toggled."""
         matrix_log("UI", "SHOWTIME", inspect.currentframe().f_code.co_name, f"🟢️️️🔵 Zone toggle clicked for: {zone_name}. Current selection: {self.selected_zone}.", level="DEBUG")
-        
+
         if self.selected_zone == zone_name:
             self.selected_zone = None
             self.selected_group = None
@@ -32,7 +33,7 @@ class ShowtimeInteractionMixin:
     def on_group_toggle(self, group_name):
         """Updates selection when a group button is toggled."""
         matrix_log("UI", "SHOWTIME", inspect.currentframe().f_code.co_name, f"🟢️️️🔵 Group toggle clicked for: {group_name}. Current selection: {self.selected_group}.", level="DEBUG")
-        
+
         if self.selected_group == group_name:
             self.selected_group = None
         else:
@@ -51,7 +52,7 @@ class ShowtimeInteractionMixin:
         else:
             if self.selected_device_button:
                 self.selected_device_button.config(style="Custom.TButton")
-            
+
             self.selected_device_button = button
             self.selected_device_button.config(style="Selected.TButton")
 

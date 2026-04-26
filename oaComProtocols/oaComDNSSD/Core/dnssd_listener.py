@@ -2,11 +2,11 @@
 # Author: Gemini (Collaborator)
 # Version: 20260414.1200.1
 
-from zeroconf import ServiceBrowser, Zeroconf
-import threading
-import time
+import json  # For hashing payload
 import socket
-import json # For hashing payload
+
+from zeroconf import ServiceBrowser, Zeroconf
+
 
 class ServiceTypeListener:
     """
@@ -24,7 +24,7 @@ class ServiceTypeListener:
     def add_service(self, zeroconf, type, name):
         # `name` is the new service type found, e.g., "_googlecast._tcp.local."
         self.listener.add_service_type_to_browse(name)
-        
+
     def update_service(self, zeroconf, type, name):
         # Not typically called for service type browsing
         pass
@@ -46,7 +46,7 @@ class DNSSDListener:
         """Adds a new service type to the list of browsed services."""
         if type_ in self.services_being_browsed:
             return
-        
+
         print(f"🕵️ [DNSSD] New service type found: {type_}. Adding to browser.")
         self.services_being_browsed.add(type_)
         browser = ServiceBrowser(self.zeroconf, type_, self)
@@ -63,16 +63,16 @@ class DNSSDListener:
     def remove_service(self, zeroconf, type, name):
         topic = self._create_topic("Removed", type, name)
         payload = {
-            "action": "removed", 
-            "type": type, 
-            "name": name, 
+            "action": "removed",
+            "type": type,
+            "name": name,
             "origin_source": "oaComDNSSD"
         }
         self.known_services.pop(name, None)
         print(f"📉 [DNSSD] Removed: {name} ({type})")
         if self.rx_callback:
             # Pass name as source, and type as summary for clarity
-            self.rx_callback(name, f"Removed {type}", payload) 
+            self.rx_callback(name, f"Removed {type}", payload)
         self.mqtt_publisher.publish(topic, payload)
 
     def add_service(self, zeroconf, type, name):
@@ -88,7 +88,7 @@ class DNSSDListener:
                 except Exception as e:
                     print(f"⚠️ [DNSSD] Could not convert addresses for {name}: {e}")
                     addresses = [] # Ensure addresses is a list
-                    
+
             properties = {}
             if info.properties:
                 for k, v in info.properties.items():
@@ -114,17 +114,17 @@ class DNSSDListener:
                 "properties": properties, # This is the TXT record payload ("package")
                 "origin_source": "oaComDNSSD"
             }
-            
+
             payload_hash = hash(json.dumps(payload, sort_keys=True))
             if self.known_services.get(name) == payload_hash:
                 return  # Skip republishing unchanged records
             self.known_services[name] = payload_hash
-            
+
             topic = self._create_topic("Discovered", type, name)
             print(f"📈 [DNSSD] Discovered/Updated: {name} ({type}) at {addresses}:{info.port}") # Enhanced print statement
             if self.rx_callback:
                 # Pass 'name' as source and 'type' as summary for better differentiation in the GUI
-                self.rx_callback(name, type, payload) 
+                self.rx_callback(name, type, payload)
             self.mqtt_publisher.publish(topic, payload)
 
     def update_service(self, zeroconf, type, name):

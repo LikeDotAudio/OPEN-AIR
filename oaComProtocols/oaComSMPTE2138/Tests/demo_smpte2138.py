@@ -10,7 +10,6 @@
 
 import os
 import sys
-import time
 from unittest.mock import MagicMock
 
 # Ensure we can import the local modules
@@ -18,7 +17,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')
 
 from oaComProtocols.oaComSMPTE2138.Managers.smpte2138_bridge_manager import SMPTE2138BridgeManager
 from oaComProtocols.oaComSMPTE2138.Managers.smpte2138_monitor_manager import SMPTE2138MonitorManager
-from oaComProtocols.oaComSMPTE2138.Interface import param_pb2
+
 
 class MockMqttMessage:
     def __init__(self, topic, payload):
@@ -30,24 +29,24 @@ class MockMqttMessage:
 
 def run_demo():
     print("🚀 [DEMO] Starting oaComProtocols.oaComSMPTE2138 & ST 2138 Monitor Demonstration...")
-    
+
     # 1. Mock the MQTT environment
     mock_mqtt = MagicMock()
     mock_router = MagicMock()
-    
+
     # Capture publications
     published_messages = []
-    
+
     # 2. Initialize the Monitor Manager
     monitor = SMPTE2138MonitorManager(mock_mqtt, mock_router)
-    
+
     # Track monitor callbacks
     decoded_packets = []
     def monitor_callback(topic, data):
         decoded_packets.append((topic, data))
         if "oid" in data:
             print(f"🔗 [MONITOR] Decoded packet from {topic}: {data['oid']} = {data['value']}")
-        
+
     SMPTE2138MonitorManager.register_callback(monitor_callback)
 
     def mock_publish(topic, payload, qos=0, retain=False):
@@ -55,21 +54,21 @@ def run_demo():
         print(f"📡 [OUTBOUND] Published binary payload to: {topic}")
         # Simulate the loopback to the monitor
         monitor._on_smpte2138_traffic(MockMqttMessage(topic, payload))
-        
+
     mock_mqtt.publish = mock_publish
     mock_mqtt.get_client_instance.return_value = mock_mqtt
-    
+
     # 3. Initialize the Bridge Manager
     bridge = SMPTE2138BridgeManager(mock_mqtt, mock_router)
-    
+
     # 4. Simulate an internal "Action"
     test_topic = "oa/action/sig_gen/frequency"
     test_value = 440.0
     print(f"\n📥 [SIMULATION] Internal Action: {test_topic} -> {test_value}")
-    
+
     # Manually trigger the callback
     bridge._on_internal_action(MockMqttMessage(test_topic, str(test_value)))
-    
+
     # 5. Verify and Decode the Output
     if published_messages:
         # Filter for non-status messages for verification

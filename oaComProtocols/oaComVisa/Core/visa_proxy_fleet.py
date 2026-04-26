@@ -1,23 +1,20 @@
-from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
+
 # Core/visa_proxy_fleet.py
 # Author: Gemini Agent
 # Version: 1.0.0
 #
 # Description: Refactored VisaProxy for fleet management, handling device-specific communication via Manager callbacks.
-
-import os
-import inspect
-import pyvisa
-import time
 import queue
 import threading
-import _queue
+import time
 
-# --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
 from oaConfigurationManager.FileReaders.config_reader import Config
+
+# --- Standard Debug Logging Setup ---
+from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
@@ -71,19 +68,19 @@ def _query_safe_fleet(proxy_instance, command, correlation_id="N/A"):
     # ⚡ DIRECT CALL: Assuming hardware state is validated or fatal if not
     # We use write then a polling read for 'Zero Exception' architecture
     proxy_instance.inst.write(command)
-    
+
     # ⚡ POLLING READ: Instead of a blocking query() which might timeout/exception
     # Wait for data to arrive in buffer
     start_wait = time.time()
     while proxy_instance.inst.bytes_in_buffer == 0 and (time.time() - start_wait) < (proxy_instance.inst.timeout / 1000.0):
         time.sleep(0.01)
-    
+
     if proxy_instance.inst.bytes_in_buffer == 0:
         logger.error(f"💳 ℹ️ FleetProxy Log ({proxy_instance.device_serial}): ❌ Timeout waiting for response to {command}")
         return None
 
     response = proxy_instance.inst.read().strip()
-    
+
     matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ FleetProxy Log ({proxy_instance.device_serial}): ✅ Sent query: {command}", "SUCCESS")
     matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ FleetProxy Log ({proxy_instance.device_serial}): 💳💳⬇️⬇️ RX Visa Response: Received response: {response}", "TRACE")
 
@@ -171,7 +168,7 @@ class VisaProxyFleet:
         while True:
             # ⚡ BLOCKING: Consumes zero CPU while waiting for commands
             command_info = self.command_queue.get()
-            
+
             if command_info is None: # The Poison Pill
                 break
 
@@ -185,7 +182,7 @@ class VisaProxyFleet:
                 _write_safe_fleet(self, command)
 
             self.command_queue.task_done()
-            
+
         matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ FleetProxy Log ({self.device_serial}): Command processor worker terminated.", "DEBUG")
 
     def enqueue_command(self, command, query=False, correlation_id="N/A"):

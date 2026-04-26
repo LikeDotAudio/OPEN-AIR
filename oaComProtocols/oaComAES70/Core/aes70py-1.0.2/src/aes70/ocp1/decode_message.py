@@ -1,15 +1,14 @@
+
 from aes70.ocp1.command import Command
 from aes70.ocp1.commandrrq import CommandRrq
+from aes70.ocp1.keepalive import KeepAlive
 from aes70.ocp1.notification import Notification
 from aes70.ocp1.response import Response
-from aes70.ocp1.keepalive import KeepAlive
-
-from typing import List
 
 PDU_TYPES = [Command, CommandRrq, Notification, Response, KeepAlive]
 
 
-def decode_message(data: bytearray, pos: int, ret: List) -> int:
+def decode_message(data: bytearray, pos: int, ret: list) -> int:
     #print(data)
     #print(len(data))
     #print(data.find(b'\x3b'))

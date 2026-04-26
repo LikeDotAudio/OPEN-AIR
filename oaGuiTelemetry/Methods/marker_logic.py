@@ -1,16 +1,16 @@
-from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
+
 # Methods/marker_logic.py
 # Author: Anthony Peter Kuzub
 # Version: 20250821.200641.1
 #
 # Description: A utility module to contain core business logic functions related to marker data
-
 import os
-import inspect
+
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = False
-from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
 from oaConfigurationManager.FileReaders.config_reader import Config
@@ -73,7 +73,7 @@ def calculate_frequency_range(marker_data_list):
         matrix_log("ui", "telemetry", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🟡 No valid frequencies found in marker data.", "DEBUG")
         return None, None
 
-    except Exception as e:
+    except Exception:
         if LOCAL_DEBUG:
             logger.exception("❌ Error in {current_function_name}")
         if LOCAL_DEBUG:

@@ -7,8 +7,11 @@
 
 import unittest
 from unittest.mock import MagicMock
+
 from scapy.all import IP, UDP
+
 from oaPTP.Core.ptp_packet_parser import PTPPacketParser
+
 
 class MockPkt:
     def __init__(self, payload, src_ip="192.168.1.10", dst_ip="224.0.1.129", dport=319):
@@ -44,7 +47,7 @@ class TestPtpParserRust(unittest.TestCase):
         payload[4] = 0x01 # Domain 1
         payload[30] = 0x01
         payload[31] = 0x2C # Seq 300
-        
+
         # Port Identity: 01:02:03:04:05:06:07:08 + Port 123
         payload[20:28] = b"\x01\x02\x03\x04\x05\x06\x07\x08"
         payload[28] = 0x00

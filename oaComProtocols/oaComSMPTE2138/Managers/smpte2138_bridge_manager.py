@@ -1,6 +1,6 @@
 # oaComProtocols.oaComSMPTE2138/Managers/smpte2138_bridge_manager.py
 #
-# Manages the bridge between the internal OPEN-AIR MQTT actions and the 
+# Manages the bridge between the internal OPEN-AIR MQTT actions and the
 # external SMPTE2138 (ST 2138) Protobuf-encoded namespace.
 # Supports remote start/stop control via MQTT and direct ProtocolRouter events.
 #
@@ -16,13 +16,15 @@
 #
 # Version 20260330.1600.1
 
-import os
 import sys
 import threading
 import time
-import orjson
 from pathlib import Path
+
+import orjson
+
 from oaLogging.Core.logger import SMPTE2138_LOGGER
+
 logger = SMPTE2138_LOGGER.bind(protocol="SMPTE2138")
 
 # --- Path Guard for Protobuf Imports ---
@@ -31,15 +33,16 @@ if str(interface_path) not in sys.path:
     sys.path.insert(0, str(interface_path))
 
 # --- Protobuf Imports ---
+from oaComProtocols.oaComMQTT.Managers.mqtt_connection import MqttConnectionManager
+from oaComProtocols.oaComMQTT.Managers.mqtt_subscriber_router import MqttSubscriberRouter
+from oaComProtocols.oaComSMPTE2138.Interface import language_pb2
+from oaComProtocols.oaComSMPTE2138.Interface import constraint_pb2
 from oaComProtocols.oaComSMPTE2138.Interface import param_pb2
-from oaComProtocols.oaComSMPTE2138.Interface import device_pb2
 
 # --- Standard OPEN-AIR Imports ---
 from oaLogging.Core.logger import SMPTE2138_LOGGER
 from oaLogging.Methods.matrix_gate import matrix_log
-from oaConfigurationManager.FileReaders.config_reader import Config
-from oaComProtocols.oaComMQTT.Managers.mqtt_connection import MqttConnectionManager
-from oaComProtocols.oaComMQTT.Managers.mqtt_subscriber_router import MqttSubscriberRouter
+
 
 def _is_debug():
     from oaLogging.Methods.matrix_gate import is_debug_allowed
@@ -51,17 +54,17 @@ class SMPTE2138BridgeManager:
     Includes lifecycle control for enabling/disabling the translation engine.
     """
 
-    def __init__(self, mqtt_connection: MqttConnectionManager, 
+    def __init__(self, mqtt_connection: MqttConnectionManager,
                  subscriber_router: MqttSubscriberRouter):
         self.mqtt = mqtt_connection
         self.router = subscriber_router
         self.slot = 1
-        
+
         # State Control
         self.bridge_enabled = True # Enabled by default
         self._running = False
         self._watchdog_thread = None
-        
+
         # Internal OID mapping
         self.topic_to_oid = {
             "oa/action/sig_gen/frequency": "frequency",
@@ -73,9 +76,9 @@ class SMPTE2138BridgeManager:
             "OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz": "frequency_start",
             "OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz": "frequency_center"
         }
-        
+
         self._setup_subscriptions()
-        
+
         matrix_log("comms", "smpte2138", "__init__", "✅ [BRIDGE] SMPTE2138 Protocol Bridge initialized.", "SUCCESS")
 
     def start(self):
@@ -83,11 +86,11 @@ class SMPTE2138BridgeManager:
         if self._running: return
         self._running = True
         self.bridge_enabled = True
-        
+
         # ⚡ WATCHDOG: Ensures the engine stays alive and fights for connectivity
         self._watchdog_thread = threading.Thread(target=self._auto_start_watchdog, daemon=True, name="ST2138-Watchdog")
         self._watchdog_thread.start()
-        
+
         matrix_log("comms", "smpte2138", "start", "▶️ [BRIDGE] SMPTE2138 Protocol Bridge started (FIGHTING FOR LIFE).", "INFO")
         self._publish_bridge_status()
 
@@ -107,7 +110,7 @@ class SMPTE2138BridgeManager:
                     self.bridge_enabled = True
                     matrix_log("comms", "smpte2138", "_watchdog", "🛡️ [BRIDGE] Watchdog forced bridge reactivation.", "WARNING")
                     self._publish_bridge_status()
-                
+
                 # Periodic status broadcast
                 # Actual publication is handled inside the 'if' above or via status loop
             except Exception as e:
@@ -117,13 +120,13 @@ class SMPTE2138BridgeManager:
     def _setup_subscriptions(self):
         """Registers listeners for internal actions and remote control."""
         # 1. Action Triggers (Raw MQTT fallback / Broad Subscription)
-        # We subscribe to the root namespace to ensure 
+        # We subscribe to the root namespace to ensure
         # that we catch ALL changes even if the ProtocolRouter dispatch is gated.
         self.router.subscribe_to_topic("OPEN-AIR/#", self._on_internal_action)
-        
+
         # 2. Remote Bridge Control (from GUI)
         self.router.subscribe_to_topic("OPEN-AIR/System/Control/SMPTE2138/Bridge", self._on_remote_control)
-        
+
         matrix_log("comms", "smpte2138", "_setup_subscriptions", "👂 [LISTEN] Bridge active and listening for OPEN-AIR/# Actions and Control.", "DEBUG")
 
 
@@ -137,7 +140,7 @@ class SMPTE2138BridgeManager:
             matrix_log("comms", "smpte2138", "handle_router_event", f"📥 [ST2138-IN] topic={topic} enabled={self.bridge_enabled}", "TRACE")
 
         if not self.bridge_enabled: return
-        
+
         # ⚡ V3.1.13 NAMESPACE EXCLUSION:
         # System and Monitor topics should never be mirrored to the ST2138 bus.
         if "/System/" in topic or "/Monitor/" in topic:
@@ -148,7 +151,7 @@ class SMPTE2138BridgeManager:
         # Filter out traffic generated by SMPTE2138 itself
         if meta.get("origin_source") == "SMPTE2138":
             return
-            
+
         # ⚡ ENHANCEMENT: Handle enriched payloads (e.g., from MIDI or REST)
         # If value is a dict, extract the primary numeric or boolean value.
         real_val = value
@@ -171,20 +174,20 @@ class SMPTE2138BridgeManager:
 
         # 2. Resolve OID
         oid = self.topic_to_oid.get(topic)
-        
+
         # ⚡ ARCHITECT'S CHOICE: Mirror the builder hierarchy if structural metadata is present
         if block_name and field_name:
             oid = f"{block_name}/{field_name}"
-        
+
         # ⚡ GENERIC FALLBACK: If no OID is mapped, use a portion of the topic path.
         if not oid:
             # We strip the root namespace to create a relative OID
             oid = topic.replace("OPEN-AIR/", "")
-        
-        if not oid: 
+
+        if not oid:
             # Silent skip for unmapped or empty topics
             return
-        
+
         # ⚡ DEBUG: Log resolved OID
         if _is_debug():
             matrix_log("comms", "smpte2138", "handle_router_event", f"📝 [ST2138-OID] oid={oid} value={real_val} type={type(real_val)}", "DEBUG")
@@ -221,10 +224,10 @@ class SMPTE2138BridgeManager:
         payload.slot = slot
         payload.value.oid = oid
         payload.value.value.float32_value = value
-        
+
         binary_payload = payload.SerializeToString()
         smpte2138_topic = f"st2138/device/{slot}/param/{oid}"
-        
+
         self.mqtt.publish(
             topic=smpte2138_topic,
             payload=binary_payload,
@@ -240,10 +243,10 @@ class SMPTE2138BridgeManager:
         payload.oid = oid
         payload.value.string_value = value
         payload.respond = True
-        
+
         binary_payload = payload.SerializeToString()
         smpte2138_topic = f"st2138/device/{slot}/cmd/{oid}"
-        
+
         self.mqtt.publish(
             topic=smpte2138_topic,
             payload=binary_payload,
@@ -257,11 +260,11 @@ class SMPTE2138BridgeManager:
         try:
             if not message.payload: return
             data = message.get_json_payload()
-            
+
             if "active" in data:
                 new_state = bool(data["active"])
-                
-                # 🛡️ RESILIENCE: If it's a retained message and it's trying to disable us, 
+
+                # 🛡️ RESILIENCE: If it's a retained message and it's trying to disable us,
                 # we ignore it to ensure we start in an ACTIVE state.
                 if message.retain and not new_state:
                     matrix_log("comms", "smpte2138", "_on_remote_control", "🛡️ [BRIDGE] Ignoring retained DISABLE command on startup.", "DEBUG")
@@ -292,13 +295,13 @@ class SMPTE2138BridgeManager:
     def _on_internal_action(self, message):
         """Fallback handler for raw MQTT actions."""
         if not self.bridge_enabled: return
-        
+
         # ⚡ V3.1.22 FEEDBACK LOOP PREVENTION:
         # Ignore messages that are explicitly linked feedback to prevent loops.
         try:
             if not message.payload: return
             data = message.get_json_payload()
-            
+
             # Extract actual value if it's a dict
             value = data
             meta = {}
@@ -307,7 +310,7 @@ class SMPTE2138BridgeManager:
                     return
                 value = data.get("value", data)
                 meta = data
-            
+
             self.handle_router_event(message.topic, value, meta)
         except Exception as e:
             SMPTE2138_LOGGER.error(f"❌ [BRIDGE] MQTT Internal action handling failure: {e}")

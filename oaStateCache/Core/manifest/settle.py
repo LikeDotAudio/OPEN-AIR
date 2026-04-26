@@ -4,9 +4,9 @@
 #
 # Description: Logic for managing the 'is_settled' flag and debounce logic.
 
-import threading
 import logging
-from typing import Callable, Any
+import threading
+from collections.abc import Callable
 
 try:
     from oaRustCore.oa_translator_core_rs import SettleLock as RustSettleLock
@@ -39,7 +39,7 @@ class SettleManager:
         with self._lock:
             if self._timer:
                 self._timer.cancel()
-            
+
     def schedule_settle(self, callback: Callable):
         """
         Schedules a settling broadcast after inactivity.
@@ -50,11 +50,11 @@ class SettleManager:
         with self._lock:
             if self._timer:
                 self._timer.cancel()
-            
+
             # Start a new debounce timer
             self._timer = threading.Timer(self.debounce_ms / 1000.0, callback)
             self._timer.start()
-            
+
     def cancel(self):
         """Cancels any pending settle timer."""
         with self._lock:

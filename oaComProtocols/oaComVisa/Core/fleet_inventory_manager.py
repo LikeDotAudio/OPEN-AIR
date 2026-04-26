@@ -4,7 +4,6 @@
 #
 # Description: Refactored Inventory Manager (Composition over Inheritance).
 
-from loguru import logger
 
 class InventoryManager:
     """Manages the inventory of fleet devices in JSON and CSV formats."""

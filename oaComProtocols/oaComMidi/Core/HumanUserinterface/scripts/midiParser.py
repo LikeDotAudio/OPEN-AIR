@@ -4,8 +4,9 @@
 #
 # Description: Brief summary of purpose
 
-from Cell import Cell
 from enum import Enum
+
+from Cell import Cell
 
 ROW_SIZE = 8  # Temporary
 
@@ -29,7 +30,7 @@ def parse_message(message, direction, table) -> Cell:
     row = get_row_num(row_name, table)
     if row is None:
         return None
-    
+
     column = get_column(message)
     if column is None:
         return None
@@ -120,7 +121,7 @@ def get_row_name(message, direction: Direction) -> str:
             else:
                 return "note_led_on_" + str(message.note // ROW_SIZE)
         # case "sysex":
-                
+
 
     return None
 

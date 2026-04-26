@@ -1,29 +1,33 @@
 # text_gui_dropdown_option/text_gui_dropdown_option.py
-from oaGui.Methods.i18n_utils import get_text
+import inspect
+
 # Author: Anthony Peter Kuzub
 # Version: 20260315.Modular.1
 #
 # Description: Modularized dynamic Text Dropdown (Combobox).
-
 import tkinter as tk
-from oaLogging.Methods.matrix_gate import matrix_log
-import inspect
 from tkinter import ttk
+
 from loguru import logger
+
+from oaGui.Methods.i18n_utils import get_text
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = False
-from oaLogging.Core.logger import builder_logger
 from oaConfigurationManager.FileReaders.config_reader import Config
+
 app_constants = Config.get_instance()
 
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
-from oaGuiManager.Core.transparency.transparency import TransparencyManager
 from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
+from oaGuiManager.Core.transparency.transparency import TransparencyManager
+from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+
+from .dropdown import DropdownDataManager
 
 # --- EXTRACTED CORE MODULES ---
-from ..dropdown_style_mixin import DropdownStyleMixin
-from ..dropdown import DropdownDataManager
+from .dropdown_style_mixin import DropdownStyleMixin
+
 
 @WidgetRegistry.register("_GuiDropDownOption")
 class BuilderTextGuiDropdownOptionCreator(TransparencyMixin):
@@ -53,7 +57,7 @@ class BuilderTextGuiDropdownOptionCreator(TransparencyMixin):
             # 1. Data parsing
             options_map, option_labels, option_values = DropdownDataManager.parse_options(config_data)
             init_val, init_label = DropdownDataManager.determine_initial_state(config_data, options_map, option_values)
-            
+
             selected_value_var = tk.StringVar(value=init_val)
             displayed_text_var = tk.StringVar(value=init_label)
 
@@ -78,7 +82,7 @@ class BuilderTextGuiDropdownOptionCreator(TransparencyMixin):
 
             # 3. Styling & UI
             style_name = f"Dropdown.{path.replace('/', '_') if path else 'default'}.TCombobox"
-            
+
             dropdown = ttk.Combobox(sub_frame, textvariable=displayed_text_var, values=option_labels, state="readonly", style=style_name)
             dropdown.bind("<<ComboboxSelected>>", on_select)
             dropdown.pack(side=tk.LEFT, padx=(80 if label else 10, 5))
@@ -92,7 +96,7 @@ class BuilderTextGuiDropdownOptionCreator(TransparencyMixin):
                 bg = sub_frame.cget("bg")
                 DropdownStyleMixin.apply_style(style_name, bg)
                 redraw_label()
-            
+
             sub_frame._draw = sub_frame.render = sync_bg
             sub_frame.bind("<Configure>", redraw_label, add="+")
 
@@ -101,9 +105,9 @@ class BuilderTextGuiDropdownOptionCreator(TransparencyMixin):
                 topic = state_mirror_engine.register_widget(path, selected_value_var, base_mqtt_topic, config_data)
                 if topic and subscriber_router: subscriber_router.subscribe_to_topic(topic, state_mirror_engine.sync_incoming_mqtt_to_gui)
                 state_mirror_engine.initialize_widget_state(path)
-            
+
             return sub_frame
-        except Exception as e:
+        except Exception:
             if LOCAL_DEBUG: logger.exception(f"❌ Error in Dropdown creation for '{label}'")
             return None
 

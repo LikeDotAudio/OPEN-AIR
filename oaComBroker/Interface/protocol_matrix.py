@@ -7,9 +7,10 @@
 
 import tkinter as tk
 from tkinter import ttk
-import time
-from oaLogging.Methods.matrix_gate import matrix_log
+
 from oaComBroker.Core.protocol_router.manager import ProtocolRouter
+from oaLogging.Methods.matrix_gate import matrix_log
+
 
 class ProtocolMatrix(tk.Frame):
     """
@@ -21,22 +22,22 @@ class ProtocolMatrix(tk.Frame):
         # Extract non-Tkinter arguments often passed by the ModuleLoader
         self.config_data = kwargs.pop("config", {})
         self.json_path = kwargs.pop("json_path", None)
-        
+
         super().__init__(parent, **kwargs)
         self.router = ProtocolRouter.get_instance()
         self._setup_ui()
 
     def _setup_ui(self):
         self.configure(bg="#1a1a1a")
-        
+
         title_label = tk.Label(self, text="🛰️ N x N PROTOCOL ROUTING CROSS-POINT & STRATEGY", font=("Helvetica", 10, "bold"), fg="#ffffff", bg="#333333")
         title_label.pack(fill=tk.X)
-        
+
         # Scrollable container for the large matrix
         canvas = tk.Canvas(self, bg="#1a1a1a", highlightthickness=0)
         scrollbar_v = ttk.Scrollbar(self, orient="vertical", command=canvas.yview)
         scrollbar_h = ttk.Scrollbar(self, orient="horizontal", command=canvas.xview)
-        
+
         self.scrollable_frame = tk.Frame(canvas, bg="#1a1a1a")
         self.scrollable_frame.bind(
             "<Configure>",
@@ -51,15 +52,15 @@ class ProtocolMatrix(tk.Frame):
         canvas.pack(side="left", fill="both", expand=True)
 
         container = self.scrollable_frame
-        
+
         # Legend/Axis Labels
-        tk.Label(container, text="FROM \ TO", font=("Helvetica", 8, "italic"), fg="#888888", bg="#1a1a1a").grid(row=0, column=0, padx=5, pady=5)
+        tk.Label(container, text=r"FROM \ TO", font=("Helvetica", 8, "italic"), fg="#888888", bg="#1a1a1a").grid(row=0, column=0, padx=5, pady=5)
 
         self.matrix_vars = {}
         self.strategy_previews = {}
-        
+
         protocols = self.router.protocols
-        
+
         # 1. Column Headers (Destinations + Emojis)
         for c, dest in enumerate(protocols):
             emoji = self.router.protocol_emojis.get(dest, "")

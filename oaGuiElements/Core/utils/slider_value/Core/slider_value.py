@@ -1,29 +1,24 @@
 # slider_value/slider_value.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 20250821.200641.1
 #
 # Description: slider_value/gui_slider_value.py
 
-import os
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
+import os
 import tkinter as tk
 from tkinter import ttk
-import inspect
 
 # --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()  # Get the singleton instance
 
-from oaOchestration.Methods.widget_event_binder import bind_variable_trace
-from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
-
+from oaOchestration.Methods.widget_event_binder import bind_variable_trace
 
 # --- Global Scope Variables ---
 current_file = f"{os.path.basename(__file__)}"
@@ -35,12 +30,13 @@ DEFAULT_PAD_Y = 2
 
 from oaGuiBuilder.Core.base_widget_creator import BaseWidgetCreator
 
+
 class BuilderSliderValueCreator(BaseWidgetCreator, TransparencyMixin):
     """
     A mixin class that provides the functionality for creating a
     slider widget combined with a text entry box.
     """
-    
+
     is_composite = True
 
     def __init__(self):
@@ -63,7 +59,7 @@ class BuilderSliderValueCreator(BaseWidgetCreator, TransparencyMixin):
 
         try:
             sub_frame = tk.Frame(parent_widget, bd=0, highlightthickness=0, relief="flat")
-            
+
             # Apply Industrial Transparency
             if hasattr(b_inst, '_apply_transparency'):
                 b_inst._apply_transparency(sub_frame, None, config_data, b_inst)
@@ -76,7 +72,7 @@ class BuilderSliderValueCreator(BaseWidgetCreator, TransparencyMixin):
             # Line 1: Label, Textbox, Units
             top_info_frame = tk.Canvas(sub_frame, bd=0, highlightthickness=0, relief="flat", height=30)
             top_info_frame.pack(side=tk.TOP, fill=tk.X, expand=True)
-            
+
             # Apply Industrial Transparency to internal frames
             if hasattr(b_inst, '_apply_transparency'):
                 b_inst._apply_transparency(top_info_frame, top_info_frame, config_data, b_inst)
@@ -90,7 +86,7 @@ class BuilderSliderValueCreator(BaseWidgetCreator, TransparencyMixin):
                 if (w, h) == top_info_frame._last_redraw_size: return
                 if w <= 1: return
                 top_info_frame._last_redraw_size = (w, h)
-                
+
                 top_info_frame.delete("industrial_text")
                 top_info_frame.create_text(5, h/2, text=f"{label}:", anchor="w", fill="white", font=custom_font, tags="industrial_text")
                 units_txt = config_data.get("units", "")
@@ -147,9 +143,13 @@ class BuilderSliderValueCreator(BaseWidgetCreator, TransparencyMixin):
                     s_router.subscribe_to_topic(topic, s_engine.sync_incoming_mqtt_to_gui)
                 s_engine.initialize_widget_state(path)
 
+            # --- POPULATE TOPIC WIDGETS (Fixes AttributeError in test_slider_value) ---
+            if path and b_inst and hasattr(b_inst, "topic_widgets"):
+                b_inst.topic_widgets[path] = (entry_value, slider)
+
             return sub_frame, sub_frame
 
-        except Exception as e:
+        except Exception:
             logger.exception(f"💥 failure in slider for '{label}'")
             return None, None
 

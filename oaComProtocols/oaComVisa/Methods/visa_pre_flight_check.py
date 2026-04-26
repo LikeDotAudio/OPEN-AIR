@@ -1,21 +1,19 @@
-from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
+
 # Methods/visa_pre_flight_check.py
 # Author: Anthony Peter Kuzub
 # Version: 20251013.202759.4
 #
 # Description: A standalone utility script to scan all available VISA resources (USB, TCP/IP, Serial, etc.)
-
 import os
-import inspect
-import datetime
-import pyvisa
-import sys
 
-# --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory
+import pyvisa
 from loguru import logger
 
 from oaConfigurationManager.FileReaders.config_reader import Config
+
+# --- Standard Debug Logging Setup ---
+from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
@@ -111,7 +109,7 @@ def list_visa_resources():
         logger.error(f"❌ Error: PyVISA backend library failed to load with '{backend_to_use}'.")
         matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "  Ensure 'pyvisa-py' is installed and its dependencies are met.", "DEBUG")
         matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"  Details: {e}", "DEBUG")
-    except Exception as e:
+    except Exception:
         logger.exception("❌ UNEXPECTED ERROR during VISA scan")
     return []
 

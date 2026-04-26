@@ -1,21 +1,18 @@
-import pathlib
 
 import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
+
 # Methods/visa_search_results.py
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: This manager handles VISA device discovery and validation against yak_config.
-
-import orjson
 import re
 
 # --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
@@ -44,7 +41,7 @@ class VisaDeviceSearcher:
         }
 
     def search_resources(self):
-        matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 GUI command received: initiating VISA resource search.", "DEBUG")
+        matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳 GUI command received: initiating VISA resource search.", "DEBUG")
         all_resources = list_visa_resources()
         validated_resources = []
 

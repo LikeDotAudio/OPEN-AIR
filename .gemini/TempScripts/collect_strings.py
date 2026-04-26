@@ -1,6 +1,6 @@
 
-import os
 import json
+import os
 
 target_dir = "/home/anthony/Documents/OPEN-AIR/oaGui/Assets/Assets/right_50/bottom_90/9_Zoo"
 unique_strings = set()
@@ -20,7 +20,7 @@ for root, dirs, files in os.walk(target_dir):
         if file.endswith(".json"):
             file_path = os.path.join(root, file)
             try:
-                with open(file_path, "r", encoding="utf-8") as f:
+                with open(file_path, encoding="utf-8") as f:
                     data = json.load(f)
                     find_en_strings(data)
             except Exception as e:

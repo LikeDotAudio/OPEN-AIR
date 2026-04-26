@@ -28,13 +28,13 @@
 #            "widget2": {"name": "Button", "type": "button"}
 #        }
 #        view = GrabBagView(self.root, self.mock_event_bus)
-#        
+#
 #        # We need to manually trigger the display since the event bus is mocked
 #        view.display_items(items)
-#        
+#
 #        # Find the canvas to check its items
 #        canvas = next(w for w in view.winfo_children() if isinstance(w, tk.Canvas))
-#        
+#
 #        # Check if canvas items were created (e.g., text items for the labels)
 #        canvas_items = canvas.find_all()
 #        # Expecting items for the widgets + potentially other graphical elements
@@ -50,13 +50,13 @@
 #        items = {"widget1": {"name": "MyWidget", "type": "button"}}
 #        view = GrabBagView(self.root, self.mock_event_bus)
 #        view.display_items(items)
-#        
+#
 #        # Simulate a click on the first canvas item
 #        canvas = view.canvas
 #        # In a real scenario, we'd find the specific item. For the test, assume it's item 2 (1 is background).
 #        # A more robust test would tag items and find by tag.
-#        item_id = 2 
-#        
+#        item_id = 2
+#
 #        # Directly call the bound method
 #        # The event object is not critical for this mock
 #        view._on_item_click(MagicMock(), item_tag_or_id="widget1_bg")

@@ -5,7 +5,6 @@
 # Description: High-performance Trie-based prefix mapping for state queries.
 # Optimized with native Rust oatrie_rs for deterministic path lookups.
 
-from typing import Any
 from loguru import logger
 
 # --- Native Rust Optimization ---

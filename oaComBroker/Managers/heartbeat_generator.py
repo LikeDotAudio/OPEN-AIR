@@ -4,11 +4,13 @@
 #
 # Description: Dedicated 1Hz Heartbeat Generator for System-Wide Liveness.
 
-import time
 import threading
+import time
+
 import orjson
-from oaLogging.Methods.matrix_gate import matrix_log
+
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
@@ -23,7 +25,7 @@ class HeartbeatGenerator:
     def __init__(self, mqtt_manager=None):
         if hasattr(self, "_initialized"): return
         self._initialized = True
-        
+
         self.mqtt = mqtt_manager
         self.interval = 1.0 # 1Hz
         self._running = False
@@ -67,7 +69,7 @@ class HeartbeatGenerator:
                     self.mqtt.publish(self.topic, orjson.dumps(payload).decode(), retain=False)
             except Exception as e:
                 matrix_log("system", "heartbeat", "_loop", f"❌ [HEARTBEAT] Error: {e}", "ERROR")
-            
+
             time.sleep(self.interval)
 
 def start_heartbeat(mqtt_manager):

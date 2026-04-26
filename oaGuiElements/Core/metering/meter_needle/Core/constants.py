@@ -20,22 +20,22 @@ LINE_WIDTH_DEFAULT = 12
 # These represent the 'Maximum Extents' of the shape relative to R.
 # Used to calculate the Radius (R) so the shape fits the canvas.
 SHAPE_MULTIPLIERS = {
-    "gem": (1.9, 2.4),       
+    "gem": (1.9, 2.4),
     "super_gem": (1.9, 2.4),
-    "triangle": (2.0, 2.0),   
+    "triangle": (2.0, 2.0),
     "parking_meter": (2.0, 2.5),
-    "pyramid": (2.0, 2.0),    
-    "hotdog": (2.91, 3.5),   
+    "pyramid": (2.0, 2.0),
+    "hotdog": (2.91, 3.5),
     "cylinder": (1.85, 1.3),
-    "hex": (2.52, 2.6),      
+    "hex": (2.52, 2.6),
     "octagon": (1.5, 1.5),
     "squircle": (1.2, 3.5),
     "squimonde": (1.9, 1.9),
     "squectangle": (1.7, 2.1),
-    "trapezoid": (1.8, 2.6), 
-    "badge": (1.8, 2.6),     
-    "crest": (1.5, 2.1),      
-    "stereo_diamond": (3.5, 2.5), 
+    "trapezoid": (1.8, 2.6),
+    "badge": (1.8, 2.6),
+    "crest": (1.5, 2.1),
+    "stereo_diamond": (3.5, 2.5),
     "intersecting_overlay": (4.0, 2.25),
     "default": (1.5, 1.5)
 }
@@ -43,19 +43,19 @@ SHAPE_MULTIPLIERS = {
 # Shape Vertical Shifts (Relative to R)
 # Positive shifts move the shape UP relative to the pivot.
 SHAPE_Y_SHIFTS = {
-    "hotdog": 1.30,  
-    "pyramid": 0.5,   
-    "triangle": 0.5,  
+    "hotdog": 1.30,
+    "pyramid": 0.5,
+    "triangle": 0.5,
     "parking_meter": 0.5,
-    "hex": 0.5,      
+    "hex": 0.5,
     "octagon": 0.9,
     "squircle": 0.4,
     "squimonde": 0.014,
-    "squectangle": 0.4, 
-    "crest": 0.2,     
-    "badge": 0.3,    
+    "squectangle": 0.4,
+    "crest": 0.2,
+    "badge": 0.3,
     "trapezoid": 0.3,
-    "gem": 0.5,      
+    "gem": 0.5,
     "super_gem": 0.5,
     "stereo_diamond": 0.0,
     "intersecting_overlay": 0.0,
@@ -63,25 +63,25 @@ SHAPE_Y_SHIFTS = {
 }
 
 # Expansion Factors (Bezel only, doesn't affect needle/scale)
-GEM_BEZEL_EXPANSION = 3.06  
-HEX_BEZEL_EXPANSION = 1.4  
+GEM_BEZEL_EXPANSION = 3.06
+HEX_BEZEL_EXPANSION = 1.4
 OCTAGON_BEZEL_EXPANSION = 1.4
-TRIANGLE_BEZEL_EXPANSION = 4.32 
+TRIANGLE_BEZEL_EXPANSION = 4.32
 PARKING_METER_BEZEL_EXPANSION = 4.32
 PYRAMID_BEZEL_EXPANSION = 4.32
 
 # Custom Needle Scales (Per Shape)
 # Multiplier applied to the needle length R.
 NEEDLE_SCALES = {
-    "hex": 0.8,      
+    "hex": 0.8,
     "octagon": 0.8,
-    "gem": 0.75,      
+    "gem": 0.75,
     "super_gem": 0.75,
     "squimonde": 0.5,
-    "pyramid": 0.65,   
-    "triangle": 1.235,  
+    "pyramid": 0.65,
+    "triangle": 1.235,
     "parking_meter": 1.35,
-    "badge": 0.9625,    
+    "badge": 0.9625,
     "trapezoid": 0.9625,
     "stereo_diamond": 0.9,
     "intersecting_overlay": 1.2,
@@ -102,7 +102,7 @@ SCALE_PADDINGS = {
     "squimonde": 180,
     "squectangle": 50,
     "squircle": 110,
-    "stereo_diamond": 50, 
+    "stereo_diamond": 50,
     "intersecting_overlay": 50,
     "default": 50
 }
@@ -118,12 +118,12 @@ SQUIRCLE_STEPS = 40
 # Crest Constants
 CREST_CURVE_STEPS = 15
 CREST_TOP_WIDTH_FACTOR = 1.5
-CREST_TOP_HEIGHT_FACTOR = 1.76 
+CREST_TOP_HEIGHT_FACTOR = 1.76
 CREST_BOTTOM_HEIGHT_FACTOR = 0.6
 
 # Cylinder / Hotdog Constants
-HOTDOG_WIDTH_STRAIGHT = 1.9 
-HOTDOG_HEIGHT_TOTAL = 2.02 
+HOTDOG_WIDTH_STRAIGHT = 1.9
+HOTDOG_HEIGHT_TOTAL = 2.02
 HOTDOG_CAP_RADIUS = 1.01
 HOTDOG_CAP_CENTER_Y = 1.01
 
@@ -142,15 +142,15 @@ GEM_SHOULDER_HEIGHT = 0.6
 GEM_PEAK_HEIGHT = 0.98
 
 # Stereo Diamond Constants (14x10 grid -> 1.4:1 ratio)
-STEREO_DIAMOND_WIDTH = 1.4 
-STEREO_DIAMOND_HEIGHT = 1.0 
-STEREO_DIAMOND_FLAT_WIDTH = 0.6 
+STEREO_DIAMOND_WIDTH = 1.4
+STEREO_DIAMOND_HEIGHT = 1.0
+STEREO_DIAMOND_FLAT_WIDTH = 0.6
 
 # Intersecting Overlay Constants (16:9 ratio -> 1.77:1)
 INTERSECTING_OVERLAY_WIDTH = 1.77
 INTERSECTING_OVERLAY_HEIGHT = 1.0
-INTERSECTING_OVERLAY_SKEW = 0.3 
-INTERSECTING_OVERLAY_CUTOUT_RADIUS = 0.4 
+INTERSECTING_OVERLAY_SKEW = 0.3
+INTERSECTING_OVERLAY_CUTOUT_RADIUS = 0.4
 
 # Triangle Constants
 TRIANGLE_SHIFT_Y = 0.4
@@ -169,7 +169,7 @@ HEX_TOP_HEIGHT = 1.8
 
 # Trapezoid/Badge Constants
 TRAPEZOID_TOP_WIDTH = 1.6
-TRAPEZOID_TOP_HEIGHT = 1.6 
+TRAPEZOID_TOP_HEIGHT = 1.6
 TRAPEZOID_BOTTOM_WIDTH = 1.3
 
 # Hill Mask / Aperture Constants

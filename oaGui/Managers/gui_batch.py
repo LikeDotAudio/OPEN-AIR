@@ -1,16 +1,16 @@
 # Managers/gui_batch.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 20260222.Adapter.1
 #
 # Description: Handles recursive JSON parsing and Grid layout with a "Skeleton-First" rendering system.
 
-import tkinter as tk
 from loguru import logger
-from ..Workers.async_grid_renderer import AsyncGridRenderer
-from ..Core.batch_processing_engine import BatchProcessingEngine
 
 from oaLogging.Methods.matrix_gate import is_debug_allowed, matrix_log
+
+from ..Core.batch_processing_engine import BatchProcessingEngine
+from ..Workers.async_grid_renderer import AsyncGridRenderer
+
 
 def _is_debug():
     return is_debug_allowed(system="UI", element="GUI_BUILDER")
@@ -36,7 +36,7 @@ class GuiBatchBuilderMixin:
         """
         if not hasattr(self, '_coord_cache'):
             self._coord_cache = {}
-            
+
         wid = widget._w
         if wid in self._coord_cache:
             return self._coord_cache[wid]
@@ -51,14 +51,14 @@ class GuiBatchBuilderMixin:
                 break
             relative_x += current_widget.winfo_x()
             relative_y += current_widget.winfo_y()
-            
+
             parent_path = current_widget.winfo_parent()
             if not parent_path: break
             current_widget = current_widget.nametowidget(parent_path)
-        
+
         if widget.winfo_ismapped():
             self._coord_cache[wid] = (relative_x, relative_y)
-            
+
         return relative_x, relative_y
 
     def _clear_coord_cache(self):
@@ -85,14 +85,14 @@ class GuiBatchBuilderMixin:
             batch_engine = BatchProcessingEngine(self, logger, _is_debug())
             factory = getattr(self, 'widget_factory', {})
             self._async_renderer = AsyncGridRenderer(factory, batch_engine)
-            
+
         self._async_renderer.render(
-            parent_frame, 
-            data, 
-            path_prefix, 
-            override_cols, 
-            on_complete, 
-            parent_bg_pil, 
+            parent_frame,
+            data,
+            path_prefix,
+            override_cols,
+            on_complete,
+            parent_bg_pil,
             context
         )
 

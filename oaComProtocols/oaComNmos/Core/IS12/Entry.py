@@ -5,11 +5,12 @@
 # Description: Gatekeeper for the IS12 module.
 
 import os
-import sys
 import subprocess
+import sys
 import time
 from pathlib import Path
-from typing import Optional, List, Dict, Any
+from typing import Any
+
 from pydantic import BaseModel
 
 # Add the project root to sys.path for absolute imports
@@ -26,21 +27,18 @@ if str(project_root) not in sys.path:
 # Absolute imports with fallback
 try:
     from oaComProtocols.oaComNmos.Core.IS12.Interface.schemas import (
+        IS12BaseMessage,
         IS12CommandMessage,
         IS12CommandResponseMessage,
-        IS12SubscriptionMessage,
-        IS12NotificationMessage,
         IS12ErrorMessage,
-        IS12BaseMessage
+        IS12NotificationMessage,
+        IS12SubscriptionMessage,
     )
 except ImportError:
     from Interface.schemas import (
+        IS12BaseMessage,
         IS12CommandMessage,
         IS12CommandResponseMessage,
-        IS12SubscriptionMessage,
-        IS12NotificationMessage,
-        IS12ErrorMessage,
-        IS12BaseMessage
     )
 
 class IS12Manager:
@@ -51,7 +49,7 @@ class IS12Manager:
         self.base_url = base_url
         print(f"IS12Manager initialized with base URL: {self.base_url}")
 
-    async def _send_message(self, endpoint: str, message: IS12BaseMessage) -> Optional[BaseModel]:
+    async def _send_message(self, endpoint: str, message: IS12BaseMessage) -> BaseModel | None:
         print(f"Attempting to send message to {self.base_url}{endpoint}")
         if isinstance(message, IS12CommandMessage):
             return IS12CommandResponseMessage(
@@ -63,7 +61,7 @@ class IS12Manager:
             )
         return None
 
-    async def send_command(self, device_id: str, operation: str, parameters: Optional[Dict[str, Any]] = None) -> Optional[IS12CommandResponseMessage]:
+    async def send_command(self, device_id: str, operation: str, parameters: dict[str, Any] | None = None) -> IS12CommandResponseMessage | None:
         command_message = IS12CommandMessage(
             message_id=f"cmd-{hash(device_id + operation + str(parameters))}",
             timestamp="2026-04-05T15:47:00Z",
@@ -87,14 +85,14 @@ def run_tests():
     """
     print(f"📡📥📥 [TEST] {Path(__file__).parent.name}: Starting automated test discovery...")
     test_dir = current_dir / "Tests"
-    
+
     if not test_dir.exists():
         print(f"⚠️ [TEST] {Path(__file__).parent.name}: No Tests/ directory found.")
         return True
 
     env = os.environ.copy()
     env["PYTHONPATH"] = str(project_root) + os.pathsep + env.get("PYTHONPATH", "")
-    
+
     try:
         rel_test_dir = os.path.relpath(test_dir, project_root)
         result = subprocess.run(
@@ -134,7 +132,7 @@ if __name__ == "__main__":
     if not run_tests():
         print("❌ [CRITICAL] Tests failed. Aborting execution.")
         sys.exit(1)
-    
+
     # Standalone execution logic
     if len(sys.argv) > 1:
         cmd = sys.argv[1].lower()

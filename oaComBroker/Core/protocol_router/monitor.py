@@ -24,12 +24,16 @@
 # - Provides forensic reporting via Deep Packet Inspection (DPI).
 # - Correlates patched "Splink" relationships across network sessions.
 
-from collections import deque
 import threading
-import orjson
 import time
-from .constants import SOURCE_DESCRIPTIONS, EMOJI_TO_WORD, app_constants
+from collections import deque
+
+import orjson
+
 from oaLogging.Methods.matrix_gate import matrix_log
+
+from .constants import EMOJI_TO_WORD, SOURCE_DESCRIPTIONS, app_constants
+
 
 class Monitor:
     """
@@ -112,12 +116,12 @@ class Monitor:
         self._telemetry["pps"] = int(self._message_count / elapsed)
         self._telemetry["bps"] = int((self._byte_count * 8) / elapsed)
         self._telemetry["total_messages"] += self._message_count
-        
+
         # Reset interval counters
         self._message_count = 0
         self._byte_count = 0
         self._last_telemetry_ts = now
-        
+
         # Broadcast to observers (UI)
         telemetry_message = {
             "timestamp": now,
@@ -143,32 +147,32 @@ class Monitor:
             tuple: (source_ts, dest_ts) or (None, None).
         """
         with self._firehose_lock:
-            match = next((m for m in self.firehose if 
+            match = next((m for m in self.firehose if
                           f"{m['timestamp']:.6f}" == message_ts or m['timestamp'] == message_ts), None)
-            
+
             if not match:
                 return None, None
-            
-            s_id = (match["meta"].get("splink_id") or 
+
+            s_id = (match["meta"].get("splink_id") or
                     match["meta"].get("splinker_source"))
-            
+
             if not s_id:
                 return None, None
-            
+
             is_active = match["meta"].get("splink_active")
-            
+
             if is_active:
-                candidates = [m for m in self.firehose if 
+                candidates = [m for m in self.firehose if
                              m["meta"].get("splinker_source") == s_id]
             else:
-                candidates = [m for m in self.firehose if 
+                candidates = [m for m in self.firehose if
                              m["meta"].get("splink_id") == s_id]
-        
+
         if not candidates:
             return (match["timestamp"] if is_active else None), (None if is_active else match["timestamp"])
-            
+
         partner = min(candidates, key=lambda m: abs(m["timestamp"] - match["timestamp"]))
-        
+
         if is_active:
             return match["timestamp"], partner["timestamp"]
         else:
@@ -189,26 +193,26 @@ class Monitor:
         """
         match = None
         with self._firehose_lock:
-            match = next((m for m in self.firehose if 
+            match = next((m for m in self.firehose if
                           f"{m['timestamp']:.6f}" == message_ts or m['timestamp'] == message_ts), None)
-        
+
         if not match:
             return "Packet not found in firehose buffer."
 
         report = []
         source = match['source']
         src_desc = SOURCE_DESCRIPTIONS.get(source, f"❓ [{source}] - Unknown origin.")
-        
+
         report.append("╔════════════ PACKET INVESTIGATION REPORT ════════════╗")
         report.append(f"  TIME (UTP) : {match['timestamp']}")
-        
+
         p_id = match.get("partition", "UNKNOWN")
         is_local_session = (match['guid'] == self.local_guid)
         is_local_partition = (p_id == app_constants.PARTITION_ID)
-        
+
         p_desc = f"{p_id} ({'HERE' if is_local_partition else 'REMOTE'})"
         s_desc = f"{match['guid']} ({'THIS SESSION' if is_local_session else 'REMOTE'})"
-        
+
         report.append(f"  SESSION    : {s_desc}")
         report.append(f"  PARTITION  : {p_desc}")
         report.append("╟──────────────────────────────────────────────────────╢")
@@ -219,12 +223,12 @@ class Monitor:
 
         strat = match.get("strategy", "BROADCAST")
         report.append(f"  STRATEGY   : {strat}")
-        
+
         lifecycle_parts = []
         for char in strat:
             if char in EMOJI_TO_WORD:
                 lifecycle_parts.append(f"[{EMOJI_TO_WORD[char]}]")
-        
+
         if lifecycle_parts:
             if "[PUSH]" in lifecycle_parts:
                 p_idx = lifecycle_parts.index("[PUSH]")
@@ -234,7 +238,7 @@ class Monitor:
             else:
                 lifecycle_str = " -> ".join(lifecycle_parts)
             report.append(f"  LIFECYCLE  : {lifecycle_str}")
-        
+
         if match["meta"]:
             report.append("╟── DEEP PACKET INSPECTION (DPI) ──────────────────────╢")
             for k, v in match["meta"].items():
@@ -246,16 +250,16 @@ class Monitor:
                 if "midi" in k.lower(): prefix = "🎹 🔍 "
                 if "mutation" in k.lower(): prefix = "🚨 ⚡ "
                 report.append(f"  {prefix}{k_disp}: {v}")
-        
+
         try:
             if isinstance(match['value'], dict):
                 report.append("╟── PAYLOAD DISSECTION ────────────────────────────────╢")
-                pretty_json = orjson.dumps(match['value'], 
+                pretty_json = orjson.dumps(match['value'],
                                            option=orjson.OPT_INDENT_2).decode()
                 report.append(f"{pretty_json}")
         except:
             pass
-        
+
         report.append("╚════════════════════════ END ════════════════════════╝")
         return "\n".join(report)
 

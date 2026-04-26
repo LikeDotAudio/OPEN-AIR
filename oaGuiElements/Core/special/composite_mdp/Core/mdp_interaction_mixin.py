@@ -4,8 +4,8 @@
 #
 # Description: Brief summary of purpose
 
-import math
 from .mdp_math import MDPMath
+
 
 class MDPInteractionMixin:
     """Static interaction handlers for dispatching MDP events to fader components."""
@@ -18,7 +18,7 @@ class MDPInteractionMixin:
         if not item_id: return None
         tags = canvas.gettags(item_id[0])
         for tag in tags:
-            if tag.startswith("mdp_ltp_"): return frame.faders[0] 
+            if tag.startswith("mdp_ltp_"): return frame.faders[0]
         return None
 
     @staticmethod
@@ -44,11 +44,11 @@ class MDPInteractionMixin:
         if f and f.dragging:
             dx, dy = event.x - f.start_x, event.y - f.start_y
             ldx, ldy = MDPMath.to_local_space(dx, dy, f.angle)
-            
+
             # Linear (Local Y)
             dv = -(ldy / f.track_len) * (f.val_max - f.val_min)
             f.linear_var.set(max(f.val_min, min(f.val_max, f.start_val + dv)))
-            
+
             # Rotary (Local X)
             f.rotation_var.set(max(f.rot_min, min(f.rot_max, f.start_rot + ldx)))
 

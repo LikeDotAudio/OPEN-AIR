@@ -1,33 +1,36 @@
 # graphing/dynamic_graph.py
-from oaGui.Methods.i18n_utils import get_text
+import inspect
+import time
+
 # Author: Anthony Peter Kuzub
 # Version: 20260315.Modular.1
 #
 # Description: Modularized GraphPlotter Graph Component.
-
 import tkinter as tk
-from oaLogging.Methods.matrix_gate import matrix_log
-import inspect
 from collections import deque
-import time
-from typing import Dict, Any
+from typing import Any
+
+from oaConfigurationManager.FileReaders.config_reader import Config
+from oaGui.Methods.i18n_utils import get_text
 
 # --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import builder_logger
-from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import matrix_log
+
 app_constants = Config.get_instance()
 
-from . import graph, graph_styler, graph_interactor, graph_updater
-from oaStyle.Core.style import THEMES, DEFAULT_THEME
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
-from oaGuiManager.Core.transparency.transparency import TransparencyManager
+from oaGui.Methods.safe_after_mixin import SafeAfterMixin
+from oaGuiElements.Core.graphing.Core.graph_interaction_mixin import GraphInteractionMixin
 
 # --- EXTRACTED CORE MIXINS ---
 from oaGuiElements.Core.graphing.Core.graph_patina_mixin import GraphPatinaMixin
-from oaGuiElements.Core.graphing.Core.graph_throttle_mixin import GraphThrottleMixin
-from oaGuiElements.Core.graphing.Core.graph_interaction_mixin import GraphInteractionMixin
 from oaGuiElements.Core.graphing.Core.graph_state_mixin import GraphStateMixin
-from oaGui.Methods.safe_after_mixin import SafeAfterMixin
+from oaGuiElements.Core.graphing.Core.graph_throttle_mixin import GraphThrottleMixin
+from oaGuiManager.Core.transparency.transparency import TransparencyManager
+from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+from oaStyle.Core.style import DEFAULT_THEME, THEMES
+
+from . import graph, graph_interactor, graph_styler
+
 
 class GraphPlotter(
     tk.Frame,
@@ -42,7 +45,7 @@ class GraphPlotter(
     A high-performance Matplotlib graph widget refactored into modular components.
     """
 
-    def __init__(self, parent, config: Dict[str, Any], base_mqtt_topic_from_path: str, widget_id: str, builder_instance=None, **kwargs):
+    def __init__(self, parent, config: dict[str, Any], base_mqtt_topic_from_path: str, widget_id: str, builder_instance=None, **kwargs):
         self._init_safe_after()
         self.subscriber_router = kwargs.pop("subscriber_router", None)
         self.state_mirror_engine = kwargs.pop("state_mirror_engine", None)
@@ -56,7 +59,7 @@ class GraphPlotter(
         geom = config.get("geometry", {})
         w = config.get("width") or geom.get("width") or layout_config.get("width") or 500
         h = config.get("height") or geom.get("height") or layout_config.get("height") or 400
-        
+
         kwargs["width"] = max(int(float(w)), 100)
         kwargs["height"] = max(int(float(h)), 50)
 
@@ -75,13 +78,13 @@ class GraphPlotter(
 
         self._initialize_throttle()
         self.fig, self.ax, self.canvas = graph.create_base_plot(self, config)
-        
+
         colors = THEMES.get(DEFAULT_THEME, THEMES["dark"])
         self.theme_colors = colors
         self.configure(bg=colors["bg"])
         tk_canvas = self.canvas.get_tk_widget()
         tk_canvas.configure(bg=colors["bg"], highlightthickness=0)
-        
+
         TransparencyManager.apply_transparency(self, tk_canvas, config, self.instance)
 
         if self.state_mirror_engine:
@@ -107,14 +110,14 @@ class GraphPlotter(
     def _init_plot_elements(self):
         graph_styler.apply_style(self.ax, self.fig, self.widget_config, graph_styler.get_theme_style("dark"))
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] GraphPlotter '{self.widget_id}' visual styles applied.", level="SUCCESS")
-        
+
         graph_interactor.setup_interaction(self.fig, self.ax, self.widget_config, {"on_view_change": lambda x, y: None, "on_setting_change": lambda n, v: None, "on_add_marker": self._on_add_marker})
         for ds in self.widget_config.get("datasets", []):
             ds_id = ds.get("id")
             if ds_id:
                 line, = self.ax.plot([], [], color=ds.get("style", {}).get("line_color") or "cyan", linewidth=1, label=get_text(ds.get("label"), ds_id))
                 self.lines[ds_id], self.x_data[ds_id], self.y_data[ds_id] = line, deque(maxlen=self.widget_config.get("buffer_size", 100)), deque(maxlen=self.widget_config.get("buffer_size", 100))
-        
+
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] GraphPlotter '{self.widget_id}' plot elements initialized.", level="SUCCESS")
 
     def _init_dataset_config(self):
@@ -144,16 +147,16 @@ class GraphPlotter(
             return
 
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] GraphPlotter '{self.widget_id}' resize event: {event.width}x{event.height}", level="TRACE")
-        
+
         # 🛡️ ZERO-DIMENSION GUARD: Ignore events where dimensions are too small.
         if event.width <= 10 or event.height <= 10:
             return
 
         last_w, last_h = getattr(self, "_last_resize_dim", (0, 0))
-        
+
         # 🛡️ JITTER FILTER: Threshold to stop minor rounding-error vibrations.
         if abs(event.width - last_w) <= 2 and abs(event.height - last_h) <= 2: return
-        
+
         self._last_resize_dim = (event.width, event.height)
         if hasattr(self, "_resize_timer") and self._resize_timer: self.safe_after_cancel(self._resize_timer)
         # ⚡ DEBOUNCE: Use 100ms for responsiveness while avoiding vibration

@@ -4,14 +4,11 @@
 #
 # Description: Gatekeeper for the oaComSAP module.
 
-import subprocess
-from pathlib import Path
-
-import sys
-import time
-import signal
 import os
 import pathlib
+import subprocess
+import sys
+from pathlib import Path
 
 current_dir = pathlib.Path(__file__).resolve().parent
 project_root = current_dir.parent.parent
@@ -19,8 +16,8 @@ if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
 # Core components are now managed externally
-from oaLogging.Methods.matrix_gate import matrix_log
 from oaComProtocols.oaComSAP.Core.sap_listener import SAPListener
+from oaLogging.Methods.matrix_gate import matrix_log
 
 _listener = None
 _publisher_instance = None
@@ -30,13 +27,13 @@ def start(mqtt_publisher=None, rx_callback=None):
     global _listener, _publisher_instance
     if _listener is not None:
         return
-    
+
     # Use provided or handle missing publisher
     _publisher_instance = mqtt_publisher
     if _publisher_instance is None:
         # matrix_log("comms", "sap", "start", "⚠️ No MQTT publisher provided. SAP listener will not bridge events.", "WARNING")
         pass
-    
+
     _listener = SAPListener(_publisher_instance, rx_callback=rx_callback)
     _listener.start()
     matrix_log("comms", "sap", "start", "🚀 [SAP] Listener started.", "INFO")
@@ -63,15 +60,13 @@ def run_tests():
     Discover and run tests in the local Tests/ directory using unittest via subprocess.
     Ensures isolation and proper sys.path handling.
     """
-    import subprocess
     import sys
-    import os
     from pathlib import Path
 
     print(f"📡📥📥 [TEST] {Path(__file__).parent.name}: Starting automated test discovery...")
     current_dir = Path(__file__).parent.absolute()
     test_dir = current_dir / "Tests"
-    
+
     if not test_dir.exists():
         return True
 
@@ -80,10 +75,10 @@ def run_tests():
         if (project_root / "GEMINI.md").exists():
             break
         project_root = project_root.parent
-    
+
     env = os.environ.copy()
     env["PYTHONPATH"] = str(project_root) + os.pathsep + env.get("PYTHONPATH", "")
-    
+
     try:
         rel_test_dir = os.path.relpath(test_dir, project_root)
         result = subprocess.run(
@@ -112,7 +107,7 @@ if __name__ == "__main__":
     if not run_tests():
         print("❌ [CRITICAL] Tests failed. Aborting execution.")
         sys.exit(1)
-    
+
     # Standalone execution logic
     if len(sys.argv) > 1:
         cmd = sys.argv[1].lower()

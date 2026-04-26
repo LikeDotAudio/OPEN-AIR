@@ -1,22 +1,19 @@
 # text_table/table_editing_inplace_mixin.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 20250821.200641.1
 #
 # Description: text_table/table_editing_inplace_mixin.py
 
-import tkinter as tk
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
-from tkinter import ttk
-import orjson
 import re
+import tkinter as tk
+from tkinter import ttk
+
+import orjson
 
 # --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import TABLE_LOGGER
-from loguru import logger
-
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 

@@ -4,10 +4,12 @@
 #
 # Description: Unit tests for composition_root.py
 
+import tkinter as tk
 import unittest
 from unittest.mock import MagicMock, patch
-import tkinter as tk
+
 from oaGuiManager.Core.composition_root import UICompositionRoot
+
 
 class TestUICompositionRoot(unittest.TestCase):
     """Verifies that the UI composition root correctly wires dependencies."""
@@ -18,7 +20,7 @@ class TestUICompositionRoot(unittest.TestCase):
         self.mock_constants = MagicMock()
         self.mock_constants.SCAN_OSC = True
         self.mock_constants.SCAN_SNMP = False
-        
+
         self.comp_root = UICompositionRoot(self.mock_root, self.mock_constants)
 
     @patch('oaComProtocols.oaComMQTT.Managers.mqtt_connection.MqttConnectionManager')
@@ -32,17 +34,17 @@ class TestUICompositionRoot(unittest.TestCase):
     def test_build_services_wires_all_layers(self, mock_splinker, mock_rest, mock_osc, mock_proto_get, mock_mirror, mock_cache, mock_router, mock_mqtt):
         """OPERATE: Build services. CHECK: Verify service graph is constructed and mapped."""
         services = self.comp_root.build_services()
-        
+
         # Verify base layers exist in the returned dictionary
         self.assertIn("mqtt_conn", services)
         self.assertIn("state_cache", services)
         self.assertIn("mirror_engine", services)
-        
+
         # Verify wiring
         # state_cache should have been set with the sub_router instance
         # Since they are all mocks, we check if the sub_router mock was assigned to the cache mock
         self.assertEqual(services["state_cache"].subscriber_router, services["sub_router"])
-        
+
         # Verify OSC was enabled (as SCAN_OSC = True)
         self.assertIn("osc_manager", services)
 

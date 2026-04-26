@@ -4,8 +4,9 @@
 #
 # Description: Brief summary of purpose
 
-import threading
 import logging
+import threading
+
 from loguru import logger
 
 try:
@@ -83,7 +84,7 @@ class RegistryMixin:
 
     def is_widget_registered(self, widget_id: str) -> bool:
         return self._registry.is_registered(widget_id)
-            
+
     def get_widget_topic(self, widget_id):
         return self._registry.get_topic(widget_id)
 

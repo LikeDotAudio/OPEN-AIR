@@ -6,6 +6,7 @@
 
 from tkinter import ttk
 
+
 class DropdownStyleMixin:
     """Provides methods for blending colors and configuring TTK Combobox styles dynamically."""
 
@@ -27,14 +28,14 @@ class DropdownStyleMixin:
     def apply_style(cls, style_name, bg_color):
         blended_bg = cls._blend_colors(bg_color, "#ffffff", 0.5)
         style = ttk.Style()
-        
-        style.configure(style_name, 
-            fieldbackground=blended_bg, foreground="white", 
-            background=bg_color, arrowcolor="white", 
+
+        style.configure(style_name,
+            fieldbackground=blended_bg, foreground="white",
+            background=bg_color, arrowcolor="white",
             bordercolor=bg_color, lightcolor=bg_color, darkcolor=bg_color
         )
-        
-        style.map(style_name, 
+
+        style.map(style_name,
             fieldbackground=[("readonly", blended_bg), ("disabled", bg_color)],
             foreground=[("readonly", "white"), ("disabled", "grey")],
             background=[("readonly", bg_color)],

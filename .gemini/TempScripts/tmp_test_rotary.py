@@ -1,4 +1,5 @@
 import sys
+
 sys.path.insert(0, '/home/anthony/Documents/OPEN-AIR')
 from oaGuiElements.Methods.rotary_core import RotaryCore
 

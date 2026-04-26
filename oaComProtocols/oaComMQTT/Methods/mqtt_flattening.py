@@ -1,19 +1,19 @@
-from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
+
 # Methods/mqtt_flattening.py
 # Author: Anthony Peter Kuzub
 # Version: 20250821.200641.1
 #
 # Description: A utility module to process and flatten nested MQTT payloads into a format
-
-import os
-import inspect
 import orjson
+
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- Module Imports ---
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = False
+
 from oaLogging.Core.logger import MQTT_LOGGER
-from loguru import logger
 
 
 class MqttFlattener:

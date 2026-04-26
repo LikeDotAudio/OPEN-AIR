@@ -1,12 +1,13 @@
 import asyncio
+from concurrent.futures import Future
 
-from aes70.controller.remote_error import RemoteError
 from aes70.connection import Connection
-from aes70.ocp1.response import Response
+from aes70.controller.arguments import Arguments
+from aes70.controller.remote_error import RemoteError
 from aes70.ocp1.keepalive import KeepAlive
 from aes70.ocp1.notification import Notification
-from aes70.controller.arguments import Arguments
-from concurrent.futures import Future
+from aes70.ocp1.response import Response
+
 
 class PendingCommand:
     @property

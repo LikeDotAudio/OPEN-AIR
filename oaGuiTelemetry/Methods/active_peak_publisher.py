@@ -1,19 +1,19 @@
-import os
 
+import datetime
 import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
+
 # Methods/active_peak_publisher.py
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: Event-driven worker that transforms flat marker data into a hierarchical
-
 import orjson
-import datetime
-import math
 from loguru import logger
-from oaConfigurationManager.FileReaders.config_reader import Config
+
 from oaComProtocols.oaComMQTT.Methods.mqtt_controller_util import MqttControllerUtility
+from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import matrix_log
+
 LOCAL_DEBUG = False
 
 app_constants = Config.get_instance()
@@ -88,7 +88,7 @@ class ActivePeakPublisher:
         """Constructs and publishes to hierarchical frequency topics."""
         try:
             freq_mhz = freq_hz / 1_000_000.0
-            
+
             # Breakdown for path: GHz/100M/10M/1M/100k/10k/1k
             ghz = int(freq_mhz // 1000)
             m_rem = freq_mhz % 1000
@@ -96,7 +96,7 @@ class ActivePeakPublisher:
             m_rem %= 100
             m10 = int(m_rem // 10)
             m1 = int(m_rem % 10)
-            
+
             k_total = round((freq_mhz - int(freq_mhz)) * 1000.0, 0)
             k100 = int(k_total // 100)
             k_rem = k_total % 100

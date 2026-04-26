@@ -1,6 +1,6 @@
 # oaComProtocols.oaComSMPTE2138/Managers/smpte2138_monitor_manager.py
 #
-# Monitors the external st2138/ Protobuf tree and publishes decoded 
+# Monitors the external st2138/ Protobuf tree and publishes decoded
 # human-readable updates to the internal OPEN-AIR monitor bus.
 # Now enhanced with high-performance telemetry and heartbeat tracking.
 #
@@ -9,14 +9,10 @@
 #
 # Version 20260330.1600.1
 
-import orjson
 import sys
-import os
-import time
 import threading
+import time
 from pathlib import Path
-from loguru import logger
-from typing import Callable, List
 
 LOCAL_DEBUG = False
 
@@ -26,14 +22,16 @@ if str(interface_path) not in sys.path:
     sys.path.insert(0, str(interface_path))
 
 # --- Protobuf Imports ---
+from oaComProtocols.oaComMQTT.Managers.mqtt_connection import MqttConnectionManager
+from oaComProtocols.oaComMQTT.Managers.mqtt_subscriber_router import MqttSubscriberRouter
+from oaComProtocols.oaComSMPTE2138.Interface import language_pb2
+from oaComProtocols.oaComSMPTE2138.Interface import constraint_pb2
 from oaComProtocols.oaComSMPTE2138.Interface import param_pb2
-from oaComProtocols.oaComSMPTE2138.Interface import device_pb2
 
 # --- OPEN-AIR Imports ---
 from oaLogging.Core.logger import SMPTE2138_LOGGER
 from oaLogging.Methods.matrix_gate import matrix_log
-from oaComProtocols.oaComMQTT.Managers.mqtt_connection import MqttConnectionManager
-from oaComProtocols.oaComMQTT.Managers.mqtt_subscriber_router import MqttSubscriberRouter
+
 # from oaComBroker.Core.event_bus import event_bus
 
 def _is_debug():
@@ -46,11 +44,11 @@ class SMPTE2138MonitorManager:
     Tracks throughput and engine health to demonstrate system performance.
     """
 
-    def __init__(self, mqtt_connection: MqttConnectionManager, 
+    def __init__(self, mqtt_connection: MqttConnectionManager,
                  subscriber_router: MqttSubscriberRouter):
         self.mqtt = mqtt_connection
         self.router = subscriber_router
-        
+
         # Performance Telemetry
         self.stats = {
             "total_messages": 0,
@@ -61,7 +59,7 @@ class SMPTE2138MonitorManager:
             "throughput_message_sec": 0.0,
             "status": "STOPPED"
         }
-        
+
         self._setup_subscriptions()
         self._is_running = False
         self._heartbeat_thread = None
@@ -81,7 +79,7 @@ class SMPTE2138MonitorManager:
         self._is_running = False
         # Do not join to avoid blocking the main thread during shutdown
         self.stats["status"] = "STOPPED"
-        
+
     def add_observer(self, callback: callable):
         """Registers a listener for decoded traffic."""
         if callback not in self._observers:
@@ -94,10 +92,10 @@ class SMPTE2138MonitorManager:
         # 1. Traffic Monitoring (External + Internal)
         self.router.subscribe_to_topic("st2138/#", self._on_smpte2138_traffic)
         self.router.subscribe_to_topic("OPEN-AIR/#", self._on_smpte2138_traffic)
-        
+
         # 2. Bridge Status Monitoring
         self.router.subscribe_to_topic("OPEN-AIR/System/Status/SMPTE2138/Bridge", self._on_bridge_status)
-        
+
         matrix_log("comms", "smpte2138", "_setup_subscriptions", "👂 [LISTEN] Monitor active and listening for st2138/# and OPEN-AIR/#.", "DEBUG")
 
     def _on_bridge_status(self, message):
@@ -119,7 +117,7 @@ class SMPTE2138MonitorManager:
                 elapsed = now - self.stats["start_time"]
                 if elapsed > 0:
                     self.stats["throughput_message_sec"] = round(self.stats["total_messages"] / elapsed, 2)
-                
+
                 # Push telemetry to GUI
                 self._broadcast("HEARTBEAT", {"_message_type": "HEARTBEAT", "_stats": self.get_telemetry()})
             except Exception: pass
@@ -132,10 +130,10 @@ class SMPTE2138MonitorManager:
         topic = message.topic
         payload = message.payload
         now = time.time()
-        
+
         self.stats["total_messages"] += 1
         self.stats["last_message_ts"] = now
-        
+
         decoded_data = None
         message_type = "Unknown"
 
@@ -161,13 +159,13 @@ class SMPTE2138MonitorManager:
                     "value": self._extract_value(decoded.value),
                     "respond": decoded.respond
                 }
-            
+
             if decoded_data:
                 decoded_data["_message_type"] = message_type
                 decoded_data["_topic"] = topic
                 decoded_data["_stats"] = self.get_telemetry()
                 self._broadcast(topic, decoded_data)
-                
+
         except Exception as e:
             if LOCAL_DEBUG:
                 SMPTE2138_LOGGER.trace(f"⚠️ [MONITOR] Decode skipped for {topic}: {e}")

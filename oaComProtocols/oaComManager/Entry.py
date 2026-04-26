@@ -4,9 +4,8 @@
 #
 # Description: Gatekeeper for the oaComManager module.
 
-import sys
 import os
-import argparse
+import sys
 import time
 from pathlib import Path
 
@@ -22,9 +21,10 @@ while project_root.parent != project_root:
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
-from oaLogging.Methods.matrix_gate import matrix_log
 from oaComProtocols.oaComManager.Managers.manager import ComProtocolManager
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import matrix_log
+
 
 def start_all_protocols():
     """
@@ -33,11 +33,11 @@ def start_all_protocols():
     """
     partition_id = os.environ.get("OPEN_AIR_PARTITION_ID", "STANDALONE")
     matrix_log("manager", "entry", "start_all_protocols", f"🚀 [MANAGER] Initializing ComProtocolManager for partition: {partition_id}", "INFO")
-    
+
     config = Config.get_instance()
     protocol_manager = ComProtocolManager.get_instance(config=config)
     protocol_manager.discover_and_register_protocols()
-    
+
     if not protocol_manager.initialize_common_dependencies():
         matrix_log("manager", "entry", "start_all_protocols", "❌ Failed to initialize common dependencies. Aborting start.", "ERROR")
         sys.exit(1)
@@ -46,7 +46,7 @@ def start_all_protocols():
     # We only want to run the heavy hardware bridges in the CORE partition.
     # The UI partition should just be an observer.
     run_bridge = (partition_id in ["CORE", "STANDALONE"])
-    
+
     common_deps_to_pass = {
         "protocol_router": protocol_manager.protocol_router,
         "run_bridge": run_bridge
@@ -54,7 +54,7 @@ def start_all_protocols():
 
     matrix_log("manager", "entry", "start_all_protocols", f"Starting registered protocols (Active Bridges: {run_bridge})...", "INFO")
     protocol_manager.start_all(**common_deps_to_pass)
-    
+
     matrix_log("manager", "entry", "start_all_protocols", "✅ All registered protocols launched.", "SUCCESS")
     return protocol_manager
 
@@ -64,7 +64,7 @@ def stop_all_protocols(protocol_manager=None):
     """
     if protocol_manager is None:
         protocol_manager = ComProtocolManager.get_instance()
-        
+
     if protocol_manager:
         matrix_log("manager", "entry", "stop_all_protocols", "🛑 Shutting down all protocols...", "INFO")
         protocol_manager.stop_all()
@@ -91,17 +91,17 @@ def run_tests():
     Ensures isolation and proper sys.path handling.
     """
     import subprocess
-    
+
     print(f"📡📥📥 [TEST] {Path(__file__).parent.name}: Starting automated test discovery...")
     test_dir = current_dir / "Tests"
-    
+
     if not test_dir.exists():
         print(f"📡📤📤 [TEST] {Path(__file__).parent.name}: No Tests/ directory found.")
         return True
 
     env = os.environ.copy()
     env["PYTHONPATH"] = str(project_root) + os.pathsep + env.get("PYTHONPATH", "")
-    
+
     try:
         rel_test_dir = os.path.relpath(test_dir, project_root)
         result = subprocess.run(
@@ -139,7 +139,7 @@ if __name__ == "__main__":
     if not run_tests():
         print("❌ [CRITICAL] Tests failed. Aborting execution.")
         sys.exit(1)
-    
+
     # Standalone execution logic
     if len(sys.argv) > 1:
         cmd = sys.argv[1].lower()

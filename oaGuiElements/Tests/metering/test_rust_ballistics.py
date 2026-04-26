@@ -6,8 +6,9 @@
 # Version: 20260401.1000.1
 
 import unittest
-from unittest.mock import MagicMock, patch
+
 from oaGuiElements.Core.metering.meter_bar.Core.ballistics import BallisticsEngine
+
 
 class MockMeterConfig:
     def __init__(self):
@@ -48,10 +49,10 @@ class TestRustBallistics(unittest.TestCase):
             self.skipTest("Rust oameteringengine_rs not installed.")
 
         engine = BallisticsEngine(self.config)
-        
+
         target = 6.0
         engine.set_target(target)
-        
+
         # Step through time
         dt = 20.0 # 20ms steps
         for _ in range(10):

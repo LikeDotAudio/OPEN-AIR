@@ -6,8 +6,10 @@
 Pydantic models for IS-12 NMOS Control Protocol schemas.
 """
 
-from pydantic import BaseModel, Field, StrictStr, StrictInt, StrictBool, StrictFloat, AnyUrl
-from typing import List, Optional, Dict, Any
+from typing import Any
+
+from pydantic import BaseModel, Field, StrictInt, StrictStr
+
 
 # Base message schema
 class IS12BaseMessage(BaseModel):
@@ -19,36 +21,36 @@ class IS12BaseMessage(BaseModel):
 # Command message schema
 class IS12CommandMessage(IS12BaseMessage):
     operation: StrictStr = Field(..., description="The operation to perform (e.g., 'Set', 'Get', 'Invoke').")
-    resource_id: Optional[StrictStr] = Field(None, description="Identifier of the resource to operate on.")
-    parameters: Optional[Dict[StrictStr, Any]] = Field(None, description="Parameters for the command.")
+    resource_id: StrictStr | None = Field(None, description="Identifier of the resource to operate on.")
+    parameters: dict[StrictStr, Any] | None = Field(None, description="Parameters for the command.")
     # Additional fields as per protocol specification
 
 # Command Response message schema
 class IS12CommandResponseMessage(IS12BaseMessage):
     command_result: StrictStr = Field(..., description="Result of the command ('Success', 'Failure').")
-    data: Optional[Dict[StrictStr, Any]] = Field(None, description="Data returned by the command.")
-    error: Optional[Dict[str, Any]] = Field(None, description="Error details if command_result is 'Failure'.")
+    data: dict[StrictStr, Any] | None = Field(None, description="Data returned by the command.")
+    error: dict[str, Any] | None = Field(None, description="Error details if command_result is 'Failure'.")
     # Additional fields as per protocol specification
 
 # Subscription message schema
 class IS12SubscriptionMessage(IS12BaseMessage):
     subscription_id: StrictStr = Field(..., description="Unique identifier for the subscription.")
-    resource_ids: List[StrictStr] = Field(..., description="List of resource IDs to subscribe to.")
-    event_types: List[StrictStr] = Field(..., description="List of event types to subscribe to (e.g., 'property_changed', 'state_changed').")
-    filter: Optional[Dict[str, Any]] = Field(None, description="Optional filter for events.")
+    resource_ids: list[StrictStr] = Field(..., description="List of resource IDs to subscribe to.")
+    event_types: list[StrictStr] = Field(..., description="List of event types to subscribe to (e.g., 'property_changed', 'state_changed').")
+    filter: dict[str, Any] | None = Field(None, description="Optional filter for events.")
 
 # Subscription Response message schema
 class IS12SubscriptionResponseMessage(IS12BaseMessage):
     subscription_id: StrictStr = Field(..., description="Identifier of the subscription being responded to.")
     status: StrictStr = Field(..., description="Status of the subscription ('Subscribed', 'Failed').")
-    message: Optional[StrictStr] = Field(None, description="Message providing details on the subscription status.")
+    message: StrictStr | None = Field(None, description="Message providing details on the subscription status.")
 
 # Notification message schema
 class IS12NotificationMessage(IS12BaseMessage):
     notification_id: StrictStr = Field(..., description="Unique identifier for the notification.")
     resource_id: StrictStr = Field(..., description="Identifier of the resource the notification pertains to.")
     event_type: StrictStr = Field(..., description="Type of event (e.g., 'property_changed').")
-    event_data: Dict[str, Any] = Field(..., description="Data associated with the event.")
+    event_data: dict[str, Any] = Field(..., description="Data associated with the event.")
 
 # Event Data schema (used within NotificationMessage)
 class IS12EventData(BaseModel):
@@ -60,7 +62,7 @@ class IS12EventData(BaseModel):
 class IS12ErrorMessage(IS12BaseMessage):
     error_code: StrictInt = Field(..., description="Numeric error code.")
     error_message: StrictStr = Field(..., description="Human-readable error message.")
-    details: Optional[Dict[str, Any]] = Field(None, description="Additional error details.")
+    details: dict[str, Any] | None = Field(None, description="Additional error details.")
 
 # Example usage (for development and testing)
 if __name__ == "__main__":

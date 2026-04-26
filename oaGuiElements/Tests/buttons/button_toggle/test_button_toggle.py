@@ -4,11 +4,12 @@
 #
 # Description: Brief summary of purpose
 
-import unittest
+import tkinter as tk
 import unittest
 from unittest.mock import MagicMock, patch
-import tkinter as tk
+
 from oaGuiElements.Core.buttons.button_toggle.Core.button_toggle import BuilderButtonToggleCreator
+
 
 class TestButtonToggle(unittest.TestCase):
     def setUp(self):
@@ -49,7 +50,7 @@ class TestButtonToggle(unittest.TestCase):
             self.mock_bool_var = MagicMock() # Assign mock_bool_var here
             self.mock_bool_var.get.return_value = False # Default state for BooleanVar.
             self.mock_bool_var.trace_add.return_value = None
-            
+
             # Patch tkinter.Canvas and tkinter.BooleanVar.
             canvas_patcher = patch('tkinter.Canvas', return_value=mock_canvas_instance)
             self.patchers.append(canvas_patcher)
@@ -60,7 +61,7 @@ class TestButtonToggle(unittest.TestCase):
             bool_var_patcher.start()
 
             # Ensure tk.TclError is available for the try-except block to catch.
-            tk.TclError = tk.TclError 
+            tk.TclError = tk.TclError
 
         # Common mocks setup, independent of Tkinter availability.
         self.config = {
@@ -92,7 +93,7 @@ class TestButtonToggle(unittest.TestCase):
         # Stop all active patches.
         for patcher in self.patchers:
             patcher.stop()
-        
+
         # Destroy the Tkinter root window if it's a real Tk instance.
         if self.root and isinstance(self.root, tk.Tk):
             self.root.destroy()

@@ -1,20 +1,21 @@
 # Core/vertical_meter_renderer.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: Brief summary of purpose
 
-import tkinter as tk
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
-from tkinter import ttk
-import time
-import orjson
 import re
-from loguru import logger
+import time
+import tkinter as tk
+from tkinter import ttk
+
+import orjson
+
 from oaComProtocols.oaComMQTT.Core.mqtt_publisher_service import publish_payload
 from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic
+from oaLogging.Methods.matrix_gate import matrix_log
+
 
 class VerticalMeterRenderer(ttk.Frame):
     """A Tkinter widget to simulate a multi-channel vertical meter display."""
@@ -23,15 +24,15 @@ class VerticalMeterRenderer(ttk.Frame):
         self.subscriber_router = kwargs.pop("subscriber_router", None)
         self.state_mirror_engine = kwargs.pop("state_mirror_engine", None)
         super().__init__(parent, **kwargs)
-        
+
         self.widget_config, self.base_mqtt_topic, self.widget_id = config, base_mqtt_topic, widget_id
         self.GUID = self.state_mirror_engine.GUID if self.state_mirror_engine and hasattr(self.state_mirror_engine, "GUID") else "UNKNOWN_GUID"
 
         self.channel_labels = []
         num_channels = config.get("num_channels", 4)
-        
+
         self.meter_values_var = tk.StringVar(value=orjson.dumps([config.get("value_default", 0.0)] * num_channels).decode())
-        
+
         for i in range(num_channels):
             label = ttk.Label(self, text=f"Ch {i+1}: --", anchor="w")
             label.pack(side=tk.TOP, fill=tk.X, pady=1)
@@ -54,7 +55,7 @@ class VerticalMeterRenderer(ttk.Frame):
             for n in num_strs:
                 try: vals.append(float(n))
                 except: continue
-            
+
             for i, v in enumerate(vals):
                 if i < len(self.channel_labels): self.channel_labels[i].config(text=f"Ch {i+1}: {float(v):.2f}")
 

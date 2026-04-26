@@ -1,18 +1,18 @@
-from typing import Optional
 from struct import pack, unpack
 
+from aes70.ocp1.encoded_arguments import EncodedArguments
 from aes70.ocp1.pdu import PDU
 from aes70.types.ocaevent import OcaEvent
-from aes70.ocp1.encoded_arguments import EncodedArguments
+
 
 class Notification(PDU):
     target: int
     method_level: int
     method_index: int
-    context: Optional[bytes]
+    context: bytes | None
     event: OcaEvent
     param_count: int
-    parameters: Optional[bytes]
+    parameters: bytes | None
     message_type: int = 2
 
     def __init__(self, target: int, method_level: int, method_index: int, context, event: OcaEvent, param_count:int, parameters) -> None:

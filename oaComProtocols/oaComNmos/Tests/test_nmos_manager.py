@@ -2,15 +2,15 @@
 # Author: Anthony Peter Kuzub
 # Version: 20260410.1000.2
 #
-# Description: Unit tests for NMOS Entry/Manager ensuring Hub-and-Spoke integrity, 
+# Description: Unit tests for NMOS Entry/Manager ensuring Hub-and-Spoke integrity,
 # anti-feedback, and standardized standalone behavior.
 
 import unittest
-from unittest.mock import MagicMock, patch
-import threading
+from unittest.mock import patch
 
 # --- Target Module ---
-from oaComProtocols.oaComNmos.Entry import start, stop, status, global_state
+from oaComProtocols.oaComNmos.Entry import global_state, start, status, stop
+
 
 class TestNMOSManager(unittest.TestCase):
     """
@@ -23,7 +23,7 @@ class TestNMOSManager(unittest.TestCase):
         # Reset global state for isolation
         global_state["RUNNING"] = False
         global_state["NODE_ID"] = None
-        
+
         # Patch external dependencies
         # ⚡ CRITICAL: We patch HTTPServer in EVERY namespace it appears to be sure.
         self.patchers = [
@@ -48,16 +48,16 @@ class TestNMOSManager(unittest.TestCase):
         """CHECK: Verify start/stop/status cycle."""
         # OPERATE
         start(registrar_url="http://mock-registry:4000")
-        
+
         # CHECK
         curr_status = status()
         self.assertTrue(curr_status["running"])
         self.assertEqual(curr_status["registrar"], "http://mock-registry:4000")
         self.assertEqual(curr_status["node_id"], "test-uuid")
-        
+
         # OPERATE
         stop()
-        
+
         # CHECK
         self.assertFalse(status()["running"])
 
@@ -65,7 +65,7 @@ class TestNMOSManager(unittest.TestCase):
         """CHECK: Verify the manager registers itself with the NMOS registry on start."""
         # OPERATE
         start()
-        
+
         # CHECK: registration_manager was called
         from oaComProtocols.oaComNmos.Entry import registration_manager
         registration_manager.register_all_resources.assert_called()

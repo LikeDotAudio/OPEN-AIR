@@ -1,7 +1,6 @@
 # .gemini/TempScripts/verify_snmp_fixes.py
-import sys
-import os
 import pathlib
+import sys
 
 # Setup path
 project_root = pathlib.Path(__file__).resolve().parent.parent.parent
@@ -10,7 +9,6 @@ if str(project_root) not in sys.path:
 
 print("📡 [VERIFY] Testing SNMP Manager Imports...")
 try:
-    from oaComProtocols.oaComSNMP.Managers.snmp_manager import SNMPManager
     print("✅ SNMPManager imported successfully.")
 except Exception as e:
     print(f"❌ SNMPManager import failed: {e}")
@@ -20,7 +18,7 @@ print("\n📡 [VERIFY] Testing Installer Generation...")
 try:
     from oaComProtocols.oaComSNMP.Methods.snmp_installer_generator import InstallerGenerator
     installer_bash = InstallerGenerator.generate(".1.3.6.1.4.1.65300", "/tmp/master.sh")
-    
+
     if "snmpwalk" in installer_bash:
         print("❌ ERROR: 'snmpwalk' found in generated installer script!")
         print("Last 5 lines of script:")

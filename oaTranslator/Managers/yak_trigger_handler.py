@@ -15,13 +15,13 @@
 #
 # Version 20260406.1940.1
 
-from oaLogging.Core.logger import initialize_logging, set_log_directory
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
+
 from loguru import logger
 
-from oaConfigurationManager.FileReaders.config_reader import Config
 from oaComProtocols.oaComMQTT.Core.mqtt_message import MqttMessage
+from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
@@ -42,7 +42,7 @@ def register_monitor_callback(callback_func):
     """
     if callback_func not in _gui_observers:
         _gui_observers.append(callback_func)
-        matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, 
+        matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name,
                    "✅ [CONFIG] Yak Monitor GUI registered.", level="SUCCESS")
 
 def unregister_monitor_callback(callback_func):
@@ -72,10 +72,10 @@ def handle_yak_monitor_traffic(message: MqttMessage):
     """
     topic = message.topic
     payload = message.decode_payload()
-    
+
     # Notify all registered GUI dashboards.
     for callback in _gui_observers:
         try:
             callback(topic, payload)
-        except Exception as e:
+        except Exception:
              logger.exception("❌ [UI] Error updating Yak Monitor dashboard.")

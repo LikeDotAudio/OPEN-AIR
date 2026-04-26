@@ -14,13 +14,13 @@
 #
 # Version 20260330.1600.1
 
-from loguru import logger
 from oaLogging.Methods.matrix_gate import matrix_log
 
 try: import mido
 except ImportError: mido = None
 
 import os
+
 # ⚡ SAFETY: Skip real hardware in restricted environments
 if os.environ.get("OPEN_AIR_SKIP_REAL_MIDI") == "1":
     mido = None
@@ -63,7 +63,7 @@ class MIDIPortController:
         # Check if already open
         for p in self.inports:
             if hasattr(p, 'name') and p.name == name: return p
-        
+
         try:
             p = mido.open_input(name)
             self.inports.append(p)
@@ -79,7 +79,7 @@ class MIDIPortController:
         # Check if already open
         for p in self.outports:
             if hasattr(p, 'name') and p.name == name: return p
-            
+
         try:
             p = mido.open_output(name)
             self.outports.append(p)
@@ -99,14 +99,14 @@ class MIDIPortController:
                 t = threading.Thread(target=listen_loop_cb, args=(p,), daemon=True); t.start()
                 threads.append(t)
                 matrix_log("comms", "midi", "open_all", f"🎹 INPUT READY: {name}", "SUCCESS")
-            except Exception as e: 
+            except Exception as e:
                 self.logger.error(f"❌ FAILED INPUT {name}: {e}")
 
         # for name in info["outputs"]:
         #     try:
         #         p = mido.open_output(name); self.outports.append(p)
         #         matrix_log("comms", "midi", "open_all", f"🎹 OUTPUT READY: {name}", "SUCCESS")
-        #     except Exception as e: 
+        #     except Exception as e:
         #         self.logger.error(f"❌ FAILED OUTPUT {name}: {e}")
         return threads
 

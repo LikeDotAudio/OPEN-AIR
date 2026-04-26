@@ -1,8 +1,10 @@
-from aes70.ocp1.createtype import create_type, Type
 from struct import pack_into, unpack_from
 
+from aes70.ocp1.createtype import Type, create_type
+
+
 def encode_to(dataView: bytearray, pos: int, value):
-    pack_into('?', dataView, pos, value);
+    pack_into('?', dataView, pos, value)
     return pos + 1
 
 def decode(dataView: bytearray, pos: int):

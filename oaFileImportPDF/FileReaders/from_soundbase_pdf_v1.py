@@ -1,20 +1,22 @@
+import inspect
 import os
 
-import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
 # FileReaders/from_soundbase_pdf_v1.py
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: Logic for converting Sound Base PDF files (version 1) into standardized marker format.
-
 import re
+
 import numpy as np
 import pdfplumber
+
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = False
 from loguru import logger
+
 from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
@@ -55,7 +57,7 @@ def _internal_convert_soundbase_pdf_v1_to_markers(pdf_file_path):
 
             for page_num, page in enumerate(pdf.pages):
                 matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"▶️ Processing Page {page_num + 1}...", "DEBUG")
-                
+
                 # Extract text for group headers
                 lines = page.extract_text().splitlines()
                 lines = [line.strip() for line in lines if line.strip()]

@@ -1,6 +1,6 @@
 # oaTranslator/Methods/yak_receiver.py
 #
-# Processes responses from SCPI queries and publishes the parsed output 
+# Processes responses from SCPI queries and publishes the parsed output
 # values to MQTT. Maps instrument data back to the YAK hierarchy.
 #
 # Author: Anthony Peter Kuzub
@@ -15,18 +15,15 @@
 #
 # Version 20260406.1945.1
 
-import os
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
-import orjson
-from typing import Any
-from oaComProtocols.oaComMQTT.Core.mqtt_message import MqttMessage
 
 # --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
+from oaComProtocols.oaComMQTT.Core.mqtt_message import MqttMessage
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import matrix_log
+
 app_constants = Config.get_instance()
 
 class YakReceiverManager:
@@ -49,7 +46,7 @@ class YakReceiverManager:
         - Assumes 'OPEN-AIR/Proxy/Rx_Outbox' topic availability.
     """
 
-    def __init__(self, mqtt_connection_manager, subscriber_router, 
+    def __init__(self, mqtt_connection_manager, subscriber_router,
                  yak_translator, state_cache_manager=None):
         """
         Initializes the YakRxManager and establishes proxy subscriptions.
@@ -64,7 +61,7 @@ class YakReceiverManager:
         self.subscriber_router = subscriber_router
         self.yak_translator = yak_translator
         self.state_cache_manager = state_cache_manager
-        
+
         # Hardware Workaround: Fixed path for bandwidth trigger corrections.
         self.NAB_BANDWIDTH_TRIGGER_PATH = [
             "yak", "Bandwidth", "nab", "NAB_bandwidth_settings",
@@ -76,8 +73,8 @@ class YakReceiverManager:
         """Registers the primary Proxy outbox filter for instrument responses."""
         topic = "OPEN-AIR/Proxy/Rx_Outbox"
         self.subscriber_router.subscribe_to_topic(topic, self._on_rx_outbox_message)
-        matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, 
-                   f"✅ [INIT] YakRxManager listening on '{topic}'", 
+        matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name,
+                   f"✅ [INIT] YakRxManager listening on '{topic}'",
                    level="SUCCESS")
 
     def _on_rx_outbox_message(self, message: MqttMessage):
@@ -98,7 +95,7 @@ class YakReceiverManager:
         except Exception as e:
             logger.error(f"❌ [RX] Payload parse failure: {e}")
             return
-            
+
         response_value = payload_data.get("response")
         correlation_id = payload_data.get("correlation_id")
 
@@ -111,8 +108,8 @@ class YakReceiverManager:
                 command_details = command_context.get("command_details")
 
                 if path_parts and command_details:
-                    self.process_response(path_parts, 
-                                         {"Outputs": command_details}, 
+                    self.process_response(path_parts,
+                                         {"Outputs": command_details},
                                          response_value)
                 else:
                     logger.error(f"❌ [RX] Incomplete context for {correlation_id}")
@@ -121,7 +118,7 @@ class YakReceiverManager:
         else:
             logger.error("❌ [RX] Missing response or correlation ID.")
 
-    def process_response(self, path_parts: list, command_details: dict, 
+    def process_response(self, path_parts: list, command_details: dict,
                          response: str):
         """
         Parses an instrument response and publishes values to the MQTT broker.
@@ -141,14 +138,14 @@ class YakReceiverManager:
         output_keys = list(outputs.keys())
 
         # --- Hardware Quirk Correction ---
-        # Correct for legacy bandwidth setting key-order discrepancies 
+        # Correct for legacy bandwidth setting key-order discrepancies
         # observed in specific firmware versions.
         if path_parts == self.NAB_BANDWIDTH_TRIGGER_PATH and len(output_keys) >= 5:
-            if (output_keys[3].startswith("Sweep_Time_s") and 
+            if (output_keys[3].startswith("Sweep_Time_s") and
                 output_keys[4].startswith("Continuous_Mode_On")):
                 output_keys[3], output_keys[4] = output_keys[4], output_keys[3]
-                matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, 
-                           "🔄 [CORRECT] Key swap applied for bandwidth path.", 
+                matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name,
+                           "🔄 [CORRECT] Key swap applied for bandwidth path.",
                            level="DEBUG")
 
         if len(response_parts) != len(output_keys):
@@ -170,7 +167,7 @@ class YakReceiverManager:
             else:
                 self.mqtt_util.get_client_instance().publish(
                     topic=output_topic, payload=raw_value, qos=0, retain=True)
-            
-            matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, 
-                       f"📡📤📤 [STATE] {output_topic} -> {raw_value}", 
+
+            matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name,
+                       f"📡📤📤 [STATE] {output_topic} -> {raw_value}",
                        level="DEBUG")

@@ -4,15 +4,16 @@
 #
 # Description: Universal GUI Loader - Host for Dynamic GUI components.
 
-import tkinter as tk
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
-from loguru import logger
 import pathlib
-from typing import Optional, Any, Dict
+import tkinter as tk
+from typing import Any
+
+from loguru import logger
 
 from oaGuiBuilder.Workers.builder import DynamicGuiBuilder
 from oaGuiManager.Core.context.widget_context import WidgetContext
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # Globals
 current_version = "20260111.1510.1"
@@ -24,20 +25,20 @@ class UniversalGuiLoader(tk.Frame):
     It takes a JSON path and builds the interface.
     """
 
-    def __init__(self, parent, json_path: str, config: Optional[Dict[str, Any]] = None, **kwargs):
+    def __init__(self, parent, json_path: str, config: dict[str, Any] | None = None, **kwargs):
         """
         Initialize the Universal GUI Loader.
         """
         # Set default background to match theme
         if "bg" not in kwargs and "background" not in kwargs:
             kwargs["bg"] = "#2b2b2b"
-        
+
         super().__init__(parent, **kwargs)
 
         # 1. Absorb Arguments
         self.json_path = pathlib.Path(json_path)
         self.config_data = config if config else {}
-        
+
         # Extract the module name from the filename
         self.module_name = self.json_path.stem.replace("gui_", "").upper()
 
@@ -46,7 +47,7 @@ class UniversalGuiLoader(tk.Frame):
 
         # 2. Extract Core Dependencies (Safety Check)
         self.app = self.config_data.get("app_instance")
-        
+
         # 3. Initialize UI (Start the reactor!)
         self._init_ui()
 
@@ -62,22 +63,22 @@ class UniversalGuiLoader(tk.Frame):
             if not self.json_path.exists():
                 raise FileNotFoundError(f"Blueprint missing! {self.json_path}")
 
-            matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, 
-                       f"🏗️🏗️🏗️ [BUILDER] Constructing '{self.module_name}' via DynamicGuiBuilder...", 
+            matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name,
+                       f"🏗️🏗️🏗️ [BUILDER] Constructing '{self.module_name}' via DynamicGuiBuilder...",
                        level="DEBUG")
 
             # 2. Execution
             self._instantiate_builder()
 
             # 3. Success
-            matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, 
-                       f"✅✅✅ [SUCCESS] It works! {self.module_name} is fully operational!", 
+            matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name,
+                       f"✅✅✅ [SUCCESS] It works! {self.module_name} is fully operational!",
                        level="SUCCESS")
 
         except FileNotFoundError as e:
             # 4a. Expected Validation Failure - No noisy traceback
-            matrix_log("UI", "GUI_MANAGER", "_construct_dynamic_gui", 
-                       f"⚠️⚠️⚠️ [VALIDATION] Blueprint missing! Module: {self.module_name} | Path: {self.json_path}", 
+            matrix_log("UI", "GUI_MANAGER", "_construct_dynamic_gui",
+                       f"⚠️⚠️⚠️ [VALIDATION] Blueprint missing! Module: {self.module_name} | Path: {self.json_path}",
                        level="WARNING")
             self._handle_build_error(e)
 
@@ -94,7 +95,7 @@ class UniversalGuiLoader(tk.Frame):
         # during the initial geometry configuration of the top-level container.
         if "geometry" in builder_config:
             builder_config["geometry"] = WidgetContext.sanitize_geometry(builder_config["geometry"])
-        
+
         try:
             self.dynamic_gui = DynamicGuiBuilder(
                 parent=self,
@@ -106,7 +107,7 @@ class UniversalGuiLoader(tk.Frame):
             self.dynamic_gui.grid(row=0, column=0, sticky="nsew")
             self.dynamic_gui.start()
         except tk.TclError as e:
-            # 🛡️ RECURSION GUARD EXPANSION: Catch TclErrors during initial configuration 
+            # 🛡️ RECURSION GUARD EXPANSION: Catch TclErrors during initial configuration
             # to prevent a hard crash if X11 rejects transient 0x0 geometries.
             logger.error(f"🖥️🎨 [UI] TclError during builder instantiation for {self.module_name}: {e}")
             matrix_log("UI", "GUI_MANAGER", "_instantiate_builder", f"⚠️ Geometry initialization failed for {self.module_name}. Proceeding with fallback.", level="WARNING")
@@ -117,7 +118,7 @@ class UniversalGuiLoader(tk.Frame):
             for child in self.winfo_children():
                 child.destroy()
             tk.Label(
-                self, text=f"Error: {e}", fg="red", bg="#2b2b2b", 
+                self, text=f"Error: {e}", fg="red", bg="#2b2b2b",
                 font=("Arial", 12, "bold")
             ).pack(pady=20)
 

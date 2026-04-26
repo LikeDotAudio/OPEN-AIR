@@ -6,8 +6,9 @@
 
 import unittest
 from unittest.mock import MagicMock, patch
-import tkinter as tk
+
 from oaGuiManager.Core.ui_window import UIWindowManager
+
 
 class TestUIWindowManager(unittest.TestCase):
     """Verifies that the main UI window is correctly initialized and configured."""
@@ -17,20 +18,20 @@ class TestUIWindowManager(unittest.TestCase):
         """OPERATE: Create root window. CHECK: Verify styling and title are applied."""
         mock_root = MagicMock()
         mock_tk_class.return_value = mock_root
-        
+
         root = UIWindowManager.create_root_window()
-        
+
         # Verify base styling
         mock_root.configure.assert_called_with(bg="#2b2b2b")
         mock_root.title.assert_called_with("OPEN-AIR (Partitioned UI)")
-        
+
         # Verify options are added
         mock_root.option_add.assert_any_call("*Background", "#2b2b2b")
         mock_root.option_add.assert_any_call("*Foreground", "#dcdcdc")
-        
+
         # Verify minimum size
         mock_root.minsize.assert_called_with(800, 600)
-        
+
         # Verify withdraw is not called
         mock_root.withdraw.assert_not_called()
 
@@ -40,9 +41,9 @@ class TestUIWindowManager(unittest.TestCase):
         """OPERATE: Create window on Linux. CHECK: Verify zoomed attribute is NOT set yet."""
         mock_root = MagicMock()
         mock_tk_class.return_value = mock_root
-        
+
         UIWindowManager.create_root_window()
-        
+
         # Should NOT be called in create_root_window anymore
         for call in mock_root.attributes.call_args_list:
             if "-zoomed" in str(call):
@@ -53,9 +54,9 @@ class TestUIWindowManager(unittest.TestCase):
         """OPERATE: Reveal window on Linux. CHECK: Verify zoomed attribute is set."""
         mock_root = MagicMock()
         mock_splash = MagicMock()
-        
+
         UIWindowManager.reveal_main_window(mock_root, mock_splash, False)
-        
+
         mock_root.attributes.assert_called_with("-zoomed", True)
         mock_root.deiconify.assert_called_once()
         mock_splash.hide.assert_called_once()

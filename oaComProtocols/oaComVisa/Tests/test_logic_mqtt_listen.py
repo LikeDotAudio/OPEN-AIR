@@ -6,10 +6,14 @@
 
 import unittest
 from unittest.mock import MagicMock, patch
-import orjson
-import threading
 
-from oaComProtocols.oaComVisa.Workers.logic_mqtt_listen import VisaMqttListener, MQTT_TOPIC_SEARCH_TRIGGER, MQTT_TOPIC_DEVICE_SELECT
+import orjson
+
+from oaComProtocols.oaComVisa.Workers.logic_mqtt_listen import (
+    MQTT_TOPIC_SEARCH_TRIGGER,
+    VisaMqttListener,
+)
+
 
 class TestVisaMqttListener(unittest.TestCase):
 
@@ -20,7 +24,7 @@ class TestVisaMqttListener(unittest.TestCase):
         self.mock_connector = MagicMock()
         self.mock_disconnector = MagicMock()
         self.mock_publisher = MagicMock()
-        
+
         self.listener = VisaMqttListener(
             subscriber_router=self.mock_router,
             searcher=self.mock_searcher,
@@ -43,9 +47,9 @@ class TestVisaMqttListener(unittest.TestCase):
         """
         self.mock_searcher.search_resources.return_value = ["DEV1", "DEV2"]
         payload = orjson.dumps({"value": True})
-        
+
         self.listener._on_search_request(MQTT_TOPIC_SEARCH_TRIGGER, payload)
-        
+
         self.mock_searcher.search_resources.assert_called_once()
         self.mock_publisher._update_found_devices_gui.assert_called_with(["DEV1", "DEV2"])
         self.assertEqual(self.listener.found_resources, ["DEV1", "DEV2"])
@@ -60,9 +64,9 @@ class TestVisaMqttListener(unittest.TestCase):
         # Topic format: .../options/<index>/selected. Let's pick index 2 (1-based is 2, 0-based is 1)
         topic = "OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Found_devices/options/2/selected"
         payload = orjson.dumps({"value": True})
-        
+
         self.listener._on_device_select(topic, payload)
-        
+
         self.assertEqual(self.listener.selected_device_resource, "RES2")
 
     @patch('threading.Thread')
@@ -74,9 +78,9 @@ class TestVisaMqttListener(unittest.TestCase):
         """
         self.listener.selected_device_resource = "TCPIP::1.2.3.4::INSTR"
         payload = orjson.dumps({"value": True})
-        
+
         self.listener._on_gui_connect_request("topic", payload)
-        
+
         MockThread.assert_called_once()
         args, kwargs = MockThread.call_args
         self.assertEqual(kwargs['target'], self.listener._connect_and_get_inst)
@@ -93,9 +97,9 @@ class TestVisaMqttListener(unittest.TestCase):
         mock_inst = MagicMock()
         self.listener.inst = mock_inst
         payload = orjson.dumps({"value": True})
-        
+
         self.listener._on_gui_disconnect_request("topic", payload)
-        
+
         MockThread.assert_called_once()
         args, kwargs = MockThread.call_args
         self.assertEqual(kwargs['target'], self.mock_disconnector.disconnect_instrument_logic)
@@ -111,9 +115,9 @@ class TestVisaMqttListener(unittest.TestCase):
         CHECK: Assert a thread is started for the specific resource.
         """
         payload = orjson.dumps({"resource": "GPIB0::7::INSTR"})
-        
+
         self.listener._on_connect_request("topic", payload)
-        
+
         MockThread.assert_called_once()
         args, kwargs = MockThread.call_args
         self.assertEqual(kwargs['args'], ("GPIB0::7::INSTR",))

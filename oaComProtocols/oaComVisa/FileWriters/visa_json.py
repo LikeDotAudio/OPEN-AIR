@@ -1,19 +1,19 @@
-from oaLogging.Methods.matrix_gate import matrix_log
+import datetime
+import inspect
+import os
+import tempfile
+
 # FileWriters/visa_json.py
 # Author: Gemini Agent
 # Version: 1.0.0
 #
 # Description: Manages the construction and augmentation of JSON data for VISA devices.
-
 import orjson
-import os
-import datetime
-import inspect
-import tempfile
+
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = False
-from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
 from oaConfigurationManager.FileReaders.config_reader import Config
@@ -64,7 +64,7 @@ class VisaJsonBuilder:
         """
         filepath = STATE_VISA_FLEET_JSON_PATH
         temp_path = None
-        
+
         # Ensure directory exists (exist_ok=True prevents exception)
         os.makedirs(os.path.dirname(filepath), exist_ok=True)
 
@@ -163,8 +163,8 @@ class VisaJsonBuilder:
 
         with open(filepath, "wb") as f:
             f.write(orjson.dumps(query_data, option=orjson.OPT_INDENT_2))
-        
-        if LOCAL_DEBUG: 
+
+        if LOCAL_DEBUG:
             # Final validation: check if file was written
             if os.path.exists(filepath):
                 matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"✅ Saved query response for {serial} to {filepath}", "DEBUG")

@@ -5,15 +5,14 @@
 # Description: monitoring/fleet_status_monitor.py
 
 import time
+
 import orjson
-import os
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = False
-from loguru import logger
-from oaLogging.Core.logger import SYSTEM_LOGGER as sys_logger
-from oaConfigurationManager.FileReaders.config_reader import Config
 from oaComProtocols.oaComMQTT.Core.mqtt_message import MqttMessage
+from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Core.logger import SYSTEM_LOGGER as sys_logger
 
 app_constants = Config.get_instance()  # Get the singleton instance
 
@@ -85,7 +84,7 @@ class FleetStatusMonitor:
                 data = orjson.loads(payload)
             else:
                 data = payload
-                
+
             num_devices = data.get("num_devices", 0)
             if num_devices > 0:
                 self.current_state = "GREEN"

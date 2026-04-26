@@ -7,8 +7,10 @@
 
 import inspect
 import threading
-from typing import Dict, List, Any, Callable
+from collections.abc import Callable
+
 from oaLogging.Methods.matrix_gate import matrix_log
+
 
 class EventBus:
     """A singleton event bus for decoupled system-wide communication."""
@@ -19,7 +21,7 @@ class EventBus:
         if cls._instance is None:
             with cls._lock:
                 if cls._instance is None:
-                    cls._instance = super(EventBus, cls).__new__(cls)
+                    cls._instance = super().__new__(cls)
                     cls._instance._subscribers = {}
                     cls._instance.raise_exceptions = False
         return cls._instance
@@ -68,7 +70,7 @@ class EventBus:
         """Publishes an event to all subscribers."""
         source = kwargs.get('source', 'Unknown')
         source_name = source.__class__.__name__ if not isinstance(source, str) else source
-        
+
         subscriber_count = len(self._subscribers.get(event_type, []))
         matrix_log(
             system="BROKER",
@@ -77,7 +79,7 @@ class EventBus:
             message=f"🔔🗃️💬 [EVENT_BUS] Publishing '{event_type}' from {source_name} to {subscriber_count} subscribers.",
             level="DEBUG",
         )
-        
+
         if event_type in self._subscribers:
             for callback in self._subscribers[event_type]:
                 try:

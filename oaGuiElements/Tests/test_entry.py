@@ -7,6 +7,7 @@
 
 import unittest
 
+
 class TestInitialization(unittest.TestCase):
     def test_module_loads(self):
         # BUILD

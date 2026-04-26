@@ -1,8 +1,9 @@
-import typing
-from typing import Any, Callable, Dict
-from .createtype import create_type, Type
+from typing import Any
 
-def Enum(data_type: typing.Type, base: Type) -> Type:
+from .createtype import Type, create_type
+
+
+def Enum(data_type: type, base: Type) -> Type:
     encode_to = base.encode_to
     decode_from = base.decode_from
 

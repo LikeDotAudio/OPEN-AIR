@@ -6,8 +6,8 @@
 # The sole orchestrator for the State Cache Module.
 
 import os
-import sys
 import subprocess
+import sys
 import time
 from pathlib import Path
 
@@ -44,14 +44,14 @@ def start(mqtt_connection_manager=None, state_mirror_engine=None):
     Initializes and starts the State Cache service.
     """
     print(f"🚀 [START] Starting {Path(__file__).parent.name} services...")
-    
-    # If no MQTT manager is provided and we are in standalone mode, 
+
+    # If no MQTT manager is provided and we are in standalone mode,
     # we might need to initialize a default one or handle the lack thereof.
     # For now, we'll try to get the registry and then tell it to subscribe if possible.
-    
+
     registry = get_registry(mqtt_connection_manager, state_mirror_engine)
     registry.initialize_state()
-    
+
     # ⚡ V3.1.25 MQTT SYNC:
     # If we have an MQTT manager, ensure we subscribe to all topics to "get all the MQTT things".
     if registry.mqtt:
@@ -59,7 +59,7 @@ def start(mqtt_connection_manager=None, state_mirror_engine=None):
         registry.subscribe_to_all_topics()
     else:
         print(f"⚠️ [WARN] {Path(__file__).parent.name} started without MQTT manager. Network sync disabled.")
-        
+
     return registry
 
 def stop():
@@ -83,14 +83,14 @@ def run_tests():
     """
     print(f"📡📥📥 [TEST] {Path(__file__).parent.name}: Starting automated test discovery...")
     test_dir = current_dir / "Tests"
-    
+
     if not test_dir.exists():
         print(f"⚠️ [TEST] {Path(__file__).parent.name}: No Tests/ directory found.")
         return True
 
     env = os.environ.copy()
     env["PYTHONPATH"] = str(project_root) + os.pathsep + env.get("PYTHONPATH", "")
-    
+
     try:
         rel_test_dir = os.path.relpath(test_dir, project_root)
         result = subprocess.run(
@@ -117,7 +117,7 @@ if __name__ == "__main__":
     if not run_tests():
         print("❌ [CRITICAL] Tests failed. Aborting execution.")
         sys.exit(1)
-    
+
     # Standalone execution logic
     if len(sys.argv) > 1:
         cmd = sys.argv[1].lower()

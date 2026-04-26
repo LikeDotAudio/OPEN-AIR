@@ -1,6 +1,6 @@
 # FileReaders/from_shure_wwb_zip.py
 #
-# Parses a Shure Wireless Workbench .zip archive, extracts relevant 
+# Parses a Shure Wireless Workbench .zip archive, extracts relevant
 # frequency data, and returns it in a standardized marker format.
 #
 # Author: Anthony Peter Kuzub
@@ -16,15 +16,16 @@
 # Version 20260330.1600.1
 
 import csv
-import inspect
 import io
 import os
 import re
 import zipfile
+
 import numpy as np
 from loguru import logger
-from oaLogging.Methods.matrix_gate import is_debug_allowed, matrix_log
+
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
@@ -36,11 +37,11 @@ def Marker_convert_wwb_zip_report_to_csv(file_path):
     list of dictionaries.
     """
     if not file_path:
-        matrix_log("ui", "importer", "Marker_convert_wwb_zip_report_to_csv", 
+        matrix_log("ui", "importer", "Marker_convert_wwb_zip_report_to_csv",
                    "🟡 No file path provided for zip conversion.", "DEBUG")
         return [], []
 
-    matrix_log("ui", "importer", "Marker_convert_wwb_zip_report_to_csv", 
+    matrix_log("ui", "importer", "Marker_convert_wwb_zip_report_to_csv",
                f"▶️ Starting ZIP report conversion for: {os.path.basename(file_path)}", "DEBUG")
 
     csv_data = []
@@ -55,7 +56,7 @@ def Marker_convert_wwb_zip_report_to_csv(file_path):
         group_match = re.search(r"([^_]+)_wwb$", zip_filename_stem)
         main_group = group_match.group(1).replace("_", " ") if group_match else "N/A"
 
-        matrix_log("ui", "importer", "Marker_convert_wwb_zip_report_to_csv", 
+        matrix_log("ui", "importer", "Marker_convert_wwb_zip_report_to_csv",
                    f"🔍 Derived from ZIP filename: ZONE='{zone}', Main Group='{main_group}'", "DEBUG")
 
         with zipfile.ZipFile(file_path, "r") as zip_ref:
@@ -66,7 +67,7 @@ def Marker_convert_wwb_zip_report_to_csv(file_path):
                 return [], []
 
             if len(csv_files) > 1:
-                matrix_log("ui", "importer", "Marker_convert_wwb_zip_report_to_csv", 
+                matrix_log("ui", "importer", "Marker_convert_wwb_zip_report_to_csv",
                            "⚠️ Found multiple .csv files. Processing all of them.", "DEBUG")
 
             for csv_file_name in csv_files:
@@ -88,13 +89,13 @@ def Marker_convert_wwb_zip_report_to_csv(file_path):
                                 "NAME": "", "FREQ_MHZ": freq_mhz, "PEAK": np.nan,
                             }
                             csv_data.append(row_data)
-                            matrix_log("ui", "importer", "Marker_convert_wwb_zip_report_to_csv", 
+                            matrix_log("ui", "importer", "Marker_convert_wwb_zip_report_to_csv",
                                        f"✅ Added ZIP CSV row: {row_data}", "SUCCESS")
                         except (ValueError, IndexError):
-                            matrix_log("ui", "importer", "Marker_convert_wwb_zip_report_to_csv", 
+                            matrix_log("ui", "importer", "Marker_convert_wwb_zip_report_to_csv",
                                        f"⏩ Skipping non-frequency data row: {row}", "TRACE")
 
-        matrix_log("ui", "importer", "Marker_convert_wwb_zip_report_to_csv", 
+        matrix_log("ui", "importer", "Marker_convert_wwb_zip_report_to_csv",
                    f"✅ Extracted and converted {len(csv_files)} CSV files successfully!", "SUCCESS")
         return headers, csv_data
 

@@ -4,14 +4,15 @@
 #
 # Description: Brief summary of purpose
 
-import midiParser
-import csvWriter
-import csvReader
-import mido
-import time
 import configparser
+import time
+from threading import Event, Thread
+
+import csvReader
+import csvWriter
+import midiParser
+import mido
 from Cell import Cell
-from threading import Thread, Event
 from midiParser import Direction
 
 UPDATE_PERIOD = 0.5  # Seconds
@@ -30,7 +31,7 @@ def handle_midi_input(input_port_name: str, output_port_name: str, table: list[l
     :parameter table: The table to update
     :parameter direction: The direction of the midi message (incoming from or outgoing to rtp)
     """
-    
+
     try:
         output_port = mido.open_output(output_port_name)
         input_port = mido.open_input(input_port_name)
@@ -48,15 +49,15 @@ def handle_midi_input(input_port_name: str, output_port_name: str, table: list[l
     input_port.close()
     print("Closing port" + output_port_name)
     output_port.close()
-        
+
 
 def listen_to_midi(input_port, output_port, table, direction: Direction) -> None:
     while True:
-        
+
         if stop_flag.is_set():
             print("Stopping thread")
             break
-        
+
         for message in input_port.iter_pending():
             if message.type == 'sysex' and direction == Direction.INCOMING:
                 print(message)
@@ -78,11 +79,11 @@ def update_table(table: list[list[int]], message, direction: Direction) -> None:
         update_table_lcd(table, message, direction)
         return
 
-    
+
     cell = midiParser.parse_message(message, direction, table)
     if cell is None:
         return
-    
+
     table[cell.row][cell.column] = midiParser.get_message_value(message)
 
     # csvWriter.write_table('hui_data.csv', table)
@@ -104,7 +105,7 @@ def update_table_lcd(table: list[list[int]], message, direction: Direction) -> N
     for char_index in range(LCD_POSITION_INDEX + 1, LCD_POSITION_INDEX + length + 1): # for each ascii character in the message
 
         cell = lcd_seg_to_cell(table, position)
-        
+
         new_char = chr(message.data[char_index])
 
         seg = position % SEGMENTS_PER_LCD
@@ -125,14 +126,14 @@ def lcd_seg_to_cell(table: list[list[int]], position: int) -> Cell:
     """
 
     lcd_section = position // SEGMENTS_PER_LCD # the lcd section (1-8 is first row, 9-16 is second row)
- 
+
     lcd_row_index = midiParser.get_row_num('lcd_line_' + str(lcd_section // LCDS_PER_ROW), table)
     lcd_column_index = lcd_section % LCDS_PER_ROW
 
     if lcd_row_index is None:
         print("lcd_line_" + str(lcd_section // LCDS_PER_ROW) + " not found")
         return None
-    
+
     return Cell(lcd_row_index, lcd_column_index)
 
 
@@ -171,7 +172,7 @@ def init_device_from_table(table: list[list[int]], output_port_name: str) -> Non
             message.note = column + led * midiParser.ROW_SIZE
             message.velocity = value
             output_port.send(message)
-    
+
     # knob leds
     knob_led_row = table[midiParser.get_row_num('control_change_6', table)]
     for column in range(midiParser.ROW_SIZE):
@@ -237,13 +238,13 @@ if __name__ == "__main__":
         threads.append(rtp_input_thread)
         threads.append(csv_writer)
 
-    
 
-    
 
-    
 
-    
+
+
+
+
 
     # Wait for a keyboard interrupt
     try:

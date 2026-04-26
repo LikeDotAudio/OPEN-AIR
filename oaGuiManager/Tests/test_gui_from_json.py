@@ -4,14 +4,15 @@
 #
 # Description: Unit tests for gui_from_json.py (UniversalGuiLoader)
 
+import pathlib
+import tkinter as tk
 import unittest
 from unittest.mock import MagicMock, patch
-import tkinter as tk
-import pathlib
+
+# Import the class to be patched where it's used
 # Import the module under test first
 from oaGuiManager.Core.loader.gui_from_json import UniversalGuiLoader
-# Import the class to be patched where it's used
-from oaGuiBuilder.Workers.builder import DynamicGuiBuilder
+
 
 class TestUniversalGuiLoader(unittest.TestCase):
     """Verifies that the Universal GUI Loader correctly instantiates and builds the UI."""
@@ -38,19 +39,19 @@ class TestUniversalGuiLoader(unittest.TestCase):
         """OPERATE: Instantiate Loader. CHECK: Verify it sets up and starts the builder."""
         mock_builder = MagicMock()
         mock_builder_class.return_value = mock_builder
-        
+
         loader = UniversalGuiLoader(self.root, self.test_json_path_success, self.mock_config)
-        
+
         # Trigger the async build manually
         loader._construct_dynamic_gui()
-        
+
         # Verify DynamicGuiBuilder was instantiated
         mock_builder_class.assert_called_once()
-        
+
         # Verify it was gridded and started
         mock_builder.grid.assert_called_once()
         mock_builder.start.assert_called_once()
-        
+
         loader.destroy()
 
     @patch.object(pathlib.Path, 'exists', return_value=False)
@@ -60,9 +61,9 @@ class TestUniversalGuiLoader(unittest.TestCase):
         """OPERATE: Trigger build with missing file. CHECK: Verify error handling."""
         mock_builder = MagicMock()
         mock_builder_class.return_value = mock_builder
-        
+
         loader = UniversalGuiLoader(self.root, self.test_json_path_fail, self.mock_config)
-        
+
         # Trigger build
         with patch.object(loader, '_handle_build_error') as mock_handle:
             loader._construct_dynamic_gui()

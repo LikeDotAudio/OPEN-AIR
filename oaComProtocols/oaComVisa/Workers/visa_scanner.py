@@ -1,22 +1,20 @@
 import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
+import re
+import urllib.parse
+import urllib.request
+from concurrent.futures import ThreadPoolExecutor
+
 # Workers/visa_scanner.py
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: Core scanning and probing logic for VISA device discovery.
-
 import pyvisa
-import urllib.request
-import urllib.parse
-import re
-import string
-import time
-from concurrent.futures import ThreadPoolExecutor
-from loguru import logger
+
+from oaLogging.Methods.matrix_gate import matrix_log
 
 from ..Constants.visa_devices import KNOWN_DEVICES
-from ..Methods.network_utils import clean_string_for_display, get_local_ip, check_host
+from ..Methods.network_utils import check_host, clean_string_for_display, get_local_ip
 
 # --- CONFIGURATION ---
 HTTP_TIMEOUT = 5
@@ -37,7 +35,7 @@ class VisaScanner:
         my_ip = get_local_ip()
         if my_ip == "127.0.0.1":
             return [], []
-        
+
         subnet = ".".join(my_ip.split(".")[:-1])
         targets_to_scan = [f"{subnet}.{i}" for i in range(1, 255) if f"{subnet}.{i}" != my_ip]
 

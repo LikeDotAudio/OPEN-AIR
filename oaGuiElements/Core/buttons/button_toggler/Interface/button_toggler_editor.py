@@ -5,9 +5,10 @@
 # Description: Bespoke editor for the Button Toggler element.
 # Provides a standalone window to modify the element's JSON configuration.
 
-import tkinter as tk
-from tkinter import ttk, colorchooser
 import json
+import tkinter as tk
+from tkinter import colorchooser, ttk
+
 
 class ButtonTogglerEditor:
     """Standalone editor for Button Toggler configuration."""
@@ -31,21 +32,21 @@ class ButtonTogglerEditor:
         # Header
         header = tk.Frame(self.window, bg="#333333", height=40)
         header.pack(side="top", fill="x")
-        tk.Label(header, text="BUTTON TOGGLER EDITOR", bg="#333333", fg="white", 
+        tk.Label(header, text="BUTTON TOGGLER EDITOR", bg="#333333", fg="white",
                  font=("Arial", 10, "bold")).pack(side="left", padx=10, pady=10)
 
         # Scrollable area
         container = tk.Frame(self.window, bg="#1e1e1e")
         container.pack(fill="both", expand=True, padx=10, pady=10)
-        
+
         canvas = tk.Canvas(container, bg="#1e1e1e", highlightthickness=0)
         scrollbar = ttk.Scrollbar(container, orient="vertical", command=canvas.yview)
         self.scroll_frame = tk.Frame(canvas, bg="#1e1e1e")
-        
+
         canvas.configure(yscrollcommand=scrollbar.set)
         canvas.pack(side="left", fill="both", expand=True)
         scrollbar.pack(side="right", fill="y")
-        
+
         self.canvas_window = canvas.create_window((0, 0), window=self.scroll_frame, anchor="nw")
         self.scroll_frame.bind("<Configure>", lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
         canvas.bind("<Configure>", lambda e: canvas.itemconfig(self.canvas_window, width=e.width))
@@ -78,16 +79,16 @@ class ButtonTogglerEditor:
         footer = tk.Frame(self.window, bg="#333333", height=50)
         footer.pack(side="bottom", fill="x")
 
-        tk.Button(footer, text="SAVE", bg="#4CAF50", fg="white", 
+        tk.Button(footer, text="SAVE", bg="#4CAF50", fg="white",
                   font=("Arial", 9, "bold"), relief="flat", width=12,
                   command=self._on_save).pack(side="right", padx=10, pady=10)
-        
-        tk.Button(footer, text="DISCARD", bg="#f44336", fg="white", 
+
+        tk.Button(footer, text="DISCARD", bg="#f44336", fg="white",
                   font=("Arial", 9, "bold"), relief="flat", width=12,
                   command=self.window.destroy).pack(side="right", padx=10, pady=10)
 
     def _add_section(self, text):
-        lbl = tk.Label(self.scroll_frame, text=text.upper(), bg="#1e1e1e", fg="#33A1FD", 
+        lbl = tk.Label(self.scroll_frame, text=text.upper(), bg="#1e1e1e", fg="#33A1FD",
                        font=("Arial", 9, "bold"))
         lbl.pack(fill="x", pady=(15, 5))
         tk.Frame(self.scroll_frame, height=1, bg="#444444").pack(fill="x", pady=(0, 10))
@@ -115,74 +116,74 @@ class ButtonTogglerEditor:
         row = tk.Frame(self.scroll_frame, bg="#1e1e1e")
         row.pack(fill="x", pady=2)
         tk.Label(row, text=label, bg="#1e1e1e", fg="#dcdcdc", width=20, anchor="w").pack(side="left")
-        
+
         var = tk.StringVar(value=str(self._get_nested(key_path) or ""))
         entry = tk.Entry(row, textvariable=var, bg="#2d2d2d", fg="white", insertbackground="white", relief="flat")
         entry.pack(side="left", fill="x", expand=True, padx=5)
-        
+
         var.trace_add("write", lambda *a: self._set_nested(key_path, var.get()))
 
     def _add_spinbox(self, label, key_path, from_, to_):
         row = tk.Frame(self.scroll_frame, bg="#1e1e1e")
         row.pack(fill="x", pady=2)
         tk.Label(row, text=label, bg="#1e1e1e", fg="#dcdcdc", width=20, anchor="w").pack(side="left")
-        
+
         val = self._get_nested(key_path)
         var = tk.IntVar(value=int(val) if val is not None else from_)
-        spin = tk.Spinbox(row, from_=from_, to=to_, textvariable=var, bg="#2d2d2d", fg="white", 
+        spin = tk.Spinbox(row, from_=from_, to=to_, textvariable=var, bg="#2d2d2d", fg="white",
                           buttonbackground="#444444", relief="flat", width=5)
         spin.pack(side="left", padx=5)
-        
+
         var.trace_add("write", lambda *a: self._set_nested(key_path, var.get()))
 
     def _add_checkbox(self, label, key_path, on_value=True, off_value=False):
         row = tk.Frame(self.scroll_frame, bg="#1e1e1e")
         row.pack(fill="x", pady=2)
         tk.Label(row, text=label, bg="#1e1e1e", fg="#dcdcdc", width=20, anchor="w").pack(side="left")
-        
+
         current = self._get_nested(key_path)
         var = tk.BooleanVar(value=(current == on_value))
-        cb = tk.Checkbutton(row, variable=var, bg="#1e1e1e", activebackground="#1e1e1e", 
+        cb = tk.Checkbutton(row, variable=var, bg="#1e1e1e", activebackground="#1e1e1e",
                             selectcolor="#2d2d2d", highlightthickness=0)
         cb.pack(side="left", padx=5)
-        
+
         var.trace_add("write", lambda *a: self._set_nested(key_path, on_value if var.get() else off_value))
 
     def _add_color_picker(self, label, key_path):
         row = tk.Frame(self.scroll_frame, bg="#1e1e1e")
         row.pack(fill="x", pady=2)
         tk.Label(row, text=label, bg="#1e1e1e", fg="#dcdcdc", width=20, anchor="w").pack(side="left")
-        
+
         color = self._get_nested(key_path) or "#000000"
         btn = tk.Button(row, bg=color, width=10, relief="flat")
         btn.pack(side="left", padx=5)
-        
+
         def pick():
             c = colorchooser.askcolor(color, title=f"Pick {label}")[1]
             if c:
                 btn.config(bg=c)
                 self._set_nested(key_path, c)
-        
+
         btn.config(command=pick)
 
     def _add_slider(self, label, key_path, from_, to_):
         row = tk.Frame(self.scroll_frame, bg="#1e1e1e")
         row.pack(fill="x", pady=2)
         tk.Label(row, text=label, bg="#1e1e1e", fg="#dcdcdc", width=20, anchor="w").pack(side="left")
-        
+
         val = self._get_nested(key_path)
         var = tk.DoubleVar(value=float(val) if val is not None else from_)
-        scale = tk.Scale(row, from_=from_, to=to_, resolution=0.1, orient="horizontal", 
+        scale = tk.Scale(row, from_=from_, to=to_, resolution=0.1, orient="horizontal",
                          variable=var, bg="#1e1e1e", fg="#888888", highlightthickness=0,
                          troughcolor="#2d2d2d", activebackground="#33A1FD")
         scale.pack(side="left", fill="x", expand=True, padx=5)
-        
+
         var.trace_add("write", lambda *a: self._set_nested(key_path, var.get()))
 
     def _refresh_options_list(self):
         # Implementation for editing the 'options' list/dict
         # This can be complex, for now we just show a message
-        tk.Label(self.options_frame, text="Use 'Code' tab for granular option editing.", 
+        tk.Label(self.options_frame, text="Use 'Code' tab for granular option editing.",
                  bg="#1e1e1e", fg="#666666", font=("Arial", 8, "italic")).pack(pady=5)
 
     def _on_save(self):

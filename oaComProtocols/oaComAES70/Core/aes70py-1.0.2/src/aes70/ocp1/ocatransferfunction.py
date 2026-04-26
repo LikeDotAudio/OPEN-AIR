@@ -2,11 +2,10 @@
 This file is part of aes70py.
 This file has been generated.
 """
+from ..types.ocatransferfunction import OcaTransferFunction as type
 from .ocafloat32 import OcaFloat32
 from .ocalist import OcaList
 from .struct import Struct
-
-from ..types.ocatransferfunction import OcaTransferFunction as type
 
 OcaTransferFunction = Struct(
   {

@@ -6,6 +6,7 @@
 
 import tkinter as tk
 
+
 class ValueProcessor:
     """
     Standardizes value extraction and normalization for GUI/MQTT synchronization.
@@ -27,9 +28,9 @@ class ValueProcessor:
             return None
 
         widget_type = config.get("type", "")
-        
+
         # 1. Boolean Normalization
-        if (widget_type in ["_GuiButtonToggle", "_WinkButton", "_WinkButtonToggler"] or 
+        if (widget_type in ["_GuiButtonToggle", "_WinkButton", "_WinkButtonToggler"] or
             isinstance(tk_var, tk.BooleanVar)):
             if isinstance(raw_value, bool):
                 return raw_value

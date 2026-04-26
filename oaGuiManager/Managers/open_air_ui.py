@@ -15,10 +15,9 @@
 #
 # Version 20260330.1600.1
 
-import sys
 import pathlib
+import sys
 import threading
-from loguru import logger
 
 # Ensure root directory is in the search path
 current_dir = pathlib.Path(__file__).resolve().parent
@@ -26,19 +25,21 @@ project_root = current_dir.parent.parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
-from oaConfigurationManager.FileReaders.config_reader import Config
-from oaLogging.Core.logger import set_log_directory
-from oaOchestration.Core.path_initializer import initialize_paths, DATA_LOGS_DIR
-from oaConfigurationManager.Methods.console_encoder import configure_console_encoding
-from oaGuiSplashScreen.Methods.splash_screen import SplashScreen
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
+
+from oaConfigurationManager.FileReaders.config_reader import Config
+from oaConfigurationManager.Methods.console_encoder import configure_console_encoding
+from oaGuiManager.Core.bootstrap_sequence import AsyncBootstrapEngine
+from oaGuiManager.Core.composition_root import UICompositionRoot
+from oaGuiManager.Core.shutdown_coordinator import ShutdownCoordinator
 
 # --- EXTRACTED CORE MODULES ---
 from oaGuiManager.Core.ui_window import UIWindowManager
-from oaGuiManager.Core.shutdown_coordinator import ShutdownCoordinator
-from oaGuiManager.Core.bootstrap_sequence import AsyncBootstrapEngine
-from oaGuiManager.Core.composition_root import UICompositionRoot
+from oaGuiSplashScreen.Methods.splash_screen import SplashScreen
+from oaLogging.Core.logger import set_log_directory
+from oaLogging.Methods.matrix_gate import matrix_log
+from oaOchestration.Core.path_initializer import DATA_LOGS_DIR, initialize_paths
+
 
 def main():
     """Orchestrates the startup, execution, and shutdown of the OPEN-AIR UI."""
@@ -50,7 +51,7 @@ def main():
         set_log_directory(DATA_LOGS_DIR, partition="UI")
         configure_console_encoding()
         app_constants = Config.get_instance()
-        
+
         matrix_log("ui", "system", "main", "🖥️🎨 [UI] Starting OpenAir UI Service...", "DEBUG")
 
         # 2. Tkinter Environment Setup
@@ -74,7 +75,7 @@ def main():
         def handle_sigterm(signum, frame):
             matrix_log("ui", "system", "main", "🛑 SIGTERM received in UI partition. Initiating shutdown...", "WARNING")
             shutdown_coordinator.shutdown()
-        
+
         signal.signal(signal.SIGTERM, handle_sigterm)
 
         # 6. Resource Management
@@ -86,24 +87,24 @@ def main():
         # 7. Bootstrap Engine (Consumes injected services)
         bootstrap_engine = AsyncBootstrapEngine(root, splash, shared_services, app_constants, shutdown_coordinator)
         threading.Thread(target=bootstrap_engine.run, daemon=True).start()
-        
+
         matrix_log("ui", "system", "main", "🖥️🎨 [UI] Entering Tkinter MainLoop.", "DEBUG")
         root.mainloop()
-        
+
     except KeyboardInterrupt:
         matrix_log("ui", "system", "main", "🛑 Keyboard Interrupt detected in UI partition. Initiating shutdown...", "WARNING")
         if shutdown_coordinator:
             shutdown_coordinator.shutdown()
         else:
             sys.exit(0)
-    
+
     matrix_log("ui", "system", "main", "🖥️🎨 [UI] MainLoop exited. Finalizing...", "DEBUG")
     if root:
         try:
             root.destroy()
         except Exception as e:
             matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"Error during root.destroy(): {e}", level="TRACE")
-    
+
     sys.exit(0)
 
 if __name__ == "__main__":

@@ -5,11 +5,12 @@
 # Description: Tests for the VisaGuiPublisher class.
 
 import unittest
-from unittest.mock import MagicMock, patch
-import orjson
-import time
+from unittest.mock import MagicMock
 
-from oaComProtocols.oaComVisa.Workers.logic_mqtt_publisher import VisaGuiPublisher, MAX_GUI_DEVICE_SLOTS
+import orjson
+
+from oaComProtocols.oaComVisa.Workers.logic_mqtt_publisher import VisaGuiPublisher
+
 
 class TestVisaGuiPublisher(unittest.TestCase):
 
@@ -18,7 +19,7 @@ class TestVisaGuiPublisher(unittest.TestCase):
         self.mock_mqtt = MagicMock()
         self.mock_client = MagicMock()
         self.mock_mqtt.get_client_instance.return_value = self.mock_client
-        
+
         self.publisher = VisaGuiPublisher(mqtt_controller=self.mock_mqtt)
 
     def test_initialization(self):
@@ -34,11 +35,11 @@ class TestVisaGuiPublisher(unittest.TestCase):
         CHECK: Assert the correct topic and payload (with GUID and origin) are published.
         """
         self.publisher._publish_status("connected", True)
-        
+
         expected_topic = "OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Device_status/connected"
         self.mock_client.publish.assert_called_once()
         args, kwargs = self.mock_client.publish.call_args
-        
+
         self.assertEqual(kwargs['topic'], expected_topic)
         payload = orjson.loads(kwargs['payload'])
         self.assertEqual(payload["value"], True)
@@ -53,11 +54,11 @@ class TestVisaGuiPublisher(unittest.TestCase):
         CHECK: Assert the proxy status and timestamp are published correctly.
         """
         self.publisher._publish_proxy_status("CONNECTED")
-        
+
         expected_topic = "OPEN-AIR/Proxy/Status"
         self.mock_client.publish.assert_called_once()
         args, kwargs = self.mock_client.publish.call_args
-        
+
         self.assertEqual(kwargs['topic'], expected_topic)
         payload = orjson.loads(kwargs['payload'])
         self.assertEqual(payload["status"], "CONNECTED")
@@ -71,12 +72,12 @@ class TestVisaGuiPublisher(unittest.TestCase):
         """
         resources = ["TCPIP::1.1.1.1::INSTR", "USB::1234::5678::INSTR"]
         self.publisher._update_found_devices_gui(resources)
-        
+
         # 1. Check bulk publish call
         # 2. Check auto-selection call
         total_expected_calls = 2
         self.assertEqual(self.mock_client.publish.call_count, total_expected_calls)
-        
+
         # Check bulk population
         self.mock_client.publish.assert_any_call(
             topic="OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Found_devices/options/all",
@@ -84,7 +85,7 @@ class TestVisaGuiPublisher(unittest.TestCase):
             qos=0,
             retain=False
         )
-        
+
         # Check first device auto-selection
         self.mock_client.publish.assert_any_call(
             topic="OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Found_devices/options/1/selected",

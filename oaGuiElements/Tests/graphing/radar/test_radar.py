@@ -4,12 +4,14 @@
 #
 # Description: Brief summary of purpose
 
+import os
+import tkinter as tk
 import unittest
 from unittest.mock import MagicMock, patch
-import tkinter as tk
+
 from oaGuiElements.Core.graphing.radar.Core.radar import BuilderDataRadarCreator
 from oaGuiElements.Tests.utils.test_utils import load_sample_config
-import os
+
 
 class RadarTestComponent(BuilderDataRadarCreator):
 

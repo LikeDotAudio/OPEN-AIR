@@ -5,16 +5,20 @@
 # Description: Native MIDI event transport over MQTT.
 # ⚡ CORE: Foundational transport for MIDI within the module.
 
-import threading
 import json
-import ssl
 import os
 import random
+import ssl
+import threading
+from typing import Any
+
 import paho.mqtt.client as mqtt
-from typing import Optional, Callable, Dict, Any
-from .abc import EventTransport
-from oaLogging.Methods.matrix_gate import matrix_log
+
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import matrix_log
+
+from .abc import EventTransport
+
 
 class MidiMqttTransport(EventTransport):
     """
@@ -24,8 +28,8 @@ class MidiMqttTransport(EventTransport):
     def __init__(self):
         super().__init__()
         self.config = Config.get_instance()
-        self.client: Optional[mqtt.Client] = None
-        self._thread: Optional[threading.Thread] = None
+        self.client: mqtt.Client | None = None
+        self._thread: threading.Thread | None = None
         matrix_log("comms", "midi_mqtt", "__init__", "📡 [MIDI-MQTT] Core Transport Initialized.", "DEBUG")
 
     def publish(self, topic: str, payload: Any, retain: bool = False, qos: int = 0) -> bool:
@@ -72,12 +76,12 @@ class MidiMqttTransport(EventTransport):
             matrix_log("comms", "midi_mqtt", "unsubscribe", f"📡❌ [MIDI-MQTT] Unsubscribe Error: {e}", "ERROR")
             return False
 
-    def connect(self, connection_params: Dict[str, Any]) -> bool:
+    def connect(self, connection_params: dict[str, Any]) -> bool:
         host = connection_params.get("destination_host", self.config.MQTT_BROKER_ADDRESS)
         port = connection_params.get("destination_port", self.config.MQTT_BROKER_PORT)
         username = connection_params.get("username", self.config.MQTT_USERNAME)
         password = connection_params.get("password", self.config.MQTT_PASSWORD)
-        
+
         # ⚡ UNIQUE IDENTITY: Prevent Client ID collisions in multi-partition environments
         partition_id = os.environ.get("OPEN_AIR_PARTITION_ID", "SUP")
         random_suffix = f"{random.getrandbits(16):04x}"
@@ -95,11 +99,11 @@ class MidiMqttTransport(EventTransport):
             self.client.tls_set(tls_version=ssl.PROTOCOL_TLS)
         if username and password:
             self.client.username_pw_set(username, password)
-        
+
         try:
             self.client.connect(host, port, 60)
             self.client.loop_start()
-            
+
             # Wait for connection
             import time
             start_time = time.time()
@@ -107,7 +111,7 @@ class MidiMqttTransport(EventTransport):
                 if self._is_connected:
                     return True
                 time.sleep(0.1)
-                
+
             return self._is_connected
         except Exception as e:
             matrix_log("comms", "midi_mqtt", "connect", f"📡❌ [MIDI-MQTT] Connection Error: {e}", "ERROR")
@@ -144,7 +148,7 @@ class MidiMqttTransport(EventTransport):
                     payload_data = json.loads(payload_str)
                 except json.JSONDecodeError:
                     payload_data = payload_str
-                
+
                 # Echo prevention check moved here for transport layer
                 if isinstance(payload_data, dict):
                     meta = payload_data.get("meta", {})

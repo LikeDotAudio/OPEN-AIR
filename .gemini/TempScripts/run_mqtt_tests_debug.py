@@ -1,7 +1,5 @@
 
 import sys
-import os
-import io
 import unittest
 from unittest.mock import MagicMock
 
@@ -12,9 +10,11 @@ if project_root not in sys.path:
 
 # Mock TEST_LOGGER before import
 import oaLogging.Entry
+
 oaLogging.Entry.TEST_LOGGER = MagicMock()
 
-from oaTests.Workers.TestRunner.TestRunner import TestRunner, CrashInterceptingResult
+from oaTests.Workers.TestRunner.TestRunner import CrashInterceptingResult, TestRunner
+
 
 class DebugCrashInterceptingResult(CrashInterceptingResult):
     def stopTest(self, test):
@@ -34,7 +34,7 @@ def run_all_mqtt_tests():
     # Run with CrashInterceptingResult
     runner = TestRunner()
     result = DebugCrashInterceptingResult(runner)
-    
+
     print(f"--- Running {suite.countTestCases()} tests ---")
     suite.run(result)
     print("--- Done ---")

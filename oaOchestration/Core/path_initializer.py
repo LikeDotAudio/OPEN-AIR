@@ -5,11 +5,10 @@
 # Description: This module initializes global project paths, including the project root and data directory, and adds them to the system path.
 
 import os
-import sys
 import pathlib
+import sys
 
 # --- Standard Debug Logging Setup ---
-from loguru import logger
 
 # ⚡ CACHE: Store resolved paths as module-level constants to avoid recalculation
 GLOBAL_PROJECT_ROOT = None
@@ -56,7 +55,7 @@ def initialize_paths():
     DATA_SNMP_DIR.mkdir(parents=True, exist_ok=True)
     DATA_SPLINKS_DIR.mkdir(parents=True, exist_ok=True)
     DATA_REPORTS_DIR.mkdir(parents=True, exist_ok=True)
-    
+
     return GLOBAL_PROJECT_ROOT, DATA_RUNNING_DIR
 
 

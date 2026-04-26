@@ -1,12 +1,12 @@
 # Core/shadow.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: Brief summary of purpose
 
-import tkinter as tk
 import math
+import tkinter as tk
+
 from .needle import NeedleConfig
 
 try:
@@ -26,7 +26,7 @@ class ShadowDrawer:
     STIPPLE_PATTERN = "gray25"
 
     @staticmethod
-    def draw_shadow(canvas, center_x, center_y, 
+    def draw_shadow(canvas, center_x, center_y,
                     value, min_val, max_val,
                     start_angle_deg, end_angle_deg, extent_deg,
                     main_arc_radius, text_offset_from_arc,
@@ -37,8 +37,8 @@ class ShadowDrawer:
             value=value, min_val=min_val, max_val=max_val,
             start_angle_deg=start_angle_deg, end_angle_deg=end_angle_deg, extent_deg=extent_deg,
             main_arc_radius=main_arc_radius, text_offset_from_arc=text_offset_from_arc,
-            color=ShadowDrawer.FILL_COLOR, style=style, thick=thick, 
-            counter_clockwise=counter_clockwise, pivot_size=pivot_size, 
+            color=ShadowDrawer.FILL_COLOR, style=style, thick=thick,
+            counter_clockwise=counter_clockwise, pivot_size=pivot_size,
             needle_scale=needle_scale, tag=tag
         )
         return ShadowDrawer.draw_with_config(canvas, center_x, center_y, config)
@@ -49,7 +49,7 @@ class ShadowDrawer:
         if needle_geo_rs:
             # ⚡ OFF-LOAD to RUST
             geo = needle_geo_rs.calculate_shadow_geometry(cx, cy, config.__dict__)
-            
+
             # 2. Try Optimization (Update existing)
             existing = canvas.find_withtag(config.tag)
             if existing:
@@ -72,17 +72,17 @@ class ShadowDrawer:
 
             g_type = geo.get("type")
             if g_type == "teardrop":
-                canvas.create_line(*geo["line1"], width=config.thick, fill=ShadowDrawer.FILL_COLOR, 
+                canvas.create_line(*geo["line1"], width=config.thick, fill=ShadowDrawer.FILL_COLOR,
                                    capstyle=tk.ROUND, tags=(config.tag, "vu_shadow"), stipple=ShadowDrawer.STIPPLE_PATTERN)
-                canvas.create_polygon(geo["poly"], fill=ShadowDrawer.FILL_COLOR, 
+                canvas.create_polygon(geo["poly"], fill=ShadowDrawer.FILL_COLOR,
                                        outline="", smooth=True, tags=(config.tag, "vu_shadow"), stipple=ShadowDrawer.STIPPLE_PATTERN)
-                canvas.create_line(*geo["line2"], width=config.thick, fill=ShadowDrawer.FILL_COLOR, 
+                canvas.create_line(*geo["line2"], width=config.thick, fill=ShadowDrawer.FILL_COLOR,
                                    capstyle=tk.ROUND, tags=(config.tag, "vu_shadow"), stipple=ShadowDrawer.STIPPLE_PATTERN)
             elif g_type == "polygon":
-                canvas.create_polygon(geo["coords"], fill=ShadowDrawer.FILL_COLOR, 
+                canvas.create_polygon(geo["coords"], fill=ShadowDrawer.FILL_COLOR,
                                        outline="", tags=(config.tag, "vu_shadow"), stipple=ShadowDrawer.STIPPLE_PATTERN)
             else: # line
-                canvas.create_line(*geo["coords"], width=config.thick, fill=ShadowDrawer.FILL_COLOR, 
+                canvas.create_line(*geo["coords"], width=config.thick, fill=ShadowDrawer.FILL_COLOR,
                                    capstyle=tk.ROUND, tags=(config.tag, "vu_shadow"), stipple=ShadowDrawer.STIPPLE_PATTERN)
             return
 
@@ -93,7 +93,7 @@ class ShadowDrawer:
 
         angle_deg = config.end_angle_deg + (norm_val * config.extent_deg) if config.counter_clockwise \
                     else config.start_angle_deg - (norm_val * config.extent_deg)
-            
+
         angle_rad = math.radians(angle_deg)
         length = (config.main_arc_radius + config.text_offset_from_arc - 2) * config.needle_scale
         tip_x, tip_y = cx + length * math.cos(angle_rad), cy - length * math.sin(angle_rad)
@@ -114,7 +114,7 @@ class ShadowDrawer:
             "baton": ShadowDrawer._draw_baton,
             "taper": ShadowDrawer._draw_taper,
         }
-        
+
         handler = handlers.get(config.style, ShadowDrawer._draw_line)
         handler(canvas, cx, cy, tip_x, tip_y, angle_rad, length, config)
 
@@ -133,7 +133,7 @@ class ShadowDrawer:
         existing = canvas.find_withtag(config.tag)
         if not existing or config.style not in ["line", "baton", "taper", "knife-edge"]:
             return False
-            
+
         if config.style == "line":
             scx, scy = ShadowDrawer._get_shadow_pt(cx, cy, cx, cy, length)
             stip_x, stip_y = ShadowDrawer._get_shadow_pt(tip_x, tip_y, cx, cy, length)
@@ -161,7 +161,7 @@ class ShadowDrawer:
     def _draw_line(canvas, cx, cy, tip_x, tip_y, angle_rad, length, config):
         scx, scy = ShadowDrawer._get_shadow_pt(cx, cy, cx, cy, length)
         stip_x, stip_y = ShadowDrawer._get_shadow_pt(tip_x, tip_y, cx, cy, length)
-        canvas.create_line(scx, scy, stip_x, stip_y, width=config.thick, fill=ShadowDrawer.FILL_COLOR, 
+        canvas.create_line(scx, scy, stip_x, stip_y, width=config.thick, fill=ShadowDrawer.FILL_COLOR,
                            capstyle=tk.ROUND, tags=(config.tag, "vu_shadow"), stipple=ShadowDrawer.STIPPLE_PATTERN)
 
     @staticmethod
@@ -173,7 +173,7 @@ class ShadowDrawer:
         sbx1, sby1 = ShadowDrawer._get_shadow_pt(bx1, by1, cx, cy, length)
         sbx2, sby2 = ShadowDrawer._get_shadow_pt(bx2, by2, cx, cy, length)
         stip_x, stip_y = ShadowDrawer._get_shadow_pt(tip_x, tip_y, cx, cy, length)
-        canvas.create_polygon([sbx1, sby1, stip_x, stip_y, sbx2, sby2], fill=ShadowDrawer.FILL_COLOR, 
+        canvas.create_polygon([sbx1, sby1, stip_x, stip_y, sbx2, sby2], fill=ShadowDrawer.FILL_COLOR,
                                outline="", tags=(config.tag, "vu_shadow"), stipple=ShadowDrawer.STIPPLE_PATTERN)
 
     @staticmethod
@@ -185,7 +185,7 @@ class ShadowDrawer:
         sbx1, sby1 = ShadowDrawer._get_shadow_pt(bx1, by1, cx, cy, length)
         sbx2, sby2 = ShadowDrawer._get_shadow_pt(bx2, by2, cx, cy, length)
         stip_x, stip_y = ShadowDrawer._get_shadow_pt(tip_x, tip_y, cx, cy, length)
-        canvas.create_polygon([sbx1, sby1, stip_x, stip_y, sbx2, sby2], fill=ShadowDrawer.FILL_COLOR, 
+        canvas.create_polygon([sbx1, sby1, stip_x, stip_y, sbx2, sby2], fill=ShadowDrawer.FILL_COLOR,
                                outline="", tags=(config.tag, "vu_shadow"), stipple=ShadowDrawer.STIPPLE_PATTERN)
 
     @staticmethod
@@ -196,7 +196,7 @@ class ShadowDrawer:
         sc2 = ShadowDrawer._get_shadow_pt(tip_x + ox, tip_y - oy, cx, cy, length)
         sc3 = ShadowDrawer._get_shadow_pt(tip_x - ox, tip_y + oy, cx, cy, length)
         sc4 = ShadowDrawer._get_shadow_pt(cx - ox, cy + oy, cx, cy, length)
-        canvas.create_polygon([sc1[0], sc1[1], sc2[0], sc2[1], sc3[0], sc3[1], sc4[0], sc4[1]], 
+        canvas.create_polygon([sc1[0], sc1[1], sc2[0], sc2[1], sc3[0], sc3[1], sc4[0], sc4[1]],
                                fill=ShadowDrawer.FILL_COLOR, outline="", tags=(config.tag, "vu_shadow"), stipple=ShadowDrawer.STIPPLE_PATTERN)
 
     @staticmethod
@@ -210,7 +210,7 @@ class ShadowDrawer:
         mx, my = cx + mid_dist * math.cos(angle_rad), cy - mid_dist * math.sin(angle_rad)
         s1x, s1y = mx + bulb_w * math.cos(perp_angle), my - bulb_w * math.sin(perp_angle)
         s2x, s2y = mx - bulb_w * math.cos(perp_angle), my + bulb_w * math.sin(perp_angle)
-        
+
         scx, scy = ShadowDrawer._get_shadow_pt(cx, cy, cx, cy, length)
         sp1x, sp1y = ShadowDrawer._get_shadow_pt(p1x, p1y, cx, cy, length)
         sbx, sby = ShadowDrawer._get_shadow_pt(bx, by, cx, cy, length)
@@ -219,9 +219,9 @@ class ShadowDrawer:
         ss2x, ss2y = ShadowDrawer._get_shadow_pt(s2x, s2y, cx, cy, length)
         stip_x, stip_y = ShadowDrawer._get_shadow_pt(tip_x, tip_y, cx, cy, length)
 
-        canvas.create_line(scx, scy, sp1x, sp1y, width=config.thick, fill=ShadowDrawer.FILL_COLOR, 
+        canvas.create_line(scx, scy, sp1x, sp1y, width=config.thick, fill=ShadowDrawer.FILL_COLOR,
                            capstyle=tk.ROUND, tags=(config.tag, "vu_shadow"), stipple=ShadowDrawer.STIPPLE_PATTERN)
-        canvas.create_polygon([sbx, sby, ss1x, ss1y, sp2x, sp2y, ss2x, ss2y], fill=ShadowDrawer.FILL_COLOR, 
+        canvas.create_polygon([sbx, sby, ss1x, ss1y, sp2x, sp2y, ss2x, ss2y], fill=ShadowDrawer.FILL_COLOR,
                                outline="", smooth=True, tags=(config.tag, "vu_shadow"), stipple=ShadowDrawer.STIPPLE_PATTERN)
-        canvas.create_line(sp2x, sp2y, stip_x, stip_y, width=config.thick, fill=ShadowDrawer.FILL_COLOR, 
+        canvas.create_line(sp2x, sp2y, stip_x, stip_y, width=config.thick, fill=ShadowDrawer.FILL_COLOR,
                            capstyle=tk.ROUND, tags=(config.tag, "vu_shadow"), stipple=ShadowDrawer.STIPPLE_PATTERN)

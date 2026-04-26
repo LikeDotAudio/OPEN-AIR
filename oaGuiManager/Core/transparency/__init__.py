@@ -9,4 +9,4 @@ __all__ = [
     "TransparencyManager",
 ]
 
-from .transparency import TransparencyConfig, BackgroundSlicer, TransparencyManager
+from .transparency import BackgroundSlicer, TransparencyConfig, TransparencyManager

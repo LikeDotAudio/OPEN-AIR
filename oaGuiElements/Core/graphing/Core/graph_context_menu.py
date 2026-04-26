@@ -1,14 +1,15 @@
 # Core/graph_context_menu.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: Brief summary of purpose
 
-import tkinter as tk
-from tkinter import simpledialog, filedialog
 import datetime
+import tkinter as tk
+from tkinter import filedialog, simpledialog
+
 from loguru import logger
+
 
 class GraphContextMenu:
     """Encapsulates the complex right-click context menu for Matplotlib graphs."""
@@ -17,7 +18,7 @@ class GraphContextMenu:
     def show(event, fig, ax, annot, callbacks):
         try:
             menu = tk.Menu(fig.canvas.get_tk_widget(), tearoff=0)
-            
+
             # 1. Markers
             m_menu = tk.Menu(menu, tearoff=0); menu.add_cascade(label="Markers", menu=m_menu)
             def add_m(t):
@@ -81,4 +82,4 @@ class GraphContextMenu:
             menu.add_command(label="Autoscale", command=lambda: (ax.relim(), ax.autoscale(enable=True, axis='both', tight=True), fig.canvas.draw_idle()))
 
             menu.post(event.guiEvent.x_root, event.guiEvent.y_root)
-        except Exception as e: logger.exception("❌ Context menu failed")
+        except Exception: logger.exception("❌ Context menu failed")

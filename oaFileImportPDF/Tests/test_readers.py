@@ -8,6 +8,7 @@
 import unittest
 from pathlib import Path
 
+
 class TestPDFReaderAsset(unittest.TestCase):
     def test_sample_pdf_exists(self):
         """CHECK: Ensure the real-world SoundBase PDF is present."""

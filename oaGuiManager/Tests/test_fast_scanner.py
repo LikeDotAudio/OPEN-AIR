@@ -4,12 +4,13 @@
 #
 # Description: Unit tests for fast_scanner.py
 
-import unittest
-import os
+import pathlib
 import shutil
 import tempfile
-import pathlib
+import unittest
+
 from oaGuiManager.Core.fast_scanner import FastScanner
+
 
 class TestFastScanner(unittest.TestCase):
     """Verifies that the directory scanner works correctly, including fallback logic."""
@@ -18,7 +19,7 @@ class TestFastScanner(unittest.TestCase):
         """Build a temporary directory tree for testing."""
         self.test_dir = tempfile.mkdtemp()
         self.test_path = pathlib.Path(self.test_dir)
-        
+
         # Create some files and directories
         (self.test_path / "subdir1").mkdir()
         (self.test_path / "subdir2").mkdir()
@@ -35,7 +36,7 @@ class TestFastScanner(unittest.TestCase):
         """OPERATE: Scan for .py files. CHECK: Verify all matching files are found."""
         scanner = FastScanner()
         results = scanner.scan_directory(self.test_dir, ".py")
-        
+
         # Should find: subdir1/file1.py, subdir2/file3.py, root_file.py
         self.assertEqual(len(results), 3)
         self.assertTrue(any(res.endswith("file1.py") for res in results))
@@ -46,7 +47,7 @@ class TestFastScanner(unittest.TestCase):
         """OPERATE: Scan for all files. CHECK: Verify every file is identified."""
         scanner = FastScanner()
         results = scanner.scan_directory(self.test_dir)
-        
+
         # Should find 4 files total
         self.assertEqual(len(results), 4)
 

@@ -1,9 +1,11 @@
-import time
 import threading
-from .events import Events
+import time
+
 from aes70.ocp1.decode_message import decode_message
 from aes70.ocp1.keepalive import KeepAlive
 from aes70.ocp1.message_generator import MessageGenerator
+
+from .events import Events
 
 
 class Connection(Events):

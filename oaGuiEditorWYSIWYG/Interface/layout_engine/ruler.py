@@ -5,7 +5,9 @@
 # Description: Horizontal and Vertical rulers for the WYSIWYG editor.
 
 import tkinter as tk
+
 from oaLogging.Methods.matrix_gate import matrix_log
+
 
 class Ruler(tk.Canvas):
     """A ruler widget that displays measurements in pixels."""
@@ -14,19 +16,19 @@ class Ruler(tk.Canvas):
         kwargs.setdefault("bg", "#1a1a1a")
         kwargs.setdefault("highlightthickness", 0)
         kwargs.setdefault("bd", 0)
-        
+
         if self.orient == "horizontal":
             kwargs.setdefault("height", 20)
         else:
             kwargs.setdefault("width", 20)
-            
+
         super().__init__(parent, **kwargs)
         self.offset = 0
         self.scale = 1.0
         self.grid_size = 100
         self.center_val = None
         self.bind("<Configure>", lambda e: self.redraw())
-        
+
     def set_offset(self, offset):
         """Sets the scroll offset of the ruler."""
         self.offset = offset
@@ -36,13 +38,13 @@ class Ruler(tk.Canvas):
         """Sets the center point value to mark on the ruler."""
         self.center_val = value
         self.redraw()
-        
+
     def redraw(self):
         """Redraws the ruler markings based on the current orientation."""
         try:
             self.delete("all")
             width, height = int(self.winfo_width()), int(self.winfo_height())
-            
+
             if self.orient == "horizontal":
                 self._draw_horizontal(width, height)
             else:
@@ -55,11 +57,11 @@ class Ruler(tk.Canvas):
         self.create_line(0, h-1, w, h-1, fill="#555555")
         start = int(-(self.offset % self.grid_size))
         step = max(1, int(self.grid_size // 10))
-        
+
         for x in range(start, w, step):
             value = int(x + self.offset)
             self._draw_horizontal_tick(x, value, h)
-        
+
         if self.center_val is not None:
             self._draw_horizontal_center(w, h)
 
@@ -85,7 +87,7 @@ class Ruler(tk.Canvas):
         self.create_line(w-1, 0, w-1, h, fill="#555555")
         start = int(-(self.offset % self.grid_size))
         step = max(1, int(self.grid_size // 10))
-        
+
         for y in range(start, h, step):
             value = int(y + self.offset)
             self._draw_vertical_tick(y, value, w)

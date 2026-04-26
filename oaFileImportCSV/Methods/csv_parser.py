@@ -7,6 +7,7 @@
 LOCAL_DEBUG = False
 from oaRustCore import oa_csv_parser_rs as oacsvparser_rs
 
+
 class CSVParser:
     """
     High-performance CSV parser using Rust and Polars.

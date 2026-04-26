@@ -6,6 +6,7 @@
 
 from tkinter import ttk
 
+
 class AutoScrollbar(ttk.Scrollbar):
     """A custom scrollbar that removes itself from the grid if the scroll region is smaller than the frame."""
     def __init__(self, master=None, **kwargs):

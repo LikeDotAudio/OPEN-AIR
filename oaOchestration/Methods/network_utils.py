@@ -6,6 +6,7 @@
 
 import socket
 
+
 def get_local_ip():
     """
     Finds the primary local IP address of the machine.

@@ -1,8 +1,10 @@
-import sys
-import time
 import socket
+import sys
 import threading
+import time
+
 from aes70.controller.client_connection import ClientConnection
+
 
 class TCPConnection(ClientConnection):
     sock = None

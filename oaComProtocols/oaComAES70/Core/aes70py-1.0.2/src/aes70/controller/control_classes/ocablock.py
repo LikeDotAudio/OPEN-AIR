@@ -1,4 +1,3 @@
-from ...ocp1.string16 import String16
 from ...ocp1.ocablockmember import OcaBlockMember
 from ...ocp1.ocaglobaltypeidentifier import OcaGlobalTypeIdentifier
 from ...ocp1.ocalibvoldata_paramset import OcaLibVolData_ParamSet
@@ -13,6 +12,7 @@ from ...ocp1.ocastring import OcaString
 from ...ocp1.ocastringcomparisontype import OcaStringComparisonType
 from ...ocp1.ocauint16 import OcaUint16
 from ...ocp1.ocauint32 import OcaUint32
+from ...ocp1.string16 import String16
 from ..make_control_class import make_control_class
 from .ocaworker import OcaWorker
 

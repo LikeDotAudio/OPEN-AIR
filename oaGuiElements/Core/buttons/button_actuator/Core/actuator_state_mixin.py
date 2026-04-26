@@ -1,14 +1,16 @@
 # Core/actuator_state_mixin.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: Brief summary of purpose
 
-import orjson
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
+
+import orjson
 from loguru import logger
+
+from oaLogging.Methods.matrix_gate import matrix_log
+
 
 class ActuatorStateMixin:
     """Handles remote state synchronization for the Actuator button."""

@@ -8,6 +8,7 @@
 import unittest
 from pathlib import Path
 
+
 class TestReaders(unittest.TestCase):
     def test_asset_exists(self):
         # BUILD

@@ -14,9 +14,8 @@
 #
 # Version 20260329.1040.1
 
-import zlib
 import re
-import os
+import zlib
 from pathlib import Path
 
 # Global map: "clean/path/prefix" -> "numerical_node_id"
@@ -30,7 +29,7 @@ def initialize_oid_map(display_root):
     """
     global _clean_to_num_map
     _clean_to_num_map.clear()
-    
+
     root = Path(display_root)
     if not root.exists(): return
 
@@ -39,17 +38,17 @@ def initialize_oid_map(display_root):
 
     for path in root.rglob("*"):
         if not path.is_dir(): continue
-        
+
         # Build the clean path relative to display root
         rel_parts = path.relative_to(root).parts
-        
+
         # Trace the path to build clean vs numerical mapping
         current_clean_path = []
         for p in rel_parts:
             # ⚡ CLEAN: Strip numeric prefix/suffix (e.g. '1_Router' -> 'Router')
             clean = re.sub(r"^(\d+)[_-]?", "", p)
             clean = re.sub(r"[_-]?(\d+)$", "", clean).replace(" ", "_")
-            
+
             # ⚡ ALIGNMENT: Skip structural layout tokens
             if clean.lower() in LAYOUT_TOKENS or not clean:
                 continue
@@ -57,10 +56,10 @@ def initialize_oid_map(display_root):
             # Extract sorting number for OID assignment
             num_match = re.search(r"(\d+)", p)
             num = num_match.group(1) if num_match else None
-            
+
             current_clean_path.append(clean)
             clean_str = "/".join(current_clean_path)
-            
+
             if num:
                 _clean_to_num_map[clean_str] = num
 
@@ -70,12 +69,12 @@ def get_snmp_node_id(path_parts):
     Uses the pre-built crawler map to find folder sorting numbers.
     """
     if not path_parts: return "1"
-    
+
     # 1. Check the crawler map for a match
     clean_path = "/".join(path_parts)
     if clean_path in _clean_to_num_map:
         return _clean_to_num_map[clean_path]
-    
+
     # 2. Fallback: Deterministic 16-bit hash for non-folder parts (JSON keys)
     h_int = (zlib.crc32(clean_path.lower().encode()) & 0xFFFF)
     return str(h_int if h_int > 0 else 1)
@@ -87,10 +86,10 @@ def get_snmp_descriptor(path_parts):
     Example: OPEN-AIR/Mixing/Faders/Level -> mixingFadersLevela1b2
     """
     if not path_parts: return "v1"
-    
+
     # ⚡ SMIv2 REQUIREMENT: Must start with lowercase letter, use only [a-zA-Z0-9]
     # Max length is technically 64 characters.
-    
+
     clean_parts = []
     for p in path_parts:
         # Strip everything but alphanumeric
@@ -101,20 +100,20 @@ def get_snmp_descriptor(path_parts):
             clean_parts.append(c[0].lower() + c[1:])
         else:
             clean_parts.append(c[0].upper() + c[1:])
-    
+
     if not clean_parts:
         clean_parts = ["node"]
-        
+
     # Join parts to form the base name
     base_name = "".join(clean_parts)
-    
+
     # 4-character deterministic path hash for global uniqueness
     full_path = "/".join(path_parts).lower()
     h_str = hex(zlib.crc32(full_path.encode()) & 0xffffffff)[2:6].zfill(4)
-    
+
     # Enforce SMIv2 length limit (64 chars)
     # [BASE_NAME][HASH] = max 64. So base_name max 60.
     if len(base_name) > 60:
         base_name = base_name[:60]
-        
+
     return f"{base_name}{h_str}"

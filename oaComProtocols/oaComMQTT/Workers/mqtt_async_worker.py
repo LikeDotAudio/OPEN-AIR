@@ -1,21 +1,23 @@
-import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
 # Workers/mqtt_async_worker.py
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: Background worker for handling asynchronous aiomqtt operations.
-
 import asyncio
+import inspect
+
 import aiomqtt
-import queue
+
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = False
+
 from oaLogging.Core.logger import MQTT_LOGGER
-from loguru import logger
+
+from ..Constants.mqtt_config import PAYLOAD_OFFLINE, TOPIC_STATUS, WORKER_KICK_TIMEOUT
 from ..Core.mqtt_message import MqttMessage
-from ..Constants.mqtt_config import TOPIC_STATUS, PAYLOAD_OFFLINE, WORKER_KICK_TIMEOUT
+
 
 class MqttAsyncWorker:
     """Handles the async MQTT loop and traffic management."""
@@ -40,7 +42,7 @@ class MqttAsyncWorker:
         self.loop = asyncio.get_running_loop()
         self.stop_event = asyncio.Event()
         self.kick_event = asyncio.Event()
-        
+
         # Configure client
         kwargs = {
             "hostname": self.manager.broker_address,
@@ -49,7 +51,7 @@ class MqttAsyncWorker:
             "identifier": self.manager.client_id,
             "will": aiomqtt.Will(TOPIC_STATUS, payload=PAYLOAD_OFFLINE, qos=1, retain=True)
         }
-        
+
         if self.manager.username and self.manager.password:
             kwargs["username"] = self.manager.username
             kwargs["password"] = self.manager.password
@@ -61,7 +63,7 @@ class MqttAsyncWorker:
                 self.manager._connected = True
                 if LOCAL_DEBUG:
                     matrix_log("comms", "mqtt", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "aiomqtt: Connected to broker.", "SUCCESS")
-                
+
                 if self.manager.subscriber_router:
                     await self.manager.subscriber_router.resubscribe_all_topics(client)
 
@@ -77,7 +79,7 @@ class MqttAsyncWorker:
 
                 for t in pending: t.cancel()
                 await asyncio.gather(*pending, return_exceptions=True)
-                
+
         except Exception as e:
             MQTT_LOGGER.error(f"Worker failure: {e}")
         finally:
@@ -104,8 +106,8 @@ class MqttAsyncWorker:
             while not self.stop_event.is_set():
                 try:
                     await asyncio.wait_for(self.kick_event.wait(), timeout=WORKER_KICK_TIMEOUT)
-                except asyncio.TimeoutError: pass
-                
+                except TimeoutError: pass
+
                 self.kick_event.clear()
                 if self.stop_event.is_set(): break
 
@@ -113,7 +115,7 @@ class MqttAsyncWorker:
                 while True:
                     job = self.queue_manager.get_subscribe_request()
                     if job is None: break
-                    
+
                     try:
                         await client.subscribe(job["topic"], qos=job["qos"])
                     except Exception as e:
@@ -121,12 +123,12 @@ class MqttAsyncWorker:
                     finally:
                         self.queue_manager.task_done("subscribe")
                         self.queue_manager.remove_pending_subscription(job["topic"])
-                
+
                 # 2. Publications
                 while True:
                     item = self.queue_manager.get_publish_message()
                     if item is None: break
-                    
+
                     topic, payload, qos, retain = self._parse_publish_item(item)
                     try:
                         await client.publish(topic, payload=payload, qos=qos, retain=retain)
@@ -148,7 +150,7 @@ class MqttAsyncWorker:
             payload = item.get("payload")
             qos = item.get("qos", 0)
             retain = item.get("retain", False)
-            
+
         # ⚡ PROTOCOL ALIGNMENT: aiomqtt expects str, bytes, or None
         if isinstance(payload, (dict, list)):
             import orjson
@@ -158,5 +160,5 @@ class MqttAsyncWorker:
             pass
         elif payload is not None and not isinstance(payload, str):
             payload = str(payload)
-            
+
         return topic, payload, qos, retain

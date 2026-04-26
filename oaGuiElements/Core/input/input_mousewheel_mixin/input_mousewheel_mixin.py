@@ -4,18 +4,13 @@
 #
 # Description: input_mousewheel_mixin/mousewheel_mixin.py
 
-import sys
-from oaLogging.Methods.matrix_gate import matrix_log
-import inspect
 import inspect
 import pathlib
-import os
+import sys
 
 # --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
-from loguru import logger
-
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()  # Get the singleton instance
 
@@ -61,7 +56,7 @@ class MousewheelScrollMixin:
     # Outputs:
     #     None.
     def _bind_mousewheel(self, event):
-        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🖱️👆🔗 [EVENTS] Binding mousewheel scrolling for canvas.", level="TRACE")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🖱️👆🔗 [EVENTS] Binding mousewheel scrolling for canvas.", level="TRACE")
         # Bind mousewheel scrolling when the mouse enters the scrollable area
         self.canvas.bind_all("<MouseWheel>", self._on_mousewheel)
         self.canvas.bind_all("<Button-4>", self._on_mousewheel)  # Linux scroll up

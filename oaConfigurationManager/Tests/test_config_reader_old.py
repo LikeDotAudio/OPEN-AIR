@@ -5,7 +5,9 @@
 # Description: Brief summary of purpose
 
 import unittest
+
 from oaConfigurationManager.FileReaders.config_reader import Config
+
 
 class TestConfigReader(unittest.TestCase):
     def test_singleton(self):

@@ -5,7 +5,9 @@
 # Description: Structural operations on the JSON tree (Delete, Reorder, Nesting).
 
 from tkinter import messagebox
+
 from ...Core.state import state_manager
+
 
 class StructuralManagerMixin:
     """Handles structural operations on the JSON tree (Delete, Reorder, Nesting)."""
@@ -20,7 +22,7 @@ class StructuralManagerMixin:
     def _move_out(self, path):
         parts = path.split(".")
         if len(parts) < 3: return
-        target_parts = parts[:-2] 
+        target_parts = parts[:-2]
         state_manager.move_element(path, target_parts, source=self)
 
     def _move_in(self, path):

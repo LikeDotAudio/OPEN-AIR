@@ -4,8 +4,9 @@
 #
 # Description: Handles persistent logging of the installation process.
 
-import os
 import datetime
+import os
+
 
 class InstallationLogWriter:
     """

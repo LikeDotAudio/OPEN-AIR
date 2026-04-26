@@ -1,28 +1,28 @@
 # composite_mdp/composite_mdp.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 20260315.Modular.1
 #
 # Description: Modularized Motion Draggable Potentiometer (MDP).
 
-import tkinter as tk
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
-from loguru import logger
+import tkinter as tk
 
 # --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import builder_logger
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import matrix_log
+
 app_constants = Config.get_instance()
 
-from oaGuiElements.Core.graphing.Methods.dynamic_graph import GraphPlotter
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
-from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
 from oaGuiBuilder.Core.base_widget_creator import BaseWidgetCreator
+from oaGuiElements.Core.graphing.Methods.dynamic_graph import GraphPlotter
+from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
+from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+
+from .mdp_interaction_mixin import MDPInteractionMixin
 
 # --- EXTRACTED CORE MODULES ---
-from ..mdp_ltp_component import MDPLTPComponent
-from ..mdp_interaction_mixin import MDPInteractionMixin
+from .mdp_ltp_component import MDPLTPComponent
+
 
 class MDPFrame(tk.Frame, TransparencyMixin):
     def __init__(self, master, builder_instance=None, config=None, **kwargs):
@@ -32,48 +32,48 @@ class MDPFrame(tk.Frame, TransparencyMixin):
 
 @WidgetRegistry.register("_MDP")
 class BuilderCompositeMdpCreator(BaseWidgetCreator, TransparencyMixin, MDPInteractionMixin):
-    
+
     is_composite = True
 
     def _assemble_ui(self, parent_widget, config_data, context, **kwargs):
         """Assembles the MDP UI."""
-        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️🕹️ [BUILDER] Creating MDP widget.", level="TRACE")
-        
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🔬🏗️🕹️ [BUILDER] Creating MDP widget.", level="TRACE")
+
         ctx = context if context else type('obj', (object,), kwargs)()
         b_inst = getattr(ctx, 'builder_instance', None) or getattr(ctx, 'app_instance', None) or kwargs.get('builder_instance')
-        
+
         mdp_frame = MDPFrame(parent_widget, builder_instance=b_inst, config=config_data)
-        
+
         # 1. Graph Background
         g_cfg = config_data.get("graph", {"show_grid": True, "xlim": [0, 10], "ylim": [0, 10]})
-        
+
         s_engine = getattr(ctx, 'state_mirror_engine', None) or kwargs.get('state_mirror_engine')
         b_topic = getattr(ctx, 'base_mqtt_topic_from_path', None) or kwargs.get('base_mqtt_topic_from_path', "")
         s_router = getattr(ctx, 'subscriber_router', None) or kwargs.get('subscriber_router')
 
-        plotter = GraphPlotter(mdp_frame, g_cfg, b_topic, f"{config_data.get('path')}/graph", 
+        plotter = GraphPlotter(mdp_frame, g_cfg, b_topic, f"{config_data.get('path')}/graph",
                               subscriber_router=s_router, state_mirror_engine=s_engine, builder_instance=b_inst)
         plotter.pack(fill=tk.BOTH, expand=True)
-        
+
         tk_canvas = plotter.canvas.get_tk_widget()
         if hasattr(b_inst, '_apply_transparency'): b_inst._apply_transparency(mdp_frame, tk_canvas, config_data, b_inst)
-        
+
         def redraw():
             for item in tk_canvas.find_all():
                 if "panel_bg_slice" not in tk_canvas.gettags(item): tk_canvas.delete(item)
             for f in mdp_frame.faders: f.render()
         mdp_frame._draw = redraw
-        
+
         # 2. Floating LTP Vector
         ltp_cfg = config_data.get("ltp", {}); path = config_data.get("path", ""); ltp_path = f"{path}/ltp"
         lin_var = tk.DoubleVar(value=float(ltp_cfg.get("value_default", 50.0)))
         rot_var = tk.DoubleVar(value=float(ltp_cfg.get("rotation_default", 0.0)))
-        
+
         if s_engine:
             s_engine.register_widget(ltp_path, lin_var, b_topic, ltp_cfg)
             s_engine.initialize_widget_state(ltp_path)
             lin_var.trace_add("write", lambda *a: s_engine.broadcast_gui_change_to_mqtt(ltp_path))
-            
+
             r_path = f"{ltp_path}/rotation"
             s_engine.register_widget(r_path, rot_var, b_topic, ltp_cfg)
             s_engine.initialize_widget_state(r_path)
@@ -81,7 +81,7 @@ class BuilderCompositeMdpCreator(BaseWidgetCreator, TransparencyMixin, MDPIntera
 
         fader = MDPLTPComponent(tk_canvas, "0", config_data.get("initial_x", 150), config_data.get("initial_y", 150), lin_var, rot_var, ltp_cfg)
         mdp_frame.faders.append(fader)
-        
+
         # 3. Bindings
         tk_canvas.bind("<Button-1>", lambda e: BuilderCompositeMdpCreator._mdp_on_click(e, mdp_frame), add="+")
         tk_canvas.bind("<B1-Motion>", lambda e: BuilderCompositeMdpCreator._mdp_on_drag(e, mdp_frame), add="+")
@@ -93,7 +93,7 @@ class BuilderCompositeMdpCreator(BaseWidgetCreator, TransparencyMixin, MDPIntera
         tk_canvas.bind("<Button-4>", lambda e: BuilderCompositeMdpCreator._mdp_on_scroll(e, mdp_frame), add="+")
         tk_canvas.bind("<Button-5>", lambda e: BuilderCompositeMdpCreator._mdp_on_scroll(e, mdp_frame), add="+")
         tk_canvas.bind("<Motion>", lambda e: BuilderCompositeMdpCreator._mdp_on_motion(e, mdp_frame), add="+")
-        
+
         return mdp_frame, tk_canvas
 
     @staticmethod

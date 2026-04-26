@@ -4,20 +4,18 @@
 #
 # Description: Homoginized photorealistic Toggle Button based on Actuator design.
 
-import os
 import tkinter as tk
-from tkinter import ttk
-import inspect
-from loguru import logger
 
 from oaConfigurationManager.FileReaders.config_reader import Config
+
 app_constants = Config.get_instance()
 
-from oaGuiManager.Core.factory.button_canvas_base import CanvasButton
 from oaGui.Methods.i18n_utils import get_text
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
-from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
 from oaGuiBuilder.Core.base_widget_creator import BaseWidgetCreator
+from oaGuiManager.Core.factory.button_canvas_base import CanvasButton
+from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
+from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+
 
 class ToggleButton(CanvasButton):
     """
@@ -28,7 +26,7 @@ class ToggleButton(CanvasButton):
         self.label = get_text(config.get("label"), "Toggle")
         self.config_data = config
         self.builder = builder_instance
-        
+
         # Parse Options for Text
         options_map = config.get("options", {})
         self.on_text = get_text(config.get("label_active"), self.label if self.label else "ON")
@@ -84,7 +82,7 @@ class BuilderButtonToggleCreator(BaseWidgetCreator, TransparencyMixin):
         """
         ctx = context if context else type('obj', (object,), kwargs)()
         b_inst = getattr(ctx, 'builder_instance', None) or getattr(ctx, 'app_instance', None) or kwargs.get('builder_instance')
-        
+
         label = get_text(config_data.get('label'), "")
 
         if label:
@@ -94,7 +92,7 @@ class BuilderButtonToggleCreator(BaseWidgetCreator, TransparencyMixin):
                 parent_widget, bd=0, highlightthickness=0, relief="flat",
                 width=btn_w + 10, height=btn_h + 25
             )
-            
+
             def redraw_labels():
                 if not container.winfo_exists(): return
                 container.delete("industrial_text")
@@ -103,7 +101,7 @@ class BuilderButtonToggleCreator(BaseWidgetCreator, TransparencyMixin):
                     fill="white", font=("TkDefaultFont", 10, "bold"),
                     tags="industrial_text"
                 )
-            
+
             container.bind("<Configure>", lambda e: redraw_labels(), add="+")
             redraw_labels()
             parent_for_button = container
@@ -125,7 +123,7 @@ class BuilderButtonToggleCreator(BaseWidgetCreator, TransparencyMixin):
             container.render = sync_bg
             container.variable = button.variable
             return container, container
-        
+
         return button, button
 
     @staticmethod

@@ -130,6 +130,11 @@ Managers are passive components that handle state and control logic.
 ------[manager_launcher](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/launcher.md) — *Manager Launcher*<br>
 
 ## Workers
+
+├-----**SchemWeb (Research & Development)**<br>
+     ├----> [Schematic Engine](../../../../GitProjects/SchemWeb/crate-engine/Summary.md) — *High-performance Rust/WASM graph processing*<br>
+     ├----> [Core Backend](../../../../GitProjects/SchemWeb/backend/Summary.md) — *High-performance Express.js API*<br>
+     ├----> [Frontend UI](../../../../GitProjects/SchemWeb/frontend/src/Summary.md) — *React-based schematic visualization layer*<br>
 Workers are active background processes for data acquisition and system monitoring.
 
 ├-----**Showtime/**<br>

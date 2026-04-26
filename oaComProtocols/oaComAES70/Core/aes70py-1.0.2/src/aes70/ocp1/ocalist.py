@@ -1,7 +1,8 @@
-import array
-from .createtype import Type, create_type
 from struct import pack_into, unpack_from
+
+from .createtype import Type, create_type
 from .is_typed_array import is_typed_array
+
 
 def OcaListConstantLength(_type):
     encodedLengthConst = _type.encoded_length(None)

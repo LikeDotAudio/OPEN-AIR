@@ -4,15 +4,12 @@
 #
 # Description: Orchestrates installation and setup tasks for the OPEN-AIR environment within the test UI.
 
-import os
-import sys
 import threading
-from oaInstallation.Managers.Setup import (
-    SetupManager, STAGE_PYTHON_DEPS, STAGE_MQTT_INFRA, 
-    STAGE_SNMP_INFRA, STAGE_DESKTOP_INTEG
-)
+
 from oaInstallation.FileWriters.LogWriter import InstallationLogWriter
+from oaInstallation.Managers.Setup import SetupManager
 from oaInstallation.Tests.test_installation_validator import run_all_tests as run_installation_tests
+
 
 class InstallationManager:
     """Manages system-wide installation, dependency, and infrastructure setup."""
@@ -33,7 +30,7 @@ class InstallationManager:
         def task():
             self.log_callback("🕵️ [MISSION] Initiating deep scan for legendary dependencies...")
             success = self.setup_manager.check_dependencies(self.log_callback, auto_install=False)
-            
+
             if success:
                 self.log_callback("🎆 [CELEBRATION] Every single package is in place! This environment is impeccable.")
             else:
@@ -50,7 +47,7 @@ class InstallationManager:
                     self.log_callback("🤔 [INQUIRY] Should I deploy the engineering team to install the missing pieces?")
                     self.log_callback("💡 Tip: Click 'Run Dependency Check' again to attempt auto-repair.")
                     self._dep_check_failed = True
-        
+
         self._run_in_thread(task)
 
     def perform_clean_install(self):
@@ -82,7 +79,7 @@ class InstallationManager:
             snmp_success = self.setup_manager.setup_snmp(self.log_callback)
             if mqtt_success and snmp_success:
                 self.log_callback("💎 [ELITE] Infrastructure is robust and ready for traffic.")
-        
+
         self._run_in_thread(task)
 
     def perform_desktop_setup(self):
@@ -91,7 +88,7 @@ class InstallationManager:
             success = self.setup_manager.setup_desktop(self.log_callback)
             if success:
                 self.log_callback("🎨 [STYLISH] The OPEN-AIR icon is now a permanent fixture of your workspace.")
-        
+
         self._run_in_thread(task)
 
     def perform_install_validation(self):
@@ -102,7 +99,7 @@ class InstallationManager:
                 self.log_callback("🥇 [PRESTIGE] All systems have passed rigorous testing. We are GO for launch.")
             else:
                 self.log_callback("⚠️ [ANOMALY] Validation failed! Minor adjustments may be needed.")
-        
+
         self._run_in_thread(task)
 
     def perform_full_installation(self, log_lines_getter):
@@ -112,7 +109,7 @@ class InstallationManager:
             if not success:
                 self.log_callback("🏗️ [CONSTRUCTION] Engineering team deployed! Repairing the environment...")
                 success = self.setup_manager.check_dependencies(self.log_callback, auto_install=True)
-            
+
             if success:
                 mqtt_ok = self.setup_manager.setup_mqtt(self.log_callback)
                 snmp_ok = self.setup_manager.setup_snmp(self.log_callback)

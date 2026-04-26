@@ -1,6 +1,8 @@
 # Required dependencies and imports
-from .createtype import Type, create_type
 from struct import pack_into, unpack_from
+
+from .createtype import Type, create_type
+
 
 def count_codepoints(value):
     # Return the number of Unicode codepoints in the string.

@@ -4,19 +4,20 @@
 #
 # Description: Brief summary of purpose
 
-import os
 import glob
 import html
+import os
 from datetime import datetime
+
 
 def parse_log_line(line):
     """Parses a pipe-separated log line and returns a grid-aligned HTML row."""
     parts = [p.strip() for p in line.split('|')]
-    
+
     if len(parts) < 5:
         # This handles tracebacks or multiline messages
         return f'<div class="log-line-raw" style="color: #e74c3c; padding: 2px 15px; font-size: 0.9em;">{html.escape(line)}</div>'
-    
+
     # Extract columns
     timestamp = parts[0]
     level = parts[1]
@@ -24,11 +25,11 @@ def parse_log_line(line):
     element = parts[3]
     module = parts[4]
     message = " | ".join(parts[5:]) if len(parts) > 5 else ""
-    
+
     # Assign color classes based on content
     level_class = f"log-level-{level.lower()}"
     system_class = f"log-system-{system.lower()}"
-    
+
     return (
         f'<div class="log-line">'
         f'<span class="log-col log-timestamp">{html.escape(timestamp)}</span>'
@@ -84,12 +85,12 @@ def build_tab(data_dir):
     for file_path in error_files[:5]: # Show latest 5
         filename = os.path.basename(file_path)
         mtime = datetime.fromtimestamp(os.path.getmtime(file_path)).strftime('%Y-%m-%d %H:%M:%S')
-        
-        with open(file_path, 'r', encoding='utf-8', errors='replace') as f:
+
+        with open(file_path, encoding='utf-8', errors='replace') as f:
             lines = f.readlines()
-        
+
         processed_lines = "".join([parse_log_line(line) for line in lines])
-        
+
         tab_html += f"""
         <div class="log-entry error-log">
             <div class="log-header">

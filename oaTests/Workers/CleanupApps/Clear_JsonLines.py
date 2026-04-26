@@ -1,16 +1,18 @@
 import os
+
 project_root = os.getcwd()
 
 import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
+import logging
+
 # oaTests/Workers/CleanupApps/Clear_JsonLines.py
 # Author: Anthony Peter Kuzub
 # Version: 20260328.0.1
 #
 # Description: Maintenance script to purge all system JSON Lines logs.
-
 import shutil
-import logging
+
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # Configure standard logging
 logging.basicConfig(
@@ -23,9 +25,9 @@ logger = logging.getLogger("JsonLinesCleanup")
 def cleanup_jsonlines():
     """Purges all files from the JsonLines data directory."""
     target = os.path.join(project_root, "oaDataLogs", "JsonLines")
-    
-    matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"📡📤📤 [CLEAR_JSONLINES] Starting JsonLines cleanup...", "INFO")
-    
+
+    matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "📡📤📤 [CLEAR_JSONLINES] Starting JsonLines cleanup...", "INFO")
+
     if os.path.exists(target):
         items_purged = 0
         try:
@@ -42,7 +44,7 @@ def cleanup_jsonlines():
                         items_purged += 1
                 except Exception as e:
                     logger.error(f"   ⚠️ Failed to delete {file_path}. Reason: {e}")
-            
+
             if items_purged > 0:
                 matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"   ✅ Purged {items_purged} items from: {os.path.relpath(target, project_root)}", "INFO")
             else:
@@ -52,7 +54,7 @@ def cleanup_jsonlines():
     else:
         logger.warning(f"   ⚠️ Directory not found: {os.path.relpath(target, project_root)}")
 
-    matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"📡📤📤 [CLEAR_JSONLINES] JsonLines cleanup complete.", "INFO")
+    matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "📡📤📤 [CLEAR_JSONLINES] JsonLines cleanup complete.", "INFO")
 
 if __name__ == "__main__":
     cleanup_jsonlines()

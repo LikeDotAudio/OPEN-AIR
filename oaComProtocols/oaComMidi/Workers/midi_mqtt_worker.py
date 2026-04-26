@@ -8,10 +8,14 @@
 
 import os
 import random
+
 from loguru import logger
-from oaLogging.Methods.matrix_gate import matrix_log
+
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import matrix_log
+
 from ..Core.midi_mqtt_transport import MidiMqttTransport
+
 
 class MidiMqttWorker:
     """
@@ -23,16 +27,16 @@ class MidiMqttWorker:
         self.config = Config.get_instance()
         self.transport = transport or MidiMqttTransport()
         self._running = False
-        
+
         # Base topic for MIDI
         self.base_topic = "OPEN-AIR/MIDI/#"
 
     def start(self):
         if self._running: return
-        
+
         # Setup message handler before connecting
         self.transport.set_message_handler(self._on_transport_message)
-        
+
         # ⚡ UNIQUE IDENTITY: Prevent Client ID collisions in multi-partition environments
         partition_id = os.environ.get("OPEN_AIR_PARTITION_ID", "SUP")
         random_suffix = f"{random.getrandbits(16):04x}"
@@ -45,7 +49,7 @@ class MidiMqttWorker:
             "password": self.config.MQTT_PASSWORD,
             "client_id": client_id
         }
-        
+
         if self.transport.connect(connection_params):
             self._running = True
             self.transport.subscribe(self.base_topic)
@@ -63,25 +67,25 @@ class MidiMqttWorker:
         try:
             # ⚡ EFFICIENT ROUTING: Forward to MidiManager
             # The core transport already handled JSON decoding and echo prevention (src check)
-            
+
             meta = payload.get("meta", {}) if isinstance(payload, dict) else {}
-            
+
             event_message = {
                 "topic": topic,
                 "value": payload.get("value") if isinstance(payload, dict) else payload,
                 "meta": meta,
                 "source": "MIDI-MQTT",
-                "logical_source": meta.get("origin_source", "MQTT") 
+                "logical_source": meta.get("origin_source", "MQTT")
             }
             self.midi_manager._on_protocol_event(event_message)
-            
+
         except Exception as e:
             logger.error(f"📡 [MIDI-WORKER] Error processing transport message: {e}")
 
     def publish(self, topic, payload, meta=None):
         """Legacy publish shim that delegates to core transport."""
         if not self.transport: return
-        
+
         # Standardized payload structure
         m = meta or {}
         # Core transport handles src injection if we pass a dict correctly

@@ -8,10 +8,10 @@ def update_physics(canvas, state, config, draw_visuals_callback):
     """Smoothly interpolates current position to target position."""
     current = state["current_open"]
     target = state["target_open"]
-    
+
     open_inc = config["open_inc"]
     close_inc = config["close_inc"]
-    
+
     moved = False
     if current < target:
         state["current_open"] += open_inc
@@ -23,17 +23,17 @@ def update_physics(canvas, state, config, draw_visuals_callback):
         if state["current_open"] < target:
             state["current_open"] = target
         moved = True
-    
+
     if moved:
         draw_visuals_callback()
-    
+
     # ⚡ TERMINATION SAFETY: Use microscopic epsilon for floating point comparison.
     # Also check moved flag to ensure we don't loop if no delta was applied.
     is_at_target = abs(state["current_open"] - target) < 0.001
-    
+
     if (moved or state["is_pressed"]) and not is_at_target:
         if hasattr(canvas, "winfo_exists") and canvas.winfo_exists():
-            canvas.after(16, lambda: update_physics(canvas, state, config, 
+            canvas.after(16, lambda: update_physics(canvas, state, config,
                                                     draw_visuals_callback))
     else:
         state["animating"] = False
@@ -51,7 +51,7 @@ def blink_loop(canvas, state, config, value_var, draw_visuals_callback):
 
     state["blink_open"] = not state["blink_open"]
     state["target_open"] = 1.0 if state["blink_open"] else 0.0
-    
+
     if not state.get("animating", False):
         state["animating"] = True
         update_physics(canvas, state, config, draw_visuals_callback)
@@ -59,6 +59,6 @@ def blink_loop(canvas, state, config, value_var, draw_visuals_callback):
     # ⚡ OVERLAP PROTECTION: Cancel existing blink timer if present (handled by logic flow)
     # The canvas.after approach means only one chain lives per button.
     if hasattr(canvas, "winfo_exists") and canvas.winfo_exists():
-        canvas.after(config["blink_interval"], lambda: blink_loop(canvas, state, 
-                                                                 config, value_var, 
+        canvas.after(config["blink_interval"], lambda: blink_loop(canvas, state,
+                                                                 config, value_var,
                                                                  draw_visuals_callback))

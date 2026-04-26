@@ -4,20 +4,15 @@
 #
 # Description: Proxy/yak_manager/manager_yakety_yak.py
 
-import os
-from oaLogging.Methods.matrix_gate import matrix_log
-import inspect
 import inspect
 
 # --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
 from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
 
-from oaOchestration.Constants.project_paths import YAKETY_YAK_REPO_PATH
 
 # DELETED: YAKETY_YAK_REPO_PATH is now imported from worker_project_paths.py
 # repo_topic_filter = "OPEN-AIR/yak/#" # Not needed in deprecated stub
@@ -31,7 +26,7 @@ class DeprecatedYaketyYakManager:  # Renamed class
 
     def __init__(self, *args, **kwargs):
         current_function_name = inspect.currentframe().f_code.co_name
-        logger.error(f"❌❌❌ WARNING: DeprecatedYaketyYakManager is being instantiated. Use YakTranslator instead!")
+        logger.error("❌❌❌ WARNING: DeprecatedYaketyYakManager is being instantiated. Use YakTranslator instead!")
         raise DeprecationWarning(
             "YaketyYakManager is deprecated. Use YakTranslator for YAK command translation."
         )

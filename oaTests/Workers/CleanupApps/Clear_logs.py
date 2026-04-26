@@ -7,6 +7,7 @@
 import os
 import shutil
 
+
 def cleanup_logs(report_path):
     """
     Finalizes the report generation by confirming the file location
@@ -14,14 +15,14 @@ def cleanup_logs(report_path):
     """
     if report_path:
         # Corrected f-string formatting for multi-line output
-        print(f"✨ The report was generated perfectly, and is stored here:")
+        print("✨ The report was generated perfectly, and is stored here:")
         print(f"   📍 {os.path.realpath(report_path)}")
 
     project_root = os.getcwd()
     # ⚡ NEW REQUIREMENT: Purge EVERYTHING inside oaDataLogs
     log_root = os.path.join(project_root, "oaDataLogs")
-    
-    print(f"📡📤📤 [CLEAR_LOGS] Starting master log sweeper (Purging oaDataLogs)...")
+
+    print("📡📤📤 [CLEAR_LOGS] Starting master log sweeper (Purging oaDataLogs)...")
 
     if os.path.exists(log_root):
         items_purged = 0
@@ -39,7 +40,7 @@ def cleanup_logs(report_path):
                     items_purged += 1
             except Exception as e:
                 print(f"   ⚠️ Failed to delete {file_path}. Reason: {e}")
-        
+
         if items_purged > 0:
             print(f"   ✅ Purged {items_purged} top-level items and all their contents from: {os.path.relpath(log_root, project_root)}")
         else:
@@ -47,7 +48,7 @@ def cleanup_logs(report_path):
     else:
         print(f"   ⚠️ Log directory not found: {os.path.relpath(log_root, project_root)}")
 
-    print(f"📡📤📤 [CLEAR_LOGS] Log cleanup complete.")
+    print("📡📤📤 [CLEAR_LOGS] Log cleanup complete.")
 
 if __name__ == "__main__":
     # If run directly, we'll perform the cleanup without the specific report path message.

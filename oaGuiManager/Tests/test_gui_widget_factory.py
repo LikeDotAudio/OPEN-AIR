@@ -4,10 +4,12 @@
 #
 # Description: Unit tests for gui_widget_factory.py
 
+import tkinter as tk  # ⚡ FIX: Import tkinter for creating real frames
 import unittest
 from unittest.mock import MagicMock, patch
-import tkinter as tk  # ⚡ FIX: Import tkinter for creating real frames
+
 from oaGuiManager.Core.factory.gui_widget_factory import GuiWidgetFactoryMixin
+
 
 class MockBuilder(GuiWidgetFactoryMixin):
     """Minimal subclass for testing the Mixin."""
@@ -33,51 +35,51 @@ class TestGuiWidgetFactory(unittest.TestCase):
     def test_lazy_wrap_instantiation(self):
         """OPERATE: Trigger lazy wrap. CHECK: Verify it correctly calls the module class."""
         builder = MockBuilder()
-        
+
         with patch('importlib.import_module') as mock_import:
             mock_module = MagicMock()
             mock_import.return_value = mock_module
-            
+
             class RealMockClass:
                 @staticmethod
                 def mock_method(*args, **kwargs): pass
-            
+
             mock_class = MagicMock(spec_set=RealMockClass)
             mock_module.MockClass = mock_class
-            
+
             wrapper = builder._lazy_wrap('mock_path', 'MockClass', 'mock_method')
-            
+
             # ⚡ FIX: Use a real tk.Frame as parent instead of MagicMock
             # This prevents `AttributeError: '_w'` when child widgets are instantiated.
             parent = tk.Frame(self.root)
             config = {"some": "data"}
             wrapper(parent, config)
-            
+
             mock_import.assert_called_with('mock_path')
             mock_class.mock_method.assert_called_with(builder, parent, config, context=None, builder_instance=builder)
 
     def test_lazy_wrap_with_static_make(self):
         """OPERATE: Trigger lazy wrap on a class with 'make'. CHECK: Verify 'make' is used."""
         builder = MockBuilder()
-        
+
         with patch('importlib.import_module') as mock_import:
             mock_module = MagicMock()
             mock_import.return_value = mock_module
-            
+
             class ClassWithMake:
                 @staticmethod
                 def make(*args, **kwargs): pass
-            
+
             mock_class = MagicMock(spec_set=ClassWithMake)
             mock_module.MockClass = mock_class
-            
+
             wrapper = builder._lazy_wrap('mock_path', 'MockClass', 'mock_method')
-            
+
             # ⚡ FIX: Use a real tk.Frame for the parent
             parent = tk.Frame(self.root)
             config = {"some": "data"}
             wrapper(parent, config)
-            
+
             mock_class.make.assert_called_once()
 
 if __name__ == '__main__':

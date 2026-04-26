@@ -4,18 +4,17 @@
 #
 # Description: This module provides functions for creating the base Matplotlib plot within a Tkinter application.
 
-import tkinter as tk
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
-from matplotlib.figure import Figure
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-from typing import Dict, Any
+import tkinter as tk
+from typing import Any
 
-# --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
-from loguru import logger
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from matplotlib.figure import Figure
 
 from oaConfigurationManager.FileReaders.config_reader import Config
+
+# --- Standard Debug Logging Setup ---
+from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
@@ -29,7 +28,7 @@ app_constants = Config.get_instance()
 #                              including layout dimensions.
 # Outputs:
 #     tuple: A tuple containing the Matplotlib figure, axes, and FigureCanvasTkAgg instance.
-def create_base_plot(parent_frame: tk.Frame, config: Dict[str, Any]) -> tuple:
+def create_base_plot(parent_frame: tk.Frame, config: dict[str, Any]) -> tuple:
     """
     Creates the FigureCanvasTkAgg and basic Axis.
     Returns (figure, axis, canvas).
@@ -41,7 +40,7 @@ def create_base_plot(parent_frame: tk.Frame, config: Dict[str, Any]) -> tuple:
     geom = config.get("geometry", {})
     width = config.get("width") or geom.get("width") or layout_config.get("width") or 500
     height = config.get("height") or geom.get("height") or layout_config.get("height") or 400
-    
+
     # Ensure we don't start with 0 or 1 which triggers the "pixel wide" bug
     width = max(1, int(float(width)))
     height = max(1, int(float(height)))

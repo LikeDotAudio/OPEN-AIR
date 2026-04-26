@@ -1,20 +1,17 @@
 # button_trapezoid_toggler/button_trapezoid_toggler.py
-from oaGui.Methods.i18n_utils import get_text
+import inspect
+
 # Author: Anthony Peter Kuzub
 # Version: 20250821.200641.1
 #
 # Description: button_trapezoid_toggler/trapezoid_toggler.py
-
 import tkinter as tk
-from oaLogging.Methods.matrix_gate import matrix_log
-import inspect
-from tkinter import ttk
-
-# --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
-from loguru import logger
 
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaGui.Methods.i18n_utils import get_text
+
+# --- Standard Debug Logging Setup ---
+from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
@@ -44,7 +41,7 @@ class BuilderButtonTrapezoidTogglerCreator(BuilderButtonTrapezoidCreator):
 
     def _assemble_ui(self, parent_widget, config_data, context, **kwargs):
         """Creates a group of trapezoid buttons where only one can be active."""
-        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️🔳 [BUILDER] Entering _assemble_ui", level="TRACE")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🔬🏗️🔳 [BUILDER] Entering _assemble_ui", level="TRACE")
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📜📑💻 [CONFIG] Raw config received: {config_data}", level="DEBUG")
 
         # Extract widget-specific config from config_data
@@ -80,7 +77,7 @@ class BuilderButtonTrapezoidTogglerCreator(BuilderButtonTrapezoidCreator):
             if "bg_color" not in trans_config: trans_config["transparent"] = True
             matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"👻🌀🪟 [ALPHA] Applying industrial transparency to internal group frame '{label}'", level="TRACE")
             builder_instance._apply_transparency(group_frame, group_frame, trans_config, builder_instance)
-            
+
         # Add top padding if there is a label to avoid overlap
         pady_top = 25 if label else 0
         group_frame.pack(fill="both", expand=True, pady=(pady_top, 0))
@@ -91,13 +88,13 @@ class BuilderButtonTrapezoidTogglerCreator(BuilderButtonTrapezoidCreator):
             if not container.winfo_exists(): return
             w = container.winfo_width()
             h = container.winfo_height()
-            
+
             if (w, h) == container._last_redraw_size:
                 return
-            
+
             if w <= 1: return
             container._last_redraw_size = (w, h)
-            
+
             matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔄🎨🔤 [REDRAW] Redrawing labels for trapezoid toggler '{label}'", level="TRACE")
             container.delete("industrial_text")
             if label:
@@ -113,13 +110,13 @@ class BuilderButtonTrapezoidTogglerCreator(BuilderButtonTrapezoidCreator):
             for b_info in buttons.values():
                 if hasattr(b_info["canvas"], "_draw"):
                     b_info["canvas"]._draw()
-        
+
         container._draw = sync_bg
         container.render = sync_bg
         container.bind("<Configure>", lambda e: redraw_group_labels(), add="+")
 
         options = config.get("options", {})
-        
+
         # Handle list format for options (convert to dict)
         if isinstance(options, list):
             matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"⚠️🔔🔡 [CONFIG] Options for trapezoid toggler '{label}' is a list, converting to dict.", level="DEBUG")
@@ -132,7 +129,7 @@ class BuilderButtonTrapezoidTogglerCreator(BuilderButtonTrapezoidCreator):
             "value_default", next(iter(options.keys())) if options else None
         )
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔋🔘✨ [STATE] Initial selected trapezoid key for '{label}': {value_default}", level="DEBUG")
-        
+
         layout_columns = int(config.get("layout_columns", 4))
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📐📏🔳 [LAYOUT] Grid columns: {layout_columns}", level="DEBUG")
 
@@ -144,7 +141,7 @@ class BuilderButtonTrapezoidTogglerCreator(BuilderButtonTrapezoidCreator):
             """Called when selected_var changes, triggers redraw and MQTT broadcast."""
             matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"⚡🔄🔋 [STATE] Trapezoid toggler '{label}' state change: {selected_var.get()}", level="INFO")
             for key, button_info in buttons.items():
-                # The individual buttons listen to selected_var indirectly 
+                # The individual buttons listen to selected_var indirectly
                 # (via their own redraw which uses selected_var.get())
                 if hasattr(button_info["canvas"], "_draw"):
                     button_info["canvas"]._draw()
@@ -174,33 +171,33 @@ class BuilderButtonTrapezoidTogglerCreator(BuilderButtonTrapezoidCreator):
             # Inherit properties from parent config if not specified in button config
             full_config = config.copy()
             full_config.update(button_config)
-            
+
             # Robust Background Inheritance
             try:
                 p_bg = group_frame.cget("bg")
                 if not p_bg or not p_bg.startswith("#"): p_bg = "#2b2b2b"
             except:
                 p_bg = "#2b2b2b"
-            
+
             if "bg_color" not in full_config:
                 full_config["bg_color"] = p_bg
 
             # Create the button using the base creator, passing our shared selected_var logic
             # We need a boolean var for each button that reflects if it is selected
             bool_var = tk.BooleanVar(master=parent_widget, value=(selected_var.get() == key))
-            
+
             # Sync shared selected_var -> individual bool_var
             def sync_to_bool(v, i, m, k=key, bv=bool_var):
                 bv.set(selected_var.get() == str(k))
             selected_var.trace_add("write", sync_to_bool)
 
             # Create the button widget (it will be its own canvas)
-            # We don't want the button to have its own path registration yet, 
-            # or maybe we do if it's a multi-path setup. 
+            # We don't want the button to have its own path registration yet,
+            # or maybe we do if it's a multi-path setup.
             # But usually toggler is one path.
             # Base creator will register if path is in full_config.
             btn_canvas = BuilderButtonTrapezoidCreator.make(
-                group_frame, full_config, variable=bool_var, 
+                group_frame, full_config, variable=bool_var,
                 context=context, # ⚡ MANDATORY: Pass context for transparency!
                 base_mqtt_topic_from_path=base_mqtt_topic_from_path
             )

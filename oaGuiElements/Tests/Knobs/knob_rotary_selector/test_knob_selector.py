@@ -1,16 +1,20 @@
+import json
+import os
+import tkinter as tk
 import unittest
 from unittest.mock import MagicMock, patch
-import tkinter as tk
-import os
-import json
 
-from oaGuiElements.Core.Knobs.knob_rotary_selector.Core.knob_rotary_selector import BuilderKnobRotarySelectorCreator, RotarySelectorSwitch
+from oaGuiElements.Core.Knobs.knob_rotary_selector.Core.knob_rotary_selector import (
+    BuilderKnobRotarySelectorCreator,
+    RotarySelectorSwitch,
+)
+
 
 def load_sample_config():
     # Correctly locate the sample.json relative to this test file
     dir_path = os.path.dirname(os.path.realpath(__file__))
-    sample_path = os.path.join(dir_path, '../../../Core/Knobs/knob_rotary_selector/sample.json')
-    with open(sample_path, 'r') as f:
+    sample_path = os.path.join(dir_path, '../../../Core/Knobs/knob_rotary_selector/Assets/sample.json')
+    with open(sample_path) as f:
         data = json.load(f)
         return data.get("knob_rotary_selector_Example", data)
 
@@ -27,12 +31,12 @@ class TestRotarySelector(unittest.TestCase):
             self.root = MagicMock()
             self.root.winfo_exists.return_value = True
             self.root.tk = MagicMock()
-            
+
             # Patch classes in the TARGET module
             SELECTOR_MODULE = 'oaGuiElements.Core.Knobs.knob_rotary_selector.Core.knob_rotary_selector'
             self.patchers.append(patch(f'{SELECTOR_MODULE}.tk.Canvas'))
             self.patchers.append(patch(f'{SELECTOR_MODULE}.tk.Frame'))
-            
+
             for p in self.patchers:
                 mock_cls = p.start()
                 if hasattr(mock_cls, 'return_value'):
@@ -45,7 +49,7 @@ class TestRotarySelector(unittest.TestCase):
         self.theme_patch.start()
 
         self.config_data = load_sample_config()
-        
+
         # Correctly handle default value
         self.positions = self.config_data.get("positions", ["A", "B", "C"])
         if self.HAS_DISPLAY:
@@ -61,7 +65,7 @@ class TestRotarySelector(unittest.TestCase):
 
         # Provide a basic config for the base class
         self.basic_config = {
-            "width": 100, "height": 100, 
+            "width": 100, "height": 100,
             "min": 0, "max": 4, "reff_point": 0
         }
 
@@ -97,7 +101,7 @@ class TestRotarySelector(unittest.TestCase):
         """Verify the Builder can create a RotarySelectorSwitch instance."""
         mock_context = MagicMock()
         mock_context.state_mirror_engine = MagicMock()
-        
+
         # Patch TransparencyManager to avoid GUI dependencies
         with patch('oaGuiManager.Core.transparency.transparency.TransparencyManager.apply_transparency'):
             widget = BuilderKnobRotarySelectorCreator.make(

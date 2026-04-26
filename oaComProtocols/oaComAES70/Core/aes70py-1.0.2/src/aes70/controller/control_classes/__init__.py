@@ -44,14 +44,14 @@ from .ocagrouper import OcaGrouper
 from .ocaidentificationactuator import OcaIdentificationActuator
 from .ocaidentificationsensor import OcaIdentificationSensor
 from .ocaimpedancesensor import OcaImpedanceSensor
+from .ocaint8actuator import OcaInt8Actuator
+from .ocaint8sensor import OcaInt8Sensor
 from .ocaint16actuator import OcaInt16Actuator
 from .ocaint16sensor import OcaInt16Sensor
 from .ocaint32actuator import OcaInt32Actuator
 from .ocaint32sensor import OcaInt32Sensor
 from .ocaint64actuator import OcaInt64Actuator
 from .ocaint64sensor import OcaInt64Sensor
-from .ocaint8actuator import OcaInt8Actuator
-from .ocaint8sensor import OcaInt8Sensor
 from .ocalevelsensor import OcaLevelSensor
 from .ocalibrary import OcaLibrary
 from .ocalibrarymanager import OcaLibraryManager
@@ -91,14 +91,14 @@ from .ocatemperatureactuator import OcaTemperatureActuator
 from .ocatemperaturesensor import OcaTemperatureSensor
 from .ocatimeintervalsensor import OcaTimeIntervalSensor
 from .ocatimesource import OcaTimeSource
+from .ocauint8actuator import OcaUint8Actuator
+from .ocauint8sensor import OcaUint8Sensor
 from .ocauint16actuator import OcaUint16Actuator
 from .ocauint16sensor import OcaUint16Sensor
 from .ocauint32actuator import OcaUint32Actuator
 from .ocauint32sensor import OcaUint32Sensor
 from .ocauint64actuator import OcaUint64Actuator
 from .ocauint64sensor import OcaUint64Sensor
-from .ocauint8actuator import OcaUint8Actuator
-from .ocauint8sensor import OcaUint8Sensor
 from .ocavoltagesensor import OcaVoltageSensor
 from .ocaworker import OcaWorker
 

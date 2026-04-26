@@ -4,10 +4,11 @@
 #
 # Description: Brief summary of purpose
 
-import os
 import glob
 import html
+import os
 from datetime import datetime
+
 
 def build_tab(data_dir):
     """
@@ -24,15 +25,15 @@ def build_tab(data_dir):
     for file_path in audit_files[:5]: # Show latest 5
         filename = os.path.basename(file_path)
         mtime = datetime.fromtimestamp(os.path.getmtime(file_path)).strftime('%Y-%m-%d %H:%M:%S')
-        
-        with open(file_path, 'r', encoding="utf-8") as f:
+
+        with open(file_path, encoding="utf-8") as f:
             # ⚡ OPTIMIZATION: Limit read to 100KB per file
             content = f.read(100000)
             if f.read(1): # Check if there's more
                 content += "\n\n... (Report Truncated for Performance) ..."
-        
+
         escaped_content = html.escape(content)
-        
+
         tab_html += f"""
         <div class="log-entry">
             <div class="log-header">

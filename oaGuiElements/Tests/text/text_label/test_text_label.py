@@ -4,10 +4,12 @@
 #
 # Description: Brief summary of purpose
 
-import unittest
-from unittest.mock import MagicMock, patch
 import tkinter as tk
+import unittest
+from unittest.mock import MagicMock
+
 from oaGuiElements.Core.text.text_label.text_label import BuilderTextLabelCreator
+
 
 class TestTextLabel(unittest.TestCase):
     def setUp(self):
@@ -16,7 +18,7 @@ class TestTextLabel(unittest.TestCase):
             self.root.withdraw()
         except:
             self.root = MagicMock()
-        
+
         self.config = {
             "label_active": "Test Label",
             "path": "test/label",
@@ -34,14 +36,14 @@ class TestTextLabel(unittest.TestCase):
         """Goal: Verify that BuilderTextLabelCreator creates a label widget (canvas)."""
         # BUILD
         creator = BuilderTextLabelCreator()
-        
+
         # OPERATE
         label_widget = creator.make_text_label(
             parent_widget=self.root,
             config_data=self.config,
             context=self.context
         )
-        
+
         # CHECK
         self.assertIsInstance(label_widget, tk.Canvas)
         self.mirror_engine.register_widget.assert_called()
@@ -54,7 +56,7 @@ class TestTextLabel(unittest.TestCase):
             config_data=self.config,
             context=self.context
         )
-        
+
         # CHECK
         self.assertIsInstance(label_widget, tk.Canvas)
 

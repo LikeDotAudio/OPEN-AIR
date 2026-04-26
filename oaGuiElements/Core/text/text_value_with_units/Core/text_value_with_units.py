@@ -4,24 +4,21 @@
 #
 # Description: text_value_with_units/dynamic_guimake_text_value_with_units.py
 
-import tkinter as tk
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
+import tkinter as tk
 from tkinter import ttk
-import os
 
-# --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
 from oaConfigurationManager.FileReaders.config_reader import Config
 
+# --- Standard Debug Logging Setup ---
+from oaLogging.Methods.matrix_gate import matrix_log
+
 app_constants = Config.get_instance()  # Get the singleton instance
 
-from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic  # Import get_topic
-from oaStyle.Core.style import THEMES, DEFAULT_THEME
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 from oaGui.Methods.i18n_utils import get_text
+from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 
 
 class BuilderTextValueWithUnitsCreator(TransparencyMixin):
@@ -83,7 +80,7 @@ class BuilderTextValueWithUnitsCreator(TransparencyMixin):
             height=30,
             bg=p_bg
         )
-        
+
         # Apply Industrial Transparency
         if hasattr(self, '_apply_transparency'):
             self._apply_transparency(canvas, canvas, config, builder_instance)
@@ -92,10 +89,10 @@ class BuilderTextValueWithUnitsCreator(TransparencyMixin):
             # Check both 'layout' and 'geometry' for configuration
             layout_config = config.get("layout", {})
             geom_config = config.get("geometry", {})
-            
+
             font_size = layout_config.get("font", geom_config.get("font", 13))
             custom_font = ("Segoe UI", font_size)
-            
+
             # Extract color with fallback to None if it's an empty string
             custom_colour = layout_config.get("colour", geom_config.get("colour", None))
             if custom_colour == "": custom_colour = None
@@ -107,12 +104,12 @@ class BuilderTextValueWithUnitsCreator(TransparencyMixin):
             clean_path = path.replace('/', '_') if path else "default"
             style_name = f"TextValue.{clean_path}.TEntry"
             style = ttk.Style()
-            
+
             # Default to black text, override if custom_colour is provided
             text_color = "black"
             if custom_colour:
                 text_color = custom_colour
-                
+
             style.configure(style_name, fieldbackground="#2b2b2b", foreground=text_color)
 
             entry = ttk.Entry(canvas, textvariable=text_var, font=custom_font, style=style_name)
@@ -126,7 +123,7 @@ class BuilderTextValueWithUnitsCreator(TransparencyMixin):
                 w = canvas.winfo_width()
                 h = canvas.winfo_height()
                 if w <= 1: return
-                
+
                 # Draw Main Label (Left)
                 if label:
                     canvas.create_text(
@@ -141,7 +138,7 @@ class BuilderTextValueWithUnitsCreator(TransparencyMixin):
                 # ⚡ HIGH-FIDELITY: Update the style's fieldbackground to match the sampled patina
                 style.configure(style_name, fieldbackground=bg)
                 redraw_input_labels()
-            
+
             canvas._draw = sync_bg
             canvas.render = sync_bg
             canvas.bind("<Configure>", redraw_input_labels, add="+")

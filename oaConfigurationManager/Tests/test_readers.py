@@ -6,7 +6,9 @@
 
 import unittest
 from pathlib import Path
+
 from oaConfigurationManager.Core.config_loader import ConfigLoader
+
 
 class TestConfigReader(unittest.TestCase):
     """

@@ -5,8 +5,10 @@
 # Description: Modular Sizing and Padding handles.
 
 import tkinter as tk
+
 from ....Core.state import state_manager
 from .base_overlay import BaseOverlay
+
 
 class SizingOverlay(BaseOverlay):
     """Handles resize and padding interactive handles."""
@@ -23,10 +25,10 @@ class SizingOverlay(BaseOverlay):
         self.pad_x = self.create_element(tk.Label, text="PX", bg="#33A1FD", fg="white", font=("Arial", 6, "bold"), cursor="sb_h_double_arrow")
         self.pad_y = self.create_element(tk.Label, text="PY", bg="#33A1FD", fg="white", font=("Arial", 6, "bold"), cursor="sb_v_double_arrow")
         self.breath = self.create_element(tk.Label, text="BR", bg="#33A1FD", fg="white", font=("Arial", 6, "bold"), cursor="fleur")
-        
+
         self.handles = [self.res_diag, self.res_horiz, self.res_vert, self.pad_x, self.pad_y, self.breath]
-        
-        for m, h in [("diag", self.res_diag), ("horiz", self.res_horiz), ("vert", self.res_vert), 
+
+        for m, h in [("diag", self.res_diag), ("horiz", self.res_horiz), ("vert", self.res_vert),
                     ("padx", self.pad_x), ("pady", self.pad_y), ("breath", self.breath)]:
             h.bind("<Button-1>", lambda e, mode=m: self._on_drag(e, mode))
             h.bind("<B1-Motion>", lambda e, mode=m: self._on_drag(e, mode))
@@ -35,7 +37,7 @@ class SizingOverlay(BaseOverlay):
     def _on_drag(self, event, mode):
         if not self.widget.winfo_exists(): return
         dx, dy = event.x_root - self.widget.winfo_rootx(), event.y_root - self.widget.winfo_rooty()
-        
+
         # UI FEEDBACK (Tooltip + Ghost) - Managed by workspace
         if hasattr(self.workspace, '_show_sizing_feedback'):
             self.workspace._show_sizing_feedback(event, mode, dx, dy, self.widget)
@@ -43,15 +45,15 @@ class SizingOverlay(BaseOverlay):
     def _on_release(self, event, mode):
         if hasattr(self.workspace, '_clear_sizing_feedback'):
             self.workspace._clear_sizing_feedback()
-            
+
         if not self.widget.winfo_exists(): return
         dx, dy = event.x_root - self.widget.winfo_rootx(), event.y_root - self.widget.winfo_rooty()
-        
-        if mode == "padx": 
+
+        if mode == "padx":
             state_manager.update_state(max(0, int(dx // 5)), path=f"{self.path}.layout.padx", source=self.workspace)
-        elif mode == "pady": 
+        elif mode == "pady":
             state_manager.update_state(max(0, int(dy // 5)), path=f"{self.path}.layout.pady", source=self.workspace)
-        elif mode == "breath": 
+        elif mode == "breath":
             state_manager.update_state(max(0, int(dx // 5)), path=f"{self.path}.layout.breath_padding", source=self.workspace)
         else:
             nw, nh = max(20, dx), max(20, dy)

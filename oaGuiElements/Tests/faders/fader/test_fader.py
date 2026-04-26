@@ -4,10 +4,12 @@
 #
 # Description: Brief summary of purpose
 
-import unittest
-from unittest.mock import MagicMock, patch
 import tkinter as tk
-from oaGuiElements.Core.faders.fader.Core.fader import CustomFaderFrame, BuilderFaderCreator
+import unittest
+from unittest.mock import MagicMock
+
+from oaGuiElements.Core.faders.fader.Core.fader import BuilderFaderCreator, CustomFaderFrame
+
 
 class TestFader(unittest.TestCase):
     def setUp(self):
@@ -16,7 +18,7 @@ class TestFader(unittest.TestCase):
             self.root.withdraw()
         except:
             self.root = MagicMock()
-        
+
         self.variable = tk.DoubleVar(master=self.root, value=50.0)
         self.config = {
             "label_active": "Test Fader",
@@ -25,7 +27,7 @@ class TestFader(unittest.TestCase):
             "value_max": 100
         }
         self.mirror_engine = MagicMock()
-        
+
         self.context = MagicMock()
         self.context.state_mirror_engine = self.mirror_engine
         self.context.base_mqtt_topic_from_path = "test/topic"

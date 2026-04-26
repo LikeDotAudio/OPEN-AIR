@@ -5,8 +5,8 @@
 # Description: Gatekeeper for the oaGuiManager module.
 
 
-import sys
 import os
+import sys
 from pathlib import Path
 
 # Add project root to sys.path to allow absolute imports when run as a script
@@ -14,10 +14,10 @@ project_root = Path(__file__).resolve().parent.parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
-from oaGuiManager.Core.ui_window import UIWindowManager
-from oaGuiManager.Core.shutdown_coordinator import ShutdownCoordinator
 from oaGuiManager.Core.bootstrap_sequence import AsyncBootstrapEngine
 from oaGuiManager.Core.composition_root import UICompositionRoot
+from oaGuiManager.Core.shutdown_coordinator import ShutdownCoordinator
+from oaGuiManager.Core.ui_window import UIWindowManager
 
 """
 oaGuiManager/Entry.py - Gatekeeper for oaGuiManager
@@ -91,13 +91,12 @@ def run_tests():
     """
     import subprocess
     import sys
-    import os
     from pathlib import Path
 
     print(f"📡📥📥 [TEST] {Path(__file__).parent.name}: Starting automated test discovery...")
     current_dir = Path(__file__).parent.absolute()
     test_dir = current_dir / "Tests"
-    
+
     if not test_dir.exists():
         return True
 
@@ -106,10 +105,10 @@ def run_tests():
         if (project_root / "GEMINI.md").exists():
             break
         project_root = project_root.parent
-    
+
     env = os.environ.copy()
     env["PYTHONPATH"] = str(project_root) + os.pathsep + env.get("PYTHONPATH", "")
-    
+
     try:
         rel_test_dir = os.path.relpath(test_dir, project_root)
         result = subprocess.run(
@@ -141,7 +140,7 @@ if __name__ == "__main__":
     if not run_tests():
         print("❌ [CRITICAL] Tests failed. Aborting execution.")
         sys.exit(1)
-    
+
     # Standalone execution logic
     if len(sys.argv) > 1:
         cmd = sys.argv[1].lower()

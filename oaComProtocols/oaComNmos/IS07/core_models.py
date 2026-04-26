@@ -2,8 +2,8 @@
 # Author: Gemini (Collaborator)
 # Version: 20260405.1315.12
 
-from dataclasses import dataclass, field
-from typing import Optional, List, Dict, Any, Union
+from dataclasses import dataclass
+from typing import Any, Union
 
 # --- Core Data Structures for IS-07 Events and Messages ---
 
@@ -11,14 +11,14 @@ from typing import Optional, List, Dict, Any, Union
 class Identity:
     """Represents the identity of an event source or message sender."""
     source_id: str
-    flow_id: Optional[str] = None
+    flow_id: str | None = None
 
 @dataclass
 class Timing:
     """Represents timing information for an event or message."""
     creation_timestamp: str # e.g., "1531680501:280709600"
-    origin_timestamp: Optional[str] = None
-    action_timestamp: Optional[str] = None
+    origin_timestamp: str | None = None
+    action_timestamp: str | None = None
 
 # --- Type Definitions ---
 # These classes represent the structure for defining event types.
@@ -26,26 +26,26 @@ class Timing:
 @dataclass
 class NumberValue:
     """Represents a numerical value, potentially with a scale for rational numbers."""
-    value: Union[int, float]
-    scale: Optional[int] = None
+    value: int | float
+    scale: int | None = None
 
 @dataclass
 class NumberTypeDefinition:
     """Defines a number event type with constraints and optional scale/unit."""
     type: str = "number"
-    scale: Optional[int] = None
-    min: Optional[NumberValue] = None
-    max: Optional[NumberValue] = None
-    step: Optional[NumberValue] = None
-    unit: Optional[str] = None
+    scale: int | None = None
+    min: NumberValue | None = None
+    max: NumberValue | None = None
+    step: NumberValue | None = None
+    unit: str | None = None
 
 @dataclass
 class StringTypeDefinition:
     """Defines a string event type with length and pattern constraints."""
     type: str = "string"
-    min_length: Optional[int] = None
-    max_length: Optional[int] = None
-    pattern: Optional[str] = None
+    min_length: int | None = None
+    max_length: int | None = None
+    pattern: str | None = None
 
 @dataclass
 class BooleanTypeDefinition:
@@ -55,26 +55,26 @@ class BooleanTypeDefinition:
 @dataclass
 class EnumValue:
     """Represents a single value within an enumerated type."""
-    value: Union[bool, int, float, str]
+    value: bool | int | float | str
     label: str
     description: str
 
 @dataclass
 class BooleanEnumTypeDefinition:
     """Defines a boolean enumerated type."""
-    values: List[EnumValue]
+    values: list[EnumValue]
     type: str = "boolean"
 
 @dataclass
 class NumberEnumTypeDefinition:
     """Defines a number enumerated type."""
-    values: List[EnumValue]
+    values: list[EnumValue]
     type: str = "number"
 
 @dataclass
 class StringEnumTypeDefinition:
     """Defines a string enumerated type."""
-    values: List[EnumValue]
+    values: list[EnumValue]
     type: str = "string"
 
 # Union for type definitions to allow any of them
@@ -103,11 +103,11 @@ class StringPayload:
 @dataclass
 class NumberPayload:
     """Payload for number events."""
-    value: Union[int, float]
-    scale: Optional[int] = None
+    value: int | float
+    scale: int | None = None
 
 @dataclass
-class ObjectPayload(Dict[str, Any]):
+class ObjectPayload(dict[str, Any]):
     """Payload for object events. Using Dict as a base for flexibility."""
     pass
 
@@ -119,7 +119,7 @@ class EventCore:
     identity: Identity
     timing: Timing
     event_type: str # e.g., "boolean", "number/temperature/C", "boolean/enum/OnOff"
-    payload: Union[BooleanPayload, StringPayload, NumberPayload, ObjectPayload]
+    payload: BooleanPayload | StringPayload | NumberPayload | ObjectPayload
     message_type: str = "state" # Default to state message type
 
 # Specific Event Types (composed of EventCore + specific payload type)
@@ -167,12 +167,12 @@ Message = Union[
 class GenericTypeDefinition:
     """A general representation for type definitions that might include various fields."""
     type: str
-    values: Optional[List[Dict[str, Any]]] = None # For enums
-    min: Optional[Dict[str, Any]] = None # For number type
-    max: Optional[Dict[str, Any]] = None
-    step: Optional[Dict[str, Any]] = None
-    unit: Optional[str] = None
-    min_length: Optional[int] = None
-    max_length: Optional[int] = None
-    pattern: Optional[str] = None
+    values: list[dict[str, Any]] | None = None # For enums
+    min: dict[str, Any] | None = None # For number type
+    max: dict[str, Any] | None = None
+    step: dict[str, Any] | None = None
+    unit: str | None = None
+    min_length: int | None = None
+    max_length: int | None = None
+    pattern: str | None = None
 

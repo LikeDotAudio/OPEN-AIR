@@ -1,5 +1,4 @@
 # standardizers/widget_type_resolver.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
@@ -53,14 +52,14 @@ class WidgetTypeResolver:
         Detects the implementation type based on aliases and context.
         """
         widget_type = config.get("type") or config.get("widget_type", "")
-        
+
         if widget_type == "_SmartMeter":
             cosmetics = config.get("cosmetics", {})
             viz = cosmetics.get("style_flags", {}).get("visualization", "bar").lower()
             return "_NeedleVUMeter" if viz == "needle" else "_BarGraph"
-            
+
         if widget_type == "_SmartFader":
             return "_CustomHorizontalFader" if orientation == "horizontal" else "_CustomFader"
-            
+
         resolved = cls.TYPE_MAP.get(widget_type, widget_type)
         return resolved

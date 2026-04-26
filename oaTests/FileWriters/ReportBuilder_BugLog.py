@@ -4,9 +4,10 @@
 #
 # Description: Scans the BugLog directory for bug reports and returns HTML content.
 
-import os
 import glob
+import os
 from datetime import datetime
+
 
 def build_tab(data_dir):
     """
@@ -23,10 +24,10 @@ def build_tab(data_dir):
     for file_path in bug_files[:5]: # Show latest 5
         filename = os.path.basename(file_path)
         mtime = datetime.fromtimestamp(os.path.getmtime(file_path)).strftime('%Y-%m-%d %H:%M:%S')
-        
+
         from collections import deque
         try:
-            with open(file_path, 'r', errors='replace') as f:
+            with open(file_path, errors='replace') as f:
                 # Use deque to efficiently keep only the last 500 lines
                 lines = deque(f, maxlen=500)
                 content = "".join(lines)
@@ -34,7 +35,7 @@ def build_tab(data_dir):
                     content = "... [truncated for performance] ...\n" + content
         except Exception as e:
             content = f"Error reading log: {e}"
-        
+
         html += f"""
         <div class="log-entry bug-log">
             <div class="log-header">

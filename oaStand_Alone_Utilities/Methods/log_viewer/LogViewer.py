@@ -6,11 +6,12 @@
 
 import base64
 import re
-import pandas as pd
+
 import dash
-from dash import dcc, html, dash_table, Input, Output, State
-import plotly.express as px
 import emoji
+import pandas as pd
+import plotly.express as px
+from dash import Input, Output, State, dash_table, dcc, html
 
 # Regex pattern to parse your specific log format:
 LOG_PATTERN = re.compile(
@@ -49,7 +50,7 @@ app.title = "Log Visualizer: Dark Edition"
 
 app.layout = html.Div(style={'fontFamily': 'Segoe UI, Tahoma, Geneva, Verdana, sans-serif', 'backgroundColor': BG_COLOR, 'color': TEXT_COLOR, 'padding': '20px', 'minHeight': '100vh'}, children=[
     html.H1("Log Analytics Dashboard", style={'textAlign': 'center', 'color': ACCENT_COLOR, 'textTransform': 'uppercase', 'letterSpacing': '2px'}),
-    
+
     # 1. File Upload Button
     dcc.Upload(
         id='upload-data',
@@ -62,27 +63,27 @@ app.layout = html.Div(style={'fontFamily': 'Segoe UI, Tahoma, Geneva, Verdana, s
         },
         multiple=False
     ),
-    
+
     dcc.Store(id='stored-data'),
-    
+
     # 2. Filters
     html.Div([
         html.Div([
             html.Label("Filter by Process:", style={'fontWeight': 'bold'}),
             dcc.Dropdown(id='filter-process', multi=True, style={'color': '#000'})
         ], style={'width': '32%', 'display': 'inline-block', 'marginRight': '1%'}),
-        
+
         html.Div([
             html.Label("Filter by Type:", style={'fontWeight': 'bold'}),
             dcc.Dropdown(id='filter-type', multi=True, style={'color': '#000'})
         ], style={'width': '32%', 'display': 'inline-block', 'marginRight': '1%'}),
-        
+
         html.Div([
             html.Label("Filter by Function:", style={'fontWeight': 'bold'}),
             dcc.Dropdown(id='filter-function', multi=True, style={'color': '#000'})
         ], style={'width': '32%', 'display': 'inline-block'})
     ], style={'marginBottom': '20px', 'backgroundColor': CARD_COLOR, 'padding': '15px', 'borderRadius': '10px'}),
-    
+
     # 3. Flamboyant Interactive Charts Row 1
     html.Div([
         dcc.Graph(id='chart-sunburst', style={'width': '40%', 'display': 'inline-block', 'verticalAlign': 'top'}),
@@ -94,7 +95,7 @@ app.layout = html.Div(style={'fontFamily': 'Segoe UI, Tahoma, Geneva, Verdana, s
         dcc.Graph(id='chart-heatmap', style={'width': '50%', 'display': 'inline-block'}),
         dcc.Graph(id='chart-timeline', style={'width': '50%', 'display': 'inline-block'})
     ], style={'marginTop': '20px'}),
-    
+
     # 5. Drill-Down List
     html.H3("Drill-Down Data Viewer", style={'marginTop': '40px', 'color': ACCENT_COLOR}),
     dash_table.DataTable(
@@ -114,12 +115,12 @@ app.layout = html.Div(style={'fontFamily': 'Segoe UI, Tahoma, Geneva, Verdana, s
         filter_action="native",
         sort_action="native",
     ),
-    
+
     # 6. Detail Viewer
     html.H3("Raw Detail Inspector", style={'marginTop': '30px', 'color': ACCENT_COLOR}),
     html.Pre(id='detail-viewer', style={
-        'border': f'1px solid {ACCENT_COLOR}', 'padding': '20px', 
-        'whiteSpace': 'pre-wrap', 'wordBreak': 'break-all', 
+        'border': f'1px solid {ACCENT_COLOR}', 'padding': '20px',
+        'whiteSpace': 'pre-wrap', 'wordBreak': 'break-all',
         'backgroundColor': '#000000', 'color': '#00FF41', # Matrix-style terminal green for raw logs
         'borderRadius': '10px', 'fontFamily': 'Consolas, monospace', 'boxShadow': '0px 0px 15px rgba(187, 134, 252, 0.2)'
     })
@@ -136,18 +137,18 @@ app.layout = html.Div(style={'fontFamily': 'Segoe UI, Tahoma, Geneva, Verdana, s
 def update_data(contents):
     if contents is None:
         return [], [], [], []
-    
+
     content_type, content_string = contents.split(',')
     decoded = base64.b64decode(content_string).decode('utf-8', errors='replace')
     df = parse_log_file(decoded)
-    
+
     if df.empty:
         return [], [], [], []
-        
+
     proc_opts = [{'label': i, 'value': i} for i in sorted(df['process'].unique())]
     type_opts = [{'label': i, 'value': i} for i in sorted(df['type'].unique())]
     func_opts = [{'label': i, 'value': i} for i in sorted(df['function'].unique())]
-    
+
     return df.to_dict('records'), proc_opts, type_opts, func_opts
 
 
@@ -166,20 +167,20 @@ def update_data(contents):
 def update_visuals(data, procs, types, funcs):
     if not data:
         return {}, {}, {}, {}, []
-        
+
     df = pd.DataFrame(data)
-    
+
     # Apply dropdown filters
     if procs: df = df[df['process'].isin(procs)]
     if types: df = df[df['type'].isin(types)]
     if funcs: df = df[df['function'].isin(funcs)]
-    
+
     layout_theme = 'plotly_dark'
     bg_color = '#000000' # True black background for charts
 
     # 1. Sunburst Chart
     fig_sun = px.sunburst(
-        df, path=['process', 'function'], 
+        df, path=['process', 'function'],
         title='Process & Function Hierarchy (Click to drill)',
         color_discrete_sequence=px.colors.qualitative.Pastel
     )

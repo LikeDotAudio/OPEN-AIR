@@ -4,13 +4,12 @@
 #
 # Description: REST API Tree Explorer with interactive testing capabilities.
 
-import tkinter as tk
-from tkinter import ttk, messagebox
-import requests
 import json
 import threading
-from pathlib import Path
-import sys
+import tkinter as tk
+from tkinter import ttk
+
+import requests
 
 import oaComProtocols.oaComREST.Entry as REST_MODULE
 
@@ -30,11 +29,11 @@ class RestTreeImplementation(tk.Frame, TransparencyMixin):
     def __init__(self, parent, **kwargs):
         self.config_data = kwargs.pop("config", {})
         super().__init__(parent, **kwargs)
-        
+
         # REST Server details
         from oaComProtocols.oaComREST.Constants.rest_constants import REST_BIND_HOST, REST_PORT
         self.base_url = f"http://{REST_BIND_HOST}:{REST_PORT}"
-        
+
         self._setup_ui()
         self._refresh_tree()
         self._refresh_ui()
@@ -64,10 +63,10 @@ class RestTreeImplementation(tk.Frame, TransparencyMixin):
         # 1. Top Control Bar
         ctrl_bar = tk.Frame(self, bg="#333333")
         ctrl_bar.pack(side=tk.TOP, fill=tk.X, padx=10, pady=5)
-        
+
         tk.Button(ctrl_bar, text="🔄 REFRESH TREE", bg="#444444", fg="#ffffff", font=("Helvetica", 9, "bold"),
                   command=self._refresh_tree, width=15).pack(side=tk.LEFT, padx=5, pady=5)
-        
+
         tk.Button(ctrl_bar, text="🚀 TEST FULLY (GET ALL)", bg="#f4902c", fg="#1a1a1a", font=("Helvetica", 9, "bold"),
                   command=self._test_fully, width=20).pack(side=tk.LEFT, padx=5, pady=5)
 
@@ -88,7 +87,7 @@ class RestTreeImplementation(tk.Frame, TransparencyMixin):
         self.tree.heading("Value", text="Live Value")
         self.tree.column("#0", width=350)
         self.tree.column("Value", width=150)
-        
+
         vsb = ttk.Scrollbar(tree_frame, orient="vertical", command=self.tree.yview)
         self.tree.configure(yscrollcommand=vsb.set)
         self.tree.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
@@ -104,7 +103,7 @@ class RestTreeImplementation(tk.Frame, TransparencyMixin):
         header = tk.Frame(result_frame, bg="#333333")
         header.pack(side=tk.TOP, fill=tk.X)
         tk.Label(header, text="🧪 INTERACTIVE TESTER", font=("Helvetica", 10, "bold"), fg="#ffffff", bg="#333333").pack(side=tk.LEFT, padx=10, pady=5)
-        
+
         self.btn_test = tk.Button(header, text="GET VALUE", bg="#33A1FD", fg="#ffffff", font=("Helvetica", 8, "bold"),
                                  command=self._test_selected, state="disabled")
         self.btn_test.pack(side=tk.RIGHT, padx=5, pady=2)
@@ -137,18 +136,18 @@ class RestTreeImplementation(tk.Frame, TransparencyMixin):
     def _rebuild_tree_ui(self, data):
         """Reconstructs the hierarchical Treeview from a flat dict."""
         self.tree.delete(*self.tree.get_children())
-        
+
         # Build node structure
         nodes = {} # path -> id
-        
+
         # Sort topics to ensure parents are created before children
         topics = sorted(data.keys())
-        
+
         for topic in topics:
             parts = topic.split('/')
             path = ""
             parent_id = ""
-            
+
             for i, part in enumerate(parts):
                 path = f"{path}/{part}" if path else part
                 if path not in nodes:
@@ -160,14 +159,14 @@ class RestTreeImplementation(tk.Frame, TransparencyMixin):
     def _test_selected(self, event=None):
         selected = self.tree.selection()
         if not selected: return
-        
+
         # Reconstruct path from tree hierarchy
         path_parts = []
         curr = selected[0]
         while curr:
             path_parts.insert(0, self.tree.item(curr)["text"])
             curr = self.tree.parent(curr)
-        
+
         endpoint = "/".join(path_parts)
         self._run_test(endpoint)
 
@@ -180,16 +179,16 @@ class RestTreeImplementation(tk.Frame, TransparencyMixin):
         self.result_text.delete("1.0", tk.END)
         self.result_text.insert(tk.END, f"📡 REQUEST: GET {self.base_url}/{endpoint}\n")
         self.result_text.insert(tk.END, "--------------------------------------------------\n\n")
-        
+
         def worker():
             try:
                 import time
                 t0 = time.time()
                 response = requests.get(f"{self.base_url}/{endpoint}", timeout=5)
                 t1 = time.time()
-                
+
                 content = json.dumps(response.json(), indent=4)
-                
+
                 self.after(0, lambda: self._display_result(response.status_code, content, t1-t0))
             except Exception as e:
                 err_msg = str(e)

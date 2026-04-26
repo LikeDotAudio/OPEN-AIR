@@ -5,12 +5,13 @@
 # Description: Modularized design control injector.
 
 import tkinter as tk
-from oaLogging.Core.logger import GUI_LOGGER as logger
+
+from .overlays.alignment_overlay import AlignmentOverlay
 
 # Import modular overlay classes
 from .overlays.selection_overlay import SelectionOverlay
-from .overlays.alignment_overlay import AlignmentOverlay
 from .overlays.sizing_overlay import SizingOverlay
+
 
 class OverlayManager:
     """Orchestrates the injection of designer overlays onto live widgets."""
@@ -19,7 +20,7 @@ class OverlayManager:
         self.workspace = workspace
         self.active_overlays = {} # path -> [BaseOverlay, ...]
         self.event_blocker_canvas = None
-        
+
         # Registry of functional overlay classes
         self.overlay_registry = [
             SelectionOverlay,
@@ -31,18 +32,18 @@ class OverlayManager:
         """Creates a transparent canvas to prevent interaction with preview widgets."""
         if self.event_blocker_canvas:
             self.event_blocker_canvas.destroy()
-            
+
         self.event_blocker_canvas = tk.Canvas(parent_widget, highlightthickness=0, bd=0)
         for event in ["<Button-1>", "<Button-2>", "<Button-3>", "<Motion>", "<MouseWheel>"]:
             self.event_blocker_canvas.bind(event, lambda e: "break")
-            
+
         self.show_event_blocker(False)
 
     def show_event_blocker(self, show=True):
         """Toggles the visibility of the event-blocking layer."""
         if not self.event_blocker_canvas:
             return
-            
+
         if show:
             parent = self.event_blocker_canvas.master
             if parent.winfo_width() > 1 and parent.winfo_height() > 1:
@@ -54,7 +55,7 @@ class OverlayManager:
         """Top-level entry point to refresh all designer overlays for a container."""
         if not container or not container.winfo_exists():
             return
-            
+
         self._recursive_clear(container)
         self._recursive_apply(container)
 
@@ -84,15 +85,15 @@ class OverlayManager:
         """Recursively injects designer controls into widgets with valid paths."""
         if depth > 10:
             return
-            
+
         for child in container.winfo_children():
             if getattr(child, '_is_design_overlay', False):
                 continue
-            
+
             path = getattr(child, '_oca_path', None)
             if path and "unknown" not in path:
                 self._inject_modular_controls(child, path)
-            
+
             if isinstance(child, (tk.Frame, tk.Canvas, tk.LabelFrame)):
                 self._recursive_apply(child, depth + 1)
 
@@ -119,7 +120,7 @@ class OverlayManager:
                     instance.sync(*bounds)
             except (tk.TclError, ValueError):
                 pass
-        
+
         # Bind sync to widget resize and trigger initial sync
         widget.bind("<Configure>", _sync_pos, add="+")
         widget.after(100, _sync_pos)

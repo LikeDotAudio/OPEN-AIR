@@ -5,11 +5,9 @@
 # Description: Advanced Ember+ Monitor & Control Hub.
 # This file contains the primary implementation logic for the Ember+ GUI.
 
-import os
 import sys
-import pathlib
-from pathlib import Path
 import tkinter as tk
+from pathlib import Path
 from tkinter import ttk
 
 # --- Path Guard: Ensure project root is in sys.path ---
@@ -23,10 +21,9 @@ for parent in current_path.parents:
 if str(root_path) not in sys.path:
     sys.path.insert(0, str(root_path))
 
-import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
 from loguru import logger
-from oaLogging.Entry import logger as logger_oa
+
+from oaLogging.Methods.matrix_gate import matrix_log
 
 try:
     import oaComProtocols.oaComEmber.Entry as EMBER_MODULE
@@ -50,19 +47,19 @@ class EmberDashboardImplementation(tk.Frame, TransparencyMixin):
         # Extract non-Tkinter arguments
         self.config_data = kwargs.pop("config", {})
         self.json_path = kwargs.pop("json_path", None)
-        
+
         super().__init__(parent, **kwargs)
-        
+
         # Activity cache for investigation
         self._activity_cache = {}
-        
+
         self._setup_ui()
-        
+
         # --- Standalone Initialization ---
         if EMBER_MODULE and hasattr(EMBER_MODULE, "get_manager"):
             try:
                 mqtt_conn = self.config_data.get("mqtt_connection_manager") or (getattr(self.config_data.get("app_instance"), "mqtt_connection_manager", None) if self.config_data.get("app_instance") else None)
-                
+
                 EMBER_MODULE.get_manager(mqtt_connection_manager=mqtt_conn)
                 matrix_log("core", "system", "EmberDashboard", "🧬 EmberDashboard: EmberManager linked successfully.", "INFO")
             except Exception as e:
@@ -74,7 +71,7 @@ class EmberDashboardImplementation(tk.Frame, TransparencyMixin):
                 EMBER_MODULE.add_monitor_callback(self.on_ember_activity)
             except Exception as e:
                 logger.error(f"EmberDashboard: Failed to register callback: {e}")
-            
+
         self._refresh_ui()
         self._schedule_refresh()
 
@@ -91,16 +88,16 @@ class EmberDashboardImplementation(tk.Frame, TransparencyMixin):
         # 1. Header
         header = tk.Frame(self, bg="#2b2b2b")
         header.pack(side=tk.TOP, fill=tk.X, pady=(10, 5))
-        
+
         tk.Label(header, text="🧬 EMBER+ CONTROL HUB", font=("Helvetica", 14, "bold"), fg="#ffffff", bg="#2b2b2b").pack(side=tk.LEFT, padx=20)
-        
+
         self.status_lbl = tk.Label(header, text="Status: LOADING...", font=("Courier", 10, "bold"), fg="#ffff00", bg="#2b2b2b")
         self.status_lbl.pack(side=tk.RIGHT, padx=20)
 
         # 2. Control Bar (with input as requested)
         ctrl_bar = tk.Frame(self, bg="#333333", height=40)
         ctrl_bar.pack(side=tk.TOP, fill=tk.X, padx=10, pady=5)
-        
+
         tk.Label(ctrl_bar, text="TARGET IP:", font=("Helvetica", 8, "bold"), fg="#888888", bg="#333333").pack(side=tk.LEFT, padx=(10, 2))
         self.ip_entry = tk.Entry(ctrl_bar, bg="#000000", fg="#00ff00", insertbackground="white", width=15, bd=1, relief="flat")
         self.ip_entry.pack(side=tk.LEFT, padx=5, pady=5)
@@ -111,7 +108,7 @@ class EmberDashboardImplementation(tk.Frame, TransparencyMixin):
         self.port_entry.pack(side=tk.LEFT, padx=5, pady=5)
         self.port_entry.insert(0, "9000")
 
-        self.btn_connect = tk.Button(ctrl_bar, text="CONNECT", bg="#1a4a1a", fg="#ffffff", font=("Helvetica", 8, "bold"), 
+        self.btn_connect = tk.Button(ctrl_bar, text="CONNECT", bg="#1a4a1a", fg="#ffffff", font=("Helvetica", 8, "bold"),
                                     command=self._on_connect, relief="raised", bd=2)
         self.btn_connect.pack(side=tk.LEFT, padx=10)
 
@@ -128,7 +125,7 @@ class EmberDashboardImplementation(tk.Frame, TransparencyMixin):
         for col in cols:
             self.tree.heading(col, text=col)
             self.tree.column(col, width=100)
-        
+
         self.tree.column("Time", width=120)
         self.tree.column("Path", width=250, anchor="w")
         self.tree.column("Value", width=150)
@@ -151,8 +148,8 @@ class EmberDashboardImplementation(tk.Frame, TransparencyMixin):
         inspect_header = tk.Frame(inspect_frame, bg="#1a1a1a")
         inspect_header.pack(side=tk.TOP, fill=tk.X)
         tk.Label(inspect_header, text="🔍 EMBER+ NODE DISSECTOR", font=("Helvetica", 10, "bold"), fg="#888888", bg="#1a1a1a").pack(side=tk.LEFT, padx=5)
-        
-        tk.Button(inspect_header, text="CLEAR", bg="#333333", fg="#ffffff", font=("Helvetica", 7), 
+
+        tk.Button(inspect_header, text="CLEAR", bg="#333333", fg="#ffffff", font=("Helvetica", 7),
                   command=self._clear_monitor, bd=1).pack(side=tk.RIGHT, padx=5, pady=2)
 
         self.inspect_text = tk.Text(inspect_frame, bg="#000000", fg="#00ff00", font=("Courier", 10), bd=0, highlightthickness=0)
@@ -175,13 +172,13 @@ class EmberDashboardImplementation(tk.Frame, TransparencyMixin):
         if not EMBER_MODULE or not hasattr(EMBER_MODULE, "status"):
             self.status_lbl.configure(text="OFFLINE (No Module)", fg="#ff4444")
             return
-            
+
         try:
             status = EMBER_MODULE.status()
         except Exception:
             self.status_lbl.configure(text="ERROR", fg="#ff0000")
             return
-        
+
         if isinstance(status, dict):
             is_running = status.get("running", False)
             conn_str = status.get("connection", "DISCONNECTED")
@@ -200,9 +197,9 @@ class EmberDashboardImplementation(tk.Frame, TransparencyMixin):
     def _add_log_entry(self, direction, path, value, node_type):
         now = datetime.datetime.now()
         timestamp = now.strftime("%H:%M:%S.%f")[:-3]
-        
+
         item_id = self.tree.insert("", 0, values=(timestamp, direction, path, value, node_type or "-"), tags=(direction,))
-        
+
         self._activity_cache[timestamp] = {
             "timestamp": timestamp,
             "direction": direction,
@@ -220,12 +217,12 @@ class EmberDashboardImplementation(tk.Frame, TransparencyMixin):
     def on_select_node(self, event):
         selected = self.tree.selection()
         if not selected: return
-        
+
         item = self.tree.item(selected[0])
         timestamp = item["values"][0]
         data = self._activity_cache.get(timestamp)
         if not data: return
-        
+
         self.inspect_text.delete("1.0", tk.END)
         self.inspect_text.insert(tk.END, f"TIME     : {data['timestamp']}\n")
         self.inspect_text.insert(tk.END, f"DIR      : {data['direction']}\n")

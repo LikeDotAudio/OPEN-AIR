@@ -1,28 +1,25 @@
-import sys
 
 import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
+
 # 1588_PTP_Monitor/ptp_monitor.py
 # Author: Anthony Peter Kuzub
 # Version: 20260315.Modular.1
 #
 # Description: Modularized PTP (Precision Time Protocol) Monitor GUI.
-
 import tkinter as tk
 from tkinter import ttk
-import datetime
-from pathlib import Path
-from loguru import logger
+
+from oaConfigurationManager.FileReaders.config_reader import Config
+from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+from oaLogging.Methods.matrix_gate import matrix_log
+from oaPTP.Core.ptp import register_ptp_callback, unregister_ptp_callback
+from oaStyle.Core.style import DEFAULT_THEME, THEMES
+
+from .Core.ptp_dissector_engine import PTPDissectorEngine
+from .Core.ptp_meter_panel import PTPMeterPanel
 
 # --- EXTRACTED CORE MODULES ---
 from .Core.ptp_processor import PTPDataProcessor
-from .Core.ptp_meter_panel import PTPMeterPanel
-from .Core.ptp_dissector_engine import PTPDissectorEngine
-
-from oaPTP.Core.ptp import register_ptp_callback, unregister_ptp_callback
-from oaConfigurationManager.FileReaders.config_reader import Config
-from oaStyle.Core.style import THEMES, DEFAULT_THEME
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 
 app_constants = Config.get_instance()
 
@@ -35,20 +32,20 @@ class PtpMonitor(tk.Frame, TransparencyMixin):
         self.config_data = config or {}
         self.theme_colors = self.config_data.get("theme_colors", THEMES[DEFAULT_THEME])
         self._packet_data_cache = {}
-        
+
         if "bg" not in kwargs: kwargs["bg"] = self.theme_colors.get("bg", "#2b2b2b")
         super().__init__(parent, **kwargs)
-        
+
         self._setup_styles()
         self._setup_ui()
-        
+
         # Transparency integration
         builder = self._find_builder(self)
         if builder: self._apply_transparency(self, None, {}, builder)
-        
+
         # Meter Cluster initialization
         self.meter_panel = PTPMeterPanel(self.meter_container, builder) if builder else None
-        
+
         register_ptp_callback(self.on_ptp_packet)
         matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🖥️ PTP Monitor Initialized.", "DEBUG")
 
@@ -77,16 +74,16 @@ class PtpMonitor(tk.Frame, TransparencyMixin):
         self.list_container = tk.Frame(self.v_paned, bg=self.cget("bg"))
         self.v_paned.add(self.list_container, stretch="always", height=200)
         ttk.Label(self.list_container, text="PTP (IEEE 1588) Monitor", font=("Arial", 12, "bold"), style="Dark.TLabel").pack(pady=(0,5))
-        
+
         cols = ("Time", "Source IP", "Type", "Domain", "Seq ID", "Clock Identity")
         self.packet_tree = ttk.Treeview(self.list_container, columns=cols, show="headings", style="Ptp.Treeview")
         for c in cols:
             self.packet_tree.heading(c, text=c); self.packet_tree.column(c, width=150 if c=="Time" else (250 if c=="Clock Identity" else 100))
         self.packet_tree.tag_configure("Sync", foreground="#006400"); self.packet_tree.tag_configure("Announce", foreground="#4444ff")
-        
+
         sy = ttk.Scrollbar(self.list_container, orient=tk.VERTICAL, command=self.packet_tree.yview)
         self.packet_tree.configure(yscrollcommand=sy.set); self.packet_tree.pack(side=tk.LEFT, fill=tk.BOTH, expand=True); sy.pack(side=tk.RIGHT, fill=tk.Y)
-        
+
         self.packet_tree.bind("<<TreeviewSelect>>", self.on_packet_select)
 
         # 2. MIDDLE: Meters
@@ -97,7 +94,7 @@ class PtpMonitor(tk.Frame, TransparencyMixin):
         self.dissect_container = tk.Frame(self.v_paned, bg=self.cget("bg"))
         self.v_paned.add(self.dissect_container, stretch="always", height=300)
         ttk.Label(self.dissect_container, text="Packet Dissector", font=("Arial", 10, "bold"), style="Dark.TLabel").pack(anchor="w", pady=(5,0))
-        
+
         self.dissector_tree = ttk.Treeview(self.dissect_container, columns=("Value"), show="tree headings", style="Ptp.Treeview")
         self.dissector_tree.heading("#0", text="Field"); self.dissector_tree.heading("Value", text="Protobuf Content")
         dsy = ttk.Scrollbar(self.dissect_container, orient=tk.VERTICAL, command=self.dissector_tree.yview)
@@ -113,7 +110,7 @@ class PtpMonitor(tk.Frame, TransparencyMixin):
         ordered, ts_str, tag = PTPDataProcessor.process_packet(data)
         iid = self.packet_tree.insert("", 0, values=(ts_str, data["source_ip"], data["message_type"], data["domain"], data["sequence_id"], data["clock_identity"]), tags=(tag))
         self._packet_data_cache[iid] = ordered
-        
+
         self.packet_tree.selection_set(iid); self.packet_tree.see(iid); self.on_packet_select()
         if len(self.packet_tree.get_children()) > 100:
             last = self.packet_tree.get_children()[-1]; self.packet_tree.delete(last); self._packet_data_cache.pop(last, None)

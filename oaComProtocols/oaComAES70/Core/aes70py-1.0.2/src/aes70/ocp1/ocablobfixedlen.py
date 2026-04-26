@@ -1,6 +1,7 @@
 from struct import pack_into
 
-from ..ocp1.createtype import create_type, Type
+from ..ocp1.createtype import Type, create_type
+
 
 def OcaBlobFixedLen(Length):
 

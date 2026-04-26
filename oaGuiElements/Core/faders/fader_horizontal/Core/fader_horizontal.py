@@ -1,28 +1,26 @@
 # fader_horizontal/fader_horizontal.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 20260315.Modular.1
 #
 # Description: Modularized Horizontal Fader.
 
 import tkinter as tk
-from oaLogging.Methods.matrix_gate import matrix_log
-import inspect
-from loguru import logger
 
 # --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import builder_logger
 from oaConfigurationManager.FileReaders.config_reader import Config
+
 app_constants = Config.get_instance()
 
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
-from oaGuiManager.Core.transparency.transparency import TransparencyManager
-from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
 from oaGuiBuilder.Core.base_widget_creator import BaseWidgetCreator
 
 # --- EXTRACTED CORE MODULES ---
 from oaGuiElements.Core.faders.fader_horizontal.Core.horizontal_fader_renderer_mixin import HorizontalFaderRendererMixin
+from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
+from oaGuiManager.Core.transparency.transparency import TransparencyManager
+from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+
 from .horizontal_fader_interaction_mixin import HorizontalFaderInteractionMixin
+
 
 class CustomHorizontalFaderFrame(
     tk.Frame,
@@ -31,19 +29,19 @@ class CustomHorizontalFaderFrame(
 ):
     def __init__(self, master, variable, config, path, state_mirror_engine):
         super().__init__(master, bd=0, highlightthickness=0)
-        
+
         self.variable, self.path, self.config_data, self.state_mirror_engine = variable, path, config, state_mirror_engine
-        
+
         # 1. Config
         self.min_val = float(config.get("min", config.get("value_min", 0.0)))
         self.max_val = float(config.get("max", config.get("value_max", 100.0)))
         self.log_exponent = float(config.get("log_exponent", 1.0))
         self.reff_point = float(config.get("reff_point", (self.min_val + self.max_val) / 2.0))
-        
+
         self.width = float(config.get("width", config.get("layout", {}).get("width", 200)))
         self.height = float(config.get("height", config.get("layout", {}).get("height", 100)))
         self.track_hover_color = "#444444"
-        
+
         # 2. State
         self.is_sliding = self.is_locked = self.is_hovered = False
         self._resize_timer = self.temp_entry = None
@@ -80,19 +78,19 @@ class CustomHorizontalFaderFrame(
 
 @WidgetRegistry.register("_CustomHorizontalFader")
 class BuilderFaderHorizontalCreator(BaseWidgetCreator, TransparencyMixin):
-    
+
     def _assemble_ui(self, parent_widget, config_data, context, **kwargs):
         """Assembles the Horizontal Fader UI."""
         ctx = context if context else type('obj', (object,), kwargs)()
         b_inst = getattr(ctx, 'builder_instance', None) or getattr(ctx, 'app_instance', None) or kwargs.get('builder_instance')
-        
+
         val_var = tk.DoubleVar(master=parent_widget, value=float(config_data.get("value_default", config_data.get("value", 50.0))))
         frame = CustomHorizontalFaderFrame(parent_widget, val_var, config_data, config_data.get("path"), getattr(ctx, 'state_mirror_engine', None) or kwargs.get('state_mirror_engine'))
-        
+
         if hasattr(b_inst, '_apply_transparency'):
             TransparencyManager.apply_transparency(frame, frame.canvas, config_data, b_inst)
             TransparencyManager.apply_transparency(frame, frame, config_data, b_inst)
-        
+
         path = config_data.get("path")
         s_engine = getattr(ctx, 'state_mirror_engine', None) or kwargs.get('state_mirror_engine')
         if path and s_engine:

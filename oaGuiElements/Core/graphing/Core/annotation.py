@@ -1,11 +1,11 @@
 # Core/annotation.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: Brief summary of purpose
 
 import numpy as np
+
 
 class AnnotationManager:
     """Handles hover-based annotations, intersection dots, and vertical crosshair lines."""
@@ -23,10 +23,10 @@ class AnnotationManager:
                 if not line.get_visible() or line == v_line: continue
                 label = line.get_label()
                 if not label or label.startswith("_"): continue
-                
+
                 x_d, y_d = line.get_xdata(), line.get_ydata()
                 if len(x_d) == 0: continue
-                
+
                 if "Marker" in label or "MRK" in label:
                     if np.all(x_d == x_d[0]): marker_text.append(f"{label}: X={x_d[0]:.2f}")
                     elif np.all(y_d == y_d[0]): marker_text.append(f"{label}: Y={y_d[0]:.2f}")
@@ -41,7 +41,7 @@ class AnnotationManager:
                     dots[active_dot_count].set_color(line.get_color())
                     dots[active_dot_count].set_visible(True)
                     active_dot_count += 1
-            
+
             for i in range(active_dot_count, len(dots)): dots[i].set_visible(False)
 
             if data_text or marker_text:

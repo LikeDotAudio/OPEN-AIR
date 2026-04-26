@@ -7,7 +7,9 @@
 
 import unittest
 from unittest.mock import MagicMock, patch
+
 from oaComProtocols.oaComMidi.Managers.midi_manager import MidiManager
+
 
 class TestMidiTx(unittest.TestCase):
     def setUp(self):
@@ -26,13 +28,13 @@ class TestMidiTx(unittest.TestCase):
         mock_out = MagicMock()
         mock_out.name = "my_device"
         self.midi.ports.outports = [mock_out]
-        
+
         topic = "OPEN-AIR/MIDI/my_device/ch0/cc7"
         value = {"value": 127}
-        
+
         with patch("oaComBroker.Core.protocol_router.manager.ProtocolRouter.get_instance"):
             self.midi.publish(topic, value)
-        
+
         # Verify mido.Message was sent
         self.assertTrue(mock_out.send.called)
         message = mock_out.send.call_args[0][0]
@@ -46,13 +48,13 @@ class TestMidiTx(unittest.TestCase):
         mock_out = MagicMock()
         mock_out.name = "my_device"
         self.midi.ports.outports = [mock_out]
-        
+
         topic = "OPEN-AIR/MIDI/my_device/ch2/note60"
         value = 100
-        
+
         with patch("oaComBroker.Core.protocol_router.manager.ProtocolRouter.get_instance"):
             self.midi.publish(topic, value)
-        
+
         # Verify mido.Message was sent
         self.assertTrue(mock_out.send.called)
         message = mock_out.send.call_args[0][0]

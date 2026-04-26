@@ -5,21 +5,17 @@
 # Description: Brief summary of purpose
 
 import tkinter as tk
-from oaLogging.Methods.matrix_gate import matrix_log
-import inspect
 from tkinter import ttk
-import os
-
-# --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory
-from loguru import logger
 
 from oaConfigurationManager.FileReaders.config_reader import Config
 
+# --- Standard Debug Logging Setup ---
+
 app_constants = Config.get_instance()
 
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 from oaGuiManager.Core.context.widget_context import WidgetContext
+from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+
 
 class CollapsibleBlockCreatorMixin(TransparencyMixin):
     def _create_collapsible_block(self, parent_widget, config_data, context: WidgetContext = None, **kwargs):
@@ -36,17 +32,17 @@ class CollapsibleBlockCreatorMixin(TransparencyMixin):
         try: p_bg = parent_widget.cget("bg")
         except: pass
         wrapper = tk.Canvas(parent_widget, bd=0, highlightthickness=0, relief="flat", bg=p_bg)
-        
+
         # Apply Industrial Transparency
         if hasattr(self, '_apply_transparency'):
             self._apply_transparency(wrapper, wrapper, config_data, builder_instance)
 
         # 2. Content Frame (The OcaBlock)
         content_frame = tk.Canvas(wrapper, bd=0, highlightthickness=0, relief="flat")
-        
+
         if hasattr(self, '_apply_transparency'):
             self._apply_transparency(content_frame, content_frame, config_data, builder_instance)
-        
+
         # --- GRID CONFIGURATION ---
         max_cols = int(config_data.get("layout_columns", 1))
         column_sizing = config_data.get("column_sizing", [])
@@ -57,10 +53,10 @@ class CollapsibleBlockCreatorMixin(TransparencyMixin):
             content_frame.grid_columnconfigure(col_idx, weight=weight, minsize=minwidth)
 
         # 3. Placeholder Frame (Hidden by default)
-        placeholder_frame = tk.Canvas(wrapper, height=5, bd=0, highlightthickness=0, relief="flat") 
+        placeholder_frame = tk.Canvas(wrapper, height=5, bd=0, highlightthickness=0, relief="flat")
         if hasattr(self, '_apply_transparency'):
             self._apply_transparency(placeholder_frame, placeholder_frame, config_data, self)
-            
+
         separator = ttk.Separator(placeholder_frame, orient="horizontal")
         separator.pack(fill="x", expand=True, pady=2)
 
@@ -86,20 +82,20 @@ class CollapsibleBlockCreatorMixin(TransparencyMixin):
             elif state == "collapsed":
                 content_frame.pack_forget()
                 placeholder_frame.pack(fill="x", expand=False)
-        
+
         wrapper.set_view_state = set_view_state
-        
+
         if view_manager and view_group:
             view_manager.register(view_group, wrapper)
-        
+
         set_view_state("expanded")
 
         # 6. Build Children
         # ⚡ SPEED: Only build if we have fields
         if "fields" in config_data:
             self._create_dynamic_widgets(
-                content_frame, config_data, 
-                path_prefix=config_data.get("path",""), 
+                content_frame, config_data,
+                path_prefix=config_data.get("path",""),
                 on_complete=on_complete,
                 context=context
             )

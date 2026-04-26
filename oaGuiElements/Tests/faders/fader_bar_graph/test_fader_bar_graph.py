@@ -4,10 +4,15 @@
 #
 # Description: Brief summary of purpose
 
-import unittest
-from unittest.mock import MagicMock, patch
 import tkinter as tk
-from oaGuiElements.Core.faders.fader_bar_graph.Core.fader_bar_graph import FaderWithBarGraphFrame, BuilderFaderBarGraphCreator
+import unittest
+from unittest.mock import MagicMock
+
+from oaGuiElements.Core.faders.fader_bar_graph.Core.fader_bar_graph import (
+    BuilderFaderBarGraphCreator,
+    FaderWithBarGraphFrame,
+)
+
 
 class TestFaderBarGraph(unittest.TestCase):
     def setUp(self):
@@ -16,7 +21,7 @@ class TestFaderBarGraph(unittest.TestCase):
             self.root.withdraw()
         except:
             self.root = MagicMock()
-        
+
         self.config = {
             "label_active": "Test Fader Bar",
             "path": "test/fader_bar",
@@ -26,7 +31,7 @@ class TestFaderBarGraph(unittest.TestCase):
         }
         self.mirror_engine = MagicMock()
         self.router = MagicMock()
-        
+
         self.context = MagicMock()
         self.context.state_mirror_engine = self.mirror_engine
         self.context.subscriber_router = self.router

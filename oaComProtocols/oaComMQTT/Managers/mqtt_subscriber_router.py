@@ -5,13 +5,12 @@
 # Description: Manages MQTT subscriptions via high-performance Rust MqttRouter.
 
 import threading
-from typing import Any, Callable, Dict, List, Set, Union
-from oaLogging.Core.logger import MQTT_LOGGER
-from loguru import logger
-import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
+from collections.abc import Callable
 
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Core.logger import MQTT_LOGGER
+from oaLogging.Methods.matrix_gate import matrix_log
+
 from ..Core.mqtt_message import MqttMessage
 from ..Core.mqtt_router import MqttRouter
 
@@ -26,10 +25,10 @@ class MqttSubscriberRouter:
     def __init__(self):
         # High-performance Rust backend
         self.router = MqttRouter()
-        
+
         self._client = None
         self._base_topic = app_constants.MQTT_BASE_TOPIC
-        
+
         # --- Namespace Split: Default global roots ---
         self._roots = {
             "Cmd": f"{self._base_topic}/Cmd/#",
@@ -48,9 +47,9 @@ class MqttSubscriberRouter:
             "SMPTE2138": f"{self._base_topic}/SMPTE2138/#",
             "EMBER": f"{self._base_topic}/EMBER/#"
         }
-        
+
         # Track what we've actually asked the broker for
-        self._active_broker_subscriptions: Set[str] = set()
+        self._active_broker_subscriptions: set[str] = set()
         self._lock = threading.Lock() # For broker subscription sync
 
     def set_client(self, client):
@@ -59,9 +58,9 @@ class MqttSubscriberRouter:
     def subscribe_to_topic(self, topic_filter: str, callback_func: Callable[[MqttMessage], None]):
         """Registers a callback for a topic filter via Rust Router."""
         matrix_log("comms", "mqtt", "subscribe_to_topic", f"Subscribing to {topic_filter}", "DEBUG")
-            
+
         self.router.subscribe(topic_filter, callback_func)
-        
+
         with self._lock:
             # Determining global root logic
             if topic_filter.startswith(f"{self._base_topic}/"):
@@ -81,11 +80,11 @@ class MqttSubscriberRouter:
                 elif "/AES70/" in topic_filter: root_to_use = self._roots["AES70"]
                 elif "/SMPTE2138/" in topic_filter: root_to_use = self._roots["SMPTE2138"]
                 elif "/EMBER/" in topic_filter: root_to_use = self._roots["EMBER"]
-                
-                # ⚡ OPTIMIZATION: If it matches a root, use the root. 
+
+                # ⚡ OPTIMIZATION: If it matches a root, use the root.
                 # Otherwise, subscribe to the specific filter.
                 sub_target = root_to_use or topic_filter
-                
+
                 if sub_target not in self._active_broker_subscriptions:
                     self._active_broker_subscriptions.add(sub_target)
                     from .mqtt_connection import MqttConnectionManager
@@ -133,12 +132,12 @@ class MqttSubscriberRouter:
             # ⚡ RESILIENCE: We must re-subscribe to everything that was previously
             # active to ensure continuity across network interruptions.
             subscriptions_to_restore = list(self._active_broker_subscriptions)
-            
+
             # Ensure the core roots are always present in the restoration list
             for root in self._roots.values():
                 if root not in subscriptions_to_restore:
                     subscriptions_to_restore.append(root)
-            
+
             self._active_broker_subscriptions.clear()
             for root in subscriptions_to_restore:
                 try:
@@ -147,5 +146,5 @@ class MqttSubscriberRouter:
                     matrix_log("comms", "mqtt", "resubscribe_all_topics", f"aiomqtt: Restored subscription to {root}", "DEBUG")
                 except Exception as e:
                     MQTT_LOGGER.error(f"aiomqtt: Failed to restore subscription to {root}: {e}")
-        
+
         matrix_log("comms", "mqtt", "resubscribe_all_topics", "aiomqtt: All topics resubscribed.", "DEBUG")

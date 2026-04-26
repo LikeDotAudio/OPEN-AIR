@@ -6,7 +6,7 @@
 # focusing on granular updates vs. global rebuild events.
 
 import unittest
-from unittest.mock import MagicMock, call
+from unittest.mock import MagicMock
 
 # Placeholder for actual imports if classes were available in the project.
 # For testing purposes, we'll use mocks and a dummy editor class.
@@ -62,7 +62,7 @@ class TestWYSIWYGEditorInteractions(unittest.TestCase):
         node_id_to_modify = "button_123"
         new_color = "#FF0000" # Example new color
 
-        print(f"TEST: Starting test_sub_node_modification_does_not_trigger_global_rebuild")
+        print("TEST: Starting test_sub_node_modification_does_not_trigger_global_rebuild")
         self.editor.modify_sub_node_color(node_id=node_id_to_modify, new_color=new_color)
 
         # Assert that the state manager was called to update the specific node property
@@ -78,7 +78,7 @@ class TestWYSIWYGEditorInteractions(unittest.TestCase):
         for call_args in self.mock_event_bus.emit.call_args_list:
             self.assertNotEqual(call_args[0][0], self.global_rebuild_event_name,
                                 "Global rebuild event was emitted unexpectedly.")
-        print(f"TEST: Finished test_sub_node_modification_does_not_trigger_global_rebuild")
+        print("TEST: Finished test_sub_node_modification_does_not_trigger_global_rebuild")
 
 
     def test_global_setting_modification_triggers_global_rebuild(self):
@@ -89,7 +89,7 @@ class TestWYSIWYGEditorInteractions(unittest.TestCase):
         setting_name = "canvas_size"
         new_value = {"width": 1920, "height": 1080}
 
-        print(f"TEST: Starting test_global_setting_modification_triggers_global_rebuild")
+        print("TEST: Starting test_global_setting_modification_triggers_global_rebuild")
         self.editor.update_global_setting(setting_name=setting_name, value=new_value)
 
         # Assert state manager update for global property
@@ -103,4 +103,4 @@ class TestWYSIWYGEditorInteractions(unittest.TestCase):
             self.global_rebuild_event_name,
             {"setting": setting_name, "value": new_value}
         )
-        print(f"TEST: Finished test_global_setting_modification_triggers_global_rebuild")
+        print("TEST: Finished test_global_setting_modification_triggers_global_rebuild")

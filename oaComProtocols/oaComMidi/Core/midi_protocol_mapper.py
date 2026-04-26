@@ -15,8 +15,6 @@
 # Version 20260328.1425.1
 
 import re
-import sys
-from pathlib import Path
 
 # --- Iron Oxide Distributed Binary Standard ---
 try:
@@ -37,30 +35,30 @@ class MIDIProtocolMapper:
         if not message: return "OPEN-AIR/MIDI/unknown/error", 0
         if not HAS_RUST_MIDI:
             return "OPEN-AIR/MIDI/unknown/no_rust", 0
-        
+
         # 1. Device ID Sanitization (Rust)
-        if port_name in self._dev_id_cache: 
+        if port_name in self._dev_id_cache:
             dev_id = self._dev_id_cache[port_name]
         else:
             dev_id = oamidimapper_rs.sanitize_id(port_name)
             self._dev_id_cache[port_name] = dev_id
-        
+
         # 2. Topic Mapping (Rust)
         ch = message.channel if hasattr(message, 'channel') else 0
         note_or_cc = 0
         if hasattr(message, 'note'): note_or_cc = message.note
         elif hasattr(message, 'control'): note_or_cc = message.control
-        
+
         value = 0
         if hasattr(message, 'velocity'): value = message.velocity
         elif hasattr(message, 'value'): value = message.value
-        
+
         return oamidimapper_rs.midi_to_topic(dev_id, message.type, ch, note_or_cc, value)
 
     def topic_to_midi(self, topic, value):
         """Logic for reverse mapping Internal -> MIDI (Mixed Mode)."""
         if "/MIDI/" not in topic: return None
-        
+
         try:
             # ⚡ Support for JSON dictionary payloads
             if isinstance(value, dict):
@@ -75,10 +73,10 @@ class MIDIProtocolMapper:
                 ch_match = re.search(r'/ch(\d+)', topic)
                 note_match = re.search(r'/note(\d+)', topic)
                 cc_match = re.search(r'/cc(\d+)', topic)
-                
+
                 if not ch_match: return None
                 channel = int(ch_match.group(1)) - 1
-                
+
                 import mido
                 if note_match:
                     note = int(note_match.group(1))
@@ -88,29 +86,29 @@ class MIDIProtocolMapper:
                 elif cc_match:
                     control = int(cc_match.group(1))
                     return mido.Message('control_change', channel=channel, control=control, value=real_val)
-                
+
                 return None
 
             if not HAS_RUST_MIDI: return None
 
             parts = topic.split('/')
             if len(parts) < 5: return None
-            
+
             # Use Rust for digit extraction (Speed + Safety)
             channel = oamidimapper_rs.parse_channel_and_val(parts[3])
             type_str = parts[4]
-            
+
             import mido
             if "cc" in type_str:
                 control = oamidimapper_rs.parse_channel_and_val(type_str)
                 return mido.Message('control_change', channel=channel, control=control, value=real_val)
-            
+
             if "note" in type_str:
                 note = oamidimapper_rs.parse_channel_and_val(type_str)
                 velocity = real_val
                 m_type = 'note_on' if velocity > 0 else 'note_off'
                 return mido.Message(m_type, channel=channel, note=note, velocity=velocity)
-                
+
             return None
         except Exception:
             return None

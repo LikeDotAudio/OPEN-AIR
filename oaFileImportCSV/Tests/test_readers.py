@@ -8,6 +8,7 @@
 import unittest
 from pathlib import Path
 
+
 class TestCSVReaderAsset(unittest.TestCase):
     def test_sample_csv_exists(self):
         """CHECK: Ensure the real-world venue CSV is present."""

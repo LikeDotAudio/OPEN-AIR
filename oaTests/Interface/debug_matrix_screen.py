@@ -1,9 +1,11 @@
 # oaTests/Interface/debug_matrix_screen.py
 from textual.app import ComposeResult
+from textual.containers import Container, Grid, ScrollableContainer
 from textual.screen import Screen
-from textual.widgets import Label, Checkbox, Button, Footer
-from textual.containers import Vertical, Container, ScrollableContainer, Grid
+from textual.widgets import Button, Checkbox, Footer, Label
+
 from oaTests.Managers.configIniEditor.manager import ConfigIniEditor
+
 
 class DebugMatrixScreen(Screen):
     """A dedicated screen for configuring the Hierarchical Debug Matrix."""
@@ -74,7 +76,7 @@ class DebugMatrixScreen(Screen):
 
         with Container(id="dialog"):
             yield Label("SYSTEM CONFIGURATION & DEBUG MATRIX", classes="matrix-label")
-            
+
             with ScrollableContainer():
                 # 1. Global Debug Section
                 yield Label("GLOBAL DEBUG SETTINGS [Debug]", classes="section-label")
@@ -86,7 +88,7 @@ class DebugMatrixScreen(Screen):
                 # 2. Matrix Master Switch
                 yield Label("DEBUG MATRIX CONTROL", classes="section-label")
                 yield Checkbox("MASTER MATRIX ENABLE", value=setup["master"], id="chk_master_debug")
-                
+
                 # 3. Systems
                 yield Label("Systems", classes="matrix-item")
                 with Grid(classes="matrix-grid"):
@@ -100,7 +102,7 @@ class DebugMatrixScreen(Screen):
                     for el_name, value in setup["elements"].items():
                         chk_id = f"chk_el_{el_name.lower()}"
                         yield Checkbox(f"{el_name}", value=value, id=chk_id)
-            
+
             yield Button("CLOSE & RETURN", id="btn_close", variant="success")
         yield Footer()
 
@@ -112,7 +114,7 @@ class DebugMatrixScreen(Screen):
         """Handles debug flag toggles by updating config.ini."""
         cid = event.checkbox.id
         if not cid: return
-        
+
         editor = ConfigIniEditor()
 
         # Handle [Debug] section
@@ -137,7 +139,7 @@ class DebugMatrixScreen(Screen):
             "chk_el_rest": "element_rest",
             "chk_el_builder": "element_gui_builder"
         }
-        
+
         if cid in key_map:
             config_key = key_map[cid]
             editor.set_debug_flag(config_key, event.value)

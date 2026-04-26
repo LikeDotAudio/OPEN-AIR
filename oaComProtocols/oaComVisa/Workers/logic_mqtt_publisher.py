@@ -1,18 +1,18 @@
 import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
+import random
+import time
+
 # Workers/logic_mqtt_publisher.py
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: This manager handles publishing device status and information to the MQTT broker.
-
 import orjson
-import time
-import random
+
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = False
-from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
 from oaConfigurationManager.FileReaders.config_reader import Config
@@ -97,7 +97,7 @@ class VisaGuiPublisher:
                 matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳 ✅ First device automatically selected after search.", "SUCCESS")
 
             matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳 ✅ GUI device list updated with bulk search results.", "SUCCESS")
-        except Exception as e:
+        except Exception:
             if LOCAL_DEBUG:
                 logger.exception("💳 ❌ Error in _update_found_devices_gui")
 
@@ -119,7 +119,7 @@ class VisaGuiPublisher:
                 "OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Device_status"
             )
             full_topic = f"{base_topic}/{topic_suffix}"
-            
+
             # ⚡ ANTI-FEEDBACK SPEC: Define identity and origin to prevent
             # recursive message loops.
             payload_data = {

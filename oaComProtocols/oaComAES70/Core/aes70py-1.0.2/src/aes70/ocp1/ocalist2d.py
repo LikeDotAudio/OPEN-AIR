@@ -1,5 +1,6 @@
-from .createtype import create_type, Type
+from .createtype import Type, create_type
 from .is_typed_array import is_typed_array
+
 
 def OcaList2DConstantLength(_type):
     encoded_length = _type.encoded_length(None)

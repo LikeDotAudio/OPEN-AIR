@@ -1,19 +1,20 @@
 import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
+
 # 3_Command_Router/command_router.py
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: Brief summary of purpose
-
 import tkinter as tk
 from tkinter import ttk
-import time
 
 # --- Standard Debug Logging Setup ---
 from loguru import logger
-from oaConfigurationManager.FileReaders.config_reader import Config
+
 from oaComBroker.Core.protocol_router.manager import ProtocolRouter
+from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import matrix_log
+
 from .protocol_matrix import ProtocolMatrix
 
 app_constants = Config.get_instance()
@@ -27,18 +28,18 @@ class CommandRouter(tk.Frame):
         # Extract non-Tkinter arguments
         self.config_data = kwargs.pop("config", {})
         self.json_path = kwargs.pop("json_path", None)
-        
+
         super().__init__(parent, **kwargs)
         self.router = ProtocolRouter.get_instance()
-        
+
         # Selection state for Splinking
         self.src_var = tk.StringVar(value="")
         self.dest_var = tk.StringVar(value="")
         self._src_utp = None
         self._dest_utp = None
-        
+
         self._setup_ui()
-        
+
         # Register as observer of the central protocol router
         self.router.register_cache_observer(self.on_router_event)
 
@@ -49,9 +50,9 @@ class CommandRouter(tk.Frame):
         # 1. Header
         header = tk.Frame(self, bg="#2b2b2b")
         header.pack(side=tk.TOP, fill=tk.X, pady=10)
-        
+
         tk.Label(header, text="🌐 COMMAND ROUTER & INVESTIGATION", font=("Helvetica", 14, "bold"), fg="#ffffff", bg="#2b2b2b").pack(side=tk.LEFT, padx=20)
-        
+
         self.status_var = tk.StringVar(value=f"Instance Identity: {self.router.GUID}")
         tk.Label(header, textvariable=self.status_var, font=("Courier", 10, "bold"), fg="#00ff00", bg="#2b2b2b").pack(side=tk.RIGHT, padx=20)
 
@@ -71,11 +72,11 @@ class CommandRouter(tk.Frame):
 
         cols = ("Machine Time", "Source", "GUID", "Strategy", "Topic", "Value")
         self.tree = ttk.Treeview(self.tree_frame, columns=cols, show="headings", height=15)
-        
+
         for col in cols:
             self.tree.heading(col, text=col)
             self.tree.column(col, width=100, anchor="center")
-        
+
         self.tree.column("Topic", width=300, anchor="w")
         self.tree.column("Machine Time", width=150)
         self.tree.column("GUID", width=80)
@@ -102,13 +103,13 @@ class CommandRouter(tk.Frame):
         splink_bar.pack(side=tk.BOTTOM, fill=tk.X)
 
         tk.Label(splink_bar, text="SPLINK:", font=("Helvetica", 10, "bold"), fg="#888888", bg="#1a1a1a").pack(side=tk.LEFT, padx=10)
-        
+
         self.src_entry = tk.Entry(splink_bar, textvariable=self.src_var, bg="#000000", fg="#00ff00", insertbackground="white", width=40, bd=1, relief="flat")
         self.src_entry.pack(side=tk.LEFT, padx=5)
 
         self.splink_btn = tk.Button(
-            splink_bar, 
-            text="🔗 SPLINK", 
+            splink_bar,
+            text="🔗 SPLINK",
             command=self.create_direct_splink,
             bg="#2b2b2b",
             fg="#888888",
@@ -127,7 +128,7 @@ class CommandRouter(tk.Frame):
         self.paned.add(inspect_container, weight=2)
 
         tk.Label(inspect_container, text="🔍 DUAL PACKET INVESTIGATION & SPLINK DISCOVERY", font=("Helvetica", 10, "bold"), fg="#888888", bg="#000000").pack(side=tk.TOP, anchor="nw", padx=5)
-        
+
         # Dual Column Layout
         self.inspect_split = tk.Frame(inspect_container, bg="#000000")
         self.inspect_split.pack(fill=tk.BOTH, expand=True)
@@ -150,9 +151,9 @@ class CommandRouter(tk.Frame):
         self.legend_frame = tk.Frame(self.inspect_split, bg="#1a1a1a", bd=1, relief="raised", width=200)
         self.legend_frame.pack(side=tk.RIGHT, fill=tk.Y)
         self.legend_frame.pack_propagate(False)
-        
+
         tk.Label(self.legend_frame, text="🗝️ SYMBOL KEY", font=("Helvetica", 9, "bold"), fg="#ffffff", bg="#333333").pack(fill=tk.X)
-        
+
         symbols = [
             ("🚀", "PUSH", "Network Out"),
             ("💾", "CACHE", "State Registry"),
@@ -171,7 +172,7 @@ class CommandRouter(tk.Frame):
             tk.Label(f, text=desc, font=("Helvetica", 7), fg="#666666", bg="#1a1a1a").pack(side=tk.LEFT, padx=5)
 
         tk.Label(self.legend_frame, text="🎨 COLOR KEY", font=("Helvetica", 9, "bold"), fg="#ffffff", bg="#333333").pack(fill=tk.X, pady=(10, 0))
-        
+
         colors = [
             ("HERE", "#00ff00", None, "This Machine"),
             ("REMOTE", "yellow", "#440000", "Other Machine"),
@@ -191,7 +192,7 @@ class CommandRouter(tk.Frame):
         # 3. Footer
         btn_frame = tk.Frame(self, bg="#2b2b2b")
         btn_frame.pack(side=tk.BOTTOM, fill=tk.X, pady=5)
-        
+
         ttk.Button(btn_frame, text="Clear Firehose", command=self.clear_log).pack(side=tk.LEFT, padx=20)
         self.autoscroll_var = tk.BooleanVar(value=True)
         ttk.Checkbutton(btn_frame, text="Auto-Scroll", variable=self.autoscroll_var).pack(side=tk.LEFT)
@@ -213,11 +214,11 @@ class CommandRouter(tk.Frame):
         source = message["source"]             # Transport (e.g. MQTT)
         logical_source = message.get("logical_source", source) # Identity (e.g. MIDI)
         guid = message.get("logical_guid", message["guid"])        # Identity (e.g. 32_0/3)
-        
+
         strategy = message.get("strategy", "BROADCAST")
         topic = message["topic"]
         value = message["value"]
-        
+
         # Tags are now pre-calculated by the router (no brains in GUI)
         tags = message.get("ui_tags", [])
 
@@ -228,7 +229,7 @@ class CommandRouter(tk.Frame):
 
         # ⚡ STACK BEHAVIOR: Insert at TOP (index 0)
         item_id = self.tree.insert("", 0, values=(utp, display_source, guid, strategy, topic, value), tags=tuple(tags))
-        
+
         if len(self.tree.get_children()) > 100:
             self.tree.delete(self.tree.get_children()[-1])
 
@@ -240,7 +241,7 @@ class CommandRouter(tk.Frame):
         """Populates the investigation pane and handles SPLINK selection logic."""
         selected = self.tree.selection()
         if not selected: return
-        
+
         item = self.tree.item(selected[0])
         utp = item["values"][0]
         topic = item["values"][4]
@@ -299,7 +300,7 @@ class CommandRouter(tk.Frame):
         if hasattr(self, "_src_utp") and self._src_utp:
             report_src = self.router.get_dpi_report(self._src_utp)
             self.inspect_text_src.insert(tk.END, report_src)
-            
+
         if hasattr(self, "_dest_utp") and self._dest_utp:
             report_dest = self.router.get_dpi_report(self._dest_utp)
             self.inspect_text_dest.insert(tk.END, report_dest)
@@ -308,28 +309,28 @@ class CommandRouter(tk.Frame):
         """Sends command to Router to create the link and navigates to Splinker UI."""
         src = self.src_var.get()
         dest = self.dest_var.get()
-        
+
         # ⚡ TIE TOGETHER: Extract the exact values the user is investigating
         src_val = self._get_val_from_utp(self._src_utp) if self._src_utp else None
         dest_val = self._get_val_from_utp(self._dest_utp) if self._dest_utp else None
 
         matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🔗 CommandRouter: SPLINK button clicked. Source='{src}' ({src_val}), Dest='{dest}' ({dest_val})", "INFO")
-        
-        if not src or not dest: 
+
+        if not src or not dest:
             logger.warning("🔗 CommandRouter: Cannot splink, source or destination is empty!")
             return
-        
-        matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🔗 CommandRouter: Calling router.publish_splink...", "DEBUG")
+
+        matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🔗 CommandRouter: Calling router.publish_splink...", "DEBUG")
         if self.router.publish_splink(src, dest, s_val=src_val, d_val=dest_val):
-            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🔗 CommandRouter: Splink command published successfully.", "SUCCESS")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🔗 CommandRouter: Splink command published successfully.", "SUCCESS")
             # Visual feedback
             self.splink_btn.configure(text="✅ CREATED", fg="#00ff00")
-            
+
             # ⚡ NAVIGATION: Switch to Splinker Tab
             app = self._find_app_instance()
             if app:
                 app.show_splinker_tab(src_topic=src, dest_topic=dest)
-                
+
             self.after(2000, lambda: self._reset_splink_selection())
 
     def _get_val_from_utp(self, utp):

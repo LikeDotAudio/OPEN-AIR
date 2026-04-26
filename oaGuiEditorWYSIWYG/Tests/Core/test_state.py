@@ -35,9 +35,9 @@
 #        """Test if setting a value notifies registered observers."""
 #        mock_observer = unittest.mock.Mock()
 #        self.state.subscribe("change", mock_observer)
-#        
+#
 #        self.state.set("another_key", "another_value")
-#        
+#
 #        # The observer should be called with the key and new value
 #        mock_observer.assert_called_once_with("another_key", "another_value")
 #
@@ -47,7 +47,7 @@
 #        self.state.unsubscribe("change", mock_observer)
 #
 #        self.state.set("key", "value")
-#        
+#
 #        mock_observer.assert_not_called()
 #
 #    unittest.main()

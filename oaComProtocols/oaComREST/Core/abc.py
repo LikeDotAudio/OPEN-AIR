@@ -5,13 +5,15 @@
 # Description: Abstract base classes for REST transport mechanisms.
 
 from abc import ABC, abstractmethod
-from typing import Optional, Callable, Dict, Any
+from collections.abc import Callable
+from typing import Any
+
 
 class EventTransport(ABC):
     """Abstract base class for event transport mechanisms."""
 
     def __init__(self):
-        self._message_handler: Optional[Callable[[str, Any], None]] = None
+        self._message_handler: Callable[[str, Any], None] | None = None
         self._is_connected: bool = False
 
     @abstractmethod
@@ -27,7 +29,7 @@ class EventTransport(ABC):
         pass
 
     @abstractmethod
-    def connect(self, connection_params: Dict[str, Any]) -> bool:
+    def connect(self, connection_params: dict[str, Any]) -> bool:
         pass
 
     @abstractmethod

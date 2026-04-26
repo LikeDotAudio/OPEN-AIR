@@ -1,20 +1,16 @@
-import os
-import sys
-import logging
 import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
+import logging
+import re
+import threading
+
 # Methods/visa_Search.py
 # Author: Anthony Peter Kuzub (Refactored)
 # Version: 1.0.0
 #
 # Description: Dedicated module for probing VISA devices and parsing their identification.
-
 import pyvisa
-import time
-import re
-import string
-import threading
-import socket
+
+from oaLogging.Methods.matrix_gate import matrix_log
 
 try:
     from oaRustCore import oa_visa_core_rs as oavisacore_rs
@@ -40,7 +36,9 @@ except Exception as e:
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = False
 from loguru import logger
+
 from oaConfigurationManager.FileReaders.config_reader import Config
+
 from .visa_utility_parser import VisaUtilityParser
 
 app_constants = Config.get_instance()
@@ -91,11 +89,11 @@ def probe_devices(resource_manager, potential_targets):
                     probe_list.append((ip, 111))
                     probe_list.append((ip, 5025))
                     probe_list.append((ip, 4880))
-        
+
         if probe_list:
             reachability = scanner_rs.check_reachability(probe_list, 1000)
             reachable_ips = {r["ip"] for r in reachability if r["reachable"]}
-            
+
             filtered = []
             for target in potential_targets:
                 resource = target["Resource"]
@@ -118,16 +116,16 @@ def probe_devices(resource_manager, potential_targets):
             matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"   🎯 Probing {display_res} ... ", "DEBUG")
 
             conn_details = VisaUtilityParser.parse_resource_details(display_res)
-            
+
             # Use per-IP locking to prevent 'wrong xid' desync on multi-port gateways
             ip = conn_details["IP"]
             lock = _get_lock_for_ip(ip)
-            
+
             idn = None
             try:
                 with lock:
                     idn = VisaUtilityParser.query_device_safe(resource_manager, raw_res)
-            except socket.timeout:
+            except TimeoutError:
                 logger.warning(f"      💳⚠️ [TIMEOUT] Socket timeout for {display_res}.")
                 idn = None
             except Exception as e:
@@ -144,7 +142,7 @@ def probe_devices(resource_manager, potential_targets):
             }
 
             if idn:
-                matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"SUCCESS", "SUCCESS")
+                matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "SUCCESS", "SUCCESS")
                 mfg, model, serial_num, firm = VisaUtilityParser.parse_idn(
                     idn
                 )  # Use VisaUtilityParser for basic parsing
@@ -211,7 +209,7 @@ def probe_devices(resource_manager, potential_targets):
                     }
                 )
             else:
-                if LOCAL_DEBUG: logger.warning(f"FAILED (IDN Query Error)")
+                if LOCAL_DEBUG: logger.warning("FAILED (IDN Query Error)")
                 device_identifier = re.sub(
                     r"[^\w\-]+", "_", raw_res
                 )  # Still need identifier for unresponsive devices

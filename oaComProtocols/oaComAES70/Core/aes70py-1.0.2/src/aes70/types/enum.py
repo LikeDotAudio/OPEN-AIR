@@ -1,5 +1,4 @@
 # Required dependencies and imports
-from typing import Any
 
 def hasOwnProperty(o, name):
     return name in o
@@ -52,7 +51,7 @@ def Enum(values):
             if blueprints is not None and value in blueprints:
                 return blueprints[value]
             # Create a new instance and store its value.
-            instance = super(result, cls).__new__(cls)
+            instance = super().__new__(cls)
             instance._value = value
             setBlueprint(value, instance)
             return instance

@@ -1,15 +1,17 @@
 # oaTests/Interface/maintenance_clear_screen.py
-import os
 import pathlib
+
 from textual.app import ComposeResult
-from textual.screen import Screen
-from textual.widgets import Label, Button, Footer
 from textual.containers import Container
-from oaOchestration.Core.path_initializer import DATA_LOGS_DIR, GLOBAL_PROJECT_ROOT, DATA_REPORTS_DIR
+from textual.screen import Screen
+from textual.widgets import Button, Footer, Label
+
+from oaOchestration.Core.path_initializer import DATA_LOGS_DIR, DATA_REPORTS_DIR, GLOBAL_PROJECT_ROOT
+
 
 class MaintenanceClearScreen(Screen):
     """A dedicated screen for system cleanup and maintenance operations with verification."""
-    
+
     def __init__(self, maintenance_manager, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.maintenance_manager = maintenance_manager
@@ -48,7 +50,7 @@ class MaintenanceClearScreen(Screen):
     def compose(self) -> ComposeResult:
         with Container(id="dialog"):
             yield Label("MAINTENANCE: CLEAR OPERATIONS (Verifying...)", id="header_label", classes="clear-label")
-            
+
             yield Button("CLEAR LOGS (--)", id="btn_clear_logs", variant="warning")
             yield Button("CLEAR AUDITS (--)", id="btn_clear_audits", variant="warning")
             yield Button("CLEAR REPORTS (--)", id="btn_clear_reports", variant="warning")
@@ -143,6 +145,6 @@ class MaintenanceClearScreen(Screen):
             self.maintenance_manager.clear_config()
         elif event.button.id == "btn_clear_all":
             self.maintenance_manager.clear_all()
-        
+
         # Schedule a refresh after a short delay to allow file I/O to finish
         self.set_timer(1.0, self.refresh_all_counts)

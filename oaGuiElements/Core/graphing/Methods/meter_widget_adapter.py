@@ -4,18 +4,16 @@
 #
 # Description: data_graphing/meter_widget_adapter.py
 
+import inspect
+
+from oaConfigurationManager.FileReaders.config_reader import Config
 from oaGuiElements.Core.graphing.Methods.Meter_to_display_units import (
     HorizontalMeterWithText,
     VerticalMeter,
 )
-from oaLogging.Methods.matrix_gate import matrix_log
-import inspect
 
 # --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
-from loguru import logger
-
-from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
@@ -36,7 +34,7 @@ class MeterWidgetAdapterMixin:
         self, parent_widget, config_data, **kwargs
     ):  # Updated signature
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] meter_adapter: Instantiating HorizontalMeter '{config_data.get('id', 'Unknown')}'.", level="DEBUG")
-        
+
         # Extract arguments from config_data
         config = config_data  # config_data is the config
         base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path")
@@ -44,9 +42,9 @@ class MeterWidgetAdapterMixin:
         subscriber_router = config_data.get("subscriber_router")
 
         widget_id = config.get("id", "h_meter")
-        
+
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] Spawning HorizontalMeterWithText core for '{widget_id}'", level="TRACE")
-        
+
         return HorizontalMeterWithText(
             parent=parent_widget,  # Use parent_widget here
             config=config,
@@ -69,7 +67,7 @@ class MeterWidgetAdapterMixin:
         self, parent_widget, config_data, **kwargs
     ):  # Updated signature
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] meter_adapter: Instantiating VerticalMeter '{config_data.get('id', 'Unknown')}'.", level="DEBUG")
-        
+
         # Extract arguments from config_data
         config = config_data  # config_data is the config
         base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path")
@@ -77,9 +75,9 @@ class MeterWidgetAdapterMixin:
         subscriber_router = config_data.get("subscriber_router")
 
         widget_id = config.get("id", "v_meter")
-        
+
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] Spawning VerticalMeter core for '{widget_id}'", level="TRACE")
-        
+
         return VerticalMeter(
             parent=parent_widget,  # Use parent_widget here
             config=config,

@@ -1,5 +1,7 @@
 import logging
+
 from arguments import Arguments
+
 
 # /**
 #  * Observe a property in an object.

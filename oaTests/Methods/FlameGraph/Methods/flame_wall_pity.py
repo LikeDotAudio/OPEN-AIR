@@ -22,11 +22,11 @@
 #
 # Architectural Role:
 # - Forensic Narrator: Translates raw metrics into architectural insights.
-# - Bottleneck Identifier: Groups offenders by Cumulative Time, Self-Time, 
+# - Bottleneck Identifier: Groups offenders by Cumulative Time, Self-Time,
 #   and Call Frequency.
 
-import os
 import html
+import os
 
 # --- Architectural Limits ---
 MAX_OFFENDERS_PER_CATEGORY = 50
@@ -40,12 +40,12 @@ def generate_wall_of_pity(performance_stats, ps):
     """
     stats = ps.stats
     vroot = ("<virtual>", 0, "total_execution")
-    
+
     # 1. Pre-process rich caller and subsystem attribution
     func_metadata = {}
     for func, (cc, nc, tt, ct, callers) in stats.items():
         if func == vroot: continue
-        
+
         # Sort callers by who triggered this function the most
         sorted_callers = sorted(callers.items(), key=lambda x: x[1][1], reverse=True)
         top_callers = []
@@ -57,20 +57,20 @@ def generate_wall_of_pity(performance_stats, ps):
                 # Clean up <method 'name' ...>
                 if "method" in c_name and "'" in c_name:
                     c_name = c_name.split("'")[1]
-            
+
             c_file = os.path.basename(c_func[0])
-            if c_func[0] == "~": 
+            if c_func[0] == "~":
                 c_label = f"built-in:{c_name}"
             else:
                 c_label = f"{c_name} (in {c_file}:{c_func[1]})"
-                
+
             # Calculate what percentage of total calls this caller is responsible for
             pct = (c_stats[1] / nc * 100) if nc > 0 else 0
             top_callers.append(f"{c_label} [{pct:.1f}%]")
-        
+
         # Escape the full path to avoid any weird chars
         safe_path = html.escape(f"{func[0]}:{func[1]}")
-        
+
         func_metadata[func] = {
             "caller_report": " | TRIGGERED BY: " + ", ".join(top_callers) if top_callers else " | TRIGGERED BY: <entry point>",
             "full_path": safe_path
@@ -122,16 +122,16 @@ def generate_wall_of_pity(performance_stats, ps):
         "who is responsible for the performance degradation.",
         ""
     ]
-    
+
     for cat in categories:
         report.append(f"\n>>> {cat['title']}")
         report.append("-" * len(cat['title']))
         report.append(f"CONTEXT: {cat['description']}")
         report.append("")
-        
+
         # USE CONSTANT
         by_metric = sorted(performance_stats, key=cat['sort_key'], reverse=True)[:MAX_OFFENDERS_PER_CATEGORY]
-        
+
         for i, s in enumerate(by_metric, 1):
             # Safe Fallback for Metadata
             raw_key = s.get('raw_key')
@@ -142,22 +142,22 @@ def generate_wall_of_pity(performance_stats, ps):
                     "full_path": html.escape(f"{s.get('filename', 'unknown')}:{s.get('lineno', '?')}"),
                     "caller_report": " | TRIGGERED BY: (Unknown Caller Context)"
                 }
-            
+
             subsystems = f" [Subsystems: {', '.join(s['roots'])}]" if s['roots'] else ""
-            
+
             # Sanitize Function Name for HTML Display
             raw_name = s['funcname']
             if raw_name.startswith("<") and raw_name.endswith(">"):
                  if "method" in raw_name and "'" in raw_name:
                      raw_name = raw_name.split("'")[1]
-            
+
             safe_funcname = html.escape(raw_name)
             safe_caller_report = html.escape(meta['caller_report'])
-            
+
             line_1 = f" {i:2}. {cat['metric_label']}: {cat['metric_format'](s)} | FUNCTION: {safe_funcname}{subsystems}"
             line_2 = f"     LOCATION: {meta['full_path']}"
             line_3 = f"     DETAIL  : {safe_caller_report}"
-            
+
             report.append(line_1)
             report.append(line_2)
             report.append(line_3)
@@ -175,7 +175,7 @@ def generate_wall_of_pity(performance_stats, ps):
         report.append(f"  [ ROOT SUBSYSTEM: {root} ]")
         root_stats = [s for s in performance_stats if root in s['roots']]
         root_offenders = sorted(root_stats, key=lambda x: x['cumtime'], reverse=True)[:MAX_SUBSYSTEM_BREAKDOWN_ITEMS]
-        
+
         for i, s in enumerate(root_offenders, 1):
             raw_name = s['funcname']
             if raw_name.startswith("<") and raw_name.endswith(">"):

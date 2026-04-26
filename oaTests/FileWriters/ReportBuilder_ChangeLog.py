@@ -6,6 +6,7 @@
 
 import os
 
+
 def build_tab(data_dir):
     """
     Reads the main CHANGELOG.md and returns an HTML snippet for the tab content.
@@ -16,7 +17,7 @@ def build_tab(data_dir):
 
     from collections import deque
     try:
-        with open(changelog_path, 'r') as f:
+        with open(changelog_path) as f:
             # Use deque to efficiently keep only the last 1000 lines
             lines = deque(f, maxlen=1000)
             content = "".join(lines)

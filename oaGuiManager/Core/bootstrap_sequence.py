@@ -4,10 +4,11 @@
 #
 # Description: Non-blocking initialization sequence for UI and Comms.
 
-import tkinter as tk
-import traceback
 import time
+import tkinter as tk
+
 from loguru import logger
+
 
 class AsyncBootstrapEngine:
     """
@@ -30,11 +31,11 @@ class AsyncBootstrapEngine:
         """
         try:
             services = self.services
-            
+
             # Phase 1: Communication
             self._connect_communication_services(
-                mqtt_conn=services["mqtt_conn"], 
-                sub_router=services["sub_router"], 
+                mqtt_conn=services["mqtt_conn"],
+                sub_router=services["sub_router"],
                 state_cache=services["state_cache"]
             )
 
@@ -46,7 +47,7 @@ class AsyncBootstrapEngine:
 
             # Phase 4: Control Links
             self._setup_control_links(
-                sub_router=services["sub_router"], 
+                sub_router=services["sub_router"],
                 splinker=services["splinker_manager"]
             )
 
@@ -54,9 +55,9 @@ class AsyncBootstrapEngine:
             # INCREASED DELAY: Give X11 200ms to stabilize and process destruction events
             # of any transient windows before the heavy GUI build begins.
             self.root.after(200, lambda: self._launch_app(
-                mqtt_conn=services["mqtt_conn"], 
-                sub_router=services["sub_router"], 
-                mirror_engine=services["mirror_engine"], 
+                mqtt_conn=services["mqtt_conn"],
+                sub_router=services["sub_router"],
+                mirror_engine=services["mirror_engine"],
                 state_cache=services["state_cache"]
             ))
 
@@ -65,7 +66,7 @@ class AsyncBootstrapEngine:
             local_debug = False
             try:
                 if hasattr(self.app_constants, 'LOCAL_DEBUG'):
-                    value = getattr(self.app_constants, 'LOCAL_DEBUG')
+                    value = self.app_constants.LOCAL_DEBUG
                     # If it's a MagicMock, it will be truthy but not True.
                     # We only want to trigger exception() if it's explicitly True.
                     if value is True:
@@ -76,14 +77,14 @@ class AsyncBootstrapEngine:
                 logger.exception("🖥️🏗️🎨 [UI] Bootstrap Failure")
             else:
                 logger.error(f"🖥️🏗️🎨 [UI] Bootstrap Failure: {e}")
-            
+
             self.root.after(0, self.shutdown_coordinator.on_closing)
 
     def _connect_communication_services(self, mqtt_conn, sub_router, state_cache):
         """Initializes the connection to the MQTT broker and sets up state subscriptions."""
         self.splash.set_status(message="Connecting to Broker...")
         mqtt_conn.connect_to_broker(
-            on_message_callback=state_cache.handle_incoming_mqtt, 
+            on_message_callback=state_cache.handle_incoming_mqtt,
             subscriber_router=sub_router
         )
         state_cache.subscribe_to_all_topics()
@@ -101,7 +102,7 @@ class AsyncBootstrapEngine:
             "midi_manager": "MIDI",
             "rest_manager": "REST API"
         }
-        
+
         for key, display_name in service_map.items():
             service = self.services.get(key)
             if service:
@@ -110,11 +111,11 @@ class AsyncBootstrapEngine:
 
     def _setup_control_links(self, sub_router, splinker):
         """Sets up specialized MQTT control topics for internal systems like Splinker."""
-        def splinker_mqtt_wrapper(message): 
+        def splinker_mqtt_wrapper(message):
             splinker.handle_mqtt_command(topic=message.topic, payload=message.payload)
-        
+
         sub_router.subscribe_to_topic(
-            topic_filter="OPEN-AIR/System/Control/Splinker/#", 
+            topic_filter="OPEN-AIR/System/Control/Splinker/#",
             callback_func=splinker_mqtt_wrapper
         )
 
@@ -126,9 +127,10 @@ class AsyncBootstrapEngine:
         try:
             self.splash.set_status(message="Building Workspace...")
             from oaGui.Entry import Application
+
             from .ui_window import UIWindowManager
 
-            # ⚡ SANITIZATION: Destroy the splash screen BEFORE building the application 
+            # ⚡ SANITIZATION: Destroy the splash screen BEFORE building the application
             # GUI to prevent X11 display handle race conditions (Matplotlib vs. Splash).
             self.splash.hide()
             self.root.update_idletasks()
@@ -138,7 +140,7 @@ class AsyncBootstrapEngine:
                     # Calculate remaining time to fulfill the 10-second minimum
                     elapsed_time = time.time() - self.start_time
                     remaining_time = max(0, self.MIN_SPLASH_TIME - elapsed_time)
-                    
+
                     def _finish():
                         try:
                             self.splash.set_status(message="Ignition Complete!")
@@ -147,10 +149,10 @@ class AsyncBootstrapEngine:
                         except Exception:
                             logger.exception("🖥️🏗️🎨 [UI] Ignition Finalization Failure")
                             self.root.after(0, self.shutdown_coordinator.on_closing)
-                    
+
                     # Split the remaining time into 3 "Ignition" phases for visual feedback
                     phase_duration = remaining_time / 3.0
-                    
+
                     def _phase_2():
                         self.splash.set_status(message="Ignition Phase 2: Building systems...")
                         self.root.after(int(phase_duration * 1000), _phase_3)
@@ -164,12 +166,12 @@ class AsyncBootstrapEngine:
 
                 try:
                     app = Application(
-                        parent=self.root, 
-                        root=self.root, 
-                        mqtt_connection_manager=mqtt_conn, 
-                        subscriber_router=sub_router, 
-                        state_mirror_engine=mirror_engine, 
-                        state_cache_manager=state_cache, 
+                        parent=self.root,
+                        root=self.root,
+                        mqtt_connection_manager=mqtt_conn,
+                        subscriber_router=sub_router,
+                        state_mirror_engine=mirror_engine,
+                        state_cache_manager=state_cache,
                         osc_manager=self.services.get("osc_manager"),
                         snmp_manager=self.services.get("snmp_manager"),
                         midi_manager=self.services.get("midi_manager"),
@@ -180,11 +182,11 @@ class AsyncBootstrapEngine:
                     logger.exception("🖥️🏗️🎨 [UI] TclError during Application build")
                     # Re-raise to trigger the coordinated shutdown below
                     raise
-                
+
                 # Register main app back to services
                 self.services["app"] = app
                 self.root.update_idletasks()
-                
+
         except Exception:
             logger.exception("🖥️🏗️🎨 [UI] App Launch Failure")
             self.root.after(0, self.shutdown_coordinator.on_closing)

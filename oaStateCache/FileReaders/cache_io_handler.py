@@ -1,20 +1,20 @@
-from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
+
 # FileReaders/cache_io_handler.py
 # Author: Anthony Peter Kuzub
 # Version: 20250821.200641.1
 #
 # Description: State_Cache/cache_io_handler.py
-
 import os
-import orjson
-import pathlib
 import tempfile
-import inspect
-from typing import Dict, Any
+from typing import Any
+
+import orjson
+
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = False
-from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
 from oaConfigurationManager.FileReaders.config_reader import Config
@@ -39,14 +39,14 @@ class CacheLoadError(Exception):
     """Raised when the cache file exists but cannot be parsed."""
     pass
 
-def load_cache() -> Dict[str, Any]:
+def load_cache() -> dict[str, Any]:
     """
     Reads device_state_cache.json from the DATA directory defined in app_constants.
     Raises FileNotFoundError if the file doesn't exist, and CacheLoadError if it's corrupted.
     """
     if LOCAL_DEBUG and app_config.global_settings["debug_enabled"]:
         matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💾📖 Reading Cache.", "DEBUG")
-        
+
     if not app_constants.DEVICE_STATE_CACHE_PATH.exists():
         if LOCAL_DEBUG and app_config.global_settings["debug_enabled"]:
             matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💾📄 No cache file found.", "DEBUG")
@@ -94,7 +94,7 @@ def save_cache(data: Any) -> bool:
         ) as temp_f:
             # Safely handle any stray bytes objects by decoding them
             json_data = orjson.dumps(
-                data, 
+                data,
                 default=lambda x: x.decode("utf-8") if isinstance(x, bytes) else str(x)
             )
             temp_f.write(json_data)
@@ -103,7 +103,7 @@ def save_cache(data: Any) -> bool:
         os.rename(temp_path, app_constants.DEVICE_STATE_CACHE_PATH)
         #     logger.success("💾✅ Cache saved.")
         return True
-    except Exception as e:
+    except Exception:
         if LOCAL_DEBUG and app_config.global_settings["debug_enabled"]:
             logger.exception("💾❌ Error saving cache")
         if "temp_path" in locals() and os.path.exists(temp_path):

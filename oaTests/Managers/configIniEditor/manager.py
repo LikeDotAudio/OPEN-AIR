@@ -1,16 +1,17 @@
-import pathlib
-
-import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
 # oaTests/Managers/configIniEditor/manager.py
 # Author: Anthony Peter Kuzub
 # Version: 20260330.0030.1
 #
 # Description: Specialized manager for editing config.ini directly from the TUI.
 # Handles multiple sections while preserving comments and formatting.
-
 import configparser
+import inspect
+import pathlib
+
 from loguru import logger
+
+from oaLogging.Methods.matrix_gate import matrix_log
+
 
 class ConfigIniEditor:
     """
@@ -22,7 +23,7 @@ class ConfigIniEditor:
         if config_path is None:
             from oaOchestration.Core.path_initializer import GLOBAL_PROJECT_ROOT
             config_path = GLOBAL_PROJECT_ROOT / "config.ini"
-        
+
         self.config_path = pathlib.Path(config_path)
         self.config = configparser.ConfigParser()
         self._ensure_config_exists()
@@ -57,7 +58,7 @@ class ConfigIniEditor:
         Surgically updates a specific flag in any section while preserving comments.
         """
         try:
-            with open(self.config_path, 'r') as f:
+            with open(self.config_path) as f:
                 lines = f.readlines()
         except Exception as e:
             logger.error(f"❌ Failed to read config.ini: {e}")
@@ -70,13 +71,13 @@ class ConfigIniEditor:
 
         for line in lines:
             stripped = line.strip()
-            
+
             # Identify section
             if stripped.startswith('[') and stripped.endswith(']'):
                 current_section = stripped[1:-1].strip()
                 new_lines.append(line)
                 continue
-            
+
             # If in the correct section, look for the key
             if current_section == section and not stripped.startswith('#') and '=' in stripped:
                 line_key, line_val = stripped.split('=', 1)
@@ -86,11 +87,11 @@ class ConfigIniEditor:
                     comment = ""
                     if '#' in line_val:
                         comment = " #" + line_val.split('#', 1)[1].rstrip()
-                    
+
                     new_lines.append(f"{indent}{line_key.strip()} = {val_str}{comment}\n")
                     key_found = True
                     continue
-            
+
             new_lines.append(line)
 
         # If the key didn't exist in the section, add it at the end of the section
@@ -104,7 +105,7 @@ class ConfigIniEditor:
                 if found_section and line.strip().startswith('['):
                     insert_pos = i
                     break
-            
+
             if insert_pos == -1: # End of file or section was the last one
                 new_lines.append(f"{key} = {val_str}\n")
             else:
@@ -114,7 +115,7 @@ class ConfigIniEditor:
             with open(self.config_path, 'w') as f:
                 f.writelines(new_lines)
             matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💾 [CONFIG] Surgically updated [{section}] {key} to {value}", "SUCCESS")
-            
+
             # Sync the internal configparser for immediate read consistency
             self.config.read(self.config_path)
             return True

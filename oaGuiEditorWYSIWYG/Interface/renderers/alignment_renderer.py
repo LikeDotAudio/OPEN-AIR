@@ -6,6 +6,7 @@
 
 import tkinter as tk
 
+
 class AlignmentRenderer:
     """Renders the Quick Alignment (Anchor) button grid."""
 
@@ -32,14 +33,14 @@ class AlignmentRenderer:
                      (label == "T" and "top" in align) or \
                      (label == "B" and "bottom" in align) or \
                      (label == "C" and not align)
-                     
-            btn = tk.Button(btn_frame, text=label, width=3, 
-                            bg="#33A1FD" if active else "#444444", fg="white", 
-                            relief="flat", font=("Arial", 8, "bold"), 
+
+            btn = tk.Button(btn_frame, text=label, width=3,
+                            bg="#33A1FD" if active else "#444444", fg="white",
+                            relief="flat", font=("Arial", 8, "bold"),
                             command=lambda l=label: on_set_align_callback(l))
             btn.pack(side="left", padx=2)
             buttons[label] = btn
-            
+
         return buttons
 
     @staticmethod

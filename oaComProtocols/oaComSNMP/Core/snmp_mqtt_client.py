@@ -5,13 +5,14 @@
 # Description: Native SNMP-specific MQTT client for 100% independence.
 # ⚡ STANDALONE: This module manages its own connection and subscriptions.
 
-import paho.mqtt.client as mqtt
-import threading
 import json
-import time
-from typing import Optional, Callable, Dict, Any
+from collections.abc import Callable
+from typing import Any
+
+import paho.mqtt.client as mqtt
 
 from oaLogging.Methods.matrix_gate import matrix_log
+
 
 class SnmpMqttClient:
     """
@@ -23,8 +24,8 @@ class SnmpMqttClient:
         self.client.on_connect = self._on_connect
         self.client.on_message = self._on_message
         self.client.on_disconnect = self._on_disconnect
-        
-        self._on_message_callback: Optional[Callable[[str, Any], None]] = None
+
+        self._on_message_callback: Callable[[str, Any], None] | None = None
         self._subscriptions = set()
         self._is_connected = False
         self._host = "localhost"

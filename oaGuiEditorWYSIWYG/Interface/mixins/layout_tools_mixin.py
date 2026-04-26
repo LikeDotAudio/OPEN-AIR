@@ -8,6 +8,7 @@ from ...Core.state import state_manager
 from ..renderers.alignment_renderer import AlignmentRenderer
 from ..renderers.sticky_renderer import StickyRenderer
 
+
 class LayoutToolsMixin:
     """Provides Quick Alignment and Sticky UI tools for the properties panel."""
 
@@ -26,7 +27,7 @@ class LayoutToolsMixin:
         curr_layout = current_data.get("layout", {})
         curr_align = set(str(curr_layout.get("align", "")).lower().split())
         curr_stretch = set(str(curr_layout.get("stretch", "")).lower().split())
-        
+
         if mode == "L":
             if "left" in curr_align: curr_align.discard("left")
             else: curr_align.discard("right"); curr_align.add("left"); curr_stretch.discard("width"); curr_stretch.discard("both")
@@ -44,7 +45,7 @@ class LayoutToolsMixin:
         new_align = " ".join(sorted(list(curr_align)))
         new_stretch = " ".join(sorted(list(curr_stretch)))
         state_manager.update_state({"align": new_align, "stretch": new_stretch}, path=f"{self.focused_path}.layout", source=self)
-        
+
         AlignmentRenderer.update_highlights(self._align_buttons, new_align)
         StickyRenderer.update_highlights(self._sticky_buttons, new_stretch)
         self._request_debounced_refresh()
@@ -54,7 +55,7 @@ class LayoutToolsMixin:
         curr_layout = current_data.get("layout", {})
         curr_align = set(str(curr_layout.get("align", "")).lower().split())
         curr_stretch = set(str(curr_layout.get("stretch", "")).lower().split())
-        
+
         new_mode = mode.lower()
         if new_mode == "width":
             if "width" in curr_stretch: curr_stretch.discard("width")
@@ -72,7 +73,7 @@ class LayoutToolsMixin:
         new_align = " ".join(sorted(list(curr_align)))
         new_stretch = " ".join(sorted(list(curr_stretch)))
         state_manager.update_state({"align": new_align, "stretch": new_stretch}, path=f"{self.focused_path}.layout", source=self)
-        
+
         AlignmentRenderer.update_highlights(self._align_buttons, new_align)
         StickyRenderer.update_highlights(self._sticky_buttons, new_stretch)
         self._request_debounced_refresh()

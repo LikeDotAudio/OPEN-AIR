@@ -1,16 +1,14 @@
 # graphing/styler.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: styler.py
 
-from typing import Dict, Any
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
-from loguru import logger
-from oaLogging.Core.logger import builder_logger
+from typing import Any
+
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
@@ -18,12 +16,12 @@ class GraphStyler:
     """Handles visual styling and theme application for graphs."""
 
     @staticmethod
-    def apply(ax: object, fig: object, config: Dict[str, Any], theme: Dict[str, Any]):
+    def apply(ax: object, fig: object, config: dict[str, Any], theme: dict[str, Any]):
         """
         Applies colors, grid visibility, and axis visibility.
         Pushes elements of styling from JSON to the plot.
         """
-        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [GRAPH] styler: Applying visual styles.", level="DEBUG")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🔬🏗️📊 [GRAPH] styler: Applying visual styles.", level="DEBUG")
 
         # 1. Background & Transparency
         style_block = config.get("style", {})
@@ -101,7 +99,7 @@ class GraphStyler:
             ax.set_title("")
 
     @staticmethod
-    def get_theme_style(theme_name: str) -> Dict[str, Any]:
+    def get_theme_style(theme_name: str) -> dict[str, Any]:
         if theme_name == "dark":
             return {"background": "none", "text": "white", "grid": "#444444"}
         return {"background": "none", "text": "black", "grid": "#cccccc"}

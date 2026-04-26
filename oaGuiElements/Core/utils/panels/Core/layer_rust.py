@@ -6,6 +6,7 @@
 
 from PIL import Image, ImageChops, ImageFilter
 
+
 class RustLayer:
     @staticmethod
     def generate_rust_spots(width, height, intensity):

@@ -4,26 +4,22 @@
 #
 # Description: text_value_box/dynamic_guimake_text_value_box.py
 
-import os
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
+import os
 import tkinter as tk
 from tkinter import ttk
-import tkinter.font as tkFont
-import inspect
-
-# --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
-from loguru import logger
 
 from oaConfigurationManager.FileReaders.config_reader import Config
 
+# --- Standard Debug Logging Setup ---
+from oaLogging.Core.logger import builder_logger
+from oaLogging.Methods.matrix_gate import matrix_log
+
 app_constants = Config.get_instance()  # Get the singleton instance
 
-from oaOchestration.Methods.widget_event_binder import bind_variable_trace
-from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 from oaGui.Methods.i18n_utils import get_text
+from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+from oaOchestration.Methods.widget_event_binder import bind_variable_trace
 
 # --- Global Scope Variables ---
 current_file = f"{os.path.basename(__file__)}"
@@ -55,9 +51,9 @@ class BuilderTextValueBoxCreator(TransparencyMixin):
     #     tk.Frame: The created frame containing the value box, or None on failure.
     def make_text_value_box(
         self, parent_widget, config_data, context=None, **kwargs
-    ):  
+    ):
         """Creates an editable text box widget."""
-        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📝 [BUILDER] Entering make_text_value_box", level="TRACE")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🔬🏗️📝 [BUILDER] Entering make_text_value_box", level="TRACE")
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📜📑💻 [CONFIG] Raw config received: {config_data}", level="DEBUG")
 
         current_function_name = inspect.currentframe().f_code.co_name
@@ -103,7 +99,7 @@ class BuilderTextValueBoxCreator(TransparencyMixin):
                 height=25,
                 bg=p_bg
             )
-            
+
             # --- Layout Analysis ---
             matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "📐📏🔳 [LAYOUT] Analyzing dimensions and grid configuration...", level="TRACE")
             layout = config.get("layout", {})
@@ -112,18 +108,18 @@ class BuilderTextValueBoxCreator(TransparencyMixin):
             box_width = geometry.get("width", layout.get("width"))
             font_size = geometry.get("font", layout.get("font", 10))
             custom_colour = geometry.get("colour", layout.get("colour"))
-            
+
             # Configure Grid: Label (0), Entry (1), Units (2)
             # CRITICAL: Entry column MUST have weight 1 to fill sub_frame
             # Reserve space for labels in columns 0 and 2
             sub_frame.grid_columnconfigure(0, minsize=60 if label else 0)
-            sub_frame.grid_columnconfigure(1, weight=1) 
+            sub_frame.grid_columnconfigure(1, weight=1)
             sub_frame.grid_columnconfigure(2, minsize=40 if units else 0)
             sub_frame.grid_rowconfigure(0, weight=1)
 
             # Apply Industrial Transparency
             if hasattr(self, '_apply_transparency'):
-                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"👻🌀🪟 [ALPHA] Applying industrial transparency to value box.", level="TRACE")
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "👻🌀🪟 [ALPHA] Applying industrial transparency to value box.", level="TRACE")
                 self._apply_transparency(sub_frame, sub_frame, config, builder_instance)
 
             matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🧐📐🎨 [LAYOUT] Analysis for '{label}': H={box_height}, W={box_width}, Font={font_size}, Colour={custom_colour}", level="DEBUG")
@@ -131,10 +127,10 @@ class BuilderTextValueBoxCreator(TransparencyMixin):
             # --- Frame Sizing Logic ---
             if box_width is not None or box_height is not None:
                 sub_frame.grid_propagate(False) # Stop resizing to content
-                
+
                 if box_height is not None:
                     sub_frame.config(height=box_height)
-                
+
                 if box_width is not None:
                     sub_frame.config(width=box_width)
 
@@ -145,27 +141,27 @@ class BuilderTextValueBoxCreator(TransparencyMixin):
 
             # 3. Entry Widget (Center)
             entry_font = ("TkDefaultFont", font_size)
-            
+
             clean_path = path.replace('/', '_') if path else "default"
             style_name = f"DarkGrey.{clean_path}.TEntry"
             style = ttk.Style()
-            
+
             text_color = "white"
             if custom_colour:
                 text_color = custom_colour
-                
+
             matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🎨🖌️✨ [STYLE] Configuring entry style '{style_name}'", level="TRACE")
             style.configure(style_name, fieldbackground=sub_frame.cget("bg"), foreground=text_color, insertcolor="white")
 
-            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🏗️📝🔢 [CONSTRUCT] Instantiating ttk.Entry.", level="TRACE")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🏗️📝🔢 [CONSTRUCT] Instantiating ttk.Entry.", level="TRACE")
             entry_widget = ttk.Entry(
-                sub_frame, 
+                sub_frame,
                 textvariable=entry_value,
                 font=entry_font,
                 justify="center",
                 style=style_name
             )
-            
+
             # STICKY NSEW ensures it fills the calculated frame height/width!
             entry_widget.grid(row=0, column=1, sticky="nsew", padx=DEFAULT_PAD_X)
 
@@ -173,20 +169,20 @@ class BuilderTextValueBoxCreator(TransparencyMixin):
 
             def redraw_box_labels(*args):
                 if not sub_frame.winfo_exists(): return
-                
+
                 w = sub_frame.winfo_width()
                 h = sub_frame.winfo_height()
-                
+
                 # ⚡ OPTIMIZATION: Skip if size hasn't changed
                 if (w, h) == sub_frame._last_redraw_size:
                     return
-                
+
                 if w <= 1 or h <= 1: return
-                
+
                 matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔄🎨🔤 [REDRAW] Updating value box labels for '{label}'", level="TRACE")
                 sub_frame._last_redraw_size = (w, h)
                 sub_frame.delete("industrial_text")
-                
+
                 # Label (Left)
                 if label and label != "X":
                     sub_frame.create_text(
@@ -194,7 +190,7 @@ class BuilderTextValueBoxCreator(TransparencyMixin):
                         fill=custom_colour or "white", font=("TkDefaultFont", font_size),
                         tags="industrial_text"
                     )
-                
+
                 # Units (Right)
                 if units:
                     sub_frame.create_text(
@@ -225,7 +221,7 @@ class BuilderTextValueBoxCreator(TransparencyMixin):
 
             matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "⌨️👆🔗 [EVENTS] Binding return protocol to entry widget.", level="TRACE")
             entry_widget.bind("<Return>", on_return)
-            
+
             # --- MQTT Wiring ---
             if path and state_mirror_engine:
                 matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📡📶🔗 [MQTT] Registering value box at path '{path}'", level="TRACE")
@@ -233,11 +229,11 @@ class BuilderTextValueBoxCreator(TransparencyMixin):
                 topic = state_mirror_engine.register_widget(
                     widget_id, entry_value, base_mqtt_topic_from_path, config
                 )
-                
+
                 def on_gui_change():
                     matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"⚡🔴📡 [EVENT] GUI change for value box '{label}'. Broadcasting.", level="DEBUG")
                     state_mirror_engine.broadcast_gui_change_to_mqtt(widget_id)
-                
+
                 bind_variable_trace(entry_value, on_gui_change)
 
                 if subscriber_router and topic:
@@ -245,13 +241,13 @@ class BuilderTextValueBoxCreator(TransparencyMixin):
                     subscriber_router.subscribe_to_topic(
                         topic, state_mirror_engine.sync_incoming_mqtt_to_gui
                     )
-                
+
                 matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔄⏳🔋 [STATE] Initializing state from cache/broker for '{path}'", level="TRACE")
                 state_mirror_engine.initialize_widget_state(widget_id)
 
             matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"✅🆗📝 [SUCCESS] The text value box '{label}' has materialized!", level="SUCCESS")
             return sub_frame
 
-        except Exception as e:
+        except Exception:
             builder_logger.exception(f"❌🚫🛑 [ERROR] Critical failure creating value box '{label}'")
             return None

@@ -1,11 +1,13 @@
 import sys
-import os
+
 sys.path.insert(0, '/home/anthony/Documents/OPEN-AIR')
 
+import time
 import tkinter as tk
 from unittest.mock import MagicMock
+
 from oaGuiElements.Core.graphing.Methods.dynamic_graph import GraphPlotter
-import time
+
 
 def run_test():
     root = tk.Tk()
@@ -35,16 +37,16 @@ def run_test():
 
     # Force initial draw
     plotter._perform_scheduled_update()
-    
+
     # Save the canvas as a postscript or just print if it exists
     print("Canvas drawn. Exists:", plotter.canvas.get_tk_widget().winfo_exists())
-    
+
     # We won't call mainloop to avoid hanging, we just update
     root.update()
     time.sleep(1)
     print("Canvas width:", plotter.canvas.get_tk_widget().winfo_width())
     print("Canvas height:", plotter.canvas.get_tk_widget().winfo_height())
-    
+
     root.destroy()
 
 if __name__ == "__main__":

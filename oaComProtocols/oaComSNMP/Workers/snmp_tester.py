@@ -4,11 +4,12 @@
 #
 # Description: Brief summary of purpose
 
-import subprocess
 import os
 import re
-from oaLogging.Core.logger import get_logger
+import subprocess
+
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Core.logger import get_logger
 from oaOchestration.Constants.project_paths import SNMP_TEMP_MIB
 
 # --- Standard Debug Logging Setup ---
@@ -30,7 +31,7 @@ class SnmpTester:
         """
         temp_mib = str(SNMP_TEMP_MIB)
         active_mib_path = mib_path
-        
+
         # ⚡ TARGET PLUMPING: If walking the absolute root, append .1 to reach the populated v1 tree
         if base_oid == ".1.3.6.1.4.1.65300":
             base_oid = f"{base_oid}.1"
@@ -50,14 +51,14 @@ class SnmpTester:
 
         # --- MIB MODE: MIB provided or requested ---
         diagnostics = ["SNMP DIAGNOSTIC REPORT", "="*40]
-        
+
         # 1. Check for system MIBs
         std_mib_path = "/usr/share/snmp/mibs"
         fallback_path = "/usr/share/apps/snmpb/mibs"
-        
+
         has_std_mibs = os.path.exists(os.path.join(std_mib_path, "SNMPv2-SMI.txt")) or \
                        os.path.exists(os.path.join(std_mib_path, "SNMPv2-SMI"))
-        
+
         if not has_std_mibs:
             diagnostics.append("! SYSTEM MIBS MISSING: Found no 'SNMPv2-SMI' in /usr/share/snmp/mibs.")
             if os.path.exists(fallback_path):
@@ -68,7 +69,7 @@ class SnmpTester:
             diagnostics.append("- System MIBs found in /usr/share/snmp/mibs.")
 
         # 2. Process custom MIB
-        module_name = "OPENAIR-MIB" 
+        module_name = "OPENAIR-MIB"
         if not active_mib_path and mib_content:
             try:
                 with open(temp_mib, "w") as f:
@@ -82,7 +83,7 @@ class SnmpTester:
             diagnostics.append(f"- Custom MIB found: {os.path.basename(active_mib_path)}")
             # Detect module name
             try:
-                with open(active_mib_path, "r") as f:
+                with open(active_mib_path) as f:
                     first_lines = f.read(2000)
                     match = re.search(r"^([\w-]+)\s+DEFINITIONS\s+::=\s+BEGIN", first_lines, re.MULTILINE)
                     if match:
@@ -95,29 +96,29 @@ class SnmpTester:
 
         # Phase 2: Execution
         env = os.environ.copy()
-        
+
         if active_mib_path:
             mib_dir = os.path.dirname(os.path.abspath(active_mib_path))
             search_paths = [mib_dir]
             if os.path.exists(std_mib_path): search_paths.append(std_mib_path)
             if os.path.exists(fallback_path): search_paths.append(fallback_path)
-            
+
             search_path_str = ":".join(search_paths)
             env["MIBDIRS"] = f"{search_path_str}" # ⚡ ABSOLUTE search path
-            
+
             # Build Command
             # -OS: Full symbolic names
             # -m ALL: Load all MIBs in search path
             # -Cc: Continue on error (critical for identity nodes)
-            cmd = ["snmpwalk", "-v2c", "-c", "public", 
+            cmd = ["snmpwalk", "-v2c", "-c", "public",
                    "-Cc",
-                   "-M", search_path_str, 
-                   "-m", "ALL", 
-                   "-OS", 
+                   "-M", search_path_str,
+                   "-m", "ALL",
+                   "-OS",
                    "localhost", base_oid]
         else:
             cmd = ["snmpwalk", "-v2c", "-c", "public", "localhost", base_oid]
-        
+
         diagnostics.append(f"> Executing walk on {base_oid}...")
         diagnostics.append("="*40 + "\n")
 
@@ -126,7 +127,7 @@ class SnmpTester:
             output = result.stdout
             if result.stderr:
                 output = "SNMPWALK ERRORS/WARNINGS:\n" + result.stderr + "\n" + "-"*40 + "\n" + output
-                
+
             if not output.strip() and result.returncode == 0:
                 output = "No data returned. Bridge is active but tree is empty."
             elif not output.strip():
@@ -134,5 +135,5 @@ class SnmpTester:
         except Exception as e:
             snmp_logger.error(f"Process Exception during SNMP walk: {e}")
             output = f"Process Exception: {e}"
-            
+
         return "\n".join(diagnostics) + output

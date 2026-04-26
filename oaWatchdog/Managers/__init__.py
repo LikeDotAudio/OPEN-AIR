@@ -1,13 +1,13 @@
 # oaWatchdog/Managers/__init__.py
+from .fleet_status_monitor import FleetStatusMonitor
 from .watchdog import (
-    register_panic_callback,
-    trigger_system_panic,
     WatchdogManager,
     kick_watchdog,
+    register_panic_callback,
     start_heartbeat,
-    stop_heartbeat
+    stop_heartbeat,
+    trigger_system_panic,
 )
-from .fleet_status_monitor import FleetStatusMonitor
 
 __all__ = [
     "register_panic_callback",

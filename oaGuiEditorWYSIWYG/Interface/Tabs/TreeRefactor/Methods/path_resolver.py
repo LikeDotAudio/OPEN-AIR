@@ -9,7 +9,7 @@ def normalize_path(path, state_manager):
     if not path: return ""
     normalized = str(path).strip().strip('.')
     if normalized.lower() == "root": return ""
-    
+
     full_state = state_manager.get_state()
     if full_state:
         root_keys = list(full_state.keys())

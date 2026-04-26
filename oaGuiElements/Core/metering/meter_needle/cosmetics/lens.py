@@ -4,44 +4,47 @@
 #
 # Description: Brief summary of purpose
 
-import tkinter as tk
-from oaGuiElements.Core.metering.meter_needle.cosmetics.geometry import BezelGeometry
 from oaGuiElements.Core.metering.meter_needle.Core.constants import (
-    LENS_GLOW_STEPS, LENS_GLOW_SHRINK_MAX, LENS_SHADOW_STEPS, LENS_SHADOW_DEPTH
+    LENS_GLOW_SHRINK_MAX,
+    LENS_GLOW_STEPS,
+    LENS_SHADOW_DEPTH,
+    LENS_SHADOW_STEPS,
 )
+from oaGuiElements.Core.metering.meter_needle.cosmetics.geometry import BezelGeometry
+
 
 class BezelLens:
     @staticmethod
     def draw(canvas, cx, cy, w, h, cosmetics):
         style_overrides = cosmetics.get("style_overrides", {})
         bezel_shape = style_overrides.get("bezel_shape", None)
-        
+
         # Check if lighting is enabled (default to True)
         if not style_overrides.get("enable_lighting", True):
             return
-        
+
         if not bezel_shape:
             return
 
         colors = cosmetics.get("colors", {})
         faceplate_hex = colors.get("faceplate", "#e0d4b4")
-        glow_hex = "#fffcd1" 
-        shadow_hex = "#a09070" 
+        glow_hex = "#fffcd1"
+        shadow_hex = "#a09070"
         line_width = int(style_overrides.get("bezel_width", 12))
-        
+
         # 1. Shape-Matched Glow
         glow_steps = LENS_GLOW_STEPS
         for i in range(glow_steps):
             frac = i / float(glow_steps)
             fade = frac * frac
             step_color = BezelLens._blend_colors(glow_hex, faceplate_hex, fade)
-            
-            shrink_px = (1.0 - frac) * LENS_GLOW_SHRINK_MAX 
-            
+
+            shrink_px = (1.0 - frac) * LENS_GLOW_SHRINK_MAX
+
             points, is_smooth = BezelGeometry.get_bezel_points(
                 cx, cy, w, h, bezel_shape, line_width, shrink_px=shrink_px
             )
-            
+
             if points:
                 canvas.create_polygon(points, fill=step_color, outline="", tags="nextgen_background", smooth=is_smooth)
 
@@ -52,11 +55,11 @@ class BezelLens:
             frac = i / float(shadow_steps)
             step_color = BezelLens._blend_colors(shadow_hex, faceplate_hex, frac)
             shrink_px = i * (shadow_depth / shadow_steps)
-            
+
             points, is_smooth = BezelGeometry.get_bezel_points(
                 cx, cy, w, h, bezel_shape, line_width, shrink_px=shrink_px
             )
-            
+
             if points:
                 canvas.create_polygon(points, fill=step_color, outline="", tags="nextgen_background", smooth=is_smooth)
 

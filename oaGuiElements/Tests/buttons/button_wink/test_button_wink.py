@@ -4,20 +4,22 @@
 #
 # Description: Brief summary of purpose
 
+import tkinter as tk
 import unittest
 from unittest.mock import MagicMock, patch
-import tkinter as tk
+
 from oaGuiElements.Core.buttons.button_wink.Core.button_wink import BuilderButtonWinkCreator
+
 
 class TestButtonWink(unittest.TestCase):
 
     def setUp(self):
         self.patchers = []
-        
+
         # Always patch PIL and ImageTk to avoid issues with display/image registration
         self.patchers.append(patch('PIL.Image.open', return_value=MagicMock()))
         self.patchers.append(patch('PIL.ImageTk.PhotoImage', return_value=MagicMock()))
-        
+
         try:
             self.root = tk.Tk()
             self.root.withdraw()
@@ -28,7 +30,7 @@ class TestButtonWink(unittest.TestCase):
             mock_canvas = MagicMock()
             mock_canvas.winfo_exists.return_value = True
             self.patchers.append(patch('tkinter.Canvas', return_value=mock_canvas))
-            
+
         for p in self.patchers:
             p.start()
         self.config = {'label_active': 'Test Wink', 'path': 'test/wink', 'width': 100, 'height': 50}

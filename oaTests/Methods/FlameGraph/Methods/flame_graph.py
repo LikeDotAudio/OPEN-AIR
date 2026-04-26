@@ -24,10 +24,10 @@
 # - Visualization Engine: Renders complex call-stack data into visual assets.
 # - Statistics Normalizer: Corrects common profiling artifacts (virtual roots).
 
-import io
-import sys
-import re
 import importlib.util
+import io
+import re
+import sys
 
 # --- Constants for Magic Numbers ---
 DEFAULT_RECURSION_LIMIT = 50000
@@ -49,7 +49,7 @@ def generate_flamegraph_with_flameprof(ps, output_svg):
     if not flameprof:
         print("? 'flameprof' library not found. Install it with: pip install flameprof")
         return False
-    
+
     # ? PRECONDITION VALIDATION
     if not ps or not hasattr(ps, 'stats') or not ps.stats:
         print("?? No profile data collected.")
@@ -70,43 +70,43 @@ def generate_flamegraph_with_flameprof(ps, output_svg):
 
     roots = [f for f, data in stats.items() if not data[4]]
     vroot = ("<virtual>", 0, "total_execution")
-    
+
     for func in list(stats.keys()):
         if func == vroot: continue
         cc, nc, tt, ct, callers = stats[func]
-        
+
         new_callers = {}
         for c_func, c_data in callers.items():
             c_cc, c_nc, c_tt, c_ct = c_data
             new_callers[c_func] = (c_cc, c_nc, c_tt, max(c_ct, MIN_EXECUTION_TIME))
-        
+
         if not new_callers or func in roots:
             new_callers[vroot] = (cc, nc, tt, max(ct, MIN_EXECUTION_TIME))
         stats[func] = (cc, nc, tt, ct, new_callers)
-    
+
     stats[vroot] = (1, 1, 0, max(total_tottime, MIN_EXECUTION_TIME), {})
 
     out = io.StringIO()
     # Increased width to 6000 (5x standard) for better resolution
     flameprof.render(ps.stats, out, width=FLAMEGRAPH_STANDARD_WIDTH * FLAMEGRAPH_WIDTH_MULTIPLIER, threshold=DEFAULT_THRESHOLD)
     svg_content = out.getvalue()
-    
-    if not svg_content.strip(): 
+
+    if not svg_content.strip():
         sys.setrecursionlimit(old_limit)
         return False
-    
+
     # ? POST-PROCESS SVG: Inject ID and standard height, but KEEP WIDTH for resolution
     if '<svg' in svg_content:
         # Force fixed height for consistent UI, but allow width to stay at 6000px
         svg_content = re.sub(r'height="[^"]+"', 'height="600"', svg_content, count=1)
         # Inject ID and Preserve Aspect Ratio
         svg_content = svg_content.replace('<svg', '<svg id="flamegraph-svg" preserveAspectRatio="none"', 1)
-    
+
     if '<?xml' in svg_content:
         svg_content = svg_content[svg_content.find('<svg'):]
 
     with open(output_svg, 'w') as f:
         f.write(svg_content)
-    
+
     sys.setrecursionlimit(old_limit)
     return svg_content

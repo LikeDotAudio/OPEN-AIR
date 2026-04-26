@@ -4,9 +4,9 @@
 #
 # Description: Master Cache Purge Script. Ensures a clean slate for MQTT-driven state.
 
-import sys
-import shutil
 import logging
+import shutil
+import sys
 from pathlib import Path
 
 # 1. Setup Environment
@@ -39,7 +39,7 @@ def purge_cache():
         project_root / ".pytest_cache" / "RUN",
         project_root / "DATA" # Legacy compatibility
     ]
-    
+
     # Specific files to remove
     target_files = [
         project_root / "oaDataCache" / "device_state_cache.json",
@@ -76,7 +76,7 @@ def purge_cache():
                             items_purged += 1
                     except Exception as e:
                         logger.error(f"  └─ ❌ Failed to delete {item.name}: {e}")
-                
+
                 if items_purged > 0:
                     matrix_log("core", "system", "purge_cache", f"  └─ 💥 Purged {items_purged} items from {data_dir.name}.", "INFO")
             except Exception as e:

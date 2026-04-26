@@ -5,9 +5,11 @@
 # Author: Anthony Peter Kuzub
 # Version: 20260406.1955.1
 
-import tkinter as tk
 import datetime
+import tkinter as tk
+
 from .midi_keyboard import get_midi_color
+
 
 class MidiFeed(tk.Frame):
     """
@@ -26,14 +28,14 @@ class MidiFeed(tk.Frame):
     def add_log(self, direction, message_str, channel=0):
         timestamp = datetime.datetime.now().strftime("%H:%M:%S")
         color = get_midi_color(channel)
-        
+
         # Create or reuse a tag for this specific color
         tag_name = f"ch_color_{color.replace('#', '')}"
         self.log_text.tag_configure(tag_name, foreground=color)
-        
+
         formatted_line = f"[{timestamp}] {direction} >> {message_str}\n"
         self.log_text.insert("1.0", formatted_line, tag_name)
-        
+
         # Truncate
         if int(self.log_text.index('end-1c').split('.')[0]) > 200:
             self.log_text.delete('200.0', tk.END)

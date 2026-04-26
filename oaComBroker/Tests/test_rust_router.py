@@ -6,8 +6,9 @@
 # Version: 20260401.1000.1
 
 import unittest
-from unittest.mock import MagicMock, patch
+
 from oaComBroker.Core.protocol_router.manager import ProtocolRouter
+
 
 class TestRustRouter(unittest.TestCase):
     def setUp(self):
@@ -24,10 +25,10 @@ class TestRustRouter(unittest.TestCase):
 
         router = ProtocolRouter.get_instance(force_reload=True)
         self.assertIsNotNone(router.rust_router)
-        
+
         # Test ingestion
         router.ingest("MQTT", "test/rs", 200)
-        
+
         # Verify it went into the rust router
         # Note: We assume oacorerouter_rs.CoreRouter has inbound_len() and pop_inbound()
         # as suggested by the previous version of this test.

@@ -4,9 +4,7 @@
 #
 # Description: Ballistics engine for meter movement, now strictly Rust-powered.
 
-import time
 from loguru import logger
-from oaConfigurationManager.Entry import Config
 
 try:
     from oaRustCore.oa_metering_engine_rs import BallisticsEngine as RustBallisticsEngine
@@ -14,7 +12,7 @@ try:
 except ImportError:
     logger.warning("🚀⚠️ [GUI] Rust Metering Engine missing. Falling back to slow Python ballistics.")
     HAS_RUST_METERING = False
-    
+
     class RustBallisticsEngine:
         """Fallback Python implementation of the ballistics engine."""
         def __init__(self, config):
@@ -43,7 +41,7 @@ except ImportError:
 
 class BallisticsEngine:
     """Handles the physics math for meter movement."""
-    
+
     def __init__(self, config):
         self.configuration = config
         try:

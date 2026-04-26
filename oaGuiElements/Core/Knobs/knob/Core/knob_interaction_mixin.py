@@ -4,8 +4,8 @@
 #
 # Description: Brief summary of purpose
 
-import tkinter as tk
 import sys
+
 
 class KnobInteractionMixin:
     """Handles all user input interactions for the rotary knob."""
@@ -30,13 +30,13 @@ class KnobInteractionMixin:
     def _on_knob_drag(self, event):
         if self.state.get("start_y") is None: return
         dy = self.state["start_y"] - event.y
-        
+
         min_val, max_val = self.widget_config["min"], self.widget_config["max"]
         base_sensitivity = (max_val - min_val) / 200.0
         if self.widget_config["fine_pitch"]:
             base_sensitivity /= 10.0
-        
-        if (event.state & 0x000C) == 0x000C: 
+
+        if (event.state & 0x000C) == 0x000C:
             base_sensitivity /= 2.0
 
         delta = dy * base_sensitivity

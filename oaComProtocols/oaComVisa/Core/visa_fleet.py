@@ -1,33 +1,32 @@
 import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
+
 # Core/visa_fleet.py
 # Author: Anthony Peter Kuzub
 # Version: 2.0.0
 #
 # Description: Refactored VISA Fleet Manager (Composition over Inheritance).
-
-import threading
-from loguru import logger
+from oaConfigurationManager.FileReaders.config_reader import Config
 
 # --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import builder_logger
-from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import matrix_log
+
 app_constants = Config.get_instance()
 
 # Note: DiscoveryOrchestrator is imported from discovery_agents
-from ..Managers.discovery_orchestrator import DiscoveryOrchestrator
-from ..FileWriters.visa_json import VisaJsonBuilder
-from ..Managers.fleet_mqtt_bridge import MqttFleetBridge
 from ..FileWriters.visa_csv import VisaCsvBuilder
+from ..FileWriters.visa_json import VisaJsonBuilder
+from ..Managers.discovery_orchestrator import DiscoveryOrchestrator
+from ..Managers.fleet_mqtt_bridge import MqttFleetBridge
 
 # --- Refactored Core Managers ---
 from .fleet_command_manager import CommandQueueManager
 from .fleet_inventory_manager import InventoryManager
 from .fleet_scan_manager import ScanManager
 
+
 class FleetOrchestrator:
     """Commander for the VISA instrument fleet, managing discovery and communication."""
-    
+
     def __init__(self, mqtt_connection_manager=None, subscriber_router=None, aes70_manager=None):
         matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳🚢🔍 [VISA] Initializing FleetOrchestrator.", "DEBUG")
 
@@ -47,7 +46,7 @@ class FleetOrchestrator:
 
         self._current_inventory = self.json_builder.load_inventory_from_json()
         self.discovery_orchestrator = DiscoveryOrchestrator(manager_ref=self, aes70_manager=aes70_manager)
-        
+
         # Initialize Composed Managers
         self._command_manager = CommandQueueManager(self)
         self._inventory_manager = InventoryManager(self)
@@ -58,7 +57,7 @@ class FleetOrchestrator:
         matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "✅ [SUCCESS] FleetOrchestrator initialized.", "SUCCESS")
 
     # --- Delegated Properties and Methods (Public API Compatibility) ---
-    
+
     @property
     def current_inventory(self):
         return self._inventory_manager.current_inventory

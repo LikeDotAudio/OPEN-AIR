@@ -5,8 +5,10 @@
 # Description: Modular Alignment (Sticky) toolset indicators.
 
 import tkinter as tk
+
 from ....Core.state import state_manager
 from .base_overlay import BaseOverlay
+
 
 class AlignmentOverlay(BaseOverlay):
     """Handles visual indicators for widget alignment (sticky)."""
@@ -25,14 +27,14 @@ class AlignmentOverlay(BaseOverlay):
     def _toggle_sticky(self, mode):
         full_path = f"{self.path}.layout.sticky"
         current = str(state_manager.get_value_at_path(full_path) or "").lower()
-        
+
         new_sticky = current
         if mode == "L": new_sticky = new_sticky.replace("w", "") if "w" in new_sticky else new_sticky + "w"
         elif mode == "R": new_sticky = new_sticky.replace("e", "") if "e" in new_sticky else new_sticky + "e"
         elif mode == "T": new_sticky = new_sticky.replace("n", "") if "n" in new_sticky else new_sticky + "n"
         elif mode == "B": new_sticky = new_sticky.replace("s", "") if "s" in new_sticky else new_sticky + "s"
         elif mode == "C": new_sticky = ""
-        
+
         new_sticky = "".join(sorted(list(set(new_sticky))))
         state_manager.update_state(new_sticky.upper(), path=full_path, source=self.workspace)
 
@@ -40,7 +42,7 @@ class AlignmentOverlay(BaseOverlay):
         if not self.workspace.show_alignment.get():
             self.hide()
             return
-            
+
         value = (state_manager.get_value_at_path(f"{self.path}.layout.sticky") or "").lower()
         self.alignment_handles["L"].config(bg="#33A1FD" if "w" in value else "#666666")
         self.alignment_handles["R"].config(bg="#33A1FD" if "e" in value else "#666666")

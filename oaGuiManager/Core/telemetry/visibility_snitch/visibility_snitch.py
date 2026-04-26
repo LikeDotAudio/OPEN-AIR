@@ -4,13 +4,10 @@
 #
 # Description: Brief summary of purpose
 
-import time
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
-import orjson
+
 from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic
-from oaComProtocols.oaComMQTT.Core.mqtt_publisher_service import is_connected
-from loguru import logger
+from oaLogging.Methods.matrix_gate import matrix_log
 
 
 class HiddenVisibilityManagerMixin:

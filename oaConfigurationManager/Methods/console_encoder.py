@@ -1,8 +1,9 @@
-import sys
-import os
-
 import inspect
+import os
+import sys
+
 from oaLogging.Methods.matrix_gate import matrix_log
+
 # Methods/console_encoder.py
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
@@ -34,15 +35,13 @@ Assumptions and Constraints:
 LOCAL_DEBUG = False
 
 # --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory
-from loguru import logger
 
 from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
 
 
-def configure_console_encoding(): 
+def configure_console_encoding():
     """
     Configures the console streams to handle UTF-8 encoding.
 
@@ -59,7 +58,7 @@ def configure_console_encoding():
         - This function is not thread-safe if called while other threads are 
           actively writing to console streams.
     """
-    # Windows ('nt') often defaults to legacy encodings (like cp1252), which 
+    # Windows ('nt') often defaults to legacy encodings (like cp1252), which
     # fail when encountering UTF-8 symbols used throughout the app.
     if os.name == "nt":
         try:
@@ -67,7 +66,7 @@ def configure_console_encoding():
 
             matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "⚙️ Attempting to reconfigure stdout encoding to UTF-8.", "DEBUG")
 
-            # UTF-8 reconfiguration prevents 'UnicodeEncodeError' when logging 
+            # UTF-8 reconfiguration prevents 'UnicodeEncodeError' when logging
             # stylized status indicators.
             sys.stdout.reconfigure(encoding="utf-8")
             matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "✅ Successfully reconfigured stdout encoding.", "SUCCESS")
@@ -84,7 +83,7 @@ def configure_console_encoding():
                 matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"⚠️ Exception during console encoding reconfiguration: {e}", "DEBUG")
 
     else:
-        # POSIX systems typically default to UTF-8, making reconfiguration 
+        # POSIX systems typically default to UTF-8, making reconfiguration
         # unnecessary and potentially disruptive.
         matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "⏩ Not on Windows ('nt').", "DEBUG")
 

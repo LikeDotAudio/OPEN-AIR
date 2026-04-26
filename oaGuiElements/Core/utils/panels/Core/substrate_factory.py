@@ -4,8 +4,9 @@
 #
 # Description: Brief summary of purpose
 
+
 from PIL import Image, ImageChops
-import random
+
 
 class SubstrateFactory:
     @staticmethod
@@ -15,7 +16,7 @@ class SubstrateFactory:
         base_divisor = 10 / scale_factor
         source_w = width if not vertical else max(5, int(width // base_divisor))
         source_h = height if vertical else max(5, int(height // base_divisor))
-        
+
         source = Image.effect_noise((source_w, source_h), sigma=sigma)
         return source.resize((width, height), resample=Image.LANCZOS)
 
@@ -24,16 +25,16 @@ class SubstrateFactory:
         # ⚡ RESOLUTION FIX: Generate noise at higher resolution if scale_factor > 1.0
         noise_w = int(width * scale_factor)
         noise_h = int(height * scale_factor)
-        
+
         base = Image.effect_noise((noise_w, noise_h), sigma=30)
-        
+
         # Dimple frequency should also respect scale
         dimple_divisor = 20 / scale_factor
         dimples = Image.effect_noise((max(5, int(width // dimple_divisor)), max(5, int(height // dimple_divisor))), sigma=50)
-        
+
         dimples = dimples.resize((noise_w, noise_h), resample=Image.BICUBIC)
         combined = ImageChops.multiply(base, dimples)
-        
+
         # If we generated at higher res, downsample smoothly to target size
         if scale_factor > 1.0:
             return combined.resize((width, height), resample=Image.LANCZOS)

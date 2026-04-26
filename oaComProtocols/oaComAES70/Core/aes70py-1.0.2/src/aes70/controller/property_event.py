@@ -1,5 +1,6 @@
-from .base_event import BaseEvent
 import logging
+
+from .base_event import BaseEvent
 
 logger = logging.getLogger(__name__)
 

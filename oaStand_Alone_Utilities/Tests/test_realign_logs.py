@@ -5,12 +5,13 @@
 # Author: Anthony Peter Kuzub
 # Version: 20260401.1000.1
 
-import unittest
-import os
 import shutil
 import tempfile
+import unittest
 from pathlib import Path
-from oaStand_Alone_Utilities.Methods.realign_logs import realign_logs, HAS_RUST
+
+from oaStand_Alone_Utilities.Methods.realign_logs import HAS_RUST, realign_logs
+
 
 class TestLogRealigner(unittest.TestCase):
     def setUp(self):
@@ -19,7 +20,7 @@ class TestLogRealigner(unittest.TestCase):
         self.logs_dir = self.test_dir / "logs"
         self.logs_dir.mkdir()
         self.output_log = self.test_dir / "merged.log"
-        
+
         # Create some mock log files
         self.log_content_1 = [
             "1711880000.500 | INFO | SYS | PROG1 | func1 | [DEBUG] Message 2",
@@ -29,7 +30,7 @@ class TestLogRealigner(unittest.TestCase):
             "1711880000.800 | INFO | SYS | PROG2 | func2 | [DEBUG] Message 4",
             "1711880000.600 | INFO | SYS | PROG2 | func2 | [DEBUG] Message 3",
         ]
-        
+
         with open(self.logs_dir / "log1.log", 'w') as f:
             f.write("\n".join(self.log_content_1) + "\n")
         with open(self.logs_dir / "log2.log", 'w') as f:
@@ -46,8 +47,8 @@ class TestLogRealigner(unittest.TestCase):
         success = realign_logs(str(self.logs_dir), str(self.output_log))
         self.assertTrue(success)
         self.assertTrue(self.output_log.exists())
-        
-        with open(self.output_log, 'r') as f:
+
+        with open(self.output_log) as f:
             lines = [l.strip() for l in f.readlines() if l.strip()]
         self.assertEqual(len(lines), 4)
         timestamps = [float(line.split(' | ')[0]) for line in lines]
@@ -57,12 +58,12 @@ class TestLogRealigner(unittest.TestCase):
         """Test the high-performance Rust log realigner if available."""
         if not HAS_RUST:
             self.skipTest("Rust LogAligner not available.")
-            
+
         success = realign_logs(str(self.logs_dir), str(self.output_log))
         self.assertTrue(success)
         self.assertTrue(self.output_log.exists())
-        
-        with open(self.output_log, 'r') as f:
+
+        with open(self.output_log) as f:
             lines = [l.strip() for l in f.readlines() if l.strip()]
         self.assertEqual(len(lines), 4)
         timestamps = [float(line.split(' | ')[0]) for line in lines]

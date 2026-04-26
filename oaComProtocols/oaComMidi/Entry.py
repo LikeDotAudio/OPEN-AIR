@@ -5,11 +5,11 @@
 # Description: Gatekeeper for the oaComMidi module.
 # Manages the lifecycle of the MIDI bridge service.
 
-import sys
 import os
 import pathlib
-import time
 import subprocess
+import sys
+import time
 from pathlib import Path
 
 # Ensure root directory is in the search path
@@ -52,9 +52,9 @@ def get_manager(**kwargs):
     global _manager_instance
     if _manager_instance is None:
         from oaComProtocols.oaComMidi.Managers.midi_manager import MidiManager
-        
+
         state_cache = kwargs.get("state_cache_manager", MockStateCache())
-        mqtt_conn = kwargs.get("mqtt_connection_manager", None) 
+        mqtt_conn = kwargs.get("mqtt_connection_manager", None)
         sub_router = kwargs.get("subscriber_router", MockSubscriberRouter())
         run_bridge = kwargs.get("run_bridge", True)
         use_protocol_router = kwargs.get("use_protocol_router", True)
@@ -109,14 +109,14 @@ def run_tests():
     """
     print(f"📡📥📥 [TEST] {Path(__file__).parent.name}: Starting automated test discovery...")
     test_dir = current_dir / "Tests"
-    
+
     if not test_dir.exists():
         print(f"⚠️ [TEST] {Path(__file__).parent.name}: No Tests/ directory found.")
         return True
 
     env = os.environ.copy()
     env["PYTHONPATH"] = str(project_root) + os.pathsep + env.get("PYTHONPATH", "")
-    
+
     try:
         rel_test_dir = os.path.relpath(test_dir, project_root)
         result = subprocess.run(
@@ -140,7 +140,7 @@ if __name__ == "__main__":
     if not run_tests():
         print("❌ [CRITICAL] Tests failed. Aborting execution.")
         sys.exit(1)
-    
+
     # Standalone execution logic
     if len(sys.argv) > 1:
         cmd = sys.argv[1].lower()

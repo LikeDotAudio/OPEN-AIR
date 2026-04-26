@@ -1,6 +1,7 @@
 from arguments import Arguments
 from observe_property import observeProperty
 
+
 class PropertyObserver:
     def __init__(self, o, propertyName, cacheSubscriptions):
         self.o = o

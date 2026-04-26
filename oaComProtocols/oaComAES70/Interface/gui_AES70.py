@@ -5,10 +5,10 @@
 # Description: AES70 (OCA) Status & Discovery GUI.
 # This file contains the primary implementation logic for the AES70 GUI.
 
+import datetime
 import tkinter as tk
 from tkinter import ttk
-import datetime
-from loguru import logger
+
 
 class Aes70DashboardImplementation(tk.Frame):
     """
@@ -20,11 +20,11 @@ class Aes70DashboardImplementation(tk.Frame):
         # Extract non-Tkinter arguments
         self.config_data = kwargs.pop("config", {})
         self.json_path = kwargs.pop("json_path", None)
-        
+
         super().__init__(parent, **kwargs)
         self.aes_manager = self._find_aes_manager(parent)
         self._setup_ui()
-        
+
         if self.aes_manager:
             self.aes_manager.add_monitor_callback(self.on_aes_activity)
             self._refresh_ui()
@@ -39,10 +39,10 @@ class Aes70DashboardImplementation(tk.Frame):
             # Check for direct attribute or app_instance
             app = getattr(curr, 'app_instance', None)
             if app and hasattr(app, 'aes70_manager'):
-                return getattr(app, 'aes70_manager')
+                return app.aes70_manager
             if hasattr(curr, 'aes70_manager'):
-                return getattr(curr, 'aes70_manager')
-                
+                return curr.aes70_manager
+
             try: curr = curr.master
             except: break
         return None
@@ -55,7 +55,7 @@ class Aes70DashboardImplementation(tk.Frame):
         header = tk.Frame(self, bg="#2b2b2b")
         header.pack(side=tk.TOP, fill=tk.X, pady=10)
         tk.Label(header, text="📻 AES70 / OCA DISCOVERY", font=("Helvetica", 14, "bold"), fg="#ffffff", bg="#2b2b2b").pack(side=tk.LEFT, padx=20)
-        
+
         ttk.Button(header, text="Scan Network", command=self._trigger_scan).pack(side=tk.RIGHT, padx=20)
 
         # 2. Main Layout
@@ -87,11 +87,11 @@ class Aes70DashboardImplementation(tk.Frame):
     def _refresh_ui(self):
         """Pure UI refresh. Pulls data from the manager."""
         if not self.aes_manager: return
-        
+
         # Some managers might have get_status(), check if it exists
         if hasattr(self.aes_manager, "get_status"):
             status = self.aes_manager.get_status()
-        
+
         # We could update a general status label here if needed
         pass
 
@@ -101,7 +101,7 @@ class Aes70DashboardImplementation(tk.Frame):
 
     def _handle_event(self, event_type, details):
         timestamp = datetime.datetime.now().strftime("%H:%M:%S")
-        
+
         if event_type == "SCAN_COMPLETE":
             # Update Tree
             for item in self.device_tree.get_children():
@@ -109,7 +109,7 @@ class Aes70DashboardImplementation(tk.Frame):
             for dev in details:
                 self.device_tree.insert("", "end", text=dev, values=("Online",))
             self.log_text.insert("1.0", f"[{timestamp}] 📻 SCAN COMPLETE: Found {len(details)} devices.\n")
-        
+
         elif event_type == "STATE_SYNC":
             self.log_text.insert("1.0", f"[{timestamp}] 📻 SYNC >> {details}\n")
 

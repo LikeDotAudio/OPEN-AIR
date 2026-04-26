@@ -1,6 +1,8 @@
 import unittest
 from unittest.mock import MagicMock
+
 from oaComProtocols.oaComSMPTE2138.Managers.smpte2138_monitor_manager import SMPTE2138MonitorManager
+
 
 class TestSMPTE2138MonitorManager(unittest.TestCase):
     def setUp(self):

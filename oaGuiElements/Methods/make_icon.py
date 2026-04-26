@@ -4,10 +4,11 @@
 #
 # Description: This script generates the application icon as an SVG file.
 
-import os
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
 import pathlib
+
+from oaLogging.Methods.matrix_gate import matrix_log
+
 
 def generate_icon():
     """
@@ -24,18 +25,18 @@ def generate_icon():
     # Get the project root directory
     current_script_path = pathlib.Path(__file__).resolve()
     project_root = current_script_path.parent.parent.parent
-    
+
     # Define the output path
     output_dir = project_root / "oaDataCache" / "assets" / "images"
     output_path = output_dir / "open_air_icon.svg"
-    
+
     # Ensure the directory exists
     output_dir.mkdir(parents=True, exist_ok=True)
-    
+
     # Write the SVG content
     with open(output_path, "w") as f:
         f.write(svg_content)
-    
+
     matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"✅ Icon generated and saved to: {output_path}", level="INFO")
 
 if __name__ == "__main__":

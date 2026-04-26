@@ -1,14 +1,16 @@
-import unittest
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
-from unittest.mock import MagicMock, patch
-import tkinter as tk
 import os
+import tkinter as tk
+import unittest
+from unittest.mock import MagicMock, patch
+
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # Set a path for logs before other imports
 os.environ['OPEN_AIR_LOG_PATH'] = '/tmp/open_air_tests'
 
 from oaGuiElements.Core.utils.json_tree.Core.json_tree import BuilderDataJsonTreeCreator, JsonTreeWidget
+
 
 class TestJsonTreeWidget(unittest.TestCase):
 
@@ -89,7 +91,7 @@ class TestJsonTreeWidget(unittest.TestCase):
 
         # 1. CHECK: The widget was created successfully
         self.assertIsNotNone(widget, "The widget should be created, not None.")
-        
+
         # If we're mocking, we might not get a JsonTreeWidget instance back if Frame was patched
         if not isinstance(self.parent_widget, MagicMock):
             self.assertIsInstance(widget, JsonTreeWidget, "The created widget should be a JsonTreeWidget.")
@@ -98,7 +100,7 @@ class TestJsonTreeWidget(unittest.TestCase):
         self.mock_context.state_mirror_engine.register_widget.assert_called_once_with(
             config_data["path"], None, self.mock_context.base_mqtt_topic_from_path, config_data
         )
-        
+
         # 3. CHECK: The widget state was initialized.
         self.mock_context.state_mirror_engine.initialize_widget_state.assert_called_once_with(config_data["path"])
 

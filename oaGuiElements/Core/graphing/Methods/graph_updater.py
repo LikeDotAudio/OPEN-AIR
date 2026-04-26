@@ -5,19 +5,18 @@
 # Description: Graph updating and drawing orchestration.
 
 from collections import deque
-from typing import List, Any, Dict
+from typing import Any
+
 import numpy as np
-import time
-from oaLogging.Core.logger import builder_logger
 
 # --- BLIT OPTIMIZATION ENGINE CACHE ---
 _bg_cache = {}
 
-def discover_datasets(config: Dict[str, Any]) -> List[Dict[str, Any]]:
+def discover_datasets(config: dict[str, Any]) -> list[dict[str, Any]]:
     """Discovers dataset definitions from JSON."""
     return config.get("datasets", [])
 
-def process_initial_data(widget, datasets: List[Dict[str, Any]]):
+def process_initial_data(widget, datasets: list[dict[str, Any]]):
     """Processes initial CSV data for discovered datasets."""
     for ds in datasets:
         ds_id = ds.get("id")
@@ -26,7 +25,7 @@ def process_initial_data(widget, datasets: List[Dict[str, Any]]):
             if hasattr(widget, 'dataset_vars') and ds_id in widget.dataset_vars:
                 widget.dataset_vars[ds_id].set(csv)
 
-def smooth_data(data: List[float], window_size: int) -> List[float]:
+def smooth_data(data: list[float], window_size: int) -> list[float]:
     """Applies a simple moving average smoothing to the data."""
     if window_size <= 1 or len(data) < (window_size // 2):
         return data
@@ -44,7 +43,7 @@ def update_line_data(line: Any, x_data: deque, y_data: deque, new_x: float, new_
     else:
         line.set_data(list(x_data), list(y_data))
 
-def load_initial_data(line: Any, x_queue: deque, y_queue: deque, x_vals: List[float], y_vals: List[float], smoothing: int = 0):
+def load_initial_data(line: Any, x_queue: deque, y_queue: deque, x_vals: list[float], y_vals: list[float], smoothing: int = 0):
     """Loads initial data into queues and updates the line."""
     x_queue.clear()
     y_queue.clear()
@@ -79,15 +78,15 @@ def perform_full_draw(ax: Any, canvas: Any):
     canvas.draw()
     canvas.draw_idle()
 
-def perform_fast_blit(ax: Any, canvas: Any, lines: List[Any]):
+def perform_fast_blit(ax: Any, canvas: Any, lines: list[Any]):
     """⚡ BLIT OPTIMIZATION: Redraws ONLY the lines on top of a cached background."""
     fig = ax.get_figure()
     fig_id = id(fig)
-    
+
     if fig_id not in _bg_cache:
         canvas.draw()
         _bg_cache[fig_id] = canvas.copy_from_bbox(ax.bbox)
-        
+
     canvas.restore_region(_bg_cache[fig_id])
     for line in lines:
         ax.draw_artist(line)

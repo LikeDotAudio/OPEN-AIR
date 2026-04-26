@@ -4,10 +4,12 @@
 #
 # Description: Provides functions for publishing messages to the MQTT broker.
 
-from ..Managers.mqtt_connection import MqttConnectionManager
 import orjson
 
 from oaConfigurationManager.FileReaders.config_reader import Config
+
+from ..Managers.mqtt_connection import MqttConnectionManager
+
 app_constants = Config.get_instance()
 
 def start_publisher_worker():

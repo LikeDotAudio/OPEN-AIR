@@ -4,27 +4,31 @@
 #
 # Description: Brief summary of purpose
 
-import unittest
-from unittest.mock import MagicMock, patch
-from oaStateCache.Core.topic_calculator import TopicCalculator
+import os
+
 # Using a robust path to import from the moved Workers location for MQTTSweeper
 import sys
-import os
+import unittest
+from unittest.mock import MagicMock
+
+from oaStateCache.Core.topic_calculator import TopicCalculator
+
 # Calculate the project root by going up three levels from the current file
 project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 if project_root not in sys.path:
     sys.path.insert(0, project_root)
 from oaTests.Workers.CleanupApps.ClearMQTT import MQTTSweeper
 
+
 class TestMQTTLogic(unittest.TestCase):
     def test_topic_calculator_calculate(self):
         """Validate string manipulation for dynamic MQTT topics based on UI hierarchy."""
         calc = TopicCalculator(base_topic="OPEN-AIR")
-        
+
         # Test basic formatting
         topic = calc.calculate("volume", "MainTab")
         self.assertEqual(topic, "OPEN-AIR/MainTab/volume")
-        
+
         # Test stripping layout/structural tokens
         topic_with_extra = calc.calculate("gui/knob1", "oaGui/Assets/Tab1")
         self.assertNotIn("display", topic_with_extra)
@@ -34,18 +38,18 @@ class TestMQTTLogic(unittest.TestCase):
     def test_mqtt_sweeper_on_message_filter(self):
         """Verify on_message correctly filters for the configured base topic."""
         sweeper = MQTTSweeper("localhost", 1883, "OPEN-AIR")
-        
+
         # Mock message objects
         message_in_root = MagicMock()
         message_in_root.topic = "OPEN-AIR/some/topic"
-        
+
         message_outside = MagicMock()
         message_outside.topic = "OTHER-PROJECT/topic"
-        
+
         # Trigger on_message
         sweeper.on_message(None, None, message_in_root)
         sweeper.on_message(None, None, message_outside)
-        
+
         # Check results
         self.assertIn("OPEN-AIR/some/topic", sweeper.topics)
         self.assertNotIn("OTHER-PROJECT/topic", sweeper.topics)

@@ -27,19 +27,20 @@
 
 
 import tkinter as tk
-from tkinter import ttk
-from oaLogging.Core.logger import GUI_LOGGER as logger
-from oaLogging.Methods.matrix_gate import matrix_log
+
 from oaComBroker.Core.event_bus import event_bus
-from ....Core.state import state_manager
 from oaGui.Methods.safe_after_mixin import SafeAfterMixin
+from oaLogging.Methods.matrix_gate import matrix_log
+
+from ....Core.state import state_manager
+from ...layout_engine.focus import FocusManager
+from ...layout_engine.ghost_overlay import GhostOverlay
+from ...layout_engine.overlay_manager import OverlayManager
 
 # --- MODULAR CORE COMPONENTS ---
 from ...layout_engine.preview_engine import PreviewEngine
-from ...layout_engine.focus import FocusManager
-from ...layout_engine.overlay_manager import OverlayManager
 from ...layout_engine.ruler import Ruler
-from ...layout_engine.ghost_overlay import GhostOverlay
+
 
 class InteractiveLayout(tk.Frame, SafeAfterMixin):
     """The visual workspace where users interact with the GUI layout."""
@@ -48,7 +49,7 @@ class InteractiveLayout(tk.Frame, SafeAfterMixin):
         self._init_safe_after()
         kwargs.pop("bg", None)
         super().__init__(parent, bg="#1a1a1a", *args, **kwargs)
-        
+
         # Display Toggles
         self.show_structure = tk.BooleanVar(value=False)
         self.show_blocks = tk.BooleanVar(value=False)
@@ -57,12 +58,12 @@ class InteractiveLayout(tk.Frame, SafeAfterMixin):
         self.show_sticky = tk.BooleanVar(value=False)
         self.show_alignment = tk.BooleanVar(value=False)
         self.show_colors = tk.BooleanVar(value=False)
-        
+
         self.render_tier_var = tk.StringVar(value="Fast")
         self.auto_rebuild_var = tk.BooleanVar(value=False)
         self.show_background_var = tk.BooleanVar(value=False)
         self.superficial_pad_var = tk.IntVar(value=0)
-        
+
         self.focused_path = None
         self.pending_changes = 0
         self._refresh_timer = None
@@ -70,12 +71,12 @@ class InteractiveLayout(tk.Frame, SafeAfterMixin):
 
         self._setup_engines()
         self._build_ui()
-        
+
         event_bus.subscribe("STATE_UPDATED", self._on_state_updated)
         event_bus.subscribe("FOCUS_REQUESTED", self._on_external_focus)
         event_bus.subscribe("COMPONENT_DRAGGING", self._on_component_dragging)
         event_bus.subscribe("COMPONENT_DROPPED", self._on_component_dropped_global)
-        
+
         self.bind("<Destroy>", self._on_destroy)
         self.bind("<Configure>", self._on_layout_configure)
         self.safe_after(100, self._initial_startup_sync)
@@ -89,25 +90,25 @@ class InteractiveLayout(tk.Frame, SafeAfterMixin):
     def _build_ui(self):
         # 1. Ruler Infrastructure
         self.ruler_corner = tk.Frame(self, bg="#1a1a1a", width=20, height=20)
-        self.ruler_corner.place(x=0, y=0) 
-        
+        self.ruler_corner.place(x=0, y=0)
+
         self.h_ruler = Ruler(self, orient="horizontal")
         self.h_ruler.place(x=20, y=0, relwidth=1, width=-20, height=20)
-        
+
         self.v_ruler = Ruler(self, orient="vertical")
         self.v_ruler.place(x=0, y=20, width=20, relheight=1, height=-20)
 
         # 2. Main Render Canvas
         self.render_area = tk.Frame(self, bg="#2b2b2b")
         self.render_area.place(x=20, y=20, relwidth=1, relheight=1, width=-20, height=-20)
-        
+
         # 3. Engines requiring UI context
         self.preview_engine = PreviewEngine(self.render_area, self.focus_mgr.handle_focus_request, workspace=self)
         self.overlay_mgr.create_event_blocker(self.render_area)
-        
+
         # 4. Ghost Layer
         self.ghost_overlay = GhostOverlay(self.render_area)
-        self.ghost_overlay.place_forget() 
+        self.ghost_overlay.place_forget()
 
     def _on_layout_configure(self, event):
         if not self._initial_render_done and event.width > 50:
@@ -132,8 +133,8 @@ class InteractiveLayout(tk.Frame, SafeAfterMixin):
         if not self.winfo_exists() or source == self: return
         self.pending_changes += 1
         self._update_rebuild_ui()
-        
-        # ⚡ AUTO-REFRESH: If we are in Ghost mode, we always refresh to provide 
+
+        # ⚡ AUTO-REFRESH: If we are in Ghost mode, we always refresh to provide
         # immediate visual feedback on structural changes.
         is_ghost = self.render_tier_var.get().lower() == "ghost"
         if self.auto_rebuild_var.get() or is_ghost:
@@ -150,10 +151,10 @@ class InteractiveLayout(tk.Frame, SafeAfterMixin):
         tier = tier_map.get(self.render_tier_var.get(), "high_res")
         if self.preview_engine.preview_builder:
             self._manual_rebuild()
-            self.overlay_mgr.apply_outlines(self.preview_engine.preview_builder.scroll_frame) 
-        
+            self.overlay_mgr.apply_outlines(self.preview_engine.preview_builder.scroll_frame)
+
     def _toggle_auto_rebuild(self):
-        if self.auto_rebuild_var.get(): self._manual_rebuild() 
+        if self.auto_rebuild_var.get(): self._manual_rebuild()
 
     def _sync_rulers(self, event=None):
         builder = self.preview_engine.preview_builder
@@ -204,7 +205,7 @@ class InteractiveLayout(tk.Frame, SafeAfterMixin):
         render_menu.add_checkbutton(label="Auto-Rebuild", variable=self.auto_rebuild_var, command=self._toggle_auto_rebuild)
         render_menu.add_checkbutton(label="Show Background", variable=self.show_background_var, command=self._toggle_background_visibility)
         menubar.add_cascade(label="RENDER", menu=render_menu)
-        
+
         # 2. GRID Menu
         grid_menu = tk.Menu(menubar, tearoff=0)
         pad_menu = tk.Menu(grid_menu, tearoff=0)
@@ -212,13 +213,13 @@ class InteractiveLayout(tk.Frame, SafeAfterMixin):
             pad_menu.add_radiobutton(label=f"PAD {i}px", variable=self.superficial_pad_var, value=i, command=self._manual_rebuild)
         grid_menu.add_cascade(label="Spacing (PAD)", menu=pad_menu)
         menubar.add_cascade(label="GRID", menu=grid_menu)
-        
+
         # 3. VIEW Menu (Overlays)
         view_menu = tk.Menu(menubar, tearoff=0)
         self.view_all_var = tk.BooleanVar(value=False)
         view_menu.add_checkbutton(label="VIEW ALL", variable=self.view_all_var, command=self._toggle_all_overlays, font=("Arial", 9, "bold"))
         view_menu.add_separator()
-        for text, var in [("Structure", self.show_structure), ("Blocks", self.show_blocks), ("Columns", self.show_columns), 
+        for text, var in [("Structure", self.show_structure), ("Blocks", self.show_blocks), ("Columns", self.show_columns),
                          ("Sizing", self.show_sizing), ("Sticky", self.show_sticky), ("Alignment", self.show_alignment), ("Colors", self.show_colors)]:
             view_menu.add_checkbutton(label=text, variable=var, command=self._force_overlay_refresh)
         menubar.add_cascade(label="VIEW", menu=view_menu)
@@ -236,7 +237,7 @@ class InteractiveLayout(tk.Frame, SafeAfterMixin):
     def _on_component_dragging(self, x, y, name):
         """Handles real-time feedback for components being dragged from the Grab Bag."""
         if not self.winfo_exists(): return
-        
+
         # 1. ⚡ GHOST MODE: Temporarily switch to ghost tier if not already there
         # This provides immediate structural feedback.
         if self.render_tier_var.get() != "Ghost":
@@ -247,7 +248,7 @@ class InteractiveLayout(tk.Frame, SafeAfterMixin):
         # 2. Ensure ghost overlay is visible and on top
         self.ghost_overlay.place(x=0, y=0, relwidth=1, relheight=1)
         tk.Widget.tkraise(self.ghost_overlay)
-        
+
         # 3. Find target and update visuals
         target = self.focus_mgr.find_drop_target_at(x, y)
         if target:
@@ -261,7 +262,7 @@ class InteractiveLayout(tk.Frame, SafeAfterMixin):
         if not self.winfo_exists(): return
         self.ghost_overlay.clear()
         self.ghost_overlay.place_forget()
-        
+
         # ⚡ RESTORE MODE: Switch back to the previous rendering quality
         if hasattr(self, '_previous_tier'):
             self.render_tier_var.set(self._previous_tier)
@@ -276,6 +277,6 @@ class InteractiveLayout(tk.Frame, SafeAfterMixin):
 
     def _force_overlay_refresh(self):
         builder = self.preview_engine.preview_builder
-        if builder: 
+        if builder:
             self.overlay_mgr.apply_outlines(builder.scroll_frame)
             if hasattr(builder, '_update_background'): builder._update_background()

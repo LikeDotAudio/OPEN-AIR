@@ -1,6 +1,8 @@
-from ..types.ocapropertyid import OcaPropertyID
-from promise import Promise
 import logging
+
+from promise import Promise
+
+from ..types.ocapropertyid import OcaPropertyID
 
 logger = logging.getLogger(__name__)
 

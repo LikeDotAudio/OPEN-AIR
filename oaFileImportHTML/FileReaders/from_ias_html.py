@@ -1,18 +1,20 @@
 import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
+
 # FileReaders/from_ias_html.py
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: Logic for converting IAS HTML frequency coordination reports into standardized marker format.
-
 import re
+
 import numpy as np
 from bs4 import BeautifulSoup
 
 # --- Standard Debug Logging Setup ---
 from loguru import logger
+
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
@@ -56,7 +58,7 @@ def _internal_convert_ias_html_to_markers(html_content):
 
     if first_zone_p:
         main_content_container = first_zone_p.find_parent("span")
-        matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🔍 Found main content container based on first zone paragraph.", "DEBUG")
+        matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🔍 Found main content container based on first zone paragraph.", "DEBUG")
 
     if not main_content_container:
         main_table = soup.find("table", class_="MainTable")
@@ -70,7 +72,7 @@ def _internal_convert_ias_html_to_markers(html_content):
                         main_content_container = potential_span_wrapper
                     else:
                         main_content_container = second_tr_td
-                    matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🔍 Found main content container based on MainTable structure.", "DEBUG")
+                    matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🔍 Found main content container based on MainTable structure.", "DEBUG")
 
     if not main_content_container:
         matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "⚠️ Could not find the main content container. No data will be extracted.", "DEBUG")

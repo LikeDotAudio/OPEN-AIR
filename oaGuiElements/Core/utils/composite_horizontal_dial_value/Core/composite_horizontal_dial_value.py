@@ -1,37 +1,37 @@
 # composite_horizontal_dial_value/composite_horizontal_dial_value.py
-from oaGui.Methods.i18n_utils import get_text
+import inspect
+
 # Author: Anthony Peter Kuzub
 # Version: 20260315.Modular.1
 #
 # Description: Modularized Composite Horizontal Fader & Dial.
-
 import tkinter as tk
-from oaLogging.Methods.matrix_gate import matrix_log
-import inspect
-from tkinter import ttk
+
 from loguru import logger
 
-# --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import builder_logger
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaGui.Methods.i18n_utils import get_text
+
+# --- Standard Debug Logging Setup ---
+from oaLogging.Methods.matrix_gate import matrix_log
+
 app_constants = Config.get_instance()
 
-from oaOchestration.Methods.widget_event_binder import bind_variable_trace
-from oaGuiManager.Core.context.widget_context import WidgetContext
-from oaGuiElements.Core.faders.fader_horizontal.Core.fader_horizontal import BuilderFaderHorizontalCreator
-from oaGuiElements.Core.utils.knob.knob import BuilderKnobCreator
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
-from oaGuiManager.Core.transparency.transparency import TransparencyManager
-from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
 from oaGuiBuilder.Core.base_widget_creator import BaseWidgetCreator
-
-# --- EXTRACTED CORE MODULES ---
-from ..grid import GridManager
-from ..state_sync import CompositeStateSync
-from ..ui_components import CompositeUIComponents
+from oaGuiElements.Core.faders.fader_horizontal.Core.fader_horizontal import BuilderFaderHorizontalCreator
+from oaGuiElements.Core.utils.knob.Core.knob import BuilderKnobCreator
+from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
+from oaGuiManager.Core.transparency.transparency import TransparencyManager
+from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Methods.matrix_gate import is_debug_allowed
+
+# --- EXTRACTED CORE MODULES ---
+from .grid import GridManager
+from .state_sync import CompositeStateSync
+from .ui_components import CompositeUIComponents
+
 BUILDER_DEBUG = is_debug_allowed(system="UI", element="GUI_BUILDER")
 
 @WidgetRegistry.register("_Horizontal_with_dial_Value", "OcaCompositeFaderKnob")
@@ -46,10 +46,10 @@ class BuilderCompositeHorizontalDialValueCreator(
         return BuilderCompositeHorizontalDialValueCreator.build(parent_widget, config_data, context, **kwargs)
 
     def _assemble_ui(self, parent_widget, config_data, context, **kwargs):
-        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️🔀 [BUILDER] Creating composite horizontal dial value.", level="TRACE")
-        
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🔬🏗️🔀 [BUILDER] Creating composite horizontal dial value.", level="TRACE")
+
         label, path = get_text(config_data.get("label_active"), get_text(config_data.get("label"), "Composite")), config_data.get("path", "")
-        
+
         # Context extraction
         state_mirror_engine = getattr(context, 'state_mirror_engine', None)
         subscriber_router = getattr(context, 'subscriber_router', None)
@@ -65,7 +65,7 @@ class BuilderCompositeHorizontalDialValueCreator(
 
             sub_frame = tk.Canvas(parent_widget, bd=0, highlightthickness=0, relief="flat", bg=p_bg, width=w_req, height=h_req)
             sub_frame._oca_path = path
-            
+
             # ⚡ PROPAGATION SAFETY: If we are in ghost/preview mode, we MUST propagate
             # otherwise the container collapses to 1x1 if width/height were stripped.
             render_tier = getattr(builder_instance, '_render_tier', 'high_res')
@@ -119,7 +119,7 @@ class BuilderCompositeHorizontalDialValueCreator(
             dial_widget.grid(row=0, column=1, rowspan=2, sticky="nsew", padx=5); dial_widget._oca_path = d_cfg["path"]
 
             def on_manual(e):
-                try: 
+                try:
                     value = round(float(entry_string_var.get()) / numerical_step) * numerical_step
                     main_value_var.set(max(min_val, min(max_val, value)))
                 except: entry_string_var.set(fmt_str.format(main_value_var.get()))
@@ -131,7 +131,7 @@ class BuilderCompositeHorizontalDialValueCreator(
             # 4. State Synchronization
             # ⚡ GHOST AWARENESS: Only wire up synchronization if sub-widgets are fully functional (have .variable)
             is_ghost = not hasattr(fader_widget, 'variable') or not hasattr(dial_widget, 'variable')
-            
+
             if not is_ghost:
                 dial_widget._prev_dial_val_for_wrap_detection = CompositeStateSync.calculate_initial_fine(init_val, step_coarse, numerical_step)
 
@@ -155,12 +155,12 @@ class BuilderCompositeHorizontalDialValueCreator(
                 sync_entry_style(); draw_f_label(); draw_unit_label()
                 if hasattr(fader_widget, "render"): fader_widget.render()
                 if hasattr(dial_widget, "render"): dial_widget.render()
-            
+
             sub_frame.render = sub_frame._draw = sync_bg
 
             sub_frame.variable = main_value_var
             return sub_frame, sub_frame
-        except Exception as e:
+        except Exception:
             if BUILDER_DEBUG: logger.exception(f"❌🚫🛑 [ERROR] Critical failure creating composite '{label}'")
             return None, None
 

@@ -4,12 +4,12 @@
 #
 # Description: Tests for the MqttConnectionManager singleton class.
 
+import queue
 import unittest
 from unittest.mock import MagicMock, patch
-import queue
-import threading
 
 from oaComProtocols.oaComMQTT.Managers.mqtt_connection import MqttConnectionManager
+
 
 class TestMqttConnectionManager(unittest.TestCase):
 
@@ -40,19 +40,19 @@ class TestMqttConnectionManager(unittest.TestCase):
         """
         mock_callback = MagicMock()
         mock_router = MagicMock()
-        
+
         self.manager.connect_to_broker(
-            address="1.2.3.4", 
-            port=1883, 
-            on_message_callback=mock_callback, 
+            address="1.2.3.4",
+            port=1883,
+            on_message_callback=mock_callback,
             subscriber_router=mock_router
         )
-        
+
         self.assertEqual(self.manager.broker_address, "1.2.3.4")
         self.assertEqual(self.manager.broker_port, 1883)
         self.assertEqual(self.manager.on_message_callback, mock_callback)
         self.assertEqual(self.manager.subscriber_router, mock_router)
-        
+
         MockThread.assert_called_once()
         args, kwargs = MockThread.call_args
         self.assertEqual(kwargs['target'], self.manager._run_worker_thread)
@@ -68,13 +68,13 @@ class TestMqttConnectionManager(unittest.TestCase):
         mock_worker.loop = MagicMock()
         mock_worker.kick_event = MagicMock()
         self.manager._worker = mock_worker
-        
+
         self.manager.publish("test/topic", payload=b"data", qos=1, retain=True)
-        
+
         self.assertEqual(self.manager.queue_manager._publish_queue.qsize(), 1)
         item = self.manager.queue_manager._publish_queue.get()
         self.assertEqual(item, ("test/topic", b"data", 1, True))
-        
+
         # Verify worker kick
         mock_worker.loop.call_soon_threadsafe.assert_called_with(mock_worker.kick_event.set)
 
@@ -88,14 +88,14 @@ class TestMqttConnectionManager(unittest.TestCase):
         mock_worker.loop = MagicMock()
         mock_worker.kick_event = MagicMock()
         self.manager._worker = mock_worker
-        
+
         self.manager.subscribe("test/sub", qos=0)
-        
+
         self.assertIn("test/sub", self.manager.queue_manager._pending_subscriptions)
         self.assertEqual(self.manager.queue_manager._subscribe_queue.qsize(), 1)
         item = self.manager.queue_manager._subscribe_queue.get()
         self.assertEqual(item, {"topic": "test/sub", "qos": 0})
-        
+
         # Duplicate subscribe should be ignored
         self.manager.subscribe("test/sub", qos=0)
         self.assertEqual(self.manager.queue_manager._subscribe_queue.qsize(), 0)
@@ -110,9 +110,9 @@ class TestMqttConnectionManager(unittest.TestCase):
         mock_worker.loop = MagicMock()
         mock_worker.stop_event = MagicMock()
         self.manager._worker = mock_worker
-        
+
         self.manager.disconnect()
-        
+
         mock_worker.loop.call_soon_threadsafe.assert_called_with(mock_worker.stop_event.set)
 
     @patch('oaComProtocols.oaComMQTT.Managers.mqtt_connection.MQTT_LOGGER')
@@ -125,7 +125,7 @@ class TestMqttConnectionManager(unittest.TestCase):
         """
         # --- First call ---
         self.manager.connect_to_broker(address="1.2.3.4", port=1883)
-        
+
         # Assert the first call starts the thread
         MockThread.assert_called_once()
         MockThread.return_value.start.assert_called_once()
@@ -136,10 +136,10 @@ class TestMqttConnectionManager(unittest.TestCase):
         MockThread.return_value.is_alive.return_value = True
 
         self.manager.connect_to_broker(address="1.2.3.4", port=1883)
-        
+
         # Assert start was NOT called again
         MockThread.return_value.start.assert_called_once()
-        
+
         # Assert that the warning was logged
         MockLogger.warning.assert_called_once_with("MQTT: Connection attempt while already running.")
 

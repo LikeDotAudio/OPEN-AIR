@@ -28,20 +28,23 @@
 
 import tkinter as tk
 from tkinter import ttk
+
 from oaComBroker.Core.event_bus import event_bus
+from oaLogging.Methods.matrix_gate import matrix_log
+
 from ....Core.state import state_manager
 from ....FileReaders.grab_bag_loader import GrabBagLoader
-from oaLogging.Methods.matrix_gate import matrix_log
+from ...mixins.layout_tools_mixin import LayoutToolsMixin
+from ...mixins.property_renderer_mixin import PropertyRendererMixin
+
+# --- MIXINS (To be modularized next phase) ---
+from ...mixins.structural_mixin import StructuralManagerMixin
 
 # --- MODULAR IMPORTS ---
 from .Interface.properties_ui import PropertiesUI
 from .Managers.properties_refresh_manager import PropertiesRefreshManager
 from .Methods.path_resolver import normalize_path
 
-# --- MIXINS (To be modularized next phase) ---
-from ...mixins.structural_mixin import StructuralManagerMixin
-from ...mixins.layout_tools_mixin import LayoutToolsMixin
-from ...mixins.property_renderer_mixin import PropertyRendererMixin
 
 class ElementProperties(
     tk.Frame,
@@ -54,7 +57,7 @@ class ElementProperties(
     def __init__(self, parent, library_cache=None, *args, **kwargs):
         kwargs.pop("bg", None)
         super().__init__(parent, bg="#2b2b2b", *args, **kwargs)
-        
+
         self.focused_path = None
         self._refresh_job = None
         self.library = library_cache if library_cache is not None else GrabBagLoader().scan_library()
@@ -77,7 +80,7 @@ class ElementProperties(
 
     def _setup_styles(self):
         style = ttk.Style()
-        style.configure("Property.TEntry", fieldbackground="#1e1e1e", foreground="#dcdcdc", 
+        style.configure("Property.TEntry", fieldbackground="#1e1e1e", foreground="#dcdcdc",
                         insertcolor="white", bordercolor="#444444", font=("Arial", 8))
 
     def highlight_item(self, element_id):
@@ -96,17 +99,17 @@ class ElementProperties(
 
     def _on_focus_requested(self, path, source=None):
         if not self.winfo_exists(): return
-        
+
         clean_path = normalize_path(path, state_manager)
         self.focused_path = clean_path
-        
+
         matrix_log("ui", "gui_builder", "element_properties", f"🖱️🖱️🖱️ [ACTION] ElementProperties: Focus synchronization for path: {path} (Clean: {clean_path})", "INFO")
         self._refresh_content()
 
     def launch_bespoke_editor(self):
         """Dynamically loads and launches the bespoke editor for the selected element."""
         if not self.focused_path: return
-        
+
         info = self.refresh_mgr.bespoke_editor_info
         if not info: return
 
@@ -129,7 +132,7 @@ class ElementProperties(
 
             # 3. Get Current Data
             config_data = state_manager.get_value_at_path(self.focused_path)
-            
+
             # 4. Define Save Callback
             def on_bespoke_save(new_config):
                 matrix_log("ui", "gui_builder", "element_properties", f"💾💾💾 [SAVE] Bespoke Editor: Applying changes to {self.focused_path}", "SUCCESS")

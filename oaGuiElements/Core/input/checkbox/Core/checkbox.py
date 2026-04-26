@@ -4,27 +4,22 @@
 #
 # Description: checkbox/dynamic_guimake_checkbox.py
 
+import inspect
 import os
-from oaLogging.Methods.matrix_gate import matrix_log
-import inspect
 import tkinter as tk
-from tkinter import ttk
-import inspect
-import orjson
 
 # --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
-from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
-from oaGuiBuilder.Core.base_widget_creator import BaseWidgetCreator
 from oaGui.Methods.i18n_utils import get_text
+from oaGuiBuilder.Core.base_widget_creator import BaseWidgetCreator
 from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
+from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 
 # --- Global Scope Variables ---
 current_file = f"{os.path.basename(__file__)}"
@@ -44,7 +39,7 @@ class BuilderCheckboxCreator(BaseWidgetCreator, TransparencyMixin):
         current_function_name = inspect.currentframe().f_code.co_name
         config = config_data
         label = get_text(config.get('label_active')) or get_text(config.get('label'), "")
-        
+
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬 Entering _assemble_ui for '{label}'.", level="DEBUG")
 
         try:
@@ -57,7 +52,7 @@ class BuilderCheckboxCreator(BaseWidgetCreator, TransparencyMixin):
                 height=30,
                 width=150
             )
-            
+
             # We use a BooleanVar to track the state of the checkbox.
             initial_value = bool(config.get("value", False))
             state_var = kwargs.get("variable") or tk.BooleanVar(master=parent_widget, value=initial_value)
@@ -81,28 +76,28 @@ class BuilderCheckboxCreator(BaseWidgetCreator, TransparencyMixin):
                 current_state = state_var.get()
                 box_size = 16
                 bx, by = 10, h/2 - box_size/2
-                
+
                 # Draw Box
                 canvas.create_rectangle(
-                    bx, by, bx + box_size, by + box_size, 
+                    bx, by, bx + box_size, by + box_size,
                     outline="white", width=1, tags="vu_element"
                 )
-                
+
                 if current_state:
                     # Draw Checkmark
                     canvas.create_line(
-                        bx+3, by+box_size/2, bx+box_size/2, by+box_size-3, 
+                        bx+3, by+box_size/2, bx+box_size/2, by+box_size-3,
                         fill="#00ff00", width=2, tags="vu_element"
                     )
                     canvas.create_line(
-                        bx+box_size/2, by+box_size-3, bx+box_size-3, by+3, 
+                        bx+box_size/2, by+box_size-3, bx+box_size-3, by+3,
                         fill="#00ff00", width=2, tags="vu_element"
                     )
 
                 # Draw Label
                 canvas.create_text(
-                    bx + box_size + 10, h/2, text=get_label_text(), 
-                    fill="white", font=("Helvetica", 9), anchor="w", 
+                    bx + box_size + 10, h/2, text=get_label_text(),
+                    fill="white", font=("Helvetica", 9), anchor="w",
                     tags="industrial_text"
                 )
 

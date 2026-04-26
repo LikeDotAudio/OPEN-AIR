@@ -1,29 +1,28 @@
 # oaGuiElements/Core/metering/meter_modifyer.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 20260322.1130.1
 #
 # Description: Provides utility functions for modifying meter appearance and geometry.
 
-import tkinter as tk
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
+import tkinter as tk
+
+from oaLogging.Methods.matrix_gate import matrix_log
+
 try:
     from PIL import Image, ImageDraw, ImageTk
 except ImportError:
-    from tkinter import Image
     ImageDraw = None
     ImageTk = None
-import math
 from loguru import logger
 
-# --- Specialized Modules ---
-from oaGuiElements.Core.metering.meter_needle.cosmetics.lens import BezelLens
-from oaGuiElements.Core.metering.meter_needle.cosmetics.mask import BezelMask
 from oaGuiElements.Core.metering.meter_needle.cosmetics.bezel import BezelOverlay
+from oaGuiElements.Core.metering.meter_needle.cosmetics.geometry import BezelGeometry  # Added import for BezelGeometry
 from oaGuiElements.Core.metering.meter_needle.cosmetics.label import BezelLabel
 from oaGuiElements.Core.metering.meter_needle.cosmetics.lighting_overlay import VintageLightingGenerator
-from oaGuiElements.Core.metering.meter_needle.cosmetics.geometry import BezelGeometry # Added import for BezelGeometry
+
+# --- Specialized Modules ---
+from oaGuiElements.Core.metering.meter_needle.cosmetics.mask import BezelMask
 
 # --- Define BezelBackground locally if it's not found ---
 # This is a placeholder implementation based on the usage and geometry.py
@@ -46,8 +45,8 @@ if not hasattr(tk.Canvas, 'BezelBackground'): # Check if BezelBackground is alre
 
             line_width = int(style_overrides.get("bezel_width", 12))
             # Use a default background color if not specified in cosmetics
-            fill_color = cosmetics.get("colors", {}).get("background", "#2b2b2b") 
-            
+            fill_color = cosmetics.get("colors", {}).get("background", "#2b2b2b")
+
             try:
                 # Get points for the bezel shape using BezelGeometry
                 # Note: shrink_px is not typically used for the background fill itself,
@@ -58,7 +57,7 @@ if not hasattr(tk.Canvas, 'BezelBackground'): # Check if BezelBackground is alre
                     # Draw the filled polygon on the canvas
                     # Tag it as 'nextgen_background' for Z-ordering
                     background_id = canvas.create_polygon(points, fill=fill_color, outline="", tags="nextgen_background")
-                    
+
                     # Ensure it's drawn behind other elements that might use 'nextgen_background' or similar tags.
                     # For now, assuming default ordering is sufficient or handled by other layers.
                     # If issues arise, explicit tag_lower calls might be needed here.
@@ -66,7 +65,7 @@ if not hasattr(tk.Canvas, 'BezelBackground'): # Check if BezelBackground is alre
                 logger.error(f"Failed to draw BezelBackground for shape '{bezel_shape}': {e}")
     # Attach the locally defined class to the canvas for potential global access if needed elsewhere
     tk.Canvas.BezelBackground = BezelBackground
-    
+
 
 
 class MeterModifier:
@@ -104,14 +103,14 @@ class MeterModifier:
             return
 
         bezel_width = int(style_overrides.get("bezel_width", 12))
-        
+
         # Get lighting config from cosmetics
         lighting_config = cosmetics.get("lighting", {})
-        
+
         # Pass overlay style for hill shadow logic
         style_overrides = cosmetics.get("style_overrides", {})
         lighting_config["overlay_style"] = style_overrides.get("overlay_style", None)
-        
+
         # Default glow color to scale label color if not provided
         if "color" not in lighting_config:
             lighting_config["color"] = cosmetics.get("colors", {}).get("scale_label", "#FFB450")
@@ -119,16 +118,16 @@ class MeterModifier:
         # Cache key needs to include all lighting params
         config_hash = str(sorted(lighting_config.items()))
         cache_key = f"{bezel_shape}_{w}_{h}_{cx}_{cy}_{config_hash}"
-        
+
         if not hasattr(canvas, "lighting_cache"):
             canvas.lighting_cache = {}
-            
+
         if cache_key not in canvas.lighting_cache:
             img = VintageLightingGenerator.photo_image(
                 w, h, bezel_shape, bezel_width, cx, cy, lighting_config
             )
             canvas.lighting_cache[cache_key] = img
-            
+
         photo_image = canvas.lighting_cache[cache_key]
         if photo_image:
             # Place at 0,0 to cover the whole canvas
@@ -142,7 +141,7 @@ class MeterModifier:
 
         # 1. Mask (Bottom cover / Aperture)
         BezelMask.draw(canvas, cx, cy, w, h, cosmetics)
-        
+
         # 2. Bezel Frame (Top outline)
         BezelOverlay.draw(canvas, cx, cy, w, h, cosmetics)
 
@@ -162,7 +161,7 @@ class MeterModifier:
             return
 
         line_width = int(style_overrides.get("bezel_width", 12))
-        
+
         # Cache the masked image to avoid per-frame PIL ops
         # Use id(panel_bg_pil_slice) to detect background changes
         cache_key = f"chassis_mask_{w}_{h}_{cx}_{cy}_{bezel_shape}_{id(canvas.panel_bg_pil_slice)}"
@@ -175,26 +174,26 @@ class MeterModifier:
                 # 1. Create a mask: White (255) is the chassis, Black (0) is the 'hole'
                 mask = Image.new('L', (w, h), 255)
                 draw_mask = ImageDraw.Draw(mask)
-                
+
                 # Use BezelGeometry to get the 'Hole' points
                 # Shrink slightly to ensure no gap between mask and bezel frame
                 shrink_px = line_width / 2.0
                 points, is_smooth = BezelGeometry.get_bezel_points(cx, cy, w, h, bezel_shape, line_width, shrink_px=shrink_px)
-                
+
                 if points:
                     # Draw the hole (Black)
                     draw_mask.polygon(points, fill=0)
-                
+
                 # 2. Extract the panel texture and apply the mask
                 # The mask alpha will hide the 'hole' area
                 chassis_img = canvas.panel_bg_pil_slice.copy().convert("RGBA")
                 if chassis_img.size != (w, h):
                     chassis_img = chassis_img.resize((w, h), Image.Resampling.LANCZOS)
-                
+
                 # Create final image with the mask applied to alpha
                 # ⚡ OPTIMIZATION: putalpha uses mask directly
                 chassis_img.putalpha(mask)
-                
+
                 canvas.chassis_mask_cache[cache_key] = ImageTk.PhotoImage(chassis_img)
             except ImportError:
                 logger.warning("PIL not found, cannot generate chassis mask.")
@@ -209,8 +208,7 @@ class MeterModifier:
         # Ensure it's below needles but above the base patina slice
         canvas.tag_lower(mask_id)
         # If there's a base slice, make sure the mask is ABOVE it
-        try: 
+        try:
             canvas.tag_raise(mask_id, "panel_bg_slice")
         except Exception as e:
-            from oaLogging.Entry import logger
             matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"MeterModifier: Failed to raise mask above panel_bg_slice: {e}", level="TRACE")

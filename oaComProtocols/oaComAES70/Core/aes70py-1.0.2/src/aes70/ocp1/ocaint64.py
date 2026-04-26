@@ -1,7 +1,7 @@
+from struct import pack_into, unpack_from
 from typing import Any
 
-from aes70.ocp1.createtype import create_type, Type
-from struct import pack_into, unpack_from
+from aes70.ocp1.createtype import Type, create_type
 
 
 def int64_decode_from(data: bytearray, pos: int) -> tuple[Any, ...]:

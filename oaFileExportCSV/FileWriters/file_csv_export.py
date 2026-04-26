@@ -1,18 +1,17 @@
-from oaLogging.Methods.matrix_gate import matrix_log
 # FileWriters/file_csv_export.py
 # Author: Anthony Peter Kuzub
 # Version: 20250821.200641.1
 #
 # Description: exporters/worker_file_csv_export.py
-
 import csv
 import inspect
 import os
 
-from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import matrix_log
+
 LOCAL_DEBUG = False
 
 app_constants = Config.get_instance()  # Get the singleton instance
@@ -79,7 +78,7 @@ class CsvExportUtility:
 
             matrix_log("ui", "exporter", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"✅ Data successfully exported to {file_path}", "SUCCESS")
 
-        except Exception as e:
+        except Exception:
             logger.exception("❌ Error in {current_function_name}")
             if LOCAL_DEBUG:
                 logger.exception("❌🔴 Arrr, the code be capsized! The error be")

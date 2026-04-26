@@ -4,14 +4,15 @@
 #
 # Description: Brief summary of purpose
 
-from PIL import Image
 from loguru import logger
+
 from oaGuiElements.Constants.gui_constants import (
+    COLOR_BLACK_RGB,
     COLOR_GREY_128,
     COLOR_GREY_128_ALPHA,
-    COLOR_BLACK_RGB,
-    COLOR_TRANSPARENT_HEX
+    COLOR_TRANSPARENT_HEX,
 )
+
 
 class PanelUtils:
     @staticmethod

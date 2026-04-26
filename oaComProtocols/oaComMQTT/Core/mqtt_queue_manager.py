@@ -7,10 +7,9 @@
 
 import queue
 import threading
-from typing import Optional, Callable
 
 # Standard Debug Logging Setup
-from oaLogging.Core.logger import MQTT_LOGGER
+
 
 class MqttQueueManager:
     """
@@ -27,7 +26,7 @@ class MqttQueueManager:
                               This is needed to signal the worker for pending operations.
         """
         self._async_worker = async_worker_ref
-        
+
         # Internal Queues & State
         self._publish_queue = queue.Queue()
         self._subscribe_queue = queue.Queue()

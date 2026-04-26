@@ -1,6 +1,6 @@
 import pathlib
-import os
 import sys
+
 # 1. Setup Environment
 current_dir = pathlib.Path(__file__).resolve().parent
 project_root = current_dir.parent.parent.parent
@@ -8,7 +8,8 @@ if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
 import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
+import json
+
 # oaTests/Methods/FlameGraph/flame_manager.py
 #
 # Main manager for the OpenAir Performance Intelligence Engine.
@@ -34,20 +35,21 @@ from oaLogging.Methods.matrix_gate import matrix_log
 # Architectural Role:
 # - Performance Lifecycle Manager: Controls start/stop of profiling hooks.
 # - Intelligence Synthesizer: Aggregates raw stats into human-readable reports.
-
 import threading
-import json
+
 from loguru import logger
 
 # 2. Import Modular Core (using new naming convention)
-from oaTests.Methods.FlameGraph.flame_capture import MultiThreadProfiler
-from oaTests.Methods.FlameGraph.flame_graph import generate_flamegraph_with_flameprof
-from oaTests.Methods.FlameGraph.flame_events import process_stats_for_ui, generate_table_rows
-from oaTests.Methods.FlameGraph.flame_wall_shame import generate_wall_of_shame
-from oaTests.Methods.FlameGraph.flame_wall_pity import generate_wall_of_pity
-from oaTests.Methods.FlameGraph.flame_html import generate_final_html
+from oaTests.Methods.FlameGraph.Methods.flame_capture import MultiThreadProfiler
+from oaTests.Methods.FlameGraph.Methods.flame_events import generate_table_rows, process_stats_for_ui
+from oaTests.Methods.FlameGraph.Methods.flame_graph import generate_flamegraph_with_flameprof
+from oaTests.Methods.FlameGraph.Methods.flame_html import generate_final_html
+from oaTests.Methods.FlameGraph.Methods.flame_wall_pity import generate_wall_of_pity
+from oaTests.Methods.FlameGraph.Methods.flame_wall_shame import generate_wall_of_shame
 
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import matrix_log
+
 app_constants = Config.get_instance()
 
 # Global lock to prevent multiple synthesis runs
@@ -61,7 +63,7 @@ class FlameManager:
             self.data_dir = pathlib.Path(output_dir)
         else:
             self.data_dir = project_root / "oaDataLogs" / "FlameGraph"
-        
+
         self.data_dir.mkdir(parents=True, exist_ok=True)
         self.mtp = MultiThreadProfiler()
         self.report_generated = False
@@ -79,14 +81,14 @@ class FlameManager:
     def generate_report(self):
         """Synthesizes the final intelligence report from collected stats."""
         global report_generated
-        
+
         with report_lock:
             if self.report_generated:
                 return None
             self.report_generated = True
 
         matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🔥 [FLAME] Synthesizing Intelligence Report...", "INFO")
-        
+
         profile_stats = self.mtp.get_stats()
         svg_file = self.data_dir / "flamegraph.svg"
         html_file = self.data_dir / "flamegraph.html"

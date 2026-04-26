@@ -5,13 +5,10 @@
 # Description: Gatekeeper for the oaComREST module.
 
 
-import sys
 import os
 import pathlib
-import threading
-import time
 import subprocess
-import argparse
+import sys
 from pathlib import Path
 
 # Ensure project root is in sys.path for direct execution
@@ -21,8 +18,6 @@ if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
 from oaLogging.Methods.matrix_gate import matrix_log
-from oaConfigurationManager.FileReaders.config_reader import Config
-from oaOchestration.Core.path_initializer import initialize_paths, DATA_LOGS_DIR
 
 # --- Core Components ---
 # These managers will be instantiated and managed by the ComProtocolManager
@@ -61,7 +56,7 @@ def get_rest_manager(state_cache_manager=None, mqtt_connection_manager=None, sub
         from oaComProtocols.oaComREST.Managers.rest_manager import RESTManager
         # Provide mocks if not supplied by the orchestrator
         state_cache = state_cache_manager if state_cache_manager else MockStateCache()
-        
+
         _rest_manager = RESTManager(
             state_cache_manager=state_cache,
             protocol_router=protocol_router
@@ -84,7 +79,7 @@ def start(state_cache_manager=None, mqtt_connection_manager=None, subscriber_rou
     Initializes and starts the REST API service, accepting external dependencies.
     """
     matrix_log("comms", "rest", "start", "🚀 [REST] Starting REST API service...", "INFO")
-    
+
     manager = get_rest_manager(
         state_cache_manager=state_cache_manager,
         mqtt_connection_manager=mqtt_connection_manager,
@@ -92,7 +87,7 @@ def start(state_cache_manager=None, mqtt_connection_manager=None, subscriber_rou
         protocol_router=protocol_router,
         run_bridge=run_bridge
     )
-    
+
     # The start() method of RESTManager handles internal initialization (like FastAPI app)
     # and launching the Uvicorn worker.
     manager.start()
@@ -134,15 +129,13 @@ def run_tests():
     Discover and run tests in the local Tests/ directory using unittest via subprocess.
     Ensures isolation and proper sys.path handling.
     """
-    import subprocess
     import sys
-    import os
     from pathlib import Path
 
     print(f"📡📥📥 [TEST] {Path(__file__).parent.name}: Starting automated test discovery...")
     current_dir = Path(__file__).parent.absolute()
     test_dir = current_dir / "Tests"
-    
+
     if not test_dir.exists():
         return True
 
@@ -151,10 +144,10 @@ def run_tests():
         if (project_root / "GEMINI.md").exists():
             break
         project_root = project_root.parent
-    
+
     env = os.environ.copy()
     env["PYTHONPATH"] = str(project_root) + os.pathsep + env.get("PYTHONPATH", "")
-    
+
     try:
         rel_test_dir = os.path.relpath(test_dir, project_root)
         result = subprocess.run(
@@ -183,7 +176,7 @@ if __name__ == "__main__":
     if not run_tests():
         print("❌ [CRITICAL] Tests failed. Aborting execution.")
         sys.exit(1)
-    
+
     # Standalone execution logic
     if len(sys.argv) > 1:
         cmd = sys.argv[1].lower()

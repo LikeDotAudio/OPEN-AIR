@@ -2,10 +2,9 @@
 This file is part of aes70py.
 This file has been generated.
 """
+from ..types.ocamediaclockrate import OcaMediaClockRate as type
 from .ocafloat32 import OcaFloat32
 from .struct import Struct
-
-from ..types.ocamediaclockrate import OcaMediaClockRate as type
 
 OcaMediaClockRate = Struct(
   {

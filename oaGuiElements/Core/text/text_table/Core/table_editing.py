@@ -1,31 +1,21 @@
 # text_table/table_editing.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 20250821.200641.1
 #
 # Description: text_table/table_editing_manager.py
 
-import tkinter as tk
-from oaLogging.Methods.matrix_gate import matrix_log
-import inspect
-from tkinter import ttk
-import orjson
 import inspect
 
 # --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory
-from loguru import logger
-
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
-from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic
-from oaComProtocols.oaComMQTT.Core import mqtt_publisher_service
 from .table_editing_inplace_mixin import TableEditingInplaceMixin
-from .table_editing_undo_mixin import TableEditingUndoMixin
 from .table_editing_row_ops_mixin import TableEditingRowOpsMixin
 from .table_editing_sort_mixin import TableEditingSortMixin
+from .table_editing_undo_mixin import TableEditingUndoMixin
 
 
 class TableEditingManager(
@@ -60,10 +50,10 @@ class TableEditingManager(
 
         # Bindings specific to TableEditingManager (which are now methods of mixins)
         self.tree.bind("<Double-1>", self.on_double_click)
-        
+
         if allow_delete:
             self.tree.bind("<Delete>", self.delete_selection)
-        
+
         if allow_undo:
             self.tree.bind("<Control-z>", self.undo)
 

@@ -1,5 +1,4 @@
 # Managers/gui_re.py
-from oaGui.Methods.i18n_utils import get_text
 #
 # Handles the destruction and re-initialization of the GUI Frame.
 # Implements optimized cleanup and batched creation for high-speed updates.
@@ -16,24 +15,23 @@ from oaGui.Methods.i18n_utils import get_text
 #
 # Version 20260330.1600.1
 
-import tkinter as tk
 from oaLogging.Methods.matrix_gate import is_debug_allowed, matrix_log
+
 
 def _is_debug():
     return is_debug_allowed(system="UI", element="GUI_BUILDER")
 
-from oaConfigurationManager.FileReaders.config_reader import Config
 
 class GuiRebuilderMixin:
     """Mixin for destroying and recreating the GUI content."""
 
     def _force_rebuild_gui(self):
         """Forces a complete rebuild by clearing the hash."""
-        matrix_log("ui", "gui_re", "_force_rebuild_gui", 
+        matrix_log("ui", "gui_re", "_force_rebuild_gui",
                    f"♻️ Rebuilder: FORCING GUI rebuild for '{getattr(self, 'tab_name', 'Unknown')}'", "INFO")
-        
-        from oaGuiManager.FileReaders.blueprint_loader import BlueprintLoader
+
         from oaGuiManager.Core.factory.asset_cache import AssetCacheManager
+        from oaGuiManager.FileReaders.blueprint_loader import BlueprintLoader
         BlueprintLoader.invalidate_cache()
         AssetCacheManager.invalidate_cache()
 
@@ -44,9 +42,9 @@ class GuiRebuilderMixin:
         """Rebuilds the GUI by destroying existing widgets and recreating them."""
         if not self.winfo_exists(): return
 
-        matrix_log("ui", "gui_re", "_rebuild_gui", 
+        matrix_log("ui", "gui_re", "_rebuild_gui",
                    f"♻️ Rebuilder: Starting destruction of current UI for '{getattr(self, 'tab_name', 'Unknown')}'", "DEBUG")
-        
+
         self._is_rebuilding = True
 
         from oaGuiManager.Core.transparency.transparency import TransparencyManager
@@ -59,22 +57,22 @@ class GuiRebuilderMixin:
                     continue
                 child.destroy()
                 destroyed_count += 1
-        
+
         matrix_log("ui", "gui_re", "_rebuild_gui", f"  └─ 💥 Destroyed {destroyed_count} widgets.", "TRACE")
 
         self.topic_widgets.clear()
 
         def on_build_complete():
             if not self.winfo_exists(): return
-            matrix_log("ui", "gui_re", "on_build_complete", 
+            matrix_log("ui", "gui_re", "on_build_complete",
                        f"♻️🆗✅ [RENDER] Rebuilder: Build sequence FINISHED for '{getattr(self, 'tab_name', 'Unknown')}'", "INFO")
-            
+
 
             def _final_settle():
                 if not self.winfo_exists(): return
                 if hasattr(self, '_perform_canvas_resize') and hasattr(self, 'canvas') and self.canvas.winfo_exists():
                     self._perform_canvas_resize(self.canvas.winfo_width())
-                
+
                 if hasattr(self, '_trigger_reslice_all'):
                     self._trigger_reslice_all()
 
@@ -88,13 +86,13 @@ class GuiRebuilderMixin:
                 if not self.winfo_exists(): return
                 _final_settle()
                 self._is_rebuilding = False
-            
+
             self.after(200, _wrap_settle)
 
         matrix_log("ui", "gui_re", "_rebuild_gui", "♻️ Rebuilder: Handing off to BatchBuilder for creation pass.", "DEBUG")
-        
+
         # ⚡ ROOT PATH RESOLUTION
-        # Determine the initial prefix. If data is the whole project state, 
+        # Determine the initial prefix. If data is the whole project state,
         # we need the root key as prefix.
         path_prefix = ""
         if isinstance(self.config_data, dict) and len(self.config_data) == 1:
@@ -104,8 +102,8 @@ class GuiRebuilderMixin:
 
         if hasattr(self, '_create_dynamic_widgets'):
             self._create_dynamic_widgets(
-                self.scroll_frame, 
-                self.config_data, 
+                self.scroll_frame,
+                self.config_data,
                 path_prefix=path_prefix,
                 on_complete=on_build_complete
             )

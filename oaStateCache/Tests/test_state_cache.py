@@ -6,7 +6,9 @@
 
 import unittest
 from unittest.mock import MagicMock, patch
+
 from oaStateCache.Core.state_cache import StateRegistry
+
 
 class TestStateCache(unittest.TestCase):
     def setUp(self):
@@ -19,16 +21,16 @@ class TestStateCache(unittest.TestCase):
         # Mock dependencies
         self.registry.save_engine = MagicMock()
         self.registry.observers = MagicMock()
-        
+
         with patch("oaComBroker.Core.protocol_router.manager.ProtocolRouter.get_instance") as mock_router_get:
             mock_router = mock_router_get.return_value
             with patch("oaStateCache.Core.manifest.builder.create_manifest", return_value={"value": 42}):
-                
+
                 self.registry.handle_external_update("TEST/TOPIC", 42, source="GUI")
-                
+
                 # CHECK: Cached
                 cached_manifest = self.registry.rust_cache.get("TEST/TOPIC")
-                
+
                 self.assertIsNotNone(cached_manifest)
                 self.assertEqual(cached_manifest["value"], 42)
                 # CHECK: Persisted

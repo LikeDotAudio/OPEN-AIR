@@ -2,8 +2,8 @@
 # Author: Gemini (Collaborator)
 # Version: 20260405.1315.9
 
+
 import requests
-import time
 
 # Dependencies on other modules/globals passed via orchestrator
 # NODE, DEVICE, SOURCES, FLOWS, SENDERS, REGISTRAR_URL, NODE_ID, DEVICE_ID will be passed as arguments.
@@ -18,7 +18,7 @@ def post_resource(registrar_url, resource_type, resource_data, timeout=2):
     global _registrar_available
     resource_url = f"{registrar_url}/resource"
     payload = {"type": resource_type, "data": resource_data}
-    
+
     try:
         response = requests.post(resource_url, json=payload, timeout=timeout)
         if response.status_code not in (200, 201):
@@ -65,20 +65,20 @@ def register_all_resources(
 
     # Register Node
     post_resource(registrar_url, "node", node_resource, timeout)
-    
+
     # Register Device
     post_resource(registrar_url, "device", device_resource, timeout)
-    
+
     # Register Sources
     for src_id, src_data in sources_dict.items():
         post_resource(registrar_url, "source", src_data, timeout)
-        
+
     # Register Flows
     for flow_id, flow_data in flows_dict.items():
         post_resource(registrar_url, "flow", flow_data, timeout)
-        
+
     # Register Senders
     for sender_id, sender_data in senders_dict.items():
         post_resource(registrar_url, "sender", sender_data, timeout)
-        
+
     print("[RegistrationManager] Finished attempting to register all resources.")

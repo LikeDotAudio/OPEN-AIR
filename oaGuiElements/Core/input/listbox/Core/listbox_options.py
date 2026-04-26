@@ -6,7 +6,9 @@
 
 import orjson
 from loguru import logger
+
 from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import TOPIC_DELIMITER
+
 
 class ListboxOptionsManager:
     """Manages the internal model of listbox options and processes remote MQTT updates."""
@@ -24,10 +26,10 @@ class ListboxOptionsManager:
 
             opt_key, prop = parts[0], parts[1]
             if opt_key not in self.options_map: self.options_map[opt_key] = {"active": "true"}
-            
+
             if prop in ["active", "selected"]: self.options_map[opt_key][prop] = str(value).lower()
             else: self.options_map[opt_key][prop] = value
-            
+
             return opt_key if (prop == "selected" and value is True) else True
         except Exception as e:
             logger.error(f"❌ Listbox options update failed: {e}"); return None

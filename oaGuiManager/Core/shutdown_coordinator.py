@@ -4,11 +4,14 @@
 #
 # Description: Brief summary of purpose
 
-import sys
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
+import sys
 import threading
+
 from loguru import logger
+
+from oaLogging.Methods.matrix_gate import matrix_log
+
 
 class ShutdownCoordinator:
     """Manages the clean, sequential shutdown of all background services."""
@@ -30,7 +33,7 @@ class ShutdownCoordinator:
                     elif hasattr(instance, "disconnect"): instance.disconnect()
                 except Exception as e:
                     logger.warning(f"⚠️ Error shutting down {name}: {e}")
-        
+
         # --- FINAL LOGGING FLUSH ---
         from oaLogging.Core.logger import shutdown_logging
         shutdown_logging()
@@ -39,25 +42,25 @@ class ShutdownCoordinator:
         """Gracefully terminates all UI and Communication sub-processes via a thread."""
         if self._shutdown_in_progress:
             return
-        
+
         # ⚡ V3.1.26 PERSISTENCE: Save window position and size before closing
         from .ui_window import UIWindowManager
         UIWindowManager.save_window_geometry(self.root)
 
         self._shutdown_in_progress = True
-        
+
         # ⚡ USER INTENT: Log clearly that the exit was requested by the user
         root_name = getattr(self.root, 'winfo_name', lambda: str(self.root))()
         matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"👋 [EXIT] User is requesting to exit application (Root: {root_name}).", level="INFO")
-        
+
         # ⚡ DEBUG: Identify who called on_closing
         if self.debug_enabled:
             stack = inspect.stack()
             caller_info = "\n".join([f"  - {s.filename}:{s.lineno} in {s.function}" for s in stack[1:5]])
             matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"🖥️🎨 [UI] Initiating shutdown... Caller stack:\n{caller_info}", level="DEBUG")
-        
+
         self.root._shutdown = True
-        
+
         # ⚡ THREADED SHUTDOWN: Run manager stops in a separate thread to prevent UI hang
         def _threaded_shutdown():
             self._stop_all_managers()
@@ -75,11 +78,11 @@ class ShutdownCoordinator:
         if self._shutdown_in_progress:
             return
         self._shutdown_in_progress = True
-        
+
         matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, "🛑 [EXIT] Synchronous shutdown triggered.", level="INFO")
         self._stop_all_managers()
         matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, "🖥️🎨 [UI] Shutdown complete. Quitting mainloop.", level="DEBUG")
-        
+
         try:
             self.root.after(0, self.root.quit)
         except Exception:

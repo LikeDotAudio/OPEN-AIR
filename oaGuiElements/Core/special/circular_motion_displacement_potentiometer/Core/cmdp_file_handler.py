@@ -1,20 +1,16 @@
 # circular_motion_displacement_potentiometer/cmdp_file_handler.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: Brief summary of purpose
 
-import orjson
-from oaLogging.Methods.matrix_gate import matrix_log
-import inspect
-import pathlib
 from datetime import datetime
 from tkinter import filedialog
-from oaLogging.Core.logger import initialize_logging, set_log_directory
-from loguru import logger
-from oaOchestration.Constants.project_paths import GLOBAL_PROJECT_ROOT
 
+import orjson
+from loguru import logger
+
+from oaOchestration.Constants.project_paths import GLOBAL_PROJECT_ROOT
 
 
 class CMDPFileHandler:
@@ -36,7 +32,7 @@ class CMDPFileHandler:
                 return None
             target = find_data(data)
             if not target: return
-            
+
             # 1. Update Channels
             for ch_data in target.get("channels", []):
                 idx = ch_data.get("id", 0) - 1
@@ -46,23 +42,23 @@ class CMDPFileHandler:
                     f.rot_var.set(ch_data.get("level", 50.0))
                     f.angle_var.set(ch_data.get("angle", 0.0))
                     f.mute_var.set(ch_data.get("mute", False))
-                    
+
                     if self.w.mixin_ref.state_mirror_engine:
                         sme = self.w.mixin_ref.state_mirror_engine
                         fp = f"{self.w.path}/ch{idx}"
                         for p_name in ["value", "rot", "angle", "mute"]:
                             sme.broadcast_gui_change_to_mqtt(f"{fp}/{p_name}")
                     self.w.update_tree(f)
-            
+
             # 2. Update Group Metadata
             for g_cfg in target.get("group_configs", []):
                 gn = g_cfg.get("name")
                 if gn in self.w.group_name_vars:
                     self.w.group_vars[gn].set(g_cfg.get("visible", True))
                     self.w.group_color_vars[gn].set(g_cfg.get("color", "#00FF00"))
-            
+
             self.w.refresh_pop_tree()
-        except Exception as e:
+        except Exception:
             logger.exception("❌ Error importing CMDP JSON")
 
     def export_json(self):
@@ -73,7 +69,7 @@ class CMDPFileHandler:
                 "color": self.w.group_color_vars[gn].get(),
                 "visible": self.w.group_vars[gn].get()
             })
-        
+
         channels = []
         for f in self.w.faders:
             channels.append({
@@ -85,13 +81,13 @@ class CMDPFileHandler:
                 "depth": f.val_var.get(),
                 "mute": f.mute_var.get()
             })
-            
+
         inner = self.w.widget_config.copy()
         inner["group_configs"] = group_configs
         inner["channels"] = channels
         # Cleanup
         for k in ["state_mirror_engine", "subscriber_router"]: inner.pop(k, None)
-        
+
         full_data = {
             "mdp_demo": {
                 "type": "OcaBlock",
@@ -100,11 +96,11 @@ class CMDPFileHandler:
                 "fields": {"cmdp_1": inner}
             }
         }
-        
+
         # ⚡ OPTIMIZATION: Use GLOBAL_PROJECT_ROOT instead of Path.cwd()
         default_dir = GLOBAL_PROJECT_ROOT / "DATA" / "state"
         if not default_dir.exists(): default_dir.mkdir(parents=True, exist_ok=True)
-        
+
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         p = filedialog.asksaveasfilename(
             initialdir=str(default_dir),
@@ -116,5 +112,5 @@ class CMDPFileHandler:
             try:
                 with open(p, "wb") as f:
                     f.write(orjson.dumps(full_data, option=orjson.OPT_INDENT_2))
-            except Exception as e:
+            except Exception:
                 logger.exception("❌ Error exporting CMDP JSON")

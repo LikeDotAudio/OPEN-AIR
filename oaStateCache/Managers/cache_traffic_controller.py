@@ -4,15 +4,11 @@
 #
 # Description: State_Cache/cache_traffic_controller.py
 
-import orjson
-import inspect
-from typing import Dict, Any, Tuple, Optional
+from typing import Any
+
 from oaComProtocols.oaComMQTT.Core.mqtt_message import MqttMessage
 
 # --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory
-from loguru import logger
-
 from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
@@ -33,13 +29,13 @@ current_version_hash = 20251230 * 230300 * 1
 #                                  and the new payload (if an update is needed, None otherwise).
 def process_traffic(
     message: MqttMessage, current_cache: Any
-) -> Tuple[bool, Optional[Dict]]:
+) -> tuple[bool, dict | None]:
     """
     Decodes payload and determines if update is needed.
     Purity check is performed on the 'value' only, but METADATA is preserved.
     """
     topic = message.topic
-    
+
     # --- HEARTBEAT FILTER (V3.0.0 Refinement) ---
     # Exclude high-frequency/volatile data from the persistent state cache.
     # This prevents 'Heartbeat' or 'Status' messages from thrashing disk I/O.
@@ -72,7 +68,7 @@ def process_traffic(
         if state_comparator.should_update(topic, compare_val, current_cache):
             # ⚡ RETURN FULL PAYLOAD: We need GUID/TS for the Investigation Engine
             return True, full_payload
-        
+
         return False, None
 
     except Exception:

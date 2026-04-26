@@ -6,6 +6,7 @@
 
 from ..Constants.constants import Splinker_debug_enabled, splinker_logger
 
+
 def update_splink(self, splink_id, new_data):
     """Updates an existing splink with new configuration."""
     for i, s in enumerate(self.splinks):

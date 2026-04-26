@@ -4,8 +4,9 @@
 #
 # Description: Brief summary of purpose
 
-import tkinter as tk
 import sys
+import tkinter as tk
+
 
 class HorizontalFaderInteractionMixin:
     """Handles mouse, drag, scroll, and manual entry for the horizontal fader."""

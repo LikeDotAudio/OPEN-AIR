@@ -1,23 +1,25 @@
 from __future__ import annotations
-from typing import List, Union
-import traceback
-import inspect
 
-from .client_connection import ClientConnection
-from ..events import Events
-from .object_base import ObjectBase
-from .control_classes.ocadevicemanager import OcaDeviceManager
-from  .control_classes.ocablock import OcaBlock
-from .tree_to_rolemap import tree_to_rolemap
-from ..types.ocamanagerdefaultobjectnumbers import OcaManagerDefaultObjectNumbers
-import aes70.controller.control_classes as RemoteControlClasses
+import inspect
 import logging
+import traceback
+from typing import Union
+
+import aes70.controller.control_classes as RemoteControlClasses
+
+from ..events import Events
+from ..types.ocamanagerdefaultobjectnumbers import OcaManagerDefaultObjectNumbers
+from .client_connection import ClientConnection
+from .control_classes.ocablock import OcaBlock
+from .control_classes.ocadevicemanager import OcaDeviceManager
+from .object_base import ObjectBase
+from .tree_to_rolemap import tree_to_rolemap
 
 logger = logging.getLogger(__name__)
 
 # Type definitions
-DeviceTreeNode = Union[ObjectBase, List["DeviceTreeNode"]]
-DeviceTree = List[DeviceTreeNode]
+DeviceTreeNode = Union[ObjectBase, list["DeviceTreeNode"]]
+DeviceTree = list[DeviceTreeNode]
 
 """
 Controller class for a remote OCA device.
@@ -328,13 +330,13 @@ class RemoteDevice(Events):
         # OcaBlockMember
         #print("resolve object ", o)
         if hasattr(o, 'MemberObjectIdentification'):
-            return self.resolve_object(getattr(o, "MemberObjectIdentification"))
+            return self.resolve_object(o.MemberObjectIdentification)
 
         # OcaObjectIdentification
         if hasattr(o, 'ONo') and hasattr(o, 'ClassIdentification'):
             #print("ObjectIdentification")
-            ono = getattr(o,"ONo")
-            id_val = getattr(o, "ClassIdentification")
+            ono = o.ONo
+            id_val = o.ClassIdentification
             return self.allocate(self.find_best_class(id_val), ono)
 
         raise TypeError('Expected OcaObjectIdentification or OcaBlockMember')

@@ -5,16 +5,11 @@
 # Description: This module processes and groups marker data by Zone, Group, and Device for display in the Showtime tab.
 
 import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
-import inspect
 from collections import defaultdict
-import os
 
 # --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory
-from loguru import logger
-
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()  # Get the singleton instance
 

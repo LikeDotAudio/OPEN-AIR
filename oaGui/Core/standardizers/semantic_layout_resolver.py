@@ -23,7 +23,7 @@ class SemanticLayoutResolver:
         stretch = geometry.get("stretch", "").lower()
         anchor = geometry.get("anchor", "").lower()
         align = geometry.get("align", "").lower()
-        
+
         # 1. Handle Stretching (Size Change)
         if stretch in ["width", "horizontal", "ew"]:
             sticky_parts.update(["e", "w"])
@@ -31,11 +31,11 @@ class SemanticLayoutResolver:
             sticky_parts.update(["n", "s"])
         elif stretch in ["both", "all", "fill", "nsew"]:
             sticky_parts.update(["n", "s", "e", "w"])
-            
+
         # 2. Handle Anchoring (Pinned Position)
         for part in cls.ANCHOR_MAP.get(anchor, ""):
             sticky_parts.add(part)
-            
+
         # 3. Handle Alignment (Justification)
         if "e" not in sticky_parts and "w" not in sticky_parts:
             if align in ["left", "west"]: sticky_parts.add("w")
@@ -43,11 +43,11 @@ class SemanticLayoutResolver:
         if "n" not in sticky_parts and "s" not in sticky_parts:
             if align in ["top", "north"]: sticky_parts.add("n")
             if align in ["bottom", "south"]: sticky_parts.add("s")
-            
+
         # 4. Fallback to Deprecated 'sticky'
         if not (stretch or anchor or align) and "sticky" in geometry:
             sticky_parts.update(list(geometry["sticky"].lower()))
-            
+
         # 5. Fixed Size Enforcement
         has_fixed_width = "width" in geometry or "width" in config
         if has_fixed_width and stretch not in ["width", "both", "horizontal", "fill", "nsew"]:

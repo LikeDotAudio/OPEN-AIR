@@ -6,8 +6,10 @@
 # Version: 20260401.1100.1
 
 import unittest
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
+
 from oaSplinker.Methods.pipeline import SplinkPipeline
+
 
 class TestPipelineRust(unittest.TestCase):
     def setUp(self):
@@ -40,7 +42,7 @@ class TestPipelineRust(unittest.TestCase):
 
         pipeline = SplinkPipeline(self.splink_config, self.splinker_manager)
         self.assertIsNotNone(pipeline.rust_pipeline)
-        
+
         # Test scale (50 / 100 * 255 = 127.5)
         out = pipeline.process(50, {})
         self.assertEqual(out, 127.5)
@@ -62,19 +64,19 @@ class TestPipelineRust(unittest.TestCase):
                 }
             }
         ]
-        
+
         pipeline = SplinkPipeline(self.splink_config, self.splinker_manager)
         self.assertIsNotNone(pipeline.rust_pipeline)
-        
+
         state = {}
         # First value passes
         self.assertEqual(pipeline.process(50, state), 50)
         self.assertEqual(state.get("last_deadband_value"), 50)
-        
+
         # Change by 4% (less than 10%) -> should drop (return None)
         self.assertIsNone(pipeline.process(54, state))
         self.assertEqual(state.get("last_deadband_value"), 50)
-        
+
         # Change by 15% (more than 10%) -> should pass
         self.assertEqual(pipeline.process(66, state), 66)
         self.assertEqual(state.get("last_deadband_value"), 66)

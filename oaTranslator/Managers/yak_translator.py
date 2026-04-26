@@ -1,6 +1,6 @@
 # oaTranslator/Managers/yak_translator.py
 #
-# The central translation layer for YAK commands. It loads command 
+# The central translation layer for YAK commands. It loads command
 # definitions, processes triggers, and builds SCPI commands.
 #
 # Author: Anthony Peter Kuzub
@@ -15,11 +15,11 @@
 #
 # Version 20260406.1935.1
 
-import os
-import sys
-from loguru import logger
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
+
+from loguru import logger
+
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- RUST ACCELERATION LAYER (PyO3) ---
 try:
@@ -33,23 +33,21 @@ except Exception as e:
     logger.error(f"❌ [TRANSLATOR] Failed to initialize Rust Core: {e}")
     HAS_RUST = False
 
-import orjson
-import pathlib
-import re
-import time
 import random
-from typing import Any
+
+import orjson
+
 from oaComProtocols.oaComMQTT.Core.mqtt_message import MqttMessage
+from oaConfigurationManager.FileReaders.config_reader import Config
 
 # --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory
 
-from oaConfigurationManager.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
 from oaComProtocols.oaComMQTT.Managers.mqtt_connection import MqttConnectionManager
 from oaComProtocols.oaComMQTT.Managers.mqtt_subscriber_router import MqttSubscriberRouter
 from oaOchestration.Constants.project_paths import YAKETY_YAK_REPO_PATH
+
 
 class YakTranslator:
     """
@@ -95,7 +93,7 @@ class YakTranslator:
         self._load_yak_repository()
         self._setup_mqtt_subscriptions()
 
-        matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, 
+        matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name,
                    "✅ YakTranslator initialized and ready.", level="SUCCESS")
 
     def _load_yak_repository(self):
@@ -114,14 +112,14 @@ class YakTranslator:
         if repo_path.is_file() and repo_path.stat().st_size > 0:
             with open(repo_path, "rb") as f:
                 self.yak_repository = orjson.loads(f.read())
-            
-            matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, 
-                       f"📡📥📥 [CONFIG] YAK repository loaded: {repo_path}", 
+
+            matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name,
+                       f"📡📥📥 [CONFIG] YAK repository loaded: {repo_path}",
                        level="DEBUG")
         else:
             # ⚡ RESILIENCE: Handle missing repository with graceful fallback.
-            matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, 
-                       f"ℹ️ YAK repository missing. Creating default.", 
+            matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name,
+                       "ℹ️ YAK repository missing. Creating default.",
                        level="INFO")
             self.yak_repository = {}
             try:
@@ -136,8 +134,8 @@ class YakTranslator:
         self.subscriber_router.subscribe_to_topic(
             trigger_topic_filter, self._on_yak_trigger_message
         )
-        matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, 
-                   f"🎧 [LISTEN] Subscribed to triggers: '{trigger_topic_filter}'", 
+        matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name,
+                   f"🎧 [LISTEN] Subscribed to triggers: '{trigger_topic_filter}'",
                    level="DEBUG")
 
     def _on_yak_trigger_message(self, message: MqttMessage):
@@ -157,7 +155,7 @@ class YakTranslator:
         """
         topic = message.topic
         payload = message.payload
-        
+
         # Strip the prefix to resolve the relative YAK path hierarchy.
         yak_command_path = topic.replace("OPEN-AIR/yak/commands/", "").split("/")
 
@@ -193,15 +191,15 @@ class YakTranslator:
             "query": is_query,
             "correlation_id": correlation_id,
         }
-        
+
         self.mqtt_util.get_client_instance().publish(
             topic="OPEN-AIR/Proxy/Tx_Inbox",
             payload=orjson.dumps(proxy_payload).decode(),
             qos=0,
             retain=False,
         )
-        
-        matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, 
+
+        matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name,
                    f"📡📤📤 [TRANSLATE] SCPI: '{final_scpi_command}' "
                    f"(ID: {correlation_id})", level="DEBUG")
 
@@ -250,6 +248,6 @@ class YakTranslator:
         """
         if correlation_id in self.command_context_store:
             return self.command_context_store.pop(correlation_id)
-        
+
         logger.error(f"❌ Correlation ID mismatch: {correlation_id}")
         return None

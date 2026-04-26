@@ -5,9 +5,10 @@
 # Description: Tests for the protocol_guard decorator.
 
 import unittest
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 
 from oaOchestration.Managers.protocol_guard import protocol_guard
+
 
 class TestProtocolGuard(unittest.TestCase):
 
@@ -23,7 +24,7 @@ class TestProtocolGuard(unittest.TestCase):
             return x + y
 
         result = successful_func(2, 3)
-        
+
         self.assertEqual(result, 5)
         mock_logger.error.assert_not_called()
 
@@ -39,7 +40,7 @@ class TestProtocolGuard(unittest.TestCase):
             raise ValueError("Something went wrong")
 
         result = failing_func()
-        
+
         self.assertIsNone(result)
         mock_logger.error.assert_called_once()
         args, _ = mock_logger.error.call_args

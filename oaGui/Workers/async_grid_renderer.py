@@ -1,6 +1,6 @@
 # Workers/async_grid_renderer.py
 #
-# Modularized Asynchronous Grid Layout Engine. Orchestrates recursive 
+# Modularized Asynchronous Grid Layout Engine. Orchestrates recursive
 # Grid layout using a modular Skeleton-First strategy.
 #
 # Author: Anthony Peter Kuzub
@@ -16,12 +16,13 @@
 # Version 20260330.1600.1
 
 import tkinter as tk
-import time
-import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
+
 from loguru import logger
+
 from oaGui.Core.grid_topology_configurator import GridTopologyConfigurator
 from oaGui.Core.structural_assembler import StructuralAssembler
+from oaLogging.Methods.matrix_gate import matrix_log
+
 
 class AsyncGridRenderer:
     """Asynchronous Grid Layout Engine."""
@@ -51,7 +52,7 @@ class AsyncGridRenderer:
         # 2. ⚡ DEEP NESTING RESOLUTION:
         # Find the actual widget fields, descending through 'blocks' or 'fields' containers.
         fields = data.get("fields", data.get("blocks"))
-        
+
         # If the level has no 'type', it's an anonymous container (likely the top-level dict).
         if fields is None and not data.get("type"):
             fields = data
@@ -63,7 +64,7 @@ class AsyncGridRenderer:
                 fields = fields[key]
             else:
                 break
-        
+
         if not fields or not isinstance(fields, (dict, list)):
             if on_complete: on_complete()
             return
@@ -86,7 +87,7 @@ class AsyncGridRenderer:
             nonlocal row_idx, col_idx, field_idx
             for item in batch:
                 if state["aborted"]: break
-                
+
                 # ⚡ ROBUSTNESS: Normalize (key, config) regardless of source (dict.items or enumerate)
                 if isinstance(item, tuple) and len(item) == 2:
                     key, config = item
@@ -137,12 +138,12 @@ class AsyncGridRenderer:
                         widget = self.factory[w_type](parent, item_config, context)
                         if widget:
                             self._apply_grid(widget, item_config, row_idx, col_idx)
-                    
+
                     # ⚡ DESIGN INJECTION: Attach the path for the overlay system
                     if widget:
                         full_widget_path = f"{path_prefix}.{key}".strip(".")
                         widget._oca_path = full_widget_path
-                        
+
                 except Exception as e:
                     logger.exception(f"❌ Failed to render widget '{key}' of type '{w_type}': {e}")
 
@@ -155,9 +156,9 @@ class AsyncGridRenderer:
                 field_idx += 1
 
             state["loop_done"] = True
-            if deferred and not state["aborted"]: 
+            if deferred and not state["aborted"]:
                 self.batch_engine.process(parent, deferred, 25, context, state, _check_done)
-            else: 
+            else:
                 _check_done()
 
         # Kick off processing

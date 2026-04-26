@@ -4,8 +4,9 @@
 #
 # Description: Background worker for executing installation and system tasks.
 
-import asyncio
-from typing import Callable, Coroutine, Any
+from collections.abc import Callable, Coroutine
+from typing import Any
+
 
 class TaskWorker:
     """

@@ -1,12 +1,12 @@
 # Core/view_controller.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: Brief summary of purpose
 
-from matplotlib.patches import Rectangle
 from tkinter import simpledialog
+
+from matplotlib.patches import Rectangle
 
 # Mouse Button Constants
 LEFT_CLICK = 1
@@ -28,7 +28,7 @@ class ViewController:
         self.axes = axes
         self.event_callbacks = event_callbacks
         self.on_context_menu_callback = on_context_menu
-        
+
         self.mouse_press_position = None
         self.selection_rectangle = None
         self.selection_rectangle_start = None
@@ -36,7 +36,7 @@ class ViewController:
         self.current_ylim = None
         self.active_axis_zoom_mode = None
         self.active_axis_pan_mode = None
-        
+
         self.initial_xlim = axes.get_xlim()
         self.initial_ylim = axes.get_ylim()
 
@@ -45,18 +45,18 @@ class ViewController:
         if event.inaxes != self.axes:
             axes_bbox = self.axes.bbox
             mouse_x, mouse_y = event.x, event.y
-            
+
             if event.dblclick:
                 if event.button == LEFT_CLICK:
                     self._handle_axis_double_click(mouse_x, mouse_y, axes_bbox)
                 else:
                     self.reset_view()
                 return
-            
+
             if event.button in [LEFT_CLICK, MIDDLE_CLICK]:
                 self._initialize_axis_mode(mouse_x, mouse_y, axes_bbox, event.button)
-            return 
-        
+            return
+
         if event.button == MIDDLE_CLICK:
             self.current_xlim = self.axes.get_xlim()
             self.current_ylim = self.axes.get_ylim()
@@ -64,7 +64,7 @@ class ViewController:
         elif event.button == RIGHT_CLICK:
             self.selection_rectangle_start = (event.xdata, event.ydata)
             self.selection_rectangle = Rectangle(
-                (event.xdata, event.ydata), 0, 0, 
+                (event.xdata, event.ydata), 0, 0,
                 linewidth=1, edgecolor='white', facecolor=(1, 1, 1, RECTANGLE_FACE_ALPHA)
             )
             self.axes.add_patch(self.selection_rectangle)
@@ -76,19 +76,19 @@ class ViewController:
             self.active_axis_zoom_mode = self.active_axis_pan_mode = self.mouse_press_position = None
             self._notify_view_change()
             return
-            
+
         if self.mouse_press_position and event.button == MIDDLE_CLICK:
             self.mouse_press_position = None
             self.axes.figure.canvas.draw()
             self._notify_view_change()
-            
+
         if self.selection_rectangle and event.button == RIGHT_CLICK:
             start_x, start_y = self.selection_rectangle_start
             end_x, end_y = event.xdata, event.ydata
-            
+
             self.selection_rectangle.remove()
             self.selection_rectangle = self.selection_rectangle_start = None
-            
+
             if start_x is not None and end_x is not None and start_x != end_x and start_y != end_y:
                  self.axes.set_xlim(min(start_x, end_x), max(start_x, end_x))
                  self.axes.set_ylim(min(start_y, end_y), max(start_y, end_y))
@@ -103,7 +103,7 @@ class ViewController:
             press_x, press_y = self.mouse_press_position
             axes_width = self.axes.bbox.width
             axes_height = self.axes.bbox.height
-            
+
             if self.active_axis_zoom_mode:
                 if self.active_axis_zoom_mode == 'x':
                     zoom_scale = max(MINIMUM_ZOOM_SCALE, NORMAL_ZOOM_SCALE - ((event.x - press_x) / ZOOM_SENSITIVITY_DIVISOR))
@@ -124,7 +124,7 @@ class ViewController:
                 elif axes_height > 0:
                     delta_y = ((self.current_ylim[1] - self.current_ylim[0]) / axes_height) * (event.y - press_y)
                     self.axes.set_ylim(self.current_ylim[0] - delta_y, self.current_ylim[1] - delta_y)
-            
+
             self.axes.figure.canvas.draw_idle()
             return
 
@@ -147,22 +147,22 @@ class ViewController:
         """Handles scroll wheel events for focal zooming."""
         if event.inaxes != self.axes:
             return
-            
+
         zoom_factor = (1.0 / DEFAULT_ZOOM_FACTOR) if event.button == "up" else DEFAULT_ZOOM_FACTOR
         current_xlim = self.axes.get_xlim()
         current_ylim = self.axes.get_ylim()
         event_xdata, event_ydata = event.xdata, event.ydata
-        
+
         if self.axes.get_xscale() == 'log':
             self.axes.set_xlim(event_xdata * (current_xlim[0] / event_xdata) ** zoom_factor, event_xdata * (current_xlim[1] / event_xdata) ** zoom_factor)
         else:
             self.axes.set_xlim((current_xlim[0] - event_xdata) * zoom_factor + event_xdata, (current_xlim[1] - event_xdata) * zoom_factor + event_xdata)
-            
+
         if self.axes.get_yscale() == 'log':
             self.axes.set_ylim(event_ydata * (current_ylim[0] / event_ydata) ** zoom_factor, event_ydata * (current_ylim[1] / event_ydata) ** zoom_factor)
         else:
             self.axes.set_ylim((current_ylim[0] - event_ydata) * zoom_factor + event_ydata, (current_ylim[1] - event_ydata) * zoom_factor + event_ydata)
-            
+
         self.axes.figure.canvas.draw()
         self._notify_view_change()
 
@@ -195,9 +195,9 @@ class ViewController:
         """Opens a dialog to manually set an axis limit."""
         current_limits = self.axes.get_xlim() if axis_name == 'x' else self.axes.get_ylim()
         limit_index = 0 if limit_side == 'min' else 1
-        
+
         new_value = simpledialog.askfloat("Limit", f"{axis_name.upper()} {limit_side}:", initialvalue=current_limits[limit_index])
-        
+
         if new_value is not None:
             if axis_name == 'x':
                 self.axes.set_xlim(left=new_value) if limit_side == 'min' else self.axes.set_xlim(right=new_value)
@@ -209,7 +209,7 @@ class ViewController:
     def _initialize_axis_mode(self, mouse_x, mouse_y, axes_bbox, mouse_button):
         """Sets the active zooming or panning mode based on click location."""
         mode_attribute = 'active_axis_zoom_mode' if mouse_button == LEFT_CLICK else 'active_axis_pan_mode'
-        
+
         if (axes_bbox.x0 <= mouse_x <= axes_bbox.x1) and (axes_bbox.y0 - AXIS_CLICK_THRESHOLD_PIXELS < mouse_y < axes_bbox.y0 or mouse_y > axes_bbox.y1):
             setattr(self, mode_attribute, 'x')
             self.mouse_press_position = (mouse_x, mouse_y)

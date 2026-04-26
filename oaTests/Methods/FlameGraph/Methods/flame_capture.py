@@ -5,14 +5,14 @@
 # Description: Low-level Multi-threaded Profiling Hooks.
 # Surgical fixes for NameError and multi-thread capture.
 
-import sys
-import inspect
 import cProfile
-import pstats
-import threading
 import gc
-from oaLogging.Methods.matrix_gate import matrix_log
+import pstats
+import sys
+import threading
+
 from oaLogging.Entry import TEST_LOGGER
+
 
 def kill_all_profilers():
     """Safety cleanup: stops any dangling profilers in the environment."""
@@ -39,36 +39,36 @@ class MultiThreadProfiler:
     def install(self):
         if self._is_installed:
             return
-        
+
         kill_all_profilers()
-        
+
         # Ensure main profiler is enabled
         self.main_profiler.enable()
-        
+
         if not hasattr(threading.Thread, "_original_run"):
             threading.Thread._original_run = threading.Thread.run
-            
+
         original_run = threading.Thread._original_run
         outer_self = self
-        
+
         def patched_run(self_thread):
             # Clear any inherited profilers in this new thread
             kill_all_profilers()
-            
+
             p = cProfile.Profile()
             try:
                 p.enable()
                 with outer_self.lock:
                     outer_self.profilers.append(p)
-                try: 
+                try:
                     original_run(self_thread)
-                finally: 
+                finally:
                     p.disable()
             except ValueError as e:
                 TEST_LOGGER.warning(f"FlameGraph: Profiler enable failed: {e}")
                 # Fallback if another profiler is active (e.g. nested calls)
                 original_run(self_thread)
-            
+
         threading.Thread.run = patched_run
         self._is_installed = True
 
@@ -82,7 +82,7 @@ class MultiThreadProfiler:
 
     def get_stats(self):
         self.main_profiler.disable()
-        
+
         # Initialize with main thread stats
         try:
             combined_stats = pstats.Stats(self.main_profiler)
@@ -93,7 +93,7 @@ class MultiThreadProfiler:
             empty_p.enable()
             empty_p.disable()
             combined_stats = pstats.Stats(empty_p)
-            
+
         with self.lock:
             for p in self.profilers:
                 p.disable()

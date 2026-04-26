@@ -15,25 +15,26 @@
 #
 # Version 20260330.1600.1
 
+import os
 import threading
 import time
+
 import orjson
-import os
-from loguru import logger
+
 try:
-    from scapy.all import sniff, UDP
+    from scapy.all import UDP, sniff
 except ImportError:
     pass
 
 # --- Standard Debug Logging Setup ---
+
+from oaComProtocols.oaComMQTT.Core.mqtt_message import MqttMessage
 from oaLogging.Methods.matrix_gate import matrix_log
-import inspect
+from oaPTP.Core.ptp_observer_registry import PTPObserverRegistry
+from oaPTP.Core.ptp_packet_parser import PTPPacketParser
 
 # --- EXTRACTED CORE MODULES ---
 from oaPTP.Core.ptp_packet_schema import PTP, SCAPY_AVAILABLE
-from oaPTP.Core.ptp_packet_parser import PTPPacketParser
-from oaPTP.Core.ptp_observer_registry import PTPObserverRegistry
-from oaComProtocols.oaComMQTT.Core.mqtt_message import MqttMessage
 
 
 def register_ptp_callback(cb): PTPObserverRegistry.register(cb)
@@ -55,11 +56,11 @@ class PtpManager:
         """Starts the sniffing worker and MQTT subscriptions."""
         if self.subscriber_router:
             self.subscriber_router.subscribe_to_topic("OPEN-AIR/System/PTP/Capture", self._on_external_data)
-        
+
         if not SCAPY_AVAILABLE:
             matrix_log("core", "ptp", "start", "⚠️ Scapy not available. Local sniffing disabled.", "WARNING")
             return
-        
+
         if self.permission_error_reported:
             matrix_log("core", "ptp", "start", "ℹ️ PTP Sniffer: [PERMISSION DENIED] Run as root/sudo for raw capture. Sniffer disabled.", "INFO")
             return
@@ -84,7 +85,7 @@ class PtpManager:
                 data = orjson.loads(payload)
         else:
             data = payload
-        
+
         if not data: return
 
         if isinstance(data.get("message_type"), int):
@@ -93,15 +94,15 @@ class PtpManager:
 
     def _run_sniffer(self):
         """Background loop for raw packet capture."""
-        sniff(filter="udp port 319 or udp port 320", 
-                prn=self._process_packet, 
+        sniff(filter="udp port 319 or udp port 320",
+                prn=self._process_packet,
                 stop_filter=lambda x: self.stop_event.is_set(),
                 store=0)
 
     def _process_packet(self, pkt):
         """Dissects raw packets and distributes data."""
         if not pkt or not pkt.haslayer(UDP): return
-        
+
         ptp_layer = None
         if pkt.haslayer(PTP):
             ptp_layer = pkt[PTP]
@@ -109,7 +110,7 @@ class PtpManager:
             payload = bytes(pkt[UDP].payload)
             if len(payload) >= 34:
                 ptp_layer = PTP(payload)
-        
+
         if not ptp_layer: return
 
         data = PTPPacketParser.tear_apart(pkt, ptp_layer)

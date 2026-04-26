@@ -4,30 +4,33 @@
 #
 # Description: Brief summary of purpose
 
-from PIL import Image, ImageDraw, ImageFilter, ImageChops, ImageTk
-from oaLogging.Methods.matrix_gate import matrix_log, is_debug_allowed
 import inspect
-import random
 import math
+import random
+
+from PIL import Image, ImageChops, ImageDraw, ImageFilter, ImageTk
+
+from oaLogging.Methods.matrix_gate import is_debug_allowed, matrix_log
+
 
 def _is_debug():
     return is_debug_allowed(system="UI", element="GUI_BUILDER")
 
 # --- Imports for the new modular architecture ---
 from oaGuiElements.Methods.utils import PanelUtils
-from .Core.substrate_factory import SubstrateFactory
-from .Core.layer_rust import RustLayer
-from .Core.layer_vignette import VignetteLayer
-from .Core.layer_stains import StainsLayer
-from .Core.layer_dust import DustLayer
-from .Core.layer_scratches import ScratchLayer
-from .Core.layer_screws import ScrewLayer
-from .Core.layer_metal_fold import MetalFoldLayer
+from oaGuiManager.Core.factory.asset_cache import AssetCacheManager
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Core.logger import BUILDER_LOGGER
-from oaConfigurationManager.FileReaders.config_reader import Config
-from oaGuiManager.Core.factory.asset_cache import AssetCacheManager
+
+from .Core.layer_dust import DustLayer
+from .Core.layer_metal_fold import MetalFoldLayer
+from .Core.layer_rust import RustLayer
+from .Core.layer_scratches import ScratchLayer
+from .Core.layer_screws import ScrewLayer
+from .Core.layer_stains import StainsLayer
+from .Core.layer_vignette import VignetteLayer
+from .Core.substrate_factory import SubstrateFactory
 
 # Random Seed Constants
 MAX_RANDOM_SEED = 1000000
@@ -78,7 +81,7 @@ class PanelGenerator:
         """
         #prefer the 'parameters' key if it exists, otherwise use the top-level dict
         settings = configuration_data.get("parameters", configuration_data)
-        
+
         # ⚡ RESOLUTION CONTROL: Extract scale_factor (default 1.0)
         scale_factor = float(settings.get("scale_factor", 1.0))
 
@@ -94,16 +97,16 @@ class PanelGenerator:
         if not random_seed:
             random_seed = random.randint(1, MAX_RANDOM_SEED)
         random.seed(random_seed)
-        
+
         matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name, f"Generating NEW Procedural Panel ({width}x{height}) Scale: {scale_factor} Seed: {random_seed}", "info".upper())
 
         # --- 2. Layer Configs ---
         base_material_settings = settings.get("base_material", {})
         paint_layer_settings = settings.get("paint_layer", {})
-        edge_wear_settings = settings.get("edge_wear", {"enabled": False}) 
+        edge_wear_settings = settings.get("edge_wear", {"enabled": False})
         panel_scratch_settings = settings.get("panel_scratches", settings.get("scratches", {"count": 0}))
-        grime_settings = settings.get("grime", {"stain_count": 0}) 
-        rust_settings = settings.get("rust", {"enabled": False})      
+        grime_settings = settings.get("grime", {"stain_count": 0})
+        rust_settings = settings.get("rust", {"enabled": False})
         dust_settings = settings.get("dust", {"enabled": False, "intensity": 0.3})
         screws_settings = settings.get("screws", {"enabled": False})
         fold_settings = settings.get("metal_fold", {"enabled": False})
@@ -114,10 +117,10 @@ class PanelGenerator:
         matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name, f"Layer 1. Substrate: {substrate_color_hex}", "trace".upper())
         substrate_color_rgba = PanelUtils.hex_to_rgba(substrate_color_hex)
         panel_image = Image.new('RGBA', (width, height), substrate_color_rgba)
-        
+
         texture_type = base_material_settings.get("texture_type", "flat")
         grain_intensity = float(base_material_settings.get("grain_intensity", DEFAULT_GRAIN_INTENSITY))
-        
+
         if texture_type == "hammered":
             matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name, "Applying hammered texture.", "trace".upper())
             hammered_texture = SubstrateFactory.generate_hammered(width, height, grain_intensity, scale_factor=scale_factor).convert("RGBA")
@@ -154,7 +157,7 @@ class PanelGenerator:
         paint_opacity = float(paint_layer_settings.get("opacity", DEFAULT_PAINT_OPACITY))
         matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name, f"Layer 2. Paint: {paint_layer_settings.get('color')} (Opacity: {paint_opacity})", "trace".upper())
         paint_mask_image = Image.new('L', (width, height), MAX_OPACITY_VALUE)
-        
+
         if edge_wear_settings.get("enabled", False):
             matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name, "Etching edge wear scratches.", "trace".upper())
             scratch_depth_limit = int(edge_wear_settings.get("scratch_depth", DEFAULT_EDGE_SCRATCH_DEPTH))
@@ -163,7 +166,7 @@ class PanelGenerator:
             edge_scratch_count = int(edge_wear_settings.get("scratch_intensity", DEFAULT_EDGE_SCRATCH_INTENSITY) * EDGE_SCRATCH_COUNT_MULTIPLIER)
             for _ in range(edge_scratch_count):
                 selected_edge = random.choice(["top", "bottom", "left", "right"])
-                if selected_edge == "top": 
+                if selected_edge == "top":
                     start_x, start_y = random.randint(0, width - 1), 0
                     end_x, end_y = start_x + random.randint(-EDGE_SCRATCH_OFFSET_RANGE, EDGE_SCRATCH_OFFSET_RANGE), random.randint(0, scratch_depth_limit)
                 elif selected_edge == "bottom":

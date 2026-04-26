@@ -6,6 +6,7 @@
 
 import math
 
+
 class CMDPInteractionMixin:
     """Handles canvas-level mouse and scroll interactions for the CMDP widget."""
 

@@ -1,5 +1,5 @@
-import os
 import json
+import os
 import re
 
 # Technical Translation Mapping
@@ -270,15 +270,15 @@ TRANSLATIONS = {
 def translate_text(text, target_lang):
     if not text:
         return text
-    
+
     # Check for technical context first
     if text in TECHNICAL_CONTEXT:
         return TECHNICAL_CONTEXT[text].get(target_lang, text)
-    
+
     # Check for full mapping
     if text in TRANSLATIONS:
         return TRANSLATIONS[text].get(target_lang, text)
-    
+
     # Handle placeholders: do not translate inside {{ }}
     # We split by placeholders, translate the parts, and reassemble.
     parts = re.split(r"(\{\{.*?\}\})", text)
@@ -300,7 +300,7 @@ def translate_text(text, target_lang):
                     if len(en_w) > 3 and en_w in t_part:
                         t_part = t_part.replace(en_w, langs.get(target_lang, en_w))
                 translated_parts.append(t_part)
-    
+
     return "".join(translated_parts)
 
 def process_object(obj):
@@ -591,15 +591,15 @@ FILES = [
 for file_path in FILES:
     if not os.path.exists(file_path):
         continue
-    with open(file_path, "r") as f:
+    with open(file_path) as f:
         try:
             data = json.load(f)
         except Exception as e:
             print(f"Error loading {file_path}: {e}")
             continue
-    
+
     process_object(data)
-    
+
     with open(file_path, "w") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
     print(f"Processed {file_path}")

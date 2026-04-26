@@ -4,10 +4,11 @@
 #
 # Description: Unit tests for the oaGuiEditorWYSIWYG entry point.
 
-import unittest
 import tkinter as tk
+import unittest
+
 from oaGuiEditorWYSIWYG.Entry import launch_editor
-from oaGuiEditorWYSIWYG.Managers.wysiwyg_editor import WysiwygEditor
+
 
 class TestWysiwygEditorEntry(unittest.TestCase):
     """
@@ -37,7 +38,7 @@ class TestWysiwygEditorEntry(unittest.TestCase):
         self.assertIsNotNone(editor, "Editor instance should not be None")
         self.assertEqual(editor.parent, self.root, "Editor parent should be the test root")
         self.assertTrue(hasattr(editor, 'window'), "Editor should have a window attribute")
-        
+
         # Verify core components are initialized
         self.assertTrue(hasattr(editor, 'json_tab'), "Editor should have a structure tab (JsonTree)")
         self.assertTrue(hasattr(editor, 'code_tab'), "Editor should have a JSON code tab")

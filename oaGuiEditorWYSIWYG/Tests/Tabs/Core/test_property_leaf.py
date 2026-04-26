@@ -30,7 +30,7 @@
 #        parent = tk.Frame(self.root)
 #        widget = self.factory.create_editor(parent, True, "boolean")
 #        self.assertIsInstance(widget, tk.Checkbutton)
-#        
+#
 #        """Test factory creating a color editor (e.g., a button that opens a color chooser)."""
 #        parent = tk.Frame(self.root)
 #        # Assuming the property name or a metadata tag indicates it's a color

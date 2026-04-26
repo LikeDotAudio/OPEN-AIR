@@ -1,20 +1,19 @@
-import os
 
 import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
+import re
+import urllib.parse
+
 # Workers/agent_static_ip_prober.py
 # Author: Gemini Agent
 # Version: 1.0.0
 #
 # Description: Dedicated module for Gateway-based VISA device discovery (VXI-11 HTML scraping).
-
 import urllib.request
-import urllib.parse
-import re
+
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = False
-from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
 from oaConfigurationManager.FileReaders.config_reader import Config

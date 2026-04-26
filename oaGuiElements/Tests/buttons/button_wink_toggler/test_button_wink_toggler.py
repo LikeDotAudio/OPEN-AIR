@@ -4,20 +4,22 @@
 #
 # Description: Brief summary of purpose
 
+import tkinter as tk
 import unittest
 from unittest.mock import MagicMock, patch
-import tkinter as tk
+
 from oaGuiElements.Core.buttons.button_wink_toggler.Core.button_wink_toggler import BuilderButtonWinkTogglerCreator
+
 
 class TestButtonWinkToggler(unittest.TestCase):
 
     def setUp(self):
         self.patchers = []
-        
+
         # Always patch PIL and ImageTk to avoid issues with display/image registration
         self.patchers.append(patch('PIL.Image.open', return_value=MagicMock()))
         self.patchers.append(patch('PIL.ImageTk.PhotoImage', return_value=MagicMock()))
-        
+
         try:
             self.root = tk.Tk()
             self.root.withdraw()
@@ -31,7 +33,7 @@ class TestButtonWinkToggler(unittest.TestCase):
             mock_canvas.winfo_width.return_value = 100
             mock_canvas.winfo_height.return_value = 100
             self.patchers.append(patch('tkinter.Canvas', return_value=mock_canvas))
-            
+
         for p in self.patchers:
             p.start()
         self.config = {'label_active': 'Test Wink Toggler', 'path': 'test/wink_toggler', 'options': {'A': {'label_active': 'A', 'value': 1}, 'B': {'label_active': 'B', 'value': 2}}}

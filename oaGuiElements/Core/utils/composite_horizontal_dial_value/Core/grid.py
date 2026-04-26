@@ -5,16 +5,17 @@
 # Description: Brief summary of purpose
 
 from oaGuiElements.Constants.gui_constants import (
-    DEFAULT_COLUMN_SPACING, 
-    GRID_ROW_WEIGHT_TOP, 
-    GRID_ROW_WEIGHT_BOTTOM, 
-    GRID_ROW_MINSIZE_TOP, 
+    DEFAULT_COLUMN_SPACING,
     GRID_ROW_MINSIZE_BOTTOM,
-    KNOB_SAFE_DIM_MIN,
-    KNOB_SAFE_DIM_MAX,
+    GRID_ROW_MINSIZE_TOP,
+    GRID_ROW_WEIGHT_BOTTOM,
+    GRID_ROW_WEIGHT_TOP,
     KNOB_SAFE_DIM_DEFAULT,
-    V_WIDTH_LIMIT_RATIO
+    KNOB_SAFE_DIM_MAX,
+    KNOB_SAFE_DIM_MIN,
+    V_WIDTH_LIMIT_RATIO,
 )
+
 
 class GridManager:
     """Calculates and configures column and row weights for the composite widget."""

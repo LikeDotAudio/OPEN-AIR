@@ -6,10 +6,9 @@
 
 import unittest
 from unittest.mock import MagicMock, patch
-import os
-import json
 
 from oaComProtocols.oaComVisa.Managers.discovery_orchestrator import DiscoveryOrchestrator
+
 
 class TestDiscoveryOrchestrator(unittest.TestCase):
 
@@ -17,17 +16,17 @@ class TestDiscoveryOrchestrator(unittest.TestCase):
         """Set up the orchestrator with mocked dependencies."""
         self.mock_manager = MagicMock()
         self.mock_aes70 = MagicMock()
-        
+
         # Patch VisaScanner where it's used inside DiscoveryOrchestrator
         patcher = patch('oaComProtocols.oaComVisa.Managers.discovery_orchestrator.VisaScanner')
         self.MockVisaScanner = patcher.start()
         self.addCleanup(patcher.stop)
-        
+
         self.mock_scanner = self.MockVisaScanner.return_value
-        
+
         self.orchestrator = DiscoveryOrchestrator(
-            manager_ref=self.mock_manager, 
-            aes70_manager=self.mock_aes70, 
+            manager_ref=self.mock_manager,
+            aes70_manager=self.mock_aes70,
             output_filename="test_inventory.json"
         )
 
@@ -39,29 +38,29 @@ class TestDiscoveryOrchestrator(unittest.TestCase):
         """
         self.mock_scanner.hunt_for_devices.return_value = (["192.168.1.100"], ["192.168.1.1"])
         self.mock_scanner.get_gateway_inventory.return_value = ["inst0", "inst1"]
-        
+
         mock_rm = MagicMock()
         mock_rm.list_resources.return_value = ["USB0::0x1234::0x5678::INSTR", "TCPIP::192.168.1.50::INSTR"]
         self.mock_scanner.rm = mock_rm
-        
+
         self.mock_scanner.parse_resource_details.return_value = {
             "IP": "192.168.1.100", "Interface": "TCPIP", "GPIB_Addr": "N/A"
         }
         self.mock_scanner.query_device_safe.return_value = "TestMfg,TestModel,12345,1.0"
         self.mock_scanner.parse_idn.return_value = ("TestMfg", "TestModel", "12345", "1.0")
         self.mock_scanner.augment_device_details.side_effect = lambda x: {**x, "device_type": "Oscilloscope", "notes": "OK"}
-        
+
         # OPERATE
         inventory = self.orchestrator.run_discovery(silent=True)
-        
+
         # CHECK
         self.assertTrue(self.mock_scanner.hunt_for_devices.called)
         self.assertTrue(self.mock_scanner.get_gateway_inventory.called)
         self.assertTrue(mock_rm.list_resources.called)
-        
+
         # We expect: 1 dedicated, 2 gateway, 1 USB (TCPIP filtered out from list_resources)
         self.assertEqual(len(inventory), 4)
-        
+
         # Check first device structure
         dev1 = inventory["1"]
         self.assertEqual(dev1["type"], "DEDICATED")
@@ -77,19 +76,19 @@ class TestDiscoveryOrchestrator(unittest.TestCase):
         """
         self.mock_scanner.hunt_for_devices.return_value = (["10.0.0.5"], [])
         self.mock_scanner.get_gateway_inventory.return_value = []
-        
+
         mock_rm = MagicMock()
         mock_rm.list_resources.return_value = []
         self.mock_scanner.rm = mock_rm
-        
+
         self.mock_scanner.parse_resource_details.return_value = {
             "IP": "10.0.0.5", "Interface": "TCPIP", "GPIB_Addr": "N/A"
         }
         # Simulate timeout
         self.mock_scanner.query_device_safe.return_value = None
-        
+
         inventory = self.orchestrator.run_discovery(silent=True)
-        
+
         self.assertEqual(len(inventory), 1)
         dev1 = inventory["1"]
         self.assertEqual(dev1["status"], "Unresponsive")
@@ -105,10 +104,10 @@ class TestDiscoveryOrchestrator(unittest.TestCase):
         CHECK: Verify the file is opened for writing and the content is saved.
         """
         self.orchestrator.inventory = {"1": {"model": "TestModel"}}
-        
+
         # OPERATE
         result_path = self.orchestrator.save_inventory()
-        
+
         # CHECK
         self.assertEqual(result_path, '/fake/dir/test_inventory.json')
         mock_file.assert_called_once_with('/fake/dir/test_inventory.json', 'w', encoding='utf-8')

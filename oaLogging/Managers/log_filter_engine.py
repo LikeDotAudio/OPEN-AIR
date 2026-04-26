@@ -1,7 +1,8 @@
-import sys
 
 import inspect
+
 from oaLogging.Methods.matrix_gate import matrix_log
+
 # Managers/log_filter_engine.py
 # Author: Gemini CLI
 # Version: 20260315.150000.REV01
@@ -28,8 +29,11 @@ Dependencies:
 """
 
 import json
+
 from loguru import logger
-from ..Core.logger import initialize_logging, get_logger, quarantine_logger # Assuming logger module is accessible
+
+from ..Core.logger import get_logger  # Assuming logger module is accessible
+
 # We need to import the MQTT router to subscribe to topics.
 # Assuming it's structured like this, adjust if needed.
 try:
@@ -86,7 +90,7 @@ class LogFilterEngine:
                     new_filters[module] = level.upper()
                 else:
                     self.logger.warning(f"Invalid log level '{level}' for module '{module}'. Ignoring.")
-            
+
             self.active_filters.update(new_filters) # Apply new filters, potentially overwriting existing ones
 
             # Reapply filters to Loguru sinks.
@@ -112,14 +116,14 @@ class LogFilterEngine:
         # This is a complex operation and depends heavily on how sinks are managed.
         # For now, we'll log that it *should* happen.
         self.logger.info("Attempting to apply dynamic filters to Loguru sinks. (Implementation pending)")
-        
+
         # Example of how one might *conceptually* do this if sinks were managed centrally:
         # logger.remove() # Remove all existing sinks
         # self.base_logger_configurator() # Re-initialize with base settings (e.g., console, file)
         #     # Add sinks with specific filters for the module
         #     # This requires a more sophisticated logger setup function
         #     pass
-        
+
         # A simpler approach might be to modify filters on existing sinks if Loguru allows it.
         # If not, re-adding sinks is necessary. The current logger.py does not expose sink management well.
         # We will need to ensure the `initialize_logging` function is aware of this engine.
@@ -145,7 +149,7 @@ class MockMqttSubscriberRouter:
     def __init__(self):
         self.logger = get_logger("MOCK_MQTT")
         self.logger.warning("Using Mock MQTT Router. MQTT subscriptions will not work.")
-    
+
     def subscribe_to_topic(self, topic_filter, callback_func):
         self.logger.info(f"Mock MQTT: Subscribing to {topic_filter} (no-op)")
 
@@ -156,21 +160,22 @@ if __name__ == "__main__":
     # and logger are initialized.
 
     # Mock logger initialization
-    from oaLogging.Core.logger import initialize_logging as mock_init_logging, get_logger as mock_get_logger
-    
+    from oaLogging.Core.logger import get_logger as mock_get_logger
+    from oaLogging.Core.logger import initialize_logging as mock_init_logging
+
     class MockConfig: # Dummy config for testing
         global_settings = {"debug_enabled": True}
-    
+
     mock_log_dir = "./mock_logs"
     mock_init_logging(MockConfig(), log_dir=mock_log_dir, partition="TEST")
-    
+
     # Mock logger instance
     mock_logger_for_engine = mock_get_logger("ENGINE_TEST")
     mock_logger_for_engine.info("Logger initialized for engine test.")
 
     # Mock MQTT router and pass it to the engine initializer
     mock_mqtt_router = MockMqttSubscriberRouter()
-    
+
     # The reconfigurator callable needs to be defined or passed correctly.
     # For simplicity here, we'll just pass the initialisation function,
     # assuming it can be called again to reconfigure sinks.
@@ -182,7 +187,7 @@ if __name__ == "__main__":
     initialize_filter_engine(mock_mqtt_router, mock_reconfigure_sinks)
 
     mock_logger_for_engine.info("LogFilterEngine setup complete.")
-    
+
     # Simulate receiving a filter update
     if _log_filter_engine:
         mock_logger_for_engine.info("Simulating MQTT message...")

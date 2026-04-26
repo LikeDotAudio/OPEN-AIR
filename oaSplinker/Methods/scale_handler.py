@@ -4,8 +4,9 @@
 #
 # Description: Brief summary of purpose
 
+from ..Constants.constants import Splinker_debug_enabled, splinker_logger
 from .base_handler import BaseHandler
-from ..Constants.constants import splinker_logger, Splinker_debug_enabled
+
 
 class ScaleHandler(BaseHandler):
     """
@@ -17,10 +18,10 @@ class ScaleHandler(BaseHandler):
         s_max = self.params.get("source_max", 100)
         d_min = self.params.get("dest_min", 0)
         d_max = self.params.get("dest_max", 255)
-        
+
         try:
             val_float = float(value)
-            
+
             if direction == "REVERSE":
                 src_in_min, src_in_max = d_min, d_max
                 dest_out_min, dest_out_max = s_min, s_max
@@ -38,20 +39,20 @@ class ScaleHandler(BaseHandler):
             # 2. Linear Scaling
             input_span = src_in_max - src_in_min
             output_span = dest_out_max - dest_out_min
-            
+
             if input_span == 0:
                 return dest_out_min
-                
+
             scaled_value = dest_out_min + (((clamped_val - src_in_min) / input_span) * output_span)
 
             # 3. Preservation of type (int if both dest limits are int)
             result = scaled_value
             if isinstance(dest_out_min, int) and isinstance(dest_out_max, int):
                 result = int(round(scaled_value))
-            
+
             if Splinker_debug_enabled:
                 splinker_logger.trace(f"⚖️ ScaleHandler Result: {result}")
-                
+
             return result
 
         except (ValueError, TypeError) as e:

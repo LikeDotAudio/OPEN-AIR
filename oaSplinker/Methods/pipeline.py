@@ -8,8 +8,8 @@
 # Version: 20260331.2235.1
 
 from loguru import logger
-from oaLogging.Methods.matrix_gate import matrix_log, is_debug_allowed
-from oaConfigurationManager.Entry import Config
+
+from oaLogging.Methods.matrix_gate import is_debug_allowed, matrix_log
 
 try:
     from oaRustCore.oa_splink_core_rs import SplinkPipeline as RustSplinkPipeline
@@ -30,16 +30,16 @@ class SplinkPipeline:
 
     def _build_pipeline(self):
         handler_configs = self.splink.get("handlers", [])
-        
+
         # In pure Rust mode, we MUST use RustSplinkPipeline
         # We assume Rust supports the standard handler types (scale, invert, deadband)
         try:
             self.rust_pipeline = RustSplinkPipeline(handler_configs)
             if _is_debug():
-                matrix_log("core", "splinker", "_build_pipeline", 
+                matrix_log("core", "splinker", "_build_pipeline",
                            f"🚀 SplinkPipeline: Using HIGH-PERFORMANCE RUST core for {self.splink['id']}.", "DEBUG")
         except Exception as e:
-            matrix_log("core", "splinker", "_build_pipeline", 
+            matrix_log("core", "splinker", "_build_pipeline",
                        f"🚀❌ [FATAL] Rust SplinkPipeline init failed for {self.splink['id']}: {e}", "ERROR")
             raise e
 

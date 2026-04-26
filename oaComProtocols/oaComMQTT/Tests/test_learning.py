@@ -6,7 +6,9 @@
 
 import unittest
 from unittest.mock import MagicMock
+
 import paho.mqtt.client as mqtt
+
 
 class TestLearningThirdParty(unittest.TestCase):
     # --- 5. "Learning Tests" for Third-Party Libraries ---
@@ -16,7 +18,7 @@ class TestLearningThirdParty(unittest.TestCase):
         client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
         mock_on_connect = MagicMock()
         client.on_connect = mock_on_connect
-        
+
         # Test basic attribute assignment
         self.assertEqual(client.on_connect, mock_on_connect)
 

@@ -6,19 +6,20 @@
 
 import time
 
+
 class MeterAnimator:
     def __init__(self, frame, config, canvas, draw_callback):
         self.frame = frame
         self.config = config
         self.canvas = canvas
         self.draw_callback = draw_callback
-        
+
         # Initialize Frame State
         self.frame.anim_current_value = self.config.value_default
         self.frame.anim_target = self.config.value_default
         self.frame.anim_current_value_2 = self.config.value_default
         self.frame.anim_target_2 = self.config.value_default
-        
+
         self.frame.anim_mode = "idle" # idle, tracking, holding, decaying
         self.frame.anim_hold_start = 0
         self.frame.anim_running = False
@@ -62,7 +63,7 @@ class MeterAnimator:
 
         targets = [self.frame.anim_target]
         currents = [self.frame.anim_current_value]
-        
+
         if self.config.meter_mode == "stereo":
             targets.append(self.frame.anim_target_2)
             currents.append(self.frame.anim_current_value_2)
@@ -77,10 +78,10 @@ class MeterAnimator:
             elif self.frame.anim_mode == "decaying":
                 target = self.config.resting_point
             else: # idle
-                target = current 
+                target = current
 
             diff = target - current
-            
+
             # Check for completion of current move
             if abs(diff) < 0.05: # Threshold
                 new_currents.append(target)
@@ -88,7 +89,7 @@ class MeterAnimator:
                 all_done = False
                 step = 0.0
                 time_param = 0.0
-                
+
                 if diff > 0: # Rising
                     time_param = self.config.glide_time
                 else: # Falling
@@ -96,7 +97,7 @@ class MeterAnimator:
                         time_param = self.config.dwell_time
                     else:
                         time_param = self.config.fall_time
-                
+
                 if time_param <= 0:
                     step = diff # Instant
                 else:
@@ -113,7 +114,7 @@ class MeterAnimator:
             self.frame.anim_current_value_2 = new_currents[1]
 
         self.draw_callback()
-        
+
         if all_done:
             if self.frame.anim_mode == "tracking":
                 # Reached tracking target
@@ -122,7 +123,7 @@ class MeterAnimator:
                     self.frame.anim_hold_start = time.time() * 1000
                 else:
                     self.frame.anim_mode = "decaying"
-                
+
                 # ⚡ SAFETY: Check if canvas still exists before scheduling next frame
                 if hasattr(self.canvas, "winfo_exists") and self.canvas.winfo_exists():
                     self.canvas.after(int(dt), self.animate)

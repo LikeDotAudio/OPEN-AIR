@@ -1,15 +1,14 @@
-from oaLogging.Methods.matrix_gate import matrix_log
 # Workers/logic_disconnect_instrument.py
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: Brief summary of purpose
-
 import inspect
+
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = False
-from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
 from oaConfigurationManager.FileReaders.config_reader import Config
@@ -84,7 +83,7 @@ class VisaDisconnector:
         - Publishes multiple status updates to clear device-specific info.
         """
         if not inst:
-            # If no instrument is present, ensure the proxy is reset and 
+            # If no instrument is present, ensure the proxy is reset and
             # the UI reflects the disconnected state.
             self.visa_proxy.set_instrument_instance(inst=None)
             self.gui_publisher._publish_proxy_status("DISCONNECTED")

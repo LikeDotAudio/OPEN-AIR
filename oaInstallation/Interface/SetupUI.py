@@ -4,21 +4,26 @@
 #
 # Description: Textual UI for the OPEN-AIR installation process.
 
-from textual.app import App, ComposeResult
-from textual.widgets import Header, Footer, Static, Button, Log, Label
-from textual.containers import Container, Vertical, Horizontal
-from textual.binding import Binding
 import asyncio
-from typing import Coroutine, Any
+from collections.abc import Coroutine
+from typing import Any
 
-from oaInstallation.Managers.Setup import (
-    SetupManager, STAGE_PYTHON_DEPS, STAGE_MQTT_INFRA, 
-    STAGE_SNMP_INFRA, STAGE_DESKTOP_INTEG
-)
 from oaInstallation.Tests.installation_validator import run_all_tests
-from oaInstallation.FileWriters.LogWriter import InstallationLogWriter
+from textual.app import App, ComposeResult
+from textual.binding import Binding
+from textual.containers import Horizontal, Vertical
+from textual.widgets import Button, Footer, Header, Label, Log
+
 from oaInstallation.Core.SystemStats import SystemStatsProvider
-from oaInstallation.Workers.runTask import run_background_task
+from oaInstallation.FileWriters.LogWriter import InstallationLogWriter
+from oaInstallation.Managers.Setup import (
+    STAGE_DESKTOP_INTEG,
+    STAGE_MQTT_INFRA,
+    STAGE_PYTHON_DEPS,
+    STAGE_SNMP_INFRA,
+    SetupManager,
+)
+
 
 class SetupApp(App):
     """A Textual app to manage the OPEN-AIR installation."""
@@ -130,7 +135,7 @@ class SetupApp(App):
                 yield self.desk_status
                 self.test_status = Label("🧪 System Tests: Pending", classes="status-item")
                 yield self.test_status
-                
+
                 yield Label("Actions", classes="status-label")
                 yield Button("Run Dependency Check", id="btn_deps", variant="primary")
                 yield Button("Clean Installation", id="btn_clean", variant="error")
@@ -212,7 +217,7 @@ class SetupApp(App):
         self.write_log("🌪️ [PURGE] Initiating full environmental scrub...")
         try:
             success = await asyncio.to_thread(self.manager.check_dependencies, self.write_log, auto_install=True, clean_install=True)
-            
+
             if success:
                 self.dep_status.update(f"📦 {STAGE_PYTHON_DEPS}: [green]Refreshed[/]")
                 self.write_log("✨ [POLISHED] All dependencies have been purged and perfectly re-installed!")
@@ -223,15 +228,15 @@ class SetupApp(App):
             self.write_log(f"💥 [CRITICAL ERROR] The scrub process crashed: {e}")
             self.dep_status.update(f"📦 {STAGE_PYTHON_DEPS}: [red]CRASHED[/]")
             success = False
-        
+
         return success
 
     async def check_dependencies(self):
         self.write_log("🕵️ [MISSION] Initiating deep scan for legendary dependencies...")
-        
+
         # First check without auto-installing
         success = await asyncio.to_thread(self.manager.check_dependencies, self.write_log, auto_install=False)
-        
+
         if success:
             self.dep_status.update(f"📦 {STAGE_PYTHON_DEPS}: [green]Glorious[/]")
             self.write_log("🎆 [CELEBRATION] Every single package is in place! This environment is impeccable.")
@@ -240,11 +245,11 @@ class SetupApp(App):
             self.write_log("😲 [SCANDAL] We are missing some essential components!")
             self.write_log("🤔 [INQUIRY] Should I deploy the engineering team to install the missing pieces?")
             self.write_log("💡 Tip: Click 'Run Dependency Check' again to attempt auto-repair.")
-            
+
             # Change button text to indicate next step
             self.query_one("#btn_deps").label = "Attempt Auto-Repair"
             self.query_one("#btn_deps").variant = "warning"
-            
+
             # If they click again, we should detect this state
             if hasattr(self, "_dep_check_failed") and self._dep_check_failed:
                 await self.install_missing_dependencies()
@@ -253,7 +258,7 @@ class SetupApp(App):
                 self.query_one("#btn_deps").variant = "primary"
             else:
                 self._dep_check_failed = True
-                
+
         return success
 
     async def install_missing_dependencies(self):
@@ -268,16 +273,16 @@ class SetupApp(App):
 
     async def setup_infrastructure(self):
         self.write_log("🚀 [MISSION] Provisioning world-class infrastructure...")
-        
+
         mqtt_success = await asyncio.to_thread(self.manager.setup_mqtt, self.write_log)
         self.mqtt_status.update(f"📡 {STAGE_MQTT_INFRA}: {'[green]Installed[/]' if mqtt_success else '[red]Failed[/]'}")
-        
+
         snmp_success = await asyncio.to_thread(self.manager.setup_snmp, self.write_log)
         self.snmp_status.update(f"🛠️ {STAGE_SNMP_INFRA}: {'[green]Installed[/]' if snmp_success else '[red]Failed[/]'}")
-        
+
         if mqtt_success and snmp_success:
             self.write_log("💎 [ELITE] Infrastructure is robust and ready for traffic.")
-        
+
         return mqtt_success and snmp_success
 
     async def setup_desktop(self):
@@ -300,19 +305,19 @@ class SetupApp(App):
 
     async def full_installation(self):
         self.write_log("🔥 [IGNITION] Starting FULL INSTALLATION process...")
-        
+
         # Check dependencies first
         success = await asyncio.to_thread(self.manager.check_dependencies, self.write_log, auto_install=False)
         if not success:
             self.write_log("❓ [CHOICE] Dependencies are missing. Proceeding with automatic repair...")
             success = await self.install_missing_dependencies()
-            
+
         if success:
             if await self.setup_infrastructure():
                 if await self.setup_desktop():
                     await self.run_validation()
                     self.write_log("🏆 [LEGENDARY] FULL INSTALLATION COMPLETE! The system is magnificent.")
-                    
+
                     # Save the log content to the configuration directory
                     log_content = "\n".join(self.log_lines)
                     success = self.log_writer.write_log(log_content)

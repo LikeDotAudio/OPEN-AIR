@@ -1,5 +1,4 @@
 # Core/layout_calculator.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
@@ -7,7 +6,7 @@ from oaGui.Methods.i18n_utils import get_text
 
 import math
 from dataclasses import dataclass, field
-from typing import Dict, List, Tuple, Any
+
 
 @dataclass
 class LayoutResult:
@@ -17,67 +16,67 @@ class LayoutResult:
     bar_y: float
     base_len: float
     bar_thick: float
-    
+
     # Pixel coordinates for shapes
-    bar_track: List[float]
-    zone1: List[float]
-    zone2: List[float]
-    zone3: List[float]
-    indicator: List[float]
-    peak_led: Tuple[float, float, float, float]
-    
+    bar_track: list[float]
+    zone1: list[float]
+    zone2: list[float]
+    zone3: list[float]
+    indicator: list[float]
+    peak_led: tuple[float, float, float, float]
+
     # Tick data: list of (x1, y1, x2, y2, is_subtick)
-    ticks: List[Tuple[float, float, float, float, bool]]
+    ticks: list[tuple[float, float, float, float, bool]]
     # Grid data: list of (x1, y1, x2, y2, is_subtick)
-    grid_lines: List[Tuple[float, float, float, float, bool]]
+    grid_lines: list[tuple[float, float, float, float, bool]]
     # Label data: list of (x, y, text, anchor)
-    scale_labels: List[Tuple[float, float, str, str]]
-    
+    scale_labels: list[tuple[float, float, str, str]]
+
     # For dynamic updates
-    peak_flag_points: List[float] = field(default_factory=list)
+    peak_flag_points: list[float] = field(default_factory=list)
 
 class MeterLayoutCalculator:
     """Calculates all pixel coordinates for the meter elements based on configuration and available size."""
-    
+
     def __init__(self):
         self.last_w = 0
         self.last_h = 0
 
     def calculate(self, w: int, h: int, configuration) -> LayoutResult:
         """Computes the full coordinate set for the current widget dimensions."""
-        
+
         # 1. Pappings & Buffers
         scale_text_padding = 15 # Horizontal buffer for numbers
-        
+
         tick_height_val = configuration.tick_size if (configuration.show_ticks or configuration.tick_both_sides) else 0
         if configuration.is_vertical:
             label_thickness = (configuration.font_size * 3) if (configuration.scale_position != "none" and configuration.show_scale_labels) else 0
         else:
             label_thickness = (configuration.font_size + 4) if (configuration.scale_position != "none" and configuration.show_scale_labels) else 0
-            
+
         side_a_pad = tick_height_val + label_thickness
         if configuration.peak_display: side_a_pad += 6
-        
+
         side_b_pad = tick_height_val if configuration.tick_both_sides else 0
-        
+
         # 2. Base Bar Geometry
         if not configuration.is_vertical:
             eff_h = configuration.height
             b_thick = eff_h
-            
+
             peak_led_size = configuration.peak_size if configuration.peak_size > 0 else b_thick
             peak_led_gap = 5 if configuration.peak_display else 0
             led_offset = peak_led_gap + peak_led_size if configuration.peak_display else 0
-            
+
             eff_w = min(w, configuration.width + (scale_text_padding * 2))
             center_x_off = max(0, (w - eff_w) / 2)
-            
+
             b_len = max(1, eff_w - led_offset - (scale_text_padding * 2))
             bar_x = center_x_off + scale_text_padding
-            
+
             base_y = side_a_pad if configuration.scale_position == "top" else side_b_pad
             bar_y = base_y + max(0, (h - (eff_h + side_a_pad + side_b_pad)) / 2)
-            
+
             peak_y_off = (b_thick - peak_led_size) / 2
             peak_led_coords = (
                 bar_x + b_len + peak_led_gap, bar_y + peak_y_off,
@@ -85,24 +84,24 @@ class MeterLayoutCalculator:
             )
             tick_start = bar_y + b_thick if configuration.scale_position == "bottom" else bar_y
             tick_dir = 1 if configuration.scale_position == "bottom" else -1
-            
+
         else:
             eff_w = configuration.width
             b_thick = eff_w
-            
+
             peak_led_size = configuration.peak_size if configuration.peak_size > 0 else b_thick
             peak_led_gap = 5 if configuration.peak_display else 0
             led_offset = peak_led_gap + peak_led_size if configuration.peak_display else 0
-            
+
             eff_h = min(h, configuration.height + (scale_text_padding * 2))
             center_y_off = max(0, (h - eff_h) / 2)
-            
+
             b_len = max(1, eff_h - led_offset - (scale_text_padding * 2))
-            
+
             base_x = side_a_pad if configuration.scale_position in ["top", "left"] else side_b_pad
             bar_x = base_x + max(0, (w - (eff_w + side_a_pad + side_b_pad)) / 2)
             bar_y = center_y_off + led_offset + scale_text_padding
-            
+
             peak_x_off = (b_thick - peak_led_size) / 2
             peak_led_coords = (
                 bar_x + peak_x_off, bar_y - led_offset - scale_text_padding,
@@ -117,7 +116,7 @@ class MeterLayoutCalculator:
             x2 = bar_x + v_end
             y1 = bar_y + t_start
             y2 = bar_y + t_end
-            
+
             if configuration.rotation_angle == 0.0: return [x1, y1, x2, y2]
             if configuration.rotation_angle == 90.0:
                 vx1 = bar_x + t_start
@@ -125,7 +124,7 @@ class MeterLayoutCalculator:
                 vx2 = bar_x + t_end
                 vy2 = bar_y + (b_len - v_start)
                 return [vx1, vy1, vx2, vy2]
-            
+
             # Arbitrary Rotation
             cx, cy = bar_x + (b_len / 2), bar_y + (b_thick / 2)
             points = [(x1, y1), (x2, y1), (x2, y2), (x1, y2)]
@@ -144,18 +143,18 @@ class MeterLayoutCalculator:
         z2_norm = (configuration.upper_range - configuration.min_val) / (configuration.max_val - configuration.min_val)
         z1_pix = max(0, min(b_len, z1_norm * b_len))
         z2_pix = max(0, min(b_len, z2_norm * b_len))
-        
+
         # 5. Ticks & Grid
         ticks = []
         grid_lines = []
         scale_labels = []
-        
+
         num_main = 5
         for i in range(num_main + 1):
             norm = i / num_main
             value = configuration.min_val + norm * (configuration.max_val - configuration.min_val)
             position = norm * b_len
-            
+
             if not configuration.is_vertical:
                 tx1, ty1 = bar_x + position, tick_start
                 tx2, ty2 = bar_x + position, tick_start + (tick_height_val * tick_dir)
@@ -168,12 +167,12 @@ class MeterLayoutCalculator:
                 gx1, gy1, gx2, gy2 = bar_x, bar_y + (b_len - position), bar_x + b_thick, bar_y + (b_len - position)
                 label_x, label_y = tx2 + (5 * tick_dir), ty2
                 anchor = "w" if configuration.scale_position in ["bottom", "right"] else "e"
-            
+
             if configuration.show_ticks: ticks.append((tx1, ty1, tx2, ty2, False))
             if configuration.tick_grid_overlay: grid_lines.append((gx1, gy1, gx2, gy2, False))
             if configuration.scale_position != "none" and configuration.show_scale_labels:
                 scale_labels.append((label_x, label_y, f"{int(value)}", anchor))
-                
+
             if configuration.tick_both_sides:
                 opp_dir = -tick_dir
                 if not configuration.is_vertical:
@@ -197,10 +196,10 @@ class MeterLayoutCalculator:
                         stx1, sty1 = tick_start, bar_y + (b_len - sub_position)
                         stx2, sty2 = tick_start + ((tick_height_val * 0.5) * tick_dir), bar_y + (b_len - sub_position)
                         sgx1, sgy1, sgx2, sgy2 = bar_x, bar_y + (b_len - sub_position), bar_x + b_thick, bar_y + (b_len - sub_position)
-                    
+
                     if configuration.show_ticks: ticks.append((stx1, sty1, stx2, sty2, True))
                     if configuration.tick_sub_grid_overlay: grid_lines.append((sgx1, sgy1, sgx2, sgy2, True))
-                    
+
                     if configuration.tick_both_sides:
                         opp_dir = -tick_dir
                         if not configuration.is_vertical:
@@ -234,10 +233,10 @@ class MeterLayoutCalculator:
     def get_dynamic_coords(self, current_val, peak_val, overload_factor, configuration, layout: LayoutResult):
         """Calculates coordinates for elements that change every frame."""
         def norm(v): return (v - configuration.min_val) / (configuration.max_val - configuration.min_val)
-        
+
         position = max(0, min(layout.base_len, norm(current_val) * layout.base_len))
         peak_position = max(0, min(layout.base_len, norm(peak_val) * layout.base_len))
-        
+
         # Recalculate poly helper locally
         def get_poly(v_start, v_end, t_start, t_end):
             x1 = layout.bar_x + v_start
@@ -263,13 +262,13 @@ class MeterLayoutCalculator:
         z1_end = min(position, (configuration.middle_range - configuration.min_val) / (configuration.max_val - configuration.min_val) * layout.base_len)
         if configuration.fill_with_value:
             z1_end = position
-        
+
         z2_start = (configuration.middle_range - configuration.min_val) / (configuration.max_val - configuration.min_val) * layout.base_len
         z2_end = max(z2_start, min(position, (configuration.upper_range - configuration.min_val) / (configuration.max_val - configuration.min_val) * layout.base_len))
         z3_start = (configuration.upper_range - configuration.min_val) / (configuration.max_val - configuration.min_val) * layout.base_len
         z3_end = max(z3_start, min(position, layout.base_len))
 
-        
+
         if not configuration.fill_with_value:
             z1_end, z2_end, z3_end = z2_start, z3_start, layout.base_len # full zones
 
@@ -278,7 +277,7 @@ class MeterLayoutCalculator:
         ext = layout.bar_thick * 0.15
         if configuration.scale_position in ["top", "left"]: thick1 -= ext
         if configuration.scale_position in ["bottom", "right"]: thick2 += ext
-        
+
         # 3. Peak Flag
         flag_points = []
         if configuration.peak_flag:

@@ -9,7 +9,9 @@ import subprocess
 import sys
 import tkinter as tk
 from pathlib import Path
+
 from oaLogging.Core.logger import builder_logger
+
 
 class BuilderContextMenuMixin:
     """
@@ -26,7 +28,7 @@ class BuilderContextMenuMixin:
         self.context_menu.add_command(label="Check Dependencies", command=self._run_dependency_audit)
         self.context_menu.add_separator()
         self.context_menu.add_command(label="Reload UI", command=self._force_rebuild_gui)
-        
+
         # Physical Bindings
         target_widgets = [w for w in ['canvas', 'scroll_frame'] if hasattr(self, w)]
         for attr in target_widgets:
@@ -78,7 +80,7 @@ class BuilderContextMenuMixin:
     def _spawn_editor_process(self):
         """Physical execution of the subprocess call for the editor."""
         runner_path = Path(__file__).resolve().parent.parent.parent / "oaGuiEditorWYSIWYG" / "Managers" / "run_builder.py"
-        
+
         if not runner_path.exists():
             builder_logger.error(f"🏗️🚫 Orchestrator runner missing: {runner_path}")
             return
@@ -95,7 +97,7 @@ class BuilderContextMenuMixin:
         """Triggers the global installation script to verify system state."""
         from oaOchestration.Core.path_initializer import GLOBAL_PROJECT_ROOT
         audit_script = GLOBAL_PROJECT_ROOT / "oaInstallation" / "Entry.py"
-        
+
         if not audit_script.exists():
             builder_logger.error("🏗️🚫 Audit script not found.")
             return

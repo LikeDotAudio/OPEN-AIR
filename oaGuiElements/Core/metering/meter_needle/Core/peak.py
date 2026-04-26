@@ -4,8 +4,8 @@
 #
 # Description: Brief summary of purpose
 
-import tkinter as tk
 import math
+
 
 class PeakDrawer:
     @staticmethod

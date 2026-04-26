@@ -28,8 +28,6 @@ Constraints:
       disk I/O on hot paths.
 """
 
-import sys
-import os
 from loguru import logger
 
 try:
@@ -42,12 +40,14 @@ except Exception as e:
     logger.error(f"❌ [GUI_MANAGER] Failed to initialize Rust Blueprint Parser: {e}")
     HAS_RUST = False
 
-import hashlib
-from oaLogging.Methods.matrix_gate import matrix_log
-import inspect
-import orjson
 import copy
+import hashlib
+import inspect
 from pathlib import Path
+
+import orjson
+
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # LOCAL_DEBUG: Toggles verbose tracing for blueprint loading and merging.
 
@@ -78,7 +78,7 @@ class BlueprintLoader:
         Retrieves and prepares a GUI blueprint for the builder.
         """
         if json_filepath is None or not json_filepath.exists():
-            # Fallback to the default configuration if the specific file is 
+            # Fallback to the default configuration if the specific file is
             # missing (unless it's a temporary preview).
             if tab_name != "InteractivePreview":
                 default = BlueprintLoader._load_default_config()
@@ -91,7 +91,7 @@ class BlueprintLoader:
             logger.error(f"❌ BlueprintLoader: Empty file at {json_filepath}")
             return {}, None, False
 
-        with open(json_filepath, "r") as f:
+        with open(json_filepath) as f:
             raw_content = f.read()
 
         # Generate SHA256 hash for rapid change detection (Satisfies security audit).
@@ -107,15 +107,15 @@ class BlueprintLoader:
 
         # 1. Parse the specific GUI configuration using high-speed orjson.
         specific_config = orjson.loads(raw_content)
-        
+
         # 2. Merge with global defaults to ensure theme consistency.
         default_config = BlueprintLoader._load_default_config()
-        config_data = BlueprintLoader._recursive_merge(default_config, 
+        config_data = BlueprintLoader._recursive_merge(default_config,
                                                         specific_config)
-        
+
         # 3. ⚡ PERFORMANCE: Pre-normalize the entire tree.
         config_data = BlueprintLoader._recursively_normalize(config_data)
-        
+
         return config_data, current_hash, True
 
     @staticmethod
@@ -128,15 +128,15 @@ class BlueprintLoader:
             root (dict): The root of the entire tree (for cross-references).
         """
         from oaGui.Core.widget_schema_normalizer import WidgetSchemaNormalizer
-        if root is None: 
+        if root is None:
             root = config
-        
+
         if not isinstance(config, dict):
             return config
-            
+
         # 1. Normalize the current level (flattens geometry/cosmetics).
         config = WidgetSchemaNormalizer.normalize(config, root_config=root)
-        
+
         # 2. Optimized recursion: Only descend into logical widget containers.
         if "fields" in config:
             fields = config["fields"]
@@ -146,7 +146,7 @@ class BlueprintLoader:
             elif isinstance(fields, list):
                 for i, field in enumerate(fields):
                     fields[i] = BlueprintLoader._recursively_normalize(field, root)
-        
+
         elif "blocks" in config:
             blocks = config["blocks"]
             if isinstance(blocks, dict):
@@ -155,14 +155,14 @@ class BlueprintLoader:
             elif isinstance(blocks, list):
                 for i, block in enumerate(blocks):
                     blocks[i] = BlueprintLoader._recursively_normalize(block, root)
-        
+
         elif not config.get("type"):
             # If the current level has no 'type', it is a structural container.
             for key, value in config.items():
                 if isinstance(value, dict):
                     # Skip known metadata keys to avoid redundant processing.
-                    if key not in ["background", "styles", "style", "behavior", 
-                                   "metadata", "geometry", "cosmetics", "domain", 
+                    if key not in ["background", "styles", "style", "behavior",
+                                   "metadata", "geometry", "cosmetics", "domain",
                                    "dynamics", "readout", "interaction", "layout"]:
                         config[key] = (
                             BlueprintLoader._recursively_normalize(value, root)
@@ -170,7 +170,7 @@ class BlueprintLoader:
                 elif isinstance(value, list) and key in ["items", "blocks", "fields"]:
                      for i, item in enumerate(value):
                          value[i] = BlueprintLoader._recursively_normalize(item, root)
-                
+
         return config
 
     @staticmethod
@@ -185,19 +185,19 @@ class BlueprintLoader:
         # Locate default_panel.json relative to the current module path.
         current_dir = Path(__file__).resolve().parent
         default_path = current_dir.parent / "Constants" / "default_panel.json"
-        
+
         if default_path.exists() and default_path.stat().st_size > 0:
-            with open(default_path, "r") as f:
+            with open(default_path) as f:
                 raw_data = f.read()
                 # ⚡ PRE-VALIDATION: Structural check
                 if raw_data.strip().startswith("{"):
                     _DEFAULT_CONFIG_CACHE = orjson.loads(raw_data)
                     return copy.deepcopy(_DEFAULT_CONFIG_CACHE)
                 else:
-                    logger.warning(f"🟡 BlueprintLoader: default_panel.json failed structural check.")
+                    logger.warning("🟡 BlueprintLoader: default_panel.json failed structural check.")
         else:
-            logger.warning(f"🟡 BlueprintLoader: default_panel.json missing or empty.")
-            
+            logger.warning("🟡 BlueprintLoader: default_panel.json missing or empty.")
+
         return {}
 
     @staticmethod
@@ -215,9 +215,9 @@ class BlueprintLoader:
         # Ensure the base is cloned to prevent accidental mutation of the cache.
         result = copy.deepcopy(base)
         for key, value in overrides.items():
-            if (isinstance(value, dict) and key in result and 
+            if (isinstance(value, dict) and key in result and
                 isinstance(result[key], dict)):
-                result[key] = BlueprintLoader._recursive_merge(result[key], 
+                result[key] = BlueprintLoader._recursive_merge(result[key],
                                                                 value)
             else:
                 result[key] = copy.deepcopy(value)

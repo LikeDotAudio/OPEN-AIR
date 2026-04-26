@@ -4,13 +4,14 @@
 #
 # Description: Brief summary of purpose
 
-import time
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
+import time
+
 import orjson
-from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic
+
 from oaComProtocols.oaComMQTT.Core.mqtt_publisher_service import is_connected
-from loguru import logger
+from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic
+from oaLogging.Methods.matrix_gate import matrix_log
 
 
 class HiddenGeometryManagerMixin:
@@ -39,10 +40,10 @@ class HiddenGeometryManagerMixin:
         """Handles the <Configure> event to report geometry."""
         if not hasattr(self, "_geometry_timer"):
             self._geometry_timer = None
-            
+
         if self._geometry_timer:
             self.after_cancel(self._geometry_timer)
-            
+
         toplevel = self.winfo_toplevel()
         if toplevel:
             w, h, x, y = toplevel.winfo_width(), toplevel.winfo_height(), toplevel.winfo_x(), toplevel.winfo_y()

@@ -71,7 +71,7 @@ def find_module_name(dir_path):
     # Try pyproject.toml first
     pyproject = os.path.join(dir_path, "pyproject.toml")
     if os.path.exists(pyproject):
-        with open(pyproject, "r") as f:
+        with open(pyproject) as f:
             content = f.read()
             # Look for module-name in [tool.maturin]
             match = re.search(r'module-name\s*=\s*\"([^\"]+)\"', content)
@@ -85,12 +85,12 @@ def find_module_name(dir_path):
     # Try Cargo.toml
     cargo = os.path.join(dir_path, "Cargo.toml")
     if os.path.exists(cargo):
-        with open(cargo, "r") as f:
+        with open(cargo) as f:
             content = f.read()
             match = re.search(r'^name\s*=\s*\"([^\"]+)\"', content, re.MULTILINE)
             if match:
                 return match.group(1).lower().replace("-", "_")
-    
+
     return None
 
 def main():
@@ -98,24 +98,24 @@ def main():
     for root, dirs, files in os.walk("."):
         if "compiler_hook.py" in files:
             hooks.append(os.path.join(root, "compiler_hook.py"))
-    
+
     print(f"Found {len(hooks)} compiler hooks.")
-    
+
     for hook_path in hooks:
         dir_path = os.path.dirname(hook_path)
         module_name = find_module_name(dir_path)
-        
+
         if not module_name:
             print(f"Skipping {hook_path}: Could not determine module name.")
             continue
-        
+
         print(f"Updating {hook_path} for module {module_name}...")
-        
+
         # We use the relative path from the project root for the header
         rel_hook_path = os.path.relpath(hook_path, ".")
-        
+
         new_content = TEMPLATE.format(file_path=rel_hook_path, module_name=module_name)
-        
+
         with open(hook_path, "w") as f:
             f.write(new_content)
 

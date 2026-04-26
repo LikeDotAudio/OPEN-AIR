@@ -4,12 +4,15 @@
 #
 # Description: Brief summary of purpose
 
-import unittest
-from unittest.mock import MagicMock, patch
 import tkinter as tk
+import unittest
+from unittest.mock import MagicMock
+
 import matplotlib
+
 matplotlib.use('Agg')
 from oaGuiElements.Core.graphing.Methods.dynamic_graph import GraphPlotter
+
 
 class TestGraphPlotter(unittest.TestCase):
     def setUp(self):
@@ -17,14 +20,14 @@ class TestGraphPlotter(unittest.TestCase):
         self.root.withdraw()
         self.parent = tk.Frame(self.root)
         self.parent.pack()
-        
+
         # Mock Context
         self.mock_context = MagicMock()
         self.mock_context.state_mirror_engine = MagicMock()
         self.mock_context.subscriber_router = MagicMock()
         self.mock_context.base_mqtt_topic_from_path = "OPEN-AIR/test"
         self.mock_context.builder_instance = MagicMock()
-        
+
         self.config = {
             "path": "test/graph",
             "datasets": [
@@ -36,9 +39,9 @@ class TestGraphPlotter(unittest.TestCase):
     def test_creation(self):
         """Verify that GraphPlotter initializes without error."""
         plotter = GraphPlotter(
-            self.parent, 
-            self.config, 
-            "OPEN-AIR/test", 
+            self.parent,
+            self.config,
+            "OPEN-AIR/test",
             "test/graph",
             context=self.mock_context
         )
@@ -46,10 +49,10 @@ class TestGraphPlotter(unittest.TestCase):
         self.assertIsNotNone(plotter.fig)
         self.assertIsNotNone(plotter.ax)
         self.assertIsNotNone(plotter.canvas)
-        
+
         # Check if line was created
         self.assertIn("ds1", plotter.lines)
-        
+
     def tearDown(self):
         self.root.destroy()
 

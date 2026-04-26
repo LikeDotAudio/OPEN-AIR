@@ -1,7 +1,7 @@
 # Core/handle_command.py
 #
 # Unified command handler for both MQTT and internal Router events.
-# Processes Splinker-specific control messages and dispatches them 
+# Processes Splinker-specific control messages and dispatches them
 # to the appropriate internal logic.
 #
 # Author: Anthony Peter Kuzub
@@ -17,8 +17,11 @@
 # Version 20260330.1600.1
 
 import orjson
-from ..Constants.constants import splinker_logger
+
 from oaLogging.Methods.matrix_gate import matrix_log
+
+from ..Constants.constants import splinker_logger
+
 
 def handle_command(self, topic, payload):
     """Unified command handler for both MQTT and internal Router events."""
@@ -27,7 +30,7 @@ def handle_command(self, topic, payload):
         return
 
     parts = topic.split('/')
-    if len(parts) < 5: 
+    if len(parts) < 5:
         return
 
     command = parts[-1]
@@ -67,7 +70,7 @@ def _unwrap_payload(self, payload):
         data = payload
         if isinstance(payload, (bytes, str)):
             data = orjson.loads(payload)
-        
+
         if isinstance(data, dict) and "value" in data:
             return data["value"]
         return data
@@ -80,7 +83,7 @@ def _process_direct_create(self, payload):
     data = self._unwrap_payload(payload)
     if data and isinstance(data, dict):
         self.create_splink_with_params(
-            data.get("source"), 
+            data.get("source"),
             data.get("dest"),
             source_val=data.get("source_val"),
             dest_val=data.get("dest_val")

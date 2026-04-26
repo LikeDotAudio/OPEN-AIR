@@ -1,14 +1,14 @@
 # adapters/plot_adapter.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: Brief summary of purpose
 
+import inspect
+
 from oaGuiElements.Core.graphing.Methods.dynamic_graph import GraphPlotter
 from oaLogging.Methods.matrix_gate import matrix_log
-import inspect
-from oaLogging.Core.logger import builder_logger
+
 
 class PlotAdapter:
     """Adapter for creating standard Plot widgets."""
@@ -27,9 +27,9 @@ class PlotAdapter:
             builder_instance = kwargs.get("builder_instance")
 
         widget_id = config_data.get("path", config_data.get("id", "plot_widget"))
-        
+
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] plot_adapter: Spawning GraphPlotter '{widget_id}'.", level="DEBUG")
-        
+
         return GraphPlotter(
             parent=parent_widget,
             config=config_data,

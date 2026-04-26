@@ -4,8 +4,10 @@
 #
 # Description: Brief summary of purpose
 
-from PIL import Image, ImageDraw, ImageFilter
 import math
+
+from PIL import Image, ImageDraw, ImageFilter
+
 
 class VignetteLayer:
     @staticmethod
@@ -25,24 +27,24 @@ class VignetteLayer:
         """Creates a robust 4-sided vignette fading from all edges."""
         if depth <= 0:
             return Image.new('RGBA', (width, height), (255, 255, 255, 255))
-            
+
         # Start with white (no effect when multiplied)
         vig = Image.new('L', (width, height), 255)
         draw = ImageDraw.Draw(vig)
-        
+
         # Ensure intensity is clamped
         intensity = max(0.0, min(1.0, intensity))
-        
+
         # Draw a gradient that fades inwards from all 4 sides.
         for i in range(depth):
             progress = i / depth
             # Nonlinear falloff for a "lens" look
             alpha_factor = 1.0 - (math.pow(1.0 - progress, 1.2) * intensity * 0.8)
             alpha = int(255 * alpha_factor)
-            
+
             # Draw rectangles to ensure 4-sided coverage without gaps
             draw.rectangle((i, i, width-1-i, height-1-i), outline=alpha)
-            
+
         # Apply a heavy blur to soften the transitions further
         blur_radius = max(2, depth // 2)
         return vig.filter(ImageFilter.GaussianBlur(radius=blur_radius)).convert("RGBA")

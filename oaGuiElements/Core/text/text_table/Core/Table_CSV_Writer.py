@@ -1,20 +1,16 @@
 # text_table/Table_CSV_Writer.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 20250821.200641.1
 #
 # Description: This module provides functionality to write a list of dictionaries to a CSV file.
 
 import csv
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
 import os
 
 # --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory
-from loguru import logger
-
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 

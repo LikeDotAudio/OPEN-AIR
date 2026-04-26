@@ -5,10 +5,11 @@
 # Description: NMOS WebSocket Manager Implementation.
 # Provides controls to start/stop the IS-07 WebSocket transport.
 
-import tkinter as tk
-from tkinter import ttk
 import threading
 import time
+import tkinter as tk
+from tkinter import ttk
+
 from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- GUI FALLBACKS (V3.2.1 Decoupling) ---
@@ -28,12 +29,12 @@ class NmosWebsocketManagerImplementation(tk.Frame, TransparencyMixin):
         super().__init__(parent, **kwargs)
         self.config = config or {}
         self.global_state = self.config.get("global_state", {})
-        
+
         # ⚡ MANDATE: NMOS WebSocket must ALWAYS be online.
         self.is_connected = False
         self.ws_url = "ws://localhost:8080/is07"
         self.client_count = 0
-        
+
         self._setup_ui()
         self._start_monitor_thread()
 
@@ -61,7 +62,7 @@ class NmosWebsocketManagerImplementation(tk.Frame, TransparencyMixin):
         # 3. Controls
         ctrl_frame = tk.Frame(self, bg=bg_color)
         ctrl_frame.pack(side=tk.TOP, fill=tk.X, padx=20, pady=10)
-        
+
         self.start_btn = ttk.Button(ctrl_frame, text="RESTART WEBSOCKET", command=self._start_ws)
         self.start_btn.pack(side=tk.LEFT, padx=5)
 
@@ -83,7 +84,7 @@ class NmosWebsocketManagerImplementation(tk.Frame, TransparencyMixin):
                     self.is_connected = bridge.is_running
                     # In a real impl we'd check active clients from the transport
                     self.client_count = 1 if bridge.is_running else 0
-                
+
                 if self.winfo_exists():
                     self.after(0, self._refresh_ui)
             except (RuntimeError, tk.TclError):
@@ -91,16 +92,16 @@ class NmosWebsocketManagerImplementation(tk.Frame, TransparencyMixin):
                 break
             except Exception as e:
                 matrix_log("ui", "nmos", "ws_monitor_error", f"Error in WS monitor: {e}", "ERROR")
-            
+
             time.sleep(2)
 
     def _refresh_ui(self):
         status_text = "Status: RUNNING" if self.is_connected else "Status: STOPPED"
         status_color = "#00ff00" if self.is_connected else "#ff0000"
-        
+
         self.ws_status_var.set(status_text)
         self.ws_status_lbl.config(fg=status_color)
-        
+
         url = self.ws_url if self.is_connected else "-"
         clients = self.client_count if self.is_connected else 0
         self.ws_info_var.set(f"URL: {url} | Clients: {clients}")

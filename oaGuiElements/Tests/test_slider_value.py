@@ -1,14 +1,17 @@
-import unittest
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
-from unittest.mock import MagicMock, patch
-import tkinter as tk
-from tkinter import ttk
+
 # Set a path for logs before other imports
 import os
+import tkinter as tk
+import unittest
+from unittest.mock import MagicMock, patch
+
+from oaLogging.Methods.matrix_gate import matrix_log
+
 os.environ['OPEN_AIR_LOG_PATH'] = '/tmp/open_air_tests'
 
 from oaGuiElements.Core.utils.slider_value.Core.slider_value import BuilderSliderValueCreator
+
 
 class TestSliderValueCreator(unittest.TestCase):
 
@@ -26,27 +29,27 @@ class TestSliderValueCreator(unittest.TestCase):
             self.root = MagicMock()
             self.root.winfo_exists.return_value = True
             self.root.cget.return_value = '#2b2b2b'
-            
+
             # Patch variables and widgets
             self.patchers.append(patch('tkinter.DoubleVar', return_value=MagicMock()))
             self.patchers.append(patch('tkinter.StringVar', return_value=MagicMock()))
             self.patchers.append(patch('tkinter.Frame', return_value=MagicMock()))
             self.patchers.append(patch('tkinter.Scale', return_value=MagicMock()))
             self.patchers.append(patch('tkinter.ttk.Scale', return_value=MagicMock()))
-            
+
             for p in self.patchers:
                 p.start()
-            
+
         self.parent_widget = tk.Frame(self.root)
 
         # Mock the context object that is passed around during GUI building
         self.mock_context = MagicMock()
-        
+
         # The builder_instance is the main GUI builder that holds state,
         # including the 'topic_widgets' dictionary.
         self.mock_builder_instance = MagicMock()
         self.mock_builder_instance.topic_widgets = {}
-        
+
         # Mock other required context attributes
         self.mock_context.builder_instance = self.mock_builder_instance
         self.mock_context.state_mirror_engine = MagicMock()
@@ -58,7 +61,7 @@ class TestSliderValueCreator(unittest.TestCase):
         if hasattr(self, 'patchers'):
             for p in self.patchers:
                 p.stop()
-                
+
         if hasattr(self.root, 'destroy') and not isinstance(self.root, MagicMock):
             try:
                 self.parent_widget.destroy()
@@ -96,19 +99,19 @@ class TestSliderValueCreator(unittest.TestCase):
         # This is the crucial check to ensure the 'AttributeError' doesn't happen.
         # The path from config_data should now be a key in the dictionary.
         self.assertIn(config_data["path"], self.mock_builder_instance.topic_widgets)
-        
+
         # 3. CHECK: The value stored is a tuple containing the StringVar and the Scale widget
         stored_tuple = self.mock_builder_instance.topic_widgets[config_data["path"]]
         self.assertIsInstance(stored_tuple, tuple, "The stored value should be a tuple.")
         self.assertEqual(len(stored_tuple), 2, "The tuple should contain two elements.")
-        
+
         # Check the elements in the tuple (using isinstance or checking if they are mocks)
         string_var, scale_widget = stored_tuple
-        
+
         # Check if the value was set correctly
         if not isinstance(string_var, MagicMock):
             self.assertEqual(string_var.get(), str(config_data["value"]))
-        
+
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "✅ Test passed: 'test_make_slider_value_prevents_attribute_error' confirmed the fix.", level="INFO")
 
 

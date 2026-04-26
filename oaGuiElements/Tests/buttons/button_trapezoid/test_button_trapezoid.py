@@ -4,10 +4,12 @@
 #
 # Description: Brief summary of purpose
 
+import tkinter as tk
 import unittest
 from unittest.mock import MagicMock, patch
-import tkinter as tk
+
 from oaGuiElements.Core.buttons.button_trapezoid.Core.button_trapezoid import TrapezoidButton
+
 
 class TestButtonTrapezoid(unittest.TestCase):
     def setUp(self):
@@ -16,7 +18,7 @@ class TestButtonTrapezoid(unittest.TestCase):
             self.root.withdraw()
         except:
             self.root = MagicMock()
-        
+
         # Fixed DoubleVar master
         self.variable = tk.DoubleVar(master=self.root, value=0.0)
         self.config = {
@@ -28,7 +30,7 @@ class TestButtonTrapezoid(unittest.TestCase):
         }
         self.mirror_engine = MagicMock()
         self.router = MagicMock()
-        
+
         self.context = MagicMock()
         self.context.state_mirror_engine = self.mirror_engine
         self.context.subscriber_router = self.router

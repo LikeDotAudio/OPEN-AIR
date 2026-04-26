@@ -1,5 +1,6 @@
-from .createtype import Type, create_type
 from struct import pack_into, unpack_from
+
+from .createtype import Type, create_type
 
 
 def encoded_length(value):

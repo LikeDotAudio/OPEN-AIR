@@ -29,12 +29,12 @@ def snap_geometry(geometry, grid_size=100):
         dict: A new dictionary with snapped values.
     """
     snapped = {}
-    if "x" in geometry: 
+    if "x" in geometry:
         snapped["x"] = snap_to_grid(geometry["x"], grid_size)
-    if "y" in geometry: 
+    if "y" in geometry:
         snapped["y"] = snap_to_grid(geometry["y"], grid_size)
-    if "width" in geometry: 
+    if "width" in geometry:
         snapped["width"] = max(grid_size, snap_to_grid(geometry["width"], grid_size))
-    if "height" in geometry: 
+    if "height" in geometry:
         snapped["height"] = max(grid_size, snap_to_grid(geometry["height"], grid_size))
     return snapped

@@ -1,24 +1,19 @@
 # integration/state_linker.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: Brief summary of purpose
 
-import tkinter as tk
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
 import random
+import tkinter as tk
 
 # --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory
-from loguru import logger
-
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
-from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic
 
 class StateLinker:
     def __init__(self, state_mirror_engine, subscriber_router, config, base_topic_path, master=None):
@@ -26,7 +21,7 @@ class StateLinker:
         self.subscriber_router = subscriber_router
         self.config = config
         self.base_topic_path = base_topic_path
-        
+
         self.vu_value_var = tk.DoubleVar(master=master, value=self.config.value_default)
         self.vu_value_var_2 = tk.DoubleVar(master=master, value=self.config.value_default) if self.config.meter_mode == "stereo" else None
 
@@ -34,17 +29,17 @@ class StateLinker:
         # Trace variables to trigger animation
         def on_value_change(*args):
             animator.update_target(self.vu_value_var.get())
-        
+
         self.vu_value_var.trace_add("write", on_value_change)
-        
+
         if self.config.meter_mode == "stereo":
             def on_value_change_2(*args):
                 animator.update_target_2(self.vu_value_var_2.get())
             self.vu_value_var_2.trace_add("write", on_value_change_2)
-            
+
         # Bind interactions for random testing
         self._bind_random_generators(animator.canvas)
-        
+
         # Register with State Mirror
         if self.config.path:
             self._register_with_engine()
@@ -56,7 +51,7 @@ class StateLinker:
             if self.config.meter_mode == "stereo":
                 random_val_2 = random.uniform(self.config.min_val, self.config.max_val)
                 self.vu_value_var_2.set(random_val_2)
-            
+
             if self.state_mirror_engine:
                 self.state_mirror_engine.broadcast_gui_change_to_mqtt(self.config.path)
                 if self.config.meter_mode == "stereo":
@@ -67,7 +62,7 @@ class StateLinker:
 
     def _register_with_engine(self):
         widget_id = self.config.path
-        
+
         # Channel 1
         topic = self.state_mirror_engine.register_widget(
             widget_id, self.vu_value_var, self.base_topic_path, self.config.config
@@ -76,10 +71,10 @@ class StateLinker:
             self.subscriber_router.subscribe_to_topic(
                 topic, self.state_mirror_engine.sync_incoming_mqtt_to_gui
             )
-        
+
         # Channel 2 (Stereo)
         if self.config.meter_mode == "stereo":
-            widget_id_2 = widget_id + "_2" 
+            widget_id_2 = widget_id + "_2"
             topic_2 = self.state_mirror_engine.register_widget(
                 widget_id_2, self.vu_value_var_2, self.base_topic_path, self.config.config
             )
@@ -89,7 +84,7 @@ class StateLinker:
                 )
 
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬 Widget '{self.config.label}' ({self.config.path}) registered with StateMirrorEngine.", level="DEBUG")
-        
+
         # Initialize state
         self.state_mirror_engine.initialize_widget_state(self.config.path)
         if self.config.meter_mode == "stereo":

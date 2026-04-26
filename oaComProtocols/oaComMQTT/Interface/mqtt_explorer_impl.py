@@ -5,12 +5,12 @@
 # Description: MQTT Tree Explorer for the OPEN-AIR System.
 # Pulls data from the State Cache and updates in real-time.
 
+import time
 import tkinter as tk
 from tkinter import ttk
-import json
-import time
-from pathlib import Path
+
 from oaLogging.Methods.matrix_gate import matrix_log
+
 # from oaComBroker.Core.event_bus import event_bus
 
 try:
@@ -27,10 +27,10 @@ class MqttExplorerImplementation(tk.Frame, TransparencyMixin):
     def __init__(self, parent, **kwargs):
         self.config_data = kwargs.pop("config", {})
         super().__init__(parent, **kwargs)
-        
+
         self._nodes = {} # path -> item_id
         self._setup_ui()
-        
+
         # Subscribe to state changes if available
         try:
             # event_bus.subscribe("STATE_CHANGED", self._on_state_change)
@@ -39,7 +39,7 @@ class MqttExplorerImplementation(tk.Frame, TransparencyMixin):
             pass
         except Exception:
             pass
-            
+
         # Initial priming if state registry is already active
         self._prime_tree()
 
@@ -51,10 +51,10 @@ class MqttExplorerImplementation(tk.Frame, TransparencyMixin):
         header = tk.Frame(self, bg="#2b2b2b")
         header.pack(side=tk.TOP, fill=tk.X, pady=5)
         tk.Label(header, text="🌐 MQTT TREE EXPLORER", font=("Helvetica", 12, "bold"), fg="#ffffff", bg="#2b2b2b").pack(side=tk.LEFT, padx=10)
-        
+
         btn_frame = tk.Frame(header, bg="#2b2b2b")
         btn_frame.pack(side=tk.RIGHT, padx=10)
-        
+
         tk.Button(btn_frame, text="CLEAR", bg="#444444", fg="#ffffff", font=("Helvetica", 8), command=self._clear_tree).pack(side=tk.LEFT, padx=2)
         tk.Button(btn_frame, text="REFRESH", bg="#444444", fg="#ffffff", font=("Helvetica", 8), command=self._prime_tree).pack(side=tk.LEFT, padx=2)
 
@@ -67,11 +67,11 @@ class MqttExplorerImplementation(tk.Frame, TransparencyMixin):
         self.tree.heading("#0", text="Topic Namespace")
         self.tree.heading("Value", text="Live Value")
         self.tree.heading("Timestamp", text="Last Updated")
-        
+
         self.tree.column("#0", width=400)
         self.tree.column("Value", width=200)
         self.tree.column("Timestamp", width=150)
-        
+
         vsb = ttk.Scrollbar(tree_frame, orient="vertical", command=self.tree.yview)
         self.tree.configure(yscrollcommand=vsb.set)
         self.tree.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
@@ -88,12 +88,12 @@ class MqttExplorerImplementation(tk.Frame, TransparencyMixin):
             try:
                 # 1. Try from config first
                 registry = self.config_data.get("state_cache_manager")
-                
+
                 # 2. Fallback to singleton if available
                 if not registry:
                     from oaStateCache.Entry import get_registry
                     registry = get_registry()
-                
+
                 if registry and hasattr(registry, "rust_cache"):
                     # Use internal rust_cache items
                     for topic, data in registry.rust_cache.items():
@@ -106,7 +106,7 @@ class MqttExplorerImplementation(tk.Frame, TransparencyMixin):
                 return
 
         if not entries: return
-        
+
         for topic, data in entries.items():
             val = data.get('value') if isinstance(data, dict) else data
             ts = data.get('timestamp', time.time()) if isinstance(data, dict) else time.time()
@@ -120,11 +120,11 @@ class MqttExplorerImplementation(tk.Frame, TransparencyMixin):
     def _update_node(self, topic, value, timestamp):
         """Inserts or updates a node in the hierarchical tree."""
         if not self.winfo_exists(): return
-        
+
         parts = topic.split('/')
         path = ""
         parent_id = ""
-        
+
         ts_str = time.strftime("%H:%M:%S", time.localtime(timestamp))
         val_str = str(value)[:100] + ("..." if len(str(value)) > 100 else "")
 
@@ -139,7 +139,7 @@ class MqttExplorerImplementation(tk.Frame, TransparencyMixin):
             elif i == len(parts) - 1:
                 # Update existing leaf
                 self.tree.item(self._nodes[path], values=(val_str, ts_str))
-            
+
             parent_id = self._nodes[path]
 
     def render(self): pass

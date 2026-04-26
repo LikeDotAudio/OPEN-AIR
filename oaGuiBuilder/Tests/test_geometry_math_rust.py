@@ -6,7 +6,9 @@
 # Version: 20260401.1000.1
 
 import unittest
+
 from oaGuiBuilder.Core.ui_geometry_math import UIGeometryMath
+
 
 class TestGeometryMathRust(unittest.TestCase):
     def test_rust_normalize_value(self):

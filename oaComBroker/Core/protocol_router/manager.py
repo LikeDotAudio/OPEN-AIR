@@ -15,18 +15,18 @@
 # Version 20260328.1610.1
 #
 # Description:
-# This file serves as a high-level Manager proxy for the ProtocolRouter logic 
+# This file serves as a high-level Manager proxy for the ProtocolRouter logic
 # located in the Core partition. It maintains architectural consistency by
 # providing a familiar import path for legacy modules while adhering to the
 # Core/UI separation required by the OPEN-AIR standards.
 #
 # Partitioned Architecture (Core vs UI):
-# This is part of the 'Core' protocol_router package. It provides the 
+# This is part of the 'Core' protocol_router package. It provides the
 # high-level interface (Manager) for the internal routing logic.
 #
 # Architectural Role:
 # - Acts as a bridge between the 'Managers' conceptual layer and 'Core' logic.
-# - Ensures that modules requiring the ProtocolRouter receive the correct 
+# - Ensures that modules requiring the ProtocolRouter receive the correct
 #   Singleton instance.
 
 from .router import ProtocolRouter

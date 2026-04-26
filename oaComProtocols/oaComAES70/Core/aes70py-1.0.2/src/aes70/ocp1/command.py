@@ -1,10 +1,10 @@
-from typing import Optional
 from dataclasses import dataclass
 from struct import pack, unpack
 
+from .encoded_arguments import EncodedArguments
 from .pdu import PDU
 from .response import Response
-from .encoded_arguments import EncodedArguments
+
 
 @dataclass
 class Command(PDU):
@@ -12,7 +12,7 @@ class Command(PDU):
     method_level: int
     method_index: int
     param_count: int
-    parameters: Optional[bytes]
+    parameters: bytes | None
 
     message_type: int
 

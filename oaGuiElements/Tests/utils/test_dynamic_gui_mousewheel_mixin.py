@@ -4,15 +4,14 @@
 #
 # Description: Brief summary of purpose
 
-import unittest
 import os
 import sys
+import unittest
 
 # Add the project root to the Python path
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
 sys.path.insert(0, project_root)
 
-from oaGuiElements.Core.input.input_mousewheel_mixin.input_mousewheel_mixin import MousewheelScrollMixin
 
 class TestMousewheelScrollMixin(unittest.TestCase):
 
@@ -28,7 +27,7 @@ class TestMousewheelScrollMixin(unittest.TestCase):
 
         # Simulate a windows path for testing
         path_with_backslash = "workers\\builder\\builder_input_mousewheel_mixin\\mousewheel_mixin.py"
-        
+
         # Correct replacement
         path_with_forwardslash = path_with_backslash.replace("\\", "/")
         self.assertEqual(path_with_forwardslash, "workers/builder/builder_input_mousewheel_mixin/mousewheel_mixin.py")

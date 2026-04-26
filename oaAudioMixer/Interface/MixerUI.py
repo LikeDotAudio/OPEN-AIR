@@ -5,16 +5,16 @@
 # Description: TUI for the oaAudioMixer module with real-time controls for Inputs, Outputs, and Processes.
 # Fixed style argument error by moving layout properties to CSS.
 
-import sys
-import os
 import asyncio
+import sys
 from pathlib import Path
-from textual.app import App, ComposeResult
-from textual.widgets import Header, Footer, Static, ProgressBar, Label, Button
-from textual.containers import Container, Vertical, Horizontal, ScrollableContainer, Grid
-from textual.binding import Binding
-from textual.message import Message
+
 from textual import work
+from textual.app import App, ComposeResult
+from textual.binding import Binding
+from textual.containers import Container, Grid, Horizontal, ScrollableContainer, Vertical
+from textual.message import Message
+from textual.widgets import Button, Footer, Header, Label, ProgressBar, Static
 
 # Add project root to sys.path
 script_dir = Path(__file__).parent
@@ -33,7 +33,7 @@ except ImportError:
 
 class UniversalVolumeControl(Horizontal):
     """A volume control with UP/DOWN buttons for Inputs, Outputs, and Apps."""
-    
+
     class Changed(Message):
         def __init__(self, target_id, value, type):
             super().__init__()
@@ -65,7 +65,7 @@ class UniversalVolumeControl(Horizontal):
             self.volume_percent = max(0, self.volume_percent - 5)
         elif event.button.id == "inc":
             self.volume_percent = min(100, self.volume_percent + 5)
-        
+
         self.query_one("#v-bar", ProgressBar).progress = self.volume_percent
         self.query_one("#v-pct-label", Label).update(f"{self.volume_percent}%")
         self.post_message(self.Changed(self.target_id, self.volume_percent / 100.0, self.type))
@@ -161,7 +161,7 @@ class MixerApp(App):
             apps = self.mixer.get_connected_software()
 
             # Clear and populate
-            for list_id, items, type in [("#sink-list", sinks, 'device'), 
+            for list_id, items, type in [("#sink-list", sinks, 'device'),
                                          ("#source-list", sources, 'source'),
                                          ("#app-list", apps, 'app')]:
                 cont = self.query_one(list_id, ScrollableContainer)

@@ -15,8 +15,8 @@
 # Version 20260329.0045.1
 #
 # Description:
-# The 'Wall of Shame' provides a concise, high-density view of the top 
-# performance offenders. It is optimized for rapid scanning by lead 
+# The 'Wall of Shame' provides a concise, high-density view of the top
+# performance offenders. It is optimized for rapid scanning by lead
 # developers to identify immediate hotspots in the code that require
 # micro-optimization or refactoring.
 #
@@ -45,21 +45,21 @@ def generate_wall_of_shame(performance_stats, ps):
 
     # 2. Build lines
     shame_lines = ["--- PERFORMANCE WALL OF SHAME (TOP OFFENDERS) ---", ""]
-    
+
     for title, sort_key in categories:
         shame_lines.append(f"\n>>> {title}")
         # USE CONSTANT
         by_metric = sorted(performance_stats, key=sort_key, reverse=True)[:MAX_OFFENDERS_PER_CATEGORY]
-        
+
         for i, s in enumerate(by_metric, 1):
             # Sanitize Function Name for HTML Display (remove <method ...>)
             raw_name = s['funcname']
             if raw_name.startswith("<") and raw_name.endswith(">"):
                  if "method" in raw_name and "'" in raw_name:
                      raw_name = raw_name.split("'")[1]
-            
+
             safe_funcname = html.escape(raw_name)
-            
+
             if "Frequency" in title:
                 val_str = f"{s['ncalls']:10} calls | {s['tottime']:8.4f}s self"
             elif "Latency" in title:
@@ -68,7 +68,7 @@ def generate_wall_of_shame(performance_stats, ps):
                 val_str = f"{s['tottime']:10.4f}s | {s['ncalls']:8} calls"
             else: # Cumulative
                 val_str = f"{s['cumtime']:10.4f}s | {s['ncalls']:8} calls"
-                
+
             shame_lines.append(f" {i:2}. {val_str} | {safe_funcname}")
 
     # 3. Add Subsystem Breakdown

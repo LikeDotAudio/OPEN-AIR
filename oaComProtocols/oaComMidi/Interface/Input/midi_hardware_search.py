@@ -8,6 +8,7 @@
 import tkinter as tk
 from tkinter import ttk
 
+
 class MidiHardwareSearch(tk.Frame):
     """
     Component for hardware refresh and search actions.
@@ -21,7 +22,7 @@ class MidiHardwareSearch(tk.Frame):
     def _setup_ui(self):
         self.configure(bg="#2b2b2b")
         ttk.Button(self, text="🔄 Refresh MIDI Hardware", command=self.refresh_callback).pack(side=tk.LEFT, padx=5, pady=5)
-        
+
         # Search Entry placeholder for future filtering
         self.search_var = tk.StringVar()
         self.search_entry = ttk.Entry(self, textvariable=self.search_var)

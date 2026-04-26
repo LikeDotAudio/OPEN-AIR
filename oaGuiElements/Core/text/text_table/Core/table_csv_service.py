@@ -1,18 +1,19 @@
 # Core/table_csv_service.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: Brief summary of purpose
 
-import os
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
+import os
 import re
-from ..Table_CSV_Writer import TableCsvWriter
-from ..Table_CSV_Reader import TableCsvReader
-from ..Table_CSV_check import TableCsvCheck
+
 import oaOchestration.Constants.project_paths as app_paths
+from oaLogging.Methods.matrix_gate import matrix_log
+
+from .Table_CSV_check import TableCsvCheck
+from .Table_CSV_Reader import TableCsvReader
+from .Table_CSV_Writer import TableCsvWriter
 
 CSV_SAVE_DIR = str(app_paths.TABLES_DIR)
 
@@ -33,16 +34,15 @@ class TableCSVService:
 
     def load(self):
         """Reads from CSV and returns a dictionary structured for the table update."""
-        from loguru import logger
         try:
             headers, data = self.reader.read_from_csv(self.csv_path)
         except FileNotFoundError:
             matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📜 CSV file not found at {self.csv_path}. This is normal if no data has been saved yet.", level="DEBUG")
             return None
 
-        if not data: 
+        if not data:
             return None
-        
+
         data_dict = {}
         kp = ["id", "gpib_address", "serial_number", "resource_string", "model"]
         for i, row in enumerate(data):

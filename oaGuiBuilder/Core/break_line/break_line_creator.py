@@ -6,13 +6,12 @@
 # Specialized to handle "OcaFold" visual indicators for industrial layouts.
 
 import tkinter as tk
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
-from oaGuiManager.Core.transparency.transparency import TransparencyManager
+
+from oaGuiBuilder.Constants.builder_constants import BREAKLINE_DEFAULT_COLOR, BREAKLINE_MIN_THICKNESS
 from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
-from oaGuiBuilder.Constants.builder_constants import (
-    BREAKLINE_MIN_THICKNESS, 
-    BREAKLINE_DEFAULT_COLOR
-)
+from oaGuiManager.Core.transparency.transparency import TransparencyManager
+from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+
 
 @WidgetRegistry.register("OcaFold", "BreakLine", "_Separator", "OcaSeparator")
 class BreakLineCreator(TransparencyMixin):
@@ -23,10 +22,10 @@ class BreakLineCreator(TransparencyMixin):
         """Constructs a Canvas-based break line with transparency support."""
         builder = context.builder_instance if context else kwargs.get("builder_instance")
         layout = config_data.get("layout", {})
-        
+
         # 1. Parse Geometry and Style
         params = BreakLineCreator._parse_parameters(config_data, layout)
-        
+
         # 2. Setup Canvas
         canvas = BreakLineCreator._create_canvas(parent_widget, params)
 
@@ -44,7 +43,7 @@ class BreakLineCreator(TransparencyMixin):
         canvas._draw = redraw
         canvas.render = redraw
         canvas.bind("<Configure>", lambda e: redraw(), add="+")
-        
+
         return canvas
 
     @staticmethod
@@ -52,12 +51,12 @@ class BreakLineCreator(TransparencyMixin):
         """Standardizes input dictionary parsing for the creator."""
         orient = (config.get("Orientation") or layout.get("Orientation") or "horizontal").lower()
         is_horiz = orient == "horizontal"
-        
+
         thick = layout.get("thickness") or layout.get("height") if is_horiz else layout.get("width")
         thick = int(thick) if thick else 1
-        
+
         style = config.get("style", "normal").upper()
-        if config.get("type") == "OcaFold": 
+        if config.get("type") == "OcaFold":
             style = "FOLD"
             thick = max(thick, BREAKLINE_MIN_THICKNESS)
 
@@ -92,18 +91,18 @@ class BreakLineCreator(TransparencyMixin):
         """Handles the actual drawing commands for simple lines vs fold indicators."""
         if not canvas.winfo_exists(): return
         canvas.delete("content")
-        
+
         # Background slice support
         if hasattr(canvas, 'panel_bg_image') and not canvas.find_withtag("panel_bg_slice"):
              canvas.create_image(0, 0, image=canvas.panel_bg_image, anchor="nw", tags="panel_bg_slice")
-        
+
         w, h = canvas.winfo_width(), canvas.winfo_height()
-        
+
         if p["style"] == "FOLD" and getattr(builder, "is_editor", False):
             BreakLineCreator._draw_fold_indicator(canvas, p, w, h)
         else:
             BreakLineCreator._draw_standard_line(canvas, p, w, h)
-            
+
         canvas.tag_raise("content")
 
     @staticmethod
@@ -111,11 +110,11 @@ class BreakLineCreator(TransparencyMixin):
         """Draws a solid single-color line."""
         if p["is_horizontal"]:
             cy = h / 2
-            canvas.create_line(p["padx"], cy, max(p["padx"] + 1, w - p["padx"]), cy, 
+            canvas.create_line(p["padx"], cy, max(p["padx"] + 1, w - p["padx"]), cy,
                                fill=p["color"], width=p["thickness"], tags="content")
         else:
             cx = w / 2
-            canvas.create_line(cx, p["pady"], cx, max(p["pady"] + 1, h - p["pady"]), 
+            canvas.create_line(cx, p["pady"], cx, max(p["pady"] + 1, h - p["pady"]),
                                fill=p["color"], width=p["thickness"], tags="content")
 
     @staticmethod
@@ -123,13 +122,13 @@ class BreakLineCreator(TransparencyMixin):
         """Draws high-contrast highlight/shadow lines to represent a metal fold."""
         if p["is_horizontal"]:
             cy = h / 2
-            canvas.create_line(p["padx"], cy - 1, max(p["padx"] + 1, w - p["padx"]), cy - 1, 
+            canvas.create_line(p["padx"], cy - 1, max(p["padx"] + 1, w - p["padx"]), cy - 1,
                                fill="#FFFFFF", width=1, tags="content", stipple="gray50")
-            canvas.create_line(p["padx"], cy + 1, max(p["padx"] + 1, w - p["padx"]), cy + 1, 
+            canvas.create_line(p["padx"], cy + 1, max(p["padx"] + 1, w - p["padx"]), cy + 1,
                                fill="#000000", width=2, tags="content")
         else:
             cx = w / 2
-            canvas.create_line(cx - 1, p["pady"], cx - 1, max(p["pady"] + 1, h - p["pady"]), 
+            canvas.create_line(cx - 1, p["pady"], cx - 1, max(p["pady"] + 1, h - p["pady"]),
                                fill="#FFFFFF", width=1, tags="content", stipple="gray50")
-            canvas.create_line(cx + 1, p["pady"], cx + 1, max(p["pady"] + 1, h - p["pady"]), 
+            canvas.create_line(cx + 1, p["pady"], cx + 1, max(p["pady"] + 1, h - p["pady"]),
                                fill="#000000", width=2, tags="content")

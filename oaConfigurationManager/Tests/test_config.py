@@ -4,11 +4,12 @@
 #
 # Description: Brief summary of purpose
 
-import unittest
-import pathlib
-import os
 import configparser
+import pathlib
+import unittest
+
 from oaConfigurationManager.Core.config_builder import create_default_config_ini
+
 
 class TestConfigGenerator(unittest.TestCase):
     def setUp(self):
@@ -23,12 +24,12 @@ class TestConfigGenerator(unittest.TestCase):
     def test_create_default_config_ini(self):
         """Test that the default config.ini is created with expected sections."""
         create_default_config_ini(self.test_config_path, silent=True)
-        
+
         self.assertTrue(self.test_config_path.exists(), "config.ini was not created")
-        
+
         config = configparser.ConfigParser()
         config.read(self.test_config_path)
-        
+
         expected_sections = ["Version", "Debug", "UI", "MQTT", "ScanSettings", "OSC"]
         for section in expected_sections:
             self.assertIn(section, config.sections(), f"Section {section} missing from config")

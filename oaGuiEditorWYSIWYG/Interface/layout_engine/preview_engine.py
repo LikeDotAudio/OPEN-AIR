@@ -5,9 +5,11 @@
 # Description: Manages the lifecycle and instantiation of the GUI builder preview.
 
 import copy
+
 from oaGuiBuilder.Workers.builder import DynamicGuiBuilder
-from oaStateCache.Core.state_mirror_engine import StateMirrorEngine
 from oaLogging.Core.logger import GUI_LOGGER as logger
+from oaStateCache.Core.state_mirror_engine import StateMirrorEngine
+
 
 class PreviewEngine:
     """Manages the lifecycle and instantiation of the DynamicGuiBuilder preview."""
@@ -68,7 +70,7 @@ class PreviewEngine:
         self.preview_builder = DynamicGuiBuilder(self.render_area, config=builder_config, tab_name="InteractivePreview")
         self.preview_builder.start()
         self.preview_builder.pack(fill="both", expand=True)
-        
+
         # Initial render configuration
         self.preview_builder._is_rebuilding = True
         try:

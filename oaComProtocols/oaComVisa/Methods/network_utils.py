@@ -1,15 +1,16 @@
 import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
+
 # Methods/network_utils.py
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: Reusable network and string cleaning utilities for VISA modules.
-
 import socket
 import string
 import urllib.request
-from loguru import logger
+
+from oaLogging.Methods.matrix_gate import matrix_log
+
 
 def clean_string_for_display(s):
     """Removes non-printable characters from strings."""

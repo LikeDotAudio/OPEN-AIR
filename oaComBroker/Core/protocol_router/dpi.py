@@ -16,7 +16,7 @@
 #
 # Description:
 # This module implements the forensic "investigation" phase of the ProtocolRouter
-# pipeline. It performs Deep Packet Inspection to extract protocol-specific 
+# pipeline. It performs Deep Packet Inspection to extract protocol-specific
 # details, resolve OIDs, and flag safety-critical hardware mutations.
 #
 # Architectural Role:
@@ -42,16 +42,16 @@ def investigate_packet(message, mib_cache=None):
     """
     topic = str(message["topic"])
     source = message["source"]
-    
+
     # --- SNMP Investigation: Resolve numeric OIDs to human-readable names ---
     if source == "SNMP" or topic.startswith(".1.3.6"):
         mib = mib_cache.get(topic, "Unknown OID") if mib_cache else "Unknown OID"
         message["meta"]["mib_resolution"] = mib
         message["meta"]["investigation"] = f"SNMP MIB: {mib}"
-        
+
     # --- OSC Investigation: Map logical topics back to OSC addresses ---
     if source == "OSC" or "osc_address" in message["meta"]:
-        osc_addr = message["meta"].get("osc_address", 
+        osc_addr = message["meta"].get("osc_address",
                                    "/" + topic.replace("OPEN-AIR/", ""))
         message["meta"]["investigation"] = f"OSC Map: {osc_addr}"
 
@@ -60,7 +60,7 @@ def investigate_packet(message, mib_cache=None):
         raw = message["meta"].get("midi_raw", "Unknown Message")
         port = message["meta"].get("midi_port", "Remote")
         m_type = message["meta"].get("midi_type", "message")
-        
+
         # Flag real-time clock signals to differentiate from control changes.
         if "clock" in raw.lower():
             message["meta"]["investigation"] = f"🎹 MIDI [CLOCK] from {port}"

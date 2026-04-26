@@ -1,31 +1,30 @@
-import os
-
+import csv
 import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
+import os
+import re
+
 # FileWriters/visa_csv.py
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: Generates CSV representations of the VISA fleet inventory from JSON state.
-
 import orjson
-import csv
-import re
+
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = False
-from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
-from oaConfigurationManager.FileReaders.config_reader import Config
 import oaOchestration.Constants.project_paths as app_paths
+from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
 
 # --- Constants ---
 STATE_VISA_FLEET_JSON_PATH = str(app_paths.STATE_VISA_FLEET_JSON_PATH)
 CSV_OUTPUT_DIR = os.path.join(
-    os.path.dirname(STATE_VISA_FLEET_JSON_PATH), 
+    os.path.dirname(STATE_VISA_FLEET_JSON_PATH),
     "CSV"
 )
 
@@ -33,7 +32,7 @@ class VisaCsvBuilder:
     """
     Handles the transformation of JSON fleet inventory into CSV export files.
     """
-    def __init__(self, json_path=STATE_VISA_FLEET_JSON_PATH, 
+    def __init__(self, json_path=STATE_VISA_FLEET_JSON_PATH,
                  csv_dir=CSV_OUTPUT_DIR):
         """
         Initializes the CSV builder with source and destination paths.
@@ -65,7 +64,7 @@ class VisaCsvBuilder:
         """
         if LOCAL_DEBUG:
             matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Starting CSV build process (per table)...", "DEBUG")
-            
+
         if not os.path.exists(self.json_path):
             logger.error(f"JSON file not found at {self.json_path}")
             return
@@ -75,7 +74,7 @@ class VisaCsvBuilder:
         # Clear existing CSV files to prevent stale data from lingering.
         if LOCAL_DEBUG:
             matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Clearing existing CSV files from {self.csv_dir}...", "DEBUG")
-            
+
         for filename in os.listdir(self.csv_dir):
             if filename.endswith(".csv"):
                 file_path = os.path.join(self.csv_dir, filename)
@@ -146,14 +145,14 @@ class VisaCsvBuilder:
             return
 
         data_list = list(data_dict.values())
-        
+
         # Dynamically determine headers from the first data row.
         # Assumes all rows in the same table share the same schema.
         headers = list(data_list[0].keys())
 
         # Sanitize the full topic path to create a safe filesystem filename.
         topic_string = "/".join(table_path)
-        sanitized_filename = (re.sub(r"[^a-zA-Z0-9_-]", "_", topic_string) 
+        sanitized_filename = (re.sub(r"[^a-zA-Z0-9_-]", "_", topic_string)
                               + ".csv")
         csv_filepath = os.path.join(self.csv_dir, sanitized_filename)
 
@@ -168,7 +167,7 @@ class VisaCsvBuilder:
             )
             writer.writeheader()
             writer.writerows(data_list)
-        
+
         if LOCAL_DEBUG:
             if os.path.exists(csv_filepath):
                 matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"  Successfully wrote {len(data_list)} rows to {csv_filepath}", "SUCCESS")

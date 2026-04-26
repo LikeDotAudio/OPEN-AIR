@@ -15,15 +15,13 @@
 #
 # Version 20260330.1600.1
 
-import orjson
-import os
-import time
-from typing import Optional, Callable
-from loguru import logger
-from oaLogging.Methods.matrix_gate import matrix_log
+from collections.abc import Callable
 
-from oaConfigurationManager.FileReaders.config_reader import Config
+import orjson
+
 from oaComProtocols.oaComMQTT.Core.mqtt_message import MqttMessage
+from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
@@ -31,14 +29,14 @@ class MqttFleetBridge:
     """
     Handles the MQTT representation of the instrument fleet and its control hooks.
     """
-    def __init__(self, mqtt_connection_manager, subscriber_router, 
+    def __init__(self, mqtt_connection_manager, subscriber_router,
                  topic_prefix=None):
         self.mqtt_manager = mqtt_connection_manager
         self.subscriber_router = subscriber_router
         self.topic_prefix = topic_prefix or app_constants.get_mqtt_base_topic()
-        
-        self.on_scan_trigger: Optional[Callable[[], None]] = None
-        
+
+        self.on_scan_trigger: Callable[[], None] | None = None
+
         matrix_log("comms", "visa", "__init__", f"Initializing MqttFleetBridge. Prefix: {self.topic_prefix}", "DEBUG")
         self._setup_subscriptions()
 
@@ -61,7 +59,7 @@ class MqttFleetBridge:
 
     def publish_inventory(self, inventory_data):
         if not self.mqtt_manager: return
-        
+
         matrix_log("comms", "visa", "publish_inventory", f"Fleet Bridge: Publishing inventory. Size: {len(str(inventory_data))} chars.", "DEBUG")
 
         try:
@@ -73,7 +71,7 @@ class MqttFleetBridge:
         if not self.mqtt_manager: return
 
         if isinstance(data, dict):
-            if ("serial_number" in data and "device_type" in data 
+            if ("serial_number" in data and "device_type" in data
                 and "model" in data):
                 try:
                     payload = orjson.dumps(data, option=orjson.OPT_INDENT_2).decode()

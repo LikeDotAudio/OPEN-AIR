@@ -4,18 +4,18 @@
 #
 # Description: A modern bar-style meter widget with ballistics and peak hold.
 
-from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
-import tkinter as tk
-from loguru import logger
+
+from oaGui.Methods.i18n_utils import get_text
+from oaGuiBuilder.Core.base_widget_creator import BaseWidgetCreator
+from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
+from oaGuiManager.Core.transparency.transparency import TransparencyManager
+from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+from oaLogging.Core.logger import builder_logger
+from oaLogging.Methods.matrix_gate import matrix_log
 
 from .smart_meter import SmartMeter
-from oaGuiManager.Core.transparency.transparency import TransparencyManager
-from oaGui.Methods.i18n_utils import get_text
-from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
-from oaGuiBuilder.Core.base_widget_creator import BaseWidgetCreator
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+
 
 @WidgetRegistry.register("_BarGraph", "_SmartMeter", "MeterBar", "_MeterBar")
 class BuilderMeterBarCreator(BaseWidgetCreator, TransparencyMixin):
@@ -25,10 +25,10 @@ class BuilderMeterBarCreator(BaseWidgetCreator, TransparencyMixin):
         """
         Implementation of the Template Method for Meter Bar assembly.
         """
-        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] Entering _assemble_ui", level="TRACE")
-    
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🔬🏗️📊 [BUILDER] Entering _assemble_ui", level="TRACE")
+
         label = get_text(config_data.get("label_active"), get_text(config_data.get('label'), "Unknown"))
-        
+
         ctx = context if context else type('obj', (object,), kwargs)()
         b_inst = getattr(ctx, 'builder_instance', None) or getattr(ctx, 'app_instance', None) or kwargs.get('builder_instance')
         s_engine = getattr(ctx, 'state_mirror_engine', None) or kwargs.get('state_mirror_engine')
@@ -48,7 +48,7 @@ class BuilderMeterBarCreator(BaseWidgetCreator, TransparencyMixin):
                 apply_transparency_func=TransparencyManager.apply_transparency,
                 variable=kwargs.get("variable")
             )
-            
+
             # Link variable for BaseWidgetCreator registration
             meter.variable = meter.value_var
 

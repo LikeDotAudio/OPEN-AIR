@@ -15,15 +15,18 @@
 # Version 20260330.1600.1
 
 import os
-import time
 import threading
-from loguru import logger
+import time
+
+from oaComProtocols.oaComSNMP.Constants.snmp_constants import (
+    STATE_SYNC_INTERVAL,
+    THREAD_JOIN_TIMEOUT,
+)
+from oaLogging.Core.logger import SNMP_LOGGER as snmp_logger
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # Import necessary constants and logging
 from oaOchestration.Constants.project_paths import SNMP_STATE_FILE
-from oaLogging.Core.logger import SNMP_LOGGER as snmp_logger 
-from oaComProtocols.oaComSNMP.Constants.snmp_constants import THREAD_JOIN_TIMEOUT, LOG_POLLING_INTERVAL, STATE_SYNC_INTERVAL
-from oaLogging.Methods.matrix_gate import matrix_log
 
 # LOCAL_DEBUG can be set or passed if needed
 
@@ -68,14 +71,14 @@ class SnmpStatePersister:
         self._running = True
         self._thread = threading.Thread(target=self._persistence_loop, daemon=True, name="SNMP-StatePersistenceLoop")
         self._thread.start()
-        matrix_log("comms", "snmp", "start", 
+        matrix_log("comms", "snmp", "start",
                    "SnmpStatePersister: Started background persistence thread.", "INFO")
 
     def stop(self):
         """Signals the background thread to stop and waits for it to terminate."""
         self._running = False
         if self._thread and self._thread.is_alive():
-            matrix_log("comms", "snmp", "stop", 
+            matrix_log("comms", "snmp", "stop",
                        "SnmpStatePersister: Stopping background persistence thread...", "INFO")
             self._thread.join(timeout=THREAD_JOIN_TIMEOUT) # Wait for thread to finish
             if self._thread.is_alive():
@@ -123,7 +126,7 @@ class SnmpStatePersister:
                 for oid, data in sorted_items:
                     topic = data['topic']
                     # Use the snapshot we took inside the lock for consistency
-                    payload = state_snapshot.get(topic, {}) 
+                    payload = state_snapshot.get(topic, {})
  # Get payload for filtering if needed
 
                     # ⚡ ANTI-FEEDBACK SPEC: The Golden Rule for Transports
@@ -131,11 +134,11 @@ class SnmpStatePersister:
                     message_type = payload.get("message_type")
                     origin_source = payload.get("origin_source")
                     is_settled = payload.get("is_settled", False)
-                    
+
                     # 1. If it's LINK_FEEDBACK, we only push to SNMP if it's SETTLED (confirmed state)
                     if message_type == "LINK_FEEDBACK" and not is_settled:
                         continue
-                        
+
                     # 2. If the origin_source is SNMP, don't send it back to SNMP
                     if origin_source == "SNMP":
                         continue
@@ -143,24 +146,24 @@ class SnmpStatePersister:
                     val_str = data['value']
                     lines.append(f"{oid}:{val_str}")
                     current_values[oid] = val_str
-                    
+
                     # ⚡ DELTA NOTIFICATION: Only notify monitor if the value has changed
                     # This prevents the Activity MQTT topic from being flooded every second.
                     if self._last_persisted_values.get(oid) != val_str:
                         self._notify_monitor("TX_DUMP", oid, val_str, topic, data)
-                
+
                 # Update tracking for next loop
                 self._last_persisted_values = current_values
-                
+
                 # Only perform file operations if the bridge is active and there's data
                 if self.run_bridge and lines:
                     current_count = 0
                     with self._state_lock: # Access converter's map for count
-                        current_count = len(self.oid_map_converter.oid_map) 
-                    
+                        current_count = len(self.oid_map_converter.oid_map)
+
                     # Check if OID map has grown and sync MIB if necessary
                     if current_count > 0 and current_count != self._last_topic_count:
-                        matrix_log("comms", "snmp", "_persistence_loop", 
+                        matrix_log("comms", "snmp", "_persistence_loop",
                                    f"SnmpStatePersister: Tree Expansion ({self._last_topic_count} -> {current_count}). MIB sync might be needed.", "INFO")
                         with self._state_lock:
                             self._last_topic_count = current_count
@@ -170,20 +173,20 @@ class SnmpStatePersister:
                         oid_str = oid_line.split(':')[0]
                         return [int(x) for x in oid_str.strip('.').split('.')]
                     lines.sort(key=oid_key)
-                    
+
                     # Write to a temporary file and then replace
                     os.makedirs(os.path.dirname(self.state_file), exist_ok=True)
                     temp_path = self.state_file + ".tmp"
                     with open(temp_path, "w", encoding="utf-8") as f:
                         f.write("\n".join(lines) + "\n")
-                    
+
                     if os.path.exists(temp_path):
                         os.replace(temp_path, self.state_file)
                         os.chmod(self.state_file, 0o644) # Set appropriate permissions
-                        matrix_log("comms", "snmp", "_persistence_loop", 
+                        matrix_log("comms", "snmp", "_persistence_loop",
                                    f"SnmpStatePersister: State persisted to {self.state_file}", "DEBUG")
 
             except Exception as e:
                 snmp_logger.error(f"SnmpStatePersister: Persistence loop error: {e}")
-            
+
             time.sleep(STATE_SYNC_INTERVAL) # Periodically check for updates

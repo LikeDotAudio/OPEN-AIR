@@ -1,11 +1,9 @@
 # Core/cmdp_group_mixin.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: Brief summary of purpose
 
-import tkinter as tk
 from tkinter import colorchooser, simpledialog
 
 ACCENT_COLOR = "#f4902c"
@@ -46,7 +44,7 @@ class CMDPGroupMixin:
     def select_group(self, g_idx):
         self.selected_group = -1 if self.selected_group == g_idx else g_idx
         for i, lbl in enumerate(self.group_labels):
-            lbl.config(bg=ACCENT_COLOR if i == self.selected_group else "#333", 
+            lbl.config(bg=ACCENT_COLOR if i == self.selected_group else "#333",
                        fg="black" if i == self.selected_group else self.groups[i]["color"])
         self._refresh_table_view()
 
@@ -70,5 +68,5 @@ class CMDPGroupMixin:
         for item in self.tree.get_children(): self.tree.delete(item)
         for f in self.faders:
             if self.selected_group == -1 or f.group_index == self.selected_group:
-                self.tree.insert("", "end", iid=str(f.widget_id), 
+                self.tree.insert("", "end", iid=str(f.widget_id),
                                  values=(f.widget_id+1, f.label, int(f.val_current), int(f.rot_current), int(f.angle)))

@@ -5,7 +5,9 @@
 # Description: Brief summary of purpose
 
 import orjson
+
 from ..Constants.constants import Splinker_debug_enabled, splinker_logger
+
 
 def load_splinks(self):
     try:
@@ -16,7 +18,7 @@ def load_splinks(self):
         if Splinker_debug_enabled:
             splinker_logger.debug(f"📂🔗📥 [SPLINKER] Loading splinks from "
                                   f"{self.storage_path}")
-            
+
         self.registry.clear()
         for f in self.storage_path.glob("*.json"):
             with open(f, "rb") as splink_file:

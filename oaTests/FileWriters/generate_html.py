@@ -4,8 +4,8 @@
 #
 # Description: Brief summary of purpose
 
-import os
 import html
+
 
 class HTMLGenerator:
     @staticmethod
@@ -337,7 +337,7 @@ class HTMLGenerator:
         table_rows = []
         def status_weight(status):
             return {"error": 0, "failed": 1, "warning": 2}.get(status, 3)
-            
+
         sorted_results = sorted(details, key=lambda x: (status_weight(x['status']), x['name']))
 
         for r in sorted_results:
@@ -367,6 +367,6 @@ class HTMLGenerator:
             flamegraph_html=extra_tabs.get("flamegraph", "No FlameGraph data available."),
             dependencies_html=extra_tabs.get("dependencies", "No Dependency data available.")
         )
-        
+
         with open(html_path, "w") as f:
             f.write(html_content)

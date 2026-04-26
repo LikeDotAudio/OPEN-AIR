@@ -3,12 +3,13 @@
 # Version: 20260321.1955.1
 
 import unittest
-from unittest.mock import MagicMock, patch, call
-import time
+from unittest.mock import MagicMock, call, patch
+
 import orjson
 
-from oaComProtocols.oaComMQTT.Managers.mqtt_manager import MqttManager
 from oaComProtocols.oaComMQTT.Core.mqtt_message import MqttMessage
+from oaComProtocols.oaComMQTT.Managers.mqtt_manager import MqttManager
+
 
 # Assume these imports exist for the sake of the test
 class MockAppPaths:
@@ -19,7 +20,7 @@ class MockAppConstants:
     MQTT_BROKER_ADDRESS = "localhost"
     MQTT_BROKER_PORT = 1883
     MQTT_CLIENT_ID = "test_client_id"
-    
+
 class MockMqttClient:
     def __init__(self):
         self.is_connected_status = True
@@ -29,7 +30,7 @@ class MockMqttClient:
         self.loop_stop = MagicMock()
         self.publish = MagicMock(return_value=0)
         self.subscribe = MagicMock(return_value=0)
-        
+
         self.connect_called_with = None
         self.publish_calls = []
         self.subscribe_calls = []
@@ -50,13 +51,13 @@ class TestMqttManager(unittest.TestCase):
     def setUp(self):
         """Set up the MqttManager with mock services."""
         self.mock_router = MagicMock()
-        self.mock_client = MockMqttClient() 
+        self.mock_client = MockMqttClient()
         self.mock_cache = MagicMock()
-        
+
         # Mocking external dependencies
         self.mock_app_paths = MockAppPaths()
         self.mock_app_constants = MockAppConstants()
-        
+
         # Patching modules and classes used by MqttManager
         self.patcher_thread = patch('threading.Thread')
         self.MockThread = self.patcher_thread.start()
@@ -70,10 +71,10 @@ class TestMqttManager(unittest.TestCase):
                         mqtt_client=self.mock_client,
                         state_cache_manager=self.mock_cache
                     )
-        
+
         # Ensure the manager is not running initially for tests
         self.manager._is_running = False
-        self.manager._status_thread = None 
+        self.manager._status_thread = None
 
         self.patcher_app_paths = patch('oaComProtocols.oaComMQTT.Managers.mqtt_manager.app_paths', self.mock_app_paths)
         self.mock_app_paths_obj = self.patcher_app_paths.start()
@@ -83,7 +84,7 @@ class TestMqttManager(unittest.TestCase):
 
         self.patcher_time_sleep = patch('time.sleep')
         self.mock_time_sleep = self.patcher_time_sleep.start()
-        
+
         self.patcher_matrix_log = patch('oaComProtocols.oaComMQTT.Managers.mqtt_manager.matrix_log')
         self.mock_matrix_log = self.patcher_matrix_log.start()
 
@@ -117,7 +118,7 @@ class TestMqttManager(unittest.TestCase):
         if hasattr(self.manager, '_update_service_status'):
             with patch.object(self.manager, '_update_service_status') as mock_update:
                 self.manager._handle_service_command(message)
-                mock_update.assert_not_called() 
+                mock_update.assert_not_called()
 
     @patch('oaComProtocols.oaComMQTT.Managers.mqtt_manager.re_register_all_services')
     @patch('oaComProtocols.oaComMQTT.Managers.mqtt_manager.register_service')
@@ -147,7 +148,7 @@ class TestMqttManager(unittest.TestCase):
         """Test _system_status_loop when client is connected."""
         self.mock_client.is_connected_status = True
         self.manager._is_running = True
-        
+
         sleep_calls = 0
         def sleep_side_effect(duration):
             nonlocal sleep_calls
@@ -155,7 +156,7 @@ class TestMqttManager(unittest.TestCase):
             if sleep_calls >= 1: # Break fast
                 self.manager._is_running = False
         self.mock_time_sleep.side_effect = sleep_side_effect
-        
+
         self.manager._system_status_loop()
         self.mock_client.publish.assert_any_call("OPEN-AIR/System/Status/Broker/Connection", unittest.mock.ANY, qos=1)
 
@@ -163,7 +164,7 @@ class TestMqttManager(unittest.TestCase):
         """Test _system_status_loop when client is disconnected."""
         self.mock_client.is_connected_status = False
         self.manager._is_running = True
-        
+
         sleep_calls = 0
         def sleep_side_effect(duration):
             nonlocal sleep_calls
@@ -171,7 +172,7 @@ class TestMqttManager(unittest.TestCase):
             if sleep_calls >= 1:
                 self.manager._is_running = False
         self.mock_time_sleep.side_effect = sleep_side_effect
-        
+
         self.manager._system_status_loop()
         self.mock_client.publish.assert_any_call("OPEN-AIR/System/Status/Broker/Connection", unittest.mock.ANY, qos=1)
 
@@ -180,11 +181,11 @@ class TestMqttManager(unittest.TestCase):
         """Test that _attempt_reconnect is called when disconnected and _is_running is True."""
         self.mock_client.is_connected_status = False
         self.manager._is_running = True
-        
+
         # Simulate one iteration of the loop and then stop
         with patch('time.sleep', side_effect=lambda x: setattr(self.manager, '_is_running', False)):
             self.manager._system_status_loop()
-        
+
         mock_attempt_reconnect.assert_called_once()
 
     @patch('oaComProtocols.oaComMQTT.Managers.mqtt_manager.MqttManager._attempt_reconnect')
@@ -192,17 +193,17 @@ class TestMqttManager(unittest.TestCase):
         """Test that _attempt_reconnect is NOT called if client is already connected."""
         self.mock_client.is_connected_status = True
         self.manager._is_running = True
-        
+
         with patch('time.sleep', side_effect=lambda x: setattr(self.manager, '_is_running', False)):
             self.manager._system_status_loop()
-        
+
         mock_attempt_reconnect.assert_not_called()
 
     def test_attempt_reconnect_successful(self):
         """Test _attempt_reconnect when connection is successful."""
         self.mock_client.is_connected_status = True # Simulate connection becoming successful
         self.mock_client.connect.return_value = 0 # MQTT_ERR_SUCCESS
-        
+
         # Mocking the callbacks that should be re-registered
         mock_callback1 = MagicMock()
         mock_callback2 = MagicMock()
@@ -210,13 +211,13 @@ class TestMqttManager(unittest.TestCase):
             "topic1": (mock_callback1, 1),
             "topic2": (mock_callback2, 0)
         }
-        
+
         # Mocking the function that gets called on reconnection to sync state
         mock_sync_state = MagicMock()
         self.manager._sync_state_on_reconnect = mock_sync_state
 
         self.manager._attempt_reconnect()
-        
+
         self.mock_client.connect.assert_called_once_with(
             self.mock_app_constants.MQTT_BROKER_ADDRESS,
             self.mock_app_constants.MQTT_BROKER_PORT,
@@ -234,12 +235,12 @@ class TestMqttManager(unittest.TestCase):
             self.manager._attempt_reconnect()
         except:
             pass
-        
+
         self.mock_client.connect.assert_called_once()
         self.mock_client.publish.assert_any_call("OPEN-AIR/System/Status/Broker/Connection", unittest.mock.ANY, qos=1)
         # Ensure no other actions like resubscribe or sync_state are called
         self.mock_router.resubscribe_all.assert_not_called()
-        self.mock_cache.sync_state_from_all_sources.assert_not_called() 
+        self.mock_cache.sync_state_from_all_sources.assert_not_called()
 
     def test_attempt_reconnect_failed_loop_start(self):
         """Test _attempt_reconnect when client.loop_start() fails (simulated)."""
@@ -249,7 +250,7 @@ class TestMqttManager(unittest.TestCase):
 
         with self.assertRaises(RuntimeError) as cm:
             self.manager._attempt_reconnect()
-        
+
         self.assertEqual(str(cm.exception), "Failed to start loop")
         self.mock_client.disconnect.assert_called_once() # Should disconnect if loop start fails
 
@@ -258,7 +259,7 @@ class TestMqttManager(unittest.TestCase):
         self.manager.start()
         self.assertTrue(self.manager._is_running)
         self.assertIsNotNone(self.manager._thread)
-        
+
         self.manager.stop()
         self.assertFalse(self.manager._is_running)
 
@@ -286,7 +287,7 @@ class TestMqttManager(unittest.TestCase):
         self.manager._sync_state_on_reconnect()
 
         self.mock_cache.sync_state_from_all_sources.assert_called_once()
-        
+
         # Verify that the client subscribed to all topics from the router
         expected_calls = [
             call("topic1", 1),

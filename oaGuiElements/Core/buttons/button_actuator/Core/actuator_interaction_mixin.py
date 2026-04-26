@@ -1,15 +1,17 @@
 # Core/actuator_interaction_mixin.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: Brief summary of purpose
 
-import orjson
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
 import time
+
+import orjson
 from loguru import logger
+
+from oaLogging.Methods.matrix_gate import matrix_log
+
 
 class ActuatorInteractionMixin:
     """Handles mouse events and network triggers for the Momentary Actuator button."""
@@ -17,16 +19,16 @@ class ActuatorInteractionMixin:
     def _on_press(self, event):
         """Handles the button press event."""
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🖱️👆🔘 [INPUT] Press detected on actuator '{self.label}'", level="INFO")
-        
+
         # 1. Local Feedback
         self.set_active(True)
         self.set_text(self.text_active)
-        
+
         # Maintenance Command Handling
         scpi_message = str(self.config_data.get("message", self.config_data.get("value", self.config_data.get("domain", {}).get("value", ""))))
         if self._handle_maintenance_command(scpi_message):
-            return 
-        
+            return
+
         # 2. Network Action
         if self.state_mirror_engine:
             topic = self.state_mirror_engine.calculate_topic(f"{self.path}/trigger", self.base_mqtt_topic)
@@ -36,7 +38,7 @@ class ActuatorInteractionMixin:
     def _on_release(self, event):
         """Handles the button release event."""
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🖱️🔙🔘 [INPUT] Release detected on actuator '{self.label}'", level="INFO")
-        
+
         # 1. Local Feedback
         self.set_active(False)
         if self.text != "PASTE copied text into terminal":
@@ -70,5 +72,5 @@ class ActuatorInteractionMixin:
 
     def _is_maintenance(self, message):
         """Predicate for maintenance commands."""
-        return (message.startswith("*") or "SYSTem" in message.upper() or 
+        return (message.startswith("*") or "SYSTem" in message.upper() or
                 message.startswith("sudo ") or message.startswith("pkill "))

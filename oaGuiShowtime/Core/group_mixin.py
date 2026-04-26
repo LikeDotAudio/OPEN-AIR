@@ -4,10 +4,13 @@
 #
 # Description: Brief summary of purpose
 
-from collections import defaultdict
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
+from collections import defaultdict
+
 from loguru import logger
+
+from oaLogging.Methods.matrix_gate import matrix_log
+
 
 class ShowtimeGroupMixin:
     """

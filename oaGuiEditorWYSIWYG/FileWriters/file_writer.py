@@ -4,15 +4,18 @@
 #
 # Description: Handles saving of GUI definition files.
 
-import orjson
-import shutil
 import datetime
 import inspect
-import tkinter as tk
-from tkinter import filedialog
+import shutil
 from pathlib import Path
+from tkinter import filedialog
+
+import orjson
+
 from oaLogging.Methods.matrix_gate import matrix_log
+
 from ..Core.state import state_manager
+
 
 class FileWriter:
     """Manages file writing and backups for the editor."""
@@ -27,18 +30,18 @@ class FileWriter:
             message="💾📁✏️ [STORAGE] SAVE AS SEQUENCE INITIATED.",
             level="info",
         )
-        
+
         initial_path = state_manager.get_file_path()
         initial_dir = initial_path.parent if initial_path else "."
         initial_file = initial_path.name if initial_path else "new_gui.json"
-        
+
         file_path = filedialog.asksaveasfilename(
             initialdir=initial_dir,
             initialfile=initial_file,
             defaultextension=".json",
             filetypes=[("JSON files", "*.json"), ("All files", "*.*")]
         )
-        
+
         if not file_path:
             matrix_log(
                 system='UI',
@@ -48,10 +51,10 @@ class FileWriter:
                 func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown"
             )
             return False
-            
+
         new_path = Path(file_path)
         state_manager.set_file_path(new_path)
-        
+
         return FileWriter.save_file(on_save_callback=on_save_callback)
 
     @staticmethod
@@ -77,7 +80,7 @@ class FileWriter:
             return False
 
         data = state_manager.get_state()
-        
+
         try:
             matrix_log(
                 system="UI",
@@ -102,7 +105,7 @@ class FileWriter:
                     level="info",
                 )
                 shutil.copy2(path, backup_path)
-                
+
                 # 🛡️ VALIDATION: Ensure backup is successful and contains data
                 if not backup_path.exists() or backup_path.stat().st_size <= 1:
                     matrix_log(
@@ -131,7 +134,7 @@ class FileWriter:
             matrix_log(system="UI", element="FILE_IO", func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", message=f"💾📁🏁 [STORAGE] File successfully written and closed: {path.name}", level="SUCCESS")
 
             if on_save_callback:
-                matrix_log(system="UI", element="FILE_IO", func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", message=f"💾📁🚀 [STORAGE] Executing on_save_callback...", level="DEBUG")
+                matrix_log(system="UI", element="FILE_IO", func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", message="💾📁🚀 [STORAGE] Executing on_save_callback...", level="DEBUG")
                 on_save_callback()
 
             return True

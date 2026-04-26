@@ -17,16 +17,16 @@
 #            "id": "w1",
 #            "bbox": (10, 20, 110, 70)
 #        }
-#        
+#
 #        self.overlay.draw(selected_widget_info)
-#        
+#
 #        self.canvas.create_rectangle.assert_called_once_with(
-#            10, 20, 110, 70, 
+#            10, 20, 110, 70,
 #            tags='selection_highlight',
 #            outline='red',
 #            width=2
 #        )
-#        
+#
 #        self.overlay.clear()
 #        self.canvas.delete.assert_called_once_with('selection_highlight')
 #

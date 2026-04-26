@@ -17,15 +17,15 @@
 #        """
 #        mock_isdir.return_value = True
 #        mock_listdir.return_value = ['widget1.json', 'widget2.json', 'not_a_json.txt']
-#        
+#
 #        loader = GrabBagLoader()
 #        items = loader.load_items("dummy_path")
-#        
+#
 #        self.assertEqual(len(items), 2)
 #        self.assertIn("widget1", items)
 #        self.assertIn("widget2", items)
 #        self.assertEqual(items["widget1"]["name"], "Test Widget")
-#        
+#
 #        # Check that it tried to open both json files
 #        self.assertEqual(mock_file.call_count, 2)
 #

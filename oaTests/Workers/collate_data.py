@@ -6,6 +6,7 @@
 
 import os
 
+
 def collate_extra_tabs(project_root):
     """
     Collates specialized report tabs (Audits, Logs, etc.) 
@@ -13,15 +14,15 @@ def collate_extra_tabs(project_root):
     """
     try:
         from oaTests.FileWriters import (
-            ReportBuilder_Audits, 
-            ReportBuilder_ChangeLog, 
-            ReportBuilder_ErrorLog, 
-            ReportBuilder_RunLog, 
-            ReportBuilder_FlameGraph,
+            ReportBuilder_Audits,
             ReportBuilder_BugLog,
-            ReportBuilder_Dependencies
+            ReportBuilder_ChangeLog,
+            ReportBuilder_Dependencies,
+            ReportBuilder_ErrorLog,
+            ReportBuilder_FlameGraph,
+            ReportBuilder_RunLog,
         )
-        
+
         audit_html = ReportBuilder_Audits.build_tab(os.path.join(project_root, "oaDataLogs/Audits"))
         changelog_html = ReportBuilder_ChangeLog.build_tab(os.path.join(project_root, "oaDataLogs", "ChangeLog"))
         error_html = ReportBuilder_ErrorLog.build_tab(os.path.join(project_root, "oaDataLogs", "Errors"))
@@ -29,7 +30,7 @@ def collate_extra_tabs(project_root):
         buglog_html = ReportBuilder_BugLog.build_tab(os.path.join(project_root, "oaDataLogs", "BugLog"))
         flamegraph_html = ReportBuilder_FlameGraph.build_tab(project_root)
         dependencies_html = ReportBuilder_Dependencies.build_tab()
-        
+
         return {
             "audit": audit_html,
             "changelog": changelog_html,

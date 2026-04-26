@@ -4,7 +4,6 @@
 #
 # Description: Refactored Command Manager (Composition over Inheritance).
 
-from loguru import logger
 
 class CommandQueueManager:
     """Provides a thread-safe interface for routing commands to specific devices."""

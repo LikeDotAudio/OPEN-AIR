@@ -6,31 +6,33 @@
 
 from oaLogging.Methods.matrix_gate import is_debug_allowed, matrix_log
 
+
 def _is_debug():
     return is_debug_allowed(system="UI", element="GUI_SHELL")
 
 from oaConfigurationManager.FileReaders.config_reader import Config
+
 app_constants = Config.get_instance()
 
-import os
 import tkinter as tk
 from tkinter import ttk
-import pathlib
 
-# --- Module Imports ---
-from oaGui.Core.window import WindowManager
-from oaGuiManager.FileReaders.module_loader import ModuleLoader
-from oaGui.Core.layout_parser import LayoutParser
-from oaStyle.Core.style import THEMES, DEFAULT_THEME
-from oaOchestration.Constants.project_paths import LAYOUT_CACHE_PATH
-from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
-from oaGuiEditorWYSIWYG.Managers.wysiwyg_editor import WysiwygEditor
+from oaGui.Core.directory import DirectoryBuilderMixin
 
 # --- EXTRACTED CORE MODULES ---
 from oaGui.Core.layout_cache import LayoutCacheManager
-from oaGui.Core.directory import DirectoryBuilderMixin
-from oaGui.Core.tab import TabManagerMixin
+from oaGui.Core.layout_parser import LayoutParser
 from oaGui.Core.navigation import NavigationManagerMixin
+from oaGui.Core.tab import TabManagerMixin
+
+# --- Module Imports ---
+from oaGui.Core.window import WindowManager
+from oaGuiEditorWYSIWYG.Managers.wysiwyg_editor import WysiwygEditor
+from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
+from oaGuiManager.FileReaders.module_loader import ModuleLoader
+from oaOchestration.Constants.project_paths import LAYOUT_CACHE_PATH
+from oaStyle.Core.style import DEFAULT_THEME
+
 
 class Application(
     ttk.Frame,
@@ -62,15 +64,15 @@ class Application(
         self.root = root
         self.app_constants = app_constants
         self.on_complete_callback = on_complete
-        
+
         # --- TOP TOOLBAR ---
         self.top_toolbar = tk.Frame(self, bg="#333333", height=30)
         self.top_toolbar.pack(side="top", fill="x")
-        
+
         tk.Label(self.top_toolbar, text="OPEN-AIR CORE", bg="#333333", fg="white", font=("Arial", 9, "bold")).pack(side="left", padx=10)
-        
-        tk.Button(self.top_toolbar, text="Launch WYSIWYG Editor", bg="#444444", fg="#00FF00", 
-                  font=("Arial", 8, "bold"), relief="flat", padx=10, 
+
+        tk.Button(self.top_toolbar, text="Launch WYSIWYG Editor", bg="#444444", fg="#00FF00",
+                  font=("Arial", 8, "bold"), relief="flat", padx=10,
                   command=self._launch_wysiwyg_editor).pack(side="right", padx=10, pady=2)
 
         # ⚡ AUTO-DISCOVERY
@@ -115,7 +117,7 @@ class Application(
 
         # Display Toggles
         self.show_background_var = tk.BooleanVar(value=True) # Toggle for background visibility
-        
+
         # Resize Debouncing
         self.global_resizing = False
         self._resize_timer = None
@@ -125,9 +127,9 @@ class Application(
         try:
             from oaOchestration.Core.path_initializer import GLOBAL_PROJECT_ROOT
             root_dir = GLOBAL_PROJECT_ROOT / "oaGui" / "Assets"
-            
+
             def _start_build():
-                self._build_from_directory(path=root_dir, parent_widget=self, 
+                self._build_from_directory(path=root_dir, parent_widget=self,
                                            on_complete=self._on_initial_build_complete)
 
             self.after(10, _start_build)
@@ -136,8 +138,8 @@ class Application(
 
     def _on_initial_build_complete(self):
         matrix_log("ui", "gui_builder", "_on_initial_build_complete", "✅🏗️ [BUILDER] Initial GUI build complete. Performing final settle...", "INFO")
-        
-        # ⚡ FINAL SETTLE: After all widgets are created and the layout has had a moment 
+
+        # ⚡ FINAL SETTLE: After all widgets are created and the layout has had a moment
         # to calculate, trigger a final, forced reslice and background sync on all builders.
         # DELAY INCREASED: To 500ms to allow X11 window manager to assign geometry.
         def _final_settle():
@@ -177,33 +179,33 @@ class Application(
     def _apply_styles(self, theme_name: str):
         from oaStyle.Managers.theme_applier import apply_theme
         return apply_theme(self, theme_name)
-    
+
     def print_to_console(self, message: str):
         matrix_log("ui", "gui_shell", "print_to_console", f"🖥️💬 Observer's Log: {message}", "DEBUG")
 
     def _launch_wysiwyg_editor(self):
         """Launches the WYSIWYG editor for the currently loaded layout or a new one."""
         matrix_log("ui", "gui_shell", "_launch_wysiwyg_editor", "🚀 [EDITOR] Launching WYSIWYG Designer...", "INFO")
-        
+
         def _rebuild_main_ui(new_data=None):
             """Callback for the editor to test new GUI definitions."""
             matrix_log("ui", "gui_shell", "_rebuild_main_ui", "🏗️ [TEST] Rebuilding main application with editor state...", "INFO")
             # For simplicity, we trigger a clean build from Assets
             from oaOchestration.Core.path_initializer import GLOBAL_PROJECT_ROOT
             root_dir = GLOBAL_PROJECT_ROOT / "oaGui" / "Assets"
-            
+
             # Wipe current UI (Simplified)
             for child in self.winfo_children():
                 if child != self.top_toolbar:
                     child.destroy()
-            
+
             # Re-initialize storage
             self._notebooks = {}
             self._frames_by_path = {}
-            
-            # If new_data is provided, we'd ideally pass it to _build_from_directory 
-            # to override the disk version. 
-            self._build_from_directory(path=root_dir, parent_widget=self, 
+
+            # If new_data is provided, we'd ideally pass it to _build_from_directory
+            # to override the disk version.
+            self._build_from_directory(path=root_dir, parent_widget=self,
                                        on_complete=self._on_initial_build_complete)
 
         WysiwygEditor.launch(self.root, on_test_callback=_rebuild_main_ui)

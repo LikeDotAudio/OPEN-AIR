@@ -5,7 +5,7 @@
 # Description: Brief summary of purpose
 
 import sys
-import tkinter as tk
+
 
 class GCAInteractionMixin:
     """Handles user interactions (Press, Drag, Mousewheel, Resize) for the GCA array."""
@@ -17,7 +17,7 @@ class GCAInteractionMixin:
         cap_h = 60
         draw_w = self.req_width
         offset_x = (self.width - draw_w) / 2 if self.width > draw_w else 0
-        
+
         if (cap_y - cap_h/2) <= event.y <= (cap_y + cap_h/2):
             if getattr(self, 'mode', 'macro') == "micro":
                 if offset_x <= event.x <= (offset_x + draw_w):
@@ -49,7 +49,7 @@ class GCAInteractionMixin:
             delta_val = (dy / pixel_range) * val_range
             new_val = max(self.min_val, min(self.max_val, self.start_val + delta_val))
             self.child_values[self.dragging_child].set(new_val)
-            if hasattr(self, 'path') and self.path: 
+            if hasattr(self, 'path') and self.path:
                 self.state_mirror_engine.broadcast_gui_change_to_mqtt(f"{self.path}/ch_{self.dragging_child+1}")
 
     def _on_release(self, event):
@@ -64,10 +64,10 @@ class GCAInteractionMixin:
         else:
             delta = 1 if event.delta > 0 else -1
         if delta == 0: return
-        
+
         current_val = self._safe_get(self.master_value)
         val_range = self.max_val - self.min_val
-        step = val_range * 0.05 
+        step = val_range * 0.05
         new_val = max(self.min_val, min(self.max_val, current_val + (delta * step)))
         self.master_value.set(new_val)
         if hasattr(self, 'path') and self.path: self.state_mirror_engine.broadcast_gui_change_to_mqtt(self.path)

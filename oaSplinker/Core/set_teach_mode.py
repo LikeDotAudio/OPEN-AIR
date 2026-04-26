@@ -6,6 +6,7 @@
 
 from ..Constants.constants import Splinker_debug_enabled, splinker_logger
 
+
 def set_teach_mode(self, splink_id):
     self.active_splink_id = splink_id
     self.teaching_dest = True

@@ -6,6 +6,7 @@
 
 import tkinter as tk
 
+
 class TreeOpsManager:
     """Manages tree operations such as reordering and deletion."""
 
@@ -18,7 +19,7 @@ class TreeOpsManager:
         """Moves the selected item up in the hierarchy."""
         selected = self.tree.selection()
         if not selected: return
-        
+
         path = self.tree.item(selected[0], "values")[0]
         self.state_manager.reorder_element(path, "up", source=self)
         self.refresh_callback()
@@ -27,7 +28,7 @@ class TreeOpsManager:
         """Moves the selected item down in the hierarchy."""
         selected = self.tree.selection()
         if not selected: return
-        
+
         path = self.tree.item(selected[0], "values")[0]
         self.state_manager.reorder_element(path, "down", source=self)
         self.refresh_callback()
@@ -36,7 +37,7 @@ class TreeOpsManager:
         """Deletes the selected item with confirmation."""
         selected = self.tree.selection()
         if not selected: return
-        
+
         path = self.tree.item(selected[0], "values")[0]
         if tk.messagebox.askyesno("Confirm Delete", f"Are you sure you want to delete '{path}'?"):
             self.state_manager.delete_element(path, source=self)

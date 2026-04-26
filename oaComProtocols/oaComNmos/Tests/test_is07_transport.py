@@ -6,7 +6,9 @@
 
 import unittest
 from unittest.mock import MagicMock, patch
-from oaComProtocols.oaComNmos.Core.is07_transport import Is07WebSocketTransport, Is07MqttTransport
+
+from oaComProtocols.oaComNmos.Core.is07_transport import Is07MqttTransport, Is07WebSocketTransport
+
 
 class TestIs07Transports(unittest.TestCase):
 
@@ -23,19 +25,19 @@ class TestIs07Transports(unittest.TestCase):
         # Mocking Client
         mock_instance = mock_client.return_value
         transport = Is07MqttTransport()
-        
+
         # Simulate connection success
         def mock_connect(*args, **kwargs):
             transport._is_connected = True
             return 0
-        
+
         mock_instance.connect.side_effect = mock_connect
-        
+
         params = {
             "destination_host": "localhost",
             "destination_port": 1883
         }
-        
+
         success = transport.connect(params)
         self.assertTrue(success)
         self.assertTrue(transport.is_connected())
@@ -47,12 +49,12 @@ class TestIs07Transports(unittest.TestCase):
         transport = Is07MqttTransport()
         transport._is_connected = True
         transport.client = mock_instance
-        
+
         # Mock publish result
         mock_info = MagicMock()
         mock_info.rc = 0 # mqtt.MQTT_ERR_SUCCESS
         mock_instance.publish.return_value = mock_info
-        
+
         success = transport.publish("test/topic", {"val": True})
         self.assertTrue(success)
         mock_instance.publish.assert_called_once()

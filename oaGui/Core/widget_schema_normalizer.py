@@ -4,11 +4,11 @@
 #
 # Description: Static Translation Engine for GUI Configuration Schema.
 
-from oaGuiManager.Methods.schema_utils import deep_merge, get_styled_val, calculate_sticky, expand_abbreviations
-from oaGuiManager.Constants.schema_defaults import PILLARS, STRUCT_TYPES, DEFAULT_COLORS
 from oaGui.Core.standardizers.widget_type_resolver import WidgetTypeResolver
+from oaGuiManager.Constants.schema_defaults import DEFAULT_COLORS, PILLARS, STRUCT_TYPES
+from oaGuiManager.Methods.schema_utils import calculate_sticky, deep_merge, expand_abbreviations, get_styled_val
 
-from oaGuiElements.Core.faders.fader_horizontal.Core.horizontal_fader_asset_generator import HorizontalFaderAssetGenerator
+
 class WidgetSchemaNormalizer:
     """Static Translation Engine for GUI Configuration Schema."""
 
@@ -23,7 +23,7 @@ class WidgetSchemaNormalizer:
         # 1. Style Inheritance
         styles_registry = root_config.get("styles", {}) if root_config else {}
         parent_name = config.get("style_parent") or config.get("type", config.get("widget_type"))
-        
+
         if parent_name in styles_registry:
             config = deep_merge(styles_registry[parent_name].copy(), config)
 
@@ -33,7 +33,7 @@ class WidgetSchemaNormalizer:
         if "main" in labels: config["label_active"] = labels["main"]
         if "v1" in labels: config["label_v1"] = labels["v1"]
         if "v2" in labels: config["label_v2"] = labels["v2"]
-        if "visible" in labels: 
+        if "visible" in labels:
             config["show_label"] = labels["visible"]
             config["label_visible"] = labels["visible"]
         if "show_units" in labels: config["show_units"] = labels["show_units"]
@@ -56,24 +56,24 @@ class WidgetSchemaNormalizer:
         # Resolve Colors/Fonts via modular helper
         if "active_text_color" not in config:
             config["active_text_color"] = get_styled_val(
-                ["font_on_colour", "font_on_color", "active_text_color"], 
+                ["font_on_colour", "font_on_color", "active_text_color"],
                 config, style_block, cosmetics, DEFAULT_COLORS["active_text"]
             )
         if "text_color" not in config:
             config["text_color"] = get_styled_val(
-                ["font_off_colour", "font_off_color", "text_color"], 
+                ["font_off_colour", "font_off_color", "text_color"],
                 config, style_block, cosmetics, DEFAULT_COLORS["inactive_text"]
             )
-        
+
         config["active_font_style"] = get_styled_val(["font_on_style"], config, style_block, cosmetics, "bold")
         config["inactive_font_style"] = get_styled_val(["font_off_style"], config, style_block, cosmetics, "normal")
 
         if "active_color" not in config:
             config["active_color"] = get_styled_val(
-                ["colour_light", "color_light", "active_color"], 
+                ["colour_light", "color_light", "active_color"],
                 config, style_block, cosmetics, DEFAULT_COLORS["active_accent"]
             )
-        
+
         is_struct = any(config.get(k) in STRUCT_TYPES for k in ["type", "widget_type"])
         if "bg_color" not in config:
             default_bg = "transparent" if is_struct else DEFAULT_COLORS["panel_bg"]
@@ -83,7 +83,7 @@ class WidgetSchemaNormalizer:
         # 4. Geometry and Space
         if "width" in geometry: config["width"] = max(1, int(float(geometry["width"])))
         if "height" in geometry: config["height"] = max(1, int(float(geometry["height"])))
-        
+
         final_sticky = calculate_sticky(geometry)
         if "layout" not in config: config["layout"] = {}
         if final_sticky: config["layout"]["sticky"] = final_sticky
@@ -97,10 +97,10 @@ class WidgetSchemaNormalizer:
         config["value_min"] = primary_domain.get("min", 0.0)
         config["value_max"] = primary_domain.get("max", 1.0)
         config["value_default"] = primary_domain.get("value_default", 0.0)
-        
+
         if "fps_limit" in dynamics:
             config["refresh_rate_ms"] = int(1000 / dynamics["fps_limit"])
-        
+
         smoothing = dynamics.get("smoothing")
         if smoothing is not None: config["glide_time"] = smoothing * 1000
 

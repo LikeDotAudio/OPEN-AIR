@@ -1,6 +1,7 @@
 from struct import pack_into, unpack_from
 
-from ..ocp1.createtype import create_type, Type
+from ..ocp1.createtype import Type, create_type
+
 
 def toByteLength(length):
     return (length + 7) >> 3
@@ -41,7 +42,7 @@ def decodeBitstring(data: bytearray, pos: int, length: int):
     a8 = data[start : start + byteLength]
     for i in range(length):
         # For each bit, determine its boolean value using bitwise operations
-        result[i:i] = bool((a8[i >> 3] & (128 >> (i & 7))))
+        result[i:i] = bool(a8[i >> 3] & (128 >> (i & 7)))
     return result
 
 # Function to encode a bitstring (provided as a list of booleans) into the dataView starting at pos.

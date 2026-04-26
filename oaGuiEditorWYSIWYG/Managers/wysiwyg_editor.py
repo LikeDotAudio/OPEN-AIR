@@ -4,16 +4,18 @@
 #
 # Description: High-level orchestrator for the modular WYSIWYG Definition Editor.
 
-import tkinter as tk
 import pathlib
-from oaLogging.Methods.matrix_gate import matrix_log
+import tkinter as tk
+
 from oaComBroker.Core.event_bus import event_bus
+from oaLogging.Methods.matrix_gate import matrix_log
 
 from ..Core.state import state_manager
 from ..FileReaders.file_reader import FileReader
 from ..FileWriters.file_writer import FileWriter
 from ..Interface.Window.editor_layout import EditorLayoutBuilder
 from ..Interface.Window.editor_menus import EditorMenuBuilder
+
 
 class WysiwygEditor:
     """
@@ -40,18 +42,18 @@ class WysiwygEditor:
         self.on_test = on_test_callback
         self.on_save = on_save_callback
         self.is_standalone = is_standalone
-        
+
         # 1. Initialize Global Editor State
         state_manager.initialize(config_data, pathlib.Path(json_filepath) if json_filepath else None)
-        
+
         # 2. Build UI Components
         self._initialize_window()
         EditorLayoutBuilder.assemble(self)
         EditorMenuBuilder.build(self)
-        
+
         # 3. Wire Event Bus
         self._subscribe_events()
-        
+
         if not is_standalone:
             WysiwygEditor._instance = self
 
@@ -61,7 +63,7 @@ class WysiwygEditor:
             self.window = self.parent
         else:
             self.window = tk.Toplevel(self.parent)
-            
+
         title_suffix = state_manager.get_file_path().name if state_manager.get_file_path() else 'Unsaved'
         self.window.title(f"WYSIWYG Editor - {title_suffix}")
         self.window.geometry("1400x900")
@@ -113,22 +115,22 @@ class WysiwygEditor:
     def new_workspace(self):
         """Forces the user to Save As, then creates an empty canvas."""
         matrix_log("ui", "gui_builder", "new", "🖱️🖱️🖱️ [ACTION] WysiwygEditor: NEW WORKSPACE triggered.", "INFO")
-        
+
         # 1. Force Save As (User MUST pick a file name)
         if FileWriter.save_as(on_save_callback=self.on_save):
             # 2. Reset State to empty structure
             state_manager.initialize({}, state_manager.get_file_path())
-            
+
             # 3. Update UI
             new_path = state_manager.get_file_path()
             if not self.is_standalone:
                 self.window.title(f"WYSIWYG Editor - {new_path.name if new_path else 'Unsaved'}")
             self.status_bar.set_status(f"New Workspace: {new_path.name if new_path else 'Unknown'}", "#00ffcc")
-            
+
             if hasattr(self, 'layout_view'):
                 self.layout_view._manual_rebuild()
             return True
-        
+
         # User cancelled Save As or it failed
         self.status_bar.set_status("NEW WORKSPACE CANCELLED - Save required.", "#ff8800")
         return False
@@ -173,7 +175,7 @@ class WysiwygEditor:
         config = Config.get_instance()
         config.SYSTEM_LANGUAGE = lang_code
         matrix_log("ui", "gui_builder", "language", f"🌐🌐🌐 [CONFIG] System language changed to: {lang_code}", "INFO")
-        
+
         # Trigger a rebuild of the interactive layout to see translations
         if hasattr(self, 'layout_view'):
             self.layout_view._manual_rebuild()
@@ -189,6 +191,6 @@ class WysiwygEditor:
             self.window.destroy()
         except Exception:
             pass
-            
+
         WysiwygEditor._instance = None
         matrix_log("ui", "gui_builder", "close_window", "🛑🛑🛑 [STOPPED] WysiwygEditor: Editor Closed.", "INFO")

@@ -2,14 +2,17 @@
 # Author: Anthony Peter Kuzub
 # Version: 20260416.Modular.1
 #
-# Description: Monitors and reports if a widget has been "broken off" into a 
+# Description: Monitors and reports if a widget has been "broken off" into a
 # separate Toplevel window. Orchestrates state synchronization via MQTT.
 
 import time
-import orjson
 import tkinter as tk
-from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic
+
+import orjson
+
 from oaComProtocols.oaComMQTT.Core.mqtt_publisher_service import is_connected
+from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic
+
 
 class WindowBreakoffManagerMixin:
     """
@@ -61,11 +64,11 @@ class WindowBreakoffManagerMixin:
         if not self.is_broken_off:
             self.is_broken_off = True
             self.toplevel_window = toplevel
-            
+
             # Wire up geometry and destruction tracking
             self.toplevel_window.bind("<Configure>", self._on_breakoff_configure)
             self.toplevel_window.bind("<Destroy>", self._on_breakoff_destroy)
-            
+
             self._publish_breakoff_state()
 
     def _handle_docked(self):
@@ -106,7 +109,7 @@ class WindowBreakoffManagerMixin:
     def _create_breakoff_payload(self):
         """Calculates current window geometry for the MQTT payload."""
         geom = {"w": 0, "h": 0, "x": 0, "y": 0}
-        
+
         if self.is_broken_off and self.toplevel_window:
             try:
                 geom["w"] = self.toplevel_window.winfo_width()

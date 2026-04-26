@@ -4,12 +4,16 @@
 #
 # Description: Handles loading of GUI definition files.
 
-import orjson
 import inspect
 from pathlib import Path
 from tkinter import filedialog
+
+import orjson
+
 from oaLogging.Methods.matrix_gate import matrix_log
+
 from ..Core.state import state_manager
+
 
 class FileReader:
     """Manages file reading for the editor."""
@@ -36,7 +40,7 @@ class FileReader:
             message=f"💾📁✏️ [FILE_IO] Load operation started for: {filepath}",
             level="info",
         )
-        
+
         if not path.exists():
             matrix_log(
                 system='UI',
@@ -46,7 +50,7 @@ class FileReader:
                 func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown"
             )
             return False
-            
+
         try:
             file_size = path.stat().st_size
             matrix_log(
@@ -71,7 +75,7 @@ class FileReader:
             else:
                 with open(path, 'rb') as f:
                     data = orjson.loads(f.read())
-            
+
             matrix_log(
                 system="UI",
                 element="FILE_IO",

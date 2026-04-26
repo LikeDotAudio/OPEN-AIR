@@ -5,13 +5,11 @@
 # Description: Gatekeeper for the oaComMQTT module.
 
 
-import sys
 import os
 import pathlib
-import threading
-import subprocess
-import unittest
 import random
+import subprocess
+import sys
 from pathlib import Path
 
 # Ensure project root is in sys.path for direct execution
@@ -20,13 +18,12 @@ project_root = current_dir.parent.parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
-from oaLogging.Methods.matrix_gate import matrix_log
-from oaConfigurationManager.FileReaders.config_reader import Config
-
 # --- Core Components ---
 from oaComProtocols.oaComMQTT.Managers.mqtt_connection import MqttConnectionManager
-from oaComProtocols.oaComMQTT.Managers.mqtt_subscriber_router import MqttSubscriberRouter
 from oaComProtocols.oaComMQTT.Managers.mqtt_manager import MqttManager
+from oaComProtocols.oaComMQTT.Managers.mqtt_subscriber_router import MqttSubscriberRouter
+from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import matrix_log
 
 _connection_manager = None
 _subscriber_router = None
@@ -47,7 +44,7 @@ def get_connection_manager(**kwargs):
         username = kwargs.get("username", Config.get_instance().get("MQTT_USERNAME", "guest"))
         password = kwargs.get("password", Config.get_instance().get("MQTT_PASSWORD", "guest"))
         client_id = kwargs.get("client_id", default_client_id)
-        
+
         _connection_manager = MqttConnectionManager(
             address=broker_address,
             port=broker_port,
@@ -72,13 +69,13 @@ def get_mqtt_manager(**kwargs):
     global _manager
     if _manager is None:
         from oaComProtocols.oaComMQTT.Managers.mqtt_manager import MqttManager
-        
+
         # Retrieve or create dependencies internally if not provided
         mqtt_client = kwargs.get("mqtt_client", get_connection_manager(**kwargs))
         subscriber_router = kwargs.get("subscriber_router", get_subscriber_router())
         # State cache is assumed to be handled by the orchestrator or provided
-        state_cache_manager = kwargs.get("state_cache_manager", None) 
-        
+        state_cache_manager = kwargs.get("state_cache_manager", None)
+
         _manager = MqttManager(subscriber_router, mqtt_client, state_cache_manager)
         matrix_log("comms", "mqtt", "get_mqtt_manager", "MQTT Manager initialized.", "DEBUG")
     return _manager
@@ -89,20 +86,20 @@ def start(**kwargs):
     Accepts optional kwargs to override default connection parameters.
     """
     matrix_log("comms", "mqtt", "start", "🚀 [MQTT] Starting MQTT services internally...", "INFO")
-    
+
     # Initialize connection and start publisher worker using internal managers
     conn_mgr = get_connection_manager(**kwargs)
     sub_router = get_subscriber_router(**kwargs)
     manager = get_mqtt_manager(mqtt_client=conn_mgr, subscriber_router=sub_router, **kwargs)
-    
+
     # Initialize connection and start publisher worker
     conn_mgr.connect_to_broker(subscriber_router=sub_router)
-    
+
     # Start background publisher worker. This might need to be managed externally if it's a long-lived process.
     from oaComProtocols.oaComMQTT.Core import mqtt_publisher_service
     if hasattr(mqtt_publisher_service, 'start_publisher_worker'):
         mqtt_publisher_service.start_publisher_worker()
-    
+
     matrix_log("comms", "mqtt", "start", "✅ MQTT services started.", "SUCCESS")
     return conn_mgr # Return connection manager for external control if needed
 
@@ -111,9 +108,9 @@ def stop():
     Shuts down MQTT connection and publisher services.
     """
     global _connection_manager, _subscriber_router, _manager
-    
+
     matrix_log("comms", "mqtt", "stop", "🛑 [MQTT] Stopping MQTT services...", "INFO")
-    
+
     # Stop publisher worker first if it was started here
     from oaComProtocols.oaComMQTT.Core import mqtt_publisher_service
     if hasattr(mqtt_publisher_service, 'shutdown_publisher_worker'):
@@ -127,7 +124,7 @@ def stop():
         _connection_manager.disconnect()
         _connection_manager = None
     _subscriber_router = None # Clear router
-    
+
     matrix_log("comms", "mqtt", "stop", "✅ MQTT services stopped.", "INFO")
 
 def status():
@@ -171,15 +168,14 @@ def run_tests():
     Discover and run tests in the local Tests/ directory using unittest via subprocess.
     Ensures isolation and proper sys.path handling.
     """
-    import subprocess
-    import sys
     import os
+    import sys
     from pathlib import Path
 
     print(f"📡📥📥 [TEST] {Path(__file__).parent.name}: Starting automated test discovery...")
     current_dir = Path(__file__).parent.absolute()
     test_dir = current_dir / "Tests"
-    
+
     if not test_dir.exists():
         return True
 
@@ -188,10 +184,10 @@ def run_tests():
         if (project_root / "GEMINI.md").exists():
             break
         project_root = project_root.parent
-    
+
     env = os.environ.copy()
     env["PYTHONPATH"] = str(project_root) + os.pathsep + env.get("PYTHONPATH", "")
-    
+
     try:
         rel_test_dir = os.path.relpath(test_dir, project_root)
         result = subprocess.run(
@@ -219,7 +215,7 @@ if __name__ == "__main__":
     if not run_tests():
         print("❌ [CRITICAL] Tests failed. Aborting execution.")
         sys.exit(1)
-    
+
     # Standalone execution logic
     if len(sys.argv) > 1:
         cmd = sys.argv[1].lower()

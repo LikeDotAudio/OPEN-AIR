@@ -15,7 +15,6 @@
 # Version 20260329.1110.1
 
 import threading
-import time
 from typing import Any
 
 try:
@@ -33,11 +32,14 @@ except ImportError:
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Methods.matrix_gate import is_debug_allowed
+
+
 def _is_debug():
     return is_debug_allowed(system="comms", element="osc")
 
-from oaLogging.Core.logger import get_logger
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Core.logger import get_logger
+
 app_constants = Config.get_instance()
 osc_logger = get_logger("OSC")
 
@@ -93,8 +95,8 @@ class OscRxServer:
     def _start_legacy(self):
         """Starts the legacy python-osc server in a background thread."""
         if not HAS_OSC:
-            osc_logger.error(f"❌🚫🛑 [OSC] RX Server: python-osc not installed. "
-                             f"Please run 'Check Dependencies'.")
+            osc_logger.error("❌🚫🛑 [OSC] RX Server: python-osc not installed. "
+                             "Please run 'Check Dependencies'.")
             return
 
         dispatcher = Dispatcher()
@@ -104,9 +106,9 @@ class OscRxServer:
             class ReusableOSCServer(BlockingOSCUDPServer):
                 allow_reuse_address = True
 
-            self.server = ReusableOSCServer((self.host, self.port), 
+            self.server = ReusableOSCServer((self.host, self.port),
                                                dispatcher)
-            self._thread = threading.Thread(target=self.server.serve_forever, 
+            self._thread = threading.Thread(target=self.server.serve_forever,
                                             daemon=True)
             self._thread.start()
             if _is_debug():

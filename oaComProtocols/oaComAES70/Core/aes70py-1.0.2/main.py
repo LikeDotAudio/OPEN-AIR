@@ -1,12 +1,13 @@
 import asyncio
-import sys
 import os
+import sys
 
 # Add src to sys.path to allow importing aes70
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'src'))
 
 from aes70.controller import tcp_connection
 from aes70.controller.remote_device import RemoteDevice
+
 
 class Main:
     device: RemoteDevice

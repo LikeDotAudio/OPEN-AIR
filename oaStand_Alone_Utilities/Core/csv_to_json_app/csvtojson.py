@@ -4,17 +4,19 @@
 #
 # Description: Modularized CSV to JSON Converter.
 
+import os
 import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
-import pandas as pd
+
 import orjson
-import os
-from loguru import logger
+import pandas as pd
 
 # --- EXTRACTED CORE MODULES ---
 from core.csv_converter_engine import CSVConverterEngine
 from core.header_config_ui import HeaderConfigUI
 from core.json_preview_ui import JSONPreviewUI
+from loguru import logger
+
 
 class CSVToJSONApp(tk.Tk):
     """Orchestrates the CSV to JSON conversion application."""
@@ -48,7 +50,7 @@ class CSVToJSONApp(tk.Tk):
 
         # 2. Main Content (Split View)
         main = tk.Frame(self, padx=10, pady=10); main.pack(fill=tk.BOTH, expand=True)
-        
+
         # Left: Header Config
         l_frame = tk.LabelFrame(main, text="Header Configuration", padx=5, pady=5)
         l_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)

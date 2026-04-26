@@ -1,6 +1,6 @@
-import os
-import json
 import glob
+import json
+import os
 
 assets_dir = '/home/anthony/Documents/OPEN-AIR/oaGui/Assets/Assets'
 files = glob.glob(os.path.join(assets_dir, '**', '*.json'), recursive=True)
@@ -19,7 +19,7 @@ def extract_strings(obj):
 
 for fpath in files:
     try:
-        with open(fpath, 'r', encoding='utf-8') as f:
+        with open(fpath, encoding='utf-8') as f:
             data = json.load(f)
             extract_strings(data)
     except Exception as e:

@@ -4,13 +4,12 @@
 #
 # Description: Orchestrate the initialization, configuration, and execution of all background worker processes for the OPEN-AIR application.
 
-import os
 import inspect
+import os
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = False
 # LOCAL_DEBUG: Toggles verbose logging for internal development diagnostics.
-from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
 from oaConfigurationManager.FileReaders.config_reader import Config
@@ -101,7 +100,7 @@ class WorkerLauncher:
         try:
             # The launch sequence is designed to be extensible. New workers
             # should be instantiated and registered here.
-            
+
             if LOCAL_DEBUG:
                 logger.debug("🟢️️️🔵 Worker 'ActivePeakPublisher' initialized. "
                              "The lab is buzzing with activity!")

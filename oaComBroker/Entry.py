@@ -4,10 +4,9 @@
 #
 # Description: Gatekeeper for the oaComBroker module.
 
-import sys
 import os
+import sys
 import threading
-import time
 from pathlib import Path
 
 # Standard project_root resolution
@@ -25,12 +24,13 @@ if str(project_root) not in sys.path:
 from oaComBroker.Core.event_bus import EventBus
 from oaComBroker.Core.protocol_router.manager import ProtocolRouter
 
+
 def start():
     """Starts the Communication Broker service (OpenAir Core)."""
     from oaComBroker.Core.open_air_core import main as core_main
-    
+
     # Run core_main in a background thread if called from start()
-    # unless we want it to block. In Entry.py, start() usually 
+    # unless we want it to block. In Entry.py, start() usually
     # should be non-blocking or at least clearly defined.
     # For now, let's allow it to be called as a script to block.
     print("🚀 [START] ComBroker services starting...")
@@ -57,17 +57,17 @@ def run_tests():
     Ensures isolation and proper sys.path handling.
     """
     import subprocess
-    
+
     print(f"📡📥📥 [TEST] {Path(__file__).parent.name}: Starting automated test discovery...")
     test_dir = current_dir / "Tests"
-    
+
     if not test_dir.exists():
         print(f"📡📤📤 [TEST] {Path(__file__).parent.name}: No Tests/ directory found.")
         return True
 
     env = os.environ.copy()
     env["PYTHONPATH"] = str(project_root) + os.pathsep + env.get("PYTHONPATH", "")
-    
+
     try:
         # Run from project root to ensure module resolution works correctly
         result = subprocess.run(
@@ -91,7 +91,7 @@ if __name__ == "__main__":
     if not run_tests():
         print("❌ [CRITICAL] Tests failed. Aborting execution.")
         sys.exit(1)
-    
+
     # Standalone execution logic
     if len(sys.argv) > 1:
         cmd = sys.argv[1].lower()

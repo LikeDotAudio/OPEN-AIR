@@ -4,11 +4,12 @@
 #
 # Description: Brief summary of purpose
 
-import numpy as np
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
-from PIL import Image, ImageDraw, ImageTk, ImageFilter
-from oaLogging.Core.logger import builder_logger
+
+import numpy as np
+from PIL import Image, ImageDraw, ImageFilter, ImageTk
+
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- Standard Debug Logging Setup ---
 _HORIZONTAL_FADER_ASSET_CACHE = {}
@@ -26,20 +27,20 @@ class HorizontalFaderAssetGenerator:
         upscaled_width, upscaled_height = int(width * UPSCALE_FACTOR), int(height * UPSCALE_FACTOR)
         if upscaled_width < 1: upscaled_width = 1
         if upscaled_height < 1: upscaled_height = 1
-        
+
         def convert_hex_to_rgb(hex_str):
             hex_str = hex_str.lstrip('#')
             HEX_SHORT_LEN = 3
-            if len(hex_str) == HEX_SHORT_LEN: 
+            if len(hex_str) == HEX_SHORT_LEN:
                 hex_str = "".join([char*2 for char in hex_str])
             return np.array([int(hex_str[i:i+2], 16) for i in (0, 2, 4)], dtype=np.float32)
 
-        try: 
+        try:
             body_rgb = convert_hex_to_rgb(body_color)
-        except: 
+        except:
             FALLBACK_BODY_COLOR = 120
             body_rgb = np.array([FALLBACK_BODY_COLOR, FALLBACK_BODY_COLOR, FALLBACK_BODY_COLOR], dtype=np.float32)
-        
+
         normalized_x = np.linspace(0, 1, upscaled_width, dtype=np.float32).reshape(1, upscaled_width)
         slope_x, slope_z = np.zeros((1, upscaled_width), dtype=np.float32), np.ones((1, upscaled_width), dtype=np.float32)
 
@@ -53,7 +54,7 @@ class HorizontalFaderAssetGenerator:
         slope_x[normalized_x < SLOPE_THRESHOLD_1], slope_z[normalized_x < SLOPE_THRESHOLD_1] = -1.0, 0.0
         mask_slope_2 = (normalized_x >= SLOPE_THRESHOLD_1) & (normalized_x < SLOPE_THRESHOLD_2)
         slope_x[mask_slope_2], slope_z[mask_slope_2] = -0.707, 0.707
-        
+
         mask_center = (normalized_x >= SLOPE_THRESHOLD_3) & (normalized_x < SLOPE_THRESHOLD_4)
         PROFILE_CENTER_SCALE = 0.5
         PROFILE_OFFSET = 0.5
@@ -63,7 +64,7 @@ class HorizontalFaderAssetGenerator:
         slope_x_val = (profile_t - PROFILE_OFFSET) * PROFILE_AMPLITUDE * PROFILE_CURVATURE
         slope_x[mask_center] = slope_x_val
         slope_z[mask_center] = np.sqrt(np.maximum(0, 1.0 - slope_x_val**2))
-        
+
         mask_slope_9 = (normalized_x >= SLOPE_THRESHOLD_5) & (normalized_x < SLOPE_THRESHOLD_6)
         slope_x[mask_slope_9], slope_z[mask_slope_9] = 0.707, 0.707
         slope_x[normalized_x >= SLOPE_THRESHOLD_6], slope_z[normalized_x >= SLOPE_THRESHOLD_6] = 1.0, 0.0
@@ -71,11 +72,11 @@ class HorizontalFaderAssetGenerator:
         LIGHT_DIR_X, LIGHT_DIR_Y, LIGHT_DIR_Z = 0.3, -0.6, 0.8
         light_dir = np.array([LIGHT_DIR_X, LIGHT_DIR_Y, LIGHT_DIR_Z], dtype=np.float32)
         light_dir /= np.linalg.norm(light_dir)
-        
+
         UP_VECTOR = np.array([0, 0, 1], dtype=np.float32)
         half_vector = (light_dir + UP_VECTOR)
         half_vector /= np.linalg.norm(half_vector)
-        
+
         DIFFUSE_MIN = 0.25
         diffuse = np.maximum(DIFFUSE_MIN, slope_x * light_dir[0] + slope_z * light_dir[2])
         SPEC_POWER = 1.5
@@ -85,7 +86,7 @@ class HorizontalFaderAssetGenerator:
         SPEC_COLOR_SCALE = 150
         colors = body_rgb.reshape(1, 1, 3) * diffuse.reshape(1, upscaled_width, 1) + (SPEC_COLOR_SCALE * specular).reshape(1, upscaled_width, 1)
         pixel_data = np.tile(np.clip(colors, 0, 255).astype(np.uint8), (upscaled_height, 1, 1))
-        
+
         indicator_line_width = max(2, UPSCALE_FACTOR)
         HIGHLIGHT_FALLBACK_RGB = np.array([40, 40, 180], dtype=np.float32)
         highlight_rgb = convert_hex_to_rgb(highlight_color) if highlight_color else HIGHLIGHT_FALLBACK_RGB
@@ -96,7 +97,7 @@ class HorizontalFaderAssetGenerator:
         mask_draw = ImageDraw.Draw(mask_image)
         CORNER_RADIUS_BASE = 3
         mask_draw.rounded_rectangle((0, 0, upscaled_width, upscaled_height), radius=CORNER_RADIUS_BASE * UPSCALE_FACTOR, fill=255)
-        
+
         SHADOW_HEIGHT_RATIO = 0.08
         shadow_height = int(upscaled_height * SHADOW_HEIGHT_RATIO)
         mask_draw.ellipse((-upscaled_width // 4, -shadow_height, 5 * upscaled_width // 4, shadow_height), fill=0)
@@ -105,7 +106,7 @@ class HorizontalFaderAssetGenerator:
         result_image = Image.new("RGBA", (upscaled_width, upscaled_height), (0, 0, 0, 0))
         result_image.paste(surface_image, (0, 0), mask_image)
         result_image = result_image.resize((int(width), int(height)), Image.Resampling.LANCZOS)
-        
+
         shadow_padding = 10
         canvas_image = Image.new("RGBA", (int(width) + shadow_padding * 2, int(height) + shadow_padding * 2), (0, 0, 0, 0))
         shadow_image = Image.new("RGBA", canvas_image.size, (0, 0, 0, 0))
@@ -113,15 +114,15 @@ class HorizontalFaderAssetGenerator:
         SHADOW_RADIUS = 4
         SHADOW_ALPHA = 110
         ImageDraw.Draw(shadow_image).rounded_rectangle(
-            (shadow_padding + SHADOW_OFFSET_X, shadow_padding + SHADOW_OFFSET_Y, 
-             shadow_padding + int(width) + SHADOW_OFFSET_X, shadow_padding + int(height) + SHADOW_OFFSET_Y), 
+            (shadow_padding + SHADOW_OFFSET_X, shadow_padding + SHADOW_OFFSET_Y,
+             shadow_padding + int(width) + SHADOW_OFFSET_X, shadow_padding + int(height) + SHADOW_OFFSET_Y),
             radius=SHADOW_RADIUS, fill=(0, 0, 0, SHADOW_ALPHA)
         )
-        
+
         BLUR_RADIUS = 3.5
         canvas_image.paste(shadow_image.filter(ImageFilter.GaussianBlur(radius=BLUR_RADIUS)), (0, 0))
         canvas_image.paste(result_image, (shadow_padding, shadow_padding), result_image)
-        
+
         photo = ImageTk.PhotoImage(canvas_image)
         _HORIZONTAL_FADER_ASSET_CACHE[cache_key] = photo
         return photo

@@ -4,11 +4,13 @@
 #
 # Description: Unit tests for the config.ini TUI editor.
 
-import unittest
+import configparser
 import os
 import pathlib
-import configparser
+import unittest
+
 from oaTests.Managers.configIniEditor.manager import ConfigIniEditor
+
 
 class TestConfigIniEditor(unittest.TestCase):
     def setUp(self):
@@ -21,7 +23,7 @@ class TestConfigIniEditor(unittest.TestCase):
         }
         with open(self.test_file, 'w') as f:
             self.config.write(f)
-        
+
         self.editor = ConfigIniEditor(config_path=self.test_file)
 
     def tearDown(self):
@@ -38,7 +40,7 @@ class TestConfigIniEditor(unittest.TestCase):
     def test_set_flag(self):
         """Operate: Update a flag and verify disk persistence."""
         self.editor.set_debug_flag("sys_data", True)
-        
+
         # Verify by re-reading the file directly
         new_config = configparser.ConfigParser()
         new_config.read(self.test_file)

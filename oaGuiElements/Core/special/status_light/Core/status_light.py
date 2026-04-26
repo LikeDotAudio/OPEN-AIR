@@ -1,27 +1,25 @@
 # status_light/status_light.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 20250821.200641.4
 #
 # Description: Adds a status indicator circle to the GUI.
 
-import tkinter as tk
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
-from tkinter import ttk
-import orjson
+import tkinter as tk
 
-# --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
-from loguru import logger
+import orjson
 
 from oaConfigurationManager.FileReaders.config_reader import Config
 
+# --- Standard Debug Logging Setup ---
+from oaLogging.Core.logger import builder_logger
+from oaLogging.Methods.matrix_gate import matrix_log
+
 app_constants = Config.get_instance()
 
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
-from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic
 from oaComProtocols.oaComMQTT.Core.mqtt_message import MqttMessage
+from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+
 
 class StatusLightWidget(tk.Frame):
     """
@@ -30,26 +28,26 @@ class StatusLightWidget(tk.Frame):
     def __init__(self, parent, config, state_mirror_engine, subscriber_router, base_topic_path):
         # Use theme-compatible background
         super().__init__(parent, bd=0, highlightthickness=0, relief="flat")
-        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️🔴 [BUILDER] Initializing StatusLightWidget", level="TRACE")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🔬🏗️🔴 [BUILDER] Initializing StatusLightWidget", level="TRACE")
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📜📑💻 [CONFIG] Raw config received: {config}", level="DEBUG")
 
         self.widget_config = config
         self.state_mirror_engine = state_mirror_engine
         self.subscriber_router = subscriber_router
         self.base_topic_path = base_topic_path
-        
+
         # 1. Orientation Logic
         self.orientation = config.get("Orientation", "horizontal").lower()
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📐📏🔳 [LAYOUT] Orientation: {self.orientation}", level="DEBUG")
-        
+
         # 3. Canvas for the Label and Dot
         # Increase size to fit label if needed
-        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🏗️🪟🎨 [CONSTRUCT] Creating status light canvas.", level="TRACE")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🏗️🪟🎨 [CONSTRUCT] Creating status light canvas.", level="TRACE")
         self.status_canvas = tk.Canvas(
             self, width=120, height=30, highlightthickness=0, bd=0, relief="flat"
         )
         self.status_canvas.pack(fill=tk.BOTH, expand=True)
-        
+
         # Draw the initial circle (Gray or Red)
         # Coordinates will be updated in _draw
         self.status_light_id = self.status_canvas.create_oval(
@@ -64,7 +62,7 @@ class StatusLightWidget(tk.Frame):
             self.subscriber_router.subscribe_to_topic(
                 global_topic, self._update_status_light
             )
-            
+
             # Instance-specific topic if path is provided
             widget_path = config.get("path")
             if widget_path:
@@ -109,14 +107,14 @@ class StatusLightWidget(tk.Frame):
             else:
                 update_gui()
 
-        except Exception as e:
+        except Exception:
             builder_logger.exception(f"❌🚫🛑 [ERROR] failure updating status light for topic '{topic}'")
             pass
 
     def _draw(self):
         """Transparency hook."""
         if not self.status_canvas.winfo_exists(): return
-        
+
         w = self.status_canvas.winfo_width()
         h = self.status_canvas.winfo_height()
         if w <= 1: return
@@ -125,11 +123,11 @@ class StatusLightWidget(tk.Frame):
         if hasattr(self.status_canvas, 'panel_bg_image') and self.status_canvas.panel_bg_image:
             self.status_canvas.create_image(0, 0, image=self.status_canvas.panel_bg_image, anchor="nw", tags="bg")
             self.status_canvas.tag_lower("bg")
-        
+
         self.status_canvas.delete("industrial_text")
-        
+
         label_text = self.widget_get_text(config.get("label_active"), "Fleet Status:")
-        
+
         dot_size = 16
         if self.orientation == "vertical":
             # Label on top, dot below
@@ -161,13 +159,13 @@ class HeaderStatusLightMixin(TransparencyMixin):
     def _build_header_status_light(self, parent_widget, config_data, context=None):
         # Create the Status Light Widget
         status_widget = StatusLightWidget(
-            parent_widget, 
-            config_data, 
-            self.state_mirror_engine, 
+            parent_widget,
+            config_data,
+            self.state_mirror_engine,
             self.subscriber_router,
             self.base_mqtt_topic_from_path
         )
-        
+
         # Register for transparency slicing
         if hasattr(self, '_apply_transparency'):
              self._apply_transparency(status_widget, status_widget.status_canvas, config_data, self)

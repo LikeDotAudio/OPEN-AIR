@@ -1,17 +1,18 @@
 import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
+import threading
+
 # Workers/logic_mqtt_listen.py
 # Author: Anthony Peter Kuzub
 # Version: 20260323.1700.1
 #
 # Description: This manager handles listening to MQTT topics for device connection and control.
-
 import orjson
-import threading
+
+from oaConfigurationManager.FileReaders.config_reader import Config
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Core.logger import VISA_LOGGER as logger
-from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
@@ -42,7 +43,7 @@ class VisaMqttListener:
 
         # ⚡ THREAD SAFETY: Protect shared mutable state
         self._state_lock = threading.Lock()
-        
+
         self.found_resources = []
         self.selected_device_resource = None
         self.inst = None
@@ -57,31 +58,31 @@ class VisaMqttListener:
                 callback_func=self._on_search_request,
             )
             matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Subscribed to: {MQTT_TOPIC_SEARCH_TRIGGER}", "DEBUG")
-            
+
             self.subscriber_router.subscribe_to_topic(
                 topic_filter=MQTT_TOPIC_DEVICE_SELECT,
                 callback_func=self._on_device_select,
             )
             matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Subscribed to: {MQTT_TOPIC_DEVICE_SELECT}", "DEBUG")
-            
+
             self.subscriber_router.subscribe_to_topic(
                 topic_filter=MQTT_TOPIC_CONNECT_TRIGGER,
                 callback_func=self._on_gui_connect_request,
             )
             matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Subscribed to: {MQTT_TOPIC_CONNECT_TRIGGER}", "DEBUG")
-            
+
             self.subscriber_router.subscribe_to_topic(
                 topic_filter=MQTT_TOPIC_DISCONNECT_TRIGGER,
                 callback_func=self._on_gui_disconnect_request,
             )
             matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Subscribed to: {MQTT_TOPIC_DISCONNECT_TRIGGER}", "DEBUG")
-            
+
             self.subscriber_router.subscribe_to_topic(
                 topic_filter=MQTT_TOPIC_CONNECT_RESOURCE_REQUEST,
                 callback_func=self._on_connect_request,
             )
             matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Subscribed to: {MQTT_TOPIC_CONNECT_RESOURCE_REQUEST}", "DEBUG")
-            
+
             matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "VisaMqttListener subscribed to all necessary GUI and command topics.", "SUCCESS")
         except Exception:
             logger.exception("Error in VisaMqttListener._setup_mqtt_subscriptions")
@@ -97,13 +98,13 @@ class VisaMqttListener:
             payload_data = orjson.loads(payload)
             if payload_data.get("value") is True:
                 matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Processing Search for devices initiated from GUI.", "DEBUG")
-                
+
                 # Execution of search might be slow, but results must be stored safely
                 found = self.searcher.search_resources()
-                
+
                 with self._state_lock:
                     self.found_resources = found
-                    
+
                 self.gui_publisher._update_found_devices_gui(found)
             else:
                 matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Ignoring Search Request, value is not 'true'.", "DEBUG")
@@ -121,11 +122,11 @@ class VisaMqttListener:
             payload_data = orjson.loads(payload)
             if payload_data.get("value") is True:
                 matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Processing Device Select, value is 'true'.", "DEBUG")
-                
+
                 # Extract the index from the topic structure: .../options/<index>/selected
                 parts = topic.split("/")
                 option_index = int(parts[-2]) - 1
-                
+
                 with self._state_lock:
                     if 0 <= option_index < len(self.found_resources):
                         self.selected_device_resource = self.found_resources[option_index]
@@ -148,10 +149,10 @@ class VisaMqttListener:
             payload_data = orjson.loads(payload)
             if payload_data.get("value") is True:
                 matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Processing GUI Connect Request, value is 'true'.", "DEBUG")
-                
+
                 with self._state_lock:
                     resource = self.selected_device_resource
-                
+
                 if resource:
                     matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Initiating connection to {resource}...", "DEBUG")
                     # Offload to thread to prevent MQTT blocking during hardware handshake.
@@ -186,11 +187,11 @@ class VisaMqttListener:
             payload_data = orjson.loads(payload)
             if payload_data.get("value") is True:
                 matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Processing GUI Disconnect Request, value is 'true'.", "DEBUG")
-                
+
                 with self._state_lock:
                     inst_to_close = self.inst
                     self.inst = None
-                
+
                 if inst_to_close:
                     matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Initiating disconnection...", "DEBUG")
                     thread = threading.Thread(

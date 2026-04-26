@@ -4,20 +4,18 @@
 #
 # Description: Utility to cache procedurally generated assets (panels, screws, etc) to disk and memory.
 
-import os
-from oaLogging.Methods.matrix_gate import matrix_log
-import inspect
 import hashlib
+import inspect
+import os
+
 import orjson
-from pathlib import Path
+from loguru import logger
 from PIL import Image
 
-# --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory
-from loguru import logger
-
 from oaConfigurationManager.FileReaders.config_reader import Config
-from oaOchestration.Constants.project_paths import GLOBAL_PROJECT_ROOT
+
+# --- Standard Debug Logging Setup ---
+from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
@@ -27,11 +25,11 @@ _MEMORY_ASSET_CACHE = {}
 
 class AssetCacheManager:
     """Manages disk and memory caching for procedurally generated PIL images."""
-    
+
     # ⚡ OPTIMIZATION: Use absolute path relative to project root
     from oaOchestration.Core.path_initializer import DATA_CACHE_DIR
     _CACHE_DIR = DATA_CACHE_DIR / "assets"
-    
+
     @classmethod
     def _ensure_cache_dir(cls):
         """Ensures the cache directory exists."""
@@ -58,7 +56,7 @@ class AssetCacheManager:
     def load_from_cache(cls, key_prefix, width, height, config):
         """Loads an image from memory or disk if it exists and is healthy."""
         asset_hash = cls.get_asset_hash(key_prefix, width, height, config)
-        
+
         # 1. Check Memory Cache First (FASTEST)
         if asset_hash in _MEMORY_ASSET_CACHE:
             return _MEMORY_ASSET_CACHE[asset_hash]
@@ -66,14 +64,14 @@ class AssetCacheManager:
         # 2. Check Disk Cache
         cls._ensure_cache_dir()
         cache_path = cls._CACHE_DIR / f"{asset_hash}.png"
-        
+
         if cache_path.exists():
             try:
                 img = Image.open(cache_path)
-                # ⚡ MANDATORY INTEGRITY CHECK: 
-                # Force PIL to actually read the pixel data. 
-                img.load() 
-                
+                # ⚡ MANDATORY INTEGRITY CHECK:
+                # Force PIL to actually read the pixel data.
+                img.load()
+
                 # Cache in memory for next time
                 _MEMORY_ASSET_CACHE[asset_hash] = img
                 return img
@@ -90,15 +88,15 @@ class AssetCacheManager:
     def save_to_cache(cls, key_prefix, width, height, config, pil_image):
         """Saves a generated image to the disk and memory cache."""
         asset_hash = cls.get_asset_hash(key_prefix, width, height, config)
-        
+
         # Save to memory cache immediately
         _MEMORY_ASSET_CACHE[asset_hash] = pil_image
 
         # Save to disk cache asynchronously (or immediately for now)
         cls._ensure_cache_dir()
         cache_path = cls._CACHE_DIR / f"{asset_hash}.png"
-        
+
         try:
             pil_image.save(cache_path, "PNG")
-        except Exception as e:
+        except Exception:
             logger.exception("❌ Error saving asset cache")

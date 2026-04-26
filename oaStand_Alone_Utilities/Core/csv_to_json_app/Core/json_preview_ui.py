@@ -6,7 +6,9 @@
 
 import tkinter as tk
 from tkinter import ttk
+
 import orjson
+
 
 class JSONPreviewUI:
     """Manages the Structured Treeview and Raw JSON text preview areas."""

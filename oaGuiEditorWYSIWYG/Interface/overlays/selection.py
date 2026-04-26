@@ -5,13 +5,13 @@
 # Description: Brief summary of purpose
 
 import tkinter as tk
-from oaComBroker.Core.event_bus import event_bus
+
 from ...Core.state import state_manager
-from ..layout_engine.snap_logic import snap_to_grid
+
 
 def apply_design_overlay(layout, widget, path, is_focused, design_elements):
     """Handles the selection target (emoji), focus highlight, and interactive handles."""
-    
+
     # 1. SELECTION HIGHLIGHT (Yellow Dotted via 4-Frame Construction)
     highlight_frames = []
     if is_focused:
@@ -20,7 +20,7 @@ def apply_design_overlay(layout, widget, path, is_focused, design_elements):
             f._is_design_overlay = True
             design_elements.append(f)
             highlight_frames.append(f)
-    
+
     # 2. SELECTION HANDLE (🎯) - Acts as a MOVE handle
     try:
         master_bg = widget.master.cget("bg")
@@ -62,7 +62,7 @@ def apply_design_overlay(layout, widget, path, is_focused, design_elements):
         # Apply Snap-to-Grid on release and update State
         dx = event.x_root - drag_data["x"]
         dy = event.y_root - drag_data["y"]
-        
+
         # Get current geometry from state
         # This is a placeholder for the actual path-based update logic
         # state_manager.update_state(new_val, path=f"{path}.geometry.x")
@@ -74,7 +74,7 @@ def apply_design_overlay(layout, widget, path, is_focused, design_elements):
 
     move_handle.bind("<Button-1>", _on_click)
     widget.bind("<Button-1>", _on_click, add="+")
-    
+
     def _on_enter(e): move_handle.config(bg="#FF00FF")
     def _on_leave(e): move_handle.config(bg="#33A1FD" if is_focused else master_bg)
     move_handle.bind("<Enter>", _on_enter)
@@ -82,12 +82,12 @@ def apply_design_overlay(layout, widget, path, is_focused, design_elements):
 
     def sync(x, y, w, h):
         if highlight_frames:
-            th = 2 
+            th = 2
             highlight_frames[0].place(x=x-th, y=y-th, width=w+(th*2), height=th)
             highlight_frames[1].place(x=x-th, y=y+h, width=w+(th*2), height=th)
             highlight_frames[2].place(x=x-th, y=y, width=th, height=h)
             highlight_frames[3].place(x=x+w, y=y, width=th, height=h)
-            
+
         move_handle.place(x=x, y=y, width=20, height=20)
         if resize_handle:
             resize_handle.place(x=x+w-5, y=y+h-5, width=10, height=10)

@@ -2,11 +2,10 @@
 This file is part of aes70py.
 This file has been generated.
 """
+from ..types.ocamediaconnectorstatus import OcaMediaConnectorStatus as type
 from .ocamediaconnectorstate import OcaMediaConnectorState
 from .ocauint16 import OcaUint16
 from .struct import Struct
-
-from ..types.ocamediaconnectorstatus import OcaMediaConnectorStatus as type
 
 OcaMediaConnectorStatus = Struct(
   {

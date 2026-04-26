@@ -4,14 +4,15 @@
 #
 # Description: Smoke tests for oaAudioMixer Rust core binding.
 
-import unittest
-import sys
 import os
+import sys
+import unittest
 
 # Add the module path so we can import the rust core
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
 from oaRustCore import oa_audio_mixer_rs as oaaudiomixer_rs
+
 
 class TestAudioMixerSmoke(unittest.TestCase):
     def test_core_loading(self):

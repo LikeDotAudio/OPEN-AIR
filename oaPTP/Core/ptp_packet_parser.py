@@ -4,9 +4,6 @@
 #
 # Description: Wrapper for High-Performance Rust PTP Packet Parser
 
-import time
-import sys
-import os
 from loguru import logger
 
 try:

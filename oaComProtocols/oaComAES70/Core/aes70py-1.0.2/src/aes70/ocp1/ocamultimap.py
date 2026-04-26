@@ -1,8 +1,9 @@
 import weakref
-
-from aes70.ocp1.createtype import create_type, Type
-from struct import pack_into, unpack_from
 from collections import defaultdict
+from struct import pack_into, unpack_from
+
+from aes70.ocp1.createtype import Type, create_type
+
 
 def OcaMultiMap(KeyType, ValueType):
     kencodedLength = KeyType.encoded_length

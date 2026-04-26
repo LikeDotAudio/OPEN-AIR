@@ -7,9 +7,11 @@
 
 import tkinter as tk
 from tkinter import ttk
+
 from loguru import logger
-from oaLogging.Methods.matrix_gate import matrix_log
+
 from ..Input.midi_keyboard import MidiKeyboard, get_midi_color
+
 
 class MidiOutputGenerator(tk.Frame):
     """
@@ -19,16 +21,16 @@ class MidiOutputGenerator(tk.Frame):
         self.config_data = kwargs.pop("config", {})
         self.midi_manager = midi_manager
         super().__init__(parent, **kwargs)
-        
+
         if not self.midi_manager:
             self.midi_manager = self._find_midi_manager(parent)
-        
+
         self.selected_channels = [tk.BooleanVar(value=False) for _ in range(16)]
         self.selected_channels[0].set(True) # Default Ch 1
         self.all_channels_var = tk.BooleanVar(value=False)
         self.send_enabled_var = tk.BooleanVar(value=True)
         self.selected_output_port = tk.StringVar()
-        
+
         self._setup_ui()
         self._refresh_ports()
 
@@ -50,13 +52,13 @@ class MidiOutputGenerator(tk.Frame):
 
     def _setup_ui(self):
         self.configure(bg="#2b2b2b")
-        
+
         # 1. Header
         header = tk.Frame(self, bg="#2b2b2b")
         header.pack(side=tk.TOP, fill=tk.X, pady=10)
         tk.Label(header, text="🎹 MIDI OUTPUT GENERATOR", font=("Helvetica", 14, "bold"), fg="#ffffff", bg="#2b2b2b").pack(side=tk.LEFT, padx=20)
-        
-        tk.Checkbutton(header, text="ENABLE MIDI OUT", variable=self.send_enabled_var, 
+
+        tk.Checkbutton(header, text="ENABLE MIDI OUT", variable=self.send_enabled_var,
                        bg="#2b2b2b", fg="#00ff00", selectcolor="#000000", font=("Helvetica", 10, "bold")).pack(side=tk.RIGHT, padx=20)
 
         main_pane = tk.Frame(self, bg="#2b2b2b")
@@ -65,16 +67,16 @@ class MidiOutputGenerator(tk.Frame):
         # --- TOP: Interactive Keyboard ---
         kb_frame = tk.LabelFrame(main_pane, text="Interactive Keyboard (Touch to Play)", bg="#2b2b2b", fg="#888888")
         kb_frame.pack(side=tk.TOP, fill=tk.X, padx=5, pady=5)
-        
-        self.keyboard = MidiKeyboard(kb_frame, height=300, 
-                                     on_note_on=self._generate_note_on, 
+
+        self.keyboard = MidiKeyboard(kb_frame, height=300,
+                                     on_note_on=self._generate_note_on,
                                      on_note_off=self._generate_note_off)
         self.keyboard.pack(fill=tk.X, expand=True, padx=10, pady=10)
 
         # --- MIDDLE: Output Selection ---
         out_frame = tk.LabelFrame(main_pane, text="Output Hardware Selector", bg="#2b2b2b", fg="#888888")
         out_frame.pack(side=tk.TOP, fill=tk.X, padx=5, pady=5)
-        
+
         self.port_combo = ttk.Combobox(out_frame, textvariable=self.selected_output_port, state="readonly")
         self.port_combo.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=10, pady=10)
         ttk.Button(out_frame, text="Refresh", command=self._refresh_ports).pack(side=tk.RIGHT, padx=10)
@@ -82,16 +84,16 @@ class MidiOutputGenerator(tk.Frame):
         # --- BOTTOM: Channel Selector ---
         ch_frame = tk.LabelFrame(main_pane, text="MIDI Channel Selector", bg="#2b2b2b", fg="#888888")
         ch_frame.pack(side=tk.TOP, fill=tk.X, padx=5, pady=5)
-        
+
         grid_frame = tk.Frame(ch_frame, bg="#2b2b2b")
         grid_frame.pack(padx=10, pady=10)
-        
+
         for i in range(16):
             cb = tk.Checkbutton(grid_frame, text=f"Ch {i+1}", variable=self.selected_channels[i],
                                 bg="#2b2b2b", fg=get_midi_color(i), selectcolor="#000000",
                                 activebackground="#333333", activeforeground=get_midi_color(i))
             cb.grid(row=i//8, column=i%8, padx=5, pady=2, sticky="w")
-            
+
         tk.Checkbutton(ch_frame, text="SELECT ALL CHANNELS", variable=self.all_channels_var, command=self._on_all_channels_toggle,
                        bg="#2b2b2b", fg="#ffffff", selectcolor="#000000").pack(pady=(0,10))
 
@@ -118,10 +120,10 @@ class MidiOutputGenerator(tk.Frame):
 
     def _send_midi(self, m_type, note, velocity):
         if not self.midi_manager: return
-        
+
         channels = [i for i, v in enumerate(self.selected_channels) if v.get()]
         if not channels: return
-        
+
         color = get_midi_color(channels[0])
         if m_type == "note_on": self.keyboard.note_on(note, color)
         else: self.keyboard.note_off(note)

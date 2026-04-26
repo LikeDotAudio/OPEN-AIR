@@ -5,9 +5,10 @@
 # Description: Tests for the VisaDisconnector class and disconnect_instrument function.
 
 import unittest
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
 
 from oaComProtocols.oaComVisa.Workers.logic_disconnect_instrument import VisaDisconnector, disconnect_instrument
+
 
 class TestVisaDisconnector(unittest.TestCase):
 
@@ -21,7 +22,7 @@ class TestVisaDisconnector(unittest.TestCase):
         """Test the standalone disconnect_instrument function with a valid instrument."""
         mock_inst = MagicMock()
         result = disconnect_instrument(mock_inst)
-        
+
         self.assertTrue(result)
         mock_inst.close.assert_called_once()
 
@@ -30,7 +31,7 @@ class TestVisaDisconnector(unittest.TestCase):
         mock_inst = MagicMock()
         mock_inst.close.side_effect = Exception("Close error")
         result = disconnect_instrument(mock_inst)
-        
+
         self.assertFalse(result)
 
     def test_disconnect_instrument_none(self):
@@ -45,9 +46,9 @@ class TestVisaDisconnector(unittest.TestCase):
         CHECK: Assert it closes the instrument, resets the proxy, and publishes status updates.
         """
         mock_inst = MagicMock()
-        
+
         result = self.disconnector.disconnect_instrument_logic(mock_inst)
-        
+
         self.assertTrue(result)
         mock_inst.close.assert_called_once()
         self.mock_proxy.set_instrument_instance.assert_called_with(inst=None)
@@ -61,7 +62,7 @@ class TestVisaDisconnector(unittest.TestCase):
         CHECK: Assert it resets the proxy and publishes disconnected status.
         """
         result = self.disconnector.disconnect_instrument_logic(None)
-        
+
         self.assertTrue(result)
         self.mock_proxy.set_instrument_instance.assert_called_with(inst=None)
         self.mock_publisher._publish_proxy_status.assert_called_with("DISCONNECTED")

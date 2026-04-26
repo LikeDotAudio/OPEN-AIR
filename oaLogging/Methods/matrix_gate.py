@@ -6,8 +6,8 @@
 # Optimized with native Rust oalogginggate_rs for nanosecond checks.
 
 import functools
-import inspect
-from typing import Any, Callable
+from collections.abc import Callable
+
 from loguru import logger
 
 # --- Native Rust Optimization ---
@@ -28,7 +28,7 @@ def is_debug_allowed(system: str, element: str = None, func_name: str = None) ->
     """
     if RUST_ENABLED:
         return oalogginggate_rs.is_debug_allowed(system, element, func_name)
-    
+
     # --- Python Fallback Logic ---
     try:
         from oaConfigurationManager.Managers.LoggingManager.manager import LoggingMatrixManager
@@ -51,16 +51,16 @@ def debug_matrix(system: str, element: str = None):
         return wrapper
     return decorator
 
-def matrix_log(system: str, element: str = None, func_name: str = None, 
+def matrix_log(system: str, element: str = None, func_name: str = None,
                message: str = "", level: str = "DEBUG"):
     """
     Surgical entry point for the Hierarchical Debug Matrix.
     """
     gravity = level.upper()
-    
+
     # 1. Master Logic: Check if the matrix allows this context
     allowed = is_debug_allowed(system, element, func_name)
-    
+
     # 2. Gatekeeper: Allow if matrix permits, OR if it's a critical log (WARNING+)
     if allowed or gravity in ["WARNING", "ERROR", "CRITICAL"]:
         pass
@@ -74,7 +74,7 @@ def matrix_log(system: str, element: str = None, func_name: str = None,
     if system.lower() == "comms":
         category = element.upper() if element else "COMMS"
         context_logger = get_logger(category, emoji_prefix="📡")
-        
+
         # ⚡ V3.1.20 SEGREGATION: Assign protocol tag for sink filtering
         if element:
             el_up = element.upper()
@@ -85,7 +85,7 @@ def matrix_log(system: str, element: str = None, func_name: str = None,
     else:
         cat_name = element.upper() if element else system.upper()
         context_logger = get_logger(cat_name)
-        
+
         # ⚡ V3.1.20 GUI/BROKER/WYSIWYG DETECTION:
         if cat_name in ["GUI", "OAGUI"]: protocol_tag = "GUI"
         elif cat_name == "BROKER": protocol_tag = "BROKER"
@@ -95,7 +95,7 @@ def matrix_log(system: str, element: str = None, func_name: str = None,
     bound_logger = context_logger.opt(depth=1)
     if protocol_tag:
         bound_logger = bound_logger.bind(protocol=protocol_tag)
-        
+
     log_func = getattr(bound_logger, level.lower(), bound_logger.debug)
     log_func(message)
 

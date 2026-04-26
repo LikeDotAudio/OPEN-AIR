@@ -1,15 +1,16 @@
 # Managers/gui_mqtt.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 20250821.200641.1
 #
 # Description: Handles MQTT Context and Command Transmission.
 
 import time
-import orjson
 from pathlib import Path
 
+import orjson
+
 from oaLogging.Methods.matrix_gate import is_debug_allowed, matrix_log
+
 
 def _is_debug():
     return is_debug_allowed(system="UI", element="MQTT")
@@ -18,7 +19,7 @@ from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants_config = Config.get_instance()
 
-from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic, generate_topic_path_from_filepath
+from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import generate_topic_path_from_filepath
 from oaOchestration.Constants.project_paths import GLOBAL_PROJECT_ROOT
 
 
@@ -50,7 +51,7 @@ class GuiMqttManagerMixin:
             self.state_mirror_engine, "base_topic"
         ):
             self.state_mirror_engine.base_topic = app_constants.get_mqtt_base_topic()
-        
+
         # ⚡ REMOTE REBUILD: Listen for test requests from external editors
         self._subscribe_to_rebuild_requests()
 
@@ -58,14 +59,14 @@ class GuiMqttManagerMixin:
         """Subscribes to the UI Rebuild topic to allow live updates from external editors."""
         if not self.subscriber_router or not self.json_filepath:
             return
-            
+
         rebuild_topic = "OPEN-AIR/System/Control/UI/Rebuild"
-        
+
         def _handle_rebuild_request(message):
             # ⚡ ZERO EXCEPTION: Structural validation before processing
             payload = message.payload
             if not payload: return
-            
+
             # Simple check for JSON-like structure
             if not (payload.startswith(b"{") or payload.startswith("{")):
                 return
@@ -73,15 +74,15 @@ class GuiMqttManagerMixin:
             data = orjson.loads(payload)
             target_path = data.get("path")
             new_config = data.get("config")
-            
+
             # Check if this builder instance is for the requested file
             if target_path and str(Path(target_path).resolve()) == str(self.json_filepath.resolve()):
                 matrix_log("ui", "gui_shell", "_handle_rebuild_request", f"♻️ MQTT: Rebuild request received for '{self.tab_name}'. Injecting new config...", "INFO")
-                
+
                 # 1. Update config data
                 if new_config:
                     self.config_data = new_config
-                
+
                 # 2. Trigger rebuild (GuiRebuilderMixin)
                 if hasattr(self, "_rebuild_gui"):
                     # Use self.after to ensure we run on the main Tkinter thread

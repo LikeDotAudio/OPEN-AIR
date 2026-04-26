@@ -4,26 +4,21 @@
 #
 # Description: Brief summary of purpose
 
-import tkinter as tk
-from oaLogging.Methods.matrix_gate import matrix_log
-import inspect
-from oaLogging.Core.logger import initialize_logging, set_log_directory
-from loguru import logger
 
 
 
 def bind_wink_events(canvas, state, config, value_var, draw_visuals_callback, broadcast_callback):
     """Binds all input events to the Wink Button."""
-    
+
     def on_press(event):
         alt_pressed = (event.state & 0x0008) != 0
         state["last_click_was_alt"] = alt_pressed
-        
+
         # ⚡ INTERACTION LOCK
         frame = canvas.master
         if hasattr(frame, "is_locked"):
             frame.is_locked = True
-        
+
         if alt_pressed:
             state["is_locked"] = not state["is_locked"]
             if state["is_locked"]:
@@ -36,7 +31,7 @@ def bind_wink_events(canvas, state, config, value_var, draw_visuals_callback, br
             return
 
         state["is_pressed"] = True
-        value_var.set(True) 
+        value_var.set(True)
 
     def on_release(event):
         if state.get("last_click_was_alt"):
@@ -53,13 +48,13 @@ def bind_wink_events(canvas, state, config, value_var, draw_visuals_callback, br
             return
 
         state["is_pressed"] = False
-        
+
         if config["is_latching"]:
             state["is_latched"] = not state["is_latched"]
             value_var.set(state["is_latched"])
         else:
             value_var.set(False)
-            
+
         # ⚡ INTERACTION LOCK: Release
         frame = canvas.master
         if hasattr(frame, "is_locked"):
@@ -76,7 +71,7 @@ def bind_wink_events(canvas, state, config, value_var, draw_visuals_callback, br
     def on_resize(event):
         if state["_resize_timer"]:
             canvas.after_cancel(state["_resize_timer"])
-        
+
         w = canvas.winfo_width()
         h = canvas.winfo_height()
         state["_resize_timer"] = canvas.after(100, lambda: perform_resize(w, h))

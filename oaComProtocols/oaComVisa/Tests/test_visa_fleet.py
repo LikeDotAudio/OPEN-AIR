@@ -6,7 +6,9 @@
 
 import unittest
 from unittest.mock import MagicMock, patch
+
 from oaComProtocols.oaComVisa.Core.visa_fleet import FleetOrchestrator
+
 
 class TestVisaFleet(unittest.TestCase):
     def setUp(self):
@@ -22,13 +24,13 @@ class TestVisaFleet(unittest.TestCase):
         self.fleet.json_builder = MagicMock()
         self.fleet.csv_builder = MagicMock()
         self.fleet.mqtt_bridge = MagicMock()
-        
+
         test_device = {"IDN": "TEK,DPO123", "RESOURCE": "USB::123"}
         self.fleet.json_builder.augment_device_details.return_value = {"model": "DPO123", "serial": "123"}
-        
+
         # Trigger notification (normally called after scan)
         self.fleet._notify_inventory([test_device])
-        
+
         # CHECK: Builders called
         self.fleet.json_builder.save_inventory_to_json.assert_called()
         self.fleet.csv_builder.build_csvs_from_json.assert_called()

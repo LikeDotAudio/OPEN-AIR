@@ -1,15 +1,15 @@
 import os
 
-import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
 # Methods/port_utils.py
 # Author: Gemini (Collaborator)
 # Version: 20260327.1700.1
 #
 # Description: Utilities for port monitoring and sibling-aware conflict resolution.
-
 import psutil
 from loguru import logger
+
+from oaLogging.Methods.matrix_gate import matrix_log
+
 
 def get_process_on_port(port):
     """Identifies the process currently listening on the specified port."""
@@ -29,7 +29,7 @@ def is_friendly_process(proc):
     current_pid = os.getpid()
     if proc.pid == current_pid:
         return True
-        
+
     try:
         # 1. Check for shared parent (Supervisor)
         my_proc = psutil.Process(current_pid)
@@ -37,22 +37,22 @@ def is_friendly_process(proc):
         proc_parent = proc.parent()
         if my_parent and proc_parent and my_parent.pid == proc_parent.pid:
             return True
-            
+
         # 2. Check for Session Identity GUID (Environment Injection)
         # This is the most reliable way to identify siblings from the same run.
         my_env = my_proc.environ()
         proc_env = proc.environ()
-        
+
         my_guid = my_env.get("OPEN_AIR_INSTANCE_GUID")
         proc_guid = proc_env.get("OPEN_AIR_INSTANCE_GUID")
-        
+
         if my_guid and proc_guid and my_guid == proc_guid:
             return True
 
-        # ⚡ V3.1.28 STRICTNESS: 
+        # ⚡ V3.1.28 STRICTNESS:
         # We NO LONGER consider any process with "openair" in the cmdline as friendly.
         # This allows a new supervisor run to "Zap" orphans from a previous crashed run.
-        
+
     except (psutil.AccessDenied, psutil.NoSuchProcess):
         pass
     return False

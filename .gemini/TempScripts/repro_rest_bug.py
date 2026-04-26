@@ -1,6 +1,6 @@
 # .gemini/TempScripts/repro_rest_bug.py
-import sys
 import os
+import sys
 
 # Add project root to path
 sys.path.append(os.getcwd())

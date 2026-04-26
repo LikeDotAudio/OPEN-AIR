@@ -4,9 +4,11 @@
 #
 # Description: Brief summary of purpose
 
-from PIL import Image, ImageDraw
-import random
 import math
+import random
+
+from PIL import Image, ImageDraw
+
 
 class ScratchLayer:
     @staticmethod

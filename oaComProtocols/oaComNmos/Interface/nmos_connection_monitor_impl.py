@@ -5,11 +5,11 @@
 # Description: NMOS Connection Monitor Implementation.
 # Shows registration status with the NMOS registry and HTTP server status.
 
-import tkinter as tk
-from tkinter import ttk
-import requests
 import threading
 import time
+import tkinter as tk
+from tkinter import ttk
+
 from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- GUI FALLBACKS (V3.2.1 Decoupling) ---
@@ -29,7 +29,7 @@ class NmosConnectionMonitorImplementation(tk.Frame, TransparencyMixin):
         super().__init__(parent, **kwargs)
         self.config = config or {}
         self.global_state = self.config.get("global_state", {})
-        
+
         # Default values
         self.registrar_url = self.global_state.get("REGISTRAR_URL", "http://localhost:4000")
         self.node_id = self.global_state.get("NODE_ID", "Unknown")
@@ -37,7 +37,7 @@ class NmosConnectionMonitorImplementation(tk.Frame, TransparencyMixin):
         self.host_ip = "0.0.0.0"
         self.is_registered = False
         self.is_server_running = False
-        
+
         self._setup_ui()
         self._start_monitor_thread()
 
@@ -63,7 +63,7 @@ class NmosConnectionMonitorImplementation(tk.Frame, TransparencyMixin):
         # 3. Controls
         ctrl_frame = tk.Frame(self, bg=bg_color)
         ctrl_frame.pack(side=tk.TOP, fill=tk.X, padx=20, pady=10)
-        
+
         self.refresh_btn = ttk.Button(ctrl_frame, text="Force Re-registration", command=self._force_re_register)
         self.refresh_btn.pack(side=tk.LEFT, padx=5)
 
@@ -91,15 +91,15 @@ class NmosConnectionMonitorImplementation(tk.Frame, TransparencyMixin):
             self.is_server_running = self.global_state.get("RUNNING", False)
             self.node_id = self.global_state.get("NODE_ID", "Unknown")
             self.device_id = self.global_state.get("DEVICE_ID", "Unknown")
-            
+
             # Simple IP discovery or from state
             from oaComProtocols.oaComNmos.Core.utils import get_ip
             self.host_ip = get_ip()
-            
-            # For registration status, we'd need to check the manager, 
+
+            # For registration status, we'd need to check the manager,
             # but for now we assume if it's running it's attempting registration.
-            self.is_registered = self.is_server_running 
-            
+            self.is_registered = self.is_server_running
+
             if self.winfo_exists():
                 self.after(0, self._refresh_ui)
         except (RuntimeError, tk.TclError):
@@ -116,20 +116,20 @@ class NmosConnectionMonitorImplementation(tk.Frame, TransparencyMixin):
     def _refresh_ui(self):
         for item in self.status_tree.get_children():
             self.status_tree.delete(item)
-            
+
         self.status_tree.insert("", "end", text="Node ID", values=(self.node_id,))
         self.status_tree.insert("", "end", text="Device ID", values=(self.device_id,))
         self.status_tree.insert("", "end", text="Host IP", values=(self.host_ip,))
         self.status_tree.insert("", "end", text="Registrar URL", values=(self.registrar_url,))
-        
+
         reg_status = "REGISTERED" if self.is_registered else "NOT REGISTERED"
         reg_color = "#00ff00" if self.is_registered else "#ff0000"
         self.status_tree.insert("", "end", text="Registration", values=(reg_status,))
-        
+
         srv_status = "RUNNING" if self.is_server_running else "STOPPED"
         srv_color = "#00ff00" if self.is_server_running else "#ff0000"
         self.status_tree.insert("", "end", text="HTTP Server", values=(srv_status,))
-        
+
         self.status_label.config(text=f"Last Sync: {time.strftime('%H:%M:%S')}", fg="#00ff00" if self.is_server_running else "#ff0000")
 
     def _force_re_register(self):

@@ -5,16 +5,16 @@
 # Description: NMOS Connection & Node API using FastAPI.
 # ⚡ STANDALONE: Includes IS-07 WebSocket server support.
 
-import json
 import asyncio
-from typing import Dict, List, Any, Optional
-from fastapi import FastAPI, WebSocket, WebSocketDisconnect, HTTPException, Request
-from fastapi.responses import JSONResponse, Response
-import uvicorn
+from typing import Any
 
-from oaComProtocols.oaComNmos.Core.utils import now_ts, get_ip
-from oaComProtocols.oaComNmos.Core.sdp_parser import parse_sdp
+import uvicorn
+from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect
+from fastapi.responses import Response
+
 from oaComProtocols.oaComNmos.Constants import settings
+from oaComProtocols.oaComNmos.Core.sdp_parser import parse_sdp
+from oaComProtocols.oaComNmos.Core.utils import get_ip, now_ts
 from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- Shared State (Populated by Orchestrator) ---
@@ -31,7 +31,7 @@ app = FastAPI(title="OPEN-AIR NMOS API")
 
 # --- Helper Functions ---
 
-def build_connection_active(sender_id: str) -> Optional[Dict[str, Any]]:
+def build_connection_active(sender_id: str) -> dict[str, Any] | None:
     sender_resource = STATE["SENDERS"].get(sender_id)
     if not sender_resource:
         return None
@@ -121,7 +121,7 @@ async def manifest_sender(sender_id: str):
 
 class ConnectionManager:
     def __init__(self):
-        self.active_connections: List[WebSocket] = []
+        self.active_connections: list[WebSocket] = []
 
     async def connect(self, websocket: WebSocket):
         await websocket.accept()
@@ -151,7 +151,7 @@ async def websocket_endpoint(websocket: WebSocket):
             # Handle incoming IS-07 commands here if needed
             # For now, we just log and potentially echo or broadcast
             matrix_log("comms", "is07_ws", "receive", f"📡📥 [IS07-WS] Received: {data[:100]}", "DEBUG")
-            
+
             # Simple Echo for testing
             # await websocket.send_text(f"Message received: {data}")
     except WebSocketDisconnect:
@@ -166,9 +166,9 @@ def run_server(host="0.0.0.0", port=settings.PORT):
     """Starts the NMOS API and IS-07 WebSocket server using uvicorn."""
     config = uvicorn.Config(app, host=host, port=port, log_level="warning")
     server = uvicorn.Server(config)
-    
+
     matrix_log("comms", "nmos_api", "run", f"🚀 [NMOS-API] Starting FastAPI server on {host}:{port}", "INFO")
-    
+
     try:
         loop = asyncio.get_running_loop()
         loop.create_task(server.serve())

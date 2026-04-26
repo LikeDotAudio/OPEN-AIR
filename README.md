@@ -37,6 +37,9 @@ For detailed information, please refer to the modular documentation:
 - **[Communication Broker](oaComBroker/Documentation/README.md)**: Details on the Protocol Router and Unified Message Schema.
 - **[WYSIWYG Editor](oaGuiEditorWYSIWYG/Documentation/wysiwyg_editor.md)**: Learn how to interactively design and build GUI definitions.
 - **[Patent Details](oaDocumentation/Patent/01_abstract.md)**: Technical descriptions of the novel architecture.
+- **[Schematic Engine](../GitProjects/SchemWeb/crate-engine/Summary.md)**: High-performance Rust/WASM graph processing for the Partitioned Architecture.
+- **[Core Backend](../GitProjects/SchemWeb/backend/Summary.md)**: High-performance Express.js API serving the Partitioned Architecture and Widget Registry.
+- **[Frontend UI](../GitProjects/SchemWeb/frontend/src/Summary.md)**: React-based schematic visualization and orchestration layer following the Partitioned Architecture.
 
 ---
 

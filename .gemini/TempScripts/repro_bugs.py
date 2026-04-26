@@ -1,7 +1,6 @@
 # .gemini/TempScripts/repro_bugs.py
-import unittest
-import os
 import sys
+
 
 def test_syntax_errors():
     print("Checking for syntax/indentation errors...")
@@ -11,7 +10,7 @@ def test_syntax_errors():
     ]
     for f in files_to_check:
         try:
-            with open(f, 'r') as file:
+            with open(f) as file:
                 compile(file.read(), f, 'exec')
             print(f"✅ {f} syntax OK")
         except Exception as e:
@@ -20,7 +19,6 @@ def test_syntax_errors():
 def test_broker_import():
     print("Checking oaComBroker.Core.protocol_router.manager import...")
     try:
-        from oaComBroker.Core.protocol_router.manager import ProtocolRouter
         print("✅ oaComBroker.Core.protocol_router.manager import OK")
     except Exception as e:
         print(f"❌ oaComBroker.Core.protocol_router.manager import ERROR: {e}")
@@ -28,7 +26,7 @@ def test_broker_import():
 if __name__ == "__main__":
     test_syntax_errors()
     test_broker_import()
-    
+
     # Run the fast_scanner test
     print("\nRunning FastScanner tests...")
     import subprocess

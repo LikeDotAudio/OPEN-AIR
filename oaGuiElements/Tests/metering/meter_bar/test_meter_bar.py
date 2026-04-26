@@ -4,11 +4,13 @@
 #
 # Description: Brief summary of purpose
 
+import tkinter as tk
 import unittest
 from unittest.mock import MagicMock, patch
-import tkinter as tk
+
 from oaGuiElements.Core.metering.meter_bar.Core.meter_bar import BuilderMeterBarCreator
 from oaGuiElements.Core.metering.meter_bar.Core.smart_meter import SmartMeter
+
 
 class TestMeterBar(unittest.TestCase):
     def setUp(self):
@@ -21,7 +23,7 @@ class TestMeterBar(unittest.TestCase):
             self.HAS_DISPLAY = False
             self.root = MagicMock()
             self.root.winfo_exists.return_value = True
-            
+
             # Provide return values for common cget calls
             def mock_cget(attr):
                 if attr == "bg": return "#2b2b2b"
@@ -30,12 +32,12 @@ class TestMeterBar(unittest.TestCase):
                 return ""
             self.root.cget.side_effect = mock_cget
             self.root.tk = MagicMock()
-            
+
             # Patch classes in the TARGET module to return mocks
             METER_MODULE = 'oaGuiElements.Core.metering.meter_bar.Core.smart_meter'
             self.patchers.append(patch(f'{METER_MODULE}.tk.Canvas'))
             self.patchers.append(patch(f'{METER_MODULE}.tk.DoubleVar', return_value=MagicMock()))
-            
+
             for p in self.patchers:
                 mock_cls = p.start()
                 # Use getattr to safely check for return_value
@@ -47,7 +49,7 @@ class TestMeterBar(unittest.TestCase):
                     # Safe way to add cget to mocks that might need it
                     if hasattr(m_ret, 'cget'):
                         m_ret.cget.side_effect = mock_cget
-        
+
         self.config = {
             "label_active": "Test Meter",
             "path": "test/meter",
@@ -73,13 +75,13 @@ class TestMeterBar(unittest.TestCase):
             subscriber_router=self.context.subscriber_router,
             base_topic="test/base"
         )
-        
+
         # OPERATE & CHECK
         if self.HAS_DISPLAY:
             self.assertIsInstance(meter.value_var, tk.DoubleVar)
         else:
             self.assertIsNotNone(meter.value_var)
-            
+
         # Just checking basic initialization success here.
         self.assertTrue(hasattr(meter, "canvas"))
 
@@ -91,7 +93,7 @@ class TestMeterBar(unittest.TestCase):
             config_data=self.config,
             context=self.context
         )
-        
+
         # CHECK
         self.assertIsNotNone(meter)
         if self.HAS_DISPLAY:

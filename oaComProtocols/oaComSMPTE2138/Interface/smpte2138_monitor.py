@@ -3,24 +3,22 @@
 # Blog: www.Like.audio (Contributor to this project)
 # Version: 20260405.2115.1
 #
-# Description: Elite GUI monitor for the SMPTE ST 2138 protocol. 
+# Description: Elite GUI monitor for the SMPTE ST 2138 protocol.
 # This file contains the primary implementation logic.
 
+import datetime
+import inspect
 import tkinter as tk
 from tkinter import ttk
-import datetime
+
 import orjson
-import inspect
-from pathlib import Path
-from loguru import logger
+
+from oaComProtocols.oaComMQTT.Core import mqtt_publisher_service
 
 # --- ST 2138 Logic Bridge ---
-from oaComProtocols.oaComSMPTE2138.Managers.smpte2138_monitor_manager import SMPTE2138MonitorManager
-
 # --- Standard OPEN-AIR GUI Imports ---
 from oaLogging.Methods.matrix_gate import matrix_log
-from oaStyle.Core.style import THEMES, DEFAULT_THEME
-from oaComProtocols.oaComMQTT.Core import mqtt_publisher_service
+from oaStyle.Core.style import DEFAULT_THEME, THEMES
 
 # --- GUI FALLBACKS (V3.2.1 Decoupling) ---
 try:
@@ -43,28 +41,28 @@ class SMPTE2138MonitorImplementation(tk.Frame, TransparencyMixin):
         self.config_data = config if config else {}
         self.theme_colors = self.config_data.get("theme_colors", THEMES[DEFAULT_THEME])
         self._packet_cache = {}
-        
+
         if "bg" not in kwargs:
             kwargs["bg"] = self.theme_colors.get("bg", "#2b2b2b")
-            
+
         super().__init__(parent, **kwargs)
-        
+
         self._setup_styles()
         self._setup_ui()
-        
+
         builder = self._find_builder(self)
         if builder:
             self._apply_transparency(self, None, {}, builder)
-        
+
         try:
             # from oaComBroker.Core.event_bus import event_bus
             # event_bus.subscribe("SMPTE2138_TRAFFIC", self._on_bus_update)
             pass
         except ImportError: pass
-        
+
         self._update_status_loop()
-        
-        if LOCAL_DEBUG: 
+
+        if LOCAL_DEBUG:
             matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🖥️ [UI] Elite ST 2138 Monitor Online.", "DEBUG")
 
     def _find_builder(self, widget):
@@ -76,7 +74,7 @@ class SMPTE2138MonitorImplementation(tk.Frame, TransparencyMixin):
         while curr:
             # Check for generic 'builder' or 'app_instance'
             if hasattr(curr, 'builder'):
-                return getattr(curr, 'builder')
+                return curr.builder
             if hasattr(curr, 'app_instance'):
                 return curr
             try: curr = curr.master
@@ -87,108 +85,108 @@ class SMPTE2138MonitorImplementation(tk.Frame, TransparencyMixin):
         self.style = ttk.Style()
         bg = self.theme_colors.get("bg", "#2b2b2b")
         fg = self.theme_colors.get("fg", "#dcdcdc")
-        
+
         self.style.configure("SMPTE.TFrame", background=bg)
         self.style.configure("SMPTE.TLabel", background=bg, foreground=fg)
-        self.style.configure("SMPTE.Header.TLabel", background=bg, 
+        self.style.configure("SMPTE.Header.TLabel", background=bg,
                              foreground="#00ff00", font=("Arial", 12, "bold"))
-        self.style.configure("SMPTE.Stat.TLabel", background=bg, 
+        self.style.configure("SMPTE.Stat.TLabel", background=bg,
                              foreground="#aaa", font=("Monospace", 9))
-        self.style.configure("SMPTE.Treeview", background="#1e1e1e", 
+        self.style.configure("SMPTE.Treeview", background="#1e1e1e",
                              fieldbackground="#1e1e1e", foreground="#00ff00")
-        
+
         self.style.configure("SMPTE.Start.TButton", foreground="white", background="#28a745")
         self.style.configure("SMPTE.Stop.TButton", foreground="white", background="#dc3545")
 
     def _setup_ui(self):
         self.pack(fill=tk.BOTH, expand=True)
-        
+
         # --- TOP: Elite Status Header ---
         self.header_panel = tk.Frame(self, bg="#1a1a1a", height=70, bd=1, relief=tk.RAISED)
         self.header_panel.pack(side=tk.TOP, fill=tk.X, padx=2, pady=2)
-        
+
         # 1. Info & Control
         ctrl_frame = tk.Frame(self.header_panel, bg="#1a1a1a")
         ctrl_frame.pack(side=tk.LEFT, padx=10)
-        
-        ttk.Label(ctrl_frame, text="ST 2138 ENGINE", 
+
+        ttk.Label(ctrl_frame, text="ST 2138 ENGINE",
                   style="SMPTE.Header.TLabel").pack(anchor="w")
-        
+
         btn_frame = tk.Frame(ctrl_frame, bg="#1a1a1a")
         btn_frame.pack(anchor="w", pady=2)
-        
-        self.start_btn = ttk.Button(btn_frame, text="START", width=8, 
+
+        self.start_btn = ttk.Button(btn_frame, text="START", width=8,
                                     command=lambda: self._send_bridge_cmd(True))
         self.start_btn.pack(side=tk.LEFT, padx=2)
-        
-        self.stop_btn = ttk.Button(btn_frame, text="STOP", width=8, 
+
+        self.stop_btn = ttk.Button(btn_frame, text="STOP", width=8,
                                    command=lambda: self._send_bridge_cmd(False))
         self.stop_btn.pack(side=tk.LEFT, padx=2)
 
         # 2. Telemetry Meters
         stats_frame = tk.Frame(self.header_panel, bg="#1a1a1a")
         stats_frame.pack(side=tk.LEFT, expand=True)
-        
+
         self.status_var = tk.StringVar(value="STATUS: UNKNOWN")
         self.message_total_var = tk.StringVar(value="MSGS: 0")
         self.rate_var = tk.StringVar(value="RATE: 0.0 message/s")
-        
-        ttk.Label(stats_frame, textvariable=self.status_var, 
+
+        ttk.Label(stats_frame, textvariable=self.status_var,
                   style="SMPTE.Stat.TLabel").grid(row=0, column=0, padx=10)
-        ttk.Label(stats_frame, textvariable=self.message_total_var, 
+        ttk.Label(stats_frame, textvariable=self.message_total_var,
                   style="SMPTE.Stat.TLabel").grid(row=0, column=1, padx=10)
-        ttk.Label(stats_frame, textvariable=self.rate_var, 
+        ttk.Label(stats_frame, textvariable=self.rate_var,
                   style="SMPTE.Stat.TLabel").grid(row=0, column=2, padx=10)
 
         # 3. Connection Info
         conn_frame = tk.Frame(self.header_panel, bg="#1a1a1a")
         conn_frame.pack(side=tk.RIGHT, padx=10)
-        
+
         self.broker_var = tk.StringVar(value="NODE: -")
-        ttk.Label(conn_frame, textvariable=self.broker_var, 
+        ttk.Label(conn_frame, textvariable=self.broker_var,
                   style="SMPTE.Stat.TLabel").pack(anchor="e")
-        
-        self.led_canvas = tk.Canvas(conn_frame, width=15, height=15, 
+
+        self.led_canvas = tk.Canvas(conn_frame, width=15, height=15,
                                     bg="#1a1a1a", highlightthickness=0)
         self.led_canvas.pack(side=tk.RIGHT, pady=2)
         self.status_led = self.led_canvas.create_oval(2, 2, 13, 13, fill="grey")
 
         # --- Main Splitter Area ---
-        self.paned = tk.PanedWindow(self, orient=tk.VERTICAL, bg=self.cget("bg"), 
+        self.paned = tk.PanedWindow(self, orient=tk.VERTICAL, bg=self.cget("bg"),
                                     bd=0, sashwidth=4)
         self.paned.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
 
         # 1. TOP: Log
         self.log_container = tk.Frame(self.paned, bg=self.cget("bg"))
         self.paned.add(self.log_container, stretch="always", height=250)
-        
+
         cols = ("Time", "Type", "Slot", "OID", "Value")
-        self.log_tree = ttk.Treeview(self.log_container, columns=cols, 
+        self.log_tree = ttk.Treeview(self.log_container, columns=cols,
                                      show="headings", style="SMPTE.Treeview")
-        
+
         for c in cols:
             self.log_tree.heading(c, text=c, command=lambda _c=c: self._sort_column(_c, False))
             self.log_tree.column(c, width=100 if c!="Value" else 200)
 
-        sy = ttk.Scrollbar(self.log_container, orient=tk.VERTICAL, 
+        sy = ttk.Scrollbar(self.log_container, orient=tk.VERTICAL,
                            command=self.log_tree.yview)
         self.log_tree.configure(yscrollcommand=sy.set)
         self.log_tree.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
         sy.pack(side=tk.RIGHT, fill=tk.Y)
-        
+
         self.log_tree.bind("<<TreeviewSelect>>", self.on_select)
 
         # 2. BOTTOM: Dissector
         self.dissect_container = tk.Frame(self.paned, bg=self.cget("bg"))
         self.paned.add(self.dissect_container, stretch="always", height=200)
-        
-        self.dissector = ttk.Treeview(self.dissect_container, columns=("Value"), 
+
+        self.dissector = ttk.Treeview(self.dissect_container, columns=("Value"),
                                       show="tree headings", style="SMPTE.Treeview")
         self.dissector.heading("#0", text="Field")
         self.dissector.heading("Value", text="Protobuf Content")
         self.dissector.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
-        
-        dsy = ttk.Scrollbar(self.dissect_container, orient=tk.VERTICAL, 
+
+        dsy = ttk.Scrollbar(self.dissect_container, orient=tk.VERTICAL,
                             command=self.dissector.yview)
         self.dissector.configure(yscrollcommand=dsy.set)
         dsy.pack(side=tk.RIGHT, fill=tk.Y)
@@ -196,7 +194,7 @@ class SMPTE2138MonitorImplementation(tk.Frame, TransparencyMixin):
     def _sort_column(self, col, reverse):
         """Sorts the treeview by the given column."""
         l = [(self.log_tree.set(k, col), k) for k in self.log_tree.get_children('')]
-        
+
         # Try numeric sort if applicable
         try:
             l.sort(key=lambda t: float(t[0]), reverse=reverse)
@@ -232,13 +230,13 @@ class SMPTE2138MonitorImplementation(tk.Frame, TransparencyMixin):
 
     def _update_gui(self, topic, data):
         stats = data.get("_stats", {})
-        
+
         # Update Header
         self.status_var.set(f"ENGINE: {stats.get('status', 'N/A')}")
         self.message_total_var.set(f"TOTAL MSGS: {stats.get('message_count', 0)}")
         self.rate_var.set(f"RATE: {stats.get('rate', 0.0)} message/s")
         self.broker_var.set(f"NODE: {stats.get('broker', '-')}")
-        
+
         # Update LED
         color = "#00ff00" if stats.get("connected") else "red"
         self.led_canvas.itemconfig(self.status_led, fill=color)
@@ -250,15 +248,15 @@ class SMPTE2138MonitorImplementation(tk.Frame, TransparencyMixin):
 
         timestamp = datetime.datetime.now().strftime("%H:%M:%S.%f")[:-3]
         iid = self.log_tree.insert("", 0, values=(
-            timestamp, 
+            timestamp,
             message_type,
             data.get("slot", "-"),
             data.get("oid", "-"),
             data.get("value", "-")
         ))
-        
+
         self._packet_cache[iid] = data
-        
+
         if len(self.log_tree.get_children()) > 200:
             last = self.log_tree.get_children()[-1]
             self.log_tree.delete(last)
@@ -267,7 +265,7 @@ class SMPTE2138MonitorImplementation(tk.Frame, TransparencyMixin):
     def on_select(self, event=None):
         sel = self.log_tree.selection()
         if not sel: return
-        
+
         self.dissector.delete(*self.dissector.get_children())
         packet = self._packet_cache.get(sel[0])
         if packet:
@@ -275,7 +273,7 @@ class SMPTE2138MonitorImplementation(tk.Frame, TransparencyMixin):
 
     def _populate_dissector(self, parent, data):
         for k, v in data.items():
-            if k.startswith("_"): continue 
+            if k.startswith("_"): continue
             if isinstance(v, dict):
                 node = self.dissector.insert(parent, "end", text=k, open=True)
                 self._populate_dissector(node, v)

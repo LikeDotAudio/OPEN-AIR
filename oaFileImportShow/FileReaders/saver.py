@@ -1,25 +1,24 @@
-from oaLogging.Methods.matrix_gate import matrix_log
+import csv
+
 # FileReaders/saver.py
 # Author: Anthony Peter Kuzub
 # Version: 20250821.200641.1
 #
 # Description: importers/worker_importer_saver.py
-
 import inspect
 import os
-import csv
 from tkinter import filedialog
+
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = False
-from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
 from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()  # Get the singleton instance
 
-from oaOchestration.Constants.project_paths import GLOBAL_PROJECT_ROOT
 
 # Define the canonical headers
 CANONICAL_HEADERS = ["ZONE", "GROUP", "DEVICE", "NAME", "FREQ_MHZ", "PEAK"]
@@ -55,7 +54,7 @@ def save_intermediate_file(tree_headers, tree_data):
             writer.writerows(tree_data)
 
         matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💾 Intermediate file saved as {target_path}", "DEBUG")
-    except Exception as e:
+    except Exception:
         if LOCAL_DEBUG:
             logger.exception("❌ Failed to save intermediate MARKERS.csv file. ")
 
@@ -107,7 +106,7 @@ def save_open_air_file(tree_headers, tree_data):
         if LOCAL_DEBUG: logger.success("✅ File saved successfully.", file=os.path.basename(__file__),
             function=f"{current_function}",
         )
-    except Exception as e:
+    except Exception:
         if LOCAL_DEBUG:
             logger.exception("❌ Error saving Open Air CSV file",
                 file=os.path.basename(__file__),

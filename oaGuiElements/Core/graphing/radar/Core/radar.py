@@ -4,27 +4,23 @@
 #
 # Description: Brief summary of purpose
 
-import tkinter as tk
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
 import math
-import time
-import orjson
-import os
-import numpy as np
+import tkinter as tk
 
-# --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
-from loguru import logger
+import orjson
 
 from oaConfigurationManager.FileReaders.config_reader import Config
 
+# --- Standard Debug Logging Setup ---
+from oaLogging.Methods.matrix_gate import matrix_log
+
 app_constants = Config.get_instance()
 
-from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic
 from oaComProtocols.oaComMQTT.Core import mqtt_publisher_service
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 from oaGui.Methods.i18n_utils import get_text
+from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+
 
 class BuilderDataRadarCreator(TransparencyMixin):
     """
@@ -39,12 +35,12 @@ class BuilderDataRadarCreator(TransparencyMixin):
 
     def make_data_radar(self, parent_widget, config_data, context=None, **kwargs):
         """Creates a hierarchical radar eye widget."""
-        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📶 [BUILDER] Entering make_data_radar", level="TRACE")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🔬🏗️📶 [BUILDER] Entering make_data_radar", level="TRACE")
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📜📑💻 [CONFIG] Raw config received: {config_data}", level="DEBUG")
 
         label = get_text(config_data.get("label_active"), "Radar")
         path = config_data.get("path", "")
-        
+
         # ⚡ HARDENED INTERFACE: Extract from context if available
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🔗🗂️⚙️ [CONTEXT] Extracting engine and router context...", level="TRACE")
         if context:
@@ -70,10 +66,10 @@ class BuilderDataRadarCreator(TransparencyMixin):
 
         width = app_settings.get("window_size", [600, 600])[0]
         height = app_settings.get("window_size", [600, 600])[1]
-        refresh_rate = app_settings.get("refresh_rate_ms", 33) 
+        refresh_rate = app_settings.get("refresh_rate_ms", 33)
         mode = app_settings.get("mode", "sweep")
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📐📏🔳 [LAYOUT] Radar dimensions: {width}x{height}, Mode: {mode}", level="DEBUG")
-        
+
         points_count = data_parameters.get("points_per_revolution", 360)
         min_val, max_val = data_parameters.get("min_value", 0), data_parameters.get("max_value", 100)
         start_angle = data_parameters.get("start_angle", 90)
@@ -85,9 +81,9 @@ class BuilderDataRadarCreator(TransparencyMixin):
         frame = tk.Frame(parent_widget, bd=0, highlightthickness=0)
         canvas = tk.Canvas(frame, width=width, height=height, highlightthickness=0, bd=0)
         canvas.pack(fill=tk.BOTH, expand=True)
-        
+
         if hasattr(builder_instance, '_apply_transparency'):
-            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"👻🌀🪟 [ALPHA] Applying industrial transparency to radar.", level="TRACE")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "👻🌀🪟 [ALPHA] Applying industrial transparency to radar.", level="TRACE")
             builder_instance._apply_transparency(frame, canvas, config_data, builder_instance)
 
         trig_cache = []
@@ -119,17 +115,17 @@ class BuilderDataRadarCreator(TransparencyMixin):
             return cols.get("safe", "#00ff00") if v < mid else cols.get("warning", "#ffff00") if v < upper else cols.get("critical", "#ff0000")
 
         def draw_static_grid():
-            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔄✨🎨 [REDRAW] Drawing radar grid system.", level="TRACE")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🔄✨🎨 [REDRAW] Drawing radar grid system.", level="TRACE")
             canvas.delete("grid")
             canvas.delete("bg")
             cx, cy, r_max = radar_state["cx"], radar_state["cy"], radar_state["radius"]
-            
+
             # ⚡ INDUSTRIAL TRANSPARENCY: Don't draw patina manually, TransparencyManager handles it.
             # However, if we're NOT transparent, we might want a solid background.
             is_trans = config_data.get("transparent", False)
             if not is_trans and hasattr(canvas, 'panel_bg_image') and canvas.panel_bg_image:
                 canvas.create_image(0, 0, image=canvas.panel_bg_image, anchor="nw", tags="bg")
-            
+
             show_grid = grid_sys.get("show_grid", True)
             grid_color = grid_sys.get("grid_color", "#ffffff")
             label_cfg = grid_sys.get("labels", {})
@@ -152,7 +148,7 @@ class BuilderDataRadarCreator(TransparencyMixin):
                         rad = math.radians(a)
                         px, py = cx + r_max * math.cos(rad), cy - r_max * math.sin(rad)
                         canvas.create_line(cx, cy, px, py, fill=grid_color, tags="grid")
-            
+
             # ⚡ LAYER MANAGEMENT: Ensure grid is above background but below data
             canvas.tag_lower("grid")
             canvas.tag_lower("bg")
@@ -178,7 +174,7 @@ class BuilderDataRadarCreator(TransparencyMixin):
                     if items: canvas.coords(items[0], radar_state["cx"], radar_state["cy"], px, py)
                     else: canvas.create_line(radar_state["cx"], radar_state["cy"], px, py, fill=get_color(value), width=2, tags=("data", tag))
                 radar_state["dirty_indices"].clear()
-            
+
             lx, ly = get_pos(radar_state["current_angle_idx"], radar_state["radius"])
             items = canvas.find_withtag("cursor")
             if items: canvas.coords(items[0], radar_state["cx"], radar_state["cy"], lx, ly)
@@ -204,12 +200,12 @@ class BuilderDataRadarCreator(TransparencyMixin):
             r_px = math.sqrt(dx*dx + dy*dy)
             norm_r = max(0, min(1.0, r_px / radar_state["radius"]))
             new_val = min_val + (norm_r * (max_val - min_val))
-            
+
             matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🖱️👆📶 [INPUT] Radar injection: Val={new_val:.1f}", level="INFO")
-        
+
             # Inject value into the variable (the system's source of truth)
             radar_value_var.set(new_val)
-            
+
             if path and radar_state["mqtt_topic"]:
                 payload = {"value": new_val, "pulse": True}
                 mqtt_publisher_service.publish_payload(radar_state["mqtt_topic"], orjson.dumps(payload).decode())
@@ -220,12 +216,12 @@ class BuilderDataRadarCreator(TransparencyMixin):
 
         def sweep_loop():
             if not radar_state["running"]: return
-            
+
             # ⚡ INJECTION POINT: Record the current system value into the sweep head
             idx = radar_state["current_angle_idx"]
             radar_state["data_buffer"][idx] = radar_value_var.get()
             radar_state["dirty_indices"].add(idx)
-            
+
             # Move sweep head
             radar_state["current_angle_idx"] = (idx + 1) % points_count
             _schedule_draw()
@@ -235,22 +231,22 @@ class BuilderDataRadarCreator(TransparencyMixin):
             if w <= 1 or h <= 1: return
             matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📐📏🔄 [LAYOUT] Radar performing resize to {w}x{h}.", level="DEBUG")
             radar_state.update({"cx": w/2, "cy": h/2, "radius": min(w, h)/2 - 25})
-            
+
             # ⚡ INDUSTRIAL TRANSPARENCY: Don't delete everything, preserve the patina slice
             for item in canvas.find_all():
                 tags = canvas.gettags(item)
                 if "panel_bg_slice" not in tags:
                     canvas.delete(item)
-                    
+
             draw_static_grid()
             for i in range(points_count): radar_state["dirty_indices"].add(i)
             _perform_draw()
-        
+
         frame._draw = lambda: perform_resize(canvas.winfo_width(), canvas.winfo_height())
         canvas.bind("<Configure>", lambda e: frame._draw())
 
         radar_value_var = tk.DoubleVar(value=min_val)
-        
+
         def on_value_change(*args):
             # Immediate update of the current sweep position when value changes
             idx = radar_state["current_angle_idx"]
@@ -267,13 +263,13 @@ class BuilderDataRadarCreator(TransparencyMixin):
             if subscriber_router and topic:
                 matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📥📶🔄 [MQTT] Subscribing to topic: {topic}", level="DEBUG")
                 subscriber_router.subscribe_to_topic(topic, state_mirror_engine.sync_incoming_mqtt_to_gui)
-            
-            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔄⏳🔋 [STATE] Initializing radar state from cache/broker.", level="TRACE")
+
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🔄⏳🔋 [STATE] Initializing radar state from cache/broker.", level="TRACE")
             state_mirror_engine.initialize_widget_state(path)
 
-        if mode == "sweep": 
+        if mode == "sweep":
             matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🌀⏳🔄 [ANIM] Starting radar sweep loop.", level="TRACE")
             sweep_loop()
-            
+
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"✅🆗📶 [SUCCESS] The Radar Eye '{label}' has materialized!", level="SUCCESS")
         return frame

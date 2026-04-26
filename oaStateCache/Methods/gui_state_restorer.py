@@ -1,19 +1,18 @@
-from oaLogging.Methods.matrix_gate import matrix_log
 # Methods/gui_state_restorer.py
 # Author: Anthony Peter Kuzub
 # Version: 20250821.200641.1
 #
 # Description: State_Cache/gui_state_restorer.py
-
 import inspect
-from typing import Dict, Any, Optional
-from oaComProtocols.oaComMQTT.Core.mqtt_message import MqttMessage
+from typing import Any
 
-# --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
+from oaComProtocols.oaComMQTT.Core.mqtt_message import MqttMessage
 from oaConfigurationManager.FileReaders.config_reader import Config
+
+# --- Standard Debug Logging Setup ---
+from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
@@ -30,7 +29,7 @@ current_version_hash = 20251230 * 230200 * 1
 #     state_mirror_engine (Any): An instance of the state mirror engine to handle GUI updates.
 # Outputs:
 #     None.
-def restore_timeline(cache_data: Dict[str, Any], state_mirror_engine: Any) -> None:
+def restore_timeline(cache_data: dict[str, Any], state_mirror_engine: Any) -> None:
     """
     Iterate through the cache_data.
     Trigger the specific GUI update methods in display (or via the state_mirror if accessible)
@@ -53,7 +52,7 @@ def restore_timeline(cache_data: Dict[str, Any], state_mirror_engine: Any) -> No
                     data = orjson.loads(payload)
                 else:
                     data = payload # Already parsed/dict
-                
+
                 if isinstance(data, dict) and "value" in data:
                     val_str = f" Val={data['value']}"
             except Exception as e:
@@ -61,7 +60,7 @@ def restore_timeline(cache_data: Dict[str, Any], state_mirror_engine: Any) -> No
                 matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Cosmetic: Failed to extract 'value' for replaying log: {e}", "TRACE")
 
             matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"⏪🔄 Topic='{topic}'{val_str}", "TRACE")
-            
+
             # ⚡ V3.1.22 RECURSION GUARD (RESTORE PHASE):
             # Skip topics that have recursive protocol segments (corrupted paths).
             if any(x + "/" + x + "/" in str(topic) for x in ["OSC", "MIDI", "GUI", "oaGui", "MQTT"]):

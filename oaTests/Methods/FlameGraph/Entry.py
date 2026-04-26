@@ -4,13 +4,12 @@
 #
 # Description: Gatekeeper for the FlameGraph module.
 
-import subprocess
-from pathlib import Path
-
-import sys
 import os
 import pathlib
-import threading
+import subprocess
+import sys
+from pathlib import Path
+
 from loguru import logger
 
 # 1. Setup Environment: MUST BE FIRST to allow internal imports
@@ -20,7 +19,9 @@ if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
 import inspect
+
 from oaLogging.Methods.matrix_gate import matrix_log
+
 # oaTests/Methods/FlameGraph/Entry.py
 
 try:
@@ -33,12 +34,12 @@ def main():
     Orchestrates a full profiling session of the OpenAir application.
     """
     matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🔥 [ENTRY] Initializing Performance Profiling Session...", "INFO")
-    
+
     manager = FlameManager()
-    
+
     # 1. Start Profiling
     manager.start_profiling()
-    
+
     # 2. Register Panic Callback (Handle "Halting and Catching Fire")
     try:
         from oaWatchdog.Managers.watchdog import register_panic_callback
@@ -65,9 +66,9 @@ def main():
         # 4. Stop Profiling and Generate Report
         manager.stop_profiling()
         report_path = manager.generate_report()
-        
+
         if report_path:
-            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🔥 [ENTRY] Performance profiling session complete.", "SUCCESS")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🔥 [ENTRY] Performance profiling session complete.", "SUCCESS")
             matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🔥 [ENTRY] Report: {report_path}", "INFO")
         else:
             logger.error("🔥 [ENTRY] Failed to synthesize final report.")
@@ -78,15 +79,13 @@ def run_tests():
     Discover and run tests in the local Tests/ directory using unittest via subprocess.
     Ensures isolation and proper sys.path handling.
     """
-    import subprocess
     import sys
-    import os
     from pathlib import Path
 
     print(f"📡📥📥 [TEST] {Path(__file__).parent.name}: Starting automated test discovery...")
     current_dir = Path(__file__).parent.absolute()
     test_dir = current_dir / "Tests"
-    
+
     if not test_dir.exists():
         return True
 
@@ -95,10 +94,10 @@ def run_tests():
         if (project_root / "GEMINI.md").exists():
             break
         project_root = project_root.parent
-    
+
     env = os.environ.copy()
     env["PYTHONPATH"] = str(project_root) + os.pathsep + env.get("PYTHONPATH", "")
-    
+
     try:
         rel_test_dir = os.path.relpath(test_dir, project_root)
         result = subprocess.run(
@@ -136,7 +135,7 @@ if __name__ == "__main__":
     if not run_tests():
         print("❌ [CRITICAL] Tests failed. Aborting execution.")
         sys.exit(1)
-    
+
     # Standalone execution logic
     if len(sys.argv) > 1:
         cmd = sys.argv[1].lower()

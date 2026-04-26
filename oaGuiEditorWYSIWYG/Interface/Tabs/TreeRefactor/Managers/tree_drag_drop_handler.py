@@ -4,8 +4,8 @@
 #
 # Description: Handles drag and drop events for the Treeview.
 
-import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
+
 
 class TreeDragDropHandler:
     """Handles drag and drop interactions for hierarchical reordering."""
@@ -30,18 +30,18 @@ class TreeDragDropHandler:
     def on_drag_stop(self, event):
         """Handles the drop logic and element relocation."""
         if not self._dragging_item: return
-        
+
         target_item = self.tree.identify_row(event.y)
-        if not target_item or target_item == self._dragging_item: 
+        if not target_item or target_item == self._dragging_item:
             self._dragging_item = None
             return
 
         source_path = self.tree.item(self._dragging_item, "values")[0]
         target_parent_path = self.tree.item(target_item, "values")[0]
         target_type = self.tree.item(target_item, "values")[1]
-        
+
         source_parent_path = ".".join(source_path.split(".")[:-1])
-        
+
         # If target is NOT a block/container, move to target's parent
         if "Block" not in target_type and "Array" not in target_type:
             target_parent_path = ".".join(target_parent_path.split(".")[:-1])
@@ -54,7 +54,7 @@ class TreeDragDropHandler:
             if isinstance(target_val, dict) and "type" in target_val:
                 if "Block" in target_val.get("type", ""):
                     target_parent_path = f"{target_parent_path}.fields"
-            
+
             self.state_manager.move_element(source_path, target_parent_path, source=self)
             self.refresh_callback()
 

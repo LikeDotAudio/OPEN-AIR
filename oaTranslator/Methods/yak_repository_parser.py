@@ -4,17 +4,13 @@
 #
 # Description: Utility module for traversing and resolving YAK command definitions.
 
-import os
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
-import inspect
-import orjson
 
 # --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
@@ -34,7 +30,7 @@ def find_command_node(repo, command_path_parts, function_name):
         current_node = current_node.get(part)
 
         if not current_node:
-            logger.error(f"❌ Error: Command path not found at intermediate step.")
+            logger.error("❌ Error: Command path not found at intermediate step.")
             return None
 
         matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, f"🔍 Succeeded. Current node keys are now: {list(current_node.keys())}", level="DEBUG")

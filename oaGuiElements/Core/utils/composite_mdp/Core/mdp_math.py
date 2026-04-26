@@ -6,6 +6,7 @@
 
 import math
 
+
 class MDPMath:
     """Helper for coordinate transformations in rotated local spaces."""
 

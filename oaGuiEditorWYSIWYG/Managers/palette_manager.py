@@ -6,22 +6,24 @@
 
 import tkinter as tk
 from tkinter import ttk
+
 from .palette.palette_docking import PaletteDockingService
 from .palette.palette_visibility import PaletteVisibilityService
+
 
 class PaletteManager(tk.Frame):
     """
     Orchestrates the lifecycle of multiple tool palettes.
     Provides a header with selection dropdown and undocking controls.
     """
-    
+
     def __init__(self, parent, tool_panels, *args, **kwargs):
         super().__init__(parent, *args, **kwargs)
         self.tool_panels = tool_panels
         self._panel_states = {p["name"]: False for p in tool_panels}
 
         self._build_scaffolding()
-        
+
         # Services
         self.visibility_service = PaletteVisibilityService(self.panel_container, self._panel_states)
         self.docking_service = PaletteDockingService(self, self.tool_panels, self._panel_states)
@@ -40,10 +42,10 @@ class PaletteManager(tk.Frame):
         # Dropdown for panel selection
         self.selected_panel_var = tk.StringVar()
         self.panel_dropdown = ttk.Combobox(
-            header, 
-            textvariable=self.selected_panel_var, 
-            values=[p["name"] for p in self.tool_panels], 
-            state="readonly", 
+            header,
+            textvariable=self.selected_panel_var,
+            values=[p["name"] for p in self.tool_panels],
+            state="readonly",
             width=15
         )
         self.panel_dropdown.pack(side="left", padx=5)
@@ -51,7 +53,7 @@ class PaletteManager(tk.Frame):
 
         # Quick undock buttons
         for panel in self.tool_panels:
-            ttk.Button(header, text=f"⏏ {panel['name']}", 
+            ttk.Button(header, text=f"⏏ {panel['name']}",
                        command=lambda n=panel["name"]: self.docking_service.undock_panel(n)).pack(side="right", padx=2)
 
         # 2. Main Stackable Container

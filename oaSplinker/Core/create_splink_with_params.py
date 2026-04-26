@@ -5,8 +5,10 @@
 # Description: Brief summary of purpose
 
 import time
-from ..Methods.pipeline import SplinkPipeline
+
 from ..Constants.constants import Splinker_debug_enabled, splinker_logger
+from ..Methods.pipeline import SplinkPipeline
+
 
 def create_splink_with_params(self, source, dest, source_val=None, dest_val=None):
     splinker_logger.info(f"🔗 Splinker: create_splink_with_params received. Source={source} ({source_val}), Dest={dest} ({dest_val})")
@@ -19,7 +21,7 @@ def create_splink_with_params(self, source, dest, source_val=None, dest_val=None
     dest_label = str(dest).split('/')[-1] if dest else "UNKNOWN"
 
     new_id = f"SPLINK_{int(time.time() * 1000)}"
-    
+
     # ⚡ UNIQUE PREVENTION: Avoid duplicate splinks for the same source/dest pair
     for s in self.splinks:
         if s.get("source") == source and s.get("dest") == dest:
@@ -29,12 +31,12 @@ def create_splink_with_params(self, source, dest, source_val=None, dest_val=None
 
     # Create with a default scale handler as requested (MIN/MAX source -> MIN/MAX dest)
     splink = {
-        "id": new_id, 
-        "source": source, 
-        "dest": dest, 
+        "id": new_id,
+        "source": source,
+        "dest": dest,
         "mode": "SPLINK",
-        "active": True, 
-        "label": f"Splink: {src_label} -> {dest_label}", 
+        "active": True,
+        "label": f"Splink: {src_label} -> {dest_label}",
         "handlers": [
             {
                 "type": "scale",
@@ -50,22 +52,22 @@ def create_splink_with_params(self, source, dest, source_val=None, dest_val=None
     }
     self.splinks.append(splink)
     self._save_splink(splink)
-    
+
     # Detailed Debug Report for Discovery
     debug_report = [
-        f"╔════════════ DIRECT SPLINK DISCOVERY ════════════╗",
+        "╔════════════ DIRECT SPLINK DISCOVERY ════════════╗",
         f"  ID         : {new_id}",
         f"  SOURCE     : {source}",
         f"  DEST       : {dest}",
-        f"  MODE       : SPLINK (Bidirectional)",
-        f"  HANDLERS   : [Scale] 0-127 -> 0-100 (Default)"
+        "  MODE       : SPLINK (Bidirectional)",
+        "  HANDLERS   : [Scale] 0-127 -> 0-100 (Default)"
     ]
 
     # ⚡ STATE CONNECTION: Trigger an immediate sync from source to dest
     # Priority: 1. Observed value from UI, 2. Current value from Cache
     current_val = source_val
     sync_method = "Investigation (Live)"
-    
+
     if current_val is None and self.state_cache_manager:
         src_topic, src_key = self._parse_splink_path(source)
         current_val = self.state_cache_manager.get(src_topic)
@@ -75,16 +77,16 @@ def create_splink_with_params(self, source, dest, source_val=None, dest_val=None
         # We process it through the pipeline
         pipeline = SplinkPipeline(splink, self)
         processed = pipeline.process(current_val, {}, direction="FORWARD")
-        
+
         debug_report.append(f"  SYNC ({sync_method}): {current_val} -> {processed} (Linkage Point)")
-        
+
         if processed is not None:
             self._broker_splice(splink, processed, "GUI-INIT")
     else:
-        debug_report.append(f"  SYNC       : No source state found. Waiting for movement.")
+        debug_report.append("  SYNC       : No source state found. Waiting for movement.")
 
-    debug_report.append(f"╚══════════════════════════════════════════════════╝")
-    
+    debug_report.append("╚══════════════════════════════════════════════════╝")
+
     full_debug = "\n".join(debug_report)
 
     # ⚡ FIREHOSE: Ingest creation event for visibility

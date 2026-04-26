@@ -10,8 +10,10 @@ import threading
 import time
 from collections import deque
 from datetime import datetime
+
 from oaLogging.Constants.logging_constants import DEFAULT_BATCH_SIZE, DEFAULT_FLUSH_INTERVAL
 from oaLogging.Core.rust_sink_bridge import get_rust_sink, has_rust_sink
+
 
 class BatchLogSink:
     """
@@ -29,7 +31,7 @@ class BatchLogSink:
         self._is_running = True
         self._current_file = None
         self._current_minute = ""
-        
+
         if not has_rust_sink():
             # Start the background flusher thread if Rust is unavailable.
             self._flush_thread = threading.Thread(target=self._flush_loop, daemon=True, name=f"LogBatchFlusher-{os.path.basename(file_path_pattern)}")
@@ -39,14 +41,14 @@ class BatchLogSink:
         """Calculates the target filename for the current minute (YYYYMMDDHHMM)."""
         now = datetime.now()
         minute_str = now.strftime("%Y%m%d%H%M")
-        
+
         if minute_str != self._current_minute:
             self._current_minute = minute_str
             # Pattern expected like ".../Application_{time}.log"
             self._current_file = self.file_path_pattern.replace("{time}", minute_str)
             # Ensure directory exists for new minute file
             os.makedirs(os.path.dirname(self._current_file), exist_ok=True)
-            
+
         return self._current_file
 
     def write(self, message):
@@ -66,13 +68,13 @@ class BatchLogSink:
         """Internal helper to write the buffer to disk."""
         if not self.buffer:
             return
-            
+
         target_file = self._get_current_file()
-            
+
         with self._lock:
             lines_to_write = list(self.buffer)
             self.buffer.clear()
-            
+
         try:
             with open(target_file, "a", encoding="utf-8") as f:
                 f.writelines(lines_to_write)

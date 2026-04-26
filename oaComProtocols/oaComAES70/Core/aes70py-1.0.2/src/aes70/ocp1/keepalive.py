@@ -1,5 +1,7 @@
+from struct import pack_into, unpack_from
+
 from .pdu import PDU
-from struct import pack_into,unpack_from
+
 
 class KeepAlive(PDU):
     """

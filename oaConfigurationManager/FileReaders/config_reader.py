@@ -5,15 +5,15 @@
 # Description: Modularized Configuration Manager.
 
 import threading
-import inspect
+
 from loguru import logger
 
 LOCAL_DEBUG = False
 
 # --- EXTRACTED CORE MODULES ---
 from ..Core.config_defaults import ConfigDefaults
-from ..Core.identity import IdentityManager
 from ..Core.config_loader import ConfigLoader
+from ..Core.identity import IdentityManager
 
 
 class Config(ConfigDefaults):
@@ -28,11 +28,11 @@ class Config(ConfigDefaults):
         if hasattr(self, "_initialized") and self._initialized: return
         self._initialized = True
         self._config = None # ⚡ CACHE: Store the ConfigParser object
-        
+
         # 1. Initialize Identity
         ids = IdentityManager.initialize()
         for k, v in ids.items(): setattr(self, k, v)
-        
+
         # 2. Read Configuration
         self.read_config()
 
@@ -60,7 +60,7 @@ class Config(ConfigDefaults):
         """Helper to get and parse config values with fallbacks."""
         if sec not in config: return fallback
         if parser == "bool": return config[sec].getboolean(key, fallback)
-        if parser == "int": 
+        if parser == "int":
             try:
                 return int(config[sec].get(key, fallback))
             except (ValueError, TypeError):
@@ -115,13 +115,13 @@ class Config(ConfigDefaults):
         self.OSC_TX_PORT = self._s_get(config, "OSC", "osc_tx_port", self.OSC_TX_PORT, "int")
         self.OSC_REMOTE_IP = self._s_get(config, "OSC", "osc_remote_ip", self.OSC_REMOTE_IP)
 
-        # ⚡ MULTI-PROCESS SAFETY: 
+        # ⚡ MULTI-PROCESS SAFETY:
         # If randomize_ports is True, we must ensure different partitions use different offsets.
         # Core gets offset A, UI gets offset B.
         if self._s_get(config, "System", "randomize_ports", False, "bool"):
             import os
             partition_id = os.environ.get("OPEN_AIR_PARTITION_ID", "SUP")
-            
+
             # Static seeds for partition consistency within a run
             # but still randomized across different runs if needed.
             # For now, let's use fixed offsets based on partition to prevent collision.
@@ -131,11 +131,11 @@ class Config(ConfigDefaults):
                 "UI": 20
             }
             offset = partition_offsets.get(partition_id, 30)
-            
+
             # Apply partition-specific offset to the base ports
             self.OSC_RX_PORT += offset
             self.OSC_TX_PORT += offset
-            
+
             # ⚡ LOOPBACK SYNC: In UI partition, TX Target should point to Core's RX Port
             if partition_id == "UI":
                 self.OSC_TX_PORT = self._s_get(config, "OSC", "osc_rx_port", 8000, "int") + partition_offsets["CORE"]
@@ -152,7 +152,7 @@ class Config(ConfigDefaults):
         self.REST_HOST = self._s_get(config, "REST", "rest_host", self.REST_HOST)
         self.REST_PORT = self._s_get(config, "REST", "rest_port", self.REST_PORT, "int")
         self.REST_CORS_ORIGINS = self._s_get(config, "REST", "rest_cors_origins", self.REST_CORS_ORIGINS)
-        
+
         # ⚡ MULTI-INSTANCE: Randomize port if enabled to avoid conflicts
         if self._s_get(config, "System", "randomize_ports", False, "bool"):
             import random
@@ -162,10 +162,10 @@ class Config(ConfigDefaults):
         # ⚡ GRANULAR CONTROLS: Parse all DEBUG_* sections into the matrix
         debug_sections = [
             "DEBUG_MATRIX", "DEBUG_CORE_ORCHESTRATION", "DEBUG_STATE_DATA",
-            "DEBUG_TRANSLATOR", "DEBUG_COMMS_PROTOCOLS", "DEBUG_GUI", 
+            "DEBUG_TRANSLATOR", "DEBUG_COMMS_PROTOCOLS", "DEBUG_GUI",
             "DEBUG_RUST_FFI", "DEBUG_ROUTER", "DEBUG_FILE_IO"
         ]
-        
+
         for section_name in debug_sections:
             if section_name in config:
                 section = config[section_name]
@@ -178,7 +178,7 @@ class Config(ConfigDefaults):
                         self.DEBUG_MATRIX[key.upper()] = section.getboolean(key, False)
                     except ValueError:
                         logger.warning(f"Config: Key '{key}' in '{section_name}' is not boolean. Skipping.")
-        
+
         # Special case for comma-separated strings (usually in DEBUG_MATRIX)
         if "DEBUG_MATRIX" in config:
             self.MUTE_FUNCTIONS = config["DEBUG_MATRIX"].get("mute_functions", "")
@@ -188,13 +188,13 @@ class Config(ConfigDefaults):
     def read_config(self):
         from oaOchestration.Core.path_initializer import GLOBAL_PROJECT_ROOT, initialize_paths
         if not GLOBAL_PROJECT_ROOT: initialize_paths()
-        
+
         from oaOchestration.Core.path_initializer import GLOBAL_PROJECT_ROOT
         config_path = GLOBAL_PROJECT_ROOT / "config.ini"
         setup_path = GLOBAL_PROJECT_ROOT / "oaInstallation" / "Setup.py"
-        
+
         self._config = ConfigLoader.load(config_path, setup_path, LOCAL_DEBUG)
-        if not self._config: 
+        if not self._config:
             logger.error(f"❌ [CONFIG] Failed to load configuration from {config_path} or {setup_path}.")
             return
 

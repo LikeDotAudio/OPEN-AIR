@@ -1,34 +1,34 @@
 # meter_needle/meter_needle.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 20260315.Modular.1
 #
 # Description: Modularized Needle VU Meter.
 
-import time
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
+import time
 import tkinter as tk
-from loguru import logger
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Core.logger import builder_logger
-from oaLogging.Methods.matrix_gate import is_debug_allowed
+from oaLogging.Methods.matrix_gate import is_debug_allowed, matrix_log
+
 BUILDER_DEBUG = is_debug_allowed(system="UI", element="GUI_BUILDER")
 
 from oaConfigurationManager.FileReaders.config_reader import Config
+
 app_constants = Config.get_instance()
 
 # --- Specialized Modules ---
-from .config.meter_config import MeterConfig
-from .ui.frame_factory import FrameFactory
-from .animation.animator import MeterAnimator
-from .integration.state_linker import StateLinker
-from ..rendering_engine import MeterRenderingEngine
-from ..visual_helpers import MeterVisualHelpers
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
-from oaGuiManager.Core.transparency.transparency import TransparencyManager
 from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
+from oaGuiManager.Core.transparency.transparency import TransparencyManager
+from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+
+from .rendering_engine import MeterRenderingEngine
+from oaGuiElements.Core.metering.meter_needle.animation.animator import MeterAnimator
+from oaGuiElements.Core.metering.meter_needle.config.meter_config import MeterConfig
+from oaGuiElements.Core.metering.meter_needle.integration.state_linker import StateLinker
+from oaGuiElements.Core.metering.meter_needle.ui.frame_factory import FrameFactory
+
 
 @WidgetRegistry.register("_NeedleVUMeter")
 class BuilderMeterNeedleCreator(TransparencyMixin):
@@ -42,13 +42,13 @@ class BuilderMeterNeedleCreator(TransparencyMixin):
         )
 
     def make_meter_needle(self, parent_widget, config_data, context=None, **kwargs):
-        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📶 [BUILDER] Creating MeterNeedle.", level="TRACE")
-        
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🔬🏗️📶 [BUILDER] Creating MeterNeedle.", level="TRACE")
+
         # 1. Config & Context
         config = MeterConfig(config_data)
         ctx = context if context else type('obj', (object,), kwargs)()
         b_inst = ctx.builder_instance if hasattr(ctx, 'builder_instance') else ctx.app_instance
-        
+
         try:
             # 2. UI Setup
             frame = FrameFactory.create_frame(parent_widget, config)
@@ -68,7 +68,7 @@ class BuilderMeterNeedleCreator(TransparencyMixin):
                     if v1 >= config.red_zone_start or (v2 is not None and v2 >= config.red_zone_start):
                         frame.anim_peak_on, frame.anim_peak_expiry = True, now + config.peak_hold_ms
                     elif now > frame.anim_peak_expiry: frame.anim_peak_on = False
-                    
+
                     # Wrap rendering in try-except to catch potential TclError (e.g., tagOrId not found)
                     MeterRenderingEngine.render(canvas, config, v1, v2, frame.anim_peak_on, ox, oy, full_redraw=full_redraw)
                 except tk.TclError as e:
@@ -77,7 +77,7 @@ class BuilderMeterNeedleCreator(TransparencyMixin):
                 except Exception as e:
                     builder_logger.exception(f"Unexpected error during meter rendering for '{config.label}': {e}")
 
-            
+
             frame.render = lambda: render_cb(full_redraw=True)
             animator = MeterAnimator(frame, config, canvas, render_cb)
             canvas.tag_bind("peak_dot", "<Button-1>", animator.reset_peak)

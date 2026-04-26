@@ -11,16 +11,16 @@ def rust_gate_filter(record):
     """
     if record["extra"].get("category") == "🚫 QUARANTINE":
         return False
-        
+
     # Always allow high-gravity logs
     if record["level"].name in ["WARNING", "ERROR", "CRITICAL"]:
         return True
-        
+
     # Extract clean partition and category names
     raw_part = record["extra"].get("partition", "")
     partition = raw_part.split()[-1].lower() if raw_part else "system"
     category = record["extra"].get("category", "").lower()
     func_name = record.get("function", "")
-    
+
     from oaLogging.Methods.matrix_gate import is_debug_allowed
     return is_debug_allowed(partition, category, func_name)

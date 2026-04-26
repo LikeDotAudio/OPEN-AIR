@@ -7,6 +7,7 @@ import struct
 import threading
 import time
 
+
 class SAPListener:
     """
     Listens for Session Announcement Protocol (SAP) streams on 239.255.255.255:9875
@@ -26,7 +27,7 @@ class SAPListener:
         if self.running:
             return
         self.running = True
-        
+
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
         self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         if hasattr(socket, "SO_REUSEPORT"):
@@ -34,14 +35,14 @@ class SAPListener:
                 self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
             except OSError:
                 pass
-                
+
         # Bind to 0.0.0.0 for broader multicast reception on Linux
         self.sock.bind(('0.0.0.0', self.mcast_port))
-        
+
         # Determine the host IP for multicast registration if needed, or INADDR_ANY
         mreq = struct.pack("4sl", socket.inet_aton(self.mcast_grp), socket.INADDR_ANY)
         self.sock.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP, mreq)
-        
+
         self.thread = threading.Thread(target=self._listen_loop, daemon=True)
         self.thread.start()
         print(f"🎧 [SAP] Listener started on {self.mcast_grp}:{self.mcast_port}")
@@ -67,39 +68,39 @@ class SAPListener:
             except:
                 pass
             return
-            
+
         try:
             sdp_payload = data[sdp_start:].decode('utf-8', errors='ignore')
-            
+
             session_name = "Unknown_SAP_Stream"
             for line in sdp_payload.split('\n'):
                 line = line.strip()
                 if line.startswith('s='):
                     session_name = line[2:].strip()
                     break
-                    
+
             payload = {
                 "source_ip": addr[0],
                 "session_name": session_name,
                 "sdp": sdp_payload,
                 "origin_source": "oaComSAP"
             }
-            
+
             import json
             payload_hash = hash(json.dumps(payload, sort_keys=True))
             if self.known_streams.get(session_name) == payload_hash:
                 return # Skip republishing unchanged records
             self.known_streams[session_name] = payload_hash
-            
+
             # Clean IP address for MQTT Topic path
             safe_ip = addr[0].replace('.', '_')
             topic = f"OPEN-AIR/SAP/Discovered/{safe_ip}"
-            
+
             print(f"📈 [SAP] Discovered/Updated: {session_name} from {addr[0]}")
-            
+
             if self.rx_callback:
                 self.rx_callback(addr[0], f"Stream: {session_name}", payload)
-                
+
             self.mqtt_publisher.publish(topic, payload)
         except Exception as e:
             print(f"⚠️ [SAP] Parsing error: {e}")

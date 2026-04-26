@@ -5,7 +5,9 @@
 # Description: Brief summary of purpose
 
 from pathlib import Path
+
 from loguru import logger
+
 from oaGuiSplashScreen.Constants.splash_constants import DEFAULT_GIF_DURATION, MIN_GIF_DURATION
 
 try:
@@ -26,7 +28,7 @@ class GifAnimator:
         if not PIL_AVAILABLE: return False
         p = Path(__file__).parent.parent / "Assets" / filename
         if not p.exists(): return False
-        
+
         try:
             with Image.open(p) as img:
                 for i in range(img.n_frames):

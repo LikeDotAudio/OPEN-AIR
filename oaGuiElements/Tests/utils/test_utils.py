@@ -5,8 +5,8 @@
 # Description: Brief summary of purpose
 
 import json
-import os
 from pathlib import Path
+
 
 def load_sample_config(component_path, entry_key=None):
     """
@@ -18,10 +18,10 @@ def load_sample_config(component_path, entry_key=None):
     if not sample_file.exists():
         # Standard: Also check Assets/
         sample_file = Path(component_path) / 'Assets' / 'sample.json'
-        
+
     if not sample_file.exists():
         raise FileNotFoundError(f'Sample file not found: {sample_file}')
-    with open(sample_file, 'r') as f:
+    with open(sample_file) as f:
         data = json.load(f)
     if entry_key and entry_key in data:
         return data[entry_key]

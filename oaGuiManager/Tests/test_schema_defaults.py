@@ -5,7 +5,15 @@
 # Description: Unit tests for schema_defaults.py
 
 import unittest
-from oaGuiManager.Constants.schema_defaults import LEXICON, STRUCT_TYPES, DEFAULT_PANEL_PERCENTAGE, ANCHOR_MAP, DEFAULT_COLORS, PILLARS
+
+from oaGuiManager.Constants.schema_defaults import (
+    ANCHOR_MAP,
+    DEFAULT_COLORS,
+    LEXICON,
+    PILLARS,
+    STRUCT_TYPES,
+)
+
 
 class TestSchemaDefaults(unittest.TestCase):
     """Verifies that foundational UI schema constants are correctly defined."""

@@ -5,9 +5,10 @@
 # Description: Parses Markdown-formatted audit logs into structured results.
 # Refactored to preserve full audit findings 1:1.
 
+import glob
 import os
 import re
-import glob
+
 
 def parse_audit_log(file_path):
     """
@@ -17,7 +18,7 @@ def parse_audit_log(file_path):
     if not os.path.exists(file_path):
         return []
 
-    with open(file_path, 'r', encoding="utf-8") as f:
+    with open(file_path, encoding="utf-8") as f:
         # ⚡ OPTIMIZATION: Limit read to 2MB.
         content = f.read(2000000)
 
@@ -29,16 +30,16 @@ def parse_audit_log(file_path):
         lines = section.split('\n')
         if not lines:
             continue
-        
+
         header_line = lines[0].strip()
-        
+
         # Extract filename and status
         # Example: AuditArchitecture.toml (PASSED)
         match = re.search(r'^(.*?)\s*\((PASSED|FAILED|SKIPPED|ERROR|UNEXPECTED ERROR)\)', header_line)
         if match:
             name = match.group(1).strip()
             status_raw = match.group(2).upper()
-            
+
             # Map statuses to reporting categories
             status_map = {
                 "PASSED": "passed",
@@ -48,18 +49,18 @@ def parse_audit_log(file_path):
                 "UNEXPECTED ERROR": "error"
             }
             status = status_map.get(status_raw, "error")
-            
+
             # Capture EVERYTHING after the header line as the body
             # We strip the trailing separator '---' if it exists at the end
             body = "\n".join(lines[1:]).strip()
             if body.endswith('---'):
                 body = body[:-3].strip()
-            
+
             # For passed audits, the body goes to description
             # For failed/error, the body goes to cause
             description = ""
             cause = ""
-            
+
             if status == "passed":
                 description = body
             else:
@@ -78,7 +79,7 @@ def parse_audit_log(file_path):
                 "cause": cause, # Preserve raw newlines, HTML generator will handle formatting
                 "duration": "N/A"
             })
-    
+
     return results
 
 def get_latest_audit_results(data_dir):
@@ -92,9 +93,9 @@ def get_latest_audit_results(data_dir):
     audit_files = glob.glob(os.path.join(data_dir, "*.md")) + glob.glob(os.path.join(data_dir, "*.txt"))
     if not audit_files:
         return []
-    
+
     # Sort by modification time (newest first)
     audit_files.sort(key=os.path.getmtime, reverse=True)
     latest_file = audit_files[0]
-    
+
     return parse_audit_log(latest_file)

@@ -3,12 +3,11 @@
 # Version: 20260414.1500.1
 # Description: Central manager for initializing and controlling communication protocol modules.
 
-import threading
-import sys
-import os
 import pathlib
+import sys
+import threading
 import time
-from typing import List, Dict, Any, Optional
+from typing import Any
 
 # Ensure project root is in sys.path for direct execution
 current_dir = pathlib.Path(__file__).resolve().parent
@@ -16,8 +15,8 @@ project_root = current_dir.parent.parent # Project root is two levels up
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
-from oaLogging.Methods.matrix_gate import matrix_log
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- Protocol Module Definitions ---
 # This dictionary will store information about discovered modules and their callable functions.
@@ -36,12 +35,12 @@ class ComProtocolManager:
         if hasattr(self, "_initialized"):
             return
         self._initialized = True
-        
+
         self.config = config if config else Config.get_instance()
-        self.protocol_modules: Dict[str, Dict[str, Any]] = {} # Stores module info (name, start, stop, status)
-        self.running_threads: Dict[str, threading.Thread] = {} # Tracks started module threads
+        self.protocol_modules: dict[str, dict[str, Any]] = {} # Stores module info (name, start, stop, status)
+        self.running_threads: dict[str, threading.Thread] = {} # Tracks started module threads
         self._lock = threading.Lock()
-        
+
         # Common dependencies to be shared between protocol modules if available.
         self.protocol_router = None
         self.state_cache_manager = None
@@ -56,28 +55,28 @@ class ComProtocolManager:
         Looks for Entry.py files in standard 'oaComProtocols/oaCom*/' subdirectories.
         """
         protocol_base_path = project_root / "oaComProtocols"
-        
+
         # List of known protocol module directories to check
         protocol_dirs_to_check = [
             "oaComDNSSD", "oaComMDNS", "oaComMidi", "oaComMQTT", "oaComNmos",
             "oaComOSC", "oaComREST", "oaComSAP", "oaComSMPTE2138", "oaComSNMP",
             "oaComVISA" # Added based on previous context, though not explicitly listed by user
         ]
-        
+
         for module_name_short in protocol_dirs_to_check:
             module_path = protocol_base_path / module_name_short
             entry_file_path = module_path / "Entry.py"
-            
+
             if entry_file_path.is_file():
                 module_full_name = f"oaComProtocols.{module_name_short}.Entry"
                 try:
                     # Dynamically import the Entry point module
                     entry_module = __import__(module_full_name, fromlist=['start', 'stop', 'status'])
-                    
+
                     # Check for required functions
                     if hasattr(entry_module, 'start') and callable(entry_module.start) and \
                        hasattr(entry_module, 'stop') and callable(entry_module.stop):
-                        
+
                         self.protocol_modules[module_name_short] = {
                             "module_name": module_full_name,
                             "start": entry_module.start,
@@ -93,7 +92,7 @@ class ComProtocolManager:
                     matrix_log("manager", "com_protocol", "discover", f"❌ Unexpected error registering module {module_full_name}: {e}. Skipping.", "ERROR")
             else:
                 matrix_log("manager", "com_protocol", "discover", f"ℹ️ No Entry.py found for {module_path}. Skipping.", "DEBUG")
-        
+
         return len(self.protocol_modules) > 0
 
     def initialize_common_dependencies(self):
@@ -102,10 +101,12 @@ class ComProtocolManager:
         try:
             # No shared MQTT connection will be initialized here.
             # Individual modules manage their own if needed.
-            
+
             # Protocol router might also need initialization or singleton access
             try:
-                from oaComBroker.Core.protocol_router.manager import ProtocolRouter # Assuming this is the central router
+                from oaComBroker.Core.protocol_router.manager import (
+                    ProtocolRouter,  # Assuming this is the central router
+                )
                 self.protocol_router = ProtocolRouter.get_instance() # Assuming singleton pattern
                 matrix_log("manager", "com_protocol", "initialize_dependencies", "ProtocolRouter singleton retrieved.", "DEBUG")
             except Exception as e:
@@ -133,11 +134,11 @@ class ComProtocolManager:
                 return
 
             matrix_log("manager", "com_protocol", "start_all", "🚀 Starting all registered protocols...", "INFO")
-            
+
             # Discover and register protocols if not already done
             if not self.protocol_modules:
                 self.discover_and_register_protocols()
-                
+
             # Initialize common dependencies once before starting modules
             # MQTT connection is managed internally by individual modules.
             if not self.initialize_common_dependencies():
@@ -149,10 +150,10 @@ class ComProtocolManager:
                     # Prepare arguments for the start function.
                     # This needs to be adaptive to each module's start() signature.
                     start_args = {}
-                    
+
                     # Pass common dependencies if the start function expects them.
                     # Exclude MQTT-related arguments as they are self-contained.
-                    
+
                     if "subscriber_router" in info["start"].__code__.co_varnames:
                         start_args["subscriber_router"] = self.subscriber_router
                     if "protocol_router" in info["start"].__code__.co_varnames:
@@ -165,7 +166,7 @@ class ComProtocolManager:
                     # These modules created their own StandaloneMqttPublisher internally.
                     # If they are refactored to accept an MQTT client, that would be handled here.
                     # For now, assuming they create their own.
-                    
+
                     # Add other common kwargs if identified
                     # start_args["some_other_param"] = kwargs.get("some_other_param")
 
@@ -175,7 +176,7 @@ class ComProtocolManager:
                     matrix_log("manager", "com_protocol", "start_all", f"✅ Started {name} in background thread.", "SUCCESS")
                 except Exception as e:
                     matrix_log("manager", "com_protocol", "start_all", f"❌ Failed to start {name}: {e}", "ERROR")
-            
+
             matrix_log("manager", "com_protocol", "start_all", "All protocols started (or attempted).", "INFO")
 
     def stop_all(self):
@@ -196,14 +197,14 @@ class ComProtocolManager:
                         matrix_log("manager", "com_protocol", "stop_all", f"✅ Stopped {name}.", "SUCCESS")
                     else:
                         matrix_log("manager", "com_protocol", "stop_all", f"⚠️ {name} has no callable stop function.", "WARNING")
-                    
+
                     # Clean up thread reference
                     if name in self.running_threads:
                         del self.running_threads[name]
-                        
+
                 except Exception as e:
                     matrix_log("manager", "com_protocol", "stop_all", f"❌ Error stopping {name}: {e}", "ERROR")
-            
+
             matrix_log("manager", "com_protocol", "stop_all", "All protocols stopped (or attempted).", "INFO")
             self.running_threads.clear() # Ensure it's empty
 
@@ -219,7 +220,7 @@ class ComProtocolManager:
                 status_report[name] = {"error": str(e)}
                 matrix_log("manager", "com_protocol", "get_status_all", f"❌ Error getting status for {name}: {e}", "ERROR")
         return status_report
-    
+
     @classmethod
     def get_instance(cls, config=None):
         """Singleton getter for ComProtocolManager."""
@@ -246,7 +247,7 @@ def main():
     args = parser.parse_args()
 
     # Initialize the singleton manager
-    manager = ComProtocolManager.get_instance() 
+    manager = ComProtocolManager.get_instance()
 
     if args.discover:
         manager.discover_and_register_protocols()
@@ -264,7 +265,7 @@ def main():
         if not manager.initialize_common_dependencies():
             print("❌ Failed to initialize common dependencies. Aborting start.")
             sys.exit(1)
-            
+
         # Pass dependencies to start_all. This assumes start_all might use them.
         # The actual passing to individual module start functions is handled within start_all.
         # Exclude MQTT/Subscriber dependencies as they are self-contained.

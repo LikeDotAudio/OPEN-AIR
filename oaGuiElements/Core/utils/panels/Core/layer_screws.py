@@ -4,21 +4,24 @@
 #
 # Description: Brief summary of purpose
 
-from PIL import Image
 import random
+
+from PIL import Image
+
 from oaGuiElements.Core.utils.panel_screw.screw_generator import ScrewGenerator
+
 
 class ScrewLayer:
     @staticmethod
     def generate_screws(width, height, config, fold_cfg=None):
         layer = Image.new('RGBA', (width, height), (0,0,0,0))
         size, margin = int(config.get("size_px", 24)), 30
-        
+
         # 1. Determine enabled locations from config
         loc_cfg = config.get("locations", ["top", "bottom", "middle"])
         if isinstance(loc_cfg, str): loc_cfg = [loc_cfg]
         loc_cfg = [l.lower() for l in loc_cfg]
-        
+
         positions = []
         if "top" in loc_cfg:
             positions.extend([(margin, margin), (width-margin, margin)])
@@ -32,7 +35,7 @@ class ScrewLayer:
             for crease in fold_cfg.get("creases", []):
                 orientation = crease.get("orientation", "vertical").lower()
                 pos_pct = float(crease.get("position_pct", 0.5))
-                
+
                 if orientation == "vertical":
                     x = int(width * pos_pct)
                     if "top" in loc_cfg: positions.append((x, margin))
@@ -52,5 +55,5 @@ class ScrewLayer:
         for cx, cy in positions:
             img = ScrewGenerator.generate_screw(size, {**config, "angle": random.randint(0, 90)})
             layer.alpha_composite(img, (cx - img.width // 2, cy - img.height // 2))
-            
+
         return layer

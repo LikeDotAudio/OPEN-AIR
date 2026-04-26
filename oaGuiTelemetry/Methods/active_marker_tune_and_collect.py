@@ -1,28 +1,28 @@
-import os
 
 import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
+import threading
+import time
+
 # Methods/active_marker_tune_and_collect.py
 # Author: Anthony Peter Kuzub
 # Version: 20260315.Modular.1
 #
 # Description: Modularized Marker Go-Getter Worker.
-
 import orjson
-import threading
-import time
 from loguru import logger
 
 # --- Standard Debug Logging Setup ---
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import matrix_log
+
 app_constants = Config.get_instance()
+
+from oaGuiTelemetry.Core.marker_repository_watcher import MarkerRepositoryWatcher
 
 from oaComProtocols.oaComMQTT.Methods.mqtt_controller_util import MqttControllerUtility
 
 # --- EXTRACTED CORE MODULES ---
 from oaGuiTelemetry.Core.instrument_controller import InstrumentController
-from oaGuiTelemetry.Core.marker_repository_watcher import MarkerRepositoryWatcher
-from oaGuiTelemetry.Core.tuning_helpers import Push_Marker_to_Center_Freq, Push_Marker_to_Start_Stop_Freq
 
 # Constants
 BUFFER_START_STOP_MHZ = 0.1
@@ -45,11 +45,11 @@ class MarkerGoGetterWorker:
         self.mqtt_util = mqtt_util
         self.stop_event = threading.Event()
         self.processing_thread = None
-        
+
         # Modular Components
         self.instrument = InstrumentController(mqtt_util)
         self.repository = MarkerRepositoryWatcher()
-        
+
         # State Tracking
         self.last_min_freq = None
         self.last_max_freq = None
@@ -94,7 +94,7 @@ class MarkerGoGetterWorker:
     def _is_payload_true(self, payload) -> bool:
         """Unifies JSON and raw-string truth evaluation for MQTT payloads."""
         if not payload: return False
-        
+
         # 1. Attempt JSON parsing (primary)
         try:
             data = orjson.loads(payload)
@@ -102,7 +102,7 @@ class MarkerGoGetterWorker:
                 return str(data.get("value", "")).lower() == "true"
         except (orjson.JSONDecodeError, TypeError, ValueError):
             pass
-            
+
         # 2. Fallback to raw string evaluation
         raw_str = payload.decode("utf-8") if isinstance(payload, bytes) else str(payload)
         return raw_str.lower() == "true"
@@ -116,7 +116,7 @@ class MarkerGoGetterWorker:
         self.last_min_freq, self.last_max_freq = repo.min_frequency_mhz, repo.max_frequency_mhz
         new_min = max(0, repo.min_frequency_mhz - BUFFER_START_STOP_MHZ)
         new_max = repo.max_frequency_mhz + BUFFER_START_STOP_MHZ
-        
+
         self.instrument.set_span(new_min, new_max)
         self.first_run = False
 
@@ -132,11 +132,11 @@ class MarkerGoGetterWorker:
                 if self.stop_event.is_set(): break
                 batch_ids = device_ids[i : i + 6]
                 batch_freqs = [self.repository.marker_frequencies[did] for did in batch_ids]
-                
+
                 # 1. Place Markers
                 self.instrument.place_markers_batch(batch_freqs)
                 time.sleep(0.3)
-                
+
                 # 2. Query NAB
                 self.instrument.trigger_nab_query()
                 matrix_log("ui", "telemetry", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"✅ Batch {i//6 + 1} processed.", "SUCCESS")

@@ -4,8 +4,9 @@
 #
 # Description: Brief summary of purpose
 
-import string
 import socket
+import string
+
 import pyvisa
 from loguru import logger
 
@@ -58,7 +59,7 @@ class VisaUtilityParser:
     @staticmethod
     def query_device_safe(rm, resource_str, attempt=1, timeout=VISA_TIMEOUT):
         """Safely queries *IDN? from a VISA resource with defensive pre-checks."""
-        
+
         # ⚡ NETWORK PRE-CHECK: If TCPIP, verify port 5025 (standard SCPI) or 111 (VXI-11) is open
         # This prevents blocking on dead IP addresses before PyVISA even tries.
         if "TCPIP" in resource_str:
@@ -70,7 +71,7 @@ class VisaUtilityParser:
                     sock.settimeout(1.0)
                     # connect_ex returns 0 on success, no exception
                     res_5025 = sock.connect_ex((ip, 5025))
-                
+
                 if res_5025 != 0:
                     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
                         sock.settimeout(1.0)
@@ -110,7 +111,7 @@ class VisaUtilityParser:
     def get_local_ip():
         """Retrieves the primary local IP address without using exceptions."""
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        # connect() on a UDP socket doesn't actually send a packet, 
+        # connect() on a UDP socket doesn't actually send a packet,
         # so it's extremely unlikely to throw.
         try:
             s.connect(("10.255.255.255", 1))

@@ -32,7 +32,7 @@ from oaLogging.Methods.matrix_gate import is_debug_allowed
 app_constants = Config.get_instance()
 
 # --- Standard Debug Logging Setup ---
-# The router respects the hierarchical debug matrix. 
+# The router respects the hierarchical debug matrix.
 # It is classified under the 'ROUTER' element within the 'router' system.
 def GET_LOCAL_DEBUG(func_name=None):
     return is_debug_allowed(system="comms", element="broker", func_name=func_name)
@@ -41,7 +41,7 @@ def GET_LOCAL_DEBUG(func_name=None):
 LOCAL_DEBUG = GET_LOCAL_DEBUG()
 
 # --- Default Routing Strategy Map ---
-# Each protocol is assigned a set of emoji tokens that dictate where a message 
+# Each protocol is assigned a set of emoji tokens that dictate where a message
 # from that source should be routed.
 #
 # Tokens:
@@ -64,17 +64,17 @@ SINK_STRATEGIES = {
 }
 
 # --- Emoji to Word Mapping for DPI Reports ---
-# Used by the Monitor to translate cryptic strategy strings into 
+# Used by the Monitor to translate cryptic strategy strings into
 # human-readable forensic reports.
 EMOJI_TO_WORD = {
-    "Ⓖ": "GUI", 
-    "Ⓜ️": "MQTT", 
-    "🅾️": "OSC", 
-    "Ⓢ": "SNMP", 
+    "Ⓖ": "GUI",
+    "Ⓜ️": "MQTT",
+    "🅾️": "OSC",
+    "Ⓢ": "SNMP",
     "🎹": "MIDI",
-    "💾": "CACHE", 
-    "🚀": "PUSH", 
-    "⚙️": "SYSTEM", 
+    "💾": "CACHE",
+    "🚀": "PUSH",
+    "⚙️": "SYSTEM",
     "🔗": "LINK"
 }
 

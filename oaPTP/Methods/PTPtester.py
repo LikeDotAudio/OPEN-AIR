@@ -24,14 +24,15 @@ Assumptions and Constraints:
     - Designed for Linux environments.
 """
 
-import sys
-import os
-import inspect
-import orjson
-import time
 import argparse
 import importlib.util
+import inspect
+import os
+import sys
+import time
 from pathlib import Path
+
+import orjson
 
 # --- Project Path Setup ---
 current_dir = Path(__file__).parent.absolute()
@@ -46,11 +47,12 @@ if str(project_root) not in sys.path:
 
 from oaLogging.Methods.matrix_gate import matrix_log
 
+
 def packet_callback(pkt, PTP, mqtt_client, MQTT_TOPIC):
     """
     Process captured network packets and extract PTP-specific information.
     """
-    from scapy.all import UDP, IP
+    from scapy.all import IP, UDP
     ptp_layer = None
     source = "Unknown"
     dport = 0
@@ -58,7 +60,7 @@ def packet_callback(pkt, PTP, mqtt_client, MQTT_TOPIC):
     if pkt.haslayer(UDP):
         source = pkt[IP].src if IP in pkt else "Unknown"
         dport = pkt[UDP].dport
-        
+
         # Determine if the packet contains a recognized PTP layer.
         if pkt.haslayer(PTP):
             ptp_layer = pkt[PTP]
@@ -71,7 +73,7 @@ def packet_callback(pkt, PTP, mqtt_client, MQTT_TOPIC):
     if ptp_layer:
         matrix_log("CORE", "PTP", inspect.currentframe().f_code.co_name, f"\n[+] Captured PTP Packet from {source} on port {dport}", level="INFO")
         ptp_layer.show()
-        
+
         # Relay the captured metrics to the system-wide MQTT bus.
         if mqtt_client:
             # Prioritize direct field access to minimize processing latency.
@@ -79,9 +81,9 @@ def packet_callback(pkt, PTP, mqtt_client, MQTT_TOPIC):
             domain = int(ptp_layer.domainNumber)
             seq_id = int(ptp_layer.sequenceId)
             port_id = ptp_layer.sourcePortIdentity
-            
+
             # Convert raw port identity to readable hex format for JSON.
-            clock_id = (port_id.hex(':') if isinstance(port_id, bytes) 
+            clock_id = (port_id.hex(':') if isinstance(port_id, bytes)
                         else str(port_id))
 
             data = {
@@ -106,11 +108,11 @@ def main():
         description="PTP Traffic Sniffer and MQTT Reporter"
     )
     parser.add_argument(
-        "--broker", default="localhost", 
+        "--broker", default="localhost",
         help="MQTT Broker address (default: localhost)"
     )
     parser.add_argument(
-        "--port", type=int, default=1883, 
+        "--port", type=int, default=1883,
         help="MQTT Broker port (default: 1883)"
     )
     args = parser.parse_args()
@@ -136,7 +138,7 @@ def main():
             mqtt_client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION1)
         else:
             mqtt_client = mqtt.Client()
-            
+
         mqtt_client.connect(MQTT_BROKER, MQTT_PORT, 60)
         mqtt_client.loop_start()
 
@@ -149,9 +151,18 @@ def main():
             mqtt_client.disconnect()
         sys.exit(1)
 
-    from scapy.all import (sniff, UDP, Packet, ByteField, ShortField,
-                            XShortField, LongField, StrFixedLenField, BitField,
-                            bind_layers)
+    from scapy.all import (
+        UDP,
+        BitField,
+        ByteField,
+        LongField,
+        Packet,
+        ShortField,
+        StrFixedLenField,
+        XShortField,
+        bind_layers,
+        sniff,
+    )
 
     # Attempt to load specialized PTP definitions from Scapy's contribution library.
     PTP_SPEC = importlib.util.find_spec("scapy.contrib.ptp")
@@ -194,14 +205,14 @@ def main():
     # Notify the user of the sniffer's current operational state.
     matrix_log("CORE", "PTP", "main", "Listening for PTP traffic (UDP 319/320)...", level="INFO")
     matrix_log("CORE", "PTP", "main", f"Scapy PTP Layer Status: {'Available' if HAS_PTP else 'Not Available'}", level="INFO")
-    
+
     mqtt_status = f"Active ({MQTT_TOPIC})" if mqtt_client else "Disabled"
     matrix_log("CORE", "PTP", "main", f"MQTT Feedback: {mqtt_status}", level="INFO")
 
     # Execute the packet capture engine with a filter for PTP ports.
     try:
-        sniff(filter="udp port 319 or udp port 320", 
-              prn=lambda pkt: packet_callback(pkt, PTP, mqtt_client, MQTT_TOPIC), 
+        sniff(filter="udp port 319 or udp port 320",
+              prn=lambda pkt: packet_callback(pkt, PTP, mqtt_client, MQTT_TOPIC),
               store=0)
     except KeyboardInterrupt:
         pass

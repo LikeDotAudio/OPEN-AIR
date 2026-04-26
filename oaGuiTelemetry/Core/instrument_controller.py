@@ -1,12 +1,11 @@
 import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
+
 # Core/instrument_controller.py
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: Brief summary of purpose
-
-from loguru import logger
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- Standard Debug Logging Setup ---
 HZ_TO_MHZ = 1_000_000

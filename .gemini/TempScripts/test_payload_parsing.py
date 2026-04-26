@@ -1,6 +1,7 @@
 # .gemini/TempScripts/test_payload_parsing.py
 import orjson
 
+
 def original_logic(payload):
     try:
         try:
@@ -14,7 +15,7 @@ def original_logic(payload):
 def refactored_logic(payload):
     if not payload:
         return False
-    
+
     # Try parsing as JSON first
     try:
         data = orjson.loads(payload)
@@ -22,7 +23,7 @@ def refactored_logic(payload):
             return str(data.get("value", "")).lower() == "true"
     except (orjson.JSONDecodeError, TypeError):
         pass
-        
+
     # Fallback to raw string check
     return str(payload).decode('utf-8').lower() == "true" if isinstance(payload, bytes) else str(payload).lower() == "true"
 

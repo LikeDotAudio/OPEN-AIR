@@ -4,10 +4,12 @@
 #
 # Description: Brief summary of purpose
 
+import tkinter as tk
 import unittest
 from unittest.mock import MagicMock, patch
-import tkinter as tk
+
 from oaGuiElements.Core.text.text_value_box.Core.text_value_box import BuilderTextValueBoxCreator
+
 
 class TestTextValueBox(unittest.TestCase):
     def setUp(self):
@@ -16,7 +18,7 @@ class TestTextValueBox(unittest.TestCase):
             self.root.withdraw()
         except:
             self.root = MagicMock()
-        
+
         self.config = {
             "label_active": "Test Box",
             "path": "test/box",
@@ -34,7 +36,7 @@ class TestTextValueBox(unittest.TestCase):
         """Goal: Verify that BuilderTextValueBoxCreator creates a value box widget."""
         # BUILD
         creator = BuilderTextValueBoxCreator()
-        
+
         # OPERATE
         with patch('tkinter.ttk.Style'):
             box_widget = creator.make_text_value_box(
@@ -42,7 +44,7 @@ class TestTextValueBox(unittest.TestCase):
                 config_data=self.config,
                 context=self.context
             )
-        
+
         # CHECK
         self.assertIsInstance(box_widget, tk.Canvas)
         self.mirror_engine.register_widget.assert_called()

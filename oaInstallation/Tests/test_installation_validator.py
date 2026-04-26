@@ -4,9 +4,10 @@
 #
 # Description: Unit tests to validate system installation and environment.
 
-import unittest
-import shutil
 import os
+import shutil
+import unittest
+
 
 def check_python_environment():
     """Verify minimum Python dependencies are present."""
@@ -73,7 +74,7 @@ def run_all_tests(callback=None):
         ("SNMP", check_snmp_reachable),
         ("Desktop Icon", check_desktop_entry),
     ]
-    
+
     results = []
     for name, func in tests:
         success, message = func()
@@ -81,7 +82,7 @@ def run_all_tests(callback=None):
         if callback:
             status = "💎 [VERIFIED]" if success else "💀 [FAILED]"
             callback(f"{status} {name}: {message}")
-            
+
     return all(r[1] for r in results)
 
 if __name__ == "__main__":

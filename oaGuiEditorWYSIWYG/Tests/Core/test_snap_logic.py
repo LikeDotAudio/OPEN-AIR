@@ -5,7 +5,9 @@
 # Description: Unit tests for snap_logic utility.
 
 import unittest
-from oaGuiEditorWYSIWYG.Interface.layout_engine.snap_logic import snap_to_grid, snap_geometry
+
+from oaGuiEditorWYSIWYG.Interface.layout_engine.snap_logic import snap_geometry, snap_to_grid
+
 
 class TestSnapLogic(unittest.TestCase):
     def test_snap_to_grid(self):
@@ -14,7 +16,7 @@ class TestSnapLogic(unittest.TestCase):
         self.assertEqual(snap_to_grid(51), 100)
         self.assertEqual(snap_to_grid(149), 100)
         self.assertEqual(snap_to_grid(151), 200)
-        
+
         # Custom grid 50
         self.assertEqual(snap_to_grid(24, 50), 0)
         self.assertEqual(snap_to_grid(26, 50), 50)
@@ -22,7 +24,7 @@ class TestSnapLogic(unittest.TestCase):
     def test_snap_geometry(self):
         geo = {"x": 12, "y": 88, "width": 145, "height": 210}
         snapped = snap_geometry(geo, 100)
-        
+
         self.assertEqual(snapped["x"], 0)
         self.assertEqual(snapped["y"], 100)
         self.assertEqual(snapped["width"], 100)

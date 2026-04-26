@@ -1,21 +1,17 @@
 # graphing/plot_widget_adapter.py
-from oaGui.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
 # Description: Brief summary of purpose
 
-from oaGuiElements.Core.graphing.Methods.dynamic_graph import GraphPlotter
-from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
-from oaGuiElements.Core.graphing.Methods.dynamic_bar_graph import DynamicBarGraph
 
 # --- Standard Debug Logging Setup ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
-from loguru import logger
-
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaGuiElements.Core.graphing.Methods.dynamic_bar_graph import DynamicBarGraph
+from oaGuiElements.Core.graphing.Methods.dynamic_graph import GraphPlotter
 from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
+from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
@@ -36,7 +32,7 @@ class BuilderGraphingCreator:
 
     def _create_plot_widget(self, parent_widget, config_data, context=None, **kwargs):
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] plot_adapter: Spawning GraphPlotter '{config_data.get('path', 'Unknown')}'.", level="DEBUG")
-    
+
         # ⚡ HARDENED INTERFACE
         if context:
             state_mirror_engine = context.state_mirror_engine
@@ -62,7 +58,7 @@ class BuilderGraphingCreator:
 
     def _create_bar_graph_widget(self, parent_widget, config_data, context=None, **kwargs):
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] plot_adapter: Spawning DynamicBarGraph '{config_data.get('path', 'Unknown')}'.", level="DEBUG")
-    
+
         if context:
             state_mirror_engine = context.state_mirror_engine
             subscriber_router = context.subscriber_router
@@ -89,6 +85,6 @@ class PlotWidgetAdapterMixin:
     """Legacy mixin for backward compatibility."""
     def _create_plot_widget(self, *args, **kwargs):
         return BuilderGraphingCreator._create_plot_widget(*args, **kwargs)
-    
+
     def _create_bar_graph_widget(self, *args, **kwargs):
         return BuilderGraphingCreator._create_bar_graph_widget(*args, **kwargs)

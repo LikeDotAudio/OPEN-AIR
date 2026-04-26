@@ -8,7 +8,7 @@ import tkinter as tk
 
 from loguru import logger
 
-from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
+from oaGui.Core.factory.widget_registry import WidgetRegistry
 from oaLogging.Methods.matrix_gate import matrix_log
 
 # Resistor Color Code Mapping & MIDI Channel Logic

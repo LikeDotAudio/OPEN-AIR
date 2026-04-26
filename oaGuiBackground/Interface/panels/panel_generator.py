@@ -11,7 +11,7 @@ from PIL import Image, ImageChops, ImageDraw, ImageFilter, ImageTk
 
 # --- Imports for the new modular architecture ---
 from oaGuiElements.Methods.utils import PanelUtils
-from oaGuiManager.Core.factory.asset_cache import AssetCacheManager
+from oaGui.Core.factory.asset_cache import AssetCacheManager
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Core.logger import builder_logger

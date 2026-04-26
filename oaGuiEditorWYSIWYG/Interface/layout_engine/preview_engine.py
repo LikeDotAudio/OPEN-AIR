@@ -6,7 +6,7 @@
 
 import copy
 
-from oaGuiBuilder.Workers.builder import DynamicGuiBuilder
+from oaGui.Workers.builder import DynamicGuiBuilder
 from oaLogging.Core.logger import GUI_LOGGER as logger
 from oaStateCache.Core.state_mirror_engine import StateMirrorEngine
 

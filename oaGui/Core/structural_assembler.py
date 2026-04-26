@@ -6,7 +6,7 @@
 
 import tkinter as tk
 
-from oaGuiManager.Core.transparency.transparency import TransparencyManager
+from oaGui.Core.transparency.transparency import TransparencyManager
 
 
 class StructuralAssembler:
@@ -41,7 +41,7 @@ class StructuralAssembler:
         viewport.grid(row=0, column=0, sticky="nsew")
 
         # ⚡ SCROLLBARS: Auto-hiding scrollbars
-        from oaGuiBuilder.Workers.builder import AutoScrollbar
+        from oaGui.Workers.builder import AutoScrollbar
         vsb = AutoScrollbar(hull, orient=tk.VERTICAL, command=viewport.yview)
         hsb = AutoScrollbar(hull, orient=tk.HORIZONTAL, command=viewport.xview)
         viewport.configure(yscrollcommand=vsb.set, xscrollcommand=hsb.set)

@@ -36,7 +36,7 @@ if str(root_path) not in sys.path:
     sys.path.append(str(root_path))
 
 
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Core.transparency.transparency_mixin import TransparencyMixin
 
 # --- Protocol: Integration Layer ---
 from oaStyle.Core.style import DEFAULT_THEME, THEMES
@@ -74,7 +74,7 @@ class YakMonitor(tk.Frame, TransparencyMixin):
 
     def _find_builder_instance(self, widget):
         """Recursively searches for a DynamicGuiBuilder in the parent hierarchy."""
-        from oaGuiBuilder.Workers.builder import DynamicGuiBuilder
+        from oaGui.Workers.builder import DynamicGuiBuilder
         curr = widget
         while curr:
             if isinstance(curr, DynamicGuiBuilder):

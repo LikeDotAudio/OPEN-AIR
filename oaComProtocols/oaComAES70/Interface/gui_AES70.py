@@ -32,7 +32,7 @@ class Aes70DashboardImplementation(tk.Frame):
     def _find_aes_manager(self, widget):
         """
         ⚡ DECOUPLED: Searches the widget tree for an AES70 manager without 
-        direct dependency on oaGuiBuilder classes.
+        direct dependency on oaGui classes.
         """
         curr = widget
         while curr:

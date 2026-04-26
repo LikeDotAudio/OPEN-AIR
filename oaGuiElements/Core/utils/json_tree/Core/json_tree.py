@@ -18,8 +18,8 @@ app_constants = Config.get_instance()
 from oaGuiElements.Core.utils.json_tree.Core.json import JsonDataManager
 from oaGuiElements.Core.utils.json_tree.Core.json_tree_editor_mixin import JsonTreeEditorMixin
 from oaGuiElements.Core.utils.json_tree.Core.json_tree_renderer_mixin import JsonTreeRendererMixin
-from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Core.factory.widget_registry import WidgetRegistry
+from oaGui.Core.transparency.transparency_mixin import TransparencyMixin
 
 
 class AutoScrollbar(ttk.Scrollbar):

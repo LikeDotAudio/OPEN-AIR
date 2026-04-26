@@ -8,7 +8,7 @@ import inspect
 
 from loguru import logger
 
-from oaGuiTelemetry.Methods.marker_logic import calculate_frequency_range
+from oaGui.Methods.marker_logic import calculate_frequency_range
 from oaLogging.Methods.matrix_gate import matrix_log
 
 

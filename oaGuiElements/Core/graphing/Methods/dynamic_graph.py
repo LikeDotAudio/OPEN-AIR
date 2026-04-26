@@ -25,8 +25,8 @@ from oaGuiElements.Core.graphing.Core.graph_interaction_mixin import GraphIntera
 from oaGuiElements.Core.graphing.Core.graph_patina_mixin import GraphPatinaMixin
 from oaGuiElements.Core.graphing.Core.graph_state_mixin import GraphStateMixin
 from oaGuiElements.Core.graphing.Core.graph_throttle_mixin import GraphThrottleMixin
-from oaGuiManager.Core.transparency.transparency import TransparencyManager
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Core.transparency.transparency import TransparencyManager
+from oaGui.Core.transparency.transparency_mixin import TransparencyMixin
 from oaStyle.Core.style import DEFAULT_THEME, THEMES
 
 from . import graph, graph_interactor, graph_styler

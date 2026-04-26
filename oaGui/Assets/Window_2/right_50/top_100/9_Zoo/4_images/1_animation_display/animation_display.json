@@ -27,7 +27,7 @@
             "De": "Animated Zeit Circuits",
             "Es": "Animated Hora Circuits"
           },
-          "gif_path": "oaGuiMediaElements/Assets/time_circuits.gif",
+          "gif_path": "oaGui/Assets/time_circuits.gif",
           "value_default": 0,
           "notes": "A standard animation of the time circuits."
         }
@@ -48,7 +48,7 @@
             "De": "Zeit Circuits (Start Frame 5)",
             "Es": "Hora Circuits (Start Frame 5)"
           },
-          "gif_path": "oaGuiMediaElements/Assets/time_circuits.gif",
+          "gif_path": "oaGui/Assets/time_circuits.gif",
           "value_default": 5,
           "notes": "Time circuits animation starting from a later frame."
         }

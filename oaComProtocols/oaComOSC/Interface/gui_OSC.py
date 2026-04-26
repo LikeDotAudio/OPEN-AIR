@@ -31,7 +31,7 @@ from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- GUI FALLBACKS (V3.2.1 Decoupling) ---
 try:
-    from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+    from oaGui.Core.transparency.transparency_mixin import TransparencyMixin
 except ImportError:
     class TransparencyMixin:
         """Fallback mixin for standalone execution without GUI manager."""
@@ -87,7 +87,7 @@ class OscDashboardImplementation(tk.Frame, TransparencyMixin):
     def _find_builder_instance(self, widget):
         """
         ⚡ DECOUPLED: Searches the widget tree for a builder instance without 
-        direct dependency on oaGuiBuilder classes.
+        direct dependency on oaGui classes.
         """
         curr = widget
         while curr:

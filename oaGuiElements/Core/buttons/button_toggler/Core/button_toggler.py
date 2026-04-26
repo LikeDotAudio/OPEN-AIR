@@ -11,10 +11,10 @@ from oaConfigurationManager.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
 from oaGui.Methods.i18n_utils import get_text
-from oaGuiBuilder.Core.base_widget_creator import BaseWidgetCreator
-from oaGuiManager.Core.factory.button_canvas_base import CanvasButton
-from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Core.base_widget_creator import BaseWidgetCreator
+from oaGui.Core.factory.button_canvas_base import CanvasButton
+from oaGui.Core.factory.widget_registry import WidgetRegistry
+from oaGui.Core.transparency.transparency_mixin import TransparencyMixin
 
 
 class TogglerButton(CanvasButton):

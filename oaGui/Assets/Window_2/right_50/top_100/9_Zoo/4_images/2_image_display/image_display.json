@@ -47,7 +47,7 @@
             "De": "Zeit Circuits (GIF)",
             "Es": "Hora Circuits (GIF)"
           },
-          "path": "oaGuiMediaElements/Assets/time_circuits.gif",
+          "path": "oaGui/Assets/time_circuits.gif",
           "notes": "A GIF animation of the time circuits."
         }
       },
@@ -107,7 +107,7 @@
             "De": "Zeit Circuits (PNG)",
             "Es": "Hora Circuits (PNG)"
           },
-          "path": "oaGuiMediaElements/Assets/time_circuits.gif.png",
+          "path": "oaGui/Assets/time_circuits.gif.png",
           "notes": "A static PNG version of the time circuits."
         }
       }

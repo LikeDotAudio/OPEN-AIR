@@ -72,7 +72,7 @@ class GuiBatchBuilderMixin:
         Delegates to AsyncGridRenderer.
         """
         if context is None:
-            from oaGuiManager.Core.context.widget_context import WidgetContext
+            from oaGui.Core.context.widget_context import WidgetContext
             context = WidgetContext(
                 state_mirror_engine=getattr(self, 'state_mirror_engine', None),
                 subscriber_router=getattr(self, 'subscriber_router', None),

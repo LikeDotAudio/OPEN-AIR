@@ -30,8 +30,8 @@ class GuiRebuilderMixin:
         matrix_log("ui", "gui_re", "_force_rebuild_gui",
                    f"♻️ Rebuilder: FORCING GUI rebuild for '{getattr(self, 'tab_name', 'Unknown')}'", "INFO")
 
-        from oaGuiManager.Core.factory.asset_cache import AssetCacheManager
-        from oaGuiManager.FileReaders.blueprint_loader import BlueprintLoader
+        from oaGui.Core.factory.asset_cache import AssetCacheManager
+        from oaGui.FileReaders.blueprint_loader import BlueprintLoader
         BlueprintLoader.invalidate_cache()
         AssetCacheManager.invalidate_cache()
 
@@ -47,7 +47,7 @@ class GuiRebuilderMixin:
 
         self._is_rebuilding = True
 
-        from oaGuiManager.Core.transparency.transparency import TransparencyManager
+        from oaGui.Core.transparency.transparency import TransparencyManager
         TransparencyManager.cleanup(self)
 
         destroyed_count = 0

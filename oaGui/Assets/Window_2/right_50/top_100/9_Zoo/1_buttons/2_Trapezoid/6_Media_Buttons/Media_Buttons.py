@@ -29,7 +29,7 @@ if str(root_path) not in sys.path:
 from loguru import logger
 
 from oaConfigurationManager.FileReaders.config_reader import Config
-from oaGuiBuilder.Workers.builder import DynamicGuiBuilder
+from oaGui.Workers.builder import DynamicGuiBuilder
 
 LOCAL_DEBUG = False
 

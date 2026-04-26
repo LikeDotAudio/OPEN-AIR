@@ -10,8 +10,8 @@ import tkinter as tk
 
 from oaGui.Methods.i18n_utils import get_text
 from oaGuiElements.Core.Knobs.knob.Core.knob import CustomKnobFrame
-from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
-from oaGuiManager.Core.transparency.transparency import TransparencyManager
+from oaGui.Core.factory.widget_registry import WidgetRegistry
+from oaGui.Core.transparency.transparency import TransparencyManager
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Methods.matrix_gate import matrix_log

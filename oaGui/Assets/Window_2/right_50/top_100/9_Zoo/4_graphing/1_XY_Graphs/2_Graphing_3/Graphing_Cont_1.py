@@ -15,7 +15,7 @@ from loguru import logger
 from oaConfigurationManager.FileReaders.config_reader import Config
 
 # --- Protocol: Integration Layer ---
-from oaGuiBuilder.Workers.builder import DynamicGuiBuilder
+from oaGui.Workers.builder import DynamicGuiBuilder
 from oaLogging.Methods.matrix_gate import matrix_log
 
 LOCAL_DEBUG = False

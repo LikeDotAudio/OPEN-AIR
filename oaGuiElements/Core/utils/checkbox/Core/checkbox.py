@@ -17,7 +17,7 @@ from oaLogging.Methods.matrix_gate import matrix_log
 app_constants = Config.get_instance()
 
 from oaGui.Methods.i18n_utils import get_text
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Core.transparency.transparency_mixin import TransparencyMixin
 
 # --- Global Scope Variables ---
 current_file = f"{os.path.basename(__file__)}"

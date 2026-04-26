@@ -11,7 +11,7 @@ from oaOchestration.Constants.project_paths import SNMP_CURRENT_MIB
 
 # --- GUI FALLBACKS (V3.2.1 Decoupling) ---
 try:
-    from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+    from oaGui.Core.transparency.transparency_mixin import TransparencyMixin
 except ImportError:
     class TransparencyMixin:
         """Fallback mixin for standalone execution without GUI manager."""
@@ -46,7 +46,7 @@ class SnmpVerifyMibImplementation(tk.Frame, TransparencyMixin):
     def _find_snmp_manager(self, widget):
         """
         ⚡ DECOUPLED: Searches the widget tree for an SNMP manager without 
-        direct dependency on oaGuiBuilder classes.
+        direct dependency on oaGui classes.
         """
         curr = widget
         while curr:

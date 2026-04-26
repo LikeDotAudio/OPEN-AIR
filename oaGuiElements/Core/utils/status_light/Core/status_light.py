@@ -18,7 +18,7 @@ from oaLogging.Methods.matrix_gate import matrix_log
 app_constants = Config.get_instance()
 
 from oaComProtocols.oaComMQTT.Core.mqtt_message import MqttMessage
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Core.transparency.transparency_mixin import TransparencyMixin
 
 
 class StatusLightWidget(tk.Frame):

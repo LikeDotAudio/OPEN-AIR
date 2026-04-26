@@ -4,7 +4,7 @@
 #
 # Description: Brief summary of purpose
 
-from oaGuiBuilder.Core.ui_geometry_math import UIGeometryMath
+from oaGui.Core.ui_geometry_math import UIGeometryMath
 
 from .fader_bar_asset_generator import FaderBarAssetGenerator
 

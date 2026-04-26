@@ -19,7 +19,7 @@ app_constants = Config.get_instance()
 
 from oaComProtocols.oaComMQTT.Core import mqtt_publisher_service
 from oaGui.Methods.i18n_utils import get_text
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Core.transparency.transparency_mixin import TransparencyMixin
 
 
 class BuilderDataRadarCreator(TransparencyMixin):

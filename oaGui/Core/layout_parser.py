@@ -12,7 +12,7 @@ import tkinter as tk
 import orjson
 
 from oaConfigurationManager.FileReaders.config_reader import Config
-from oaGuiManager.Constants.schema_defaults import DEFAULT_PANEL_PERCENTAGE
+from oaGui.Constants.schema_defaults import DEFAULT_PANEL_PERCENTAGE
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Core.logger import LAYOUT_LOGGER

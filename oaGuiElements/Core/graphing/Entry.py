@@ -21,7 +21,7 @@ while project_root.parent != project_root:
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
-from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
+from oaGui.Core.factory.widget_registry import WidgetRegistry
 from oaLogging.Core.logger import builder_logger
 
 # Absolute imports with fallback

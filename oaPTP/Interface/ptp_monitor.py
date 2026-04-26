@@ -10,7 +10,7 @@ import tkinter as tk
 from tkinter import ttk
 
 from oaConfigurationManager.FileReaders.config_reader import Config
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Core.transparency.transparency_mixin import TransparencyMixin
 from oaLogging.Methods.matrix_gate import matrix_log
 from oaPTP.Core.ptp import register_ptp_callback, unregister_ptp_callback
 from oaStyle.Core.style import DEFAULT_THEME, THEMES
@@ -50,7 +50,7 @@ class PtpMonitor(tk.Frame, TransparencyMixin):
         matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🖥️ PTP Monitor Initialized.", "DEBUG")
 
     def _find_builder(self, widget):
-        from oaGuiBuilder.Workers.builder import DynamicGuiBuilder
+        from oaGui.Workers.builder import DynamicGuiBuilder
         curr = widget
         while curr:
             if isinstance(curr, DynamicGuiBuilder): return curr

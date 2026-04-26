@@ -6,7 +6,7 @@
 
 import random
 
-from oaGuiManager.Core.factory.asset_cache import AssetCacheManager
+from oaGui.Core.factory.asset_cache import AssetCacheManager
 from oaLogging.Core.logger import builder_logger
 from oaLogging.Methods.matrix_gate import is_debug_allowed
 

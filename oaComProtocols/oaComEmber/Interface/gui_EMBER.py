@@ -32,7 +32,7 @@ except ImportError:
 
 # --- GUI FALLBACKS (V3.2.1 Decoupling) ---
 try:
-    from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+    from oaGui.Core.transparency.transparency_mixin import TransparencyMixin
 except ImportError:
     class TransparencyMixin:
         """Fallback mixin for standalone execution without GUI manager."""

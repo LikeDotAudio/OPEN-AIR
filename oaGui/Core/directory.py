@@ -165,7 +165,7 @@ class DirectoryBuilderMixin:
 
                     # If overflow is 'auto' horizontally or vertically, create a scrollable canvas
                     if panel_overflow_ew == "auto" or panel_overflow_ns == "auto":
-                        from oaGuiBuilder.Workers.builder import AutoScrollbar
+                        from oaGui.Workers.builder import AutoScrollbar
                         # Create a canvas that will hold the scrollable content
                         canvas = tk.Canvas(base_frame, borderwidth=0, highlightthickness=0, relief="flat", bg=self.theme_colors["bg"])
 

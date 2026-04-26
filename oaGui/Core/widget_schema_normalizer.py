@@ -5,8 +5,8 @@
 # Description: Static Translation Engine for GUI Configuration Schema.
 
 from oaGui.Core.standardizers.widget_type_resolver import WidgetTypeResolver
-from oaGuiManager.Constants.schema_defaults import DEFAULT_COLORS, PILLARS, STRUCT_TYPES
-from oaGuiManager.Methods.schema_utils import calculate_sticky, deep_merge, expand_abbreviations, get_styled_val
+from oaGui.Constants.schema_defaults import DEFAULT_COLORS, PILLARS, STRUCT_TYPES
+from oaGui.Methods.schema_utils import calculate_sticky, deep_merge, expand_abbreviations, get_styled_val
 
 
 class WidgetSchemaNormalizer:

@@ -65,7 +65,7 @@ Message: GitHub Actions CI/CD Integration
 ## [V3.1.14] - 2026-04-09
 ### GUI Manager Logging & Stability
 - **Blueprint Validation Fix:** Demoted `FileNotFoundError` (missing blueprint) in `UniversalGuiLoader` from `ERROR` to `WARNING`. This prevents CI/CD log clutter for handled validation failures while maintaining visibility in the UI.
-- **Logging Standardization:** Standardized all logs in `oaGuiManager/Core/loader/gui_from_json.py` to use `matrix_log` with the "exactly three emojis" visual grepping rule and bracketed categories (e.g., `[VALIDATION]`, `[BUILDER]`, `[SUCCESS]`, `[CATASTROPHIC]`).
+- **Logging Standardization:** Standardized all logs in `oaGui/Core/loader/gui_from_json.py` to use `matrix_log` with the "exactly three emojis" visual grepping rule and bracketed categories (e.g., `[VALIDATION]`, `[BUILDER]`, `[SUCCESS]`, `[CATASTROPHIC]`).
 - **Improved Error Visibility:** Enhanced the `Exception` block in `_construct_dynamic_gui` to follow the project's visual standards while preserving full tracebacks via `logger.exception`.
 
 ## [V3.1.13] - 2026-04-07
@@ -291,7 +291,7 @@ Message: GitHub Actions CI/CD Integration
 
 ## [20260406.1950.1] - 2026-04-06
 ### Fixed
-- Handled KeyboardInterrupt in UI partition (oaGuiManager) to ensure graceful shutdown without tracebacks.
+- Handled KeyboardInterrupt in UI partition (oaGui) to ensure graceful shutdown without tracebacks.
 - Added synchronous shutdown() method to ShutdownCoordinator to handle non-GUI-event-driven termination.
 
 ## [20260404.2245.1] - 2026-04-04
@@ -303,7 +303,7 @@ Message: GitHub Actions CI/CD Integration
 
 ### [2026-04-04 23:35:00] - Bug Fix: X11 BadValue Crash (Geometry Sanitization & Hardening)
 - Implemented geometry sanitization in `WidgetContext` to enforce a 1x1 minimum pixel size for all materialized containers.
-- Hardened `UniversalGuiLoader` in `oaGuiManager/Core/loader/gui_from_json.py` with 1x1 floor and `try...except` wrapper during builder instantiation.
+- Hardened `UniversalGuiLoader` in `oaGui/Core/loader/gui_from_json.py` with 1x1 floor and `try...except` wrapper during builder instantiation.
 - Added recursive build guards and `try...except` around `sashpos` calls in `oaGuiBuildShell/Core/directory.py`.
 - Enabled `element_gui_builder` debug flag in `config.ini` for enhanced layout tracing.
 

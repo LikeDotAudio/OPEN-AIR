@@ -13,10 +13,10 @@ from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
-from oaGuiBuilder.Core.base_widget_creator import BaseWidgetCreator
+from oaGui.Core.base_widget_creator import BaseWidgetCreator
 from oaGuiElements.Core.graphing.Methods.dynamic_graph import GraphPlotter
-from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Core.factory.widget_registry import WidgetRegistry
+from oaGui.Core.transparency.transparency_mixin import TransparencyMixin
 
 from .mdp_interaction_mixin import MDPInteractionMixin
 

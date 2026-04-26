@@ -7,9 +7,9 @@
 import tkinter as tk
 
 # --- Standard Debug Logging Setup ---
-from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
-from oaGuiManager.Core.transparency.transparency import TransparencyManager
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Core.factory.widget_registry import WidgetRegistry
+from oaGui.Core.transparency.transparency import TransparencyManager
+from oaGui.Core.transparency.transparency_mixin import TransparencyMixin
 from oaLogging.Methods.matrix_gate import matrix_log
 
 

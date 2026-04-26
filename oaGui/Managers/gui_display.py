@@ -28,8 +28,8 @@ from oaGui.Core.tab import TabManagerMixin
 # --- Module Imports ---
 from oaGui.Core.window import WindowManager
 from oaGuiEditorWYSIWYG.Managers.wysiwyg_editor import WysiwygEditor
-from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
-from oaGuiManager.FileReaders.module_loader import ModuleLoader
+from oaGui.Core.factory.widget_registry import WidgetRegistry
+from oaGui.FileReaders.module_loader import ModuleLoader
 from oaOchestration.Constants.project_paths import LAYOUT_CACHE_PATH
 from oaStyle.Core.style import DEFAULT_THEME
 

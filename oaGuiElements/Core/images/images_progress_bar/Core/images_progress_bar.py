@@ -18,8 +18,8 @@ from oaLogging.Methods.matrix_gate import matrix_log
 app_constants = Config.get_instance()  # Get the singleton instance
 
 from oaGui.Methods.i18n_utils import get_text
-from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Core.factory.widget_registry import WidgetRegistry
+from oaGui.Core.transparency.transparency_mixin import TransparencyMixin
 
 
 @WidgetRegistry.register("ProgressBar", "_ProgressBar", "_SmartProgress")

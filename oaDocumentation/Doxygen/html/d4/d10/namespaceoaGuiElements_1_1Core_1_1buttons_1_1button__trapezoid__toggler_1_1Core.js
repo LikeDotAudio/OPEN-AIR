@@ -1,0 +1,4 @@
+var namespaceoaGuiElements_1_1Core_1_1buttons_1_1button__trapezoid__toggler_1_1Core =
+[
+    [ "button_trapezoid_toggler", "d3/d4f/namespaceoaGuiElements_1_1Core_1_1buttons_1_1button__trapezoid__toggler_1_1Core_1_1button__trapezoid__toggler.html", "d3/d4f/namespaceoaGuiElements_1_1Core_1_1buttons_1_1button__trapezoid__toggler_1_1Core_1_1button__trapezoid__toggler" ]
+];

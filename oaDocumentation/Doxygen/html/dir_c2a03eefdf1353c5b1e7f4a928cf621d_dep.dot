@@ -1,0 +1,19 @@
+digraph "oaGuiElements/Core/metering"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  compound=true
+  subgraph clusterdir_767290a45b02f930014da94b483161cc {
+    graph [ bgcolor="#edf0f7", pencolor="grey50", label="Core", fontname=Helvetica,fontsize=10 style="filled,dashed", URL="dir_767290a45b02f930014da94b483161cc.html",tooltip=""]
+  subgraph clusterdir_c2a03eefdf1353c5b1e7f4a928cf621d {
+    graph [ bgcolor="#edf0f7", pencolor="grey25", label="", fontname=Helvetica,fontsize=10 style="filled,bold", URL="dir_c2a03eefdf1353c5b1e7f4a928cf621d.html",tooltip=""]
+    dir_c2a03eefdf1353c5b1e7f4a928cf621d [shape=plaintext, label="metering"];
+  dir_788809c6338701861936fd8362d8c4d7 [label="meter_bar", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_788809c6338701861936fd8362d8c4d7.html",tooltip=""];
+  dir_94903bab68d025fa999b714b5c54ede0 [label="meter_knob_with_vu\l_meter", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_94903bab68d025fa999b714b5c54ede0.html",tooltip=""];
+  dir_1a089c94cd483954230f255b12a8c274 [label="meter_needle", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_1a089c94cd483954230f255b12a8c274.html",tooltip=""];
+  dir_415230fc32578aae8c9ad86ab7bbb2a5 [label="oaMeteringEngine_rs", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_415230fc32578aae8c9ad86ab7bbb2a5.html",tooltip=""];
+  }
+  }
+}

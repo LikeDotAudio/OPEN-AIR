@@ -1,0 +1,4 @@
+var classoaGuiElements_1_1Core_1_1faders_1_1fader__dual_1_1Core_1_1dual__fader__asset__generator_1_1DualFaderAssetGenerator =
+[
+    [ "get_3d_dual_fader_cap", "dd/d3a/classoaGuiElements_1_1Core_1_1faders_1_1fader__dual_1_1Core_1_1dual__fader__asset__generator_1_1DualFaderAssetGenerator.html#a85f5a0ff78e8ca48c76673e33ab72e13", null ]
+];

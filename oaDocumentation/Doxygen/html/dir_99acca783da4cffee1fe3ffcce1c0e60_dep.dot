@@ -1,0 +1,12 @@
+digraph "oaGui/Core/telemetry/visibility_snitch"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  compound=true
+  subgraph clusterdir_8fb829afd17bf12745d2dc05b4782874 {
+    graph [ bgcolor="#edf0f7", pencolor="grey50", label="telemetry", fontname=Helvetica,fontsize=10 style="filled,dashed", URL="dir_8fb829afd17bf12745d2dc05b4782874.html",tooltip=""]
+  dir_99acca783da4cffee1fe3ffcce1c0e60 [label="visibility_snitch", fillcolor="#edf0f7", color="grey25", style="filled,bold", URL="dir_99acca783da4cffee1fe3ffcce1c0e60.html",tooltip=""];
+  }
+}

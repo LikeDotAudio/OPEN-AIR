@@ -1,0 +1,4 @@
+var namespaceoaGuiElements_1_1Core_1_1faders_1_1fader__horizontal_1_1Interface =
+[
+    [ "fader_horizontal_editor", "dc/de5/namespaceoaGuiElements_1_1Core_1_1faders_1_1fader__horizontal_1_1Interface_1_1fader__horizontal__editor.html", "dc/de5/namespaceoaGuiElements_1_1Core_1_1faders_1_1fader__horizontal_1_1Interface_1_1fader__horizontal__editor" ]
+];

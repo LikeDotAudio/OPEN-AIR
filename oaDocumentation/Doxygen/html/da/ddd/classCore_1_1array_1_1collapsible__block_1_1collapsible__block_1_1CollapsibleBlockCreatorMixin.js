@@ -1,0 +1,4 @@
+var classCore_1_1array_1_1collapsible__block_1_1collapsible__block_1_1CollapsibleBlockCreatorMixin =
+[
+    [ "_create_collapsible_block", "da/ddd/classCore_1_1array_1_1collapsible__block_1_1collapsible__block_1_1CollapsibleBlockCreatorMixin.html#ab2deff421be6f2cd99e7d2f77240504c", null ]
+];

@@ -89,7 +89,32 @@ class UniversalGuiLoader(tk.Frame):
 
     def _instantiate_builder(self):
         """Creates the DynamicGuiBuilder instance."""
+        import json
         builder_config = self.config_data.copy()
+
+        # ⚡ PRE-FLIGHT: Inspect JSON for behavior flags before scaffolding
+        try:
+            with open(self.json_path, 'r') as f:
+                raw_data = json.load(f)
+                # Find the root object (often named after the module or generic)
+                root_obj = next(iter(raw_data.values())) if isinstance(raw_data, dict) and raw_data else {}
+                
+                # Check for behavior overrides
+                behavior = root_obj.get("behavior", {})
+                if "allow_scrolling" in behavior:
+                    builder_config["allow_scrolling"] = behavior["allow_scrolling"]
+                if "transparent" in behavior:
+                    builder_config["transparent"] = behavior["transparent"]
+                
+                # ⚡ AUTOMATIC OVERLAY: If the root type is OcaBin, it handles its own scrolling.
+                # The builder should default to overlay mode (allow_scrolling=False) to avoid 
+                # nested scrollbars, UNLESS explicitly requested otherwise.
+                if root_obj.get("type") == "OcaBin" and "allow_scrolling" not in behavior:
+                    builder_config["allow_scrolling"] = False
+                    builder_config["transparent"] = True
+
+        except Exception as e:
+            matrix_log("UI", "GUI_MANAGER", "_instantiate_builder", f"⚠️ Failed to pre-read JSON flags: {e}", level="DEBUG")
 
         # ⚡ SANITIZATION: Enforce 1x1 minimum to prevent X11 BadValue crashes
         # during the initial geometry configuration of the top-level container.
@@ -104,6 +129,8 @@ class UniversalGuiLoader(tk.Frame):
                 config=builder_config,
                 use_grid=True
             )
+            self.grid_rowconfigure(0, weight=1)
+            self.grid_columnconfigure(0, weight=1)
             self.dynamic_gui.grid(row=0, column=0, sticky="nsew")
             self.dynamic_gui.start()
         except tk.TclError as e:

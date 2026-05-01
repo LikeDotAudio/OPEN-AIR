@@ -58,6 +58,11 @@ class TabManagerMixin:
                 matrix_log("ui", "gui_shell", "_on_tab_change", f"🏗️ Populating tab {newly_selected_tab_name} from {build_path}", "INFO")
                 if build_path:
                     if isinstance(build_path, str): build_path = pathlib.Path(build_path)
+                    
+                    # ⚡ SIZING FIX: Ensure the tab frame itself allows the builder to expand
+                    selected_tab_frame.grid_rowconfigure(0, weight=1)
+                    selected_tab_frame.grid_columnconfigure(0, weight=1)
+
                     def _populate():
                         try:
                             self._build_from_directory(path=build_path, parent_widget=selected_tab_frame)

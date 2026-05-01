@@ -30,7 +30,7 @@ class BuilderContextMenuMixin:
         self.context_menu.add_command(label="Reload UI", command=self._force_rebuild_gui)
 
         # Physical Bindings
-        target_widgets = [w for w in ['canvas', 'scroll_frame'] if hasattr(self, w)]
+        target_widgets = [w for w in ['canvas', 'scroll_frame'] if getattr(self, w, None) is not None]
         for attr in target_widgets:
             getattr(self, attr).bind("<Button-3>", self._on_right_click)
 

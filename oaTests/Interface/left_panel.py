@@ -24,6 +24,7 @@ class LeftPanel(Vertical):
 
         yield Label("Debug Management", classes="status-label")
         yield Button("CONFIGURE DEBUG", id="btn_debug_matrix", variant="warning")
+        yield Button("MAKE DOXYGEN", id="btn_doxygenizer", classes="violet-button")
 
         yield Label("System Metrics", classes="status-label")
         yield Label("CPU: -- MHz", classes="status-item", id="cpu_label")

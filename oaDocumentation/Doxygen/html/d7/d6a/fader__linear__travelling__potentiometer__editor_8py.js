@@ -1,0 +1,4 @@
+var fader__linear__travelling__potentiometer__editor_8py =
+[
+    [ "oaGuiElements.Core.faders.fader_linear_travelling_potentiometer.Interface.fader_linear_travelling_potentiometer_editor.FaderLinearTravellingPotentiometerEditor", "d0/d69/classoaGuiElements_1_1Core_1_1faders_1_1fader__linear__travelling__potentiometer_1_1Interface_1_5f6ef703d98e5dab7788565ee29057ea.html", "d0/d69/classoaGuiElements_1_1Core_1_1faders_1_1fader__linear__travelling__potentiometer_1_1Interface_1_5f6ef703d98e5dab7788565ee29057ea" ]
+];

@@ -1,0 +1,25 @@
+digraph "oaRustCore_pkg/target/release/build"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  compound=true
+  subgraph clusterdir_ba4642c0163fe07c4659546c38d735c8 {
+    graph [ bgcolor="#edf0f7", pencolor="grey50", label="release", fontname=Helvetica,fontsize=10 style="filled,dashed", URL="dir_ba4642c0163fe07c4659546c38d735c8.html",tooltip=""]
+  subgraph clusterdir_22dcc8b7859a4daee97f051f851f63a6 {
+    graph [ bgcolor="#edf0f7", pencolor="grey25", label="", fontname=Helvetica,fontsize=10 style="filled,bold", URL="dir_22dcc8b7859a4daee97f051f851f63a6.html",tooltip=""]
+    dir_22dcc8b7859a4daee97f051f851f63a6 [shape=plaintext, label="build"];
+  dir_58735656a9d571abe08d0a4aef58d07c [label="bzip2-sys-71ffd8ce3080c3c6", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_58735656a9d571abe08d0a4aef58d07c.html",tooltip=""];
+  dir_e7e3a9e601781a9e5a521a5c4df597bd [label="html5ever-021b0a5fb87f4516", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_e7e3a9e601781a9e5a521a5c4df597bd.html",tooltip=""];
+  dir_6da21a8e2feb751fd2bb3e0ed1dca6b6 [label="markup5ever-6c3b2addd39abd24", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_6da21a8e2feb751fd2bb3e0ed1dca6b6.html",tooltip=""];
+  dir_1ef76138ea462d1d0332cd67705dcef0 [label="oaRustCore-a13e50a6292a5455", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_1ef76138ea462d1d0332cd67705dcef0.html",tooltip=""];
+  dir_ce053558b137724e4ba368a3a4aa77de [label="selectors-1d1778bcbd76c107", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_ce053558b137724e4ba368a3a4aa77de.html",tooltip=""];
+  dir_8cbd6d20d068d76e202d3828cca6e094 [label="serde-2bd0a7e82b312b43", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_8cbd6d20d068d76e202d3828cca6e094.html",tooltip=""];
+  dir_b4d4eb2ac65bb1e88e7606ec2fd630b8 [label="serde_core-e9d25619b840851e", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_b4d4eb2ac65bb1e88e7606ec2fd630b8.html",tooltip=""];
+  dir_87015f30bd36ab67916d1b6832b8254d [label="target-lexicon-708a4af31667e5ee", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_87015f30bd36ab67916d1b6832b8254d.html",tooltip=""];
+  dir_cba64286e4d811ea8c83d61ec8949c1b [label="typenum-6d252817eb52a986", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_cba64286e4d811ea8c83d61ec8949c1b.html",tooltip=""];
+  dir_153770d85d10ebd5e9d7fec24604a8ca [label="zstd-sys-49158a597a425ab2", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_153770d85d10ebd5e9d7fec24604a8ca.html",tooltip=""];
+  }
+  }
+}

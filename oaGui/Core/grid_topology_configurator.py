@@ -68,7 +68,17 @@ class GridTopologyConfigurator:
                     # ⚡ SMART DEFAULTS: Certain structural/expanding widgets default to weight_y=1.
                     # Other widgets (sliders, text) default to 0 to remain tight.
                     default_wy = 0
-                    if w_type in ["OcaBin", "Bin", "OcaBlock", "Block", "plot_widget", "_Horizontal_with_dial_Value"]:
+                    expanding_types = [
+                        "OcaBin", "Bin", "OcaBlock", "Block", "OcaArray", "Array",
+                        "OcaCollapsibleBlock", "plot_widget", 
+                        "_Horizontal_with_dial_Value", "_CustomLTP", "_Fader", 
+                        "_SmartFader", "_CustomFader", "_CustomDualVerticalFader", 
+                        "_CompositeFader", "_FaderWithBarGraph", "_BarGraph", 
+                        "_SmartMeter", "MeterBar", "_MeterBar", "_VUMeterKnob", 
+                        "_NeedleVUMeter", "_MDP", "_CMDP", "SelectorSwitch", 
+                        "_SelectorSwitch"
+                    ]
+                    if w_type in expanding_types:
                         default_wy = 1
                         
                     wy = int(lay.get("weight_y", default_wy))

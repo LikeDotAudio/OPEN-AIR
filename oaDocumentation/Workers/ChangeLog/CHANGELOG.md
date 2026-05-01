@@ -333,3 +333,92 @@ Message: GitHub Actions CI/CD Integration
 - **SNMP Installer Noise:** Removed automated 'snmpwalk' test from the end of the generated SNMP installer script. This prevents raw telemetry data from being output to the console during installation, which was causing "command not found" errors in shells misinterpreting the output.
 - **SNMP Manager Scope:** Resolved a 'NameError' for 'matrix_log' in 'snmp_manager.py' by correctly importing it at the module level.
 - **SNMP Manager Syntax:** Fixed a syntax error in 'snmp_manager.py' imports (dots vs slashes).
+
+## [20260429.0105.1] - 2026-04-29
+### Fixed
+- **Vertical Rendering:** Fixed a bug in DynamicGuiBuilder where it only tracked width changes. It now correctly reacts to height changes, ensuring the preview fills the vertical space.
+- **Transparency Support:** Changed default render tier to 'High-Res' in the Interactive Layout to ensure transparency (alpha channel) is visible by default.
+- **Panel Visibility:** Robustified the sash positioning logic in the WYSIWYG editor to prevent the center panel from collapsing on launch.
+- **Telemetry Link:** Updated the WYSIWYG editor and PreviewEngine to accept and use the system's subscriber_router and state_mirror_engine, allowing real device telemetry to be displayed in the builder.
+- **Flat Texture Rendering:** Fixed a bug in PanelGenerator where 'flat' textures were still applying streak overlays.
+### Added
+- **Background Rendering Test:** Added a new integration test 'oaGuiElements/Tests/images/test_procedural_bg_engine.py' to verify the background rendering pipeline.
+
+## [20260429.0125.1] - 2026-04-29
+### Fixed
+- **DynamicGuiBuilder Vertical Height**: Fixed a critical bug in  where it was using stale  instead of the current event height. Also updated  to pass both dimensions to the resize handler. This ensures that GUI components fill the full vertical space in the main application.
+- **PreviewEngine Aggressive Stripping**: Refined  in the editor's  to only remove dimensions from the structural root object. This prevents child widgets from having their intended sizes stripped away while still allowing the preview container to resize fluidly.
+
+## [20260429.0125.1] - 2026-04-29
+### Fixed
+- **DynamicGuiBuilder Vertical Height**: Fixed a critical bug in `_perform_canvas_resize` where it was using stale `winfo_height()` instead of the current event height. Also updated `_on_canvas_configure` to pass both dimensions to the resize handler. This ensures that GUI components fill the full vertical space in the main application.
+- **PreviewEngine Aggressive Stripping**: Refined `_strip_constraints` in the editor's `PreviewEngine` to only remove dimensions from the structural root object. This prevents child widgets from having their intended sizes stripped away while still allowing the preview container to resize fluidly.
+
+## [20260429.0135.1] - 2026-04-29
+### Added
+- **Global Telemetry Footer**: Implemented a real-time dimension footer for all `DynamicGuiBuilder` windows. This footer displays the current `Viewport` (telemetry size) and `Content` (scrollable frame size) dimensions.
+- **Configurable Footer**: Added `FOOTER_ENABLED` setting to `config.ini` and `ConfigDefaults` to allow global toggling of the telemetry footer.
+### Fixed
+- **Resize Integrity**: Corrected a `NameError` in `_perform_canvas_resize` and ensured the footer updates dynamically during window manipulation.
+
+## [20260429.0140.1] - 2026-04-29
+### Fixed
+- **Footer Initialization**: Added an initial resize pass in the `_on_visibility` handler of `DynamicGuiBuilder` to ensure the footer is populated with non-zero dimensions as soon as the UI is physical.
+### Added
+- **Command Telemetry in Footer**: Hooked into `_transmit_command` to display the active MQTT transmission (widget name and value) directly in the footer. Added visual highlighting to the TX label to confirm successful command dispatch.
+
+## [20260429.0150.1] - 2026-04-29
+### Added
+- **Dedicated GUI Log Partition**: Implemented a new log sink in `oaLogging` that automatically redirects all graphics, rendering, and editor-related logs to `oaDataLogs/Gui/`. This partition captures events from `oaGui`, `oaGuiElements`, and `oaGuiEditorWYSIWYG`, as well as any logs tagged with GUI-specific categories.
+
+## [20260429.0155.1] - 2026-04-29
+### Fixed
+- **Footer Sync in Notebooks**: Renamed visibility handler to `_on_gui_visible` to ensure compatibility with `TabManagerMixin`. This ensures that footer dimensions are correctly updated when switching tabs in a `Notebook` (e.g., the Zoo window).
+- **Activity Pulse Visibility**: Added a forced UI update call during command transmission to ensure the TX label's color pulse is visible during heavy rendering tasks.
+### Added
+- **Enhanced Render Logging**: Updated `oaGuiElements/Core/background.py` to use the `RENDER` category for background generation events. These events are now correctly captured and redirected to the `oaDataLogs/Gui/` forensic logs.
+
+## [20260429.0160.1] - 2026-04-29
+### Fixed
+- **Telemetry Discrepancy**: Updated `UITrackingService` to report actual widget (viewport) dimensions instead of the `toplevel` window size. This ensures MQTT telemetry aligns perfectly with the GUI footer display.
+- **Local Telemetry Sync**: Implemented a callback system where MQTT geometry transmissions are mirrored back to the local footer's `GEO:` label for immediate verification.
+### Added
+- **Detailed Command Monitoring**: The footer now separates `GEO:` (Geometry) and `TX:` (Command) telemetry into dedicated labels. This allows you to monitor window movement and widget interactions simultaneously.
+
+## [20260429.0165.1] - 2026-04-29
+### Fixed
+- **Resize Signature Mismatch**: Corrected a `TypeError` in `oaGui/Managers/gui_re.py` where `_final_settle` was calling `_perform_canvas_resize` with the old single-argument signature. It now correctly passes both `width` and `height`.
+- **Bin-Level Footer Sync**: Updated `oaGui/Core/structural_assembler.py` to trigger the builder's `_update_footer` during structural resizing. This ensures that nested containers (bins) report their viewport and content dimensions to the telemetry footer.
+### Added
+- **Structural Render Tracing**: Redirected structural assembler logs to the `RENDER` category to ensure they are captured in the `oaDataLogs/Gui/` forensic stream.
+
+## [20260429.0170.1] - 2026-04-29
+### Changed
+- **Increased UI Responsiveness**: Reduced `RESIZE_WIDTH_THRESHOLD` from 20px to 5px. This ensures the GUI footer and background engine react much earlier to small growth or shrinkage of the window.
+- **Visual Feedback on Resize**: Updated the telemetry footer to pulse white whenever `Viewport` or `Content` dimensions change, providing immediate confirmation of layout scaling.
+
+## [20260429.0175.1] - 2026-04-29
+### Fixed
+- **Grid Expansion Integrity**: Corrected multiple instances where `tk.Frame` containers were defaulting to restricted sizes. Forced `grid_rowconfigure(0, weight=1)` on all tab frames and universal loaders to ensure the `DynamicGuiBuilder` can expand to fill the full vertical space.
+- **Root Geometry Protection**: Refined the `_strip_constraints` logic in the `PreviewEngine`. It now only removes dimensions from the structural root object, preserving the intended height/width of widgets defined within your JSON (like `OcaBin`).
+- **Forced Geometry Realization**: Added `self.update()` calls during the initial visibility pass of the builder. This forces the OS to calculate physical dimensions immediately, ensuring the footer and background engine don't initialize with "0x0" values.
+
+## [20260429.0180.1] - 2026-04-29
+### Fixed
+- **Container Height Collapse**: Eliminated a hardcoded 200px height default in `structural_assembler.py` for `OcaBin` objects. This allows containers to respect parent expansion weights and fill the full vertical height of the screen.
+- **Grid Expansion Reliability**: Replaced the `ttk.Frame` main content container in `DynamicGuiBuilder` with a standard `tk.Frame`. This bypasses style-based height clamping and ensures that `grid_rowconfigure(0, weight=1)` is respected by the OS rendering engine.
+
+## [20260429.0185.1] - 2026-04-29
+### Fixed
+- **TclError (Unknown Option -bg)**: Resolved a crash in the `DynamicGuiBuilder` by changing its inheritance from `ttk.Frame` to `tk.Frame`. This allows the builder to accept standard background configurations and ensures full compatibility with the industrial background engine.
+
+## [20260429.0190.1] - 2026-04-29
+### Fixed
+- **Telemetry Event Gating**: Implemented strict event source validation across `DynamicGuiBuilder`, `StructuralAssembler`, and `UITrackingService`. This prevents "Event Bubbling" where child widgets (like the footer or buttons) were accidentally triggering the parent's resize logic with their own small dimensions.
+- **Viewport/GEO Alignment**: Updated the resize handler to use a "Throttled Settle Pass" (`_trigger_final_resize`). This ensures that the dimensions reported in the footer and transmitted via MQTT are always derived from the physical, settled state of the window, eliminating the `42px` height discrepancy.
+
+## [20260429.0195.1] - 2026-04-29
+### Fixed
+- **Core Geometry Logic Restoration**: Surgically restored `oaGui/Workers/builder.py` to fix method corruption where `_perform_canvas_resize` and `_update_footer` logic had partially merged.
+- **Physical Pixel Synchronization**: Updated the footer calculation to query physical OS dimensions via `winfo_height()` during the throttled settle pass. This ensures that the `Viewport` height in the footer always matches the `GEO` height transmitted to MQTT.
+- **Expansion Weight Reinforcement**: Added mandatory parent-level grid row/column weight configuration during the visibility settle pass. This prevents nested containers from clamping the builder to a default 42px or 200px height.

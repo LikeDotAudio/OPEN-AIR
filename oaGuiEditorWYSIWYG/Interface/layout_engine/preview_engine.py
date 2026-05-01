@@ -14,10 +14,12 @@ from oaStateCache.Core.state_mirror_engine import StateMirrorEngine
 class PreviewEngine:
     """Manages the lifecycle and instantiation of the DynamicGuiBuilder preview."""
 
-    def __init__(self, render_area, on_focus_callback, workspace=None):
+    def __init__(self, render_area, on_focus_callback, workspace=None, subscriber_router=None, state_mirror_engine=None):
         self.render_area = render_area
         self.on_focus_callback = on_focus_callback
         self.workspace = workspace
+        self.subscriber_router = subscriber_router
+        self.state_mirror_engine = state_mirror_engine
         self.preview_builder = None
 
     def refresh(self, json_data, render_tier=None, superficial_pad=0):
@@ -58,10 +60,15 @@ class PreviewEngine:
 
     def _create_new_builder(self, render_data, render_tier, superficial_pad):
         """Instantiates a fresh DynamicGuiBuilder and attaches it to the render area."""
-        inert_engine = StateMirrorEngine(base_topic="PREVIEW", subscriber_router=None, root=None, state_cache_manager=None)
+        # ⚡ TELEMETRY LINK: Use real system services if provided, otherwise fallback to inert preview mode
+        if self.state_mirror_engine:
+            active_engine = self.state_mirror_engine
+        else:
+            active_engine = StateMirrorEngine(base_topic="PREVIEW", subscriber_router=None, root=None, state_cache_manager=None)
+            
         builder_config = {
-            "state_mirror_engine": inert_engine,
-            "subscriber_router": None,
+            "state_mirror_engine": active_engine,
+            "subscriber_router": self.subscriber_router,
             "on_focus_widget": self.on_focus_callback,
             "app_instance": self.workspace,
             "is_editor": True,
@@ -90,15 +97,24 @@ class PreviewEngine:
         return 'high_res'
 
     def _strip_constraints(self, data):
-        """Recursively removes fixed geometry to allow the preview to fluidly resize."""
+        """Recursively removes fixed geometry from the ROOT ONLY to allow fluid resizing."""
         if isinstance(data, dict):
-            if "geometry" in data and isinstance(data["geometry"], dict):
-                data["geometry"].pop("width", None)
-                data["geometry"].pop("height", None)
-            data.pop("width", None)
-            data.pop("height", None)
-            for v in data.values():
-                self._strip_constraints(v)
+            # ⚡ ROOT PROTECTION: Only strip dimensions if this is a structural wrapper (no 'type')
+            # If it has a 'type', it's the main widget (e.g. OcaBin) and we should respect its intent.
+            if "type" not in data:
+                if "geometry" in data and isinstance(data["geometry"], dict):
+                    data["geometry"].pop("width", None)
+                    data["geometry"].pop("height", None)
+                data.pop("width", None)
+                data.pop("height", None)
+                
+                # Recursively check children
+                for v in data.values():
+                    self._strip_constraints(v)
+            else:
+                # If it has a type, it's a widget. We stop stripping here 
+                # to ensure child containers inside the JSON keep their sizes.
+                pass
         elif isinstance(data, list):
             for item in data:
                 self._strip_constraints(item)

@@ -145,6 +145,8 @@ class PanelGenerator:
             adj_enamel_factor = max(1, ENAMEL_RESIZE_FACTOR / scale_factor)
             peel_texture = Image.effect_noise((int(width // adj_enamel_factor), int(height // adj_enamel_factor)), sigma=STREAK_SIGMA_CROSSHATCH).resize((width, height), Image.BICUBIC).convert("RGBA")
             panel_image = ImageChops.soft_light(panel_image, peel_texture)
+        elif texture_type == "flat":
+             matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name, "Using flat substrate.", "trace".upper())
         else:
             streak_sigma = STREAK_SIGMA_BRUSHED if texture_type == "brushed" else STREAK_SIGMA_DEFAULT
             matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name, f"Applying {texture_type} streak texture.", "trace".upper())

@@ -1,0 +1,12 @@
+digraph "oaComProtocols/oaComEmber/Core/include/communication/connection"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  compound=true
+  subgraph clusterdir_fe4bfb1da9f8520ad1f3f70b05922f76 {
+    graph [ bgcolor="#edf0f7", pencolor="grey50", label="communication", fontname=Helvetica,fontsize=10 style="filled,dashed", URL="dir_fe4bfb1da9f8520ad1f3f70b05922f76.html",tooltip=""]
+  dir_e6712e9cde771f896b3660bbc251f7de [label="connection", fillcolor="#edf0f7", color="grey25", style="filled,bold", URL="dir_e6712e9cde771f896b3660bbc251f7de.html",tooltip=""];
+  }
+}

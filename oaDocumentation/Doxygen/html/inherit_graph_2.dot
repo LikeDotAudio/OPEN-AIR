@@ -1,0 +1,27 @@
+digraph "Graphical Class Hierarchy"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node0 [id="Node000000",label="ABC",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
+  Node0 -> Node1 [id="edge1_Node000000_Node000001",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node1 [id="Node000001",label="Core.abc.EventTransport",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$db/d95/classCore_1_1abc_1_1EventTransport.html",tooltip=" "];
+  Node0 -> Node2 [id="edge2_Node000000_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="Core.is07_transport.Event\lTransport",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$d5/de5/classCore_1_1is07__transport_1_1EventTransport.html",tooltip=" "];
+  Node2 -> Node3 [id="edge3_Node000002_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="Core.is07_transport.Is07\lMqttTransport",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$d6/dec/classCore_1_1is07__transport_1_1Is07MqttTransport.html",tooltip=" "];
+  Node2 -> Node4 [id="edge4_Node000002_Node000004",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="Core.is07_transport.Is07\lWebSocketTransport",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$d9/dbb/classCore_1_1is07__transport_1_1Is07WebSocketTransport.html",tooltip=" "];
+  Node0 -> Node5 [id="edge5_Node000000_Node000005",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="abc.EventTransport",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$d4/d87/classabc_1_1EventTransport.html",tooltip=" "];
+  Node5 -> Node6 [id="edge6_Node000005_Node000006",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="Core.midi_mqtt_transport.\lMidiMqttTransport",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$de/dcf/classCore_1_1midi__mqtt__transport_1_1MidiMqttTransport.html",tooltip=" "];
+  Node5 -> Node7 [id="edge7_Node000005_Node000007",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node7 [id="Node000007",label="Core.osc_mqtt_transport.\lOscMqttTransport",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$de/d71/classCore_1_1osc__mqtt__transport_1_1OscMqttTransport.html",tooltip=" "];
+  Node5 -> Node8 [id="edge8_Node000005_Node000008",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node8 [id="Node000008",label="Core.rest_mqtt_transport.\lRestMqttTransport",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$dd/dcb/classCore_1_1rest__mqtt__transport_1_1RestMqttTransport.html",tooltip=" "];
+  Node5 -> Node9 [id="edge9_Node000005_Node000009",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node9 [id="Node000009",label="websocket_transport.WebSocket\lEventTransport",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$d8/da6/classwebsocket__transport_1_1WebSocketEventTransport.html",tooltip=" "];
+}

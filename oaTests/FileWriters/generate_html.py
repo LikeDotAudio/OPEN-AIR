@@ -9,7 +9,7 @@ import html
 
 class HTMLGenerator:
     @staticmethod
-    def render(html_path, timestamp, summary, details, extra_tabs):
+    def render(html_path, timestamp, summary, details, extra_tabs, doxygen_path=None):
         # HTML Report Template
         html_template = """
 <!DOCTYPE html>
@@ -269,6 +269,7 @@ class HTMLGenerator:
             <button class="tab-btn" onclick="openTab(event, 'RunLogs')">Application Run Logs</button>
             <button class="tab-btn" onclick="openTab(event, 'FlameGraph')">Flame Graph</button>
             <button class="tab-btn" onclick="openTab(event, 'Dependencies')">Dependencies</button>
+            <button class="tab-btn" onclick="openTab(event, 'Doxygen')">Doxygen</button>
         </div>
 
         <!-- TAB 1: Test Results -->
@@ -330,6 +331,13 @@ class HTMLGenerator:
         <div id="Dependencies" class="tab-content">
             {dependencies_html}
         </div>
+        
+        <!-- TAB 8: Doxygen -->
+        <div id="Doxygen" class="tab-content">
+            <h2>Doxygen Documentation</h2>
+            <p>The full Doxygen-generated documentation is available.</p>
+            <a href="{doxygen_link}" target="_blank" style="color: #33A1FD; text-decoration: none; font-weight: bold;">Click here to open the documentation</a>
+        </div>
     </div>
 </body>
 </html>
@@ -352,6 +360,8 @@ class HTMLGenerator:
             """
             table_rows.append(row)
 
+        doxygen_link_html = f'<a href="{doxygen_path}" target="_blank">Open Doxygen Documentation</a>' if doxygen_path else "Doxygen documentation not generated or path not provided."
+
         html_content = html_template.format(
             timestamp=timestamp,
             total=summary["total"],
@@ -365,7 +375,8 @@ class HTMLGenerator:
             error_html=extra_tabs.get("error", ""),
             runlog_html=extra_tabs.get("runlog", ""),
             flamegraph_html=extra_tabs.get("flamegraph", "No FlameGraph data available."),
-            dependencies_html=extra_tabs.get("dependencies", "No Dependency data available.")
+            dependencies_html=extra_tabs.get("dependencies", "No Dependency data available."),
+            doxygen_link=doxygen_link_html,
         )
 
         with open(html_path, "w") as f:

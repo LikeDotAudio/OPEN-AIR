@@ -100,17 +100,17 @@ class GuiMqttManagerMixin:
     #     None.
     def _publish_json_to_topic(self, json_data):
         """Publishes the entire JSON data to the base topic."""
-        # ⚡ ICE: User requested to stop GUI from announcing itself
-        #     payload = {
-        #         "value": json_data,
-        #         "source": "GUI-INIT",
-        #         "timestamp": time.time(),
-        #         "GUID": self.state_mirror_engine.GUID,
-        #     }
-        #     # ⚡ CONSISTENCY: Use engine to calculate absolute topic
-        #     full_topic = self.state_mirror_engine.calculate_topic("", self.base_mqtt_topic_from_path)
-        #     self.state_mirror_engine.publish_command(full_topic, orjson.dumps(payload).decode())
-        pass
+        # ⚡ RESTORED: User requested GUI to announce itself always.
+        if self.state_mirror_engine:
+            payload = {
+                "value": json_data,
+                "source": "GUI-INIT",
+                "timestamp": time.time(),
+                "GUID": self.state_mirror_engine.GUID,
+            }
+            # ⚡ CONSISTENCY: Use engine to calculate absolute topic
+            full_topic = self.state_mirror_engine.calculate_topic("", self.base_mqtt_topic_from_path)
+            self.state_mirror_engine.publish_command(full_topic, orjson.dumps(payload).decode())
 
     def _publish_initial_widget_states(self, config_data):
         """
@@ -131,6 +131,9 @@ class GuiMqttManagerMixin:
     def _transmit_command(self, widget_name: str, value):
         """Centralized method for sending GUI updates to MQTT."""
         if self.state_mirror_engine:
+            if hasattr(self, '_log_command_tx'):
+                self._log_command_tx(f"{widget_name} -> {value}")
+
             if self.state_mirror_engine.is_widget_registered(widget_name):
                 self.state_mirror_engine.broadcast_gui_change_to_mqtt(widget_name)
             else:

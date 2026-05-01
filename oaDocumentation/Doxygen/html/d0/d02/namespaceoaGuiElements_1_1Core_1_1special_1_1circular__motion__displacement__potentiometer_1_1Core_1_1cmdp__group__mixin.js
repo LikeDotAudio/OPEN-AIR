@@ -1,0 +1,5 @@
+var namespaceoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_1_1cmdp__group__mixin =
+[
+    [ "CMDPGroupMixin", "dd/dde/classoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_14ece0bf57acf9aebd229cd3b6aff9cf1.html", "dd/dde/classoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_14ece0bf57acf9aebd229cd3b6aff9cf1" ],
+    [ "ACCENT_COLOR", "d0/d02/namespaceoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_1_1cmdp__group__mixin.html#ac79fb444867739553c01628493d4309d", null ]
+];

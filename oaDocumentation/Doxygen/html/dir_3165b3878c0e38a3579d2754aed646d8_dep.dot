@@ -1,0 +1,12 @@
+digraph "oaStand_Alone_Utilities/Methods/log_viewer"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  compound=true
+  subgraph clusterdir_4e5c14f104a233615b09083602db77da {
+    graph [ bgcolor="#edf0f7", pencolor="grey50", label="Methods", fontname=Helvetica,fontsize=10 style="filled,dashed", URL="dir_4e5c14f104a233615b09083602db77da.html",tooltip=""]
+  dir_3165b3878c0e38a3579d2754aed646d8 [label="log_viewer", fillcolor="#edf0f7", color="grey25", style="filled,bold", URL="dir_3165b3878c0e38a3579d2754aed646d8.html",tooltip=""];
+  }
+}

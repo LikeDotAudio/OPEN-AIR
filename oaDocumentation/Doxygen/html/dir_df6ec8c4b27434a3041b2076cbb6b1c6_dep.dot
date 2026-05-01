@@ -1,0 +1,12 @@
+digraph "oaPTP/Workers"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  compound=true
+  subgraph clusterdir_1fa9eee6f758137f16ed120c80439026 {
+    graph [ bgcolor="#edf0f7", pencolor="grey25", label="oaPTP", fontname=Helvetica,fontsize=10 style="filled,dashed", URL="dir_1fa9eee6f758137f16ed120c80439026.html",tooltip=""]
+  dir_df6ec8c4b27434a3041b2076cbb6b1c6 [label="Workers", fillcolor="#edf0f7", color="grey25", style="filled,bold", URL="dir_df6ec8c4b27434a3041b2076cbb6b1c6.html",tooltip=""];
+  }
+}

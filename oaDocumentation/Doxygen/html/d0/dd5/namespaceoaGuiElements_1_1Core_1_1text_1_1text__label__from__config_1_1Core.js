@@ -1,0 +1,4 @@
+var namespaceoaGuiElements_1_1Core_1_1text_1_1text__label__from__config_1_1Core =
+[
+    [ "text_label_from_config", "d0/d1c/namespaceoaGuiElements_1_1Core_1_1text_1_1text__label__from__config_1_1Core_1_1text__label__from__config.html", "d0/d1c/namespaceoaGuiElements_1_1Core_1_1text_1_1text__label__from__config_1_1Core_1_1text__label__from__config" ]
+];

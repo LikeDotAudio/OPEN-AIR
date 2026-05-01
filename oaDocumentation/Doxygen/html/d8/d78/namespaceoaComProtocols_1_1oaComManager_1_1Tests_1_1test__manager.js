@@ -1,0 +1,4 @@
+var namespaceoaComProtocols_1_1oaComManager_1_1Tests_1_1test__manager =
+[
+    [ "TestComProtocolManagerSanity", "d8/df2/classoaComProtocols_1_1oaComManager_1_1Tests_1_1test__manager_1_1TestComProtocolManagerSanity.html", "d8/df2/classoaComProtocols_1_1oaComManager_1_1Tests_1_1test__manager_1_1TestComProtocolManagerSanity" ]
+];

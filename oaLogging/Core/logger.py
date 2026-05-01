@@ -115,10 +115,12 @@ def initialize_logging(config, log_dir=None, partition="SYS"):
         run_log_dir = os.path.join(log_dir, "ApplicationRunLog")
         error_log_dir = os.path.join(log_dir, "Errors")
         comms_log_dir = os.path.join(log_dir, "Comms")
+        gui_log_dir = os.path.join(log_dir, "Gui")
 
         os.makedirs(run_log_dir, exist_ok=True)
         os.makedirs(error_log_dir, exist_ok=True)
         os.makedirs(comms_log_dir, exist_ok=True)
+        os.makedirs(gui_log_dir, exist_ok=True)
 
         # 2. --- Application Log Sink ---
         app_log_pattern = os.path.join(run_log_dir, "Application_{time}.log")
@@ -129,7 +131,31 @@ def initialize_logging(config, log_dir=None, partition="SYS"):
             backtrace=True, diagnose=True
         )
 
-        # 3. --- Isolated Error Log Sink ---
+        # 3. --- Dedicated GUI/Render Log Sink ---
+        gui_log_pattern = os.path.join(gui_log_dir, "GuiRender_{time}.log")
+        
+        def gui_filter(record):
+            # 1. Filter by Module Name
+            module_name = record["name"]
+            if any(m in module_name for m in ["oaGui", "oaGuiElements", "oaGuiEditorWYSIWYG"]):
+                return rust_gate_filter(record)
+            
+            # 2. Filter by Category
+            category = record["extra"].get("category", "").upper()
+            gui_keywords = ["GUI", "RENDER", "LAYOUT", "WYSIWYG", "BUILDER"]
+            if any(kw in category for kw in gui_keywords):
+                return rust_gate_filter(record)
+                
+            return False
+
+        logger.add(
+            BatchLogSink(gui_log_pattern, format_str=file_format_plain, batch_size=PROTOCOL_LOG_BATCH_SIZE, interval=PROTOCOL_LOG_INTERVAL),
+            format=file_format_plain, level=file_level,
+            filter=gui_filter,
+            backtrace=True, diagnose=True
+        )
+
+        # 4. --- Isolated Error Log Sink ---
         error_log_pattern = os.path.join(error_log_dir, "errors_{time}.log")
         logger.add(
             BatchLogSink(error_log_pattern, format_str=file_format_plain, batch_size=ERROR_LOG_BATCH_SIZE, interval=ERROR_LOG_INTERVAL),

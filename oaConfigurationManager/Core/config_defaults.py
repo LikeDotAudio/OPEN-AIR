@@ -21,6 +21,7 @@ class ConfigDefaults:
     UI_LAYOUT_FULL_WEIGHT = 100
     SHOW_RELOAD_BUTTON = True
     RELOAD_CONFIG_DISPLAYED = False
+    FOOTER_ENABLED = True
 
     # System
     MISSION_CRITICAL_MODE = False

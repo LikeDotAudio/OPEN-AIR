@@ -1,0 +1,4 @@
+var namespaceoaGuiElements_1_1Core_1_1text_1_1text__label__from__config_1_1Interface =
+[
+    [ "text_label_from_config_editor", "d9/d18/namespaceoaGuiElements_1_1Core_1_1text_1_1text__label__from__config_1_1Interface_1_1text__label__from__config__editor.html", "d9/d18/namespaceoaGuiElements_1_1Core_1_1text_1_1text__label__from__config_1_1Interface_1_1text__label__from__config__editor" ]
+];

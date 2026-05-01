@@ -36,7 +36,12 @@ DEFAULT_THEME_BACKGROUND = "#2b2b2b"
 # Structural widget types that default to transparency
 STRUCTURAL_WIDGET_TYPES = [
     "OcaBlock", "OcaBin", "OcaArray", "OcaCollapsibleBlock",
-    "Block", "Array", "Bin", "_Label", "_SmartLabel", "_GuiLabel", "Label"
+    "Block", "Array", "Bin", "_Label", "_SmartLabel", "_GuiLabel", "Label",
+    "_CustomLTP", "_Fader", "_SmartFader", "_CustomFader", 
+    "_CustomHorizontalFader", "_CustomDualHorizontalFader", "_CustomDualVerticalFader",
+    "_CompositeFader", "_FaderWithBarGraph", "_BarGraph", "_SmartMeter", 
+    "MeterBar", "_MeterBar", "_VUMeterKnob", "_NeedleVUMeter",
+    "_MDP", "_CMDP", "SelectorSwitch", "_SelectorSwitch"
 ]
 
 # Standard background colors for theme matching

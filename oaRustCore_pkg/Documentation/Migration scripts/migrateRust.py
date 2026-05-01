@@ -30,7 +30,7 @@ CRATES = [
     "oaPTP/Methods/oaPtpParser_rs",
     "oaGui/Methods/oaFastDir_rs",
     "oaGui/Methods/oaLayoutEngine_rs",
-    "oaGuiBackground/Methods/oaPatternEngine_rs",
+    "oaGuiElements/Methods/oaPatternEngine_rs",
     "oaGui/Core/oaGeometryMath_rs",
     "oaGuiEditorWYSIWYG/Core/oaEditorState_rs",
     "oaGuiEditorWYSIWYG/Methods/oaHitboxMath_rs",

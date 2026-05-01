@@ -1,0 +1,17 @@
+digraph "oaGui/Assets/Window_2/right_50/top_100/9_Zoo/4_graphing"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  compound=true
+  subgraph clusterdir_7194c78d441a8b6ec55d992a49110c6a {
+    graph [ bgcolor="#edf0f7", pencolor="grey50", label="9_Zoo", fontname=Helvetica,fontsize=10 style="filled,dashed", URL="dir_7194c78d441a8b6ec55d992a49110c6a.html",tooltip=""]
+  subgraph clusterdir_3260a31e9de486159a8208a150f44ea4 {
+    graph [ bgcolor="#edf0f7", pencolor="grey25", label="", fontname=Helvetica,fontsize=10 style="filled,bold", URL="dir_3260a31e9de486159a8208a150f44ea4.html",tooltip=""]
+    dir_3260a31e9de486159a8208a150f44ea4 [shape=plaintext, label="4_graphing"];
+  dir_072d0efab2e6788742a9c8eebb300fc9 [label="0_radar", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_072d0efab2e6788742a9c8eebb300fc9.html",tooltip=""];
+  dir_02a808c06758fb12f344ab51ecbf87e3 [label="1_XY_Graphs", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_02a808c06758fb12f344ab51ecbf87e3.html",tooltip=""];
+  }
+  }
+}

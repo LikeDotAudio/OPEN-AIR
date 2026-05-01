@@ -1,0 +1,5 @@
+var namespaceoaGuiElements_1_1Core_1_1text_1_1text__label__from__config_1_1Core_1_1text__label__from__config =
+[
+    [ "BuilderTextLabelFromConfigCreator", "d1/ddf/classoaGuiElements_1_1Core_1_1text_1_1text__label__from__config_1_1Core_1_1text__label__from__co24a2b6ed02cef6ac8a0be6062a381ac0.html", "d1/ddf/classoaGuiElements_1_1Core_1_1text_1_1text__label__from__config_1_1Core_1_1text__label__from__co24a2b6ed02cef6ac8a0be6062a381ac0" ],
+    [ "app_constants", "d0/d1c/namespaceoaGuiElements_1_1Core_1_1text_1_1text__label__from__config_1_1Core_1_1text__label__from__config.html#a2f88db492e47ccaaf6ce81f3bb071932", null ]
+];

@@ -70,8 +70,8 @@ class GuiRebuilderMixin:
 
             def _final_settle():
                 if not self.winfo_exists(): return
-                if hasattr(self, '_perform_canvas_resize') and hasattr(self, 'canvas') and self.canvas.winfo_exists():
-                    self._perform_canvas_resize(self.canvas.winfo_width())
+                if hasattr(self, '_perform_canvas_resize') and getattr(self, 'canvas', None) is not None and self.canvas.winfo_exists():
+                    self._perform_canvas_resize(self.canvas.winfo_width(), self.canvas.winfo_height())
 
                 if hasattr(self, '_trigger_reslice_all'):
                     self._trigger_reslice_all()

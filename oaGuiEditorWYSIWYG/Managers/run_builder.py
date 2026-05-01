@@ -9,10 +9,19 @@ import signal
 import sys
 import tkinter as tk
 
+# ⚡ BOOTSTRAP: Resolve project root and add to sys.path before any project imports
+project_root = pathlib.Path(__file__).resolve().parent.parent.parent
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
+
 import orjson
 
 from oaLogging.Methods.matrix_gate import matrix_log
-
+from oaGuiEditorWYSIWYG.Managers.runner.runner_env import RunnerEnvironment
+from oaLogging.Core.logger import WYSIWYG_LOGGER
+from oaStyle.Managers.theme_applier import apply_theme
+from oaGuiEditorWYSIWYG.Managers.wysiwyg_editor import WysiwygEditor
+from oaGuiEditorWYSIWYG.Managers.runner.mqtt_tester import MqttTester
 
 class StandaloneRunner:
     """Orchestrates the boot sequence and lifecycle of the Standalone WYSIWYG Builder."""
@@ -24,15 +33,8 @@ class StandaloneRunner:
 
     def run(self):
         """Main execution flow."""
-        # 1. Bootstrap Environment (Crucial: must happen BEFORE other imports)
-        from .runner.runner_env import RunnerEnvironment
+        # 1. Setup Environment
         config = RunnerEnvironment.setup()
-
-        # 2. Lazy Imports of project modules
-        from oaLogging.Core.logger import WYSIWYG_LOGGER
-        from oaStyle.Managers.theme_applier import apply_theme
-
-        from .wysiwyg_editor import WysiwygEditor
 
         self.logger = WYSIWYG_LOGGER.bind(protocol="WYSIWYG")
 
@@ -83,7 +85,6 @@ class StandaloneRunner:
 
     def _handle_test_request(self, new_data):
         """Relays editor 'Test' events to the MQTT test bridge."""
-        from .runner.mqtt_tester import MqttTester
         MqttTester.publish_rebuild(self.json_path, new_data)
 
     def _bind_signals(self):

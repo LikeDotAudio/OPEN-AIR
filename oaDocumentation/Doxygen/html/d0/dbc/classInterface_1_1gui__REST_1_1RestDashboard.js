@@ -1,0 +1,27 @@
+var classInterface_1_1gui__REST_1_1RestDashboard =
+[
+    [ "__init__", "d0/dbc/classInterface_1_1gui__REST_1_1RestDashboard.html#af9fda22831ef74cdc019016df6345117", null ],
+    [ "_add_log_entry", "d0/dbc/classInterface_1_1gui__REST_1_1RestDashboard.html#af53df5694c77e6224c8665168516a9ee", null ],
+    [ "_open_browser", "d0/dbc/classInterface_1_1gui__REST_1_1RestDashboard.html#a6be3bfd692ff60d45e16d54a7c49c62e", null ],
+    [ "_open_explorer", "d0/dbc/classInterface_1_1gui__REST_1_1RestDashboard.html#abf06b97070b0b4335519b86858dbcf9f", null ],
+    [ "_refresh_ui", "d0/dbc/classInterface_1_1gui__REST_1_1RestDashboard.html#aaf9fe77aaa49eb52d0815741aa665ad5", null ],
+    [ "_schedule_refresh", "d0/dbc/classInterface_1_1gui__REST_1_1RestDashboard.html#a7a5ad55d4097cb2d1c1982380e4ddfa8", null ],
+    [ "_setup_ui", "d0/dbc/classInterface_1_1gui__REST_1_1RestDashboard.html#a91cf498270c788698bbef9b965ffbeb8", null ],
+    [ "destroy", "d0/dbc/classInterface_1_1gui__REST_1_1RestDashboard.html#a3de745ef7fc7cbaadec3a80953c8c0d9", null ],
+    [ "on_rest_activity", "d0/dbc/classInterface_1_1gui__REST_1_1RestDashboard.html#a251578f0b7a2f80b76b394a39787699b", null ],
+    [ "render", "d0/dbc/classInterface_1_1gui__REST_1_1RestDashboard.html#aaa09dd09e92ce0b97972f68fd0b53f1c", null ],
+    [ "_destroyed", "d0/dbc/classInterface_1_1gui__REST_1_1RestDashboard.html#a46b5fb172f6b0fe9412213a8d0212d52", null ],
+    [ "_schedule_refresh", "d0/dbc/classInterface_1_1gui__REST_1_1RestDashboard.html#a8358f3900dc26aa0d959da5f385eac83", null ],
+    [ "btn_browser", "d0/dbc/classInterface_1_1gui__REST_1_1RestDashboard.html#ac25ba5a759ddd76fa4f39a6e8618171f", null ],
+    [ "btn_explorer", "d0/dbc/classInterface_1_1gui__REST_1_1RestDashboard.html#a28d15cfcb4fb8f1eb2262e4f2a283fe4", null ],
+    [ "config_data", "d0/dbc/classInterface_1_1gui__REST_1_1RestDashboard.html#a55730c1b446252ed4153d6209d8a1b30", null ],
+    [ "footer_lbl", "d0/dbc/classInterface_1_1gui__REST_1_1RestDashboard.html#a3c6bceef0b94469fc672e8613206c804", null ],
+    [ "info_tree", "d0/dbc/classInterface_1_1gui__REST_1_1RestDashboard.html#ae2368405e734b2a38651d0e305395d1a", null ],
+    [ "json_path", "d0/dbc/classInterface_1_1gui__REST_1_1RestDashboard.html#af59221607bc06de80451bd9baa779711", null ],
+    [ "on_rest_activity", "d0/dbc/classInterface_1_1gui__REST_1_1RestDashboard.html#a9c9bbd740a032856dafcb80a78d02793", null ],
+    [ "paned", "d0/dbc/classInterface_1_1gui__REST_1_1RestDashboard.html#ad894f5d8a423979f7252ce2ffa962c3a", null ],
+    [ "routes_frame", "d0/dbc/classInterface_1_1gui__REST_1_1RestDashboard.html#ac6361ed6bc4f61edb8d6807f03e78f13", null ],
+    [ "routes_tree", "d0/dbc/classInterface_1_1gui__REST_1_1RestDashboard.html#a64f471eae252ccfc8ff0bf710695d4a2", null ],
+    [ "status_lbl", "d0/dbc/classInterface_1_1gui__REST_1_1RestDashboard.html#ad9839042bc7d9309354fa7764ee36c80", null ],
+    [ "tree", "d0/dbc/classInterface_1_1gui__REST_1_1RestDashboard.html#ab354b1898fa05f99b9aeef2c411abf4a", null ]
+];

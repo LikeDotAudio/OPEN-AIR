@@ -1,0 +1,4 @@
+var namespaceoaGuiElements_1_1Core_1_1Knobs_1_1knob__rotary__selector_1_1Interface_1_1knob__rotary__selector__editor =
+[
+    [ "KnobRotarySelectorEditor", "d2/d0e/classoaGuiElements_1_1Core_1_1Knobs_1_1knob__rotary__selector_1_1Interface_1_1knob__rotary__sele9055cd7a6d853e6c6a964595b0aa2494.html", "d2/d0e/classoaGuiElements_1_1Core_1_1Knobs_1_1knob__rotary__selector_1_1Interface_1_1knob__rotary__sele9055cd7a6d853e6c6a964595b0aa2494" ]
+];

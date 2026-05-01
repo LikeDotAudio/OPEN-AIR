@@ -1,0 +1,25 @@
+var classoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core_1_1tester_1_1MultiFaderApp =
+[
+    [ "__init__", "d3/d8b/classoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core_1_1tester_1_1MultiFaderApp.html#a870a35cb488df80836463b5c48c9080f", null ],
+    [ "get_fader_at", "d3/d8b/classoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core_1_1tester_1_1MultiFaderApp.html#a8d23c66cfae3d6125a452cab3248fa58", null ],
+    [ "on_click", "d3/d8b/classoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core_1_1tester_1_1MultiFaderApp.html#adc4345351478e547e3a0830daf255134", null ],
+    [ "on_drag", "d3/d8b/classoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core_1_1tester_1_1MultiFaderApp.html#a8ab5010638414d800bac318d618d9db9", null ],
+    [ "on_mid_click", "d3/d8b/classoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core_1_1tester_1_1MultiFaderApp.html#a09b434d1019332f00cbbd7c53f7e6176", null ],
+    [ "on_mid_drag", "d3/d8b/classoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core_1_1tester_1_1MultiFaderApp.html#a4ab7922ab4f85a18d038af6b2d825858", null ],
+    [ "on_motion", "d3/d8b/classoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core_1_1tester_1_1MultiFaderApp.html#aeaebb8727b938e116ec97c58f75aa6f8", null ],
+    [ "on_release", "d3/d8b/classoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core_1_1tester_1_1MultiFaderApp.html#a924570156acafbac0f71e9c6dfc8da8d", null ],
+    [ "on_scroll", "d3/d8b/classoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core_1_1tester_1_1MultiFaderApp.html#a1d796a9efa656004319543424d3b2a55", null ],
+    [ "update_table", "d3/d8b/classoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core_1_1tester_1_1MultiFaderApp.html#aaba9d2a3e1bbaf7c6e9578e370d71dee", null ],
+    [ "active_fader", "d3/d8b/classoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core_1_1tester_1_1MultiFaderApp.html#ad97d6fa9c076e529c1e86dc9188e9f2e", null ],
+    [ "canvas", "d3/d8b/classoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core_1_1tester_1_1MultiFaderApp.html#af48a3e8de3a9e36d9b78e18331ca9e42", null ],
+    [ "faders", "d3/d8b/classoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core_1_1tester_1_1MultiFaderApp.html#a4d7dcfcd35f4760af9eebff5378af763", null ],
+    [ "hovered_fader", "d3/d8b/classoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core_1_1tester_1_1MultiFaderApp.html#ae30cd4e2be0f8af4e51c0f5d398f5ecc", null ],
+    [ "on_click", "d3/d8b/classoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core_1_1tester_1_1MultiFaderApp.html#a7881253bbe23f535710a42ed2212e698", null ],
+    [ "on_drag", "d3/d8b/classoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core_1_1tester_1_1MultiFaderApp.html#aa61864e6699b2b04c871493f463649a1", null ],
+    [ "on_mid_click", "d3/d8b/classoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core_1_1tester_1_1MultiFaderApp.html#aba67bfc2c81b6924e1f90e1b82a7ff09", null ],
+    [ "on_mid_drag", "d3/d8b/classoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core_1_1tester_1_1MultiFaderApp.html#ac10ce4e0868e1552caa0952db7a5534d", null ],
+    [ "on_motion", "d3/d8b/classoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core_1_1tester_1_1MultiFaderApp.html#af5bdfbddd6b78cb51b7d8938866de8dc", null ],
+    [ "on_release", "d3/d8b/classoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core_1_1tester_1_1MultiFaderApp.html#a07db74e225cc6ee7f8f439af19b1c986", null ],
+    [ "on_scroll", "d3/d8b/classoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core_1_1tester_1_1MultiFaderApp.html#ac503daa0d7f17643ec1f8c6e8099c207", null ],
+    [ "tree", "d3/d8b/classoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core_1_1tester_1_1MultiFaderApp.html#a7da227d549f097ad27d2260813fcc043", null ]
+];

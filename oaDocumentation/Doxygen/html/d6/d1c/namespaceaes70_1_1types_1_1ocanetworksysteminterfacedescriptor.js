@@ -1,0 +1,5 @@
+var namespaceaes70_1_1types_1_1ocanetworksysteminterfacedescriptor =
+[
+    [ "IOcaNetworkSystemInterfaceDescriptor", "de/d68/classaes70_1_1types_1_1ocanetworksysteminterfacedescriptor_1_1IOcaNetworkSystemInterfaceDescriptor.html", "de/d68/classaes70_1_1types_1_1ocanetworksysteminterfacedescriptor_1_1IOcaNetworkSystemInterfaceDescriptor" ],
+    [ "OcaNetworkSystemInterfaceDescriptor", "d5/d83/classaes70_1_1types_1_1ocanetworksysteminterfacedescriptor_1_1OcaNetworkSystemInterfaceDescriptor.html", "d5/d83/classaes70_1_1types_1_1ocanetworksysteminterfacedescriptor_1_1OcaNetworkSystemInterfaceDescriptor" ]
+];

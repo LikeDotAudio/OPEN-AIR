@@ -1,0 +1,4 @@
+var namespaceoaGuiElements_1_1Core_1_1faders_1_1fader__bar__graph_1_1Interface =
+[
+    [ "fader_bar_graph_editor", "d1/d25/namespaceoaGuiElements_1_1Core_1_1faders_1_1fader__bar__graph_1_1Interface_1_1fader__bar__graph__editor.html", "d1/d25/namespaceoaGuiElements_1_1Core_1_1faders_1_1fader__bar__graph_1_1Interface_1_1fader__bar__graph__editor" ]
+];

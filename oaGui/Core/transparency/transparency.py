@@ -49,14 +49,46 @@ class BackgroundSlicer:
         self.builder = builder
         self.widget_name = widget_name
 
+    def _find_parent_builder(self, start_builder):
+        """Traverses up the widget tree to find a parent DynamicGuiBuilder."""
+        curr = start_builder.master
+        while curr:
+            if hasattr(curr, 'builder_instance') and curr.builder_instance:
+                return curr.builder_instance
+            # Some modules might attach the builder reference directly to the frame
+            if hasattr(curr, 'dynamic_gui') and curr.dynamic_gui:
+                return curr.dynamic_gui
+            parent_path = curr.winfo_parent()
+            if not parent_path: break
+            curr = curr.nametowidget(parent_path)
+        return None
+
     def perform_slice(self, source_bg_pil=None, scroll_ref=None, scroll_root_x=None, scroll_root_y=None):
         if not self.widget.winfo_exists(): return False
 
         rendering_target = self.canvas if self.canvas and self.canvas.winfo_exists() else self.widget
-        background_source = source_bg_pil or getattr(self.builder, 'panel_bg_pil', None)
-
+        
+        # ⚡ RECURSIVE SOURCE DISCOVERY: Find the nearest ancestor builder with a real background
+        background_source = source_bg_pil
+        container_ref = scroll_ref
+        
+        # If we weren't given a source, or the source we have is empty, look up the tree
         if not background_source:
-            # [ ... rest of the existing fallback logic remains mostly same but using the same improved color check ...]
+            current_builder = self.builder
+            while current_builder:
+                background_source = getattr(current_builder, 'panel_bg_pil', None)
+                if background_source:
+                    container_ref = getattr(current_builder, 'scroll_frame', None)
+                    break
+                
+                parent_builder = getattr(current_builder, 'parent_builder', None)
+                if not parent_builder:
+                    parent_builder = self._find_parent_builder(current_builder)
+                current_builder = parent_builder
+
+        if not background_source or not container_ref:
+            # [ ... rest of the existing fallback logic ...]
+            # [ ... rest of the existing fallback logic ...]
             background_config = getattr(self.builder, 'config_data', {}).get("background")
             app_inst = getattr(self.builder, 'app_instance', None)
             show_bg_toggle = getattr(app_inst, 'show_background_var', None)

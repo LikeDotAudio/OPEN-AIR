@@ -1,0 +1,6 @@
+var classoaGuiElements_1_1Core_1_1buttons_1_1button__trapezoid_1_1Core_1_1trapezoid__interaction__mia605c79f68f2a92b81cd5af22eaab567 =
+[
+    [ "_on_press", "d4/de4/classoaGuiElements_1_1Core_1_1buttons_1_1button__trapezoid_1_1Core_1_1trapezoid__interaction__mia605c79f68f2a92b81cd5af22eaab567.html#a295441c86fe059b706ffc2601a06fbcd", null ],
+    [ "_on_release", "d4/de4/classoaGuiElements_1_1Core_1_1buttons_1_1button__trapezoid_1_1Core_1_1trapezoid__interaction__mia605c79f68f2a92b81cd5af22eaab567.html#a8e0c882a14bc16b3efd8482dcae091ea", null ],
+    [ "_is_pressed", "d4/de4/classoaGuiElements_1_1Core_1_1buttons_1_1button__trapezoid_1_1Core_1_1trapezoid__interaction__mia605c79f68f2a92b81cd5af22eaab567.html#afe26dca61e4cba50a3f838f287029f7a", null ]
+];

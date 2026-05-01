@@ -1,0 +1,8 @@
+var classoaGuiElements_1_1Core_1_1utils_1_1composite__horizontal__dial__value_1_1Core_1_1composite__8596c610975f0987301e41b2956f23a9 =
+[
+    [ "_assemble_ui", "d8/d63/classoaGuiElements_1_1Core_1_1utils_1_1composite__horizontal__dial__value_1_1Core_1_1composite__8596c610975f0987301e41b2956f23a9.html#ac5e19d9874407ee71185bf3270d0a749", null ],
+    [ "make", "d8/d63/classoaGuiElements_1_1Core_1_1utils_1_1composite__horizontal__dial__value_1_1Core_1_1composite__8596c610975f0987301e41b2956f23a9.html#a235870d568f5ed0918917f17b0fc9b34", null ],
+    [ "make_fader_horizontal", "d8/d63/classoaGuiElements_1_1Core_1_1utils_1_1composite__horizontal__dial__value_1_1Core_1_1composite__8596c610975f0987301e41b2956f23a9.html#a30da7e8cd0d209dedd80624994d300ac", null ],
+    [ "make_knob", "d8/d63/classoaGuiElements_1_1Core_1_1utils_1_1composite__horizontal__dial__value_1_1Core_1_1composite__8596c610975f0987301e41b2956f23a9.html#a8a8908bd4a8dc5aeae2278a509ab6db5", null ],
+    [ "is_composite", "d8/d63/classoaGuiElements_1_1Core_1_1utils_1_1composite__horizontal__dial__value_1_1Core_1_1composite__8596c610975f0987301e41b2956f23a9.html#a39ae5f8f8467a1fe8cc87ec7827fd97e", null ]
+];

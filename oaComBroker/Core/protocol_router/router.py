@@ -95,14 +95,13 @@ class ProtocolRouter:
         }
 
         # ⚡ HUB-AND-SPOKE: Boolean enablement maps
-        # Disconnect all routing by default as per user request.
-        # This allows protocols to free-run asynchronously without central bridging.
-        self.ingest_enabled = {p: False for p in self.protocols}
-        self.egress_enabled = {p: False for p in self.protocols}
+        # Enable all routing by default as per user request.
+        self.ingest_enabled = {p: True for p in self.protocols}
+        self.egress_enabled = {p: True for p in self.protocols}
 
         # ⚡ V3.1.25 LEGACY COMPATIBILITY: Restore N x N Routing Matrix
         # Many UI components still expect this structure for granular visualization.
-        self.routing_matrix = {source: {destination: False for destination in self.protocols} for source in self.protocols}
+        self.routing_matrix = {source: {destination: True for destination in self.protocols} for source in self.protocols}
         # Standard loopback prevention
         for p in self.protocols:
             self.routing_matrix[p][p] = False

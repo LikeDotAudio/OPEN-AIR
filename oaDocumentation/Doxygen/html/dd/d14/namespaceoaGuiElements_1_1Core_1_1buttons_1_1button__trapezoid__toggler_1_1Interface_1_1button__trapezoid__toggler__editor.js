@@ -1,0 +1,4 @@
+var namespaceoaGuiElements_1_1Core_1_1buttons_1_1button__trapezoid__toggler_1_1Interface_1_1button__trapezoid__toggler__editor =
+[
+    [ "ButtonTrapezoidTogglerEditor", "dc/d2f/classoaGuiElements_1_1Core_1_1buttons_1_1button__trapezoid__toggler_1_1Interface_1_1button__trap8ec4f814081d0e04a5ff5450af97ec85.html", "dc/d2f/classoaGuiElements_1_1Core_1_1buttons_1_1button__trapezoid__toggler_1_1Interface_1_1button__trap8ec4f814081d0e04a5ff5450af97ec85" ]
+];

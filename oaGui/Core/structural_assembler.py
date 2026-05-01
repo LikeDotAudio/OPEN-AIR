@@ -31,10 +31,21 @@ class StructuralAssembler:
         hull.grid_rowconfigure(0, weight=1)
         hull.grid_columnconfigure(0, weight=1)
 
-        # 📏 GEOMETRY: Extract explicit size or default to 200x200
+        # 📏 GEOMETRY: Extract explicit size or default to minimal to allow expansion
         geom = value.get("geometry", {})
-        w = value.get("width") or geom.get("width") or 200
-        h = value.get("height") or geom.get("height") or 200
+        w = value.get("width") or geom.get("width") or 1
+        h = value.get("height") or geom.get("height") or 1
+
+        # ⚡ BEHAVIOR: Check for scrolling override
+        behavior = value.get("behavior", {})
+        allow_scrolling = behavior.get("allow_scrolling", True)
+
+        if not allow_scrolling:
+            # ⚡ OVERLAY MODE: Build directly into a transparent canvas without scrollbars
+            inner = tk.Canvas(hull, bg="#2b2b2b", bd=0, highlightthickness=0, width=w, height=h)
+            inner.grid(row=0, column=0, sticky="nsew")
+            TransparencyManager.apply_transparency(hull, inner, value, builder)
+            return hull, inner
 
         # ⚡ VIEWPORT: The scrollable canvas
         viewport = tk.Canvas(hull, bd=0, highlightthickness=0, bg="#2b2b2b", width=w, height=h)
@@ -56,19 +67,24 @@ class StructuralAssembler:
 
         # ⚡ RESPONSIVE SYNC: Track canvas size to allow inner frame to fill viewport
         def _on_canvas_configure(event):
+            # ⚡ EVENT GATE: Ignore resize events from gridded children (like buttons/knobs)
+            if event.widget != viewport: return
+            
             # Track width for horizontal stretching
             # Track height to ensure background fills the viewport even when content is short
             # Use max(req_height, event.height) to allow scrolling if content is tall
+            req_w = inner.winfo_reqwidth()
             req_h = inner.winfo_reqheight()
             new_h = max(event.height, req_h)
             
             from oaLogging.Methods.matrix_gate import matrix_log
-            matrix_log("gui", "gui_builder", "create_bin", 
-                       f"📦 [BIN_SIZE] ID: {value.get('id', '??')} | "
-                       f"Hull: {hull.winfo_width()}x{hull.winfo_height()} | "
-                       f"Viewport: {event.width}x{event.height} | "
-                       f"Inner Req: {inner.winfo_reqwidth()}x{req_h} | "
-                       f"Inner Target: {event.width}x{new_h}", "TRACE")
+            matrix_log("ui", "gui_render", "create_bin", 
+                       f"📦📐🔳 [RENDER] Bin Size Sync (ID: {value.get('id', '??')}) | "
+                       f"Viewport: {event.width}x{event.height} | Content: {req_w}x{req_h} | Target: {event.width}x{new_h}", "TRACE")
+
+            # ⚡ FOOTER UPDATE: If this is the main workspace bin, update the builder footer
+            if builder and hasattr(builder, '_update_footer'):
+                builder._update_footer(event.width, event.height, req_w, req_h)
 
             viewport.itemconfig(inner_id, width=event.width, height=new_h)
 

@@ -1,0 +1,6 @@
+var namespaceoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_1_1CMDP__tester =
+[
+    [ "MultiFaderApp", "dd/d11/classoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_1_1CMDP__tester_1_1MultiFaderApp.html", "dd/d11/classoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_1_1CMDP__tester_1_1MultiFaderApp" ],
+    [ "BAND_NAMES", "d7/d60/namespaceoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_1_1CMDP__tester.html#a53c6c29ddd5efa918d098ca444416ef0", null ],
+    [ "GROUPS_DATA", "d7/d60/namespaceoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_1_1CMDP__tester.html#a378408648c82b67c0d8b3d35e125c676", null ]
+];

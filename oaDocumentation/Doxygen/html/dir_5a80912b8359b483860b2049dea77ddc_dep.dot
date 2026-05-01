@@ -1,0 +1,12 @@
+digraph "oaComProtocols/oaComEmber/Core/subprojects/libember/Headers/ember/glow/traits"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  compound=true
+  subgraph clusterdir_2f48b1f9bbbb77113dbfcc52fc8e0b01 {
+    graph [ bgcolor="#edf0f7", pencolor="grey50", label="glow", fontname=Helvetica,fontsize=10 style="filled,dashed", URL="dir_2f48b1f9bbbb77113dbfcc52fc8e0b01.html",tooltip=""]
+  dir_5a80912b8359b483860b2049dea77ddc [label="traits", fillcolor="#edf0f7", color="grey25", style="filled,bold", URL="dir_5a80912b8359b483860b2049dea77ddc.html",tooltip=""];
+  }
+}

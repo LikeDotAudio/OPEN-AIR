@@ -1,0 +1,5 @@
+var namespaceoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer =
+[
+    [ "Core", "d3/d76/namespaceoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Core.html", "d3/d76/namespaceoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Core" ],
+    [ "Interface", "d4/d20/namespaceoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Interface.html", "d4/d20/namespaceoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Interface" ]
+];

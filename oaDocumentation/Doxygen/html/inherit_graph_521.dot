@@ -1,0 +1,9 @@
+digraph "Graphical Class Hierarchy"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node0 [id="Node000000",label="oaGuiElements.Interface.panels.\lCore.layer_metal_fold.MetalFoldLayer",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$d0/d7d/classoaGuiElements_1_1Interface_1_1panels_1_1Core_1_1layer__metal__fold_1_1MetalFoldLayer.html",tooltip=" "];
+}

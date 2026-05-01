@@ -208,4 +208,9 @@ class Application(
             self._build_from_directory(path=root_dir, parent_widget=self,
                                        on_complete=self._on_initial_build_complete)
 
-        WysiwygEditor.launch(self.root, on_test_callback=_rebuild_main_ui)
+        WysiwygEditor.launch(
+            self.root, 
+            on_test_callback=_rebuild_main_ui,
+            subscriber_router=self.subscriber_router,
+            state_mirror_engine=self.state_mirror_engine
+        )

@@ -1,0 +1,12 @@
+digraph "oaRustCore_pkg/target/release/build/selectors-1d1778bcbd76c107/out"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  compound=true
+  subgraph clusterdir_ce053558b137724e4ba368a3a4aa77de {
+    graph [ bgcolor="#edf0f7", pencolor="grey50", label="selectors-1d1778bcbd76c107", fontname=Helvetica,fontsize=10 style="filled,dashed", URL="dir_ce053558b137724e4ba368a3a4aa77de.html",tooltip=""]
+  dir_9bdc10a316aea4ce6818df04c5900892 [label="out", fillcolor="#edf0f7", color="grey25", style="filled,bold", URL="dir_9bdc10a316aea4ce6818df04c5900892.html",tooltip=""];
+  }
+}

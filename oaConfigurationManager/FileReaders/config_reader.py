@@ -78,6 +78,7 @@ class Config(ConfigDefaults):
         self.UI_LAYOUT_FULL_WEIGHT = self._s_get(config, "UI", "LAYOUT_FULL_WEIGHT", self.UI_LAYOUT_FULL_WEIGHT, "int")
         self.SHOW_RELOAD_BUTTON = self._s_get(config, "UI", "SHOW_RELOAD_BUTTON", self.SHOW_RELOAD_BUTTON, "bool")
         self.RELOAD_CONFIG_DISPLAYED = self._s_get(config, "UI", "RELOAD_CONFIG_DISPLAYED", self.RELOAD_CONFIG_DISPLAYED, "bool")
+        self.FOOTER_ENABLED = self._s_get(config, "UI", "FOOTER_ENABLED", self.FOOTER_ENABLED, "bool")
 
     def _parse_font_settings(self, config):
         self.DEFAULT_FONT_FAMILY = self._s_get(config, "Fonts", "default_font_family", self.DEFAULT_FONT_FAMILY)

@@ -1,0 +1,25 @@
+var namespaceoaGuiElements_1_1Core_1_1metering_1_1meter__needle_1_1cosmetics_1_1lighting__overlay =
+[
+    [ "VintageLightingGenerator", "d3/d94/classoaGuiElements_1_1Core_1_1metering_1_1meter__needle_1_1cosmetics_1_1lighting__overlay_1_1VintageLightingGenerator.html", "d3/d94/classoaGuiElements_1_1Core_1_1metering_1_1meter__needle_1_1cosmetics_1_1lighting__overlay_1_1VintageLightingGenerator" ],
+    [ "app_constants", "db/da5/namespaceoaGuiElements_1_1Core_1_1metering_1_1meter__needle_1_1cosmetics_1_1lighting__overlay.html#af6482d9af623c7bf5a67ccf71ffda012", null ],
+    [ "DEFAULT_GLOW_COLOR_HEX", "db/da5/namespaceoaGuiElements_1_1Core_1_1metering_1_1meter__needle_1_1cosmetics_1_1lighting__overlay.html#a10e65c3b3763e7297cd035352681c25e", null ],
+    [ "DEFAULT_GLOW_INTENSITY", "db/da5/namespaceoaGuiElements_1_1Core_1_1metering_1_1meter__needle_1_1cosmetics_1_1lighting__overlay.html#aeb34e7104a9b2a19271e8bdfb880bc78", null ],
+    [ "DEFAULT_GLOW_RGB", "db/da5/namespaceoaGuiElements_1_1Core_1_1metering_1_1meter__needle_1_1cosmetics_1_1lighting__overlay.html#ac6944f492c672fbc3b3642dc160baa98", null ],
+    [ "DEFAULT_SIZE_X_MULT", "db/da5/namespaceoaGuiElements_1_1Core_1_1metering_1_1meter__needle_1_1cosmetics_1_1lighting__overlay.html#a2aebe466258c1663e152132544b7d760", null ],
+    [ "DEFAULT_SIZE_Y_MULT", "db/da5/namespaceoaGuiElements_1_1Core_1_1metering_1_1meter__needle_1_1cosmetics_1_1lighting__overlay.html#a509dbf2d2d8eb6007090da823c993b9e", null ],
+    [ "GAUSSIAN_BLUR_SCALE_BOTTOM_SPEC", "db/da5/namespaceoaGuiElements_1_1Core_1_1metering_1_1meter__needle_1_1cosmetics_1_1lighting__overlay.html#a5f86223d98005e738c532261f41b9efd", null ],
+    [ "GAUSSIAN_BLUR_SCALE_HILL_SHADOW", "db/da5/namespaceoaGuiElements_1_1Core_1_1metering_1_1meter__needle_1_1cosmetics_1_1lighting__overlay.html#aebc52e6f82dd63662a675f4f90b96bac", null ],
+    [ "GAUSSIAN_BLUR_SCALE_TOP_SPEC", "db/da5/namespaceoaGuiElements_1_1Core_1_1metering_1_1meter__needle_1_1cosmetics_1_1lighting__overlay.html#aa25cd685e1fc6d45ecaf016af2d56686", null ],
+    [ "GAUSSIAN_BLUR_SCALE_VIGNETTE", "db/da5/namespaceoaGuiElements_1_1Core_1_1metering_1_1meter__needle_1_1cosmetics_1_1lighting__overlay.html#a3a687fe2c399b1c9e8a0244151f6ac96", null ],
+    [ "GLINT_H_FACTOR", "db/da5/namespaceoaGuiElements_1_1Core_1_1metering_1_1meter__needle_1_1cosmetics_1_1lighting__overlay.html#aa256931f25cc5f4c4a4f0f746b573ae2", null ],
+    [ "GLINT_W_FACTOR", "db/da5/namespaceoaGuiElements_1_1Core_1_1metering_1_1meter__needle_1_1cosmetics_1_1lighting__overlay.html#a50233f82abf934622282bc7b0eaf5dcf", null ],
+    [ "GLINT_Y_FACTOR", "db/da5/namespaceoaGuiElements_1_1Core_1_1metering_1_1meter__needle_1_1cosmetics_1_1lighting__overlay.html#af6e5495e2c171f3686096f96c2f687e2", null ],
+    [ "GLOW_INTENSITY_FACTOR", "db/da5/namespaceoaGuiElements_1_1Core_1_1metering_1_1meter__needle_1_1cosmetics_1_1lighting__overlay.html#a0cdcb110737fd38f518e1bcf9b33eb6e", null ],
+    [ "LOW_SPEC_H_FACTOR", "db/da5/namespaceoaGuiElements_1_1Core_1_1metering_1_1meter__needle_1_1cosmetics_1_1lighting__overlay.html#aae4012ef3292b7c7e2dc7845c833eb8f", null ],
+    [ "LOW_SPEC_W_FACTOR", "db/da5/namespaceoaGuiElements_1_1Core_1_1metering_1_1meter__needle_1_1cosmetics_1_1lighting__overlay.html#a489175290a3ac8d1c7c442c7c8408760", null ],
+    [ "LOW_SPEC_Y_OFFSET_FACTOR", "db/da5/namespaceoaGuiElements_1_1Core_1_1metering_1_1meter__needle_1_1cosmetics_1_1lighting__overlay.html#a1d10b87833eb6e7982a537055c5a1163", null ],
+    [ "MAX_ALPHA", "db/da5/namespaceoaGuiElements_1_1Core_1_1metering_1_1meter__needle_1_1cosmetics_1_1lighting__overlay.html#af341082dfbacf292bb204b69e16113a0", null ],
+    [ "SHADOW_OFFSET_FACTOR", "db/da5/namespaceoaGuiElements_1_1Core_1_1metering_1_1meter__needle_1_1cosmetics_1_1lighting__overlay.html#af15cd8a1560f2302dcabc591c8a453f5", null ],
+    [ "SHADOW_OPACITY", "db/da5/namespaceoaGuiElements_1_1Core_1_1metering_1_1meter__needle_1_1cosmetics_1_1lighting__overlay.html#af839e1eba24c9bec996831af1eec9323", null ],
+    [ "SUPERSAMPLING_SCALE", "db/da5/namespaceoaGuiElements_1_1Core_1_1metering_1_1meter__needle_1_1cosmetics_1_1lighting__overlay.html#a265ba06c5c8b3e6a838b843096a008ca", null ]
+];

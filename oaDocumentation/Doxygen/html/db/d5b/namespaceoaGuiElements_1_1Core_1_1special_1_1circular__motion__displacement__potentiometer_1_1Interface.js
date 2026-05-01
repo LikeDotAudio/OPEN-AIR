@@ -1,0 +1,4 @@
+var namespaceoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Interface =
+[
+    [ "circular_motion_displacement_potentiometer_editor", "dc/dd4/namespaceoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1In2f821b00e389110072efe672c8785c5d.html", "dc/dd4/namespaceoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1In2f821b00e389110072efe672c8785c5d" ]
+];

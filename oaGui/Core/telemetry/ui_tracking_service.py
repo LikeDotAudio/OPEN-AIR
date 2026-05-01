@@ -92,6 +92,9 @@ class UITrackingService:
                 self._publish_visibility(meta, False)
 
     def _on_geometry_change(self, widget, event):
+        # ⚡ EVENT GATE: Ignore resize events from children
+        if event.widget != widget: return
+
         meta = self._tracked_widgets.get(widget)
         if not meta: return
 
@@ -107,8 +110,9 @@ class UITrackingService:
         meta["geo_timer"] = None
 
         try:
-            toplevel = widget.winfo_toplevel()
-            w, h, x, y = toplevel.winfo_width(), toplevel.winfo_height(), toplevel.winfo_x(), toplevel.winfo_y()
+            # ⚡ TELEMETRY SYNC: Report the actual widget (viewport) dimensions, not the entire window.
+            # This ensures MQTT telemetry aligns with the footer display.
+            w, h, x, y = widget.winfo_width(), widget.winfo_height(), widget.winfo_x(), widget.winfo_y()
 
             if not is_connected(): return
 
@@ -118,7 +122,14 @@ class UITrackingService:
                 "tab_name": meta["tab_name"],
             }
             meta["engine"].publish_command(meta["geo_topic"], orjson.dumps(payload).decode())
-            matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"📏 UITrackingService: Published geometry for {meta['tab_name']}", level="DEBUG")
+            
+            # ⚡ LOCAL SYNC: Update the footer if the widget supports it
+            if hasattr(widget, '_log_telemetry_tx'):
+                widget._log_telemetry_tx(f"GEO: {w}x{h}")
+
+            # Explicitly log to GuiRender if enabled
+            matrix_log("ui", "gui_telemetry", "_perform_geometry_publish", 
+                       f"📡📏 [TELEMETRY] Transmitting {meta['tab_name']} geometry: {w}x{h} at {x},{y}", "DEBUG")
         except Exception:
             pass
 

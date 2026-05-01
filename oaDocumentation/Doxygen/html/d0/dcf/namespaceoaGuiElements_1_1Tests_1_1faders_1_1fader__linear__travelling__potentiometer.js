@@ -1,0 +1,4 @@
+var namespaceoaGuiElements_1_1Tests_1_1faders_1_1fader__linear__travelling__potentiometer =
+[
+    [ "test_fader_linear_travelling_potentiometer", "d9/d76/namespaceoaGuiElements_1_1Tests_1_1faders_1_1fader__linear__travelling__potentiometer_1_1test__f3107e0b9f1525d27f5c0c0e19067aa2f.html", "d9/d76/namespaceoaGuiElements_1_1Tests_1_1faders_1_1fader__linear__travelling__potentiometer_1_1test__f3107e0b9f1525d27f5c0c0e19067aa2f" ]
+];

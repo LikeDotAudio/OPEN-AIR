@@ -46,9 +46,9 @@ class GuiFileLoaderMixin:
 
         # ⚡ AUTO-PUBLISH: Announce this GUI and all its initial widget states to MQTT
         # This populates the OID tree and SNMP bridge immediately on load.
-        # ⚡ ICE: User requested to stop GUI from announcing itself
-        #     self._publish_json_to_topic(self.config_data)
-        #     self._publish_initial_widget_states(self.config_data)
+        # ⚡ RESTORED: User requested GUI to announce itself always.
+        self._publish_json_to_topic(self.config_data)
+        self._publish_initial_widget_states(self.config_data)
 
         self._rebuild_gui()
         self.gui_built = True

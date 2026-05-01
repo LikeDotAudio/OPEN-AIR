@@ -173,6 +173,7 @@ class TestsApp(App):
         elif bid == "btn_audits": self.perform_audits()
         elif bid == "btn_cancel_audits": self.audit_cancel_event.set()
         elif bid == "btn_report": self.perform_report_generation()
+        elif bid == "btn_doxygenizer": self.perform_doxygenizer()
         # Screens
         elif bid == "btn_debug_matrix": self.push_screen(DebugMatrixScreen())
         elif bid == "btn_clear_menu": self.push_screen(MaintenanceClearScreen(self.maintenance))
@@ -192,6 +193,33 @@ class TestsApp(App):
         elif bid == "btn_desktop": self.installation.perform_desktop_setup()
         elif bid == "btn_tests_install": self.installation.perform_install_validation()
         elif bid == "btn_full": self.installation.perform_full_installation(lambda: self.log_lines)
+
+    def perform_doxygenizer(self):
+        self.write_log("📖 [DOXYGEN] Starting Doxygen generation...")
+        def task():
+            script_path = os.path.join(self.project_root, "oaTests", "Workers", "MakeDoxygen.py")
+            if not os.path.exists(script_path):
+                self.safe_write_log("❌ [ERROR] MakeDoxygen.py script not found.")
+                return
+
+            try:
+                proc = subprocess.Popen(
+                    [sys.executable, script_path],
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.STDOUT,
+                    text=True,
+                    cwd=self.project_root
+                )
+                for line in iter(proc.stdout.readline, ''):
+                    self.safe_write_log(line.strip())
+                proc.wait()
+                if proc.returncode == 0:
+                    self.safe_write_log("✅ [SUCCESS] Doxygen generation complete.")
+                else:
+                    self.safe_write_log(f"❌ [ERROR] Doxygen generation failed with return code {proc.returncode}.")
+            except Exception as e:
+                self.safe_write_log(f"💥 [CRITICAL] Failed to run Doxygen script: {e}")
+        threading.Thread(target=task, daemon=True).start()
 
     def perform_launch_editor(self):
         self.write_log("🚀 [EDITOR] Launching standalone GUI Designer...")
@@ -304,7 +332,8 @@ class TestsApp(App):
             extra_tabs = collate_extra_tabs(self.project_root)
             generator = ReportGenerator(html_path, json_path, datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
             generator.generate_json(self.summary, self.test_results)
-            generator.generate_html(self.summary, self.test_results, extra_tabs)
+            doxygen_path = os.path.join(self.project_root, 'oaDocumentation', 'Doxygen', 'html', 'index.html')
+            generator.generate_html(self.summary, self.test_results, extra_tabs, doxygen_path)
             self.safe_write_log(f"✅ [SUCCESS] Reports generated at: {html_path}")
             webbrowser.open('file://' + os.path.realpath(html_path))
         threading.Thread(target=task, daemon=True).start()

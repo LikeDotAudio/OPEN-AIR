@@ -1,0 +1,4 @@
+var classoaGuiElements_1_1Core_1_1faders_1_1fader__linear__travelling__potentiometer_1_1Core_1_1ltp_815992d9445ab16c9938be602bb0c483 =
+[
+    [ "get_3d_knob", "d3/d54/classoaGuiElements_1_1Core_1_1faders_1_1fader__linear__travelling__potentiometer_1_1Core_1_1ltp_815992d9445ab16c9938be602bb0c483.html#a7d888d51a9f1f1e2ded47ff1e45b6b4e", null ]
+];

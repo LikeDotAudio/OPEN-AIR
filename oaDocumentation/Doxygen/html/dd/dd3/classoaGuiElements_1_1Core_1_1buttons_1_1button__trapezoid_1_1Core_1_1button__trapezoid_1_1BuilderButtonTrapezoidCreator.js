@@ -1,0 +1,6 @@
+var classoaGuiElements_1_1Core_1_1buttons_1_1button__trapezoid_1_1Core_1_1button__trapezoid_1_1BuilderButtonTrapezoidCreator =
+[
+    [ "_assemble_ui", "dd/dd3/classoaGuiElements_1_1Core_1_1buttons_1_1button__trapezoid_1_1Core_1_1button__trapezoid_1_1BuilderButtonTrapezoidCreator.html#a23a731dcb83fc1a802af55e5f219418a", null ],
+    [ "make", "dd/dd3/classoaGuiElements_1_1Core_1_1buttons_1_1button__trapezoid_1_1Core_1_1button__trapezoid_1_1BuilderButtonTrapezoidCreator.html#a8b4d7248195400a24452a6dec4072605", null ],
+    [ "make_button_trapezoid", "dd/dd3/classoaGuiElements_1_1Core_1_1buttons_1_1button__trapezoid_1_1Core_1_1button__trapezoid_1_1BuilderButtonTrapezoidCreator.html#a2c417856e7f7e14ddb16640c1c29c414", null ]
+];

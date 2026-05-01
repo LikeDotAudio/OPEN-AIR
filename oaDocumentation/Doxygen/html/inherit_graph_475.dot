@@ -1,0 +1,9 @@
+digraph "Graphical Class Hierarchy"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node0 [id="Node000000",label="oaGuiElements.Core.text.text\l_web_link.Interface.text\l_web_link_editor.TextWebLinkEditor",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$db/d4f/classoaGuiElements_1_1Core_1_1text_1_1text__web__link_1_1Interface_1_1text__web__link__editor_1_1TextWebLinkEditor.html",tooltip=" "];
+}

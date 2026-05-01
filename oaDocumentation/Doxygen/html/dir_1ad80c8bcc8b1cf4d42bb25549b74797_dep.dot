@@ -1,0 +1,19 @@
+digraph "oaGui/Assets/Window_2/right_50/top_100/9_Zoo/2_Knobs"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  compound=true
+  subgraph clusterdir_7194c78d441a8b6ec55d992a49110c6a {
+    graph [ bgcolor="#edf0f7", pencolor="grey50", label="9_Zoo", fontname=Helvetica,fontsize=10 style="filled,dashed", URL="dir_7194c78d441a8b6ec55d992a49110c6a.html",tooltip=""]
+  subgraph clusterdir_1ad80c8bcc8b1cf4d42bb25549b74797 {
+    graph [ bgcolor="#edf0f7", pencolor="grey25", label="", fontname=Helvetica,fontsize=10 style="filled,bold", URL="dir_1ad80c8bcc8b1cf4d42bb25549b74797.html",tooltip=""]
+    dir_1ad80c8bcc8b1cf4d42bb25549b74797 [shape=plaintext, label="2_Knobs"];
+  dir_7d8e05c15ef67d847ba1f85741de874e [label="0_knobs", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_7d8e05c15ef67d847ba1f85741de874e.html",tooltip=""];
+  dir_8680b0f9ad10edd8422848884e592027 [label="3_dial", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_8680b0f9ad10edd8422848884e592027.html",tooltip=""];
+  dir_b20327d46d508799da9598747ea6478a [label="4_panner", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_b20327d46d508799da9598747ea6478a.html",tooltip=""];
+  dir_3f4f39f28fb63a5d0f2552e6192a3acb [label="8_rotary_selector", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_3f4f39f28fb63a5d0f2552e6192a3acb.html",tooltip=""];
+  }
+  }
+}

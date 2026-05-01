@@ -53,7 +53,7 @@ class SmartMeter(tk.Canvas, SafeAfterMixin):
         except Exception as e:
             logger.warning(f"⚠️ SmartMeter UI build failed (possibly destroyed parent?): {e}")
             # If UI build fails, we still need basic components to avoid AttributeError later
-            if not hasattr(self, 'canvas'):
+            if getattr(self, 'canvas', None) is None:
                 from unittest.mock import MagicMock
                 self.canvas = MagicMock()
             if not hasattr(self, 'renderer'):
@@ -155,7 +155,7 @@ class SmartMeter(tk.Canvas, SafeAfterMixin):
     def _on_value_update(self, *args):
         try:
             # ⚡ SAFETY: Ensure we don't try to animate on a mock or dead canvas
-            if not hasattr(self, 'canvas') or not hasattr(self.canvas, 'winfo_exists'):
+            if getattr(self, 'canvas', None) is None or not hasattr(self.canvas, 'winfo_exists'):
                 return
             if not self.canvas.winfo_exists():
                 return

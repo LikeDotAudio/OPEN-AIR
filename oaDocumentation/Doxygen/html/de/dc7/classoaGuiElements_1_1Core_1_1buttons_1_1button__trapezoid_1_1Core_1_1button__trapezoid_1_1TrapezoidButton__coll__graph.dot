@@ -1,0 +1,15 @@
+digraph "oaGuiElements.Core.buttons.button_trapezoid.Core.button_trapezoid.TrapezoidButton"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="oaGuiElements.Core.buttons.button\l_trapezoid.Core.button_trapezoid.TrapezoidButton",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node2 -> Node1 [id="edge1_Node000001_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="tk.Canvas",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",tooltip=" "];
+  Node3 -> Node1 [id="edge2_Node000001_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="oaGuiElements.Core.buttons.button\l_trapezoid.Core.trapezoid_renderer\l_mixin.TrapezoidRendererMixin",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$d0/d2d/classoaGuiElements_1_1Core_1_1buttons_1_1button__trapezoid_1_1Core_1_1trapezoid__renderer__mixin_1_1TrapezoidRendererMixin.html",tooltip=" "];
+  Node4 -> Node1 [id="edge3_Node000001_Node000004",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="oaGuiElements.Core.buttons.button\l_trapezoid.Core.trapezoid_interaction\l_mixin.TrapezoidInteractionMixin",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$d4/de4/classoaGuiElements_1_1Core_1_1buttons_1_1button__trapezoid_1_1Core_1_1trapezoid__interaction__mia605c79f68f2a92b81cd5af22eaab567.html",tooltip=" "];
+}

@@ -1,0 +1,9 @@
+digraph "Graphical Class Hierarchy"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node0 [id="Node000000",label="oaGuiElements.Core.faders.fader\l_ganged_controlled_array.Interface.fader\l_ganged_controlled_array_editor.FaderGangedControlled\lArrayEditor",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$db/d3a/classoaGuiElements_1_1Core_1_1faders_1_1fader__ganged__controlled__array_1_1Interface_1_1fader__002f82a9d3e0a1b1ca3f839161cf093b.html",tooltip=" "];
+}

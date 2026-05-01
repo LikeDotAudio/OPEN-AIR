@@ -117,6 +117,10 @@ class AsyncGridRenderer:
                 # 5. Widget Instantiation
                 widget = None
                 try:
+                    # ⚡ PATH INJECTION: Ensure the widget config knows its own MQTT path
+                    full_widget_path = f"{path_prefix}.{key}".strip(".")
+                    item_config["path"] = full_widget_path
+
                     # Handle structural types (Bin/Block) vs standard widgets
                     if w_type in ["OcaBin", "Bin"]:
                         builder = getattr(context, 'builder_instance', self.factory)
@@ -125,7 +129,7 @@ class AsyncGridRenderer:
                         widget = hull # Represent the hull for overlays
                         # Recursive call for children
                         state["count"] += 1
-                        self.render(inner, item_config, path_prefix=f"{path_prefix}.{key}", context=context, on_complete=lambda: (state.update({"count": state["count"]-1}), _check_done()))
+                        self.render(inner, item_config, path_prefix=full_widget_path, context=context, on_complete=lambda: (state.update({"count": state["count"]-1}), _check_done()))
                     elif w_type in ["OcaBlock", "Block"]:
                         builder = getattr(context, 'builder_instance', self.factory)
                         hull, inner = StructuralAssembler.create_block(parent, item_config, builder)
@@ -133,7 +137,7 @@ class AsyncGridRenderer:
                         widget = hull # Represent the hull for overlays
                         # Recursive call for children
                         state["count"] += 1
-                        self.render(inner, item_config, path_prefix=f"{path_prefix}.{key}", context=context, on_complete=lambda: (state.update({"count": state["count"]-1}), _check_done()))
+                        self.render(inner, item_config, path_prefix=full_widget_path, context=context, on_complete=lambda: (state.update({"count": state["count"]-1}), _check_done()))
                     else:
                         widget = self.factory[w_type](parent, item_config, context)
                         if widget:
@@ -141,7 +145,6 @@ class AsyncGridRenderer:
 
                     # ⚡ DESIGN INJECTION: Attach the path for the overlay system
                     if widget:
-                        full_widget_path = f"{path_prefix}.{key}".strip(".")
                         widget._oca_path = full_widget_path
 
                 except Exception as e:

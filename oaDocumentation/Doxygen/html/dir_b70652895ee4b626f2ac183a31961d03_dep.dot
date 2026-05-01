@@ -1,0 +1,16 @@
+digraph "oaTests/Core"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  compound=true
+  subgraph clusterdir_31c28ca110f7183aecbeed99e55287be {
+    graph [ bgcolor="#edf0f7", pencolor="grey25", label="oaTests", fontname=Helvetica,fontsize=10 style="filled,dashed", URL="dir_31c28ca110f7183aecbeed99e55287be.html",tooltip=""]
+  subgraph clusterdir_b70652895ee4b626f2ac183a31961d03 {
+    graph [ bgcolor="#edf0f7", pencolor="grey25", label="", fontname=Helvetica,fontsize=10 style="filled,bold", URL="dir_b70652895ee4b626f2ac183a31961d03.html",tooltip=""]
+    dir_b70652895ee4b626f2ac183a31961d03 [shape=plaintext, label="Core"];
+  dir_836ade01399f89818138527bce2bf83b [label="Workers", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_836ade01399f89818138527bce2bf83b.html",tooltip=""];
+  }
+  }
+}

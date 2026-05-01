@@ -1,0 +1,12 @@
+digraph "oaGuiElements/Core/images/images_image_display/Assets"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  compound=true
+  subgraph clusterdir_bb44cb8e564e69d6e93700acf9d390da {
+    graph [ bgcolor="#edf0f7", pencolor="grey50", label="images_image_display", fontname=Helvetica,fontsize=10 style="filled,dashed", URL="dir_bb44cb8e564e69d6e93700acf9d390da.html",tooltip=""]
+  dir_394457188fdc69c244e598c2fa0d6bf7 [label="Assets", fillcolor="#edf0f7", color="grey25", style="filled,bold", URL="dir_394457188fdc69c244e598c2fa0d6bf7.html",tooltip=""];
+  }
+}

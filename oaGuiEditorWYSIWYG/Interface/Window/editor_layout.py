@@ -103,7 +103,11 @@ class CanvasBuilder:
         editor.layout_container = tk.Frame(editor.main_pane, bg="#1a1a1a")
         editor.main_pane.add(editor.layout_container, stretch="always")
 
-        editor.layout_view = InteractiveLayout(editor.layout_container)
+        editor.layout_view = InteractiveLayout(
+            editor.layout_container, 
+            subscriber_router=getattr(editor, 'subscriber_router', None),
+            state_mirror_engine=getattr(editor, 'state_mirror_engine', None)
+        )
         editor.layout_view.pack(fill="both", expand=True)
 
 class SashManager:
@@ -126,20 +130,32 @@ class SashManager:
         try:
             editor.main_pane.update_idletasks()
             width = editor.main_pane.winfo_width()
-            if width <= 1:
+            height = editor.main_pane.winfo_height()
+            
+            # ⚡ RECOVERY: If dimensions are not yet calculated, defer.
+            if width <= 50 or height <= 50:
+                matrix_log("ui", "gui_builder", "layout", f"⚠️📐🔳 [RENDER] Main pane too small ({width}x{height}). Deferring sash placement...", "TRACE")
                 editor.window.after(200, lambda: SashManager.set_initial(editor))
                 return
 
-            matrix_log("ui", "gui_builder", "layout", f"📐📐📐 [RENDER] Setting initial sashes for width: {width}", "DEBUG")
+            matrix_log("ui", "gui_builder", "layout", f"📐📐📐 [RENDER] Setting initial sashes for {width}x{height}", "DEBUG")
 
-            # 1. Left Sidebar: 30% of width
-            left_pos = int(width * 0.30)
+            # 1. Left Sidebar: Target 250px or 25% of width
+            left_pos = max(200, int(width * 0.25))
 
-            # 2. Right Sidebar: 30% of width (measured from the right)
-            right_pos = int(width * (1.0 - 0.30))
+            # 2. Right Sidebar: Target 300px or 25% of width (measured from the right)
+            right_pos = min(width - 250, int(width * 0.75))
+            
+            # ⚡ HARD CONSTRAINT: Ensure center is at least 400px
+            if (right_pos - left_pos) < 400:
+                matrix_log("ui", "gui_builder", "layout", "⚠️📐🔳 [RENDER] Center pane too narrow. Adjusting sashes...", "DEBUG")
+                left_pos = 250
+                right_pos = max(left_pos + 400, width - 300)
 
             editor.main_pane.sash_place(0, left_pos, 0)
             editor.main_pane.sash_place(1, right_pos, 0)
+            
+            matrix_log("ui", "gui_builder", "layout", f"📐🆗✨ [RENDER] Sashes set at: {left_pos} | {right_pos}", "SUCCESS")
         except Exception as e:
             matrix_log("ui", "gui_builder", "layout", f"⚠️🎨🤦‍♂️ [RENDER] Sash placement failed: {e}", "TRACE")
 

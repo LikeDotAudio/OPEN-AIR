@@ -35,7 +35,7 @@ from oaGui.Core.shutdown_coordinator import ShutdownCoordinator
 
 # --- EXTRACTED CORE MODULES ---
 from oaGui.Core.ui_window import UIWindowManager
-from oaGuiSplashScreen.Methods.splash_screen import SplashScreen
+from oaGuiElements.Methods.splash_screen import SplashScreen
 from oaLogging.Core.logger import set_log_directory
 from oaLogging.Methods.matrix_gate import matrix_log
 from oaOchestration.Core.path_initializer import DATA_LOGS_DIR, initialize_paths

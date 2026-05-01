@@ -123,7 +123,7 @@ class GCARendererMixin:
             self.canvas.create_text(x_pos, y_pos, text=label, fill="white", font=("Helvetica", LABEL_FONT_SIZE, "bold"), anchor=anchor, angle=self.channel_labels_rotation)
 
     def _draw(self):
-        if not hasattr(self, 'canvas'): return
+        if getattr(self, 'canvas', None) is None: return
         for item in self.canvas.find_all():
             if "panel_bg_slice" not in self.canvas.gettags(item):
                 self.canvas.delete(item)

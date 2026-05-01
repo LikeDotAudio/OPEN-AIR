@@ -1,0 +1,25 @@
+digraph "Graphical Class Hierarchy"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node0 [id="Node000000",label="tk.Tk",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
+  Node0 -> Node1 [id="edge462_Node000000_Node000001",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node1 [id="Node000001",label="Core.csv_to_json_app.csvtojson.\lCSVToJSONApp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$db/d40/classCore_1_1csv__to__json__app_1_1csvtojson_1_1CSVToJSONApp.html",tooltip=" "];
+  Node0 -> Node2 [id="edge463_Node000000_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="oaGuiElements.Core.special.circular\l_motion_displacement_potentiometer.Core.\lCMDP_tester.MultiFaderApp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$dd/d11/classoaGuiElements_1_1Core_1_1special_1_1circular__motion__displacement__potentiometer_1_1Core_1_1CMDP__tester_1_1MultiFaderApp.html",tooltip=" "];
+  Node0 -> Node6 [id="edge464_Node000000_Node000006",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="oaGuiElements.Core.special.composite\l_mdp.Core.tester.MultiFaderApp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$d3/d8b/classoaGuiElements_1_1Core_1_1special_1_1composite__mdp_1_1Core_1_1tester_1_1MultiFaderApp.html",tooltip=" "];
+  Node0 -> Node4 [id="edge465_Node000000_Node000004",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="oaGuiElements.Core.utils.circular\l_motion_displacement_potentiometer.\lCore.CMDP_tester.MultiFaderApp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$d4/d86/classoaGuiElements_1_1Core_1_1utils_1_1circular__motion__displacement__potentiometer_1_1Core_1_1CMDP__tester_1_1MultiFaderApp.html",tooltip=" "];
+  Node0 -> Node7 [id="edge466_Node000000_Node000007",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node7 [id="Node000007",label="oaGuiElements.Core.utils.composite\l_mdp.Core.tester.MultiFaderApp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$d4/dd0/classoaGuiElements_1_1Core_1_1utils_1_1composite__mdp_1_1Core_1_1tester_1_1MultiFaderApp.html",tooltip=" "];
+  Node3 [id="Node000003",label="CMDPGroupMixin",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
+  Node3 -> Node2 [id="edge467_Node000003_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node3 -> Node4 [id="edge468_Node000003_Node000004",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="CMDPInteractionMixin",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
+  Node5 -> Node2 [id="edge469_Node000005_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node5 -> Node4 [id="edge470_Node000005_Node000004",dir="back",color="steelblue1",style="solid",tooltip=" "];
+}

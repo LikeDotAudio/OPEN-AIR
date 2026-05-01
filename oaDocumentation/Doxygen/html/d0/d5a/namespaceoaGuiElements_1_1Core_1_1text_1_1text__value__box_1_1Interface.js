@@ -1,0 +1,4 @@
+var namespaceoaGuiElements_1_1Core_1_1text_1_1text__value__box_1_1Interface =
+[
+    [ "text_value_box_editor", "d6/d90/namespaceoaGuiElements_1_1Core_1_1text_1_1text__value__box_1_1Interface_1_1text__value__box__editor.html", "d6/d90/namespaceoaGuiElements_1_1Core_1_1text_1_1text__value__box_1_1Interface_1_1text__value__box__editor" ]
+];

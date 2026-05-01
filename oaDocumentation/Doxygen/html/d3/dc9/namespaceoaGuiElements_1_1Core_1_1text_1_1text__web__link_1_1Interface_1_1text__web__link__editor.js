@@ -1,0 +1,4 @@
+var namespaceoaGuiElements_1_1Core_1_1text_1_1text__web__link_1_1Interface_1_1text__web__link__editor =
+[
+    [ "TextWebLinkEditor", "db/d4f/classoaGuiElements_1_1Core_1_1text_1_1text__web__link_1_1Interface_1_1text__web__link__editor_1_1TextWebLinkEditor.html", "db/d4f/classoaGuiElements_1_1Core_1_1text_1_1text__web__link_1_1Interface_1_1text__web__link__editor_1_1TextWebLinkEditor" ]
+];

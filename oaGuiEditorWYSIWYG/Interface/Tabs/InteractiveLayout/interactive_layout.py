@@ -32,23 +32,26 @@ from oaComBroker.Core.event_bus import event_bus
 from oaGui.Methods.safe_after_mixin import SafeAfterMixin
 from oaLogging.Methods.matrix_gate import matrix_log
 
-from ....Core.state import state_manager
-from ...layout_engine.focus import FocusManager
-from ...layout_engine.ghost_overlay import GhostOverlay
-from ...layout_engine.overlay_manager import OverlayManager
+from oaGuiEditorWYSIWYG.Core.state import state_manager
+from oaGuiEditorWYSIWYG.Interface.layout_engine.focus import FocusManager
+from oaGuiEditorWYSIWYG.Interface.layout_engine.ghost_overlay import GhostOverlay
+from oaGuiEditorWYSIWYG.Interface.layout_engine.overlay_manager import OverlayManager
 
 # --- MODULAR CORE COMPONENTS ---
-from ...layout_engine.preview_engine import PreviewEngine
-from ...layout_engine.ruler import Ruler
+from oaGuiEditorWYSIWYG.Interface.layout_engine.preview_engine import PreviewEngine
+from oaGuiEditorWYSIWYG.Interface.layout_engine.ruler import Ruler
 
 
 class InteractiveLayout(tk.Frame, SafeAfterMixin):
     """The visual workspace where users interact with the GUI layout."""
 
-    def __init__(self, parent, *args, **kwargs):
+    def __init__(self, parent, subscriber_router=None, state_mirror_engine=None, *args, **kwargs):
         self._init_safe_after()
         kwargs.pop("bg", None)
         super().__init__(parent, bg="#1a1a1a", *args, **kwargs)
+
+        self.subscriber_router = subscriber_router
+        self.state_mirror_engine = state_mirror_engine
 
         # Display Toggles
         self.show_structure = tk.BooleanVar(value=False)
@@ -59,9 +62,10 @@ class InteractiveLayout(tk.Frame, SafeAfterMixin):
         self.show_alignment = tk.BooleanVar(value=False)
         self.show_colors = tk.BooleanVar(value=False)
 
-        self.render_tier_var = tk.StringVar(value="Fast")
+        # ⚡ DEFAULT CHANGE: Default to High-Res for full transparency support on launch
+        self.render_tier_var = tk.StringVar(value="High-Res")
         self.auto_rebuild_var = tk.BooleanVar(value=False)
-        self.show_background_var = tk.BooleanVar(value=False)
+        self.show_background_var = tk.BooleanVar(value=True)
         self.superficial_pad_var = tk.IntVar(value=0)
 
         self.focused_path = None
@@ -99,11 +103,18 @@ class InteractiveLayout(tk.Frame, SafeAfterMixin):
         self.v_ruler.place(x=0, y=20, width=20, relheight=1, height=-20)
 
         # 2. Main Render Canvas
+        # ⚡ LAYOUT FIX: Use pack with expand=True instead of place to prevent zero-size collapse
         self.render_area = tk.Frame(self, bg="#2b2b2b")
-        self.render_area.place(x=20, y=20, relwidth=1, relheight=1, width=-20, height=-20)
+        self.render_area.pack(side="right", fill="both", expand=True, padx=(20, 0), pady=(20, 0))
 
         # 3. Engines requiring UI context
-        self.preview_engine = PreviewEngine(self.render_area, self.focus_mgr.handle_focus_request, workspace=self)
+        self.preview_engine = PreviewEngine(
+            self.render_area, 
+            self.focus_mgr.handle_focus_request, 
+            workspace=self,
+            subscriber_router=self.subscriber_router,
+            state_mirror_engine=self.state_mirror_engine
+        )
         self.overlay_mgr.create_event_blocker(self.render_area)
 
         # 4. Ghost Layer
@@ -189,6 +200,7 @@ class InteractiveLayout(tk.Frame, SafeAfterMixin):
     def _toggle_background_visibility(self):
         if self.preview_engine.preview_builder and hasattr(self.preview_engine.preview_builder, '_update_background'):
             self.preview_engine.preview_builder._update_background()
+        self._manual_rebuild()
 
     def _update_rebuild_ui(self):
         event_bus.publish("CHANGES_PENDING", count=self.pending_changes)

@@ -1,0 +1,5 @@
+var classoaGuiElements_1_1Core_1_1text_1_1text__value__with__units_1_1Core_1_1text__value__with__uni98e31baaca46f9155d064e40160aac21 =
+[
+    [ "make", "d4/d63/classoaGuiElements_1_1Core_1_1text_1_1text__value__with__units_1_1Core_1_1text__value__with__uni98e31baaca46f9155d064e40160aac21.html#add1bb0df703d10b080234b2afd35a70d", null ],
+    [ "make_text_value_with_units", "d4/d63/classoaGuiElements_1_1Core_1_1text_1_1text__value__with__units_1_1Core_1_1text__value__with__uni98e31baaca46f9155d064e40160aac21.html#a6e41dabd0ea241b46a716d0a6239c4ef", null ]
+];

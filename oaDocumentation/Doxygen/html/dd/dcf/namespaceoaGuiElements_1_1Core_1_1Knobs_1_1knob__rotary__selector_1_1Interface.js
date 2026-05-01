@@ -1,0 +1,4 @@
+var namespaceoaGuiElements_1_1Core_1_1Knobs_1_1knob__rotary__selector_1_1Interface =
+[
+    [ "knob_rotary_selector_editor", "de/de6/namespaceoaGuiElements_1_1Core_1_1Knobs_1_1knob__rotary__selector_1_1Interface_1_1knob__rotary__selector__editor.html", "de/de6/namespaceoaGuiElements_1_1Core_1_1Knobs_1_1knob__rotary__selector_1_1Interface_1_1knob__rotary__selector__editor" ]
+];

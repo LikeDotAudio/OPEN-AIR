@@ -10,11 +10,11 @@ import tkinter as tk
 from oaComBroker.Core.event_bus import event_bus
 from oaLogging.Methods.matrix_gate import matrix_log
 
-from ..Core.state import state_manager
-from ..FileReaders.file_reader import FileReader
-from ..FileWriters.file_writer import FileWriter
-from ..Interface.Window.editor_layout import EditorLayoutBuilder
-from ..Interface.Window.editor_menus import EditorMenuBuilder
+from oaGuiEditorWYSIWYG.Core.state import state_manager
+from oaGuiEditorWYSIWYG.FileReaders.file_reader import FileReader
+from oaGuiEditorWYSIWYG.FileWriters.file_writer import FileWriter
+from oaGuiEditorWYSIWYG.Interface.Window.editor_layout import EditorLayoutBuilder
+from oaGuiEditorWYSIWYG.Interface.Window.editor_menus import EditorMenuBuilder
 
 
 class WysiwygEditor:
@@ -25,7 +25,7 @@ class WysiwygEditor:
     _instance = None
 
     @classmethod
-    def launch(cls, parent_window, json_filepath=None, config_data=None, **kwargs):
+    def launch(cls, parent_window, json_filepath=None, config_data=None, subscriber_router=None, state_mirror_engine=None, **kwargs):
         """
         Standard static launcher to prevent multiple instances.
         Focuses existing instance if available.
@@ -35,13 +35,15 @@ class WysiwygEditor:
             return cls._instance
 
         matrix_log("ui", "gui_builder", "launch", f"🚀🚀🚀 [LAUNCHING] WysiwygEditor: New instance for {json_filepath}", "INFO")
-        return cls(parent_window, json_filepath, config_data, **kwargs)
+        return cls(parent_window, json_filepath, config_data, subscriber_router=subscriber_router, state_mirror_engine=state_mirror_engine, **kwargs)
 
-    def __init__(self, parent_window, json_filepath=None, config_data=None, on_test_callback=None, on_save_callback=None, is_standalone=False):
+    def __init__(self, parent_window, json_filepath=None, config_data=None, on_test_callback=None, on_save_callback=None, is_standalone=False, subscriber_router=None, state_mirror_engine=None):
         self.parent = parent_window
         self.on_test = on_test_callback
         self.on_save = on_save_callback
         self.is_standalone = is_standalone
+        self.subscriber_router = subscriber_router
+        self.state_mirror_engine = state_mirror_engine
 
         # 1. Initialize Global Editor State
         state_manager.initialize(config_data, pathlib.Path(json_filepath) if json_filepath else None)

@@ -1,0 +1,5 @@
+var namespaceaes70_1_1types_1_1ocamediasourceconnectorchangedeventdata =
+[
+    [ "IOcaMediaSourceConnectorChangedEventData", "d5/dc9/classaes70_1_1types_1_1ocamediasourceconnectorchangedeventdata_1_1IOcaMediaSourceConnectorChangedEventData.html", "d5/dc9/classaes70_1_1types_1_1ocamediasourceconnectorchangedeventdata_1_1IOcaMediaSourceConnectorChangedEventData" ],
+    [ "OcaMediaSourceConnectorChangedEventData", "df/dea/classaes70_1_1types_1_1ocamediasourceconnectorchangedeventdata_1_1OcaMediaSourceConnectorChangedEventData.html", "df/dea/classaes70_1_1types_1_1ocamediasourceconnectorchangedeventdata_1_1OcaMediaSourceConnectorChangedEventData" ]
+];

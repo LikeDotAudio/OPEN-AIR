@@ -1,0 +1,18 @@
+digraph "oaComProtocols/oaComEmber/Core/subprojects/libember/Headers/ember/ber"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  compound=true
+  subgraph clusterdir_6644e51dc3816939f3a0dfad9d35ad2b {
+    graph [ bgcolor="#edf0f7", pencolor="grey50", label="ember", fontname=Helvetica,fontsize=10 style="filled,dashed", URL="dir_6644e51dc3816939f3a0dfad9d35ad2b.html",tooltip=""]
+  subgraph clusterdir_682d5134feff09efe83e11c3f9f583c1 {
+    graph [ bgcolor="#edf0f7", pencolor="grey25", label="", fontname=Helvetica,fontsize=10 style="filled,bold", URL="dir_682d5134feff09efe83e11c3f9f583c1.html",tooltip=""]
+    dir_682d5134feff09efe83e11c3f9f583c1 [shape=plaintext, label="ber"];
+  dir_f6fe6308e63dff3f8017830abc6f668c [label="detail", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_f6fe6308e63dff3f8017830abc6f668c.html",tooltip=""];
+  dir_10a5a07c181915aa9cbf968ce16c62b8 [label="impl", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_10a5a07c181915aa9cbf968ce16c62b8.html",tooltip=""];
+  dir_96d07a0f50518b6540c43be8a8f76061 [label="traits", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_96d07a0f50518b6540c43be8a8f76061.html",tooltip=""];
+  }
+  }
+}

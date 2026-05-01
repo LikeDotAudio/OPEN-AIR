@@ -19,11 +19,12 @@ class ReportGenerator:
         with open(self.json_path, "w") as f:
             json.dump({"summary": summary, "details": details}, f, indent=4)
 
-    def generate_html(self, summary, details, extra_tabs):
+    def generate_html(self, summary, details, extra_tabs, doxygen_path=None):
         HTMLGenerator.render(
             self.html_path,
             self.timestamp,
             summary,
             details,
-            extra_tabs
+            extra_tabs,
+            doxygen_path
         )

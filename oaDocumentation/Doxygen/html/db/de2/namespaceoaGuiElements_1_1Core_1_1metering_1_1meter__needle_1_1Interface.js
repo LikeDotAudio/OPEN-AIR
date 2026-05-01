@@ -1,0 +1,4 @@
+var namespaceoaGuiElements_1_1Core_1_1metering_1_1meter__needle_1_1Interface =
+[
+    [ "meter_needle_editor", "d9/db5/namespaceoaGuiElements_1_1Core_1_1metering_1_1meter__needle_1_1Interface_1_1meter__needle__editor.html", "d9/db5/namespaceoaGuiElements_1_1Core_1_1metering_1_1meter__needle_1_1Interface_1_1meter__needle__editor" ]
+];

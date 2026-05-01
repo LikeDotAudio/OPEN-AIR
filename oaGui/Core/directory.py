@@ -151,7 +151,9 @@ class DirectoryBuilderMixin:
 
                 for i, panel_data in enumerate(panels):
                     # Create a base frame for the panel within the PanedWindow
-                    base_frame = tk.Frame(paned_window, borderwidth=0, relief="flat", bg=self.theme_colors["bg"], width=10, height=10)
+                    # ⚡ SIZING FIX: Use 1x1 initial size to ensure the PanedWindow 
+                    # doesn't get stuck at a larger default 'request' size.
+                    base_frame = tk.Frame(paned_window, borderwidth=0, relief="flat", bg=self.theme_colors["bg"], width=1, height=1)
                     
                     # ⚡ LAYOUT SAFETY: Ensure the base frame allows its children to expand
                     base_frame.grid_rowconfigure(0, weight=1)

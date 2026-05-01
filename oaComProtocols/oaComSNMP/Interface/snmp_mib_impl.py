@@ -16,7 +16,7 @@ from oaOchestration.Constants.project_paths import SNMP_CURRENT_MIB, SNMP_OPENAI
 
 # --- GUI FALLBACKS (V3.2.1 Decoupling) ---
 try:
-    from oaGui.Core.transparency.transparency_mixin import TransparencyMixin
+    from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
 except ImportError:
     class TransparencyMixin:
         """Fallback mixin for standalone execution without GUI manager."""

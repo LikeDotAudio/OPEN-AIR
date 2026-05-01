@@ -8,7 +8,7 @@ import tkinter as tk
 import unittest
 from unittest.mock import MagicMock, patch
 
-from oaGui.Core.bootstrap_sequence import AsyncBootstrapEngine
+from oaGui.Managers.bootstrap_sequence import AsyncBootstrapEngine
 
 
 class TestAsyncBootstrapEngine(unittest.TestCase):
@@ -79,7 +79,7 @@ class TestAsyncBootstrapEngine(unittest.TestCase):
         self.mock_root.after = mock_after
 
         # Use patch to suppress logging for this expected failure
-        with patch('oaGui.Core.bootstrap_sequence.logger') as mock_logger:
+        with patch('oaGui.Managers.bootstrap_sequence.logger') as mock_logger:
             self.engine.run()
             # Verify the error was logged
             mock_logger.error.assert_called()

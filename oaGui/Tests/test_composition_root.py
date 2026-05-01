@@ -8,7 +8,7 @@ import tkinter as tk
 import unittest
 from unittest.mock import MagicMock, patch
 
-from oaGui.Core.composition_root import UICompositionRoot
+from oaGui.Managers.composition_root import UICompositionRoot
 
 
 class TestUICompositionRoot(unittest.TestCase):

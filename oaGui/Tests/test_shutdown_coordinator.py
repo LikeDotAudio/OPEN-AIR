@@ -8,7 +8,7 @@ import tkinter as tk
 import unittest
 from unittest.mock import MagicMock
 
-from oaGui.Core.shutdown_coordinator import ShutdownCoordinator
+from oaGui.Managers.shutdown_coordinator import ShutdownCoordinator
 
 
 class TestShutdownCoordinator(unittest.TestCase):

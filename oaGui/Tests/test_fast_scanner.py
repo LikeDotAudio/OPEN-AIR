@@ -9,7 +9,7 @@ import shutil
 import tempfile
 import unittest
 
-from oaGui.Core.fast_scanner import FastScanner
+from oaGui.FileReaders.fast_scanner import FastScanner
 
 
 class TestFastScanner(unittest.TestCase):

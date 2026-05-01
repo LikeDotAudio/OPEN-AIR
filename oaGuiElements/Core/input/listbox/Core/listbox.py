@@ -16,8 +16,8 @@ from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
-from oaGui.Core.transparency.transparency import TransparencyManager
-from oaGui.Core.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Workers.transparency.transparency import TransparencyManager
+from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
 from oaStyle.Core.style import DEFAULT_THEME, THEMES
 
 # --- EXTRACTED CORE MODULES ---

@@ -14,7 +14,7 @@ from oaLogging.Methods.matrix_gate import matrix_log
 # from oaComBroker.Core.event_bus import event_bus
 
 try:
-    from oaGui.Core.transparency.transparency_mixin import TransparencyMixin
+    from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
 except ImportError:
     class TransparencyMixin:
         def render(self): pass

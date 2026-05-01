@@ -17,7 +17,7 @@ from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()  # Get the singleton instance
 
-from oaGui.Core.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
 from oaOchestration.Methods.widget_event_binder import bind_variable_trace
 
 # --- Global Scope Variables ---

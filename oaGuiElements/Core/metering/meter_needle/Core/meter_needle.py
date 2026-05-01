@@ -19,9 +19,9 @@ from oaConfigurationManager.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
 # --- Specialized Modules ---
-from oaGui.Core.factory.widget_registry import WidgetRegistry
-from oaGui.Core.transparency.transparency import TransparencyManager
-from oaGui.Core.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Hooks.widget_registry import WidgetRegistry
+from oaGui.Workers.transparency.transparency import TransparencyManager
+from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
 
 from .rendering_engine import MeterRenderingEngine
 from oaGuiElements.Core.metering.meter_needle.animation.animator import MeterAnimator

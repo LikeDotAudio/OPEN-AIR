@@ -10,7 +10,7 @@ from unittest.mock import MagicMock, patch
 
 import orjson
 
-from oaGui.Core.layout_parser import LayoutParser
+from oaGui.FileReaders.layout_parser import LayoutParser
 
 
 class TestLayoutParser(unittest.TestCase):

@@ -7,7 +7,7 @@
 import unittest
 from unittest.mock import MagicMock, patch
 
-from oaGui.Core.factory.widget_registry import WidgetRegistry
+from oaGui.Hooks.widget_registry import WidgetRegistry
 
 
 class TestWidgetRegistry(unittest.TestCase):
@@ -36,7 +36,7 @@ class TestWidgetRegistry(unittest.TestCase):
         self.assertEqual(WidgetRegistry.get_creator("TypeA"), MockCreator)
         self.assertEqual(WidgetRegistry.get_creator("TypeB"), MockCreator)
 
-    @patch('oaGui.Core.fast_scanner.FastScanner.scan_directory')
+    @patch('oaGui.FileReaders.fast_scanner.FastScanner.scan_directory')
     @patch('importlib.import_module')
     @patch('pathlib.Path.exists', return_value=True)
     def test_scan_widgets_discovery(self, mock_exists, mock_import, mock_scan):
@@ -47,7 +47,7 @@ class TestWidgetRegistry(unittest.TestCase):
         ]
 
         # We need to mock GLOBAL_PROJECT_ROOT as well for relpath
-        with patch('oaGui.Core.factory.widget_registry.GLOBAL_PROJECT_ROOT', MagicMock()) as mock_root:
+        with patch('oaGui.Hooks.widget_registry.GLOBAL_PROJECT_ROOT', MagicMock()) as mock_root:
             mock_root.__str__.return_value = "/path/to"
 
             WidgetRegistry.scan_widgets()

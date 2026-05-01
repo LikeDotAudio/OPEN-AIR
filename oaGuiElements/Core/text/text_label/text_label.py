@@ -15,8 +15,8 @@ from oaLogging.Methods.matrix_gate import matrix_log
 app_constants = Config.get_instance()
 
 from oaGui.Core.base_widget_creator import BaseWidgetCreator
-from oaGui.Core.factory.widget_registry import WidgetRegistry
-from oaGui.Core.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Hooks.widget_registry import WidgetRegistry
+from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
 
 
 @WidgetRegistry.register("_Label", "_SmartLabel", "_GuiLabel")

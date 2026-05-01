@@ -7,7 +7,7 @@
 
 import unittest
 
-from oaGui.Core.ui_geometry_math import UIGeometryMath
+from oaGui.Interface.ui_geometry_math import UIGeometryMath
 
 
 class TestGeometryMathRust(unittest.TestCase):

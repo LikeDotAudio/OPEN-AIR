@@ -14,9 +14,9 @@ app_constants = Config.get_instance()
 from oaGui.Methods.i18n_utils import get_text
 from oaGui.Methods.safe_after_mixin import SafeAfterMixin
 from oaGui.Core.base_widget_creator import BaseWidgetCreator
-from oaGui.Core.factory.widget_registry import WidgetRegistry
-from oaGui.Core.transparency.transparency import TransparencyManager
-from oaGui.Core.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Hooks.widget_registry import WidgetRegistry
+from oaGui.Workers.transparency.transparency import TransparencyManager
+from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
 
 # Core Modules
 from .knob_config import extract_knob_config

@@ -10,7 +10,7 @@ import inspect
 from oaConfigurationManager.FileReaders.config_reader import Config
 from oaGuiElements.Core.graphing.Methods.dynamic_bar_graph import DynamicBarGraph
 from oaGuiElements.Core.graphing.Methods.dynamic_graph import GraphPlotter
-from oaGui.Core.factory.widget_registry import WidgetRegistry
+from oaGui.Hooks.widget_registry import WidgetRegistry
 from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()

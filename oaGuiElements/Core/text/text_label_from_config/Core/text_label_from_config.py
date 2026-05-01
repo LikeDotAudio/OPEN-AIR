@@ -13,8 +13,8 @@ from oaLogging.Methods.matrix_gate import matrix_log
 app_constants = Config.get_instance()
 
 from oaGui.Core.context.widget_context import WidgetContext
-from oaGui.Core.factory.widget_registry import WidgetRegistry
-from oaGui.Core.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Hooks.widget_registry import WidgetRegistry
+from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
 
 from .text_label.text_label import BuilderTextLabelCreator
 

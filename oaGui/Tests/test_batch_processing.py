@@ -8,7 +8,7 @@ import tkinter as tk
 import unittest
 from unittest.mock import MagicMock
 
-from oaGui.Core.batch_processing_engine import BatchProcessingEngine
+from oaGui.Workers.batch_processing_engine import BatchProcessingEngine
 
 
 class TestBatchProcessingEngine(unittest.TestCase):

@@ -20,9 +20,9 @@ app_constants = Config.get_instance()
 from oaGui.Core.base_widget_creator import BaseWidgetCreator
 from oaGuiElements.Core.faders.fader_horizontal.Core.fader_horizontal import BuilderFaderHorizontalCreator
 from oaGuiElements.Core.utils.knob.Core.knob import BuilderKnobCreator
-from oaGui.Core.factory.widget_registry import WidgetRegistry
-from oaGui.Core.transparency.transparency import TransparencyManager
-from oaGui.Core.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Hooks.widget_registry import WidgetRegistry
+from oaGui.Workers.transparency.transparency import TransparencyManager
+from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Methods.matrix_gate import is_debug_allowed

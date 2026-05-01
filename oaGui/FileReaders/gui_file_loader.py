@@ -4,7 +4,7 @@
 #
 # Description: Handles File I/O and Hash Verification.
 
-from .blueprint_loader import BlueprintLoader
+from oaGui.FileReaders.blueprint_loader import BlueprintLoader
 
 
 class GuiFileLoaderMixin:

@@ -17,7 +17,7 @@ from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
-from oaGui.Core.loader.gui_from_json import UniversalGuiLoader
+from oaGui.FileReaders.gui_from_json import UniversalGuiLoader
 from oaOchestration.Constants.project_paths import GLOBAL_PROJECT_ROOT
 
 

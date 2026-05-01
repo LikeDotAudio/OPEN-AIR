@@ -7,7 +7,7 @@
 import unittest
 from unittest.mock import MagicMock, patch
 
-from oaGui.Core.ui_window import UIWindowManager
+from oaGui.Interface.ui_window import UIWindowManager
 
 
 class TestUIWindowManager(unittest.TestCase):

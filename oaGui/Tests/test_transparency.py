@@ -8,7 +8,7 @@ import tkinter as tk
 import unittest
 from unittest.mock import MagicMock, patch
 
-from oaGui.Core.transparency.transparency import BackgroundSlicer, TransparencyConfig, TransparencyManager
+from oaGui.Workers.transparency import BackgroundSlicer, TransparencyConfig, TransparencyManager
 
 
 class TestTransparency(unittest.TestCase):

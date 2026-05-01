@@ -22,7 +22,7 @@ from oaGui.Core.marker_repository_watcher import MarkerRepositoryWatcher
 from oaComProtocols.oaComMQTT.Methods.mqtt_controller_util import MqttControllerUtility
 
 # --- EXTRACTED CORE MODULES ---
-from oaGui.Core.instrument_controller import InstrumentController
+from oaGui.Managers.instrument_controller import InstrumentController
 
 # Constants
 BUFFER_START_STOP_MHZ = 0.1

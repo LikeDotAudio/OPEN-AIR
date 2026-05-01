@@ -16,7 +16,7 @@ from oaGuiEditorWYSIWYG.FileWriters.file_writer import FileWriter
 from oaComBroker.Core.event_bus import event_bus
 
 # --- UI & Widget Construction ---
-from oaGui.Core.layout_parser import LayoutParser
+from oaGui.FileReaders.layout_parser import LayoutParser
 from oaGuiEditorWYSIWYG.Core.state import StateManager
 
 # --- Data & Processing Utilities ---

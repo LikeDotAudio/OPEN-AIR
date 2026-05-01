@@ -15,16 +15,16 @@ import tkinter as tk
 from tkinter import ttk
 
 from oaConfigurationManager.FileReaders.config_reader import Config
-from oaGui.Core.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
 from oaLogging.Methods.matrix_gate import matrix_log
 from oaPTP.Core.ptp import register_ptp_callback, unregister_ptp_callback
 from oaStyle.Core.style import DEFAULT_THEME, THEMES
 
-from .Core.ptp_dissector_engine import PTPDissectorEngine
-from .Core.ptp_meter_panel import PTPMeterPanel
+from oaGui.Assets.Window_1.right_50.bottom_90.2_monitors.1588_PTP_Monitor.Core.ptp_dissector_engine import PTPDissectorEngine
+from oaGui.Assets.Window_1.right_50.bottom_90.2_monitors.1588_PTP_Monitor.Core.ptp_meter_panel import PTPMeterPanel
 
 # --- EXTRACTED CORE MODULES ---
-from .Core.ptp_processor import PTPDataProcessor
+from oaGui.Assets.Window_1.right_50.bottom_90.2_monitors.1588_PTP_Monitor.Core.ptp_processor import PTPDataProcessor
 
 app_constants = Config.get_instance()
 

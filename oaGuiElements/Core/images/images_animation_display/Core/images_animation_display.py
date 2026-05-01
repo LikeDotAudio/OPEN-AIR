@@ -20,7 +20,7 @@ from oaLogging.Methods.matrix_gate import matrix_log
 app_constants = Config.get_instance()  # Get the singleton instance
 
 from oaGui.Methods.i18n_utils import get_text
-from oaGui.Core.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Methods.matrix_gate import is_debug_allowed

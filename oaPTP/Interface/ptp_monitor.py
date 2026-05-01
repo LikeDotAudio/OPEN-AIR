@@ -10,7 +10,7 @@ import tkinter as tk
 from tkinter import ttk
 
 from oaConfigurationManager.FileReaders.config_reader import Config
-from oaGui.Core.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
 from oaLogging.Methods.matrix_gate import matrix_log
 from oaPTP.Core.ptp import register_ptp_callback, unregister_ptp_callback
 from oaStyle.Core.style import DEFAULT_THEME, THEMES

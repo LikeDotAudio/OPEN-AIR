@@ -1,4 +1,4 @@
-digraph "oaGui/Core/transparency"
+digraph "oaGui.Workers.transparency"
 {
  // LATEX_PDF_SIZE
   bgcolor="transparent";

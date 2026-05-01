@@ -11,7 +11,7 @@ from unittest.mock import MagicMock, patch
 
 # Import the class to be patched where it's used
 # Import the module under test first
-from oaGui.Core.loader.gui_from_json import UniversalGuiLoader
+from oaGui.FileReaders.gui_from_json import UniversalGuiLoader
 
 
 class TestUniversalGuiLoader(unittest.TestCase):
@@ -33,7 +33,7 @@ class TestUniversalGuiLoader(unittest.TestCase):
         self.mock_config = {"app_instance": MagicMock()}
 
     # Patch DynamicGuiBuilder within the module where it's used: gui_from_json.py
-    @patch('oaGui.Core.loader.gui_from_json.DynamicGuiBuilder')
+    @patch('oaGui.FileReaders.universal_gui_loader.DynamicGuiBuilder')
     @patch.object(pathlib.Path, 'exists', return_value=True)
     def test_initialization_and_build(self, mock_exists, mock_builder_class):
         """OPERATE: Instantiate Loader. CHECK: Verify it sets up and starts the builder."""
@@ -56,7 +56,7 @@ class TestUniversalGuiLoader(unittest.TestCase):
 
     @patch.object(pathlib.Path, 'exists', return_value=False)
     # Patch DynamicGuiBuilder within the module where it's used: gui_from_json.py
-    @patch('oaGui.Core.loader.gui_from_json.DynamicGuiBuilder')
+    @patch('oaGui.FileReaders.universal_gui_loader.DynamicGuiBuilder')
     def test_missing_blueprint_error(self, mock_builder_class, mock_exists):
         """OPERATE: Trigger build with missing file. CHECK: Verify error handling."""
         mock_builder = MagicMock()

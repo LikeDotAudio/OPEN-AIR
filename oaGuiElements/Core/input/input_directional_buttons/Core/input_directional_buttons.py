@@ -20,7 +20,7 @@ app_constants = Config.get_instance()
 
 from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic
 from oaGui.Methods.i18n_utils import get_text
-from oaGui.Core.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
 
 
 class BuilderInputDirectionalButtonsCreator(TransparencyMixin):

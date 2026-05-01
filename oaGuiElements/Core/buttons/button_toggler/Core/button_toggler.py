@@ -13,8 +13,8 @@ app_constants = Config.get_instance()
 from oaGui.Methods.i18n_utils import get_text
 from oaGui.Core.base_widget_creator import BaseWidgetCreator
 from oaGui.Core.factory.button_canvas_base import CanvasButton
-from oaGui.Core.factory.widget_registry import WidgetRegistry
-from oaGui.Core.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Hooks.widget_registry import WidgetRegistry
+from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
 
 
 class TogglerButton(CanvasButton):

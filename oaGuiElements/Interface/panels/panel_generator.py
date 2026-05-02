@@ -11,7 +11,7 @@ from PIL import Image, ImageChops, ImageDraw, ImageFilter, ImageTk
 
 # --- Imports for the new modular architecture ---
 from oaGuiElements.Methods.utils import PanelUtils
-from oaGui.Core.factory.asset_cache import AssetCacheManager
+from oaGui.Core.factory.cache_image_store import CacheImageStore
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Core.logger import builder_logger
@@ -85,7 +85,7 @@ class PanelGenerator:
 
         # --- 0. Check Cache First ---
         if BUILDER_DEBUG: builder_logger.trace(f"📦🔍✨ [CACHE] Checking for procedural panel in cache: {width}x{height} (Scale: {scale_factor})")
-        cached_image = AssetCacheManager.load_from_cache("panel", width, height, configuration_data)
+        cached_image = CacheImageStore.load_from_cache("panel", width, height, configuration_data)
         if cached_image:
             if BUILDER_DEBUG: builder_logger.debug("📦🆗✅ [CACHE] Retaining procedural panel from disk cache.")
             return cached_image
@@ -258,7 +258,7 @@ class PanelGenerator:
             panel_image = panel_image.filter(ImageFilter.GaussianBlur(radius=blur_radius_value))
 
         if BUILDER_DEBUG: builder_logger.success("🎨🆗💾 [SUCCESS] Procedural panel generation complete. Saving to disk cache.")
-        AssetCacheManager.save_to_cache("panel", width, height, configuration_data, panel_image)
+        CacheImageStore.save_to_cache("panel", width, height, configuration_data, panel_image)
         return panel_image
 
     @staticmethod

@@ -5,7 +5,7 @@
 # Description: Shared Base Class for photorealistic Canvas-based buttons.
 
 import tkinter as tk
-from oaGui.Methods.button_image_renderer import ButtonImageRenderer
+from oaGui.Methods.rendering.button_image_renderer import ButtonImageRenderer
 
 class CanvasButton(tk.Canvas):
     """
@@ -43,7 +43,7 @@ class CanvasButton(tk.Canvas):
         self.is_hovered = False
         self.is_pressed = False
         self.builder = builder
-        self.config_data = config
+        self.configuration = config
         self.transparency_applicator = transparency_applicator
 
         super().__init__(parent, width=max(1, int(width)), height=max(1, int(height)),

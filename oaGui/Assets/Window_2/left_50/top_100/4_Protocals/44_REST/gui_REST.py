@@ -11,7 +11,7 @@ from oaComProtocols.oaComREST.Interface.gui_REST import RestDashboard
 class RestMonitor(RestDashboard):
     """
     A local instance of the REST Dashboard plugin.
-    This class is discovered by ModuleLoader and instantiated.
+    This class is discovered by LoaderFacade and instantiated.
     """
     def __init__(self, parent, **kwargs):
         super().__init__(parent, **kwargs)

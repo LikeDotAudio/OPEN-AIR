@@ -8,10 +8,10 @@ import inspect
 import math
 import tkinter as tk
 
-from oaGui.Methods.i18n_utils import get_text
+from oaGui.Methods.formatting.i18n_utils import get_text
 from oaGuiElements.Core.Knobs.knob.Core.knob import CustomKnobFrame
-from oaGui.Hooks.widget_registry import WidgetRegistry
-from oaGui.Workers.transparency.transparency import TransparencyManager
+from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
+from oaGui.Workers.compositing.engine_visual_effects import EngineVisualEffects
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Methods.matrix_gate import matrix_log
@@ -154,7 +154,7 @@ class RotarySelectorSwitch(CustomKnobFrame):
             canvas.create_text(cx, height - 10, text=options.get("selection_text"), fill=colors['indicator'],
                                font=("Helvetica", 9, "bold"), anchor="s", tags="industrial_text")
 
-@WidgetRegistry.register("SelectorSwitch", "_SelectorSwitch")
+@RegistryWidgetStore.register("SelectorSwitch", "_SelectorSwitch")
 class BuilderKnobRotarySelectorCreator:
     """Factory for creating Rotary Selector Switch widgets."""
 
@@ -235,8 +235,8 @@ class BuilderKnobRotarySelectorCreator:
         # ⚡ INDUSTRIAL TRANSPARENCY: Apply via Manager
         if hasattr(builder_instance, '_apply_transparency'):
             matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"👻🌀🪟 [ALPHA] Applying industrial transparency to rotary selector '{label}'", level="TRACE")
-            TransparencyManager.apply_transparency(frame, frame.canvas, config_data, builder_instance)
-            TransparencyManager.apply_transparency(frame, frame, config_data, builder_instance)
+            EngineVisualEffects.apply_transparency(frame, frame.canvas, config_data, builder_instance)
+            EngineVisualEffects.apply_transparency(frame, frame, config_data, builder_instance)
 
         # 4. MQTT Registration
         if path and state_mirror_engine:

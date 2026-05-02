@@ -16,10 +16,10 @@ from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
-from oaGui.Methods.i18n_utils import get_text
-from oaGui.Core.base_widget_creator import BaseWidgetCreator
-from oaGui.Hooks.widget_registry import WidgetRegistry
-from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Methods.formatting.i18n_utils import get_text
+from oaGui.Core.factory.base_widget_creator import BaseWidgetCreator
+from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
+from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 
 # --- Global Scope Variables ---
 current_file = f"{os.path.basename(__file__)}"
@@ -28,8 +28,8 @@ current_file = f"{os.path.basename(__file__)}"
 DEFAULT_PAD_X = 5
 DEFAULT_PAD_Y = 2
 
-@WidgetRegistry.register("_Checkbox", "_SmartCheckbox", "_GuiCheckbox")
-class BuilderCheckboxCreator(BaseWidgetCreator, TransparencyMixin):
+@RegistryWidgetStore.register("_Checkbox", "_SmartCheckbox", "_GuiCheckbox")
+class BuilderCheckboxCreator(BaseWidgetCreator, SyncBehavior):
     """
     Factory for creating photorealistic Checkboxes.
     """

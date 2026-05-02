@@ -51,8 +51,8 @@ def main():
     except Exception as e:
         logger.error(f"🔥 [ENTRY] Failed to register panic callback: {e}")
 
-    # 3. Launch the Application
-    matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🔥 [ENTRY] Launching OpenAir Application...", "INFO")
+    # 3. Launch the EngineGuiDisplay
+    matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🔥 [ENTRY] Launching OpenAir EngineGuiDisplay...", "INFO")
     try:
         import openair
         # Assuming openair has a main() entry point that starts the app
@@ -61,7 +61,7 @@ def main():
     except KeyboardInterrupt:
         matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🔥 [ENTRY] Session interrupted by user (KeyboardInterrupt).", "INFO")
     except Exception as e:
-        logger.exception(f"🔥 [ENTRY] Application crashed during profiling: {e}")
+        logger.exception(f"🔥 [ENTRY] EngineGuiDisplay crashed during profiling: {e}")
     finally:
         # 4. Stop Profiling and Generate Report
         manager.stop_profiling()

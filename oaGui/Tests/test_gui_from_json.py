@@ -1,8 +1,8 @@
-# oaGui/Tests/test_gui_from_json.py
+# oaGui/Tests/test_json_gui_host.py
 # Author: Gemini CLI
 # Version: 20260404.1.5
 #
-# Description: Unit tests for gui_from_json.py (UniversalGuiLoader)
+# Description: Unit tests for json_gui_host.py (JsonGuiHost)
 
 import pathlib
 import tkinter as tk
@@ -11,7 +11,7 @@ from unittest.mock import MagicMock, patch
 
 # Import the class to be patched where it's used
 # Import the module under test first
-from oaGui.FileReaders.gui_from_json import UniversalGuiLoader
+from oaGui.FileReaders.loader.json_gui_host import JsonGuiHost
 
 
 class TestUniversalGuiLoader(unittest.TestCase):
@@ -32,20 +32,25 @@ class TestUniversalGuiLoader(unittest.TestCase):
         self.test_json_path_fail = "oaGui/Tests/Assets/nonexistent.json"
         self.mock_config = {"app_instance": MagicMock()}
 
-    # Patch DynamicGuiBuilder within the module where it's used: gui_from_json.py
-    @patch('oaGui.FileReaders.universal_gui_loader.DynamicGuiBuilder')
+    # Patch LoaderOrchestrator within the module where it's used: json_gui_host.py
+    @patch('oaGui.FileReaders.loader.json_gui_host.LoaderOrchestrator')
     @patch.object(pathlib.Path, 'exists', return_value=True)
     def test_initialization_and_build(self, mock_exists, mock_builder_class):
         """OPERATE: Instantiate Loader. CHECK: Verify it sets up and starts the builder."""
+        # unittest.mock passes patches in REVERSE order of decorators (bottom to top).
+        # So mock_exists is argument 1, mock_builder_class is argument 2.
+        # My previous assumption "top-most is first" was WRONG for unittest.mock.
+        # Bottom-most decorator is FIRST argument.
+        
         mock_builder = MagicMock()
         mock_builder_class.return_value = mock_builder
 
-        loader = UniversalGuiLoader(self.root, self.test_json_path_success, self.mock_config)
+        loader = JsonGuiHost(self.root, self.test_json_path_success, self.mock_config)
 
         # Trigger the async build manually
         loader._construct_dynamic_gui()
 
-        # Verify DynamicGuiBuilder was instantiated
+        # Verify LoaderOrchestrator was instantiated
         mock_builder_class.assert_called_once()
 
         # Verify it was gridded and started
@@ -55,14 +60,13 @@ class TestUniversalGuiLoader(unittest.TestCase):
         loader.destroy()
 
     @patch.object(pathlib.Path, 'exists', return_value=False)
-    # Patch DynamicGuiBuilder within the module where it's used: gui_from_json.py
-    @patch('oaGui.FileReaders.universal_gui_loader.DynamicGuiBuilder')
+    @patch('oaGui.FileReaders.loader.json_gui_host.LoaderOrchestrator')
     def test_missing_blueprint_error(self, mock_builder_class, mock_exists):
         """OPERATE: Trigger build with missing file. CHECK: Verify error handling."""
         mock_builder = MagicMock()
         mock_builder_class.return_value = mock_builder
 
-        loader = UniversalGuiLoader(self.root, self.test_json_path_fail, self.mock_config)
+        loader = JsonGuiHost(self.root, self.test_json_path_fail, self.mock_config)
 
         # Trigger build
         with patch.object(loader, '_handle_build_error') as mock_handle:

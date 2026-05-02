@@ -14,13 +14,13 @@ from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- GUI FALLBACKS (V3.2.1 Decoupling) ---
 try:
-    from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+    from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 except ImportError:
-    class TransparencyMixin:
+    class SyncBehavior:
         """Fallback mixin for standalone execution without GUI manager."""
         def render(self): pass
 
-class NmosWebsocketManagerImplementation(tk.Frame, TransparencyMixin):
+class NmosWebsocketManagerImplementation(tk.Frame, SyncBehavior):
     """
     NMOS WebSocket Manager GUI.
     Allows users to control the IS-07 WebSocket transport.

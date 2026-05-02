@@ -1,14 +1,14 @@
-# oaGui/Tests/test_shutdown_coordinator.py
+# oaGui/Tests/test_loader_shutdown_service.py
 # Author: Gemini CLI
 # Version: 20260409.1.1
 #
-# Description: Unit tests for shutdown_coordinator.py (Optimized for synchronous execution)
+# Description: Unit tests for loader_shutdown_service.py (Optimized for synchronous execution)
 
 import tkinter as tk
 import unittest
 from unittest.mock import MagicMock
 
-from oaGui.Managers.shutdown_coordinator import ShutdownCoordinator
+from oaGui.Managers.lifecycle.loader_shutdown_service import LoaderShutdownService
 
 
 class TestShutdownCoordinator(unittest.TestCase):
@@ -27,7 +27,7 @@ class TestShutdownCoordinator(unittest.TestCase):
             "service2": self.mock_service2
         }
 
-        self.coordinator = ShutdownCoordinator(self.mock_root, self.shared_instances)
+        self.coordinator = LoaderShutdownService(self.mock_root, self.shared_instances)
 
     def test_on_closing_stops_managers(self):
         """OPERATE: Trigger on_closing synchronously. CHECK: Verify managers are signaled to stop."""
@@ -35,7 +35,7 @@ class TestShutdownCoordinator(unittest.TestCase):
         self.coordinator.on_closing(run_async=False)
 
         # Verify stop/shutdown/disconnect was called on instances
-        # (It checks for .stop() first in ShutdownCoordinator)
+        # (It checks for .stop() first in LoaderShutdownService)
         self.mock_service1.stop.assert_called_once()
         self.mock_service2.stop.assert_called_once()
 

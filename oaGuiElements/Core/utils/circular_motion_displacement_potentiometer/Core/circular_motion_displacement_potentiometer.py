@@ -12,8 +12,8 @@ from oaConfigurationManager.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
 # --- Specialized Modules ---
-from oaGui.Hooks.widget_registry import WidgetRegistry
-from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
+from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 
 # --- EXTRACTED CORE MODULES ---
 from .cmdp_interaction_mixin import CMDPInteractionMixin
@@ -26,7 +26,7 @@ from .cmdp_group_handler import CMDPGroupHandler
 
 class CMDPWidget(
     tk.Frame,
-    TransparencyMixin,
+    SyncBehavior,
     CMDPInteractionMixin,
     CMDPRendererMixin
 ):
@@ -115,7 +115,7 @@ class CMDPWidget(
         if hasattr(self, 'tm'):
             self.tm.refresh()
 
-@WidgetRegistry.register("_CMDP")
+@RegistryWidgetStore.register("_CMDP")
 class BuilderCircularMotionDisplacementPotentiometerCreator:
     @staticmethod
     def make(parent_widget, config_data, context=None, **kwargs):

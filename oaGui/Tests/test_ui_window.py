@@ -1,13 +1,13 @@
-# oaGui/Tests/test_ui_window.py
+# oaGui/Tests/test_tab_physical_window.py
 # Author: Gemini CLI
 # Version: 20260404.1.0
 #
-# Description: Unit tests for ui_window.py
+# Description: Unit tests for tab_physical_window.py
 
 import unittest
 from unittest.mock import MagicMock, patch
 
-from oaGui.Interface.ui_window import UIWindowManager
+from oaGui.Interface.viewport.tab_physical_window import TabWindowManager
 
 
 class TestUIWindowManager(unittest.TestCase):
@@ -19,7 +19,7 @@ class TestUIWindowManager(unittest.TestCase):
         mock_root = MagicMock()
         mock_tk_class.return_value = mock_root
 
-        root = UIWindowManager.create_root_window()
+        root = TabWindowManager.create_root_window()
 
         # Verify base styling
         mock_root.configure.assert_called_with(bg="#2b2b2b")
@@ -42,7 +42,7 @@ class TestUIWindowManager(unittest.TestCase):
         mock_root = MagicMock()
         mock_tk_class.return_value = mock_root
 
-        UIWindowManager.create_root_window()
+        TabWindowManager.create_root_window()
 
         # Should NOT be called in create_root_window anymore
         for call in mock_root.attributes.call_args_list:
@@ -55,7 +55,7 @@ class TestUIWindowManager(unittest.TestCase):
         mock_root = MagicMock()
         mock_splash = MagicMock()
 
-        UIWindowManager.reveal_main_window(mock_root, mock_splash, False)
+        TabWindowManager.reveal_main_window(mock_root, mock_splash, False)
 
         mock_root.attributes.assert_called_with("-zoomed", True)
         mock_root.deiconify.assert_called_once()

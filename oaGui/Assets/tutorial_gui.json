@@ -450,7 +450,7 @@
                 },
                 "application_settings": {
                     "type": "OcaBlock",
-                    "description": "Application",
+                    "description": "EngineGuiDisplay",
                     "notes": "A group for application-level settings.",
                     "fields": {
                         "theme": {

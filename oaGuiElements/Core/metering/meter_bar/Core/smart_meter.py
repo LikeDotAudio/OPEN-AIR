@@ -10,18 +10,18 @@ import tkinter as tk
 
 from loguru import logger
 
-from oaGui.Methods.safe_after_mixin import SafeAfterMixin
+from oaGui.Methods.processing.deferred_task_handler import DeferredTaskHandler
 
 from .ballistics import BallisticsEngine
 from .layout_calculator import MeterLayoutCalculator
 from ..renderers.tk_canvas_renderer import TkCanvasRenderer
 
 
-class SmartMeter(tk.Canvas, SafeAfterMixin):
+class SmartMeter(tk.Canvas, DeferredTaskHandler):
     """The modular SmartMeter widget."""
 
     def __init__(self, parent, raw_config, state_mirror_engine=None, subscriber_router=None, base_topic=None, **kwargs):
-        self._init_safe_after()
+        self._init_deferred_handler()
         # Robust Background Inheritance
         try:
             p_bg = parent.cget("bg")
@@ -82,7 +82,7 @@ class SmartMeter(tk.Canvas, SafeAfterMixin):
 
         # 4. Finalize Initial State
         try:
-            self.safe_after(10, self._initial_draw)
+            self.defer(10, self._initial_draw)
         except:
             pass
 
@@ -134,10 +134,10 @@ class SmartMeter(tk.Canvas, SafeAfterMixin):
 
         # Set resize flag and schedule layout/redraw
         self.is_resizing = True
-        self.safe_after(50, lambda: self._perform_layout(self.canvas.winfo_width(), self.canvas.winfo_height()))
+        self.defer(50, lambda: self._perform_layout(self.canvas.winfo_width(), self.canvas.winfo_height()))
 
     def render(self):
-        """Hook for TransparencyMixin to trigger a redraw when slicing updates."""
+        """Hook for SyncBehavior to trigger a redraw when slicing updates."""
         if self.canvas.winfo_width() > 1:
             # Ensure we don't trigger layout if a resize is already in progress
             if not self.is_resizing:
@@ -192,7 +192,7 @@ class SmartMeter(tk.Canvas, SafeAfterMixin):
                 self.state_mirror.broadcast_gui_change_to_mqtt(self.configuration.path)
 
         if is_running:
-            self._anim_timer_id = self.safe_after(20, self._animate)
+            self._anim_timer_id = self.defer(20, self._animate)
 
     def _refresh_frame(self):
         current_v = self.physics.current_value

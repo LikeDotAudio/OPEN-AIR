@@ -17,7 +17,7 @@ from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()  # Get the singleton instance
 
-from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 from oaOchestration.Methods.widget_event_binder import bind_variable_trace
 
 # --- Global Scope Variables ---
@@ -28,7 +28,7 @@ DEFAULT_PAD_X = 5
 DEFAULT_PAD_Y = 2
 
 
-class BuilderSliderValueCreator(TransparencyMixin):
+class BuilderSliderValueCreator(SyncBehavior):
     """
     A mixin class that provides the functionality for creating a
     slider widget combined with a text entry box.

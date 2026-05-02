@@ -33,13 +33,13 @@ from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- GUI FALLBACKS (V3.2.1 Decoupling) ---
 try:
-    from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+    from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 except ImportError:
-    class TransparencyMixin:
+    class SyncBehavior:
         """Fallback mixin for standalone execution without GUI manager."""
         def render(self): pass
 
-class RestDashboard(tk.Frame, TransparencyMixin):
+class RestDashboard(tk.Frame, SyncBehavior):
     """
     REST API Status, Control & Monitor.
     """

@@ -14,12 +14,12 @@ from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
-from oaGui.Methods.i18n_utils import get_text
-from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Methods.formatting.i18n_utils import get_text
+from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 from oaOchestration.Methods.widget_event_binder import bind_variable_trace
 
 
-class BuilderFaderInputCreator(TransparencyMixin):
+class BuilderFaderInputCreator(SyncBehavior):
     """Mixin for creating a simple entry field synced with a DoubleVar."""
 
     def make_fader_input(self, parent_widget, config_data, context=None, **kwargs):

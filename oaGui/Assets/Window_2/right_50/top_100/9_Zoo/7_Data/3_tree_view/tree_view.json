@@ -35,10 +35,10 @@
           "Application_Config": {
             "type": "JsonTree",
             "label_active": {
-              "En": "Dataset Configuration Application",
-              "Fr": "Dataset Configuration Application",
-              "De": "Dataset Configuration Application",
-              "Es": "Dataset Configuration Application"
+              "En": "Dataset Configuration EngineGuiDisplay",
+              "Fr": "Dataset Configuration EngineGuiDisplay",
+              "De": "Dataset Configuration EngineGuiDisplay",
+              "Es": "Dataset Configuration EngineGuiDisplay"
             },
             "json_source": "display/right_50/bottom_90/10_sets/dataset_configuration_application.json",
             "allow_filter": true

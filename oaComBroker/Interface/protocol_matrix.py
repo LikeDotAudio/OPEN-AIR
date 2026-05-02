@@ -19,7 +19,7 @@ class ProtocolMatrix(tk.Frame):
     Cols = Destination (TO)
     """
     def __init__(self, parent, **kwargs):
-        # Extract non-Tkinter arguments often passed by the ModuleLoader
+        # Extract non-Tkinter arguments often passed by the LoaderFacade
         self.config_data = kwargs.pop("config", {})
         self.json_path = kwargs.pop("json_path", None)
 

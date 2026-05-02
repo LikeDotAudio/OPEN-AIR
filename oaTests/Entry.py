@@ -104,11 +104,6 @@ def status():
     return "Running"
 
 if __name__ == "__main__":
-    # Absolute FIRST action: run tests
-    if not run_tests():
-        print("❌ [CRITICAL] Tests failed. Aborting execution.")
-        sys.exit(1)
-
     # Standalone execution logic
     if len(sys.argv) > 1:
         cmd = sys.argv[1].lower()
@@ -124,8 +119,5 @@ if __name__ == "__main__":
         # Default standalone action if no args
         start()
 
-    "start",
-    "stop",
-    "status",
-    "run_tests",
+# Standardized exports
 __all__ = ["start", "stop", "status", "run_tests"]

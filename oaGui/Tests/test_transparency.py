@@ -8,7 +8,7 @@ import tkinter as tk
 import unittest
 from unittest.mock import MagicMock, patch
 
-from oaGui.Workers.transparency import BackgroundSlicer, TransparencyConfig, TransparencyManager
+from oaGui.Workers.compositing import EngineTextureMapper, TransparencyConfig, EngineVisualEffects
 
 
 class TestTransparency(unittest.TestCase):
@@ -52,7 +52,7 @@ class TestTransparency(unittest.TestCase):
     @patch('PIL.ImageTk.PhotoImage')
     def test_background_slicer_perform_slice(self, mock_photo):
         """OPERATE: Perform slice. CHECK: Verify crop coordinates and image creation."""
-        slicer = BackgroundSlicer(self.mock_widget, self.mock_canvas, self.mock_builder, "TestWidget")
+        slicer = EngineTextureMapper(self.mock_widget, self.mock_canvas, self.mock_builder, "TestWidget")
 
         # Mock hierarchical geometry for get_relative_pos
         # rendering_target (mock_canvas) -> scroll_frame (mock_builder.scroll_frame)
@@ -81,7 +81,7 @@ class TestTransparency(unittest.TestCase):
     def test_apply_transparency_registration(self):
         """OPERATE: Apply transparency. CHECK: Verify it's registered with the builder."""
         config = {"transparent": True}
-        TransparencyManager.apply_transparency(self.mock_widget, self.mock_canvas, config, self.mock_builder)
+        EngineVisualEffects.apply_transparency(self.mock_widget, self.mock_canvas, config, self.mock_builder)
 
         # Verify builder.register_for_slicing was called
         self.mock_builder.register_for_slicing.assert_called_once()

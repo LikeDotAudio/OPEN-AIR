@@ -16,7 +16,7 @@
 #
 #        self.root.destroy()
 #
-#    @patch('oaGuiEditorWYSIWYG.Tabs.Core.layout.preview_engine.DynamicGuiBuilder')
+#    @patch('oaGuiEditorWYSIWYG.Tabs.Core.layout.preview_engine.LoaderOrchestrator')
 #        """Test that the engine uses the GUI builder to render a preview."""
 #        mock_builder_instance = MockGuiBuilder.return_value
 #        gui_definition = {
@@ -32,7 +32,7 @@
 #        # Check that the build was called
 #        mock_builder_instance.build_gui.assert_called_once_with(gui_definition)
 #
-#    @patch('oaGuiEditorWYSIWYG.Tabs.Core.layout.preview_engine.DynamicGuiBuilder')
+#    @patch('oaGuiEditorWYSIWYG.Tabs.Core.layout.preview_engine.LoaderOrchestrator')
 #        """Test that the preview area can be cleared."""
 #        mock_builder_instance = MockGuiBuilder.return_value
 #
@@ -45,7 +45,7 @@
 #        # Check that the builder's destroy method was called
 #        mock_builder_instance.destroy_widgets.assert_called_once()
 #
-#    @patch('oaGuiEditorWYSIWYG.Tabs.Core.layout.preview_engine.DynamicGuiBuilder')
+#    @patch('oaGuiEditorWYSIWYG.Tabs.Core.layout.preview_engine.LoaderOrchestrator')
 #        """Test that updating the preview clears the old one first."""
 #        mock_builder_instance = MockGuiBuilder.return_value
 #

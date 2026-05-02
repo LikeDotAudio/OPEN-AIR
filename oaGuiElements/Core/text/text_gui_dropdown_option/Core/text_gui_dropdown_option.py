@@ -10,7 +10,7 @@ from tkinter import ttk
 
 from loguru import logger
 
-from oaGui.Methods.i18n_utils import get_text
+from oaGui.Methods.formatting.i18n_utils import get_text
 from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- Standard Debug Logging Setup ---
@@ -19,9 +19,9 @@ from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
 
-from oaGui.Hooks.widget_registry import WidgetRegistry
-from oaGui.Workers.transparency.transparency import TransparencyManager
-from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
+from oaGui.Workers.compositing.engine_visual_effects import EngineVisualEffects
+from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 
 from .dropdown import DropdownDataManager
 
@@ -29,8 +29,8 @@ from .dropdown import DropdownDataManager
 from .dropdown_style_mixin import DropdownStyleMixin
 
 
-@WidgetRegistry.register("_GuiDropDownOption")
-class BuilderTextGuiDropdownOptionCreator(TransparencyMixin):
+@RegistryWidgetStore.register("_GuiDropDownOption")
+class BuilderTextGuiDropdownOptionCreator(SyncBehavior):
     """A mixin class providing functionality for creating a dropdown (Combobox) widget."""
 
     def make_text_gui_dropdown_option(self, parent_widget, config_data, context=None, **kwargs):
@@ -52,7 +52,7 @@ class BuilderTextGuiDropdownOptionCreator(TransparencyMixin):
         try:
             sub_frame = tk.Canvas(parent_widget, bd=0, highlightthickness=0, relief="flat", height=30)
             if hasattr(self, '_apply_transparency'):
-                TransparencyManager.apply_transparency(sub_frame, sub_frame, config_data, builder_instance)
+                EngineVisualEffects.apply_transparency(sub_frame, sub_frame, config_data, builder_instance)
 
             # 1. Data parsing
             options_map, option_labels, option_values = DropdownDataManager.parse_options(config_data)

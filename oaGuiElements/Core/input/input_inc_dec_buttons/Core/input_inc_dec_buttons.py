@@ -15,11 +15,11 @@ from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
-from oaGui.Methods.i18n_utils import get_text
-from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Methods.formatting.i18n_utils import get_text
+from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 
 
-class BuilderInputIncDecButtonsCreator(TransparencyMixin):
+class BuilderInputIncDecButtonsCreator(SyncBehavior):
     # Creates a set of increment and decrement buttons along with a display for their current value.
     # This method sets up two buttons (up/down arrows) that, when pressed, modify a numerical
     # value. The current value is displayed, and the entire widget is synchronized via MQTT.

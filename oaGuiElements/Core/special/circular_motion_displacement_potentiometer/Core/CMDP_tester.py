@@ -2,7 +2,7 @@
 # Author: Anthony Peter Kuzub
 # Version: 20260315.Modular.1
 #
-# Description: Modularized CMPD Tester Application.
+# Description: Modularized CMPD Tester EngineGuiDisplay.
 
 import random
 import tkinter as tk

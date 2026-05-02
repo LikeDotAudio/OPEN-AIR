@@ -8,7 +8,7 @@ import tkinter as tk  # ⚡ FIX: Import tkinter for creating real frames
 import unittest
 from unittest.mock import MagicMock, patch
 
-from oaGui.Core.factory.gui_widget_factory import GuiWidgetFactoryMixin
+from oaGui.Hooks.registry.gui_widget_factory import GuiWidgetFactoryMixin
 
 
 class MockBuilder(GuiWidgetFactoryMixin):

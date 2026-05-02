@@ -31,9 +31,9 @@ from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- GUI FALLBACKS (V3.2.1 Decoupling) ---
 try:
-    from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+    from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 except ImportError:
-    class TransparencyMixin:
+    class SyncBehavior:
         """Fallback mixin for standalone execution without GUI manager."""
         def render(self): pass
 
@@ -42,7 +42,7 @@ import oaComProtocols.oaComOSC.Entry as OSC_MODULE
 
 
 # --- Define the actual GUI class ---
-class OscDashboardImplementation(tk.Frame, TransparencyMixin):
+class OscDashboardImplementation(tk.Frame, SyncBehavior):
     """
     OSC Status, Control & Monitor.
     Manages the OSC Bridge lifecycle and provides deep inspection of traffic.
@@ -255,7 +255,7 @@ class OscDashboardImplementation(tk.Frame, TransparencyMixin):
         self.inspect_text.insert(tk.END, "╚═════════════════════ END ════════════════════════╝")
 
     def render(self):
-        """Required by TransparencyMixin to sync background colors."""
+        """Required by SyncBehavior to sync background colors."""
         pass
 
     def destroy(self):

@@ -209,15 +209,15 @@ class CommandRouter(tk.Frame):
     def _add_entry(self, message):
         if not self.tree.winfo_exists(): return
 
-        # Machine Time (UTP)
-        utp = f"{message['timestamp']:.6f}"
-        source = message["source"]             # Transport (e.g. MQTT)
+        # ⚡ ROBUSTNESS: Use safe .get() for all router message fields
+        utp = f"{message.get('timestamp', 0.0):.6f}"
+        source = message.get("source", "UNKNOWN")             # Transport (e.g. MQTT)
         logical_source = message.get("logical_source", source) # Identity (e.g. MIDI)
-        guid = message.get("logical_guid", message["guid"])        # Identity (e.g. 32_0/3)
+        guid = message.get("logical_guid", message.get("guid", "LOCAL")) # Identity (e.g. 32_0/3)
 
         strategy = message.get("strategy", "BROADCAST")
-        topic = message["topic"]
-        value = message["value"]
+        topic = message.get("topic", "N/A")
+        value = message.get("value", "N/A")
 
         # Tags are now pre-calculated by the router (no brains in GUI)
         tags = message.get("ui_tags", [])
@@ -341,10 +341,10 @@ class CommandRouter(tk.Frame):
             return match["value"] if match else None
 
     def _find_app_instance(self):
-        from oaGui.Managers.gui_display import Application
+        from oaGui.Managers.display.engine_gui_display import EngineGuiDisplay
         curr = self.master
         while curr:
-            if isinstance(curr, Application):
+            if isinstance(curr, EngineGuiDisplay):
                 return curr
             try:
                 curr = curr.master

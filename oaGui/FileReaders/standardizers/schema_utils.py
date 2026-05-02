@@ -1,6 +1,6 @@
 # oaGui/FileReaders/standardizers/schema_utils.py
 # Author: Anthony Peter Kuzub
-# Version: 1.0.0
+# Version: 1.0.1
 #
 # Description: Utility functions for schema manipulation and normalization.
 
@@ -9,12 +9,12 @@ from oaGui.Constants.schema_defaults import ANCHOR_MAP, LEXICON
 
 def deep_merge(target, source):
     """Deep merges source dict into target dict without erasing nested blocks."""
-    for k, v in source.items():
-        if (isinstance(v, dict) and k in target and
-            isinstance(target[k], dict)):
-            deep_merge(target[k], v)
+    for key, value in source.items():
+        if (isinstance(value, dict) and key in target and
+            isinstance(target[key], dict)):
+            deep_merge(target[key], value)
         else:
-            target[k] = v
+            target[key] = value
     return target
 
 def expand_abbreviations(data):
@@ -23,22 +23,22 @@ def expand_abbreviations(data):
         return data
 
     new_data = {}
-    for k, v in data.items():
-        if isinstance(v, dict):
-            v = expand_abbreviations(v)
+    for key, value in data.items():
+        if isinstance(value, dict):
+            value = expand_abbreviations(value)
 
-        target_key = LEXICON.get(k, k)
-        new_data[target_key] = v
+        target_key = LEXICON.get(key, key)
+        new_data[target_key] = value
     return new_data
 
 def get_styled_val(key_list, config, style_block, cosmetics, default=None):
     """Probes multiple blocks for a style value."""
     colors = cosmetics.get("colors", {})
-    for k in key_list:
-        if k in style_block: return style_block[k]
-        if k in config: return config[k]
-        if k in colors: return colors[k]
-        if k in cosmetics: return cosmetics[k]
+    for key in key_list:
+        if key in style_block: return style_block[key]
+        if key in config: return config[key]
+        if key in colors: return colors[key]
+        if key in cosmetics: return cosmetics[key]
     return default
 
 def calculate_sticky(geometry):

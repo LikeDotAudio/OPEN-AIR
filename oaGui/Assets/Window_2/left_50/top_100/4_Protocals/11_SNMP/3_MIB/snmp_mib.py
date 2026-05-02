@@ -12,7 +12,7 @@ from oaComProtocols.oaComSNMP.Interface.snmp_mib_impl import SnmpMibImplementati
 class SnmpMibGUI(SnmpMibImplementation):
     """
     A wrapper class pointing to the SNMP MIB GUI implementation.
-    This class is discovered by ModuleLoader and instantiated.
+    This class is discovered by LoaderFacade and instantiated.
     It inherits directly from the implementation to maintain full functionality.
     """
     # No additional logic is needed here as we inherit the full implementation.

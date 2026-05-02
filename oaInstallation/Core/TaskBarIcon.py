@@ -117,7 +117,7 @@ def install_icon():
 
         if DESKTOP_FILENAME in current_favorites:
             if LOCAL_DEBUG:
-                logger.info("🖥️🖱️🎨 [DESKTOP] Application already in "
+                logger.info("🖥️🖱️🎨 [DESKTOP] EngineGuiDisplay already in "
                             "favorites.")
         else:
             if LOCAL_DEBUG:

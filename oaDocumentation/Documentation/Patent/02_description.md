@@ -21,7 +21,7 @@ The application employs a decoupled, message-driven architecture using an MQTT m
 *   **Workers:** Active background processes acquiring data (e.g., polling spectrum peaks) and publishing it via MQTT.
 *   **Display:** The photorealistic GUI that both publishes commands and subscribes to data streams.
 
-The **"Next Gen" Rendering Engine** elevates standard software meters into photorealistic industrial instruments. It features a "MeterModifier" class that draws custom vintage bezels (Gem, Hex, Squircle, Trapezoid, Crest), simulates radial glow (warm bulb lighting), and applies inner shadows to create a high-fidelity depth-of-field effect. Industrial transparency is applied across all widgets using a "TransparencyMixin."
+The **"Next Gen" Rendering Engine** elevates standard software meters into photorealistic industrial instruments. It features a "MeterModifier" class that draws custom vintage bezels (Gem, Hex, Squircle, Trapezoid, Crest), simulates radial glow (warm bulb lighting), and applies inner shadows to create a high-fidelity depth-of-field effect. Industrial transparency is applied across all widgets using a "SyncBehavior."
 
 The **YAK Command Abstraction Protocol** translates abstract, application-level commands into the specific SCPI (Standard Commands for Programmable Instruments) language of the connected hardware. This enables the software to adapt to diverse instrument models via a central `YaketyYakManager` and `YakFleetCommandBuilder`.
 
@@ -31,7 +31,7 @@ The application is implemented in Python, managed by a supervisor entry point, `
 
 ### Filesystem-Driven Dynamic GUI Construction
 
-The GUI is dynamically constructed at runtime by the `gui_display.py` module. This module recursively scans the `display` directory and builds the layout based on folder naming conventions:
+The GUI is dynamically constructed at runtime by the `engine_gui_display.py` module. This module recursively scans the `display` directory and builds the layout based on folder naming conventions:
 *   **`left_50/` or `right_50/`:** Vertical splits with specified percentage width.
 *   **`top_10/` or `bottom_90/`:** Horizontal splits with specified percentage height.
 *   **Subdirectories:** Create tabs in a Notebook interface when multiple folders exist within a container.

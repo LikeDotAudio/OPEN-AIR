@@ -25,7 +25,7 @@ class TestApplicationInitializer(unittest.TestCase):
 
             self.assertTrue(result)
             mock_logger.debug.assert_called()
-            mock_logger.success.assert_called_with("🚀🏗️✅ [SUCCESS] Application initialization completed.")
+            mock_logger.success.assert_called_with("🚀🏗️✅ [SUCCESS] EngineGuiDisplay initialization completed.")
 
     @patch('oaOchestration.Managers.application_initializer.logger')
     def test_initialize_app_exception(self, mock_logger):

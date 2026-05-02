@@ -9,7 +9,7 @@ project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..
 if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
-from oaGuiManager.Core.bootstrap_sequence import AsyncBootstrapEngine
+from oaGui.Core.loader_bootstrap_engine import LoaderBootstrapEngine
 
 
 def main():
@@ -28,11 +28,11 @@ def main():
     mock_app_constants = MagicMock()
     mock_app_constants.global_settings = {"debug_enabled": False}
 
-    engine = AsyncBootstrapEngine(root, mock_splash, mock_services, mock_app_constants, mock_shutdown)
+    engine = LoaderBootstrapEngine(root, mock_splash, mock_services, mock_app_constants, mock_shutdown)
 
     print("Testing IMPROVED TclError handling in _launch_app...")
-    # Mock Application to raise TclError
-    with patch("oaGui.Entry.Application", side_effect=tk.TclError("Simulated TclError")):
+    # Mock EngineGuiDisplay to raise TclError
+    with patch("oaGui.Entry.EngineGuiDisplay", side_effect=tk.TclError("Simulated TclError")):
         try:
             engine._launch_app(
                 mock_services["mqtt_conn"],

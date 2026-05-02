@@ -14,7 +14,7 @@ from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()  # Get the singleton instance
 
-from oaGui.Methods.marker_logic import calculate_frequency_range
+from oaGui.Methods.instrumentation.marker_logic import calculate_frequency_range
 
 
 # Tunes the instrument based on the current marker selections in the Showtime tab.

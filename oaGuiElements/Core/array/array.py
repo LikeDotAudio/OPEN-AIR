@@ -9,17 +9,17 @@ import tkinter as tk
 from typing import Any
 
 from oaConfigurationManager.FileReaders.config_reader import Config
-from oaGui.Core.context.widget_context import WidgetContext
-from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Core.context.cache_widget_context import WidgetContext
+from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 from oaLogging.Methods.matrix_gate import matrix_log
 
-from oaGui.Managers.view_manager import ViewManager
-from oaGui.Methods.grid_column_configurator import GridColumnConfigurator
-from oaGui.Methods.array_data_expander import ArrayDataExpander
+from oaGui.Managers.interaction.interaction_view_states import InteractionViewStates
+from oaGui.Methods.rendering.grid_column_configurator import GridColumnConfigurator
+from oaGui.Methods.formatting.array_data_expander import ArrayDataExpander
 
 app_constants = Config.get_instance()
 
-class BuilderArrayCreator(TransparencyMixin):
+class BuilderArrayCreator(SyncBehavior):
     """
     Main orchestrator for data-driven Array widgets.
     Coordinates container setup, data expansion, and batch rendering handoff.
@@ -37,14 +37,14 @@ class BuilderArrayCreator(TransparencyMixin):
 
         # 1. Scaffolding
         main_container = self._setup_scaffolding(parent_widget, config_data, context, **kwargs)
-        view_manager = ViewManager(main_container)
-        main_container.bind("<Button-3>", view_manager.show_menu)
+        interaction_view_states = InteractionViewStates(main_container)
+        main_container.bind("<Button-3>", interaction_view_states.show_menu)
 
         # 2. Grid Management
-        grid_container = self._setup_grid_container(main_container, config_data, context, view_manager, **kwargs)
+        grid_container = self._setup_grid_container(main_container, config_data, context, interaction_view_states, **kwargs)
 
         # 3. Data-Driven Expansion
-        synthetic_fields = self._expand_data_to_fields(config_data, view_manager)
+        synthetic_fields = self._expand_data_to_fields(config_data, interaction_view_states)
 
         # 4. Asynchronous Build Handoff
         self._dispatch_batch_build(grid_container, config_data, synthetic_fields, context, **kwargs)
@@ -76,11 +76,11 @@ class BuilderArrayCreator(TransparencyMixin):
         self._apply_transparency(container, container, config, builder)
         return container
 
-    def _setup_grid_container(self, parent, config, context, view_manager, **kwargs) -> tk.Canvas:
+    def _setup_grid_container(self, parent, config, context, interaction_view_states, **kwargs) -> tk.Canvas:
         """Creates the inner grid container and configures its columns."""
         grid_container = tk.Canvas(parent, bd=0, highlightthickness=0, relief="flat")
         grid_container.grid(row=0, column=0, sticky="nsew")
-        grid_container.bind("<Button-3>", view_manager.show_menu)
+        grid_container.bind("<Button-3>", interaction_view_states.show_menu)
 
         builder = getattr(context, 'builder_instance', kwargs.get('builder_instance'))
         self._apply_transparency(grid_container, grid_container, config, builder)
@@ -90,14 +90,14 @@ class BuilderArrayCreator(TransparencyMixin):
 
         return grid_container
 
-    def _expand_data_to_fields(self, config: dict, view_manager: ViewManager) -> dict:
+    def _expand_data_to_fields(self, config: dict, interaction_view_states: InteractionViewStates) -> dict:
         """Transforms data array into a set of item configurations using the blueprint."""
         data_array = config.get("data", [])
         blueprint = config.get("blueprint", {})
         blocks = config.get("blocks") or config.get("fields")
 
         if data_array:
-            return ArrayDataExpander.expand_blueprint(blueprint, data_array, view_manager)
+            return ArrayDataExpander.expand_blueprint(blueprint, data_array, interaction_view_states)
 
         return blocks or {}
 

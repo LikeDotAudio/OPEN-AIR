@@ -25,7 +25,7 @@ This document provides a high-level summary of the architectural and functional 
 - **Major Feature Milestones**: Integrated the `MarkerSettingsManager` into the core application launch sequence. Stabilized SCPI trigger sequencing following a period of experimental shifts.
 
 ## December 2025: Performance and Authoritative Blueprints
-- **Key Tool Developments**: Refactored the `DynamicGuiBuilder` to establish local JSON blueprints as the authoritative source for UI structure, significantly reducing startup latency. Introduced "Map" event listeners for single-instance tab building.
+- **Key Tool Developments**: Refactored the `LoaderOrchestrator` to establish local JSON blueprints as the authoritative source for UI structure, significantly reducing startup latency. Introduced "Map" event listeners for single-instance tab building.
 - **Architectural Shifts**: Implemented a `StateMirrorEngine` with early-boot state caching. Standardized the directory-based GUI tab loading system (e.g., `1_Connection`, `2_Frequency`) for better project organization.
 - **Major Feature Milestones**: Implemented graceful fallbacks for missing image dependencies (PIL). Achieved significant performance gains in tab switching and high-frequency MQTT update handling.
 

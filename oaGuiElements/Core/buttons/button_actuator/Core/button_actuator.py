@@ -12,11 +12,11 @@ from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
-from oaGui.Methods.i18n_utils import get_text
-from oaGui.Core.base_widget_creator import BaseWidgetCreator
+from oaGui.Methods.formatting.i18n_utils import get_text
+from oaGui.Core.factory.base_widget_creator import BaseWidgetCreator
 from oaGui.Core.factory.button_canvas_base import CanvasButton
-from oaGui.Hooks.widget_registry import WidgetRegistry
-from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
+from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 
 # --- EXTRACTED CORE MODULES ---
 from .actuator_interaction_mixin import ActuatorInteractionMixin
@@ -75,8 +75,8 @@ class ActuatorButton(CanvasButton, ActuatorInteractionMixin, ActuatorStateMixin)
             if self.subscriber_router:
                 self.subscriber_router.unsubscribe_from_topic(self._status_topic, self._on_mqtt_state_update)
 
-@WidgetRegistry.register("_GuiActuator", "_SmartActuator", "_ButtonActuator", "_GuiButton")
-class BuilderButtonActuatorCreator(BaseWidgetCreator, TransparencyMixin):
+@RegistryWidgetStore.register("_GuiActuator", "_SmartActuator", "_ButtonActuator", "_GuiButton")
+class BuilderButtonActuatorCreator(BaseWidgetCreator, SyncBehavior):
     """Factory for creating Actuator Buttons."""
 
     def _assemble_ui(self, parent_widget, config_data, context, **kwargs):

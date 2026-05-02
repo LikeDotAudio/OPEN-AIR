@@ -16,7 +16,7 @@ from oaGuiEditorWYSIWYG.FileWriters.file_writer import FileWriter
 from oaComBroker.Core.event_bus import event_bus
 
 # --- UI & Widget Construction ---
-from oaGui.FileReaders.layout_parser import LayoutParser
+from oaGui.FileReaders.scanner.folder_layout_interpreter import FolderLayoutInterpreter
 from oaGuiEditorWYSIWYG.Core.state import StateManager
 
 # --- Data & Processing Utilities ---
@@ -46,9 +46,9 @@ class TestUIAndData(unittest.TestCase):
         (gui_dir / "sub_folder" / "widget.json").touch()
         (gui_dir / "__init__.py").touch()
 
-        parser = LayoutParser("1.0")
+        parser = FolderLayoutInterpreter("1.0")
         # Clear cache to ensure fresh scan
-        LayoutParser._scan_cache = {}
+        FolderLayoutInterpreter._scan_cache = {}
 
         # Test scan
         found = parser._scan_for_gui_files(gui_dir)
@@ -58,7 +58,7 @@ class TestUIAndData(unittest.TestCase):
         empty_dir = self.test_path / "empty"
         empty_dir.mkdir()
         (empty_dir / "__init__.py").touch()
-        LayoutParser._scan_cache = {}
+        FolderLayoutInterpreter._scan_cache = {}
         found_empty = parser._scan_for_gui_files(empty_dir)
         self.assertFalse(found_empty, "Should ignore __init__.py files")
 

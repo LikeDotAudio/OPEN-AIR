@@ -15,13 +15,13 @@ import oaComProtocols.oaComREST.Entry as REST_MODULE
 
 # --- GUI FALLBACKS (V3.2.1 Decoupling) ---
 try:
-    from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+    from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 except ImportError:
-    class TransparencyMixin:
+    class SyncBehavior:
         """Fallback mixin for standalone execution without GUI manager."""
         def render(self): pass
 
-class RestTreeImplementation(tk.Frame, TransparencyMixin):
+class RestTreeImplementation(tk.Frame, SyncBehavior):
     """
     Interactive API Tree Explorer.
     Allows manual testing of endpoints and full system state retrieval.

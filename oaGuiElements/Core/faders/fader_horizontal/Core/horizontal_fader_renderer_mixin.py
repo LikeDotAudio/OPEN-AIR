@@ -5,7 +5,7 @@
 # Description: Brief summary of purpose
 import math
 
-from oaGui.Methods.i18n_utils import get_text
+from oaGui.Methods.formatting.i18n_utils import get_text
 from oaStyle.Core.style import DEFAULT_THEME, THEMES
 
 from .horizontal_fader_asset_generator import HorizontalFaderAssetGenerator

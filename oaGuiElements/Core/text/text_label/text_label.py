@@ -4,23 +4,23 @@ import inspect
 # Author: Anthony Peter Kuzub
 # Version: 20260221.Standardized.1
 #
-# Description: A mixin class for the DynamicGuiBuilder that handles the creation of a label widget.
+# Description: A mixin class for the LoaderOrchestrator that handles the creation of a label widget.
 import tkinter as tk
 
 # --- Standard Debug Logging Setup ---
 from oaConfigurationManager.FileReaders.config_reader import Config
-from oaGui.Methods.i18n_utils import get_text
+from oaGui.Methods.formatting.i18n_utils import get_text
 from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
-from oaGui.Core.base_widget_creator import BaseWidgetCreator
-from oaGui.Hooks.widget_registry import WidgetRegistry
-from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Core.factory.base_widget_creator import BaseWidgetCreator
+from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
+from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 
 
-@WidgetRegistry.register("_Label", "_SmartLabel", "_GuiLabel")
-class BuilderTextLabelCreator(BaseWidgetCreator, TransparencyMixin):
+@RegistryWidgetStore.register("_Label", "_SmartLabel", "_GuiLabel")
+class BuilderTextLabelCreator(BaseWidgetCreator, SyncBehavior):
     """
     Factory for creating photorealistic Text Labels.
     """

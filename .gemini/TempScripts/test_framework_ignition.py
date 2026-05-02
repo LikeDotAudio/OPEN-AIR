@@ -18,19 +18,19 @@ def test_ignition():
     print("🚀 [TEST] Starting oaGui Ignition Test...")
 
     try:
-        from oaGui.Entry import Application
-        print("✅ [TEST] Successfully imported Application from oaGui.")
+        from oaGui.Entry import EngineGuiDisplay
+        print("✅ [TEST] Successfully imported EngineGuiDisplay from oaGui.")
     except ImportError as e:
-        print(f"❌ [TEST] Failed to import Application: {e}")
+        print(f"❌ [TEST] Failed to import EngineGuiDisplay: {e}")
         return False
 
     root = tk.Tk()
     root.withdraw() # Hide main window
 
-    print("🏗️ [TEST] Attempting to instantiate Application (Dry Run)...")
+    print("🏗️ [TEST] Attempting to instantiate EngineGuiDisplay (Dry Run)...")
     try:
         # Mock dependencies
-        app = Application(
+        app = EngineGuiDisplay(
             parent=root,
             root=root,
             mqtt_connection_manager=None,
@@ -38,22 +38,22 @@ def test_ignition():
             state_mirror_engine=None,
             state_cache_manager=None
         )
-        print("✅ [TEST] Application instantiated successfully.")
+        print("✅ [TEST] EngineGuiDisplay instantiated successfully.")
 
         # Check for key attributes/mixins
         if hasattr(app, '_build_from_directory'):
-            print("✅ [TEST] DirectoryBuilderMixin detected.")
+            print("✅ [TEST] FolderRecursiveScannerMixin detected.")
         else:
-            print("❌ [TEST] DirectoryBuilderMixin MISSING!")
+            print("❌ [TEST] FolderRecursiveScannerMixin MISSING!")
 
         if hasattr(app, 'layout_parser'):
-            print("✅ [TEST] LayoutParser detected.")
+            print("✅ [TEST] FolderLayoutInterpreter detected.")
         else:
-            print("❌ [TEST] LayoutParser MISSING!")
+            print("❌ [TEST] FolderLayoutInterpreter MISSING!")
 
         return True
     except Exception as e:
-        print(f"❌ [TEST] Application instantiation failed: {e}")
+        print(f"❌ [TEST] EngineGuiDisplay instantiation failed: {e}")
         import traceback
         traceback.print_exc()
         return False

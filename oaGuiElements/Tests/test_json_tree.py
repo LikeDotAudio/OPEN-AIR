@@ -72,7 +72,7 @@ class TestJsonTreeWidget(unittest.TestCase):
     def test_make_json_tree_prevents_name_error(self):
         """
         Tests that BuilderDataJsonTreeCreator.make() does not raise a NameError.
-        This test ensures that all necessary modules like TransparencyManager (or its mixin)
+        This test ensures that all necessary modules like EngineVisualEffects (or its mixin)
         are correctly imported and used.
         """
         config_data = {

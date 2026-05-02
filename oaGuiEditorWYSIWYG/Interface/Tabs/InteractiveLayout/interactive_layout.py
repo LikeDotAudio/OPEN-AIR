@@ -29,7 +29,7 @@
 import tkinter as tk
 
 from oaComBroker.Core.event_bus import event_bus
-from oaGui.Methods.safe_after_mixin import SafeAfterMixin
+from oaGui.Methods.processing.deferred_task_handler import DeferredTaskHandler
 from oaLogging.Methods.matrix_gate import matrix_log
 
 from oaGuiEditorWYSIWYG.Core.state import state_manager
@@ -42,11 +42,11 @@ from oaGuiEditorWYSIWYG.Interface.layout_engine.preview_engine import PreviewEng
 from oaGuiEditorWYSIWYG.Interface.layout_engine.ruler import Ruler
 
 
-class InteractiveLayout(tk.Frame, SafeAfterMixin):
+class InteractiveLayout(tk.Frame, DeferredTaskHandler):
     """The visual workspace where users interact with the GUI layout."""
 
     def __init__(self, parent, subscriber_router=None, state_mirror_engine=None, *args, **kwargs):
-        self._init_safe_after()
+        self._init_deferred_handler()
         kwargs.pop("bg", None)
         super().__init__(parent, bg="#1a1a1a", *args, **kwargs)
 
@@ -83,7 +83,7 @@ class InteractiveLayout(tk.Frame, SafeAfterMixin):
 
         self.bind("<Destroy>", self._on_destroy)
         self.bind("<Configure>", self._on_layout_configure)
-        self.safe_after(100, self._initial_startup_sync)
+        self.defer(100, self._initial_startup_sync)
 
     def _setup_engines(self):
         """Initializes modular layout and interaction engines."""
@@ -135,7 +135,7 @@ class InteractiveLayout(tk.Frame, SafeAfterMixin):
 
     def _on_destroy(self, event):
         if event.widget == self:
-            self._cleanup_safe_after()
+            self._cleanup_deferred_tasks()
             if self._refresh_timer: self.safe_after_cancel(self._refresh_timer)
             event_bus.unsubscribe("STATE_UPDATED", self._on_state_updated)
             event_bus.unsubscribe("FOCUS_REQUESTED", self._on_external_focus)
@@ -182,7 +182,7 @@ class InteractiveLayout(tk.Frame, SafeAfterMixin):
 
     def _refresh_preview(self):
         if self._refresh_timer: self.safe_after_cancel(self._refresh_timer)
-        self._refresh_timer = self.safe_after(200, self._perform_refresh)
+        self._refresh_timer = self.defer(200, self._perform_refresh)
 
     def _perform_refresh(self):
         self._refresh_timer = None
@@ -192,7 +192,7 @@ class InteractiveLayout(tk.Frame, SafeAfterMixin):
             superficial_pad=self.superficial_pad_var.get()
         )
         if builder:
-            builder.canvas.bind("<Configure>", lambda e: self.safe_after(100, self._sync_rulers), add="+")
+            builder.canvas.bind("<Configure>", lambda e: self.defer(100, self._sync_rulers), add="+")
             builder.canvas.bind("<Motion>", self._sync_rulers, add="+")
             builder.canvas.bind("<Button-1>", self._sync_rulers, add="+")
             self._sync_rulers()

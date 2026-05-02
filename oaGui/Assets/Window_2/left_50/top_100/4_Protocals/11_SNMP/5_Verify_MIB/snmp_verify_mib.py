@@ -12,7 +12,7 @@ from oaComProtocols.oaComSNMP.Interface.snmp_verify_mib_impl import SnmpVerifyMi
 class SnmpVerifyWithMibGUI(SnmpVerifyMibImplementation):
     """
     A wrapper class pointing to the SNMP Verify MIB GUI implementation.
-    This class is discovered by ModuleLoader and instantiated.
+    This class is discovered by LoaderFacade and instantiated.
     It inherits directly from the implementation to maintain full functionality.
     """
     # No additional logic is needed here as we inherit the full implementation.

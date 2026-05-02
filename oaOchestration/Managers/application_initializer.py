@@ -36,9 +36,9 @@ def initialize_app():
     try:
         if LOCAL_DEBUG:
             # The test specifically mocks logger.success to trigger an exception in test_initialize_app_exception
-            logger.success("🚀🏗️✅ [SUCCESS] Application initialization completed.")
+            logger.success("🚀🏗️✅ [SUCCESS] EngineGuiDisplay initialization completed.")
             matrix_log("core", "system", "initialize_app",
-                       "🚀🏗️✅ [SUCCESS] Application initialization completed.", "SUCCESS")
+                       "🚀🏗️✅ [SUCCESS] EngineGuiDisplay initialization completed.", "SUCCESS")
         return True
     except Exception as e:
         # matrix_log does not support exception() directly, but we use ERROR level for forensic integrity

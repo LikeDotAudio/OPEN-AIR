@@ -124,7 +124,7 @@ class WinkSwitch:
             )
             self.shutter_ids.append(frame)
 
-# --- Application Setup ---
+# --- EngineGuiDisplay Setup ---
 
 def run_app():
     root = tk.Tk()

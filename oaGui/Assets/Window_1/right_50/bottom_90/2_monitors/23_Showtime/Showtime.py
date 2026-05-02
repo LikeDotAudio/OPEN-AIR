@@ -6,6 +6,6 @@
 
 from oaGuiShowtime.Core.tab import ShowtimeTab
 
-# The ModuleLoader expects a class that inherits from tk.Frame or ttk.Frame.
+# The LoaderFacade expects a class that inherits from tk.Frame or ttk.Frame.
 # ShowtimeTab already does this.
 Showtime = ShowtimeTab

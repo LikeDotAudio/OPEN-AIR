@@ -9,16 +9,16 @@ from tkinter import ttk
 
 # --- GUI FALLBACKS (V3.2.1 Decoupling) ---
 try:
-    from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+    from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 except ImportError:
-    class TransparencyMixin:
+    class SyncBehavior:
         """Fallback mixin for standalone execution without GUI manager."""
         def render(self): pass
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = False
 
-class SnmpLogImplementation(tk.Frame, TransparencyMixin):
+class SnmpLogImplementation(tk.Frame, SyncBehavior):
     """
     Advanced SNMP Monitor with Change Tracking and Smart Sorting.
     - Green (Top): Value changed in this refresh.

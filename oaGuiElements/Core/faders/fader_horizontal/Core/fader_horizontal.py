@@ -11,13 +11,13 @@ from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
 
-from oaGui.Core.base_widget_creator import BaseWidgetCreator
+from oaGui.Core.factory.base_widget_creator import BaseWidgetCreator
 
 # --- EXTRACTED CORE MODULES ---
 from oaGuiElements.Core.faders.fader_horizontal.Core.horizontal_fader_renderer_mixin import HorizontalFaderRendererMixin
-from oaGui.Hooks.widget_registry import WidgetRegistry
-from oaGui.Workers.transparency.transparency import TransparencyManager
-from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
+from oaGui.Workers.compositing.engine_visual_effects import EngineVisualEffects
+from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 
 from .horizontal_fader_interaction_mixin import HorizontalFaderInteractionMixin
 
@@ -76,8 +76,8 @@ class CustomHorizontalFaderFrame(
 
     def _draw(self): self.render()
 
-@WidgetRegistry.register("_CustomHorizontalFader")
-class BuilderFaderHorizontalCreator(BaseWidgetCreator, TransparencyMixin):
+@RegistryWidgetStore.register("_CustomHorizontalFader")
+class BuilderFaderHorizontalCreator(BaseWidgetCreator, SyncBehavior):
 
     def _assemble_ui(self, parent_widget, config_data, context, **kwargs):
         """Assembles the Horizontal Fader UI."""
@@ -88,8 +88,8 @@ class BuilderFaderHorizontalCreator(BaseWidgetCreator, TransparencyMixin):
         frame = CustomHorizontalFaderFrame(parent_widget, val_var, config_data, config_data.get("path"), getattr(ctx, 'state_mirror_engine', None) or kwargs.get('state_mirror_engine'))
 
         if hasattr(b_inst, '_apply_transparency'):
-            TransparencyManager.apply_transparency(frame, frame.canvas, config_data, b_inst)
-            TransparencyManager.apply_transparency(frame, frame, config_data, b_inst)
+            EngineVisualEffects.apply_transparency(frame, frame.canvas, config_data, b_inst)
+            EngineVisualEffects.apply_transparency(frame, frame, config_data, b_inst)
 
         path = config_data.get("path")
         s_engine = getattr(ctx, 'state_mirror_engine', None) or kwargs.get('state_mirror_engine')

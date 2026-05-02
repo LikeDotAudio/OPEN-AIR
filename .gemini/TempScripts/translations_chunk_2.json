@@ -879,8 +879,8 @@
     "De": "Mathematische Messungen",
     "Es": "Mediciones matemáticas"
   },
-  "Dataset Configuration Application": {
-    "Fr": "Application de configuration de jeu de données",
+  "Dataset Configuration EngineGuiDisplay": {
+    "Fr": "EngineGuiDisplay de configuration de jeu de données",
     "De": "Datensatz-Konfigurationsanwendung",
     "Es": "Aplicación de configuración de conjunto de datos"
   },

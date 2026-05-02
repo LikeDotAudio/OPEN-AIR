@@ -11,7 +11,7 @@ from typing import Any
 
 # Ensure project root is in sys.path for direct execution
 current_dir = pathlib.Path(__file__).resolve().parent
-project_root = current_dir.parent.parent # Project root is two levels up
+project_root = current_dir.parent.parent.parent # Project root is three levels up
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 

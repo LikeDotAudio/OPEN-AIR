@@ -6,12 +6,12 @@ from pathlib import Path
 project_root = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(project_root))
 
-from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
+from oaGui.Core.factory.registry_widget_store import RegistryWidgetStore
 
 print(f"Scanning widgets from {project_root}...")
-WidgetRegistry.scan_widgets()
+RegistryWidgetStore.scan_widgets()
 
-registry = WidgetRegistry.get_registry()
+registry = RegistryWidgetStore.get_registry()
 print(f"Discovered {len(registry)} types.")
 for w_type in sorted(registry.keys()):
     print(f" - {w_type}: {registry[w_type].__name__}")

@@ -7,16 +7,16 @@
 import tkinter as tk
 
 from oaConfigurationManager.FileReaders.config_reader import Config
-from oaGui.Methods.i18n_utils import get_text
+from oaGui.Methods.formatting.i18n_utils import get_text
 
 # --- Standard Debug Logging Setup ---
 
 app_constants = Config.get_instance()
 
-from oaGui.Core.base_widget_creator import BaseWidgetCreator
-from oaGui.Hooks.widget_registry import WidgetRegistry
-from oaGui.Workers.transparency.transparency import TransparencyManager
-from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Core.factory.base_widget_creator import BaseWidgetCreator
+from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
+from oaGui.Workers.compositing.engine_visual_effects import EngineVisualEffects
+from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 from oaStyle.Core.style import DEFAULT_THEME, THEMES
 
 from .dual_fader_interaction_mixin import DualFaderInteractionMixin
@@ -72,8 +72,8 @@ class CustomDualFaderFrame(tk.Frame, DualFaderRendererMixin, DualFaderInteractio
     def render(self): self._draw_fader()
     def _draw(self): self.render()
 
-@WidgetRegistry.register("_CustomDualHorizontalFader", "_CustomDualVerticalFader")
-class BuilderFaderDualCreator(BaseWidgetCreator, TransparencyMixin):
+@RegistryWidgetStore.register("_CustomDualHorizontalFader", "_CustomDualVerticalFader")
+class BuilderFaderDualCreator(BaseWidgetCreator, SyncBehavior):
 
     is_composite = True
 
@@ -92,7 +92,7 @@ class BuilderFaderDualCreator(BaseWidgetCreator, TransparencyMixin):
         frame = CustomDualFaderFrame(parent_widget, config_data, path, s_engine, b_topic, s_router, orientation)
 
         if hasattr(b_inst, '_apply_transparency'):
-            TransparencyManager.apply_transparency(frame, frame.canvas, config_data, b_inst)
+            EngineVisualEffects.apply_transparency(frame, frame.canvas, config_data, b_inst)
 
         if path and s_engine:
             for v_id, var in [("V1", frame.v1_var), ("V2", frame.v2_var)]:

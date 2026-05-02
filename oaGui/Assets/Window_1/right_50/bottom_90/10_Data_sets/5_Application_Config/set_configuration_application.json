@@ -12,8 +12,8 @@
       "Active": {
         "type": "_GuiButtonToggle",
         "label": {
-          "En": "Application Active",
-          "Fr": "Application active",
+          "En": "EngineGuiDisplay Active",
+          "Fr": "EngineGuiDisplay active",
           "De": "Anwendung aktiv",
           "Es": "Aplicación activa"
         },

@@ -8,7 +8,7 @@ import inspect
 from typing import Any
 
 from oaConfigurationManager.FileReaders.config_reader import Config
-from oaGui.Methods.i18n_utils import get_text
+from oaGui.Methods.formatting.i18n_utils import get_text
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Methods.matrix_gate import matrix_log

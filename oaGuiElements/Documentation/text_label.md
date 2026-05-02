@@ -7,7 +7,7 @@
 ### File Level
 text_label/dynamic_guimake_text_label.py
 
-A mixin class for the DynamicGuiBuilder that handles the creation of a label
+A mixin class for the LoaderOrchestrator that handles the creation of a label
 widget.
 
 Author: Anthony Peter Kuzub

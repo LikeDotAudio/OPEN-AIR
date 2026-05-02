@@ -18,11 +18,11 @@ from oaLogging.Methods.matrix_gate import matrix_log
 app_constants = Config.get_instance()
 
 from oaComProtocols.oaComMQTT.Core import mqtt_publisher_service
-from oaGui.Methods.i18n_utils import get_text
-from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Methods.formatting.i18n_utils import get_text
+from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 
 
-class BuilderDataRadarCreator(TransparencyMixin):
+class BuilderDataRadarCreator(SyncBehavior):
     """
     Mixin for creating a Radar Eye widget.
     FIXED: Restored Background, Interaction, Grid, and Sweep.
@@ -120,7 +120,7 @@ class BuilderDataRadarCreator(TransparencyMixin):
             canvas.delete("bg")
             cx, cy, r_max = radar_state["cx"], radar_state["cy"], radar_state["radius"]
 
-            # ⚡ INDUSTRIAL TRANSPARENCY: Don't draw patina manually, TransparencyManager handles it.
+            # ⚡ INDUSTRIAL TRANSPARENCY: Don't draw patina manually, EngineVisualEffects handles it.
             # However, if we're NOT transparent, we might want a solid background.
             is_trans = config_data.get("transparent", False)
             if not is_trans and hasattr(canvas, 'panel_bg_image') and canvas.panel_bg_image:

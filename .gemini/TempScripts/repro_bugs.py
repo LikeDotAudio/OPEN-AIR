@@ -6,7 +6,7 @@ def test_syntax_errors():
     print("Checking for syntax/indentation errors...")
     files_to_check = [
         "oaAudioMixer/Tests/test_mixer_smoke.py",
-        "oaFileImportCSV/Methods/csv_parser.py"
+        "oaFileHandlers.oaFileImportCSV/Methods/csv_parser.py"
     ]
     for f in files_to_check:
         try:
@@ -27,7 +27,7 @@ if __name__ == "__main__":
     test_syntax_errors()
     test_broker_import()
 
-    # Run the fast_scanner test
+    # Run the folder_fast_io_utility test
     print("\nRunning FastScanner tests...")
     import subprocess
-    subprocess.run([sys.executable, "-m", "unittest", "oaGuiManager/Tests/test_fast_scanner.py"])
+    subprocess.run([sys.executable, "-m", "unittest", "oaGui/Tests/test_folder_fast_io_utility.py"])

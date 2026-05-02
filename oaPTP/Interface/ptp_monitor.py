@@ -3,14 +3,14 @@ import inspect
 
 # 1588_PTP_Monitor/ptp_monitor.py
 # Author: Anthony Peter Kuzub
-# Version: 20260315.Modular.1
+# Version: 20260502.1200.1
 #
 # Description: Modularized PTP (Precision Time Protocol) Monitor GUI.
 import tkinter as tk
 from tkinter import ttk
 
 from oaConfigurationManager.FileReaders.config_reader import Config
-from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 from oaLogging.Methods.matrix_gate import matrix_log
 from oaPTP.Core.ptp import register_ptp_callback, unregister_ptp_callback
 from oaStyle.Core.style import DEFAULT_THEME, THEMES
@@ -23,7 +23,7 @@ from .Core.ptp_processor import PTPDataProcessor
 
 app_constants = Config.get_instance()
 
-class PtpMonitor(tk.Frame, TransparencyMixin):
+class PtpMonitor(tk.Frame, SyncBehavior):
     """
     Modular GUI monitor for real-time PTP packet inspection and time analysis.
     """
@@ -50,10 +50,10 @@ class PtpMonitor(tk.Frame, TransparencyMixin):
         matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🖥️ PTP Monitor Initialized.", "DEBUG")
 
     def _find_builder(self, widget):
-        from oaGui.Workers.builder import DynamicGuiBuilder
+        from oaGui.Workers.orchestration.loader_orchestrator import LoaderOrchestrator
         curr = widget
         while curr:
-            if isinstance(curr, DynamicGuiBuilder): return curr
+            if isinstance(curr, LoaderOrchestrator): return curr
             try: curr = curr.master
             except: break
         return None
@@ -142,3 +142,6 @@ class PtpMonitor(tk.Frame, TransparencyMixin):
         if self.meter_panel: self.meter_panel.stack.config(bg=bg)
 
     def destroy(self): unregister_ptp_callback(self.on_ptp_packet); super().destroy()
+
+def get_gui_class():
+    return PtpMonitor

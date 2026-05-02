@@ -17,13 +17,13 @@ from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()  # Get the singleton instance
 
-from oaGui.Methods.i18n_utils import get_text
-from oaGui.Hooks.widget_registry import WidgetRegistry
-from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Methods.formatting.i18n_utils import get_text
+from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
+from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 
 
-@WidgetRegistry.register("ProgressBar", "_ProgressBar", "_SmartProgress")
-class BuilderImagesProgressBarCreator(TransparencyMixin):
+@RegistryWidgetStore.register("ProgressBar", "_ProgressBar", "_SmartProgress")
+class BuilderImagesProgressBarCreator(SyncBehavior):
     @staticmethod
     def make(parent_widget, config_data, context=None, **kwargs):
         """Static factory method for the registry."""

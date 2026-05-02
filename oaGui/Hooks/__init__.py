@@ -5,17 +5,17 @@
 # Description: Exposes public API for the Hooks module.
 
 __all__ = [
-    "GuiMqttManagerMixin",
+    "InteractionMqttGatewayMixin",
     "MqttRebuildHandler",
-    "MqttCommandTransmitter",
-    "WidgetRegistry",
+    "InteractionDispatcher",
+    "RegistryWidgetStore",
     "GuiWidgetFactoryMixin",
     "TelemetryHooks",
 ]
 
-from oaGui.Hooks.gui_mqtt import GuiMqttManagerMixin
-from oaGui.Hooks.mqtt_rebuild_handler import MqttRebuildHandler
-from oaGui.Hooks.mqtt_command_transmitter import MqttCommandTransmitter
-from oaGui.Hooks.widget_registry import WidgetRegistry
-from oaGui.Hooks.gui_widget_factory import GuiWidgetFactoryMixin
-from oaGui.Hooks.telemetry_hooks import TelemetryHooks
+from oaGui.Hooks.events.interaction_mqtt_gateway import InteractionMqttGatewayMixin
+from oaGui.Hooks.events.mqtt_rebuild_handler import MqttRebuildHandler
+from oaGui.Hooks.events.interaction_dispatcher import InteractionDispatcher
+from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
+from oaGui.Hooks.registry.gui_widget_factory import GuiWidgetFactoryMixin
+from oaGui.Hooks.events.telemetry_hooks import TelemetryHooks

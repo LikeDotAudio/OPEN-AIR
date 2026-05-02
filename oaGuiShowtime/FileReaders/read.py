@@ -12,7 +12,7 @@ from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()  # Get the singleton instance
 
-from oaFileImportShow.FileReaders.loader import maker_file_check_for_markers_file
+from oaFileHandlers.oaFileImportShow.FileReaders.loader import maker_file_check_for_markers_file
 
 
 # Loads marker data from the 'MARKERS.csv' file into the Showtime tab instance.

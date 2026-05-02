@@ -1,15 +1,15 @@
-# oaGui/Tests/test_fast_scanner.py
+# oaGui/Tests/test_folder_fast_io_utility.py
 # Author: Gemini CLI
 # Version: 20260404.1.0
 #
-# Description: Unit tests for fast_scanner.py
+# Description: Unit tests for folder_fast_io_utility.py
 
 import pathlib
 import shutil
 import tempfile
 import unittest
 
-from oaGui.FileReaders.fast_scanner import FastScanner
+from oaGui.FileReaders.scanner.folder_fast_io_utility import FastScanner
 
 
 class TestFastScanner(unittest.TestCase):

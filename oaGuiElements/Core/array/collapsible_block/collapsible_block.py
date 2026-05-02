@@ -13,11 +13,11 @@ from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
 
-from oaGui.Core.context.widget_context import WidgetContext
-from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Core.context.cache_widget_context import WidgetContext
+from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 
 
-class CollapsibleBlockCreatorMixin(TransparencyMixin):
+class CollapsibleBlockCreatorMixin(SyncBehavior):
     def _create_collapsible_block(self, parent_widget, config_data, context: WidgetContext = None, **kwargs):
         """
         Creates a frame that can be collapsed into a placeholder.
@@ -61,13 +61,13 @@ class CollapsibleBlockCreatorMixin(TransparencyMixin):
         separator.pack(fill="x", expand=True, pady=2)
 
         # 4. Context Menu Binding
-        view_manager = config_data.get("_view_manager", None)
+        interaction_view_states = config_data.get("_view_manager", None)
         # ⚡ JSON ALIAS: Support 'view' or 'view_group'
         view_group = config_data.get("view", config_data.get("view_group", None))
 
-        if view_manager:
+        if interaction_view_states:
             def show_global_menu(event):
-                view_manager.show_menu(event)
+                interaction_view_states.show_menu(event)
 
             wrapper.bind("<Button-3>", show_global_menu)
             content_frame.bind("<Button-3>", show_global_menu)
@@ -85,8 +85,8 @@ class CollapsibleBlockCreatorMixin(TransparencyMixin):
 
         wrapper.set_view_state = set_view_state
 
-        if view_manager and view_group:
-            view_manager.register(view_group, wrapper)
+        if interaction_view_states and view_group:
+            interaction_view_states.register(view_group, wrapper)
 
         set_view_state("expanded")
 

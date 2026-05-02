@@ -11,7 +11,7 @@ from tkinter import ttk
 import orjson
 
 from oaConfigurationManager.FileReaders.config_reader import Config
-from oaGui.Methods.i18n_utils import get_text
+from oaGui.Methods.formatting.i18n_utils import get_text
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Core.logger import builder_logger
@@ -20,7 +20,7 @@ from oaLogging.Methods.matrix_gate import matrix_log
 app_constants = Config.get_instance()
 
 from oaComProtocols.oaComMQTT.Core import mqtt_publisher_service
-from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 
 # --- EXTRACTED CORE MODULES ---
 from .table_csv_service import TableCSVService
@@ -28,7 +28,7 @@ from .table_sync_engine import TableSyncEngine
 from .table_editing import TableEditingManager
 
 
-class BuilderTextTableCreator(TransparencyMixin):
+class BuilderTextTableCreator(SyncBehavior):
     """Mixin for creating an editable table widget with CSV backup and MQTT sync."""
 
     @staticmethod

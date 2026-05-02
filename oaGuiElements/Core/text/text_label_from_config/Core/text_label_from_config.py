@@ -2,7 +2,7 @@
 # Author: Anthony Peter Kuzub
 # Version: 20260221.Proxy.1
 #
-# Description: A mixin class for the DynamicGuiBuilder that handles creating a label from a config dictionary.
+# Description: A mixin class for the LoaderOrchestrator that handles creating a label from a config dictionary.
 
 import inspect
 
@@ -12,15 +12,15 @@ from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
-from oaGui.Core.context.widget_context import WidgetContext
-from oaGui.Hooks.widget_registry import WidgetRegistry
-from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Core.context.cache_widget_context import WidgetContext
+from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
+from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 
 from .text_label.text_label import BuilderTextLabelCreator
 
 
-@WidgetRegistry.register("_LabelFromConfig")
-class BuilderTextLabelFromConfigCreator(TransparencyMixin):
+@RegistryWidgetStore.register("_LabelFromConfig")
+class BuilderTextLabelFromConfigCreator(SyncBehavior):
     """
     A mixin class that provides a wrapper for creating a label widget
     from a configuration dictionary.

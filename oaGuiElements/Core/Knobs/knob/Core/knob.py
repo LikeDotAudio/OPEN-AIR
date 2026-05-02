@@ -11,10 +11,10 @@ from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
-from oaGui.Methods.i18n_utils import get_text
-from oaGui.Core.base_widget_creator import BaseWidgetCreator
-from oaGui.Hooks.widget_registry import WidgetRegistry
-from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Methods.formatting.i18n_utils import get_text
+from oaGui.Core.factory.base_widget_creator import BaseWidgetCreator
+from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
+from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 from oaStyle.Core.style import DEFAULT_THEME, THEMES
 
 # Core Modules
@@ -183,8 +183,8 @@ class CustomKnobFrame(tk.Frame, KnobInteractionMixin, KnobRendererMixin):
         if self.temp_entry and self.temp_entry.winfo_exists():
             self.temp_entry.destroy(); self.temp_entry = None
 
-@WidgetRegistry.register("_Knob", "_SmartKnob")
-class BuilderKnobCreator(BaseWidgetCreator, TransparencyMixin):
+@RegistryWidgetStore.register("_Knob", "_SmartKnob")
+class BuilderKnobCreator(BaseWidgetCreator, SyncBehavior):
 
     def _assemble_ui(self, parent_widget, config_data, context, **kwargs):
         """Assembles the Knob UI elements."""

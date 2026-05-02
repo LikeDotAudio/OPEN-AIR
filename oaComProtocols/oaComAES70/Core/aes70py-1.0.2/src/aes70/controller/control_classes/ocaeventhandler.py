@@ -22,7 +22,7 @@ OcaEventHandler = make_control_class(
     []
 )
 
-# Generic empty callback method for events. Application developers can override
+# Generic empty callback method for events. EngineGuiDisplay developers can override
 # this method in a derived class to add behavior.
 #
 # @method OcaEventHandler#OnEvent

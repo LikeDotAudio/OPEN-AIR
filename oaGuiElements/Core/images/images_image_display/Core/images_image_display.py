@@ -18,8 +18,8 @@ from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()  # Get the singleton instance
 
-from oaGui.Methods.i18n_utils import get_text
-from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Methods.formatting.i18n_utils import get_text
+from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Methods.matrix_gate import is_debug_allowed
@@ -29,7 +29,7 @@ from oaStyle.Core.style import DEFAULT_THEME, THEMES
 BUILDER_DEBUG = is_debug_allowed(system="UI", element="GUI_BUILDER")
 
 
-class BuilderImagesImageDisplayCreator(TransparencyMixin):
+class BuilderImagesImageDisplayCreator(SyncBehavior):
     # Creates an image display widget that loads and displays images dynamically.
     # This method sets up a Tkinter label to display an image. The image path is managed
     # by a tkinter StringVar and can be updated via MQTT, allowing for dynamic image changes.

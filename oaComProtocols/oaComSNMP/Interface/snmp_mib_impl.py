@@ -16,13 +16,13 @@ from oaOchestration.Constants.project_paths import SNMP_CURRENT_MIB, SNMP_OPENAI
 
 # --- GUI FALLBACKS (V3.2.1 Decoupling) ---
 try:
-    from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+    from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 except ImportError:
-    class TransparencyMixin:
+    class SyncBehavior:
         """Fallback mixin for standalone execution without GUI manager."""
         def render(self): pass
 
-class SnmpMibImplementation(tk.Frame, TransparencyMixin):
+class SnmpMibImplementation(tk.Frame, SyncBehavior):
     """
     MIB File Generator View Implementation.
     Always manages and displays the 'current.mib' file with auto-reload.

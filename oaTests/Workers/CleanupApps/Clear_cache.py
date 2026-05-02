@@ -43,7 +43,7 @@ def purge_cache():
     # Specific files to remove
     target_files = [
         project_root / "oaDataCache" / "device_state_cache.json",
-        project_root / "oaDataCache" / "layout_cache.json",
+        project_root / "oaDataCache" / "cache_layout_store.json",
         project_root / "oaComProtocols" / "oaComSNMP" / "Assets" / "current.mib",
         project_root / "oaComProtocols" / "oaComSNMP" / "Assets" / "OPEN-AIR.mib",
         project_root / "oaComProtocols" / "oaComSNMP" / "Assets" / "openair_snmp_objects.txt",

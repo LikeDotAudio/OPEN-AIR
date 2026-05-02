@@ -6,7 +6,7 @@
 from dataclasses import dataclass
 from typing import Any
 
-from oaGui.Methods.i18n_utils import get_text
+from oaGui.Methods.formatting.i18n_utils import get_text
 from oaStyle.Core.style import DEFAULT_THEME, THEMES
 
 

@@ -10,11 +10,11 @@ from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
 
-from oaGui.Methods.i18n_utils import get_text
-from oaGui.Core.base_widget_creator import BaseWidgetCreator
+from oaGui.Methods.formatting.i18n_utils import get_text
+from oaGui.Core.factory.base_widget_creator import BaseWidgetCreator
 from oaGui.Core.factory.button_canvas_base import CanvasButton
-from oaGui.Hooks.widget_registry import WidgetRegistry
-from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
+from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 
 
 class TogglerButton(CanvasButton):
@@ -82,8 +82,8 @@ class TogglerButton(CanvasButton):
         self.set_active(is_sel)
         self.set_text(self.on_text if is_sel else self.off_text)
 
-@WidgetRegistry.register("_GuiButtonToggler", "_SmartToggleGroup", "_ButtonToggler")
-class BuilderButtonTogglerCreator(BaseWidgetCreator, TransparencyMixin):
+@RegistryWidgetStore.register("_GuiButtonToggler", "_SmartToggleGroup", "_ButtonToggler")
+class BuilderButtonTogglerCreator(BaseWidgetCreator, SyncBehavior):
     """Factory for creating Button Toggler groups."""
 
     is_composite = True

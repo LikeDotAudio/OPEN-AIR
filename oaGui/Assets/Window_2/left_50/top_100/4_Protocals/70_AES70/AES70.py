@@ -12,7 +12,7 @@ from oaComProtocols.oaComAES70.Interface.gui_AES70 import Aes70DashboardImplemen
 class Aes70DashboardGUI(Aes70DashboardImplementation):
     """
     A wrapper class pointing to the AES70 GUI implementation.
-    This class is discovered by ModuleLoader and instantiated.
+    This class is discovered by LoaderFacade and instantiated.
     It inherits directly from the implementation to maintain full functionality.
     """
     # No additional logic is needed here as we inherit the full implementation.

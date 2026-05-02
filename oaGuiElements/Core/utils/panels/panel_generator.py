@@ -18,7 +18,7 @@ def _is_debug():
 
 # --- Imports for the new modular architecture ---
 from oaGuiElements.Methods.utils import PanelUtils
-from oaGui.Core.factory.asset_cache import AssetCacheManager
+from oaGui.Core.factory.cache_image_store import CacheImageStore
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Core.logger import BUILDER_LOGGER
@@ -87,7 +87,7 @@ class PanelGenerator:
 
         # --- 0. Check Cache First ---
         matrix_log("ui", "gui_builder", "generate_procedural_panel", f"Checking for procedural panel in cache: {width}x{height} (Scale: {scale_factor})", "TRACE")
-        cached_image = AssetCacheManager.load_from_cache("panel", width, height, configuration_data)
+        cached_image = CacheImageStore.load_from_cache("panel", width, height, configuration_data)
         if cached_image:
             matrix_log("ui", "gui_builder", "generate_procedural_panel", "Retaining procedural panel from disk cache.", "DEBUG")
             return cached_image
@@ -262,7 +262,7 @@ class PanelGenerator:
             panel_image = panel_image.filter(ImageFilter.GaussianBlur(radius=blur_radius_value))
 
         matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name, "Procedural panel generation complete. Saving to disk cache.", "success".upper())
-        AssetCacheManager.save_to_cache("panel", width, height, configuration_data, panel_image)
+        CacheImageStore.save_to_cache("panel", width, height, configuration_data, panel_image)
         return panel_image
 
     @staticmethod

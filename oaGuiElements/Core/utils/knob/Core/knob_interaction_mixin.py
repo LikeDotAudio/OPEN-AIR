@@ -89,7 +89,7 @@ class KnobInteractionMixin:
         if self.state.get("_resize_timer"):
             self.safe_after_cancel(self.state["_resize_timer"])
         w, h = self.winfo_width(), self.winfo_height()
-        self.state["_resize_timer"] = self.safe_after(100, lambda: self._perform_resize(w, h))
+        self.state["_resize_timer"] = self.defer(100, lambda: self._perform_resize(w, h))
 
     def _perform_resize(self, w, h):
         self.state["_resize_timer"] = None

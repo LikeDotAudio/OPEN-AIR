@@ -4,7 +4,7 @@ import glob
 import re
 
 source_modules = [
-    "oaGuiManager",
+    "oaGui",
     "oaGuiBuilder",
     "oaGuiTelemetry",
     "oaGuiMediaElements"

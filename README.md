@@ -17,17 +17,19 @@ instruments with the same ease as a single device.
     brands of hardware through the YAK command abstraction.
 2.  **Partitioned Architecture (Core/UI):** High-performance separation of 
     real-time hardware logic from the visual rendering engine.
-3.  **Your Folders are Your Interface:** No complex UI designers. 
+3.  **Encapsulated Module Standard:** The `oaGui` module follows a strict 
+    12-subfolder structure, organized into 7 Functional Pillars (Loader, 
+    Parser, Tab Maker, Json Parser, Persistence, Rendering, and Telemetry).
+4.  **Your Folders are Your Interface:** No complex UI designers. 
     Reorganizing your `oaGui/Assets/` folders instantly redraws your 
     dashboard via the new Widget Registry.
-4.  **Photorealistic Industrial Aesthetics:** High-fidelity vintage meters and 
-    industrial design provide a tactile, professional monitoring experience.
 
 ---
 
 ## 🧭 Navigation
 For detailed information, please refer to the modular documentation:
 
+- **[GUI Module](oaGui/Documentation/Summary.md)**: Deep dive into the Dynamic GUI Builder, Widget Registry, and Folder-Driven Layouts.
 - **[User Manual](oaDocumentation/Manual/01_Introduction.md)**: Start here to learn how to use the software.
 - **[Translator Module](oaTranslator/Documentation/Summary.md)**: Details on the YAK Command Translation and State Mirroring.
 - **[Logging Matrix](oaConfigurationManager/Documentation/logging_matrix.md)**: Learn how the hierarchical debug system works.

@@ -30,7 +30,7 @@ Once the state is mutated, it yells back: 🧠📡📤 `[COMPUTE] STATE_UPDATED`
 
 ### 3. The Stage (Dynamic Rendering)
 The `InteractiveLayout` receives the update and triggers a ♻️ `[REBUILD]`.
-It uses an `AsyncGridRenderer` to rebuild the UI in batches. To keep the 
+It uses an `BatchLayoutEngine` to rebuild the UI in batches. To keep the 
 experience fluid, it employs a "Skeleton-First" strategy:
 1.  **Ghost Mode**: In high-speed drag operations, the editor renders 
     simple boxes and green insertion lines to indicate intent.

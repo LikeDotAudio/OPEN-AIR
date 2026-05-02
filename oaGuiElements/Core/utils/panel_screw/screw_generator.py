@@ -12,7 +12,7 @@ import random
 # --- Standard Debug Logging Setup ---
 from PIL import Image, ImageChops, ImageDraw, ImageFilter, ImageOps
 
-from oaGui.Core.factory.asset_cache import AssetCacheManager
+from oaGui.Core.factory.cache_image_store import CacheImageStore
 from oaLogging.Methods.matrix_gate import matrix_log
 
 try:
@@ -73,7 +73,7 @@ class ScrewGenerator:
         """
         # --- 0. Check Cache First ---
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📦🔍✨ [CACHE] Checking for procedural screw in cache: {size_pixels}px", level="TRACE")
-        cached_image = AssetCacheManager.load_from_cache("screw", size_pixels, size_pixels, configuration_data)
+        cached_image = CacheImageStore.load_from_cache("screw", size_pixels, size_pixels, configuration_data)
         if cached_image:
             matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "📦🆗✅ [CACHE] Retaining procedural screw from disk cache.", level="DEBUG")
             return cached_image
@@ -88,7 +88,7 @@ class ScrewGenerator:
 
                 # Save to Cache
                 matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🎨🆗💾 [SUCCESS] Rust-based procedural screw generation complete. Saving to cache.", level="SUCCESS")
-                AssetCacheManager.save_to_cache("screw", size_pixels, size_pixels, configuration_data, screw_image)
+                CacheImageStore.save_to_cache("screw", size_pixels, size_pixels, configuration_data, screw_image)
                 return screw_image
             except Exception as e:
                 matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"⚠️🛑 [ERROR] Rust ScrewGenerator failed: {e}. Falling back to Python.", level="WARNING")
@@ -255,7 +255,7 @@ class ScrewGenerator:
 
         # --- 6. Save to Cache ---
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🎨🆗💾 [SUCCESS] Procedural screw generation complete. Saving to cache.", level="SUCCESS")
-        AssetCacheManager.save_to_cache("screw", size_pixels, size_pixels, configuration_data, screw_image)
+        CacheImageStore.save_to_cache("screw", size_pixels, size_pixels, configuration_data, screw_image)
 
         return screw_image
 

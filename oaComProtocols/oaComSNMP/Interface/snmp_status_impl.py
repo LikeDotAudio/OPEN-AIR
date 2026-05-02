@@ -9,13 +9,13 @@ from tkinter import ttk
 
 # --- GUI FALLBACKS (V3.2.1 Decoupling) ---
 try:
-    from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+    from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 except ImportError:
-    class TransparencyMixin:
+    class SyncBehavior:
         """Fallback mixin for standalone execution without GUI manager."""
         def render(self): pass
 
-class SnmpStatusImplementation(tk.Frame, TransparencyMixin):
+class SnmpStatusImplementation(tk.Frame, SyncBehavior):
     """
     Passive SNMP Status & Installer Interface Implementation.
     Observes CORE status via MQTT and sends control commands.

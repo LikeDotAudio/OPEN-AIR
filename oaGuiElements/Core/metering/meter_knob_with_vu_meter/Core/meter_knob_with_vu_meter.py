@@ -12,19 +12,19 @@ import tkinter as tk
 from loguru import logger
 
 from oaConfigurationManager.FileReaders.config_reader import Config
-from oaGui.Methods.i18n_utils import get_text
+from oaGui.Methods.formatting.i18n_utils import get_text
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
-from oaGui.Hooks.widget_registry import WidgetRegistry
-from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
+from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 
 
-@WidgetRegistry.register("_VUMeterKnob")
-class BuilderMeterKnobWithVuMeterCreator(TransparencyMixin):
+@RegistryWidgetStore.register("_VUMeterKnob")
+class BuilderMeterKnobWithVuMeterCreator(SyncBehavior):
     """
     Mixin for creating a composite VU Meter + Knob widget.
     Requires BuilderMeterNeedleCreator and BuilderKnobCreator to be present in the host class.

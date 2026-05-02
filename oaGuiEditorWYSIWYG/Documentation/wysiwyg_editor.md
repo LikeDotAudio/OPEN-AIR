@@ -40,7 +40,7 @@ The module is strictly divided into two distinct layers:
 
 ## ⚙️ Operational Mandates
 *   **Widget Registry**: All UI elements MUST be registered via the 
-    `WidgetRegistry` to be discoverable by the Grab Bag and Renderer.
+    `RegistryWidgetStore` to be discoverable by the Grab Bag and Renderer.
 *   **Path-Based Sync**: Widgets are addressed via dot-notated paths 
     (e.g., `elements.main_panel.fader_1`).
 *   **Ghost Mode**: Structural changes are validated in a low-overhead 

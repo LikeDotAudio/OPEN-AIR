@@ -17,11 +17,11 @@ from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()  # Get the singleton instance
 
-from oaGui.Methods.i18n_utils import get_text
-from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Methods.formatting.i18n_utils import get_text
+from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 
 
-class BuilderTextValueWithUnitsCreator(TransparencyMixin):
+class BuilderTextValueWithUnitsCreator(SyncBehavior):
     # Creates a text input widget (Entry) that is synchronized via MQTT.
     # This method sets up a Tkinter Entry widget for text input, binds its value
     # to a StringVar, and integrates it with the state management engine.

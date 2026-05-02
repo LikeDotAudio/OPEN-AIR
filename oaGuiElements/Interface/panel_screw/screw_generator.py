@@ -6,7 +6,7 @@
 
 import random
 
-from oaGui.Core.factory.asset_cache import AssetCacheManager
+from oaGui.Core.factory.cache_image_store import CacheImageStore
 from oaLogging.Core.logger import builder_logger
 from oaLogging.Methods.matrix_gate import is_debug_allowed
 
@@ -26,7 +26,7 @@ class ScrewGenerator:
         Includes disk caching.
         """
         # --- 0. Check Cache First ---
-        cached_image = AssetCacheManager.load_from_cache("screw", size_pixels, size_pixels, configuration_data)
+        cached_image = CacheImageStore.load_from_cache("screw", size_pixels, size_pixels, configuration_data)
         if cached_image:
             return cached_image
 
@@ -44,7 +44,7 @@ class ScrewGenerator:
 
         # --- 2. Save to Cache ---
         if BUILDER_DEBUG: builder_logger.success("🎨🆗💾 [SUCCESS] Procedural screw generation complete. Saving to cache.")
-        AssetCacheManager.save_to_cache("screw", size_pixels, size_pixels, configuration_data, screw_image)
+        CacheImageStore.save_to_cache("screw", size_pixels, size_pixels, configuration_data, screw_image)
 
         return screw_image
 

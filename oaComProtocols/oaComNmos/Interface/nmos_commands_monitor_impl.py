@@ -14,13 +14,13 @@ from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- GUI FALLBACKS (V3.2.1 Decoupling) ---
 try:
-    from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+    from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 except ImportError:
-    class TransparencyMixin:
+    class SyncBehavior:
         """Fallback mixin for standalone execution without GUI manager."""
         def render(self): pass
 
-class NmosCommandsMonitorImplementation(tk.Frame, TransparencyMixin):
+class NmosCommandsMonitorImplementation(tk.Frame, SyncBehavior):
     """
     NMOS Commands Monitor GUI.
     Provides a real-time view of IS-07 events and resource updates.

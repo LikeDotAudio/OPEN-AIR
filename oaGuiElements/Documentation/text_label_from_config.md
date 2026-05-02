@@ -7,7 +7,7 @@
 ### File Level
 text_label_from_config/dynamic_guimake_text_label_from_config.py
 
-A mixin class for the DynamicGuiBuilder that handles creating a label from a
+A mixin class for the LoaderOrchestrator that handles creating a label from a
 config dictionary.
 
 Author: Anthony Peter Kuzub

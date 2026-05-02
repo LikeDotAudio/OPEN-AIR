@@ -4,7 +4,7 @@ import inspect
 # Author: Anthony Peter Kuzub
 # Version: 20260315.Modular.1
 #
-# Description: Modularized Application Splash Screen.
+# Description: Modularized EngineGuiDisplay Splash Screen.
 import tkinter as tk
 
 from oaLogging.Entry import vocal_capture

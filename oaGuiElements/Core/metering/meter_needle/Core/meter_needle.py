@@ -19,9 +19,9 @@ from oaConfigurationManager.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
 # --- Specialized Modules ---
-from oaGui.Hooks.widget_registry import WidgetRegistry
-from oaGui.Workers.transparency.transparency import TransparencyManager
-from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
+from oaGui.Workers.compositing.engine_visual_effects import EngineVisualEffects
+from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 
 from .rendering_engine import MeterRenderingEngine
 from oaGuiElements.Core.metering.meter_needle.animation.animator import MeterAnimator
@@ -30,8 +30,8 @@ from oaGuiElements.Core.metering.meter_needle.integration.state_linker import St
 from oaGuiElements.Core.metering.meter_needle.ui.frame_factory import FrameFactory
 
 
-@WidgetRegistry.register("_NeedleVUMeter")
-class BuilderMeterNeedleCreator(TransparencyMixin):
+@RegistryWidgetStore.register("_NeedleVUMeter")
+class BuilderMeterNeedleCreator(SyncBehavior):
     """Orchestrates the creation of a needle-style VU meter."""
 
     @staticmethod
@@ -57,9 +57,9 @@ class BuilderMeterNeedleCreator(TransparencyMixin):
             canvas = FrameFactory.create_canvas(frame, w, h, config.canvas_bg)
 
             if hasattr(b_inst, '_apply_transparency'):
-                TransparencyManager.apply_transparency(frame, frame, config_data, b_inst)
-                TransparencyManager.apply_transparency(frame, canvas, config_data, b_inst)
-                if hasattr(frame, 'lbl'): TransparencyManager.apply_transparency(frame.lbl, None, config_data, b_inst)
+                EngineVisualEffects.apply_transparency(frame, frame, config_data, b_inst)
+                EngineVisualEffects.apply_transparency(frame, canvas, config_data, b_inst)
+                if hasattr(frame, 'lbl'): EngineVisualEffects.apply_transparency(frame.lbl, None, config_data, b_inst)
 
             # 3. Animation Logic
             def render_cb(full_redraw=False):

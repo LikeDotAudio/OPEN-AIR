@@ -1,14 +1,14 @@
-# oaGui/Tests/test_composition_root.py
+# oaGui/Tests/test_loader_service_composer.py
 # Author: Gemini CLI
 # Version: 20260404.1.1
 #
-# Description: Unit tests for composition_root.py
+# Description: Unit tests for loader_service_composer.py
 
 import tkinter as tk
 import unittest
 from unittest.mock import MagicMock, patch
 
-from oaGui.Managers.composition_root import UICompositionRoot
+from oaGui.Managers.orchestration.loader_service_composer import LoaderServiceComposer
 
 
 class TestUICompositionRoot(unittest.TestCase):
@@ -21,7 +21,7 @@ class TestUICompositionRoot(unittest.TestCase):
         self.mock_constants.SCAN_OSC = True
         self.mock_constants.SCAN_SNMP = False
 
-        self.comp_root = UICompositionRoot(self.mock_root, self.mock_constants)
+        self.comp_root = LoaderServiceComposer(self.mock_root, self.mock_constants)
 
     @patch('oaComProtocols.oaComMQTT.Managers.mqtt_connection.MqttConnectionManager')
     @patch('oaComProtocols.oaComMQTT.Managers.mqtt_subscriber_router.MqttSubscriberRouter')

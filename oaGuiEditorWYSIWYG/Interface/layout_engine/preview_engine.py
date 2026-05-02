@@ -6,13 +6,13 @@
 
 import copy
 
-from oaGui.Workers.builder import DynamicGuiBuilder
+from oaGui.Workers.orchestration.loader_orchestrator import LoaderOrchestrator
 from oaLogging.Core.logger import GUI_LOGGER as logger
 from oaStateCache.Core.state_mirror_engine import StateMirrorEngine
 
 
 class PreviewEngine:
-    """Manages the lifecycle and instantiation of the DynamicGuiBuilder preview."""
+    """Manages the lifecycle and instantiation of the LoaderOrchestrator preview."""
 
     def __init__(self, render_area, on_focus_callback, workspace=None, subscriber_router=None, state_mirror_engine=None):
         self.render_area = render_area
@@ -59,7 +59,7 @@ class PreviewEngine:
             self.preview_builder.after(100, lambda: setattr(self.preview_builder, '_is_rebuilding', False))
 
     def _create_new_builder(self, render_data, render_tier, superficial_pad):
-        """Instantiates a fresh DynamicGuiBuilder and attaches it to the render area."""
+        """Instantiates a fresh LoaderOrchestrator and attaches it to the render area."""
         # ⚡ TELEMETRY LINK: Use real system services if provided, otherwise fallback to inert preview mode
         if self.state_mirror_engine:
             active_engine = self.state_mirror_engine
@@ -74,7 +74,7 @@ class PreviewEngine:
             "is_editor": True,
             "allow_horizontal_scroll": True
         }
-        self.preview_builder = DynamicGuiBuilder(self.render_area, config=builder_config, tab_name="InteractivePreview")
+        self.preview_builder = LoaderOrchestrator(self.render_area, config=builder_config, tab_name="InteractivePreview")
         self.preview_builder.start()
         self.preview_builder.pack(fill="both", expand=True)
 

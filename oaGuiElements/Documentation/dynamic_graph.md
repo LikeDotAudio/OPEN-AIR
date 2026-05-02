@@ -37,7 +37,7 @@ OPTIMIZED: 30 FPS throttle and redundancy filter.
 - [TODO: Note any locks, I/O, or global state.]
 
 ##### `render(self)`
-Hook for TransparencyManager to trigger redraw when background changes.
+Hook for EngineVisualEffects to trigger redraw when background changes.
 
 **Parameters:**
 - None

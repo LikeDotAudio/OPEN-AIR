@@ -12,7 +12,7 @@ from oaComProtocols.oaComSNMP.Interface.snmp_verify_oid_impl import SnmpVerifyOi
 class SnmpVerifyOidGUI(SnmpVerifyOidImplementation):
     """
     A wrapper class pointing to the SNMP Verify OID GUI implementation.
-    This class is discovered by ModuleLoader and instantiated.
+    This class is discovered by LoaderFacade and instantiated.
     It inherits directly from the implementation to maintain full functionality.
     """
     # No additional logic is needed here as we inherit the full implementation.

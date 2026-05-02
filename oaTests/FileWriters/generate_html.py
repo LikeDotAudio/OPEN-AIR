@@ -266,7 +266,7 @@ class HTMLGenerator:
             <button class="tab-btn" onclick="openTab(event, 'ChangeLogs')">Change Logs</button>
             <button class="tab-btn" onclick="openTab(event, 'BugLogs')">Bug Logs</button>
             <button class="tab-btn" onclick="openTab(event, 'ErrorLogs')">Error Logs</button>
-            <button class="tab-btn" onclick="openTab(event, 'RunLogs')">Application Run Logs</button>
+            <button class="tab-btn" onclick="openTab(event, 'RunLogs')">EngineGuiDisplay Run Logs</button>
             <button class="tab-btn" onclick="openTab(event, 'FlameGraph')">Flame Graph</button>
             <button class="tab-btn" onclick="openTab(event, 'Dependencies')">Dependencies</button>
             <button class="tab-btn" onclick="openTab(event, 'Doxygen')">Doxygen</button>
@@ -317,7 +317,7 @@ class HTMLGenerator:
             {error_html}
         </div>
 
-        <!-- TAB 5: Application Run Logs -->
+        <!-- TAB 5: EngineGuiDisplay Run Logs -->
         <div id="RunLogs" class="tab-content">
             {runlog_html}
         </div>

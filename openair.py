@@ -37,7 +37,7 @@ Responsibilities:
 Constraints:
     - Requires a Python 3.x environment.
     - Assumes the presence of 'oaComBroker/Core/open_air_core.py' and 
-      'oaGui/Managers/open_air_ui.py'.
+      'oaGui/Managers/loader_main_service.py'.
 """
 
 import signal
@@ -96,7 +96,7 @@ def main():
             core_mod.main()
             return
         elif mode == "--ui":
-            import oaGui.Managers.open_air_ui as ui_mod
+            import oaGui.Managers.orchestration.loader_main_service as ui_mod
             ui_mod.main()
             return
 
@@ -127,7 +127,7 @@ def main():
 
     python_executable = sys.executable
     core_script = project_root / "oaComBroker" / "Core" / "open_air_core.py"
-    ui_script = project_root / "oaGui" / "Managers" / "open_air_ui.py"
+    ui_script = project_root / "oaGui" / "Managers" / "orchestration" / "loader_main_service.py"
 
     # ⚡ VALIDATION: Ensure critical scripts exist before spawning.
     if not core_script.exists():

@@ -13,10 +13,10 @@ from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
-from oaGui.Core.base_widget_creator import BaseWidgetCreator
+from oaGui.Core.factory.base_widget_creator import BaseWidgetCreator
 from oaGuiElements.Core.graphing.Methods.dynamic_graph import GraphPlotter
-from oaGui.Hooks.widget_registry import WidgetRegistry
-from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
+from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 
 from .mdp_interaction_mixin import MDPInteractionMixin
 
@@ -24,14 +24,14 @@ from .mdp_interaction_mixin import MDPInteractionMixin
 from .mdp_ltp_component import MDPLTPComponent
 
 
-class MDPFrame(tk.Frame, TransparencyMixin):
+class MDPFrame(tk.Frame, SyncBehavior):
     def __init__(self, master, builder_instance=None, config=None, **kwargs):
         super().__init__(master, **kwargs)
         self.widget_config, self.faders = config, []
         self.active_fader = self.hovered_fader = None
 
-@WidgetRegistry.register("_MDP")
-class BuilderCompositeMdpCreator(BaseWidgetCreator, TransparencyMixin, MDPInteractionMixin):
+@RegistryWidgetStore.register("_MDP")
+class BuilderCompositeMdpCreator(BaseWidgetCreator, SyncBehavior, MDPInteractionMixin):
 
     is_composite = True
 

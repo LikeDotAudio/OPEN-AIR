@@ -1,23 +1,23 @@
-# oaGuiEditorWYSIWYG/Workers/async_grid_renderer.py
+# oaGuiEditorWYSIWYG/Workers/batch_layout_engine.py
 # Author: Anthony Peter Kuzub
 # Version 20260330.1600.1
 #
-# Description: Modularized Asynchronous Grid Layout Engine.
+# Description: Non-blocking, asynchronous batch rendering engine for grid layouts.
 
 import tkinter as tk
 from loguru import logger
 
-from oaGui.Managers.grid_topology_configurator import GridTopologyConfigurator
-from oaGui.Workers.structural_assembler import StructuralAssembler
+from oaGui.Managers.grid.engine_grid_layout_logic import GridTopologyConfigurator
+from oaGui.Workers.assembly.engine_structural_assembler import StructuralAssembler
 from oaLogging.Methods.matrix_gate import matrix_log
-from oaGui.Methods.grid_renderer_utils import GridRendererUtils
+from oaGui.Methods.rendering.grid_renderer_utils import GridRendererUtils
 
-class AsyncGridRenderer:
-    """Asynchronous Grid Layout Engine."""
+class BatchLayoutEngine:
+    """Non-blocking, asynchronous batch rendering engine for grid layouts."""
 
-    def __init__(self, factory, batch_engine):
+    def __init__(self, factory, scheduler_engine_render):
         self.factory = factory
-        self.batch_engine = batch_engine
+        self.scheduler_engine_render = scheduler_engine_render
 
     def render(self, parent, data, path_prefix="", override_cols=None, on_complete=None, parent_bg_pil=None, context=None):
         """Asynchronously renders a GUI branch into the parent frame."""
@@ -26,7 +26,7 @@ class AsyncGridRenderer:
             return
 
         branch_name = data.get("id", data.get("path", "root"))
-        matrix_log("ui", "gui_shell", "render", f"🔨🔨🔨 [BUILDING] Rendering branch '{branch_name}'", "INFO")
+        matrix_log("ui", "batch_layout", "render", f"🔨🔨🔨 [BUILDING] Rendering branch '{branch_name}'", "INFO")
 
         # 1. Geometry Normalization
         if "geometry" in data:
@@ -35,7 +35,7 @@ class AsyncGridRenderer:
                 if "width" in geom: parent.config(width=int(geom["width"]))
                 if "height" in geom: parent.config(height=int(geom["height"]))
             except (tk.TclError, ValueError) as e:
-                matrix_log("ui", "gui_shell", "render", f"⚠️ Geometry configuration skipped: {e}", "TRACE")
+                matrix_log("ui", "batch_layout", "render", f"⚠️ Geometry configuration skipped: {e}", "TRACE")
 
         # 2. ⚡ DEEP NESTING RESOLUTION:
         fields = GridRendererUtils.resolve_fields(data)
@@ -83,15 +83,13 @@ class AsyncGridRenderer:
                     item_config["path"] = full_widget_path
 
                     if w_type in ["OcaBin", "Bin"]:
-                        builder = getattr(context, 'builder_instance', self.factory)
-                        hull, inner = StructuralAssembler.create_bin(parent, item_config, builder)
+                        hull, inner = StructuralAssembler.create_bin(parent, item_config, getattr(context, 'builder_instance', self.factory))
                         self._apply_grid(hull, item_config, row_idx, col_idx)
                         widget = hull
                         state["count"] += 1
                         self.render(inner, item_config, path_prefix=full_widget_path, context=context, on_complete=lambda: (state.update({"count": state["count"]-1}), _check_done()))
                     elif w_type in ["OcaBlock", "Block"]:
-                        builder = getattr(context, 'builder_instance', self.factory)
-                        hull, inner = StructuralAssembler.create_block(parent, item_config, builder)
+                        hull, inner = StructuralAssembler.create_block(parent, item_config, getattr(context, 'builder_instance', self.factory))
                         self._apply_grid(hull, item_config, row_idx, col_idx)
                         widget = hull
                         state["count"] += 1
@@ -116,7 +114,7 @@ class AsyncGridRenderer:
 
             state["loop_done"] = True
             if deferred and not state["aborted"]:
-                self.batch_engine.process(parent, deferred, 25, context, state, _check_done)
+                self.scheduler_engine_render.process(parent, deferred, 25, context, state, _check_done)
             else:
                 _check_done()
 
@@ -136,4 +134,4 @@ class AsyncGridRenderer:
         try:
             widget.grid(row=r, column=c, rowspan=rs, columnspan=cs, padx=px, pady=py, sticky=sticky)
         except tk.TclError as e:
-            matrix_log("ui", "gui_shell", "_apply_grid", f"⚠️ Grid placement failed: {e}", "TRACE")
+            matrix_log("ui", "batch_layout", "_apply_grid", f"⚠️ Grid placement failed: {e}", "TRACE")

@@ -102,8 +102,8 @@ class TestRotarySelector(unittest.TestCase):
         mock_context = MagicMock()
         mock_context.state_mirror_engine = MagicMock()
 
-        # Patch TransparencyManager to avoid GUI dependencies
-        with patch('oaGui.Workers.transparency.transparency.TransparencyManager.apply_transparency'):
+        # Patch EngineVisualEffects to avoid GUI dependencies
+        with patch('oaGui.Workers.compositing.engine_visual_effects.EngineVisualEffects.apply_transparency'):
             widget = BuilderKnobRotarySelectorCreator.make(
                 self.root,
                 self.config_data,

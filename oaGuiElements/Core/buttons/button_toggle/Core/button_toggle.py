@@ -10,11 +10,11 @@ from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
 
-from oaGui.Methods.i18n_utils import get_text
-from oaGui.Core.base_widget_creator import BaseWidgetCreator
+from oaGui.Methods.formatting.i18n_utils import get_text
+from oaGui.Core.factory.base_widget_creator import BaseWidgetCreator
 from oaGui.Core.factory.button_canvas_base import CanvasButton
-from oaGui.Hooks.widget_registry import WidgetRegistry
-from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
+from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 
 
 class ToggleButton(CanvasButton):
@@ -72,8 +72,8 @@ class ToggleButton(CanvasButton):
         self.set_active(is_on)
         self.set_text(self.on_text if is_on else self.off_text)
 
-@WidgetRegistry.register("_GuiButtonToggle", "_SmartToggle", "_ButtonToggle")
-class BuilderButtonToggleCreator(BaseWidgetCreator, TransparencyMixin):
+@RegistryWidgetStore.register("_GuiButtonToggle", "_SmartToggle", "_ButtonToggle")
+class BuilderButtonToggleCreator(BaseWidgetCreator, SyncBehavior):
     """Factory for creating Toggle Buttons."""
 
     def _assemble_ui(self, parent_widget, config_data, context, **kwargs):

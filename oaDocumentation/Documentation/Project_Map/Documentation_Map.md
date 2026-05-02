@@ -19,6 +19,9 @@ These modules provide the foundational communication and orchestration layers fo
 ├-----**oaComProtocols.oaComSNMP/**<br>
      ├----> [oaComProtocols.oaComSNMP](oaComProtocols.oaComSNMP/Documentation/README.md) — *SNMP Communication Module*<br>
      ├----> [Summary](oaComProtocols.oaComSNMP/Documentation/Summary.md) — *Narrative of Legacy Integration*<br>
+├-----**oaGui/**<br>
+     ├----> [Summary](oaGui/Documentation/Summary.md) — *Narrative of Folder-Driven UI*<br>
+     ├----> [Architectural Guide](oaGui/Documentation/ARCHITECTURE.md) — *How it Works & Why it Works*<br>
 ├-----**oaConfigurationManager/**<br>
      ├----> [Summary](oaConfigurationManager/Documentation/Summary.md) — *Narrative of Control*<br>
      ├----> [Config Builder](oaConfigurationManager/Documentation/config.md) — *Default Settings Generator*<br>
@@ -41,22 +44,22 @@ Managers are passive components that handle state and control logic.
         |   -> [DYNAMIC_GUI_GUIDE](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/Display/builder/DYNAMIC_GUI_GUIDE.md) — *Dynamic Gui Guide*<br>
         |   -> [async_grid_renderer](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/Display/builder/async_grid_renderer.md) — *Async Grid Renderer*<br>
         |   -> [gui_batch_builder](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/Display/builder/gui_batch.md) — *Gui Batch Builder*<br>
-        |   -> [gui_display](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/Display/builder/gui_display.md) — *Gui Display*<br>
+        |   -> [engine_gui_display](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/Display/builder/engine_gui_display.md) — *Gui Display*<br>
         |   -> [gui_mqtt_manager](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/Display/builder/gui_mqtt.md) — *Gui Mqtt Manager*<br>
         |   -> [gui_rebuilder](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/Display/builder/gui_re.md) — *Gui Rebuilder*<br>
-        |   -> [window_manager](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/Display/builder/window.md) — *Window Manager*<br>
+        |   -> [tab_window_manager](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/Display/builder/window.md) — *Window Manager*<br>
      ├----> **context/**<br>
-        |   -> [widget_context](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/Display/context/widget_context.md) — *Widget Context*<br>
+        |   -> [cache_widget_context](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/Display/context/cache_widget_context.md) — *Widget Context*<br>
      ├----> **factory/**<br>
-        |   -> [asset_cache_manager](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/Display/factory/asset_cache.md) — *Asset Cache Manager*<br>
+        |   -> [asset_cache_manager](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/Display/factory/cache_image_store.md) — *Asset Cache Manager*<br>
         |   -> [button_canvas_base](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/Display/factory/button_canvas_base.md) — *Button Canvas Base*<br>
         |   -> [gui_widget_factory](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/Display/factory/gui_widget_factory.md) — *Gui Widget Factory*<br>
-        |   -> [widget_registry](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/Display/factory/widget_registry.md) — *Widget Registry*<br>
+        |   -> [registry_widget_store](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/Display/factory/registry_widget_store.md) — *Widget Registry*<br>
      ├----> **loader/**<br>
-        |   -> [blueprint_loader](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/Display/loader/blueprint_loader.md) — *Blueprint Loader*<br>
+        |   -> [json_blueprint_reader](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/Display/loader/json_blueprint_reader.md) — *Blueprint Loader*<br>
         |   -> [gui_file_loader](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/Display/loader/gui_file_loader.md) — *Gui File Loader*<br>
-        |   -> [gui_from_json](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/Display/loader/gui_from_json.md) — *Gui From Json*<br>
-        |   -> [module_loader](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/Display/loader/module_loader.md) — *Module Loader*<br>
+        |   -> [json_gui_host](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/Display/loader/json_gui_host.md) — *Gui From Json*<br>
+        |   -> [loader_facade](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/Display/loader/loader_facade.md) — *Module Loader*<br>
      ├----> **parser/**<br>
         |   -> [HOMOGENIZED_SCHEMA_SPEC](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/Display/parser/HOMOGENIZED_SCHEMA_SPEC.md) — *Homogenized Schema Spec*<br>
         |   -> [gui_batch_builder](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/Display/parser/gui_batch.md) — *Gui Batch Builder*<br>
@@ -77,11 +80,11 @@ Managers are passive components that handle state and control logic.
         |   -> **visibility_snitch/**<br>
              ├------->[hidden_visibility_manager](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/Display/telemetry/visibility_snitch/hidden_visibility.md) — *Hidden Visibility Manager*<br>
              ├------->[visibility_snitch](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/Display/telemetry/visibility_snitch/visibility_snitch.md) — *Visibility Snitch*<br>
-        |   -> [ui_tracking_service](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/Display/telemetry/ui_tracking_service.md) — *Ui Tracking Service*<br>
-     ├----> **transparency/**<br>
-        |   -> [transparency_manager](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/Display/transparency/transparency.md) — *Transparency Manager*<br>
-        |   -> [transparency_mixin](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/Display/transparency/transparency_mixin.md) — *Transparency Mixin*<br>
-     ├----> [open_air_ui](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/Display/open_air_ui.md) — *Open Air Ui*<br>
+        |   -> [interaction_telemetry_service](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/Display/telemetry/interaction_telemetry_service.md) — *Ui Tracking Service*<br>
+     ├----> **compositing/**<br>
+        |   -> [transparency_manager](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/Display/compositing/transparency.md) — *Transparency Manager*<br>
+        |   -> [transparency_mixin](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/Display/compositing/transparency_mixin.md) — *Transparency Mixin*<br>
+     ├----> [loader_main_service](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/Display/loader_main_service.md) — *Open Air Ui*<br>
 ├-----**PTP/**<br>
      ├----> [PTPtester](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/PTP/PTPtester.md) — *Ptptester*<br>
      ├----> [ptp_manager](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/managers/PTP/ptp.md) — *Ptp Manager*<br>
@@ -345,7 +348,7 @@ Workers are active background processes for data acquisition and system monitori
      ├----> [worker_marker_csv_to_json_mqtt](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/importers/marker_csv_to_json_mqtt.md) — *Worker Marker Csv To Json Mqtt*<br>
      ├----> [worker_marker_file_import_converter](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/importers/marker_file_import_converter.md) — *Worker Marker File Import Converter*<br>
 ├-----**initialization/**<br>
-     ├----> [application_initializer](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/initialization/application_initializer.md) — *Application Initializer*<br>
+     ├----> [application_initializer](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/initialization/application_initializer.md) — *EngineGuiDisplay Initializer*<br>
      ├----> [debug_cleaner](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/initialization/debug_cleaner.md) — *Debug Cleaner*<br>
      ├----> [path_initializer](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/initialization/path_initializer.md) — *Path Initializer*<br>
      ├----> [worker_project_paths](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/initialization/project_paths.md) — *Worker Project Paths*<br>

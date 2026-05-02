@@ -14,12 +14,12 @@ from oaLogging.Methods.matrix_gate import matrix_log
 # from oaComBroker.Core.event_bus import event_bus
 
 try:
-    from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+    from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 except ImportError:
-    class TransparencyMixin:
+    class SyncBehavior:
         def render(self): pass
 
-class MqttExplorerImplementation(tk.Frame, TransparencyMixin):
+class MqttExplorerImplementation(tk.Frame, SyncBehavior):
     """
     Hierarchical Tree Explorer for MQTT topics.
     Subscribes to EventBus for real-time updates from State Cache.

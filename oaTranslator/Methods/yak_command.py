@@ -17,7 +17,7 @@ from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
-from oaGui.FileReaders.gui_from_json import UniversalGuiLoader
+from oaGui.FileReaders.loader.json_gui_host import JsonGuiHost
 from oaOchestration.Constants.project_paths import GLOBAL_PROJECT_ROOT
 
 
@@ -149,7 +149,7 @@ class YakFleetCommandBuilder:
                 # Schedule next load with a small gap for breathing room
                 hidden_window.after(100, lambda: self._process_staggered_queue(hidden_window, queue, model))
 
-            UniversalGuiLoader(
+            JsonGuiHost(
                 hidden_window,
                 str(json_path),
                 config={

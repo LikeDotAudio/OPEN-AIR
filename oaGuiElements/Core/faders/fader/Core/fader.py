@@ -9,15 +9,15 @@ import tkinter as tk
 from loguru import logger
 
 from oaConfigurationManager.FileReaders.config_reader import Config
-from oaGui.Methods.i18n_utils import get_text
+from oaGui.Methods.formatting.i18n_utils import get_text
 
 # --- Standard Debug Logging Setup ---
 
 app_constants = Config.get_instance()
 
-from oaGui.Core.base_widget_creator import BaseWidgetCreator
-from oaGui.Hooks.widget_registry import WidgetRegistry
-from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Core.factory.base_widget_creator import BaseWidgetCreator
+from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
+from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 from oaStyle.Core.style import DEFAULT_THEME, THEMES
 
 # --- EXTRACTED CORE MODULES ---
@@ -87,8 +87,8 @@ class CustomFaderFrame(
             highlightthickness=int(config.get("border_width", 0)), bg=self.bg_color
         )
 
-@WidgetRegistry.register("_Fader", "_SmartFader", "_CustomFader")
-class BuilderFaderCreator(BaseWidgetCreator, TransparencyMixin):
+@RegistryWidgetStore.register("_Fader", "_SmartFader", "_CustomFader")
+class BuilderFaderCreator(BaseWidgetCreator, SyncBehavior):
 
     def _assemble_ui(self, parent_widget, config_data, context, **kwargs):
         """

@@ -11,7 +11,7 @@ from .midi_dashboard import MidiDashboard
 class MidiMonitor(MidiDashboard):
     """
     A local instance of the MIDI Dashboard plugin.
-    This class is discovered by ModuleLoader and instantiated.
+    This class is discovered by LoaderFacade and instantiated.
     """
     def __init__(self, parent, **kwargs):
         super().__init__(parent, **kwargs)

@@ -11,22 +11,22 @@ from collections import deque
 from typing import Any
 
 from oaConfigurationManager.FileReaders.config_reader import Config
-from oaGui.Methods.i18n_utils import get_text
+from oaGui.Methods.formatting.i18n_utils import get_text
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
-from oaGui.Methods.safe_after_mixin import SafeAfterMixin
+from oaGui.Methods.processing.deferred_task_handler import DeferredTaskHandler
 from oaGuiElements.Core.graphing.Core.graph_interaction_mixin import GraphInteractionMixin
 
 # --- EXTRACTED CORE MIXINS ---
 from oaGuiElements.Core.graphing.Core.graph_patina_mixin import GraphPatinaMixin
 from oaGuiElements.Core.graphing.Core.graph_state_mixin import GraphStateMixin
 from oaGuiElements.Core.graphing.Core.graph_throttle_mixin import GraphThrottleMixin
-from oaGui.Workers.transparency.transparency import TransparencyManager
-from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Workers.compositing.engine_visual_effects import EngineVisualEffects
+from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 from oaStyle.Core.style import DEFAULT_THEME, THEMES
 
 from . import graph, graph_interactor, graph_styler
@@ -34,19 +34,19 @@ from . import graph, graph_interactor, graph_styler
 
 class GraphPlotter(
     tk.Frame,
-    TransparencyMixin,
+    SyncBehavior,
     GraphPatinaMixin,
     GraphThrottleMixin,
     GraphInteractionMixin,
     GraphStateMixin,
-    SafeAfterMixin
+    DeferredTaskHandler
 ):
     """
     A high-performance Matplotlib graph widget refactored into modular components.
     """
 
     def __init__(self, parent, config: dict[str, Any], base_mqtt_topic_from_path: str, widget_id: str, builder_instance=None, **kwargs):
-        self._init_safe_after()
+        self._init_deferred_handler()
         self.subscriber_router = kwargs.pop("subscriber_router", None)
         self.state_mirror_engine = kwargs.pop("state_mirror_engine", None)
         context = kwargs.pop("context", None)
@@ -85,7 +85,7 @@ class GraphPlotter(
         tk_canvas = self.canvas.get_tk_widget()
         tk_canvas.configure(bg=colors["bg"], highlightthickness=0)
 
-        TransparencyManager.apply_transparency(self, tk_canvas, config, self.instance)
+        EngineVisualEffects.apply_transparency(self, tk_canvas, config, self.instance)
 
         if self.state_mirror_engine:
             self._initialize_state_mirroring()
@@ -160,7 +160,7 @@ class GraphPlotter(
         self._last_resize_dim = (event.width, event.height)
         if hasattr(self, "_resize_timer") and self._resize_timer: self.safe_after_cancel(self._resize_timer)
         # ⚡ DEBOUNCE: Use 100ms for responsiveness while avoiding vibration
-        self._resize_timer = self.safe_after(100, lambda: self._perform_resize(event.width, event.height))
+        self._resize_timer = self.defer(100, lambda: self._perform_resize(event.width, event.height))
 
     def _perform_resize(self, w, h):
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] GraphPlotter '{self.widget_id}' performing resize to {w}x{h}", level="DEBUG")
@@ -217,7 +217,7 @@ class GraphPlotter(
 
     def destroy(self):
         """Cleanup method to cancel pending after tasks and release resources."""
-        self._cleanup_safe_after()
+        self._cleanup_deferred_tasks()
         if hasattr(self, "_resize_timer") and self._resize_timer:
             self.safe_after_cancel(self._resize_timer)
 

@@ -1,14 +1,14 @@
-# oaGui/Tests/test_bootstrap_sequence.py
+# oaGui/Tests/test_loader_bootstrap_engine.py
 # Author: Gemini CLI
 # Version: 20260404.1.6
 #
-# Description: Unit tests for bootstrap_sequence.py
+# Description: Unit tests for loader_bootstrap_engine.py
 
 import tkinter as tk
 import unittest
 from unittest.mock import MagicMock, patch
 
-from oaGui.Managers.bootstrap_sequence import AsyncBootstrapEngine
+from oaGui.Managers.bootstrap.loader_bootstrap_engine import LoaderBootstrapEngine
 
 
 class TestAsyncBootstrapEngine(unittest.TestCase):
@@ -42,7 +42,7 @@ class TestAsyncBootstrapEngine(unittest.TestCase):
         self.mock_app_constants = MagicMock()
         self.mock_app_constants.global_settings = {"debug_enabled": False}
 
-        self.engine = AsyncBootstrapEngine(
+        self.engine = LoaderBootstrapEngine(
             self.mock_root,
             self.mock_splash,
             self.mock_services,
@@ -50,42 +50,44 @@ class TestAsyncBootstrapEngine(unittest.TestCase):
             self.mock_shutdown
         )
 
-    def test_run_executes_phases(self):
+    @patch('oaGui.Managers.bootstrap.loader_bootstrap_engine.launch_workspace_application')
+    @patch('oaGui.Managers.bootstrap.loader_bootstrap_engine.assemble_system_control_links')
+    @patch('oaGui.Managers.bootstrap.loader_bootstrap_engine.ignite_protocol_services')
+    @patch('oaGui.Managers.bootstrap.loader_bootstrap_engine.initialize_communications')
+    def test_run_executes_phases(self, mock_init, mock_ignite, mock_assemble, mock_launch):
         """OPERATE: Run engine. CHECK: Verify each initialization phase is triggered."""
         # Patch after to execute immediately for testing
         with patch.object(self.mock_root, 'after', side_effect=lambda delay, func: func()):
-            with patch.object(self.engine, '_launch_app') as mock_launch:
-                self.engine.run()
-
-                # Phase 1: MQTT
-                self.mock_services["mqtt_conn"].connect_to_broker.assert_called_once()
-
-                # Phase 2: Protocols
-                self.mock_services["protocol_router"].start.assert_called_once()
-
-                # Phase 4: Splinker Control
-                self.mock_services["sub_router"].subscribe_to_topic.assert_called()
-
-                # Phase 5: Launch should be called
-                mock_launch.assert_called_once()
-
-    def test_failure_triggers_shutdown(self):
-        """OPERATE: Trigger failure in bootstrap. CHECK: Verify shutdown is called."""
-        # Configure mock to raise exception on connect_to_broker for this failure test
-        self.mock_services["mqtt_conn"].connect_to_broker.side_effect = Exception("Boom")
-
-        # Mock after to capture calls and execute them, then assert shutdown was called
-        mock_after = MagicMock(side_effect=lambda delay, func: func())
-        self.mock_root.after = mock_after
-
-        # Use patch to suppress logging for this expected failure
-        with patch('oaGui.Managers.bootstrap_sequence.logger') as mock_logger:
             self.engine.run()
+
+            # Phase 1: Communication
+            mock_init.assert_called_once()
+
+            # Phase 2: Protocols
+            mock_ignite.assert_called_once()
+
+            # Phase 4: Splinker Control
+            mock_assemble.assert_called_once()
+
+            # Phase 5: Launch should be called
+            mock_launch.assert_called_once()
+
+    @patch('oaGui.Managers.bootstrap.loader_bootstrap_engine.logger')
+    def test_failure_triggers_shutdown(self, mock_logger):
+        """OPERATE: Trigger failure in bootstrap. CHECK: Verify shutdown is called."""
+        # Patch init to raise exception
+        with patch('oaGui.Managers.bootstrap.loader_bootstrap_engine.initialize_communications', side_effect=Exception("Boom")):
+            # Mock after to capture calls and execute them, then assert shutdown was called
+            mock_after = MagicMock(side_effect=lambda delay, func: func())
+            self.mock_root.after = mock_after
+
+            self.engine.run()
+            
             # Verify the error was logged
             mock_logger.error.assert_called()
 
-        # Verify that on_closing was scheduled to be called
-        mock_after.assert_called_with(0, self.mock_shutdown.on_closing)
+            # Verify that on_closing was scheduled to be called
+            mock_after.assert_any_call(0, self.mock_shutdown.on_closing)
 
 if __name__ == '__main__':
     unittest.main()

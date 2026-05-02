@@ -24,6 +24,7 @@ if str(project_root) not in sys.path:
 
 # --- Absolute Imports for Standalone Support ---
 from oaTranslator.Managers.yak_translator import YakTranslator
+from oaTranslator.Managers.instrument_controller import InstrumentController
 from oaTranslator.Managers.yak_trigger_handler import (
     handle_yak_monitor_traffic,
     register_monitor_callback,
@@ -126,6 +127,7 @@ if __name__ == "__main__":
 
 __all__ = [
     "YakTranslator",
+    "InstrumentController",
     "register_monitor_callback",
     "unregister_monitor_callback",
     "handle_yak_monitor_traffic",

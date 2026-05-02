@@ -30,9 +30,9 @@ def expand_msg(text):
 def process_files():
     directories = [
         "oaAudioMixer", "oaComBroker", "oaComProtocols", "oaConfigurationManager",
-        "oaDocumentation", "oaFileExportCSV", "oaFileImportCSV", "oaFileImportHTML",
-        "oaFileImportPDF", "oaFileImportShow", "oaGui", "oaGuiBackground",
-        "oaGuiBuilder", "oaGuiEditorWYSIWYG", "oaGuiElements", "oaGuiManager",
+        "oaDocumentation", "oaFileExportCSV", "oaFileHandlers.oaFileImportCSV", "oaFileHandlers.oaFileImportHTML",
+        "oaFileHandlers.oaFileImportPDF", "oaFileHandlers.oaFileImportShow", "oaGui", "oaGuiBackground",
+        "oaGuiBuilder", "oaGuiEditorWYSIWYG", "oaGuiElements", "oaGui",
         "oaGuiMediaElements", "oaGuiShowtime", "oaGuiSplashScreen", "oaGuiTelemetry",
         "oaInstallation", "oaLogging", "oaOchestration", "oaPTP", "oaRustCore",
         "oaSplinker", "oaStand_Alone_Utilities", "oaStateCache", "oaStyle", "oaTests",

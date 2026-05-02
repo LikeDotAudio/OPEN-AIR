@@ -106,7 +106,7 @@ class RESTManager:
 
             api_router = create_router(self.state_cache, self.router)
             self.app.include_router(api_router)
-            matrix_log("comms", "rest", "_try_initialize", "📡⚙️✅ [REST] FastAPI Application initialized.", "SUCCESS")
+            matrix_log("comms", "rest", "_try_initialize", "📡⚙️✅ [REST] FastAPI EngineGuiDisplay initialized.", "SUCCESS")
             return True
         except Exception as e:
             matrix_log("comms", "rest", "_try_initialize", f"❌ [REST] Initialization crash: {e}", "ERROR")

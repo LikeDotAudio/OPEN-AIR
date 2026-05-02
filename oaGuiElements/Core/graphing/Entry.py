@@ -21,7 +21,7 @@ while project_root.parent != project_root:
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
-from oaGui.Hooks.widget_registry import WidgetRegistry
+from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
 from oaLogging.Core.logger import builder_logger
 
 # Absolute imports with fallback
@@ -32,7 +32,7 @@ except ImportError:
     from adapters.bar_graph_adapter import BarGraphAdapter
     from adapters.plot_adapter import PlotAdapter
 
-@WidgetRegistry.register("plot_widget", "bar_graph", "_GuiGraph")
+@RegistryWidgetStore.register("plot_widget", "bar_graph", "_GuiGraph")
 class GraphEntry:
     """
     Unified Entry Point for all Graphing and Plotting Widgets.

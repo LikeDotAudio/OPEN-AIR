@@ -72,5 +72,5 @@ class ShowtimeTab(
         self.device_frame.bind("<Configure>", lambda e: self.canvas.configure(scrollregion=self.canvas.bbox("all")))
 
     def render(self):
-        """Standard render entry point for DynamicGuiBuilder."""
+        """Standard render entry point for LoaderOrchestrator."""
         self._refresh_showtime_ui()

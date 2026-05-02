@@ -11,11 +11,11 @@ from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
 
-from oaGui.Methods.safe_after_mixin import SafeAfterMixin
-from oaGui.Interface.ui_geometry_math import UIGeometryMath
-from oaGui.Hooks.widget_registry import WidgetRegistry
-from oaGui.Workers.transparency.transparency import TransparencyManager
-from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Methods.processing.deferred_task_handler import DeferredTaskHandler
+from oaGui.Interface.math.coordinate_transformer import CoordinateTransformer
+from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
+from oaGui.Workers.compositing.engine_visual_effects import EngineVisualEffects
+from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 from oaStyle.Core.style import DEFAULT_THEME, THEMES
 
 from .fader_bar_interaction_mixin import FaderBarInteractionMixin
@@ -27,14 +27,14 @@ from .fader_bar_state_mixin import FaderBarStateMixin
 
 class FaderWithBarGraphFrame(
     tk.Frame,
-    TransparencyMixin,
+    SyncBehavior,
     FaderBarRendererMixin,
     FaderBarInteractionMixin,
     FaderBarStateMixin,
-    SafeAfterMixin
+    DeferredTaskHandler
 ):
     def __init__(self, master, config, path, state_mirror_engine, subscriber_router, base_mqtt_topic, builder_instance=None):
-        self._init_safe_after()
+        self._init_deferred_handler()
         colors = THEMES.get(DEFAULT_THEME, THEMES["dark"])
         super().__init__(master, bd=0, highlightthickness=0)
 
@@ -62,24 +62,24 @@ class FaderWithBarGraphFrame(
         # 3. UI
         self.canvas = tk.Canvas(self, width=self.width, height=self.height, highlightthickness=0); self.canvas.pack(fill=tk.BOTH, expand=True)
         if builder_instance and hasattr(builder_instance, '_apply_transparency'):
-            TransparencyManager.apply_transparency(self, self.canvas, config, builder_instance)
+            EngineVisualEffects.apply_transparency(self, self.canvas, config, builder_instance)
 
         self.fader_var.trace_add("write", lambda *a: self._update_fader_pos())
         self.left_var.trace_add("write", lambda *a: self._update_meter("left"))
         self.right_var.trace_add("write", lambda *a: self._update_meter("right"))
 
         self.canvas.bind("<Button-1>", self._on_press); self.canvas.bind("<B1-Motion>", self._on_drag); self.canvas.bind("<Configure>", self._on_resize)
-        self.safe_after(10, self._draw_static); self.safe_after(20, self._draw_dynamic)
+        self.defer(10, self._draw_static); self.defer(20, self._draw_dynamic)
 
     def render(self): self._draw_static(); self._draw_dynamic()
     def _update_fader_pos(self):
         if not hasattr(self, 'draw_h'): return
-        y = self.top_m + UIGeometryMath.value_to_pixel(self.fader_var.get(), self.min_val, self.max_val, self.draw_h, reverse=True)
+        y = self.top_m + CoordinateTransformer.value_to_pixel(self.fader_var.get(), self.min_val, self.max_val, self.draw_h, reverse=True)
         self.canvas.coords("cap", self.cx, y); self.canvas.coords("cap_text", self.cx, y)
         self.canvas.itemconfig("cap_text", text=f"{self.fader_var.get():.1f}")
 
-@WidgetRegistry.register("_FaderWithBarGraph")
-class BuilderFaderBarGraphCreator(TransparencyMixin):
+@RegistryWidgetStore.register("_FaderWithBarGraph")
+class BuilderFaderBarGraphCreator(SyncBehavior):
     @staticmethod
     def make(parent_widget, config_data, context=None, **kwargs):
         if context: s_engine, s_router, b_topic, b_inst = context.state_mirror_engine, context.subscriber_router, context.base_mqtt_topic_from_path, context.builder_instance

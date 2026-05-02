@@ -11,12 +11,12 @@ from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
 
-from oaGui.Methods.i18n_utils import get_text
-from oaGui.Methods.safe_after_mixin import SafeAfterMixin
-from oaGui.Core.base_widget_creator import BaseWidgetCreator
-from oaGui.Hooks.widget_registry import WidgetRegistry
-from oaGui.Workers.transparency.transparency import TransparencyManager
-from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Methods.formatting.i18n_utils import get_text
+from oaGui.Methods.processing.deferred_task_handler import DeferredTaskHandler
+from oaGui.Core.factory.base_widget_creator import BaseWidgetCreator
+from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
+from oaGui.Workers.compositing.engine_visual_effects import EngineVisualEffects
+from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 
 # Core Modules
 from .knob_config import extract_knob_config
@@ -25,13 +25,13 @@ from .knob_renderer_mixin import KnobRendererMixin
 from .knob_state import create_knob_state
 
 
-class CustomKnobFrame(tk.Canvas, KnobInteractionMixin, KnobRendererMixin, SafeAfterMixin):
+class CustomKnobFrame(tk.Canvas, KnobInteractionMixin, KnobRendererMixin, DeferredTaskHandler):
     """
     A self-contained, stateful Rotary Knob widget.
     Follows SRP: Handles its own interactions, state, and rendering via mixins.
     """
     def __init__(self, parent, variable, config, state, path, state_mirror_engine, label_text, **kwargs):
-        self._init_safe_after()
+        self._init_deferred_handler()
         # 1. Geometry Normalization
         if "width" in kwargs: kwargs["width"] = max(kwargs["width"], 10)
         if "height" in kwargs: kwargs["height"] = max(kwargs["height"], 10)
@@ -64,7 +64,7 @@ class CustomKnobFrame(tk.Canvas, KnobInteractionMixin, KnobRendererMixin, SafeAf
         self.variable.trace_add("write", lambda *a: self._draw_visuals())
 
         # Initial Render
-        self.safe_after(50, self._draw_visuals)
+        self.defer(50, self._draw_visuals)
 
     def _broadcast_cb(self):
         """Helper for mixin to trigger MQTT updates."""
@@ -104,8 +104,8 @@ class CustomKnobFrame(tk.Canvas, KnobInteractionMixin, KnobRendererMixin, SafeAf
         if self.temp_entry and self.temp_entry.winfo_exists():
             self.temp_entry.destroy(); self.temp_entry = None
 
-@WidgetRegistry.register("_Knob", "_SmartKnob")
-class BuilderKnobCreator(BaseWidgetCreator, TransparencyMixin):
+@RegistryWidgetStore.register("_Knob", "_SmartKnob")
+class BuilderKnobCreator(BaseWidgetCreator, SyncBehavior):
 
     def _assemble_ui(self, parent_widget, config_data, context, **kwargs):
         """Assembles the Knob UI elements."""
@@ -124,7 +124,7 @@ class BuilderKnobCreator(BaseWidgetCreator, TransparencyMixin):
         frame = CustomKnobFrame(parent_widget, knob_var, config, state, path, s_engine, label, width=config["width"], height=config["height"])
 
         if hasattr(b_inst, '_apply_transparency'):
-            TransparencyManager.apply_transparency(frame, frame, config_data, b_inst)
+            EngineVisualEffects.apply_transparency(frame, frame, config_data, b_inst)
 
         if path and s_engine:
             topic = s_engine.register_widget(path, knob_var, b_topic, config_data, instance=frame)

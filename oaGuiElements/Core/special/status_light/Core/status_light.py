@@ -18,7 +18,7 @@ from oaLogging.Methods.matrix_gate import matrix_log
 app_constants = Config.get_instance()
 
 from oaComProtocols.oaComMQTT.Core.mqtt_message import MqttMessage
-from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 
 
 class StatusLightWidget(tk.Frame):
@@ -151,7 +151,7 @@ class StatusLightWidget(tk.Frame):
             self.status_canvas.coords(self.status_light_id, cx - dot_size/2, cy - dot_size/2, cx + dot_size/2, cy + dot_size/2)
 
 
-class HeaderStatusLightMixin(TransparencyMixin):
+class HeaderStatusLightMixin(SyncBehavior):
     """
     Adds a status indicator circle to the GUI.
     """

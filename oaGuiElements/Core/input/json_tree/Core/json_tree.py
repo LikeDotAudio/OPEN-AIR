@@ -8,7 +8,7 @@ import tkinter as tk
 from tkinter import filedialog, ttk
 
 from oaConfigurationManager.FileReaders.config_reader import Config
-from oaGui.Methods.i18n_utils import get_text
+from oaGui.Methods.formatting.i18n_utils import get_text
 
 # --- Standard Debug Logging Setup ---
 
@@ -18,9 +18,9 @@ app_constants = Config.get_instance()
 from oaGuiElements.Core.input.json_tree.Core.json import JsonDataManager
 from oaGuiElements.Core.input.json_tree.Core.json_tree_editor_mixin import JsonTreeEditorMixin
 from oaGuiElements.Core.input.json_tree.Core.json_tree_renderer_mixin import JsonTreeRendererMixin
-from oaGui.Hooks.widget_registry import WidgetRegistry
-from oaGui.Workers.transparency.transparency import TransparencyManager
-from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
+from oaGui.Workers.compositing.engine_visual_effects import EngineVisualEffects
+from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 
 
 class AutoScrollbar(ttk.Scrollbar):
@@ -160,8 +160,8 @@ class JsonTreeWidget(
         if hasattr(self, 'lbl'): self.lbl.config(bg=bg)
         ttk.Style().configure("Custom.Treeview", background=bg, fieldbackground=bg)
 
-@WidgetRegistry.register("_DataJsonTree")
-class BuilderDataJsonTreeCreator(TransparencyMixin):
+@RegistryWidgetStore.register("_DataJsonTree")
+class BuilderDataJsonTreeCreator(SyncBehavior):
     def make_data_json_tree(self, parent_widget, config_data, context=None, **kwargs):
         if context:
             state_mirror_engine = context.state_mirror_engine
@@ -175,7 +175,7 @@ class BuilderDataJsonTreeCreator(TransparencyMixin):
         widget = JsonTreeWidget(parent_widget, config_data, state_mirror_engine, base_mqtt_topic)
 
         if hasattr(builder_instance, '_apply_transparency'):
-            TransparencyManager.apply_transparency(widget, None, config_data, builder_instance)
+            EngineVisualEffects.apply_transparency(widget, None, config_data, builder_instance)
 
         path = config_data.get("path")
         if path and state_mirror_engine:

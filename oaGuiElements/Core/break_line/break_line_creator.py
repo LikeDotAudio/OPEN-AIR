@@ -8,13 +8,13 @@
 import tkinter as tk
 
 from oaGui.Constants.builder_constants import BREAKLINE_DEFAULT_COLOR, BREAKLINE_MIN_THICKNESS
-from oaGui.Hooks.widget_registry import WidgetRegistry
-from oaGui.Workers.transparency.transparency import TransparencyManager
-from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
+from oaGui.Workers.compositing.engine_visual_effects import EngineVisualEffects
+from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 
 
-@WidgetRegistry.register("OcaFold", "BreakLine", "_Separator", "OcaSeparator")
-class BreakLineCreator(TransparencyMixin):
+@RegistryWidgetStore.register("OcaFold", "BreakLine", "_Separator", "OcaSeparator")
+class BreakLineCreator(SyncBehavior):
     """Factory for industrial break lines and fold indicators."""
 
     @staticmethod
@@ -34,7 +34,7 @@ class BreakLineCreator(TransparencyMixin):
             config_data.setdefault("layout", {})["sticky"] = "ew" if params["is_horizontal"] else "ns"
 
         if builder:
-            TransparencyManager.apply_transparency(canvas, canvas, config_data, builder)
+            EngineVisualEffects.apply_transparency(canvas, canvas, config_data, builder)
 
         # 4. Redraw Pipeline
         def redraw():

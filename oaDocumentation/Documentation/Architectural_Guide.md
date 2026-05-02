@@ -12,7 +12,7 @@ The "Core" lives in `managers/System_Core/open_air_core.py`. It is the silent en
 *   **Why it's needed:** By isolating hardware logic, we ensure that a slow instrument response never blocks the user's view. It allows for headless operation—the system can run and monitor hardware even if no screen is attached.
 
 ### 2. The UI (The Visual Reflex)
-The "UI" lives in `managers/Display/open_air_ui.py`. It is the reactive skin.
+The "UI" lives in `managers/Display/loader_main_service.py`. It is the reactive skin.
 *   **How it works:** It uses the **Widget Registry** system to dynamically build interfaces from JSON blueprints. It doesn't "know" about hardware; it only knows about MQTT topics and visual states.
 *   **Why it's needed:** This decoupling allows UI designers to iterate on meters, knobs, and graphs without ever touching a line of hardware driver code.
 
@@ -29,7 +29,7 @@ Everything in OPEN-AIR communicates via **MQTT**. This is the glue that binds th
 
 ## 🛠️ The Assembly Line: Dynamic Widget Registry
 
-Instead of hard-coding every screen, OPEN-AIR uses a **Widget Registry** (`managers/Display/factory/widget_registry.py`).
+Instead of hard-coding every screen, OPEN-AIR uses a **Widget Registry** (`managers/Display/factory/registry_widget_store.py`).
 
 *   **How it works:** 
     1.  A **Blueprint Loader** reads a JSON file defining a layout.

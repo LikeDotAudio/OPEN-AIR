@@ -19,11 +19,11 @@ from oaLogging.Methods.matrix_gate import matrix_log
 app_constants = Config.get_instance()
 
 from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic
-from oaGui.Methods.i18n_utils import get_text
-from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Methods.formatting.i18n_utils import get_text
+from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 
 
-class BuilderInputDirectionalButtonsCreator(TransparencyMixin):
+class BuilderInputDirectionalButtonsCreator(SyncBehavior):
     # Creates a set of directional buttons (up, down, left, right) and binds them to MQTT commands.
     # This method arranges four buttons in a cross pattern and configures each button
     # to publish a specific MQTT command when pressed, allowing for remote control of movement.

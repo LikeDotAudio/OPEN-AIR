@@ -1,31 +1,18 @@
-# oaGui/Assets/right_50/bottom_90/3_Commands/1_Router/2_Matrix/protocol_matrix.py
+# oaGui/Assets/Window_2/left_50/top_100/3_Commands/1_Router/2_Matrix/protocol_matrix.py
 # Author: Anthony Peter Kuzub
-# Version: 20260406.2005.1
+# Version: 20260502.1000.1
 #
-# Description: Modular Protocol Router Interface Matrix.
-# This file serves as a pointer to the ProtocolMatrix implementation
-# in the oaComBroker module.
+# Description: Proxy frame for the ProtocolMatrix implementation.
+# Delegates actual implementation to oaComBroker.Interface.
 
-try:
-    from oaComBroker.Interface.protocol_matrix import ProtocolMatrix as OriginalProtocolMatrix
+import tkinter as tk
+from oaComBroker.Interface.protocol_matrix import ProtocolMatrix
 
-    class ProtocolMatrix(OriginalProtocolMatrix):
-        """
-        A local instance of the Protocol Router Interface Matrix.
-        This class is discovered by ModuleLoader and instantiated.
-        """
-        def __init__(self, parent, **kwargs):
-            super().__init__(parent, **kwargs)
+class ProtocolMatrixProxy(ProtocolMatrix):
+    """
+    Asset-level proxy for the ProtocolMatrix.
+    """
+    pass
 
-    def get_gui_class():
-        return ProtocolMatrix
-
-except ImportError:
-    import tkinter as tk
-    class ProtocolMatrix(tk.Frame):
-        def __init__(self, parent, **kwargs):
-            super().__init__(parent, **kwargs)
-            tk.Label(self, text=f"Error loading ProtocolMatrix: {e}", fg="red").pack()
-
-    def get_gui_class():
-        return ProtocolMatrix
+def get_gui_class():
+    return ProtocolMatrixProxy

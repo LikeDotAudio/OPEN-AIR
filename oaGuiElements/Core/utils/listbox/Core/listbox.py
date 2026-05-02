@@ -9,15 +9,15 @@ import tkinter as tk
 from tkinter import ttk
 
 from oaConfigurationManager.FileReaders.config_reader import Config
-from oaGui.Methods.i18n_utils import get_text
+from oaGui.Methods.formatting.i18n_utils import get_text
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
-from oaGui.Workers.transparency.transparency import TransparencyManager
-from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Workers.compositing.engine_visual_effects import EngineVisualEffects
+from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 from oaStyle.Core.style import DEFAULT_THEME, THEMES
 
 # --- EXTRACTED CORE MODULES ---
@@ -25,7 +25,7 @@ from .listbox_options import ListboxOptionsManager
 from .listbox_sync_engine import ListboxSyncEngine
 
 
-class BuilderListboxCreator(TransparencyMixin):
+class BuilderListboxCreator(SyncBehavior):
     """Mixin for creating a dynamic Listbox with MQTT sync and industrial transparency."""
 
     @staticmethod
@@ -45,7 +45,7 @@ class BuilderListboxCreator(TransparencyMixin):
         sub_frame.pack_propagate(False); sub_frame.grid_rowconfigure(1, weight=1); sub_frame.grid_columnconfigure(0, weight=1)
 
         if hasattr(self, '_apply_transparency'):
-            TransparencyManager.apply_transparency(sub_frame, sub_frame, config_data, b_inst)
+            EngineVisualEffects.apply_transparency(sub_frame, sub_frame, config_data, b_inst)
 
         # 2. Components
         colors = THEMES.get(DEFAULT_THEME, THEMES["dark"])

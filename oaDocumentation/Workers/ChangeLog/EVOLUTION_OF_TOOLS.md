@@ -7,8 +7,8 @@ This document traces the architectural progression and technical maturity of the
 ## 🏗️ 1. Dynamic GUI Construction
 **From Hardcoded Mixins to Registry-Based Discovery.**
 
-*   **Legacy (2025):** The `DynamicGuiBuilder` relied on the `GuiWidgetFactoryMixin`, a "Dependency Magnet" that required explicit imports of every widget class. Adding a new widget meant modifying the core builder.
-*   **The Transition (Feb 2026):** Introduction of the `WidgetRegistry` and the `@register` decorator. This enabled a **Plugin Architecture** where widgets could exist in isolated directories and register themselves during a recursive filesystem scan (`scan_widgets`).
+*   **Legacy (2025):** The `LoaderOrchestrator` relied on the `GuiWidgetFactoryMixin`, a "Dependency Magnet" that required explicit imports of every widget class. Adding a new widget meant modifying the core builder.
+*   **The Transition (Feb 2026):** Introduction of the `RegistryWidgetStore` and the `@register` decorator. This enabled a **Plugin Architecture** where widgets could exist in isolated directories and register themselves during a recursive filesystem scan (`scan_widgets`).
 *   **Modern (March 2026):** Implementation of `_lazy_wrap` in `factory_mapping.py`. By deferring module imports until the exact moment a widget is instantiated, the system achieved O(1) startup time regardless of the number of available widgets.
 
 ---
@@ -18,7 +18,7 @@ This document traces the architectural progression and technical maturity of the
 
 *   **Legacy:** Widgets managed their own MQTT logic, leading to redundant subscriptions and complex "Infinite Feedback" loops.
 *   **The Transition:** Extraction of the `StateMirrorEngine`. This centralized the mapping between Tkinter variables and MQTT topics.
-*   **Modern:** The `UITrackingService` now handles automated event binding. The engine supports **Path-Based Topic Generation**, where a widget's address is automatically derived from its location in the filesystem-based GUI tree, eliminating manual topic configuration in JSON.
+*   **Modern:** The `InteractionTelemetryService` now handles automated event binding. The engine supports **Path-Based Topic Generation**, where a widget's address is automatically derived from its location in the filesystem-based GUI tree, eliminating manual topic configuration in JSON.
 
 ---
 
@@ -51,4 +51,4 @@ This document traces the architectural progression and technical maturity of the
 ## 🖥️ 6. Process Partitioning
 **From Monolithic Execution to Partitioned Core/UI.**
 
-*   **Evolution:** The system was split into `open_air_core.py` (Hardware/Logic) and `open_air_ui.py` (Visuals). Managed by a Python-based **Supervisor** (`OpenAir.py`), this partitioning ensures that a UI crash does not take down hardware control loops, and provides OS-level process isolation for mission-critical reliability.
+*   **Evolution:** The system was split into `open_air_core.py` (Hardware/Logic) and `loader_main_service.py` (Visuals). Managed by a Python-based **Supervisor** (`OpenAir.py`), this partitioning ensures that a UI crash does not take down hardware control loops, and provides OS-level process isolation for mission-critical reliability.

@@ -10,7 +10,7 @@ from oaComProtocols.oaComSAP.Interface.dashboard_gui import ProtocolDashboard
 class SAPGUI(ProtocolDashboard):
     """
     A wrapper class pointing to the SAP GUI implementation.
-    This class is discovered by ModuleLoader and instantiated.
+    This class is discovered by LoaderFacade and instantiated.
     It inherits directly from the implementation to maintain full functionality.
     """
     # No additional logic is needed here as we inherit the full implementation.

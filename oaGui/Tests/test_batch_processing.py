@@ -2,16 +2,16 @@
 # Author: Gemini (Collaborator)
 # Version: 20260405.2340.1
 #
-# Description: Unit tests for BatchProcessingEngine - Verifying Fast Render & Padding
+# Description: Unit tests for EngineRenderScheduler - Verifying Fast Render & Padding
 
 import tkinter as tk
 import unittest
 from unittest.mock import MagicMock
 
-from oaGui.Workers.batch_processing_engine import BatchProcessingEngine
+from oaGui.Workers.scheduling.engine_render_scheduler import EngineRenderScheduler
 
 
-class TestBatchProcessingEngine(unittest.TestCase):
+class TestRenderScheduler(unittest.TestCase):
 
     def setUp(self):
         """Set up Tkinter root and mock builder."""
@@ -25,7 +25,7 @@ class TestBatchProcessingEngine(unittest.TestCase):
         self.mock_builder._render_tier = "high_res"
         self.mock_builder.superficial_pad = 0
 
-        self.engine = BatchProcessingEngine(self.mock_builder, self.mock_logger, local_debug=True)
+        self.engine = EngineRenderScheduler(self.mock_builder, self.mock_logger, local_debug=True)
 
     def tearDown(self):
         """Destroy widgets."""

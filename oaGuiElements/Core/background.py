@@ -199,26 +199,24 @@ class BuilderBackgroundManagerMixin:
             return
 
         # 📏 DIMENSION CALCULATION
-        # We need to cover the ENTIRE scrollable frame, or at least the entire viewport.
-        cv_w = self.canvas.winfo_width()
-        cv_h = self.canvas.winfo_height()
-        req_w = self.scroll_frame.winfo_reqwidth()
-        req_h = self.scroll_frame.winfo_reqheight()
+        # We fit the background to the ACTUAL size of the scroll_frame container.
+        # The CanvasViewportManager is responsible for sizing this frame.
+        w = self.scroll_frame.winfo_width()
+        h = self.scroll_frame.winfo_height()
         
-        w = max(cv_w, req_w)
-        h = max(cv_h, req_h)
-        
+        # Fallback to requested size if not yet physically realized
+        if w <= 1: w = self.scroll_frame.winfo_reqwidth()
+        if h <= 1: h = self.scroll_frame.winfo_reqheight()
+
         matrix_log("gui", "gui_builder", "_perform_background_sync", 
                    f"🎨 [BG_SYNC] Tab: {getattr(self, 'tab_name', '??')} | "
-                   f"Canvas: {cv_w}x{cv_h} | Req: {req_w}x{req_h} | "
-                   f"Final: {w}x{h}", "TRACE")
+                   f"Actual Frame Size: {w}x{h}", "TRACE")
 
         if w <= 1 or h <= 1: return
 
         last_w, last_h = getattr(self, '_last_bg_size', (0, 0))
 
-        # ⚡ IMPROVED: Regenerate if size changed significantly in ANY direction (not just growth)
-        # to ensure the background label always matches the scroll_frame size.
+        # ⚡ IMPROVED: Regenerate if size changed significantly
         needs_regen = force or abs(w - last_w) > 20 or abs(h - last_h) > 20
 
         if not needs_regen:
@@ -226,13 +224,6 @@ class BuilderBackgroundManagerMixin:
             return
 
         self._last_bg_size = (w, h)
-        if hasattr(self, 'canvas_window_id') and self.canvas_window_id:
-            # ⚡ ROBUSTNESS: Ensure dimensions are valid before updating canvas item.
-            if w > 1 and h > 1:
-                try:
-                    self.canvas.itemconfig(self.canvas_window_id, width=w, height=h)
-                except tk.TclError:
-                    pass
 
         bg_config = getattr(self, 'config_data', {}).get("background")
         if bg_config and bg_config != "none":

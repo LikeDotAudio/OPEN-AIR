@@ -14,13 +14,13 @@ from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- GUI FALLBACKS (V3.2.1 Decoupling) ---
 try:
-    from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+    from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 except ImportError:
-    class TransparencyMixin:
+    class SyncBehavior:
         """Fallback mixin for standalone execution without GUI manager."""
         def render(self): pass
 
-class NmosConnectionMonitorImplementation(tk.Frame, TransparencyMixin):
+class NmosConnectionMonitorImplementation(tk.Frame, SyncBehavior):
     """
     NMOS Connection Monitor GUI.
     Displays Node/Device registration status and HTTP server health.

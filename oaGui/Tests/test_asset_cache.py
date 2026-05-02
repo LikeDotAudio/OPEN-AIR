@@ -1,8 +1,8 @@
-# oaGui/Tests/test_asset_cache.py
+# oaGui/Tests/test_cache_image_store.py
 # Author: Gemini CLI
 # Version: 20260404.1.1
 #
-# Description: Unit tests for asset_cache.py
+# Description: Unit tests for cache_image_store.py
 
 import pathlib
 import unittest
@@ -10,7 +10,7 @@ from unittest.mock import MagicMock, patch
 
 from PIL import Image
 
-from oaGui.Core.factory.asset_cache import _MEMORY_ASSET_CACHE, AssetCacheManager
+from oaGui.Core.factory.cache_image_store import _MEMORY_ASSET_CACHE, CacheImageStore
 
 
 class TestAssetCacheManager(unittest.TestCase):
@@ -18,17 +18,17 @@ class TestAssetCacheManager(unittest.TestCase):
 
     def setUp(self):
         """Clear memory cache before each test."""
-        AssetCacheManager.invalidate_cache()
+        CacheImageStore.invalidate_cache()
 
     def test_get_asset_hash(self):
         """OPERATE: Generate hash. CHECK: Verify consistent and unique hashing."""
         config = {"color": "red", "radius": 5}
-        hash1 = AssetCacheManager.get_asset_hash("btn", 100, 50, config)
-        hash2 = AssetCacheManager.get_asset_hash("btn", 100, 50, config)
+        hash1 = CacheImageStore.get_asset_hash("btn", 100, 50, config)
+        hash2 = CacheImageStore.get_asset_hash("btn", 100, 50, config)
         self.assertEqual(hash1, hash2)
 
     @patch('pathlib.Path.mkdir')
-    @patch('oaGui.Core.factory.asset_cache.AssetCacheManager._CACHE_DIR')
+    @patch('oaGui.Core.factory.cache_image_store.CacheImageStore._CACHE_DIR')
     def test_save_to_cache(self, mock_cache_dir, mock_mkdir):
         """OPERATE: Save image. CHECK: Verify it's in memory and saved to disk."""
         mock_cache_dir.__truediv__.return_value = pathlib.Path("/tmp/mock_asset.png")
@@ -36,10 +36,10 @@ class TestAssetCacheManager(unittest.TestCase):
         mock_image = MagicMock(spec=Image.Image)
         config = {"color": "red"}
 
-        AssetCacheManager.save_to_cache("btn", 100, 50, config, mock_image)
+        CacheImageStore.save_to_cache("btn", 100, 50, config, mock_image)
 
         # Verify memory cache
-        asset_hash = AssetCacheManager.get_asset_hash("btn", 100, 50, config)
+        asset_hash = CacheImageStore.get_asset_hash("btn", 100, 50, config)
         self.assertIn(asset_hash, _MEMORY_ASSET_CACHE)
 
         # Verify disk save call on the image object itself
@@ -51,12 +51,12 @@ class TestAssetCacheManager(unittest.TestCase):
         """OPERATE: Load asset. CHECK: Verify it hits memory cache first, skipping disk."""
         mock_image = MagicMock(spec=Image.Image)
         config = {"color": "red"}
-        asset_hash = AssetCacheManager.get_asset_hash("btn", 100, 50, config)
+        asset_hash = CacheImageStore.get_asset_hash("btn", 100, 50, config)
 
         # Manually seed memory cache
         _MEMORY_ASSET_CACHE[asset_hash] = mock_image
 
-        loaded = AssetCacheManager.load_from_cache("btn", 100, 50, config)
+        loaded = CacheImageStore.load_from_cache("btn", 100, 50, config)
 
         # Verify it came from memory
         self.assertEqual(loaded, mock_image)

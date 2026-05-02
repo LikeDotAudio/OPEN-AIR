@@ -2,7 +2,7 @@
 # Author: Gemini (Collaborator)
 # Version: 20260405.2355.1
 #
-# Description: Unit tests for LayoutParser - Verifying Robustness against empty files
+# Description: Unit tests for FolderLayoutInterpreter - Verifying Robustness against empty files
 
 import pathlib
 import unittest
@@ -10,14 +10,14 @@ from unittest.mock import MagicMock, patch
 
 import orjson
 
-from oaGui.FileReaders.layout_parser import LayoutParser
+from oaGui.FileReaders.scanner.folder_layout_interpreter import FolderLayoutInterpreter
 
 
-class TestLayoutParser(unittest.TestCase):
+class TestStructuralInterpreter(unittest.TestCase):
 
     def setUp(self):
         """Set up."""
-        self.parser = LayoutParser(current_version="2026.04.05")
+        self.parser = FolderLayoutInterpreter(current_version="2026.04.05")
 
     def test_parse_empty_layout_file(self):
         """Verify that an empty layout.json returns an error dictionary instead of crashing."""

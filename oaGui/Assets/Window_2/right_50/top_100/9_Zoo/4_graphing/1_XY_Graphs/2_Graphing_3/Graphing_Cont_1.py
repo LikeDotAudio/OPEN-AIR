@@ -15,7 +15,7 @@ from loguru import logger
 from oaConfigurationManager.FileReaders.config_reader import Config
 
 # --- Protocol: Integration Layer ---
-from oaGui.Workers.builder import DynamicGuiBuilder
+from oaGui.Workers.orchestration.loader_orchestrator import LoaderOrchestrator
 from oaLogging.Methods.matrix_gate import matrix_log
 
 LOCAL_DEBUG = False
@@ -38,7 +38,7 @@ module_name = current_path.stem.replace("gui_", "")
 class GenericInstrumentGui(ttk.Frame):
     """
     A generic GUI wrapper that loads a JSON configuration to build its interface.
-    Now safely handles arguments from ModuleLoader and fails gracefully.
+    Now safely handles arguments from LoaderFacade and fails gracefully.
     """
 
     def __init__(self, parent, json_path=None, config=None, **kwargs):
@@ -56,9 +56,9 @@ class GenericInstrumentGui(ttk.Frame):
 
         # 2. Absorb Arguments (Priority: Passed Args > Global Calculation)
         self.json_path = json_path
-        self.config_data = config if config else {}
+        self.configuration = config if config else {}
 
-        # Fallback if json_path wasn't passed (though ModuleLoader should pass it)
+        # Fallback if json_path wasn't passed (though LoaderFacade should pass it)
         if not self.json_path:
             self.json_path = current_path.with_suffix(".json")
 
@@ -67,8 +67,8 @@ class GenericInstrumentGui(ttk.Frame):
             self.json_path = pathlib.Path(self.json_path)
 
         # 3. Extract Core Dependencies
-        self.state_mirror_engine = self.config_data.get("state_mirror_engine")
-        self.subscriber_router = self.config_data.get("subscriber_router")
+        self.state_mirror_engine = self.configuration.get("state_mirror_engine")
+        self.subscriber_router = self.configuration.get("subscriber_router")
 
         # 4. Initialize UI
         self._init_ui()
@@ -117,13 +117,13 @@ class GenericInstrumentGui(ttk.Frame):
             processed_path = str(self.json_path)
 
             if LOCAL_DEBUG:
-                matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🚀 [Liftoff] Validated path. Passing control to DynamicGuiBuilder...", "DEBUG")
+                matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🚀 [Liftoff] Validated path. Passing control to LoaderOrchestrator...", "DEBUG")
 
             # --- The Main Event: Dynamic Builder ---
-            self.dynamic_gui = DynamicGuiBuilder(
+            self.dynamic_gui = LoaderOrchestrator(
                 parent=self,
                 json_path=processed_path,
-                config=self.config_data,  # Pass the full config dictionary here
+                config=self.configuration,  # Pass the full config dictionary here
                 use_grid=True,
             )
 
@@ -161,7 +161,7 @@ class GenericInstrumentGui(ttk.Frame):
 
     def _on_tab_selected(self, event):
         """
-        Called by the grand orchestrator (Application) when this tab is brought to focus.
+        Called by the grand orchestrator (EngineGuiDisplay) when this tab is brought to focus.
         """
         current_function_name = inspect.currentframe().f_code.co_name
 

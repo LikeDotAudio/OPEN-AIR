@@ -122,7 +122,7 @@ def initialize_logging(config, log_dir=None, partition="SYS"):
         os.makedirs(comms_log_dir, exist_ok=True)
         os.makedirs(gui_log_dir, exist_ok=True)
 
-        # 2. --- Application Log Sink ---
+        # 2. --- EngineGuiDisplay Log Sink ---
         app_log_pattern = os.path.join(run_log_dir, "Application_{time}.log")
         logger.add(
             BatchLogSink(app_log_pattern, format_str=file_format_plain, batch_size=APP_LOG_BATCH_SIZE, interval=APP_LOG_INTERVAL),

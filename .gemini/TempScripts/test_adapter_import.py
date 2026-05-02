@@ -7,7 +7,7 @@ from unittest.mock import MagicMock
 project_root = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(project_root))
 
-from oaGuiManager.Core.factory.Core.factory_mapping import get_core_factory_mapping
+from oaGui.Core.factory.Core.factory_mapping import get_core_factory_mapping
 
 
 def test_adapter_import():

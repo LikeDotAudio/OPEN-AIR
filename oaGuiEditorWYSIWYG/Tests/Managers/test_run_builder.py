@@ -14,17 +14,17 @@
 #        self.mock_event_bus = MagicMock()
 #        self.builder = RunBuilder(self.mock_root, self.mock_event_bus)
 #
-#    @patch('oaGuiEditorWYSIWYG.Managers.run_builder.DynamicGuiBuilder')
+#    @patch('oaGuiEditorWYSIWYG.Managers.run_builder.LoaderOrchestrator')
 #        """
-#        Test that run_builder correctly invokes the DynamicGuiBuilder with JSON content.
+#        Test that run_builder correctly invokes the LoaderOrchestrator with JSON content.
 #        """
 #        json_content = '{"type": "frame", "children": []}'
-#        mock_builder_instance = MockDynamicGuiBuilder.return_value
+#        mock_builder_instance = MockUIOrchestrator.return_value
 #
 #        self.builder.build_gui_from_json(json_content)
 #
-#        # Verify DynamicGuiBuilder was instantiated with the correct root
-#        MockDynamicGuiBuilder.assert_called_once_with(self.mock_root, self.mock_event_bus)
+#        # Verify LoaderOrchestrator was instantiated with the correct root
+#        MockUIOrchestrator.assert_called_once_with(self.mock_root, self.mock_event_bus)
 #
 #        # Verify the build process was started with the parsed JSON
 #        mock_builder_instance.build_gui.assert_called_once()
@@ -42,12 +42,12 @@
 #        # Check that the event bus was notified of the failure
 #        self.mock_event_bus.publish.assert_called_with("error", "Failed to decode JSON for builder.")
 #
-#    @patch('oaGuiEditorWYSIWYG.Managers.run_builder.DynamicGuiBuilder')
+#    @patch('oaGuiEditorWYSIWYG.Managers.run_builder.LoaderOrchestrator')
 #        """
 #        Test that the builder can clear the previous GUI and rebuild.
 #        """
 #        json_content = '{"type": "label", "text": "Hello"}'
-#        mock_builder_instance = MockDynamicGuiBuilder.return_value
+#        mock_builder_instance = MockUIOrchestrator.return_value
 #
 #        # First build
 #        self.builder.build_gui_from_json(json_content)

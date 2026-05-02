@@ -14,10 +14,10 @@ from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
-from oaGui.Methods.i18n_utils import get_text
-from oaGui.Core.base_widget_creator import BaseWidgetCreator
-from oaGui.Hooks.widget_registry import WidgetRegistry
-from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Methods.formatting.i18n_utils import get_text
+from oaGui.Core.factory.base_widget_creator import BaseWidgetCreator
+from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
+from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 
 from .trapezoid_interaction_mixin import TrapezoidInteractionMixin
 
@@ -107,8 +107,8 @@ class TrapezoidButton(tk.Canvas, TrapezoidRendererMixin, TrapezoidInteractionMix
         }
         self.render_trapezoid_button(self, self.config_data, current_state)
 
-@WidgetRegistry.register("_TrapezoidButton")
-class BuilderButtonTrapezoidCreator(BaseWidgetCreator, TransparencyMixin):
+@RegistryWidgetStore.register("_TrapezoidButton")
+class BuilderButtonTrapezoidCreator(BaseWidgetCreator, SyncBehavior):
     """Factory for creating TrapezoidButton instances."""
 
     def _assemble_ui(self, parent_widget, config_data, context, **kwargs):

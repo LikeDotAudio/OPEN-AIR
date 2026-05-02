@@ -10,7 +10,7 @@ import tkinter as tk
 from loguru import logger
 
 from oaConfigurationManager.FileReaders.config_reader import Config
-from oaGui.Methods.i18n_utils import get_text
+from oaGui.Methods.formatting.i18n_utils import get_text
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Methods.matrix_gate import matrix_log
@@ -19,9 +19,9 @@ app_constants = Config.get_instance()
 
 from oaGuiElements.Core.faders.fader_horizontal.Core.fader_horizontal import BuilderFaderHorizontalCreator
 from oaGuiElements.Core.Knobs.knob.Core.knob import BuilderKnobCreator
-from oaGui.Hooks.widget_registry import WidgetRegistry
-from oaGui.Workers.transparency.transparency import TransparencyManager
-from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
+from oaGui.Workers.compositing.engine_visual_effects import EngineVisualEffects
+from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Methods.matrix_gate import is_debug_allowed
@@ -33,9 +33,9 @@ from .ui_components import CompositeUIComponents
 
 BUILDER_DEBUG = is_debug_allowed(system="UI", element="GUI_BUILDER")
 
-@WidgetRegistry.register("_Horizontal_with_dial_Value", "OcaCompositeFaderKnob")
+@RegistryWidgetStore.register("_Horizontal_with_dial_Value", "OcaCompositeFaderKnob")
 class BuilderCompositeHorizontalDialValueCreator(
-    BuilderFaderHorizontalCreator, BuilderKnobCreator, TransparencyMixin
+    BuilderFaderHorizontalCreator, BuilderKnobCreator, SyncBehavior
 ):
     @staticmethod
     def make(parent_widget, config_data, context=None, **kwargs):
@@ -62,7 +62,7 @@ class BuilderCompositeHorizontalDialValueCreator(
 
             sub_frame = tk.Canvas(parent_widget, bd=0, highlightthickness=0, relief="flat", bg=p_bg, width=w_req, height=h_req)
             sub_frame._oca_path = path; sub_frame.grid_propagate(False)
-            TransparencyManager.apply_transparency(sub_frame, sub_frame, config_data, builder_instance)
+            EngineVisualEffects.apply_transparency(sub_frame, sub_frame, config_data, builder_instance)
 
             safe_knob_dim, v_width_limit = GridManager.configure(sub_frame, config_data, w_req)
 
@@ -82,7 +82,7 @@ class BuilderCompositeHorizontalDialValueCreator(
 
             # 3. Component Creation
             ui_ctx = {
-                'sub_frame': sub_frame, 'p_bg': p_bg, 'trans_mgr': TransparencyManager,
+                'sub_frame': sub_frame, 'p_bg': p_bg, 'trans_mgr': EngineVisualEffects,
                 'builder_instance': builder_instance, 'config_data': config_data,
                 'label_text': label, 'path': path, 'v_width': v_width,
                 'v_font_size': v_font_size, 'v_text_color': v_text_color,

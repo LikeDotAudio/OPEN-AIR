@@ -8,7 +8,7 @@ import tkinter as tk
 from tkinter import filedialog, ttk
 
 from oaConfigurationManager.FileReaders.config_reader import Config
-from oaGui.Methods.i18n_utils import get_text
+from oaGui.Methods.formatting.i18n_utils import get_text
 
 # --- Standard Debug Logging Setup ---
 
@@ -18,8 +18,8 @@ app_constants = Config.get_instance()
 from oaGuiElements.Core.utils.json_tree.Core.json import JsonDataManager
 from oaGuiElements.Core.utils.json_tree.Core.json_tree_editor_mixin import JsonTreeEditorMixin
 from oaGuiElements.Core.utils.json_tree.Core.json_tree_renderer_mixin import JsonTreeRendererMixin
-from oaGui.Hooks.widget_registry import WidgetRegistry
-from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
+from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 
 
 class AutoScrollbar(ttk.Scrollbar):
@@ -155,8 +155,8 @@ class JsonTreeWidget(
         if hasattr(self, 'lbl'): self.lbl.config(bg=bg)
         ttk.Style().configure("Custom.Treeview", background=bg, fieldbackground=bg)
 
-@WidgetRegistry.register("_DataJsonTree")
-class BuilderDataJsonTreeCreator(TransparencyMixin):
+@RegistryWidgetStore.register("_DataJsonTree")
+class BuilderDataJsonTreeCreator(SyncBehavior):
 
     @staticmethod
     def make(parent_widget, config_data, context=None, **kwargs):

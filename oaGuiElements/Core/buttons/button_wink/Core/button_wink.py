@@ -14,10 +14,10 @@ from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
-from oaGui.Methods.i18n_utils import get_text
-from oaGui.Core.base_widget_creator import BaseWidgetCreator
-from oaGui.Hooks.widget_registry import WidgetRegistry
-from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Methods.formatting.i18n_utils import get_text
+from oaGui.Core.factory.base_widget_creator import BaseWidgetCreator
+from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
+from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 
 # Core Modules
 from .wink_config import extract_wink_config
@@ -27,8 +27,8 @@ from .wink_renderer import draw_wink_visuals
 from .wink_state import create_wink_state
 
 
-@WidgetRegistry.register("_WinkButton")
-class BuilderButtonWinkCreator(BaseWidgetCreator, TransparencyMixin):
+@RegistryWidgetStore.register("_WinkButton")
+class BuilderButtonWinkCreator(BaseWidgetCreator, SyncBehavior):
     """
     A mixin to create 'Wink' style buttons/switches.
     Mimics a mechanical shutter revealing a bright background.

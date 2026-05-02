@@ -74,7 +74,7 @@ The modular SmartMeter widget.
 - [TODO: Note any locks, I/O, or global state.]
 
 ##### `render(self)`
-Hook for TransparencyMixin to trigger a redraw when slicing updates.
+Hook for SyncBehavior to trigger a redraw when slicing updates.
 
 **Parameters:**
 - None

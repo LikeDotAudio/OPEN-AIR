@@ -62,7 +62,7 @@ TRANSLATIONS = {
     "Sweeping": {"Fr": "Balayage", "De": "Wobbeln", "Es": "Barrido"},
     "Plotting": {"Fr": "Tracé", "De": "Plotten", "Es": "Trazado"},
     "Reports": {"Fr": "Rapports", "De": "Berichte", "Es": "Informes"},
-    "Application": {"Fr": "Application", "De": "Anwendung", "Es": "Aplicación"},
+    "EngineGuiDisplay": {"Fr": "EngineGuiDisplay", "De": "Anwendung", "Es": "Aplicación"},
     "Filepaths": {"Fr": "Chemins de fichiers", "De": "Dateipfade", "Es": "Rutas de archivos"},
     "Monitors": {"Fr": "Moniteurs", "De": "Monitore", "Es": "Monitores"},
     "Graphs": {"Fr": "Graphiques", "De": "Grafiken", "Es": "Gráficos"},

@@ -8,7 +8,7 @@ import tkinter as tk
 
 from loguru import logger
 
-from oaGui.Hooks.widget_registry import WidgetRegistry
+from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
 from oaLogging.Methods.matrix_gate import matrix_log
 
 # Resistor Color Code Mapping & MIDI Channel Logic
@@ -49,7 +49,7 @@ def get_midi_color(channel):
         idx = (ch - 10) % len(WRAP_COLORS)
         return WRAP_COLORS[idx]
 
-@WidgetRegistry.register("MidiKeyboard", "MIDI_KEYBOARD")
+@RegistryWidgetStore.register("MidiKeyboard", "MIDI_KEYBOARD")
 class MidiKeyboard(tk.Canvas):
     """
     A 6-octave MIDI Keyboard Visualizer & Input Component.

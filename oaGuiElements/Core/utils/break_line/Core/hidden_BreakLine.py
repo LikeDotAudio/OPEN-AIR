@@ -7,14 +7,14 @@
 import tkinter as tk
 
 # --- Standard Debug Logging Setup ---
-from oaGui.Hooks.widget_registry import WidgetRegistry
-from oaGui.Workers.transparency.transparency import TransparencyManager
-from oaGui.Workers.transparency.transparency_mixin import TransparencyMixin
+from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
+from oaGui.Workers.compositing.engine_visual_effects import EngineVisualEffects
+from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 from oaLogging.Methods.matrix_gate import matrix_log
 
 
-@WidgetRegistry.register("OcaFold", "BreakLine", "_Separator", "OcaSeparator")
-class BuilderBreakLineCreator(TransparencyMixin):
+@RegistryWidgetStore.register("OcaFold", "BreakLine", "_Separator", "OcaSeparator")
+class BuilderBreakLineCreator(SyncBehavior):
     """Factory class for creating horizontal or vertical break lines."""
 
     @staticmethod
@@ -76,7 +76,7 @@ class BuilderBreakLineCreator(TransparencyMixin):
 
         # Apply Industrial Transparency
         if builder_instance and hasattr(builder_instance, '_apply_transparency'):
-            TransparencyManager.apply_transparency(frame, frame, config_data, builder_instance)
+            EngineVisualEffects.apply_transparency(frame, frame, config_data, builder_instance)
 
         def redraw_line():
             if not frame.winfo_exists(): return

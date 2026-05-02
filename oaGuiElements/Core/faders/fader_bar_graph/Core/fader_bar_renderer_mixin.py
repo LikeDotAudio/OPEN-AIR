@@ -4,7 +4,7 @@
 #
 # Description: Brief summary of purpose
 
-from oaGui.Interface.ui_geometry_math import UIGeometryMath
+from oaGui.Interface.math.coordinate_transformer import CoordinateTransformer
 
 from .fader_bar_asset_generator import FaderBarAssetGenerator
 
@@ -62,7 +62,7 @@ class FaderBarRendererMixin:
         self.cap_img = FaderBarAssetGenerator.get_3d_cap(int(cap_w), int(cap_h), self.fader_grip_color, self.fader_track_color)
         value = self.fader_var.get()
         # Use centralized geometry math for value-to-pixel mapping
-        y = self.top_m + UIGeometryMath.value_to_pixel(value, self.min_val, self.max_val, self.draw_h, reverse=True)
+        y = self.top_m + CoordinateTransformer.value_to_pixel(value, self.min_val, self.max_val, self.draw_h, reverse=True)
         self.canvas.create_image(self.cx, y, image=self.cap_img, tags=("dynamic", "cap"))
 
         text_col = "white" if self.fader_grip_color.lower() in ["black", "#000000", "#222222"] else "black"
@@ -77,7 +77,7 @@ class FaderBarRendererMixin:
 
         meter_w = self.meter_width
         # Use centralized geometry math for value-to-pixel mapping
-        val_h = UIGeometryMath.value_to_pixel(value, self.min_val, self.max_val, self.draw_h)
+        val_h = CoordinateTransformer.value_to_pixel(value, self.min_val, self.max_val, self.draw_h)
         fy = self.top_m + (self.draw_h - val_h)
 
         # Ranges

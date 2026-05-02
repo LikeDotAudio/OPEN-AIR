@@ -26,13 +26,13 @@ def build_tab(data_dir):
     """
     log_files = glob.glob(os.path.join(data_dir, "Application_*.log"))
     if not log_files:
-        return "<h3>No Application Run Logs Found</h3><p>Application logs will appear here after the system is launched.</p>"
+        return "<h3>No EngineGuiDisplay Run Logs Found</h3><p>EngineGuiDisplay logs will appear here after the system is launched.</p>"
 
     # Sort by modification time (newest first)
     log_files.sort(key=os.path.getmtime, reverse=True)
 
     tab_html = """
-    <h3>Application Run Log Browser</h3>
+    <h3>EngineGuiDisplay Run Log Browser</h3>
     <div class="log-controls">
         <input type="text" class="log-search" placeholder="Search log messages..." onkeyup="filterLogs('RunLogs')">
         <select class="log-filter-select filter-level" onchange="filterLogs('RunLogs')">

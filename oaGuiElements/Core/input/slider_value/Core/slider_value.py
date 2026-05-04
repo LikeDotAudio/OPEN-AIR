@@ -28,52 +28,41 @@ DEFAULT_PAD_X = 5
 DEFAULT_PAD_Y = 2
 
 
-class BuilderSliderValueCreator(SyncBehavior):
+from oaGui.Core.factory.base_widget_creator import BaseWidgetCreator
+
+
+class BuilderSliderValueCreator(BaseWidgetCreator, SyncBehavior):
     """
     A mixin class that provides the functionality for creating a
     slider widget combined with a text entry box.
     """
 
-    # Creates a composite widget consisting of a slider and a text entry box.
-    # This method sets up a slider for adjusting a numerical value, along with a text entry
-    # field for precise input. The two are synchronized and connected to the state management engine.
-    # Inputs:
-    #     parent_widget: The parent tkinter widget.
-    #     config_data (dict): The configuration for the slider widget.
-    #     **kwargs: Additional keyword arguments.
-    # Outputs:
-    #     tk.Frame: The created frame containing the composite widget, or None on failure.
-    def make_slider_value(self, parent_widget, config_data, context=None, **kwargs):
+    is_composite = True
+
+    def __init__(self):
+        self.topic_widgets = {}
+
+    def _assemble_ui(self, parent_widget, config_data, context, **kwargs):
+        """Assembles the Slider Value UI."""
         # Creates a slider and an entry box for a numerical value.
-        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬 Entering make_slider_value with config: {config_data}", level="TRACE")
-        current_function_name = inspect.currentframe().f_code.co_name
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬 Entering _assemble_ui with config: {config_data}", level="TRACE")
 
         # Extract only widget-specific config from config_data
-        label = config_data.get(
-            "label_active", ""
-        )  # Assuming label comes from config_data
-        path = config_data.get("path")  # Path needs to be passed in config_data
+        label = config_data.get("label_active", "")
+        path = config_data.get("path")
 
-        # ⚡ HARDENED INTERFACE: Extract from context if available
-        if context:
-            state_mirror_engine = context.state_mirror_engine
-            subscriber_router = context.subscriber_router
-            base_mqtt_topic_from_path = context.base_mqtt_topic_from_path
-            builder_instance = context.builder_instance
-        else:
-            state_mirror_engine = self.state_mirror_engine
-            subscriber_router = self.subscriber_router
-            base_mqtt_topic_from_path = kwargs.get("base_mqtt_topic_from_path")
-            builder_instance = kwargs.get("builder_instance") or self
-
-        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬⚡️ Entering '{current_function_name}' to assemble a slider for '{label}'.", level="DEBUG")
+        ctx = context if context else type('obj', (object,), kwargs)()
+        b_inst = getattr(ctx, 'builder_instance', None) or getattr(ctx, 'app_instance', None) or kwargs.get('builder_instance')
+        s_engine = getattr(ctx, 'state_mirror_engine', None) or kwargs.get('state_mirror_engine')
+        s_router = getattr(ctx, 'subscriber_router', None) or kwargs.get('subscriber_router')
+        b_topic = getattr(ctx, 'base_mqtt_topic_from_path', None) or kwargs.get('base_mqtt_topic_from_path', "")
 
         try:
-            sub_frame = tk.Frame(parent_widget, bd=0, highlightthickness=0, relief="flat")  # Use parent_widget here
+            sub_frame = tk.Frame(parent_widget, bd=0, highlightthickness=0, relief="flat")
 
             # Apply Industrial Transparency
-            if hasattr(self, '_apply_transparency'):
-                self._apply_transparency(sub_frame, None, config_data, builder_instance)
+            if hasattr(b_inst, '_apply_transparency'):
+                b_inst._apply_transparency(sub_frame, None, config_data, b_inst)
 
             layout_config = config_data.get("layout", {})
             font_size = layout_config.get("font", 12)
@@ -85,8 +74,8 @@ class BuilderSliderValueCreator(SyncBehavior):
             top_info_frame.pack(side=tk.TOP, fill=tk.X, expand=True)
 
             # Apply Industrial Transparency to internal frames
-            if hasattr(self, '_apply_transparency'):
-                self._apply_transparency(top_info_frame, top_info_frame, config_data, builder_instance)
+            if hasattr(b_inst, '_apply_transparency'):
+                b_inst._apply_transparency(top_info_frame, top_info_frame, config_data, b_inst)
 
             top_info_frame._last_redraw_size = (0, 0)
 
@@ -94,146 +83,79 @@ class BuilderSliderValueCreator(SyncBehavior):
                 if not top_info_frame.winfo_exists(): return
                 w = top_info_frame.winfo_width()
                 h = top_info_frame.winfo_height()
-                if (w, h) == top_info_frame._last_redraw_size:
-                    return
+                if (w, h) == top_info_frame._last_redraw_size: return
                 if w <= 1: return
                 top_info_frame._last_redraw_size = (w, h)
 
                 top_info_frame.delete("industrial_text")
-
-                # Draw Main Label (Left)
-                top_info_frame.create_text(
-                    5, h/2, text=f"{label}:", anchor="w",
-                    fill="white", font=custom_font, tags="industrial_text"
-                )
-
-                # Draw Units (Right)
+                top_info_frame.create_text(5, h/2, text=f"{label}:", anchor="w", fill="white", font=custom_font, tags="industrial_text")
                 units_txt = config_data.get("units", "")
-                top_info_frame.create_text(
-                    w-5, h/2, text=units_txt, anchor="e",
-                    fill="white", font=custom_font, tags="industrial_text"
-                )
+                top_info_frame.create_text(w-5, h/2, text=units_txt, anchor="e", fill="white", font=custom_font, tags="industrial_text")
 
             top_info_frame.bind("<Configure>", redraw_labels, add="+")
 
             entry_value = tk.StringVar(value=config_data.get("value", "0"))
-            entry = ttk.Entry(
-                top_info_frame,
-                width=7,
-                style="Custom.TEntry",
-                textvariable=entry_value,
-                justify=tk.RIGHT,
-                font=custom_font
-            )
-            # Pack entry with right padding to avoid overlapping the units text
+            entry = ttk.Entry(top_info_frame, width=7, style="Custom.TEntry", textvariable=entry_value, justify=tk.RIGHT, font=custom_font)
             u_txt = config_data.get("units", "")
             u_pad = 60 if u_txt else 5
             entry.pack(side=tk.RIGHT, padx=(DEFAULT_PAD_X, u_pad))
 
-            def sync_bg():
-                redraw_labels()
-
-            sub_frame._draw = sync_bg
+            sub_frame._draw = lambda: redraw_labels()
             min_val = float(config_data.get("min", "0"))
             max_val = float(config_data.get("max", "100"))
 
-            # 🟢️️️ New fix: Create a custom style for a thicker slider
             style = ttk.Style(sub_frame)
             style_name = f"Thicker.{font_size}.Horizontal.TScale"
-
-            slider_width = layout_config.get("width", 200)
-            slider_height = layout_config.get("height", 40)
-
             style.configure(style_name, sliderlength=font_size * 2)
-            slider = ttk.Scale(
-                sub_frame,
-                from_=min_val,
-                to=max_val,
-                orient=tk.HORIZONTAL,
-                style=style_name,
-            )
-
-            slider.pack(
-                side=tk.TOP,
-                fill=tk.X,
-                expand=True,
-                padx=DEFAULT_PAD_X,
-                pady=(0, DEFAULT_PAD_Y),
-            )
+            slider = ttk.Scale(sub_frame, from_=min_val, to=max_val, orient=tk.HORIZONTAL, style=style_name)
+            slider.pack(side=tk.TOP, fill=tk.X, expand=True, padx=DEFAULT_PAD_X, pady=(0, DEFAULT_PAD_Y))
 
             try:
                 initial_val = float(entry_value.get())
                 slider.set(initial_val)
             except (ValueError, tk.TclError):
                 slider.set(min_val)
-            # --- Layout Refactor: End ---
 
-            def on_slider_move(value):
-                entry_value.set(f"{float(value):.2f}")
-
+            def on_slider_move(value): entry_value.set(f"{float(value):.2f}")
             def on_entry_change(event):
                 try:
                     new_val = float(entry.get())
-                    if min_val <= new_val <= max_val:
-                        slider.set(new_val)
-                except ValueError:
-                    matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "Invalid input, please enter a number.", level="DEBUG")
+                    if min_val <= new_val <= max_val: slider.set(new_val)
+                except ValueError: pass
 
             slider.config(command=on_slider_move)
             entry.bind("<FocusOut>", on_entry_change)
             entry.bind("<Return>", on_entry_change)
 
-            # --- New Logic: Trace for external updates ---
             def _update_slider_from_entry_var(*args):
-                if not entry_value.get():  # Check for empty string
-                    matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "Empty string in entry_value for slider. Ignoring update.", level="DEBUG")
-                    return  # Exit early if the string is empty
-
                 try:
+                    if not entry_value.get(): return
                     new_val = float(entry_value.get())
-                    # Ensure the value is within the slider's range before setting
-                    if min_val <= new_val <= max_val:
-                        slider.set(new_val)
-                    elif new_val < min_val:
-                        slider.set(min_val)
-                    elif new_val > max_val:
-                        slider.set(max_val)
-                except (ValueError, tk.TclError):
-                    # Handle cases where entry_value might not be a valid float
-                    matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"Invalid value in entry_value for slider: {entry_value.get()}", level="DEBUG")
+                    slider.set(max(min_val, min(max_val, new_val)))
+                except: pass
 
-            # Bind the trace to the entry_value
             entry_value.trace_add("write", _update_slider_from_entry_var)
 
-            if path:
-                self.topic_widgets[path] = (entry_value, slider)
+            if path and s_engine:
+                topic = s_engine.register_widget(path, entry_value, b_topic, config_data)
+                bind_variable_trace(entry_value, lambda: s_engine.broadcast_gui_change_to_mqtt(path))
+                if s_router and topic:
+                    s_router.subscribe_to_topic(topic, s_engine.sync_incoming_mqtt_to_gui)
+                s_engine.initialize_widget_state(path)
 
-                # --- New MQTT Wiring ---
-                widget_id = path
+            # --- POPULATE TOPIC WIDGETS (Fixes AttributeError in test_slider_value) ---
+            if path and b_inst and hasattr(b_inst, "topic_widgets"):
+                b_inst.topic_widgets[path] = (entry_value, slider)
 
-                # 1. Register widget
-                topic = state_mirror_engine.register_widget(
-                    widget_id, entry_value, base_mqtt_topic_from_path, config_data
-                )
-
-                # 2. Bind variable trace for outgoing messages
-                callback = lambda: state_mirror_engine.broadcast_gui_change_to_mqtt(
-                    widget_id
-                )
-                bind_variable_trace(entry_value, callback)
-
-                # 3. Subscribe to topic for incoming messages
-                if subscriber_router and topic:
-                    subscriber_router.subscribe_to_topic(
-                        topic, state_mirror_engine.sync_incoming_mqtt_to_gui
-                    )
-
-                # 4. Initialize the widget state from cache or broadcast initial state
-                state_mirror_engine.initialize_widget_state(widget_id)
-
-            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"✅ SUCCESS! The slider '{label}' has materialized!", level="SUCCESS")
-            return sub_frame
+            return sub_frame, sub_frame
 
         except Exception:
-            logger.exception("💥 KABOOM! The slider contraption for '{label}' has malfunctioned! Error")
-            return None
+            logger.exception(f"💥 failure in slider for '{label}'")
+            return None, None
+
+    @staticmethod
+    def make(parent_widget, config_data, context=None, **kwargs):
+        return BuilderSliderValueCreator.build(parent_widget, config_data, context, **kwargs)
+
+    def make_slider_value(self, parent_widget, config_data, context=None, **kwargs):
+        return self.build(parent_widget, config_data, context, **kwargs)

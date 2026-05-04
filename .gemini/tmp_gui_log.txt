@@ -1,0 +1,5 @@
+DEBUG    | 🎨 UI      | ❓ GUI_MANAGER      | oaGuiElements.Methods.splash_screen | 🔬 SPLASH: Ignition Complete!
+DEBUG    | 🎨 UI      | ❓ GUI_MANAGER      | oaGui.Interface.viewport.tab_physical_window | 🖥️🎨 [UI] Reveal main window.
+DEBUG    | 🎨 UI      | ❓ GUI_MANAGER      | oaGui.Interface.viewport.tab_physical_window | Attempting to set window maximization attributes...
+DEBUG    | 🎨 UI      | ❓ GUI_MANAGER      | oaGui.Interface.viewport.tab_physical_window | Set '-zoomed' attribute for Linux.
+DEBUG    | 🎨 UI      | ❓ GUI_MANAGER      | oaGui.Interface.viewport.tab_physical_window | 🖥️🎨 [UI] Main window deiconified.

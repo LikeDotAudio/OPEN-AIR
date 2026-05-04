@@ -109,7 +109,7 @@ class BuilderMeterKnobWithVuMeterCreator(SyncBehavior):
                  knob_config["height"] = 40
 
             # Knob is embedded in the VU canvas
-            from oaGuiElements.Core.utils.knob.Core.knob import BuilderKnobCreator
+            from oaGuiElements.Core.Knobs.knob.Core.knob import BuilderKnobCreator
             knob_widget = BuilderKnobCreator.make(canvas, knob_config, context=context, builder_instance=builder_instance, **kwargs)
 
             if knob_widget:

@@ -160,31 +160,31 @@ class CMDP_LTPObject:
 
         # Hitbox (for click detection)
         hitbox_width = HITBOX_WIDTH
-        hitbox_points = [self.calculate_rotated_point(center_x - hitbox_width/2.0, center_y - track_length/2.0 - HITBOX_PADDING, center_x, center_y, cos_t, sin_t),
-               self.calculate_rotated_point(center_x + hitbox_width/2.0, center_y - track_length/2.0 - HITBOX_PADDING, center_x, center_y, cos_t, sin_t),
-               self.calculate_rotated_point(center_x + hitbox_width/2.0, center_y + track_length/2.0 + HITBOX_PADDING, center_x, center_y, cos_t, sin_t),
-               self.calculate_rotated_point(center_x - hitbox_width/2.0, center_y + track_length/2.0 + HITBOX_PADDING, center_x, center_y, cos_t, sin_t)]
+        hitbox_points = [self.calculate_rotated_point(center_x - hitbox_width/2, center_y - track_length/2 - HITBOX_PADDING, center_x, center_y, cos_t, sin_t),
+               self.calculate_rotated_point(center_x + hitbox_width/2, center_y - track_length/2 - HITBOX_PADDING, center_x, center_y, cos_t, sin_t),
+               self.calculate_rotated_point(center_x + hitbox_width/2, center_y + track_length/2 + HITBOX_PADDING, center_x, center_y, cos_t, sin_t),
+               self.calculate_rotated_point(center_x - hitbox_width/2, center_y + track_length/2 + HITBOX_PADDING, center_x, center_y, cos_t, sin_t)]
 
         flat_hitbox_points = [coord for point in hitbox_points for coord in point]
         self.canvas.create_polygon(flat_hitbox_points, fill="", outline="", tags=(self.tag_root, "hitbox"))
 
         # Track & Ticks
-        track_start = self.calculate_rotated_point(center_x, center_y - track_length/2.0, center_x, center_y, cos_t, sin_t)
-        track_end = self.calculate_rotated_point(center_x, center_y + track_length/2.0, center_x, center_y, cos_t, sin_t)
+        track_start = self.calculate_rotated_point(center_x, center_y - track_length/2, center_x, center_y, cos_t, sin_t)
+        track_end = self.calculate_rotated_point(center_x, center_y + track_length/2, center_x, center_y, cos_t, sin_t)
         self.canvas.create_line(track_start, track_end, fill="#000000", width=TRACK_WIDTH_OUTER, capstyle=tk.ROUND, tags=self.tag_root)
         self.canvas.create_line(track_start, track_end, fill="#222222", width=TRACK_WIDTH_INNER, capstyle=tk.ROUND, tags=self.tag_root)
 
         # Batch draw ticks (Reduced complexity)
         for i in range(TICK_COUNT):
-            local_y = (-track_length/2.0) + ((i/TICK_DIVISOR) * track_length)
+            local_y = (-track_length/2) + ((i/TICK_DIVISOR) * track_length)
             tick_start = self.calculate_rotated_point(center_x - TICK_INNER_OFFSET, center_y + local_y, center_x, center_y, cos_t, sin_t)
             tick_end = self.calculate_rotated_point(center_x - TICK_OUTER_OFFSET, center_y + local_y, center_x, center_y, cos_t, sin_t)
             self.canvas.create_line(tick_start, tick_end, fill="#888888", width=TRACK_WIDTH_INNER, tags=self.tag_root)
 
         # Cap & Potentiometer
         denom = (self.val_max - self.val_min)
-        v_norm = (val_curr - self.val_min) / denom if denom != 0.0 else 0
-        cap_center_x, cap_center_y = self.calculate_rotated_point(center_x, center_y + (-track_length/2.0) + (v_norm * track_length), center_x, center_y, cos_t, sin_t)
+        v_norm = (val_curr - self.val_min) / denom if denom != 0 else 0
+        cap_center_x, cap_center_y = self.calculate_rotated_point(center_x, center_y + (-track_length/2) + (v_norm * track_length), center_x, center_y, cos_t, sin_t)
         radius = CAP_RADIUS
 
         is_active = self.dragging or self.hovered

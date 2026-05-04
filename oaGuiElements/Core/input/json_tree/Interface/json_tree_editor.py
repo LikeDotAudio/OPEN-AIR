@@ -1,4 +1,4 @@
-# oaGuiElements/Core/input/json_tree/Interface/json_tree_editor.py
+# oaGuiElements/Core/utils/json_tree/Interface/json_tree_editor.py
 # Author: Gemini CLI
 # Version: 20260417.1.0
 # Description: Bespoke editor for json_tree.

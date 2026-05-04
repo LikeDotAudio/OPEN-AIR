@@ -1,0 +1,20 @@
+DEBUG    | 🎨 UI      | ❓ GUI_MANAGER      | oaGui.Interface.viewport.tab_physical_window | Saved window geometry: 1920x1163+3840+0
+INFO     | 🎨 UI      | ❓ GUI_MANAGER      | oaGui.Managers.lifecycle.loader_shutdown_service | 👋 [EXIT] User is requesting to exit application (Root: tk #2).
+DEBUG    | 🎨 UI      | ❓ GUI_MANAGER      | oaGui.Managers.lifecycle.loader_shutdown_service | 🖥️🎨 [UI] Initiating shutdown... Caller stack:
+  - /usr/lib/python3.12/tkinter/__init__.py:1967 in __call__
+  - /usr/lib/python3.12/tkinter/__init__.py:1504 in mainloop
+  - /home/anthony/Documents/OPEN-AIR/oaGui/Managers/orchestration/loader_main_service.py:108 in main
+  - /home/anthony/Documents/OPEN-AIR/oaGui/Managers/orchestration/loader_main_service.py:129 in <module>
+DEBUG    | 🎨 UI      | ❓ GUI_MANAGER      | oaGui.Managers.lifecycle.loader_shutdown_service | 🛑 Stopping manager: app
+DEBUG    | 🎨 UI      | ❓ GUI_SHELL        | oaGui.Managers.display.app_shutdown_service | 🛑 Initiating application shutdown...
+DEBUG    | 🎨 UI      | ❓ GUI_MANAGER      | oaGui.Managers.lifecycle.loader_shutdown_service | 🛑 Stopping manager: mqtt_conn
+DEBUG    | 🎨 UI      | ❓ GUI_MANAGER      | oaGui.Managers.lifecycle.loader_shutdown_service | 🛑 Stopping manager: sub_router
+DEBUG    | 🎨 UI      | ❓ GUI_MANAGER      | oaGui.Managers.lifecycle.loader_shutdown_service | 🛑 Stopping manager: state_cache
+DEBUG    | 🎨 UI      | ❓ GUI_MANAGER      | oaGui.Managers.lifecycle.loader_shutdown_service | 🛑 Stopping manager: mirror_engine
+DEBUG    | 🎨 UI      | ❓ GUI_MANAGER      | oaGui.Managers.lifecycle.loader_shutdown_service | 🛑 Stopping manager: osc_manager
+DEBUG    | 🎨 UI      | ❓ GUI_MANAGER      | oaGui.Managers.lifecycle.loader_shutdown_service | 🛑 Stopping manager: snmp_manager
+DEBUG    | 🎨 UI      | ❓ GUI_MANAGER      | oaGui.Managers.lifecycle.loader_shutdown_service | 🛑 Stopping manager: midi_manager
+DEBUG    | 🎨 UI      | ❓ GUI_MANAGER      | oaGui.Managers.lifecycle.loader_shutdown_service | 🛑 Stopping manager: splinker_manager
+DEBUG    | 🎨 UI      | ❓ GUI_MANAGER      | oaGui.Managers.lifecycle.loader_shutdown_service | 🛑 Stopping manager: protocol_router
+DEBUG    | 🎨 UI      | ❓ GUI_MANAGER      | oaGui.Managers.lifecycle.loader_shutdown_service | 🛑 Stopping manager: rest_manager
+DEBUG    | 🎨 UI      | ❓ GUI_MANAGER      | oaGui.Managers.lifecycle.loader_shutdown_service | 🛑 Stopping manager: smpte2138_monitor_manager

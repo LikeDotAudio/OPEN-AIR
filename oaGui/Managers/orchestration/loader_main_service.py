@@ -83,7 +83,7 @@ def main():
         configure_console_encoding()
         app_constants = Config.get_instance()
 
-        matrix_log("ui", "system", "main", "🖥️🎨 [UI] Starting OpenAir UI Service...", "DEBUG")
+        matrix_log("gui", "system", "main", "🖥️🎨 [UI] Starting OpenAir UI Service...", "DEBUG")
 
         # 2. Setup Windows & Visual Feedback
         root = TabWindowManager.create_root_window()
@@ -104,16 +104,16 @@ def main():
         bootstrap_engine = LoaderBootstrapEngine(root, splash, shared_services, app_constants, loader_shutdown_service)
         threading.Thread(target=bootstrap_engine.run, daemon=True).start()
 
-        matrix_log("ui", "system", "main", "🖥️🎨 [UI] Entering Tkinter MainLoop.", "DEBUG")
+        matrix_log("gui", "system", "main", "🖥️🎨 [UI] Entering Tkinter MainLoop.", "DEBUG")
         root.mainloop()
 
     except KeyboardInterrupt:
-        matrix_log("ui", "system", "main", "🛑 Keyboard Interrupt. Initiating shutdown...", "WARNING")
+        matrix_log("gui", "system", "main", "🛑 Keyboard Interrupt. Initiating shutdown...", "WARNING")
         if loader_shutdown_service: loader_shutdown_service.shutdown()
         else: sys.exit(0)
 
     except Exception as e:
-        matrix_log("ui", "system", "main", f"💥 Critical Startup Failure: {e}", "ERROR")
+        matrix_log("gui", "system", "main", f"💥 Critical Startup Failure: {e}", "ERROR")
         if root: root.destroy()
         sys.exit(1)
 

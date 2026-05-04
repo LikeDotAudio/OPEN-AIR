@@ -18,7 +18,7 @@ from oaGui.Managers.assembler.engine_widget_assembler import EngineWidgetAssembl
 from oaGui.Hooks.events.interaction_mqtt_gateway import InteractionMqttGatewayMixin
 from oaGui.Managers.lifecycle.loader_lifecycle_service import LifecycleManagerMixin
 from oaGuiElements.Core.background import BuilderBackgroundManagerMixin
-from oaGuiElements.Core.breakoff.window_breakoff_manager import WindowBreakoffManagerMixin
+from oaGuiElements.Core.breakoff.Core.window_breakoff_manager import WindowBreakoffManagerMixin
 from oaGui.Hooks.menu.context_menu import BuilderContextMenuMixin
 from oaGui.Managers.refresh.engine_refresh_coordinator import RefreshCoordinatorMixin
 from oaGuiElements.Core.input.input_mousewheel_mixin.input_mousewheel_mixin import MousewheelScrollMixin

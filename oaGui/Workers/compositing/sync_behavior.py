@@ -25,6 +25,9 @@ class SyncBehavior:
         """
         builder_instance = context.builder_instance if context else None
         parent = widget.master
+        widget_name = getattr(widget, 'path', type(widget).__name__)
+
+        matrix_log("gui", "gui_manager", "register_for_bg_sync", f"🎨 [UI] Registering {widget_name} for background sync.", "INFO")
 
         def perform_sync(event=None):
             if not widget.winfo_exists(): return

@@ -10,7 +10,7 @@ from unittest.mock import MagicMock
 from PIL import Image
 
 from oaGuiElements.Core.background import BuilderBackgroundManagerMixin
-from oaGuiElements.Core.utils.panels.panel_generator import PanelGenerator
+from oaGuiElements.Core.panels.Core.panel_generator import PanelGenerator
 
 class MockBuilder(tk.Frame, BuilderBackgroundManagerMixin):
     def __init__(self, parent):

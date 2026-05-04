@@ -1,0 +1,1 @@
+WARNING  | ⚙️ CORE   | 📡 NMOS_WS          | oaComProtocols.oaComNmos.Core.is07_transport | 📡⚠️ [NMOS-WS] Connection Refused/Not Found

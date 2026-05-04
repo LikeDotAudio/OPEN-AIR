@@ -42,6 +42,7 @@ class EngineTextureMapper:
                 current_builder = parent_builder
 
         if not background_source or not container_ref:
+            matrix_log("gui", "engine_texture_mapper", "perform_slice", f"⏭️ Skipping slice for {self.widget_name}: No background source or container ref.", "TRACE")
             background_config = getattr(self.builder, 'configuration', {}).get("background")
             app_inst = getattr(self.builder, 'app_instance', None)
             show_bg_toggle = getattr(app_inst, 'show_background_var', None)
@@ -112,6 +113,6 @@ class EngineTextureMapper:
                 if hasattr(self.widget, 'render'): self.widget.render()
                 return True
             except Exception as e:
-                matrix_log("ui", "engine_texture_mapper", "perform_slice", f"Texture alignment failed for {self.widget_name}: {e}", "DEBUG")
+                matrix_log("gui", "engine_texture_mapper", "perform_slice", f"Texture alignment failed for {self.widget_name}: {e}", "DEBUG")
                 return False
         return False

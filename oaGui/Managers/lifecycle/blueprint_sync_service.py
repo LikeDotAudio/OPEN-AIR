@@ -24,9 +24,9 @@ def load_and_synchronize_blueprint(loader_instance):
     loader_instance.configuration = configuration
     if new_hash: loader_instance.last_build_hash = new_hash
 
-    # Apply Background
+    # Apply Background (Always apply unless explicitly "none" to allow for fallbacks)
     bg_config = configuration.get("background")
-    if bg_config and bg_config != "none":
+    if bg_config != "none":
         if hasattr(loader_instance, '_apply_panel_background'):
             loader_instance._apply_panel_background(bg_config)
 

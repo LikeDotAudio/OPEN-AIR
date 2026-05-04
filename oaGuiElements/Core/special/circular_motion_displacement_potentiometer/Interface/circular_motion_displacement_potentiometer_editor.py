@@ -1,4 +1,4 @@
-# oaGuiElements/Core/special/circular_motion_displacement_potentiometer/Interface/circular_motion_displacement_potentiometer_editor.py
+# oaGuiElements/Core/utils/circular_motion_displacement_potentiometer/Interface/circular_motion_displacement_potentiometer_editor.py
 # Author: Gemini CLI
 # Version: 20260417.1.0
 # Description: Bespoke editor for circular_motion_displacement_potentiometer.

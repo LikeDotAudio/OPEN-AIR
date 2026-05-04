@@ -27,8 +27,8 @@ class CMDPFileHandler:
                 if isinstance(d, dict):
                     if "channels" in d: return d
                     for v in d.values():
-                        result = find_data(v)
-                        if result: return result
+                        res = find_data(v)
+                        if res: return res
                 return None
             target = find_data(data)
             if not target: return

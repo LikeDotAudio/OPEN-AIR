@@ -17,8 +17,6 @@ from oaLogging.Methods.matrix_gate import matrix_log
 app_constants = Config.get_instance()
 
 from oaGui.Methods.formatting.i18n_utils import get_text
-from oaGui.Core.factory.base_widget_creator import BaseWidgetCreator
-from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
 from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 
 # --- Global Scope Variables ---
@@ -28,19 +26,46 @@ current_file = f"{os.path.basename(__file__)}"
 DEFAULT_PAD_X = 5
 DEFAULT_PAD_Y = 2
 
-@RegistryWidgetStore.register("_Checkbox", "_SmartCheckbox", "_GuiCheckbox")
-class BuilderCheckboxCreator(BaseWidgetCreator, SyncBehavior):
+
+class BuilderCheckboxCreator(SyncBehavior):
     """
-    Factory for creating photorealistic Checkboxes.
+    A mixin class that provides the functionality for creating a
+    checkbox widget.
     """
 
-    def _assemble_ui(self, parent_widget, config_data, context, **kwargs):
-        """Assembles the Checkbox UI elements."""
+    # Creates a checkbox widget that manages a boolean state and synchronizes via MQTT.
+    # This method sets up a Canvas-based checkbox to ensure true transparency.
+    # It also integrates with the state management engine for MQTT communication.
+    # Inputs:
+    #     parent_widget: The parent tkinter widget.
+    #     config_data (dict): Configuration for the checkbox.
+    #     **kwargs: Additional keyword arguments.
+    # Outputs:
+    #     tk.Canvas: The created canvas containing the checkbox, or None on failure.
+    def make_checkbox(
+        self, parent_widget, config_data, context=None, **kwargs
+    ):
+        """Creates a checkbox widget."""
         current_function_name = inspect.currentframe().f_code.co_name
-        config = config_data
-        label = get_text(config.get('label_active')) or get_text(config.get('label'), "")
 
-        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬 Entering _assemble_ui for '{label}'.", level="DEBUG")
+        # Extract only widget-specific config from config_data
+        label = get_text(get_text(config_data.get('label_active'))) or get_text(get_text(config_data.get('label')), "")
+        config = config_data
+        path = config_data.get("path")
+
+        # ⚡ HARDENED INTERFACE: Extract from context if available
+        if context:
+            state_mirror_engine = context.state_mirror_engine
+            subscriber_router = context.subscriber_router
+            base_mqtt_topic_from_path = context.base_mqtt_topic_from_path
+            builder_instance = context.builder_instance
+        else:
+            state_mirror_engine = self.state_mirror_engine
+            subscriber_router = self.subscriber_router
+            base_mqtt_topic_from_path = kwargs.get("base_mqtt_topic_from_path")
+            builder_instance = kwargs.get("builder_instance") or self
+
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬⚡️ Entering '{current_function_name}' to spawn a checkbox for '{label}'.", level="DEBUG")
 
         try:
             # Use tk.Canvas for transparency support
@@ -55,8 +80,7 @@ class BuilderCheckboxCreator(BaseWidgetCreator, SyncBehavior):
 
             # We use a BooleanVar to track the state of the checkbox.
             initial_value = bool(config.get("value", False))
-            state_var = kwargs.get("variable") or tk.BooleanVar(master=parent_widget, value=initial_value)
-            canvas.variable = state_var
+            state_var = tk.BooleanVar(value=initial_value)
 
             def get_label_text():
                 current_state = state_var.get()
@@ -72,6 +96,11 @@ class BuilderCheckboxCreator(BaseWidgetCreator, SyncBehavior):
                 w = canvas.winfo_width()
                 h = canvas.winfo_height()
                 if w <= 1: return
+
+                if hasattr(canvas, 'panel_bg_image') and canvas.panel_bg_image:
+                    canvas.delete("bg")
+                    canvas.create_image(0, 0, image=canvas.panel_bg_image, anchor="nw", tags="bg")
+                    canvas.tag_lower("bg")
 
                 current_state = state_var.get()
                 box_size = 16
@@ -103,22 +132,45 @@ class BuilderCheckboxCreator(BaseWidgetCreator, SyncBehavior):
 
             def toggle_state(event):
                 state_var.set(not state_var.get())
+                if path:
+                    state_mirror_engine.broadcast_gui_change_to_mqtt(path)
                 redraw_checkbox()
+
+            # Apply Industrial Transparency
+            if hasattr(self, '_apply_transparency'):
+                self._apply_transparency(canvas, canvas, config, builder_instance)
 
             canvas.bind("<Button-1>", toggle_state)
             canvas.bind("<Configure>", redraw_checkbox, add="+")
             state_var.trace_add("write", lambda *a: redraw_checkbox())
 
-            redraw_checkbox()
-            return canvas, canvas
+            # Store the widget and its state variable for external updates.
+            if path:
+                widget_id = path
+                topic = state_mirror_engine.register_widget(
+                    widget_id, state_var, base_mqtt_topic_from_path, config
+                )
 
-        except Exception as e:
-            logger.exception(f"❌ Error in _assemble_ui for '{label}': {e}")
-            return None, None
+                # Subscribe to this widget's topic to receive updates
+                if subscriber_router and topic:
+                    subscriber_router.subscribe_to_topic(
+                        topic, state_mirror_engine.sync_incoming_mqtt_to_gui
+                    )
+
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬 Widget '{label}' ({path}) registered with StateMirrorEngine (BooleanVar: {state_var.get()}).", level="DEBUG")
+                # Initialize state from cache or broadcast
+                state_mirror_engine.initialize_widget_state(path)
+
+            redraw_checkbox()
+
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"✅ SUCCESS! The checkbox '{label}' has been successfully instantiated.", level="SUCCESS")
+            return canvas
+
+        except Exception:
+            logger.exception("❌ Error in make_checkbox for '{label}'")
+            return None
 
     @staticmethod
     def make(parent_widget, config_data, context=None, **kwargs):
-        return BuilderCheckboxCreator.build(parent_widget, config_data, context, **kwargs)
-
-    def make_checkbox(self, parent_widget, config_data, context=None, **kwargs):
-        return self.build(parent_widget, config_data, context, **kwargs)
+        creator = BuilderCheckboxCreator()
+        return creator.make_checkbox(parent_widget, config_data, context, **kwargs)

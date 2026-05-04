@@ -1,4 +1,4 @@
-# oaGuiElements/Core/special/composite_mdp/Interface/composite_mdp_editor.py
+# oaGuiElements/Core/utils/composite_mdp/Interface/composite_mdp_editor.py
 # Author: Gemini CLI
 # Version: 20260417.1.0
 # Description: Bespoke editor for composite_mdp.

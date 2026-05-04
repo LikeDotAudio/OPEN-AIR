@@ -1,4 +1,4 @@
-# oaGuiElements/Core/input/composite_horizontal_dial_value/Interface/composite_horizontal_dial_value_editor.py
+# oaGuiElements/Core/utils/composite_horizontal_dial_value/Interface/composite_horizontal_dial_value_editor.py
 # Author: Gemini CLI
 # Version: 20260417.1.0
 # Description: Bespoke editor for composite_horizontal_dial_value.

@@ -7,6 +7,12 @@
 from oaStyle.Core.style import DEFAULT_THEME, THEMES
 
 
+def _to_float(value, default=0.0):
+    try:
+        return float(value)
+    except (ValueError, TypeError):
+        return default
+
 def extract_knob_config(config_data):
     """
     Extracts and normalizes configuration for the Rotary Knob.
@@ -37,15 +43,10 @@ def extract_knob_config(config_data):
     indicator_color = c.get("indicator_color", colors.get("active", accent_color))
 
     # 3. Domain and Range
-    min_val = float(primary_domain.get("min", c.get("min", 0.0)))
-    max_val = float(primary_domain.get("max", c.get("max", 100.0)))
-    reff_point = float(primary_domain.get("reff_point", (min_val + max_val) / 2.0))
-
-    val_def_raw = primary_domain.get("value_default", c.get("value_default", 0.0))
-    try:
-        value_default = float(val_def_raw)
-    except (ValueError, TypeError):
-        value_default = val_def_raw # Keep as string/other if not a float
+    min_val = _to_float(primary_domain.get("min", c.get("min", 0.0)), 0.0)
+    max_val = _to_float(primary_domain.get("max", c.get("max", 100.0)), 100.0)
+    reff_point = _to_float(primary_domain.get("reff_point", (min_val + max_val) / 2.0), (min_val + max_val) / 2.0)
+    value_default = _to_float(primary_domain.get("value_default", c.get("value_default", 0.0)), 0.0)
 
     # 4. Interaction
     infinity = interaction.get("infinity", c.get("infinity", False))
@@ -63,16 +64,11 @@ def extract_knob_config(config_data):
 
     # 7. Aesthetics (The "Pattern" fix)
     # We probe overrides -> styling -> cosmetics -> top-level
-    visualization = cosmetics.get("visualization", c.get("visualization", "")).lower()
-
-    knob_style = overrides.get("knob_style", styling.get("knob_style", c.get("knob_style", "standard"))).lower()
-    shape = overrides.get("shape", styling.get("shape", c.get("shape", "circle"))).lower()
-
-    if visualization:
-        if visualization in ["panner", "dial", "standard"]:
-            knob_style = visualization
-        elif visualization in ["circle", "octagon", "gear"]:
-            shape = visualization
+    knob_style = overrides.get("knob_style", styling.get("knob_style", cosmetics.get("visualization", c.get("knob_style", "standard")))).lower()
+    
+    # If shape isn't explicitly defined, derive it from knob_style
+    default_shape = "gear" if knob_style == "gear" else "circle"
+    shape = overrides.get("shape", styling.get("shape", c.get("shape", default_shape))).lower()
 
     no_center = styling.get("no_center", c.get("no_center", False))
     arc_width = int(styling.get("arc_width", c.get("arc_width", 5)))

@@ -1,6 +1,6 @@
 # oaGuiElements/Entry.py
 # Author: Anthony Peter Kuzub
-# Version: 20260415.2210.1
+# Version: 20260503.1545.1
 #
 # Description: Gatekeeper for the oaGuiElements module.
 
@@ -9,80 +9,70 @@ import sys
 from pathlib import Path
 
 # Standard project_root resolution
-current_dir = Path(__file__).parent.absolute()
-project_root = current_dir
-while project_root.parent != project_root:
-    if (project_root / "GEMINI.md").exists():
-        break
-    project_root = project_root.parent
+current_dir = Path(__file__).parent.resolve()
+project_root = current_dir.parent
 
-# Ensure the project root is in sys.path for absolute imports
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
-def run_tests():
-    """
-    Discover and run tests in the local Tests/ directory using unittest via subprocess.
-    Ensures isolation and proper sys.path handling.
-    """
-    import subprocess
+# --- Public API Exports ---
 
-    print(f"📡📥📥 [TEST] {Path(__file__).parent.name}: Starting automated test discovery...")
-    test_dir = current_dir / "Tests"
+# Generators & Utilities
+from oaGuiElements.Core.panels.panel_generator import PanelGenerator
+from oaGuiElements.Core.panels.tiled_panel_generator import TiledPanelGenerator
+from oaGuiElements.Core.panels.panel_creator import BuilderPanelCreator
+from oaGuiElements.Core.panels.panel_screw.screw_generator import ScrewGenerator
+from oaGuiElements.Methods.utils import PanelUtils
 
-    if not test_dir.exists():
-        print(f"📡📤📤 [TEST] {Path(__file__).parent.name}: No Tests/ directory found.")
-        return True
+# Widget Creators (Core)
+from oaGuiElements.Core.Knobs.knob.Core.knob import BuilderKnobCreator
+from oaGuiElements.Core.Knobs.knob_rotary_selector.Core.knob_rotary_selector import BuilderKnobRotarySelectorCreator
+from oaGuiElements.Core.faders.fader.Core.fader import BuilderFaderCreator
+from oaGuiElements.Core.faders.fader_horizontal.Core.fader_horizontal import BuilderFaderHorizontalCreator
+from oaGuiElements.Core.faders.fader_bar_graph.Core.fader_bar_graph import BuilderFaderBarGraphCreator
+from oaGuiElements.Core.metering.meter_needle.Core.meter_needle import BuilderMeterNeedleCreator
+from oaGuiElements.Core.metering.meter_bar.Core.meter_bar import BuilderMeterBarCreator
+from oaGuiElements.Core.buttons.button_wink.Core.button_wink import BuilderButtonWinkCreator
+from oaGuiElements.Core.buttons.button_toggle.Core.button_toggle import BuilderButtonToggleCreator
+from oaGuiElements.Core.buttons.button_toggler.Core.button_toggler import BuilderButtonTogglerCreator
+from oaGuiElements.Core.text.text_label.text_label import BuilderTextLabelCreator
+from oaGuiElements.Core.text.text_table.Core.text_table import BuilderTextTableCreator
+from oaGuiElements.Core.input.checkbox.Core.checkbox import BuilderCheckboxCreator
+from oaGuiElements.Core.input.listbox.Core.listbox import BuilderListboxCreator
+from oaGuiElements.Core.input.slider_value.Core.slider_value import BuilderSliderValueCreator
+from oaGuiElements.Core.input.json_tree.Core.json_tree import BuilderDataJsonTreeCreator
+from oaGuiElements.Core.input.composite_horizontal_dial_value.Core.composite_horizontal_dial_value import BuilderCompositeHorizontalDialValueCreator
+from oaGuiElements.Core.special.circular_motion_displacement_potentiometer.Core.circular_motion_displacement_potentiometer import BuilderCircularMotionDisplacementPotentiometerCreator
+from oaGuiElements.Core.special.composite_mdp.Core.composite_mdp import BuilderCompositeMdpCreator
+from oaGuiElements.Core.special.status_light.Core.status_light import BuilderStatusLightCreator
 
-    env = os.environ.copy()
-    env["PYTHONPATH"] = str(project_root) + os.pathsep + env.get("PYTHONPATH", "")
-
-    try:
-        # Run from project root to ensure module resolution works correctly
-        result = subprocess.run(
-            [sys.executable, "-m", "unittest", "discover", "-s", str(test_dir.relative_to(project_root)), "-p", "test_*.py"],
-            cwd=str(project_root),
-            env=env,
-            capture_output=False
-        )
-        if result.returncode == 0:
-            print(f"📡📤📤 [TEST] {Path(__file__).parent.name}: All tests PASSED.")
-            return True
-        else:
-            print(f"📡📤📤 [TEST] {Path(__file__).parent.name}: Tests FAILED.")
-            return False
-    except Exception as e:
-        print(f"🛑 [ERROR] {Path(__file__).parent.name}: Test discovery failed: {e}")
-        return False
-
+# Module Interface methods
 def start():
-    """Start the module services."""
-    print(f"🚀 [START] Starting {Path(__file__).parent.name} services...")
+    """Initializes the GUI Elements module."""
+    print("🎨 [GUI_ELEMENTS] Module Started.")
 
 def stop():
-    """Stop the module services."""
-    print(f"🛑 [STOP] Stopping {Path(__file__).parent.name} services...")
+    """Shuts down the GUI Elements module."""
+    print("🎨 [GUI_ELEMENTS] Module Stopped.")
 
 def status():
-    """Get the module status."""
-    print(f"📊 [STATUS] Checking {Path(__file__).parent.name} status...")
+    """Returns the status of the GUI Elements module."""
     return "Running"
 
-if __name__ == "__main__":
-    # Absolute FIRST action: run tests
-    if not run_tests():
-        print("❌ [CRITICAL] Tests failed. Aborting execution.")
-        sys.exit(1)
+def run_tests():
+    """Runs the module's unit tests."""
+    import pytest
+    test_path = current_dir / "Tests"
+    pytest.main([str(test_path)])
 
-    # Standalone execution logic
+# Standalone execution
+if __name__ == "__main__":
     if len(sys.argv) > 1:
         cmd = sys.argv[1].lower()
-        if cmd == "--start":
-            start()
-        elif cmd == "--stop":
-            stop()
-        elif cmd == "--status":
-            print(f"Status: {status()}")
+        if cmd == "start": start()
+        elif cmd == "stop": stop()
+        elif cmd == "status": print(status())
+        elif cmd == "test": run_tests()
         else:
             print(f"Unknown command: {cmd}")
     else:
@@ -94,5 +84,29 @@ __all__ = [
     "start",
     "stop",
     "status",
-    "run_tests"
+    "run_tests",
+    "PanelGenerator",
+    "TiledPanelGenerator",
+    "BuilderPanelCreator",
+    "ScrewGenerator",
+    "PanelUtils",
+    "BuilderKnobCreator",
+    "BuilderFaderCreator",
+    "BuilderFaderHorizontalCreator",
+    "BuilderFaderBarGraphCreator",
+    "BuilderMeterNeedleCreator",
+    "BuilderMeterBarCreator",
+    "BuilderButtonWinkCreator",
+    "BuilderButtonToggleCreator",
+    "BuilderButtonTogglerCreator",
+    "BuilderTextLabelCreator",
+    "BuilderTextTableCreator",
+    "BuilderCheckboxCreator",
+    "BuilderListboxCreator",
+    "BuilderSliderValueCreator",
+    "BuilderDataJsonTreeCreator",
+    "BuilderCompositeHorizontalDialValueCreator",
+    "BuilderCircularMotionDisplacementPotentiometerCreator",
+    "BuilderCompositeMdpCreator",
+    "BuilderStatusLightCreator"
 ]

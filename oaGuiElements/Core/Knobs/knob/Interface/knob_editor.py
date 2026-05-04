@@ -1,4 +1,4 @@
-# oaGuiElements/Core/Knobs/knob/Interface/knob_editor.py
+# oaGuiElements/Core/utils/knob/Interface/knob_editor.py
 # Author: Gemini CLI
 # Version: 20260417.1.0
 # Description: Bespoke editor for knob.

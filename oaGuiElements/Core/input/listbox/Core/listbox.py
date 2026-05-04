@@ -28,12 +28,17 @@ from .listbox_sync_engine import ListboxSyncEngine
 class BuilderListboxCreator(SyncBehavior):
     """Mixin for creating a dynamic Listbox with MQTT sync and industrial transparency."""
 
+    @staticmethod
+    def make(parent_widget, config_data, context=None, **kwargs):
+        creator = BuilderListboxCreator()
+        return creator.make_listbox(parent_widget, config_data, context, **kwargs)
+
     def make_listbox(self, parent_widget, config_data, context=None, **kwargs):
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🔬🏗️📑 [BUILDER] Creating Listbox widget.", level="TRACE")
 
         ctx = context if context else type('obj', (object,), kwargs)()
         b_inst = ctx.builder_instance if hasattr(ctx, 'builder_instance') else ctx.app_instance
-        label, path = get_text(config.get("label_active"), ""), config_data.get("path")
+        label, path = get_text(config_data.get("label_active"), ""), config_data.get("path")
 
         # 1. Scaffolding
         sub_frame = tk.Canvas(parent_widget, bd=0, highlightthickness=0, relief="flat", width=200, height=150)

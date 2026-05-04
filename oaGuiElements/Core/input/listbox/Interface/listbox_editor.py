@@ -1,4 +1,4 @@
-# oaGuiElements/Core/input/listbox/Interface/listbox_editor.py
+# oaGuiElements/Core/utils/listbox/Interface/listbox_editor.py
 # Author: Gemini CLI
 # Version: 20260417.1.0
 # Description: Bespoke editor for listbox.

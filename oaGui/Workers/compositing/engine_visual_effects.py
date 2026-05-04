@@ -55,8 +55,10 @@ class EngineVisualEffects:
 
         # ⚡ OPTIMIZATION: Only register if transparency is explicitly requested or expected.
         if not is_transparent or (is_solid and not is_transparent):
+            matrix_log("gui", "engine_visual_effects", "_register_widget_for_slicing", f"⏭️ Skipping transparency for {widget_name} (is_transparent={is_transparent}, is_solid={is_solid})", "TRACE")
             return
 
+        matrix_log("gui", "engine_visual_effects", "_register_widget_for_slicing", f"📡 Registering {widget_name} for industrial transparency slicing.", "TRACE")
         aligner = EngineTextureMapper(widget, canvas, builder, widget_name)
 
         widget._perform_background_slice = aligner.perform_slice
@@ -67,6 +69,6 @@ class EngineVisualEffects:
 
     @staticmethod
     def _handle_registration_failure(widget, widget_name, e):
-        matrix_log("ui", "engine_visual_effects", "apply_transparency", f"❌ EngineVisualEffects: Failed to apply to {widget_name}: {e}", "ERROR")
+        matrix_log("gui", "engine_visual_effects", "apply_transparency", f"❌ EngineVisualEffects: Failed to apply to {widget_name}: {e}", "ERROR")
         if widget.winfo_exists() and isinstance(widget, tk.Canvas):
             widget.create_text(10, 10, text=f"Transparency Error: {e}", fill="red", anchor="nw")

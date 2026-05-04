@@ -36,7 +36,7 @@ class TableEditingRowOpsMixin:
     # Outputs:
     #     None.
     def add_row(self):
-        matrix_log("ui", "gui_elements", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Adding new row.", "DEBUG")
+        matrix_log("gui", "gui_elements", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Adding new row.", "DEBUG")
 
         # Determine next available device_key (simple incremental for now)
         next_device_num = 1
@@ -82,9 +82,9 @@ class TableEditingRowOpsMixin:
             mqtt_publisher_service.publish_payload(
                 field_topic, orjson.dumps(new_row_data).decode()
             )
-            matrix_log("ui", "gui_elements", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"MQTT Added: topic='{field_topic}', payload='{new_row_data}'", "DEBUG")
+            matrix_log("gui", "gui_elements", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"MQTT Added: topic='{field_topic}', payload='{new_row_data}'", "DEBUG")
 
-        matrix_log("ui", "gui_elements", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Added new row with item_id: {new_item_id}, device_key: {device_key}", "DEBUG")
+        matrix_log("gui", "gui_elements", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Added new row with item_id: {new_item_id}, device_key: {device_key}", "DEBUG")
 
         # Select the new row and start editing the first cell
         self.tree.selection_set(new_item_id)
@@ -102,7 +102,7 @@ class TableEditingRowOpsMixin:
     def delete_selection(self, event=None):
         selected_items = self.tree.selection()
         if not selected_items:
-            matrix_log("ui", "gui_elements", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "No items selected for deletion.", "DEBUG")
+            matrix_log("gui", "gui_elements", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "No items selected for deletion.", "DEBUG")
             return
 
         for item_id in selected_items:
@@ -131,13 +131,13 @@ class TableEditingRowOpsMixin:
                     mqtt_publisher_service.publish_payload(
                         field_topic, orjson.dumps({}).decode()
                     )  # Publish empty dict for clear
-                matrix_log("ui", "gui_elements", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"MQTT Deleted: topic='{field_topic}', payload='{{}}'", "DEBUG")
+                matrix_log("gui", "gui_elements", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"MQTT Deleted: topic='{field_topic}', payload='{{}}'", "DEBUG")
 
             # Delete from Treeview
             self.tree.delete(item_id)
-            matrix_log("ui", "gui_elements", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Deleted row {item_id} (Device Key: {device_key}).", "DEBUG")
+            matrix_log("gui", "gui_elements", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Deleted row {item_id} (Device Key: {device_key}).", "DEBUG")
 
-        matrix_log("ui", "gui_elements", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Delete selection completed.", "DEBUG")
+        matrix_log("gui", "gui_elements", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Delete selection completed.", "DEBUG")
 
     # Imports data from a list of dictionaries into the Treeview table.
     # This method processes a list of dictionaries (e.g., from a CSV import),
@@ -148,7 +148,7 @@ class TableEditingRowOpsMixin:
     # Outputs:
     #     None.
     def import_data(self, data_list):
-        matrix_log("ui", "gui_elements", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Importing {len(data_list)} new rows.", "DEBUG")
+        matrix_log("gui", "gui_elements", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Importing {len(data_list)} new rows.", "DEBUG")
 
         headers = self.tree["columns"]
 
@@ -191,5 +191,5 @@ class TableEditingRowOpsMixin:
                 mqtt_publisher_service.publish_payload(
                     field_topic, orjson.dumps(row_data_dict).decode()
                 )
-                matrix_log("ui", "gui_elements", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"MQTT Imported: topic='{field_topic}', payload='{row_data_dict}'", "DEBUG")
-        matrix_log("ui", "gui_elements", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Finished importing {len(data_list)} rows.", "DEBUG")
+                matrix_log("gui", "gui_elements", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"MQTT Imported: topic='{field_topic}', payload='{row_data_dict}'", "DEBUG")
+        matrix_log("gui", "gui_elements", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Finished importing {len(data_list)} rows.", "DEBUG")

@@ -57,11 +57,11 @@ class SplashScreen:
             tk.Label(vis, text="[Animation Offline]", fg="#333", bg="black").pack(expand=True)
 
         if LOCAL_DEBUG:
-            matrix_log("ui", "gui_manager", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "✅ SplashScreen materialised.", "DEBUG")
+            matrix_log("gui", "gui_manager", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "✅ SplashScreen materialised.", "DEBUG")
 
     def set_status(self, message):
         """Updates the startup status text and pumps the Tkinter event loop."""
-        matrix_log("ui", "gui_manager", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🔬 SPLASH: {message}", "DEBUG")
+        matrix_log("gui", "gui_manager", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🔬 SPLASH: {message}", "DEBUG")
         if not self.win or not self.win.winfo_exists(): return
 
         def _update_ui():
@@ -76,7 +76,7 @@ class SplashScreen:
                 self.status_label.config(text=message)
                 self.win.update_idletasks()
             except tk.TclError as e:
-                matrix_log("ui", "gui_manager", "set_status", f"⚠️ Splash status update skipped: {e}", "TRACE")
+                matrix_log("gui", "gui_manager", "set_status", f"⚠️ Splash status update skipped: {e}", "TRACE")
             except Exception as e:
                 vocal_capture("UI", f"SplashScreen: Update failure: {e}")
 
@@ -96,4 +96,4 @@ class SplashScreen:
             self.win = None
 
             if LOCAL_DEBUG:
-                matrix_log("ui", "gui_manager", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "👋 SplashScreen dismissed.", "DEBUG")
+                matrix_log("gui", "gui_manager", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "👋 SplashScreen dismissed.", "DEBUG")

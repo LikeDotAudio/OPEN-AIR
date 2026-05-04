@@ -9,7 +9,7 @@ from oaLogging.Methods.matrix_gate import matrix_log
 # Set a path for logs before other imports
 os.environ['OPEN_AIR_LOG_PATH'] = '/tmp/open_air_tests'
 
-from oaGuiElements.Core.utils.json_tree.Core.json_tree import BuilderDataJsonTreeCreator, JsonTreeWidget
+from oaGuiElements.Core.input.json_tree.Core.json_tree import BuilderDataJsonTreeCreator, JsonTreeWidget
 
 
 class TestJsonTreeWidget(unittest.TestCase):

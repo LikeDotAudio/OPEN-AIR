@@ -8,13 +8,15 @@ import inspect
 import math
 import tkinter as tk
 
-from oaGui.Methods.formatting.i18n_utils import get_text
 from oaGuiElements.Core.Knobs.knob.Core.knob import CustomKnobFrame
+
+from oaGui.Methods.formatting.i18n_utils import get_text
 from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
 from oaGui.Workers.compositing.engine_visual_effects import EngineVisualEffects
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Methods.matrix_gate import matrix_log
+from oaStyle.Core.style import DEFAULT_THEME, THEMES
 
 from ...knob.Core.knob_config import extract_knob_config
 
@@ -36,40 +38,10 @@ class RotarySelectorSwitch(CustomKnobFrame):
         super().__init__(
             parent, variable,
             config, state,
-            path,
-            state_mirror_engine=state_mirror_engine,
+            path=path, state_mirror_engine=state_mirror_engine,
             label_text=label_text,
             **kwargs
         )
-
-    def _draw_visuals(self):
-        """Override base visuals with selector-specific rendering."""
-        if not self.canvas.winfo_exists(): return
-
-        idx = int(round(self.variable.get()))
-        idx = idx % self.num_positions if self.continuous else max(0, min(self.num_positions - 1, idx))
-
-        sel_text = str(self.positions[idx])
-
-        colors = {
-            "fg": self.widget_config.get("fg_color", self.theme_colors.get("fg", "white")),
-            "accent": self.widget_config.get("accent_color", self.theme_colors.get("accent", "cyan")),
-            "indicator": self.widget_config.get("indicator_color", "yellow"),
-            "secondary": self.widget_config.get("secondary_color", self.theme_colors.get("secondary", "gray"))
-        }
-
-        options = {
-            "shape": self.widget_config.get("shape", "circle"),
-            "pointer_style": self.widget_config.get("pointer_style", "line"),
-            "knob_style": self.widget_config.get("knob_style", "standard"),
-            "no_center": self.widget_config.get("no_center", False),
-            "continuous": self.continuous,
-            "main_label": self.label_text,
-            "selection_text": sel_text,
-            "show_label": self.widget_config.get("show_label", True)
-        }
-
-        self._draw_selector(self.canvas, self.winfo_width(), self.winfo_height(), idx, self.positions, colors, options)
 
     def _draw_selector(self, canvas, width, height, current_idx, positions, colors, options):
         """Internal drawing pipeline for the selector switch."""
@@ -144,6 +116,12 @@ class RotarySelectorSwitch(CustomKnobFrame):
         _draw_pointer(canvas, cx, adj_cy, radius - 5, 4, p_angle, options.get("pointer_style", "line"),
                       colors['indicator'], length=radius+14, offset=0, no_center=options.get("no_center", False))
 
+    @property
+    def selection_text(self):
+        idx = int(round(self.variable.get()))
+        idx = idx % self.num_positions if self.continuous else max(0, min(self.num_positions - 1, idx))
+        return str(self.positions[idx])
+
     def _draw_text_overlays(self, canvas, width, height, colors, options):
         """Draw the main title and selection value text."""
         cx = width / 2
@@ -198,15 +176,23 @@ class BuilderKnobRotarySelectorCreator:
         height = config_data.get("height", 140)
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📐📏🔳 [LAYOUT] Dimensions: {width}x{height}", level="DEBUG")
 
+        colors = THEMES.get(DEFAULT_THEME, THEMES["dark"])
+        fg_color = colors.get("fg", "#dcdcdc")
+        accent_color = colors.get("accent", "#33A1FD")
+        secondary_color = colors.get("secondary", "#444444")
+        indicator_color = config_data.get("indicator_color", accent_color)
+
         # Value Handling
         val_def = config_data.get("value_default", 0)
         if isinstance(val_def, str) and val_def in positions:
             val_def = positions.index(val_def)
 
-        knob_value_var = tk.DoubleVar(master=parent_widget, value=float(val_def))
+        knob_value_var = tk.DoubleVar(value=float(val_def))
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔋🔢✨ [STATE] Initial position value: {val_def}", level="DEBUG")
 
-        # 1. Container frame background
+        drag_state = {"start_y": None, "start_value": None}
+
+        # 1. Container frame
         try:
             p_bg = parent_widget.cget("bg")
             if not p_bg or not p_bg.startswith("#"): p_bg = "#2b2b2b"
@@ -224,19 +210,96 @@ class BuilderKnobRotarySelectorCreator:
 
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🏗️🪟🎨 [CONSTRUCT] Creating RotarySelectorSwitch for '{label}'", level="TRACE")
         frame = RotarySelectorSwitch(
-            parent_widget, knob_value_var, positions, continuous, path,
-            state_mirror_engine=state_mirror_engine,
+            parent_widget, variable=knob_value_var,
+            positions=positions, continuous=continuous,
+            path=path, state_mirror_engine=state_mirror_engine,
             config=knob_config, state=knob_state,
             label_text=label,
             width=width, height=height,
             bg=p_bg
         )
+        frame.pack_propagate(False)
+
+        # 2. Canvas
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🏗️🪟🖼️ [CONSTRUCT] Creating drawing canvas for rotary selector.", level="TRACE")
+        canvas = tk.Canvas(frame, width=width, height=height, highlightthickness=0, bd=0, relief="flat", bg=p_bg)
+        canvas.pack(expand=True, fill=tk.BOTH)
 
         # ⚡ INDUSTRIAL TRANSPARENCY: Apply via Manager
         if hasattr(builder_instance, '_apply_transparency'):
             matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"👻🌀🪟 [ALPHA] Applying industrial transparency to rotary selector '{label}'", level="TRACE")
-            EngineVisualEffects.apply_transparency(frame, frame.canvas, config_data, builder_instance)
+            EngineVisualEffects.apply_transparency(frame, canvas, config_data, builder_instance)
             EngineVisualEffects.apply_transparency(frame, frame, config_data, builder_instance)
+
+        def update_visuals(*args):
+            if not canvas.winfo_exists(): return
+
+            idx = int(round(knob_value_var.get()))
+            idx = idx % num_pos if continuous else max(0, min(num_pos - 1, idx))
+
+            sel_text = str(positions[idx])
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔄✨🎨 [REDRAW] Updating rotary selector '{label}' visuals to index {idx} ('{sel_text}')", level="TRACE")
+
+            colors = {
+                "fg": fg_color,
+                "accent": accent_color,
+                "indicator": indicator_color,
+                "secondary": secondary_color
+            }
+            options = {
+                "shape": config_data.get("shape", "circle"),
+                "pointer_style": config_data.get("pointer_style", "line"),
+                "knob_style": config_data.get("knob_style", "standard"),
+                "no_center": config_data.get("no_center", False),
+                "continuous": continuous,
+                "main_label": label,
+                "selection_text": sel_text,
+                "show_label": config_data.get("show_label", True)
+            }
+
+            frame._draw_selector(canvas, width, height, idx, positions, colors, options)
+
+        def sync_bg():
+            update_visuals()
+
+        frame._draw = sync_bg
+        frame.render = sync_bg
+
+        # 3. Bindings
+        def on_knob_drag(event):
+            if drag_state["start_y"] is None: return
+            new_val = drag_state["start_value"] + (drag_state["start_y"] - event.y) / 40.0
+            knob_value_var.set(new_val % num_pos if continuous else max(0.0, min(num_pos - 1, new_val)))
+
+        def on_knob_release(event):
+            snapped = round(knob_value_var.get())
+            final_idx = snapped % num_pos if continuous else max(0, min(num_pos - 1, snapped))
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🖱️🔙🎛️ [INPUT] Rotary selector '{label}' released at position {final_idx}", level="INFO")
+            knob_value_var.set(float(final_idx))
+            drag_state.update({"start_y": None, "start_value": None})
+            if path and state_mirror_engine:
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📡🔴📡 [MQTT] Broadcasting rotary selector change for '{path}'", level="TRACE")
+                state_mirror_engine.broadcast_gui_change_to_mqtt(path)
+
+        def on_mousewheel(event):
+            delta = 1 if (event.num == 4 or event.delta > 0) else -1
+            new_val = round(knob_value_var.get()) + delta
+            final_idx = new_val % num_pos if continuous else max(0, min(num_pos-1, new_val))
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🖱️🔄🎛️ [INPUT] Rotary selector '{label}' wheel adjustment to {final_idx}", level="INFO")
+            knob_value_var.set(float(final_idx))
+            if path and state_mirror_engine:
+                state_mirror_engine.broadcast_gui_change_to_mqtt(path)
+
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🖱️👆🔗 [EVENTS] Binding input protocols for rotary selector '{label}'", level="TRACE")
+        canvas.bind("<Button-1>", lambda e: setattr(frame, 'is_locked', True) or drag_state.update({"start_y": e.y, "start_value": knob_value_var.get()}))
+        canvas.bind("<B1-Motion>", on_knob_drag)
+        canvas.bind("<ButtonRelease-1>", lambda e: on_knob_release(e) or (state_mirror_engine.broadcast_gui_change_to_mqtt(path) if path and state_mirror_engine else None) or setattr(frame, 'is_locked', False))
+
+        canvas.bind("<MouseWheel>", on_mousewheel)
+        canvas.bind("<Button-4>", on_mousewheel)
+        canvas.bind("<Button-5>", on_mousewheel)
+
+        knob_value_var.trace_add("write", update_visuals)
 
         # 4. MQTT Registration
         if path and state_mirror_engine:
@@ -249,6 +312,9 @@ class BuilderKnobRotarySelectorCreator:
 
             matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔄⏳🔋 [STATE] Initializing state from cache/broker for '{path}'", level="TRACE")
             state_mirror_engine.initialize_widget_state(path)
+
+        # Initial Render
+        update_visuals()
 
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"✅🆗🎛️ [SUCCESS] The rotary selector switch '{label}' has materialized!", level="SUCCESS")
         return frame

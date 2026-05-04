@@ -64,7 +64,7 @@ class CompositeUIComponents:
         def draw_unit_label(e=None):
             if not unit_label.winfo_exists(): return
             unit_label.delete("all")
-            unit_label.create_text(max(1, unit_label.winfo_width())/2, 5, text=ctx['units_txt'],
+            unit_label.create_text(unit_label.winfo_width()/2, 5, text=ctx['units_txt'],
                                    fill="#888888", font=("Helvetica", ctx['v_font_size']-1), anchor="n")
         unit_label.bind("<Configure>", draw_unit_label)
         return unit_label, draw_unit_label

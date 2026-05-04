@@ -1,4 +1,4 @@
-# oaGuiElements/Core/input/slider_value/Interface/slider_value_editor.py
+# oaGuiElements/Core/utils/slider_value/Interface/slider_value_editor.py
 # Author: Gemini CLI
 # Version: 20260417.1.0
 # Description: Bespoke editor for slider_value.

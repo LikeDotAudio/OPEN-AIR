@@ -21,7 +21,7 @@ class KnobRendererMixin:
         draw_knob_visuals(
             canvas=self,
             state=self.state,
-            config=self.widget_config,
+            config=self.config,
             value=self.variable.get(),
             label_text=getattr(self, 'label_text', None)
         )

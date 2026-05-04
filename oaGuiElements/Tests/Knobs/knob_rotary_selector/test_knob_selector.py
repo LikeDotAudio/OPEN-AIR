@@ -95,7 +95,7 @@ class TestRotarySelector(unittest.TestCase):
     def test_03_position_text(self):
         """Verify the selector returns correct position text."""
         self.variable.set(2)
-        self.assertEqual(self.selector.cget('label_active'), self.positions[2])
+        self.assertEqual(self.selector.selection_text, self.positions[2])
 
     def test_04_builder_creation(self):
         """Verify the Builder can create a RotarySelectorSwitch instance."""

@@ -13,17 +13,17 @@ class CMDPInteractionMixin:
     def on_click(self, e):
         active_fader = self.get_fader_at(e.x, e.y)
         if active_fader:
-            self.active_fader = active_fader; active_fader.dragging = True; self.canvas.lift(active_fader.widget_id)
+            self.active_fader = active_fader; active_fader.dragging = True; active_fader.lift()
             active_fader.start_val, active_fader.start_x, active_fader.start_y = float(active_fader.val_var.get()), e.x, e.y
 
     def on_drag(self, e):
         active_fader = self.active_fader
         if active_fader and active_fader.dragging:
+            from .cmdp_math import CircularMath
             if (e.state & 0x0008) or (e.state & 0x20000): # Alt
-                active_fader.angle_var.set(math.degrees(math.atan2(e.y-self.center_y, e.x-self.center_x)))
+                active_fader.angle_var.set(CircularMath.get_angle(e.x, e.y, self.center_x, self.center_y))
             else:
-                rad = math.radians(float(active_fader.angle_var.get()))
-                proj = (e.x-active_fader.start_x)*math.cos(rad) + (e.y-active_fader.start_y)*math.sin(rad)
+                proj = CircularMath.calculate_projection(e.x - active_fader.start_x, e.y - active_fader.start_y, float(active_fader.angle_var.get()))
                 active_fader.val_var.set(max(0, min(100, active_fader.start_val - (proj/active_fader.track_len)*100)))
             self.update_tree(active_fader)
 
@@ -49,7 +49,7 @@ class CMDPInteractionMixin:
     def on_scroll(self, e):
         active_fader = self.get_fader_at(e.x, e.y)
         if active_fader:
-            self.canvas.lift(active_fader.widget_id); delta = 1 if (e.num == 4 or (hasattr(e, 'delta') and e.delta > 0)) else -1
+            active_fader.lift(); delta = 1 if (e.num == 4 or (hasattr(e, 'delta') and e.delta > 0)) else -1
             is_alt = (e.state & 0x0008) or (e.state & 0x20000)
             if is_alt: active_fader.angle_var.set(float(active_fader.angle_var.get()) + delta * 3)
             else: active_fader.rot_var.set(max(0, min(100, float(active_fader.rot_var.get()) + delta * 5)))

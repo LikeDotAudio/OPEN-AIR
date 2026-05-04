@@ -19,7 +19,6 @@ from oaGuiElements.Core.input.json_tree.Core.json import JsonDataManager
 from oaGuiElements.Core.input.json_tree.Core.json_tree_editor_mixin import JsonTreeEditorMixin
 from oaGuiElements.Core.input.json_tree.Core.json_tree_renderer_mixin import JsonTreeRendererMixin
 from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
-from oaGui.Workers.compositing.engine_visual_effects import EngineVisualEffects
 from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 
 
@@ -38,13 +37,10 @@ class JsonTreeWidget(
 
     def __init__(self, parent, config, state_mirror_engine, base_mqtt_topic):
         super().__init__(parent)
-        self.data_manager = None
         self.config_data = config
         self.state_mirror_engine = state_mirror_engine
         self.base_mqtt_topic = base_mqtt_topic
-        self.json_manager = JsonDataManager()
-        self.data_manager = self.json_manager
-        self.data_manager = self.json_manager
+        self.data_manager = JsonDataManager()
 
         self.allow_browse = config.get("ALLOW", {}).get("browse", config.get("allow_browse", True))
         self.allow_filter = config.get("ALLOW", {}).get("filter", config.get("allow_filter", True))
@@ -54,7 +50,6 @@ class JsonTreeWidget(
         self.allow_table_toggle = config.get("ALLOW", {}).get("table_toggle", True)
 
         self.show_values_var = tk.BooleanVar(value=config.get("show_values", False))
-        self.filter_var = tk.StringVar()
         self._setup_ui()
 
         if self.allow_edit: self._setup_editing()
@@ -89,7 +84,8 @@ class JsonTreeWidget(
 
             if self.allow_filter:
                 tk.Label(self.ctrl, text="Filter: ", fg="white").pack(side=tk.LEFT)
-                self.filter_var.trace_add("write", lambda *a: self.refresh_tree_display(str(self.filter_var.get()), self.show_values_var.get()))
+                self.filter_var = tk.StringVar()
+                self.filter_var.trace_add("write", lambda *a: self.refresh_tree_display(self.filter_var.get(), self.show_values_var.get()))
                 ttk.Entry(self.ctrl, textvariable=self.filter_var).pack(side=tk.LEFT, fill=tk.X, expand=True)
 
         # 3. Tree
@@ -121,9 +117,9 @@ class JsonTreeWidget(
             ttk.Button(self.footer, text="Save As...", command=self.save_as).pack(side=tk.LEFT, padx=2)
 
     def load_json(self, source):
-        data = self.json_manager.load(source)
+        data = self.data_manager.load(source)
         if self.show_values_var.get():
-            cols = self.json_manager.discover_columns()
+            cols = self.data_manager.discover_columns()
             self.tree["columns"] = ("value",) + tuple(cols)
             for c in cols:
                 self.tree.heading(c, text=c.replace("_", " ").title(), anchor="w")
@@ -131,8 +127,7 @@ class JsonTreeWidget(
         else:
             self.tree["columns"] = ("value",)
 
-        filter_str = str(self.filter_var.get()) if self.filter_var.get() else ""
-        self.refresh_tree_display(filter_str, self.show_values_var.get())
+        self.refresh_tree_display(getattr(self, 'filter_var', tk.StringVar()).get(), self.show_values_var.get())
 
     def browse_file(self):
         fn = filedialog.askopenfilename(title="Select JSON", filetypes=[("JSON", "*.json"), ("All", "*.*")])
@@ -140,10 +135,10 @@ class JsonTreeWidget(
 
     def save_as(self):
         fn = filedialog.asksaveasfilename(title="Save JSON", defaultextension=".json", filetypes=[("JSON", "*.json")])
-        if fn: self.json_manager.save_as(fn)
+        if fn: self.data_manager.save_as(fn)
 
     def _on_view_toggle(self):
-        self.load_json(self.json_manager.raw_data)
+        self.load_json(self.data_manager.raw_data)
 
     def _toggle_all(self, state):
         stack = [c for c in self.tree.get_children("")]
@@ -162,6 +157,12 @@ class JsonTreeWidget(
 
 @RegistryWidgetStore.register("_DataJsonTree")
 class BuilderDataJsonTreeCreator(SyncBehavior):
+
+    @staticmethod
+    def make(parent_widget, config_data, context=None, **kwargs):
+        creator = BuilderDataJsonTreeCreator()
+        return creator.make_data_json_tree(parent_widget, config_data, context, **kwargs)
+
     def make_data_json_tree(self, parent_widget, config_data, context=None, **kwargs):
         if context:
             state_mirror_engine = context.state_mirror_engine
@@ -174,8 +175,8 @@ class BuilderDataJsonTreeCreator(SyncBehavior):
 
         widget = JsonTreeWidget(parent_widget, config_data, state_mirror_engine, base_mqtt_topic)
 
-        if hasattr(builder_instance, '_apply_transparency'):
-            EngineVisualEffects.apply_transparency(widget, None, config_data, builder_instance)
+        if hasattr(self, '_apply_transparency'):
+            self._apply_transparency(widget, None, config_data, builder_instance)
 
         path = config_data.get("path")
         if path and state_mirror_engine:

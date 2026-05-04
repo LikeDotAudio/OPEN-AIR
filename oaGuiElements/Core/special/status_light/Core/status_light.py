@@ -171,3 +171,28 @@ class HeaderStatusLightMixin(SyncBehavior):
              self._apply_transparency(status_widget, status_widget.status_canvas, config_data, self)
 
         return status_widget
+
+class BuilderStatusLightCreator:
+    def make_status_light(self, parent_widget, config_data, context=None, **kwargs):
+        """
+        Factory method to create a HeaderStatusLight.
+        """
+        # Resolve dependencies from context or kwargs
+        state_mirror_engine = context.state_mirror_engine if context else kwargs.get("state_mirror_engine")
+        subscriber_router = context.subscriber_router if context else kwargs.get("subscriber_router")
+        base_topic_path = context.base_mqtt_topic_from_path if context else kwargs.get("base_mqtt_topic_from_path", "OPEN-AIR")
+
+        # Create the Status Light Widget
+        status_widget = StatusLightWidget(
+            parent_widget,
+            config_data,
+            state_mirror_engine,
+            subscriber_router,
+            base_topic_path
+        )
+
+        # Apply transparency if creator has the mixin
+        if hasattr(self, '_apply_transparency'):
+             self._apply_transparency(status_widget, status_widget.status_canvas, config_data, context.builder_instance if context else self)
+
+        return status_widget

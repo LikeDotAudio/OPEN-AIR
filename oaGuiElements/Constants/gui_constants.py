@@ -37,3 +37,27 @@ DEFAULT_PAD_X = 5
 DEFAULT_PAD_Y = 2
 DEFAULT_FONT_SIZE = 12
 DEFAULT_DECIMAL_PLACES = 2
+
+# Panel Defaults
+DEFAULT_PANEL_CONFIG = {
+    "type": "layered_industrial",
+    "parameters": {
+        "random_seed": 304,
+        "global_blur": 0.5,
+        "base_material": {
+            "color": "#2a2a2a",
+            "texture_type": "brushed",
+            "grain_intensity": 0.35
+        },
+        "paint_layer": {
+            "color": "#3a4a5a",
+            "opacity": 0.15,
+            "gradient_intensity": 0.2
+        },
+        "edge_wear": {
+            "enabled": True,
+            "fade_depth": 30,
+            "vignette_intensity": 0.5
+        }
+    }
+}

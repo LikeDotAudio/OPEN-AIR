@@ -1,4 +1,4 @@
-# oaGuiElements/Core/Knobs/knob_rotary_selector/Interface/knob_rotary_selector_editor.py
+# oaGuiElements/Core/utils/knob_rotary_selector/Interface/knob_rotary_selector_editor.py
 # Author: Gemini CLI
 # Version: 20260417.1.0
 # Description: Bespoke editor for knob_rotary_selector.

@@ -17,6 +17,7 @@ from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
+from oaGui.Core.factory.base_widget_creator import BaseWidgetCreator
 from oaGuiElements.Core.faders.fader_horizontal.Core.fader_horizontal import BuilderFaderHorizontalCreator
 from oaGuiElements.Core.Knobs.knob.Core.knob import BuilderKnobCreator
 from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
@@ -35,8 +36,10 @@ BUILDER_DEBUG = is_debug_allowed(system="UI", element="GUI_BUILDER")
 
 @RegistryWidgetStore.register("_Horizontal_with_dial_Value", "OcaCompositeFaderKnob")
 class BuilderCompositeHorizontalDialValueCreator(
-    BuilderFaderHorizontalCreator, BuilderKnobCreator, SyncBehavior
+    BaseWidgetCreator, SyncBehavior
 ):
+    is_composite = True
+
     @staticmethod
     def make(parent_widget, config_data, context=None, **kwargs):
         """Unified entry point for composite horizontal dial value."""
@@ -61,7 +64,16 @@ class BuilderCompositeHorizontalDialValueCreator(
             w_req, h_req = int(float(config_data.get("width", l_cfg.get("width", 400)))), int(float(config_data.get("height", l_cfg.get("height", 100))))
 
             sub_frame = tk.Canvas(parent_widget, bd=0, highlightthickness=0, relief="flat", bg=p_bg, width=w_req, height=h_req)
-            sub_frame._oca_path = path; sub_frame.grid_propagate(False)
+            sub_frame._oca_path = path
+
+            # ⚡ PROPAGATION SAFETY: If we are in ghost/preview mode, we MUST propagate
+            # otherwise the container collapses to 1x1 if width/height were stripped.
+            render_tier = getattr(builder_instance, '_render_tier', 'high_res')
+            if render_tier in ['ghost', 'fast'] or not (w_req and h_req):
+                sub_frame.grid_propagate(True)
+            else:
+                sub_frame.grid_propagate(False)
+
             EngineVisualEffects.apply_transparency(sub_frame, sub_frame, config_data, builder_instance)
 
             safe_knob_dim, v_width_limit = GridManager.configure(sub_frame, config_data, w_req)
@@ -117,22 +129,27 @@ class BuilderCompositeHorizontalDialValueCreator(
             unit_label, draw_unit_label = CompositeUIComponents.build_unit_label(ui_ctx)
 
             # 4. State Synchronization
-            dial_widget._prev_dial_val_for_wrap_detection = CompositeStateSync.calculate_initial_fine(init_val, step_coarse, numerical_step)
+            # ⚡ GHOST AWARENESS: Only wire up synchronization if sub-widgets are fully functional (have .variable)
+            is_ghost = not hasattr(fader_widget, 'variable') or not hasattr(dial_widget, 'variable')
 
-            def update_from_main(*args): CompositeStateSync.sync_from_main(main_value_var.get(), step_coarse, numerical_step, fmt_str, entry_string_var, fader_widget.variable, dial_widget)
-            def on_f_change(*args): main_value_var.set(CompositeStateSync.calc_from_fader(fader_widget.variable.get(), main_value_var.get(), step_coarse, numerical_step, min_val, max_val))
-            def on_d_change(*args):
-                ctx = {
-                    'curr_dial': dial_widget.variable.get(), 'main_val': main_value_var.get(),
-                    'fader_var': fader_widget.variable, 'dial_widget': dial_widget,
-                    'step_coarse': step_coarse, 'numerical_step': numerical_step,
-                    'min_val': min_val, 'max_val': max_val
-                }
-                main_value_var.set(CompositeStateSync.calc_from_dial(ctx))
+            if not is_ghost:
+                dial_widget._prev_dial_val_for_wrap_detection = CompositeStateSync.calculate_initial_fine(init_val, step_coarse, numerical_step)
 
-            fader_widget.variable.trace_add("write", on_f_change)
-            dial_widget.variable.trace_add("write", on_d_change)
-            main_value_var.trace_add("write", update_from_main)
+                def update_from_main(*args): CompositeStateSync.sync_from_main(main_value_var.get(), step_coarse, numerical_step, fmt_str, entry_string_var, fader_widget.variable, dial_widget)
+                def on_f_change(*args): main_value_var.set(CompositeStateSync.calc_from_fader(fader_widget.variable.get(), main_value_var.get(), step_coarse, numerical_step, min_val, max_val))
+                def on_d_change(*args):
+                    sync_ctx = {
+                        'curr_dial': dial_widget.variable.get(), 'main_val': main_value_var.get(),
+                        'fader_var': fader_widget.variable, 'dial_widget': dial_widget,
+                        'step_coarse': step_coarse, 'numerical_step': numerical_step,
+                        'min_val': min_val, 'max_val': max_val
+                    }
+                    main_value_var.set(CompositeStateSync.calc_from_dial(sync_ctx))
+
+                fader_widget.variable.trace_add("write", on_f_change)
+                dial_widget.variable.trace_add("write", on_d_change)
+                main_value_var.trace_add("write", update_from_main)
+                update_from_main()
 
             def sync_bg():
                 sync_entry_style(); draw_f_label(); draw_unit_label()
@@ -140,7 +157,6 @@ class BuilderCompositeHorizontalDialValueCreator(
                 if hasattr(dial_widget, "render"): dial_widget.render()
 
             sub_frame.render = sub_frame._draw = sync_bg
-            update_from_main()
 
             sub_frame.variable = main_value_var
             return sub_frame, sub_frame
@@ -149,4 +165,9 @@ class BuilderCompositeHorizontalDialValueCreator(
             return None, None
 
     def make_knob(self, parent_widget, config_data, context=None, **kwargs):
-        return BuilderKnobCreator.make(parent_widget, config_data, context, builder_instance=kwargs.pop('builder_instance', self), **kwargs)
+        """Internal factory call for knob component."""
+        return BuilderKnobCreator.build(parent_widget, config_data, context=context, **kwargs)
+
+    def make_fader_horizontal(self, parent_widget, config_data, context=None, **kwargs):
+        """Internal factory call for fader component."""
+        return BuilderFaderHorizontalCreator.build(parent_widget, config_data, context=context, **kwargs)

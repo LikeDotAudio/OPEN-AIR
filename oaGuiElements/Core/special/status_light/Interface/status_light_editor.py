@@ -1,4 +1,4 @@
-# oaGuiElements/Core/special/status_light/Interface/status_light_editor.py
+# oaGuiElements/Core/utils/status_light/Interface/status_light_editor.py
 # Author: Gemini CLI
 # Version: 20260417.1.0
 # Description: Bespoke editor for status_light.

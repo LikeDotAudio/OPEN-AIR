@@ -72,8 +72,9 @@ class TestAsyncBootstrapEngine(unittest.TestCase):
             # Phase 5: Launch should be called
             mock_launch.assert_called_once()
 
+    @patch('oaLogging.Methods.matrix_gate.is_debug_allowed', return_value=False)
     @patch('oaGui.Managers.bootstrap.loader_bootstrap_engine.logger')
-    def test_failure_triggers_shutdown(self, mock_logger):
+    def test_failure_triggers_shutdown(self, mock_logger, mock_is_debug_allowed):
         """OPERATE: Trigger failure in bootstrap. CHECK: Verify shutdown is called."""
         # Patch init to raise exception
         with patch('oaGui.Managers.bootstrap.loader_bootstrap_engine.initialize_communications', side_effect=Exception("Boom")):

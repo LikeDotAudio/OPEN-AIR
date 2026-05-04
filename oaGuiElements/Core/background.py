@@ -19,7 +19,8 @@ import tkinter as tk
 
 from PIL import ImageTk
 
-from oaGuiElements.Core.utils.panels.panel_generator import PanelGenerator
+from oaGuiElements.Constants.gui_constants import DEFAULT_PANEL_CONFIG, COLOR_BLACK_RGB
+from oaGuiElements.Core.panels.Core.panel_generator import PanelGenerator
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Methods.matrix_gate import matrix_log
@@ -33,14 +34,14 @@ class BuilderBackgroundManagerMixin:
 
     def _clear_panel_background(self):
         """Removes the generated panel background and restores the theme default."""
-        matrix_log("ui", "gui_builder", "_clear_panel_background",
+        matrix_log("gui", "gui_builder", "_clear_panel_background",
                    f"🎨🧹✨ [BUILDER] Clearing panel background for '{getattr(self, 'tab_name', 'Unknown')}'", "TRACE")
 
         if hasattr(self, 'panel_bg_label') and self.panel_bg_label:
             try:
                 self.panel_bg_label.destroy()
             except Exception as e:
-                matrix_log("ui", "gui_builder", "_clear_panel_background",
+                matrix_log("gui", "gui_builder", "_clear_panel_background",
                            f"🎨 Clean: Label already gone or failed to destroy: {e}", "TRACE")
             self.panel_bg_label = None
 
@@ -60,7 +61,7 @@ class BuilderBackgroundManagerMixin:
         # ⚡ RENDER TIER BYPASS: Skip procedural generation in Fast/Ghost modes
         render_tier = getattr(self, '_render_tier', 'high_res')
         if render_tier in ['fast', 'ghost']:
-            matrix_log("ui", "gui_builder", "_apply_panel_background",
+            matrix_log("gui", "gui_builder", "_apply_panel_background",
                        f"🎨⚡✨ [RENDER] Skipping procedural background for Tier: {render_tier}", "DEBUG")
             self._clear_panel_background()
             return
@@ -74,7 +75,7 @@ class BuilderBackgroundManagerMixin:
                 w = self.canvas.winfo_width()
                 h = self.canvas.winfo_height()
                 if w <= 1 or h <= 1:
-                    matrix_log("ui", "gui_builder", "_apply_panel_background",
+                    matrix_log("gui", "gui_builder", "_apply_panel_background",
                                f"🎨📐🔳 [BUILDER] Skipping bg regen for '{getattr(self, 'tab_name', 'Unknown')}': Canvas not yet sized.", "TRACE")
                     return
                 width, height = w, h
@@ -84,7 +85,7 @@ class BuilderBackgroundManagerMixin:
         width = max(50, width)
         height = max(50, height)
 
-        matrix_log("ui", "gui_render", "_apply_panel_background",
+        matrix_log("gui", "gui_render", "_apply_panel_background",
                    f"🎨🎨🎨 [RENDER] Spawning background generation thread for '{getattr(self, 'tab_name', 'Unknown')}' ({width}x{height})", "INFO")
 
         if not hasattr(self, "_bg_task_id"): self._bg_task_id = 0
@@ -111,12 +112,15 @@ class BuilderBackgroundManagerMixin:
             return
 
         if task_id is not None and hasattr(self, "_bg_task_id") and self._bg_task_id != task_id:
-            matrix_log("ui", "gui_builder", "_apply_generated_background",
+            matrix_log("gui", "gui_builder", "_apply_generated_background",
                        f"⚠️🗑️🌀 [BUILDER] Background Task {task_id} discarded (superseded by {self._bg_task_id})", "DEBUG")
             return
 
-        matrix_log("ui", "gui_render", "_apply_generated_background",
+        matrix_log("gui", "gui_render", "_apply_generated_background",
                    f"🎨🆗✅ [RENDER] Background applied to '{getattr(self, 'tab_name', 'Unknown')}' ({width}x{height})", "SUCCESS")
+        
+        matrix_log("gui", "gui_builder", "_apply_generated_background", 
+                   f"🏗️ [BG] Applying background to scroll_frame (type: {type(self.scroll_frame).__name__})", "INFO")
 
         self.panel_bg_pil = panel_bg_pil
         self.panel_bg_image = ImageTk.PhotoImage(self.panel_bg_pil)
@@ -128,7 +132,7 @@ class BuilderBackgroundManagerMixin:
                 self.scroll_frame.configure(bg=base_hex)
                 self.canvas.configure(bg=base_hex)
             except Exception as e:
-                matrix_log("ui", "gui_builder", "_apply_generated_background",
+                matrix_log("gui", "gui_builder", "_apply_generated_background",
                            f"⚠️ Could not extract base color from background: {e}", "WARNING")
 
             if isinstance(self.scroll_frame, tk.Canvas):
@@ -177,7 +181,7 @@ class BuilderBackgroundManagerMixin:
 
         # ⚡ BYPASS: If force is True, we proceed even if rebuilding (critical for editor updates)
         if not force and getattr(self, '_is_rebuilding', False):
-            matrix_log("ui", "gui_builder", "_trigger_background_sync",
+            matrix_log("gui", "gui_builder", "_trigger_background_sync",
                        f"🎨📐🔳 [LAYOUT] BG Sync BLOCKED for '{getattr(self, 'tab_name', 'Unknown')}': Rebuild in progress.", "TRACE")
             return
 
@@ -225,7 +229,15 @@ class BuilderBackgroundManagerMixin:
 
         self._last_bg_size = (w, h)
 
+        # ⚡ ADAPTATION: Support both 'config_data' and 'configuration' naming standards
         bg_config = getattr(self, 'config_data', {}).get("background")
+        if bg_config is None:
+            bg_config = getattr(self, 'configuration', {}).get("background")
+
+        # ⚡ ROBUSTNESS: If background is missing, use DEFAULT_PANEL_CONFIG
+        if bg_config is None:
+            bg_config = DEFAULT_PANEL_CONFIG
+        
         if bg_config and bg_config != "none":
             if isinstance(bg_config, dict):
                 params = bg_config.get("parameters", bg_config)

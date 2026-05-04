@@ -70,7 +70,7 @@ def initialize_logging(config, log_dir=None, partition="SYS"):
     # Configure global defaults for the 'extra' dictionary.
     logger.configure(
         patcher=ptp_patcher,
-        extra={"category": "SYSTEM", "partition": partition_with_emoji, "protocol": None}
+        extra={} # Remove all default extra values
     )
 
     # Remove existing handlers to avoid duplicate output.
@@ -99,7 +99,7 @@ def initialize_logging(config, log_dir=None, partition="SYS"):
     # 1. --- Console Sink ---
     logger.add(
         sys.stderr,
-        format=log_format_console,
+        format="{extra[ptp_time]} | {level:<8} | {extra[category]} | {message}", # Use desired format directly
         level=console_level,
         enqueue=False,
         filter=rust_gate_filter,
@@ -213,16 +213,8 @@ def initialize_test_logging(log_dir: str):
 
 def get_logger(category: str, emoji_prefix: str = None):
     """Returns a bound logger instance for a specific subsystem."""
-    if emoji_prefix is None and category.upper() in COMMS_ELEMENTS:
-        emoji = "📡"
-        cat_name = f"COMM: {category.upper()}"
-    else:
-        emoji = emoji_prefix if emoji_prefix else get_emoji(category)
-        cat_name = category.upper()
-
-    full_category = f"{emoji} {cat_name}"
-    padded_category = full_category.ljust(18)
-    return logger.bind(category=padded_category)
+    emoji = emoji_prefix if emoji_prefix else get_emoji(category)
+    return logger.bind(category=emoji)
 
 # --- Subsystem-Specific Bound Instances ---
 SYSTEM_LOGGER    = get_logger("SYSTEM")

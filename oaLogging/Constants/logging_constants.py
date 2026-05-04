@@ -8,18 +8,13 @@
 # Primary format for colorized terminal output.
 # Note: {ts_fmt} is dynamically prepended in initialize_logging.
 LOG_FORMAT_CONSOLE = (
-    "<level>{level: <8}</level>|"
-    "<yellow>{extra[partition]: <9}</yellow>|"
-    "<magenta>{extra[category]: <18}</magenta>|"
-    "<cyan>{name: <20}</cyan>|"
-    "<level>{message}</level>"
+    "{extra[ptp_time]} | {level:<8} | {extra[category]} | {message}"
 )
 
 # Simplified format for disk-based log files.
 # Note: {ts_fmt_plain} is dynamically prepended in initialize_logging.
 FILE_FORMAT_PLAIN = (
-    "{level: <8} | {extra[partition]: <9} | "
-    "{extra[category]: <18} | {name: <20} | {message}"
+    "{extra[ptp_time]} | {level:<8} | {extra[category]} | {message}"
 )
 
 # JSON Lines format for structured logging.

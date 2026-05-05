@@ -25,26 +25,17 @@ def ptp_patcher(record):
     """
     global _last_ptp_second, _cached_hhmmss
 
+    # 1. Architectural Safety: Ensure required metadata exists for sinks
+    if "category" not in record["extra"]:
+        from oaLogging.Constants.subsystem_emojis import SUBSYSTEM_EMOJIS
+        record["extra"]["category"] = SUBSYSTEM_EMOJIS.get("SYSTEM", "❓")
+    
+    if "category_name" not in record["extra"]:
+        record["extra"]["category_name"] = "SYSTEM"
+
     from oaLogging.Methods.config_retrieval import _get_cached_config
 
     config = _get_cached_config()
     if not config.global_settings.get("timestamp_logs", True):
         record["extra"]["ptp_time"] = "000000.000"
         return
-
-    ptp_now = get_ptp_time()
-    current_second = int(ptp_now)
-
-    # Cache the HHMMSS string and only update when the integer second changes.
-    if current_second != _last_ptp_second:
-        dt = datetime.fromtimestamp(ptp_now)
-        _cached_hhmmss = dt.strftime("%H%M%S")
-        _last_ptp_second = current_second
-
-    # Append milliseconds using fast f-string formatting.
-    ms = int((ptp_now - current_second) * 1000)
-    record["extra"]["ptp_time"] = f"{_cached_hhmmss}.{ms:03d}"
-
-    # Ensure 'category' is always present to avoid KeyErrors in sinks that expect it.
-    if "category" not in record["extra"]:
-        record["extra"]["category"] = "UNSET"

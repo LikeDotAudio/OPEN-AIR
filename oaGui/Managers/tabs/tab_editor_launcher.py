@@ -4,24 +4,23 @@
 #
 # Description: Service for identifying and launching the WYSIWYG editor from a tab context.
 
-def launch_tab_editor(tab_instance, tab_frame):
-    """Traverses the widget hierarchy starting from a tab frame to find and invoke the editor."""
+def find_tab_orchestrator(tab_frame):
+    """Traverses the widget hierarchy starting from a tab frame to find a LoaderOrchestrator instance."""
     queue = [tab_frame]
     
     while queue:
         current = queue.pop(0)
         
-        # Check for direct editor capability
+        # Check if this widget itself is an orchestrator or has the direct editor capability
         if hasattr(current, "_show_wysiwyg_editor"):
-            current._show_wysiwyg_editor()
-            return
+            return current
             
         # Check for nested dynamic GUI container
         if hasattr(current, "dynamic_gui"):
             if hasattr(current.dynamic_gui, "_show_wysiwyg_editor"):
-                current.dynamic_gui._show_wysiwyg_editor()
-                return
+                return current.dynamic_gui
                 
         # Descend into children
         for child in current.winfo_children():
             queue.append(child)
+    return None

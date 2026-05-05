@@ -82,7 +82,12 @@ def matrix_log(system: str, element: str = None, func_name: str = None,
         context_logger = get_logger(system)
 
     # Use .opt(depth=1) to ensure the caller's filename/line is preserved
+    # Ensure category_name is available for consistency with direct logger calls
     bound_logger = context_logger.opt(depth=1)
+    if element:
+        bound_logger = bound_logger.bind(category_name=element.upper())
+    else:
+        bound_logger = bound_logger.bind(category_name=system.upper())
 
     log_func = getattr(bound_logger, level.lower(), bound_logger.debug)
     log_func(message)

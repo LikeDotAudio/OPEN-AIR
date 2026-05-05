@@ -348,22 +348,25 @@ impl PatternEngine {
 
 impl PatternEngine {
     fn internal_draw_line(&self, img: &mut RgbaImage, x1: f64, y1: f64, x2: f64, y2: f64, color: [u8; 4]) {
-        let dx = (x2 - x1).abs();
-        let dy = (y2 - y1).abs();
-        let sx = if x1 < x2 { 1.0 } else { -1.0 };
-        let sy = if y1 < y2 { 1.0 } else { -1.0 };
+        let mut x = x1.round() as i32;
+        let mut y = y1.round() as i32;
+        let x2_i = x2.round() as i32;
+        let y2_i = y2.round() as i32;
+
+        let dx = (x2_i - x).abs();
+        let dy = (y2_i - y).abs();
+        let sx = if x < x2_i { 1 } else { -1 };
+        let sy = if y < y2_i { 1 } else { -1 };
         let mut error_accumulator = dx - dy;
 
-        let mut x = x1;
-        let mut y = y1;
-
         loop {
-            if x >= 0.0 && x < img.width() as f64 && y >= 0.0 && y < img.height() as f64 {
+            if x >= 0 && x < img.width() as i32 && y >= 0 && y < img.height() as i32 {
                 img.put_pixel(x as u32, y as u32, Rgba(color));
             }
 
-            if (x - x2).abs() < 0.1 && (y - y2).abs() < 0.1 { break; }
-            let e2 = 2.0 * error_accumulator;
+            if x == x2_i && y == y2_i { break; }
+            
+            let e2 = 2 * error_accumulator;
             if e2 > -dy {
                 error_accumulator -= dy;
                 x += sx;
@@ -372,6 +375,9 @@ impl PatternEngine {
                 error_accumulator += dx;
                 y += sy;
             }
+
+            // ⚡ SAFETY: Absolute bail-out to prevent infinite loops if logic fails
+            if x.abs() > 10000 || y.abs() > 10000 { break; }
         }
     }
 

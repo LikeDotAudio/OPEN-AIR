@@ -7,7 +7,7 @@
 from oaLogging.Methods.matrix_gate import matrix_log
 from .tab_lazy_populator import populate_tab_on_demand
 from .tab_visibility_dispatcher import dispatch_tab_visibility_events
-from .tab_editor_launcher import launch_tab_editor
+from .tab_editor_launcher import find_tab_orchestrator
 
 class TabOrchestratorMixin:
     """
@@ -69,7 +69,10 @@ class TabOrchestratorMixin:
             index = notebook.index(f"@{event.x},{event.y}")
             tab_id = notebook.tabs()[index]
             tab_frame = notebook.nametowidget(tab_id)
-            launch_tab_editor(self, tab_frame)
+            
+            orchestrator = find_tab_orchestrator(tab_frame)
+            if orchestrator and hasattr(orchestrator, "_on_right_click"):
+                orchestrator._on_right_click(event)
         except Exception:
             from oaLogging.Entry import vocal_capture
             vocal_capture("UI", "Failed to trigger WYSIWYG editor from right-click.")

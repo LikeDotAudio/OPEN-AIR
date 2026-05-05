@@ -34,6 +34,14 @@ def publish_payload(
     """
     MqttConnectionManager().publish(topic, payload, retain=retain)
 
+def publish_batch(messages):
+    """
+    Publishes multiple messages in a single call.
+    Args:
+        messages: List of tuples (topic, payload, [qos], [retain])
+    """
+    MqttConnectionManager().publish_batch(messages)
+
 def publish_json_structure(base_topic: str, json_data: dict):
     """
     Publishes the entire JSON structure to a base topic.

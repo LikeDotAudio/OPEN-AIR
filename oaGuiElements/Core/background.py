@@ -71,12 +71,20 @@ class BuilderBackgroundManagerMixin:
             return
 
         if width is None or height is None:
-            if getattr(self, 'canvas', None) is not None:
-                w = self.canvas.winfo_width()
-                h = self.canvas.winfo_height()
+            # Prefer scroll_frame for dimensions as it's always present in modern builders
+            target = getattr(self, 'scroll_frame', getattr(self, 'canvas', None))
+            if target is not None:
+                w = target.winfo_width()
+                h = target.winfo_height()
+                
+                # ⚡ FALLBACK: If physically realized size is 0 or 1, use the requested size
+                # This is critical for generating backgrounds during the initial boot sequence
+                if w <= 1: w = target.winfo_reqwidth()
+                if h <= 1: h = target.winfo_reqheight()
+
                 if w <= 1 or h <= 1:
                     matrix_log("gui", "gui_builder", "_apply_panel_background",
-                               f"🎨📐🔳 [BUILDER] Skipping bg regen for '{getattr(self, 'tab_name', 'Unknown')}': Canvas not yet sized.", "TRACE")
+                               f"🎨📐🔳 [BUILDER] Skipping bg regen for '{getattr(self, 'tab_name', 'Unknown')}': Container not yet sized.", "TRACE")
                     return
                 width, height = w, h
             else:
@@ -125,12 +133,13 @@ class BuilderBackgroundManagerMixin:
         self.panel_bg_pil = panel_bg_pil
         self.panel_bg_image = ImageTk.PhotoImage(self.panel_bg_pil)
 
-        if self.panel_bg_image and hasattr(self, 'scroll_frame') and getattr(self, 'canvas', None) is not None:
+        if self.panel_bg_image and hasattr(self, 'scroll_frame'):
             try:
                 base_rgb = self.panel_bg_pil.getpixel((width//2, height//2))
                 base_hex = '#%02x%02x%02x' % base_rgb[:3]
                 self.scroll_frame.configure(bg=base_hex)
-                self.canvas.configure(bg=base_hex)
+                if getattr(self, 'canvas', None):
+                    self.canvas.configure(bg=base_hex)
             except Exception as e:
                 matrix_log("gui", "gui_builder", "_apply_generated_background",
                            f"⚠️ Could not extract base color from background: {e}", "WARNING")
@@ -199,7 +208,7 @@ class BuilderBackgroundManagerMixin:
         if not self.winfo_exists() or not self.winfo_ismapped():
             return
 
-        if getattr(self, 'canvas', None) is None or not hasattr(self, 'scroll_frame'):
+        if not hasattr(self, 'scroll_frame'):
             return
 
         # 📏 DIMENSION CALCULATION
@@ -246,7 +255,7 @@ class BuilderBackgroundManagerMixin:
                     params["random_seed"] = random.randint(1, 1000000)
 
                 # ⚡ RESOLUTION INJECTION: Driven by _render_tier
-                render_tier = getattr(self, '_render_tier', 'fast')
+                render_tier = getattr(self, '_render_tier', 'high_res')
                 if render_tier == 'high_res':
                     params["scale_factor"] = 2.0
                 else:

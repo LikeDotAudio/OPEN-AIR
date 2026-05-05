@@ -16,16 +16,16 @@ def recover_corrupted_cache(filepath, exception):
     """
     Handles state cache corruption by backing up the bad file and returning an empty state.
     """
-    logger.critical(f"🧠💾🚫 [CACHE CORRUPTED] Critical error loading state cache: {filepath}")
-    logger.critical(f"  └─ Reason: {exception}")
+    matrix_log("core", "data", "recover_corrupted_cache", f"🧠💾🚫 [CACHE CORRUPTED] Critical error loading state cache: {filepath}", "CRITICAL")
+    matrix_log("core", "data", "recover_corrupted_cache", f"  └─ Reason: {exception}", "CRITICAL")
 
     if filepath.exists():
         backup_path = filepath.with_suffix(f".corrupted_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.json")
         try:
             shutil.copy(filepath, backup_path)
-            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🧠💾🛡️ [RECOVERY] Corrupted cache backed up to: {backup_path.name}", "INFO")
+            matrix_log("core", "data", "recover_corrupted_cache", f"🧠💾🛡️ [RECOVERY] Corrupted cache backed up to: {backup_path.name}", "INFO")
         except Exception as e:
-            logger.error(f"  └─ Failed to create backup: {e}")
+            matrix_log("core", "data", "recover_corrupted_cache", f"  └─ Failed to create backup: {e}", "ERROR")
 
     # Return the definitive empty state
     return {}

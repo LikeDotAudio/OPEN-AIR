@@ -129,22 +129,22 @@ class MidiOutputGenerator(tk.Frame):
         else: self.keyboard.note_off(note)
 
         port = self.selected_output_port.get()
+        import mido
+        batch = []
         for ch in channels:
-            topic = f"OPEN-AIR/MIDI/gui_out/ch{ch+1}/note{note}"
-            pld = {
-                "value": velocity, "channel": ch, "note": note, "velocity": velocity,
-                "type": m_type, "raw": f"{m_type} channel={ch} note={note} velocity={velocity}"
-            }
-            meta = {
-                "origin_source": "MIDI-TX", "target_port": port, "midi_type": m_type
-            }
-            import mido
             midi_message = mido.Message(m_type, channel=ch, note=note, velocity=velocity)
-            try:
-                # ⚡ REFACTORED: MidiManager.publish expects (port_name, mido_message)
-                self.midi_manager.publish(port, midi_message)
-            except Exception as e:
-                logger.error(f"Failed to publish MIDI message: {e}")
+            # MidiManager.publish expects (port_name, mido_message)
+            batch.append((port, midi_message))
+
+        try:
+            # ⚡ OPTIMIZED: Use batch publication if supported by manager
+            if hasattr(self.midi_manager, "publish_batch"):
+                self.midi_manager.publish_batch(batch)
+            else:
+                for msg in batch:
+                    self.midi_manager.publish(*msg)
+        except Exception as e:
+            logger.error(f"Failed to publish MIDI batch: {e}")
 
 def get_gui_class():
     return MidiOutputGenerator

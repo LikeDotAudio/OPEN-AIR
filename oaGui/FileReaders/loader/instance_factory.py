@@ -27,6 +27,7 @@ def create_gui_instance(loader_instance, python_path, json_path, parent_widget):
                 "subscriber_router": loader_instance.subscriber_router,
                 "app_instance": loader_instance.app_instance,
                 "json_path": str(json_path),
+                "render_tier": getattr(loader_instance, '_render_tier', 'high_res'),
             }
             config["base_mqtt_topic_from_path"] = generate_topic_path_from_filepath(json_path, GLOBAL_PROJECT_ROOT)
 

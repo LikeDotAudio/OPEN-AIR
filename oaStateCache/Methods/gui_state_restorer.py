@@ -31,56 +31,44 @@ current_version_hash = 20251230 * 230200 * 1
 #     None.
 def restore_timeline(cache_data: dict[str, Any], state_mirror_engine: Any) -> None:
     """
-    Iterate through the cache_data.
-    Trigger the specific GUI update methods in display (or via the state_mirror if accessible)
-    to visually set the knobs/labels/graphs.
+    Iterate through the cache_data in batches using the GUI event loop.
+    This prevents the main thread from locking up and allows the UI to remain responsive.
     """
-    matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "⏪ Restoring State.", "INFO")
     if not state_mirror_engine:
-        # Use debug instead of error to reduce noise during early boot partitions
-        logger.debug("⏪ℹ️ State Mirror Engine not available for restoration (skipping GUI replay).")
+        matrix_log("core", "system", "restore_timeline", "⏪ℹ️ State Mirror Engine not available for restoration.", "DEBUG")
         return
 
-    matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "⏪ Restoring GUI state from cache.", "INFO")
-    try:
-        import orjson
-        for topic, payload in cache_data.items():
-            # ⚡ OPTIMIZATION: Extract 'value' for cleaner replaying logs
-            val_str = ""
-            try:
-                if isinstance(payload, (str, bytes)):
-                    data = orjson.loads(payload)
-                else:
-                    data = payload # Already parsed/dict
+    matrix_log("core", "system", "restore_timeline", f"⏪ Starting state restoration ({len(cache_data)} topics).", "INFO")
 
-                if isinstance(data, dict) and "value" in data:
-                    val_str = f" Val={data['value']}"
-            except Exception as e:
-                # ⚡ VOCAL: Cosmetic failure (just for cleaner logging), so trace is sufficient
-                matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Cosmetic: Failed to extract 'value' for replaying log: {e}", "TRACE")
+    items = list(cache_data.items())
+    batch_size = 50
+    import orjson
 
-            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"⏪🔄 Topic='{topic}'{val_str}", "TRACE")
+    def process_batch(start_idx):
+        end_idx = min(start_idx + batch_size, len(items))
+        batch = items[start_idx:end_idx]
 
-            # ⚡ V3.1.22 RECURSION GUARD (RESTORE PHASE):
-            # Skip topics that have recursive protocol segments (corrupted paths).
+        for topic, payload in batch:
+            # ⚡ V3.1.22 RECURSION GUARD:
             if any(x + "/" + x + "/" in str(topic) for x in ["OSC", "MIDI", "GUI", "oaGui", "MQTT"]):
-                matrix_log("core", "system", "restore_timeline", f"🛡️ [GUARD] Skipping corrupted recursive topic: {topic}", "DEBUG")
                 continue
 
-            # ⚡ REFACTORED: Wrap in MqttMessage for Partitioned Architecture compatibility
-            # Only process valid functional state topics (Exclude System/Monitor/Heartbeat)
             volatile = any(x in str(topic) for x in ["/System/", "/Monitor/", "/Heartbeat/"])
             if topic.startswith("OPEN-AIR/") and not volatile:
                 message = MqttMessage(topic=topic, payload=payload)
                 state_mirror_engine.sync_incoming_mqtt_to_gui(message)
-            else:
-                # Log or handle non-functional data if necessary
-                matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Skipping non-functional topic in cache: {topic}", "DEBUG")
 
-            # ⚡ STABILITY: Replaying state directly into the GUI is expensive (redraws, reslices).
-            # Throttle to 2ms per message to prevent overwhelming the main thread.
-            import time
-            time.sleep(0.002)
-        matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "⏪✅ Timeline restored!", "SUCCESS")
-    except Exception:
-        logger.exception("⏪❌ Error restoring timeline")
+        if end_idx < len(items):
+            # Schedule next batch
+            if hasattr(state_mirror_engine, "root") and state_mirror_engine.root:
+                state_mirror_engine.root.after(1, lambda: process_batch(end_idx))
+            else:
+                # Headless/fallback: sync process with tiny sleep
+                import time
+                time.sleep(0.01)
+                process_batch(end_idx)
+        else:
+            matrix_log("core", "system", "restore_timeline", "⏪✅ Timeline restoration complete.", "SUCCESS")
+
+    # Launch initial batch
+    process_batch(0)

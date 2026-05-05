@@ -76,6 +76,13 @@ def initialize_logging(config, log_dir=None, partition="SYS"):
     # Remove existing handlers to avoid duplicate output.
     logger.remove()
 
+    # ⚡ SYNC MATRIX: Ensure the logging matrix is loaded and synced to Rust
+    try:
+        from oaConfigurationManager.Managers.LoggingManager.manager import LoggingMatrixManager
+        LoggingMatrixManager.get_instance().load_from_config(config)
+    except Exception as e:
+        print(f"⚠️ [LOGGING] Failed to sync debug matrix: {e}", file=sys.stderr)
+
     debug_enabled = config.global_settings.get("debug_enabled", False)
     console_level = "TRACE" if debug_enabled else "INFO"
     file_level = "TRACE" if debug_enabled else "INFO"
@@ -97,9 +104,12 @@ def initialize_logging(config, log_dir=None, partition="SYS"):
     jsonl_format = JSONL_FORMAT
 
     # 1. --- Console Sink ---
+    # ⚡ SAFE FORMAT: Provide defaults within the format string to prevent KeyError crashes
+    safe_format = "{extra[ptp_time]} | {level:<8} | {extra[category]} {extra[category_name]:<12} | {message}"
+    
     logger.add(
         sys.stderr,
-        format="{extra[ptp_time]} | {level:<8} | {extra[category]} | {message}", # Use desired format directly
+        format=safe_format,
         level=console_level,
         enqueue=False,
         filter=rust_gate_filter,
@@ -199,13 +209,13 @@ def initialize_test_logging(log_dir: str):
 
     logger.configure(
         patcher=ptp_patcher,
-        extra={"partition": "🧪 TEST", "category": "TEST"}
+        extra={"partition": "🧪 TEST", "category": "🧪", "category_name": "TEST"}
     )
 
     logger.add(
         BatchLogSink(test_log_path, format_str=file_format_plain, batch_size=TEST_LOG_BATCH_SIZE, interval=TEST_LOG_INTERVAL),
         format=file_format_plain, level="TRACE",
-        filter=lambda record: "TEST" in record["extra"].get("category", ""),
+        filter=lambda record: "TEST" in record["extra"].get("category_name", ""),
         backtrace=True, diagnose=True
     )
 
@@ -214,7 +224,7 @@ def initialize_test_logging(log_dir: str):
 def get_logger(category: str, emoji_prefix: str = None):
     """Returns a bound logger instance for a specific subsystem."""
     emoji = emoji_prefix if emoji_prefix else get_emoji(category)
-    return logger.bind(category=emoji)
+    return logger.bind(category=emoji, category_name=category.upper())
 
 # --- Subsystem-Specific Bound Instances ---
 SYSTEM_LOGGER    = get_logger("SYSTEM")
@@ -298,15 +308,15 @@ failure_logger = FAILURE_LOGGER
 
 def debug_logger(message: str, *args, **kwargs):
     """Legacy compatibility wrapper for debug logging."""
-    logger.opt(depth=1).bind(category=f"{get_emoji('SYSTEM')} SYSTEM").debug(message, *args)
+    logger.opt(depth=1).bind(category=f"{get_emoji('SYSTEM')}", category_name="SYSTEM").debug(message, *args)
 
 def console_log(message: str):
     """Routes informational messages to the primary system log."""
-    logger.opt(depth=1).bind(category=f"{get_emoji('SYSTEM')} SYSTEM").info(message)
+    logger.opt(depth=1).bind(category=f"{get_emoji('SYSTEM')}", category_name="SYSTEM").info(message)
 
 def failure_log(message: str, *args, **kwargs):
     """Routes critical failure messages to the primary system log with maximal impact."""
-    logger.opt(depth=1).bind(category=f"{get_emoji('FAILURE')} FAILURE").error(message, *args)
+    logger.opt(depth=1).bind(category=f"{get_emoji('FAILURE')}", category_name="FAILURE").error(message, *args)
 
 # Standard aliases for cross-module compatibility.
 debug_log = debug_logger

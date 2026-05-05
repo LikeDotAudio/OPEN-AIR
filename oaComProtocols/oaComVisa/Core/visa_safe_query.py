@@ -54,10 +54,19 @@ def query_safe(proxy, command, correlation_id="N/A"):
         proxy._reset_device()
         return None
 
+    # ⚡ MEMORY GUARD: Monitor buffer size before reading
+    buffer_size = proxy.inst.bytes_in_buffer
+    if buffer_size > 1024 * 1024: # > 1MB
+        matrix_log("comms", "visa", "query_safe",
+                   f"⚠️ [MEMORY] Large instrument response detected: {buffer_size} bytes. "
+                   f"Reading in bulk.", "WARNING")
+
+    # Read the full response
     response = proxy.inst.read().strip()
 
     matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ Proxy Log: ✅ Sent query: {command}", "SUCCESS")
-    matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ Proxy Log: 💳💳⬇️⬇️ RX Visa Response: Received response: {response}", "DEBUG")
+    resp_str = str(response)[:100] + ("..." if len(str(response)) > 100 else "")
+    matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ Proxy Log: 💳💳⬇️⬇️ RX Visa Response: Received response: {resp_str}", "DEBUG")
 
     topic = "OPEN-AIR/Proxy/Rx_Outbox"
     payload = orjson.dumps(

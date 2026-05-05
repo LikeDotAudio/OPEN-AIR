@@ -190,7 +190,8 @@ class SMPTE2138BridgeManager:
 
         # ⚡ DEBUG: Log resolved OID
         if _is_debug():
-            matrix_log("comms", "smpte2138", "handle_router_event", f"📝 [ST2138-OID] oid={oid} value={real_val} type={type(real_val)}", "DEBUG")
+            val_str = str(real_val)[:100] + ("..." if len(str(real_val)) > 100 else "")
+            matrix_log("comms", "smpte2138", "handle_router_event", f"📝 [ST2138-OID] oid={oid} value={val_str} type={type(real_val)}", "DEBUG")
 
         try:
             if isinstance(real_val, (int, float, bool)):
@@ -235,7 +236,8 @@ class SMPTE2138BridgeManager:
             retain=False
         )
         if _is_debug():
-            matrix_log("comms", "smpte2138", "_publish_parameter", f"📡📤📤 [SMPTE2138] Published FLOAT32 to {smpte2138_topic} ({value})", "DEBUG")
+            val_str = str(value)[:100] + ("..." if len(str(value)) > 100 else "")
+            matrix_log("comms", "smpte2138", "_publish_parameter", f"📡📤📤 [SMPTE2138] Published FLOAT32 to {smpte2138_topic} ({val_str})", "DEBUG")
 
     def _publish_command(self, oid: str, value: str, slot_override=None):
         slot = slot_override or self.slot
@@ -255,7 +257,8 @@ class SMPTE2138BridgeManager:
             retain=False
         )
         if _is_debug():
-            matrix_log("comms", "smpte2138", "_publish_command", f"🚀📤📤 [SMPTE2138] Published COMMAND to {smpte2138_topic} ({value})", "DEBUG")
+            val_str = str(value)[:100] + ("..." if len(str(value)) > 100 else "")
+            matrix_log("comms", "smpte2138", "_publish_command", f"🚀📤📤 [SMPTE2138] Published COMMAND to {smpte2138_topic} ({val_str})", "DEBUG")
 
     def _on_remote_control(self, message):
         """Processes remote start/stop commands."""

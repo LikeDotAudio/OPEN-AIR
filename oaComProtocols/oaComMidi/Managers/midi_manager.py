@@ -308,3 +308,17 @@ class MidiManager:
                         outport.send(midi_message)
                     except Exception as e:
                         logger.error(f"Failed to send MIDI to {getattr(outport, 'name', 'unknown')}: {e}")
+
+    def publish_batch(self, messages):
+        """
+        Processes a batch of MIDI messages.
+        Args:
+            messages: List of tuples matching publish() arguments.
+        """
+        if not self.run_bridge: return
+        # Direct iteration is fine here as open_output and send are optimized.
+        for msg in messages:
+            if isinstance(msg, (list, tuple)):
+                self.publish(*msg)
+            else:
+                self.publish(msg)

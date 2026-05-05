@@ -87,6 +87,20 @@ class MqttConnectionManager:
         """Thread-safe non-blocking publish (enqueues message)."""
         self.queue_manager.put_publish_message(topic, payload, qos, retain)
 
+    def publish_batch(self, messages):
+        """
+        Thread-safe non-blocking batch publish.
+        Args:
+            messages: List of tuples (topic, payload, qos, retain)
+        """
+        for msg in messages:
+            # Unpack with defaults if necessary
+            topic = msg[0]
+            payload = msg[1] if len(msg) > 1 else None
+            qos = msg[2] if len(msg) > 2 else 0
+            retain = msg[3] if len(msg) > 3 else False
+            self.queue_manager.put_publish_message(topic, payload, qos, retain)
+
     def subscribe(self, topic, qos=0, on_message_callback=None):
         """Thread-safe non-blocking subscribe (enqueues request)."""
         if on_message_callback:

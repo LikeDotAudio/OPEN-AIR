@@ -7,13 +7,15 @@
 
 from loguru import logger
 
+from oaLogging.Methods.matrix_gate import matrix_log
+
 # --- Native Rust Optimization ---
 try:
     from oaRustCore import oa_trie_rs as oatrie_rs
     RUST_ENABLED = True
 except ImportError:
     RUST_ENABLED = False
-    logger.warning("⚠️ [STATE_CACHE] oatrie_rs not found. Falling back to slow Python prefix sets.")
+    matrix_log("core", "data", "init", "⚠️ [STATE_CACHE] oatrie_rs not found. Falling back to slow Python prefix sets.", "WARNING")
 
 class CacheSearchEngine:
     """Manages an optimized prefix tree for high-performance state queries."""

@@ -53,6 +53,12 @@ fn is_debug_allowed(system: String, element: Option<String>, func_name: Option<S
         if let Some(enabled) = LOGGING_MATRIX.get(&key) {
             return *enabled;
         }
+
+        // ⚡ FALLBACK: Check element standalone if system-specific key not found.
+        // This ensures 'element_smpte2138' works even if partition is 'system'.
+        if let Some(enabled) = LOGGING_MATRIX.get(element_name) {
+            return *enabled;
+        }
     }
 
     // System-wide fallback ensures that protocol-level logs (e.g., all MIDI)

@@ -87,17 +87,30 @@ class BuilderContextMenuMixin:
 
     def _spawn_editor_process(self):
         """Physical execution of the subprocess call for the editor."""
-        runner_path = Path(__file__).resolve().parent.parent.parent / "oaGuiEditorWYSIWYG" / "Managers" / "run_builder.py"
+        runner_path = Path(__file__).resolve().parent.parent.parent.parent / "oaGuiEditorWYSIWYG" / "Managers" / "run_builder.py"
 
         if not runner_path.exists():
             builder_logger.error(f"🏗️🚫 Orchestrator runner missing: {runner_path}")
             return
 
         try:
-            BuilderContextMenuMixin._editor_process = subprocess.Popen([
-                sys.executable, str(runner_path), str(self.json_filepath)
-            ])
+            # ⚡ FORENSIC LOGGING: Capture stderr to identify why the process might fail to start
+            BuilderContextMenuMixin._editor_process = subprocess.Popen(
+                [sys.executable, str(runner_path), str(self.json_filepath)],
+                stderr=subprocess.PIPE,
+                text=True
+            )
             BuilderContextMenuMixin._editor_file = self.json_filepath
+            
+            # Check for immediate failure
+            try:
+                _, stderr = BuilderContextMenuMixin._editor_process.communicate(timeout=0.5)
+                if stderr:
+                    builder_logger.error(f"🏗️🚫 Editor Process Immediate Error: {stderr.strip()}")
+            except subprocess.TimeoutExpired:
+                # Process is still running, which is good
+                pass
+
         except Exception as e:
             builder_logger.exception(f"🏗️🚫 Process spawn failure: {e}")
 

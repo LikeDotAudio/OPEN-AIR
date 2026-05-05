@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Meter Component</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body {
+            background-color: #2c2c2c;
+            color: #fff;
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel" src="Meter.jsx"></script>
+    <script type="text/babel">
+        function App() {
+            const [value, setValue] = React.useState(0);
+
+            React.useEffect(() => {
+                const interval = setInterval(() => {
+                    // Simulate random audio level
+                    if (Math.random() > 0.8) {
+                        setValue(Math.random() * 100);
+                    } else {
+                        setValue(prev => Math.max(0, prev - 10)); // decay in signal
+                    }
+                }, 50);
+                return () => clearInterval(interval);
+            }, []);
+
+            return (
+                <div className="container">
+                    <h3>Audio Meter</h3>
+                    <Meter 
+                        value={value} 
+                        min={0} 
+                        max={100} 
+                        width={30} 
+                        height={300} 
+                    />
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Button Components</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body {
+            background-color: #2c2c2c;
+            color: #fff;
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel" src="Button.jsx"></script>
+    <script type="text/babel">
+        function App() {
+            const [toggleState, setToggleState] = React.useState(false);
+
+            return (
+                <div className="container">
+                    <h3>Buttons</h3>
+                    <div style={{ display: 'flex', gap: '15px' }}>
+                        <OcaButton label="Actuator (Mute)" onClick={() => alert('Muted!')} />
+                        <OcaToggleButton 
+                            label="Toggle (Power)" 
+                            value={toggleState} 
+                            onChange={setToggleState} 
+                        />
+                    </div>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>

@@ -37,6 +37,7 @@
       "repo_url": "https://github.com/LikeDotAudio/OPEN-AIR"
     },
     "vault_directories": [
+      "Gui_Frames",
       "oaGuiDefinitions",
       "oaDataRunningFiles",
       "oaDataLogs",

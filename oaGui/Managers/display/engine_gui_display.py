@@ -88,8 +88,8 @@ class EngineGuiDisplay(
 
     def _start_initial_build(self):
         """Kickoff handled by atomic service."""
-        from oaOchestration.Core.path_initializer import GLOBAL_PROJECT_ROOT
-        ignite_application_build(self, GLOBAL_PROJECT_ROOT / "oaGui" / "Assets")
+        from oaOchestration.Core.path_initializer import GUI_FRAMES_DIR
+        ignite_application_build(self, GUI_FRAMES_DIR)
 
     def _on_initial_build_complete(self):
         """Finalization handled by atomic service."""
@@ -111,8 +111,8 @@ class EngineGuiDisplay(
         """Launches the WYSIWYG editor."""
         def _rebuild_main_ui(new_data=None):
             matrix_log("ui", "gui_shell", "_rebuild_main_ui", "🏗️ [TEST] Rebuilding main application...", "INFO")
-            from oaOchestration.Core.path_initializer import GLOBAL_PROJECT_ROOT
-            root_dir = GLOBAL_PROJECT_ROOT / "oaGui" / "Assets"
+            from oaOchestration.Core.path_initializer import GUI_FRAMES_DIR
+            root_dir = GUI_FRAMES_DIR
 
             for child in self.winfo_children():
                 if child != self.top_toolbar: child.destroy()

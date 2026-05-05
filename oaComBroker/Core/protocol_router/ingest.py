@@ -76,9 +76,9 @@ def normalize_and_ingest(
         - May drop packets due to dead-band or interaction locks.
         - Injects a new dictionary into the inbound_queue.
     """
-    val_str = str(value)[:100] + ("..." if len(str(value)) > 100 else "")
+    value_representation = str(value)[:100] + ("..." if len(str(value)) > 100 else "")
     if app_constants.ROUTER_INGEST_LOGS:
-        matrix_log("comms", "broker", "normalize_and_ingest", f"📡📥📥 [INBOUND] {transport_source} on {topic}: {val_str}", "DEBUG")
+        matrix_log("comms", "broker", "normalize_and_ingest", f"📡📥📥 [INBOUND] {transport_source} on {topic}: {value_representation}", "DEBUG")
 
 
     # Standardize None to empty string or keep as None depending on protocol?
@@ -89,14 +89,14 @@ def normalize_and_ingest(
             matrix_log("comms", "broker", "normalize_and_ingest", f"⚠️ [ROUTER] Received 'None' for {topic}. Propagating as Reset state.", "TRACE")
         return
 
-    meta = metadata or {}
+    metadata_context = metadata or {}
 
     # --- STATE DELTA CHECK (Loop Prevention / Noise Reduction) ---
     # ⚡ EXCEPTION: Monitor, Firehose, and MIDI topics are event streams.
     # They must never be dropped by dead-band logic.
     is_event_stream = any(x in str(topic) for x in ["/Monitor/", "/Firehose/", "/MIDI/"])
 
-    if state_cache and not meta.get("boot") and not is_event_stream:
+    if state_cache and not metadata_context.get("boot") and not is_event_stream:
         cached_val = state_cache.get_cached_value(topic)
         if cached_val == value:
             if app_constants.ROUTER_INGEST_LOGS:
@@ -104,16 +104,16 @@ def normalize_and_ingest(
             return
 
     # Boot sequence messages are ingested silently to prevent console flood.
-    if meta.get("boot"):
+    if metadata_context.get("boot"):
         if app_constants.ROUTER_INGEST_LOGS:
             matrix_log("comms", "broker", "normalize_and_ingest", f"👢🤫👢 [BOOT] Silent ingestion for {topic}", "DEBUG")
-        silent_ingest_callback(transport_source, topic, value, meta)
+        silent_ingest_callback(transport_source, topic, value, metadata_context)
         return
 
     # --- Identity Extraction & Loop Prevention ---
-    session_guid = meta.get("GUID") or meta.get("guid") or local_guid
-    partition = meta.get("partition") or app_constants.PARTITION_ID
-    full_id = meta.get("full_id") or app_constants.FULL_INSTANCE_ID
+    session_guid = metadata_context.get("GUID") or metadata_context.get("guid") or local_guid
+    partition = metadata_context.get("partition") or app_constants.PARTITION_ID
+    full_id = metadata_context.get("full_id") or app_constants.FULL_INSTANCE_ID
 
     logical_source = transport_source
 
@@ -136,16 +136,16 @@ def normalize_and_ingest(
     if any(x + "/" + x + "/" in str(topic) for x in ["OSC", "MIDI", "GUI", "oaGui"]):
         parts = str(topic).split("/")
         unique_parts = []
-        for p in parts:
-            if p in ["OSC", "MIDI", "GUI", "oaGui"] and unique_parts and unique_parts[-1] == p:
+        for topic_part in parts:
+            if topic_part in ["OSC", "MIDI", "GUI", "oaGui"] and unique_parts and unique_parts[-1] == topic_part:
                 continue
-            unique_parts.append(p)
+            unique_parts.append(topic_part)
         topic = "/".join(unique_parts)
 
     logical_guid = session_guid
 
-    id_src = meta.get("source") or meta.get("logical_source")
-    id_guid = meta.get("guid") or meta.get("logical_guid")
+    id_src = metadata_context.get("source") or metadata_context.get("logical_source")
+    id_guid = metadata_context.get("guid") or metadata_context.get("logical_guid")
 
     if isinstance(value, dict):
         id_src = id_src or value.get("source") or value.get("logical_source")
@@ -155,10 +155,10 @@ def normalize_and_ingest(
     if id_guid: logical_guid = id_guid
 
     # --- Unified Message Schema Extraction ---
-    message_guid = meta.get("message_guid")
-    message_type = meta.get("message_type")
-    origin_source = meta.get("origin_source")
-    is_settled = meta.get("is_settled")
+    message_guid = metadata_context.get("message_guid")
+    message_type = metadata_context.get("message_type")
+    origin_source = metadata_context.get("origin_source")
+    is_settled = metadata_context.get("is_settled")
 
     if isinstance(value, dict):
         message_guid = message_guid or value.get("message_guid")
@@ -167,7 +167,7 @@ def normalize_and_ingest(
         if is_settled is None:
             is_settled = value.get("is_settled")
 
-    message_guid = (message_guid or meta.get("GUID") or
+    message_guid = (message_guid or metadata_context.get("GUID") or
                f"G-{int(time.time()*1000)}-{random.getrandbits(16)}")
     message_type = (message_type or "SPLICE_ACTION").upper()
     origin_source = origin_source or logical_source
@@ -177,14 +177,14 @@ def normalize_and_ingest(
     # --- V3.0.0 METADATA HARDENING ---
     # Ensure 'src' (Source Identity) is explicitly tagged for Echo Cancellation.
     # If not provided by transport, we inject the local full_id.
-    message_src_id = meta.get("src")
+    message_src_id = metadata_context.get("src")
     if isinstance(value, dict):
         message_src_id = message_src_id or value.get("src")
 
     message_src_id = message_src_id or full_id
 
     # ⚡ V3.1.16 REFLECTION IDENTIFICATION
-    is_reflection = meta.get("is_reflection") or (message_src_id == full_id and transport_source == "MQTT")
+    is_reflection = metadata_context.get("is_reflection") or (message_src_id == full_id and transport_source == "MQTT")
 
     if is_reflection:
         if app_constants.ROUTER_INGEST_LOGS:
@@ -200,13 +200,13 @@ def normalize_and_ingest(
             return
 
     # Final Normalized Packet Construction.
-    message = {
+    unified_message = {
         "timestamp": time.time(),
         "source": transport_source,
         "logical_source": logical_source,
         "topic": topic,
         "value": value,
-        "meta": meta,
+        "meta": metadata_context,
         "guid": session_guid,
         "full_id": full_id,
         "logical_guid": logical_guid,
@@ -220,7 +220,7 @@ def normalize_and_ingest(
     }
 
     # Update metadata dictionary for downstream consumers.
-    meta.update({
+    metadata_context.update({
         "message_guid": message_guid,
         "message_type": message_type,
         "origin_source": origin_source,
@@ -230,13 +230,13 @@ def normalize_and_ingest(
         "is_reflection": is_reflection
     })
 
-    inbound_queue.put(message)
+    inbound_queue.put(unified_message)
 
     # ⚡ RUST NATIVE ACCELERATION: Push to Rust router for high-speed numeric paths
     # TODO: BUG: The rust_router integration causes the ingest pipeline to hang.
     # Disabling until the Rust component can be fixed.
     # if rust_router:
-    #     rust_router.push_inbound(message)
+    #     rust_router.push_inbound(unified_message)
 
     # TERMINAL SETTLING:
     # If this is a primary action, lock the parameter and schedule a
@@ -258,17 +258,17 @@ def normalize_and_ingest(
 
         if not is_mqtt or (is_mqtt and is_active):
             settle_manager.lock_parameter(topic, full_id)
-            settle_manager.schedule_settling(topic, message)
+            settle_manager.schedule_settling(topic, unified_message)
 
-def create_silent_message(transport_source, topic, value, meta, local_guid, rust_router=None):
+def create_silent_message(transport_source, topic, value, metadata_context, local_guid, rust_router=None):
     """
     Internal helper for low-priority/boot ingestion.
     
     Allocates a pre-settled message that bypasses the normal processing loops.
     """
-    message = {
+    unified_message = {
         "timestamp": time.time(), "source": transport_source, "topic": topic,
-        "value": value, "meta": meta, "guid": local_guid,
+        "value": value, "meta": metadata_context, "guid": local_guid,
         "partition": app_constants.PARTITION_ID,
         "full_id": app_constants.FULL_INSTANCE_ID,
         "message_type": "LINK_FEEDBACK", "is_settled": True
@@ -276,6 +276,6 @@ def create_silent_message(transport_source, topic, value, meta, local_guid, rust
 
     # TODO: BUG: The rust_router integration causes the ingest pipeline to hang.
     # if rust_router:
-    #     rust_router.push_inbound(message)
+    #     rust_router.push_inbound(unified_message)
 
-    return message
+    return unified_message

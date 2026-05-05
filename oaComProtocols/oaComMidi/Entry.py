@@ -99,7 +99,7 @@ def status():
     """Returns the current status of the MIDI bridge."""
     manager = get_manager()
     if manager:
-        return manager.get_port_info()
+        return manager.queryPortStatus()
     return "stopped"
 
 def run_tests():

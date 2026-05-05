@@ -31,12 +31,12 @@ class Connection(Events):
 
 
 
-        self.on('close', self.x)
-        self.on('error', self.x)
+        self.on('close', self.handle_connection_closure)
+        self.on('error', self.handle_connection_closure)
 
-    def x(self, s, r = None):
-        self.remove_event_listener('close', self.x)
-        self.remove_event_listener('error', self.x)
+    def handle_connection_closure(self, source, reason = None):
+        self.remove_event_listener('close', self.handle_connection_closure)
+        self.remove_event_listener('error', self.handle_connection_closure)
         self.cleanup()
 
     # @property

@@ -181,7 +181,7 @@ class MidiDashboard(tk.Frame):
 
     def _refresh_ui(self):
         if not self.midi_manager: return
-        info = self.midi_manager.get_port_info()
+        info = self.midi_manager.queryPortStatus()
         self.midi_hardware.update_ports(info)
         self.conn_mgr.update_connections(info)
 

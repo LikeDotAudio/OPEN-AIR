@@ -131,7 +131,7 @@ class MixerApp(App):
         yield Footer()
 
     def on_mount(self) -> None:
-        self.refresh_data()
+        self.refreshMixer()
         self.start_pcm_visualizer()
 
     async def on_unmount(self) -> None:
@@ -139,7 +139,7 @@ class MixerApp(App):
             self.visualizer_process.terminate()
 
     def on_button_pressed(self, event: Button.Pressed) -> None:
-        if event.button.id == "refresh-btn": self.refresh_data()
+        if event.button.id == "refresh-btn": self.refreshMixer()
 
     def on_universal_volume_control_changed(self, event: UniversalVolumeControl.Changed) -> None:
         self.apply_volume(event.target_id, event.value, event.type)
@@ -154,7 +154,7 @@ class MixerApp(App):
         except Exception as e:
             self.notify(f"Set Volume Failed: {e}", severity="error")
 
-    def refresh_data(self) -> None:
+    def refreshMixer(self) -> None:
         try:
             sinks = self.mixer.get_available_devices()
             sources = self.mixer.get_available_sources()

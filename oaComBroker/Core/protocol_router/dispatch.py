@@ -28,7 +28,7 @@ def dispatch_message(message, managers, topic_routing=None, is_active=True):
     """
     from oaComBroker.Core.protocol_router.manager import ProtocolRouter
     router = ProtocolRouter.get_instance()
-    t_routing = topic_routing or {}
+    topic_routing_map = topic_routing or {}
 
     # Normalize Source Name for Matrix Lookup
     source_raw = str(message["source"]).upper()
@@ -37,20 +37,20 @@ def dispatch_message(message, managers, topic_routing=None, is_active=True):
     strategy = message.get("strategy", "")
     topic = message["topic"]
     value = message["value"]
-    val_str = str(value)[:100] + ("..." if len(str(value)) > 100 else "")
+    value_representation = str(value)[:100] + ("..." if len(str(value)) > 100 else "")
 
     # Helper to resolve topic override or prefixing
     def get_topic(dest):
-        configuration = t_routing.get((source, dest))
+        configuration_entry = topic_routing_map.get((source, dest))
 
         # ⚡ V3.1.15 OSC ADDRESS GUARD:
         # OSC typically uses its own address mapping. Do not force-prefix
         # unless a specific 'send' override is defined in the routing matrix.
-        if dest == "OSC" and not (configuration and configuration.get("send")):
+        if dest == "OSC" and not (configuration_entry and configuration_entry.get("send")):
             return topic
 
-        if configuration and configuration.get("send"):
-            prefix = configuration["send"].rstrip("/")
+        if configuration_entry and configuration_entry.get("send"):
+            prefix = configuration_entry["send"].rstrip("/")
 
             # ⚡ V3.1.13 PREFIX GUARD:
             # Do not prefix topics that already belong to System or Monitor namespaces.
@@ -99,7 +99,7 @@ def dispatch_message(message, managers, topic_routing=None, is_active=True):
             # even if the source was MQTT (for broadcasts/activity logs).
             # We only block standard loopback if NO broadcast strategy is present.
             if mqtt_manager:
-                _dispatch_mqtt(mqtt_manager, get_topic("MQTT"), message, val_str)
+                _dispatch_mqtt(mqtt_manager, get_topic("MQTT"), message, value_representation)
 
     # --- OSC Dispatch ---
     if "🅾️" in strategy:
@@ -115,7 +115,7 @@ def dispatch_message(message, managers, topic_routing=None, is_active=True):
                 if (is_gui or is_system or is_midi) and not has_address:
                     pass
                 else:
-                    _dispatch_osc(osc_manager, get_topic("OSC"), value, message, val_str)
+                    _dispatch_osc(osc_manager, get_topic("OSC"), value, message, value_representation)
 
     # --- MIDI Dispatch ---
     if "🎹" in strategy:
@@ -132,31 +132,31 @@ def dispatch_message(message, managers, topic_routing=None, is_active=True):
                 is_feedback = (message.get("message_type") == "LINK_FEEDBACK")
 
                 if not (is_midi_hw or is_feedback):
-                    _dispatch_midi(midi_manager, get_topic("MIDI"), value, message, val_str)
+                    _dispatch_midi(midi_manager, get_topic("MIDI"), value, message, value_representation)
 
     # --- SNMP Dispatch ---
     if "Ⓢ" in strategy:
         if is_active and router.routing_matrix.get(source, {}).get("SNMP", True):
             snmp_manager = managers.get("snmp")
             if snmp_manager and message["source"] not in ["SNMP", "SNMP-TX"] and message.get("logical_source") not in ["SNMP", "SNMP-TX"]:
-                _dispatch_snmp(snmp_manager, get_topic("SNMP"), value, val_str)
+                _dispatch_snmp(snmp_manager, get_topic("SNMP"), value, value_representation)
 
     # --- NMOS Dispatch ---
     if "N" in strategy or "NMOS" in strategy:
         if is_active and router.routing_matrix.get(source, {}).get("NMOS", True):
             nmos_manager = managers.get("nmos")
             if nmos_manager and message["source"] != "NMOS" and message.get("logical_source") != "NMOS":
-                _dispatch_nmos(nmos_manager, get_topic("NMOS"), value, message, val_str)
+                _dispatch_nmos(nmos_manager, get_topic("NMOS"), value, message, value_representation)
 
     # --- SMPTE 2138 Dispatch ---
     if "🔗" in strategy or "🚀" in strategy:
         if is_active and router.routing_matrix.get(source, {}).get("SMPTE2138", True):
             smpte_manager = managers.get("smpte2138")
             if smpte_manager and message["source"] != "SMPTE2138" and message.get("logical_source") != "SMPTE2138":
-                _dispatch_smpte2138(smpte_manager, get_topic("SMPTE2138"), value, message, val_str)
+                _dispatch_smpte2138(smpte_manager, get_topic("SMPTE2138"), value, message, value_representation)
 
 @protocol_guard("MQTT")
-def _dispatch_mqtt(mqtt_manager, topic, message, val_str):
+def _dispatch_mqtt(mqtt_manager, topic, message, value_representation):
     payload = {
         "value": message["value"], "source": message.get("logical_source", message["source"]),
         "timestamp": message["timestamp"], "GUID": message["guid"], "partition": message["partition"]
@@ -180,10 +180,10 @@ def _dispatch_mqtt(mqtt_manager, topic, message, val_str):
 
     mqtt_manager.publish(tx_topic, encoded_payload, retain=retain)
     if app_constants.ROUTER_DISPATCH_LOGS:
-        matrix_log("comms", "broker", "_dispatch_mqtt", f"📡📤📤 [OUTBOUND] MQTT >> {tx_topic} (Retain={retain}): {val_str}", "DEBUG")
+        matrix_log("comms", "broker", "_dispatch_mqtt", f"📡📤📤 [OUTBOUND] MQTT >> {tx_topic} (Retain={retain}): {value_representation}", "DEBUG")
 
 @protocol_guard("OSC")
-def _dispatch_osc(osc_manager, topic, value, message, val_str):
+def _dispatch_osc(osc_manager, topic, value, message, value_representation):
     osc_address = message["meta"].get("osc_address", "/" + topic.replace("OPEN-AIR/", ""))
 
     # ⚡ RESILIENCE: Handle complex GUI-sourced payloads
@@ -194,31 +194,31 @@ def _dispatch_osc(osc_manager, topic, value, message, val_str):
 
     osc_manager.send(osc_address, payload)
     if app_constants.ROUTER_DISPATCH_LOGS:
-        matrix_log("comms", "broker", "_dispatch_osc", f"📡📤📤 [OUTBOUND] OSC >> {osc_address}: {val_str}", "DEBUG")
+        matrix_log("comms", "broker", "_dispatch_osc", f"📡📤📤 [OUTBOUND] OSC >> {osc_address}: {value_representation}", "DEBUG")
 
 @protocol_guard("MIDI")
-def _dispatch_midi(midi_manager, topic, value, message, val_str):
+def _dispatch_midi(midi_manager, topic, value, message, value_representation):
     midi_manager.publish(topic, value, message["meta"])
     if app_constants.ROUTER_DISPATCH_LOGS:
-        matrix_log("comms", "broker", "_dispatch_midi", f"📡📤📤 [MIDI] >> {topic}: {val_str}", "DEBUG")
+        matrix_log("comms", "broker", "_dispatch_midi", f"📡📤📤 [MIDI] >> {topic}: {value_representation}", "DEBUG")
 
 @protocol_guard("SNMP")
-def _dispatch_snmp(snmp_manager, topic, value, val_str):
+def _dispatch_snmp(snmp_manager, topic, value, value_representation):
     snmp_manager.publish(topic, value)
     if app_constants.ROUTER_DISPATCH_LOGS:
-        matrix_log("comms", "broker", "_dispatch_snmp", f"📡📤📤 [SNMP] >> {topic}: {val_str}", "DEBUG")
+        matrix_log("comms", "broker", "_dispatch_snmp", f"📡📤📤 [SNMP] >> {topic}: {value_representation}", "DEBUG")
 
 @protocol_guard("NMOS")
-def _dispatch_nmos(nmos_manager, topic, value, message, val_str):
+def _dispatch_nmos(nmos_manager, topic, value, message, value_representation):
     """Routes normalized internal actions to the NMOS IS-07 bridge."""
     nmos_manager.handle_router_event(topic, value, message.get("meta", {}))
     if app_constants.ROUTER_DISPATCH_LOGS:
-        matrix_log("comms", "broker", "_dispatch_nmos", f"📡📤📤 [NMOS] >> {topic}: {val_str}", "DEBUG")
+        matrix_log("comms", "broker", "_dispatch_nmos", f"📡📤📤 [NMOS] >> {topic}: {value_representation}", "DEBUG")
 
 @protocol_guard("SMPTE2138")
-def _dispatch_smpte2138(smpte_manager, topic, value, message, val_str):
+def _dispatch_smpte2138(smpte_manager, topic, value, message, value_representation):
     """Routes normalized internal actions to the SMPTE 2138 bridge."""
     # The manager's ingest method handles OID mapping and Protobuf encoding.
     smpte_manager.handle_router_event(topic, value, message.get("meta", {}))
     if app_constants.ROUTER_DISPATCH_LOGS:
-        matrix_log("comms", "broker", "_dispatch_smpte2138", f"📡📤📤 [SMPTE2138] >> {topic}: {val_str}", "DEBUG")
+        matrix_log("comms", "broker", "_dispatch_smpte2138", f"📡📤📤 [SMPTE2138] >> {topic}: {value_representation}", "DEBUG")

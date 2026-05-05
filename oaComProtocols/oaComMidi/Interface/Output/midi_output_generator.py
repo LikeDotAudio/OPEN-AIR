@@ -99,7 +99,7 @@ class MidiOutputGenerator(tk.Frame):
 
     def _refresh_ports(self):
         if not self.midi_manager: return
-        info = self.midi_manager.get_port_info()
+        info = self.midi_manager.queryPortStatus()
         outputs = info.get("outputs", [])
         self.port_combo['values'] = outputs
         if outputs and not self.selected_output_port.get():

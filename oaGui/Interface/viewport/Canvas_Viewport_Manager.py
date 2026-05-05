@@ -61,6 +61,16 @@ class CanvasViewportManager:
                    f"Content Req: {req_w}x{req_h} | Target: {new_w}x{new_h}", "TRACE")
 
         try:
+            # ⚡ STABILITY CHECK: Avoid redundant updates that trigger layout loops
+            curr_w = int(float(self.canvas.itemcget(self.window_id, "width")))
+            curr_h = int(float(self.canvas.itemcget(self.window_id, "height")))
+            if curr_w == int(new_w) and curr_h == int(new_h):
+                return {
+                    "viewport": (viewport_w, viewport_h),
+                    "content": (req_w, req_h),
+                    "target": (new_w, new_h)
+                }
+
             self.canvas.itemconfig(self.window_id, width=int(new_w), height=int(new_h))
             self.canvas.configure(scrollregion=self.canvas.bbox("all"))
             return {

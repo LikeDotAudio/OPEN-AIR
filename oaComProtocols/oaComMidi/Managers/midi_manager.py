@@ -85,7 +85,7 @@ class MidiManager:
             self.mqtt_worker.start()
 
         if self.run_bridge:
-            info = self.get_port_info()
+            info = self.queryPortStatus()
             matrix_log("comms", "midi", "start",
                        f"🎹 [MIDI-MGR] Found {len(info.get('inputs', []))} inputs, {len(info.get('outputs', []))} outputs.", "INFO")
 
@@ -113,7 +113,7 @@ class MidiManager:
             "outputs": self._active_out_names
         }
 
-    def get_port_info(self):
+    def queryPortStatus(self):
         # Support old signature from MIDIPortController if needed
         # (Though we added get_available_ports to it recently)
         return self.ports.get_available_ports()

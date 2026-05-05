@@ -63,16 +63,37 @@ class TabOrchestratorMixin:
             notebook = event.widget
             # Identify what was clicked (tab, padding, or empty space)
             element = notebook.identify(event.x, event.y)
-            if "tab" not in element:
+            matrix_log("gui", "gui_shell", "_on_notebook_right_click", f"🖱️ Notebook right-click at {event.x},{event.y}. Element: {element}", "DEBUG")
+            
+            # ⚡ ROBUST IDENTIFICATION: Catch 'tab', 'label', 'text' or numeric indices
+            is_tab_area = any(s in element for s in ["tab", "label", "text"]) or element.isdigit()
+            
+            if not is_tab_area:
                 return
 
             index = notebook.index(f"@{event.x},{event.y}")
             tab_id = notebook.tabs()[index]
             tab_frame = notebook.nametowidget(tab_id)
-            
-            orchestrator = find_tab_orchestrator(tab_frame)
-            if orchestrator and hasattr(orchestrator, "_on_right_click"):
-                orchestrator._on_right_click(event)
-        except Exception:
+            tab_name = notebook.tab(tab_id, "text")
+
+            matrix_log("gui", "gui_shell", "_on_notebook_right_click", f"🎯 Target Tab: {tab_name} (ID: {tab_id})", "DEBUG")
+
+            # ⚡ ENSURE POPULATED: If the user right-clicks a tab they haven't visited,
+            # we must populate it first so the orchestrator exists.
+            def _launch_after_population():
+                matrix_log("gui", "gui_shell", "_on_notebook_right_click", f"🔍 Searching orchestrator for {tab_name} after population...", "DEBUG")
+                orchestrator = find_tab_orchestrator(tab_frame)
+                if orchestrator:
+                    matrix_log("gui", "gui_shell", "_on_notebook_right_click", f"🚀 Launching editor for {tab_name} via {orchestrator}", "DEBUG")
+                    if hasattr(orchestrator, "_show_wysiwyg_editor"):
+                        orchestrator._show_wysiwyg_editor()
+                    else:
+                        matrix_log("gui", "gui_shell", "_on_notebook_right_click", f"❌ Orchestrator {orchestrator} missing _show_wysiwyg_editor!", "WARNING")
+                else:
+                    matrix_log("gui", "gui_shell", "_on_notebook_right_click", f"❌ Failed to find orchestrator for tab {tab_name}", "WARNING")
+
+            populate_tab_on_demand(self, tab_frame, tab_name, on_complete=_launch_after_population)
+        except Exception as e:
+            matrix_log("gui", "gui_shell", "_on_notebook_right_click", f"🛑 Tab right-click failure: {e}", "ERROR")
             from oaLogging.Entry import vocal_capture
             vocal_capture("UI", "Failed to trigger WYSIWYG editor from right-click.")

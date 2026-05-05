@@ -27,34 +27,35 @@ class SyncBehavior:
         parent = widget.master
         widget_name = getattr(widget, 'path', type(widget).__name__)
 
-        matrix_log("gui", "gui_manager", "register_for_bg_sync", f"🎨 [UI] Registering {widget_name} for background sync.", "INFO")
-
         def perform_sync(event=None):
             if not widget.winfo_exists(): return
 
             try:
+                # ⚡ LIGHTWEIGHT CHECK: Ensure widget is physically realized
                 w, h = widget.winfo_width(), widget.winfo_height()
                 if w <= 1 or h <= 1: return
             except tk.TclError: return
 
             try:
+                # ⚡ COLOR SYNC: Match parent's background color
                 p_bg = parent.cget("bg")
                 if widget.cget("bg") != p_bg:
                     widget.configure(bg=p_bg)
                 if canvas and canvas.winfo_exists() and canvas.cget("bg") != p_bg:
                     canvas.configure(bg=p_bg)
 
-                # Use stored slice method if available
+                # ⚡ SLICING: Use stored slice method if available
+                # Note: Transparent widgets are already registered with the builder's 
+                # centralized registry via EngineVisualEffects.
                 if hasattr(widget, '_perform_background_slice'):
                     widget._perform_background_slice()
-                else:
-                    # Re-apply transparency slicing if not already registered
-                    self._apply_transparency(widget, canvas, configuration, builder_instance)
+                
             except Exception as e:
-                matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"perform_sync error: {e}", level="DEBUG")
-                pass
+                matrix_log("UI", "GUI_MANAGER", "perform_sync", f"perform_sync error for {widget_name}: {e}", level="TRACE")
 
-        # Bind to parent's configuration changes to keep in sync
-        parent.bind("<Configure>", perform_sync, add="+")
-        # Also sync immediately on Map
+        # Sync immediately once the widget is mapped to the screen
         widget.bind("<Map>", perform_sync, add="+")
+        
+        # ⚡ OPTIMIZATION: Removed parent.bind("<Configure>"). 
+        # This was causing layout thrashing in dense modules like EDAC.
+        # Background updates are now driven by the Orchestrator's debounced _trigger_reslice_all().

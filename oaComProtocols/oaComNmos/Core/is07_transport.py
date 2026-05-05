@@ -16,6 +16,7 @@ from typing import Any
 import paho.mqtt.client as mqtt
 import websocket
 
+from oaComProtocols.oaComNmos.Constants.nmos_constants import NMOS_IS07_DEFAULT_URI, NMOS_IS07_RECONNECT_INTERVAL
 from oaComProtocols.oaComNmos.Core.utils import gen_id
 from oaLogging.Methods.matrix_gate import matrix_log, is_debug_allowed
 
@@ -94,7 +95,7 @@ class Is07WebSocketTransport(EventTransport):
 
     def connect(self, connection_params: dict[str, Any]) -> bool:
         self._connection_params = connection_params
-        uri = connection_params.get("connection_uri", "ws://localhost:8085/is07")
+        uri = connection_params.get("connection_uri", NMOS_IS07_DEFAULT_URI)
         reconnect = connection_params.get("reconnect", True)
 
         if _is_debug("nmos_ws"):
@@ -111,7 +112,7 @@ class Is07WebSocketTransport(EventTransport):
         return success
 
     def _attempt_connect(self) -> bool:
-        uri = self._connection_params.get("connection_uri", "ws://localhost:8085/is07")
+        uri = self._connection_params.get("connection_uri", NMOS_IS07_DEFAULT_URI)
         try:
             if self.ws_app:
                 try: self.ws_app.close()
@@ -144,8 +145,8 @@ class Is07WebSocketTransport(EventTransport):
             return False
 
     def _reconnect_loop(self):
-        interval = self._connection_params.get("reconnect_interval", 5.0)
-        uri = self._connection_params.get("connection_uri", "ws://localhost:8085/is07")
+        interval = self._connection_params.get("reconnect_interval", NMOS_IS07_RECONNECT_INTERVAL)
+        uri = self._connection_params.get("connection_uri", NMOS_IS07_DEFAULT_URI)
 
         while self._should_reconnect and not self._is_connected:
             if _is_debug("nmos_ws"):

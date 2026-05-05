@@ -16,8 +16,11 @@ use std::f64::consts::PI;
 
 const COLOR_NORMALIZATION_FACTOR: f64 = 127.5;
 
+const SAFETY_BAIL_OUT_LIMIT: i32 = 10000;
+
 #[pyclass]
-struct PatternEngine;
+struct PatternEngine {
+
 
 #[pymethods]
 impl PatternEngine {
@@ -377,7 +380,7 @@ impl PatternEngine {
             }
 
             // ⚡ SAFETY: Absolute bail-out to prevent infinite loops if logic fails
-            if x.abs() > 10000 || y.abs() > 10000 { break; }
+            if x.abs() > SAFETY_BAIL_OUT_LIMIT || y.abs() > SAFETY_BAIL_OUT_LIMIT { break; }
         }
     }
 

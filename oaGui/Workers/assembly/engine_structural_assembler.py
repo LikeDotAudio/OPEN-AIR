@@ -21,6 +21,7 @@ class StructuralAssembler:
         if builder and hasattr(builder, 'show_structure') and builder.show_structure.get():
             target.config(highlightbackground="red", highlightthickness=1)
 
+        # ⚡ SLICING: Ensure block is registered for industrial transparency inheritance
         EngineVisualEffects.apply_transparency(target, target, value, builder)
         return target, target
 
@@ -44,6 +45,8 @@ class StructuralAssembler:
             # ⚡ OVERLAY MODE: Build directly into a transparent canvas without scrollbars
             inner = tk.Canvas(hull, bg="#2b2b2b", bd=0, highlightthickness=0, width=w, height=h)
             inner.grid(row=0, column=0, sticky="nsew")
+            
+            # ⚡ SLICING: Ensure overlay is registered for industrial transparency inheritance
             EngineVisualEffects.apply_transparency(hull, inner, value, builder)
             return hull, inner
 
@@ -77,6 +80,15 @@ class StructuralAssembler:
             req_h = inner.winfo_reqheight()
             new_h = max(event.height, req_h)
             
+            # ⚡ STABILITY CHECK: Avoid redundant updates that trigger layout loops
+            try:
+                curr_w = int(float(viewport.itemcget(inner_id, "width")))
+                curr_h = int(float(viewport.itemcget(inner_id, "height")))
+                if curr_w == event.width and curr_h == new_h:
+                    return
+            except (tk.TclError, ValueError):
+                pass
+
             from oaLogging.Methods.matrix_gate import matrix_log
             matrix_log("ui", "gui_render", "create_bin", 
                        f"📦📐🔳 [RENDER] Bin Size Sync (ID: {value.get('id', '??')}) | "
@@ -91,6 +103,7 @@ class StructuralAssembler:
         viewport.bind("<Configure>", _on_canvas_configure, add="+")
         inner.bind("<Configure>", lambda e: viewport.configure(scrollregion=viewport.bbox("all")))
 
+        # ⚡ SLICING: Ensure both viewport and inner frame are registered for inheritance
         EngineVisualEffects.apply_transparency(hull, viewport, value, builder)
         EngineVisualEffects.apply_transparency(hull, inner, value, builder)
         return hull, inner

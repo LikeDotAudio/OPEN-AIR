@@ -7,16 +7,22 @@
 import pathlib
 from oaLogging.Methods.matrix_gate import matrix_log
 
-def populate_tab_on_demand(display_instance, tab_frame, tab_name):
+def populate_tab_on_demand(display_instance, tab_frame, tab_name, on_complete=None):
     """Checks if a tab requires population and triggers the build if necessary."""
-    if getattr(tab_frame, "is_populated", False) or getattr(tab_frame, "is_populating", False):
-        matrix_log("gui", "gui_shell", "tab_populate", f"ℹ️ Tab {tab_name} already populated or populating.", "DEBUG")
+    if getattr(tab_frame, "is_populated", False):
+        matrix_log("gui", "gui_shell", "tab_populate", f"ℹ️ Tab {tab_name} already populated. Firing on_complete.", "DEBUG")
+        if on_complete: on_complete()
+        return
+
+    if getattr(tab_frame, "is_populating", False):
+        matrix_log("gui", "gui_shell", "tab_populate", f"⚠️ Tab {tab_name} is already populating. Skipping redundant request.", "DEBUG")
         return
 
     tab_frame.is_populating = True
     build_path = getattr(tab_frame, "build_path", None)
     
     if not build_path:
+        matrix_log("gui", "gui_shell", "tab_populate", f"❌ Tab {tab_name} missing build_path!", "ERROR")
         tab_frame.is_populating = False
         return
 
@@ -31,9 +37,11 @@ def populate_tab_on_demand(display_instance, tab_frame, tab_name):
 
     def _execute_population():
         try:
+            matrix_log("gui", "gui_shell", "tab_populate", f"🚀 Executing build for tab {tab_name}...", "DEBUG")
             display_instance._build_from_directory(path=build_path, parent_widget=tab_frame)
             tab_frame.is_populated = True
-            matrix_log("gui", "gui_shell", "tab_populate", f"✅ Tab {tab_name} population complete.", "SUCCESS")
+            matrix_log("gui", "gui_shell", "tab_populate", f"✅ Tab {tab_name} population complete. Firing on_complete.", "SUCCESS")
+            if on_complete: on_complete()
         except Exception as error:
             matrix_log("gui", "gui_shell", "tab_populate", f"❌ Failed to populate tab {tab_name}: {error}", "ERROR")
         finally:

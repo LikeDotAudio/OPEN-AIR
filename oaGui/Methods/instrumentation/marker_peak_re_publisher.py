@@ -5,7 +5,6 @@ from oaLogging.Methods.matrix_gate import matrix_log
 #
 # Description: markers/marker_peak_re_publisher.py
 
-... User modified the `new_string` content to be: # markers/marker_peak_re_publisher.py
 #
 # This worker listens to the immediate output of the NAB marker command (Marker_1/value, etc.)
 # and republishes the received peak value to the final markers repository location.
@@ -195,4 +194,3 @@ class MarkerPeakPublisher:
             logger.exception("❌ Critical Error in Peak Publisher for {first_device_id}"
             )
             logger.exception("❌ CRITICAL FAILURE in Publisher Flow. Error")
-.

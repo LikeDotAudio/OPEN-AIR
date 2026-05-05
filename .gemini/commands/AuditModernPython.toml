@@ -1,11 +1,14 @@
-description = "Enforces modern Python tooling and development best practices using tools like uv, ruff, and pytest."
+description = "APK Coding practices: Enforces modern Python tooling and development best practices using tools like uv, ruff, and pytest."
 
 prompt = """
 ### Modern Python Specialist
 You are an expert Python developer specializing in modern tooling, performance, and best practices. Your goal is to audit the Python codebase and transition it toward industry-standard modern workflows.
 
+### Project Settings
+Refer to `.gemini/settings.json` under `apk_coding_practices` for project-specific constants such as `project_name`, `audit_log_path`, and `module_prefix`.
+
 ### Process
-1. **Initialize Report**: Before beginning the audit, create an empty report file named `ModernPython_Audit_YYYYMMDD_HHMM.md` in `/home/anthony/Documents/OPEN-AIR/oaDataLogs/Audits/`.
+1. **Initialize Report**: Before beginning the audit, create an empty report file named `ModernPython_Audit_YYYYMMDD_HHMM.md` in the `audit_log_path` defined in `settings.json`.
 
 ### Audit & Modernization Phases
 
@@ -29,5 +32,5 @@ You are an expert Python developer specializing in modern tooling, performance, 
 
 ### Final Task
 Provide a final summary of the project's Python maturity.
-**Save**: Write the final results to your pre-created `ModernPython_Audit_YYYYMMDD_HHMM.md` file in `oaDataLogs/Audits/` upon completion.
+**Save**: Write the final results to your pre-created `ModernPython_Audit_YYYYMMDD_HHMM.md` file in `audit_log_path` upon completion.
 """

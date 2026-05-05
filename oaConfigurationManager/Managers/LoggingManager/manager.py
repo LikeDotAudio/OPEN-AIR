@@ -119,9 +119,14 @@ class LoggingMatrixManager:
                 system_name = k_lower[4:]
                 sync_gate_to_rust(system=system_name, enabled=enabled)
             elif k_lower.startswith("element_"):
-                # We also sync elements directly if they are used as system names in matrix_log
+                # Default elements to 'COMMS' or 'UI' system for safer routing if not specified
                 element_name = k_lower[8:]
-                sync_gate_to_rust(system=element_name, enabled=enabled)
+                sync_gate_to_rust(system="comms", element=element_name, enabled=enabled)
+                sync_gate_to_rust(system="gui", element=element_name, enabled=enabled)
+            elif "_" in k_lower:
+                # Handle joined keys like COMMS_MQTT -> system="comms", element="mqtt"
+                parts = k_lower.split("_", 1)
+                sync_gate_to_rust(system=parts[0], element=parts[1], enabled=enabled)
 
             # Also sync the raw key just in case it's used directly
             sync_gate_to_rust(system=k_lower, enabled=enabled)

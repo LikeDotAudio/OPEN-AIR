@@ -1,6 +1,6 @@
 # oaComSMPTE2138/Entry.py
 # Author: Anthony Peter Kuzub
-# Version: 20260415.2150.1
+# Version: 20260505.Modular.1
 #
 # Description: Gatekeeper for the oaComSMPTE2138 module.
 
@@ -19,10 +19,6 @@ if str(project_root) not in sys.path:
 # Absolute imports for robustness in standalone mode
 from oaLogging.Methods.matrix_gate import matrix_log
 
-# These managers will be instantiated and managed by the ComProtocolManager
-# from oaComProtocols.oaComSMPTE2138.Managers.smpte2138_bridge_manager import SMPTE2138BridgeManager
-# from oaComProtocols.oaComSMPTE2138.Managers.smpte2138_monitor_manager import SMPTE2138MonitorManager
-
 # Mock dependencies if not provided by the manager
 class MockMqttConnectionManager:
     def connect_to_broker(self, *args, **kwargs): pass
@@ -36,6 +32,14 @@ class MockSubscriberRouter:
 _bridge_manager = None
 _monitor_manager = None
 
+def _is_debug():
+    try:
+        from oaComProtocols.oaComSMPTE2138.Managers.smpte2138_bridge_manager import _is_debug as bridge_debug
+        return bridge_debug()
+    except Exception:
+        from oaLogging.Methods.matrix_gate import is_debug_allowed
+        return is_debug_allowed(system="comms", element="smpte2138")
+
 def start_bridge(mqtt_connection_manager=None, subscriber_router=None):
     """Initializes and starts the SMPTE2138 Bridge manager."""
     global _bridge_manager
@@ -47,7 +51,8 @@ def start_bridge(mqtt_connection_manager=None, subscriber_router=None):
 
         _bridge_manager = SMPTE2138BridgeManager(mqtt_conn, sub_router)
         _bridge_manager.start()
-        matrix_log("comms", "smpte2138", "start_bridge", "✅ SMPTE2138 Bridge started.", "SUCCESS")
+        if _is_debug():
+            matrix_log("comms", "smpte2138", "start_bridge", "✅ SMPTE2138 Bridge started.", "SUCCESS")
     return _bridge_manager
 
 def start_monitor(mqtt_connection_manager=None, subscriber_router=None):
@@ -61,7 +66,8 @@ def start_monitor(mqtt_connection_manager=None, subscriber_router=None):
 
         _monitor_manager = SMPTE2138MonitorManager(mqtt_conn, sub_router)
         _monitor_manager.start()
-        matrix_log("comms", "smpte2138", "start_monitor", "✅ SMPTE2138 Monitor started.", "SUCCESS")
+        if _is_debug():
+            matrix_log("comms", "smpte2138", "start_monitor", "✅ SMPTE2138 Monitor started.", "SUCCESS")
     return _monitor_manager
 
 def start(mqtt_connection_manager=None, subscriber_router=None, **kwargs):
@@ -69,10 +75,14 @@ def start(mqtt_connection_manager=None, subscriber_router=None, **kwargs):
     Initializes and starts the SMPTE2138 Bridge and Monitor managers.
     Accepts external MQTT connection and subscriber router.
     """
-    matrix_log("comms", "smpte2138", "start", "🚀 [ST2138] Starting SMPTE2138 services...", "INFO")
+    if _is_debug():
+        matrix_log("comms", "smpte2138", "start", "🚀 [ST2138] Starting SMPTE2138 services...", "INFO")
+    
     start_bridge(mqtt_connection_manager, subscriber_router)
     start_monitor(mqtt_connection_manager, subscriber_router)
-    matrix_log("comms", "smpte2138", "start", "✅ SMPTE2138 services started.", "SUCCESS")
+    
+    if _is_debug():
+        matrix_log("comms", "smpte2138", "start", "✅ SMPTE2138 services started.", "SUCCESS")
 
 def stop():
     """
@@ -80,7 +90,8 @@ def stop():
     """
     global _bridge_manager, _monitor_manager
 
-    matrix_log("comms", "smpte2138", "stop", "🛑 [ST2138] Stopping Bridge and Monitor managers...", "INFO")
+    if _is_debug():
+        matrix_log("comms", "smpte2138", "stop", "🛑 [ST2138] Stopping Bridge and Monitor managers...", "INFO")
 
     if _bridge_manager:
         _bridge_manager.stop()
@@ -89,7 +100,8 @@ def stop():
         _monitor_manager.stop()
         _monitor_manager = None
 
-    matrix_log("comms", "smpte2138", "stop", "✅ SMPTE2138 managers stopped.", "INFO")
+    if _is_debug():
+        matrix_log("comms", "smpte2138", "stop", "✅ SMPTE2138 managers stopped.", "INFO")
 
 def status():
     """
@@ -107,10 +119,6 @@ def status():
         status_report["monitor"] = {"running": False, "message": "Not initialized"}
 
     return status_report
-
-# Standalone main() function is removed.
-# def main(): ...
-
 
 def run_tests():
     """
@@ -155,11 +163,6 @@ def run_tests():
         print(f"🛑 [ERROR] {Path(__file__).parent.name}: Test discovery failed: {e}")
         return False
 
-def start():
-    """Start the module services."""
-    print(f"🚀 [START] Starting {Path(__file__).parent.name} services...")
-    main()
-
 if __name__ == "__main__":
     # Absolute FIRST action: run tests
     if not run_tests():
@@ -181,8 +184,4 @@ if __name__ == "__main__":
         # Default standalone action if no args
         start()
 
-    "start",
-    "stop",
-    "status",
-    "run_tests",
 __all__ = ["start", "stop", "status", "run_tests"]

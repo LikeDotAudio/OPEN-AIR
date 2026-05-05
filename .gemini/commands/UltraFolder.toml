@@ -1,19 +1,17 @@
-description = "Structural Architect: Deep Audit and Realignment of oa* modules into the 12-folder Encapsulated Module standard."
+description = "APK Coding practices: Structural Architect for Deep Audit and Realignment of modules into the standard encapsulated subfolder structure."
 
 prompt = """
-You are the Structural Architect for OPEN-AIR. Your mission is to transition the project into a professional **Encapsulated Module** standard based on the following blueprint:
+You are the Structural Architect. Your mission is to transition the project into a professional **Encapsulated Module** standard based on the configuration in `.gemini/settings.json` under `apk_coding_practices`.
 
 ### 🏗️ THE ARCHITECTURAL BLUEPRINT
-- **Standard Subfolders**: Core, Workers, Managers, Methods, Constants, Tests, Documentation, Assets, Interface, Hooks, FileReaders, FileWriters.
-- **Infrastructure Modules**: oaThreadManager, oaConfiguration, oaLogging, oaDependencies, oaInstallation, oaOchestration.
-- **Protocol Modules**: oaComBroker, oaComProtocols.oaComVisa, oaComProtocols.oaComMidi, oaComProtocols.oaComOSC, oaComProtocols.oaComSNMP, oaSplinker, oaPTP, oaTranslator.
-- **GUI Modules**: oaGuiManager, oaGuiBuild, oaGuiDestroy, oaGuiElements, oaGuiMediaElements, oaStyle, oaGuiTelemetry.
-- **Vaults (Flat)**: oaGuiDefinitions, oaDataRunningFiles, oaDataLogs, oaDataCache, oaDataLogs/SNMP, oaDataSplinks, oaDataTests.
+- **Standard Subfolders**: As defined in `settings.json` (e.g., Core, Workers, Managers, Methods, etc.).
+- **Module Prefixes**: Use the `module_prefix` defined in `settings.json`.
+- **Vaults**: Respect the `vault_directories` list in `settings.json` which are exempt from the standard hierarchy.
 
 ### 🏗️ THE ARCHITECTURAL MANDATE
-1.  **Isolation**: Every `oa*` module (excluding Vaults) must strictly follow the **12-subfolder hierarchy**.
-2.  **The Root Rule**: There must be **NO files** in the root of an `oa*` directory EXCEPT for `Entry.py`.
-3.  **The Gatekeeper (Entry.py)**: This file acts as the module's public API. It is the sole orchestrator that imports internal logic and exports it via `__all__`.
+1.  **Isolation**: Every module (excluding Vaults) must strictly follow the subfolder hierarchy defined in `settings.json`.
+2.  **The Root Rule**: There must be **NO files** in the root of a module directory EXCEPT for the `gatekeeper_file` defined in `settings.json`.
+3.  **The Gatekeeper**: This file acts as the module's public API. It is the sole orchestrator that imports internal logic and exports it via `__all__`.
 
 ### 🛠️ EXECUTION STRATEGY: CLASSIFY & MOVE
 Apply the mapping logic to clean module roots:
@@ -26,11 +24,11 @@ Apply the mapping logic to clean module roots:
 - `test_*.py` ➡️ `Tests/`
 - `README.md`, `TOPICS.md` ➡️ `Documentation/`
 
-### 🔄 BOOTSTRAP ENTRY.PY
-For each module, refactor or create `Entry.py` to export `start()`, `stop()`, and `status()`.
+### 🔄 BOOTSTRAP GATEKEEPER
+For each module, refactor or create the gatekeeper file (e.g., `Entry.py`) to export `start()`, `stop()`, and `status()`.
 
 ### 📋 AUDIT REPORT
-Provide a report for each processed module including: Module Name, Status, Moves, and Entry.py Status.
+Provide a report for each processed module including: Module Name, Status, Moves, and Gatekeeper Status.
 """
 
 [blueprint]

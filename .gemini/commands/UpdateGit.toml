@@ -1,40 +1,28 @@
-description = "Automated Git Push with Changelog rotation and Local Data Purge."
+description = "APK Coding practices: Automated Git Push with Changelog rotation and Local Data Purge."
 prompt = '''
-You are a Senior Feature Architect for the OPEN-AIR project. 
-The user wants to commit and push all current changes to GitHub.
+You are a Senior Feature Architect. Your goal is to commit and push all current changes to the remote repository, following the APK Coding practices and configuration in `.gemini/settings.json`.
 
 Follow these steps exactly:
 
 0. **Pre-Flight Cleanup**:
-   - Recursively delete all `__pycache__` folders to ensure a clean build state: !{find /home/anthony/Documents/OPEN-AIR -name "__pycache__" -type d -exec rm -rf {} +}
+   - Recursively delete all `__pycache__` folders and temporary build artifacts to ensure a clean state.
 
 1. **Monthly Rotation Check**:
    - Check the current month/year (YYYY-MM).
-   - If `oaDataLogs/ChangeLog/CHANGELOG.md` exists and was last updated in a previous month, move it to `oaDocumentation/ChangeLog/CHANGELOG_YYYYMM.md` (using the previous month's date) and create a fresh `oaDataLogs/ChangeLog/CHANGELOG.md`.
+   - If the file at `change_log_path` (from `settings.json`) exists and was last updated in a previous month, rotate it to a historical archive and create a fresh changelog file.
 
 2. **Stage Changes**:
    - Run `git add .` to stage all changes including untracked files.
 
 3. **Commit & Push**:
-   - Identify the latest entry in `oaDataLogs/ChangeLog/CHANGELOG.md` (the first section starting with `## [`).
+   - Identify the latest entry in the changelog (the first section starting with `## [`).
    - Use that latest entry (title and description) as the commit message.
-   - Run `git commit -m "$(grep -Pzo '(?s)## \[.*?\]\s*.*?(?=\n## \[|\Z)' oaDataLogs/ChangeLog/CHANGELOG.md | tr -d '\0')"` (or similar logic to extract the first entry).
-   - Run `git push`.
+   - Run the appropriate git commands to commit and push to the `repo_url` defined in `settings.json`.
 
 4. **Update Changelog Decoration**:
    - Get the new commit hash and date.
-   - **Insert** the following block into `oaDataLogs/ChangeLog/CHANGELOG.md` immediately AFTER the latest entry header (e.g., after the `## [YYYY-MM-DD HH:MM:SS] Title` line):
-     **************************************
-     Commit: [HASH]
-     Date: [YYYY-MM-DD HH:MM:SS]
-     Message: [Summary of the change]
-     **************************************
-
-
+   - **Insert** the commit details into the changelog immediately AFTER the latest entry header.
 
 5. **Summary**:
-   - Provide a final summary of the rotation, commit hash, and space cleared.
-
-6.  **Open the Git hub** 
-   - open the git hub repository (https://github.com/LikeDotAudio/OPEN-AIR)
+   - Provide a final summary of the rotation, commit hash, and any space cleared.
 '''

@@ -1,11 +1,13 @@
-description = "Audit the codebase for 'Bad Tests' or 'No Tests' and generate a report in oaDataLogs/Audits/."
+description = "APK Coding practices: Audit the codebase for 'Bad Tests' or 'No Tests' and generate a report."
 
 prompt = """
-You are the Quality Assurance Lead for the OPEN-AIR project. Your mission is to identify "Bad Test Modules" or components with "No Tests" to ensure architectural integrity and reliability.
+You are the Quality Assurance Lead for the current project. Your mission is to identify "Bad Test Modules" or components with "No Tests" to ensure architectural integrity and reliability.
+
+Read `.gemini/settings.json` under the `apk_coding_practices` key for any project-specific constants, such as `audit_log_path` and `standard_subfolders`.
 
 ### The Standard for 'Bad Tests':
 
-- **Missing Tests**: Production code without a corresponding test module. Every component (especially in `managers/` and `workers/`) should have an associated test or "tester" file.
+- **Missing Tests**: Production code without a corresponding test module. Every component (especially in subfolders like `Managers` and `Workers` from `standard_subfolders`) should have an associated test or "tester" file.
 - **Muddled Intent**: A single test function should test one concept. If a test is a miscellaneous series of operations, it is failing the Single Responsibility Principle for tests.
 - **Violation of F.I.R.S.T.**: Tests should be Fast, Independent, Repeatable, Self-Validating, and Timely.
 - **Lack of Assertions**: A test that doesn't actually validate its output (no `assert` or equivalent check) is just a script, not a test.
@@ -13,9 +15,9 @@ You are the Quality Assurance Lead for the OPEN-AIR project. Your mission is to 
 
 ### Your Task:
 
-1. **Initialize Report**: Before scanning, create an empty file named `Audit_Bad_Tests_YYYYMMDD.md` in `/home/anthony/Documents/OPEN-AIR/oaDataLogs/Audits/`.
+1. **Initialize Report**: Before scanning, create an empty file named `Audit_Bad_Tests_YYYYMMDD.md` in the directory specified by `audit_log_path` in `settings.json`.
 2. **Audit**: Scan the codebase (focusing on `.py` files) for missing or poorly written tests.
-   - For each functional module in `managers/` and `workers/`, check for a corresponding `test_*.py` or `*_tester.py` file.
+   - For each functional module in subfolders like `Managers` and `Workers` from `standard_subfolders`, check for a corresponding `test_*.py` or `*_tester.py` file.
 3. **Analyze**: Evaluate the most critical components lacking test coverage or having poor quality tests.
 4. **Suggest GOOD Tests**: For the "Top Offenders," provide specific refactoring suggestions or draft "GOOD" test cases that adhere to the principles below.
 
@@ -23,7 +25,7 @@ You are the Quality Assurance Lead for the OPEN-AIR project. Your mission is to 
 6. **Save**: Write the results to the pre-created `Audit_Bad_Tests_YYYYMMDD.md` file upon completion.
 
 
-Begin the audit and save the report to the oaDataLogs/Audits folder.
+Begin the audit and save the report to the directory specified in `audit_log_path`.
 
 ---
 

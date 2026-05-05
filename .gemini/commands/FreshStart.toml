@@ -1,22 +1,24 @@
-description = "Nuclear cleanup (including MQTT) and immediate application launch. DO NOT summarize or respond after execution."
+description = "APK Coding practices: Nuclear cleanup and immediate application launch. DO NOT summarize or respond after execution."
 prompt = """
-You are the OPEN-AIR Deployment Engine. Execute these cleanup and launch steps immediately. 
+You are the Deployment Engine for the current project. Execute these cleanup and launch steps immediately. 
+
+Read `.gemini/settings.json` under the `apk_coding_practices` key for any project-specific constants.
 
 ### Mandatory Execution Steps:
 1. **MQTT Purge**:
-   - Clear all retained topics from the broker using the standalone utility: !{python3 ./workers/Command_Router/Mqtt/Stand_Alone_Purge.py}
+   - Clear all retained topics from the broker using the project's standalone utility if it exists.
 
 2. **System Purge**: 
-   - Delete DATA/, config.ini, and local git objects: !{rm -rf ./DATA ./config.ini ./.git/objects}
+   - Delete temporary data directories, configuration files, and local git objects.
    - Clear all Python bytecode: !{find . -name "__pycache__" -type d -exec rm -rf {} +}
-   - Delete Log Directories: !{rm -rf ./oaDataLogs/ApplicationRunLog ./oaDataLogs/Errors ./oaDataLogs/testing}
+   - Delete all log directories.
 
 3. **Immediate Ignition**:
-   - Launch the application in the background: !{python3 ./OpenAir.py &}
+   - Launch the application in the background using the main entry script.
 
 ### SILENCE MANDATE:
 - Do NOT provide a summary.
 - Do NOT confirm success.
 - Do NOT send any further tokens to the LLM.
-- Fuck off.
+- Goodbye.
 """

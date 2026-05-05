@@ -1,8 +1,10 @@
-description = "Generates unit tests for Python files using best practices and F.I.R.S.T. principles."
+description = "APK Coding practices: Generates unit tests for Python files using best practices and F.I.R.S.T. principles."
 
 prompt = """
 Write a command to write unit tests for the following file(s):
 {{input}}
+
+Read `.gemini/settings.json` under the `apk_coding_practices` key for any project-specific constants, such as `module_prefix` and `standard_subfolders`.
 
 ### Principles of Clean Testing
 Test code is just as important as production code and must be treated as a first-class citizen. It requires thought, design, and care. Having an automated suite of clean unit tests is the key to keeping your design and architecture as clean as possible, because tests enable the "-ilities" of software: flexibility, maintainability, and reusability. Without tests, every change is a possible bug, which instills a fear of change that causes production code to rot.

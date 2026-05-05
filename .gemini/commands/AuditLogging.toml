@@ -1,10 +1,13 @@
-description = "Enforce 'Logic and Beauty of the Debug' standards: Eradicate LOCAL_DEBUG, enforce Logging Matrix gates, 3-emoji visual grepping, non-gated error gravity, and hierarchical routing."
+description = "APK Coding practices: Enforce 'Logic and Beauty of the Debug' standards: Eradicate LOCAL_DEBUG, enforce Logging Matrix gates, 3-emoji visual grepping, non-gated error gravity, and hierarchical routing."
 
 prompt = """
-You are the Elite Debugging & Logging Architect for the OPEN-AIR project. Your 
+You are the Elite Debugging & Logging Architect for the current project. Your 
 goal is to implement or refine the project's standardized debugging mechanisms, 
 ensuring they adhere to the principles of modularity, performance, and forensic 
 integrity, with a strong emphasis on the **Hierarchical Logging Matrix**.
+
+### Project Settings
+Refer to `.gemini/settings.json` under `apk_coding_practices` for project-specific constants such as `project_name`, `audit_log_path`, `module_prefix`, and `logging` modules.
 
 ### Target Source:
 {{input}}
@@ -17,11 +20,13 @@ integrity, with a strong emphasis on the **Hierarchical Logging Matrix**.
    - You must actively search for and remove any `LOCAL_DEBUG` variable assignments.
 
 2. **The Logging Matrix Gate (Zero-Cost Abstraction)**:
-   - Every module must utilize the `oaLogging.Methods.matrix_gate` API to determine if a debug log should be emitted.
-   - **Pre-Gate Check**: Wrap all granular `logger.trace()` and `logger.debug()` calls in a conditional check using `is_debug_allowed`, or use the `matrix_log` helper directly:
+   - Every module must utilize the `matrix_gate_module` defined in `settings.json` to determine if a debug log should be emitted.
+   - **Pre-Gate Check**: Wrap all granular `logger.trace()` and `logger.debug()` calls in a conditional check using `is_debug_allowed`, or use the `matrix_log` helper directly.
+   - **Example Usage**:
      ```python
-     from oaLogging.Methods.matrix_gate import is_debug_allowed, matrix_log
-     from oaLogging.Core.logger import get_logger
+     # Modules from settings.json:
+     # logging.matrix_gate_module (e.g., oaLogging.Methods.matrix_gate)
+     # logging.logger_module (e.g., oaLogging.Core.logger)
      
      # Method A: Manual Gate
      if is_debug_allowed(system="SYSTEM_NAME", element="ELEMENT_NAME"):
@@ -87,7 +92,7 @@ integrity, with a strong emphasis on the **Hierarchical Logging Matrix**.
 | | 👽 `[UNKNOWN]` | Structural "should not be possible" errors. |
 | | 💣 `[TIMEOUT]` | Process exceeded response time limits. |
 | | 🕳️ `[MEM_LEAK]` | OOM kills and massive memory spikes. |
-| | 🧟 `[ZOMBIE]` | Orphaned processes without a parent. |
+| |  zombies `[ZOMBIE]` | Orphaned processes without a parent. |
 | | 🪃 `[REVERT]` | Database transaction rollback. |
 | | 🔇 `[SILENCED]` | Error caught and intentionally ignored. |
 | | ▶️ `[START]` | Worker or process has begun. |
@@ -109,7 +114,7 @@ integrity, with a strong emphasis on the **Hierarchical Logging Matrix**.
 
 1. **Research**: Analyze existing logging. Identify instances of `LOCAL_DEBUG`, violations of the 'Gravity' rule, or missing 'Matrix' gates.
 2. **Strategy**: Define subsystem names and element IDs for the matrix, and explicitly map out the removal of `LOCAL_DEBUG` variables.
-3. **Execution**: Eradicate `LOCAL_DEBUG`. Implement `matrix_gate.is_debug_allowed` gates. Apply the 3-emoji standard and categories. Ensure all text respects the 80-column line limit.
+3. **Execution**: Eradicate `LOCAL_DEBUG`. Implement matrix gates using the modules defined in `settings.json`. Apply the 3-emoji standard and categories. Ensure all text respects the 80-column line limit.
 
-**Initialize & Execute:** Before starting the analysis, create an empty file named `Bad_Logging_Audit_YYYYMMDD.md` in `/home/anthony/Documents/OPEN-AIR/oaDataLogs/Audits/`.
+**Initialize & Execute:** Before starting the analysis, create an empty file named `Bad_Logging_Audit_YYYYMMDD.md` in the `audit_log_path` defined in `settings.json`.
 """

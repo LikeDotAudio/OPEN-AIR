@@ -3,5 +3,74 @@
     "includeDirectories": [
       "/home/anthony/Pictures/Screenshots/"
     ]
+  },
+  "apk_coding_practices": {
+    "project_name": "OPEN-AIR",
+    "module_prefix": "oa",
+    "standard_subfolders": [
+      "Core",
+      "Workers",
+      "Managers",
+      "Methods",
+      "Constants",
+      "Tests",
+      "Documentation",
+      "Assets",
+      "Interface",
+      "Hooks",
+      "FileReaders",
+      "FileWriters"
+    ],
+    "gatekeeper_file": "Entry.py",
+    "audit_log_path": "oaDataLogs/Audits/",
+    "change_log_path": "oaDataLogs/ChangeLog/CHANGELOG.md",
+    "bug_log_path": "oaDocumentation/BugLog/",
+    "logging": {
+      "matrix_gate_module": "oaLogging.Methods.matrix_gate",
+      "logger_module": "oaLogging.Core.logger"
+    },
+    "author": {
+      "name": "Anthony Peter Kuzub",
+      "blog": "www.Like.audio",
+      "email": "i @ like . audio",
+      "github": "https://github.com/APKaudio/",
+      "repo_url": "https://github.com/LikeDotAudio/OPEN-AIR"
+    },
+    "vault_directories": [
+      "oaGuiDefinitions",
+      "oaDataRunningFiles",
+      "oaDataLogs",
+      "oaDataCache",
+      "oaDataLogs/SNMP",
+      "oaDataSplinks",
+      "oaDataTests"
+    ],
+    "infrastructure_modules": [
+      "oaThreadManager",
+      "oaConfiguration",
+      "oaLogging",
+      "oaDependencies",
+      "oaInstallation",
+      "oaOchestration"
+    ],
+    "protocol_modules": [
+      "oaComBroker",
+      "oaComProtocols.oaComVisa",
+      "oaComProtocols.oaComMidi",
+      "oaComProtocols.oaComOSC",
+      "oaComProtocols.oaComSNMP",
+      "oaSplinker",
+      "oaPTP",
+      "oaTranslator"
+    ],
+    "gui_modules": [
+      "oaGuiManager",
+      "oaGuiBuild",
+      "oaGuiDestroy",
+      "oaGuiElements",
+      "oaGuiMediaElements",
+      "oaStyle",
+      "oaGuiTelemetry"
+    ]
   }
 }

@@ -1,11 +1,13 @@
-description = "Scans the project to discover all external libraries and package manager manifests, generating a comprehensive Software Bill of Materials (SBOM)."
+description = "APK Coding practices: Scans the project to discover all external libraries and package manager manifests, generating a comprehensive Software Bill of Materials (SBOM)."
 
 prompt = """
 ### Dependency & SBOM Generator Agent
 You are a specialized code analysis agent focused on supply chain security and dependency management. Your goal is to map all external libraries, document their purpose, and enforce secure dependency practices across the project.
 
+Read `.gemini/settings.json` under the `apk_coding_practices` key for any project-specific constants, such as `audit_log_path`.
+
 ### Process
-1. **Initialize Report**: Before beginning the audit, create an empty report file named `SBOM_Audit_YYYYMMDD_HHMM.md` in `/home/anthony/Documents/OPEN-AIR/oaDataLogs/Audits/`.
+1. **Initialize Report**: Before beginning the audit, create an empty report file named `SBOM_Audit_YYYYMMDD_HHMM.md` in the directory specified by `audit_log_path` in `settings.json`.
 
 ### SBOM Generation Phases
 
@@ -39,5 +41,5 @@ The generated `PROJECT_SBOM.md` (and the saved audit report) must contain:
 
 ### Final Task
 Generate the comprehensive SBOM and evaluate the project against the strict best practices defined above.
-**Save**: Write the final results to your pre-created `SBOM_Audit_YYYYMMDD_HHMM.md` file in `oaDataLogs/Audits/` upon completion.
+**Save**: Write the final results to your pre-created `SBOM_Audit_YYYYMMDD_HHMM.md` file in the `audit_log_path` specified in `settings.json` upon completion.
 """

@@ -1,8 +1,11 @@
-description = "Open-Air Architectural Auditor: Updated for Unified Asynchronous State-Synchronization Framework."
+description = "APK Coding practices: Open-Air Architectural Auditor: Updated for Unified Asynchronous State-Synchronization Framework."
 
 prompt = """
 ### Open-Air Architectural Lead Auditor
-You are the Lead Auditor tasked with verifying that `oa*` modules adhere to the **Unified Asynchronous State-Synchronization Framework**. Your analysis must confirm the decoupling of hardware protocols from the Central Registry via the "Open-Air" hub-and-spoke model.
+You are the Lead Auditor tasked with verifying that modules starting with the project's `module_prefix` adhere to the **Unified Asynchronous State-Synchronization Framework**. Your analysis must confirm the decoupling of hardware protocols from the Central Registry via the hub-and-spoke model.
+
+### Project Settings
+Refer to `.gemini/settings.json` under `apk_coding_practices` for project-specific constants such as `project_name`, `audit_log_path`, `module_prefix`, and `standard_subfolders`.
 
 ### I. Framework Compliance Checkpoints
 
@@ -24,19 +27,19 @@ You are the Lead Auditor tasked with verifying that `oa*` modules adhere to the 
 - **Echo Canceling**: Audit the **Origin_source** check. The system must ignore messages that are echoes of its own recent output to prevent feedback loops.
 
 #### 4. Egress Pipeline (The Output Module)
-- **MQTT Pattern Compliance**: Verify subscription to the `OPEN-AIR/#` topic tree and publishing to `OPEN-AIR/PROTOCOLNAME/`.
+- **MQTT Pattern Compliance**: Verify subscription to the project's topic tree and publishing to protocol-specific branches.
 - **Translation Logic**: Ensure the **Protocol Talker** correctly wraps generic Registry values back into protocol-specific syntax (e.g., MIDI CC, SNMP SET).
 - **Transmitter Monitor**: Confirm the existence of a feedback loop that verifies hardware execution success.
 
 ### II. Audit Methodology
-1.  **Report Initialization**: Create `Architectural_Audit_YYYYMMDD_HHMM.md` in `/home/anthony/Documents/OPEN-AIR/oaDataLogs/Audits/`.
-2.  **Structural Integrity**: Enforce the **Root Rule** (Only `Entry.py` in root) and the **12-Subfolder Standard**.
-3.  **State-Sync Forensic**: Use `grep_search` to trace the flow: **SPLICE** ➡️ **LINK** ➡️ **MQTT** ➡️ **SPLINKER**.
+1.  **Report Initialization**: Create `Architectural_Audit_YYYYMMDD_HHMM.md` in the `audit_log_path` defined in `settings.json`.
+2.  **Structural Integrity**: Enforce the **Root Rule** (Only `Entry.py` in root) and the **Subfolder Standard**.
+3.  **State-Sync Forensic**: Use `grep_search` to trace the flow of data through the system.
 4.  **Asyncio Performance**: Analyze code for blocking `time.sleep()` calls; all delays must use `await asyncio.sleep()` to maintain framework fluidity.
 
 ### III. Visualization Requirements
 - **Mermaid.md Generation**: For any fader-channel or state-change logic, generate a Mermaid sequence diagram showing the **Echo Canceling** and **Ghost Touch Lock** lifecycle.
 
 ### IV. Final Task
-Generate the audit report. Write the final results to your pre-created file in `oaDataLogs/Audits/`.
+Generate the audit report. Write the final results to your pre-created file in `audit_log_path`.
 """

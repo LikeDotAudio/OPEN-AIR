@@ -173,10 +173,3 @@ if __name__ == "__main__":
     # Resolve the project root relative to this utility's location
     project_root_path = Path(__file__).resolve().parents[2]
     toggle_debug_flags(project_root_path)
-oot_path)
-ect_root_path = Path(__file__).resolve().parents[2]
-    toggle_debug_flags(project_root_path)
-oot_path)
-ct_root_path)
-= Path(__file__).resolve().parents[2]
-    toggle_debug_flags(project_root_path)

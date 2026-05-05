@@ -5,7 +5,6 @@ from oaLogging.Methods.matrix_gate import matrix_log
 #
 # Description: A worker module to process a selected preset and push the corresponding
 
-... User modified the `new_string` content to be: # presets/preset_pusher.py
 #
 # A worker module to process a selected preset and push the corresponding
 # SCPI commands via MQTT to configure the instrument.

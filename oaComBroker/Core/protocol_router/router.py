@@ -311,8 +311,9 @@ class ProtocolRouter:
         self.monitor.append_to_firehose(message)
         self.monitor.broadcast_to_observers(message)
 
-        val_str = str(message['value'])[:100] + ("..." if len(str(message['value'])) > 100 else "")
-        matrix_log("comms", "broker", "_process_pipeline", f"📥📡📤 [ROUTER] {strategy} >> {message['topic']}: {val_str}", "DEBUG")
+        if getattr(app_constants, "ROUTER_DISPATCH_LOGS", True):
+            val_str = str(message['value'])[:100] + ("..." if len(str(message['value'])) > 100 else "")
+            matrix_log("comms", "broker", "_process_pipeline", f"📥📡📤 [ROUTER] {strategy} >> {message['topic']}: {val_str}", "DEBUG")
 
         self._dispatch_by_strategy(strategy, message)
 

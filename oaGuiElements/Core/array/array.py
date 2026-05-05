@@ -37,7 +37,8 @@ class BuilderArrayCreator(SyncBehavior):
 
         # 1. Scaffolding
         main_container = self._setup_scaffolding(parent_widget, config_data, context, **kwargs)
-        interaction_view_states = InteractionViewStates(main_container)
+        builder = getattr(context, 'builder_instance', kwargs.get('builder_instance'))
+        interaction_view_states = InteractionViewStates(main_container, builder=builder)
         main_container.bind("<Button-3>", interaction_view_states.show_menu)
 
         # 2. Grid Management

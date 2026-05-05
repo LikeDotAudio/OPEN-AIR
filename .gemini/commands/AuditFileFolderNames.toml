@@ -1,28 +1,28 @@
-description = "Structural Architect: Audit all oa* modules for 12-folder standard, Entry.py enforcement, and under-populated zones."
+description = "APK Coding practices: Structural Architect: Audit all modules for 12-folder standard, Entry.py enforcement, and under-populated zones."
 
 prompt = """
-You are the Structural Architect for OPEN-AIR. Your mission is to audit the codebase to ensure all `oa*` modules conform to the professional **Encapsulated Module** standard.
+You are the Structural Architect for the current project. Your mission is to audit the codebase to ensure all modules starting with the project's `module_prefix` conform to the professional **Encapsulated Module** standard.
+
+### Project Settings
+Refer to `.gemini/settings.json` under `apk_coding_practices` for project-specific constants such as `project_name`, `audit_log_path`, `module_prefix`, and `standard_subfolders`.
 
 ### 🏗️ THE ARCHITECTURAL MANDATE (The Audit Criteria)
-1.  **The 12-Subfolder Hierarchy**: Every `oa*` module (excluding Data Vaults) must strictly follow this structure:
-    - `Core`, `Workers`, `Managers`, `Methods`, `Constants`, `Tests`, `Documentation`, `Assets`, `Interface`, `Hooks`.
-    - `FileReaders`: Logic for pulling data from disk (JSON/CSV/Log parsing).
-    - `FileWriters`: Logic for pushing data to disk (Reporting/State saving).
-2.  **The Root Rule**: There must be **NO files** in the root of an `oa*` directory EXCEPT for `Entry.py`.
+1.  **The Subfolder Hierarchy**: Every module (excluding Data Vaults) must strictly follow the `standard_subfolders` defined in `settings.json` (e.g., `Core`, `Workers`, `Managers`, `Methods`, `Constants`, `Tests`, `Documentation`, `Assets`, `Interface`, `Hooks`, `FileReaders`, `FileWriters`).
+2.  **The Root Rule**: There must be **NO files** in the root of a module directory EXCEPT for `Entry.py`.
 3.  **The Gatekeeper (Entry.py)**: This file must exist as the module's public API and sole orchestrator. If it is missing, or if other files (like `manager.py` or `worker.py`) are sitting at the root, it is a violation.
 4.  **Under-Populated Zones**: Identify modules that have the folders but they are empty, or modules that are missing these folders entirely.
 
 ### 🛠️ YOUR TASK:
-1.  **Deep Audit**: Scan every `oa*` directory in the project.
+1.  **Deep Audit**: Scan every directory starting with `module_prefix` in the project.
 2.  **Identify Violations**:
-    - **Root Violations**: List any files sitting in the root of an `oa*` module that are NOT `Entry.py`.
-    - **Missing Orchestrator**: Flag any `oa*` module that lacks an `Entry.py`.
-    - **Structural Gaps**: Flag any `oa*` module missing any of the 12 standard subfolders.
+    - **Root Violations**: List any files sitting in the root of a module that are NOT `Entry.py`.
+    - **Missing Orchestrator**: Flag any module that lacks an `Entry.py`.
+    - **Structural Gaps**: Flag any module missing any of the standard subfolders.
     - **Under-Populated Folders**: Identify standard subfolders that are empty (missing their `__init__.py` or logic).
-    - **Zero-File Folders**: List any folders (at any level within `oa*` modules) that contain zero files. Suggest these can be deleted as part of a structural cleanup procedure.
+    - **Zero-File Folders**: List any folders (at any level within modules) that contain zero files. Suggest these can be deleted as part of a structural cleanup procedure.
     - **Naming Violations**: Flag files/folders that don't reveal their intention or use "noise words" (e.g., `info`, `data`).
 3.  **Analyze**: Evaluate which modules are the furthest from the "Encapsulated Module" standard.
-4.  **Report**: Before scanning, create an empty file named `Structural_Audit_YYYYMMDD.md` in `/home/anthony/Documents/OPEN-AIR/oaDataLogs/Audits/`. Write your final detailed Markdown report to this file.
+4.  **Report**: Before scanning, create an empty file named `Structural_Audit_YYYYMMDD.md` in the `audit_log_path` defined in `settings.json`. Write your final detailed Markdown report to this file.
 
 ### 📋 REPORT STRUCTURE:
 - **Executive Summary**: Overall health of the module encapsulation.

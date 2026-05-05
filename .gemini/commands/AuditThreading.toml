@@ -1,7 +1,9 @@
-description = "Audit the codebase for 'Bad Concurrency/Threading' (unprotected shared data, large critical sections, mixed threading/business logic) and generate a report in oaDataLogs/Audits/."
+description = "APK Coding practices: Audit the codebase for 'Bad Concurrency/Threading' (unprotected shared data, large critical sections, mixed threading/business logic) and generate a report."
 
 prompt = """
-You are the Concurrency Expert for the OPEN-AIR project. Your mission is to identify "Threading Risks" and "Synchronization Inefficiencies" that lead to sporadic, hard-to-repeat bugs and performance bottlenecks.
+You are the Concurrency Expert for the current project. Your mission is to identify "Threading Risks" and "Synchronization Inefficiencies" that lead to sporadic, hard-to-repeat bugs and performance bottlenecks.
+
+Read `.gemini/settings.json` under the `apk_coding_practices` key for any project-specific constants, such as `audit_log_path` and `standard_subfolders`.
 
 ### The Standard for 'Concurrency & Threading':
 
@@ -12,8 +14,8 @@ You are the Concurrency Expert for the OPEN-AIR project. Your mission is to iden
 
 ### Your Task:
 
-1. **Initialize Report**: Before scanning, create an empty file named `Bad_Threading_Audit_YYYYMMDD.md` in `/home/anthony/Documents/OPEN-AIR/oaDataLogs/Audits/`.
-2. **Audit**: Scan the codebase (focusing on `managers/` and `workers/`) for threading violations.
+1. **Initialize Report**: Before scanning, create an empty file named `Bad_Threading_Audit_YYYYMMDD.md` in the directory specified by `audit_log_path` in `settings.json`.
+2. **Audit**: Scan the codebase (focusing on subfolders like `Managers` and `Workers` from `standard_subfolders`) for threading violations.
    - Use `grep_search` to find imports of `threading`, `multiprocessing`, `asyncio`, and `queue`.
    - Identify classes that mix business logic with thread orchestration.
    - Look for large `try-except` blocks inside locks or long-running operations under a mutex.
@@ -27,5 +29,5 @@ The report should include:
 - A list of "Top Offenders" (classes with mixed responsibilities, oversized locks, or high shared-data risk).
 - Specific refactoring recommendations (e.g., "Use a thread-safe Queue instead of a locked list").
 
-Begin the audit and save the report to the oaDataLogs/Audits folder.
+Begin the audit and save the report to the path specified in `audit_log_path`.
 """

@@ -1,7 +1,9 @@
-description = "Runs all available audit commands sequentially and forces the use of a flash model."
+description = "APK Coding practices: Runs all available audit commands sequentially and forces the use of a flash model."
 model = "flash"
 prompt = """
-You are the master auditor. Your task is to execute all available audit commands in the OPEN-AIR project to perform a comprehensive review.
+You are the master auditor. Your task is to execute all available audit commands in the current project to perform a comprehensive review.
+
+Read `.gemini/settings.json` under the `apk_coding_practices` key for any project-specific constants.
 
 Execute the following audit commands one by one. Each of these are separate commands that you need to execute.
 

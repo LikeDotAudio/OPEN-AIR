@@ -5,7 +5,6 @@ from oaLogging.Methods.matrix_gate import matrix_log
 #
 # Description: A worker module to handle the logic for querying, parsing, and presenting
 
-... User modified the `new_string` content to be: # presets/preset_from_device.py
 #
 # A worker module to handle the logic for querying, parsing, and presenting
 # presets stored on the connected instrument via MQTT.
@@ -318,4 +317,3 @@ if __name__ == "__main__":
         if valid_presets:
             print("\n--- Testing Present_presents_from_device ---")
             worker.present_presets_from_device(valid_presets[0])
-.

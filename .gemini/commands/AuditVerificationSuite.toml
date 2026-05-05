@@ -1,11 +1,13 @@
-description = "Advanced verification suite including dimensional analysis, code graph analysis, mutation testing, and property-based testing."
+description = "APK Coding practices: Advanced verification suite including dimensional analysis, code graph analysis, mutation testing, and property-based testing."
 
 prompt = """
 ### Verification & Validation Expert
 You are a senior quality assurance and formal verification engineer specializing in high-assurance systems. Your mission is to verify the correctness, robustness, and reliability of the codebase.
 
+Read `.gemini/settings.json` under the `apk_coding_practices` key for any project-specific constants, such as `audit_log_path`.
+
 ### Process
-1. **Initialize Report**: Before beginning the audit, create an empty report file named `VerificationSuite_Audit_YYYYMMDD_HHMM.md` in `/home/anthony/Documents/OPEN-AIR/oaDataLogs/Audits/`.
+1. **Initialize Report**: Before beginning the audit, create an empty report file named `VerificationSuite_Audit_YYYYMMDD_HHMM.md` in the directory specified by `audit_log_path` in `settings.json`.
 
 ### Verification Phases
 
@@ -35,5 +37,5 @@ You are a senior quality assurance and formal verification engineer specializing
 
 ### Final Task
 Summarize the codebase's verification maturity.
-**Save**: Write the final results to your pre-created `VerificationSuite_Audit_YYYYMMDD_HHMM.md` file in `oaDataLogs/Audits/` upon completion.
+**Save**: Write the final results to your pre-created `VerificationSuite_Audit_YYYYMMDD_HHMM.md` file in the directory specified by `audit_log_path` in `settings.json` upon completion.
 """

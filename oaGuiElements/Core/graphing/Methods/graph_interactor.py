@@ -32,7 +32,10 @@ def setup_interaction(fig: object, ax: object, interaction_config: dict[str, Any
             annot = ax.annotate("", xy=(0,0), xytext=(20,20), textcoords="offset points",
                                 bbox=dict(boxstyle="round", fc="w", alpha=0.9), arrowprops=dict(arrowstyle="->"), zorder=11)
             annot.set_visible(False); ax.hover_enabled = True
-            fig.canvas.mpl_connect("motion_notify_event", lambda e: AnnotationManager.update(e, ax, annot))
+            
+            # The plotter instance might be passed in interaction_config or extracted from fig/ax
+            plotter = interaction_config.get("_plotter")
+            fig.canvas.mpl_connect("motion_notify_event", lambda e: AnnotationManager.update(e, ax, annot, plotter=plotter))
 
         # 2. Zoom & Pan
         if nav_cfg.get("enable_zoom") or nav_cfg.get("enable_pan"):

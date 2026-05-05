@@ -11,7 +11,7 @@ class AnnotationManager:
     """Handles hover-based annotations, intersection dots, and vertical crosshair lines."""
 
     @staticmethod
-    def update(event, ax, annot):
+    def update(event, ax, annot, plotter=None):
         v_line = getattr(ax, "_hover_vline", None)
         dots = getattr(ax, "_hover_dots", [])
 
@@ -47,9 +47,24 @@ class AnnotationManager:
             if data_text or marker_text:
                 content = [f"X: {event.xdata:.2f}"] + data_text + (["---"] if data_text and marker_text else []) + marker_text
                 annot.set_text("\n".join(content)); annot.xy = (event.xdata, event.ydata); annot.set_visible(True)
-                ax.figure.canvas.draw_idle()
+                
+                if plotter:
+                    plotter._schedule_update()
+                else:
+                    ax.figure.canvas.draw_idle()
         else:
-            if annot.get_visible(): annot.set_visible(False)
-            if v_line: v_line.set_visible(False)
-            for d in dots: d.set_visible(False)
-            ax.figure.canvas.draw_idle()
+            if annot.get_visible():
+                annot.set_visible(False)
+                if plotter: plotter._schedule_update()
+                else: ax.figure.canvas.draw_idle()
+
+            if v_line and v_line.get_visible():
+                v_line.set_visible(False)
+                if plotter: plotter._schedule_update()
+                else: ax.figure.canvas.draw_idle()
+
+            for d in dots:
+                if d.get_visible():
+                    d.set_visible(False)
+                    if plotter: plotter._schedule_update()
+                    else: ax.figure.canvas.draw_idle()

@@ -22,9 +22,10 @@ from oaComProtocols.oaComSNMP.Constants.snmp_constants import OID_MAP_STR_LIMIT
 from oaComProtocols.oaComSNMP.Methods.snmp_utils import get_snmp_descriptor, get_snmp_node_id
 
 # Assuming SNMP_LOGGER is available and configured in the logging setup
-from oaLogging.Methods.matrix_gate import matrix_log
+from oaLogging.Methods.matrix_gate import matrix_log, is_debug_allowed
 
-# LOCAL_DEBUG can be set or passed if needed
+def _is_debug():
+    return is_debug_allowed(system="comms", element="snmp")
 
 class OidMapConverter:
     """
@@ -50,8 +51,9 @@ class OidMapConverter:
         """
         new_oid_map = {}
 
-        matrix_log("comms", "snmp", "build_oid_map",
-                   f"OidMapConverter: Updating OID map. Input size: {len(state_snapshot)}", "DEBUG")
+        if _is_debug():
+            matrix_log("comms", "snmp", "build_oid_map",
+                       f"OidMapConverter: Updating OID map. Input size: {len(state_snapshot)}", "TRACE")
 
         # for topic, payload in state_snapshot.items():
         #     # ⚡ FILTER: Skip System control/status, Router, and large Blobs
@@ -100,7 +102,8 @@ class OidMapConverter:
 
         self.oid_map = new_oid_map # Update internal map
 
-        matrix_log("comms", "snmp", "build_oid_map",
-                   f"OidMapConverter: OID map built. Active objects: {len(self.oid_map)}", "DEBUG")
+        if _is_debug():
+            matrix_log("comms", "snmp", "build_oid_map",
+                       f"OidMapConverter: OID map built. Active objects: {len(self.oid_map)}", "TRACE")
 
         return self.oid_map

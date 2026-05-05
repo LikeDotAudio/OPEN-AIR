@@ -5,11 +5,11 @@
 # Description: Brief summary of purpose
 
 from oaGuiElements.Core.graphing.Meter_to_display_units import (
-from oaLogging.Methods.matrix_gate import matrix_log
-import inspect
     HorizontalMeterWithText,
     VerticalMeter,
 )
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from oaLogging.Core.logger import builder_logger
 
 class MeterAdapter:

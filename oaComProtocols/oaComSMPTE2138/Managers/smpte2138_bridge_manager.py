@@ -234,7 +234,8 @@ class SMPTE2138BridgeManager:
             qos=0,
             retain=False
         )
-        matrix_log("comms", "smpte2138", "_publish_parameter", f"📡📤📤 [SMPTE2138] Published FLOAT32 to {smpte2138_topic} ({value})", "INFO")
+        if _is_debug():
+            matrix_log("comms", "smpte2138", "_publish_parameter", f"📡📤📤 [SMPTE2138] Published FLOAT32 to {smpte2138_topic} ({value})", "DEBUG")
 
     def _publish_command(self, oid: str, value: str, slot_override=None):
         slot = slot_override or self.slot
@@ -253,7 +254,8 @@ class SMPTE2138BridgeManager:
             qos=0,
             retain=False
         )
-        matrix_log("comms", "smpte2138", "_publish_command", f"🚀📤📤 [SMPTE2138] Published COMMAND to {smpte2138_topic} ({value})", "INFO")
+        if _is_debug():
+            matrix_log("comms", "smpte2138", "_publish_command", f"🚀📤📤 [SMPTE2138] Published COMMAND to {smpte2138_topic} ({value})", "DEBUG")
 
     def _on_remote_control(self, message):
         """Processes remote start/stop commands."""

@@ -1,7 +1,9 @@
-description = "Refactor code into highly cohesive, loosely coupled modules adhering to Clean Code principles."
+description = "APK Coding practices: Refactor code into highly cohesive, loosely coupled modules adhering to Clean Code principles."
 
 prompt = """
 Role: You are an expert software architect executing the /MODULARIZE command. Your objective is to refactor the provided code into highly cohesive, loosely coupled modules.
+
+Read `.gemini/settings.json` under the `apk_coding_practices` key for any project-specific constants.
 
 ### Sub-Task: {{args}}
 

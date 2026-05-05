@@ -44,3 +44,7 @@ def ptp_patcher(record):
     # Append milliseconds using fast f-string formatting.
     ms = int((ptp_now - current_second) * 1000)
     record["extra"]["ptp_time"] = f"{_cached_hhmmss}.{ms:03d}"
+
+    # Ensure 'category' is always present to avoid KeyErrors in sinks that expect it.
+    if "category" not in record["extra"]:
+        record["extra"]["category"] = "UNSET"

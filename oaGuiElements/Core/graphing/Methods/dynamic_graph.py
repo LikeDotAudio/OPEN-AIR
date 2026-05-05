@@ -111,7 +111,11 @@ class GraphPlotter(
         graph_styler.apply_style(self.ax, self.fig, self.widget_config, graph_styler.get_theme_style("dark"))
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] GraphPlotter '{self.widget_id}' visual styles applied.", level="SUCCESS")
 
-        graph_interactor.setup_interaction(self.fig, self.ax, self.widget_config, {"on_view_change": lambda x, y: None, "on_setting_change": lambda n, v: None, "on_add_marker": self._on_add_marker})
+        # Pass self as _plotter for throttled updates
+        interaction_config = self.widget_config.copy()
+        interaction_config["_plotter"] = self
+        
+        graph_interactor.setup_interaction(self.fig, self.ax, interaction_config, {"on_view_change": lambda x, y: None, "on_setting_change": lambda n, v: None, "on_add_marker": self._on_add_marker})
         for ds in self.widget_config.get("datasets", []):
             ds_id = ds.get("id")
             if ds_id:

@@ -24,15 +24,19 @@ class BuilderContextMenuMixin:
     def _setup_context_menu(self):
         """Initializes the Tkinter Menu and binds physical button events."""
         self.context_menu = tk.Menu(self, tearoff=0)
-        self.context_menu.add_command(label="WYSIWYG Editor", command=self._launch_wysiwyg_editor)
-        self.context_menu.add_command(label="Check Dependencies", command=self._run_dependency_audit)
-        self.context_menu.add_separator()
-        self.context_menu.add_command(label="Reload UI", command=self._force_rebuild_gui)
+        self.populate_context_menu(self.context_menu)
 
         # Physical Bindings
         target_widgets = [w for w in ['canvas', 'scroll_frame'] if getattr(self, w, None) is not None]
         for attr in target_widgets:
             getattr(self, attr).bind("<Button-3>", self._on_right_click)
+
+    def populate_context_menu(self, menu):
+        """Appends the builder context menu items to an existing menu."""
+        menu.add_command(label="WYSIWYG Editor", command=self._launch_wysiwyg_editor)
+        menu.add_command(label="Check Dependencies", command=self._run_dependency_audit)
+        menu.add_separator()
+        menu.add_command(label="Reload UI", command=self._force_rebuild_gui)
 
     def bind_context_menu(self, widget):
         """Standard API to attach the builder context menu to any UI element."""
@@ -63,6 +67,10 @@ class BuilderContextMenuMixin:
             self._terminate_active_editor()
 
         self._spawn_editor_process()
+
+    def _show_wysiwyg_editor(self):
+        """Alias for compatibility with the tab editor launcher."""
+        self._launch_wysiwyg_editor()
 
     def _is_editor_active(self):
         """Checks if a previously spawned editor is still running."""

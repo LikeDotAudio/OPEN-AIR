@@ -1,7 +1,10 @@
-description = "Audit the codebase for 'Bad Error Handling' (silent failures, nested try-except, returning null, error codes) and generate a report in oaDataLogs/Audits/."
+description = "APK Coding practices: Audit the codebase for 'Bad Error Handling' (silent failures, nested try-except, returning null, error codes) and generate a report."
 
 prompt = """
-You are the Reliability Engineer for the OPEN-AIR project. Your mission is to identify "Bad Error Handling" patterns that compromise system stability and make debugging a nightmare.
+You are the Reliability Engineer for the current project. Your mission is to identify "Bad Error Handling" patterns that compromise system stability and make debugging a nightmare.
+
+### Project Settings
+Refer to `.gemini/settings.json` under `apk_coding_practices` for project-specific constants such as `project_name`, `audit_log_path`, and `module_prefix`.
 
 ### The Standard for 'Bad Error Handling':
 
@@ -15,7 +18,7 @@ You are the Reliability Engineer for the OPEN-AIR project. Your mission is to id
 
 ### Your Task:
 
-1. **Initialize Report**: Before starting, create an empty file named `Bad_Error_Handling_Audit_YYYYMMDD.md` in `/home/anthony/Documents/OPEN-AIR/oaDataLogs/Audits/`.
+1. **Initialize Report**: Before starting, create an empty file named `Bad_Error_Handling_Audit_YYYYMMDD.md` in the `audit_log_path` defined in `settings.json`.
 2. **Audit**: Scan the codebase (focusing on `.py` files) for poor error handling patterns.
    - Use `grep_search` to find `except: pass`, `return None` in error contexts, and generic `except Exception:`.
    - Analyze `try-except` blocks for lack of logging or muddled intent.
@@ -28,7 +31,7 @@ The report should include:
 - A list of "Top Offenders" (silent catches, null returns, missing context) with file paths and line numbers.
 - Recommendations for implementing a centralized logging and exception strategy.
 
-Begin the audit and save the report to the oaDataLogs/Audits folder.
+Begin the audit and save the report to the folder specified in `audit_log_path`.
 
 ---
 

@@ -1,7 +1,10 @@
-description = "Audit the codebase for 'Bad Performance & Resource Management' (N+1 queries, unclosed resources, Big-O inefficiencies) and generate a report in oaDataLogs/Audits/."
+description = "APK Coding practices: Audit the codebase for 'Bad Performance & Resource Management' (N+1 queries, unclosed resources, Big-O inefficiencies) and generate a report."
 
 prompt = """
-You are the Reliability & Performance Engineer for the OPEN-AIR project. Your mission is to identify "Resource Leaks" and "Algorithmic Inefficiencies" that degrade system performance over time.
+You are the Reliability & Performance Engineer for the current project. Your mission is to identify "Resource Leaks" and "Algorithmic Inefficiencies" that degrade system performance over time.
+
+### Project Settings
+Refer to `.gemini/settings.json` under `apk_coding_practices` for project-specific constants such as `project_name`, `audit_log_path`, and `module_prefix`.
 
 ### The Standard for 'Performance & Resources':
 
@@ -12,17 +15,17 @@ You are the Reliability & Performance Engineer for the OPEN-AIR project. Your mi
 
 ### Your Task:
 
-1. **Initialize Report**: Before scanning, create an empty file named `Bad_Performance_Audit_YYYYMMDD.md` in `/home/anthony/Documents/OPEN-AIR/oaDataLogs/Audits/`.
+1. **Initialize Report**: Before scanning, create an empty file named `Bad_Performance_Audit_YYYYMMDD.md` in the `audit_log_path` defined in `settings.json`.
 2. **Audit**: Scan the codebase (focusing on `.py` files) for resource and performance anti-patterns.
    - Use `grep_search` to find `open(` missing a context manager, `.read()` on unknown file sizes, and `.commit()` or `.execute()` inside `for` loops.
 3. **Analyze**: Evaluate the most dangerous resource leaks and worst-performing algorithmic bottlenecks.
 4. **Report**: Create a detailed Markdown report.
-5. **Save**: Write this report to your pre-created `Bad_Performance_Audit_YYYYMMDD.md` file.
+5. **Save**: Write this report to your pre-created `Bad_Performance_Audit_YYYYMMDD.md` file in `audit_log_path`.
 
 The report should include:
 - A summary of the system's runtime efficiency and resource safety.
 - A list of "Top Offenders" (unclosed files, N+1 queries, dangerous memory loads).
 - Specific optimization recommendations.
 
-Begin the audit and save the report to the oaDataLogs/Audits folder.
+Begin the audit and save the report to the folder specified in `audit_log_path`.
 """

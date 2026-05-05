@@ -108,7 +108,7 @@ class InteractionTelemetryService:
             if hasattr(widget, '_log_telemetry_tx'):
                 widget._log_telemetry_tx(f"GEO: {width}x{height}")
 
-            matrix_log("ui", "gui_telemetry", "_perform_geometry_publish", 
-                       f"📡📏 [TELEMETRY] Transmitting {meta['tab_name']} geometry: {width}x{height} at {pos_x},{pos_y}", "DEBUG")
+            matrix_log("ui", "gui_telemetry", "_perform_geometry_publish",
+                       f"📡📏 [TELEMETRY] Transmitting {meta['tab_name']} geometry: {width}x{height} at {pos_x},{pos_y}", "TRACE")
         except Exception:
             pass

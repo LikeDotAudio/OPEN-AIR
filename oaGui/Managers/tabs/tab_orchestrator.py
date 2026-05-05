@@ -61,6 +61,11 @@ class TabOrchestratorMixin:
         """Handles right-click to trigger editor via atomic service."""
         try:
             notebook = event.widget
+            # Identify what was clicked (tab, padding, or empty space)
+            element = notebook.identify(event.x, event.y)
+            if "tab" not in element:
+                return
+
             index = notebook.index(f"@{event.x},{event.y}")
             tab_id = notebook.tabs()[index]
             tab_frame = notebook.nametowidget(tab_id)

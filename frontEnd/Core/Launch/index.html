@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OPEN-AIR HTML5 GUI</title>
+    <link rel="icon" href="data:,">
     <!-- React & Babel -->
     <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
@@ -51,18 +52,35 @@
 
     <!-- Load Component Library -->
     <script type="text/babel" src="../../libControl/faders/Fader.jsx"></script>
+    <script type="text/babel" src="../../libControl/faders/DualFader.jsx"></script>
+    <script type="text/babel" src="../../libControl/faders/LTPFader.jsx"></script>
+    <script type="text/babel" src="../../libControl/faders/FaderDial.jsx"></script>
+    <script type="text/babel" src="../../libControl/faders/FaderWithMeter.jsx"></script>
     <script type="text/babel" src="../../libControl/Knobs/Knob.jsx"></script>
+    <script type="text/babel" src="../../libControl/Knobs/SelectorSwitch.jsx"></script>
     <script type="text/babel" src="../../libControl/metering/Meter.jsx"></script>
+    <script type="text/babel" src="../../libControl/metering/NeedleMeter.jsx"></script>
     <script type="text/babel" src="../../libControl/special/CMDP.jsx"></script>
     <script type="text/babel" src="../../libControl/graphing/DynamicGraph.jsx"></script>
     <script type="text/babel" src="../../libControl/buttons/Button.jsx"></script>
+    <script type="text/babel" src="../../libControl/buttons/WinkButton.jsx"></script>
+    <script type="text/babel" src="../../libControl/buttons/TrapezoidButton.jsx"></script>
     <script type="text/babel" src="../../libControl/text/TextElements.jsx"></script>
+    <script type="text/babel" src="../../libControl/text/OcaTable.jsx"></script>
     <script type="text/babel" src="../../libControl/input/InputElements.jsx"></script>
+    <script type="text/babel" src="../../libControl/input/JsonTree.jsx"></script>
+    <script type="text/babel" src="../../libControl/special/MidiKeyboard.jsx"></script>
+    <script type="text/babel" src="../../libControl/special/StatusLight.jsx"></script>
+    <script type="text/babel" src="../../libControl/images/ImageDisplay.jsx"></script>
+    <script type="text/babel" src="../../libControl/BreakLine.jsx"></script>
 
     <!-- Load MQTT & Layout & Navigation Engines -->
     <script type="text/babel" src="../../comMQTT/MqttProvider.jsx"></script>
+    <script type="text/babel" src="../../frameLayout/WidgetFactory.jsx"></script>
+    <script type="text/babel" src="../../frameLayout/SplitLayout.jsx"></script>
+    <script type="text/babel" src="../../frameLayout/TabLayout.jsx"></script>
     <script type="text/babel" src="../../frameLayout/LoaderOrchestrator.jsx"></script>
-    <script type="text/babel" src="../../tabManager/TabManager.jsx"></script>
+    <script type="text/babel" src="../../tabManager/WindowManager.jsx"></script>
 
     <!-- Main App Bootstrapper -->
     <script type="text/babel">
@@ -104,10 +122,10 @@
                 );
             }
 
-            // Once loaded, hand off orchestration to TabManager
+            // Once loaded, hand off orchestration to WindowManager
             return (
                 <window.MqttProvider brokerUrl="ws://localhost:9001">
-                    <window.TabManager directoryTree={directoryTree} />
+                    <window.WindowManager directoryTree={directoryTree} />
                 </window.MqttProvider>
             );
         }

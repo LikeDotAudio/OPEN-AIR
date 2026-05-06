@@ -1,11 +1,7 @@
-import React from 'react';
-import WidgetFactory from './WidgetFactory';
-
 /**
  * TabLayout: Renders a tabbed "Notebook" interface.
- * Mimics tab_orchestrator.py and tab_lazy_populator.py.
  */
-const TabLayout = ({ nodeName, node, path_prefix }) => {
+window.TabLayout = ({ nodeName, node, path_prefix }) => {
   const { tabs = {} } = node;
   const tabKeys = Object.keys(tabs);
   const [activeTab, setActiveTab] = React.useState(tabKeys[0]);
@@ -38,7 +34,7 @@ const TabLayout = ({ nodeName, node, path_prefix }) => {
       {/* Tab Content */}
       <div className="tab-content" style={{ flex: 1, overflow: 'auto', background: '#1a1a1a' }}>
         {activeTab && (
-          <WidgetFactory 
+          <window.WidgetFactory 
             nodeName={activeTab} 
             node={tabs[activeTab]} 
             path_prefix={`${path_prefix}/${nodeName}`} 
@@ -48,5 +44,3 @@ const TabLayout = ({ nodeName, node, path_prefix }) => {
     </div>
   );
 };
-
-export default TabLayout;

@@ -54,6 +54,31 @@ class APIRequestHandler(SimpleHTTPRequestHandler):
             self.wfile.write(json.dumps(tree).encode('utf-8'))
             return
             
+        # Serve local images from the project root
+        if parsed_path.path == '/api/image':
+            query = urllib.parse.parse_qs(parsed_path.query)
+            image_rel_path = query.get('path', [None])[0]
+            if image_rel_path:
+                # Security: prevent directory traversal
+                clean_rel = image_rel_path.lstrip('/')
+                abs_project_root = os.path.abspath(os.path.join(FRONTEND_DIR, ".."))
+                image_abs_path = os.path.abspath(os.path.join(abs_project_root, clean_rel))
+                
+                if image_abs_path.startswith(abs_project_root) and os.path.exists(image_abs_path):
+                    self.send_response(200)
+                    if image_abs_path.endswith('.png'): self.send_header('Content-Type', 'image/png')
+                    elif image_abs_path.endswith('.jpg') or image_abs_path.endswith('.jpeg'): self.send_header('Content-Type', 'image/jpeg')
+                    elif image_abs_path.endswith('.svg'): self.send_header('Content-Type', 'image/svg+xml')
+                    elif image_abs_path.endswith('.gif'): self.send_header('Content-Type', 'image/gif')
+                    self.end_headers()
+                    with open(image_abs_path, 'rb') as f:
+                        self.wfile.write(f.read())
+                    return
+            
+            self.send_response(404)
+            self.end_headers()
+            return
+            
         # Default to serving static files
         if parsed_path.path == '/':
             self.path = '/Core/Launch/index.html'

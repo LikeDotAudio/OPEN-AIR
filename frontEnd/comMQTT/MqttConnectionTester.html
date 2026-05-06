@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPEN-AIR | MQTT Connection Tester</title>
+    <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+    <style>
+        body {
+            background-color: #0d0d0d;
+            color: #e0e0e0;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 20px;
+        }
+        .header {
+            border-bottom: 2px solid #FF9900;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .status-badge {
+            padding: 5px 15px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        .status-disconnected { background-color: #4d0000; color: #ff6666; }
+        .status-connected { background-color: #003300; color: #66ff66; }
+        
+        .tree-container {
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 4px;
+            padding: 15px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        .topic-row {
+            margin: 5px 0;
+            padding-left: 20px;
+            border-left: 1px solid #444;
+        }
+        .topic-name { color: #FF9900; font-weight: bold; }
+        .topic-value { color: #aaa; margin-left: 10px; font-size: 13px; }
+        .topic-timestamp { color: #555; font-size: 10px; margin-left: 10px; }
+        
+        .log-panel {
+            margin-top: 20px;
+            font-size: 11px;
+            color: #666;
+            max-height: 100px;
+            overflow-y: auto;
+            border-top: 1px solid #222;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div>
+            <h2 style="margin:0;">📡 MQTT TREE EXPLORER</h2>
+            <div style="font-size: 10px; color: #666;">OPEN-AIR Diagnostic Utility v1.0</div>
+        </div>
+        <div id="status" class="status-badge status-disconnected">DISCONNECTED</div>
+    </div>
+
+    <div id="tree" class="tree-container">
+        <div style="color: #666;">Waiting for telemetry data...</div>
+    </div>
+
+    <div id="logs" class="log-panel"></div>
+
+    <script>
+        const statusBadge = document.getElementById('status');
+        const treeContainer = document.getElementById('tree');
+        const logsPanel = document.getElementById('logs');
+        
+        const brokerUrl = 'ws://localhost:9001';
+        const options = {
+            username: 'guest',
+            password: 'guest',
+            clientId: 'tester_' + Math.random().toString(16).substr(2, 8)
+        };
+
+        const topics = {};
+
+        function addLog(msg) {
+            const entry = document.createElement('div');
+            entry.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
+            logsPanel.prepend(entry);
+        }
+
+        function updateUI() {
+            treeContainer.innerHTML = '';
+            const sortedPaths = Object.keys(topics).sort();
+            
+            if (sortedPaths.length === 0) {
+                treeContainer.innerHTML = '<div style="color: #666;">Connected. Listening for messages...</div>';
+                return;
+            }
+
+            sortedPaths.forEach(path => {
+                const row = document.createElement('div');
+                row.className = 'topic-row';
+                
+                const name = document.createElement('span');
+                name.className = 'topic-name';
+                name.textContent = path;
+                
+                const val = document.createElement('span');
+                val.className = 'topic-value';
+                let payload = topics[path].payload;
+                try {
+                    // Try to pretty-print JSON
+                    const obj = JSON.parse(payload);
+                    payload = JSON.stringify(obj, null, 2);
+                } catch(e) {}
+                
+                // Truncate for display if needed
+                const displayPayload = payload.length > 100 ? payload.substring(0, 100) + '...' : payload;
+                val.textContent = `>> ${displayPayload}`;
+                val.title = payload; // Show full on hover
+                
+                const ts = document.createElement('span');
+                ts.className = 'topic-timestamp';
+                ts.textContent = topics[path].time;
+                
+                row.appendChild(name);
+                row.appendChild(val);
+                row.appendChild(ts);
+                treeContainer.appendChild(row);
+            });
+        }
+
+        addLog(`Initiating connection to ${brokerUrl}...`);
+        const client = mqtt.connect(brokerUrl, options);
+
+        client.on('connect', () => {
+            statusBadge.textContent = 'CONNECTED';
+            statusBadge.className = 'status-badge status-connected';
+            addLog('Handshake successful. Subscribing to wildcards (#)...');
+            client.subscribe('#');
+        });
+
+        client.on('message', (topic, message) => {
+            const payload = message.toString();
+            topics[topic] = {
+                payload: payload,
+                time: new Date().toLocaleTimeString()
+            };
+            updateUI();
+        });
+
+        client.on('error', (err) => {
+            addLog(`Error: ${err.message}`);
+        });
+
+        client.on('close', () => {
+            statusBadge.textContent = 'DISCONNECTED';
+            statusBadge.className = 'status-badge status-disconnected';
+            addLog('Connection closed.');
+        });
+    </script>
+</body>
+</html>

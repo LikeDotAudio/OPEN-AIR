@@ -1,10 +1,7 @@
-import React from 'react';
-import WidgetFactory from './WidgetFactory';
-
 /**
  * SplitLayout: Renders a container split into multiple panels.
  */
-const SplitLayout = ({ nodeName, node, path_prefix }) => {
+window.SplitLayout = ({ nodeName, node, path_prefix }) => {
   const { behavior, panels = {} } = node;
   const orientation = behavior?.orientation === 'horizontal' ? 'row' : 'column';
 
@@ -16,7 +13,7 @@ const SplitLayout = ({ nodeName, node, path_prefix }) => {
         flexDirection: orientation,
         width: '100%',
         height: '100%',
-        gap: '2px', // Minimal gap to simulate industrial split
+        gap: '2px',
         backgroundColor: '#222'
       }}
     >
@@ -29,7 +26,7 @@ const SplitLayout = ({ nodeName, node, path_prefix }) => {
             backgroundColor: '#1a1a1a' 
           }}
         >
-          <WidgetFactory 
+          <window.WidgetFactory 
             nodeName={key} 
             node={panel} 
             path_prefix={`${path_prefix}/${nodeName}`} 
@@ -39,5 +36,3 @@ const SplitLayout = ({ nodeName, node, path_prefix }) => {
     </div>
   );
 };
-
-export default SplitLayout;

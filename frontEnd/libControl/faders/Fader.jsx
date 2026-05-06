@@ -1,80 +1,86 @@
-const Fader = ({ value, onChange, min = 0, max = 100, height = 300, width = 60 }) => {
-    const trackRef = React.useRef(null);
+// Fader Component
+// Author: Gemini (Collaborator)
+// Version: 20260505.1600.1
+//
+// Description: High-fidelity Fader component using SVG to achieve the desired industrial aesthetic.
+
+const Fader = ({ value: externalValue, onChange, config, topic, nodeJson }) => {
+    const min = config?.domain?.primary?.min !== undefined ? config.domain.primary.min : 0;
+    const max = config?.domain?.primary?.max !== undefined ? config.domain.primary.max : 100;
+    
+    // MQTT integration
+    const useMqtt = !!topic;
+    const useMqttState = window.useMqttState;
+    const [val, setVal] = useMqtt ? useMqttState(topic, externalValue || min, nodeJson) : [externalValue, onChange, 'En'];
+    const currentValue = useMqtt ? val : (externalValue !== undefined ? externalValue : min);
+    const setCurrentValue = useMqtt ? setVal : (val) => { if (onChange) onChange(val); };
+
+    // Layout configuration
+    const orientation = config?.style?.orientation || 'vertical'; 
+    const width = config?.geometry?.width || 60;
+    const height = config?.geometry?.height || 250;
+    const thumbWidth = 40;
+    const thumbHeight = 30;
+    
+    const paddingStart = 25;
+    const paddingEnd = 20;
+    const range = (orientation === 'vertical' ? height : width) - paddingStart - paddingEnd;
+    const trackSlotWidth = 10;
+
     const [isDragging, setIsDragging] = React.useState(false);
+    const containerRef = React.useRef(null);
+
+    const handleInteraction = (e) => {
+        if (!containerRef.current) return;
+        const rect = containerRef.current.getBoundingClientRect();
+        const pos = orientation === 'vertical' ? (rect.bottom - paddingEnd - e.clientY) : (e.clientX - rect.left - paddingStart);
+        const norm = Math.max(0, Math.min(1, pos / range));
+        setCurrentValue(Math.round((min + norm * (max - min)) * 100) / 100);
+    };
 
     const handlePointerDown = (e) => {
         setIsDragging(true);
-        updateValue(e.clientY);
-        e.target.setPointerCapture(e.pointerId);
+        handleInteraction(e);
+        if (containerRef.current) containerRef.current.setPointerCapture(e.pointerId);
     };
 
-    const handlePointerMove = (e) => {
-        if (isDragging) {
-            updateValue(e.clientY);
-        }
-    };
+    const handlePointerMove = (e) => { if (isDragging) handleInteraction(e); };
 
     const handlePointerUp = (e) => {
         setIsDragging(false);
-        e.target.releasePointerCapture(e.pointerId);
+        if (containerRef.current) containerRef.current.releasePointerCapture(e.pointerId);
     };
 
-    const updateValue = (clientY) => {
-        if (!trackRef.current) return;
-        const rect = trackRef.current.getBoundingClientRect();
-        // Calculate percentage from bottom
-        let percent = 1 - (clientY - rect.top) / rect.height;
-        percent = Math.max(0, Math.min(1, percent));
-        const newValue = min + percent * (max - min);
-        onChange(newValue);
-    };
+    const norm = (currentValue - min) / (max - min);
+    const pos = norm * range;
 
-    const thumbHeight = 30;
-    const thumbY = height - ((value - min) / (max - min)) * height - thumbHeight / 2;
+    const containerStyle = { width, height, touchAction: 'none' };
+    
+    // SVG coordinates
+    const trackX = orientation === 'vertical' ? (width/2 - trackSlotWidth/2) : paddingStart;
+    const trackY = orientation === 'vertical' ? paddingStart : (height/2 - trackSlotWidth/2);
+    const trackW = orientation === 'vertical' ? trackSlotWidth : range;
+    const trackH = orientation === 'vertical' ? range : trackSlotWidth;
 
-    // Render scale ticks
-    const ticks = [];
-    for (let i = 0; i <= 10; i++) {
-        const tickY = height - (i / 10) * height;
-        ticks.push(
-            <line key={i} x1="5" y1={tickY} x2="15" y2={tickY} stroke="#aaa" strokeWidth="2" />
-        );
-    }
+    const thumbX = orientation === 'vertical' ? (width/2 - thumbWidth/2) : (paddingStart + pos - thumbWidth/2);
+    const thumbY = orientation === 'vertical' ? (height - paddingEnd - pos - thumbHeight/2) : (height/2 - thumbHeight/2);
 
     return (
-        <svg 
-            width={width} 
-            height={height + thumbHeight} 
-            style={{ touchAction: 'none', cursor: 'pointer', overflow: 'visible' }}
-            onPointerDown={handlePointerDown}
-            onPointerMove={handlePointerMove}
-            onPointerUp={handlePointerUp}
-            onPointerCancel={handlePointerUp}
-        >
-            <g transform={`translate(0, ${thumbHeight / 2})`} ref={trackRef}>
-                {/* Track */}
-                <rect x={width / 2 - 4} y="0" width="8" height={height} fill="#1a1a1a" rx="4" />
-                <rect x={width / 2 - 2} y="0" width="4" height={height} fill="#000" rx="2" />
-                
-                {/* Scale Ticks */}
-                {ticks}
-
-                {/* Thumb */}
-                <g transform={`translate(${width / 2}, ${thumbY + thumbHeight/2})`}>
-                    <rect 
-                        x="-20" 
-                        y={-thumbHeight / 2} 
-                        width="40" 
-                        height={thumbHeight} 
-                        fill="#444" 
-                        stroke="#222" 
-                        strokeWidth="2" 
-                        rx="4" 
-                    />
-                    <line x1="-15" y1="0" x2="15" y2="0" stroke="#fff" strokeWidth="3" />
-                </g>
+        <svg ref={containerRef} style={containerStyle} onPointerDown={handlePointerDown} onPointerMove={handlePointerMove} onPointerUp={handlePointerUp}>
+            {/* Background */}
+            <rect width="100%" height="100%" fill="#2b2b2b" />
+            
+            {/* Track Slot */}
+            <rect x={trackX} y={trackY} width={trackW} height={trackH} fill="#050505" stroke="#222" />
+            
+            {/* Thumb (Cap) */}
+            <g transform={`translate(${thumbX}, ${thumbY})`}>
+                <rect width={thumbWidth} height={thumbHeight} fill="#dcdcdc" rx="4" stroke="#555" />
+                <line x1="10" y1={thumbHeight/2} x2={thumbWidth-10} y2={thumbHeight/2} stroke="#333" strokeWidth="2" />
+                <line x1="10" y1={thumbHeight/2 - 4} x2={thumbWidth-10} y2={thumbHeight/2 - 4} stroke="#aaa" strokeWidth="1" />
             </g>
         </svg>
     );
 };
+
 window.Fader = Fader;

@@ -36,7 +36,7 @@
         ],
         "fields": {
           "vu_standard": {
-            "type": "_SmartMeter",
+            "type": "_NeedleVUMeter",
             "label": {
               "En": "Standard VU",
               "Fr": "Standard VU",
@@ -103,7 +103,7 @@
             }
           },
           "vu_ppm_fast": {
-            "type": "_SmartMeter",
+            "type": "_NeedleVUMeter",
             "label": {
               "En": "Fast PPM",
               "Fr": "Rapide PPM",
@@ -170,7 +170,7 @@
             }
           },
           "vu_broadcast": {
-            "type": "_SmartMeter",
+            "type": "_NeedleVUMeter",
             "label": {
               "En": "Broadcast Avg",
               "Fr": "Broadcast Avg",
@@ -235,7 +235,7 @@
             }
           },
           "vu_vintage": {
-            "type": "_SmartMeter",
+            "type": "_NeedleVUMeter",
             "label": {
               "En": "Vintage Damped",
               "Fr": "Vintage Damped",
@@ -300,7 +300,7 @@
             }
           },
           "vu_hyper_sensitive": {
-            "type": "_SmartMeter",
+            "type": "_NeedleVUMeter",
             "label": {
               "En": "Hyper Sensitive",
               "Fr": "Hyper Sensitive",
@@ -365,7 +365,7 @@
             }
           },
           "vu_lazy_peak": {
-            "type": "_SmartMeter",
+            "type": "_NeedleVUMeter",
             "label": {
               "En": "Lazy Peak",
               "Fr": "Lazy Peak",
@@ -430,7 +430,7 @@
             }
           },
           "vu_stereo_comp": {
-            "type": "_SmartMeter",
+            "type": "_NeedleVUMeter",
             "label": {
               "En": "Stereo Comp",
               "Fr": "Stereo Comp",
@@ -495,7 +495,7 @@
             }
           },
           "vu_mastering": {
-            "type": "_SmartMeter",
+            "type": "_NeedleVUMeter",
             "label": {
               "En": "Mastering",
               "Fr": "Mastering",

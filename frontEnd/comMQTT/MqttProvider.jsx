@@ -1,25 +1,28 @@
-import React from 'react';
+const MqttContext = React.createContext();
 
-export const MqttContext = React.createContext();
-
-export const MqttProvider = ({ brokerUrl = 'ws://localhost:9001', children }) => {
+window.MqttProvider = ({ brokerUrl = 'ws://localhost:9001', children }) => {
     const [client, setClient] = React.useState(null);
     const [messages, setMessages] = React.useState({});
+    const [lang, setLang] = React.useState('En'); // Default to English
 
     React.useEffect(() => {
         console.log(`📡📥📥 [MQTT] Connecting to broker at ${brokerUrl}`);
-        // We check if mqtt is defined in window (loaded via CDN)
         if (typeof window.mqtt === 'undefined') {
             console.error("🛑 [ERROR] MQTT.js not loaded.");
             return;
         }
         
-        const mqttClient = window.mqtt.connect(brokerUrl);
+        const mqttClient = window.mqtt.connect(brokerUrl, {
+            username: 'guest',
+            password: 'guest',
+            keepalive: 60,
+            reconnectPeriod: 5000, // Wait 5 seconds between retries
+            connectTimeout: 30 * 1000,
+        });
 
         mqttClient.on('connect', () => {
             console.log(`📡📥📥 [MQTT] Connected to WebSockets`);
             setClient(mqttClient);
-            // Subscribe to all GUI topics
             mqttClient.subscribe('OpenAir/Gui/#', (err) => {
                 if (!err) console.log(`📡📥📥 [MQTT] Subscribed to OpenAir/Gui/#`);
             });
@@ -46,34 +49,37 @@ export const MqttProvider = ({ brokerUrl = 'ws://localhost:9001', children }) =>
     }, [client]);
 
     return (
-        <MqttContext.Provider value={{ client, messages, publish }}>
+        <MqttContext.Provider value={{ client, messages, publish, lang, setLang }}>
             {children}
         </MqttContext.Provider>
     );
 };
 
-export const useMqttState = (topic, defaultValue, nodeJson) => {
+window.useMqttState = (topic, defaultValue, nodeJson) => {
     const context = React.useContext(MqttContext);
     
-    // If not wrapped in MqttProvider (fallback safety)
+    // We maintain a local state so the UI feels instantly responsive
+    // even before the MQTT round-trip or if the broker is entirely offline.
+    const [localValue, setLocalValue] = React.useState(defaultValue);
+
     if (!context) {
-        const [fallbackVal, setFallbackVal] = React.useState(defaultValue);
-        return [fallbackVal, setFallbackVal];
+        return [localValue, setLocalValue, 'En'];
     }
 
-    const { messages, publish } = context;
+    const { messages, publish, lang } = context;
     
-    // Parse incoming message or use default
-    let currentValue = defaultValue;
-    if (messages[topic] !== undefined) {
-        try {
-            const parsed = JSON.parse(messages[topic]);
-            currentValue = parsed.value !== undefined ? parsed.value : parsed;
-        } catch (e) {
-            const num = parseFloat(messages[topic]);
-            currentValue = isNaN(num) ? messages[topic] : num;
+    // Sync local state when a fresh MQTT message arrives for this topic
+    React.useEffect(() => {
+        if (messages[topic] !== undefined) {
+            try {
+                const parsed = JSON.parse(messages[topic]);
+                setLocalValue(parsed.value !== undefined ? parsed.value : parsed);
+            } catch (e) {
+                const num = parseFloat(messages[topic]);
+                setLocalValue(isNaN(num) ? messages[topic] : num);
+            }
         }
-    }
+    }, [messages[topic], topic]);
 
     const initialPublishDone = React.useRef(false);
 
@@ -88,15 +94,19 @@ export const useMqttState = (topic, defaultValue, nodeJson) => {
     }, [publish, topic, nodeJson, defaultValue, messages]);
 
     const setValue = (newValue) => {
+        // Optimistic UI Update: instantly snap the local React component
+        setLocalValue(newValue);
+
+        // Push to global store
         const payload = JSON.stringify({ value: newValue });
         publish(topic, payload);
     };
 
-    return [currentValue, setValue];
+    return [localValue, setValue, lang];
 };
 
-// Compatibility for legacy global script loading
-if (typeof window !== 'undefined') {
-    window.MqttProvider = MqttProvider;
-    window.useMqttState = useMqttState;
-}
+window.useMqttLang = () => {
+    const context = React.useContext(MqttContext);
+    if (!context) return ['En', () => {}];
+    return [context.lang, context.setLang];
+};

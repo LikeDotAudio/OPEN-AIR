@@ -7,6 +7,7 @@
     },
     "blocks": {
       "Control_Buttons": {
+  "Control_Buttons": {
         "fields": {
           "Pause": {
             "handler": "pause_button_clicked",
@@ -60,11 +61,16 @@
             "type": "_GuiActuator"
           }
         },
-        "type": "OcaBlock"
-      }
+        "layout": {
+          "gridTemplateColumns": "repeat(3, 1fr)",
+          "gap": "10px"
+        },
+        "layout_columns": 3
+      },
+      "type": "OcaBlock"
     },
     "description": {
-      "En": "Root container locked to window edges with smart auto-scrolling.",
+      "En": "Root container locked to window edges with smart auto-Srolling.",
       "Fr": "Conteneur racine verrouillé sur les bords de la fenêtre avec défilement automatique intelligent.",
       "De": "Root-Container an Fensterrändern fixiert mit intelligentem automatischem Scrollen.",
       "Es": "Contenedor raíz bloqueado en los bordes de la ventana con desplazamiento automático inteligente."
@@ -75,4 +81,4 @@
     "id": "50.10",
     "type": "OcaBin"
   }
-}
+}}

@@ -1,6 +1,8 @@
-## [V3.3.8] - 2026-04-26
+## [V3.3.9] - 2026-05-05
 ### Fixed
-- **TestsUI AttributeError:** Resolved `AttributeError: 'function' object has no attribute 'identify_test_directories'` in `oaTests/Interface/TestsUI.py` by correcting the shadowed import and usage of `identify_test_directories`.
+- **Fader Refactor & MQTT Integration:** Modernized `Fader.jsx` to use ES modules and integrated `useMqttState` hook to restore UI functionality and real-time MQTT value updates.
+
+
 ## [V3.3.7] - 2026-04-16
 ### Fixed
 - **WYSIWYG Menu Bindings:** Resolved `AttributeError: 'WysiwygEditor' object has no attribute '_save_and_close'` by implementing the missing method in the main controller.

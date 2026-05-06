@@ -30,7 +30,7 @@
         ],
         "fields": {
           "left_meter": {
-            "type": "_SmartMeter",
+            "type": "_NeedleVUMeter",
             "label": {
               "En": "Left Meter (180-90)",
               "Fr": "Gauche Meter (180-90)",
@@ -92,7 +92,7 @@
             "show_label": true
           },
           "right_meter": {
-            "type": "_SmartMeter",
+            "type": "_NeedleVUMeter",
             "label": {
               "En": "Right Meter (0-90)",
               "Fr": "Droite Meter (0-90)",
@@ -154,7 +154,7 @@
             "show_label": true
           },
           "rev_meter": {
-            "type": "_SmartMeter",
+            "type": "_NeedleVUMeter",
             "label": {
               "En": "Standard Reverse",
               "Fr": "Standard Reverse",
@@ -216,7 +216,7 @@
             "show_label": true
           },
           "ceiling_meter": {
-            "type": "_SmartMeter",
+            "type": "_NeedleVUMeter",
             "label": {
               "En": "Ceiling Mount",
               "Fr": "Ceiling Mount",
@@ -278,7 +278,7 @@
             "show_label": true
           },
           "floor_meter": {
-            "type": "_SmartMeter",
+            "type": "_NeedleVUMeter",
             "label": {
               "En": "Floor Mount",
               "Fr": "Floor Mount",
@@ -340,7 +340,7 @@
             "show_label": true
           },
           "sideways_L": {
-            "type": "_SmartMeter",
+            "type": "_NeedleVUMeter",
             "label": {
               "En": "Sideways Left",
               "Fr": "Sideways Gauche",
@@ -402,7 +402,7 @@
             "show_label": true
           },
           "sideways_R": {
-            "type": "_SmartMeter",
+            "type": "_NeedleVUMeter",
             "label": {
               "En": "Sideways Right",
               "Fr": "Sideways Droite",
@@ -464,7 +464,7 @@
             "show_label": true
           },
           "compass_N": {
-            "type": "_SmartMeter",
+            "type": "_NeedleVUMeter",
             "label": {
               "En": "Compass North",
               "Fr": "Compass North",
@@ -526,7 +526,7 @@
             "show_label": true
           },
           "tilted_stereo": {
-            "type": "_SmartMeter",
+            "type": "_NeedleVUMeter",
             "label": {
               "En": "Stereo Tilted",
               "Fr": "Stereo Tilted",
@@ -588,7 +588,7 @@
             "show_label": true
           },
           "radar_sweep": {
-            "type": "_SmartMeter",
+            "type": "_NeedleVUMeter",
             "label": {
               "En": "Radar Sweep",
               "Fr": "Radar Sweep",

@@ -39,7 +39,7 @@
         ],
         "fields": {
           "corr_standard": {
-            "type": "_SmartMeter",
+            "type": "_NeedleVUMeter",
             "label": {
               "En": "Standard",
               "Fr": "Standard",
@@ -108,7 +108,7 @@
             "show_label": true
           },
           "corr_slow": {
-            "type": "_SmartMeter",
+            "type": "_NeedleVUMeter",
             "label": {
               "En": "Slow/Damped",
               "Fr": "Slow/Damped",
@@ -175,7 +175,7 @@
             "show_label": true
           },
           "corr_peak_hold": {
-            "type": "_SmartMeter",
+            "type": "_NeedleVUMeter",
             "label": {
               "En": "Peak Hold",
               "Fr": "Peak Hold",
@@ -244,7 +244,7 @@
             "show_label": true
           },
           "corr_ballistic": {
-            "type": "_SmartMeter",
+            "type": "_NeedleVUMeter",
             "label": {
               "En": "Fast Ballistic",
               "Fr": "Rapide Ballistic",
@@ -311,7 +311,7 @@
             "show_label": true
           },
           "corr_lazy": {
-            "type": "_SmartMeter",
+            "type": "_NeedleVUMeter",
             "label": {
               "En": "Lazy/Smooth",
               "Fr": "Lazy/Smooth",
@@ -380,7 +380,7 @@
             "show_label": true
           },
           "APK": {
-            "type": "_SmartMeter",
+            "type": "_NeedleVUMeter",
             "label": {
               "En": "Lazy/Smooth",
               "Fr": "Lazy/Smooth",

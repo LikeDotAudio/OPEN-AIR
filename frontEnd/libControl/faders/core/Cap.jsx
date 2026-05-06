@@ -5,8 +5,6 @@
 // Description: Renders a high-fidelity 3D fader cap using HTML5 Canvas, 
 // matching the Python CapDrawer's geometry and lighting.
 
-
-
 const _FADER_ASSET_CACHE = {};
 
 const Cap = ({ config, orientation, width, height, capColor, highlightColor }) => {
@@ -25,7 +23,10 @@ const Cap = ({ config, orientation, width, height, capColor, highlightColor }) =
     const GAUSSIAN_BLUR_SHADOW = 3.5;
     const SPECULAR_HIGHLIGHT_VALUE = 150;
 
-    useEffect(() => {
+    const padX = 10;
+    const padY = 15;
+
+    React.useEffect(() => {
         if (!canvasRef.current) return;
         const ctx = canvasRef.current.getContext('2d');
         const w = Math.round(width);
@@ -146,7 +147,6 @@ const Cap = ({ config, orientation, width, height, capColor, highlightColor }) =
 
         // Final composition with masking
         const finalCanvas = document.createElement('canvas');
-        const padX = 10, padY = 15;
         finalCanvas.width = w + padX * 2;
         finalCanvas.height = h + padY * 2;
         const finalCtx = finalCanvas.getContext('2d');
@@ -156,26 +156,6 @@ const Cap = ({ config, orientation, width, height, capColor, highlightColor }) =
         finalCtx.shadowBlur = GAUSSIAN_BLUR_SHADOW * 2;
         finalCtx.shadowOffsetX = 4;
         finalCtx.shadowOffsetY = 10;
-        
-        // Define path for rounded rect + scoops
-        const drawMaskedCap = (c, x, y, cw, ch) => {
-            c.beginPath();
-            const radius = CORNER_RADIUS * upscale;
-            c.roundRect(x, y, cw, ch, radius);
-            c.fill();
-            
-            c.globalCompositeOperation = 'destination-out';
-            const scoopW = cw * 0.15;
-            // Left scoop
-            c.beginPath();
-            c.ellipse(x - scoopW/2, y + ch/2, scoopW, ch/2, 0, 0, 2 * Math.PI);
-            c.fill();
-            // Right scoop
-            c.beginPath();
-            c.ellipse(x + cw + scoopW/2, y + ch/2, scoopW, ch/2, 0, 0, 2 * Math.PI);
-            c.fill();
-            c.globalCompositeOperation = 'source-over';
-        };
 
         // We use a separate canvas to create the masked cap image
         const maskedCapCanvas = document.createElement('canvas');
@@ -230,18 +210,6 @@ const Cap = ({ config, orientation, width, height, capColor, highlightColor }) =
                 transform: `translate(-50%, -50%)${orientation === 'horizontal' ? ' rotate(-90deg)' : ''}`,
                 pointerEvents: 'none'
             }} 
-        />
-    );
-};
-
-window.FaderCap = Cap;
-       }} 
-        />
-    );
-};
-
-window.FaderCap = Cap;
-      }} 
         />
     );
 };

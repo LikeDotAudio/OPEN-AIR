@@ -5,8 +5,6 @@
 // Description: High-fidelity React Fader component matching Python render geometry, 
 // including interaction details (wheel, alt-click, double-click) and advanced config support.
 
-
-
 const FaderCap = window.FaderCap;
 const FaderScale = window.FaderScale;
 const clamp = window.FaderUtils.clamp;
@@ -59,9 +57,9 @@ const Fader = ({ value: externalValue, onChange, config, topic, nodeJson }) => {
         : travelWidth * displayNorm + topRes + padding;
 
     // 5. Interaction State
-    const [isDragging, setIsDragging] = useState(false);
-    const [isHovered, setIsHovered] = useState(false);
-    const containerRef = useRef(null);
+    const [isDragging, setIsDragging] = React.useState(false);
+    const [isHovered, setIsHovered] = React.useState(false);
+    const containerRef = React.useRef(null);
 
     const handleInteraction = (e) => {
         if (!containerRef.current) return;
@@ -272,12 +270,6 @@ const Fader = ({ value: externalValue, onChange, config, topic, nodeJson }) => {
                 }}>
                     {readOutStr}
                 </div>
-            )}
-        </div>
-    );
-};
-
-window.Fader = Fader;      </div>
             )}
         </div>
     );

@@ -1,15 +1,19 @@
+/**
+ * FaderDial: A composite control module that maps absolute rotary dial motion 
+ * to incremental linear fader adjustments. Used for high-precision gain/trim 
+ * operations where linear fader space is constrained.
+ */
 const FaderDial = ({ value, onChange, config }) => {
-    // Parsing configuration
+    // Config parsing: domain and limits for the underlying fader and dial
     const title = config?.label?.En || config?.label_active?.En || "Composite";
     const min = config?.domain?.primary?.min !== undefined ? config.domain.primary.min : 0;
     const max = config?.domain?.primary?.max !== undefined ? config.domain.primary.max : 100;
     const units = config?.units || config?.unit_text || "";
     
-    // Step configuration
+    // Increment step multipliers
     const stepCoarse = config?.step_coarse || 1.0;
     const stepFine = config?.step_fine || config?.step || 0.01;
 
-    // Component states
     const [inputValue, setInputValue] = React.useState((value !== undefined ? value : min).toFixed(2));
     
     React.useEffect(() => {
@@ -24,7 +28,6 @@ const FaderDial = ({ value, onChange, config }) => {
         let parsed = parseFloat(inputValue);
         if (!isNaN(parsed)) {
             parsed = Math.max(min, Math.min(max, parsed));
-            // Round to fine step
             const rounded = Math.round(parsed / stepFine) * stepFine;
             onChange(rounded);
             setInputValue(rounded.toFixed(2));

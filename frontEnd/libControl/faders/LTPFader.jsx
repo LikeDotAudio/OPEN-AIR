@@ -1,214 +1,231 @@
-const LTPFader = ({ value, onChange, config }) => {
-    // Parsing configuration from JSON
-    const fConfig = config?.fader_config || {}; // Fader specific configs
-    const kConfig = config?.knob_config || {}; // Knob specific configs for the cap
-    const styleCfg = config?.style || {}; // General style overrides
-    
-    // Domain: Min/Max values for the fader
-    const min = fConfig.value_min !== undefined ? fConfig.value_min : -60;
-    const max = fConfig.value_max !== undefined ? fConfig.value_max : 12;
-    const logExponent = fConfig.log_exponent || 1.0; // Logarithmic scale factor
+// LTPFader - Linear Travelling Potentiometer Component
+// Author: Gemini (Collaborator)
+// Version: 20260506.1600.1
+//
+// Description: Dual-axis controller (linear travel + rotation).
 
-    // Geometry: Determine orientation and dimensions
-    const isHorizontal = config?.orientation === 'horizontal' || config?.layout?.W !== undefined;
-    const height = config?.layout?.height || (isHorizontal ? 100 : 400);
-    const width = config?.layout?.width || (isHorizontal ? 400 : 100);
-    
-    // Track Appearance
-    const trackColor = styleCfg.tick_color || '#1a1a1a';
-    
-    // Current Value
-    const faderVal = value !== undefined && value !== null ? value : (fConfig.value_default || min);
+const LTPFader = ({ config, value, rotValue, onChange }) => {
+    const canvasRef = React.useRef(null);
+    const [dragging, setDragging] = React.useState(false);
+    const [isMod, setIsMod] = React.useState(false);
+    const [interactionState, setInteractionState] = React.useState({ startX: 0, startY: 0, startLin: 0, startRot: 0 });
 
-    // Interaction State
-    const [isDragging, setIsDragging] = React.useState(false);
-    const svgRef = React.useRef(null); // Ref for the SVG element
+    const min = config?.min || 0;
+    const max = config?.max || 100;
+    const rotMin = -100;
+    const rotMax = 100;
+    const width = config?.width || 100;
+    const height = config?.height || 300;
+    const radius = 18;
+    const freestyle = config?.freestyle || false;
 
-    // Pointer Event Handlers
+    // --- Robust Value Extraction ---
+    // If 'value' is an object (composite state from MQTT), extract parts.
+    // Otherwise fallback to primitive 'value' and 'rotValue' props.
+    const getVal = (v, fallback) => (typeof v === 'number' ? v : (typeof v === 'string' ? parseFloat(v) : fallback));
+    
+    let linearVal = (min + max) / 2;
+    let currentRotVal = 0;
+
+    if (value && typeof value === 'object' && !Array.isArray(value)) {
+        linearVal = getVal(value.value, linearVal);
+        currentRotVal = getVal(value.rotValue, currentRotVal);
+    } else {
+        linearVal = getVal(value, linearVal);
+        currentRotVal = getVal(rotValue, currentRotVal);
+    }
+
+    const getHandleY = (val) => {
+        const range = max - min;
+        const norm = (val - min) / range;
+        const drawH = height - 40;
+        return 20 + drawH * (1.0 - norm);
+    };
+
+    const getValFromY = (y) => {
+        const drawH = height - 40;
+        const norm = (drawH - (y - 20)) / drawH;
+        return min + (norm * (max - min));
+    };
+
+    const draw = (ctx) => {
+        const cx = width / 2;
+        const isNarrow = width < 50;
+        const isAdjustingPot = dragging && (isMod || freestyle);
+
+        ctx.fillStyle = "#222";
+        ctx.fillRect(0, 0, width, height);
+
+        ctx.strokeStyle = "#444";
+        ctx.lineWidth = 4;
+        ctx.lineCap = "round";
+        ctx.beginPath();
+        ctx.moveTo(cx, 20);
+        ctx.lineTo(cx, height - 20);
+        ctx.stroke();
+
+        const handleY = getHandleY(linearVal);
+        ctx.strokeStyle = freestyle ? "#FF5555" : "#f4902c";
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.moveTo(cx, height - 20);
+        ctx.lineTo(cx, handleY);
+        ctx.stroke();
+
+        const range = max - min;
+        const steps = isNarrow ? 5 : 10;
+        ctx.strokeStyle = "#666";
+        ctx.lineWidth = 1;
+        ctx.font = isNarrow ? "7px Arial" : "10px Arial";
+        ctx.fillStyle = "#888";
+        ctx.textAlign = "left";
+
+        for (let i = 0; i <= steps; i++) {
+            const norm = i / steps;
+            const y = 20 + (height - 40) * (1.0 - norm);
+            const val = min + (norm * range);
+            ctx.beginPath();
+            const tw = isNarrow ? 5 : 10;
+            ctx.moveTo(cx - tw, y);
+            ctx.lineTo(cx + tw, y);
+            ctx.stroke();
+            if (i % 2 === 0 && !isNarrow) {
+                ctx.fillText(val.toFixed(0), cx + 15, y + 3);
+            }
+        }
+
+        ctx.fillStyle = "#dcdcdc";
+        ctx.beginPath();
+        ctx.arc(cx, handleY, radius, 0, Math.PI * 2);
+        ctx.fill();
+
+        const angle = (currentRotVal / 100) * 135;
+        const rad = (angle - 90) * Math.PI / 180;
+        const drawLen = isAdjustingPot ? radius * 10 : radius;
+        const px = cx + drawLen * Math.cos(rad);
+        const py = handleY + drawLen * Math.sin(rad);
+
+        ctx.strokeStyle = "#f4902c";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(cx, handleY);
+        ctx.lineTo(px, py);
+        ctx.stroke();
+
+        ctx.fillStyle = "#f4902c";
+        ctx.beginPath();
+        ctx.arc(cx, handleY, 3, 0, Math.PI * 2);
+        ctx.fill();
+
+        if (!isNarrow) {
+            ctx.fillStyle = "#fff";
+            ctx.textAlign = "right";
+            ctx.fillText(`L: ${linearVal.toFixed(1)}`, cx - 25, handleY + 4);
+            ctx.textAlign = "left";
+            ctx.fillText(`R: ${currentRotVal.toFixed(0)}`, cx + 25, handleY + 4);
+        }
+    };
+
+    React.useEffect(() => {
+        if (canvasRef.current) {
+            const ctx = canvasRef.current.getContext('2d');
+            draw(ctx);
+        }
+    }, [linearVal, currentRotVal, dragging, isMod]);
+
     const handlePointerDown = (e) => {
-        setIsDragging(true);
-        updateValue(e);
-        svgRef.current.setPointerCapture(e.pointerId);
+        const rect = canvasRef.current.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const handleY = getHandleY(linearVal);
+        const cx = width / 2;
+        const dist = Math.sqrt((x - cx) ** 2 + (y - handleY) ** 2);
+
+        if (dist <= radius * 1.5) {
+            setDragging(true);
+            setIsMod(e.altKey);
+            setInteractionState({ startX: x, startY: y, startLin: linearVal, startRot: currentRotVal });
+            canvasRef.current.setPointerCapture(e.pointerId);
+        }
     };
 
     const handlePointerMove = (e) => {
-        if (isDragging) {
-            updateValue(e);
+        if (!dragging) return;
+        const rect = canvasRef.current.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const activeMod = e.altKey;
+        if (!freestyle && activeMod !== isMod) {
+            setInteractionState(prev => ({ ...prev, startX: x, startY: y, startLin: linearVal, startRot: currentRotVal }));
+            setIsMod(activeMod);
+        }
+
+        let nextLin = linearVal;
+        let nextRot = currentRotVal;
+
+        if (freestyle || activeMod) {
+            const dx = x - interactionState.startX;
+            const sensitivity = 0.5;
+            let change = dx * sensitivity;
+            if (freestyle) change /= 2;
+            nextRot = Math.max(rotMin, Math.min(rotMax, interactionState.startRot + change));
+        }
+
+        if (freestyle || !activeMod) {
+            const dy = y - interactionState.startY;
+            const pixelRange = height - 40;
+            const valRange = max - min;
+            let change = -(dy / pixelRange) * valRange;
+            if (freestyle) change /= 2;
+            nextLin = Math.max(min, Math.min(max, interactionState.startLin + change));
+        }
+
+        if (onChange) {
+            onChange({ value: nextLin, rotValue: nextRot });
         }
     };
 
     const handlePointerUp = (e) => {
-        setIsDragging(false);
-        svgRef.current.releasePointerCapture(e.pointerId);
+        setDragging(false);
+        if (canvasRef.current) canvasRef.current.releasePointerCapture(e.pointerId);
     };
-
-    const updateValue = (e) => {
-        if (!svgRef.current) return;
-        const svgRect = svgRef.current.getBoundingClientRect(); // Use SVG element's bounds
-        
-        let percent;
-        if (isHorizontal) {
-            const clientX = e.clientX;
-            percent = (clientX - svgRect.left) / svgRect.width;
-        } else {
-            const clientY = e.clientY;
-            percent = 1 - (clientY - svgRect.top) / svgRect.height; // Use svgRect for consistent bounds
-        }
-        
-        percent = Math.max(0, Math.min(1, percent));
-        
-        // Logarithmic scale interpolation
-        let norm = Math.pow(percent, logExponent);
-        let newValue = min + norm * (max - min);
-        newValue = Math.round(newValue * 100) / 100;
-        onChange(newValue);
-    };
-
-    // Calculate Thumb Position based on value and scale
-    const capRadius = kConfig.cap_radius || 22;
-    const capColor = kConfig.cap_color || '#1a1a1a';
-    const capOutline = kConfig.cap_outline_color || '#FF3131';
-
-    const range = (max - min) || 1;
-    const boundedValue = Math.max(min, Math.min(max, faderVal));
-    let normForRender = (boundedValue - min) / range;
-    if (logExponent !== 1.0) {
-        normForRender = Math.pow(normForRender, 1.0 / logExponent);
-    }
-    
-    const thumbPos = isHorizontal 
-        ? normForRender * width
-        : height - normForRender * height - capRadius; // Adjust for cap radius on vertical
-
-    // Knob Shape Generator
-    const renderShape = () => {
-        const r = capRadius;
-        const knobShape = styleCfg.knob_shape || 'circle';
-        const gearTeeth = styleCfg.knob_teeth || 16;
-
-        if (knobShape === 'gear') {
-            const innerR = r * 0.85;
-            const pts = [];
-            for (let i = 0; i < gearTeeth * 4; i++) {
-                const toothState = i % 4;
-                const rad = (toothState === 1 || toothState === 2) ? r : innerR;
-                const a = (i / (gearTeeth * 4)) * Math.PI * 2;
-                pts.push(`${r * Math.cos(a)},${r * Math.sin(a)}`);
-            }
-            return <polygon points={pts.join(' ')} fill={`url(#ltp-grad-${config?.id || 'ltp'})`} stroke="#111" strokeWidth="1" />;
-        } else if (knobShape === 'octagon') {
-            const pts = [];
-            for (let i = 0; i < 8; i++) {
-                const a = (i / 8) * Math.PI * 2 + (Math.PI / 8);
-                pts.push(`${r * Math.cos(a)},${r * Math.sin(a)}`);
-            }
-            return <polygon points={pts.join(' ')} fill={`url(#ltp-grad-${config?.id || 'ltp'})`} stroke="#111" strokeWidth="1" />;
-        }
-        return <circle cx="0" cy="0" r={r} fill={`url(#ltp-grad-${config?.id || 'ltp'})`} stroke="#111" strokeWidth="1" />;
-    };
-
-    // Pointer Generator
-    const renderPointer = () => {
-        const pLen = kConfig.pointer_length || (capRadius - 5);
-        const pointerStyle = styleCfg.pointer_style || 'line';
-
-        if (pointerStyle === 'dot') return <circle cx="0" cy={-pLen} r="3" fill="#fff" />;
-        if (pointerStyle === 'triangle') return <polygon points={`0,${-pLen + 2} -5,${-pLen + 10} 5,${-pLen + 10}`} fill="#fff" />;
-        if (pointerStyle === 'notch') return <rect x="-4" y={-capRadius} width="8" height="10" fill="#fff" rx="2" />;
-        return <line x1="0" y1="0" x2="0" y2={-pLen} stroke="#fff" strokeWidth="2" strokeLinecap="round" />;
-    };
-
-    // Ticks for LTP fader
-    const ticks = [];
-    const tickInterval = fConfig?.tick_interval || ((max - min) / 10);
-    const tickSteps = Math.abs(max - min) / tickInterval;
-    const tickColorEffective = styleCfg.tick_color || trackColor;
-    
-    if (styleCfg.show_ticks !== false && tickInterval > 0 && tickSteps > 0) {
-        for (let i = 0; i <= tickSteps; i++) {
-            const tickVal = min + (i * tickInterval);
-            let tNorm;
-            if (logExponent !== 1.0) {
-                let tRawNorm = (tickVal - min) / range;
-                tNorm = Math.pow(tRawNorm, 1.0 / logExponent);
-            } else {
-                tNorm = (tickVal - min) / range;
-            }
-
-            if (isHorizontal) {
-                const tickX = tNorm * width;
-                ticks.push(<line key={i} x1={tickX} y1={height - 15} x2={tickX} y2={height - 5} stroke={tickColorEffective} strokeWidth="1" />);
-            } else {
-                const tickY = height - tNorm * height;
-                const slotW = 10;
-                const tickLen = width * 0.35;
-                ticks.push(
-                    <g key={i}>
-                        <line x1={width/2 - tickLen} y1={tickY} x2={width/2 - slotW/2 - 2} y2={tickY} stroke={tickColorEffective} strokeWidth="1" />
-                        <line x1={width/2 + slotW/2 + 2} y1={tickY} x2={width/2 + tickLen} y2={tickY} stroke={tickColorEffective} strokeWidth="1" />
-                        {styleCfg.tick_label_position !== "left" && (
-                            <text x={width/2 + tickLen + 8} y={tickY + 3} fill={tickColorEffective} fontSize="7" fontFamily="Arial">{tickVal}</text>
-                        )}
-                    </g>
-                );
-            }
-        }
-    }
-
-    const faderValueDisplay = faderVal.toFixed(1);
 
     return (
-        <div style={{ display: 'flex', flexDirection: isHorizontal ? 'row' : 'column', alignItems: 'center', gap: '10px' }}>
-            <svg 
-                ref={svgRef}
-                width={isHorizontal ? width + capRadius : width} 
-                height={isHorizontal ? height : height + capRadius} 
-                style={{ touchAction: 'none', cursor: 'pointer', overflow: 'visible' }}
+        <div className="ltp-wrapper" style={{ 
+            backgroundColor: '#3c3f41', 
+            border: '1px solid #555', 
+            padding: '10px', 
+            borderRadius: '4px',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center'
+        }}>
+            <div className="widget-label" style={{ 
+                marginBottom: '10px', 
+                fontWeight: 'bold', 
+                color: '#dcdcdc',
+                fontSize: width < 40 ? '8px' : '12px'
+            }}>
+                {config?.label || "LTP"}
+            </div>
+            <canvas
+                ref={canvasRef}
+                width={width}
+                height={height}
                 onPointerDown={handlePointerDown}
                 onPointerMove={handlePointerMove}
                 onPointerUp={handlePointerUp}
-                onPointerCancel={handlePointerUp}
-            >
-                <defs>
-                    <linearGradient id={`ltp-grad-${config?.id || 'ltp'}`} x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stopColor="#666" />
-                        <stop offset="30%" stopColor={capColor} />
-                        <stop offset="100%" stopColor="#000" />
-                    </linearGradient>
-                    <filter id={`drop-shadow-ltp-${config?.id || 'ltp'}`} x="-20%" y="-20%" width="140%" height="140%">
-                        <feDropShadow dx="2" dy="2" stdDeviation="2" floodColor="#000" floodOpacity="0.5"/>
-                    </filter>
-                </defs>
-
-                <g>
-                    {/* Track Slot */}
-                    {isHorizontal ? (
-                        <>
-                            <rect x="0" y={height / 2 - 5} width={width} height="10" fill="#000" rx="5" stroke="#111" />
-                            <rect x="0" y={height / 2 - 2} width={thumbPos} height="4" fill={trackColor} rx="2" />
-                        </>
-                    ) : (
-                        <>
-                            <rect x={width / 2 - 5} y="0" width="11" height={height} fill="#000" rx="5" stroke="#111" />
-                            <rect x={width / 2 - 2} y={thumbPos} width="4" height={height - thumbPos} fill={trackColor} rx="2" />
-                        </>
-                    )}
-                    
-                    {ticks}
-
-                    {/* The traveling Knob Cap */}
-                    <g transform={isHorizontal ? `translate(${thumbPos}, ${height/2})` : `translate(${width / 2}, ${thumbPos})`}>
-                        {renderShape()}
-                        {/* Fake 3D inner ridge */}
-                        <circle cx="0" cy="0" r={capRadius * 0.7} fill="#222" stroke="#111" />
-                        {renderPointer()}
-                    </g>
-                </g>
-            </svg>
-            <div style={{ marginTop: '10px', fontFamily: 'monospace', fontSize: '12px', color: capOutline, backgroundColor: '#111', padding: '2px 8px', borderRadius: '4px', border: `1px solid ${capOutline}` }}>
-                {faderValueDisplay} {fConfig.show_units && fConfig.unit_text}
-            </div>
+                style={{ 
+                    cursor: freestyle ? 'move' : (isMod ? 'ew-resize' : 'ns-resize'), 
+                    backgroundColor: '#222', 
+                    borderRadius: '4px', 
+                    touchAction: 'none' 
+                }}
+            />
         </div>
     );
 };
+
 window.LTPFader = LTPFader;

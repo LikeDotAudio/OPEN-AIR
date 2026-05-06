@@ -1,26 +1,42 @@
 const SelectorSwitch = ({ value, onChange, config }) => {
-    // 1. Parsing Configuration
+    // --- 1. Robust Config Extraction (Mirroring Python's knob_config.py) ---
+    const c = config || {};
+    const cosmetics = c.cosmetics || {};
+    const styling = cosmetics.styling || {};
+    const overrides = cosmetics.style_overrides || {};
+    const pointer = cosmetics.pointer || {};
+    const colors = cosmetics.colors || {};
+
     const [lang] = window.useMqttLang();
-    const title = config?.label?.[lang] || config?.label_active?.[lang] || config?.label?.En || config?.label_active?.En || "";
-    const positions = config?.positions || ["OFF", "ON"];
-    const isContinuous = config?.continuous === true;
+    const title = c.label?.[lang] || c.label_active?.[lang] || c.label?.En || c.label_active?.En || "";
+    const positions = c.positions || ["OFF", "ON"];
+    const isContinuous = c.continuous === true;
+
+    // Colors
+    const accentColor = colors.primary || '#33A1FD';
+    const secondaryColor = colors.secondary || '#444444';
+    const indicatorColor = c.indicator_color || colors.active || accentColor;
+    const tickColor = colors.text || '#888';
     
-    // Geometry & Layout
+    // Geometry
     const w = config?.width || config?.geometry?.width || config?.layout?.width || 120;
     const h = config?.height || config?.geometry?.height || config?.layout?.height || 140;
     const size = Math.min(w, h);
-    
-    // Cosmetics
-    const baseColor = config?.knob_config?.cap_color || config?.cosmetics?.colors?.primary || '#333';
-    const accentColor = config?.indicator_color || config?.cosmetics?.colors?.accent || '#0f0';
-    const tickColor = config?.cosmetics?.colors?.text || '#888';
-    
-    const knobShape = config?.shape || config?.knob_shape || 'circle'; 
-    const gearTeeth = config?.teeth || config?.knob_teeth || 16;
-    const pointerStyle = config?.pointer_style || 'line';
-    const noCenter = config?.no_center === true;
 
-    // State Mapping
+    // Aesthetics
+    const knobStyle = (overrides.knob_style || styling.knob_style || cosmetics.visualization || c.knob_style || 'standard').toLowerCase();
+    const defaultShape = knobStyle === 'gear' ? 'gear' : 'circle';
+    const knobShape = (overrides.shape || styling.shape || c.shape || defaultShape).toLowerCase();
+    
+    const baseColor = styling.fill_color || c.knob_fill_color || '#333';
+    const outlineColor = styling.outline_color || c.knob_outline_color || secondaryColor;
+    const gearTeeth = styling.teeth || c.knob_teeth || 8;
+    const noCenter = styling.no_center || c.no_center || false;
+
+    // Pointer
+    const pointerStyle = (pointer.style || c.pointer_style || 'line').toLowerCase();
+
+    // --- 2. State Mapping & Layout Math ---
     let currentIndex = 0;
     if (typeof value === 'number') {
         currentIndex = value;
@@ -30,15 +46,20 @@ const SelectorSwitch = ({ value, onChange, config }) => {
     }
 
     const totalPos = positions.length;
-    // Python match: continuous = 360/90, non-continuous = 300/240
+    // Python: (90, 360) if continuous else (240, 300)
     const sweepAngle = isContinuous ? 360 : 300;
     const startAngle = isContinuous ? 90 : 240; 
     const angleStep = sweepAngle / (isContinuous ? totalPos : Math.max(1, totalPos - 1));
 
     const eRef = React.useRef(null);
     const centerX = w / 2;
-    const centerY = h / 2 - 10;
-    const radius = size * 0.28;
+    const centerY = h / 2;
+    
+    // Python Layout: adj_cy = cy + (top_res - bottom_res) / 2
+    const topRes = title ? 20 : 0;
+    const bottomRes = 20;
+    const adjCy = centerY + (topRes - bottomRes) / 2;
+    const radius = Math.min(w, h - topRes - bottomRes) / 2 - 25;
 
     const getAngleForIndex = (idx) => {
         return startAngle - (idx * angleStep);
@@ -47,15 +68,13 @@ const SelectorSwitch = ({ value, onChange, config }) => {
     const updateFromPoint = (clientX, clientY) => {
         const rect = eRef.current.getBoundingClientRect();
         const cx = rect.left + rect.width / 2;
-        const cy = rect.top + rect.height / 2 - 10;
+        const cy = rect.top + adjCy;
         const dx = clientX - cx;
         const dy = clientY - cy;
         
-        let angle = Math.atan2(-dy, dx) * (180 / Math.PI); // -dy because Y is down in browser
+        let angle = Math.atan2(-dy, dx) * (180 / Math.PI); 
         if (angle < 0) angle += 360;
         
-        // Map angle to index
-        // startAngle is 240 (NW-ish). We want to find which position is closest
         let closestIdx = 0;
         let minDiff = Infinity;
         
@@ -82,60 +101,73 @@ const SelectorSwitch = ({ value, onChange, config }) => {
         updateFromPoint(e.clientX, e.clientY);
     };
 
-    // --- High Fidelity Renderers (Inherited from Knob.jsx) ---
-    
-    const renderShape = () => {
-        const r = radius;
+    const renderShape = (r, fill, stroke, sWidth, rotation = 0) => {
         if (knobShape === 'gear') {
-            const innerR = r * 0.85;
+            const innerR = r * 0.85; 
             const pts = [];
-            for (let i = 0; i < gearTeeth * 4; i++) {
+            const teeth = gearTeeth;
+            for (let i = 0; i < teeth * 4; i++) {
                 const toothState = i % 4;
                 const rad = (toothState === 1 || toothState === 2) ? r : innerR;
-                const a = (i / (gearTeeth * 4)) * Math.PI * 2;
-                pts.push(`${rad * Math.cos(a)},${rad * Math.sin(a)}`);
+                const a = (i / (teeth * 4)) * Math.PI * 2 + (rotation * Math.PI / 180);
+                pts.push(`${rad * Math.cos(a)},${-rad * Math.sin(a)}`);
             }
-            return <polygon points={pts.join(' ')} fill={`url(#sel-grad-${config?.id})`} stroke="#000" strokeWidth="1" />;
+            return <polygon points={pts.join(' ')} fill={fill} stroke={stroke} strokeWidth={sWidth} />;
         } else if (knobShape === 'octagon') {
             const pts = [];
             for (let i = 0; i < 8; i++) {
-                const a = (i / 8) * Math.PI * 2 + (Math.PI / 8);
-                pts.push(`${r * Math.cos(a)},${r * Math.sin(a)}`);
+                const a = (i / 8) * Math.PI * 2 + (Math.PI / 8) + (rotation * Math.PI / 180);
+                pts.push(`${r * Math.cos(a)},${-r * Math.sin(a)}`);
             }
-            return <polygon points={pts.join(' ')} fill={`url(#sel-grad-${config?.id})`} stroke="#000" strokeWidth="1" />;
+            return <polygon points={pts.join(' ')} fill={fill} stroke={stroke} strokeWidth={sWidth} />;
         }
-        return <circle cx="0" cy="0" r={r} fill={`url(#sel-grad-${config?.id})`} stroke="#000" strokeWidth="1" />;
+        return <circle cx="0" cy="0" r={Math.max(0, r)} fill={fill} stroke={stroke} strokeWidth={sWidth} />;
     };
 
-    const renderPointer = () => {
-        if (pointerStyle === 'dot') return <circle cx="0" cy={-radius + 6} r="3" fill={accentColor} />;
-        if (pointerStyle === 'triangle') return <polygon points={`0,${-radius + 2} -5,${-radius + 12} 5,${-radius + 12}`} fill={accentColor} />;
-        if (pointerStyle === 'notch') return <rect x="-4" y={-radius} width="8" height="10" fill={accentColor} rx="2" />;
-        return <line x1="0" y1="0" x2="0" y2={-radius - 8} stroke={accentColor} strokeWidth="3" strokeLinecap="round" />;
+    const renderPointer = (r, angle) => {
+        const rad = angle * Math.PI / 180;
+        // Python: pointer length is radius + 14 (extends past knob to ticks)
+        const pLen = r + 14; 
+        const x2 = pLen * Math.cos(rad);
+        const y2 = -pLen * Math.sin(rad);
+
+        if (pointerStyle === 'dot') return <circle cx={x2} cy={y2} r="3" fill={indicatorColor} />;
+        if (pointerStyle === 'triangle') {
+            const triWidth = 5;
+            const perp = rad + Math.PI / 2;
+            const c1x = 0 + triWidth * Math.cos(perp);
+            const c1y = 0 - triWidth * Math.sin(perp);
+            const c2x = 0 - triWidth * Math.cos(perp);
+            const c2y = 0 + triWidth * Math.sin(perp);
+            return <polygon points={`${x2},${y2} ${c1x},${c1y} ${c2x},${c2y}`} fill={indicatorColor} />;
+        }
+        if (pointerStyle === 'notch') return <line x1={0} y1={0} x2={x2} y2={y2} stroke={indicatorColor} strokeWidth="4" strokeLinecap="butt" />;
+        return <line x1="0" y1="0" x2={x2} y2={y2} stroke={indicatorColor} strokeWidth="3" strokeLinecap="round" />;
     };
 
     const ticks = [];
     positions.forEach((p, i) => {
         const ang = getAngleForIndex(i);
         const rad = ang * Math.PI / 180;
-        
-        // Match Python: adj_cy - (radius + 2) * math.sin(angle_rad)
-        const x1 = centerX + (radius + 5) * Math.cos(rad);
-        const y1 = centerY - (radius + 5) * Math.sin(rad);
-        const x2 = centerX + (radius + 14) * Math.cos(rad);
-        const y2 = centerY - (radius + 14) * Math.sin(rad);
+        // Python: ts_x = cx + (radius + 2), te_x = cx + (radius + 10), tl_x = cx + (radius + 24)
+        const x1 = (radius + 2) * Math.cos(rad);
+        const y1 = -(radius + 2) * Math.sin(rad);
+        const x2 = (radius + 10) * Math.cos(rad);
+        const y2 = -(radius + 10) * Math.sin(rad);
+        const tlX = (radius + 24) * Math.cos(rad);
+        const tlY = -(radius + 24) * Math.sin(rad);
         
         const isActive = i === currentIndex;
         
         ticks.push(
             <g key={i}>
-                <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={isActive ? accentColor : tickColor} strokeWidth={isActive ? 2 : 1} filter={isActive ? `url(#glow-sel-${config?.id})` : ''} />
+                <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={isActive ? indicatorColor : tickColor} strokeWidth={isActive ? 2 : 1} filter={isActive ? `url(#glow-${filterId})` : ''} />
                 <text 
-                    x={centerX + (radius + 32) * Math.cos(rad)} 
-                    y={centerY - (radius + 32) * Math.sin(rad)} 
-                    fill={isActive ? '#fff' : '#666'} 
+                    x={tlX} 
+                    y={tlY} 
+                    fill={isActive ? indicatorColor : '#666'} 
                     fontSize="8" 
-                    fontFamily="monospace" 
+                    fontFamily="Helvetica, Arial, sans-serif" 
                     fontWeight={isActive ? "bold" : "normal"}
                     textAnchor="middle" 
                     dominantBaseline="middle"
@@ -146,7 +178,9 @@ const SelectorSwitch = ({ value, onChange, config }) => {
         );
     });
 
+    const DEPTH_OFFSET = 1.5;
     const pointerAngleDeg = getAngleForIndex(currentIndex);
+    const filterId = `sel-${c.id || Math.random().toString(36).substr(2, 9)}`;
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -157,51 +191,87 @@ const SelectorSwitch = ({ value, onChange, config }) => {
                 onPointerDown={handlePointerDown}
             >
                 <defs>
-                    <linearGradient id={`sel-grad-${config?.id}`} x1="0%" y1="0%" x2="0%" y2="100%">
+                    <linearGradient id={`grad-${filterId}`} x1="0%" y1="0%" x2="0%" y2="100%">
                         <stop offset="0%" stopColor="#666" />
                         <stop offset="30%" stopColor={baseColor} />
-                        <stop offset="100%" stopColor="#000" />
+                        <stop offset="100%" stopColor="#111" />
                     </linearGradient>
-                    <filter id={`shadow-sel-${config?.id}`}>
-                        <feDropShadow dx="2" dy="2" stdDeviation="2" floodOpacity="0.5" />
+                    <filter id={`sh-${filterId}`} x="-50%" y="-50%" width="200%" height="200%">
+                        <feDropShadow dx="2" dy="2" stdDeviation="3" floodColor="#000" floodOpacity="0.6"/>
                     </filter>
-                    <filter id={`glow-sel-${config?.id}`}>
+                    <filter id={`glow-${filterId}`}>
                         <feGaussianBlur stdDeviation="2" result="blur" />
                         <feComposite in="SourceGraphic" in2="blur" operator="over"/>
                     </filter>
+                    <filter id={`blur-${filterId}`}>
+                        <feGaussianBlur stdDeviation="2" />
+                    </filter>
                 </defs>
 
-                {/* Outer Rail / Bezel */}
-                <circle cx={centerX} cy={centerY} r={radius + 4} fill="#111" />
-
-                {ticks}
-
-                {/* 3D Offset Base (Inherited from Knob.jsx) */}
-                <g transform={`translate(${centerX + 1.5}, ${centerY + 1.5})`}>
-                    {knobShape === 'circle' ? <circle cx="0" cy="0" r={radius} fill="#111" /> : null}
-                </g>
-
-                {/* The Main Cap (Inherited from Knob.jsx logic) */}
-                <g transform={`translate(${centerX}, ${centerY}) rotate(${270 - pointerAngleDeg})`} filter={`url(#shadow-sel-${config?.id})`}>
-                    {renderShape()}
-                    
-                    {/* Inner Center Ridge */}
-                    {!noCenter && <circle cx="0" cy="0" r={radius * 0.5} fill="#1a1a1a" stroke="#000" strokeWidth="1" />}
-                    
-                    {renderPointer()}
-                </g>
-
-                {/* Glint & Dome Overlays (Inherited from Knob.jsx) */}
-                <g transform={`translate(${centerX}, ${centerY})`} pointerEvents="none">
-                    <ellipse cx={-radius * 0.4} cy={-radius * 0.5} rx={radius * 0.6} ry={radius * 0.3} fill="rgba(255,255,255,0.15)" filter="blur(2px)" />
-                </g>
-
-                {/* Title */}
+                {/* Title (n-anchor, top 10) */}
                 {title && (
-                    <text x={centerX} y={h - 10} fill="#aaa" fontSize="10" fontWeight="bold" textAnchor="middle">{title.toUpperCase()}</text>
+                    <text x={centerX} y={10} fill="#fff" fontSize="9" fontWeight="bold" textAnchor="middle" dominantBaseline="hanging">{title.toUpperCase()}</text>
+                )}
+
+                <g transform={`translate(${centerX}, ${adjCy})`}>
+                    {/* Outer Bezel / Track */}
+                    {isContinuous ? (
+                        <circle cx="0" cy="0" r={Math.max(0, radius)} fill="none" stroke={secondaryColor} strokeWidth="2" />
+                    ) : (
+                        <path 
+                            d={describeArc(0, 0, radius, startAngle, startAngle - sweepAngle)} 
+                            fill="none" stroke={secondaryColor} strokeWidth="2"
+                        />
+                    )}
+
+                    {ticks}
+
+                    {/* 3D Body (Offset Base) */}
+                    <g transform={`translate(${DEPTH_OFFSET}, ${DEPTH_OFFSET})`}>
+                        {renderShape(radius - 5, "#111", "none", 0, pointerAngleDeg)}
+                    </g>
+
+                    {/* The Main Cap (Offset NW) */}
+                    <g transform={`translate(${-DEPTH_OFFSET}, ${-DEPTH_OFFSET})`} filter={`url(#sh-${filterId})`}>
+                        {renderShape(radius - 5, `url(#grad-${filterId})`, outlineColor, 1, pointerAngleDeg)}
+                        
+                        {/* 3D Effects: Glint & Inner Rim */}
+                        <g pointerEvents="none">
+                            <circle cx={(radius-5) * 0.1} cy={(radius-5) * 0.1} r={Math.max(0, (radius-5) * 0.9)} fill="black" opacity="0.2" filter={`url(#blur-${filterId})`} />
+                            <ellipse cx={-(radius-5) * 0.4} cy={-(radius-5) * 0.5} rx={Math.max(0, (radius-5) * 0.6)} ry={Math.max(0, (radius-5) * 0.3)} fill="white" opacity="0.3" filter={`url(#blur-${filterId})`} />
+                            <path 
+                                d={describeArc(0, 0, (radius-5) - 3, 180, 270)} 
+                                fill="none" stroke="white" strokeWidth="2" strokeOpacity="0.4" filter={`url(#blur-${filterId})`}
+                            />
+                        </g>
+
+                        {!noCenter && <circle cx="0" cy="0" r={3} fill={indicatorColor} />}
+                        {renderPointer(radius - 5, pointerAngleDeg)}
+                    </g>
+                </g>
+
+                {/* Selection Text (s-anchor, bottom 10) */}
+                {positions[currentIndex] !== undefined && (
+                    <text x={centerX} y={h - 10} fill={indicatorColor} fontSize="9" fontWeight="bold" textAnchor="middle">{positions[currentIndex].toString().toUpperCase()}</text>
                 )}
             </svg>
         </div>
     );
 };
+
+function describeArc(x, y, radius, startAngle, endAngle) {
+    const start = polarToCartesian(x, y, radius, endAngle);
+    const end = polarToCartesian(x, y, radius, startAngle);
+    // Note: for SelectorSwitch, sweep is CW in SVG (downward), but startAngle is CCW (standard math).
+    // Large arc flag needs adjustment if sweep > 180
+    const largeArcFlag = Math.abs(endAngle - startAngle) <= 180 ? "0" : "1";
+    // We want the arc to follow CCW order (start -> end)
+    return ["M", start.x, start.y, "A", radius, radius, 0, largeArcFlag, 0, end.x, end.y].join(" ");
+}
+
+function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
+    const rad = angleInDegrees * Math.PI / 180.0;
+    return { x: centerX + (radius * Math.cos(rad)), y: centerY - (radius * Math.sin(rad)) };
+}
+
 window.SelectorSwitch = SelectorSwitch;

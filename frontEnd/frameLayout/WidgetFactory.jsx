@@ -14,7 +14,7 @@ window.OcaBin = ({ nodeName, node, path_prefix }) => {
         overflowY: overflowNS,
         backgroundColor: '#121212',
         position: 'relative',
-        padding: '10px',
+        padding: '0px',
         boxSizing: 'border-box'
     }}>
       {node.blocks && typeof node.blocks === 'object' && Object.entries(node.blocks).map(([k, v]) => (
@@ -38,19 +38,19 @@ window.OcaBlock = ({ nodeName, node, path_prefix }) => {
 
   return (
     <div className="oca-block" style={{
-        margin: '10px',
-        border: '1px solid #333',
+        margin: '0px',
+        border: '1px solid #222',
         backgroundColor: '#1e1e1e',
-        padding: '10px',
+        padding: '5px',
         borderRadius: '2px'
     }}>
-      <div style={{ color: '#888', fontSize: '12px', borderBottom: '1px solid #333', marginBottom: '10px', fontWeight: 'bold' }}>
+      <div style={{ color: '#888', fontSize: '10px', borderBottom: '1px solid #222', marginBottom: '5px', fontWeight: 'bold', opacity: 0.8 }}>
         {title.toUpperCase()}
       </div>
       <div style={{
           display: 'grid',
           gridTemplateColumns: `repeat(${cols}, 1fr)`,
-          gap: '10px'
+          gap: '5px'
       }}>
         {node.fields && typeof node.fields === 'object' && Object.entries(node.fields).map(([k, v]) => (
           <window.WidgetFactory key={k} nodeName={k} node={v} path_prefix={`${path_prefix}/${nodeName}`} />
@@ -61,13 +61,13 @@ window.OcaBlock = ({ nodeName, node, path_prefix }) => {
 };
 
 /**
- * WidgetFactory: The recursive engine that translates JSON nodes into React components.
- * Registered on window for Babel standalone compatibility.
+ * WidgetFactory: The recursive engine that translates JSON schema definitions 
+ * into a dynamic React component tree. Handles component registry lookups, 
+ * layout attribute mapping, and fallback rendering for unregistered types.
  */
 window.WidgetFactory = ({ nodeName, node, path_prefix = '' }) => {
   if (!node) return null;
 
-  // 1. Identify the component type from the JSON
   const COMPONENT_REGISTRY = {
     'OcaBin': window.OcaBin,
     'OcaBlock': window.OcaBlock,
@@ -78,7 +78,7 @@ window.WidgetFactory = ({ nodeName, node, path_prefix = '' }) => {
 
   const ComponentToRender = COMPONENT_REGISTRY[node.type];
 
-  // 2. Handle Grid/Layout styles
+  // Map JSON layout constraints to CSS Grid attributes for reactive container sizing
   const gridStyles = {
     gridColumnStart: node.layout?.column !== undefined ? node.layout.column : 'auto',
     gridRowStart: node.layout?.row !== undefined ? node.layout.row : 'auto',
@@ -86,12 +86,11 @@ window.WidgetFactory = ({ nodeName, node, path_prefix = '' }) => {
     gridRowEnd: node.layout?.row_span ? `span ${node.layout.row_span}` : 'auto',
   };
 
-  // 3. Fallback for unknown types or generic containers
   if (!ComponentToRender) {
     if (node.type && (
         node.type.startsWith('_') || 
         node.type.toLowerCase().includes('fader') || 
-        node.type.toLowerCase().includes('meter') ||
+        node.type.toLowerCase().includes('meter') || 
         node.type.toLowerCase().includes('button') ||
         node.type.toLowerCase().includes('actuator') ||
         node.type.toLowerCase().includes('checkbox') ||
@@ -104,7 +103,6 @@ window.WidgetFactory = ({ nodeName, node, path_prefix = '' }) => {
             </div>
         );
     }
-
     return (
         <div style={{ border: '1px dashed #333', padding: '5px', margin: '2px' }}>
             {node.blocks && typeof node.blocks === 'object' && Object.entries(node.blocks).map(([k, v]) => (
@@ -184,6 +182,14 @@ window.FieldComponent = ({ nodeName, node, path_prefix }) => {
         );
     }
 
+    if (type === '_CompositeFader' || type === '_GCA' || type === 'GCA') {
+        return (
+            <div style={style}>
+                {window.GCA ? <window.GCA value={val} onChange={setVal} config={node} /> : <div style={{width: '100px', height: '150px', background: '#333'}}>GCA</div>}
+            </div>
+        );
+    }
+
     if (type === '_SmartFader' || type.toLowerCase().includes('fader')) {
         if (type === '_FaderWithBarGraph') {
             return (
@@ -211,13 +217,17 @@ window.FieldComponent = ({ nodeName, node, path_prefix }) => {
         return (
             <div style={style}>
                 <span style={titleStyle}>{title}</span>
-                {window.Meter ? <window.Meter value={val} config={node} /> : <div style={{width: '20px', height: '150px', background: 'green'}}></div>}
+                {window.MeterBarGraph ? <window.MeterBarGraph value={val} config={node} /> : <div style={{width: '20px', height: '150px', background: 'green'}}></div>}
             </div>
         );
     }
 
-    if (type.toLowerCase().includes('cmdp') || type.toLowerCase().includes('knob') || type === 'SelectorSwitch') {
-        const Widget = (type === 'SelectorSwitch') ? window.SelectorSwitch : (window.CMDP || window.Knob);
+    if (type.toLowerCase().includes('cmdp') || type.toLowerCase().includes('mdp') || type.toLowerCase().includes('knob') || type === 'SelectorSwitch') {
+        let Widget = window.Knob;
+        if (type === 'SelectorSwitch') Widget = window.SelectorSwitch;
+        else if (type.toLowerCase().includes('cmdp')) Widget = window.CMDP || window.Knob;
+        else if (type.toLowerCase().includes('mdp')) Widget = window.MDP || window.Knob;
+        
         return (
             <div style={style}>
                 <span style={titleStyle}>{title}</span>
@@ -266,10 +276,10 @@ window.FieldComponent = ({ nodeName, node, path_prefix }) => {
         );
     }
 
-    if (type === 'DynamicGraph' || type.toLowerCase().includes('graph')) {
+    if (type === 'DynamicGraph' || type === 'plot_widget' || type.toLowerCase().includes('graph')) {
         return (
             <div style={style}>
-                {window.DynamicGraph ? <window.DynamicGraph data={val} config={node} /> : <div style={{width: '100%', height: '300px', background: '#222'}}>Graph Component</div>}
+                {window.DynamicGraph ? <window.DynamicGraph value={val} config={node} topic={topic} nodeJson={node} /> : <div style={{width: '100%', height: '300px', background: '#222'}}>Graph Component</div>}
             </div>
         );
     }

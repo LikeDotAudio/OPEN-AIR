@@ -1,46 +1,211 @@
-const Knob = ({ value, onChange, config, size: defaultSize = 80 }) => {
-    // Dynamic Config Parsing
-    const min = config?.domain?.primary?.min !== undefined ? config.domain.primary.min : 0;
-    const max = config?.domain?.primary?.max !== undefined ? config.domain.primary.max : 100;
-    const logExponent = config?.domain?.primary?.log_exponent || 1.0;
-    
-    // Geometry
-    const w = config?.geometry?.width || config?.layout?.width || config?.width || defaultSize;
-    const h = config?.geometry?.height || config?.layout?.height || config?.height || defaultSize;
-    const size = Math.min(w, h);
-    
-    // Cosmetics & Styling
-    const baseColor = config?.knob_config?.cap_color || config?.cosmetics?.colors?.primary || config?.base_color || '#333';
-    const accentColor = config?.knob_config?.cap_outline_color || config?.indicator_color || config?.cosmetics?.colors?.accent || '#33A1FD';
-    const tickColor = config?.style?.tick_color || config?.cosmetics?.colors?.text || '#aaa';
-    const bgColor = config?.cosmetics?.colors?.background || config?.bg_color || '#2b2b2b';
-    
-    const knobStyle = config?.style?.knob_style || config?.knob_style || 'standard'; // 'standard', 'panner', 'dial'
-    const knobShape = config?.style?.knob_shape || config?.shape || (knobStyle === 'gear' ? 'gear' : 'circle'); // 'circle', 'octagon', 'gear'
-    const gearTeeth = config?.style?.knob_teeth || config?.teeth || 16;
-    const pointerStyle = config?.style?.pointer_style || config?.pointer_style || 'line'; // 'line', 'dot', 'triangle', 'notch'
-    
-    const showTicks = config?.style?.show_ticks !== false;
-    const tickStyle = config?.style?.tick_style || config?.tick_style || 'line'; // 'line', 'dots', 'numeric'
-    const tickLength = config?.style?.tick_length || config?.tick_length || 10;
-    const arcWidth = config?.style?.arc_width || config?.arc_width || 5;
+/**
+ * Knob Architecture (Separated Concerns)
+ * 1. KnobMotion: Logic for ranges, angles, and interaction.
+ * 2. KnobTicks: Scale rendering (ticks and sizes).
+ * 3. KnobCap: The 3D visual body (cap, shapes, glints).
+ * 4. Main Orchestrator: Combines elements.
+ */
 
-    const showLabel = config?.readout?.show_label !== false;
-    const textInside = config?.readout?.text_inside === true;
-    const textPos = config?.readout?.label_position || 'top';
-    const noCenter = config?.style?.no_center === true;
-
-    // Angle limits for knob sweep
-    const minAngle = config?.geometry?.min_angle !== undefined ? config.geometry.min_angle : config?.min_angle !== undefined ? config.min_angle : -135;
-    const maxAngle = config?.geometry?.max_angle !== undefined ? config.geometry.max_angle : config?.max_angle !== undefined ? config.max_angle : 135;
-    
-    // State for dragging
-    const [isDragging, setIsDragging] = React.useState(false);
-    const svgRef = React.useRef(null); // Ref for the SVG element
-    const startYRef = React.useRef(0);
-    const startValRef = React.useRef(0);
+// --- 1. MOTIONS & RANGES (Logic) ---
+const getKnobAngles = (config, value, min, max) => {
+    const knobStyle = (config?.cosmetics?.style_overrides?.knob_style || 
+                      config?.cosmetics?.styling?.knob_style || 
+                      config?.cosmetics?.visualization || 'standard').toLowerCase();
 
     const clamp = (val, min, max) => Math.max(min, Math.min(max, val));
+    const boundedValue = clamp(value !== undefined && value !== null ? value : min, min, max);
+    const norm = (boundedValue - min) / ((max - min) || 1);
+
+    let startAngle = 240;
+    let extent = -300;
+    let pointerAngleDeg;
+
+    if (knobStyle === 'panner') {
+        startAngle = 90;
+        extent = 135; 
+        const mid = (min + max) / 2;
+        const normFromCenter = (boundedValue - mid) / ((max - min) / 2 || 1);
+        pointerAngleDeg = startAngle + (-normFromCenter * extent);
+    } else if (knobStyle === 'dial') {
+        startAngle = 90;
+        extent = -360;
+        pointerAngleDeg = startAngle + (norm * extent);
+    } else {
+        pointerAngleDeg = startAngle + (norm * extent);
+    }
+
+    return { startAngle, extent, pointerAngleDeg, norm };
+};
+
+// --- 2. TICK MARKS & SIZES ---
+const KnobTicks = ({ center, radius, arcWidth, config, filterId }) => {
+    const scale = config?.cosmetics?.scale || config?.scale || {};
+    const colors = config?.cosmetics?.colors || {};
+    
+    const showTicks = scale.show !== undefined ? scale.show : (config?.show_ticks || false);
+    if (!showTicks) return null;
+
+    const tickLength = scale.length !== undefined ? scale.length : (config?.tick_length || 10);
+    const tickColor = colors.tick || colors.text || '#aaa';
+    const tickCount = scale.count || 10;
+    const tickThickness = scale.thickness || 1;
+
+    const ticks = [];
+    for (let i = 0; i <= tickCount; i++) {
+        const ang = 240 - (i * (300 / tickCount));
+        const rad = ang * Math.PI / 180;
+        const r1 = radius + (arcWidth / 2) + 2;
+        const r2 = r1 + tickLength;
+        
+        ticks.push(
+            <line 
+                key={i} 
+                x1={center + r1 * Math.cos(rad)} 
+                y1={center - r1 * Math.sin(rad)} 
+                x2={center + r2 * Math.cos(rad)} 
+                y2={center - r2 * Math.sin(rad)} 
+                stroke={tickColor} 
+                strokeWidth={tickThickness} 
+            />
+        );
+    }
+    return <g className="knob-ticks">{ticks}</g>;
+};
+
+// --- 3. KNOB CAP (Visual Body) ---
+const KnobCap = ({ center, radius, angle, config, filterId, indicatorColor }) => {
+    const c = config || {};
+    const cosmetics = c.cosmetics || {};
+    const styling = cosmetics.styling || {};
+    const overrides = cosmetics.style_overrides || {};
+    const pointer = cosmetics.pointer || {};
+
+    const knobStyle = (overrides.knob_style || styling.knob_style || cosmetics.visualization || c.knob_style || 'standard').toLowerCase();
+    const defaultShape = knobStyle === 'gear' ? 'gear' : 'circle';
+    const knobShape = (overrides.shape || styling.shape || c.shape || defaultShape).toLowerCase();
+    
+    const gearTeeth = styling.teeth || c.knob_teeth || 8;
+    const outlineColor = styling.outline_color || c.knob_outline_color || '#444';
+    const outlineThickness = styling.outline_thickness !== undefined ? styling.outline_thickness : (c.knob_outline_thickness || 0);
+    const noCenter = styling.no_center || c.no_center || false;
+
+    // Cap Scale logic: allow smaller caps to see ticks better (Default to 0.7 for better visibility)
+    const capScale = styling.cap_scale !== undefined ? styling.cap_scale : 0.7;
+    const capR = radius * capScale;
+
+    const pointerStyle = (pointer.style || c.pointer_style || 'line').toLowerCase();
+    // Default pointer length should reach near the track radius even if cap is small
+    const pointerLength = pointer.length !== undefined ? pointer.length : (config?.pointer_length || (radius - 2));
+    const pointerOffset = pointer.offset !== undefined ? pointer.offset : (config?.pointer_offset || 0);
+
+    const DEPTH_OFFSET = 1.5;
+
+    const renderGeometry = (r, fill, stroke, sWidth, rotation) => {
+        const safeR = Math.max(0, r);
+        if (knobShape === 'gear') {
+            const innerR = safeR * 0.85; 
+            const pts = [];
+            for (let i = 0; i < gearTeeth * 4; i++) {
+                const toothState = i % 4;
+                const rad = (toothState === 1 || toothState === 2) ? safeR : innerR;
+                const a = (i / (gearTeeth * 4)) * Math.PI * 2 + (rotation * Math.PI / 180);
+                pts.push(`${center + rad * Math.cos(a)},${center - rad * Math.sin(a)}`);
+            }
+            return <polygon points={pts.join(' ')} fill={fill} stroke={stroke} strokeWidth={sWidth} />;
+        } else if (knobShape === 'octagon') {
+            const pts = [];
+            for (let i = 0; i < 8; i++) {
+                const a = (i / 8) * Math.PI * 2 + (Math.PI / 8) + (rotation * Math.PI / 180);
+                pts.push(`${center + safeR * Math.cos(a)},${center - safeR * Math.sin(a)}`);
+            }
+            return <polygon points={pts.join(' ')} fill={fill} stroke={stroke} strokeWidth={sWidth} />;
+        }
+        return <circle cx={center} cy={center} r={safeR} fill={fill} stroke={stroke} strokeWidth={sWidth} />;
+    };
+
+    const renderPointer = (r, ang) => {
+        const rad = ang * Math.PI / 180;
+        const x1 = center + pointerOffset * Math.cos(rad);
+        const y1 = center - pointerOffset * Math.sin(rad);
+        const x2 = center + (pointerOffset + pointerLength) * Math.cos(rad);
+        const y2 = center - (pointerOffset + pointerLength) * Math.sin(rad);
+
+        if (pointerStyle === 'dot') {
+            return <circle cx={x2} cy={y2} r="3" fill={indicatorColor} />;
+        } else if (pointerStyle === 'triangle') {
+            const triWidth = 5;
+            const perp = rad + Math.PI / 2;
+            const c1x = x1 + triWidth * Math.cos(perp);
+            const c1y = y1 - triWidth * Math.sin(perp);
+            const c2x = x1 - triWidth * Math.cos(perp);
+            const c2y = y1 + triWidth * Math.sin(perp);
+            return <polygon points={`${x2},${y2} ${c1x},${c1y} ${c2x},${c2y}`} fill={indicatorColor} />;
+        } else if (pointerStyle === 'notch') {
+            // Adjust notch length to reach pointerLength
+            const nLen = 6;
+            const nx1 = center + (pointerOffset + pointerLength - nLen) * Math.cos(rad);
+            const ny1 = center - (pointerOffset + pointerLength - nLen) * Math.sin(rad);
+            return <line x1={nx1} y1={ny1} x2={x2} y2={y2} stroke={indicatorColor} strokeWidth="4" strokeLinecap="butt" />;
+        }
+        return <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={indicatorColor} strokeWidth="2" strokeLinecap="round" />;
+    };
+
+    return (
+        <g className="knob-cap-system">
+            {/* 3D Body (Offset Base) */}
+            <g transform={`translate(${DEPTH_OFFSET}, ${DEPTH_OFFSET})`}>
+                {renderGeometry(capR, "#111", "none", 0, angle)}
+            </g>
+
+            {/* Top Cap (Offset NW) */}
+            <g transform={`translate(${-DEPTH_OFFSET}, -${DEPTH_OFFSET})`} filter={`url(#sh-${filterId})`}>
+                {renderGeometry(capR, `url(#grad-${filterId})`, outlineColor, outlineThickness, angle)}
+                
+                {/* 3D Effects: Glint & Inner Rim */}
+                <g pointerEvents="none">
+                    <circle cx={center + capR * 0.1} cy={center + capR * 0.1} r={capR * 0.9} fill="black" opacity="0.2" filter={`url(#blur-${filterId})`} />
+                    <ellipse cx={center - capR * 0.4} cy={center - capR * 0.5} rx={capR * 0.6} ry={capR * 0.3} fill="white" opacity="0.3" filter={`url(#blur-${filterId})`} />
+                    <path 
+                        d={describeArc(center, center, capR - 3, 180, 270)} 
+                        fill="none" stroke="white" strokeWidth="2" strokeOpacity="0.4" filter={`url(#blur-${filterId})`}
+                    />
+                </g>
+
+                {!noCenter && <circle cx={center} cy={center} r={3} fill={indicatorColor} />}
+                {renderPointer(capR, angle)}
+            </g>
+        </g>
+    );
+};
+
+// --- 4. MAIN ORCHESTRATOR ---
+const Knob = ({ value, onChange, config, size: defaultSize = 80 }) => {
+    // 1. Config & Geometry Extraction
+    const c = config || {};
+    const cosmetics = c.cosmetics || {};
+    const colors = cosmetics.colors || {};
+    const styling = cosmetics.styling || {};
+    
+    const min = c.domain?.primary?.min !== undefined ? c.domain.primary.min : (c.min !== undefined ? c.min : 0);
+    const max = c.domain?.primary?.max !== undefined ? c.domain.primary.max : (c.max !== undefined ? c.max : 100);
+    
+    const w = c.geometry?.width || c.width || defaultSize;
+    const h = c.geometry?.height || c.height || defaultSize;
+    const size = Math.min(w, h);
+
+    const arcWidth = styling.arc_width !== undefined ? styling.arc_width : (c.arc_width || 5);
+    const indicatorColor = c.indicator_color || colors.active || colors.primary || '#33A1FD';
+    const secondaryColor = colors.secondary || '#444444';
+    const baseColor = styling.fill_color || c.knob_fill_color || '#333';
+
+    const padding = (arcWidth / 2) + 12;
+    const radius = ((size - (padding * 2)) / 2) * 0.8;
+    const center = size / 2;
+
+    // 2. Interaction State
+    const [isDragging, setIsDragging] = React.useState(false);
+    const startYRef = React.useRef(0);
+    const startValRef = React.useRef(0);
 
     const handlePointerDown = (e) => {
         setIsDragging(true);
@@ -52,11 +217,9 @@ const Knob = ({ value, onChange, config, size: defaultSize = 80 }) => {
     const handlePointerMove = (e) => {
         if (!isDragging) return;
         const deltaY = startYRef.current - e.clientY;
-        // Sensitivity: 1 pixel = 1 unit (scaled by range)
         const range = max - min;
-        const deltaVal = (deltaY / 100) * range; 
-        const newVal = clamp(startValRef.current + deltaVal, min, max);
-        onChange(Math.round(newVal * 100) / 100);
+        const deltaVal = (deltaY / 150) * range; 
+        onChange(Math.max(min, Math.min(max, Math.round((startValRef.current + deltaVal) * 100) / 100)));
     };
 
     const handlePointerUp = (e) => {
@@ -64,110 +227,71 @@ const Knob = ({ value, onChange, config, size: defaultSize = 80 }) => {
         e.target.releasePointerCapture(e.pointerId);
     };
 
-    // Calculate current angle based on value
-    const boundedValue = clamp(value !== undefined && value !== null ? value : min, min, max);
-    const percentage = (boundedValue - min) / ((max - min) || 1);
-    const angle = minAngle + percentage * (maxAngle - minAngle);
-
-    const radius = size / 2;
-    const center = size / 2;
-
-    // Helper to render different knob shapes
-    const renderShape = () => {
-        const r = radius - 10; // Radius for the main shape, slightly smaller than SVG radius
-        if (knobShape === 'gear') {
-            const innerR = r * 0.85;
-            const pts = [];
-            for (let i = 0; i < gearTeeth * 4; i++) {
-                const toothState = i % 4;
-                const currentR = (toothState === 1 || toothState === 2) ? r : innerR;
-                const a = (i / (gearTeeth * 4)) * Math.PI * 2;
-                pts.push(`${center + currentR * Math.cos(a)},${center + currentR * Math.sin(a)}`);
-            }
-            return <polygon points={pts.join(' ')} fill={`url(#knob-grad-${config?.id || 'knob'})`} stroke="#111" strokeWidth="2" />;
-        } else if (knobShape === 'octagon') {
-            const pts = [];
-            for (let i = 0; i < 8; i++) {
-                const a = (i / 8) * Math.PI * 2 + (Math.PI / 8);
-                pts.push(`${center + r * Math.cos(a)},${center + r * Math.sin(a)}`);
-            }
-            return <polygon points={pts.join(' ')} fill={`url(#knob-grad-${config?.id || 'knob'})`} stroke="#111" strokeWidth="2" />;
-        } else { // Default to circle
-            return <circle cx={center} cy={center} r={r} fill={`url(#knob-grad-${config?.id || 'knob'})`} stroke="#111" strokeWidth="2" />;
-        }
-    };
-
-    // Helper to render different pointer styles
-    const renderPointer = () => {
-        const pLen = config?.pointer_length || (radius - 15);
-        if (pointerStyle === 'dot') {
-            return <circle cx={center} cy={center - radius + 6} r="3" fill={accentColor} />;
-        } else if (pointerStyle === 'triangle') {
-            return <polygon points={`${center},${center - radius + 2} ${center - 5},${center - radius + 12} ${center + 5},${center - radius + 12}`} fill={accentColor} />;
-        } else if (pointerStyle === 'notch') {
-            return <rect x={center - 4} y={center - radius} width="8" height="10" fill={accentColor} rx="2" />;
-        } else { // Default to line
-            return <line x1={center} y1={center} x2={center} y2={center - pLen} stroke={accentColor} strokeWidth="3" strokeLinecap="round" />;
-        }
-    };
+    // 3. Coordinate Sync
+    const { startAngle, extent, pointerAngleDeg, norm } = getKnobAngles(c, value, min, max);
+    const filterId = `knob-${c.id || Math.random().toString(36).substr(2, 9)}`;
 
     return (
         <svg 
-            ref={svgRef} // Attach ref to SVG for interaction bounds
-            width={size} 
-            height={size} 
-            style={{ touchAction: 'none', cursor: 'ns-resize' }} // Cursor style adjusted for vertical drag
+            width={size} height={size} 
+            viewBox={`0 0 ${size} ${size}`}
+            style={{ touchAction: 'none', cursor: 'ns-resize', overflow: 'visible' }}
             onPointerDown={handlePointerDown}
             onPointerMove={handlePointerMove}
             onPointerUp={handlePointerUp}
             onPointerCancel={handlePointerUp}
         >
             <defs>
-                <linearGradient id={`knob-grad-${config?.id || 'knob'})`} x1="0%" y1="0%" x2="0%" y2="100%">
+                <linearGradient id={`grad-${filterId}`} x1="0%" y1="0%" x2="0%" y2="100%">
                     <stop offset="0%" stopColor="#555" />
                     <stop offset="30%" stopColor={baseColor} />
                     <stop offset="100%" stopColor="#111" />
                 </linearGradient>
-                <filter id={`drop-shadow-knob-${config?.id || 'knob'})`} x="-20%" y="-20%" width="140%" height="140%">
-                    <feDropShadow dx="2" dy="2" stdDeviation="2" floodColor="#000" floodOpacity="0.5"/>
+                <filter id={`sh-${filterId}`} x="-50%" y="-50%" width="200%" height="200%">
+                    <feDropShadow dx="2" dy="2" stdDeviation="3" floodColor="#000" floodOpacity="0.6"/>
                 </filter>
-                <filter id={`glow-${config?.id || 'knob'})`} x="-20%" y="-20%" width="140%" height="140%">
-                    <feGaussianBlur stdDeviation="3" result="blur" />
-                    <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+                <filter id={`blur-${filterId}`}>
+                    <feGaussianBlur stdDeviation="2" />
                 </filter>
             </defs>
 
-            {/* Outer Bezel Shadow Ring */}
-            <circle cx={center} cy={center} r={radius + 10} fill="#111" />
-            
-            {/* Ticks/Scale indicator */}
-            <circle 
-                cx={center} 
-                cy={center} 
-                r={radius + 5} 
-                fill="none" 
-                stroke={tickColor} 
-                strokeWidth="2" 
-                strokeDasharray="4 6" 
+            {/* Background Track / Indicator Arc */}
+            <circle cx={center} cy={center} r={radius} fill="none" stroke={secondaryColor} strokeWidth={arcWidth} />
+            <path 
+                d={describeArc(center, center, radius, startAngle, startAngle + (norm * extent))} 
+                fill="none" stroke={indicatorColor} strokeWidth={arcWidth} strokeLinecap="round"
             />
 
-            {/* Rotating Core Group */}
-            <g transform={`rotate(${angle}, ${center}, ${center})`} filter={`url(#drop-shadow-knob-${config?.id || 'knob'})`}>
-                {renderShape()}
-                
-                {/* 3D Convex Dome simulation */}
-                <circle cx={center} cy={center} r={radius - 2} fill="url(#knob-grad-overlay)" opacity="0.3" />
-                <radialGradient id="knob-grad-overlay" cx="30%" cy="30%" r="70%">
-                    <stop offset="0%" stopColor="#fff" stopOpacity="0.4" />
-                    <stop offset="100%" stopColor="#000" stopOpacity="0.8" />
-                </radialGradient>
+            {/* Ticks Component */}
+            <KnobTicks center={center} radius={radius} arcWidth={arcWidth} config={c} filterId={filterId} />
 
-                {/* Inner Indent */}
-                {!noCenter && <circle cx={center} cy={center} r={radius * 0.5} fill="#1a1a1a" stroke="#000" strokeWidth="1" />}
-                
-                {renderPointer()}
-            </g>
+            {/* Outer Bezel */}
+            <circle cx={center} cy={center} r={radius + arcWidth/2 + 2} fill="none" stroke="#111" strokeWidth="1" />
+
+            {/* Visual Cap Component */}
+            <KnobCap 
+                center={center} 
+                radius={radius} 
+                angle={pointerAngleDeg} 
+                config={c} 
+                filterId={filterId} 
+                indicatorColor={indicatorColor}
+            />
         </svg>
     );
 };
+
+// --- HELPERS ---
+function describeArc(x, y, radius, startAngle, endAngle) {
+    const start = polarToCartesian(x, y, radius, endAngle);
+    const end = polarToCartesian(x, y, radius, startAngle);
+    const largeArcFlag = Math.abs(endAngle - startAngle) <= 180 ? "0" : "1";
+    return ["M", start.x, start.y, "A", radius, radius, 0, largeArcFlag, 0, end.x, end.y].join(" ");
+}
+
+function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
+    const rad = angleInDegrees * Math.PI / 180.0;
+    return { x: centerX + (radius * Math.cos(rad)), y: centerY - (radius * Math.sin(rad)) };
+}
+
 window.Knob = Knob;

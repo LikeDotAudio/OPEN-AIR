@@ -1,0 +1,104 @@
+/* Fader Component Styles
+ * Author: Gemini (Collaborator)
+ * Version: 20260505.1900.1
+ *
+ * Description: CSS for Fader, Slider, and Cap components, aiming for a photorealistic 3D industrial aesthetic.
+ */
+
+/* --- Fader Container --- */
+.fader-container {
+  position: relative;
+  touch-action: none; /* Prevent default touch behaviors like scrolling */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #2b2b2b; /* Dark background, common in audio UIs */
+  border: 1px solid #1a1a1a; /* Subtle border */
+  border-radius: 4px;
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+
+/* --- Fader Track (Slider) --- */
+.fader-track {
+  position: absolute;
+  background-color: #050505; /* Dark, recessed track color */
+  border: 1px solid #222;    /* Inner border for depth */
+  border-radius: 4px;        /* Rounded track */
+  box-sizing: border-box;
+}
+
+/* Vertical Track Specifics */
+.fader-track.vertical {
+  left: 50%; /* Center horizontally */
+  top: 25px; /* Top padding */
+  bottom: 20px; /* Bottom padding */
+  width: 10px; /* Track width */
+  transform: translateX(-50%); /* Adjust centering */
+}
+
+/* Horizontal Track Specifics */
+.fader-track.horizontal {
+  left: 25px; /* Left padding */
+  top: 50%;  /* Center vertically */
+  right: 20px; /* Right padding */
+  height: 10px; /* Track height */
+  transform: translateY(-50%); /* Adjust centering */
+}
+
+/* --- Fader Cap (Thumb) --- */
+.fader-cap {
+  position: absolute;
+  background-color: #dcdcdc; /* Default base color */
+  border-radius: 4px;        /* Rounded corners */
+  border: 1px solid #555;    /* Subtle edge border */
+  z-index: 1;                /* Ensure cap is above track */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); /* Drop shadow for lift */
+  transition: background-color 0.1s ease; /* Smooth color changes */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+/* 3D Lighting and Texture for Cap */
+.fader-cap {
+  /* Base Color + Diffuse Lighting (simulated with gradients) */
+  background-image: 
+    linear-gradient(to bottom, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 15%, rgba(0,0,0,0.05) 100%),
+    /* Specular Highlight (Top-center sharp reflection) */
+    linear-gradient(to bottom, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 10%, rgba(255,255,255,0) 90%, rgba(255,255,255,0.2) 100%),
+    /* Grooves (repeating lines for texture) */
+    repeating-linear-gradient(
+      to right, /* Adjust angle for different groove directions */
+      rgba(0,0,0,0.1) 0px,
+      rgba(0,0,0,0.1) 1px,
+      transparent 1px,
+      transparent 5px
+    );
+}
+
+/* Specific Cap Colors from JSON */
+.fader-cap.cap-primary { background-color: #33A1FD; } /* Default */
+.fader-cap.cap-highlight-gold { background-image: linear-gradient(to bottom, rgba(255,215,0,0.6) 0%, rgba(255,215,0,0.1) 15%, transparent 30%); } /* Example */
+
+/* Vertical Cap Styling */
+.fader-cap.vertical {
+  width: 30px;
+  height: 40px; /* Taller than wide */
+  left: 50%;
+  transform: translateX(-50%) translateY(calc(var(--fader-pos) * 1px)); /* Dynamic vertical position */
+}
+
+/* Horizontal Cap Styling */
+.fader-cap.horizontal {
+  width: 40px;  /* Wider than tall */
+  height: 30px;
+  top: 50%;
+  transform: translateY(-50%) translateX(calc(var(--fader-pos) * 1px)); /* Dynamic horizontal position */
+}
+
+/* Line within the cap */
+.fader-cap-line {
+  stroke: #333;
+  stroke-width: 2;
+}

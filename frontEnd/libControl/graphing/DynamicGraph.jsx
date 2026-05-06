@@ -6,8 +6,11 @@ const DynamicGraph = ({ value: mqttData, config }) => {
     const title = config?.label?.[lang] || config?.label?.En || config?.title || "Dynamic Graph";
     
     // Geometry
-    const height = config?.layout?.height ? `${config.layout.height * 10}px` : "400px";
-    const width = config?.layout?.width || "100%";
+    const heightVal = config?.geometry?.height || config?.layout?.height;
+    const height = heightVal ? (typeof heightVal === 'number' ? `${heightVal}px` : heightVal) : "400px";
+    
+    const widthVal = config?.geometry?.width || config?.layout?.width;
+    const width = widthVal ? (typeof widthVal === 'number' ? `${widthVal}px` : widthVal) : "100%";
 
     // Axes
     const xAxisCfg = config?.axis?.x || {};

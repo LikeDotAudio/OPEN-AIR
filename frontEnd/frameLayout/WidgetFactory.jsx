@@ -206,7 +206,7 @@ window.FieldComponent = ({ nodeName, node, path_prefix }) => {
         );
     }
 
-    if (type.toLowerCase().includes('meter')) {
+    if (type.toLowerCase().includes('meter') || type === '_BarGraph' || type === '_SmartMeter' || type === '_Meter') {
         if (type.toLowerCase().includes('needle')) {
             return (
                 <div style={style}>

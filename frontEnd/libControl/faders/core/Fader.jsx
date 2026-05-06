@@ -91,7 +91,6 @@ const Fader = ({ value: externalValue, onChange, config, topic, nodeJson }) => {
     };
 
     const onWheel = (e) => {
-        e.preventDefault();
         const step = (max - min) * 0.05;
         const delta = Math.sign(e.deltaY) * -1; // Standard scroll down = negative Y = decrease
         setCurrentValue(currentValue + (delta * step));

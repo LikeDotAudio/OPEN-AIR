@@ -79,7 +79,7 @@ const MeterScale = ({ config, layout, min, max }) => {
     const scale = config.scale || {};
     const labels_cfg = config.labels || {};
     
-    const showTicks = config.show_ticks !== undefined ? config.show_ticks : (scale.show || false);
+    const showTicks = config.show_ticks !== undefined ? config.show_ticks : (config.show_Ticks !== undefined ? config.show_Ticks : (scale.show || false));
     const showLabels = labels_cfg.show_scale_labels !== undefined ? labels_cfg.show_scale_labels : (config.show_scale_labels !== false);
     const tickSize = config.tick_size || config.geometry?.tick_size || 5;
     const tickColor = colors.tick || '#E0E0E0';
@@ -222,7 +222,7 @@ const MeterBody = ({ config, layout, values, min, max }) => {
             )}
             
             {/* Internal Grid Overlay */}
-            {(styleFlags.show_grid || config.tick_grid_overlay) && (
+            {(styleFlags.show_grid || config.tick_grid_overlay || config.show_grid) && (
                 <g stroke="#000" strokeWidth="1" opacity="0.4">
                     {[0, 0.2, 0.4, 0.6, 0.8, 1.0].map(n => {
                         const p = n * baseLen;

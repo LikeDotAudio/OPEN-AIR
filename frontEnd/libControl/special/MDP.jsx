@@ -1,10 +1,11 @@
-// MDP - Multi-Dimensional Panner Component
-// Author: Gemini (Collaborator)
-// Version: 20260506.1800.1
-//
-// Description: Advanced multi-axis panner with widget rotation and free move.
-
-
+/**
+ * MDP - Multi-Dimensional Panner Component
+ * Author: Anthony Peter Kuzub / Gemini (Collaborator)
+ * Version: 20260507.1200.1
+ *
+ * Description: Advanced multi-axis panner with widget rotation and free move.
+ * Robust numeric extraction for MQTT composite states.
+ */
 
 const MDP = ({ config, value, rotValue, angle, onChange }) => {
     const canvasRef = React.useRef(null);
@@ -17,11 +18,25 @@ const MDP = ({ config, value, rotValue, angle, onChange }) => {
     const trackLen = config?.trackLen || 200;
     const capRadius = 22;
 
-    const valCurrent = value !== undefined ? value : 50;
-    const rotCurrent = rotValue !== undefined ? rotValue : 0;
-    const widgetAngle = angle !== undefined ? angle : 0;
-    const x = config?.x || 150;
-    const y = config?.y || 150;
+    // --- Robust Value Extraction ---
+    const getNum = (v, fallback) => (typeof v === 'number' ? v : (typeof v === 'string' ? parseFloat(v) : fallback));
+    
+    let valCurrent = (valMin + valMax) / 2;
+    let rotCurrent = 0;
+    let widgetAngle = angle !== undefined ? getNum(angle, 0) : getNum(config?.angle, 0);
+    let x = config?.x || 150;
+    let y = config?.y || 150;
+
+    if (value && typeof value === 'object' && !Array.isArray(value)) {
+        valCurrent = getNum(value.value, valCurrent);
+        rotCurrent = getNum(value.rotValue, rotCurrent);
+        if (value.angle !== undefined) widgetAngle = getNum(value.angle, widgetAngle);
+        if (value.x !== undefined) x = getNum(value.x, x);
+        if (value.y !== undefined) y = getNum(value.y, y);
+    } else {
+        valCurrent = getNum(value, valCurrent);
+        rotCurrent = getNum(rotValue, rotCurrent);
+    }
 
     const rotatePoint = (px, py, cx, cy, angleDeg) => {
         const rad = angleDeg * (Math.PI / 180);
@@ -33,7 +48,7 @@ const MDP = ({ config, value, rotValue, angle, onChange }) => {
     };
 
     const getCapPos = () => {
-        const norm = (valCurrent - valMin) / (valMax - valMin);
+        const norm = (valCurrent - valMin) / (valMax - valMin || 1);
         const localY = (trackLen / 2) - (norm * trackLen);
         return rotatePoint(x, y + localY, x, y, widgetAngle);
     };
@@ -108,11 +123,11 @@ const MDP = ({ config, value, rotValue, angle, onChange }) => {
 
         // Labels
         ctx.font = "10px Arial"; ctx.textAlign = "center"; ctx.fillStyle = "white";
-        ctx.fillText(valCurrent.toFixed(1), capPos.x, capPos.y - 35);
-        ctx.fillStyle = "#aaaaaa"; ctx.fillText("R:" + rotCurrent.toFixed(0), capPos.x, capPos.y + 35);
+        ctx.fillText(Number(valCurrent).toFixed(1), capPos.x, capPos.y - 35);
+        ctx.fillStyle = "#aaaaaa"; ctx.fillText("R:" + Number(rotCurrent).toFixed(0), capPos.x, capPos.y + 35);
     };
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (canvasRef.current) {
             const ctx = canvasRef.current.getContext('2d');
             draw(ctx);
@@ -132,8 +147,6 @@ const MDP = ({ config, value, rotValue, angle, onChange }) => {
             setInteractionState({ startX: tx, startY: ty, startVal: valCurrent, startRot: rotCurrent });
             canvasRef.current.setPointerCapture(e.pointerId);
         } else {
-            // Check for body hit (simulated long press for move would be here)
-            // For this port, we'll just allow direct move if not on cap
             setDraggingRole('widget_move');
             setInteractionState({ startX: tx, startY: ty, startXPos: x, startYPos: y });
             canvasRef.current.setPointerCapture(e.pointerId);
@@ -156,13 +169,11 @@ const MDP = ({ config, value, rotValue, angle, onChange }) => {
             const dx = tx - interactionState.startX;
             const dy = ty - interactionState.startY;
             
-            // Local Y component along track
             const localY = dx * Math.sin(-rad) + dy * Math.cos(-rad);
             const dv = -(localY / trackLen) * 100;
             
             const nextVal = Math.max(valMin, Math.min(valMax, interactionState.startVal + dv));
             
-            // Rotation via horizontal drag if holding modifier or second finger (simplified)
             let nextRot = rotCurrent;
             if (e.shiftKey) {
                 nextRot = Math.max(rotMin, Math.min(rotMax, interactionState.startRot + dx));
@@ -194,11 +205,4 @@ const MDP = ({ config, value, rotValue, angle, onChange }) => {
     );
 };
 
-window.MDP = MDP;
-ckgroundColor: '#222' }}
-        />
-    );
-};
-
-window.MDP = MDP;
 window.MDP = MDP;

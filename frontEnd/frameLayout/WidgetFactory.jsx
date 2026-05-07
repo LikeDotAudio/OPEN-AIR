@@ -95,7 +95,10 @@ window.WidgetFactory = ({ nodeName, node, path_prefix = '' }) => {
         node.type.toLowerCase().includes('actuator') ||
         node.type.toLowerCase().includes('checkbox') ||
         node.type.toLowerCase().includes('value') ||
-        node.type.toLowerCase().includes('label')
+        node.type.toLowerCase().includes('label') ||
+        node.type.toLowerCase().includes('graph') ||
+        node.type.toLowerCase().includes('plot') ||
+        node.type.toLowerCase().includes('link')
     )) {
         return (
             <div style={gridStyles} className={`widget-wrapper ${node.type}`}>
@@ -153,7 +156,16 @@ window.FieldComponent = ({ nodeName, node, path_prefix }) => {
                   getLocalizedLabel(node.label_active) || 
                   nodeName;
 
-    const style = { display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', height: '100%' };
+    const lHeight = node.layout?.height || node.geometry?.height;
+    const lWidth = node.layout?.width || node.geometry?.width;
+
+    const style = { 
+        display: 'flex', 
+        flexDirection: 'column', 
+        alignItems: 'center', 
+        width: lWidth ? (typeof lWidth === 'number' ? `${lWidth}px` : lWidth) : '100%', 
+        height: lHeight ? (typeof lHeight === 'number' ? `${lHeight}px` : lHeight) : '100%' 
+    };
     const titleStyle = { fontSize: '12px', color: node.cosmetics?.colors?.text || '#999', marginBottom: '10px' };
 
     if (type.toLowerCase().includes('composite') || type.toLowerCase().includes('dial_value') || type === '_Horizontal_with_dial_Value') {
@@ -206,6 +218,14 @@ window.FieldComponent = ({ nodeName, node, path_prefix }) => {
         );
     }
 
+    if (type === '_VUMeterKnob') {
+        return (
+            <div style={style}>
+                {window.VUMeterKnob ? <window.VUMeterKnob value={val} onChange={setVal} config={node} topic={topic} path_prefix={path_prefix} /> : <div style={{width: '150px', height: '150px', background: '#333'}}>VU Knob</div>}
+            </div>
+        );
+    }
+
     if (type.toLowerCase().includes('meter') || type === '_BarGraph' || type === '_SmartMeter' || type === '_Meter') {
         if (type.toLowerCase().includes('needle')) {
             return (
@@ -252,6 +272,14 @@ window.FieldComponent = ({ nodeName, node, path_prefix }) => {
         );
     }
 
+    if (type.toLowerCase().includes('progress') || type === 'ProgressBar' || type === '_ProgressBar' || type === '_SmartProgress') {
+        return (
+            <div style={style}>
+                {window.OcaProgressBar ? <window.OcaProgressBar value={val} config={node} topic={topic} nodeJson={node} /> : <div style={{width: '100%', height: '20px', background: '#333'}}>Progress</div>}
+            </div>
+        );
+    }
+
     if (type.toLowerCase().includes('status_light') || type.toLowerCase().includes('indicator')) {
         return (
             <div style={style}>
@@ -284,90 +312,96 @@ window.FieldComponent = ({ nodeName, node, path_prefix }) => {
         );
     }
 
-    if (type.toLowerCase().includes('button') || type.toLowerCase().includes('actuator')) {
+    if (type.toLowerCase().includes('button') || type.toLowerCase().includes('actuator') || type.toLowerCase().includes('toggle')) {
         const isWink = type.toLowerCase().includes('wink');
         const isTrapezoid = type.toLowerCase().includes('trapezoid');
-        const isToggle = type.toLowerCase().includes('toggle') || isWink || isTrapezoid;
-        
-        // Handle Toggler with multiple options (Grid of buttons)
-        if (node.options && typeof node.options === 'object' && Object.keys(node.options).length > 1) {
-            const maxCols = node.layout?.max_cols || 1;
-            const options = Object.entries(node.options).map(([k, v]) => ({ ...v, key: k }));
-            
+        const isTogglerGroup = type.toLowerCase().includes('toggler') || (node.options && typeof node.options === 'object' && Object.keys(node.options).length > 1 && !isWink && !isTrapezoid);
+        const isDirectional = type.toLowerCase().includes('directional');
+        const isIncDec = type.toLowerCase().includes('inc_dec') || type.toLowerCase().includes('incdec');
+
+        if (isDirectional) {
             return (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '5px', width: '100%' }}>
-                    {title && <div style={{ fontSize: '11px', color: '#666', fontWeight: 'bold' }}>{title}</div>}
-                    <div style={{ 
-                        display: 'grid', 
-                        gridTemplateColumns: `repeat(${maxCols}, 1fr)`, 
-                        gap: '5px' 
-                    }}>
-                        {options.map((opt) => {
-                            const optTitle = getLocalizedLabel(opt.label) || getLocalizedLabel(opt.label_active) || opt.key;
-                            const isOptActive = val === opt.value || val === opt.key;
-                            
-                            return (
-                                <div key={opt.key}>
-                                    {isWink ? (
-                                        window.OcaWinkButton && <window.OcaWinkButton label={optTitle} value={isOptActive} onChange={() => setVal(opt.value || opt.key)} config={{...node, ...opt}} />
-                                    ) : isTrapezoid ? (
-                                        window.OcaTrapezoidButton && <window.OcaTrapezoidButton label={optTitle} value={isOptActive} onChange={() => setVal(opt.value || opt.key)} config={{...node, ...opt}} />
-                                    ) : (
-                                        window.OcaToggleButton && <window.OcaToggleButton label={optTitle} value={isOptActive} onChange={() => setVal(opt.value || opt.key)} config={{...node, ...opt}} />
-                                    )}
-                                </div>
-                            );
-                        })}
-                    </div>
+                <div style={style}>
+                    {window.DirectionalButtons ? <window.DirectionalButtons config={node} topic={topic} nodeJson={node} /> : <div style={{background: '#333'}}>Dir Buttons</div>}
                 </div>
             );
         }
 
+        if (isIncDec) {
+            return (
+                <div style={style}>
+                    {window.IncDecButtons ? <window.IncDecButtons value={val} onChange={setVal} config={node} topic={topic} nodeJson={node} /> : <div style={{background: '#333'}}>IncDec Buttons</div>}
+                </div>
+            );
+        }
+
+        if (isTogglerGroup) {
+            return (
+                <div style={style}>
+                    {window.ButtonToggler ? <window.ButtonToggler value={val} onChange={setVal} config={node} topic={topic} nodeJson={node} /> : <div style={{background: '#333'}}>Button Toggler</div>}
+                </div>
+            );
+        }
+
+        // Single buttons
         return (
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '10px' }}>
                 {isWink ? (
-                    window.OcaWinkButton ? <window.OcaWinkButton label={title} value={val} onChange={setVal} config={node} /> : <button>{title}</button>
+                    window.OcaWinkButton ? <window.OcaWinkButton label={title} value={val} onChange={setVal} config={node} topic={topic} /> : <button>{title}</button>
                 ) : isTrapezoid ? (
-                    window.OcaTrapezoidButton ? <window.OcaTrapezoidButton label={title} value={val} onChange={setVal} config={node} /> : <button>{title}</button>
-                ) : isToggle ? (
-                    window.OcaToggleButton ? <window.OcaToggleButton label={title} value={val} onChange={setVal} /> : <button>{title}</button>
+                    window.OcaTrapezoidButton ? <window.OcaTrapezoidButton label={title} value={val} onChange={setVal} config={node} topic={topic} /> : <button>{title}</button>
                 ) : (
-                    window.OcaButton ? <window.OcaButton label={title} onClick={() => setVal(val === 1 ? 0 : 1)} /> : <button>{title}</button>
+                    window.ButtonToggle ? <window.ButtonToggle value={val} onChange={setVal} config={node} topic={topic} nodeJson={node} /> : <button>{title}</button>
                 )}
             </div>
         );
     }
 
-    if (type.toLowerCase().includes('checkbox')) {
+    if (type.toLowerCase().includes('checkbox') || type === '_Checkbox') {
         return (
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '10px' }}>
-                {window.OcaCheckbox ? <window.OcaCheckbox label={title} checked={val} onChange={setVal} /> : <input type="checkbox" />}
+            <div style={style}>
+                {window.OcaCheckbox ? <window.OcaCheckbox value={val} onChange={setVal} config={node} topic={topic} nodeJson={node} /> : <input type="checkbox" />}
             </div>
         );
     }
 
-    if (type.toLowerCase().includes('listbox') || type.toLowerCase().includes('dropdown')) {
-        const options = node.options || ['Option 1', 'Option 2'];
+    if (type.toLowerCase().includes('listbox') || type.toLowerCase().includes('dropdown') || type === '_Listbox') {
         return (
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '10px' }}>
-                {window.OcaDropdown ? <window.OcaDropdown label={title} value={val} onChange={setVal} options={options} /> : <select><option>{title}</option></select>}
+            <div style={style}>
+                {window.OcaListbox ? <window.OcaListbox value={val} onChange={setVal} config={node} topic={topic} nodeJson={node} /> : <select><option>{title}</option></select>}
             </div>
         );
     }
 
-    if (type.toLowerCase().includes('label')) {
+    if (type.toLowerCase().includes('label') || type.startsWith('_Label') || type === '_GuiLabel') {
         return (
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '10px' }}>
-                {window.OcaTextLabel ? <window.OcaTextLabel label={title} color={node.cosmetics?.colors?.text || '#ccc'} /> : <span>{title}</span>}
+            <div style={style}>
+                {window.OcaTextLabel ? <window.OcaTextLabel value={val} config={node} /> : <span>{title}</span>}
             </div>
         );
     }
 
-    if (type.toLowerCase().includes('value')) {
-        const units = node.unit_text || node.units || '';
+    if (type.toLowerCase().includes('value') || type === '_TextInput' || type === '_SliderValue') {
+        if (type === '_SliderValue' || type.toLowerCase().includes('slider')) {
+            return (
+                <div style={style}>
+                    {window.OcaSliderValue ? <window.OcaSliderValue value={val} onChange={setVal} config={node} topic={topic} nodeJson={node} /> : <span>{val}</span>}
+                </div>
+            );
+        }
         return (
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '10px' }}>
-                {window.OcaTextValueBox ? <window.OcaTextValueBox label={title} value={val} units={units} /> : <span>{val} {units}</span>}
+            <div style={style}>
+                {window.OcaTextInput ? <window.OcaTextInput value={val} onChange={setVal} config={node} topic={topic} nodeJson={node} /> : (
+                    window.OcaTextValueBox ? <window.OcaTextValueBox label={title} value={val} config={node} /> : <span>{val}</span>
+                )}
+            </div>
+        );
+    }
+
+    if (type.toLowerCase().includes('link') || type === '_WebLink') {
+        return (
+            <div style={style}>
+                {window.OcaWebLink ? <window.OcaWebLink config={node} /> : <a href="#">{title}</a>}
             </div>
         );
     }

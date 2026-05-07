@@ -1,16 +1,17 @@
 const DynamicGraph = ({ value: mqttData, config }) => {
     const chartRef = React.useRef(null);
     const chartInstance = React.useRef(null);
-    const [lang] = window.useMqttLang();
+    const useMqttLang = window.useMqttLang || (() => ['En', () => {}]);
+    const [lang] = useMqttLang();
 
     const title = config?.label?.[lang] || config?.label?.En || config?.title || "Dynamic Graph";
     
     // Geometry
-    const heightVal = config?.geometry?.height || config?.layout?.height;
-    const height = heightVal ? (typeof heightVal === 'number' ? `${heightVal}px` : heightVal) : "400px";
+    const heightVal = config?.geometry?.height || config?.layout?.height || 400;
+    const height = typeof heightVal === 'number' ? `${heightVal}px` : heightVal;
     
-    const widthVal = config?.geometry?.width || config?.layout?.width;
-    const width = widthVal ? (typeof widthVal === 'number' ? `${widthVal}px` : widthVal) : "100%";
+    const widthVal = config?.geometry?.width || config?.layout?.width || '100%';
+    const width = typeof widthVal === 'number' ? `${widthVal}px` : widthVal;
 
     // Axes
     const xAxisCfg = config?.axis?.x || {};
@@ -22,9 +23,9 @@ const DynamicGraph = ({ value: mqttData, config }) => {
         if (!csvString) return [];
         const lines = csvString.split('\n');
         const data = [];
-        for (let i = 1; i < lines.length; i++) { // Skip header line
+        for (let i = 1; i < lines.length; i++) { 
             const trimmedLine = lines[i].trim();
-            if (!trimmedLine) continue; // Skip empty lines
+            if (!trimmedLine) continue; 
             const values = trimmedLine.split(',');
             if (values.length >= 2) {
                 const x = parseFloat(values[0]);
@@ -38,20 +39,34 @@ const DynamicGraph = ({ value: mqttData, config }) => {
     React.useEffect(() => {
         if (!chartRef.current) return;
 
+        if (typeof echarts === 'undefined') {
+            console.error("🛑 [ERROR] Apache ECharts not loaded.");
+            return;
+        }
+
+        // Cleanup previous instance
+        if (chartInstance.current) {
+            chartInstance.current.dispose();
+        }
+
         chartInstance.current = echarts.init(chartRef.current, 'dark');
 
-        const initialSeries = (config?.datasets || []).map(ds => ({
-            name: ds.label?.[lang] || ds.label?.En || ds.id || 'Series',
-            type: 'line',
-            smooth: ds.style?.smooth === true, // Enable smoothing if specified
-            showSymbol: ds.style?.showSymbol !== false, // Default show symbol, disable if specified false
-            data: ds.initial_csv_data ? parseCsv(ds.initial_csv_data) : [],
-            lineStyle: {
-                color: ds.style?.line_color || '#0f0',
-                width: ds.style?.line_width || 2
-            },
-            itemStyle: { color: ds.style?.line_color || '#0f0' }
-        }));
+        const initialSeries = (config?.datasets || []).map(ds => {
+            const seriesName = ds.id || ds.label?.[lang] || ds.label?.En || 'Series';
+            return {
+                id: ds.id,
+                name: seriesName,
+                type: 'line',
+                smooth: ds.style?.smooth === true || (ds.style?.smoothing > 0),
+                showSymbol: ds.style?.showSymbol !== false,
+                data: ds.initial_csv_data ? parseCsv(ds.initial_csv_data) : [],
+                lineStyle: {
+                    color: ds.style?.line_color || '#0f0',
+                    width: ds.style?.line_width || 2
+                },
+                itemStyle: { color: ds.style?.line_color || '#0f0' }
+            };
+        });
 
         const option = {
             backgroundColor: 'transparent',
@@ -95,44 +110,36 @@ const DynamicGraph = ({ value: mqttData, config }) => {
             dataZoom: config?.Navigation ? [
                 { type: 'inside', start: 0, end: 100 },
                 { type: 'slider', bottom: 10, height: 20, borderColor: '#333', handleStyle: { color: '#555' } }
-            ] : [], // Only add dataZoom if Navigation is enabled in config
+            ] : [],
             series: initialSeries
         };
 
         chartInstance.current.setOption(option);
 
-        const resizeHandler = () => chartInstance.current.resize();
+        const resizeHandler = () => chartInstance.current && chartInstance.current.resize();
         window.addEventListener('resize', resizeHandler);
 
         return () => {
             window.removeEventListener('resize', resizeHandler);
-            if (chartInstance.current) {
-                chartInstance.current.dispose();
-                chartInstance.current = null;
-            }
         };
-    }, [config, lang, title, xAxisCfg, yAxisCfg, showGrid]); // Re-init if config changes
+    }, [config, lang, title, xAxisCfg, yAxisCfg, showGrid]);
 
     // Handle incoming real-time data from MQTT
     React.useEffect(() => {
         if (mqttData && chartInstance.current) {
-            // MQTT data might come as a stringified JSON object or directly as an object.
             let parsedMqttData = mqttData;
             if (typeof mqttData === 'string') {
                 try {
                     parsedMqttData = JSON.parse(mqttData);
-                } catch (e) {
-                    console.error("Failed to parse MQTT data:", e);
-                    return; // Skip if parsing fails
-                }
+                } catch (e) { return; }
             }
 
-            // Expecting mqttData to be an object like: { "ds_sine": [[x1, y1], ...], "ds_cosine": [[x1, y1], ...] }
             const updates = [];
             Object.entries(parsedMqttData).forEach(([datasetId, points]) => {
                 if (Array.isArray(points)) {
+                    // Try to find series by ID first, then fallback to name matching
                     updates.push({
-                        name: datasetId, // Use the key (e.g., 'ds_sine') as the series name
+                        id: datasetId,
                         data: points
                     });
                 }
@@ -142,7 +149,7 @@ const DynamicGraph = ({ value: mqttData, config }) => {
                 chartInstance.current.setOption({ series: updates });
             }
         }
-    }, [mqttData]); // Re-run when mqttData prop changes
+    }, [mqttData]);
 
     return (
         <div style={{ width: width, height: height, display: 'flex', flexDirection: 'column' }}>

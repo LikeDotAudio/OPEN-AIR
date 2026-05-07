@@ -76,7 +76,7 @@
             },
             "fields": {
               "Meter_Voltage": {
-                "type": "_GuiAnalogGauge",
+                "type": "_NeedleVUMeter",
                 "label_active": {
                   "En": "VOLTAGE",
                   "Fr": "TENSION",
@@ -114,7 +114,7 @@
                 }
               },
               "Meter_Current": {
-                "type": "_GuiAnalogGauge",
+                "type": "_NeedleVUMeter",
                 "label_active": {
                   "En": "CURRENT",
                   "Fr": "COURANT",
@@ -152,7 +152,7 @@
                 }
               },
               "Meter_Power": {
-                "type": "_GuiAnalogGauge",
+                "type": "_NeedleVUMeter",
                 "label_active": {
                   "En": "TOTAL POWER",
                   "Fr": "TOTAL POWER",

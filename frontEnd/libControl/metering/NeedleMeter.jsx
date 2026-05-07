@@ -1,10 +1,10 @@
 /**
  * NeedleMeter Component
  * Author: Anthony Peter Kuzub / Gemini (Collaborator)
- * Version: 20260506.2000.1
+ * Version: 20260507.1300.1
  *
  * Description: Analog-style needle meter with ballistics and high-fidelity bezel shapes.
- * Based on the industrial standard at oaGuiElements/Core/metering/meter_needle
+ * Robust parameter extraction for diverse JSON configurations.
  */
 
 const BEZEL_CONFIGS = {
@@ -46,7 +46,6 @@ function getBezelPath(ctx, shape, centerX, centerY, radius) {
         ctx.lineTo(centerX + tW, centerY - (tH - yShift));
         ctx.lineTo(centerX - tW, centerY - (tH - yShift));
     } else {
-        // Default: Trimmed Circle (Semicircle)
         ctx.arc(centerX, centerY, radius + 5, Math.PI, 0);
         ctx.lineTo(centerX, centerY);
     }
@@ -59,7 +58,7 @@ function useNeedleBallistics(rawValueRef, canvasRef, min, max, width, height, co
         let animationFrameId;
 
         const render = () => {
-            const raw = rawValueRef.current;
+            const raw = typeof rawValueRef.current === 'number' ? rawValueRef.current : parseFloat(rawValueRef.current || min);
             const attack = config?.dynamics?.attack_ms ? (100 / config.dynamics.attack_ms) * 0.5 : 0.3;
             const release = config?.dynamics?.release_ms ? (100 / config.dynamics.release_ms) * 0.5 : 0.1;
 
@@ -77,35 +76,27 @@ function useNeedleBallistics(rawValueRef, canvasRef, min, max, width, height, co
                 const centerY = height / 2 + (styleOv.pivot_offset_y || 0);
                 const meterSize = Math.min(width, height);
                 const arcRadius = meterSize / 2 * (styleOv.arc_radius_factor || 0.8);
-                const bezelShape = (styleOv.bezel_shape || 'default').toLowerCase();
+                const bezelShape = (styleOv.bezel_shape || config?.bezel_shape || 'default').toLowerCase();
 
-                // 1. Draw Background (Outside the meter)
                 ctx.fillStyle = colors.background || config?.bg_color || '#2b2b2b';
                 ctx.fillRect(0, 0, width, height);
 
-                // 2. Define Bezel Mask & Clip
                 ctx.save();
                 getBezelPath(ctx, bezelShape, centerX, centerY, arcRadius);
                 
-                // Shadow & Glow for Bezel
-                ctx.shadowColor = 'rgba(0,0,0,0.8)';
-                ctx.shadowBlur = 10;
-                ctx.shadowOffsetX = 2;
-                ctx.shadowOffsetY = 2;
+                ctx.shadowColor = 'rgba(0,0,0,0.8)'; ctx.shadowBlur = 10; ctx.shadowOffsetX = 2; ctx.shadowOffsetY = 2;
                 ctx.fillStyle = colors.bezel || '#111';
                 ctx.fill();
                 ctx.shadowColor = 'transparent';
 
-                ctx.clip(); // Everything after this is cropped to the bezel
+                ctx.clip();
 
-                // 3. Draw Internal Faceplate
                 const faceColor = colors.faceplate || colors.meter_face_colour || '#111';
                 if (faceColor !== 'transparent') {
                     ctx.fillStyle = faceColor;
                     ctx.fillRect(0, 0, width, height);
                 }
 
-                // 4. Draw Scale (Ticks & Arcs)
                 const minVal = min; const maxVal = max; const range = maxVal - minVal || 1;
                 const viewAngle = config?.meter_viewable_angle || 90;
                 const centerAngle = config?.meter_center_angle || 90;
@@ -115,7 +106,6 @@ function useNeedleBallistics(rawValueRef, canvasRef, min, max, width, height, co
                 const boundedVal = Math.max(minVal, Math.min(maxVal, displayValue));
                 const nAng = toRad(sang - ((boundedVal - minVal) / range) * viewAngle);
 
-                // Arcs
                 const upperRange = styleOv.upper_range !== undefined ? styleOv.upper_range : (config?.upper_range || 0.0);
                 const uAng = toRad(sang - ((upperRange - minVal) / range) * viewAngle);
                 
@@ -128,9 +118,8 @@ function useNeedleBallistics(rawValueRef, canvasRef, min, max, width, height, co
                     ctx.beginPath(); ctx.arc(centerX, centerY, arcRadius, uAng, toRad(sang - viewAngle), true); ctx.stroke();
                 }
 
-                // Ticks
                 ctx.font = 'bold 9px Arial'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-                const step = config?.domain?.primary?.step || 5.0;
+                const step = config?.domain?.primary?.step || config?.step || 10.0;
                 for (let i = 0; i <= range / step; i++) {
                     const val = minVal + i * step;
                     const tRad = toRad(sang - ((val - minVal) / range) * viewAngle);
@@ -148,7 +137,6 @@ function useNeedleBallistics(rawValueRef, canvasRef, min, max, width, height, co
                     ctx.fillText(Math.round(val), tx, ty);
                 }
 
-                // 5. Draw Needle
                 const needleLen = arcRadius * 0.95;
                 ctx.shadowColor = 'rgba(0,0,0,0.5)'; ctx.shadowBlur = 5; ctx.shadowOffsetX = 3; ctx.shadowOffsetY = 3;
                 ctx.strokeStyle = colors.pointer || '#fff'; ctx.lineWidth = 2; ctx.lineCap = 'round';
@@ -157,12 +145,11 @@ function useNeedleBallistics(rawValueRef, canvasRef, min, max, width, height, co
                 ctx.stroke();
                 ctx.shadowColor = 'transparent';
 
-                // Pivot
                 ctx.fillStyle = colors.pivot || '#000';
                 ctx.beginPath(); ctx.arc(centerX, centerY, 10, 0, Math.PI * 2); ctx.fill();
                 ctx.strokeStyle = '#444'; ctx.lineWidth = 2; ctx.stroke();
 
-                ctx.restore(); // Stop clipping
+                ctx.restore();
             }
             animationFrameId = requestAnimationFrame(render);
         };
@@ -172,10 +159,21 @@ function useNeedleBallistics(rawValueRef, canvasRef, min, max, width, height, co
 }
 
 const NeedleMeter = ({ value, config }) => {
-    const min = config?.domain?.primary?.min !== undefined ? config.domain.primary.min : -60;
-    const max = config?.domain?.primary?.max !== undefined ? config.domain.primary.max : 10;
-    const width = config?.geometry?.width || 150;
-    const height = config?.geometry?.height || 150;
+    const getNum = (v, fallback) => {
+        if (typeof v === 'number') return v;
+        if (typeof v === 'string') {
+            const p = parseFloat(v);
+            return isNaN(p) ? fallback : p;
+        }
+        return fallback;
+    };
+
+    const min = getNum(config?.domain?.primary?.min, getNum(config?.min, -60));
+    const max = getNum(config?.domain?.primary?.max, getNum(config?.max, 10));
+    
+    const width = config?.geometry?.width || config?.layout?.width || 150;
+    const height = config?.geometry?.height || config?.layout?.height || 150;
+
     const canvasRef = React.useRef(null);
     const rawValueRef = React.useRef(value !== undefined ? value : min);
 
@@ -184,7 +182,9 @@ const NeedleMeter = ({ value, config }) => {
     useNeedleBallistics(rawValueRef, canvasRef, min, max, width, height, config);
 
     const [lang] = window.useMqttLang ? window.useMqttLang() : ['En'];
-    const title = config?.label?.[lang] || config?.label?.En || config?.label_active?.[lang];
+    const title = config?.label_active?.[lang] || config?.label_active?.En || 
+                  config?.label?.[lang] || config?.label?.En || 
+                  (typeof config?.label === 'string' ? config.label : null);
 
     return (
         <div style={{ width: width, height: height, position: 'relative', overflow: 'hidden' }}>
@@ -192,7 +192,8 @@ const NeedleMeter = ({ value, config }) => {
             {title && (
                 <div style={{ 
                     position: 'absolute', bottom: '5px', left: '50%', transform: 'translateX(-50%)',
-                    color: '#888', fontSize: '9px', fontWeight: 'bold', pointerEvents: 'none'
+                    color: '#888', fontSize: '9px', fontWeight: 'bold', pointerEvents: 'none',
+                    textAlign: 'center', width: '90%'
                 }}>
                     {title.toUpperCase()}
                 </div>

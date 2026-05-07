@@ -76,7 +76,7 @@
             },
             "fields": {
               "Meter_Volts": {
-                "type": "_GuiAnalogGauge",
+                "type": "_NeedleVUMeter",
                 "label_active": {
                   "En": "INPUT VOLTS",
                   "Fr": "VOLTS D'ENTRÉE",
@@ -107,7 +107,7 @@
                 }
               },
               "Meter_Amps": {
-                "type": "_GuiAnalogGauge",
+                "type": "_NeedleVUMeter",
                 "label_active": {
                   "En": "SINK CURRENT",
                   "Fr": "SINK CURRENT",
@@ -138,7 +138,7 @@
                 }
               },
               "Meter_Watts": {
-                "type": "_GuiAnalogGauge",
+                "type": "_NeedleVUMeter",
                 "label_active": {
                   "En": "DISSIPATION",
                   "Fr": "DISSIPATION",

@@ -1,0 +1,226 @@
+{
+  "OPEN_AIR_GRAB_BAG": {
+    "type": "OcaBin",
+    "description": "The Ultimate OPEN-AIR GUI Reference Guide. This file demonstrates every supported widget type and parameter.",
+    "behavior": {
+      "fluid_ew": true,
+      "overflow_ew": "auto",
+      "overflow_ns": "auto"
+    },
+    "blocks": {
+      "SECTION_1_STRUCTURE": {
+        "type": "OcaBlock",
+        "description": "01: Structural Containers",
+        "layout_columns": 2,
+        "fields": {
+          "bin_info": {
+            "type": "_Label",
+            "label": "OcaBin: High-level container with scrolling and background management."
+          },
+          "block_info": {
+            "type": "_Label",
+            "label": "OcaBlock: Grouping container with CSS Grid layout support."
+          }
+        }
+      },
+      "SECTION_2_FADERS": {
+        "type": "OcaBlock",
+        "description": "02: High-Fidelity Faders (3D Rendered)",
+        "layout_columns": 4,
+        "fields": {
+          "std_fader": {
+            "type": "_SmartFader",
+            "label": "Standard Fader",
+            "notes": "Full 3D cap, recessed track, and custom ticks.",
+            "domain": {
+              "primary": { "min": -100, "max": 12, "value_default": -20, "log_exponent": 1.0 }
+            },
+            "cosmetics": {
+              "colors": { "cap": "#dcdcdc", "highlight": "#f4902c", "primary": "#050505" },
+              "style_overrides": { "custom_ticks": [-100, -60, -40, -20, -10, 0, 6, 12] }
+            },
+            "tick_label_position": "both",
+            "show_units": true,
+            "unit_text": "dB"
+          },
+          "dual_fader": {
+            "type": "_CustomDualVerticalFader",
+            "label": "Dual Fader",
+            "notes": "Ganged stereo control.",
+            "geometry": { "width": 80, "height": 250 }
+          },
+          "ltp_fader": {
+            "type": "_CustomLTP",
+            "label": "LTP (Linear Travelling Pot)",
+            "notes": "Dual-axis control: Slide for Volume, Alt+Drag for Pan/Pot.",
+            "freestyle": true,
+            "geometry": { "width": 100, "height": 300 }
+          },
+          "gca_array": {
+            "type": "_CompositeFader",
+            "label": "GCA (Ganged Controlled Array)",
+            "notes": "Master average control with per-channel micro bars. Double-click to toggle mode.",
+            "num_channels": 8,
+            "value_min": 0,
+            "value_max": 100,
+            "layout": { "width": 200, "height": 350 }
+          }
+        }
+      },
+      "SECTION_3_KNOBS": {
+        "type": "OcaBlock",
+        "description": "03: Industrial Knobs & Selectors",
+        "layout_columns": 3,
+        "fields": {
+          "pro_knob": {
+            "type": "_SmartKnob",
+            "label": "3D Console Knob",
+            "domain": { "primary": { "min": 0, "max": 100, "value_default": 50 } },
+            "cosmetics": {
+              "colors": { "highlight": "#00bcd4" }
+            }
+          },
+          "selector_switch": {
+            "type": "SelectorSwitch",
+            "label": "Rotary Selector",
+            "options": {
+              "1": "PHASE",
+              "2": "LINEAR",
+              "3": "LOG",
+              "4": "EXP"
+            }
+          },
+          "vu_knob": {
+            "type": "_VUMeterKnob",
+            "label": "VU Meter Knob",
+            "notes": "Composite: Control knob layered over a needle meter pivot.",
+            "knob_width": 45,
+            "domain": { "primary": { "min": -60, "max": 10 } }
+          }
+        }
+      },
+      "SECTION_4_METERING": {
+        "type": "OcaBlock",
+        "description": "04: Precision Metering",
+        "layout_columns": 3,
+        "fields": {
+          "needle_meter": {
+            "type": "_NeedleVUMeter",
+            "label": "Needle Meter",
+            "upper_range": 0,
+            "domain": { "primary": { "min": -60, "max": 12 } }
+          },
+          "bar_meter": {
+            "type": "_MeterBar",
+            "label": "LED Segment Bar",
+            "geometry": { "width": 30, "height": 200 }
+          },
+          "progress_bar": {
+            "type": "_ProgressBar",
+            "label": "System Progress",
+            "units": "%",
+            "min": 0,
+            "max": 100,
+            "value_default": 75
+          }
+        }
+      },
+      "SECTION_5_BUTTONS": {
+        "type": "OcaBlock",
+        "description": "05: Tactile Buttons & Toggles",
+        "layout_columns": 4,
+        "fields": {
+          "toggle_sw": {
+            "type": "_ButtonToggle",
+            "label": "Safety Toggle",
+            "label_active": "ARMED",
+            "label_inactive": "DISARMED",
+            "active_color": "#ff5252",
+            "active_bg_color": "#330000"
+          },
+          "radio_group": {
+            "type": "_ButtonToggler",
+            "label": "Selection Mode",
+            "selection_mode": "one",
+            "layout": { "max_cols": 2 },
+            "options": {
+              "auto": { "label": "AUTO", "active_color": "#4caf50" },
+              "manual": { "label": "MANUAL", "active_color": "#2196f3" }
+            }
+          },
+          "d_pad": {
+            "type": "DirectionalButtons",
+            "label": "PTZ Control"
+          },
+          "inc_dec": {
+            "type": "IncDecButtons",
+            "label": "Fine Tune",
+            "increment": 0.5,
+            "value_default": 10.0
+          }
+        }
+      },
+      "SECTION_6_GRAPHING": {
+        "type": "OcaBlock",
+        "description": "06: Apache ECharts Telemetry",
+        "layout_columns": 1,
+        "fields": {
+          "spectrum_plot": {
+            "type": "plot_widget",
+            "title": "High Resolution Spectrum Scan",
+            "Navigation": { "enable_zoom": true, "enable_pan": true },
+            "layout": { "height": 400 },
+            "axis": {
+              "x": { "label": "Frequency (GHz)", "min": 0, "max": 1 },
+              "y": { "label": "Amplitude (dBm)", "min": -1.5, "max": 1.5, "show_grid": true }
+            },
+            "datasets": [
+              {
+                "id": "sig_a",
+                "label": "Signal Alpha",
+                "initial_csv_data": "x,y\n0,0\n0.5,1\n1,0",
+                "style": { "line_color": "cyan", "line_width": 2, "smoothing": 5 }
+              }
+            ]
+          }
+        }
+      },
+      "SECTION_7_INPUTS_TEXT": {
+        "type": "OcaBlock",
+        "description": "07: Inputs & Data Interaction",
+        "layout_columns": 2,
+        "fields": {
+          "text_in": {
+            "type": "_TextInput",
+            "label": "User Input",
+            "value_default": "Enter command..."
+          },
+          "slider_val": {
+            "type": "_SliderValue",
+            "label": "Precision Parameter",
+            "units": "ms",
+            "min": 0,
+            "max": 1000,
+            "value": 250
+          },
+          "check_box": {
+            "type": "_Checkbox",
+            "label": "Enable Telemetry",
+            "label_active": "ONLINE",
+            "label_inactive": "OFFLINE"
+          },
+          "web_link": {
+            "type": "_WebLink",
+            "label": "View Documentation",
+            "url": "https://github.com/AnthonyPeterKuzub/OPEN-AIR"
+          },
+          "data_tree": {
+            "type": "_DataJsonTree",
+            "label": "Live MQTT State Explorer",
+            "layout": { "height": 300 }
+          }
+        }
+      }
+    }
+  }
+}

@@ -83,7 +83,7 @@
                 "type": "OcaBlock",
                 "fields": {
                   "V_Meter_1": {
-                    "type": "_GuiAnalogGauge",
+                    "type": "_NeedleVUMeter",
                     "label_active": {
                       "En": "V1",
                       "Fr": "V1",
@@ -101,7 +101,7 @@
                     }
                   },
                   "I_Meter_1": {
-                    "type": "_GuiAnalogGauge",
+                    "type": "_NeedleVUMeter",
                     "label_active": {
                       "En": "A1",
                       "Fr": "A1",
@@ -119,7 +119,7 @@
                     }
                   },
                   "P_Meter_1": {
-                    "type": "_GuiAnalogGauge",
+                    "type": "_NeedleVUMeter",
                     "label_active": {
                       "En": "W1",
                       "Fr": "W1",
@@ -215,7 +215,7 @@
                 "type": "OcaBlock",
                 "fields": {
                   "V_Meter_2": {
-                    "type": "_GuiAnalogGauge",
+                    "type": "_NeedleVUMeter",
                     "label_active": {
                       "En": "V2",
                       "Fr": "V2",
@@ -233,7 +233,7 @@
                     }
                   },
                   "I_Meter_2": {
-                    "type": "_GuiAnalogGauge",
+                    "type": "_NeedleVUMeter",
                     "label_active": {
                       "En": "A2",
                       "Fr": "A2",
@@ -251,7 +251,7 @@
                     }
                   },
                   "P_Meter_2": {
-                    "type": "_GuiAnalogGauge",
+                    "type": "_NeedleVUMeter",
                     "label_active": {
                       "En": "W2",
                       "Fr": "W2",
@@ -347,7 +347,7 @@
                 "type": "OcaBlock",
                 "fields": {
                   "V_Meter_3": {
-                    "type": "_GuiAnalogGauge",
+                    "type": "_NeedleVUMeter",
                     "label_active": {
                       "En": "V3",
                       "Fr": "V3",
@@ -365,7 +365,7 @@
                     }
                   },
                   "I_Meter_3": {
-                    "type": "_GuiAnalogGauge",
+                    "type": "_NeedleVUMeter",
                     "label_active": {
                       "En": "A3",
                       "Fr": "A3",
@@ -383,7 +383,7 @@
                     }
                   },
                   "P_Meter_3": {
-                    "type": "_GuiAnalogGauge",
+                    "type": "_NeedleVUMeter",
                     "label_active": {
                       "En": "W3",
                       "Fr": "W3",
@@ -479,7 +479,7 @@
                 "type": "OcaBlock",
                 "fields": {
                   "V_Meter_4": {
-                    "type": "_GuiAnalogGauge",
+                    "type": "_NeedleVUMeter",
                     "label_active": {
                       "En": "V4",
                       "Fr": "V4",
@@ -497,7 +497,7 @@
                     }
                   },
                   "I_Meter_4": {
-                    "type": "_GuiAnalogGauge",
+                    "type": "_NeedleVUMeter",
                     "label_active": {
                       "En": "A4",
                       "Fr": "A4",
@@ -515,7 +515,7 @@
                     }
                   },
                   "P_Meter_4": {
-                    "type": "_GuiAnalogGauge",
+                    "type": "_NeedleVUMeter",
                     "label_active": {
                       "En": "W4",
                       "Fr": "W4",

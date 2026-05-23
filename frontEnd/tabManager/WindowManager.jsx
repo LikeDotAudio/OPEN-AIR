@@ -4,7 +4,7 @@ const parseSplitName = (name) => {
     return null;
 };
 
-const WindowLayout = ({ node }) => {
+const WindowLayout = ({ node, path = '' }) => {
     if (!node || !node.children) return null;
 
     // Check if children are splits
@@ -36,21 +36,21 @@ const WindowLayout = ({ node }) => {
                             flexShrink: 1, 
                             overflow: 'hidden', 
                             borderRight: isRow ? '1px solid #333' : 'none', 
-                            borderBottom: !isRow ? '1px solid #333' : 'none' 
+                            borderBottom: !isRow ? '1px solid #333' : 'none'
                         }}>
-                            <WindowLayout node={split} />
+                            <WindowLayout node={split} path={`${path}/${split.name}`} />
                         </div>
                     );
                 })}
             </div>
         );
     }
-    
+
     // If no splits, it's a Tab container!
-    return <TabContainer node={node} />;
+    return <TabContainer node={node} path={path} />;
 };
 
-const TabContainer = ({ node }) => {
+const TabContainer = ({ node, path = '' }) => {
     let dirs = node.children.filter(c => c.type === 'directory');
     dirs = [...dirs].sort((a, b) => {
         const matchA = a.name.match(/^(\d+)_/);
@@ -71,7 +71,14 @@ const TabContainer = ({ node }) => {
         return a.name.localeCompare(b.name);
     });
 
-    const [activeTab, setActiveTab] = React.useState(dirs.length > 0 ? dirs[0].name : null);
+    // Restore this pane's active tab from the URL hash (keyed by its node path),
+    // so a refresh returns to the same tab in every pane.
+    const [activeTab, setActiveTab] = React.useState(() => {
+        const saved = window.OaNav && window.OaNav.get(path);
+        return (saved && dirs.find(d => d.name === saved)) ? saved
+            : (dirs.length > 0 ? dirs[0].name : null);
+    });
+    const selectTab = (name) => { setActiveTab(name); window.OaNav && window.OaNav.set(path, name); };
 
     // If new dirs loaded, reset active tab if current is invalid
     React.useEffect(() => {
@@ -115,9 +122,9 @@ const TabContainer = ({ node }) => {
         <div style={{ display: 'flex', flexDirection: 'column', width: '100%', height: '100%' }}>
             <div style={{ display: 'flex', backgroundColor: '#0a0a0a', overflowX: 'auto', flexShrink: 0, borderBottom: '1px solid #222' }}>
                 {dirs.map(d => (
-                    <div 
+                    <div
                         key={d.name}
-                        onClick={() => setActiveTab(d.name)}
+                        onClick={() => selectTab(d.name)}
                         style={{
                             padding: '8px 16px',
                             cursor: 'pointer',
@@ -136,7 +143,7 @@ const TabContainer = ({ node }) => {
                 ))}
             </div>
             <div style={{ flexGrow: 1, overflow: 'hidden' }}>
-                {activeNode && <WindowLayout node={activeNode} />}
+                {activeNode && <WindowLayout node={activeNode} path={`${path}/${activeNode.name}`} />}
             </div>
         </div>
     );
@@ -159,8 +166,14 @@ const WindowManager = ({ directoryTree }) => {
 
     // The root usually contains "Window_1", "Window_2"
     const windows = directoryTree.children.filter(c => c.type === 'directory' && c.name.toLowerCase().includes('window'));
-    
-    const [activeWindow, setActiveWindow] = React.useState(windows.length > 0 ? windows[0].name : null);
+
+    // Restore the active window from the URL hash (so refresh returns here).
+    const [activeWindow, setActiveWindow] = React.useState(() => {
+        const saved = window.OaNav && window.OaNav.get('__win');
+        return (saved && windows.find(w => w.name === saved)) ? saved
+            : (windows.length > 0 ? windows[0].name : null);
+    });
+    const selectWindow = (name) => { setActiveWindow(name); window.OaNav && window.OaNav.set('__win', name); };
 
     const activeWindowNode = windows.find(w => w.name === activeWindow) || directoryTree;
 
@@ -171,9 +184,9 @@ const WindowManager = ({ directoryTree }) => {
             <div style={{ display: 'flex', backgroundColor: '#111', borderBottom: '1px solid #333', alignItems: 'center', padding: '0 10px', height: '35px', flexShrink: 0 }}>
                 <span style={{ color: '#fff', fontWeight: 'bold', marginRight: '20px', letterSpacing: '1px', fontSize: '12px' }}>OPEN-AIR</span>
                 {windows.map(w => (
-                    <div 
+                    <div
                         key={w.name}
-                        onClick={() => setActiveWindow(w.name)}
+                        onClick={() => selectWindow(w.name)}
                         style={{
                             padding: '0 20px',
                             height: '100%',
@@ -225,7 +238,7 @@ const WindowManager = ({ directoryTree }) => {
 
             {/* Window Content */}
             <div style={{ flexGrow: 1, overflow: 'hidden' }}>
-                <WindowLayout node={activeWindowNode} />
+                <WindowLayout node={activeWindowNode} path={activeWindow || ''} />
             </div>
 
             {/* WYSIWYG editor overlay */}

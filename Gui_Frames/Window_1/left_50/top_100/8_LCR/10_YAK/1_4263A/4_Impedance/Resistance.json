@@ -22,7 +22,12 @@
                 "Es": "1 kHz"
               }
             },
-            "message": ":FREQ 1KHZ"
+            "message": ":FREQ 1KHZ",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           },
           "Level": {
             "type": "_GuiActuator",
@@ -34,7 +39,12 @@
                 "Es": "1V Nivel"
               }
             },
-            "message": ":VOLT 1V"
+            "message": ":VOLT 1V",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           },
           "Speed_Fast": {
             "type": "_GuiActuator",
@@ -46,7 +56,12 @@
                 "Es": "Rápido (Corto)"
               }
             },
-            "message": ":APER SHOR"
+            "message": ":APER SHOR",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           },
           "DC_Bias": {
             "type": "_GuiActuator",
@@ -58,7 +73,12 @@
                 "Es": "Polarización ACTIVADA"
               }
             },
-            "message": ":BIAS:STAT ON"
+            "message": ":BIAS:STAT ON",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           }
         }
       }

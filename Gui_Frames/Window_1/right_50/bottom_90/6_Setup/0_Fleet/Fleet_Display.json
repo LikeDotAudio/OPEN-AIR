@@ -21,7 +21,12 @@
           "identity": {
             "type": "_ButtonActuator",
             "id": "btn_find_fleet",
-            "lbl": "FIND FLEET"
+            "lbl": "FIND FLEET",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           },
           "geometry": {
             "w": 300,

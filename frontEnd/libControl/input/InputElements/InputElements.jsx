@@ -56,15 +56,26 @@ const OcaDropdown = ({ label, value, onChange, options = [] }) => {
         currentLang = 'En'; 
     }
 
-    // Normalize options to always be an array of { label, value }
+    // Resolve an option's label to a STRING (handles the label:{active,inactive}
+    // schema, legacy label_active/label, or a plain string), localized.
+    const resolveLabel = (o, key) => {
+        const src = window.oaPickLabel ? window.oaPickLabel(o, 'active') : (o.label_active || o.label);
+        if (src == null) return key !== undefined ? String(key) : '';
+        if (typeof src === 'string') return src;
+        return src[currentLang] || src.En || (key !== undefined ? String(key) : '');
+    };
+
+    // Normalize options to always be an array of { label (string), value }
     let normalizedOptions = [];
     if (Array.isArray(options)) {
-        normalizedOptions = options.map(opt => typeof opt === 'string' ? { label: opt, value: opt } : opt);
+        normalizedOptions = options.map(opt => typeof opt === 'string'
+            ? { label: opt, value: opt }
+            : { label: resolveLabel(opt, opt.value), value: opt.value });
     } else if (typeof options === 'object' && options !== null) {
-        normalizedOptions = Object.entries(options).map(([key, opt]) => {
-            const labelText = opt.label?.[currentLang] || opt.label?.En || key;
-            return { label: labelText, value: key };
-        });
+        normalizedOptions = Object.entries(options).map(([key, opt]) => ({
+            label: resolveLabel(opt, key),
+            value: opt.value !== undefined ? opt.value : key,
+        }));
     }
     // Ensure safeOptions is always an array, default to empty if normalization fails
     const safeOptions = Array.isArray(normalizedOptions) ? normalizedOptions : [];

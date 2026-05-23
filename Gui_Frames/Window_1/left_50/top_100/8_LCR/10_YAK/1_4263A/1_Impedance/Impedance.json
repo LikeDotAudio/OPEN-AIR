@@ -20,7 +20,8 @@
                 "bg_color": "#000000",
                 "border_color": "#FF9900",
                 "border_thickness": 2,
-                "glow_intensity": 8
+                "glow_intensity": 8,
+                "text_color": "#FF902C"
               },
               "inactive": {
                 "bg_color": "#2b2b2b",

@@ -27,7 +27,8 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
     // label_active/label_inactive so every widget that reads those keeps working
     // (migration-safe), without disturbing a plain `label` group title.
     const _lab = rawNode && rawNode.label;
-    if (_lab && typeof _lab === 'object' && ('active' in _lab || 'inactive' in _lab)) {
+    const _labIsPair = _lab && typeof _lab === 'object' && ('active' in _lab || 'inactive' in _lab);
+    if (_labIsPair) {
         if (node.label_active === undefined) node.label_active = _lab.active;
         if (node.label_inactive === undefined) node.label_inactive = _lab.inactive !== undefined ? _lab.inactive : _lab.active;
     }
@@ -55,8 +56,14 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
         return labelData[lang] || labelData.En || labelData.label?.[lang] || labelData.label?.En || null;
     };
 
-    const title = getLocalizedLabel(node.label?.text) ||
-                  getLocalizedLabel(node.label) ||
+    // Collapse a label:{active,inactive,text} pair to the LOCALIZED active STRING so
+    // widgets that render config.label directly (e.g. LTPFader's {config.label})
+    // never receive a raw object ("Objects are not valid as a React child").
+    if (_labIsPair) {
+        node.label = getLocalizedLabel(_lab.text) || getLocalizedLabel(_lab.active) || getLocalizedLabel(_lab.inactive) || '';
+    }
+
+    const title = getLocalizedLabel(node.label) ||
                   getLocalizedLabel(node.label_active) ||
                   nodeName;
 
@@ -332,7 +339,19 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
         );
     }
 
-    if (type.toLowerCase().includes('listbox') || type.toLowerCase().includes('dropdown') || type === '_Listbox' || type === '_SmartList') {
+    // Dropdown = a native <select> menu (OcaDropdown), distinct from the scrolling
+    // OcaListbox. `_GuiDropDownOption` and any 'dropdown' type render as a menu.
+    if (type === '_GuiDropDownOption' || type.toLowerCase().includes('dropdown')) {
+        return (
+            <div style={style}>
+                {window.OcaDropdown
+                    ? <window.OcaDropdown label={title} value={val} onChange={setVal} options={node.options} />
+                    : <select><option>{title}</option></select>}
+            </div>
+        );
+    }
+
+    if (type.toLowerCase().includes('listbox') || type === '_Listbox' || type === '_SmartList') {
         return (
             <div style={style}>
                 {window.OcaListbox ? <window.OcaListbox value={val} onChange={setVal} config={node} topic={topic} nodeJson={node} /> : <select><option>{title}</option></select>}

@@ -25,7 +25,12 @@
                 "Es": "Disparar"
               }
             },
-            "message": ":TRIGger"
+            "message": ":TRIGger",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           },
           "Trigger Source": {
             "type": "_GuiActuator",
@@ -43,7 +48,12 @@
               "MAN",
               "EXT",
               "BUS"
-            ]
+            ],
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           },
           "Trigger Delay": {
             "type": "_GuiActuator",
@@ -55,7 +65,12 @@
                 "Es": "Establecer retraso"
               }
             },
-            "message": ":TRIGger:DELay {value}"
+            "message": ":TRIGger:DELay {value}",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           },
           "Lower Limit": {
             "type": "_GuiActuator",
@@ -67,7 +82,12 @@
                 "Es": "Límite inferior"
               }
             },
-            "message": ":CALCulate:LIMit:LOWer {value}"
+            "message": ":CALCulate:LIMit:LOWer {value}",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           },
           "Upper Limit": {
             "type": "_GuiActuator",
@@ -79,7 +99,12 @@
                 "Es": "Límite superior"
               }
             },
-            "message": ":CALCulate:LIMit:UPPer {value}"
+            "message": ":CALCulate:LIMit:UPPer {value}",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           },
           "Comparator State": {
             "type": "_GuiActuator",
@@ -95,7 +120,12 @@
             "options": [
               "ON",
               "OFF"
-            ]
+            ],
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           }
         }
       }

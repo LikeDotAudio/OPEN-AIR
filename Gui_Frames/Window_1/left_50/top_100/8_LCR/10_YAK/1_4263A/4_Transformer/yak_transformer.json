@@ -31,7 +31,12 @@
               "L2N",
               "L2M",
               "L2R2"
-            ]
+            ],
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           },
           "Test Frequency": {
             "type": "_GuiActuator",
@@ -50,7 +55,12 @@
               "1k",
               "10k",
               "100k"
-            ]
+            ],
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           }
         }
       }

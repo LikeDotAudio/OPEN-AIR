@@ -1,112 +1,108 @@
 {
   "right_top": {
+    "type": "OcaBin",
+    "id": "50.10",
+    "geometry": {
+      "anchor": "NSEW"
+    },
     "behavior": {
       "fluid_ew": true,
       "overflow_ew": "auto",
       "overflow_ns": "auto"
     },
+    "description": {
+      "En": "Root container locked to window edges with smart auto-scrolling.",
+      "Fr": "Conteneur racine verrouillé sur les bords de la fenêtre avec défilement automatique intelligent.",
+      "De": "Root-Container an Fensterrändern fixiert mit intelligentem automatischem Scrollen.",
+      "Es": "Contenedor raíz bloqueado en los bordes de la ventana con desplazamiento automático inteligente."
+    },
     "blocks": {
       "Control_Buttons": {
-        "Control_Buttons": {
-          "fields": {
-            "Pause": {
-              "handler": "pause_button_clicked",
-              "label": {
-                "En": "Pause",
-                "Fr": "Pause",
-                "De": "Pause",
-                "Es": "Pausa"
-              },
-              "layout": {
-                "height": 40,
-                "width": 80
-              },
-              "style": {
-                "active": {
-                  "border_color": "#ffff00",
-                  "border_thickness": 2,
-                  "glow_intensity": 8
-                },
-                "inactive": {
-                  "border_color": "#555555",
-                  "border_thickness": 2,
-                  "glow_intensity": 0
-                }
-              },
-              "type": "_GuiButtonToggle"
+        "type": "OcaBlock",
+        "layout_columns": 3,
+        "fields": {
+          "Start": {
+            "type": "_GuiActuator",
+            "handler": "start_button_clicked",
+            "label": {
+              "En": "Start",
+              "Fr": "Démarrer",
+              "De": "Start",
+              "Es": "Inicio"
             },
-            "Start": {
-              "handler": "start_button_clicked",
-              "label": {
-                "En": "Start",
-                "Fr": "Démarrer",
-                "De": "Start",
-                "Es": "Inicio"
-              },
-              "layout": {
-                "height": 40,
-                "width": 80
-              },
-              "style": {
-                "active": {
-                  "border_color": "#00ff00",
-                  "border_thickness": 2,
-                  "glow_intensity": 8
-                },
-                "inactive": {
-                  "border_color": "#555555",
-                  "border_thickness": 2,
-                  "glow_intensity": 0
-                }
-              },
-              "type": "_GuiActuator"
+            "layout": {
+              "height": 40,
+              "width": 80
             },
-            "Stop": {
-              "handler": "stop_button_clicked",
-              "label": {
-                "En": "Stop",
-                "Fr": "Arrêter",
-                "De": "Stopp",
-                "Es": "Parar"
+            "style": {
+              "active": {
+                "border_color": "#00ff00",
+                "border_thickness": 2,
+                "glow_intensity": 8,
+                "text_color": "#FF902C"
               },
-              "layout": {
-                "height": 40,
-                "width": 80
-              },
-              "style": {
-                "active": {
-                  "border_color": "#ff0000",
-                  "border_thickness": 2,
-                  "glow_intensity": 8
-                },
-                "inactive": {
-                  "border_color": "#555555",
-                  "border_thickness": 2,
-                  "glow_intensity": 0
-                }
-              },
-              "type": "_GuiActuator"
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
             }
           },
-          "layout": {
-            "gridTemplateColumns": "repeat(3, 1fr)",
-            "gap": "10px"
+          "Pause": {
+            "type": "_GuiButtonToggle",
+            "handler": "pause_button_clicked",
+            "label": {
+              "En": "Pause",
+              "Fr": "Pause",
+              "De": "Pause",
+              "Es": "Pausa"
+            },
+            "layout": {
+              "height": 40,
+              "width": 80
+            },
+            "style": {
+              "active": {
+                "border_color": "#ffff00",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            }
           },
-          "layout_columns": 3
-        },
-        "type": "OcaBlock"
-      },
-      "description": {
-        "En": "Root container locked to window edges with smart auto-Srolling.",
-        "Fr": "Conteneur racine verrouillé sur les bords de la fenêtre avec défilement automatique intelligent.",
-        "De": "Root-Container an Fensterrändern fixiert mit intelligentem automatischem Scrollen.",
-        "Es": "Contenedor raíz bloqueado en los bordes de la ventana con desplazamiento automático inteligente."
-      },
-      "geometry": {
-        "anchor": "NSEW"
-      },
-      "id": "50.10",
-      "type": "OcaBin"
+          "Stop": {
+            "type": "_GuiActuator",
+            "handler": "stop_button_clicked",
+            "label": {
+              "En": "Stop",
+              "Fr": "Arrêter",
+              "De": "Stopp",
+              "Es": "Parar"
+            },
+            "layout": {
+              "height": 40,
+              "width": 80
+            },
+            "style": {
+              "active": {
+                "border_color": "#ff0000",
+                "border_thickness": 2,
+                "glow_intensity": 8,
+                "text_color": "#FF902C"
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

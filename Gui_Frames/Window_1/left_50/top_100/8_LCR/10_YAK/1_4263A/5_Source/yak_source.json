@@ -25,7 +25,12 @@
                 "Es": "Establecer nivel"
               }
             },
-            "message": ":SOURce:VOLTage:LEVel {value}"
+            "message": ":SOURce:VOLTage:LEVel {value}",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           },
           "DC Bias Level": {
             "type": "_GuiActuator",
@@ -37,7 +42,12 @@
                 "Es": "Establecer polarización CC"
               }
             },
-            "message": ":SOURce:BIAS:VOLTage {value}"
+            "message": ":SOURce:BIAS:VOLTage {value}",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           },
           "DC Bias State": {
             "type": "_GuiActuator",
@@ -53,7 +63,12 @@
             "options": [
               "ON",
               "OFF"
-            ]
+            ],
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           }
         }
       }

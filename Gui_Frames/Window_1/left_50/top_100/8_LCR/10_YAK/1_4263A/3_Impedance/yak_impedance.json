@@ -32,7 +32,12 @@
               "ZTR",
               "YTD",
               "YTR"
-            ]
+            ],
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           },
           "Test Frequency": {
             "type": "_GuiActuator",
@@ -51,7 +56,12 @@
               "1k",
               "10k",
               "100k"
-            ]
+            ],
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           },
           "Auto Voltage Range": {
             "type": "_GuiActuator",
@@ -67,7 +77,12 @@
             "options": [
               "ON",
               "OFF"
-            ]
+            ],
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           }
         }
       }

@@ -104,7 +104,7 @@ const ButtonToggle = ({ value, onChange, config, topic, nodeJson }) => {
                     alignItems: 'center',
                     cursor: 'pointer',
                     userSelect: 'none',
-                    boxShadow: glow > 0 ? `0 0 ${Math.min(40, glow)}px ${currentBorder}99` : (val ? 'none' : 'inset 0 0 5px rgba(0,0,0,0.5)'),
+                    boxShadow: glow > 0 ? `inset 0 0 ${Math.min(40, glow * 3)}px ${currentBorder}` : (val ? 'none' : 'inset 0 0 5px rgba(0,0,0,0.5)'),
                     transition: 'all 0.1s'
                 }}
                 onPointerDown={handlePointerDown}

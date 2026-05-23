@@ -284,7 +284,12 @@
           "identity": {
             "type": "_ButtonActuator",
             "id": "btn_clear",
-            "lbl": "CLEAR HEAP & STORED"
+            "lbl": "CLEAR HEAP & STORED",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           },
           "geometry": {
             "w": 400,
@@ -317,7 +322,12 @@
           "identity": {
             "type": "_ButtonActuator",
             "id": "btn_stop",
-            "lbl": "STOP"
+            "lbl": "STOP",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           },
           "geometry": {
             "row": 0,
@@ -337,7 +347,12 @@
           "identity": {
             "type": "_ButtonActuator",
             "id": "btn_start",
-            "lbl": "START"
+            "lbl": "START",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           },
           "geometry": {
             "row": 0,
@@ -357,7 +372,12 @@
           "identity": {
             "type": "_ButtonActuator",
             "id": "btn_restart",
-            "lbl": "RESTART"
+            "lbl": "RESTART",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           },
           "geometry": {
             "row": 0,
@@ -377,7 +397,12 @@
           "identity": {
             "type": "_ButtonActuator",
             "id": "btn_del_db",
-            "lbl": "DELETE DB COMPLETELY"
+            "lbl": "DELETE DB COMPLETELY",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           },
           "geometry": {
             "row": 1,
@@ -413,7 +438,12 @@
           "identity": {
             "type": "_ButtonActuator",
             "id": "btn_delete_tree",
-            "lbl": "DELETE OPEN-AIR TOPIC TREE"
+            "lbl": "DELETE OPEN-AIR TOPIC TREE",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           },
           "geometry": {
             "w": 800,
@@ -432,7 +462,12 @@
           "identity": {
             "type": "_ButtonActuator",
             "id": "btn_pkill",
-            "lbl": "COPY PKILL COMMAND"
+            "lbl": "COPY PKILL COMMAND",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           },
           "geometry": {
             "w": 400,

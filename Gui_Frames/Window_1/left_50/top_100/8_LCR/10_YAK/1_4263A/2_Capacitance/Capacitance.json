@@ -22,7 +22,12 @@
                 "Es": "Cp-D"
               }
             },
-            "message": ":FUNC:IMP:TYPE CPD"
+            "message": ":FUNC:IMP:TYPE CPD",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           },
           "Inductance": {
             "type": "_GuiActuator",
@@ -34,7 +39,12 @@
                 "Es": "Ls-Q"
               }
             },
-            "message": ":FUNC:IMP:TYPE LSQ"
+            "message": ":FUNC:IMP:TYPE LSQ",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           },
           "Impedance": {
             "type": "_GuiActuator",
@@ -46,7 +56,12 @@
                 "Es": "Z-Theta"
               }
             },
-            "message": ":FUNC:IMP:TYPE ZTD"
+            "message": ":FUNC:IMP:TYPE ZTD",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           },
           "Transformer_N": {
             "type": "_GuiActuator",
@@ -58,7 +73,12 @@
                 "Es": "Turns Ratio (N)"
               }
             },
-            "message": ":FUNC:TRNS:TYPE N"
+            "message": ":FUNC:TRNS:TYPE N",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           }
         }
       }

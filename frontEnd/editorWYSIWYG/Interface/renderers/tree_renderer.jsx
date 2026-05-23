@@ -18,7 +18,7 @@
   const SKIP = new Set(['blocks', 'fields']);
   const DIM = new Set(['width', 'height', 'x', 'y']); // accept px or %
 
-  const Section = ({ title, depth, defaultOpen = false, accent, children }) => {
+  const Section = ({ title, depth, defaultOpen = false, accent, headerExtra, children }) => {
     const [open, setOpen] = React.useState(defaultOpen);
     return (
       <div>
@@ -30,10 +30,19 @@
         }}>
           <span style={{ width: 10 }}>{open ? '▾' : '▸'}</span>
           <span>{title}</span>
+          {headerExtra}
         </div>
         {open && <div>{children}</div>}
       </div>
     );
+  };
+
+  // Copy/paste controls shown beside the `style` and `layout` fold-outs.
+  const sectionExtra = (k, copyValue, basePath, keyPath, store) => {
+    const onPaste = (v) => store.setProp(basePath, keyPath, v);
+    if (k === 'style' && window.OaEdCopyStyle) return <window.OaEdCopyStyle value={copyValue} onPaste={onPaste} />;
+    if (k === 'layout' && window.OaEdCopyLayout) return <window.OaEdCopyLayout value={copyValue} onPaste={onPaste} />;
+    return null;
   };
 
   const isObj = (v) => v && typeof v === 'object' && !Array.isArray(v);
@@ -51,8 +60,9 @@
         if (ref) renderValue = window.OaEdComposite.merge(ref, isObj(value) ? value : {});
       }
       const entries = Object.entries(renderValue);
+      const headerExtra = sectionExtra(k, saved !== undefined ? saved : value, basePath, keyPath, store);
       return (
-        <Section title={k} depth={depth} defaultOpen={defaultOpen} count={entries.length}>
+        <Section title={k} depth={depth} defaultOpen={defaultOpen} count={entries.length} headerExtra={headerExtra}>
           {entries.map(([ck, cv]) => (
             <PropertyNode key={ck} k={ck} value={cv}
               saved={isObj(savedObj) || Array.isArray(savedObj) ? savedObj[ck] : undefined}

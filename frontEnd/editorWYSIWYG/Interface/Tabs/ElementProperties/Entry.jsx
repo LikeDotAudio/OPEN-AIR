@@ -19,6 +19,40 @@
     fontSize: 11, padding: '3px 8px', cursor: 'pointer', ...extra,
   });
 
+  // Properties view for a clicked Library item (not yet on the canvas). Renders the
+  // item's editable draft + a draggable "Add to Canvas" handle. Edits go to the
+  // store's libraryItem draft via a shim store; dropping the handle on the canvas
+  // (interactive_layout onDrop) inserts the (edited) schema.
+  const LibraryItemPanel = ({ store, item }) => {
+    const schema = item.schema || {};
+    const libShim = React.useMemo(() => ({
+      setProp: (_basePath, key, value) => store.setLibraryProp(key, value),
+      getNode: () => schema,
+    }), [store, schema]);
+    const onDragStart = (e) =>
+      e.dataTransfer.setData('application/json', JSON.stringify({ name: item.name, schema }));
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+        <div style={{ padding: 8, borderBottom: '1px solid #333', flexShrink: 0 }}>
+          <div style={{ fontSize: 11, color: '#FF9900', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: 1 }}>Library Item</div>
+          <div style={{ fontSize: 18, color: '#fff', fontWeight: 'bold', margin: '4px 0' }}>{schema.type || 'element'}</div>
+          <div style={{ fontSize: 12, color: '#aaa', wordBreak: 'break-all' }}>{item.name}</div>
+          <div draggable onDragStart={onDragStart}
+            title="Drag onto the canvas to place this item"
+            style={{ marginTop: 10, padding: '8px 10px', background: '#3a2f12', color: '#FF9900',
+              border: '1px dashed #FF9900', borderRadius: 4, fontSize: 12, fontWeight: 'bold',
+              textAlign: 'center', cursor: 'grab', userSelect: 'none' }}>
+            ➕ Add library item to Canvas — drag me ⤵
+          </div>
+          <button style={{ ...btn(), marginTop: 6, width: '100%' }} onClick={() => store.clearLibraryItem()}>✕ Close</button>
+        </div>
+        <div style={{ flex: 1, minHeight: 0, overflow: 'auto' }}>
+          <window.OaEdPropertyTree node={schema} basePath="" store={libShim} />
+        </div>
+      </div>
+    );
+  };
+
   window.OaEdProperties = ({ store }) => {
     const st = window.useEditorStore(store);
 
@@ -30,6 +64,9 @@
       if (window.OaEdEnum) window.OaEdEnum.load().then(bump).catch(() => {});
       if (window.OaEdComposite) window.OaEdComposite.load().then(bump).catch(() => {});
     }, []);
+
+    // A clicked Library item takes over the panel until it's placed or closed.
+    if (st.libraryItem) return <LibraryItemPanel store={store} item={st.libraryItem} />;
 
     const path = st.selectedPath;
     const node = path ? store.getNode(path) : null;

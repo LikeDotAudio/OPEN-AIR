@@ -103,11 +103,11 @@ def main():
             # The web launcher lives under frontEnd/ (outside the import path),
             # so load it by file path and call its run() entry point directly.
             import importlib.util
-            web_path = project_root / "frontEnd" / "Core" / "Launch" / "LauchWebserver.py"
+            web_path = project_root / "frontEnd" / "Entry.py"
             if not web_path.exists():
                 log(f"🛑 CRITICAL FAILURE: Web launcher not found at {web_path}")
                 sys.exit(1)
-            spec = importlib.util.spec_from_file_location("LauchWebserver", web_path)
+            spec = importlib.util.spec_from_file_location("frontend_entry", web_path)
             web_mod = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(web_mod)
             web_mod.run()
@@ -230,8 +230,8 @@ def main():
 
     # 3. Launch Web Interface (Browser-based control surface) — the LAST thing
     #    spawned, so it comes up only after Core and UI are running. It runs as
-    #    its own subprocess because LauchWebserver.serve_forever() is blocking.
-    web_script = project_root / "frontEnd" / "Core" / "Launch" / "LauchWebserver.py"
+    #    its own subprocess because Entry.run()'s serve_forever() is blocking.
+    web_script = project_root / "frontEnd" / "Entry.py"
     p_web = None
     if web_script.exists():
         log("Spawning Web Interface (http://localhost:8000)...")

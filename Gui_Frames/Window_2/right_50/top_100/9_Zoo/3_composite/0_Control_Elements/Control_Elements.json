@@ -89,6 +89,11 @@
             "notes": "",
             "interaction": {
               "trigger": false
+            },
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
             }
           },
           "w02": {

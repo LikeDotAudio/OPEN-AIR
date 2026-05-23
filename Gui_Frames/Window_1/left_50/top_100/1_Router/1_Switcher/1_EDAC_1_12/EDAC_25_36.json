@@ -29,23 +29,23 @@
             "AES70": "OcaSwitch",
             "handler": "set_snake_out_left_c5",
             "layout": {
-              "height": 50,
+              "height": 30,
               "alpha": 0.9,
               "max_cols": 6,
-              "width": 100,
+              "width": "100%",
               "font": 14,
-              "padx": 5,
-              "pady": 5
+              "padx": 0,
+              "pady": 0
             },
             "style": {
               "active": {
                 "font_style": "bold",
                 "font_size": null,
-                "text_color": "#1a1a1a",
+                "text_color": "#FF9900",
                 "bg_color": "#000000",
                 "border_color": "#FF9900",
                 "border_thickness": 2,
-                "glow_intensity": 1.944
+                "glow_intensity": 50
               },
               "inactive": {
                 "font_style": "normal",
@@ -198,8 +198,10 @@
               }
             },
             "selection_mode": "radio",
-            "Allow_Null": true,
-            "Allow_Multi_Alt_Select": true,
+            "domain": {
+              "Allow_Null": true,
+              "Allow_Multi_Alt_Select": true
+            },
             "yak_handler": {
               "enable": true,
               "yak_type": "set",
@@ -214,23 +216,23 @@
             "AES70": "OcaSwitch",
             "handler": "set_snake_out_right_c5",
             "layout": {
-              "height": 50,
+              "height": 30,
               "alpha": 0.9,
               "max_cols": 6,
-              "width": 100,
+              "width": "100%",
               "font": 14,
-              "padx": 5,
-              "pady": 5
+              "padx": 0,
+              "pady": 0
             },
             "style": {
               "active": {
                 "font_style": "bold",
                 "font_size": null,
-                "text_color": "#1a1a1a",
+                "text_color": "#FF9900",
                 "bg_color": "#000000",
-                "border_color": "#ff0000",
+                "border_color": "#FF9900",
                 "border_thickness": 2,
-                "glow_intensity": 1.944
+                "glow_intensity": 50
               },
               "inactive": {
                 "font_style": "normal",
@@ -383,8 +385,10 @@
               }
             },
             "selection_mode": "radio",
-            "Allow_Null": true,
-            "Allow_Multi_Alt_Select": true,
+            "domain": {
+              "Allow_Null": true,
+              "Allow_Multi_Alt_Select": true
+            },
             "yak_handler": {
               "enable": true,
               "yak_type": "set",
@@ -399,23 +403,23 @@
             "AES70": "OcaSwitch",
             "handler": "set_snake_in_left_c5",
             "layout": {
-              "height": 50,
+              "height": 30,
               "alpha": 0.9,
               "max_cols": 6,
-              "width": 100,
+              "width": "100%",
               "font": 14,
-              "padx": 5,
-              "pady": 5
+              "padx": 0,
+              "pady": 0
             },
             "style": {
               "active": {
                 "font_style": "bold",
                 "font_size": null,
-                "text_color": "#1a1a1a",
+                "text_color": "#FF9900",
                 "bg_color": "#000000",
                 "border_color": "#FF9900",
                 "border_thickness": 2,
-                "glow_intensity": 1.944
+                "glow_intensity": 50
               },
               "inactive": {
                 "font_style": "normal",
@@ -568,8 +572,10 @@
               }
             },
             "selection_mode": "radio",
-            "Allow_Null": true,
-            "Allow_Multi_Alt_Select": true,
+            "domain": {
+              "Allow_Null": true,
+              "Allow_Multi_Alt_Select": true
+            },
             "yak_handler": {
               "enable": true,
               "yak_type": "set",
@@ -584,23 +590,23 @@
             "AES70": "OcaSwitch",
             "handler": "set_snake_in_right_c5",
             "layout": {
-              "height": 50,
+              "height": 30,
               "alpha": 0.9,
               "max_cols": 6,
-              "width": 100,
+              "width": "100%",
               "font": 14,
-              "padx": 5,
-              "pady": 5
+              "padx": 0,
+              "pady": 0
             },
             "style": {
               "active": {
                 "font_style": "bold",
                 "font_size": null,
-                "text_color": "#1a1a1a",
+                "text_color": "#FF9900",
                 "bg_color": "#000000",
-                "border_color": "#ff0000",
+                "border_color": "#FF9900",
                 "border_thickness": 2,
-                "glow_intensity": 1.944
+                "glow_intensity": 50
               },
               "inactive": {
                 "font_style": "normal",
@@ -753,8 +759,10 @@
               }
             },
             "selection_mode": "radio",
-            "Allow_Null": true,
-            "Allow_Multi_Alt_Select": true,
+            "domain": {
+              "Allow_Null": true,
+              "Allow_Multi_Alt_Select": true
+            },
             "yak_handler": {
               "enable": true,
               "yak_type": "set",

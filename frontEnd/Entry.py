@@ -1,12 +1,15 @@
 import json
 import os
 import re
+import shutil
+import threading
 import time
 import urllib.parse
+import webbrowser
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 
-# Paths
-FRONTEND_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
+# Paths — Entry.py lives at frontEnd/, so the frontend root is its own directory.
+FRONTEND_DIR = os.path.abspath(os.path.dirname(__file__))
 GUI_FRAMES_DIR = os.path.abspath(os.path.join(FRONTEND_DIR, "../Gui_Frames"))
 PORT = 8000
 
@@ -250,12 +253,46 @@ class APIRequestHandler(SimpleHTTPRequestHandler):
 
         return super().do_GET()
 
-def run(server_class=HTTPServer, handler_class=APIRequestHandler, port=PORT):
+def open_in_chrome(url):
+    """Open `url` in Chrome, falling back to Chromium then the default browser."""
+    # Browsers webbrowser may already know about.
+    for name in ("google-chrome", "chrome", "chromium", "chromium-browser"):
+        try:
+            webbrowser.get(name).open(url)
+            return
+        except webbrowser.Error:
+            pass
+    # Otherwise locate a Chrome/Chromium binary directly.
+    candidates = [
+        "google-chrome", "google-chrome-stable", "chromium", "chromium-browser",
+        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+        r"C:\Program Files\Google\Chrome\Application\chrome.exe",
+        r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",
+    ]
+    for cand in candidates:
+        path = cand if os.path.exists(cand) else shutil.which(cand)
+        if path:
+            try:
+                webbrowser.get(f'"{path}" %s').open(url)
+                return
+            except webbrowser.Error:
+                pass
+    # Last resort: the system default browser.
+    webbrowser.open(url)
+
+
+def run(server_class=HTTPServer, handler_class=APIRequestHandler, port=PORT, open_browser=True):
     server_address = ('', port)
     httpd = server_class(server_address, handler_class)
-    print(f"🚀 [DEPLOY] Starting Open-Air Web Server on http://localhost:{port}")
+    url = f"http://localhost:{port}"
+    print(f"🚀 [DEPLOY] Starting Open-Air Web Server on {url}")
     print(f"📂 [ROUTING] Serving frontend from: {FRONTEND_DIR}")
     print(f"📂 [ROUTING] API tracking Gui_Frames from: {GUI_FRAMES_DIR}")
+    if open_browser:
+        # The socket is already bound/listening, so the browser can connect while
+        # serve_forever() spins up. Delay slightly so the first request lands cleanly.
+        print(f"🌐 [LAUNCH] Opening {url} in Chrome…")
+        threading.Timer(1.0, lambda: open_in_chrome(url)).start()
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:

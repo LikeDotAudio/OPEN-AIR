@@ -28,7 +28,7 @@
                     "active": {
                       "font_style": "bold",
                       "font_size": null,
-                      "text_color": "#1a1a1a",
+                      "text_color": "#FF902C",
                       "bg_color": "#000000",
                       "border_color": "#FF9900",
                       "border_thickness": 2,
@@ -63,7 +63,7 @@
                     "active": {
                       "font_style": "bold",
                       "font_size": null,
-                      "text_color": "#1a1a1a",
+                      "text_color": "#FF902C",
                       "bg_color": "#000000",
                       "border_color": "#FF9900",
                       "border_thickness": 2,
@@ -99,7 +99,7 @@
                   "active": {
                     "font_style": "bold",
                     "font_size": null,
-                    "text_color": "#1a1a1a",
+                    "text_color": "#FF902C",
                     "bg_color": "#000000",
                     "border_color": "#FF9900",
                     "border_thickness": 2,
@@ -129,7 +129,7 @@
                     "active": {
                       "font_style": "bold",
                       "font_size": null,
-                      "text_color": "#1a1a1a",
+                      "text_color": "#FF902C",
                       "bg_color": "#000000",
                       "border_color": "#FF9900",
                       "border_thickness": 2,
@@ -158,7 +158,7 @@
                     "active": {
                       "font_style": "bold",
                       "font_size": null,
-                      "text_color": "#1a1a1a",
+                      "text_color": "#FF902C",
                       "bg_color": "#000000",
                       "border_color": "#FF9900",
                       "border_thickness": 2,
@@ -187,7 +187,7 @@
                     "active": {
                       "font_style": "bold",
                       "font_size": null,
-                      "text_color": "#1a1a1a",
+                      "text_color": "#FF902C",
                       "bg_color": "#000000",
                       "border_color": "#FF9900",
                       "border_thickness": 2,

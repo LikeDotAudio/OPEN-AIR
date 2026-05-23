@@ -25,7 +25,12 @@
                 "Es": "*IDN?"
               }
             },
-            "message": "*IDN?"
+            "message": "*IDN?",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           },
           "Reset": {
             "type": "_GuiActuator",
@@ -37,7 +42,12 @@
                 "Es": "Reiniciar"
               }
             },
-            "message": "*RST"
+            "message": "*RST",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           },
           "Beeper State": {
             "type": "_GuiActuator",
@@ -53,7 +63,12 @@
             "options": [
               "ON",
               "OFF"
-            ]
+            ],
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           },
           "Key Lock": {
             "type": "_GuiActuator",
@@ -69,7 +84,12 @@
             "options": [
               "ON",
               "OFF"
-            ]
+            ],
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           },
           "Display State": {
             "type": "_GuiActuator",
@@ -85,7 +105,12 @@
             "options": [
               "ON",
               "OFF"
-            ]
+            ],
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           },
           "Error Query": {
             "type": "_GuiActuator",
@@ -97,7 +122,12 @@
                 "Es": "Consultar error"
               }
             },
-            "message": ":SYSTem:ERRor?"
+            "message": ":SYSTem:ERRor?",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           }
         }
       }

@@ -144,7 +144,9 @@
               "AMP"
             ],
             "continuous": false,
-            "value_default": "OFF",
+            "value": {
+              "default_value": "OFF"
+            },
             "indicator_color": "#FFFF00",
             "shape": "circle",
             "pointer_style": "line",
@@ -227,6 +229,11 @@
               "sticky": "center",
               "padx": 10,
               "pady": 10
+            },
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
             }
           },
           "Exhaustive_Toggle_Example": {
@@ -367,9 +374,13 @@
             "label": {
               "active": "Play"
             },
-            "min": 0.0,
-            "max": 1.0,
-            "value_default": false,
+            "domain": {
+              "min": 0.0,
+              "max": 1.0
+            },
+            "value": {
+              "default_value": false
+            },
             "width": 80,
             "height": 50,
             "color": "#6a9955",
@@ -588,12 +599,16 @@
               "pady": 10,
               "sticky": "ew"
             },
-            "min": 0.0,
-            "max": 5000.0,
-            "default_value": 1250.0,
-            "step_coarse": 100.0,
-            "step_fine": 0.001,
-            "units": "MHz",
+            "domain": {
+              "min": 0.0,
+              "max": 5000.0,
+              "step_coarse": 100.0,
+              "step_fine": 0.001,
+              "units": "MHz"
+            },
+            "value": {
+              "default_value": 1250.0
+            },
             "show_label": true,
             "value_config": {
               "_README": "Overrides for the numerical entry and unit readout panel (Column 2).",
@@ -671,9 +686,13 @@
             "label": {
               "active": "Standard"
             },
-            "value_min": -60.0,
-            "value_max": 10.0,
-            "value_default": -10.0,
+            "domain": {
+              "min": -60.0,
+              "max": 10.0
+            },
+            "value": {
+              "default_value": -10.0
+            },
             "layout": {
               "height": 300,
               "width": 120
@@ -707,13 +726,17 @@
               "font": 14,
               "padx": 10
             },
-            "default_value": "0",
-            "min": "0",
-            "max": "1000",
-            "units": "MHz",
-            "step_coarse": "1",
-            "step_fine": "0.001",
-            "step": "0.001",
+            "domain": {
+              "min": "0",
+              "max": "1000",
+              "units": "MHz",
+              "step_coarse": "1",
+              "step_fine": "0.001",
+              "precision": "0.001"
+            },
+            "value": {
+              "default_value": "0"
+            },
             "fader_config": {
               "type": "_GuiFaderHorizontal",
               "tick_interval": 100,
@@ -750,9 +773,13 @@
             },
             "notes": "A fully-featured Linear Travelling Potentiometer (LTP) sample showcasing every parameter.",
             "fader_config": {
-              "value_min": -100.0,
-              "value_max": 20.0,
-              "value_default": -10.0,
+              "domain": {
+                "min": -100.0,
+                "max": 20.0
+              },
+              "value": {
+                "default_value": -10.0
+              },
               "log_exponent": 1.0,
               "reff_point": 0.0,
               "value_highlight_color": "#33A1FD",
@@ -858,7 +885,9 @@
               "label": {
                 "active": "Level"
               },
-              "value_default": -10,
+              "value": {
+                "default_value": -10
+              },
               "cap_color": "#00FF00",
               "freestyle": true,
               "knob_style": "standard"
@@ -899,15 +928,19 @@
               "x": {
                 "label": "Frequency (GHz)",
                 "scale": "linear",
-                "min": 0,
-                "max": 1,
+                "domain": {
+                  "min": 0,
+                  "max": 1
+                },
                 "color": "white"
               },
               "y": {
                 "label": "Amplitude (dBm)",
                 "scale": "linear",
-                "min": -1.5,
-                "max": 1.5,
+                "domain": {
+                  "min": -1.5,
+                  "max": 1.5
+                },
                 "color": "white"
               },
               "show_grid": true,
@@ -1197,10 +1230,12 @@
               "width": 250,
               "font": 18
             },
-            "min": 0.0,
-            "max": 100.0,
-            "value": 50.0,
-            "units": "%",
+            "domain": {
+              "min": 0.0,
+              "max": 100.0,
+              "units": "%"
+            },
+            "value": {},
             "notes": "A standard horizontal slider with numerical input for volume control.",
             "show_label": true,
             "cosmetics": {
@@ -1263,8 +1298,10 @@
               },
               "y": {
                 "label": "Usage (%)",
-                "min": 0,
-                "max": 100,
+                "domain": {
+                  "min": 0,
+                  "max": 100
+                },
                 "color": "cyan"
               },
               "show_grid": true,
@@ -1408,8 +1445,10 @@
             "path": "audio/master/left/vu",
             "knob_path": "audio/master/left/gain",
             "size": 200,
-            "min": -60,
-            "max": 6,
+            "domain": {
+              "min": -60,
+              "max": 6
+            },
             "knob_min": 0,
             "knob_max": 100,
             "knob_width": 100,
@@ -2047,7 +2086,9 @@
               "label": {
                 "active": "Level"
               },
-              "value_default": -10,
+              "value": {
+                "default_value": -10
+              },
               "cap_color": "#00FF00",
               "freestyle": true,
               "knob_style": "standard"

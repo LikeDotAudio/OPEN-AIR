@@ -34,7 +34,12 @@
               "CSD",
               "CSQ",
               "CSRS"
-            ]
+            ],
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           },
           "Test Frequency": {
             "type": "_GuiActuator",
@@ -53,7 +58,12 @@
               "1k",
               "10k",
               "100k"
-            ]
+            ],
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           },
           "Averaging": {
             "type": "_GuiActuator",
@@ -65,7 +75,12 @@
                 "Es": "Establecer promedio"
               }
             },
-            "message": ":SENSe:AVERage:COUNt {value}"
+            "message": ":SENSe:AVERage:COUNt {value}",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           },
           "OPEN Correction": {
             "type": "_GuiActuator",
@@ -77,7 +92,12 @@
                 "Es": "ABIERTO"
               }
             },
-            "message": ":SENSe:CORRection:OPEN"
+            "message": ":SENSe:CORRection:OPEN",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           },
           "SHORT Correction": {
             "type": "_GuiActuator",
@@ -89,7 +109,12 @@
                 "Es": "CORTO"
               }
             },
-            "message": ":SENSe:CORRection:SHORt"
+            "message": ":SENSe:CORRection:SHORt",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           }
         }
       }

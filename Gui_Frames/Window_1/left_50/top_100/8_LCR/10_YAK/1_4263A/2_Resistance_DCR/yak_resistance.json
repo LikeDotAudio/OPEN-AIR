@@ -33,7 +33,12 @@
               "DCR",
               "LPDCR",
               "LSDCR"
-            ]
+            ],
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           },
           "Test Frequency": {
             "type": "_GuiActuator",
@@ -52,7 +57,12 @@
               "1k",
               "10k",
               "100k"
-            ]
+            ],
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           },
           "Current Range": {
             "type": "_GuiActuator",
@@ -64,7 +74,12 @@
                 "Es": "Establecer rango de corriente"
               }
             },
-            "message": ":SENSe:CURRent:RANGe:UPPer {value}"
+            "message": ":SENSe:CURRent:RANGe:UPPer {value}",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           }
         }
       }

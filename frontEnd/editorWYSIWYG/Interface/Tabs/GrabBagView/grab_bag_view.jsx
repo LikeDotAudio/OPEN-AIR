@@ -74,10 +74,10 @@
 
     React.useEffect(() => { load(false); }, [load]);
 
-    const insertSelected = (comp) => {
-      const target = window.OaEdCanvas.containerPathOf(store, st.selectedPath);
-      store.insert(target, comp.schema, comp.name);
-    };
+    // Clicking a palette item no longer auto-inserts — it loads the item into the
+    // Properties panel (as an editable draft) where an "Add to Canvas" drag handle
+    // places it. Dragging a chip straight onto the canvas still works too.
+    const selectForProps = (comp) => store.selectLibraryItem(comp);
 
     const dragStart = (e, comp) =>
       e.dataTransfer.setData('application/json', JSON.stringify({ name: comp.name, schema: comp.schema }));
@@ -110,9 +110,9 @@
                     <div key={c.name + i}
                       draggable
                       onDragStart={(e) => dragStart(e, c)}
-                      onClick={() => insertSelected(c)}
-                      title={`${c.type} — drag to canvas or click to insert into selection`}
-                      style={{ width: CHIP_W, border: '1px solid #3a3a3a', borderRadius: 4, overflow: 'hidden', cursor: 'grab', background: '#222' }}>
+                      onClick={() => selectForProps(c)}
+                      title={`${c.type} — click to inspect in Properties, or drag onto the canvas`}
+                      style={{ width: CHIP_W, border: (st.libraryItem && st.libraryItem.name === c.name) ? '1px solid #FF9900' : '1px solid #3a3a3a', borderRadius: 4, overflow: 'hidden', cursor: 'grab', background: (st.libraryItem && st.libraryItem.name === c.name) ? '#2a2410' : '#222' }}>
                       {showPreviews
                         ? <WidgetPreview comp={c} />
                         : <div style={{ height: 4 }} />}

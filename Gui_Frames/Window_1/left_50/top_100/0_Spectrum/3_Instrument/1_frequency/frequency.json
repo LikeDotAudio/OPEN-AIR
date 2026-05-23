@@ -8,7 +8,7 @@
     "behavior": {
       "overflow_ns": "auto",
       "overflow_ew": "auto",
-      "fluid_ew": true
+      "fluid_ew": false
     },
     "blocks": {
       "Frequency": {
@@ -52,14 +52,18 @@
               "input_name": "hz_value",
               "converter": "mhz_to_hz"
             },
-            "locked": false,
-            "default_value": "500",
-            "min": "0",
-            "max": "6000",
-            "units": "MHz",
-            "step_coarse": "1",
-            "step_fine": "0.001",
-            "step": ".001"
+            "domain": {
+              "locked": false,
+              "min": "0",
+              "max": "6000",
+              "units": "MHz",
+              "step_coarse": "1",
+              "step_fine": "0.001",
+              "precision": ".001"
+            },
+            "value": {
+              "default_value": "500"
+            }
           },
           "span_freq_MHz": {
             "label": {
@@ -98,14 +102,18 @@
               "input_name": "hz_value",
               "converter": "mhz_to_hz"
             },
-            "locked": false,
-            "default_value": "200",
-            "min": "0",
-            "max": "1000",
-            "units": "MHz",
-            "step_coarse": "1",
-            "step_fine": "0.001",
-            "step": ".001"
+            "domain": {
+              "locked": false,
+              "min": "0",
+              "max": "1000",
+              "units": "MHz",
+              "step_coarse": "1",
+              "step_fine": "0.001",
+              "precision": ".001"
+            },
+            "value": {
+              "default_value": "200"
+            }
           }
         }
       },
@@ -167,14 +175,18 @@
               "input_name": "hz_value",
               "converter": "mhz_to_hz"
             },
-            "locked": false,
-            "default_value": "400",
-            "min": "0",
-            "max": "5999",
-            "units": "MHz",
-            "step_coarse": "1",
-            "step_fine": "0.001",
-            "step": ".001"
+            "domain": {
+              "locked": false,
+              "min": "0",
+              "max": "5999",
+              "units": "MHz",
+              "step_coarse": "1",
+              "step_fine": "0.001",
+              "precision": ".001"
+            },
+            "value": {
+              "default_value": "400"
+            }
           },
           "stop_freq_MHz": {
             "label": {
@@ -213,14 +225,18 @@
               "input_name": "hz_value",
               "converter": "mhz_to_hz"
             },
-            "locked": false,
-            "default_value": "600",
-            "min": "1",
-            "max": "6000",
-            "units": "MHz",
-            "step_coarse": "1",
-            "step_fine": "0.001",
-            "step": ".001"
+            "domain": {
+              "locked": false,
+              "min": "1",
+              "max": "6000",
+              "units": "MHz",
+              "step_coarse": "1",
+              "step_fine": "0.001",
+              "precision": ".001"
+            },
+            "value": {
+              "default_value": "600"
+            }
           }
         }
       },

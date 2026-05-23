@@ -67,6 +67,11 @@ in the property editor.
       "sticky": "center",
       "padx": 10,
       "pady": 10
+    },
+    "style": {
+      "active": {
+        "text_color": "#FF902C"
+      }
     }
   },
   "_README": "This sample is REALLY REALLY COMPLETE. It outlines the momentary press behavior and MQTT trigger paths.",

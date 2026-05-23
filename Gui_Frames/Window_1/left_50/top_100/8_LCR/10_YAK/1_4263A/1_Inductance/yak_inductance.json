@@ -34,7 +34,12 @@
               "LSD",
               "LSQ",
               "LSRS"
-            ]
+            ],
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           },
           "Test Frequency": {
             "type": "_GuiActuator",
@@ -53,7 +58,12 @@
               "1k",
               "10k",
               "100k"
-            ]
+            ],
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           },
           "Averaging": {
             "type": "_GuiActuator",
@@ -65,7 +75,12 @@
                 "Es": "Establecer promedio"
               }
             },
-            "message": ":SENSe:AVERage:COUNt {value}"
+            "message": ":SENSe:AVERage:COUNt {value}",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           }
         }
       }

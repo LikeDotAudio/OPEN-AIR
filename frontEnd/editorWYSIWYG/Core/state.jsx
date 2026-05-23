@@ -94,6 +94,10 @@
         data: deepClone(initialData || {}),
         filePath: filePath || null,
         selectedPath: null,
+        // Editable draft of a Library palette item the user clicked (NOT yet on the
+        // canvas). When set, the Properties panel shows it + an "Add to Canvas" drag
+        // handle. Picking a canvas node clears it. { name, schema } | null.
+        libraryItem: null,
         dirty: false,
         rev: 0,
       };
@@ -116,7 +120,27 @@
         getNode: (path) => getAtPath(state.data, path),
         getSelected: () => (state.selectedPath ? getAtPath(state.data, state.selectedPath) : null),
 
-        select(path) { state = { ...state, selectedPath: path }; notify(); },
+        select(path) { state = { ...state, selectedPath: path, libraryItem: null }; notify(); },
+
+        // --- Library draft (palette item shown in Properties before it's placed) ---
+        getLibraryItem: () => state.libraryItem,
+        selectLibraryItem(comp) {
+          state = {
+            ...state,
+            selectedPath: null,
+            libraryItem: comp ? { name: comp.name, schema: deepClone(comp.schema) } : null,
+          };
+          notify();
+        },
+        clearLibraryItem() { state = { ...state, libraryItem: null }; notify(); },
+        /** Edit a property on the library draft (dot key path into its schema). */
+        setLibraryProp(key, value) {
+          if (!state.libraryItem) return;
+          const schema = deepClone(state.libraryItem.schema);
+          setAtPath(schema, key, value);
+          state = { ...state, libraryItem: { ...state.libraryItem, schema } };
+          notify();
+        },
 
         /** Replace the whole document (e.g. from the JSON code pane). */
         replaceData(data, opts) { commit(deepClone(data), opts); },

@@ -358,7 +358,9 @@
               }
             },
             "selection_mode": "radio",
-            "Allow_Null": true,
+            "domain": {
+              "Allow_Null": true
+            },
             "yak_handler": {
               "enable": true,
               "yak_type": "set",
@@ -854,7 +856,9 @@
               }
             },
             "selection_mode": "radio",
-            "Allow_Null": true,
+            "domain": {
+              "Allow_Null": true
+            },
             "yak_handler": {
               "enable": true,
               "yak_type": "set",
@@ -892,7 +896,7 @@
               "active": {
                 "font_style": "bold",
                 "font_size": null,
-                "text_color": "#1a1a1a",
+                "text_color": "#FF902C",
                 "bg_color": "#000000",
                 "border_color": "#FF9900",
                 "border_thickness": 2,

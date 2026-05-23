@@ -22,7 +22,12 @@
                 "Es": "OPEN CORR"
               }
             },
-            "message": ":CORR:OPEN:EXEC"
+            "message": ":CORR:OPEN:EXEC",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           },
           "Short_Corr": {
             "type": "_GuiActuator",
@@ -34,7 +39,12 @@
                 "Es": "SHORT CORR"
               }
             },
-            "message": ":CORR:SHOR:EXEC"
+            "message": ":CORR:SHOR:EXEC",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           },
           "Reset_Unit": {
             "type": "_GuiActuator",
@@ -50,7 +60,8 @@
               "active": {
                 "border_color": "#FF0000",
                 "border_thickness": 2,
-                "glow_intensity": 8
+                "glow_intensity": 8,
+                "text_color": "#FF902C"
               },
               "inactive": {
                 "border_color": "#555555",
@@ -70,7 +81,12 @@
                 "Es": "Read Error"
               }
             },
-            "message": ":SYST:ERR?"
+            "message": ":SYST:ERR?",
+            "style": {
+              "active": {
+                "text_color": "#FF902C"
+              }
+            }
           }
         }
       }

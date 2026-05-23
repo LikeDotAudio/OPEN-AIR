@@ -36,20 +36,21 @@ const DynamicGraph = ({ value: mqttData, config }) => {
         return data;
     };
 
+    // Stable signature of everything that affects chart STRUCTURE. Options are
+    // re-applied only when this string changes — NOT on every render. `config` gets
+    // a fresh identity each render and unrelated MQTT updates re-render every widget,
+    // so without this the chart was torn down + redrawn on any GUI change.
+    const cfgKey = JSON.stringify({
+        datasets: config?.datasets, axis: config?.axis, title, nav: !!config?.Navigation,
+    });
+
     React.useEffect(() => {
-        if (!chartRef.current) return;
+        if (!chartRef.current || typeof echarts === 'undefined') return;
 
-        if (typeof echarts === 'undefined') {
-            console.error("🛑 [ERROR] Apache ECharts not loaded.");
-            return;
+        // Init ONCE; reuse the instance afterwards (no dispose/redraw churn).
+        if (!chartInstance.current) {
+            chartInstance.current = echarts.init(chartRef.current, 'dark');
         }
-
-        // Cleanup previous instance
-        if (chartInstance.current) {
-            chartInstance.current.dispose();
-        }
-
-        chartInstance.current = echarts.init(chartRef.current, 'dark');
 
         const initialSeries = (config?.datasets || []).map(ds => {
             const seriesName = ds.id || ds.label?.[lang] || ds.label?.En || 'Series';
@@ -115,14 +116,17 @@ const DynamicGraph = ({ value: mqttData, config }) => {
         };
 
         chartInstance.current.setOption(option);
+    }, [cfgKey, lang]);
 
+    // Resize listener + dispose — mount/unmount only.
+    React.useEffect(() => {
         const resizeHandler = () => chartInstance.current && chartInstance.current.resize();
         window.addEventListener('resize', resizeHandler);
-
         return () => {
             window.removeEventListener('resize', resizeHandler);
+            if (chartInstance.current) { chartInstance.current.dispose(); chartInstance.current = null; }
         };
-    }, [config, lang, title, xAxisCfg, yAxisCfg, showGrid]);
+    }, []);
 
     // Handle incoming real-time data from MQTT
     React.useEffect(() => {
@@ -160,4 +164,10 @@ const DynamicGraph = ({ value: mqttData, config }) => {
         </div>
     );
 };
-window.DynamicGraph = DynamicGraph;
+// Skip re-render when neither the live data nor the config CONTENT changed — this
+// stops unrelated GUI changes (which re-render every widget via the MQTT context)
+// from cascading into the graph.
+window.DynamicGraph = React.memo(DynamicGraph, (prev, next) =>
+    prev.value === next.value &&
+    JSON.stringify(prev.config) === JSON.stringify(next.config)
+);

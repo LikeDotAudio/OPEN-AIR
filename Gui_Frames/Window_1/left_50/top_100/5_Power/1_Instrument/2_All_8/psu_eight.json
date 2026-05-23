@@ -57,7 +57,7 @@
                       "active": {
                         "font_style": "bold",
                         "font_size": null,
-                        "text_color": "#1a1a1a",
+                        "text_color": "#FF902C",
                         "bg_color": "#000000",
                         "border_color": "#FF9900",
                         "border_thickness": 2,
@@ -110,7 +110,12 @@
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
-                        "command_value": "INST:SEL 1;MEAS:VOLT?"
+                        "command_value": "INST:SEL 1;MEAS:VOLT?",
+                        "style": {
+                          "active": {
+                            "text_color": "#FF902C"
+                          }
+                        }
                       }
                     }
                   },
@@ -132,7 +137,12 @@
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
-                        "command_value": "INST:SEL 1;MEAS:CURR?"
+                        "command_value": "INST:SEL 1;MEAS:CURR?",
+                        "style": {
+                          "active": {
+                            "text_color": "#FF902C"
+                          }
+                        }
                       }
                     }
                   },
@@ -154,7 +164,12 @@
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
-                        "command_value": "INST:SEL 1;MEAS:POW?"
+                        "command_value": "INST:SEL 1;MEAS:POW?",
+                        "style": {
+                          "active": {
+                            "text_color": "#FF902C"
+                          }
+                        }
                       }
                     }
                   }
@@ -174,7 +189,12 @@
                 "message_details": {
                   "PSU_MODEL": {
                     "type": "_GuiActuator",
-                    "command_value": "INST:SEL 1;MEAS:SCAL:ALL?"
+                    "command_value": "INST:SEL 1;MEAS:SCAL:ALL?",
+                    "style": {
+                      "active": {
+                        "text_color": "#FF902C"
+                      }
+                    }
                   }
                 }
               }
@@ -210,7 +230,12 @@
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
-                        "command_value": "INST:SEL 2;MEAS:VOLT?"
+                        "command_value": "INST:SEL 2;MEAS:VOLT?",
+                        "style": {
+                          "active": {
+                            "text_color": "#FF902C"
+                          }
+                        }
                       }
                     }
                   },
@@ -232,7 +257,12 @@
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
-                        "command_value": "INST:SEL 2;MEAS:CURR?"
+                        "command_value": "INST:SEL 2;MEAS:CURR?",
+                        "style": {
+                          "active": {
+                            "text_color": "#FF902C"
+                          }
+                        }
                       }
                     }
                   },
@@ -254,7 +284,12 @@
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
-                        "command_value": "INST:SEL 2;MEAS:POW?"
+                        "command_value": "INST:SEL 2;MEAS:POW?",
+                        "style": {
+                          "active": {
+                            "text_color": "#FF902C"
+                          }
+                        }
                       }
                     }
                   }
@@ -274,7 +309,12 @@
                 "message_details": {
                   "PSU_MODEL": {
                     "type": "_GuiActuator",
-                    "command_value": "INST:SEL 2;MEAS:SCAL:ALL?"
+                    "command_value": "INST:SEL 2;MEAS:SCAL:ALL?",
+                    "style": {
+                      "active": {
+                        "text_color": "#FF902C"
+                      }
+                    }
                   }
                 }
               }
@@ -310,7 +350,12 @@
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
-                        "command_value": "INST:SEL 3;MEAS:VOLT?"
+                        "command_value": "INST:SEL 3;MEAS:VOLT?",
+                        "style": {
+                          "active": {
+                            "text_color": "#FF902C"
+                          }
+                        }
                       }
                     }
                   },
@@ -332,7 +377,12 @@
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
-                        "command_value": "INST:SEL 3;MEAS:CURR?"
+                        "command_value": "INST:SEL 3;MEAS:CURR?",
+                        "style": {
+                          "active": {
+                            "text_color": "#FF902C"
+                          }
+                        }
                       }
                     }
                   },
@@ -354,7 +404,12 @@
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
-                        "command_value": "INST:SEL 3;MEAS:POW?"
+                        "command_value": "INST:SEL 3;MEAS:POW?",
+                        "style": {
+                          "active": {
+                            "text_color": "#FF902C"
+                          }
+                        }
                       }
                     }
                   }
@@ -374,7 +429,12 @@
                 "message_details": {
                   "PSU_MODEL": {
                     "type": "_GuiActuator",
-                    "command_value": "INST:SEL 3;MEAS:SCAL:ALL?"
+                    "command_value": "INST:SEL 3;MEAS:SCAL:ALL?",
+                    "style": {
+                      "active": {
+                        "text_color": "#FF902C"
+                      }
+                    }
                   }
                 }
               }
@@ -410,7 +470,12 @@
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
-                        "command_value": "INST:SEL 4;MEAS:VOLT?"
+                        "command_value": "INST:SEL 4;MEAS:VOLT?",
+                        "style": {
+                          "active": {
+                            "text_color": "#FF902C"
+                          }
+                        }
                       }
                     }
                   },
@@ -432,7 +497,12 @@
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
-                        "command_value": "INST:SEL 4;MEAS:CURR?"
+                        "command_value": "INST:SEL 4;MEAS:CURR?",
+                        "style": {
+                          "active": {
+                            "text_color": "#FF902C"
+                          }
+                        }
                       }
                     }
                   },
@@ -454,7 +524,12 @@
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
-                        "command_value": "INST:SEL 4;MEAS:POW?"
+                        "command_value": "INST:SEL 4;MEAS:POW?",
+                        "style": {
+                          "active": {
+                            "text_color": "#FF902C"
+                          }
+                        }
                       }
                     }
                   }
@@ -474,7 +549,12 @@
                 "message_details": {
                   "PSU_MODEL": {
                     "type": "_GuiActuator",
-                    "command_value": "INST:SEL 4;MEAS:SCAL:ALL?"
+                    "command_value": "INST:SEL 4;MEAS:SCAL:ALL?",
+                    "style": {
+                      "active": {
+                        "text_color": "#FF902C"
+                      }
+                    }
                   }
                 }
               }
@@ -510,7 +590,12 @@
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
-                        "command_value": "INST:SEL 5;MEAS:VOLT?"
+                        "command_value": "INST:SEL 5;MEAS:VOLT?",
+                        "style": {
+                          "active": {
+                            "text_color": "#FF902C"
+                          }
+                        }
                       }
                     }
                   },
@@ -532,7 +617,12 @@
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
-                        "command_value": "INST:SEL 5;MEAS:CURR?"
+                        "command_value": "INST:SEL 5;MEAS:CURR?",
+                        "style": {
+                          "active": {
+                            "text_color": "#FF902C"
+                          }
+                        }
                       }
                     }
                   },
@@ -554,7 +644,12 @@
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
-                        "command_value": "INST:SEL 5;MEAS:POW?"
+                        "command_value": "INST:SEL 5;MEAS:POW?",
+                        "style": {
+                          "active": {
+                            "text_color": "#FF902C"
+                          }
+                        }
                       }
                     }
                   }
@@ -574,7 +669,12 @@
                 "message_details": {
                   "PSU_MODEL": {
                     "type": "_GuiActuator",
-                    "command_value": "INST:SEL 5;MEAS:SCAL:ALL?"
+                    "command_value": "INST:SEL 5;MEAS:SCAL:ALL?",
+                    "style": {
+                      "active": {
+                        "text_color": "#FF902C"
+                      }
+                    }
                   }
                 }
               }
@@ -610,7 +710,12 @@
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
-                        "command_value": "INST:SEL 6;MEAS:VOLT?"
+                        "command_value": "INST:SEL 6;MEAS:VOLT?",
+                        "style": {
+                          "active": {
+                            "text_color": "#FF902C"
+                          }
+                        }
                       }
                     }
                   },
@@ -632,7 +737,12 @@
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
-                        "command_value": "INST:SEL 6;MEAS:CURR?"
+                        "command_value": "INST:SEL 6;MEAS:CURR?",
+                        "style": {
+                          "active": {
+                            "text_color": "#FF902C"
+                          }
+                        }
                       }
                     }
                   },
@@ -654,7 +764,12 @@
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
-                        "command_value": "INST:SEL 6;MEAS:POW?"
+                        "command_value": "INST:SEL 6;MEAS:POW?",
+                        "style": {
+                          "active": {
+                            "text_color": "#FF902C"
+                          }
+                        }
                       }
                     }
                   }
@@ -674,7 +789,12 @@
                 "message_details": {
                   "PSU_MODEL": {
                     "type": "_GuiActuator",
-                    "command_value": "INST:SEL 6;MEAS:SCAL:ALL?"
+                    "command_value": "INST:SEL 6;MEAS:SCAL:ALL?",
+                    "style": {
+                      "active": {
+                        "text_color": "#FF902C"
+                      }
+                    }
                   }
                 }
               }
@@ -710,7 +830,12 @@
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
-                        "command_value": "INST:SEL 7;MEAS:VOLT?"
+                        "command_value": "INST:SEL 7;MEAS:VOLT?",
+                        "style": {
+                          "active": {
+                            "text_color": "#FF902C"
+                          }
+                        }
                       }
                     }
                   },
@@ -732,7 +857,12 @@
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
-                        "command_value": "INST:SEL 7;MEAS:CURR?"
+                        "command_value": "INST:SEL 7;MEAS:CURR?",
+                        "style": {
+                          "active": {
+                            "text_color": "#FF902C"
+                          }
+                        }
                       }
                     }
                   },
@@ -754,7 +884,12 @@
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
-                        "command_value": "INST:SEL 7;MEAS:POW?"
+                        "command_value": "INST:SEL 7;MEAS:POW?",
+                        "style": {
+                          "active": {
+                            "text_color": "#FF902C"
+                          }
+                        }
                       }
                     }
                   }
@@ -774,7 +909,12 @@
                 "message_details": {
                   "PSU_MODEL": {
                     "type": "_GuiActuator",
-                    "command_value": "INST:SEL 7;MEAS:SCAL:ALL?"
+                    "command_value": "INST:SEL 7;MEAS:SCAL:ALL?",
+                    "style": {
+                      "active": {
+                        "text_color": "#FF902C"
+                      }
+                    }
                   }
                 }
               }
@@ -810,7 +950,12 @@
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
-                        "command_value": "INST:SEL 8;MEAS:VOLT?"
+                        "command_value": "INST:SEL 8;MEAS:VOLT?",
+                        "style": {
+                          "active": {
+                            "text_color": "#FF902C"
+                          }
+                        }
                       }
                     }
                   },
@@ -832,7 +977,12 @@
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
-                        "command_value": "INST:SEL 8;MEAS:CURR?"
+                        "command_value": "INST:SEL 8;MEAS:CURR?",
+                        "style": {
+                          "active": {
+                            "text_color": "#FF902C"
+                          }
+                        }
                       }
                     }
                   },
@@ -854,7 +1004,12 @@
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
-                        "command_value": "INST:SEL 8;MEAS:POW?"
+                        "command_value": "INST:SEL 8;MEAS:POW?",
+                        "style": {
+                          "active": {
+                            "text_color": "#FF902C"
+                          }
+                        }
                       }
                     }
                   }
@@ -874,7 +1029,12 @@
                 "message_details": {
                   "PSU_MODEL": {
                     "type": "_GuiActuator",
-                    "command_value": "INST:SEL 8;MEAS:SCAL:ALL?"
+                    "command_value": "INST:SEL 8;MEAS:SCAL:ALL?",
+                    "style": {
+                      "active": {
+                        "text_color": "#FF902C"
+                      }
+                    }
                   }
                 }
               }

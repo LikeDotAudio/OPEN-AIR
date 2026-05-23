@@ -242,11 +242,13 @@
                   "fields": {
                     "Output_ON": {
                       "type": "_GuiActuator",
-                      "label_inactive": {
-                        "En": "Output ON",
-                        "Fr": "Sortie ON",
-                        "De": "Ausgang ON",
-                        "Es": "Salida ON"
+                      "label": {
+                        "inactive": {
+                          "En": "Output ON",
+                          "Fr": "Sortie ON",
+                          "De": "Ausgang ON",
+                          "Es": "Salida ON"
+                        }
                       },
                       "AES70": "OcaBooleanActuator",
                       "style": {
@@ -285,11 +287,13 @@
                     },
                     "Output_OFF": {
                       "type": "_GuiActuator",
-                      "label_inactive": {
-                        "En": "Output OFF",
-                        "Fr": "Sortie DÉSACTIVÉE",
-                        "De": "Ausgang AUS",
-                        "Es": "Salida DESACTIVADA"
+                      "label": {
+                        "inactive": {
+                          "En": "Output OFF",
+                          "Fr": "Sortie DÉSACTIVÉE",
+                          "De": "Ausgang AUS",
+                          "Es": "Salida DESACTIVADA"
+                        }
                       },
                       "AES70": "OcaBooleanActuator",
                       "style": {
@@ -333,11 +337,13 @@
                   "fields": {
                     "Clear_Protection": {
                       "type": "_GuiActuator",
-                      "label_inactive": {
-                        "En": "Clear Prot",
-                        "Fr": "Effacer Prot",
-                        "De": "Löschen Prot",
-                        "Es": "Borrar Prot"
+                      "label": {
+                        "inactive": {
+                          "En": "Clear Prot",
+                          "Fr": "Effacer Prot",
+                          "De": "Löschen Prot",
+                          "Es": "Borrar Prot"
+                        }
                       },
                       "style": {
                         "active": {
@@ -375,11 +381,13 @@
                     },
                     "Reset_Module": {
                       "type": "_GuiActuator",
-                      "label_inactive": {
-                        "En": "Reset",
-                        "Fr": "Réinitialiser",
-                        "De": "Zurücksetzen",
-                        "Es": "Reiniciar"
+                      "label": {
+                        "inactive": {
+                          "En": "Reset",
+                          "Fr": "Réinitialiser",
+                          "De": "Zurücksetzen",
+                          "Es": "Reiniciar"
+                        }
                       },
                       "style": {
                         "active": {

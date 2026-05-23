@@ -468,11 +468,13 @@
             "fields": {
               "Set_Input_Auto_Attenuation_ON": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "Auto Atten ON",
-                  "Fr": "Auto Attén ACTIVÉE",
-                  "De": "Auto Atten AN",
-                  "Es": "Auto Aten ACTIVADA"
+                "label": {
+                  "inactive": {
+                    "En": "Auto Atten ON",
+                    "Fr": "Auto Attén ACTIVÉE",
+                    "De": "Auto Atten AN",
+                    "Es": "Auto Aten ACTIVADA"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "layout": {
@@ -506,11 +508,13 @@
               },
               "Set_Input_Auto_Attenuation_OFF": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "Auto Atten OFF",
-                  "Fr": "Atténuation auto OFF",
-                  "De": "Auto-Dämpfung AUS",
-                  "Es": "Atenuación auto DES"
+                "label": {
+                  "inactive": {
+                    "En": "Auto Atten OFF",
+                    "Fr": "Atténuation auto OFF",
+                    "De": "Auto-Dämpfung AUS",
+                    "Es": "Atenuación auto DES"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "layout": {
@@ -549,11 +553,13 @@
             "fields": {
               "Set_Power_Gain_ON": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "Preamp ON",
-                  "Fr": "Préampli ON",
-                  "De": "Vorverstärker EIN",
-                  "Es": "Preampli ENC"
+                "label": {
+                  "inactive": {
+                    "En": "Preamp ON",
+                    "Fr": "Préampli ON",
+                    "De": "Vorverstärker EIN",
+                    "Es": "Preampli ENC"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "layout": {
@@ -587,11 +593,13 @@
               },
               "Set_Power_Gain_OFF": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "Preamp OFF",
-                  "Fr": "Préampli OFF",
-                  "De": "Vorverstärker AUS",
-                  "Es": "Preampli DES"
+                "label": {
+                  "inactive": {
+                    "En": "Preamp OFF",
+                    "Fr": "Préampli OFF",
+                    "De": "Vorverstärker AUS",
+                    "Es": "Preampli DES"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "layout": {
@@ -637,11 +645,13 @@
             "fields": {
               "Set_High_Sensitive_Power_ON_N9340B": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "High Sensitivity ON",
-                  "Fr": "High Sensitivity ON",
-                  "De": "High Sensitivity ON",
-                  "Es": "High Sensitivity ON"
+                "label": {
+                  "inactive": {
+                    "En": "High Sensitivity ON",
+                    "Fr": "High Sensitivity ON",
+                    "De": "High Sensitivity ON",
+                    "Es": "High Sensitivity ON"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "layout": {
@@ -676,11 +686,13 @@
               },
               "Set_High_Sensitive_Power_ON_N9342CN": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "High Sensitivity ON",
-                  "Fr": "High Sensitivity ON",
-                  "De": "High Sensitivity ON",
-                  "Es": "High Sensitivity ON"
+                "label": {
+                  "inactive": {
+                    "En": "High Sensitivity ON",
+                    "Fr": "High Sensitivity ON",
+                    "De": "High Sensitivity ON",
+                    "Es": "High Sensitivity ON"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "layout": {
@@ -715,11 +727,13 @@
               },
               "Set_High_Sensitive_Power_OFF_N9340B": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "High Sensitivity OFF",
-                  "Fr": "High Sensitivity OFF",
-                  "De": "High Sensitivity OFF",
-                  "Es": "High Sensitivity OFF"
+                "label": {
+                  "inactive": {
+                    "En": "High Sensitivity OFF",
+                    "Fr": "High Sensitivity OFF",
+                    "De": "High Sensitivity OFF",
+                    "Es": "High Sensitivity OFF"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "layout": {
@@ -754,11 +768,13 @@
               },
               "Set_High_Sensitive_Power_OFF_N9342CN": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "High Sensitivity OFF",
-                  "Fr": "High Sensitivity OFF",
-                  "De": "High Sensitivity OFF",
-                  "Es": "High Sensitivity OFF"
+                "label": {
+                  "inactive": {
+                    "En": "High Sensitivity OFF",
+                    "Fr": "High Sensitivity OFF",
+                    "De": "High Sensitivity OFF",
+                    "Es": "High Sensitivity OFF"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "layout": {

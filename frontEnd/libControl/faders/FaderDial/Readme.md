@@ -27,7 +27,9 @@ in the property editor.
       10,
       10
     ],
-    "label_active": "Master High-Precision Tuning",
+    "label": {
+      "active": "Master High-Precision Tuning"
+    },
     "description": "An exhaustive sample demonstrating every possible sub-configuration for the OcaCompositeFaderKnob.",
     "layout": {
       "width": 600,

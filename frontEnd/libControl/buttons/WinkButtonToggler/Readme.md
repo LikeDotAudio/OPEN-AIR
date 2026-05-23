@@ -22,15 +22,47 @@ the palette entry, preview, and property manipulators.
 {
   "Wink_Toggler_Example": {
     "type": "_WinkButtonToggler",
-    "label_active": "Channel",
+    "label": {
+      "active": "Channel"
+    },
     "layout_columns": 3,
     "options": {
-      "1": { "label_active": "1", "color": "#FF0000" },
-      "2": { "label_active": "2", "color": "#FF7F00" },
-      "3": { "label_active": "3", "color": "#FFFF00" },
-      "4": { "label_active": "4", "color": "#00FF00" },
-      "5": { "label_active": "5", "color": "#0000FF" },
-      "6": { "label_active": "6", "color": "#4B0082" }
+      "1": {
+        "label": {
+          "active": "1"
+        },
+        "color": "#FF0000"
+      },
+      "2": {
+        "label": {
+          "active": "2"
+        },
+        "color": "#FF7F00"
+      },
+      "3": {
+        "label": {
+          "active": "3"
+        },
+        "color": "#FFFF00"
+      },
+      "4": {
+        "label": {
+          "active": "4"
+        },
+        "color": "#00FF00"
+      },
+      "5": {
+        "label": {
+          "active": "5"
+        },
+        "color": "#0000FF"
+      },
+      "6": {
+        "label": {
+          "active": "6"
+        },
+        "color": "#4B0082"
+      }
     },
     "value_default": "1",
     "selection_mode": "radio",
@@ -42,12 +74,23 @@ the palette entry, preview, and property manipulators.
     "bezel_color": "#2b2b2b",
     "open_speed": 1200,
     "close_speed": 600,
-    "layout": { "sticky": "ew", "padx": 5, "pady": 5 }
+    "layout": {
+      "sticky": "ew",
+      "padx": 5,
+      "pady": 5
+    }
   },
   "_README": "Radio/multi group of wink (shutter) buttons; the selected option is held open.",
   "_LEGEND": {
-    "selection_modes": ["radio", "multi"],
-    "shape_type": ["rect", "round", "rounded_rect"]
+    "selection_modes": [
+      "radio",
+      "multi"
+    ],
+    "shape_type": [
+      "rect",
+      "round",
+      "rounded_rect"
+    ]
   }
 }
 ```

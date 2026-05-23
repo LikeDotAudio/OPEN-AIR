@@ -25,11 +25,13 @@
             "fields": {
               "Output_ON": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "ON",
-                  "Fr": "ON",
-                  "De": "EIN",
-                  "Es": "ENC"
+                "label": {
+                  "inactive": {
+                    "En": "ON",
+                    "Fr": "ON",
+                    "De": "EIN",
+                    "Es": "ENC"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
@@ -58,11 +60,13 @@
               },
               "Output_OFF": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "OFF",
-                  "Fr": "OFF",
-                  "De": "AUS",
-                  "Es": "DES"
+                "label": {
+                  "inactive": {
+                    "En": "OFF",
+                    "Fr": "OFF",
+                    "De": "AUS",
+                    "Es": "DES"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {

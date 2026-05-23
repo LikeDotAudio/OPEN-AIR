@@ -48,10 +48,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Stop Sign",
-              "Fr": "Arrêter Sign",
-              "De": "Stop Sign",
-              "Es": "Parar Sign"
+              "active": {
+                "En": "Stop Sign",
+                "Fr": "Arrêter Sign",
+                "De": "Stop Sign",
+                "Es": "Parar Sign"
+              }
             },
             "geometry": {
               "width": 250,
@@ -111,12 +113,6 @@
                 }
               ]
             },
-            "label_active": {
-              "En": "Stop Sign",
-              "Fr": "Arrêter Sign",
-              "De": "Stop Sign",
-              "Es": "Parar Sign"
-            },
             "width": 250,
             "height": 250,
             "Orientation": "vertical",
@@ -163,10 +159,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Caution Yellow",
-              "Fr": "Caution Yellow",
-              "De": "Caution Yellow",
-              "Es": "Caution Yellow"
+              "active": {
+                "En": "Caution Yellow",
+                "Fr": "Caution Yellow",
+                "De": "Caution Yellow",
+                "Es": "Caution Yellow"
+              }
             },
             "geometry": {
               "width": 250,
@@ -218,12 +216,6 @@
                 }
               ]
             },
-            "label_active": {
-              "En": "Caution Yellow",
-              "Fr": "Caution Yellow",
-              "De": "Caution Yellow",
-              "Es": "Caution Yellow"
-            },
             "width": 250,
             "height": 250,
             "Orientation": "vertical",
@@ -270,10 +262,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Emerald Sign",
-              "Fr": "Emerald Sign",
-              "De": "Emerald Sign",
-              "Es": "Emerald Sign"
+              "active": {
+                "En": "Emerald Sign",
+                "Fr": "Emerald Sign",
+                "De": "Emerald Sign",
+                "Es": "Emerald Sign"
+              }
             },
             "geometry": {
               "width": 220,
@@ -306,12 +300,6 @@
                   "color": "#b2dfdb"
                 }
               ]
-            },
-            "label_active": {
-              "En": "Emerald Sign",
-              "Fr": "Emerald Sign",
-              "De": "Emerald Sign",
-              "Es": "Emerald Sign"
             },
             "width": 220,
             "height": 220,
@@ -356,10 +344,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Blueprint",
-              "Fr": "Blueprint",
-              "De": "Blueprint",
-              "Es": "Blueprint"
+              "active": {
+                "En": "Blueprint",
+                "Fr": "Blueprint",
+                "De": "Blueprint",
+                "Es": "Blueprint"
+              }
             },
             "geometry": {
               "width": 220,
@@ -392,12 +382,6 @@
                   "color": "#90caf9"
                 }
               ]
-            },
-            "label_active": {
-              "En": "Blueprint",
-              "Fr": "Blueprint",
-              "De": "Blueprint",
-              "Es": "Blueprint"
             },
             "width": 220,
             "height": 220,
@@ -442,10 +426,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Royal Octagon",
-              "Fr": "Royal Octagon",
-              "De": "Royal Octagon",
-              "Es": "Royal Octagon"
+              "active": {
+                "En": "Royal Octagon",
+                "Fr": "Royal Octagon",
+                "De": "Royal Octagon",
+                "Es": "Royal Octagon"
+              }
             },
             "geometry": {
               "width": 220,
@@ -479,12 +465,6 @@
                   "color": "#FFD700"
                 }
               ]
-            },
-            "label_active": {
-              "En": "Royal Octagon",
-              "Fr": "Royal Octagon",
-              "De": "Royal Octagon",
-              "Es": "Royal Octagon"
             },
             "width": 220,
             "height": 220,
@@ -529,10 +509,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Night Mode",
-              "Fr": "Night Mode",
-              "De": "Night Mode",
-              "Es": "Night Mode"
+              "active": {
+                "En": "Night Mode",
+                "Fr": "Night Mode",
+                "De": "Night Mode",
+                "Es": "Night Mode"
+              }
             },
             "geometry": {
               "width": 220,
@@ -564,12 +546,6 @@
                   "color": "#555"
                 }
               ]
-            },
-            "label_active": {
-              "En": "Night Mode",
-              "Fr": "Night Mode",
-              "De": "Night Mode",
-              "Es": "Night Mode"
             },
             "width": 220,
             "height": 220,
@@ -614,10 +590,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Vintage Analog",
-              "Fr": "Vintage Analog",
-              "De": "Vintage Analog",
-              "Es": "Vintage Analog"
+              "active": {
+                "En": "Vintage Analog",
+                "Fr": "Vintage Analog",
+                "De": "Vintage Analog",
+                "Es": "Vintage Analog"
+              }
             },
             "geometry": {
               "width": 220,
@@ -650,12 +628,6 @@
                   "color": "#5d4037"
                 }
               ]
-            },
-            "label_active": {
-              "En": "Vintage Analog",
-              "Fr": "Vintage Analog",
-              "De": "Vintage Analog",
-              "Es": "Vintage Analog"
             },
             "width": 220,
             "height": 220,
@@ -700,10 +672,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Cyber Sign",
-              "Fr": "Cyber Sign",
-              "De": "Cyber Sign",
-              "Es": "Cyber Sign"
+              "active": {
+                "En": "Cyber Sign",
+                "Fr": "Cyber Sign",
+                "De": "Cyber Sign",
+                "Es": "Cyber Sign"
+              }
             },
             "geometry": {
               "width": 220,
@@ -738,12 +712,6 @@
                   "color": "#00e5ff"
                 }
               ]
-            },
-            "label_active": {
-              "En": "Cyber Sign",
-              "Fr": "Cyber Sign",
-              "De": "Cyber Sign",
-              "Es": "Cyber Sign"
             },
             "width": 220,
             "height": 220,

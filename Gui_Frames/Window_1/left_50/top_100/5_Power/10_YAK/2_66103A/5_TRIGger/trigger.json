@@ -22,11 +22,13 @@
         "fields": {
           "Trigger_Immediate": {
             "type": "_GuiActuator",
-            "label_inactive": {
-              "En": "Trigger (*TRG)",
-              "Fr": "Déclencheur (*TRG)",
-              "De": "Trigger (*TRG)",
-              "Es": "Disparo (*TRG)"
+            "label": {
+              "inactive": {
+                "En": "Trigger (*TRG)",
+                "Fr": "Déclencheur (*TRG)",
+                "De": "Trigger (*TRG)",
+                "Es": "Disparo (*TRG)"
+              }
             },
             "AES70": "OcaBooleanActuator",
             "style": {

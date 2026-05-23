@@ -13,20 +13,30 @@
     "blocks": {
       "elements1": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Feature Enabled",
-          "Fr": "Feature Activé",
-          "De": "Feature Aktiviert",
-          "Es": "Feature Habilitado"
+        "label": {
+          "active": {
+            "En": "Feature Enabled",
+            "Fr": "Feature Activé",
+            "De": "Feature Aktiviert",
+            "Es": "Feature Habilitado"
+          }
         },
         "fields": {
           "examplefields": {
             "type": "_SmartCheckbox",
             "label": {
-              "En": "Feature Enabled",
-              "Fr": "Feature Activé",
-              "De": "Feature Aktiviert",
-              "Es": "Feature Habilitado"
+              "active": {
+                "En": "Feature Enabled",
+                "Fr": "Feature Activé",
+                "De": "Feature Aktiviert",
+                "Es": "Feature Habilitado"
+              },
+              "inactive": {
+                "En": "Feature Disabled",
+                "Fr": "Feature Désactivé",
+                "De": "Feature Deaktiviert",
+                "Es": "Feature Deshabilitado"
+              }
             },
             "notes": "Checkbox to enable/disable a specific feature.",
             "domain": {
@@ -36,32 +46,36 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "label_inactive": {
-              "En": "Feature Disabled",
-              "Fr": "Feature Désactivé",
-              "De": "Feature Deaktiviert",
-              "Es": "Feature Deshabilitado"
             }
           }
         }
       },
       "elements2": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Auto-Save ON",
-          "Fr": "Auto-Save ON",
-          "De": "Auto-Save ON",
-          "Es": "Auto-Save ON"
+        "label": {
+          "active": {
+            "En": "Auto-Save ON",
+            "Fr": "Auto-Save ON",
+            "De": "Auto-Save ON",
+            "Es": "Auto-Save ON"
+          }
         },
         "fields": {
           "examplefields": {
             "type": "_SmartCheckbox",
             "label": {
-              "En": "Auto-Save ON",
-              "Fr": "Auto-Save ON",
-              "De": "Auto-Save ON",
-              "Es": "Auto-Save ON"
+              "active": {
+                "En": "Auto-Save ON",
+                "Fr": "Auto-Save ON",
+                "De": "Auto-Save ON",
+                "Es": "Auto-Save ON"
+              },
+              "inactive": {
+                "En": "Auto-Save OFF",
+                "Fr": "Auto-Save OFF",
+                "De": "Auto-Save OFF",
+                "Es": "Auto-Save OFF"
+              }
             },
             "notes": "Checkbox for auto-save functionality, enabled by default.",
             "domain": {
@@ -71,32 +85,36 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "label_inactive": {
-              "En": "Auto-Save OFF",
-              "Fr": "Auto-Save OFF",
-              "De": "Auto-Save OFF",
-              "Es": "Auto-Save OFF"
             }
           }
         }
       },
       "elements3": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Show Gridlines",
-          "Fr": "Show Gridlines",
-          "De": "Show Gridlines",
-          "Es": "Show Gridlines"
+        "label": {
+          "active": {
+            "En": "Show Gridlines",
+            "Fr": "Show Gridlines",
+            "De": "Show Gridlines",
+            "Es": "Show Gridlines"
+          }
         },
         "fields": {
           "examplefields": {
             "type": "_SmartCheckbox",
             "label": {
-              "En": "Show Gridlines",
-              "Fr": "Show Gridlines",
-              "De": "Show Gridlines",
-              "Es": "Show Gridlines"
+              "active": {
+                "En": "Show Gridlines",
+                "Fr": "Show Gridlines",
+                "De": "Show Gridlines",
+                "Es": "Show Gridlines"
+              },
+              "inactive": {
+                "En": "Hide Gridlines",
+                "Fr": "Hide Gridlines",
+                "De": "Hide Gridlines",
+                "Es": "Hide Gridlines"
+              }
             },
             "notes": "Checkbox to toggle visibility of gridlines.",
             "domain": {
@@ -106,23 +124,19 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "label_inactive": {
-              "En": "Hide Gridlines",
-              "Fr": "Hide Gridlines",
-              "De": "Hide Gridlines",
-              "Es": "Hide Gridlines"
             }
           }
         }
       },
       "elements4": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Gui Checkbox 04 Dark Mode",
-          "Fr": "Gui Checkbox 04 Dark Mode",
-          "De": "Gui Checkbox 04 Dark Mode",
-          "Es": "Gui Checkbox 04 Dark Mode"
+        "label": {
+          "active": {
+            "En": "Gui Checkbox 04 Dark Mode",
+            "Fr": "Gui Checkbox 04 Dark Mode",
+            "De": "Gui Checkbox 04 Dark Mode",
+            "Es": "Gui Checkbox 04 Dark Mode"
+          }
         },
         "fields": {
           "examplefields": {
@@ -147,21 +161,31 @@
       },
       "elements5": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Notifications ON",
-          "Fr": "Notifications ON",
-          "De": "Notifications ON",
-          "Es": "Notifications ON"
+        "label": {
+          "active": {
+            "En": "Notifications ON",
+            "Fr": "Notifications ON",
+            "De": "Notifications ON",
+            "Es": "Notifications ON"
+          }
         },
         "fields": {
           "fields": {
             "examplefields": {
               "type": "_SmartCheckbox",
               "label": {
-                "En": "Notifications ON",
-                "Fr": "Notifications ON",
-                "De": "Notifications ON",
-                "Es": "Notifications ON"
+                "active": {
+                  "En": "Notifications ON",
+                  "Fr": "Notifications ON",
+                  "De": "Notifications ON",
+                  "Es": "Notifications ON"
+                },
+                "inactive": {
+                  "En": "Notifications OFF",
+                  "Fr": "Notifications OFF",
+                  "De": "Notifications OFF",
+                  "Es": "Notifications OFF"
+                }
               },
               "notes": "Checkbox to control system notifications.",
               "domain": {
@@ -171,12 +195,6 @@
               },
               "interaction": {
                 "is_read_only": false
-              },
-              "label_inactive": {
-                "En": "Notifications OFF",
-                "Fr": "Notifications OFF",
-                "De": "Notifications OFF",
-                "Es": "Notifications OFF"
               }
             }
           }

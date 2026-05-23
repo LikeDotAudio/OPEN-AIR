@@ -237,17 +237,19 @@
               },
               "Load_Button": {
                 "type": "_GuiActuator",
-                "label_active": {
-                  "En": "LoadPreset",
-                  "Fr": "ChargerPreset",
-                  "De": "LadenPreset",
-                  "Es": "CargarPreset"
-                },
-                "label_inactive": {
-                  "En": "LoadPreset",
-                  "Fr": "ChargerPreset",
-                  "De": "LadenPreset",
-                  "Es": "CargarPreset"
+                "label": {
+                  "active": {
+                    "En": "LoadPreset",
+                    "Fr": "ChargerPreset",
+                    "De": "LadenPreset",
+                    "Es": "CargarPreset"
+                  },
+                  "inactive": {
+                    "En": "LoadPreset",
+                    "Fr": "ChargerPreset",
+                    "De": "LadenPreset",
+                    "Es": "CargarPreset"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "layout": {

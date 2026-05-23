@@ -805,11 +805,13 @@
             "fields": {
               "Output_ON": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "Output ON",
-                  "Fr": "Sortie ON",
-                  "De": "Ausgang ON",
-                  "Es": "Salida ON"
+                "label": {
+                  "inactive": {
+                    "En": "Output ON",
+                    "Fr": "Sortie ON",
+                    "De": "Ausgang ON",
+                    "Es": "Salida ON"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
@@ -839,11 +841,13 @@
               },
               "Output_OFF": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "Output OFF",
-                  "Fr": "Sortie DÉSACTIVÉE",
-                  "De": "Ausgang AUS",
-                  "Es": "Salida DESACTIVADA"
+                "label": {
+                  "inactive": {
+                    "En": "Output OFF",
+                    "Fr": "Sortie DÉSACTIVÉE",
+                    "De": "Ausgang AUS",
+                    "Es": "Salida DESACTIVADA"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
@@ -873,11 +877,13 @@
               },
               "Sync_ON": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "Sync ON",
-                  "Fr": "Sync ON",
-                  "De": "Sync ON",
-                  "Es": "Sync ON"
+                "label": {
+                  "inactive": {
+                    "En": "Sync ON",
+                    "Fr": "Sync ON",
+                    "De": "Sync ON",
+                    "Es": "Sync ON"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
@@ -907,11 +913,13 @@
               },
               "Sync_OFF": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "Sync OFF",
-                  "Fr": "Sync OFF",
-                  "De": "Sync OFF",
-                  "Es": "Sync OFF"
+                "label": {
+                  "inactive": {
+                    "En": "Sync OFF",
+                    "Fr": "Sync OFF",
+                    "De": "Sync OFF",
+                    "Es": "Sync OFF"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
@@ -946,11 +954,13 @@
             "fields": {
               "AM_State_ON": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "AM ON",
-                  "Fr": "AM ON",
-                  "De": "AM EIN",
-                  "Es": "AM ENC"
+                "label": {
+                  "inactive": {
+                    "En": "AM ON",
+                    "Fr": "AM ON",
+                    "De": "AM EIN",
+                    "Es": "AM ENC"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
@@ -979,11 +989,13 @@
               },
               "AM_State_OFF": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "AM OFF",
-                  "Fr": "AM OFF",
-                  "De": "AM AUS",
-                  "Es": "AM DES"
+                "label": {
+                  "inactive": {
+                    "En": "AM OFF",
+                    "Fr": "AM OFF",
+                    "De": "AM AUS",
+                    "Es": "AM DES"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
@@ -1012,11 +1024,13 @@
               },
               "FM_State_ON": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "FM ON",
-                  "Fr": "FM ACTIVÉE",
-                  "De": "FM AN",
-                  "Es": "FM ACTIVADO"
+                "label": {
+                  "inactive": {
+                    "En": "FM ON",
+                    "Fr": "FM ACTIVÉE",
+                    "De": "FM AN",
+                    "Es": "FM ACTIVADO"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
@@ -1045,11 +1059,13 @@
               },
               "FM_State_OFF": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "FM OFF",
-                  "Fr": "FM OFF",
-                  "De": "FM OFF",
-                  "Es": "FM OFF"
+                "label": {
+                  "inactive": {
+                    "En": "FM OFF",
+                    "Fr": "FM OFF",
+                    "De": "FM OFF",
+                    "Es": "FM OFF"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
@@ -1083,11 +1099,13 @@
             "fields": {
               "Trigger_Immediate": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "Trigger (*TRG)",
-                  "Fr": "Déclencheur (*TRG)",
-                  "De": "Trigger (*TRG)",
-                  "Es": "Disparo (*TRG)"
+                "label": {
+                  "inactive": {
+                    "En": "Trigger (*TRG)",
+                    "Fr": "Déclencheur (*TRG)",
+                    "De": "Trigger (*TRG)",
+                    "Es": "Disparo (*TRG)"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
@@ -1116,11 +1134,13 @@
               },
               "Reset_Device": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "Reset (*RST)",
-                  "Fr": "Réinitialiser (*RST)",
-                  "De": "Zurücksetzen (*RST)",
-                  "Es": "Reiniciar (*RST)"
+                "label": {
+                  "inactive": {
+                    "En": "Reset (*RST)",
+                    "Fr": "Réinitialiser (*RST)",
+                    "De": "Zurücksetzen (*RST)",
+                    "Es": "Reiniciar (*RST)"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
@@ -1149,11 +1169,13 @@
               },
               "Clear_Text": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "Clear Display",
-                  "Fr": "Effacer l'affichage",
-                  "De": "Anzeige löschen",
-                  "Es": "Borrar pantalla"
+                "label": {
+                  "inactive": {
+                    "En": "Clear Display",
+                    "Fr": "Effacer l'affichage",
+                    "De": "Anzeige löschen",
+                    "Es": "Borrar pantalla"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {

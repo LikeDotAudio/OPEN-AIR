@@ -24,11 +24,13 @@
           "radar_eye_1": {
             "type": "_Radar",
             "transparent": true,
-            "label_active": {
-              "En": "Variant 1",
-              "Fr": "Variant 1",
-              "De": "Variant 1",
-              "Es": "Variant 1"
+            "label": {
+              "active": {
+                "En": "Variant 1",
+                "Fr": "Variant 1",
+                "De": "Variant 1",
+                "Es": "Variant 1"
+              }
             },
             "app_settings": {
               "title": "Sonar",
@@ -85,11 +87,13 @@
           "radar_eye_2": {
             "type": "_Radar",
             "transparent": true,
-            "label_active": {
-              "En": "Variant 2",
-              "Fr": "Variant 2",
-              "De": "Variant 2",
-              "Es": "Variant 2"
+            "label": {
+              "active": {
+                "En": "Variant 2",
+                "Fr": "Variant 2",
+                "De": "Variant 2",
+                "Es": "Variant 2"
+              }
             },
             "app_settings": {
               "title": "Sonar",
@@ -146,11 +150,13 @@
           "radar_eye_3": {
             "type": "_Radar",
             "transparent": true,
-            "label_active": {
-              "En": "Variant 3",
-              "Fr": "Variant 3",
-              "De": "Variant 3",
-              "Es": "Variant 3"
+            "label": {
+              "active": {
+                "En": "Variant 3",
+                "Fr": "Variant 3",
+                "De": "Variant 3",
+                "Es": "Variant 3"
+              }
             },
             "app_settings": {
               "title": "Sonar",
@@ -207,11 +213,13 @@
           "radar_eye_4": {
             "type": "_Radar",
             "transparent": true,
-            "label_active": {
-              "En": "Variant 4",
-              "Fr": "Variant 4",
-              "De": "Variant 4",
-              "Es": "Variant 4"
+            "label": {
+              "active": {
+                "En": "Variant 4",
+                "Fr": "Variant 4",
+                "De": "Variant 4",
+                "Es": "Variant 4"
+              }
             },
             "app_settings": {
               "title": "Sonar",
@@ -268,11 +276,13 @@
           "radar_eye_5": {
             "type": "_Radar",
             "transparent": true,
-            "label_active": {
-              "En": "Variant 5",
-              "Fr": "Variant 5",
-              "De": "Variant 5",
-              "Es": "Variant 5"
+            "label": {
+              "active": {
+                "En": "Variant 5",
+                "Fr": "Variant 5",
+                "De": "Variant 5",
+                "Es": "Variant 5"
+              }
             },
             "app_settings": {
               "title": "Sonar",
@@ -329,11 +339,13 @@
           "radar_eye_6": {
             "type": "_Radar",
             "transparent": true,
-            "label_active": {
-              "En": "Variant 6",
-              "Fr": "Variant 6",
-              "De": "Variant 6",
-              "Es": "Variant 6"
+            "label": {
+              "active": {
+                "En": "Variant 6",
+                "Fr": "Variant 6",
+                "De": "Variant 6",
+                "Es": "Variant 6"
+              }
             },
             "app_settings": {
               "title": "Sonar",

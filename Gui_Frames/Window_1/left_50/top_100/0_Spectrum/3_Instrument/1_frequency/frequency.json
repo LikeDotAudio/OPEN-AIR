@@ -22,11 +22,13 @@
         },
         "fields": {
           "center_freq_MHz": {
-            "label_active": {
-              "En": "Center Frequency",
-              "Fr": "Fréquence centrale",
-              "De": "Mittenfrequenz",
-              "Es": "Frecuencia central"
+            "label": {
+              "active": {
+                "En": "Center Frequency",
+                "Fr": "Fréquence centrale",
+                "De": "Mittenfrequenz",
+                "Es": "Frecuencia central"
+              }
             },
             "type": "_Horizontal_with_dial_Value",
             "column_spacing": [
@@ -60,17 +62,19 @@
             "step": ".001"
           },
           "span_freq_MHz": {
-            "label_active": {
-              "En": "Frequency Span",
-              "Fr": "Fréquence Span",
-              "De": "Frequenz Span",
-              "Es": "Frecuencia Span"
-            },
-            "label_inactive": {
-              "En": "Frequency Span",
-              "Fr": "Fréquence Span",
-              "De": "Frequenz Span",
-              "Es": "Frecuencia Span"
+            "label": {
+              "active": {
+                "En": "Frequency Span",
+                "Fr": "Fréquence Span",
+                "De": "Frequenz Span",
+                "Es": "Frecuencia Span"
+              },
+              "inactive": {
+                "En": "Frequency Span",
+                "Fr": "Fréquence Span",
+                "De": "Frequenz Span",
+                "Es": "Frecuencia Span"
+              }
             },
             "type": "_Horizontal_with_dial_Value",
             "column_spacing": [
@@ -127,17 +131,19 @@
         },
         "fields": {
           "start_freq_MHz": {
-            "label_active": {
-              "En": "Start Frequency",
-              "Fr": "Fréquence de début",
-              "De": "Startfrequenz",
-              "Es": "Frecuencia de inicio"
-            },
-            "label_inactive": {
-              "En": "Start Frequency",
-              "Fr": "Fréquence de début",
-              "De": "Startfrequenz",
-              "Es": "Frecuencia de inicio"
+            "label": {
+              "active": {
+                "En": "Start Frequency",
+                "Fr": "Fréquence de début",
+                "De": "Startfrequenz",
+                "Es": "Frecuencia de inicio"
+              },
+              "inactive": {
+                "En": "Start Frequency",
+                "Fr": "Fréquence de début",
+                "De": "Startfrequenz",
+                "Es": "Frecuencia de inicio"
+              }
             },
             "type": "_Horizontal_with_dial_Value",
             "column_spacing": [
@@ -171,17 +177,19 @@
             "step": ".001"
           },
           "stop_freq_MHz": {
-            "label_active": {
-              "En": "Stop Frequency",
-              "Fr": "Fréquence de fin",
-              "De": "Stoppfrequenz",
-              "Es": "Frecuencia de parada"
-            },
-            "label_inactive": {
-              "En": "Stop Frequency",
-              "Fr": "Fréquence de fin",
-              "De": "Stoppfrequenz",
-              "Es": "Frecuencia de parada"
+            "label": {
+              "active": {
+                "En": "Stop Frequency",
+                "Fr": "Fréquence de fin",
+                "De": "Stoppfrequenz",
+                "Es": "Frecuencia de parada"
+              },
+              "inactive": {
+                "En": "Stop Frequency",
+                "Fr": "Fréquence de fin",
+                "De": "Stoppfrequenz",
+                "Es": "Frecuencia de parada"
+              }
             },
             "type": "_Horizontal_with_dial_Value",
             "column_spacing": [
@@ -240,11 +248,13 @@
         "fields": {
           "Span": {
             "type": "_GuiButtonToggler",
-            "label_active": {
-              "En": "Span",
-              "Fr": "Étendue",
-              "De": "Spanne",
-              "Es": "Intervalo"
+            "label": {
+              "active": {
+                "En": "Span",
+                "Fr": "Étendue",
+                "De": "Spanne",
+                "Es": "Intervalo"
+              }
             },
             "AES70": "OcaSwitch",
             "handler": "set_span_frequency",
@@ -281,17 +291,19 @@
             "options": {
               "1": {
                 "value": "0.01",
-                "label_active": {
-                  "En": "Microscope",
-                  "Fr": "Microscope",
-                  "De": "Mikroskop",
-                  "Es": "Microscopio"
-                },
-                "label_inactive": {
-                  "En": "Microscope",
-                  "Fr": "Microscope",
-                  "De": "Mikroskop",
-                  "Es": "Microscopio"
+                "label": {
+                  "active": {
+                    "En": "Microscope",
+                    "Fr": "Microscope",
+                    "De": "Mikroskop",
+                    "Es": "Microscopio"
+                  },
+                  "inactive": {
+                    "En": "Microscope",
+                    "Fr": "Microscope",
+                    "De": "Mikroskop",
+                    "Es": "Microscopio"
+                  }
                 },
                 "description": {
                   "En": "So tight you'll feel like a cellular biologist examining a single-cell waveform.",
@@ -304,17 +316,19 @@
               },
               "2": {
                 "value": "0.1",
-                "label_active": {
-                  "En": "Tight",
-                  "Fr": "Tight",
-                  "De": "Tight",
-                  "Es": "Tight"
-                },
-                "label_inactive": {
-                  "En": "Tight",
-                  "Fr": "Tight",
-                  "De": "Tight",
-                  "Es": "Tight"
+                "label": {
+                  "active": {
+                    "En": "Tight",
+                    "Fr": "Tight",
+                    "De": "Tight",
+                    "Es": "Tight"
+                  },
+                  "inactive": {
+                    "En": "Tight",
+                    "Fr": "Tight",
+                    "De": "Tight",
+                    "Es": "Tight"
+                  }
                 },
                 "description": {
                   "En": "A narrow, focused view for getting up close and personal with signals.",
@@ -327,17 +341,19 @@
               },
               "3": {
                 "value": "1",
-                "label_active": {
-                  "En": "Normal",
-                  "Fr": "Normal",
-                  "De": "Normal",
-                  "Es": "Normal"
-                },
-                "label_inactive": {
-                  "En": "Normal",
-                  "Fr": "Normal",
-                  "De": "Normal",
-                  "Es": "Normal"
+                "label": {
+                  "active": {
+                    "En": "Normal",
+                    "Fr": "Normal",
+                    "De": "Normal",
+                    "Es": "Normal"
+                  },
+                  "inactive": {
+                    "En": "Normal",
+                    "Fr": "Normal",
+                    "De": "Normal",
+                    "Es": "Normal"
+                  }
                 },
                 "description": {
                   "En": "The standard span, a balanced diet for most common analysis.",
@@ -350,17 +366,19 @@
               },
               "4": {
                 "value": "10",
-                "label_active": {
-                  "En": "Wide",
-                  "Fr": "Large",
-                  "De": "Breit",
-                  "Es": "Ancho"
-                },
-                "label_inactive": {
-                  "En": "Wide",
-                  "Fr": "Large",
-                  "De": "Breit",
-                  "Es": "Ancho"
+                "label": {
+                  "active": {
+                    "En": "Wide",
+                    "Fr": "Large",
+                    "De": "Breit",
+                    "Es": "Ancho"
+                  },
+                  "inactive": {
+                    "En": "Wide",
+                    "Fr": "Large",
+                    "De": "Breit",
+                    "Es": "Ancho"
+                  }
                 },
                 "description": {
                   "En": "A broad, digestible view of the spectrum, great for general reconnaissance.",
@@ -373,17 +391,19 @@
               },
               "5": {
                 "value": "100",
-                "label_active": {
-                  "En": "Ultra Wide",
-                  "Fr": "Ultra Large",
-                  "De": "Ultra Breit",
-                  "Es": "Ultra Ancho"
-                },
-                "label_inactive": {
-                  "En": "Ultra Wide",
-                  "Fr": "Ultra Large",
-                  "De": "Ultra Breit",
-                  "Es": "Ultra Ancho"
+                "label": {
+                  "active": {
+                    "En": "Ultra Wide",
+                    "Fr": "Ultra Large",
+                    "De": "Ultra Breit",
+                    "Es": "Ultra Ancho"
+                  },
+                  "inactive": {
+                    "En": "Ultra Wide",
+                    "Fr": "Ultra Large",
+                    "De": "Ultra Breit",
+                    "Es": "Ultra Ancho"
+                  }
                 },
                 "description": {
                   "En": "A very broad span for finding signals over a large frequency range. It's like scanning with a wide-angle lens.",
@@ -396,17 +416,19 @@
               },
               "6": {
                 "value": "500",
-                "label_active": {
-                  "En": "From Space",
-                  "Fr": "From Space",
-                  "De": "From Space",
-                  "Es": "From Space"
-                },
-                "label_inactive": {
-                  "En": "From Space",
-                  "Fr": "From Space",
-                  "De": "From Space",
-                  "Es": "From Space"
+                "label": {
+                  "active": {
+                    "En": "From Space",
+                    "Fr": "From Space",
+                    "De": "From Space",
+                    "Es": "From Space"
+                  },
+                  "inactive": {
+                    "En": "From Space",
+                    "Fr": "From Space",
+                    "De": "From Space",
+                    "Es": "From Space"
+                  }
                 },
                 "description": {
                   "En": "A very broad span for finding signals over a large frequency range.",
@@ -419,17 +441,19 @@
               },
               "7": {
                 "value": "1000",
-                "label_active": {
-                  "En": "From The Moon",
-                  "Fr": "From The Moon",
-                  "De": "From The Moon",
-                  "Es": "From The Moon"
-                },
-                "label_inactive": {
-                  "En": "From The Moon",
-                  "Fr": "From The Moon",
-                  "De": "From The Moon",
-                  "Es": "From The Moon"
+                "label": {
+                  "active": {
+                    "En": "From The Moon",
+                    "Fr": "From The Moon",
+                    "De": "From The Moon",
+                    "Es": "From The Moon"
+                  },
+                  "inactive": {
+                    "En": "From The Moon",
+                    "Fr": "From The Moon",
+                    "De": "From The Moon",
+                    "Es": "From The Moon"
+                  }
                 },
                 "description": {
                   "En": "A very broad span for finding signals over a large frequency range. It's like scanning with a wide-angle lens.",
@@ -442,17 +466,19 @@
               },
               "UNSELECTED": {
                 "value": "NONE",
-                "label_active": {
-                  "En": "None Selected",
-                  "Fr": "Aucun sélectionné",
-                  "De": "Keine ausgewählt",
-                  "Es": "Ninguno seleccionado"
-                },
-                "label_inactive": {
-                  "En": "None Selected",
-                  "Fr": "Aucun sélectionné",
-                  "De": "Keine ausgewählt",
-                  "Es": "Ninguno seleccionado"
+                "label": {
+                  "active": {
+                    "En": "None Selected",
+                    "Fr": "Aucun sélectionné",
+                    "De": "Keine ausgewählt",
+                    "Es": "Ninguno seleccionado"
+                  },
+                  "inactive": {
+                    "En": "None Selected",
+                    "Fr": "Aucun sélectionné",
+                    "De": "Keine ausgewählt",
+                    "Es": "Ninguno seleccionado"
+                  }
                 },
                 "description": {
                   "En": "No span option is currently selected.",

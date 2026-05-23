@@ -60,17 +60,19 @@
             "options": {
               "1": {
                 "value": "601",
-                "label_active": {
-                  "En": "Ch 1 (L)",
-                  "Fr": "Ch 1",
-                  "De": "Ch 1",
-                  "Es": "Ch 1"
-                },
-                "label_inactive": {
-                  "En": "Ch 1 (L)",
-                  "Fr": "Ch 1",
-                  "De": "Ch 1",
-                  "Es": "Ch 1"
+                "label": {
+                  "active": {
+                    "En": "Ch 1 (L)",
+                    "Fr": "Ch 1",
+                    "De": "Ch 1",
+                    "Es": "Ch 1"
+                  },
+                  "inactive": {
+                    "En": "Ch 1 (L)",
+                    "Fr": "Ch 1",
+                    "De": "Ch 1",
+                    "Es": "Ch 1"
+                  }
                 },
                 "description": {
                   "En": "Snake Ch 1 Left/Odd OUT to Bus AB0",
@@ -81,17 +83,19 @@
               },
               "2": {
                 "value": "602",
-                "label_active": {
-                  "En": "Ch 3 (L)",
-                  "Fr": "Ch 3",
-                  "De": "Ch 3",
-                  "Es": "Ch 3"
-                },
-                "label_inactive": {
-                  "En": "Ch 3 (L)",
-                  "Fr": "Ch 3",
-                  "De": "Ch 3",
-                  "Es": "Ch 3"
+                "label": {
+                  "active": {
+                    "En": "Ch 3 (L)",
+                    "Fr": "Ch 3",
+                    "De": "Ch 3",
+                    "Es": "Ch 3"
+                  },
+                  "inactive": {
+                    "En": "Ch 3 (L)",
+                    "Fr": "Ch 3",
+                    "De": "Ch 3",
+                    "Es": "Ch 3"
+                  }
                 },
                 "description": {
                   "En": "Snake Ch 3 Left/Odd OUT to Bus AB0",
@@ -102,17 +106,19 @@
               },
               "3": {
                 "value": "603",
-                "label_active": {
-                  "En": "Ch 5 (L)",
-                  "Fr": "Ch 5",
-                  "De": "Ch 5",
-                  "Es": "Ch 5"
-                },
-                "label_inactive": {
-                  "En": "Ch 5 (L)",
-                  "Fr": "Ch 5",
-                  "De": "Ch 5",
-                  "Es": "Ch 5"
+                "label": {
+                  "active": {
+                    "En": "Ch 5 (L)",
+                    "Fr": "Ch 5",
+                    "De": "Ch 5",
+                    "Es": "Ch 5"
+                  },
+                  "inactive": {
+                    "En": "Ch 5 (L)",
+                    "Fr": "Ch 5",
+                    "De": "Ch 5",
+                    "Es": "Ch 5"
+                  }
                 },
                 "description": {
                   "En": "Snake Ch 5 Left/Odd OUT to Bus AB0",
@@ -123,17 +129,19 @@
               },
               "4": {
                 "value": "604",
-                "label_active": {
-                  "En": "Ch 7 (L)",
-                  "Fr": "Ch 7",
-                  "De": "Ch 7",
-                  "Es": "Ch 7"
-                },
-                "label_inactive": {
-                  "En": "Ch 7 (L)",
-                  "Fr": "Ch 7",
-                  "De": "Ch 7",
-                  "Es": "Ch 7"
+                "label": {
+                  "active": {
+                    "En": "Ch 7 (L)",
+                    "Fr": "Ch 7",
+                    "De": "Ch 7",
+                    "Es": "Ch 7"
+                  },
+                  "inactive": {
+                    "En": "Ch 7 (L)",
+                    "Fr": "Ch 7",
+                    "De": "Ch 7",
+                    "Es": "Ch 7"
+                  }
                 },
                 "description": {
                   "En": "Snake Ch 7 Left/Odd OUT to Bus AB0",
@@ -144,17 +152,19 @@
               },
               "5": {
                 "value": "605",
-                "label_active": {
-                  "En": "Ch 9 (L)",
-                  "Fr": "Ch 9",
-                  "De": "Ch 9",
-                  "Es": "Ch 9"
-                },
-                "label_inactive": {
-                  "En": "Ch 9 (L)",
-                  "Fr": "Ch 9",
-                  "De": "Ch 9",
-                  "Es": "Ch 9"
+                "label": {
+                  "active": {
+                    "En": "Ch 9 (L)",
+                    "Fr": "Ch 9",
+                    "De": "Ch 9",
+                    "Es": "Ch 9"
+                  },
+                  "inactive": {
+                    "En": "Ch 9 (L)",
+                    "Fr": "Ch 9",
+                    "De": "Ch 9",
+                    "Es": "Ch 9"
+                  }
                 },
                 "description": {
                   "En": "Snake Ch 9 Left/Odd OUT to Bus AB0",
@@ -165,17 +175,19 @@
               },
               "6": {
                 "value": "606",
-                "label_active": {
-                  "En": "Ch 11 (L)",
-                  "Fr": "Ch 11",
-                  "De": "Ch 11",
-                  "Es": "Ch 11"
-                },
-                "label_inactive": {
-                  "En": "Ch 11 (L)",
-                  "Fr": "Ch 11",
-                  "De": "Ch 11",
-                  "Es": "Ch 11"
+                "label": {
+                  "active": {
+                    "En": "Ch 11 (L)",
+                    "Fr": "Ch 11",
+                    "De": "Ch 11",
+                    "Es": "Ch 11"
+                  },
+                  "inactive": {
+                    "En": "Ch 11 (L)",
+                    "Fr": "Ch 11",
+                    "De": "Ch 11",
+                    "Es": "Ch 11"
+                  }
                 },
                 "description": {
                   "En": "Snake Ch 11 Left/Odd OUT to Bus AB0",
@@ -233,17 +245,19 @@
             "options": {
               "1": {
                 "value": "621",
-                "label_active": {
-                  "En": "Ch 2 (R)",
-                  "Fr": "Ch 2",
-                  "De": "Ch 2",
-                  "Es": "Ch 2"
-                },
-                "label_inactive": {
-                  "En": "Ch 2 (R)",
-                  "Fr": "Ch 2",
-                  "De": "Ch 2",
-                  "Es": "Ch 2"
+                "label": {
+                  "active": {
+                    "En": "Ch 2 (R)",
+                    "Fr": "Ch 2",
+                    "De": "Ch 2",
+                    "Es": "Ch 2"
+                  },
+                  "inactive": {
+                    "En": "Ch 2 (R)",
+                    "Fr": "Ch 2",
+                    "De": "Ch 2",
+                    "Es": "Ch 2"
+                  }
                 },
                 "description": {
                   "En": "Snake Ch 2 Right/Even OUT to Bus AB2",
@@ -254,17 +268,19 @@
               },
               "2": {
                 "value": "622",
-                "label_active": {
-                  "En": "Ch 4 (R)",
-                  "Fr": "Ch 4",
-                  "De": "Ch 4",
-                  "Es": "Ch 4"
-                },
-                "label_inactive": {
-                  "En": "Ch 4 (R)",
-                  "Fr": "Ch 4",
-                  "De": "Ch 4",
-                  "Es": "Ch 4"
+                "label": {
+                  "active": {
+                    "En": "Ch 4 (R)",
+                    "Fr": "Ch 4",
+                    "De": "Ch 4",
+                    "Es": "Ch 4"
+                  },
+                  "inactive": {
+                    "En": "Ch 4 (R)",
+                    "Fr": "Ch 4",
+                    "De": "Ch 4",
+                    "Es": "Ch 4"
+                  }
                 },
                 "description": {
                   "En": "Snake Ch 4 Right/Even OUT to Bus AB2",
@@ -275,17 +291,19 @@
               },
               "3": {
                 "value": "623",
-                "label_active": {
-                  "En": "Ch 6 (R)",
-                  "Fr": "Ch 6",
-                  "De": "Ch 6",
-                  "Es": "Ch 6"
-                },
-                "label_inactive": {
-                  "En": "Ch 6 (R)",
-                  "Fr": "Ch 6",
-                  "De": "Ch 6",
-                  "Es": "Ch 6"
+                "label": {
+                  "active": {
+                    "En": "Ch 6 (R)",
+                    "Fr": "Ch 6",
+                    "De": "Ch 6",
+                    "Es": "Ch 6"
+                  },
+                  "inactive": {
+                    "En": "Ch 6 (R)",
+                    "Fr": "Ch 6",
+                    "De": "Ch 6",
+                    "Es": "Ch 6"
+                  }
                 },
                 "description": {
                   "En": "Snake Ch 6 Right/Even OUT to Bus AB2",
@@ -296,17 +314,19 @@
               },
               "4": {
                 "value": "624",
-                "label_active": {
-                  "En": "Ch 8 (R)",
-                  "Fr": "Ch 8",
-                  "De": "Ch 8",
-                  "Es": "Ch 8"
-                },
-                "label_inactive": {
-                  "En": "Ch 8 (R)",
-                  "Fr": "Ch 8",
-                  "De": "Ch 8",
-                  "Es": "Ch 8"
+                "label": {
+                  "active": {
+                    "En": "Ch 8 (R)",
+                    "Fr": "Ch 8",
+                    "De": "Ch 8",
+                    "Es": "Ch 8"
+                  },
+                  "inactive": {
+                    "En": "Ch 8 (R)",
+                    "Fr": "Ch 8",
+                    "De": "Ch 8",
+                    "Es": "Ch 8"
+                  }
                 },
                 "description": {
                   "En": "Snake Ch 8 Right/Even OUT to Bus AB2",
@@ -317,17 +337,19 @@
               },
               "5": {
                 "value": "625",
-                "label_active": {
-                  "En": "Ch 10 (R)",
-                  "Fr": "Ch 10",
-                  "De": "Ch 10",
-                  "Es": "Ch 10"
-                },
-                "label_inactive": {
-                  "En": "Ch 10 (R)",
-                  "Fr": "Ch 10",
-                  "De": "Ch 10",
-                  "Es": "Ch 10"
+                "label": {
+                  "active": {
+                    "En": "Ch 10 (R)",
+                    "Fr": "Ch 10",
+                    "De": "Ch 10",
+                    "Es": "Ch 10"
+                  },
+                  "inactive": {
+                    "En": "Ch 10 (R)",
+                    "Fr": "Ch 10",
+                    "De": "Ch 10",
+                    "Es": "Ch 10"
+                  }
                 },
                 "description": {
                   "En": "Snake Ch 10 Right/Even OUT to Bus AB2",
@@ -338,17 +360,19 @@
               },
               "6": {
                 "value": "626",
-                "label_active": {
-                  "En": "Ch 12 (R)",
-                  "Fr": "Ch 12",
-                  "De": "Ch 12",
-                  "Es": "Ch 12"
-                },
-                "label_inactive": {
-                  "En": "Ch 12 (R)",
-                  "Fr": "Ch 12",
-                  "De": "Ch 12",
-                  "Es": "Ch 12"
+                "label": {
+                  "active": {
+                    "En": "Ch 12 (R)",
+                    "Fr": "Ch 12",
+                    "De": "Ch 12",
+                    "Es": "Ch 12"
+                  },
+                  "inactive": {
+                    "En": "Ch 12 (R)",
+                    "Fr": "Ch 12",
+                    "De": "Ch 12",
+                    "Es": "Ch 12"
+                  }
                 },
                 "description": {
                   "En": "Snake Ch 12 Right/Even OUT to Bus AB2",
@@ -406,17 +430,19 @@
             "options": {
               "1": {
                 "value": "611",
-                "label_active": {
-                  "En": "Ch 13 (L)",
-                  "Fr": "Ch 13",
-                  "De": "Ch 13",
-                  "Es": "Ch 13"
-                },
-                "label_inactive": {
-                  "En": "Ch 13 (L)",
-                  "Fr": "Ch 13",
-                  "De": "Ch 13",
-                  "Es": "Ch 13"
+                "label": {
+                  "active": {
+                    "En": "Ch 13 (L)",
+                    "Fr": "Ch 13",
+                    "De": "Ch 13",
+                    "Es": "Ch 13"
+                  },
+                  "inactive": {
+                    "En": "Ch 13 (L)",
+                    "Fr": "Ch 13",
+                    "De": "Ch 13",
+                    "Es": "Ch 13"
+                  }
                 },
                 "description": {
                   "En": "Snake Ch 13 Left/Odd IN from Bus AB1",
@@ -427,17 +453,19 @@
               },
               "2": {
                 "value": "612",
-                "label_active": {
-                  "En": "Ch 15 (L)",
-                  "Fr": "Ch 15",
-                  "De": "Ch 15",
-                  "Es": "Ch 15"
-                },
-                "label_inactive": {
-                  "En": "Ch 15 (L)",
-                  "Fr": "Ch 15",
-                  "De": "Ch 15",
-                  "Es": "Ch 15"
+                "label": {
+                  "active": {
+                    "En": "Ch 15 (L)",
+                    "Fr": "Ch 15",
+                    "De": "Ch 15",
+                    "Es": "Ch 15"
+                  },
+                  "inactive": {
+                    "En": "Ch 15 (L)",
+                    "Fr": "Ch 15",
+                    "De": "Ch 15",
+                    "Es": "Ch 15"
+                  }
                 },
                 "description": {
                   "En": "Snake Ch 15 Left/Odd IN from Bus AB1",
@@ -448,17 +476,19 @@
               },
               "3": {
                 "value": "613",
-                "label_active": {
-                  "En": "Ch 17 (L)",
-                  "Fr": "Ch 17",
-                  "De": "Ch 17",
-                  "Es": "Ch 17"
-                },
-                "label_inactive": {
-                  "En": "Ch 17 (L)",
-                  "Fr": "Ch 17",
-                  "De": "Ch 17",
-                  "Es": "Ch 17"
+                "label": {
+                  "active": {
+                    "En": "Ch 17 (L)",
+                    "Fr": "Ch 17",
+                    "De": "Ch 17",
+                    "Es": "Ch 17"
+                  },
+                  "inactive": {
+                    "En": "Ch 17 (L)",
+                    "Fr": "Ch 17",
+                    "De": "Ch 17",
+                    "Es": "Ch 17"
+                  }
                 },
                 "description": {
                   "En": "Snake Ch 17 Left/Odd IN from Bus AB1",
@@ -469,17 +499,19 @@
               },
               "4": {
                 "value": "614",
-                "label_active": {
-                  "En": "Ch 19 (L)",
-                  "Fr": "Ch 19",
-                  "De": "Ch 19",
-                  "Es": "Ch 19"
-                },
-                "label_inactive": {
-                  "En": "Ch 19 (L)",
-                  "Fr": "Ch 19",
-                  "De": "Ch 19",
-                  "Es": "Ch 19"
+                "label": {
+                  "active": {
+                    "En": "Ch 19 (L)",
+                    "Fr": "Ch 19",
+                    "De": "Ch 19",
+                    "Es": "Ch 19"
+                  },
+                  "inactive": {
+                    "En": "Ch 19 (L)",
+                    "Fr": "Ch 19",
+                    "De": "Ch 19",
+                    "Es": "Ch 19"
+                  }
                 },
                 "description": {
                   "En": "Snake Ch 19 Left/Odd IN from Bus AB1",
@@ -490,17 +522,19 @@
               },
               "5": {
                 "value": "615",
-                "label_active": {
-                  "En": "Ch 21 (L)",
-                  "Fr": "Ch 21",
-                  "De": "Ch 21",
-                  "Es": "Ch 21"
-                },
-                "label_inactive": {
-                  "En": "Ch 21 (L)",
-                  "Fr": "Ch 21",
-                  "De": "Ch 21",
-                  "Es": "Ch 21"
+                "label": {
+                  "active": {
+                    "En": "Ch 21 (L)",
+                    "Fr": "Ch 21",
+                    "De": "Ch 21",
+                    "Es": "Ch 21"
+                  },
+                  "inactive": {
+                    "En": "Ch 21 (L)",
+                    "Fr": "Ch 21",
+                    "De": "Ch 21",
+                    "Es": "Ch 21"
+                  }
                 },
                 "description": {
                   "En": "Snake Ch 21 Left/Odd IN from Bus AB1",
@@ -511,17 +545,19 @@
               },
               "6": {
                 "value": "616",
-                "label_active": {
-                  "En": "Ch 23 (L)",
-                  "Fr": "Ch 23",
-                  "De": "Ch 23",
-                  "Es": "Ch 23"
-                },
-                "label_inactive": {
-                  "En": "Ch 23 (L)",
-                  "Fr": "Ch 23",
-                  "De": "Ch 23",
-                  "Es": "Ch 23"
+                "label": {
+                  "active": {
+                    "En": "Ch 23 (L)",
+                    "Fr": "Ch 23",
+                    "De": "Ch 23",
+                    "Es": "Ch 23"
+                  },
+                  "inactive": {
+                    "En": "Ch 23 (L)",
+                    "Fr": "Ch 23",
+                    "De": "Ch 23",
+                    "Es": "Ch 23"
+                  }
                 },
                 "description": {
                   "En": "Snake Ch 23 Left/Odd IN from Bus AB1",
@@ -579,17 +615,19 @@
             "options": {
               "1": {
                 "value": "631",
-                "label_active": {
-                  "En": "Ch 14 (R)",
-                  "Fr": "Ch 14",
-                  "De": "Ch 14",
-                  "Es": "Ch 14"
-                },
-                "label_inactive": {
-                  "En": "Ch 14 (R)",
-                  "Fr": "Ch 14",
-                  "De": "Ch 14",
-                  "Es": "Ch 14"
+                "label": {
+                  "active": {
+                    "En": "Ch 14 (R)",
+                    "Fr": "Ch 14",
+                    "De": "Ch 14",
+                    "Es": "Ch 14"
+                  },
+                  "inactive": {
+                    "En": "Ch 14 (R)",
+                    "Fr": "Ch 14",
+                    "De": "Ch 14",
+                    "Es": "Ch 14"
+                  }
                 },
                 "description": {
                   "En": "Snake Ch 14 Right/Even IN from Bus AB3",
@@ -600,17 +638,19 @@
               },
               "2": {
                 "value": "632",
-                "label_active": {
-                  "En": "Ch 16 (R)",
-                  "Fr": "Ch 16",
-                  "De": "Ch 16",
-                  "Es": "Ch 16"
-                },
-                "label_inactive": {
-                  "En": "Ch 16 (R)",
-                  "Fr": "Ch 16",
-                  "De": "Ch 16",
-                  "Es": "Ch 16"
+                "label": {
+                  "active": {
+                    "En": "Ch 16 (R)",
+                    "Fr": "Ch 16",
+                    "De": "Ch 16",
+                    "Es": "Ch 16"
+                  },
+                  "inactive": {
+                    "En": "Ch 16 (R)",
+                    "Fr": "Ch 16",
+                    "De": "Ch 16",
+                    "Es": "Ch 16"
+                  }
                 },
                 "description": {
                   "En": "Snake Ch 16 Right/Even IN from Bus AB3",
@@ -621,17 +661,19 @@
               },
               "3": {
                 "value": "633",
-                "label_active": {
-                  "En": "Ch 18 (R)",
-                  "Fr": "Ch 18",
-                  "De": "Ch 18",
-                  "Es": "Ch 18"
-                },
-                "label_inactive": {
-                  "En": "Ch 18 (R)",
-                  "Fr": "Ch 18",
-                  "De": "Ch 18",
-                  "Es": "Ch 18"
+                "label": {
+                  "active": {
+                    "En": "Ch 18 (R)",
+                    "Fr": "Ch 18",
+                    "De": "Ch 18",
+                    "Es": "Ch 18"
+                  },
+                  "inactive": {
+                    "En": "Ch 18 (R)",
+                    "Fr": "Ch 18",
+                    "De": "Ch 18",
+                    "Es": "Ch 18"
+                  }
                 },
                 "description": {
                   "En": "Snake Ch 18 Right/Even IN from Bus AB3",
@@ -642,17 +684,19 @@
               },
               "4": {
                 "value": "634",
-                "label_active": {
-                  "En": "Ch 20 (R)",
-                  "Fr": "Ch 20",
-                  "De": "Ch 20",
-                  "Es": "Ch 20"
-                },
-                "label_inactive": {
-                  "En": "Ch 20 (R)",
-                  "Fr": "Ch 20",
-                  "De": "Ch 20",
-                  "Es": "Ch 20"
+                "label": {
+                  "active": {
+                    "En": "Ch 20 (R)",
+                    "Fr": "Ch 20",
+                    "De": "Ch 20",
+                    "Es": "Ch 20"
+                  },
+                  "inactive": {
+                    "En": "Ch 20 (R)",
+                    "Fr": "Ch 20",
+                    "De": "Ch 20",
+                    "Es": "Ch 20"
+                  }
                 },
                 "description": {
                   "En": "Snake Ch 20 Right/Even IN from Bus AB3",
@@ -663,17 +707,19 @@
               },
               "5": {
                 "value": "635",
-                "label_active": {
-                  "En": "Ch 22 (R)",
-                  "Fr": "Ch 22",
-                  "De": "Ch 22",
-                  "Es": "Ch 22"
-                },
-                "label_inactive": {
-                  "En": "Ch 22 (R)",
-                  "Fr": "Ch 22",
-                  "De": "Ch 22",
-                  "Es": "Ch 22"
+                "label": {
+                  "active": {
+                    "En": "Ch 22 (R)",
+                    "Fr": "Ch 22",
+                    "De": "Ch 22",
+                    "Es": "Ch 22"
+                  },
+                  "inactive": {
+                    "En": "Ch 22 (R)",
+                    "Fr": "Ch 22",
+                    "De": "Ch 22",
+                    "Es": "Ch 22"
+                  }
                 },
                 "description": {
                   "En": "Snake Ch 22 Right/Even IN from Bus AB3",
@@ -684,17 +730,19 @@
               },
               "6": {
                 "value": "636",
-                "label_active": {
-                  "En": "Ch 24 (R)",
-                  "Fr": "Ch 24",
-                  "De": "Ch 24",
-                  "Es": "Ch 24"
-                },
-                "label_inactive": {
-                  "En": "Ch 24 (R)",
-                  "Fr": "Ch 24",
-                  "De": "Ch 24",
-                  "Es": "Ch 24"
+                "label": {
+                  "active": {
+                    "En": "Ch 24 (R)",
+                    "Fr": "Ch 24",
+                    "De": "Ch 24",
+                    "Es": "Ch 24"
+                  },
+                  "inactive": {
+                    "En": "Ch 24 (R)",
+                    "Fr": "Ch 24",
+                    "De": "Ch 24",
+                    "Es": "Ch 24"
+                  }
                 },
                 "description": {
                   "En": "Snake Ch 24 Right/Even IN from Bus AB3",

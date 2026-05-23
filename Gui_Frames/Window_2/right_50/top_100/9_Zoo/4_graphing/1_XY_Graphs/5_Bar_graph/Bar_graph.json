@@ -13,20 +13,24 @@
     "blocks": {
       "elements": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Gui Dynamic Bar Graph",
-          "Fr": "Gui Dynamic Bar Graph",
-          "De": "Gui Dynamic Bar Graph",
-          "Es": "Gui Dynamic Bar Graph"
+        "label": {
+          "active": {
+            "En": "Gui Dynamic Bar Graph",
+            "Fr": "Gui Dynamic Bar Graph",
+            "De": "Gui Dynamic Bar Graph",
+            "Es": "Gui Dynamic Bar Graph"
+          }
         },
         "fields": {
           "bar_graph_examples": {
             "type": "OcaBlock",
-            "label_active": {
-              "En": "Bar Graph Examples",
-              "Fr": "Bar Graph Exemples",
-              "De": "Bar Graph Beispiele",
-              "Es": "Bar Graph Ejemplos"
+            "label": {
+              "active": {
+                "En": "Bar Graph Examples",
+                "Fr": "Bar Graph Exemples",
+                "De": "Bar Graph Beispiele",
+                "Es": "Bar Graph Ejemplos"
+              }
             },
             "description": {
               "En": "Examples of the DynamicBarGraph element.",

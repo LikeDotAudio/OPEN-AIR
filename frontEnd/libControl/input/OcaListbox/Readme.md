@@ -26,17 +26,23 @@ in the property editor.
     "interaction": {
       "options": {
         "file1": {
-          "label_active": "document.pdf",
+          "label": {
+            "active": "document.pdf"
+          },
           "value": "/path/to/document.pdf",
           "active": "true"
         },
         "file2": {
-          "label_active": "report.docx",
+          "label": {
+            "active": "report.docx"
+          },
           "value": "/path/to/report.docx",
           "active": "true"
         },
         "file3": {
-          "label_active": "image.png",
+          "label": {
+            "active": "image.png"
+          },
           "value": "/path/to/image.png",
           "active": "true",
           "selected": true

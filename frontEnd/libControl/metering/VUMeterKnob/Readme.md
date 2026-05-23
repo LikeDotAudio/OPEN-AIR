@@ -22,7 +22,9 @@ in the property editor.
 {
   "meter_knob_with_vu_meter_Example": {
     "widget_type": "_VUMeterKnob",
-    "label_active": "Master L",
+    "label": {
+      "active": "Master L"
+    },
     "path": "audio/master/left/vu",
     "knob_path": "audio/master/left/gain",
     "size": 200,

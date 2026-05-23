@@ -60,17 +60,19 @@
             "options": {
               "1": {
                 "value": "901",
-                "label_active": {
-                  "En": "Patch Panel OUT",
-                  "Fr": "Patch Panel OUT",
-                  "De": "Patch Panel OUT",
-                  "Es": "Patch Panel OUT"
-                },
-                "label_inactive": {
-                  "En": "Patch Panel OUT",
-                  "Fr": "Patch Panel OUT",
-                  "De": "Patch Panel OUT",
-                  "Es": "Patch Panel OUT"
+                "label": {
+                  "active": {
+                    "En": "Patch Panel OUT",
+                    "Fr": "Patch Panel OUT",
+                    "De": "Patch Panel OUT",
+                    "Es": "Patch Panel OUT"
+                  },
+                  "inactive": {
+                    "En": "Patch Panel OUT",
+                    "Fr": "Patch Panel OUT",
+                    "De": "Patch Panel OUT",
+                    "Es": "Patch Panel OUT"
+                  }
                 },
                 "description": {
                   "En": "Patch Panel OUT",
@@ -81,17 +83,19 @@
               },
               "2": {
                 "value": "902",
-                "label_active": {
-                  "En": "Patch Panel IN",
-                  "Fr": "Patch Panel IN",
-                  "De": "Patch Panel IN",
-                  "Es": "Patch Panel IN"
-                },
-                "label_inactive": {
-                  "En": "Patch Panel IN",
-                  "Fr": "Patch Panel IN",
-                  "De": "Patch Panel IN",
-                  "Es": "Patch Panel IN"
+                "label": {
+                  "active": {
+                    "En": "Patch Panel IN",
+                    "Fr": "Patch Panel IN",
+                    "De": "Patch Panel IN",
+                    "Es": "Patch Panel IN"
+                  },
+                  "inactive": {
+                    "En": "Patch Panel IN",
+                    "Fr": "Patch Panel IN",
+                    "De": "Patch Panel IN",
+                    "Es": "Patch Panel IN"
+                  }
                 },
                 "description": {
                   "En": "Patch Panel IN",
@@ -102,17 +106,19 @@
               },
               "3": {
                 "value": "903",
-                "label_active": {
-                  "En": "HP-xformer 1 IN",
-                  "Fr": "ENT transformateur HP 1",
-                  "De": "HP-Trafo 1 EIN",
-                  "Es": "ENT transformador HP 1"
-                },
-                "label_inactive": {
-                  "En": "HP-xformer 1 IN",
-                  "Fr": "ENT transformateur HP 1",
-                  "De": "HP-Trafo 1 EIN",
-                  "Es": "ENT transformador HP 1"
+                "label": {
+                  "active": {
+                    "En": "HP-xformer 1 IN",
+                    "Fr": "ENT transformateur HP 1",
+                    "De": "HP-Trafo 1 EIN",
+                    "Es": "ENT transformador HP 1"
+                  },
+                  "inactive": {
+                    "En": "HP-xformer 1 IN",
+                    "Fr": "ENT transformateur HP 1",
+                    "De": "HP-Trafo 1 EIN",
+                    "Es": "ENT transformador HP 1"
+                  }
                 },
                 "description": {
                   "En": "HP-xformer 1 IN",
@@ -123,17 +129,19 @@
               },
               "4": {
                 "value": "904",
-                "label_active": {
-                  "En": "HP-xformer 2 IN",
-                  "Fr": "ENT transformateur HP 2",
-                  "De": "HP-Trafo 2 EIN",
-                  "Es": "ENT transformador HP 2"
-                },
-                "label_inactive": {
-                  "En": "HP-xformer 2 IN",
-                  "Fr": "ENT transformateur HP 2",
-                  "De": "HP-Trafo 2 EIN",
-                  "Es": "ENT transformador HP 2"
+                "label": {
+                  "active": {
+                    "En": "HP-xformer 2 IN",
+                    "Fr": "ENT transformateur HP 2",
+                    "De": "HP-Trafo 2 EIN",
+                    "Es": "ENT transformador HP 2"
+                  },
+                  "inactive": {
+                    "En": "HP-xformer 2 IN",
+                    "Fr": "ENT transformateur HP 2",
+                    "De": "HP-Trafo 2 EIN",
+                    "Es": "ENT transformador HP 2"
+                  }
                 },
                 "description": {
                   "En": "HP-xformer 2 IN",
@@ -144,17 +152,19 @@
               },
               "5": {
                 "value": "905",
-                "label_active": {
-                  "En": "TO AMPLIFIER L",
-                  "Fr": "TO AMPLIFIER L",
-                  "De": "TO AMPLIFIER L",
-                  "Es": "TO AMPLIFIER L"
-                },
-                "label_inactive": {
-                  "En": "TO AMPLIFIER L",
-                  "Fr": "TO AMPLIFIER L",
-                  "De": "TO AMPLIFIER L",
-                  "Es": "TO AMPLIFIER L"
+                "label": {
+                  "active": {
+                    "En": "TO AMPLIFIER L",
+                    "Fr": "TO AMPLIFIER L",
+                    "De": "TO AMPLIFIER L",
+                    "Es": "TO AMPLIFIER L"
+                  },
+                  "inactive": {
+                    "En": "TO AMPLIFIER L",
+                    "Fr": "TO AMPLIFIER L",
+                    "De": "TO AMPLIFIER L",
+                    "Es": "TO AMPLIFIER L"
+                  }
                 },
                 "description": {
                   "En": "TO AMPLIFIER L",
@@ -165,17 +175,19 @@
               },
               "6": {
                 "value": "906",
-                "label_active": {
-                  "En": "TO AMPLIFIER R",
-                  "Fr": "TO AMPLIFIER R",
-                  "De": "TO AMPLIFIER R",
-                  "Es": "TO AMPLIFIER R"
-                },
-                "label_inactive": {
-                  "En": "TO AMPLIFIER R",
-                  "Fr": "TO AMPLIFIER R",
-                  "De": "TO AMPLIFIER R",
-                  "Es": "TO AMPLIFIER R"
+                "label": {
+                  "active": {
+                    "En": "TO AMPLIFIER R",
+                    "Fr": "TO AMPLIFIER R",
+                    "De": "TO AMPLIFIER R",
+                    "Es": "TO AMPLIFIER R"
+                  },
+                  "inactive": {
+                    "En": "TO AMPLIFIER R",
+                    "Fr": "TO AMPLIFIER R",
+                    "De": "TO AMPLIFIER R",
+                    "Es": "TO AMPLIFIER R"
+                  }
                 },
                 "description": {
                   "En": "TO AMPLIFIER R",
@@ -186,17 +198,19 @@
               },
               "7": {
                 "value": "907",
-                "label_active": {
-                  "En": "From Signal Gen",
-                  "Fr": "From Signal Gen",
-                  "De": "From Signal Gen",
-                  "Es": "From Signal Gen"
-                },
-                "label_inactive": {
-                  "En": "From Signal Gen",
-                  "Fr": "From Signal Gen",
-                  "De": "From Signal Gen",
-                  "Es": "From Signal Gen"
+                "label": {
+                  "active": {
+                    "En": "From Signal Gen",
+                    "Fr": "From Signal Gen",
+                    "De": "From Signal Gen",
+                    "Es": "From Signal Gen"
+                  },
+                  "inactive": {
+                    "En": "From Signal Gen",
+                    "Fr": "From Signal Gen",
+                    "De": "From Signal Gen",
+                    "Es": "From Signal Gen"
+                  }
                 },
                 "description": {
                   "En": "From Signal Gen",
@@ -207,17 +221,19 @@
               },
               "8": {
                 "value": "908",
-                "label_active": {
-                  "En": "From Signal Gen",
-                  "Fr": "From Signal Gen",
-                  "De": "From Signal Gen",
-                  "Es": "From Signal Gen"
-                },
-                "label_inactive": {
-                  "En": "From Signal Gen",
-                  "Fr": "From Signal Gen",
-                  "De": "From Signal Gen",
-                  "Es": "From Signal Gen"
+                "label": {
+                  "active": {
+                    "En": "From Signal Gen",
+                    "Fr": "From Signal Gen",
+                    "De": "From Signal Gen",
+                    "Es": "From Signal Gen"
+                  },
+                  "inactive": {
+                    "En": "From Signal Gen",
+                    "Fr": "From Signal Gen",
+                    "De": "From Signal Gen",
+                    "Es": "From Signal Gen"
+                  }
                 },
                 "description": {
                   "En": "From Signal Gen",
@@ -275,17 +291,19 @@
             "options": {
               "1": {
                 "value": "910",
-                "label_active": {
-                  "En": "SCOPE IN 1",
-                  "Fr": "SCOPE IN 1",
-                  "De": "SCOPE IN 1",
-                  "Es": "SCOPE IN 1"
-                },
-                "label_inactive": {
-                  "En": "SCOPE IN 1",
-                  "Fr": "SCOPE IN 1",
-                  "De": "SCOPE IN 1",
-                  "Es": "SCOPE IN 1"
+                "label": {
+                  "active": {
+                    "En": "SCOPE IN 1",
+                    "Fr": "SCOPE IN 1",
+                    "De": "SCOPE IN 1",
+                    "Es": "SCOPE IN 1"
+                  },
+                  "inactive": {
+                    "En": "SCOPE IN 1",
+                    "Fr": "SCOPE IN 1",
+                    "De": "SCOPE IN 1",
+                    "Es": "SCOPE IN 1"
+                  }
                 },
                 "description": {
                   "En": "SCOPE IN 1",
@@ -296,17 +314,19 @@
               },
               "2": {
                 "value": "920",
-                "label_active": {
-                  "En": "SCOPE IN 2",
-                  "Fr": "SCOPE IN 2",
-                  "De": "SCOPE IN 2",
-                  "Es": "SCOPE IN 2"
-                },
-                "label_inactive": {
-                  "En": "SCOPE IN 2",
-                  "Fr": "SCOPE IN 2",
-                  "De": "SCOPE IN 2",
-                  "Es": "SCOPE IN 2"
+                "label": {
+                  "active": {
+                    "En": "SCOPE IN 2",
+                    "Fr": "SCOPE IN 2",
+                    "De": "SCOPE IN 2",
+                    "Es": "SCOPE IN 2"
+                  },
+                  "inactive": {
+                    "En": "SCOPE IN 2",
+                    "Fr": "SCOPE IN 2",
+                    "De": "SCOPE IN 2",
+                    "Es": "SCOPE IN 2"
+                  }
                 },
                 "description": {
                   "En": "SCOPE IN 2",
@@ -317,17 +337,19 @@
               },
               "3": {
                 "value": "930",
-                "label_active": {
-                  "En": "SCOPE IN 3",
-                  "Fr": "SCOPE IN 3",
-                  "De": "SCOPE IN 3",
-                  "Es": "SCOPE IN 3"
-                },
-                "label_inactive": {
-                  "En": "SCOPE IN 3",
-                  "Fr": "SCOPE IN 3",
-                  "De": "SCOPE IN 3",
-                  "Es": "SCOPE IN 3"
+                "label": {
+                  "active": {
+                    "En": "SCOPE IN 3",
+                    "Fr": "SCOPE IN 3",
+                    "De": "SCOPE IN 3",
+                    "Es": "SCOPE IN 3"
+                  },
+                  "inactive": {
+                    "En": "SCOPE IN 3",
+                    "Fr": "SCOPE IN 3",
+                    "De": "SCOPE IN 3",
+                    "Es": "SCOPE IN 3"
+                  }
                 },
                 "description": {
                   "En": "SCOPE IN 3",
@@ -338,17 +360,19 @@
               },
               "4": {
                 "value": "940",
-                "label_active": {
-                  "En": "SCOPE IN 4",
-                  "Fr": "ENT SCOPE 4",
-                  "De": "SCOPE EIN 4",
-                  "Es": "ENT SCOPE 4"
-                },
-                "label_inactive": {
-                  "En": "SCOPE IN 4",
-                  "Fr": "ENT SCOPE 4",
-                  "De": "SCOPE EIN 4",
-                  "Es": "ENT SCOPE 4"
+                "label": {
+                  "active": {
+                    "En": "SCOPE IN 4",
+                    "Fr": "ENT SCOPE 4",
+                    "De": "SCOPE EIN 4",
+                    "Es": "ENT SCOPE 4"
+                  },
+                  "inactive": {
+                    "En": "SCOPE IN 4",
+                    "Fr": "ENT SCOPE 4",
+                    "De": "SCOPE EIN 4",
+                    "Es": "ENT SCOPE 4"
+                  }
                 },
                 "description": {
                   "En": "SCOPE IN 4",

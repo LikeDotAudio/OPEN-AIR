@@ -44,11 +44,13 @@
             "value": {
               "default_value": false
             },
-            "label_active": {
-              "En": "Play",
-              "Fr": "Lire",
-              "De": "Wiedergabe",
-              "Es": "Reproducir"
+            "label": {
+              "active": {
+                "En": "Play",
+                "Fr": "Lire",
+                "De": "Wiedergabe",
+                "Es": "Reproducir"
+              }
             },
             "width": 80,
             "height": 50,
@@ -70,11 +72,13 @@
             "value": {
               "default_value": false
             },
-            "label_active": {
-              "En": "REC",
-              "Fr": "REC",
-              "De": "REC",
-              "Es": "REC"
+            "label": {
+              "active": {
+                "En": "REC",
+                "Fr": "REC",
+                "De": "REC",
+                "Es": "REC"
+              }
             },
             "width": 70,
             "height": 70,
@@ -96,11 +100,13 @@
             "value": {
               "default_value": false
             },
-            "label_active": {
-              "En": "MUTE",
-              "Fr": "MUTE",
-              "De": "MUTE",
-              "Es": "MUTE"
+            "label": {
+              "active": {
+                "En": "MUTE",
+                "Fr": "MUTE",
+                "De": "MUTE",
+                "Es": "MUTE"
+              }
             },
             "width": 90,
             "height": 60,
@@ -122,11 +128,13 @@
             "value": {
               "default_value": false
             },
-            "label_active": {
-              "En": "SELECT",
-              "Fr": "SELECT",
-              "De": "SELECT",
-              "Es": "SELECT"
+            "label": {
+              "active": {
+                "En": "SELECT",
+                "Fr": "SELECT",
+                "De": "SELECT",
+                "Es": "SELECT"
+              }
             },
             "width": 40,
             "height": 50,
@@ -149,11 +157,13 @@
             "value": {
               "default_value": false
             },
-            "label_active": {
-              "En": "PROCESS",
-              "Fr": "PROCESS",
-              "De": "PROCESS",
-              "Es": "PROCESS"
+            "label": {
+              "active": {
+                "En": "PROCESS",
+                "Fr": "PROCESS",
+                "De": "PROCESS",
+                "Es": "PROCESS"
+              }
             },
             "width": 70,
             "height": 70,
@@ -175,11 +185,13 @@
             "value": {
               "default_value": false
             },
-            "label_active": {
-              "En": "FX",
-              "Fr": "FX",
-              "De": "FX",
-              "Es": "FX"
+            "label": {
+              "active": {
+                "En": "FX",
+                "Fr": "FX",
+                "De": "FX",
+                "Es": "FX"
+              }
             },
             "width": 60,
             "height": 60,
@@ -201,11 +213,13 @@
             "value": {
               "default_value": false
             },
-            "label_active": {
-              "En": "MODE",
-              "Fr": "MODE",
-              "De": "MODE",
-              "Es": "MODE"
+            "label": {
+              "active": {
+                "En": "MODE",
+                "Fr": "MODE",
+                "De": "MODE",
+                "Es": "MODE"
+              }
             },
             "width": 100,
             "height": 50,
@@ -228,11 +242,13 @@
             "value": {
               "default_value": false
             },
-            "label_active": {
-              "En": "GLOBAL",
-              "Fr": "GLOBAL",
-              "De": "GLOBAL",
-              "Es": "GLOBAL"
+            "label": {
+              "active": {
+                "En": "GLOBAL",
+                "Fr": "GLOBAL",
+                "De": "GLOBAL",
+                "Es": "GLOBAL"
+              }
             },
             "width": 70,
             "height": 70,
@@ -280,11 +296,13 @@
             "value": {
               "default_value": false
             },
-            "label_active": {
-              "En": "REC",
-              "Fr": "REC",
-              "De": "REC",
-              "Es": "REC"
+            "label": {
+              "active": {
+                "En": "REC",
+                "Fr": "REC",
+                "De": "REC",
+                "Es": "REC"
+              }
             },
             "width": 70,
             "height": 70,
@@ -306,11 +324,13 @@
             "value": {
               "default_value": false
             },
-            "label_active": {
-              "En": "REC",
-              "Fr": "REC",
-              "De": "REC",
-              "Es": "REC"
+            "label": {
+              "active": {
+                "En": "REC",
+                "Fr": "REC",
+                "De": "REC",
+                "Es": "REC"
+              }
             },
             "width": 60,
             "height": 60,
@@ -332,11 +352,13 @@
             "value": {
               "default_value": false
             },
-            "label_active": {
-              "En": "REC",
-              "Fr": "REC",
-              "De": "REC",
-              "Es": "REC"
+            "label": {
+              "active": {
+                "En": "REC",
+                "Fr": "REC",
+                "De": "REC",
+                "Es": "REC"
+              }
             },
             "width": 90,
             "height": 90,
@@ -358,11 +380,13 @@
             "value": {
               "default_value": false
             },
-            "label_active": {
-              "En": "REC",
-              "Fr": "REC",
-              "De": "REC",
-              "Es": "REC"
+            "label": {
+              "active": {
+                "En": "REC",
+                "Fr": "REC",
+                "De": "REC",
+                "Es": "REC"
+              }
             },
             "width": 40,
             "height": 50,
@@ -385,11 +409,13 @@
             "value": {
               "default_value": false
             },
-            "label_active": {
-              "En": "REC",
-              "Fr": "REC",
-              "De": "REC",
-              "Es": "REC"
+            "label": {
+              "active": {
+                "En": "REC",
+                "Fr": "REC",
+                "De": "REC",
+                "Es": "REC"
+              }
             },
             "width": 100,
             "height": 50,
@@ -412,11 +438,13 @@
             "value": {
               "default_value": false
             },
-            "label_active": {
-              "En": "REC",
-              "Fr": "REC",
-              "De": "REC",
-              "Es": "REC"
+            "label": {
+              "active": {
+                "En": "REC",
+                "Fr": "REC",
+                "De": "REC",
+                "Es": "REC"
+              }
             },
             "width": 40,
             "height": 70,
@@ -438,11 +466,13 @@
             "value": {
               "default_value": false
             },
-            "label_active": {
-              "En": "REC",
-              "Fr": "REC",
-              "De": "REC",
-              "Es": "REC"
+            "label": {
+              "active": {
+                "En": "REC",
+                "Fr": "REC",
+                "De": "REC",
+                "Es": "REC"
+              }
             },
             "width": 60,
             "height": 60,
@@ -464,11 +494,13 @@
             "value": {
               "default_value": false
             },
-            "label_active": {
-              "En": "REC",
-              "Fr": "REC",
-              "De": "REC",
-              "Es": "REC"
+            "label": {
+              "active": {
+                "En": "REC",
+                "Fr": "REC",
+                "De": "REC",
+                "Es": "REC"
+              }
             },
             "width": 50,
             "height": 50,
@@ -516,11 +548,13 @@
             "value": {
               "default_value": false
             },
-            "label_active": {
-              "En": "MUTE",
-              "Fr": "MUTE",
-              "De": "MUTE",
-              "Es": "MUTE"
+            "label": {
+              "active": {
+                "En": "MUTE",
+                "Fr": "MUTE",
+                "De": "MUTE",
+                "Es": "MUTE"
+              }
             },
             "width": 70,
             "height": 45,
@@ -542,11 +576,13 @@
             "value": {
               "default_value": false
             },
-            "label_active": {
-              "En": "MUTE",
-              "Fr": "MUTE",
-              "De": "MUTE",
-              "Es": "MUTE"
+            "label": {
+              "active": {
+                "En": "MUTE",
+                "Fr": "MUTE",
+                "De": "MUTE",
+                "Es": "MUTE"
+              }
             },
             "width": 50,
             "height": 50,
@@ -568,11 +604,13 @@
             "value": {
               "default_value": false
             },
-            "label_active": {
-              "En": "SOLO",
-              "Fr": "SOLO",
-              "De": "SOLO",
-              "Es": "SOLO"
+            "label": {
+              "active": {
+                "En": "SOLO",
+                "Fr": "SOLO",
+                "De": "SOLO",
+                "Es": "SOLO"
+              }
             },
             "width": 70,
             "height": 70,
@@ -594,11 +632,13 @@
             "value": {
               "default_value": false
             },
-            "label_active": {
-              "En": "BYPASS",
-              "Fr": "BYPASS",
-              "De": "BYPASS",
-              "Es": "BYPASS"
+            "label": {
+              "active": {
+                "En": "BYPASS",
+                "Fr": "BYPASS",
+                "De": "BYPASS",
+                "Es": "BYPASS"
+              }
             },
             "width": 60,
             "height": 60,
@@ -620,11 +660,13 @@
             "value": {
               "default_value": false
             },
-            "label_active": {
-              "En": "EFFECT",
-              "Fr": "EFFECT",
-              "De": "EFFECT",
-              "Es": "EFFECT"
+            "label": {
+              "active": {
+                "En": "EFFECT",
+                "Fr": "EFFECT",
+                "De": "EFFECT",
+                "Es": "EFFECT"
+              }
             },
             "width": 70,
             "height": 70,
@@ -646,11 +688,13 @@
             "value": {
               "default_value": false
             },
-            "label_active": {
-              "En": "POWER",
-              "Fr": "POWER",
-              "De": "POWER",
-              "Es": "POWER"
+            "label": {
+              "active": {
+                "En": "POWER",
+                "Fr": "POWER",
+                "De": "POWER",
+                "Es": "POWER"
+              }
             },
             "width": 50,
             "height": 50,
@@ -672,11 +716,13 @@
             "value": {
               "default_value": false
             },
-            "label_active": {
-              "En": "RESET",
-              "Fr": "RESET",
-              "De": "RESET",
-              "Es": "RESET"
+            "label": {
+              "active": {
+                "En": "RESET",
+                "Fr": "RESET",
+                "De": "RESET",
+                "Es": "RESET"
+              }
             },
             "width": 60,
             "height": 60,
@@ -698,11 +744,13 @@
             "value": {
               "default_value": false
             },
-            "label_active": {
-              "En": "FILTER",
-              "Fr": "FILTER",
-              "De": "FILTER",
-              "Es": "FILTER"
+            "label": {
+              "active": {
+                "En": "FILTER",
+                "Fr": "FILTER",
+                "De": "FILTER",
+                "Es": "FILTER"
+              }
             },
             "width": 100,
             "height": 50,

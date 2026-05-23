@@ -66,17 +66,19 @@
             "options": {
               "1": {
                 "value": "701",
-                "label_active": {
-                  "En": "Test Patch (L)",
-                  "Fr": "Test Patch (L)",
-                  "De": "Test Patch (L)",
-                  "Es": "Test Patch (L)"
-                },
-                "label_inactive": {
-                  "En": "Test Patch (L)",
-                  "Fr": "Test Patch (L)",
-                  "De": "Test Patch (L)",
-                  "Es": "Test Patch (L)"
+                "label": {
+                  "active": {
+                    "En": "Test Patch (L)",
+                    "Fr": "Test Patch (L)",
+                    "De": "Test Patch (L)",
+                    "Es": "Test Patch (L)"
+                  },
+                  "inactive": {
+                    "En": "Test Patch (L)",
+                    "Fr": "Test Patch (L)",
+                    "De": "Test Patch (L)",
+                    "Es": "Test Patch (L)"
+                  }
                 },
                 "description": {
                   "En": "Test Patch Panel OUT to Bus AB0",
@@ -87,17 +89,19 @@
               },
               "2": {
                 "value": "702",
-                "label_active": {
-                  "En": "Bench AP (L)",
-                  "Fr": "Bench AP (L)",
-                  "De": "Bench AP (L)",
-                  "Es": "Bench AP (L)"
-                },
-                "label_inactive": {
-                  "En": "Bench AP (L)",
-                  "Fr": "Bench AP (L)",
-                  "De": "Bench AP (L)",
-                  "Es": "Bench AP (L)"
+                "label": {
+                  "active": {
+                    "En": "Bench AP (L)",
+                    "Fr": "Bench AP (L)",
+                    "De": "Bench AP (L)",
+                    "Es": "Bench AP (L)"
+                  },
+                  "inactive": {
+                    "En": "Bench AP (L)",
+                    "Fr": "Bench AP (L)",
+                    "De": "Bench AP (L)",
+                    "Es": "Bench AP (L)"
+                  }
                 },
                 "description": {
                   "En": "Left Bench AP OUT to Bus AB0",
@@ -108,17 +112,19 @@
               },
               "3": {
                 "value": "703",
-                "label_active": {
-                  "En": "Bench Neutrik (L)",
-                  "Fr": "Bench Neutrik (L)",
-                  "De": "Bench Neutrik (L)",
-                  "Es": "Bench Neutrik (L)"
-                },
-                "label_inactive": {
-                  "En": "Bench Neutrik (L)",
-                  "Fr": "Bench Neutrik (L)",
-                  "De": "Bench Neutrik (L)",
-                  "Es": "Bench Neutrik (L)"
+                "label": {
+                  "active": {
+                    "En": "Bench Neutrik (L)",
+                    "Fr": "Bench Neutrik (L)",
+                    "De": "Bench Neutrik (L)",
+                    "Es": "Bench Neutrik (L)"
+                  },
+                  "inactive": {
+                    "En": "Bench Neutrik (L)",
+                    "Fr": "Bench Neutrik (L)",
+                    "De": "Bench Neutrik (L)",
+                    "Es": "Bench Neutrik (L)"
+                  }
                 },
                 "description": {
                   "En": "Left Bench Neutrik RM-1 OUT to Bus AB0",
@@ -129,17 +135,19 @@
               },
               "4": {
                 "value": "704",
-                "label_active": {
-                  "En": "Music Src (L)",
-                  "Fr": "Music Src (L)",
-                  "De": "Music Src (L)",
-                  "Es": "Music Src (L)"
-                },
-                "label_inactive": {
-                  "En": "Music Src (L)",
-                  "Fr": "Music Src (L)",
-                  "De": "Music Src (L)",
-                  "Es": "Music Src (L)"
+                "label": {
+                  "active": {
+                    "En": "Music Src (L)",
+                    "Fr": "Music Src (L)",
+                    "De": "Music Src (L)",
+                    "Es": "Music Src (L)"
+                  },
+                  "inactive": {
+                    "En": "Music Src (L)",
+                    "Fr": "Music Src (L)",
+                    "De": "Music Src (L)",
+                    "Es": "Music Src (L)"
+                  }
                 },
                 "description": {
                   "En": "Balanced Music Source to Bus AB0",
@@ -150,17 +158,19 @@
               },
               "5": {
                 "value": "705",
-                "label_active": {
-                  "En": "Snk 1 XLR (L)",
-                  "Fr": "Snk 1 XLR (L)",
-                  "De": "Snk 1 XLR (L)",
-                  "Es": "Snk 1 XLR (L)"
-                },
-                "label_inactive": {
-                  "En": "Snk 1 XLR (L)",
-                  "Fr": "Snk 1 XLR (L)",
-                  "De": "Snk 1 XLR (L)",
-                  "Es": "Snk 1 XLR (L)"
+                "label": {
+                  "active": {
+                    "En": "Snk 1 XLR (L)",
+                    "Fr": "Snk 1 XLR (L)",
+                    "De": "Snk 1 XLR (L)",
+                    "Es": "Snk 1 XLR (L)"
+                  },
+                  "inactive": {
+                    "En": "Snk 1 XLR (L)",
+                    "Fr": "Snk 1 XLR (L)",
+                    "De": "Snk 1 XLR (L)",
+                    "Es": "Snk 1 XLR (L)"
+                  }
                 },
                 "description": {
                   "En": "Snake 1 Balanced XLR-M OUT to Bus AB0",
@@ -171,17 +181,19 @@
               },
               "6": {
                 "value": "706",
-                "label_active": {
-                  "En": "Snk 3 XLR (L)",
-                  "Fr": "Snk 3 XLR (G)",
-                  "De": "Snk 3 XLR (L)",
-                  "Es": "Snk 3 XLR (Izq)"
-                },
-                "label_inactive": {
-                  "En": "Snk 3 XLR (L)",
-                  "Fr": "Snk 3 XLR (G)",
-                  "De": "Snk 3 XLR (L)",
-                  "Es": "Snk 3 XLR (Izq)"
+                "label": {
+                  "active": {
+                    "En": "Snk 3 XLR (L)",
+                    "Fr": "Snk 3 XLR (G)",
+                    "De": "Snk 3 XLR (L)",
+                    "Es": "Snk 3 XLR (Izq)"
+                  },
+                  "inactive": {
+                    "En": "Snk 3 XLR (L)",
+                    "Fr": "Snk 3 XLR (G)",
+                    "De": "Snk 3 XLR (L)",
+                    "Es": "Snk 3 XLR (Izq)"
+                  }
                 },
                 "description": {
                   "En": "Snake 3 Balanced XLR-M OUT to Bus AB0",
@@ -192,17 +204,19 @@
               },
               "7": {
                 "value": "707",
-                "label_active": {
-                  "En": "Snk 5 XLR (L)",
-                  "Fr": "Snk 5 XLR (L)",
-                  "De": "Snk 5 XLR (L)",
-                  "Es": "Snk 5 XLR (L)"
-                },
-                "label_inactive": {
-                  "En": "Snk 5 XLR (L)",
-                  "Fr": "Snk 5 XLR (L)",
-                  "De": "Snk 5 XLR (L)",
-                  "Es": "Snk 5 XLR (L)"
+                "label": {
+                  "active": {
+                    "En": "Snk 5 XLR (L)",
+                    "Fr": "Snk 5 XLR (L)",
+                    "De": "Snk 5 XLR (L)",
+                    "Es": "Snk 5 XLR (L)"
+                  },
+                  "inactive": {
+                    "En": "Snk 5 XLR (L)",
+                    "Fr": "Snk 5 XLR (L)",
+                    "De": "Snk 5 XLR (L)",
+                    "Es": "Snk 5 XLR (L)"
+                  }
                 },
                 "description": {
                   "En": "Snake 5 Balanced XLR-M OUT to Bus AB0",
@@ -213,17 +227,19 @@
               },
               "8": {
                 "value": "708",
-                "label_active": {
-                  "En": "Snk 7 XLR (L)",
-                  "Fr": "Snk 7 XLR (L)",
-                  "De": "Snk 7 XLR (L)",
-                  "Es": "Snk 7 XLR (L)"
-                },
-                "label_inactive": {
-                  "En": "Snk 7 XLR (L)",
-                  "Fr": "Snk 7 XLR (L)",
-                  "De": "Snk 7 XLR (L)",
-                  "Es": "Snk 7 XLR (L)"
+                "label": {
+                  "active": {
+                    "En": "Snk 7 XLR (L)",
+                    "Fr": "Snk 7 XLR (L)",
+                    "De": "Snk 7 XLR (L)",
+                    "Es": "Snk 7 XLR (L)"
+                  },
+                  "inactive": {
+                    "En": "Snk 7 XLR (L)",
+                    "Fr": "Snk 7 XLR (L)",
+                    "De": "Snk 7 XLR (L)",
+                    "Es": "Snk 7 XLR (L)"
+                  }
                 },
                 "description": {
                   "En": "Snake 7 Balanced XLR-M OUT to Bus AB0",
@@ -284,17 +300,19 @@
             "options": {
               "1": {
                 "value": "721",
-                "label_active": {
-                  "En": "Test Patch (R)",
-                  "Fr": "Test Patch (R)",
-                  "De": "Test Patch (R)",
-                  "Es": "Test Patch (R)"
-                },
-                "label_inactive": {
-                  "En": "Test Patch (R)",
-                  "Fr": "Test Patch (R)",
-                  "De": "Test Patch (R)",
-                  "Es": "Test Patch (R)"
+                "label": {
+                  "active": {
+                    "En": "Test Patch (R)",
+                    "Fr": "Test Patch (R)",
+                    "De": "Test Patch (R)",
+                    "Es": "Test Patch (R)"
+                  },
+                  "inactive": {
+                    "En": "Test Patch (R)",
+                    "Fr": "Test Patch (R)",
+                    "De": "Test Patch (R)",
+                    "Es": "Test Patch (R)"
+                  }
                 },
                 "description": {
                   "En": "Test Patch Panel OUT to Bus AB2",
@@ -305,17 +323,19 @@
               },
               "2": {
                 "value": "722",
-                "label_active": {
-                  "En": "Bench AP (R)",
-                  "Fr": "Bench AP (R)",
-                  "De": "Bench AP (R)",
-                  "Es": "Bench AP (R)"
-                },
-                "label_inactive": {
-                  "En": "Bench AP (R)",
-                  "Fr": "Bench AP (R)",
-                  "De": "Bench AP (R)",
-                  "Es": "Bench AP (R)"
+                "label": {
+                  "active": {
+                    "En": "Bench AP (R)",
+                    "Fr": "Bench AP (R)",
+                    "De": "Bench AP (R)",
+                    "Es": "Bench AP (R)"
+                  },
+                  "inactive": {
+                    "En": "Bench AP (R)",
+                    "Fr": "Bench AP (R)",
+                    "De": "Bench AP (R)",
+                    "Es": "Bench AP (R)"
+                  }
                 },
                 "description": {
                   "En": "Left Bench AP OUT to Bus AB2",
@@ -326,17 +346,19 @@
               },
               "3": {
                 "value": "723",
-                "label_active": {
-                  "En": "Bench Neutrik (R)",
-                  "Fr": "Bench Neutrik (R)",
-                  "De": "Bench Neutrik (R)",
-                  "Es": "Bench Neutrik (R)"
-                },
-                "label_inactive": {
-                  "En": "Bench Neutrik (R)",
-                  "Fr": "Bench Neutrik (R)",
-                  "De": "Bench Neutrik (R)",
-                  "Es": "Bench Neutrik (R)"
+                "label": {
+                  "active": {
+                    "En": "Bench Neutrik (R)",
+                    "Fr": "Bench Neutrik (R)",
+                    "De": "Bench Neutrik (R)",
+                    "Es": "Bench Neutrik (R)"
+                  },
+                  "inactive": {
+                    "En": "Bench Neutrik (R)",
+                    "Fr": "Bench Neutrik (R)",
+                    "De": "Bench Neutrik (R)",
+                    "Es": "Bench Neutrik (R)"
+                  }
                 },
                 "description": {
                   "En": "Left Bench Neutrik RM-1 OUT to Bus AB2",
@@ -347,17 +369,19 @@
               },
               "4": {
                 "value": "724",
-                "label_active": {
-                  "En": "Music Src (R)",
-                  "Fr": "Music Src (R)",
-                  "De": "Music Src (R)",
-                  "Es": "Music Src (R)"
-                },
-                "label_inactive": {
-                  "En": "Music Src (R)",
-                  "Fr": "Music Src (R)",
-                  "De": "Music Src (R)",
-                  "Es": "Music Src (R)"
+                "label": {
+                  "active": {
+                    "En": "Music Src (R)",
+                    "Fr": "Music Src (R)",
+                    "De": "Music Src (R)",
+                    "Es": "Music Src (R)"
+                  },
+                  "inactive": {
+                    "En": "Music Src (R)",
+                    "Fr": "Music Src (R)",
+                    "De": "Music Src (R)",
+                    "Es": "Music Src (R)"
+                  }
                 },
                 "description": {
                   "En": "Balanced Music Source to Bus AB2",
@@ -368,17 +392,19 @@
               },
               "5": {
                 "value": "725",
-                "label_active": {
-                  "En": "Snk 2 XLR (R)",
-                  "Fr": "Snk 2 XLR (R)",
-                  "De": "Snk 2 XLR (R)",
-                  "Es": "Snk 2 XLR (R)"
-                },
-                "label_inactive": {
-                  "En": "Snk 2 XLR (R)",
-                  "Fr": "Snk 2 XLR (R)",
-                  "De": "Snk 2 XLR (R)",
-                  "Es": "Snk 2 XLR (R)"
+                "label": {
+                  "active": {
+                    "En": "Snk 2 XLR (R)",
+                    "Fr": "Snk 2 XLR (R)",
+                    "De": "Snk 2 XLR (R)",
+                    "Es": "Snk 2 XLR (R)"
+                  },
+                  "inactive": {
+                    "En": "Snk 2 XLR (R)",
+                    "Fr": "Snk 2 XLR (R)",
+                    "De": "Snk 2 XLR (R)",
+                    "Es": "Snk 2 XLR (R)"
+                  }
                 },
                 "description": {
                   "En": "Snake 2 Balanced XLR-M OUT to Bus AB2",
@@ -389,17 +415,19 @@
               },
               "6": {
                 "value": "726",
-                "label_active": {
-                  "En": "Snk 4 XLR (R)",
-                  "Fr": "Snk 4 XLR (R)",
-                  "De": "Snk 4 XLR (R)",
-                  "Es": "Snk 4 XLR (R)"
-                },
-                "label_inactive": {
-                  "En": "Snk 4 XLR (R)",
-                  "Fr": "Snk 4 XLR (R)",
-                  "De": "Snk 4 XLR (R)",
-                  "Es": "Snk 4 XLR (R)"
+                "label": {
+                  "active": {
+                    "En": "Snk 4 XLR (R)",
+                    "Fr": "Snk 4 XLR (R)",
+                    "De": "Snk 4 XLR (R)",
+                    "Es": "Snk 4 XLR (R)"
+                  },
+                  "inactive": {
+                    "En": "Snk 4 XLR (R)",
+                    "Fr": "Snk 4 XLR (R)",
+                    "De": "Snk 4 XLR (R)",
+                    "Es": "Snk 4 XLR (R)"
+                  }
                 },
                 "description": {
                   "En": "Snake 4 Balanced XLR-M OUT to Bus AB2",
@@ -410,17 +438,19 @@
               },
               "7": {
                 "value": "727",
-                "label_active": {
-                  "En": "Snk 6 XLR (R)",
-                  "Fr": "Snk 6 XLR (R)",
-                  "De": "Snk 6 XLR (R)",
-                  "Es": "Snk 6 XLR (R)"
-                },
-                "label_inactive": {
-                  "En": "Snk 6 XLR (R)",
-                  "Fr": "Snk 6 XLR (R)",
-                  "De": "Snk 6 XLR (R)",
-                  "Es": "Snk 6 XLR (R)"
+                "label": {
+                  "active": {
+                    "En": "Snk 6 XLR (R)",
+                    "Fr": "Snk 6 XLR (R)",
+                    "De": "Snk 6 XLR (R)",
+                    "Es": "Snk 6 XLR (R)"
+                  },
+                  "inactive": {
+                    "En": "Snk 6 XLR (R)",
+                    "Fr": "Snk 6 XLR (R)",
+                    "De": "Snk 6 XLR (R)",
+                    "Es": "Snk 6 XLR (R)"
+                  }
                 },
                 "description": {
                   "En": "Snake 6 Balanced XLR-M OUT to Bus AB2",
@@ -431,17 +461,19 @@
               },
               "8": {
                 "value": "728",
-                "label_active": {
-                  "En": "Snk 8 XLR (R)",
-                  "Fr": "Snk 8 XLR (R)",
-                  "De": "Snk 8 XLR (R)",
-                  "Es": "Snk 8 XLR (R)"
-                },
-                "label_inactive": {
-                  "En": "Snk 8 XLR (R)",
-                  "Fr": "Snk 8 XLR (R)",
-                  "De": "Snk 8 XLR (R)",
-                  "Es": "Snk 8 XLR (R)"
+                "label": {
+                  "active": {
+                    "En": "Snk 8 XLR (R)",
+                    "Fr": "Snk 8 XLR (R)",
+                    "De": "Snk 8 XLR (R)",
+                    "Es": "Snk 8 XLR (R)"
+                  },
+                  "inactive": {
+                    "En": "Snk 8 XLR (R)",
+                    "Fr": "Snk 8 XLR (R)",
+                    "De": "Snk 8 XLR (R)",
+                    "Es": "Snk 8 XLR (R)"
+                  }
                 },
                 "description": {
                   "En": "Snake 8 Balanced XLR-M OUT to Bus AB2",
@@ -502,17 +534,19 @@
             "options": {
               "1": {
                 "value": "711",
-                "label_active": {
-                  "En": "Test Patch (L)",
-                  "Fr": "Test Patch (L)",
-                  "De": "Test Patch (L)",
-                  "Es": "Test Patch (L)"
-                },
-                "label_inactive": {
-                  "En": "Test Patch (L)",
-                  "Fr": "Test Patch (L)",
-                  "De": "Test Patch (L)",
-                  "Es": "Test Patch (L)"
+                "label": {
+                  "active": {
+                    "En": "Test Patch (L)",
+                    "Fr": "Test Patch (L)",
+                    "De": "Test Patch (L)",
+                    "Es": "Test Patch (L)"
+                  },
+                  "inactive": {
+                    "En": "Test Patch (L)",
+                    "Fr": "Test Patch (L)",
+                    "De": "Test Patch (L)",
+                    "Es": "Test Patch (L)"
+                  }
                 },
                 "description": {
                   "En": "Test Patch Panel IN from Bus AB1",
@@ -523,17 +557,19 @@
               },
               "2": {
                 "value": "712",
-                "label_active": {
-                  "En": "Bench AP (L)",
-                  "Fr": "Bench AP (L)",
-                  "De": "Bench AP (L)",
-                  "Es": "Bench AP (L)"
-                },
-                "label_inactive": {
-                  "En": "Bench AP (L)",
-                  "Fr": "Bench AP (L)",
-                  "De": "Bench AP (L)",
-                  "Es": "Bench AP (L)"
+                "label": {
+                  "active": {
+                    "En": "Bench AP (L)",
+                    "Fr": "Bench AP (L)",
+                    "De": "Bench AP (L)",
+                    "Es": "Bench AP (L)"
+                  },
+                  "inactive": {
+                    "En": "Bench AP (L)",
+                    "Fr": "Bench AP (L)",
+                    "De": "Bench AP (L)",
+                    "Es": "Bench AP (L)"
+                  }
                 },
                 "description": {
                   "En": "Left Bench AP IN from Bus AB1",
@@ -544,17 +580,19 @@
               },
               "3": {
                 "value": "713",
-                "label_active": {
-                  "En": "Bench Neutrik (L)",
-                  "Fr": "Bench Neutrik (L)",
-                  "De": "Bench Neutrik (L)",
-                  "Es": "Bench Neutrik (L)"
-                },
-                "label_inactive": {
-                  "En": "Bench Neutrik (L)",
-                  "Fr": "Bench Neutrik (L)",
-                  "De": "Bench Neutrik (L)",
-                  "Es": "Bench Neutrik (L)"
+                "label": {
+                  "active": {
+                    "En": "Bench Neutrik (L)",
+                    "Fr": "Bench Neutrik (L)",
+                    "De": "Bench Neutrik (L)",
+                    "Es": "Bench Neutrik (L)"
+                  },
+                  "inactive": {
+                    "En": "Bench Neutrik (L)",
+                    "Fr": "Bench Neutrik (L)",
+                    "De": "Bench Neutrik (L)",
+                    "Es": "Bench Neutrik (L)"
+                  }
                 },
                 "description": {
                   "En": "Left Bench Neutrik RM-1 IN from Bus AB1",
@@ -565,17 +603,19 @@
               },
               "4": {
                 "value": "714",
-                "label_active": {
-                  "En": "Speakers (L)",
-                  "Fr": "Speakers (L)",
-                  "De": "Speakers (L)",
-                  "Es": "Speakers (L)"
-                },
-                "label_inactive": {
-                  "En": "Speakers (L)",
-                  "Fr": "Speakers (L)",
-                  "De": "Speakers (L)",
-                  "Es": "Speakers (L)"
+                "label": {
+                  "active": {
+                    "En": "Speakers (L)",
+                    "Fr": "Speakers (L)",
+                    "De": "Speakers (L)",
+                    "Es": "Speakers (L)"
+                  },
+                  "inactive": {
+                    "En": "Speakers (L)",
+                    "Fr": "Speakers (L)",
+                    "De": "Speakers (L)",
+                    "Es": "Speakers (L)"
+                  }
                 },
                 "description": {
                   "En": "Balanced Speakers IN from Bus AB1",
@@ -586,17 +626,19 @@
               },
               "5": {
                 "value": "715",
-                "label_active": {
-                  "En": "Snk 1 XLR (L)",
-                  "Fr": "Snk 1 XLR (L)",
-                  "De": "Snk 1 XLR (L)",
-                  "Es": "Snk 1 XLR (L)"
-                },
-                "label_inactive": {
-                  "En": "Snk 1 XLR (L)",
-                  "Fr": "Snk 1 XLR (L)",
-                  "De": "Snk 1 XLR (L)",
-                  "Es": "Snk 1 XLR (L)"
+                "label": {
+                  "active": {
+                    "En": "Snk 1 XLR (L)",
+                    "Fr": "Snk 1 XLR (L)",
+                    "De": "Snk 1 XLR (L)",
+                    "Es": "Snk 1 XLR (L)"
+                  },
+                  "inactive": {
+                    "En": "Snk 1 XLR (L)",
+                    "Fr": "Snk 1 XLR (L)",
+                    "De": "Snk 1 XLR (L)",
+                    "Es": "Snk 1 XLR (L)"
+                  }
                 },
                 "description": {
                   "En": "Snake 1 Balanced XLR-M IN from Bus AB1",
@@ -607,17 +649,19 @@
               },
               "6": {
                 "value": "716",
-                "label_active": {
-                  "En": "Snk 3 XLR (L)",
-                  "Fr": "Snk 3 XLR (G)",
-                  "De": "Snk 3 XLR (L)",
-                  "Es": "Snk 3 XLR (Izq)"
-                },
-                "label_inactive": {
-                  "En": "Snk 3 XLR (L)",
-                  "Fr": "Snk 3 XLR (G)",
-                  "De": "Snk 3 XLR (L)",
-                  "Es": "Snk 3 XLR (Izq)"
+                "label": {
+                  "active": {
+                    "En": "Snk 3 XLR (L)",
+                    "Fr": "Snk 3 XLR (G)",
+                    "De": "Snk 3 XLR (L)",
+                    "Es": "Snk 3 XLR (Izq)"
+                  },
+                  "inactive": {
+                    "En": "Snk 3 XLR (L)",
+                    "Fr": "Snk 3 XLR (G)",
+                    "De": "Snk 3 XLR (L)",
+                    "Es": "Snk 3 XLR (Izq)"
+                  }
                 },
                 "description": {
                   "En": "Snake 3 Balanced XLR-M IN from Bus AB1",
@@ -628,17 +672,19 @@
               },
               "7": {
                 "value": "717",
-                "label_active": {
-                  "En": "Snk 5 XLR (L)",
-                  "Fr": "Snk 5 XLR (L)",
-                  "De": "Snk 5 XLR (L)",
-                  "Es": "Snk 5 XLR (L)"
-                },
-                "label_inactive": {
-                  "En": "Snk 5 XLR (L)",
-                  "Fr": "Snk 5 XLR (L)",
-                  "De": "Snk 5 XLR (L)",
-                  "Es": "Snk 5 XLR (L)"
+                "label": {
+                  "active": {
+                    "En": "Snk 5 XLR (L)",
+                    "Fr": "Snk 5 XLR (L)",
+                    "De": "Snk 5 XLR (L)",
+                    "Es": "Snk 5 XLR (L)"
+                  },
+                  "inactive": {
+                    "En": "Snk 5 XLR (L)",
+                    "Fr": "Snk 5 XLR (L)",
+                    "De": "Snk 5 XLR (L)",
+                    "Es": "Snk 5 XLR (L)"
+                  }
                 },
                 "description": {
                   "En": "Snake 5 Balanced XLR-M IN from Bus AB1",
@@ -649,17 +695,19 @@
               },
               "8": {
                 "value": "718",
-                "label_active": {
-                  "En": "Snk 7 XLR (L)",
-                  "Fr": "Snk 7 XLR (L)",
-                  "De": "Snk 7 XLR (L)",
-                  "Es": "Snk 7 XLR (L)"
-                },
-                "label_inactive": {
-                  "En": "Snk 7 XLR (L)",
-                  "Fr": "Snk 7 XLR (L)",
-                  "De": "Snk 7 XLR (L)",
-                  "Es": "Snk 7 XLR (L)"
+                "label": {
+                  "active": {
+                    "En": "Snk 7 XLR (L)",
+                    "Fr": "Snk 7 XLR (L)",
+                    "De": "Snk 7 XLR (L)",
+                    "Es": "Snk 7 XLR (L)"
+                  },
+                  "inactive": {
+                    "En": "Snk 7 XLR (L)",
+                    "Fr": "Snk 7 XLR (L)",
+                    "De": "Snk 7 XLR (L)",
+                    "Es": "Snk 7 XLR (L)"
+                  }
                 },
                 "description": {
                   "En": "Snake 7 Balanced XLR-M IN from Bus AB1",
@@ -720,17 +768,19 @@
             "options": {
               "1": {
                 "value": "731",
-                "label_active": {
-                  "En": "Test Patch (R)",
-                  "Fr": "Test Patch (R)",
-                  "De": "Test Patch (R)",
-                  "Es": "Test Patch (R)"
-                },
-                "label_inactive": {
-                  "En": "Test Patch (R)",
-                  "Fr": "Test Patch (R)",
-                  "De": "Test Patch (R)",
-                  "Es": "Test Patch (R)"
+                "label": {
+                  "active": {
+                    "En": "Test Patch (R)",
+                    "Fr": "Test Patch (R)",
+                    "De": "Test Patch (R)",
+                    "Es": "Test Patch (R)"
+                  },
+                  "inactive": {
+                    "En": "Test Patch (R)",
+                    "Fr": "Test Patch (R)",
+                    "De": "Test Patch (R)",
+                    "Es": "Test Patch (R)"
+                  }
                 },
                 "description": {
                   "En": "Test Patch Panel IN from Bus AB3",
@@ -741,17 +791,19 @@
               },
               "2": {
                 "value": "732",
-                "label_active": {
-                  "En": "Bench AP (R)",
-                  "Fr": "Bench AP (R)",
-                  "De": "Bench AP (R)",
-                  "Es": "Bench AP (R)"
-                },
-                "label_inactive": {
-                  "En": "Bench AP (R)",
-                  "Fr": "Bench AP (R)",
-                  "De": "Bench AP (R)",
-                  "Es": "Bench AP (R)"
+                "label": {
+                  "active": {
+                    "En": "Bench AP (R)",
+                    "Fr": "Bench AP (R)",
+                    "De": "Bench AP (R)",
+                    "Es": "Bench AP (R)"
+                  },
+                  "inactive": {
+                    "En": "Bench AP (R)",
+                    "Fr": "Bench AP (R)",
+                    "De": "Bench AP (R)",
+                    "Es": "Bench AP (R)"
+                  }
                 },
                 "description": {
                   "En": "Left Bench AP IN from Bus AB3",
@@ -762,17 +814,19 @@
               },
               "3": {
                 "value": "733",
-                "label_active": {
-                  "En": "Bench Neutrik (R)",
-                  "Fr": "Bench Neutrik (R)",
-                  "De": "Bench Neutrik (R)",
-                  "Es": "Bench Neutrik (R)"
-                },
-                "label_inactive": {
-                  "En": "Bench Neutrik (R)",
-                  "Fr": "Bench Neutrik (R)",
-                  "De": "Bench Neutrik (R)",
-                  "Es": "Bench Neutrik (R)"
+                "label": {
+                  "active": {
+                    "En": "Bench Neutrik (R)",
+                    "Fr": "Bench Neutrik (R)",
+                    "De": "Bench Neutrik (R)",
+                    "Es": "Bench Neutrik (R)"
+                  },
+                  "inactive": {
+                    "En": "Bench Neutrik (R)",
+                    "Fr": "Bench Neutrik (R)",
+                    "De": "Bench Neutrik (R)",
+                    "Es": "Bench Neutrik (R)"
+                  }
                 },
                 "description": {
                   "En": "Left Bench Neutrik RM-1 IN from Bus AB3",
@@ -783,17 +837,19 @@
               },
               "4": {
                 "value": "734",
-                "label_active": {
-                  "En": "Speakers (R)",
-                  "Fr": "Speakers (R)",
-                  "De": "Speakers (R)",
-                  "Es": "Speakers (R)"
-                },
-                "label_inactive": {
-                  "En": "Speakers (R)",
-                  "Fr": "Speakers (R)",
-                  "De": "Speakers (R)",
-                  "Es": "Speakers (R)"
+                "label": {
+                  "active": {
+                    "En": "Speakers (R)",
+                    "Fr": "Speakers (R)",
+                    "De": "Speakers (R)",
+                    "Es": "Speakers (R)"
+                  },
+                  "inactive": {
+                    "En": "Speakers (R)",
+                    "Fr": "Speakers (R)",
+                    "De": "Speakers (R)",
+                    "Es": "Speakers (R)"
+                  }
                 },
                 "description": {
                   "En": "Balanced Speakers IN from Bus AB3",
@@ -804,17 +860,19 @@
               },
               "5": {
                 "value": "735",
-                "label_active": {
-                  "En": "Snk 2 XLR (R)",
-                  "Fr": "Snk 2 XLR (R)",
-                  "De": "Snk 2 XLR (R)",
-                  "Es": "Snk 2 XLR (R)"
-                },
-                "label_inactive": {
-                  "En": "Snk 2 XLR (R)",
-                  "Fr": "Snk 2 XLR (R)",
-                  "De": "Snk 2 XLR (R)",
-                  "Es": "Snk 2 XLR (R)"
+                "label": {
+                  "active": {
+                    "En": "Snk 2 XLR (R)",
+                    "Fr": "Snk 2 XLR (R)",
+                    "De": "Snk 2 XLR (R)",
+                    "Es": "Snk 2 XLR (R)"
+                  },
+                  "inactive": {
+                    "En": "Snk 2 XLR (R)",
+                    "Fr": "Snk 2 XLR (R)",
+                    "De": "Snk 2 XLR (R)",
+                    "Es": "Snk 2 XLR (R)"
+                  }
                 },
                 "description": {
                   "En": "Snake 2 Balanced XLR-M IN from Bus AB3",
@@ -825,17 +883,19 @@
               },
               "6": {
                 "value": "736",
-                "label_active": {
-                  "En": "Snk 4 XLR (R)",
-                  "Fr": "Snk 4 XLR (R)",
-                  "De": "Snk 4 XLR (R)",
-                  "Es": "Snk 4 XLR (R)"
-                },
-                "label_inactive": {
-                  "En": "Snk 4 XLR (R)",
-                  "Fr": "Snk 4 XLR (R)",
-                  "De": "Snk 4 XLR (R)",
-                  "Es": "Snk 4 XLR (R)"
+                "label": {
+                  "active": {
+                    "En": "Snk 4 XLR (R)",
+                    "Fr": "Snk 4 XLR (R)",
+                    "De": "Snk 4 XLR (R)",
+                    "Es": "Snk 4 XLR (R)"
+                  },
+                  "inactive": {
+                    "En": "Snk 4 XLR (R)",
+                    "Fr": "Snk 4 XLR (R)",
+                    "De": "Snk 4 XLR (R)",
+                    "Es": "Snk 4 XLR (R)"
+                  }
                 },
                 "description": {
                   "En": "Snake 4 Balanced XLR-M IN from Bus AB3",
@@ -846,17 +906,19 @@
               },
               "7": {
                 "value": "737",
-                "label_active": {
-                  "En": "Snk 6 XLR (R)",
-                  "Fr": "Snk 6 XLR (R)",
-                  "De": "Snk 6 XLR (R)",
-                  "Es": "Snk 6 XLR (R)"
-                },
-                "label_inactive": {
-                  "En": "Snk 6 XLR (R)",
-                  "Fr": "Snk 6 XLR (R)",
-                  "De": "Snk 6 XLR (R)",
-                  "Es": "Snk 6 XLR (R)"
+                "label": {
+                  "active": {
+                    "En": "Snk 6 XLR (R)",
+                    "Fr": "Snk 6 XLR (R)",
+                    "De": "Snk 6 XLR (R)",
+                    "Es": "Snk 6 XLR (R)"
+                  },
+                  "inactive": {
+                    "En": "Snk 6 XLR (R)",
+                    "Fr": "Snk 6 XLR (R)",
+                    "De": "Snk 6 XLR (R)",
+                    "Es": "Snk 6 XLR (R)"
+                  }
                 },
                 "description": {
                   "En": "Snake 6 Balanced XLR-M IN from Bus AB3",
@@ -867,17 +929,19 @@
               },
               "8": {
                 "value": "738",
-                "label_active": {
-                  "En": "Snk 8 XLR (R)",
-                  "Fr": "Snk 8 XLR (R)",
-                  "De": "Snk 8 XLR (R)",
-                  "Es": "Snk 8 XLR (R)"
-                },
-                "label_inactive": {
-                  "En": "Snk 8 XLR (R)",
-                  "Fr": "Snk 8 XLR (R)",
-                  "De": "Snk 8 XLR (R)",
-                  "Es": "Snk 8 XLR (R)"
+                "label": {
+                  "active": {
+                    "En": "Snk 8 XLR (R)",
+                    "Fr": "Snk 8 XLR (R)",
+                    "De": "Snk 8 XLR (R)",
+                    "Es": "Snk 8 XLR (R)"
+                  },
+                  "inactive": {
+                    "En": "Snk 8 XLR (R)",
+                    "Fr": "Snk 8 XLR (R)",
+                    "De": "Snk 8 XLR (R)",
+                    "Es": "Snk 8 XLR (R)"
+                  }
                 },
                 "description": {
                   "En": "Snake 8 Balanced XLR-M IN from Bus AB3",

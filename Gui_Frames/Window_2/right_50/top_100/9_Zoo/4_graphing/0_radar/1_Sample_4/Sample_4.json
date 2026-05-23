@@ -24,11 +24,13 @@
           "radar_01": {
             "type": "_Radar",
             "transparent": true,
-            "label_active": {
-              "En": "Radar 01",
-              "Fr": "Radar 01",
-              "De": "Radar 01",
-              "Es": "Radar 01"
+            "label": {
+              "active": {
+                "En": "Radar 01",
+                "Fr": "Radar 01",
+                "De": "Radar 01",
+                "Es": "Radar 01"
+              }
             },
             "app_settings": {
               "title": "Mini",
@@ -85,11 +87,13 @@
           "radar_02": {
             "type": "_Radar",
             "transparent": true,
-            "label_active": {
-              "En": "Radar 02",
-              "Fr": "Radar 02",
-              "De": "Radar 02",
-              "Es": "Radar 02"
+            "label": {
+              "active": {
+                "En": "Radar 02",
+                "Fr": "Radar 02",
+                "De": "Radar 02",
+                "Es": "Radar 02"
+              }
             },
             "app_settings": {
               "title": "Mini",
@@ -146,11 +150,13 @@
           "radar_03": {
             "type": "_Radar",
             "transparent": true,
-            "label_active": {
-              "En": "Radar 03",
-              "Fr": "Radar 03",
-              "De": "Radar 03",
-              "Es": "Radar 03"
+            "label": {
+              "active": {
+                "En": "Radar 03",
+                "Fr": "Radar 03",
+                "De": "Radar 03",
+                "Es": "Radar 03"
+              }
             },
             "app_settings": {
               "title": "Mini",
@@ -207,11 +213,13 @@
           "radar_04": {
             "type": "_Radar",
             "transparent": true,
-            "label_active": {
-              "En": "Radar 04",
-              "Fr": "Radar 04",
-              "De": "Radar 04",
-              "Es": "Radar 04"
+            "label": {
+              "active": {
+                "En": "Radar 04",
+                "Fr": "Radar 04",
+                "De": "Radar 04",
+                "Es": "Radar 04"
+              }
             },
             "app_settings": {
               "title": "Mini",
@@ -268,11 +276,13 @@
           "radar_05": {
             "type": "_Radar",
             "transparent": true,
-            "label_active": {
-              "En": "Radar 05",
-              "Fr": "Radar 05",
-              "De": "Radar 05",
-              "Es": "Radar 05"
+            "label": {
+              "active": {
+                "En": "Radar 05",
+                "Fr": "Radar 05",
+                "De": "Radar 05",
+                "Es": "Radar 05"
+              }
             },
             "app_settings": {
               "title": "Mini",
@@ -329,11 +339,13 @@
           "radar_06": {
             "type": "_Radar",
             "transparent": true,
-            "label_active": {
-              "En": "Radar 06",
-              "Fr": "Radar 06",
-              "De": "Radar 06",
-              "Es": "Radar 06"
+            "label": {
+              "active": {
+                "En": "Radar 06",
+                "Fr": "Radar 06",
+                "De": "Radar 06",
+                "Es": "Radar 06"
+              }
             },
             "app_settings": {
               "title": "Mini",
@@ -390,11 +402,13 @@
           "radar_07": {
             "type": "_Radar",
             "transparent": true,
-            "label_active": {
-              "En": "Radar 07",
-              "Fr": "Radar 07",
-              "De": "Radar 07",
-              "Es": "Radar 07"
+            "label": {
+              "active": {
+                "En": "Radar 07",
+                "Fr": "Radar 07",
+                "De": "Radar 07",
+                "Es": "Radar 07"
+              }
             },
             "app_settings": {
               "title": "Mini",
@@ -451,11 +465,13 @@
           "radar_08": {
             "type": "_Radar",
             "transparent": true,
-            "label_active": {
-              "En": "Radar 08",
-              "Fr": "Radar 08",
-              "De": "Radar 08",
-              "Es": "Radar 08"
+            "label": {
+              "active": {
+                "En": "Radar 08",
+                "Fr": "Radar 08",
+                "De": "Radar 08",
+                "Es": "Radar 08"
+              }
             },
             "app_settings": {
               "title": "Mini",
@@ -512,11 +528,13 @@
           "radar_09": {
             "type": "_Radar",
             "transparent": true,
-            "label_active": {
-              "En": "Radar 09",
-              "Fr": "Radar 09",
-              "De": "Radar 09",
-              "Es": "Radar 09"
+            "label": {
+              "active": {
+                "En": "Radar 09",
+                "Fr": "Radar 09",
+                "De": "Radar 09",
+                "Es": "Radar 09"
+              }
             },
             "app_settings": {
               "title": "Mini",
@@ -573,11 +591,13 @@
           "radar_10": {
             "type": "_Radar",
             "transparent": true,
-            "label_active": {
-              "En": "Radar 10",
-              "Fr": "Radar 10",
-              "De": "Radar 10",
-              "Es": "Radar 10"
+            "label": {
+              "active": {
+                "En": "Radar 10",
+                "Fr": "Radar 10",
+                "De": "Radar 10",
+                "Es": "Radar 10"
+              }
             },
             "app_settings": {
               "title": "Mini",
@@ -634,11 +654,13 @@
           "radar_11": {
             "type": "_Radar",
             "transparent": true,
-            "label_active": {
-              "En": "Radar 11",
-              "Fr": "Radar 11",
-              "De": "Radar 11",
-              "Es": "Radar 11"
+            "label": {
+              "active": {
+                "En": "Radar 11",
+                "Fr": "Radar 11",
+                "De": "Radar 11",
+                "Es": "Radar 11"
+              }
             },
             "app_settings": {
               "title": "Mini",
@@ -695,11 +717,13 @@
           "radar_12": {
             "type": "_Radar",
             "transparent": true,
-            "label_active": {
-              "En": "Radar 12",
-              "Fr": "Radar 12",
-              "De": "Radar 12",
-              "Es": "Radar 12"
+            "label": {
+              "active": {
+                "En": "Radar 12",
+                "Fr": "Radar 12",
+                "De": "Radar 12",
+                "Es": "Radar 12"
+              }
             },
             "app_settings": {
               "title": "Mini",

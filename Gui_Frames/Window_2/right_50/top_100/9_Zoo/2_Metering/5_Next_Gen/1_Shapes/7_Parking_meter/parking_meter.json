@@ -45,10 +45,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Large Classic",
-              "Fr": "Large Classique",
-              "De": "Large Klassisch",
-              "Es": "Large Clásico"
+              "active": {
+                "En": "Large Classic",
+                "Fr": "Large Classique",
+                "De": "Large Klassisch",
+                "Es": "Large Clásico"
+              }
             },
             "geometry": {
               "width": 350,
@@ -89,12 +91,6 @@
                   "sig_fig": 3
                 }
               ]
-            },
-            "label_active": {
-              "En": "Large Classic",
-              "Fr": "Large Classique",
-              "De": "Large Klassisch",
-              "Es": "Large Clásico"
             },
             "width": 350,
             "height": 350,
@@ -139,10 +135,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Medium Night",
-              "Fr": "Moyen Night",
-              "De": "Mittel Night",
-              "Es": "Medio Night"
+              "active": {
+                "En": "Medium Night",
+                "Fr": "Moyen Night",
+                "De": "Mittel Night",
+                "Es": "Medio Night"
+              }
             },
             "geometry": {
               "width": 250,
@@ -176,12 +174,6 @@
                   "color": "#0F0"
                 }
               ]
-            },
-            "label_active": {
-              "En": "Medium Night",
-              "Fr": "Moyen Night",
-              "De": "Mittel Night",
-              "Es": "Medio Night"
             },
             "width": 250,
             "height": 250,
@@ -227,10 +219,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Small Cyber",
-              "Fr": "Small Cyber",
-              "De": "Small Cyber",
-              "Es": "Small Cyber"
+              "active": {
+                "En": "Small Cyber",
+                "Fr": "Small Cyber",
+                "De": "Small Cyber",
+                "Es": "Small Cyber"
+              }
             },
             "geometry": {
               "width": 180,
@@ -268,12 +262,6 @@
                   "color": "#00E5FF"
                 }
               ]
-            },
-            "label_active": {
-              "En": "Small Cyber",
-              "Fr": "Small Cyber",
-              "De": "Small Cyber",
-              "Es": "Small Cyber"
             },
             "width": 180,
             "height": 180,
@@ -322,10 +310,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Tiny Vintage",
-              "Fr": "Tiny Vintage",
-              "De": "Tiny Vintage",
-              "Es": "Tiny Vintage"
+              "active": {
+                "En": "Tiny Vintage",
+                "Fr": "Tiny Vintage",
+                "De": "Tiny Vintage",
+                "Es": "Tiny Vintage"
+              }
             },
             "geometry": {
               "width": 120,
@@ -362,12 +352,6 @@
                   "color": "#5D4037"
                 }
               ]
-            },
-            "label_active": {
-              "En": "Tiny Vintage",
-              "Fr": "Tiny Vintage",
-              "De": "Tiny Vintage",
-              "Es": "Tiny Vintage"
             },
             "width": 120,
             "height": 120,
@@ -414,10 +398,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Tall Danger",
-              "Fr": "Tall Danger",
-              "De": "Tall Danger",
-              "Es": "Tall Danger"
+              "active": {
+                "En": "Tall Danger",
+                "Fr": "Tall Danger",
+                "De": "Tall Danger",
+                "Es": "Tall Danger"
+              }
             },
             "geometry": {
               "width": 200,
@@ -452,12 +438,6 @@
                   "color": "red"
                 }
               ]
-            },
-            "label_active": {
-              "En": "Tall Danger",
-              "Fr": "Tall Danger",
-              "De": "Tall Danger",
-              "Es": "Tall Danger"
             },
             "width": 200,
             "height": 50,
@@ -503,10 +483,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Wide Royal",
-              "Fr": "Wide Royal",
-              "De": "Wide Royal",
-              "Es": "Wide Royal"
+              "active": {
+                "En": "Wide Royal",
+                "Fr": "Wide Royal",
+                "De": "Wide Royal",
+                "Es": "Wide Royal"
+              }
             },
             "geometry": {
               "width": 400,
@@ -541,12 +523,6 @@
                   "color": "gold"
                 }
               ]
-            },
-            "label_active": {
-              "En": "Wide Royal",
-              "Fr": "Wide Royal",
-              "De": "Wide Royal",
-              "Es": "Wide Royal"
             },
             "width": 400,
             "height": 200,
@@ -592,10 +568,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Blueprint Tech",
-              "Fr": "Blueprint Tech",
-              "De": "Blueprint Tech",
-              "Es": "Blueprint Tech"
+              "active": {
+                "En": "Blueprint Tech",
+                "Fr": "Blueprint Tech",
+                "De": "Blueprint Tech",
+                "Es": "Blueprint Tech"
+              }
             },
             "geometry": {
               "width": 300,
@@ -628,12 +606,6 @@
                   "color": "white"
                 }
               ]
-            },
-            "label_active": {
-              "En": "Blueprint Tech",
-              "Fr": "Blueprint Tech",
-              "De": "Blueprint Tech",
-              "Es": "Blueprint Tech"
             },
             "width": 300,
             "height": 300,
@@ -678,10 +650,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Emerald Sea",
-              "Fr": "Emerald Sea",
-              "De": "Emerald Sea",
-              "Es": "Emerald Sea"
+              "active": {
+                "En": "Emerald Sea",
+                "Fr": "Emerald Sea",
+                "De": "Emerald Sea",
+                "Es": "Emerald Sea"
+              }
             },
             "geometry": {
               "width": 280,
@@ -713,12 +687,6 @@
                   "color": "#b2dfdb"
                 }
               ]
-            },
-            "label_active": {
-              "En": "Emerald Sea",
-              "Fr": "Emerald Sea",
-              "De": "Emerald Sea",
-              "Es": "Emerald Sea"
             },
             "width": 280,
             "height": 280,
@@ -762,10 +730,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Carbon Fiber",
-              "Fr": "Carbon Fiber",
-              "De": "Carbon Fiber",
-              "Es": "Carbon Fiber"
+              "active": {
+                "En": "Carbon Fiber",
+                "Fr": "Carbon Fiber",
+                "De": "Carbon Fiber",
+                "Es": "Carbon Fiber"
+              }
             },
             "geometry": {
               "width": 320,
@@ -798,12 +768,6 @@
                   "color": "#888"
                 }
               ]
-            },
-            "label_active": {
-              "En": "Carbon Fiber",
-              "Fr": "Carbon Fiber",
-              "De": "Carbon Fiber",
-              "Es": "Carbon Fiber"
             },
             "width": 320,
             "height": 320,
@@ -848,10 +812,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Fireball",
-              "Fr": "Fireball",
-              "De": "Fireball",
-              "Es": "Fireball"
+              "active": {
+                "En": "Fireball",
+                "Fr": "Fireball",
+                "De": "Fireball",
+                "Es": "Fireball"
+              }
             },
             "geometry": {
               "width": 260,
@@ -884,12 +850,6 @@
                   "color": "white"
                 }
               ]
-            },
-            "label_active": {
-              "En": "Fireball",
-              "Fr": "Fireball",
-              "De": "Fireball",
-              "Es": "Fireball"
             },
             "width": 260,
             "height": 260,

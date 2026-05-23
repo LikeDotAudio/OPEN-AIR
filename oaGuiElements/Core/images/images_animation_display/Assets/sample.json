@@ -1,7 +1,9 @@
 {
   "images_animation_display_Example": {
     "type": "AnimationDisplay",
-    "label_active": "Animated Time Circuits",
+    "label": {
+      "active": "Animated Time Circuits"
+    },
     "gif_path": "oaDataCache/assets/images/time_circuits.gif",
     "value_default": 0,
     "notes": "A standard animation of the time circuits.",

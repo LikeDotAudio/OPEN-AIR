@@ -21,8 +21,14 @@ the palette entry, preview, and property manipulators.
 {
   "Trapezoid_Toggler_Example": {
     "type": "_TrapezoidButtonToggler",
-    "label_active": "Input",
-    "options": ["Mic", "Line", "USB"],
+    "label": {
+      "active": "Input"
+    },
+    "options": [
+      "Mic",
+      "Line",
+      "USB"
+    ],
     "value_default": "Mic",
     "selection_mode": "radio",
     "Allow_Null": false,
@@ -31,12 +37,26 @@ the palette entry, preview, and property manipulators.
     "color": "#6a9955",
     "led_color": "#00FF00",
     "slant": 15,
-    "layout": { "sticky": "ew", "padx": 5, "pady": 5, "max_cols": 3 },
-    "cosmetics": { "colors": { "primary": "#FF9900", "secondary": "#444444", "background": "#2b2b2b" } }
+    "layout": {
+      "sticky": "ew",
+      "padx": 5,
+      "pady": 5,
+      "max_cols": 3
+    },
+    "cosmetics": {
+      "colors": {
+        "primary": "#FF9900",
+        "secondary": "#444444",
+        "background": "#2b2b2b"
+      }
+    }
   },
   "_README": "Radio/multi group of trapezoid buttons (reuses OcaTrapezoidButton per option).",
   "_LEGEND": {
-    "selection_modes": ["radio", "multi"]
+    "selection_modes": [
+      "radio",
+      "multi"
+    ]
   }
 }
 ```

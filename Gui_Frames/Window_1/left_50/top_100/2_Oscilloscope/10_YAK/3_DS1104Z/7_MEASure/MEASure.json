@@ -83,11 +83,13 @@
             "fields": {
               "Execute Command": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "Clear All",
-                  "Fr": "Effacer All",
-                  "De": "Löschen All",
-                  "Es": "Borrar All"
+                "label": {
+                  "inactive": {
+                    "En": "Clear All",
+                    "Fr": "Effacer All",
+                    "De": "Löschen All",
+                    "Es": "Borrar All"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {

@@ -49,11 +49,13 @@
         "fields": {
           "CH1": {
             "type": "_CustomLTP",
-            "label_active": {
-              "En": "Kick",
-              "Fr": "Kick",
-              "De": "Kick",
-              "Es": "Kick"
+            "label": {
+              "active": {
+                "En": "Kick",
+                "Fr": "Kick",
+                "De": "Kick",
+                "Es": "Kick"
+              }
             },
             "fader_config": {
               "domain": {
@@ -87,11 +89,13 @@
           },
           "CH2": {
             "type": "_CustomLTP",
-            "label_active": {
-              "En": "Snare",
-              "Fr": "Snare",
-              "De": "Snare",
-              "Es": "Snare"
+            "label": {
+              "active": {
+                "En": "Snare",
+                "Fr": "Snare",
+                "De": "Snare",
+                "Es": "Snare"
+              }
             },
             "fader_config": {
               "domain": {
@@ -123,11 +127,13 @@
           },
           "CH3": {
             "type": "_CustomLTP",
-            "label_active": {
-              "En": "Hat",
-              "Fr": "Hat",
-              "De": "Hat",
-              "Es": "Hat"
+            "label": {
+              "active": {
+                "En": "Hat",
+                "Fr": "Hat",
+                "De": "Hat",
+                "Es": "Hat"
+              }
             },
             "fader_config": {
               "domain": {
@@ -158,11 +164,13 @@
           },
           "CH4": {
             "type": "_CustomLTP",
-            "label_active": {
-              "En": "Toms",
-              "Fr": "Toms",
-              "De": "Toms",
-              "Es": "Toms"
+            "label": {
+              "active": {
+                "En": "Toms",
+                "Fr": "Toms",
+                "De": "Toms",
+                "Es": "Toms"
+              }
             },
             "fader_config": {
               "domain": {
@@ -193,11 +201,13 @@
           },
           "CH5": {
             "type": "_CustomLTP",
-            "label_active": {
-              "En": "Bass",
-              "Fr": "Bass",
-              "De": "Bass",
-              "Es": "Bass"
+            "label": {
+              "active": {
+                "En": "Bass",
+                "Fr": "Bass",
+                "De": "Bass",
+                "Es": "Bass"
+              }
             },
             "fader_config": {
               "domain": {
@@ -226,11 +236,13 @@
           },
           "CH6": {
             "type": "_CustomLTP",
-            "label_active": {
-              "En": "Gtr L",
-              "Fr": "Gtr L",
-              "De": "Gtr L",
-              "Es": "Gtr L"
+            "label": {
+              "active": {
+                "En": "Gtr L",
+                "Fr": "Gtr L",
+                "De": "Gtr L",
+                "Es": "Gtr L"
+              }
             },
             "fader_config": {
               "domain": {
@@ -260,11 +272,13 @@
           },
           "CH7": {
             "type": "_CustomLTP",
-            "label_active": {
-              "En": "Gtr R",
-              "Fr": "Gtr R",
-              "De": "Gtr R",
-              "Es": "Gtr R"
+            "label": {
+              "active": {
+                "En": "Gtr R",
+                "Fr": "Gtr R",
+                "De": "Gtr R",
+                "Es": "Gtr R"
+              }
             },
             "fader_config": {
               "domain": {
@@ -293,11 +307,13 @@
           },
           "CH8": {
             "type": "_CustomLTP",
-            "label_active": {
-              "En": "Vox",
-              "Fr": "Vox",
-              "De": "Vox",
-              "Es": "Vox"
+            "label": {
+              "active": {
+                "En": "Vox",
+                "Fr": "Vox",
+                "De": "Vox",
+                "Es": "Vox"
+              }
             },
             "fader_config": {
               "domain": {
@@ -339,11 +355,13 @@
         "fields": {
           "H1": {
             "type": "_CustomLTP",
-            "label_active": {
-              "En": "Industrial Gear",
-              "Fr": "Industriel Gear",
-              "De": "Industriell Gear",
-              "Es": "Industrial Gear"
+            "label": {
+              "active": {
+                "En": "Industrial Gear",
+                "Fr": "Industriel Gear",
+                "De": "Industriell Gear",
+                "Es": "Industrial Gear"
+              }
             },
             "fader_config": {
               "value_highlight_color": "#f4902c"
@@ -365,11 +383,13 @@
           },
           "H2": {
             "type": "_CustomLTP",
-            "label_active": {
-              "En": "Sleek Octagon",
-              "Fr": "Sleek Octagon",
-              "De": "Sleek Octagon",
-              "Es": "Sleek Octagon"
+            "label": {
+              "active": {
+                "En": "Sleek Octagon",
+                "Fr": "Sleek Octagon",
+                "De": "Sleek Octagon",
+                "Es": "Sleek Octagon"
+              }
             },
             "fader_config": {
               "value_highlight_color": "#33A1FD"
@@ -390,11 +410,13 @@
           },
           "H3": {
             "type": "_CustomLTP",
-            "label_active": {
-              "En": "Ghost Circle",
-              "Fr": "Ghost Circle",
-              "De": "Ghost Circle",
-              "Es": "Ghost Circle"
+            "label": {
+              "active": {
+                "En": "Ghost Circle",
+                "Fr": "Ghost Circle",
+                "De": "Ghost Circle",
+                "Es": "Ghost Circle"
+              }
             },
             "fader_config": {
               "value_highlight_color": "#AAAAAA"

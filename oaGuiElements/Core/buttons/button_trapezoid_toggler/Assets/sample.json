@@ -1,7 +1,9 @@
 {
   "button_trapezoid_toggler_Example": {
     "type": "_TrapezoidButtonToggler",
-    "label_active": "Input",
+    "label": {
+      "active": "Input"
+    },
     "options": [
       "Mic",
       "Line",

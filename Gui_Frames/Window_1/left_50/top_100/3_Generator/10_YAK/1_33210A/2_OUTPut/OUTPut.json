@@ -94,11 +94,13 @@
             "fields": {
               "Output_ON": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "Output ON",
-                  "Fr": "Sortie ON",
-                  "De": "Ausgang ON",
-                  "Es": "Salida ON"
+                "label": {
+                  "inactive": {
+                    "En": "Output ON",
+                    "Fr": "Sortie ON",
+                    "De": "Ausgang ON",
+                    "Es": "Salida ON"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
@@ -128,11 +130,13 @@
               },
               "Output_OFF": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "Output OFF",
-                  "Fr": "Sortie DÉSACTIVÉE",
-                  "De": "Ausgang AUS",
-                  "Es": "Salida DESACTIVADA"
+                "label": {
+                  "inactive": {
+                    "En": "Output OFF",
+                    "Fr": "Sortie DÉSACTIVÉE",
+                    "De": "Ausgang AUS",
+                    "Es": "Salida DESACTIVADA"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
@@ -162,11 +166,13 @@
               },
               "Sync_ON": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "Sync ON",
-                  "Fr": "Sync ON",
-                  "De": "Sync ON",
-                  "Es": "Sync ON"
+                "label": {
+                  "inactive": {
+                    "En": "Sync ON",
+                    "Fr": "Sync ON",
+                    "De": "Sync ON",
+                    "Es": "Sync ON"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
@@ -196,11 +202,13 @@
               },
               "Sync_OFF": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "Sync OFF",
-                  "Fr": "Sync OFF",
-                  "De": "Sync OFF",
-                  "Es": "Sync OFF"
+                "label": {
+                  "inactive": {
+                    "En": "Sync OFF",
+                    "Fr": "Sync OFF",
+                    "De": "Sync OFF",
+                    "Es": "Sync OFF"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {

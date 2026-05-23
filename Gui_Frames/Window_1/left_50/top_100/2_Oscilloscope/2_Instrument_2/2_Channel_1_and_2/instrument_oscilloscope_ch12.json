@@ -34,11 +34,13 @@
                 "value": {
                   "default_value": "Flux_Scope_Dual_88"
                 },
-                "label_active": {
-                  "En": "Device Name",
-                  "Fr": "Device Nom",
-                  "De": "Device Name",
-                  "Es": "Device Nombre"
+                "label": {
+                  "active": {
+                    "En": "Device Name",
+                    "Fr": "Device Nom",
+                    "De": "Device Name",
+                    "Es": "Device Nombre"
+                  }
                 },
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
@@ -70,11 +72,13 @@
               },
               "Main_Graph_Display": {
                 "type": "_GuiGraph",
-                "label_active": {
-                  "En": "Dual Waveform Visualization",
-                  "Fr": "Dual Waveform Visualization",
-                  "De": "Dual Waveform Visualization",
-                  "Es": "Dual Waveform Visualization"
+                "label": {
+                  "active": {
+                    "En": "Dual Waveform Visualization",
+                    "Fr": "Dual Waveform Visualization",
+                    "De": "Dual Waveform Visualization",
+                    "Es": "Dual Waveform Visualization"
+                  }
                 },
                 "description": {
                   "En": "Real-time rendering of Ch1 and Ch2",
@@ -134,17 +138,19 @@
             "fields": {
               "Ch1_Enable": {
                 "type": "_GuiButtonToggle",
-                "label_active": {
-                  "En": "CH1 ON",
-                  "Fr": "CH1 ACTIVÉ",
-                  "De": "CH1 AN",
-                  "Es": "CH1 ACTIVADO"
-                },
-                "label_inactive": {
-                  "En": "CH1 OFF",
-                  "Fr": "CH 1",
-                  "De": "CH 1",
-                  "Es": "CH 1"
+                "label": {
+                  "active": {
+                    "En": "CH1 ON",
+                    "Fr": "CH1 ACTIVÉ",
+                    "De": "CH1 AN",
+                    "Es": "CH1 ACTIVADO"
+                  },
+                  "inactive": {
+                    "En": "CH1 OFF",
+                    "Fr": "CH 1",
+                    "De": "CH 1",
+                    "Es": "CH 1"
+                  }
                 },
                 "style": {
                   "active": {
@@ -205,11 +211,13 @@
                 "value": {
                   "default_value": "1.0"
                 },
-                "label_active": {
-                  "En": "Ch1 Scale",
-                  "Fr": "Ch 1",
-                  "De": "Ch 1",
-                  "Es": "Ch 1"
+                "label": {
+                  "active": {
+                    "En": "Ch1 Scale",
+                    "Fr": "Ch 1",
+                    "De": "Ch 1",
+                    "Es": "Ch 1"
+                  }
                 },
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
@@ -247,11 +255,13 @@
                 "value": {
                   "default_value": "0.0"
                 },
-                "label_active": {
-                  "En": "Ch1 Offset",
-                  "Fr": "Ch 1",
-                  "De": "Ch 1",
-                  "Es": "Ch 1"
+                "label": {
+                  "active": {
+                    "En": "Ch1 Offset",
+                    "Fr": "Ch 1",
+                    "De": "Ch 1",
+                    "Es": "Ch 1"
+                  }
                 },
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
@@ -283,11 +293,13 @@
               },
               "Ch1_Coupling": {
                 "type": "_GuiDropDownOption",
-                "label_active": {
-                  "En": "Ch1 Coupling",
-                  "Fr": "Ch 1",
-                  "De": "Ch 1",
-                  "Es": "Ch 1"
+                "label": {
+                  "active": {
+                    "En": "Ch1 Coupling",
+                    "Fr": "Ch 1",
+                    "De": "Ch 1",
+                    "Es": "Ch 1"
+                  }
                 },
                 "options": [
                   "AC",
@@ -337,17 +349,19 @@
             "fields": {
               "Ch2_Enable": {
                 "type": "_GuiButtonToggle",
-                "label_active": {
-                  "En": "CH2 ON",
-                  "Fr": "CH 2",
-                  "De": "CH 2",
-                  "Es": "CH 2"
-                },
-                "label_inactive": {
-                  "En": "CH2 OFF",
-                  "Fr": "CH 2",
-                  "De": "CH 2",
-                  "Es": "CH 2"
+                "label": {
+                  "active": {
+                    "En": "CH2 ON",
+                    "Fr": "CH 2",
+                    "De": "CH 2",
+                    "Es": "CH 2"
+                  },
+                  "inactive": {
+                    "En": "CH2 OFF",
+                    "Fr": "CH 2",
+                    "De": "CH 2",
+                    "Es": "CH 2"
+                  }
                 },
                 "style": {
                   "active": {
@@ -408,11 +422,13 @@
                 "value": {
                   "default_value": "1.0"
                 },
-                "label_active": {
-                  "En": "Ch2 Scale",
-                  "Fr": "Ch 2",
-                  "De": "Ch 2",
-                  "Es": "Ch 2"
+                "label": {
+                  "active": {
+                    "En": "Ch2 Scale",
+                    "Fr": "Ch 2",
+                    "De": "Ch 2",
+                    "Es": "Ch 2"
+                  }
                 },
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
@@ -450,11 +466,13 @@
                 "value": {
                   "default_value": "0.0"
                 },
-                "label_active": {
-                  "En": "Ch2 Offset",
-                  "Fr": "Ch 2",
-                  "De": "Ch 2",
-                  "Es": "Ch 2"
+                "label": {
+                  "active": {
+                    "En": "Ch2 Offset",
+                    "Fr": "Ch 2",
+                    "De": "Ch 2",
+                    "Es": "Ch 2"
+                  }
                 },
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
@@ -486,11 +504,13 @@
               },
               "Ch2_Coupling": {
                 "type": "_GuiDropDownOption",
-                "label_active": {
-                  "En": "Ch2 Coupling",
-                  "Fr": "Couplage Ch2",
-                  "De": "Ch2 Kopplung",
-                  "Es": "Acoplamiento Ch2"
+                "label": {
+                  "active": {
+                    "En": "Ch2 Coupling",
+                    "Fr": "Couplage Ch2",
+                    "De": "Ch2 Kopplung",
+                    "Es": "Acoplamiento Ch2"
+                  }
                 },
                 "options": [
                   "AC",
@@ -548,11 +568,13 @@
                 "value": {
                   "default_value": "1e-3"
                 },
-                "label_active": {
-                  "En": "Time / Div",
-                  "Fr": "Temps / Div",
-                  "De": "Zeit / Div",
-                  "Es": "Tiempo / Div"
+                "label": {
+                  "active": {
+                    "En": "Time / Div",
+                    "Fr": "Temps / Div",
+                    "De": "Zeit / Div",
+                    "Es": "Tiempo / Div"
+                  }
                 },
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
@@ -590,11 +612,13 @@
                 "value": {
                   "default_value": "0.0"
                 },
-                "label_active": {
-                  "En": "Delay",
-                  "Fr": "Delay",
-                  "De": "Delay",
-                  "Es": "Delay"
+                "label": {
+                  "active": {
+                    "En": "Delay",
+                    "Fr": "Delay",
+                    "De": "Delay",
+                    "Es": "Delay"
+                  }
                 },
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
@@ -637,11 +661,13 @@
             "fields": {
               "Trigger_Source": {
                 "type": "_GuiDropDownOption",
-                "label_active": {
-                  "En": "Source",
-                  "Fr": "Source",
-                  "De": "Quelle",
-                  "Es": "Fuente"
+                "label": {
+                  "active": {
+                    "En": "Source",
+                    "Fr": "Source",
+                    "De": "Quelle",
+                    "Es": "Fuente"
+                  }
                 },
                 "options": [
                   "CHAN1",
@@ -686,11 +712,13 @@
                 "value": {
                   "default_value": "0.5"
                 },
-                "label_active": {
-                  "En": "Trig Level",
-                  "Fr": "Trig Niveau",
-                  "De": "Trig Pegel",
-                  "Es": "Trig Nivel"
+                "label": {
+                  "active": {
+                    "En": "Trig Level",
+                    "Fr": "Trig Niveau",
+                    "De": "Trig Pegel",
+                    "Es": "Trig Nivel"
+                  }
                 },
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
@@ -722,17 +750,19 @@
               },
               "Trigger_Edge_Toggle": {
                 "type": "_GuiButtonToggle",
-                "label_active": {
-                  "En": "RISING",
-                  "Fr": "CROISSANT",
-                  "De": "STEIGEND",
-                  "Es": "ASCENDENTE"
-                },
-                "label_inactive": {
-                  "En": "FALLING",
-                  "Fr": "FALLING",
-                  "De": "FALLING",
-                  "Es": "FALLING"
+                "label": {
+                  "active": {
+                    "En": "RISING",
+                    "Fr": "CROISSANT",
+                    "De": "STEIGEND",
+                    "Es": "ASCENDENTE"
+                  },
+                  "inactive": {
+                    "En": "FALLING",
+                    "Fr": "FALLING",
+                    "De": "FALLING",
+                    "Es": "FALLING"
+                  }
                 },
                 "style": {
                   "active": {
@@ -785,11 +815,13 @@
               },
               "Force_Trigger": {
                 "type": "_TrapezoidButton",
-                "label_active": {
-                  "En": "FORCE",
-                  "Fr": "FORCE",
-                  "De": "KRAFT",
-                  "Es": "FUERZA"
+                "label": {
+                  "active": {
+                    "En": "FORCE",
+                    "Fr": "FORCE",
+                    "De": "KRAFT",
+                    "Es": "FUERZA"
+                  }
                 },
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
@@ -832,17 +864,19 @@
             "fields": {
               "Run_Stop_Toggle": {
                 "type": "_GuiButtonToggle",
-                "label_active": {
-                  "En": "RUNNING 🟢",
-                  "Fr": "RUNNING 🟢",
-                  "De": "RUNNING 🟢",
-                  "Es": "RUNNING 🟢"
-                },
-                "label_inactive": {
-                  "En": "STOPPED 🔴",
-                  "Fr": "ARRÊTÉ 🔴",
-                  "De": "GESTOPPT 🔴",
-                  "Es": "DETENIDO 🔴"
+                "label": {
+                  "active": {
+                    "En": "RUNNING 🟢",
+                    "Fr": "RUNNING 🟢",
+                    "De": "RUNNING 🟢",
+                    "Es": "RUNNING 🟢"
+                  },
+                  "inactive": {
+                    "En": "STOPPED 🔴",
+                    "Fr": "ARRÊTÉ 🔴",
+                    "De": "GESTOPPT 🔴",
+                    "Es": "DETENIDO 🔴"
+                  }
                 },
                 "style": {
                   "active": {
@@ -895,11 +929,13 @@
               },
               "Single_Shot": {
                 "type": "_GuiButton",
-                "label_active": {
-                  "En": "SINGLE SEQ",
-                  "Fr": "SINGLE SEQ",
-                  "De": "SINGLE SEQ",
-                  "Es": "SINGLE SEQ"
+                "label": {
+                  "active": {
+                    "En": "SINGLE SEQ",
+                    "Fr": "SINGLE SEQ",
+                    "De": "SINGLE SEQ",
+                    "Es": "SINGLE SEQ"
+                  }
                 },
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
@@ -945,11 +981,13 @@
                 "value": {
                   "default_value": "--- V"
                 },
-                "label_active": {
-                  "En": "CH1 Vpp",
-                  "Fr": "CH 1",
-                  "De": "CH 1",
-                  "Es": "CH 1"
+                "label": {
+                  "active": {
+                    "En": "CH1 Vpp",
+                    "Fr": "CH 1",
+                    "De": "CH 1",
+                    "Es": "CH 1"
+                  }
                 },
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
@@ -984,11 +1022,13 @@
                 "value": {
                   "default_value": "--- Hz"
                 },
-                "label_active": {
-                  "En": "CH1 Freq",
-                  "Fr": "Fréq CH1",
-                  "De": "CH1 Freq",
-                  "Es": "Frec CH1"
+                "label": {
+                  "active": {
+                    "En": "CH1 Freq",
+                    "Fr": "Fréq CH1",
+                    "De": "CH1 Freq",
+                    "Es": "Frec CH1"
+                  }
                 },
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
@@ -1034,11 +1074,13 @@
                 "value": {
                   "default_value": "--- V"
                 },
-                "label_active": {
-                  "En": "CH2 Vpp",
-                  "Fr": "CH 2",
-                  "De": "CH 2",
-                  "Es": "CH 2"
+                "label": {
+                  "active": {
+                    "En": "CH2 Vpp",
+                    "Fr": "CH 2",
+                    "De": "CH 2",
+                    "Es": "CH 2"
+                  }
                 },
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
@@ -1073,11 +1115,13 @@
                 "value": {
                   "default_value": "--- Hz"
                 },
-                "label_active": {
-                  "En": "CH2 Freq",
-                  "Fr": "CH 2",
-                  "De": "CH 2",
-                  "Es": "CH 2"
+                "label": {
+                  "active": {
+                    "En": "CH2 Freq",
+                    "Fr": "CH 2",
+                    "De": "CH 2",
+                    "Es": "CH 2"
+                  }
                 },
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {

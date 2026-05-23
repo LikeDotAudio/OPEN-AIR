@@ -13,20 +13,24 @@
     "blocks": {
       "elements1": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "System Status:",
-          "Fr": "System Statut:",
-          "De": "System Status:",
-          "Es": "System Estado:"
+        "label": {
+          "active": {
+            "En": "System Status:",
+            "Fr": "System Statut:",
+            "De": "System Status:",
+            "Es": "System Estado:"
+          }
         },
         "fields": {
           "examplefields": {
             "type": "HeaderStatusLight",
-            "label_active": {
-              "En": "System Status:",
-              "Fr": "System Statut:",
-              "De": "System Status:",
-              "Es": "System Estado:"
+            "label": {
+              "active": {
+                "En": "System Status:",
+                "Fr": "System Statut:",
+                "De": "System Status:",
+                "Es": "System Estado:"
+              }
             },
             "notes": "Standard header status light, default placement."
           }
@@ -34,20 +38,24 @@
       },
       "elements2": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Network Health:",
-          "Fr": "Network Health:",
-          "De": "Network Health:",
-          "Es": "Network Health:"
+        "label": {
+          "active": {
+            "En": "Network Health:",
+            "Fr": "Network Health:",
+            "De": "Network Health:",
+            "Es": "Network Health:"
+          }
         },
         "fields": {
           "examplefields": {
             "type": "HeaderStatusLight",
-            "label_active": {
-              "En": "Network Health:",
-              "Fr": "Network Health:",
-              "De": "Network Health:",
-              "Es": "Network Health:"
+            "label": {
+              "active": {
+                "En": "Network Health:",
+                "Fr": "Network Health:",
+                "De": "Network Health:",
+                "Es": "Network Health:"
+              }
             },
             "layout": {
               "side": "left",
@@ -60,20 +68,24 @@
       },
       "elements3": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Server Connection:",
-          "Fr": "Server Connection:",
-          "De": "Server Connection:",
-          "Es": "Server Connection:"
+        "label": {
+          "active": {
+            "En": "Server Connection:",
+            "Fr": "Server Connection:",
+            "De": "Server Connection:",
+            "Es": "Server Connection:"
+          }
         },
         "fields": {
           "examplefields": {
             "type": "HeaderStatusLight",
-            "label_active": {
-              "En": "Server Connection:",
-              "Fr": "Server Connection:",
-              "De": "Server Connection:",
-              "Es": "Server Connection:"
+            "label": {
+              "active": {
+                "En": "Server Connection:",
+                "Fr": "Server Connection:",
+                "De": "Server Connection:",
+                "Es": "Server Connection:"
+              }
             },
             "layout": {
               "side": "bottom",
@@ -85,20 +97,24 @@
       },
       "elements4": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Gui Header Status Light 04 Data Stream",
-          "Fr": "Gui Header Statut Light 04 Data Stream",
-          "De": "Gui Header Status Light 04 Data Stream",
-          "Es": "Gui Header Estado Light 04 Data Stream"
+        "label": {
+          "active": {
+            "En": "Gui Header Status Light 04 Data Stream",
+            "Fr": "Gui Header Statut Light 04 Data Stream",
+            "De": "Gui Header Status Light 04 Data Stream",
+            "Es": "Gui Header Estado Light 04 Data Stream"
+          }
         },
         "fields": {
           "examplefields": {
             "type": "HeaderStatusLight",
-            "label_active": {
-              "En": "",
-              "Fr": "",
-              "De": "",
-              "Es": ""
+            "label": {
+              "active": {
+                "En": "",
+                "Fr": "",
+                "De": "",
+                "Es": ""
+              }
             },
             "layout": {
               "side": "top"
@@ -109,20 +125,24 @@
       },
       "elements5": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Alert Status:",
-          "Fr": "Alert Statut:",
-          "De": "Alert Status:",
-          "Es": "Alert Estado:"
+        "label": {
+          "active": {
+            "En": "Alert Status:",
+            "Fr": "Alert Statut:",
+            "De": "Alert Status:",
+            "Es": "Alert Estado:"
+          }
         },
         "fields": {
           "examplefields": {
             "type": "HeaderStatusLight",
-            "label_active": {
-              "En": "Alert Status:",
-              "Fr": "Alert Statut:",
-              "De": "Alert Status:",
-              "Es": "Alert Estado:"
+            "label": {
+              "active": {
+                "En": "Alert Status:",
+                "Fr": "Alert Statut:",
+                "De": "Alert Status:",
+                "Es": "Alert Estado:"
+              }
             },
             "notes": "Status light signaling critical alerts."
           }

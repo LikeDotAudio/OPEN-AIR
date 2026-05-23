@@ -350,11 +350,13 @@
             "fields": {
               "CH2_ON": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "CH2 ON",
-                  "Fr": "CH 2",
-                  "De": "CH 2",
-                  "Es": "CH 2"
+                "label": {
+                  "inactive": {
+                    "En": "CH2 ON",
+                    "Fr": "CH 2",
+                    "De": "CH 2",
+                    "Es": "CH 2"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
@@ -383,11 +385,13 @@
               },
               "CH2_OFF": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "CH2 OFF",
-                  "Fr": "CH 2",
-                  "De": "CH 2",
-                  "Es": "CH 2"
+                "label": {
+                  "inactive": {
+                    "En": "CH2 OFF",
+                    "Fr": "CH 2",
+                    "De": "CH 2",
+                    "Es": "CH 2"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {

@@ -24,7 +24,9 @@ the palette entry, preview, and property manipulators.
 {
   "Radar_Scope_Example": {
     "type": "_Radar",
-    "label_active": "Radar Eye 01",
+    "label": {
+      "active": "Radar Eye 01"
+    },
     "data_parameters": {
       "min_value": 0,
       "max_value": 100,
@@ -40,17 +42,38 @@ the palette entry, preview, and property manipulators.
       "grid_color": "#86c0db",
       "ring_interval": 20,
       "spoke_interval": 30,
-      "labels": { "show_values": true }
+      "labels": {
+        "show_values": true
+      }
     },
     "color_thresholds": {
-      "colors": { "safe": "#0c75ec", "warning": "#2f6988", "critical": "#455594" }
+      "colors": {
+        "safe": "#0c75ec",
+        "warning": "#2f6988",
+        "critical": "#455594"
+      }
     },
-    "layout": { "sticky": "ew", "padx": 5, "pady": 5, "width": 240, "height": 240 },
-    "cosmetics": { "colors": { "primary": "#FF9900", "secondary": "#444444", "background": "#0a0f12" } }
+    "layout": {
+      "sticky": "ew",
+      "padx": 5,
+      "pady": 5,
+      "width": 240,
+      "height": 240
+    },
+    "cosmetics": {
+      "colors": {
+        "primary": "#FF9900",
+        "secondary": "#444444",
+        "background": "#0a0f12"
+      }
+    }
   },
   "_README": "Radial radar scope: polar rings/spokes with a value sweep around one revolution.",
   "_LEGEND": {
-    "plot_style": ["area", "line"]
+    "plot_style": [
+      "area",
+      "line"
+    ]
   }
 }
 ```

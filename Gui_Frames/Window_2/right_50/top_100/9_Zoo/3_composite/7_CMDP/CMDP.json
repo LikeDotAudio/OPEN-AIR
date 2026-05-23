@@ -27,11 +27,13 @@
         "fields": {
           "cmdp_1": {
             "type": "_CMDP",
-            "label_active": {
-              "En": "CMDP 1",
-              "Fr": "CMDP 1",
-              "De": "CMDP 1",
-              "Es": "CMDP 1"
+            "label": {
+              "active": {
+                "En": "CMDP 1",
+                "Fr": "CMDP 1",
+                "De": "CMDP 1",
+                "Es": "CMDP 1"
+              }
             },
             "path": "audio/cmdp/1",
             "layout": {

@@ -40,11 +40,13 @@
         "fields": {
           "wink_01_round_red": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "01",
-              "Fr": "01",
-              "De": "01",
-              "Es": "01"
+            "label": {
+              "active": {
+                "En": "01",
+                "Fr": "01",
+                "De": "01",
+                "Es": "01"
+              }
             },
             "shape_type": "round",
             "width": 60,
@@ -56,11 +58,13 @@
           },
           "wink_02_square_green": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "02",
-              "Fr": "02",
-              "De": "02",
-              "Es": "02"
+            "label": {
+              "active": {
+                "En": "02",
+                "Fr": "02",
+                "De": "02",
+                "Es": "02"
+              }
             },
             "shape_type": "square",
             "width": 60,
@@ -74,11 +78,13 @@
           },
           "wink_03_rect_blue": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "03",
-              "Fr": "03",
-              "De": "03",
-              "Es": "03"
+            "label": {
+              "active": {
+                "En": "03",
+                "Fr": "03",
+                "De": "03",
+                "Es": "03"
+              }
             },
             "shape_type": "rect",
             "width": 90,
@@ -92,11 +98,13 @@
           },
           "wink_04_round_yellow": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "04",
-              "Fr": "04",
-              "De": "04",
-              "Es": "04"
+            "label": {
+              "active": {
+                "En": "04",
+                "Fr": "04",
+                "De": "04",
+                "Es": "04"
+              }
             },
             "shape_type": "round",
             "width": 70,
@@ -110,11 +118,13 @@
           },
           "wink_05_rect_cyan": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "05",
-              "Fr": "05",
-              "De": "05",
-              "Es": "05"
+            "label": {
+              "active": {
+                "En": "05",
+                "Fr": "05",
+                "De": "05",
+                "Es": "05"
+              }
             },
             "shape_type": "rect",
             "width": 80,
@@ -127,11 +137,13 @@
           },
           "wink_06_round_magenta": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "06",
-              "Fr": "06",
-              "De": "06",
-              "Es": "06"
+            "label": {
+              "active": {
+                "En": "06",
+                "Fr": "06",
+                "De": "06",
+                "Es": "06"
+              }
             },
             "shape_type": "round",
             "width": 50,
@@ -143,11 +155,13 @@
           },
           "wink_07_square_orange": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "07",
-              "Fr": "07",
-              "De": "07",
-              "Es": "07"
+            "label": {
+              "active": {
+                "En": "07",
+                "Fr": "07",
+                "De": "07",
+                "Es": "07"
+              }
             },
             "shape_type": "square",
             "width": 75,
@@ -163,11 +177,13 @@
           },
           "wink_08_rect_purple": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "08",
-              "Fr": "08",
-              "De": "08",
-              "Es": "08"
+            "label": {
+              "active": {
+                "En": "08",
+                "Fr": "08",
+                "De": "08",
+                "Es": "08"
+              }
             },
             "shape_type": "rect",
             "width": 100,
@@ -181,11 +197,13 @@
           },
           "wink_09_round_lime": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "09",
-              "Fr": "09",
-              "De": "09",
-              "Es": "09"
+            "label": {
+              "active": {
+                "En": "09",
+                "Fr": "09",
+                "De": "09",
+                "Es": "09"
+              }
             },
             "shape_type": "round",
             "width": 80,
@@ -197,11 +215,13 @@
           },
           "wink_10_rect_pink": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "10",
-              "Fr": "10",
-              "De": "10",
-              "Es": "10"
+            "label": {
+              "active": {
+                "En": "10",
+                "Fr": "10",
+                "De": "10",
+                "Es": "10"
+              }
             },
             "shape_type": "rect",
             "width": 60,
@@ -215,11 +235,13 @@
           },
           "wink_11_square_white": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "11",
-              "Fr": "11",
-              "De": "11",
-              "Es": "11"
+            "label": {
+              "active": {
+                "En": "11",
+                "Fr": "11",
+                "De": "11",
+                "Es": "11"
+              }
             },
             "shape_type": "square",
             "width": 65,
@@ -233,11 +255,13 @@
           },
           "wink_12_round_teal": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "12",
-              "Fr": "12",
-              "De": "12",
-              "Es": "12"
+            "label": {
+              "active": {
+                "En": "12",
+                "Fr": "12",
+                "De": "12",
+                "Es": "12"
+              }
             },
             "shape_type": "round",
             "width": 55,
@@ -249,11 +273,13 @@
           },
           "wink_13_rect_gold": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "13",
-              "Fr": "13",
-              "De": "13",
-              "Es": "13"
+            "label": {
+              "active": {
+                "En": "13",
+                "Fr": "13",
+                "De": "13",
+                "Es": "13"
+              }
             },
             "shape_type": "rect",
             "width": 110,
@@ -270,11 +296,13 @@
           },
           "wink_14_square_brown": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "14",
-              "Fr": "14",
-              "De": "14",
-              "Es": "14"
+            "label": {
+              "active": {
+                "En": "14",
+                "Fr": "14",
+                "De": "14",
+                "Es": "14"
+              }
             },
             "shape_type": "square",
             "width": 70,
@@ -287,11 +315,13 @@
           },
           "wink_15_round_salmon": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "15",
-              "Fr": "15",
-              "De": "15",
-              "Es": "15"
+            "label": {
+              "active": {
+                "En": "15",
+                "Fr": "15",
+                "De": "15",
+                "Es": "15"
+              }
             },
             "shape_type": "round",
             "width": 90,
@@ -303,11 +333,13 @@
           },
           "wink_16_rect_indigo": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "16",
-              "Fr": "16",
-              "De": "16",
-              "Es": "16"
+            "label": {
+              "active": {
+                "En": "16",
+                "Fr": "16",
+                "De": "16",
+                "Es": "16"
+              }
             },
             "shape_type": "rect",
             "width": 50,
@@ -320,11 +352,13 @@
           },
           "wink_17_square_gray": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "17",
-              "Fr": "17",
-              "De": "17",
-              "Es": "17"
+            "label": {
+              "active": {
+                "En": "17",
+                "Fr": "17",
+                "De": "17",
+                "Es": "17"
+              }
             },
             "shape_type": "square",
             "width": 60,
@@ -339,11 +373,13 @@
           },
           "wink_18_round_olive": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "18",
-              "Fr": "18",
-              "De": "18",
-              "Es": "18"
+            "label": {
+              "active": {
+                "En": "18",
+                "Fr": "18",
+                "De": "18",
+                "Es": "18"
+              }
             },
             "shape_type": "round",
             "width": 65,
@@ -355,11 +391,13 @@
           },
           "wink_19_rect_crimson": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "19",
-              "Fr": "19",
-              "De": "19",
-              "Es": "19"
+            "label": {
+              "active": {
+                "En": "19",
+                "Fr": "19",
+                "De": "19",
+                "Es": "19"
+              }
             },
             "shape_type": "rect",
             "width": 120,
@@ -377,11 +415,13 @@
           },
           "wink_20_square_sky": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "20",
-              "Fr": "20",
-              "De": "20",
-              "Es": "20"
+            "label": {
+              "active": {
+                "En": "20",
+                "Fr": "20",
+                "De": "20",
+                "Es": "20"
+              }
             },
             "shape_type": "square",
             "width": 80,

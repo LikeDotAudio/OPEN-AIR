@@ -44,11 +44,13 @@
               "padx": 10,
               "pady": 10
             },
-            "label_active": {
-              "En": "Resolution Bandwidth",
-              "Fr": "Résolution Bandwidth",
-              "De": "Auflösung Bandwidth",
-              "Es": "Resolución Bandwidth"
+            "label": {
+              "active": {
+                "En": "Resolution Bandwidth",
+                "Fr": "Résolution Bandwidth",
+                "De": "Auflösung Bandwidth",
+                "Es": "Resolución Bandwidth"
+              }
             },
             "column_spacing": [
               10,
@@ -131,17 +133,19 @@
             "options": {
               "1": {
                 "value": "1",
-                "label_active": {
-                  "En": "Fast",
-                  "Fr": "Rapide",
-                  "De": "Schnell",
-                  "Es": "Rápido"
-                },
-                "label_inactive": {
-                  "En": "Fast",
-                  "Fr": "Rapide",
-                  "De": "Schnell",
-                  "Es": "Rápido"
+                "label": {
+                  "active": {
+                    "En": "Fast",
+                    "Fr": "Rapide",
+                    "De": "Schnell",
+                    "Es": "Rápido"
+                  },
+                  "inactive": {
+                    "En": "Fast",
+                    "Fr": "Rapide",
+                    "De": "Schnell",
+                    "Es": "Rápido"
+                  }
                 },
                 "description": {
                   "En": "Like a race car: fast sweep, low detail. Best for catching fleeting signals.",
@@ -154,17 +158,19 @@
               },
               "2": {
                 "value": "0.3",
-                "label_active": {
-                  "En": "Brisk",
-                  "Fr": "Vif",
-                  "De": "Flott",
-                  "Es": "Enérgico"
-                },
-                "label_inactive": {
-                  "En": "Brisk",
-                  "Fr": "Vif",
-                  "De": "Flott",
-                  "Es": "Enérgico"
+                "label": {
+                  "active": {
+                    "En": "Brisk",
+                    "Fr": "Vif",
+                    "De": "Flott",
+                    "Es": "Enérgico"
+                  },
+                  "inactive": {
+                    "En": "Brisk",
+                    "Fr": "Vif",
+                    "De": "Flott",
+                    "Es": "Enérgico"
+                  }
                 },
                 "description": {
                   "En": "A jog through the spectrum; quick enough to see the sights without missing much.",
@@ -177,17 +183,19 @@
               },
               "3": {
                 "value": "0.1",
-                "label_active": {
-                  "En": "Deliberate",
-                  "Fr": "Délibéré",
-                  "De": "Bedächtig",
-                  "Es": "Deliberado"
-                },
-                "label_inactive": {
-                  "En": "Deliberate",
-                  "Fr": "Délibéré",
-                  "De": "Bedächtig",
-                  "Es": "Deliberado"
+                "label": {
+                  "active": {
+                    "En": "Deliberate",
+                    "Fr": "Délibéré",
+                    "De": "Bedächtig",
+                    "Es": "Deliberado"
+                  },
+                  "inactive": {
+                    "En": "Deliberate",
+                    "Fr": "Délibéré",
+                    "De": "Bedächtig",
+                    "Es": "Deliberado"
+                  }
                 },
                 "description": {
                   "En": "The perfect balance of speed and fidelity. Not too fast, not too slow.",
@@ -200,17 +208,19 @@
               },
               "4": {
                 "value": "0.03",
-                "label_active": {
-                  "En": "Steady",
-                  "Fr": "Stable",
-                  "De": "Stabil",
-                  "Es": "Estable"
-                },
-                "label_inactive": {
-                  "En": "Steady",
-                  "Fr": "Stable",
-                  "De": "Stabil",
-                  "Es": "Estable"
+                "label": {
+                  "active": {
+                    "En": "Steady",
+                    "Fr": "Stable",
+                    "De": "Stabil",
+                    "Es": "Estable"
+                  },
+                  "inactive": {
+                    "En": "Steady",
+                    "Fr": "Stable",
+                    "De": "Stabil",
+                    "Es": "Estable"
+                  }
                 },
                 "description": {
                   "En": "A calm stroll, giving you time to appreciate the finer signal details.",
@@ -223,17 +233,19 @@
               },
               "5": {
                 "value": "0.01",
-                "label_active": {
-                  "En": "Leisurely",
-                  "Fr": "Leisurely",
-                  "De": "Leisurely",
-                  "Es": "Leisurely"
-                },
-                "label_inactive": {
-                  "En": "Leisurely",
-                  "Fr": "Leisurely",
-                  "De": "Leisurely",
-                  "Es": "Leisurely"
+                "label": {
+                  "active": {
+                    "En": "Leisurely",
+                    "Fr": "Leisurely",
+                    "De": "Leisurely",
+                    "Es": "Leisurely"
+                  },
+                  "inactive": {
+                    "En": "Leisurely",
+                    "Fr": "Leisurely",
+                    "De": "Leisurely",
+                    "Es": "Leisurely"
+                  }
                 },
                 "description": {
                   "En": "A slow saunter through the noise floor, where every waveform is a work of art.",
@@ -246,17 +258,19 @@
               },
               "6": {
                 "value": "0.003",
-                "label_active": {
-                  "En": "Unhurried",
-                  "Fr": "Unhurried",
-                  "De": "Unhurried",
-                  "Es": "Unhurried"
-                },
-                "label_inactive": {
-                  "En": "Unhurried",
-                  "Fr": "Unhurried",
-                  "De": "Unhurried",
-                  "Es": "Unhurried"
+                "label": {
+                  "active": {
+                    "En": "Unhurried",
+                    "Fr": "Unhurried",
+                    "De": "Unhurried",
+                    "Es": "Unhurried"
+                  },
+                  "inactive": {
+                    "En": "Unhurried",
+                    "Fr": "Unhurried",
+                    "De": "Unhurried",
+                    "Es": "Unhurried"
+                  }
                 },
                 "description": {
                   "En": "For the patient scientist. You'll see things nobody else can, but it'll take a while.",
@@ -269,17 +283,19 @@
               },
               "7": {
                 "value": "0.001",
-                "label_active": {
-                  "En": "Slothlike",
-                  "Fr": "Slothlike",
-                  "De": "Slothlike",
-                  "Es": "Slothlike"
-                },
-                "label_inactive": {
-                  "En": "Slothlike",
-                  "Fr": "Slothlike",
-                  "De": "Slothlike",
-                  "Es": "Slothlike"
+                "label": {
+                  "active": {
+                    "En": "Slothlike",
+                    "Fr": "Slothlike",
+                    "De": "Slothlike",
+                    "Es": "Slothlike"
+                  },
+                  "inactive": {
+                    "En": "Slothlike",
+                    "Fr": "Slothlike",
+                    "De": "Slothlike",
+                    "Es": "Slothlike"
+                  }
                 },
                 "description": {
                   "En": "So slow you can practically see the electrons move. The highest fidelity, but you'll miss any quick events.",
@@ -292,17 +308,19 @@
               },
               "8": {
                 "value": "0.0003",
-                "label_active": {
-                  "En": "Slothlike",
-                  "Fr": "Slothlike",
-                  "De": "Slothlike",
-                  "Es": "Slothlike"
-                },
-                "label_inactive": {
-                  "En": "Slothlike",
-                  "Fr": "Slothlike",
-                  "De": "Slothlike",
-                  "Es": "Slothlike"
+                "label": {
+                  "active": {
+                    "En": "Slothlike",
+                    "Fr": "Slothlike",
+                    "De": "Slothlike",
+                    "Es": "Slothlike"
+                  },
+                  "inactive": {
+                    "En": "Slothlike",
+                    "Fr": "Slothlike",
+                    "De": "Slothlike",
+                    "Es": "Slothlike"
+                  }
                 },
                 "description": {
                   "En": "So slow you can practically see the electrons move. The highest fidelity, but you'll miss any quick events.",
@@ -315,17 +333,19 @@
               },
               "UNSELECTED": {
                 "value": "NONE",
-                "label_active": {
-                  "En": "None Selected",
-                  "Fr": "Aucun sélectionné",
-                  "De": "Keine ausgewählt",
-                  "Es": "Ninguno seleccionado"
-                },
-                "label_inactive": {
-                  "En": "None Selected",
-                  "Fr": "Aucun sélectionné",
-                  "De": "Keine ausgewählt",
-                  "Es": "Ninguno seleccionado"
+                "label": {
+                  "active": {
+                    "En": "None Selected",
+                    "Fr": "Aucun sélectionné",
+                    "De": "Keine ausgewählt",
+                    "Es": "Ninguno seleccionado"
+                  },
+                  "inactive": {
+                    "En": "None Selected",
+                    "Fr": "Aucun sélectionné",
+                    "De": "Keine ausgewählt",
+                    "Es": "Ninguno seleccionado"
+                  }
                 },
                 "description": {
                   "En": "No resolution bandwidth option is currently selected.",
@@ -390,11 +410,13 @@
               "padx": 10,
               "pady": 10
             },
-            "label_active": {
-              "En": "Video Bandwidth",
-              "Fr": "Largeur de bande vidéo",
-              "De": "Videobandbreite",
-              "Es": "Ancho de banda de video"
+            "label": {
+              "active": {
+                "En": "Video Bandwidth",
+                "Fr": "Largeur de bande vidéo",
+                "De": "Videobandbreite",
+                "Es": "Ancho de banda de video"
+              }
             },
             "column_spacing": [
               10,
@@ -482,17 +504,19 @@
             "options": {
               "1": {
                 "value": "1000",
-                "label_active": {
-                  "En": "Ultra Fast",
-                  "Fr": "Ultra Rapide",
-                  "De": "Ultra Schnell",
-                  "Es": "Ultra Rápido"
-                },
-                "label_inactive": {
-                  "En": "Ultra Fast",
-                  "Fr": "Ultra Rapide",
-                  "De": "Ultra Schnell",
-                  "Es": "Ultra Rápido"
+                "label": {
+                  "active": {
+                    "En": "Ultra Fast",
+                    "Fr": "Ultra Rapide",
+                    "De": "Ultra Schnell",
+                    "Es": "Ultra Rápido"
+                  },
+                  "inactive": {
+                    "En": "Ultra Fast",
+                    "Fr": "Ultra Rapide",
+                    "De": "Ultra Schnell",
+                    "Es": "Ultra Rápido"
+                  }
                 },
                 "description": {
                   "En": "A lightning-fast sweep. Filters are wide open, letting everything through.",
@@ -505,17 +529,19 @@
               },
               "2": {
                 "value": "300",
-                "label_active": {
-                  "En": "Very Fast",
-                  "Fr": "Very Rapide",
-                  "De": "Very Schnell",
-                  "Es": "Very Rápido"
-                },
-                "label_inactive": {
-                  "En": "Very Fast",
-                  "Fr": "Very Rapide",
-                  "De": "Very Schnell",
-                  "Es": "Very Rápido"
+                "label": {
+                  "active": {
+                    "En": "Very Fast",
+                    "Fr": "Very Rapide",
+                    "De": "Very Schnell",
+                    "Es": "Very Rápido"
+                  },
+                  "inactive": {
+                    "En": "Very Fast",
+                    "Fr": "Very Rapide",
+                    "De": "Very Schnell",
+                    "Es": "Very Rápido"
+                  }
                 },
                 "description": {
                   "En": "A quick pass through the spectrum, ideal for fast-changing signals.",
@@ -528,17 +554,19 @@
               },
               "3": {
                 "value": "100",
-                "label_active": {
-                  "En": "Fast",
-                  "Fr": "Rapide",
-                  "De": "Schnell",
-                  "Es": "Rápido"
-                },
-                "label_inactive": {
-                  "En": "Fast",
-                  "Fr": "Rapide",
-                  "De": "Schnell",
-                  "Es": "Rápido"
+                "label": {
+                  "active": {
+                    "En": "Fast",
+                    "Fr": "Rapide",
+                    "De": "Schnell",
+                    "Es": "Rápido"
+                  },
+                  "inactive": {
+                    "En": "Fast",
+                    "Fr": "Rapide",
+                    "De": "Schnell",
+                    "Es": "Rápido"
+                  }
                 },
                 "description": {
                   "En": "A balanced speed for general purpose monitoring and signal capture.",
@@ -551,17 +579,19 @@
               },
               "4": {
                 "value": "30",
-                "label_active": {
-                  "En": "Normal",
-                  "Fr": "Normal",
-                  "De": "Normal",
-                  "Es": "Normal"
-                },
-                "label_inactive": {
-                  "En": "Normal",
-                  "Fr": "Normal",
-                  "De": "Normal",
-                  "Es": "Normal"
+                "label": {
+                  "active": {
+                    "En": "Normal",
+                    "Fr": "Normal",
+                    "De": "Normal",
+                    "Es": "Normal"
+                  },
+                  "inactive": {
+                    "En": "Normal",
+                    "Fr": "Normal",
+                    "De": "Normal",
+                    "Es": "Normal"
+                  }
                 },
                 "description": {
                   "En": "The standard filter setting for most common analysis tasks. Not too much, not too little.",
@@ -574,17 +604,19 @@
               },
               "5": {
                 "value": "10",
-                "label_active": {
-                  "En": "Slow",
-                  "Fr": "Lent",
-                  "De": "Langsam",
-                  "Es": "Lento"
-                },
-                "label_inactive": {
-                  "En": "Slow",
-                  "Fr": "Lent",
-                  "De": "Langsam",
-                  "Es": "Lento"
+                "label": {
+                  "active": {
+                    "En": "Slow",
+                    "Fr": "Lent",
+                    "De": "Langsam",
+                    "Es": "Lento"
+                  },
+                  "inactive": {
+                    "En": "Slow",
+                    "Fr": "Lent",
+                    "De": "Langsam",
+                    "Es": "Lento"
+                  }
                 },
                 "description": {
                   "En": "A gentle filter, giving you more time to appreciate the finer details of a waveform.",
@@ -597,17 +629,19 @@
               },
               "6": {
                 "value": "3",
-                "label_active": {
-                  "En": "Very Slow",
-                  "Fr": "Very Lent",
-                  "De": "Very Langsam",
-                  "Es": "Very Lento"
-                },
-                "label_inactive": {
-                  "En": "Very Slow",
-                  "Fr": "Very Lent",
-                  "De": "Very Langsam",
-                  "Es": "Very Lento"
+                "label": {
+                  "active": {
+                    "En": "Very Slow",
+                    "Fr": "Very Lent",
+                    "De": "Very Langsam",
+                    "Es": "Very Lento"
+                  },
+                  "inactive": {
+                    "En": "Very Slow",
+                    "Fr": "Very Lent",
+                    "De": "Very Langsam",
+                    "Es": "Very Lento"
+                  }
                 },
                 "description": {
                   "En": "For the meticulous scientist. You'll filter out fast noise and jitter, but at the cost of speed.",
@@ -620,17 +654,19 @@
               },
               "7": {
                 "value": "1",
-                "label_active": {
-                  "En": "Ultra Slow",
-                  "Fr": "Ultra Lent",
-                  "De": "Ultra Langsam",
-                  "Es": "Ultra Lento"
-                },
-                "label_inactive": {
-                  "En": "Ultra Slow",
-                  "Fr": "Ultra Lent",
-                  "De": "Ultra Langsam",
-                  "Es": "Ultra Lento"
+                "label": {
+                  "active": {
+                    "En": "Ultra Slow",
+                    "Fr": "Ultra Lent",
+                    "De": "Ultra Langsam",
+                    "Es": "Ultra Lento"
+                  },
+                  "inactive": {
+                    "En": "Ultra Slow",
+                    "Fr": "Ultra Lent",
+                    "De": "Ultra Langsam",
+                    "Es": "Ultra Lento"
+                  }
                 },
                 "description": {
                   "En": "A meditative pace. So slow you can practically see the electrons move, offering maximum stability and noise reduction.",
@@ -643,17 +679,19 @@
               },
               "8": {
                 "value": "0.3",
-                "label_active": {
-                  "En": "Glacial",
-                  "Fr": "Glacial",
-                  "De": "Glazial",
-                  "Es": "Glacial"
-                },
-                "label_inactive": {
-                  "En": "Glacial",
-                  "Fr": "Glacial",
-                  "De": "Glazial",
-                  "Es": "Glacial"
+                "label": {
+                  "active": {
+                    "En": "Glacial",
+                    "Fr": "Glacial",
+                    "De": "Glazial",
+                    "Es": "Glacial"
+                  },
+                  "inactive": {
+                    "En": "Glacial",
+                    "Fr": "Glacial",
+                    "De": "Glazial",
+                    "Es": "Glacial"
+                  }
                 },
                 "description": {
                   "En": "A slow crawl. Good for very detailed analysis of continuous signals and filtering out transient noise.",
@@ -666,17 +704,19 @@
               },
               "9": {
                 "value": "0.1",
-                "label_active": {
-                  "En": "Glacial",
-                  "Fr": "Glacial",
-                  "De": "Glazial",
-                  "Es": "Glacial"
-                },
-                "label_inactive": {
-                  "En": "Glacial",
-                  "Fr": "Glacial",
-                  "De": "Glazial",
-                  "Es": "Glacial"
+                "label": {
+                  "active": {
+                    "En": "Glacial",
+                    "Fr": "Glacial",
+                    "De": "Glazial",
+                    "Es": "Glacial"
+                  },
+                  "inactive": {
+                    "En": "Glacial",
+                    "Fr": "Glacial",
+                    "De": "Glazial",
+                    "Es": "Glacial"
+                  }
                 },
                 "description": {
                   "En": "A slow crawl. Good for very detailed analysis of continuous signals and filtering out transient noise.",
@@ -689,17 +729,19 @@
               },
               "10": {
                 "value": "0.03",
-                "label_active": {
-                  "En": "Sub-Glacial",
-                  "Fr": "Sub-Glacial",
-                  "De": "Sub-Glazial",
-                  "Es": "Sub-Glacial"
-                },
-                "label_inactive": {
-                  "En": "Sub-Glacial",
-                  "Fr": "Sub-Glacial",
-                  "De": "Sub-Glazial",
-                  "Es": "Sub-Glacial"
+                "label": {
+                  "active": {
+                    "En": "Sub-Glacial",
+                    "Fr": "Sub-Glacial",
+                    "De": "Sub-Glazial",
+                    "Es": "Sub-Glacial"
+                  },
+                  "inactive": {
+                    "En": "Sub-Glacial",
+                    "Fr": "Sub-Glacial",
+                    "De": "Sub-Glazial",
+                    "Es": "Sub-Glacial"
+                  }
                 },
                 "description": {
                   "En": "The scanner cries, but it's worth it. Filters out almost all random noise, giving you a crystal-clear, steady line.",
@@ -712,17 +754,19 @@
               },
               "11": {
                 "value": "0.01",
-                "label_active": {
-                  "En": "Sub-Glacial",
-                  "Fr": "Sub-Glacial",
-                  "De": "Sub-Glazial",
-                  "Es": "Sub-Glacial"
-                },
-                "label_inactive": {
-                  "En": "Sub-Glacial",
-                  "Fr": "Sub-Glacial",
-                  "De": "Sub-Glazial",
-                  "Es": "Sub-Glacial"
+                "label": {
+                  "active": {
+                    "En": "Sub-Glacial",
+                    "Fr": "Sub-Glacial",
+                    "De": "Sub-Glazial",
+                    "Es": "Sub-Glacial"
+                  },
+                  "inactive": {
+                    "En": "Sub-Glacial",
+                    "Fr": "Sub-Glacial",
+                    "De": "Sub-Glazial",
+                    "Es": "Sub-Glacial"
+                  }
                 },
                 "description": {
                   "En": "The scanner cries, but it's worth it. Filters out almost all random noise, giving you a crystal-clear, steady line.",
@@ -735,17 +779,19 @@
               },
               "12": {
                 "value": "0.003",
-                "label_active": {
-                  "En": "Crazy Slow",
-                  "Fr": "Extrêmement lent",
-                  "De": "Wahnsinnig langsam",
-                  "Es": "Locamente lento"
-                },
-                "label_inactive": {
-                  "En": "Crazy Slow",
-                  "Fr": "Extrêmement lent",
-                  "De": "Wahnsinnig langsam",
-                  "Es": "Locamente lento"
+                "label": {
+                  "active": {
+                    "En": "Crazy Slow",
+                    "Fr": "Extrêmement lent",
+                    "De": "Wahnsinnig langsam",
+                    "Es": "Locamente lento"
+                  },
+                  "inactive": {
+                    "En": "Crazy Slow",
+                    "Fr": "Extrêmement lent",
+                    "De": "Wahnsinnig langsam",
+                    "Es": "Locamente lento"
+                  }
                 },
                 "description": {
                   "En": "Time seems to stop. For the most patient scientists and signals with incredible stability. The ultimate low-pass filter.",
@@ -758,17 +804,19 @@
               },
               "13": {
                 "value": "0.001",
-                "label_active": {
-                  "En": "Crazy Slow",
-                  "Fr": "Extrêmement lent",
-                  "De": "Wahnsinnig langsam",
-                  "Es": "Locamente lento"
-                },
-                "label_inactive": {
-                  "En": "Crazy Slow",
-                  "Fr": "Extrêmement lent",
-                  "De": "Wahnsinnig langsam",
-                  "Es": "Locamente lento"
+                "label": {
+                  "active": {
+                    "En": "Crazy Slow",
+                    "Fr": "Extrêmement lent",
+                    "De": "Wahnsinnig langsam",
+                    "Es": "Locamente lento"
+                  },
+                  "inactive": {
+                    "En": "Crazy Slow",
+                    "Fr": "Extrêmement lent",
+                    "De": "Wahnsinnig langsam",
+                    "Es": "Locamente lento"
+                  }
                 },
                 "description": {
                   "En": "Time seems to stop. For the most patient scientists and signals with incredible stability. The ultimate low-pass filter.",
@@ -781,17 +829,19 @@
               },
               "UNSELECTED": {
                 "value": "NONE",
-                "label_active": {
-                  "En": "None Selected",
-                  "Fr": "Aucun sélectionné",
-                  "De": "Keine ausgewählt",
-                  "Es": "Ninguno seleccionado"
-                },
-                "label_inactive": {
-                  "En": "None Selected",
-                  "Fr": "Aucun sélectionné",
-                  "De": "Keine ausgewählt",
-                  "Es": "Ninguno seleccionado"
+                "label": {
+                  "active": {
+                    "En": "None Selected",
+                    "Fr": "Aucun sélectionné",
+                    "De": "Keine ausgewählt",
+                    "Es": "Ninguno seleccionado"
+                  },
+                  "inactive": {
+                    "En": "None Selected",
+                    "Fr": "Aucun sélectionné",
+                    "De": "Keine ausgewählt",
+                    "Es": "Ninguno seleccionado"
+                  }
                 },
                 "description": {
                   "En": "No video bandwidth option is currently selected.",
@@ -816,17 +866,19 @@
           },
           "VBW_Automatic": {
             "type": "_GuiButtonToggle",
-            "label_active": {
-              "En": "VBW Auto On",
-              "Fr": "VBW Auto On",
-              "De": "VBW Auto On",
-              "Es": "VBW Auto On"
-            },
-            "label_inactive": {
-              "En": "VBW Auto On",
-              "Fr": "VBW Auto On",
-              "De": "VBW Auto On",
-              "Es": "VBW Auto On"
+            "label": {
+              "active": {
+                "En": "VBW Auto On",
+                "Fr": "VBW Auto On",
+                "De": "VBW Auto On",
+                "Es": "VBW Auto On"
+              },
+              "inactive": {
+                "En": "VBW Auto On",
+                "Fr": "VBW Auto On",
+                "De": "VBW Auto On",
+                "Es": "VBW Auto On"
+              }
             },
             "AES70": "OcaBooleanActuator",
             "handler": "toggle_vbw_auto",
@@ -858,32 +910,36 @@
             },
             "options": {
               "ON": {
-                "label_active": {
-                  "En": "Auto ON",
-                  "Fr": "Auto ACTIVÉ",
-                  "De": "Auto AN",
-                  "Es": "Auto ACTIVADO"
-                },
-                "label_inactive": {
-                  "En": "Auto ON",
-                  "Fr": "Auto ACTIVÉ",
-                  "De": "Auto AN",
-                  "Es": "Auto ACTIVADO"
+                "label": {
+                  "active": {
+                    "En": "Auto ON",
+                    "Fr": "Auto ACTIVÉ",
+                    "De": "Auto AN",
+                    "Es": "Auto ACTIVADO"
+                  },
+                  "inactive": {
+                    "En": "Auto ON",
+                    "Fr": "Auto ACTIVÉ",
+                    "De": "Auto AN",
+                    "Es": "Auto ACTIVADO"
+                  }
                 },
                 "selected": true
               },
               "OFF": {
-                "label_active": {
-                  "En": "Auto OFF",
-                  "Fr": "Auto OFF",
-                  "De": "Auto AUS",
-                  "Es": "Auto DES"
-                },
-                "label_inactive": {
-                  "En": "Auto OFF",
-                  "Fr": "Auto OFF",
-                  "De": "Auto AUS",
-                  "Es": "Auto DES"
+                "label": {
+                  "active": {
+                    "En": "Auto OFF",
+                    "Fr": "Auto OFF",
+                    "De": "Auto AUS",
+                    "Es": "Auto DES"
+                  },
+                  "inactive": {
+                    "En": "Auto OFF",
+                    "Fr": "Auto OFF",
+                    "De": "Auto AUS",
+                    "Es": "Auto DES"
+                  }
                 },
                 "selected": false
               }
@@ -944,17 +1000,19 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "Sweep Time",
-              "Fr": "Temps de balayage",
-              "De": "Wobbelzeit",
-              "Es": "Tiempo de barrido"
-            },
-            "label_inactive": {
-              "En": "Sweep Time",
-              "Fr": "Temps de balayage",
-              "De": "Wobbelzeit",
-              "Es": "Tiempo de barrido"
+            "label": {
+              "active": {
+                "En": "Sweep Time",
+                "Fr": "Temps de balayage",
+                "De": "Wobbelzeit",
+                "Es": "Tiempo de barrido"
+              },
+              "inactive": {
+                "En": "Sweep Time",
+                "Fr": "Temps de balayage",
+                "De": "Wobbelzeit",
+                "Es": "Tiempo de barrido"
+              }
             },
             "handler": "set_sweep_time",
             "yak_handler": {

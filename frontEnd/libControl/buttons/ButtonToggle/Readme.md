@@ -70,11 +70,15 @@ in the property editor.
       "is_read_only": false,
       "options": {
         "ON": {
-          "label_active": "MUTED",
+          "label": {
+            "active": "MUTED"
+          },
           "selected": false
         },
         "OFF": {
-          "label_inactive": "LIVE",
+          "label": {
+            "inactive": "LIVE"
+          },
           "selected": true
         }
       }
@@ -97,7 +101,10 @@ in the property editor.
       "bold",
       "italic"
     ],
-    "style_states": ["active", "inactive"],
+    "style_states": [
+      "active",
+      "inactive"
+    ],
     "style_params": "style.active and style.inactive carry the SAME params: font_style, font_size, text_color, bg_color, border_color, border_thickness, glow_intensity."
   }
 }

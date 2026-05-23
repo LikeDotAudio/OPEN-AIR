@@ -13,11 +13,13 @@
     "blocks": {
       "elements1": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Download Progress",
-          "Fr": "Download Progress",
-          "De": "Download Progress",
-          "Es": "Download Progress"
+        "label": {
+          "active": {
+            "En": "Download Progress",
+            "Fr": "Download Progress",
+            "De": "Download Progress",
+            "Es": "Download Progress"
+          }
         },
         "fields": {
           "examplefields": {
@@ -54,11 +56,13 @@
       },
       "elements2": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Voltage Indicator",
-          "Fr": "Voltage Indicator",
-          "De": "Voltage Indicator",
-          "Es": "Voltage Indicator"
+        "label": {
+          "active": {
+            "En": "Voltage Indicator",
+            "Fr": "Voltage Indicator",
+            "De": "Voltage Indicator",
+            "Es": "Voltage Indicator"
+          }
         },
         "fields": {
           "examplefields": {
@@ -96,11 +100,13 @@
       },
       "elements3": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "System Load",
-          "Fr": "System Charger",
-          "De": "System Laden",
-          "Es": "System Cargar"
+        "label": {
+          "active": {
+            "En": "System Load",
+            "Fr": "System Charger",
+            "De": "System Laden",
+            "Es": "System Cargar"
+          }
         },
         "fields": {
           "examplefields": {
@@ -113,11 +119,13 @@
             "value": {
               "default_value": 750
             },
-            "label_active": {
-              "En": "System Load",
-              "Fr": "System Charger",
-              "De": "System Laden",
-              "Es": "System Cargar"
+            "label": {
+              "active": {
+                "En": "System Load",
+                "Fr": "System Charger",
+                "De": "System Laden",
+                "Es": "System Cargar"
+              }
             },
             "notes": "A progress bar indicating system load."
           }
@@ -125,11 +133,13 @@
       },
       "elements4": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Temperature Sensor",
-          "Fr": "Temperature Sensor",
-          "De": "Temperature Sensor",
-          "Es": "Temperature Sensor"
+        "label": {
+          "active": {
+            "En": "Temperature Sensor",
+            "Fr": "Temperature Sensor",
+            "De": "Temperature Sensor",
+            "Es": "Temperature Sensor"
+          }
         },
         "fields": {
           "examplefields": {
@@ -142,11 +152,13 @@
             "value": {
               "default_value": 18.2
             },
-            "label_active": {
-              "En": "Temperature Sensor",
-              "Fr": "Temperature Sensor",
-              "De": "Temperature Sensor",
-              "Es": "Temperature Sensor"
+            "label": {
+              "active": {
+                "En": "Temperature Sensor",
+                "Fr": "Temperature Sensor",
+                "De": "Temperature Sensor",
+                "Es": "Temperature Sensor"
+              }
             },
             "notes": "Displays temperature within a specific range."
           }
@@ -154,11 +166,13 @@
       },
       "elements5": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Initialization Steps",
-          "Fr": "Initialization Steps",
-          "De": "Initialization Steps",
-          "Es": "Initialization Steps"
+        "label": {
+          "active": {
+            "En": "Initialization Steps",
+            "Fr": "Initialization Steps",
+            "De": "Initialization Steps",
+            "Es": "Initialization Steps"
+          }
         },
         "fields": {
           "examplefields": {
@@ -171,11 +185,13 @@
             "value": {
               "default_value": 40
             },
-            "label_active": {
-              "En": "Initialization Steps",
-              "Fr": "Initialization Steps",
-              "De": "Initialization Steps",
-              "Es": "Initialization Steps"
+            "label": {
+              "active": {
+                "En": "Initialization Steps",
+                "Fr": "Initialization Steps",
+                "De": "Initialization Steps",
+                "Es": "Initialization Steps"
+              }
             },
             "notes": "Progress bar tracking steps in an initialization process."
           }

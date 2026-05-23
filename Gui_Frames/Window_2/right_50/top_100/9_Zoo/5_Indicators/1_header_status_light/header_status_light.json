@@ -13,11 +13,13 @@
     "blocks": {
       "elements": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Header Status Light",
-          "Fr": "Header Statut Light",
-          "De": "Header Status Light",
-          "Es": "Header Estado Light"
+        "label": {
+          "active": {
+            "En": "Header Status Light",
+            "Fr": "Header Statut Light",
+            "De": "Header Status Light",
+            "Es": "Header Estado Light"
+          }
         },
         "fields": {
           "examplefields": {

@@ -13,11 +13,13 @@
     "blocks": {
       "elements1": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Gui Label 01 Status",
-          "Fr": "Gui Étiquette 01 Statut",
-          "De": "Gui Beschriftung 01 Status",
-          "Es": "Gui Etiqueta 01 Estado"
+        "label": {
+          "active": {
+            "En": "Gui Label 01 Status",
+            "Fr": "Gui Étiquette 01 Statut",
+            "De": "Gui Beschriftung 01 Status",
+            "Es": "Gui Etiqueta 01 Estado"
+          }
         },
         "fields": {
           "examplefields": {
@@ -48,11 +50,13 @@
       },
       "elements2": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Gui Label 02 Temperature",
-          "Fr": "Gui Étiquette 02 Temperature",
-          "De": "Gui Beschriftung 02 Temperature",
-          "Es": "Gui Etiqueta 02 Temperature"
+        "label": {
+          "active": {
+            "En": "Gui Label 02 Temperature",
+            "Fr": "Gui Étiquette 02 Temperature",
+            "De": "Gui Beschriftung 02 Temperature",
+            "Es": "Gui Etiqueta 02 Temperature"
+          }
         },
         "fields": {
           "examplefields": {
@@ -84,11 +88,13 @@
       },
       "elements3": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Gui Label 03 Count",
-          "Fr": "Gui Étiquette 03 Count",
-          "De": "Gui Beschriftung 03 Count",
-          "Es": "Gui Etiqueta 03 Count"
+        "label": {
+          "active": {
+            "En": "Gui Label 03 Count",
+            "Fr": "Gui Étiquette 03 Count",
+            "De": "Gui Beschriftung 03 Count",
+            "Es": "Gui Etiqueta 03 Count"
+          }
         },
         "fields": {
           "examplefields": {
@@ -113,11 +119,13 @@
       },
       "elements4": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Gui Label 04 Connection",
-          "Fr": "Gui Étiquette 04 Connection",
-          "De": "Gui Beschriftung 04 Connection",
-          "Es": "Gui Etiqueta 04 Connection"
+        "label": {
+          "active": {
+            "En": "Gui Label 04 Connection",
+            "Fr": "Gui Étiquette 04 Connection",
+            "De": "Gui Beschriftung 04 Connection",
+            "Es": "Gui Etiqueta 04 Connection"
+          }
         },
         "fields": {
           "examplefields": {
@@ -142,11 +150,13 @@
       },
       "elements5": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Gui Label 05 Time Elapsed",
-          "Fr": "Gui Étiquette 05 Heure Elapsed",
-          "De": "Gui Beschriftung 05 Zeit Elapsed",
-          "Es": "Gui Etiqueta 05 Hora Elapsed"
+        "label": {
+          "active": {
+            "En": "Gui Label 05 Time Elapsed",
+            "Fr": "Gui Étiquette 05 Heure Elapsed",
+            "De": "Gui Beschriftung 05 Zeit Elapsed",
+            "Es": "Gui Etiqueta 05 Hora Elapsed"
+          }
         },
         "fields": {
           "examplefields": {

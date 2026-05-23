@@ -13,21 +13,25 @@
     "blocks": {
       "Blinky_Winky_100_Demo": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "100 Blinky Winky Buttons",
-          "Fr": "100 Blinky Obturateury Buttons",
-          "De": "100 Blinky Verschlussy Buttons",
-          "Es": "100 Blinky Obturadory Buttons"
+        "label": {
+          "active": {
+            "En": "100 Blinky Winky Buttons",
+            "Fr": "100 Blinky Obturateury Buttons",
+            "De": "100 Blinky Verschlussy Buttons",
+            "Es": "100 Blinky Obturadory Buttons"
+          }
         },
         "layout_columns": 10,
         "fields": {
           "Wink_001": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B1",
-              "Fr": "B1",
-              "De": "B1",
-              "Es": "B1"
+            "label": {
+              "active": {
+                "En": "B1",
+                "Fr": "B1",
+                "De": "B1",
+                "Es": "B1"
+              }
             },
             "path": "audio/wink/demo_001",
             "color": "#00FF00",
@@ -40,11 +44,13 @@
           },
           "Wink_002": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B2",
-              "Fr": "B2",
-              "De": "B2",
-              "Es": "B2"
+            "label": {
+              "active": {
+                "En": "B2",
+                "Fr": "B2",
+                "De": "B2",
+                "Es": "B2"
+              }
             },
             "path": "audio/wink/demo_002",
             "color": "#0000FF",
@@ -57,11 +63,13 @@
           },
           "Wink_003": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B3",
-              "Fr": "B3",
-              "De": "B3",
-              "Es": "B3"
+            "label": {
+              "active": {
+                "En": "B3",
+                "Fr": "B3",
+                "De": "B3",
+                "Es": "B3"
+              }
             },
             "path": "audio/wink/demo_003",
             "color": "#FFFF00",
@@ -74,11 +82,13 @@
           },
           "Wink_004": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B4",
-              "Fr": "B4",
-              "De": "B4",
-              "Es": "B4"
+            "label": {
+              "active": {
+                "En": "B4",
+                "Fr": "B4",
+                "De": "B4",
+                "Es": "B4"
+              }
             },
             "path": "audio/wink/demo_004",
             "color": "#00FFFF",
@@ -91,11 +101,13 @@
           },
           "Wink_005": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B5",
-              "Fr": "B5",
-              "De": "B5",
-              "Es": "B5"
+            "label": {
+              "active": {
+                "En": "B5",
+                "Fr": "B5",
+                "De": "B5",
+                "Es": "B5"
+              }
             },
             "path": "audio/wink/demo_005",
             "color": "#FF00FF",
@@ -108,11 +120,13 @@
           },
           "Wink_006": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B6",
-              "Fr": "B6",
-              "De": "B6",
-              "Es": "B6"
+            "label": {
+              "active": {
+                "En": "B6",
+                "Fr": "B6",
+                "De": "B6",
+                "Es": "B6"
+              }
             },
             "path": "audio/wink/demo_006",
             "color": "#FFA500",
@@ -125,11 +139,13 @@
           },
           "Wink_007": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B7",
-              "Fr": "B7",
-              "De": "B7",
-              "Es": "B7"
+            "label": {
+              "active": {
+                "En": "B7",
+                "Fr": "B7",
+                "De": "B7",
+                "Es": "B7"
+              }
             },
             "path": "audio/wink/demo_007",
             "color": "#800080",
@@ -142,11 +158,13 @@
           },
           "Wink_008": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B8",
-              "Fr": "B8",
-              "De": "B8",
-              "Es": "B8"
+            "label": {
+              "active": {
+                "En": "B8",
+                "Fr": "B8",
+                "De": "B8",
+                "Es": "B8"
+              }
             },
             "path": "audio/wink/demo_008",
             "color": "#008080",
@@ -159,11 +177,13 @@
           },
           "Wink_009": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B9",
-              "Fr": "B9",
-              "De": "B9",
-              "Es": "B9"
+            "label": {
+              "active": {
+                "En": "B9",
+                "Fr": "B9",
+                "De": "B9",
+                "Es": "B9"
+              }
             },
             "path": "audio/wink/demo_009",
             "color": "#FFC0CB",
@@ -176,11 +196,13 @@
           },
           "Wink_010": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B10",
-              "Fr": "B10",
-              "De": "B10",
-              "Es": "B10"
+            "label": {
+              "active": {
+                "En": "B10",
+                "Fr": "B10",
+                "De": "B10",
+                "Es": "B10"
+              }
             },
             "path": "audio/wink/demo_010",
             "color": "#FFFFFF",
@@ -193,11 +215,13 @@
           },
           "Wink_011": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B11",
-              "Fr": "B11",
-              "De": "B11",
-              "Es": "B11"
+            "label": {
+              "active": {
+                "En": "B11",
+                "Fr": "B11",
+                "De": "B11",
+                "Es": "B11"
+              }
             },
             "path": "audio/wink/demo_011",
             "color": "#FFD700",
@@ -210,11 +234,13 @@
           },
           "Wink_012": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B12",
-              "Fr": "B12",
-              "De": "B12",
-              "Es": "B12"
+            "label": {
+              "active": {
+                "En": "B12",
+                "Fr": "B12",
+                "De": "B12",
+                "Es": "B12"
+              }
             },
             "path": "audio/wink/demo_012",
             "color": "#FF0000",
@@ -227,11 +253,13 @@
           },
           "Wink_013": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B13",
-              "Fr": "B13",
-              "De": "B13",
-              "Es": "B13"
+            "label": {
+              "active": {
+                "En": "B13",
+                "Fr": "B13",
+                "De": "B13",
+                "Es": "B13"
+              }
             },
             "path": "audio/wink/demo_013",
             "color": "#00FF00",
@@ -245,11 +273,13 @@
           },
           "Wink_014": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B14",
-              "Fr": "B14",
-              "De": "B14",
-              "Es": "B14"
+            "label": {
+              "active": {
+                "En": "B14",
+                "Fr": "B14",
+                "De": "B14",
+                "Es": "B14"
+              }
             },
             "path": "audio/wink/demo_014",
             "color": "#0000FF",
@@ -262,11 +292,13 @@
           },
           "Wink_015": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B15",
-              "Fr": "B15",
-              "De": "B15",
-              "Es": "B15"
+            "label": {
+              "active": {
+                "En": "B15",
+                "Fr": "B15",
+                "De": "B15",
+                "Es": "B15"
+              }
             },
             "path": "audio/wink/demo_015",
             "color": "#FFFF00",
@@ -279,11 +311,13 @@
           },
           "Wink_016": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B16",
-              "Fr": "B16",
-              "De": "B16",
-              "Es": "B16"
+            "label": {
+              "active": {
+                "En": "B16",
+                "Fr": "B16",
+                "De": "B16",
+                "Es": "B16"
+              }
             },
             "path": "audio/wink/demo_016",
             "color": "#00FFFF",
@@ -296,11 +330,13 @@
           },
           "Wink_017": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B17",
-              "Fr": "B17",
-              "De": "B17",
-              "Es": "B17"
+            "label": {
+              "active": {
+                "En": "B17",
+                "Fr": "B17",
+                "De": "B17",
+                "Es": "B17"
+              }
             },
             "path": "audio/wink/demo_017",
             "color": "#FF00FF",
@@ -313,11 +349,13 @@
           },
           "Wink_018": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B18",
-              "Fr": "B18",
-              "De": "B18",
-              "Es": "B18"
+            "label": {
+              "active": {
+                "En": "B18",
+                "Fr": "B18",
+                "De": "B18",
+                "Es": "B18"
+              }
             },
             "path": "audio/wink/demo_018",
             "color": "#FFA500",
@@ -330,11 +368,13 @@
           },
           "Wink_019": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B19",
-              "Fr": "B19",
-              "De": "B19",
-              "Es": "B19"
+            "label": {
+              "active": {
+                "En": "B19",
+                "Fr": "B19",
+                "De": "B19",
+                "Es": "B19"
+              }
             },
             "path": "audio/wink/demo_019",
             "color": "#800080",
@@ -347,11 +387,13 @@
           },
           "Wink_020": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B20",
-              "Fr": "B20",
-              "De": "B20",
-              "Es": "B20"
+            "label": {
+              "active": {
+                "En": "B20",
+                "Fr": "B20",
+                "De": "B20",
+                "Es": "B20"
+              }
             },
             "path": "audio/wink/demo_020",
             "color": "#FFFFFF",
@@ -364,11 +406,13 @@
           },
           "Wink_021": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B21",
-              "Fr": "B21",
-              "De": "B21",
-              "Es": "B21"
+            "label": {
+              "active": {
+                "En": "B21",
+                "Fr": "B21",
+                "De": "B21",
+                "Es": "B21"
+              }
             },
             "path": "audio/wink/demo_021",
             "color": "#FFC0CB",
@@ -381,11 +425,13 @@
           },
           "Wink_022": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B22",
-              "Fr": "B22",
-              "De": "B22",
-              "Es": "B22"
+            "label": {
+              "active": {
+                "En": "B22",
+                "Fr": "B22",
+                "De": "B22",
+                "Es": "B22"
+              }
             },
             "path": "audio/wink/demo_022",
             "color": "#39FF14",
@@ -398,11 +444,13 @@
           },
           "Wink_023": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B23",
-              "Fr": "B23",
-              "De": "B23",
-              "Es": "B23"
+            "label": {
+              "active": {
+                "En": "B23",
+                "Fr": "B23",
+                "De": "B23",
+                "Es": "B23"
+              }
             },
             "path": "audio/wink/demo_023",
             "color": "#FFD700",
@@ -415,11 +463,13 @@
           },
           "Wink_024": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B24",
-              "Fr": "B24",
-              "De": "B24",
-              "Es": "B24"
+            "label": {
+              "active": {
+                "En": "B24",
+                "Fr": "B24",
+                "De": "B24",
+                "Es": "B24"
+              }
             },
             "path": "audio/wink/demo_024",
             "color": "#FF0000",
@@ -432,11 +482,13 @@
           },
           "Wink_025": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B25",
-              "Fr": "B25",
-              "De": "B25",
-              "Es": "B25"
+            "label": {
+              "active": {
+                "En": "B25",
+                "Fr": "B25",
+                "De": "B25",
+                "Es": "B25"
+              }
             },
             "path": "audio/wink/demo_025",
             "color": "#00FF00",
@@ -449,11 +501,13 @@
           },
           "Wink_026": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B26",
-              "Fr": "B26",
-              "De": "B26",
-              "Es": "B26"
+            "label": {
+              "active": {
+                "En": "B26",
+                "Fr": "B26",
+                "De": "B26",
+                "Es": "B26"
+              }
             },
             "path": "audio/wink/demo_026",
             "color": "#0000FF",
@@ -467,11 +521,13 @@
           },
           "Wink_027": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B27",
-              "Fr": "B27",
-              "De": "B27",
-              "Es": "B27"
+            "label": {
+              "active": {
+                "En": "B27",
+                "Fr": "B27",
+                "De": "B27",
+                "Es": "B27"
+              }
             },
             "path": "audio/wink/demo_027",
             "color": "#FFFF00",
@@ -484,11 +540,13 @@
           },
           "Wink_028": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B28",
-              "Fr": "B28",
-              "De": "B28",
-              "Es": "B28"
+            "label": {
+              "active": {
+                "En": "B28",
+                "Fr": "B28",
+                "De": "B28",
+                "Es": "B28"
+              }
             },
             "path": "audio/wink/demo_028",
             "color": "#00FFFF",
@@ -501,11 +559,13 @@
           },
           "Wink_029": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B29",
-              "Fr": "B29",
-              "De": "B29",
-              "Es": "B29"
+            "label": {
+              "active": {
+                "En": "B29",
+                "Fr": "B29",
+                "De": "B29",
+                "Es": "B29"
+              }
             },
             "path": "audio/wink/demo_029",
             "color": "#FF00FF",
@@ -518,11 +578,13 @@
           },
           "Wink_030": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B30",
-              "Fr": "B30",
-              "De": "B30",
-              "Es": "B30"
+            "label": {
+              "active": {
+                "En": "B30",
+                "Fr": "B30",
+                "De": "B30",
+                "Es": "B30"
+              }
             },
             "path": "audio/wink/demo_030",
             "color": "#FFFFFF",
@@ -535,11 +597,13 @@
           },
           "Wink_031": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B31",
-              "Fr": "B31",
-              "De": "B31",
-              "Es": "B31"
+            "label": {
+              "active": {
+                "En": "B31",
+                "Fr": "B31",
+                "De": "B31",
+                "Es": "B31"
+              }
             },
             "path": "audio/wink/demo_031",
             "color": "#800080",
@@ -552,11 +616,13 @@
           },
           "Wink_032": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B32",
-              "Fr": "B32",
-              "De": "B32",
-              "Es": "B32"
+            "label": {
+              "active": {
+                "En": "B32",
+                "Fr": "B32",
+                "De": "B32",
+                "Es": "B32"
+              }
             },
             "path": "audio/wink/demo_032",
             "color": "#008080",
@@ -569,11 +635,13 @@
           },
           "Wink_033": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B33",
-              "Fr": "B33",
-              "De": "B33",
-              "Es": "B33"
+            "label": {
+              "active": {
+                "En": "B33",
+                "Fr": "B33",
+                "De": "B33",
+                "Es": "B33"
+              }
             },
             "path": "audio/wink/demo_033",
             "color": "#FFC0CB",
@@ -586,11 +654,13 @@
           },
           "Wink_034": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B34",
-              "Fr": "B34",
-              "De": "B34",
-              "Es": "B34"
+            "label": {
+              "active": {
+                "En": "B34",
+                "Fr": "B34",
+                "De": "B34",
+                "Es": "B34"
+              }
             },
             "path": "audio/wink/demo_034",
             "color": "#39FF14",
@@ -603,11 +673,13 @@
           },
           "Wink_035": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B35",
-              "Fr": "B35",
-              "De": "B35",
-              "Es": "B35"
+            "label": {
+              "active": {
+                "En": "B35",
+                "Fr": "B35",
+                "De": "B35",
+                "Es": "B35"
+              }
             },
             "path": "audio/wink/demo_035",
             "color": "#FFD700",
@@ -620,11 +692,13 @@
           },
           "Wink_036": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B36",
-              "Fr": "B36",
-              "De": "B36",
-              "Es": "B36"
+            "label": {
+              "active": {
+                "En": "B36",
+                "Fr": "B36",
+                "De": "B36",
+                "Es": "B36"
+              }
             },
             "path": "audio/wink/demo_036",
             "color": "#FF0000",
@@ -637,11 +711,13 @@
           },
           "Wink_037": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B37",
-              "Fr": "B37",
-              "De": "B37",
-              "Es": "B37"
+            "label": {
+              "active": {
+                "En": "B37",
+                "Fr": "B37",
+                "De": "B37",
+                "Es": "B37"
+              }
             },
             "path": "audio/wink/demo_037",
             "color": "#00FF00",
@@ -654,11 +730,13 @@
           },
           "Wink_038": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B38",
-              "Fr": "B38",
-              "De": "B38",
-              "Es": "B38"
+            "label": {
+              "active": {
+                "En": "B38",
+                "Fr": "B38",
+                "De": "B38",
+                "Es": "B38"
+              }
             },
             "path": "audio/wink/demo_038",
             "color": "#0000FF",
@@ -671,11 +749,13 @@
           },
           "Wink_039": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B39",
-              "Fr": "B39",
-              "De": "B39",
-              "Es": "B39"
+            "label": {
+              "active": {
+                "En": "B39",
+                "Fr": "B39",
+                "De": "B39",
+                "Es": "B39"
+              }
             },
             "path": "audio/wink/demo_039",
             "color": "#FFFF00",
@@ -689,11 +769,13 @@
           },
           "Wink_040": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B40",
-              "Fr": "B40",
-              "De": "B40",
-              "Es": "B40"
+            "label": {
+              "active": {
+                "En": "B40",
+                "Fr": "B40",
+                "De": "B40",
+                "Es": "B40"
+              }
             },
             "path": "audio/wink/demo_040",
             "color": "#FFFFFF",
@@ -706,11 +788,13 @@
           },
           "Wink_041": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B41",
-              "Fr": "B41",
-              "De": "B41",
-              "Es": "B41"
+            "label": {
+              "active": {
+                "En": "B41",
+                "Fr": "B41",
+                "De": "B41",
+                "Es": "B41"
+              }
             },
             "path": "audio/wink/demo_041",
             "color": "#FF00FF",
@@ -723,11 +807,13 @@
           },
           "Wink_042": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B42",
-              "Fr": "B42",
-              "De": "B42",
-              "Es": "B42"
+            "label": {
+              "active": {
+                "En": "B42",
+                "Fr": "B42",
+                "De": "B42",
+                "Es": "B42"
+              }
             },
             "path": "audio/wink/demo_042",
             "color": "#FFA500",
@@ -740,11 +826,13 @@
           },
           "Wink_043": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B43",
-              "Fr": "B43",
-              "De": "B43",
-              "Es": "B43"
+            "label": {
+              "active": {
+                "En": "B43",
+                "Fr": "B43",
+                "De": "B43",
+                "Es": "B43"
+              }
             },
             "path": "audio/wink/demo_043",
             "color": "#800080",
@@ -757,11 +845,13 @@
           },
           "Wink_044": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B44",
-              "Fr": "B44",
-              "De": "B44",
-              "Es": "B44"
+            "label": {
+              "active": {
+                "En": "B44",
+                "Fr": "B44",
+                "De": "B44",
+                "Es": "B44"
+              }
             },
             "path": "audio/wink/demo_044",
             "color": "#008080",
@@ -774,11 +864,13 @@
           },
           "Wink_045": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B45",
-              "Fr": "B45",
-              "De": "B45",
-              "Es": "B45"
+            "label": {
+              "active": {
+                "En": "B45",
+                "Fr": "B45",
+                "De": "B45",
+                "Es": "B45"
+              }
             },
             "path": "audio/wink/demo_045",
             "color": "#FFC0CB",
@@ -791,11 +883,13 @@
           },
           "Wink_046": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B46",
-              "Fr": "B46",
-              "De": "B46",
-              "Es": "B46"
+            "label": {
+              "active": {
+                "En": "B46",
+                "Fr": "B46",
+                "De": "B46",
+                "Es": "B46"
+              }
             },
             "path": "audio/wink/demo_046",
             "color": "#39FF14",
@@ -808,11 +902,13 @@
           },
           "Wink_047": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B47",
-              "Fr": "B47",
-              "De": "B47",
-              "Es": "B47"
+            "label": {
+              "active": {
+                "En": "B47",
+                "Fr": "B47",
+                "De": "B47",
+                "Es": "B47"
+              }
             },
             "path": "audio/wink/demo_047",
             "color": "#FFD700",
@@ -825,11 +921,13 @@
           },
           "Wink_048": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B48",
-              "Fr": "B48",
-              "De": "B48",
-              "Es": "B48"
+            "label": {
+              "active": {
+                "En": "B48",
+                "Fr": "B48",
+                "De": "B48",
+                "Es": "B48"
+              }
             },
             "path": "audio/wink/demo_048",
             "color": "#FF0000",
@@ -842,11 +940,13 @@
           },
           "Wink_049": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B49",
-              "Fr": "B49",
-              "De": "B49",
-              "Es": "B49"
+            "label": {
+              "active": {
+                "En": "B49",
+                "Fr": "B49",
+                "De": "B49",
+                "Es": "B49"
+              }
             },
             "path": "audio/wink/demo_049",
             "color": "#00FF00",
@@ -859,11 +959,13 @@
           },
           "Wink_050": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B50",
-              "Fr": "B50",
-              "De": "B50",
-              "Es": "B50"
+            "label": {
+              "active": {
+                "En": "B50",
+                "Fr": "B50",
+                "De": "B50",
+                "Es": "B50"
+              }
             },
             "path": "audio/wink/demo_050",
             "color": "#FFFFFF",
@@ -876,11 +978,13 @@
           },
           "Wink_051": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B51",
-              "Fr": "B51",
-              "De": "B51",
-              "Es": "B51"
+            "label": {
+              "active": {
+                "En": "B51",
+                "Fr": "B51",
+                "De": "B51",
+                "Es": "B51"
+              }
             },
             "path": "audio/wink/demo_051",
             "color": "#FFFF00",
@@ -893,11 +997,13 @@
           },
           "Wink_052": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B52",
-              "Fr": "B52",
-              "De": "B52",
-              "Es": "B52"
+            "label": {
+              "active": {
+                "En": "B52",
+                "Fr": "B52",
+                "De": "B52",
+                "Es": "B52"
+              }
             },
             "path": "audio/wink/demo_052",
             "color": "#00FFFF",
@@ -911,11 +1017,13 @@
           },
           "Wink_053": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B53",
-              "Fr": "B53",
-              "De": "B53",
-              "Es": "B53"
+            "label": {
+              "active": {
+                "En": "B53",
+                "Fr": "B53",
+                "De": "B53",
+                "Es": "B53"
+              }
             },
             "path": "audio/wink/demo_053",
             "color": "#FF00FF",
@@ -928,11 +1036,13 @@
           },
           "Wink_054": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B54",
-              "Fr": "B54",
-              "De": "B54",
-              "Es": "B54"
+            "label": {
+              "active": {
+                "En": "B54",
+                "Fr": "B54",
+                "De": "B54",
+                "Es": "B54"
+              }
             },
             "path": "audio/wink/demo_054",
             "color": "#FFA500",
@@ -945,11 +1055,13 @@
           },
           "Wink_055": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B55",
-              "Fr": "B55",
-              "De": "B55",
-              "Es": "B55"
+            "label": {
+              "active": {
+                "En": "B55",
+                "Fr": "B55",
+                "De": "B55",
+                "Es": "B55"
+              }
             },
             "path": "audio/wink/demo_055",
             "color": "#800080",
@@ -962,11 +1074,13 @@
           },
           "Wink_056": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B56",
-              "Fr": "B56",
-              "De": "B56",
-              "Es": "B56"
+            "label": {
+              "active": {
+                "En": "B56",
+                "Fr": "B56",
+                "De": "B56",
+                "Es": "B56"
+              }
             },
             "path": "audio/wink/demo_056",
             "color": "#008080",
@@ -979,11 +1093,13 @@
           },
           "Wink_057": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B57",
-              "Fr": "B57",
-              "De": "B57",
-              "Es": "B57"
+            "label": {
+              "active": {
+                "En": "B57",
+                "Fr": "B57",
+                "De": "B57",
+                "Es": "B57"
+              }
             },
             "path": "audio/wink/demo_057",
             "color": "#FFC0CB",
@@ -996,11 +1112,13 @@
           },
           "Wink_058": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B58",
-              "Fr": "B58",
-              "De": "B58",
-              "Es": "B58"
+            "label": {
+              "active": {
+                "En": "B58",
+                "Fr": "B58",
+                "De": "B58",
+                "Es": "B58"
+              }
             },
             "path": "audio/wink/demo_058",
             "color": "#39FF14",
@@ -1013,11 +1131,13 @@
           },
           "Wink_059": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B59",
-              "Fr": "B59",
-              "De": "B59",
-              "Es": "B59"
+            "label": {
+              "active": {
+                "En": "B59",
+                "Fr": "B59",
+                "De": "B59",
+                "Es": "B59"
+              }
             },
             "path": "audio/wink/demo_059",
             "color": "#FFD700",
@@ -1030,11 +1150,13 @@
           },
           "Wink_060": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B60",
-              "Fr": "B60",
-              "De": "B60",
-              "Es": "B60"
+            "label": {
+              "active": {
+                "En": "B60",
+                "Fr": "B60",
+                "De": "B60",
+                "Es": "B60"
+              }
             },
             "path": "audio/wink/demo_060",
             "color": "#FFFFFF",
@@ -1047,11 +1169,13 @@
           },
           "Wink_061": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B61",
-              "Fr": "B61",
-              "De": "B61",
-              "Es": "B61"
+            "label": {
+              "active": {
+                "En": "B61",
+                "Fr": "B61",
+                "De": "B61",
+                "Es": "B61"
+              }
             },
             "path": "audio/wink/demo_061",
             "color": "#00FF00",
@@ -1064,11 +1188,13 @@
           },
           "Wink_062": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B62",
-              "Fr": "B62",
-              "De": "B62",
-              "Es": "B62"
+            "label": {
+              "active": {
+                "En": "B62",
+                "Fr": "B62",
+                "De": "B62",
+                "Es": "B62"
+              }
             },
             "path": "audio/wink/demo_062",
             "color": "#0000FF",
@@ -1081,11 +1207,13 @@
           },
           "Wink_063": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B63",
-              "Fr": "B63",
-              "De": "B63",
-              "Es": "B63"
+            "label": {
+              "active": {
+                "En": "B63",
+                "Fr": "B63",
+                "De": "B63",
+                "Es": "B63"
+              }
             },
             "path": "audio/wink/demo_063",
             "color": "#FFFF00",
@@ -1098,11 +1226,13 @@
           },
           "Wink_064": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B64",
-              "Fr": "B64",
-              "De": "B64",
-              "Es": "B64"
+            "label": {
+              "active": {
+                "En": "B64",
+                "Fr": "B64",
+                "De": "B64",
+                "Es": "B64"
+              }
             },
             "path": "audio/wink/demo_064",
             "color": "#00FFFF",
@@ -1115,11 +1245,13 @@
           },
           "Wink_065": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B65",
-              "Fr": "B65",
-              "De": "B65",
-              "Es": "B65"
+            "label": {
+              "active": {
+                "En": "B65",
+                "Fr": "B65",
+                "De": "B65",
+                "Es": "B65"
+              }
             },
             "path": "audio/wink/demo_065",
             "color": "#FF00FF",
@@ -1133,11 +1265,13 @@
           },
           "Wink_066": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B66",
-              "Fr": "B66",
-              "De": "B66",
-              "Es": "B66"
+            "label": {
+              "active": {
+                "En": "B66",
+                "Fr": "B66",
+                "De": "B66",
+                "Es": "B66"
+              }
             },
             "path": "audio/wink/demo_066",
             "color": "#FFA500",
@@ -1150,11 +1284,13 @@
           },
           "Wink_067": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B67",
-              "Fr": "B67",
-              "De": "B67",
-              "Es": "B67"
+            "label": {
+              "active": {
+                "En": "B67",
+                "Fr": "B67",
+                "De": "B67",
+                "Es": "B67"
+              }
             },
             "path": "audio/wink/demo_067",
             "color": "#800080",
@@ -1167,11 +1303,13 @@
           },
           "Wink_068": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B68",
-              "Fr": "B68",
-              "De": "B68",
-              "Es": "B68"
+            "label": {
+              "active": {
+                "En": "B68",
+                "Fr": "B68",
+                "De": "B68",
+                "Es": "B68"
+              }
             },
             "path": "audio/wink/demo_068",
             "color": "#008080",
@@ -1184,11 +1322,13 @@
           },
           "Wink_069": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B69",
-              "Fr": "B69",
-              "De": "B69",
-              "Es": "B69"
+            "label": {
+              "active": {
+                "En": "B69",
+                "Fr": "B69",
+                "De": "B69",
+                "Es": "B69"
+              }
             },
             "path": "audio/wink/demo_069",
             "color": "#FFC0CB",
@@ -1201,11 +1341,13 @@
           },
           "Wink_070": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B70",
-              "Fr": "B70",
-              "De": "B70",
-              "Es": "B70"
+            "label": {
+              "active": {
+                "En": "B70",
+                "Fr": "B70",
+                "De": "B70",
+                "Es": "B70"
+              }
             },
             "path": "audio/wink/demo_070",
             "color": "#FFFFFF",
@@ -1218,11 +1360,13 @@
           },
           "Wink_071": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B71",
-              "Fr": "B71",
-              "De": "B71",
-              "Es": "B71"
+            "label": {
+              "active": {
+                "En": "B71",
+                "Fr": "B71",
+                "De": "B71",
+                "Es": "B71"
+              }
             },
             "path": "audio/wink/demo_071",
             "color": "#FFD700",
@@ -1235,11 +1379,13 @@
           },
           "Wink_072": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B72",
-              "Fr": "B72",
-              "De": "B72",
-              "Es": "B72"
+            "label": {
+              "active": {
+                "En": "B72",
+                "Fr": "B72",
+                "De": "B72",
+                "Es": "B72"
+              }
             },
             "path": "audio/wink/demo_072",
             "color": "#FF0000",
@@ -1252,11 +1398,13 @@
           },
           "Wink_073": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B73",
-              "Fr": "B73",
-              "De": "B73",
-              "Es": "B73"
+            "label": {
+              "active": {
+                "En": "B73",
+                "Fr": "B73",
+                "De": "B73",
+                "Es": "B73"
+              }
             },
             "path": "audio/wink/demo_073",
             "color": "#00FF00",
@@ -1269,11 +1417,13 @@
           },
           "Wink_074": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B74",
-              "Fr": "B74",
-              "De": "B74",
-              "Es": "B74"
+            "label": {
+              "active": {
+                "En": "B74",
+                "Fr": "B74",
+                "De": "B74",
+                "Es": "B74"
+              }
             },
             "path": "audio/wink/demo_074",
             "color": "#0000FF",
@@ -1286,11 +1436,13 @@
           },
           "Wink_075": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B75",
-              "Fr": "B75",
-              "De": "B75",
-              "Es": "B75"
+            "label": {
+              "active": {
+                "En": "B75",
+                "Fr": "B75",
+                "De": "B75",
+                "Es": "B75"
+              }
             },
             "path": "audio/wink/demo_075",
             "color": "#FFFF00",
@@ -1303,11 +1455,13 @@
           },
           "Wink_076": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B76",
-              "Fr": "B76",
-              "De": "B76",
-              "Es": "B76"
+            "label": {
+              "active": {
+                "En": "B76",
+                "Fr": "B76",
+                "De": "B76",
+                "Es": "B76"
+              }
             },
             "path": "audio/wink/demo_076",
             "color": "#00FFFF",
@@ -1320,11 +1474,13 @@
           },
           "Wink_077": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B77",
-              "Fr": "B77",
-              "De": "B77",
-              "Es": "B77"
+            "label": {
+              "active": {
+                "En": "B77",
+                "Fr": "B77",
+                "De": "B77",
+                "Es": "B77"
+              }
             },
             "path": "audio/wink/demo_077",
             "color": "#FF00FF",
@@ -1337,11 +1493,13 @@
           },
           "Wink_078": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B78",
-              "Fr": "B78",
-              "De": "B78",
-              "Es": "B78"
+            "label": {
+              "active": {
+                "En": "B78",
+                "Fr": "B78",
+                "De": "B78",
+                "Es": "B78"
+              }
             },
             "path": "audio/wink/demo_078",
             "color": "#FFA500",
@@ -1355,11 +1513,13 @@
           },
           "Wink_079": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B79",
-              "Fr": "B79",
-              "De": "B79",
-              "Es": "B79"
+            "label": {
+              "active": {
+                "En": "B79",
+                "Fr": "B79",
+                "De": "B79",
+                "Es": "B79"
+              }
             },
             "path": "audio/wink/demo_079",
             "color": "#800080",
@@ -1372,11 +1532,13 @@
           },
           "Wink_080": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B80",
-              "Fr": "B80",
-              "De": "B80",
-              "Es": "B80"
+            "label": {
+              "active": {
+                "En": "B80",
+                "Fr": "B80",
+                "De": "B80",
+                "Es": "B80"
+              }
             },
             "path": "audio/wink/demo_080",
             "color": "#FFFFFF",
@@ -1389,11 +1551,13 @@
           },
           "Wink_081": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B81",
-              "Fr": "B81",
-              "De": "B81",
-              "Es": "B81"
+            "label": {
+              "active": {
+                "En": "B81",
+                "Fr": "B81",
+                "De": "B81",
+                "Es": "B81"
+              }
             },
             "path": "audio/wink/demo_081",
             "color": "#FFC0CB",
@@ -1406,11 +1570,13 @@
           },
           "Wink_082": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B82",
-              "Fr": "B82",
-              "De": "B82",
-              "Es": "B82"
+            "label": {
+              "active": {
+                "En": "B82",
+                "Fr": "B82",
+                "De": "B82",
+                "Es": "B82"
+              }
             },
             "path": "audio/wink/demo_082",
             "color": "#39FF14",
@@ -1423,11 +1589,13 @@
           },
           "Wink_083": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B83",
-              "Fr": "B83",
-              "De": "B83",
-              "Es": "B83"
+            "label": {
+              "active": {
+                "En": "B83",
+                "Fr": "B83",
+                "De": "B83",
+                "Es": "B83"
+              }
             },
             "path": "audio/wink/demo_083",
             "color": "#FFD700",
@@ -1440,11 +1608,13 @@
           },
           "Wink_084": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B84",
-              "Fr": "B84",
-              "De": "B84",
-              "Es": "B84"
+            "label": {
+              "active": {
+                "En": "B84",
+                "Fr": "B84",
+                "De": "B84",
+                "Es": "B84"
+              }
             },
             "path": "audio/wink/demo_084",
             "color": "#FF0000",
@@ -1457,11 +1627,13 @@
           },
           "Wink_085": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B85",
-              "Fr": "B85",
-              "De": "B85",
-              "Es": "B85"
+            "label": {
+              "active": {
+                "En": "B85",
+                "Fr": "B85",
+                "De": "B85",
+                "Es": "B85"
+              }
             },
             "path": "audio/wink/demo_085",
             "color": "#00FF00",
@@ -1474,11 +1646,13 @@
           },
           "Wink_086": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B86",
-              "Fr": "B86",
-              "De": "B86",
-              "Es": "B86"
+            "label": {
+              "active": {
+                "En": "B86",
+                "Fr": "B86",
+                "De": "B86",
+                "Es": "B86"
+              }
             },
             "path": "audio/wink/demo_086",
             "color": "#0000FF",
@@ -1491,11 +1665,13 @@
           },
           "Wink_087": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B87",
-              "Fr": "B87",
-              "De": "B87",
-              "Es": "B87"
+            "label": {
+              "active": {
+                "En": "B87",
+                "Fr": "B87",
+                "De": "B87",
+                "Es": "B87"
+              }
             },
             "path": "audio/wink/demo_087",
             "color": "#FFFF00",
@@ -1508,11 +1684,13 @@
           },
           "Wink_088": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B88",
-              "Fr": "B88",
-              "De": "B88",
-              "Es": "B88"
+            "label": {
+              "active": {
+                "En": "B88",
+                "Fr": "B88",
+                "De": "B88",
+                "Es": "B88"
+              }
             },
             "path": "audio/wink/demo_088",
             "color": "#00FFFF",
@@ -1525,11 +1703,13 @@
           },
           "Wink_089": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B89",
-              "Fr": "B89",
-              "De": "B89",
-              "Es": "B89"
+            "label": {
+              "active": {
+                "En": "B89",
+                "Fr": "B89",
+                "De": "B89",
+                "Es": "B89"
+              }
             },
             "path": "audio/wink/demo_089",
             "color": "#FF00FF",
@@ -1542,11 +1722,13 @@
           },
           "Wink_090": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B90",
-              "Fr": "B90",
-              "De": "B90",
-              "Es": "B90"
+            "label": {
+              "active": {
+                "En": "B90",
+                "Fr": "B90",
+                "De": "B90",
+                "Es": "B90"
+              }
             },
             "path": "audio/wink/demo_090",
             "color": "#FFFFFF",
@@ -1559,11 +1741,13 @@
           },
           "Wink_091": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B91",
-              "Fr": "B91",
-              "De": "B91",
-              "Es": "B91"
+            "label": {
+              "active": {
+                "En": "B91",
+                "Fr": "B91",
+                "De": "B91",
+                "Es": "B91"
+              }
             },
             "path": "audio/wink/demo_091",
             "color": "#800080",
@@ -1577,11 +1761,13 @@
           },
           "Wink_092": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B92",
-              "Fr": "B92",
-              "De": "B92",
-              "Es": "B92"
+            "label": {
+              "active": {
+                "En": "B92",
+                "Fr": "B92",
+                "De": "B92",
+                "Es": "B92"
+              }
             },
             "path": "audio/wink/demo_092",
             "color": "#008080",
@@ -1594,11 +1780,13 @@
           },
           "Wink_093": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B93",
-              "Fr": "B93",
-              "De": "B93",
-              "Es": "B93"
+            "label": {
+              "active": {
+                "En": "B93",
+                "Fr": "B93",
+                "De": "B93",
+                "Es": "B93"
+              }
             },
             "path": "audio/wink/demo_093",
             "color": "#FFC0CB",
@@ -1611,11 +1799,13 @@
           },
           "Wink_094": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B94",
-              "Fr": "B94",
-              "De": "B94",
-              "Es": "B94"
+            "label": {
+              "active": {
+                "En": "B94",
+                "Fr": "B94",
+                "De": "B94",
+                "Es": "B94"
+              }
             },
             "path": "audio/wink/demo_094",
             "color": "#39FF14",
@@ -1628,11 +1818,13 @@
           },
           "Wink_095": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B95",
-              "Fr": "B95",
-              "De": "B95",
-              "Es": "B95"
+            "label": {
+              "active": {
+                "En": "B95",
+                "Fr": "B95",
+                "De": "B95",
+                "Es": "B95"
+              }
             },
             "path": "audio/wink/demo_095",
             "color": "#FFD700",
@@ -1645,11 +1837,13 @@
           },
           "Wink_096": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B96",
-              "Fr": "B96",
-              "De": "B96",
-              "Es": "B96"
+            "label": {
+              "active": {
+                "En": "B96",
+                "Fr": "B96",
+                "De": "B96",
+                "Es": "B96"
+              }
             },
             "path": "audio/wink/demo_096",
             "color": "#FF0000",
@@ -1662,11 +1856,13 @@
           },
           "Wink_097": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B97",
-              "Fr": "B97",
-              "De": "B97",
-              "Es": "B97"
+            "label": {
+              "active": {
+                "En": "B97",
+                "Fr": "B97",
+                "De": "B97",
+                "Es": "B97"
+              }
             },
             "path": "audio/wink/demo_097",
             "color": "#00FF00",
@@ -1679,11 +1875,13 @@
           },
           "Wink_098": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B98",
-              "Fr": "B98",
-              "De": "B98",
-              "Es": "B98"
+            "label": {
+              "active": {
+                "En": "B98",
+                "Fr": "B98",
+                "De": "B98",
+                "Es": "B98"
+              }
             },
             "path": "audio/wink/demo_098",
             "color": "#0000FF",
@@ -1696,11 +1894,13 @@
           },
           "Wink_099": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B99",
-              "Fr": "B99",
-              "De": "B99",
-              "Es": "B99"
+            "label": {
+              "active": {
+                "En": "B99",
+                "Fr": "B99",
+                "De": "B99",
+                "Es": "B99"
+              }
             },
             "path": "audio/wink/demo_099",
             "color": "#FFFF00",
@@ -1713,11 +1913,13 @@
           },
           "Wink_100": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B100",
-              "Fr": "B100",
-              "De": "B100",
-              "Es": "B100"
+            "label": {
+              "active": {
+                "En": "B100",
+                "Fr": "B100",
+                "De": "B100",
+                "Es": "B100"
+              }
             },
             "path": "audio/wink/demo_100",
             "color": "#FFFFFF",

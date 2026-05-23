@@ -13,11 +13,13 @@
     "blocks": {
       "elements": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Download Progress",
-          "Fr": "Download Progress",
-          "De": "Download Progress",
-          "Es": "Download Progress"
+        "label": {
+          "active": {
+            "En": "Download Progress",
+            "Fr": "Download Progress",
+            "De": "Download Progress",
+            "Es": "Download Progress"
+          }
         },
         "fields": {
           "examplefields": {

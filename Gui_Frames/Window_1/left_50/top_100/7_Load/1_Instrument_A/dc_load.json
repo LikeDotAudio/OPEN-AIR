@@ -31,17 +31,19 @@
             "fields": {
               "Master_Switch": {
                 "type": "_TrapezoidButton",
-                "label_active": {
-                  "En": "🩸 DRAINING ACTIVE 🩸",
-                  "Fr": "🩸 DRAINING ACTIVE 🩸",
-                  "De": "🩸 DRAINING ACTIVE 🩸",
-                  "Es": "🩸 DRAINING ACTIVE 🩸"
-                },
-                "label_inactive": {
-                  "En": "ENGAGE LOAD",
-                  "Fr": "ENGAGE LOAD",
-                  "De": "ENGAGE LOAD",
-                  "Es": "ENGAGE LOAD"
+                "label": {
+                  "active": {
+                    "En": "🩸 DRAINING ACTIVE 🩸",
+                    "Fr": "🩸 DRAINING ACTIVE 🩸",
+                    "De": "🩸 DRAINING ACTIVE 🩸",
+                    "Es": "🩸 DRAINING ACTIVE 🩸"
+                  },
+                  "inactive": {
+                    "En": "ENGAGE LOAD",
+                    "Fr": "ENGAGE LOAD",
+                    "De": "ENGAGE LOAD",
+                    "Es": "ENGAGE LOAD"
+                  }
                 },
                 "state_default": false,
                 "message_details": {
@@ -74,17 +76,19 @@
               },
               "Mode_Toggle": {
                 "type": "_GuiButtonToggle",
-                "label_active": {
-                  "En": "CONSTANT CURRENT",
-                  "Fr": "COURANT CONSTANT",
-                  "De": "KONSTANTSTROM",
-                  "Es": "CORRIENTE CONSTANTE"
-                },
-                "label_inactive": {
-                  "En": "CONSTANT POWER",
-                  "Fr": "PUISSANCE CONSTANTE",
-                  "De": "KONSTANTPOTENZ",
-                  "Es": "POTENCIA CONSTANTE"
+                "label": {
+                  "active": {
+                    "En": "CONSTANT CURRENT",
+                    "Fr": "COURANT CONSTANT",
+                    "De": "KONSTANTSTROM",
+                    "Es": "CORRIENTE CONSTANTE"
+                  },
+                  "inactive": {
+                    "En": "CONSTANT POWER",
+                    "Fr": "PUISSANCE CONSTANTE",
+                    "De": "KONSTANTPOTENZ",
+                    "Es": "POTENCIA CONSTANTE"
+                  }
                 },
                 "style": {
                   "active": {
@@ -165,11 +169,13 @@
                     "value": {
                       "default_value": "0.0"
                     },
-                    "label_active": {
-                      "En": "BASE LOAD (A)",
-                      "Fr": "BASE LOAD (A)",
-                      "De": "BASE LOAD (A)",
-                      "Es": "BASE LOAD (A)"
+                    "label": {
+                      "active": {
+                        "En": "BASE LOAD (A)",
+                        "Fr": "BASE LOAD (A)",
+                        "De": "BASE LOAD (A)",
+                        "Es": "BASE LOAD (A)"
+                      }
                     },
                     "message_details": {
                       "DC_LOAD_MODEL": {
@@ -220,11 +226,13 @@
                     "value": {
                       "default_value": "0.0"
                     },
-                    "label_active": {
-                      "En": "PULSE PEAK (A)",
-                      "Fr": "PULSE PEAK (A)",
-                      "De": "PULSE PEAK (A)",
-                      "Es": "PULSE PEAK (A)"
+                    "label": {
+                      "active": {
+                        "En": "PULSE PEAK (A)",
+                        "Fr": "PULSE PEAK (A)",
+                        "De": "PULSE PEAK (A)",
+                        "Es": "PULSE PEAK (A)"
+                      }
                     },
                     "message_details": {
                       "DC_LOAD_MODEL": {
@@ -256,17 +264,19 @@
                   },
                   "Pulse_Enable": {
                     "type": "_GuiButtonToggle",
-                    "label_active": {
-                      "En": "PULSE ON",
-                      "Fr": "PULSE ON",
-                      "De": "PULSE ON",
-                      "Es": "PULSE ON"
-                    },
-                    "label_inactive": {
-                      "En": "PULSE OFF",
-                      "Fr": "PULSE OFF",
-                      "De": "PULSE OFF",
-                      "Es": "PULSE OFF"
+                    "label": {
+                      "active": {
+                        "En": "PULSE ON",
+                        "Fr": "PULSE ON",
+                        "De": "PULSE ON",
+                        "Es": "PULSE ON"
+                      },
+                      "inactive": {
+                        "En": "PULSE OFF",
+                        "Fr": "PULSE OFF",
+                        "De": "PULSE OFF",
+                        "Es": "PULSE OFF"
+                      }
                     },
                     "style": {
                       "active": {
@@ -340,11 +350,13 @@
                 "value": {
                   "default_value": "3.0"
                 },
-                "label_active": {
-                  "En": "Stop Voltage (UVLO)",
-                  "Fr": "Arrêter Tension (UVLO)",
-                  "De": "Stopp Spannenung (UVLO)",
-                  "Es": "Parar Voltaje (UVLO)"
+                "label": {
+                  "active": {
+                    "En": "Stop Voltage (UVLO)",
+                    "Fr": "Arrêter Tension (UVLO)",
+                    "De": "Stopp Spannenung (UVLO)",
+                    "Es": "Parar Voltaje (UVLO)"
+                  }
                 },
                 "message_details": {
                   "DC_LOAD_MODEL": {
@@ -384,11 +396,13 @@
                 "value": {
                   "default_value": "500"
                 },
-                "label_active": {
-                  "En": "Attack Speed (Slew)",
-                  "Fr": "Attack Speed (Slew)",
-                  "De": "Attack Speed (Slew)",
-                  "Es": "Attack Speed (Slew)"
+                "label": {
+                  "active": {
+                    "En": "Attack Speed (Slew)",
+                    "Fr": "Attack Speed (Slew)",
+                    "De": "Attack Speed (Slew)",
+                    "Es": "Attack Speed (Slew)"
+                  }
                 },
                 "message_details": {
                   "DC_LOAD_MODEL": {
@@ -437,11 +451,13 @@
                     "value": {
                       "default_value": "0.000 Ah"
                     },
-                    "label_active": {
-                      "En": "CAPACITY DRAINED",
-                      "Fr": "CAPACITY DRAINED",
-                      "De": "CAPACITY DRAINED",
-                      "Es": "CAPACITY DRAINED"
+                    "label": {
+                      "active": {
+                        "En": "CAPACITY DRAINED",
+                        "Fr": "CAPACITY DRAINED",
+                        "De": "CAPACITY DRAINED",
+                        "Es": "CAPACITY DRAINED"
+                      }
                     },
                     "message_details": {
                       "DC_LOAD_MODEL": {
@@ -476,11 +492,13 @@
                     "value": {
                       "default_value": "0.000 Wh"
                     },
-                    "label_active": {
-                      "En": "ENERGY DISSIPATED",
-                      "Fr": "ENERGY DISSIPATED",
-                      "De": "ENERGY DISSIPATED",
-                      "Es": "ENERGY DISSIPATED"
+                    "label": {
+                      "active": {
+                        "En": "ENERGY DISSIPATED",
+                        "Fr": "ENERGY DISSIPATED",
+                        "De": "ENERGY DISSIPATED",
+                        "Es": "ENERGY DISSIPATED"
+                      }
                     },
                     "message_details": {
                       "DC_LOAD_MODEL": {
@@ -515,11 +533,13 @@
                     "value": {
                       "default_value": "00:00:00"
                     },
-                    "label_active": {
-                      "En": "ELAPSED TIME",
-                      "Fr": "ELAPSED TIME",
-                      "De": "ELAPSED TIME",
-                      "Es": "ELAPSED TIME"
+                    "label": {
+                      "active": {
+                        "En": "ELAPSED TIME",
+                        "Fr": "ELAPSED TIME",
+                        "De": "ELAPSED TIME",
+                        "Es": "ELAPSED TIME"
+                      }
                     },
                     "message_details": {
                       "DC_LOAD_MODEL": {
@@ -553,11 +573,13 @@
               },
               "Discharge_Curve": {
                 "type": "_GuiGraph",
-                "label_active": {
-                  "En": "Discharge Curve (V)",
-                  "Fr": "Discharge Curve (V)",
-                  "De": "Discharge Curve (V)",
-                  "Es": "Discharge Curve (V)"
+                "label": {
+                  "active": {
+                    "En": "Discharge Curve (V)",
+                    "Fr": "Discharge Curve (V)",
+                    "De": "Discharge Curve (V)",
+                    "Es": "Discharge Curve (V)"
+                  }
                 },
                 "description": {
                   "En": "Battery Voltage Sag",

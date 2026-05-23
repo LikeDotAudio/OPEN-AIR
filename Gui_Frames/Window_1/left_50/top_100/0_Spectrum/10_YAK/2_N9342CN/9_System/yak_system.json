@@ -150,11 +150,13 @@
         "fields": {
           "Do_Update_Display": {
             "type": "_GuiActuator",
-            "label_inactive": {
-              "En": "Update Display",
-              "Fr": "Mettre à jour Display",
-              "De": "Aktualisieren Display",
-              "Es": "Actualizar Display"
+            "label": {
+              "inactive": {
+                "En": "Update Display",
+                "Fr": "Mettre à jour Display",
+                "De": "Aktualisieren Display",
+                "Es": "Actualizar Display"
+              }
             },
             "AES70": "OcaBooleanActuator",
             "layout": {
@@ -198,11 +200,13 @@
             "fields": {
               "Do_Clear_Device": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "Clear Status (*CLS)",
-                  "Fr": "Effacer Statut (*CLS)",
-                  "De": "Löschen Status (*CLS)",
-                  "Es": "Borrar Estado (*CLS)"
+                "label": {
+                  "inactive": {
+                    "En": "Clear Status (*CLS)",
+                    "Fr": "Effacer Statut (*CLS)",
+                    "De": "Löschen Status (*CLS)",
+                    "Es": "Borrar Estado (*CLS)"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "layout": {
@@ -237,11 +241,13 @@
               },
               "Do_Reset": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "Reset Device (*RST)",
-                  "Fr": "Réinitialiser l'appareil (*RST)",
-                  "De": "Gerät zurücksetzen (*RST)",
-                  "Es": "Reiniciar dispositivo (*RST)"
+                "label": {
+                  "inactive": {
+                    "En": "Reset Device (*RST)",
+                    "Fr": "Réinitialiser l'appareil (*RST)",
+                    "De": "Gerät zurücksetzen (*RST)",
+                    "Es": "Reiniciar dispositivo (*RST)"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "layout": {
@@ -276,11 +282,13 @@
               },
               "Do_Power_Cycle": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "Power Cycle",
-                  "Fr": "Puissance Cycle",
-                  "De": "Leistung Cycle",
-                  "Es": "Potencia Cycle"
+                "label": {
+                  "inactive": {
+                    "En": "Power Cycle",
+                    "Fr": "Puissance Cycle",
+                    "De": "Leistung Cycle",
+                    "Es": "Potencia Cycle"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "layout": {

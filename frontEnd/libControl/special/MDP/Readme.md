@@ -23,7 +23,9 @@ in the property editor.
 {
   "composite_mdp_Example": {
     "type": "_MDP",
-    "label_active": "MDP 1",
+    "label": {
+      "active": "MDP 1"
+    },
     "path": "audio/mdp/1",
     "initial_x": 210,
     "initial_y": 125,
@@ -71,7 +73,9 @@ in the property editor.
       ]
     },
     "ltp": {
-      "label_active": "Level",
+      "label": {
+        "active": "Level"
+      },
       "value_default": -10,
       "cap_color": "#00FF00",
       "freestyle": true,

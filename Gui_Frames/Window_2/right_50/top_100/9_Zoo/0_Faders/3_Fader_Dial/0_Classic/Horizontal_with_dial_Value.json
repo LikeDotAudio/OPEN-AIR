@@ -13,11 +13,13 @@
     "blocks": {
       "elements1": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Frequency",
-          "Fr": "Fréquence",
-          "De": "Frequenz",
-          "Es": "Frecuencia"
+        "label": {
+          "active": {
+            "En": "Frequency",
+            "Fr": "Fréquence",
+            "De": "Frequenz",
+            "Es": "Frecuencia"
+          }
         },
         "fields": {
           "examplefields": {
@@ -40,11 +42,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "Frequency",
-              "Fr": "Fréquence",
-              "De": "Frequenz",
-              "Es": "Frecuencia"
+            "label": {
+              "active": {
+                "En": "Frequency",
+                "Fr": "Fréquence",
+                "De": "Frequenz",
+                "Es": "Frecuencia"
+              }
             },
             "show_label": true,
             "value_config": {
@@ -67,11 +71,13 @@
       },
       "elements2": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Master Vol",
-          "Fr": "Vol Master",
-          "De": "Master Vol",
-          "Es": "Vol Maestro"
+        "label": {
+          "active": {
+            "En": "Master Vol",
+            "Fr": "Vol Master",
+            "De": "Master Vol",
+            "Es": "Vol Maestro"
+          }
         },
         "fields": {
           "examplefields": {
@@ -94,11 +100,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "Master Vol",
-              "Fr": "Vol Master",
-              "De": "Master Vol",
-              "Es": "Vol Maestro"
+            "label": {
+              "active": {
+                "En": "Master Vol",
+                "Fr": "Vol Master",
+                "De": "Master Vol",
+                "Es": "Vol Maestro"
+              }
             },
             "show_label": true,
             "fader_config": {
@@ -114,11 +122,13 @@
       },
       "elements3": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Delay",
-          "Fr": "Delay",
-          "De": "Delay",
-          "Es": "Delay"
+        "label": {
+          "active": {
+            "En": "Delay",
+            "Fr": "Delay",
+            "De": "Delay",
+            "Es": "Delay"
+          }
         },
         "fields": {
           "examplefields": {
@@ -140,11 +150,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "Delay",
-              "Fr": "Delay",
-              "De": "Delay",
-              "Es": "Delay"
+            "label": {
+              "active": {
+                "En": "Delay",
+                "Fr": "Delay",
+                "De": "Delay",
+                "Es": "Delay"
+              }
             },
             "show_label": true,
             "dial_config": {
@@ -161,11 +173,13 @@
       },
       "element4": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Decay",
-          "Fr": "Decay",
-          "De": "Decay",
-          "Es": "Decay"
+        "label": {
+          "active": {
+            "En": "Decay",
+            "Fr": "Decay",
+            "De": "Decay",
+            "Es": "Decay"
+          }
         },
         "fields": {
           "examplefields": {
@@ -187,11 +201,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "Decay",
-              "Fr": "Decay",
-              "De": "Decay",
-              "Es": "Decay"
+            "label": {
+              "active": {
+                "En": "Decay",
+                "Fr": "Decay",
+                "De": "Decay",
+                "Es": "Decay"
+              }
             },
             "show_label": true,
             "fader_config": {
@@ -203,11 +219,13 @@
       },
       "elements5": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Pitch Shift",
-          "Fr": "Pitch Shift",
-          "De": "Pitch Shift",
-          "Es": "Pitch Shift"
+        "label": {
+          "active": {
+            "En": "Pitch Shift",
+            "Fr": "Pitch Shift",
+            "De": "Pitch Shift",
+            "Es": "Pitch Shift"
+          }
         },
         "fields": {
           "examplefields": {
@@ -229,11 +247,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "Pitch Shift",
-              "Fr": "Pitch Shift",
-              "De": "Pitch Shift",
-              "Es": "Pitch Shift"
+            "label": {
+              "active": {
+                "En": "Pitch Shift",
+                "Fr": "Pitch Shift",
+                "De": "Pitch Shift",
+                "Es": "Pitch Shift"
+              }
             },
             "show_label": true,
             "value_config": {

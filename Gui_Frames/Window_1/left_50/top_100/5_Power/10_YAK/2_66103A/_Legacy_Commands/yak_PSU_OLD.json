@@ -194,11 +194,13 @@
                 "fields": {
                   "S1_ON": {
                     "type": "_GuiActuator",
-                    "label_inactive": {
-                      "En": "ON",
-                      "Fr": "ON",
-                      "De": "EIN",
-                      "Es": "ENC"
+                    "label": {
+                      "inactive": {
+                        "En": "ON",
+                        "Fr": "ON",
+                        "De": "EIN",
+                        "Es": "ENC"
+                      }
                     },
                     "AES70": "OcaBooleanActuator",
                     "style": {
@@ -227,11 +229,13 @@
                   },
                   "S1_OFF": {
                     "type": "_GuiActuator",
-                    "label_inactive": {
-                      "En": "OFF",
-                      "Fr": "OFF",
-                      "De": "AUS",
-                      "Es": "DES"
+                    "label": {
+                      "inactive": {
+                        "En": "OFF",
+                        "Fr": "OFF",
+                        "De": "AUS",
+                        "Es": "DES"
+                      }
                     },
                     "AES70": "OcaBooleanActuator",
                     "style": {
@@ -267,11 +271,13 @@
             "fields": {
               "System_Reset": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "Reset (*RST)",
-                  "Fr": "Réinitialiser (*RST)",
-                  "De": "Zurücksetzen (*RST)",
-                  "Es": "Reiniciar (*RST)"
+                "label": {
+                  "inactive": {
+                    "En": "Reset (*RST)",
+                    "Fr": "Réinitialiser (*RST)",
+                    "De": "Zurücksetzen (*RST)",
+                    "Es": "Reiniciar (*RST)"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
@@ -301,11 +307,13 @@
               },
               "Clear_Status": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "Clear (*CLS)",
-                  "Fr": "Effacer (*CLS)",
-                  "De": "Löschen (*CLS)",
-                  "Es": "Borrar (*CLS)"
+                "label": {
+                  "inactive": {
+                    "En": "Clear (*CLS)",
+                    "Fr": "Effacer (*CLS)",
+                    "De": "Löschen (*CLS)",
+                    "Es": "Borrar (*CLS)"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {

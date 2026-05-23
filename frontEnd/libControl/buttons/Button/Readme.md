@@ -54,8 +54,10 @@ in the property editor.
       "inactive_font_size": 10
     },
     "readout": {
-      "label_active": "FIRING...",
-      "label_inactive": "FIRE"
+      "label": {
+        "active": "FIRING...",
+        "inactive": "FIRE"
+      }
     },
     "interaction": {
       "is_read_only": false,

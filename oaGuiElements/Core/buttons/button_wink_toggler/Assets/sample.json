@@ -1,31 +1,45 @@
 {
   "button_wink_toggler_Example": {
     "type": "_WinkButtonToggler",
-    "label_active": "Vertical Rects (Slow)",
+    "label": {
+      "active": "Vertical Rects (Slow)"
+    },
     "layout_columns": 1,
     "options": {
       "1": {
-        "label_active": "1",
+        "label": {
+          "active": "1"
+        },
         "color": "#FF0000"
       },
       "2": {
-        "label_active": "2",
+        "label": {
+          "active": "2"
+        },
         "color": "#FF7F00"
       },
       "3": {
-        "label_active": "3",
+        "label": {
+          "active": "3"
+        },
         "color": "#FFFF00"
       },
       "4": {
-        "label_active": "4",
+        "label": {
+          "active": "4"
+        },
         "color": "#00FF00"
       },
       "5": {
-        "label_active": "5",
+        "label": {
+          "active": "5"
+        },
         "color": "#0000FF"
       },
       "6": {
-        "label_active": "6",
+        "label": {
+          "active": "6"
+        },
         "color": "#4B0082"
       }
     },

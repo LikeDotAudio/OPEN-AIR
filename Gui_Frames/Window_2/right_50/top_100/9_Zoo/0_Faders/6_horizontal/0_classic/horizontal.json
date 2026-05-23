@@ -13,11 +13,13 @@
     "blocks": {
       "elements1": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Stereo Pan",
-          "Fr": "Stereo Panoramique",
-          "De": "Stereo Panorama",
-          "Es": "Stereo Panorámico"
+        "label": {
+          "active": {
+            "En": "Stereo Pan",
+            "Fr": "Stereo Panoramique",
+            "De": "Stereo Panorama",
+            "Es": "Stereo Panorámico"
+          }
         },
         "fields": {
           "pan_classic": {
@@ -34,11 +36,13 @@
               "H": 80,
               "sticky": "ew"
             },
-            "label_active": {
-              "En": "Classic Pan",
-              "Fr": "Classique Panoramique",
-              "De": "Klassisch Panorama",
-              "Es": "Clásico Panorámico"
+            "label": {
+              "active": {
+                "En": "Classic Pan",
+                "Fr": "Classique Panoramique",
+                "De": "Klassisch Panorama",
+                "Es": "Clásico Panorámico"
+              }
             },
             "cap_width": 55,
             "cap_height": 40,
@@ -48,11 +52,13 @@
       },
       "elements2": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Frequency Sweep",
-          "Fr": "Fréquence Sweep",
-          "De": "Frequenz Sweep",
-          "Es": "Frecuencia Sweep"
+        "label": {
+          "active": {
+            "En": "Frequency Sweep",
+            "Fr": "Fréquence Sweep",
+            "De": "Frequenz Sweep",
+            "Es": "Frecuencia Sweep"
+          }
         },
         "fields": {
           "freq_sweep": {
@@ -69,11 +75,13 @@
               "H": 100,
               "sticky": "ew"
             },
-            "label_active": {
-              "En": "Log Sweep",
-              "Fr": "Log Sweep",
-              "De": "Log Sweep",
-              "Es": "Log Sweep"
+            "label": {
+              "active": {
+                "En": "Log Sweep",
+                "Fr": "Log Sweep",
+                "De": "Log Sweep",
+                "Es": "Log Sweep"
+              }
             },
             "log_exponent": 3.0,
             "tick_interval": 2000,
@@ -86,11 +94,13 @@
       },
       "elements3": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Mix Ratio",
-          "Fr": "Mix Ratio",
-          "De": "Mix Ratio",
-          "Es": "Mezcla Ratio"
+        "label": {
+          "active": {
+            "En": "Mix Ratio",
+            "Fr": "Mix Ratio",
+            "De": "Mix Ratio",
+            "Es": "Mezcla Ratio"
+          }
         },
         "fields": {
           "compact_mix": {
@@ -107,11 +117,13 @@
               "H": 60,
               "sticky": "ew"
             },
-            "label_active": {
-              "En": "Compact Mix",
-              "Fr": "Compact Mix",
-              "De": "Compact Mix",
-              "Es": "Compact Mezcla"
+            "label": {
+              "active": {
+                "En": "Compact Mix",
+                "Fr": "Compact Mix",
+                "De": "Compact Mix",
+                "Es": "Compact Mezcla"
+              }
             },
             "cap_width": 30,
             "cap_height": 25,
@@ -122,11 +134,13 @@
       },
       "elements4": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Delay Time",
-          "Fr": "Temps de Delay",
-          "De": "Delay-Zeit",
-          "Es": "Tiempo de Delay"
+        "label": {
+          "active": {
+            "En": "Delay Time",
+            "Fr": "Temps de Delay",
+            "De": "Delay-Zeit",
+            "Es": "Tiempo de Delay"
+          }
         },
         "fields": {
           "long_delay": {
@@ -143,11 +157,13 @@
               "H": 70,
               "sticky": "ew"
             },
-            "label_active": {
-              "En": "Long Delay",
-              "Fr": "Long Delay",
-              "De": "Long Delay",
-              "Es": "Long Delay"
+            "label": {
+              "active": {
+                "En": "Long Delay",
+                "Fr": "Long Delay",
+                "De": "Long Delay",
+                "Es": "Long Delay"
+              }
             },
             "cap_width": 80,
             "cap_height": 30,
@@ -158,11 +174,13 @@
       },
       "elements5": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Reverb Decay",
-          "Fr": "Réverbération Decay",
-          "De": "Reverb Decay",
-          "Es": "Reverberación Decay"
+        "label": {
+          "active": {
+            "En": "Reverb Decay",
+            "Fr": "Réverbération Decay",
+            "De": "Reverb Decay",
+            "Es": "Reverberación Decay"
+          }
         },
         "fields": {
           "industrial_decay": {
@@ -179,11 +197,13 @@
               "H": 120,
               "sticky": "ew"
             },
-            "label_active": {
-              "En": "Industrial Decay",
-              "Fr": "Industriel Decay",
-              "De": "Industriell Decay",
-              "Es": "Industrial Decay"
+            "label": {
+              "active": {
+                "En": "Industrial Decay",
+                "Fr": "Industriel Decay",
+                "De": "Industriell Decay",
+                "Es": "Industrial Decay"
+              }
             },
             "fader_cap_scale": 1.5,
             "cap_color": "#FF9900",

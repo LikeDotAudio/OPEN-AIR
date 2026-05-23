@@ -13,11 +13,13 @@
     "blocks": {
       "elements1": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Visit Project Homepage",
-          "Fr": "Visit Project Homepage",
-          "De": "Visit Project Homepage",
-          "Es": "Visit Project Homepage"
+        "label": {
+          "active": {
+            "En": "Visit Project Homepage",
+            "Fr": "Visit Project Homepage",
+            "De": "Visit Project Homepage",
+            "Es": "Visit Project Homepage"
+          }
         },
         "fields": {
           "examplefields": {
@@ -43,11 +45,13 @@
       },
       "elements2": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Read Documentation",
-          "Fr": "Read Documentation",
-          "De": "Read Documentation",
-          "Es": "Read Documentation"
+        "label": {
+          "active": {
+            "En": "Read Documentation",
+            "Fr": "Read Documentation",
+            "De": "Read Documentation",
+            "Es": "Read Documentation"
+          }
         },
         "fields": {
           "examplefields": {
@@ -67,11 +71,13 @@
       },
       "elements3": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Contact Support",
-          "Fr": "Contact Support",
-          "De": "Contact Support",
-          "Es": "Contact Support"
+        "label": {
+          "active": {
+            "En": "Contact Support",
+            "Fr": "Contact Support",
+            "De": "Contact Support",
+            "Es": "Contact Support"
+          }
         },
         "fields": {
           "examplefields": {
@@ -91,11 +97,13 @@
       },
       "elements4": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "View Source Code",
-          "Fr": "View Source Code",
-          "De": "View Source Code",
-          "Es": "View Source Code"
+        "label": {
+          "active": {
+            "En": "View Source Code",
+            "Fr": "View Source Code",
+            "De": "View Source Code",
+            "Es": "View Source Code"
+          }
         },
         "fields": {
           "examplefields": {
@@ -121,11 +129,13 @@
       },
       "elements5": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Latest Blog Post",
-          "Fr": "Latest Blog Post",
-          "De": "Latest Blog Post",
-          "Es": "Latest Blog Post"
+        "label": {
+          "active": {
+            "En": "Latest Blog Post",
+            "Fr": "Latest Blog Post",
+            "De": "Latest Blog Post",
+            "Es": "Latest Blog Post"
+          }
         },
         "fields": {
           "examplefields": {

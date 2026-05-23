@@ -20,7 +20,9 @@ in the property editor.
 {
   "data_json_tree_Example": {
     "type": "_JsonTree",
-    "label_active": "AES70 Object Model (data_AES70.json)",
+    "label": {
+      "active": "AES70 Object Model (data_AES70.json)"
+    },
     "json_source": "display/right_50/bottom_90/10_sets/3_AES70/data_AES70.json",
     "allow_filter": true,
     "layout": {

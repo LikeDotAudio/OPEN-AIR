@@ -74,19 +74,25 @@ in the property editor.
       "Allow_Multi_Alt_Select": true,
       "options": {
         "LPF": {
-          "label_active": "LOW PASS",
-          "label_inactive": "LPF",
+          "label": {
+            "active": "LOW PASS",
+            "inactive": "LPF"
+          },
           "selected": true,
           "active_color": "#00FF00"
         },
         "HPF": {
-          "label_active": "HIGH PASS",
-          "label_inactive": "HPF",
+          "label": {
+            "active": "HIGH PASS",
+            "inactive": "HPF"
+          },
           "selected": false
         },
         "BPF": {
-          "label_active": "BAND PASS",
-          "label_inactive": "BPF",
+          "label": {
+            "active": "BAND PASS",
+            "inactive": "BPF"
+          },
           "selected": false
         }
       }
@@ -110,8 +116,15 @@ in the property editor.
     "Allow_Null": "If true, clicking an active button deselects it (empty state).",
     "Allow_Multi_Alt_Select": "If true, holding ALT allows multi-selection even in radio mode.",
     "option_overrides": "Each option can have its own 'active_color' or 'bg_color'.",
-    "font_styles": ["normal", "bold", "italic"],
-    "style_states": ["active", "inactive"],
+    "font_styles": [
+      "normal",
+      "bold",
+      "italic"
+    ],
+    "style_states": [
+      "active",
+      "inactive"
+    ],
     "style_params": "style.active and style.inactive carry the SAME params: font_style, font_size, text_color, bg_color, border_color, border_thickness, glow_intensity."
   }
 }

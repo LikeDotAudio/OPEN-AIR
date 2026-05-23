@@ -31,11 +31,13 @@
               "height": 750,
               "alpha": 0.9
             },
-            "label_active": {
-              "En": "Drum Group",
-              "Fr": "Drum Group",
-              "De": "Drum Group",
-              "Es": "Drum Group"
+            "label": {
+              "active": {
+                "En": "Drum Group",
+                "Fr": "Drum Group",
+                "De": "Drum Group",
+                "Es": "Drum Group"
+              }
             },
             "num_channels": 20,
             "channels": [

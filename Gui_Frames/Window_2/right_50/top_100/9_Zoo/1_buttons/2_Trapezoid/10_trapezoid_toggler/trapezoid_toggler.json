@@ -40,11 +40,13 @@
             "value": {
               "default_value": "Mic"
             },
-            "label_active": {
-              "En": "Input",
-              "Fr": "Entrée",
-              "De": "Eingang",
-              "Es": "Entrada"
+            "label": {
+              "active": {
+                "En": "Input",
+                "Fr": "Entrée",
+                "De": "Eingang",
+                "Es": "Entrada"
+              }
             },
             "options": [
               "Mic",
@@ -67,11 +69,13 @@
             "value": {
               "default_value": "Normal"
             },
-            "label_active": {
-              "En": "Mode",
-              "Fr": "Mode",
-              "De": "Mode",
-              "Es": "Mode"
+            "label": {
+              "active": {
+                "En": "Mode",
+                "Fr": "Mode",
+                "De": "Mode",
+                "Es": "Mode"
+              }
             },
             "options": [
               "Normal",
@@ -94,11 +98,13 @@
             "value": {
               "default_value": "MF"
             },
-            "label_active": {
-              "En": "EQ Band",
-              "Fr": "Bande EQ",
-              "De": "EQ-Band",
-              "Es": "Banda EQ"
+            "label": {
+              "active": {
+                "En": "EQ Band",
+                "Fr": "Bande EQ",
+                "De": "EQ-Band",
+                "Es": "Banda EQ"
+              }
             },
             "options": [
               "LF",
@@ -122,11 +128,13 @@
             "value": {
               "default_value": "Solid State"
             },
-            "label_active": {
-              "En": "Preamp",
-              "Fr": "Preamp",
-              "De": "Preamp",
-              "Es": "Preamp"
+            "label": {
+              "active": {
+                "En": "Preamp",
+                "Fr": "Preamp",
+                "De": "Preamp",
+                "Es": "Preamp"
+              }
             },
             "options": [
               "Tube",
@@ -149,11 +157,13 @@
             "value": {
               "default_value": "A"
             },
-            "label_active": {
-              "En": "Group",
-              "Fr": "Group",
-              "De": "Group",
-              "Es": "Group"
+            "label": {
+              "active": {
+                "En": "Group",
+                "Fr": "Group",
+                "De": "Group",
+                "Es": "Group"
+              }
             },
             "options": [
               "A",
@@ -177,11 +187,13 @@
             "value": {
               "default_value": "Off"
             },
-            "label_active": {
-              "En": "Effect",
-              "Fr": "Effect",
-              "De": "Effect",
-              "Es": "Effect"
+            "label": {
+              "active": {
+                "En": "Effect",
+                "Fr": "Effect",
+                "De": "Effect",
+                "Es": "Effect"
+              }
             },
             "options": [
               "Off",
@@ -204,11 +216,13 @@
             "value": {
               "default_value": "Main"
             },
-            "label_active": {
-              "En": "Output",
-              "Fr": "Sortie",
-              "De": "Ausgang",
-              "Es": "Salida"
+            "label": {
+              "active": {
+                "En": "Output",
+                "Fr": "Sortie",
+                "De": "Ausgang",
+                "Es": "Salida"
+              }
             },
             "options": [
               "Main",
@@ -231,11 +245,13 @@
             "value": {
               "default_value": "A"
             },
-            "label_active": {
-              "En": "Source",
-              "Fr": "Source",
-              "De": "Source",
-              "Es": "Source"
+            "label": {
+              "active": {
+                "En": "Source",
+                "Fr": "Source",
+                "De": "Source",
+                "Es": "Source"
+              }
             },
             "options": [
               "A",
@@ -262,11 +278,13 @@
             "value": {
               "default_value": "Off"
             },
-            "label_active": {
-              "En": "Gate",
-              "Fr": "Porte",
-              "De": "Gate",
-              "Es": "Puerta"
+            "label": {
+              "active": {
+                "En": "Gate",
+                "Fr": "Porte",
+                "De": "Gate",
+                "Es": "Puerta"
+              }
             },
             "options": [
               "Off",
@@ -289,11 +307,13 @@
             "value": {
               "default_value": "Normal"
             },
-            "label_active": {
-              "En": "Phase",
-              "Fr": "Phase",
-              "De": "Phase",
-              "Es": "Fase"
+            "label": {
+              "active": {
+                "En": "Phase",
+                "Fr": "Phase",
+                "De": "Phase",
+                "Es": "Fase"
+              }
             },
             "options": [
               "Normal",
@@ -341,11 +361,13 @@
             "value": {
               "default_value": "Normal"
             },
-            "label_active": {
-              "En": "Mode",
-              "Fr": "Mode",
-              "De": "Mode",
-              "Es": "Mode"
+            "label": {
+              "active": {
+                "En": "Mode",
+                "Fr": "Mode",
+                "De": "Mode",
+                "Es": "Mode"
+              }
             },
             "options": [
               "Normal",
@@ -368,11 +390,13 @@
             "value": {
               "default_value": "A"
             },
-            "label_active": {
-              "En": "Type",
-              "Fr": "Type",
-              "De": "Type",
-              "Es": "Type"
+            "label": {
+              "active": {
+                "En": "Type",
+                "Fr": "Type",
+                "De": "Type",
+                "Es": "Type"
+              }
             },
             "options": [
               "A",
@@ -395,11 +419,13 @@
             "value": {
               "default_value": "Mic"
             },
-            "label_active": {
-              "En": "Input",
-              "Fr": "Entrée",
-              "De": "Eingang",
-              "Es": "Entrada"
+            "label": {
+              "active": {
+                "En": "Input",
+                "Fr": "Entrée",
+                "De": "Eingang",
+                "Es": "Entrada"
+              }
             },
             "options": [
               "Mic",
@@ -422,11 +448,13 @@
             "value": {
               "default_value": "MF"
             },
-            "label_active": {
-              "En": "EQ",
-              "Fr": "EQ",
-              "De": "EQ",
-              "Es": "EQ"
+            "label": {
+              "active": {
+                "En": "EQ",
+                "Fr": "EQ",
+                "De": "EQ",
+                "Es": "EQ"
+              }
             },
             "options": [
               "LF",
@@ -449,11 +477,13 @@
             "value": {
               "default_value": "SS"
             },
-            "label_active": {
-              "En": "Preamp",
-              "Fr": "Preamp",
-              "De": "Preamp",
-              "Es": "Preamp"
+            "label": {
+              "active": {
+                "En": "Preamp",
+                "Fr": "Preamp",
+                "De": "Preamp",
+                "Es": "Preamp"
+              }
             },
             "options": [
               "Tube",
@@ -476,11 +506,13 @@
             "value": {
               "default_value": "1-4"
             },
-            "label_active": {
-              "En": "Channel",
-              "Fr": "Canal",
-              "De": "Kanal",
-              "Es": "Canal"
+            "label": {
+              "active": {
+                "En": "Channel",
+                "Fr": "Canal",
+                "De": "Kanal",
+                "Es": "Canal"
+              }
             },
             "options": [
               "1-4",
@@ -503,11 +535,13 @@
             "value": {
               "default_value": "Off"
             },
-            "label_active": {
-              "En": "Effect",
-              "Fr": "Effect",
-              "De": "Effect",
-              "Es": "Effect"
+            "label": {
+              "active": {
+                "En": "Effect",
+                "Fr": "Effect",
+                "De": "Effect",
+                "Es": "Effect"
+              }
             },
             "options": [
               "Off",
@@ -530,11 +564,13 @@
             "value": {
               "default_value": "Main"
             },
-            "label_active": {
-              "En": "Output",
-              "Fr": "Sortie",
-              "De": "Ausgang",
-              "Es": "Salida"
+            "label": {
+              "active": {
+                "En": "Output",
+                "Fr": "Sortie",
+                "De": "Ausgang",
+                "Es": "Salida"
+              }
             },
             "options": [
               "Main",
@@ -557,11 +593,13 @@
             "value": {
               "default_value": "Off"
             },
-            "label_active": {
-              "En": "Gate",
-              "Fr": "Porte",
-              "De": "Gate",
-              "Es": "Puerta"
+            "label": {
+              "active": {
+                "En": "Gate",
+                "Fr": "Porte",
+                "De": "Gate",
+                "Es": "Puerta"
+              }
             },
             "options": [
               "Off",
@@ -584,11 +622,13 @@
             "value": {
               "default_value": "Normal"
             },
-            "label_active": {
-              "En": "Phase",
-              "Fr": "Phase",
-              "De": "Phase",
-              "Es": "Fase"
+            "label": {
+              "active": {
+                "En": "Phase",
+                "Fr": "Phase",
+                "De": "Phase",
+                "Es": "Fase"
+              }
             },
             "options": [
               "Normal",
@@ -636,11 +676,13 @@
             "value": {
               "default_value": "Flat"
             },
-            "label_active": {
-              "En": "LF Band",
-              "Fr": "Bande LF",
-              "De": "LF-Band",
-              "Es": "Banda LF"
+            "label": {
+              "active": {
+                "En": "LF Band",
+                "Fr": "Bande LF",
+                "De": "LF-Band",
+                "Es": "Banda LF"
+              }
             },
             "options": [
               "Flat",
@@ -663,11 +705,13 @@
             "value": {
               "default_value": "Flat"
             },
-            "label_active": {
-              "En": "MF Band",
-              "Fr": "Bande MF",
-              "De": "MF-Band",
-              "Es": "Banda MF"
+            "label": {
+              "active": {
+                "En": "MF Band",
+                "Fr": "Bande MF",
+                "De": "MF-Band",
+                "Es": "Banda MF"
+              }
             },
             "options": [
               "Flat",
@@ -690,11 +734,13 @@
             "value": {
               "default_value": "Flat"
             },
-            "label_active": {
-              "En": "HF Band",
-              "Fr": "Bande HF",
-              "De": "HF-Band",
-              "Es": "Banda HF"
+            "label": {
+              "active": {
+                "En": "HF Band",
+                "Fr": "Bande HF",
+                "De": "HF-Band",
+                "Es": "Banda HF"
+              }
             },
             "options": [
               "Flat",
@@ -717,11 +763,13 @@
             "value": {
               "default_value": "Off"
             },
-            "label_active": {
-              "En": "HPF",
-              "Fr": "HPF",
-              "De": "HPF",
-              "Es": "HPF"
+            "label": {
+              "active": {
+                "En": "HPF",
+                "Fr": "HPF",
+                "De": "HPF",
+                "Es": "HPF"
+              }
             },
             "options": [
               "Off",
@@ -743,11 +791,13 @@
             "value": {
               "default_value": "Off"
             },
-            "label_active": {
-              "En": "LPF",
-              "Fr": "LPF",
-              "De": "LPF",
-              "Es": "LPF"
+            "label": {
+              "active": {
+                "En": "LPF",
+                "Fr": "LPF",
+                "De": "LPF",
+                "Es": "LPF"
+              }
             },
             "options": [
               "Off",
@@ -769,11 +819,13 @@
             "value": {
               "default_value": "Off"
             },
-            "label_active": {
-              "En": "BPF",
-              "Fr": "BPF",
-              "De": "BPF",
-              "Es": "BPF"
+            "label": {
+              "active": {
+                "En": "BPF",
+                "Fr": "BPF",
+                "De": "BPF",
+                "Es": "BPF"
+              }
             },
             "options": [
               "Off",
@@ -795,11 +847,13 @@
             "value": {
               "default_value": "12dB"
             },
-            "label_active": {
-              "En": "Slope",
-              "Fr": "Slope",
-              "De": "Slope",
-              "Es": "Slope"
+            "label": {
+              "active": {
+                "En": "Slope",
+                "Fr": "Slope",
+                "De": "Slope",
+                "Es": "Slope"
+              }
             },
             "options": [
               "12dB",
@@ -822,11 +876,13 @@
             "value": {
               "default_value": "Narrow"
             },
-            "label_active": {
-              "En": "Q",
-              "Fr": "Q",
-              "De": "Q",
-              "Es": "Q"
+            "label": {
+              "active": {
+                "En": "Q",
+                "Fr": "Q",
+                "De": "Q",
+                "Es": "Q"
+              }
             },
             "options": [
               "Narrow",
@@ -848,11 +904,13 @@
             "value": {
               "default_value": "Med"
             },
-            "label_active": {
-              "En": "Res",
-              "Fr": "Res",
-              "De": "Res",
-              "Es": "Res"
+            "label": {
+              "active": {
+                "En": "Res",
+                "Fr": "Res",
+                "De": "Res",
+                "Es": "Res"
+              }
             },
             "options": [
               "Low",
@@ -875,11 +933,13 @@
             "value": {
               "default_value": "Flat"
             },
-            "label_active": {
-              "En": "Gain",
-              "Fr": "Gain",
-              "De": "Verstärkung",
-              "Es": "Ganancia"
+            "label": {
+              "active": {
+                "En": "Gain",
+                "Fr": "Gain",
+                "De": "Verstärkung",
+                "Es": "Ganancia"
+              }
             },
             "options": [
               "Boost",
@@ -928,11 +988,13 @@
             "value": {
               "default_value": "Tube"
             },
-            "label_active": {
-              "En": "Tube",
-              "Fr": "Tube",
-              "De": "Tube",
-              "Es": "Tube"
+            "label": {
+              "active": {
+                "En": "Tube",
+                "Fr": "Tube",
+                "De": "Tube",
+                "Es": "Tube"
+              }
             },
             "options": [
               "Tube",
@@ -955,11 +1017,13 @@
             "value": {
               "default_value": "SS"
             },
-            "label_active": {
-              "En": "SS",
-              "Fr": "SS",
-              "De": "SS",
-              "Es": "SS"
+            "label": {
+              "active": {
+                "En": "SS",
+                "Fr": "SS",
+                "De": "SS",
+                "Es": "SS"
+              }
             },
             "options": [
               "Tube",
@@ -982,11 +1046,13 @@
             "value": {
               "default_value": "FET"
             },
-            "label_active": {
-              "En": "FET",
-              "Fr": "FET",
-              "De": "FET",
-              "Es": "FET"
+            "label": {
+              "active": {
+                "En": "FET",
+                "Fr": "FET",
+                "De": "FET",
+                "Es": "FET"
+              }
             },
             "options": [
               "Tube",
@@ -1009,11 +1075,13 @@
             "value": {
               "default_value": "OpAmp"
             },
-            "label_active": {
-              "En": "OpAmp",
-              "Fr": "OpAmp",
-              "De": "OpAmp",
-              "Es": "OpAmp"
+            "label": {
+              "active": {
+                "En": "OpAmp",
+                "Fr": "OpAmp",
+                "De": "OpAmp",
+                "Es": "OpAmp"
+              }
             },
             "options": [
               "OpAmp",
@@ -1035,11 +1103,13 @@
             "value": {
               "default_value": "Discrete"
             },
-            "label_active": {
-              "En": "Discrete",
-              "Fr": "Discrete",
-              "De": "Discrete",
-              "Es": "Discrete"
+            "label": {
+              "active": {
+                "En": "Discrete",
+                "Fr": "Discrete",
+                "De": "Discrete",
+                "Es": "Discrete"
+              }
             },
             "options": [
               "OpAmp",
@@ -1061,11 +1131,13 @@
             "value": {
               "default_value": "Vintage"
             },
-            "label_active": {
-              "En": "Vintage",
-              "Fr": "Vintage",
-              "De": "Vintage",
-              "Es": "Vintage"
+            "label": {
+              "active": {
+                "En": "Vintage",
+                "Fr": "Vintage",
+                "De": "Vintage",
+                "Es": "Vintage"
+              }
             },
             "options": [
               "Vintage",
@@ -1087,11 +1159,13 @@
             "value": {
               "default_value": "Modern"
             },
-            "label_active": {
-              "En": "Modern",
-              "Fr": "Moderne",
-              "De": "Modern",
-              "Es": "Moderno"
+            "label": {
+              "active": {
+                "En": "Modern",
+                "Fr": "Moderne",
+                "De": "Modern",
+                "Es": "Moderno"
+              }
             },
             "options": [
               "Vintage",
@@ -1113,11 +1187,13 @@
             "value": {
               "default_value": "Clean"
             },
-            "label_active": {
-              "En": "Clean",
-              "Fr": "Clean",
-              "De": "Clean",
-              "Es": "Clean"
+            "label": {
+              "active": {
+                "En": "Clean",
+                "Fr": "Clean",
+                "De": "Clean",
+                "Es": "Clean"
+              }
             },
             "options": [
               "Clean",
@@ -1139,11 +1215,13 @@
             "value": {
               "default_value": "Boost"
             },
-            "label_active": {
-              "En": "Boost",
-              "Fr": "Boost",
-              "De": "Boost",
-              "Es": "Boost"
+            "label": {
+              "active": {
+                "En": "Boost",
+                "Fr": "Boost",
+                "De": "Boost",
+                "Es": "Boost"
+              }
             },
             "options": [
               "Boost",
@@ -1165,11 +1243,13 @@
             "value": {
               "default_value": "Cut"
             },
-            "label_active": {
-              "En": "Cut",
-              "Fr": "Cut",
-              "De": "Cut",
-              "Es": "Cut"
+            "label": {
+              "active": {
+                "En": "Cut",
+                "Fr": "Cut",
+                "De": "Cut",
+                "Es": "Cut"
+              }
             },
             "options": [
               "Boost",
@@ -1215,11 +1295,13 @@
           "fields": {
             "group_a_latching": {
               "type": "_TrapezoidButtonToggler",
-              "label_active": {
-                "En": "Group A",
-                "Fr": "Group A",
-                "De": "Group A",
-                "Es": "Group A"
+              "label": {
+                "active": {
+                  "En": "Group A",
+                  "Fr": "Group A",
+                  "De": "Group A",
+                  "Es": "Group A"
+                }
               },
               "options": [
                 "A",
@@ -1242,11 +1324,13 @@
             },
             "group_b_momentary": {
               "type": "_TrapezoidButtonToggler",
-              "label_active": {
-                "En": "Group B",
-                "Fr": "Group B",
-                "De": "Group B",
-                "Es": "Group B"
+              "label": {
+                "active": {
+                  "En": "Group B",
+                  "Fr": "Group B",
+                  "De": "Group B",
+                  "Es": "Group B"
+                }
               },
               "options": [
                 "A",
@@ -1269,11 +1353,13 @@
             },
             "group_c_latching": {
               "type": "_TrapezoidButtonToggler",
-              "label_active": {
-                "En": "Group C",
-                "Fr": "Group C",
-                "De": "Group C",
-                "Es": "Group C"
+              "label": {
+                "active": {
+                  "En": "Group C",
+                  "Fr": "Group C",
+                  "De": "Group C",
+                  "Es": "Group C"
+                }
               },
               "options": [
                 "A",
@@ -1296,11 +1382,13 @@
             },
             "all_momentary": {
               "type": "_TrapezoidButtonToggler",
-              "label_active": {
-                "En": "All",
-                "Fr": "All",
-                "De": "All",
-                "Es": "All"
+              "label": {
+                "active": {
+                  "En": "All",
+                  "Fr": "All",
+                  "De": "All",
+                  "Es": "All"
+                }
               },
               "options": [
                 "On",
@@ -1322,11 +1410,13 @@
             },
             "none_latching": {
               "type": "_TrapezoidButtonToggler",
-              "label_active": {
-                "En": "None",
-                "Fr": "None",
-                "De": "None",
-                "Es": "None"
+              "label": {
+                "active": {
+                  "En": "None",
+                  "Fr": "None",
+                  "De": "None",
+                  "Es": "None"
+                }
               },
               "options": [
                 "On",
@@ -1348,11 +1438,13 @@
             },
             "sub_mix_momentary": {
               "type": "_TrapezoidButtonToggler",
-              "label_active": {
-                "En": "Sub Mix",
-                "Fr": "Sub Mix",
-                "De": "Sub Mix",
-                "Es": "Sub Mezcla"
+              "label": {
+                "active": {
+                  "En": "Sub Mix",
+                  "Fr": "Sub Mix",
+                  "De": "Sub Mix",
+                  "Es": "Sub Mezcla"
+                }
               },
               "options": [
                 "On",
@@ -1374,11 +1466,13 @@
             },
             "main_latching": {
               "type": "_TrapezoidButtonToggler",
-              "label_active": {
-                "En": "Main",
-                "Fr": "Main",
-                "De": "Main",
-                "Es": "Main"
+              "label": {
+                "active": {
+                  "En": "Main",
+                  "Fr": "Main",
+                  "De": "Main",
+                  "Es": "Main"
+                }
               },
               "options": [
                 "On",
@@ -1400,11 +1494,13 @@
             },
             "bus1_momentary": {
               "type": "_TrapezoidButtonToggler",
-              "label_active": {
-                "En": "Bus 1",
-                "Fr": "Bus 1",
-                "De": "Bus 1",
-                "Es": "Bús 1"
+              "label": {
+                "active": {
+                  "En": "Bus 1",
+                  "Fr": "Bus 1",
+                  "De": "Bus 1",
+                  "Es": "Bús 1"
+                }
               },
               "options": [
                 "Active",
@@ -1426,11 +1522,13 @@
             },
             "bus2_latching": {
               "type": "_TrapezoidButtonToggler",
-              "label_active": {
-                "En": "Bus 2",
-                "Fr": "Bus 2",
-                "De": "Bus 2",
-                "Es": "Bús 2"
+              "label": {
+                "active": {
+                  "En": "Bus 2",
+                  "Fr": "Bus 2",
+                  "De": "Bus 2",
+                  "Es": "Bús 2"
+                }
               },
               "options": [
                 "Active",
@@ -1452,11 +1550,13 @@
             },
             "bus3_momentary_wide": {
               "type": "_TrapezoidButtonToggler",
-              "label_active": {
-                "En": "Bus 3",
-                "Fr": "Bus 3",
-                "De": "Bus 3",
-                "Es": "Bús 3"
+              "label": {
+                "active": {
+                  "En": "Bus 3",
+                  "Fr": "Bus 3",
+                  "De": "Bus 3",
+                  "Es": "Bús 3"
+                }
               },
               "options": [
                 "Active",

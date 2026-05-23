@@ -26,65 +26,79 @@
             "value": {
               "default_value": "1"
             },
-            "label_active": {
-              "En": "Vertical Rects (Slow)",
-              "Fr": "Vertical Rects (Slow)",
-              "De": "Vertikal Rects (Slow)",
-              "Es": "Vertical Rects (Slow)"
+            "label": {
+              "active": {
+                "En": "Vertical Rects (Slow)",
+                "Fr": "Vertical Rects (Slow)",
+                "De": "Vertikal Rects (Slow)",
+                "Es": "Vertical Rects (Slow)"
+              }
             },
             "layout_columns": 1,
             "options": {
               "1": {
-                "label_active": {
-                  "En": "1",
-                  "Fr": "1",
-                  "De": "1",
-                  "Es": "1"
+                "label": {
+                  "active": {
+                    "En": "1",
+                    "Fr": "1",
+                    "De": "1",
+                    "Es": "1"
+                  }
                 },
                 "color": "#FF0000"
               },
               "2": {
-                "label_active": {
-                  "En": "2",
-                  "Fr": "2",
-                  "De": "2",
-                  "Es": "2"
+                "label": {
+                  "active": {
+                    "En": "2",
+                    "Fr": "2",
+                    "De": "2",
+                    "Es": "2"
+                  }
                 },
                 "color": "#FF7F00"
               },
               "3": {
-                "label_active": {
-                  "En": "3",
-                  "Fr": "3",
-                  "De": "3",
-                  "Es": "3"
+                "label": {
+                  "active": {
+                    "En": "3",
+                    "Fr": "3",
+                    "De": "3",
+                    "Es": "3"
+                  }
                 },
                 "color": "#FFFF00"
               },
               "4": {
-                "label_active": {
-                  "En": "4",
-                  "Fr": "4",
-                  "De": "4",
-                  "Es": "4"
+                "label": {
+                  "active": {
+                    "En": "4",
+                    "Fr": "4",
+                    "De": "4",
+                    "Es": "4"
+                  }
                 },
                 "color": "#00FF00"
               },
               "5": {
-                "label_active": {
-                  "En": "5",
-                  "Fr": "5",
-                  "De": "5",
-                  "Es": "5"
+                "label": {
+                  "active": {
+                    "En": "5",
+                    "Fr": "5",
+                    "De": "5",
+                    "Es": "5"
+                  }
                 },
                 "color": "#0000FF"
               },
               "6": {
-                "label_active": {
-                  "En": "6",
-                  "Fr": "6",
-                  "De": "6",
-                  "Es": "6"
+                "label": {
+                  "active": {
+                    "En": "6",
+                    "Fr": "6",
+                    "De": "6",
+                    "Es": "6"
+                  }
                 },
                 "color": "#4B0082"
               }
@@ -105,11 +119,13 @@
             "value": {
               "default_value": "A"
             },
-            "label_active": {
-              "En": "Vertical Rounds (Medium)",
-              "Fr": "Vertical Rounds (Medium)",
-              "De": "Vertikal Rounds (Medium)",
-              "Es": "Vertical Rounds (Medium)"
+            "label": {
+              "active": {
+                "En": "Vertical Rounds (Medium)",
+                "Fr": "Vertical Rounds (Medium)",
+                "De": "Vertikal Rounds (Medium)",
+                "Es": "Vertical Rounds (Medium)"
+              }
             },
             "layout_columns": 1,
             "options": [
@@ -138,65 +154,79 @@
             "value": {
               "default_value": "1"
             },
-            "label_active": {
-              "En": "Tall Rects (Normal)",
-              "Fr": "Tall Rects (Normal)",
-              "De": "Tall Rects (Normal)",
-              "Es": "Tall Rects (Normal)"
+            "label": {
+              "active": {
+                "En": "Tall Rects (Normal)",
+                "Fr": "Tall Rects (Normal)",
+                "De": "Tall Rects (Normal)",
+                "Es": "Tall Rects (Normal)"
+              }
             },
             "layout_columns": 1,
             "options": {
               "1": {
-                "label_active": {
-                  "En": "1",
-                  "Fr": "1",
-                  "De": "1",
-                  "Es": "1"
+                "label": {
+                  "active": {
+                    "En": "1",
+                    "Fr": "1",
+                    "De": "1",
+                    "Es": "1"
+                  }
                 },
                 "color": "#FFFFFF"
               },
               "2": {
-                "label_active": {
-                  "En": "2",
-                  "Fr": "2",
-                  "De": "2",
-                  "Es": "2"
+                "label": {
+                  "active": {
+                    "En": "2",
+                    "Fr": "2",
+                    "De": "2",
+                    "Es": "2"
+                  }
                 },
                 "color": "#FFFFFF"
               },
               "3": {
-                "label_active": {
-                  "En": "3",
-                  "Fr": "3",
-                  "De": "3",
-                  "Es": "3"
+                "label": {
+                  "active": {
+                    "En": "3",
+                    "Fr": "3",
+                    "De": "3",
+                    "Es": "3"
+                  }
                 },
                 "color": "#FFFFFF"
               },
               "4": {
-                "label_active": {
-                  "En": "4",
-                  "Fr": "4",
-                  "De": "4",
-                  "Es": "4"
+                "label": {
+                  "active": {
+                    "En": "4",
+                    "Fr": "4",
+                    "De": "4",
+                    "Es": "4"
+                  }
                 },
                 "color": "#FFFFFF"
               },
               "5": {
-                "label_active": {
-                  "En": "5",
-                  "Fr": "5",
-                  "De": "5",
-                  "Es": "5"
+                "label": {
+                  "active": {
+                    "En": "5",
+                    "Fr": "5",
+                    "De": "5",
+                    "Es": "5"
+                  }
                 },
                 "color": "#FF0000"
               },
               "6": {
-                "label_active": {
-                  "En": "6",
-                  "Fr": "6",
-                  "De": "6",
-                  "Es": "6"
+                "label": {
+                  "active": {
+                    "En": "6",
+                    "Fr": "6",
+                    "De": "6",
+                    "Es": "6"
+                  }
                 },
                 "color": "#00FF00"
               }
@@ -217,11 +247,13 @@
             "value": {
               "default_value": "1"
             },
-            "label_active": {
-              "En": "Squares (Fast)",
-              "Fr": "Squares (Fast)",
-              "De": "Squares (Fast)",
-              "Es": "Squares (Fast)"
+            "label": {
+              "active": {
+                "En": "Squares (Fast)",
+                "Fr": "Squares (Fast)",
+                "De": "Squares (Fast)",
+                "Es": "Squares (Fast)"
+              }
             },
             "layout_columns": 1,
             "options": [
@@ -254,11 +286,13 @@
             "layout": {
               "col_span": 4
             },
-            "label_active": {
-              "En": "Horizontal Red",
-              "Fr": "Horizontal Red",
-              "De": "Horizontal Red",
-              "Es": "Horizontal Red"
+            "label": {
+              "active": {
+                "En": "Horizontal Red",
+                "Fr": "Horizontal Red",
+                "De": "Horizontal Red",
+                "Es": "Horizontal Red"
+              }
             },
             "layout_columns": 8,
             "options": [
@@ -287,83 +321,101 @@
             "layout": {
               "col_span": 4
             },
-            "label_active": {
-              "En": "White to Orange",
-              "Fr": "White to Orange",
-              "De": "White to Orange",
-              "Es": "White to Orange"
+            "label": {
+              "active": {
+                "En": "White to Orange",
+                "Fr": "White to Orange",
+                "De": "White to Orange",
+                "Es": "White to Orange"
+              }
             },
             "layout_columns": 8,
             "options": {
               "G1": {
-                "label_active": {
-                  "En": "G1",
-                  "Fr": "G1",
-                  "De": "G1",
-                  "Es": "G1"
+                "label": {
+                  "active": {
+                    "En": "G1",
+                    "Fr": "G1",
+                    "De": "G1",
+                    "Es": "G1"
+                  }
                 },
                 "color": "#FFFFFF"
               },
               "G2": {
-                "label_active": {
-                  "En": "G2",
-                  "Fr": "G2",
-                  "De": "G2",
-                  "Es": "G2"
+                "label": {
+                  "active": {
+                    "En": "G2",
+                    "Fr": "G2",
+                    "De": "G2",
+                    "Es": "G2"
+                  }
                 },
                 "color": "#FFF2E0"
               },
               "G3": {
-                "label_active": {
-                  "En": "G3",
-                  "Fr": "G3",
-                  "De": "G3",
-                  "Es": "G3"
+                "label": {
+                  "active": {
+                    "En": "G3",
+                    "Fr": "G3",
+                    "De": "G3",
+                    "Es": "G3"
+                  }
                 },
                 "color": "#FFE5C1"
               },
               "G4": {
-                "label_active": {
-                  "En": "G4",
-                  "Fr": "G4",
-                  "De": "G4",
-                  "Es": "G4"
+                "label": {
+                  "active": {
+                    "En": "G4",
+                    "Fr": "G4",
+                    "De": "G4",
+                    "Es": "G4"
+                  }
                 },
                 "color": "#FFD8A2"
               },
               "G5": {
-                "label_active": {
-                  "En": "G5",
-                  "Fr": "G5",
-                  "De": "G5",
-                  "Es": "G5"
+                "label": {
+                  "active": {
+                    "En": "G5",
+                    "Fr": "G5",
+                    "De": "G5",
+                    "Es": "G5"
+                  }
                 },
                 "color": "#FFCB83"
               },
               "G6": {
-                "label_active": {
-                  "En": "G6",
-                  "Fr": "G6",
-                  "De": "G6",
-                  "Es": "G6"
+                "label": {
+                  "active": {
+                    "En": "G6",
+                    "Fr": "G6",
+                    "De": "G6",
+                    "Es": "G6"
+                  }
                 },
                 "color": "#FFBE64"
               },
               "G7": {
-                "label_active": {
-                  "En": "G7",
-                  "Fr": "G7",
-                  "De": "G7",
-                  "Es": "G7"
+                "label": {
+                  "active": {
+                    "En": "G7",
+                    "Fr": "G7",
+                    "De": "G7",
+                    "Es": "G7"
+                  }
                 },
                 "color": "#FFB145"
               },
               "G8": {
-                "label_active": {
-                  "En": "G8",
-                  "Fr": "G8",
-                  "De": "G8",
-                  "Es": "G8"
+                "label": {
+                  "active": {
+                    "En": "G8",
+                    "Fr": "G8",
+                    "De": "G8",
+                    "Es": "G8"
+                  }
                 },
                 "color": "#FFA500"
               }

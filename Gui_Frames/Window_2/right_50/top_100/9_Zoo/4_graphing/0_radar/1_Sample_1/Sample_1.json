@@ -24,11 +24,13 @@
           "radar_eye_1": {
             "type": "_Radar",
             "transparent": true,
-            "label_active": {
-              "En": "Radar Eye 01",
-              "Fr": "Radar Eye 01",
-              "De": "Radar Eye 01",
-              "Es": "Radar Eye 01"
+            "label": {
+              "active": {
+                "En": "Radar Eye 01",
+                "Fr": "Radar Eye 01",
+                "De": "Radar Eye 01",
+                "Es": "Radar Eye 01"
+              }
             },
             "app_settings": {
               "title": "Radar Eye v1.0",
@@ -85,11 +87,13 @@
           "radar_eye_2": {
             "type": "_Radar",
             "transparent": true,
-            "label_active": {
-              "En": "Radar Eye 02",
-              "Fr": "Radar Eye 02",
-              "De": "Radar Eye 02",
-              "Es": "Radar Eye 02"
+            "label": {
+              "active": {
+                "En": "Radar Eye 02",
+                "Fr": "Radar Eye 02",
+                "De": "Radar Eye 02",
+                "Es": "Radar Eye 02"
+              }
             },
             "app_settings": {
               "title": "Radar Eye v1.0",
@@ -146,11 +150,13 @@
           "radar_eye_3": {
             "type": "_Radar",
             "transparent": true,
-            "label_active": {
-              "En": "Radar Eye 03",
-              "Fr": "Radar Eye 03",
-              "De": "Radar Eye 03",
-              "Es": "Radar Eye 03"
+            "label": {
+              "active": {
+                "En": "Radar Eye 03",
+                "Fr": "Radar Eye 03",
+                "De": "Radar Eye 03",
+                "Es": "Radar Eye 03"
+              }
             },
             "app_settings": {
               "title": "Radar Eye v1.0",
@@ -207,11 +213,13 @@
           "radar_eye_4": {
             "type": "_Radar",
             "transparent": true,
-            "label_active": {
-              "En": "Radar Eye 04",
-              "Fr": "Radar Eye 04",
-              "De": "Radar Eye 04",
-              "Es": "Radar Eye 04"
+            "label": {
+              "active": {
+                "En": "Radar Eye 04",
+                "Fr": "Radar Eye 04",
+                "De": "Radar Eye 04",
+                "Es": "Radar Eye 04"
+              }
             },
             "app_settings": {
               "title": "Radar Eye v1.0",
@@ -268,11 +276,13 @@
           "radar_eye_5": {
             "type": "_Radar",
             "transparent": true,
-            "label_active": {
-              "En": "Radar Eye 05",
-              "Fr": "Radar Eye 05",
-              "De": "Radar Eye 05",
-              "Es": "Radar Eye 05"
+            "label": {
+              "active": {
+                "En": "Radar Eye 05",
+                "Fr": "Radar Eye 05",
+                "De": "Radar Eye 05",
+                "Es": "Radar Eye 05"
+              }
             },
             "app_settings": {
               "title": "Radar Eye v1.0",
@@ -329,11 +339,13 @@
           "radar_eye_6": {
             "type": "_Radar",
             "transparent": true,
-            "label_active": {
-              "En": "Radar Eye 06",
-              "Fr": "Radar Eye 06",
-              "De": "Radar Eye 06",
-              "Es": "Radar Eye 06"
+            "label": {
+              "active": {
+                "En": "Radar Eye 06",
+                "Fr": "Radar Eye 06",
+                "De": "Radar Eye 06",
+                "Es": "Radar Eye 06"
+              }
             },
             "app_settings": {
               "title": "Radar Eye v1.0",
@@ -390,11 +402,13 @@
           "radar_eye_7": {
             "type": "_Radar",
             "transparent": true,
-            "label_active": {
-              "En": "Radar Eye 07",
-              "Fr": "Radar Eye 07",
-              "De": "Radar Eye 07",
-              "Es": "Radar Eye 07"
+            "label": {
+              "active": {
+                "En": "Radar Eye 07",
+                "Fr": "Radar Eye 07",
+                "De": "Radar Eye 07",
+                "Es": "Radar Eye 07"
+              }
             },
             "app_settings": {
               "title": "Radar Eye v1.0",
@@ -451,11 +465,13 @@
           "radar_eye_8": {
             "type": "_Radar",
             "transparent": true,
-            "label_active": {
-              "En": "Radar Eye 08",
-              "Fr": "Radar Eye 08",
-              "De": "Radar Eye 08",
-              "Es": "Radar Eye 08"
+            "label": {
+              "active": {
+                "En": "Radar Eye 08",
+                "Fr": "Radar Eye 08",
+                "De": "Radar Eye 08",
+                "Es": "Radar Eye 08"
+              }
             },
             "app_settings": {
               "title": "Radar Eye v1.0",
@@ -512,11 +528,13 @@
           "radar_eye_9": {
             "type": "_Radar",
             "transparent": true,
-            "label_active": {
-              "En": "Radar Eye 09",
-              "Fr": "Radar Eye 09",
-              "De": "Radar Eye 09",
-              "Es": "Radar Eye 09"
+            "label": {
+              "active": {
+                "En": "Radar Eye 09",
+                "Fr": "Radar Eye 09",
+                "De": "Radar Eye 09",
+                "Es": "Radar Eye 09"
+              }
             },
             "app_settings": {
               "title": "Radar Eye v1.0",

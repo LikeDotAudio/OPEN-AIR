@@ -18,32 +18,24 @@
           "Immediate Trigger": {
             "type": "_GuiActuator",
             "label": {
-              "En": "Trigger",
-              "Fr": "Déclencher",
-              "De": "Auslösen",
-              "Es": "Disparar"
-            },
-            "label_active": {
-              "En": "Trigger",
-              "Fr": "Déclencher",
-              "De": "Auslösen",
-              "Es": "Disparar"
+              "active": {
+                "En": "Trigger",
+                "Fr": "Déclencher",
+                "De": "Auslösen",
+                "Es": "Disparar"
+              }
             },
             "message": ":TRIGger"
           },
           "Trigger Source": {
             "type": "_GuiActuator",
             "label": {
-              "En": "Set Source",
-              "Fr": "Définir la source",
-              "De": "Quelle einstellen",
-              "Es": "Establecer fuente"
-            },
-            "label_active": {
-              "En": "Set Source",
-              "Fr": "Définir la source",
-              "De": "Quelle einstellen",
-              "Es": "Establecer fuente"
+              "active": {
+                "En": "Set Source",
+                "Fr": "Définir la source",
+                "De": "Quelle einstellen",
+                "Es": "Establecer fuente"
+              }
             },
             "message": ":TRIGger:SOURce {value}",
             "options": [
@@ -56,64 +48,48 @@
           "Trigger Delay": {
             "type": "_GuiActuator",
             "label": {
-              "En": "Set Delay",
-              "Fr": "Définir le délai",
-              "De": "Verzögerung einstellen",
-              "Es": "Establecer retraso"
-            },
-            "label_active": {
-              "En": "Set Delay",
-              "Fr": "Définir le délai",
-              "De": "Verzögerung einstellen",
-              "Es": "Establecer retraso"
+              "active": {
+                "En": "Set Delay",
+                "Fr": "Définir le délai",
+                "De": "Verzögerung einstellen",
+                "Es": "Establecer retraso"
+              }
             },
             "message": ":TRIGger:DELay {value}"
           },
           "Lower Limit": {
             "type": "_GuiActuator",
             "label": {
-              "En": "Lower Limit",
-              "Fr": "Limite inférieure",
-              "De": "Untere Grenze",
-              "Es": "Límite inferior"
-            },
-            "label_active": {
-              "En": "Lower Limit",
-              "Fr": "Limite inférieure",
-              "De": "Untere Grenze",
-              "Es": "Límite inferior"
+              "active": {
+                "En": "Lower Limit",
+                "Fr": "Limite inférieure",
+                "De": "Untere Grenze",
+                "Es": "Límite inferior"
+              }
             },
             "message": ":CALCulate:LIMit:LOWer {value}"
           },
           "Upper Limit": {
             "type": "_GuiActuator",
             "label": {
-              "En": "Upper Limit",
-              "Fr": "Limite supérieure",
-              "De": "Obere Grenze",
-              "Es": "Límite superior"
-            },
-            "label_active": {
-              "En": "Upper Limit",
-              "Fr": "Limite supérieure",
-              "De": "Obere Grenze",
-              "Es": "Límite superior"
+              "active": {
+                "En": "Upper Limit",
+                "Fr": "Limite supérieure",
+                "De": "Obere Grenze",
+                "Es": "Límite superior"
+              }
             },
             "message": ":CALCulate:LIMit:UPPer {value}"
           },
           "Comparator State": {
             "type": "_GuiActuator",
             "label": {
-              "En": "Comparator",
-              "Fr": "Comparateur",
-              "De": "Komparator",
-              "Es": "Comparador"
-            },
-            "label_active": {
-              "En": "Comparator",
-              "Fr": "Comparateur",
-              "De": "Komparator",
-              "Es": "Comparador"
+              "active": {
+                "En": "Comparator",
+                "Fr": "Comparateur",
+                "De": "Komparator",
+                "Es": "Comparador"
+              }
             },
             "message": ":CALCulate:LIMit:STATe {value}",
             "options": [

@@ -34,11 +34,13 @@
                 "value": {
                   "default_value": "5.0"
                 },
-                "label_active": {
-                  "En": "Voltage (V)",
-                  "Fr": "Tension (V)",
-                  "De": "Spannenung (V)",
-                  "Es": "Voltaje (V)"
+                "label": {
+                  "active": {
+                    "En": "Voltage (V)",
+                    "Fr": "Tension (V)",
+                    "De": "Spannenung (V)",
+                    "Es": "Voltaje (V)"
+                  }
                 },
                 "message_details": {
                   "PSU_MODEL": {
@@ -84,11 +86,13 @@
                 "value": {
                   "default_value": "0.1"
                 },
-                "label_active": {
-                  "En": "Current (A)",
-                  "Fr": "Courant (A)",
-                  "De": "Strom (A)",
-                  "Es": "Corriente (A)"
+                "label": {
+                  "active": {
+                    "En": "Current (A)",
+                    "Fr": "Courant (A)",
+                    "De": "Strom (A)",
+                    "Es": "Corriente (A)"
+                  }
                 },
                 "message_details": {
                   "PSU_MODEL": {
@@ -131,17 +135,19 @@
             "fields": {
               "output_enable": {
                 "type": "_GuiButtonToggle",
-                "label_active": {
-                  "En": "ON",
-                  "Fr": "ON",
-                  "De": "EIN",
-                  "Es": "ENC"
-                },
-                "label_inactive": {
-                  "En": "OFF",
-                  "Fr": "OFF",
-                  "De": "AUS",
-                  "Es": "DES"
+                "label": {
+                  "active": {
+                    "En": "ON",
+                    "Fr": "ON",
+                    "De": "EIN",
+                    "Es": "ENC"
+                  },
+                  "inactive": {
+                    "En": "OFF",
+                    "Fr": "OFF",
+                    "De": "AUS",
+                    "Es": "DES"
+                  }
                 },
                 "style": {
                   "active": {

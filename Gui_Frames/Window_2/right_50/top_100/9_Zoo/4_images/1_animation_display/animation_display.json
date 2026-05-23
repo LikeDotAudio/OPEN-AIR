@@ -13,19 +13,23 @@
     "blocks": {
       "elements1": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Animated Time Circuits",
-          "Fr": "Animated Heure Circuits",
-          "De": "Animated Zeit Circuits",
-          "Es": "Animated Hora Circuits"
-        },
-        "examplefields": {
-          "type": "AnimationDisplay",
-          "label_active": {
+        "label": {
+          "active": {
             "En": "Animated Time Circuits",
             "Fr": "Animated Heure Circuits",
             "De": "Animated Zeit Circuits",
             "Es": "Animated Hora Circuits"
+          }
+        },
+        "examplefields": {
+          "type": "AnimationDisplay",
+          "label": {
+            "active": {
+              "En": "Animated Time Circuits",
+              "Fr": "Animated Heure Circuits",
+              "De": "Animated Zeit Circuits",
+              "Es": "Animated Hora Circuits"
+            }
           },
           "gif_path": "oaGui/Assets/time_circuits.gif",
           "value": {
@@ -36,19 +40,23 @@
       },
       "elements2": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Time Circuits (Start Frame 5)",
-          "Fr": "Heure Circuits (Start Frame 5)",
-          "De": "Zeit Circuits (Start Frame 5)",
-          "Es": "Hora Circuits (Start Frame 5)"
-        },
-        "examplefields": {
-          "type": "AnimationDisplay",
-          "label_active": {
+        "label": {
+          "active": {
             "En": "Time Circuits (Start Frame 5)",
             "Fr": "Heure Circuits (Start Frame 5)",
             "De": "Zeit Circuits (Start Frame 5)",
             "Es": "Hora Circuits (Start Frame 5)"
+          }
+        },
+        "examplefields": {
+          "type": "AnimationDisplay",
+          "label": {
+            "active": {
+              "En": "Time Circuits (Start Frame 5)",
+              "Fr": "Heure Circuits (Start Frame 5)",
+              "De": "Zeit Circuits (Start Frame 5)",
+              "Es": "Hora Circuits (Start Frame 5)"
+            }
           },
           "gif_path": "oaGui/Assets/time_circuits.gif",
           "value": {
@@ -59,19 +67,23 @@
       },
       "elements3": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Animation Start Frame 10",
-          "Fr": "Animation Start Frame 10",
-          "De": "Animation Start Frame 10",
-          "Es": "Animation Start Frame 10"
+        "label": {
+          "active": {
+            "En": "Animation Start Frame 10",
+            "Fr": "Animation Start Frame 10",
+            "De": "Animation Start Frame 10",
+            "Es": "Animation Start Frame 10"
+          }
         },
         "examplefields": {
           "type": "_GuiAnimation",
-          "label_active": {
-            "En": "Start Frame 10",
-            "Fr": "Start Frame 10",
-            "De": "Start Frame 10",
-            "Es": "Start Frame 10"
+          "label": {
+            "active": {
+              "En": "Start Frame 10",
+              "Fr": "Start Frame 10",
+              "De": "Start Frame 10",
+              "Es": "Start Frame 10"
+            }
           },
           "path": "oaDataCache/assets/animations/start_frame_10.gif",
           "start_frame": 10,
@@ -80,19 +92,23 @@
       },
       "elements4": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Thematic Animation Label",
-          "Fr": "Thematic Animation Étiquette",
-          "De": "Thematic Animation Beschriftung",
-          "Es": "Thematic Animation Etiqueta"
+        "label": {
+          "active": {
+            "En": "Thematic Animation Label",
+            "Fr": "Thematic Animation Étiquette",
+            "De": "Thematic Animation Beschriftung",
+            "Es": "Thematic Animation Etiqueta"
+          }
         },
         "examplefields": {
           "type": "_GuiAnimation",
-          "label_active": {
-            "En": "Thematic Animation",
-            "Fr": "Thematic Animation",
-            "De": "Thematic Animation",
-            "Es": "Thematic Animation"
+          "label": {
+            "active": {
+              "En": "Thematic Animation",
+              "Fr": "Thematic Animation",
+              "De": "Thematic Animation",
+              "Es": "Thematic Animation"
+            }
           },
           "path": "oaDataCache/assets/animations/thematic_label.gif",
           "notes": "An animation used as a thematic label or separator."
@@ -100,19 +116,23 @@
       },
       "elements5": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Detailed Notes Animation",
-          "Fr": "Detailed Notes Animation",
-          "De": "Detailed Notizen Animation",
-          "Es": "Detailed Notas Animation"
+        "label": {
+          "active": {
+            "En": "Detailed Notes Animation",
+            "Fr": "Detailed Notes Animation",
+            "De": "Detailed Notizen Animation",
+            "Es": "Detailed Notas Animation"
+          }
         },
         "examplefields": {
           "type": "_GuiAnimation",
-          "label_active": {
-            "En": "Detailed Animation",
-            "Fr": "Detailed Animation",
-            "De": "Detailed Animation",
-            "Es": "Detailed Animation"
+          "label": {
+            "active": {
+              "En": "Detailed Animation",
+              "Fr": "Detailed Animation",
+              "De": "Detailed Animation",
+              "Es": "Detailed Animation"
+            }
           },
           "path": "oaDataCache/assets/animations/detailed_notes.gif",
           "notes": "An animation providing detailed contextual information."

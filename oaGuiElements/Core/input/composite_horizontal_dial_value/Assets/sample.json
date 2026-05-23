@@ -1,8 +1,14 @@
 {
   "Exhaustive_Composite_Example": {
     "type": "_Horizontal_with_dial_Value",
-    "column_spacing": [80, 10, 10],
-    "label_active": "Master High-Precision Tuning",
+    "column_spacing": [
+      80,
+      10,
+      10
+    ],
+    "label": {
+      "active": "Master High-Precision Tuning"
+    },
     "description": "An exhaustive sample demonstrating every possible sub-configuration for the OcaCompositeFaderKnob.",
     "layout": {
       "width": 600,
@@ -19,7 +25,6 @@
     "step_fine": 0.001,
     "units": "MHz",
     "show_label": true,
-
     "value_config": {
       "_README": "Overrides for the numerical entry and unit readout panel (Column 2).",
       "width": 12,
@@ -28,7 +33,6 @@
       "bg_color": "#050505",
       "height": 35
     },
-
     "fader_config": {
       "_README": "Deep overrides for the coarse adjustment horizontal fader (Column 0).",
       "tick_interval": 500,
@@ -47,7 +51,6 @@
       "log_exponent": 1.0,
       "reff_point": 2500.0
     },
-
     "dial_config": {
       "_README": "Deep overrides for the fine-tuning rotary dial (Column 1).",
       "knob_style": "vintage",
@@ -75,7 +78,6 @@
       "infinity": true,
       "fine_pitch": true
     },
-
     "yak_handler": {
       "_README": "Hardware bridge configuration for MQTT/SCPI communication.",
       "enable": true,
@@ -85,7 +87,6 @@
       "input_name": "hz_value",
       "converter": "mhz_to_hz"
     },
-
     "cosmetics": {
       "_README": "Legacy fallback color definitions used if specific configs are missing.",
       "colors": {
@@ -97,10 +98,29 @@
   },
   "_README": "This sample is REALLY REALLY complete. It outlines every sub-config breakout for the fader, knob, and value elements, including style options and hardware handlers.",
   "_LEGEND": {
-    "knob_styles": ["standard", "panner", "dial", "vintage", "industrial", "modern"],
-    "knob_shapes": ["circle", "octagon", "gear"],
-    "pointer_styles": ["line", "triangle", "notch"],
-    "tick_styles": ["simple", "dots", "numeric"],
+    "knob_styles": [
+      "standard",
+      "panner",
+      "dial",
+      "vintage",
+      "industrial",
+      "modern"
+    ],
+    "knob_shapes": [
+      "circle",
+      "octagon",
+      "gear"
+    ],
+    "pointer_styles": [
+      "line",
+      "triangle",
+      "notch"
+    ],
+    "tick_styles": [
+      "simple",
+      "dots",
+      "numeric"
+    ],
     "column_spacing_note": "[Fader_Width, Knob_Width, Value_Width] - Percentages should sum to 100."
   }
 }

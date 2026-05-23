@@ -31,17 +31,19 @@
             "fields": {
               "Global_Kill_Switch": {
                 "type": "_TrapezoidButton",
-                "label_active": {
-                  "En": "☢️ DUAL SIPHON ACTIVE ☢️",
-                  "Fr": "☢️ DUAL SIPHON ACTIVE ☢️",
-                  "De": "☢️ DUAL SIPHON ACTIVE ☢️",
-                  "Es": "☢️ DUAL SIPHON ACTIVE ☢️"
-                },
-                "label_inactive": {
-                  "En": "ENGAGE TWIN LOADS",
-                  "Fr": "ENGAGE TWIN LOADS",
-                  "De": "ENGAGE TWIN LOADS",
-                  "Es": "ENGAGE TWIN LOADS"
+                "label": {
+                  "active": {
+                    "En": "☢️ DUAL SIPHON ACTIVE ☢️",
+                    "Fr": "☢️ DUAL SIPHON ACTIVE ☢️",
+                    "De": "☢️ DUAL SIPHON ACTIVE ☢️",
+                    "Es": "☢️ DUAL SIPHON ACTIVE ☢️"
+                  },
+                  "inactive": {
+                    "En": "ENGAGE TWIN LOADS",
+                    "Fr": "ENGAGE TWIN LOADS",
+                    "De": "ENGAGE TWIN LOADS",
+                    "Es": "ENGAGE TWIN LOADS"
+                  }
                 },
                 "state_default": false,
                 "message_details": {
@@ -91,11 +93,13 @@
                     "value": {
                       "default_value": "Batt_LiPo_Cell_1"
                     },
-                    "label_active": {
-                      "En": "DUT 1 ID",
-                      "Fr": "DUT 1 ID",
-                      "De": "DUT 1 ID",
-                      "Es": "DUT 1 ID"
+                    "label": {
+                      "active": {
+                        "En": "DUT 1 ID",
+                        "Fr": "DUT 1 ID",
+                        "De": "DUT 1 ID",
+                        "Es": "DUT 1 ID"
+                      }
                     },
                     "message_details": {
                       "DC_LOAD_MODEL": {
@@ -127,17 +131,19 @@
                   },
                   "Activate_A": {
                     "type": "_GuiButtonToggle",
-                    "label_active": {
-                      "En": "A: SINKING 🔥",
-                      "Fr": "A: SINKING 🔥",
-                      "De": "A: SINKING 🔥",
-                      "Es": "A: SINKING 🔥"
-                    },
-                    "label_inactive": {
-                      "En": "A: STANDBY",
-                      "Fr": "A: STANDBY",
-                      "De": "A: STANDBY",
-                      "Es": "A: STANDBY"
+                    "label": {
+                      "active": {
+                        "En": "A: SINKING 🔥",
+                        "Fr": "A: SINKING 🔥",
+                        "De": "A: SINKING 🔥",
+                        "Es": "A: SINKING 🔥"
+                      },
+                      "inactive": {
+                        "En": "A: STANDBY",
+                        "Fr": "A: STANDBY",
+                        "De": "A: STANDBY",
+                        "Es": "A: STANDBY"
+                      }
                     },
                     "style": {
                       "active": {
@@ -206,11 +212,13 @@
                       "max": "60",
                       "units": "A"
                     },
-                    "label_active": {
-                      "En": "BASE (A)",
-                      "Fr": "BASE (A)",
-                      "De": "BASE (A)",
-                      "Es": "BASE (A)"
+                    "label": {
+                      "active": {
+                        "En": "BASE (A)",
+                        "Fr": "BASE (A)",
+                        "De": "BASE (A)",
+                        "Es": "BASE (A)"
+                      }
                     },
                     "message_details": {
                       "DC_LOAD_MODEL": {
@@ -247,11 +255,13 @@
                       "max": "60",
                       "units": "A"
                     },
-                    "label_active": {
-                      "En": "PEAK (A)",
-                      "Fr": "PEAK (A)",
-                      "De": "PEAK (A)",
-                      "Es": "PEAK (A)"
+                    "label": {
+                      "active": {
+                        "En": "PEAK (A)",
+                        "Fr": "PEAK (A)",
+                        "De": "PEAK (A)",
+                        "Es": "PEAK (A)"
+                      }
                     },
                     "message_details": {
                       "DC_LOAD_MODEL": {
@@ -294,17 +304,19 @@
                 "fields": {
                   "Pulse_Enable_A": {
                     "type": "_GuiButtonToggle",
-                    "label_active": {
-                      "En": "PULSE ON",
-                      "Fr": "PULSE ON",
-                      "De": "PULSE ON",
-                      "Es": "PULSE ON"
-                    },
-                    "label_inactive": {
-                      "En": "PULSE OFF",
-                      "Fr": "PULSE OFF",
-                      "De": "PULSE OFF",
-                      "Es": "PULSE OFF"
+                    "label": {
+                      "active": {
+                        "En": "PULSE ON",
+                        "Fr": "PULSE ON",
+                        "De": "PULSE ON",
+                        "Es": "PULSE ON"
+                      },
+                      "inactive": {
+                        "En": "PULSE OFF",
+                        "Fr": "PULSE OFF",
+                        "De": "PULSE OFF",
+                        "Es": "PULSE OFF"
+                      }
                     },
                     "style": {
                       "active": {
@@ -365,11 +377,13 @@
                     "value": {
                       "default_value": "3.0"
                     },
-                    "label_active": {
-                      "En": "Stop Volts",
-                      "Fr": "Arrêter Volts",
-                      "De": "Stopp Volts",
-                      "Es": "Parar Volts"
+                    "label": {
+                      "active": {
+                        "En": "Stop Volts",
+                        "Fr": "Arrêter Volts",
+                        "De": "Stopp Volts",
+                        "Es": "Parar Volts"
+                      }
                     },
                     "message_details": {
                       "DC_LOAD_MODEL": {
@@ -415,11 +429,13 @@
                     "value": {
                       "default_value": "0.00 Ah"
                     },
-                    "label_active": {
-                      "En": "Ah Drained",
-                      "Fr": "Ah Drained",
-                      "De": "Ah Drained",
-                      "Es": "Ah Drained"
+                    "label": {
+                      "active": {
+                        "En": "Ah Drained",
+                        "Fr": "Ah Drained",
+                        "De": "Ah Drained",
+                        "Es": "Ah Drained"
+                      }
                     },
                     "message_details": {
                       "DC_LOAD_MODEL": {
@@ -451,11 +467,13 @@
                   },
                   "Graph_A": {
                     "type": "_GuiGraph",
-                    "label_active": {
-                      "En": "Discharge A",
-                      "Fr": "Discharge A",
-                      "De": "Discharge A",
-                      "Es": "Discharge A"
+                    "label": {
+                      "active": {
+                        "En": "Discharge A",
+                        "Fr": "Discharge A",
+                        "De": "Discharge A",
+                        "Es": "Discharge A"
+                      }
                     },
                     "height": 120,
                     "message_details": {
@@ -516,11 +534,13 @@
                     "value": {
                       "default_value": "Batt_Lead_Acid_Old"
                     },
-                    "label_active": {
-                      "En": "DUT 2 ID",
-                      "Fr": "DUT 2 ID",
-                      "De": "DUT 2 ID",
-                      "Es": "DUT 2 ID"
+                    "label": {
+                      "active": {
+                        "En": "DUT 2 ID",
+                        "Fr": "DUT 2 ID",
+                        "De": "DUT 2 ID",
+                        "Es": "DUT 2 ID"
+                      }
                     },
                     "message_details": {
                       "DC_LOAD_MODEL": {
@@ -552,17 +572,19 @@
                   },
                   "Activate_B": {
                     "type": "_GuiButtonToggle",
-                    "label_active": {
-                      "En": "B: SINKING 🔥",
-                      "Fr": "B: SINKING 🔥",
-                      "De": "B: SINKING 🔥",
-                      "Es": "B: SINKING 🔥"
-                    },
-                    "label_inactive": {
-                      "En": "B: STANDBY",
-                      "Fr": "B: STANDBY",
-                      "De": "B: STANDBY",
-                      "Es": "B: STANDBY"
+                    "label": {
+                      "active": {
+                        "En": "B: SINKING 🔥",
+                        "Fr": "B: SINKING 🔥",
+                        "De": "B: SINKING 🔥",
+                        "Es": "B: SINKING 🔥"
+                      },
+                      "inactive": {
+                        "En": "B: STANDBY",
+                        "Fr": "B: STANDBY",
+                        "De": "B: STANDBY",
+                        "Es": "B: STANDBY"
+                      }
                     },
                     "style": {
                       "active": {
@@ -631,11 +653,13 @@
                       "max": "60",
                       "units": "A"
                     },
-                    "label_active": {
-                      "En": "BASE (A)",
-                      "Fr": "BASE (A)",
-                      "De": "BASE (A)",
-                      "Es": "BASE (A)"
+                    "label": {
+                      "active": {
+                        "En": "BASE (A)",
+                        "Fr": "BASE (A)",
+                        "De": "BASE (A)",
+                        "Es": "BASE (A)"
+                      }
                     },
                     "message_details": {
                       "DC_LOAD_MODEL": {
@@ -672,11 +696,13 @@
                       "max": "60",
                       "units": "A"
                     },
-                    "label_active": {
-                      "En": "PEAK (A)",
-                      "Fr": "PEAK (A)",
-                      "De": "PEAK (A)",
-                      "Es": "PEAK (A)"
+                    "label": {
+                      "active": {
+                        "En": "PEAK (A)",
+                        "Fr": "PEAK (A)",
+                        "De": "PEAK (A)",
+                        "Es": "PEAK (A)"
+                      }
                     },
                     "message_details": {
                       "DC_LOAD_MODEL": {
@@ -719,17 +745,19 @@
                 "fields": {
                   "Pulse_Enable_B": {
                     "type": "_GuiButtonToggle",
-                    "label_active": {
-                      "En": "PULSE ON",
-                      "Fr": "PULSE ON",
-                      "De": "PULSE ON",
-                      "Es": "PULSE ON"
-                    },
-                    "label_inactive": {
-                      "En": "PULSE OFF",
-                      "Fr": "PULSE OFF",
-                      "De": "PULSE OFF",
-                      "Es": "PULSE OFF"
+                    "label": {
+                      "active": {
+                        "En": "PULSE ON",
+                        "Fr": "PULSE ON",
+                        "De": "PULSE ON",
+                        "Es": "PULSE ON"
+                      },
+                      "inactive": {
+                        "En": "PULSE OFF",
+                        "Fr": "PULSE OFF",
+                        "De": "PULSE OFF",
+                        "Es": "PULSE OFF"
+                      }
                     },
                     "style": {
                       "active": {
@@ -790,11 +818,13 @@
                     "value": {
                       "default_value": "10.5"
                     },
-                    "label_active": {
-                      "En": "Stop Volts",
-                      "Fr": "Arrêter Volts",
-                      "De": "Stopp Volts",
-                      "Es": "Parar Volts"
+                    "label": {
+                      "active": {
+                        "En": "Stop Volts",
+                        "Fr": "Arrêter Volts",
+                        "De": "Stopp Volts",
+                        "Es": "Parar Volts"
+                      }
                     },
                     "message_details": {
                       "DC_LOAD_MODEL": {
@@ -840,11 +870,13 @@
                     "value": {
                       "default_value": "0.00 Ah"
                     },
-                    "label_active": {
-                      "En": "Ah Drained",
-                      "Fr": "Ah Drained",
-                      "De": "Ah Drained",
-                      "Es": "Ah Drained"
+                    "label": {
+                      "active": {
+                        "En": "Ah Drained",
+                        "Fr": "Ah Drained",
+                        "De": "Ah Drained",
+                        "Es": "Ah Drained"
+                      }
                     },
                     "message_details": {
                       "DC_LOAD_MODEL": {
@@ -876,11 +908,13 @@
                   },
                   "Graph_B": {
                     "type": "_GuiGraph",
-                    "label_active": {
-                      "En": "Discharge B",
-                      "Fr": "Discharge B",
-                      "De": "Discharge B",
-                      "Es": "Discharge B"
+                    "label": {
+                      "active": {
+                        "En": "Discharge B",
+                        "Fr": "Discharge B",
+                        "De": "Discharge B",
+                        "Es": "Discharge B"
+                      }
                     },
                     "height": 120,
                     "message_details": {

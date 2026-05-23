@@ -21,7 +21,9 @@ in the property editor.
 {
   "images_image_display_Example": {
     "type": "_GuiImage",
-    "label_active": "Flux Capacitor",
+    "label": {
+      "active": "Flux Capacitor"
+    },
     "path": "oaDataCache/assets/images/flux_capacitor.png",
     "notes": "Static display of the Flux Capacitor.",
     "layout": {

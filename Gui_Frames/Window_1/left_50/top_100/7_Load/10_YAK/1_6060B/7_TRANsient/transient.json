@@ -25,11 +25,13 @@
             "fields": {
               "Transient_ON": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "Trans ON",
-                  "Fr": "Trans ON",
-                  "De": "Trans ON",
-                  "Es": "Trans ON"
+                "label": {
+                  "inactive": {
+                    "En": "Trans ON",
+                    "Fr": "Trans ON",
+                    "De": "Trans ON",
+                    "Es": "Trans ON"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
@@ -59,11 +61,13 @@
               },
               "Transient_OFF": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "Trans OFF",
-                  "Fr": "Trans DÉSACTIVÉ",
-                  "De": "Trans AUS",
-                  "Es": "Trans DESACTIVADO"
+                "label": {
+                  "inactive": {
+                    "En": "Trans OFF",
+                    "Fr": "Trans DÉSACTIVÉ",
+                    "De": "Trans AUS",
+                    "Es": "Trans DESACTIVADO"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {

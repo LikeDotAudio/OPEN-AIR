@@ -103,17 +103,19 @@
               }
             },
             "Do_Load_Preset": {
-              "label_active": {
-                "En": "Load Preset",
-                "Fr": "Charger Preset",
-                "De": "Laden Preset",
-                "Es": "Cargar Preset"
-              },
-              "label_inactive": {
-                "En": "Load Preset",
-                "Fr": "Charger Preset",
-                "De": "Laden Preset",
-                "Es": "Cargar Preset"
+              "label": {
+                "active": {
+                  "En": "Load Preset",
+                  "Fr": "Charger Preset",
+                  "De": "Laden Preset",
+                  "Es": "Cargar Preset"
+                },
+                "inactive": {
+                  "En": "Load Preset",
+                  "Fr": "Charger Preset",
+                  "De": "Laden Preset",
+                  "Es": "Cargar Preset"
+                }
               },
               "message_details": {
                 "N9342CN": {

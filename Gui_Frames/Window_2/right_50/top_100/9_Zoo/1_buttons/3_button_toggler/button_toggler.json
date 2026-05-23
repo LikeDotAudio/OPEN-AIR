@@ -13,11 +13,13 @@
     "blocks": {
       "elements1": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Select Channel",
-          "Fr": "Select Canal",
-          "De": "Select Kanal",
-          "Es": "Select Canal"
+        "label": {
+          "active": {
+            "En": "Select Channel",
+            "Fr": "Select Canal",
+            "De": "Select Kanal",
+            "Es": "Select Canal"
+          }
         },
         "fields": {
           "examplefields": {
@@ -37,36 +39,44 @@
             "interaction": {
               "options": {
                 "CH1": {
-                  "label_active": {
-                    "En": "CH1",
-                    "Fr": "CH1",
-                    "De": "CH1",
-                    "Es": "CH1"
+                  "label": {
+                    "active": {
+                      "En": "CH1",
+                      "Fr": "CH1",
+                      "De": "CH1",
+                      "Es": "CH1"
+                    }
                   },
                   "selected": true
                 },
                 "CH2": {
-                  "label_active": {
-                    "En": "CH2",
-                    "Fr": "CH2",
-                    "De": "CH2",
-                    "Es": "CH2"
+                  "label": {
+                    "active": {
+                      "En": "CH2",
+                      "Fr": "CH2",
+                      "De": "CH2",
+                      "Es": "CH2"
+                    }
                   }
                 },
                 "CH3": {
-                  "label_active": {
-                    "En": "CH3",
-                    "Fr": "CH3",
-                    "De": "CH3",
-                    "Es": "CH3"
+                  "label": {
+                    "active": {
+                      "En": "CH3",
+                      "Fr": "CH3",
+                      "De": "CH3",
+                      "Es": "CH3"
+                    }
                   }
                 },
                 "CH4": {
-                  "label_active": {
-                    "En": "CH4",
-                    "Fr": "CH4",
-                    "De": "CH4",
-                    "Es": "CH4"
+                  "label": {
+                    "active": {
+                      "En": "CH4",
+                      "Fr": "CH4",
+                      "De": "CH4",
+                      "Es": "CH4"
+                    }
                   }
                 }
               }
@@ -79,11 +89,13 @@
       },
       "neon_intensity": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Glow Intensity Demo",
-          "Fr": "Glow Intensity Démo",
-          "De": "Glow Intensity Demo",
-          "Es": "Glow Intensity Demo"
+        "label": {
+          "active": {
+            "En": "Glow Intensity Demo",
+            "Fr": "Glow Intensity Démo",
+            "De": "Glow Intensity Demo",
+            "Es": "Glow Intensity Demo"
+          }
         },
         "fields": {
           "glow_0_1": {
@@ -103,20 +115,24 @@
             "interaction": {
               "options": {
                 "A": {
-                  "label_active": {
-                    "En": "0.1 GLOW",
-                    "Fr": "0.1 GLOW",
-                    "De": "0.1 GLOW",
-                    "Es": "0.1 GLOW"
+                  "label": {
+                    "active": {
+                      "En": "0.1 GLOW",
+                      "Fr": "0.1 GLOW",
+                      "De": "0.1 GLOW",
+                      "Es": "0.1 GLOW"
+                    }
                   },
                   "selected": true
                 },
                 "B": {
-                  "label_active": {
-                    "En": "OFF",
-                    "Fr": "OFF",
-                    "De": "OFF",
-                    "Es": "OFF"
+                  "label": {
+                    "active": {
+                      "En": "OFF",
+                      "Fr": "OFF",
+                      "De": "OFF",
+                      "Es": "OFF"
+                    }
                   }
                 }
               }
@@ -139,20 +155,24 @@
             "interaction": {
               "options": {
                 "A": {
-                  "label_active": {
-                    "En": "1.0 GLOW",
-                    "Fr": "1.0 GLOW",
-                    "De": "1.0 GLOW",
-                    "Es": "1.0 GLOW"
+                  "label": {
+                    "active": {
+                      "En": "1.0 GLOW",
+                      "Fr": "1.0 GLOW",
+                      "De": "1.0 GLOW",
+                      "Es": "1.0 GLOW"
+                    }
                   },
                   "selected": true
                 },
                 "B": {
-                  "label_active": {
-                    "En": "OFF",
-                    "Fr": "OFF",
-                    "De": "OFF",
-                    "Es": "OFF"
+                  "label": {
+                    "active": {
+                      "En": "OFF",
+                      "Fr": "OFF",
+                      "De": "OFF",
+                      "Es": "OFF"
+                    }
                   }
                 }
               }
@@ -175,20 +195,24 @@
             "interaction": {
               "options": {
                 "A": {
-                  "label_active": {
-                    "En": "2.5 GLOW",
-                    "Fr": "2.5 GLOW",
-                    "De": "2.5 GLOW",
-                    "Es": "2.5 GLOW"
+                  "label": {
+                    "active": {
+                      "En": "2.5 GLOW",
+                      "Fr": "2.5 GLOW",
+                      "De": "2.5 GLOW",
+                      "Es": "2.5 GLOW"
+                    }
                   },
                   "selected": true
                 },
                 "B": {
-                  "label_active": {
-                    "En": "OFF",
-                    "Fr": "OFF",
-                    "De": "OFF",
-                    "Es": "OFF"
+                  "label": {
+                    "active": {
+                      "En": "OFF",
+                      "Fr": "OFF",
+                      "De": "OFF",
+                      "Es": "OFF"
+                    }
                   }
                 }
               }
@@ -211,20 +235,24 @@
             "interaction": {
               "options": {
                 "A": {
-                  "label_active": {
-                    "En": "5.0 GLOW",
-                    "Fr": "5.0 GLOW",
-                    "De": "5.0 GLOW",
-                    "Es": "5.0 GLOW"
+                  "label": {
+                    "active": {
+                      "En": "5.0 GLOW",
+                      "Fr": "5.0 GLOW",
+                      "De": "5.0 GLOW",
+                      "Es": "5.0 GLOW"
+                    }
                   },
                   "selected": true
                 },
                 "B": {
-                  "label_active": {
-                    "En": "OFF",
-                    "Fr": "OFF",
-                    "De": "OFF",
-                    "Es": "OFF"
+                  "label": {
+                    "active": {
+                      "En": "OFF",
+                      "Fr": "OFF",
+                      "De": "OFF",
+                      "Es": "OFF"
+                    }
                   }
                 }
               }
@@ -234,11 +262,13 @@
       },
       "color_spectrum": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Vivid Color Spectrum",
-          "Fr": "Vivid Color Spectrum",
-          "De": "Vivid Color Spectrum",
-          "Es": "Vivid Color Spectrum"
+        "label": {
+          "active": {
+            "En": "Vivid Color Spectrum",
+            "Fr": "Vivid Color Spectrum",
+            "De": "Vivid Color Spectrum",
+            "Es": "Vivid Color Spectrum"
+          }
         },
         "fields": {
           "red_neon": {
@@ -258,20 +288,24 @@
             "interaction": {
               "options": {
                 "R": {
-                  "label_active": {
-                    "En": "CRIMSON",
-                    "Fr": "CRIMSON",
-                    "De": "CRIMSON",
-                    "Es": "CRIMSON"
+                  "label": {
+                    "active": {
+                      "En": "CRIMSON",
+                      "Fr": "CRIMSON",
+                      "De": "CRIMSON",
+                      "Es": "CRIMSON"
+                    }
                   },
                   "selected": true
                 },
                 "O": {
-                  "label_active": {
-                    "En": "OFF",
-                    "Fr": "OFF",
-                    "De": "OFF",
-                    "Es": "OFF"
+                  "label": {
+                    "active": {
+                      "En": "OFF",
+                      "Fr": "OFF",
+                      "De": "OFF",
+                      "Es": "OFF"
+                    }
                   }
                 }
               }
@@ -294,20 +328,24 @@
             "interaction": {
               "options": {
                 "A": {
-                  "label_active": {
-                    "En": "AMBER",
-                    "Fr": "AMBER",
-                    "De": "AMBER",
-                    "Es": "AMBER"
+                  "label": {
+                    "active": {
+                      "En": "AMBER",
+                      "Fr": "AMBER",
+                      "De": "AMBER",
+                      "Es": "AMBER"
+                    }
                   },
                   "selected": true
                 },
                 "O": {
-                  "label_active": {
-                    "En": "OFF",
-                    "Fr": "OFF",
-                    "De": "OFF",
-                    "Es": "OFF"
+                  "label": {
+                    "active": {
+                      "En": "OFF",
+                      "Fr": "OFF",
+                      "De": "OFF",
+                      "Es": "OFF"
+                    }
                   }
                 }
               }
@@ -330,20 +368,24 @@
             "interaction": {
               "options": {
                 "G": {
-                  "label_active": {
-                    "En": "GOLD",
-                    "Fr": "GOLD",
-                    "De": "GOLD",
-                    "Es": "GOLD"
+                  "label": {
+                    "active": {
+                      "En": "GOLD",
+                      "Fr": "GOLD",
+                      "De": "GOLD",
+                      "Es": "GOLD"
+                    }
                   },
                   "selected": true
                 },
                 "O": {
-                  "label_active": {
-                    "En": "OFF",
-                    "Fr": "OFF",
-                    "De": "OFF",
-                    "Es": "OFF"
+                  "label": {
+                    "active": {
+                      "En": "OFF",
+                      "Fr": "OFF",
+                      "De": "OFF",
+                      "Es": "OFF"
+                    }
                   }
                 }
               }
@@ -366,20 +408,24 @@
             "interaction": {
               "options": {
                 "L": {
-                  "label_active": {
-                    "En": "LIME",
-                    "Fr": "LIME",
-                    "De": "LIME",
-                    "Es": "LIME"
+                  "label": {
+                    "active": {
+                      "En": "LIME",
+                      "Fr": "LIME",
+                      "De": "LIME",
+                      "Es": "LIME"
+                    }
                   },
                   "selected": true
                 },
                 "O": {
-                  "label_active": {
-                    "En": "OFF",
-                    "Fr": "OFF",
-                    "De": "OFF",
-                    "Es": "OFF"
+                  "label": {
+                    "active": {
+                      "En": "OFF",
+                      "Fr": "OFF",
+                      "De": "OFF",
+                      "Es": "OFF"
+                    }
                   }
                 }
               }
@@ -402,20 +448,24 @@
             "interaction": {
               "options": {
                 "C": {
-                  "label_active": {
-                    "En": "CYAN",
-                    "Fr": "CYAN",
-                    "De": "CYAN",
-                    "Es": "CYAN"
+                  "label": {
+                    "active": {
+                      "En": "CYAN",
+                      "Fr": "CYAN",
+                      "De": "CYAN",
+                      "Es": "CYAN"
+                    }
                   },
                   "selected": true
                 },
                 "O": {
-                  "label_active": {
-                    "En": "OFF",
-                    "Fr": "OFF",
-                    "De": "OFF",
-                    "Es": "OFF"
+                  "label": {
+                    "active": {
+                      "En": "OFF",
+                      "Fr": "OFF",
+                      "De": "OFF",
+                      "Es": "OFF"
+                    }
                   }
                 }
               }
@@ -438,20 +488,24 @@
             "interaction": {
               "options": {
                 "B": {
-                  "label_active": {
-                    "En": "COBALT",
-                    "Fr": "COBALT",
-                    "De": "COBALT",
-                    "Es": "COBALT"
+                  "label": {
+                    "active": {
+                      "En": "COBALT",
+                      "Fr": "COBALT",
+                      "De": "COBALT",
+                      "Es": "COBALT"
+                    }
                   },
                   "selected": true
                 },
                 "O": {
-                  "label_active": {
-                    "En": "OFF",
-                    "Fr": "OFF",
-                    "De": "OFF",
-                    "Es": "OFF"
+                  "label": {
+                    "active": {
+                      "En": "OFF",
+                      "Fr": "OFF",
+                      "De": "OFF",
+                      "Es": "OFF"
+                    }
                   }
                 }
               }
@@ -474,20 +528,24 @@
             "interaction": {
               "options": {
                 "V": {
-                  "label_active": {
-                    "En": "VIOLET",
-                    "Fr": "VIOLET",
-                    "De": "VIOLET",
-                    "Es": "VIOLET"
+                  "label": {
+                    "active": {
+                      "En": "VIOLET",
+                      "Fr": "VIOLET",
+                      "De": "VIOLET",
+                      "Es": "VIOLET"
+                    }
                   },
                   "selected": true
                 },
                 "O": {
-                  "label_active": {
-                    "En": "OFF",
-                    "Fr": "OFF",
-                    "De": "OFF",
-                    "Es": "OFF"
+                  "label": {
+                    "active": {
+                      "En": "OFF",
+                      "Fr": "OFF",
+                      "De": "OFF",
+                      "Es": "OFF"
+                    }
                   }
                 }
               }
@@ -510,20 +568,24 @@
             "interaction": {
               "options": {
                 "P": {
-                  "label_active": {
-                    "En": "MAGENTA",
-                    "Fr": "MAGENTA",
-                    "De": "MAGENTA",
-                    "Es": "MAGENTA"
+                  "label": {
+                    "active": {
+                      "En": "MAGENTA",
+                      "Fr": "MAGENTA",
+                      "De": "MAGENTA",
+                      "Es": "MAGENTA"
+                    }
                   },
                   "selected": true
                 },
                 "O": {
-                  "label_active": {
-                    "En": "OFF",
-                    "Fr": "OFF",
-                    "De": "OFF",
-                    "Es": "OFF"
+                  "label": {
+                    "active": {
+                      "En": "OFF",
+                      "Fr": "OFF",
+                      "De": "OFF",
+                      "Es": "OFF"
+                    }
                   }
                 }
               }
@@ -533,11 +595,13 @@
       },
       "industrial_color_pairs": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Industrial Color Pairs",
-          "Fr": "Industriel Color Pairs",
-          "De": "Industriell Color Pairs",
-          "Es": "Industrial Color Pairs"
+        "label": {
+          "active": {
+            "En": "Industrial Color Pairs",
+            "Fr": "Industriel Color Pairs",
+            "De": "Industriell Color Pairs",
+            "Es": "Industrial Color Pairs"
+          }
         },
         "fields": {
           "pair_1": {
@@ -548,11 +612,13 @@
             "interaction": {
               "options": {
                 "OFF": {
-                  "label_active": {
-                    "En": "TAG",
-                    "Fr": "TAG",
-                    "De": "TAG",
-                    "Es": "TAG"
+                  "label": {
+                    "active": {
+                      "En": "TAG",
+                      "Fr": "TAG",
+                      "De": "TAG",
+                      "Es": "TAG"
+                    }
                   },
                   "selected": true,
                   "style": {
@@ -568,11 +634,13 @@
                   }
                 },
                 "ON": {
-                  "label_active": {
-                    "En": "TAG",
-                    "Fr": "TAG",
-                    "De": "TAG",
-                    "Es": "TAG"
+                  "label": {
+                    "active": {
+                      "En": "TAG",
+                      "Fr": "TAG",
+                      "De": "TAG",
+                      "Es": "TAG"
+                    }
                   },
                   "style": {
                     "active": {
@@ -597,11 +665,13 @@
             "interaction": {
               "options": {
                 "A": {
-                  "label_active": {
-                    "En": "SEL",
-                    "Fr": "SEL",
-                    "De": "SEL",
-                    "Es": "SEL"
+                  "label": {
+                    "active": {
+                      "En": "SEL",
+                      "Fr": "SEL",
+                      "De": "SEL",
+                      "Es": "SEL"
+                    }
                   },
                   "selected": true,
                   "style": {
@@ -615,11 +685,13 @@
                   }
                 },
                 "B": {
-                  "label_active": {
-                    "En": "SEL",
-                    "Fr": "SEL",
-                    "De": "SEL",
-                    "Es": "SEL"
+                  "label": {
+                    "active": {
+                      "En": "SEL",
+                      "Fr": "SEL",
+                      "De": "SEL",
+                      "Es": "SEL"
+                    }
                   },
                   "style": {
                     "active": {
@@ -642,11 +714,13 @@
             "interaction": {
               "options": {
                 "A": {
-                  "label_active": {
-                    "En": "SEL",
-                    "Fr": "SEL",
-                    "De": "SEL",
-                    "Es": "SEL"
+                  "label": {
+                    "active": {
+                      "En": "SEL",
+                      "Fr": "SEL",
+                      "De": "SEL",
+                      "Es": "SEL"
+                    }
                   },
                   "selected": true,
                   "style": {
@@ -660,11 +734,13 @@
                   }
                 },
                 "B": {
-                  "label_active": {
-                    "En": "SEL",
-                    "Fr": "SEL",
-                    "De": "SEL",
-                    "Es": "SEL"
+                  "label": {
+                    "active": {
+                      "En": "SEL",
+                      "Fr": "SEL",
+                      "De": "SEL",
+                      "Es": "SEL"
+                    }
                   },
                   "style": {
                     "active": {
@@ -687,11 +763,13 @@
             "interaction": {
               "options": {
                 "A": {
-                  "label_active": {
-                    "En": "SEL",
-                    "Fr": "SEL",
-                    "De": "SEL",
-                    "Es": "SEL"
+                  "label": {
+                    "active": {
+                      "En": "SEL",
+                      "Fr": "SEL",
+                      "De": "SEL",
+                      "Es": "SEL"
+                    }
                   },
                   "selected": true,
                   "style": {
@@ -705,11 +783,13 @@
                   }
                 },
                 "B": {
-                  "label_active": {
-                    "En": "SEL",
-                    "Fr": "SEL",
-                    "De": "SEL",
-                    "Es": "SEL"
+                  "label": {
+                    "active": {
+                      "En": "SEL",
+                      "Fr": "SEL",
+                      "De": "SEL",
+                      "Es": "SEL"
+                    }
                   },
                   "style": {
                     "active": {
@@ -732,11 +812,13 @@
             "interaction": {
               "options": {
                 "A": {
-                  "label_active": {
-                    "En": "SEL",
-                    "Fr": "SEL",
-                    "De": "SEL",
-                    "Es": "SEL"
+                  "label": {
+                    "active": {
+                      "En": "SEL",
+                      "Fr": "SEL",
+                      "De": "SEL",
+                      "Es": "SEL"
+                    }
                   },
                   "selected": true,
                   "style": {
@@ -750,11 +832,13 @@
                   }
                 },
                 "B": {
-                  "label_active": {
-                    "En": "SEL",
-                    "Fr": "SEL",
-                    "De": "SEL",
-                    "Es": "SEL"
+                  "label": {
+                    "active": {
+                      "En": "SEL",
+                      "Fr": "SEL",
+                      "De": "SEL",
+                      "Es": "SEL"
+                    }
                   },
                   "style": {
                     "active": {
@@ -777,11 +861,13 @@
             "interaction": {
               "options": {
                 "A": {
-                  "label_active": {
-                    "En": "SEL",
-                    "Fr": "SEL",
-                    "De": "SEL",
-                    "Es": "SEL"
+                  "label": {
+                    "active": {
+                      "En": "SEL",
+                      "Fr": "SEL",
+                      "De": "SEL",
+                      "Es": "SEL"
+                    }
                   },
                   "selected": true,
                   "style": {
@@ -795,11 +881,13 @@
                   }
                 },
                 "B": {
-                  "label_active": {
-                    "En": "SEL",
-                    "Fr": "SEL",
-                    "De": "SEL",
-                    "Es": "SEL"
+                  "label": {
+                    "active": {
+                      "En": "SEL",
+                      "Fr": "SEL",
+                      "De": "SEL",
+                      "Es": "SEL"
+                    }
                   },
                   "style": {
                     "active": {
@@ -822,11 +910,13 @@
             "interaction": {
               "options": {
                 "A": {
-                  "label_active": {
-                    "En": "SEL",
-                    "Fr": "SEL",
-                    "De": "SEL",
-                    "Es": "SEL"
+                  "label": {
+                    "active": {
+                      "En": "SEL",
+                      "Fr": "SEL",
+                      "De": "SEL",
+                      "Es": "SEL"
+                    }
                   },
                   "selected": true,
                   "style": {
@@ -840,11 +930,13 @@
                   }
                 },
                 "B": {
-                  "label_active": {
-                    "En": "SEL",
-                    "Fr": "SEL",
-                    "De": "SEL",
-                    "Es": "SEL"
+                  "label": {
+                    "active": {
+                      "En": "SEL",
+                      "Fr": "SEL",
+                      "De": "SEL",
+                      "Es": "SEL"
+                    }
                   },
                   "style": {
                     "active": {
@@ -867,11 +959,13 @@
             "interaction": {
               "options": {
                 "A": {
-                  "label_active": {
-                    "En": "SEL",
-                    "Fr": "SEL",
-                    "De": "SEL",
-                    "Es": "SEL"
+                  "label": {
+                    "active": {
+                      "En": "SEL",
+                      "Fr": "SEL",
+                      "De": "SEL",
+                      "Es": "SEL"
+                    }
                   },
                   "selected": true,
                   "style": {
@@ -885,11 +979,13 @@
                   }
                 },
                 "B": {
-                  "label_active": {
-                    "En": "SEL",
-                    "Fr": "SEL",
-                    "De": "SEL",
-                    "Es": "SEL"
+                  "label": {
+                    "active": {
+                      "En": "SEL",
+                      "Fr": "SEL",
+                      "De": "SEL",
+                      "Es": "SEL"
+                    }
                   },
                   "style": {
                     "active": {
@@ -912,11 +1008,13 @@
             "interaction": {
               "options": {
                 "A": {
-                  "label_active": {
-                    "En": "SEL",
-                    "Fr": "SEL",
-                    "De": "SEL",
-                    "Es": "SEL"
+                  "label": {
+                    "active": {
+                      "En": "SEL",
+                      "Fr": "SEL",
+                      "De": "SEL",
+                      "Es": "SEL"
+                    }
                   },
                   "selected": true,
                   "style": {
@@ -930,11 +1028,13 @@
                   }
                 },
                 "B": {
-                  "label_active": {
-                    "En": "SEL",
-                    "Fr": "SEL",
-                    "De": "SEL",
-                    "Es": "SEL"
+                  "label": {
+                    "active": {
+                      "En": "SEL",
+                      "Fr": "SEL",
+                      "De": "SEL",
+                      "Es": "SEL"
+                    }
                   },
                   "style": {
                     "active": {
@@ -957,11 +1057,13 @@
             "interaction": {
               "options": {
                 "A": {
-                  "label_active": {
-                    "En": "SEL",
-                    "Fr": "SEL",
-                    "De": "SEL",
-                    "Es": "SEL"
+                  "label": {
+                    "active": {
+                      "En": "SEL",
+                      "Fr": "SEL",
+                      "De": "SEL",
+                      "Es": "SEL"
+                    }
                   },
                   "selected": true,
                   "style": {
@@ -975,11 +1077,13 @@
                   }
                 },
                 "B": {
-                  "label_active": {
-                    "En": "SEL",
-                    "Fr": "SEL",
-                    "De": "SEL",
-                    "Es": "SEL"
+                  "label": {
+                    "active": {
+                      "En": "SEL",
+                      "Fr": "SEL",
+                      "De": "SEL",
+                      "Es": "SEL"
+                    }
                   },
                   "style": {
                     "active": {
@@ -1002,11 +1106,13 @@
             "interaction": {
               "options": {
                 "A": {
-                  "label_active": {
-                    "En": "SEL",
-                    "Fr": "SEL",
-                    "De": "SEL",
-                    "Es": "SEL"
+                  "label": {
+                    "active": {
+                      "En": "SEL",
+                      "Fr": "SEL",
+                      "De": "SEL",
+                      "Es": "SEL"
+                    }
                   },
                   "selected": true,
                   "style": {
@@ -1020,11 +1126,13 @@
                   }
                 },
                 "B": {
-                  "label_active": {
-                    "En": "SEL",
-                    "Fr": "SEL",
-                    "De": "SEL",
-                    "Es": "SEL"
+                  "label": {
+                    "active": {
+                      "En": "SEL",
+                      "Fr": "SEL",
+                      "De": "SEL",
+                      "Es": "SEL"
+                    }
                   },
                   "style": {
                     "active": {
@@ -1047,11 +1155,13 @@
             "interaction": {
               "options": {
                 "A": {
-                  "label_active": {
-                    "En": "SEL",
-                    "Fr": "SEL",
-                    "De": "SEL",
-                    "Es": "SEL"
+                  "label": {
+                    "active": {
+                      "En": "SEL",
+                      "Fr": "SEL",
+                      "De": "SEL",
+                      "Es": "SEL"
+                    }
                   },
                   "selected": true,
                   "style": {
@@ -1065,11 +1175,13 @@
                   }
                 },
                 "B": {
-                  "label_active": {
-                    "En": "SEL",
-                    "Fr": "SEL",
-                    "De": "SEL",
-                    "Es": "SEL"
+                  "label": {
+                    "active": {
+                      "En": "SEL",
+                      "Fr": "SEL",
+                      "De": "SEL",
+                      "Es": "SEL"
+                    }
                   },
                   "style": {
                     "active": {
@@ -1092,11 +1204,13 @@
             "interaction": {
               "options": {
                 "A": {
-                  "label_active": {
-                    "En": "SEL",
-                    "Fr": "SEL",
-                    "De": "SEL",
-                    "Es": "SEL"
+                  "label": {
+                    "active": {
+                      "En": "SEL",
+                      "Fr": "SEL",
+                      "De": "SEL",
+                      "Es": "SEL"
+                    }
                   },
                   "selected": true,
                   "style": {
@@ -1110,11 +1224,13 @@
                   }
                 },
                 "B": {
-                  "label_active": {
-                    "En": "SEL",
-                    "Fr": "SEL",
-                    "De": "SEL",
-                    "Es": "SEL"
+                  "label": {
+                    "active": {
+                      "En": "SEL",
+                      "Fr": "SEL",
+                      "De": "SEL",
+                      "Es": "SEL"
+                    }
                   },
                   "style": {
                     "active": {
@@ -1137,11 +1253,13 @@
             "interaction": {
               "options": {
                 "A": {
-                  "label_active": {
-                    "En": "SEL",
-                    "Fr": "SEL",
-                    "De": "SEL",
-                    "Es": "SEL"
+                  "label": {
+                    "active": {
+                      "En": "SEL",
+                      "Fr": "SEL",
+                      "De": "SEL",
+                      "Es": "SEL"
+                    }
                   },
                   "selected": true,
                   "style": {
@@ -1155,11 +1273,13 @@
                   }
                 },
                 "B": {
-                  "label_active": {
-                    "En": "SEL",
-                    "Fr": "SEL",
-                    "De": "SEL",
-                    "Es": "SEL"
+                  "label": {
+                    "active": {
+                      "En": "SEL",
+                      "Fr": "SEL",
+                      "De": "SEL",
+                      "Es": "SEL"
+                    }
                   },
                   "style": {
                     "active": {
@@ -1182,11 +1302,13 @@
             "interaction": {
               "options": {
                 "A": {
-                  "label_active": {
-                    "En": "SEL",
-                    "Fr": "SEL",
-                    "De": "SEL",
-                    "Es": "SEL"
+                  "label": {
+                    "active": {
+                      "En": "SEL",
+                      "Fr": "SEL",
+                      "De": "SEL",
+                      "Es": "SEL"
+                    }
                   },
                   "selected": true,
                   "style": {
@@ -1200,11 +1322,13 @@
                   }
                 },
                 "B": {
-                  "label_active": {
-                    "En": "SEL",
-                    "Fr": "SEL",
-                    "De": "SEL",
-                    "Es": "SEL"
+                  "label": {
+                    "active": {
+                      "En": "SEL",
+                      "Fr": "SEL",
+                      "De": "SEL",
+                      "Es": "SEL"
+                    }
                   },
                   "style": {
                     "active": {
@@ -1227,11 +1351,13 @@
             "interaction": {
               "options": {
                 "A": {
-                  "label_active": {
-                    "En": "SEL",
-                    "Fr": "SEL",
-                    "De": "SEL",
-                    "Es": "SEL"
+                  "label": {
+                    "active": {
+                      "En": "SEL",
+                      "Fr": "SEL",
+                      "De": "SEL",
+                      "Es": "SEL"
+                    }
                   },
                   "selected": true,
                   "style": {
@@ -1245,11 +1371,13 @@
                   }
                 },
                 "B": {
-                  "label_active": {
-                    "En": "SEL",
-                    "Fr": "SEL",
-                    "De": "SEL",
-                    "Es": "SEL"
+                  "label": {
+                    "active": {
+                      "En": "SEL",
+                      "Fr": "SEL",
+                      "De": "SEL",
+                      "Es": "SEL"
+                    }
                   },
                   "style": {
                     "active": {
@@ -1272,11 +1400,13 @@
             "interaction": {
               "options": {
                 "A": {
-                  "label_active": {
-                    "En": "SEL",
-                    "Fr": "SEL",
-                    "De": "SEL",
-                    "Es": "SEL"
+                  "label": {
+                    "active": {
+                      "En": "SEL",
+                      "Fr": "SEL",
+                      "De": "SEL",
+                      "Es": "SEL"
+                    }
                   },
                   "selected": true,
                   "style": {
@@ -1290,11 +1420,13 @@
                   }
                 },
                 "B": {
-                  "label_active": {
-                    "En": "SEL",
-                    "Fr": "SEL",
-                    "De": "SEL",
-                    "Es": "SEL"
+                  "label": {
+                    "active": {
+                      "En": "SEL",
+                      "Fr": "SEL",
+                      "De": "SEL",
+                      "Es": "SEL"
+                    }
                   },
                   "style": {
                     "active": {
@@ -1317,11 +1449,13 @@
             "interaction": {
               "options": {
                 "A": {
-                  "label_active": {
-                    "En": "SEL",
-                    "Fr": "SEL",
-                    "De": "SEL",
-                    "Es": "SEL"
+                  "label": {
+                    "active": {
+                      "En": "SEL",
+                      "Fr": "SEL",
+                      "De": "SEL",
+                      "Es": "SEL"
+                    }
                   },
                   "selected": true,
                   "style": {
@@ -1335,11 +1469,13 @@
                   }
                 },
                 "B": {
-                  "label_active": {
-                    "En": "SEL",
-                    "Fr": "SEL",
-                    "De": "SEL",
-                    "Es": "SEL"
+                  "label": {
+                    "active": {
+                      "En": "SEL",
+                      "Fr": "SEL",
+                      "De": "SEL",
+                      "Es": "SEL"
+                    }
                   },
                   "style": {
                     "active": {
@@ -1362,11 +1498,13 @@
             "interaction": {
               "options": {
                 "A": {
-                  "label_active": {
-                    "En": "SEL",
-                    "Fr": "SEL",
-                    "De": "SEL",
-                    "Es": "SEL"
+                  "label": {
+                    "active": {
+                      "En": "SEL",
+                      "Fr": "SEL",
+                      "De": "SEL",
+                      "Es": "SEL"
+                    }
                   },
                   "selected": true,
                   "style": {
@@ -1381,11 +1519,13 @@
                   }
                 },
                 "B": {
-                  "label_active": {
-                    "En": "SEL",
-                    "Fr": "SEL",
-                    "De": "SEL",
-                    "Es": "SEL"
+                  "label": {
+                    "active": {
+                      "En": "SEL",
+                      "Fr": "SEL",
+                      "De": "SEL",
+                      "Es": "SEL"
+                    }
                   },
                   "style": {
                     "active": {
@@ -1409,11 +1549,13 @@
             "interaction": {
               "options": {
                 "A": {
-                  "label_active": {
-                    "En": "SEL",
-                    "Fr": "SEL",
-                    "De": "SEL",
-                    "Es": "SEL"
+                  "label": {
+                    "active": {
+                      "En": "SEL",
+                      "Fr": "SEL",
+                      "De": "SEL",
+                      "Es": "SEL"
+                    }
                   },
                   "selected": true,
                   "style": {
@@ -1427,11 +1569,13 @@
                   }
                 },
                 "B": {
-                  "label_active": {
-                    "En": "SEL",
-                    "Fr": "SEL",
-                    "De": "SEL",
-                    "Es": "SEL"
+                  "label": {
+                    "active": {
+                      "En": "SEL",
+                      "Fr": "SEL",
+                      "De": "SEL",
+                      "Es": "SEL"
+                    }
                   },
                   "style": {
                     "active": {
@@ -1450,11 +1594,13 @@
       },
       "form_factors": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Size & Geometry Variety",
-          "Fr": "Size & Geometry Variety",
-          "De": "Size & Geometry Variety",
-          "Es": "Size & Geometry Variety"
+        "label": {
+          "active": {
+            "En": "Size & Geometry Variety",
+            "Fr": "Size & Geometry Variety",
+            "De": "Size & Geometry Variety",
+            "Es": "Size & Geometry Variety"
+          }
         },
         "fields": {
           "micro_strip": {
@@ -1466,27 +1612,33 @@
             "interaction": {
               "options": {
                 "1": {
-                  "label_active": {
-                    "En": "S1",
-                    "Fr": "S1",
-                    "De": "S1",
-                    "Es": "S1"
+                  "label": {
+                    "active": {
+                      "En": "S1",
+                      "Fr": "S1",
+                      "De": "S1",
+                      "Es": "S1"
+                    }
                   }
                 },
                 "2": {
-                  "label_active": {
-                    "En": "S2",
-                    "Fr": "S2",
-                    "De": "S2",
-                    "Es": "S2"
+                  "label": {
+                    "active": {
+                      "En": "S2",
+                      "Fr": "S2",
+                      "De": "S2",
+                      "Es": "S2"
+                    }
                   }
                 },
                 "3": {
-                  "label_active": {
-                    "En": "S3",
-                    "Fr": "S3",
-                    "De": "S3",
-                    "Es": "S3"
+                  "label": {
+                    "active": {
+                      "En": "S3",
+                      "Fr": "S3",
+                      "De": "S3",
+                      "Es": "S3"
+                    }
                   },
                   "selected": true
                 }
@@ -1515,20 +1667,24 @@
             "interaction": {
               "options": {
                 "STOP": {
-                  "label_active": {
-                    "En": "STOP",
-                    "Fr": "STOP",
-                    "De": "STOP",
-                    "Es": "STOP"
+                  "label": {
+                    "active": {
+                      "En": "STOP",
+                      "Fr": "STOP",
+                      "De": "STOP",
+                      "Es": "STOP"
+                    }
                   },
                   "selected": true
                 },
                 "GO": {
-                  "label_active": {
-                    "En": "GO",
-                    "Fr": "GO",
-                    "De": "GO",
-                    "Es": "GO"
+                  "label": {
+                    "active": {
+                      "En": "GO",
+                      "Fr": "GO",
+                      "De": "GO",
+                      "Es": "GO"
+                    }
                   }
                 }
               }
@@ -1545,28 +1701,34 @@
             "interaction": {
               "options": {
                 "TOP": {
-                  "label_active": {
-                    "En": "TOP",
-                    "Fr": "TOP",
-                    "De": "TOP",
-                    "Es": "TOP"
+                  "label": {
+                    "active": {
+                      "En": "TOP",
+                      "Fr": "TOP",
+                      "De": "TOP",
+                      "Es": "TOP"
+                    }
                   }
                 },
                 "MID": {
-                  "label_active": {
-                    "En": "MID",
-                    "Fr": "MID",
-                    "De": "MID",
-                    "Es": "MID"
+                  "label": {
+                    "active": {
+                      "En": "MID",
+                      "Fr": "MID",
+                      "De": "MID",
+                      "Es": "MID"
+                    }
                   },
                   "selected": true
                 },
                 "BOT": {
-                  "label_active": {
-                    "En": "BOT",
-                    "Fr": "BOT",
-                    "De": "BOT",
-                    "Es": "BOT"
+                  "label": {
+                    "active": {
+                      "En": "BOT",
+                      "Fr": "BOT",
+                      "De": "BOT",
+                      "Es": "BOT"
+                    }
                   }
                 }
               }
@@ -1583,67 +1745,83 @@
             "interaction": {
               "options": {
                 "1": {
-                  "label_active": {
-                    "En": "1",
-                    "Fr": "1",
-                    "De": "1",
-                    "Es": "1"
+                  "label": {
+                    "active": {
+                      "En": "1",
+                      "Fr": "1",
+                      "De": "1",
+                      "Es": "1"
+                    }
                   }
                 },
                 "2": {
-                  "label_active": {
-                    "En": "2",
-                    "Fr": "2",
-                    "De": "2",
-                    "Es": "2"
+                  "label": {
+                    "active": {
+                      "En": "2",
+                      "Fr": "2",
+                      "De": "2",
+                      "Es": "2"
+                    }
                   }
                 },
                 "3": {
-                  "label_active": {
-                    "En": "3",
-                    "Fr": "3",
-                    "De": "3",
-                    "Es": "3"
+                  "label": {
+                    "active": {
+                      "En": "3",
+                      "Fr": "3",
+                      "De": "3",
+                      "Es": "3"
+                    }
                   }
                 },
                 "4": {
-                  "label_active": {
-                    "En": "4",
-                    "Fr": "4",
-                    "De": "4",
-                    "Es": "4"
+                  "label": {
+                    "active": {
+                      "En": "4",
+                      "Fr": "4",
+                      "De": "4",
+                      "Es": "4"
+                    }
                   }
                 },
                 "5": {
-                  "label_active": {
-                    "En": "5",
-                    "Fr": "5",
-                    "De": "5",
-                    "Es": "5"
+                  "label": {
+                    "active": {
+                      "En": "5",
+                      "Fr": "5",
+                      "De": "5",
+                      "Es": "5"
+                    }
                   }
                 },
                 "6": {
-                  "label_active": {
-                    "En": "6",
-                    "Fr": "6",
-                    "De": "6",
-                    "Es": "6"
+                  "label": {
+                    "active": {
+                      "En": "6",
+                      "Fr": "6",
+                      "De": "6",
+                      "Es": "6"
+                    }
                   }
                 },
                 "7": {
-                  "label_active": {
-                    "En": "7",
-                    "Fr": "7",
-                    "De": "7",
-                    "Es": "7"
+                  "label": {
+                    "active": {
+                      "En": "7",
+                      "Fr": "7",
+                      "De": "7",
+                      "Es": "7"
+                    }
                   }
                 },
                 "8": {
-                  "label_active": {
-                    "En": "8",
-                    "Fr": "8",
-                    "De": "8",
-                    "Es": "8"
+                  "label": {
+                    "active": {
+                      "En": "8",
+                      "Fr": "8",
+                      "De": "8",
+                      "Es": "8"
+                    }
                   },
                   "selected": true
                 }
@@ -1654,11 +1832,13 @@
       },
       "aesthetic_mix": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Industrial Styles",
-          "Fr": "Industriel Styles",
-          "De": "Industriell Styles",
-          "Es": "Industrial Styles"
+        "label": {
+          "active": {
+            "En": "Industrial Styles",
+            "Fr": "Industriel Styles",
+            "De": "Industriell Styles",
+            "Es": "Industrial Styles"
+          }
         },
         "fields": {
           "stealth": {
@@ -1681,19 +1861,23 @@
             "interaction": {
               "options": {
                 "OFF": {
-                  "label_active": {
-                    "En": "VOID",
-                    "Fr": "VOID",
-                    "De": "VOID",
-                    "Es": "VOID"
+                  "label": {
+                    "active": {
+                      "En": "VOID",
+                      "Fr": "VOID",
+                      "De": "VOID",
+                      "Es": "VOID"
+                    }
                   }
                 },
                 "ON": {
-                  "label_active": {
-                    "En": "ACTIVE",
-                    "Fr": "ACTIVE",
-                    "De": "ACTIVE",
-                    "Es": "ACTIVE"
+                  "label": {
+                    "active": {
+                      "En": "ACTIVE",
+                      "Fr": "ACTIVE",
+                      "De": "ACTIVE",
+                      "Es": "ACTIVE"
+                    }
                   },
                   "selected": true
                 }
@@ -1718,20 +1902,24 @@
             "interaction": {
               "options": {
                 "IGNITE": {
-                  "label_active": {
-                    "En": "IGNITE",
-                    "Fr": "IGNITE",
-                    "De": "IGNITE",
-                    "Es": "IGNITE"
+                  "label": {
+                    "active": {
+                      "En": "IGNITE",
+                      "Fr": "IGNITE",
+                      "De": "IGNITE",
+                      "Es": "IGNITE"
+                    }
                   },
                   "selected": true
                 },
                 "KILL": {
-                  "label_active": {
-                    "En": "KILL",
-                    "Fr": "KILL",
-                    "De": "KILL",
-                    "Es": "KILL"
+                  "label": {
+                    "active": {
+                      "En": "KILL",
+                      "Fr": "KILL",
+                      "De": "KILL",
+                      "Es": "KILL"
+                    }
                   }
                 }
               }
@@ -1756,20 +1944,24 @@
             "interaction": {
               "options": {
                 "DATA": {
-                  "label_active": {
-                    "En": "STREAMING",
-                    "Fr": "STREAMING",
-                    "De": "STREAMING",
-                    "Es": "STREAMING"
+                  "label": {
+                    "active": {
+                      "En": "STREAMING",
+                      "Fr": "STREAMING",
+                      "De": "STREAMING",
+                      "Es": "STREAMING"
+                    }
                   },
                   "selected": true
                 },
                 "IDLE": {
-                  "label_active": {
-                    "En": "IDLE",
-                    "Fr": "IDLE",
-                    "De": "IDLE",
-                    "Es": "IDLE"
+                  "label": {
+                    "active": {
+                      "En": "IDLE",
+                      "Fr": "IDLE",
+                      "De": "IDLE",
+                      "Es": "IDLE"
+                    }
                   }
                 }
               }
@@ -1793,20 +1985,24 @@
             "interaction": {
               "options": {
                 "FROST": {
-                  "label_active": {
-                    "En": "FROZEN",
-                    "Fr": "FROZEN",
-                    "De": "FROZEN",
-                    "Es": "FROZEN"
+                  "label": {
+                    "active": {
+                      "En": "FROZEN",
+                      "Fr": "FROZEN",
+                      "De": "FROZEN",
+                      "Es": "FROZEN"
+                    }
                   },
                   "selected": true
                 },
                 "MELT": {
-                  "label_active": {
-                    "En": "THAW",
-                    "Fr": "THAW",
-                    "De": "THAW",
-                    "Es": "THAW"
+                  "label": {
+                    "active": {
+                      "En": "THAW",
+                      "Fr": "THAW",
+                      "De": "THAW",
+                      "Es": "THAW"
+                    }
                   }
                 }
               }
@@ -1831,20 +2027,24 @@
             "interaction": {
               "options": {
                 "OLD": {
-                  "label_active": {
-                    "En": "ANTIQUE",
-                    "Fr": "ANTIQUE",
-                    "De": "ANTIQUE",
-                    "Es": "ANTIQUE"
+                  "label": {
+                    "active": {
+                      "En": "ANTIQUE",
+                      "Fr": "ANTIQUE",
+                      "De": "ANTIQUE",
+                      "Es": "ANTIQUE"
+                    }
                   },
                   "selected": true
                 },
                 "NEW": {
-                  "label_active": {
-                    "En": "MODERN",
-                    "Fr": "MODERN",
-                    "De": "MODERN",
-                    "Es": "MODERN"
+                  "label": {
+                    "active": {
+                      "En": "MODERN",
+                      "Fr": "MODERN",
+                      "De": "MODERN",
+                      "Es": "MODERN"
+                    }
                   }
                 }
               }
@@ -1871,19 +2071,23 @@
             "interaction": {
               "options": {
                 "VIS": {
-                  "label_active": {
-                    "En": "VISIBLE",
-                    "Fr": "VISIBLE",
-                    "De": "VISIBLE",
-                    "Es": "VISIBLE"
+                  "label": {
+                    "active": {
+                      "En": "VISIBLE",
+                      "Fr": "VISIBLE",
+                      "De": "VISIBLE",
+                      "Es": "VISIBLE"
+                    }
                   }
                 },
                 "INV": {
-                  "label_active": {
-                    "En": "GHOST",
-                    "Fr": "GHOST",
-                    "De": "GHOST",
-                    "Es": "GHOST"
+                  "label": {
+                    "active": {
+                      "En": "GHOST",
+                      "Fr": "GHOST",
+                      "De": "GHOST",
+                      "Es": "GHOST"
+                    }
                   },
                   "selected": true
                 }
@@ -1894,11 +2098,13 @@
       },
       "complex_arrays": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Multi-Choice Arrays",
-          "Fr": "Multi-Choice Arrays",
-          "De": "Multi-Choice Arrays",
-          "Es": "Multi-Choice Arrays"
+        "label": {
+          "active": {
+            "En": "Multi-Choice Arrays",
+            "Fr": "Multi-Choice Arrays",
+            "De": "Multi-Choice Arrays",
+            "Es": "Multi-Choice Arrays"
+          }
         },
         "fields": {
           "radio_12": {
@@ -1921,99 +2127,123 @@
             "interaction": {
               "options": {
                 "1": {
-                  "label_active": {
-                    "En": "A",
-                    "Fr": "A",
-                    "De": "A",
-                    "Es": "A"
+                  "label": {
+                    "active": {
+                      "En": "A",
+                      "Fr": "A",
+                      "De": "A",
+                      "Es": "A"
+                    }
                   }
                 },
                 "2": {
-                  "label_active": {
-                    "En": "B",
-                    "Fr": "B",
-                    "De": "B",
-                    "Es": "B"
+                  "label": {
+                    "active": {
+                      "En": "B",
+                      "Fr": "B",
+                      "De": "B",
+                      "Es": "B"
+                    }
                   }
                 },
                 "3": {
-                  "label_active": {
-                    "En": "C",
-                    "Fr": "C",
-                    "De": "C",
-                    "Es": "C"
+                  "label": {
+                    "active": {
+                      "En": "C",
+                      "Fr": "C",
+                      "De": "C",
+                      "Es": "C"
+                    }
                   }
                 },
                 "4": {
-                  "label_active": {
-                    "En": "D",
-                    "Fr": "D",
-                    "De": "D",
-                    "Es": "D"
+                  "label": {
+                    "active": {
+                      "En": "D",
+                      "Fr": "D",
+                      "De": "D",
+                      "Es": "D"
+                    }
                   }
                 },
                 "5": {
-                  "label_active": {
-                    "En": "E",
-                    "Fr": "E",
-                    "De": "E",
-                    "Es": "E"
+                  "label": {
+                    "active": {
+                      "En": "E",
+                      "Fr": "E",
+                      "De": "E",
+                      "Es": "E"
+                    }
                   }
                 },
                 "6": {
-                  "label_active": {
-                    "En": "F",
-                    "Fr": "F",
-                    "De": "F",
-                    "Es": "F"
+                  "label": {
+                    "active": {
+                      "En": "F",
+                      "Fr": "F",
+                      "De": "F",
+                      "Es": "F"
+                    }
                   }
                 },
                 "7": {
-                  "label_active": {
-                    "En": "G",
-                    "Fr": "G",
-                    "De": "G",
-                    "Es": "G"
+                  "label": {
+                    "active": {
+                      "En": "G",
+                      "Fr": "G",
+                      "De": "G",
+                      "Es": "G"
+                    }
                   }
                 },
                 "8": {
-                  "label_active": {
-                    "En": "H",
-                    "Fr": "H",
-                    "De": "H",
-                    "Es": "H"
+                  "label": {
+                    "active": {
+                      "En": "H",
+                      "Fr": "H",
+                      "De": "H",
+                      "Es": "H"
+                    }
                   }
                 },
                 "9": {
-                  "label_active": {
-                    "En": "I",
-                    "Fr": "I",
-                    "De": "I",
-                    "Es": "I"
+                  "label": {
+                    "active": {
+                      "En": "I",
+                      "Fr": "I",
+                      "De": "I",
+                      "Es": "I"
+                    }
                   }
                 },
                 "10": {
-                  "label_active": {
-                    "En": "J",
-                    "Fr": "J",
-                    "De": "J",
-                    "Es": "J"
+                  "label": {
+                    "active": {
+                      "En": "J",
+                      "Fr": "J",
+                      "De": "J",
+                      "Es": "J"
+                    }
                   }
                 },
                 "11": {
-                  "label_active": {
-                    "En": "K",
-                    "Fr": "K",
-                    "De": "K",
-                    "Es": "K"
+                  "label": {
+                    "active": {
+                      "En": "K",
+                      "Fr": "K",
+                      "De": "K",
+                      "Es": "K"
+                    }
                   }
                 },
                 "12": {
-                  "label_active": {
-                    "En": "L",
-                    "Fr": "L",
-                    "De": "L",
-                    "Es": "L"
+                  "label": {
+                    "active": {
+                      "En": "L",
+                      "Fr": "L",
+                      "De": "L",
+                      "Es": "L"
+                    }
                   },
                   "selected": true
                 }
@@ -2024,11 +2254,13 @@
       },
       "circular_demos": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Circular Button Demos",
-          "Fr": "Circular Bouton Demos",
-          "De": "Circular Taste Demos",
-          "Es": "Circular Botón Demos"
+        "label": {
+          "active": {
+            "En": "Circular Button Demos",
+            "Fr": "Circular Bouton Demos",
+            "De": "Circular Taste Demos",
+            "Es": "Circular Botón Demos"
+          }
         },
         "fields": {
           "circular_channels": {
@@ -2060,36 +2292,44 @@
             "interaction": {
               "options": {
                 "1": {
-                  "label_active": {
-                    "En": "1",
-                    "Fr": "1",
-                    "De": "1",
-                    "Es": "1"
+                  "label": {
+                    "active": {
+                      "En": "1",
+                      "Fr": "1",
+                      "De": "1",
+                      "Es": "1"
+                    }
                   },
                   "selected": true
                 },
                 "2": {
-                  "label_active": {
-                    "En": "2",
-                    "Fr": "2",
-                    "De": "2",
-                    "Es": "2"
+                  "label": {
+                    "active": {
+                      "En": "2",
+                      "Fr": "2",
+                      "De": "2",
+                      "Es": "2"
+                    }
                   }
                 },
                 "3": {
-                  "label_active": {
-                    "En": "3",
-                    "Fr": "3",
-                    "De": "3",
-                    "Es": "3"
+                  "label": {
+                    "active": {
+                      "En": "3",
+                      "Fr": "3",
+                      "De": "3",
+                      "Es": "3"
+                    }
                   }
                 },
                 "4": {
-                  "label_active": {
-                    "En": "4",
-                    "Fr": "4",
-                    "De": "4",
-                    "Es": "4"
+                  "label": {
+                    "active": {
+                      "En": "4",
+                      "Fr": "4",
+                      "De": "4",
+                      "Es": "4"
+                    }
                   }
                 }
               }
@@ -2117,32 +2357,38 @@
             "interaction": {
               "options": {
                 "RED": {
-                  "label_active": {
-                    "En": "STOP",
-                    "Fr": "STOP",
-                    "De": "STOP",
-                    "Es": "STOP"
+                  "label": {
+                    "active": {
+                      "En": "STOP",
+                      "Fr": "STOP",
+                      "De": "STOP",
+                      "Es": "STOP"
+                    }
                   },
                   "active_color": "#FF0000",
                   "glow_intensity": 3.0,
                   "selected": true
                 },
                 "YEL": {
-                  "label_active": {
-                    "En": "WAIT",
-                    "Fr": "WAIT",
-                    "De": "WAIT",
-                    "Es": "WAIT"
+                  "label": {
+                    "active": {
+                      "En": "WAIT",
+                      "Fr": "WAIT",
+                      "De": "WAIT",
+                      "Es": "WAIT"
+                    }
                   },
                   "active_color": "#FFCC00",
                   "glow_intensity": 2.5
                 },
                 "GRN": {
-                  "label_active": {
-                    "En": "GO",
-                    "Fr": "GO",
-                    "De": "GO",
-                    "Es": "GO"
+                  "label": {
+                    "active": {
+                      "En": "GO",
+                      "Fr": "GO",
+                      "De": "GO",
+                      "Es": "GO"
+                    }
                   },
                   "active_color": "#00FF00",
                   "glow_intensity": 2.5
@@ -2182,36 +2428,44 @@
             "interaction": {
               "options": {
                 "A": {
-                  "label_active": {
-                    "En": "A",
-                    "Fr": "A",
-                    "De": "A",
-                    "Es": "A"
+                  "label": {
+                    "active": {
+                      "En": "A",
+                      "Fr": "A",
+                      "De": "A",
+                      "Es": "A"
+                    }
                   }
                 },
                 "B": {
-                  "label_active": {
-                    "En": "B",
-                    "Fr": "B",
-                    "De": "B",
-                    "Es": "B"
+                  "label": {
+                    "active": {
+                      "En": "B",
+                      "Fr": "B",
+                      "De": "B",
+                      "Es": "B"
+                    }
                   }
                 },
                 "C": {
-                  "label_active": {
-                    "En": "C",
-                    "Fr": "C",
-                    "De": "C",
-                    "Es": "C"
+                  "label": {
+                    "active": {
+                      "En": "C",
+                      "Fr": "C",
+                      "De": "C",
+                      "Es": "C"
+                    }
                   },
                   "selected": true
                 },
                 "D": {
-                  "label_active": {
-                    "En": "D",
-                    "Fr": "D",
-                    "De": "D",
-                    "Es": "D"
+                  "label": {
+                    "active": {
+                      "En": "D",
+                      "Fr": "D",
+                      "De": "D",
+                      "Es": "D"
+                    }
                   }
                 }
               }
@@ -2249,21 +2503,25 @@
             "interaction": {
               "options": {
                 "POWER": {
-                  "label_active": {
-                    "En": "PWR",
-                    "Fr": "PWR",
-                    "De": "PWR",
-                    "Es": "PWR"
+                  "label": {
+                    "active": {
+                      "En": "PWR",
+                      "Fr": "PWR",
+                      "De": "PWR",
+                      "Es": "PWR"
+                    }
                   },
                   "active_color": "#00AAFF",
                   "selected": true
                 },
                 "FAULT": {
-                  "label_active": {
-                    "En": "ERR",
-                    "Fr": "ERR",
-                    "De": "ERR",
-                    "Es": "ERR"
+                  "label": {
+                    "active": {
+                      "En": "ERR",
+                      "Fr": "ERR",
+                      "De": "ERR",
+                      "Es": "ERR"
+                    }
                   },
                   "active_color": "#FF3300"
                 }

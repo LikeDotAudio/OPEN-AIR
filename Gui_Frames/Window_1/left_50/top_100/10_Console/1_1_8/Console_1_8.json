@@ -102,11 +102,13 @@
             "Summing_Groups": {
               "type": "OcaCollapsibleBlock",
               "view": "Subs",
-              "label_active": {
-                "En": "Subs",
-                "Fr": "Sous-groupes",
-                "De": "Subgruppen",
-                "Es": "Subgrupos"
+              "label": {
+                "active": {
+                  "En": "Subs",
+                  "Fr": "Sous-groupes",
+                  "De": "Subgruppen",
+                  "Es": "Subgrupos"
+                }
               },
               "show_label": false,
               "layout_columns": 2,
@@ -125,11 +127,13 @@
               "fields": {
                 "m1": {
                   "type": "_WinkButton",
-                  "label_active": {
-                    "En": "M1",
-                    "Fr": "M1",
-                    "De": "M1",
-                    "Es": "M1"
+                  "label": {
+                    "active": {
+                      "En": "M1",
+                      "Fr": "M1",
+                      "De": "M1",
+                      "Es": "M1"
+                    }
                   },
                   "font_size": 8,
                   "text_inside": "",
@@ -148,11 +152,13 @@
                 },
                 "m2": {
                   "type": "_WinkButton",
-                  "label_active": {
-                    "En": "M2",
-                    "Fr": "M2",
-                    "De": "M2",
-                    "Es": "M2"
+                  "label": {
+                    "active": {
+                      "En": "M2",
+                      "Fr": "M2",
+                      "De": "M2",
+                      "Es": "M2"
+                    }
                   },
                   "font_size": 8,
                   "text_inside": "",
@@ -171,11 +177,13 @@
                 },
                 "s1": {
                   "type": "_WinkButton",
-                  "label_active": {
-                    "En": "S1",
-                    "Fr": "S1",
-                    "De": "S1",
-                    "Es": "S1"
+                  "label": {
+                    "active": {
+                      "En": "S1",
+                      "Fr": "S1",
+                      "De": "S1",
+                      "Es": "S1"
+                    }
                   },
                   "font_size": 8,
                   "text_inside": "",
@@ -194,11 +202,13 @@
                 },
                 "s2": {
                   "type": "_WinkButton",
-                  "label_active": {
-                    "En": "S2",
-                    "Fr": "S2",
-                    "De": "S2",
-                    "Es": "S2"
+                  "label": {
+                    "active": {
+                      "En": "S2",
+                      "Fr": "S2",
+                      "De": "S2",
+                      "Es": "S2"
+                    }
                   },
                   "font_size": 8,
                   "text_inside": "",
@@ -217,11 +227,13 @@
                 },
                 "s3": {
                   "type": "_WinkButton",
-                  "label_active": {
-                    "En": "S3",
-                    "Fr": "S3",
-                    "De": "S3",
-                    "Es": "S3"
+                  "label": {
+                    "active": {
+                      "En": "S3",
+                      "Fr": "S3",
+                      "De": "S3",
+                      "Es": "S3"
+                    }
                   },
                   "font_size": 8,
                   "text_inside": "",
@@ -240,11 +252,13 @@
                 },
                 "s4": {
                   "type": "_WinkButton",
-                  "label_active": {
-                    "En": "S4",
-                    "Fr": "S4",
-                    "De": "S4",
-                    "Es": "S4"
+                  "label": {
+                    "active": {
+                      "En": "S4",
+                      "Fr": "S4",
+                      "De": "S4",
+                      "Es": "S4"
+                    }
                   },
                   "font_size": 8,
                   "text_inside": "",
@@ -302,11 +316,13 @@
                       "fields": {
                         "pr_po": {
                           "type": "_WinkButton",
-                          "label_active": {
-                            "En": "",
-                            "Fr": "",
-                            "De": "",
-                            "Es": ""
+                          "label": {
+                            "active": {
+                              "En": "",
+                              "Fr": "",
+                              "De": "",
+                              "Es": ""
+                            }
                           },
                           "text_inside": "PO",
                           "text_closed": "PR",
@@ -326,11 +342,13 @@
                         },
                         "on_off": {
                           "type": "_WinkButton",
-                          "label_active": {
-                            "En": "",
-                            "Fr": "",
-                            "De": "",
-                            "Es": ""
+                          "label": {
+                            "active": {
+                              "En": "",
+                              "Fr": "",
+                              "De": "",
+                              "Es": ""
+                            }
                           },
                           "text_inside": "ON",
                           "text_closed": "",
@@ -455,11 +473,13 @@
                       "fields": {
                         "pr_po": {
                           "type": "_WinkButton",
-                          "label_active": {
-                            "En": "",
-                            "Fr": "",
-                            "De": "",
-                            "Es": ""
+                          "label": {
+                            "active": {
+                              "En": "",
+                              "Fr": "",
+                              "De": "",
+                              "Es": ""
+                            }
                           },
                           "text_inside": "PO",
                           "text_closed": "PR",
@@ -479,11 +499,13 @@
                         },
                         "on_off": {
                           "type": "_WinkButton",
-                          "label_active": {
-                            "En": "",
-                            "Fr": "",
-                            "De": "",
-                            "Es": ""
+                          "label": {
+                            "active": {
+                              "En": "",
+                              "Fr": "",
+                              "De": "",
+                              "Es": ""
+                            }
                           },
                           "text_inside": "ON",
                           "text_closed": "",
@@ -608,11 +630,13 @@
                       "fields": {
                         "pr_po": {
                           "type": "_WinkButton",
-                          "label_active": {
-                            "En": "",
-                            "Fr": "",
-                            "De": "",
-                            "Es": ""
+                          "label": {
+                            "active": {
+                              "En": "",
+                              "Fr": "",
+                              "De": "",
+                              "Es": ""
+                            }
                           },
                           "text_inside": "PO",
                           "text_closed": "PR",
@@ -632,11 +656,13 @@
                         },
                         "on_off": {
                           "type": "_WinkButton",
-                          "label_active": {
-                            "En": "",
-                            "Fr": "",
-                            "De": "",
-                            "Es": ""
+                          "label": {
+                            "active": {
+                              "En": "",
+                              "Fr": "",
+                              "De": "",
+                              "Es": ""
+                            }
                           },
                           "text_inside": "ON",
                           "text_closed": "",
@@ -761,11 +787,13 @@
                       "fields": {
                         "pr_po": {
                           "type": "_WinkButton",
-                          "label_active": {
-                            "En": "",
-                            "Fr": "",
-                            "De": "",
-                            "Es": ""
+                          "label": {
+                            "active": {
+                              "En": "",
+                              "Fr": "",
+                              "De": "",
+                              "Es": ""
+                            }
                           },
                           "text_inside": "PO",
                           "text_closed": "PR",
@@ -785,11 +813,13 @@
                         },
                         "on_off": {
                           "type": "_WinkButton",
-                          "label_active": {
-                            "En": "",
-                            "Fr": "",
-                            "De": "",
-                            "Es": ""
+                          "label": {
+                            "active": {
+                              "En": "",
+                              "Fr": "",
+                              "De": "",
+                              "Es": ""
+                            }
                           },
                           "text_inside": "ON",
                           "text_closed": "",
@@ -920,11 +950,13 @@
                   "fields": {
                     "pan_toggle": {
                       "type": "_WinkButton",
-                      "label_active": {
-                        "En": "",
-                        "Fr": "",
-                        "De": "",
-                        "Es": ""
+                      "label": {
+                        "active": {
+                          "En": "",
+                          "Fr": "",
+                          "De": "",
+                          "Es": ""
+                        }
                       },
                       "text_inside": "PAN",
                       "text_closed": "PAN",
@@ -940,11 +972,13 @@
                     },
                     "pfl": {
                       "type": "_WinkButton",
-                      "label_active": {
-                        "En": "",
-                        "Fr": "",
-                        "De": "",
-                        "Es": ""
+                      "label": {
+                        "active": {
+                          "En": "",
+                          "Fr": "",
+                          "De": "",
+                          "Es": ""
+                        }
                       },
                       "text_inside": "PFL",
                       "text_closed": "PFL",
@@ -1028,11 +1062,13 @@
             },
             "channel_label": {
               "type": "_GuiLabel",
-              "label_active": {
-                "En": "{{channel_name}}",
-                "Fr": "{{channel_name}}",
-                "De": "{{channel_name}}",
-                "Es": "{{channel_name}}"
+              "label": {
+                "active": {
+                  "En": "{{channel_name}}",
+                  "Fr": "{{channel_name}}",
+                  "De": "{{channel_name}}",
+                  "Es": "{{channel_name}}"
+                }
               },
               "layout": {
                 "pady": 0,
@@ -1057,11 +1093,13 @@
               "fields": {
                 "solo": {
                   "type": "_WinkButton",
-                  "label_active": {
-                    "En": "",
-                    "Fr": "",
-                    "De": "",
-                    "Es": ""
+                  "label": {
+                    "active": {
+                      "En": "",
+                      "Fr": "",
+                      "De": "",
+                      "Es": ""
+                    }
                   },
                   "text_inside": "S",
                   "text_closed": "",
@@ -1077,11 +1115,13 @@
                 },
                 "ch_on": {
                   "type": "_WinkButton",
-                  "label_active": {
-                    "En": "",
-                    "Fr": "",
-                    "De": "",
-                    "Es": ""
+                  "label": {
+                    "active": {
+                      "En": "",
+                      "Fr": "",
+                      "De": "",
+                      "Es": ""
+                    }
                   },
                   "text_inside": "CH ON",
                   "text_closed": "",
@@ -1127,11 +1167,13 @@
             },
             "fader": {
               "type": "_CustomFader",
-              "label_active": {
-                "En": "",
-                "Fr": "",
-                "De": "",
-                "Es": ""
+              "label": {
+                "active": {
+                  "En": "",
+                  "Fr": "",
+                  "De": "",
+                  "Es": ""
+                }
               },
               "domain": {
                 "min": -100,

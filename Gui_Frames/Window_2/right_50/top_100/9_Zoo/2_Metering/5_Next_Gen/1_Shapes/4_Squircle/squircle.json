@@ -48,10 +48,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Standard Squircle",
-              "Fr": "Standard Squircle",
-              "De": "Standard Squircle",
-              "Es": "Estándar Squircle"
+              "active": {
+                "En": "Standard Squircle",
+                "Fr": "Standard Squircle",
+                "De": "Standard Squircle",
+                "Es": "Estándar Squircle"
+              }
             },
             "geometry": {
               "width": 300,
@@ -100,12 +102,6 @@
                   "sig_fig": 3
                 }
               ]
-            },
-            "label_active": {
-              "En": "Standard Squircle",
-              "Fr": "Standard Squircle",
-              "De": "Standard Squircle",
-              "Es": "Estándar Squircle"
             },
             "width": 300,
             "height": 300,
@@ -156,10 +152,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Small Blue",
-              "Fr": "Small Blue",
-              "De": "Small Blue",
-              "Es": "Small Blue"
+              "active": {
+                "En": "Small Blue",
+                "Fr": "Small Blue",
+                "De": "Small Blue",
+                "Es": "Small Blue"
+              }
             },
             "geometry": {
               "width": 200,
@@ -195,12 +193,6 @@
                   "color": "#33A1FD"
                 }
               ]
-            },
-            "label_active": {
-              "En": "Small Blue",
-              "Fr": "Small Blue",
-              "De": "Small Blue",
-              "Es": "Small Blue"
             },
             "width": 200,
             "height": 200,
@@ -246,10 +238,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Large Red",
-              "Fr": "Large Red",
-              "De": "Large Red",
-              "Es": "Large Red"
+              "active": {
+                "En": "Large Red",
+                "Fr": "Large Red",
+                "De": "Large Red",
+                "Es": "Large Red"
+              }
             },
             "geometry": {
               "width": 300,
@@ -285,12 +279,6 @@
                   "color": "red"
                 }
               ]
-            },
-            "label_active": {
-              "En": "Large Red",
-              "Fr": "Large Red",
-              "De": "Large Red",
-              "Es": "Large Red"
             },
             "width": 300,
             "height": 300,
@@ -336,10 +324,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Tiny Silver",
-              "Fr": "Tiny Silver",
-              "De": "Tiny Silver",
-              "Es": "Tiny Silver"
+              "active": {
+                "En": "Tiny Silver",
+                "Fr": "Tiny Silver",
+                "De": "Tiny Silver",
+                "Es": "Tiny Silver"
+              }
             },
             "geometry": {
               "width": 150,
@@ -359,12 +349,6 @@
                 "sub_ticks": 0,
                 "label_radius_offset": 5
               }
-            },
-            "label_active": {
-              "En": "Tiny Silver",
-              "Fr": "Tiny Silver",
-              "De": "Tiny Silver",
-              "Es": "Tiny Silver"
             },
             "width": 150,
             "height": 150,
@@ -410,10 +394,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Neon Pink",
-              "Fr": "Neon Pink",
-              "De": "Neon Pink",
-              "Es": "Neon Pink"
+              "active": {
+                "En": "Neon Pink",
+                "Fr": "Neon Pink",
+                "De": "Neon Pink",
+                "Es": "Neon Pink"
+              }
             },
             "geometry": {
               "width": 250,
@@ -450,12 +436,6 @@
                   "color": "#FF1493"
                 }
               ]
-            },
-            "label_active": {
-              "En": "Neon Pink",
-              "Fr": "Neon Pink",
-              "De": "Neon Pink",
-              "Es": "Neon Pink"
             },
             "width": 250,
             "height": 250,
@@ -502,10 +482,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Vintage Cream",
-              "Fr": "Vintage Cream",
-              "De": "Vintage Cream",
-              "Es": "Vintage Cream"
+              "active": {
+                "En": "Vintage Cream",
+                "Fr": "Vintage Cream",
+                "De": "Vintage Cream",
+                "Es": "Vintage Cream"
+              }
             },
             "geometry": {
               "width": 250,
@@ -540,12 +522,6 @@
                   "color": "#8B4513"
                 }
               ]
-            },
-            "label_active": {
-              "En": "Vintage Cream",
-              "Fr": "Vintage Cream",
-              "De": "Vintage Cream",
-              "Es": "Vintage Cream"
             },
             "width": 250,
             "height": 250,
@@ -591,10 +567,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Cyber Cyan",
-              "Fr": "Cyber Cyan",
-              "De": "Cyber Cyan",
-              "Es": "Cyber Cyan"
+              "active": {
+                "En": "Cyber Cyan",
+                "Fr": "Cyber Cyan",
+                "De": "Cyber Cyan",
+                "Es": "Cyber Cyan"
+              }
             },
             "geometry": {
               "width": 300,
@@ -631,12 +609,6 @@
                   "color": "#00E5FF"
                 }
               ]
-            },
-            "label_active": {
-              "En": "Cyber Cyan",
-              "Fr": "Cyber Cyan",
-              "De": "Cyber Cyan",
-              "Es": "Cyber Cyan"
             },
             "width": 300,
             "height": 300,
@@ -683,10 +655,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Blueprint",
-              "Fr": "Blueprint",
-              "De": "Blueprint",
-              "Es": "Blueprint"
+              "active": {
+                "En": "Blueprint",
+                "Fr": "Blueprint",
+                "De": "Blueprint",
+                "Es": "Blueprint"
+              }
             },
             "geometry": {
               "width": 220,
@@ -721,12 +695,6 @@
                   "color": "white"
                 }
               ]
-            },
-            "label_active": {
-              "En": "Blueprint",
-              "Fr": "Blueprint",
-              "De": "Blueprint",
-              "Es": "Blueprint"
             },
             "width": 220,
             "height": 220,
@@ -772,10 +740,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Black & Gold",
-              "Fr": "Black & Gold",
-              "De": "Black & Gold",
-              "Es": "Black & Gold"
+              "active": {
+                "En": "Black & Gold",
+                "Fr": "Black & Gold",
+                "De": "Black & Gold",
+                "Es": "Black & Gold"
+              }
             },
             "geometry": {
               "width": 300,
@@ -811,12 +781,6 @@
                   "color": "gold"
                 }
               ]
-            },
-            "label_active": {
-              "En": "Black & Gold",
-              "Fr": "Black & Gold",
-              "De": "Black & Gold",
-              "Es": "Black & Gold"
             },
             "width": 300,
             "height": 300,

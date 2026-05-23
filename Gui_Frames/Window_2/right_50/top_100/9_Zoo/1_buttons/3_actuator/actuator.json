@@ -13,20 +13,30 @@
     "blocks": {
       "elements1": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "SENDING...",
-          "Fr": "SENDING...",
-          "De": "SENDING...",
-          "Es": "SENDING..."
+        "label": {
+          "active": {
+            "En": "SENDING...",
+            "Fr": "SENDING...",
+            "De": "SENDING...",
+            "Es": "SENDING..."
+          }
         },
         "fields": {
           "examplefields": {
             "type": "_SmartActuator",
             "label": {
-              "En": "SENDING...",
-              "Fr": "SENDING...",
-              "De": "SENDING...",
-              "Es": "SENDING..."
+              "active": {
+                "En": "SENDING...",
+                "Fr": "SENDING...",
+                "De": "SENDING...",
+                "Es": "SENDING..."
+              },
+              "inactive": {
+                "En": "SEND",
+                "Fr": "SEND",
+                "De": "SEND",
+                "Es": "SEND"
+              }
             },
             "notes": "A button to trigger a 'send' command.",
             "geometry": {
@@ -38,32 +48,36 @@
             "interaction": {
               "is_read_only": false
             },
-            "label_inactive": {
-              "En": "SEND",
-              "Fr": "SEND",
-              "De": "SEND",
-              "Es": "SEND"
-            },
             "layout": {}
           }
         }
       },
       "elements2": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "RUNNING",
-          "Fr": "RUNNING",
-          "De": "RUNNING",
-          "Es": "RUNNING"
+        "label": {
+          "active": {
+            "En": "RUNNING",
+            "Fr": "RUNNING",
+            "De": "RUNNING",
+            "Es": "RUNNING"
+          }
         },
         "fields": {
           "examplefields": {
             "type": "_SmartActuator",
             "label": {
-              "En": "RUNNING",
-              "Fr": "RUNNING",
-              "De": "RUNNING",
-              "Es": "RUNNING"
+              "active": {
+                "En": "RUNNING",
+                "Fr": "RUNNING",
+                "De": "RUNNING",
+                "Es": "RUNNING"
+              },
+              "inactive": {
+                "En": "START",
+                "Fr": "START",
+                "De": "START",
+                "Es": "START"
+              }
             },
             "notes": "Button to initiate a process, showing 'RUNNING' when active.",
             "geometry": {
@@ -74,32 +88,36 @@
             "interaction": {
               "is_read_only": false
             },
-            "label_inactive": {
-              "En": "START",
-              "Fr": "START",
-              "De": "START",
-              "Es": "START"
-            },
             "layout": {}
           }
         }
       },
       "elements3": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "STOPPING!",
-          "Fr": "STOPPING!",
-          "De": "STOPPING!",
-          "Es": "STOPPING!"
+        "label": {
+          "active": {
+            "En": "STOPPING!",
+            "Fr": "STOPPING!",
+            "De": "STOPPING!",
+            "Es": "STOPPING!"
+          }
         },
         "fields": {
           "examplefields": {
             "type": "_SmartActuator",
             "label": {
-              "En": "STOPPING!",
-              "Fr": "STOPPING!",
-              "De": "STOPPING!",
-              "Es": "STOPPING!"
+              "active": {
+                "En": "STOPPING!",
+                "Fr": "STOPPING!",
+                "De": "STOPPING!",
+                "Es": "STOPPING!"
+              },
+              "inactive": {
+                "En": "STOP",
+                "Fr": "STOP",
+                "De": "STOP",
+                "Es": "STOP"
+              }
             },
             "notes": "Large emergency stop button.",
             "geometry": {
@@ -110,32 +128,36 @@
             "interaction": {
               "is_read_only": false
             },
-            "label_inactive": {
-              "En": "STOP",
-              "Fr": "STOP",
-              "De": "STOP",
-              "Es": "STOP"
-            },
             "layout": {}
           }
         }
       },
       "elements4": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "RESETTING...",
-          "Fr": "RESETTING...",
-          "De": "RESETTING...",
-          "Es": "RESETTING..."
+        "label": {
+          "active": {
+            "En": "RESETTING...",
+            "Fr": "RESETTING...",
+            "De": "RESETTING...",
+            "Es": "RESETTING..."
+          }
         },
         "fields": {
           "examplefields": {
             "type": "_SmartActuator",
             "label": {
-              "En": "RESETTING...",
-              "Fr": "RESETTING...",
-              "De": "RESETTING...",
-              "Es": "RESETTING..."
+              "active": {
+                "En": "RESETTING...",
+                "Fr": "RESETTING...",
+                "De": "RESETTING...",
+                "Es": "RESETTING..."
+              },
+              "inactive": {
+                "En": "RESET",
+                "Fr": "RESET",
+                "De": "RESET",
+                "Es": "RESET"
+              }
             },
             "notes": "Compact button to reset a device.",
             "geometry": {
@@ -146,32 +168,36 @@
             "interaction": {
               "is_read_only": false
             },
-            "label_inactive": {
-              "En": "RESET",
-              "Fr": "RESET",
-              "De": "RESET",
-              "Es": "RESET"
-            },
             "layout": {}
           }
         }
       },
       "elements5": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "CALIBRATING",
-          "Fr": "CALIBRATING",
-          "De": "CALIBRATING",
-          "Es": "CALIBRATING"
+        "label": {
+          "active": {
+            "En": "CALIBRATING",
+            "Fr": "CALIBRATING",
+            "De": "CALIBRATING",
+            "Es": "CALIBRATING"
+          }
         },
         "fields": {
           "examplefields": {
             "type": "_SmartActuator",
             "label": {
-              "En": "CALIBRATING",
-              "Fr": "CALIBRATING",
-              "De": "CALIBRATING",
-              "Es": "CALIBRATING"
+              "active": {
+                "En": "CALIBRATING",
+                "Fr": "CALIBRATING",
+                "De": "CALIBRATING",
+                "Es": "CALIBRATING"
+              },
+              "inactive": {
+                "En": "CALIBRATE",
+                "Fr": "CALIBRATE",
+                "De": "CALIBRATE",
+                "Es": "CALIBRATE"
+              }
             },
             "notes": "Button to trigger sensor calibration.",
             "geometry": {
@@ -182,44 +208,42 @@
             "interaction": {
               "is_read_only": false
             },
-            "label_inactive": {
-              "En": "CALIBRATE",
-              "Fr": "CALIBRATE",
-              "De": "CALIBRATE",
-              "Es": "CALIBRATE"
-            },
             "layout": {}
           }
         }
       },
       "circular_demos": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Circular Actuators",
-          "Fr": "Circular Actuators",
-          "De": "Circular Actuators",
-          "Es": "Circular Actuators"
+        "label": {
+          "active": {
+            "En": "Circular Actuators",
+            "Fr": "Circular Actuators",
+            "De": "Circular Actuators",
+            "Es": "Circular Actuators"
+          }
         },
         "fields": {
           "panic_button": {
             "type": "_SmartActuator",
             "label": {
-              "En": "PANIC",
-              "Fr": "PANIC",
-              "De": "PANIC",
-              "Es": "PANIC"
-            },
-            "label_active": {
-              "En": "HALT!",
-              "Fr": "HALT!",
-              "De": "HALT!",
-              "Es": "HALT!"
-            },
-            "label_inactive": {
-              "En": "PANIC",
-              "Fr": "PANIC",
-              "De": "PANIC",
-              "Es": "PANIC"
+              "text": {
+                "En": "PANIC",
+                "Fr": "PANIC",
+                "De": "PANIC",
+                "Es": "PANIC"
+              },
+              "active": {
+                "En": "HALT!",
+                "Fr": "HALT!",
+                "De": "HALT!",
+                "Es": "HALT!"
+              },
+              "inactive": {
+                "En": "PANIC",
+                "Fr": "PANIC",
+                "De": "PANIC",
+                "Es": "PANIC"
+              }
             },
             "geometry": {
               "width": 100,
@@ -246,22 +270,24 @@
           "start_circle": {
             "type": "_SmartActuator",
             "label": {
-              "En": "START",
-              "Fr": "START",
-              "De": "START",
-              "Es": "START"
-            },
-            "label_active": {
-              "En": "GO!",
-              "Fr": "GO!",
-              "De": "GO!",
-              "Es": "GO!"
-            },
-            "label_inactive": {
-              "En": "START",
-              "Fr": "START",
-              "De": "START",
-              "Es": "START"
+              "text": {
+                "En": "START",
+                "Fr": "START",
+                "De": "START",
+                "Es": "START"
+              },
+              "active": {
+                "En": "GO!",
+                "Fr": "GO!",
+                "De": "GO!",
+                "Es": "GO!"
+              },
+              "inactive": {
+                "En": "START",
+                "Fr": "START",
+                "De": "START",
+                "Es": "START"
+              }
             },
             "geometry": {
               "width": 80,
@@ -288,22 +314,24 @@
           "trigger_circle": {
             "type": "_SmartActuator",
             "label": {
-              "En": "TRIG",
-              "Fr": "TRIG",
-              "De": "TRIG",
-              "Es": "TRIG"
-            },
-            "label_active": {
-              "En": "FIRING",
-              "Fr": "FIRING",
-              "De": "FIRING",
-              "Es": "FIRING"
-            },
-            "label_inactive": {
-              "En": "TRIG",
-              "Fr": "TRIG",
-              "De": "TRIG",
-              "Es": "TRIG"
+              "text": {
+                "En": "TRIG",
+                "Fr": "TRIG",
+                "De": "TRIG",
+                "Es": "TRIG"
+              },
+              "active": {
+                "En": "FIRING",
+                "Fr": "FIRING",
+                "De": "FIRING",
+                "Es": "FIRING"
+              },
+              "inactive": {
+                "En": "TRIG",
+                "Fr": "TRIG",
+                "De": "TRIG",
+                "Es": "TRIG"
+              }
             },
             "geometry": {
               "width": 60,
@@ -330,22 +358,24 @@
           "tiny_poke": {
             "type": "_SmartActuator",
             "label": {
-              "En": "Poke",
-              "Fr": "Poke",
-              "De": "Poke",
-              "Es": "Poke"
-            },
-            "label_active": {
-              "En": "!",
-              "Fr": "!",
-              "De": "!",
-              "Es": "!"
-            },
-            "label_inactive": {
-              "En": "?",
-              "Fr": "?",
-              "De": "?",
-              "Es": "?"
+              "text": {
+                "En": "Poke",
+                "Fr": "Poke",
+                "De": "Poke",
+                "Es": "Poke"
+              },
+              "active": {
+                "En": "!",
+                "Fr": "!",
+                "De": "!",
+                "Es": "!"
+              },
+              "inactive": {
+                "En": "?",
+                "Fr": "?",
+                "De": "?",
+                "Es": "?"
+              }
             },
             "geometry": {
               "width": 30,
@@ -373,32 +403,36 @@
       },
       "cream_and_variants": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Cream & Color Variants",
-          "Fr": "Cream & Color Variants",
-          "De": "Cream & Color Variants",
-          "Es": "Cream & Color Variants"
+        "label": {
+          "active": {
+            "En": "Cream & Color Variants",
+            "Fr": "Cream & Color Variants",
+            "De": "Cream & Color Variants",
+            "Es": "Cream & Color Variants"
+          }
         },
         "fields": {
           "cream_off": {
             "type": "_SmartActuator",
             "label": {
-              "En": "CREAM DIM",
-              "Fr": "CREAM DIM",
-              "De": "CREAM DIM",
-              "Es": "CREAM DIM"
-            },
-            "label_inactive": {
-              "En": "DIM",
-              "Fr": "DIM",
-              "De": "DIM",
-              "Es": "DIM"
-            },
-            "label_active": {
-              "En": "...",
-              "Fr": "...",
-              "De": "...",
-              "Es": "..."
+              "text": {
+                "En": "CREAM DIM",
+                "Fr": "CREAM DIM",
+                "De": "CREAM DIM",
+                "Es": "CREAM DIM"
+              },
+              "active": {
+                "En": "...",
+                "Fr": "...",
+                "De": "...",
+                "Es": "..."
+              },
+              "inactive": {
+                "En": "DIM",
+                "Fr": "DIM",
+                "De": "DIM",
+                "Es": "DIM"
+              }
             },
             "geometry": {
               "width": 100,
@@ -420,22 +454,24 @@
           "cream_on": {
             "type": "_SmartActuator",
             "label": {
-              "En": "CREAM LIT",
-              "Fr": "CREAM LIT",
-              "De": "CREAM LIT",
-              "Es": "CREAM LIT"
-            },
-            "label_inactive": {
-              "En": "...",
-              "Fr": "...",
-              "De": "...",
-              "Es": "..."
-            },
-            "label_active": {
-              "En": "LIT",
-              "Fr": "LIT",
-              "De": "LIT",
-              "Es": "LIT"
+              "text": {
+                "En": "CREAM LIT",
+                "Fr": "CREAM LIT",
+                "De": "CREAM LIT",
+                "Es": "CREAM LIT"
+              },
+              "active": {
+                "En": "LIT",
+                "Fr": "LIT",
+                "De": "LIT",
+                "Es": "LIT"
+              },
+              "inactive": {
+                "En": "...",
+                "Fr": "...",
+                "De": "...",
+                "Es": "..."
+              }
             },
             "geometry": {
               "width": 100,

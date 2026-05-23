@@ -23,11 +23,13 @@
         "fields": {
           "Stereo_Bank_A": {
             "type": "OcaBlock",
-            "label_active": {
-              "En": "Stereo Pair Bridge (High-Detail Ticks)",
-              "Fr": "Stereo Pair Bridge (High-Detail Ticks)",
-              "De": "Stereo Pair Bridge (High-Detail Ticks)",
-              "Es": "Stereo Pair Bridge (High-Detail Ticks)"
+            "label": {
+              "active": {
+                "En": "Stereo Pair Bridge (High-Detail Ticks)",
+                "Fr": "Stereo Pair Bridge (High-Detail Ticks)",
+                "De": "Stereo Pair Bridge (High-Detail Ticks)",
+                "Es": "Stereo Pair Bridge (High-Detail Ticks)"
+              }
             },
             "layout_columns": 4,
             "column_sizing": [
@@ -569,11 +571,13 @@
           },
           "Gang_of_8": {
             "type": "OcaBlock",
-            "label_active": {
-              "En": "8-Channel Gang (Extra Tall)",
-              "Fr": "8-Channel Gang (Extra Tall)",
-              "De": "8-Channel Gang (Extra Tall)",
-              "Es": "8-Channel Gang (Extra Tall)"
+            "label": {
+              "active": {
+                "En": "8-Channel Gang (Extra Tall)",
+                "Fr": "8-Channel Gang (Extra Tall)",
+                "De": "8-Channel Gang (Extra Tall)",
+                "Es": "8-Channel Gang (Extra Tall)"
+              }
             },
             "layout_columns": 8,
             "column_sizing": [

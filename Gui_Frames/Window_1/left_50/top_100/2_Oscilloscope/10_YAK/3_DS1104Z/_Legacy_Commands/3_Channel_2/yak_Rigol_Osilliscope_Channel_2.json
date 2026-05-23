@@ -417,11 +417,13 @@
             "fields": {
               "Run": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "RUN",
-                  "Fr": "EXEC",
-                  "De": "AUSFÜHREN",
-                  "Es": "EJEC"
+                "label": {
+                  "inactive": {
+                    "En": "RUN",
+                    "Fr": "EXEC",
+                    "De": "AUSFÜHREN",
+                    "Es": "EJEC"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
@@ -451,11 +453,13 @@
               },
               "Stop": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "STOP",
-                  "Fr": "STOP",
-                  "De": "STOP",
-                  "Es": "STOP"
+                "label": {
+                  "inactive": {
+                    "En": "STOP",
+                    "Fr": "STOP",
+                    "De": "STOP",
+                    "Es": "STOP"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
@@ -485,11 +489,13 @@
               },
               "Single": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "SINGLE",
-                  "Fr": "SINGLE",
-                  "De": "SINGLE",
-                  "Es": "SINGLE"
+                "label": {
+                  "inactive": {
+                    "En": "SINGLE",
+                    "Fr": "SINGLE",
+                    "De": "SINGLE",
+                    "Es": "SINGLE"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
@@ -519,11 +525,13 @@
               },
               "Auto_Scale": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "AUTO",
-                  "Fr": "AUTO",
-                  "De": "AUTO",
-                  "Es": "AUTO"
+                "label": {
+                  "inactive": {
+                    "En": "AUTO",
+                    "Fr": "AUTO",
+                    "De": "AUTO",
+                    "Es": "AUTO"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
@@ -558,11 +566,13 @@
             "fields": {
               "CH2_ON": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "CH2 ON",
-                  "Fr": "CH 2",
-                  "De": "CH 2",
-                  "Es": "CH 2"
+                "label": {
+                  "inactive": {
+                    "En": "CH2 ON",
+                    "Fr": "CH 2",
+                    "De": "CH 2",
+                    "Es": "CH 2"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
@@ -591,11 +601,13 @@
               },
               "CH2_OFF": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "CH2 OFF",
-                  "Fr": "CH 2",
-                  "De": "CH 2",
-                  "Es": "CH 2"
+                "label": {
+                  "inactive": {
+                    "En": "CH2 OFF",
+                    "Fr": "CH 2",
+                    "De": "CH 2",
+                    "Es": "CH 2"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {

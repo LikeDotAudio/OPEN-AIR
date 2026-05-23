@@ -21,11 +21,13 @@ in the property editor.
 {
   "horizontal_with_dial_Example": {
     "type": "_Horizontal_with_dial_Value",
-    "label_active": {
-      "En": "Tuning",
-      "Fr": "Accord",
-      "De": "Abstimmung",
-      "Es": "Sintonía"
+    "label": {
+      "active": {
+        "En": "Tuning",
+        "Fr": "Accord",
+        "De": "Abstimmung",
+        "Es": "Sintonía"
+      }
     },
     "layout": {
       "width": "100%",

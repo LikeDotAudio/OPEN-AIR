@@ -26,11 +26,13 @@
             "value": {
               "default_value": "OFF"
             },
-            "label_active": {
-              "En": "Multimeter Mode",
-              "Fr": "Multimeter Mode",
-              "De": "Multimeter Mode",
-              "Es": "Multimeter Mode"
+            "label": {
+              "active": {
+                "En": "Multimeter Mode",
+                "Fr": "Multimeter Mode",
+                "De": "Multimeter Mode",
+                "Es": "Multimeter Mode"
+              }
             },
             "positions": [
               "OFF",
@@ -49,11 +51,13 @@
             "value": {
               "default_value": 0
             },
-            "label_active": {
-              "En": "Basic 4-Way",
-              "Fr": "Basic 4-Way",
-              "De": "Basic 4-Way",
-              "Es": "Basic 4-Way"
+            "label": {
+              "active": {
+                "En": "Basic 4-Way",
+                "Fr": "Basic 4-Way",
+                "De": "Basic 4-Way",
+                "Es": "Basic 4-Way"
+              }
             },
             "positions": [
               "POS 1",
@@ -70,11 +74,13 @@
             "value": {
               "default_value": 0
             },
-            "label_active": {
-              "En": "Microwave Select",
-              "Fr": "Microwave Select",
-              "De": "Microwave Select",
-              "Es": "Microwave Select"
+            "label": {
+              "active": {
+                "En": "Microwave Select",
+                "Fr": "Microwave Select",
+                "De": "Microwave Select",
+                "Es": "Microwave Select"
+              }
             },
             "positions": [
               "Defrost",
@@ -90,11 +96,13 @@
           },
           "Audio_Input": {
             "type": "SelectorSwitch",
-            "label_active": {
-              "En": "Audio Source",
-              "Fr": "Audio Source",
-              "De": "Audio Source",
-              "Es": "Audio Source"
+            "label": {
+              "active": {
+                "En": "Audio Source",
+                "Fr": "Audio Source",
+                "De": "Audio Source",
+                "Es": "Audio Source"
+              }
             },
             "positions": [
               "Phono",
@@ -110,11 +118,13 @@
           },
           "Large_Industrial_Switch": {
             "type": "SelectorSwitch",
-            "label_active": {
-              "En": "Large Power Selector",
-              "Fr": "Large Power Selector",
-              "De": "Large Power Selector",
-              "Es": "Large Power Selector"
+            "label": {
+              "active": {
+                "En": "Large Power Selector",
+                "Fr": "Large Power Selector",
+                "De": "Large Power Selector",
+                "Es": "Large Power Selector"
+              }
             },
             "positions": [
               "STANDBY",
@@ -131,11 +141,13 @@
           },
           "Oscilloscope_Timebase": {
             "type": "SelectorSwitch",
-            "label_active": {
-              "En": "Time/Div",
-              "Fr": "Time/Div",
-              "De": "Time/Div",
-              "Es": "Time/Div"
+            "label": {
+              "active": {
+                "En": "Time/Div",
+                "Fr": "Time/Div",
+                "De": "Time/Div",
+                "Es": "Time/Div"
+              }
             },
             "positions": [
               "1ns",
@@ -155,11 +167,13 @@
           },
           "Guitar_Pickup": {
             "type": "SelectorSwitch",
-            "label_active": {
-              "En": "Pickup Select",
-              "Fr": "Pickup Select",
-              "De": "Pickup Select",
-              "Es": "Pickup Select"
+            "label": {
+              "active": {
+                "En": "Pickup Select",
+                "Fr": "Pickup Select",
+                "De": "Pickup Select",
+                "Es": "Pickup Select"
+              }
             },
             "positions": [
               "Bridge",
@@ -174,11 +188,13 @@
           },
           "High_Resolution_Encoder": {
             "type": "SelectorSwitch",
-            "label_active": {
-              "En": "20-Position Encoder",
-              "Fr": "20-Position Encoder",
-              "De": "20-Position Encoder",
-              "Es": "20-Position Encoder"
+            "label": {
+              "active": {
+                "En": "20-Position Encoder",
+                "Fr": "20-Position Encoder",
+                "De": "20-Position Encoder",
+                "Es": "20-Position Encoder"
+              }
             },
             "positions": [
               "1",
@@ -210,11 +226,13 @@
           },
           "Washing_Machine": {
             "type": "SelectorSwitch",
-            "label_active": {
-              "En": "Cycle",
-              "Fr": "Cycle",
-              "De": "Cycle",
-              "Es": "Cycle"
+            "label": {
+              "active": {
+                "En": "Cycle",
+                "Fr": "Cycle",
+                "De": "Cycle",
+                "Es": "Cycle"
+              }
             },
             "positions": [
               "Normal",
@@ -230,11 +248,13 @@
           },
           "Oven_Temp": {
             "type": "SelectorSwitch",
-            "label_active": {
-              "En": "Temp Range",
-              "Fr": "Temp Range",
-              "De": "Temp Range",
-              "Es": "Temp Range"
+            "label": {
+              "active": {
+                "En": "Temp Range",
+                "Fr": "Temp Range",
+                "De": "Temp Range",
+                "Es": "Temp Range"
+              }
             },
             "positions": [
               "Warm",
@@ -250,11 +270,13 @@
           },
           "Clock_Format": {
             "type": "SelectorSwitch",
-            "label_active": {
-              "En": "Time Mode",
-              "Fr": "Heure Mode",
-              "De": "Zeit Mode",
-              "Es": "Hora Mode"
+            "label": {
+              "active": {
+                "En": "Time Mode",
+                "Fr": "Heure Mode",
+                "De": "Zeit Mode",
+                "Es": "Hora Mode"
+              }
             },
             "positions": [
               "12H",
@@ -268,11 +290,13 @@
           },
           "Digital_Filter": {
             "type": "SelectorSwitch",
-            "label_active": {
-              "En": "Filter Type",
-              "Fr": "Type de Filtre",
-              "De": "Filtertyp",
-              "Es": "Tipo de Filtro"
+            "label": {
+              "active": {
+                "En": "Filter Type",
+                "Fr": "Type de Filtre",
+                "De": "Filtertyp",
+                "Es": "Tipo de Filtro"
+              }
             },
             "positions": [
               "None",

@@ -21,7 +21,9 @@ in the property editor.
 {
   "slider_value_Example": {
     "type": "_sliderValue",
-    "label_active": "Volume",
+    "label": {
+      "active": "Volume"
+    },
     "layout": {
       "height": 100,
       "width": 250,

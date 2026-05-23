@@ -50,11 +50,15 @@
       "is_read_only": false,
       "options": {
         "ON": {
-          "label_active": "MUTED",
+          "label": {
+            "active": "MUTED"
+          },
           "selected": false
         },
         "OFF": {
-          "label_inactive": "LIVE",
+          "label": {
+            "inactive": "LIVE"
+          },
           "selected": true
         }
       }
@@ -67,10 +71,20 @@
   },
   "_README": "This sample is REALLY REALLY COMPLETE. It follows the 5-pillar 'Universal Rhyme' schema and outlines the state-specific labels used for boolean logic.",
   "_LEGEND": {
-    "toggle_types": ["_SmartToggle", "_GuiButtonToggle"],
+    "toggle_types": [
+      "_SmartToggle",
+      "_GuiButtonToggle"
+    ],
     "options_keys": "The 'ON' and 'OFF' keys in interaction.options are mandatory for boolean mapping.",
-    "font_styles": ["normal", "bold", "italic"],
-    "style_states": ["active", "inactive"],
+    "font_styles": [
+      "normal",
+      "bold",
+      "italic"
+    ],
+    "style_states": [
+      "active",
+      "inactive"
+    ],
     "style_params": "style.active and style.inactive carry the SAME params: font_style, font_size, text_color, bg_color, border_color, border_thickness, glow_intensity."
   }
 }

@@ -37,11 +37,13 @@
         "fields": {
           "wink_col_01_std": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "STD",
-              "Fr": "STD",
-              "De": "STD",
-              "Es": "STD"
+            "label": {
+              "active": {
+                "En": "STD",
+                "Fr": "STD",
+                "De": "STD",
+                "Es": "STD"
+              }
             },
             "shape_type": "rect",
             "width": 80,
@@ -55,11 +57,13 @@
           },
           "wink_col_02_blue_yellow": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "B->Y",
-              "Fr": "B->Y",
-              "De": "B->Y",
-              "Es": "B->Y"
+            "label": {
+              "active": {
+                "En": "B->Y",
+                "Fr": "B->Y",
+                "De": "B->Y",
+                "Es": "B->Y"
+              }
             },
             "shape_type": "square",
             "width": 70,
@@ -71,11 +75,13 @@
           },
           "wink_col_03_text_swap": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "TXT",
-              "Fr": "TXT",
-              "De": "TXT",
-              "Es": "TXT"
+            "label": {
+              "active": {
+                "En": "TXT",
+                "Fr": "TXT",
+                "De": "TXT",
+                "Es": "TXT"
+              }
             },
             "shape_type": "round",
             "width": 80,
@@ -91,11 +97,13 @@
           },
           "wink_col_04_same_reveal": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "SAME",
-              "Fr": "SAME",
-              "De": "SAME",
-              "Es": "SAME"
+            "label": {
+              "active": {
+                "En": "SAME",
+                "Fr": "SAME",
+                "De": "SAME",
+                "Es": "SAME"
+              }
             },
             "shape_type": "rect",
             "width": 100,
@@ -110,11 +118,13 @@
           },
           "wink_col_05_inv_mono": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "INV",
-              "Fr": "INV",
-              "De": "INV",
-              "Es": "INV"
+            "label": {
+              "active": {
+                "En": "INV",
+                "Fr": "INV",
+                "De": "INV",
+                "Es": "INV"
+              }
             },
             "shape_type": "square",
             "width": 60,
@@ -129,11 +139,13 @@
           },
           "wink_col_06_warn": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "WARN",
-              "Fr": "WARN",
-              "De": "WARN",
-              "Es": "WARN"
+            "label": {
+              "active": {
+                "En": "WARN",
+                "Fr": "WARN",
+                "De": "WARN",
+                "Es": "WARN"
+              }
             },
             "shape_type": "rect",
             "width": 120,
@@ -150,11 +162,13 @@
           },
           "wink_col_07_stealth": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "STLTH",
-              "Fr": "STLTH",
-              "De": "STLTH",
-              "Es": "STLTH"
+            "label": {
+              "active": {
+                "En": "STLTH",
+                "Fr": "STLTH",
+                "De": "STLTH",
+                "Es": "STLTH"
+              }
             },
             "shape_type": "round",
             "width": 60,
@@ -167,11 +181,13 @@
           },
           "wink_col_08_party": {
             "type": "_WinkButton",
-            "label_active": {
-              "En": "PARTY",
-              "Fr": "PARTY",
-              "De": "PARTY",
-              "Es": "PARTY"
+            "label": {
+              "active": {
+                "En": "PARTY",
+                "Fr": "PARTY",
+                "De": "PARTY",
+                "Es": "PARTY"
+              }
             },
             "shape_type": "square",
             "width": 80,

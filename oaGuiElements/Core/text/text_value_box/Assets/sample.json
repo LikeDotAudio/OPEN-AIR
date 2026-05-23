@@ -33,7 +33,9 @@
       }
     },
     "readout": {
-      "label_active": "TEMP",
+      "label": {
+        "active": "TEMP"
+      },
       "units": "°C",
       "font_size": 12
     },
@@ -46,7 +48,11 @@
   },
   "_README": "This sample is REALLY REALLY COMPLETE. It outlines the digital readout configuration and standard field keys.",
   "_LEGEND": {
-    "value_box_types": ["_Value", "_SmartValue", "_GuiValue"],
+    "value_box_types": [
+      "_Value",
+      "_SmartValue",
+      "_GuiValue"
+    ],
     "interaction": "Pressing ENTER in the box publishes the new value to MQTT.",
     "units": "Units are rendered on the right side of the entry box."
   }

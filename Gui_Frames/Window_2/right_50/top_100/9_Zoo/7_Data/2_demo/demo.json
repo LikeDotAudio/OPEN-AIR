@@ -13,20 +13,24 @@
     "blocks": {
       "elements1": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Instrument Connections",
-          "Fr": "Instrument Connections",
-          "De": "Instrument Connections",
-          "Es": "Instrument Connections"
+        "label": {
+          "active": {
+            "En": "Instrument Connections",
+            "Fr": "Instrument Connections",
+            "De": "Instrument Connections",
+            "Es": "Instrument Connections"
+          }
         },
         "fields": {
           "examplefields": {
             "type": "GuiTable",
-            "label_active": {
-              "En": "Instrument Connections",
-              "Fr": "Instrument Connections",
-              "De": "Instrument Connections",
-              "Es": "Instrument Connections"
+            "label": {
+              "active": {
+                "En": "Instrument Connections",
+                "Fr": "Instrument Connections",
+                "De": "Instrument Connections",
+                "Es": "Instrument Connections"
+              }
             },
             "height": 80,
             "read_cvs": false,
@@ -61,20 +65,24 @@
       },
       "elements2": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Process Monitoring",
-          "Fr": "Process Monitoring",
-          "De": "Process Monitoring",
-          "Es": "Process Monitoring"
+        "label": {
+          "active": {
+            "En": "Process Monitoring",
+            "Fr": "Process Monitoring",
+            "De": "Process Monitoring",
+            "Es": "Process Monitoring"
+          }
         },
         "fields": {
           "examplefields": {
             "type": "GuiTable",
-            "label_active": {
-              "En": "Process Monitoring",
-              "Fr": "Process Monitoring",
-              "De": "Process Monitoring",
-              "Es": "Process Monitoring"
+            "label": {
+              "active": {
+                "En": "Process Monitoring",
+                "Fr": "Process Monitoring",
+                "De": "Process Monitoring",
+                "Es": "Process Monitoring"
+              }
             },
             "height": 100,
             "Sort": false,
@@ -133,20 +141,24 @@
       },
       "elements3": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Configuration Settings",
-          "Fr": "Configuration Paramètres",
-          "De": "Configuration Einstellungen",
-          "Es": "Configuration Ajustes"
+        "label": {
+          "active": {
+            "En": "Configuration Settings",
+            "Fr": "Configuration Paramètres",
+            "De": "Configuration Einstellungen",
+            "Es": "Configuration Ajustes"
+          }
         },
         "fields": {
           "examplefields": {
             "type": "GuiTable",
-            "label_active": {
-              "En": "Configuration Settings",
-              "Fr": "Configuration Paramètres",
-              "De": "Configuration Einstellungen",
-              "Es": "Configuration Ajustes"
+            "label": {
+              "active": {
+                "En": "Configuration Settings",
+                "Fr": "Configuration Paramètres",
+                "De": "Configuration Einstellungen",
+                "Es": "Configuration Ajustes"
+              }
             },
             "height": 100,
             "headers": [
@@ -185,20 +197,24 @@
       },
       "elements4": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "New Log Entries",
-          "Fr": "New Log Entries",
-          "De": "New Log Entries",
-          "Es": "New Log Entries"
+        "label": {
+          "active": {
+            "En": "New Log Entries",
+            "Fr": "New Log Entries",
+            "De": "New Log Entries",
+            "Es": "New Log Entries"
+          }
         },
         "fields": {
           "examplefields": {
             "type": "GuiTable",
-            "label_active": {
-              "En": "New Log Entries",
-              "Fr": "New Log Entries",
-              "De": "New Log Entries",
-              "Es": "New Log Entries"
+            "label": {
+              "active": {
+                "En": "New Log Entries",
+                "Fr": "New Log Entries",
+                "De": "New Log Entries",
+                "Es": "New Log Entries"
+              }
             },
             "height": 120,
             "headers": [
@@ -220,20 +236,24 @@
       },
       "elements5": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Resource Allocation",
-          "Fr": "Resource Allocation",
-          "De": "Resource Allocation",
-          "Es": "Resource Allocation"
+        "label": {
+          "active": {
+            "En": "Resource Allocation",
+            "Fr": "Resource Allocation",
+            "De": "Resource Allocation",
+            "Es": "Resource Allocation"
+          }
         },
         "fields": {
           "examplefields": {
             "type": "GuiTable",
-            "label_active": {
-              "En": "Resource Allocation",
-              "Fr": "Resource Allocation",
-              "De": "Resource Allocation",
-              "Es": "Resource Allocation"
+            "label": {
+              "active": {
+                "En": "Resource Allocation",
+                "Fr": "Resource Allocation",
+                "De": "Resource Allocation",
+                "Es": "Resource Allocation"
+              }
             },
             "height": 70,
             "headers": [

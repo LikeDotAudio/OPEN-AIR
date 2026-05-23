@@ -34,11 +34,13 @@
                 "value": {
                   "default_value": "Flux_Scope_88"
                 },
-                "label_active": {
-                  "En": "Device Name",
-                  "Fr": "Device Nom",
-                  "De": "Device Name",
-                  "Es": "Device Nombre"
+                "label": {
+                  "active": {
+                    "En": "Device Name",
+                    "Fr": "Device Nom",
+                    "De": "Device Name",
+                    "Es": "Device Nombre"
+                  }
                 },
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
@@ -70,11 +72,13 @@
               },
               "Main_Graph_Display": {
                 "type": "_GuiGraph",
-                "label_active": {
-                  "En": "Signal Visualization",
-                  "Fr": "Visualisation de signal",
-                  "De": "Signalvisualisierung",
-                  "Es": "Visualización de señal"
+                "label": {
+                  "active": {
+                    "En": "Signal Visualization",
+                    "Fr": "Visualisation de signal",
+                    "De": "Signalvisualisierung",
+                    "Es": "Visualización de señal"
+                  }
                 },
                 "description": {
                   "En": "Real-time waveform rendering",
@@ -142,11 +146,13 @@
                 "value": {
                   "default_value": "1.0"
                 },
-                "label_active": {
-                  "En": "Volts / Div",
-                  "Fr": "Volts / Div",
-                  "De": "Volts / Div",
-                  "Es": "Volts / Div"
+                "label": {
+                  "active": {
+                    "En": "Volts / Div",
+                    "Fr": "Volts / Div",
+                    "De": "Volts / Div",
+                    "Es": "Volts / Div"
+                  }
                 },
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
@@ -184,11 +190,13 @@
                 "value": {
                   "default_value": "0.0"
                 },
-                "label_active": {
-                  "En": "Offset",
-                  "Fr": "Décalage",
-                  "De": "Versatz",
-                  "Es": "Compensación"
+                "label": {
+                  "active": {
+                    "En": "Offset",
+                    "Fr": "Décalage",
+                    "De": "Versatz",
+                    "Es": "Compensación"
+                  }
                 },
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
@@ -220,11 +228,13 @@
               },
               "Coupling_Mode": {
                 "type": "_GuiDropDownOption",
-                "label_active": {
-                  "En": "Coupling",
-                  "Fr": "Couplage",
-                  "De": "Kopplung",
-                  "Es": "Acoplamiento"
+                "label": {
+                  "active": {
+                    "En": "Coupling",
+                    "Fr": "Couplage",
+                    "De": "Kopplung",
+                    "Es": "Acoplamiento"
+                  }
                 },
                 "options": [
                   "AC",
@@ -282,11 +292,13 @@
                 "value": {
                   "default_value": "1e-3"
                 },
-                "label_active": {
-                  "En": "Time / Div",
-                  "Fr": "Temps / Div",
-                  "De": "Zeit / Div",
-                  "Es": "Tiempo / Div"
+                "label": {
+                  "active": {
+                    "En": "Time / Div",
+                    "Fr": "Temps / Div",
+                    "De": "Zeit / Div",
+                    "Es": "Tiempo / Div"
+                  }
                 },
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
@@ -324,11 +336,13 @@
                 "value": {
                   "default_value": "0.0"
                 },
-                "label_active": {
-                  "En": "Delay",
-                  "Fr": "Delay",
-                  "De": "Delay",
-                  "Es": "Delay"
+                "label": {
+                  "active": {
+                    "En": "Delay",
+                    "Fr": "Delay",
+                    "De": "Delay",
+                    "Es": "Delay"
+                  }
                 },
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
@@ -377,11 +391,13 @@
                 "value": {
                   "default_value": "0.5"
                 },
-                "label_active": {
-                  "En": "Trig Level",
-                  "Fr": "Trig Niveau",
-                  "De": "Trig Pegel",
-                  "Es": "Trig Nivel"
+                "label": {
+                  "active": {
+                    "En": "Trig Level",
+                    "Fr": "Trig Niveau",
+                    "De": "Trig Pegel",
+                    "Es": "Trig Nivel"
+                  }
                 },
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
@@ -413,17 +429,19 @@
               },
               "Trigger_Edge_Toggle": {
                 "type": "_GuiButtonToggle",
-                "label_active": {
-                  "En": "RISING",
-                  "Fr": "CROISSANT",
-                  "De": "STEIGEND",
-                  "Es": "ASCENDENTE"
-                },
-                "label_inactive": {
-                  "En": "FALLING",
-                  "Fr": "FALLING",
-                  "De": "FALLING",
-                  "Es": "FALLING"
+                "label": {
+                  "active": {
+                    "En": "RISING",
+                    "Fr": "CROISSANT",
+                    "De": "STEIGEND",
+                    "Es": "ASCENDENTE"
+                  },
+                  "inactive": {
+                    "En": "FALLING",
+                    "Fr": "FALLING",
+                    "De": "FALLING",
+                    "Es": "FALLING"
+                  }
                 },
                 "style": {
                   "active": {
@@ -476,11 +494,13 @@
               },
               "Force_Trigger": {
                 "type": "_TrapezoidButton",
-                "label_active": {
-                  "En": "FORCE",
-                  "Fr": "FORCE",
-                  "De": "KRAFT",
-                  "Es": "FUERZA"
+                "label": {
+                  "active": {
+                    "En": "FORCE",
+                    "Fr": "FORCE",
+                    "De": "KRAFT",
+                    "Es": "FUERZA"
+                  }
                 },
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
@@ -523,17 +543,19 @@
             "fields": {
               "Run_Stop_Toggle": {
                 "type": "_GuiButtonToggle",
-                "label_active": {
-                  "En": "RUNNING 🟢",
-                  "Fr": "RUNNING 🟢",
-                  "De": "RUNNING 🟢",
-                  "Es": "RUNNING 🟢"
-                },
-                "label_inactive": {
-                  "En": "STOPPED 🔴",
-                  "Fr": "ARRÊTÉ 🔴",
-                  "De": "GESTOPPT 🔴",
-                  "Es": "DETENIDO 🔴"
+                "label": {
+                  "active": {
+                    "En": "RUNNING 🟢",
+                    "Fr": "RUNNING 🟢",
+                    "De": "RUNNING 🟢",
+                    "Es": "RUNNING 🟢"
+                  },
+                  "inactive": {
+                    "En": "STOPPED 🔴",
+                    "Fr": "ARRÊTÉ 🔴",
+                    "De": "GESTOPPT 🔴",
+                    "Es": "DETENIDO 🔴"
+                  }
                 },
                 "style": {
                   "active": {
@@ -586,11 +608,13 @@
               },
               "Single_Shot": {
                 "type": "_GuiButton",
-                "label_active": {
-                  "En": "SINGLE SEQ",
-                  "Fr": "SINGLE SEQ",
-                  "De": "SINGLE SEQ",
-                  "Es": "SINGLE SEQ"
+                "label": {
+                  "active": {
+                    "En": "SINGLE SEQ",
+                    "Fr": "SINGLE SEQ",
+                    "De": "SINGLE SEQ",
+                    "Es": "SINGLE SEQ"
+                  }
                 },
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
@@ -636,11 +660,13 @@
                 "value": {
                   "default_value": "--- V"
                 },
-                "label_active": {
-                  "En": "Vpp",
-                  "Fr": "Vpp",
-                  "De": "Vss",
-                  "Es": "Vpp"
+                "label": {
+                  "active": {
+                    "En": "Vpp",
+                    "Fr": "Vpp",
+                    "De": "Vss",
+                    "Es": "Vpp"
+                  }
                 },
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
@@ -675,11 +701,13 @@
                 "value": {
                   "default_value": "--- V"
                 },
-                "label_active": {
-                  "En": "Vrms",
-                  "Fr": "Vrms",
-                  "De": "Veff",
-                  "Es": "Vrms"
+                "label": {
+                  "active": {
+                    "En": "Vrms",
+                    "Fr": "Vrms",
+                    "De": "Veff",
+                    "Es": "Vrms"
+                  }
                 },
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
@@ -714,11 +742,13 @@
                 "value": {
                   "default_value": "--- Hz"
                 },
-                "label_active": {
-                  "En": "Freq",
-                  "Fr": "Freq",
-                  "De": "Freq",
-                  "Es": "Freq"
+                "label": {
+                  "active": {
+                    "En": "Freq",
+                    "Fr": "Freq",
+                    "De": "Freq",
+                    "Es": "Freq"
+                  }
                 },
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
@@ -753,11 +783,13 @@
                 "value": {
                   "default_value": "--- dB"
                 },
-                "label_active": {
-                  "En": "dB",
-                  "Fr": "dB",
-                  "De": "dB",
-                  "Es": "dB"
+                "label": {
+                  "active": {
+                    "En": "dB",
+                    "Fr": "dB",
+                    "De": "dB",
+                    "Es": "dB"
+                  }
                 },
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {

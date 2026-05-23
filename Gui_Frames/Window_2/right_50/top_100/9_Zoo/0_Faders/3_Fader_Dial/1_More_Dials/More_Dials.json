@@ -38,11 +38,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "Vintage Voltage",
-              "Fr": "Vintage Voltage",
-              "De": "Vintage Voltage",
-              "Es": "Vintage Voltage"
+            "label": {
+              "active": {
+                "En": "Vintage Voltage",
+                "Fr": "Vintage Voltage",
+                "De": "Vintage Voltage",
+                "Es": "Vintage Voltage"
+              }
             },
             "fader_config": {
               "tick_interval": 1.0,
@@ -82,11 +84,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "Industrial Current",
-              "Fr": "Industriel Current",
-              "De": "Industriell Current",
-              "Es": "Industrial Current"
+            "label": {
+              "active": {
+                "En": "Industrial Current",
+                "Fr": "Industriel Current",
+                "De": "Industriell Current",
+                "Es": "Industrial Current"
+              }
             },
             "fader_config": {
               "tick_interval": 10.0,
@@ -122,11 +126,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "Modern Power",
-              "Fr": "Moderne Power",
-              "De": "Modern Power",
-              "Es": "Moderno Power"
+            "label": {
+              "active": {
+                "En": "Modern Power",
+                "Fr": "Moderne Power",
+                "De": "Modern Power",
+                "Es": "Moderno Power"
+              }
             },
             "fader_config": {
               "active_color": "#00FF00",
@@ -157,11 +163,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "Ghost Tuning",
-              "Fr": "Ghost Tuning",
-              "De": "Ghost Tuning",
-              "Es": "Ghost Tuning"
+            "label": {
+              "active": {
+                "En": "Ghost Tuning",
+                "Fr": "Ghost Tuning",
+                "De": "Ghost Tuning",
+                "Es": "Ghost Tuning"
+              }
             },
             "fader_config": {
               "bar_color": "#444",
@@ -198,11 +206,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "High-Res Bias",
-              "Fr": "High-Res Bias",
-              "De": "High-Res Bias",
-              "Es": "High-Res Bias"
+            "label": {
+              "active": {
+                "En": "High-Res Bias",
+                "Fr": "High-Res Bias",
+                "De": "High-Res Bias",
+                "Es": "High-Res Bias"
+              }
             },
             "dial_config": {
               "knob_style": "vintage",
@@ -237,11 +247,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "Log Harmonic",
-              "Fr": "Log Harmonic",
-              "De": "Log Harmonic",
-              "Es": "Log Harmonic"
+            "label": {
+              "active": {
+                "En": "Log Harmonic",
+                "Fr": "Log Harmonic",
+                "De": "Log Harmonic",
+                "Es": "Log Harmonic"
+              }
             },
             "fader_config": {
               "log_exponent": 2.0,
@@ -273,11 +285,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "Deep Space",
-              "Fr": "Deep Space",
-              "De": "Deep Space",
-              "Es": "Deep Space"
+            "label": {
+              "active": {
+                "En": "Deep Space",
+                "Fr": "Deep Space",
+                "De": "Deep Space",
+                "Es": "Deep Space"
+              }
             },
             "dial_config": {
               "knob_style": "modern",
@@ -309,11 +323,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "Ruby Gain",
-              "Fr": "Ruby Gain",
-              "De": "Ruby Verstärkung",
-              "Es": "Ruby Ganancia"
+            "label": {
+              "active": {
+                "En": "Ruby Gain",
+                "Fr": "Ruby Gain",
+                "De": "Ruby Verstärkung",
+                "Es": "Ruby Ganancia"
+              }
             },
             "fader_config": {
               "bar_color": "#990000",
@@ -345,11 +361,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "Emerald Phase",
-              "Fr": "Emerald Phase",
-              "De": "Emerald Phase",
-              "Es": "Emerald Fase"
+            "label": {
+              "active": {
+                "En": "Emerald Phase",
+                "Fr": "Emerald Phase",
+                "De": "Emerald Phase",
+                "Es": "Emerald Fase"
+              }
             },
             "fader_config": {
               "active_color": "#00FF88",
@@ -381,11 +399,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "Big Knob",
-              "Fr": "Big Knob",
-              "De": "Big Knob",
-              "Es": "Big Knob"
+            "label": {
+              "active": {
+                "En": "Big Knob",
+                "Fr": "Big Knob",
+                "De": "Big Knob",
+                "Es": "Big Knob"
+              }
             },
             "dial_config": {
               "width": 60,
@@ -415,11 +435,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "Tiny Precision",
-              "Fr": "Tiny Precision",
-              "De": "Tiny Precision",
-              "Es": "Tiny Precision"
+            "label": {
+              "active": {
+                "En": "Tiny Precision",
+                "Fr": "Tiny Precision",
+                "De": "Tiny Precision",
+                "Es": "Tiny Precision"
+              }
             },
             "dial_config": {
               "width": 30,
@@ -448,11 +470,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "Stealth Black",
-              "Fr": "Stealth Black",
-              "De": "Stealth Black",
-              "Es": "Stealth Black"
+            "label": {
+              "active": {
+                "En": "Stealth Black",
+                "Fr": "Stealth Black",
+                "De": "Stealth Black",
+                "Es": "Stealth Black"
+              }
             },
             "fader_config": {
               "bar_color": "#111",
@@ -489,11 +513,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "Gold Standard",
-              "Fr": "Gold Standard",
-              "De": "Gold Standard",
-              "Es": "Gold Estándar"
+            "label": {
+              "active": {
+                "En": "Gold Standard",
+                "Fr": "Gold Standard",
+                "De": "Gold Standard",
+                "Es": "Gold Estándar"
+              }
             },
             "fader_config": {
               "bar_color": "#D4AF37",
@@ -524,11 +550,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "Oceanic Depth",
-              "Fr": "Oceanic Profondeur",
-              "De": "Oceanic Tiefe",
-              "Es": "Oceanic Profundidad"
+            "label": {
+              "active": {
+                "En": "Oceanic Depth",
+                "Fr": "Oceanic Profondeur",
+                "De": "Oceanic Tiefe",
+                "Es": "Oceanic Profundidad"
+              }
             },
             "fader_config": {
               "bar_color": "#0077BE",
@@ -559,11 +587,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "Cyberpunk",
-              "Fr": "Cyberpunk",
-              "De": "Cyberpunk",
-              "Es": "Cyberpunk"
+            "label": {
+              "active": {
+                "En": "Cyberpunk",
+                "Fr": "Cyberpunk",
+                "De": "Cyberpunk",
+                "Es": "Cyberpunk"
+              }
             },
             "fader_config": {
               "bar_color": "#f3e600",
@@ -594,11 +624,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "Log Temp",
-              "Fr": "Log Temp",
-              "De": "Log Temp",
-              "Es": "Log Temp"
+            "label": {
+              "active": {
+                "En": "Log Temp",
+                "Fr": "Log Temp",
+                "De": "Log Temp",
+                "Es": "Log Temp"
+              }
             },
             "fader_config": {
               "log_exponent": 3.0,
@@ -629,11 +661,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "Binary",
-              "Fr": "Binary",
-              "De": "Binary",
-              "Es": "Binary"
+            "label": {
+              "active": {
+                "En": "Binary",
+                "Fr": "Binary",
+                "De": "Binary",
+                "Es": "Binary"
+              }
             },
             "fader_config": {
               "show_ticks": true,
@@ -664,11 +698,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "Wide Track",
-              "Fr": "Wide Track",
-              "De": "Wide Track",
-              "Es": "Wide Track"
+            "label": {
+              "active": {
+                "En": "Wide Track",
+                "Fr": "Wide Track",
+                "De": "Wide Track",
+                "Es": "Wide Track"
+              }
             },
             "fader_config": {
               "height": 120,
@@ -697,11 +733,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "Panner",
-              "Fr": "Panner",
-              "De": "Panner",
-              "Es": "Panner"
+            "label": {
+              "active": {
+                "En": "Panner",
+                "Fr": "Panner",
+                "De": "Panner",
+                "Es": "Panner"
+              }
             },
             "fader_config": {
               "reff_point": 0.0,
@@ -732,11 +770,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "The End",
-              "Fr": "The End",
-              "De": "The End",
-              "Es": "The End"
+            "label": {
+              "active": {
+                "En": "The End",
+                "Fr": "The End",
+                "De": "The End",
+                "Es": "The End"
+              }
             },
             "fader_config": {
               "bar_color": "#FFFFFF",

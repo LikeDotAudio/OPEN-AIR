@@ -31,11 +31,13 @@
             "fields": {
               "mode_set": {
                 "type": "_GuiDropDownOption",
-                "label_active": {
-                  "En": "Mode",
-                  "Fr": "Mode",
-                  "De": "Modus",
-                  "Es": "Modo"
+                "label": {
+                  "active": {
+                    "En": "Mode",
+                    "Fr": "Mode",
+                    "De": "Modus",
+                    "Es": "Modo"
+                  }
                 },
                 "options": [
                   "CC",
@@ -88,11 +90,13 @@
                 "value": {
                   "default_value": "1.0"
                 },
-                "label_active": {
-                  "En": "Set Value",
-                  "Fr": "Set Valeur",
-                  "De": "Set Wert",
-                  "Es": "Set Valor"
+                "label": {
+                  "active": {
+                    "En": "Set Value",
+                    "Fr": "Set Valeur",
+                    "De": "Set Wert",
+                    "Es": "Set Valor"
+                  }
                 },
                 "message_details": {
                   "DC_LOAD_MODEL": {
@@ -135,17 +139,19 @@
             "fields": {
               "input_enable": {
                 "type": "_GuiButtonToggle",
-                "label_active": {
-                  "En": "ON",
-                  "Fr": "ON",
-                  "De": "EIN",
-                  "Es": "ENC"
-                },
-                "label_inactive": {
-                  "En": "OFF",
-                  "Fr": "OFF",
-                  "De": "AUS",
-                  "Es": "DES"
+                "label": {
+                  "active": {
+                    "En": "ON",
+                    "Fr": "ON",
+                    "De": "EIN",
+                    "Es": "ENC"
+                  },
+                  "inactive": {
+                    "En": "OFF",
+                    "Fr": "OFF",
+                    "De": "AUS",
+                    "Es": "DES"
+                  }
                 },
                 "style": {
                   "active": {

@@ -18,16 +18,12 @@
           "Impedance Mode": {
             "type": "_GuiActuator",
             "label": {
-              "En": "Set Mode",
-              "Fr": "Définir le mode",
-              "De": "Modus einstellen",
-              "Es": "Establecer modo"
-            },
-            "label_active": {
-              "En": "Set Mode",
-              "Fr": "Définir le mode",
-              "De": "Modus einstellen",
-              "Es": "Establecer modo"
+              "active": {
+                "En": "Set Mode",
+                "Fr": "Définir le mode",
+                "De": "Modus einstellen",
+                "Es": "Establecer modo"
+              }
             },
             "AES70": "OcaBooleanActuator",
             "message": ":SENSe:FUNCtion:ON \"{value}\"",
@@ -41,16 +37,12 @@
           "Test Frequency": {
             "type": "_GuiActuator",
             "label": {
-              "En": "Set Frequency",
-              "Fr": "Définir la fréquence",
-              "De": "Frequenz einstellen",
-              "Es": "Establecer frecuencia"
-            },
-            "label_active": {
-              "En": "Set Frequency",
-              "Fr": "Définir la fréquence",
-              "De": "Frequenz einstellen",
-              "Es": "Establecer frecuencia"
+              "active": {
+                "En": "Set Frequency",
+                "Fr": "Définir la fréquence",
+                "De": "Frequenz einstellen",
+                "Es": "Establecer frecuencia"
+              }
             },
             "message": ":SENSe:FREQuency:CW {value}",
             "options": [
@@ -64,16 +56,12 @@
           "Auto Voltage Range": {
             "type": "_GuiActuator",
             "label": {
-              "En": "Auto Voltage",
-              "Fr": "Tension automatique",
-              "De": "Auto-Spannung",
-              "Es": "Voltaje automático"
-            },
-            "label_active": {
-              "En": "Auto Voltage",
-              "Fr": "Tension automatique",
-              "De": "Auto-Spannung",
-              "Es": "Voltaje automático"
+              "active": {
+                "En": "Auto Voltage",
+                "Fr": "Tension automatique",
+                "De": "Auto-Spannung",
+                "Es": "Voltaje automático"
+              }
             },
             "message": ":SENSe:VOLTage:RANGe:AUTO {value}",
             "options": [

@@ -12,17 +12,19 @@
       "fields": {
         "Active": {
           "type": "_GuiButtonToggle",
-          "label_active": {
-            "En": "Report Active",
-            "Fr": "Report Actif",
-            "De": "Report Aktiv",
-            "Es": "Report Activo"
-          },
-          "label_inactive": {
-            "En": "Report Active",
-            "Fr": "Report Actif",
-            "De": "Report Aktiv",
-            "Es": "Report Activo"
+          "label": {
+            "active": {
+              "En": "Report Active",
+              "Fr": "Report Actif",
+              "De": "Report Aktiv",
+              "Es": "Report Activo"
+            },
+            "inactive": {
+              "En": "Report Active",
+              "Fr": "Report Actif",
+              "De": "Report Aktiv",
+              "Es": "Report Activo"
+            }
           },
           "AES70": "OcaBooleanActuator",
           "handler": "set_report_active",
@@ -48,49 +50,55 @@
           },
           "options": {
             "ON": {
-              "label_active": {
-                "En": "Active",
-                "Fr": "Actif",
-                "De": "Aktiv",
-                "Es": "Activo"
-              },
-              "label_inactive": {
-                "En": "Active",
-                "Fr": "Actif",
-                "De": "Aktiv",
-                "Es": "Activo"
+              "label": {
+                "active": {
+                  "En": "Active",
+                  "Fr": "Actif",
+                  "De": "Aktiv",
+                  "Es": "Activo"
+                },
+                "inactive": {
+                  "En": "Active",
+                  "Fr": "Actif",
+                  "De": "Aktiv",
+                  "Es": "Activo"
+                }
               },
               "selected": true
             },
             "OFF": {
-              "label_active": {
-                "En": "Inactive",
-                "Fr": "Inactif",
-                "De": "Inaktiv",
-                "Es": "Inactivo"
-              },
-              "label_inactive": {
-                "En": "Inactive",
-                "Fr": "Inactif",
-                "De": "Inaktiv",
-                "Es": "Inactivo"
+              "label": {
+                "active": {
+                  "En": "Inactive",
+                  "Fr": "Inactif",
+                  "De": "Inaktiv",
+                  "Es": "Inactivo"
+                },
+                "inactive": {
+                  "En": "Inactive",
+                  "Fr": "Inactif",
+                  "De": "Inaktiv",
+                  "Es": "Inactivo"
+                }
               },
               "selected": false
             }
           }
         },
         "operator_name": {
-          "label_active": {
-            "En": "Operator Name",
-            "Fr": "Operator Nom",
-            "De": "Operator Name",
-            "Es": "Operator Nombre"
-          },
-          "label_inactive": {
-            "En": "Operator Name",
-            "Fr": "Operator Nom",
-            "De": "Operator Name",
-            "Es": "Operator Nombre"
+          "label": {
+            "active": {
+              "En": "Operator Name",
+              "Fr": "Operator Nom",
+              "De": "Operator Name",
+              "Es": "Operator Nombre"
+            },
+            "inactive": {
+              "En": "Operator Name",
+              "Fr": "Operator Nom",
+              "De": "Operator Name",
+              "Es": "Operator Nombre"
+            }
           },
           "type": "_Value",
           "AES70": "OcaStringActuator",
@@ -100,17 +108,19 @@
           }
         },
         "operator_contact": {
-          "label_active": {
-            "En": "Operator Contact",
-            "Fr": "Operator Contact",
-            "De": "Operator Contact",
-            "Es": "Operator Contact"
-          },
-          "label_inactive": {
-            "En": "Operator Contact",
-            "Fr": "Operator Contact",
-            "De": "Operator Contact",
-            "Es": "Operator Contact"
+          "label": {
+            "active": {
+              "En": "Operator Contact",
+              "Fr": "Operator Contact",
+              "De": "Operator Contact",
+              "Es": "Operator Contact"
+            },
+            "inactive": {
+              "En": "Operator Contact",
+              "Fr": "Operator Contact",
+              "De": "Operator Contact",
+              "Es": "Operator Contact"
+            }
           },
           "type": "_Value",
           "AES70": "OcaStringActuator",
@@ -120,17 +130,19 @@
           }
         },
         "venue_name": {
-          "label_active": {
-            "En": "Venue Name",
-            "Fr": "Venue Nom",
-            "De": "Venue Name",
-            "Es": "Venue Nombre"
-          },
-          "label_inactive": {
-            "En": "Venue Name",
-            "Fr": "Venue Nom",
-            "De": "Venue Name",
-            "Es": "Venue Nombre"
+          "label": {
+            "active": {
+              "En": "Venue Name",
+              "Fr": "Venue Nom",
+              "De": "Venue Name",
+              "Es": "Venue Nombre"
+            },
+            "inactive": {
+              "En": "Venue Name",
+              "Fr": "Venue Nom",
+              "De": "Venue Name",
+              "Es": "Venue Nombre"
+            }
           },
           "type": "_Value",
           "AES70": "OcaStringActuator",
@@ -140,17 +152,19 @@
           }
         },
         "venue_address": {
-          "label_active": {
-            "En": "Venue Address",
-            "Fr": "Venue Address",
-            "De": "Venue Address",
-            "Es": "Venue Address"
-          },
-          "label_inactive": {
-            "En": "Venue Address",
-            "Fr": "Venue Address",
-            "De": "Venue Address",
-            "Es": "Venue Address"
+          "label": {
+            "active": {
+              "En": "Venue Address",
+              "Fr": "Venue Address",
+              "De": "Venue Address",
+              "Es": "Venue Address"
+            },
+            "inactive": {
+              "En": "Venue Address",
+              "Fr": "Venue Address",
+              "De": "Venue Address",
+              "Es": "Venue Address"
+            }
           },
           "type": "_Value",
           "AES70": "OcaStringActuator",
@@ -160,17 +174,19 @@
           }
         },
         "venue_city": {
-          "label_active": {
-            "En": "Venue City",
-            "Fr": "Venue City",
-            "De": "Venue City",
-            "Es": "Venue City"
-          },
-          "label_inactive": {
-            "En": "Venue City",
-            "Fr": "Venue City",
-            "De": "Venue City",
-            "Es": "Venue City"
+          "label": {
+            "active": {
+              "En": "Venue City",
+              "Fr": "Venue City",
+              "De": "Venue City",
+              "Es": "Venue City"
+            },
+            "inactive": {
+              "En": "Venue City",
+              "Fr": "Venue City",
+              "De": "Venue City",
+              "Es": "Venue City"
+            }
           },
           "type": "_Value",
           "AES70": "OcaStringActuator",
@@ -180,17 +196,19 @@
           }
         },
         "venue_province": {
-          "label_active": {
-            "En": "Venue Province",
-            "Fr": "Venue Province",
-            "De": "Venue Province",
-            "Es": "Venue Province"
-          },
-          "label_inactive": {
-            "En": "Venue Province",
-            "Fr": "Venue Province",
-            "De": "Venue Province",
-            "Es": "Venue Province"
+          "label": {
+            "active": {
+              "En": "Venue Province",
+              "Fr": "Venue Province",
+              "De": "Venue Province",
+              "Es": "Venue Province"
+            },
+            "inactive": {
+              "En": "Venue Province",
+              "Fr": "Venue Province",
+              "De": "Venue Province",
+              "Es": "Venue Province"
+            }
           },
           "type": "_Value",
           "AES70": "OcaStringActuator",
@@ -200,17 +218,19 @@
           }
         },
         "venue_postal_code": {
-          "label_active": {
-            "En": "Venue Postal Code",
-            "Fr": "Venue Postal Code",
-            "De": "Venue Postal Code",
-            "Es": "Venue Postal Code"
-          },
-          "label_inactive": {
-            "En": "Venue Postal Code",
-            "Fr": "Venue Postal Code",
-            "De": "Venue Postal Code",
-            "Es": "Venue Postal Code"
+          "label": {
+            "active": {
+              "En": "Venue Postal Code",
+              "Fr": "Venue Postal Code",
+              "De": "Venue Postal Code",
+              "Es": "Venue Postal Code"
+            },
+            "inactive": {
+              "En": "Venue Postal Code",
+              "Fr": "Venue Postal Code",
+              "De": "Venue Postal Code",
+              "Es": "Venue Postal Code"
+            }
           },
           "type": "_Value",
           "AES70": "OcaStringActuator",
@@ -220,17 +240,19 @@
           }
         },
         "notes": {
-          "label_active": {
-            "En": "Notes",
-            "Fr": "Notes",
-            "De": "Notizen",
-            "Es": "Notas"
-          },
-          "label_inactive": {
-            "En": "Notes",
-            "Fr": "Notes",
-            "De": "Notizen",
-            "Es": "Notas"
+          "label": {
+            "active": {
+              "En": "Notes",
+              "Fr": "Notes",
+              "De": "Notizen",
+              "Es": "Notas"
+            },
+            "inactive": {
+              "En": "Notes",
+              "Fr": "Notes",
+              "De": "Notizen",
+              "Es": "Notas"
+            }
           },
           "type": "_Value",
           "AES70": "OcaStringActuator",
@@ -240,17 +262,19 @@
           }
         },
         "scanner_type": {
-          "label_active": {
-            "En": "Scanner Type",
-            "Fr": "Type de scanner",
-            "De": "Scannertyp",
-            "Es": "Tipo de escáner"
-          },
-          "label_inactive": {
-            "En": "Scanner Type",
-            "Fr": "Type de scanner",
-            "De": "Scannertyp",
-            "Es": "Tipo de escáner"
+          "label": {
+            "active": {
+              "En": "Scanner Type",
+              "Fr": "Type de scanner",
+              "De": "Scannertyp",
+              "Es": "Tipo de escáner"
+            },
+            "inactive": {
+              "En": "Scanner Type",
+              "Fr": "Type de scanner",
+              "De": "Scannertyp",
+              "Es": "Tipo de escáner"
+            }
           },
           "type": "_Value",
           "AES70": "OcaStringActuator",
@@ -272,33 +296,37 @@
       },
       "fields": {
         "Amplifier_type_switch": {
-          "label_active": {
-            "En": "Amplifier Type",
-            "Fr": "Amplificateur Type",
-            "De": "Verstärker Typ",
-            "Es": "Amplificador Tipo"
-          },
-          "label_inactive": {
-            "En": "Amplifier Type",
-            "Fr": "Amplificateur Type",
-            "De": "Verstärker Typ",
-            "Es": "Amplificador Tipo"
+          "label": {
+            "active": {
+              "En": "Amplifier Type",
+              "Fr": "Amplificateur Type",
+              "De": "Verstärker Typ",
+              "Es": "Amplificador Tipo"
+            },
+            "inactive": {
+              "En": "Amplifier Type",
+              "Fr": "Amplificateur Type",
+              "De": "Verstärker Typ",
+              "Es": "Amplificador Tipo"
+            }
           },
           "type": "_GuiDropDownOption",
           "handler": "set_amplifier_type",
           "options": {
             "Broadband": {
-              "label_active": {
-                "En": "Broadband",
-                "Fr": "Large bande",
-                "De": "Breitband",
-                "Es": "Banda ancha"
-              },
-              "label_inactive": {
-                "En": "Broadband",
-                "Fr": "Large bande",
-                "De": "Breitband",
-                "Es": "Banda ancha"
+              "label": {
+                "active": {
+                  "En": "Broadband",
+                  "Fr": "Large bande",
+                  "De": "Breitband",
+                  "Es": "Banda ancha"
+                },
+                "inactive": {
+                  "En": "Broadband",
+                  "Fr": "Large bande",
+                  "De": "Breitband",
+                  "Es": "Banda ancha"
+                }
               },
               "value": "Broadband",
               "description": {
@@ -311,17 +339,19 @@
               "selected": "yes"
             },
             "Low_Noise_LNA": {
-              "label_active": {
-                "En": "Low Noise (LNA)",
-                "Fr": "Faible bruit (LNA)",
-                "De": "Rauscharm (LNA)",
-                "Es": "Bajo ruido (LNA)"
-              },
-              "label_inactive": {
-                "En": "Low Noise (LNA)",
-                "Fr": "Faible bruit (LNA)",
-                "De": "Rauscharm (LNA)",
-                "Es": "Bajo ruido (LNA)"
+              "label": {
+                "active": {
+                  "En": "Low Noise (LNA)",
+                  "Fr": "Faible bruit (LNA)",
+                  "De": "Rauscharm (LNA)",
+                  "Es": "Bajo ruido (LNA)"
+                },
+                "inactive": {
+                  "En": "Low Noise (LNA)",
+                  "Fr": "Faible bruit (LNA)",
+                  "De": "Rauscharm (LNA)",
+                  "Es": "Bajo ruido (LNA)"
+                }
               },
               "value": "Low_Noise_LNA",
               "description": {
@@ -334,17 +364,19 @@
               "selected": "no"
             },
             "High_Power_HPAs": {
-              "label_active": {
-                "En": "High Power (HPAs)",
-                "Fr": "Haute puissance (HPAs)",
-                "De": "Hochleistung (HPAs)",
-                "Es": "Alta potencia (HPAs)"
-              },
-              "label_inactive": {
-                "En": "High Power (HPAs)",
-                "Fr": "Haute puissance (HPAs)",
-                "De": "Hochleistung (HPAs)",
-                "Es": "Alta potencia (HPAs)"
+              "label": {
+                "active": {
+                  "En": "High Power (HPAs)",
+                  "Fr": "Haute puissance (HPAs)",
+                  "De": "Hochleistung (HPAs)",
+                  "Es": "Alta potencia (HPAs)"
+                },
+                "inactive": {
+                  "En": "High Power (HPAs)",
+                  "Fr": "Haute puissance (HPAs)",
+                  "De": "Hochleistung (HPAs)",
+                  "Es": "Alta potencia (HPAs)"
+                }
               },
               "value": "High_Power_HPAs",
               "description": {
@@ -357,17 +389,19 @@
               "selected": "no"
             },
             "Band_Specific": {
-              "label_active": {
-                "En": "Band-Specific",
-                "Fr": "Band-Specific",
-                "De": "Band-Specific",
-                "Es": "Band-Specific"
-              },
-              "label_inactive": {
-                "En": "Band-Specific",
-                "Fr": "Band-Specific",
-                "De": "Band-Specific",
-                "Es": "Band-Specific"
+              "label": {
+                "active": {
+                  "En": "Band-Specific",
+                  "Fr": "Band-Specific",
+                  "De": "Band-Specific",
+                  "Es": "Band-Specific"
+                },
+                "inactive": {
+                  "En": "Band-Specific",
+                  "Fr": "Band-Specific",
+                  "De": "Band-Specific",
+                  "Es": "Band-Specific"
+                }
               },
               "value": "Band_Specific",
               "description": {
@@ -380,17 +414,19 @@
               "selected": "no"
             },
             "Logarithmic": {
-              "label_active": {
-                "En": "Logarithmic",
-                "Fr": "Logarithmic",
-                "De": "Logarithmic",
-                "Es": "Logarithmic"
-              },
-              "label_inactive": {
-                "En": "Logarithmic",
-                "Fr": "Logarithmic",
-                "De": "Logarithmic",
-                "Es": "Logarithmic"
+              "label": {
+                "active": {
+                  "En": "Logarithmic",
+                  "Fr": "Logarithmic",
+                  "De": "Logarithmic",
+                  "Es": "Logarithmic"
+                },
+                "inactive": {
+                  "En": "Logarithmic",
+                  "Fr": "Logarithmic",
+                  "De": "Logarithmic",
+                  "Es": "Logarithmic"
+                }
               },
               "value": "Logarithmic",
               "description": {
@@ -417,33 +453,37 @@
       },
       "fields": {
         "Antenna_type_switch": {
-          "label_active": {
-            "En": "Antenna Type",
-            "Fr": "Antenne Type",
-            "De": "Antenne Typ",
-            "Es": "Antena Tipo"
-          },
-          "label_inactive": {
-            "En": "Antenna Type",
-            "Fr": "Antenne Type",
-            "De": "Antenne Typ",
-            "Es": "Antena Tipo"
+          "label": {
+            "active": {
+              "En": "Antenna Type",
+              "Fr": "Antenne Type",
+              "De": "Antenne Typ",
+              "Es": "Antena Tipo"
+            },
+            "inactive": {
+              "En": "Antenna Type",
+              "Fr": "Antenne Type",
+              "De": "Antenne Typ",
+              "Es": "Antena Tipo"
+            }
           },
           "type": "_GuiDropDownOption",
           "handler": "set_antenna_type",
           "options": {
             "Omnidirectional_Dipole": {
-              "label_active": {
-                "En": "Omnidirectional (Dipole)",
-                "Fr": "Omnidirectional (Dipole)",
-                "De": "Omnidirectional (Dipole)",
-                "Es": "Omnidirectional (Dipole)"
-              },
-              "label_inactive": {
-                "En": "Omnidirectional (Dipole)",
-                "Fr": "Omnidirectional (Dipole)",
-                "De": "Omnidirectional (Dipole)",
-                "Es": "Omnidirectional (Dipole)"
+              "label": {
+                "active": {
+                  "En": "Omnidirectional (Dipole)",
+                  "Fr": "Omnidirectional (Dipole)",
+                  "De": "Omnidirectional (Dipole)",
+                  "Es": "Omnidirectional (Dipole)"
+                },
+                "inactive": {
+                  "En": "Omnidirectional (Dipole)",
+                  "Fr": "Omnidirectional (Dipole)",
+                  "De": "Omnidirectional (Dipole)",
+                  "Es": "Omnidirectional (Dipole)"
+                }
               },
               "value": "Omnidirectional_Dipole",
               "description": {
@@ -456,17 +496,19 @@
               "selected": "yes"
             },
             "Omnidirectional_Ground_Plane": {
-              "label_active": {
-                "En": "Omnidirectional (Ground Plane)",
-                "Fr": "Omnidirectional (Ground Plane)",
-                "De": "Omnidirectional (Ground Plane)",
-                "Es": "Omnidirectional (Ground Plane)"
-              },
-              "label_inactive": {
-                "En": "Omnidirectional (Ground Plane)",
-                "Fr": "Omnidirectional (Ground Plane)",
-                "De": "Omnidirectional (Ground Plane)",
-                "Es": "Omnidirectional (Ground Plane)"
+              "label": {
+                "active": {
+                  "En": "Omnidirectional (Ground Plane)",
+                  "Fr": "Omnidirectional (Ground Plane)",
+                  "De": "Omnidirectional (Ground Plane)",
+                  "Es": "Omnidirectional (Ground Plane)"
+                },
+                "inactive": {
+                  "En": "Omnidirectional (Ground Plane)",
+                  "Fr": "Omnidirectional (Ground Plane)",
+                  "De": "Omnidirectional (Ground Plane)",
+                  "Es": "Omnidirectional (Ground Plane)"
+                }
               },
               "value": "Omnidirectional_Ground_Plane",
               "description": {
@@ -479,17 +521,19 @@
               "selected": "no"
             },
             "Directional_Yagi_Uda": {
-              "label_active": {
-                "En": "Directional (Yagi-Uda)",
-                "Fr": "Directional (Yagi-Uda)",
-                "De": "Directional (Yagi-Uda)",
-                "Es": "Directional (Yagi-Uda)"
-              },
-              "label_inactive": {
-                "En": "Directional (Yagi-Uda)",
-                "Fr": "Directional (Yagi-Uda)",
-                "De": "Directional (Yagi-Uda)",
-                "Es": "Directional (Yagi-Uda)"
+              "label": {
+                "active": {
+                  "En": "Directional (Yagi-Uda)",
+                  "Fr": "Directional (Yagi-Uda)",
+                  "De": "Directional (Yagi-Uda)",
+                  "Es": "Directional (Yagi-Uda)"
+                },
+                "inactive": {
+                  "En": "Directional (Yagi-Uda)",
+                  "Fr": "Directional (Yagi-Uda)",
+                  "De": "Directional (Yagi-Uda)",
+                  "Es": "Directional (Yagi-Uda)"
+                }
               },
               "value": "Directional_Yagi_Uda",
               "description": {
@@ -502,17 +546,19 @@
               "selected": "no"
             },
             "Directional_Parabolic_Dish": {
-              "label_active": {
-                "En": "Directional (Parabolic Dish)",
-                "Fr": "Directional (Parabolic Dish)",
-                "De": "Directional (Parabolic Dish)",
-                "Es": "Directional (Parabolic Dish)"
-              },
-              "label_inactive": {
-                "En": "Directional (Parabolic Dish)",
-                "Fr": "Directional (Parabolic Dish)",
-                "De": "Directional (Parabolic Dish)",
-                "Es": "Directional (Parabolic Dish)"
+              "label": {
+                "active": {
+                  "En": "Directional (Parabolic Dish)",
+                  "Fr": "Directional (Parabolic Dish)",
+                  "De": "Directional (Parabolic Dish)",
+                  "Es": "Directional (Parabolic Dish)"
+                },
+                "inactive": {
+                  "En": "Directional (Parabolic Dish)",
+                  "Fr": "Directional (Parabolic Dish)",
+                  "De": "Directional (Parabolic Dish)",
+                  "Es": "Directional (Parabolic Dish)"
+                }
               },
               "value": "Directional_Parabolic_Dish",
               "description": {
@@ -525,17 +571,19 @@
               "selected": "no"
             },
             "Loop_Antenna": {
-              "label_active": {
-                "En": "Loop Antenna",
-                "Fr": "Loop Antenne",
-                "De": "Loop Antenne",
-                "Es": "Loop Antena"
-              },
-              "label_inactive": {
-                "En": "Loop Antenna",
-                "Fr": "Loop Antenne",
-                "De": "Loop Antenne",
-                "Es": "Loop Antena"
+              "label": {
+                "active": {
+                  "En": "Loop Antenna",
+                  "Fr": "Loop Antenne",
+                  "De": "Loop Antenne",
+                  "Es": "Loop Antena"
+                },
+                "inactive": {
+                  "En": "Loop Antenna",
+                  "Fr": "Loop Antenne",
+                  "De": "Loop Antenne",
+                  "Es": "Loop Antena"
+                }
               },
               "value": "Loop_Antenna",
               "description": {
@@ -548,17 +596,19 @@
               "selected": "no"
             },
             "Patch_Antenna": {
-              "label_active": {
-                "En": "Patch Antenna",
-                "Fr": "Patch Antenne",
-                "De": "Patch Antenne",
-                "Es": "Patch Antena"
-              },
-              "label_inactive": {
-                "En": "Patch Antenna",
-                "Fr": "Patch Antenne",
-                "De": "Patch Antenne",
-                "Es": "Patch Antena"
+              "label": {
+                "active": {
+                  "En": "Patch Antenna",
+                  "Fr": "Patch Antenne",
+                  "De": "Patch Antenne",
+                  "Es": "Patch Antena"
+                },
+                "inactive": {
+                  "En": "Patch Antenna",
+                  "Fr": "Patch Antenne",
+                  "De": "Patch Antenne",
+                  "Es": "Patch Antena"
+                }
               },
               "value": "Patch_Antenna",
               "description": {
@@ -571,17 +621,19 @@
               "selected": "no"
             },
             "Horn_Antenna": {
-              "label_active": {
-                "En": "Horn Antenna",
-                "Fr": "Horn Antenne",
-                "De": "Horn Antenne",
-                "Es": "Horn Antena"
-              },
-              "label_inactive": {
-                "En": "Horn Antenna",
-                "Fr": "Horn Antenne",
-                "De": "Horn Antenne",
-                "Es": "Horn Antena"
+              "label": {
+                "active": {
+                  "En": "Horn Antenna",
+                  "Fr": "Horn Antenne",
+                  "De": "Horn Antenne",
+                  "Es": "Horn Antena"
+                },
+                "inactive": {
+                  "En": "Horn Antenna",
+                  "Fr": "Horn Antenne",
+                  "De": "Horn Antenne",
+                  "Es": "Horn Antena"
+                }
               },
               "value": "Horn_Antenna",
               "description": {

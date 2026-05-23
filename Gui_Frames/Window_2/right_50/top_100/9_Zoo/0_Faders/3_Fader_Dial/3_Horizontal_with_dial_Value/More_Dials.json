@@ -38,11 +38,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "Big Dial Center",
-              "Fr": "Big Dial Centre",
-              "De": "Big Dial Zentrum",
-              "Es": "Big Dial Centro"
+            "label": {
+              "active": {
+                "En": "Big Dial Center",
+                "Fr": "Big Dial Centre",
+                "De": "Big Dial Zentrum",
+                "Es": "Big Dial Centro"
+              }
             },
             "dial_config": {
               "width": 50,
@@ -72,11 +74,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "Sub-Atomic",
-              "Fr": "Sub-Atomic",
-              "De": "Sub-Atomic",
-              "Es": "Sub-Atomic"
+            "label": {
+              "active": {
+                "En": "Sub-Atomic",
+                "Fr": "Sub-Atomic",
+                "De": "Sub-Atomic",
+                "Es": "Sub-Atomic"
+              }
             },
             "fader_config": {
               "cap_height": 40
@@ -103,11 +107,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "Rainbow Fader",
-              "Fr": "Rainbow Fader",
-              "De": "Rainbow Fader",
-              "Es": "Rainbow Fader"
+            "label": {
+              "active": {
+                "En": "Rainbow Fader",
+                "Fr": "Rainbow Fader",
+                "De": "Rainbow Fader",
+                "Es": "Rainbow Fader"
+              }
             },
             "fader_config": {
               "active_color": "#FF0000",
@@ -138,11 +144,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "Gear Head",
-              "Fr": "Gear Head",
-              "De": "Gear Head",
-              "Es": "Gear Head"
+            "label": {
+              "active": {
+                "En": "Gear Head",
+                "Fr": "Gear Head",
+                "De": "Gear Head",
+                "Es": "Gear Head"
+              }
             },
             "dial_config": {
               "knob_style": "industrial",
@@ -173,11 +181,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "Minimalist",
-              "Fr": "Minimalist",
-              "De": "Minimalist",
-              "Es": "Minimalist"
+            "label": {
+              "active": {
+                "En": "Minimalist",
+                "Fr": "Minimalist",
+                "De": "Minimalist",
+                "Es": "Minimalist"
+              }
             },
             "show_label": false,
             "fader_config": {
@@ -212,11 +222,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "Nuclear Core",
-              "Fr": "Nuclear Core",
-              "De": "Nuclear Core",
-              "Es": "Nuclear Core"
+            "label": {
+              "active": {
+                "En": "Nuclear Core",
+                "Fr": "Nuclear Core",
+                "De": "Nuclear Core",
+                "Es": "Nuclear Core"
+              }
             },
             "fader_config": {
               "active_color": "#00FF00",
@@ -251,11 +263,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "Ice Cold",
-              "Fr": "Ice Cold",
-              "De": "Ice Cold",
-              "Es": "Ice Cold"
+            "label": {
+              "active": {
+                "En": "Ice Cold",
+                "Fr": "Ice Cold",
+                "De": "Ice Cold",
+                "Es": "Ice Cold"
+              }
             },
             "fader_config": {
               "bar_color": "#00FFFF",
@@ -285,11 +299,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "Hell Fire",
-              "Fr": "Hell Fire",
-              "De": "Hell Fire",
-              "Es": "Hell Fire"
+            "label": {
+              "active": {
+                "En": "Hell Fire",
+                "Fr": "Hell Fire",
+                "De": "Hell Fire",
+                "Es": "Hell Fire"
+              }
             },
             "fader_config": {
               "bar_color": "#660000",
@@ -320,11 +336,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "Deep Sea",
-              "Fr": "Deep Sea",
-              "De": "Deep Sea",
-              "Es": "Deep Sea"
+            "label": {
+              "active": {
+                "En": "Deep Sea",
+                "Fr": "Deep Sea",
+                "De": "Deep Sea",
+                "Es": "Deep Sea"
+              }
             },
             "fader_config": {
               "bar_color": "#000033",
@@ -355,11 +373,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "Gold Rush",
-              "Fr": "Gold Rush",
-              "De": "Gold Rush",
-              "Es": "Gold Rush"
+            "label": {
+              "active": {
+                "En": "Gold Rush",
+                "Fr": "Gold Rush",
+                "De": "Gold Rush",
+                "Es": "Gold Rush"
+              }
             },
             "fader_config": {
               "bar_color": "#FFD700",
@@ -390,11 +410,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "Alien Tech",
-              "Fr": "Alien Tech",
-              "De": "Alien Tech",
-              "Es": "Alien Tech"
+            "label": {
+              "active": {
+                "En": "Alien Tech",
+                "Fr": "Alien Tech",
+                "De": "Alien Tech",
+                "Es": "Alien Tech"
+              }
             },
             "dial_config": {
               "knob_style": "modern",
@@ -425,11 +447,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "Classic Audio",
-              "Fr": "Classique Audio",
-              "De": "Klassisch Audio",
-              "Es": "Clásico Audio"
+            "label": {
+              "active": {
+                "En": "Classic Audio",
+                "Fr": "Classique Audio",
+                "De": "Klassisch Audio",
+                "Es": "Clásico Audio"
+              }
             },
             "dial_config": {
               "knob_style": "dial",
@@ -459,11 +483,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "Steampunk",
-              "Fr": "Steampunk",
-              "De": "Steampunk",
-              "Es": "Steampunk"
+            "label": {
+              "active": {
+                "En": "Steampunk",
+                "Fr": "Steampunk",
+                "De": "Steampunk",
+                "Es": "Steampunk"
+              }
             },
             "dial_config": {
               "knob_style": "vintage",
@@ -495,11 +521,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "Neon Nights",
-              "Fr": "Neon Nights",
-              "De": "Neon Nights",
-              "Es": "Neon Nights"
+            "label": {
+              "active": {
+                "En": "Neon Nights",
+                "Fr": "Neon Nights",
+                "De": "Neon Nights",
+                "Es": "Neon Nights"
+              }
             },
             "dial_config": {
               "active_color": "#39FF14",
@@ -530,11 +558,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "Shadow",
-              "Fr": "Shadow",
-              "De": "Shadow",
-              "Es": "Shadow"
+            "label": {
+              "active": {
+                "En": "Shadow",
+                "Fr": "Shadow",
+                "De": "Shadow",
+                "Es": "Shadow"
+              }
             },
             "fader_config": {
               "bar_color": "#111",
@@ -565,11 +595,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "Solar Flare",
-              "Fr": "Solar Flare",
-              "De": "Solar Flare",
-              "Es": "Solar Flare"
+            "label": {
+              "active": {
+                "En": "Solar Flare",
+                "Fr": "Solar Flare",
+                "De": "Solar Flare",
+                "Es": "Solar Flare"
+              }
             },
             "fader_config": {
               "active_color": "#FFA500",
@@ -598,11 +630,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "Velocity",
-              "Fr": "Velocity",
-              "De": "Velocity",
-              "Es": "Velocity"
+            "label": {
+              "active": {
+                "En": "Velocity",
+                "Fr": "Velocity",
+                "De": "Velocity",
+                "Es": "Velocity"
+              }
             },
             "fader_config": {
               "cap_height": 50
@@ -628,11 +662,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "Macro/Micro",
-              "Fr": "Macro/Micro",
-              "De": "Macro/Micro",
-              "Es": "Macro/Micro"
+            "label": {
+              "active": {
+                "En": "Macro/Micro",
+                "Fr": "Macro/Micro",
+                "De": "Macro/Micro",
+                "Es": "Macro/Micro"
+              }
             },
             "dial_config": {
               "fine_pitch": true,
@@ -660,11 +696,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "Infinity Plus",
-              "Fr": "Infinity Plus",
-              "De": "Infinity Plus",
-              "Es": "Infinity Plus"
+            "label": {
+              "active": {
+                "En": "Infinity Plus",
+                "Fr": "Infinity Plus",
+                "De": "Infinity Plus",
+                "Es": "Infinity Plus"
+              }
             },
             "dial_config": {
               "infinity": true,
@@ -693,11 +731,13 @@
               10,
               10
             ],
-            "label_active": {
-              "En": "The End",
-              "Fr": "The End",
-              "De": "The End",
-              "Es": "The End"
+            "label": {
+              "active": {
+                "En": "The End",
+                "Fr": "The End",
+                "De": "The End",
+                "Es": "The End"
+              }
             },
             "fader_config": {
               "bar_color": "#FFFFFF",

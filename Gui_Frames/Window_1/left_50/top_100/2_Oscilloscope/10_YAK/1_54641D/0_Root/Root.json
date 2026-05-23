@@ -25,11 +25,13 @@
             "fields": {
               "Run": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "RUN",
-                  "Fr": "EXEC",
-                  "De": "AUSFÜHREN",
-                  "Es": "EJEC"
+                "label": {
+                  "inactive": {
+                    "En": "RUN",
+                    "Fr": "EXEC",
+                    "De": "AUSFÜHREN",
+                    "Es": "EJEC"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
@@ -58,11 +60,13 @@
               },
               "Stop": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "STOP",
-                  "Fr": "STOP",
-                  "De": "STOP",
-                  "Es": "STOP"
+                "label": {
+                  "inactive": {
+                    "En": "STOP",
+                    "Fr": "STOP",
+                    "De": "STOP",
+                    "Es": "STOP"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
@@ -91,11 +95,13 @@
               },
               "Single": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "SINGLE",
-                  "Fr": "SINGLE",
-                  "De": "SINGLE",
-                  "Es": "SINGLE"
+                "label": {
+                  "inactive": {
+                    "En": "SINGLE",
+                    "Fr": "SINGLE",
+                    "De": "SINGLE",
+                    "Es": "SINGLE"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
@@ -124,11 +130,13 @@
               },
               "Autoscale": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "AUTOSCALE",
-                  "Fr": "ÉCHELLE AUTO",
-                  "De": "AUTOSCALE",
-                  "Es": "ESCALA AUTO"
+                "label": {
+                  "inactive": {
+                    "En": "AUTOSCALE",
+                    "Fr": "ÉCHELLE AUTO",
+                    "De": "AUTOSCALE",
+                    "Es": "ESCALA AUTO"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {

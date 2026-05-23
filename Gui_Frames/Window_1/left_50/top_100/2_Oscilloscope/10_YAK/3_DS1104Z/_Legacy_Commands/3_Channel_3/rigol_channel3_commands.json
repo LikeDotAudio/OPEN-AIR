@@ -339,11 +339,13 @@
             "fields": {
               "CH3_ON": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "CH3 ON",
-                  "Fr": "CH 3",
-                  "De": "CH 3",
-                  "Es": "CH 3"
+                "label": {
+                  "inactive": {
+                    "En": "CH3 ON",
+                    "Fr": "CH 3",
+                    "De": "CH 3",
+                    "Es": "CH 3"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
@@ -372,11 +374,13 @@
               },
               "CH3_OFF": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "CH3 OFF",
-                  "Fr": "CH 3",
-                  "De": "CH 3",
-                  "Es": "CH 3"
+                "label": {
+                  "inactive": {
+                    "En": "CH3 OFF",
+                    "Fr": "CH 3",
+                    "De": "CH 3",
+                    "Es": "CH 3"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {

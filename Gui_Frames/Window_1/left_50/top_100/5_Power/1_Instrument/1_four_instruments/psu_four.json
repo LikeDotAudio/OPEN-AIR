@@ -35,17 +35,19 @@
             "fields": {
               "Global_Kill_Switch": {
                 "type": "_TrapezoidButton",
-                "label_active": {
-                  "En": "☢️ MASTER POWER: ACTIVE ☢️",
-                  "Fr": "☢️ MASTER POWER: ACTIVE ☢️",
-                  "De": "☢️ MASTER POWER: ACTIVE ☢️",
-                  "Es": "☢️ MASTER POWER: ACTIVE ☢️"
-                },
-                "label_inactive": {
-                  "En": "MASTER POWER: OFF",
-                  "Fr": "MASTER POWER: OFF",
-                  "De": "MASTER POWER: OFF",
-                  "Es": "MASTER POWER: OFF"
+                "label": {
+                  "active": {
+                    "En": "☢️ MASTER POWER: ACTIVE ☢️",
+                    "Fr": "☢️ MASTER POWER: ACTIVE ☢️",
+                    "De": "☢️ MASTER POWER: ACTIVE ☢️",
+                    "Es": "☢️ MASTER POWER: ACTIVE ☢️"
+                  },
+                  "inactive": {
+                    "En": "MASTER POWER: OFF",
+                    "Fr": "MASTER POWER: OFF",
+                    "De": "MASTER POWER: OFF",
+                    "Es": "MASTER POWER: OFF"
+                  }
                 },
                 "state_default": false,
                 "message_details": {
@@ -97,11 +99,13 @@
                       "max": "100",
                       "units": "V"
                     },
-                    "label_active": {
-                      "En": "V1",
-                      "Fr": "V1",
-                      "De": "V1",
-                      "Es": "V1"
+                    "label": {
+                      "active": {
+                        "En": "V1",
+                        "Fr": "V1",
+                        "De": "V1",
+                        "Es": "V1"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -117,11 +121,13 @@
                       "max": "10",
                       "units": "A"
                     },
-                    "label_active": {
-                      "En": "A1",
-                      "Fr": "A1",
-                      "De": "A1",
-                      "Es": "A1"
+                    "label": {
+                      "active": {
+                        "En": "A1",
+                        "Fr": "A1",
+                        "De": "A1",
+                        "Es": "A1"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -137,11 +143,13 @@
                       "max": "1000",
                       "units": "W"
                     },
-                    "label_active": {
-                      "En": "W1",
-                      "Fr": "W1",
-                      "De": "W1",
-                      "Es": "W1"
+                    "label": {
+                      "active": {
+                        "En": "W1",
+                        "Fr": "W1",
+                        "De": "W1",
+                        "Es": "W1"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -162,11 +170,13 @@
                       "max": "100",
                       "units": "V"
                     },
-                    "label_active": {
-                      "En": "SET V",
-                      "Fr": "SET V",
-                      "De": "SET V",
-                      "Es": "SET V"
+                    "label": {
+                      "active": {
+                        "En": "SET V",
+                        "Fr": "SET V",
+                        "De": "SET V",
+                        "Es": "SET V"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -182,11 +192,13 @@
                       "max": "10",
                       "units": "A"
                     },
-                    "label_active": {
-                      "En": "LIM A",
-                      "Fr": "LIM A",
-                      "De": "LIM A",
-                      "Es": "LIM A"
+                    "label": {
+                      "active": {
+                        "En": "LIM A",
+                        "Fr": "LIM A",
+                        "De": "LIM A",
+                        "Es": "LIM A"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -197,17 +209,19 @@
                   },
                   "Enable_1": {
                     "type": "_GuiButtonToggle",
-                    "label_active": {
-                      "En": "CH1 ON",
-                      "Fr": "CH1 ACTIVÉ",
-                      "De": "CH1 AN",
-                      "Es": "CH1 ACTIVADO"
-                    },
-                    "label_inactive": {
-                      "En": "CH1 OFF",
-                      "Fr": "CH 1",
-                      "De": "CH 1",
-                      "Es": "CH 1"
+                    "label": {
+                      "active": {
+                        "En": "CH1 ON",
+                        "Fr": "CH1 ACTIVÉ",
+                        "De": "CH1 AN",
+                        "Es": "CH1 ACTIVADO"
+                      },
+                      "inactive": {
+                        "En": "CH1 OFF",
+                        "Fr": "CH 1",
+                        "De": "CH 1",
+                        "Es": "CH 1"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -239,11 +253,13 @@
                       "max": "100",
                       "units": "V"
                     },
-                    "label_active": {
-                      "En": "V2",
-                      "Fr": "V2",
-                      "De": "V2",
-                      "Es": "V2"
+                    "label": {
+                      "active": {
+                        "En": "V2",
+                        "Fr": "V2",
+                        "De": "V2",
+                        "Es": "V2"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -259,11 +275,13 @@
                       "max": "10",
                       "units": "A"
                     },
-                    "label_active": {
-                      "En": "A2",
-                      "Fr": "A2",
-                      "De": "A2",
-                      "Es": "A2"
+                    "label": {
+                      "active": {
+                        "En": "A2",
+                        "Fr": "A2",
+                        "De": "A2",
+                        "Es": "A2"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -279,11 +297,13 @@
                       "max": "1000",
                       "units": "W"
                     },
-                    "label_active": {
-                      "En": "W2",
-                      "Fr": "W2",
-                      "De": "W2",
-                      "Es": "W2"
+                    "label": {
+                      "active": {
+                        "En": "W2",
+                        "Fr": "W2",
+                        "De": "W2",
+                        "Es": "W2"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -304,11 +324,13 @@
                       "max": "100",
                       "units": "V"
                     },
-                    "label_active": {
-                      "En": "SET V",
-                      "Fr": "SET V",
-                      "De": "SET V",
-                      "Es": "SET V"
+                    "label": {
+                      "active": {
+                        "En": "SET V",
+                        "Fr": "SET V",
+                        "De": "SET V",
+                        "Es": "SET V"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -324,11 +346,13 @@
                       "max": "10",
                       "units": "A"
                     },
-                    "label_active": {
-                      "En": "LIM A",
-                      "Fr": "LIM A",
-                      "De": "LIM A",
-                      "Es": "LIM A"
+                    "label": {
+                      "active": {
+                        "En": "LIM A",
+                        "Fr": "LIM A",
+                        "De": "LIM A",
+                        "Es": "LIM A"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -339,17 +363,19 @@
                   },
                   "Enable_2": {
                     "type": "_GuiButtonToggle",
-                    "label_active": {
-                      "En": "CH2 ON",
-                      "Fr": "CH 2",
-                      "De": "CH 2",
-                      "Es": "CH 2"
-                    },
-                    "label_inactive": {
-                      "En": "CH2 OFF",
-                      "Fr": "CH 2",
-                      "De": "CH 2",
-                      "Es": "CH 2"
+                    "label": {
+                      "active": {
+                        "En": "CH2 ON",
+                        "Fr": "CH 2",
+                        "De": "CH 2",
+                        "Es": "CH 2"
+                      },
+                      "inactive": {
+                        "En": "CH2 OFF",
+                        "Fr": "CH 2",
+                        "De": "CH 2",
+                        "Es": "CH 2"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -381,11 +407,13 @@
                       "max": "100",
                       "units": "V"
                     },
-                    "label_active": {
-                      "En": "V3",
-                      "Fr": "V3",
-                      "De": "V3",
-                      "Es": "V3"
+                    "label": {
+                      "active": {
+                        "En": "V3",
+                        "Fr": "V3",
+                        "De": "V3",
+                        "Es": "V3"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -401,11 +429,13 @@
                       "max": "10",
                       "units": "A"
                     },
-                    "label_active": {
-                      "En": "A3",
-                      "Fr": "A3",
-                      "De": "A3",
-                      "Es": "A3"
+                    "label": {
+                      "active": {
+                        "En": "A3",
+                        "Fr": "A3",
+                        "De": "A3",
+                        "Es": "A3"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -421,11 +451,13 @@
                       "max": "1000",
                       "units": "W"
                     },
-                    "label_active": {
-                      "En": "W3",
-                      "Fr": "W3",
-                      "De": "W3",
-                      "Es": "W3"
+                    "label": {
+                      "active": {
+                        "En": "W3",
+                        "Fr": "W3",
+                        "De": "W3",
+                        "Es": "W3"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -446,11 +478,13 @@
                       "max": "100",
                       "units": "V"
                     },
-                    "label_active": {
-                      "En": "SET V",
-                      "Fr": "SET V",
-                      "De": "SET V",
-                      "Es": "SET V"
+                    "label": {
+                      "active": {
+                        "En": "SET V",
+                        "Fr": "SET V",
+                        "De": "SET V",
+                        "Es": "SET V"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -466,11 +500,13 @@
                       "max": "10",
                       "units": "A"
                     },
-                    "label_active": {
-                      "En": "LIM A",
-                      "Fr": "LIM A",
-                      "De": "LIM A",
-                      "Es": "LIM A"
+                    "label": {
+                      "active": {
+                        "En": "LIM A",
+                        "Fr": "LIM A",
+                        "De": "LIM A",
+                        "Es": "LIM A"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -481,17 +517,19 @@
                   },
                   "Enable_3": {
                     "type": "_GuiButtonToggle",
-                    "label_active": {
-                      "En": "CH3 ON",
-                      "Fr": "CH 3",
-                      "De": "CH 3",
-                      "Es": "CH 3"
-                    },
-                    "label_inactive": {
-                      "En": "CH3 OFF",
-                      "Fr": "CH 3",
-                      "De": "CH 3",
-                      "Es": "CH 3"
+                    "label": {
+                      "active": {
+                        "En": "CH3 ON",
+                        "Fr": "CH 3",
+                        "De": "CH 3",
+                        "Es": "CH 3"
+                      },
+                      "inactive": {
+                        "En": "CH3 OFF",
+                        "Fr": "CH 3",
+                        "De": "CH 3",
+                        "Es": "CH 3"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -523,11 +561,13 @@
                       "max": "100",
                       "units": "V"
                     },
-                    "label_active": {
-                      "En": "V4",
-                      "Fr": "V4",
-                      "De": "V4",
-                      "Es": "V4"
+                    "label": {
+                      "active": {
+                        "En": "V4",
+                        "Fr": "V4",
+                        "De": "V4",
+                        "Es": "V4"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -543,11 +583,13 @@
                       "max": "10",
                       "units": "A"
                     },
-                    "label_active": {
-                      "En": "A4",
-                      "Fr": "A4",
-                      "De": "A4",
-                      "Es": "A4"
+                    "label": {
+                      "active": {
+                        "En": "A4",
+                        "Fr": "A4",
+                        "De": "A4",
+                        "Es": "A4"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -563,11 +605,13 @@
                       "max": "1000",
                       "units": "W"
                     },
-                    "label_active": {
-                      "En": "W4",
-                      "Fr": "W4",
-                      "De": "W4",
-                      "Es": "W4"
+                    "label": {
+                      "active": {
+                        "En": "W4",
+                        "Fr": "W4",
+                        "De": "W4",
+                        "Es": "W4"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -588,11 +632,13 @@
                       "max": "100",
                       "units": "V"
                     },
-                    "label_active": {
-                      "En": "SET V",
-                      "Fr": "SET V",
-                      "De": "SET V",
-                      "Es": "SET V"
+                    "label": {
+                      "active": {
+                        "En": "SET V",
+                        "Fr": "SET V",
+                        "De": "SET V",
+                        "Es": "SET V"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -608,11 +654,13 @@
                       "max": "10",
                       "units": "A"
                     },
-                    "label_active": {
-                      "En": "LIM A",
-                      "Fr": "LIM A",
-                      "De": "LIM A",
-                      "Es": "LIM A"
+                    "label": {
+                      "active": {
+                        "En": "LIM A",
+                        "Fr": "LIM A",
+                        "De": "LIM A",
+                        "Es": "LIM A"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -623,17 +671,19 @@
                   },
                   "Enable_4": {
                     "type": "_GuiButtonToggle",
-                    "label_active": {
-                      "En": "CH4 ON",
-                      "Fr": "CH 4",
-                      "De": "CH 4",
-                      "Es": "CH 4"
-                    },
-                    "label_inactive": {
-                      "En": "CH4 OFF",
-                      "Fr": "CH 4",
-                      "De": "CH 4",
-                      "Es": "CH 4"
+                    "label": {
+                      "active": {
+                        "En": "CH4 ON",
+                        "Fr": "CH 4",
+                        "De": "CH 4",
+                        "Es": "CH 4"
+                      },
+                      "inactive": {
+                        "En": "CH4 OFF",
+                        "Fr": "CH 4",
+                        "De": "CH 4",
+                        "Es": "CH 4"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {

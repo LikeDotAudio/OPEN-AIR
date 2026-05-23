@@ -130,11 +130,13 @@
             "fields": {
               "AM_State_ON": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "AM ON",
-                  "Fr": "AM ON",
-                  "De": "AM EIN",
-                  "Es": "AM ENC"
+                "label": {
+                  "inactive": {
+                    "En": "AM ON",
+                    "Fr": "AM ON",
+                    "De": "AM EIN",
+                    "Es": "AM ENC"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
@@ -163,11 +165,13 @@
               },
               "AM_State_OFF": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "AM OFF",
-                  "Fr": "AM OFF",
-                  "De": "AM AUS",
-                  "Es": "AM DES"
+                "label": {
+                  "inactive": {
+                    "En": "AM OFF",
+                    "Fr": "AM OFF",
+                    "De": "AM AUS",
+                    "Es": "AM DES"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
@@ -196,11 +200,13 @@
               },
               "FM_State_ON": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "FM ON",
-                  "Fr": "FM ACTIVÉE",
-                  "De": "FM AN",
-                  "Es": "FM ACTIVADO"
+                "label": {
+                  "inactive": {
+                    "En": "FM ON",
+                    "Fr": "FM ACTIVÉE",
+                    "De": "FM AN",
+                    "Es": "FM ACTIVADO"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
@@ -229,11 +235,13 @@
               },
               "FM_State_OFF": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "FM OFF",
-                  "Fr": "FM OFF",
-                  "De": "FM OFF",
-                  "Es": "FM OFF"
+                "label": {
+                  "inactive": {
+                    "En": "FM OFF",
+                    "Fr": "FM OFF",
+                    "De": "FM OFF",
+                    "Es": "FM OFF"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {

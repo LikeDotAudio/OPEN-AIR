@@ -48,10 +48,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Large Classic",
-              "Fr": "Large Classique",
-              "De": "Large Klassisch",
-              "Es": "Large Clásico"
+              "active": {
+                "En": "Large Classic",
+                "Fr": "Large Classique",
+                "De": "Large Klassisch",
+                "Es": "Large Clásico"
+              }
             },
             "geometry": {
               "width": 300,
@@ -91,12 +93,6 @@
                   "sig_fig": 3
                 }
               ]
-            },
-            "label_active": {
-              "En": "Large Classic",
-              "Fr": "Large Classique",
-              "De": "Large Klassisch",
-              "Es": "Large Clásico"
             },
             "width": 300,
             "height": 300,
@@ -139,10 +135,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Medium Blue",
-              "Fr": "Moyen Blue",
-              "De": "Mittel Blue",
-              "Es": "Medio Blue"
+              "active": {
+                "En": "Medium Blue",
+                "Fr": "Moyen Blue",
+                "De": "Mittel Blue",
+                "Es": "Medio Blue"
+              }
             },
             "geometry": {
               "width": 220,
@@ -174,12 +172,6 @@
                   "color": "#33A1FD"
                 }
               ]
-            },
-            "label_active": {
-              "En": "Medium Blue",
-              "Fr": "Moyen Blue",
-              "De": "Mittel Blue",
-              "Es": "Medio Blue"
             },
             "width": 220,
             "height": 220,
@@ -223,10 +215,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Small Gold",
-              "Fr": "Small Gold",
-              "De": "Small Gold",
-              "Es": "Small Gold"
+              "active": {
+                "En": "Small Gold",
+                "Fr": "Small Gold",
+                "De": "Small Gold",
+                "Es": "Small Gold"
+              }
             },
             "geometry": {
               "width": 150,
@@ -256,12 +250,6 @@
                   "size": 8
                 }
               ]
-            },
-            "label_active": {
-              "En": "Small Gold",
-              "Fr": "Small Gold",
-              "De": "Small Gold",
-              "Es": "Small Gold"
             },
             "width": 150,
             "height": 150,
@@ -304,10 +292,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Ruby Red",
-              "Fr": "Ruby Red",
-              "De": "Ruby Red",
-              "Es": "Ruby Red"
+              "active": {
+                "En": "Ruby Red",
+                "Fr": "Ruby Red",
+                "De": "Ruby Red",
+                "Es": "Ruby Red"
+              }
             },
             "geometry": {
               "width": 220,
@@ -339,12 +329,6 @@
                   "color": "red"
                 }
               ]
-            },
-            "label_active": {
-              "En": "Ruby Red",
-              "Fr": "Ruby Red",
-              "De": "Ruby Red",
-              "Es": "Ruby Red"
             },
             "width": 220,
             "height": 220,
@@ -388,10 +372,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Emerald Flat",
-              "Fr": "Emerald Flat",
-              "De": "Emerald Flat",
-              "Es": "Emerald Flat"
+              "active": {
+                "En": "Emerald Flat",
+                "Fr": "Emerald Flat",
+                "De": "Emerald Flat",
+                "Es": "Emerald Flat"
+              }
             },
             "geometry": {
               "width": 220,
@@ -423,12 +409,6 @@
                   "font": "Arial"
                 }
               ]
-            },
-            "label_active": {
-              "En": "Emerald Flat",
-              "Fr": "Emerald Flat",
-              "De": "Emerald Flat",
-              "Es": "Emerald Flat"
             },
             "width": 220,
             "height": 220,
@@ -472,10 +452,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Sapphire Deep",
-              "Fr": "Sapphire Deep",
-              "De": "Sapphire Deep",
-              "Es": "Sapphire Deep"
+              "active": {
+                "En": "Sapphire Deep",
+                "Fr": "Sapphire Deep",
+                "De": "Sapphire Deep",
+                "Es": "Sapphire Deep"
+              }
             },
             "geometry": {
               "width": 220,
@@ -507,12 +489,6 @@
                   "color": "#FFFFFF"
                 }
               ]
-            },
-            "label_active": {
-              "En": "Sapphire Deep",
-              "Fr": "Sapphire Deep",
-              "De": "Sapphire Deep",
-              "Es": "Sapphire Deep"
             },
             "width": 220,
             "height": 220,
@@ -556,10 +532,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Onyx Stealth",
-              "Fr": "Onyx Stealth",
-              "De": "Onyx Stealth",
-              "Es": "Onyx Stealth"
+              "active": {
+                "En": "Onyx Stealth",
+                "Fr": "Onyx Stealth",
+                "De": "Onyx Stealth",
+                "Es": "Onyx Stealth"
+              }
             },
             "geometry": {
               "width": 220,
@@ -591,12 +569,6 @@
                   "color": "#444"
                 }
               ]
-            },
-            "label_active": {
-              "En": "Onyx Stealth",
-              "Fr": "Onyx Stealth",
-              "De": "Onyx Stealth",
-              "Es": "Onyx Stealth"
             },
             "width": 220,
             "height": 220,
@@ -640,10 +612,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Pearl White",
-              "Fr": "Pearl White",
-              "De": "Pearl White",
-              "Es": "Pearl White"
+              "active": {
+                "En": "Pearl White",
+                "Fr": "Pearl White",
+                "De": "Pearl White",
+                "Es": "Pearl White"
+              }
             },
             "geometry": {
               "width": 220,
@@ -675,12 +649,6 @@
                   "color": "#999"
                 }
               ]
-            },
-            "label_active": {
-              "En": "Pearl White",
-              "Fr": "Pearl White",
-              "De": "Pearl White",
-              "Es": "Pearl White"
             },
             "width": 220,
             "height": 220,
@@ -724,10 +692,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Amethyst",
-              "Fr": "Amethyst",
-              "De": "Amethyst",
-              "Es": "Amethyst"
+              "active": {
+                "En": "Amethyst",
+                "Fr": "Amethyst",
+                "De": "Amethyst",
+                "Es": "Amethyst"
+              }
             },
             "geometry": {
               "width": 220,
@@ -759,12 +729,6 @@
                   "color": "#E6E6FA"
                 }
               ]
-            },
-            "label_active": {
-              "En": "Amethyst",
-              "Fr": "Amethyst",
-              "De": "Amethyst",
-              "Es": "Amethyst"
             },
             "width": 220,
             "height": 220,

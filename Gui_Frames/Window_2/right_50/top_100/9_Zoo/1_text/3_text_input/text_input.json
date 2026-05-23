@@ -13,11 +13,13 @@
     "blocks": {
       "elements1": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Username",
-          "Fr": "Username",
-          "De": "Username",
-          "Es": "Username"
+        "label": {
+          "active": {
+            "En": "Username",
+            "Fr": "Username",
+            "De": "Username",
+            "Es": "Username"
+          }
         },
         "fields": {
           "examplefields": {
@@ -48,11 +50,13 @@
       },
       "elements2": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Search",
-          "Fr": "Search",
-          "De": "Search",
-          "Es": "Search"
+        "label": {
+          "active": {
+            "En": "Search",
+            "Fr": "Search",
+            "De": "Search",
+            "Es": "Search"
+          }
         },
         "fields": {
           "examplefields": {
@@ -78,11 +82,13 @@
       },
       "elements3": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "File Path",
-          "Fr": "File Path",
-          "De": "File Path",
-          "Es": "File Path"
+        "label": {
+          "active": {
+            "En": "File Path",
+            "Fr": "File Path",
+            "De": "File Path",
+            "Es": "File Path"
+          }
         },
         "fields": {
           "examplefields": {
@@ -108,11 +114,13 @@
       },
       "elements4": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "ID",
-          "Fr": "ID",
-          "De": "ID",
-          "Es": "ID"
+        "label": {
+          "active": {
+            "En": "ID",
+            "Fr": "ID",
+            "De": "ID",
+            "Es": "ID"
+          }
         },
         "fields": {
           "examplefields": {
@@ -138,11 +146,13 @@
       },
       "elements5": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Description",
-          "Fr": "Description",
-          "De": "Beschreibung",
-          "Es": "Descripción"
+        "label": {
+          "active": {
+            "En": "Description",
+            "Fr": "Description",
+            "De": "Beschreibung",
+            "Es": "Descripción"
+          }
         },
         "fields": {
           "examplefields": {

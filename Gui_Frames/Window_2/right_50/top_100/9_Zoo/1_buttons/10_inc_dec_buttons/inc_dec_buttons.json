@@ -13,11 +13,13 @@
     "blocks": {
       "elements1": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Count:",
-          "Fr": "Count:",
-          "De": "Count:",
-          "Es": "Count:"
+        "label": {
+          "active": {
+            "En": "Count:",
+            "Fr": "Count:",
+            "De": "Count:",
+            "Es": "Count:"
+          }
         },
         "fields": {
           "examplefields": {
@@ -43,11 +45,13 @@
       },
       "elements2": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Volume:",
-          "Fr": "Volume:",
-          "De": "Lautstärke:",
-          "Es": "Volumen:"
+        "label": {
+          "active": {
+            "En": "Volume:",
+            "Fr": "Volume:",
+            "De": "Lautstärke:",
+            "Es": "Volumen:"
+          }
         },
         "fields": {
           "examplefields": {
@@ -73,11 +77,13 @@
       },
       "elements3": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Fine Tune:",
-          "Fr": "Fine Tune:",
-          "De": "Fine Tune:",
-          "Es": "Fine Tune:"
+        "label": {
+          "active": {
+            "En": "Fine Tune:",
+            "Fr": "Fine Tune:",
+            "De": "Fine Tune:",
+            "Es": "Fine Tune:"
+          }
         },
         "fields": {
           "examplefields": {
@@ -103,11 +109,13 @@
       },
       "elements4": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Channel:",
-          "Fr": "Canal:",
-          "De": "Kanal:",
-          "Es": "Canal:"
+        "label": {
+          "active": {
+            "En": "Channel:",
+            "Fr": "Canal:",
+            "De": "Kanal:",
+            "Es": "Canal:"
+          }
         },
         "fields": {
           "examplefields": {
@@ -133,11 +141,13 @@
       },
       "elements5": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Brightness:",
-          "Fr": "Brightness:",
-          "De": "Brightness:",
-          "Es": "Brightness:"
+        "label": {
+          "active": {
+            "En": "Brightness:",
+            "Fr": "Brightness:",
+            "De": "Brightness:",
+            "Es": "Brightness:"
+          }
         },
         "fields": {
           "examplefields": {

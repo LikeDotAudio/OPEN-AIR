@@ -1,7 +1,9 @@
 {
   "data_radar_Example": {
     "type": "_Radar",
-    "label_active": "Radar Eye 01",
+    "label": {
+      "active": "Radar Eye 01"
+    },
     "app_settings": {
       "title": "Radar Eye v1.0",
       "window_size": [

@@ -35,17 +35,19 @@
             "fields": {
               "Master_Log_Switch": {
                 "type": "_TrapezoidButton",
-                "label_active": {
-                  "En": "💾 LOGGING ACTIVE 💾",
-                  "Fr": "💾 LOGGING ACTIVE 💾",
-                  "De": "💾 LOGGING ACTIVE 💾",
-                  "Es": "💾 LOGGING ACTIVE 💾"
-                },
-                "label_inactive": {
-                  "En": "START LOGGING",
-                  "Fr": "START LOGGING",
-                  "De": "START LOGGING",
-                  "Es": "START LOGGING"
+                "label": {
+                  "active": {
+                    "En": "💾 LOGGING ACTIVE 💾",
+                    "Fr": "💾 LOGGING ACTIVE 💾",
+                    "De": "💾 LOGGING ACTIVE 💾",
+                    "Es": "💾 LOGGING ACTIVE 💾"
+                  },
+                  "inactive": {
+                    "En": "START LOGGING",
+                    "Fr": "START LOGGING",
+                    "De": "START LOGGING",
+                    "Es": "START LOGGING"
+                  }
                 },
                 "state_default": false,
                 "message_details": {
@@ -97,11 +99,13 @@
                       "max": "100",
                       "units": "V"
                     },
-                    "label_active": {
-                      "En": "V1",
-                      "Fr": "V1",
-                      "De": "V1",
-                      "Es": "V1"
+                    "label": {
+                      "active": {
+                        "En": "V1",
+                        "Fr": "V1",
+                        "De": "V1",
+                        "Es": "V1"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -117,11 +121,13 @@
                       "max": "10",
                       "units": "A"
                     },
-                    "label_active": {
-                      "En": "A1",
-                      "Fr": "A1",
-                      "De": "A1",
-                      "Es": "A1"
+                    "label": {
+                      "active": {
+                        "En": "A1",
+                        "Fr": "A1",
+                        "De": "A1",
+                        "Es": "A1"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -137,11 +143,13 @@
                       "max": "1000",
                       "units": "W"
                     },
-                    "label_active": {
-                      "En": "W1",
-                      "Fr": "W1",
-                      "De": "W1",
-                      "Es": "W1"
+                    "label": {
+                      "active": {
+                        "En": "W1",
+                        "Fr": "W1",
+                        "De": "W1",
+                        "Es": "W1"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -154,11 +162,13 @@
               },
               "Graph_1": {
                 "type": "_GuiGraph",
-                "label_active": {
-                  "En": "Stability 1",
-                  "Fr": "Stability 1",
-                  "De": "Stability 1",
-                  "Es": "Stability 1"
+                "label": {
+                  "active": {
+                    "En": "Stability 1",
+                    "Fr": "Stability 1",
+                    "De": "Stability 1",
+                    "Es": "Stability 1"
+                  }
                 },
                 "height": 100,
                 "message_details": {
@@ -189,11 +199,13 @@
                       "max": "100",
                       "units": "V"
                     },
-                    "label_active": {
-                      "En": "V2",
-                      "Fr": "V2",
-                      "De": "V2",
-                      "Es": "V2"
+                    "label": {
+                      "active": {
+                        "En": "V2",
+                        "Fr": "V2",
+                        "De": "V2",
+                        "Es": "V2"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -209,11 +221,13 @@
                       "max": "10",
                       "units": "A"
                     },
-                    "label_active": {
-                      "En": "A2",
-                      "Fr": "A2",
-                      "De": "A2",
-                      "Es": "A2"
+                    "label": {
+                      "active": {
+                        "En": "A2",
+                        "Fr": "A2",
+                        "De": "A2",
+                        "Es": "A2"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -229,11 +243,13 @@
                       "max": "1000",
                       "units": "W"
                     },
-                    "label_active": {
-                      "En": "W2",
-                      "Fr": "W2",
-                      "De": "W2",
-                      "Es": "W2"
+                    "label": {
+                      "active": {
+                        "En": "W2",
+                        "Fr": "W2",
+                        "De": "W2",
+                        "Es": "W2"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -246,11 +262,13 @@
               },
               "Graph_2": {
                 "type": "_GuiGraph",
-                "label_active": {
-                  "En": "Stability 2",
-                  "Fr": "Stability 2",
-                  "De": "Stability 2",
-                  "Es": "Stability 2"
+                "label": {
+                  "active": {
+                    "En": "Stability 2",
+                    "Fr": "Stability 2",
+                    "De": "Stability 2",
+                    "Es": "Stability 2"
+                  }
                 },
                 "height": 100,
                 "message_details": {
@@ -281,11 +299,13 @@
                       "max": "100",
                       "units": "V"
                     },
-                    "label_active": {
-                      "En": "V3",
-                      "Fr": "V3",
-                      "De": "V3",
-                      "Es": "V3"
+                    "label": {
+                      "active": {
+                        "En": "V3",
+                        "Fr": "V3",
+                        "De": "V3",
+                        "Es": "V3"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -301,11 +321,13 @@
                       "max": "10",
                       "units": "A"
                     },
-                    "label_active": {
-                      "En": "A3",
-                      "Fr": "A3",
-                      "De": "A3",
-                      "Es": "A3"
+                    "label": {
+                      "active": {
+                        "En": "A3",
+                        "Fr": "A3",
+                        "De": "A3",
+                        "Es": "A3"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -321,11 +343,13 @@
                       "max": "1000",
                       "units": "W"
                     },
-                    "label_active": {
-                      "En": "W3",
-                      "Fr": "W3",
-                      "De": "W3",
-                      "Es": "W3"
+                    "label": {
+                      "active": {
+                        "En": "W3",
+                        "Fr": "W3",
+                        "De": "W3",
+                        "Es": "W3"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -338,11 +362,13 @@
               },
               "Graph_3": {
                 "type": "_GuiGraph",
-                "label_active": {
-                  "En": "Stability 3",
-                  "Fr": "Stability 3",
-                  "De": "Stability 3",
-                  "Es": "Stability 3"
+                "label": {
+                  "active": {
+                    "En": "Stability 3",
+                    "Fr": "Stability 3",
+                    "De": "Stability 3",
+                    "Es": "Stability 3"
+                  }
                 },
                 "height": 100,
                 "message_details": {
@@ -373,11 +399,13 @@
                       "max": "100",
                       "units": "V"
                     },
-                    "label_active": {
-                      "En": "V4",
-                      "Fr": "V4",
-                      "De": "V4",
-                      "Es": "V4"
+                    "label": {
+                      "active": {
+                        "En": "V4",
+                        "Fr": "V4",
+                        "De": "V4",
+                        "Es": "V4"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -393,11 +421,13 @@
                       "max": "10",
                       "units": "A"
                     },
-                    "label_active": {
-                      "En": "A4",
-                      "Fr": "A4",
-                      "De": "A4",
-                      "Es": "A4"
+                    "label": {
+                      "active": {
+                        "En": "A4",
+                        "Fr": "A4",
+                        "De": "A4",
+                        "Es": "A4"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -413,11 +443,13 @@
                       "max": "1000",
                       "units": "W"
                     },
-                    "label_active": {
-                      "En": "W4",
-                      "Fr": "W4",
-                      "De": "W4",
-                      "Es": "W4"
+                    "label": {
+                      "active": {
+                        "En": "W4",
+                        "Fr": "W4",
+                        "De": "W4",
+                        "Es": "W4"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -430,11 +462,13 @@
               },
               "Graph_4": {
                 "type": "_GuiGraph",
-                "label_active": {
-                  "En": "Stability 4",
-                  "Fr": "Stability 4",
-                  "De": "Stability 4",
-                  "Es": "Stability 4"
+                "label": {
+                  "active": {
+                    "En": "Stability 4",
+                    "Fr": "Stability 4",
+                    "De": "Stability 4",
+                    "Es": "Stability 4"
+                  }
                 },
                 "height": 100,
                 "message_details": {
@@ -465,11 +499,13 @@
                       "max": "100",
                       "units": "V"
                     },
-                    "label_active": {
-                      "En": "V5",
-                      "Fr": "V5",
-                      "De": "V5",
-                      "Es": "V5"
+                    "label": {
+                      "active": {
+                        "En": "V5",
+                        "Fr": "V5",
+                        "De": "V5",
+                        "Es": "V5"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -485,11 +521,13 @@
                       "max": "10",
                       "units": "A"
                     },
-                    "label_active": {
-                      "En": "A5",
-                      "Fr": "A5",
-                      "De": "A5",
-                      "Es": "A5"
+                    "label": {
+                      "active": {
+                        "En": "A5",
+                        "Fr": "A5",
+                        "De": "A5",
+                        "Es": "A5"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -505,11 +543,13 @@
                       "max": "1000",
                       "units": "W"
                     },
-                    "label_active": {
-                      "En": "W5",
-                      "Fr": "W5",
-                      "De": "W5",
-                      "Es": "W5"
+                    "label": {
+                      "active": {
+                        "En": "W5",
+                        "Fr": "W5",
+                        "De": "W5",
+                        "Es": "W5"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -522,11 +562,13 @@
               },
               "Graph_5": {
                 "type": "_GuiGraph",
-                "label_active": {
-                  "En": "Stability 5",
-                  "Fr": "Stability 5",
-                  "De": "Stability 5",
-                  "Es": "Stability 5"
+                "label": {
+                  "active": {
+                    "En": "Stability 5",
+                    "Fr": "Stability 5",
+                    "De": "Stability 5",
+                    "Es": "Stability 5"
+                  }
                 },
                 "height": 100,
                 "message_details": {
@@ -557,11 +599,13 @@
                       "max": "100",
                       "units": "V"
                     },
-                    "label_active": {
-                      "En": "V6",
-                      "Fr": "V6",
-                      "De": "V6",
-                      "Es": "V6"
+                    "label": {
+                      "active": {
+                        "En": "V6",
+                        "Fr": "V6",
+                        "De": "V6",
+                        "Es": "V6"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -577,11 +621,13 @@
                       "max": "10",
                       "units": "A"
                     },
-                    "label_active": {
-                      "En": "A6",
-                      "Fr": "A6",
-                      "De": "A6",
-                      "Es": "A6"
+                    "label": {
+                      "active": {
+                        "En": "A6",
+                        "Fr": "A6",
+                        "De": "A6",
+                        "Es": "A6"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -597,11 +643,13 @@
                       "max": "1000",
                       "units": "W"
                     },
-                    "label_active": {
-                      "En": "W6",
-                      "Fr": "W6",
-                      "De": "W6",
-                      "Es": "W6"
+                    "label": {
+                      "active": {
+                        "En": "W6",
+                        "Fr": "W6",
+                        "De": "W6",
+                        "Es": "W6"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -614,11 +662,13 @@
               },
               "Graph_6": {
                 "type": "_GuiGraph",
-                "label_active": {
-                  "En": "Stability 6",
-                  "Fr": "Stabilité 6",
-                  "De": "Stabilität 6",
-                  "Es": "Estabilidad 6"
+                "label": {
+                  "active": {
+                    "En": "Stability 6",
+                    "Fr": "Stabilité 6",
+                    "De": "Stabilität 6",
+                    "Es": "Estabilidad 6"
+                  }
                 },
                 "height": 100,
                 "message_details": {
@@ -649,11 +699,13 @@
                       "max": "100",
                       "units": "V"
                     },
-                    "label_active": {
-                      "En": "V7",
-                      "Fr": "V7",
-                      "De": "V7",
-                      "Es": "V7"
+                    "label": {
+                      "active": {
+                        "En": "V7",
+                        "Fr": "V7",
+                        "De": "V7",
+                        "Es": "V7"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -669,11 +721,13 @@
                       "max": "10",
                       "units": "A"
                     },
-                    "label_active": {
-                      "En": "A7",
-                      "Fr": "A7",
-                      "De": "A7",
-                      "Es": "A7"
+                    "label": {
+                      "active": {
+                        "En": "A7",
+                        "Fr": "A7",
+                        "De": "A7",
+                        "Es": "A7"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -689,11 +743,13 @@
                       "max": "1000",
                       "units": "W"
                     },
-                    "label_active": {
-                      "En": "W7",
-                      "Fr": "W7",
-                      "De": "W7",
-                      "Es": "W7"
+                    "label": {
+                      "active": {
+                        "En": "W7",
+                        "Fr": "W7",
+                        "De": "W7",
+                        "Es": "W7"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -706,11 +762,13 @@
               },
               "Graph_7": {
                 "type": "_GuiGraph",
-                "label_active": {
-                  "En": "Stability 7",
-                  "Fr": "Stability 7",
-                  "De": "Stability 7",
-                  "Es": "Stability 7"
+                "label": {
+                  "active": {
+                    "En": "Stability 7",
+                    "Fr": "Stability 7",
+                    "De": "Stability 7",
+                    "Es": "Stability 7"
+                  }
                 },
                 "height": 100,
                 "message_details": {
@@ -741,11 +799,13 @@
                       "max": "100",
                       "units": "V"
                     },
-                    "label_active": {
-                      "En": "V8",
-                      "Fr": "V8",
-                      "De": "V8",
-                      "Es": "V8"
+                    "label": {
+                      "active": {
+                        "En": "V8",
+                        "Fr": "V8",
+                        "De": "V8",
+                        "Es": "V8"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -761,11 +821,13 @@
                       "max": "10",
                       "units": "A"
                     },
-                    "label_active": {
-                      "En": "A8",
-                      "Fr": "A8",
-                      "De": "A8",
-                      "Es": "A8"
+                    "label": {
+                      "active": {
+                        "En": "A8",
+                        "Fr": "A8",
+                        "De": "A8",
+                        "Es": "A8"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -781,11 +843,13 @@
                       "max": "1000",
                       "units": "W"
                     },
-                    "label_active": {
-                      "En": "W8",
-                      "Fr": "W8",
-                      "De": "W8",
-                      "Es": "W8"
+                    "label": {
+                      "active": {
+                        "En": "W8",
+                        "Fr": "W8",
+                        "De": "W8",
+                        "Es": "W8"
+                      }
                     },
                     "message_details": {
                       "PSU_MODEL": {
@@ -798,11 +862,13 @@
               },
               "Graph_8": {
                 "type": "_GuiGraph",
-                "label_active": {
-                  "En": "Stability 8",
-                  "Fr": "Stability 8",
-                  "De": "Stability 8",
-                  "Es": "Stability 8"
+                "label": {
+                  "active": {
+                    "En": "Stability 8",
+                    "Fr": "Stability 8",
+                    "De": "Stability 8",
+                    "Es": "Stability 8"
+                  }
                 },
                 "height": 100,
                 "message_details": {

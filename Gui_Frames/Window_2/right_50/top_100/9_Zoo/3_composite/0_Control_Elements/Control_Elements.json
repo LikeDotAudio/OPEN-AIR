@@ -118,20 +118,24 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": {
-                    "En": "ON",
-                    "Fr": "ON",
-                    "De": "ON",
-                    "Es": "ON"
+                  "label": {
+                    "active": {
+                      "En": "ON",
+                      "Fr": "ON",
+                      "De": "ON",
+                      "Es": "ON"
+                    }
                   },
                   "selected": false
                 },
                 "OFF": {
-                  "label_inactive": {
-                    "En": "OFF",
-                    "Fr": "OFF",
-                    "De": "OFF",
-                    "Es": "OFF"
+                  "label": {
+                    "inactive": {
+                      "En": "OFF",
+                      "Fr": "OFF",
+                      "De": "OFF",
+                      "Es": "OFF"
+                    }
                   },
                   "selected": true
                 }
@@ -191,178 +195,200 @@
             "type": "_GuiDropDownOption",
             "AES70": "OcaSwitch",
             "handler": "set_value",
-            "label_active": {
-              "En": "Dropdown with 10 Choices",
-              "Fr": "Dropdown with 10 Choices",
-              "De": "Dropdown with 10 Choices",
-              "Es": "Dropdown with 10 Choices"
+            "label": {
+              "active": {
+                "En": "Dropdown with 10 Choices",
+                "Fr": "Dropdown with 10 Choices",
+                "De": "Dropdown with 10 Choices",
+                "Es": "Dropdown with 10 Choices"
+              }
             },
             "options": {
               "1": {
-                "label_active": {
-                  "En": "Choice 1",
-                  "Fr": "Choice 1",
-                  "De": "Choice 1",
-                  "Es": "Choice 1"
-                },
-                "label_inactive": {
-                  "En": "Choice 1",
-                  "Fr": "Choice 1",
-                  "De": "Choice 1",
-                  "Es": "Choice 1"
+                "label": {
+                  "active": {
+                    "En": "Choice 1",
+                    "Fr": "Choice 1",
+                    "De": "Choice 1",
+                    "Es": "Choice 1"
+                  },
+                  "inactive": {
+                    "En": "Choice 1",
+                    "Fr": "Choice 1",
+                    "De": "Choice 1",
+                    "Es": "Choice 1"
+                  }
                 },
                 "value": "1",
                 "units": "text",
                 "selected": false
               },
               "2": {
-                "label_active": {
-                  "En": "Choice 2",
-                  "Fr": "Choice 2",
-                  "De": "Choice 2",
-                  "Es": "Choice 2"
-                },
-                "label_inactive": {
-                  "En": "Choice 2",
-                  "Fr": "Choice 2",
-                  "De": "Choice 2",
-                  "Es": "Choice 2"
+                "label": {
+                  "active": {
+                    "En": "Choice 2",
+                    "Fr": "Choice 2",
+                    "De": "Choice 2",
+                    "Es": "Choice 2"
+                  },
+                  "inactive": {
+                    "En": "Choice 2",
+                    "Fr": "Choice 2",
+                    "De": "Choice 2",
+                    "Es": "Choice 2"
+                  }
                 },
                 "value": "2",
                 "units": "text",
                 "selected": false
               },
               "3": {
-                "label_active": {
-                  "En": "Choice 3",
-                  "Fr": "Choice 3",
-                  "De": "Choice 3",
-                  "Es": "Choice 3"
-                },
-                "label_inactive": {
-                  "En": "Choice 3",
-                  "Fr": "Choice 3",
-                  "De": "Choice 3",
-                  "Es": "Choice 3"
+                "label": {
+                  "active": {
+                    "En": "Choice 3",
+                    "Fr": "Choice 3",
+                    "De": "Choice 3",
+                    "Es": "Choice 3"
+                  },
+                  "inactive": {
+                    "En": "Choice 3",
+                    "Fr": "Choice 3",
+                    "De": "Choice 3",
+                    "Es": "Choice 3"
+                  }
                 },
                 "value": "3",
                 "units": "text",
                 "selected": false
               },
               "4": {
-                "label_active": {
-                  "En": "Choice 4",
-                  "Fr": "Choice 4",
-                  "De": "Choice 4",
-                  "Es": "Choice 4"
-                },
-                "label_inactive": {
-                  "En": "Choice 4",
-                  "Fr": "Choice 4",
-                  "De": "Choice 4",
-                  "Es": "Choice 4"
+                "label": {
+                  "active": {
+                    "En": "Choice 4",
+                    "Fr": "Choice 4",
+                    "De": "Choice 4",
+                    "Es": "Choice 4"
+                  },
+                  "inactive": {
+                    "En": "Choice 4",
+                    "Fr": "Choice 4",
+                    "De": "Choice 4",
+                    "Es": "Choice 4"
+                  }
                 },
                 "value": "4",
                 "units": "text",
                 "selected": false
               },
               "5": {
-                "label_active": {
-                  "En": "Choice 5",
-                  "Fr": "Choice 5",
-                  "De": "Choice 5",
-                  "Es": "Choice 5"
-                },
-                "label_inactive": {
-                  "En": "Choice 5",
-                  "Fr": "Choice 5",
-                  "De": "Choice 5",
-                  "Es": "Choice 5"
+                "label": {
+                  "active": {
+                    "En": "Choice 5",
+                    "Fr": "Choice 5",
+                    "De": "Choice 5",
+                    "Es": "Choice 5"
+                  },
+                  "inactive": {
+                    "En": "Choice 5",
+                    "Fr": "Choice 5",
+                    "De": "Choice 5",
+                    "Es": "Choice 5"
+                  }
                 },
                 "value": "5",
                 "units": "text",
                 "selected": false
               },
               "6": {
-                "label_active": {
-                  "En": "Choice 6",
-                  "Fr": "Choice 6",
-                  "De": "Choice 6",
-                  "Es": "Choice 6"
-                },
-                "label_inactive": {
-                  "En": "Choice 6",
-                  "Fr": "Choice 6",
-                  "De": "Choice 6",
-                  "Es": "Choice 6"
+                "label": {
+                  "active": {
+                    "En": "Choice 6",
+                    "Fr": "Choice 6",
+                    "De": "Choice 6",
+                    "Es": "Choice 6"
+                  },
+                  "inactive": {
+                    "En": "Choice 6",
+                    "Fr": "Choice 6",
+                    "De": "Choice 6",
+                    "Es": "Choice 6"
+                  }
                 },
                 "value": "6",
                 "units": "text",
                 "selected": false
               },
               "7": {
-                "label_active": {
-                  "En": "Choice 7",
-                  "Fr": "Choice 7",
-                  "De": "Choice 7",
-                  "Es": "Choice 7"
-                },
-                "label_inactive": {
-                  "En": "Choice 7",
-                  "Fr": "Choice 7",
-                  "De": "Choice 7",
-                  "Es": "Choice 7"
+                "label": {
+                  "active": {
+                    "En": "Choice 7",
+                    "Fr": "Choice 7",
+                    "De": "Choice 7",
+                    "Es": "Choice 7"
+                  },
+                  "inactive": {
+                    "En": "Choice 7",
+                    "Fr": "Choice 7",
+                    "De": "Choice 7",
+                    "Es": "Choice 7"
+                  }
                 },
                 "value": "7",
                 "units": "text",
                 "selected": false
               },
               "8": {
-                "label_active": {
-                  "En": "Choice 8",
-                  "Fr": "Choice 8",
-                  "De": "Choice 8",
-                  "Es": "Choice 8"
-                },
-                "label_inactive": {
-                  "En": "Choice 8",
-                  "Fr": "Choice 8",
-                  "De": "Choice 8",
-                  "Es": "Choice 8"
+                "label": {
+                  "active": {
+                    "En": "Choice 8",
+                    "Fr": "Choice 8",
+                    "De": "Choice 8",
+                    "Es": "Choice 8"
+                  },
+                  "inactive": {
+                    "En": "Choice 8",
+                    "Fr": "Choice 8",
+                    "De": "Choice 8",
+                    "Es": "Choice 8"
+                  }
                 },
                 "value": "8",
                 "units": "text",
                 "selected": false
               },
               "9": {
-                "label_active": {
-                  "En": "Choice 9",
-                  "Fr": "Choice 9",
-                  "De": "Choice 9",
-                  "Es": "Choice 9"
-                },
-                "label_inactive": {
-                  "En": "Choice 9",
-                  "Fr": "Choice 9",
-                  "De": "Choice 9",
-                  "Es": "Choice 9"
+                "label": {
+                  "active": {
+                    "En": "Choice 9",
+                    "Fr": "Choice 9",
+                    "De": "Choice 9",
+                    "Es": "Choice 9"
+                  },
+                  "inactive": {
+                    "En": "Choice 9",
+                    "Fr": "Choice 9",
+                    "De": "Choice 9",
+                    "Es": "Choice 9"
+                  }
                 },
                 "value": "9",
                 "units": "text",
                 "selected": false
               },
               "10": {
-                "label_active": {
-                  "En": "Choice 10",
-                  "Fr": "Choice 10",
-                  "De": "Choice 10",
-                  "Es": "Choice 10"
-                },
-                "label_inactive": {
-                  "En": "Choice 10",
-                  "Fr": "Choice 10",
-                  "De": "Choice 10",
-                  "Es": "Choice 10"
+                "label": {
+                  "active": {
+                    "En": "Choice 10",
+                    "Fr": "Choice 10",
+                    "De": "Choice 10",
+                    "Es": "Choice 10"
+                  },
+                  "inactive": {
+                    "En": "Choice 10",
+                    "Fr": "Choice 10",
+                    "De": "Choice 10",
+                    "Es": "Choice 10"
+                  }
                 },
                 "value": "10",
                 "units": "text",
@@ -529,11 +555,13 @@
               "height": 50,
               "alpha": 0.9
             },
-            "label_active": {
-              "En": "Slider",
-              "Fr": "Slider",
-              "De": "Slider",
-              "Es": "Slider"
+            "label": {
+              "active": {
+                "En": "Slider",
+                "Fr": "Slider",
+                "De": "Slider",
+                "Es": "Slider"
+              }
             },
             "show_label": true,
             "notes": ""
@@ -585,93 +613,105 @@
             "type": "_GuiDropDownOption",
             "AES70": "OcaSwitch",
             "handler": "set_value",
-            "label_active": {
-              "En": "Dropdown - Numbers",
-              "Fr": "Dropdown - Numbers",
-              "De": "Dropdown - Numbers",
-              "Es": "Dropdown - Numbers"
+            "label": {
+              "active": {
+                "En": "Dropdown - Numbers",
+                "Fr": "Dropdown - Numbers",
+                "De": "Dropdown - Numbers",
+                "Es": "Dropdown - Numbers"
+              }
             },
             "options": {
               "1": {
-                "label_active": {
-                  "En": "10",
-                  "Fr": "10",
-                  "De": "10",
-                  "Es": "10"
-                },
-                "label_inactive": {
-                  "En": "10",
-                  "Fr": "10",
-                  "De": "10",
-                  "Es": "10"
+                "label": {
+                  "active": {
+                    "En": "10",
+                    "Fr": "10",
+                    "De": "10",
+                    "Es": "10"
+                  },
+                  "inactive": {
+                    "En": "10",
+                    "Fr": "10",
+                    "De": "10",
+                    "Es": "10"
+                  }
                 },
                 "value": "10",
                 "units": "num",
                 "selected": false
               },
               "2": {
-                "label_active": {
-                  "En": "20",
-                  "Fr": "20",
-                  "De": "20",
-                  "Es": "20"
-                },
-                "label_inactive": {
-                  "En": "20",
-                  "Fr": "20",
-                  "De": "20",
-                  "Es": "20"
+                "label": {
+                  "active": {
+                    "En": "20",
+                    "Fr": "20",
+                    "De": "20",
+                    "Es": "20"
+                  },
+                  "inactive": {
+                    "En": "20",
+                    "Fr": "20",
+                    "De": "20",
+                    "Es": "20"
+                  }
                 },
                 "value": "20",
                 "units": "num",
                 "selected": false
               },
               "3": {
-                "label_active": {
-                  "En": "30",
-                  "Fr": "30",
-                  "De": "30",
-                  "Es": "30"
-                },
-                "label_inactive": {
-                  "En": "30",
-                  "Fr": "30",
-                  "De": "30",
-                  "Es": "30"
+                "label": {
+                  "active": {
+                    "En": "30",
+                    "Fr": "30",
+                    "De": "30",
+                    "Es": "30"
+                  },
+                  "inactive": {
+                    "En": "30",
+                    "Fr": "30",
+                    "De": "30",
+                    "Es": "30"
+                  }
                 },
                 "value": "30",
                 "units": "num",
                 "selected": false
               },
               "4": {
-                "label_active": {
-                  "En": "40",
-                  "Fr": "40",
-                  "De": "40",
-                  "Es": "40"
-                },
-                "label_inactive": {
-                  "En": "40",
-                  "Fr": "40",
-                  "De": "40",
-                  "Es": "40"
+                "label": {
+                  "active": {
+                    "En": "40",
+                    "Fr": "40",
+                    "De": "40",
+                    "Es": "40"
+                  },
+                  "inactive": {
+                    "En": "40",
+                    "Fr": "40",
+                    "De": "40",
+                    "Es": "40"
+                  }
                 },
                 "value": "40",
                 "units": "num",
                 "selected": false
               },
               "5": {
-                "label_active": {
-                  "En": "50",
-                  "Fr": "50",
-                  "De": "50",
-                  "Es": "50"
-                },
-                "label_inactive": {
-                  "En": "50",
-                  "Fr": "50",
-                  "De": "50",
-                  "Es": "50"
+                "label": {
+                  "active": {
+                    "En": "50",
+                    "Fr": "50",
+                    "De": "50",
+                    "Es": "50"
+                  },
+                  "inactive": {
+                    "En": "50",
+                    "Fr": "50",
+                    "De": "50",
+                    "Es": "50"
+                  }
                 },
                 "value": "50",
                 "units": "num",
@@ -686,59 +726,67 @@
             },
             "AES70": "OcaSwitch",
             "handler": "set_value",
-            "label_active": {
-              "En": "Dropdown - Default Value",
-              "Fr": "Dropdown - Default Valeur",
-              "De": "Dropdown - Default Wert",
-              "Es": "Dropdown - Default Valor"
+            "label": {
+              "active": {
+                "En": "Dropdown - Default Value",
+                "Fr": "Dropdown - Default Valeur",
+                "De": "Dropdown - Default Wert",
+                "Es": "Dropdown - Default Valor"
+              }
             },
             "options": {
               "1": {
-                "label_active": {
-                  "En": "Apple",
-                  "Fr": "Apple",
-                  "De": "Apple",
-                  "Es": "Apple"
-                },
-                "label_inactive": {
-                  "En": "Apple",
-                  "Fr": "Apple",
-                  "De": "Apple",
-                  "Es": "Apple"
+                "label": {
+                  "active": {
+                    "En": "Apple",
+                    "Fr": "Apple",
+                    "De": "Apple",
+                    "Es": "Apple"
+                  },
+                  "inactive": {
+                    "En": "Apple",
+                    "Fr": "Apple",
+                    "De": "Apple",
+                    "Es": "Apple"
+                  }
                 },
                 "value": "1",
                 "units": "fruit",
                 "selected": false
               },
               "2": {
-                "label_active": {
-                  "En": "Banana",
-                  "Fr": "Banana",
-                  "De": "Banana",
-                  "Es": "Banana"
-                },
-                "label_inactive": {
-                  "En": "Banana",
-                  "Fr": "Banana",
-                  "De": "Banana",
-                  "Es": "Banana"
+                "label": {
+                  "active": {
+                    "En": "Banana",
+                    "Fr": "Banana",
+                    "De": "Banana",
+                    "Es": "Banana"
+                  },
+                  "inactive": {
+                    "En": "Banana",
+                    "Fr": "Banana",
+                    "De": "Banana",
+                    "Es": "Banana"
+                  }
                 },
                 "value": "2",
                 "units": "fruit",
                 "selected": true
               },
               "3": {
-                "label_active": {
-                  "En": "Cherry",
-                  "Fr": "Cherry",
-                  "De": "Cherry",
-                  "Es": "Cherry"
-                },
-                "label_inactive": {
-                  "En": "Cherry",
-                  "Fr": "Cherry",
-                  "De": "Cherry",
-                  "Es": "Cherry"
+                "label": {
+                  "active": {
+                    "En": "Cherry",
+                    "Fr": "Cherry",
+                    "De": "Cherry",
+                    "Es": "Cherry"
+                  },
+                  "inactive": {
+                    "En": "Cherry",
+                    "Fr": "Cherry",
+                    "De": "Cherry",
+                    "Es": "Cherry"
+                  }
                 },
                 "value": "3",
                 "units": "fruit",

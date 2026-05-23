@@ -23,7 +23,10 @@ in the property editor.
 {
   "checkbox_Example": {
     "type": "_SmartCheckbox",
-    "label": "Feature Enabled",
+    "label": {
+      "active": "Feature Enabled",
+      "inactive": "Feature Disabled"
+    },
     "notes": "Checkbox to enable/disable a specific feature.",
     "domain": {
       "primary": {
@@ -33,7 +36,6 @@ in the property editor.
     "interaction": {
       "is_read_only": false
     },
-    "label_inactive": "Feature Disabled",
     "layout": {
       "sticky": "ew",
       "padx": 5,

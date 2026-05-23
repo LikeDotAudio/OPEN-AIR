@@ -836,11 +836,13 @@
             "fields": {
               "Do_Math_ON": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "Math ON",
-                  "Fr": "Math ON",
-                  "De": "Math EIN",
-                  "Es": "Math ENC"
+                "label": {
+                  "inactive": {
+                    "En": "Math ON",
+                    "Fr": "Math ON",
+                    "De": "Math EIN",
+                    "Es": "Math ENC"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
@@ -870,11 +872,13 @@
               },
               "Do_Math_OFF": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "Math OFF",
-                  "Fr": "Math OFF",
-                  "De": "Math AUS",
-                  "Es": "Math DES"
+                "label": {
+                  "inactive": {
+                    "En": "Math OFF",
+                    "Fr": "Math OFF",
+                    "De": "Math AUS",
+                    "Es": "Math DES"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {

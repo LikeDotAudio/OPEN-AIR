@@ -51,10 +51,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Large Classic",
-              "Fr": "Large Classique",
-              "De": "Large Klassisch",
-              "Es": "Large Clásico"
+              "active": {
+                "En": "Large Classic",
+                "Fr": "Large Classique",
+                "De": "Large Klassisch",
+                "Es": "Large Clásico"
+              }
             },
             "geometry": {
               "width": 300,
@@ -95,12 +97,6 @@
                   "sig_fig": 3
                 }
               ]
-            },
-            "label_active": {
-              "En": "Large Classic",
-              "Fr": "Large Classique",
-              "De": "Large Klassisch",
-              "Es": "Large Clásico"
             },
             "width": 300,
             "height": 300,
@@ -147,10 +143,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Medium Silver",
-              "Fr": "Moyen Silver",
-              "De": "Mittel Silver",
-              "Es": "Medio Silver"
+              "active": {
+                "En": "Medium Silver",
+                "Fr": "Moyen Silver",
+                "De": "Mittel Silver",
+                "Es": "Medio Silver"
+              }
             },
             "geometry": {
               "width": 220,
@@ -181,12 +179,6 @@
                   "size": 10
                 }
               ]
-            },
-            "label_active": {
-              "En": "Medium Silver",
-              "Fr": "Moyen Silver",
-              "De": "Mittel Silver",
-              "Es": "Medio Silver"
             },
             "width": 220,
             "height": 220,
@@ -233,10 +225,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Small Bronze",
-              "Fr": "Small Bronze",
-              "De": "Small Bronze",
-              "Es": "Small Bronze"
+              "active": {
+                "En": "Small Bronze",
+                "Fr": "Small Bronze",
+                "De": "Small Bronze",
+                "Es": "Small Bronze"
+              }
             },
             "geometry": {
               "width": 150,
@@ -269,12 +263,6 @@
                   "color": "#cd7f32"
                 }
               ]
-            },
-            "label_active": {
-              "En": "Small Bronze",
-              "Fr": "Small Bronze",
-              "De": "Small Bronze",
-              "Es": "Small Bronze"
             },
             "width": 150,
             "height": 150,
@@ -319,10 +307,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Cobalt Blue",
-              "Fr": "Cobalt Blue",
-              "De": "Cobalt Blue",
-              "Es": "Cobalt Blue"
+              "active": {
+                "En": "Cobalt Blue",
+                "Fr": "Cobalt Blue",
+                "De": "Cobalt Blue",
+                "Es": "Cobalt Blue"
+              }
             },
             "geometry": {
               "width": 220,
@@ -354,12 +344,6 @@
                   "color": "#00FFFF"
                 }
               ]
-            },
-            "label_active": {
-              "En": "Cobalt Blue",
-              "Fr": "Cobalt Blue",
-              "De": "Cobalt Blue",
-              "Es": "Cobalt Blue"
             },
             "width": 220,
             "height": 220,
@@ -403,10 +387,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Amber Alert",
-              "Fr": "Amber Alert",
-              "De": "Amber Alert",
-              "Es": "Amber Alert"
+              "active": {
+                "En": "Amber Alert",
+                "Fr": "Amber Alert",
+                "De": "Amber Alert",
+                "Es": "Amber Alert"
+              }
             },
             "geometry": {
               "width": 220,
@@ -438,12 +424,6 @@
                   "color": "#FFBF00"
                 }
               ]
-            },
-            "label_active": {
-              "En": "Amber Alert",
-              "Fr": "Amber Alert",
-              "De": "Amber Alert",
-              "Es": "Amber Alert"
             },
             "width": 220,
             "height": 220,
@@ -487,10 +467,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Graphite Flat",
-              "Fr": "Graphite Flat",
-              "De": "Graphite Flat",
-              "Es": "Graphite Flat"
+              "active": {
+                "En": "Graphite Flat",
+                "Fr": "Graphite Flat",
+                "De": "Graphite Flat",
+                "Es": "Graphite Flat"
+              }
             },
             "geometry": {
               "width": 220,
@@ -522,12 +504,6 @@
                   "color": "#D3D3D3"
                 }
               ]
-            },
-            "label_active": {
-              "En": "Graphite Flat",
-              "Fr": "Graphite Flat",
-              "De": "Graphite Flat",
-              "Es": "Graphite Flat"
             },
             "width": 220,
             "height": 220,
@@ -571,10 +547,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Solar Flare",
-              "Fr": "Solar Flare",
-              "De": "Solar Flare",
-              "Es": "Solar Flare"
+              "active": {
+                "En": "Solar Flare",
+                "Fr": "Solar Flare",
+                "De": "Solar Flare",
+                "Es": "Solar Flare"
+              }
             },
             "geometry": {
               "width": 220,
@@ -606,12 +584,6 @@
                   "color": "#FFFF00"
                 }
               ]
-            },
-            "label_active": {
-              "En": "Solar Flare",
-              "Fr": "Solar Flare",
-              "De": "Solar Flare",
-              "Es": "Solar Flare"
             },
             "width": 220,
             "height": 220,
@@ -655,10 +627,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Arctic Ice",
-              "Fr": "Arctic Ice",
-              "De": "Arctic Ice",
-              "Es": "Arctic Ice"
+              "active": {
+                "En": "Arctic Ice",
+                "Fr": "Arctic Ice",
+                "De": "Arctic Ice",
+                "Es": "Arctic Ice"
+              }
             },
             "geometry": {
               "width": 220,
@@ -690,12 +664,6 @@
                   "color": "#00CED1"
                 }
               ]
-            },
-            "label_active": {
-              "En": "Arctic Ice",
-              "Fr": "Arctic Ice",
-              "De": "Arctic Ice",
-              "Es": "Arctic Ice"
             },
             "width": 220,
             "height": 220,
@@ -739,10 +707,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Steampunk",
-              "Fr": "Steampunk",
-              "De": "Steampunk",
-              "Es": "Steampunk"
+              "active": {
+                "En": "Steampunk",
+                "Fr": "Steampunk",
+                "De": "Steampunk",
+                "Es": "Steampunk"
+              }
             },
             "geometry": {
               "width": 220,
@@ -774,12 +744,6 @@
                   "color": "#8B0000"
                 }
               ]
-            },
-            "label_active": {
-              "En": "Steampunk",
-              "Fr": "Steampunk",
-              "De": "Steampunk",
-              "Es": "Steampunk"
             },
             "width": 220,
             "height": 220,

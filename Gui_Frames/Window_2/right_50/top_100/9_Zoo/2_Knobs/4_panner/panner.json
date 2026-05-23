@@ -1281,11 +1281,13 @@
       },
       "elements3": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Aux 2 Pan",
-          "Fr": "Auxiliairesiliaires 2 Panoramique",
-          "De": "Aux-Sends-Sends 2 Panorama",
-          "Es": "Auxiliaresiliares 2 Panorámico"
+        "label": {
+          "active": {
+            "En": "Aux 2 Pan",
+            "Fr": "Auxiliairesiliaires 2 Panoramique",
+            "De": "Aux-Sends-Sends 2 Panorama",
+            "Es": "Auxiliaresiliares 2 Panorámico"
+          }
         },
         "fields": {
           "examplefields": {
@@ -1983,11 +1985,13 @@
       },
       "elements5": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "FX Send",
-          "Fr": "FX Send",
-          "De": "FX Send",
-          "Es": "FX Send"
+        "label": {
+          "active": {
+            "En": "FX Send",
+            "Fr": "FX Send",
+            "De": "FX Send",
+            "Es": "FX Send"
+          }
         },
         "fields": {
           "examplefields": {

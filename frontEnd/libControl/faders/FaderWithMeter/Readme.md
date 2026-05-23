@@ -21,7 +21,9 @@ in the property editor.
 {
   "fader_bar_graph_Example": {
     "type": "_FaderWithBarGraph",
-    "label_active": "Standard",
+    "label": {
+      "active": "Standard"
+    },
     "value_min": -60.0,
     "value_max": 10.0,
     "value_default": -10.0,

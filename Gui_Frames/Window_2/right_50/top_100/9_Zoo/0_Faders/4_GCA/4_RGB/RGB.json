@@ -23,11 +23,13 @@
           "alpha": 0.9,
           "sticky": "nsew"
         },
-        "label_active": {
-          "En": "RGB Color Mixer",
-          "Fr": "RGB Color Mixer",
-          "De": "RGB Color Mixer",
-          "Es": "RGB Color Mixer"
+        "label": {
+          "active": {
+            "En": "RGB Color Mixer",
+            "Fr": "RGB Color Mixer",
+            "De": "RGB Color Mixer",
+            "Es": "RGB Color Mixer"
+          }
         },
         "is_rgb": true,
         "num_channels": 3,

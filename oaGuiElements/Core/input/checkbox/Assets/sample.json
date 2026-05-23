@@ -1,7 +1,10 @@
 {
   "checkbox_Example": {
     "type": "_SmartCheckbox",
-    "label": "Feature Enabled",
+    "label": {
+      "active": "Feature Enabled",
+      "inactive": "Feature Disabled"
+    },
     "notes": "Checkbox to enable/disable a specific feature.",
     "domain": {
       "primary": {
@@ -11,7 +14,6 @@
     "interaction": {
       "is_read_only": false
     },
-    "label_inactive": "Feature Disabled",
     "layout": {
       "sticky": "ew",
       "padx": 5,

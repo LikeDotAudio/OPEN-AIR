@@ -13,11 +13,13 @@
     "blocks": {
       "elements1": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Set Point",
-          "Fr": "Set Point",
-          "De": "Set Point",
-          "Es": "Set Point"
+        "label": {
+          "active": {
+            "En": "Set Point",
+            "Fr": "Set Point",
+            "De": "Set Point",
+            "Es": "Set Point"
+          }
         },
         "fields": {
           "examplefields": {
@@ -51,11 +53,13 @@
       },
       "elements2": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Name",
-          "Fr": "Name",
-          "De": "Name",
-          "Es": "Name"
+        "label": {
+          "active": {
+            "En": "Name",
+            "Fr": "Name",
+            "De": "Name",
+            "Es": "Name"
+          }
         },
         "fields": {
           "examplefields": {
@@ -87,11 +91,13 @@
       },
       "elements3": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "IP Address",
-          "Fr": "IP Address",
-          "De": "IP Address",
-          "Es": "IP Address"
+        "label": {
+          "active": {
+            "En": "IP Address",
+            "Fr": "IP Address",
+            "De": "IP Address",
+            "Es": "IP Address"
+          }
         },
         "fields": {
           "examplefields": {
@@ -122,11 +128,13 @@
       },
       "elements4": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Delay",
-          "Fr": "Delay",
-          "De": "Delay",
-          "Es": "Delay"
+        "label": {
+          "active": {
+            "En": "Delay",
+            "Fr": "Delay",
+            "De": "Delay",
+            "Es": "Delay"
+          }
         },
         "fields": {
           "examplefields": {
@@ -158,11 +166,13 @@
       },
       "elements5": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Password",
-          "Fr": "Password",
-          "De": "Password",
-          "Es": "Password"
+        "label": {
+          "active": {
+            "En": "Password",
+            "Fr": "Password",
+            "De": "Password",
+            "Es": "Password"
+          }
         },
         "fields": {
           "examplefields": {

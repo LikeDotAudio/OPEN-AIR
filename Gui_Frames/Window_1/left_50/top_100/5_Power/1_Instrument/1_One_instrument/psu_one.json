@@ -31,17 +31,19 @@
             "fields": {
               "Master_Output_Switch": {
                 "type": "_TrapezoidButton",
-                "label_active": {
-                  "En": "☢️ MAIN BUS: ACTIVE ☢️",
-                  "Fr": "☢️ MAIN BUS: ACTIVE ☢️",
-                  "De": "☢️ MAIN BUS: ACTIVE ☢️",
-                  "Es": "☢️ MAIN BUS: ACTIVE ☢️"
-                },
-                "label_inactive": {
-                  "En": "MAIN BUS: DISENGAGED",
-                  "Fr": "MAIN BUS: DISENGAGED",
-                  "De": "MAIN BUS: DISENGAGED",
-                  "Es": "MAIN BUS: DISENGAGED"
+                "label": {
+                  "active": {
+                    "En": "☢️ MAIN BUS: ACTIVE ☢️",
+                    "Fr": "☢️ MAIN BUS: ACTIVE ☢️",
+                    "De": "☢️ MAIN BUS: ACTIVE ☢️",
+                    "Es": "☢️ MAIN BUS: ACTIVE ☢️"
+                  },
+                  "inactive": {
+                    "En": "MAIN BUS: DISENGAGED",
+                    "Fr": "MAIN BUS: DISENGAGED",
+                    "De": "MAIN BUS: DISENGAGED",
+                    "Es": "MAIN BUS: DISENGAGED"
+                  }
                 },
                 "state_default": false,
                 "message_details": {
@@ -93,11 +95,13 @@
                 "value": {
                   "default_value": "0"
                 },
-                "label_active": {
-                  "En": "VOLTAGE",
-                  "Fr": "TENSION",
-                  "De": "SPANNUNG",
-                  "Es": "VOLTAJE"
+                "label": {
+                  "active": {
+                    "En": "VOLTAGE",
+                    "Fr": "TENSION",
+                    "De": "SPANNUNG",
+                    "Es": "VOLTAJE"
+                  }
                 },
                 "description": {
                   "En": "Potential Difference",
@@ -143,11 +147,13 @@
                 "value": {
                   "default_value": "0"
                 },
-                "label_active": {
-                  "En": "CURRENT",
-                  "Fr": "COURANT",
-                  "De": "STROM",
-                  "Es": "CORRIENTE"
+                "label": {
+                  "active": {
+                    "En": "CURRENT",
+                    "Fr": "COURANT",
+                    "De": "STROM",
+                    "Es": "CORRIENTE"
+                  }
                 },
                 "description": {
                   "En": "Electron Flow",
@@ -193,11 +199,13 @@
                 "value": {
                   "default_value": "0"
                 },
-                "label_active": {
-                  "En": "TOTAL POWER",
-                  "Fr": "TOTAL POWER",
-                  "De": "TOTAL POWER",
-                  "Es": "TOTAL POWER"
+                "label": {
+                  "active": {
+                    "En": "TOTAL POWER",
+                    "Fr": "TOTAL POWER",
+                    "De": "TOTAL POWER",
+                    "Es": "TOTAL POWER"
+                  }
                 },
                 "description": {
                   "En": "Energy Consumption",
@@ -246,11 +254,13 @@
             "fields": {
               "Power_History": {
                 "type": "_GuiGraph",
-                "label_active": {
-                  "En": "Stability Matrix",
-                  "Fr": "Stability Matrix",
-                  "De": "Stability Matrix",
-                  "Es": "Stability Matrix"
+                "label": {
+                  "active": {
+                    "En": "Stability Matrix",
+                    "Fr": "Stability Matrix",
+                    "De": "Stability Matrix",
+                    "Es": "Stability Matrix"
+                  }
                 },
                 "description": {
                   "En": "Voltage & Current over Time",
@@ -308,11 +318,13 @@
                 "value": {
                   "default_value": "5.0"
                 },
-                "label_active": {
-                  "En": "SET VOLTS (V)",
-                  "Fr": "SET VOLTS (V)",
-                  "De": "SET VOLTS (V)",
-                  "Es": "SET VOLTS (V)"
+                "label": {
+                  "active": {
+                    "En": "SET VOLTS (V)",
+                    "Fr": "SET VOLTS (V)",
+                    "De": "SET VOLTS (V)",
+                    "Es": "SET VOLTS (V)"
+                  }
                 },
                 "message_details": {
                   "PSU_MODEL": {
@@ -352,11 +364,13 @@
                 "value": {
                   "default_value": "0.1"
                 },
-                "label_active": {
-                  "En": "LIMIT AMPS (A)",
-                  "Fr": "LIMIT AMPS (A)",
-                  "De": "LIMIT AMPS (A)",
-                  "Es": "LIMIT AMPS (A)"
+                "label": {
+                  "active": {
+                    "En": "LIMIT AMPS (A)",
+                    "Fr": "LIMIT AMPS (A)",
+                    "De": "LIMIT AMPS (A)",
+                    "Es": "LIMIT AMPS (A)"
+                  }
                 },
                 "message_details": {
                   "PSU_MODEL": {

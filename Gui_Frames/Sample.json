@@ -133,7 +133,9 @@
           },
           "knob_rotary_selector_Example": {
             "type": "SelectorSwitch",
-            "label_active": "Multimeter Mode",
+            "label": {
+              "active": "Multimeter Mode"
+            },
             "positions": [
               "OFF",
               "VAC",
@@ -212,8 +214,10 @@
               }
             },
             "readout": {
-              "label_active": "FIRING...",
-              "label_inactive": "FIRE"
+              "label": {
+                "active": "FIRING...",
+                "inactive": "FIRE"
+              }
             },
             "interaction": {
               "is_read_only": false,
@@ -273,11 +277,15 @@
               "is_read_only": false,
               "options": {
                 "ON": {
-                  "label_active": "MUTED",
+                  "label": {
+                    "active": "MUTED"
+                  },
                   "selected": false
                 },
                 "OFF": {
-                  "label_inactive": "LIVE",
+                  "label": {
+                    "inactive": "LIVE"
+                  },
                   "selected": true
                 }
               }
@@ -325,19 +333,25 @@
               "Allow_Multi_Alt_Select": true,
               "options": {
                 "LPF": {
-                  "label_active": "LOW PASS",
-                  "label_inactive": "LPF",
+                  "label": {
+                    "active": "LOW PASS",
+                    "inactive": "LPF"
+                  },
                   "selected": true,
                   "active_color": "#00FF00"
                 },
                 "HPF": {
-                  "label_active": "HIGH PASS",
-                  "label_inactive": "HPF",
+                  "label": {
+                    "active": "HIGH PASS",
+                    "inactive": "HPF"
+                  },
                   "selected": false
                 },
                 "BPF": {
-                  "label_active": "BAND PASS",
-                  "label_inactive": "BPF",
+                  "label": {
+                    "active": "BAND PASS",
+                    "inactive": "BPF"
+                  },
                   "selected": false
                 }
               }
@@ -350,7 +364,9 @@
           },
           "button_trapezoid_Example": {
             "type": "_TrapezoidButton",
-            "label_active": "Play",
+            "label": {
+              "active": "Play"
+            },
             "min": 0.0,
             "max": 1.0,
             "value_default": false,
@@ -381,7 +397,9 @@
           },
           "button_wink_Example": {
             "type": "_WinkButton",
-            "label_active": "01",
+            "label": {
+              "active": "01"
+            },
             "path": "audio/wink/target_demo_001",
             "width": 60,
             "height": 60,
@@ -558,7 +576,9 @@
               10,
               10
             ],
-            "label_active": "Master High-Precision Tuning",
+            "label": {
+              "active": "Master High-Precision Tuning"
+            },
             "description": "An exhaustive sample demonstrating every possible sub-configuration for the OcaCompositeFaderKnob.",
             "layout": {
               "width": 600,
@@ -648,7 +668,9 @@
           },
           "fader_bar_graph_Example": {
             "type": "_FaderWithBarGraph",
-            "label_active": "Standard",
+            "label": {
+              "active": "Standard"
+            },
             "value_min": -60.0,
             "value_max": 10.0,
             "value_default": -10.0,
@@ -670,11 +692,13 @@
           },
           "horizontal_with_dial_Example": {
             "type": "_Horizontal_with_dial_Value",
-            "label_active": {
-              "En": "Tuning",
-              "Fr": "Accord",
-              "De": "Abstimmung",
-              "Es": "Sintonía"
+            "label": {
+              "active": {
+                "En": "Tuning",
+                "Fr": "Accord",
+                "De": "Abstimmung",
+                "Es": "Sintonía"
+              }
             },
             "layout": {
               "width": "100%",
@@ -721,7 +745,9 @@
           },
           "fader_linear_travelling_potentiometer_Example": {
             "type": "_CustomLTP",
-            "label_active": "Master Gali",
+            "label": {
+              "active": "Master Gali"
+            },
             "notes": "A fully-featured Linear Travelling Potentiometer (LTP) sample showcasing every parameter.",
             "fader_config": {
               "value_min": -100.0,
@@ -779,7 +805,9 @@
           },
           "composite_mdp_Faders_Variant_Example": {
             "type": "_MDP",
-            "label_active": "MDP 1",
+            "label": {
+              "active": "MDP 1"
+            },
             "path": "audio/mdp/1",
             "initial_x": 210,
             "initial_y": 125,
@@ -827,7 +855,9 @@
               ]
             },
             "ltp": {
-              "label_active": "Level",
+              "label": {
+                "active": "Level"
+              },
               "value_default": -10,
               "cap_color": "#00FF00",
               "freestyle": true,
@@ -941,7 +971,9 @@
         "fields": {
           "images_image_display_Example": {
             "type": "_GuiImage",
-            "label_active": "Flux Capacitor",
+            "label": {
+              "active": "Flux Capacitor"
+            },
             "path": "oaDataCache/assets/images/flux_capacitor.png",
             "notes": "Static display of the Flux Capacitor.",
             "layout": {
@@ -1023,16 +1055,22 @@
             "label": "Input",
             "options": {
               "Mic1": {
-                "label_active": "Microphone 1",
+                "label": {
+                  "active": "Microphone 1"
+                },
                 "value": "MIC1_IN",
                 "selected": true
               },
               "Mic2": {
-                "label_active": "Microphone 2",
+                "label": {
+                  "active": "Microphone 2"
+                },
                 "value": "MIC2_IN"
               },
               "LineIn": {
-                "label_active": "Line Input",
+                "label": {
+                  "active": "Line Input"
+                },
                 "value": "LINE_IN"
               }
             },
@@ -1054,7 +1092,9 @@
           },
           "data_json_tree_Example": {
             "type": "_JsonTree",
-            "label_active": "AES70 Object Model (data_AES70.json)",
+            "label": {
+              "active": "AES70 Object Model (data_AES70.json)"
+            },
             "json_source": "display/right_50/bottom_90/10_sets/3_AES70/data_AES70.json",
             "allow_filter": true,
             "layout": {
@@ -1074,7 +1114,10 @@
           },
           "checkbox_Example": {
             "type": "_SmartCheckbox",
-            "label": "Feature Enabled",
+            "label": {
+              "active": "Feature Enabled",
+              "inactive": "Feature Disabled"
+            },
             "notes": "Checkbox to enable/disable a specific feature.",
             "domain": {
               "primary": {
@@ -1084,7 +1127,6 @@
             "interaction": {
               "is_read_only": false
             },
-            "label_inactive": "Feature Disabled",
             "layout": {
               "sticky": "ew",
               "padx": 5,
@@ -1107,17 +1149,23 @@
             "interaction": {
               "options": {
                 "file1": {
-                  "label_active": "document.pdf",
+                  "label": {
+                    "active": "document.pdf"
+                  },
                   "value": "/path/to/document.pdf",
                   "active": "true"
                 },
                 "file2": {
-                  "label_active": "report.docx",
+                  "label": {
+                    "active": "report.docx"
+                  },
                   "value": "/path/to/report.docx",
                   "active": "true"
                 },
                 "file3": {
-                  "label_active": "image.png",
+                  "label": {
+                    "active": "image.png"
+                  },
                   "value": "/path/to/image.png",
                   "active": "true",
                   "selected": true
@@ -1141,7 +1189,9 @@
           },
           "slider_value_Example": {
             "type": "_sliderValue",
-            "label_active": "Volume",
+            "label": {
+              "active": "Volume"
+            },
             "layout": {
               "height": 100,
               "width": 250,
@@ -1352,7 +1402,9 @@
           },
           "meter_knob_with_vu_meter_Example": {
             "widget_type": "_VUMeterKnob",
-            "label_active": "Master L",
+            "label": {
+              "active": "Master L"
+            },
             "path": "audio/master/left/vu",
             "knob_path": "audio/master/left/gain",
             "size": 200,
@@ -1392,7 +1444,9 @@
         "fields": {
           "circular_motion_displacement_potentiometer_Example": {
             "type": "_CMDP",
-            "label_active": "CMDP 1",
+            "label": {
+              "active": "CMDP 1"
+            },
             "path": "audio/cmdp/1",
             "layout": {
               "sticky": "nsew",
@@ -1940,7 +1994,9 @@
           },
           "composite_mdp_Example": {
             "type": "_MDP",
-            "label_active": "MDP 1",
+            "label": {
+              "active": "MDP 1"
+            },
             "path": "audio/mdp/1",
             "initial_x": 210,
             "initial_y": 125,
@@ -1988,7 +2044,9 @@
               ]
             },
             "ltp": {
-              "label_active": "Level",
+              "label": {
+                "active": "Level"
+              },
               "value_default": -10,
               "cap_color": "#00FF00",
               "freestyle": true,

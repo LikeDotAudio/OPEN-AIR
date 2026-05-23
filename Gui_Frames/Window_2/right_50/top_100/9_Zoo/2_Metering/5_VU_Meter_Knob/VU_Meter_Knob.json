@@ -13,11 +13,13 @@
     "blocks": {
       "VU_Meter_Knob_Demo": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Composite VU-Knob Ballistics & Angle Lab",
-          "Fr": "Composite VU-Knob Ballistics & Angle Lab",
-          "De": "Composite VU-Knob Ballistics & Angle Lab",
-          "Es": "Composite VU-Knob Ballistics & Angle Lab"
+        "label": {
+          "active": {
+            "En": "Composite VU-Knob Ballistics & Angle Lab",
+            "Fr": "Composite VU-Knob Ballistics & Angle Lab",
+            "De": "Composite VU-Knob Ballistics & Angle Lab",
+            "Es": "Composite VU-Knob Ballistics & Angle Lab"
+          }
         },
         "layout_columns": 4,
         "fields": {
@@ -28,11 +30,13 @@
               "max": 6
             },
             "meter_face_colour": "transparent",
-            "label_active": {
-              "En": "Master L",
-              "Fr": "Master L",
-              "De": "Master L",
-              "Es": "Maestro L"
+            "label": {
+              "active": {
+                "En": "Master L",
+                "Fr": "Master L",
+                "De": "Master L",
+                "Es": "Maestro L"
+              }
             },
             "path": "audio/master/left/vu",
             "knob_path": "audio/master/left/gain",
@@ -52,11 +56,13 @@
               "max": 6
             },
             "meter_face_colour": "transparent",
-            "label_active": {
-              "En": "Master R",
-              "Fr": "Master R",
-              "De": "Master R",
-              "Es": "Maestro R"
+            "label": {
+              "active": {
+                "En": "Master R",
+                "Fr": "Master R",
+                "De": "Master R",
+                "Es": "Maestro R"
+              }
             },
             "path": "audio/master/right/vu",
             "knob_path": "audio/master/right/gain",
@@ -77,11 +83,13 @@
               "max": 10
             },
             "meter_face_colour": "transparent",
-            "label_active": {
-              "En": "Sub Mix (Default 90°)",
-              "Fr": "Sub Mix (Default 90°)",
-              "De": "Sub Mix (Default 90°)",
-              "Es": "Sub Mezcla (Default 90°)"
+            "label": {
+              "active": {
+                "En": "Sub Mix (Default 90°)",
+                "Fr": "Sub Mix (Default 90°)",
+                "De": "Sub Mix (Default 90°)",
+                "Es": "Sub Mezcla (Default 90°)"
+              }
             },
             "path": "audio/sub/vu",
             "knob_path": "audio/sub/level",
@@ -102,11 +110,13 @@
               "max": 6
             },
             "meter_face_colour": "transparent",
-            "label_active": {
-              "En": "Wide Angle (180°)",
-              "Fr": "Wide Angle (180°)",
-              "De": "Wide Angle (180°)",
-              "Es": "Wide Angle (180°)"
+            "label": {
+              "active": {
+                "En": "Wide Angle (180°)",
+                "Fr": "Wide Angle (180°)",
+                "De": "Wide Angle (180°)",
+                "Es": "Wide Angle (180°)"
+              }
             },
             "path": "audio/wide/vu",
             "knob_path": "audio/wide/level",
@@ -127,11 +137,13 @@
               "max": 6
             },
             "meter_face_colour": "transparent",
-            "label_active": {
-              "En": "Medium Angle (120°)",
-              "Fr": "Moyen Angle (120°)",
-              "De": "Mittel Angle (120°)",
-              "Es": "Medio Angle (120°)"
+            "label": {
+              "active": {
+                "En": "Medium Angle (120°)",
+                "Fr": "Moyen Angle (120°)",
+                "De": "Mittel Angle (120°)",
+                "Es": "Medio Angle (120°)"
+              }
             },
             "path": "audio/medium/vu",
             "knob_path": "audio/medium/level",
@@ -154,11 +166,13 @@
               "max": 6
             },
             "meter_face_colour": "transparent",
-            "label_active": {
-              "En": "Narrow Angle (60°)",
-              "Fr": "Narrow Angle (60°)",
-              "De": "Narrow Angle (60°)",
-              "Es": "Narrow Angle (60°)"
+            "label": {
+              "active": {
+                "En": "Narrow Angle (60°)",
+                "Fr": "Narrow Angle (60°)",
+                "De": "Narrow Angle (60°)",
+                "Es": "Narrow Angle (60°)"
+              }
             },
             "path": "audio/narrow/vu",
             "knob_path": "audio/narrow/level",
@@ -175,11 +189,13 @@
           "Slow_270": {
             "type": "_VUMeterKnob",
             "meter_face_colour": "transparent",
-            "label_active": {
-              "En": "Slow 270° (1s Ballistics)",
-              "Fr": "Lent 270° (1s Ballistics)",
-              "De": "Langsam 270° (1s Ballistics)",
-              "Es": "Lento 270° (1s Ballistics)"
+            "label": {
+              "active": {
+                "En": "Slow 270° (1s Ballistics)",
+                "Fr": "Lent 270° (1s Ballistics)",
+                "De": "Langsam 270° (1s Ballistics)",
+                "Es": "Lento 270° (1s Ballistics)"
+              }
             },
             "path": "audio/270/slow/vu",
             "knob_path": "audio/270/slow/gain",
@@ -195,11 +211,13 @@
           "Fast_270": {
             "type": "_VUMeterKnob",
             "meter_face_colour": "transparent",
-            "label_active": {
-              "En": "Fast 270° (30ms Snappy)",
-              "Fr": "Rapide 270° (30ms Snappy)",
-              "De": "Schnell 270° (30ms Snappy)",
-              "Es": "Rápido 270° (30ms Snappy)"
+            "label": {
+              "active": {
+                "En": "Fast 270° (30ms Snappy)",
+                "Fr": "Rapide 270° (30ms Snappy)",
+                "De": "Schnell 270° (30ms Snappy)",
+                "Es": "Rápido 270° (30ms Snappy)"
+              }
             },
             "path": "audio/270/fast/vu",
             "knob_path": "audio/270/fast/gain",
@@ -216,11 +234,13 @@
           "Sticky_270": {
             "type": "_VUMeterKnob",
             "meter_face_colour": "transparent",
-            "label_active": {
-              "En": "Sticky 270° (500ms Hold)",
-              "Fr": "Sticky 270° (500ms Hold)",
-              "De": "Sticky 270° (500ms Hold)",
-              "Es": "Sticky 270° (500ms Hold)"
+            "label": {
+              "active": {
+                "En": "Sticky 270° (500ms Hold)",
+                "Fr": "Sticky 270° (500ms Hold)",
+                "De": "Sticky 270° (500ms Hold)",
+                "Es": "Sticky 270° (500ms Hold)"
+              }
             },
             "path": "audio/270/sticky/vu",
             "knob_path": "audio/270/sticky/gain",
@@ -235,11 +255,13 @@
           "Dwell_270": {
             "type": "_VUMeterKnob",
             "meter_face_colour": "transparent",
-            "label_active": {
-              "En": "Dwell 270° (Target Dwell)",
-              "Fr": "Dwell 270° (Target Dwell)",
-              "De": "Dwell 270° (Target Dwell)",
-              "Es": "Dwell 270° (Target Dwell)"
+            "label": {
+              "active": {
+                "En": "Dwell 270° (Target Dwell)",
+                "Fr": "Dwell 270° (Target Dwell)",
+                "De": "Dwell 270° (Target Dwell)",
+                "Es": "Dwell 270° (Target Dwell)"
+              }
             },
             "path": "audio/270/dwell/vu",
             "knob_path": "audio/270/dwell/gain",
@@ -256,11 +278,13 @@
           "Instant_270": {
             "type": "_VUMeterKnob",
             "meter_face_colour": "transparent",
-            "label_active": {
-              "En": "Instant 270° (0ms)",
-              "Fr": "Instant 270° (0ms)",
-              "De": "Instant 270° (0ms)",
-              "Es": "Instant 270° (0ms)"
+            "label": {
+              "active": {
+                "En": "Instant 270° (0ms)",
+                "Fr": "Instant 270° (0ms)",
+                "De": "Instant 270° (0ms)",
+                "Es": "Instant 270° (0ms)"
+              }
             },
             "path": "audio/270/instant/vu",
             "knob_path": "audio/270/instant/gain",
@@ -277,11 +301,13 @@
           "Lazy_270": {
             "type": "_VUMeterKnob",
             "meter_face_colour": "transparent",
-            "label_active": {
-              "En": "Lazy 270° (Slow Decay)",
-              "Fr": "Lazy 270° (Slow Decay)",
-              "De": "Lazy 270° (Slow Decay)",
-              "Es": "Lazy 270° (Slow Decay)"
+            "label": {
+              "active": {
+                "En": "Lazy 270° (Slow Decay)",
+                "Fr": "Lazy 270° (Slow Decay)",
+                "De": "Lazy 270° (Slow Decay)",
+                "Es": "Lazy 270° (Slow Decay)"
+              }
             },
             "path": "audio/270/lazy/vu",
             "knob_path": "audio/270/lazy/gain",
@@ -297,11 +323,13 @@
           "Test_100": {
             "type": "_VUMeterKnob",
             "meter_face_colour": "transparent",
-            "label_active": {
-              "En": "Testing 100° Angle",
-              "Fr": "Testing 100° Angle",
-              "De": "Testing 100° Angle",
-              "Es": "Testing 100° Angle"
+            "label": {
+              "active": {
+                "En": "Testing 100° Angle",
+                "Fr": "Testing 100° Angle",
+                "De": "Testing 100° Angle",
+                "Es": "Testing 100° Angle"
+              }
             },
             "path": "audio/100/vu",
             "knob_path": "audio/100/gain",
@@ -316,11 +344,13 @@
           "Standard_90": {
             "type": "_VUMeterKnob",
             "meter_face_colour": "transparent",
-            "label_active": {
-              "En": "Classic 90° (Fast)",
-              "Fr": "Classique 90° (Fast)",
-              "De": "Klassisch 90° (Fast)",
-              "Es": "Clásico 90° (Fast)"
+            "label": {
+              "active": {
+                "En": "Classic 90° (Fast)",
+                "Fr": "Classique 90° (Fast)",
+                "De": "Klassisch 90° (Fast)",
+                "Es": "Clásico 90° (Fast)"
+              }
             },
             "path": "audio/90/vu",
             "knob_path": "audio/90/gain",
@@ -336,11 +366,13 @@
           "Neon_Sawblade": {
             "type": "_VUMeterKnob",
             "meter_face_colour": "transparent",
-            "label_active": {
-              "En": "⚠️ NEON SAWBLADE (300°)",
-              "Fr": "⚠️ NEON SAWBLADE (300°)",
-              "De": "⚠️ NEON SAWBLADE (300°)",
-              "Es": "⚠️ NEON SAWBLADE (300°)"
+            "label": {
+              "active": {
+                "En": "⚠️ NEON SAWBLADE (300°)",
+                "Fr": "⚠️ NEON SAWBLADE (300°)",
+                "De": "⚠️ NEON SAWBLADE (300°)",
+                "Es": "⚠️ NEON SAWBLADE (300°)"
+              }
             },
             "path": "audio/wild/sawblade/vu",
             "knob_path": "audio/wild/sawblade/gain",
@@ -360,11 +392,13 @@
           "Deep_Abyss": {
             "type": "_VUMeterKnob",
             "meter_face_colour": "transparent",
-            "label_active": {
-              "En": "⚫ DEEP ABYSS (320°)",
-              "Fr": "⚫ DEEP ABYSS (320°)",
-              "De": "⚫ DEEP ABYSS (320°)",
-              "Es": "⚫ DEEP ABYSS (320°)"
+            "label": {
+              "active": {
+                "En": "⚫ DEEP ABYSS (320°)",
+                "Fr": "⚫ DEEP ABYSS (320°)",
+                "De": "⚫ DEEP ABYSS (320°)",
+                "Es": "⚫ DEEP ABYSS (320°)"
+              }
             },
             "path": "audio/wild/abyss/vu",
             "knob_path": "audio/wild/abyss/gain",

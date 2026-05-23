@@ -31,11 +31,13 @@
               "height": 550,
               "alpha": 0.9
             },
-            "label_active": {
-              "En": "Stereo Mix",
-              "Fr": "Stereo Mix",
-              "De": "Stereo Mix",
-              "Es": "Stereo Mezcla"
+            "label": {
+              "active": {
+                "En": "Stereo Mix",
+                "Fr": "Stereo Mix",
+                "De": "Stereo Mix",
+                "Es": "Stereo Mezcla"
+              }
             },
             "num_channels": 2,
             "channels": [

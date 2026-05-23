@@ -44,11 +44,13 @@
             "value": {
               "default_value": false
             },
-            "label_active": {
-              "En": "MUTE",
-              "Fr": "MUTE",
-              "De": "MUTE",
-              "Es": "MUTE"
+            "label": {
+              "active": {
+                "En": "MUTE",
+                "Fr": "MUTE",
+                "De": "MUTE",
+                "Es": "MUTE"
+              }
             },
             "button_text": "MUT",
             "width": 70,
@@ -71,11 +73,13 @@
             "value": {
               "default_value": false
             },
-            "label_active": {
-              "En": "MUTE",
-              "Fr": "MUTE",
-              "De": "MUTE",
-              "Es": "MUTE"
+            "label": {
+              "active": {
+                "En": "MUTE",
+                "Fr": "MUTE",
+                "De": "MUTE",
+                "Es": "MUTE"
+              }
             },
             "button_text": "HEY",
             "width": 50,
@@ -98,11 +102,13 @@
             "value": {
               "default_value": false
             },
-            "label_active": {
-              "En": "SOLO",
-              "Fr": "SOLO",
-              "De": "SOLO",
-              "Es": "SOLO"
+            "label": {
+              "active": {
+                "En": "SOLO",
+                "Fr": "SOLO",
+                "De": "SOLO",
+                "Es": "SOLO"
+              }
             },
             "button_text": "SOLO",
             "width": 70,
@@ -125,11 +131,13 @@
             "value": {
               "default_value": false
             },
-            "label_active": {
-              "En": "BYPASS",
-              "Fr": "BYPASS",
-              "De": "BYPASS",
-              "Es": "BYPASS"
+            "label": {
+              "active": {
+                "En": "BYPASS",
+                "Fr": "BYPASS",
+                "De": "BYPASS",
+                "Es": "BYPASS"
+              }
             },
             "button_text": "BYP",
             "width": 60,
@@ -152,11 +160,13 @@
             "value": {
               "default_value": false
             },
-            "label_active": {
-              "En": "EFFECT",
-              "Fr": "EFFECT",
-              "De": "EFFECT",
-              "Es": "EFFECT"
+            "label": {
+              "active": {
+                "En": "EFFECT",
+                "Fr": "EFFECT",
+                "De": "EFFECT",
+                "Es": "EFFECT"
+              }
             },
             "button_text": "FX",
             "width": 70,
@@ -179,11 +189,13 @@
             "value": {
               "default_value": false
             },
-            "label_active": {
-              "En": "POWER",
-              "Fr": "POWER",
-              "De": "POWER",
-              "Es": "POWER"
+            "label": {
+              "active": {
+                "En": "POWER",
+                "Fr": "POWER",
+                "De": "POWER",
+                "Es": "POWER"
+              }
             },
             "button_text": "ON",
             "width": 50,
@@ -275,11 +287,13 @@
             "value": {
               "default_value": false
             },
-            "label_active": {
-              "En": "SELECT",
-              "Fr": "SELECT",
-              "De": "SELECT",
-              "Es": "SELECT"
+            "label": {
+              "active": {
+                "En": "SELECT",
+                "Fr": "SELECT",
+                "De": "SELECT",
+                "Es": "SELECT"
+              }
             },
             "width": 100,
             "height": 55,
@@ -301,11 +315,13 @@
             "value": {
               "default_value": false
             },
-            "label_active": {
-              "En": "ENTER",
-              "Fr": "ENTER",
-              "De": "ENTER",
-              "Es": "ENTER"
+            "label": {
+              "active": {
+                "En": "ENTER",
+                "Fr": "ENTER",
+                "De": "ENTER",
+                "Es": "ENTER"
+              }
             },
             "width": 80,
             "height": 80,
@@ -327,11 +343,13 @@
             "value": {
               "default_value": false
             },
-            "label_active": {
-              "En": "OK",
-              "Fr": "OK",
-              "De": "OK",
-              "Es": "OK"
+            "label": {
+              "active": {
+                "En": "OK",
+                "Fr": "OK",
+                "De": "OK",
+                "Es": "OK"
+              }
             },
             "width": 60,
             "height": 60,
@@ -353,11 +371,13 @@
             "value": {
               "default_value": false
             },
-            "label_active": {
-              "En": "CANCEL",
-              "Fr": "CANCEL",
-              "De": "CANCEL",
-              "Es": "CANCEL"
+            "label": {
+              "active": {
+                "En": "CANCEL",
+                "Fr": "CANCEL",
+                "De": "CANCEL",
+                "Es": "CANCEL"
+              }
             },
             "width": 70,
             "height": 70,
@@ -379,11 +399,13 @@
             "value": {
               "default_value": false
             },
-            "label_active": {
-              "En": "BACK",
-              "Fr": "BACK",
-              "De": "BACK",
-              "Es": "BACK"
+            "label": {
+              "active": {
+                "En": "BACK",
+                "Fr": "BACK",
+                "De": "BACK",
+                "Es": "BACK"
+              }
             },
             "width": 50,
             "height": 50,
@@ -405,11 +427,13 @@
             "value": {
               "default_value": false
             },
-            "label_active": {
-              "En": "NEXT",
-              "Fr": "NEXT",
-              "De": "NEXT",
-              "Es": "NEXT"
+            "label": {
+              "active": {
+                "En": "NEXT",
+                "Fr": "NEXT",
+                "De": "NEXT",
+                "Es": "NEXT"
+              }
             },
             "width": 60,
             "height": 60,
@@ -431,11 +455,13 @@
             "value": {
               "default_value": false
             },
-            "label_active": {
-              "En": "DONE",
-              "Fr": "DONE",
-              "De": "DONE",
-              "Es": "DONE"
+            "label": {
+              "active": {
+                "En": "DONE",
+                "Fr": "DONE",
+                "De": "DONE",
+                "Es": "DONE"
+              }
             },
             "width": 70,
             "height": 70,
@@ -457,11 +483,13 @@
             "value": {
               "default_value": false
             },
-            "label_active": {
-              "En": "EXECUTE",
-              "Fr": "EXECUTE",
-              "De": "EXECUTE",
-              "Es": "EXECUTE"
+            "label": {
+              "active": {
+                "En": "EXECUTE",
+                "Fr": "EXECUTE",
+                "De": "EXECUTE",
+                "Es": "EXECUTE"
+              }
             },
             "width": 100,
             "height": 50,
@@ -479,11 +507,13 @@
       },
       "elements5": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "BYPASS",
-          "Fr": "BYPASS",
-          "De": "BYPASS",
-          "Es": "BYPASS"
+        "label": {
+          "active": {
+            "En": "BYPASS",
+            "Fr": "BYPASS",
+            "De": "BYPASS",
+            "Es": "BYPASS"
+          }
         },
         "fields": {
           "examplefields": {
@@ -491,11 +521,13 @@
             "value": {
               "default_value": true
             },
-            "label_active": {
-              "En": "BYPASS",
-              "Fr": "BYPASS",
-              "De": "BYPASS",
-              "Es": "BYPASS"
+            "label": {
+              "active": {
+                "En": "BYPASS",
+                "Fr": "BYPASS",
+                "De": "BYPASS",
+                "Es": "BYPASS"
+              }
             },
             "width": 75,
             "height": 48,

@@ -21,7 +21,7 @@ const WinkButtonToggler = ({ value, onChange, config, topic, nodeJson }) => {
     for (const [k, o] of Object.entries(opts)) {
         const yes = String(o?.selected ?? "").toLowerCase();
         if (yes === "yes" || yes === "true") { initial = k; break; }
-        if (vDef != null && (k === String(vDef) || txt(o.label_active, null) === String(vDef))) initial = k;
+        if (vDef != null && (k === String(vDef) || txt(window.oaPickLabel(o, 'active'), null) === String(vDef))) initial = k;
     }
 
     const [val, setVal] = useMqtt

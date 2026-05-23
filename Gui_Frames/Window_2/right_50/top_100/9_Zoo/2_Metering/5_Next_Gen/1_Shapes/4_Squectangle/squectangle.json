@@ -51,10 +51,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Large Classic",
-              "Fr": "Large Classique",
-              "De": "Large Klassisch",
-              "Es": "Large Clásico"
+              "active": {
+                "En": "Large Classic",
+                "Fr": "Large Classique",
+                "De": "Large Klassisch",
+                "Es": "Large Clásico"
+              }
             },
             "geometry": {
               "width": 300,
@@ -95,12 +97,6 @@
                   "sig_fig": 3
                 }
               ]
-            },
-            "label_active": {
-              "En": "Large Classic",
-              "Fr": "Large Classique",
-              "De": "Large Klassisch",
-              "Es": "Large Clásico"
             },
             "width": 300,
             "height": 300,
@@ -147,10 +143,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Medium Brown",
-              "Fr": "Moyen Brown",
-              "De": "Mittel Brown",
-              "Es": "Medio Brown"
+              "active": {
+                "En": "Medium Brown",
+                "Fr": "Moyen Brown",
+                "De": "Mittel Brown",
+                "Es": "Medio Brown"
+              }
             },
             "geometry": {
               "width": 220,
@@ -182,12 +180,6 @@
                   "weight": "bold"
                 }
               ]
-            },
-            "label_active": {
-              "En": "Medium Brown",
-              "Fr": "Moyen Brown",
-              "De": "Mittel Brown",
-              "Es": "Medio Brown"
             },
             "width": 220,
             "height": 220,
@@ -234,10 +226,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Small Silver",
-              "Fr": "Small Silver",
-              "De": "Small Silver",
-              "Es": "Small Silver"
+              "active": {
+                "En": "Small Silver",
+                "Fr": "Small Silver",
+                "De": "Small Silver",
+                "Es": "Small Silver"
+              }
             },
             "geometry": {
               "width": 150,
@@ -256,12 +250,6 @@
                 "Pointer_Style": "needle",
                 "pivot_colour": "silver"
               }
-            },
-            "label_active": {
-              "En": "Small Silver",
-              "Fr": "Small Silver",
-              "De": "Small Silver",
-              "Es": "Small Silver"
             },
             "width": 150,
             "height": 150,
@@ -306,10 +294,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Midnight Blue",
-              "Fr": "Midnight Blue",
-              "De": "Midnight Blue",
-              "Es": "Midnight Blue"
+              "active": {
+                "En": "Midnight Blue",
+                "Fr": "Midnight Blue",
+                "De": "Midnight Blue",
+                "Es": "Midnight Blue"
+              }
             },
             "geometry": {
               "width": 220,
@@ -342,12 +332,6 @@
                   "color": "#ADD8E6"
                 }
               ]
-            },
-            "label_active": {
-              "En": "Midnight Blue",
-              "Fr": "Midnight Blue",
-              "De": "Midnight Blue",
-              "Es": "Midnight Blue"
             },
             "width": 220,
             "height": 220,
@@ -391,10 +375,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Forest Green",
-              "Fr": "Forest Green",
-              "De": "Forest Green",
-              "Es": "Forest Green"
+              "active": {
+                "En": "Forest Green",
+                "Fr": "Forest Green",
+                "De": "Forest Green",
+                "Es": "Forest Green"
+              }
             },
             "geometry": {
               "width": 220,
@@ -427,12 +413,6 @@
                   "color": "#98FB98"
                 }
               ]
-            },
-            "label_active": {
-              "En": "Forest Green",
-              "Fr": "Forest Green",
-              "De": "Forest Green",
-              "Es": "Forest Green"
             },
             "width": 220,
             "height": 220,
@@ -476,10 +456,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Slate Grey",
-              "Fr": "Slate Grey",
-              "De": "Slate Grey",
-              "Es": "Slate Grey"
+              "active": {
+                "En": "Slate Grey",
+                "Fr": "Slate Grey",
+                "De": "Slate Grey",
+                "Es": "Slate Grey"
+              }
             },
             "geometry": {
               "width": 220,
@@ -512,12 +494,6 @@
                   "color": "#FFFFFF"
                 }
               ]
-            },
-            "label_active": {
-              "En": "Slate Grey",
-              "Fr": "Slate Grey",
-              "De": "Slate Grey",
-              "Es": "Slate Grey"
             },
             "width": 220,
             "height": 220,
@@ -561,10 +537,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Neon Pink",
-              "Fr": "Neon Pink",
-              "De": "Neon Pink",
-              "Es": "Neon Pink"
+              "active": {
+                "En": "Neon Pink",
+                "Fr": "Neon Pink",
+                "De": "Neon Pink",
+                "Es": "Neon Pink"
+              }
             },
             "geometry": {
               "width": 220,
@@ -597,12 +575,6 @@
                   "color": "#FF1493"
                 }
               ]
-            },
-            "label_active": {
-              "En": "Neon Pink",
-              "Fr": "Neon Pink",
-              "De": "Neon Pink",
-              "Es": "Neon Pink"
             },
             "width": 220,
             "height": 220,
@@ -646,10 +618,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Cloud White",
-              "Fr": "Cloud White",
-              "De": "Cloud White",
-              "Es": "Cloud White"
+              "active": {
+                "En": "Cloud White",
+                "Fr": "Cloud White",
+                "De": "Cloud White",
+                "Es": "Cloud White"
+              }
             },
             "geometry": {
               "width": 220,
@@ -681,12 +655,6 @@
                   "weight": "bold"
                 }
               ]
-            },
-            "label_active": {
-              "En": "Cloud White",
-              "Fr": "Cloud White",
-              "De": "Cloud White",
-              "Es": "Cloud White"
             },
             "width": 220,
             "height": 220,
@@ -730,10 +698,12 @@
             },
             "layout": {},
             "label": {
-              "En": "Copper",
-              "Fr": "Copper",
-              "De": "Copper",
-              "Es": "Copper"
+              "active": {
+                "En": "Copper",
+                "Fr": "Copper",
+                "De": "Copper",
+                "Es": "Copper"
+              }
             },
             "geometry": {
               "width": 220,
@@ -766,12 +736,6 @@
                   "color": "#800000"
                 }
               ]
-            },
-            "label_active": {
-              "En": "Copper",
-              "Fr": "Copper",
-              "De": "Copper",
-              "Es": "Copper"
             },
             "width": 220,
             "height": 220,

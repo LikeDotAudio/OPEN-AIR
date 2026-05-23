@@ -14,31 +14,37 @@
         "fields": {
           "Open_Corr": {
             "type": "_GuiActuator",
-            "label_inactive": {
-              "En": "OPEN CORR",
-              "Fr": "OPEN CORR",
-              "De": "OPEN CORR",
-              "Es": "OPEN CORR"
+            "label": {
+              "inactive": {
+                "En": "OPEN CORR",
+                "Fr": "OPEN CORR",
+                "De": "OPEN CORR",
+                "Es": "OPEN CORR"
+              }
             },
             "message": ":CORR:OPEN:EXEC"
           },
           "Short_Corr": {
             "type": "_GuiActuator",
-            "label_inactive": {
-              "En": "SHORT CORR",
-              "Fr": "SHORT CORR",
-              "De": "SHORT CORR",
-              "Es": "SHORT CORR"
+            "label": {
+              "inactive": {
+                "En": "SHORT CORR",
+                "Fr": "SHORT CORR",
+                "De": "SHORT CORR",
+                "Es": "SHORT CORR"
+              }
             },
             "message": ":CORR:SHOR:EXEC"
           },
           "Reset_Unit": {
             "type": "_GuiActuator",
-            "label_inactive": {
-              "En": "Factory Reset",
-              "Fr": "Factory Réinitialiser",
-              "De": "Factory Zurücksetzen",
-              "Es": "Factory Reiniciar"
+            "label": {
+              "inactive": {
+                "En": "Factory Reset",
+                "Fr": "Factory Réinitialiser",
+                "De": "Factory Zurücksetzen",
+                "Es": "Factory Reiniciar"
+              }
             },
             "style": {
               "active": {
@@ -56,11 +62,13 @@
           },
           "Error_Log": {
             "type": "_GuiActuator",
-            "label_inactive": {
-              "En": "Read Error",
-              "Fr": "Read Erreur",
-              "De": "Read Fehler",
-              "Es": "Read Error"
+            "label": {
+              "inactive": {
+                "En": "Read Error",
+                "Fr": "Read Erreur",
+                "De": "Read Fehler",
+                "Es": "Read Error"
+              }
             },
             "message": ":SYST:ERR?"
           }

@@ -31,17 +31,19 @@
             "fields": {
               "Master_Input_Switch": {
                 "type": "_TrapezoidButton",
-                "label_active": {
-                  "En": "🔥 LOAD ACTIVE (SINKING) 🔥",
-                  "Fr": "🔥 LOAD ACTIVE (SINKING) 🔥",
-                  "De": "🔥 LOAD ACTIVE (SINKING) 🔥",
-                  "Es": "🔥 LOAD ACTIVE (SINKING) 🔥"
-                },
-                "label_inactive": {
-                  "En": "LOAD DISENGAGED",
-                  "Fr": "CHARGE DÉSENGAGÉE",
-                  "De": "LAST GETRENNT",
-                  "Es": "CARGA DESENGANCHADA"
+                "label": {
+                  "active": {
+                    "En": "🔥 LOAD ACTIVE (SINKING) 🔥",
+                    "Fr": "🔥 LOAD ACTIVE (SINKING) 🔥",
+                    "De": "🔥 LOAD ACTIVE (SINKING) 🔥",
+                    "Es": "🔥 LOAD ACTIVE (SINKING) 🔥"
+                  },
+                  "inactive": {
+                    "En": "LOAD DISENGAGED",
+                    "Fr": "CHARGE DÉSENGAGÉE",
+                    "De": "LAST GETRENNT",
+                    "Es": "CARGA DESENGANCHADA"
+                  }
                 },
                 "state_default": false,
                 "message_details": {
@@ -90,11 +92,13 @@
                   "max": "100",
                   "units": "V"
                 },
-                "label_active": {
-                  "En": "INPUT VOLTS",
-                  "Fr": "VOLTS D'ENTRÉE",
-                  "De": "EINGANGSSPANNUNG",
-                  "Es": "VOLTIOS DE ENTRADA"
+                "label": {
+                  "active": {
+                    "En": "INPUT VOLTS",
+                    "Fr": "VOLTS D'ENTRÉE",
+                    "De": "EINGANGSSPANNUNG",
+                    "Es": "VOLTIOS DE ENTRADA"
+                  }
                 },
                 "message_details": {
                   "DC_LOAD_MODEL": {
@@ -131,11 +135,13 @@
                   "max": "60",
                   "units": "A"
                 },
-                "label_active": {
-                  "En": "SINK CURRENT",
-                  "Fr": "SINK CURRENT",
-                  "De": "SINK CURRENT",
-                  "Es": "SINK CURRENT"
+                "label": {
+                  "active": {
+                    "En": "SINK CURRENT",
+                    "Fr": "SINK CURRENT",
+                    "De": "SINK CURRENT",
+                    "Es": "SINK CURRENT"
+                  }
                 },
                 "message_details": {
                   "DC_LOAD_MODEL": {
@@ -172,11 +178,13 @@
                   "max": "300",
                   "units": "W"
                 },
-                "label_active": {
-                  "En": "DISSIPATION",
-                  "Fr": "DISSIPATION",
-                  "De": "DISSIPATION",
-                  "Es": "DISSIPATION"
+                "label": {
+                  "active": {
+                    "En": "DISSIPATION",
+                    "Fr": "DISSIPATION",
+                    "De": "DISSIPATION",
+                    "Es": "DISSIPATION"
+                  }
                 },
                 "message_details": {
                   "DC_LOAD_MODEL": {
@@ -219,11 +227,13 @@
             "fields": {
               "Load_Graph": {
                 "type": "_GuiGraph",
-                "label_active": {
-                  "En": "Drain Timeline",
-                  "Fr": "Chronologie de consommation",
-                  "De": "Entladungs-Zeitachse",
-                  "Es": "Línea de tiempo de drenaje"
+                "label": {
+                  "active": {
+                    "En": "Drain Timeline",
+                    "Fr": "Chronologie de consommation",
+                    "De": "Entladungs-Zeitachse",
+                    "Es": "Línea de tiempo de drenaje"
+                  }
                 },
                 "description": {
                   "En": "Voltage/Current Drop over Time",
@@ -273,11 +283,13 @@
             "fields": {
               "Mode_Selector": {
                 "type": "_GuiDropDownOption",
-                "label_active": {
-                  "En": "Operating Mode",
-                  "Fr": "Operating Mode",
-                  "De": "Operating Modus",
-                  "Es": "Operating Modo"
+                "label": {
+                  "active": {
+                    "En": "Operating Mode",
+                    "Fr": "Operating Mode",
+                    "De": "Operating Modus",
+                    "Es": "Operating Modo"
+                  }
                 },
                 "options": [
                   "CC (Const Current)",
@@ -344,11 +356,13 @@
                     "value": {
                       "default_value": "0.0"
                     },
-                    "label_active": {
-                      "En": "Current Set",
-                      "Fr": "Réglage de courant",
-                      "De": "Stromeinstellung",
-                      "Es": "Ajuste de corriente"
+                    "label": {
+                      "active": {
+                        "En": "Current Set",
+                        "Fr": "Réglage de courant",
+                        "De": "Stromeinstellung",
+                        "Es": "Ajuste de corriente"
+                      }
                     },
                     "message_details": {
                       "DC_LOAD_MODEL": {
@@ -388,11 +402,13 @@
                     "value": {
                       "default_value": "1000"
                     },
-                    "label_active": {
-                      "En": "Slew Rate",
-                      "Fr": "Slew Rate",
-                      "De": "Slew Rate",
-                      "Es": "Slew Rate"
+                    "label": {
+                      "active": {
+                        "En": "Slew Rate",
+                        "Fr": "Slew Rate",
+                        "De": "Slew Rate",
+                        "Es": "Slew Rate"
+                      }
                     },
                     "message_details": {
                       "DC_LOAD_MODEL": {
@@ -443,11 +459,13 @@
                     "value": {
                       "default_value": "12.0"
                     },
-                    "label_active": {
-                      "En": "Voltage Set",
-                      "Fr": "Réglage de tension",
-                      "De": "Spannungseinstellung",
-                      "Es": "Ajuste de voltaje"
+                    "label": {
+                      "active": {
+                        "En": "Voltage Set",
+                        "Fr": "Réglage de tension",
+                        "De": "Spannungseinstellung",
+                        "Es": "Ajuste de voltaje"
+                      }
                     },
                     "message_details": {
                       "DC_LOAD_MODEL": {
@@ -487,11 +505,13 @@
                     "value": {
                       "default_value": "100"
                     },
-                    "label_active": {
-                      "En": "Resistance Set",
-                      "Fr": "Résistance Set",
-                      "De": "Breitrstand Set",
-                      "Es": "Resistencia Set"
+                    "label": {
+                      "active": {
+                        "En": "Resistance Set",
+                        "Fr": "Résistance Set",
+                        "De": "Breitrstand Set",
+                        "Es": "Resistencia Set"
+                      }
                     },
                     "message_details": {
                       "DC_LOAD_MODEL": {
@@ -536,17 +556,19 @@
             "fields": {
               "Trans_Enable": {
                 "type": "_GuiButtonToggle",
-                "label_active": {
-                  "En": "PULSE MODE ON",
-                  "Fr": "PULSE MODE ON",
-                  "De": "PULSE MODE ON",
-                  "Es": "PULSE MODE ON"
-                },
-                "label_inactive": {
-                  "En": "PULSE MODE OFF",
-                  "Fr": "MODE PULSÉ DÉSACTIVÉ",
-                  "De": "IMPULSMODUS AUS",
-                  "Es": "MODO PULSO DESACTIVADO"
+                "label": {
+                  "active": {
+                    "En": "PULSE MODE ON",
+                    "Fr": "PULSE MODE ON",
+                    "De": "PULSE MODE ON",
+                    "Es": "PULSE MODE ON"
+                  },
+                  "inactive": {
+                    "En": "PULSE MODE OFF",
+                    "Fr": "MODE PULSÉ DÉSACTIVÉ",
+                    "De": "IMPULSMODUS AUS",
+                    "Es": "MODO PULSO DESACTIVADO"
+                  }
                 },
                 "style": {
                   "active": {
@@ -605,11 +627,13 @@
                 "value": {
                   "default_value": "1.0"
                 },
-                "label_active": {
-                  "En": "Level A (Base)",
-                  "Fr": "Niveau A (Base)",
-                  "De": "Pegel A (Base)",
-                  "Es": "Nivel A (Base)"
+                "label": {
+                  "active": {
+                    "En": "Level A (Base)",
+                    "Fr": "Niveau A (Base)",
+                    "De": "Pegel A (Base)",
+                    "Es": "Nivel A (Base)"
+                  }
                 },
                 "message_details": {
                   "DC_LOAD_MODEL": {
@@ -647,11 +671,13 @@
                 "value": {
                   "default_value": "5.0"
                 },
-                "label_active": {
-                  "En": "Level B (Peak)",
-                  "Fr": "Niveau B (Peak)",
-                  "De": "Pegel B (Peak)",
-                  "Es": "Nivel B (Peak)"
+                "label": {
+                  "active": {
+                    "En": "Level B (Peak)",
+                    "Fr": "Niveau B (Peak)",
+                    "De": "Pegel B (Peak)",
+                    "Es": "Nivel B (Peak)"
+                  }
                 },
                 "message_details": {
                   "DC_LOAD_MODEL": {
@@ -691,11 +717,13 @@
                 "value": {
                   "default_value": "100"
                 },
-                "label_active": {
-                  "En": "Frequency",
-                  "Fr": "Fréquence",
-                  "De": "Frequenz",
-                  "Es": "Frecuencia"
+                "label": {
+                  "active": {
+                    "En": "Frequency",
+                    "Fr": "Fréquence",
+                    "De": "Frequenz",
+                    "Es": "Frecuencia"
+                  }
                 },
                 "message_details": {
                   "DC_LOAD_MODEL": {
@@ -735,11 +763,13 @@
                 "value": {
                   "default_value": "50"
                 },
-                "label_active": {
-                  "En": "Duty Cycle",
-                  "Fr": "Duty Cycle",
-                  "De": "Duty Cycle",
-                  "Es": "Duty Cycle"
+                "label": {
+                  "active": {
+                    "En": "Duty Cycle",
+                    "Fr": "Duty Cycle",
+                    "De": "Duty Cycle",
+                    "Es": "Duty Cycle"
+                  }
                 },
                 "message_details": {
                   "DC_LOAD_MODEL": {

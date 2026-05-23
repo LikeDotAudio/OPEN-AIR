@@ -34,8 +34,10 @@
       "inactive_font_size": 10
     },
     "readout": {
-      "label_active": "FIRING...",
-      "label_inactive": "FIRE"
+      "label": {
+        "active": "FIRING...",
+        "inactive": "FIRE"
+      }
     },
     "interaction": {
       "is_read_only": false,
@@ -49,7 +51,12 @@
   },
   "_README": "This sample is REALLY REALLY COMPLETE. It outlines the momentary press behavior and MQTT trigger paths.",
   "_LEGEND": {
-    "actuator_types": ["_GuiActuator", "_SmartActuator", "_ButtonActuator", "_GuiButton"],
+    "actuator_types": [
+      "_GuiActuator",
+      "_SmartActuator",
+      "_ButtonActuator",
+      "_GuiButton"
+    ],
     "momentary_behavior": "Publishes 'val: true' on Press and 'val: false' on Release.",
     "maintenance_commands": "If 'message' starts with '*' (SCPI) or contains 'SYSTem', the command is copied to clipboard instead of published."
   }

@@ -18,48 +18,36 @@
           "Signal Level": {
             "type": "_GuiActuator",
             "label": {
-              "En": "Set Level",
-              "Fr": "Définir le niveau",
-              "De": "Pegel einstellen",
-              "Es": "Establecer nivel"
-            },
-            "label_active": {
-              "En": "Set Level",
-              "Fr": "Définir le niveau",
-              "De": "Pegel einstellen",
-              "Es": "Establecer nivel"
+              "active": {
+                "En": "Set Level",
+                "Fr": "Définir le niveau",
+                "De": "Pegel einstellen",
+                "Es": "Establecer nivel"
+              }
             },
             "message": ":SOURce:VOLTage:LEVel {value}"
           },
           "DC Bias Level": {
             "type": "_GuiActuator",
             "label": {
-              "En": "Set DC Bias",
-              "Fr": "Définir la polarisation CC",
-              "De": "DC-Bias einstellen",
-              "Es": "Establecer polarización CC"
-            },
-            "label_active": {
-              "En": "Set DC Bias",
-              "Fr": "Définir la polarisation CC",
-              "De": "DC-Bias einstellen",
-              "Es": "Establecer polarización CC"
+              "active": {
+                "En": "Set DC Bias",
+                "Fr": "Définir la polarisation CC",
+                "De": "DC-Bias einstellen",
+                "Es": "Establecer polarización CC"
+              }
             },
             "message": ":SOURce:BIAS:VOLTage {value}"
           },
           "DC Bias State": {
             "type": "_GuiActuator",
             "label": {
-              "En": "DC Bias",
-              "Fr": "Polarisation CC",
-              "De": "DC-Bias",
-              "Es": "Polarización CC"
-            },
-            "label_active": {
-              "En": "DC Bias",
-              "Fr": "Polarisation CC",
-              "De": "DC-Bias",
-              "Es": "Polarización CC"
+              "active": {
+                "En": "DC Bias",
+                "Fr": "Polarisation CC",
+                "De": "DC-Bias",
+                "Es": "Polarización CC"
+              }
             },
             "message": ":SOURce:BIAS:STATe {value}",
             "options": [

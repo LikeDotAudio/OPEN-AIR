@@ -21,7 +21,9 @@ in the property editor.
 {
   "knob_rotary_selector_Example": {
     "type": "SelectorSwitch",
-    "label_active": "Multimeter Mode",
+    "label": {
+      "active": "Multimeter Mode"
+    },
     "positions": [
       "OFF",
       "VAC",

@@ -32,17 +32,19 @@
             "fields": {
               "Execute Command": {
                 "type": "_GuiActuator",
-                "label_active": {
-                  "En": "Get Frequency Settings",
-                  "Fr": "Get Fréquence Paramètres",
-                  "De": "Get Frequenz Einstellungen",
-                  "Es": "Get Frecuencia Ajustes"
-                },
-                "label_inactive": {
-                  "En": "Get Frequency Settings",
-                  "Fr": "Get Fréquence Paramètres",
-                  "De": "Get Frequenz Einstellungen",
-                  "Es": "Get Frecuencia Ajustes"
+                "label": {
+                  "active": {
+                    "En": "Get Frequency Settings",
+                    "Fr": "Get Fréquence Paramètres",
+                    "De": "Get Frequenz Einstellungen",
+                    "Es": "Get Frecuencia Ajustes"
+                  },
+                  "inactive": {
+                    "En": "Get Frequency Settings",
+                    "Fr": "Get Fréquence Paramètres",
+                    "De": "Get Frequenz Einstellungen",
+                    "Es": "Get Frecuencia Ajustes"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "layout": {
@@ -151,17 +153,19 @@
             "fields": {
               "Execute Command": {
                 "type": "_GuiActuator",
-                "label_active": {
-                  "En": "Set Start and Stop Frequency",
-                  "Fr": "Set Démarrer and Arrêter Fréquence",
-                  "De": "Set Start and Stopp Frequenz",
-                  "Es": "Set Inicio and Parar Frecuencia"
-                },
-                "label_inactive": {
-                  "En": "Set Start and Stop Frequency",
-                  "Fr": "Set Démarrer and Arrêter Fréquence",
-                  "De": "Set Start and Stopp Frequenz",
-                  "Es": "Set Inicio and Parar Frecuencia"
+                "label": {
+                  "active": {
+                    "En": "Set Start and Stop Frequency",
+                    "Fr": "Set Démarrer and Arrêter Fréquence",
+                    "De": "Set Start and Stopp Frequenz",
+                    "Es": "Set Inicio and Parar Frecuencia"
+                  },
+                  "inactive": {
+                    "En": "Set Start and Stop Frequency",
+                    "Fr": "Set Démarrer and Arrêter Fréquence",
+                    "De": "Set Start and Stopp Frequenz",
+                    "Es": "Set Inicio and Parar Frecuencia"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "layout": {
@@ -340,17 +344,19 @@
             "fields": {
               "Execute Command": {
                 "type": "_GuiActuator",
-                "label_active": {
-                  "En": "Set Stop Frequency",
-                  "Fr": "Set Arrêter Fréquence",
-                  "De": "Set Stopp Frequenz",
-                  "Es": "Set Parar Frecuencia"
-                },
-                "label_inactive": {
-                  "En": "Set Stop Frequency",
-                  "Fr": "Set Arrêter Fréquence",
-                  "De": "Set Stopp Frequenz",
-                  "Es": "Set Parar Frecuencia"
+                "label": {
+                  "active": {
+                    "En": "Set Stop Frequency",
+                    "Fr": "Set Arrêter Fréquence",
+                    "De": "Set Stopp Frequenz",
+                    "Es": "Set Parar Frecuencia"
+                  },
+                  "inactive": {
+                    "En": "Set Stop Frequency",
+                    "Fr": "Set Arrêter Fréquence",
+                    "De": "Set Stopp Frequenz",
+                    "Es": "Set Parar Frecuencia"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "layout": {

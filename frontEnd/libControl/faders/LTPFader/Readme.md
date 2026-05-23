@@ -21,7 +21,9 @@ in the property editor.
 {
   "fader_linear_travelling_potentiometer_Example": {
     "type": "_CustomLTP",
-    "label_active": "Master Gali",
+    "label": {
+      "active": "Master Gali"
+    },
     "notes": "A fully-featured Linear Travelling Potentiometer (LTP) sample showcasing every parameter.",
     "fader_config": {
       "value_min": -100.0,

@@ -21,7 +21,9 @@ in the property editor.
 {
   "button_wink_Example": {
     "type": "_WinkButton",
-    "label_active": "01",
+    "label": {
+      "active": "01"
+    },
     "path": "audio/wink/target_demo_001",
     "width": 60,
     "height": 60,

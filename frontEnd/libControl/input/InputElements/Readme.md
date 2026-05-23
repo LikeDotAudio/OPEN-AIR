@@ -28,16 +28,22 @@ in the property editor.
     "label": "Input",
     "options": {
       "Mic1": {
-        "label_active": "Microphone 1",
+        "label": {
+          "active": "Microphone 1"
+        },
         "value": "MIC1_IN",
         "selected": true
       },
       "Mic2": {
-        "label_active": "Microphone 2",
+        "label": {
+          "active": "Microphone 2"
+        },
         "value": "MIC2_IN"
       },
       "LineIn": {
-        "label_active": "Line Input",
+        "label": {
+          "active": "Line Input"
+        },
         "value": "LINE_IN"
       }
     },

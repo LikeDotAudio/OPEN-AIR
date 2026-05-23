@@ -22,11 +22,13 @@
         "fields": {
           "Set_Mode_Current": {
             "type": "_GuiActuator",
-            "label_inactive": {
-              "En": "Mode: CC",
-              "Fr": "Mode: CC",
-              "De": "Modus: CC",
-              "Es": "Modo: CC"
+            "label": {
+              "inactive": {
+                "En": "Mode: CC",
+                "Fr": "Mode: CC",
+                "De": "Modus: CC",
+                "Es": "Modo: CC"
+              }
             },
             "AES70": "OcaBooleanActuator",
             "layout": {
@@ -60,11 +62,13 @@
           },
           "Set_Mode_Voltage": {
             "type": "_GuiActuator",
-            "label_inactive": {
-              "En": "Mode: CV",
-              "Fr": "Mode: CV",
-              "De": "Modus: CV",
-              "Es": "Modo: CV"
+            "label": {
+              "inactive": {
+                "En": "Mode: CV",
+                "Fr": "Mode: CV",
+                "De": "Modus: CV",
+                "Es": "Modo: CV"
+              }
             },
             "AES70": "OcaBooleanActuator",
             "layout": {
@@ -98,11 +102,13 @@
           },
           "Set_Mode_Resistance": {
             "type": "_GuiActuator",
-            "label_inactive": {
-              "En": "Mode: CR",
-              "Fr": "Mode: CR",
-              "De": "Modus: CR",
-              "Es": "Modo: CR"
+            "label": {
+              "inactive": {
+                "En": "Mode: CR",
+                "Fr": "Mode: CR",
+                "De": "Modus: CR",
+                "Es": "Modo: CR"
+              }
             },
             "AES70": "OcaBooleanActuator",
             "layout": {

@@ -26,17 +26,19 @@
         "fields": {
           "All_Markers_On": {
             "type": "_GuiButtonToggle",
-            "label_active": {
-              "En": "All Markers ON",
-              "Fr": "Tous les marqueurs ON",
-              "De": "Alle Marker EIN",
-              "Es": "Todos los marcadores ENC"
-            },
-            "label_inactive": {
-              "En": "All Markers ON",
-              "Fr": "Tous les marqueurs ON",
-              "De": "Alle Marker EIN",
-              "Es": "Todos los marcadores ENC"
+            "label": {
+              "active": {
+                "En": "All Markers ON",
+                "Fr": "Tous les marqueurs ON",
+                "De": "Alle Marker EIN",
+                "Es": "Todos los marcadores ENC"
+              },
+              "inactive": {
+                "En": "All Markers ON",
+                "Fr": "Tous les marqueurs ON",
+                "De": "Alle Marker EIN",
+                "Es": "Todos los marcadores ENC"
+              }
             },
             "AES70": "OcaBooleanActuator",
             "handler": "turn_all_markers_on",
@@ -67,32 +69,36 @@
             },
             "options": {
               "ON": {
-                "label_active": {
-                  "En": "All Markers ON",
-                  "Fr": "Tous les marqueurs ON",
-                  "De": "Alle Marker EIN",
-                  "Es": "Todos los marcadores ENC"
-                },
-                "label_inactive": {
-                  "En": "All Markers ON",
-                  "Fr": "Tous les marqueurs ON",
-                  "De": "Alle Marker EIN",
-                  "Es": "Todos los marcadores ENC"
+                "label": {
+                  "active": {
+                    "En": "All Markers ON",
+                    "Fr": "Tous les marqueurs ON",
+                    "De": "Alle Marker EIN",
+                    "Es": "Todos los marcadores ENC"
+                  },
+                  "inactive": {
+                    "En": "All Markers ON",
+                    "Fr": "Tous les marqueurs ON",
+                    "De": "Alle Marker EIN",
+                    "Es": "Todos los marcadores ENC"
+                  }
                 },
                 "selected": true
               },
               "OFF": {
-                "label_active": {
-                  "En": "All Markers OFF",
-                  "Fr": "Tous les marqueurs OFF",
-                  "De": "Alle Marker AUS",
-                  "Es": "Todos los marcadores DES"
-                },
-                "label_inactive": {
-                  "En": "All Markers OFF",
-                  "Fr": "Tous les marqueurs OFF",
-                  "De": "Alle Marker AUS",
-                  "Es": "Todos los marcadores DES"
+                "label": {
+                  "active": {
+                    "En": "All Markers OFF",
+                    "Fr": "Tous les marqueurs OFF",
+                    "De": "Alle Marker AUS",
+                    "Es": "Todos los marcadores DES"
+                  },
+                  "inactive": {
+                    "En": "All Markers OFF",
+                    "Fr": "Tous les marqueurs OFF",
+                    "De": "Alle Marker AUS",
+                    "Es": "Todos los marcadores DES"
+                  }
                 },
                 "selected": false
               }
@@ -132,17 +138,19 @@
             "layout": {
               "height": 30
             },
-            "label_active": {
-              "En": "Active",
-              "Fr": "Actif",
-              "De": "Aktiv",
-              "Es": "Activo"
-            },
-            "label_inactive": {
-              "En": "Active",
-              "Fr": "Actif",
-              "De": "Aktiv",
-              "Es": "Activo"
+            "label": {
+              "active": {
+                "En": "Active",
+                "Fr": "Actif",
+                "De": "Aktiv",
+                "Es": "Activo"
+              },
+              "inactive": {
+                "En": "Active",
+                "Fr": "Actif",
+                "De": "Aktiv",
+                "Es": "Activo"
+              }
             },
             "AES70": "OcaSwitch",
             "handler": "toggle_marker_active",
@@ -166,17 +174,19 @@
               "stretch": "width",
               "Font": 50
             },
-            "label_active": {
-              "En": "X",
-              "Fr": "X",
-              "De": "X",
-              "Es": "X"
-            },
-            "label_inactive": {
-              "En": "X",
-              "Fr": "X",
-              "De": "X",
-              "Es": "X"
+            "label": {
+              "active": {
+                "En": "X",
+                "Fr": "X",
+                "De": "X",
+                "Es": "X"
+              },
+              "inactive": {
+                "En": "X",
+                "Fr": "X",
+                "De": "X",
+                "Es": "X"
+              }
             },
             "AES70": "OcaFrequencyActuator",
             "handler": "set_marker_frequency",
@@ -195,17 +205,19 @@
             "domain": {
               "units": "dBm"
             },
-            "label_active": {
-              "En": "Y",
-              "Fr": "Y",
-              "De": "Y",
-              "Es": "Y"
-            },
-            "label_inactive": {
-              "En": "Y",
-              "Fr": "Y",
-              "De": "Y",
-              "Es": "Y"
+            "label": {
+              "active": {
+                "En": "Y",
+                "Fr": "Y",
+                "De": "Y",
+                "Es": "Y"
+              },
+              "inactive": {
+                "En": "Y",
+                "Fr": "Y",
+                "De": "Y",
+                "Es": "Y"
+              }
             },
             "AES70": "OcaLevelSensor"
           }
@@ -235,17 +247,19 @@
             "layout": {
               "height": 30
             },
-            "label_active": {
-              "En": "Active",
-              "Fr": "Actif",
-              "De": "Aktiv",
-              "Es": "Activo"
-            },
-            "label_inactive": {
-              "En": "Active",
-              "Fr": "Actif",
-              "De": "Aktiv",
-              "Es": "Activo"
+            "label": {
+              "active": {
+                "En": "Active",
+                "Fr": "Actif",
+                "De": "Aktiv",
+                "Es": "Activo"
+              },
+              "inactive": {
+                "En": "Active",
+                "Fr": "Actif",
+                "De": "Aktiv",
+                "Es": "Activo"
+              }
             },
             "AES70": "OcaSwitch",
             "handler": "toggle_marker_active",
@@ -264,17 +278,19 @@
             "domain": {
               "units": "MHz"
             },
-            "label_active": {
-              "En": "X",
-              "Fr": "X",
-              "De": "X",
-              "Es": "X"
-            },
-            "label_inactive": {
-              "En": "X",
-              "Fr": "X",
-              "De": "X",
-              "Es": "X"
+            "label": {
+              "active": {
+                "En": "X",
+                "Fr": "X",
+                "De": "X",
+                "Es": "X"
+              },
+              "inactive": {
+                "En": "X",
+                "Fr": "X",
+                "De": "X",
+                "Es": "X"
+              }
             },
             "AES70": "OcaFrequencyActuator",
             "handler": "set_marker_frequency",
@@ -293,17 +309,19 @@
             "domain": {
               "units": "dBm"
             },
-            "label_active": {
-              "En": "Y",
-              "Fr": "Y",
-              "De": "Y",
-              "Es": "Y"
-            },
-            "label_inactive": {
-              "En": "Y",
-              "Fr": "Y",
-              "De": "Y",
-              "Es": "Y"
+            "label": {
+              "active": {
+                "En": "Y",
+                "Fr": "Y",
+                "De": "Y",
+                "Es": "Y"
+              },
+              "inactive": {
+                "En": "Y",
+                "Fr": "Y",
+                "De": "Y",
+                "Es": "Y"
+              }
             },
             "AES70": "OcaLevelSensor"
           }
@@ -333,17 +351,19 @@
             "layout": {
               "height": 30
             },
-            "label_active": {
-              "En": "Active",
-              "Fr": "Actif",
-              "De": "Aktiv",
-              "Es": "Activo"
-            },
-            "label_inactive": {
-              "En": "Active",
-              "Fr": "Actif",
-              "De": "Aktiv",
-              "Es": "Activo"
+            "label": {
+              "active": {
+                "En": "Active",
+                "Fr": "Actif",
+                "De": "Aktiv",
+                "Es": "Activo"
+              },
+              "inactive": {
+                "En": "Active",
+                "Fr": "Actif",
+                "De": "Aktiv",
+                "Es": "Activo"
+              }
             },
             "AES70": "OcaSwitch",
             "handler": "toggle_marker_active",
@@ -362,17 +382,19 @@
             "domain": {
               "units": "MHz"
             },
-            "label_active": {
-              "En": "X",
-              "Fr": "X",
-              "De": "X",
-              "Es": "X"
-            },
-            "label_inactive": {
-              "En": "X",
-              "Fr": "X",
-              "De": "X",
-              "Es": "X"
+            "label": {
+              "active": {
+                "En": "X",
+                "Fr": "X",
+                "De": "X",
+                "Es": "X"
+              },
+              "inactive": {
+                "En": "X",
+                "Fr": "X",
+                "De": "X",
+                "Es": "X"
+              }
             },
             "AES70": "OcaFrequencyActuator",
             "handler": "set_marker_frequency",
@@ -391,17 +413,19 @@
             "domain": {
               "units": "dBm"
             },
-            "label_active": {
-              "En": "Y",
-              "Fr": "Y",
-              "De": "Y",
-              "Es": "Y"
-            },
-            "label_inactive": {
-              "En": "Y",
-              "Fr": "Y",
-              "De": "Y",
-              "Es": "Y"
+            "label": {
+              "active": {
+                "En": "Y",
+                "Fr": "Y",
+                "De": "Y",
+                "Es": "Y"
+              },
+              "inactive": {
+                "En": "Y",
+                "Fr": "Y",
+                "De": "Y",
+                "Es": "Y"
+              }
             },
             "AES70": "OcaLevelSensor"
           }
@@ -431,17 +455,19 @@
             "layout": {
               "height": 30
             },
-            "label_active": {
-              "En": "Active",
-              "Fr": "Actif",
-              "De": "Aktiv",
-              "Es": "Activo"
-            },
-            "label_inactive": {
-              "En": "Active",
-              "Fr": "Actif",
-              "De": "Aktiv",
-              "Es": "Activo"
+            "label": {
+              "active": {
+                "En": "Active",
+                "Fr": "Actif",
+                "De": "Aktiv",
+                "Es": "Activo"
+              },
+              "inactive": {
+                "En": "Active",
+                "Fr": "Actif",
+                "De": "Aktiv",
+                "Es": "Activo"
+              }
             },
             "AES70": "OcaSwitch",
             "handler": "toggle_marker_active",
@@ -460,17 +486,19 @@
             "domain": {
               "units": "MHz"
             },
-            "label_active": {
-              "En": "X",
-              "Fr": "X",
-              "De": "X",
-              "Es": "X"
-            },
-            "label_inactive": {
-              "En": "X",
-              "Fr": "X",
-              "De": "X",
-              "Es": "X"
+            "label": {
+              "active": {
+                "En": "X",
+                "Fr": "X",
+                "De": "X",
+                "Es": "X"
+              },
+              "inactive": {
+                "En": "X",
+                "Fr": "X",
+                "De": "X",
+                "Es": "X"
+              }
             },
             "AES70": "OcaFrequencyActuator",
             "handler": "set_marker_frequency",
@@ -489,17 +517,19 @@
             "domain": {
               "units": "dBm"
             },
-            "label_active": {
-              "En": "Y",
-              "Fr": "Y",
-              "De": "Y",
-              "Es": "Y"
-            },
-            "label_inactive": {
-              "En": "Y",
-              "Fr": "Y",
-              "De": "Y",
-              "Es": "Y"
+            "label": {
+              "active": {
+                "En": "Y",
+                "Fr": "Y",
+                "De": "Y",
+                "Es": "Y"
+              },
+              "inactive": {
+                "En": "Y",
+                "Fr": "Y",
+                "De": "Y",
+                "Es": "Y"
+              }
             },
             "AES70": "OcaLevelSensor"
           }
@@ -529,17 +559,19 @@
             "layout": {
               "height": 30
             },
-            "label_active": {
-              "En": "Active",
-              "Fr": "Actif",
-              "De": "Aktiv",
-              "Es": "Activo"
-            },
-            "label_inactive": {
-              "En": "Active",
-              "Fr": "Actif",
-              "De": "Aktiv",
-              "Es": "Activo"
+            "label": {
+              "active": {
+                "En": "Active",
+                "Fr": "Actif",
+                "De": "Aktiv",
+                "Es": "Activo"
+              },
+              "inactive": {
+                "En": "Active",
+                "Fr": "Actif",
+                "De": "Aktiv",
+                "Es": "Activo"
+              }
             },
             "AES70": "OcaSwitch",
             "handler": "toggle_marker_active",
@@ -558,17 +590,19 @@
             "domain": {
               "units": "MHz"
             },
-            "label_active": {
-              "En": "X",
-              "Fr": "X",
-              "De": "X",
-              "Es": "X"
-            },
-            "label_inactive": {
-              "En": "X",
-              "Fr": "X",
-              "De": "X",
-              "Es": "X"
+            "label": {
+              "active": {
+                "En": "X",
+                "Fr": "X",
+                "De": "X",
+                "Es": "X"
+              },
+              "inactive": {
+                "En": "X",
+                "Fr": "X",
+                "De": "X",
+                "Es": "X"
+              }
             },
             "AES70": "OcaFrequencyActuator",
             "handler": "set_marker_frequency",
@@ -587,17 +621,19 @@
             "domain": {
               "units": "dBm"
             },
-            "label_active": {
-              "En": "Y",
-              "Fr": "Y",
-              "De": "Y",
-              "Es": "Y"
-            },
-            "label_inactive": {
-              "En": "Y",
-              "Fr": "Y",
-              "De": "Y",
-              "Es": "Y"
+            "label": {
+              "active": {
+                "En": "Y",
+                "Fr": "Y",
+                "De": "Y",
+                "Es": "Y"
+              },
+              "inactive": {
+                "En": "Y",
+                "Fr": "Y",
+                "De": "Y",
+                "Es": "Y"
+              }
             },
             "AES70": "OcaLevelSensor"
           }
@@ -627,17 +663,19 @@
             "layout": {
               "height": 30
             },
-            "label_active": {
-              "En": "Active",
-              "Fr": "Actif",
-              "De": "Aktiv",
-              "Es": "Activo"
-            },
-            "label_inactive": {
-              "En": "Active",
-              "Fr": "Actif",
-              "De": "Aktiv",
-              "Es": "Activo"
+            "label": {
+              "active": {
+                "En": "Active",
+                "Fr": "Actif",
+                "De": "Aktiv",
+                "Es": "Activo"
+              },
+              "inactive": {
+                "En": "Active",
+                "Fr": "Actif",
+                "De": "Aktiv",
+                "Es": "Activo"
+              }
             },
             "AES70": "OcaSwitch",
             "handler": "toggle_marker_active",
@@ -656,17 +694,19 @@
             "domain": {
               "units": "MHz"
             },
-            "label_active": {
-              "En": "X",
-              "Fr": "X",
-              "De": "X",
-              "Es": "X"
-            },
-            "label_inactive": {
-              "En": "X",
-              "Fr": "X",
-              "De": "X",
-              "Es": "X"
+            "label": {
+              "active": {
+                "En": "X",
+                "Fr": "X",
+                "De": "X",
+                "Es": "X"
+              },
+              "inactive": {
+                "En": "X",
+                "Fr": "X",
+                "De": "X",
+                "Es": "X"
+              }
             },
             "AES70": "OcaFrequencyActuator",
             "handler": "set_marker_frequency",
@@ -685,17 +725,19 @@
             "domain": {
               "units": "dBm"
             },
-            "label_active": {
-              "En": "Y",
-              "Fr": "Y",
-              "De": "Y",
-              "Es": "Y"
-            },
-            "label_inactive": {
-              "En": "Y",
-              "Fr": "Y",
-              "De": "Y",
-              "Es": "Y"
+            "label": {
+              "active": {
+                "En": "Y",
+                "Fr": "Y",
+                "De": "Y",
+                "Es": "Y"
+              },
+              "inactive": {
+                "En": "Y",
+                "Fr": "Y",
+                "De": "Y",
+                "Es": "Y"
+              }
             },
             "AES70": "OcaLevelSensor"
           }

@@ -31,11 +31,13 @@
             "fields": {
               "Do_Output_ON": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "OUTPUT ON",
-                  "Fr": "OUTPUT ON",
-                  "De": "OUTPUT ON",
-                  "Es": "OUTPUT ON"
+                "label": {
+                  "inactive": {
+                    "En": "OUTPUT ON",
+                    "Fr": "OUTPUT ON",
+                    "De": "OUTPUT ON",
+                    "Es": "OUTPUT ON"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
@@ -65,11 +67,13 @@
               },
               "Do_Output_OFF": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "OUTPUT OFF",
-                  "Fr": "OUTPUT OFF",
-                  "De": "OUTPUT OFF",
-                  "Es": "OUTPUT OFF"
+                "label": {
+                  "inactive": {
+                    "En": "OUTPUT OFF",
+                    "Fr": "OUTPUT OFF",
+                    "De": "OUTPUT OFF",
+                    "Es": "OUTPUT OFF"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
@@ -110,11 +114,13 @@
             "fields": {
               "Do_Reset": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "RESET (*RST)",
-                  "Fr": "RESET (*RST)",
-                  "De": "RESET (*RST)",
-                  "Es": "RESET (*RST)"
+                "label": {
+                  "inactive": {
+                    "En": "RESET (*RST)",
+                    "Fr": "RESET (*RST)",
+                    "De": "RESET (*RST)",
+                    "Es": "RESET (*RST)"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
@@ -144,11 +150,13 @@
               },
               "Do_Clear_Status": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "CLS (*CLS)",
-                  "Fr": "CLS (*CLS)",
-                  "De": "CLS (*CLS)",
-                  "Es": "CLS (*CLS)"
+                "label": {
+                  "inactive": {
+                    "En": "CLS (*CLS)",
+                    "Fr": "CLS (*CLS)",
+                    "De": "CLS (*CLS)",
+                    "Es": "CLS (*CLS)"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
@@ -178,11 +186,13 @@
               },
               "Do_Display_Panel": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "Display Panel",
-                  "Fr": "Affichage Panel",
-                  "De": "Anzeige Panel",
-                  "Es": "Pantalla Panel"
+                "label": {
+                  "inactive": {
+                    "En": "Display Panel",
+                    "Fr": "Affichage Panel",
+                    "De": "Anzeige Panel",
+                    "Es": "Pantalla Panel"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {

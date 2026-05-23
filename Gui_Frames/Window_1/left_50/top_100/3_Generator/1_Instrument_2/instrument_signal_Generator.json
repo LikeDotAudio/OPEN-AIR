@@ -34,11 +34,13 @@
                 "value": {
                   "default_value": "1e6"
                 },
-                "label_active": {
-                  "En": "Frequency (Hz)",
-                  "Fr": "Fréquence (Hz)",
-                  "De": "Frequenz (Hz)",
-                  "Es": "Frecuencia (Hz)"
+                "label": {
+                  "active": {
+                    "En": "Frequency (Hz)",
+                    "Fr": "Fréquence (Hz)",
+                    "De": "Frequenz (Hz)",
+                    "Es": "Frecuencia (Hz)"
+                  }
                 },
                 "message_details": {
                   "SIGNAL_GENERATOR_MODEL": {
@@ -84,11 +86,13 @@
                 "value": {
                   "default_value": "0"
                 },
-                "label_active": {
-                  "En": "Amplitude (dBm)",
-                  "Fr": "Amplitude (dBm)",
-                  "De": "Amplitude (dBm)",
-                  "Es": "Amplitud (dBm)"
+                "label": {
+                  "active": {
+                    "En": "Amplitude (dBm)",
+                    "Fr": "Amplitude (dBm)",
+                    "De": "Amplitude (dBm)",
+                    "Es": "Amplitud (dBm)"
+                  }
                 },
                 "message_details": {
                   "SIGNAL_GENERATOR_MODEL": {
@@ -131,17 +135,19 @@
             "fields": {
               "output_state": {
                 "type": "_GuiButtonToggle",
-                "label_active": {
-                  "En": "ON",
-                  "Fr": "ON",
-                  "De": "EIN",
-                  "Es": "ENC"
-                },
-                "label_inactive": {
-                  "En": "OFF",
-                  "Fr": "OFF",
-                  "De": "AUS",
-                  "Es": "DES"
+                "label": {
+                  "active": {
+                    "En": "ON",
+                    "Fr": "ON",
+                    "De": "EIN",
+                    "Es": "ENC"
+                  },
+                  "inactive": {
+                    "En": "OFF",
+                    "Fr": "OFF",
+                    "De": "AUS",
+                    "Es": "DES"
+                  }
                 },
                 "style": {
                   "active": {

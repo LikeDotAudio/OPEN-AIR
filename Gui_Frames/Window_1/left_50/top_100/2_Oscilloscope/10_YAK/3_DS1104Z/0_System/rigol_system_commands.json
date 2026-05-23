@@ -24,11 +24,13 @@
             "fields": {
               "Clear": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "Clear",
-                  "Fr": "Effacer",
-                  "De": "Löschen",
-                  "Es": "Borrar"
+                "label": {
+                  "inactive": {
+                    "En": "Clear",
+                    "Fr": "Effacer",
+                    "De": "Löschen",
+                    "Es": "Borrar"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
@@ -57,11 +59,13 @@
               },
               "Force_Trigger": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "Force",
-                  "Fr": "Force",
-                  "De": "Force",
-                  "Es": "Force"
+                "label": {
+                  "inactive": {
+                    "En": "Force",
+                    "Fr": "Force",
+                    "De": "Force",
+                    "Es": "Force"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {

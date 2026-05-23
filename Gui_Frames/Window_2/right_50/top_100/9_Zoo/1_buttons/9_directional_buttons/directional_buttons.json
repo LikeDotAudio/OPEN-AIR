@@ -13,11 +13,13 @@
     "blocks": {
       "elements1": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Navigation",
-          "Fr": "Navigation",
-          "De": "Navigation",
-          "Es": "Navigation"
+        "label": {
+          "active": {
+            "En": "Navigation",
+            "Fr": "Navigation",
+            "De": "Navigation",
+            "Es": "Navigation"
+          }
         },
         "fields": {
           "examplefields": {
@@ -37,11 +39,13 @@
       },
       "elements2": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Camera Movement",
-          "Fr": "Camera Movement",
-          "De": "Camera Movement",
-          "Es": "Camera Movement"
+        "label": {
+          "active": {
+            "En": "Camera Movement",
+            "Fr": "Camera Movement",
+            "De": "Camera Movement",
+            "Es": "Camera Movement"
+          }
         },
         "fields": {
           "examplefields": {
@@ -61,11 +65,13 @@
       },
       "elements3": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Robot Controls",
-          "Fr": "Robot Controls",
-          "De": "Robot Controls",
-          "Es": "Robot Controls"
+        "label": {
+          "active": {
+            "En": "Robot Controls",
+            "Fr": "Robot Controls",
+            "De": "Robot Controls",
+            "Es": "Robot Controls"
+          }
         },
         "fields": {
           "examplefields": {
@@ -85,11 +91,13 @@
       },
       "elements4": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Cursor",
-          "Fr": "Cursor",
-          "De": "Cursor",
-          "Es": "Cursor"
+        "label": {
+          "active": {
+            "En": "Cursor",
+            "Fr": "Cursor",
+            "De": "Cursor",
+            "Es": "Cursor"
+          }
         },
         "fields": {
           "examplefields": {
@@ -109,11 +117,13 @@
       },
       "elements5": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Focus Adjust",
-          "Fr": "Focus Adjust",
-          "De": "Focus Adjust",
-          "Es": "Focus Adjust"
+        "label": {
+          "active": {
+            "En": "Focus Adjust",
+            "Fr": "Focus Adjust",
+            "De": "Focus Adjust",
+            "Es": "Focus Adjust"
+          }
         },
         "fields": {
           "examplefields": {

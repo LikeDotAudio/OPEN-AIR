@@ -18,48 +18,36 @@
           "Identification": {
             "type": "_GuiActuator",
             "label": {
-              "En": "*IDN?",
-              "Fr": "*IDN?",
-              "De": "*IDN?",
-              "Es": "*IDN?"
-            },
-            "label_active": {
-              "En": "*IDN?",
-              "Fr": "*IDN?",
-              "De": "*IDN?",
-              "Es": "*IDN?"
+              "active": {
+                "En": "*IDN?",
+                "Fr": "*IDN?",
+                "De": "*IDN?",
+                "Es": "*IDN?"
+              }
             },
             "message": "*IDN?"
           },
           "Reset": {
             "type": "_GuiActuator",
             "label": {
-              "En": "Reset",
-              "Fr": "Réinitialiser",
-              "De": "Zurücksetzen",
-              "Es": "Reiniciar"
-            },
-            "label_active": {
-              "En": "Reset",
-              "Fr": "Réinitialiser",
-              "De": "Zurücksetzen",
-              "Es": "Reiniciar"
+              "active": {
+                "En": "Reset",
+                "Fr": "Réinitialiser",
+                "De": "Zurücksetzen",
+                "Es": "Reiniciar"
+              }
             },
             "message": "*RST"
           },
           "Beeper State": {
             "type": "_GuiActuator",
             "label": {
-              "En": "Beeper",
-              "Fr": "Avertisseur",
-              "De": "Beeper",
-              "Es": "Beeper"
-            },
-            "label_active": {
-              "En": "Beeper",
-              "Fr": "Avertisseur",
-              "De": "Beeper",
-              "Es": "Beeper"
+              "active": {
+                "En": "Beeper",
+                "Fr": "Avertisseur",
+                "De": "Beeper",
+                "Es": "Beeper"
+              }
             },
             "message": ":SYSTem:BEEPer:STATe {value}",
             "options": [
@@ -70,16 +58,12 @@
           "Key Lock": {
             "type": "_GuiActuator",
             "label": {
-              "En": "Key Lock",
-              "Fr": "Verrouillage des touches",
-              "De": "Tastensperre",
-              "Es": "Bloqueo de teclas"
-            },
-            "label_active": {
-              "En": "Key Lock",
-              "Fr": "Verrouillage des touches",
-              "De": "Tastensperre",
-              "Es": "Bloqueo de teclas"
+              "active": {
+                "En": "Key Lock",
+                "Fr": "Verrouillage des touches",
+                "De": "Tastensperre",
+                "Es": "Bloqueo de teclas"
+              }
             },
             "message": ":SYSTem:KLOCk {value}",
             "options": [
@@ -90,16 +74,12 @@
           "Display State": {
             "type": "_GuiActuator",
             "label": {
-              "En": "Display",
-              "Fr": "Écran",
-              "De": "Anzeige",
-              "Es": "Pantalla"
-            },
-            "label_active": {
-              "En": "Display",
-              "Fr": "Écran",
-              "De": "Anzeige",
-              "Es": "Pantalla"
+              "active": {
+                "En": "Display",
+                "Fr": "Écran",
+                "De": "Anzeige",
+                "Es": "Pantalla"
+              }
             },
             "message": ":DISPlay:STATe {value}",
             "options": [
@@ -110,16 +90,12 @@
           "Error Query": {
             "type": "_GuiActuator",
             "label": {
-              "En": "Query Error",
-              "Fr": "Interroger l'erreur",
-              "De": "Fehler abfragen",
-              "Es": "Consultar error"
-            },
-            "label_active": {
-              "En": "Query Error",
-              "Fr": "Interroger l'erreur",
-              "De": "Fehler abfragen",
-              "Es": "Consultar error"
+              "active": {
+                "En": "Query Error",
+                "Fr": "Interroger l'erreur",
+                "De": "Fehler abfragen",
+                "Es": "Consultar error"
+              }
             },
             "message": ":SYSTem:ERRor?"
           }

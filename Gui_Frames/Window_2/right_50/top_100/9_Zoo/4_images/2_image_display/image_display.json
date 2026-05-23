@@ -13,19 +13,23 @@
     "blocks": {
       "elements1": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Flux Capacitor (PNG)",
-          "Fr": "Flux Capacitor (PNG)",
-          "De": "Flux Capacitor (PNG)",
-          "Es": "Flux Capacitor (PNG)"
+        "label": {
+          "active": {
+            "En": "Flux Capacitor (PNG)",
+            "Fr": "Flux Capacitor (PNG)",
+            "De": "Flux Capacitor (PNG)",
+            "Es": "Flux Capacitor (PNG)"
+          }
         },
         "examplefields": {
           "type": "_GuiImage",
-          "label_active": {
-            "En": "Flux Capacitor",
-            "Fr": "Flux Capacitor",
-            "De": "Flux Capacitor",
-            "Es": "Flux Capacitor"
+          "label": {
+            "active": {
+              "En": "Flux Capacitor",
+              "Fr": "Flux Capacitor",
+              "De": "Flux Capacitor",
+              "Es": "Flux Capacitor"
+            }
           },
           "path": "oaDataCache/assets/images/flux_capacitor.png",
           "notes": "Static display of the Flux Capacitor."
@@ -33,19 +37,23 @@
       },
       "elements2": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Time Circuits (GIF)",
-          "Fr": "Heure Circuits (GIF)",
-          "De": "Zeit Circuits (GIF)",
-          "Es": "Hora Circuits (GIF)"
-        },
-        "examplefields": {
-          "type": "_GuiImage",
-          "label_active": {
+        "label": {
+          "active": {
             "En": "Time Circuits (GIF)",
             "Fr": "Heure Circuits (GIF)",
             "De": "Zeit Circuits (GIF)",
             "Es": "Hora Circuits (GIF)"
+          }
+        },
+        "examplefields": {
+          "type": "_GuiImage",
+          "label": {
+            "active": {
+              "En": "Time Circuits (GIF)",
+              "Fr": "Heure Circuits (GIF)",
+              "De": "Zeit Circuits (GIF)",
+              "Es": "Hora Circuits (GIF)"
+            }
           },
           "path": "oaGui/Assets/time_circuits.gif",
           "notes": "A GIF animation of the time circuits."
@@ -53,19 +61,23 @@
       },
       "elements3": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Unnamed Image (JPG)",
-          "Fr": "Unnamed Image (JPG)",
-          "De": "Unnamed Image (JPG)",
-          "Es": "Unnamed Image (JPG)"
-        },
-        "examplefields": {
-          "type": "_GuiImage",
-          "label_active": {
+        "label": {
+          "active": {
             "En": "Unnamed Image (JPG)",
             "Fr": "Unnamed Image (JPG)",
             "De": "Unnamed Image (JPG)",
             "Es": "Unnamed Image (JPG)"
+          }
+        },
+        "examplefields": {
+          "type": "_GuiImage",
+          "label": {
+            "active": {
+              "En": "Unnamed Image (JPG)",
+              "Fr": "Unnamed Image (JPG)",
+              "De": "Unnamed Image (JPG)",
+              "Es": "Unnamed Image (JPG)"
+            }
           },
           "path": "oaDataCache/assets/images/unnamed_(1).jpg",
           "notes": "A generic JPG image."
@@ -73,19 +85,23 @@
       },
       "elements4": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Another Unnamed Image (JPG)",
-          "Fr": "Another Unnamed Image (JPG)",
-          "De": "Another Unnamed Image (JPG)",
-          "Es": "Another Unnamed Image (JPG)"
-        },
-        "examplefields": {
-          "type": "_GuiImage",
-          "label_active": {
+        "label": {
+          "active": {
             "En": "Another Unnamed Image (JPG)",
             "Fr": "Another Unnamed Image (JPG)",
             "De": "Another Unnamed Image (JPG)",
             "Es": "Another Unnamed Image (JPG)"
+          }
+        },
+        "examplefields": {
+          "type": "_GuiImage",
+          "label": {
+            "active": {
+              "En": "Another Unnamed Image (JPG)",
+              "Fr": "Another Unnamed Image (JPG)",
+              "De": "Another Unnamed Image (JPG)",
+              "Es": "Another Unnamed Image (JPG)"
+            }
           },
           "path": "oaDataCache/assets/images/unnamed.jpg",
           "notes": "Another generic JPG image, different aspect ratio."
@@ -93,19 +109,23 @@
       },
       "elements5": {
         "type": "OcaBlock",
-        "label_active": {
-          "En": "Time Circuits (PNG)",
-          "Fr": "Heure Circuits (PNG)",
-          "De": "Zeit Circuits (PNG)",
-          "Es": "Hora Circuits (PNG)"
-        },
-        "examplefields": {
-          "type": "_GuiImage",
-          "label_active": {
+        "label": {
+          "active": {
             "En": "Time Circuits (PNG)",
             "Fr": "Heure Circuits (PNG)",
             "De": "Zeit Circuits (PNG)",
             "Es": "Hora Circuits (PNG)"
+          }
+        },
+        "examplefields": {
+          "type": "_GuiImage",
+          "label": {
+            "active": {
+              "En": "Time Circuits (PNG)",
+              "Fr": "Heure Circuits (PNG)",
+              "De": "Zeit Circuits (PNG)",
+              "Es": "Hora Circuits (PNG)"
+            }
           },
           "path": "oaGui/Assets/time_circuits.gif.png",
           "notes": "A static PNG version of the time circuits."

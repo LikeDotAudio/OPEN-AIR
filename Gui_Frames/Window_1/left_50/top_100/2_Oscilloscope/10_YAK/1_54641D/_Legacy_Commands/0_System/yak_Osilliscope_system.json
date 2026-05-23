@@ -151,11 +151,13 @@
             "fields": {
               "Do_Run": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "RUN",
-                  "Fr": "EXEC",
-                  "De": "AUSFÜHREN",
-                  "Es": "EJEC"
+                "label": {
+                  "inactive": {
+                    "En": "RUN",
+                    "Fr": "EXEC",
+                    "De": "AUSFÜHREN",
+                    "Es": "EJEC"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
@@ -185,11 +187,13 @@
               },
               "Do_Stop": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "STOP",
-                  "Fr": "STOP",
-                  "De": "STOP",
-                  "Es": "STOP"
+                "label": {
+                  "inactive": {
+                    "En": "STOP",
+                    "Fr": "STOP",
+                    "De": "STOP",
+                    "Es": "STOP"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
@@ -219,11 +223,13 @@
               },
               "Do_Single": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "SINGLE",
-                  "Fr": "SINGLE",
-                  "De": "SINGLE",
-                  "Es": "SINGLE"
+                "label": {
+                  "inactive": {
+                    "En": "SINGLE",
+                    "Fr": "SINGLE",
+                    "De": "SINGLE",
+                    "Es": "SINGLE"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
@@ -253,11 +259,13 @@
               },
               "Do_Autoscale": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "AUTOSCALE",
-                  "Fr": "ÉCHELLE AUTO",
-                  "De": "AUTOSCALE",
-                  "Es": "ESCALA AUTO"
+                "label": {
+                  "inactive": {
+                    "En": "AUTOSCALE",
+                    "Fr": "ÉCHELLE AUTO",
+                    "De": "AUTOSCALE",
+                    "Es": "ESCALA AUTO"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
@@ -292,11 +300,13 @@
             "fields": {
               "Do_Clear_Display": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "Clear Display",
-                  "Fr": "Effacer l'affichage",
-                  "De": "Anzeige löschen",
-                  "Es": "Borrar pantalla"
+                "label": {
+                  "inactive": {
+                    "En": "Clear Display",
+                    "Fr": "Effacer l'affichage",
+                    "De": "Anzeige löschen",
+                    "Es": "Borrar pantalla"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
@@ -331,11 +341,13 @@
             "fields": {
               "Do_Clear_Status": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "CLS",
-                  "Fr": "CLS",
-                  "De": "CLS",
-                  "Es": "CLS"
+                "label": {
+                  "inactive": {
+                    "En": "CLS",
+                    "Fr": "CLS",
+                    "De": "CLS",
+                    "Es": "CLS"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
@@ -365,11 +377,13 @@
               },
               "Do_Reset": {
                 "type": "_GuiActuator",
-                "label_inactive": {
-                  "En": "Reset (*RST)",
-                  "Fr": "Réinitialiser (*RST)",
-                  "De": "Zurücksetzen (*RST)",
-                  "Es": "Reiniciar (*RST)"
+                "label": {
+                  "inactive": {
+                    "En": "Reset (*RST)",
+                    "Fr": "Réinitialiser (*RST)",
+                    "De": "Zurücksetzen (*RST)",
+                    "Es": "Reiniciar (*RST)"
+                  }
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {

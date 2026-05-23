@@ -22,11 +22,13 @@
         "fields": {
           "mdp_1": {
             "type": "_MDP",
-            "label_active": {
-              "En": "MDP 1",
-              "Fr": "MDP 1",
-              "De": "MDP 1",
-              "Es": "MDP 1"
+            "label": {
+              "active": {
+                "En": "MDP 1",
+                "Fr": "MDP 1",
+                "De": "MDP 1",
+                "Es": "MDP 1"
+              }
             },
             "path": "audio/mdp/1",
             "initial_x": 210,
@@ -90,11 +92,13 @@
               ]
             },
             "ltp": {
-              "label_active": {
-                "En": "Level",
-                "Fr": "Level",
-                "De": "Level",
-                "Es": "Level"
+              "label": {
+                "active": {
+                  "En": "Level",
+                  "Fr": "Level",
+                  "De": "Level",
+                  "Es": "Level"
+                }
               },
               "value": {
                 "default_value": -10

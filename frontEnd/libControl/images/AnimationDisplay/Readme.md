@@ -21,12 +21,26 @@ the palette entry, preview, and property manipulators.
 {
   "Animation_Display_Example": {
     "type": "AnimationDisplay",
-    "label_active": "Animated Time Circuits",
+    "label": {
+      "active": "Animated Time Circuits"
+    },
     "gif_path": "oaDataCache/assets/images/time_circuits.gif",
     "value_default": 0,
     "notes": "A standard animation rendered through /api/image.",
-    "layout": { "sticky": "ew", "padx": 5, "pady": 5, "width": 200, "height": 120 },
-    "cosmetics": { "colors": { "primary": "#FF9900", "secondary": "#444444", "background": "#2b2b2b" } }
+    "layout": {
+      "sticky": "ew",
+      "padx": 5,
+      "pady": 5,
+      "width": 200,
+      "height": 120
+    },
+    "cosmetics": {
+      "colors": {
+        "primary": "#FF9900",
+        "secondary": "#444444",
+        "background": "#2b2b2b"
+      }
+    }
   },
   "_README": "Animated image widget. gif_path (or value) is served via /api/image and animates natively."
 }

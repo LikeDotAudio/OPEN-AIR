@@ -21,7 +21,9 @@ in the property editor.
 {
   "button_trapezoid_Example": {
     "type": "_TrapezoidButton",
-    "label_active": "Play",
+    "label": {
+      "active": "Play"
+    },
     "min": 0.0,
     "max": 1.0,
     "value_default": false,

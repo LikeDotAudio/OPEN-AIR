@@ -23,11 +23,13 @@
         "fields": {
           "Surround_5_1_Vert": {
             "type": "OcaBlock",
-            "label_active": {
-              "En": "5.1 Surround (Vertical + Scale)",
-              "Fr": "5.1 Surround (Vertical + Scale)",
-              "De": "5.1 Surround (Vertical + Scale)",
-              "Es": "5.1 Surround (Vertical + Scale)"
+            "label": {
+              "active": {
+                "En": "5.1 Surround (Vertical + Scale)",
+                "Fr": "5.1 Surround (Vertical + Scale)",
+                "De": "5.1 Surround (Vertical + Scale)",
+                "Es": "5.1 Surround (Vertical + Scale)"
+              }
             },
             "layout_columns": 6,
             "column_sizing": [
@@ -418,11 +420,13 @@
           },
           "Surround_5_1_Horiz": {
             "type": "OcaBlock",
-            "label_active": {
-              "En": "5.1 Surround (Horizontal + Start Labels)",
-              "Fr": "5.1 Surround (Horizontal + Start Labels)",
-              "De": "5.1 Surround (Horizontal + Start Labels)",
-              "Es": "5.1 Surround (Horizontal + Start Labels)"
+            "label": {
+              "active": {
+                "En": "5.1 Surround (Horizontal + Start Labels)",
+                "Fr": "5.1 Surround (Horizontal + Start Labels)",
+                "De": "5.1 Surround (Horizontal + Start Labels)",
+                "Es": "5.1 Surround (Horizontal + Start Labels)"
+              }
             },
             "layout_columns": 1,
             "fields": {

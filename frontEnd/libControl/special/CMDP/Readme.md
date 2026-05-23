@@ -21,7 +21,9 @@ in the property editor.
 {
   "circular_motion_displacement_potentiometer_Example": {
     "type": "_CMDP",
-    "label_active": "CMDP 1",
+    "label": {
+      "active": "CMDP 1"
+    },
     "path": "audio/cmdp/1",
     "layout": {
       "sticky": "nsew",

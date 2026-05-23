@@ -34,11 +34,13 @@
                 "value": {
                   "default_value": "1e-3"
                 },
-                "label_active": {
-                  "En": "Time/Div (s)",
-                  "Fr": "Temps/Div (s)",
-                  "De": "Zeit/Div (s)",
-                  "Es": "Tiempo/Div (s)"
+                "label": {
+                  "active": {
+                    "En": "Time/Div (s)",
+                    "Fr": "Temps/Div (s)",
+                    "De": "Zeit/Div (s)",
+                    "Es": "Tiempo/Div (s)"
+                  }
                 },
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
@@ -84,11 +86,13 @@
                 "value": {
                   "default_value": "1"
                 },
-                "label_active": {
-                  "En": "Volts/Div (V)",
-                  "Fr": "Volts/Div (V)",
-                  "De": "Volts/Div (V)",
-                  "Es": "Volts/Div (V)"
+                "label": {
+                  "active": {
+                    "En": "Volts/Div (V)",
+                    "Fr": "Volts/Div (V)",
+                    "De": "Volts/Div (V)",
+                    "Es": "Volts/Div (V)"
+                  }
                 },
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
@@ -120,11 +124,13 @@
               },
               "channel1_coupling": {
                 "type": "_GuiDropDownOption",
-                "label_active": {
-                  "En": "Coupling",
-                  "Fr": "Couplage",
-                  "De": "Kopplung",
-                  "Es": "Acoplamiento"
+                "label": {
+                  "active": {
+                    "En": "Coupling",
+                    "Fr": "Couplage",
+                    "De": "Kopplung",
+                    "Es": "Acoplamiento"
+                  }
                 },
                 "options": [
                   "AC",
@@ -173,11 +179,13 @@
             "fields": {
               "trigger_mode": {
                 "type": "_GuiDropDownOption",
-                "label_active": {
-                  "En": "Mode",
-                  "Fr": "Mode",
-                  "De": "Modus",
-                  "Es": "Modo"
+                "label": {
+                  "active": {
+                    "En": "Mode",
+                    "Fr": "Mode",
+                    "De": "Modus",
+                    "Es": "Modo"
+                  }
                 },
                 "options": [
                   "AUTO",
@@ -218,11 +226,13 @@
                 "value": {
                   "default_value": "0"
                 },
-                "label_active": {
-                  "En": "Level (V)",
-                  "Fr": "Niveau (V)",
-                  "De": "Pegel (V)",
-                  "Es": "Nivel (V)"
+                "label": {
+                  "active": {
+                    "En": "Level (V)",
+                    "Fr": "Niveau (V)",
+                    "De": "Pegel (V)",
+                    "Es": "Nivel (V)"
+                  }
                 },
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
@@ -265,17 +275,19 @@
             "fields": {
               "run_stop": {
                 "type": "_GuiButtonToggle",
-                "label_active": {
-                  "En": "RUN",
-                  "Fr": "EXEC",
-                  "De": "AUSFÜHREN",
-                  "Es": "EJEC"
-                },
-                "label_inactive": {
-                  "En": "STOP",
-                  "Fr": "STOP",
-                  "De": "STOP",
-                  "Es": "STOP"
+                "label": {
+                  "active": {
+                    "En": "RUN",
+                    "Fr": "EXEC",
+                    "De": "AUSFÜHREN",
+                    "Es": "EJEC"
+                  },
+                  "inactive": {
+                    "En": "STOP",
+                    "Fr": "STOP",
+                    "De": "STOP",
+                    "Es": "STOP"
+                  }
                 },
                 "style": {
                   "active": {

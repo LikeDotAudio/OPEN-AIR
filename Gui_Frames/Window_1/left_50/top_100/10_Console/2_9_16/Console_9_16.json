@@ -1133,10 +1133,14 @@
                 "De": "",
                 "Es": ""
               },
-              "value_default": 0,
+              "domain": {
+                "min": -100,
+                "max": 20
+              },
+              "value": {
+                "default_value": 0
+              },
               "reff_point": -15,
-              "value_min": -100,
-              "value_max": 20,
               "ticks": [
                 -100,
                 -80,

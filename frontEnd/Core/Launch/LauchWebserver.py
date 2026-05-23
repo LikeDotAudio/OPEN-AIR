@@ -1,5 +1,6 @@
 import json
 import os
+import re
 import time
 import urllib.parse
 from http.server import HTTPServer, SimpleHTTPRequestHandler
@@ -49,13 +50,81 @@ def strip_volatile(obj):
     return obj
 
 
+def _extract_readme_json(md_text):
+    """Return the first ```json fenced block in a markdown file, parsed; or None."""
+    m = re.search(r"```json\s*\n(.*?)\n```", md_text, re.DOTALL)
+    if not m:
+        return None
+    try:
+        return json.loads(m.group(1))
+    except Exception:
+        return None
+
+
+def _add_components(content, category, relpath, components, legends, seen):
+    """Append widget entries from a parsed sample dict (deduped by name); merge
+    every _LEGEND enum block into the shared legends lookup."""
+    for key, schema in content.items():
+        # _LEGEND blocks enumerate allowed enum values (visualization_types,
+        # knob_styles, …). Merge them (union) into the global legends lookup.
+        if key == "_LEGEND" and isinstance(schema, dict):
+            for lk, lv in schema.items():
+                if isinstance(lv, list):
+                    bucket = legends.setdefault(lk, [])
+                    for item in lv:
+                        if item not in bucket:
+                            bucket.append(item)
+            continue
+        if key == "_README":
+            continue
+        # Skip non-widget entries (no "type") and names already supplied.
+        if not isinstance(schema, dict) or "type" not in schema:
+            continue
+        if key in seen:
+            continue
+        seen.add(key)
+        components.append({
+            "name": key,
+            "category": category,
+            "type": schema.get("type", "unknown"),
+            "schema": schema,
+            "path": relpath,
+        })
+
+
 def get_grab_bag():
-    """Scan oaGuiElements for sample.json palette templates (mirrors the Python
-    GrabBagLoader). Returns a flat, categorized component list for the editor."""
-    root = os.path.abspath(os.path.join(FRONTEND_DIR, "..", "oaGuiElements"))
+    """Build the WYSIWYG palette. The libControl component READMEs are the source
+    of truth: each <Component>/Readme.md embeds one ```json sample block. We scan
+    those first (authoritative), then fall back to oaGuiElements/*/sample.json for
+    any widget a README has not already provided (deduped by sample name). Returns
+    a flat, categorized component list + merged enum legends for the editor."""
     components = []
-    legends = {}  # merged enum lookups from every sample.json _LEGEND block
-    for dirpath, _dirnames, filenames in os.walk(root):
+    legends = {}
+    seen = set()
+
+    # 1. libControl component READMEs — authoritative.
+    lib_root = os.path.join(FRONTEND_DIR, "libControl")
+    for dirpath, _dirnames, filenames in os.walk(lib_root):
+        readme = next((f for f in filenames if f.lower() == "readme.md"), None)
+        if not readme:
+            continue
+        full = os.path.join(dirpath, readme)
+        try:
+            content = _extract_readme_json(open(full, encoding="utf-8").read())
+        except Exception:
+            content = None
+        if not content:
+            continue
+        rel = os.path.relpath(dirpath, lib_root).split(os.sep)
+        # Category = the libControl group folder (buttons, faders, …); a component
+        # sitting at the libControl root (BreakLine) is grouped as "structure".
+        category = rel[0] if len(rel) > 1 else "structure"
+        _add_components(content, category, os.path.relpath(full, FRONTEND_DIR),
+                        components, legends, seen)
+
+    # 2. oaGuiElements/*/sample.json — fallback for widgets with no libControl README.
+    oag_root = os.path.abspath(os.path.join(FRONTEND_DIR, "..", "oaGuiElements"))
+    for dirpath, _dirnames, filenames in os.walk(oag_root):
         if "sample.json" not in filenames:
             continue
         full = os.path.join(dirpath, "sample.json")
@@ -64,31 +133,13 @@ def get_grab_bag():
                 content = json.load(f)
         except Exception:
             continue
-        rel_parts = os.path.relpath(dirpath, root).split(os.sep)
+        rel_parts = os.path.relpath(dirpath, oag_root).split(os.sep)
         # Category = first meaningful folder segment (skip Core/Assets wrappers).
         meaningful = [p for p in rel_parts if p not in ("Core", "Assets", ".")]
         category = meaningful[0] if meaningful else "General"
-        for key, schema in content.items():
-            # _LEGEND blocks enumerate allowed enum values (visualization_types,
-            # knob_styles, …). Merge them (union) into the global legends lookup.
-            if key == "_LEGEND" and isinstance(schema, dict):
-                for lk, lv in schema.items():
-                    if isinstance(lv, list):
-                        bucket = legends.setdefault(lk, [])
-                        for item in lv:
-                            if item not in bucket:
-                                bucket.append(item)
-                continue
-            # Skip other non-widget entries (no "type").
-            if not isinstance(schema, dict) or "type" not in schema:
-                continue
-            components.append({
-                "name": key,
-                "category": category,
-                "type": schema.get("type", "unknown"),
-                "schema": schema,
-                "path": os.path.relpath(full, root),
-            })
+        _add_components(content, category, os.path.relpath(full, oag_root),
+                        components, legends, seen)
+
     components.sort(key=lambda c: (c["category"].lower(), c["name"].lower()))
     return {"components": components, "legends": legends}
 

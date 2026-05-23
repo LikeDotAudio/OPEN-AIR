@@ -16,9 +16,18 @@
             "type": "_GuiActuator",
             "AES70": "OcaBooleanActuator",
             "style": {
-              "active_bg_color": "#000000",
-              "active_color": "#FF9900",
-              "bg_color": "#2b2b2b"
+              "active": {
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
             },
             "message": ":MEAS?"
           },

@@ -1,0 +1,101 @@
+# DynamicGraph — live ECharts graph
+
+Live chart driven by MQTT data, rendered with Apache ECharts.
+
+- **Defines (global):** `DynamicGraph`
+- **Props:** `value` (the MQTT data payload), `config` (`label`, `geometry.height`, series options)
+- **Requires:** the `echarts` global (the host page / demo loads it from CDN).
+- **Loaded by:** the live app via `frontEnd/Core/Launch/index.html`.
+- **Demo:** `../index.html` (loads ECharts; standalone graph harness).
+
+<!-- wysiwyg:sample (auto-generated from oaGuiElements; edit here to drive the library) -->
+## Sample (WYSIWYG library source)
+
+The WYSIWYG editor builds this widget's **palette entry, live preview, and
+property manipulators** from the JSON block below. The web server
+(`frontEnd/Core/Launch/LauchWebserver.py` → `get_grab_bag()`) scans these
+READMEs, extracts this block, and serves it at `/api/grabbag`. `_README`
+documents the widget; every `_LEGEND` array becomes a dropdown of allowed values
+in the property editor.
+
+```json
+{
+  "dynamic_graph_Example": {
+    "type": "plot_widget",
+    "id": "multi_dataset_plot",
+    "transparent": true,
+    "layout": {
+      "height": 1000,
+      "sticky": "",
+      "weight_y": 1
+    },
+    "plot_mode": "time_domain",
+    "title": "High Resolution Spectrum Scan",
+    "axis": {
+      "x": {
+        "label": "Frequency (GHz)",
+        "scale": "linear",
+        "min": 0,
+        "max": 1,
+        "color": "white"
+      },
+      "y": {
+        "label": "Amplitude (dBm)",
+        "scale": "linear",
+        "min": -1.5,
+        "max": 1.5,
+        "color": "white"
+      },
+      "show_grid": true,
+      "show_x_axis": true,
+      "show_y_axis": true
+    },
+    "style": {
+      "background_color": "match_theme",
+      "grid_color": "darkgrey",
+      "title_color": "white"
+    },
+    "datasets": [
+      {
+        "id": "ref_linear",
+        "label": "Reference",
+        "style": {
+          "line_color": "white",
+          "line_width": 1,
+          "smoothing": 0
+        },
+        "initial_csv_data": "x,y\n0,0\n1,1"
+      },
+      {
+        "id": "sig_a",
+        "label": "Signal Alpha",
+        "style": {
+          "line_color": "cyan",
+          "line_width": 2,
+          "smoothing": 5
+        },
+        "initial_csv_data": "x,y\n0.000,0.000\n0.010,0.063\n0.020,0.125\n0.030,0.187\n0.040,0.249\n0.050,0.309\n0.060,0.368\n0.070,0.426\n0.080,0.482\n0.090,0.536\n0.100,0.588\n0.110,0.637\n0.120,0.685\n0.130,0.729\n0.140,0.771\n0.150,0.809\n0.160,0.844\n0.170,0.876\n0.180,0.905\n0.190,0.930\n0.200,0.951\n0.210,0.969\n0.220,0.982\n0.230,0.992\n0.240,0.998\n0.250,1.000\n0.260,0.998\n0.270,0.992\n0.280,0.982\n0.290,0.969\n0.300,0.951\n0.310,0.930\n0.320,0.905\n0.330,0.876\n0.340,0.844\n0.350,0.809\n0.360,0.771\n0.370,0.729\n0.380,0.685\n0.390,0.637\n0.400,0.588\n0.410,0.536\n0.420,0.482\n0.430,0.426\n0.440,0.368\n0.450,0.309\n0.460,0.249\n0.470,0.187\n0.480,0.125\n0.490,0.063\n0.500,0.000\n0.510,-0.063\n0.520,-0.125\n0.530,-0.187\n0.540,-0.249\n0.550,-0.309\n0.560,-0.368\n0.570,-0.426\n0.580,-0.482\n0.590,-0.536\n0.600,-0.588\n0.610,-0.637\n0.620,-0.685\n0.630,-0.729\n0.640,-0.771\n0.650,-0.809\n0.660,-0.844\n0.670,-0.876\n0.680,-0.905\n0.690,-0.930\n0.700,-0.951\n0.710,-0.969\n0.720,-0.982\n0.730,-0.992\n0.740,-0.998\n0.750,-1.000\n0.760,-0.998\n0.770,-0.992\n0.780,-0.982\n0.790,-0.969\n0.800,-0.951\n0.810,-0.930\n0.820,-0.905\n0.830,-0.876\n0.840,-0.844\n0.850,-0.809\n0.860,-0.771\n0.870,-0.729\n0.880,-0.685\n0.890,-0.637\n0.900,-0.588\n0.910,-0.536\n0.920,-0.482\n0.930,-0.426\n0.940,-0.368\n0.950,-0.309\n0.960,-0.249\n0.970,-0.187\n0.980,-0.125\n0.990,-0.063\n1.000,-0.000"
+      },
+      {
+        "id": "sig_b",
+        "label": "Signal Beta",
+        "style": {
+          "line_color": "magenta",
+          "line_width": 2,
+          "smoothing": 5
+        },
+        "initial_csv_data": "x,y\n0.000,1.000\n0.010,0.998\n0.020,0.992\n0.030,0.982\n0.040,0.969\n0.050,0.951\n0.060,0.930\n0.070,0.905\n0.080,0.876\n0.090,0.844\n0.100,0.809\n0.110,0.771\n0.120,0.729\n0.130,0.685\n0.140,0.637\n0.150,0.588\n0.160,0.536\n0.170,0.482\n0.180,0.426\n0.190,0.368\n0.200,0.309\n0.210,0.249\n0.220,0.187\n0.230,0.125\n0.240,0.063\n0.250,0.000\n0.260,-0.063\n0.270,-0.125\n0.280,-0.187\n0.290,-0.249\n0.300,-0.309\n0.310,-0.368\n0.320,-0.426\n0.330,-0.482\n0.340,-0.536\n0.350,-0.588\n0.360,-0.637\n0.370,-0.685\n0.380,-0.729\n0.390,-0.771\n0.400,-0.809\n0.410,-0.844\n0.420,-0.876\n0.430,-0.905\n0.440,-0.930\n0.450,-0.951\n0.460,-0.969\n0.470,-0.982\n0.480,-0.992\n0.490,-0.998\n0.500,-1.000\n0.510,-0.998\n0.520,-0.992\n0.530,-0.982\n0.540,-0.969\n0.550,-0.951\n0.560,-0.930\n0.570,-0.905\n0.580,-0.876\n0.590,-0.844\n0.600,-0.809\n0.610,-0.771\n0.620,-0.729\n0.630,-0.685\n0.640,-0.637\n0.650,-0.588\n0.660,-0.536\n0.670,-0.482\n0.680,-0.426\n0.690,-0.368\n0.700,-0.309\n0.710,-0.249\n0.720,-0.187\n0.730,-0.125\n0.740,-0.063\n0.750,-0.000\n0.760,0.063\n0.770,0.125\n0.780,0.187\n0.790,0.249\n0.800,0.309\n0.810,0.368\n0.820,0.426\n0.830,0.482\n0.840,0.536\n0.850,0.588\n0.860,0.637\n0.870,0.685\n0.880,0.729\n0.890,0.771\n0.900,0.809\n0.910,0.844\n0.920,0.876\n0.930,0.905\n0.940,0.930\n0.950,0.951\n0.960,0.969\n0.970,0.982\n0.980,0.992\n0.990,0.998\n1.000,1.000"
+      }
+    ],
+    "Navigation": {
+      "enable_zoom": true,
+      "enable_pan": true,
+      "show_hover_value": true
+    },
+    "geometry": {
+      "width": 831
+    }
+  },
+  "_README": "Live ECharts plot driven by MQTT data. type=plot_widget; series/axes come from config."
+}
+```

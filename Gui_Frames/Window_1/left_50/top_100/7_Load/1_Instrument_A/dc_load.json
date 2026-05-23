@@ -48,16 +48,24 @@
                   "DC_LOAD_MODEL": {
                     "type": "_GuiActuator",
                     "style": {
-                      "active_text_color": "#1a1a1a",
-                      "text_color": "#888888",
-                      "active_font_style": "bold",
-                      "active_font_size": null,
-                      "inactive_font_style": "normal",
-                      "inactive_font_size": null,
-                      "active_color": "#FF9900",
-                      "active_bg_color": "#000000",
-                      "bg_color": "#2b2b2b",
-                      "glow_intensity": 1.944
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#1a1a1a",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
                     },
                     "trigger": false,
                     "command_value": "INP <state>"
@@ -79,32 +87,48 @@
                   "Es": "POTENCIA CONSTANTE"
                 },
                 "style": {
-                  "active_text_color": "#1a1a1a",
-                  "text_color": "#888888",
-                  "active_font_style": "bold",
-                  "active_font_size": null,
-                  "inactive_font_style": "normal",
-                  "inactive_font_size": null,
-                  "active_color": "#FF9900",
-                  "active_bg_color": "#000000",
-                  "bg_color": "#2b2b2b",
-                  "glow_intensity": 1.944
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#1a1a1a",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
                 },
                 "state_default": true,
                 "message_details": {
                   "DC_LOAD_MODEL": {
                     "type": "_GuiActuator",
                     "style": {
-                      "active_text_color": "#1a1a1a",
-                      "text_color": "#888888",
-                      "active_font_style": "bold",
-                      "active_font_size": null,
-                      "inactive_font_style": "normal",
-                      "inactive_font_size": null,
-                      "active_color": "#FF9900",
-                      "active_bg_color": "#000000",
-                      "bg_color": "#2b2b2b",
-                      "glow_intensity": 1.944
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#1a1a1a",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
                     },
                     "trigger": false,
                     "command_value": "MODE <value>"
@@ -151,16 +175,24 @@
                       "DC_LOAD_MODEL": {
                         "type": "_GuiActuator",
                         "style": {
-                          "active_text_color": "#1a1a1a",
-                          "text_color": "#888888",
-                          "active_font_style": "bold",
-                          "active_font_size": null,
-                          "inactive_font_style": "normal",
-                          "inactive_font_size": null,
-                          "active_color": "#FF9900",
-                          "active_bg_color": "#000000",
-                          "bg_color": "#2b2b2b",
-                          "glow_intensity": 1.944
+                          "active": {
+                            "font_style": "bold",
+                            "font_size": null,
+                            "text_color": "#1a1a1a",
+                            "bg_color": "#000000",
+                            "border_color": "#FF9900",
+                            "border_thickness": 2,
+                            "glow_intensity": 1.944
+                          },
+                          "inactive": {
+                            "font_style": "normal",
+                            "font_size": null,
+                            "text_color": "#888888",
+                            "bg_color": "#2b2b2b",
+                            "border_color": "#555555",
+                            "border_thickness": 2,
+                            "glow_intensity": 0
+                          }
                         },
                         "trigger": false,
                         "command_value": "CURR <value>"
@@ -198,16 +230,24 @@
                       "DC_LOAD_MODEL": {
                         "type": "_GuiActuator",
                         "style": {
-                          "active_text_color": "#1a1a1a",
-                          "text_color": "#888888",
-                          "active_font_style": "bold",
-                          "active_font_size": null,
-                          "inactive_font_style": "normal",
-                          "inactive_font_size": null,
-                          "active_color": "#FF9900",
-                          "active_bg_color": "#000000",
-                          "bg_color": "#2b2b2b",
-                          "glow_intensity": 1.944
+                          "active": {
+                            "font_style": "bold",
+                            "font_size": null,
+                            "text_color": "#1a1a1a",
+                            "bg_color": "#000000",
+                            "border_color": "#FF9900",
+                            "border_thickness": 2,
+                            "glow_intensity": 1.944
+                          },
+                          "inactive": {
+                            "font_style": "normal",
+                            "font_size": null,
+                            "text_color": "#888888",
+                            "bg_color": "#2b2b2b",
+                            "border_color": "#555555",
+                            "border_thickness": 2,
+                            "glow_intensity": 0
+                          }
                         },
                         "trigger": false,
                         "command_value": "CURR:TLEV <value>"
@@ -229,32 +269,48 @@
                       "Es": "PULSE OFF"
                     },
                     "style": {
-                      "active_text_color": "#1a1a1a",
-                      "text_color": "#888888",
-                      "active_font_style": "bold",
-                      "active_font_size": null,
-                      "inactive_font_style": "normal",
-                      "inactive_font_size": null,
-                      "active_color": "#FF9900",
-                      "active_bg_color": "#000000",
-                      "bg_color": "#2b2b2b",
-                      "glow_intensity": 1.944
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#1a1a1a",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
                     },
                     "state_default": false,
                     "message_details": {
                       "DC_LOAD_MODEL": {
                         "type": "_GuiActuator",
                         "style": {
-                          "active_text_color": "#1a1a1a",
-                          "text_color": "#888888",
-                          "active_font_style": "bold",
-                          "active_font_size": null,
-                          "inactive_font_style": "normal",
-                          "inactive_font_size": null,
-                          "active_color": "#FF9900",
-                          "active_bg_color": "#000000",
-                          "bg_color": "#2b2b2b",
-                          "glow_intensity": 1.944
+                          "active": {
+                            "font_style": "bold",
+                            "font_size": null,
+                            "text_color": "#1a1a1a",
+                            "bg_color": "#000000",
+                            "border_color": "#FF9900",
+                            "border_thickness": 2,
+                            "glow_intensity": 1.944
+                          },
+                          "inactive": {
+                            "font_style": "normal",
+                            "font_size": null,
+                            "text_color": "#888888",
+                            "bg_color": "#2b2b2b",
+                            "border_color": "#555555",
+                            "border_thickness": 2,
+                            "glow_intensity": 0
+                          }
                         },
                         "trigger": false,
                         "command_value": "TRAN:STAT <value>"
@@ -294,16 +350,24 @@
                   "DC_LOAD_MODEL": {
                     "type": "_GuiActuator",
                     "style": {
-                      "active_text_color": "#1a1a1a",
-                      "text_color": "#888888",
-                      "active_font_style": "bold",
-                      "active_font_size": null,
-                      "inactive_font_style": "normal",
-                      "inactive_font_size": null,
-                      "active_color": "#FF9900",
-                      "active_bg_color": "#000000",
-                      "bg_color": "#2b2b2b",
-                      "glow_intensity": 1.944
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#1a1a1a",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
                     },
                     "trigger": false,
                     "command_value": "VOLT:PROT:LOW <value>"
@@ -330,16 +394,24 @@
                   "DC_LOAD_MODEL": {
                     "type": "_GuiActuator",
                     "style": {
-                      "active_text_color": "#1a1a1a",
-                      "text_color": "#888888",
-                      "active_font_style": "bold",
-                      "active_font_size": null,
-                      "inactive_font_style": "normal",
-                      "inactive_font_size": null,
-                      "active_color": "#FF9900",
-                      "active_bg_color": "#000000",
-                      "bg_color": "#2b2b2b",
-                      "glow_intensity": 1.944
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#1a1a1a",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
                     },
                     "trigger": false,
                     "command_value": "CURR:SLEW <value>"
@@ -375,16 +447,24 @@
                       "DC_LOAD_MODEL": {
                         "type": "_GuiActuator",
                         "style": {
-                          "active_text_color": "#1a1a1a",
-                          "text_color": "#888888",
-                          "active_font_style": "bold",
-                          "active_font_size": null,
-                          "inactive_font_style": "normal",
-                          "inactive_font_size": null,
-                          "active_color": "#FF9900",
-                          "active_bg_color": "#000000",
-                          "bg_color": "#2b2b2b",
-                          "glow_intensity": 1.944
+                          "active": {
+                            "font_style": "bold",
+                            "font_size": null,
+                            "text_color": "#1a1a1a",
+                            "bg_color": "#000000",
+                            "border_color": "#FF9900",
+                            "border_thickness": 2,
+                            "glow_intensity": 1.944
+                          },
+                          "inactive": {
+                            "font_style": "normal",
+                            "font_size": null,
+                            "text_color": "#888888",
+                            "bg_color": "#2b2b2b",
+                            "border_color": "#555555",
+                            "border_thickness": 2,
+                            "glow_intensity": 0
+                          }
                         },
                         "trigger": false,
                         "command_value": "MEAS:AH?"
@@ -406,16 +486,24 @@
                       "DC_LOAD_MODEL": {
                         "type": "_GuiActuator",
                         "style": {
-                          "active_text_color": "#1a1a1a",
-                          "text_color": "#888888",
-                          "active_font_style": "bold",
-                          "active_font_size": null,
-                          "inactive_font_style": "normal",
-                          "inactive_font_size": null,
-                          "active_color": "#FF9900",
-                          "active_bg_color": "#000000",
-                          "bg_color": "#2b2b2b",
-                          "glow_intensity": 1.944
+                          "active": {
+                            "font_style": "bold",
+                            "font_size": null,
+                            "text_color": "#1a1a1a",
+                            "bg_color": "#000000",
+                            "border_color": "#FF9900",
+                            "border_thickness": 2,
+                            "glow_intensity": 1.944
+                          },
+                          "inactive": {
+                            "font_style": "normal",
+                            "font_size": null,
+                            "text_color": "#888888",
+                            "bg_color": "#2b2b2b",
+                            "border_color": "#555555",
+                            "border_thickness": 2,
+                            "glow_intensity": 0
+                          }
                         },
                         "trigger": false,
                         "command_value": "MEAS:WH?"
@@ -437,16 +525,24 @@
                       "DC_LOAD_MODEL": {
                         "type": "_GuiActuator",
                         "style": {
-                          "active_text_color": "#1a1a1a",
-                          "text_color": "#888888",
-                          "active_font_style": "bold",
-                          "active_font_size": null,
-                          "inactive_font_style": "normal",
-                          "inactive_font_size": null,
-                          "active_color": "#FF9900",
-                          "active_bg_color": "#000000",
-                          "bg_color": "#2b2b2b",
-                          "glow_intensity": 1.944
+                          "active": {
+                            "font_style": "bold",
+                            "font_size": null,
+                            "text_color": "#1a1a1a",
+                            "bg_color": "#000000",
+                            "border_color": "#FF9900",
+                            "border_thickness": 2,
+                            "glow_intensity": 1.944
+                          },
+                          "inactive": {
+                            "font_style": "normal",
+                            "font_size": null,
+                            "text_color": "#888888",
+                            "bg_color": "#2b2b2b",
+                            "border_color": "#555555",
+                            "border_thickness": 2,
+                            "glow_intensity": 0
+                          }
                         },
                         "trigger": false,
                         "command_value": "FETC:TIME?"
@@ -474,16 +570,24 @@
                   "DC_LOAD_MODEL": {
                     "type": "_GuiActuator",
                     "style": {
-                      "active_text_color": "#1a1a1a",
-                      "text_color": "#888888",
-                      "active_font_style": "bold",
-                      "active_font_size": null,
-                      "inactive_font_style": "normal",
-                      "inactive_font_size": null,
-                      "active_color": "#FF9900",
-                      "active_bg_color": "#000000",
-                      "bg_color": "#2b2b2b",
-                      "glow_intensity": 1.944
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#1a1a1a",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
                     },
                     "trigger": false,
                     "command_value": "MEAS:VOLT?;MEAS:CURR?"

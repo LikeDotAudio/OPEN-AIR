@@ -56,9 +56,13 @@
               "Es": "Kick"
             },
             "fader_config": {
-              "value_min": -60.0,
-              "value_max": 12.0,
-              "value_default": -10.0,
+              "domain": {
+                "min": -60.0,
+                "max": 12.0
+              },
+              "value": {
+                "default_value": -10.0
+              },
               "value_highlight_color": "#FF3131",
               "show_value": true,
               "unit_text": "dB",
@@ -90,9 +94,13 @@
               "Es": "Snare"
             },
             "fader_config": {
-              "value_min": -60.0,
-              "value_max": 12.0,
-              "value_default": -5.0,
+              "domain": {
+                "min": -60.0,
+                "max": 12.0
+              },
+              "value": {
+                "default_value": -5.0
+              },
               "value_highlight_color": "#39FF14"
             },
             "knob_config": {
@@ -122,9 +130,13 @@
               "Es": "Hat"
             },
             "fader_config": {
-              "value_min": -60.0,
-              "value_max": 12.0,
-              "value_default": -15.0,
+              "domain": {
+                "min": -60.0,
+                "max": 12.0
+              },
+              "value": {
+                "default_value": -15.0
+              },
               "value_highlight_color": "#33A1FD"
             },
             "knob_config": {
@@ -153,9 +165,13 @@
               "Es": "Toms"
             },
             "fader_config": {
-              "value_min": -60.0,
-              "value_max": 12.0,
-              "value_default": -20.0,
+              "domain": {
+                "min": -60.0,
+                "max": 12.0
+              },
+              "value": {
+                "default_value": -20.0
+              },
               "value_highlight_color": "yellow"
             },
             "knob_config": {
@@ -184,9 +200,13 @@
               "Es": "Bass"
             },
             "fader_config": {
-              "value_min": -60.0,
-              "value_max": 12.0,
-              "value_default": 0.0,
+              "domain": {
+                "min": -60.0,
+                "max": 12.0
+              },
+              "value": {
+                "default_value": 0.0
+              },
               "value_highlight_color": "#FF6B35"
             },
             "knob_config": {
@@ -213,9 +233,13 @@
               "Es": "Gtr L"
             },
             "fader_config": {
-              "value_min": -60.0,
-              "value_max": 12.0,
-              "value_default": -12.0,
+              "domain": {
+                "min": -60.0,
+                "max": 12.0
+              },
+              "value": {
+                "default_value": -12.0
+              },
               "value_highlight_color": "#00FFFF"
             },
             "knob_config": {
@@ -243,9 +267,13 @@
               "Es": "Gtr R"
             },
             "fader_config": {
-              "value_min": -60.0,
-              "value_max": 12.0,
-              "value_default": -12.0,
+              "domain": {
+                "min": -60.0,
+                "max": 12.0
+              },
+              "value": {
+                "default_value": -12.0
+              },
               "value_highlight_color": "#FFA500"
             },
             "knob_config": {
@@ -272,9 +300,13 @@
               "Es": "Vox"
             },
             "fader_config": {
-              "value_min": -60.0,
-              "value_max": 12.0,
-              "value_default": 5.0,
+              "domain": {
+                "min": -60.0,
+                "max": 12.0
+              },
+              "value": {
+                "default_value": 5.0
+              },
               "value_highlight_color": "#FFFFFF"
             },
             "knob_config": {

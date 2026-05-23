@@ -21,17 +21,27 @@
       "path": "Audio/Output/Mute"
     },
     "cosmetics": {
-      "active_color": "#FF3300",
-      "active_bg_color": "#220000",
-      "bg_color": "#1a1a1a",
-      "active_text_color": "#FFFFFF",
-      "text_color": "#888888",
-      "glow_intensity": 1.5,
-      "alpha": 1.0,
-      "active_font_style": "bold",
-      "active_font_size": 11,
-      "inactive_font_style": "normal",
-      "inactive_font_size": 10
+      "alpha": 1.0
+    },
+    "style": {
+      "active": {
+        "font_style": "bold",
+        "font_size": 11,
+        "text_color": "#FFFFFF",
+        "bg_color": "#220000",
+        "border_color": "#FF3300",
+        "border_thickness": 2,
+        "glow_intensity": 1.5
+      },
+      "inactive": {
+        "font_style": "normal",
+        "font_size": 10,
+        "text_color": "#888888",
+        "bg_color": "#1a1a1a",
+        "border_color": "#555555",
+        "border_thickness": 2,
+        "glow_intensity": 0
+      }
     },
     "readout": {
       "label_position": "top"
@@ -59,6 +69,8 @@
   "_LEGEND": {
     "toggle_types": ["_SmartToggle", "_GuiButtonToggle"],
     "options_keys": "The 'ON' and 'OFF' keys in interaction.options are mandatory for boolean mapping.",
-    "font_styles": ["normal", "bold", "italic"]
+    "font_styles": ["normal", "bold", "italic"],
+    "style_states": ["active", "inactive"],
+    "style_params": "style.active and style.inactive carry the SAME params: font_style, font_size, text_color, bg_color, border_color, border_thickness, glow_intensity."
   }
 }

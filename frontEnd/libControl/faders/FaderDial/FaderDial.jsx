@@ -26,6 +26,13 @@ const FaderDial = ({ value, onChange, config }) => {
     const decimals = _dot === -1 ? 0 : (stepStr.length - _dot - 1);
     const knobSteps = Math.max(1, Math.round(stepCoarse / stepFine)); // fine steps per coarse
 
+    // Readout width is driven by the DOMAIN (max + precision), NOT the box height:
+    // it must always fit the widest value the field can show, at full precision —
+    // e.g. max 6000 at step .001 => "6000.000" (8 chars). Monospace => 1ch per
+    // glyph, so the pixel width tracks the font size automatically.
+    const fmtLen = (v) => (Number.isFinite(v) ? v.toFixed(decimals) : String(v ?? '')).length;
+    const valueChars = Math.max(fmtLen(min), fmtLen(max), decimals + 2);
+
     const [inputValue, setInputValue] = React.useState((value !== undefined ? value : min).toFixed(decimals));
     React.useEffect(() => {
         setInputValue((value !== undefined ? value : min).toFixed(decimals));
@@ -135,7 +142,7 @@ const FaderDial = ({ value, onChange, config }) => {
                 <input type="text" value={inputValue}
                     onChange={handleTextChange} onBlur={handleTextBlur} onKeyDown={handleTextKeyDown}
                     style={{
-                        width: `${Math.max(40, Math.round(H * 0.9))}px`,
+                        width: `calc(${valueChars}ch + 4px)`, boxSizing: 'content-box',
                         backgroundColor: '#111', color: '#fff', border: '1px inset #222',
                         padding: '2px 4px', textAlign: 'center', fontFamily: 'monospace',
                         fontSize: `${valueFont}px`, borderRadius: '3px', outline: 'none',

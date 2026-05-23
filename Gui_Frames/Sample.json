@@ -1,311 +1,2181 @@
 {
-  "OPEN_AIR_GRAB_BAG": {
+  "Sample": {
     "type": "OcaBin",
-    "description": "The Ultimate OPEN-AIR GUI Reference Guide. This file demonstrates every supported widget type and parameter.",
+    "description": {
+      "En": "OPEN-AIR Component Sample Library"
+    },
     "behavior": {
       "fluid_ew": true,
-      "overflow_ew": "auto",
+      "overflow_ew": "hidden",
       "overflow_ns": "auto"
     },
     "blocks": {
-      "SECTION_1_STRUCTURE": {
+      "SECTION_KNOBS": {
         "type": "OcaBlock",
-        "description": "01: Structural Containers",
-        "layout_columns": 2,
+        "description": {
+          "En": "Knobs"
+        },
+        "layout_columns": 3,
         "fields": {
-          "bin_info": {
-            "type": "_Label",
-            "label": "OcaBin: High-level container with scrolling and background management."
+          "Exhaustive_Knob_Example": {
+            "type": "_SmartKnob",
+            "identity": {
+              "label": "Master Tuning",
+              "id": "tuning_knob_01",
+              "notes": "A ultra-complete example of the photorealistic rotary control."
+            },
+            "geometry": {
+              "width": 200,
+              "height": 250,
+              "padding": 10,
+              "stretch": "none",
+              "anchor": "center",
+              "align": "center"
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 1000.0,
+                "value_default": 500.0,
+                "unit": "MHz",
+                "zero_point": 0.0,
+                "step": 0.1,
+                "law": "linear"
+              },
+              "rotation": {
+                "value": 500.0
+              }
+            },
+            "dynamics": {
+              "fps_limit": 60,
+              "smoothing": 0.1,
+              "retention": 500,
+              "attack_ms": 50,
+              "release_ms": 300,
+              "ballistics": "vu",
+              "path": "System/DSP/Oscillator/Freq"
+            },
+            "cosmetics": {
+              "visualization": "dial",
+              "colors": {
+                "primary": "#33A1FD",
+                "secondary": "#444444",
+                "alert": "#FF0000",
+                "warning": "#FFA500",
+                "background": "#2b2b2b",
+                "highlight": "#FFFFFF",
+                "active": "#00FF00"
+              },
+              "style_flags": {
+                "show_grid": true,
+                "fill_shape": true
+              },
+              "pointer": {
+                "show": true,
+                "style": "triangle",
+                "length": 30,
+                "offset": 5,
+                "thickness": 2,
+                "primary_color": "#33A1FD",
+                "secondary_color": "#0055AA",
+                "pivot_size": 8,
+                "pivot_color": "#222222",
+                "pivot_crop": true
+              },
+              "scale": {
+                "show": true,
+                "style": "dots",
+                "length": 12,
+                "thickness": 1,
+                "size": 10,
+                "upper_range": 800.0
+              },
+              "styling": {
+                "gradient": 3,
+                "teeth": 12,
+                "outline_thickness": 1,
+                "outline_color": "#555555",
+                "fill_color": "#1a1a1a",
+                "arc_width": 6,
+                "no_center": false,
+                "cap_radius": 40,
+                "cap_color": "#333333"
+              },
+              "style_overrides": {
+                "knob_style": "vintage",
+                "shape": "gear"
+              }
+            },
+            "readout": {
+              "show_value": true,
+              "location": "bottom",
+              "units": "MHz",
+              "decimal_places": 2,
+              "text_inside": false,
+              "font_size": 10,
+              "label_position": "top"
+            },
+            "interaction": {
+              "sensitivity": 1.0,
+              "scroll_enabled": true,
+              "infinity": true,
+              "fine_pitch": true,
+              "delta_absolute": false,
+              "freestyle": false,
+              "is_read_only": false
+            },
+            "layout": {
+              "sticky": "nsew",
+              "padx": 10,
+              "pady": 10,
+              "weight": 1
+            }
           },
-          "block_info": {
-            "type": "_Label",
-            "label": "OcaBlock: Grouping container with CSS Grid layout support."
+          "knob_rotary_selector_Example": {
+            "type": "SelectorSwitch",
+            "label_active": "Multimeter Mode",
+            "positions": [
+              "OFF",
+              "VAC",
+              "VDC",
+              "OHM",
+              "AMP"
+            ],
+            "continuous": false,
+            "value_default": "OFF",
+            "indicator_color": "#FFFF00",
+            "shape": "circle",
+            "pointer_style": "line",
+            "layout": {
+              "sticky": "ew",
+              "padx": 5,
+              "pady": 5,
+              "width": 100,
+              "height": 50
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF9900",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
+              }
+            }
           }
         }
       },
-      "SECTION_2_FADERS": {
+      "SECTION_BUTTONS": {
         "type": "OcaBlock",
-        "description": "02: High-Fidelity Faders (3D Rendered)",
-        "layout_columns": 4,
+        "description": {
+          "En": "buttons"
+        },
+        "layout_columns": 3,
         "fields": {
-          "std_fader": {
-            "type": "_SmartFader",
+          "Exhaustive_Actuator_Example": {
+            "type": "_GuiActuator",
+            "identity": {
+              "label": "Fire Pulse",
+              "id": "fire_btn",
+              "notes": "A momentary push button that triggers a hardware action."
+            },
+            "geometry": {
+              "width": 100,
+              "height": 50,
+              "corner_radius": 12,
+              "stretch": "none"
+            },
             "domain": {
               "primary": {
-                "min": -100,
-                "max": 12,
-                "value_default": -20,
+                "value": "TRG:IMM"
+              }
+            },
+            "dynamics": {
+              "path": "Hardware/Trigger/Manual"
+            },
+            "cosmetics": {
+              "active_color": "#FF9900",
+              "active_bg_color": "#331100",
+              "bg_color": "#1a1a1a",
+              "active_text_color": "#FFFFFF",
+              "text_color": "#dcdcdc",
+              "glow_intensity": 1.8,
+              "alpha": 1.0,
+              "active_font_style": "bold",
+              "active_font_size": 12,
+              "inactive_font_style": "normal",
+              "inactive_font_size": 10
+            },
+            "readout": {
+              "label_active": "FIRING...",
+              "label_inactive": "FIRE"
+            },
+            "interaction": {
+              "is_read_only": false,
+              "message": "TRG:IMM"
+            },
+            "layout": {
+              "sticky": "center",
+              "padx": 10,
+              "pady": 10
+            }
+          },
+          "Exhaustive_Toggle_Example": {
+            "type": "_SmartToggle",
+            "identity": {
+              "label": "Mute Control",
+              "id": "mute_btn",
+              "notes": "A boolean toggle button with custom photorealistic states."
+            },
+            "geometry": {
+              "width": 120,
+              "height": 50,
+              "corner_radius": 8,
+              "stretch": "none"
+            },
+            "domain": {
+              "primary": {
+                "value_default": false
+              }
+            },
+            "dynamics": {
+              "path": "Audio/Output/Mute"
+            },
+            "cosmetics": {
+              "active_color": "#FF3300",
+              "active_bg_color": "#220000",
+              "bg_color": "#1a1a1a",
+              "active_text_color": "#FFFFFF",
+              "text_color": "#888888",
+              "glow_intensity": 1.5,
+              "alpha": 1.0,
+              "active_font_style": "bold",
+              "active_font_size": 11,
+              "inactive_font_style": "normal",
+              "inactive_font_size": 10
+            },
+            "readout": {
+              "label_position": "top"
+            },
+            "interaction": {
+              "is_read_only": false,
+              "options": {
+                "ON": {
+                  "label_active": "MUTED",
+                  "selected": false
+                },
+                "OFF": {
+                  "label_inactive": "LIVE",
+                  "selected": true
+                }
+              }
+            },
+            "layout": {
+              "sticky": "nw",
+              "padx": 10,
+              "pady": 10
+            }
+          },
+          "Exhaustive_Toggler_Example": {
+            "type": "_SmartToggler",
+            "identity": {
+              "label": "Filter Mode",
+              "id": "filter_group",
+              "notes": "A multi-state radio group with photorealistic buttons."
+            },
+            "geometry": {
+              "width": 160,
+              "height": 50,
+              "max_cols": 3,
+              "padx": 5,
+              "pady": 5,
+              "corner_radius": 6,
+              "stretch": "width"
+            },
+            "domain": {
+              "primary": {
+                "value_default": "LPF"
+              }
+            },
+            "dynamics": {
+              "path": "DSP/Filter/Type"
+            },
+            "cosmetics": {
+              "active_color": "#33A1FD",
+              "bg_color": "#1a1a1a",
+              "glow_intensity": 1.2,
+              "alpha": 0.9,
+              "font": 10
+            },
+            "interaction": {
+              "selection_mode": "radio",
+              "Allow_Null": false,
+              "Allow_Multi_Alt_Select": true,
+              "options": {
+                "LPF": {
+                  "label_active": "LOW PASS",
+                  "label_inactive": "LPF",
+                  "selected": true,
+                  "active_color": "#00FF00"
+                },
+                "HPF": {
+                  "label_active": "HIGH PASS",
+                  "label_inactive": "HPF",
+                  "selected": false
+                },
+                "BPF": {
+                  "label_active": "BAND PASS",
+                  "label_inactive": "BPF",
+                  "selected": false
+                }
+              }
+            },
+            "layout": {
+              "sticky": "ew",
+              "padx": 10,
+              "pady": 10
+            }
+          },
+          "button_trapezoid_Example": {
+            "type": "_TrapezoidButton",
+            "label_active": "Play",
+            "min": 0.0,
+            "max": 1.0,
+            "value_default": false,
+            "width": 80,
+            "height": 50,
+            "color": "#6a9955",
+            "led_color": "#00FF00",
+            "latching": false,
+            "slant": 15,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Momentary, standard green.",
+            "layout": {
+              "sticky": "ew",
+              "padx": 5,
+              "pady": 5,
+              "width": 100,
+              "height": 50
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF9900",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
+              }
+            }
+          },
+          "button_wink_Example": {
+            "type": "_WinkButton",
+            "label_active": "01",
+            "path": "audio/wink/target_demo_001",
+            "width": 60,
+            "height": 60,
+            "shape_type": "square",
+            "color": "#00FF00",
+            "shutter_color": "#000000",
+            "latching": false,
+            "open_speed": 0.22,
+            "close_speed": 0.33,
+            "text_inside": "GO",
+            "text_inside_color": "white",
+            "radius": 0,
+            "text_closed": "",
+            "layout": {
+              "sticky": "ew",
+              "padx": 5,
+              "pady": 5,
+              "width": 100,
+              "height": 50
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF9900",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
+              }
+            }
+          }
+        }
+      },
+      "SECTION_FADERS": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "faders"
+        },
+        "layout_columns": 3,
+        "fields": {
+          "fader_dual_Example": {
+            "type": "_CustomDualHorizontalFader",
+            "label": "Horizontal Dual Fader",
+            "notes": "Standard horizontal configuration",
+            "geometry": {
+              "width": 400,
+              "height": 100,
+              "font": 12,
+              "colour": "#FFFFFF",
+              "orientation": "horizontal"
+            },
+            "domain": {
+              "primary": {
+                "min": -100.0,
+                "max": 20.0,
+                "value_default_v1": -10.0,
+                "value_default_v2": -20.0,
+                "law": "linear",
                 "log_exponent": 1.0
               }
             },
-            "label": "Standard Fader",
-            "notes": "Full 3D cap, recessed track, and custom ticks.",
             "cosmetics": {
               "colors": {
-                "cap": "#dcdcdc",
-                "highlight": "#f4902c",
-                "primary": "#050505"
+                "primary": "#dcdcdc"
               },
+              "style_flags": {},
               "style_overrides": {
-                "custom_ticks": [
-                  -100,
-                  -60,
-                  -40,
-                  -20,
-                  -10,
-                  0,
-                  6,
-                  12
-                ]
+                "cap_width": 40,
+                "cap_height_ratio": 0.5,
+                "cap_radius": 5,
+                "value_follow": true,
+                "border_width": 1,
+                "border_color": "#444444"
               }
             },
-            "tick_label_position": "both",
-            "show_units": true,
-            "unit_text": "dB"
+            "interaction": {
+              "is_read_only": false
+            },
+            "layout": {}
           },
-          "dual_fader": {
-            "type": "_CustomDualVerticalFader",
-            "label": "Dual Fader",
-            "notes": "Ganged stereo control.",
-            "geometry": {
-              "width": 80,
-              "height": 250
-            }
-          },
-          "ltp_fader": {
-            "type": "_CustomLTP",
-            "label": "LTP (Linear Travelling Pot)",
-            "notes": "Dual-axis control: Slide for Volume, Alt+Drag for Pan/Pot.",
-            "freestyle": true,
+          "Exhaustive_Fader_Example": {
+            "type": "_SmartFader",
+            "identity": {
+              "label": "Channel 1 Level",
+              "id": "ch1_fader",
+              "notes": "A ultra-complete example of the photorealistic vertical fader."
+            },
             "geometry": {
               "width": 100,
-              "height": 300
-            }
-          },
-          "gca_array": {
-            "type": "_Horizontal_with_dial_Value",
-            "domain": {
-              "min": 0,
-              "max": 100
-            },
-            "layout": {
-              "width": 200,
-              "height": 350
-            },
-            "label": "GCA (Ganged Controlled Array)",
-            "notes": "Master average control with per-channel micro bars. Double-click to toggle mode.",
-            "num_channels": 8
-          }
-        }
-      },
-      "SECTION_3_KNOBS": {
-        "type": "OcaBlock",
-        "description": "03: Industrial Knobs & Selectors",
-        "layout_columns": 3,
-        "fields": {
-          "pro_knob": {
-            "type": "_SmartKnob",
-            "domain": {
-              "primary": {
-                "min": 0,
-                "max": 100,
-                "value_default": 50
+              "height": 300,
+              "padding": 5,
+              "stretch": "height",
+              "anchor": "center",
+              "align": "center",
+              "cap": {
+                "w": 45,
+                "h": 60
               }
             },
-            "label": "3D Console Knob",
+            "domain": {
+              "primary": {
+                "min": -100.0,
+                "max": 12.0,
+                "value_default": 0.0,
+                "unit": "dB",
+                "zero_point": 0.0,
+                "law": "log",
+                "log_exponent": 2.0
+              },
+              "linear": {
+                "min": 0.0,
+                "max": 1.0,
+                "value": 0.75
+              }
+            },
+            "dynamics": {
+              "fps_limit": 60,
+              "smoothing": 0.05,
+              "path": "MixingConsole/Channels/1/Fader"
+            },
             "cosmetics": {
               "colors": {
-                "highlight": "#00bcd4"
-              }
-            }
-          },
-          "selector_switch": {
-            "type": "SelectorSwitch",
-            "label": "Rotary Selector",
-            "options": {
-              "1": "PHASE",
-              "2": "LINEAR",
-              "3": "LOG",
-              "4": "EXP"
-            }
-          },
-          "vu_knob": {
-            "type": "_VUMeterKnob",
-            "domain": {
-              "primary": {
-                "min": -60,
-                "max": 10
+                "primary": "#33A1FD",
+                "secondary": "#222222",
+                "background": "#2b2b2b",
+                "cap": "#dcdcdc",
+                "cap_highlight": "#FF9900",
+                "tick_color": "#888888",
+                "sub_tick_color": "#444444",
+                "highlight": "#FF9900"
+              },
+              "style_flags": {
+                "show_grid": true,
+                "show_label": true,
+                "value_follow": true
+              },
+              "scale": {
+                "show": true,
+                "style": "simple",
+                "interval": 10.0,
+                "size": 0.4,
+                "thickness": 1
+              },
+              "styling": {
+                "glow_intensity": 1.5,
+                "track_hover_color": "#333333",
+                "fader_track_color": "#111111",
+                "border_width": 0,
+                "border_color": "#000000"
               }
             },
-            "label": "VU Meter Knob",
-            "notes": "Composite: Control knob layered over a needle meter pivot.",
-            "knob_width": 45
+            "readout": {
+              "show_value": true,
+              "show_units": true,
+              "units": "dB",
+              "location": "bottom",
+              "decimal_places": 1,
+              "label_position": "top",
+              "movement_value_display": true
+            },
+            "interaction": {
+              "scroll_enabled": true,
+              "is_read_only": false,
+              "reff_point": 0.0
+            },
+            "layout": {
+              "sticky": "ns",
+              "padx": 10,
+              "pady": 10,
+              "weight": 1
+            }
+          },
+          "Exhaustive_Composite_Example": {
+            "type": "_Horizontal_with_dial_Value",
+            "column_spacing": [
+              80,
+              10,
+              10
+            ],
+            "label_active": "Master High-Precision Tuning",
+            "description": "An exhaustive sample demonstrating every possible sub-configuration for the OcaCompositeFaderKnob.",
+            "layout": {
+              "width": 600,
+              "height": 120,
+              "stretch": "width",
+              "padx": 20,
+              "pady": 10,
+              "sticky": "ew"
+            },
+            "min": 0.0,
+            "max": 5000.0,
+            "default_value": 1250.0,
+            "step_coarse": 100.0,
+            "step_fine": 0.001,
+            "units": "MHz",
+            "show_label": true,
+            "value_config": {
+              "_README": "Overrides for the numerical entry and unit readout panel (Column 2).",
+              "width": 12,
+              "font": 18,
+              "colour": "#00FF00",
+              "bg_color": "#050505",
+              "height": 35
+            },
+            "fader_config": {
+              "_README": "Deep overrides for the coarse adjustment horizontal fader (Column 0).",
+              "tick_interval": 500,
+              "show_ticks": true,
+              "bar_color": "#222222",
+              "active_color": "#FF9900",
+              "glow_intensity": 1.8,
+              "cap_color": "#dcdcdc",
+              "cap_highlight_color": "#33A1FD",
+              "fader_cap_scale": 1.2,
+              "cap_width": 55,
+              "cap_height": 40,
+              "value_highlight_color": "#FF9900",
+              "tick_color": "#888888",
+              "sub_tick_color": "#444444",
+              "log_exponent": 1.0,
+              "reff_point": 2500.0
+            },
+            "dial_config": {
+              "_README": "Deep overrides for the fine-tuning rotary dial (Column 1).",
+              "knob_style": "vintage",
+              "shape": "gear",
+              "knob_teeth": 12,
+              "width": 80,
+              "height": 80,
+              "active_color": "#00ffff",
+              "bg_color": "#2b2b2b",
+              "indicator_color": "#00ffff",
+              "pointer_style": "triangle",
+              "pointer_length": 25,
+              "pointer_offset": 5,
+              "gradient_level": 3,
+              "knob_fill_color": "#333333",
+              "knob_outline_thickness": 1,
+              "knob_outline_color": "#555555",
+              "show_ticks": true,
+              "tick_style": "dots",
+              "tick_length": 8,
+              "arc_width": 6,
+              "text_inside": false,
+              "no_center": false,
+              "label_Text_position": "top",
+              "infinity": true,
+              "fine_pitch": true
+            },
+            "yak_handler": {
+              "_README": "Hardware bridge configuration for MQTT/SCPI communication.",
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Frequency",
+              "command": "Set_Freq",
+              "input_name": "hz_value",
+              "converter": "mhz_to_hz"
+            },
+            "cosmetics": {
+              "_README": "Legacy fallback color definitions used if specific configs are missing.",
+              "colors": {
+                "primary": "#FF9900",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
+              }
+            }
+          },
+          "fader_bar_graph_Example": {
+            "type": "_FaderWithBarGraph",
+            "label_active": "Standard",
+            "value_min": -60.0,
+            "value_max": 10.0,
+            "value_default": -10.0,
+            "layout": {
+              "height": 300,
+              "width": 120
+            },
+            "meter_width": 15,
+            "cap_height": 40,
+            "show_ticks": true,
+            "tick_steps": 10,
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF9900",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
+              }
+            }
+          },
+          "horizontal_with_dial_Example": {
+            "type": "_Horizontal_with_dial_Value",
+            "label_active": {
+              "En": "Tuning",
+              "Fr": "Accord",
+              "De": "Abstimmung",
+              "Es": "Sintonía"
+            },
+            "layout": {
+              "width": "100%",
+              "height": 90,
+              "stretch": "width",
+              "font": 14,
+              "padx": 10
+            },
+            "default_value": "0",
+            "min": "0",
+            "max": "1000",
+            "units": "MHz",
+            "step_coarse": "1",
+            "step_fine": "0.001",
+            "step": "0.001",
+            "fader_config": {
+              "type": "_GuiFaderHorizontal",
+              "tick_interval": 100,
+              "show_ticks": true,
+              "bar_color": "#333333",
+              "active_color": "#FF9900"
+            },
+            "dial_config": {
+              "type": "_GuiKnob",
+              "knob_style": "dial",
+              "active_color": "#00ffff",
+              "bg_color": "#2b2b2b"
+            },
+            "value_config": {
+              "height": 30,
+              "colour": "#ffffff",
+              "bg_color": "#1a1a1a",
+              "width": 12,
+              "font": 18
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF9900",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
+              }
+            },
+            "_README": "Converted from the deprecated _CompositeFader to the canonical _Horizontal_with_dial_Value: a horizontal fader (whole number) + dial (decimal) that combine into one value."
+          },
+          "fader_linear_travelling_potentiometer_Example": {
+            "type": "_CustomLTP",
+            "label_active": "Master Gali",
+            "notes": "A fully-featured Linear Travelling Potentiometer (LTP) sample showcasing every parameter.",
+            "fader_config": {
+              "value_min": -100.0,
+              "value_max": 20.0,
+              "value_default": -10.0,
+              "log_exponent": 1.0,
+              "reff_point": 0.0,
+              "value_highlight_color": "#33A1FD",
+              "show_value": true,
+              "show_units": true,
+              "unit_text": "dB",
+              "unit_position": "right"
+            },
+            "knob_config": {
+              "rotation_min": -100.0,
+              "rotation_max": 100.0,
+              "rotation_default": 0.0,
+              "cap_radius": 22,
+              "cap_color": "#1a1a1a",
+              "cap_outline_color": "#FF6B35",
+              "freestyle": true,
+              "knob_style": "standard",
+              "gradient_level": 2
+            },
+            "style": {
+              "knob_shape": "octagon",
+              "knob_teeth": 12,
+              "pointer_style": "line",
+              "arc_width": 3,
+              "tick_color": "#666666",
+              "sub_tick_color": "#444444",
+              "tick_font_size": 9,
+              "tick_label_position": "right",
+              "value_color": "#33A1FD",
+              "value_follow": true,
+              "label_color": "#ffffff",
+              "border_width": 0,
+              "border_color": "#000000"
+            },
+            "layout": {
+              "width": 100,
+              "height": 450,
+              "padx": 10,
+              "pady": 10,
+              "font": 12,
+              "colour": "#dcdcdc"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF9900",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
+              }
+            }
+          },
+          "composite_mdp_Faders_Variant_Example": {
+            "type": "_MDP",
+            "label_active": "MDP 1",
+            "path": "audio/mdp/1",
+            "initial_x": 210,
+            "initial_y": 125,
+            "graph": {
+              "title": "XY Space",
+              "show_title": false,
+              "show_grid": true,
+              "show_legend": false,
+              "show_axis": true,
+              "xlim": [
+                0,
+                20
+              ],
+              "ylim": [
+                0,
+                20
+              ],
+              "style": {
+                "bg_color": "#000000",
+                "grid_color": "#666666",
+                "title_color": "white",
+                "axis_color": "white"
+              },
+              "axis": {
+                "x": {
+                  "label": "X",
+                  "color": "white",
+                  "scale": "linear"
+                },
+                "y": {
+                  "label": "Y",
+                  "color": "white",
+                  "scale": "linear"
+                }
+              },
+              "datasets": [
+                {
+                  "id": "grid_ref",
+                  "label": "Grid Ref",
+                  "style": {
+                    "line_color": "cyan"
+                  },
+                  "initial_csv_data": "x,y\n0,0\n20,20"
+                }
+              ]
+            },
+            "ltp": {
+              "label_active": "Level",
+              "value_default": -10,
+              "cap_color": "#00FF00",
+              "freestyle": true,
+              "knob_style": "standard"
+            },
+            "layout": {
+              "width": 500,
+              "height": 500
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF9900",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
+              }
+            }
           }
         }
       },
-      "SECTION_4_METERING": {
+      "SECTION_GRAPHING": {
         "type": "OcaBlock",
-        "description": "04: Precision Metering",
+        "description": {
+          "En": "graphing"
+        },
         "layout_columns": 3,
         "fields": {
-          "needle_meter": {
-            "type": "_NeedleVUMeter",
-            "domain": {
-              "primary": {
-                "min": -60,
-                "max": 12
-              }
-            },
-            "label": "Needle Meter",
-            "upper_range": 0
-          },
-          "bar_meter": {
-            "type": "_MeterBar",
-            "label": "LED Segment Bar",
-            "geometry": {
-              "width": 30,
-              "height": 200
-            }
-          },
-          "progress_bar": {
-            "type": "_ProgressBar",
-            "domain": {
-              "min": 0,
-              "max": 100,
-              "units": "%"
-            },
-            "value": {
-              "default_value": 75
-            },
-            "label": "System Progress"
-          }
-        }
-      },
-      "SECTION_5_BUTTONS": {
-        "type": "OcaBlock",
-        "description": "05: Tactile Buttons & Toggles",
-        "layout_columns": 4,
-        "fields": {
-          "toggle_sw": {
-            "type": "_ButtonToggle",
-            "label": "Safety Toggle",
-            "label_active": "ARMED",
-            "label_inactive": "DISARMED",
-            "active_color": "#ff5252",
-            "active_bg_color": "#330000"
-          },
-          "radio_group": {
-            "type": "_ButtonToggler",
-            "label": "Selection Mode",
-            "selection_mode": "one",
-            "layout": {
-              "max_cols": 2
-            },
-            "options": {
-              "auto": {
-                "label": "AUTO",
-                "active_color": "#4caf50"
-              },
-              "manual": {
-                "label": "MANUAL",
-                "active_color": "#2196f3"
-              }
-            }
-          },
-          "d_pad": {
-            "type": "DirectionalButtons",
-            "label": "PTZ Control"
-          },
-          "inc_dec": {
-            "type": "IncDecButtons",
-            "value": {
-              "default_value": 10.0
-            },
-            "label": "Fine Tune",
-            "increment": 0.5
-          }
-        }
-      },
-      "SECTION_6_GRAPHING": {
-        "type": "OcaBlock",
-        "description": "06: Apache ECharts Telemetry",
-        "layout_columns": 1,
-        "fields": {
-          "spectrum_plot": {
+          "dynamic_graph_Example": {
             "type": "plot_widget",
-            "title": "High Resolution Spectrum Scan",
-            "Navigation": {
-              "enable_zoom": true,
-              "enable_pan": true
-            },
+            "id": "multi_dataset_plot",
+            "transparent": true,
             "layout": {
-              "height": 400
+              "height": 1000,
+              "sticky": "",
+              "weight_y": 1
             },
+            "plot_mode": "time_domain",
+            "title": "High Resolution Spectrum Scan",
             "axis": {
               "x": {
                 "label": "Frequency (GHz)",
+                "scale": "linear",
                 "min": 0,
-                "max": 1
+                "max": 1,
+                "color": "white"
               },
               "y": {
                 "label": "Amplitude (dBm)",
+                "scale": "linear",
                 "min": -1.5,
                 "max": 1.5,
-                "show_grid": true
-              }
+                "color": "white"
+              },
+              "show_grid": true,
+              "show_x_axis": true,
+              "show_y_axis": true
+            },
+            "style": {
+              "background_color": "match_theme",
+              "grid_color": "darkgrey",
+              "title_color": "white"
             },
             "datasets": [
               {
+                "id": "ref_linear",
+                "label": "Reference",
+                "style": {
+                  "line_color": "white",
+                  "line_width": 1,
+                  "smoothing": 0
+                },
+                "initial_csv_data": "x,y\n0,0\n1,1"
+              },
+              {
                 "id": "sig_a",
                 "label": "Signal Alpha",
-                "initial_csv_data": "x,y\n0,0\n0.5,1\n1,0",
                 "style": {
                   "line_color": "cyan",
                   "line_width": 2,
                   "smoothing": 5
-                }
+                },
+                "initial_csv_data": "x,y\n0.000,0.000\n0.010,0.063\n0.020,0.125\n0.030,0.187\n0.040,0.249\n0.050,0.309\n0.060,0.368\n0.070,0.426\n0.080,0.482\n0.090,0.536\n0.100,0.588\n0.110,0.637\n0.120,0.685\n0.130,0.729\n0.140,0.771\n0.150,0.809\n0.160,0.844\n0.170,0.876\n0.180,0.905\n0.190,0.930\n0.200,0.951\n0.210,0.969\n0.220,0.982\n0.230,0.992\n0.240,0.998\n0.250,1.000\n0.260,0.998\n0.270,0.992\n0.280,0.982\n0.290,0.969\n0.300,0.951\n0.310,0.930\n0.320,0.905\n0.330,0.876\n0.340,0.844\n0.350,0.809\n0.360,0.771\n0.370,0.729\n0.380,0.685\n0.390,0.637\n0.400,0.588\n0.410,0.536\n0.420,0.482\n0.430,0.426\n0.440,0.368\n0.450,0.309\n0.460,0.249\n0.470,0.187\n0.480,0.125\n0.490,0.063\n0.500,0.000\n0.510,-0.063\n0.520,-0.125\n0.530,-0.187\n0.540,-0.249\n0.550,-0.309\n0.560,-0.368\n0.570,-0.426\n0.580,-0.482\n0.590,-0.536\n0.600,-0.588\n0.610,-0.637\n0.620,-0.685\n0.630,-0.729\n0.640,-0.771\n0.650,-0.809\n0.660,-0.844\n0.670,-0.876\n0.680,-0.905\n0.690,-0.930\n0.700,-0.951\n0.710,-0.969\n0.720,-0.982\n0.730,-0.992\n0.740,-0.998\n0.750,-1.000\n0.760,-0.998\n0.770,-0.992\n0.780,-0.982\n0.790,-0.969\n0.800,-0.951\n0.810,-0.930\n0.820,-0.905\n0.830,-0.876\n0.840,-0.844\n0.850,-0.809\n0.860,-0.771\n0.870,-0.729\n0.880,-0.685\n0.890,-0.637\n0.900,-0.588\n0.910,-0.536\n0.920,-0.482\n0.930,-0.426\n0.940,-0.368\n0.950,-0.309\n0.960,-0.249\n0.970,-0.187\n0.980,-0.125\n0.990,-0.063\n1.000,-0.000"
+              },
+              {
+                "id": "sig_b",
+                "label": "Signal Beta",
+                "style": {
+                  "line_color": "magenta",
+                  "line_width": 2,
+                  "smoothing": 5
+                },
+                "initial_csv_data": "x,y\n0.000,1.000\n0.010,0.998\n0.020,0.992\n0.030,0.982\n0.040,0.969\n0.050,0.951\n0.060,0.930\n0.070,0.905\n0.080,0.876\n0.090,0.844\n0.100,0.809\n0.110,0.771\n0.120,0.729\n0.130,0.685\n0.140,0.637\n0.150,0.588\n0.160,0.536\n0.170,0.482\n0.180,0.426\n0.190,0.368\n0.200,0.309\n0.210,0.249\n0.220,0.187\n0.230,0.125\n0.240,0.063\n0.250,0.000\n0.260,-0.063\n0.270,-0.125\n0.280,-0.187\n0.290,-0.249\n0.300,-0.309\n0.310,-0.368\n0.320,-0.426\n0.330,-0.482\n0.340,-0.536\n0.350,-0.588\n0.360,-0.637\n0.370,-0.685\n0.380,-0.729\n0.390,-0.771\n0.400,-0.809\n0.410,-0.844\n0.420,-0.876\n0.430,-0.905\n0.440,-0.930\n0.450,-0.951\n0.460,-0.969\n0.470,-0.982\n0.480,-0.992\n0.490,-0.998\n0.500,-1.000\n0.510,-0.998\n0.520,-0.992\n0.530,-0.982\n0.540,-0.969\n0.550,-0.951\n0.560,-0.930\n0.570,-0.905\n0.580,-0.876\n0.590,-0.844\n0.600,-0.809\n0.610,-0.771\n0.620,-0.729\n0.630,-0.685\n0.640,-0.637\n0.650,-0.588\n0.660,-0.536\n0.670,-0.482\n0.680,-0.426\n0.690,-0.368\n0.700,-0.309\n0.710,-0.249\n0.720,-0.187\n0.730,-0.125\n0.740,-0.063\n0.750,-0.000\n0.760,0.063\n0.770,0.125\n0.780,0.187\n0.790,0.249\n0.800,0.309\n0.810,0.368\n0.820,0.426\n0.830,0.482\n0.840,0.536\n0.850,0.588\n0.860,0.637\n0.870,0.685\n0.880,0.729\n0.890,0.771\n0.900,0.809\n0.910,0.844\n0.920,0.876\n0.930,0.905\n0.940,0.930\n0.950,0.951\n0.960,0.969\n0.970,0.982\n0.980,0.992\n0.990,0.998\n1.000,1.000"
               }
-            ]
+            ],
+            "Navigation": {
+              "enable_zoom": true,
+              "enable_pan": true,
+              "show_hover_value": true
+            },
+            "geometry": {
+              "width": 831
+            }
           }
         }
       },
-      "SECTION_7_INPUTS_TEXT": {
+      "SECTION_IMAGES": {
         "type": "OcaBlock",
-        "description": "07: Inputs & Data Interaction",
-        "layout_columns": 2,
+        "description": {
+          "En": "images"
+        },
+        "layout_columns": 3,
         "fields": {
-          "text_in": {
-            "type": "_TextInput",
-            "value": {
-              "default_value": "Enter command..."
-            },
-            "label": "User Input"
-          },
-          "slider_val": {
-            "type": "_SliderValue",
-            "domain": {
-              "min": 0,
-              "max": 1000,
-              "units": "ms"
-            },
-            "label": "Precision Parameter"
-          },
-          "check_box": {
-            "type": "_Checkbox",
-            "label": "Enable Telemetry",
-            "label_active": "ONLINE",
-            "label_inactive": "OFFLINE"
-          },
-          "web_link": {
-            "type": "_WebLink",
-            "label": "View Documentation",
-            "url": "https://github.com/AnthonyPeterKuzub/OPEN-AIR"
-          },
-          "data_tree": {
-            "type": "_DataJsonTree",
-            "label": "Live MQTT State Explorer",
+          "images_image_display_Example": {
+            "type": "_GuiImage",
+            "label_active": "Flux Capacitor",
+            "path": "oaDataCache/assets/images/flux_capacitor.png",
+            "notes": "Static display of the Flux Capacitor.",
             "layout": {
-              "height": 300
+              "sticky": "ew",
+              "padx": 5,
+              "pady": 5,
+              "width": 100,
+              "height": 50
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF9900",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
+              }
+            }
+          }
+        }
+      },
+      "SECTION_INPUT": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "input"
+        },
+        "layout_columns": 3,
+        "fields": {
+          "input_directional_buttons_Example": {
+            "type": "_SmartNav",
+            "label": "Navigation",
+            "notes": "Standard directional buttons for navigation.",
+            "interaction": {
+              "is_read_only": false
+            },
+            "layout": {
+              "sticky": "ew",
+              "padx": 5,
+              "pady": 5,
+              "width": 100,
+              "height": 50
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF9900",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
+              }
+            }
+          },
+          "input_inc_dec_buttons_Example": {
+            "type": "_SmartIncDec",
+            "label": "Count:",
+            "notes": "Simple increment/decrement counter.",
+            "domain": {
+              "primary": {
+                "value_default": 0
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "increment": 1,
+            "layout": {
+              "sticky": "ew",
+              "padx": 5,
+              "pady": 5,
+              "width": 100,
+              "height": 50
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF9900",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
+              }
+            }
+          },
+          "text_gui_dropdown_option_Example": {
+            "type": "_GuiDropDownOption",
+            "label": "Input",
+            "options": {
+              "Mic1": {
+                "label_active": "Microphone 1",
+                "value": "MIC1_IN",
+                "selected": true
+              },
+              "Mic2": {
+                "label_active": "Microphone 2",
+                "value": "MIC2_IN"
+              },
+              "LineIn": {
+                "label_active": "Line Input",
+                "value": "LINE_IN"
+              }
+            },
+            "notes": "Dropdown for selecting an audio input source.",
+            "layout": {
+              "sticky": "ew",
+              "padx": 5,
+              "pady": 5,
+              "width": 100,
+              "height": 50
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF9900",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
+              }
+            }
+          },
+          "data_json_tree_Example": {
+            "type": "_JsonTree",
+            "label_active": "AES70 Object Model (data_AES70.json)",
+            "json_source": "display/right_50/bottom_90/10_sets/3_AES70/data_AES70.json",
+            "allow_filter": true,
+            "layout": {
+              "sticky": "ew",
+              "padx": 5,
+              "pady": 5,
+              "width": 100,
+              "height": 50
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF9900",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
+              }
+            }
+          },
+          "checkbox_Example": {
+            "type": "_SmartCheckbox",
+            "label": "Feature Enabled",
+            "notes": "Checkbox to enable/disable a specific feature.",
+            "domain": {
+              "primary": {
+                "value_default": false
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "label_inactive": "Feature Disabled",
+            "layout": {
+              "sticky": "ew",
+              "padx": 5,
+              "pady": 5,
+              "width": 100,
+              "height": 50
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF9900",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
+              }
+            }
+          },
+          "listbox_Example": {
+            "type": "_SmartList",
+            "label": "Select File",
+            "notes": "Listbox for selecting a file from a list.",
+            "interaction": {
+              "options": {
+                "file1": {
+                  "label_active": "document.pdf",
+                  "value": "/path/to/document.pdf",
+                  "active": "true"
+                },
+                "file2": {
+                  "label_active": "report.docx",
+                  "value": "/path/to/report.docx",
+                  "active": "true"
+                },
+                "file3": {
+                  "label_active": "image.png",
+                  "value": "/path/to/image.png",
+                  "active": "true",
+                  "selected": true
+                }
+              }
+            },
+            "layout": {
+              "sticky": "ew",
+              "padx": 5,
+              "pady": 5,
+              "width": 100,
+              "height": 50
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF9900",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
+              }
+            }
+          },
+          "slider_value_Example": {
+            "type": "_sliderValue",
+            "label_active": "Volume",
+            "layout": {
+              "height": 100,
+              "width": 250,
+              "font": 18
+            },
+            "min": 0.0,
+            "max": 100.0,
+            "value": 50.0,
+            "units": "%",
+            "notes": "A standard horizontal slider with numerical input for volume control.",
+            "show_label": true,
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF9900",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
+              }
+            }
+          },
+          "text_value_with_units_Example": {
+            "type": "_SmartInput",
+            "label": "Username",
+            "notes": "Standard input field for a username.",
+            "geometry": {
+              "sticky": "ew",
+              "font": 16,
+              "colour": "#6a9955"
+            },
+            "domain": {
+              "primary": {
+                "value_default": "user123"
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "layout": {},
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF9900",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
+              }
+            }
+          }
+        }
+      },
+      "SECTION_METERING": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "metering"
+        },
+        "layout_columns": 3,
+        "fields": {
+          "meter_bar_Example": {
+            "type": "DynamicBarGraph",
+            "label": "Metric Comparison",
+            "notes": "Demonstrates categorical data as bars.",
+            "show_title": true,
+            "title": "System Resource Usage",
+            "layout": {
+              "height": 50,
+              "alpha": 0.9
+            },
+            "axis": {
+              "x": {
+                "label": "Resource ID",
+                "color": "white"
+              },
+              "y": {
+                "label": "Usage (%)",
+                "min": 0,
+                "max": 100,
+                "color": "cyan"
+              },
+              "show_grid": true,
+              "show_x_axis": true,
+              "show_y_axis": true
+            },
+            "datasets": [
+              {
+                "id": "ds_usage",
+                "label": "Usage",
+                "style": {
+                  "line_color": "cyan",
+                  "line_width": 1
+                },
+                "initial_csv_data": "x,y\n1,45\n2,78\n3,12\n4,90\n5,55"
+              }
+            ],
+            "Navigation": {
+              "enable_zoom": true,
+              "enable_pan": true,
+              "show_hover_value": true
+            },
+            "initial_markers": "y,80,red,2,Warning Threshold",
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF9900",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
+              }
+            }
+          },
+          "Exhaustive_Needle_Example": {
+            "type": "_NeedleVUMeter",
+            "identity": {
+              "label": "Master Output",
+              "id": "master_vu",
+              "notes": "A vintage-style photorealistic needle meter with Next-Gen bezel support."
+            },
+            "geometry": {
+              "width": 300,
+              "height": 250,
+              "size": 250,
+              "scale_padding": 40,
+              "pivot_offset_x": 0,
+              "pivot_offset_y": 0,
+              "stretch": "none"
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -20.0,
+                "unit": "VU",
+                "mid_range_start": -3.0,
+                "red_zone_start": 0.0
+              }
+            },
+            "dynamics": {
+              "fps_limit": 60,
+              "smoothing": 0.15,
+              "ballistics": "vu",
+              "peak_hold_ms": 2000,
+              "path": "MasterBus/Metering/Output"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF9900",
+                "secondary": "#444444",
+                "background": "#2b2b2b",
+                "pointer": "#CC0000",
+                "pivot": "#222222",
+                "lower": "#FFFFFF",
+                "middle": "#FF9900",
+                "upper": "#FF0000"
+              },
+              "style_flags": {
+                "show_label": true,
+                "ticks_visible": true,
+                "scale_numbers": true,
+                "peak_flag": true
+              },
+              "style_overrides": {
+                "bezel_shape": "gem",
+                "bezel_width": 12,
+                "lighting_effects": true,
+                "glass_reflection": true,
+                "aperture_mask": "smile",
+                "overlay_type": "dome"
+              },
+              "scale": {
+                "viewable_angle": 90,
+                "center_angle": 90,
+                "tick_step": 1.0,
+                "sub_ticks": 4,
+                "tick_radius_offset": 5,
+                "label_radius_offset": 20
+              }
+            },
+            "interaction": {
+              "is_read_only": true
+            },
+            "layout": {
+              "sticky": "center",
+              "padx": 10,
+              "pady": 10
+            }
+          },
+          "images_progress_bar_Example": {
+            "type": "_SmartProgress",
+            "label": "Progress",
+            "notes": "Shows the progress of a download.",
+            "domain": {
+              "primary": {
+                "max": 100,
+                "value_default": 25
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "layout": {
+              "sticky": "ew",
+              "padx": 5,
+              "pady": 5,
+              "width": 100,
+              "height": 50
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF9900",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
+              }
+            }
+          },
+          "meter_knob_with_vu_meter_Example": {
+            "widget_type": "_VUMeterKnob",
+            "label_active": "Master L",
+            "path": "audio/master/left/vu",
+            "knob_path": "audio/master/left/gain",
+            "size": 200,
+            "min": -60,
+            "max": 6,
+            "knob_min": 0,
+            "knob_max": 100,
+            "knob_width": 100,
+            "knob_height": 100,
+            "knob_shape": "circle",
+            "knob_pointer_style": "line",
+            "knob_outline_thickness": 5,
+            "type": "_Meter_Knob_With_Vu_Meter",
+            "layout": {
+              "sticky": "ew",
+              "padx": 5,
+              "pady": 5,
+              "width": 100,
+              "height": 50
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF9900",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
+              }
+            }
+          }
+        }
+      },
+      "SECTION_SPECIAL": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "special"
+        },
+        "layout_columns": 3,
+        "fields": {
+          "circular_motion_displacement_potentiometer_Example": {
+            "type": "_CMDP",
+            "label_active": "CMDP 1",
+            "path": "audio/cmdp/1",
+            "layout": {
+              "sticky": "nsew",
+              "weight_y": 1
+            },
+            "group_configs": [
+              {
+                "name": "Drums",
+                "color": "#FF4444",
+                "visible": true,
+                "mute": false
+              },
+              {
+                "name": "Bass",
+                "color": "#FFFF44",
+                "visible": true,
+                "mute": false
+              },
+              {
+                "name": "Guitars",
+                "color": "#44FF44",
+                "visible": true,
+                "mute": false
+              },
+              {
+                "name": "Keys",
+                "color": "#44FFFF",
+                "visible": true,
+                "mute": false
+              },
+              {
+                "name": "Vocals",
+                "color": "#4444FF",
+                "visible": true,
+                "mute": false
+              },
+              {
+                "name": "Strings",
+                "color": "#FF44FF",
+                "visible": true,
+                "mute": false
+              },
+              {
+                "name": "Brass",
+                "color": "#FF4488",
+                "visible": true,
+                "mute": false
+              },
+              {
+                "name": "FX",
+                "color": "#888888",
+                "visible": true,
+                "mute": false
+              }
+            ],
+            "channels": [
+              {
+                "id": 1,
+                "name": "Kick In",
+                "group": "Drums",
+                "angle": 0,
+                "level": 12,
+                "depth": 84,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 2,
+                "name": "Kick Out",
+                "group": "Drums",
+                "angle": 7.5,
+                "level": 67,
+                "depth": 23,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 3,
+                "name": "Snare T",
+                "group": "Drums",
+                "angle": 15,
+                "level": 45,
+                "depth": 91,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 4,
+                "name": "Snare B",
+                "group": "Drums",
+                "angle": 22.5,
+                "level": 88,
+                "depth": 5,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 5,
+                "name": "Hat",
+                "group": "Drums",
+                "angle": 30,
+                "level": 34,
+                "depth": 76,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 6,
+                "name": "Ride",
+                "group": "Drums",
+                "angle": 37.5,
+                "level": 56,
+                "depth": 42,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 7,
+                "name": "Tom 1",
+                "group": "Drums",
+                "angle": 45,
+                "level": 21,
+                "depth": 68,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 8,
+                "name": "Tom 2",
+                "group": "Drums",
+                "angle": -62.3,
+                "level": 79,
+                "depth": 14,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 9,
+                "name": "Tom 3",
+                "group": "Drums",
+                "angle": 60,
+                "level": 93,
+                "depth": 37,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 10,
+                "name": "Floor 1",
+                "group": "Drums",
+                "angle": 67.5,
+                "level": 18,
+                "depth": 59,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 11,
+                "name": "Floor 2",
+                "group": "Drums",
+                "angle": 75,
+                "level": 44,
+                "depth": 82,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 12,
+                "name": "Gong",
+                "group": "Drums",
+                "angle": 82.5,
+                "level": 72,
+                "depth": 29,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 13,
+                "name": "Bass DI",
+                "group": "Bass",
+                "angle": 90,
+                "level": 5,
+                "depth": 95,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 14,
+                "name": "Bass Mic",
+                "group": "Bass",
+                "angle": 97.5,
+                "level": 61,
+                "depth": 48,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 15,
+                "name": "Bass Syn",
+                "group": "Bass",
+                "angle": 105,
+                "level": 39,
+                "depth": 17,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 16,
+                "name": "Upright",
+                "group": "Bass",
+                "angle": 112.5,
+                "level": 84,
+                "depth": 71,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 17,
+                "name": "Sub",
+                "group": "Bass",
+                "angle": 120,
+                "level": 27,
+                "depth": 53,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 18,
+                "name": "Bass FX",
+                "group": "Bass",
+                "angle": 127.5,
+                "level": 52,
+                "depth": 89,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 19,
+                "name": "Gtr 1 L",
+                "group": "Guitars",
+                "angle": 135,
+                "level": 16,
+                "depth": 32,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 20,
+                "name": "Gtr 1 R",
+                "group": "Guitars",
+                "angle": 142.5,
+                "level": 75,
+                "depth": 64,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 21,
+                "name": "Gtr 2 L",
+                "group": "Guitars",
+                "angle": 150,
+                "level": 98,
+                "depth": 11,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 22,
+                "name": "Gtr 2 R",
+                "group": "Guitars",
+                "angle": 157.5,
+                "level": 41,
+                "depth": 78,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 23,
+                "name": "Ac Gtr",
+                "group": "Guitars",
+                "angle": 165,
+                "level": 63,
+                "depth": 46,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 24,
+                "name": "12 Str",
+                "group": "Guitars",
+                "angle": 172.5,
+                "level": 29,
+                "depth": 92,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 25,
+                "name": "Piano L",
+                "group": "Keys",
+                "angle": -168,
+                "level": 87,
+                "depth": 25,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 26,
+                "name": "Piano R",
+                "group": "Keys",
+                "angle": -160.5,
+                "level": 14,
+                "depth": 57,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 27,
+                "name": "Organ L",
+                "group": "Keys",
+                "angle": -153,
+                "level": 49,
+                "depth": 81,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 28,
+                "name": "Organ R",
+                "group": "Keys",
+                "angle": -145.5,
+                "level": 71,
+                "depth": 38,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 29,
+                "name": "Synth 1",
+                "group": "Keys",
+                "angle": -138,
+                "level": 33,
+                "depth": 69,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 30,
+                "name": "Synth 2",
+                "group": "Keys",
+                "angle": -130.5,
+                "level": 58,
+                "depth": 12,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 31,
+                "name": "Lead Vox",
+                "group": "Vocals",
+                "angle": 225,
+                "level": 95,
+                "depth": 44,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 32,
+                "name": "Double",
+                "group": "Vocals",
+                "angle": 232.5,
+                "level": 22,
+                "depth": 73,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 33,
+                "name": "BGV 1",
+                "group": "Vocals",
+                "angle": 240,
+                "level": 47,
+                "depth": 19,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 34,
+                "name": "BGV 2",
+                "group": "Vocals",
+                "angle": 247.5,
+                "level": 81,
+                "depth": 62,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 35,
+                "name": "BGV 3",
+                "group": "Vocals",
+                "angle": 255,
+                "level": 66,
+                "depth": 35,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 36,
+                "name": "BGV 4",
+                "group": "Vocals",
+                "angle": 262.5,
+                "level": 10,
+                "depth": 87,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 37,
+                "name": "Violin 1",
+                "group": "Strings",
+                "angle": 270,
+                "level": 54,
+                "depth": 51,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 38,
+                "name": "Violin 2",
+                "group": "Strings",
+                "angle": 277.5,
+                "level": 77,
+                "depth": 28,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 39,
+                "name": "Viola",
+                "group": "Strings",
+                "angle": 285,
+                "level": 0,
+                "depth": 40.8,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 40,
+                "name": "Cello",
+                "group": "Strings",
+                "angle": -50.8,
+                "level": 89,
+                "depth": 6,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 41,
+                "name": "Trumpet",
+                "group": "Brass",
+                "angle": -137.3,
+                "level": 23,
+                "depth": 18,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 42,
+                "name": "Sax",
+                "group": "Brass",
+                "angle": 307.5,
+                "level": 69,
+                "depth": 15,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 43,
+                "name": "Trombone",
+                "group": "Brass",
+                "angle": -44.2,
+                "level": 25,
+                "depth": 49,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 44,
+                "name": "Tuba",
+                "group": "Brass",
+                "angle": 322.5,
+                "level": 82,
+                "depth": 83,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 45,
+                "name": "Rev 1",
+                "group": "FX",
+                "angle": 330,
+                "level": 19,
+                "depth": 36,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 46,
+                "name": "Rev 2",
+                "group": "FX",
+                "angle": 337.5,
+                "level": 46,
+                "depth": 61,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 47,
+                "name": "Delay",
+                "group": "FX",
+                "angle": 345,
+                "level": 73,
+                "depth": 24,
+                "visible": true,
+                "mute": false
+              },
+              {
+                "id": 48,
+                "name": "Echo",
+                "group": "FX",
+                "angle": 352.5,
+                "level": 38,
+                "depth": 97,
+                "visible": true,
+                "mute": false
+              }
+            ],
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF9900",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
+              }
+            }
+          },
+          "composite_mdp_Example": {
+            "type": "_MDP",
+            "label_active": "MDP 1",
+            "path": "audio/mdp/1",
+            "initial_x": 210,
+            "initial_y": 125,
+            "graph": {
+              "title": "XY Space",
+              "show_title": false,
+              "show_grid": true,
+              "show_legend": false,
+              "show_axis": true,
+              "xlim": [
+                0,
+                20
+              ],
+              "ylim": [
+                0,
+                20
+              ],
+              "style": {
+                "bg_color": "#000000",
+                "grid_color": "#666666",
+                "title_color": "white",
+                "axis_color": "white"
+              },
+              "axis": {
+                "x": {
+                  "label": "X",
+                  "color": "white",
+                  "scale": "linear"
+                },
+                "y": {
+                  "label": "Y",
+                  "color": "white",
+                  "scale": "linear"
+                }
+              },
+              "datasets": [
+                {
+                  "id": "grid_ref",
+                  "label": "Grid Ref",
+                  "style": {
+                    "line_color": "cyan"
+                  },
+                  "initial_csv_data": "x,y\n0,0\n20,20"
+                }
+              ]
+            },
+            "ltp": {
+              "label_active": "Level",
+              "value_default": -10,
+              "cap_color": "#00FF00",
+              "freestyle": true,
+              "knob_style": "standard"
+            },
+            "layout": {
+              "width": 500,
+              "height": 500
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF9900",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
+              }
+            }
+          },
+          "midi_keyboard_Example": {
+            "type": "_MidiKeyboard",
+            "identity": {
+              "label": "MIDI Keyboard",
+              "id": "midi_kbd_01",
+              "notes": "On-screen 6-octave (73-key) piano keyboard, C1 upward."
+            },
+            "geometry": {
+              "width": 800,
+              "height": 120,
+              "anchor": "center"
+            },
+            "domain": {
+              "primary": {
+                "min": 36,
+                "max": 108,
+                "value_default": 60,
+                "unit": "note",
+                "step": 1
+              }
+            },
+            "dynamics": {
+              "path": "System/MIDI/Input"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FFFFFF",
+                "secondary": "#111111",
+                "active": "#33A1FD",
+                "background": "#1a1a1a"
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "status_light_Example": {
+            "type": "_SmartLight",
+            "label": "System Status",
+            "notes": "A status light with a label.",
+            "interaction": {
+              "is_read_only": false
+            },
+            "status": "green",
+            "layout": {
+              "sticky": "ew",
+              "padx": 5,
+              "pady": 5,
+              "width": 100,
+              "height": 50
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF9900",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
+              }
+            }
+          }
+        }
+      },
+      "SECTION_STRUCTURE": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "structure"
+        },
+        "layout_columns": 3,
+        "fields": {
+          "break_line_Example": {
+            "type": "OcaBreakLine",
+            "layout": {
+              "height": 2,
+              "padx": 10,
+              "pady": 5,
+              "colour": "#555555",
+              "alpha": 1.0,
+              "sticky": "ew"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF9900",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
+              }
+            }
+          }
+        }
+      },
+      "SECTION_TEXT": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "text"
+        },
+        "layout_columns": 3,
+        "fields": {
+          "text_table_Example": {
+            "type": "OcaTable",
+            "description": "Discovered Devices",
+            "headers": [
+              "type",
+              "resource_string",
+              "ip_address",
+              "interface_port",
+              "gpib_address",
+              "status",
+              "manufacturer",
+              "model",
+              "serial_number",
+              "firmware",
+              "idn_string",
+              "device_type",
+              "notes",
+              "allocated",
+              "connection_timestamp"
+            ],
+            "read_cvs": true,
+            "write_cvs": true,
+            "Add_Row": true,
+            "Delete_Row": true,
+            "Undo": true,
+            "height": 10,
+            "Sort": true,
+            "data": {},
+            "notes": "",
+            "layout": {
+              "sticky": "ew",
+              "padx": 5,
+              "pady": 5,
+              "width": 100,
+              "height": 50
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF9900",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
+              }
+            }
+          },
+          "text_web_link_Example": {
+            "type": "_SmartLink",
+            "label": "Visit Project Homepage",
+            "notes": "Link to the main project website.",
+            "geometry": {
+              "sticky": "ew",
+              "font": 14,
+              "colour": "#007acc"
+            },
+            "interaction": {
+              "url": "https://www.like.audio/project"
+            },
+            "layout": {},
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF9900",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
+              }
+            }
+          },
+          "text_label_from_config_Example": {
+            "type": "_SmartLabel",
+            "label": "Status",
+            "notes": "A basic status indicator.",
+            "geometry": {
+              "sticky": "ew",
+              "font": 18,
+              "colour": "#c75450"
+            },
+            "domain": {
+              "primary": {
+                "value_default": "Idle"
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "layout": {},
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF9900",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
+              }
             }
           }
         }

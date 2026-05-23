@@ -227,9 +227,17 @@
               "font": 16
             },
             "style": {
-              "Circular": true,
-              "active_color": "#FF0000",
-              "glow_intensity": 5.0
+              "active": {
+                "border_color": "#FF0000",
+                "border_thickness": 2,
+                "glow_intensity": 5.0
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              },
+              "Circular": true
             },
             "interaction": {
               "is_read_only": false
@@ -261,8 +269,17 @@
               "font": 14
             },
             "style": {
-              "Circular": true,
-              "active_color": "#00FF00"
+              "active": {
+                "border_color": "#00FF00",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              },
+              "Circular": true
             },
             "interaction": {
               "is_read_only": false
@@ -294,8 +311,17 @@
               "font": 10
             },
             "style": {
-              "Circular": true,
-              "active_color": "#FF9900"
+              "active": {
+                "border_color": "#FF9900",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              },
+              "Circular": true
             },
             "interaction": {
               "is_read_only": false
@@ -327,8 +353,17 @@
               "font": 12
             },
             "style": {
-              "Circular": true,
-              "active_color": "#00CCFF"
+              "active": {
+                "border_color": "#00CCFF",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              },
+              "Circular": true
             },
             "interaction": {
               "is_read_only": false

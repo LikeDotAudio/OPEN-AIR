@@ -24,11 +24,27 @@
       "path": "DSP/Filter/Type"
     },
     "cosmetics": {
-      "active_color": "#33A1FD",
-      "bg_color": "#1a1a1a",
-      "glow_intensity": 1.2,
-      "alpha": 0.9,
-      "font": 10
+      "alpha": 0.9
+    },
+    "style": {
+      "active": {
+        "font_style": "bold",
+        "font_size": 10,
+        "text_color": "#1a1a1a",
+        "bg_color": "#000000",
+        "border_color": "#33A1FD",
+        "border_thickness": 2,
+        "glow_intensity": 1.2
+      },
+      "inactive": {
+        "font_style": "normal",
+        "font_size": 10,
+        "text_color": "#888888",
+        "bg_color": "#1a1a1a",
+        "border_color": "#555555",
+        "border_thickness": 2,
+        "glow_intensity": 0
+      }
     },
     "interaction": {
       "selection_mode": "radio",
@@ -65,6 +81,9 @@
     "selection_modes": ["radio", "multi"],
     "Allow_Null": "If true, clicking an active button deselects it (empty state).",
     "Allow_Multi_Alt_Select": "If true, holding ALT allows multi-selection even in radio mode.",
-    "option_overrides": "Each option can have its own 'active_color' or 'bg_color'."
+    "option_overrides": "Each option can have its own 'active_color' or 'bg_color'.",
+    "font_styles": ["normal", "bold", "italic"],
+    "style_states": ["active", "inactive"],
+    "style_params": "style.active and style.inactive carry the SAME params: font_style, font_size, text_color, bg_color, border_color, border_thickness, glow_intensity."
   }
 }

@@ -26,19 +26,45 @@ const ButtonToggle = ({ value, onChange, config, topic, nodeJson }) => {
     const height = layout.height || 50;
     const cornerRadius = layout.corner_radius || 6;
     
-    const bgColor = config?.bg_color || "#1a1a1a";
-    const activeColor = config?.active_color || "#FF9900";
-    const activeBgColor = config?.active_bg_color || "#000000";
-    const textColor = config?.text_color || "#888888";
-    const activeTextColor = config?.active_text_color || "#1a1a1a";
+    // Style schema: style.active / style.inactive parents (same params each),
+    // falling back to legacy flat keys under `style` (this is what makes
+    // active_text_color etc. actually render — they were read off config before).
+    const styleObj = config?.style || {};
+    const A = styleObj.active || {};
+    const I = styleObj.inactive || {};
+    const pk = (...vals) => vals.find((v) => v !== undefined && v !== null);
+    const grpActive = {
+        text_color: pk(A.text_color, styleObj.active_text_color, '#1a1a1a'),
+        bg_color: pk(A.bg_color, styleObj.active_bg_color, '#000000'),
+        border_color: pk(A.border_color, styleObj.active_color, '#FF9900'),
+        border_thickness: pk(A.border_thickness, 2),
+        glow_intensity: pk(A.glow_intensity, styleObj.glow_intensity, 10),
+        font_style: pk(A.font_style, styleObj.active_font_style, 'bold'),
+        font_size: pk(A.font_size, styleObj.active_font_size),
+    };
+    const grpInactive = {
+        text_color: pk(I.text_color, styleObj.text_color, '#888888'),
+        bg_color: pk(I.bg_color, styleObj.bg_color, '#1a1a1a'),
+        border_color: pk(I.border_color, '#555'),
+        border_thickness: pk(I.border_thickness, 2),
+        glow_intensity: pk(I.glow_intensity, 0),
+        font_style: pk(I.font_style, styleObj.inactive_font_style, 'normal'),
+        font_size: pk(I.font_size, styleObj.inactive_font_size),
+    };
 
     const isHovered = React.useRef(false);
-    const [hoverState, setHoverState] = React.useState(false); 
+    const [hoverState, setHoverState] = React.useState(false);
 
+    const s = val ? grpActive : grpInactive;
     const currentText = val ? onText : offText;
-    const currentBg = val ? activeBgColor : bgColor;
-    const currentBorder = val ? activeColor : '#555';
-    const currentTextColor = val ? activeTextColor : textColor;
+    const currentBg = s.bg_color;
+    const currentBorder = s.border_color;
+    const currentTextColor = s.text_color;
+    const borderW = s.border_thickness || 2;
+    const glow = s.glow_intensity || 0;
+    const fontWeight = s.font_style === 'bold' ? 'bold' : 'normal';
+    const fontStyleCss = s.font_style === 'italic' ? 'italic' : 'normal';
+    const fontSizeCss = s.font_size ? `${s.font_size}px` : '12px';
 
     const handlePointerDown = () => {
         const newVal = !val;
@@ -71,21 +97,21 @@ const ButtonToggle = ({ value, onChange, config, topic, nodeJson }) => {
                     width: `${width}px`,
                     height: `${height}px`,
                     backgroundColor: currentBg,
-                    border: `2px solid ${isHovered.current ? (val ? activeColor : '#888') : currentBorder}`,
+                    border: `${borderW}px solid ${isHovered.current ? (val ? grpActive.border_color : '#888') : currentBorder}`,
                     borderRadius: `${cornerRadius}px`,
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
                     cursor: 'pointer',
                     userSelect: 'none',
-                    boxShadow: val ? `0 0 10px ${activeColor}80` : 'inset 0 0 5px rgba(0,0,0,0.5)',
+                    boxShadow: glow > 0 ? `0 0 ${Math.min(40, glow)}px ${currentBorder}99` : (val ? 'none' : 'inset 0 0 5px rgba(0,0,0,0.5)'),
                     transition: 'all 0.1s'
                 }}
                 onPointerDown={handlePointerDown}
                 onPointerEnter={handlePointerEnter}
                 onPointerLeave={handlePointerLeave}
             >
-                <span style={{ color: currentTextColor, fontSize: '12px', fontWeight: val ? 'bold' : 'normal', textAlign: 'center', pointerEvents: 'none' }}>
+                <span style={{ color: currentTextColor, fontSize: fontSizeCss, fontWeight, fontStyle: fontStyleCss, textAlign: 'center', pointerEvents: 'none' }}>
                     {currentText}
                 </span>
             </div>

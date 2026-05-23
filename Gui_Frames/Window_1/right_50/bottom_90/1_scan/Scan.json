@@ -24,8 +24,10 @@
               "De": "Frequenz (GHz)",
               "Es": "Frecuencia (GHz)"
             },
-            "max": 1,
-            "min": 0,
+            "domain": {
+              "max": 1,
+              "min": 0
+            },
             "scale": "linear"
           },
           "y": {
@@ -36,8 +38,10 @@
               "De": "Amplitude (dBm)",
               "Es": "Amplitud (dBm)"
             },
-            "max": 1.5,
-            "min": -1.5,
+            "domain": {
+              "max": 1.5,
+              "min": -1.5
+            },
             "scale": "linear"
           }
         },

@@ -96,7 +96,9 @@
                 "De": "Level",
                 "Es": "Level"
               },
-              "value_default": -10,
+              "value": {
+                "default_value": -10
+              },
               "cap_color": "#00FF00",
               "freestyle": true,
               "knob_style": "standard"

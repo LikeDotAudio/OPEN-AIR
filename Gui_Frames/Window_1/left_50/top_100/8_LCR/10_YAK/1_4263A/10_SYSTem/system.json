@@ -41,7 +41,16 @@
               "Es": "Factory Reiniciar"
             },
             "style": {
-              "active_color": "#FF0000"
+              "active": {
+                "border_color": "#FF0000",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
             },
             "message": "*RST"
           },

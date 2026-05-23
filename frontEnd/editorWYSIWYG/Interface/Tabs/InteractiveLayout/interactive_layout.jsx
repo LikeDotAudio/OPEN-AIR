@@ -72,7 +72,7 @@
           >
             <div ref={innerRef} style={{
               position: 'relative', width: '100%', minHeight: '100%',
-              ...(showGrid ? window.OaEdGrid.style(100) : {}),
+              ...(showGrid ? window.OaEdGrid.style(10) : {}),
             }}>
               <window.OaEdPreview data={st.data} />
 

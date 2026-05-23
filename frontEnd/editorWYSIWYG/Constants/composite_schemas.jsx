@@ -24,12 +24,26 @@
     return n;
   };
 
+  // Strip library-only annotation keys (_README/_LEGEND/…) and identity (id/type)
+  // so the reference holds only real, editable params. Recurses into objects.
+  const cleanRef = (o) => {
+    if (Array.isArray(o)) return o.map(cleanRef);
+    if (!o || typeof o !== 'object') return o;
+    const out = {};
+    for (const k in o) {
+      if (k.startsWith('_') || k === 'id') continue;
+      out[k] = cleanRef(o[k]);
+    }
+    return out;
+  };
+
   window.OaEdComposite = {
     KEYWORDS,
     _refs: null,
+    _byType: null,
 
     async load(force) {
-      if (this._refs && !force) return this._refs;
+      if (this._refs && this._byType && !force) return this._refs;
       const data = await window.OaEdGrabBagLoader.load(force);
       const comps = data.components || [];
       const refs = {};
@@ -48,11 +62,49 @@
         }
       }
       this._refs = refs;
+
+      // Per widget TYPE: the richest library sample for that type, cleaned. Lets
+      // the property editor surface every library-supported param (in red) even
+      // when the placed instance only saved a few.
+      const byType = {};
+      for (const c of comps) {
+        const t = String(c.type || '').toLowerCase();
+        if (!t) continue;
+        const n = countKeys(c.schema);
+        if (!byType[t] || n > byType[t]._n) byType[t] = { schema: cleanRef(c.schema), _n: n };
+      }
+      this._byType = byType;
       return refs;
     },
 
     isSubWidget(key) { return Object.prototype.hasOwnProperty.call(KEYWORDS, key); },
     referenceFor(key) { return this._refs ? (this._refs[key] || null) : null; },
+
+    /** Full library reference for a widget `type` (null if no library match). */
+    referenceForType(type) {
+      if (!this._byType || !type) return null;
+      const e = this._byType[String(type).toLowerCase()];
+      return e ? e.schema : null;
+    },
+
+    /** Merge for the TOP level: keep the instance's key ORDER (and values), then
+     *  APPEND library-only keys after — so the saved layout is undisturbed and
+     *  reference-only params surface (in red) at the end of each object. */
+    mergeForType(ref, inst) {
+      if (!ref || typeof ref !== 'object') return inst;
+      if (!inst || typeof inst !== 'object' || Array.isArray(inst)) return inst;
+      const out = {};
+      for (const k of Object.keys(inst)) {
+        if (ref[k] && typeof ref[k] === 'object' && !Array.isArray(ref[k]) &&
+            inst[k] && typeof inst[k] === 'object' && !Array.isArray(inst[k])) {
+          out[k] = this.mergeForType(ref[k], inst[k]);
+        } else {
+          out[k] = inst[k];
+        }
+      }
+      for (const k of Object.keys(ref)) if (!(k in out)) out[k] = ref[k];
+      return out;
+    },
 
     /** Deep-merge reference defaults UNDER the instance (instance values win). */
     merge(ref, inst) {

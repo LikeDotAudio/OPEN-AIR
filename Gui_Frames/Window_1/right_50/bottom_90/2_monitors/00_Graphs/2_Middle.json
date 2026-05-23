@@ -18,8 +18,10 @@
           "Es": "Tiempo (ms)"
         },
         "scale": "linear",
-        "min": 0,
-        "max": 1,
+        "domain": {
+          "min": 0,
+          "max": 1
+        },
         "color": "white"
       },
       "y": {
@@ -30,8 +32,10 @@
           "Es": "Amplitud (V)"
         },
         "scale": "linear",
-        "min": -1.5,
-        "max": 1.5,
+        "domain": {
+          "min": -1.5,
+          "max": 1.5
+        },
         "color": "white"
       },
       "show_grid": true,

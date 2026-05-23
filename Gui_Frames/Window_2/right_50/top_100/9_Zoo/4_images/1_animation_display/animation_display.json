@@ -28,7 +28,9 @@
             "Es": "Animated Hora Circuits"
           },
           "gif_path": "oaGui/Assets/time_circuits.gif",
-          "value_default": 0,
+          "value": {
+            "default_value": 0
+          },
           "notes": "A standard animation of the time circuits."
         }
       },
@@ -49,7 +51,9 @@
             "Es": "Hora Circuits (Start Frame 5)"
           },
           "gif_path": "oaGui/Assets/time_circuits.gif",
-          "value_default": 5,
+          "value": {
+            "default_value": 5
+          },
           "notes": "Time circuits animation starting from a later frame."
         }
       },

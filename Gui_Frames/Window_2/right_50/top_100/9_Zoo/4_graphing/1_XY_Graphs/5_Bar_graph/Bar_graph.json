@@ -47,7 +47,7 @@
                 "show_title": true,
                 "title": "System Resource Usage",
                 "layout": {
-                  "height": 50,
+                  "height": 428,
                   "alpha": 0.9
                 },
                 "axis": {
@@ -67,8 +67,10 @@
                       "De": "Usage (%)",
                       "Es": "Usage (%)"
                     },
-                    "min": 0,
-                    "max": 100,
+                    "domain": {
+                      "min": 0,
+                      "max": 100
+                    },
                     "color": "cyan"
                   },
                   "show_grid": true,
@@ -102,6 +104,9 @@
           }
         }
       }
+    },
+    "layout": {
+      "height": "400%"
     }
   }
 }

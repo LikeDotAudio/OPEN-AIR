@@ -53,11 +53,27 @@ e.g. `Spectrum_Instrument_bandwidth.blocks.Resolution Bandwidth.fields.RBW`
 (GUI keys never contain `.`). Selection on the canvas relies on the
 `data-oca-path` attribute emitted by `WidgetFactory`.
 
+## Where the library (palette) comes from
+
+`GET /api/grabbag` (`LauchWebserver.py → get_grab_bag()`) is the library source.
+It is now **README-driven**: each `frontEnd/libControl/<category>/<Component>/Readme.md`
+embeds one ```json sample block (see the "Sample (WYSIWYG library source)"
+section in any component README). The server scans those READMEs first — they are
+authoritative — and supplies each widget's palette entry, live preview, and
+property manipulators from that block. It then falls back to
+`oaGuiElements/*/sample.json` for any widget no README has provided (deduped by
+sample name). `_LEGEND` arrays from either source become the property-editor
+dropdowns. `Gui_Frames/Sample.json` is a generated catalog frame holding one
+instance of every component — open it to see the whole library at once.
+
+To add/change a widget in the editor: edit the JSON block in its component
+README (or add a new component folder with a README) — no editor code change.
+
 ## Server requirement
 
-The palette and save use endpoints added to `frontEnd/Core/Launch/LauchWebserver.py`
-(`GET /api/grabbag`, `POST /api/save`). **Restart the web server** after pulling
-these changes so the new endpoints are live.
+The palette and save use endpoints in `frontEnd/Core/Launch/LauchWebserver.py`
+(`GET /api/grabbag`, `POST /api/save`). **Restart the web server** after editing a
+component README so the regenerated palette is live.
 
 ## Not yet implemented (vs. the Python editor)
 

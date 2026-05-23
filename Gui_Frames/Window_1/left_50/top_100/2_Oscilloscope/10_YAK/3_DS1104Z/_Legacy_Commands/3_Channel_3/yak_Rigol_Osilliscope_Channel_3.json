@@ -40,16 +40,24 @@
                       "sticky": ""
                     },
                     "style": {
-                      "active_text_color": "#1a1a1a",
-                      "text_color": "#888888",
-                      "active_font_style": "bold",
-                      "active_font_size": null,
-                      "inactive_font_style": "normal",
-                      "inactive_font_size": null,
-                      "active_color": "#FF9900",
-                      "active_bg_color": "#000000",
-                      "bg_color": "#2b2b2b",
-                      "glow_intensity": 1.944
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#1a1a1a",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
                     },
                     "active": true,
                     "message": ":MEASure:VPP? CHANnel3;:MEASure:VRMS? CHANnel3;:MEASure:FREQuency? CHANnel3;:MEASure:PDUTy? CHANnel3"
@@ -142,16 +150,24 @@
                       "sticky": ""
                     },
                     "style": {
-                      "active_text_color": "#1a1a1a",
-                      "text_color": "#888888",
-                      "active_font_style": "bold",
-                      "active_font_size": null,
-                      "inactive_font_style": "normal",
-                      "inactive_font_size": null,
-                      "active_color": "#FF9900",
-                      "active_bg_color": "#000000",
-                      "bg_color": "#2b2b2b",
-                      "glow_intensity": 1.944
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#1a1a1a",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
                     },
                     "active": true,
                     "message": ":CHANnel3:SCALe <scale>"
@@ -186,16 +202,24 @@
                       "sticky": ""
                     },
                     "style": {
-                      "active_text_color": "#1a1a1a",
-                      "text_color": "#888888",
-                      "active_font_style": "bold",
-                      "active_font_size": null,
-                      "inactive_font_style": "normal",
-                      "inactive_font_size": null,
-                      "active_color": "#FF9900",
-                      "active_bg_color": "#000000",
-                      "bg_color": "#2b2b2b",
-                      "glow_intensity": 1.944
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#1a1a1a",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
                     },
                     "active": true,
                     "message": ":CHANnel3:OFFSet <offset>"
@@ -230,16 +254,24 @@
                       "sticky": ""
                     },
                     "style": {
-                      "active_text_color": "#1a1a1a",
-                      "text_color": "#888888",
-                      "active_font_style": "bold",
-                      "active_font_size": null,
-                      "inactive_font_style": "normal",
-                      "inactive_font_size": null,
-                      "active_color": "#FF9900",
-                      "active_bg_color": "#000000",
-                      "bg_color": "#2b2b2b",
-                      "glow_intensity": 1.944
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#1a1a1a",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
                     },
                     "active": true,
                     "message": ":CHANnel3:COUPling <coupling>"
@@ -274,16 +306,24 @@
                       "sticky": ""
                     },
                     "style": {
-                      "active_text_color": "#1a1a1a",
-                      "text_color": "#888888",
-                      "active_font_style": "bold",
-                      "active_font_size": null,
-                      "inactive_font_style": "normal",
-                      "inactive_font_size": null,
-                      "active_color": "#FF9900",
-                      "active_bg_color": "#000000",
-                      "bg_color": "#2b2b2b",
-                      "glow_intensity": 1.944
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#1a1a1a",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
                     },
                     "active": true,
                     "message": ":CHANnel3:PROBe <atten>"
@@ -318,16 +358,24 @@
                       "sticky": ""
                     },
                     "style": {
-                      "active_text_color": "#1a1a1a",
-                      "text_color": "#888888",
-                      "active_font_style": "bold",
-                      "active_font_size": null,
-                      "inactive_font_style": "normal",
-                      "inactive_font_size": null,
-                      "active_color": "#FF9900",
-                      "active_bg_color": "#000000",
-                      "bg_color": "#2b2b2b",
-                      "glow_intensity": 1.944
+                      "active": {
+                        "font_style": "bold",
+                        "font_size": null,
+                        "text_color": "#1a1a1a",
+                        "bg_color": "#000000",
+                        "border_color": "#FF9900",
+                        "border_thickness": 2,
+                        "glow_intensity": 1.944
+                      },
+                      "inactive": {
+                        "font_style": "normal",
+                        "font_size": null,
+                        "text_color": "#888888",
+                        "bg_color": "#2b2b2b",
+                        "border_color": "#555555",
+                        "border_thickness": 2,
+                        "glow_intensity": 0
+                      }
                     },
                     "active": true,
                     "message": ":CHANnel3:BWLimit <limit>"
@@ -377,16 +425,24 @@
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
-                  "active_text_color": "#1a1a1a",
-                  "text_color": "#888888",
-                  "active_font_style": "bold",
-                  "active_font_size": null,
-                  "inactive_font_style": "normal",
-                  "inactive_font_size": null,
-                  "active_color": "#FF9900",
-                  "active_bg_color": "#000000",
-                  "bg_color": "#2b2b2b",
-                  "glow_intensity": 1.944
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#1a1a1a",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
                 },
                 "active": true,
                 "Execute Command": {
@@ -403,16 +459,24 @@
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
-                  "active_text_color": "#1a1a1a",
-                  "text_color": "#888888",
-                  "active_font_style": "bold",
-                  "active_font_size": null,
-                  "inactive_font_style": "normal",
-                  "inactive_font_size": null,
-                  "active_color": "#FF9900",
-                  "active_bg_color": "#000000",
-                  "bg_color": "#2b2b2b",
-                  "glow_intensity": 1.944
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#1a1a1a",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
                 },
                 "active": true,
                 "Execute Command": {
@@ -429,16 +493,24 @@
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
-                  "active_text_color": "#1a1a1a",
-                  "text_color": "#888888",
-                  "active_font_style": "bold",
-                  "active_font_size": null,
-                  "inactive_font_style": "normal",
-                  "inactive_font_size": null,
-                  "active_color": "#FF9900",
-                  "active_bg_color": "#000000",
-                  "bg_color": "#2b2b2b",
-                  "glow_intensity": 1.944
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#1a1a1a",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
                 },
                 "active": true,
                 "Execute Command": {
@@ -455,16 +527,24 @@
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
-                  "active_text_color": "#1a1a1a",
-                  "text_color": "#888888",
-                  "active_font_style": "bold",
-                  "active_font_size": null,
-                  "inactive_font_style": "normal",
-                  "inactive_font_size": null,
-                  "active_color": "#FF9900",
-                  "active_bg_color": "#000000",
-                  "bg_color": "#2b2b2b",
-                  "glow_intensity": 1.944
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#1a1a1a",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
                 },
                 "active": true,
                 "Execute Command": {
@@ -486,16 +566,24 @@
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
-                  "active_text_color": "#1a1a1a",
-                  "text_color": "#888888",
-                  "active_font_style": "bold",
-                  "active_font_size": null,
-                  "inactive_font_style": "normal",
-                  "inactive_font_size": null,
-                  "active_color": "#FF9900",
-                  "active_bg_color": "#000000",
-                  "bg_color": "#2b2b2b",
-                  "glow_intensity": 1.944
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#1a1a1a",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
                 },
                 "Execute Command": {
                   "message": ":CHANnel3:DISPlay ON"
@@ -511,16 +599,24 @@
                 },
                 "AES70": "OcaBooleanActuator",
                 "style": {
-                  "active_text_color": "#1a1a1a",
-                  "text_color": "#888888",
-                  "active_font_style": "bold",
-                  "active_font_size": null,
-                  "inactive_font_style": "normal",
-                  "inactive_font_size": null,
-                  "active_color": "#FF9900",
-                  "active_bg_color": "#000000",
-                  "bg_color": "#2b2b2b",
-                  "glow_intensity": 1.944
+                  "active": {
+                    "font_style": "bold",
+                    "font_size": null,
+                    "text_color": "#1a1a1a",
+                    "bg_color": "#000000",
+                    "border_color": "#FF9900",
+                    "border_thickness": 2,
+                    "glow_intensity": 1.944
+                  },
+                  "inactive": {
+                    "font_style": "normal",
+                    "font_size": null,
+                    "text_color": "#888888",
+                    "bg_color": "#2b2b2b",
+                    "border_color": "#555555",
+                    "border_thickness": 2,
+                    "glow_intensity": 0
+                  }
                 },
                 "Execute Command": {
                   "message": ":CHANnel3:DISPlay OFF"

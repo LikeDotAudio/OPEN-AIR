@@ -24,7 +24,7 @@
           }
         ],
         "layout": {
-          "height": 50,
+          "height": 300,
           "alpha": 0.9
         },
         "Navigation": {
@@ -45,8 +45,10 @@
             },
             "scale": "linear",
             "color": "white",
-            "min": "auto",
-            "max": "auto"
+            "domain": {
+              "min": "auto",
+              "max": "auto"
+            }
           },
           "y": {
             "label": {
@@ -57,8 +59,10 @@
             },
             "scale": "linear",
             "color": "white",
-            "min": "auto",
-            "max": "auto"
+            "domain": {
+              "min": "auto",
+              "max": "auto"
+            }
           }
         }
       },
@@ -75,7 +79,7 @@
           }
         ],
         "layout": {
-          "height": 50,
+          "height": 300,
           "alpha": 0.9
         },
         "Navigation": {
@@ -96,8 +100,10 @@
             },
             "scale": "linear",
             "color": "white",
-            "min": "auto",
-            "max": "auto"
+            "domain": {
+              "min": "auto",
+              "max": "auto"
+            }
           },
           "y": {
             "label": {
@@ -108,8 +114,10 @@
             },
             "scale": "linear",
             "color": "white",
-            "min": "auto",
-            "max": "auto"
+            "domain": {
+              "min": "auto",
+              "max": "auto"
+            }
           }
         }
       },
@@ -126,7 +134,7 @@
           }
         ],
         "layout": {
-          "height": 50,
+          "height": 300,
           "alpha": 0.9
         },
         "Navigation": {
@@ -147,8 +155,10 @@
             },
             "scale": "linear",
             "color": "white",
-            "min": "auto",
-            "max": "auto"
+            "domain": {
+              "min": "auto",
+              "max": "auto"
+            }
           },
           "y": {
             "label": {
@@ -159,8 +169,10 @@
             },
             "scale": "linear",
             "color": "white",
-            "min": "auto",
-            "max": "auto"
+            "domain": {
+              "min": "auto",
+              "max": "auto"
+            }
           }
         }
       },
@@ -182,7 +194,7 @@
           }
         ],
         "layout": {
-          "height": 50,
+          "height": 300,
           "alpha": 0.9
         },
         "Navigation": {
@@ -203,8 +215,10 @@
             },
             "scale": "linear",
             "color": "white",
-            "min": "auto",
-            "max": "auto"
+            "domain": {
+              "min": "auto",
+              "max": "auto"
+            }
           },
           "y": {
             "label": {
@@ -215,8 +229,10 @@
             },
             "scale": "linear",
             "color": "white",
-            "min": "auto",
-            "max": "auto"
+            "domain": {
+              "min": "auto",
+              "max": "auto"
+            }
           }
         }
       },
@@ -236,7 +252,7 @@
           }
         ],
         "layout": {
-          "height": 50,
+          "height": 300,
           "alpha": 0.9
         },
         "Navigation": {
@@ -257,8 +273,10 @@
             },
             "scale": "linear",
             "color": "white",
-            "min": "auto",
-            "max": "auto"
+            "domain": {
+              "min": "auto",
+              "max": "auto"
+            }
           },
           "y": {
             "label": {
@@ -269,8 +287,10 @@
             },
             "scale": "linear",
             "color": "white",
-            "min": "auto",
-            "max": "auto"
+            "domain": {
+              "min": "auto",
+              "max": "auto"
+            }
           }
         }
       },
@@ -287,7 +307,7 @@
           }
         ],
         "layout": {
-          "height": 50,
+          "height": 300,
           "alpha": 0.9
         },
         "Navigation": {
@@ -308,8 +328,10 @@
             },
             "scale": "linear",
             "color": "white",
-            "min": "auto",
-            "max": "auto"
+            "domain": {
+              "min": "auto",
+              "max": "auto"
+            }
           },
           "y": {
             "label": {
@@ -320,8 +342,10 @@
             },
             "scale": "linear",
             "color": "white",
-            "min": "auto",
-            "max": "auto"
+            "domain": {
+              "min": "auto",
+              "max": "auto"
+            }
           }
         }
       },
@@ -341,7 +365,7 @@
           }
         ],
         "layout": {
-          "height": 50,
+          "height": 300,
           "alpha": 0.9
         },
         "Navigation": {
@@ -362,8 +386,10 @@
             },
             "scale": "linear",
             "color": "white",
-            "min": "auto",
-            "max": "auto"
+            "domain": {
+              "min": "auto",
+              "max": "auto"
+            }
           },
           "y": {
             "label": {
@@ -374,8 +400,10 @@
             },
             "scale": "linear",
             "color": "white",
-            "min": "auto",
-            "max": "auto"
+            "domain": {
+              "min": "auto",
+              "max": "auto"
+            }
           }
         }
       },
@@ -395,7 +423,7 @@
           }
         ],
         "layout": {
-          "height": 50,
+          "height": 300,
           "alpha": 0.9
         },
         "Navigation": {
@@ -416,8 +444,10 @@
             },
             "scale": "linear",
             "color": "white",
-            "min": "auto",
-            "max": "auto"
+            "domain": {
+              "min": "auto",
+              "max": "auto"
+            }
           },
           "y": {
             "label": {
@@ -428,8 +458,10 @@
             },
             "scale": "linear",
             "color": "white",
-            "min": "auto",
-            "max": "auto"
+            "domain": {
+              "min": "auto",
+              "max": "auto"
+            }
           }
         }
       },
@@ -449,7 +481,7 @@
           }
         ],
         "layout": {
-          "height": 50,
+          "height": 300,
           "alpha": 0.9
         },
         "Navigation": {
@@ -470,8 +502,10 @@
             },
             "scale": "linear",
             "color": "white",
-            "min": "auto",
-            "max": "auto"
+            "domain": {
+              "min": "auto",
+              "max": "auto"
+            }
           },
           "y": {
             "label": {
@@ -482,8 +516,10 @@
             },
             "scale": "linear",
             "color": "white",
-            "min": "auto",
-            "max": "auto"
+            "domain": {
+              "min": "auto",
+              "max": "auto"
+            }
           }
         }
       },
@@ -509,8 +545,10 @@
             },
             "scale": "linear",
             "color": "white",
-            "min": "auto",
-            "max": "auto"
+            "domain": {
+              "min": "auto",
+              "max": "auto"
+            }
           }
         },
         "datasets": [
@@ -520,7 +558,7 @@
           }
         ],
         "layout": {
-          "height": 50,
+          "height": 300,
           "alpha": 0.9
         },
         "Navigation": {

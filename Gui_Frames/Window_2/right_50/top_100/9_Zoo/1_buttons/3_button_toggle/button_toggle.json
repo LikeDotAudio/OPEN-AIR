@@ -70,7 +70,16 @@
               "font": 10
             },
             "style": {
-              "active_color": "#FF0000"
+              "active": {
+                "border_color": "#FF0000",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
             },
             "interaction": {
               "options": {
@@ -108,10 +117,19 @@
           "v1": {
             "type": "_SmartToggle",
             "style": {
-              "Circular": true,
-              "bg_color": "#4a483e",
-              "active_bg_color": "#FFFDD0",
-              "active_color": "#FFFDD0"
+              "active": {
+                "bg_color": "#FFFDD0",
+                "border_color": "#FFFDD0",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "bg_color": "#4a483e",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              },
+              "Circular": true
             },
             "interaction": {
               "options": {
@@ -139,10 +157,19 @@
           "v2": {
             "type": "_SmartToggle",
             "style": {
-              "Circular": true,
-              "bg_color": "#400010",
-              "active_bg_color": "#e0115f",
-              "active_color": "#e0115f"
+              "active": {
+                "bg_color": "#e0115f",
+                "border_color": "#e0115f",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "bg_color": "#400010",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              },
+              "Circular": true
             },
             "interaction": {
               "options": {
@@ -170,10 +197,19 @@
           "v3": {
             "type": "_SmartToggle",
             "style": {
-              "Circular": true,
-              "bg_color": "#003010",
-              "active_bg_color": "#50c878",
-              "active_color": "#50c878"
+              "active": {
+                "bg_color": "#50c878",
+                "border_color": "#50c878",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "bg_color": "#003010",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              },
+              "Circular": true
             },
             "interaction": {
               "options": {
@@ -201,10 +237,19 @@
           "v4": {
             "type": "_SmartToggle",
             "style": {
-              "Circular": true,
-              "bg_color": "#001040",
-              "active_bg_color": "#0f52ba",
-              "active_color": "#0f52ba"
+              "active": {
+                "bg_color": "#0f52ba",
+                "border_color": "#0f52ba",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "bg_color": "#001040",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              },
+              "Circular": true
             },
             "interaction": {
               "options": {
@@ -232,10 +277,19 @@
           "v5": {
             "type": "_SmartToggle",
             "style": {
-              "Circular": true,
-              "bg_color": "#302000",
-              "active_bg_color": "#ffbf00",
-              "active_color": "#ffbf00"
+              "active": {
+                "bg_color": "#ffbf00",
+                "border_color": "#ffbf00",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "bg_color": "#302000",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              },
+              "Circular": true
             },
             "interaction": {
               "options": {
@@ -263,10 +317,19 @@
           "v6": {
             "type": "_SmartToggle",
             "style": {
-              "Circular": true,
-              "bg_color": "#300030",
-              "active_bg_color": "#ee82ee",
-              "active_color": "#ee82ee"
+              "active": {
+                "bg_color": "#ee82ee",
+                "border_color": "#ee82ee",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "bg_color": "#300030",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              },
+              "Circular": true
             },
             "interaction": {
               "options": {
@@ -294,10 +357,19 @@
           "v7": {
             "type": "_SmartToggle",
             "style": {
-              "Circular": true,
-              "bg_color": "#003030",
-              "active_bg_color": "#00ffff",
-              "active_color": "#00ffff"
+              "active": {
+                "bg_color": "#00ffff",
+                "border_color": "#00ffff",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "bg_color": "#003030",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              },
+              "Circular": true
             },
             "interaction": {
               "options": {
@@ -325,10 +397,19 @@
           "v8": {
             "type": "_SmartToggle",
             "style": {
-              "Circular": true,
-              "bg_color": "#400040",
-              "active_bg_color": "#ff00ff",
-              "active_color": "#ff00ff"
+              "active": {
+                "bg_color": "#ff00ff",
+                "border_color": "#ff00ff",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "bg_color": "#400040",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              },
+              "Circular": true
             },
             "interaction": {
               "options": {
@@ -356,10 +437,19 @@
           "v9": {
             "type": "_SmartToggle",
             "style": {
-              "Circular": true,
-              "bg_color": "#103000",
-              "active_bg_color": "#32cd32",
-              "active_color": "#32cd32"
+              "active": {
+                "bg_color": "#32cd32",
+                "border_color": "#32cd32",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "bg_color": "#103000",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              },
+              "Circular": true
             },
             "interaction": {
               "options": {
@@ -387,10 +477,19 @@
           "v10": {
             "type": "_SmartToggle",
             "style": {
-              "Circular": true,
-              "bg_color": "#303000",
-              "active_bg_color": "#ffd700",
-              "active_color": "#ffd700"
+              "active": {
+                "bg_color": "#ffd700",
+                "border_color": "#ffd700",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "bg_color": "#303000",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              },
+              "Circular": true
             },
             "interaction": {
               "options": {
@@ -418,10 +517,19 @@
           "v11": {
             "type": "_SmartToggle",
             "style": {
-              "Circular": true,
-              "bg_color": "#101020",
-              "active_bg_color": "#708090",
-              "active_color": "#708090"
+              "active": {
+                "bg_color": "#708090",
+                "border_color": "#708090",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "bg_color": "#101020",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              },
+              "Circular": true
             },
             "interaction": {
               "options": {
@@ -449,10 +557,19 @@
           "v12": {
             "type": "_SmartToggle",
             "style": {
-              "Circular": true,
-              "bg_color": "#201000",
-              "active_bg_color": "#d2691e",
-              "active_color": "#d2691e"
+              "active": {
+                "bg_color": "#d2691e",
+                "border_color": "#d2691e",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "bg_color": "#201000",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              },
+              "Circular": true
             },
             "interaction": {
               "options": {
@@ -480,10 +597,19 @@
           "v13": {
             "type": "_SmartToggle",
             "style": {
-              "Circular": true,
-              "bg_color": "#002020",
-              "active_bg_color": "#20b2aa",
-              "active_color": "#20b2aa"
+              "active": {
+                "bg_color": "#20b2aa",
+                "border_color": "#20b2aa",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "bg_color": "#002020",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              },
+              "Circular": true
             },
             "interaction": {
               "options": {
@@ -511,10 +637,19 @@
           "v14": {
             "type": "_SmartToggle",
             "style": {
-              "Circular": true,
-              "bg_color": "#300000",
-              "active_bg_color": "#ff4500",
-              "active_color": "#ff4500"
+              "active": {
+                "bg_color": "#ff4500",
+                "border_color": "#ff4500",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "bg_color": "#300000",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              },
+              "Circular": true
             },
             "interaction": {
               "options": {
@@ -542,10 +677,19 @@
           "v15": {
             "type": "_SmartToggle",
             "style": {
-              "Circular": true,
-              "bg_color": "#001030",
-              "active_bg_color": "#4682b4",
-              "active_color": "#4682b4"
+              "active": {
+                "bg_color": "#4682b4",
+                "border_color": "#4682b4",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "bg_color": "#001030",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              },
+              "Circular": true
             },
             "interaction": {
               "options": {
@@ -573,10 +717,19 @@
           "v16": {
             "type": "_SmartToggle",
             "style": {
-              "Circular": true,
-              "bg_color": "#102010",
-              "active_bg_color": "#9acd32",
-              "active_color": "#9acd32"
+              "active": {
+                "bg_color": "#9acd32",
+                "border_color": "#9acd32",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "bg_color": "#102010",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              },
+              "Circular": true
             },
             "interaction": {
               "options": {
@@ -604,10 +757,19 @@
           "v17": {
             "type": "_SmartToggle",
             "style": {
-              "Circular": true,
-              "bg_color": "#200020",
-              "active_bg_color": "#ba55d3",
-              "active_color": "#ba55d3"
+              "active": {
+                "bg_color": "#ba55d3",
+                "border_color": "#ba55d3",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "bg_color": "#200020",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              },
+              "Circular": true
             },
             "interaction": {
               "options": {
@@ -635,10 +797,19 @@
           "v18": {
             "type": "_SmartToggle",
             "style": {
-              "Circular": true,
-              "bg_color": "#003020",
-              "active_bg_color": "#3cb371",
-              "active_color": "#3cb371"
+              "active": {
+                "bg_color": "#3cb371",
+                "border_color": "#3cb371",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "bg_color": "#003020",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              },
+              "Circular": true
             },
             "interaction": {
               "options": {
@@ -666,11 +837,20 @@
           "v19": {
             "type": "_SmartToggle",
             "style": {
-              "Circular": true,
-              "bg_color": "#303030",
-              "active_bg_color": "#f0f0f0",
-              "active_color": "#f0f0f0",
-              "active_text_color": "#1a1a1a"
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#f0f0f0",
+                "border_color": "#f0f0f0",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "bg_color": "#303030",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              },
+              "Circular": true
             },
             "interaction": {
               "options": {
@@ -698,10 +878,19 @@
           "v20": {
             "type": "_SmartToggle",
             "style": {
-              "Circular": true,
-              "bg_color": "#1a1a1a",
-              "active_bg_color": "#ff69b4",
-              "active_color": "#ff69b4"
+              "active": {
+                "bg_color": "#ff69b4",
+                "border_color": "#ff69b4",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "bg_color": "#1a1a1a",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              },
+              "Circular": true
             },
             "interaction": {
               "options": {
@@ -746,8 +935,16 @@
               "Es": "Dim"
             },
             "style": {
-              "active_color": "#00FF00",
-              "glow_intensity": 0.2
+              "active": {
+                "border_color": "#00FF00",
+                "border_thickness": 2,
+                "glow_intensity": 0.2
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
             },
             "interaction": {
               "options": {
@@ -780,8 +977,16 @@
               "Es": "Mid"
             },
             "style": {
-              "active_color": "#00FF00",
-              "glow_intensity": 1.2
+              "active": {
+                "border_color": "#00FF00",
+                "border_thickness": 2,
+                "glow_intensity": 1.2
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
             },
             "interaction": {
               "options": {
@@ -814,8 +1019,16 @@
               "Es": "Alto"
             },
             "style": {
-              "active_color": "#00FF00",
-              "glow_intensity": 2.5
+              "active": {
+                "border_color": "#00FF00",
+                "border_thickness": 2,
+                "glow_intensity": 2.5
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
             },
             "interaction": {
               "options": {
@@ -848,8 +1061,16 @@
               "Es": "Ultra"
             },
             "style": {
-              "active_color": "#00FF00",
-              "glow_intensity": 4.5
+              "active": {
+                "border_color": "#00FF00",
+                "border_thickness": 2,
+                "glow_intensity": 4.5
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
             },
             "interaction": {
               "options": {
@@ -887,7 +1108,16 @@
           "amber": {
             "type": "_SmartToggle",
             "style": {
-              "active_color": "#FF9900"
+              "active": {
+                "border_color": "#FF9900",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
             },
             "interaction": {
               "options": {
@@ -914,7 +1144,16 @@
           "cyan": {
             "type": "_SmartToggle",
             "style": {
-              "active_color": "#00FFFF"
+              "active": {
+                "border_color": "#00FFFF",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
             },
             "interaction": {
               "options": {
@@ -941,7 +1180,16 @@
           "magenta": {
             "type": "_SmartToggle",
             "style": {
-              "active_color": "#FF00FF"
+              "active": {
+                "border_color": "#FF00FF",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
             },
             "interaction": {
               "options": {
@@ -968,8 +1216,16 @@
           "white": {
             "type": "_SmartToggle",
             "style": {
-              "active_color": "#FFFFFF",
-              "glow_intensity": 1.0
+              "active": {
+                "border_color": "#FFFFFF",
+                "border_thickness": 2,
+                "glow_intensity": 1.0
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
             },
             "interaction": {
               "options": {
@@ -1070,7 +1326,16 @@
               "font": 14
             },
             "style": {
-              "active_color": "#3399FF"
+              "active": {
+                "border_color": "#3399FF",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
             },
             "interaction": {
               "options": {
@@ -1102,8 +1367,16 @@
               "font": 20
             },
             "style": {
-              "active_color": "#FF3300",
-              "glow_intensity": 2.2
+              "active": {
+                "border_color": "#FF3300",
+                "border_thickness": 2,
+                "glow_intensity": 2.2
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
             },
             "interaction": {
               "options": {
@@ -1141,8 +1414,17 @@
           "inverted": {
             "type": "_SmartToggle",
             "style": {
-              "active_color": "#444444",
-              "bg_color": "#00FF00"
+              "active": {
+                "border_color": "#444444",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "bg_color": "#00FF00",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
             },
             "interaction": {
               "options": {
@@ -1175,8 +1457,17 @@
               "Es": "Hot Swap (Sticky)"
             },
             "style": {
-              "active_color": "#FF0000",
-              "text_color": "#FFFF00"
+              "active": {
+                "border_color": "#FF0000",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "text_color": "#FFFF00",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
             },
             "interaction": {
               "options": {
@@ -1207,7 +1498,16 @@
               "alpha": 0.3
             },
             "style": {
-              "active_color": "#AAAAAA"
+              "active": {
+                "border_color": "#AAAAAA",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
             },
             "interaction": {
               "options": {
@@ -1234,9 +1534,17 @@
           "nuclear": {
             "type": "_SmartToggle",
             "style": {
-              "active_color": "#7FFF00",
-              "glow_intensity": 5.0,
-              "active_text_color": "#000000"
+              "active": {
+                "text_color": "#000000",
+                "border_color": "#7FFF00",
+                "border_thickness": 2,
+                "glow_intensity": 5.0
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
             },
             "interaction": {
               "options": {
@@ -1274,8 +1582,17 @@
           "ocean": {
             "type": "_SmartToggle",
             "style": {
-              "active_color": "#0077BE",
-              "bg_color": "#001a33"
+              "active": {
+                "border_color": "#0077BE",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "bg_color": "#001a33",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
             },
             "interaction": {
               "options": {
@@ -1302,8 +1619,16 @@
           "forest": {
             "type": "_SmartToggle",
             "style": {
-              "active_color": "#228B22",
-              "glow_intensity": 1.5
+              "active": {
+                "border_color": "#228B22",
+                "border_thickness": 2,
+                "glow_intensity": 1.5
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
             },
             "interaction": {
               "options": {
@@ -1330,8 +1655,17 @@
           "sunset": {
             "type": "_SmartToggle",
             "style": {
-              "active_color": "#FD5E53",
-              "active_text_color": "#FFF5EE"
+              "active": {
+                "text_color": "#FFF5EE",
+                "border_color": "#FD5E53",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
             },
             "interaction": {
               "options": {
@@ -1358,9 +1692,18 @@
           "mono": {
             "type": "_SmartToggle",
             "style": {
-              "active_color": "#333333",
-              "active_text_color": "#FFFFFF",
-              "bg_color": "#CCCCCC"
+              "active": {
+                "text_color": "#FFFFFF",
+                "border_color": "#333333",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "bg_color": "#CCCCCC",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
             },
             "interaction": {
               "options": {
@@ -1409,9 +1752,17 @@
               "font": 16
             },
             "style": {
-              "Circular": true,
-              "active_color": "#00FFFF",
-              "glow_intensity": 3.0
+              "active": {
+                "border_color": "#00FFFF",
+                "border_thickness": 2,
+                "glow_intensity": 3.0
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              },
+              "Circular": true
             },
             "interaction": {
               "options": {
@@ -1450,8 +1801,17 @@
               "font": 10
             },
             "style": {
-              "Circular": true,
-              "active_color": "#FF0000"
+              "active": {
+                "border_color": "#FF0000",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              },
+              "Circular": true
             },
             "interaction": {
               "options": {
@@ -1489,8 +1849,17 @@
               "font": 9
             },
             "style": {
-              "Circular": true,
-              "active_color": "#00FF00"
+              "active": {
+                "border_color": "#00FF00",
+                "border_thickness": 2,
+                "glow_intensity": 8
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              },
+              "Circular": true
             },
             "interaction": {
               "options": {
@@ -1528,9 +1897,17 @@
               "font": 8
             },
             "style": {
-              "Circular": true,
-              "active_color": "#00FF00",
-              "glow_intensity": 1.5
+              "active": {
+                "border_color": "#00FF00",
+                "border_thickness": 2,
+                "glow_intensity": 1.5
+              },
+              "inactive": {
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              },
+              "Circular": true
             },
             "interaction": {
               "options": {

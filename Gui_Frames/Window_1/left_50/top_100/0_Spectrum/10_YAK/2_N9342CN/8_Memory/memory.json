@@ -56,15 +56,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "preset_path": {
-                    "value": "C:\\PRESETS\\",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Preset Path",
                       "Fr": "Chemin de préréglage",
                       "De": "Preset-Pfad",
                       "Es": "Ruta de preajuste"
-                    },
-                    "units": ""
+                    }
                   }
                 }
               },
@@ -72,15 +73,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "preset_catalog_list": {
-                    "value": "0",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Catalog List",
                       "Fr": "Catalog List",
                       "De": "Catalog List",
                       "Es": "Catalog List"
-                    },
-                    "units": ""
+                    }
                   }
                 }
               }
@@ -133,26 +135,28 @@
                 "type": "OcaBlock",
                 "fields": {
                   "preset_fileName": {
-                    "value": "14.STA",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "File Name",
                       "Fr": "File Nom",
                       "De": "File Name",
                       "Es": "File Nombre"
-                    },
-                    "units": ""
+                    }
                   },
                   "preset_path": {
-                    "value": "C:\\PRESETS\\",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Preset Path",
                       "Fr": "Chemin de préréglage",
                       "De": "Preset-Pfad",
                       "Es": "Ruta de preajuste"
-                    },
-                    "units": ""
+                    }
                   }
                 }
               }
@@ -194,15 +198,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "preset_number": {
-                    "value": "0",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Preset Number",
                       "Fr": "Preset Number",
                       "De": "Preset Number",
                       "Es": "Preset Number"
-                    },
-                    "units": ""
+                    }
                   }
                 }
               },

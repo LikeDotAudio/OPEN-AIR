@@ -31,13 +31,15 @@
             "fields": {
               "Device_Identity": {
                 "type": "_TextInput",
+                "value": {
+                  "default_value": "Flux_Math_Scope_X"
+                },
                 "label_active": {
                   "En": "Device Name",
                   "Fr": "Device Nom",
                   "De": "Device Name",
                   "Es": "Device Nombre"
                 },
-                "value_default": "Flux_Math_Scope_X",
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
                     "type": "_GuiActuator",
@@ -163,16 +165,20 @@
               },
               "Ch1_Volts_Div": {
                 "type": "_GuiHorizontalKnob",
+                "domain": {
+                  "min": "0.01",
+                  "max": "100",
+                  "units": "V"
+                },
+                "value": {
+                  "default_value": "1.0"
+                },
                 "label_active": {
                   "En": "Ch1 Scale",
                   "Fr": "Ch 1",
                   "De": "Ch 1",
                   "Es": "Ch 1"
                 },
-                "value_default": "1.0",
-                "min": "0.01",
-                "max": "100",
-                "units": "V",
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
                     "type": "_GuiActuator",
@@ -253,16 +259,20 @@
               },
               "Ch2_Volts_Div": {
                 "type": "_GuiHorizontalKnob",
+                "domain": {
+                  "min": "0.01",
+                  "max": "100",
+                  "units": "V"
+                },
+                "value": {
+                  "default_value": "1.0"
+                },
                 "label_active": {
                   "En": "Ch2 Scale",
                   "Fr": "Ch 2",
                   "De": "Ch 2",
                   "Es": "Ch 2"
                 },
-                "value_default": "1.0",
-                "min": "0.01",
-                "max": "100",
-                "units": "V",
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
                     "type": "_GuiActuator",
@@ -378,14 +388,18 @@
               },
               "Math_Scale": {
                 "type": "_GuiHorizontalKnob",
+                "domain": {
+                  "units": "U"
+                },
+                "value": {
+                  "default_value": "1.0"
+                },
                 "label_active": {
                   "En": "Math Scale",
                   "Fr": "Math Échelle",
                   "De": "Math Skala",
                   "Es": "Math Escala"
                 },
-                "value_default": "1.0",
-                "units": "U",
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
                     "type": "_GuiActuator",
@@ -408,14 +422,18 @@
               },
               "Math_Offset": {
                 "type": "_GuiHorizontalKnob",
+                "domain": {
+                  "units": "U"
+                },
+                "value": {
+                  "default_value": "0.0"
+                },
                 "label_active": {
                   "En": "Math Offset",
                   "Fr": "Math Décalage",
                   "De": "Math Versatz",
                   "Es": "Math Compensación"
                 },
-                "value_default": "0.0",
-                "units": "U",
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
                     "type": "_GuiActuator",
@@ -484,16 +502,20 @@
               },
               "FFT_Center": {
                 "type": "_GuiHorizontalKnob",
+                "domain": {
+                  "min": "0",
+                  "max": "1000000000",
+                  "units": "Hz"
+                },
+                "value": {
+                  "default_value": "1000"
+                },
                 "label_active": {
                   "En": "Center Freq",
                   "Fr": "Fréq centrale",
                   "De": "Mittenfreq",
                   "Es": "Frec central"
                 },
-                "value_default": "1000",
-                "min": "0",
-                "max": "1000000000",
-                "units": "Hz",
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
                     "type": "_GuiActuator",
@@ -516,16 +538,20 @@
               },
               "FFT_Span": {
                 "type": "_GuiHorizontalKnob",
+                "domain": {
+                  "min": "10",
+                  "max": "1000000000",
+                  "units": "Hz"
+                },
+                "value": {
+                  "default_value": "10000"
+                },
                 "label_active": {
                   "En": "Freq Span",
                   "Fr": "Intervalle de fréq",
                   "De": "Freq-Spanne",
                   "Es": "Intervalo de frec"
                 },
-                "value_default": "10000",
-                "min": "10",
-                "max": "1000000000",
-                "units": "Hz",
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
                     "type": "_GuiActuator",
@@ -559,16 +585,20 @@
             "fields": {
               "Time_Div": {
                 "type": "_GuiHorizontalKnob",
+                "domain": {
+                  "min": "1e-9",
+                  "max": "10",
+                  "units": "s"
+                },
+                "value": {
+                  "default_value": "1e-3"
+                },
                 "label_active": {
                   "En": "Time / Div",
                   "Fr": "Temps / Div",
                   "De": "Zeit / Div",
                   "Es": "Tiempo / Div"
                 },
-                "value_default": "1e-3",
-                "min": "1e-9",
-                "max": "10",
-                "units": "s",
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
                     "type": "_GuiActuator",
@@ -637,14 +667,18 @@
               },
               "Trigger_Level": {
                 "type": "_GuiHorizontalKnob",
+                "domain": {
+                  "units": "V"
+                },
+                "value": {
+                  "default_value": "0.5"
+                },
                 "label_active": {
                   "En": "Level",
                   "Fr": "Niveau",
                   "De": "Pegel",
                   "Es": "Nivel"
                 },
-                "value_default": "0.5",
-                "units": "V",
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
                     "type": "_GuiActuator",

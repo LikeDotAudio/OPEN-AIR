@@ -31,13 +31,15 @@
             "fields": {
               "Device_Identity": {
                 "type": "_TextInput",
+                "value": {
+                  "default_value": "Flux_Scope_88"
+                },
                 "label_active": {
                   "En": "Device Name",
                   "Fr": "Device Nom",
                   "De": "Device Name",
                   "Es": "Device Nombre"
                 },
-                "value_default": "Flux_Scope_88",
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
                     "type": "_GuiActuator",
@@ -116,16 +118,20 @@
             "fields": {
               "Ch1_Volts_Div": {
                 "type": "_GuiHorizontalKnob",
+                "domain": {
+                  "min": "0.01",
+                  "max": "100",
+                  "units": "V"
+                },
+                "value": {
+                  "default_value": "1.0"
+                },
                 "label_active": {
                   "En": "Volts / Div",
                   "Fr": "Volts / Div",
                   "De": "Volts / Div",
                   "Es": "Volts / Div"
                 },
-                "value_default": "1.0",
-                "min": "0.01",
-                "max": "100",
-                "units": "V",
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
                     "type": "_GuiActuator",
@@ -148,14 +154,18 @@
               },
               "Ch1_Offset": {
                 "type": "_GuiHorizontalKnob",
+                "domain": {
+                  "units": "V"
+                },
+                "value": {
+                  "default_value": "0.0"
+                },
                 "label_active": {
                   "En": "Offset",
                   "Fr": "Décalage",
                   "De": "Versatz",
                   "Es": "Compensación"
                 },
-                "value_default": "0.0",
-                "units": "V",
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
                     "type": "_GuiActuator",
@@ -224,16 +234,20 @@
             "fields": {
               "Time_Div": {
                 "type": "_GuiHorizontalKnob",
+                "domain": {
+                  "min": "1e-9",
+                  "max": "10",
+                  "units": "s"
+                },
+                "value": {
+                  "default_value": "1e-3"
+                },
                 "label_active": {
                   "En": "Time / Div",
                   "Fr": "Temps / Div",
                   "De": "Zeit / Div",
                   "Es": "Tiempo / Div"
                 },
-                "value_default": "1e-3",
-                "min": "1e-9",
-                "max": "10",
-                "units": "s",
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
                     "type": "_GuiActuator",
@@ -256,14 +270,18 @@
               },
               "Time_Offset": {
                 "type": "_GuiHorizontalKnob",
+                "domain": {
+                  "units": "s"
+                },
+                "value": {
+                  "default_value": "0.0"
+                },
                 "label_active": {
                   "En": "Delay",
                   "Fr": "Delay",
                   "De": "Delay",
                   "Es": "Delay"
                 },
-                "value_default": "0.0",
-                "units": "s",
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
                     "type": "_GuiActuator",
@@ -297,14 +315,18 @@
             "fields": {
               "Trigger_Level": {
                 "type": "_GuiHorizontalKnob",
+                "domain": {
+                  "units": "V"
+                },
+                "value": {
+                  "default_value": "0.5"
+                },
                 "label_active": {
                   "En": "Trig Level",
                   "Fr": "Trig Niveau",
                   "De": "Trig Pegel",
                   "Es": "Trig Nivel"
                 },
-                "value_default": "0.5",
-                "units": "V",
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
                     "type": "_GuiActuator",
@@ -499,13 +521,15 @@
             "fields": {
               "Read_Vpp": {
                 "type": "_GuiLabel",
+                "value": {
+                  "default_value": "--- V"
+                },
                 "label_active": {
                   "En": "Vpp",
                   "Fr": "Vpp",
                   "De": "Vss",
                   "Es": "Vpp"
                 },
-                "value_default": "--- V",
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
                     "type": "_GuiActuator",
@@ -528,13 +552,15 @@
               },
               "Read_Vrms": {
                 "type": "_GuiLabel",
+                "value": {
+                  "default_value": "--- V"
+                },
                 "label_active": {
                   "En": "Vrms",
                   "Fr": "Vrms",
                   "De": "Veff",
                   "Es": "Vrms"
                 },
-                "value_default": "--- V",
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
                     "type": "_GuiActuator",
@@ -557,13 +583,15 @@
               },
               "Read_Freq": {
                 "type": "_GuiLabel",
+                "value": {
+                  "default_value": "--- Hz"
+                },
                 "label_active": {
                   "En": "Freq",
                   "Fr": "Freq",
                   "De": "Freq",
                   "Es": "Freq"
                 },
-                "value_default": "--- Hz",
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
                     "type": "_GuiActuator",
@@ -586,13 +614,15 @@
               },
               "Read_dB": {
                 "type": "_GuiLabel",
+                "value": {
+                  "default_value": "--- dB"
+                },
                 "label_active": {
                   "En": "dB",
                   "Fr": "dB",
                   "De": "dB",
                   "Es": "dB"
                 },
-                "value_default": "--- dB",
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
                     "type": "_GuiActuator",

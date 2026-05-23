@@ -23,6 +23,10 @@
         "fields": {
           "Master_L": {
             "type": "_VUMeterKnob",
+            "domain": {
+              "min": -60,
+              "max": 6
+            },
             "meter_face_colour": "transparent",
             "label_active": {
               "En": "Master L",
@@ -33,8 +37,6 @@
             "path": "audio/master/left/vu",
             "knob_path": "audio/master/left/gain",
             "size": 200,
-            "min": -60,
-            "max": 6,
             "knob_min": 0,
             "knob_max": 100,
             "knob_width": 100,
@@ -45,6 +47,10 @@
           },
           "Master_R": {
             "type": "_VUMeterKnob",
+            "domain": {
+              "min": -60,
+              "max": 6
+            },
             "meter_face_colour": "transparent",
             "label_active": {
               "En": "Master R",
@@ -55,8 +61,6 @@
             "path": "audio/master/right/vu",
             "knob_path": "audio/master/right/gain",
             "size": 200,
-            "min": -60,
-            "max": 6,
             "knob_min": 0,
             "knob_max": 100,
             "knob_width": 100,
@@ -68,6 +72,10 @@
           },
           "Sub_Mix": {
             "type": "_VUMeterKnob",
+            "domain": {
+              "min": -40,
+              "max": 10
+            },
             "meter_face_colour": "transparent",
             "label_active": {
               "En": "Sub Mix (Default 90°)",
@@ -78,8 +86,6 @@
             "path": "audio/sub/vu",
             "knob_path": "audio/sub/level",
             "size": 150,
-            "min": -40,
-            "max": 10,
             "knob_min": -10,
             "knob_max": 10,
             "knob_width": 80,
@@ -91,6 +97,10 @@
           },
           "Wide_Angle": {
             "type": "_VUMeterKnob",
+            "domain": {
+              "min": -60,
+              "max": 6
+            },
             "meter_face_colour": "transparent",
             "label_active": {
               "En": "Wide Angle (180°)",
@@ -101,8 +111,6 @@
             "path": "audio/wide/vu",
             "knob_path": "audio/wide/level",
             "size": 200,
-            "min": -60,
-            "max": 6,
             "Meter_viewable_angle": 180,
             "knob_min": 0,
             "knob_max": 100,
@@ -114,6 +122,10 @@
           },
           "Medium_Angle": {
             "type": "_VUMeterKnob",
+            "domain": {
+              "min": -60,
+              "max": 6
+            },
             "meter_face_colour": "transparent",
             "label_active": {
               "En": "Medium Angle (120°)",
@@ -124,8 +136,6 @@
             "path": "audio/medium/vu",
             "knob_path": "audio/medium/level",
             "size": 200,
-            "min": -60,
-            "max": 6,
             "Meter_viewable_angle": 120,
             "knob_min": 0,
             "knob_max": 100,
@@ -139,6 +149,10 @@
           },
           "Narrow_Angle": {
             "type": "_VUMeterKnob",
+            "domain": {
+              "min": -60,
+              "max": 6
+            },
             "meter_face_colour": "transparent",
             "label_active": {
               "En": "Narrow Angle (60°)",
@@ -149,8 +163,6 @@
             "path": "audio/narrow/vu",
             "knob_path": "audio/narrow/level",
             "size": 200,
-            "min": -60,
-            "max": 6,
             "Meter_viewable_angle": 60,
             "knob_min": 0,
             "knob_max": 100,

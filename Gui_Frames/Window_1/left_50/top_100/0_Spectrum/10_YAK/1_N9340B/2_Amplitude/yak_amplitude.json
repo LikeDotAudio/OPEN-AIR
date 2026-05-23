@@ -62,36 +62,37 @@
                 },
                 "fields": {
                   "Ref_Level_dBm": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "dBm"
+                    },
                     "label": {
                       "En": "Ref Level (dBm)",
                       "Fr": "Ref Niveau (dBm)",
                       "De": "Ref Pegel (dBm)",
                       "Es": "Ref Nivel (dBm)"
-                    },
-                    "value": "The reference level in dBm.",
-                    "type": "_GuiValue",
-                    "units": "dBm"
+                    }
                   },
                   "Attenuation_dB": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "dB"
+                    },
                     "label": {
                       "En": "Attenuation (dB)",
                       "Fr": "Atténuation (dB)",
                       "De": "Dämpfung (dB)",
                       "Es": "Atenuación (dB)"
-                    },
-                    "value": "The attenuation in dB.",
-                    "type": "_GuiValue",
-                    "units": "dB"
+                    }
                   },
                   "Preamp_On": {
+                    "type": "_GuiValue",
                     "label": {
                       "En": "Preamp On",
                       "Fr": "Preamp On",
                       "De": "Preamp On",
                       "Es": "Preamp On"
-                    },
-                    "value": "Boolean for preamp state.",
-                    "type": "_GuiValue"
+                    }
                   }
                 }
               }
@@ -144,15 +145,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "Ref_Level_dBm": {
-                    "value": "-45",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "dBm"
+                    },
                     "label": {
                       "En": "Ref Level",
                       "Fr": "Ref Niveau",
                       "De": "Ref Pegel",
                       "Es": "Ref Nivel"
                     },
-                    "units": "dBm",
                     "description": {
                       "En": "The SCPI input for reference level.",
                       "Fr": "The SCPI input for reference level.",
@@ -161,15 +163,16 @@
                     }
                   },
                   "Attenuation_dB": {
-                    "value": "10",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "dB"
+                    },
                     "label": {
                       "En": "Attenuation",
                       "Fr": "Atténuation",
                       "De": "Dämpfung",
                       "Es": "Atenuación"
                     },
-                    "units": "dB",
                     "description": {
                       "En": "The SCPI input for power attenuation.",
                       "Fr": "The SCPI input for power attenuation.",
@@ -178,7 +181,6 @@
                     }
                   },
                   "Preamp_On": {
-                    "value": "1",
                     "type": "_GuiValue",
                     "label": {
                       "En": "Preamp (0/1)",
@@ -238,15 +240,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "ref_level": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "dBm"
+                    },
                     "label": {
                       "En": "Ref Level (dBm)",
                       "Fr": "Ref Niveau (dBm)",
                       "De": "Ref Pegel (dBm)",
                       "Es": "Ref Nivel (dBm)"
-                    },
-                    "value": "The reference level in dBm.",
-                    "type": "_GuiValue",
-                    "units": "dBm"
+                    }
                   }
                 }
               }
@@ -282,15 +285,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "attenuation": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "dB"
+                    },
                     "label": {
                       "En": "Attenuation (dB)",
                       "Fr": "Atténuation (dB)",
                       "De": "Dämpfung (dB)",
                       "Es": "Atenuación (dB)"
-                    },
-                    "value": "The attenuation in dB.",
-                    "type": "_GuiValue",
-                    "units": "dB"
+                    }
                   }
                 }
               }
@@ -326,14 +330,13 @@
                 "type": "OcaBlock",
                 "fields": {
                   "preamp_state": {
+                    "type": "_GuiValue",
                     "label": {
                       "En": "Preamp State",
                       "Fr": "Preamp State",
                       "De": "Preamp State",
                       "Es": "Preamp State"
-                    },
-                    "value": "Boolean for preamp state.",
-                    "type": "_GuiValue"
+                    }
                   }
                 }
               }
@@ -381,14 +384,15 @@
                 "fields": {
                   "Ref_Level_dBm": {
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "dBm"
+                    },
                     "label": {
                       "En": "Ref Level",
                       "Fr": "Ref Niveau",
                       "De": "Ref Pegel",
                       "Es": "Ref Nivel"
-                    },
-                    "units": "dBm",
-                    "value": "-40"
+                    }
                   }
                 }
               }
@@ -425,14 +429,15 @@
                 "fields": {
                   "Power_Attenuation": {
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "dB"
+                    },
                     "label": {
                       "En": "Attenuation",
                       "Fr": "Atténuation",
                       "De": "Dämpfung",
                       "Es": "Atenuación"
-                    },
-                    "units": "dB",
-                    "value": "20"
+                    }
                   }
                 }
               }

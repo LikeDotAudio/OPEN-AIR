@@ -84,15 +84,17 @@
                 "fields": {
                   "V_Meter_1": {
                     "type": "_NeedleVUMeter",
+                    "domain": {
+                      "min": "0",
+                      "max": "100",
+                      "units": "V"
+                    },
                     "label_active": {
                       "En": "V1",
                       "Fr": "V1",
                       "De": "V1",
                       "Es": "V1"
                     },
-                    "min": "0",
-                    "max": "100",
-                    "units": "V",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -102,15 +104,17 @@
                   },
                   "I_Meter_1": {
                     "type": "_NeedleVUMeter",
+                    "domain": {
+                      "min": "0",
+                      "max": "10",
+                      "units": "A"
+                    },
                     "label_active": {
                       "En": "A1",
                       "Fr": "A1",
                       "De": "A1",
                       "Es": "A1"
                     },
-                    "min": "0",
-                    "max": "10",
-                    "units": "A",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -120,15 +124,17 @@
                   },
                   "P_Meter_1": {
                     "type": "_NeedleVUMeter",
+                    "domain": {
+                      "min": "0",
+                      "max": "1000",
+                      "units": "W"
+                    },
                     "label_active": {
                       "En": "W1",
                       "Fr": "W1",
                       "De": "W1",
                       "Es": "W1"
                     },
-                    "min": "0",
-                    "max": "1000",
-                    "units": "W",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -143,15 +149,17 @@
                 "fields": {
                   "Volts_Set_1": {
                     "type": "_GuiVerticalFader",
+                    "domain": {
+                      "min": "0",
+                      "max": "100",
+                      "units": "V"
+                    },
                     "label_active": {
                       "En": "SET V",
                       "Fr": "SET V",
                       "De": "SET V",
                       "Es": "SET V"
                     },
-                    "min": "0",
-                    "max": "100",
-                    "units": "V",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -161,15 +169,17 @@
                   },
                   "Amps_Set_1": {
                     "type": "_GuiVerticalFader",
+                    "domain": {
+                      "min": "0",
+                      "max": "10",
+                      "units": "A"
+                    },
                     "label_active": {
                       "En": "LIM A",
                       "Fr": "LIM A",
                       "De": "LIM A",
                       "Es": "LIM A"
                     },
-                    "min": "0",
-                    "max": "10",
-                    "units": "A",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -216,15 +226,17 @@
                 "fields": {
                   "V_Meter_2": {
                     "type": "_NeedleVUMeter",
+                    "domain": {
+                      "min": "0",
+                      "max": "100",
+                      "units": "V"
+                    },
                     "label_active": {
                       "En": "V2",
                       "Fr": "V2",
                       "De": "V2",
                       "Es": "V2"
                     },
-                    "min": "0",
-                    "max": "100",
-                    "units": "V",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -234,15 +246,17 @@
                   },
                   "I_Meter_2": {
                     "type": "_NeedleVUMeter",
+                    "domain": {
+                      "min": "0",
+                      "max": "10",
+                      "units": "A"
+                    },
                     "label_active": {
                       "En": "A2",
                       "Fr": "A2",
                       "De": "A2",
                       "Es": "A2"
                     },
-                    "min": "0",
-                    "max": "10",
-                    "units": "A",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -252,15 +266,17 @@
                   },
                   "P_Meter_2": {
                     "type": "_NeedleVUMeter",
+                    "domain": {
+                      "min": "0",
+                      "max": "1000",
+                      "units": "W"
+                    },
                     "label_active": {
                       "En": "W2",
                       "Fr": "W2",
                       "De": "W2",
                       "Es": "W2"
                     },
-                    "min": "0",
-                    "max": "1000",
-                    "units": "W",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -275,15 +291,17 @@
                 "fields": {
                   "Volts_Set_2": {
                     "type": "_GuiVerticalFader",
+                    "domain": {
+                      "min": "0",
+                      "max": "100",
+                      "units": "V"
+                    },
                     "label_active": {
                       "En": "SET V",
                       "Fr": "SET V",
                       "De": "SET V",
                       "Es": "SET V"
                     },
-                    "min": "0",
-                    "max": "100",
-                    "units": "V",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -293,15 +311,17 @@
                   },
                   "Amps_Set_2": {
                     "type": "_GuiVerticalFader",
+                    "domain": {
+                      "min": "0",
+                      "max": "10",
+                      "units": "A"
+                    },
                     "label_active": {
                       "En": "LIM A",
                       "Fr": "LIM A",
                       "De": "LIM A",
                       "Es": "LIM A"
                     },
-                    "min": "0",
-                    "max": "10",
-                    "units": "A",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -348,15 +368,17 @@
                 "fields": {
                   "V_Meter_3": {
                     "type": "_NeedleVUMeter",
+                    "domain": {
+                      "min": "0",
+                      "max": "100",
+                      "units": "V"
+                    },
                     "label_active": {
                       "En": "V3",
                       "Fr": "V3",
                       "De": "V3",
                       "Es": "V3"
                     },
-                    "min": "0",
-                    "max": "100",
-                    "units": "V",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -366,15 +388,17 @@
                   },
                   "I_Meter_3": {
                     "type": "_NeedleVUMeter",
+                    "domain": {
+                      "min": "0",
+                      "max": "10",
+                      "units": "A"
+                    },
                     "label_active": {
                       "En": "A3",
                       "Fr": "A3",
                       "De": "A3",
                       "Es": "A3"
                     },
-                    "min": "0",
-                    "max": "10",
-                    "units": "A",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -384,15 +408,17 @@
                   },
                   "P_Meter_3": {
                     "type": "_NeedleVUMeter",
+                    "domain": {
+                      "min": "0",
+                      "max": "1000",
+                      "units": "W"
+                    },
                     "label_active": {
                       "En": "W3",
                       "Fr": "W3",
                       "De": "W3",
                       "Es": "W3"
                     },
-                    "min": "0",
-                    "max": "1000",
-                    "units": "W",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -407,15 +433,17 @@
                 "fields": {
                   "Volts_Set_3": {
                     "type": "_GuiVerticalFader",
+                    "domain": {
+                      "min": "0",
+                      "max": "100",
+                      "units": "V"
+                    },
                     "label_active": {
                       "En": "SET V",
                       "Fr": "SET V",
                       "De": "SET V",
                       "Es": "SET V"
                     },
-                    "min": "0",
-                    "max": "100",
-                    "units": "V",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -425,15 +453,17 @@
                   },
                   "Amps_Set_3": {
                     "type": "_GuiVerticalFader",
+                    "domain": {
+                      "min": "0",
+                      "max": "10",
+                      "units": "A"
+                    },
                     "label_active": {
                       "En": "LIM A",
                       "Fr": "LIM A",
                       "De": "LIM A",
                       "Es": "LIM A"
                     },
-                    "min": "0",
-                    "max": "10",
-                    "units": "A",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -480,15 +510,17 @@
                 "fields": {
                   "V_Meter_4": {
                     "type": "_NeedleVUMeter",
+                    "domain": {
+                      "min": "0",
+                      "max": "100",
+                      "units": "V"
+                    },
                     "label_active": {
                       "En": "V4",
                       "Fr": "V4",
                       "De": "V4",
                       "Es": "V4"
                     },
-                    "min": "0",
-                    "max": "100",
-                    "units": "V",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -498,15 +530,17 @@
                   },
                   "I_Meter_4": {
                     "type": "_NeedleVUMeter",
+                    "domain": {
+                      "min": "0",
+                      "max": "10",
+                      "units": "A"
+                    },
                     "label_active": {
                       "En": "A4",
                       "Fr": "A4",
                       "De": "A4",
                       "Es": "A4"
                     },
-                    "min": "0",
-                    "max": "10",
-                    "units": "A",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -516,15 +550,17 @@
                   },
                   "P_Meter_4": {
                     "type": "_NeedleVUMeter",
+                    "domain": {
+                      "min": "0",
+                      "max": "1000",
+                      "units": "W"
+                    },
                     "label_active": {
                       "En": "W4",
                       "Fr": "W4",
                       "De": "W4",
                       "Es": "W4"
                     },
-                    "min": "0",
-                    "max": "1000",
-                    "units": "W",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -539,15 +575,17 @@
                 "fields": {
                   "Volts_Set_4": {
                     "type": "_GuiVerticalFader",
+                    "domain": {
+                      "min": "0",
+                      "max": "100",
+                      "units": "V"
+                    },
                     "label_active": {
                       "En": "SET V",
                       "Fr": "SET V",
                       "De": "SET V",
                       "Es": "SET V"
                     },
-                    "min": "0",
-                    "max": "100",
-                    "units": "V",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -557,15 +595,17 @@
                   },
                   "Amps_Set_4": {
                     "type": "_GuiVerticalFader",
+                    "domain": {
+                      "min": "0",
+                      "max": "10",
+                      "units": "A"
+                    },
                     "label_active": {
                       "En": "LIM A",
                       "Fr": "LIM A",
                       "De": "LIM A",
                       "Es": "LIM A"
                     },
-                    "min": "0",
-                    "max": "10",
-                    "units": "A",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",

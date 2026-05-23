@@ -62,29 +62,30 @@
                 },
                 "fields": {
                   "StartFreq": {
-                    "value": "The starting frequency in Hz.",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
                     "label": {
                       "En": "Start Frequency",
                       "Fr": "Fréquence de début",
                       "De": "Startfrequenz",
                       "Es": "Frecuencia de inicio"
-                    },
-                    "units": "Hz"
+                    }
                   },
                   "StopFreq": {
-                    "value": "The stopping frequency in Hz.",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
                     "label": {
                       "En": "Stop Frequency",
                       "Fr": "Fréquence de fin",
                       "De": "Stoppfrequenz",
                       "Es": "Frecuencia de parada"
-                    },
-                    "units": "Hz"
+                    }
                   },
                   "TraceMode1": {
-                    "value": "The trace modes for each trace.",
                     "type": "_GuiValue",
                     "label": {
                       "En": "Trace Mode 1",
@@ -94,7 +95,6 @@
                     }
                   },
                   "TraceMode2": {
-                    "value": "The trace modes for each trace.",
                     "type": "_GuiValue",
                     "label": {
                       "En": "Trace Mode 2",
@@ -104,7 +104,6 @@
                     }
                   },
                   "TraceMode3": {
-                    "value": "The trace modes for each trace.",
                     "type": "_GuiValue",
                     "label": {
                       "En": "Trace Mode 3",
@@ -114,7 +113,6 @@
                     }
                   },
                   "TraceData1": {
-                    "value": "Processed trace data.",
                     "type": "_GuiValue",
                     "label": {
                       "En": "Trace Data 1",
@@ -124,7 +122,6 @@
                     }
                   },
                   "TraceData2": {
-                    "value": "Processed trace data.",
                     "type": "_GuiValue",
                     "label": {
                       "En": "Trace Data 2",
@@ -134,7 +131,6 @@
                     }
                   },
                   "TraceData3": {
-                    "value": "Processed trace data.",
                     "type": "_GuiValue",
                     "label": {
                       "En": "Trace Data 3",
@@ -189,29 +185,30 @@
                 },
                 "fields": {
                   "StartFreq": {
-                    "value": "The starting frequency in Hz.",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
                     "label": {
                       "En": "Start Frequency",
                       "Fr": "Fréquence de début",
                       "De": "Startfrequenz",
                       "Es": "Frecuencia de inicio"
-                    },
-                    "units": "Hz"
+                    }
                   },
                   "StopFreq": {
-                    "value": "The stopping frequency in Hz.",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
                     "label": {
                       "En": "Stop Frequency",
                       "Fr": "Fréquence de fin",
                       "De": "Stoppfrequenz",
                       "Es": "Frecuencia de parada"
-                    },
-                    "units": "Hz"
+                    }
                   },
                   "TraceMode1": {
-                    "value": "The trace modes for each trace.",
                     "type": "_GuiValue",
                     "label": {
                       "En": "Trace Mode 1",
@@ -221,7 +218,6 @@
                     }
                   },
                   "TraceMode2": {
-                    "value": "The trace modes for each trace.",
                     "type": "_GuiValue",
                     "label": {
                       "En": "Trace Mode 2",
@@ -231,7 +227,6 @@
                     }
                   },
                   "TraceMode3": {
-                    "value": "The trace modes for each trace.",
                     "type": "_GuiValue",
                     "label": {
                       "En": "Trace Mode 3",
@@ -241,7 +236,6 @@
                     }
                   },
                   "TraceData1": {
-                    "value": "Processed trace data.",
                     "type": "_GuiValue",
                     "label": {
                       "En": "Trace Data 1",
@@ -251,7 +245,6 @@
                     }
                   },
                   "TraceData2": {
-                    "value": "Processed trace data.",
                     "type": "_GuiValue",
                     "label": {
                       "En": "Trace Data 2",
@@ -261,7 +254,6 @@
                     }
                   },
                   "TraceData3": {
-                    "value": "Processed trace data.",
                     "type": "_GuiValue",
                     "label": {
                       "En": "Trace Data 3",
@@ -315,7 +307,6 @@
                 "type": "OcaBlock",
                 "fields": {
                   "trace_number": {
-                    "value": "1",
                     "type": "_GuiValue",
                     "label": {
                       "En": "Trace Number",
@@ -336,14 +327,13 @@
                 "type": "OcaBlock",
                 "fields": {
                   "trace_data": {
+                    "type": "_GuiValue",
                     "label": {
                       "En": "Trace Data",
                       "Fr": "Trace Data",
                       "De": "Spur Data",
                       "Es": "Traza Data"
-                    },
-                    "value": "Processed trace data or False.",
-                    "type": "_GuiValue"
+                    }
                   }
                 }
               }
@@ -379,7 +369,6 @@
                 "type": "OcaBlock",
                 "fields": {
                   "trace_number": {
-                    "value": "1",
                     "type": "_GuiValue",
                     "label": {
                       "En": "Trace Number",
@@ -400,14 +389,13 @@
                 "type": "OcaBlock",
                 "fields": {
                   "trace_data": {
+                    "type": "_GuiValue",
                     "label": {
                       "En": "Trace Data",
                       "Fr": "Trace Data",
                       "De": "Spur Data",
                       "Es": "Traza Data"
-                    },
-                    "value": "Processed trace data or False.",
-                    "type": "_GuiValue"
+                    }
                   }
                 }
               }
@@ -443,7 +431,6 @@
                 "type": "OcaBlock",
                 "fields": {
                   "trace_number": {
-                    "value": "2",
                     "type": "_GuiValue",
                     "label": {
                       "En": "Trace Number",
@@ -458,14 +445,13 @@
                 "type": "OcaBlock",
                 "fields": {
                   "trace_data": {
+                    "type": "_GuiValue",
                     "label": {
                       "En": "Trace Data",
                       "Fr": "Trace Data",
                       "De": "Spur Data",
                       "Es": "Traza Data"
-                    },
-                    "value": "Processed trace data.",
-                    "type": "_GuiValue"
+                    }
                   }
                 }
               }
@@ -501,7 +487,6 @@
                 "type": "OcaBlock",
                 "fields": {
                   "trace_number": {
-                    "value": "2",
                     "type": "_GuiValue",
                     "label": {
                       "En": "Trace Number",
@@ -516,14 +501,13 @@
                 "type": "OcaBlock",
                 "fields": {
                   "trace_data": {
+                    "type": "_GuiValue",
                     "label": {
                       "En": "Trace Data",
                       "Fr": "Trace Data",
                       "De": "Spur Data",
                       "Es": "Traza Data"
-                    },
-                    "value": "Processed trace data.",
-                    "type": "_GuiValue"
+                    }
                   }
                 }
               }
@@ -559,7 +543,6 @@
                 "type": "OcaBlock",
                 "fields": {
                   "trace_number": {
-                    "value": "3",
                     "type": "_GuiValue",
                     "label": {
                       "En": "Trace Number",
@@ -574,14 +557,13 @@
                 "type": "OcaBlock",
                 "fields": {
                   "trace_data": {
+                    "type": "_GuiValue",
                     "label": {
                       "En": "Trace Data",
                       "Fr": "Trace Data",
                       "De": "Spur Data",
                       "Es": "Traza Data"
-                    },
-                    "value": "Processed trace data.",
-                    "type": "_GuiValue"
+                    }
                   }
                 }
               }
@@ -617,7 +599,6 @@
                 "type": "OcaBlock",
                 "fields": {
                   "trace_number": {
-                    "value": "3",
                     "type": "_GuiValue",
                     "label": {
                       "En": "Trace Number",
@@ -632,14 +613,13 @@
                 "type": "OcaBlock",
                 "fields": {
                   "trace_data": {
+                    "type": "_GuiValue",
                     "label": {
                       "En": "Trace Data",
                       "Fr": "Trace Data",
                       "De": "Spur Data",
                       "Es": "Traza Data"
-                    },
-                    "value": "Processed trace data.",
-                    "type": "_GuiValue"
+                    }
                   }
                 }
               }
@@ -675,7 +655,6 @@
                 "type": "OcaBlock",
                 "fields": {
                   "trace_number": {
-                    "value": "4",
                     "type": "_GuiValue",
                     "label": {
                       "En": "Trace Number",
@@ -690,14 +669,13 @@
                 "type": "OcaBlock",
                 "fields": {
                   "trace_data": {
+                    "type": "_GuiValue",
                     "label": {
                       "En": "Trace Data",
                       "Fr": "Trace Data",
                       "De": "Spur Data",
                       "Es": "Traza Data"
-                    },
-                    "value": "Processed trace data.",
-                    "type": "_GuiValue"
+                    }
                   }
                 }
               }
@@ -733,7 +711,6 @@
                 "type": "OcaBlock",
                 "fields": {
                   "trace_number": {
-                    "value": "4",
                     "type": "_GuiValue",
                     "label": {
                       "En": "Trace Number",
@@ -748,14 +725,13 @@
                 "type": "OcaBlock",
                 "fields": {
                   "trace_data": {
+                    "type": "_GuiValue",
                     "label": {
                       "En": "Trace Data",
                       "Fr": "Trace Data",
                       "De": "Spur Data",
                       "Es": "Traza Data"
-                    },
-                    "value": "Processed trace data.",
-                    "type": "_GuiValue"
+                    }
                   }
                 }
               }

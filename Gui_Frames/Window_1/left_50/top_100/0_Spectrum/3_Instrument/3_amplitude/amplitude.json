@@ -43,7 +43,8 @@
             "layout": {
               "height": 50,
               "stretch": "width",
-              "font": 15
+              "font": 15,
+              "width": "100%"
             },
             "style": {
               "active_text_color": "#1a1a1a",
@@ -105,7 +106,8 @@
             "layout": {
               "height": 50,
               "stretch": "width",
-              "font": 15
+              "font": 15,
+              "width": "100%"
             },
             "style": {
               "active_text_color": "#1a1a1a",
@@ -648,26 +650,36 @@
             }
           },
           "ref_level_dBm": {
+            "type": "_Horizontal_with_dial_Value",
+            "domain": {
+              "min": "-100",
+              "max": "0",
+              "units": "dBm",
+              "step_coarse": "10",
+              "step_fine": "1"
+            },
+            "value": {
+              "default_value": "-30"
+            },
+            "layout": {
+              "height": 100,
+              "width": "100%",
+              "sticky": "ew",
+              "font": 12,
+              "padx": 10,
+              "pady": 10
+            },
             "label": {
               "En": "Reference Level",
               "Fr": "Référence Niveau",
               "De": "Referenz Pegel",
               "Es": "Referencia Nivel"
             },
-            "type": "_Horizontal_with_dial_Value",
             "column_spacing": [
               80,
               10,
               10
             ],
-            "layout": {
-              "height": 100,
-              "width": 400,
-              "sticky": "ew",
-              "font": 12,
-              "padx": 10,
-              "pady": 10
-            },
             "handler": "set_ref_level",
             "yak_handler": {
               "enable": true,
@@ -677,12 +689,6 @@
               "input_name": "dbm_value",
               "converter": "float"
             },
-            "default_value": "-30",
-            "units": "dBm",
-            "min": "-100",
-            "max": "0",
-            "step_coarse": "10",
-            "step_fine": "1",
             "show_label": true,
             "value_config": {
               "height": 30,
@@ -873,6 +879,24 @@
           },
           "power_attenuation_dB": {
             "type": "_Horizontal_with_dial_Value",
+            "domain": {
+              "min": "-100",
+              "max": "0",
+              "units": "dBm",
+              "step_coarse": "10",
+              "step_fine": "1"
+            },
+            "value": {
+              "default_value": "10"
+            },
+            "layout": {
+              "height": 100,
+              "width": "100%",
+              "sticky": "ew",
+              "font": 12,
+              "padx": 10,
+              "pady": 10
+            },
             "column_spacing": [
               80,
               10,
@@ -893,21 +917,7 @@
               "input_name": "db_value",
               "converter": "float"
             },
-            "default_value": "10",
-            "units": "dBm",
-            "min": "-100",
-            "max": "0",
-            "step_coarse": "10",
-            "step_fine": "1",
             "show_label": true,
-            "layout": {
-              "height": 100,
-              "width": 400,
-              "sticky": "ew",
-              "font": 12,
-              "padx": 10,
-              "pady": 10
-            },
             "value_config": {
               "height": 30,
               "colour": "#ffffff",

@@ -93,6 +93,12 @@
           },
           "w02": {
             "type": "_SmartToggle",
+            "domain": {
+              "primary": {
+                "state_default": true
+              }
+            },
+            "layout": {},
             "label": {
               "En": "Toggle Button with Title",
               "Fr": "Toggle Bouton with Title",
@@ -102,11 +108,6 @@
             "notes": "",
             "geometry": {
               "font": 10
-            },
-            "domain": {
-              "primary": {
-                "state_default": true
-              }
             },
             "cosmetics": {
               "colors": {},
@@ -135,8 +136,7 @@
                   "selected": true
                 }
               }
-            },
-            "layout": {}
+            }
           },
           "w03": {
             "type": "_SmartToggler",
@@ -171,6 +171,11 @@
           },
           "w04": {
             "type": "_SmartCheckbox",
+            "domain": {
+              "primary": {
+                "state_default": true
+              }
+            },
             "label": {
               "En": "Check",
               "Fr": "Check",
@@ -178,11 +183,6 @@
               "Es": "Check"
             },
             "notes": "",
-            "domain": {
-              "primary": {
-                "state_default": true
-              }
-            },
             "interaction": {
               "is_read_only": false
             }
@@ -392,6 +392,12 @@
           },
           "LabelActive": {
             "type": "_SmartInput",
+            "domain": {
+              "primary": {
+                "value_default": "Text"
+              }
+            },
+            "layout": {},
             "label": {
               "En": "Input",
               "Fr": "Entrée",
@@ -402,11 +408,6 @@
             "geometry": {
               "font": 13
             },
-            "domain": {
-              "primary": {
-                "value_default": "Text"
-              }
-            },
             "cosmetics": {
               "colors": {},
               "style_flags": {
@@ -415,11 +416,17 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "layout": {}
+            }
           },
           "Value": {
             "type": "_SmartValue",
+            "domain": {
+              "primary": {
+                "value_default": "1.21",
+                "units": ""
+              }
+            },
+            "layout": {},
             "label": {
               "En": "Value",
               "Fr": "Valeur",
@@ -430,12 +437,6 @@
             "geometry": {
               "font": 10
             },
-            "domain": {
-              "primary": {
-                "value_default": "1.21",
-                "units": ""
-              }
-            },
             "cosmetics": {
               "colors": {},
               "style_flags": {
@@ -444,8 +445,7 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "layout": {}
+            }
           },
           "Label": {
             "type": "_SmartLabel",
@@ -491,6 +491,11 @@
           },
           "Progress Bar": {
             "type": "_SmartProgress",
+            "domain": {
+              "primary": {
+                "value_default": 65
+              }
+            },
             "label": {
               "En": "Load",
               "Fr": "Charger",
@@ -498,11 +503,6 @@
               "Es": "Cargar"
             },
             "notes": "",
-            "domain": {
-              "primary": {
-                "value_default": 65
-              }
-            },
             "cosmetics": {
               "colors": {},
               "style_flags": {
@@ -515,28 +515,36 @@
           },
           "Label Active": {
             "type": "_sliderValue",
-            "label_active": {
-              "En": "Slider",
-              "Fr": "Slider",
-              "De": "Slider",
-              "Es": "Slider"
+            "domain": {
+              "min": 0.0,
+              "max": 100.0,
+              "units": ""
             },
-            "value_default": 50,
-            "min": 0.0,
-            "max": 100.0,
-            "value": 0.0,
-            "units": "",
+            "value": {
+              "default_value": 50
+            },
             "layout": {
               "font": 12,
               "width": 200,
               "height": 50,
               "alpha": 0.9
             },
+            "label_active": {
+              "En": "Slider",
+              "Fr": "Slider",
+              "De": "Slider",
+              "Es": "Slider"
+            },
             "show_label": true,
             "notes": ""
           },
           "IncDecButtons": {
             "type": "_SmartIncDec",
+            "domain": {
+              "primary": {
+                "value_default": 10
+              }
+            },
             "label": {
               "En": "Inc/Dec",
               "Fr": "Inc/Dec",
@@ -544,11 +552,6 @@
               "Es": "Inc/Dec"
             },
             "notes": "",
-            "domain": {
-              "primary": {
-                "value_default": 10
-              }
-            },
             "cosmetics": {
               "colors": {},
               "style_flags": {
@@ -678,6 +681,9 @@
           },
           "w16": {
             "type": "_GuiDropDownOption",
+            "value": {
+              "default_value": "2"
+            },
             "AES70": "OcaSwitch",
             "handler": "set_value",
             "label_active": {
@@ -738,8 +744,7 @@
                 "units": "fruit",
                 "selected": false
               }
-            },
-            "value_default": "2"
+            }
           }
         }
       }

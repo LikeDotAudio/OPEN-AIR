@@ -49,15 +49,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "op": {
-                    "value": "ADD",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Op",
                       "Fr": "Op",
                       "De": "Op",
                       "Es": "Op"
                     },
-                    "units": "",
                     "description": {
                       "En": "ADD, SUBTract, MULTiply, FFT, INTegrate",
                       "Fr": "ADD, SUBTract, MULTiply, FFT, INTegrate",
@@ -96,7 +97,6 @@
                     "type": "OcaBlock",
                     "fields": {
                       "src": {
-                        "value": "CHAN1",
                         "type": "_GuiValue",
                         "label": {
                           "En": "Src1",
@@ -133,7 +133,6 @@
                     "type": "OcaBlock",
                     "fields": {
                       "src": {
-                        "value": "CHAN2",
                         "type": "_GuiValue",
                         "label": {
                           "En": "Src2",

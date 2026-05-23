@@ -64,48 +64,52 @@
                     },
                     "fields": {
                       "math_vpp": {
-                        "value": "Math Vpp",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "V"
+                        },
                         "label": {
                           "En": "Vpp",
                           "Fr": "Vpp",
                           "De": "Vss",
                           "Es": "Vpp"
-                        },
-                        "units": "V"
+                        }
                       },
                       "math_vmax": {
-                        "value": "Math Vmax",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "V"
+                        },
                         "label": {
                           "En": "Vmax",
                           "Fr": "Vmax",
                           "De": "Vmax",
                           "Es": "Vmax"
-                        },
-                        "units": "V"
+                        }
                       },
                       "math_vmin": {
-                        "value": "Math Vmin",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "V"
+                        },
                         "label": {
                           "En": "Vmin",
                           "Fr": "Vmin",
                           "De": "Vmin",
                           "Es": "Vmin"
-                        },
-                        "units": "V"
+                        }
                       },
                       "math_avg": {
-                        "value": "Math Avg",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "V"
+                        },
                         "label": {
                           "En": "Avg",
                           "Fr": "Moy",
                           "De": "Mittel",
                           "Es": "Prom"
-                        },
-                        "units": "V"
+                        }
                       }
                     }
                   }
@@ -168,7 +172,6 @@
                     },
                     "fields": {
                       "operation": {
-                        "value": "FFT",
                         "type": "_GuiValue",
                         "label": {
                           "En": "Op",
@@ -298,15 +301,16 @@
                     },
                     "fields": {
                       "range": {
-                        "value": "10.0",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "V"
+                        },
                         "label": {
                           "En": "Range",
                           "Fr": "Plage",
                           "De": "Bereich",
                           "Es": "Rango"
                         },
-                        "units": "V",
                         "description": {
                           "En": "Full scale value",
                           "Fr": "Full scale value",
@@ -353,15 +357,16 @@
                     },
                     "fields": {
                       "offset": {
-                        "value": "0.0",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "V"
+                        },
                         "label": {
                           "En": "Offset",
                           "Fr": "Décalage",
                           "De": "Versatz",
                           "Es": "Compensación"
                         },
-                        "units": "V",
                         "description": {
                           "En": "Offset value",
                           "Fr": "Décalage value",
@@ -419,7 +424,6 @@
                     },
                     "fields": {
                       "window": {
-                        "value": "RECTangular",
                         "type": "_GuiValue",
                         "label": {
                           "En": "Window",
@@ -473,7 +477,6 @@
                     },
                     "fields": {
                       "window": {
-                        "value": "HANNing",
                         "type": "_GuiValue",
                         "label": {
                           "En": "Window",
@@ -527,7 +530,6 @@
                     },
                     "fields": {
                       "window": {
-                        "value": "FLATtop",
                         "type": "_GuiValue",
                         "label": {
                           "En": "Window",
@@ -581,15 +583,16 @@
                     },
                     "fields": {
                       "frequency": {
-                        "value": "100000",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "Hz"
+                        },
                         "label": {
                           "En": "Center",
                           "Fr": "Centre",
                           "De": "Mitte",
                           "Es": "Centro"
                         },
-                        "units": "Hz",
                         "description": {
                           "En": "Center Freq in Hz",
                           "Fr": "Fréq centrale en Hz",
@@ -636,15 +639,16 @@
                     },
                     "fields": {
                       "span": {
-                        "value": "50000",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "Hz"
+                        },
                         "label": {
                           "En": "Span",
                           "Fr": "Étendue",
                           "De": "Spanne",
                           "Es": "Intervalo"
                         },
-                        "units": "Hz",
                         "description": {
                           "En": "Span in Hz",
                           "Fr": "Portée in Hz",
@@ -691,15 +695,16 @@
                     },
                     "fields": {
                       "scale": {
-                        "value": "10",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "dB/div"
+                        },
                         "label": {
                           "En": "Scale",
                           "Fr": "Échelle",
                           "De": "Skala",
                           "Es": "Escala"
                         },
-                        "units": "dB/div",
                         "description": {
                           "En": "dB per division",
                           "Fr": "dB per division",

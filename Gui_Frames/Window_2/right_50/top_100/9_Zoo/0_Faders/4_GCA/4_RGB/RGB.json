@@ -12,7 +12,17 @@
     },
     "blocks": {
       "RGB_Mixer_Demo": {
-        "type": "_CompositeFader",
+        "type": "_Horizontal_with_dial_Value",
+        "domain": {
+          "min": 0,
+          "max": 100
+        },
+        "layout": {
+          "width": 120,
+          "height": 650,
+          "alpha": 0.9,
+          "sticky": "nsew"
+        },
         "label_active": {
           "En": "RGB Color Mixer",
           "Fr": "RGB Color Mixer",
@@ -21,14 +31,6 @@
         },
         "is_rgb": true,
         "num_channels": 3,
-        "value_min": 0,
-        "value_max": 100,
-        "layout": {
-          "width": 120,
-          "height": 650,
-          "alpha": 0.9,
-          "sticky": "nsew"
-        },
         "channels": [
           {
             "default": 100

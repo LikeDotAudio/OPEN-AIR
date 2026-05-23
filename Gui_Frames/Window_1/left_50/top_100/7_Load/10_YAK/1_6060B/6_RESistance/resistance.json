@@ -49,15 +49,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "value": {
-                    "value": "100",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "Ohms"
+                    },
                     "label": {
                       "En": "Resistance",
                       "Fr": "Résistance",
                       "De": "Widerstand",
                       "Es": "Resistencia"
                     },
-                    "units": "Ohms",
                     "description": {
                       "En": "Ohms",
                       "Fr": "Ohms",
@@ -98,15 +99,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "value": {
-                    "value": "1000",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "Ohms"
+                    },
                     "label": {
                       "En": "Range",
                       "Fr": "Plage",
                       "De": "Bereich",
                       "Es": "Rango"
                     },
-                    "units": "Ohms",
                     "description": {
                       "En": "Range",
                       "Fr": "Plage",

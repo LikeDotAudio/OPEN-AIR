@@ -34,6 +34,22 @@
         "fields": {
           "Hex_1_Large": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -10.0,
+                "reff_point": 0.0,
+                "step": 5.0
+              },
+              "min": -20.0,
+              "max": 3.0,
+              "precision": 5.0
+            },
+            "value": {
+              "default_value": -10.0
+            },
+            "layout": {},
             "label": {
               "En": "Large Classic",
               "Fr": "Large Classique",
@@ -43,15 +59,6 @@
             "geometry": {
               "width": 300,
               "height": 300
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -10.0,
-                "reff_point": 0.0,
-                "step": 5.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -108,23 +115,30 @@
             "width": 300,
             "height": 300,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "hex",
             "bezel_width": 6,
             "Pointer_Style": "teardrop",
             "pivot_colour": "#222222",
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -10.0,
-            "value": -10.0,
-            "default_value": -10.0,
-            "step": 5.0,
             "path": "Hex_Variations/Hex_1_Large"
           },
           "Hex_2_Medium": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -5.0,
+                "reff_point": 0.0,
+                "step": 5.0
+              },
+              "min": -20.0,
+              "max": 3.0,
+              "precision": 5.0
+            },
+            "value": {
+              "default_value": -5.0
+            },
+            "layout": {},
             "label": {
               "En": "Medium Silver",
               "Fr": "Moyen Silver",
@@ -134,15 +148,6 @@
             "geometry": {
               "width": 220,
               "height": 220
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -5.0,
-                "reff_point": 0.0,
-                "step": 5.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -189,23 +194,30 @@
             "width": 220,
             "height": 220,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "hex",
             "bezel_width": 5,
             "Pointer_Style": "knife-edge",
             "pivot_colour": "silver",
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -5.0,
-            "value": -5.0,
-            "default_value": -5.0,
-            "step": 5.0,
             "path": "Hex_Variations/Hex_2_Medium"
           },
           "Hex_3_Small": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": 0.0,
+                "reff_point": 0.0,
+                "step": 5.0
+              },
+              "min": -20.0,
+              "max": 3.0,
+              "precision": 5.0
+            },
+            "value": {
+              "default_value": 0.0
+            },
+            "layout": {},
             "label": {
               "En": "Small Bronze",
               "Fr": "Small Bronze",
@@ -215,15 +227,6 @@
             "geometry": {
               "width": 150,
               "height": 150
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": 0.0,
-                "reff_point": 0.0,
-                "step": 5.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -272,24 +275,28 @@
             "width": 150,
             "height": 150,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "hex",
             "bezel_width": 2,
             "mask": false,
             "Pointer_Style": "needle",
             "pivot_colour": "#cd7f32",
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": 0.0,
-            "value": 0.0,
-            "default_value": 0.0,
-            "step": 5.0,
             "path": "Hex_Variations/Hex_3_Small"
           },
           "Hex_4_Cobalt": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -2.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -2.0
+            },
+            "layout": {},
             "label": {
               "En": "Cobalt Blue",
               "Fr": "Cobalt Blue",
@@ -299,13 +306,6 @@
             "geometry": {
               "width": 220,
               "height": 220
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -2.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -353,22 +353,27 @@
             "width": 220,
             "height": 220,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "hex",
             "bezel_width": 5,
             "enable_lighting": true,
             "Pointer_Style": "taper",
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -2.0,
-            "value": -2.0,
-            "default_value": -2.0,
             "path": "Hex_Variations/Hex_4_Cobalt"
           },
           "Hex_5_Amber": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -8.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -8.0
+            },
+            "layout": {},
             "label": {
               "En": "Amber Alert",
               "Fr": "Amber Alert",
@@ -378,13 +383,6 @@
             "geometry": {
               "width": 220,
               "height": 220
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -8.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -432,22 +430,27 @@
             "width": 220,
             "height": 220,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "hex",
             "bezel_width": 5,
             "enable_lighting": true,
             "Pointer_Style": "spade",
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -8.0,
-            "value": -8.0,
-            "default_value": -8.0,
             "path": "Hex_Variations/Hex_5_Amber"
           },
           "Hex_6_Graphite": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -15.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -15.0
+            },
+            "layout": {},
             "label": {
               "En": "Graphite Flat",
               "Fr": "Graphite Flat",
@@ -457,13 +460,6 @@
             "geometry": {
               "width": 220,
               "height": 220
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -15.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -511,22 +507,27 @@
             "width": 220,
             "height": 220,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "hex",
             "bezel_width": 2,
             "enable_lighting": false,
             "Pointer_Style": "baton",
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -15.0,
-            "value": -15.0,
-            "default_value": -15.0,
             "path": "Hex_Variations/Hex_6_Graphite"
           },
           "Hex_7_Solar": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -4.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -4.0
+            },
+            "layout": {},
             "label": {
               "En": "Solar Flare",
               "Fr": "Solar Flare",
@@ -536,13 +537,6 @@
             "geometry": {
               "width": 220,
               "height": 220
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -4.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -590,22 +584,27 @@
             "width": 220,
             "height": 220,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "hex",
             "bezel_width": 6,
             "enable_lighting": true,
             "Pointer_Style": "needle",
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -4.0,
-            "value": -4.0,
-            "default_value": -4.0,
             "path": "Hex_Variations/Hex_7_Solar"
           },
           "Hex_8_Arctic": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -18.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -18.0
+            },
+            "layout": {},
             "label": {
               "En": "Arctic Ice",
               "Fr": "Arctic Ice",
@@ -615,13 +614,6 @@
             "geometry": {
               "width": 220,
               "height": 220
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -18.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -669,22 +661,27 @@
             "width": 220,
             "height": 220,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "hex",
             "bezel_width": 5,
             "enable_lighting": false,
             "Pointer_Style": "knife-edge",
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -18.0,
-            "value": -18.0,
-            "default_value": -18.0,
             "path": "Hex_Variations/Hex_8_Arctic"
           },
           "Hex_9_Steampunk": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -6.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -6.0
+            },
+            "layout": {},
             "label": {
               "En": "Steampunk",
               "Fr": "Steampunk",
@@ -694,13 +691,6 @@
             "geometry": {
               "width": 220,
               "height": 220
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -6.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -748,18 +738,10 @@
             "width": 220,
             "height": 220,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "hex",
             "bezel_width": 7,
             "enable_lighting": true,
             "Pointer_Style": "teardrop",
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -6.0,
-            "value": -6.0,
-            "default_value": -6.0,
             "path": "Hex_Variations/Hex_9_Steampunk"
           }
         },

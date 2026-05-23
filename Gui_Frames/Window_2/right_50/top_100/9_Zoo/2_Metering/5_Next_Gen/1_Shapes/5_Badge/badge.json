@@ -34,6 +34,22 @@
         "fields": {
           "Badge_1_Large": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -3.0,
+                "reff_point": 0.0,
+                "step": 5.0
+              },
+              "min": -20.0,
+              "max": 3.0,
+              "precision": 5.0
+            },
+            "value": {
+              "default_value": -3.0
+            },
+            "layout": {},
             "label": {
               "En": "Large Classic",
               "Fr": "Large Classique",
@@ -43,15 +59,6 @@
             "geometry": {
               "width": 300,
               "height": 300
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -3.0,
-                "reff_point": 0.0,
-                "step": 5.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -120,24 +127,31 @@
             "width": 300,
             "height": 300,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "trapezoid",
             "bezel_width": 6,
             "overlay_style": "aperture_mask",
             "Pointer_Style": "baton",
             "pivot_colour": "#000000",
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -3.0,
-            "value": -3.0,
-            "default_value": -3.0,
-            "step": 5.0,
             "path": "Badge_Variations/Badge_1_Large"
           },
           "Badge_2_Medium": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -7.0,
+                "reff_point": 0.0,
+                "step": 5.0
+              },
+              "min": -20.0,
+              "max": 3.0,
+              "precision": 5.0
+            },
+            "value": {
+              "default_value": -7.0
+            },
+            "layout": {},
             "label": {
               "En": "Medium Gold",
               "Fr": "Moyen Gold",
@@ -147,15 +161,6 @@
             "geometry": {
               "width": 220,
               "height": 220
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -7.0,
-                "reff_point": 0.0,
-                "step": 5.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -216,24 +221,31 @@
             "width": 220,
             "height": 220,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "trapezoid",
             "bezel_width": 5,
             "overlay_style": "aperture_mask",
             "Pointer_Style": "teardrop",
             "pivot_colour": "#FFD700",
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -7.0,
-            "value": -7.0,
-            "default_value": -7.0,
-            "step": 5.0,
             "path": "Badge_Variations/Badge_2_Medium"
           },
           "Badge_3_Small": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -15.0,
+                "reff_point": 0.0,
+                "step": 5.0
+              },
+              "min": -20.0,
+              "max": 3.0,
+              "precision": 5.0
+            },
+            "value": {
+              "default_value": -15.0
+            },
+            "layout": {},
             "label": {
               "En": "Small Red",
               "Fr": "Small Red",
@@ -243,15 +255,6 @@
             "geometry": {
               "width": 150,
               "height": 150
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -15.0,
-                "reff_point": 0.0,
-                "step": 5.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -313,25 +316,29 @@
             "width": 150,
             "height": 150,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "trapezoid",
             "bezel_width": 2,
             "mask": false,
             "overlay_style": "aperture_mask",
             "Pointer_Style": "needle",
             "pivot_colour": "red",
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -15.0,
-            "value": -15.0,
-            "default_value": -15.0,
-            "step": 5.0,
             "path": "Badge_Variations/Badge_3_Small"
           },
           "Badge_4_Police_Blue": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -2.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -2.0
+            },
+            "layout": {},
             "label": {
               "En": "Police Blue",
               "Fr": "Police Blue",
@@ -341,13 +348,6 @@
             "geometry": {
               "width": 220,
               "height": 220
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -2.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -408,23 +408,28 @@
             "width": 220,
             "height": 220,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "trapezoid",
             "bezel_width": 5,
             "enable_lighting": true,
             "overlay_style": "aperture_mask",
             "Pointer_Style": "knife-edge",
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -2.0,
-            "value": -2.0,
-            "default_value": -2.0,
             "path": "Badge_Variations/Badge_4_Police_Blue"
           },
           "Badge_5_Fire_Red": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -5.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -5.0
+            },
+            "layout": {},
             "label": {
               "En": "Fire Red",
               "Fr": "Fire Red",
@@ -434,13 +439,6 @@
             "geometry": {
               "width": 220,
               "height": 220
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -5.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -501,23 +499,28 @@
             "width": 220,
             "height": 220,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "trapezoid",
             "bezel_width": 5,
             "enable_lighting": true,
             "overlay_style": "aperture_mask",
             "Pointer_Style": "spade",
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -5.0,
-            "value": -5.0,
-            "default_value": -5.0,
             "path": "Badge_Variations/Badge_5_Fire_Red"
           },
           "Badge_6_Security_Grey": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -12.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -12.0
+            },
+            "layout": {},
             "label": {
               "En": "Security Grey",
               "Fr": "Security Grey",
@@ -527,13 +530,6 @@
             "geometry": {
               "width": 220,
               "height": 220
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -12.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -594,23 +590,28 @@
             "width": 220,
             "height": 220,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "trapezoid",
             "bezel_width": 2,
             "enable_lighting": false,
             "overlay_style": "aperture_mask",
             "Pointer_Style": "baton",
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -12.0,
-            "value": -12.0,
-            "default_value": -12.0,
             "path": "Badge_Variations/Badge_6_Security_Grey"
           },
           "Badge_7_Cyber_Punk": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -1.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -1.0
+            },
+            "layout": {},
             "label": {
               "En": "Cyber Badge",
               "Fr": "Cyber Badge",
@@ -620,13 +621,6 @@
             "geometry": {
               "width": 220,
               "height": 220
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -1.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -687,23 +681,28 @@
             "width": 220,
             "height": 220,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "trapezoid",
             "bezel_width": 6,
             "enable_lighting": true,
             "overlay_style": "aperture_mask",
             "Pointer_Style": "needle",
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -1.0,
-            "value": -1.0,
-            "default_value": -1.0,
             "path": "Badge_Variations/Badge_7_Cyber_Punk"
           },
           "Badge_8_Royal_Purple": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -8.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -8.0
+            },
+            "layout": {},
             "label": {
               "En": "Royal Purple",
               "Fr": "Royal Purple",
@@ -713,13 +712,6 @@
             "geometry": {
               "width": 220,
               "height": 220
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -8.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -780,23 +772,28 @@
             "width": 220,
             "height": 220,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "trapezoid",
             "bezel_width": 5,
             "enable_lighting": true,
             "overlay_style": "aperture_mask",
             "Pointer_Style": "teardrop",
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -8.0,
-            "value": -8.0,
-            "default_value": -8.0,
             "path": "Badge_Variations/Badge_8_Royal_Purple"
           },
           "Badge_9_Eco_Green": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -6.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -6.0
+            },
+            "layout": {},
             "label": {
               "En": "Eco Green",
               "Fr": "Eco Green",
@@ -806,13 +803,6 @@
             "geometry": {
               "width": 220,
               "height": 220
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -6.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -873,19 +863,11 @@
             "width": 220,
             "height": 220,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "trapezoid",
             "bezel_width": 5,
             "enable_lighting": false,
             "overlay_style": "aperture_mask",
             "Pointer_Style": "knife-edge",
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -6.0,
-            "value": -6.0,
-            "default_value": -6.0,
             "path": "Badge_Variations/Badge_9_Eco_Green"
           }
         },

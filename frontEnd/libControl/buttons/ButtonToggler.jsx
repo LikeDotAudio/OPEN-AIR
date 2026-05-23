@@ -105,8 +105,11 @@ const ButtonToggler = ({ value, onChange, config, topic, nodeJson }) => {
                     const textColor = config?.text_color || "#888888";
                     const activeTextColor = config?.active_text_color || "#1a1a1a";
                     
-                    const btnWidth = layout.width || 100;
-                    const btnHeight = layout.height || 50;
+                    // layout.width/height as a NUMBER = fixed per-button px (legacy).
+                    // A %/string or unset => buttons fill their grid cell, so the
+                    // toggler honors the element width set on its container.
+                    const fixedBtnW = (typeof layout.width === 'number') ? layout.width : null;
+                    const fixedBtnH = (typeof layout.height === 'number') ? layout.height : null;
                     const cornerRadius = layout.corner_radius || 6;
 
                     const currentBg = isSelected ? activeBgColor : cInact;
@@ -117,8 +120,8 @@ const ButtonToggler = ({ value, onChange, config, topic, nodeJson }) => {
                         <div 
                             key={key}
                             style={{
-                                width: `${btnWidth}px`,
-                                height: `${btnHeight}px`,
+                                width: fixedBtnW ? `${fixedBtnW}px` : '100%',
+                                height: fixedBtnH ? `${fixedBtnH}px` : 50,
                                 backgroundColor: currentBg,
                                 border: `2px solid ${currentBorder}`,
                                 borderRadius: `${cornerRadius}px`,

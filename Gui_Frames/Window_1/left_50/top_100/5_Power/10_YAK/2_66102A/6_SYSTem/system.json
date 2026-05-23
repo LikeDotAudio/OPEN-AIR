@@ -49,15 +49,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "error_msg": {
-                    "value": "Error Message",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Error",
                       "Fr": "Erreur",
                       "De": "Fehler",
                       "Es": "Error"
-                    },
-                    "units": ""
+                    }
                   }
                 }
               }

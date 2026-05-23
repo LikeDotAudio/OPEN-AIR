@@ -25,26 +25,36 @@
         "show_label": false,
         "fields": {
           "RBW": {
+            "type": "_Horizontal_with_dial_Value",
+            "domain": {
+              "min": "0",
+              "max": "10",
+              "units": "MHz",
+              "step_coarse": "1",
+              "step_fine": "0.001"
+            },
+            "value": {
+              "default_value": "0.5"
+            },
+            "layout": {
+              "height": 58,
+              "width": "100%",
+              "sticky": "ewn",
+              "font": 20,
+              "padx": 10,
+              "pady": 10
+            },
             "label_active": {
               "En": "Resolution Bandwidth",
               "Fr": "Résolution Bandwidth",
               "De": "Auflösung Bandwidth",
               "Es": "Resolución Bandwidth"
             },
-            "type": "_Horizontal_with_dial_Value",
             "column_spacing": [
-              80,
+              10,
               10,
               10
             ],
-            "layout": {
-              "height": 100,
-              "width": 400,
-              "sticky": "ewn",
-              "font": 20,
-              "padx": 10,
-              "pady": 10
-            },
             "handler": "set_rbw",
             "yak_handler": {
               "enable": true,
@@ -54,12 +64,6 @@
               "input_name": "hz_value",
               "converter": "mhz_to_hz"
             },
-            "default_value": "0.5",
-            "min": "0",
-            "max": "10",
-            "step_coarse": "1",
-            "step_fine": "0.001",
-            "units": "MHz",
             "show_label": true,
             "value_config": {
               "height": 30,
@@ -98,7 +102,7 @@
               "height": 50,
               "alpha": 0.9,
               "max_cols": 3,
-              "width": 160,
+              "width": "100%",
               "stretch": "width",
               "font": 10,
               "padx": 2,
@@ -359,26 +363,36 @@
         },
         "fields": {
           "vbw_MHz": {
+            "type": "_Horizontal_with_dial_Value",
+            "domain": {
+              "min": "0",
+              "max": "1000",
+              "units": "kHz",
+              "step_coarse": "10",
+              "step_fine": "1"
+            },
+            "value": {
+              "default_value": "0.5"
+            },
+            "layout": {
+              "height": 67,
+              "width": "100%",
+              "sticky": "ewn",
+              "font": 20,
+              "padx": 10,
+              "pady": 10
+            },
             "label_active": {
               "En": "Video Bandwidth",
               "Fr": "Largeur de bande vidéo",
               "De": "Videobandbreite",
               "Es": "Ancho de banda de video"
             },
-            "type": "_Horizontal_with_dial_Value",
             "column_spacing": [
-              80,
+              10,
               10,
               10
             ],
-            "layout": {
-              "height": 100,
-              "width": 400,
-              "sticky": "ewn",
-              "font": 20,
-              "padx": 10,
-              "pady": 10
-            },
             "handler": "set_vbw",
             "yak_handler": {
               "enable": true,
@@ -389,12 +403,6 @@
               "converter": "mhz_to_hz"
             },
             "default_locked": false,
-            "default_value": "0.5",
-            "min": "0",
-            "max": "1000",
-            "step_coarse": "10",
-            "step_fine": "1",
-            "units": "kHz",
             "show_label": true,
             "value_config": {
               "height": 30,
@@ -437,7 +445,7 @@
               "height": 50,
               "alpha": 0.9,
               "max_cols": 3,
-              "width": 160,
+              "width": "100%",
               "stretch": "width",
               "font": 10,
               "padx": 2,
@@ -808,7 +816,7 @@
             "handler": "toggle_vbw_auto",
             "layout": {
               "height": 50,
-              "width": 200,
+              "width": "100%",
               "stretch": "width",
               "font": 15
             },
@@ -889,19 +897,29 @@
         "fields": {
           "sweep_time_setting": {
             "type": "_Horizontal_with_dial_Value",
-            "column_spacing": [
-              80,
-              10,
-              10
-            ],
+            "domain": {
+              "min": "0",
+              "max": "50",
+              "units": "s",
+              "step_coarse": "1",
+              "step_fine": "0.1"
+            },
+            "value": {
+              "default_value": "0"
+            },
             "layout": {
-              "height": 100,
-              "width": 400,
+              "height": 64,
+              "width": "100%",
               "sticky": "ewn",
               "font": 20,
               "padx": 10,
               "pady": 10
             },
+            "column_spacing": [
+              80,
+              10,
+              10
+            ],
             "label_active": {
               "En": "Sweep Time",
               "Fr": "Temps de balayage",
@@ -923,12 +941,6 @@
               "input_name": "s_value",
               "converter": "float"
             },
-            "default_value": "0",
-            "min": "0",
-            "max": "50",
-            "step_coarse": "1",
-            "step_fine": "0.1",
-            "units": "s",
             "show_label": true,
             "value_config": {
               "height": 30,

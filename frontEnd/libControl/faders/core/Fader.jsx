@@ -34,9 +34,15 @@ const Fader = ({ value: externalValue, onChange, config, topic, nodeJson }) => {
         }
     };
 
-    // 3. Layout configuration
-    const width = config?.geometry?.width || config?.layout?.width || 100;
-    const height = config?.geometry?.height || config?.layout?.height || 250;
+    // 3. Layout configuration. Fluid faders measure their rendered box and use
+    //    that pixel width for geometry, so they REDRAW to fit (crisp) rather
+    //    than being scaled/zoomed. Non-fluid faders keep their fixed geometry.
+    const fluid = !!config?.fluid;
+    const [measured, setMeasured] = React.useState(null);
+    const _cfgW = config?.geometry?.width ?? config?.layout?.width ?? 100;
+    const _cfgH = config?.geometry?.height ?? config?.layout?.height ?? 250;
+    const width = (fluid && measured && measured.w) ? measured.w : (typeof _cfgW === 'number' ? _cfgW : 100);
+    const height = (typeof _cfgH === 'number' ? _cfgH : 250);
     const orientation = config?.style?.orientation || (width > height ? 'horizontal' : 'vertical');
 
     const topRes = 25;
@@ -60,6 +66,17 @@ const Fader = ({ value: externalValue, onChange, config, topic, nodeJson }) => {
     const [isDragging, setIsDragging] = React.useState(false);
     const [isHovered, setIsHovered] = React.useState(false);
     const containerRef = React.useRef(null);
+
+    // Measure the rendered width for fluid faders so geometry follows the box.
+    React.useEffect(() => {
+        if (!fluid || !containerRef.current || typeof ResizeObserver === 'undefined') return;
+        const ro = new ResizeObserver((entries) => {
+            const w = Math.round(entries[0].contentRect.width);
+            if (w > 0) setMeasured((m) => (m && m.w === w ? m : { w }));
+        });
+        ro.observe(containerRef.current);
+        return () => ro.disconnect();
+    }, [fluid]);
 
     const handleInteraction = (e) => {
         if (!containerRef.current) return;
@@ -159,9 +176,9 @@ const Fader = ({ value: externalValue, onChange, config, topic, nodeJson }) => {
         <div 
             ref={containerRef} 
             className={`fader-container ${orientation}`} 
-            style={{ 
-                width, height, 
-                position: 'relative', 
+            style={{
+                width: fluid ? '100%' : width, height,
+                position: 'relative',
                 backgroundColor: bgCol,
                 touchAction: 'none',
                 overflow: 'hidden',

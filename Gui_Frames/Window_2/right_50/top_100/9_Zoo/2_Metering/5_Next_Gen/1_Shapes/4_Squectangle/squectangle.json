@@ -34,6 +34,22 @@
         "fields": {
           "Squectangle_1_Large": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": 0.0,
+                "reff_point": 0.0,
+                "step": 5.0
+              },
+              "min": -20.0,
+              "max": 3.0,
+              "precision": 5.0
+            },
+            "value": {
+              "default_value": 0.0
+            },
+            "layout": {},
             "label": {
               "En": "Large Classic",
               "Fr": "Large Classique",
@@ -43,15 +59,6 @@
             "geometry": {
               "width": 300,
               "height": 300
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": 0.0,
-                "reff_point": 0.0,
-                "step": 5.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -108,23 +115,30 @@
             "width": 300,
             "height": 300,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "squectangle",
             "bezel_width": 6,
             "Pointer_Style": "knife-edge",
             "pivot_colour": "#444444",
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": 0.0,
-            "value": 0.0,
-            "default_value": 0.0,
-            "step": 5.0,
             "path": "Squectangle_Variations/Squectangle_1_Large"
           },
           "Squectangle_2_Medium": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -5.0,
+                "reff_point": 0.0,
+                "step": 5.0
+              },
+              "min": -20.0,
+              "max": 3.0,
+              "precision": 5.0
+            },
+            "value": {
+              "default_value": -5.0
+            },
+            "layout": {},
             "label": {
               "En": "Medium Brown",
               "Fr": "Moyen Brown",
@@ -134,15 +148,6 @@
             "geometry": {
               "width": 220,
               "height": 220
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -5.0,
-                "reff_point": 0.0,
-                "step": 5.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -190,23 +195,30 @@
             "width": 220,
             "height": 220,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "squectangle",
             "bezel_width": 5,
             "Pointer_Style": "baton",
             "pivot_colour": "#8B4513",
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -5.0,
-            "value": -5.0,
-            "default_value": -5.0,
-            "step": 5.0,
             "path": "Squectangle_Variations/Squectangle_2_Medium"
           },
           "Squectangle_3_Small": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -10.0,
+                "reff_point": 0.0,
+                "step": 5.0
+              },
+              "min": -20.0,
+              "max": 3.0,
+              "precision": 5.0
+            },
+            "value": {
+              "default_value": -10.0
+            },
+            "layout": {},
             "label": {
               "En": "Small Silver",
               "Fr": "Small Silver",
@@ -216,15 +228,6 @@
             "geometry": {
               "width": 150,
               "height": 150
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -10.0,
-                "reff_point": 0.0,
-                "step": 5.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -259,24 +262,28 @@
             "width": 150,
             "height": 150,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "squectangle",
             "bezel_width": 2,
             "mask": false,
             "Pointer_Style": "needle",
             "pivot_colour": "silver",
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -10.0,
-            "value": -10.0,
-            "default_value": -10.0,
-            "step": 5.0,
             "path": "Squectangle_Variations/Squectangle_3_Small"
           },
           "Squectangle_4_Midnight_Blue": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -2.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -2.0
+            },
+            "layout": {},
             "label": {
               "En": "Midnight Blue",
               "Fr": "Midnight Blue",
@@ -286,13 +293,6 @@
             "geometry": {
               "width": 220,
               "height": 220
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -2.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -341,22 +341,27 @@
             "width": 220,
             "height": 220,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "squectangle",
             "bezel_width": 5,
             "enable_lighting": true,
             "Pointer_Style": "teardrop",
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -2.0,
-            "value": -2.0,
-            "default_value": -2.0,
             "path": "Squectangle_Variations/Squectangle_4_Midnight_Blue"
           },
           "Squectangle_5_Forest_Green": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -8.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -8.0
+            },
+            "layout": {},
             "label": {
               "En": "Forest Green",
               "Fr": "Forest Green",
@@ -366,13 +371,6 @@
             "geometry": {
               "width": 220,
               "height": 220
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -8.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -421,22 +419,27 @@
             "width": 220,
             "height": 220,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "squectangle",
             "bezel_width": 5,
             "enable_lighting": true,
             "Pointer_Style": "spade",
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -8.0,
-            "value": -8.0,
-            "default_value": -8.0,
             "path": "Squectangle_Variations/Squectangle_5_Forest_Green"
           },
           "Squectangle_6_Slate_Grey": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -15.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -15.0
+            },
+            "layout": {},
             "label": {
               "En": "Slate Grey",
               "Fr": "Slate Grey",
@@ -446,13 +449,6 @@
             "geometry": {
               "width": 220,
               "height": 220
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -15.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -501,22 +497,27 @@
             "width": 220,
             "height": 220,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "squectangle",
             "bezel_width": 2,
             "enable_lighting": false,
             "Pointer_Style": "baton",
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -15.0,
-            "value": -15.0,
-            "default_value": -15.0,
             "path": "Squectangle_Variations/Squectangle_6_Slate_Grey"
           },
           "Squectangle_7_Neon_Pink": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -4.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -4.0
+            },
+            "layout": {},
             "label": {
               "En": "Neon Pink",
               "Fr": "Neon Pink",
@@ -526,13 +527,6 @@
             "geometry": {
               "width": 220,
               "height": 220
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -4.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -581,22 +575,27 @@
             "width": 220,
             "height": 220,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "squectangle",
             "bezel_width": 6,
             "enable_lighting": true,
             "Pointer_Style": "needle",
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -4.0,
-            "value": -4.0,
-            "default_value": -4.0,
             "path": "Squectangle_Variations/Squectangle_7_Neon_Pink"
           },
           "Squectangle_8_Cloud_White": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -18.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -18.0
+            },
+            "layout": {},
             "label": {
               "En": "Cloud White",
               "Fr": "Cloud White",
@@ -606,13 +605,6 @@
             "geometry": {
               "width": 220,
               "height": 220
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -18.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -660,22 +652,27 @@
             "width": 220,
             "height": 220,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "squectangle",
             "bezel_width": 5,
             "enable_lighting": false,
             "Pointer_Style": "knife-edge",
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -18.0,
-            "value": -18.0,
-            "default_value": -18.0,
             "path": "Squectangle_Variations/Squectangle_8_Cloud_White"
           },
           "Squectangle_9_Copper": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -6.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -6.0
+            },
+            "layout": {},
             "label": {
               "En": "Copper",
               "Fr": "Copper",
@@ -685,13 +682,6 @@
             "geometry": {
               "width": 220,
               "height": 220
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -6.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -740,18 +730,10 @@
             "width": 220,
             "height": 220,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "squectangle",
             "bezel_width": 7,
             "enable_lighting": true,
             "Pointer_Style": "teardrop",
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -6.0,
-            "value": -6.0,
-            "default_value": -6.0,
             "path": "Squectangle_Variations/Squectangle_9_Copper"
           }
         },

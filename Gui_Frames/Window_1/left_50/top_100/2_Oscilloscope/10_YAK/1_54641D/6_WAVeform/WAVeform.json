@@ -49,15 +49,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "source": {
-                    "value": "CHAN1",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Source",
                       "Fr": "Source",
                       "De": "Quelle",
                       "Es": "Fuente"
                     },
-                    "units": "",
                     "description": {
                       "En": "CHANn, DIGn, PODn, FUNCtion, MATH",
                       "Fr": "CANn, DIGn, PODn, FONCtion, MATH",
@@ -98,15 +99,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "format": {
-                    "value": "BYTE",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Format",
                       "Fr": "Format",
                       "De": "Format",
                       "Es": "Formato"
                     },
-                    "units": "",
                     "description": {
                       "En": "ASCii, WORD, BYTE",
                       "Fr": "ASCii, WORD, BYTE",
@@ -147,15 +149,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "points": {
-                    "value": "1000",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Points",
                       "Fr": "Points",
                       "De": "Punkte",
                       "Es": "Puntos"
                     },
-                    "units": "",
                     "description": {
                       "En": "100, 250, 500, 1000, 2000, MAXimum",
                       "Fr": "100, 250, 500, 1000, 2000, MAXimum",
@@ -196,15 +199,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "order": {
-                    "value": "LSBFirst",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Order",
                       "Fr": "Order",
                       "De": "Order",
                       "Es": "Order"
                     },
-                    "units": "",
                     "description": {
                       "En": "LSBFirst or MSBFirst",
                       "Fr": "LSBFirst or MSBFirst",
@@ -245,15 +249,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "state": {
-                    "value": "ON",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Unsigned",
                       "Fr": "Unsigned",
                       "De": "Unsigned",
                       "Es": "Unsigned"
                     },
-                    "units": "",
                     "description": {
                       "En": "ON (0-255) or OFF (-128-127)",
                       "Fr": "ON (0-255) or OFF (-128-127)",
@@ -305,15 +310,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "data": {
-                    "value": "Binary Block",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Data",
                       "Fr": "Data",
                       "De": "Data",
                       "Es": "Data"
-                    },
-                    "units": ""
+                    }
                   }
                 }
               }
@@ -348,15 +354,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "preamble": {
-                    "value": "Fmt, Type, Pts, Cnt, XInc, XOrg, XRef, YInc, YOrg, YRef",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Preamble",
                       "Fr": "Préambule",
                       "De": "Präambel",
                       "Es": "Preámbulo"
-                    },
-                    "units": ""
+                    }
                   }
                 }
               }

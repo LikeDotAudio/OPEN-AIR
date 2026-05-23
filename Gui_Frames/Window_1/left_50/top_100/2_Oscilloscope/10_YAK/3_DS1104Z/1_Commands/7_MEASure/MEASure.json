@@ -49,15 +49,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "source": {
-                    "value": "CHAN1",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Source",
                       "Fr": "Source",
                       "De": "Quelle",
                       "Es": "Fuente"
                     },
-                    "units": "",
                     "description": {
                       "En": "CHANn",
                       "Fr": "CANn",
@@ -128,15 +129,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "state": {
-                    "value": "ON",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Stats Table",
                       "Fr": "Tableau de stats",
                       "De": "Statistik-Tabelle",
                       "Es": "Tabla de estadísticas"
                     },
-                    "units": "",
                     "description": {
                       "En": "ON or OFF",
                       "Fr": "ON or OFF",
@@ -197,15 +199,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "chan": {
-                        "value": "CHAN1",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": ""
+                        },
                         "label": {
                           "En": "Ch",
                           "Fr": "Ch",
                           "De": "Ch",
                           "Es": "Ch"
-                        },
-                        "units": ""
+                        }
                       }
                     }
                   },
@@ -213,7 +216,6 @@
                     "type": "OcaBlock",
                     "fields": {
                       "val": {
-                        "value": "V",
                         "type": "_GuiValue"
                       }
                     }
@@ -249,15 +251,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "chan": {
-                        "value": "CHAN1",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": ""
+                        },
                         "label": {
                           "En": "Ch",
                           "Fr": "Ch",
                           "De": "Ch",
                           "Es": "Ch"
-                        },
-                        "units": ""
+                        }
                       }
                     }
                   },
@@ -265,7 +268,6 @@
                     "type": "OcaBlock",
                     "fields": {
                       "val": {
-                        "value": "Hz",
                         "type": "_GuiValue"
                       }
                     }

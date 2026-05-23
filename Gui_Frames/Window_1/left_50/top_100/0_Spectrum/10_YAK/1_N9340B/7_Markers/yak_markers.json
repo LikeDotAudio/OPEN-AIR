@@ -62,136 +62,148 @@
                 },
                 "fields": {
                   "Marker_1": {
-                    "value": "Marker 1 Value in dBm",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "dBm"
+                    },
                     "label": {
                       "En": "Marker 1 Amplitude",
                       "Fr": "Marqueur 1 Amplitude",
                       "De": "Marker 1 Amplitude",
                       "Es": "Marcador 1 Amplitude"
-                    },
-                    "units": "dBm"
+                    }
                   },
                   "Marker_2": {
-                    "value": "Marker 2 Value in dBm",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "dBm"
+                    },
                     "label": {
                       "En": "Marker 2 Amplitude",
                       "Fr": "Marqueur 2 Amplitude",
                       "De": "Marker 2 Amplitude",
                       "Es": "Marcador 2 Amplitude"
-                    },
-                    "units": "dBm"
+                    }
                   },
                   "Marker_3": {
-                    "value": "Marker 3 Value in dBm",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "dBm"
+                    },
                     "label": {
                       "En": "Marker 3 Amplitude",
                       "Fr": "Marqueur 3 Amplitude",
                       "De": "Marker 3 Amplitude",
                       "Es": "Marcador 3 Amplitude"
-                    },
-                    "units": "dBm"
+                    }
                   },
                   "Marker_4": {
-                    "value": "Marker 4 Value in dBm",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "dBm"
+                    },
                     "label": {
                       "En": "Marker 4 Amplitude",
                       "Fr": "Marqueur 4 Amplitude",
                       "De": "Marker 4 Amplitude",
                       "Es": "Marcador 4 Amplitude"
-                    },
-                    "units": "dBm"
+                    }
                   },
                   "Marker_5": {
-                    "value": "Marker 5 Value in dBm",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "dBm"
+                    },
                     "label": {
                       "En": "Marker 5 Amplitude",
                       "Fr": "Marqueur 5 Amplitude",
                       "De": "Marker 5 Amplitude",
                       "Es": "Marcador 5 Amplitude"
-                    },
-                    "units": "dBm"
+                    }
                   },
                   "Marker_6": {
-                    "value": "Marker 6 Value in dBm",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "dBm"
+                    },
                     "label": {
                       "En": "Marker 6 Amplitude",
                       "Fr": "Marqueur 6 Amplitude",
                       "De": "Marker 6 Amplitude",
                       "Es": "Marcador 6 Amplitude"
-                    },
-                    "units": "dBm"
+                    }
                   },
                   "Marker_1_X": {
-                    "value": "Marker 1 Frequency in Hz",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
                     "label": {
                       "En": "Marker 1 Frequency",
                       "Fr": "Marqueur 1 Frequency",
                       "De": "Marker 1 Frequenz",
                       "Es": "Marcador 1 Frequency"
-                    },
-                    "units": "Hz"
+                    }
                   },
                   "Marker_2_X": {
-                    "value": "Marker 2 Frequency in Hz",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
                     "label": {
                       "En": "Marker 2 Frequency",
                       "Fr": "Marqueur 2 Frequency",
                       "De": "Marker 2 Frequenz",
                       "Es": "Marcador 2 Frequency"
-                    },
-                    "units": "Hz"
+                    }
                   },
                   "Marker_3_X": {
-                    "value": "Marker 3 Frequency in Hz",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
                     "label": {
                       "En": "Marker 3 Frequency",
                       "Fr": "Marqueur 3 Frequency",
                       "De": "Marker 3 Frequenz",
                       "Es": "Marcador 3 Frequency"
-                    },
-                    "units": "Hz"
+                    }
                   },
                   "Marker_4_X": {
-                    "value": "Marker 4 Frequency in Hz",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
                     "label": {
                       "En": "Marker 4 Frequency",
                       "Fr": "Fréquence du marqueur 4",
                       "De": "Marker 4 Frequenz",
                       "Es": "Frecuencia del marcador 4"
-                    },
-                    "units": "Hz"
+                    }
                   },
                   "Marker_5_X": {
-                    "value": "Marker 5 Frequency in Hz",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
                     "label": {
                       "En": "Marker 5 Frequency",
                       "Fr": "Marqueur 5 Frequency",
                       "De": "Marker 5 Frequenz",
                       "Es": "Marcador 5 Frequency"
-                    },
-                    "units": "Hz"
+                    }
                   },
                   "Marker_6_X": {
-                    "value": "Marker 6 Frequency in Hz",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
                     "label": {
                       "En": "Marker 6 Frequency",
                       "Fr": "Marqueur 6 Frequency",
                       "De": "Marker 6 Frequenz",
                       "Es": "Marcador 6 Frequency"
-                    },
-                    "units": "Hz"
+                    }
                   }
                 }
               }
@@ -244,7 +256,6 @@
                 "type": "OcaBlock",
                 "fields": {
                   "marker_number": {
-                    "value": "1",
                     "type": "_GuiValue",
                     "label": {
                       "En": "Marker Number",
@@ -293,7 +304,6 @@
                 "type": "OcaBlock",
                 "fields": {
                   "marker_number": {
-                    "value": "1",
                     "type": "_GuiValue",
                     "label": {
                       "En": "Marker Number",
@@ -342,7 +352,6 @@
                 "type": "OcaBlock",
                 "fields": {
                   "marker_number": {
-                    "value": "1",
                     "type": "_GuiValue",
                     "label": {
                       "En": "Marker Number",
@@ -352,15 +361,16 @@
                     }
                   },
                   "x_value": {
-                    "value": "123456789",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
                     "label": {
                       "En": "Frequency",
                       "Fr": "Fréquence",
                       "De": "Frequenz",
                       "Es": "Frecuencia"
-                    },
-                    "units": "Hz"
+                    }
                   }
                 }
               }

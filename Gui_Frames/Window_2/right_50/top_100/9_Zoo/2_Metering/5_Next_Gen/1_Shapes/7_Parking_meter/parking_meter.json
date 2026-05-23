@@ -31,6 +31,19 @@
         "fields": {
           "Parking_Meter_1_Large": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -5.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -5.0
+            },
+            "layout": {},
             "label": {
               "En": "Large Classic",
               "Fr": "Large Classique",
@@ -40,13 +53,6 @@
             "geometry": {
               "width": 350,
               "height": 350
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -5.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -103,23 +109,28 @@
             "width": 350,
             "height": 350,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "parking_meter",
             "bezel_width": 7,
             "Pointer_Style": "needle",
             "sub_ticks": 4,
             "label_radius_offset": -20,
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -5.0,
-            "value": -5.0,
-            "default_value": -5.0,
             "path": "Parking_Meter_Variations/Parking_Meter_1_Large"
           },
           "Parking_Meter_2_Medium": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -10.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -10.0
+            },
+            "layout": {},
             "label": {
               "En": "Medium Night",
               "Fr": "Moyen Night",
@@ -129,13 +140,6 @@
             "geometry": {
               "width": 250,
               "height": 250
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -10.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -185,24 +189,29 @@
             "width": 250,
             "height": 250,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "parking_meter",
             "bezel_width": 5,
             "Pointer_Style": "needle",
             "sub_ticks": 4,
             "label_radius_offset": -15,
             "enable_lighting": true,
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -10.0,
-            "value": -10.0,
-            "default_value": -10.0,
             "path": "Parking_Meter_Variations/Parking_Meter_2_Medium"
           },
           "Parking_Meter_3_Small": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -2.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -2.0
+            },
+            "layout": {},
             "label": {
               "En": "Small Cyber",
               "Fr": "Small Cyber",
@@ -212,13 +221,6 @@
             "geometry": {
               "width": 180,
               "height": 180
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -2.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -272,7 +274,6 @@
             "width": 180,
             "height": 180,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "parking_meter",
             "bezel_width": 3,
             "Pointer_Style": "line",
@@ -282,17 +283,23 @@
             "tick_radius_offset": 40,
             "needle_length_factor": 1.5,
             "enable_lighting": true,
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -2.0,
-            "value": -2.0,
-            "default_value": -2.0,
             "path": "Parking_Meter_Variations/Parking_Meter_3_Small"
           },
           "Parking_Meter_4_Tiny": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -7.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -7.0
+            },
+            "layout": {},
             "label": {
               "En": "Tiny Vintage",
               "Fr": "Tiny Vintage",
@@ -302,13 +309,6 @@
             "geometry": {
               "width": 120,
               "height": 120
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -7.0
-              }
             },
             "Scale_numbers": true,
             "Ticks_visible": true,
@@ -361,7 +361,6 @@
             "width": 120,
             "height": 120,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "parking_meter",
             "bezel_width": 2,
             "Pointer_Style": "baton",
@@ -369,17 +368,23 @@
             "label_radius_offset": -5,
             "needle_length_factor": 1.2,
             "damping": 0.8,
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -7.0,
-            "value": -7.0,
-            "default_value": -7.0,
             "path": "Parking_Meter_Variations/Parking_Meter_4_Tiny"
           },
           "Parking_Meter_5_Tall": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -1.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -1.0
+            },
+            "layout": {},
             "label": {
               "En": "Tall Danger",
               "Fr": "Tall Danger",
@@ -390,13 +395,6 @@
               "width": 200,
               "height": 50,
               "alpha": 0.9
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -1.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -446,24 +444,29 @@
             "width": 200,
             "height": 50,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "parking_meter",
             "bezel_width": 6,
             "Pointer_Style": "spade",
             "sub_ticks": 1,
             "label_radius_offset": -20,
             "damping": 0.2,
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -1.0,
-            "value": -1.0,
-            "default_value": -1.0,
             "path": "Parking_Meter_Variations/Parking_Meter_5_Tall"
           },
           "Parking_Meter_6_Wide": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -4.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -4.0
+            },
+            "layout": {},
             "label": {
               "En": "Wide Royal",
               "Fr": "Wide Royal",
@@ -473,13 +476,6 @@
             "geometry": {
               "width": 400,
               "height": 200
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -4.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -530,24 +526,29 @@
             "width": 400,
             "height": 200,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "parking_meter",
             "bezel_width": 5,
             "Pointer_Style": "knife-edge",
             "label_radius_offset": -15,
             "needle_length_factor": 0.8,
             "damping": 0.95,
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -4.0,
-            "value": -4.0,
-            "default_value": -4.0,
             "path": "Parking_Meter_Variations/Parking_Meter_6_Wide"
           },
           "Parking_Meter_7_Blueprint": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -15.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -15.0
+            },
+            "layout": {},
             "label": {
               "En": "Blueprint Tech",
               "Fr": "Blueprint Tech",
@@ -557,13 +558,6 @@
             "geometry": {
               "width": 300,
               "height": 300
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -15.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -612,23 +606,28 @@
             "width": 300,
             "height": 300,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "parking_meter",
             "bezel_width": 2,
             "Pointer_Style": "line",
             "label_radius_offset": -25,
             "damping": 0.5,
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -15.0,
-            "value": -15.0,
-            "default_value": -15.0,
             "path": "Parking_Meter_Variations/Parking_Meter_7_Blueprint"
           },
           "Parking_Meter_8_Emerald": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -8.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -8.0
+            },
+            "layout": {},
             "label": {
               "En": "Emerald Sea",
               "Fr": "Emerald Sea",
@@ -638,13 +637,6 @@
             "geometry": {
               "width": 280,
               "height": 280
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -8.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -692,22 +684,27 @@
             "width": 280,
             "height": 280,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "parking_meter",
             "bezel_width": 6,
             "label_radius_offset": -18,
             "damping": 0.7,
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -8.0,
-            "value": -8.0,
-            "default_value": -8.0,
             "path": "Parking_Meter_Variations/Parking_Meter_8_Emerald"
           },
           "Parking_Meter_9_Carbon": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -3.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -3.0
+            },
+            "layout": {},
             "label": {
               "En": "Carbon Fiber",
               "Fr": "Carbon Fiber",
@@ -717,13 +714,6 @@
             "geometry": {
               "width": 320,
               "height": 320
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -3.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -772,23 +762,28 @@
             "width": 320,
             "height": 320,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "parking_meter",
             "bezel_width": 7,
             "Pointer_Style": "needle",
             "label_radius_offset": -22,
             "damping": 0.99,
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -3.0,
-            "value": -3.0,
-            "default_value": -3.0,
             "path": "Parking_Meter_Variations/Parking_Meter_9_Carbon"
           },
           "Parking_Meter_10_Fire": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -2.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -2.0
+            },
+            "layout": {},
             "label": {
               "En": "Fireball",
               "Fr": "Fireball",
@@ -798,13 +793,6 @@
             "geometry": {
               "width": 260,
               "height": 260
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -2.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -853,19 +841,11 @@
             "width": 260,
             "height": 260,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "parking_meter",
             "bezel_width": 5,
             "Pointer_Style": "spade",
             "label_radius_offset": -15,
             "damping": 0.1,
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -2.0,
-            "value": -2.0,
-            "default_value": -2.0,
             "path": "Parking_Meter_Variations/Parking_Meter_10_Fire"
           }
         },

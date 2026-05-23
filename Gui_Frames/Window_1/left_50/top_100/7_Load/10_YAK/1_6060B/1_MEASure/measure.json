@@ -49,48 +49,52 @@
                 "type": "OcaBlock",
                 "fields": {
                   "mode": {
-                    "value": "V",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "V"
+                    },
                     "label": {
                       "En": "Voltage",
                       "Fr": "Tension",
                       "De": "Spannung",
                       "Es": "Voltaje"
-                    },
-                    "units": "V"
+                    }
                   },
                   "volts": {
-                    "value": "V",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "V"
+                    },
                     "label": {
                       "En": "Voltage",
                       "Fr": "Tension",
                       "De": "Spannung",
                       "Es": "Voltaje"
-                    },
-                    "units": "V"
+                    }
                   },
                   "amps": {
-                    "value": "A",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "A"
+                    },
                     "label": {
                       "En": "Current",
                       "Fr": "Courant",
                       "De": "Strom",
                       "Es": "Corriente"
-                    },
-                    "units": "A"
+                    }
                   },
                   "watts": {
-                    "value": "W",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "W"
+                    },
                     "label": {
                       "En": "Power",
                       "Fr": "Puissance",
                       "De": "Leistung",
                       "Es": "Potencia"
-                    },
-                    "units": "W"
+                    }
                   }
                 }
               }

@@ -49,15 +49,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "value": {
-                    "value": "12.0",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "V"
+                    },
                     "label": {
                       "En": "Voltage",
                       "Fr": "Tension",
                       "De": "Spannung",
                       "Es": "Voltaje"
                     },
-                    "units": "V",
                     "description": {
                       "En": "Volts",
                       "Fr": "Volts",
@@ -98,15 +99,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "value": {
-                    "value": "60",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "V"
+                    },
                     "label": {
                       "En": "Range",
                       "Fr": "Plage",
                       "De": "Bereich",
                       "Es": "Rango"
                     },
-                    "units": "V",
                     "description": {
                       "En": "6, 60, etc",
                       "Fr": "6, 60, etc",

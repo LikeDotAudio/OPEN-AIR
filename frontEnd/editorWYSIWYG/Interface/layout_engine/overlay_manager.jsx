@@ -13,8 +13,11 @@
     const measure = React.useCallback(() => {
       const root = containerRef && containerRef.current;
       if (!root || !path) { setRect(null); return; }
-      const el = window.OaEdFocus.elementForPath(root, path);
-      if (!el) { setRect(null); return; }
+      const el0 = window.OaEdFocus.elementForPath(root, path);
+      if (!el0) { setRect(null); return; }
+      // Outline the actual rendered control (firstElementChild), not the
+      // full-width grid cell, so the selection box hugs the widget.
+      const el = el0.firstElementChild || el0;
       const cr = root.getBoundingClientRect();
       const er = el.getBoundingClientRect();
       setRect({

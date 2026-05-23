@@ -77,16 +77,20 @@
             "fields": {
               "Meter_Voltage": {
                 "type": "_NeedleVUMeter",
+                "domain": {
+                  "min": "0",
+                  "max": "100",
+                  "units": "V"
+                },
+                "value": {
+                  "default_value": "0"
+                },
                 "label_active": {
                   "En": "VOLTAGE",
                   "Fr": "TENSION",
                   "De": "SPANNUNG",
                   "Es": "VOLTAJE"
                 },
-                "value_default": "0",
-                "min": "0",
-                "max": "100",
-                "units": "V",
                 "description": {
                   "En": "Potential Difference",
                   "Fr": "Potential Difference",
@@ -115,16 +119,20 @@
               },
               "Meter_Current": {
                 "type": "_NeedleVUMeter",
+                "domain": {
+                  "min": "0",
+                  "max": "10",
+                  "units": "A"
+                },
+                "value": {
+                  "default_value": "0"
+                },
                 "label_active": {
                   "En": "CURRENT",
                   "Fr": "COURANT",
                   "De": "STROM",
                   "Es": "CORRIENTE"
                 },
-                "value_default": "0",
-                "min": "0",
-                "max": "10",
-                "units": "A",
                 "description": {
                   "En": "Electron Flow",
                   "Fr": "Electron Flow",
@@ -153,16 +161,20 @@
               },
               "Meter_Power": {
                 "type": "_NeedleVUMeter",
+                "domain": {
+                  "min": "0",
+                  "max": "1000",
+                  "units": "W"
+                },
+                "value": {
+                  "default_value": "0"
+                },
                 "label_active": {
                   "En": "TOTAL POWER",
                   "Fr": "TOTAL POWER",
                   "De": "TOTAL POWER",
                   "Es": "TOTAL POWER"
                 },
-                "value_default": "0",
-                "min": "0",
-                "max": "1000",
-                "units": "W",
                 "description": {
                   "En": "Energy Consumption",
                   "Fr": "Consommation d'énergie",
@@ -248,16 +260,20 @@
             "fields": {
               "Voltage_Fader": {
                 "type": "_GuiVerticalFader",
+                "domain": {
+                  "min": "0.0",
+                  "max": "100.0",
+                  "units": "V"
+                },
+                "value": {
+                  "default_value": "5.0"
+                },
                 "label_active": {
                   "En": "SET VOLTS (V)",
                   "Fr": "SET VOLTS (V)",
                   "De": "SET VOLTS (V)",
                   "Es": "SET VOLTS (V)"
                 },
-                "value_default": "5.0",
-                "min": "0.0",
-                "max": "100.0",
-                "units": "V",
                 "message_details": {
                   "PSU_MODEL": {
                     "type": "_GuiActuator",
@@ -280,16 +296,20 @@
               },
               "Current_Fader": {
                 "type": "_GuiVerticalFader",
+                "domain": {
+                  "min": "0.0",
+                  "max": "10.0",
+                  "units": "A"
+                },
+                "value": {
+                  "default_value": "0.1"
+                },
                 "label_active": {
                   "En": "LIMIT AMPS (A)",
                   "Fr": "LIMIT AMPS (A)",
                   "De": "LIMIT AMPS (A)",
                   "Es": "LIMIT AMPS (A)"
                 },
-                "value_default": "0.1",
-                "min": "0.0",
-                "max": "10.0",
-                "units": "A",
                 "message_details": {
                   "PSU_MODEL": {
                     "type": "_GuiActuator",

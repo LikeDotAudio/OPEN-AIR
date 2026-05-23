@@ -120,6 +120,10 @@
         },
         "fields": {
           "Active": {
+            "type": "_GuiCheckbox",
+            "layout": {
+              "height": 30
+            },
             "label_active": {
               "En": "Active",
               "Fr": "Actif",
@@ -132,7 +136,6 @@
               "De": "Aktiv",
               "Es": "Activo"
             },
-            "type": "_GuiCheckbox",
             "AES70": "OcaSwitch",
             "handler": "toggle_marker_active",
             "yak_handler": {
@@ -143,13 +146,18 @@
               "input_name": "state_bool",
               "converter": "bool_to_int",
               "marker_number": 1
-            },
-            "value": false,
-            "layout": {
-              "height": 30
             }
           },
           "X_MHz": {
+            "type": "_Value",
+            "domain": {
+              "units": "MHz"
+            },
+            "layout": {
+              "height": 30,
+              "stretch": "width",
+              "Font": 50
+            },
             "label_active": {
               "En": "X",
               "Fr": "X",
@@ -161,12 +169,6 @@
               "Fr": "X",
               "De": "X",
               "Es": "X"
-            },
-            "type": "_Value",
-            "layout": {
-              "height": 30,
-              "stretch": "width",
-              "Font": 50
             },
             "AES70": "OcaFrequencyActuator",
             "handler": "set_marker_frequency",
@@ -178,11 +180,13 @@
               "input_name": "hz_value",
               "converter": "mhz_to_hz",
               "marker_number": 1
-            },
-            "value": "111",
-            "units": "MHz"
+            }
           },
           "Y_dBm": {
+            "type": "_Label",
+            "domain": {
+              "units": "dBm"
+            },
             "label_active": {
               "En": "Y",
               "Fr": "Y",
@@ -195,10 +199,7 @@
               "De": "Y",
               "Es": "Y"
             },
-            "type": "_Label",
-            "AES70": "OcaLevelSensor",
-            "value": "-30",
-            "units": "dBm"
+            "AES70": "OcaLevelSensor"
           }
         }
       },
@@ -222,6 +223,10 @@
         },
         "fields": {
           "Active": {
+            "type": "_GuiCheckbox",
+            "layout": {
+              "height": 30
+            },
             "label_active": {
               "En": "Active",
               "Fr": "Actif",
@@ -234,7 +239,6 @@
               "De": "Aktiv",
               "Es": "Activo"
             },
-            "type": "_GuiCheckbox",
             "AES70": "OcaSwitch",
             "handler": "toggle_marker_active",
             "yak_handler": {
@@ -245,13 +249,13 @@
               "input_name": "state_bool",
               "converter": "bool_to_int",
               "marker_number": 2
-            },
-            "value": false,
-            "layout": {
-              "height": 30
             }
           },
           "X_MHz": {
+            "type": "_Value",
+            "domain": {
+              "units": "MHz"
+            },
             "label_active": {
               "En": "X",
               "Fr": "X",
@@ -264,7 +268,6 @@
               "De": "X",
               "Es": "X"
             },
-            "type": "_Value",
             "AES70": "OcaFrequencyActuator",
             "handler": "set_marker_frequency",
             "yak_handler": {
@@ -275,11 +278,13 @@
               "input_name": "hz_value",
               "converter": "mhz_to_hz",
               "marker_number": 2
-            },
-            "value": "111",
-            "units": "MHz"
+            }
           },
           "Y_dBm": {
+            "type": "_Label",
+            "domain": {
+              "units": "dBm"
+            },
             "label_active": {
               "En": "Y",
               "Fr": "Y",
@@ -292,10 +297,7 @@
               "De": "Y",
               "Es": "Y"
             },
-            "type": "_Label",
-            "AES70": "OcaLevelSensor",
-            "value": "-30",
-            "units": "dBm"
+            "AES70": "OcaLevelSensor"
           }
         }
       },
@@ -319,6 +321,10 @@
         },
         "fields": {
           "Active": {
+            "type": "_GuiCheckbox",
+            "layout": {
+              "height": 30
+            },
             "label_active": {
               "En": "Active",
               "Fr": "Actif",
@@ -331,7 +337,6 @@
               "De": "Aktiv",
               "Es": "Activo"
             },
-            "type": "_GuiCheckbox",
             "AES70": "OcaSwitch",
             "handler": "toggle_marker_active",
             "yak_handler": {
@@ -342,13 +347,13 @@
               "input_name": "state_bool",
               "converter": "bool_to_int",
               "marker_number": 3
-            },
-            "value": false,
-            "layout": {
-              "height": 30
             }
           },
           "X_MHz": {
+            "type": "_Value",
+            "domain": {
+              "units": "MHz"
+            },
             "label_active": {
               "En": "X",
               "Fr": "X",
@@ -361,7 +366,6 @@
               "De": "X",
               "Es": "X"
             },
-            "type": "_Value",
             "AES70": "OcaFrequencyActuator",
             "handler": "set_marker_frequency",
             "yak_handler": {
@@ -372,11 +376,13 @@
               "input_name": "hz_value",
               "converter": "mhz_to_hz",
               "marker_number": 3
-            },
-            "value": "111",
-            "units": "MHz"
+            }
           },
           "Y_dBm": {
+            "type": "_Label",
+            "domain": {
+              "units": "dBm"
+            },
             "label_active": {
               "En": "Y",
               "Fr": "Y",
@@ -389,10 +395,7 @@
               "De": "Y",
               "Es": "Y"
             },
-            "type": "_Label",
-            "AES70": "OcaLevelSensor",
-            "value": "-30",
-            "units": "dBm"
+            "AES70": "OcaLevelSensor"
           }
         }
       },
@@ -416,6 +419,10 @@
         },
         "fields": {
           "Active": {
+            "type": "_GuiCheckbox",
+            "layout": {
+              "height": 30
+            },
             "label_active": {
               "En": "Active",
               "Fr": "Actif",
@@ -428,7 +435,6 @@
               "De": "Aktiv",
               "Es": "Activo"
             },
-            "type": "_GuiCheckbox",
             "AES70": "OcaSwitch",
             "handler": "toggle_marker_active",
             "yak_handler": {
@@ -439,13 +445,13 @@
               "input_name": "state_bool",
               "converter": "bool_to_int",
               "marker_number": 4
-            },
-            "value": false,
-            "layout": {
-              "height": 30
             }
           },
           "X_MHz": {
+            "type": "_Value",
+            "domain": {
+              "units": "MHz"
+            },
             "label_active": {
               "En": "X",
               "Fr": "X",
@@ -458,7 +464,6 @@
               "De": "X",
               "Es": "X"
             },
-            "type": "_Value",
             "AES70": "OcaFrequencyActuator",
             "handler": "set_marker_frequency",
             "yak_handler": {
@@ -469,11 +474,13 @@
               "input_name": "hz_value",
               "converter": "mhz_to_hz",
               "marker_number": 4
-            },
-            "value": "111",
-            "units": "MHz"
+            }
           },
           "Y_dBm": {
+            "type": "_Label",
+            "domain": {
+              "units": "dBm"
+            },
             "label_active": {
               "En": "Y",
               "Fr": "Y",
@@ -486,10 +493,7 @@
               "De": "Y",
               "Es": "Y"
             },
-            "type": "_Label",
-            "AES70": "OcaLevelSensor",
-            "value": "-30",
-            "units": "dBm"
+            "AES70": "OcaLevelSensor"
           }
         }
       },
@@ -513,6 +517,10 @@
         },
         "fields": {
           "Active": {
+            "type": "_GuiCheckbox",
+            "layout": {
+              "height": 30
+            },
             "label_active": {
               "En": "Active",
               "Fr": "Actif",
@@ -525,7 +533,6 @@
               "De": "Aktiv",
               "Es": "Activo"
             },
-            "type": "_GuiCheckbox",
             "AES70": "OcaSwitch",
             "handler": "toggle_marker_active",
             "yak_handler": {
@@ -536,13 +543,13 @@
               "input_name": "state_bool",
               "converter": "bool_to_int",
               "marker_number": 5
-            },
-            "value": false,
-            "layout": {
-              "height": 30
             }
           },
           "X_MHz": {
+            "type": "_Value",
+            "domain": {
+              "units": "MHz"
+            },
             "label_active": {
               "En": "X",
               "Fr": "X",
@@ -555,7 +562,6 @@
               "De": "X",
               "Es": "X"
             },
-            "type": "_Value",
             "AES70": "OcaFrequencyActuator",
             "handler": "set_marker_frequency",
             "yak_handler": {
@@ -566,11 +572,13 @@
               "input_name": "hz_value",
               "converter": "mhz_to_hz",
               "marker_number": 5
-            },
-            "value": "111",
-            "units": "MHz"
+            }
           },
           "Y_dBm": {
+            "type": "_Label",
+            "domain": {
+              "units": "dBm"
+            },
             "label_active": {
               "En": "Y",
               "Fr": "Y",
@@ -583,10 +591,7 @@
               "De": "Y",
               "Es": "Y"
             },
-            "type": "_Label",
-            "AES70": "OcaLevelSensor",
-            "value": "-30",
-            "units": "dBm"
+            "AES70": "OcaLevelSensor"
           }
         }
       },
@@ -610,6 +615,10 @@
         },
         "fields": {
           "Active": {
+            "type": "_GuiCheckbox",
+            "layout": {
+              "height": 30
+            },
             "label_active": {
               "En": "Active",
               "Fr": "Actif",
@@ -622,7 +631,6 @@
               "De": "Aktiv",
               "Es": "Activo"
             },
-            "type": "_GuiCheckbox",
             "AES70": "OcaSwitch",
             "handler": "toggle_marker_active",
             "yak_handler": {
@@ -633,13 +641,13 @@
               "input_name": "state_bool",
               "converter": "bool_to_int",
               "marker_number": 6
-            },
-            "value": false,
-            "layout": {
-              "height": 30
             }
           },
           "X_MHz": {
+            "type": "_Value",
+            "domain": {
+              "units": "MHz"
+            },
             "label_active": {
               "En": "X",
               "Fr": "X",
@@ -652,7 +660,6 @@
               "De": "X",
               "Es": "X"
             },
-            "type": "_Value",
             "AES70": "OcaFrequencyActuator",
             "handler": "set_marker_frequency",
             "yak_handler": {
@@ -663,11 +670,13 @@
               "input_name": "hz_value",
               "converter": "mhz_to_hz",
               "marker_number": 6
-            },
-            "value": "111",
-            "units": "MHz"
+            }
           },
           "Y_dBm": {
+            "type": "_Label",
+            "domain": {
+              "units": "dBm"
+            },
             "label_active": {
               "En": "Y",
               "Fr": "Y",
@@ -680,10 +689,7 @@
               "De": "Y",
               "Es": "Y"
             },
-            "type": "_Label",
-            "AES70": "OcaLevelSensor",
-            "value": "-30",
-            "units": "dBm"
+            "AES70": "OcaLevelSensor"
           }
         }
       }

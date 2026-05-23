@@ -58,7 +58,6 @@
                     "type": "OcaBlock",
                     "fields": {
                       "source": {
-                        "value": "CHAN1",
                         "type": "_GuiValue",
                         "label": {
                           "En": "Source",
@@ -106,15 +105,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "level": {
-                        "value": "0.0",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "V"
+                        },
                         "label": {
                           "En": "Level",
                           "Fr": "Niveau",
                           "De": "Pegel",
                           "Es": "Nivel"
-                        },
-                        "units": "V"
+                        }
                       }
                     }
                   }
@@ -149,7 +149,6 @@
                     "type": "OcaBlock",
                     "fields": {
                       "sweep": {
-                        "value": "AUTO",
                         "type": "_GuiValue",
                         "label": {
                           "En": "Sweep",

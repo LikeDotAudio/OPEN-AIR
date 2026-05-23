@@ -49,15 +49,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "type": {
-                    "value": "NORMal",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Type",
                       "Fr": "Type",
                       "De": "Typ",
                       "Es": "Tipo"
                     },
-                    "units": "",
                     "description": {
                       "En": "NORMal, AVERage, PEAK",
                       "Fr": "NORMal, AVERage, PEAK",
@@ -98,15 +99,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "count": {
-                    "value": "8",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Count",
                       "Fr": "Count",
                       "De": "Count",
                       "Es": "Count"
-                    },
-                    "units": ""
+                    }
                   }
                 }
               }
@@ -141,15 +143,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "points": {
-                    "value": "MAXimum",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Points",
                       "Fr": "Points",
                       "De": "Punkte",
                       "Es": "Puntos"
                     },
-                    "units": "",
                     "description": {
                       "En": "100, 250, 500, 1000, 2000, MAXimum",
                       "Fr": "100, 250, 500, 1000, 2000, MAXimum",
@@ -201,15 +204,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "srate": {
-                    "value": "Hz",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
                     "label": {
                       "En": "Sample Rate",
                       "Fr": "Taux d'échantillonnage",
                       "De": "Abtastrate",
                       "Es": "Frecuencia de muestreo"
-                    },
-                    "units": "Hz"
+                    }
                   }
                 }
               }

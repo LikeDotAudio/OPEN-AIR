@@ -84,15 +84,17 @@
                 "fields": {
                   "V1": {
                     "type": "_NeedleVUMeter",
+                    "domain": {
+                      "min": "0",
+                      "max": "100",
+                      "units": "V"
+                    },
                     "label_active": {
                       "En": "V1",
                       "Fr": "V1",
                       "De": "V1",
                       "Es": "V1"
                     },
-                    "min": "0",
-                    "max": "100",
-                    "units": "V",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -102,15 +104,17 @@
                   },
                   "I1": {
                     "type": "_NeedleVUMeter",
+                    "domain": {
+                      "min": "0",
+                      "max": "10",
+                      "units": "A"
+                    },
                     "label_active": {
                       "En": "A1",
                       "Fr": "A1",
                       "De": "A1",
                       "Es": "A1"
                     },
-                    "min": "0",
-                    "max": "10",
-                    "units": "A",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -120,15 +124,17 @@
                   },
                   "W1": {
                     "type": "_NeedleVUMeter",
+                    "domain": {
+                      "min": "0",
+                      "max": "1000",
+                      "units": "W"
+                    },
                     "label_active": {
                       "En": "W1",
                       "Fr": "W1",
                       "De": "W1",
                       "Es": "W1"
                     },
-                    "min": "0",
-                    "max": "1000",
-                    "units": "W",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -170,15 +176,17 @@
                 "fields": {
                   "V2": {
                     "type": "_NeedleVUMeter",
+                    "domain": {
+                      "min": "0",
+                      "max": "100",
+                      "units": "V"
+                    },
                     "label_active": {
                       "En": "V2",
                       "Fr": "V2",
                       "De": "V2",
                       "Es": "V2"
                     },
-                    "min": "0",
-                    "max": "100",
-                    "units": "V",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -188,15 +196,17 @@
                   },
                   "I2": {
                     "type": "_NeedleVUMeter",
+                    "domain": {
+                      "min": "0",
+                      "max": "10",
+                      "units": "A"
+                    },
                     "label_active": {
                       "En": "A2",
                       "Fr": "A2",
                       "De": "A2",
                       "Es": "A2"
                     },
-                    "min": "0",
-                    "max": "10",
-                    "units": "A",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -206,15 +216,17 @@
                   },
                   "W2": {
                     "type": "_NeedleVUMeter",
+                    "domain": {
+                      "min": "0",
+                      "max": "1000",
+                      "units": "W"
+                    },
                     "label_active": {
                       "En": "W2",
                       "Fr": "W2",
                       "De": "W2",
                       "Es": "W2"
                     },
-                    "min": "0",
-                    "max": "1000",
-                    "units": "W",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -256,15 +268,17 @@
                 "fields": {
                   "V3": {
                     "type": "_NeedleVUMeter",
+                    "domain": {
+                      "min": "0",
+                      "max": "100",
+                      "units": "V"
+                    },
                     "label_active": {
                       "En": "V3",
                       "Fr": "V3",
                       "De": "V3",
                       "Es": "V3"
                     },
-                    "min": "0",
-                    "max": "100",
-                    "units": "V",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -274,15 +288,17 @@
                   },
                   "I3": {
                     "type": "_NeedleVUMeter",
+                    "domain": {
+                      "min": "0",
+                      "max": "10",
+                      "units": "A"
+                    },
                     "label_active": {
                       "En": "A3",
                       "Fr": "A3",
                       "De": "A3",
                       "Es": "A3"
                     },
-                    "min": "0",
-                    "max": "10",
-                    "units": "A",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -292,15 +308,17 @@
                   },
                   "W3": {
                     "type": "_NeedleVUMeter",
+                    "domain": {
+                      "min": "0",
+                      "max": "1000",
+                      "units": "W"
+                    },
                     "label_active": {
                       "En": "W3",
                       "Fr": "W3",
                       "De": "W3",
                       "Es": "W3"
                     },
-                    "min": "0",
-                    "max": "1000",
-                    "units": "W",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -342,15 +360,17 @@
                 "fields": {
                   "V4": {
                     "type": "_NeedleVUMeter",
+                    "domain": {
+                      "min": "0",
+                      "max": "100",
+                      "units": "V"
+                    },
                     "label_active": {
                       "En": "V4",
                       "Fr": "V4",
                       "De": "V4",
                       "Es": "V4"
                     },
-                    "min": "0",
-                    "max": "100",
-                    "units": "V",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -360,15 +380,17 @@
                   },
                   "I4": {
                     "type": "_NeedleVUMeter",
+                    "domain": {
+                      "min": "0",
+                      "max": "10",
+                      "units": "A"
+                    },
                     "label_active": {
                       "En": "A4",
                       "Fr": "A4",
                       "De": "A4",
                       "Es": "A4"
                     },
-                    "min": "0",
-                    "max": "10",
-                    "units": "A",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -378,15 +400,17 @@
                   },
                   "W4": {
                     "type": "_NeedleVUMeter",
+                    "domain": {
+                      "min": "0",
+                      "max": "1000",
+                      "units": "W"
+                    },
                     "label_active": {
                       "En": "W4",
                       "Fr": "W4",
                       "De": "W4",
                       "Es": "W4"
                     },
-                    "min": "0",
-                    "max": "1000",
-                    "units": "W",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -428,15 +452,17 @@
                 "fields": {
                   "V5": {
                     "type": "_NeedleVUMeter",
+                    "domain": {
+                      "min": "0",
+                      "max": "100",
+                      "units": "V"
+                    },
                     "label_active": {
                       "En": "V5",
                       "Fr": "V5",
                       "De": "V5",
                       "Es": "V5"
                     },
-                    "min": "0",
-                    "max": "100",
-                    "units": "V",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -446,15 +472,17 @@
                   },
                   "I5": {
                     "type": "_NeedleVUMeter",
+                    "domain": {
+                      "min": "0",
+                      "max": "10",
+                      "units": "A"
+                    },
                     "label_active": {
                       "En": "A5",
                       "Fr": "A5",
                       "De": "A5",
                       "Es": "A5"
                     },
-                    "min": "0",
-                    "max": "10",
-                    "units": "A",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -464,15 +492,17 @@
                   },
                   "W5": {
                     "type": "_NeedleVUMeter",
+                    "domain": {
+                      "min": "0",
+                      "max": "1000",
+                      "units": "W"
+                    },
                     "label_active": {
                       "En": "W5",
                       "Fr": "W5",
                       "De": "W5",
                       "Es": "W5"
                     },
-                    "min": "0",
-                    "max": "1000",
-                    "units": "W",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -514,15 +544,17 @@
                 "fields": {
                   "V6": {
                     "type": "_NeedleVUMeter",
+                    "domain": {
+                      "min": "0",
+                      "max": "100",
+                      "units": "V"
+                    },
                     "label_active": {
                       "En": "V6",
                       "Fr": "V6",
                       "De": "V6",
                       "Es": "V6"
                     },
-                    "min": "0",
-                    "max": "100",
-                    "units": "V",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -532,15 +564,17 @@
                   },
                   "I6": {
                     "type": "_NeedleVUMeter",
+                    "domain": {
+                      "min": "0",
+                      "max": "10",
+                      "units": "A"
+                    },
                     "label_active": {
                       "En": "A6",
                       "Fr": "A6",
                       "De": "A6",
                       "Es": "A6"
                     },
-                    "min": "0",
-                    "max": "10",
-                    "units": "A",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -550,15 +584,17 @@
                   },
                   "W6": {
                     "type": "_NeedleVUMeter",
+                    "domain": {
+                      "min": "0",
+                      "max": "1000",
+                      "units": "W"
+                    },
                     "label_active": {
                       "En": "W6",
                       "Fr": "W6",
                       "De": "W6",
                       "Es": "W6"
                     },
-                    "min": "0",
-                    "max": "1000",
-                    "units": "W",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -600,15 +636,17 @@
                 "fields": {
                   "V7": {
                     "type": "_NeedleVUMeter",
+                    "domain": {
+                      "min": "0",
+                      "max": "100",
+                      "units": "V"
+                    },
                     "label_active": {
                       "En": "V7",
                       "Fr": "V7",
                       "De": "V7",
                       "Es": "V7"
                     },
-                    "min": "0",
-                    "max": "100",
-                    "units": "V",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -618,15 +656,17 @@
                   },
                   "I7": {
                     "type": "_NeedleVUMeter",
+                    "domain": {
+                      "min": "0",
+                      "max": "10",
+                      "units": "A"
+                    },
                     "label_active": {
                       "En": "A7",
                       "Fr": "A7",
                       "De": "A7",
                       "Es": "A7"
                     },
-                    "min": "0",
-                    "max": "10",
-                    "units": "A",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -636,15 +676,17 @@
                   },
                   "W7": {
                     "type": "_NeedleVUMeter",
+                    "domain": {
+                      "min": "0",
+                      "max": "1000",
+                      "units": "W"
+                    },
                     "label_active": {
                       "En": "W7",
                       "Fr": "W7",
                       "De": "W7",
                       "Es": "W7"
                     },
-                    "min": "0",
-                    "max": "1000",
-                    "units": "W",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -686,15 +728,17 @@
                 "fields": {
                   "V8": {
                     "type": "_NeedleVUMeter",
+                    "domain": {
+                      "min": "0",
+                      "max": "100",
+                      "units": "V"
+                    },
                     "label_active": {
                       "En": "V8",
                       "Fr": "V8",
                       "De": "V8",
                       "Es": "V8"
                     },
-                    "min": "0",
-                    "max": "100",
-                    "units": "V",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -704,15 +748,17 @@
                   },
                   "I8": {
                     "type": "_NeedleVUMeter",
+                    "domain": {
+                      "min": "0",
+                      "max": "10",
+                      "units": "A"
+                    },
                     "label_active": {
                       "En": "A8",
                       "Fr": "A8",
                       "De": "A8",
                       "Es": "A8"
                     },
-                    "min": "0",
-                    "max": "10",
-                    "units": "A",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -722,15 +768,17 @@
                   },
                   "W8": {
                     "type": "_NeedleVUMeter",
+                    "domain": {
+                      "min": "0",
+                      "max": "1000",
+                      "units": "W"
+                    },
                     "label_active": {
                       "En": "W8",
                       "Fr": "W8",
                       "De": "W8",
                       "Es": "W8"
                     },
-                    "min": "0",
-                    "max": "1000",
-                    "units": "W",
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",

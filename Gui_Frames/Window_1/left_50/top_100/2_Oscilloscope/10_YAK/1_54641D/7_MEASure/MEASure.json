@@ -49,15 +49,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "source": {
-                    "value": "CHAN1",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Source",
                       "Fr": "Source",
                       "De": "Quelle",
                       "Es": "Fuente"
                     },
-                    "units": "",
                     "description": {
                       "En": "CHANn, DIGn, MATH",
                       "Fr": "CHANn, DIGn, MATH",
@@ -98,15 +99,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "mode": {
-                    "value": "PERCent",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Mode",
                       "Fr": "Mode",
                       "De": "Modus",
                       "Es": "Modo"
                     },
-                    "units": "",
                     "description": {
                       "En": "PERCent or ABSolute",
                       "Fr": "POURCent ou ABSolu",

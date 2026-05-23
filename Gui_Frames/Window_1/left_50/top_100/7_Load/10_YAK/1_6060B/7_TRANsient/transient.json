@@ -106,15 +106,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "mode": {
-                    "value": "CONT",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Mode",
                       "Fr": "Mode",
                       "De": "Modus",
                       "Es": "Modo"
                     },
-                    "units": "",
                     "description": {
                       "En": "CONT, PULS, TOGG",
                       "Fr": "CONT, PULS, TOGG",
@@ -155,15 +156,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "value": {
-                    "value": "0.5",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "A"
+                    },
                     "label": {
                       "En": "Level A",
                       "Fr": "Niveau A",
                       "De": "Pegel A",
                       "Es": "Nivel A"
                     },
-                    "units": "A",
                     "description": {
                       "En": "Main Level",
                       "Fr": "Main Niveau",
@@ -204,15 +206,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "value": {
-                    "value": "5.0",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "A"
+                    },
                     "label": {
                       "En": "Level B",
                       "Fr": "Niveau B",
                       "De": "Pegel B",
                       "Es": "Nivel B"
                     },
-                    "units": "A",
                     "description": {
                       "En": "Transient Level",
                       "Fr": "Transitoire Niveau",
@@ -253,15 +256,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "value": {
-                    "value": "100",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
                     "label": {
                       "En": "Frequency",
                       "Fr": "Fréquence",
                       "De": "Frequenz",
                       "Es": "Frecuencia"
                     },
-                    "units": "Hz",
                     "description": {
                       "En": "Hz",
                       "Fr": "Hz",
@@ -302,15 +306,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "value": {
-                    "value": "50",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "%"
+                    },
                     "label": {
                       "En": "Duty Cycle",
                       "Fr": "Duty Cycle",
                       "De": "Duty Cycle",
                       "Es": "Duty Cycle"
                     },
-                    "units": "%",
                     "description": {
                       "En": "Percent",
                       "Fr": "Percent",

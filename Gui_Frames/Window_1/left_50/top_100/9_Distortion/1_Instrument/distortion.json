@@ -77,13 +77,15 @@
             "fields": {
               "set_value": {
                 "type": "_TextInput",
+                "value": {
+                  "default_value": "1.0"
+                },
                 "label_active": {
                   "En": "Set Value",
                   "Fr": "Set Valeur",
                   "De": "Set Wert",
                   "Es": "Set Valor"
                 },
-                "value_default": "1.0",
                 "message_details": {
                   "DC_LOAD_MODEL": {
                     "type": "_GuiActuator",

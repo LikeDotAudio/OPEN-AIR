@@ -49,15 +49,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "n": {
-                    "value": "0",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "D Ch",
                       "Fr": "Canal D",
                       "De": "D-Kanal",
                       "Es": "Canal D"
                     },
-                    "units": "",
                     "description": {
                       "En": "0-15",
                       "Fr": "0-15",
@@ -66,15 +67,16 @@
                     }
                   },
                   "state": {
-                    "value": "ON",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "State",
                       "Fr": "State",
                       "De": "State",
                       "Es": "State"
                     },
-                    "units": "",
                     "description": {
                       "En": "ON or OFF",
                       "Fr": "ON or OFF",
@@ -115,15 +117,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "n": {
-                    "value": "0",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "D Ch",
                       "Fr": "Canal D",
                       "De": "D-Kanal",
                       "Es": "Canal D"
                     },
-                    "units": "",
                     "description": {
                       "En": "0-15",
                       "Fr": "0-15",
@@ -132,15 +135,16 @@
                     }
                   },
                   "pos": {
-                    "value": "0",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Pos",
                       "Fr": "Pos",
                       "De": "Pos",
                       "Es": "Pos"
-                    },
-                    "units": ""
+                    }
                   }
                 }
               }
@@ -175,15 +179,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "n": {
-                    "value": "0",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "D Ch",
                       "Fr": "Canal D",
                       "De": "D-Kanal",
                       "Es": "Canal D"
                     },
-                    "units": "",
                     "description": {
                       "En": "0-15",
                       "Fr": "0-15",
@@ -192,15 +197,16 @@
                     }
                   },
                   "label": {
-                    "value": "CLK",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Label",
                       "Fr": "Étiquette",
                       "De": "Beschriftung",
                       "Es": "Etiqueta"
-                    },
-                    "units": ""
+                    }
                   }
                 }
               }
@@ -235,15 +241,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "n": {
-                    "value": "1",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Pod",
                       "Fr": "Pod",
                       "De": "Pod",
                       "Es": "Pod"
                     },
-                    "units": "",
                     "description": {
                       "En": "1 or 2",
                       "Fr": "1 ou 2",
@@ -252,15 +259,16 @@
                     }
                   },
                   "thresh": {
-                    "value": "TTL",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Level",
                       "Fr": "Niveau",
                       "De": "Pegel",
                       "Es": "Nivel"
                     },
-                    "units": "",
                     "description": {
                       "En": "TTL, CMOS, ECL, or Voltage",
                       "Fr": "TTL, CMOS, ECL, or Tension",

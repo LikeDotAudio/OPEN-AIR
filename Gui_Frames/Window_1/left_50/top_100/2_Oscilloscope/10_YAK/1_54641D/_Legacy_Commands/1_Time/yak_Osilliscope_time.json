@@ -58,15 +58,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "count": {
-                        "value": "8",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": ""
+                        },
                         "label": {
                           "En": "Count",
                           "Fr": "Count",
                           "De": "Count",
                           "Es": "Count"
                         },
-                        "units": "",
                         "description": {
                           "En": "2 to 65536",
                           "Fr": "2 to 65536",
@@ -118,15 +119,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "scale": {
-                        "value": "0.001",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "s/div"
+                        },
                         "label": {
                           "En": "Scale",
                           "Fr": "Échelle",
                           "De": "Skala",
                           "Es": "Escala"
                         },
-                        "units": "s/div",
                         "description": {
                           "En": "Seconds per division",
                           "Fr": "Seconds per division",
@@ -167,15 +169,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "position": {
-                        "value": "0.0",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "s"
+                        },
                         "label": {
                           "En": "Position",
                           "Fr": "Position",
                           "De": "Position",
                           "Es": "Position"
                         },
-                        "units": "s",
                         "description": {
                           "En": "Offset in seconds",
                           "Fr": "Décalage in seconds",

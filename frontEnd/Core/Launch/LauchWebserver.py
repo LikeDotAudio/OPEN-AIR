@@ -37,6 +37,18 @@ def get_directory_tree(path):
         pass
     return tree
 
+def strip_volatile(obj):
+    """Remove runtime-only keys (e.g. value.current_value) so they never persist."""
+    if isinstance(obj, dict):
+        obj.pop("current_value", None)
+        for v in obj.values():
+            strip_volatile(v)
+    elif isinstance(obj, list):
+        for v in obj:
+            strip_volatile(v)
+    return obj
+
+
 def get_grab_bag():
     """Scan oaGuiElements for sample.json palette templates (mirrors the Python
     GrabBagLoader). Returns a flat, categorized component list for the editor."""
@@ -126,6 +138,7 @@ class APIRequestHandler(SimpleHTTPRequestHandler):
                         dst.write(src.read())
                     backup_name = os.path.basename(backup_path)
 
+                strip_volatile(content)  # never persist value.current_value
                 with open(abs_path, "w", encoding="utf-8") as f:
                     json.dump(content, f, indent=2, ensure_ascii=False)
 

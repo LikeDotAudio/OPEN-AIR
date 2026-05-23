@@ -34,6 +34,19 @@
         "fields": {
           "Stop_Sign_1": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -5.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -5.0
+            },
+            "layout": {},
             "label": {
               "En": "Stop Sign",
               "Fr": "Arrêter Sign",
@@ -43,13 +56,6 @@
             "geometry": {
               "width": 250,
               "height": 250
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -5.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -124,7 +130,6 @@
             "width": 250,
             "height": 250,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "octagon",
             "bezel_width": 6,
             "Pointer_Style": "needle",
@@ -133,17 +138,23 @@
             "sub_tick_length": 4,
             "label_radius_offset": 10,
             "needle_length_factor": 1.0,
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -5.0,
-            "value": -5.0,
-            "default_value": -5.0,
             "path": "Stop_Sign_Variations/Stop_Sign_1"
           },
           "Stop_Sign_2_Caution": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -5.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -5.0
+            },
+            "layout": {},
             "label": {
               "En": "Caution Yellow",
               "Fr": "Caution Yellow",
@@ -153,13 +164,6 @@
             "geometry": {
               "width": 250,
               "height": 250
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -5.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -226,7 +230,6 @@
             "width": 250,
             "height": 250,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "octagon",
             "bezel_width": 6,
             "Pointer_Style": "needle",
@@ -235,17 +238,23 @@
             "sub_tick_length": 4,
             "label_radius_offset": 10,
             "needle_length_factor": 1.0,
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -5.0,
-            "value": -5.0,
-            "default_value": -5.0,
             "path": "Stop_Sign_Variations/Stop_Sign_2_Caution"
           },
           "Stop_Sign_3_Emerald": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -10.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -10.0
+            },
+            "layout": {},
             "label": {
               "En": "Emerald Sign",
               "Fr": "Emerald Sign",
@@ -255,13 +264,6 @@
             "geometry": {
               "width": 220,
               "height": 220
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -10.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -310,23 +312,28 @@
             "width": 220,
             "height": 220,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "octagon",
             "bezel_width": 2,
             "Pointer_Style": "teardrop",
             "sub_ticks": 4,
             "label_radius_offset": 10,
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -10.0,
-            "value": -10.0,
-            "default_value": -10.0,
             "path": "Stop_Sign_Variations/Stop_Sign_3_Emerald"
           },
           "Stop_Sign_4_Blueprint": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -15.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -15.0
+            },
+            "layout": {},
             "label": {
               "En": "Blueprint",
               "Fr": "Blueprint",
@@ -336,13 +343,6 @@
             "geometry": {
               "width": 220,
               "height": 220
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -15.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -391,23 +391,28 @@
             "width": 220,
             "height": 220,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "octagon",
             "bezel_width": 2,
             "Pointer_Style": "line",
             "sub_ticks": 4,
             "label_radius_offset": 10,
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -15.0,
-            "value": -15.0,
-            "default_value": -15.0,
             "path": "Stop_Sign_Variations/Stop_Sign_4_Blueprint"
           },
           "Stop_Sign_5_Royal": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -2.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -2.0
+            },
+            "layout": {},
             "label": {
               "En": "Royal Octagon",
               "Fr": "Royal Octagon",
@@ -417,13 +422,6 @@
             "geometry": {
               "width": 220,
               "height": 220
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -2.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -473,23 +471,28 @@
             "width": 220,
             "height": 220,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "octagon",
             "bezel_width": 6,
             "Pointer_Style": "spade",
             "sub_ticks": 4,
             "label_radius_offset": 10,
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -2.0,
-            "value": -2.0,
-            "default_value": -2.0,
             "path": "Stop_Sign_Variations/Stop_Sign_5_Royal"
           },
           "Stop_Sign_6_Night": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -5.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -5.0
+            },
+            "layout": {},
             "label": {
               "En": "Night Mode",
               "Fr": "Night Mode",
@@ -499,13 +502,6 @@
             "geometry": {
               "width": 220,
               "height": 220
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -5.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -553,23 +549,28 @@
             "width": 220,
             "height": 220,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "octagon",
             "bezel_width": 4,
             "Pointer_Style": "knife-edge",
             "sub_ticks": 4,
             "label_radius_offset": 10,
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -5.0,
-            "value": -5.0,
-            "default_value": -5.0,
             "path": "Stop_Sign_Variations/Stop_Sign_6_Night"
           },
           "Stop_Sign_7_Vintage": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -8.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -8.0
+            },
+            "layout": {},
             "label": {
               "En": "Vintage Analog",
               "Fr": "Vintage Analog",
@@ -579,13 +580,6 @@
             "geometry": {
               "width": 220,
               "height": 220
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -8.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -634,23 +628,28 @@
             "width": 220,
             "height": 220,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "octagon",
             "bezel_width": 5,
             "Pointer_Style": "baton",
             "sub_ticks": 4,
             "label_radius_offset": 10,
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -8.0,
-            "value": -8.0,
-            "default_value": -8.0,
             "path": "Stop_Sign_Variations/Stop_Sign_7_Vintage"
           },
           "Stop_Sign_8_Cyber": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -1.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -1.0
+            },
+            "layout": {},
             "label": {
               "En": "Cyber Sign",
               "Fr": "Cyber Sign",
@@ -660,13 +659,6 @@
             "geometry": {
               "width": 220,
               "height": 220
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -1.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -717,20 +709,12 @@
             "width": 220,
             "height": 220,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "octagon",
             "bezel_width": 6,
             "enable_lighting": true,
             "Pointer_Style": "needle",
             "sub_ticks": 4,
             "label_radius_offset": 10,
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -1.0,
-            "value": -1.0,
-            "default_value": -1.0,
             "path": "Stop_Sign_Variations/Stop_Sign_8_Cyber"
           }
         },

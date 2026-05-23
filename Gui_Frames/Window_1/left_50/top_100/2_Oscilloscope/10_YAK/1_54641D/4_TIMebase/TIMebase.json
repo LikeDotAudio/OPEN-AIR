@@ -49,15 +49,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "scale": {
-                    "value": "100e-6",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "s/div"
+                    },
                     "label": {
                       "En": "Scale",
                       "Fr": "Échelle",
                       "De": "Skala",
                       "Es": "Escala"
-                    },
-                    "units": "s/div"
+                    }
                   }
                 }
               }
@@ -92,15 +93,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "pos": {
-                    "value": "0.0",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "s"
+                    },
                     "label": {
                       "En": "Delay",
                       "Fr": "Delay",
                       "De": "Delay",
                       "Es": "Delay"
-                    },
-                    "units": "s"
+                    }
                   }
                 }
               }
@@ -135,15 +137,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "ref": {
-                    "value": "CENTer",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Ref",
                       "Fr": "Réf",
                       "De": "Ref",
                       "Es": "Ref"
                     },
-                    "units": "",
                     "description": {
                       "En": "LEFT, CENTer, RIGHt",
                       "Fr": "LEFT, CENTer, RIGHt",
@@ -184,15 +187,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "mode": {
-                    "value": "MAIN",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Mode",
                       "Fr": "Mode",
                       "De": "Modus",
                       "Es": "Modo"
                     },
-                    "units": "",
                     "description": {
                       "En": "MAIN, WINDow, XY, ROLL",
                       "Fr": "MAIN, WINDow, XY, ROLL",
@@ -242,15 +246,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "scale": {
-                        "value": "10e-6",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "s/div"
+                        },
                         "label": {
                           "En": "Zoom Scale",
                           "Fr": "Zoom Échelle",
                           "De": "Zoom Skala",
                           "Es": "Zoom Escala"
-                        },
-                        "units": "s/div"
+                        }
                       }
                     }
                   }
@@ -285,15 +290,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "pos": {
-                        "value": "0.0",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "s"
+                        },
                         "label": {
                           "En": "Zoom Pos",
                           "Fr": "Zoom Pos",
                           "De": "Zoom Pos",
                           "Es": "Zoom Pos"
-                        },
-                        "units": "s"
+                        }
                       }
                     }
                   }

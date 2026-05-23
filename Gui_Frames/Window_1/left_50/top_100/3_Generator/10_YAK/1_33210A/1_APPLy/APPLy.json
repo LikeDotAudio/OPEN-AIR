@@ -58,26 +58,28 @@
                     "type": "OcaBlock",
                     "fields": {
                       "freq": {
-                        "value": "1000",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "Hz"
+                        },
                         "label": {
                           "En": "Frequency",
                           "Fr": "Fréquence",
                           "De": "Frequenz",
                           "Es": "Frecuencia"
-                        },
-                        "units": "Hz"
+                        }
                       },
                       "amp": {
-                        "value": "1.0",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "Vpp"
+                        },
                         "label": {
                           "En": "Amplitude",
                           "Fr": "Amplitude",
                           "De": "Amplitude",
                           "Es": "Amplitud"
                         },
-                        "units": "Vpp",
                         "description": {
                           "En": "Amplitude in Vpp",
                           "Fr": "Amplitude en Vpp",
@@ -86,15 +88,16 @@
                         }
                       },
                       "offset": {
-                        "value": "0.0",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "V"
+                        },
                         "label": {
                           "En": "Offset",
                           "Fr": "Décalage",
                           "De": "Versatz",
                           "Es": "Compensación"
                         },
-                        "units": "V",
                         "description": {
                           "En": "Offset in Volts",
                           "Fr": "Décalage in Volts",
@@ -135,37 +138,40 @@
                     "type": "OcaBlock",
                     "fields": {
                       "freq": {
-                        "value": "1000",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "Hz"
+                        },
                         "label": {
                           "En": "Frequency",
                           "Fr": "Fréquence",
                           "De": "Frequenz",
                           "Es": "Frecuencia"
-                        },
-                        "units": "Hz"
+                        }
                       },
                       "amp": {
-                        "value": "1.0",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "Vpp"
+                        },
                         "label": {
                           "En": "Amplitude",
                           "Fr": "Amplitude",
                           "De": "Amplitude",
                           "Es": "Amplitud"
-                        },
-                        "units": "Vpp"
+                        }
                       },
                       "offset": {
-                        "value": "0.0",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "V"
+                        },
                         "label": {
                           "En": "Offset",
                           "Fr": "Décalage",
                           "De": "Versatz",
                           "Es": "Compensación"
-                        },
-                        "units": "V"
+                        }
                       }
                     }
                   }
@@ -200,37 +206,40 @@
                     "type": "OcaBlock",
                     "fields": {
                       "freq": {
-                        "value": "1000",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "Hz"
+                        },
                         "label": {
                           "En": "Frequency",
                           "Fr": "Fréquence",
                           "De": "Frequenz",
                           "Es": "Frecuencia"
-                        },
-                        "units": "Hz"
+                        }
                       },
                       "amp": {
-                        "value": "1.0",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "Vpp"
+                        },
                         "label": {
                           "En": "Amplitude",
                           "Fr": "Amplitude",
                           "De": "Amplitude",
                           "Es": "Amplitud"
-                        },
-                        "units": "Vpp"
+                        }
                       },
                       "offset": {
-                        "value": "0.0",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "V"
+                        },
                         "label": {
                           "En": "Offset",
                           "Fr": "Décalage",
                           "De": "Versatz",
                           "Es": "Compensación"
-                        },
-                        "units": "V"
+                        }
                       }
                     }
                   }
@@ -278,15 +287,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "config_string": {
-                    "value": "\"SIN 1000, 3.0, 0.0\"",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Config String",
                       "Fr": "Config String",
                       "De": "Config String",
                       "Es": "Config String"
-                    },
-                    "units": ""
+                    }
                   }
                 }
               }

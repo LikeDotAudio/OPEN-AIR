@@ -105,16 +105,20 @@
         "fields": {
           "examplefields": {
             "type": "ProgressBar",
+            "domain": {
+              "min": 0,
+              "max": 1000,
+              "units": "Units"
+            },
+            "value": {
+              "default_value": 750
+            },
             "label_active": {
               "En": "System Load",
               "Fr": "System Charger",
               "De": "System Laden",
               "Es": "System Cargar"
             },
-            "min": 0,
-            "max": 1000,
-            "value_default": 750,
-            "units": "Units",
             "notes": "A progress bar indicating system load."
           }
         }
@@ -130,16 +134,20 @@
         "fields": {
           "examplefields": {
             "type": "ProgressBar",
+            "domain": {
+              "min": -20,
+              "max": 50,
+              "units": "°C"
+            },
+            "value": {
+              "default_value": 18.2
+            },
             "label_active": {
               "En": "Temperature Sensor",
               "Fr": "Temperature Sensor",
               "De": "Temperature Sensor",
               "Es": "Temperature Sensor"
             },
-            "min": -20,
-            "max": 50,
-            "value_default": 18.2,
-            "units": "°C",
             "notes": "Displays temperature within a specific range."
           }
         }
@@ -155,16 +163,20 @@
         "fields": {
           "examplefields": {
             "type": "ProgressBar",
+            "domain": {
+              "min": 0,
+              "max": 50,
+              "units": "Steps"
+            },
+            "value": {
+              "default_value": 40
+            },
             "label_active": {
               "En": "Initialization Steps",
               "Fr": "Initialization Steps",
               "De": "Initialization Steps",
               "Es": "Initialization Steps"
             },
-            "min": 0,
-            "max": 50,
-            "value_default": 40,
-            "units": "Steps",
             "notes": "Progress bar tracking steps in an initialization process."
           }
         }

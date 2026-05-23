@@ -37,6 +37,9 @@
         "fields": {
           "toggler_input_mic": {
             "type": "_TrapezoidButtonToggler",
+            "value": {
+              "default_value": "Mic"
+            },
             "label_active": {
               "En": "Input",
               "Fr": "Entrée",
@@ -48,7 +51,6 @@
               "Line",
               "USB"
             ],
-            "value_default": "Mic",
             "width": 80,
             "height": 50,
             "color": "#6a9955",
@@ -62,6 +64,9 @@
           },
           "toggler_mode_latching": {
             "type": "_TrapezoidButtonToggler",
+            "value": {
+              "default_value": "Normal"
+            },
             "label_active": {
               "En": "Mode",
               "Fr": "Mode",
@@ -73,7 +78,6 @@
               "Wide",
               "Mono"
             ],
-            "value_default": "Normal",
             "width": 70,
             "height": 70,
             "color": "#2196F3",
@@ -87,6 +91,9 @@
           },
           "toggler_eq_band_momentary": {
             "type": "_TrapezoidButtonToggler",
+            "value": {
+              "default_value": "MF"
+            },
             "label_active": {
               "En": "EQ Band",
               "Fr": "Bande EQ",
@@ -99,7 +106,6 @@
               "HF",
               "Parametric"
             ],
-            "value_default": "MF",
             "width": 60,
             "height": 60,
             "color": "#D32F2F",
@@ -113,6 +119,9 @@
           },
           "toggler_preamp_latching": {
             "type": "_TrapezoidButtonToggler",
+            "value": {
+              "default_value": "Solid State"
+            },
             "label_active": {
               "En": "Preamp",
               "Fr": "Preamp",
@@ -124,7 +133,6 @@
               "Solid State",
               "Digital"
             ],
-            "value_default": "Solid State",
             "width": 70,
             "height": 70,
             "color": "#9C27B0",
@@ -138,6 +146,9 @@
           },
           "toggler_channel_group_momentary": {
             "type": "_TrapezoidButtonToggler",
+            "value": {
+              "default_value": "A"
+            },
             "label_active": {
               "En": "Group",
               "Fr": "Group",
@@ -150,7 +161,6 @@
               "C",
               "D"
             ],
-            "value_default": "A",
             "width": 50,
             "height": 50,
             "color": "#FF9800",
@@ -164,6 +174,9 @@
           },
           "toggler_effect_latching": {
             "type": "_TrapezoidButtonToggler",
+            "value": {
+              "default_value": "Off"
+            },
             "label_active": {
               "En": "Effect",
               "Fr": "Effect",
@@ -175,7 +188,6 @@
               "On",
               "Send"
             ],
-            "value_default": "Off",
             "width": 60,
             "height": 60,
             "color": "#00BCD4",
@@ -189,6 +201,9 @@
           },
           "toggler_output_momentary": {
             "type": "_TrapezoidButtonToggler",
+            "value": {
+              "default_value": "Main"
+            },
             "label_active": {
               "En": "Output",
               "Fr": "Sortie",
@@ -200,7 +215,6 @@
               "Aux",
               "Headphones"
             ],
-            "value_default": "Main",
             "width": 70,
             "height": 70,
             "color": "#607D8B",
@@ -214,6 +228,9 @@
           },
           "toggler_source_wide": {
             "type": "_TrapezoidButtonToggler",
+            "value": {
+              "default_value": "A"
+            },
             "label_active": {
               "En": "Source",
               "Fr": "Source",
@@ -228,7 +245,6 @@
               "E",
               "F"
             ],
-            "value_default": "A",
             "width": 100,
             "height": 50,
             "alpha": 0.9,
@@ -243,6 +259,9 @@
           },
           "toggler_gate_latching": {
             "type": "_TrapezoidButtonToggler",
+            "value": {
+              "default_value": "Off"
+            },
             "label_active": {
               "En": "Gate",
               "Fr": "Porte",
@@ -254,7 +273,6 @@
               "On",
               "Auto"
             ],
-            "value_default": "Off",
             "width": 50,
             "height": 50,
             "color": "#4CAF50",
@@ -268,6 +286,9 @@
           },
           "toggler_phase_momentary": {
             "type": "_TrapezoidButtonToggler",
+            "value": {
+              "default_value": "Normal"
+            },
             "label_active": {
               "En": "Phase",
               "Fr": "Phase",
@@ -278,7 +299,6 @@
               "Normal",
               "Invert"
             ],
-            "value_default": "Normal",
             "width": 60,
             "height": 60,
             "color": "#9C27B0",
@@ -318,6 +338,9 @@
         "fields": {
           "toggler_mode_latching": {
             "type": "_TrapezoidButtonToggler",
+            "value": {
+              "default_value": "Normal"
+            },
             "label_active": {
               "En": "Mode",
               "Fr": "Mode",
@@ -329,7 +352,6 @@
               "Wide",
               "Mono"
             ],
-            "value_default": "Normal",
             "width": 70,
             "height": 70,
             "color": "#2196F3",
@@ -343,6 +365,9 @@
           },
           "toggler_type_momentary": {
             "type": "_TrapezoidButtonToggler",
+            "value": {
+              "default_value": "A"
+            },
             "label_active": {
               "En": "Type",
               "Fr": "Type",
@@ -354,7 +379,6 @@
               "B",
               "C"
             ],
-            "value_default": "A",
             "width": 60,
             "height": 60,
             "color": "#D32F2F",
@@ -368,6 +392,9 @@
           },
           "toggler_input_latching": {
             "type": "_TrapezoidButtonToggler",
+            "value": {
+              "default_value": "Mic"
+            },
             "label_active": {
               "En": "Input",
               "Fr": "Entrée",
@@ -379,7 +406,6 @@
               "Line",
               "USB"
             ],
-            "value_default": "Mic",
             "width": 80,
             "height": 80,
             "color": "#4CAF50",
@@ -393,6 +419,9 @@
           },
           "toggler_eq_momentary": {
             "type": "_TrapezoidButtonToggler",
+            "value": {
+              "default_value": "MF"
+            },
             "label_active": {
               "En": "EQ",
               "Fr": "EQ",
@@ -404,7 +433,6 @@
               "MF",
               "HF"
             ],
-            "value_default": "MF",
             "width": 50,
             "height": 50,
             "color": "#FF9800",
@@ -418,6 +446,9 @@
           },
           "toggler_preamp_latching": {
             "type": "_TrapezoidButtonToggler",
+            "value": {
+              "default_value": "SS"
+            },
             "label_active": {
               "En": "Preamp",
               "Fr": "Preamp",
@@ -429,7 +460,6 @@
               "SS",
               "Digital"
             ],
-            "value_default": "SS",
             "width": 70,
             "height": 70,
             "color": "#9C27B0",
@@ -443,6 +473,9 @@
           },
           "toggler_channel_momentary": {
             "type": "_TrapezoidButtonToggler",
+            "value": {
+              "default_value": "1-4"
+            },
             "label_active": {
               "En": "Channel",
               "Fr": "Canal",
@@ -454,7 +487,6 @@
               "5-8",
               "All"
             ],
-            "value_default": "1-4",
             "width": 60,
             "height": 60,
             "color": "#00BCD4",
@@ -468,6 +500,9 @@
           },
           "toggler_effect_latching": {
             "type": "_TrapezoidButtonToggler",
+            "value": {
+              "default_value": "Off"
+            },
             "label_active": {
               "En": "Effect",
               "Fr": "Effect",
@@ -479,7 +514,6 @@
               "On",
               "Send"
             ],
-            "value_default": "Off",
             "width": 60,
             "height": 60,
             "color": "#607D8B",
@@ -493,6 +527,9 @@
           },
           "toggler_output_momentary": {
             "type": "_TrapezoidButtonToggler",
+            "value": {
+              "default_value": "Main"
+            },
             "label_active": {
               "En": "Output",
               "Fr": "Sortie",
@@ -504,7 +541,6 @@
               "Aux",
               "Phones"
             ],
-            "value_default": "Main",
             "width": 80,
             "height": 80,
             "color": "#795548",
@@ -518,6 +554,9 @@
           },
           "toggler_gate_latching": {
             "type": "_TrapezoidButtonToggler",
+            "value": {
+              "default_value": "Off"
+            },
             "label_active": {
               "En": "Gate",
               "Fr": "Porte",
@@ -529,7 +568,6 @@
               "On",
               "Auto"
             ],
-            "value_default": "Off",
             "width": 50,
             "height": 50,
             "color": "#4CAF50",
@@ -543,6 +581,9 @@
           },
           "toggler_phase_momentary": {
             "type": "_TrapezoidButtonToggler",
+            "value": {
+              "default_value": "Normal"
+            },
             "label_active": {
               "En": "Phase",
               "Fr": "Phase",
@@ -553,7 +594,6 @@
               "Normal",
               "Invert"
             ],
-            "value_default": "Normal",
             "width": 60,
             "height": 60,
             "color": "#9C27B0",
@@ -593,6 +633,9 @@
         "fields": {
           "eq_lf_latching": {
             "type": "_TrapezoidButtonToggler",
+            "value": {
+              "default_value": "Flat"
+            },
             "label_active": {
               "En": "LF Band",
               "Fr": "Bande LF",
@@ -604,7 +647,6 @@
               "Boost",
               "Cut"
             ],
-            "value_default": "Flat",
             "width": 70,
             "height": 45,
             "color": "#B71C1C",
@@ -618,6 +660,9 @@
           },
           "eq_mf_momentary": {
             "type": "_TrapezoidButtonToggler",
+            "value": {
+              "default_value": "Flat"
+            },
             "label_active": {
               "En": "MF Band",
               "Fr": "Bande MF",
@@ -629,7 +674,6 @@
               "Boost",
               "Cut"
             ],
-            "value_default": "Flat",
             "width": 60,
             "height": 60,
             "color": "#2196F3",
@@ -643,6 +687,9 @@
           },
           "eq_hf_latching": {
             "type": "_TrapezoidButtonToggler",
+            "value": {
+              "default_value": "Flat"
+            },
             "label_active": {
               "En": "HF Band",
               "Fr": "Bande HF",
@@ -654,7 +701,6 @@
               "Boost",
               "Cut"
             ],
-            "value_default": "Flat",
             "width": 80,
             "height": 80,
             "color": "#4CAF50",
@@ -668,6 +714,9 @@
           },
           "filter_hpf_momentary": {
             "type": "_TrapezoidButtonToggler",
+            "value": {
+              "default_value": "Off"
+            },
             "label_active": {
               "En": "HPF",
               "Fr": "HPF",
@@ -678,7 +727,6 @@
               "Off",
               "On"
             ],
-            "value_default": "Off",
             "width": 50,
             "height": 50,
             "color": "#FFC107",
@@ -692,6 +740,9 @@
           },
           "filter_lpf_latching": {
             "type": "_TrapezoidButtonToggler",
+            "value": {
+              "default_value": "Off"
+            },
             "label_active": {
               "En": "LPF",
               "Fr": "LPF",
@@ -702,7 +753,6 @@
               "Off",
               "On"
             ],
-            "value_default": "Off",
             "width": 70,
             "height": 70,
             "color": "#9C27B0",
@@ -716,6 +766,9 @@
           },
           "filter_bpf_momentary": {
             "type": "_TrapezoidButtonToggler",
+            "value": {
+              "default_value": "Off"
+            },
             "label_active": {
               "En": "BPF",
               "Fr": "BPF",
@@ -726,7 +779,6 @@
               "Off",
               "On"
             ],
-            "value_default": "Off",
             "width": 60,
             "height": 60,
             "color": "#00BCD4",
@@ -740,6 +792,9 @@
           },
           "slope_latching_orange": {
             "type": "_TrapezoidButtonToggler",
+            "value": {
+              "default_value": "12dB"
+            },
             "label_active": {
               "En": "Slope",
               "Fr": "Slope",
@@ -751,7 +806,6 @@
               "24dB",
               "48dB"
             ],
-            "value_default": "12dB",
             "width": 70,
             "height": 70,
             "color": "#FF9800",
@@ -765,6 +819,9 @@
           },
           "q_momentary_grey": {
             "type": "_TrapezoidButtonToggler",
+            "value": {
+              "default_value": "Narrow"
+            },
             "label_active": {
               "En": "Q",
               "Fr": "Q",
@@ -775,7 +832,6 @@
               "Narrow",
               "Wide"
             ],
-            "value_default": "Narrow",
             "width": 50,
             "height": 50,
             "color": "#607D8B",
@@ -789,6 +845,9 @@
           },
           "resonance_latching_teal": {
             "type": "_TrapezoidButtonToggler",
+            "value": {
+              "default_value": "Med"
+            },
             "label_active": {
               "En": "Res",
               "Fr": "Res",
@@ -800,7 +859,6 @@
               "Med",
               "High"
             ],
-            "value_default": "Med",
             "width": 60,
             "height": 60,
             "color": "#009688",
@@ -814,6 +872,9 @@
           },
           "gain_momentary_purple": {
             "type": "_TrapezoidButtonToggler",
+            "value": {
+              "default_value": "Flat"
+            },
             "label_active": {
               "En": "Gain",
               "Fr": "Gain",
@@ -825,7 +886,6 @@
               "Cut",
               "Flat"
             ],
-            "value_default": "Flat",
             "width": 70,
             "height": 70,
             "color": "#9C27B0",
@@ -865,6 +925,9 @@
         "fields": {
           "preamp_tube_latching": {
             "type": "_TrapezoidButtonToggler",
+            "value": {
+              "default_value": "Tube"
+            },
             "label_active": {
               "En": "Tube",
               "Fr": "Tube",
@@ -876,7 +939,6 @@
               "SS",
               "FET"
             ],
-            "value_default": "Tube",
             "width": 70,
             "height": 70,
             "color": "#d18616",
@@ -890,6 +952,9 @@
           },
           "preamp_ss_momentary": {
             "type": "_TrapezoidButtonToggler",
+            "value": {
+              "default_value": "SS"
+            },
             "label_active": {
               "En": "SS",
               "Fr": "SS",
@@ -901,7 +966,6 @@
               "SS",
               "FET"
             ],
-            "value_default": "SS",
             "width": 60,
             "height": 60,
             "color": "#c75450",
@@ -915,6 +979,9 @@
           },
           "preamp_fet_latching": {
             "type": "_TrapezoidButtonToggler",
+            "value": {
+              "default_value": "FET"
+            },
             "label_active": {
               "En": "FET",
               "Fr": "FET",
@@ -926,7 +993,6 @@
               "SS",
               "FET"
             ],
-            "value_default": "FET",
             "width": 80,
             "height": 80,
             "color": "#6a9955",
@@ -940,6 +1006,9 @@
           },
           "preamp_opamp_momentary": {
             "type": "_TrapezoidButtonToggler",
+            "value": {
+              "default_value": "OpAmp"
+            },
             "label_active": {
               "En": "OpAmp",
               "Fr": "OpAmp",
@@ -950,7 +1019,6 @@
               "OpAmp",
               "Discrete"
             ],
-            "value_default": "OpAmp",
             "width": 50,
             "height": 50,
             "color": "#2196F3",
@@ -964,6 +1032,9 @@
           },
           "preamp_discrete_latching": {
             "type": "_TrapezoidButtonToggler",
+            "value": {
+              "default_value": "Discrete"
+            },
             "label_active": {
               "En": "Discrete",
               "Fr": "Discrete",
@@ -974,7 +1045,6 @@
               "OpAmp",
               "Discrete"
             ],
-            "value_default": "Discrete",
             "width": 70,
             "height": 70,
             "color": "#9C27B0",
@@ -988,6 +1058,9 @@
           },
           "preamp_vintage_momentary": {
             "type": "_TrapezoidButtonToggler",
+            "value": {
+              "default_value": "Vintage"
+            },
             "label_active": {
               "En": "Vintage",
               "Fr": "Vintage",
@@ -998,7 +1071,6 @@
               "Vintage",
               "Modern"
             ],
-            "value_default": "Vintage",
             "width": 60,
             "height": 60,
             "color": "#795548",
@@ -1012,6 +1084,9 @@
           },
           "preamp_modern_latching": {
             "type": "_TrapezoidButtonToggler",
+            "value": {
+              "default_value": "Modern"
+            },
             "label_active": {
               "En": "Modern",
               "Fr": "Moderne",
@@ -1022,7 +1097,6 @@
               "Vintage",
               "Modern"
             ],
-            "value_default": "Modern",
             "width": 70,
             "height": 70,
             "color": "#607D8B",
@@ -1036,6 +1110,9 @@
           },
           "preamp_clean_momentary": {
             "type": "_TrapezoidButtonToggler",
+            "value": {
+              "default_value": "Clean"
+            },
             "label_active": {
               "En": "Clean",
               "Fr": "Clean",
@@ -1046,7 +1123,6 @@
               "Clean",
               "Dirty"
             ],
-            "value_default": "Clean",
             "width": 50,
             "height": 50,
             "color": "#4CAF50",
@@ -1060,6 +1136,9 @@
           },
           "preamp_boost_latching": {
             "type": "_TrapezoidButtonToggler",
+            "value": {
+              "default_value": "Boost"
+            },
             "label_active": {
               "En": "Boost",
               "Fr": "Boost",
@@ -1070,7 +1149,6 @@
               "Boost",
               "Cut"
             ],
-            "value_default": "Boost",
             "width": 60,
             "height": 60,
             "color": "#FFC107",
@@ -1084,6 +1162,9 @@
           },
           "preamp_cut_momentary": {
             "type": "_TrapezoidButtonToggler",
+            "value": {
+              "default_value": "Cut"
+            },
             "label_active": {
               "En": "Cut",
               "Fr": "Cut",
@@ -1094,7 +1175,6 @@
               "Boost",
               "Cut"
             ],
-            "value_default": "Cut",
             "width": 70,
             "height": 70,
             "color": "#D32F2F",

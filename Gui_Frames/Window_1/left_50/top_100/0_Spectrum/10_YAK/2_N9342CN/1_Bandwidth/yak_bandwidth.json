@@ -75,57 +75,58 @@
                 },
                 "fields": {
                   "RBW_Hz": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
                     "label": {
                       "En": "Resolution Bandwidth (Hz)",
                       "Fr": "Résolution Bandwidth (Hz)",
                       "De": "Auflösung Bandwidth (Hz)",
                       "Es": "Resolución Bandwidth (Hz)"
-                    },
-                    "value": "The resolution bandwidth in Hz.",
-                    "type": "_GuiValue",
-                    "units": "Hz"
+                    }
                   },
                   "VBW_Hz": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
                     "label": {
                       "En": "Video Bandwidth (Hz)",
                       "Fr": "Video Largeur de bande (Hz)",
                       "De": "Video Bandbreite (Hz)",
                       "Es": "Video Ancho de banda (Hz)"
-                    },
-                    "value": "The video bandwidth in Hz.",
-                    "type": "_GuiValue",
-                    "units": "Hz"
+                    }
                   },
                   "VBW_Auto_On": {
+                    "type": "_GuiValue",
                     "label": {
                       "En": "VBW Auto State",
                       "Fr": "État Auto VBW",
                       "De": "VBW Auto-Status",
                       "Es": "Estado Auto VBW"
-                    },
-                    "value": "Boolean for VBW auto state.",
-                    "type": "_GuiValue"
+                    }
                   },
                   "Continuous_Mode_On": {
+                    "type": "_GuiValue",
                     "label": {
                       "En": "Continuous Mode State",
                       "Fr": "Continu Mode State",
                       "De": "Kontinuierlich Modus State",
                       "Es": "Continuo Modo State"
-                    },
-                    "value": "Boolean for continuous mode state.",
-                    "type": "_GuiValue"
+                    }
                   },
                   "Sweep_Time_s": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "s"
+                    },
                     "label": {
                       "En": "Sweep Time (s)",
                       "Fr": "Temps de balayage (s)",
                       "De": "Wobbelzeit (s)",
                       "Es": "Tiempo de barrido (s)"
-                    },
-                    "value": "The sweep time in seconds.",
-                    "type": "_GuiValue",
-                    "units": "s"
+                    }
                   }
                 }
               }
@@ -190,15 +191,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "rbw_hz_value": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
                     "label": {
                       "En": "Resolution Bandwidth (Hz)",
                       "Fr": "Résolution Bandwidth (Hz)",
                       "De": "Auflösung Bandwidth (Hz)",
                       "Es": "Resolución Bandwidth (Hz)"
                     },
-                    "value": "100000",
-                    "type": "_GuiValue",
-                    "units": "Hz",
                     "description": {
                       "En": "The SCPI input for RBW.",
                       "Fr": "The SCPI input for RBW.",
@@ -207,15 +209,16 @@
                     }
                   },
                   "vbw_hz_value": {
-                    "value": "100000",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
                     "label": {
                       "En": "Video Bandwidth (Hz)",
                       "Fr": "Video Largeur de bande (Hz)",
                       "De": "Video Bandbreite (Hz)",
                       "Es": "Video Ancho de banda (Hz)"
                     },
-                    "units": "Hz",
                     "description": {
                       "En": "The SCPI input for VBW.",
                       "Fr": "The SCPI input for VBW.",
@@ -269,15 +272,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "sweep_time_s": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "s"
+                    },
                     "label": {
                       "En": "Sweep Time (s)",
                       "Fr": "Temps de balayage (s)",
                       "De": "Wobbelzeit (s)",
                       "Es": "Tiempo de barrido (s)"
-                    },
-                    "value": "4",
-                    "type": "_GuiValue",
-                    "units": "s"
+                    }
                   }
                 }
               }
@@ -325,15 +329,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "hz_value": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
                     "label": {
                       "En": "Video Bandwidth (Hz)",
                       "Fr": "Video Largeur de bande (Hz)",
                       "De": "Video Bandbreite (Hz)",
                       "Es": "Video Ancho de banda (Hz)"
-                    },
-                    "value": "3000000",
-                    "type": "_GuiValue",
-                    "units": "Hz"
+                    }
                   }
                 }
               }
@@ -381,15 +386,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "hz_value": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
                     "label": {
                       "En": "Resolution Bandwidth (Hz)",
                       "Fr": "Résolution Bandwidth (Hz)",
                       "De": "Auflösung Bandwidth (Hz)",
                       "Es": "Resolución Bandwidth (Hz)"
-                    },
-                    "value": "3000000",
-                    "type": "_GuiValue",
-                    "units": "Hz"
+                    }
                   }
                 }
               }

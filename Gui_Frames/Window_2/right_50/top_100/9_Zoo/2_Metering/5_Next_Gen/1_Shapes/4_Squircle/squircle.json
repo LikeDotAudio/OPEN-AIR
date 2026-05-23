@@ -34,6 +34,19 @@
         "fields": {
           "Squircle_Square_1": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": 0.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": 0.0
+            },
+            "layout": {},
             "label": {
               "En": "Standard Squircle",
               "Fr": "Standard Squircle",
@@ -43,13 +56,6 @@
             "geometry": {
               "width": 300,
               "height": 300
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": 0.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -114,7 +120,6 @@
             "width": 300,
             "height": 300,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "squircle",
             "bezel_width": 6,
             "overlay_style": "aperture_mask",
@@ -126,17 +131,23 @@
             "tick_radius_offset": 0,
             "label_radius_offset": 10,
             "needle_length_factor": 1.0,
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": 0.0,
-            "value": 0.0,
-            "default_value": 0.0,
             "path": "Squircle_Variations/Squircle_Square_1"
           },
           "Squircle_Square_2_Small": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -5.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -5.0
+            },
+            "layout": {},
             "label": {
               "En": "Small Blue",
               "Fr": "Small Blue",
@@ -146,13 +157,6 @@
             "geometry": {
               "width": 200,
               "height": 200
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -5.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -204,24 +208,29 @@
             "width": 200,
             "height": 200,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "squircle",
             "bezel_width": 4,
             "overlay_style": "aperture_mask",
             "Pointer_Style": "needle",
             "sub_ticks": 4,
             "label_radius_offset": 10,
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -5.0,
-            "value": -5.0,
-            "default_value": -5.0,
             "path": "Squircle_Variations/Squircle_Square_2_Small"
           },
           "Squircle_Square_3_Large": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -10.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -10.0
+            },
+            "layout": {},
             "label": {
               "En": "Large Red",
               "Fr": "Large Red",
@@ -231,13 +240,6 @@
             "geometry": {
               "width": 300,
               "height": 300
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -10.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -289,24 +291,29 @@
             "width": 300,
             "height": 300,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "squircle",
             "bezel_width": 7,
             "overlay_style": "aperture_mask",
             "Pointer_Style": "spade",
             "sub_ticks": 4,
             "label_radius_offset": 10,
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -10.0,
-            "value": -10.0,
-            "default_value": -10.0,
             "path": "Squircle_Variations/Squircle_Square_3_Large"
           },
           "Squircle_Square_4_Tiny": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": 0.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": 0.0
+            },
+            "layout": {},
             "label": {
               "En": "Tiny Silver",
               "Fr": "Tiny Silver",
@@ -316,13 +323,6 @@
             "geometry": {
               "width": 150,
               "height": 150
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": 0.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -358,24 +358,29 @@
             "width": 150,
             "height": 150,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "squircle",
             "bezel_width": 2,
             "overlay_style": "aperture_mask",
             "Pointer_Style": "line",
             "sub_ticks": 0,
             "label_radius_offset": 5,
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": 0.0,
-            "value": 0.0,
-            "default_value": 0.0,
             "path": "Squircle_Variations/Squircle_Square_4_Tiny"
           },
           "Squircle_Square_5_Neon": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -3.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -3.0
+            },
+            "layout": {},
             "label": {
               "En": "Neon Pink",
               "Fr": "Neon Pink",
@@ -385,13 +390,6 @@
             "geometry": {
               "width": 250,
               "height": 250
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -3.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -444,7 +442,6 @@
             "width": 250,
             "height": 250,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "squircle",
             "bezel_width": 5,
             "overlay_style": "aperture_mask",
@@ -452,17 +449,23 @@
             "Pointer_Style": "needle",
             "sub_ticks": 4,
             "label_radius_offset": 10,
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -3.0,
-            "value": -3.0,
-            "default_value": -3.0,
             "path": "Squircle_Variations/Squircle_Square_5_Neon"
           },
           "Squircle_Square_6_Vintage": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -8.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -8.0
+            },
+            "layout": {},
             "label": {
               "En": "Vintage Cream",
               "Fr": "Vintage Cream",
@@ -472,13 +475,6 @@
             "geometry": {
               "width": 250,
               "height": 250
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -8.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -529,24 +525,29 @@
             "width": 250,
             "height": 250,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "squircle",
             "bezel_width": 6,
             "overlay_style": "aperture_mask",
             "Pointer_Style": "baton",
             "sub_ticks": 4,
             "label_radius_offset": 10,
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -8.0,
-            "value": -8.0,
-            "default_value": -8.0,
             "path": "Squircle_Variations/Squircle_Square_6_Vintage"
           },
           "Squircle_Square_7_Cyber": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -1.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -1.0
+            },
+            "layout": {},
             "label": {
               "En": "Cyber Cyan",
               "Fr": "Cyber Cyan",
@@ -556,13 +557,6 @@
             "geometry": {
               "width": 300,
               "height": 300
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -1.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -615,7 +609,6 @@
             "width": 300,
             "height": 300,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "squircle",
             "bezel_width": 6,
             "overlay_style": "aperture_mask",
@@ -623,17 +616,23 @@
             "Pointer_Style": "needle",
             "sub_ticks": 4,
             "label_radius_offset": 10,
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -1.0,
-            "value": -1.0,
-            "default_value": -1.0,
             "path": "Squircle_Variations/Squircle_Square_7_Cyber"
           },
           "Squircle_Square_8_Blueprint": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -15.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -15.0
+            },
+            "layout": {},
             "label": {
               "En": "Blueprint",
               "Fr": "Blueprint",
@@ -643,13 +642,6 @@
             "geometry": {
               "width": 220,
               "height": 220
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -15.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -700,24 +692,29 @@
             "width": 220,
             "height": 220,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "squircle",
             "bezel_width": 2,
             "overlay_style": "aperture_mask",
             "Pointer_Style": "line",
             "sub_ticks": 4,
             "label_radius_offset": 10,
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -15.0,
-            "value": -15.0,
-            "default_value": -15.0,
             "path": "Squircle_Variations/Squircle_Square_8_Blueprint"
           },
           "Squircle_Square_9_Gold": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -2.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -2.0
+            },
+            "layout": {},
             "label": {
               "En": "Black & Gold",
               "Fr": "Black & Gold",
@@ -727,13 +724,6 @@
             "geometry": {
               "width": 300,
               "height": 300
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -2.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -785,20 +775,12 @@
             "width": 300,
             "height": 300,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "squircle",
             "bezel_width": 6,
             "overlay_style": "aperture_mask",
             "Pointer_Style": "spade",
             "sub_ticks": 4,
             "label_radius_offset": 10,
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -2.0,
-            "value": -2.0,
-            "default_value": -2.0,
             "path": "Squircle_Variations/Squircle_Square_9_Gold"
           }
         },

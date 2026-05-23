@@ -35,16 +35,31 @@
 
     React.useLayoutEffect(() => { measure(); }, [measure, rev]);
 
+    const pctOf = (v) => (typeof v === 'string' && v.trim().endsWith('%')) ? parseFloat(v) : null;
+    const isPx = (v) => v != null && !(typeof v === 'string' && v.trim().endsWith('%'));
+
     const onMove = (e) => {
       const d = drag.current; if (!d) return;
       const dx = e.clientX - d.startX, dy = e.clientY - d.startY;
-      if (d.sx !== 0 && d.basisW > 0) {
-        const pct = Math.max(5, Math.min(100, Math.round((d.startW + d.sx * dx) / d.basisW * 100)));
-        if (pct !== d.lastW) { d.lastW = pct; store.setProp(path, 'layout.width', pct + '%'); }
+      // Preserve the unit: px handles (round) resize in px; % handles (square)
+      // resize in % (current % scaled by how much the box grew/shrank).
+      if (d.sx !== 0 && d.startW > 0) {
+        if (d.pxW) {
+          const v = Math.max(2, Math.round(d.startW + d.sx * dx));
+          if (v !== d.lastW) { d.lastW = v; store.setProp(path, 'layout.width', v); }
+        } else {
+          const pct = Math.max(5, Math.min(400, Math.round(d.curW * (d.startW + d.sx * dx) / d.startW)));
+          if (pct !== d.lastW) { d.lastW = pct; store.setProp(path, 'layout.width', pct + '%'); }
+        }
       }
-      if (d.sy !== 0 && d.basisH > 0) {
-        const pct = Math.max(5, Math.min(100, Math.round((d.startH + d.sy * dy) / d.basisH * 100)));
-        if (pct !== d.lastH) { d.lastH = pct; store.setProp(path, 'layout.height', pct + '%'); }
+      if (d.sy !== 0 && d.startH > 0) {
+        if (d.pxH) {
+          const v = Math.max(2, Math.round(d.startH + d.sy * dy));
+          if (v !== d.lastH) { d.lastH = v; store.setProp(path, 'layout.height', v); }
+        } else {
+          const pct = Math.max(5, Math.min(400, Math.round(d.curH * (d.startH + d.sy * dy) / d.startH)));
+          if (pct !== d.lastH) { d.lastH = pct; store.setProp(path, 'layout.height', pct + '%'); }
+        }
       }
     };
     const onUp = () => {
@@ -58,30 +73,44 @@
       const el = window.OaEdFocus.elementForPath(root, path); if (!el) return;
       const visual = el.firstElementChild || el;
       const vr = visual.getBoundingClientRect();
-      const wr = el.getBoundingClientRect(); // containing block = the % basis
+      const node = (store.getNode && store.getNode(path)) || {};
       drag.current = {
         startX: e.clientX, startY: e.clientY,
         startW: vr.width, startH: vr.height,
-        basisW: wr.width, basisH: wr.height, sx, sy, lastW: null, lastH: null,
+        curW: pctOf(node.layout && node.layout.width) ?? 100,
+        curH: pctOf(node.layout && node.layout.height) ?? 100,
+        pxW: isPx(node.layout && node.layout.width),
+        pxH: isPx(node.layout && node.layout.height),
+        sx, sy, lastW: null, lastH: null,
       };
       window.addEventListener('pointermove', onMove);
       window.addEventListener('pointerup', onUp);
     };
 
     if (!box) return null;
+    // Handle shape indicates the unit: square = percentage, round dot = pixels.
+    // (% / unset => square, since dragging writes %; explicit px => round.)
+    const node = (store.getNode && store.getNode(path)) || {};
+    const pxW = isPx(node.layout && node.layout.width);
+    const pxH = isPx(node.layout && node.layout.height);
     return (
       <React.Fragment>
-        {DIRS.map(([name, fx, fy, sx, sy]) => (
-          <div key={name}
-            onPointerDown={(e) => onDown(e, sx, sy)}
-            style={{
-              position: 'absolute', zIndex: 40, width: HS, height: HS,
-              left: box.left + fx * box.width - HS / 2,
-              top: box.top + fy * box.height - HS / 2,
-              background: '#FF9900', border: '1px solid #111', borderRadius: 2,
-              cursor: name + '-resize', touchAction: 'none',
-            }} />
-        ))}
+        {DIRS.map(([name, fx, fy, sx, sy]) => {
+          const cW = sx !== 0, cH = sy !== 0;
+          const px = (cW && cH) ? (pxW && pxH) : (cW ? pxW : pxH);
+          return (
+            <div key={name}
+              onPointerDown={(e) => onDown(e, sx, sy)}
+              style={{
+                position: 'absolute', zIndex: 40, width: HS, height: HS,
+                left: box.left + fx * box.width - HS / 2,
+                top: box.top + fy * box.height - HS / 2,
+                background: '#FF9900', border: '1px solid #111',
+                borderRadius: px ? '50%' : 2,
+                cursor: name + '-resize', touchAction: 'none',
+              }} />
+          );
+        })}
       </React.Fragment>
     );
   };

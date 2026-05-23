@@ -77,15 +77,17 @@
             "fields": {
               "Meter_Volts": {
                 "type": "_NeedleVUMeter",
+                "domain": {
+                  "min": "0",
+                  "max": "100",
+                  "units": "V"
+                },
                 "label_active": {
                   "En": "INPUT VOLTS",
                   "Fr": "VOLTS D'ENTRÉE",
                   "De": "EINGANGSSPANNUNG",
                   "Es": "VOLTIOS DE ENTRADA"
                 },
-                "min": "0",
-                "max": "100",
-                "units": "V",
                 "message_details": {
                   "DC_LOAD_MODEL": {
                     "type": "_GuiActuator",
@@ -108,15 +110,17 @@
               },
               "Meter_Amps": {
                 "type": "_NeedleVUMeter",
+                "domain": {
+                  "min": "0",
+                  "max": "60",
+                  "units": "A"
+                },
                 "label_active": {
                   "En": "SINK CURRENT",
                   "Fr": "SINK CURRENT",
                   "De": "SINK CURRENT",
                   "Es": "SINK CURRENT"
                 },
-                "min": "0",
-                "max": "60",
-                "units": "A",
                 "message_details": {
                   "DC_LOAD_MODEL": {
                     "type": "_GuiActuator",
@@ -139,15 +143,17 @@
               },
               "Meter_Watts": {
                 "type": "_NeedleVUMeter",
+                "domain": {
+                  "min": "0",
+                  "max": "300",
+                  "units": "W"
+                },
                 "label_active": {
                   "En": "DISSIPATION",
                   "Fr": "DISSIPATION",
                   "De": "DISSIPATION",
                   "Es": "DISSIPATION"
                 },
-                "min": "0",
-                "max": "300",
-                "units": "W",
                 "message_details": {
                   "DC_LOAD_MODEL": {
                     "type": "_GuiActuator",
@@ -282,16 +288,20 @@
                 "fields": {
                   "Set_Current": {
                     "type": "_GuiHorizontalKnob",
+                    "domain": {
+                      "min": "0.0",
+                      "max": "60.0",
+                      "units": "A"
+                    },
+                    "value": {
+                      "default_value": "0.0"
+                    },
                     "label_active": {
                       "En": "Current Set",
                       "Fr": "Réglage de courant",
                       "De": "Stromeinstellung",
                       "Es": "Ajuste de corriente"
                     },
-                    "value_default": "0.0",
-                    "min": "0.0",
-                    "max": "60.0",
-                    "units": "A",
                     "message_details": {
                       "DC_LOAD_MODEL": {
                         "type": "_GuiActuator",
@@ -314,16 +324,20 @@
                   },
                   "Set_Slew": {
                     "type": "_GuiHorizontalKnob",
+                    "domain": {
+                      "min": "10",
+                      "max": "5000",
+                      "units": "A/s"
+                    },
+                    "value": {
+                      "default_value": "1000"
+                    },
                     "label_active": {
                       "En": "Slew Rate",
                       "Fr": "Slew Rate",
                       "De": "Slew Rate",
                       "Es": "Slew Rate"
                     },
-                    "value_default": "1000",
-                    "min": "10",
-                    "max": "5000",
-                    "units": "A/s",
                     "message_details": {
                       "DC_LOAD_MODEL": {
                         "type": "_GuiActuator",
@@ -357,16 +371,20 @@
                 "fields": {
                   "Set_Voltage": {
                     "type": "_GuiHorizontalKnob",
+                    "domain": {
+                      "min": "0.1",
+                      "max": "100.0",
+                      "units": "V"
+                    },
+                    "value": {
+                      "default_value": "12.0"
+                    },
                     "label_active": {
                       "En": "Voltage Set",
                       "Fr": "Réglage de tension",
                       "De": "Spannungseinstellung",
                       "Es": "Ajuste de voltaje"
                     },
-                    "value_default": "12.0",
-                    "min": "0.1",
-                    "max": "100.0",
-                    "units": "V",
                     "message_details": {
                       "DC_LOAD_MODEL": {
                         "type": "_GuiActuator",
@@ -389,16 +407,20 @@
                   },
                   "Set_Resistance": {
                     "type": "_GuiHorizontalKnob",
+                    "domain": {
+                      "min": "0.1",
+                      "max": "10000",
+                      "units": "Ω"
+                    },
+                    "value": {
+                      "default_value": "100"
+                    },
                     "label_active": {
                       "En": "Resistance Set",
                       "Fr": "Résistance Set",
                       "De": "Breitrstand Set",
                       "Es": "Resistencia Set"
                     },
-                    "value_default": "100",
-                    "min": "0.1",
-                    "max": "10000",
-                    "units": "Ω",
                     "message_details": {
                       "DC_LOAD_MODEL": {
                         "type": "_GuiActuator",
@@ -481,14 +503,18 @@
               },
               "Level_A": {
                 "type": "_GuiHorizontalKnob",
+                "domain": {
+                  "units": "A"
+                },
+                "value": {
+                  "default_value": "1.0"
+                },
                 "label_active": {
                   "En": "Level A (Base)",
                   "Fr": "Niveau A (Base)",
                   "De": "Pegel A (Base)",
                   "Es": "Nivel A (Base)"
                 },
-                "value_default": "1.0",
-                "units": "A",
                 "message_details": {
                   "DC_LOAD_MODEL": {
                     "type": "_GuiActuator",
@@ -511,14 +537,18 @@
               },
               "Level_B": {
                 "type": "_GuiHorizontalKnob",
+                "domain": {
+                  "units": "A"
+                },
+                "value": {
+                  "default_value": "5.0"
+                },
                 "label_active": {
                   "En": "Level B (Peak)",
                   "Fr": "Niveau B (Peak)",
                   "De": "Pegel B (Peak)",
                   "Es": "Nivel B (Peak)"
                 },
-                "value_default": "5.0",
-                "units": "A",
                 "message_details": {
                   "DC_LOAD_MODEL": {
                     "type": "_GuiActuator",
@@ -541,16 +571,20 @@
               },
               "Pulse_Freq": {
                 "type": "_GuiHorizontalKnob",
+                "domain": {
+                  "min": "0.1",
+                  "max": "10000",
+                  "units": "Hz"
+                },
+                "value": {
+                  "default_value": "100"
+                },
                 "label_active": {
                   "En": "Frequency",
                   "Fr": "Fréquence",
                   "De": "Frequenz",
                   "Es": "Frecuencia"
                 },
-                "value_default": "100",
-                "min": "0.1",
-                "max": "10000",
-                "units": "Hz",
                 "message_details": {
                   "DC_LOAD_MODEL": {
                     "type": "_GuiActuator",
@@ -573,16 +607,20 @@
               },
               "Pulse_Duty": {
                 "type": "_GuiHorizontalKnob",
+                "domain": {
+                  "min": "1",
+                  "max": "99",
+                  "units": "%"
+                },
+                "value": {
+                  "default_value": "50"
+                },
                 "label_active": {
                   "En": "Duty Cycle",
                   "Fr": "Duty Cycle",
                   "De": "Duty Cycle",
                   "Es": "Duty Cycle"
                 },
-                "value_default": "50",
-                "min": "1",
-                "max": "99",
-                "units": "%",
                 "message_details": {
                   "DC_LOAD_MODEL": {
                     "type": "_GuiActuator",

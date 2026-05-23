@@ -22,21 +22,22 @@
         "fields": {
           "examplefields": {
             "type": "_sliderValue",
-            "label_active": {
-              "En": "Volume",
-              "Fr": "Volume",
-              "De": "Lautstärke",
-              "Es": "Volumen"
+            "domain": {
+              "min": 0.0,
+              "max": 100.0,
+              "units": "%"
             },
             "layout": {
               "height": 100,
               "width": 250,
               "font": 18
             },
-            "min": 0.0,
-            "max": 100.0,
-            "value": 50.0,
-            "units": "%",
+            "label_active": {
+              "En": "Volume",
+              "Fr": "Volume",
+              "De": "Lautstärke",
+              "Es": "Volumen"
+            },
             "notes": "A standard horizontal slider with numerical input for volume control.",
             "show_label": true
           }
@@ -53,11 +54,10 @@
         "fields": {
           "examplefields": {
             "type": "_sliderValue",
-            "label_active": {
-              "En": "Gain",
-              "Fr": "Gain",
-              "De": "Verstärkung",
-              "Es": "Ganancia"
+            "domain": {
+              "min": -12.0,
+              "max": 12.0,
+              "units": "dB"
             },
             "layout": {
               "height": 100,
@@ -65,10 +65,12 @@
               "sticky": "ew",
               "font": 18
             },
-            "min": -12.0,
-            "max": 12.0,
-            "value": 0.0,
-            "units": "dB",
+            "label_active": {
+              "En": "Gain",
+              "Fr": "Gain",
+              "De": "Verstärkung",
+              "Es": "Ganancia"
+            },
             "notes": "Slider for fine-tuning gain, bipolar range with dB units.",
             "show_label": true
           }
@@ -85,11 +87,10 @@
         "fields": {
           "examplefields": {
             "type": "_sliderValue",
-            "label_active": {
-              "En": "Frequency",
-              "Fr": "Fréquence",
-              "De": "Frequenz",
-              "Es": "Frecuencia"
+            "domain": {
+              "min": 20.0,
+              "max": 20000.0,
+              "units": "Hz"
             },
             "layout": {
               "height": 100,
@@ -97,10 +98,12 @@
               "sticky": "ew",
               "font": 18
             },
-            "min": 20.0,
-            "max": 20000.0,
-            "value": 1000.0,
-            "units": "Hz",
+            "label_active": {
+              "En": "Frequency",
+              "Fr": "Fréquence",
+              "De": "Frequenz",
+              "Es": "Frecuencia"
+            },
             "notes": "Slider for selecting frequency, wide range.",
             "show_label": true
           }
@@ -117,6 +120,11 @@
         "fields": {
           "examplefields": {
             "type": "_sliderValue",
+            "domain": {
+              "min": 0.0,
+              "max": 2.5,
+              "units": "s"
+            },
             "layout": {
               "height": 50,
               "alpha": 0.9,
@@ -130,10 +138,6 @@
               "De": "Delay-Zeit",
               "Es": "Tiempo de Delay"
             },
-            "min": 0.0,
-            "max": 2.5,
-            "value": 0.75,
-            "units": "s",
             "notes": "Slider for adjusting delay time in seconds.",
             "show_label": true
           }
@@ -150,23 +154,24 @@
         "fields": {
           "examplefields": {
             "type": "_sliderValue",
-            "label_active": {
-              "En": "Q-Factor",
-              "Fr": "Facteur Q",
-              "De": "Q-Faktor",
-              "Es": "Factor Q"
+            "domain": {
+              "min": 0.1,
+              "max": 10.0,
+              "units": ""
             },
-            "min": 0.1,
-            "max": 10.0,
-            "value": 1.5,
-            "units": "",
-            "notes": "Slider for adjusting Q-factor, dimensionless.",
             "layout": {
               "font": 12,
               "width": 200,
               "height": 50,
               "alpha": 0.9
             },
+            "label_active": {
+              "En": "Q-Factor",
+              "Fr": "Facteur Q",
+              "De": "Q-Faktor",
+              "Es": "Factor Q"
+            },
+            "notes": "Slider for adjusting Q-factor, dimensionless.",
             "show_label": true
           }
         }

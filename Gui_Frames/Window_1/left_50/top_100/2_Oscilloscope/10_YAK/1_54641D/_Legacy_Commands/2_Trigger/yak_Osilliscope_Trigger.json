@@ -58,7 +58,6 @@
                     "type": "OcaBlock",
                     "fields": {
                       "type": {
-                        "value": "NORMal",
                         "type": "_GuiValue",
                         "label": {
                           "En": "Type",
@@ -106,7 +105,6 @@
                     "type": "OcaBlock",
                     "fields": {
                       "type": {
-                        "value": "AVERage",
                         "type": "_GuiValue",
                         "label": {
                           "En": "Type",
@@ -154,7 +152,6 @@
                     "type": "OcaBlock",
                     "fields": {
                       "type": {
-                        "value": "PEAK",
                         "type": "_GuiValue",
                         "label": {
                           "En": "Type",
@@ -202,7 +199,6 @@
                     "type": "OcaBlock",
                     "fields": {
                       "type": {
-                        "value": "HRESolution",
                         "type": "_GuiValue",
                         "label": {
                           "En": "Type",
@@ -250,7 +246,6 @@
                     "type": "OcaBlock",
                     "fields": {
                       "count": {
-                        "value": "8",
                         "type": "_GuiValue",
                         "label": {
                           "En": "Count",
@@ -309,7 +304,6 @@
                     "type": "OcaBlock",
                     "fields": {
                       "mode": {
-                        "value": "EDGE",
                         "type": "_GuiValue",
                         "label": {
                           "En": "Mode",
@@ -357,7 +351,6 @@
                     "type": "OcaBlock",
                     "fields": {
                       "sweep": {
-                        "value": "AUTO",
                         "type": "_GuiValue",
                         "label": {
                           "En": "Sweep",
@@ -405,7 +398,6 @@
                     "type": "OcaBlock",
                     "fields": {
                       "source": {
-                        "value": "CHAN1",
                         "type": "_GuiValue",
                         "label": {
                           "En": "Source",
@@ -496,7 +488,6 @@
                     "type": "OcaBlock",
                     "fields": {
                       "source": {
-                        "value": "CHAN2",
                         "type": "_GuiValue",
                         "label": {
                           "En": "Source",
@@ -544,7 +535,6 @@
                     "type": "OcaBlock",
                     "fields": {
                       "source": {
-                        "value": "EXT",
                         "type": "_GuiValue",
                         "label": {
                           "En": "Source",
@@ -592,15 +582,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "level": {
-                        "value": "0.0",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "V"
+                        },
                         "label": {
                           "En": "Level",
                           "Fr": "Niveau",
                           "De": "Pegel",
                           "Es": "Nivel"
                         },
-                        "units": "V",
                         "description": {
                           "En": "Level in Volts",
                           "Fr": "Niveau in Volts",

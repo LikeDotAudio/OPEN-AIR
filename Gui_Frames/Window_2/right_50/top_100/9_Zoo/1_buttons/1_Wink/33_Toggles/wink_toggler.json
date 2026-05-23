@@ -23,6 +23,9 @@
         "fields": {
           "demo_wink_rect_toggle": {
             "type": "_WinkButtonToggler",
+            "value": {
+              "default_value": "1"
+            },
             "label_active": {
               "En": "Vertical Rects (Slow)",
               "Fr": "Vertical Rects (Slow)",
@@ -86,7 +89,6 @@
                 "color": "#4B0082"
               }
             },
-            "value_default": "1",
             "text_pos": "left",
             "width": 80,
             "height": 30,
@@ -100,6 +102,9 @@
           },
           "demo_wink_round_toggle": {
             "type": "_WinkButtonToggler",
+            "value": {
+              "default_value": "A"
+            },
             "label_active": {
               "En": "Vertical Rounds (Medium)",
               "Fr": "Vertical Rounds (Medium)",
@@ -117,7 +122,6 @@
               "G",
               "H"
             ],
-            "value_default": "A",
             "text_pos": "right",
             "width": 50,
             "height": 50,
@@ -131,6 +135,9 @@
           },
           "demo_wink_tall_rect_toggle": {
             "type": "_WinkButtonToggler",
+            "value": {
+              "default_value": "1"
+            },
             "label_active": {
               "En": "Tall Rects (Normal)",
               "Fr": "Tall Rects (Normal)",
@@ -194,7 +201,6 @@
                 "color": "#00FF00"
               }
             },
-            "value_default": "1",
             "text_pos": "left",
             "width": 30,
             "height": 80,
@@ -208,6 +214,9 @@
           },
           "demo_wink_square_toggle": {
             "type": "_WinkButtonToggler",
+            "value": {
+              "default_value": "1"
+            },
             "label_active": {
               "En": "Squares (Fast)",
               "Fr": "Squares (Fast)",
@@ -225,7 +234,6 @@
               "7",
               "8"
             ],
-            "value_default": "1",
             "text_pos": "right",
             "width": 50,
             "height": 50,
@@ -240,6 +248,12 @@
           },
           "demo_wink_red_horiz": {
             "type": "_WinkButtonToggler",
+            "value": {
+              "default_value": "R1"
+            },
+            "layout": {
+              "col_span": 4
+            },
             "label_active": {
               "En": "Horizontal Red",
               "Fr": "Horizontal Red",
@@ -257,20 +271,22 @@
               "R7",
               "R8"
             ],
-            "value_default": "R1",
             "width": 50,
             "height": 50,
             "color": "#FF0000",
             "shutter_color": "white",
             "shape_type": "rect",
             "radius": 5,
-            "bezel_color": "#2b2b2b",
-            "layout": {
-              "col_span": 4
-            }
+            "bezel_color": "#2b2b2b"
           },
           "demo_wink_green_horiz": {
             "type": "_WinkButtonToggler",
+            "value": {
+              "default_value": "G1"
+            },
+            "layout": {
+              "col_span": 4
+            },
             "label_active": {
               "En": "White to Orange",
               "Fr": "White to Orange",
@@ -352,17 +368,13 @@
                 "color": "#FFA500"
               }
             },
-            "value_default": "G1",
             "width": 50,
             "height": 50,
             "shutter_color": "black",
             "shape_type": "round",
             "bezel_color": "#2b2b2b",
             "open_speed": 1000,
-            "close_speed": 3000,
-            "layout": {
-              "col_span": 4
-            }
+            "close_speed": 3000
           }
         }
       }

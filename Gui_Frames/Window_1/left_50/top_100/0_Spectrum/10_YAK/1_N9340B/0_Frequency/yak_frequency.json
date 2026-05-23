@@ -69,48 +69,52 @@
                 "layout_columns": 2,
                 "fields": {
                   "start_freq": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
                     "label": {
                       "En": "Start Frequency (Hz)",
                       "Fr": "Démarrer Fréquence (Hz)",
                       "De": "Start Frequenz (Hz)",
                       "Es": "Inicio Frecuencia (Hz)"
-                    },
-                    "value": "The current start frequency in Hz.",
-                    "type": "_GuiValue",
-                    "units": "Hz"
+                    }
                   },
                   "stop_freq": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
                     "label": {
                       "En": "Stop Frequency (Hz)",
                       "Fr": "Arrêter Fréquence (Hz)",
                       "De": "Stopp Frequenz (Hz)",
                       "Es": "Parar Frecuencia (Hz)"
-                    },
-                    "value": "The current stop frequency in Hz.",
-                    "type": "_GuiValue",
-                    "units": "Hz"
+                    }
                   },
                   "center_freq": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
                     "label": {
                       "En": "Center Frequency (Hz)",
                       "Fr": "Fréquence centrale (Hz)",
                       "De": "Mittenfrequenz (Hz)",
                       "Es": "Frecuencia central (Hz)"
-                    },
-                    "value": "The current center frequency in Hz.",
-                    "type": "_GuiValue",
-                    "units": "Hz"
+                    }
                   },
                   "span_freq": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
                     "label": {
                       "En": "Span Frequency (Hz)",
                       "Fr": "Portée Fréquence (Hz)",
                       "De": "Spanne Frequenz (Hz)",
                       "Es": "Intervalo Frecuencia (Hz)"
-                    },
-                    "value": "The current span frequency in Hz.",
-                    "type": "_GuiValue",
-                    "units": "Hz"
+                    }
                   }
                 }
               }
@@ -175,26 +179,28 @@
                 "type": "OcaBlock",
                 "fields": {
                   "start_freq": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
                     "label": {
                       "En": "Start Frequency (Hz)",
                       "Fr": "Démarrer Fréquence (Hz)",
                       "De": "Start Frequenz (Hz)",
                       "Es": "Inicio Frecuencia (Hz)"
-                    },
-                    "value": "12345678",
-                    "type": "_GuiValue",
-                    "units": "Hz"
+                    }
                   },
                   "stop_freq": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
                     "label": {
                       "En": "Stop Frequency (Hz)",
                       "Fr": "Arrêter Fréquence (Hz)",
                       "De": "Stopp Frequenz (Hz)",
                       "Es": "Parar Frecuencia (Hz)"
-                    },
-                    "value": "12345678",
-                    "type": "_GuiValue",
-                    "units": "Hz"
+                    }
                   }
                 }
               }
@@ -230,15 +236,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "hz_value": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
                     "label": {
                       "En": "Span Frequency (Hz)",
                       "Fr": "Portée Fréquence (Hz)",
                       "De": "Spanne Frequenz (Hz)",
                       "Es": "Intervalo Frecuencia (Hz)"
-                    },
-                    "value": "12345678",
-                    "type": "_GuiValue",
-                    "units": "Hz"
+                    }
                   }
                 }
               }
@@ -280,15 +287,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "hz_value": {
+                    "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
                     "label": {
                       "En": "Start Frequency (Hz)",
                       "Fr": "Démarrer Fréquence (Hz)",
                       "De": "Start Frequenz (Hz)",
                       "Es": "Inicio Frecuencia (Hz)"
-                    },
-                    "value": "12345678",
-                    "type": "_GuiValue",
-                    "units": "Hz"
+                    }
                   }
                 }
               }
@@ -336,9 +344,10 @@
                 "type": "OcaBlock",
                 "fields": {
                   "hz_value": {
-                    "value": "987654321",
                     "type": "_GuiValue",
-                    "units": "Hz"
+                    "domain": {
+                      "units": "Hz"
+                    }
                   }
                 }
               }

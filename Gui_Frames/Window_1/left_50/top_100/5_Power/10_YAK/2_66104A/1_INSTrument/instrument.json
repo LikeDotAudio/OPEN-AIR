@@ -49,15 +49,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "chan": {
-                    "value": "1",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Channel",
                       "Fr": "Canal",
                       "De": "Kanal",
                       "Es": "Canal"
-                    },
-                    "units": ""
+                    }
                   }
                 }
               }

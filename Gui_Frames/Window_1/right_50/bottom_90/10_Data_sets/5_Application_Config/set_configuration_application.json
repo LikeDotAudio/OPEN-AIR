@@ -53,56 +53,60 @@
         }
       },
       "geometry": {
+        "type": "_Label",
+        "domain": {
+          "units": null
+        },
         "label": {
           "En": "Window Geometry",
           "Fr": "Window Geometry",
           "De": "Window Geometry",
           "Es": "Window Geometry"
         },
-        "type": "_Label",
-        "AES70": "OcaStringSensor",
-        "value": "1920x1127+1912+32",
-        "units": null
+        "AES70": "OcaStringSensor"
       },
       "window_state": {
+        "type": "_Label",
+        "domain": {
+          "units": null
+        },
         "label": {
           "En": "Window State",
           "Fr": "État de fenêtre",
           "De": "Fensterstatus",
           "Es": "Estado de ventana"
         },
-        "type": "_Label",
-        "AES70": "OcaStringSensor",
-        "value": "zoomed",
-        "units": null
+        "AES70": "OcaStringSensor"
       },
       "last_config_save_time": {
+        "type": "_Label",
+        "domain": {
+          "units": null
+        },
         "label": {
           "En": "Last Config Save Time",
           "Fr": "Last Config Enregistrer Temps",
           "De": "Last Config Speichern Zeit",
           "Es": "Last Config Guardar Tiempo"
         },
-        "type": "_Label",
-        "AES70": "OcaStringSensor",
-        "value": "2025-08-23 21:33:40",
-        "units": null
+        "AES70": "OcaStringSensor"
       },
       "paned_window_sash_position_percentage": {
+        "type": "_sliderValue",
+        "domain": {
+          "min": "0",
+          "max": "100",
+          "units": "%",
+          "precision": "1"
+        },
         "label": {
           "En": "Paned Window Sash Position",
           "Fr": "Paned Window Sash Position",
           "De": "Paned Window Sash Position",
           "Es": "Paned Window Sash Position"
         },
-        "type": "_sliderValue",
         "AES70": "OcaFloat32Actuator",
-        "handler": "set_sash_position",
-        "value": "40",
-        "min": "0",
-        "max": "100",
-        "step": "1",
-        "units": "%"
+        "handler": "set_sash_position"
       }
     }
   },

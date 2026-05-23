@@ -49,15 +49,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "value": {
-                    "value": "1.0",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "A"
+                    },
                     "label": {
                       "En": "Current",
                       "Fr": "Courant",
                       "De": "Strom",
                       "Es": "Corriente"
                     },
-                    "units": "A",
                     "description": {
                       "En": "Amps",
                       "Fr": "Amps",
@@ -98,15 +99,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "value": {
-                    "value": "60",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "A"
+                    },
                     "label": {
                       "En": "Range",
                       "Fr": "Plage",
                       "De": "Bereich",
                       "Es": "Rango"
                     },
-                    "units": "A",
                     "description": {
                       "En": "6 or 60 A",
                       "Fr": "6 ou 60 A",
@@ -147,15 +149,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "value": {
-                    "value": "1000",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "A/s"
+                    },
                     "label": {
                       "En": "Slew Rate",
                       "Fr": "Slew Rate",
                       "De": "Slew Rate",
                       "Es": "Slew Rate"
                     },
-                    "units": "A/s",
                     "description": {
                       "En": "A/sec",
                       "Fr": "A/sec",

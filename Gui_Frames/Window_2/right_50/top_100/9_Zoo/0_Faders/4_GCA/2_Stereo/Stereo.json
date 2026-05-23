@@ -21,21 +21,23 @@
         },
         "fields": {
           "composite_stereo": {
-            "type": "_CompositeFader",
+            "type": "_Horizontal_with_dial_Value",
+            "domain": {
+              "min": 0.0,
+              "max": 100.0
+            },
+            "layout": {
+              "width": 60,
+              "height": 550,
+              "alpha": 0.9
+            },
             "label_active": {
               "En": "Stereo Mix",
               "Fr": "Stereo Mix",
               "De": "Stereo Mix",
               "Es": "Stereo Mezcla"
             },
-            "value_min": 0.0,
-            "value_max": 100.0,
             "num_channels": 2,
-            "layout": {
-              "width": 60,
-              "height": 550,
-              "alpha": 0.9
-            },
             "channels": [
               {
                 "default": 75.0,

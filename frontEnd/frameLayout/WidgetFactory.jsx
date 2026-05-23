@@ -1,3 +1,12 @@
+// Convert a layout value to a CSS length: number or numeric-string -> px,
+// "%"/other CSS strings pass through. Lets width/height be entered as px OR %.
+window.oaCssLen = (v) => {
+  if (v == null) return null;
+  if (typeof v === 'number') return `${v}px`;
+  const s = String(v).trim();
+  return /^-?\d+(\.\d+)?$/.test(s) ? `${s}px` : s;
+};
+
 /**
  * Structural Component: OcaBin
  * A high-level container that manages background effects and scrolling.
@@ -97,6 +106,11 @@ window.WidgetFactory = ({ nodeName, node, path_prefix = '', jsonPath }) => {
     // overlap their neighbours.
     flexGrow: node.layout?.weight !== undefined ? node.layout.weight : 0,
     flexShrink: 0,
+    // Tk grid padx/pady -> external spacing around the element within its cell.
+    // box-sizing keeps the padding from overflowing fill containers.
+    ...((node.layout?.padx != null || node.layout?.pady != null)
+      ? { padding: `${node.layout?.pady ?? 0}px ${node.layout?.padx ?? 0}px`, boxSizing: 'border-box' }
+      : {}),
   };
 
   // Containers declared NSEW must fill their parent so 'overflow: auto' only
@@ -148,8 +162,8 @@ window.WidgetFactory = ({ nodeName, node, path_prefix = '', jsonPath }) => {
   const _lw = node.layout?.width, _lh = node.layout?.height;
   if (_lw != null || _lh != null) {
     wrapperStyle = { ...wrapperStyle };
-    if (_lw != null) wrapperStyle.width = typeof _lw === 'number' ? `${_lw}px` : _lw;
-    if (_lh != null) { wrapperStyle.height = typeof _lh === 'number' ? `${_lh}px` : _lh; wrapperStyle.minHeight = 0; }
+    if (_lw != null) wrapperStyle.width = window.oaCssLen(_lw);
+    if (_lh != null) { wrapperStyle.height = window.oaCssLen(_lh); wrapperStyle.minHeight = 0; }
   }
 
   return (
@@ -164,13 +178,37 @@ window.WidgetFactory = ({ nodeName, node, path_prefix = '', jsonPath }) => {
   );
 };
 
-window.FieldComponent = ({ nodeName, node, path_prefix }) => {
+window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
+    // Flatten the domain{} / value{} parents back onto the config so every widget
+    // can read min/max/units/step*/default_value as before (migration-safe).
+    // precision -> step (legacy readers); also expose domain.primary.
+    const _d = (rawNode && rawNode.domain) || {};
+    const _v = (rawNode && rawNode.value) || {};
+    const _numU = (x) => { const n = parseFloat(x); return Number.isNaN(n) ? undefined : n; };
+    const node = (rawNode && (rawNode.domain || rawNode.value)) ? {
+        ...rawNode, ..._d, ..._v,
+        step: _d.precision !== undefined ? _d.precision : rawNode.step,
+        value_default: _v.default_value !== undefined ? _v.default_value
+            : (_v.value_default !== undefined ? _v.value_default : rawNode.value_default),
+        domain: {
+            ..._d,
+            primary: {
+                ...(_d.primary || {}),
+                ...(_d.min !== undefined ? { min: _numU(_d.min) } : {}),
+                ...(_d.max !== undefined ? { max: _numU(_d.max) } : {}),
+                ...(_v.default_value !== undefined ? { value_default: _numU(_v.default_value) } : {}),
+            },
+        },
+    } : rawNode;
+
     const topic = `OpenAir/Gui${path_prefix}/${nodeName}`;
-    
+
     // Determine default value
     let defaultVal = 0;
     if (node.domain?.primary?.value_default !== undefined) {
         defaultVal = node.domain.primary.value_default;
+    } else if (node.value_default !== undefined) {
+        defaultVal = node.value_default;
     }
 
     // Connect to MQTT global state store
@@ -193,19 +231,35 @@ window.FieldComponent = ({ nodeName, node, path_prefix }) => {
     const lHeight = node.layout?.height || node.geometry?.height;
     const lWidth = node.layout?.width || node.geometry?.width;
 
+    // A percentage width sizes the element as a % of its CONTAINER/panel (so
+    // 100% fills the panel — it doesn't overflow the window). Responsive widgets
+    // (fader, knob) then measure the resulting box and REDRAW to fit — a real
+    // resize, not a zoom. alignItems:stretch lets the inner widget fill the box.
+    const _pctFrac = (v) => (typeof v === 'string' && v.trim().endsWith('%')) ? (parseFloat(v) / 100) : null;
+    const pw = _pctFrac(node.layout?.width);
+    const ph = _pctFrac(node.layout?.height);
+    const scaling = pw != null || ph != null;
+
     const style = {
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
-        // margin auto centers fixed-width fields (e.g. faders with layout.width)
-        // within their full-width block cell instead of pinning them to the left.
-        margin: '0 auto',
-        width: lWidth ? (typeof lWidth === 'number' ? `${lWidth}px` : lWidth) : '100%',
-        height: lHeight ? (typeof lHeight === 'number' ? `${lHeight}px` : lHeight) : '100%'
+        alignItems: scaling ? 'stretch' : 'center',
+        margin: scaling ? 0 : '0 auto',
+        width: pw != null ? `${pw * 100}%` : (lWidth != null ? window.oaCssLen(lWidth) : '100%'),
+        // Honor an explicit height (px or %); otherwise auto when scaling so the
+        // widget sizes to content.
+        height: lHeight != null ? (ph != null ? `${ph * 100}%` : window.oaCssLen(lHeight)) : (scaling ? 'auto' : '100%'),
+        boxSizing: 'border-box',
     };
+
+    // When a field is %-sized, mark its widget fluid so responsive widgets
+    // (fader, knob) measure their box and redraw to fit (crisp).
+    const fluidConfig = scaling ? { ...node, fluid: true } : node;
     const titleStyle = { fontSize: '12px', color: node.cosmetics?.colors?.text || '#999', marginBottom: '10px' };
 
-    if (type.toLowerCase().includes('composite') || type.toLowerCase().includes('dial_value') || type === '_Horizontal_with_dial_Value') {
+    // _Horizontal_with_dial_Value is the canonical composite. _CompositeFader /
+    // _GCA / GCA are deprecated styles that now render as this one too.
+    if (type.toLowerCase().includes('composite') || type.toLowerCase().includes('dial_value') || type === '_Horizontal_with_dial_Value' || type === '_GCA' || type === 'GCA') {
         return (
             <div style={style}>
                 {window.FaderDial ? <window.FaderDial value={val} onChange={setVal} config={node} /> : <div style={{width: '200px', height: '60px', background: '#333'}}></div>}
@@ -231,14 +285,6 @@ window.FieldComponent = ({ nodeName, node, path_prefix }) => {
         );
     }
 
-    if (type === '_CompositeFader' || type === '_GCA' || type === 'GCA') {
-        return (
-            <div style={style}>
-                {window.GCA ? <window.GCA value={val} onChange={setVal} config={node} /> : <div style={{width: '100px', height: '150px', background: '#333'}}>GCA</div>}
-            </div>
-        );
-    }
-
     if (type === '_SmartFader' || type.toLowerCase().includes('fader')) {
         if (type === '_FaderWithBarGraph') {
             return (
@@ -250,7 +296,7 @@ window.FieldComponent = ({ nodeName, node, path_prefix }) => {
         return (
             <div style={style}>
                 <span style={titleStyle}>{title}</span>
-                {window.Fader ? <window.Fader value={val} onChange={setVal} config={node} /> : <div style={{width: '30px', height: '150px', background: '#444'}}></div>}
+                {window.Fader ? <window.Fader value={val} onChange={setVal} config={fluidConfig} /> : <div style={{width: '30px', height: '150px', background: '#444'}}></div>}
             </div>
         );
     }
@@ -288,7 +334,7 @@ window.FieldComponent = ({ nodeName, node, path_prefix }) => {
         return (
             <div style={style}>
                 <span style={titleStyle}>{title}</span>
-                {Widget ? <Widget value={val} onChange={setVal} config={node} size={100}/> : <div style={{width: '100px', height: '100px', borderRadius:'50%', background: '#444'}}></div>}
+                {Widget ? <Widget value={val} onChange={setVal} config={fluidConfig} size={100}/> : <div style={{width: '100px', height: '100px', borderRadius:'50%', background: '#444'}}></div>}
             </div>
         );
     }
@@ -380,7 +426,7 @@ window.FieldComponent = ({ nodeName, node, path_prefix }) => {
             // multi-row grid grows down naturally instead of overflowing a 50px box
             // and overlapping the next block.
             return (
-                <div style={{ ...style, width: '100%', height: 'auto' }}>
+                <div style={{ ...style, width: pw != null ? `${pw * 100}%` : '100%', height: 'auto' }}>
                     {window.ButtonToggler ? <window.ButtonToggler value={val} onChange={setVal} config={node} topic={topic} nodeJson={node} /> : <div style={{background: '#333'}}>Button Toggler</div>}
                 </div>
             );

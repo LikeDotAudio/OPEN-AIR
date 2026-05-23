@@ -58,48 +58,52 @@
                     "type": "OcaBlock",
                     "fields": {
                       "mode": {
-                        "value": "V",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "V"
+                        },
                         "label": {
                           "En": "Voltage",
                           "Fr": "Tension",
                           "De": "Spannung",
                           "Es": "Voltaje"
-                        },
-                        "units": "V"
+                        }
                       },
                       "volts": {
-                        "value": "V",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "V"
+                        },
                         "label": {
                           "En": "Voltage",
                           "Fr": "Tension",
                           "De": "Spannung",
                           "Es": "Voltaje"
-                        },
-                        "units": "V"
+                        }
                       },
                       "amps": {
-                        "value": "A",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "A"
+                        },
                         "label": {
                           "En": "Current",
                           "Fr": "Courant",
                           "De": "Strom",
                           "Es": "Corriente"
-                        },
-                        "units": "A"
+                        }
                       },
                       "watts": {
-                        "value": "W",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "W"
+                        },
                         "label": {
                           "En": "Power",
                           "Fr": "Puissance",
                           "De": "Leistung",
                           "Es": "Potencia"
-                        },
-                        "units": "W"
+                        }
                       }
                     }
                   }
@@ -145,15 +149,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "status_byte": {
-                        "value": "Byte Value",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": ""
+                        },
                         "label": {
                           "En": "Status",
                           "Fr": "État",
                           "De": "Status",
                           "Es": "Estado"
-                        },
-                        "units": ""
+                        }
                       }
                     }
                   }
@@ -188,15 +193,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "error_msg": {
-                        "value": "Error Message",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": ""
+                        },
                         "label": {
                           "En": "Error",
                           "Fr": "Erreur",
                           "De": "Fehler",
                           "Es": "Error"
-                        },
-                        "units": ""
+                        }
                       }
                     }
                   }
@@ -231,15 +237,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "idn_string": {
-                        "value": "Device ID",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": ""
+                        },
                         "label": {
                           "En": "ID String",
                           "Fr": "Chaîne ID",
                           "De": "ID-String",
                           "Es": "Cadena de ID"
-                        },
-                        "units": ""
+                        }
                       }
                     }
                   }
@@ -397,15 +404,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "value": {
-                        "value": "1.0",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "A"
+                        },
                         "label": {
                           "En": "Current",
                           "Fr": "Courant",
                           "De": "Strom",
                           "Es": "Corriente"
                         },
-                        "units": "A",
                         "description": {
                           "En": "Amps",
                           "Fr": "Amps",
@@ -446,15 +454,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "value": {
-                        "value": "60",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "A"
+                        },
                         "label": {
                           "En": "Range",
                           "Fr": "Plage",
                           "De": "Bereich",
                           "Es": "Rango"
                         },
-                        "units": "A",
                         "description": {
                           "En": "6 or 60 A",
                           "Fr": "6 ou 60 A",
@@ -495,15 +504,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "value": {
-                        "value": "1000",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "A/s"
+                        },
                         "label": {
                           "En": "Slew Rate",
                           "Fr": "Slew Rate",
                           "De": "Slew Rate",
                           "Es": "Slew Rate"
                         },
-                        "units": "A/s",
                         "description": {
                           "En": "A/sec",
                           "Fr": "A/sec",
@@ -555,15 +565,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "value": {
-                        "value": "12.0",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "V"
+                        },
                         "label": {
                           "En": "Voltage",
                           "Fr": "Tension",
                           "De": "Spannung",
                           "Es": "Voltaje"
                         },
-                        "units": "V",
                         "description": {
                           "En": "Volts",
                           "Fr": "Volts",
@@ -604,15 +615,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "value": {
-                        "value": "60",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "V"
+                        },
                         "label": {
                           "En": "Range",
                           "Fr": "Plage",
                           "De": "Bereich",
                           "Es": "Rango"
                         },
-                        "units": "V",
                         "description": {
                           "En": "6, 60, etc",
                           "Fr": "6, 60, etc",
@@ -664,15 +676,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "value": {
-                        "value": "100",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "Ohms"
+                        },
                         "label": {
                           "En": "Resistance",
                           "Fr": "Résistance",
                           "De": "Widerstand",
                           "Es": "Resistencia"
                         },
-                        "units": "Ohms",
                         "description": {
                           "En": "Ohms",
                           "Fr": "Ohms",
@@ -713,15 +726,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "value": {
-                        "value": "1000",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "Ohms"
+                        },
                         "label": {
                           "En": "Range",
                           "Fr": "Plage",
                           "De": "Bereich",
                           "Es": "Rango"
                         },
-                        "units": "Ohms",
                         "description": {
                           "En": "Range",
                           "Fr": "Plage",
@@ -784,15 +798,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "mode": {
-                        "value": "CONT",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": ""
+                        },
                         "label": {
                           "En": "Mode",
                           "Fr": "Mode",
                           "De": "Modus",
                           "Es": "Modo"
                         },
-                        "units": "",
                         "description": {
                           "En": "CONT, PULS, TOGG",
                           "Fr": "CONT, PULS, TOGG",
@@ -833,15 +848,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "value": {
-                        "value": "0.5",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "A"
+                        },
                         "label": {
                           "En": "Level A",
                           "Fr": "Niveau A",
                           "De": "Pegel A",
                           "Es": "Nivel A"
                         },
-                        "units": "A",
                         "description": {
                           "En": "Main Level",
                           "Fr": "Main Niveau",
@@ -882,15 +898,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "value": {
-                        "value": "5.0",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "A"
+                        },
                         "label": {
                           "En": "Level B",
                           "Fr": "Niveau B",
                           "De": "Pegel B",
                           "Es": "Nivel B"
                         },
-                        "units": "A",
                         "description": {
                           "En": "Transient Level",
                           "Fr": "Transitoire Niveau",
@@ -931,15 +948,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "value": {
-                        "value": "100",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "Hz"
+                        },
                         "label": {
                           "En": "Frequency",
                           "Fr": "Fréquence",
                           "De": "Frequenz",
                           "Es": "Frecuencia"
                         },
-                        "units": "Hz",
                         "description": {
                           "En": "Hz",
                           "Fr": "Hz",
@@ -980,15 +998,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "value": {
-                        "value": "50",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "%"
+                        },
                         "label": {
                           "En": "Duty Cycle",
                           "Fr": "Duty Cycle",
                           "De": "Duty Cycle",
                           "Es": "Duty Cycle"
                         },
-                        "units": "%",
                         "description": {
                           "En": "Percent",
                           "Fr": "Percent",

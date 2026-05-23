@@ -27,23 +27,27 @@
             "fields": {
               "primary": {
                 "type": "_GuiValue",
+                "domain": {
+                  "units": ""
+                },
                 "label": {
                   "En": "Primary (L/C/R/Z)",
                   "Fr": "Primary (L/C/R/Z)",
                   "De": "Primary (L/C/R/Z)",
                   "Es": "Primary (L/C/R/Z)"
-                },
-                "units": ""
+                }
               },
               "secondary": {
                 "type": "_GuiValue",
+                "domain": {
+                  "units": ""
+                },
                 "label": {
                   "En": "Secondary (D/Q/R/G)",
                   "Fr": "Secondary (D/Q/R/G)",
                   "De": "Secondary (D/Q/R/G)",
                   "Es": "Secondary (D/Q/R/G)"
-                },
-                "units": ""
+                }
               }
             }
           }

@@ -133,16 +133,20 @@
                 "fields": {
                   "Base_Current_Fader": {
                     "type": "_GuiVerticalFader",
+                    "domain": {
+                      "min": "0.0",
+                      "max": "50.0",
+                      "units": "A"
+                    },
+                    "value": {
+                      "default_value": "0.0"
+                    },
                     "label_active": {
                       "En": "BASE LOAD (A)",
                       "Fr": "BASE LOAD (A)",
                       "De": "BASE LOAD (A)",
                       "Es": "BASE LOAD (A)"
                     },
-                    "value_default": "0.0",
-                    "min": "0.0",
-                    "max": "50.0",
-                    "units": "A",
                     "message_details": {
                       "DC_LOAD_MODEL": {
                         "type": "_GuiActuator",
@@ -176,16 +180,20 @@
                 "fields": {
                   "Transient_Fader": {
                     "type": "_GuiVerticalFader",
+                    "domain": {
+                      "min": "0.0",
+                      "max": "50.0",
+                      "units": "A"
+                    },
+                    "value": {
+                      "default_value": "0.0"
+                    },
                     "label_active": {
                       "En": "PULSE PEAK (A)",
                       "Fr": "PULSE PEAK (A)",
                       "De": "PULSE PEAK (A)",
                       "Es": "PULSE PEAK (A)"
                     },
-                    "value_default": "0.0",
-                    "min": "0.0",
-                    "max": "50.0",
-                    "units": "A",
                     "message_details": {
                       "DC_LOAD_MODEL": {
                         "type": "_GuiActuator",
@@ -268,16 +276,20 @@
             "fields": {
               "Cutoff_Voltage": {
                 "type": "_GuiHorizontalKnob",
+                "domain": {
+                  "min": "0.0",
+                  "max": "48.0",
+                  "units": "V"
+                },
+                "value": {
+                  "default_value": "3.0"
+                },
                 "label_active": {
                   "En": "Stop Voltage (UVLO)",
                   "Fr": "Arrêter Tension (UVLO)",
                   "De": "Stopp Spannenung (UVLO)",
                   "Es": "Parar Voltaje (UVLO)"
                 },
-                "value_default": "3.0",
-                "min": "0.0",
-                "max": "48.0",
-                "units": "V",
                 "message_details": {
                   "DC_LOAD_MODEL": {
                     "type": "_GuiActuator",
@@ -300,16 +312,20 @@
               },
               "Slew_Throttle": {
                 "type": "_GuiHorizontalKnob",
+                "domain": {
+                  "min": "10",
+                  "max": "2500",
+                  "units": "A/ms"
+                },
+                "value": {
+                  "default_value": "500"
+                },
                 "label_active": {
                   "En": "Attack Speed (Slew)",
                   "Fr": "Attack Speed (Slew)",
                   "De": "Attack Speed (Slew)",
                   "Es": "Attack Speed (Slew)"
                 },
-                "value_default": "500",
-                "min": "10",
-                "max": "2500",
-                "units": "A/ms",
                 "message_details": {
                   "DC_LOAD_MODEL": {
                     "type": "_GuiActuator",
@@ -346,13 +362,15 @@
                 "fields": {
                   "Ah_Counter": {
                     "type": "_GuiLabel",
+                    "value": {
+                      "default_value": "0.000 Ah"
+                    },
                     "label_active": {
                       "En": "CAPACITY DRAINED",
                       "Fr": "CAPACITY DRAINED",
                       "De": "CAPACITY DRAINED",
                       "Es": "CAPACITY DRAINED"
                     },
-                    "value_default": "0.000 Ah",
                     "message_details": {
                       "DC_LOAD_MODEL": {
                         "type": "_GuiActuator",
@@ -375,13 +393,15 @@
                   },
                   "Wh_Counter": {
                     "type": "_GuiLabel",
+                    "value": {
+                      "default_value": "0.000 Wh"
+                    },
                     "label_active": {
                       "En": "ENERGY DISSIPATED",
                       "Fr": "ENERGY DISSIPATED",
                       "De": "ENERGY DISSIPATED",
                       "Es": "ENERGY DISSIPATED"
                     },
-                    "value_default": "0.000 Wh",
                     "message_details": {
                       "DC_LOAD_MODEL": {
                         "type": "_GuiActuator",
@@ -404,13 +424,15 @@
                   },
                   "Timer_Readout": {
                     "type": "_GuiLabel",
+                    "value": {
+                      "default_value": "00:00:00"
+                    },
                     "label_active": {
                       "En": "ELAPSED TIME",
                       "Fr": "ELAPSED TIME",
                       "De": "ELAPSED TIME",
                       "Es": "ELAPSED TIME"
                     },
-                    "value_default": "00:00:00",
                     "message_details": {
                       "DC_LOAD_MODEL": {
                         "type": "_GuiActuator",

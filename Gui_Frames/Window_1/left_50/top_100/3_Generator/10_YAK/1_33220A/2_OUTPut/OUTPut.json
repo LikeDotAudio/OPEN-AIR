@@ -49,15 +49,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "ohms": {
-                    "value": "50",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "Ohms"
+                    },
                     "label": {
                       "En": "Load",
                       "Fr": "Charger",
                       "De": "Laden",
                       "Es": "Cargar"
                     },
-                    "units": "Ohms",
                     "description": {
                       "En": "Ohms or INFinity",
                       "Fr": "Ohms or INFinity",
@@ -229,15 +230,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "is_on": {
-                    "value": "0 or 1",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Is On",
                       "Fr": "Is On",
                       "De": "Is On",
                       "Es": "Is On"
-                    },
-                    "units": ""
+                    }
                   }
                 }
               }

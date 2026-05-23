@@ -22,10 +22,13 @@
   window.OaEdProperties = ({ store }) => {
     const st = window.useEditorStore(store);
 
-    // Load the library enum legends once so property fields can become dropdowns.
-    const [, setLegendsReady] = React.useState(0);
+    // Load library data once: enum legends (dropdowns) + composite reference
+    // schemas (full knob/fader/value param sets merged into sub-configs).
+    const [, setLibReady] = React.useState(0);
     React.useEffect(() => {
-      if (window.OaEdEnum) window.OaEdEnum.load().then(() => setLegendsReady((x) => x + 1)).catch(() => {});
+      const bump = () => setLibReady((x) => x + 1);
+      if (window.OaEdEnum) window.OaEdEnum.load().then(bump).catch(() => {});
+      if (window.OaEdComposite) window.OaEdComposite.load().then(bump).catch(() => {});
     }, []);
 
     const path = st.selectedPath;
@@ -51,7 +54,7 @@
       <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
         {/* header */}
         <div style={{ padding: 8, borderBottom: '1px solid #333', flexShrink: 0 }}>
-          <div style={{ fontSize: 10, color: '#888', marginBottom: 4 }}>{node.type || 'element'}</div>
+          <div style={{ fontSize: 20, color: '#fff', fontWeight: 'bold', marginBottom: 6 }}>{node.type || 'element'}</div>
           <input defaultValue={key} key={path} onBlur={onRename}
             onKeyDown={(e) => { if (e.key === 'Enter') e.target.blur(); }}
             style={{ width: '100%', boxSizing: 'border-box', background: '#111', color: '#FF9900',

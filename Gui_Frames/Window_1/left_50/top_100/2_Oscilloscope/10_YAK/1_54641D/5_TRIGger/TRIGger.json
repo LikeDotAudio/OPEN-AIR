@@ -49,15 +49,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "mode": {
-                    "value": "EDGE",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Mode",
                       "Fr": "Mode",
                       "De": "Modus",
                       "Es": "Modo"
                     },
-                    "units": "",
                     "description": {
                       "En": "EDGE, PATTern, PULSe, TV, IIC, SPI, GLITch",
                       "Fr": "EDGE, PATTern, PULSe, TV, IIC, SPI, GLITch",
@@ -98,15 +99,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "time": {
-                    "value": "60e-9",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "s"
+                    },
                     "label": {
                       "En": "Holdoff",
                       "Fr": "Maintienoff",
                       "De": "Haltenoff",
                       "Es": "Manteneroff"
-                    },
-                    "units": "s"
+                    }
                   }
                 }
               }
@@ -150,15 +152,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "source": {
-                        "value": "CHAN1",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": ""
+                        },
                         "label": {
                           "En": "Source",
                           "Fr": "Source",
                           "De": "Quelle",
                           "Es": "Fuente"
                         },
-                        "units": "",
                         "description": {
                           "En": "CHANn, DIGn, EXT",
                           "Fr": "CHANn, DIGn, EXT",
@@ -199,15 +202,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "slope": {
-                        "value": "POSitive",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": ""
+                        },
                         "label": {
                           "En": "Slope",
                           "Fr": "Pente",
                           "De": "Flanke",
                           "Es": "Pendiente"
                         },
-                        "units": "",
                         "description": {
                           "En": "POSitive, NEGative",
                           "Fr": "POSitif, NÉGatif",
@@ -259,15 +263,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "source": {
-                        "value": "CHAN1",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": ""
+                        },
                         "label": {
                           "En": "Source",
                           "Fr": "Source",
                           "De": "Quelle",
                           "Es": "Fuente"
-                        },
-                        "units": ""
+                        }
                       }
                     }
                   }
@@ -302,15 +307,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "qual": {
-                        "value": "LESSthan",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": ""
+                        },
                         "label": {
                           "En": "Condition",
                           "Fr": "Condition",
                           "De": "Condition",
                           "Es": "Condition"
                         },
-                        "units": "",
                         "description": {
                           "En": "LESSthan, GREaterthan, RANGe",
                           "Fr": "LESSthan, GREaterthan, RANGe",
@@ -351,15 +357,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "time": {
-                        "value": "100e-9",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "s"
+                        },
                         "label": {
                           "En": "Time",
                           "Fr": "Temps",
                           "De": "Zeit",
                           "Es": "Tiempo"
-                        },
-                        "units": "s"
+                        }
                       }
                     }
                   }

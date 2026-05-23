@@ -49,15 +49,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "mode": {
-                    "value": "EDGE",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Mode",
                       "Fr": "Mode",
                       "De": "Modus",
                       "Es": "Modo"
                     },
-                    "units": "",
                     "description": {
                       "En": "EDGE, PULSe, SLOPE, VIDEO, PATTern",
                       "Fr": "EDGE, PULSe, SLOPE, VIDEO, PATTern",
@@ -107,15 +108,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "source": {
-                        "value": "CHAN1",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": ""
+                        },
                         "label": {
                           "En": "Source",
                           "Fr": "Source",
                           "De": "Quelle",
                           "Es": "Fuente"
                         },
-                        "units": "",
                         "description": {
                           "En": "CHANn, AC",
                           "Fr": "CANn, CA",
@@ -156,15 +158,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "slope": {
-                        "value": "POSitive",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": ""
+                        },
                         "label": {
                           "En": "Slope",
                           "Fr": "Pente",
                           "De": "Flanke",
                           "Es": "Pendiente"
                         },
-                        "units": "",
                         "description": {
                           "En": "POSitive, NEGative, RFALI",
                           "Fr": "POSitive, NEGative, RFALI",
@@ -205,15 +208,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "level": {
-                        "value": "0.0",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "V"
+                        },
                         "label": {
                           "En": "Level",
                           "Fr": "Niveau",
                           "De": "Pegel",
                           "Es": "Nivel"
-                        },
-                        "units": "V"
+                        }
                       }
                     }
                   }
@@ -253,15 +257,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "sweep": {
-                        "value": "AUTO",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": ""
+                        },
                         "label": {
                           "En": "Sweep",
                           "Fr": "Sweep",
                           "De": "Sweep",
                           "Es": "Sweep"
                         },
-                        "units": "",
                         "description": {
                           "En": "AUTO, NORMal, SINGle",
                           "Fr": "AUTO, NORMAL, UNIQUE",
@@ -315,15 +320,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "status": {
-                    "value": "STOP",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Status",
                       "Fr": "État",
                       "De": "Status",
                       "Es": "Estado"
-                    },
-                    "units": ""
+                    }
                   }
                 }
               }

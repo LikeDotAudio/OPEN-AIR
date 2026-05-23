@@ -640,8 +640,8 @@
             "AES70": "OcaBooleanActuator",
             "handler": "set_continuous_initiate_mode",
             "layout": {
-              "height": 75,
-              "width": 200,
+              "height": "100%",
+              "width": "100%",
               "align": "center",
               "font": 15
             },
@@ -783,7 +783,7 @@
               "height": 50,
               "alpha": 0.9,
               "max_cols": 5,
-              "width": 50,
+              "width": "100%",
               "stretch": "width",
               "font": 10
             },

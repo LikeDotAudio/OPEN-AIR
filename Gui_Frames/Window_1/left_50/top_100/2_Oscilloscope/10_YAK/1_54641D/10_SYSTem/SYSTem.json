@@ -49,15 +49,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "error": {
-                    "value": "Code, Msg",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Error",
                       "Fr": "Erreur",
                       "De": "Fehler",
                       "Es": "Error"
-                    },
-                    "units": ""
+                    }
                   }
                 }
               }
@@ -92,15 +93,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "setup": {
-                    "value": "Binary Block",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Setup",
                       "Fr": "Installation",
                       "De": "Einrichtung",
                       "Es": "Configuración"
-                    },
-                    "units": ""
+                    }
                   }
                 }
               }
@@ -146,15 +148,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "state": {
-                    "value": "ON",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Lock",
                       "Fr": "Verrouiller",
                       "De": "Sperren",
                       "Es": "Bloquear"
                     },
-                    "units": "",
                     "description": {
                       "En": "ON or OFF",
                       "Fr": "ON or OFF",

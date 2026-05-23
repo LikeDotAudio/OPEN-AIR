@@ -58,48 +58,52 @@
                     "type": "OcaBlock",
                     "fields": {
                       "Vpp": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "Volts"
+                        },
                         "label": {
                           "En": "Vpp (Volts)",
                           "Fr": "Vpp (Volts)",
                           "De": "Vpp (Volts)",
                           "Es": "Vpp (Volts)"
-                        },
-                        "value": "The peak-to-peak voltage.",
-                        "type": "_GuiValue",
-                        "units": "Volts"
+                        }
                       },
                       "Vrms": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "Volts"
+                        },
                         "label": {
                           "En": "Vrms (Volts)",
                           "Fr": "Vrms (Volts)",
                           "De": "Veff (Volts)",
                           "Es": "Vrms (Volts)"
-                        },
-                        "value": "The root mean square voltage.",
-                        "type": "_GuiValue",
-                        "units": "Volts"
+                        }
                       },
                       "Freq": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "Hz"
+                        },
                         "label": {
                           "En": "Frequency (Hz)",
                           "Fr": "Fréquence (Hz)",
                           "De": "Frequenz (Hz)",
                           "Es": "Frecuencia (Hz)"
-                        },
-                        "value": "The signal frequency.",
-                        "type": "_GuiValue",
-                        "units": "Hz"
+                        }
                       },
                       "Duty": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "%"
+                        },
                         "label": {
                           "En": "Duty Cycle (%)",
                           "Fr": "Cycle de service (%)",
                           "De": "Tastverhältnis (%)",
                           "Es": "Ciclo de trabajo (%)"
-                        },
-                        "value": "The duty cycle percentage.",
-                        "type": "_GuiValue",
-                        "units": "%"
+                        }
                       }
                     }
                   }
@@ -156,15 +160,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "scale": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "Volts/Div"
+                        },
                         "label": {
                           "En": "Scale (Volts/Div)",
                           "Fr": "Échelle (Volts/Div)",
                           "De": "Skala (Volts/Div)",
                           "Es": "Escala (Volts/Div)"
-                        },
-                        "value": "The current vertical scale.",
-                        "type": "_GuiValue",
-                        "units": "Volts/Div"
+                        }
                       }
                     }
                   }
@@ -199,15 +204,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "offset": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "Volts"
+                        },
                         "label": {
                           "En": "Offset (Volts)",
                           "Fr": "Décalage (Volts)",
                           "De": "Versatz (Volts)",
                           "Es": "Compensación (Volts)"
-                        },
-                        "value": "The current vertical offset.",
-                        "type": "_GuiValue",
-                        "units": "Volts"
+                        }
                       }
                     }
                   }
@@ -242,15 +248,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "coupling": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": ""
+                        },
                         "label": {
                           "En": "Coupling",
                           "Fr": "Couplage",
                           "De": "Kopplung",
                           "Es": "Acoplamiento"
-                        },
-                        "value": "The current coupling (AC, DC, GND).",
-                        "type": "_GuiValue",
-                        "units": ""
+                        }
                       }
                     }
                   }
@@ -285,15 +292,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "atten": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": "X"
+                        },
                         "label": {
                           "En": "Probe Attenuation",
                           "Fr": "Probe Atténuation",
                           "De": "Probe Dämpfung",
                           "Es": "Probe Atenuación"
-                        },
-                        "value": "The current probe attenuation factor.",
-                        "type": "_GuiValue",
-                        "units": "X"
+                        }
                       }
                     }
                   }
@@ -328,15 +336,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "limit": {
+                        "type": "_GuiValue",
+                        "domain": {
+                          "units": ""
+                        },
                         "label": {
                           "En": "Bandwidth Limit",
                           "Fr": "Bande passante Limit",
                           "De": "Bandbreite Limit",
                           "Es": "Ancho de banda Limit"
-                        },
-                        "value": "The current bandwidth limit (20M or OFF).",
-                        "type": "_GuiValue",
-                        "units": ""
+                        }
                       }
                     }
                   }

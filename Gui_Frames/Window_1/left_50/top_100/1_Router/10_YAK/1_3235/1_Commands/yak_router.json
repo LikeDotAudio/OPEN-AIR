@@ -46,15 +46,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "channel_list": {
-                    "value": "100,101",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Channel List",
                       "Fr": "Canal List",
                       "De": "Kanal List",
                       "Es": "Canal List"
                     },
-                    "units": "",
                     "description": {
                       "En": "List of channels to close",
                       "Fr": "List of channels to close",
@@ -106,15 +107,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "channel_list": {
-                    "value": "100-103",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Channel List",
                       "Fr": "Canal List",
                       "De": "Kanal List",
                       "Es": "Canal List"
                     },
-                    "units": "",
                     "description": {
                       "En": "List of channels to open",
                       "Fr": "List of channels to open",
@@ -172,15 +174,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "channel": {
-                    "value": "100",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Channel",
                       "Fr": "Canal",
                       "De": "Kanal",
                       "Es": "Canal"
                     },
-                    "units": "",
                     "description": {
                       "En": "Target Channel",
                       "Fr": "Target Canal",
@@ -269,15 +272,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "slot": {
-                    "value": "100",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Slot",
                       "Fr": "Slot",
                       "De": "Slot",
                       "Es": "Slot"
                     },
-                    "units": "",
                     "description": {
                       "En": "Slot to reset",
                       "Fr": "Slot to reset",
@@ -367,15 +371,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "channel": {
-                    "value": "100",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Channel",
                       "Fr": "Canal",
                       "De": "Kanal",
                       "Es": "Canal"
                     },
-                    "units": "",
                     "description": {
                       "En": "Format: esnn (e=extender, s=slot, nn=channel)",
                       "Fr": "Format: esnn (e=extender, s=slot, nn=channel)",
@@ -389,7 +394,6 @@
                 "type": "OcaBlock",
                 "fields": {
                   "state": {
-                    "value": "0=Open, 1=Closed",
                     "type": "_GuiValue",
                     "label": {
                       "En": "State",
@@ -442,15 +446,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "slot": {
-                    "value": "100",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Slot",
                       "Fr": "Slot",
                       "De": "Slot",
                       "Es": "Slot"
                     },
-                    "units": "",
                     "description": {
                       "En": "Slot Number (e.g., 100)",
                       "Fr": "Slot Number (e.g., 100)",
@@ -464,7 +469,6 @@
                 "type": "OcaBlock",
                 "fields": {
                   "id_string": {
-                    "value": "Card ID String",
                     "type": "_GuiValue",
                     "label": {
                       "En": "ID String",

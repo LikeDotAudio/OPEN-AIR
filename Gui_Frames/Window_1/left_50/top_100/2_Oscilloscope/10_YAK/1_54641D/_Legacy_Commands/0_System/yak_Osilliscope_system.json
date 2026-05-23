@@ -58,15 +58,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "idn_string": {
-                        "value": "Device ID",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": ""
+                        },
                         "label": {
                           "En": "ID String",
                           "Fr": "Chaîne ID",
                           "De": "ID-String",
                           "Es": "Cadena de ID"
-                        },
-                        "units": ""
+                        }
                       }
                     }
                   }
@@ -101,15 +102,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "error_msg": {
-                        "value": "Error Message",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": ""
+                        },
                         "label": {
                           "En": "Error Message",
                           "Fr": "Erreur Message",
                           "De": "Fehler Message",
                           "Es": "Error Message"
-                        },
-                        "units": ""
+                        }
                       }
                     }
                   }

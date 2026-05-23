@@ -49,15 +49,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "condition": {
-                    "value": "0",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Condition",
                       "Fr": "Condition",
                       "De": "Condition",
                       "Es": "Condition"
-                    },
-                    "units": ""
+                    }
                   }
                 }
               }

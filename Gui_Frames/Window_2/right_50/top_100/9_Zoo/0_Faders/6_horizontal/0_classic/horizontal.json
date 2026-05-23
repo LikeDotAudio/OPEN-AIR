@@ -22,20 +22,24 @@
         "fields": {
           "pan_classic": {
             "type": "_CustomHorizontalFader",
-            "label_active": {
-              "En": "Classic Pan",
-              "Fr": "Classique Panoramique",
-              "De": "Klassisch Panorama",
-              "Es": "Clásico Panorámico"
+            "domain": {
+              "min": -100.0,
+              "max": 100.0
+            },
+            "value": {
+              "default_value": 0.0
             },
             "layout": {
               "W": 400,
               "H": 80,
               "sticky": "ew"
             },
-            "value_min": -100.0,
-            "value_max": 100.0,
-            "value_default": 0.0,
+            "label_active": {
+              "En": "Classic Pan",
+              "Fr": "Classique Panoramique",
+              "De": "Klassisch Panorama",
+              "Es": "Clásico Panorámico"
+            },
             "cap_width": 55,
             "cap_height": 40,
             "cap_color": "#dcdcdc"
@@ -53,20 +57,24 @@
         "fields": {
           "freq_sweep": {
             "type": "_CustomHorizontalFader",
-            "label_active": {
-              "En": "Log Sweep",
-              "Fr": "Log Sweep",
-              "De": "Log Sweep",
-              "Es": "Log Sweep"
+            "domain": {
+              "min": 20.0,
+              "max": 20000.0
+            },
+            "value": {
+              "default_value": 1000.0
             },
             "layout": {
               "W": 400,
               "H": 100,
               "sticky": "ew"
             },
-            "value_min": 20.0,
-            "value_max": 20000.0,
-            "value_default": 1000.0,
+            "label_active": {
+              "En": "Log Sweep",
+              "Fr": "Log Sweep",
+              "De": "Log Sweep",
+              "Es": "Log Sweep"
+            },
             "log_exponent": 3.0,
             "tick_interval": 2000,
             "cap_width": 45,
@@ -87,20 +95,24 @@
         "fields": {
           "compact_mix": {
             "type": "_CustomHorizontalFader",
-            "label_active": {
-              "En": "Compact Mix",
-              "Fr": "Compact Mix",
-              "De": "Compact Mix",
-              "Es": "Compact Mezcla"
+            "domain": {
+              "min": 0.0,
+              "max": 10.0
+            },
+            "value": {
+              "default_value": 5.0
             },
             "layout": {
               "W": 300,
               "H": 60,
               "sticky": "ew"
             },
-            "value_min": 0.0,
-            "value_max": 10.0,
-            "value_default": 5.0,
+            "label_active": {
+              "En": "Compact Mix",
+              "Fr": "Compact Mix",
+              "De": "Compact Mix",
+              "Es": "Compact Mezcla"
+            },
             "cap_width": 30,
             "cap_height": 25,
             "cap_color": "#ce9178",
@@ -119,20 +131,24 @@
         "fields": {
           "long_delay": {
             "type": "_CustomHorizontalFader",
-            "label_active": {
-              "En": "Long Delay",
-              "Fr": "Long Delay",
-              "De": "Long Delay",
-              "Es": "Long Delay"
+            "domain": {
+              "min": 0.0,
+              "max": 2.0
+            },
+            "value": {
+              "default_value": 0.5
             },
             "layout": {
               "W": 500,
               "H": 70,
               "sticky": "ew"
             },
-            "value_min": 0.0,
-            "value_max": 2.0,
-            "value_default": 0.5,
+            "label_active": {
+              "En": "Long Delay",
+              "Fr": "Long Delay",
+              "De": "Long Delay",
+              "Es": "Long Delay"
+            },
             "cap_width": 80,
             "cap_height": 30,
             "cap_color": "#b5cea8",
@@ -151,20 +167,24 @@
         "fields": {
           "industrial_decay": {
             "type": "_CustomHorizontalFader",
-            "label_active": {
-              "En": "Industrial Decay",
-              "Fr": "Industriel Decay",
-              "De": "Industriell Decay",
-              "Es": "Industrial Decay"
+            "domain": {
+              "min": 0.1,
+              "max": 10.0
+            },
+            "value": {
+              "default_value": 2.5
             },
             "layout": {
               "W": 400,
               "H": 120,
               "sticky": "ew"
             },
-            "value_min": 0.1,
-            "value_max": 10.0,
-            "value_default": 2.5,
+            "label_active": {
+              "En": "Industrial Decay",
+              "Fr": "Industriel Decay",
+              "De": "Industriell Decay",
+              "Es": "Industrial Decay"
+            },
             "fader_cap_scale": 1.5,
             "cap_color": "#FF9900",
             "tick_interval": 0.5

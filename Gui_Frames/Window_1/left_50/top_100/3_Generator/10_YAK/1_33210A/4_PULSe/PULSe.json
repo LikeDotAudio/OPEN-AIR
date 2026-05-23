@@ -49,15 +49,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "width_sec": {
-                    "value": "0.0001",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "s"
+                    },
                     "label": {
                       "En": "Width",
                       "Fr": "Largeur",
                       "De": "Breite",
                       "Es": "Ancho"
-                    },
-                    "units": "s"
+                    }
                   }
                 }
               }

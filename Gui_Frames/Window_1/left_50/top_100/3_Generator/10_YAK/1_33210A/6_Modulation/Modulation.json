@@ -49,15 +49,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "shape": {
-                    "value": "SIN",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Shape",
                       "Fr": "Shape",
                       "De": "Shape",
                       "Es": "Shape"
                     },
-                    "units": "",
                     "description": {
                       "En": "SIN, SQU, TRI, RAMP",
                       "Fr": "SIN, SQU, TRI, RAMP",
@@ -66,15 +67,16 @@
                     }
                   },
                   "freq": {
-                    "value": "100",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
                     "label": {
                       "En": "Frequency",
                       "Fr": "Fréquence",
                       "De": "Frequenz",
                       "Es": "Frecuencia"
                     },
-                    "units": "Hz",
                     "description": {
                       "En": "Modulating Freq Hz",
                       "Fr": "Modulating Freq Hz",
@@ -83,15 +85,16 @@
                     }
                   },
                   "depth": {
-                    "value": "50",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "%"
+                    },
                     "label": {
                       "En": "Depth",
                       "Fr": "Depth",
                       "De": "Depth",
                       "Es": "Depth"
                     },
-                    "units": "%",
                     "description": {
                       "En": "Depth %",
                       "Fr": "Profondeur %",

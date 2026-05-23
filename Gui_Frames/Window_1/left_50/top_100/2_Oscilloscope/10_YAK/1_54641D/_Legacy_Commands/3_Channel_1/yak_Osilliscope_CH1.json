@@ -58,7 +58,6 @@
                     "type": "OcaBlock",
                     "fields": {
                       "source": {
-                        "value": "CHANnel1",
                         "type": "_GuiValue",
                         "label": {
                           "En": "Source",
@@ -79,48 +78,52 @@
                     "type": "OcaBlock",
                     "fields": {
                       "vpp": {
-                        "value": "Vpp Value",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "V"
+                        },
                         "label": {
                           "En": "Vpp",
                           "Fr": "Vpp",
                           "De": "Vss",
                           "Es": "Vpp"
-                        },
-                        "units": "V"
+                        }
                       },
                       "vrms": {
-                        "value": "Vrms Value",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "V"
+                        },
                         "label": {
                           "En": "Vrms",
                           "Fr": "Vrms",
                           "De": "Veff",
                           "Es": "Vrms"
-                        },
-                        "units": "V"
+                        }
                       },
                       "vmax": {
-                        "value": "Vmax Value",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "V"
+                        },
                         "label": {
                           "En": "Vmax",
                           "Fr": "Vmax",
                           "De": "Vmax",
                           "Es": "Vmax"
-                        },
-                        "units": "V"
+                        }
                       },
                       "vmin": {
-                        "value": "Vmin Value",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "V"
+                        },
                         "label": {
                           "En": "Vmin",
                           "Fr": "Vmin",
                           "De": "Vmin",
                           "Es": "Vmin"
-                        },
-                        "units": "V"
+                        }
                       }
                     }
                   }
@@ -155,7 +158,6 @@
                     "type": "OcaBlock",
                     "fields": {
                       "source": {
-                        "value": "CHANnel1",
                         "type": "_GuiValue",
                         "label": {
                           "En": "Source",
@@ -170,48 +172,52 @@
                     "type": "OcaBlock",
                     "fields": {
                       "frequency": {
-                        "value": "Freq Value",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "Hz"
+                        },
                         "label": {
                           "En": "Frequency",
                           "Fr": "Fréquence",
                           "De": "Frequenz",
                           "Es": "Frecuencia"
-                        },
-                        "units": "Hz"
+                        }
                       },
                       "period": {
-                        "value": "Period Value",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "s"
+                        },
                         "label": {
                           "En": "Period",
                           "Fr": "Période",
                           "De": "Periode",
                           "Es": "Periodo"
-                        },
-                        "units": "s"
+                        }
                       },
                       "duty_cycle": {
-                        "value": "Duty Cycle Value",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "%"
+                        },
                         "label": {
                           "En": "Duty Cycle",
                           "Fr": "Duty Cycle",
                           "De": "Duty Cycle",
                           "Es": "Duty Cycle"
-                        },
-                        "units": "%"
+                        }
                       },
                       "rise_time": {
-                        "value": "Rise Time Value",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "s"
+                        },
                         "label": {
                           "En": "Rise Time",
                           "Fr": "Rise Temps",
                           "De": "Rise Zeit",
                           "Es": "Rise Tiempo"
-                        },
-                        "units": "s"
+                        }
                       }
                     }
                   }
@@ -268,15 +274,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "scale": {
-                        "value": "1.0",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "V/div"
+                        },
                         "label": {
                           "En": "Scale",
                           "Fr": "Échelle",
                           "De": "Skala",
                           "Es": "Escala"
                         },
-                        "units": "V/div",
                         "description": {
                           "En": "Volts/Div",
                           "Fr": "Volts/Div",
@@ -317,15 +324,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "offset": {
-                        "value": "0.0",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "V"
+                        },
                         "label": {
                           "En": "Offset",
                           "Fr": "Décalage",
                           "De": "Versatz",
                           "Es": "Compensación"
                         },
-                        "units": "V",
                         "description": {
                           "En": "Volts",
                           "Fr": "Volts",
@@ -366,7 +374,6 @@
                     "type": "OcaBlock",
                     "fields": {
                       "coupling": {
-                        "value": "DC",
                         "type": "_GuiValue",
                         "label": {
                           "En": "Coupling",
@@ -414,7 +421,6 @@
                     "type": "OcaBlock",
                     "fields": {
                       "attenuation": {
-                        "value": "10",
                         "type": "_GuiValue",
                         "label": {
                           "En": "Probe Atten",
@@ -456,7 +462,6 @@
                     "type": "OcaBlock",
                     "fields": {
                       "string": {
-                        "value": "\"SIG1\"",
                         "type": "_GuiValue",
                         "label": {
                           "En": "Label",
@@ -498,7 +503,6 @@
                     "type": "OcaBlock",
                     "fields": {
                       "state": {
-                        "value": "ON",
                         "type": "_GuiValue",
                         "label": {
                           "En": "BW Limit",
@@ -546,7 +550,6 @@
                     "type": "OcaBlock",
                     "fields": {
                       "state": {
-                        "value": "OFF",
                         "type": "_GuiValue",
                         "label": {
                           "En": "Invert",

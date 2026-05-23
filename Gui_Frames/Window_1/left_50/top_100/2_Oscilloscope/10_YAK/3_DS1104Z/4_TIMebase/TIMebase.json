@@ -49,15 +49,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "mode": {
-                    "value": "MAIN",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Mode",
                       "Fr": "Mode",
                       "De": "Modus",
                       "Es": "Modo"
                     },
-                    "units": "",
                     "description": {
                       "En": "MAIN, XY, ROLL",
                       "Fr": "MAIN, XY, ROLL",
@@ -98,15 +99,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "scale": {
-                    "value": "1.0e-3",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "s/div"
+                    },
                     "label": {
                       "En": "Scale",
                       "Fr": "Échelle",
                       "De": "Skala",
                       "Es": "Escala"
-                    },
-                    "units": "s/div"
+                    }
                   }
                 }
               }
@@ -141,15 +143,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "offset": {
-                    "value": "0.0",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "s"
+                    },
                     "label": {
                       "En": "Delay",
                       "Fr": "Delay",
                       "De": "Delay",
                       "Es": "Delay"
-                    },
-                    "units": "s"
+                    }
                   }
                 }
               }

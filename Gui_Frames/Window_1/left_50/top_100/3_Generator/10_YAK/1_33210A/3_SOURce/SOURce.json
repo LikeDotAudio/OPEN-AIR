@@ -49,15 +49,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "freq": {
-                    "value": "1000",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "Hz"
+                    },
                     "label": {
                       "En": "Frequency",
                       "Fr": "Fréquence",
                       "De": "Frequenz",
                       "Es": "Frecuencia"
-                    },
-                    "units": "Hz"
+                    }
                   }
                 }
               }
@@ -92,15 +93,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "amp": {
-                    "value": "1.0",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "Vpp"
+                    },
                     "label": {
                       "En": "Amplitude",
                       "Fr": "Amplitude",
                       "De": "Amplitude",
                       "Es": "Amplitud"
                     },
-                    "units": "Vpp",
                     "description": {
                       "En": "Default unit is Vpp",
                       "Fr": "L'unité par défaut est Vpp",
@@ -141,15 +143,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "offset": {
-                    "value": "0.0",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "V"
+                    },
                     "label": {
                       "En": "Offset",
                       "Fr": "Décalage",
                       "De": "Versatz",
                       "Es": "Compensación"
-                    },
-                    "units": "V"
+                    }
                   }
                 }
               }
@@ -184,15 +187,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "shape": {
-                    "value": "SIN",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Shape",
                       "Fr": "Shape",
                       "De": "Shape",
                       "Es": "Shape"
                     },
-                    "units": "",
                     "description": {
                       "En": "SIN, SQU, RAMP, PULS, NOIS, DC, USER",
                       "Fr": "SIN, SQU, RAMP, PULS, NOIS, DC, USER",
@@ -233,15 +237,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "units": {
-                    "value": "VPP",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Units",
                       "Fr": "Unités",
                       "De": "Einheiten",
                       "Es": "Unidades"
                     },
-                    "units": "",
                     "description": {
                       "En": "VPP, VRMS, DBM",
                       "Fr": "VPP, VRMS, DBM",

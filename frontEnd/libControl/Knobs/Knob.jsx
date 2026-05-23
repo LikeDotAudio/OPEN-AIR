@@ -182,6 +182,11 @@ const KnobCap = ({ center, radius, angle, config, filterId, indicatorColor }) =>
 const Knob = ({ value, onChange, config, size: defaultSize = 80 }) => {
     // 1. Config & Geometry Extraction
     const c = config || {};
+    // Fluid: measure the rendered box and use a SQUARE measured size so the knob
+    // redraws crisply at the resized scale while always staying round.
+    const fluid = !!c.fluid;
+    const wrapRef = React.useRef(null);
+    const [measured, setMeasured] = React.useState(0);
     const cosmetics = c.cosmetics || {};
     const colors = cosmetics.colors || {};
     const styling = cosmetics.styling || {};
@@ -191,7 +196,7 @@ const Knob = ({ value, onChange, config, size: defaultSize = 80 }) => {
     
     const w = c.geometry?.width || c.width || defaultSize;
     const h = c.geometry?.height || c.height || defaultSize;
-    const size = Math.min(w, h);
+    const size = (fluid && measured) ? measured : Math.min(w, h);
 
     const arcWidth = styling.arc_width !== undefined ? styling.arc_width : (c.arc_width || 5);
     const indicatorColor = c.indicator_color || colors.active || colors.primary || '#33A1FD';
@@ -201,6 +206,17 @@ const Knob = ({ value, onChange, config, size: defaultSize = 80 }) => {
     const padding = (arcWidth / 2) + 12;
     const radius = ((size - (padding * 2)) / 2) * 0.8;
     const center = size / 2;
+
+    // Fluid knobs measure their box (width) and redraw square at that size.
+    React.useEffect(() => {
+        if (!fluid || !wrapRef.current || typeof ResizeObserver === 'undefined') return;
+        const ro = new ResizeObserver((entries) => {
+            const wpx = Math.round(entries[0].contentRect.width);
+            if (wpx > 0) setMeasured((p) => (p === wpx ? p : wpx));
+        });
+        ro.observe(wrapRef.current);
+        return () => ro.disconnect();
+    }, [fluid]);
 
     // 2. Interaction State
     const [isDragging, setIsDragging] = React.useState(false);
@@ -232,8 +248,9 @@ const Knob = ({ value, onChange, config, size: defaultSize = 80 }) => {
     const filterId = `knob-${c.id || Math.random().toString(36).substr(2, 9)}`;
 
     return (
-        <svg 
-            width={size} height={size} 
+        <div ref={wrapRef} style={{ width: fluid ? '100%' : size, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <svg
+            width={size} height={size}
             viewBox={`0 0 ${size} ${size}`}
             style={{ touchAction: 'none', cursor: 'ns-resize', overflow: 'visible' }}
             onPointerDown={handlePointerDown}
@@ -278,6 +295,7 @@ const Knob = ({ value, onChange, config, size: defaultSize = 80 }) => {
                 indicatorColor={indicatorColor}
             />
         </svg>
+        </div>
     );
 };
 

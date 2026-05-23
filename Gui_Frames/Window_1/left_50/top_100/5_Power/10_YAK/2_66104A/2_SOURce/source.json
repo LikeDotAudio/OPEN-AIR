@@ -49,26 +49,28 @@
                 "type": "OcaBlock",
                 "fields": {
                   "volt": {
-                    "value": "5.0",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "V"
+                    },
                     "label": {
                       "En": "Voltage",
                       "Fr": "Tension",
                       "De": "Spannung",
                       "Es": "Voltaje"
-                    },
-                    "units": "V"
+                    }
                   },
                   "curr": {
-                    "value": "1.0",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "A"
+                    },
                     "label": {
                       "En": "Current",
                       "Fr": "Courant",
                       "De": "Strom",
                       "Es": "Corriente"
-                    },
-                    "units": "A"
+                    }
                   }
                 }
               }

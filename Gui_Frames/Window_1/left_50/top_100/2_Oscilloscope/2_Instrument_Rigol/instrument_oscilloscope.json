@@ -31,13 +31,15 @@
             "fields": {
               "time_per_div": {
                 "type": "_TextInput",
+                "value": {
+                  "default_value": "1e-3"
+                },
                 "label_active": {
                   "En": "Time/Div (s)",
                   "Fr": "Temps/Div (s)",
                   "De": "Zeit/Div (s)",
                   "Es": "Tiempo/Div (s)"
                 },
-                "value_default": "1e-3",
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
                     "type": "_GuiActuator",
@@ -71,13 +73,15 @@
             "fields": {
               "voltage_per_div": {
                 "type": "_TextInput",
+                "value": {
+                  "default_value": "1"
+                },
                 "label_active": {
                   "En": "Volts/Div (V)",
                   "Fr": "Volts/Div (V)",
                   "De": "Volts/Div (V)",
                   "Es": "Volts/Div (V)"
                 },
-                "value_default": "1",
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
                     "type": "_GuiActuator",
@@ -179,13 +183,15 @@
               },
               "trigger_level": {
                 "type": "_TextInput",
+                "value": {
+                  "default_value": "0"
+                },
                 "label_active": {
                   "En": "Level (V)",
                   "Fr": "Niveau (V)",
                   "De": "Pegel (V)",
                   "Es": "Nivel (V)"
                 },
-                "value_default": "0",
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
                     "type": "_GuiActuator",

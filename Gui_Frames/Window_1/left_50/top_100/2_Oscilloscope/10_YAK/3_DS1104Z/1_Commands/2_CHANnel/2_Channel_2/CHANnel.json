@@ -49,15 +49,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "state": {
-                    "value": "ON",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "State",
                       "Fr": "State",
                       "De": "State",
                       "Es": "State"
                     },
-                    "units": "",
                     "description": {
                       "En": "ON or OFF",
                       "Fr": "ON or OFF",
@@ -98,15 +99,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "limit": {
-                    "value": "OFF",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Limit",
                       "Fr": "Limit",
                       "De": "Limit",
                       "Es": "Limit"
                     },
-                    "units": "",
                     "description": {
                       "En": "20M or OFF",
                       "Fr": "20M or OFF",
@@ -147,15 +149,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "coupling": {
-                    "value": "DC",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Coupling",
                       "Fr": "Couplage",
                       "De": "Kopplung",
                       "Es": "Acoplamiento"
                     },
-                    "units": "",
                     "description": {
                       "En": "AC, DC, GND",
                       "Fr": "AC, DC, GND",
@@ -196,15 +199,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "scale": {
-                    "value": "1.0",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "V/div"
+                    },
                     "label": {
                       "En": "Scale",
                       "Fr": "Échelle",
                       "De": "Skala",
                       "Es": "Escala"
-                    },
-                    "units": "V/div"
+                    }
                   }
                 }
               }
@@ -239,15 +243,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "offset": {
-                    "value": "0.0",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "V"
+                    },
                     "label": {
                       "En": "Offset",
                       "Fr": "Décalage",
                       "De": "Versatz",
                       "Es": "Compensación"
-                    },
-                    "units": "V"
+                    }
                   }
                 }
               }
@@ -282,15 +287,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "unit": {
-                    "value": "VOLTs",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Unit",
                       "Fr": "Unité",
                       "De": "Einheit",
                       "Es": "Unidad"
                     },
-                    "units": "",
                     "description": {
                       "En": "VOLTs, WATTs, AMPs, UNKNown",
                       "Fr": "VOLTs, WATTs, AMPs, UNKNown",
@@ -331,15 +337,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "atten": {
-                    "value": "10",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": "X"
+                    },
                     "label": {
                       "En": "Atten",
                       "Fr": "Attén",
                       "De": "Atten",
                       "Es": "Aten"
                     },
-                    "units": "X",
                     "description": {
                       "En": "0.01 to 1000",
                       "Fr": "0.01 to 1000",

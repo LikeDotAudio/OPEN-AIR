@@ -49,15 +49,16 @@
                 "type": "OcaBlock",
                 "fields": {
                   "mode": {
-                    "value": "MANual",
                     "type": "_GuiValue",
+                    "domain": {
+                      "units": ""
+                    },
                     "label": {
                       "En": "Mode",
                       "Fr": "Mode",
                       "De": "Modus",
                       "Es": "Modo"
                     },
-                    "units": "",
                     "description": {
                       "En": "MANual, MEASure, OFF",
                       "Fr": "MANuel, MESure, DÉSACTIVÉ",
@@ -102,15 +103,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "pos": {
-                        "value": "0.0",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "s"
+                        },
                         "label": {
                           "En": "X1",
                           "Fr": "X1",
                           "De": "X1",
                           "Es": "X1"
-                        },
-                        "units": "s"
+                        }
                       }
                     }
                   }
@@ -140,15 +142,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "pos": {
-                        "value": "100e-6",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "s"
+                        },
                         "label": {
                           "En": "X2",
                           "Fr": "X2",
                           "De": "X2",
                           "Es": "X2"
-                        },
-                        "units": "s"
+                        }
                       }
                     }
                   }
@@ -189,15 +192,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "lev": {
-                        "value": "0.0",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "V"
+                        },
                         "label": {
                           "En": "Y1",
                           "Fr": "Y1",
                           "De": "Y1",
                           "Es": "Y1"
-                        },
-                        "units": "V"
+                        }
                       }
                     }
                   }
@@ -227,15 +231,16 @@
                     "type": "OcaBlock",
                     "fields": {
                       "lev": {
-                        "value": "1.0",
                         "type": "_GuiValue",
+                        "domain": {
+                          "units": "V"
+                        },
                         "label": {
                           "En": "Y2",
                           "Fr": "Y2",
                           "De": "Y2",
                           "Es": "Y2"
-                        },
-                        "units": "V"
+                        }
                       }
                     }
                   }
@@ -278,7 +283,6 @@
                 "type": "OcaBlock",
                 "fields": {
                   "delta": {
-                    "value": "s",
                     "type": "_GuiValue"
                   }
                 }
@@ -309,7 +313,6 @@
                 "type": "OcaBlock",
                 "fields": {
                   "delta": {
-                    "value": "V",
                     "type": "_GuiValue"
                   }
                 }

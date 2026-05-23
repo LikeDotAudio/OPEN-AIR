@@ -5,15 +5,18 @@
  * Renders editable controls for a node's own properties, recursing into nested
  * objects/arrays. Structural children (blocks/fields) are skipped.
  *
- * Layout rules (per design feedback):
- *  - Every loose top-level scalar (default_value, min, max, units, step…) is
- *    gathered under a synthetic "Domain" parent pinned to the TOP, so nothing is
- *    rendered un-parented. ("Domain" matches oaGui's pillar vocabulary; oaGui's
- *    "behavior" is a separate, container-only scroll/overflow concept.)
- *  - All sections start FOLDED, except the Domain group which starts open.
+ * Composite sub-configs (dial_config = embedded knob, fader_config = fader,
+ * value_config = readout) are MERGED with the library reference so every
+ * supported param is editable. Params that come from the library reference but
+ * are NOT in the saved JSON render in RED; editing one writes it to the JSON and
+ * it turns normal.
+ *
+ * Layout: loose top-level scalars are gathered under a "Domain" parent pinned to
+ * the top; all sections start folded except Domain.
  */
 (function () {
   const SKIP = new Set(['blocks', 'fields']);
+  const DIM = new Set(['width', 'height', 'x', 'y']); // accept px or %
 
   const Section = ({ title, depth, defaultOpen = false, accent, children }) => {
     const [open, setOpen] = React.useState(defaultOpen);
@@ -33,61 +36,76 @@
     );
   };
 
-  const isLeaf = (v) => v === null || typeof v !== 'object';
+  const isObj = (v) => v && typeof v === 'object' && !Array.isArray(v);
 
-  const PropertyNode = ({ k, value, keyPath, basePath, store, depth }) => {
-    if (value && typeof value === 'object' && !Array.isArray(value)) {
-      const entries = Object.entries(value);
+  // value  = the value to render (may be a merged reference+instance object)
+  // saved  = the corresponding value in the SAVED instance (undefined => not saved)
+  const PropertyNode = ({ k, value, saved, keyPath, basePath, store, depth, defaultOpen = false }) => {
+    if (isObj(value)) {
+      // Composite sub-config: merge the library reference so all params show.
+      let renderValue = value, savedObj = saved;
+      if (window.OaEdComposite && window.OaEdComposite.isSubWidget(k)) {
+        const ref = window.OaEdComposite.referenceFor(k);
+        if (ref) { renderValue = window.OaEdComposite.merge(ref, value); savedObj = value; }
+      }
+      const entries = Object.entries(renderValue);
       return (
-        <Section title={k} depth={depth} count={entries.length}>
+        <Section title={k} depth={depth} defaultOpen={defaultOpen} count={entries.length}>
           {entries.map(([ck, cv]) => (
-            <PropertyNode key={ck} k={ck} value={cv} keyPath={`${keyPath}.${ck}`}
-              basePath={basePath} store={store} depth={depth + 1} />
+            <PropertyNode key={ck} k={ck} value={cv}
+              saved={isObj(savedObj) || Array.isArray(savedObj) ? savedObj[ck] : undefined}
+              keyPath={`${keyPath}.${ck}`} basePath={basePath} store={store} depth={depth + 1} />
           ))}
         </Section>
       );
     }
     if (Array.isArray(value)) {
       return (
-        <Section title={`${k} [${value.length}]`} depth={depth} count={value.length}>
+        <Section title={`${k} [${value.length}]`} depth={depth} defaultOpen={defaultOpen} count={value.length}>
           {value.map((item, i) => (
-            <PropertyNode key={i} k={`#${i}`} value={item} keyPath={`${keyPath}.${i}`}
-              basePath={basePath} store={store} depth={depth + 1} />
+            <PropertyNode key={i} k={`#${i}`} value={item}
+              saved={Array.isArray(saved) ? saved[i] : undefined}
+              keyPath={`${keyPath}.${i}`} basePath={basePath} store={store} depth={depth + 1} />
           ))}
         </Section>
       );
     }
     return (
       <window.OaEdPropertyLeaf label={k} value={value} depth={depth}
+        notSaved={saved === undefined}
+        dimension={DIM.has(k)}
         options={window.OaEdEnum && window.OaEdEnum.optionsFor(keyPath)}
         onChange={(v) => store.setProp(basePath, keyPath, v)} />
     );
   };
 
-  /** Render the editable property tree for `node` (at `basePath`). */
+  /** Render the editable property tree for `node` (at `basePath`).
+   *  Renders in JSON key order (type → domain → value → layout → rest); the
+   *  domain and value parents are open by default. `type` is shown in the header,
+   *  so it's skipped here. */
   window.OaEdPropertyTree = ({ node, basePath, store }) => {
     if (!node || typeof node !== 'object') {
       return <div style={{ color: '#777', fontSize: 11, padding: 10 }}>No element selected.</div>;
     }
-    const entries = Object.entries(node).filter(([k]) => !SKIP.has(k));
-    const loose = entries.filter(([, v]) => isLeaf(v));
-    const sections = entries.filter(([, v]) => !isLeaf(v));
+    const entries = Object.entries(node).filter(([k]) => !SKIP.has(k) && k !== 'type');
 
     return (
       <div>
-        {loose.length > 0 && (
-          <Section title="Domain" depth={0} defaultOpen accent="#FF9900">
-            {loose.map(([k, v]) => (
-              <window.OaEdPropertyLeaf key={k} label={k} value={v} depth={1}
-                options={window.OaEdEnum && window.OaEdEnum.optionsFor(k)}
-                onChange={(nv) => store.setProp(basePath, k, nv)} />
-            ))}
-          </Section>
-        )}
-        {sections.map(([k, v]) => (
-          <PropertyNode key={k} k={k} value={v} keyPath={k}
-            basePath={basePath} store={store} depth={0} />
-        ))}
+        {entries.map(([k, v]) => {
+          if (isObj(v) || Array.isArray(v)) {
+            return (
+              <PropertyNode key={k} k={k} value={v} saved={v} keyPath={k}
+                basePath={basePath} store={store} depth={0}
+                defaultOpen={k === 'domain' || k === 'value'} />
+            );
+          }
+          return (
+            <window.OaEdPropertyLeaf key={k} label={k} value={v} depth={0}
+              dimension={DIM.has(k)}
+              options={window.OaEdEnum && window.OaEdEnum.optionsFor(k)}
+              onChange={(nv) => store.setProp(basePath, k, nv)} />
+          );
+        })}
       </div>
     );
   };

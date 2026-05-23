@@ -80,13 +80,15 @@
                 "fields": {
                   "Label_A": {
                     "type": "_TextInput",
+                    "value": {
+                      "default_value": "Batt_LiPo_Cell_1"
+                    },
                     "label_active": {
                       "En": "DUT 1 ID",
                       "Fr": "DUT 1 ID",
                       "De": "DUT 1 ID",
                       "Es": "DUT 1 ID"
                     },
-                    "value_default": "Batt_LiPo_Cell_1",
                     "message_details": {
                       "DC_LOAD_MODEL": {
                         "type": "_GuiActuator",
@@ -167,15 +169,17 @@
                 "fields": {
                   "Base_Fader_A": {
                     "type": "_GuiVerticalFader",
+                    "domain": {
+                      "min": "0",
+                      "max": "60",
+                      "units": "A"
+                    },
                     "label_active": {
                       "En": "BASE (A)",
                       "Fr": "BASE (A)",
                       "De": "BASE (A)",
                       "Es": "BASE (A)"
                     },
-                    "min": "0",
-                    "max": "60",
-                    "units": "A",
                     "message_details": {
                       "DC_LOAD_MODEL": {
                         "type": "_GuiActuator",
@@ -198,15 +202,17 @@
                   },
                   "Pulse_Fader_A": {
                     "type": "_GuiVerticalFader",
+                    "domain": {
+                      "min": "0",
+                      "max": "60",
+                      "units": "A"
+                    },
                     "label_active": {
                       "En": "PEAK (A)",
                       "Fr": "PEAK (A)",
                       "De": "PEAK (A)",
                       "Es": "PEAK (A)"
                     },
-                    "min": "0",
-                    "max": "60",
-                    "units": "A",
                     "message_details": {
                       "DC_LOAD_MODEL": {
                         "type": "_GuiActuator",
@@ -287,16 +293,20 @@
                   },
                   "Cutoff_Knob_A": {
                     "type": "_GuiHorizontalKnob",
+                    "domain": {
+                      "min": "0",
+                      "max": "20",
+                      "units": "V"
+                    },
+                    "value": {
+                      "default_value": "3.0"
+                    },
                     "label_active": {
                       "En": "Stop Volts",
                       "Fr": "Arrêter Volts",
                       "De": "Stopp Volts",
                       "Es": "Parar Volts"
                     },
-                    "value_default": "3.0",
-                    "min": "0",
-                    "max": "20",
-                    "units": "V",
                     "message_details": {
                       "DC_LOAD_MODEL": {
                         "type": "_GuiActuator",
@@ -330,13 +340,15 @@
                 "fields": {
                   "Ah_A": {
                     "type": "_GuiLabel",
+                    "value": {
+                      "default_value": "0.00 Ah"
+                    },
                     "label_active": {
                       "En": "Ah Drained",
                       "Fr": "Ah Drained",
                       "De": "Ah Drained",
                       "Es": "Ah Drained"
                     },
-                    "value_default": "0.00 Ah",
                     "message_details": {
                       "DC_LOAD_MODEL": {
                         "type": "_GuiActuator",
@@ -413,13 +425,15 @@
                 "fields": {
                   "Label_B": {
                     "type": "_TextInput",
+                    "value": {
+                      "default_value": "Batt_Lead_Acid_Old"
+                    },
                     "label_active": {
                       "En": "DUT 2 ID",
                       "Fr": "DUT 2 ID",
                       "De": "DUT 2 ID",
                       "Es": "DUT 2 ID"
                     },
-                    "value_default": "Batt_Lead_Acid_Old",
                     "message_details": {
                       "DC_LOAD_MODEL": {
                         "type": "_GuiActuator",
@@ -500,15 +514,17 @@
                 "fields": {
                   "Base_Fader_B": {
                     "type": "_GuiVerticalFader",
+                    "domain": {
+                      "min": "0",
+                      "max": "60",
+                      "units": "A"
+                    },
                     "label_active": {
                       "En": "BASE (A)",
                       "Fr": "BASE (A)",
                       "De": "BASE (A)",
                       "Es": "BASE (A)"
                     },
-                    "min": "0",
-                    "max": "60",
-                    "units": "A",
                     "message_details": {
                       "DC_LOAD_MODEL": {
                         "type": "_GuiActuator",
@@ -531,15 +547,17 @@
                   },
                   "Pulse_Fader_B": {
                     "type": "_GuiVerticalFader",
+                    "domain": {
+                      "min": "0",
+                      "max": "60",
+                      "units": "A"
+                    },
                     "label_active": {
                       "En": "PEAK (A)",
                       "Fr": "PEAK (A)",
                       "De": "PEAK (A)",
                       "Es": "PEAK (A)"
                     },
-                    "min": "0",
-                    "max": "60",
-                    "units": "A",
                     "message_details": {
                       "DC_LOAD_MODEL": {
                         "type": "_GuiActuator",
@@ -620,16 +638,20 @@
                   },
                   "Cutoff_Knob_B": {
                     "type": "_GuiHorizontalKnob",
+                    "domain": {
+                      "min": "0",
+                      "max": "24",
+                      "units": "V"
+                    },
+                    "value": {
+                      "default_value": "10.5"
+                    },
                     "label_active": {
                       "En": "Stop Volts",
                       "Fr": "Arrêter Volts",
                       "De": "Stopp Volts",
                       "Es": "Parar Volts"
                     },
-                    "value_default": "10.5",
-                    "min": "0",
-                    "max": "24",
-                    "units": "V",
                     "message_details": {
                       "DC_LOAD_MODEL": {
                         "type": "_GuiActuator",
@@ -663,13 +685,15 @@
                 "fields": {
                   "Ah_B": {
                     "type": "_GuiLabel",
+                    "value": {
+                      "default_value": "0.00 Ah"
+                    },
                     "label_active": {
                       "En": "Ah Drained",
                       "Fr": "Ah Drained",
                       "De": "Ah Drained",
                       "Es": "Ah Drained"
                     },
-                    "value_default": "0.00 Ah",
                     "message_details": {
                       "DC_LOAD_MODEL": {
                         "type": "_GuiActuator",

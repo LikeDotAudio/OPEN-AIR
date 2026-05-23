@@ -21,21 +21,23 @@
         },
         "fields": {
           "composite_drums": {
-            "type": "_CompositeFader",
+            "type": "_Horizontal_with_dial_Value",
+            "domain": {
+              "min": -60.0,
+              "max": 6.0
+            },
+            "layout": {
+              "width": 200,
+              "height": 650,
+              "alpha": 0.9
+            },
             "label_active": {
               "En": "Drum Group",
               "Fr": "Drum Group",
               "De": "Drum Group",
               "Es": "Drum Group"
             },
-            "value_min": -60.0,
-            "value_max": 6.0,
             "num_channels": 20,
-            "layout": {
-              "width": 200,
-              "height": 650,
-              "alpha": 0.9
-            },
             "channels": [
               {
                 "default": -12.0,

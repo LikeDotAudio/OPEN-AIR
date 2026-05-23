@@ -34,6 +34,22 @@
         "fields": {
           "Hotdog_1_Large": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -7.0,
+                "reff_point": 0.0,
+                "step": 5.0
+              },
+              "min": -20.0,
+              "max": 3.0,
+              "precision": 5.0
+            },
+            "value": {
+              "default_value": -7.0
+            },
+            "layout": {},
             "label": {
               "En": "Large Classic",
               "Fr": "Large Classique",
@@ -43,15 +59,6 @@
             "geometry": {
               "width": 300,
               "height": 200
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -7.0,
-                "reff_point": 0.0,
-                "step": 5.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -108,23 +115,30 @@
             "width": 300,
             "height": 200,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "hotdog",
             "bezel_width": 5,
             "Pointer_Style": "knife-edge",
             "pivot_colour": "#3e2723",
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -7.0,
-            "value": -7.0,
-            "default_value": -7.0,
-            "step": 5.0,
             "path": "Hotdog_Variations/Hotdog_1_Large"
           },
           "Hotdog_2_Medium": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -10.0,
+                "reff_point": 0.0,
+                "step": 5.0
+              },
+              "min": -20.0,
+              "max": 3.0,
+              "precision": 5.0
+            },
+            "value": {
+              "default_value": -10.0
+            },
+            "layout": {},
             "label": {
               "En": "Medium Gold",
               "Fr": "Moyen Gold",
@@ -134,15 +148,6 @@
             "geometry": {
               "width": 250,
               "height": 160
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -10.0,
-                "reff_point": 0.0,
-                "step": 5.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -190,23 +195,30 @@
             "width": 250,
             "height": 160,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "hotdog",
             "bezel_width": 3,
             "Pointer_Style": "baton",
             "pivot_colour": "#FFD700",
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -10.0,
-            "value": -10.0,
-            "default_value": -10.0,
-            "step": 5.0,
             "path": "Hotdog_Variations/Hotdog_2_Medium"
           },
           "Hotdog_3_Small": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -3.0,
+                "reff_point": 0.0,
+                "step": 5.0
+              },
+              "min": -20.0,
+              "max": 3.0,
+              "precision": 5.0
+            },
+            "value": {
+              "default_value": -3.0
+            },
+            "layout": {},
             "label": {
               "En": "Small Silver",
               "Fr": "Small Silver",
@@ -216,15 +228,6 @@
             "geometry": {
               "width": 180,
               "height": 120
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -3.0,
-                "reff_point": 0.0,
-                "step": 5.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -272,24 +275,28 @@
             "width": 180,
             "height": 120,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "hotdog",
             "bezel_width": 1,
             "mask": false,
             "Pointer_Style": "needle",
             "pivot_colour": "silver",
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -3.0,
-            "value": -3.0,
-            "default_value": -3.0,
-            "step": 5.0,
             "path": "Hotdog_Variations/Hotdog_3_Small"
           },
           "Hotdog_4_Night_Mode": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -5.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -5.0
+            },
+            "layout": {},
             "label": {
               "En": "Night Mode",
               "Fr": "Night Mode",
@@ -299,13 +306,6 @@
             "geometry": {
               "width": 250,
               "height": 160
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -5.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -353,22 +353,27 @@
             "width": 250,
             "height": 160,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "hotdog",
             "bezel_width": 4,
             "enable_lighting": true,
             "Pointer_Style": "knife-edge",
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -5.0,
-            "value": -5.0,
-            "default_value": -5.0,
             "path": "Hotdog_Variations/Hotdog_4_Night_Mode"
           },
           "Hotdog_5_Flat": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -15.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -15.0
+            },
+            "layout": {},
             "label": {
               "En": "Flat Blue",
               "Fr": "Flat Blue",
@@ -378,13 +383,6 @@
             "geometry": {
               "width": 250,
               "height": 160
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -15.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -432,22 +430,27 @@
             "width": 250,
             "height": 160,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "hotdog",
             "bezel_width": 2,
             "enable_lighting": false,
             "Pointer_Style": "baton",
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -15.0,
-            "value": -15.0,
-            "default_value": -15.0,
             "path": "Hotdog_Variations/Hotdog_5_Flat"
           },
           "Hotdog_6_Luxury": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": 0.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": 0.0
+            },
+            "layout": {},
             "label": {
               "En": "Luxury Gold",
               "Fr": "Luxury Gold",
@@ -457,13 +460,6 @@
             "geometry": {
               "width": 250,
               "height": 160
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": 0.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -511,22 +507,27 @@
             "width": 250,
             "height": 160,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "hotdog",
             "bezel_width": 5,
             "enable_lighting": true,
             "Pointer_Style": "spade",
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": 0.0,
-            "value": 0.0,
-            "default_value": 0.0,
             "path": "Hotdog_Variations/Hotdog_6_Luxury"
           },
           "Hotdog_7_Cyber": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -2.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -2.0
+            },
+            "layout": {},
             "label": {
               "En": "Cyber Neon",
               "Fr": "Cyber Neon",
@@ -536,13 +537,6 @@
             "geometry": {
               "width": 250,
               "height": 160
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -2.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -591,22 +585,27 @@
             "width": 250,
             "height": 160,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "hotdog",
             "bezel_width": 2,
             "enable_lighting": true,
             "Pointer_Style": "taper",
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -2.0,
-            "value": -2.0,
-            "default_value": -2.0,
             "path": "Hotdog_Variations/Hotdog_7_Cyber"
           },
           "Hotdog_8_Vintage": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -10.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -10.0
+            },
+            "layout": {},
             "label": {
               "En": "Vintage Cream",
               "Fr": "Vintage Cream",
@@ -616,13 +615,6 @@
             "geometry": {
               "width": 250,
               "height": 160
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -10.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -670,22 +662,27 @@
             "width": 250,
             "height": 160,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "hotdog",
             "bezel_width": 5,
             "enable_lighting": false,
             "Pointer_Style": "teardrop",
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -10.0,
-            "value": -10.0,
-            "default_value": -10.0,
             "path": "Hotdog_Variations/Hotdog_8_Vintage"
           },
           "Hotdog_9_Blueprint": {
             "type": "_NeedleVUMeter",
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -20.0
+              },
+              "min": -20.0,
+              "max": 3.0
+            },
+            "value": {
+              "default_value": -20.0
+            },
+            "layout": {},
             "label": {
               "En": "Blueprint",
               "Fr": "Blueprint",
@@ -695,13 +692,6 @@
             "geometry": {
               "width": 250,
               "height": 160
-            },
-            "domain": {
-              "primary": {
-                "min": -20.0,
-                "max": 3.0,
-                "value_default": -20.0
-              }
             },
             "cosmetics": {
               "colors": {
@@ -749,18 +739,10 @@
             "width": 250,
             "height": 160,
             "Orientation": "vertical",
-            "layout": {},
             "bezel_shape": "hotdog",
             "bezel_width": 2,
             "enable_lighting": false,
             "Pointer_Style": "line",
-            "min": -20.0,
-            "value_min": -20.0,
-            "max": 3.0,
-            "value_max": 3.0,
-            "value_default": -20.0,
-            "value": -20.0,
-            "default_value": -20.0,
             "path": "Hotdog_Variations/Hotdog_9_Blueprint"
           }
         },

@@ -1,146 +1,158 @@
 {
   "CONFIG_MAIN_PATH": {
+    "type": "_Label",
+    "domain": {
+      "units": null
+    },
     "label": {
       "En": "Main Configuration Path",
       "Fr": "Main Configuration Path",
       "De": "Main Konfiguration Path",
       "Es": "Main Configuración Path"
     },
-    "value": "config/program_config.ini",
-    "type": "_Label",
-    "AES70": "OcaStringSensor",
-    "units": null
+    "AES70": "OcaStringSensor"
   },
   "CONFIG_INSTRUMENT_PATH": {
+    "type": "_Label",
+    "domain": {
+      "units": null
+    },
     "label": {
       "En": "Instrument Configuration Path",
       "Fr": "Instrument Configuration Path",
       "De": "Instrument Konfiguration Path",
       "Es": "Instrumento Configuración Path"
     },
-    "value": "config/instrument_config.ini",
-    "type": "_Label",
-    "AES70": "OcaStringSensor",
-    "units": null
+    "AES70": "OcaStringSensor"
   },
   "CONFIG_MARKER_PATH": {
+    "type": "_Label",
+    "domain": {
+      "units": null
+    },
     "label": {
       "En": "Marker Configuration Path",
       "Fr": "Marqueur Configuration Path",
       "De": "Marker Konfiguration Path",
       "Es": "Marcador Configuration Path"
     },
-    "value": "config/marker_config.ini",
-    "type": "_Label",
-    "AES70": "OcaStringSensor",
-    "units": null
+    "AES70": "OcaStringSensor"
   },
   "CONFIG_LOG_FILES_PATH": {
+    "type": "_Label",
+    "domain": {
+      "units": null
+    },
     "label": {
       "En": "Log Files Path",
       "Fr": "Chemin des fichiers journaux",
       "De": "Pfad zu Logdateien",
       "Es": "Ruta de archivos de registro"
     },
-    "value": "logs/",
-    "type": "_Label",
-    "AES70": "OcaStringSensor",
-    "units": null
+    "AES70": "OcaStringSensor"
   },
   "DATA_MAIN_PATH": {
+    "type": "_Label",
+    "domain": {
+      "units": null
+    },
     "label": {
       "En": "Main Data Path",
       "Fr": "Main Data Path",
       "De": "Main Data Path",
       "Es": "Main Data Path"
     },
-    "value": "DATA/",
-    "type": "_Label",
-    "AES70": "OcaStringSensor",
-    "units": null
+    "AES70": "OcaStringSensor"
   },
   "DATA_SCANS_PATH": {
+    "type": "_Label",
+    "domain": {
+      "units": null
+    },
     "label": {
       "En": "Scans Data Path",
       "Fr": "Balayages Data Path",
       "De": "Scans Data Path",
       "Es": "Escaneos Data Path"
     },
-    "value": "DATA/Scans/",
-    "type": "_Label",
-    "AES70": "OcaStringSensor",
-    "units": null
+    "AES70": "OcaStringSensor"
   },
   "DATA_PLOTS_PATH": {
+    "type": "_Label",
+    "domain": {
+      "units": null
+    },
     "label": {
       "En": "Plots Data Path",
       "Fr": "Plots Data Path",
       "De": "Plots Data Path",
       "Es": "Plots Data Path"
     },
-    "value": "DATA/Plots/",
-    "type": "_Label",
-    "AES70": "OcaStringSensor",
-    "units": null
+    "AES70": "OcaStringSensor"
   },
   "DATA_PRESETS_PATH": {
+    "type": "_Label",
+    "domain": {
+      "units": null
+    },
     "label": {
       "En": "Presets Data Path",
       "Fr": "Préréglages Data Path",
       "De": "Voreinstellungen Data Path",
       "Es": "Preajustes Data Path"
     },
-    "value": "DATA/Presets/",
-    "type": "_Label",
-    "AES70": "OcaStringSensor",
-    "units": null
+    "AES70": "OcaStringSensor"
   },
   "DATA_PRESETS_CSV_PATH": {
+    "type": "_Label",
+    "domain": {
+      "units": null
+    },
     "label": {
       "En": "Presets CSV Path",
       "Fr": "Préréglages CSV Path",
       "De": "Voreinstellungen CSV Path",
       "Es": "Preajustes CSV Path"
     },
-    "value": "DATA/Presets/presets.csv",
-    "type": "_Label",
-    "AES70": "OcaStringSensor",
-    "units": null
+    "AES70": "OcaStringSensor"
   },
   "DATA_MARKERS_PATH": {
+    "type": "_Label",
+    "domain": {
+      "units": null
+    },
     "label": {
       "En": "Markers Data Path",
       "Fr": "Marqueurs Data Path",
       "De": "Markers Data Path",
       "Es": "Marcadors Data Path"
     },
-    "value": "DATA/Markers/",
-    "type": "_Label",
-    "AES70": "OcaStringSensor",
-    "units": null
+    "AES70": "OcaStringSensor"
   },
   "DATA_IMD_LOG_PATH": {
+    "type": "_Label",
+    "domain": {
+      "units": null
+    },
     "label": {
       "En": "IMD Log Path",
       "Fr": "IMD Log Path",
       "De": "IMD Log Path",
       "Es": "IMD Log Path"
     },
-    "value": "DATA/Imd/",
-    "type": "_Label",
-    "AES70": "OcaStringSensor",
-    "units": null
+    "AES70": "OcaStringSensor"
   },
   "DATA_VISA_COMMANDS_PATH": {
+    "type": "_Label",
+    "domain": {
+      "units": null
+    },
     "label": {
       "En": "VISA Commands Path",
       "Fr": "Chemin des commandes VISA",
       "De": "VISA-Befehlspfad",
       "Es": "Ruta de comandos VISA"
     },
-    "value": "DATA/Visa_Commands/",
-    "type": "_Label",
-    "AES70": "OcaStringSensor",
-    "units": null
+    "AES70": "OcaStringSensor"
   }
 }

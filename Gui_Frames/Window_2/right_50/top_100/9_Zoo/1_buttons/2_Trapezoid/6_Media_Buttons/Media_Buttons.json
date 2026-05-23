@@ -44,6 +44,9 @@
               },
               "trap_button_green": {
                 "type": "_TrapezoidButton",
+                "value": {
+                  "default_value": true
+                },
                 "label_active": {
                   "En": "LATCHING",
                   "Fr": "LATCHING",
@@ -52,8 +55,7 @@
                 },
                 "color": "#006400",
                 "led_color": "#00FF00",
-                "latching": true,
-                "value_default": true
+                "latching": true
               },
               "trap_button_white_blue": {
                 "type": "_TrapezoidButton",
@@ -569,6 +571,9 @@
               },
               "toggler_grid_radio": {
                 "type": "_TrapezoidButtonToggler",
+                "value": {
+                  "default_value": "btn_t_1"
+                },
                 "label_active": {
                   "En": "4x4 Radio Grid",
                   "Fr": "4x4 Radio Grid",
@@ -576,7 +581,6 @@
                   "Es": "4x4 Radio Grid"
                 },
                 "layout_columns": 4,
-                "value_default": "btn_t_1",
                 "color": "#00008B",
                 "led_color": "#00BFFF",
                 "width": 40,

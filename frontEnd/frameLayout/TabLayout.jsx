@@ -1,7 +1,7 @@
 /**
  * TabLayout: Renders a tabbed "Notebook" interface.
  */
-window.TabLayout = ({ nodeName, node, path_prefix }) => {
+window.TabLayout = ({ nodeName, node, path_prefix, jsonPath }) => {
   const { tabs = {} } = node;
   const tabKeys = Object.keys(tabs);
   const [activeTab, setActiveTab] = React.useState(tabKeys[0]);
@@ -34,10 +34,11 @@ window.TabLayout = ({ nodeName, node, path_prefix }) => {
       {/* Tab Content */}
       <div className="tab-content" style={{ flex: 1, overflow: 'auto', background: '#1a1a1a' }}>
         {activeTab && (
-          <window.WidgetFactory 
-            nodeName={activeTab} 
-            node={tabs[activeTab]} 
-            path_prefix={`${path_prefix}/${nodeName}`} 
+          <window.WidgetFactory
+            nodeName={activeTab}
+            node={tabs[activeTab]}
+            path_prefix={`${path_prefix}/${nodeName}`}
+            jsonPath={jsonPath ? `${jsonPath}.tabs.${activeTab}` : undefined}
           />
         )}
       </div>

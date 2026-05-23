@@ -76,9 +76,9 @@ def main():
     subprocesses, and finally enters a monitoring loop.
 
     Inputs:
-        sys.argv: Accepts '--core' o
-        r '--ui' to bypass the supervisor and
-                 launch a specific partition directly (for debugging).
+        sys.argv: Accepts '--core', '--ui', or '--web' to bypass the
+                 supervisor and launch a specific partition (or the web
+                 interface) directly, for debugging.
 
     Outputs:
         None. Process terminates on child exit or manual interrupt.
@@ -98,6 +98,19 @@ def main():
         elif mode == "--ui":
             import oaGui.Managers.orchestration.loader_main_service as ui_mod
             ui_mod.main()
+            return
+        elif mode == "--web":
+            # The web launcher lives under frontEnd/ (outside the import path),
+            # so load it by file path and call its run() entry point directly.
+            import importlib.util
+            web_path = project_root / "frontEnd" / "Core" / "Launch" / "LauchWebserver.py"
+            if not web_path.exists():
+                log(f"🛑 CRITICAL FAILURE: Web launcher not found at {web_path}")
+                sys.exit(1)
+            spec = importlib.util.spec_from_file_location("LauchWebserver", web_path)
+            web_mod = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(web_mod)
+            web_mod.run()
             return
 
     # --- Supervisor Setup ---
@@ -215,6 +228,19 @@ def main():
     # Core is prioritized in the monitoring list at index 0.
     processes.insert(0, p_core)
 
+    # 3. Launch Web Interface (Browser-based control surface) — the LAST thing
+    #    spawned, so it comes up only after Core and UI are running. It runs as
+    #    its own subprocess because LauchWebserver.serve_forever() is blocking.
+    web_script = project_root / "frontEnd" / "Core" / "Launch" / "LauchWebserver.py"
+    p_web = None
+    if web_script.exists():
+        log("Spawning Web Interface (http://localhost:8000)...")
+        p_web = subprocess.Popen([python_executable, str(web_script)], env=child_env)
+        # Appended last; not in the restart logic since it is an auxiliary service.
+        processes.append(p_web)
+    else:
+        log(f"⚠️ [WARNING] Web interface launcher not found at {web_script}. Skipping web UI.")
+
     log("System Running. Monitoring child processes...")
 
     def interpret_exit_code(code):
@@ -262,6 +288,21 @@ def main():
                     log(f"🚨 The User Interface has exited unexpectedly ({desc}).")
                 shutdown_requested[0] = True # Initiate shutdown
                 break # Exit loop to proceed with shutdown
+
+        # Check Web Interface liveness (auxiliary service).
+        # Unlike Core/UI, a web exit never forces a system shutdown; it only
+        # auto-restarts when mission-critical, otherwise it is left down.
+        if p_web is not None and p_web.poll() is not None:
+            code = p_web.returncode
+            desc = interpret_exit_code(code)
+            if is_mission_critical and not shutdown_requested[0]:
+                log(f"⚠️ The Web Interface has stopped ({desc}). Restarting automatically...")
+                time.sleep(1.0) # ⚡ OPTIMIZATION: Throttled restart backoff
+                p_web = subprocess.Popen([python_executable, str(web_script)], env=child_env)
+                processes[2] = p_web
+            else:
+                log(f"ℹ️ The Web Interface has exited ({desc}). Core system continues running.")
+                p_web = None # Stop polling so we don't re-log every loop iteration.
 
     # --- Finalization and Cleanup ---
     log("Terminating child processes...")

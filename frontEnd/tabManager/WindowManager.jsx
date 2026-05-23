@@ -91,7 +91,10 @@ const TabContainer = ({ node }) => {
                 flexDirection: 'column' 
             }}>
                  {files.map(f => (
-                     <div key={f.name} style={{ flexGrow: 1, flexBasis: '0', minHeight: '300px', borderBottom: '1px solid #333' }}>
+                     <div key={f.name}
+                        onContextMenu={(e) => { e.preventDefault(); window.launchWysiwygEditor && window.launchWysiwygEditor({ filePath: f.path, content: f.content }); }}
+                        title="Right-click: Open WYSIWYG editor"
+                        style={{ flexGrow: 1, flexBasis: '0', minHeight: '300px', borderBottom: '1px solid #333' }}>
                         <window.LoaderOrchestrator layoutJson={f.content} />
                      </div>
                  ))}
@@ -141,7 +144,17 @@ const TabContainer = ({ node }) => {
 
 const WindowManager = ({ directoryTree }) => {
     const [lang, setLang] = window.useMqttLang();
-    
+
+    // WYSIWYG editor open-state. Panels dispatch 'oa-open-wysiwyg' (see Entry.jsx)
+    // on right-click; we render the editor overlay inside this tree so it shares
+    // the MqttProvider context and the live renderer.
+    const [editor, setEditor] = React.useState(null);
+    React.useEffect(() => {
+        const onOpen = (e) => setEditor(e.detail || null);
+        window.addEventListener('oa-open-wysiwyg', onOpen);
+        return () => window.removeEventListener('oa-open-wysiwyg', onOpen);
+    }, []);
+
     if (!directoryTree || !directoryTree.children) return <div style={{color: '#fff'}}>Loading Tree...</div>;
 
     // The root usually contains "Window_1", "Window_2"
@@ -214,6 +227,15 @@ const WindowManager = ({ directoryTree }) => {
             <div style={{ flexGrow: 1, overflow: 'hidden' }}>
                 <WindowLayout node={activeWindowNode} />
             </div>
+
+            {/* WYSIWYG editor overlay */}
+            {editor && window.WysiwygEditor && (
+                <window.WysiwygEditor
+                    filePath={editor.filePath}
+                    content={editor.content}
+                    onClose={() => setEditor(null)}
+                />
+            )}
         </div>
     );
 };

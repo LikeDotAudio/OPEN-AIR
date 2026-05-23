@@ -1,7 +1,7 @@
 /**
  * SplitLayout: Renders a container split into multiple panels.
  */
-window.SplitLayout = ({ nodeName, node, path_prefix }) => {
+window.SplitLayout = ({ nodeName, node, path_prefix, jsonPath }) => {
   const { behavior, panels = {} } = node;
   const orientation = behavior?.orientation === 'horizontal' ? 'row' : 'column';
 
@@ -26,10 +26,11 @@ window.SplitLayout = ({ nodeName, node, path_prefix }) => {
             backgroundColor: '#1a1a1a' 
           }}
         >
-          <window.WidgetFactory 
-            nodeName={key} 
-            node={panel} 
-            path_prefix={`${path_prefix}/${nodeName}`} 
+          <window.WidgetFactory
+            nodeName={key}
+            node={panel}
+            path_prefix={`${path_prefix}/${nodeName}`}
+            jsonPath={jsonPath ? `${jsonPath}.panels.${key}` : undefined}
           />
         </div>
       ))}

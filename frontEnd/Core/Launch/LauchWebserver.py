@@ -1,5 +1,6 @@
 import os
 import json
+import time
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 import urllib.parse
 
@@ -36,9 +37,93 @@ def get_directory_tree(path):
         pass
     return tree
 
+def get_grab_bag():
+    """Scan oaGuiElements for sample.json palette templates (mirrors the Python
+    GrabBagLoader). Returns a flat, categorized component list for the editor."""
+    root = os.path.abspath(os.path.join(FRONTEND_DIR, "..", "oaGuiElements"))
+    components = []
+    for dirpath, _dirnames, filenames in os.walk(root):
+        if "sample.json" not in filenames:
+            continue
+        full = os.path.join(dirpath, "sample.json")
+        try:
+            with open(full, "r", encoding="utf-8") as f:
+                content = json.load(f)
+        except Exception:
+            continue
+        rel_parts = os.path.relpath(dirpath, root).split(os.sep)
+        # Category = first meaningful folder segment (skip Core/Assets wrappers).
+        meaningful = [p for p in rel_parts if p not in ("Core", "Assets", ".")]
+        category = meaningful[0] if meaningful else "General"
+        for key, schema in content.items():
+            # Skip non-widget entries (e.g. _LEGEND doc blocks have no "type").
+            if not isinstance(schema, dict) or "type" not in schema:
+                continue
+            components.append({
+                "name": key,
+                "category": category,
+                "type": schema.get("type", "unknown"),
+                "schema": schema,
+                "path": os.path.relpath(full, root),
+            })
+    components.sort(key=lambda c: (c["category"].lower(), c["name"].lower()))
+    return {"components": components}
+
+
 class APIRequestHandler(SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=FRONTEND_DIR, **kwargs)
+
+    def _send_json(self, code, obj):
+        body = json.dumps(obj).encode("utf-8")
+        self.send_response(code)
+        self.send_header("Content-Type", "application/json")
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
+
+    def do_POST(self):
+        parsed_path = urllib.parse.urlparse(self.path)
+
+        # Persist an edited GUI definition back to Gui_Frames (WYSIWYG editor save).
+        if parsed_path.path == "/api/save":
+            try:
+                length = int(self.headers.get("Content-Length", 0))
+                payload = json.loads(self.rfile.read(length).decode("utf-8"))
+                rel_path = payload["path"]
+                content = payload["content"]
+            except Exception as e:
+                self._send_json(400, {"ok": False, "error": f"Bad request: {e}"})
+                return
+
+            # Security: confine writes to Gui_Frames and to .json files only.
+            clean_rel = str(rel_path).lstrip("/")
+            abs_path = os.path.abspath(os.path.join(GUI_FRAMES_DIR, clean_rel))
+            if not abs_path.startswith(GUI_FRAMES_DIR) or not abs_path.endswith(".json"):
+                self._send_json(403, {"ok": False, "error": "Path outside Gui_Frames"})
+                return
+
+            try:
+                # Timestamped .old backup before overwrite (mirrors FileWriter).
+                backup_name = None
+                if os.path.exists(abs_path):
+                    ts = time.strftime("%Y%m%d_%H%M%S")
+                    d, name = os.path.split(abs_path)
+                    backup_path = os.path.join(d, f"{ts}_{name}.old")
+                    with open(abs_path, "rb") as src, open(backup_path, "wb") as dst:
+                        dst.write(src.read())
+                    backup_name = os.path.basename(backup_path)
+
+                with open(abs_path, "w", encoding="utf-8") as f:
+                    json.dump(content, f, indent=2, ensure_ascii=False)
+
+                self._send_json(200, {"ok": True, "saved": rel_path, "backup": backup_name})
+            except Exception as e:
+                self._send_json(500, {"ok": False, "error": str(e)})
+            return
+
+        self._send_json(404, {"ok": False, "error": "Unknown endpoint"})
 
     def do_GET(self):
         parsed_path = urllib.parse.urlparse(self.path)
@@ -53,7 +138,12 @@ class APIRequestHandler(SimpleHTTPRequestHandler):
             tree = get_directory_tree(GUI_FRAMES_DIR)
             self.wfile.write(json.dumps(tree).encode('utf-8'))
             return
-            
+
+        # Serve the categorized grab-bag palette for the WYSIWYG editor
+        if parsed_path.path == '/api/grabbag':
+            self._send_json(200, get_grab_bag())
+            return
+
         # Serve local images from the project root
         if parsed_path.path == '/api/image':
             query = urllib.parse.parse_qs(parsed_path.query)

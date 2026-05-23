@@ -13,7 +13,7 @@ window.LoaderOrchestrator = ({ layoutJson }) => {
     return (
         <div className="loader-orchestrator" style={{ width: '100%', height: '100%', backgroundColor: '#121212', color: '#eee' }}>
             {Object.entries(layoutJson).map(([key, node]) => (
-                <window.WidgetFactory key={key} nodeName={key} node={node} />
+                <window.WidgetFactory key={key} nodeName={key} node={node} jsonPath={key} />
             ))}
         </div>
     );

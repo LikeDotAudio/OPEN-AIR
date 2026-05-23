@@ -2,15 +2,21 @@
  * Structural Component: OcaBin
  * A high-level container that manages background effects and scrolling.
  */
-window.OcaBin = ({ nodeName, node, path_prefix }) => {
+window.OcaBin = ({ nodeName, node, path_prefix, jsonPath }) => {
   const overflowEW = node.behavior?.overflow_ew === 'auto' ? 'auto' : 'hidden';
   const overflowNS = node.behavior?.overflow_ns === 'auto' ? 'auto' : 'hidden';
 
   return (
-    <div className="oca-bin" style={{ 
-        width: '100%', 
-        height: '100%', 
-        overflowX: overflowEW, 
+    <div className="oca-bin" style={{
+        width: '100%',
+        height: '100%',
+        // Flex column so child blocks stack and the bin actually fills the
+        // NSEW space declared in geometry. overflow_ns/ew then only scroll
+        // when content genuinely exceeds the pane ("auto overflow as needed").
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: 0,
+        overflowX: overflowEW,
         overflowY: overflowNS,
         backgroundColor: '#121212',
         position: 'relative',
@@ -18,10 +24,10 @@ window.OcaBin = ({ nodeName, node, path_prefix }) => {
         boxSizing: 'border-box'
     }}>
       {node.blocks && typeof node.blocks === 'object' && Object.entries(node.blocks).map(([k, v]) => (
-        <window.WidgetFactory key={k} nodeName={k} node={v} path_prefix={`${path_prefix}/${nodeName}`} />
+        <window.WidgetFactory key={k} nodeName={k} node={v} path_prefix={`${path_prefix}/${nodeName}`} jsonPath={jsonPath ? `${jsonPath}.blocks.${k}` : undefined} />
       ))}
       {node.fields && typeof node.fields === 'object' && Object.entries(node.fields).map(([k, v]) => (
-        <window.WidgetFactory key={k} nodeName={k} node={v} path_prefix={`${path_prefix}/${nodeName}`} />
+        <window.WidgetFactory key={k} nodeName={k} node={v} path_prefix={`${path_prefix}/${nodeName}`} jsonPath={jsonPath ? `${jsonPath}.fields.${k}` : undefined} />
       ))}
     </div>
   );
@@ -31,7 +37,7 @@ window.OcaBin = ({ nodeName, node, path_prefix }) => {
  * Structural Component: OcaBlock
  * A grouped set of controls with a grid layout.
  */
-window.OcaBlock = ({ nodeName, node, path_prefix }) => {
+window.OcaBlock = ({ nodeName, node, path_prefix, jsonPath }) => {
   const [lang] = window.useMqttLang();
   const cols = node.layout_columns || 1;
   const title = node.description?.[lang] || node.description?.En || nodeName;
@@ -53,7 +59,7 @@ window.OcaBlock = ({ nodeName, node, path_prefix }) => {
           gap: '5px'
       }}>
         {node.fields && typeof node.fields === 'object' && Object.entries(node.fields).map(([k, v]) => (
-          <window.WidgetFactory key={k} nodeName={k} node={v} path_prefix={`${path_prefix}/${nodeName}`} />
+          <window.WidgetFactory key={k} nodeName={k} node={v} path_prefix={`${path_prefix}/${nodeName}`} jsonPath={jsonPath ? `${jsonPath}.fields.${k}` : undefined} />
         ))}
       </div>
     </div>
@@ -65,7 +71,7 @@ window.OcaBlock = ({ nodeName, node, path_prefix }) => {
  * into a dynamic React component tree. Handles component registry lookups, 
  * layout attribute mapping, and fallback rendering for unregistered types.
  */
-window.WidgetFactory = ({ nodeName, node, path_prefix = '' }) => {
+window.WidgetFactory = ({ nodeName, node, path_prefix = '', jsonPath }) => {
   if (!node) return null;
 
   const COMPONENT_REGISTRY = {
@@ -84,7 +90,20 @@ window.WidgetFactory = ({ nodeName, node, path_prefix = '' }) => {
     gridRowStart: node.layout?.row !== undefined ? node.layout.row : 'auto',
     gridColumnEnd: node.layout?.col_span ? `span ${node.layout.col_span}` : 'auto',
     gridRowEnd: node.layout?.row_span ? `span ${node.layout.row_span}` : 'auto',
+    // Flex semantics for when this widget is the child of a flex container
+    // (e.g. an OcaBin column). 'weight' mirrors the desktop Tk grid weight:
+    // 0 = size to content, >0 = grow to share leftover space. flexShrink:0
+    // keeps content from being squished, which previously made stacked widgets
+    // overlap their neighbours.
+    flexGrow: node.layout?.weight !== undefined ? node.layout.weight : 0,
+    flexShrink: 0,
   };
+
+  // Containers declared NSEW must fill their parent so 'overflow: auto' only
+  // scrolls when content truly exceeds the pane. The wrapper previously had no
+  // height, collapsing every nested container to content height and breaking
+  // the height:100% chain from the pane down to the OcaBin.
+  const FILL_CONTAINERS = ['OcaBin', 'OcaNotebook', 'OcaSplit', 'OcaTable'];
 
   if (!ComponentToRender) {
     if (node.type && (
@@ -101,30 +120,35 @@ window.WidgetFactory = ({ nodeName, node, path_prefix = '' }) => {
         node.type.toLowerCase().includes('link')
     )) {
         return (
-            <div style={gridStyles} className={`widget-wrapper ${node.type}`}>
+            <div style={gridStyles} className={`widget-wrapper ${node.type}`} data-oca-path={jsonPath}>
                 <window.FieldComponent nodeName={nodeName} node={node} path_prefix={path_prefix} />
             </div>
         );
     }
     return (
-        <div style={{ border: '1px dashed #333', padding: '5px', margin: '2px' }}>
+        <div style={{ border: '1px dashed #333', padding: '5px', margin: '2px' }} data-oca-path={jsonPath}>
             {node.blocks && typeof node.blocks === 'object' && Object.entries(node.blocks).map(([k, v]) => (
-                <window.WidgetFactory key={k} nodeName={k} node={v} path_prefix={`${path_prefix}/${nodeName}`} />
+                <window.WidgetFactory key={k} nodeName={k} node={v} path_prefix={`${path_prefix}/${nodeName}`} jsonPath={jsonPath ? `${jsonPath}.blocks.${k}` : undefined} />
             ))}
             {node.fields && typeof node.fields === 'object' && Object.entries(node.fields).map(([k, v]) => (
-                <window.WidgetFactory key={k} nodeName={k} node={v} path_prefix={`${path_prefix}/${nodeName}`} />
+                <window.WidgetFactory key={k} nodeName={k} node={v} path_prefix={`${path_prefix}/${nodeName}`} jsonPath={jsonPath ? `${jsonPath}.fields.${k}` : undefined} />
             ))}
         </div>
     );
   }
 
   // 4. Render the registered component
+  const wrapperStyle = FILL_CONTAINERS.includes(node.type)
+    ? { ...gridStyles, height: '100%', minHeight: 0, display: 'flex', flexDirection: 'column' }
+    : gridStyles;
+
   return (
-    <div style={gridStyles} className={`widget-wrapper ${node.type}`}>
-      <ComponentToRender 
+    <div style={wrapperStyle} className={`widget-wrapper ${node.type}`} data-oca-path={jsonPath}>
+      <ComponentToRender
         nodeName={nodeName}
-        node={node} 
+        node={node}
         path_prefix={path_prefix}
+        jsonPath={jsonPath}
       />
     </div>
   );
@@ -159,12 +183,15 @@ window.FieldComponent = ({ nodeName, node, path_prefix }) => {
     const lHeight = node.layout?.height || node.geometry?.height;
     const lWidth = node.layout?.width || node.geometry?.width;
 
-    const style = { 
-        display: 'flex', 
-        flexDirection: 'column', 
-        alignItems: 'center', 
-        width: lWidth ? (typeof lWidth === 'number' ? `${lWidth}px` : lWidth) : '100%', 
-        height: lHeight ? (typeof lHeight === 'number' ? `${lHeight}px` : lHeight) : '100%' 
+    const style = {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        // margin auto centers fixed-width fields (e.g. faders with layout.width)
+        // within their full-width block cell instead of pinning them to the left.
+        margin: '0 auto',
+        width: lWidth ? (typeof lWidth === 'number' ? `${lWidth}px` : lWidth) : '100%',
+        height: lHeight ? (typeof lHeight === 'number' ? `${lHeight}px` : lHeight) : '100%'
     };
     const titleStyle = { fontSize: '12px', color: node.cosmetics?.colors?.text || '#999', marginBottom: '10px' };
 
@@ -336,8 +363,14 @@ window.FieldComponent = ({ nodeName, node, path_prefix }) => {
         }
 
         if (isTogglerGroup) {
+            // For a toggler, layout.width/height are the PER-BUTTON dimensions
+            // (consumed inside ButtonToggler), not the container size. Force the
+            // container full-width so alignItems:center can center the button grid
+            // in the block cell (instead of pinning it left), and height:auto so a
+            // multi-row grid grows down naturally instead of overflowing a 50px box
+            // and overlapping the next block.
             return (
-                <div style={style}>
+                <div style={{ ...style, width: '100%', height: 'auto' }}>
                     {window.ButtonToggler ? <window.ButtonToggler value={val} onChange={setVal} config={node} topic={topic} nodeJson={node} /> : <div style={{background: '#333'}}>Button Toggler</div>}
                 </div>
             );

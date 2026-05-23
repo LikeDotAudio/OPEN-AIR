@@ -107,16 +107,6 @@
               "De": "Standard Squircle",
               "Es": "Estándar Squircle"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 300,
             "height": 300,
             "Orientation": "vertical",
@@ -131,7 +121,24 @@
             "tick_radius_offset": 0,
             "label_radius_offset": 10,
             "needle_length_factor": 1.0,
-            "path": "Squircle_Variations/Squircle_Square_1"
+            "path": "Squircle_Variations/Squircle_Square_1",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           },
           "Squircle_Square_2_Small": {
             "type": "_NeedleVUMeter",
@@ -195,16 +202,6 @@
               "De": "Small Blue",
               "Es": "Small Blue"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 200,
             "height": 200,
             "Orientation": "vertical",
@@ -214,7 +211,24 @@
             "Pointer_Style": "needle",
             "sub_ticks": 4,
             "label_radius_offset": 10,
-            "path": "Squircle_Variations/Squircle_Square_2_Small"
+            "path": "Squircle_Variations/Squircle_Square_2_Small",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           },
           "Squircle_Square_3_Large": {
             "type": "_NeedleVUMeter",
@@ -278,16 +292,6 @@
               "De": "Large Red",
               "Es": "Large Red"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 300,
             "height": 300,
             "Orientation": "vertical",
@@ -297,7 +301,24 @@
             "Pointer_Style": "spade",
             "sub_ticks": 4,
             "label_radius_offset": 10,
-            "path": "Squircle_Variations/Squircle_Square_3_Large"
+            "path": "Squircle_Variations/Squircle_Square_3_Large",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           },
           "Squircle_Square_4_Tiny": {
             "type": "_NeedleVUMeter",
@@ -345,16 +366,6 @@
               "De": "Tiny Silver",
               "Es": "Tiny Silver"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 150,
             "height": 150,
             "Orientation": "vertical",
@@ -364,7 +375,24 @@
             "Pointer_Style": "line",
             "sub_ticks": 0,
             "label_radius_offset": 5,
-            "path": "Squircle_Variations/Squircle_Square_4_Tiny"
+            "path": "Squircle_Variations/Squircle_Square_4_Tiny",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           },
           "Squircle_Square_5_Neon": {
             "type": "_NeedleVUMeter",
@@ -429,16 +457,6 @@
               "De": "Neon Pink",
               "Es": "Neon Pink"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 250,
             "height": 250,
             "Orientation": "vertical",
@@ -449,7 +467,24 @@
             "Pointer_Style": "needle",
             "sub_ticks": 4,
             "label_radius_offset": 10,
-            "path": "Squircle_Variations/Squircle_Square_5_Neon"
+            "path": "Squircle_Variations/Squircle_Square_5_Neon",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           },
           "Squircle_Square_6_Vintage": {
             "type": "_NeedleVUMeter",
@@ -512,16 +547,6 @@
               "De": "Vintage Cream",
               "Es": "Vintage Cream"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 250,
             "height": 250,
             "Orientation": "vertical",
@@ -531,7 +556,24 @@
             "Pointer_Style": "baton",
             "sub_ticks": 4,
             "label_radius_offset": 10,
-            "path": "Squircle_Variations/Squircle_Square_6_Vintage"
+            "path": "Squircle_Variations/Squircle_Square_6_Vintage",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           },
           "Squircle_Square_7_Cyber": {
             "type": "_NeedleVUMeter",
@@ -596,16 +638,6 @@
               "De": "Cyber Cyan",
               "Es": "Cyber Cyan"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 300,
             "height": 300,
             "Orientation": "vertical",
@@ -616,7 +648,24 @@
             "Pointer_Style": "needle",
             "sub_ticks": 4,
             "label_radius_offset": 10,
-            "path": "Squircle_Variations/Squircle_Square_7_Cyber"
+            "path": "Squircle_Variations/Squircle_Square_7_Cyber",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           },
           "Squircle_Square_8_Blueprint": {
             "type": "_NeedleVUMeter",
@@ -679,16 +728,6 @@
               "De": "Blueprint",
               "Es": "Blueprint"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 220,
             "height": 220,
             "Orientation": "vertical",
@@ -698,7 +737,24 @@
             "Pointer_Style": "line",
             "sub_ticks": 4,
             "label_radius_offset": 10,
-            "path": "Squircle_Variations/Squircle_Square_8_Blueprint"
+            "path": "Squircle_Variations/Squircle_Square_8_Blueprint",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           },
           "Squircle_Square_9_Gold": {
             "type": "_NeedleVUMeter",
@@ -762,16 +818,6 @@
               "De": "Black & Gold",
               "Es": "Black & Gold"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 300,
             "height": 300,
             "Orientation": "vertical",
@@ -781,21 +827,45 @@
             "Pointer_Style": "spade",
             "sub_ticks": 4,
             "label_radius_offset": 10,
-            "path": "Squircle_Variations/Squircle_Square_9_Gold"
+            "path": "Squircle_Variations/Squircle_Square_9_Gold",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           }
         },
-        "active_text_color": "#1a1a1a",
-        "text_color": "#888888",
-        "active_font_style": "bold",
-        "active_font_size": null,
-        "inactive_font_style": "normal",
-        "inactive_font_size": null,
-        "active_color": "#FF9900",
-        "active_bg_color": "#000000",
-        "bg_color": "#2b2b2b",
-        "glow_intensity": 1.0,
         "Orientation": "vertical",
-        "layout": {}
+        "layout": {},
+        "style": {
+          "active": {
+            "text_color": "#1a1a1a",
+            "bg_color": "#000000",
+            "border_color": "#FF9900",
+            "glow_intensity": 1.0,
+            "font_style": "bold",
+            "font_size": null
+          },
+          "inactive": {
+            "text_color": "#888888",
+            "bg_color": "#2b2b2b",
+            "font_style": "normal",
+            "font_size": null,
+            "glow_intensity": 0
+          }
+        }
       }
     }
   }

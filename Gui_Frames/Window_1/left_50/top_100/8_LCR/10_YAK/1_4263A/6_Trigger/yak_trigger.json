@@ -2,12 +2,18 @@
   "LCR_YAK_4263A_Trigger_Control": {
     "type": "OcaBin",
     "id": "50.100.8.10.1.6",
-    "geometry": { "anchor": "NSEW" },
-    "behavior": { "fluid_ew": true },
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "fluid_ew": true
+    },
     "blocks": {
       "Trigger_System": {
         "type": "OcaBlock",
-        "description": { "En": "Trigger & Comparator" },
+        "description": {
+          "En": "Trigger & Comparator"
+        },
         "fields": {
           "Immediate Trigger": {
             "type": "_GuiActuator",
@@ -40,7 +46,12 @@
               "Es": "Establecer fuente"
             },
             "message": ":TRIGger:SOURce {value}",
-            "options": ["INT", "MAN", "EXT", "BUS"]
+            "options": [
+              "INT",
+              "MAN",
+              "EXT",
+              "BUS"
+            ]
           },
           "Trigger Delay": {
             "type": "_GuiActuator",
@@ -105,7 +116,10 @@
               "Es": "Comparador"
             },
             "message": ":CALCulate:LIMit:STATe {value}",
-            "options": ["ON", "OFF"]
+            "options": [
+              "ON",
+              "OFF"
+            ]
           }
         }
       }

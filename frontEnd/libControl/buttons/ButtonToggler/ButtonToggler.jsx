@@ -125,9 +125,10 @@ const ButtonToggler = ({ value, onChange, config, topic, nodeJson }) => {
             )}
             <div style={containerStyle}>
                 {Object.entries(optionsData).map(([key, opt]) => {
-                    const labelBase = getLocalizedText(opt.label, key);
-                    const onText = getLocalizedText(opt.label_active, labelBase);
-                    const offText = getLocalizedText(opt.label_inactive, labelBase);
+                    // label may be the new pair {active,inactive} or legacy flat keys.
+                    const labelBase = getLocalizedText(window.oaPickLabel(opt, 'active'), key);
+                    const onText = labelBase;
+                    const offText = getLocalizedText(window.oaPickLabel(opt, 'inactive'), labelBase);
                     const valSuffix = opt.value || opt.units ? `\n(${opt.value || ''}${opt.units || ''})` : '';
 
                     const isSelected = currentSelectedKeys.includes(key);

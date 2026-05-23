@@ -56,7 +56,7 @@ const OcaListbox = ({ value, onChange, config, topic, nodeJson }) => {
             )}
             <div style={{ flexGrow: 1, overflowY: 'auto', padding: '2px' }}>
                 {sortedActiveOptions.map(([key, opt]) => {
-                    const optLabel = getLocalizedText(opt.label_active || opt.label, key);
+                    const optLabel = getLocalizedText(window.oaPickLabel(opt, 'active'), key);
                     const optValue = opt.value !== undefined ? opt.value : key;
                     const isSelected = String(val) === String(optValue);
 

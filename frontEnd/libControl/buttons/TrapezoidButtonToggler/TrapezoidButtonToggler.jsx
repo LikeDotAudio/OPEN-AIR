@@ -61,13 +61,13 @@ const TrapezoidButtonToggler = ({ value, onChange, config, topic, nodeJson }) =>
                         width: config?.width || 80,
                         height: config?.height || 50,
                         latching: true,
-                        label_active: { En: txt(o.label_active || o.label, key) },
+                        label_active: { En: txt(window.oaPickLabel(o, 'active'), key) },
                         label: undefined,
                     };
                     return (
                         <window.OcaTrapezoidButton
                             key={key}
-                            label={txt(o.label_active || o.label, key)}
+                            label={txt(window.oaPickLabel(o, 'active'), key)}
                             value={isSel ? 1 : 0}
                             onChange={() => click(key)}
                             config={btnCfg}

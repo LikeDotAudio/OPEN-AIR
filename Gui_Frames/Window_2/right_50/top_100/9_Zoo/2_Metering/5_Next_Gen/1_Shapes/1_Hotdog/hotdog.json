@@ -102,16 +102,6 @@
               "De": "Large Klassisch",
               "Es": "Large Clásico"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 300,
             "height": 200,
             "Orientation": "vertical",
@@ -119,7 +109,24 @@
             "bezel_width": 5,
             "Pointer_Style": "knife-edge",
             "pivot_colour": "#3e2723",
-            "path": "Hotdog_Variations/Hotdog_1_Large"
+            "path": "Hotdog_Variations/Hotdog_1_Large",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           },
           "Hotdog_2_Medium": {
             "type": "_NeedleVUMeter",
@@ -182,16 +189,6 @@
               "De": "Mittel Gold",
               "Es": "Medio Gold"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 250,
             "height": 160,
             "Orientation": "vertical",
@@ -199,7 +196,24 @@
             "bezel_width": 3,
             "Pointer_Style": "baton",
             "pivot_colour": "#FFD700",
-            "path": "Hotdog_Variations/Hotdog_2_Medium"
+            "path": "Hotdog_Variations/Hotdog_2_Medium",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           },
           "Hotdog_3_Small": {
             "type": "_NeedleVUMeter",
@@ -262,16 +276,6 @@
               "De": "Small Silver",
               "Es": "Small Silver"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 180,
             "height": 120,
             "Orientation": "vertical",
@@ -280,7 +284,24 @@
             "mask": false,
             "Pointer_Style": "needle",
             "pivot_colour": "silver",
-            "path": "Hotdog_Variations/Hotdog_3_Small"
+            "path": "Hotdog_Variations/Hotdog_3_Small",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           },
           "Hotdog_4_Night_Mode": {
             "type": "_NeedleVUMeter",
@@ -340,16 +361,6 @@
               "De": "Night Mode",
               "Es": "Night Mode"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 250,
             "height": 160,
             "Orientation": "vertical",
@@ -357,7 +368,24 @@
             "bezel_width": 4,
             "enable_lighting": true,
             "Pointer_Style": "knife-edge",
-            "path": "Hotdog_Variations/Hotdog_4_Night_Mode"
+            "path": "Hotdog_Variations/Hotdog_4_Night_Mode",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           },
           "Hotdog_5_Flat": {
             "type": "_NeedleVUMeter",
@@ -417,16 +445,6 @@
               "De": "Flat Blue",
               "Es": "Flat Blue"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 250,
             "height": 160,
             "Orientation": "vertical",
@@ -434,7 +452,24 @@
             "bezel_width": 2,
             "enable_lighting": false,
             "Pointer_Style": "baton",
-            "path": "Hotdog_Variations/Hotdog_5_Flat"
+            "path": "Hotdog_Variations/Hotdog_5_Flat",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           },
           "Hotdog_6_Luxury": {
             "type": "_NeedleVUMeter",
@@ -494,16 +529,6 @@
               "De": "Luxury Gold",
               "Es": "Luxury Gold"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 250,
             "height": 160,
             "Orientation": "vertical",
@@ -511,7 +536,24 @@
             "bezel_width": 5,
             "enable_lighting": true,
             "Pointer_Style": "spade",
-            "path": "Hotdog_Variations/Hotdog_6_Luxury"
+            "path": "Hotdog_Variations/Hotdog_6_Luxury",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           },
           "Hotdog_7_Cyber": {
             "type": "_NeedleVUMeter",
@@ -572,16 +614,6 @@
               "De": "Cyber Neon",
               "Es": "Cyber Neon"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 250,
             "height": 160,
             "Orientation": "vertical",
@@ -589,7 +621,24 @@
             "bezel_width": 2,
             "enable_lighting": true,
             "Pointer_Style": "taper",
-            "path": "Hotdog_Variations/Hotdog_7_Cyber"
+            "path": "Hotdog_Variations/Hotdog_7_Cyber",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           },
           "Hotdog_8_Vintage": {
             "type": "_NeedleVUMeter",
@@ -649,16 +698,6 @@
               "De": "Vintage Cream",
               "Es": "Vintage Cream"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 250,
             "height": 160,
             "Orientation": "vertical",
@@ -666,7 +705,24 @@
             "bezel_width": 5,
             "enable_lighting": false,
             "Pointer_Style": "teardrop",
-            "path": "Hotdog_Variations/Hotdog_8_Vintage"
+            "path": "Hotdog_Variations/Hotdog_8_Vintage",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           },
           "Hotdog_9_Blueprint": {
             "type": "_NeedleVUMeter",
@@ -726,16 +782,6 @@
               "De": "Blueprint",
               "Es": "Blueprint"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 250,
             "height": 160,
             "Orientation": "vertical",
@@ -743,21 +789,45 @@
             "bezel_width": 2,
             "enable_lighting": false,
             "Pointer_Style": "line",
-            "path": "Hotdog_Variations/Hotdog_9_Blueprint"
+            "path": "Hotdog_Variations/Hotdog_9_Blueprint",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           }
         },
-        "active_text_color": "#1a1a1a",
-        "text_color": "#888888",
-        "active_font_style": "bold",
-        "active_font_size": null,
-        "inactive_font_style": "normal",
-        "inactive_font_size": null,
-        "active_color": "#FF9900",
-        "active_bg_color": "#000000",
-        "bg_color": "#2b2b2b",
-        "glow_intensity": 1.0,
         "Orientation": "vertical",
-        "layout": {}
+        "layout": {},
+        "style": {
+          "active": {
+            "text_color": "#1a1a1a",
+            "bg_color": "#000000",
+            "border_color": "#FF9900",
+            "glow_intensity": 1.0,
+            "font_style": "bold",
+            "font_size": null
+          },
+          "inactive": {
+            "text_color": "#888888",
+            "bg_color": "#2b2b2b",
+            "font_style": "normal",
+            "font_size": null,
+            "glow_intensity": 0
+          }
+        }
       }
     }
   }

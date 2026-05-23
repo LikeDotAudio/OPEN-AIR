@@ -117,16 +117,6 @@
               "De": "Stop Sign",
               "Es": "Parar Sign"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 250,
             "height": 250,
             "Orientation": "vertical",
@@ -138,7 +128,24 @@
             "sub_tick_length": 4,
             "label_radius_offset": 10,
             "needle_length_factor": 1.0,
-            "path": "Stop_Sign_Variations/Stop_Sign_1"
+            "path": "Stop_Sign_Variations/Stop_Sign_1",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           },
           "Stop_Sign_2_Caution": {
             "type": "_NeedleVUMeter",
@@ -217,16 +224,6 @@
               "De": "Caution Yellow",
               "Es": "Caution Yellow"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 250,
             "height": 250,
             "Orientation": "vertical",
@@ -238,7 +235,24 @@
             "sub_tick_length": 4,
             "label_radius_offset": 10,
             "needle_length_factor": 1.0,
-            "path": "Stop_Sign_Variations/Stop_Sign_2_Caution"
+            "path": "Stop_Sign_Variations/Stop_Sign_2_Caution",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           },
           "Stop_Sign_3_Emerald": {
             "type": "_NeedleVUMeter",
@@ -299,16 +313,6 @@
               "De": "Emerald Sign",
               "Es": "Emerald Sign"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 220,
             "height": 220,
             "Orientation": "vertical",
@@ -317,7 +321,24 @@
             "Pointer_Style": "teardrop",
             "sub_ticks": 4,
             "label_radius_offset": 10,
-            "path": "Stop_Sign_Variations/Stop_Sign_3_Emerald"
+            "path": "Stop_Sign_Variations/Stop_Sign_3_Emerald",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           },
           "Stop_Sign_4_Blueprint": {
             "type": "_NeedleVUMeter",
@@ -378,16 +399,6 @@
               "De": "Blueprint",
               "Es": "Blueprint"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 220,
             "height": 220,
             "Orientation": "vertical",
@@ -396,7 +407,24 @@
             "Pointer_Style": "line",
             "sub_ticks": 4,
             "label_radius_offset": 10,
-            "path": "Stop_Sign_Variations/Stop_Sign_4_Blueprint"
+            "path": "Stop_Sign_Variations/Stop_Sign_4_Blueprint",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           },
           "Stop_Sign_5_Royal": {
             "type": "_NeedleVUMeter",
@@ -458,16 +486,6 @@
               "De": "Royal Octagon",
               "Es": "Royal Octagon"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 220,
             "height": 220,
             "Orientation": "vertical",
@@ -476,7 +494,24 @@
             "Pointer_Style": "spade",
             "sub_ticks": 4,
             "label_radius_offset": 10,
-            "path": "Stop_Sign_Variations/Stop_Sign_5_Royal"
+            "path": "Stop_Sign_Variations/Stop_Sign_5_Royal",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           },
           "Stop_Sign_6_Night": {
             "type": "_NeedleVUMeter",
@@ -536,16 +571,6 @@
               "De": "Night Mode",
               "Es": "Night Mode"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 220,
             "height": 220,
             "Orientation": "vertical",
@@ -554,7 +579,24 @@
             "Pointer_Style": "knife-edge",
             "sub_ticks": 4,
             "label_radius_offset": 10,
-            "path": "Stop_Sign_Variations/Stop_Sign_6_Night"
+            "path": "Stop_Sign_Variations/Stop_Sign_6_Night",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           },
           "Stop_Sign_7_Vintage": {
             "type": "_NeedleVUMeter",
@@ -615,16 +657,6 @@
               "De": "Vintage Analog",
               "Es": "Vintage Analog"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 220,
             "height": 220,
             "Orientation": "vertical",
@@ -633,7 +665,24 @@
             "Pointer_Style": "baton",
             "sub_ticks": 4,
             "label_radius_offset": 10,
-            "path": "Stop_Sign_Variations/Stop_Sign_7_Vintage"
+            "path": "Stop_Sign_Variations/Stop_Sign_7_Vintage",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           },
           "Stop_Sign_8_Cyber": {
             "type": "_NeedleVUMeter",
@@ -696,16 +745,6 @@
               "De": "Cyber Sign",
               "Es": "Cyber Sign"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 220,
             "height": 220,
             "Orientation": "vertical",
@@ -715,21 +754,45 @@
             "Pointer_Style": "needle",
             "sub_ticks": 4,
             "label_radius_offset": 10,
-            "path": "Stop_Sign_Variations/Stop_Sign_8_Cyber"
+            "path": "Stop_Sign_Variations/Stop_Sign_8_Cyber",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           }
         },
-        "active_text_color": "#1a1a1a",
-        "text_color": "#888888",
-        "active_font_style": "bold",
-        "active_font_size": null,
-        "inactive_font_style": "normal",
-        "inactive_font_size": null,
-        "active_color": "#FF9900",
-        "active_bg_color": "#000000",
-        "bg_color": "#2b2b2b",
-        "glow_intensity": 1.0,
         "Orientation": "vertical",
-        "layout": {}
+        "layout": {},
+        "style": {
+          "active": {
+            "text_color": "#1a1a1a",
+            "bg_color": "#000000",
+            "border_color": "#FF9900",
+            "glow_intensity": 1.0,
+            "font_style": "bold",
+            "font_size": null
+          },
+          "inactive": {
+            "text_color": "#888888",
+            "bg_color": "#2b2b2b",
+            "font_style": "normal",
+            "font_size": null,
+            "glow_intensity": 0
+          }
+        }
       }
     }
   }

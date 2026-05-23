@@ -175,16 +175,6 @@
               "input_name": "relay_id",
               "converter": "int"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.944,
             "width": 100,
             "height": 50,
             "Orientation": "vertical",
@@ -341,16 +331,6 @@
               "input_name": "relay_id",
               "converter": "int"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#ff0000",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.944,
             "width": 100,
             "height": 50,
             "Orientation": "vertical",
@@ -507,16 +487,6 @@
               "input_name": "relay_id",
               "converter": "int"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.944,
             "width": 100,
             "height": 50,
             "Orientation": "vertical",
@@ -673,33 +643,30 @@
               "input_name": "relay_id",
               "converter": "int"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#ff0000",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.944,
             "width": 100,
             "height": 50,
             "Orientation": "vertical",
             "path": "Card_8_Peripheral_Interface/Bus_AB03_Periph_Right_In"
           }
         },
-        "active_text_color": "#1a1a1a",
-        "text_color": "#888888",
-        "active_font_style": "bold",
-        "active_font_size": null,
-        "inactive_font_style": "normal",
-        "inactive_font_size": null,
-        "active_color": "#FF9900",
-        "active_bg_color": "#000000",
-        "bg_color": "#2b2b2b",
-        "glow_intensity": 1.0,
-        "Orientation": "vertical"
+        "Orientation": "vertical",
+        "style": {
+          "active": {
+            "text_color": "#1a1a1a",
+            "bg_color": "#000000",
+            "border_color": "#FF9900",
+            "glow_intensity": 1.0,
+            "font_style": "bold",
+            "font_size": null
+          },
+          "inactive": {
+            "text_color": "#888888",
+            "bg_color": "#2b2b2b",
+            "font_style": "normal",
+            "font_size": null,
+            "glow_intensity": 0
+          }
+        }
       }
     }
   }

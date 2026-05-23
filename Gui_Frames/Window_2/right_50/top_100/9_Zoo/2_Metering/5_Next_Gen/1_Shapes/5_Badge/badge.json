@@ -114,16 +114,6 @@
               "De": "Large Klassisch",
               "Es": "Large Clásico"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 300,
             "height": 300,
             "Orientation": "vertical",
@@ -132,7 +122,24 @@
             "overlay_style": "aperture_mask",
             "Pointer_Style": "baton",
             "pivot_colour": "#000000",
-            "path": "Badge_Variations/Badge_1_Large"
+            "path": "Badge_Variations/Badge_1_Large",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           },
           "Badge_2_Medium": {
             "type": "_NeedleVUMeter",
@@ -208,16 +215,6 @@
               "De": "Mittel Gold",
               "Es": "Medio Gold"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 220,
             "height": 220,
             "Orientation": "vertical",
@@ -226,7 +223,24 @@
             "overlay_style": "aperture_mask",
             "Pointer_Style": "teardrop",
             "pivot_colour": "#FFD700",
-            "path": "Badge_Variations/Badge_2_Medium"
+            "path": "Badge_Variations/Badge_2_Medium",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           },
           "Badge_3_Small": {
             "type": "_NeedleVUMeter",
@@ -303,16 +317,6 @@
               "De": "Small Red",
               "Es": "Small Red"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 150,
             "height": 150,
             "Orientation": "vertical",
@@ -322,7 +326,24 @@
             "overlay_style": "aperture_mask",
             "Pointer_Style": "needle",
             "pivot_colour": "red",
-            "path": "Badge_Variations/Badge_3_Small"
+            "path": "Badge_Variations/Badge_3_Small",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           },
           "Badge_4_Police_Blue": {
             "type": "_NeedleVUMeter",
@@ -395,16 +416,6 @@
               "De": "Police Blue",
               "Es": "Police Blue"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 220,
             "height": 220,
             "Orientation": "vertical",
@@ -413,7 +424,24 @@
             "enable_lighting": true,
             "overlay_style": "aperture_mask",
             "Pointer_Style": "knife-edge",
-            "path": "Badge_Variations/Badge_4_Police_Blue"
+            "path": "Badge_Variations/Badge_4_Police_Blue",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           },
           "Badge_5_Fire_Red": {
             "type": "_NeedleVUMeter",
@@ -486,16 +514,6 @@
               "De": "Fire Red",
               "Es": "Fire Red"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 220,
             "height": 220,
             "Orientation": "vertical",
@@ -504,7 +522,24 @@
             "enable_lighting": true,
             "overlay_style": "aperture_mask",
             "Pointer_Style": "spade",
-            "path": "Badge_Variations/Badge_5_Fire_Red"
+            "path": "Badge_Variations/Badge_5_Fire_Red",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           },
           "Badge_6_Security_Grey": {
             "type": "_NeedleVUMeter",
@@ -577,16 +612,6 @@
               "De": "Security Grey",
               "Es": "Security Grey"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 220,
             "height": 220,
             "Orientation": "vertical",
@@ -595,7 +620,24 @@
             "enable_lighting": false,
             "overlay_style": "aperture_mask",
             "Pointer_Style": "baton",
-            "path": "Badge_Variations/Badge_6_Security_Grey"
+            "path": "Badge_Variations/Badge_6_Security_Grey",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           },
           "Badge_7_Cyber_Punk": {
             "type": "_NeedleVUMeter",
@@ -668,16 +710,6 @@
               "De": "Cyber Badge",
               "Es": "Cyber Badge"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 220,
             "height": 220,
             "Orientation": "vertical",
@@ -686,7 +718,24 @@
             "enable_lighting": true,
             "overlay_style": "aperture_mask",
             "Pointer_Style": "needle",
-            "path": "Badge_Variations/Badge_7_Cyber_Punk"
+            "path": "Badge_Variations/Badge_7_Cyber_Punk",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           },
           "Badge_8_Royal_Purple": {
             "type": "_NeedleVUMeter",
@@ -759,16 +808,6 @@
               "De": "Royal Purple",
               "Es": "Royal Purple"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 220,
             "height": 220,
             "Orientation": "vertical",
@@ -777,7 +816,24 @@
             "enable_lighting": true,
             "overlay_style": "aperture_mask",
             "Pointer_Style": "teardrop",
-            "path": "Badge_Variations/Badge_8_Royal_Purple"
+            "path": "Badge_Variations/Badge_8_Royal_Purple",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           },
           "Badge_9_Eco_Green": {
             "type": "_NeedleVUMeter",
@@ -850,16 +906,6 @@
               "De": "Eco Green",
               "Es": "Eco Green"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 220,
             "height": 220,
             "Orientation": "vertical",
@@ -868,21 +914,45 @@
             "enable_lighting": false,
             "overlay_style": "aperture_mask",
             "Pointer_Style": "knife-edge",
-            "path": "Badge_Variations/Badge_9_Eco_Green"
+            "path": "Badge_Variations/Badge_9_Eco_Green",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           }
         },
-        "active_text_color": "#1a1a1a",
-        "text_color": "#888888",
-        "active_font_style": "bold",
-        "active_font_size": null,
-        "inactive_font_style": "normal",
-        "inactive_font_size": null,
-        "active_color": "#FF9900",
-        "active_bg_color": "#000000",
-        "bg_color": "#2b2b2b",
-        "glow_intensity": 1.0,
         "Orientation": "vertical",
-        "layout": {}
+        "layout": {},
+        "style": {
+          "active": {
+            "text_color": "#1a1a1a",
+            "bg_color": "#000000",
+            "border_color": "#FF9900",
+            "glow_intensity": 1.0,
+            "font_style": "bold",
+            "font_size": null
+          },
+          "inactive": {
+            "text_color": "#888888",
+            "bg_color": "#2b2b2b",
+            "font_style": "normal",
+            "font_size": null,
+            "glow_intensity": 0
+          }
+        }
       }
     }
   }

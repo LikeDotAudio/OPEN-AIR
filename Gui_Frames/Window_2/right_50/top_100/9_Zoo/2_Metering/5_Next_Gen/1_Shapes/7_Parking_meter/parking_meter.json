@@ -96,16 +96,6 @@
               "De": "Large Klassisch",
               "Es": "Large Clásico"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 350,
             "height": 350,
             "Orientation": "vertical",
@@ -114,7 +104,24 @@
             "Pointer_Style": "needle",
             "sub_ticks": 4,
             "label_radius_offset": -20,
-            "path": "Parking_Meter_Variations/Parking_Meter_1_Large"
+            "path": "Parking_Meter_Variations/Parking_Meter_1_Large",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           },
           "Parking_Meter_2_Medium": {
             "type": "_NeedleVUMeter",
@@ -176,16 +183,6 @@
               "De": "Mittel Night",
               "Es": "Medio Night"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 250,
             "height": 250,
             "Orientation": "vertical",
@@ -195,7 +192,24 @@
             "sub_ticks": 4,
             "label_radius_offset": -15,
             "enable_lighting": true,
-            "path": "Parking_Meter_Variations/Parking_Meter_2_Medium"
+            "path": "Parking_Meter_Variations/Parking_Meter_2_Medium",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           },
           "Parking_Meter_3_Small": {
             "type": "_NeedleVUMeter",
@@ -261,16 +275,6 @@
               "De": "Small Cyber",
               "Es": "Small Cyber"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 180,
             "height": 180,
             "Orientation": "vertical",
@@ -283,7 +287,24 @@
             "tick_radius_offset": 40,
             "needle_length_factor": 1.5,
             "enable_lighting": true,
-            "path": "Parking_Meter_Variations/Parking_Meter_3_Small"
+            "path": "Parking_Meter_Variations/Parking_Meter_3_Small",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           },
           "Parking_Meter_4_Tiny": {
             "type": "_NeedleVUMeter",
@@ -348,16 +369,6 @@
               "De": "Tiny Vintage",
               "Es": "Tiny Vintage"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 120,
             "height": 120,
             "Orientation": "vertical",
@@ -368,7 +379,24 @@
             "label_radius_offset": -5,
             "needle_length_factor": 1.2,
             "damping": 0.8,
-            "path": "Parking_Meter_Variations/Parking_Meter_4_Tiny"
+            "path": "Parking_Meter_Variations/Parking_Meter_4_Tiny",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           },
           "Parking_Meter_5_Tall": {
             "type": "_NeedleVUMeter",
@@ -431,16 +459,6 @@
               "De": "Tall Danger",
               "Es": "Tall Danger"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 200,
             "height": 50,
             "Orientation": "vertical",
@@ -450,7 +468,24 @@
             "sub_ticks": 1,
             "label_radius_offset": -20,
             "damping": 0.2,
-            "path": "Parking_Meter_Variations/Parking_Meter_5_Tall"
+            "path": "Parking_Meter_Variations/Parking_Meter_5_Tall",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           },
           "Parking_Meter_6_Wide": {
             "type": "_NeedleVUMeter",
@@ -513,16 +548,6 @@
               "De": "Wide Royal",
               "Es": "Wide Royal"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 400,
             "height": 200,
             "Orientation": "vertical",
@@ -532,7 +557,24 @@
             "label_radius_offset": -15,
             "needle_length_factor": 0.8,
             "damping": 0.95,
-            "path": "Parking_Meter_Variations/Parking_Meter_6_Wide"
+            "path": "Parking_Meter_Variations/Parking_Meter_6_Wide",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           },
           "Parking_Meter_7_Blueprint": {
             "type": "_NeedleVUMeter",
@@ -593,16 +635,6 @@
               "De": "Blueprint Tech",
               "Es": "Blueprint Tech"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 300,
             "height": 300,
             "Orientation": "vertical",
@@ -611,7 +643,24 @@
             "Pointer_Style": "line",
             "label_radius_offset": -25,
             "damping": 0.5,
-            "path": "Parking_Meter_Variations/Parking_Meter_7_Blueprint"
+            "path": "Parking_Meter_Variations/Parking_Meter_7_Blueprint",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           },
           "Parking_Meter_8_Emerald": {
             "type": "_NeedleVUMeter",
@@ -671,16 +720,6 @@
               "De": "Emerald Sea",
               "Es": "Emerald Sea"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 280,
             "height": 280,
             "Orientation": "vertical",
@@ -688,7 +727,24 @@
             "bezel_width": 6,
             "label_radius_offset": -18,
             "damping": 0.7,
-            "path": "Parking_Meter_Variations/Parking_Meter_8_Emerald"
+            "path": "Parking_Meter_Variations/Parking_Meter_8_Emerald",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           },
           "Parking_Meter_9_Carbon": {
             "type": "_NeedleVUMeter",
@@ -749,16 +805,6 @@
               "De": "Carbon Fiber",
               "Es": "Carbon Fiber"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 320,
             "height": 320,
             "Orientation": "vertical",
@@ -767,7 +813,24 @@
             "Pointer_Style": "needle",
             "label_radius_offset": -22,
             "damping": 0.99,
-            "path": "Parking_Meter_Variations/Parking_Meter_9_Carbon"
+            "path": "Parking_Meter_Variations/Parking_Meter_9_Carbon",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           },
           "Parking_Meter_10_Fire": {
             "type": "_NeedleVUMeter",
@@ -828,16 +891,6 @@
               "De": "Fireball",
               "Es": "Fireball"
             },
-            "active_text_color": "#1a1a1a",
-            "text_color": "#888888",
-            "active_font_style": "bold",
-            "active_font_size": null,
-            "inactive_font_style": "normal",
-            "inactive_font_size": null,
-            "active_color": "#FF9900",
-            "active_bg_color": "#000000",
-            "bg_color": "#2b2b2b",
-            "glow_intensity": 1.0,
             "width": 260,
             "height": 260,
             "Orientation": "vertical",
@@ -846,21 +899,45 @@
             "Pointer_Style": "spade",
             "label_radius_offset": -15,
             "damping": 0.1,
-            "path": "Parking_Meter_Variations/Parking_Meter_10_Fire"
+            "path": "Parking_Meter_Variations/Parking_Meter_10_Fire",
+            "style": {
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "glow_intensity": 1.0,
+                "font_style": "bold",
+                "font_size": null
+              },
+              "inactive": {
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "font_style": "normal",
+                "font_size": null,
+                "glow_intensity": 0
+              }
+            }
           }
         },
-        "active_text_color": "#1a1a1a",
-        "text_color": "#888888",
-        "active_font_style": "bold",
-        "active_font_size": null,
-        "inactive_font_style": "normal",
-        "inactive_font_size": null,
-        "active_color": "#FF9900",
-        "active_bg_color": "#000000",
-        "bg_color": "#2b2b2b",
-        "glow_intensity": 1.0,
         "Orientation": "vertical",
-        "layout": {}
+        "layout": {},
+        "style": {
+          "active": {
+            "text_color": "#1a1a1a",
+            "bg_color": "#000000",
+            "border_color": "#FF9900",
+            "glow_intensity": 1.0,
+            "font_style": "bold",
+            "font_size": null
+          },
+          "inactive": {
+            "text_color": "#888888",
+            "bg_color": "#2b2b2b",
+            "font_style": "normal",
+            "font_size": null,
+            "glow_intensity": 0
+          }
+        }
       }
     }
   }

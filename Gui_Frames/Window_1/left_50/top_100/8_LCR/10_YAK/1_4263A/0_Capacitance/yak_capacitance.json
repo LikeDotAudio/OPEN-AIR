@@ -2,12 +2,18 @@
   "LCR_YAK_4263A_Capacitance": {
     "type": "OcaBin",
     "id": "50.100.8.10.1.0",
-    "geometry": { "anchor": "NSEW" },
-    "behavior": { "fluid_ew": true },
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "fluid_ew": true
+    },
     "blocks": {
       "Capacitance_Settings": {
         "type": "OcaBlock",
-        "description": { "En": "Capacitance Measurement" },
+        "description": {
+          "En": "Capacitance Measurement"
+        },
         "fields": {
           "Capacitance Mode": {
             "type": "_GuiActuator",
@@ -25,7 +31,14 @@
             },
             "AES70": "OcaBooleanActuator",
             "message": ":SENSe:FUNCtion:ON \"{value}\"",
-            "options": ["CPD", "CPQ", "CPG", "CSD", "CSQ", "CSRS"]
+            "options": [
+              "CPD",
+              "CPQ",
+              "CPG",
+              "CSD",
+              "CSQ",
+              "CSRS"
+            ]
           },
           "Test Frequency": {
             "type": "_GuiActuator",
@@ -42,7 +55,13 @@
               "Es": "Establecer frecuencia"
             },
             "message": ":SENSe:FREQuency:CW {value}",
-            "options": ["100", "120", "1k", "10k", "100k"]
+            "options": [
+              "100",
+              "120",
+              "1k",
+              "10k",
+              "100k"
+            ]
           },
           "Averaging": {
             "type": "_GuiActuator",

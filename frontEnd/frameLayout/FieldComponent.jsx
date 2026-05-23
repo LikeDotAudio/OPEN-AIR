@@ -21,7 +21,16 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
                 ...(_v.default_value !== undefined ? { value_default: _numU(_v.default_value) } : {}),
             },
         },
-    } : rawNode;
+    } : { ...rawNode };
+
+    // Labels: new schema is label:{ active, inactive, (text) }. Expand back to
+    // label_active/label_inactive so every widget that reads those keeps working
+    // (migration-safe), without disturbing a plain `label` group title.
+    const _lab = rawNode && rawNode.label;
+    if (_lab && typeof _lab === 'object' && ('active' in _lab || 'inactive' in _lab)) {
+        if (node.label_active === undefined) node.label_active = _lab.active;
+        if (node.label_inactive === undefined) node.label_inactive = _lab.inactive !== undefined ? _lab.inactive : _lab.active;
+    }
 
     const topic = `OpenAir/Gui${path_prefix}/${nodeName}`;
 
@@ -46,8 +55,9 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
         return labelData[lang] || labelData.En || labelData.label?.[lang] || labelData.label?.En || null;
     };
 
-    const title = getLocalizedLabel(node.label) || 
-                  getLocalizedLabel(node.label_active) || 
+    const title = getLocalizedLabel(node.label?.text) ||
+                  getLocalizedLabel(node.label) ||
+                  getLocalizedLabel(node.label_active) ||
                   nodeName;
 
     const lHeight = node.layout?.height || node.geometry?.height;

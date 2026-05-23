@@ -2,12 +2,18 @@
   "LCR_YAK_4263A_Connection": {
     "type": "OcaBin",
     "id": "50.100.8.10.1.100.4263",
-    "geometry": { "anchor": "NSEW" },
-    "behavior": { "fluid_ew": true },
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "fluid_ew": true
+    },
     "blocks": {
       "Table": {
         "type": "OcaTable",
-        "description": { "En": "Discovered 4263A/B Devices" },
+        "description": {
+          "En": "Discovered 4263A/B Devices"
+        },
         "headers": [
           "type",
           "resource_string",

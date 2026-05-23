@@ -405,13 +405,16 @@
               "height": 60,
               "font": 12
             },
-            "active_color": "#FFFDD0",
-            "bg_color": "#c4bc96",
-            "active_bg_color": "#c4bc96",
-            "text_color": "#1a1a1a",
-            "active_text_color": "#1a1a1a",
             "style": {
-              "Circular": true
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#c4bc96",
+                "border_color": "#FFFDD0"
+              },
+              "inactive": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#c4bc96"
+              }
             }
           },
           "cream_on": {
@@ -439,14 +442,18 @@
               "height": 60,
               "font": 12
             },
-            "active_color": "#FFFDD0",
-            "bg_color": "#c4bc96",
-            "active_bg_color": "#FFFDD0",
-            "text_color": "#1a1a1a",
-            "active_text_color": "#1a1a1a",
-            "glow_intensity": 5.0,
             "style": {
-              "Circular": true
+              "active": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#FFFDD0",
+                "border_color": "#FFFDD0",
+                "glow_intensity": 5.0
+              },
+              "inactive": {
+                "text_color": "#1a1a1a",
+                "bg_color": "#c4bc96",
+                "glow_intensity": 0
+              }
             }
           },
           "ruby_pulse": {
@@ -461,10 +468,12 @@
               "width": 60,
               "height": 60
             },
-            "active_color": "#e0115f",
-            "active_bg_color": "#400010",
             "style": {
-              "Circular": true
+              "active": {
+                "bg_color": "#400010",
+                "border_color": "#e0115f"
+              },
+              "inactive": {}
             }
           },
           "emerald_glow": {
@@ -479,10 +488,12 @@
               "width": 60,
               "height": 60
             },
-            "active_color": "#50c878",
-            "active_bg_color": "#003010",
             "style": {
-              "Circular": true
+              "active": {
+                "bg_color": "#003010",
+                "border_color": "#50c878"
+              },
+              "inactive": {}
             }
           },
           "sapphire_deep": {
@@ -497,10 +508,12 @@
               "width": 60,
               "height": 60
             },
-            "active_color": "#0f52ba",
-            "active_bg_color": "#001040",
             "style": {
-              "Circular": true
+              "active": {
+                "bg_color": "#001040",
+                "border_color": "#0f52ba"
+              },
+              "inactive": {}
             }
           },
           "amber_warm": {
@@ -515,10 +528,12 @@
               "width": 60,
               "height": 60
             },
-            "active_color": "#ffbf00",
-            "active_bg_color": "#302000",
             "style": {
-              "Circular": true
+              "active": {
+                "bg_color": "#302000",
+                "border_color": "#ffbf00"
+              },
+              "inactive": {}
             }
           },
           "violet_vibes": {
@@ -533,10 +548,12 @@
               "width": 60,
               "height": 60
             },
-            "active_color": "#ee82ee",
-            "active_bg_color": "#300030",
             "style": {
-              "Circular": true
+              "active": {
+                "bg_color": "#300030",
+                "border_color": "#ee82ee"
+              },
+              "inactive": {}
             }
           },
           "cyan_ice": {
@@ -551,10 +568,12 @@
               "width": 60,
               "height": 60
             },
-            "active_color": "#00ffff",
-            "active_bg_color": "#003030",
             "style": {
-              "Circular": true
+              "active": {
+                "bg_color": "#003030",
+                "border_color": "#00ffff"
+              },
+              "inactive": {}
             }
           },
           "magenta_hot": {
@@ -569,10 +588,12 @@
               "width": 60,
               "height": 60
             },
-            "active_color": "#ff00ff",
-            "active_bg_color": "#400040",
             "style": {
-              "Circular": true
+              "active": {
+                "bg_color": "#400040",
+                "border_color": "#ff00ff"
+              },
+              "inactive": {}
             }
           },
           "lime_zest": {
@@ -587,10 +608,12 @@
               "width": 60,
               "height": 60
             },
-            "active_color": "#32cd32",
-            "active_bg_color": "#103000",
             "style": {
-              "Circular": true
+              "active": {
+                "bg_color": "#103000",
+                "border_color": "#32cd32"
+              },
+              "inactive": {}
             }
           },
           "gold_lux": {
@@ -605,10 +628,12 @@
               "width": 60,
               "height": 60
             },
-            "active_color": "#ffd700",
-            "active_bg_color": "#303000",
             "style": {
-              "Circular": true
+              "active": {
+                "bg_color": "#303000",
+                "border_color": "#ffd700"
+              },
+              "inactive": {}
             }
           },
           "slate_cool": {
@@ -623,10 +648,12 @@
               "width": 60,
               "height": 60
             },
-            "active_color": "#708090",
-            "active_bg_color": "#101020",
             "style": {
-              "Circular": true
+              "active": {
+                "bg_color": "#101020",
+                "border_color": "#708090"
+              },
+              "inactive": {}
             }
           }
         }

@@ -554,12 +554,18 @@
                     "De": "TAG",
                     "Es": "TAG"
                   },
-                  "bg_color": "#4a483e",
-                  "active_bg_color": "#FFFDD0",
-                  "active_color": "#FFFDD0",
-                  "text_color": "#1a1a1a",
-                  "active_text_color": "#1a1a1a",
-                  "selected": true
+                  "selected": true,
+                  "style": {
+                    "active": {
+                      "text_color": "#1a1a1a",
+                      "bg_color": "#FFFDD0",
+                      "border_color": "#FFFDD0"
+                    },
+                    "inactive": {
+                      "text_color": "#1a1a1a",
+                      "bg_color": "#4a483e"
+                    }
+                  }
                 },
                 "ON": {
                   "label_active": {
@@ -568,11 +574,17 @@
                     "De": "TAG",
                     "Es": "TAG"
                   },
-                  "bg_color": "#FFFDD0",
-                  "active_bg_color": "#FFFDD0",
-                  "active_color": "#FFFDD0",
-                  "text_color": "#1a1a1a",
-                  "active_text_color": "#1a1a1a"
+                  "style": {
+                    "active": {
+                      "text_color": "#1a1a1a",
+                      "bg_color": "#FFFDD0",
+                      "border_color": "#FFFDD0"
+                    },
+                    "inactive": {
+                      "text_color": "#1a1a1a",
+                      "bg_color": "#FFFDD0"
+                    }
+                  }
                 }
               }
             }
@@ -591,10 +603,16 @@
                     "De": "SEL",
                     "Es": "SEL"
                   },
-                  "bg_color": "#400010",
-                  "active_bg_color": "#e0115f",
-                  "active_color": "#e0115f",
-                  "selected": true
+                  "selected": true,
+                  "style": {
+                    "active": {
+                      "bg_color": "#e0115f",
+                      "border_color": "#e0115f"
+                    },
+                    "inactive": {
+                      "bg_color": "#400010"
+                    }
+                  }
                 },
                 "B": {
                   "label_active": {
@@ -603,9 +621,15 @@
                     "De": "SEL",
                     "Es": "SEL"
                   },
-                  "bg_color": "#400010",
-                  "active_bg_color": "#e0115f",
-                  "active_color": "#e0115f"
+                  "style": {
+                    "active": {
+                      "bg_color": "#e0115f",
+                      "border_color": "#e0115f"
+                    },
+                    "inactive": {
+                      "bg_color": "#400010"
+                    }
+                  }
                 }
               }
             }
@@ -624,10 +648,16 @@
                     "De": "SEL",
                     "Es": "SEL"
                   },
-                  "bg_color": "#003010",
-                  "active_bg_color": "#50c878",
-                  "active_color": "#50c878",
-                  "selected": true
+                  "selected": true,
+                  "style": {
+                    "active": {
+                      "bg_color": "#50c878",
+                      "border_color": "#50c878"
+                    },
+                    "inactive": {
+                      "bg_color": "#003010"
+                    }
+                  }
                 },
                 "B": {
                   "label_active": {
@@ -636,9 +666,15 @@
                     "De": "SEL",
                     "Es": "SEL"
                   },
-                  "bg_color": "#003010",
-                  "active_bg_color": "#50c878",
-                  "active_color": "#50c878"
+                  "style": {
+                    "active": {
+                      "bg_color": "#50c878",
+                      "border_color": "#50c878"
+                    },
+                    "inactive": {
+                      "bg_color": "#003010"
+                    }
+                  }
                 }
               }
             }
@@ -657,10 +693,16 @@
                     "De": "SEL",
                     "Es": "SEL"
                   },
-                  "bg_color": "#001040",
-                  "active_bg_color": "#0f52ba",
-                  "active_color": "#0f52ba",
-                  "selected": true
+                  "selected": true,
+                  "style": {
+                    "active": {
+                      "bg_color": "#0f52ba",
+                      "border_color": "#0f52ba"
+                    },
+                    "inactive": {
+                      "bg_color": "#001040"
+                    }
+                  }
                 },
                 "B": {
                   "label_active": {
@@ -669,9 +711,15 @@
                     "De": "SEL",
                     "Es": "SEL"
                   },
-                  "bg_color": "#001040",
-                  "active_bg_color": "#0f52ba",
-                  "active_color": "#0f52ba"
+                  "style": {
+                    "active": {
+                      "bg_color": "#0f52ba",
+                      "border_color": "#0f52ba"
+                    },
+                    "inactive": {
+                      "bg_color": "#001040"
+                    }
+                  }
                 }
               }
             }
@@ -690,10 +738,16 @@
                     "De": "SEL",
                     "Es": "SEL"
                   },
-                  "bg_color": "#302000",
-                  "active_bg_color": "#ffbf00",
-                  "active_color": "#ffbf00",
-                  "selected": true
+                  "selected": true,
+                  "style": {
+                    "active": {
+                      "bg_color": "#ffbf00",
+                      "border_color": "#ffbf00"
+                    },
+                    "inactive": {
+                      "bg_color": "#302000"
+                    }
+                  }
                 },
                 "B": {
                   "label_active": {
@@ -702,9 +756,15 @@
                     "De": "SEL",
                     "Es": "SEL"
                   },
-                  "bg_color": "#302000",
-                  "active_bg_color": "#ffbf00",
-                  "active_color": "#ffbf00"
+                  "style": {
+                    "active": {
+                      "bg_color": "#ffbf00",
+                      "border_color": "#ffbf00"
+                    },
+                    "inactive": {
+                      "bg_color": "#302000"
+                    }
+                  }
                 }
               }
             }
@@ -723,10 +783,16 @@
                     "De": "SEL",
                     "Es": "SEL"
                   },
-                  "bg_color": "#300030",
-                  "active_bg_color": "#ee82ee",
-                  "active_color": "#ee82ee",
-                  "selected": true
+                  "selected": true,
+                  "style": {
+                    "active": {
+                      "bg_color": "#ee82ee",
+                      "border_color": "#ee82ee"
+                    },
+                    "inactive": {
+                      "bg_color": "#300030"
+                    }
+                  }
                 },
                 "B": {
                   "label_active": {
@@ -735,9 +801,15 @@
                     "De": "SEL",
                     "Es": "SEL"
                   },
-                  "bg_color": "#300030",
-                  "active_bg_color": "#ee82ee",
-                  "active_color": "#ee82ee"
+                  "style": {
+                    "active": {
+                      "bg_color": "#ee82ee",
+                      "border_color": "#ee82ee"
+                    },
+                    "inactive": {
+                      "bg_color": "#300030"
+                    }
+                  }
                 }
               }
             }
@@ -756,10 +828,16 @@
                     "De": "SEL",
                     "Es": "SEL"
                   },
-                  "bg_color": "#003030",
-                  "active_bg_color": "#00ffff",
-                  "active_color": "#00ffff",
-                  "selected": true
+                  "selected": true,
+                  "style": {
+                    "active": {
+                      "bg_color": "#00ffff",
+                      "border_color": "#00ffff"
+                    },
+                    "inactive": {
+                      "bg_color": "#003030"
+                    }
+                  }
                 },
                 "B": {
                   "label_active": {
@@ -768,9 +846,15 @@
                     "De": "SEL",
                     "Es": "SEL"
                   },
-                  "bg_color": "#003030",
-                  "active_bg_color": "#00ffff",
-                  "active_color": "#00ffff"
+                  "style": {
+                    "active": {
+                      "bg_color": "#00ffff",
+                      "border_color": "#00ffff"
+                    },
+                    "inactive": {
+                      "bg_color": "#003030"
+                    }
+                  }
                 }
               }
             }
@@ -789,10 +873,16 @@
                     "De": "SEL",
                     "Es": "SEL"
                   },
-                  "bg_color": "#400040",
-                  "active_bg_color": "#ff00ff",
-                  "active_color": "#ff00ff",
-                  "selected": true
+                  "selected": true,
+                  "style": {
+                    "active": {
+                      "bg_color": "#ff00ff",
+                      "border_color": "#ff00ff"
+                    },
+                    "inactive": {
+                      "bg_color": "#400040"
+                    }
+                  }
                 },
                 "B": {
                   "label_active": {
@@ -801,9 +891,15 @@
                     "De": "SEL",
                     "Es": "SEL"
                   },
-                  "bg_color": "#400040",
-                  "active_bg_color": "#ff00ff",
-                  "active_color": "#ff00ff"
+                  "style": {
+                    "active": {
+                      "bg_color": "#ff00ff",
+                      "border_color": "#ff00ff"
+                    },
+                    "inactive": {
+                      "bg_color": "#400040"
+                    }
+                  }
                 }
               }
             }
@@ -822,10 +918,16 @@
                     "De": "SEL",
                     "Es": "SEL"
                   },
-                  "bg_color": "#103000",
-                  "active_bg_color": "#32cd32",
-                  "active_color": "#32cd32",
-                  "selected": true
+                  "selected": true,
+                  "style": {
+                    "active": {
+                      "bg_color": "#32cd32",
+                      "border_color": "#32cd32"
+                    },
+                    "inactive": {
+                      "bg_color": "#103000"
+                    }
+                  }
                 },
                 "B": {
                   "label_active": {
@@ -834,9 +936,15 @@
                     "De": "SEL",
                     "Es": "SEL"
                   },
-                  "bg_color": "#103000",
-                  "active_bg_color": "#32cd32",
-                  "active_color": "#32cd32"
+                  "style": {
+                    "active": {
+                      "bg_color": "#32cd32",
+                      "border_color": "#32cd32"
+                    },
+                    "inactive": {
+                      "bg_color": "#103000"
+                    }
+                  }
                 }
               }
             }
@@ -855,10 +963,16 @@
                     "De": "SEL",
                     "Es": "SEL"
                   },
-                  "bg_color": "#303000",
-                  "active_bg_color": "#ffd700",
-                  "active_color": "#ffd700",
-                  "selected": true
+                  "selected": true,
+                  "style": {
+                    "active": {
+                      "bg_color": "#ffd700",
+                      "border_color": "#ffd700"
+                    },
+                    "inactive": {
+                      "bg_color": "#303000"
+                    }
+                  }
                 },
                 "B": {
                   "label_active": {
@@ -867,9 +981,15 @@
                     "De": "SEL",
                     "Es": "SEL"
                   },
-                  "bg_color": "#303000",
-                  "active_bg_color": "#ffd700",
-                  "active_color": "#ffd700"
+                  "style": {
+                    "active": {
+                      "bg_color": "#ffd700",
+                      "border_color": "#ffd700"
+                    },
+                    "inactive": {
+                      "bg_color": "#303000"
+                    }
+                  }
                 }
               }
             }
@@ -888,10 +1008,16 @@
                     "De": "SEL",
                     "Es": "SEL"
                   },
-                  "bg_color": "#101020",
-                  "active_bg_color": "#708090",
-                  "active_color": "#708090",
-                  "selected": true
+                  "selected": true,
+                  "style": {
+                    "active": {
+                      "bg_color": "#708090",
+                      "border_color": "#708090"
+                    },
+                    "inactive": {
+                      "bg_color": "#101020"
+                    }
+                  }
                 },
                 "B": {
                   "label_active": {
@@ -900,9 +1026,15 @@
                     "De": "SEL",
                     "Es": "SEL"
                   },
-                  "bg_color": "#101020",
-                  "active_bg_color": "#708090",
-                  "active_color": "#708090"
+                  "style": {
+                    "active": {
+                      "bg_color": "#708090",
+                      "border_color": "#708090"
+                    },
+                    "inactive": {
+                      "bg_color": "#101020"
+                    }
+                  }
                 }
               }
             }
@@ -921,10 +1053,16 @@
                     "De": "SEL",
                     "Es": "SEL"
                   },
-                  "bg_color": "#201000",
-                  "active_bg_color": "#d2691e",
-                  "active_color": "#d2691e",
-                  "selected": true
+                  "selected": true,
+                  "style": {
+                    "active": {
+                      "bg_color": "#d2691e",
+                      "border_color": "#d2691e"
+                    },
+                    "inactive": {
+                      "bg_color": "#201000"
+                    }
+                  }
                 },
                 "B": {
                   "label_active": {
@@ -933,9 +1071,15 @@
                     "De": "SEL",
                     "Es": "SEL"
                   },
-                  "bg_color": "#201000",
-                  "active_bg_color": "#d2691e",
-                  "active_color": "#d2691e"
+                  "style": {
+                    "active": {
+                      "bg_color": "#d2691e",
+                      "border_color": "#d2691e"
+                    },
+                    "inactive": {
+                      "bg_color": "#201000"
+                    }
+                  }
                 }
               }
             }
@@ -954,10 +1098,16 @@
                     "De": "SEL",
                     "Es": "SEL"
                   },
-                  "bg_color": "#002020",
-                  "active_bg_color": "#20b2aa",
-                  "active_color": "#20b2aa",
-                  "selected": true
+                  "selected": true,
+                  "style": {
+                    "active": {
+                      "bg_color": "#20b2aa",
+                      "border_color": "#20b2aa"
+                    },
+                    "inactive": {
+                      "bg_color": "#002020"
+                    }
+                  }
                 },
                 "B": {
                   "label_active": {
@@ -966,9 +1116,15 @@
                     "De": "SEL",
                     "Es": "SEL"
                   },
-                  "bg_color": "#002020",
-                  "active_bg_color": "#20b2aa",
-                  "active_color": "#20b2aa"
+                  "style": {
+                    "active": {
+                      "bg_color": "#20b2aa",
+                      "border_color": "#20b2aa"
+                    },
+                    "inactive": {
+                      "bg_color": "#002020"
+                    }
+                  }
                 }
               }
             }
@@ -987,10 +1143,16 @@
                     "De": "SEL",
                     "Es": "SEL"
                   },
-                  "bg_color": "#300000",
-                  "active_bg_color": "#ff4500",
-                  "active_color": "#ff4500",
-                  "selected": true
+                  "selected": true,
+                  "style": {
+                    "active": {
+                      "bg_color": "#ff4500",
+                      "border_color": "#ff4500"
+                    },
+                    "inactive": {
+                      "bg_color": "#300000"
+                    }
+                  }
                 },
                 "B": {
                   "label_active": {
@@ -999,9 +1161,15 @@
                     "De": "SEL",
                     "Es": "SEL"
                   },
-                  "bg_color": "#300000",
-                  "active_bg_color": "#ff4500",
-                  "active_color": "#ff4500"
+                  "style": {
+                    "active": {
+                      "bg_color": "#ff4500",
+                      "border_color": "#ff4500"
+                    },
+                    "inactive": {
+                      "bg_color": "#300000"
+                    }
+                  }
                 }
               }
             }
@@ -1020,10 +1188,16 @@
                     "De": "SEL",
                     "Es": "SEL"
                   },
-                  "bg_color": "#001030",
-                  "active_bg_color": "#4682b4",
-                  "active_color": "#4682b4",
-                  "selected": true
+                  "selected": true,
+                  "style": {
+                    "active": {
+                      "bg_color": "#4682b4",
+                      "border_color": "#4682b4"
+                    },
+                    "inactive": {
+                      "bg_color": "#001030"
+                    }
+                  }
                 },
                 "B": {
                   "label_active": {
@@ -1032,9 +1206,15 @@
                     "De": "SEL",
                     "Es": "SEL"
                   },
-                  "bg_color": "#001030",
-                  "active_bg_color": "#4682b4",
-                  "active_color": "#4682b4"
+                  "style": {
+                    "active": {
+                      "bg_color": "#4682b4",
+                      "border_color": "#4682b4"
+                    },
+                    "inactive": {
+                      "bg_color": "#001030"
+                    }
+                  }
                 }
               }
             }
@@ -1053,10 +1233,16 @@
                     "De": "SEL",
                     "Es": "SEL"
                   },
-                  "bg_color": "#102010",
-                  "active_bg_color": "#9acd32",
-                  "active_color": "#9acd32",
-                  "selected": true
+                  "selected": true,
+                  "style": {
+                    "active": {
+                      "bg_color": "#9acd32",
+                      "border_color": "#9acd32"
+                    },
+                    "inactive": {
+                      "bg_color": "#102010"
+                    }
+                  }
                 },
                 "B": {
                   "label_active": {
@@ -1065,9 +1251,15 @@
                     "De": "SEL",
                     "Es": "SEL"
                   },
-                  "bg_color": "#102010",
-                  "active_bg_color": "#9acd32",
-                  "active_color": "#9acd32"
+                  "style": {
+                    "active": {
+                      "bg_color": "#9acd32",
+                      "border_color": "#9acd32"
+                    },
+                    "inactive": {
+                      "bg_color": "#102010"
+                    }
+                  }
                 }
               }
             }
@@ -1086,10 +1278,16 @@
                     "De": "SEL",
                     "Es": "SEL"
                   },
-                  "bg_color": "#200020",
-                  "active_bg_color": "#ba55d3",
-                  "active_color": "#ba55d3",
-                  "selected": true
+                  "selected": true,
+                  "style": {
+                    "active": {
+                      "bg_color": "#ba55d3",
+                      "border_color": "#ba55d3"
+                    },
+                    "inactive": {
+                      "bg_color": "#200020"
+                    }
+                  }
                 },
                 "B": {
                   "label_active": {
@@ -1098,9 +1296,15 @@
                     "De": "SEL",
                     "Es": "SEL"
                   },
-                  "bg_color": "#200020",
-                  "active_bg_color": "#ba55d3",
-                  "active_color": "#ba55d3"
+                  "style": {
+                    "active": {
+                      "bg_color": "#ba55d3",
+                      "border_color": "#ba55d3"
+                    },
+                    "inactive": {
+                      "bg_color": "#200020"
+                    }
+                  }
                 }
               }
             }
@@ -1119,10 +1323,16 @@
                     "De": "SEL",
                     "Es": "SEL"
                   },
-                  "bg_color": "#003020",
-                  "active_bg_color": "#3cb371",
-                  "active_color": "#3cb371",
-                  "selected": true
+                  "selected": true,
+                  "style": {
+                    "active": {
+                      "bg_color": "#3cb371",
+                      "border_color": "#3cb371"
+                    },
+                    "inactive": {
+                      "bg_color": "#003020"
+                    }
+                  }
                 },
                 "B": {
                   "label_active": {
@@ -1131,9 +1341,15 @@
                     "De": "SEL",
                     "Es": "SEL"
                   },
-                  "bg_color": "#003020",
-                  "active_bg_color": "#3cb371",
-                  "active_color": "#3cb371"
+                  "style": {
+                    "active": {
+                      "bg_color": "#3cb371",
+                      "border_color": "#3cb371"
+                    },
+                    "inactive": {
+                      "bg_color": "#003020"
+                    }
+                  }
                 }
               }
             }
@@ -1152,11 +1368,17 @@
                     "De": "SEL",
                     "Es": "SEL"
                   },
-                  "bg_color": "#303030",
-                  "active_bg_color": "#f0f0f0",
-                  "active_color": "#f0f0f0",
-                  "active_text_color": "#1a1a1a",
-                  "selected": true
+                  "selected": true,
+                  "style": {
+                    "active": {
+                      "text_color": "#1a1a1a",
+                      "bg_color": "#f0f0f0",
+                      "border_color": "#f0f0f0"
+                    },
+                    "inactive": {
+                      "bg_color": "#303030"
+                    }
+                  }
                 },
                 "B": {
                   "label_active": {
@@ -1165,10 +1387,16 @@
                     "De": "SEL",
                     "Es": "SEL"
                   },
-                  "bg_color": "#303030",
-                  "active_bg_color": "#f0f0f0",
-                  "active_color": "#f0f0f0",
-                  "active_text_color": "#1a1a1a"
+                  "style": {
+                    "active": {
+                      "text_color": "#1a1a1a",
+                      "bg_color": "#f0f0f0",
+                      "border_color": "#f0f0f0"
+                    },
+                    "inactive": {
+                      "bg_color": "#303030"
+                    }
+                  }
                 }
               }
             }
@@ -1187,10 +1415,16 @@
                     "De": "SEL",
                     "Es": "SEL"
                   },
-                  "bg_color": "#1a1a1a",
-                  "active_bg_color": "#ff69b4",
-                  "active_color": "#ff69b4",
-                  "selected": true
+                  "selected": true,
+                  "style": {
+                    "active": {
+                      "bg_color": "#ff69b4",
+                      "border_color": "#ff69b4"
+                    },
+                    "inactive": {
+                      "bg_color": "#1a1a1a"
+                    }
+                  }
                 },
                 "B": {
                   "label_active": {
@@ -1199,9 +1433,15 @@
                     "De": "SEL",
                     "Es": "SEL"
                   },
-                  "bg_color": "#1a1a1a",
-                  "active_bg_color": "#ff69b4",
-                  "active_color": "#ff69b4"
+                  "style": {
+                    "active": {
+                      "bg_color": "#ff69b4",
+                      "border_color": "#ff69b4"
+                    },
+                    "inactive": {
+                      "bg_color": "#1a1a1a"
+                    }
+                  }
                 }
               }
             }

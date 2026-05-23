@@ -22,12 +22,12 @@ app_constants = Config.get_instance()
 from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
 from oaGui.Workers.compositing.engine_visual_effects import EngineVisualEffects
 from oaGui.Workers.compositing.sync_behavior import SyncBehavior
-
-from .rendering_engine import MeterRenderingEngine
 from oaGuiElements.Core.metering.meter_needle.animation.animator import MeterAnimator
 from oaGuiElements.Core.metering.meter_needle.config.meter_config import MeterConfig
 from oaGuiElements.Core.metering.meter_needle.integration.state_linker import StateLinker
 from oaGuiElements.Core.metering.meter_needle.ui.frame_factory import FrameFactory
+
+from .rendering_engine import MeterRenderingEngine
 
 
 @RegistryWidgetStore.register("_NeedleVUMeter")

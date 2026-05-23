@@ -21,6 +21,13 @@
 
   window.OaEdProperties = ({ store }) => {
     const st = window.useEditorStore(store);
+
+    // Load the library enum legends once so property fields can become dropdowns.
+    const [, setLegendsReady] = React.useState(0);
+    React.useEffect(() => {
+      if (window.OaEdEnum) window.OaEdEnum.load().then(() => setLegendsReady((x) => x + 1)).catch(() => {});
+    }, []);
+
     const path = st.selectedPath;
     const node = path ? store.getNode(path) : null;
 

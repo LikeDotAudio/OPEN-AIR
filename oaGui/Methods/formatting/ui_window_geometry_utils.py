@@ -6,6 +6,7 @@
 
 import tkinter as tk
 
+
 class UIWindowGeometryUtils:
     """
     Utility methods for calculating UI widget geometry and relative positions.
@@ -22,7 +23,7 @@ class UIWindowGeometryUtils:
             if not parent_path: break
             curr = curr.nametowidget(parent_path)
         return rx, ry
-    
+
     @staticmethod
     def find_parent_builder(start_builder):
         """Traverses up the widget tree to find a parent LoaderOrchestrator."""

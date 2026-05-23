@@ -1,10 +1,10 @@
-from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
+
 # Methods/preset_pusher.py
 # Author: Anthony Peter Kuzub
 # Version: 20250821.200641.1
 #
 # Description: A worker module to process a selected preset and push the corresponding
-
 #
 # A worker module to process a selected preset and push the corresponding
 # SCPI commands via MQTT to configure the instrument.
@@ -14,17 +14,15 @@ from oaLogging.Methods.matrix_gate import matrix_log
 #
 #
 # Version 20250821.200641.1
-
 import os
-import inspect
-import orjson
-import time
 
-# --- Module Imports ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
 from oaComProtocols.oaComMQTT.Methods.mqtt_controller_util import MqttControllerUtility
+
+# --- Module Imports ---
+from oaLogging.Methods.matrix_gate import matrix_log
+
 LOCAL_DEBUG = False
 
 # --- Global Scope Variables ---
@@ -87,7 +85,7 @@ class PresetPusherWorker:
         current_function_name = inspect.currentframe().f_code.co_name
         self.mqtt_controller = mqtt_controller
         if LOCAL_DEBUG:
-            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🟢️️️🟢 The preset pusher has been summoned!", "DEBUG")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🟢️️️🟢 The preset pusher has been summoned!", "DEBUG")
 
     # Configures the instrument based on a selected preset.
     # This method takes a list of preset values, maps them to specific instrument
@@ -106,7 +104,7 @@ class PresetPusherWorker:
         """
         current_function_name = inspect.currentframe().f_code.co_name
         if LOCAL_DEBUG:
-            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🟢️️️🟢 Attuning the instrument to the selected preset. Ready the coils!", "DEBUG")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🟢️️️🟢 Attuning the instrument to the selected preset. Ready the coils!", "DEBUG")
 
         # Mapping the input list to readable variables
         keys = [
@@ -153,7 +151,7 @@ class PresetPusherWorker:
                 topic=FREQ_TRIGGER, subtopic="", value=False
             )
             matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "✅ Start/Stop frequencies set.", "SUCCESS")
-        except Exception as e:
+        except Exception:
             logger.exception("❌ Error setting Start/Stop frequencies")
             if LOCAL_DEBUG:
                 logger.exception("❌ The frequency setter is on the fritz! The error be",
@@ -244,7 +242,7 @@ class PresetPusherWorker:
             matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "✅ Trace modes set.", "SUCCESS")
 
         if LOCAL_DEBUG:
-            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🟢️️️✅ The tuning sequence is complete! All command triggers have been sent.", "SUCCESS")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🟢️️️✅ The tuning sequence is complete! All command triggers have been sent.", "SUCCESS")
 
 
 if __name__ == "__main__":

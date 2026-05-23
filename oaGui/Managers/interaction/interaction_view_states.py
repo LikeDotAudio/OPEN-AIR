@@ -6,6 +6,7 @@
 
 import tkinter as tk
 
+
 class InteractionViewStates:
     """Manages visibility groups and right-click toggle menus for collapsible sections."""
     def __init__(self, root_widget: tk.Widget, builder=None):
@@ -13,7 +14,7 @@ class InteractionViewStates:
         self.vars = {}
         self.builder = builder
         self.menu = tk.Menu(root_widget, tearoff=0)
-        
+
         # If we are in the builder, add those standard items
         if self.builder and hasattr(self.builder, "populate_context_menu"):
             self.builder.populate_context_menu(self.menu)

@@ -5,7 +5,9 @@
 # Description: Service for lazy-loading and populating tab frames from directory structures.
 
 import pathlib
+
 from oaLogging.Methods.matrix_gate import matrix_log
+
 
 def populate_tab_on_demand(display_instance, tab_frame, tab_name, on_complete=None):
     """Checks if a tab requires population and triggers the build if necessary."""
@@ -20,7 +22,7 @@ def populate_tab_on_demand(display_instance, tab_frame, tab_name, on_complete=No
 
     tab_frame.is_populating = True
     build_path = getattr(tab_frame, "build_path", None)
-    
+
     if not build_path:
         matrix_log("gui", "gui_shell", "tab_populate", f"❌ Tab {tab_name} missing build_path!", "ERROR")
         tab_frame.is_populating = False
@@ -28,9 +30,9 @@ def populate_tab_on_demand(display_instance, tab_frame, tab_name, on_complete=No
 
     matrix_log("gui", "gui_manager", "tab_populate", f"🏗️ Populating tab {tab_name} from {build_path}", "INFO")
 
-    if isinstance(build_path, str): 
+    if isinstance(build_path, str):
         build_path = pathlib.Path(build_path)
-    
+
     # ⚡ SIZING FIX: Ensure the tab frame itself allows the builder to expand
     tab_frame.grid_rowconfigure(0, weight=1)
     tab_frame.grid_columnconfigure(0, weight=1)

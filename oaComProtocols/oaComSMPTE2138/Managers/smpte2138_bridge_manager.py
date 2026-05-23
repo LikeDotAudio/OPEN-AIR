@@ -35,8 +35,6 @@ if str(interface_path) not in sys.path:
 # --- Protobuf Imports ---
 from oaComProtocols.oaComMQTT.Managers.mqtt_connection import MqttConnectionManager
 from oaComProtocols.oaComMQTT.Managers.mqtt_subscriber_router import MqttSubscriberRouter
-from oaComProtocols.oaComSMPTE2138.Interface import language_pb2
-from oaComProtocols.oaComSMPTE2138.Interface import constraint_pb2
 from oaComProtocols.oaComSMPTE2138.Interface import param_pb2
 
 # --- Standard OPEN-AIR Imports ---

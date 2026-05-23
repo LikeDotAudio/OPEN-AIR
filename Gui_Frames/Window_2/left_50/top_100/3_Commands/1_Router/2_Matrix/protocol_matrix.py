@@ -5,8 +5,8 @@
 # Description: Proxy frame for the ProtocolMatrix implementation.
 # Delegates actual implementation to oaComBroker.Interface.
 
-import tkinter as tk
 from oaComBroker.Interface.protocol_matrix import ProtocolMatrix
+
 
 class ProtocolMatrixProxy(ProtocolMatrix):
     """

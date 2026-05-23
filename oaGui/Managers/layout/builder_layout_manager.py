@@ -7,6 +7,7 @@
 from .resize_throttler import throttle_resize_event
 from .viewport_synchronizer import synchronize_viewport_dimensions
 
+
 class BuilderLayoutManager:
     """Manages resizing and layout synchronization using atomic services."""
     def __init__(self, builder):

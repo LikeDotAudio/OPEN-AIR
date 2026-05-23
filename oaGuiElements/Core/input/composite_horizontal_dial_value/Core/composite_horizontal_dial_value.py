@@ -18,11 +18,11 @@ from oaLogging.Methods.matrix_gate import matrix_log
 app_constants = Config.get_instance()
 
 from oaGui.Core.factory.base_widget_creator import BaseWidgetCreator
-from oaGuiElements.Core.faders.fader_horizontal.Core.fader_horizontal import BuilderFaderHorizontalCreator
-from oaGuiElements.Core.Knobs.knob.Core.knob import BuilderKnobCreator
 from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
 from oaGui.Workers.compositing.engine_visual_effects import EngineVisualEffects
 from oaGui.Workers.compositing.sync_behavior import SyncBehavior
+from oaGuiElements.Core.faders.fader_horizontal.Core.fader_horizontal import BuilderFaderHorizontalCreator
+from oaGuiElements.Core.Knobs.knob.Core.knob import BuilderKnobCreator
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Methods.matrix_gate import is_debug_allowed

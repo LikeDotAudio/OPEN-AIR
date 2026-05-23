@@ -30,6 +30,7 @@ Responsibilities:
 import os
 import re
 from pathlib import Path
+
 from loguru import logger
 
 # --- Native Rust Acceleration ---
@@ -67,7 +68,7 @@ def _set_debug_state(project_root, target_state: bool, console_print_func=None):
             if modified:
                 log(f"🚀 [DEPLOY] {action} complete (Native Rust accelerated).")
                 return True
-            log(f"🛌 [SLEEPING] No state change needed (Native Rust accelerated).")
+            log("🛌 [SLEEPING] No state change needed (Native Rust accelerated).")
             return False
         except Exception as e:
             logger.error(f"⚠️ [CONFIG] Rust execution failed: {e}. Falling back to Python...")
@@ -75,14 +76,14 @@ def _set_debug_state(project_root, target_state: bool, console_print_func=None):
     # --- Python Fallback Implementation ---
     # Pattern captures: LOCAL_DEBUG, BUILDER_DEBUG, or generic DEBUG assignments
     pattern = re.compile(
-        r'^(\s*(?:LOCAL_|BUILDER_)?[A-Z_]*DEBUG\s*=\s*)(True|False)(.*)$', 
+        r'^(\s*(?:LOCAL_|BUILDER_)?[A-Z_]*DEBUG\s*=\s*)(True|False)(.*)$',
         re.MULTILINE
     )
-    
+
     py_files = []
     for root, dirs, files in os.walk(project_root):
         # Respect project boundaries and ignore hidden/temporary directories
-        dirs[:] = [d for d in dirs if not d.startswith('.') and 
+        dirs[:] = [d for d in dirs if not d.startswith('.') and
                   d not in ['venv', 'node_modules', '__pycache__', 'oaDataLogs']]
         for file in files:
             if file.endswith('.py'):
@@ -93,9 +94,9 @@ def _set_debug_state(project_root, target_state: bool, console_print_func=None):
 
     for file_path in py_files:
         try:
-            with open(file_path, 'r', encoding='utf-8') as f:
+            with open(file_path, encoding='utf-8') as f:
                 content = f.read()
-            
+
             if not pattern.search(content):
                 continue
 
@@ -110,7 +111,7 @@ def _set_debug_state(project_root, target_state: bool, console_print_func=None):
                 return match.group(0)
 
             new_content = pattern.sub(_debug_mode_wrapper, content)
-            
+
             if replacements_made > 0:
                 with open(file_path, 'w', encoding='utf-8') as f:
                     f.write(new_content)
@@ -123,7 +124,7 @@ def _set_debug_state(project_root, target_state: bool, console_print_func=None):
         logger.success(f"🚀 [DEPLOY] {action} complete. "
                        f"Changed {flags_changed} flags across {files_modified} files.")
         return True
-    
+
     logger.info(f"🛌 [SLEEPING] No state change needed. "
                 f"All flags already {target_state_str.upper()}.")
     return False
@@ -143,17 +144,17 @@ def toggle_debug_flags(project_root, console_print_func=None):
     This implements a 'Flip-Flop' logic: if the first file scanned has 
     debug enabled, the entire project is set to disabled, and vice-versa.
     """
-    pattern = re.compile(r'^\s*(?:LOCAL_|BUILDER_)?[A-Z_]*DEBUG\s*=\s*(True|False)', 
+    pattern = re.compile(r'^\s*(?:LOCAL_|BUILDER_)?[A-Z_]*DEBUG\s*=\s*(True|False)',
                         re.MULTILINE)
-    
+
     current_state_found = None
     for root, dirs, files in os.walk(project_root):
-        dirs[:] = [d for d in dirs if not d.startswith('.') and 
+        dirs[:] = [d for d in dirs if not d.startswith('.') and
                   d not in ['venv', 'node_modules', '__pycache__']]
         for file in files:
             if file.endswith('.py'):
                 try:
-                    with open(Path(root) / file, 'r', encoding='utf-8') as f:
+                    with open(Path(root) / file, encoding='utf-8') as f:
                         content = f.read()
                     match = pattern.search(content)
                     if match:
@@ -166,7 +167,7 @@ def toggle_debug_flags(project_root, console_print_func=None):
 
     if current_state_found is None:
         return force_debug_on(project_root, console_print_func)
-    
+
     return _set_debug_state(project_root, not current_state_found, console_print_func)
 
 if __name__ == "__main__":

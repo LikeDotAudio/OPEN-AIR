@@ -16,9 +16,9 @@ from oaLogging.Methods.matrix_gate import is_debug_allowed, matrix_log
 def _is_debug():
     return is_debug_allowed(system="UI", element="GUI_BUILDER")
 
+from oaGui.Core.factory.cache_image_store import CacheImageStore
 from oaGuiElements.Constants.gui_constants import DEFAULT_PANEL_CONFIG
 from oaGuiElements.Methods.utils import PanelUtils
-from oaGui.Core.factory.cache_image_store import CacheImageStore
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Core.logger import BUILDER_LOGGER

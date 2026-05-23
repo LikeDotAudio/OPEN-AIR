@@ -7,9 +7,10 @@
 import pathlib
 import tkinter as tk
 
+
 class BaseLayoutBuilder:
     """Base class for specialized GUI layout builders."""
-    
+
     def __init__(self, scanner):
         self.scanner = scanner
 

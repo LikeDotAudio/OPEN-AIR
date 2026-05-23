@@ -7,7 +7,7 @@
 def ignite_protocol_services(splash, services):
     """Starts the main protocol router and any configured optional protocol managers."""
     splash.set_status(message="Starting Protocol Services...")
-    
+
     if "protocol_router" in services:
         services["protocol_router"].start()
 

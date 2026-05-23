@@ -4,6 +4,6 @@
 #
 # Description: Gatekeeper for the composite MDP element.
 
-from .Core.composite_mdp import MDPFrame, BuilderCompositeMdpCreator
+from .Core.composite_mdp import BuilderCompositeMdpCreator, MDPFrame
 
 __all__ = ["MDPFrame", "BuilderCompositeMdpCreator"]

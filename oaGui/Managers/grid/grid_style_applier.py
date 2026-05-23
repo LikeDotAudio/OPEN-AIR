@@ -13,7 +13,7 @@ def apply_grid_configurations(parent_frame, num_rows, num_cols, row_weights, col
     for i in range(num_rows):
         weight = row_weights.get(i, 0)
         parent_frame.grid_rowconfigure(i, weight=weight, minsize=1)
-        
+
     # ⚡ SPACER ROW: Only add if no other row requested expansion.
     if sum(row_weights.values()) == 0:
         parent_frame.grid_rowconfigure(num_rows, weight=1)

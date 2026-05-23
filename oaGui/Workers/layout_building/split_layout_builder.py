@@ -6,8 +6,11 @@
 
 import tkinter as tk
 from tkinter import ttk
-from .base_layout_builder import BaseLayoutBuilder
+
 from oaLogging.Methods.matrix_gate import matrix_log
+
+from .base_layout_builder import BaseLayoutBuilder
+
 
 class SplitLayoutBuilder(BaseLayoutBuilder):
     """Constructs split-pane (horizontal/vertical) layouts."""
@@ -33,7 +36,7 @@ class SplitLayoutBuilder(BaseLayoutBuilder):
             matrix_log("gui", "gui_builder", "_build_split_layout", f"📐 [SPLIT] Creating container for panel {i}: {p_path}", "DEBUG")
             base_frame = tk.Frame(paned_window, borderwidth=0, relief="flat", bg=self.scanner.theme_colors["bg"], width=1, height=1)
             base_frame.grid_rowconfigure(0, weight=1); base_frame.grid_columnconfigure(0, weight=1)
-            
+
             target = base_frame
             if overflow_ew == "auto" or overflow_ns == "auto":
                 from oaGui.Interface.controls.auto_scrollbar import AutoScrollbar
@@ -57,7 +60,7 @@ class SplitLayoutBuilder(BaseLayoutBuilder):
             if idx >= len(panels):
                 if on_complete: on_complete()
                 return
-            
+
             override = {"behavior": {"overflow_ew": overflow_ew, "overflow_ns": overflow_ns}}
             self.scanner._build_from_directory(path=panels[idx]["path"], parent_widget=containers[idx],
                                        on_complete=lambda: _process_panels(idx + 1),

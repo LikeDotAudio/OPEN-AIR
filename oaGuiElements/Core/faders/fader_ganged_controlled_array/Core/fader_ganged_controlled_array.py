@@ -12,16 +12,16 @@ from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
 
-from oaGui.Methods.formatting.i18n_utils import get_text
 from oaGui.Core.factory.base_widget_creator import BaseWidgetCreator
+from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
+from oaGui.Methods.formatting.i18n_utils import get_text
+from oaGui.Workers.compositing.engine_visual_effects import EngineVisualEffects
+from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 
 # --- EXTRACTED CORE MODULES ---
 from oaGuiElements.Core.faders.fader_ganged_controlled_array.Core.gca_controller_mixin import GCAControllerMixin
 from oaGuiElements.Core.faders.fader_ganged_controlled_array.Core.gca_interaction_mixin import GCAInteractionMixin
 from oaGuiElements.Core.faders.fader_ganged_controlled_array.Core.gca_renderer_mixin import GCARendererMixin
-from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
-from oaGui.Workers.compositing.engine_visual_effects import EngineVisualEffects
-from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 from oaStyle.Core.style import DEFAULT_THEME, THEMES
 
 MIN_CHANNEL_WIDTH = 40

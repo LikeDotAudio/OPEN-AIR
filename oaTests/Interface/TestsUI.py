@@ -20,8 +20,6 @@ import threading
 import webbrowser
 from datetime import datetime
 
-# Import worker logic
-from oaTests.Core.Workers.TestRunner import TestRunner
 from textual.app import App, ComposeResult
 from textual.binding import Binding
 from textual.containers import Horizontal
@@ -31,6 +29,10 @@ from oaComProtocols.oaComMQTT.Entry import get_connection_manager
 from oaGuiEditorWYSIWYG.Entry import launch_editor
 from oaInstallation.Core.SystemStats import SystemStatsProvider
 from oaLogging.Entry import TEST_LOGGER
+from oaTests.Core.Workers import identify_test_directories
+
+# Import worker logic
+from oaTests.Core.Workers.TestRunner import TestRunner
 from oaTests.Managers.AuditRunner import run_all_audits
 from oaTests.Managers.InstallationManager import InstallationManager
 
@@ -38,7 +40,6 @@ from oaTests.Managers.InstallationManager import InstallationManager
 from oaTests.Managers.MaintenanceManager import MaintenanceManager
 from oaTests.Workers.collate_data import collate_extra_tabs
 from oaTests.Workers.run_report_builder import ReportGenerator
-from oaTests.Core.Workers import identify_test_directories
 
 from .center_panel import CenterPanel
 from .debug_matrix_screen import DebugMatrixScreen

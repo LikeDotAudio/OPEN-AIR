@@ -5,12 +5,14 @@
 # Description: Non-blocking, asynchronous batch rendering engine for grid layouts.
 
 import tkinter as tk
+
 from loguru import logger
 
 from oaGui.Managers.grid.engine_grid_layout_logic import GridTopologyConfigurator
+from oaGui.Methods.rendering.grid_renderer_utils import GridRendererUtils
 from oaGui.Workers.assembly.engine_structural_assembler import StructuralAssembler
 from oaLogging.Methods.matrix_gate import matrix_log
-from oaGui.Methods.rendering.grid_renderer_utils import GridRendererUtils
+
 
 class BatchLayoutEngine:
     """Non-blocking, asynchronous batch rendering engine for grid layouts."""

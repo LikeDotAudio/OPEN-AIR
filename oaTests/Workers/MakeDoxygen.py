@@ -4,9 +4,10 @@
 #
 # Description: A simple script to run Doxygen on the project.
 #
-import subprocess
 import os
+import subprocess
 import webbrowser
+
 
 def make_doxygen():
     """
@@ -24,7 +25,7 @@ def make_doxygen():
     try:
         subprocess.run(['doxygen', doxyfile_path], check=True, cwd=project_root)
         print("Doxygen run completed successfully.")
-        
+
         # Open the generated documentation
         index_path = os.path.join(project_root, 'oaDocumentation', 'Doxygen', 'html', 'index.html')
         if os.path.exists(index_path):

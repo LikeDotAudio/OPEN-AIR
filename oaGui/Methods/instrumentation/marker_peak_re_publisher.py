@@ -1,10 +1,10 @@
-from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
+
 # Methods/marker_peak_re_publisher.py
 # Author: Anthony Peter Kuzub
 # Version: 20250821.200641.1
 #
 # Description: markers/marker_peak_re_publisher.py
-
 #
 # This worker listens to the immediate output of the NAB marker command (Marker_1/value, etc.)
 # and republishes the received peak value to the final markers repository location.
@@ -14,19 +14,14 @@ from oaLogging.Methods.matrix_gate import matrix_log
 #
 #
 # Version 20250821.200641.1
-
 import os
-import inspect
-import orjson
-import threading
 import re
-import time
 
-# --- Module Imports ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory
+import orjson
 from loguru import logger
 
-
+# --- Module Imports ---
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- Global Scope Variables ---
 Current_Date = 20251213
@@ -180,7 +175,7 @@ class MarkerPeakPublisher:
 
                 logger.error(f"❌ REPUBLISH ERROR: Peak Value '{peak_value}' for {device_id} failed conversion. Published Error Status.")
 
-        except Exception as e:
+        except Exception:
             # General failure protection
             # Find the first device ID in the map for error context
             first_device_id = next(

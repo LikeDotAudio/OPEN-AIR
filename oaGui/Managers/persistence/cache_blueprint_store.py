@@ -5,23 +5,23 @@
 # Description: Manages caching for GUI default configurations.
 
 import copy
-from typing import Dict, Optional
+
 
 class CacheBlueprintStore:
     """
     Manages caching for GUI default configurations.
     """
-    _DEFAULT_CONFIG_CACHE: Optional[Dict] = None
+    _DEFAULT_CONFIG_CACHE: dict | None = None
 
     @classmethod
-    def get_cached_default(cls) -> Optional[Dict]:
+    def get_cached_default(cls) -> dict | None:
         """Retrieves the cached default configuration if available."""
         if cls._DEFAULT_CONFIG_CACHE is not None:
             return copy.deepcopy(cls._DEFAULT_CONFIG_CACHE)
         return None
 
     @classmethod
-    def set_cached_default(cls, config: Dict):
+    def set_cached_default(cls, config: dict):
         """Sets the cached default configuration."""
         cls._DEFAULT_CONFIG_CACHE = config
 

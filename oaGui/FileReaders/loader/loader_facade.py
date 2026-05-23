@@ -5,10 +5,13 @@
 # Description: Handles dynamic loading of Python modules and instantiation of GUI classes.
 
 import pathlib
-from oaGui.Methods.execution.loader_python_engine import LoaderPythonEngine
+
 from oaGui.Managers.assembler.engine_widget_instantiator import WidgetInstantiator
-from .resource_resolver import resolve_gui_resource
+from oaGui.Methods.execution.loader_python_engine import LoaderPythonEngine
+
 from .instance_factory import create_gui_instance
+from .resource_resolver import resolve_gui_resource
+
 
 class LoaderFacade:
     """

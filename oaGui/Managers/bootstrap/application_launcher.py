@@ -6,14 +6,15 @@
 
 import time
 import tkinter as tk
+
 from loguru import logger
+
 
 def launch_workspace_application(bootstrap_instance, services):
     """Orchestrates the physical assembly and visibility of the main application window."""
     try:
         bootstrap_instance.splash.set_status(message="Building Workspace...")
         from oaGui.Entry import EngineGuiDisplay
-        from oaGui.Interface.viewport.tab_physical_window import TabWindowManager
 
         bootstrap_instance.splash.hide()
         bootstrap_instance.root.update_idletasks()
@@ -57,8 +58,8 @@ def _manage_post_ignition_feedback(bootstrap_instance):
         try:
             bootstrap_instance.splash.set_status(message="Ignition Complete!")
             TabWindowManager.reveal_main_window(
-                bootstrap_instance.root, 
-                bootstrap_instance.splash, 
+                bootstrap_instance.root,
+                bootstrap_instance.splash,
                 bootstrap_instance.app_constants.global_settings["debug_enabled"]
             )
             bootstrap_instance.services["mirror_engine"]._schedule_queue_processing()

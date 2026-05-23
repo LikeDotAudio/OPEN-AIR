@@ -1,13 +1,13 @@
 # Core/factory/base_widget_creator.py
 #
-# Template Method base class for all UI widget creators. Standardizes 
+# Template Method base class for all UI widget creators. Standardizes
 # extraction, registration, and industrial background synchronization.
 #
 # Author: Anthony Peter Kuzub
 # Blog: www.Like.audio (Contributor to this project)
 #
-# Professional services for customizing and tailoring this software to your 
-# specific application can be negotiated. There is no charge to use, modify, 
+# Professional services for customizing and tailoring this software to your
+# specific application can be negotiated. There is no charge to use, modify,
 # or fork this software.
 #
 # Build Log: https://like.audio/category/software/spectrum-scanner/
@@ -16,10 +16,10 @@
 #
 # Version 20260501.1020.1
 #
-# This file defines the foundational contract for widget construction in the 
-# OPEN-AIR system. It employs the Template Method design pattern to enforce a 
-# standardized assembly lifecycle while allowing subclasses to define specific 
-# rendering logic. It also handles "Ghost Mode" rendering for high-performance 
+# This file defines the foundational contract for widget construction in the
+# OPEN-AIR system. It employs the Template Method design pattern to enforce a
+# standardized assembly lifecycle while allowing subclasses to define specific
+# rendering logic. It also handles "Ghost Mode" rendering for high-performance
 # design-time layouts.
 
 import tkinter as tk

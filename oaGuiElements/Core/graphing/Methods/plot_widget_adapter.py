@@ -8,9 +8,9 @@ import inspect
 
 # --- Standard Debug Logging Setup ---
 from oaConfigurationManager.FileReaders.config_reader import Config
+from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
 from oaGuiElements.Core.graphing.Methods.dynamic_bar_graph import DynamicBarGraph
 from oaGuiElements.Core.graphing.Methods.dynamic_graph import GraphPlotter
-from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
 from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()

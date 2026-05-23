@@ -8,13 +8,12 @@ import pathlib
 import tkinter as tk
 
 from oaComBroker.Core.event_bus import event_bus
-from oaLogging.Methods.matrix_gate import matrix_log
-
 from oaGuiEditorWYSIWYG.Core.state import state_manager
 from oaGuiEditorWYSIWYG.FileReaders.file_reader import FileReader
 from oaGuiEditorWYSIWYG.FileWriters.file_writer import FileWriter
 from oaGuiEditorWYSIWYG.Interface.Window.editor_layout import EditorLayoutBuilder
 from oaGuiEditorWYSIWYG.Interface.Window.editor_menus import EditorMenuBuilder
+from oaLogging.Methods.matrix_gate import matrix_log
 
 
 class WysiwygEditor:

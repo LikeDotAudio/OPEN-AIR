@@ -6,6 +6,7 @@
 
 from oaGui.Constants.builder_constants import RESIZE_THROTTLE_DELAY, RESIZE_WIDTH_THRESHOLD
 
+
 def throttle_resize_event(layout_manager, event):
     """Throttles configure events using a distance threshold and time-based delay."""
     if event.widget != layout_manager.builder:
@@ -25,12 +26,12 @@ def throttle_resize_event(layout_manager, event):
 
     if layout_manager._resize_timer:
         layout_manager.builder.after_cancel(layout_manager._resize_timer)
-    
+
     layout_manager._resize_timer = layout_manager.builder.after(
-        RESIZE_THROTTLE_DELAY, 
+        RESIZE_THROTTLE_DELAY,
         layout_manager.trigger_final_resize
     )
-    
+
     _trigger_editor_grid_refresh(layout_manager)
 
 def _trigger_editor_grid_refresh(layout_manager):
@@ -38,10 +39,10 @@ def _trigger_editor_grid_refresh(layout_manager):
     if getattr(layout_manager.builder, 'is_editor', False):
         from oaGuiEditorWYSIWYG.Methods.builder_editor_grid import BuilderEditorGrid
         layout_manager.builder.after(
-            RESIZE_THROTTLE_DELAY + 10, 
+            RESIZE_THROTTLE_DELAY + 10,
             lambda: BuilderEditorGrid.draw(
-                layout_manager.builder.canvas, 
-                layout_manager.builder.scroll_frame, 
+                layout_manager.builder.canvas,
+                layout_manager.builder.scroll_frame,
                 True
             )
         )

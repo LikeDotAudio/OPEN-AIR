@@ -5,7 +5,9 @@
 # Description: Encapsulates the dual-packet inspection logic for the Command Router.
 
 import tkinter as tk
+
 from .command_router_legend import CommandRouterLegend
+
 
 class CommandInvestigationPane(tk.Frame):
     """Encapsulates the dual-packet inspection logic."""

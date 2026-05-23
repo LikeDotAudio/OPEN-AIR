@@ -4,16 +4,19 @@
 #
 # Description: Orchestrates the expansion of a blueprint into a data-mapped item set.
 
+from typing import Any
+
 import orjson
-from typing import List, Dict, Any
 from loguru import logger
+
 from oaGui.Managers.interaction.interaction_view_states import InteractionViewStates
 from oaGui.Methods.processing.blueprint_data_injector import BlueprintDataInjector
+
 
 class ArrayDataExpander:
     """Orchestrates the expansion of a blueprint into a data-mapped item set."""
     @staticmethod
-    def expand_blueprint(blueprint: Dict, data_array: List[Dict], interaction_view_states: InteractionViewStates) -> Dict[str, Any]:
+    def expand_blueprint(blueprint: dict, data_array: list[dict], interaction_view_states: InteractionViewStates) -> dict[str, Any]:
         """Creates a collection of item configurations by mapping data to a blueprint."""
         synthetic_fields = {}
         blueprint_template = orjson.dumps(blueprint).decode()

@@ -5,8 +5,11 @@
 # Description: Handles MQTT publishing for UI telemetry data.
 
 import time
+
 import orjson
+
 from oaComProtocols.oaComMQTT.Core.mqtt_publisher_service import is_connected
+
 
 class TelemetryPublisher:
     """

@@ -47,7 +47,7 @@ class AnnotationManager:
             if data_text or marker_text:
                 content = [f"X: {event.xdata:.2f}"] + data_text + (["---"] if data_text and marker_text else []) + marker_text
                 annot.set_text("\n".join(content)); annot.xy = (event.xdata, event.ydata); annot.set_visible(True)
-                
+
                 if plotter:
                     plotter._schedule_update()
                 else:

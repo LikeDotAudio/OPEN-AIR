@@ -5,10 +5,10 @@
 # Description: Handles instantiation of GUI widgets and their integration into the layout.
 
 import tkinter as tk
-from typing import List
 
-from oaLogging.Methods.matrix_gate import matrix_log
 from oaGui.Workers.orchestration.loader_orchestrator import LoaderOrchestrator
+from oaLogging.Methods.matrix_gate import matrix_log
+
 
 class WidgetInstantiator:
     """
@@ -20,7 +20,7 @@ class WidgetInstantiator:
         self.state_mirror_engine = state_mirror_engine
         self.subscriber_router = subscriber_router
         self.app_instance = app_instance
-        self.builders: List[LoaderOrchestrator] = []
+        self.builders: list[LoaderOrchestrator] = []
 
     def instantiate(self, widget_class, parent_widget):
         """

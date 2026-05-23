@@ -5,12 +5,14 @@
 # Description: Non-blocking initialization sequence for UI and Comms.
 
 import time
+
 from loguru import logger
 
-from .communication_initializer import initialize_communications
-from .protocol_service_igniter import ignite_protocol_services
-from .control_link_assembler import assemble_system_control_links
 from .application_launcher import launch_workspace_application
+from .communication_initializer import initialize_communications
+from .control_link_assembler import assemble_system_control_links
+from .protocol_service_igniter import ignite_protocol_services
+
 
 class LoaderBootstrapEngine:
     """

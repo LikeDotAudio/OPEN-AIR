@@ -39,6 +39,9 @@ import threading
 
 from loguru import logger
 
+from oaConfigurationManager.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import matrix_log
+
 # 2. Import Modular Core (using new naming convention)
 from oaTests.Methods.FlameGraph.Methods.flame_capture import MultiThreadProfiler
 from oaTests.Methods.FlameGraph.Methods.flame_events import generate_table_rows, process_stats_for_ui
@@ -46,9 +49,6 @@ from oaTests.Methods.FlameGraph.Methods.flame_graph import generate_flamegraph_w
 from oaTests.Methods.FlameGraph.Methods.flame_html import generate_final_html
 from oaTests.Methods.FlameGraph.Methods.flame_wall_pity import generate_wall_of_pity
 from oaTests.Methods.FlameGraph.Methods.flame_wall_shame import generate_wall_of_shame
-
-from oaConfigurationManager.FileReaders.config_reader import Config
-from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 

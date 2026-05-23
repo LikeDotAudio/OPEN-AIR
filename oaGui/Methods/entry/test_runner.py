@@ -5,9 +5,10 @@
 # Description: Discovers and executes unit tests for the oaGui module in an isolated subprocess.
 
 import os
-import sys
 import subprocess
+import sys
 from pathlib import Path
+
 
 def execute_module_unit_tests(module_path: Path, project_root: Path):
     """
@@ -32,14 +33,14 @@ def execute_module_unit_tests(module_path: Path, project_root: Path):
             env=env,
             capture_output=False
         )
-        
+
         if result.returncode == 0:
             print(f"📡📤📤 [TEST] {module_path.name}: All tests PASSED.")
             return True
-        
+
         print(f"📡📤📤 [TEST] {module_path.name}: Tests FAILED.")
         return False
-        
+
     except Exception as error:
         print(f"🛑 [ERROR] {module_path.name}: Test discovery failed: {error}")
         return False

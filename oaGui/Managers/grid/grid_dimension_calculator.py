@@ -11,7 +11,7 @@ def calculate_grid_dimensions(all_fields, initial_cols, current_row, current_col
     """
     max_r, max_c = 0, 0
     num_cols = initial_cols
-    
+
     if not all_fields:
         return 1, 1, 0, 0
 
@@ -36,5 +36,5 @@ def calculate_grid_dimensions(all_fields, initial_cols, current_row, current_col
     # Final dimension count (1-based)
     final_cols = max(num_cols, max_c + 1)
     final_rows = max_r + 1
-    
+
     return max(1, final_rows), max(1, final_cols), max_r, max_c

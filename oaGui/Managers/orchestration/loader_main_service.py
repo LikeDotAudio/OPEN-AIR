@@ -5,8 +5,8 @@
 # Author: Anthony Peter Kuzub
 # Blog: www.Like.audio (Contributor to this project)
 #
-# Professional services for customizing and tailoring this software to your 
-# specific application can be negotiated. There is no charge to use, modify, 
+# Professional services for customizing and tailoring this software to your
+# specific application can be negotiated. There is no charge to use, modify,
 # or fork this software.
 #
 # Build Log: https://like.audio/category/software/spectrum-scanner/
@@ -15,15 +15,15 @@
 #
 # Version 20260501.1005.1
 #
-# This file serves as the main entry point for the UI Partition. It coordinates 
-# between high-level managers (Window, Composition, Shutdown) to provide a 
-# unified, stable interface while maintaining strict separation from the 
+# This file serves as the main entry point for the UI Partition. It coordinates
+# between high-level managers (Window, Composition, Shutdown) to provide a
+# unified, stable interface while maintaining strict separation from the
 # hardware-focused Core Partition.
 
+import inspect
 import pathlib
 import sys
 import threading
-import inspect
 
 # Ensure root directory is in the search path for cross-module accessibility
 current_dir = pathlib.Path(__file__).resolve().parent
@@ -33,17 +33,17 @@ if str(project_root) not in sys.path:
 
 from oaConfigurationManager.FileReaders.config_reader import Config
 from oaConfigurationManager.Methods.console_encoder import configure_console_encoding
-from oaGui.Managers.bootstrap.loader_bootstrap_engine import LoaderBootstrapEngine
-from oaGui.Managers.orchestration.loader_service_composer import LoaderServiceComposer
-from oaGui.Managers.lifecycle.loader_shutdown_service import LoaderShutdownService
 from oaGui.Interface.viewport.tab_physical_window import TabWindowManager
+from oaGui.Managers.bootstrap.loader_bootstrap_engine import LoaderBootstrapEngine
+from oaGui.Managers.lifecycle.loader_shutdown_service import LoaderShutdownService
+from oaGui.Managers.orchestration.loader_service_composer import LoaderServiceComposer
+from oaGui.Methods.discovery.ui_resource_manager import UIResourceManager
+from oaGui.Methods.execution.loader_signal_handler import LoaderSignalHandler
 from oaGuiElements.Methods.splash_screen import SplashScreen
 from oaLogging.Core.logger import set_log_directory
 from oaLogging.Methods.matrix_gate import matrix_log
 from oaOchestration.Core.path_initializer import DATA_LOGS_DIR, initialize_paths
 
-from oaGui.Methods.execution.loader_signal_handler import LoaderSignalHandler
-from oaGui.Methods.discovery.ui_resource_manager import UIResourceManager
 
 def main():
     """

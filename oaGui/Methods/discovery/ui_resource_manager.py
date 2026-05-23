@@ -6,6 +6,7 @@
 
 import gc
 
+
 class UIResourceManager:
     """Periodic resource maintenance for the OPEN-AIR UI service."""
     @staticmethod
@@ -15,7 +16,7 @@ class UIResourceManager:
             gc.collect()
             if not getattr(root, '_shutdown', False) and root.winfo_exists():
                 root.after(interval_ms, _periodic_gc)
-        
+
         root.after(interval_ms, _periodic_gc)
         gc.collect()
         return _periodic_gc

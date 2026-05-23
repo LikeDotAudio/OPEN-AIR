@@ -14,6 +14,7 @@ from loguru import logger
 from oaLogging.Methods.matrix_gate import matrix_log
 from oaOchestration.Core.path_initializer import GLOBAL_PROJECT_ROOT
 
+
 class RegistryWidgetStore:
     """
     Registry for widget creators, facilitating a pluggable UI architecture.

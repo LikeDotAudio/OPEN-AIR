@@ -11,8 +11,9 @@ from oaLogging.Methods.matrix_gate import is_debug_allowed, matrix_log
 
 BUILDER_DEBUG = is_debug_allowed(system="UI", element="GUI_BUILDER")
 
-from .constants import NUMBER_FONT_FAMILY, SCALE_SUB_TICK_LENGTH, SCALE_TEXT_OFFSET, SCALE_TICK_LENGTH
 from oaGuiElements.Core.metering.meter_needle.cosmetics.geometry import BezelGeometry
+
+from .constants import NUMBER_FONT_FAMILY, SCALE_SUB_TICK_LENGTH, SCALE_TEXT_OFFSET, SCALE_TICK_LENGTH
 from .meter_modifyer import MeterModifier
 from .needle import NeedleDrawer
 from .number import NumberDrawer

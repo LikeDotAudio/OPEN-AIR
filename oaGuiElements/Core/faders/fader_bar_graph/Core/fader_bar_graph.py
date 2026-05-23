@@ -11,9 +11,9 @@ from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
 
-from oaGui.Methods.processing.deferred_task_handler import DeferredTaskHandler
-from oaGui.Interface.math.coordinate_transformer import CoordinateTransformer
 from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
+from oaGui.Interface.math.coordinate_transformer import CoordinateTransformer
+from oaGui.Methods.processing.deferred_task_handler import DeferredTaskHandler
 from oaGui.Workers.compositing.engine_visual_effects import EngineVisualEffects
 from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 from oaStyle.Core.style import DEFAULT_THEME, THEMES

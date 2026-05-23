@@ -5,8 +5,8 @@
 # Description: Proxy frame for the CommandRouter implementation.
 # Delegates actual implementation to oaComBroker.Interface.
 
-import tkinter as tk
 from oaComBroker.Interface.command_router import CommandRouter
+
 
 class CommandRouterProxy(CommandRouter):
     """

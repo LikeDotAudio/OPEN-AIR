@@ -12,10 +12,10 @@ from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
-from oaGui.Methods.formatting.i18n_utils import get_text
 from oaGui.Core.factory.base_widget_creator import BaseWidgetCreator
 from oaGui.Core.factory.button_canvas_base import CanvasButton
 from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
+from oaGui.Methods.formatting.i18n_utils import get_text
 from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 
 # --- EXTRACTED CORE MODULES ---

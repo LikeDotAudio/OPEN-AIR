@@ -3,10 +3,7 @@
 # Version: 20250821.200641.1
 #
 # Description: State_Cache/gui_state_restorer.py
-import inspect
 from typing import Any
-
-from loguru import logger
 
 from oaComProtocols.oaComMQTT.Core.mqtt_message import MqttMessage
 from oaConfigurationManager.FileReaders.config_reader import Config
@@ -42,7 +39,6 @@ def restore_timeline(cache_data: dict[str, Any], state_mirror_engine: Any) -> No
 
     items = list(cache_data.items())
     batch_size = 50
-    import orjson
 
     def process_batch(start_idx):
         end_idx = min(start_idx + batch_size, len(items))

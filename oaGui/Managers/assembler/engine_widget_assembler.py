@@ -5,9 +5,12 @@
 # Description: Orchestrates the creation of dynamic widgets using atomic services.
 
 from loguru import logger
-from oaLogging.Methods.matrix_gate import matrix_log
+
 from oaGui.Methods.formatting.ui_coordinate_utils import UICoordinateUtils
+from oaLogging.Methods.matrix_gate import matrix_log
+
 from .dynamic_widget_factory import instantiate_dynamic_widgets
+
 
 class EngineWidgetAssemblerMixin:
     """Orchestrates dynamic widget assembly via atomic services."""

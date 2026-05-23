@@ -11,10 +11,10 @@ from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
 
-from oaGui.Methods.formatting.i18n_utils import get_text
-from oaGui.Methods.processing.deferred_task_handler import DeferredTaskHandler
 from oaGui.Core.factory.base_widget_creator import BaseWidgetCreator
 from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
+from oaGui.Methods.formatting.i18n_utils import get_text
+from oaGui.Methods.processing.deferred_task_handler import DeferredTaskHandler
 from oaGui.Workers.compositing.engine_visual_effects import EngineVisualEffects
 from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 

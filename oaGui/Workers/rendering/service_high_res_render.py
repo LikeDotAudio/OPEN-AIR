@@ -17,17 +17,17 @@ def render_functional_widget(parent, widget_data, path, builder, context, logger
         logger.debug(f"  └─ 🔨 Creating '{widget_type}' at '{path}'")
 
     # Inject path for MQTT/System tracking
-    widget_data["path"] = path 
-    
+    widget_data["path"] = path
+
     widget = creator(
-        parent_widget=parent, 
-        configuration=widget_data, 
+        parent_widget=parent,
+        configuration=widget_data,
         context=context
     )
-    
+
     if widget:
         widget._oca_path = path
         if hasattr(builder, 'bind_to_widget'):
             builder.bind_to_widget(widget)
-            
+
     return widget

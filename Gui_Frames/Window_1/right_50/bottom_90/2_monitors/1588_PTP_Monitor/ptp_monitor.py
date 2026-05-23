@@ -7,6 +7,7 @@
 
 from oaPTP.Interface.ptp_monitor import PtpMonitor as PtpMonitorImplementation
 
+
 class PtpMonitor(PtpMonitorImplementation):
     """
     A local instance of the PTP Monitor.

@@ -4,8 +4,8 @@
 #
 # Description: Fallback builder for standard directory listings in GUI layouts.
 
-import tkinter as tk
 from .base_layout_builder import BaseLayoutBuilder
+
 
 class DefaultLayoutBuilder(BaseLayoutBuilder):
     """Fallback builder for standard directory listings."""
@@ -16,7 +16,7 @@ class DefaultLayoutBuilder(BaseLayoutBuilder):
 
         def _process_items(dir_idx=0, file_idx=0):
             if dir_idx < len(sub_dirs):
-                self.scanner._build_from_directory(path=sub_dirs[dir_idx]["path"], parent_widget=parent_widget, 
+                self.scanner._build_from_directory(path=sub_dirs[dir_idx]["path"], parent_widget=parent_widget,
                                            on_complete=lambda: _process_items(dir_idx + 1, file_idx))
                 return
             if file_idx < len(gui_files):

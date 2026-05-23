@@ -24,8 +24,8 @@ from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 
 # --- EXTRACTED CORE MODULES ---
 from .table_csv_service import TableCSVService
-from .table_sync_engine import TableSyncEngine
 from .table_editing import TableEditingManager
+from .table_sync_engine import TableSyncEngine
 
 
 class BuilderTextTableCreator(SyncBehavior):

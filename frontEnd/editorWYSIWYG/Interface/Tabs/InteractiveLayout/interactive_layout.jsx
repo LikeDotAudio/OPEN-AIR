@@ -90,6 +90,8 @@
               />
 
               <window.OaEdSelectionOverlay containerRef={innerRef} path={st.selectedPath} rev={st.rev} />
+              {window.OaEdResizeHandles &&
+                <window.OaEdResizeHandles containerRef={innerRef} path={st.selectedPath} rev={st.rev} store={store} />}
             </div>
           </div>
         </div>

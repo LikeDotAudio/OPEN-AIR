@@ -37,7 +37,9 @@
             "layout": {
               "stretch": "width",
               "font": 20,
-              "padx": 20
+              "padx": 20,
+              "width": "97%",
+              "height": "100%"
             },
             "handler": "set_center_frequency",
             "yak_handler": {

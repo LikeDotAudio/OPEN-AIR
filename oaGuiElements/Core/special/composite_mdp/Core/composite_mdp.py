@@ -14,9 +14,9 @@ from oaLogging.Methods.matrix_gate import matrix_log
 app_constants = Config.get_instance()
 
 from oaGui.Core.factory.base_widget_creator import BaseWidgetCreator
-from oaGuiElements.Core.graphing.Methods.dynamic_graph import GraphPlotter
 from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
 from oaGui.Workers.compositing.sync_behavior import SyncBehavior
+from oaGuiElements.Core.graphing.Methods.dynamic_graph import GraphPlotter
 
 from .mdp_interaction_mixin import MDPInteractionMixin
 

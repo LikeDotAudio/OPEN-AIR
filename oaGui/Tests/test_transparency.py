@@ -8,7 +8,7 @@ import tkinter as tk
 import unittest
 from unittest.mock import MagicMock, patch
 
-from oaGui.Workers.compositing import EngineTextureMapper, TransparencyConfig, EngineVisualEffects
+from oaGui.Workers.compositing import EngineTextureMapper, EngineVisualEffects, TransparencyConfig
 
 
 class TestTransparency(unittest.TestCase):

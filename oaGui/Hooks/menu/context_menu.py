@@ -101,7 +101,7 @@ class BuilderContextMenuMixin:
                 text=True
             )
             BuilderContextMenuMixin._editor_file = self.json_filepath
-            
+
             # Check for immediate failure
             try:
                 _, stderr = BuilderContextMenuMixin._editor_process.communicate(timeout=0.5)

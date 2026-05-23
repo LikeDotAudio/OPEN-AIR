@@ -6,6 +6,7 @@
 
 from tkinter import ttk
 
+
 class AutoScrollbar(ttk.Scrollbar):
     """An industrial scrollbar that manages its own visibility based on content scale."""
     def __init__(self, master=None, **kwargs):

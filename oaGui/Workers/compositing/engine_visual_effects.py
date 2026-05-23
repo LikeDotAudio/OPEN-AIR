@@ -4,13 +4,15 @@
 #
 # Description: Centralized engine for Industrial Transparency and Visual Effects.
 
-import tkinter as tk
 import gc
+import tkinter as tk
 
+from oaGui.Methods.processing.transparency_config_parser import TransparencyConfigParser
 from oaLogging.Methods.matrix_gate import matrix_log
 from oaStyle.Constants.geometry import DEFAULT_THEME_BACKGROUND
-from oaGui.Methods.processing.transparency_config_parser import TransparencyConfigParser
+
 from .engine_texture_mapper import EngineTextureMapper
+
 
 class EngineVisualEffects:
     """

@@ -1,10 +1,11 @@
-from oaLogging.Methods.matrix_gate import matrix_log
+import datetime
+import inspect
+
 # Methods/preset_from_device.py
 # Author: Anthony Peter Kuzub
 # Version: 20250821.200641.1
 #
 # Description: A worker module to handle the logic for querying, parsing, and presenting
-
 #
 # A worker module to handle the logic for querying, parsing, and presenting
 # presets stored on the connected instrument via MQTT.
@@ -14,19 +15,16 @@ from oaLogging.Methods.matrix_gate import matrix_log
 #
 #
 # Version 20250821.200641.1
-
 import os
-import inspect
-import datetime
-import orjson
-import re
 import threading
-import time
+
+import orjson
+from loguru import logger
 
 # --- Module Imports ---
 from oaComProtocols.oaComMQTT.Methods.mqtt_controller_util import MqttControllerUtility
-from oaLogging.Core.logger import initialize_logging, set_log_directory
-from loguru import logger
+from oaLogging.Methods.matrix_gate import matrix_log
+
 LOCAL_DEBUG = False
 
 
@@ -73,7 +71,7 @@ class PresetFromDeviceWorker:
         self.preset_list_event = threading.Event()
 
         if LOCAL_DEBUG:
-            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🟢️️️🟢 Initializing preset worker and subscribing to root topic.", "DEBUG")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🟢️️️🟢 Initializing preset worker and subscribing to root topic.", "DEBUG")
 
         # Subscribe to the master topic and all its sub-levels
         self.mqtt_util.add_subscriber(
@@ -118,7 +116,7 @@ class PresetFromDeviceWorker:
         """
         current_function_name = inspect.currentframe().f_code.co_name
         if LOCAL_DEBUG:
-            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🟢️️️🟢 Triggering device to send preset catalog.", "DEBUG")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🟢️️️🟢 Triggering device to send preset catalog.", "DEBUG")
 
         try:
             # Set the trigger to true
@@ -135,7 +133,7 @@ class PresetFromDeviceWorker:
             matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "✅ TRIGGER sent. Awaiting preset catalog response...", "SUCCESS")
             return True
 
-        except Exception as e:
+        except Exception:
             logger.exception("❌ Error in {current_function_name}")
             self.mqtt_util.publish_message(
                 topic=NAB_TRIGGER_TOPIC, subtopic="", value=False, retain=False
@@ -156,7 +154,7 @@ class PresetFromDeviceWorker:
         """
         current_function_name = inspect.currentframe().f_code.co_name
         if LOCAL_DEBUG:
-            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🟢️️️🟢 Parsing raw preset string for valid '.STA' files.", "DEBUG")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🟢️️️🟢 Parsing raw preset string for valid '.STA' files.", "DEBUG")
 
         if not raw_preset_string:
             return []
@@ -272,7 +270,7 @@ class PresetFromDeviceWorker:
             matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "✅ Preset filename sent and save triggered.", "SUCCESS")
             return True
 
-        except Exception as e:
+        except Exception:
             logger.exception("❌ Error in {current_function_name}")
             return False
 

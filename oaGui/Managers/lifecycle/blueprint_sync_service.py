@@ -6,6 +6,7 @@
 
 from oaGui.FileReaders.loader.json_blueprint_reader import JsonBlueprintReader
 
+
 def load_and_synchronize_blueprint(loader_instance):
     """Loads JSON blueprint, verifies hashes, and applies background configurations."""
     configuration, new_hash, is_changed = JsonBlueprintReader.load_blueprint(

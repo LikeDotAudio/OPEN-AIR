@@ -4,9 +4,12 @@
 #
 # Description: Handles remote UI rebuild requests via MQTT.
 
-import orjson
 from pathlib import Path
+
+import orjson
+
 from oaLogging.Methods.matrix_gate import matrix_log
+
 
 class MqttRebuildHandler:
     """Handles remote UI rebuild requests via MQTT."""
@@ -25,7 +28,7 @@ class MqttRebuildHandler:
             new_config = data.get("config")
 
             if target_path and str(Path(target_path).resolve()) == str(builder.json_filepath.resolve()):
-                matrix_log("ui", "gui_shell", "MqttRebuildHandler", 
+                matrix_log("ui", "gui_shell", "MqttRebuildHandler",
                            f"♻️ MQTT: Rebuild request received for '{builder.tab_name}'. Injecting new config...", "INFO")
 
                 if new_config:

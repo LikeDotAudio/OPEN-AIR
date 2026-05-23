@@ -6,7 +6,9 @@
 
 import os
 import pathlib
+
 from loguru import logger
+
 
 def resolve_gui_resource(path: pathlib.Path):
     """
@@ -38,5 +40,5 @@ def resolve_gui_resource(path: pathlib.Path):
             json_path = path
         elif path.suffix == ".py" and not path.name.startswith("__"):
             python_path = path
-            
+
     return python_path, json_path

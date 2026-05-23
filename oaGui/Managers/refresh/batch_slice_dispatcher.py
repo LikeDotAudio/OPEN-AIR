@@ -6,11 +6,12 @@
 
 from oaLogging.Methods.matrix_gate import matrix_log
 
+
 def dispatch_background_slice_updates(refresh_instance):
     """Notifies all registered subscribers that a new background slice is ready."""
     bg_pil = getattr(refresh_instance, 'panel_bg_pil', None)
     scroll_frame = getattr(refresh_instance, 'scroll_frame', None)
-    
+
     if not scroll_frame or not scroll_frame.winfo_exists():
         return
 
@@ -20,9 +21,9 @@ def dispatch_background_slice_updates(refresh_instance):
     for callback in registry:
         try:
             callback(
-                source_bg_pil=bg_pil, 
+                source_bg_pil=bg_pil,
                 scroll_ref=scroll_frame,
-                scroll_root_x=root_x, 
+                scroll_root_x=root_x,
                 scroll_root_y=root_y
             )
         except Exception as error:

@@ -22,7 +22,8 @@ from oaComProtocols.oaComSNMP.Constants.snmp_constants import OID_MAP_STR_LIMIT
 from oaComProtocols.oaComSNMP.Methods.snmp_utils import get_snmp_descriptor, get_snmp_node_id
 
 # Assuming SNMP_LOGGER is available and configured in the logging setup
-from oaLogging.Methods.matrix_gate import matrix_log, is_debug_allowed
+from oaLogging.Methods.matrix_gate import is_debug_allowed, matrix_log
+
 
 def _is_debug():
     return is_debug_allowed(system="comms", element="snmp")

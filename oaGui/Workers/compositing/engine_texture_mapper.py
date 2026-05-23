@@ -5,10 +5,13 @@
 # Description: Handles the pixel-perfect mapping of global background textures to local widget coordinates.
 
 import tkinter as tk
+
 from PIL import ImageTk
+
+from oaGui.Methods.formatting.ui_window_geometry_utils import UIWindowGeometryUtils
 from oaLogging.Methods.matrix_gate import matrix_log
 from oaStyle.Constants.geometry import DEFAULT_THEME_BACKGROUND, PRE_LAYOUT_DIMENSION_LIMIT
-from oaGui.Methods.formatting.ui_window_geometry_utils import UIWindowGeometryUtils
+
 
 class EngineTextureMapper:
     """
@@ -24,10 +27,10 @@ class EngineTextureMapper:
         if not self.widget.winfo_exists(): return False
 
         rendering_target = self.canvas if self.canvas and self.canvas.winfo_exists() else self.widget
-        
+
         background_source = source_bg_pil
         container_ref = scroll_ref
-        
+
         if not background_source:
             current_builder = self.builder
             while current_builder:
@@ -35,7 +38,7 @@ class EngineTextureMapper:
                 if background_source:
                     container_ref = getattr(current_builder, 'scroll_frame', None)
                     break
-                
+
                 parent_builder = getattr(current_builder, 'parent_builder', None)
                 if not parent_builder:
                     parent_builder = UIWindowGeometryUtils.find_parent_builder(current_builder)
@@ -91,7 +94,7 @@ class EngineTextureMapper:
         if crop_x2 > crop_x1 and crop_y2 > crop_y1:
             try:
                 image_slice = background_source.crop((crop_x1, crop_y1, crop_x2, crop_y2))
-                pixel_val = image_slice.getpixel((0, 0)) 
+                pixel_val = image_slice.getpixel((0, 0))
 
                 if isinstance(pixel_val, tuple):
                     hex_background_color = '#%02x%02x%02x' % pixel_val[:3]

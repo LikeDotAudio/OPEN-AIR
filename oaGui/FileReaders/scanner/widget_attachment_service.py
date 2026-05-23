@@ -6,11 +6,12 @@
 
 import tkinter as tk
 
+
 def attach_widget_to_parent(parent, instance, index=0):
     """Safely adds a widget instance to a parent using the appropriate geometry manager."""
-    if not instance: 
+    if not instance:
         return
-    
+
     manager = None
     if parent.winfo_children():
         manager = parent.winfo_children()[0].winfo_manager()

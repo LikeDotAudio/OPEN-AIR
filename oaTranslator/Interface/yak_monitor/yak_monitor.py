@@ -1,8 +1,9 @@
+import inspect
 import pathlib
 import sys
-import inspect
 import tkinter as tk
 from tkinter import ttk
+
 import orjson
 
 # 1. Setup Environment
@@ -17,14 +18,14 @@ for parent in current_dir.parents:
 if str(root_path) not in sys.path:
     sys.path.insert(0, str(root_path))
 
-from oaLogging.Methods.matrix_gate import matrix_log
 from oaGui.Workers.compositing.sync_behavior import SyncBehavior
+from oaLogging.Methods.matrix_gate import matrix_log
 from oaStyle.Core.style import DEFAULT_THEME, THEMES
 from oaTranslator.Managers.yak_trigger_handler import register_monitor_callback, unregister_monitor_callback
-from oaGui.Constants.builder_constants import MAX_LOG_ENTRIES
 
-from .yak_log_pane import YakLogPane
 from .yak_dissector_pane import YakDissectorPane
+from .yak_log_pane import YakLogPane
+
 
 class YakMonitor(tk.Frame, SyncBehavior):
     """
@@ -81,21 +82,21 @@ class YakMonitor(tk.Frame, SyncBehavior):
         self.pack(fill=tk.BOTH, expand=True)
         self.main_frame = tk.Frame(self, bg=self.cget("bg"))
         self.main_frame.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
-        
+
         ttk.Label(self.main_frame, text="Yak Traffic Monitor", font=("Helvetica", 12, "bold"), style="Dark.TLabel").pack(side=tk.TOP, pady=(0, 5))
-        
+
         paned_window = ttk.PanedWindow(self.main_frame, orient=tk.VERTICAL)
         paned_window.pack(fill=tk.BOTH, expand=True)
-        
+
         self.log_pane = YakLogPane(paned_window, self.on_log_select)
         paned_window.add(self.log_pane, weight=1)
-        
+
         self.dissector_pane = YakDissectorPane(paned_window, self.cget("bg"))
         paned_window.add(self.dissector_pane, weight=1)
-        
+
         controls_frame = tk.Frame(self.main_frame, bg=self.cget("bg"))
         controls_frame.pack(side=tk.BOTTOM, fill=tk.X, pady=5)
-        
+
         ttk.Button(controls_frame, text="Clear Log", command=self.clear_log).pack(side=tk.LEFT, padx=5)
         ttk.Button(controls_frame, text="Jump to Latest", command=self.jump_to_latest).pack(side=tk.LEFT, padx=5)
         ttk.Button(controls_frame, text="Jump to Latest 'value:'", command=self.jump_to_latest_val).pack(side=tk.LEFT, padx=5)
@@ -135,10 +136,10 @@ class YakMonitor(tk.Frame, SyncBehavior):
                     val_display = f"[{payload_data['type']}]"
             elif "message" in payload:
                 ui_tags = ("orange_row")
-        except: 
+        except:
             if "message" in payload:
                 ui_tags = ("orange_row")
-        
+
         self.log_pane.add_entry((device_type, model, yak_id, action, command, val_display, payload), ui_tags)
 
     def on_log_select(self, event=None):
@@ -146,16 +147,16 @@ class YakMonitor(tk.Frame, SyncBehavior):
         selection = self.log_pane.tree.selection()
         if not selection:
             return
-        
+
         values = self.log_pane.tree.item(selection[0], "values")
         if not values or len(values) < 7:
             return
-            
+
         header_context = {
-            "Device Type": values[0], 
-            "Model": values[1], 
-            "YAK": values[2], 
-            "Action": values[3], 
+            "Device Type": values[0],
+            "Model": values[1],
+            "YAK": values[2],
+            "Action": values[3],
             "Command": values[4]
         }
         raw_payload = values[6]

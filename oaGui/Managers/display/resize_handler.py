@@ -10,12 +10,12 @@ def handle_global_resize(display_instance, event):
         return
 
     display_instance.global_resizing = True
-    
+
     if hasattr(display_instance, '_resize_timer') and display_instance._resize_timer:
         display_instance.after_cancel(display_instance._resize_timer)
-    
+
     display_instance._resize_timer = display_instance.after(
-        200, 
+        200,
         lambda: _complete_resize_sequence(display_instance)
     )
 
@@ -23,7 +23,7 @@ def _complete_resize_sequence(display_instance):
     """Finalizes the resize event and notifies observers."""
     display_instance._resize_timer = None
     display_instance.global_resizing = False
-    try: 
+    try:
         display_instance.event_generate("<<GlobalResizeDone>>")
-    except: 
+    except:
         pass

@@ -19,7 +19,7 @@ import tkinter as tk
 
 from PIL import ImageTk
 
-from oaGuiElements.Constants.gui_constants import DEFAULT_PANEL_CONFIG, COLOR_BLACK_RGB
+from oaGuiElements.Constants.gui_constants import DEFAULT_PANEL_CONFIG
 from oaGuiElements.Core.panels.Core.panel_generator import PanelGenerator
 
 # --- Standard Debug Logging Setup ---
@@ -76,7 +76,7 @@ class BuilderBackgroundManagerMixin:
             if target is not None:
                 w = target.winfo_width()
                 h = target.winfo_height()
-                
+
                 # ⚡ FALLBACK: If physically realized size is 0 or 1, use the requested size
                 # This is critical for generating backgrounds during the initial boot sequence
                 if w <= 1: w = target.winfo_reqwidth()
@@ -126,8 +126,8 @@ class BuilderBackgroundManagerMixin:
 
         matrix_log("gui", "gui_render", "_apply_generated_background",
                    f"🎨🆗✅ [RENDER] Background applied to '{getattr(self, 'tab_name', 'Unknown')}' ({width}x{height})", "SUCCESS")
-        
-        matrix_log("gui", "gui_builder", "_apply_generated_background", 
+
+        matrix_log("gui", "gui_builder", "_apply_generated_background",
                    f"🏗️ [BG] Applying background to scroll_frame (type: {type(self.scroll_frame).__name__})", "INFO")
 
         self.panel_bg_pil = panel_bg_pil
@@ -166,7 +166,7 @@ class BuilderBackgroundManagerMixin:
                     matrix_log("gui", "gui_builder", "_apply_generated_background", f"🎨📐🔳 [BG] Skipping place for background label: Invalid dimensions {final_w}x{final_h}", "TRACE")
                     return
 
-                matrix_log("gui", "gui_builder", "_apply_generated_background", 
+                matrix_log("gui", "gui_builder", "_apply_generated_background",
                            f"🎨📏✨ [BG] Sizing background label to {final_w}x{final_h} | "
                            f"Source: {width}x{height} | Req: {req_w}x{req_h}", "TRACE")
                 self.panel_bg_label.place(x=0, y=0, width=final_w, height=final_h)
@@ -216,12 +216,12 @@ class BuilderBackgroundManagerMixin:
         # The CanvasViewportManager is responsible for sizing this frame.
         w = self.scroll_frame.winfo_width()
         h = self.scroll_frame.winfo_height()
-        
+
         # Fallback to requested size if not yet physically realized
         if w <= 1: w = self.scroll_frame.winfo_reqwidth()
         if h <= 1: h = self.scroll_frame.winfo_reqheight()
 
-        matrix_log("gui", "gui_builder", "_perform_background_sync", 
+        matrix_log("gui", "gui_builder", "_perform_background_sync",
                    f"🎨 [BG_SYNC] Tab: {getattr(self, 'tab_name', '??')} | "
                    f"Actual Frame Size: {w}x{h}", "TRACE")
 
@@ -246,7 +246,7 @@ class BuilderBackgroundManagerMixin:
         # ⚡ ROBUSTNESS: If background is missing, use DEFAULT_PANEL_CONFIG
         if bg_config is None:
             bg_config = DEFAULT_PANEL_CONFIG
-        
+
         if bg_config and bg_config != "none":
             if isinstance(bg_config, dict):
                 params = bg_config.get("parameters", bg_config)

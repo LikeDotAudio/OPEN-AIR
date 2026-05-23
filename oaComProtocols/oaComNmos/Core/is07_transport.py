@@ -18,7 +18,7 @@ import websocket
 
 from oaComProtocols.oaComNmos.Constants.nmos_constants import NMOS_IS07_DEFAULT_URI, NMOS_IS07_RECONNECT_INTERVAL
 from oaComProtocols.oaComNmos.Core.utils import gen_id
-from oaLogging.Methods.matrix_gate import matrix_log, is_debug_allowed
+from oaLogging.Methods.matrix_gate import is_debug_allowed, matrix_log
 
 
 def _is_debug(element="nmos_ws"):

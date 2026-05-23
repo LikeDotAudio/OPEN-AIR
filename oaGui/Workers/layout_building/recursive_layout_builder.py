@@ -6,7 +6,9 @@
 
 import pathlib
 import tkinter as tk
+
 from .base_layout_builder import BaseLayoutBuilder
+
 
 class RecursiveLayoutBuilder(BaseLayoutBuilder):
     """Constructs recursive/nested container layouts."""
@@ -36,8 +38,8 @@ class RecursiveLayoutBuilder(BaseLayoutBuilder):
             item = all_items[idx]
             slot = slots[idx]
             if isinstance(item, dict):
-                self.scanner._build_from_directory(path=path, parent_widget=slot, 
-                                           on_complete=lambda: self.scanner.after(1, lambda: _process_recursive(idx + 1)), 
+                self.scanner._build_from_directory(path=path, parent_widget=slot,
+                                           on_complete=lambda: self.scanner.after(1, lambda: _process_recursive(idx + 1)),
                                            layout_override=item)
             elif isinstance(item, (str, pathlib.Path)):
                 instance = self.scanner.loader_facade.load_and_instantiate_gui(path=item, parent_widget=slot)

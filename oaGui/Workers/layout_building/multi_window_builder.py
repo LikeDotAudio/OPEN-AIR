@@ -5,23 +5,25 @@
 # Description: Builder for multi-window GUI layouts.
 
 import tkinter as tk
+
 from .base_layout_builder import BaseLayoutBuilder
+
 
 class MultiWindowBuilder(BaseLayoutBuilder):
     """Orchestrates multi-window instantiation."""
 
     def build(self, path, parent_widget, layout_data, on_complete=None):
         windows = layout_data.get("windows", [])
-        
+
         def _process_windows(win_idx=0):
             if win_idx >= len(windows):
                 if on_complete: on_complete()
                 return
-                
+
             win_data = windows[win_idx]
             path_to_build = win_data["path"]
             title = win_data["title"]
-            
+
             if win_idx == 0:
                 target_widget = parent_widget
                 root = getattr(self.scanner, "root", None)
@@ -37,8 +39,8 @@ class MultiWindowBuilder(BaseLayoutBuilder):
                 target_widget.pack(fill=tk.BOTH, expand=True)
 
             self.scanner._build_from_directory(
-                path=path_to_build, 
-                parent_widget=target_widget, 
+                path=path_to_build,
+                parent_widget=target_widget,
                 on_complete=lambda: self.scanner.after(1, lambda: _process_windows(win_idx + 1))
             )
 

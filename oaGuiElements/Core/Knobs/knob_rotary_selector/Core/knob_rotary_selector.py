@@ -8,11 +8,10 @@ import inspect
 import math
 import tkinter as tk
 
-from oaGuiElements.Core.Knobs.knob.Core.knob import CustomKnobFrame
-
-from oaGui.Methods.formatting.i18n_utils import get_text
 from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
+from oaGui.Methods.formatting.i18n_utils import get_text
 from oaGui.Workers.compositing.engine_visual_effects import EngineVisualEffects
+from oaGuiElements.Core.Knobs.knob.Core.knob import CustomKnobFrame
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Methods.matrix_gate import matrix_log

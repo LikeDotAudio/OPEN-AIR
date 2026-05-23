@@ -26,7 +26,7 @@ def rust_gate_filter(record):
     # This allows 'element_smpte2138' to gate both matrix_log and direct logger calls.
     sys_lookup = partition
     el_lookup = category
-    
+
     if partition == "system" and category != "system":
         # If it's a protocol log but partition isn't set, try 'comms' as fallback system
         from oaLogging.Methods.matrix_gate import is_debug_allowed

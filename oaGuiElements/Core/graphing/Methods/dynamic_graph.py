@@ -19,14 +19,14 @@ from oaLogging.Methods.matrix_gate import matrix_log
 app_constants = Config.get_instance()
 
 from oaGui.Methods.processing.deferred_task_handler import DeferredTaskHandler
+from oaGui.Workers.compositing.engine_visual_effects import EngineVisualEffects
+from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 from oaGuiElements.Core.graphing.Core.graph_interaction_mixin import GraphInteractionMixin
 
 # --- EXTRACTED CORE MIXINS ---
 from oaGuiElements.Core.graphing.Core.graph_patina_mixin import GraphPatinaMixin
 from oaGuiElements.Core.graphing.Core.graph_state_mixin import GraphStateMixin
 from oaGuiElements.Core.graphing.Core.graph_throttle_mixin import GraphThrottleMixin
-from oaGui.Workers.compositing.engine_visual_effects import EngineVisualEffects
-from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 from oaStyle.Core.style import DEFAULT_THEME, THEMES
 
 from . import graph, graph_interactor, graph_styler
@@ -114,7 +114,7 @@ class GraphPlotter(
         # Pass self as _plotter for throttled updates
         interaction_config = self.widget_config.copy()
         interaction_config["_plotter"] = self
-        
+
         graph_interactor.setup_interaction(self.fig, self.ax, interaction_config, {"on_view_change": lambda x, y: None, "on_setting_change": lambda n, v: None, "on_add_marker": self._on_add_marker})
         for ds in self.widget_config.get("datasets", []):
             ds_id = ds.get("id")

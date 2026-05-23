@@ -23,7 +23,6 @@ from loguru import logger
 from oaLogging.Constants.logging_constants import (
     APP_LOG_BATCH_SIZE,
     APP_LOG_INTERVAL,
-    COMMS_ELEMENTS,
     ERROR_LOG_BATCH_SIZE,
     ERROR_LOG_INTERVAL,
     FILE_FORMAT_PLAIN,
@@ -106,7 +105,7 @@ def initialize_logging(config, log_dir=None, partition="SYS"):
     # 1. --- Console Sink ---
     # ⚡ SAFE FORMAT: Provide defaults within the format string to prevent KeyError crashes
     safe_format = "{extra[ptp_time]} | {level:<8} | {extra[category]} {extra[category_name]:<12} | {message}"
-    
+
     logger.add(
         sys.stderr,
         format=safe_format,
@@ -143,19 +142,19 @@ def initialize_logging(config, log_dir=None, partition="SYS"):
 
         # 3. --- Dedicated GUI/Render Log Sink ---
         gui_log_pattern = os.path.join(gui_log_dir, "GuiRender_{time}.log")
-        
+
         def gui_filter(record):
             # 1. Filter by Module Name
             module_name = record["name"]
             if any(m in module_name for m in ["oaGui", "oaGuiElements", "oaGuiEditorWYSIWYG"]):
                 return rust_gate_filter(record)
-            
+
             # 2. Filter by Category
             category = record["extra"].get("category", "").upper()
             gui_keywords = ["GUI", "RENDER", "LAYOUT", "WYSIWYG", "BUILDER"]
             if any(kw in category for kw in gui_keywords):
                 return rust_gate_filter(record)
-                
+
             return False
 
         logger.add(

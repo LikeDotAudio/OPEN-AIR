@@ -15,7 +15,7 @@ def detect_visual_layout_folds(scroll_frame):
 
     scroll_root_y = scroll_frame.winfo_rooty()
     view_height = scroll_frame.winfo_height()
-    
+
     if view_height <= 0:
         return folds
 
@@ -25,7 +25,7 @@ def detect_visual_layout_folds(scroll_frame):
             # Calculate midpoint relative to scrollable area
             mid_y = child.winfo_rooty() + (child.winfo_height() / 2) - scroll_root_y
             folds.append({
-                "position_pct": mid_y / view_height, 
+                "position_pct": mid_y / view_height,
                 "orientation": "horizontal"
             })
 

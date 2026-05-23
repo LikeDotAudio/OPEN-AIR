@@ -6,16 +6,14 @@
 
 import inspect
 import tkinter as tk
-from typing import Any
 
 from oaConfigurationManager.FileReaders.config_reader import Config
 from oaGui.Core.context.cache_widget_context import WidgetContext
+from oaGui.Managers.interaction.interaction_view_states import InteractionViewStates
+from oaGui.Methods.formatting.array_data_expander import ArrayDataExpander
+from oaGui.Methods.rendering.grid_column_configurator import GridColumnConfigurator
 from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 from oaLogging.Methods.matrix_gate import matrix_log
-
-from oaGui.Managers.interaction.interaction_view_states import InteractionViewStates
-from oaGui.Methods.rendering.grid_column_configurator import GridColumnConfigurator
-from oaGui.Methods.formatting.array_data_expander import ArrayDataExpander
 
 app_constants = Config.get_instance()
 

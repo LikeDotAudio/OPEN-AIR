@@ -6,7 +6,9 @@
 
 import tkinter as tk
 from tkinter import ttk
+
 from oaLogging.Methods.matrix_gate import matrix_log
+
 
 def liberate_notebook_tab(tab_window_manager, event):
     """Detaches a tab from its notebook and rebuilds it in a new Toplevel window."""

@@ -4,9 +4,11 @@
 #
 # Description: Handles photorealistic rendering of button images using PIL.
 
-from PIL import Image, ImageDraw, ImageFont, ImageTk
 from loguru import logger
+from PIL import Image, ImageDraw, ImageTk
+
 from oaGui.Methods.formatting.i18n_utils import get_text
+
 
 class ButtonImageRenderer:
     """
@@ -52,7 +54,7 @@ class ButtonImageRenderer:
                 center_x, center_y = width / 2, height / 2
                 max_radius = min(width, height) * 0.8 * (glow_intensity / 10.0)
                 num_steps = max(10, int(30 * (glow_intensity / 10.0)))
-                
+
                 for i in range(num_steps, 0, -1):
                     radius = (max_radius / num_steps) * i
                     alpha_factor = (1 - (i / (num_steps + 1)))**2
@@ -69,7 +71,7 @@ class ButtonImageRenderer:
         # Draw Text
         try:
             display_text = get_text(text)
-            draw.text((width / 2, height / 2), display_text, 
+            draw.text((width / 2, height / 2), display_text,
                       fill=active_text_color if is_active else text_color, anchor="mm")
         except Exception as e:
             logger.error(f"ButtonImageRenderer: Error drawing button text: {e}")

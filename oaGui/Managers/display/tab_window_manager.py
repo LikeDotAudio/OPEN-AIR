@@ -4,8 +4,9 @@
 #
 # Description: Manages Toplevel windows for tear-off tabs.
 
-from ..tabs.tab_tear_off_orchestrator import liberate_notebook_tab
 from ..tabs.tab_re_attachment_service import re_attach_liberated_tab
+from ..tabs.tab_tear_off_orchestrator import liberate_notebook_tab
+
 
 class TabWindowManager:
     """Manages Toplevel windows for tear-off tabs using atomic services."""

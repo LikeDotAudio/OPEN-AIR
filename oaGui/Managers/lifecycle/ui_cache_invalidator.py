@@ -8,6 +8,6 @@ def invalidate_ui_render_caches():
     """Clears global blueprint and image caches."""
     from oaGui.Core.factory.cache_image_store import CacheImageStore
     from oaGui.FileReaders.loader.json_blueprint_reader import JsonBlueprintReader
-    
+
     JsonBlueprintReader.invalidate_cache()
     CacheImageStore.invalidate_cache()

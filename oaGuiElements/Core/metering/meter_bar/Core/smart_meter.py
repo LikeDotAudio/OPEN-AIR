@@ -12,9 +12,9 @@ from loguru import logger
 
 from oaGui.Methods.processing.deferred_task_handler import DeferredTaskHandler
 
+from ..renderers.tk_canvas_renderer import TkCanvasRenderer
 from .ballistics import BallisticsEngine
 from .layout_calculator import MeterLayoutCalculator
-from ..renderers.tk_canvas_renderer import TkCanvasRenderer
 
 
 class SmartMeter(tk.Canvas, DeferredTaskHandler):

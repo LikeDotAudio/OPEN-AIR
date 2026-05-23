@@ -6,30 +6,32 @@
 # Constructs a pixel-perfect, background-aware industrial UI from JSON state.
 
 import tkinter as tk
-from oaStyle.Core.style import DEFAULT_THEME, THEMES
 
-# --- ENGINE SERVICES ---
-from oaGui.Workers.compositing.sync_behavior import SyncBehavior
+from oaGui.Constants.builder_constants import SCROLL_SYNC_DELAY
 from oaGui.Core.context.cache_widget_context import WidgetContext
-from oaGui.Workers.compositing.engine_visual_effects import EngineVisualEffects
+from oaGui.FileReaders.loader.gui_file_loader import GuiFileLoaderMixin
+from oaGui.Hooks.events.interaction_mqtt_gateway import InteractionMqttGatewayMixin
+from oaGui.Hooks.menu.context_menu import BuilderContextMenuMixin
+from oaGui.Hooks.registry.gui_widget_factory import GuiWidgetFactoryMixin
 
 # --- MODULAR MIXINS ---
 from oaGui.Managers.assembler.engine_widget_assembler import EngineWidgetAssemblerMixin
-from oaGui.Hooks.events.interaction_mqtt_gateway import InteractionMqttGatewayMixin
 from oaGui.Managers.lifecycle.loader_lifecycle_service import LifecycleManagerMixin
+from oaGui.Managers.refresh.engine_refresh_coordinator import RefreshCoordinatorMixin
+from oaGui.Workers.compositing.engine_visual_effects import EngineVisualEffects
+
+# --- ENGINE SERVICES ---
+from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 from oaGuiElements.Core.background import BuilderBackgroundManagerMixin
 from oaGuiElements.Core.breakoff.Core.window_breakoff_manager import WindowBreakoffManagerMixin
-from oaGui.Hooks.menu.context_menu import BuilderContextMenuMixin
-from oaGui.Managers.refresh.engine_refresh_coordinator import RefreshCoordinatorMixin
 from oaGuiElements.Core.input.input_mousewheel_mixin.input_mousewheel_mixin import MousewheelScrollMixin
-from oaGui.Hooks.registry.gui_widget_factory import GuiWidgetFactoryMixin
-from oaGui.FileReaders.loader.gui_file_loader import GuiFileLoaderMixin
 from oaStyle.Core.gui_style import GuiStyleMixin
+from oaStyle.Core.style import DEFAULT_THEME, THEMES
 
 # --- ORCHESTRATOR MODULES ---
 from .builder_initializer import BuilderInitializer
 from .scaffolding_builder import ScaffoldingBuilder
-from oaGui.Constants.builder_constants import SCROLL_SYNC_DELAY
+
 
 class LoaderOrchestrator(
     tk.Frame,
@@ -54,14 +56,14 @@ class LoaderOrchestrator(
         super().__init__(master=parent, bg=theme["bg"])
 
         self.parent_builder = self._find_parent_builder(parent)
-        
+
         # ⚡ MODULAR INITIALIZATION
         BuilderInitializer.initialize_state(self, json_path, tab_name, config, self.parent_builder)
         BuilderInitializer.initialize_services(self, config)
-        
+
         # ⚡ MODULAR SCAFFOLDING
         ScaffoldingBuilder.build(self, use_grid)
-        
+
         self._setup_context_menu()
 
     def _find_parent_builder(self, parent_widget):

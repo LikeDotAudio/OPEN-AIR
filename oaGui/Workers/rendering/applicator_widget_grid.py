@@ -13,11 +13,11 @@ def apply_widget_to_grid(widget, widget_data, batch_data, builder):
     superficial_pad = getattr(builder, 'superficial_pad', 0)
 
     widget.grid(
-        row=layout.get("row", batch_data["r"]), 
+        row=layout.get("row", batch_data["r"]),
         column=layout.get("column", batch_data["c"]),
-        columnspan=layout.get("col_span", 1), 
+        columnspan=layout.get("col_span", 1),
         rowspan=layout.get("row_span", 1),
-        padx=batch_data["padx"] + superficial_pad, 
-        pady=batch_data["pady"] + superficial_pad, 
+        padx=batch_data["padx"] + superficial_pad,
+        pady=batch_data["pady"] + superficial_pad,
         sticky=batch_data["sticky"]
     )

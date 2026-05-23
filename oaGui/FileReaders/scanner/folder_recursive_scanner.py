@@ -5,18 +5,19 @@
 # Description: Handles recursively building the GUI structure from a directory structure.
 
 import pathlib
-import tkinter as tk
-from loguru import logger
-from oaLogging.Methods.matrix_gate import matrix_log
 
+from loguru import logger
+
+from oaGui.Workers.layout_building.default_layout_builder import DefaultLayoutBuilder
 from oaGui.Workers.layout_building.multi_window_builder import MultiWindowBuilder
-from oaGui.Workers.layout_building.split_layout_builder import SplitLayoutBuilder
 from oaGui.Workers.layout_building.notebook_layout_builder import NotebookLayoutBuilder
 from oaGui.Workers.layout_building.recursive_layout_builder import RecursiveLayoutBuilder
-from oaGui.Workers.layout_building.default_layout_builder import DefaultLayoutBuilder
+from oaGui.Workers.layout_building.split_layout_builder import SplitLayoutBuilder
+from oaLogging.Methods.matrix_gate import matrix_log
 
 from .layout_info_service import retrieve_cached_layout_info
 from .widget_attachment_service import attach_widget_to_parent
+
 
 class FolderRecursiveScannerMixin:
     """
@@ -46,15 +47,15 @@ class FolderRecursiveScannerMixin:
     def _build_from_directory(self, path: pathlib.Path, parent_widget, on_complete=None, layout_override=None):
         """Recursively builds the GUI via a modular dispatcher."""
         matrix_log("gui", "gui_builder", "_build_from_directory", f"🏗️ [BUILDER] Starting build for: {path}", "DEBUG")
-        
+
         if not hasattr(self, '_layout_builders'):
             self._initialize_layout_builders()
 
-        if isinstance(path, str): 
+        if isinstance(path, str):
             path = pathlib.Path(path)
 
         layout_info = layout_override and self.layout_parser.parse_layout_data(layout_override, source_path=path) or self._get_layout_info(path)
-        
+
         layout_type = layout_info["type"]
         layout_data = layout_info["data"]
 
@@ -64,7 +65,7 @@ class FolderRecursiveScannerMixin:
             return
 
         builder = self._layout_builders.get(layout_type, self._default_builder)
-        
+
         try:
             builder.build(path, parent_widget, layout_data, on_complete)
         except Exception:

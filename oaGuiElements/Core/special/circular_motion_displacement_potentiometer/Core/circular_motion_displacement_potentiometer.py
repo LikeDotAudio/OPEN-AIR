@@ -15,13 +15,14 @@ app_constants = Config.get_instance()
 from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
 from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 
+from .cmdp_channel_handler import CMDP_LTPObject
+from .cmdp_file_handler import CMDPFileHandler
+from .cmdp_group_handler import CMDPGroupHandler
+
 # --- EXTRACTED CORE MODULES ---
 from .cmdp_interaction_mixin import CMDPInteractionMixin
 from .cmdp_renderer_mixin import CMDPRendererMixin
 from .cmdp_tree import CMDPTreeManager
-from .cmdp_channel_handler import CMDP_LTPObject
-from .cmdp_file_handler import CMDPFileHandler
-from .cmdp_group_handler import CMDPGroupHandler
 
 
 class CMDPWidget(

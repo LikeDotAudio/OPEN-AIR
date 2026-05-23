@@ -12,9 +12,9 @@ import random
 from PIL import Image, ImageChops, ImageDraw, ImageFilter, ImageOps
 
 from oaGui.Core.factory.cache_image_store import CacheImageStore
+from oaGuiElements.Methods.pattern_engine import PatternEngine
 from oaLogging.Methods.matrix_gate import matrix_log
 
-from oaGuiElements.Methods.pattern_engine import PatternEngine
 _engine = PatternEngine()
 
 # Sizing and Geometry Constants

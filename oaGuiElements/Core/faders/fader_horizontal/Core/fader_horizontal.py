@@ -12,12 +12,12 @@ from oaConfigurationManager.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
 from oaGui.Core.factory.base_widget_creator import BaseWidgetCreator
-
-# --- EXTRACTED CORE MODULES ---
-from oaGuiElements.Core.faders.fader_horizontal.Core.horizontal_fader_renderer_mixin import HorizontalFaderRendererMixin
 from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
 from oaGui.Workers.compositing.engine_visual_effects import EngineVisualEffects
 from oaGui.Workers.compositing.sync_behavior import SyncBehavior
+
+# --- EXTRACTED CORE MODULES ---
+from oaGuiElements.Core.faders.fader_horizontal.Core.horizontal_fader_renderer_mixin import HorizontalFaderRendererMixin
 
 from .horizontal_fader_interaction_mixin import HorizontalFaderInteractionMixin
 

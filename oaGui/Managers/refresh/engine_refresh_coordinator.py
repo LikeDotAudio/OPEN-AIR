@@ -9,8 +9,10 @@ from oaGui.Constants.builder_constants import (
     SLICING_DELAY_REBUILD,
     SLICING_POSITION_EPSILON,
 )
-from .fold_detector_service import detect_visual_layout_folds
+
 from .batch_slice_dispatcher import dispatch_background_slice_updates
+from .fold_detector_service import detect_visual_layout_folds
+
 
 class RefreshCoordinatorMixin:
     """Synchronization engine for transparent UI components via atomic services."""

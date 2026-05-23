@@ -6,7 +6,9 @@
 
 import tkinter as tk
 from tkinter import ttk
+
 import orjson
+
 
 class YakDissectorPane(ttk.Frame):
     """Encapsulates the JSON deep packet inspection tree."""

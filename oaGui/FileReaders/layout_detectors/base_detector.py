@@ -6,9 +6,10 @@
 
 import pathlib
 
+
 class BaseLayoutDetector:
     """Base class for specialized GUI layout detectors."""
-    
+
     def __init__(self, interpreter):
         self.interpreter = interpreter
 

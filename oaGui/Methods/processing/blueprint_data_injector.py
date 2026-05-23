@@ -4,13 +4,15 @@
 #
 # Description: Handles recursive injection of data and view managers into JSON blueprints.
 
-from typing import Any, Dict, Optional
+from typing import Any
+
 from oaGui.Managers.interaction.interaction_view_states import InteractionViewStates
+
 
 class BlueprintDataInjector:
     """Handles recursive injection of data and view managers into JSON blueprints."""
     @classmethod
-    def inject(cls, config: Any, data: Dict, interaction_view_states: Optional[InteractionViewStates] = None):
+    def inject(cls, config: Any, data: dict, interaction_view_states: InteractionViewStates | None = None):
         """Recursively injects data context and view manager into the configuration."""
         if isinstance(config, dict):
             cls._inject_into_dict(config, data, interaction_view_states)
@@ -18,7 +20,7 @@ class BlueprintDataInjector:
             cls._inject_into_list(config, data, interaction_view_states)
 
     @classmethod
-    def _inject_into_dict(cls, config: Dict, data: Dict, vm: Optional[InteractionViewStates]):
+    def _inject_into_dict(cls, config: dict, data: dict, vm: InteractionViewStates | None):
         # Specific injection for collapsible blocks
         if config.get("type") == "OcaCollapsibleBlock" and vm:
             config["_view_manager"] = vm
@@ -30,7 +32,7 @@ class BlueprintDataInjector:
                 config[key] = cls._resolve_string_placeholders(value, data)
 
     @classmethod
-    def _inject_into_list(cls, config: list, data: dict, vm: Optional[InteractionViewStates]):
+    def _inject_into_list(cls, config: list, data: dict, vm: InteractionViewStates | None):
         for i, value in enumerate(config):
             if isinstance(value, (dict, list)):
                 cls.inject(value, data, vm)

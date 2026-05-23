@@ -5,7 +5,6 @@
 # Description: Log record patchers for high-precision timestamping.
 
 import time
-from datetime import datetime
 
 try:
     from oaGuiShowtime.Methods.ptp_time import get_ptp_time
@@ -29,7 +28,7 @@ def ptp_patcher(record):
     if "category" not in record["extra"]:
         from oaLogging.Constants.subsystem_emojis import SUBSYSTEM_EMOJIS
         record["extra"]["category"] = SUBSYSTEM_EMOJIS.get("SYSTEM", "❓")
-    
+
     if "category_name" not in record["extra"]:
         record["extra"]["category_name"] = "SYSTEM"
 

@@ -1,5 +1,4 @@
 import pytest
-
 from oaRustCore import oa_splink_core_rs as oasplinkcore_rs
 
 

@@ -5,7 +5,9 @@
 # Description: Top toolbar for the main OPEN-AIR GUI application.
 
 import tkinter as tk
+
 from oaLogging.Methods.matrix_gate import matrix_log
+
 
 class ApplicationToolbar(tk.Frame):
     """Top toolbar for the main application orchestrator."""
@@ -15,7 +17,7 @@ class ApplicationToolbar(tk.Frame):
         self._init_ui()
 
     def _init_ui(self):
-        tk.Label(self, text="OPEN-AIR CORE", bg="#333333", fg="white", 
+        tk.Label(self, text="OPEN-AIR CORE", bg="#333333", fg="white",
                  font=("Arial", 9, "bold")).pack(side="left", padx=10)
 
         tk.Button(self, text="Launch WYSIWYG Editor", bg="#444444", fg="#00FF00",

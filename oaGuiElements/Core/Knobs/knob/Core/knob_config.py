@@ -65,7 +65,7 @@ def extract_knob_config(config_data):
     # 7. Aesthetics (The "Pattern" fix)
     # We probe overrides -> styling -> cosmetics -> top-level
     knob_style = overrides.get("knob_style", styling.get("knob_style", cosmetics.get("visualization", c.get("knob_style", "standard")))).lower()
-    
+
     # If shape isn't explicitly defined, derive it from knob_style
     default_shape = "gear" if knob_style == "gear" else "circle"
     shape = overrides.get("shape", styling.get("shape", c.get("shape", default_shape))).lower()

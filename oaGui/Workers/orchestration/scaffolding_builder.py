@@ -5,13 +5,15 @@
 # Description: Orchestrates the physical container hierarchy construction for LoaderOrchestrator.
 
 import tkinter as tk
-from oaStyle.Core.style import DEFAULT_THEME, THEMES
+
 from oaConfigurationManager.FileReaders.config_reader import Config
-from oaGui.Interface.viewport.Canvas_Viewport_Manager import CanvasViewportManager
 from oaGui.Interface.controls.auto_scrollbar import AutoScrollbar
 from oaGui.Interface.viewport.builder_footer import BuilderFooter
+from oaGui.Interface.viewport.Canvas_Viewport_Manager import CanvasViewportManager
 from oaGui.Workers.compositing.engine_visual_effects import EngineVisualEffects
 from oaGuiEditorWYSIWYG.Methods.builder_editor_grid import BuilderEditorGrid
+from oaStyle.Core.style import DEFAULT_THEME, THEMES
+
 
 class ScaffoldingBuilder:
     """Orchestrates the physical container hierarchy construction."""
@@ -27,8 +29,8 @@ class ScaffoldingBuilder:
         ScaffoldingBuilder._setup_scroll_system(orchestrator, theme["bg"])
         ScaffoldingBuilder._setup_footer_bar(orchestrator)
         ScaffoldingBuilder._apply_initial_transparency(orchestrator)
-        
-        if orchestrator.canvas and orchestrator.is_editor: 
+
+        if orchestrator.canvas and orchestrator.is_editor:
             BuilderEditorGrid.draw(orchestrator.canvas, orchestrator.scroll_frame, True)
 
     @staticmethod
@@ -46,7 +48,7 @@ class ScaffoldingBuilder:
             orchestrator.viewport_manager = CanvasViewportManager(
                 orchestrator.main_content_frame, bg, orchestrator.allow_horizontal_scroll
             )
-            
+
             orchestrator.canvas = orchestrator.viewport_manager.canvas
             orchestrator.scroll_frame = orchestrator.viewport_manager.scroll_frame
             orchestrator.canvas_window_id = orchestrator.viewport_manager.window_id

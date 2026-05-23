@@ -83,7 +83,7 @@ class TestAsyncBootstrapEngine(unittest.TestCase):
             self.mock_root.after = mock_after
 
             self.engine.run()
-            
+
             # Verify the error was logged
             mock_logger.error.assert_called()
 

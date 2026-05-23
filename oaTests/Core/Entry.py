@@ -5,7 +5,6 @@
 # Description: Gatekeeper for the TestRunner module.
 
 import os
-import signal
 import subprocess
 import sys
 import time
@@ -104,18 +103,19 @@ def main():
     # --- REPORT GENERATION PHASE ---
     try:
         from datetime import datetime
-        from oaTests.Workers.run_report_builder import ReportGenerator
+
         from oaTests.Workers.collate_data import collate_extra_tabs
-        
+        from oaTests.Workers.run_report_builder import ReportGenerator
+
         timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
         reports_dir = os.path.join(root_path, "oaDataLogs", "Reports")
         os.makedirs(reports_dir, exist_ok=True)
-        
+
         html_path = os.path.join(reports_dir, f'UnifiedReport_{timestamp}.html')
         json_path = os.path.join(reports_dir, f'UnifiedReport_{timestamp}.json')
-        
-        print(f"📝 [REPORT] Generating Unified Intelligence Report...")
-        
+
+        print("📝 [REPORT] Generating Unified Intelligence Report...")
+
         # Prepare data for generator
         summary = {
             "passed": passed,
@@ -123,7 +123,7 @@ def main():
             "errors": errors,
             "skipped": skipped
         }
-        
+
         # Extract details from results
         details = []
         for test, err in result.errors + result.failures:
@@ -135,12 +135,12 @@ def main():
                 "message": str(err),
                 "duration": "0s" # Standalone result doesn't track per-test duration easily here
             })
-            
+
         extra_tabs = collate_extra_tabs(root_path)
         generator = ReportGenerator(html_path, json_path, datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
         generator.generate_json(summary, details)
         generator.generate_html(summary, details, extra_tabs)
-        
+
         print(f"✅ [SUCCESS] Report generated at: {html_path}")
     except Exception as e:
         print(f"⚠️ [WARNING] Failed to generate report: {e}")

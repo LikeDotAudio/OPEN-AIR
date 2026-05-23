@@ -12,6 +12,7 @@ __all__ = [
 ]
 
 from oaGui.Methods.processing.transparency_config_parser import TransparencyConfigParser as TransparencyConfig
-from .engine_visual_effects import EngineVisualEffects
+
 from .engine_texture_mapper import EngineTextureMapper
+from .engine_visual_effects import EngineVisualEffects
 from .sync_behavior import SyncBehavior

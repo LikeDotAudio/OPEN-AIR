@@ -34,7 +34,7 @@ class TestUITrackingService(unittest.TestCase):
         self.mock_toplevel.winfo_x.return_value = 10
         self.mock_toplevel.winfo_y.return_value = 20
         self.mock_widget.winfo_toplevel.return_value = self.mock_toplevel
-        
+
         # Mock geometry on the widget itself as well
         self.mock_widget.winfo_width.return_value = 1024
         self.mock_widget.winfo_height.return_value = 768

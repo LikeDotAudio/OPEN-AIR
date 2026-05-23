@@ -4,8 +4,8 @@
 #
 # Description: Detector for multi-window GUI layouts.
 
-import pathlib
 from .base_detector import BaseLayoutDetector
+
 
 class MultiWindowDetector(BaseLayoutDetector):
     """Detects multi-window layouts (directories starting with 'window_')."""
@@ -14,7 +14,7 @@ class MultiWindowDetector(BaseLayoutDetector):
         window_dirs = [d for d in sub_dirs if d.name.lower().startswith("window_")]
         if window_dirs:
             return {
-                "type": "multi_window", 
+                "type": "multi_window",
                 "data": {
                     "windows": [{"path": d, "title": d.name.replace("_", " ")} for d in sorted(window_dirs)]
                 }

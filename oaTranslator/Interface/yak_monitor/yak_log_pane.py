@@ -6,10 +6,14 @@
 
 import tkinter as tk
 from tkinter import ttk
+
 from oaGui.Constants.builder_constants import (
-    DEFAULT_TREE_COLUMN_WIDTH, LARGE_TREE_COLUMN_WIDTH, 
-    SMALL_TREE_COLUMN_WIDTH, MAX_LOG_ENTRIES
+    DEFAULT_TREE_COLUMN_WIDTH,
+    LARGE_TREE_COLUMN_WIDTH,
+    MAX_LOG_ENTRIES,
+    SMALL_TREE_COLUMN_WIDTH,
 )
+
 
 class YakLogPane(ttk.Frame):
     """Encapsulates the traffic log treeview and its controls."""
@@ -27,7 +31,7 @@ class YakLogPane(ttk.Frame):
                 SMALL_TREE_COLUMN_WIDTH if col == "Value" else DEFAULT_TREE_COLUMN_WIDTH
             )
             self.tree.column(col, width=width, anchor="w" if col in ["Message", "Command", "Device Type", "Model", "YAK", "Action"] else "center")
-        
+
         sy, sx = ttk.Scrollbar(self, orient=tk.VERTICAL, command=self.tree.yview), ttk.Scrollbar(self, orient=tk.HORIZONTAL, command=self.tree.xview)
         self.tree.configure(yscrollcommand=sy.set, xscrollcommand=sx.set)
         self.tree.grid(row=0, column=0, sticky="nsew"); sy.grid(row=0, column=1, sticky="ns"); sx.grid(row=1, column=0, sticky="ew")
@@ -37,5 +41,5 @@ class YakLogPane(ttk.Frame):
 
     def add_entry(self, values, tags):
         self.tree.insert("", 0, values=values, tags=tags)
-        if len(self.tree.get_children()) > MAX_LOG_ENTRIES: 
+        if len(self.tree.get_children()) > MAX_LOG_ENTRIES:
             self.tree.delete(self.tree.get_children()[-1])

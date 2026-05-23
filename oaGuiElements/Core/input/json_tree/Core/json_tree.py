@@ -15,11 +15,11 @@ from oaGui.Methods.formatting.i18n_utils import get_text
 app_constants = Config.get_instance()
 
 # --- EXTRACTED CORE MODULES ---
+from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
+from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 from oaGuiElements.Core.input.json_tree.Core.json import JsonDataManager
 from oaGuiElements.Core.input.json_tree.Core.json_tree_editor_mixin import JsonTreeEditorMixin
 from oaGuiElements.Core.input.json_tree.Core.json_tree_renderer_mixin import JsonTreeRendererMixin
-from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
-from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 
 
 class AutoScrollbar(ttk.Scrollbar):

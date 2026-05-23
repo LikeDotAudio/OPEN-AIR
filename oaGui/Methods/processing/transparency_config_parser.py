@@ -5,7 +5,9 @@
 # Description: Parses transparency-related configurations for GUI widgets.
 
 import tkinter as tk
+
 from oaStyle.Constants.geometry import STRUCTURAL_WIDGET_TYPES, THEME_BACKGROUND_COLORS
+
 
 class TransparencyConfigParser:
     """

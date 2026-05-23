@@ -4,10 +4,10 @@
 #
 # Description: Converts raw JSON data into engine-ready configurations.
 
-from oaGui.Methods.formatting.i18n_utils import get_text
 from oaGui.FileReaders.standardizers.json_shorthand_resolver import JsonShorthandResolver
 from oaGui.FileReaders.standardizers.semantic_layout_resolver import SemanticLayoutResolver
 from oaGui.FileReaders.standardizers.widget_type_resolver import WidgetTypeResolver
+
 
 class SchemaHarmonizer:
     """
@@ -45,7 +45,7 @@ class SchemaHarmonizer:
         if "main" in labels: config["label_active"] = labels["main"]
         if "v1" in labels: config["label_v1"] = labels["v1"]
         if "v2" in labels: config["label_v2"] = labels["v2"]
-        if "visible" in labels: 
+        if "visible" in labels:
             config["show_label"] = labels["visible"]
             config["label_visible"] = labels["visible"]
         if "show_units" in labels: config["show_units"] = labels["show_units"]
@@ -72,7 +72,7 @@ class SchemaHarmonizer:
         # Geometry & Orientation
         config["Orientation"] = str(geometry.get("orientation", "vertical")).lower()
         if config["Orientation"].startswith("horiz"): config["Orientation"] = "horizontal"
-        
+
         # Semantic Layout
         config["layout"] = config.get("layout", {})
         config["layout"]["sticky"] = SemanticLayoutResolver.resolve_sticky(geometry, config)

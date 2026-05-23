@@ -1,16 +1,70 @@
 /**
- * Interface/Tabs/GrabBagView/grab_bag_view.jsx — categorized widget palette.
- * Mirrors oaGuiEditorWYSIWYG/Interface/Tabs/GrabBagView/grab_bag_view.py.
+ * Interface/Tabs/GrabBagView/grab_bag_view.jsx — categorized widget palette
+ * with LIVE widget previews. Mirrors oaGuiEditorWYSIWYG/.../grab_bag_view.py.
  *
- * Loads templates from /api/grabbag (oaGuiElements sample.json). Drag a chip
- * onto the canvas to add it, or click to insert into the selected container.
+ * Each template is rendered through the runtime renderer (LoaderOrchestrator),
+ * scaled into a thumbnail. Previews are lazy-mounted (IntersectionObserver) and
+ * wrapped in an error boundary so a heavy/broken widget can't stall or crash the
+ * palette. Drag a chip onto the canvas, or click to insert into the selection.
  */
 (function () {
+  const CHIP_W = 150;
+  const PREV_H = 86;
+  const SCALE = 0.5;
+
+  // Render error isolation — a bad template falls back to a type badge.
+  class PreviewBoundary extends React.Component {
+    constructor(p) { super(p); this.state = { err: false }; }
+    static getDerivedStateFromError() { return { err: true }; }
+    componentDidCatch() { /* swallow — fallback shown */ }
+    render() { return this.state.err ? this.props.fallback : this.props.children; }
+  }
+
+  const useInView = (ref) => {
+    const [inView, setInView] = React.useState(false);
+    React.useEffect(() => {
+      const el = ref.current;
+      if (!el || typeof IntersectionObserver === 'undefined') { setInView(true); return; }
+      const obs = new IntersectionObserver(([e]) => {
+        if (e.isIntersecting) { setInView(true); obs.disconnect(); }
+      }, { rootMargin: '120px' });
+      obs.observe(el);
+      return () => obs.disconnect();
+    }, [ref]);
+    return inView;
+  };
+
+  const TypeBadge = ({ type }) => (
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: '#666', fontSize: 10, fontFamily: 'monospace', padding: 4, textAlign: 'center' }}>
+      {type}
+    </div>
+  );
+
+  const WidgetPreview = ({ comp }) => {
+    const ref = React.useRef(null);
+    const inView = useInView(ref);
+    const layoutJson = React.useMemo(() => ({ [comp.name]: comp.schema }), [comp]);
+    return (
+      <div ref={ref} style={{ width: CHIP_W, height: PREV_H, overflow: 'hidden', position: 'relative', background: '#161616', borderBottom: '1px solid #333' }}>
+        <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>
+          {inView && window.LoaderOrchestrator ? (
+            <PreviewBoundary fallback={<TypeBadge type={comp.type} />}>
+              <div style={{ transform: `scale(${SCALE})`, transformOrigin: 'top left', width: CHIP_W / SCALE, height: PREV_H / SCALE }}>
+                <window.LoaderOrchestrator layoutJson={layoutJson} />
+              </div>
+            </PreviewBoundary>
+          ) : <TypeBadge type={comp.type} />}
+        </div>
+      </div>
+    );
+  };
+
   window.OaEdGrabBag = ({ store }) => {
     const st = window.useEditorStore(store);
     const [groups, setGroups] = React.useState(null);
     const [error, setError] = React.useState(null);
     const [filter, setFilter] = React.useState('');
+    const [showPreviews, setShowPreviews] = React.useState(true);
 
     const load = React.useCallback((force) => {
       window.OaEdGrabBagLoader.load(force)
@@ -20,12 +74,13 @@
 
     React.useEffect(() => { load(false); }, [load]);
 
-    // Insert into the selected container (or the block owning the selected field).
     const insertSelected = (comp) => {
-      const sel = st.selectedPath;
-      const target = window.OaEdCanvas.containerPathOf(store, sel);
+      const target = window.OaEdCanvas.containerPathOf(store, st.selectedPath);
       store.insert(target, comp.schema, comp.name);
     };
+
+    const dragStart = (e, comp) =>
+      e.dataTransfer.setData('application/json', JSON.stringify({ name: comp.name, schema: comp.schema }));
 
     if (error) return <div style={{ color: '#f66', fontSize: 11, padding: 10 }}>Palette error: {error}</div>;
     if (!groups) return <div style={{ color: '#888', fontSize: 11, padding: 10 }}>Loading palette…</div>;
@@ -34,33 +89,37 @@
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-        <div style={{ display: 'flex', gap: 6, padding: 6, borderBottom: '1px solid #333', flexShrink: 0 }}>
+        <div style={{ display: 'flex', gap: 6, padding: 6, borderBottom: '1px solid #333', flexShrink: 0, alignItems: 'center' }}>
           <input placeholder="filter…" value={filter} onChange={(e) => setFilter(e.target.value)}
             style={{ flex: 1, minWidth: 0, background: '#111', color: '#eee', border: '1px solid #333', borderRadius: 3, padding: '3px 6px', fontSize: 11 }} />
+          <button onClick={() => setShowPreviews(!showPreviews)} title="Toggle live previews"
+            style={{ background: showPreviews ? '#3a2f12' : '#2a2a2a', color: showPreviews ? '#FF9900' : '#ddd', border: '1px solid #444', borderRadius: 3, fontSize: 11, cursor: 'pointer', padding: '0 6px' }}>👁</button>
           <button onClick={() => load(true)} title="Refresh"
-            style={{ background: '#2a2a2a', color: '#ddd', border: '1px solid #444', borderRadius: 3, fontSize: 11, cursor: 'pointer' }}>⟳</button>
+            style={{ background: '#2a2a2a', color: '#ddd', border: '1px solid #444', borderRadius: 3, fontSize: 11, cursor: 'pointer', padding: '0 6px' }}>⟳</button>
         </div>
+
         <div style={{ flex: 1, minHeight: 0, overflow: 'auto', padding: 6 }}>
           {Object.entries(groups).map(([cat, comps]) => {
             const shown = comps.filter((c) => !q || c.name.toLowerCase().includes(q) || c.type.toLowerCase().includes(q) || cat.toLowerCase().includes(q));
             if (!shown.length) return null;
             return (
-              <div key={cat} style={{ marginBottom: 8 }}>
+              <div key={cat} style={{ marginBottom: 10 }}>
                 <div style={{ fontSize: 10, color: '#cca35a', fontWeight: 'bold', textTransform: 'uppercase', margin: '4px 0' }}>{cat}</div>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
                   {shown.map((c, i) => (
                     <div key={c.name + i}
                       draggable
-                      onDragStart={(e) => e.dataTransfer.setData('application/json', JSON.stringify({ name: c.name, schema: c.schema }))}
+                      onDragStart={(e) => dragStart(e, c)}
                       onClick={() => insertSelected(c)}
                       title={`${c.type} — drag to canvas or click to insert into selection`}
-                      style={{
-                        background: '#252525', border: '1px solid #3a3a3a', borderRadius: 4,
-                        padding: '5px 8px', fontSize: 11, color: '#ddd', cursor: 'grab', maxWidth: 130,
-                        overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
-                      }}>
-                      <div style={{ fontWeight: 'bold', overflow: 'hidden', textOverflow: 'ellipsis' }}>{c.name}</div>
-                      <div style={{ fontSize: 9, color: '#777' }}>{c.type}</div>
+                      style={{ width: CHIP_W, border: '1px solid #3a3a3a', borderRadius: 4, overflow: 'hidden', cursor: 'grab', background: '#222' }}>
+                      {showPreviews
+                        ? <WidgetPreview comp={c} />
+                        : <div style={{ height: 4 }} />}
+                      <div style={{ padding: '4px 6px' }}>
+                        <div style={{ fontSize: 11, fontWeight: 'bold', color: '#ddd', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{c.name}</div>
+                        <div style={{ fontSize: 9, color: '#777', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{c.type}</div>
+                      </div>
                     </div>
                   ))}
                 </div>

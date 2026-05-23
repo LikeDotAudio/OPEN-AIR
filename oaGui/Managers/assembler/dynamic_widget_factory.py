@@ -5,11 +5,13 @@
 # Description: Service for instantiating dynamic widgets using the BatchLayoutEngine.
 
 from loguru import logger
-from oaLogging.Methods.matrix_gate import is_debug_allowed
+
 from oaGui.Workers.scheduling.engine_render_scheduler import EngineRenderScheduler
 from oaGuiEditorWYSIWYG.Workers.batch_layout_engine import BatchLayoutEngine
+from oaLogging.Methods.matrix_gate import is_debug_allowed
 
-def instantiate_dynamic_widgets(assembler_instance, parent_frame, data, path_prefix="", 
+
+def instantiate_dynamic_widgets(assembler_instance, parent_frame, data, path_prefix="",
                                 override_cols=None, on_complete=None, parent_bg_pil=None, context=None):
     """Main entry point for creating dynamic widgets via the batch engine."""
     if context is None:

@@ -5,10 +5,12 @@
 # Description: Centralized Telemetry Service for UI Visibility and Geometry.
 
 import inspect
+
 from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import get_topic
-from oaLogging.Methods.matrix_gate import matrix_log
-from oaGui.Methods.instrumentation.telemetry_publisher import TelemetryPublisher
 from oaGui.Hooks.events.telemetry_hooks import TelemetryHooks
+from oaGui.Methods.instrumentation.telemetry_publisher import TelemetryPublisher
+from oaLogging.Methods.matrix_gate import matrix_log
+
 
 class InteractionTelemetryService:
     """
@@ -104,7 +106,7 @@ class InteractionTelemetryService:
         try:
             width, height, pos_x, pos_y = widget.winfo_width(), widget.winfo_height(), widget.winfo_x(), widget.winfo_y()
             TelemetryPublisher.publish_geometry(meta["engine"], meta["geo_topic"], meta["tab_name"], (width, height, pos_x, pos_y))
-            
+
             if hasattr(widget, '_log_telemetry_tx'):
                 widget._log_telemetry_tx(f"GEO: {width}x{height}")
 

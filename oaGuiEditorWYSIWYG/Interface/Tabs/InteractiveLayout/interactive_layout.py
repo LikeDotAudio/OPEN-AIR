@@ -30,8 +30,6 @@ import tkinter as tk
 
 from oaComBroker.Core.event_bus import event_bus
 from oaGui.Methods.processing.deferred_task_handler import DeferredTaskHandler
-from oaLogging.Methods.matrix_gate import matrix_log
-
 from oaGuiEditorWYSIWYG.Core.state import state_manager
 from oaGuiEditorWYSIWYG.Interface.layout_engine.focus import FocusManager
 from oaGuiEditorWYSIWYG.Interface.layout_engine.ghost_overlay import GhostOverlay
@@ -40,6 +38,7 @@ from oaGuiEditorWYSIWYG.Interface.layout_engine.overlay_manager import OverlayMa
 # --- MODULAR CORE COMPONENTS ---
 from oaGuiEditorWYSIWYG.Interface.layout_engine.preview_engine import PreviewEngine
 from oaGuiEditorWYSIWYG.Interface.layout_engine.ruler import Ruler
+from oaLogging.Methods.matrix_gate import matrix_log
 
 
 class InteractiveLayout(tk.Frame, DeferredTaskHandler):
@@ -109,8 +108,8 @@ class InteractiveLayout(tk.Frame, DeferredTaskHandler):
 
         # 3. Engines requiring UI context
         self.preview_engine = PreviewEngine(
-            self.render_area, 
-            self.focus_mgr.handle_focus_request, 
+            self.render_area,
+            self.focus_mgr.handle_focus_request,
             workspace=self,
             subscriber_router=self.subscriber_router,
             state_mirror_engine=self.state_mirror_engine

@@ -5,7 +5,6 @@
 # Description: High-performance Trie-based prefix mapping for state queries.
 # Optimized with native Rust oatrie_rs for deterministic path lookups.
 
-from loguru import logger
 
 from oaLogging.Methods.matrix_gate import matrix_log
 

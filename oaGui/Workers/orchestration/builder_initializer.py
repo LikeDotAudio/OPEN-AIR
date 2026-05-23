@@ -5,13 +5,15 @@
 # Description: Handles initialization and service bootstrapping for LoaderOrchestrator.
 
 from pathlib import Path
+
 from oaConfigurationManager.FileReaders.config_reader import Config
 from oaGui.Core.telemetry.interaction_telemetry_service import InteractionTelemetryService
 from oaGui.Managers.layout.builder_layout_manager import BuilderLayoutManager
 
+
 class BuilderInitializer:
     """Handles internal state and service initialization for the UI Orchestrator."""
-    
+
     @staticmethod
     def initialize_state(orchestrator, path, tab_name, config, parent_builder):
         """Standardizes internal variables and engine references."""
@@ -26,7 +28,7 @@ class BuilderInitializer:
         orchestrator.allow_scrolling = config.get("allow_scrolling", True)
         orchestrator.is_transparent = config.get("transparent", False) or (parent_builder is not None)
         orchestrator._render_tier = config.get("render_tier", "high_res")
-        
+
         orchestrator.configuration = {}
         orchestrator.tk_vars = {}
         orchestrator.topic_widgets = {}
@@ -40,15 +42,15 @@ class BuilderInitializer:
         """Bootstraps telemetry and communication services."""
         orchestrator.tracking_service = InteractionTelemetryService()
         orchestrator._initialize_mqtt_context(
-            orchestrator.json_filepath, 
-            Config.get_instance(), 
+            orchestrator.json_filepath,
+            Config.get_instance(),
             config.get("base_mqtt_topic_from_path")
         )
         orchestrator._initialize_widget_factory()
         orchestrator.layout_manager = BuilderLayoutManager(orchestrator)
         orchestrator.tracking_service.track(
-            orchestrator, 
-            orchestrator.tab_name, 
-            orchestrator.state_mirror_engine, 
+            orchestrator,
+            orchestrator.tab_name,
+            orchestrator.state_mirror_engine,
             orchestrator.base_mqtt_topic_from_path
         )

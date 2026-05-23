@@ -17,8 +17,8 @@ from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()  # Get the singleton instance
 
-from oaGui.Methods.formatting.i18n_utils import get_text
 from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
+from oaGui.Methods.formatting.i18n_utils import get_text
 from oaGui.Workers.compositing.sync_behavior import SyncBehavior
 
 

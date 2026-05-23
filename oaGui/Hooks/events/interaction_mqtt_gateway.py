@@ -5,9 +5,10 @@
 # Description: Gateway for incoming and outgoing MQTT broker traffic.
 
 from oaComProtocols.oaComMQTT.Methods.mqtt_topic_utils import generate_topic_path_from_filepath
-from oaOchestration.Constants.project_paths import GLOBAL_PROJECT_ROOT
-from oaGui.Hooks.events.mqtt_rebuild_handler import MqttRebuildHandler
 from oaGui.Hooks.events.interaction_dispatcher import InteractionDispatcher
+from oaGui.Hooks.events.mqtt_rebuild_handler import MqttRebuildHandler
+from oaOchestration.Constants.project_paths import GLOBAL_PROJECT_ROOT
+
 
 class InteractionMqttGatewayMixin:
     """Gateway for incoming and outgoing MQTT broker traffic."""
@@ -35,7 +36,7 @@ class InteractionMqttGatewayMixin:
 
         rebuild_topic = "OPEN-AIR/System/Control/UI/Rebuild"
         self.subscriber_router.subscribe_to_topic(
-            rebuild_topic, 
+            rebuild_topic,
             lambda msg: MqttRebuildHandler.handle_request(self, msg)
         )
 

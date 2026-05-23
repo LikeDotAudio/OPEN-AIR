@@ -1,6 +1,6 @@
 # oaGui/Entry.py
 #
-# Gatekeeper for the oaGui module. This file serves as the primary public API 
+# Gatekeeper for the oaGui module. This file serves as the primary public API
 # and orchestrator for the Graphical User Interface subsystem.
 #
 # Author: Anthony Peter Kuzub
@@ -25,6 +25,7 @@ if str(project_root) not in sys.path:
 from oaGui.Managers.display.engine_gui_display import EngineGuiDisplay
 from oaGui.Methods.entry.gui_starter import launch_main_gui_application as start_gui
 from oaGui.Methods.entry.test_runner import execute_module_unit_tests as _run_tests
+
 
 def run_tests():
     """Wrapper for atomic test execution."""

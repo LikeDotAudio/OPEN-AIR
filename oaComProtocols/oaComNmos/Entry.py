@@ -5,14 +5,11 @@
 # Description: Gatekeeper for the oaComNmos module.
 
 
-import sys
 import os
 import pathlib
-import signal
-import threading
-import socket
-import time
 import subprocess
+import sys
+import threading
 from pathlib import Path
 
 # Ensure project root is in sys.path for direct execution
@@ -22,18 +19,16 @@ if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
 # Standard OPEN-AIR Imports
-from oaLogging.Methods.matrix_gate import matrix_log
-from oaConfigurationManager.FileReaders.config_reader import Config
+from oaComProtocols.oaComNmos.Constants import settings
+from oaComProtocols.oaComNmos.Core.nmos_builder import build_device, build_node
 
 # Local module imports
 from oaComProtocols.oaComNmos.Core.utils import gen_id, get_ip
-from oaComProtocols.oaComNmos.Core.event_bus import nmos_event_bus
-from oaComProtocols.oaComNmos.Core.nmos_builder import build_node, build_device
-from oaComProtocols.oaComNmos.Constants import settings
-from oaComProtocols.oaComNmos.Managers import registration_manager
-from oaComProtocols.oaComNmos.Workers.sap_listener_worker import sap_listener_worker, heartbeat_worker
 from oaComProtocols.oaComNmos.Interface import connection_api
-from oaComProtocols.oaComNmos.IS07.transports import Is07Bridge # This uses internal MQTT client
+from oaComProtocols.oaComNmos.IS07.transports import Is07Bridge  # This uses internal MQTT client
+from oaComProtocols.oaComNmos.Managers import registration_manager
+from oaComProtocols.oaComNmos.Workers.sap_listener_worker import heartbeat_worker, sap_listener_worker
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- Global State Management ---
 # This state will be managed externally by ComProtocolManager or initialized internally if standalone.
@@ -53,13 +48,13 @@ global_state = {
 
 # --- Internal Managers/Components ---
 # These will be managed by the ComProtocolManager, but initialized internally here if not provided.
-_bridge_manager = None 
+_bridge_manager = None
 
 def initialize_global_state(registrar_url=None):
     """Initializes global state for NMOS module. Called by start()."""
     if not global_state.get("RUNNING", False):
         matrix_log("comms", "nmos", "initialize_global_state", "Initializing NMOS global state...", "INFO")
-        
+
         state = {
             "NODE_ID": gen_id(),
             "DEVICE_ID": gen_id(),
@@ -68,13 +63,13 @@ def initialize_global_state(registrar_url=None):
             "RUNNING": True,
             "BRIDGE": None # Will be set by start function
         }
-        
+
         host_ip = get_ip()
         state["NODE"] = build_node(state["NODE_ID"], host_ip, settings.PORT)
         state["DEVICE"] = build_device(state["DEVICE_ID"], state["NODE_ID"], host_ip, settings.PORT)
-        
+
         global_state.update(state) # Update the global_state dictionary
-        
+
         registration_manager.register_all_resources(
             global_state["REGISTRAR_URL"],
             global_state["NODE"],
@@ -98,22 +93,22 @@ def start(registrar_url=None, state_cache_manager=None, mqtt_connection_manager=
         return
 
     matrix_log("comms", "nmos", "start", "🚀 [NMOS] Starting NMOS bridge and API server...", "INFO")
-    
+
     # Initialize global state if not already done
     if not global_state.get("RUNNING", False):
         initialize_global_state(registrar_url)
-    
+
     # Initialize the bridge manager. It uses internal MQTT clients by default if none provided.
     # The `Is07Bridge` constructor handles internal MQTT connection if mqtt_connection_manager is None.
     _bridge_manager = Is07Bridge(global_state["REGISTRAR_URL"])
-    
+
     # Start Workers (SAP and Heartbeat)
     # These threads should ideally be managed by the ComProtocolManager or started here if self-contained.
     # For now, assume they are started here if needed for standalone operation.
     # If managed externally, these threads might be started by the manager.
     threading.Thread(target=sap_listener_worker, args=(global_state["REGISTRAR_URL"], global_state["NODE_ID"], global_state["DEVICE_ID"], get_ip(), global_state, registration_manager), daemon=True).start()
     threading.Thread(target=heartbeat_worker, args=(global_state["REGISTRAR_URL"], global_state["NODE_ID"], global_state, registration_manager), daemon=True).start()
-    
+
     # Start API Server (connection_api)
     connection_api.STATE["NODE"] = global_state["NODE"]
     connection_api.STATE["DEVICE"] = global_state["DEVICE"]
@@ -121,7 +116,7 @@ def start(registrar_url=None, state_cache_manager=None, mqtt_connection_manager=
     connection_api.STATE["FLOWS"] = global_state["FLOWS"]
     connection_api.STATE["SENDERS"] = global_state["SENDERS"]
     connection_api.STATE["STREAMS"] = global_state["STREAMS"]
-    
+
     api_thread = threading.Thread(target=connection_api.run_server, kwargs={"host": "0.0.0.0", "port": settings.PORT}, daemon=True)
     api_thread.start()
 
@@ -137,9 +132,9 @@ def stop():
     if _bridge_manager and _bridge_manager.is_running:
         _bridge_manager.stop()
         matrix_log("comms", "nmos", "stop", "NMOS Bridge stopped.", "INFO")
-    
+
     global_state["RUNNING"] = False
-    
+
     # Workers and API server are daemon threads and will exit with the main process.
     # If they were non-daemon, explicit stop logic would be needed here.
 
@@ -167,15 +162,12 @@ def run_tests():
     Discover and run tests in the local Tests/ directory using unittest via subprocess.
     Ensures isolation and proper sys.path handling.
     """
-    import subprocess
     import sys
-    import os
-    from pathlib import Path
 
     print(f"📡📥📥 [TEST] {Path(__file__).parent.name}: Starting automated test discovery...")
     current_dir = Path(__file__).parent.absolute()
     test_dir = current_dir / "Tests"
-    
+
     if not test_dir.exists():
         return True
 
@@ -184,10 +176,10 @@ def run_tests():
         if (project_root / "GEMINI.md").exists():
             break
         project_root = project_root.parent
-    
+
     env = os.environ.copy()
     env["PYTHONPATH"] = str(project_root) + os.pathsep + env.get("PYTHONPATH", "")
-    
+
     try:
         rel_test_dir = os.path.relpath(test_dir, project_root)
         result = subprocess.run(
@@ -211,7 +203,7 @@ if __name__ == "__main__":
     if not run_tests():
         print("❌ [CRITICAL] Tests failed. Aborting execution.")
         sys.exit(1)
-    
+
     # Standalone execution logic
     if len(sys.argv) > 1:
         cmd = sys.argv[1].lower()

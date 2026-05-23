@@ -4,7 +4,6 @@
 #
 # Description: Handles optimized destruction of Tkinter widget trees.
 
-from oaLogging.Methods.matrix_gate import matrix_log
 
 class GuiDestructionEngine:
     """Handles optimized destruction of Tkinter widget trees."""
@@ -18,12 +17,12 @@ class GuiDestructionEngine:
             # Check if we should preserve this specific child
             if preserve_tags and hasattr(child, 'tags') and any(tag in preserve_tags for tag in child.tags):
                  continue
-            
+
             # ⚡ SPECIAL CASE: Don't destroy the background patina label if it's managed externally
             if hasattr(container, 'panel_bg_label') and child == container.panel_bg_label:
                 continue
 
             child.destroy()
             destroyed_count += 1
-        
+
         return destroyed_count

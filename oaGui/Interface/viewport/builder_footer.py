@@ -6,6 +6,7 @@
 
 import tkinter as tk
 
+
 class BuilderFooter(tk.Frame):
     """Optional telemetry display footer for the Dynamic GUI Builder."""
     def __init__(self, parent, **kwargs):
@@ -16,10 +17,10 @@ class BuilderFooter(tk.Frame):
     def _init_labels(self):
         self.viewport_lbl = tk.Label(self, text="Viewport: 0x0", bg="#111111", fg="#888888", font=("Arial", 7))
         self.viewport_lbl.pack(side="left", padx=10)
-        
+
         self.content_lbl = tk.Label(self, text="Content: 0x0", bg="#111111", fg="#888888", font=("Arial", 7))
         self.content_lbl.pack(side="left", padx=10)
-        
+
         self.telemetry_geo_lbl = tk.Label(self, text="GEO: IDLE", bg="#111111", fg="#00FFFF", font=("Arial", 7))
         self.telemetry_geo_lbl.pack(side="right", padx=10)
 
@@ -30,11 +31,11 @@ class BuilderFooter(tk.Frame):
         """Updates the viewport and content dimension labels with a pulse effect."""
         new_view = f"Viewport: {width}x{height}"
         new_cont = f"Content: {req_w}x{req_h}"
-        
+
         if self.viewport_lbl.cget("text") != new_view:
             self.viewport_lbl.config(text=new_view, fg="#FFFFFF")
             self.after(300, lambda: self.viewport_lbl.config(fg="#888888") if self.winfo_exists() else None)
-        
+
         if self.content_lbl.cget("text") != new_cont:
             self.content_lbl.config(text=new_cont, fg="#FFFFFF")
             self.after(300, lambda: self.content_lbl.config(fg="#888888") if self.winfo_exists() else None)

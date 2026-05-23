@@ -5,8 +5,8 @@
 # Author: Anthony Peter Kuzub
 # Blog: www.Like.audio (Contributor to this project)
 #
-# Professional services for customizing and tailoring this software to your 
-# specific application can be negotiated. There is no charge to use, modify, 
+# Professional services for customizing and tailoring this software to your
+# specific application can be negotiated. There is no charge to use, modify,
 # or fork this software.
 #
 # Build Log: https://like.audio/category/software/spectrum-scanner/
@@ -15,10 +15,10 @@
 #
 # Version 20260501.1010.1
 #
-# The Discovery Engine is a critical component of the "Partitioned Architecture" 
-# and "Widget Registry" systems. It allows for decoupled development of new UI 
-# components. By decorating a class with @RegistryWidgetStore.register, any new 
-# widget is automatically discovered and wrapped by this engine, making it 
+# The Discovery Engine is a critical component of the "Partitioned Architecture"
+# and "Widget Registry" systems. It allows for decoupled development of new UI
+# components. By decorating a class with @RegistryWidgetStore.register, any new
+# widget is automatically discovered and wrapped by this engine, making it
 # instantly available to the Dynamic GUI Builder.
 
 import inspect
@@ -28,6 +28,7 @@ from loguru import logger
 
 from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
 from oaLogging.Methods.matrix_gate import matrix_log
+
 
 class WidgetDiscoveryEngine:
     """
@@ -92,7 +93,7 @@ class WidgetDiscoveryEngine:
                     logger.warning(f"⚠️ Registry class {cls_ref} missing static 'make' method.")
                     return None
 
-                # Ensure builder instance is passed if missing from context 
+                # Ensure builder instance is passed if missing from context
                 # to maintain the service chain.
                 if context and not hasattr(context, 'builder_instance'):
                     kwargs['builder_instance'] = builder_instance

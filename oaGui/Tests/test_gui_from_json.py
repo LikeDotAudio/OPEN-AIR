@@ -41,7 +41,7 @@ class TestUniversalGuiLoader(unittest.TestCase):
         # So mock_exists is argument 1, mock_builder_class is argument 2.
         # My previous assumption "top-most is first" was WRONG for unittest.mock.
         # Bottom-most decorator is FIRST argument.
-        
+
         mock_builder = MagicMock()
         mock_builder_class.return_value = mock_builder
 

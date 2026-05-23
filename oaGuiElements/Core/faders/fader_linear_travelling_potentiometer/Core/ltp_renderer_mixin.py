@@ -7,6 +7,7 @@
 import tkinter as tk
 
 from oaGuiElements.Core.Knobs.knob.Core.knob_renderer import _draw_pointer
+
 from ...fader.Core.scale import ScaleDrawer
 from ...fader.Core.track import TrackDrawer
 from .ltp_asset_generator import LTPAssetGenerator

@@ -5,7 +5,9 @@
 # Description: Orchestrates the initialization and launch of the main Tkinter application.
 
 import tkinter as tk
+
 from oaGui.Managers.display.engine_gui_display import EngineGuiDisplay
+
 
 def launch_main_gui_application():
     """

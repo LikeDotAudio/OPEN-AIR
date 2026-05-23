@@ -5,16 +5,19 @@
 # Description: Creator for procedural panel widgets.
 
 import tkinter as tk
+
 from PIL import ImageTk
 
 from oaGui.Core.factory.base_widget_creator import BaseWidgetCreator
 from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
 from oaGui.Workers.compositing.sync_behavior import SyncBehavior
+
 from .panel_generator import PanelGenerator
+
 
 class PanelWidget(tk.Frame):
     """A widget that displays a procedurally generated industrial panel."""
-    
+
     def __init__(self, master, config, **kwargs):
         super().__init__(master, **kwargs)
         self.config_data = config
@@ -22,14 +25,14 @@ class PanelWidget(tk.Frame):
         self.canvas.pack(fill=tk.BOTH, expand=True)
         self.panel_image = None
         self.tk_image = None
-        
+
         self.canvas.bind("<Configure>", self._on_resize)
-        
+
     def _on_resize(self, event):
         width = event.width
         height = event.height
         if width <= 1 or height <= 1: return
-        
+
         # Generate the panel
         self.panel_image = PanelGenerator.generate_procedural_panel(width, height, self.config_data)
         if self.panel_image:
@@ -41,13 +44,13 @@ class PanelWidget(tk.Frame):
 @RegistryWidgetStore.register("panel", "Panel")
 class BuilderPanelCreator(BaseWidgetCreator, SyncBehavior):
     """Creator for the procedural Panel widget."""
-    
+
     def _assemble_ui(self, parent_widget, config_data, context, **kwargs):
         """Assembles the Panel UI."""
         geom = config_data.get("geometry", {})
         width = geom.get("width", 200)
         height = geom.get("height", 150)
-        
+
         frame = PanelWidget(parent_widget, config_data, width=width, height=height)
         return frame, frame.canvas
 

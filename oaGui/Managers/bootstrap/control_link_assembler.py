@@ -6,10 +6,10 @@
 
 def assemble_system_control_links(sub_router, splinker_manager):
     """Subscribes the splinker manager to its dedicated system control topic."""
-    
+
     def _splinker_callback_bridge(message):
         splinker_manager.handle_mqtt_command(
-            topic=message.topic, 
+            topic=message.topic,
             payload=message.payload
         )
 

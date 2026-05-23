@@ -7,15 +7,15 @@
 import os
 import pathlib
 import tkinter as tk
+
 import orjson
 
 from oaConfigurationManager.FileReaders.config_reader import Config
-from oaLogging.Methods.matrix_gate import matrix_log
-
-from oaGui.FileReaders.layout_detectors.multi_window_detector import MultiWindowDetector
-from oaGui.FileReaders.layout_detectors.split_pane_detector import SplitPaneDetector
-from oaGui.FileReaders.layout_detectors.notebook_detector import NotebookDetector
 from oaGui.FileReaders.layout_detectors.equal_split_detector import EqualSplitDetector
+from oaGui.FileReaders.layout_detectors.multi_window_detector import MultiWindowDetector
+from oaGui.FileReaders.layout_detectors.notebook_detector import NotebookDetector
+from oaGui.FileReaders.layout_detectors.split_pane_detector import SplitPaneDetector
+from oaLogging.Methods.matrix_gate import matrix_log
 
 app_constants = Config.get_instance()
 
@@ -76,7 +76,7 @@ class FolderLayoutInterpreter:
         layout_file = path / "layout.json"
         if layout_file.is_file():
             return self._parse_layout_json(layout_file, path)
-        
+
         return self._parse_directory_listing(path)
 
     def _parse_file_as_layout(self, path: pathlib.Path) -> dict:
@@ -98,7 +98,7 @@ class FolderLayoutInterpreter:
         """Centralized interpreting logic for layout configuration dictionaries."""
         layout_type = layout_data.get("type", "unknown")
         behavior = layout_data.get("behavior", {})
-        
+
         parsed_data = {
             "overflow_ew": behavior.get("overflow_ew", "none"),
             "overflow_ns": behavior.get("overflow_ns", "none"),

@@ -7,7 +7,6 @@
 import inspect
 
 from oaGuiElements.Core.graphing.dynamic_bar_graph import DynamicBarGraph
-
 from oaLogging.Methods.matrix_gate import matrix_log
 
 

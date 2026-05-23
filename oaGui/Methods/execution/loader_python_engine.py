@@ -6,15 +6,15 @@
 
 import importlib.util
 import inspect
-import sys
 import pathlib
+import sys
 import tkinter as tk
 from tkinter import ttk
-from typing import Optional, Type
 
-from oaLogging.Methods.matrix_gate import matrix_log
 from oaLogging.Entry import vocal_capture
+from oaLogging.Methods.matrix_gate import matrix_log
 from oaOchestration.Core.path_initializer import GLOBAL_PROJECT_ROOT
+
 
 class LoaderPythonEngine:
     """
@@ -22,7 +22,7 @@ class LoaderPythonEngine:
     """
 
     @staticmethod
-    def load(path: pathlib.Path) -> Optional[Type]:
+    def load(path: pathlib.Path) -> type | None:
         """
         Dynamically imports a Python module and finds GUI classes.
         """
@@ -32,7 +32,7 @@ class LoaderPythonEngine:
 
         try:
             matrix_log("ui", "gui_builder", "load_module_from_path", f"📂 Loading GUI module from: {path.name}", "DEBUG")
-            
+
             try:
                 rel_path = path.resolve().relative_to(GLOBAL_PROJECT_ROOT)
                 package_parts = list(rel_path.with_suffix("").parts)

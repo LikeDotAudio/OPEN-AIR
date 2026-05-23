@@ -5,7 +5,9 @@
 # Description: Shared Base Class for photorealistic Canvas-based buttons.
 
 import tkinter as tk
+
 from oaGui.Methods.rendering.button_image_renderer import ButtonImageRenderer
+
 
 class CanvasButton(tk.Canvas):
     """
@@ -30,7 +32,7 @@ class CanvasButton(tk.Canvas):
             "corner_radius": corner_radius,
             "alpha": alpha
         }
-        
+
         self.text = text
         self.command = command
         self.font = font

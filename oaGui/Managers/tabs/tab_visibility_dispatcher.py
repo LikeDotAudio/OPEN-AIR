@@ -7,12 +7,12 @@
 def dispatch_tab_visibility_events(notebook_widget, event):
     """Notifies child widgets within tabs when they become visible or hidden."""
     selected_tab_id = notebook_widget.select()
-    
+
     for tab_id in notebook_widget.tabs():
         tab_frame = notebook_widget.nametowidget(tab_id)
         if not tab_frame.winfo_children():
             continue
-            
+
         content_widget = tab_frame.winfo_children()[0]
         if tab_id == selected_tab_id:
             if hasattr(content_widget, "_on_gui_visible"):

@@ -5,7 +5,7 @@
 # Description: Handles recursive merging of GUI blueprint configurations.
 
 import copy
-from typing import Dict
+
 
 class BlueprintMerger:
     """
@@ -13,7 +13,7 @@ class BlueprintMerger:
     """
 
     @staticmethod
-    def merge_blueprints(base: Dict, overrides: Dict) -> Dict:
+    def merge_blueprints(base: dict, overrides: dict) -> dict:
         """
         Recursively merges an override dictionary into a base dictionary.
 
@@ -36,5 +36,5 @@ class BlueprintMerger:
 
     # Legacy Alias
     @staticmethod
-    def merge(base: Dict, overrides: Dict) -> Dict:
+    def merge(base: dict, overrides: dict) -> dict:
         return BlueprintMerger.merge_blueprints(base, overrides)

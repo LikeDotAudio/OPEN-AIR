@@ -6,6 +6,7 @@
 
 import tkinter as tk
 
+
 class CommandRouterLegend(tk.Frame):
     """Encapsulates the symbol and color key sidebar."""
     def __init__(self, parent, **kwargs):

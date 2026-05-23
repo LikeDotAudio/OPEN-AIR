@@ -1,8 +1,8 @@
-import os
 import json
+import os
 import time
-from http.server import HTTPServer, SimpleHTTPRequestHandler
 import urllib.parse
+from http.server import HTTPServer, SimpleHTTPRequestHandler
 
 # Paths
 FRONTEND_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
@@ -23,7 +23,7 @@ def get_directory_tree(path):
                 tree["children"].append(get_directory_tree(full_path))
             elif entry.endswith('.json'):
                 try:
-                    with open(full_path, 'r', encoding='utf-8') as f:
+                    with open(full_path, encoding='utf-8') as f:
                         content = json.load(f)
                 except Exception as e:
                     content = {"error": f"Could not parse JSON: {e}"}
@@ -42,12 +42,13 @@ def get_grab_bag():
     GrabBagLoader). Returns a flat, categorized component list for the editor."""
     root = os.path.abspath(os.path.join(FRONTEND_DIR, "..", "oaGuiElements"))
     components = []
+    legends = {}  # merged enum lookups from every sample.json _LEGEND block
     for dirpath, _dirnames, filenames in os.walk(root):
         if "sample.json" not in filenames:
             continue
         full = os.path.join(dirpath, "sample.json")
         try:
-            with open(full, "r", encoding="utf-8") as f:
+            with open(full, encoding="utf-8") as f:
                 content = json.load(f)
         except Exception:
             continue
@@ -56,7 +57,17 @@ def get_grab_bag():
         meaningful = [p for p in rel_parts if p not in ("Core", "Assets", ".")]
         category = meaningful[0] if meaningful else "General"
         for key, schema in content.items():
-            # Skip non-widget entries (e.g. _LEGEND doc blocks have no "type").
+            # _LEGEND blocks enumerate allowed enum values (visualization_types,
+            # knob_styles, …). Merge them (union) into the global legends lookup.
+            if key == "_LEGEND" and isinstance(schema, dict):
+                for lk, lv in schema.items():
+                    if isinstance(lv, list):
+                        bucket = legends.setdefault(lk, [])
+                        for item in lv:
+                            if item not in bucket:
+                                bucket.append(item)
+                continue
+            # Skip other non-widget entries (no "type").
             if not isinstance(schema, dict) or "type" not in schema:
                 continue
             components.append({
@@ -67,7 +78,7 @@ def get_grab_bag():
                 "path": os.path.relpath(full, root),
             })
     components.sort(key=lambda c: (c["category"].lower(), c["name"].lower()))
-    return {"components": components}
+    return {"components": components, "legends": legends}
 
 
 class APIRequestHandler(SimpleHTTPRequestHandler):
@@ -127,14 +138,14 @@ class APIRequestHandler(SimpleHTTPRequestHandler):
 
     def do_GET(self):
         parsed_path = urllib.parse.urlparse(self.path)
-        
+
         # Serve the directory tree as JSON
         if parsed_path.path == '/api/tree':
             self.send_response(200)
             self.send_header('Content-Type', 'application/json')
             self.send_header('Access-Control-Allow-Origin', '*')
             self.end_headers()
-            
+
             tree = get_directory_tree(GUI_FRAMES_DIR)
             self.wfile.write(json.dumps(tree).encode('utf-8'))
             return
@@ -153,7 +164,7 @@ class APIRequestHandler(SimpleHTTPRequestHandler):
                 clean_rel = image_rel_path.lstrip('/')
                 abs_project_root = os.path.abspath(os.path.join(FRONTEND_DIR, ".."))
                 image_abs_path = os.path.abspath(os.path.join(abs_project_root, clean_rel))
-                
+
                 if image_abs_path.startswith(abs_project_root) and os.path.exists(image_abs_path):
                     self.send_response(200)
                     if image_abs_path.endswith('.png'): self.send_header('Content-Type', 'image/png')
@@ -164,15 +175,15 @@ class APIRequestHandler(SimpleHTTPRequestHandler):
                     with open(image_abs_path, 'rb') as f:
                         self.wfile.write(f.read())
                     return
-            
+
             self.send_response(404)
             self.end_headers()
             return
-            
+
         # Default to serving static files
         if parsed_path.path == '/':
             self.path = '/Core/Launch/index.html'
-        
+
         return super().do_GET()
 
 def run(server_class=HTTPServer, handler_class=APIRequestHandler, port=PORT):

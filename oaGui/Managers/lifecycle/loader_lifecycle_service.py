@@ -4,8 +4,9 @@
 #
 # Description: Handles the destruction and re-initialization of the GUI Frame using atomic services.
 
-from .ui_rebuild_orchestrator import orchestrate_ui_rebuild
 from .ui_cache_invalidator import invalidate_ui_render_caches
+from .ui_rebuild_orchestrator import orchestrate_ui_rebuild
+
 
 class LifecycleManagerMixin:
     """Mixin for destroying and recreating the GUI content via atomic services."""

@@ -65,7 +65,7 @@ class PreviewEngine:
             active_engine = self.state_mirror_engine
         else:
             active_engine = StateMirrorEngine(base_topic="PREVIEW", subscriber_router=None, root=None, state_cache_manager=None)
-            
+
         builder_config = {
             "state_mirror_engine": active_engine,
             "subscriber_router": self.subscriber_router,
@@ -107,12 +107,12 @@ class PreviewEngine:
                     data["geometry"].pop("height", None)
                 data.pop("width", None)
                 data.pop("height", None)
-                
+
                 # Recursively check children
                 for v in data.values():
                     self._strip_constraints(v)
             else:
-                # If it has a type, it's a widget. We stop stripping here 
+                # If it has a type, it's a widget. We stop stripping here
                 # to ensure child containers inside the JSON keep their sizes.
                 pass
         elif isinstance(data, list):

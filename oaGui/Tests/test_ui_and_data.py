@@ -10,14 +10,13 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-from oaGuiEditorWYSIWYG.FileReaders.file_reader import FileReader
-from oaGuiEditorWYSIWYG.FileWriters.file_writer import FileWriter
-
 from oaComBroker.Core.event_bus import event_bus
 
 # --- UI & Widget Construction ---
 from oaGui.FileReaders.scanner.folder_layout_interpreter import FolderLayoutInterpreter
 from oaGuiEditorWYSIWYG.Core.state import StateManager
+from oaGuiEditorWYSIWYG.FileReaders.file_reader import FileReader
+from oaGuiEditorWYSIWYG.FileWriters.file_writer import FileWriter
 
 # --- Data & Processing Utilities ---
 from oaGuiShowtime.Methods.group import group_markers

@@ -19,6 +19,7 @@ if str(project_root) not in sys.path:
 # Absolute imports for robustness in standalone mode
 from oaLogging.Methods.matrix_gate import matrix_log
 
+
 # Mock dependencies if not provided by the manager
 class MockMqttConnectionManager:
     def connect_to_broker(self, *args, **kwargs): pass
@@ -77,10 +78,10 @@ def start(mqtt_connection_manager=None, subscriber_router=None, **kwargs):
     """
     if _is_debug():
         matrix_log("comms", "smpte2138", "start", "🚀 [ST2138] Starting SMPTE2138 services...", "INFO")
-    
+
     start_bridge(mqtt_connection_manager, subscriber_router)
     start_monitor(mqtt_connection_manager, subscriber_router)
-    
+
     if _is_debug():
         matrix_log("comms", "smpte2138", "start", "✅ SMPTE2138 services started.", "SUCCESS")
 
@@ -127,7 +128,6 @@ def run_tests():
     """
     import subprocess
     import sys
-    from pathlib import Path
 
     print(f"📡📥📥 [TEST] {Path(__file__).parent.name}: Starting automated test discovery...")
     current_dir = Path(__file__).parent.absolute()

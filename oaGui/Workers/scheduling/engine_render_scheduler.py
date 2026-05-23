@@ -4,9 +4,10 @@
 #
 # Description: Orchestrates the non-blocking, asynchronous batching of functional widgets using atomic services.
 
+from ..rendering.applicator_widget_grid import apply_widget_to_grid
 from ..rendering.service_fast_render import render_fast_widget_placeholder
 from ..rendering.service_high_res_render import render_functional_widget
-from ..rendering.applicator_widget_grid import apply_widget_to_grid
+
 
 class EngineRenderScheduler:
     """Orchestrates the asynchronous batch processing of functional widgets via atomic services."""

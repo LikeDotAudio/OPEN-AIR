@@ -23,8 +23,8 @@ if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
 # --- Absolute Imports for Standalone Support ---
-from oaTranslator.Managers.yak_translator import YakTranslator
 from oaTranslator.Managers.instrument_controller import InstrumentController
+from oaTranslator.Managers.yak_translator import YakTranslator
 from oaTranslator.Managers.yak_trigger_handler import (
     handle_yak_monitor_traffic,
     register_monitor_callback,

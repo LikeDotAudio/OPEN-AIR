@@ -6,7 +6,9 @@
 # Handles scaling, scroll region synchronization, and filling the canvas with the inner build frame.
 
 import tkinter as tk
+
 from oaLogging.Methods.matrix_gate import matrix_log
+
 
 class CanvasViewportManager:
     """
@@ -18,13 +20,13 @@ class CanvasViewportManager:
         Initializes the canvas and inner scroll frame.
         """
         self.allow_horizontal_scroll = allow_horizontal_scroll
-        
+
         # 1. Primary Drawing Surface
         self.canvas = tk.Canvas(parent, background=bg, bd=0, highlightthickness=0)
-        
+
         # 2. Inner Content Container
         self.scroll_frame = tk.Frame(self.canvas, bd=0, highlightthickness=0, bg=bg)
-        
+
         # 3. Viewport Window Item
         self.window_id = self.canvas.create_window(
             (0, 0), window=self.scroll_frame, anchor="nw"
@@ -56,7 +58,7 @@ class CanvasViewportManager:
         new_w = viewport_w if not self.allow_horizontal_scroll else max(viewport_w, req_w)
         new_h = max(viewport_h, req_h)
 
-        matrix_log("gui", "gui_render", "synchronize_to_viewport", 
+        matrix_log("gui", "gui_render", "synchronize_to_viewport",
                    f"📏 [VIEWPORT] Sync -> View: {viewport_w}x{viewport_h} | "
                    f"Content Req: {req_w}x{req_h} | Target: {new_w}x{new_h}", "TRACE")
 

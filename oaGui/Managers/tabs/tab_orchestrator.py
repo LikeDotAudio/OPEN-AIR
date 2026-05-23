@@ -5,9 +5,11 @@
 # Description: Mixin for managing Tkinter Notebook tab events and visibility.
 
 from oaLogging.Methods.matrix_gate import matrix_log
+
+from .tab_editor_launcher import find_tab_orchestrator
 from .tab_lazy_populator import populate_tab_on_demand
 from .tab_visibility_dispatcher import dispatch_tab_visibility_events
-from .tab_editor_launcher import find_tab_orchestrator
+
 
 class TabOrchestratorMixin:
     """
@@ -34,7 +36,7 @@ class TabOrchestratorMixin:
             notebook = event.widget
             selected_tab_id = notebook.select()
             if not selected_tab_id: return
-            
+
             selected_tab_frame = notebook.nametowidget(selected_tab_id)
             tab_name = notebook.tab(selected_tab_id, "text")
 
@@ -44,12 +46,12 @@ class TabOrchestratorMixin:
             populate_tab_on_demand(self, selected_tab_frame, tab_name)
 
             self.last_selected_tab_name = tab_name
-            
+
             if selected_tab_frame.winfo_children():
                 content_widget = selected_tab_frame.winfo_children()[0]
                 if hasattr(content_widget, "_on_tab_selected") and callable(content_widget._on_tab_selected):
                     content_widget._on_tab_selected(event)
-                    
+
         except Exception as e:
             matrix_log("gui", "gui_shell", "_on_tab_change", f"❌ Error in _on_tab_change: {e}", "ERROR")
 
@@ -64,10 +66,10 @@ class TabOrchestratorMixin:
             # Identify what was clicked (tab, padding, or empty space)
             element = notebook.identify(event.x, event.y)
             matrix_log("gui", "gui_shell", "_on_notebook_right_click", f"🖱️ Notebook right-click at {event.x},{event.y}. Element: {element}", "DEBUG")
-            
+
             # ⚡ ROBUST IDENTIFICATION: Catch 'tab', 'label', 'text' or numeric indices
             is_tab_area = any(s in element for s in ["tab", "label", "text"]) or element.isdigit()
-            
+
             if not is_tab_area:
                 return
 

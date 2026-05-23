@@ -4,6 +4,6 @@
 #
 # Description: Gatekeeper for the JSON tree element.
 
-from .Core.json_tree import JsonTreeWidget, BuilderDataJsonTreeCreator
+from .Core.json_tree import BuilderDataJsonTreeCreator, JsonTreeWidget
 
 __all__ = ["JsonTreeWidget", "BuilderDataJsonTreeCreator"]

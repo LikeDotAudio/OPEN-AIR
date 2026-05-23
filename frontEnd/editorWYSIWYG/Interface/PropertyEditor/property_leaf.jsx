@@ -15,9 +15,23 @@
   const labelStyle = { flex: '0 0 42%', fontSize: 11, color: '#9aa', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' };
   const inputStyle = { flex: 1, minWidth: 0, background: '#111', color: '#eee', border: '1px solid #333', borderRadius: 3, padding: '2px 4px', fontSize: 11, outline: 'none' };
 
-  window.OaEdPropertyLeaf = ({ label, value, onChange, depth = 0 }) => {
+  window.OaEdPropertyLeaf = ({ label, value, onChange, depth = 0, options }) => {
     const [draft, setDraft] = React.useState(value);
     React.useEffect(() => setDraft(value), [value]);
+
+    // Enum dropdown driven by the library legends (see Constants/property_options).
+    if (options && options.length && typeof value !== 'boolean' && typeof value !== 'number') {
+      const list = options.includes(value) ? options : [value, ...options];
+      return (
+        <div style={rowStyle(depth)}>
+          <span style={labelStyle} title={label}>{label}</span>
+          <select style={{ ...inputStyle, cursor: 'pointer' }} value={value == null ? '' : value}
+            onChange={(e) => { setDraft(e.target.value); onChange(e.target.value); }}>
+            {list.map((o) => <option key={String(o)} value={o}>{String(o)}</option>)}
+          </select>
+        </div>
+      );
+    }
 
     if (typeof value === 'boolean') {
       return (

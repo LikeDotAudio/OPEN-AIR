@@ -7,26 +7,26 @@
 import tkinter as tk
 from tkinter import ttk
 
-from oaLogging.Methods.matrix_gate import matrix_log
 from oaConfigurationManager.FileReaders.config_reader import Config
-from oaGui.FileReaders.scanner.folder_recursive_scanner import FolderRecursiveScannerMixin
-from oaGui.Managers.persistence.cache_layout_store import CacheLayoutStore
-from oaGui.FileReaders.scanner.folder_layout_interpreter import FolderLayoutInterpreter
-from oaGui.Managers.interaction.interaction_navigation import InteractionNavigationMixin
-from oaGui.Managers.tabs.tab_orchestrator import TabOrchestratorMixin
-from oaGui.Managers.display.tab_window_manager import TabWindowManager
-from oaGuiEditorWYSIWYG.Managers.wysiwyg_editor import WysiwygEditor
-from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
 from oaGui.FileReaders.loader.loader_facade import LoaderFacade
+from oaGui.FileReaders.scanner.folder_layout_interpreter import FolderLayoutInterpreter
+from oaGui.FileReaders.scanner.folder_recursive_scanner import FolderRecursiveScannerMixin
+from oaGui.Hooks.registry.registry_widget_store import RegistryWidgetStore
+from oaGui.Interface.controls.top_toolbar import ApplicationToolbar
+from oaGui.Managers.display.tab_window_manager import TabWindowManager
+from oaGui.Managers.interaction.interaction_navigation import InteractionNavigationMixin
+from oaGui.Managers.persistence.cache_layout_store import CacheLayoutStore
+from oaGui.Managers.tabs.tab_orchestrator import TabOrchestratorMixin
+from oaGuiEditorWYSIWYG.Managers.wysiwyg_editor import WysiwygEditor
+from oaLogging.Methods.matrix_gate import matrix_log
 from oaOchestration.Constants.project_paths import LAYOUT_CACHE_PATH
 from oaStyle.Core.style import DEFAULT_THEME
-from oaGui.Interface.controls.top_toolbar import ApplicationToolbar
 
 # --- ATOMIC SERVICES ---
 from .app_igniter import ignite_application_build
+from .app_shutdown_service import orchestrate_app_shutdown
 from .post_build_finalizer import finalize_gui_settlement
 from .resize_handler import handle_global_resize
-from .app_shutdown_service import orchestrate_app_shutdown
 
 app_constants = Config.get_instance()
 

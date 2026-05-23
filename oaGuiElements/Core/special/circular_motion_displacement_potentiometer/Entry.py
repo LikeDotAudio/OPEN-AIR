@@ -4,6 +4,9 @@
 #
 # Description: Gatekeeper for the Circular Motion Displacement Potentiometer (CMDP) element.
 
-from .Core.circular_motion_displacement_potentiometer import CMDPWidget, BuilderCircularMotionDisplacementPotentiometerCreator
+from .Core.circular_motion_displacement_potentiometer import (
+    BuilderCircularMotionDisplacementPotentiometerCreator,
+    CMDPWidget,
+)
 
 __all__ = ["CMDPWidget", "BuilderCircularMotionDisplacementPotentiometerCreator"]

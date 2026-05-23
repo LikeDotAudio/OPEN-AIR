@@ -5,12 +5,12 @@
 # Description: Encapsulates Tkinter grid column management logic.
 
 import tkinter as tk
-from typing import List, Dict
+
 
 class GridColumnConfigurator:
     """Encapsulates Tkinter grid column management logic."""
     @staticmethod
-    def apply_sizing(container: tk.Widget, num_columns: int, sizing_info: List[Dict]):
+    def apply_sizing(container: tk.Widget, num_columns: int, sizing_info: list[dict]):
         """Configures grid weights and minimum sizes for the target container."""
         for col_idx in range(num_columns):
             info = sizing_info[col_idx] if col_idx < len(sizing_info) else {}

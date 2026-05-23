@@ -4,10 +4,11 @@
 #
 # Description: Orchestrates the destruction and recreation sequence for the GUI content.
 
-from oaLogging.Methods.matrix_gate import matrix_log
-from oaGui.Methods.execution.engine_destruction_service import GuiDestructionEngine
 from oaGui.Methods.discovery.folder_path_resolver import BuilderPathResolver
+from oaGui.Methods.execution.engine_destruction_service import GuiDestructionEngine
 from oaGui.Workers.compositing.engine_visual_effects import EngineVisualEffects
+from oaLogging.Methods.matrix_gate import matrix_log
+
 
 def orchestrate_ui_rebuild(lifecycle_instance):
     """Executes the high-fidelity UI reconstruction pipeline."""
@@ -48,31 +49,31 @@ def orchestrate_ui_rebuild(lifecycle_instance):
 def _finalize_rebuild_sequence(lifecycle_instance, tab_name):
     """Handles settling and state restoration after reconstruction."""
     if not lifecycle_instance.winfo_exists(): return
-    
+
     matrix_log("ui", "lifecycle", "rebuild", f"✅ Build sequence complete for '{tab_name}'", "INFO")
 
     def _settle():
         if not lifecycle_instance.winfo_exists(): return
-        
+
         # Geometry sync
         if hasattr(lifecycle_instance, 'layout_manager') and \
            getattr(lifecycle_instance, 'canvas', None) and \
            lifecycle_instance.canvas.winfo_exists():
             lifecycle_instance.layout_manager.perform_canvas_resize(
-                lifecycle_instance.canvas.winfo_width(), 
+                lifecycle_instance.canvas.winfo_width(),
                 lifecycle_instance.canvas.winfo_height()
             )
 
-        if hasattr(lifecycle_instance, '_trigger_reslice_all'): 
+        if hasattr(lifecycle_instance, '_trigger_reslice_all'):
             lifecycle_instance._trigger_reslice_all()
-            
-        if hasattr(lifecycle_instance, '_publish_initial_widget_states'): 
+
+        if hasattr(lifecycle_instance, '_publish_initial_widget_states'):
             lifecycle_instance._publish_initial_widget_states(lifecycle_instance.configuration)
-            
+
         if hasattr(lifecycle_instance, 'on_complete_callback') and \
-           lifecycle_instance.on_complete_callback: 
+           lifecycle_instance.on_complete_callback:
             lifecycle_instance.on_complete_callback()
-            
+
         lifecycle_instance._is_rebuilding = False
 
     lifecycle_instance.after(200, _settle)

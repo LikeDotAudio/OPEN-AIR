@@ -6,6 +6,7 @@
 
 import tkinter as tk
 
+
 def render_fast_widget_placeholder(parent, widget_data, path, builder):
     """Constructs a sized frame to represent a widget without functional overhead."""
     geom = widget_data.get("geometry", {})
@@ -13,9 +14,9 @@ def render_fast_widget_placeholder(parent, widget_data, path, builder):
     height = widget_data.get("height") or geom.get("height")
 
     placeholder = tk.Frame(
-        parent, 
-        bg="#3d3d3d", 
-        highlightbackground="#555555", 
+        parent,
+        bg="#3d3d3d",
+        highlightbackground="#555555",
         highlightthickness=1
     )
 
@@ -34,6 +35,6 @@ def render_fast_widget_placeholder(parent, widget_data, path, builder):
 
     if hasattr(builder, 'bind_to_widget'):
         builder.bind_to_widget(placeholder)
-        
+
     placeholder._oca_path = path
     return placeholder

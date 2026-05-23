@@ -138,9 +138,19 @@ window.WidgetFactory = ({ nodeName, node, path_prefix = '', jsonPath }) => {
   }
 
   // 4. Render the registered component
-  const wrapperStyle = FILL_CONTAINERS.includes(node.type)
+  let wrapperStyle = FILL_CONTAINERS.includes(node.type)
     ? { ...gridStyles, height: '100%', minHeight: 0, display: 'flex', flexDirection: 'column' }
     : gridStyles;
+
+  // Explicit width/height (percent string or px number), e.g. set by the WYSIWYG
+  // editor's resize handles. Only applied when present, so existing containers
+  // that don't declare a size keep their fill/auto behavior.
+  const _lw = node.layout?.width, _lh = node.layout?.height;
+  if (_lw != null || _lh != null) {
+    wrapperStyle = { ...wrapperStyle };
+    if (_lw != null) wrapperStyle.width = typeof _lw === 'number' ? `${_lw}px` : _lw;
+    if (_lh != null) { wrapperStyle.height = typeof _lh === 'number' ? `${_lh}px` : _lh; wrapperStyle.minHeight = 0; }
+  }
 
   return (
     <div style={wrapperStyle} className={`widget-wrapper ${node.type}`} data-oca-path={jsonPath}>

@@ -4,7 +4,8 @@
 #
 # Description: Handles recursive schema normalization for GUI blueprints.
 
-from typing import Any, Dict, Optional
+from typing import Any
+
 
 class JsonSchemaNormalizer:
     """
@@ -12,7 +13,7 @@ class JsonSchemaNormalizer:
     """
 
     @staticmethod
-    def normalize(config: Any, root: Optional[Dict] = None) -> Any:
+    def normalize(config: Any, root: dict | None = None) -> Any:
         """
         Recursively applies schema normalization to a configuration tree.
 
@@ -21,7 +22,7 @@ class JsonSchemaNormalizer:
             root (dict): The root of the entire tree (for cross-references).
         """
         from oaGui.FileReaders.standardizers.widget_schema_normalizer import WidgetSchemaNormalizer
-        
+
         if root is None:
             root = config if isinstance(config, dict) else {}
 

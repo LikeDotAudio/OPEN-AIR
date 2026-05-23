@@ -10,10 +10,10 @@ import random
 
 from PIL import Image
 
+from oaGuiElements.Constants.gui_constants import DEFAULT_PANEL_CONFIG
 from oaLogging.Methods.matrix_gate import matrix_log
 from oaStateCache.Core.work_stealing_pool import WorkStealingPool
 
-from oaGuiElements.Constants.gui_constants import DEFAULT_PANEL_CONFIG
 from .panel_generator import PanelGenerator
 
 # ⚡ PERSISTENCE: The pool lives for the duration of the application.

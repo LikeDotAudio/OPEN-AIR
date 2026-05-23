@@ -6,6 +6,7 @@
 
 import pathlib
 
+
 def retrieve_cached_layout_info(scanner, path: pathlib.Path):
     """
     Retrieves layout information for a given path, using a cache to avoid redundant parsing.
@@ -25,8 +26,8 @@ def retrieve_cached_layout_info(scanner, path: pathlib.Path):
 
     layout_info = scanner.layout_parser.parse_directory(path)
     layout_info["mtime"] = current_mtime
-    
+
     if hasattr(scanner, '_layout_cache'):
         scanner._layout_cache[path_str] = layout_info
-        
+
     return layout_info

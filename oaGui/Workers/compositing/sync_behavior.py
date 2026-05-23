@@ -4,11 +4,11 @@
 #
 # Description: Defines behavior for synchronizing background textures across the UI tree.
 
-import inspect
 import tkinter as tk
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Methods.matrix_gate import matrix_log
+
 from .engine_visual_effects import EngineVisualEffects
 
 
@@ -45,17 +45,17 @@ class SyncBehavior:
                     canvas.configure(bg=p_bg)
 
                 # ⚡ SLICING: Use stored slice method if available
-                # Note: Transparent widgets are already registered with the builder's 
+                # Note: Transparent widgets are already registered with the builder's
                 # centralized registry via EngineVisualEffects.
                 if hasattr(widget, '_perform_background_slice'):
                     widget._perform_background_slice()
-                
+
             except Exception as e:
                 matrix_log("UI", "GUI_MANAGER", "perform_sync", f"perform_sync error for {widget_name}: {e}", level="TRACE")
 
         # Sync immediately once the widget is mapped to the screen
         widget.bind("<Map>", perform_sync, add="+")
-        
-        # ⚡ OPTIMIZATION: Removed parent.bind("<Configure>"). 
+
+        # ⚡ OPTIMIZATION: Removed parent.bind("<Configure>").
         # This was causing layout thrashing in dense modules like EDAC.
         # Background updates are now driven by the Orchestrator's debounced _trigger_reslice_all().

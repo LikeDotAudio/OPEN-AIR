@@ -52,9 +52,13 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
 
     const topic = `OpenAir/Gui${path_prefix}/${nodeName}`;
 
-    // Determine default value
+    // Determine default value. The canonical value pillar is value.default_value
+    // (checked first); domain.primary.value_default and flat value_default are
+    // legacy fallbacks.
     let defaultVal = 0;
-    if (node.domain?.primary?.value_default !== undefined) {
+    if (node.value?.default_value !== undefined) {
+        defaultVal = node.value.default_value;
+    } else if (node.domain?.primary?.value_default !== undefined) {
         defaultVal = node.domain.primary.value_default;
     } else if (node.value_default !== undefined) {
         defaultVal = node.value_default;
@@ -206,11 +210,22 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
         if (type === 'SelectorSwitch') Widget = window.SelectorSwitch;
         else if (type.toLowerCase().includes('cmdp')) Widget = window.CMDP || window.Knob;
         else if (type.toLowerCase().includes('mdp')) Widget = window.MDP || window.Knob;
-        
+
+        // The rotary Knob fits its GRID CELL (like the Python canvas does): fill the
+        // cell width, cap at the configured geometry size, and run fluid so the SVG
+        // re-measures + redraws crisply at the cell size instead of overflowing at a
+        // fixed 200px. SelectorSwitch/CMDP/MDP size themselves and are left as-is.
+        const isRotaryKnob = Widget === window.Knob;
+        const knobMax = window.oaCssLen(node.geometry?.width || node.layout?.width || 200);
+        const knobWrapStyle = isRotaryKnob
+            ? { ...style, width: '100%', maxWidth: knobMax, alignItems: 'center' }
+            : style;
+        const knobCfg = isRotaryKnob ? { ...fluidConfig, fluid: true } : fluidConfig;
+
         return (
-            <div style={style}>
+            <div style={knobWrapStyle}>
                 <span style={titleStyle}>{title}</span>
-                {Widget ? <Widget value={val} onChange={setVal} config={fluidConfig} size={100}/> : <div style={{width: '100px', height: '100px', borderRadius:'50%', background: '#444'}}></div>}
+                {Widget ? <Widget value={val} onChange={setVal} config={knobCfg} size={100}/> : <div style={{width: '100px', height: '100px', borderRadius:'50%', background: '#444'}}></div>}
             </div>
         );
     }

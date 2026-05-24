@@ -44,9 +44,11 @@ const FaderDial = ({ value, onChange, config }) => {
     const fmtLen = (v) => (Number.isFinite(v) ? v.toFixed(decimals) : String(v ?? '')).length;
     const valueChars = Math.max(fmtLen(min), fmtLen(max), decimals + 2);
 
-    const [inputValue, setInputValue] = React.useState((value !== undefined ? value : min).toFixed(decimals));
+    // value may arrive as a string (e.g. "500" default) — coerce before toFixed.
+    const safeNum = (v) => { const n = parseFloat(v); return Number.isFinite(n) ? n : min; };
+    const [inputValue, setInputValue] = React.useState(safeNum(value).toFixed(decimals));
     React.useEffect(() => {
-        setInputValue((value !== undefined ? value : min).toFixed(decimals));
+        setInputValue(safeNum(value).toFixed(decimals));
     }, [value]);
 
     const handleTextChange = (e) => setInputValue(e.target.value);
@@ -58,7 +60,7 @@ const FaderDial = ({ value, onChange, config }) => {
             onChange(rounded);
             setInputValue(rounded.toFixed(decimals));
         } else {
-            setInputValue((value !== undefined ? value : min).toFixed(decimals));
+            setInputValue(safeNum(value).toFixed(decimals));
         }
     };
     const handleTextKeyDown = (e) => { if (e.key === 'Enter') { handleTextBlur(); e.target.blur(); } };
@@ -139,7 +141,7 @@ const FaderDial = ({ value, onChange, config }) => {
 
     // Decompose: fader = coarse part (multiples of step_coarse), knob = fine part
     // (step_fine increments). They add up and move independently.
-    const value0 = (value !== undefined && value !== null) ? value : min;
+    const value0 = safeNum(value);
     const coarse = Math.floor(value0 / stepCoarse) * stepCoarse;
     const fine = value0 - coarse;
     const knobVal = Math.max(0, Math.min(knobSteps - 1, Math.round(fine / stepFine)));

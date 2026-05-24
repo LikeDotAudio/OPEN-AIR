@@ -1,239 +1,332 @@
 /**
  * NeedleMeter Component
  * Author: Anthony Peter Kuzub / Gemini (Collaborator)
- * Version: 20260507.1300.1
+ * Version: 20260524.0300.0
  *
- * Description: Analog-style needle meter with ballistics and high-fidelity bezel shapes.
- * Robust parameter extraction for diverse JSON configurations.
+ * Analog needle meter with ballistics, tilt (center/viewable angle + direction),
+ * color-zone limits, transparency, and the full set of procedural bezel "window"
+ * shapes ported from oaRustCore/oa_needle_geometry_rs (gem, super_gem, octagon,
+ * triangle, pyramid, hex, hotdog/cylinder, squircle/squimonde/squectangle,
+ * trapezoid/badge, crest/shield, parking_meter, stereo_diamond,
+ * intersecting_overlay). Shapes are scaled-to-fit the widget box (the desktop
+ * grows the canvas instead; the web fits it).
  */
 
-const BEZEL_CONFIGS = {
-    "gem": { expansion: 3.06, yShift: 0.5 },
-    "parking_meter": { expansion: 4.32, yShift: 0.5 },
-    "hotdog": { expansion: 1.0, yShift: 1.30 },
-    "squircle": { expansion: 1.0, yShift: 0.4 },
-    "trapezoid": { expansion: 1.0, yShift: 0.3 },
-    "default": { expansion: 1.0, yShift: 0.0 }
+// --- Bezel shape geometry (ported from oa_needle_geometry_rs) -----------------
+// Each builder returns math points [[x, y], ...] (y up), pivot at (0,0), built
+// at a base radius R0; we scale-to-fit afterward. yShift moves the body up.
+const R0 = 100;
+const _Y = { hotdog: 1.30, pyramid: 0.5, triangle: 0.5, parking_meter: 0.5, hex: 0.5, octagon: 0.9, squircle: 0.4, squimonde: 0.014, squectangle: 0.4, crest: 0.2, badge: 0.3, trapezoid: 0.3, gem: 0.5, super_gem: 0.5, stereo_diamond: 0.0, intersecting_overlay: 0.0, default: 0.0 };
+// constants (from oaGuiElements meter_needle constants.py)
+const C = {
+  GEM_EXP: 3.06, GEM_W: 0.51, GEM_BASE_H: 0.3, GEM_SH_W: 0.69, GEM_SH_H: 0.6, GEM_PEAK_H: 0.98,
+  HEX_EXP: 1.4, HEX_TW: 1.2, HEX_MW: 1.8, HEX_MH: 0.8, HEX_TH: 1.8,
+  OCT_EXP: 1.4, TRI_EXP: 4.32, TRI_BW: 1.8, TRI_PH: 1.7,
+  PM_EXP: 4.32, PY_EXP: 4.32, PY_BW: 1.8, PY_PH: 1.7,
+  HOT_WS: 1.9, HOT_CR: 1.01, HOT_CY: 1.01, CYL_WS: 1.2, CYL_CR: 0.65, CYL_CY: 0.6, CYL_STEPS: 10,
+  SQ_N: 3.5, SQ_W: 1.0, SQ_H: 1.0, SQ_STEPS: 40, SQT_W: 1.7, SQT_H: 0.85,
+  TZ_TW: 1.6, TZ_TH: 1.6, TZ_BW: 1.3,
+  CR_STEPS: 15, CR_TW: 1.5, CR_TH: 1.76, CR_BH: 0.6,
+  SD_W: 1.4, SD_H: 1.0, SD_FW: 0.6,
+  IO_W: 1.77, IO_H: 1.0, IO_SK: 0.3, IO_CR: 0.4,
 };
 
-function getBezelPath(ctx, shape, centerX, centerY, radius) {
-    const cfg = BEZEL_CONFIGS[shape] || BEZEL_CONFIGS.default;
-    const r = radius * cfg.expansion;
-    const yShift = cfg.yShift * radius;
+const SHAPE_BUILDERS = {
+  gem: (r, ys) => { const g = r * C.GEM_EXP; return [[0, C.GEM_BASE_H*g+ys], [C.GEM_W*g, C.GEM_BASE_H*g+ys], [C.GEM_SH_W*g, C.GEM_SH_H*g+ys], [0, C.GEM_PEAK_H*g+ys], [-C.GEM_SH_W*g, C.GEM_SH_H*g+ys], [-C.GEM_W*g, C.GEM_BASE_H*g+ys]]; },
+  super_gem: (r, ys) => { const g = r * C.GEM_EXP; return [[0, -(C.GEM_BASE_H*g)+ys], [C.GEM_W*g, -(C.GEM_BASE_H*g)+ys], [C.GEM_SH_W*g, -(C.GEM_SH_H*g)+ys], [0, -(C.GEM_PEAK_H*g)+ys], [-C.GEM_SH_W*g, -(C.GEM_SH_H*g)+ys], [-C.GEM_W*g, -(C.GEM_BASE_H*g)+ys]]; },
+  octagon: (r, ys) => { const o = r * C.OCT_EXP; const p = []; for (let i = 0; i < 8; i++) { const a = (22.5 + i*45) * Math.PI/180; p.push([o*Math.cos(a), o*Math.sin(a)+ys]); } return p; },
+  triangle: (r, ys) => { const t = r * C.TRI_EXP; return [[0, ys], [C.TRI_BW*t, C.TRI_PH*t+ys], [-C.TRI_BW*t, C.TRI_PH*t+ys]]; },
+  pyramid: (r, ys) => { const t = r * C.PY_EXP; return [[0, C.PY_PH*t+ys], [C.PY_BW*t, ys], [-C.PY_BW*t, ys]]; },
+  hex: (r, ys) => { const g = r * C.HEX_EXP; return [[0, ys], [C.HEX_TW*g, ys], [C.HEX_MW*g, C.HEX_MH*g+ys], [C.HEX_TW*g, C.HEX_TH*g+ys], [-C.HEX_TW*g, C.HEX_TH*g+ys], [-C.HEX_MW*g, C.HEX_MH*g+ys], [-C.HEX_TW*g, ys]]; },
+  trapezoid: (r, ys) => [[0, ys], [C.TZ_BW*r, ys], [C.TZ_TW*r, C.TZ_TH*r+ys], [-C.TZ_TW*r, C.TZ_TH*r+ys], [-C.TZ_BW*r, ys]],
+  parking_meter: (r, ys) => { const pr = r*C.PM_EXP, wv = C.TRI_BW*pr, hv = C.TRI_PH*pr; const ar = Math.hypot(wv, hv); const a0 = Math.atan2(hv, wv), a1 = Math.atan2(hv, -wv); const p = [[0, ys]]; for (let i = 0; i <= 20; i++) { const a = a0 + (a1-a0)*(i/20); p.push([ar*Math.cos(a), ar*Math.sin(a)+ys]); } return p; },
+  hotdog: (r, ys) => _capsule(r, ys, C.HOT_WS, C.HOT_CR, C.HOT_CY),
+  cylinder: (r, ys) => _capsule(r, ys, C.CYL_WS, C.CYL_CR, C.CYL_CY),
+  squircle: (r, ys) => _squircle(r, ys, C.SQ_W, C.SQ_H, false),
+  squectangle: (r, ys) => _squircle(r, ys, C.SQT_W, C.SQT_H, false),
+  squimonde: (r, ys) => _squircle(r, ys, C.SQ_W, C.SQ_H, true),
+  crest: (r, ys) => { const p = [[0, ys]]; const bh = C.CR_BH*r; for (let i = 1; i <= C.CR_STEPS; i++) { const yu = bh*(i/C.CR_STEPS); p.push([C.CR_TW*r*Math.sqrt(yu/bh), yu+ys]); } p.push([C.CR_TW*r, C.CR_TH*r+ys]); p.push([-C.CR_TW*r, C.CR_TH*r+ys]); p.push([-C.CR_TW*r, bh+ys]); for (let i = C.CR_STEPS-1; i >= 0; i--) { let yu = bh*(i/C.CR_STEPS); if (yu < 0.01) yu = 0; p.push([-C.CR_TW*r*Math.sqrt(yu/bh), yu+ys]); } return p; },
+  stereo_diamond: (r, ys) => { const w = C.SD_W*r, h = C.SD_H*r, fw = C.SD_FW*r; return [[fw, h+ys], [w, ys], [fw, -h+ys], [-fw, -h+ys], [-w, ys], [-fw, h+ys]]; },
+  intersecting_overlay: (r, ys) => { const w = C.IO_W*r, h = C.IO_H*r, sk = C.IO_SK*r, cr = C.IO_CR*r; const p = [[-w+sk, h+ys], [w+sk, h+ys], [w-sk, -h+ys]]; for (let i = 0; i <= 20; i++) { const a = Math.PI + (Math.PI*i/20); p.push([(w-sk)+cr*Math.cos(a), -h+cr*Math.sin(a)+ys]); } p.push([-w-sk, -h+ys]); return p; },
+};
+function _capsule(r, ys, wsF, crF, cyF) {
+  const ws = wsF*r, rc = crF*r, ccy = cyF*r; const p = [[0, ys], [ws, ys]];
+  for (let i = 0; i <= C.CYL_STEPS; i++) { const a = (-90 + 180*i/C.CYL_STEPS)*Math.PI/180; p.push([ws+rc*Math.cos(a), ccy+rc*Math.sin(a)+ys]); }
+  for (let i = 0; i <= C.CYL_STEPS; i++) { const a = (90 + 180*i/C.CYL_STEPS)*Math.PI/180; p.push([-ws+rc*Math.cos(a), ccy+rc*Math.sin(a)+ys]); }
+  p.push([0, ys]); return p;
+}
+function _squircle(r, ys, wf, hf, rot) {
+  const n = C.SQ_N, w = wf*r, h = hf*r, p = [];
+  const cr = Math.cos(Math.PI/4), sr = Math.sin(Math.PI/4);
+  for (let i = 0; i <= C.SQ_STEPS; i++) {
+    const t = -Math.PI/2 + 2*Math.PI*i/C.SQ_STEPS, c = Math.cos(t), s = Math.sin(t);
+    const x = w*(c>=0?1:-1)*Math.pow(Math.abs(c), 2/n);
+    const yr = h*(s>=0?1:-1)*Math.pow(Math.abs(s), 2/n);
+    if (rot) p.push([x*cr - yr*sr, (x*sr + yr*cr) + h + ys]);
+    else p.push([x, yr + h + ys]);
+  }
+  return p;
+}
+function _shapeKey(shape) {
+  if (!shape) return null;
+  let k = String(shape).toLowerCase();
+  if (SHAPE_BUILDERS[k]) return k;
+  if (k === 'badge') return 'trapezoid';
+  if (k === 'shield') return 'crest';
+  return null;
+}
 
-    ctx.beginPath();
-    if (shape === 'gem') {
-        const wF = 0.51 * r; const bH = 0.3 * r; const sW = 0.69 * r; const sH = 0.6 * r; const pH = 0.98 * r;
-        ctx.moveTo(centerX, centerY - (bH + yShift));
-        ctx.lineTo(centerX + wF, centerY - (bH + yShift));
-        ctx.lineTo(centerX + sW, centerY - (sH + yShift));
-        ctx.lineTo(centerX, centerY - (pH + yShift));
-        ctx.lineTo(centerX - sW, centerY - (sH + yShift));
-        ctx.lineTo(centerX - wF, centerY - (bH + yShift));
-    } else if (shape === 'parking_meter') {
-        const arcR = r * 0.8;
-        ctx.arc(centerX, centerY - yShift, arcR, -Math.PI * 0.8, -Math.PI * 0.2);
-        ctx.lineTo(centerX, centerY - yShift);
-    } else if (shape === 'hotdog') {
-        const wS = 0.9 * r; const rC = 1.01 * r; const cY = 1.01 * r;
-        ctx.moveTo(centerX - wS, centerY + yShift);
-        ctx.arc(centerX + wS, centerY - (cY - yShift), rC, Math.PI/2, -Math.PI/2, true);
-        ctx.arc(centerX - wS, centerY - (cY - yShift), rC, -Math.PI/2, Math.PI/2, true);
-    } else if (shape === 'trapezoid') {
-        const bW = 1.3 * r; const tW = 1.6 * r; const tH = 1.6 * r;
-        ctx.moveTo(centerX - bW, centerY + yShift);
-        ctx.lineTo(centerX + bW, centerY + yShift);
-        ctx.lineTo(centerX + tW, centerY - (tH - yShift));
-        ctx.lineTo(centerX - tW, centerY - (tH - yShift));
-    } else {
-        ctx.arc(centerX, centerY, radius + 5, Math.PI, 0);
-        ctx.lineTo(centerX, centerY);
-    }
-    ctx.closePath();
+// Layout a bezel scaled-to-fit (width,height). Returns {pts, pivotX, pivotY, arcRadius} or null.
+function bezelLayout(shape, width, height, frameWidth) {
+  const key = _shapeKey(shape);
+  if (!key) return null;
+  const raw = SHAPE_BUILDERS[key](R0, (_Y[key] || 0) * R0);
+  // to canvas-relative (y down), origin at pivot (0,0)
+  let minx = Infinity, maxx = -Infinity, miny = Infinity, maxy = -Infinity;
+  const cpts = raw.map(([x, y]) => { const cx = x, cy = -y; if (cx<minx)minx=cx; if (cx>maxx)maxx=cx; if (cy<miny)miny=cy; if (cy>maxy)maxy=cy; return [cx, cy]; });
+  const bw = (maxx - minx) || 1, bh = (maxy - miny) || 1;
+  const pad = frameWidth + 6;
+  const scale = Math.min((width - pad) / bw, (height - pad) / bh);
+  const offX = (width - bw * scale) / 2 - minx * scale;
+  const offY = (height - bh * scale) / 2 - miny * scale;
+  const pts = cpts.map(([x, y]) => [offX + x * scale, offY + y * scale]);
+  return { pts, pivotX: offX, pivotY: offY, arcRadius: 0.32 * bw * scale };
+}
+
+function _tracePath(ctx, pts) {
+  ctx.beginPath();
+  ctx.moveTo(pts[0][0], pts[0][1]);
+  for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1]);
+  ctx.closePath();
+}
+
+// --- Vintage face textures (reuse the WASM panel engine, window.OAPanels) ------
+// Map a face style/patina to a panel config; the generated RGBA is cached per
+// (style, size) in an offscreen canvas and drawn (clipped) as the meter face.
+const FACE_PRESETS = {
+  cream:        { parameters: { base_material: { color: '#f0ead6', texture_type: 'flat' }, paint_layer: { color: '#ffffff', opacity: 0.06 }, edge_wear: { enabled: true, fade_depth: 22, vignette_intensity: 0.35 } } },
+  new_old_stock:{ parameters: { base_material: { color: '#f0ead6', texture_type: 'flat' }, paint_layer: { color: '#ffffff', opacity: 0.06 }, edge_wear: { enabled: true, fade_depth: 22, vignette_intensity: 0.35 } } },
+  vintage_aged: { parameters: { base_material: { color: '#d8cdb0', texture_type: 'wrinkle' }, grime: { stain_count: 6, color: '#6b5a3a', opacity: 0.22, stain_spread: 28 }, dust: { enabled: true, intensity: 0.5 }, edge_wear: { enabled: true, fade_depth: 26, vignette_intensity: 0.5 } } },
+  bakelite:     { parameters: { base_material: { color: '#2a211c', texture_type: 'flat' }, paint_layer: { color: '#000000', opacity: 0.2, gradient_intensity: 0.3 }, edge_wear: { enabled: true, fade_depth: 22, vignette_intensity: 0.6 } } },
+  tungsten:     { parameters: { base_material: { color: '#f3b86a', texture_type: 'flat' }, studio_haze: { enabled: true, intensity: 0.22 }, edge_wear: { enabled: true, fade_depth: 22, vignette_intensity: 0.4 } } },
+  wood:         { parameters: { base_material: { color: '#5a3a22', texture_type: 'brushed', grain_direction: 'horizontal', grain_intensity: 0.5 }, edge_wear: { enabled: true, fade_depth: 26, vignette_intensity: 0.5 } } },
+};
+const _FACE_CACHE = (window._OA_FACE_CACHE = window._OA_FACE_CACHE || new Map());
+
+function getFaceTexture(styleKey, w, h) {
+  const cfg = FACE_PRESETS[String(styleKey || '').toLowerCase()];
+  if (!cfg || w < 2 || h < 2) return null;
+  const k = `${String(styleKey).toLowerCase()}|${w}x${h}`;
+  const hit = _FACE_CACHE.get(k);
+  if (hit) return hit === 'pending' ? null : hit;
+  const eng = window.OAPanels;
+  if (!eng) return null;
+  _FACE_CACHE.set(k, 'pending');
+  eng.ready.then(() => {
+    try {
+      const bytes = eng.generatePanel(w, h, cfg);
+      const off = document.createElement('canvas'); off.width = w; off.height = h;
+      off.getContext('2d').putImageData(new ImageData(new Uint8ClampedArray(bytes.buffer, bytes.byteOffset, bytes.length), w, h), 0, 0);
+      _FACE_CACHE.set(k, off);
+    } catch (e) { _FACE_CACHE.set(k, null); }
+  }).catch(() => _FACE_CACHE.set(k, null));
+  return null;
 }
 
 function useNeedleBallistics(rawValueRef, canvasRef, min, max, width, height, config) {
-    React.useEffect(() => {
-        let displayValue = min;
-        let animationFrameId;
+  React.useEffect(() => {
+    let displayValue = min;
+    let animationFrameId;
 
-        const render = () => {
-            const raw = typeof rawValueRef.current === 'number' ? rawValueRef.current : parseFloat(rawValueRef.current || min);
-            const attack = config?.dynamics?.attack_ms ? (100 / config.dynamics.attack_ms) * 0.5 : 0.3;
-            const release = config?.dynamics?.release_ms ? (100 / config.dynamics.release_ms) * 0.5 : 0.1;
+    const render = () => {
+      const raw = typeof rawValueRef.current === 'number' ? rawValueRef.current : parseFloat(rawValueRef.current || min);
+      const attack = config?.dynamics?.attack_ms ? (100 / config.dynamics.attack_ms) * 0.5 : 0.3;
+      const release = config?.dynamics?.release_ms ? (100 / config.dynamics.release_ms) * 0.5 : 0.1;
+      if (raw > displayValue) displayValue += (raw - displayValue) * attack;
+      else displayValue -= (displayValue - raw) * release;
 
-            if (raw > displayValue) displayValue += (raw - displayValue) * attack;
-            else displayValue -= (displayValue - raw) * release;
+      if (!canvasRef.current) { animationFrameId = requestAnimationFrame(render); return; }
+      const ctx = canvasRef.current.getContext('2d');
+      ctx.clearRect(0, 0, width, height);
 
-            if (canvasRef.current) {
-                const ctx = canvasRef.current.getContext('2d');
-                ctx.clearRect(0, 0, width, height);
+      const styleOv = config?.cosmetics?.style_overrides || {};
+      const colors = config?.cosmetics?.colors || {};
+      const pnum = (v, d) => { const n = parseFloat(v); return Number.isNaN(n) ? d : n; };
 
-                const styleOv = config?.cosmetics?.style_overrides || {};
-                const colors = config?.cosmetics?.colors || {};
+      const bezelShape = (styleOv.bezel_shape || config?.bezel_shape || '').toLowerCase();
+      const frameWidth = pnum(styleOv.bezel_width, 6);
+      const layout = bezelLayout(bezelShape, width, height, frameWidth);
 
-                const centerX = width / 2 + (styleOv.pivot_offset_x || 0);
-                const centerY = height / 2 + (styleOv.pivot_offset_y || 0);
-                const meterSize = Math.min(width, height);
-                const arcRadius = meterSize / 2 * (styleOv.arc_radius_factor || 0.8);
-                const bezelShape = (styleOv.bezel_shape || config?.bezel_shape || 'default').toLowerCase();
+      let centerX, centerY, arcRadius;
+      if (layout) {
+        centerX = layout.pivotX; centerY = layout.pivotY; arcRadius = layout.arcRadius;
+      } else {
+        centerX = width / 2 + (styleOv.pivot_offset_x || 0);
+        centerY = height / 2 + (styleOv.pivot_offset_y || 0);
+        arcRadius = Math.min(width, height) / 2 * (styleOv.arc_radius_factor || 0.8);
+      }
 
-                // Outer backing: transparent by default so the panel behind shows
-                // through; only paints when a background is explicitly set (and the
-                // node hasn't opted into transparency via the manager).
-                let outerBg = colors.background || config?.bg_color || null;
-                if (window.OaTransparency && outerBg) outerBg = window.OaTransparency.bg(config, outerBg);
-                if (config?.cosmetics?.transparent === true) outerBg = null;
-                if (outerBg && outerBg !== 'transparent') {
-                    ctx.fillStyle = outerBg;
-                    ctx.fillRect(0, 0, width, height);
-                }
+      // Outer backing: transparent by default (panel shows through) unless a bg is set.
+      let outerBg = colors.background || config?.bg_color || null;
+      if (window.OaTransparency && outerBg) outerBg = window.OaTransparency.bg(config, outerBg);
+      if (config?.cosmetics?.transparent === true) outerBg = null;
+      if (outerBg && outerBg !== 'transparent') { ctx.fillStyle = outerBg; ctx.fillRect(0, 0, width, height); }
 
-                ctx.save();
-                getBezelPath(ctx, bezelShape, centerX, centerY, arcRadius);
-                
-                ctx.shadowColor = 'rgba(0,0,0,0.8)'; ctx.shadowBlur = 10; ctx.shadowOffsetX = 2; ctx.shadowOffsetY = 2;
-                ctx.fillStyle = colors.bezel || '#111';
-                ctx.fill();
-                ctx.shadowColor = 'transparent';
+      // --- Bezel body + clipped face ---
+      ctx.save();
+      if (layout) {
+        _tracePath(ctx, layout.pts);
+      } else {
+        ctx.beginPath(); ctx.arc(centerX, centerY, arcRadius + 5, Math.PI, 0); ctx.lineTo(centerX, centerY); ctx.closePath();
+      }
+      ctx.shadowColor = 'rgba(0,0,0,0.8)'; ctx.shadowBlur = 10; ctx.shadowOffsetX = 2; ctx.shadowOffsetY = 2;
+      ctx.fillStyle = colors.bezel || '#111';
+      ctx.fill();
+      ctx.shadowColor = 'transparent';
+      ctx.clip();
 
-                ctx.clip();
+      // Face: a WASM-generated vintage/wood texture (face_style/patina) if set,
+      // else a flat faceplate colour. A glass sheen is laid over either.
+      const cosmetics = config?.cosmetics || {};
+      const faceStyle = styleOv.face_style || cosmetics.face || cosmetics.patina;
+      const faceTex = faceStyle ? getFaceTexture(faceStyle, width, height) : null;
+      const faceColor = colors.faceplate || colors.meter_face_colour || (faceStyle ? null : '#111');
+      if (faceTex) {
+        ctx.drawImage(faceTex, 0, 0, width, height);
+      } else if (faceColor && faceColor !== 'transparent') {
+        ctx.fillStyle = faceColor; ctx.fillRect(0, 0, width, height);
+      }
+      // Glass sheen (radial highlight, top-left) for lit/vintage looks.
+      if (styleOv.enable_lighting !== false && (faceStyle || styleOv.glass)) {
+        const gg = ctx.createRadialGradient(centerX - arcRadius * 0.4, centerY - arcRadius * 0.9, arcRadius * 0.1, centerX, centerY, arcRadius * 2.2);
+        gg.addColorStop(0, 'rgba(255,255,255,0.18)');
+        gg.addColorStop(0.5, 'rgba(255,255,255,0.04)');
+        gg.addColorStop(1, 'rgba(0,0,0,0.10)');
+        ctx.fillStyle = gg; ctx.fillRect(0, 0, width, height);
+      }
 
-                const faceColor = colors.faceplate || colors.meter_face_colour || '#111';
-                if (faceColor !== 'transparent') {
-                    ctx.fillStyle = faceColor;
-                    ctx.fillRect(0, 0, width, height);
-                }
+      // --- Scale geometry (tilt + direction) ---
+      const minVal = min, maxVal = max, range = maxVal - minVal || 1;
+      const viewAngle = pnum(styleOv.Meter_viewable_angle ?? styleOv.meter_viewable_angle ?? config?.meter_viewable_angle, 90);
+      const centerAngle = pnum(styleOv.Meter_center_angle ?? styleOv.meter_center_angle ?? config?.meter_center_angle, 90);
+      const ccw = (styleOv.Counter_Clockwise ?? styleOv.counter_clockwise) ? true : false;
+      const startDeg = centerAngle + viewAngle / 2, endDeg = centerAngle - viewAngle / 2;
+      const toRad = (deg) => -deg * Math.PI / 180;
+      const angRad = (val) => { const pct = (Math.max(minVal, Math.min(maxVal, val)) - minVal) / range; return toRad(ccw ? (endDeg + pct * viewAngle) : (startDeg - pct * viewAngle)); };
+      const boundedVal = Math.max(minVal, Math.min(maxVal, displayValue));
+      const nAng = angRad(boundedVal);
 
-                const minVal = min; const maxVal = max; const range = maxVal - minVal || 1;
-                // Tilt: center/viewable angle + direction. These live under
-                // cosmetics.style_overrides (capitalised in the demos); flat
-                // lowercase kept as fallback. start = center + view/2, end =
-                // center - view/2; CW sweeps start->end, CCW sweeps end->start.
-                const pnum = (v, d) => { const n = parseFloat(v); return Number.isNaN(n) ? d : n; };
-                const viewAngle = pnum(styleOv.Meter_viewable_angle ?? styleOv.meter_viewable_angle ?? config?.meter_viewable_angle, 90);
-                const centerAngle = pnum(styleOv.Meter_center_angle ?? styleOv.meter_center_angle ?? config?.meter_center_angle, 90);
-                const ccw = (styleOv.Counter_Clockwise ?? styleOv.counter_clockwise) ? true : false;
-                const startDeg = centerAngle + viewAngle / 2;
-                const endDeg = centerAngle - viewAngle / 2;
+      // --- Color-zone limits (green -> yellow -> red) ---
+      const upperRange = styleOv.upper_range !== undefined ? styleOv.upper_range
+        : (config?.cosmetics?.scale?.upper_range !== undefined ? config.cosmetics.scale.upper_range
+        : (config?.upper_range !== undefined ? config.upper_range : maxVal));
+      const redStart = Math.max(minVal, Math.min(maxVal, upperRange));
+      const lowerColor = colors.lower || colors.primary || '#33aa33';
+      const middleColor = colors.middle || colors.warn || colors.mid || '#cccc33';
+      const upperColor = colors.upper || colors.alert || '#cc3333';
+      const midRaw = styleOv.mid_range_start ?? config?.cosmetics?.scale?.mid_range_start ?? config?.mid_range_start;
+      const midStart = (midRaw != null) ? Math.max(minVal, Math.min(redStart, pnum(midRaw, redStart))) : redStart;
+      const zoneColor = (v) => (v >= redStart ? upperColor : (v >= midStart ? middleColor : lowerColor));
 
-                const toRad = (deg) => -deg * Math.PI / 180;
-                const angRad = (val) => {
-                    const pct = (Math.max(minVal, Math.min(maxVal, val)) - minVal) / range;
-                    return toRad(ccw ? (endDeg + pct * viewAngle) : (startDeg - pct * viewAngle));
-                };
-                const boundedVal = Math.max(minVal, Math.min(maxVal, displayValue));
-                const nAng = angRad(boundedVal);
+      ctx.lineWidth = styleOv.curve_thickness || 3;
+      const arcSeg = (a, b, col) => { if (b > a) { ctx.strokeStyle = col; ctx.beginPath(); ctx.arc(centerX, centerY, arcRadius, angRad(a), angRad(b), ccw); ctx.stroke(); } };
+      arcSeg(minVal, midStart, lowerColor);
+      arcSeg(midStart, redStart, middleColor);
+      arcSeg(redStart, maxVal, upperColor);
 
-                const upperRange = styleOv.upper_range !== undefined ? styleOv.upper_range
-                    : (config?.cosmetics?.scale?.upper_range !== undefined ? config.cosmetics.scale.upper_range
-                    : (config?.upper_range !== undefined ? config.upper_range : maxVal));
-                const clampUpper = Math.max(minVal, Math.min(maxVal, upperRange));
+      // --- Ticks + numbers ---
+      ctx.font = 'bold 9px Arial'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      const showNumbers = styleOv.Scale_numbers !== false;
+      const subTicks = Math.max(0, parseInt(styleOv.sub_ticks ?? 0, 10) || 0);
+      const step = config?.domain?.primary?.step || config?.step || (range / 5);
+      const drawTick = (val, major) => {
+        const tRad = angRad(val);
+        ctx.strokeStyle = ctx.fillStyle = zoneColor(val);
+        const inner = major ? 8 : 4;
+        ctx.beginPath();
+        ctx.moveTo(centerX + arcRadius * Math.cos(tRad), centerY + arcRadius * Math.sin(tRad));
+        ctx.lineTo(centerX + (arcRadius - inner) * Math.cos(tRad), centerY + (arcRadius - inner) * Math.sin(tRad));
+        ctx.stroke();
+        if (major && showNumbers) ctx.fillText(Math.round(val), centerX + (arcRadius - 20) * Math.cos(tRad), centerY + (arcRadius - 20) * Math.sin(tRad));
+      };
+      const majorCount = Math.max(1, Math.round(range / step));
+      for (let i = 0; i <= majorCount; i++) {
+        const val = minVal + i * step;
+        if (val > maxVal + 1e-6) break;
+        drawTick(val, true);
+        if (subTicks > 0 && i < majorCount) for (let j = 1; j <= subTicks; j++) { const sv = val + (j * step) / (subTicks + 1); if (sv <= maxVal + 1e-6) drawTick(sv, false); }
+      }
 
-                ctx.lineWidth = styleOv.curve_thickness || 3;
-                ctx.strokeStyle = colors.primary || '#E0E0E0';
-                ctx.beginPath(); ctx.arc(centerX, centerY, arcRadius, angRad(minVal), angRad(clampUpper), ccw); ctx.stroke();
+      // --- Needle + pivot ---
+      const needleLen = arcRadius * 0.95;
+      ctx.shadowColor = 'rgba(0,0,0,0.5)'; ctx.shadowBlur = 5; ctx.shadowOffsetX = 3; ctx.shadowOffsetY = 3;
+      ctx.strokeStyle = colors.pointer || '#fff'; ctx.lineWidth = pnum(styleOv.curve_thickness, 2); ctx.lineCap = 'round';
+      ctx.beginPath(); ctx.moveTo(centerX, centerY);
+      ctx.lineTo(centerX + needleLen * Math.cos(nAng), centerY + needleLen * Math.sin(nAng));
+      ctx.stroke();
+      ctx.shadowColor = 'transparent';
 
-                if (clampUpper < maxVal) {
-                    ctx.strokeStyle = colors.alert || '#CC3333';
-                    ctx.beginPath(); ctx.arc(centerX, centerY, arcRadius, angRad(clampUpper), angRad(maxVal), ccw); ctx.stroke();
-                }
+      const pivotSize = pnum(styleOv.Pivot_size ?? styleOv.pivot_size, 10);
+      ctx.fillStyle = colors.pivot || '#000';
+      ctx.beginPath(); ctx.arc(centerX, centerY, pivotSize, 0, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = '#444'; ctx.lineWidth = 2; ctx.stroke();
 
-                ctx.font = 'bold 9px Arial'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-                const showNumbers = styleOv.Scale_numbers !== false;
-                const subTicks = Math.max(0, parseInt(styleOv.sub_ticks ?? 0, 10) || 0);
-                const step = config?.domain?.primary?.step || config?.step || (range / 5);
-                const drawTick = (val, major) => {
-                    const tRad = angRad(val);
-                    const isAlert = val >= clampUpper;
-                    ctx.strokeStyle = ctx.fillStyle = isAlert ? (colors.alert || '#C33') : (colors.primary || '#EEE');
-                    const inner = major ? 8 : 4;
-                    const x1 = centerX + arcRadius * Math.cos(tRad);
-                    const y1 = centerY + arcRadius * Math.sin(tRad);
-                    const x2 = centerX + (arcRadius - inner) * Math.cos(tRad);
-                    const y2 = centerY + (arcRadius - inner) * Math.sin(tRad);
-                    ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
-                    if (major && showNumbers) {
-                        const tx = centerX + (arcRadius - 20) * Math.cos(tRad);
-                        const ty = centerY + (arcRadius - 20) * Math.sin(tRad);
-                        ctx.fillText(Math.round(val), tx, ty);
-                    }
-                };
-                const majorCount = Math.max(1, Math.round(range / step));
-                for (let i = 0; i <= majorCount; i++) {
-                    const val = minVal + i * step;
-                    if (val > maxVal + 1e-6) break;
-                    drawTick(val, true);
-                    if (subTicks > 0 && i < majorCount) {
-                        for (let j = 1; j <= subTicks; j++) {
-                            const sv = val + (j * step) / (subTicks + 1);
-                            if (sv <= maxVal + 1e-6) drawTick(sv, false);
-                        }
-                    }
-                }
+      ctx.restore();
 
-                const needleLen = arcRadius * 0.95;
-                ctx.shadowColor = 'rgba(0,0,0,0.5)'; ctx.shadowBlur = 5; ctx.shadowOffsetX = 3; ctx.shadowOffsetY = 3;
-                ctx.strokeStyle = colors.pointer || '#fff'; ctx.lineWidth = 2; ctx.lineCap = 'round';
-                ctx.beginPath(); ctx.moveTo(centerX, centerY);
-                ctx.lineTo(centerX + needleLen * Math.cos(nAng), centerY + needleLen * Math.sin(nAng));
-                ctx.stroke();
-                ctx.shadowColor = 'transparent';
+      // --- Colored bezel FRAME on top of the clipped face ---
+      if (layout) {
+        const frameColor = colors.bezel || colors.frame;
+        if (frameColor && frameColor !== 'transparent') {
+          _tracePath(ctx, layout.pts);
+          ctx.lineJoin = 'round'; ctx.lineCap = 'round';
+          ctx.lineWidth = frameWidth; ctx.strokeStyle = frameColor;
+          ctx.stroke();
+        }
+      }
 
-                ctx.fillStyle = colors.pivot || '#000';
-                ctx.beginPath(); ctx.arc(centerX, centerY, 10, 0, Math.PI * 2); ctx.fill();
-                ctx.strokeStyle = '#444'; ctx.lineWidth = 2; ctx.stroke();
-
-                ctx.restore();
-            }
-            animationFrameId = requestAnimationFrame(render);
-        };
-        render();
-        return () => cancelAnimationFrame(animationFrameId);
-    }, [min, max, width, height, config]);
+      animationFrameId = requestAnimationFrame(render);
+    };
+    render();
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [min, max, width, height, config]);
 }
 
 const NeedleMeter = ({ value, config }) => {
-    const getNum = (v, fallback) => {
-        if (typeof v === 'number') return v;
-        if (typeof v === 'string') {
-            const p = parseFloat(v);
-            return isNaN(p) ? fallback : p;
-        }
-        return fallback;
-    };
+  const getNum = (v, fallback) => {
+    if (typeof v === 'number') return v;
+    if (typeof v === 'string') { const p = parseFloat(v); return isNaN(p) ? fallback : p; }
+    return fallback;
+  };
 
-    const min = getNum(config?.domain?.primary?.min, getNum(config?.min, -60));
-    const max = getNum(config?.domain?.primary?.max, getNum(config?.max, 10));
-    
-    const width = config?.geometry?.width || config?.layout?.width || 150;
-    const height = config?.geometry?.height || config?.layout?.height || 150;
+  const min = getNum(config?.domain?.primary?.min, getNum(config?.min, -60));
+  const max = getNum(config?.domain?.primary?.max, getNum(config?.max, 10));
+  const width = config?.geometry?.width || config?.layout?.width || 150;
+  const height = config?.geometry?.height || config?.layout?.height || 150;
 
-    const canvasRef = React.useRef(null);
-    const rawValueRef = React.useRef(value !== undefined ? value : min);
+  const canvasRef = React.useRef(null);
+  const rawValueRef = React.useRef(value !== undefined ? value : min);
+  React.useEffect(() => { rawValueRef.current = value !== undefined ? value : min; }, [value, min]);
 
-    React.useEffect(() => { rawValueRef.current = value !== undefined ? value : min; }, [value, min]);
+  useNeedleBallistics(rawValueRef, canvasRef, min, max, width, height, config);
 
-    useNeedleBallistics(rawValueRef, canvasRef, min, max, width, height, config);
+  const [lang] = window.useMqttLang ? window.useMqttLang() : ['En'];
+  const title = config?.label_active?.[lang] || config?.label_active?.En ||
+                config?.label?.[lang] || config?.label?.En ||
+                (typeof config?.label === 'string' ? config.label : null);
 
-    const [lang] = window.useMqttLang ? window.useMqttLang() : ['En'];
-    const title = config?.label_active?.[lang] || config?.label_active?.En || 
-                  config?.label?.[lang] || config?.label?.En || 
-                  (typeof config?.label === 'string' ? config.label : null);
-
-    return (
-        <div style={{ width: width, height: height, position: 'relative', overflow: 'hidden' }}>
-            <canvas ref={canvasRef} width={width} height={height} style={{ display: 'block' }} />
-            {title && (
-                <div style={{ 
-                    position: 'absolute', bottom: '5px', left: '50%', transform: 'translateX(-50%)',
-                    color: '#888', fontSize: '9px', fontWeight: 'bold', pointerEvents: 'none',
-                    textAlign: 'center', width: '90%'
-                }}>
-                    {title.toUpperCase()}
-                </div>
-            )}
+  return (
+    <div style={{ width: width, height: height, position: 'relative', overflow: 'hidden' }}>
+      <canvas ref={canvasRef} width={width} height={height} style={{ display: 'block' }} />
+      {title && (
+        <div style={{
+          position: 'absolute', bottom: '5px', left: '50%', transform: 'translateX(-50%)',
+          color: '#888', fontSize: '9px', fontWeight: 'bold', pointerEvents: 'none',
+          textAlign: 'center', width: '90%'
+        }}>
+          {title.toUpperCase()}
         </div>
-    );
+      )}
+    </div>
+  );
 };
 window.NeedleMeter = NeedleMeter;

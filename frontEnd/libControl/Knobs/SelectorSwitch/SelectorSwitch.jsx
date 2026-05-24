@@ -145,6 +145,10 @@ const SelectorSwitch = ({ value, onChange, config }) => {
         return <line x1="0" y1="0" x2={x2} y2={y2} stroke={indicatorColor} strokeWidth="3" strokeLinecap="round" />;
     };
 
+    // NOTE: filterId MUST be declared before the ticks loop uses it — otherwise it
+    // is a temporal-dead-zone ReferenceError that crashes the whole component
+    // (the rotary selector renders blank / "doesn't work").
+    const filterId = `sel-${c.id || Math.random().toString(36).substr(2, 9)}`;
     const ticks = [];
     positions.forEach((p, i) => {
         const ang = getAngleForIndex(i);
@@ -180,7 +184,6 @@ const SelectorSwitch = ({ value, onChange, config }) => {
 
     const DEPTH_OFFSET = 1.5;
     const pointerAngleDeg = getAngleForIndex(currentIndex);
-    const filterId = `sel-${c.id || Math.random().toString(36).substr(2, 9)}`;
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>

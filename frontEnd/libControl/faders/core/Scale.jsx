@@ -88,7 +88,9 @@ const Scale = ({
 
     const ticks = getTicks();
     const containerDim = isVert ? width : height;
-    const tickLengthHalf = containerDim * tickSize;
+    // Clamp tick length so a large `size` (e.g. 1.0) can't overrun the box edge.
+    const _maxTickLen = Math.max(2, containerDim / 2 - (slotSize / 2 + 2) - 2);
+    const tickLengthHalf = Math.min(containerDim * tickSize, _maxTickLen);
     const subTickLengthHalf = tickLengthHalf * 0.55;
     const center = containerDim / 2;
     const TICK_LINE_GAP = 2;

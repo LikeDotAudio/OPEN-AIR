@@ -97,7 +97,7 @@ const DualFader = ({ value, onChange, config }) => {
     return (
         <div 
             ref={containerRef} 
-            style={{ width, height, position: 'relative', backgroundColor: '#2b2b2b', touchAction: 'none', overflow: 'hidden', borderRadius: 4 }}
+            style={{ width, height, position: 'relative', backgroundColor: (window.OaTransparency ? window.OaTransparency.bg(config, '#2b2b2b') : '#2b2b2b'), touchAction: 'none', overflow: 'hidden', borderRadius: 4 }}
             onPointerMove={handlePointerMove}
             onPointerUp={handlePointerUp}
         >

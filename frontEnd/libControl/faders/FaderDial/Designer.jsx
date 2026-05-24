@@ -70,6 +70,12 @@
           <Slider label="cap width" min={10} max={120} step={1} value={g('fader_config.cap_width') ?? 40} onChange={(v) => set('fader_config.cap_width', v)} />
           <Slider label="cap height" min={10} max={120} step={1} value={g('fader_config.cap_height') ?? 50} onChange={(v) => set('fader_config.cap_height', v)} />
           <Toggle label="show ticks" value={g('fader_config.cosmetics.scale.show') !== false} onChange={(v) => set('fader_config.cosmetics.scale.show', v)} />
+          <Enum label="tick style" value={g('fader_config.cosmetics.scale.style')} options={opt('scale.style')} onChange={(v) => set('fader_config.cosmetics.scale.style', v)} />
+          <Enum label="scale sides" value={g('fader_config.cosmetics.scale.sides')} options={['both', 'top', 'bottom', 'left', 'right']} onChange={(v) => set('fader_config.cosmetics.scale.sides', v)} />
+          <Slider label="sub ticks" min={0} max={10} step={1} value={g('fader_config.cosmetics.scale.sub_ticks') ?? 4} onChange={(v) => set('fader_config.cosmetics.scale.sub_ticks', v)} />
+          <Slider label="interval" min={0} max={1000} step={1} value={g('fader_config.cosmetics.scale.interval') ?? 0} onChange={(v) => set('fader_config.cosmetics.scale.interval', v)} />
+          <Slider label="tick size" min={0.05} max={1} step={0.05} value={g('fader_config.cosmetics.scale.size') ?? 0.35} onChange={(v) => set('fader_config.cosmetics.scale.size', v)} />
+          <Slider label="tick thickness" min={0.5} max={5} step={0.5} value={g('fader_config.cosmetics.scale.thickness') ?? 1} onChange={(v) => set('fader_config.cosmetics.scale.thickness', v)} />
         </Section>
 
         <Section title="🎛 Knob (fine)">

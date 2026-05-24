@@ -104,9 +104,12 @@ const KnobCap = ({ center, radius, angle, config, filterId, indicatorColor }) =>
     const capR = radius * capScale;
 
     const pointerStyle = (pointer.style || c.pointer_style || 'line').toLowerCase();
-    // Default pointer length should reach near the track radius even if cap is small
-    const pointerLength = pointer.length !== undefined ? pointer.length : (config?.pointer_length || (radius - 2));
-    const pointerOffset = pointer.offset !== undefined ? pointer.offset : (config?.pointer_offset || 0);
+    // length may be null (the schema's "reach the track" sentinel). Use != null so
+    // null falls through to the default instead of coercing to a 0-length pointer.
+    const pointerLength = (pointer.length != null) ? pointer.length
+        : ((config?.pointer_length != null) ? config.pointer_length : (radius - 2));
+    const pointerOffset = (pointer.offset != null) ? pointer.offset
+        : ((config?.pointer_offset != null) ? config.pointer_offset : 0);
 
     const DEPTH_OFFSET = 1.5;
 

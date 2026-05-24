@@ -200,7 +200,7 @@ const MDP = ({ config, value, rotValue, angle, onChange }) => {
             onPointerDown={handlePointerDown}
             onPointerMove={handlePointerMove}
             onPointerUp={handlePointerUp}
-            style={{ display: 'block', touchAction: 'none', backgroundColor: '#222' }}
+            style={{ display: 'block', touchAction: 'none', backgroundColor: (window.OaTransparency ? window.OaTransparency.bg(config, '#222') : '#222') }}
         />
     );
 };

@@ -180,6 +180,24 @@
     return <Group obj={merged} basePath="" setProp={setProp} depth={0} />;
   };
 
+  // Universal transparency control shown for EVERY element (bespoke or generic),
+  // so any widget can be made see-through over the panel. Writes the keys the
+  // transparency manager (window.OaTransparency) reads.
+  window.OaEdTransparencyControls = ({ store, path, node }) => {
+    const ctl = window.OaEdArtisticCtl || {};
+    const { Section, Toggle, Slider } = ctl;
+    if (!Section || !Toggle || !Slider) return null;
+    const getAt = (o, dot) => { let n = o; for (const k of String(dot).split('.')) { if (n == null) return undefined; n = n[k]; } return n; };
+    const set = (dot, v) => store.setProp(path, dot, v);
+    const op = getAt(node, 'cosmetics.bg_opacity');
+    return (
+      <Section title="🫥 Transparency" defaultOpen={false}>
+        <Toggle label="transparent" value={!!getAt(node, 'cosmetics.transparent')} onChange={(v) => set('cosmetics.transparent', v)} />
+        <Slider label="bg opacity" min={0} max={1} step={0.05} value={op != null ? op : 1} onChange={(v) => set('cosmetics.bg_opacity', v)} />
+      </Section>
+    );
+  };
+
   // ---- pop-out host (modal) ------------------------------------------------
   const hdrBtn = (extra) => ({ border: '1px solid #444', borderRadius: 4, fontSize: 12, padding: '5px 12px', cursor: 'pointer', fontWeight: 'bold', ...extra });
 
@@ -232,6 +250,7 @@
               <Preview nodeKey={nodeKey} node={node} />
             </div>
             <div style={{ flex: '1 1 45%', minWidth: 320, overflow: 'auto', padding: '4px 12px 16px' }}>
+              <window.OaEdTransparencyControls store={store} path={path} node={node} />
               {Bespoke
                 ? <Bespoke store={store} path={path} node={node} type={type} ctl={window.OaEdArtisticCtl} />
                 : <window.OaEdArtisticGeneric store={store} path={path} node={node} type={type} />}

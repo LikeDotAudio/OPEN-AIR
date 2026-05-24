@@ -1,136 +1,72 @@
-# NeedleMeter — analog needle meter
+# NeedleMeter — analog needle (VU) meter
 
-Analog VU-style needle meter with ballistics and high-fidelity bezel shapes.
+Analog VU-style needle meter with ballistics, tilt, color-zone limits, the full
+set of procedural bezel "window" shapes (ported from the Rust needle geometry),
+and WASM-generated vintage faces.
 
-- **Defines (globals):** `NeedleMeter`, `BEZEL_CONFIGS`, `getBezelPath`, `useNeedleBallistics`
-- **Props:** `value`, `config` (min/max, bezel, cosmetics)
+- **Defines (globals):** `NeedleMeter`
+- **Props:** `value`, `config`
+- **Designer:** bespoke `Designer.jsx` (bezel shape, face style, limits, tilt…)
 - **Loaded by:** the live app via `frontEnd/Core/Launch/index.html`.
 
-<!-- wysiwyg:sample (auto-generated from oaGuiElements; edit here to drive the library) -->
-## Sample (WYSIWYG library source)
+## Config it reads
+- `cosmetics.style_overrides.bezel_shape` — gem · super_gem · octagon · triangle ·
+  pyramid · hex · hotdog · cylinder · squircle · squimonde · squectangle ·
+  trapezoid · badge · crest/shield · parking_meter · stereo_diamond ·
+  intersecting_overlay · default. Frame = `cosmetics.colors.bezel` + `bezel_width`.
+- `cosmetics.style_overrides.face_style` — none · cream · new_old_stock ·
+  vintage_aged · bakelite · tungsten · wood (WASM panel textures + glass sheen).
+- `cosmetics.style_overrides.Meter_center_angle` / `Meter_viewable_angle` /
+  `Counter_Clockwise` — tilt + direction.
+- Limits: `cosmetics.colors.lower|middle|upper` with `cosmetics.scale.mid_range_start`
+  + `cosmetics.scale.upper_range` (green → yellow → red).
+- `sub_ticks`, `Scale_numbers`, `Pivot_size`, `curve_thickness`, `enable_lighting`.
 
-The WYSIWYG editor builds this widget's **palette entry, live preview, and
-property manipulators** from the JSON block below. The web server
-(`frontEnd/Core/Launch/LauchWebserver.py` → `get_grab_bag()`) scans these
-READMEs, extracts this block, and serves it at `/api/grabbag`. `_README`
-documents the widget; every `_LEGEND` array becomes a dropdown of allowed values
-in the property editor.
+<!-- wysiwyg:sample (library source — drives the palette entry, preview & editor) -->
+## Sample (WYSIWYG library source)
 
 ```json
 {
-  "Exhaustive_Needle_Example": {
+  "NeedleMeter": {
     "type": "_NeedleVUMeter",
-    "identity": {
-      "label": "Master Output",
-      "id": "master_vu",
-      "notes": "A vintage-style photorealistic needle meter with Next-Gen bezel support."
-    },
-    "geometry": {
-      "width": 300,
-      "height": 250,
-      "size": 250,
-      "scale_padding": 40,
-      "pivot_offset_x": 0,
-      "pivot_offset_y": 0,
-      "stretch": "none"
-    },
+    "label": { "active": "Master VU", "show_label": true },
+    "geometry": { "width": 240, "height": 200 },
     "domain": {
-      "primary": {
-        "min": -20.0,
-        "max": 3.0,
-        "value_default": -20.0,
-        "unit": "VU",
-        "mid_range_start": -3.0,
-        "red_zone_start": 0.0
-      }
+      "primary": { "min": -20, "max": 3, "value_default": -5, "unit": "VU" }
     },
-    "dynamics": {
-      "fps_limit": 60,
-      "smoothing": 0.15,
-      "ballistics": "vu",
-      "peak_hold_ms": 2000,
-      "path": "MasterBus/Metering/Output"
-    },
+    "dynamics": { "attack_ms": 200, "release_ms": 500 },
     "cosmetics": {
       "colors": {
-        "primary": "#FF9900",
-        "secondary": "#444444",
-        "background": "#2b2b2b",
-        "pointer": "#CC0000",
-        "pivot": "#222222",
-        "lower": "#FFFFFF",
-        "middle": "#FF9900",
-        "upper": "#FF0000"
+        "primary": "#33aa33",
+        "lower": "#33aa33",
+        "middle": "#cccc33",
+        "upper": "#cc3333",
+        "alert": "#cc3333",
+        "pointer": "#ffffff",
+        "pivot": "#111111",
+        "bezel": "#c0c0c0",
+        "faceplate": "#111111",
+        "background": "transparent"
       },
-      "style_flags": {
-        "show_label": true,
-        "ticks_visible": true,
-        "scale_numbers": true,
-        "peak_flag": true
-      },
+      "scale": { "upper_range": 0, "mid_range_start": -6 },
       "style_overrides": {
-        "bezel_shape": "gem",
-        "bezel_width": 12,
-        "lighting_effects": true,
-        "glass_reflection": true,
-        "aperture_mask": "smile",
-        "overlay_type": "dome"
-      },
-      "scale": {
-        "viewable_angle": 90,
-        "center_angle": 90,
-        "tick_step": 1.0,
-        "sub_ticks": 4,
-        "tick_radius_offset": 5,
-        "label_radius_offset": 20
+        "bezel_shape": "default",
+        "bezel_width": 8,
+        "face_style": "none",
+        "enable_lighting": true,
+        "Meter_center_angle": 90,
+        "Meter_viewable_angle": 90,
+        "Counter_Clockwise": false,
+        "sub_ticks": 5,
+        "Scale_numbers": true,
+        "Pivot_size": 10,
+        "curve_thickness": 3
       }
-    },
-    "interaction": {
-      "is_read_only": true
-    },
-    "layout": {
-      "sticky": "center",
-      "padx": 10,
-      "pady": 10
     }
   },
-  "_README": "This sample is REALLY REALLY COMPLETE. It outlines the complex visual parameters for the vintage needle meter, including the 'Next-Gen' bezel geometries and ballistic physics.",
   "_LEGEND": {
-    "meter_modes": [
-      "mono",
-      "stereo"
-    ],
-    "bezel_shapes": [
-      "gem",
-      "pyramid",
-      "cylinder",
-      "hex",
-      "squircle",
-      "badge",
-      "crest",
-      "octagon"
-    ],
-    "aperture_masks": [
-      "smile",
-      "frown",
-      "straight"
-    ],
-    "overlay_types": [
-      "dome",
-      "flat"
-    ],
-    "ballistics": [
-      "vu",
-      "ppm",
-      "fast",
-      "slow"
-    ],
-    "pointer_styles": [
-      "thin",
-      "tapered",
-      "vintage",
-      "block"
-    ]
+    "bezel_shape": ["default", "gem", "super_gem", "octagon", "triangle", "pyramid", "hex", "hotdog", "cylinder", "squircle", "squimonde", "squectangle", "trapezoid", "badge", "crest", "shield", "parking_meter", "stereo_diamond", "intersecting_overlay"],
+    "face_style": ["none", "cream", "new_old_stock", "vintage_aged", "bakelite", "tungsten", "wood"]
   }
 }
 ```

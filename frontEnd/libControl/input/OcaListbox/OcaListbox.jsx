@@ -19,8 +19,10 @@ const OcaListbox = ({ value, onChange, config, topic, nodeJson }) => {
 
     const label = getLocalizedText(config?.label_active || config?.label, "");
     
-    // Parse options: normalize into an array of [key, config]
-    let optionsData = config?.options || {};
+    // Parse options: normalize into an array of [key, config]. Options live under
+    // the `interaction` pillar (canonical, per the _SmartList sample) or, for
+    // legacy/array data, at the root.
+    let optionsData = config?.interaction?.options ?? config?.options ?? {};
     let normalizedOptions = [];
 
     if (Array.isArray(optionsData)) {
@@ -35,9 +37,19 @@ const OcaListbox = ({ value, onChange, config, topic, nodeJson }) => {
         });
     }
 
+    // `active` may be a boolean or the STRING "true"/"false" in the JSON.
+    const isActive = (opt) => !(opt.active === false || opt.active === 'false');
     const sortedActiveOptions = normalizedOptions
-        .filter(([_, opt]) => opt.active !== false)
+        .filter(([_, opt]) => isActive(opt))
         .sort((a, b) => (a[1].order || 0) - (b[1].order || 0));
+
+    // Honor an option's `selected:true` as the initial highlight when nothing is
+    // bound yet (e.g. editor preview with no MQTT value).
+    const selectedDefault = (() => {
+        const f = normalizedOptions.find(([, o]) => o && o.selected === true);
+        return f ? (f[1].value !== undefined ? f[1].value : f[0]) : undefined;
+    })();
+    const effectiveVal = (val !== undefined && val !== null && val !== "") ? val : selectedDefault;
 
     const handleSelect = (key, optValue) => {
         const nextVal = optValue !== undefined ? optValue : key;
@@ -58,7 +70,7 @@ const OcaListbox = ({ value, onChange, config, topic, nodeJson }) => {
                 {sortedActiveOptions.map(([key, opt]) => {
                     const optLabel = getLocalizedText(window.oaPickLabel(opt, 'active'), key);
                     const optValue = opt.value !== undefined ? opt.value : key;
-                    const isSelected = String(val) === String(optValue);
+                    const isSelected = String(effectiveVal) === String(optValue);
 
                     return (
                         <div 

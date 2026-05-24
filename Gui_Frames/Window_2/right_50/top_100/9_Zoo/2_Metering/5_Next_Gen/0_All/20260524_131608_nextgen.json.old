@@ -144,33 +144,29 @@
                 "bezel": "#ffffff",
                 "scale_label": "#000",
                 "meter_face_colour": "transparent",
-                "faceplate": "#000000",
-                "pointer": "#eb0000",
-                "pivot": "#ff1414"
+                "faceplate": "#000000"
               },
               "style_overrides": {
                 "bezel_shape": "super_gem",
-                "bezel_width": 1,
+                "bezel_width": 6,
                 "overlay_style": "aperture_mask",
-                "Pointer_Style": "knife",
-                "sub_ticks": 6,
-                "arc_radius_offset": -8,
-                "tick_radius_offset": 28,
-                "label_radius_offset": 12,
-                "needle_length_factor": 1.2,
-                "pivot_offset_y": -6,
+                "Pointer_Style": "spade",
+                "sub_ticks": 4,
+                "arc_radius_offset": 0,
+                "tick_radius_offset": -8,
+                "label_radius_offset": -60,
+                "needle_length_factor": 0.8,
+                "pivot_offset_y": 100,
                 "pivot_offset_x": -4,
-                "meter_scale": 1.1,
-                "pivot_crop": 190,
-                "tick_length": 17,
+                "meter_scale": 1.5,
+                "pivot_crop": 0.45,
+                "tick_length": 15,
                 "sub_tick_length": 5,
-                "Pivot_size": 2,
-                "curve_thickness": 2,
+                "Pivot_size": 13,
+                "curve_thickness": 3,
                 "Scale_numbers": true,
                 "Meter_center_angle": 90,
-                "Counter_Clockwise": false,
-                "Meter_viewable_angle": 103,
-                "needle_size": "small"
+                "Counter_Clockwise": false
               }
             }
           },
@@ -264,20 +260,16 @@
             "cosmetics": {
               "colors": {
                 "foreground": "#000",
-                "bezel": "#000000",
+                "bezel": "#000",
                 "scale_label": "#000",
-                "meter_face_colour": "transparent",
-                "faceplate": "#2c2c2c"
+                "meter_face_colour": "transparent"
               },
               "style_overrides": {
                 "bezel_shape": "squectangle",
                 "bezel_width": 6,
                 "overlay_style": "aperture_mask",
                 "Pointer_Style": "knife-edge",
-                "sub_ticks": 4,
-                "pivot_crop": 35,
-                "pivot_offset_y": -28,
-                "meter_scale": 1.7
+                "sub_ticks": 4
               },
               "labels": [
                 {
@@ -358,16 +350,7 @@
                 "bezel_width": 6,
                 "overlay_style": "aperture_mask",
                 "Pointer_Style": "knife-edge",
-                "sub_ticks": 3,
-                "pivot_offset_x": 3,
-                "pivot_offset_y": -160,
-                "meter_scale": 0.9,
-                "arc_radius_offset": 4,
-                "tick_radius_offset": 20,
-                "sub_tick_length": 16,
-                "tick_length": 30,
-                "Meter_viewable_angle": 359,
-                "pivot_crop": 0
+                "sub_ticks": 4
               }
             }
           },
@@ -467,8 +450,7 @@
                 "foreground": "#000",
                 "bezel": "#000",
                 "scale_label": "#000",
-                "meter_face_colour": "transparent",
-                "faceplate": "#2c2c2c"
+                "meter_face_colour": "transparent"
               },
               "style_overrides": {
                 "bezel_shape": "pyramid",
@@ -477,8 +459,7 @@
                 "Pointer_Style": "needle",
                 "sub_ticks": 4,
                 "label_radius_offset": -15,
-                "Meter_viewable_angle": 120,
-                "pivot_offset_y": 20
+                "Meter_viewable_angle": 120
               }
             }
           },

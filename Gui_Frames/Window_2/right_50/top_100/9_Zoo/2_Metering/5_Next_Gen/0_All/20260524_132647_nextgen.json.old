@@ -144,33 +144,30 @@
                 "bezel": "#ffffff",
                 "scale_label": "#000",
                 "meter_face_colour": "transparent",
-                "faceplate": "#000000",
-                "pointer": "#eb0000",
-                "pivot": "#ff1414"
+                "faceplate": "#000000"
               },
               "style_overrides": {
                 "bezel_shape": "super_gem",
-                "bezel_width": 1,
+                "bezel_width": 2,
                 "overlay_style": "aperture_mask",
-                "Pointer_Style": "knife",
-                "sub_ticks": 6,
-                "arc_radius_offset": -8,
-                "tick_radius_offset": 28,
-                "label_radius_offset": 12,
+                "Pointer_Style": "diamond",
+                "sub_ticks": 5,
+                "arc_radius_offset": -6,
+                "tick_radius_offset": 30,
+                "label_radius_offset": 0,
                 "needle_length_factor": 1.2,
                 "pivot_offset_y": -6,
                 "pivot_offset_x": -4,
                 "meter_scale": 1.1,
                 "pivot_crop": 190,
-                "tick_length": 17,
+                "tick_length": 18,
                 "sub_tick_length": 5,
-                "Pivot_size": 2,
+                "Pivot_size": 9,
                 "curve_thickness": 2,
                 "Scale_numbers": true,
                 "Meter_center_angle": 90,
                 "Counter_Clockwise": false,
-                "Meter_viewable_angle": 103,
-                "needle_size": "small"
+                "Meter_viewable_angle": 103
               }
             }
           },
@@ -358,16 +355,7 @@
                 "bezel_width": 6,
                 "overlay_style": "aperture_mask",
                 "Pointer_Style": "knife-edge",
-                "sub_ticks": 3,
-                "pivot_offset_x": 3,
-                "pivot_offset_y": -160,
-                "meter_scale": 0.9,
-                "arc_radius_offset": 4,
-                "tick_radius_offset": 20,
-                "sub_tick_length": 16,
-                "tick_length": 30,
-                "Meter_viewable_angle": 359,
-                "pivot_crop": 0
+                "sub_ticks": 4
               }
             }
           },

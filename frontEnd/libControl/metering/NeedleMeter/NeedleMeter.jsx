@@ -133,6 +133,58 @@ function getFaceTexture(styleKey, w, h) {
   return null;
 }
 
+// Named needle sizes (dropdown). Each sets the default length factor + thickness;
+// explicit needle_length_factor / Needle_thickness still override.
+const NEEDLE_SIZES = {
+  thin:   { len: 0.95, thick: 1 },
+  small:  { len: 0.70, thick: 2 },
+  medium: { len: 0.95, thick: 3 },
+  large:  { len: 1.00, thick: 5 },
+  xlarge: { len: 1.08, thick: 7 },
+};
+
+// Needle anatomy (Pointer_Style). Draws from pivot (cx,cy) to the tip at angle
+// `ang`, length `len`, weight `thick`. Ported from the desktop pointer shapes.
+function drawNeedle(ctx, style, cx, cy, ang, len, thick, color) {
+  const tipX = cx + len * Math.cos(ang), tipY = cy + len * Math.sin(ang);
+  const perp = ang + Math.PI / 2, px = Math.cos(perp), py = Math.sin(perp);
+  ctx.fillStyle = color; ctx.strokeStyle = color; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+  switch (style) {
+    case 'spade': case 'lance': {
+      const w = Math.max(3, thick * 2.2);
+      const bR = len * 0.55, sR = len * 0.88;
+      const bx = cx + bR * Math.cos(ang), by = cy + bR * Math.sin(ang);
+      const sx = cx + sR * Math.cos(ang), sy = cy + sR * Math.sin(ang);
+      ctx.lineWidth = Math.max(1, thick * 0.8);
+      ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(bx, by); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(bx, by); ctx.lineTo(sx + w * px, sy + w * py); ctx.lineTo(tipX, tipY); ctx.lineTo(sx - w * px, sy - w * py); ctx.closePath(); ctx.fill();
+      break;
+    }
+    case 'knife': case 'knife_edge': {
+      const w = Math.max(3, thick * 2);
+      ctx.beginPath(); ctx.moveTo(cx + w * px, cy + w * py); ctx.lineTo(tipX, tipY); ctx.lineTo(cx - w * px, cy - w * py); ctx.closePath(); ctx.fill();
+      break;
+    }
+    case 'baton': {
+      ctx.lineWidth = Math.max(3, thick * 2);
+      ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(tipX, tipY); ctx.stroke();
+      ctx.beginPath(); ctx.arc(tipX, tipY, Math.max(3, thick * 1.6), 0, Math.PI * 2); ctx.fill();
+      break;
+    }
+    case 'diamond': case 'hollow_diamond': {
+      const w = Math.max(4, thick * 2.5), mR = len * 0.5;
+      const mx = cx + mR * Math.cos(ang), my = cy + mR * Math.sin(ang);
+      ctx.lineWidth = Math.max(1.5, thick * 0.8);
+      ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(mx + w * px, my + w * py); ctx.lineTo(tipX, tipY); ctx.lineTo(mx - w * px, my - w * py); ctx.closePath(); ctx.stroke();
+      break;
+    }
+    default: {
+      ctx.lineWidth = Math.max(1, thick);
+      ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(tipX, tipY); ctx.stroke();
+    }
+  }
+}
+
 function useNeedleBallistics(rawValueRef, canvasRef, min, max, width, height, config) {
   React.useEffect(() => {
     let displayValue = min;
@@ -157,14 +209,29 @@ function useNeedleBallistics(rawValueRef, canvasRef, min, max, width, height, co
       const frameWidth = pnum(styleOv.bezel_width, 6);
       const layout = bezelLayout(bezelShape, width, height, frameWidth);
 
+      // Geometry knobs: pivot "scootch" (x/y nudge), meter scale relative to the
+      // bezel, additive arc-radius offset, and pivot crop (push the dial down,
+      // cropping its base — like the desktop's pivot_crop).
+      const gnum = (v, d) => { const n = parseFloat(v); return Number.isNaN(n) ? d : n; };
+      const offX = gnum(styleOv.pivot_offset_x, 0);
+      const offY = gnum(styleOv.pivot_offset_y, 0);
+      const meterScale = gnum(styleOv.meter_scale ?? styleOv.needle_scale, 1.0);
+      const arcOffset = gnum(styleOv.arc_radius_offset, 0);
+      const pivotCrop = gnum(styleOv.pivot_crop, 0);
+
       let centerX, centerY, arcRadius;
       if (layout) {
         centerX = layout.pivotX; centerY = layout.pivotY; arcRadius = layout.arcRadius;
       } else {
-        centerX = width / 2 + (styleOv.pivot_offset_x || 0);
-        centerY = height / 2 + (styleOv.pivot_offset_y || 0);
-        arcRadius = Math.min(width, height) / 2 * (styleOv.arc_radius_factor || 0.8);
+        centerX = width / 2;
+        centerY = height / 2;
+        arcRadius = Math.min(width, height) / 2 * gnum(styleOv.arc_radius_factor, 0.8);
       }
+      arcRadius = Math.max(4, arcRadius * meterScale + arcOffset);
+      centerX += offX;
+      // pivot_crop is a PERCENT (desktop convention, e.g. 120) — push the pivot
+      // down by that fraction of the radius so the base is "cropped".
+      centerY += offY + (pivotCrop / 100) * arcRadius;
 
       // Outer backing: transparent by default (panel shows through) unless a bg is set.
       let outerBg = colors.background || config?.bg_color || null;
@@ -228,26 +295,38 @@ function useNeedleBallistics(rawValueRef, canvasRef, min, max, width, height, co
       const midStart = (midRaw != null) ? Math.max(minVal, Math.min(redStart, pnum(midRaw, redStart))) : redStart;
       const zoneColor = (v) => (v >= redStart ? upperColor : (v >= midStart ? middleColor : lowerColor));
 
-      ctx.lineWidth = styleOv.curve_thickness || 3;
-      const arcSeg = (a, b, col) => { if (b > a) { ctx.strokeStyle = col; ctx.beginPath(); ctx.arc(centerX, centerY, arcRadius, angRad(a), angRad(b), ccw); ctx.stroke(); } };
+      // The curved "rule" arc: thickness (curve_thickness), radius offset
+      // (rule_radius_offset, +out/-in), and a show/hide gate (show_rule).
+      const showRule = !(styleOv.show_rule === false || styleOv.show_rule === 'false' || styleOv.show_rule === 0 || styleOv.show_rule === '0');
+      const ruleR = arcRadius + gnum(styleOv.rule_radius_offset, 0);
+      ctx.lineWidth = gnum(styleOv.curve_thickness, 3);
+      const arcSeg = (a, b, col) => { if (showRule && b > a) { ctx.strokeStyle = col; ctx.beginPath(); ctx.arc(centerX, centerY, ruleR, angRad(a), angRad(b), ccw); ctx.stroke(); } };
       arcSeg(minVal, midStart, lowerColor);
       arcSeg(midStart, redStart, middleColor);
       arcSeg(redStart, maxVal, upperColor);
 
       // --- Ticks + numbers ---
       ctx.font = 'bold 9px Arial'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-      const showNumbers = styleOv.Scale_numbers !== false;
+      // Scale_numbers may be a boolean OR a string ("false") and may live under
+      // style_overrides or style_flags — treat all the falsy spellings as hide.
+      const _sn = styleOv.Scale_numbers ?? styleOv.scale_numbers ?? config?.cosmetics?.style_flags?.scale_numbers ?? config?.Scale_numbers;
+      const showNumbers = !(_sn === false || _sn === 'false' || _sn === 0 || _sn === '0' || _sn === 'no' || _sn === 'off');
       const subTicks = Math.max(0, parseInt(styleOv.sub_ticks ?? 0, 10) || 0);
       const step = config?.domain?.primary?.step || config?.step || (range / 5);
+      const tickLen = gnum(styleOv.tick_length, 8);
+      const subTickLen = gnum(styleOv.sub_tick_length, 4);
+      const tickRadOff = gnum(styleOv.tick_radius_offset, 0);
+      const labelRadOff = gnum(styleOv.label_radius_offset, 20);
       const drawTick = (val, major) => {
         const tRad = angRad(val);
         ctx.strokeStyle = ctx.fillStyle = zoneColor(val);
-        const inner = major ? 8 : 4;
+        const base = arcRadius + tickRadOff;
+        const len = major ? tickLen : subTickLen;
         ctx.beginPath();
-        ctx.moveTo(centerX + arcRadius * Math.cos(tRad), centerY + arcRadius * Math.sin(tRad));
-        ctx.lineTo(centerX + (arcRadius - inner) * Math.cos(tRad), centerY + (arcRadius - inner) * Math.sin(tRad));
+        ctx.moveTo(centerX + base * Math.cos(tRad), centerY + base * Math.sin(tRad));
+        ctx.lineTo(centerX + (base - len) * Math.cos(tRad), centerY + (base - len) * Math.sin(tRad));
         ctx.stroke();
-        if (major && showNumbers) ctx.fillText(Math.round(val), centerX + (arcRadius - 20) * Math.cos(tRad), centerY + (arcRadius - 20) * Math.sin(tRad));
+        if (major && showNumbers) ctx.fillText(Math.round(val), centerX + (arcRadius - labelRadOff) * Math.cos(tRad), centerY + (arcRadius - labelRadOff) * Math.sin(tRad));
       };
       const majorCount = Math.max(1, Math.round(range / step));
       for (let i = 0; i <= majorCount; i++) {
@@ -258,12 +337,12 @@ function useNeedleBallistics(rawValueRef, canvasRef, min, max, width, height, co
       }
 
       // --- Needle + pivot ---
-      const needleLen = arcRadius * 0.95;
+      const nsize = NEEDLE_SIZES[String(styleOv.needle_size || '').toLowerCase()];
+      const needleLen = arcRadius * gnum(styleOv.needle_length_factor, nsize ? nsize.len : 0.95);
+      const needleThick = gnum(styleOv.Needle_thickness ?? styleOv.needle_thickness, nsize ? nsize.thick : 2);
+      const pointerStyle = String(styleOv.Pointer_Style ?? styleOv.pointer_style ?? config?.Pointer_Style ?? 'line').toLowerCase();
       ctx.shadowColor = 'rgba(0,0,0,0.5)'; ctx.shadowBlur = 5; ctx.shadowOffsetX = 3; ctx.shadowOffsetY = 3;
-      ctx.strokeStyle = colors.pointer || '#fff'; ctx.lineWidth = pnum(styleOv.curve_thickness, 2); ctx.lineCap = 'round';
-      ctx.beginPath(); ctx.moveTo(centerX, centerY);
-      ctx.lineTo(centerX + needleLen * Math.cos(nAng), centerY + needleLen * Math.sin(nAng));
-      ctx.stroke();
+      drawNeedle(ctx, pointerStyle, centerX, centerY, nAng, needleLen, needleThick, colors.pointer || '#fff');
       ctx.shadowColor = 'transparent';
 
       const pivotSize = pnum(styleOv.Pivot_size ?? styleOv.pivot_size, 10);

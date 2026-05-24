@@ -60,13 +60,30 @@ and WASM-generated vintage faces.
         "sub_ticks": 5,
         "Scale_numbers": true,
         "Pivot_size": 10,
-        "curve_thickness": 3
+        "curve_thickness": 3,
+        "show_rule": true,
+        "rule_radius_offset": 0,
+        "Pointer_Style": "line",
+        "needle_size": "medium",
+        "Needle_thickness": 2,
+        "pivot_offset_x": 0,
+        "pivot_offset_y": 0,
+        "meter_scale": 1.0,
+        "arc_radius_offset": 0,
+        "pivot_crop": 0,
+        "needle_length_factor": 0.95,
+        "tick_length": 8,
+        "sub_tick_length": 4,
+        "tick_radius_offset": 0,
+        "label_radius_offset": 20
       }
     }
   },
   "_LEGEND": {
     "bezel_shape": ["default", "gem", "super_gem", "octagon", "triangle", "pyramid", "hex", "hotdog", "cylinder", "squircle", "squimonde", "squectangle", "trapezoid", "badge", "crest", "shield", "parking_meter", "stereo_diamond", "intersecting_overlay"],
-    "face_style": ["none", "cream", "new_old_stock", "vintage_aged", "bakelite", "tungsten", "wood"]
+    "face_style": ["none", "cream", "new_old_stock", "vintage_aged", "bakelite", "tungsten", "wood"],
+    "needle_size": ["thin", "small", "medium", "large", "xlarge"],
+    "Pointer_Style": ["line", "spade", "knife", "baton", "diamond"]
   }
 }
 ```

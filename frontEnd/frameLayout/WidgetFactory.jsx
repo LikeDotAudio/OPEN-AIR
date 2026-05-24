@@ -38,8 +38,15 @@ window.WidgetFactory = ({ nodeName, node, path_prefix = '', jsonPath }) => {
     // 0 = size to content, >0 = grow to share leftover space. flexShrink:0
     // keeps content from being squished, which previously made stacked widgets
     // overlap their neighbours.
-    flexGrow: node.layout?.weight !== undefined ? node.layout.weight : 0,
+    flexGrow: node.layout?.weight !== undefined ? node.layout.weight
+            : (node.layout?.weight_y !== undefined ? node.layout.weight_y : 0),
     flexShrink: 0,
+    // Explicit width/height (px or %) belong on EVERY widget wrapper — including
+    // keyword-routed ones (fader/meter/plot/graph/...), not just registered
+    // containers. Without this a plot with layout.height:"100%" collapsed to its
+    // min-height because the wrapper had no height for the % chain to resolve.
+    ...(node.layout?.width != null ? { width: window.oaCssLen(node.layout.width) } : {}),
+    ...(node.layout?.height != null ? { height: window.oaCssLen(node.layout.height), minHeight: 0 } : {}),
     // Tk grid padx/pady -> external spacing around the element within its cell.
     // box-sizing keeps the padding from overflowing fill containers.
     ...((node.layout?.padx != null || node.layout?.pady != null)

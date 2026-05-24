@@ -39,7 +39,7 @@
               "default_value": "0.5"
             },
             "layout": {
-              "height": 135,
+              "height": 58,
               "width": "100%",
               "sticky": "ewn",
               "font": 20,
@@ -62,7 +62,7 @@
                 "text_size": 12,
                 "text_color": "#cccccc"
               },
-              "show_label": false
+              "show_label": true
             },
             "handler": "set_rbw",
             "yak_handler": {
@@ -495,7 +495,7 @@
               "default_value": "0.5"
             },
             "layout": {
-              "height": 134,
+              "height": 67,
               "width": "100%",
               "sticky": "ewn",
               "font": 20,
@@ -1234,7 +1234,7 @@
               "default_value": "0"
             },
             "layout": {
-              "height": 125,
+              "height": 64,
               "width": "100%",
               "sticky": "ewn",
               "font": 20,

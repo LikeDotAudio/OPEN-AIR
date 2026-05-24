@@ -19,10 +19,14 @@
             "type": "_GuiActuator",
             "label": {
               "active": {
-                "En": "Set Level",
-                "Fr": "Définir le niveau",
-                "De": "Pegel einstellen",
-                "Es": "Establecer nivel"
+                "text": {
+                  "En": "Set Level",
+                  "Fr": "Définir le niveau",
+                  "De": "Pegel einstellen",
+                  "Es": "Establecer nivel"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "message": ":SOURce:VOLTage:LEVel {value}",
@@ -36,10 +40,14 @@
             "type": "_GuiActuator",
             "label": {
               "active": {
-                "En": "Set DC Bias",
-                "Fr": "Définir la polarisation CC",
-                "De": "DC-Bias einstellen",
-                "Es": "Establecer polarización CC"
+                "text": {
+                  "En": "Set DC Bias",
+                  "Fr": "Définir la polarisation CC",
+                  "De": "DC-Bias einstellen",
+                  "Es": "Establecer polarización CC"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "message": ":SOURce:BIAS:VOLTage {value}",
@@ -53,10 +61,14 @@
             "type": "_GuiActuator",
             "label": {
               "active": {
-                "En": "DC Bias",
-                "Fr": "Polarisation CC",
-                "De": "DC-Bias",
-                "Es": "Polarización CC"
+                "text": {
+                  "En": "DC Bias",
+                  "Fr": "Polarisation CC",
+                  "De": "DC-Bias",
+                  "Es": "Polarización CC"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "message": ":SOURce:BIAS:STATe {value}",

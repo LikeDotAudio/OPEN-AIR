@@ -22,14 +22,20 @@ the palette entry, preview, and property manipulators.
   "Trapezoid_Toggler_Example": {
     "type": "_TrapezoidButtonToggler",
     "label": {
-      "active": "Input"
+      "active": {
+        "text": "Input",
+        "text_size": 12,
+        "text_color": "#cccccc"
+      }
     },
     "options": [
       "Mic",
       "Line",
       "USB"
     ],
-    "value_default": "Mic",
+    "value": {
+      "default_value": "Mic"
+    },
     "selection_mode": "radio",
     "Allow_Null": false,
     "width": 80,

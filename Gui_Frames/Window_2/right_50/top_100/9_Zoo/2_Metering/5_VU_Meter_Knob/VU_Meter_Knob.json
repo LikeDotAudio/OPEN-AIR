@@ -15,10 +15,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Composite VU-Knob Ballistics & Angle Lab",
-            "Fr": "Composite VU-Knob Ballistics & Angle Lab",
-            "De": "Composite VU-Knob Ballistics & Angle Lab",
-            "Es": "Composite VU-Knob Ballistics & Angle Lab"
+            "text": {
+              "En": "Composite VU-Knob Ballistics & Angle Lab",
+              "Fr": "Composite VU-Knob Ballistics & Angle Lab",
+              "De": "Composite VU-Knob Ballistics & Angle Lab",
+              "Es": "Composite VU-Knob Ballistics & Angle Lab"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "layout_columns": 4,
@@ -32,10 +36,14 @@
             "meter_face_colour": "transparent",
             "label": {
               "active": {
-                "En": "Master L",
-                "Fr": "Master L",
-                "De": "Master L",
-                "Es": "Maestro L"
+                "text": {
+                  "En": "Master L",
+                  "Fr": "Master L",
+                  "De": "Master L",
+                  "Es": "Maestro L"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "path": "audio/master/left/vu",
@@ -58,10 +66,14 @@
             "meter_face_colour": "transparent",
             "label": {
               "active": {
-                "En": "Master R",
-                "Fr": "Master R",
-                "De": "Master R",
-                "Es": "Maestro R"
+                "text": {
+                  "En": "Master R",
+                  "Fr": "Master R",
+                  "De": "Master R",
+                  "Es": "Maestro R"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "path": "audio/master/right/vu",
@@ -85,10 +97,14 @@
             "meter_face_colour": "transparent",
             "label": {
               "active": {
-                "En": "Sub Mix (Default 90°)",
-                "Fr": "Sub Mix (Default 90°)",
-                "De": "Sub Mix (Default 90°)",
-                "Es": "Sub Mezcla (Default 90°)"
+                "text": {
+                  "En": "Sub Mix (Default 90°)",
+                  "Fr": "Sub Mix (Default 90°)",
+                  "De": "Sub Mix (Default 90°)",
+                  "Es": "Sub Mezcla (Default 90°)"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "path": "audio/sub/vu",
@@ -112,10 +128,14 @@
             "meter_face_colour": "transparent",
             "label": {
               "active": {
-                "En": "Wide Angle (180°)",
-                "Fr": "Wide Angle (180°)",
-                "De": "Wide Angle (180°)",
-                "Es": "Wide Angle (180°)"
+                "text": {
+                  "En": "Wide Angle (180°)",
+                  "Fr": "Wide Angle (180°)",
+                  "De": "Wide Angle (180°)",
+                  "Es": "Wide Angle (180°)"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "path": "audio/wide/vu",
@@ -139,10 +159,14 @@
             "meter_face_colour": "transparent",
             "label": {
               "active": {
-                "En": "Medium Angle (120°)",
-                "Fr": "Moyen Angle (120°)",
-                "De": "Mittel Angle (120°)",
-                "Es": "Medio Angle (120°)"
+                "text": {
+                  "En": "Medium Angle (120°)",
+                  "Fr": "Moyen Angle (120°)",
+                  "De": "Mittel Angle (120°)",
+                  "Es": "Medio Angle (120°)"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "path": "audio/medium/vu",
@@ -168,10 +192,14 @@
             "meter_face_colour": "transparent",
             "label": {
               "active": {
-                "En": "Narrow Angle (60°)",
-                "Fr": "Narrow Angle (60°)",
-                "De": "Narrow Angle (60°)",
-                "Es": "Narrow Angle (60°)"
+                "text": {
+                  "En": "Narrow Angle (60°)",
+                  "Fr": "Narrow Angle (60°)",
+                  "De": "Narrow Angle (60°)",
+                  "Es": "Narrow Angle (60°)"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "path": "audio/narrow/vu",
@@ -191,10 +219,14 @@
             "meter_face_colour": "transparent",
             "label": {
               "active": {
-                "En": "Slow 270° (1s Ballistics)",
-                "Fr": "Lent 270° (1s Ballistics)",
-                "De": "Langsam 270° (1s Ballistics)",
-                "Es": "Lento 270° (1s Ballistics)"
+                "text": {
+                  "En": "Slow 270° (1s Ballistics)",
+                  "Fr": "Lent 270° (1s Ballistics)",
+                  "De": "Langsam 270° (1s Ballistics)",
+                  "Es": "Lento 270° (1s Ballistics)"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "path": "audio/270/slow/vu",
@@ -213,10 +245,14 @@
             "meter_face_colour": "transparent",
             "label": {
               "active": {
-                "En": "Fast 270° (30ms Snappy)",
-                "Fr": "Rapide 270° (30ms Snappy)",
-                "De": "Schnell 270° (30ms Snappy)",
-                "Es": "Rápido 270° (30ms Snappy)"
+                "text": {
+                  "En": "Fast 270° (30ms Snappy)",
+                  "Fr": "Rapide 270° (30ms Snappy)",
+                  "De": "Schnell 270° (30ms Snappy)",
+                  "Es": "Rápido 270° (30ms Snappy)"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "path": "audio/270/fast/vu",
@@ -236,10 +272,14 @@
             "meter_face_colour": "transparent",
             "label": {
               "active": {
-                "En": "Sticky 270° (500ms Hold)",
-                "Fr": "Sticky 270° (500ms Hold)",
-                "De": "Sticky 270° (500ms Hold)",
-                "Es": "Sticky 270° (500ms Hold)"
+                "text": {
+                  "En": "Sticky 270° (500ms Hold)",
+                  "Fr": "Sticky 270° (500ms Hold)",
+                  "De": "Sticky 270° (500ms Hold)",
+                  "Es": "Sticky 270° (500ms Hold)"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "path": "audio/270/sticky/vu",
@@ -257,10 +297,14 @@
             "meter_face_colour": "transparent",
             "label": {
               "active": {
-                "En": "Dwell 270° (Target Dwell)",
-                "Fr": "Dwell 270° (Target Dwell)",
-                "De": "Dwell 270° (Target Dwell)",
-                "Es": "Dwell 270° (Target Dwell)"
+                "text": {
+                  "En": "Dwell 270° (Target Dwell)",
+                  "Fr": "Dwell 270° (Target Dwell)",
+                  "De": "Dwell 270° (Target Dwell)",
+                  "Es": "Dwell 270° (Target Dwell)"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "path": "audio/270/dwell/vu",
@@ -280,10 +324,14 @@
             "meter_face_colour": "transparent",
             "label": {
               "active": {
-                "En": "Instant 270° (0ms)",
-                "Fr": "Instant 270° (0ms)",
-                "De": "Instant 270° (0ms)",
-                "Es": "Instant 270° (0ms)"
+                "text": {
+                  "En": "Instant 270° (0ms)",
+                  "Fr": "Instant 270° (0ms)",
+                  "De": "Instant 270° (0ms)",
+                  "Es": "Instant 270° (0ms)"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "path": "audio/270/instant/vu",
@@ -303,10 +351,14 @@
             "meter_face_colour": "transparent",
             "label": {
               "active": {
-                "En": "Lazy 270° (Slow Decay)",
-                "Fr": "Lazy 270° (Slow Decay)",
-                "De": "Lazy 270° (Slow Decay)",
-                "Es": "Lazy 270° (Slow Decay)"
+                "text": {
+                  "En": "Lazy 270° (Slow Decay)",
+                  "Fr": "Lazy 270° (Slow Decay)",
+                  "De": "Lazy 270° (Slow Decay)",
+                  "Es": "Lazy 270° (Slow Decay)"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "path": "audio/270/lazy/vu",
@@ -325,10 +377,14 @@
             "meter_face_colour": "transparent",
             "label": {
               "active": {
-                "En": "Testing 100° Angle",
-                "Fr": "Testing 100° Angle",
-                "De": "Testing 100° Angle",
-                "Es": "Testing 100° Angle"
+                "text": {
+                  "En": "Testing 100° Angle",
+                  "Fr": "Testing 100° Angle",
+                  "De": "Testing 100° Angle",
+                  "Es": "Testing 100° Angle"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "path": "audio/100/vu",
@@ -346,10 +402,14 @@
             "meter_face_colour": "transparent",
             "label": {
               "active": {
-                "En": "Classic 90° (Fast)",
-                "Fr": "Classique 90° (Fast)",
-                "De": "Klassisch 90° (Fast)",
-                "Es": "Clásico 90° (Fast)"
+                "text": {
+                  "En": "Classic 90° (Fast)",
+                  "Fr": "Classique 90° (Fast)",
+                  "De": "Klassisch 90° (Fast)",
+                  "Es": "Clásico 90° (Fast)"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "path": "audio/90/vu",
@@ -368,10 +428,14 @@
             "meter_face_colour": "transparent",
             "label": {
               "active": {
-                "En": "⚠️ NEON SAWBLADE (300°)",
-                "Fr": "⚠️ NEON SAWBLADE (300°)",
-                "De": "⚠️ NEON SAWBLADE (300°)",
-                "Es": "⚠️ NEON SAWBLADE (300°)"
+                "text": {
+                  "En": "⚠️ NEON SAWBLADE (300°)",
+                  "Fr": "⚠️ NEON SAWBLADE (300°)",
+                  "De": "⚠️ NEON SAWBLADE (300°)",
+                  "Es": "⚠️ NEON SAWBLADE (300°)"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "path": "audio/wild/sawblade/vu",
@@ -394,10 +458,14 @@
             "meter_face_colour": "transparent",
             "label": {
               "active": {
-                "En": "⚫ DEEP ABYSS (320°)",
-                "Fr": "⚫ DEEP ABYSS (320°)",
-                "De": "⚫ DEEP ABYSS (320°)",
-                "Es": "⚫ DEEP ABYSS (320°)"
+                "text": {
+                  "En": "⚫ DEEP ABYSS (320°)",
+                  "Fr": "⚫ DEEP ABYSS (320°)",
+                  "De": "⚫ DEEP ABYSS (320°)",
+                  "Es": "⚫ DEEP ABYSS (320°)"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "path": "audio/wild/abyss/vu",

@@ -41,7 +41,8 @@
               "En": "Med (Hold 500ms)",
               "Fr": "Med (Hold 500ms)",
               "De": "Med (Hold 500ms)",
-              "Es": "Med (Hold 500ms)"
+              "Es": "Med (Hold 500ms)",
+              "show_label": true
             },
             "notes": "Standard smooth ballistics.",
             "geometry": {
@@ -100,8 +101,7 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "show_label": true
+            }
           },
           "Meter_Slow": {
             "type": "_NeedleVUMeter",
@@ -109,7 +109,8 @@
               "En": "Slow (No Hold)",
               "Fr": "Lent (No Hold)",
               "De": "Langsam (No Hold)",
-              "Es": "Lento (No Hold)"
+              "Es": "Lento (No Hold)",
+              "show_label": true
             },
             "notes": "Heavy, damped needle.",
             "geometry": {
@@ -162,8 +163,7 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "show_label": true
+            }
           },
           "Meter_SuperSlow": {
             "type": "_NeedleVUMeter",
@@ -171,7 +171,8 @@
               "En": "Super Slow (No Hold)",
               "Fr": "Super Lent (No Hold)",
               "De": "Super Langsam (No Hold)",
-              "Es": "Super Lento (No Hold)"
+              "Es": "Super Lento (No Hold)",
+              "show_label": true
             },
             "notes": "Very heavy, vintage drift.",
             "geometry": {
@@ -224,8 +225,7 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "show_label": true
+            }
           },
           "Meter_Fast": {
             "type": "_NeedleVUMeter",
@@ -233,7 +233,8 @@
               "En": "Fast (Hold 2s)",
               "Fr": "Rapide (Hold 2s)",
               "De": "Schnell (Hold 2s)",
-              "Es": "Rápido (Hold 2s)"
+              "Es": "Rápido (Hold 2s)",
+              "show_label": true
             },
             "notes": "Snappy, peak-reading style with hold.",
             "geometry": {
@@ -286,8 +287,7 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "show_label": true
+            }
           }
         }
       },
@@ -321,7 +321,8 @@
               "En": "Master Left (Hold 200ms)",
               "Fr": "Master Gauche (Hold 200ms)",
               "De": "Master Links (Hold 200ms)",
-              "Es": "Maestro Izquierda (Hold 200ms)"
+              "Es": "Maestro Izquierda (Hold 200ms)",
+              "show_label": true
             },
             "notes": "Classic console look.",
             "geometry": {
@@ -375,8 +376,7 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "show_label": true
+            }
           },
           "Large_R": {
             "type": "_NeedleVUMeter",
@@ -384,7 +384,8 @@
               "En": "Master Right (Hold 200ms)",
               "Fr": "Master Droite (Hold 200ms)",
               "De": "Master Rechts (Hold 200ms)",
-              "Es": "Maestro Derecha (Hold 200ms)"
+              "Es": "Maestro Derecha (Hold 200ms)",
+              "show_label": true
             },
             "notes": "Matching right channel.",
             "geometry": {
@@ -438,8 +439,7 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "show_label": true
+            }
           },
           "Large_Sub": {
             "type": "_NeedleVUMeter",
@@ -447,7 +447,8 @@
               "En": "Subwoofer (Hold 500ms)",
               "Fr": "Subwoofer (Hold 500ms)",
               "De": "Subwoofer (Hold 500ms)",
-              "Es": "Subwoofer (Hold 500ms)"
+              "Es": "Subwoofer (Hold 500ms)",
+              "show_label": true
             },
             "notes": "Slower tracking for low frequencies.",
             "geometry": {
@@ -500,8 +501,7 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "show_label": true
+            }
           },
           "Large_Amb": {
             "type": "_NeedleVUMeter",
@@ -509,7 +509,8 @@
               "En": "Ambience (Hold 1s)",
               "Fr": "Ambience (Hold 1s)",
               "De": "Ambience (Hold 1s)",
-              "Es": "Ambience (Hold 1s)"
+              "Es": "Ambience (Hold 1s)",
+              "show_label": true
             },
             "notes": "Extremely slow average level.",
             "geometry": {
@@ -562,8 +563,7 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "show_label": true
+            }
           }
         }
       },
@@ -609,7 +609,8 @@
               "En": "PGM 1",
               "Fr": "PGM 1",
               "De": "PGM 1",
-              "Es": "PGM 1"
+              "Es": "PGM 1",
+              "show_label": true
             },
             "notes": "Fast broadcast meter.",
             "geometry": {
@@ -662,8 +663,7 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "show_label": true
+            }
           },
           "Compact_PGM2a": {
             "type": "_NeedleVUMeter",
@@ -671,7 +671,8 @@
               "En": "PGM 2",
               "Fr": "PGM 2",
               "De": "PGM 2",
-              "Es": "PGM 2"
+              "Es": "PGM 2",
+              "show_label": true
             },
             "notes": "Matching PGM 2.",
             "geometry": {
@@ -724,8 +725,7 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "show_label": true
+            }
           },
           "Compact_Auda": {
             "type": "_NeedleVUMeter",
@@ -733,7 +733,8 @@
               "En": "Audition",
               "Fr": "Audition",
               "De": "Audition",
-              "Es": "Audition"
+              "Es": "Audition",
+              "show_label": true
             },
             "notes": "Slightly relaxed audition bus.",
             "geometry": {
@@ -786,8 +787,7 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "show_label": true
+            }
           },
           "Compact_Peaka": {
             "type": "_NeedleVUMeter",
@@ -795,7 +795,8 @@
               "En": "Peak Hold (3s)",
               "Fr": "Peak Hold (3s)",
               "De": "Peak Hold (3s)",
-              "Es": "Peak Hold (3s)"
+              "Es": "Peak Hold (3s)",
+              "show_label": true
             },
             "notes": "Instant rise, long hold, glacial fall.",
             "geometry": {
@@ -848,8 +849,7 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "show_label": true
+            }
           },
           "Compact_PGM1": {
             "type": "_NeedleVUMeter",
@@ -857,7 +857,8 @@
               "En": "PGM 1",
               "Fr": "PGM 1",
               "De": "PGM 1",
-              "Es": "PGM 1"
+              "Es": "PGM 1",
+              "show_label": true
             },
             "notes": "Fast broadcast meter.",
             "geometry": {
@@ -910,8 +911,7 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "show_label": true
+            }
           },
           "Compact_PGM2": {
             "type": "_NeedleVUMeter",
@@ -919,7 +919,8 @@
               "En": "PGM 2",
               "Fr": "PGM 2",
               "De": "PGM 2",
-              "Es": "PGM 2"
+              "Es": "PGM 2",
+              "show_label": true
             },
             "notes": "Matching PGM 2.",
             "geometry": {
@@ -972,8 +973,7 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "show_label": true
+            }
           },
           "Compact_Aud": {
             "type": "_NeedleVUMeter",
@@ -981,7 +981,8 @@
               "En": "Audition",
               "Fr": "Audition",
               "De": "Audition",
-              "Es": "Audition"
+              "Es": "Audition",
+              "show_label": true
             },
             "notes": "Slightly relaxed audition bus.",
             "geometry": {
@@ -1034,8 +1035,7 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "show_label": true
+            }
           },
           "Compact_Peak": {
             "type": "_NeedleVUMeter",
@@ -1043,7 +1043,8 @@
               "En": "Peak Hold (3s)",
               "Fr": "Peak Hold (3s)",
               "De": "Peak Hold (3s)",
-              "Es": "Peak Hold (3s)"
+              "Es": "Peak Hold (3s)",
+              "show_label": true
             },
             "notes": "Instant rise, long hold, glacial fall.",
             "geometry": {
@@ -1096,8 +1097,7 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "show_label": true
+            }
           }
         }
       },
@@ -1131,7 +1131,8 @@
               "En": "Wide (Hold 100ms)",
               "Fr": "Wide (Hold 100ms)",
               "De": "Wide (Hold 100ms)",
-              "Es": "Wide (Hold 100ms)"
+              "Es": "Wide (Hold 100ms)",
+              "show_label": true
             },
             "notes": "Full dynamic range monitor.",
             "geometry": {
@@ -1184,8 +1185,7 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "show_label": true
+            }
           },
           "Scale_Zoom": {
             "type": "_NeedleVUMeter",
@@ -1193,7 +1193,8 @@
               "En": "Zoom (-10/+3)",
               "Fr": "Zoom (-10/+3)",
               "De": "Zoom (-10/+3)",
-              "Es": "Zoom (-10/+3)"
+              "Es": "Zoom (-10/+3)",
+              "show_label": true
             },
             "notes": "Critical mastering zoom.",
             "geometry": {
@@ -1246,8 +1247,7 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "show_label": true
+            }
           },
           "Scale_Neon": {
             "type": "_NeedleVUMeter",
@@ -1255,7 +1255,8 @@
               "En": "Neon Slow (Hold 500ms)",
               "Fr": "Neon Lent (Hold 500ms)",
               "De": "Neon Langsam (Hold 500ms)",
-              "Es": "Neon Lento (Hold 500ms)"
+              "Es": "Neon Lento (Hold 500ms)",
+              "show_label": true
             },
             "notes": "Cyberpunk aesthetic.",
             "geometry": {
@@ -1308,8 +1309,7 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "show_label": true
+            }
           },
           "Scale_Mono": {
             "type": "_NeedleVUMeter",
@@ -1317,7 +1317,8 @@
               "En": "Monochrome Heavy",
               "Fr": "Monochrome Heavy",
               "De": "Monochrome Heavy",
-              "Es": "Monochrome Heavy"
+              "Es": "Monochrome Heavy",
+              "show_label": true
             },
             "notes": "High contrast, high mass.",
             "geometry": {
@@ -1370,8 +1371,7 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "show_label": true
+            }
           }
         }
       },
@@ -1405,7 +1405,8 @@
               "En": "Hold 0ms",
               "Fr": "Hold 0ms",
               "De": "Hold 0ms",
-              "Es": "Hold 0ms"
+              "Es": "Hold 0ms",
+              "show_label": true
             },
             "notes": "Instant decay.",
             "geometry": {
@@ -1458,8 +1459,7 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "show_label": true
+            }
           },
           "Hold_500": {
             "type": "_NeedleVUMeter",
@@ -1467,7 +1467,8 @@
               "En": "Hold 500ms",
               "Fr": "Hold 500ms",
               "De": "Hold 500ms",
-              "Es": "Hold 500ms"
+              "Es": "Hold 500ms",
+              "show_label": true
             },
             "notes": "Short retention.",
             "geometry": {
@@ -1520,8 +1521,7 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "show_label": true
+            }
           },
           "Hold_2000": {
             "type": "_NeedleVUMeter",
@@ -1529,7 +1529,8 @@
               "En": "Hold 2s",
               "Fr": "Hold 2s",
               "De": "Hold 2s",
-              "Es": "Hold 2s"
+              "Es": "Hold 2s",
+              "show_label": true
             },
             "notes": "Long retention.",
             "geometry": {
@@ -1582,8 +1583,7 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "show_label": true
+            }
           },
           "Hold_5000": {
             "type": "_NeedleVUMeter",
@@ -1591,7 +1591,8 @@
               "En": "Hold 5s",
               "Fr": "Hold 5s",
               "De": "Hold 5s",
-              "Es": "Hold 5s"
+              "Es": "Hold 5s",
+              "show_label": true
             },
             "notes": "Very long retention.",
             "geometry": {
@@ -1644,8 +1645,7 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "show_label": true
+            }
           }
         }
       },
@@ -1685,7 +1685,8 @@
               "En": "Crop 0%",
               "Fr": "Crop 0%",
               "De": "Crop 0%",
-              "Es": "Crop 0%"
+              "Es": "Crop 0%",
+              "show_label": true
             },
             "geometry": {
               "width": 150,
@@ -1708,8 +1709,7 @@
             },
             "interaction": {
               "is_read_only": true
-            },
-            "show_label": true
+            }
           },
           "Crop_25": {
             "type": "_NeedleVUMeter",
@@ -1717,7 +1717,8 @@
               "En": "Crop 25%",
               "Fr": "Crop 25%",
               "De": "Crop 25%",
-              "Es": "Crop 25%"
+              "Es": "Crop 25%",
+              "show_label": true
             },
             "geometry": {
               "width": 150,
@@ -1740,8 +1741,7 @@
             },
             "interaction": {
               "is_read_only": true
-            },
-            "show_label": true
+            }
           },
           "Crop_50": {
             "type": "_NeedleVUMeter",
@@ -1749,7 +1749,8 @@
               "En": "Crop 50%",
               "Fr": "Crop 50%",
               "De": "Crop 50%",
-              "Es": "Crop 50%"
+              "Es": "Crop 50%",
+              "show_label": true
             },
             "geometry": {
               "width": 150,
@@ -1772,8 +1773,7 @@
             },
             "interaction": {
               "is_read_only": true
-            },
-            "show_label": true
+            }
           },
           "Crop_75": {
             "type": "_NeedleVUMeter",
@@ -1781,7 +1781,8 @@
               "En": "Crop 75%",
               "Fr": "Crop 75%",
               "De": "Crop 75%",
-              "Es": "Crop 75%"
+              "Es": "Crop 75%",
+              "show_label": true
             },
             "geometry": {
               "width": 150,
@@ -1804,8 +1805,7 @@
             },
             "interaction": {
               "is_read_only": true
-            },
-            "show_label": true
+            }
           },
           "Crop_100": {
             "type": "_NeedleVUMeter",
@@ -1813,7 +1813,8 @@
               "En": "Crop 100%",
               "Fr": "Crop 100%",
               "De": "Crop 100%",
-              "Es": "Crop 100%"
+              "Es": "Crop 100%",
+              "show_label": true
             },
             "geometry": {
               "width": 150,
@@ -1836,8 +1837,7 @@
             },
             "interaction": {
               "is_read_only": true
-            },
-            "show_label": true
+            }
           },
           "Mask_Test": {
             "type": "_NeedleVUMeter",
@@ -1845,7 +1845,8 @@
               "En": "Mask On (No Crop)",
               "Fr": "Mask On (No Crop)",
               "De": "Mask An (No Crop)",
-              "Es": "Mask Encendido (No Crop)"
+              "Es": "Mask Encendido (No Crop)",
+              "show_label": true
             },
             "geometry": {
               "width": 150,
@@ -1868,8 +1869,7 @@
             },
             "interaction": {
               "is_read_only": true
-            },
-            "show_label": true
+            }
           }
         }
       }

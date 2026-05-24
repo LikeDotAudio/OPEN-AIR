@@ -106,7 +106,7 @@ const OcaJsonTree = ({ value, config }) => {
             flexDirection: 'column', 
             width: '100%', 
             height: '100%', 
-            backgroundColor: '#1E1E1E',
+            backgroundColor: (window.OaTransparency ? window.OaTransparency.bg(config, '#1E1E1E') : '#1E1E1E'),
             border: '1px solid #333',
             borderRadius: '4px',
             overflow: 'hidden'

@@ -15,10 +15,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Fader with VU Meter Examples",
-            "Fr": "Fader with VU Meter Exemples",
-            "De": "Fader with VU Meter Beispiele",
-            "Es": "Fader with VU Meter Ejemplos"
+            "text": {
+              "En": "Fader with VU Meter Examples",
+              "Fr": "Fader with VU Meter Exemples",
+              "De": "Fader with VU Meter Beispiele",
+              "Es": "Fader with VU Meter Ejemplos"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "layout_columns": 8,
@@ -38,10 +42,14 @@
             },
             "label": {
               "active": {
-                "En": "Standard",
-                "Fr": "Standard",
-                "De": "Standard",
-                "Es": "Estándar"
+                "text": {
+                  "En": "Standard",
+                  "Fr": "Standard",
+                  "De": "Standard",
+                  "Es": "Estándar"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "meter_width": 15,
@@ -64,10 +72,14 @@
             },
             "label": {
               "active": {
-                "En": "Big Cap",
-                "Fr": "Big Cap",
-                "De": "Big Cap",
-                "Es": "Big Cap"
+                "text": {
+                  "En": "Big Cap",
+                  "Fr": "Big Cap",
+                  "De": "Big Cap",
+                  "Es": "Big Cap"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "cap_height": 60,
@@ -86,10 +98,14 @@
             },
             "label": {
               "active": {
-                "En": "Slim",
-                "Fr": "Slim",
-                "De": "Slim",
-                "Es": "Slim"
+                "text": {
+                  "En": "Slim",
+                  "Fr": "Slim",
+                  "De": "Slim",
+                  "Es": "Slim"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "fader_width": 10,
@@ -110,10 +126,14 @@
             },
             "label": {
               "active": {
-                "En": "Wide Meters",
-                "Fr": "Wide Meters",
-                "De": "Wide Meters",
-                "Es": "Wide Meters"
+                "text": {
+                  "En": "Wide Meters",
+                  "Fr": "Wide Meters",
+                  "De": "Wide Meters",
+                  "Es": "Wide Meters"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "meter_width": 25,
@@ -132,10 +152,14 @@
             },
             "label": {
               "active": {
-                "En": "No Meters",
-                "Fr": "Non Meters",
-                "De": "Nein Meters",
-                "Es": "No Meters"
+                "text": {
+                  "En": "No Meters",
+                  "Fr": "Non Meters",
+                  "De": "Nein Meters",
+                  "Es": "No Meters"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "bar_enable": false,
@@ -153,10 +177,14 @@
             },
             "label": {
               "active": {
-                "En": "Many Ticks",
-                "Fr": "Many Ticks",
-                "De": "Many Ticks",
-                "Es": "Many Ticks"
+                "text": {
+                  "En": "Many Ticks",
+                  "Fr": "Many Ticks",
+                  "De": "Many Ticks",
+                  "Es": "Many Ticks"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "show_ticks": true,
@@ -174,10 +202,14 @@
             },
             "label": {
               "active": {
-                "En": "Inverse",
-                "Fr": "Inverse",
-                "De": "Inverse",
-                "Es": "Inverse"
+                "text": {
+                  "En": "Inverse",
+                  "Fr": "Inverse",
+                  "De": "Inverse",
+                  "Es": "Inverse"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "left_meter_style": {
@@ -208,10 +240,14 @@
             },
             "label": {
               "active": {
-                "En": "Log Scale",
-                "Fr": "Log Scale",
-                "De": "Log Scale",
-                "Es": "Log Scale"
+                "text": {
+                  "En": "Log Scale",
+                  "Fr": "Log Scale",
+                  "De": "Log Scale",
+                  "Es": "Log Scale"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "log_exponent": 2.0,

@@ -22,19 +22,25 @@ in the property editor.
   "slider_value_Example": {
     "type": "_sliderValue",
     "label": {
-      "active": "Volume"
+      "active": {
+        "text": "Volume",
+        "text_size": 12,
+        "text_color": "#cccccc"
+      },
+      "show_label": true
     },
     "layout": {
       "height": 100,
       "width": 250,
       "font": 18
     },
-    "min": 0.0,
-    "max": 100.0,
-    "value": 50.0,
-    "units": "%",
+    "domain": {
+      "locked": false,
+      "min": 0.0,
+      "max": 100.0,
+      "units": "%"
+    },
     "notes": "A standard horizontal slider with numerical input for volume control.",
-    "show_label": true,
     "cosmetics": {
       "colors": {
         "primary": "#FF9900",

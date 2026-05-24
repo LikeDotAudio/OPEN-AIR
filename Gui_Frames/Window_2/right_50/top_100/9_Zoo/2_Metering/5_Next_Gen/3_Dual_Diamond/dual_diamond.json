@@ -32,7 +32,8 @@
               "En": "Horizontal Stereo Diamond",
               "Fr": "Horizontal Stereo Diamond",
               "De": "Horizontal Stereo Diamond",
-              "Es": "Horizontal Stereo Diamond"
+              "Es": "Horizontal Stereo Diamond",
+              "show_label": true
             },
             "notes": "Mirrored opposing mechanical entities in a unified geometric housing.",
             "geometry": {
@@ -76,8 +77,7 @@
                 "mask": false,
                 "enable_lighting": true
               }
-            },
-            "show_label": true
+            }
           },
           "intersecting_overlay_meter": {
             "type": "_SmartMeter",
@@ -85,7 +85,8 @@
               "En": "Intersecting Overlay",
               "Fr": "Intersecting Overlay",
               "De": "Intersecting Overlay",
-              "Es": "Intersecting Overlay"
+              "Es": "Intersecting Overlay",
+              "show_label": true
             },
             "notes": "Scissors action needles with opposing top-left and bottom-right pivots.",
             "geometry": {
@@ -129,8 +130,7 @@
                 "mask": false,
                 "enable_lighting": true
               }
-            },
-            "show_label": true
+            }
           }
         }
       }

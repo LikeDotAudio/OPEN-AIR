@@ -33,16 +33,24 @@
                 "type": "_TrapezoidButton",
                 "label": {
                   "active": {
-                    "En": "☢️ MAIN BUS: ACTIVE ☢️",
-                    "Fr": "☢️ MAIN BUS: ACTIVE ☢️",
-                    "De": "☢️ MAIN BUS: ACTIVE ☢️",
-                    "Es": "☢️ MAIN BUS: ACTIVE ☢️"
+                    "text": {
+                      "En": "☢️ MAIN BUS: ACTIVE ☢️",
+                      "Fr": "☢️ MAIN BUS: ACTIVE ☢️",
+                      "De": "☢️ MAIN BUS: ACTIVE ☢️",
+                      "Es": "☢️ MAIN BUS: ACTIVE ☢️"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "MAIN BUS: DISENGAGED",
-                    "Fr": "MAIN BUS: DISENGAGED",
-                    "De": "MAIN BUS: DISENGAGED",
-                    "Es": "MAIN BUS: DISENGAGED"
+                    "text": {
+                      "En": "MAIN BUS: DISENGAGED",
+                      "Fr": "MAIN BUS: DISENGAGED",
+                      "De": "MAIN BUS: DISENGAGED",
+                      "Es": "MAIN BUS: DISENGAGED"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "state_default": false,
@@ -97,10 +105,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "VOLTAGE",
-                    "Fr": "TENSION",
-                    "De": "SPANNUNG",
-                    "Es": "VOLTAJE"
+                    "text": {
+                      "En": "VOLTAGE",
+                      "Fr": "TENSION",
+                      "De": "SPANNUNG",
+                      "Es": "VOLTAJE"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -149,10 +161,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "CURRENT",
-                    "Fr": "COURANT",
-                    "De": "STROM",
-                    "Es": "CORRIENTE"
+                    "text": {
+                      "En": "CURRENT",
+                      "Fr": "COURANT",
+                      "De": "STROM",
+                      "Es": "CORRIENTE"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -201,10 +217,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "TOTAL POWER",
-                    "Fr": "TOTAL POWER",
-                    "De": "TOTAL POWER",
-                    "Es": "TOTAL POWER"
+                    "text": {
+                      "En": "TOTAL POWER",
+                      "Fr": "TOTAL POWER",
+                      "De": "TOTAL POWER",
+                      "Es": "TOTAL POWER"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -256,10 +276,14 @@
                 "type": "_GuiGraph",
                 "label": {
                   "active": {
-                    "En": "Stability Matrix",
-                    "Fr": "Stability Matrix",
-                    "De": "Stability Matrix",
-                    "Es": "Stability Matrix"
+                    "text": {
+                      "En": "Stability Matrix",
+                      "Fr": "Stability Matrix",
+                      "De": "Stability Matrix",
+                      "Es": "Stability Matrix"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -320,10 +344,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "SET VOLTS (V)",
-                    "Fr": "SET VOLTS (V)",
-                    "De": "SET VOLTS (V)",
-                    "Es": "SET VOLTS (V)"
+                    "text": {
+                      "En": "SET VOLTS (V)",
+                      "Fr": "SET VOLTS (V)",
+                      "De": "SET VOLTS (V)",
+                      "Es": "SET VOLTS (V)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -366,10 +394,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "LIMIT AMPS (A)",
-                    "Fr": "LIMIT AMPS (A)",
-                    "De": "LIMIT AMPS (A)",
-                    "Es": "LIMIT AMPS (A)"
+                    "text": {
+                      "En": "LIMIT AMPS (A)",
+                      "Fr": "LIMIT AMPS (A)",
+                      "De": "LIMIT AMPS (A)",
+                      "Es": "LIMIT AMPS (A)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {

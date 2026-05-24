@@ -27,10 +27,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "RUN",
-                    "Fr": "EXEC",
-                    "De": "AUSFÜHREN",
-                    "Es": "EJEC"
+                    "text": {
+                      "En": "RUN",
+                      "Fr": "EXEC",
+                      "De": "AUSFÜHREN",
+                      "Es": "EJEC"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -63,10 +67,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "STOP",
-                    "Fr": "STOP",
-                    "De": "STOP",
-                    "Es": "STOP"
+                    "text": {
+                      "En": "STOP",
+                      "Fr": "STOP",
+                      "De": "STOP",
+                      "Es": "STOP"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -99,10 +107,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "SINGLE",
-                    "Fr": "SINGLE",
-                    "De": "SINGLE",
-                    "Es": "SINGLE"
+                    "text": {
+                      "En": "SINGLE",
+                      "Fr": "SINGLE",
+                      "De": "SINGLE",
+                      "Es": "SINGLE"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -135,10 +147,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "AUTO",
-                    "Fr": "AUTO",
-                    "De": "AUTO",
-                    "Es": "AUTO"
+                    "text": {
+                      "En": "AUTO",
+                      "Fr": "AUTO",
+                      "De": "AUTO",
+                      "Es": "AUTO"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -176,10 +192,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "Clear",
-                    "Fr": "Effacer",
-                    "De": "Löschen",
-                    "Es": "Borrar"
+                    "text": {
+                      "En": "Clear",
+                      "Fr": "Effacer",
+                      "De": "Löschen",
+                      "Es": "Borrar"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -211,10 +231,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "Force",
-                    "Fr": "Force",
-                    "De": "Force",
-                    "Es": "Force"
+                    "text": {
+                      "En": "Force",
+                      "Fr": "Force",
+                      "De": "Force",
+                      "Es": "Force"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",

@@ -26,11 +26,16 @@
             "transparent": true,
             "label": {
               "active": {
-                "En": "Radar Eye 01",
-                "Fr": "Radar Eye 01",
-                "De": "Radar Eye 01",
-                "Es": "Radar Eye 01"
-              }
+                "text": {
+                  "En": "Radar Eye 01",
+                  "Fr": "Radar Eye 01",
+                  "De": "Radar Eye 01",
+                  "Es": "Radar Eye 01"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
             },
             "app_settings": {
               "title": "Radar Eye v1.0",
@@ -81,7 +86,6 @@
               "mqtt_topic": "sensor/radar_eye/01",
               "log_to_file": true
             },
-            "show_label": true,
             "notes": ""
           }
         }

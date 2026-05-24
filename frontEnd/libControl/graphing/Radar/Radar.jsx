@@ -97,7 +97,7 @@ const Radar = ({ value, config }) => {
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
             {title && <div style={{ color: gridColor, fontSize: 10, fontFamily: 'Consolas, monospace' }}>{title}</div>}
-            <svg width={size} height={size} style={{ background: bg, borderRadius: '50%', border: `1px solid ${gridColor}33` }}>
+            <svg width={size} height={size} style={{ background: (window.OaTransparency ? window.OaTransparency.bg(config, bg) : bg), borderRadius: '50%', border: `1px solid ${gridColor}33` }}>
                 <defs>
                     <radialGradient id={gid} cx="50%" cy="50%" r="50%">
                         <stop offset="0%" stopColor={sweepColor} stopOpacity="0.55" />

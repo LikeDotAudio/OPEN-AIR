@@ -38,38 +38,48 @@ const getKnobAngles = (config, value, min, max) => {
 };
 
 // --- 2. TICK MARKS & SIZES ---
-const KnobTicks = ({ center, radius, arcWidth, config, filterId }) => {
+const KnobTicks = ({ center, radius, arcWidth, config, filterId, min = 0, max = 100 }) => {
     const scale = config?.cosmetics?.scale || config?.scale || {};
     const colors = config?.cosmetics?.colors || {};
-    
+
     const showTicks = scale.show !== undefined ? scale.show : (config?.show_ticks || false);
     if (!showTicks) return null;
 
+    // tick_style: 'simple' (lines), 'dots' (markers), 'numeric' (value labels).
+    const tickStyle = (scale.style || config?.tick_style || 'simple').toLowerCase();
     const tickLength = scale.length !== undefined ? scale.length : (config?.tick_length || 10);
     const tickColor = colors.tick || colors.text || '#aaa';
     const tickCount = scale.count || 10;
     const tickThickness = scale.thickness || 1;
 
-    const ticks = [];
+    const items = [];
     for (let i = 0; i <= tickCount; i++) {
         const ang = 240 - (i * (300 / tickCount));
         const rad = ang * Math.PI / 180;
         const r1 = radius + (arcWidth / 2) + 2;
         const r2 = r1 + tickLength;
-        
-        ticks.push(
-            <line 
-                key={i} 
-                x1={center + r1 * Math.cos(rad)} 
-                y1={center - r1 * Math.sin(rad)} 
-                x2={center + r2 * Math.cos(rad)} 
-                y2={center - r2 * Math.sin(rad)} 
-                stroke={tickColor} 
-                strokeWidth={tickThickness} 
-            />
-        );
+        const ox = center + r1 * Math.cos(rad), oy = center - r1 * Math.sin(rad);
+        const ex = center + r2 * Math.cos(rad), ey = center - r2 * Math.sin(rad);
+
+        if (tickStyle === 'dots') {
+            items.push(<circle key={i} cx={ex} cy={ey} r={Math.max(1, tickThickness + 1)} fill={tickColor} />);
+        } else if (tickStyle === 'numeric') {
+            const val = min + (i / tickCount) * (max - min);
+            const label = Math.abs(val) >= 100 ? val.toFixed(0) : (Number.isInteger(val) ? String(val) : val.toFixed(1));
+            const tr = r2 + 6;
+            items.push(
+                <text key={i} x={center + tr * Math.cos(rad)} y={center - tr * Math.sin(rad)}
+                    fill={tickColor} fontSize="7" fontFamily="Arial" textAnchor="middle" alignmentBaseline="middle">
+                    {label}
+                </text>
+            );
+        } else {
+            items.push(
+                <line key={i} x1={ox} y1={oy} x2={ex} y2={ey} stroke={tickColor} strokeWidth={tickThickness} />
+            );
+        }
     }
-    return <g className="knob-ticks">{ticks}</g>;
+    return <g className="knob-ticks">{items}</g>;
 };
 
 // --- 3. KNOB CAP (Visual Body) ---
@@ -146,6 +156,32 @@ const KnobCap = ({ center, radius, angle, config, filterId, indicatorColor }) =>
             const nx1 = center + (pointerOffset + pointerLength - nLen) * Math.cos(rad);
             const ny1 = center - (pointerOffset + pointerLength - nLen) * Math.sin(rad);
             return <line x1={nx1} y1={ny1} x2={x2} y2={y2} stroke={indicatorColor} strokeWidth="4" strokeLinecap="butt" />;
+        } else if (pointerStyle === 'thin') {
+            return <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={indicatorColor} strokeWidth="1" strokeLinecap="round" />;
+        } else if (pointerStyle === 'block') {
+            return <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={indicatorColor} strokeWidth="6" strokeLinecap="butt" />;
+        } else if (pointerStyle === 'tapered') {
+            // Wedge: wide at the hub, point at the tip.
+            const perp = rad + Math.PI / 2;
+            const bh = 4;
+            const bx1 = x1 + bh * Math.cos(perp), by1 = y1 - bh * Math.sin(perp);
+            const bx2 = x1 - bh * Math.cos(perp), by2 = y1 + bh * Math.sin(perp);
+            return <polygon points={`${x2},${y2} ${bx1},${by1} ${bx2},${by2}`} fill={indicatorColor} />;
+        } else if (pointerStyle === 'vintage') {
+            // Classic needle: tapered blade + counterweight tail + hub.
+            const perp = rad + Math.PI / 2;
+            const bh = 3.5;
+            const bx1 = x1 + bh * Math.cos(perp), by1 = y1 - bh * Math.sin(perp);
+            const bx2 = x1 - bh * Math.cos(perp), by2 = y1 + bh * Math.sin(perp);
+            const tailLen = Math.max(6, pointerLength * 0.22);
+            const tx = center - tailLen * Math.cos(rad), ty = center + tailLen * Math.sin(rad);
+            return (
+                <g>
+                    <polygon points={`${x2},${y2} ${bx1},${by1} ${bx2},${by2}`} fill={indicatorColor} />
+                    <line x1={center} y1={center} x2={tx} y2={ty} stroke={indicatorColor} strokeWidth="3" strokeLinecap="round" />
+                    <circle cx={center} cy={center} r="3.5" fill={indicatorColor} />
+                </g>
+            );
         }
         return <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={indicatorColor} strokeWidth="2" strokeLinecap="round" />;
     };
@@ -280,7 +316,7 @@ const Knob = ({ value, onChange, config, size: defaultSize = 80 }) => {
             />
 
             {/* Ticks Component */}
-            <KnobTicks center={center} radius={radius} arcWidth={arcWidth} config={c} filterId={filterId} />
+            <KnobTicks center={center} radius={radius} arcWidth={arcWidth} config={c} filterId={filterId} min={min} max={max} />
 
             {/* Outer Bezel */}
             <circle cx={center} cy={center} r={radius + arcWidth/2 + 2} fill="none" stroke="#111" strokeWidth="1" />

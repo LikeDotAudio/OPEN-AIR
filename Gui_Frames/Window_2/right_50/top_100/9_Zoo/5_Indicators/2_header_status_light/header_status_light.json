@@ -15,10 +15,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "System Status:",
-            "Fr": "System Statut:",
-            "De": "System Status:",
-            "Es": "System Estado:"
+            "text": {
+              "En": "System Status:",
+              "Fr": "System Statut:",
+              "De": "System Status:",
+              "Es": "System Estado:"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -26,10 +30,14 @@
             "type": "HeaderStatusLight",
             "label": {
               "active": {
-                "En": "System Status:",
-                "Fr": "System Statut:",
-                "De": "System Status:",
-                "Es": "System Estado:"
+                "text": {
+                  "En": "System Status:",
+                  "Fr": "System Statut:",
+                  "De": "System Status:",
+                  "Es": "System Estado:"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "notes": "Standard header status light, default placement."
@@ -40,10 +48,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Network Health:",
-            "Fr": "Network Health:",
-            "De": "Network Health:",
-            "Es": "Network Health:"
+            "text": {
+              "En": "Network Health:",
+              "Fr": "Network Health:",
+              "De": "Network Health:",
+              "Es": "Network Health:"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -51,10 +63,14 @@
             "type": "HeaderStatusLight",
             "label": {
               "active": {
-                "En": "Network Health:",
-                "Fr": "Network Health:",
-                "De": "Network Health:",
-                "Es": "Network Health:"
+                "text": {
+                  "En": "Network Health:",
+                  "Fr": "Network Health:",
+                  "De": "Network Health:",
+                  "Es": "Network Health:"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "layout": {
@@ -70,10 +86,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Server Connection:",
-            "Fr": "Server Connection:",
-            "De": "Server Connection:",
-            "Es": "Server Connection:"
+            "text": {
+              "En": "Server Connection:",
+              "Fr": "Server Connection:",
+              "De": "Server Connection:",
+              "Es": "Server Connection:"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -81,10 +101,14 @@
             "type": "HeaderStatusLight",
             "label": {
               "active": {
-                "En": "Server Connection:",
-                "Fr": "Server Connection:",
-                "De": "Server Connection:",
-                "Es": "Server Connection:"
+                "text": {
+                  "En": "Server Connection:",
+                  "Fr": "Server Connection:",
+                  "De": "Server Connection:",
+                  "Es": "Server Connection:"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "layout": {
@@ -99,10 +123,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Gui Header Status Light 04 Data Stream",
-            "Fr": "Gui Header Statut Light 04 Data Stream",
-            "De": "Gui Header Status Light 04 Data Stream",
-            "Es": "Gui Header Estado Light 04 Data Stream"
+            "text": {
+              "En": "Gui Header Status Light 04 Data Stream",
+              "Fr": "Gui Header Statut Light 04 Data Stream",
+              "De": "Gui Header Status Light 04 Data Stream",
+              "Es": "Gui Header Estado Light 04 Data Stream"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -110,10 +138,14 @@
             "type": "HeaderStatusLight",
             "label": {
               "active": {
-                "En": "",
-                "Fr": "",
-                "De": "",
-                "Es": ""
+                "text": {
+                  "En": "",
+                  "Fr": "",
+                  "De": "",
+                  "Es": ""
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "layout": {
@@ -127,10 +159,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Alert Status:",
-            "Fr": "Alert Statut:",
-            "De": "Alert Status:",
-            "Es": "Alert Estado:"
+            "text": {
+              "En": "Alert Status:",
+              "Fr": "Alert Statut:",
+              "De": "Alert Status:",
+              "Es": "Alert Estado:"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -138,10 +174,14 @@
             "type": "HeaderStatusLight",
             "label": {
               "active": {
-                "En": "Alert Status:",
-                "Fr": "Alert Statut:",
-                "De": "Alert Status:",
-                "Es": "Alert Estado:"
+                "text": {
+                  "En": "Alert Status:",
+                  "Fr": "Alert Statut:",
+                  "De": "Alert Status:",
+                  "Es": "Alert Estado:"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "notes": "Status light signaling critical alerts."

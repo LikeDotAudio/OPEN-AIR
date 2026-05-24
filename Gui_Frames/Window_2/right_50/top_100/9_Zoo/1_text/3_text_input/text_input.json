@@ -15,10 +15,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Username",
-            "Fr": "Username",
-            "De": "Username",
-            "Es": "Username"
+            "text": {
+              "En": "Username",
+              "Fr": "Username",
+              "De": "Username",
+              "Es": "Username"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -52,10 +56,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Search",
-            "Fr": "Search",
-            "De": "Search",
-            "Es": "Search"
+            "text": {
+              "En": "Search",
+              "Fr": "Search",
+              "De": "Search",
+              "Es": "Search"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -84,10 +92,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "File Path",
-            "Fr": "File Path",
-            "De": "File Path",
-            "Es": "File Path"
+            "text": {
+              "En": "File Path",
+              "Fr": "File Path",
+              "De": "File Path",
+              "Es": "File Path"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -116,10 +128,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "ID",
-            "Fr": "ID",
-            "De": "ID",
-            "Es": "ID"
+            "text": {
+              "En": "ID",
+              "Fr": "ID",
+              "De": "ID",
+              "Es": "ID"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -148,10 +164,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Description",
-            "Fr": "Description",
-            "De": "Beschreibung",
-            "Es": "Descripción"
+            "text": {
+              "En": "Description",
+              "Fr": "Description",
+              "De": "Beschreibung",
+              "Es": "Descripción"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {

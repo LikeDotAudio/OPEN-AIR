@@ -70,7 +70,7 @@ const OcaTextValueBox = ({ label, value, units = '', config }) => {
                 </span>
             )}
             <div style={{ 
-                backgroundColor: '#111', 
+                backgroundColor: (window.OaTransparency ? window.OaTransparency.bg(config, '#111') : '#111'), 
                 border: '1px solid #444', 
                 borderRadius: '4px', 
                 padding: '4px 10px',

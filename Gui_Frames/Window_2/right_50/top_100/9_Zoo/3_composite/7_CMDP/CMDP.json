@@ -17,9 +17,9 @@
           "En": "Composite Motion Draggable Potentiometer Demo",
           "Fr": "Composite Motion Draggable Potentiometer Démo",
           "De": "Composite Motion Draggable Potentiometer Demo",
-          "Es": "Composite Motion Draggable Potentiometer Demo"
+          "Es": "Composite Motion Draggable Potentiometer Demo",
+          "show_label": false
         },
-        "show_label": false,
         "layout": {
           "sticky": "nsew",
           "weight_y": 1
@@ -29,10 +29,14 @@
             "type": "_CMDP",
             "label": {
               "active": {
-                "En": "CMDP 1",
-                "Fr": "CMDP 1",
-                "De": "CMDP 1",
-                "Es": "CMDP 1"
+                "text": {
+                  "En": "CMDP 1",
+                  "Fr": "CMDP 1",
+                  "De": "CMDP 1",
+                  "Es": "CMDP 1"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "path": "audio/cmdp/1",

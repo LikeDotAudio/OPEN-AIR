@@ -33,10 +33,14 @@
             },
             "label": {
               "active": {
-                "En": "Drum Group",
-                "Fr": "Drum Group",
-                "De": "Drum Group",
-                "Es": "Drum Group"
+                "text": {
+                  "En": "Drum Group",
+                  "Fr": "Drum Group",
+                  "De": "Drum Group",
+                  "Es": "Drum Group"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "num_channels": 5,

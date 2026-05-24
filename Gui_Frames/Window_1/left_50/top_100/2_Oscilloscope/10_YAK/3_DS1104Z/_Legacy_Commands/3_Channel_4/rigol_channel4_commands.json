@@ -341,10 +341,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "CH4 ON",
-                    "Fr": "CH 4",
-                    "De": "CH 4",
-                    "Es": "CH 4"
+                    "text": {
+                      "En": "CH4 ON",
+                      "Fr": "CH 4",
+                      "De": "CH 4",
+                      "Es": "CH 4"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -376,10 +380,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "CH4 OFF",
-                    "Fr": "CH 4",
-                    "De": "CH 4",
-                    "Es": "CH 4"
+                    "text": {
+                      "En": "CH4 OFF",
+                      "Fr": "CH 4",
+                      "De": "CH 4",
+                      "Es": "CH 4"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",

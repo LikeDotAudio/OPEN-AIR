@@ -149,10 +149,14 @@
             "type": "_GuiActuator",
             "label": {
               "inactive": {
-                "En": "Update Display",
-                "Fr": "Mettre à jour Display",
-                "De": "Aktualisieren Display",
-                "Es": "Actualizar Display"
+                "text": {
+                  "En": "Update Display",
+                  "Fr": "Mettre à jour Display",
+                  "De": "Aktualisieren Display",
+                  "Es": "Actualizar Display"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "AES70": "OcaBooleanActuator",
@@ -199,10 +203,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "Clear Status (*CLS)",
-                    "Fr": "Effacer Statut (*CLS)",
-                    "De": "Löschen Status (*CLS)",
-                    "Es": "Borrar Estado (*CLS)"
+                    "text": {
+                      "En": "Clear Status (*CLS)",
+                      "Fr": "Effacer Statut (*CLS)",
+                      "De": "Löschen Status (*CLS)",
+                      "Es": "Borrar Estado (*CLS)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -240,10 +248,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "Reset Device (*RST)",
-                    "Fr": "Réinitialiser l'appareil (*RST)",
-                    "De": "Gerät zurücksetzen (*RST)",
-                    "Es": "Reiniciar dispositivo (*RST)"
+                    "text": {
+                      "En": "Reset Device (*RST)",
+                      "Fr": "Réinitialiser l'appareil (*RST)",
+                      "De": "Gerät zurücksetzen (*RST)",
+                      "Es": "Reiniciar dispositivo (*RST)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -281,10 +293,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "Power Cycle",
-                    "Fr": "Puissance Cycle",
-                    "De": "Leistung Cycle",
-                    "Es": "Potencia Cycle"
+                    "text": {
+                      "En": "Power Cycle",
+                      "Fr": "Puissance Cycle",
+                      "De": "Leistung Cycle",
+                      "Es": "Potencia Cycle"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",

@@ -33,16 +33,24 @@
                 "type": "_TrapezoidButton",
                 "label": {
                   "active": {
-                    "En": "🩸 DRAINING ACTIVE 🩸",
-                    "Fr": "🩸 DRAINING ACTIVE 🩸",
-                    "De": "🩸 DRAINING ACTIVE 🩸",
-                    "Es": "🩸 DRAINING ACTIVE 🩸"
+                    "text": {
+                      "En": "🩸 DRAINING ACTIVE 🩸",
+                      "Fr": "🩸 DRAINING ACTIVE 🩸",
+                      "De": "🩸 DRAINING ACTIVE 🩸",
+                      "Es": "🩸 DRAINING ACTIVE 🩸"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "ENGAGE LOAD",
-                    "Fr": "ENGAGE LOAD",
-                    "De": "ENGAGE LOAD",
-                    "Es": "ENGAGE LOAD"
+                    "text": {
+                      "En": "ENGAGE LOAD",
+                      "Fr": "ENGAGE LOAD",
+                      "De": "ENGAGE LOAD",
+                      "Es": "ENGAGE LOAD"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "state_default": false,
@@ -78,16 +86,24 @@
                 "type": "_GuiButtonToggle",
                 "label": {
                   "active": {
-                    "En": "CONSTANT CURRENT",
-                    "Fr": "COURANT CONSTANT",
-                    "De": "KONSTANTSTROM",
-                    "Es": "CORRIENTE CONSTANTE"
+                    "text": {
+                      "En": "CONSTANT CURRENT",
+                      "Fr": "COURANT CONSTANT",
+                      "De": "KONSTANTSTROM",
+                      "Es": "CORRIENTE CONSTANTE"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "CONSTANT POWER",
-                    "Fr": "PUISSANCE CONSTANTE",
-                    "De": "KONSTANTPOTENZ",
-                    "Es": "POTENCIA CONSTANTE"
+                    "text": {
+                      "En": "CONSTANT POWER",
+                      "Fr": "PUISSANCE CONSTANTE",
+                      "De": "KONSTANTPOTENZ",
+                      "Es": "POTENCIA CONSTANTE"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "style": {
@@ -171,10 +187,14 @@
                     },
                     "label": {
                       "active": {
-                        "En": "BASE LOAD (A)",
-                        "Fr": "BASE LOAD (A)",
-                        "De": "BASE LOAD (A)",
-                        "Es": "BASE LOAD (A)"
+                        "text": {
+                          "En": "BASE LOAD (A)",
+                          "Fr": "BASE LOAD (A)",
+                          "De": "BASE LOAD (A)",
+                          "Es": "BASE LOAD (A)"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "message_details": {
@@ -228,10 +248,14 @@
                     },
                     "label": {
                       "active": {
-                        "En": "PULSE PEAK (A)",
-                        "Fr": "PULSE PEAK (A)",
-                        "De": "PULSE PEAK (A)",
-                        "Es": "PULSE PEAK (A)"
+                        "text": {
+                          "En": "PULSE PEAK (A)",
+                          "Fr": "PULSE PEAK (A)",
+                          "De": "PULSE PEAK (A)",
+                          "Es": "PULSE PEAK (A)"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "message_details": {
@@ -266,16 +290,24 @@
                     "type": "_GuiButtonToggle",
                     "label": {
                       "active": {
-                        "En": "PULSE ON",
-                        "Fr": "PULSE ON",
-                        "De": "PULSE ON",
-                        "Es": "PULSE ON"
+                        "text": {
+                          "En": "PULSE ON",
+                          "Fr": "PULSE ON",
+                          "De": "PULSE ON",
+                          "Es": "PULSE ON"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       },
                       "inactive": {
-                        "En": "PULSE OFF",
-                        "Fr": "PULSE OFF",
-                        "De": "PULSE OFF",
-                        "Es": "PULSE OFF"
+                        "text": {
+                          "En": "PULSE OFF",
+                          "Fr": "PULSE OFF",
+                          "De": "PULSE OFF",
+                          "Es": "PULSE OFF"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "style": {
@@ -352,10 +384,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "Stop Voltage (UVLO)",
-                    "Fr": "Arrêter Tension (UVLO)",
-                    "De": "Stopp Spannenung (UVLO)",
-                    "Es": "Parar Voltaje (UVLO)"
+                    "text": {
+                      "En": "Stop Voltage (UVLO)",
+                      "Fr": "Arrêter Tension (UVLO)",
+                      "De": "Stopp Spannenung (UVLO)",
+                      "Es": "Parar Voltaje (UVLO)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -398,10 +434,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "Attack Speed (Slew)",
-                    "Fr": "Attack Speed (Slew)",
-                    "De": "Attack Speed (Slew)",
-                    "Es": "Attack Speed (Slew)"
+                    "text": {
+                      "En": "Attack Speed (Slew)",
+                      "Fr": "Attack Speed (Slew)",
+                      "De": "Attack Speed (Slew)",
+                      "Es": "Attack Speed (Slew)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -453,10 +493,14 @@
                     },
                     "label": {
                       "active": {
-                        "En": "CAPACITY DRAINED",
-                        "Fr": "CAPACITY DRAINED",
-                        "De": "CAPACITY DRAINED",
-                        "Es": "CAPACITY DRAINED"
+                        "text": {
+                          "En": "CAPACITY DRAINED",
+                          "Fr": "CAPACITY DRAINED",
+                          "De": "CAPACITY DRAINED",
+                          "Es": "CAPACITY DRAINED"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "message_details": {
@@ -494,10 +538,14 @@
                     },
                     "label": {
                       "active": {
-                        "En": "ENERGY DISSIPATED",
-                        "Fr": "ENERGY DISSIPATED",
-                        "De": "ENERGY DISSIPATED",
-                        "Es": "ENERGY DISSIPATED"
+                        "text": {
+                          "En": "ENERGY DISSIPATED",
+                          "Fr": "ENERGY DISSIPATED",
+                          "De": "ENERGY DISSIPATED",
+                          "Es": "ENERGY DISSIPATED"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "message_details": {
@@ -535,10 +583,14 @@
                     },
                     "label": {
                       "active": {
-                        "En": "ELAPSED TIME",
-                        "Fr": "ELAPSED TIME",
-                        "De": "ELAPSED TIME",
-                        "Es": "ELAPSED TIME"
+                        "text": {
+                          "En": "ELAPSED TIME",
+                          "Fr": "ELAPSED TIME",
+                          "De": "ELAPSED TIME",
+                          "Es": "ELAPSED TIME"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "message_details": {
@@ -575,10 +627,14 @@
                 "type": "_GuiGraph",
                 "label": {
                   "active": {
-                    "En": "Discharge Curve (V)",
-                    "Fr": "Discharge Curve (V)",
-                    "De": "Discharge Curve (V)",
-                    "Es": "Discharge Curve (V)"
+                    "text": {
+                      "En": "Discharge Curve (V)",
+                      "Fr": "Discharge Curve (V)",
+                      "De": "Discharge Curve (V)",
+                      "Es": "Discharge Curve (V)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {

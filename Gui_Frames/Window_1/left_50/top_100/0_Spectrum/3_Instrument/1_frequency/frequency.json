@@ -13,35 +13,40 @@
     "blocks": {
       "Frequency": {
         "type": "OcaBlock",
-        "show_label": false,
         "description": {
           "En": "A block for managing center and span frequency settings.",
           "Fr": "Un bloc pour gérer les paramètres de fréquence centrale et d'intervalle.",
           "De": "Ein Block zur Verwaltung der Mittenfrequenz- und Spanneneinstellungen.",
-          "Es": "Un bloque para gestionar los ajustes de frecuencia central e intervalo."
+          "Es": "Un bloque para gestionar los ajustes de frecuencia central e intervalo.",
+          "show_label": false
         },
         "fields": {
           "center_freq_MHz": {
             "label": {
               "active": {
-                "En": "Center Frequency",
-                "Fr": "Fréquence centrale",
-                "De": "Mittenfrequenz",
-                "Es": "Frecuencia central"
-              }
+                "text": {
+                  "En": "Center Frequency",
+                  "Fr": "Fréquence centrale",
+                  "De": "Mittenfrequenz",
+                  "Es": "Frecuencia central"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": false
             },
             "type": "_Horizontal_with_dial_Value",
-            "column_spacing": [
-              10,
-              10,
-              10
-            ],
             "layout": {
               "stretch": "width",
-              "font": 20,
+              "font": 10,
               "padx": 20,
               "width": "100%",
-              "height": 140
+              "height": 140,
+              "column_spacing": [
+                60,
+                10,
+                15
+              ]
             },
             "handler": "set_center_frequency",
             "yak_handler": {
@@ -63,35 +68,51 @@
             },
             "value": {
               "default_value": "500"
+            },
+            "fader_config": {
+              "cosmetics": {
+                "style_flags": {
+                  "show_label": false
+                }
+              }
             }
           },
           "span_freq_MHz": {
             "label": {
               "active": {
-                "En": "Frequency Span",
-                "Fr": "Fréquence Span",
-                "De": "Frequenz Span",
-                "Es": "Frecuencia Span"
+                "text": {
+                  "En": "Frequency Span",
+                  "Fr": "Fréquence Span",
+                  "De": "Frequenz Span",
+                  "Es": "Frecuencia Span"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               },
               "inactive": {
-                "En": "Frequency Span",
-                "Fr": "Fréquence Span",
-                "De": "Frequenz Span",
-                "Es": "Frecuencia Span"
-              }
+                "text": {
+                  "En": "Frequency Span",
+                  "Fr": "Fréquence Span",
+                  "De": "Frequenz Span",
+                  "Es": "Frecuencia Span"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": false
             },
             "type": "_Horizontal_with_dial_Value",
-            "column_spacing": [
-              10,
-              10,
-              10
-            ],
             "layout": {
               "stretch": "width",
               "font": 20,
               "padx": 20,
               "width": "100%",
-              "height": 140
+              "height": 140,
+              "column_spacing": [
+                60,
+                10,
+                15
+              ]
             },
             "handler": "set_span_frequency",
             "yak_handler": {
@@ -126,12 +147,12 @@
       },
       "Start Stop": {
         "type": "OcaBlock",
-        "show_label": false,
         "description": {
           "En": "A block for managing start and stop frequency settings.",
           "Fr": "Un bloc pour gérer les paramètres de fréquence de début et de fin.",
           "De": "Ein Block zur Verwaltung der Start- und Stoppfrequenzeinstellungen.",
-          "Es": "Un bloque para gestionar los ajustes de frecuencia de inicio y fin."
+          "Es": "Un bloque para gestionar los ajustes de frecuencia de inicio y fin.",
+          "show_label": false
         },
         "layout": {
           "weight": 0,
@@ -141,30 +162,39 @@
           "start_freq_MHz": {
             "label": {
               "active": {
-                "En": "Start Frequency",
-                "Fr": "Fréquence de début",
-                "De": "Startfrequenz",
-                "Es": "Frecuencia de inicio"
+                "text": {
+                  "En": "Start Frequency",
+                  "Fr": "Fréquence de début",
+                  "De": "Startfrequenz",
+                  "Es": "Frecuencia de inicio"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               },
               "inactive": {
-                "En": "Start Frequency",
-                "Fr": "Fréquence de début",
-                "De": "Startfrequenz",
-                "Es": "Frecuencia de inicio"
-              }
+                "text": {
+                  "En": "Start Frequency",
+                  "Fr": "Fréquence de début",
+                  "De": "Startfrequenz",
+                  "Es": "Frecuencia de inicio"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": false
             },
             "type": "_Horizontal_with_dial_Value",
-            "column_spacing": [
-              10,
-              10,
-              10
-            ],
             "layout": {
               "stretch": "width",
               "font": 20,
               "padx": 20,
               "width": "100%",
-              "height": 140
+              "height": 140,
+              "column_spacing": [
+                60,
+                10,
+                15
+              ]
             },
             "handler": "set_start_frequency",
             "yak_handler": {
@@ -191,30 +221,39 @@
           "stop_freq_MHz": {
             "label": {
               "active": {
-                "En": "Stop Frequency",
-                "Fr": "Fréquence de fin",
-                "De": "Stoppfrequenz",
-                "Es": "Frecuencia de parada"
+                "text": {
+                  "En": "Stop Frequency",
+                  "Fr": "Fréquence de fin",
+                  "De": "Stoppfrequenz",
+                  "Es": "Frecuencia de parada"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               },
               "inactive": {
-                "En": "Stop Frequency",
-                "Fr": "Fréquence de fin",
-                "De": "Stoppfrequenz",
-                "Es": "Frecuencia de parada"
-              }
+                "text": {
+                  "En": "Stop Frequency",
+                  "Fr": "Fréquence de fin",
+                  "De": "Stoppfrequenz",
+                  "Es": "Frecuencia de parada"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": false
             },
             "type": "_Horizontal_with_dial_Value",
-            "column_spacing": [
-              10,
-              10,
-              10
-            ],
             "layout": {
               "stretch": "width",
               "font": 20,
               "padx": 20,
               "width": "100%",
-              "height": 140
+              "height": 140,
+              "column_spacing": [
+                60,
+                10,
+                15
+              ]
             },
             "handler": "set_stop_frequency",
             "yak_handler": {
@@ -253,29 +292,31 @@
           "En": "A block for managing all frequency-related presets.",
           "Fr": "Un bloc pour gérer tous les préréglages liés à la fréquence.",
           "De": "Ein Block zur Verwaltung aller frequenzbezogenen Voreinstellungen.",
-          "Es": "Un bloque para gestionar todos los preajustes relacionados con la frecuencia."
+          "Es": "Un bloque para gestionar todos los preajustes relacionados con la frecuencia.",
+          "show_label": false
         },
         "layout": {
           "weight": 0,
-          "width": "100%",
-          "height": "145%"
+          "width": "100%"
         },
-        "show_label": false,
         "fields": {
           "Span": {
             "type": "_GuiButtonToggler",
             "label": {
               "active": {
-                "En": "Span",
-                "Fr": "Étendue",
-                "De": "Spanne",
-                "Es": "Intervalo"
+                "text": {
+                  "En": "Span",
+                  "Fr": "Étendue",
+                  "De": "Spanne",
+                  "Es": "Intervalo"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "AES70": "OcaSwitch",
             "handler": "set_span_frequency",
             "layout": {
-              "height": "158%",
               "max_cols": 4,
               "width": "100%",
               "stretch": "width",
@@ -288,7 +329,7 @@
               "active": {
                 "font_style": "bold",
                 "font_size": null,
-                "text_color": "#ff0000",
+                "text_color": "#FF9900",
                 "bg_color": "#000000",
                 "border_color": "#FF9900",
                 "border_thickness": 2,
@@ -309,16 +350,24 @@
                 "value": "0.01",
                 "label": {
                   "active": {
-                    "En": "Microscope",
-                    "Fr": "Microscope",
-                    "De": "Mikroskop",
-                    "Es": "Microscopio"
+                    "text": {
+                      "En": "Microscope",
+                      "Fr": "Microscope",
+                      "De": "Mikroskop",
+                      "Es": "Microscopio"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Microscope",
-                    "Fr": "Microscope",
-                    "De": "Mikroskop",
-                    "Es": "Microscopio"
+                    "text": {
+                      "En": "Microscope",
+                      "Fr": "Microscope",
+                      "De": "Mikroskop",
+                      "Es": "Microscopio"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -334,16 +383,24 @@
                 "value": "0.1",
                 "label": {
                   "active": {
-                    "En": "Tight",
-                    "Fr": "Tight",
-                    "De": "Tight",
-                    "Es": "Tight"
+                    "text": {
+                      "En": "Tight",
+                      "Fr": "Tight",
+                      "De": "Tight",
+                      "Es": "Tight"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Tight",
-                    "Fr": "Tight",
-                    "De": "Tight",
-                    "Es": "Tight"
+                    "text": {
+                      "En": "Tight",
+                      "Fr": "Tight",
+                      "De": "Tight",
+                      "Es": "Tight"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -359,16 +416,24 @@
                 "value": "1",
                 "label": {
                   "active": {
-                    "En": "Normal",
-                    "Fr": "Normal",
-                    "De": "Normal",
-                    "Es": "Normal"
+                    "text": {
+                      "En": "Normal",
+                      "Fr": "Normal",
+                      "De": "Normal",
+                      "Es": "Normal"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Normal",
-                    "Fr": "Normal",
-                    "De": "Normal",
-                    "Es": "Normal"
+                    "text": {
+                      "En": "Normal",
+                      "Fr": "Normal",
+                      "De": "Normal",
+                      "Es": "Normal"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -384,16 +449,24 @@
                 "value": "10",
                 "label": {
                   "active": {
-                    "En": "Wide",
-                    "Fr": "Large",
-                    "De": "Breit",
-                    "Es": "Ancho"
+                    "text": {
+                      "En": "Wide",
+                      "Fr": "Large",
+                      "De": "Breit",
+                      "Es": "Ancho"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Wide",
-                    "Fr": "Large",
-                    "De": "Breit",
-                    "Es": "Ancho"
+                    "text": {
+                      "En": "Wide",
+                      "Fr": "Large",
+                      "De": "Breit",
+                      "Es": "Ancho"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -409,16 +482,24 @@
                 "value": "100",
                 "label": {
                   "active": {
-                    "En": "Ultra Wide",
-                    "Fr": "Ultra Large",
-                    "De": "Ultra Breit",
-                    "Es": "Ultra Ancho"
+                    "text": {
+                      "En": "Ultra Wide",
+                      "Fr": "Ultra Large",
+                      "De": "Ultra Breit",
+                      "Es": "Ultra Ancho"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Ultra Wide",
-                    "Fr": "Ultra Large",
-                    "De": "Ultra Breit",
-                    "Es": "Ultra Ancho"
+                    "text": {
+                      "En": "Ultra Wide",
+                      "Fr": "Ultra Large",
+                      "De": "Ultra Breit",
+                      "Es": "Ultra Ancho"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -434,16 +515,24 @@
                 "value": "500",
                 "label": {
                   "active": {
-                    "En": "From Space",
-                    "Fr": "From Space",
-                    "De": "From Space",
-                    "Es": "From Space"
+                    "text": {
+                      "En": "From Space",
+                      "Fr": "From Space",
+                      "De": "From Space",
+                      "Es": "From Space"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "From Space",
-                    "Fr": "From Space",
-                    "De": "From Space",
-                    "Es": "From Space"
+                    "text": {
+                      "En": "From Space",
+                      "Fr": "From Space",
+                      "De": "From Space",
+                      "Es": "From Space"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -459,16 +548,24 @@
                 "value": "1000",
                 "label": {
                   "active": {
-                    "En": "From The Moon",
-                    "Fr": "From The Moon",
-                    "De": "From The Moon",
-                    "Es": "From The Moon"
+                    "text": {
+                      "En": "From The Moon",
+                      "Fr": "From The Moon",
+                      "De": "From The Moon",
+                      "Es": "From The Moon"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "From The Moon",
-                    "Fr": "From The Moon",
-                    "De": "From The Moon",
-                    "Es": "From The Moon"
+                    "text": {
+                      "En": "From The Moon",
+                      "Fr": "From The Moon",
+                      "De": "From The Moon",
+                      "Es": "From The Moon"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -484,16 +581,24 @@
                 "value": "NONE",
                 "label": {
                   "active": {
-                    "En": "None Selected",
-                    "Fr": "Aucun sélectionné",
-                    "De": "Keine ausgewählt",
-                    "Es": "Ninguno seleccionado"
+                    "text": {
+                      "En": "None Selected",
+                      "Fr": "Aucun sélectionné",
+                      "De": "Keine ausgewählt",
+                      "Es": "Ninguno seleccionado"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "None Selected",
-                    "Fr": "Aucun sélectionné",
-                    "De": "Keine ausgewählt",
-                    "Es": "Ninguno seleccionado"
+                    "text": {
+                      "En": "None Selected",
+                      "Fr": "Aucun sélectionné",
+                      "De": "Keine ausgewählt",
+                      "Es": "Ninguno seleccionado"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {

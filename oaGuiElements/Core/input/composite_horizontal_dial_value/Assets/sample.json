@@ -7,7 +7,8 @@
       10
     ],
     "label": {
-      "active": "Master High-Precision Tuning"
+      "active": "Master High-Precision Tuning",
+      "show_label": true
     },
     "description": "An exhaustive sample demonstrating every possible sub-configuration for the OcaCompositeFaderKnob.",
     "layout": {
@@ -24,7 +25,6 @@
     "step_coarse": 100.0,
     "step_fine": 0.001,
     "units": "MHz",
-    "show_label": true,
     "value_config": {
       "_README": "Overrides for the numerical entry and unit readout panel (Column 2).",
       "width": 12,

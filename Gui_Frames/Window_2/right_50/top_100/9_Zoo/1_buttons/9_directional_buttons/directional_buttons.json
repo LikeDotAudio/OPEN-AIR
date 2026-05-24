@@ -15,10 +15,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Navigation",
-            "Fr": "Navigation",
-            "De": "Navigation",
-            "Es": "Navigation"
+            "text": {
+              "En": "Navigation",
+              "Fr": "Navigation",
+              "De": "Navigation",
+              "Es": "Navigation"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -41,10 +45,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Camera Movement",
-            "Fr": "Camera Movement",
-            "De": "Camera Movement",
-            "Es": "Camera Movement"
+            "text": {
+              "En": "Camera Movement",
+              "Fr": "Camera Movement",
+              "De": "Camera Movement",
+              "Es": "Camera Movement"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -67,10 +75,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Robot Controls",
-            "Fr": "Robot Controls",
-            "De": "Robot Controls",
-            "Es": "Robot Controls"
+            "text": {
+              "En": "Robot Controls",
+              "Fr": "Robot Controls",
+              "De": "Robot Controls",
+              "Es": "Robot Controls"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -93,10 +105,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Cursor",
-            "Fr": "Cursor",
-            "De": "Cursor",
-            "Es": "Cursor"
+            "text": {
+              "En": "Cursor",
+              "Fr": "Cursor",
+              "De": "Cursor",
+              "Es": "Cursor"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -119,10 +135,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Focus Adjust",
-            "Fr": "Focus Adjust",
-            "De": "Focus Adjust",
-            "Es": "Focus Adjust"
+            "text": {
+              "En": "Focus Adjust",
+              "Fr": "Focus Adjust",
+              "De": "Focus Adjust",
+              "Es": "Focus Adjust"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {

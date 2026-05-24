@@ -49,10 +49,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Stop Sign",
-                "Fr": "Arrêter Sign",
-                "De": "Stop Sign",
-                "Es": "Parar Sign"
+                "text": {
+                  "En": "Stop Sign",
+                  "Fr": "Arrêter Sign",
+                  "De": "Stop Sign",
+                  "Es": "Parar Sign"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -160,10 +164,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Caution Yellow",
-                "Fr": "Caution Yellow",
-                "De": "Caution Yellow",
-                "Es": "Caution Yellow"
+                "text": {
+                  "En": "Caution Yellow",
+                  "Fr": "Caution Yellow",
+                  "De": "Caution Yellow",
+                  "Es": "Caution Yellow"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -263,10 +271,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Emerald Sign",
-                "Fr": "Emerald Sign",
-                "De": "Emerald Sign",
-                "Es": "Emerald Sign"
+                "text": {
+                  "En": "Emerald Sign",
+                  "Fr": "Emerald Sign",
+                  "De": "Emerald Sign",
+                  "Es": "Emerald Sign"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -345,10 +357,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Blueprint",
-                "Fr": "Blueprint",
-                "De": "Blueprint",
-                "Es": "Blueprint"
+                "text": {
+                  "En": "Blueprint",
+                  "Fr": "Blueprint",
+                  "De": "Blueprint",
+                  "Es": "Blueprint"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -427,10 +443,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Royal Octagon",
-                "Fr": "Royal Octagon",
-                "De": "Royal Octagon",
-                "Es": "Royal Octagon"
+                "text": {
+                  "En": "Royal Octagon",
+                  "Fr": "Royal Octagon",
+                  "De": "Royal Octagon",
+                  "Es": "Royal Octagon"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -510,10 +530,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Night Mode",
-                "Fr": "Night Mode",
-                "De": "Night Mode",
-                "Es": "Night Mode"
+                "text": {
+                  "En": "Night Mode",
+                  "Fr": "Night Mode",
+                  "De": "Night Mode",
+                  "Es": "Night Mode"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -591,10 +615,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Vintage Analog",
-                "Fr": "Vintage Analog",
-                "De": "Vintage Analog",
-                "Es": "Vintage Analog"
+                "text": {
+                  "En": "Vintage Analog",
+                  "Fr": "Vintage Analog",
+                  "De": "Vintage Analog",
+                  "Es": "Vintage Analog"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -673,10 +701,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Cyber Sign",
-                "Fr": "Cyber Sign",
-                "De": "Cyber Sign",
-                "Es": "Cyber Sign"
+                "text": {
+                  "En": "Cyber Sign",
+                  "Fr": "Cyber Sign",
+                  "De": "Cyber Sign",
+                  "Es": "Cyber Sign"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {

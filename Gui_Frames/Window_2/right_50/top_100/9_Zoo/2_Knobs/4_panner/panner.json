@@ -41,7 +41,8 @@
               "En": "Pan L/R",
               "Fr": "Panoramique L/R",
               "De": "Panorama L/R",
-              "Es": "Panorámico L/R"
+              "Es": "Panorámico L/R",
+              "show_label": true
             },
             "notes": "Standard stereo panner, centered.",
             "geometry": {
@@ -65,8 +66,7 @@
                 "secondary": "#ADD8E6"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "style_overrides": {
                 "custom_ticks": [
@@ -117,7 +117,8 @@
               "En": "Pan Left",
               "Fr": "Panoramique Gauche",
               "De": "Panorama Links",
-              "Es": "Panorámico Izquierda"
+              "Es": "Panorámico Izquierda",
+              "show_label": true
             },
             "notes": "Latching left pan.",
             "geometry": {
@@ -141,8 +142,7 @@
                 "secondary": "#F8BBD0"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "style_overrides": {
                 "custom_ticks": [
@@ -194,7 +194,8 @@
               "En": "Pan Right",
               "Fr": "Panoramique Droite",
               "De": "Panorama Rechts",
-              "Es": "Panorámico Derecha"
+              "Es": "Panorámico Derecha",
+              "show_label": true
             },
             "notes": "Momentary right pan.",
             "geometry": {
@@ -218,8 +219,7 @@
                 "secondary": "#BBDEFB"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "style_overrides": {
                 "custom_ticks": [
@@ -271,7 +271,8 @@
               "En": "Width",
               "Fr": "Largeur",
               "De": "Breite",
-              "Es": "Ancho"
+              "Es": "Ancho",
+              "show_label": true
             },
             "notes": "Latching stereo width.",
             "geometry": {
@@ -295,8 +296,7 @@
                 "secondary": "#E1BEE7"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "style_overrides": {
                 "custom_ticks": [
@@ -348,7 +348,8 @@
               "En": "Balance",
               "Fr": "Balance",
               "De": "Balance",
-              "Es": "Balance"
+              "Es": "Balance",
+              "show_label": true
             },
             "notes": "Momentary balance control.",
             "geometry": {
@@ -372,8 +373,7 @@
                 "secondary": "#DCEDC8"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "style_overrides": {
                 "custom_ticks": [
@@ -424,7 +424,8 @@
               "En": "Spread",
               "Fr": "Spread",
               "De": "Spread",
-              "Es": "Spread"
+              "Es": "Spread",
+              "show_label": true
             },
             "notes": "Latching spread control.",
             "geometry": {
@@ -448,8 +449,7 @@
                 "secondary": "#FFC0CB"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "style_overrides": {
                 "custom_ticks": [
@@ -500,7 +500,8 @@
               "En": "Azimuth",
               "Fr": "Azimuth",
               "De": "Azimuth",
-              "Es": "Azimuth"
+              "Es": "Azimuth",
+              "show_label": true
             },
             "notes": "Momentary azimuth angle.",
             "geometry": {
@@ -524,8 +525,7 @@
                 "secondary": "#B2DFDB"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "style_overrides": {
                 "custom_ticks": [
@@ -577,7 +577,8 @@
               "En": "Elevation",
               "Fr": "Elevation",
               "De": "Elevation",
-              "Es": "Elevation"
+              "Es": "Elevation",
+              "show_label": true
             },
             "notes": "Latching elevation angle.",
             "geometry": {
@@ -601,8 +602,7 @@
                 "secondary": "#E1BEE7"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "style_overrides": {
                 "custom_ticks": [
@@ -680,7 +680,8 @@
               "En": "Aux 1 Pan",
               "Fr": "Auxiliairesiliaires 1 Panoramique",
               "De": "Aux-Sends-Sends 1 Panorama",
-              "Es": "Auxiliaresiliares 1 Panorámico"
+              "Es": "Auxiliaresiliares 1 Panorámico",
+              "show_label": true
             },
             "notes": "Standard stereo pan, centered.",
             "geometry": {
@@ -703,8 +704,7 @@
                 "secondary": "#ADD8E6"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "style_overrides": {
                 "custom_ticks": [
@@ -755,7 +755,8 @@
               "En": "Aux 1 L",
               "Fr": "Auxiliairesiliaires 1 L",
               "De": "Aux-Sends-Sends 1 L",
-              "Es": "Auxiliaresiliares 1 L"
+              "Es": "Auxiliaresiliares 1 L",
+              "show_label": true
             },
             "notes": "Left-biased pan.",
             "geometry": {
@@ -778,8 +779,7 @@
                 "secondary": "#F8BBD0"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "style_overrides": {
                 "custom_ticks": [
@@ -830,7 +830,8 @@
               "En": "Aux 1 R",
               "Fr": "Auxiliairesiliaires 1 R",
               "De": "Aux-Sends-Sends 1 R",
-              "Es": "Auxiliaresiliares 1 R"
+              "Es": "Auxiliaresiliares 1 R",
+              "show_label": true
             },
             "notes": "Right-biased pan.",
             "geometry": {
@@ -853,8 +854,7 @@
                 "secondary": "#BBDEFB"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "style_overrides": {
                 "custom_ticks": [
@@ -905,7 +905,8 @@
               "En": "Width",
               "Fr": "Largeur",
               "De": "Breite",
-              "Es": "Ancho"
+              "Es": "Ancho",
+              "show_label": true
             },
             "notes": "Latching stereo width.",
             "geometry": {
@@ -928,8 +929,7 @@
                 "secondary": "#DCEDC8"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "style_overrides": {
                 "custom_ticks": [
@@ -981,7 +981,8 @@
               "En": "Balance",
               "Fr": "Balance",
               "De": "Balance",
-              "Es": "Balance"
+              "Es": "Balance",
+              "show_label": true
             },
             "notes": "Momentary balance control.",
             "geometry": {
@@ -1004,8 +1005,7 @@
                 "secondary": "#FFC0CB"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "style_overrides": {
                 "custom_ticks": [
@@ -1056,7 +1056,8 @@
               "En": "Spread",
               "Fr": "Spread",
               "De": "Spread",
-              "Es": "Spread"
+              "Es": "Spread",
+              "show_label": true
             },
             "notes": "Latching spread control.",
             "geometry": {
@@ -1079,8 +1080,7 @@
                 "secondary": "#E1BEE7"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "style_overrides": {
                 "custom_ticks": [
@@ -1131,7 +1131,8 @@
               "En": "Azimuth",
               "Fr": "Azimuth",
               "De": "Azimuth",
-              "Es": "Azimuth"
+              "Es": "Azimuth",
+              "show_label": true
             },
             "notes": "Momentary azimuth angle.",
             "geometry": {
@@ -1154,8 +1155,7 @@
                 "secondary": "#B2DFDB"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "style_overrides": {
                 "custom_ticks": [
@@ -1207,7 +1207,8 @@
               "En": "Elevation",
               "Fr": "Elevation",
               "De": "Elevation",
-              "Es": "Elevation"
+              "Es": "Elevation",
+              "show_label": true
             },
             "notes": "Latching elevation angle.",
             "geometry": {
@@ -1230,8 +1231,7 @@
                 "secondary": "#D7CCC8"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "style_overrides": {
                 "custom_ticks": [
@@ -1283,10 +1283,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Aux 2 Pan",
-            "Fr": "Auxiliairesiliaires 2 Panoramique",
-            "De": "Aux-Sends-Sends 2 Panorama",
-            "Es": "Auxiliaresiliares 2 Panorámico"
+            "text": {
+              "En": "Aux 2 Pan",
+              "Fr": "Auxiliairesiliaires 2 Panoramique",
+              "De": "Aux-Sends-Sends 2 Panorama",
+              "Es": "Auxiliaresiliares 2 Panorámico"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -1296,7 +1300,8 @@
               "En": "Aux 2 Pan",
               "Fr": "Auxiliairesiliaires 2 Panoramique",
               "De": "Aux-Sends-Sends 2 Panorama",
-              "Es": "Auxiliaresiliares 2 Panorámico"
+              "Es": "Auxiliaresiliares 2 Panorámico",
+              "show_label": true
             },
             "notes": "Panner with a default position to the right.",
             "geometry": {
@@ -1317,8 +1322,7 @@
                 "primary": "#ce9178"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -1381,7 +1385,8 @@
               "En": "Width",
               "Fr": "Largeur",
               "De": "Breite",
-              "Es": "Ancho"
+              "Es": "Ancho",
+              "show_label": true
             },
             "notes": "Standard stereo width.",
             "geometry": {
@@ -1404,8 +1409,7 @@
                 "secondary": "#cce5f9"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "style_overrides": {
                 "custom_ticks": [
@@ -1456,7 +1460,8 @@
               "En": "Narrow",
               "Fr": "Narrow",
               "De": "Narrow",
-              "Es": "Narrow"
+              "Es": "Narrow",
+              "show_label": true
             },
             "notes": "Narrower width control.",
             "geometry": {
@@ -1479,8 +1484,7 @@
                 "secondary": "#f8bbd0"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "style_overrides": {
                 "custom_ticks": [
@@ -1532,7 +1536,8 @@
               "En": "Wide",
               "Fr": "Wide",
               "De": "Wide",
-              "Es": "Wide"
+              "Es": "Wide",
+              "show_label": true
             },
             "notes": "Wider stereo spread.",
             "geometry": {
@@ -1555,8 +1560,7 @@
                 "secondary": "#DCEDC8"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "style_overrides": {
                 "custom_ticks": [
@@ -1608,7 +1612,8 @@
               "En": "Full",
               "Fr": "Complet",
               "De": "Vollständig",
-              "Es": "Completo"
+              "Es": "Completo",
+              "show_label": true
             },
             "notes": "Full L/R pan range.",
             "geometry": {
@@ -1631,8 +1636,7 @@
                 "secondary": "#E1BEE7"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "style_overrides": {
                 "custom_ticks": [
@@ -1684,7 +1688,8 @@
               "En": "Balance",
               "Fr": "Balance",
               "De": "Balance",
-              "Es": "Balance"
+              "Es": "Balance",
+              "show_label": true
             },
             "notes": "Latching balance control.",
             "geometry": {
@@ -1707,8 +1712,7 @@
                 "secondary": "#FFC0CB"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "style_overrides": {
                 "custom_ticks": [
@@ -1759,7 +1763,8 @@
               "En": "Depth",
               "Fr": "Profondeur",
               "De": "Tiefe",
-              "Es": "Profundidad"
+              "Es": "Profundidad",
+              "show_label": true
             },
             "notes": "Momentary depth control.",
             "geometry": {
@@ -1782,8 +1787,7 @@
                 "secondary": "#B2DFDB"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "style_overrides": {
                 "custom_ticks": [
@@ -1835,7 +1839,8 @@
               "En": "Azimuth",
               "Fr": "Azimuth",
               "De": "Azimuth",
-              "Es": "Azimuth"
+              "Es": "Azimuth",
+              "show_label": true
             },
             "notes": "Latching azimuth angle.",
             "geometry": {
@@ -1858,8 +1863,7 @@
                 "secondary": "#E1BEE7"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "style_overrides": {
                 "custom_ticks": [
@@ -1911,7 +1915,8 @@
               "En": "Elevation",
               "Fr": "Elevation",
               "De": "Elevation",
-              "Es": "Elevation"
+              "Es": "Elevation",
+              "show_label": true
             },
             "notes": "Momentary elevation angle.",
             "geometry": {
@@ -1934,8 +1939,7 @@
                 "secondary": "#D7CCC8"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "style_overrides": {
                 "custom_ticks": [
@@ -1987,10 +1991,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "FX Send",
-            "Fr": "FX Send",
-            "De": "FX Send",
-            "Es": "FX Send"
+            "text": {
+              "En": "FX Send",
+              "Fr": "FX Send",
+              "De": "FX Send",
+              "Es": "FX Send"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -2000,7 +2008,8 @@
               "En": "FX Send",
               "Fr": "FX Send",
               "De": "FX Send",
-              "Es": "FX Send"
+              "Es": "FX Send",
+              "show_label": true
             },
             "notes": "Compact panner starting at its extreme left position.",
             "geometry": {
@@ -2022,8 +2031,7 @@
                 "primary": "#7d7d7d"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {

@@ -153,10 +153,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "RUN",
-                    "Fr": "EXEC",
-                    "De": "AUSFÜHREN",
-                    "Es": "EJEC"
+                    "text": {
+                      "En": "RUN",
+                      "Fr": "EXEC",
+                      "De": "AUSFÜHREN",
+                      "Es": "EJEC"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -189,10 +193,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "STOP",
-                    "Fr": "STOP",
-                    "De": "STOP",
-                    "Es": "STOP"
+                    "text": {
+                      "En": "STOP",
+                      "Fr": "STOP",
+                      "De": "STOP",
+                      "Es": "STOP"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -225,10 +233,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "SINGLE",
-                    "Fr": "SINGLE",
-                    "De": "SINGLE",
-                    "Es": "SINGLE"
+                    "text": {
+                      "En": "SINGLE",
+                      "Fr": "SINGLE",
+                      "De": "SINGLE",
+                      "Es": "SINGLE"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -261,10 +273,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "AUTOSCALE",
-                    "Fr": "ÉCHELLE AUTO",
-                    "De": "AUTOSCALE",
-                    "Es": "ESCALA AUTO"
+                    "text": {
+                      "En": "AUTOSCALE",
+                      "Fr": "ÉCHELLE AUTO",
+                      "De": "AUTOSCALE",
+                      "Es": "ESCALA AUTO"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -302,10 +318,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "Clear Display",
-                    "Fr": "Effacer l'affichage",
-                    "De": "Anzeige löschen",
-                    "Es": "Borrar pantalla"
+                    "text": {
+                      "En": "Clear Display",
+                      "Fr": "Effacer l'affichage",
+                      "De": "Anzeige löschen",
+                      "Es": "Borrar pantalla"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -343,10 +363,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "CLS",
-                    "Fr": "CLS",
-                    "De": "CLS",
-                    "Es": "CLS"
+                    "text": {
+                      "En": "CLS",
+                      "Fr": "CLS",
+                      "De": "CLS",
+                      "Es": "CLS"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -379,10 +403,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "Reset (*RST)",
-                    "Fr": "Réinitialiser (*RST)",
-                    "De": "Zurücksetzen (*RST)",
-                    "Es": "Reiniciar (*RST)"
+                    "text": {
+                      "En": "Reset (*RST)",
+                      "Fr": "Réinitialiser (*RST)",
+                      "De": "Zurücksetzen (*RST)",
+                      "Es": "Reiniciar (*RST)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",

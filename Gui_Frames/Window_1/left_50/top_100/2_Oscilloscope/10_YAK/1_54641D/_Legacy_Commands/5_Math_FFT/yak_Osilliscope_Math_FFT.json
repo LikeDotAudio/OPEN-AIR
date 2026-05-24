@@ -838,10 +838,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "Math ON",
-                    "Fr": "Math ON",
-                    "De": "Math EIN",
-                    "Es": "Math ENC"
+                    "text": {
+                      "En": "Math ON",
+                      "Fr": "Math ON",
+                      "De": "Math EIN",
+                      "Es": "Math ENC"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -874,10 +878,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "Math OFF",
-                    "Fr": "Math OFF",
-                    "De": "Math AUS",
-                    "Es": "Math DES"
+                    "text": {
+                      "En": "Math OFF",
+                      "Fr": "Math OFF",
+                      "De": "Math AUS",
+                      "Es": "Math DES"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",

@@ -52,10 +52,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Large Classic",
-                "Fr": "Large Classique",
-                "De": "Large Klassisch",
-                "Es": "Large Clásico"
+                "text": {
+                  "En": "Large Classic",
+                  "Fr": "Large Classique",
+                  "De": "Large Klassisch",
+                  "Es": "Large Clásico"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -157,10 +161,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Medium Gold",
-                "Fr": "Moyen Gold",
-                "De": "Mittel Gold",
-                "Es": "Medio Gold"
+                "text": {
+                  "En": "Medium Gold",
+                  "Fr": "Moyen Gold",
+                  "De": "Mittel Gold",
+                  "Es": "Medio Gold"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -254,10 +262,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Small Red",
-                "Fr": "Small Red",
-                "De": "Small Red",
-                "Es": "Small Red"
+                "text": {
+                  "En": "Small Red",
+                  "Fr": "Small Red",
+                  "De": "Small Red",
+                  "Es": "Small Red"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -350,10 +362,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Police Blue",
-                "Fr": "Police Blue",
-                "De": "Police Blue",
-                "Es": "Police Blue"
+                "text": {
+                  "En": "Police Blue",
+                  "Fr": "Police Blue",
+                  "De": "Police Blue",
+                  "Es": "Police Blue"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -444,10 +460,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Fire Red",
-                "Fr": "Fire Red",
-                "De": "Fire Red",
-                "Es": "Fire Red"
+                "text": {
+                  "En": "Fire Red",
+                  "Fr": "Fire Red",
+                  "De": "Fire Red",
+                  "Es": "Fire Red"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -538,10 +558,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Security Grey",
-                "Fr": "Security Grey",
-                "De": "Security Grey",
-                "Es": "Security Grey"
+                "text": {
+                  "En": "Security Grey",
+                  "Fr": "Security Grey",
+                  "De": "Security Grey",
+                  "Es": "Security Grey"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -632,10 +656,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Cyber Badge",
-                "Fr": "Cyber Badge",
-                "De": "Cyber Badge",
-                "Es": "Cyber Badge"
+                "text": {
+                  "En": "Cyber Badge",
+                  "Fr": "Cyber Badge",
+                  "De": "Cyber Badge",
+                  "Es": "Cyber Badge"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -726,10 +754,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Royal Purple",
-                "Fr": "Royal Purple",
-                "De": "Royal Purple",
-                "Es": "Royal Purple"
+                "text": {
+                  "En": "Royal Purple",
+                  "Fr": "Royal Purple",
+                  "De": "Royal Purple",
+                  "Es": "Royal Purple"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -820,10 +852,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Eco Green",
-                "Fr": "Eco Green",
-                "De": "Eco Green",
-                "Es": "Eco Green"
+                "text": {
+                  "En": "Eco Green",
+                  "Fr": "Eco Green",
+                  "De": "Eco Green",
+                  "Es": "Eco Green"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {

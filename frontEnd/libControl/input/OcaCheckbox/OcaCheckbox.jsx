@@ -49,7 +49,7 @@ const OcaCheckbox = ({ value, onChange, config, topic, nodeJson }) => {
                 alignItems: 'center',
                 marginRight: '10px',
                 position: 'relative',
-                backgroundColor: '#111'
+                backgroundColor: (window.OaTransparency ? window.OaTransparency.bg(config, '#111') : '#111')
             }}>
                 {val && (
                     <svg width={boxSize-4} height={boxSize-4} viewBox="0 0 10 10">

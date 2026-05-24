@@ -24,10 +24,14 @@
             "type": "_GuiActuator",
             "label": {
               "inactive": {
-                "En": "Mode: CC",
-                "Fr": "Mode: CC",
-                "De": "Modus: CC",
-                "Es": "Modo: CC"
+                "text": {
+                  "En": "Mode: CC",
+                  "Fr": "Mode: CC",
+                  "De": "Modus: CC",
+                  "Es": "Modo: CC"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "AES70": "OcaBooleanActuator",
@@ -64,10 +68,14 @@
             "type": "_GuiActuator",
             "label": {
               "inactive": {
-                "En": "Mode: CV",
-                "Fr": "Mode: CV",
-                "De": "Modus: CV",
-                "Es": "Modo: CV"
+                "text": {
+                  "En": "Mode: CV",
+                  "Fr": "Mode: CV",
+                  "De": "Modus: CV",
+                  "Es": "Modo: CV"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "AES70": "OcaBooleanActuator",
@@ -104,10 +112,14 @@
             "type": "_GuiActuator",
             "label": {
               "inactive": {
-                "En": "Mode: CR",
-                "Fr": "Mode: CR",
-                "De": "Modus: CR",
-                "Es": "Modo: CR"
+                "text": {
+                  "En": "Mode: CR",
+                  "Fr": "Mode: CR",
+                  "De": "Modus: CR",
+                  "Es": "Modo: CR"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "AES70": "OcaBooleanActuator",

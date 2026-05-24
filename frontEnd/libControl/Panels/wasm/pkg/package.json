@@ -1,0 +1,12 @@
+{
+  "name": "oa_panels",
+  "description": "Procedural industrial panel + screw background generator (WASM)",
+  "version": "0.1.0",
+  "files": [
+    "oa_panels_bg.wasm",
+    "oa_panels.js",
+    "oa_panels.d.ts"
+  ],
+  "browser": "oa_panels.js",
+  "types": "oa_panels.d.ts"
+}

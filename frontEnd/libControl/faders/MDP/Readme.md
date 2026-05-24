@@ -25,7 +25,11 @@ in the property editor.
   "composite_mdp_Faders_Variant_Example": {
     "type": "_MDP",
     "label": {
-      "active": "MDP 1"
+      "active": {
+        "text": "MDP 1",
+        "text_size": 12,
+        "text_color": "#cccccc"
+      }
     },
     "path": "audio/mdp/1",
     "initial_x": 210,
@@ -75,7 +79,11 @@ in the property editor.
     },
     "ltp": {
       "label": {
-        "active": "Level"
+        "active": {
+          "text": "Level",
+          "text_size": 12,
+          "text_color": "#cccccc"
+        }
       },
       "value_default": -10,
       "cap_color": "#00FF00",

@@ -23,13 +23,20 @@ in the property editor.
   "meter_knob_with_vu_meter_Example": {
     "widget_type": "_VUMeterKnob",
     "label": {
-      "active": "Master L"
+      "active": {
+        "text": "Master L",
+        "text_size": 12,
+        "text_color": "#cccccc"
+      }
     },
     "path": "audio/master/left/vu",
     "knob_path": "audio/master/left/gain",
     "size": 200,
-    "min": -60,
-    "max": 6,
+    "domain": {
+      "locked": false,
+      "min": -60,
+      "max": 6
+    },
     "knob_min": 0,
     "knob_max": 100,
     "knob_width": 100,

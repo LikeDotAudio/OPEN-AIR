@@ -25,10 +25,14 @@
             "type": "_JsonTree",
             "label": {
               "active": {
-                "En": "AES70 Object Model (data_AES70.json)",
-                "Fr": "AES70 Object Model (data_AES70.json)",
-                "De": "AES70 Object Model (data_AES70.json)",
-                "Es": "AES70 Object Model (data_AES70.json)"
+                "text": {
+                  "En": "AES70 Object Model (data_AES70.json)",
+                  "Fr": "AES70 Object Model (data_AES70.json)",
+                  "De": "AES70 Object Model (data_AES70.json)",
+                  "Es": "AES70 Object Model (data_AES70.json)"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "json_source": "display/right_50/bottom_90/10_sets/3_AES70/data_AES70.json",
@@ -38,10 +42,14 @@
             "type": "JsonTree",
             "label": {
               "active": {
-                "En": "Dataset Configuration EngineGuiDisplay",
-                "Fr": "Dataset Configuration EngineGuiDisplay",
-                "De": "Dataset Configuration EngineGuiDisplay",
-                "Es": "Dataset Configuration EngineGuiDisplay"
+                "text": {
+                  "En": "Dataset Configuration EngineGuiDisplay",
+                  "Fr": "Dataset Configuration EngineGuiDisplay",
+                  "De": "Dataset Configuration EngineGuiDisplay",
+                  "Es": "Dataset Configuration EngineGuiDisplay"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "json_source": "display/right_50/bottom_90/10_sets/dataset_configuration_application.json",
@@ -51,10 +59,14 @@
             "type": "JsonTree",
             "label": {
               "active": {
-                "En": "File Browser",
-                "Fr": "File Browser",
-                "De": "File Browser",
-                "Es": "File Browser"
+                "text": {
+                  "En": "File Browser",
+                  "Fr": "File Browser",
+                  "De": "File Browser",
+                  "Es": "File Browser"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "allow_browse": true,

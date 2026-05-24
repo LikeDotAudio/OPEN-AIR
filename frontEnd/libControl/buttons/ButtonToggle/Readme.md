@@ -71,13 +71,21 @@ in the property editor.
       "options": {
         "ON": {
           "label": {
-            "active": "MUTED"
+            "active": {
+              "text": "MUTED",
+              "text_size": 12,
+              "text_color": "#cccccc"
+            }
           },
           "selected": false
         },
         "OFF": {
           "label": {
-            "inactive": "LIVE"
+            "inactive": {
+              "text": "LIVE",
+              "text_size": 12,
+              "text_color": "#cccccc"
+            }
           },
           "selected": true
         }

@@ -37,11 +37,13 @@
     );
   };
 
-  // Copy/paste controls shown beside the `style` and `layout` fold-outs.
+  // Copy/paste controls shown beside the `style`, `layout`, and any `*_config`
+  // sub-element fold-outs.
   const sectionExtra = (k, copyValue, basePath, keyPath, store) => {
     const onPaste = (v) => store.setProp(basePath, keyPath, v);
     if (k === 'style' && window.OaEdCopyStyle) return <window.OaEdCopyStyle value={copyValue} onPaste={onPaste} />;
     if (k === 'layout' && window.OaEdCopyLayout) return <window.OaEdCopyLayout value={copyValue} onPaste={onPaste} />;
+    if (/_config$/.test(k) && window.OaEdCopyConfig) return <window.OaEdCopyConfig value={copyValue} kind={k} onPaste={onPaste} />;
     return null;
   };
 

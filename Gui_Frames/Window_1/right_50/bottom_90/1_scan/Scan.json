@@ -97,9 +97,10 @@
         },
         "id": "multi_dataset_plot",
         "layout": {
-          "height": 1000,
+          "height": "100%",
           "sticky": "",
-          "weight_y": 1
+          "weight_y": 1,
+          "width": "100%"
         },
         "plot_mode": "time_domain",
         "style": {
@@ -116,6 +117,9 @@
       "anchor": "NSEW"
     },
     "id": "50.90.1",
-    "type": "OcaBin"
+    "type": "OcaBin",
+    "layout": {
+      "height": "100%"
+    }
   }
 }

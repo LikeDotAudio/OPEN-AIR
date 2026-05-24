@@ -27,9 +27,9 @@
               "En": "01: Bottom Scale",
               "Fr": "01: Bas Scale",
               "De": "01: Unten Scale",
-              "Es": "01: Abajo Scale"
+              "Es": "01: Abajo Scale",
+              "show_label": true
             },
-            "show_label": true,
             "label_position": "top",
             "scale_position": "bottom",
             "scale": {
@@ -94,9 +94,9 @@
               "En": "02: Top/Left Scale",
               "Fr": "02: Top/Left Scale",
               "De": "02: Top/Left Scale",
-              "Es": "02: Top/Left Scale"
+              "Es": "02: Top/Left Scale",
+              "show_label": true
             },
-            "show_label": true,
             "label_position": "right",
             "scale_position": "top",
             "scale": {
@@ -161,9 +161,9 @@
               "En": "03: Bottom Text",
               "Fr": "03: Bas Text",
               "De": "03: Unten Text",
-              "Es": "03: Abajo Text"
+              "Es": "03: Abajo Text",
+              "show_label": true
             },
-            "show_label": true,
             "label_position": "left",
             "scale_position": "bottom",
             "scale": {
@@ -227,9 +227,9 @@
               "En": "04: Ticks Only",
               "Fr": "04: Ticks Only",
               "De": "04: Ticks Only",
-              "Es": "04: Ticks Only"
+              "Es": "04: Ticks Only",
+              "show_label": true
             },
-            "show_label": true,
             "label_position": "top",
             "scale_position": "none",
             "scale": {
@@ -294,9 +294,9 @@
               "En": "HIDDEN LABEL",
               "Fr": "HIDDEN LABEL",
               "De": "HIDDEN LABEL",
-              "Es": "HIDDEN LABEL"
+              "Es": "HIDDEN LABEL",
+              "show_label": false
             },
-            "show_label": false,
             "label_position": "bottom",
             "scale_position": "bottom",
             "scale": {
@@ -361,9 +361,9 @@
               "En": "06: Rect Peak",
               "Fr": "06: Rect Peak",
               "De": "06: Rect Peak",
-              "Es": "06: Rect Peak"
+              "Es": "06: Rect Peak",
+              "show_label": true
             },
-            "show_label": true,
             "label_position": "top",
             "scale_position": "top",
             "scale": {
@@ -428,9 +428,9 @@
               "En": "07: Minimalist",
               "Fr": "07: Minimalist",
               "De": "07: Minimalist",
-              "Es": "07: Minimalist"
+              "Es": "07: Minimalist",
+              "show_label": true
             },
-            "show_label": true,
             "label_position": "left",
             "scale_position": "none",
             "scale": {
@@ -491,9 +491,9 @@
               "En": "08: Blue Ticks - NEEDLE",
               "Fr": "08: Blue Ticks - NEEDLE",
               "De": "08: Blue Ticks - NEEDLE",
-              "Es": "08: Blue Ticks - NEEDLE"
+              "Es": "08: Blue Ticks - NEEDLE",
+              "show_label": true
             },
-            "show_label": true,
             "label_position": "right",
             "scale_position": "bottom",
             "scale": {
@@ -558,9 +558,9 @@
               "En": "09: Thick Bar",
               "Fr": "09: Thick Bar",
               "De": "09: Thick Bar",
-              "Es": "09: Thick Bar"
+              "Es": "09: Thick Bar",
+              "show_label": true
             },
-            "show_label": true,
             "label_position": "top",
             "scale_position": "top",
             "scale": {
@@ -625,9 +625,9 @@
               "En": "10: Transient",
               "Fr": "10: Transient",
               "De": "10: Transient",
-              "Es": "10: Transient"
+              "Es": "10: Transient",
+              "show_label": true
             },
-            "show_label": true,
             "label_position": "bottom",
             "scale_position": "bottom",
             "scale": {
@@ -716,9 +716,9 @@
             "En": "04: Retro (Huge Ticks)",
             "Fr": "04: Retro (Huge Ticks)",
             "De": "04: Retro (Huge Ticks)",
-            "Es": "04: Retro (Huge Ticks)"
+            "Es": "04: Retro (Huge Ticks)",
+            "show_label": true
           },
-          "show_label": true,
           "scale_position": "none",
           "scale": {
             "upper_range": 0.0,
@@ -789,9 +789,9 @@
             "En": "HIDDEN LABEL",
             "Fr": "HIDDEN LABEL",
             "De": "HIDDEN LABEL",
-            "Es": "HIDDEN LABEL"
+            "Es": "HIDDEN LABEL",
+            "show_label": false
           },
-          "show_label": false,
           "scale_position": "bottom",
           "scale": {
             "upper_range": 0.0,
@@ -862,9 +862,9 @@
             "En": "06: Blue (Thick Peak)",
             "Fr": "06: Blue (Thick Peak)",
             "De": "06: Blue (Thick Peak)",
-            "Es": "06: Blue (Thick Peak)"
+            "Es": "06: Blue (Thick Peak)",
+            "show_label": true
           },
-          "show_label": true,
           "scale_position": "top",
           "scale": {
             "upper_range": 0.0,
@@ -935,9 +935,9 @@
             "En": "07: Minimalist (Mono)",
             "Fr": "07: Minimalist (Mono)",
             "De": "07: Minimalist (Mono)",
-            "Es": "07: Minimalist (Mono)"
+            "Es": "07: Minimalist (Mono)",
+            "show_label": true
           },
-          "show_label": true,
           "scale_position": "none",
           "scale": {
             "upper_range": -3.0,
@@ -1008,9 +1008,9 @@
             "En": "08: Contrast (Tiny Font)",
             "Fr": "08: Contrast (Tiny Font)",
             "De": "08: Contrast (Tiny Font)",
-            "Es": "08: Contrast (Tiny Font)"
+            "Es": "08: Contrast (Tiny Font)",
+            "show_label": true
           },
-          "show_label": true,
           "scale_position": "bottom",
           "scale": {
             "upper_range": -6.0,
@@ -1081,9 +1081,9 @@
             "En": "09: Mono (Large Peak LED)",
             "Fr": "09: Mono (Large Peak LED)",
             "De": "09: Mono (Large Peak LED)",
-            "Es": "09: Mono (Large Peak LED)"
+            "Es": "09: Mono (Large Peak LED)",
+            "show_label": true
           },
-          "show_label": true,
           "scale_position": "top",
           "scale": {
             "upper_range": 0.0,
@@ -1154,9 +1154,9 @@
             "En": "10: Transient (No Scale Font)",
             "Fr": "10: Transient (No Scale Font)",
             "De": "10: Transient (No Scale Font)",
-            "Es": "10: Transient (No Scale Font)"
+            "Es": "10: Transient (No Scale Font)",
+            "show_label": true
           },
-          "show_label": true,
           "scale_position": "bottom",
           "scale": {
             "upper_range": 0.0,

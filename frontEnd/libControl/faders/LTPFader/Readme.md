@@ -22,18 +22,30 @@ in the property editor.
   "fader_linear_travelling_potentiometer_Example": {
     "type": "_CustomLTP",
     "label": {
-      "active": "Master Gali"
+      "active": {
+        "text": "Master Gali",
+        "text_size": 12,
+        "text_color": "#cccccc"
+      }
     },
     "notes": "A fully-featured Linear Travelling Potentiometer (LTP) sample showcasing every parameter.",
     "fader_config": {
+      "cosmetics": {
+        "colors": {
+          "highlight": "#33A1FD"
+        }
+      },
+      "readout": {
+        "show_value": true,
+        "show_units": true
+      },
+      "interaction": {
+        "reff_point": 0.0
+      },
       "value_min": -100.0,
       "value_max": 20.0,
       "value_default": -10.0,
       "log_exponent": 1.0,
-      "reff_point": 0.0,
-      "value_highlight_color": "#33A1FD",
-      "show_value": true,
-      "show_units": true,
       "unit_text": "dB",
       "unit_position": "right"
     },

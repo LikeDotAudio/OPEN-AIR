@@ -24,10 +24,14 @@
             "type": "_GuiActuator",
             "label": {
               "inactive": {
-                "En": "Trigger (*TRG)",
-                "Fr": "Déclencheur (*TRG)",
-                "De": "Trigger (*TRG)",
-                "Es": "Disparo (*TRG)"
+                "text": {
+                  "En": "Trigger (*TRG)",
+                  "Fr": "Déclencheur (*TRG)",
+                  "De": "Trigger (*TRG)",
+                  "Es": "Disparo (*TRG)"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "AES70": "OcaBooleanActuator",

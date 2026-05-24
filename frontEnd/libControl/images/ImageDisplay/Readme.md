@@ -22,7 +22,11 @@ in the property editor.
   "images_image_display_Example": {
     "type": "_GuiImage",
     "label": {
-      "active": "Flux Capacitor"
+      "active": {
+        "text": "Flux Capacitor",
+        "text_size": 12,
+        "text_color": "#cccccc"
+      }
     },
     "path": "oaDataCache/assets/images/flux_capacitor.png",
     "notes": "Static display of the Flux Capacitor.",

@@ -48,7 +48,7 @@ const OcaListbox = ({ value, onChange, config, topic, nodeJson }) => {
     const colors = window.THEMES?.dark || { treeview_fg: "#dcdcdc", treeview_selected_bg: "#007acc", border: "#555" };
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', width: '100%', minWidth: '150px', height: '150px', backgroundColor: '#1a1a1a', border: `1px solid ${colors.border}`, borderRadius: '4px', overflow: 'hidden' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', width: '100%', minWidth: '150px', height: '150px', backgroundColor: (window.OaTransparency ? window.OaTransparency.bg(config, '#1a1a1a') : '#1a1a1a'), border: `1px solid ${colors.border}`, borderRadius: '4px', overflow: 'hidden' }}>
             {label && (
                 <div style={{ fontSize: '10px', color: 'white', fontWeight: 'bold', padding: '5px 8px', borderBottom: '1px solid #333' }}>
                     {label.toUpperCase()}

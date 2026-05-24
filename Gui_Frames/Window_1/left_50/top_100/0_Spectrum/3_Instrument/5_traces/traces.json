@@ -13,12 +13,12 @@
     "blocks": {
       "Trace 1": {
         "type": "OcaBlock",
-        "show_label": true,
         "description": {
           "En": "Settings for Trace 1 Mode",
           "Fr": "Paramètres for Trace 1 Mode",
           "De": "Einstellungen for Trace 1 Mode",
-          "Es": "Ajustes for Trace 1 Mode"
+          "Es": "Ajustes for Trace 1 Mode",
+          "show_label": true
         },
         "layout": {
           "weight": 1
@@ -46,16 +46,24 @@
               "WRITE": {
                 "label": {
                   "active": {
-                    "En": "LIVE REALTIME",
-                    "Fr": "LIVE REALTIME",
-                    "De": "LIVE REALTIME",
-                    "Es": "LIVE REALTIME"
+                    "text": {
+                      "En": "LIVE REALTIME",
+                      "Fr": "LIVE REALTIME",
+                      "De": "LIVE REALTIME",
+                      "Es": "LIVE REALTIME"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "LIVE REALTIME",
-                    "Fr": "LIVE REALTIME",
-                    "De": "LIVE REALTIME",
-                    "Es": "LIVE REALTIME"
+                    "text": {
+                      "En": "LIVE REALTIME",
+                      "Fr": "LIVE REALTIME",
+                      "De": "LIVE REALTIME",
+                      "Es": "LIVE REALTIME"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -71,16 +79,24 @@
               "MAXHOLD": {
                 "label": {
                   "active": {
-                    "En": "MAX HOLD",
-                    "Fr": "MAX HOLD",
-                    "De": "MAX HOLD",
-                    "Es": "MAX HOLD"
+                    "text": {
+                      "En": "MAX HOLD",
+                      "Fr": "MAX HOLD",
+                      "De": "MAX HOLD",
+                      "Es": "MAX HOLD"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "MAX HOLD",
-                    "Fr": "MAX HOLD",
-                    "De": "MAX HOLD",
-                    "Es": "MAX HOLD"
+                    "text": {
+                      "En": "MAX HOLD",
+                      "Fr": "MAX HOLD",
+                      "De": "MAX HOLD",
+                      "Es": "MAX HOLD"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -96,16 +112,24 @@
               "MINHOLD": {
                 "label": {
                   "active": {
-                    "En": "MIN HOLD",
-                    "Fr": "MIN HOLD",
-                    "De": "MIN HOLD",
-                    "Es": "MIN HOLD"
+                    "text": {
+                      "En": "MIN HOLD",
+                      "Fr": "MIN HOLD",
+                      "De": "MIN HOLD",
+                      "Es": "MIN HOLD"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "MIN HOLD",
-                    "Fr": "MIN HOLD",
-                    "De": "MIN HOLD",
-                    "Es": "MIN HOLD"
+                    "text": {
+                      "En": "MIN HOLD",
+                      "Fr": "MIN HOLD",
+                      "De": "MIN HOLD",
+                      "Es": "MIN HOLD"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -121,16 +145,24 @@
               "BLANK": {
                 "label": {
                   "active": {
-                    "En": "BLANK",
-                    "Fr": "BLANK",
-                    "De": "BLANK",
-                    "Es": "BLANK"
+                    "text": {
+                      "En": "BLANK",
+                      "Fr": "BLANK",
+                      "De": "BLANK",
+                      "Es": "BLANK"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "BLANK",
-                    "Fr": "BLANK",
-                    "De": "BLANK",
-                    "Es": "BLANK"
+                    "text": {
+                      "En": "BLANK",
+                      "Fr": "BLANK",
+                      "De": "BLANK",
+                      "Es": "BLANK"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -146,16 +178,24 @@
               "VIEW": {
                 "label": {
                   "active": {
-                    "En": "VIEW",
-                    "Fr": "VOIR",
-                    "De": "ANSEHEN",
-                    "Es": "VER"
+                    "text": {
+                      "En": "VIEW",
+                      "Fr": "VOIR",
+                      "De": "ANSEHEN",
+                      "Es": "VER"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "VIEW",
-                    "Fr": "VOIR",
-                    "De": "ANSEHEN",
-                    "Es": "VER"
+                    "text": {
+                      "En": "VIEW",
+                      "Fr": "VOIR",
+                      "De": "ANSEHEN",
+                      "Es": "VER"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -174,12 +214,12 @@
       },
       "Trace 2": {
         "type": "OcaBlock",
-        "show_label": true,
         "description": {
           "En": "Settings for Trace 2 Mode",
           "Fr": "Paramètres for Trace 2 Mode",
           "De": "Einstellungen for Trace 2 Mode",
-          "Es": "Ajustes for Trace 2 Mode"
+          "Es": "Ajustes for Trace 2 Mode",
+          "show_label": true
         },
         "layout": {
           "weight": 1
@@ -207,16 +247,24 @@
               "WRITE": {
                 "label": {
                   "active": {
-                    "En": "LIVE REALTIME",
-                    "Fr": "LIVE REALTIME",
-                    "De": "LIVE REALTIME",
-                    "Es": "LIVE REALTIME"
+                    "text": {
+                      "En": "LIVE REALTIME",
+                      "Fr": "LIVE REALTIME",
+                      "De": "LIVE REALTIME",
+                      "Es": "LIVE REALTIME"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "LIVE REALTIME",
-                    "Fr": "LIVE REALTIME",
-                    "De": "LIVE REALTIME",
-                    "Es": "LIVE REALTIME"
+                    "text": {
+                      "En": "LIVE REALTIME",
+                      "Fr": "LIVE REALTIME",
+                      "De": "LIVE REALTIME",
+                      "Es": "LIVE REALTIME"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -232,16 +280,24 @@
               "MAXHOLD": {
                 "label": {
                   "active": {
-                    "En": "MAX HOLD",
-                    "Fr": "MAX HOLD",
-                    "De": "MAX HOLD",
-                    "Es": "MAX HOLD"
+                    "text": {
+                      "En": "MAX HOLD",
+                      "Fr": "MAX HOLD",
+                      "De": "MAX HOLD",
+                      "Es": "MAX HOLD"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "MAX HOLD",
-                    "Fr": "MAX HOLD",
-                    "De": "MAX HOLD",
-                    "Es": "MAX HOLD"
+                    "text": {
+                      "En": "MAX HOLD",
+                      "Fr": "MAX HOLD",
+                      "De": "MAX HOLD",
+                      "Es": "MAX HOLD"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -257,16 +313,24 @@
               "MINHOLD": {
                 "label": {
                   "active": {
-                    "En": "MIN HOLD",
-                    "Fr": "MIN HOLD",
-                    "De": "MIN HOLD",
-                    "Es": "MIN HOLD"
+                    "text": {
+                      "En": "MIN HOLD",
+                      "Fr": "MIN HOLD",
+                      "De": "MIN HOLD",
+                      "Es": "MIN HOLD"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "MIN HOLD",
-                    "Fr": "MIN HOLD",
-                    "De": "MIN HOLD",
-                    "Es": "MIN HOLD"
+                    "text": {
+                      "En": "MIN HOLD",
+                      "Fr": "MIN HOLD",
+                      "De": "MIN HOLD",
+                      "Es": "MIN HOLD"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -282,16 +346,24 @@
               "BLANK": {
                 "label": {
                   "active": {
-                    "En": "BLANK",
-                    "Fr": "BLANK",
-                    "De": "BLANK",
-                    "Es": "BLANK"
+                    "text": {
+                      "En": "BLANK",
+                      "Fr": "BLANK",
+                      "De": "BLANK",
+                      "Es": "BLANK"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "BLANK",
-                    "Fr": "BLANK",
-                    "De": "BLANK",
-                    "Es": "BLANK"
+                    "text": {
+                      "En": "BLANK",
+                      "Fr": "BLANK",
+                      "De": "BLANK",
+                      "Es": "BLANK"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -307,16 +379,24 @@
               "VIEW": {
                 "label": {
                   "active": {
-                    "En": "VIEW",
-                    "Fr": "VOIR",
-                    "De": "ANSEHEN",
-                    "Es": "VER"
+                    "text": {
+                      "En": "VIEW",
+                      "Fr": "VOIR",
+                      "De": "ANSEHEN",
+                      "Es": "VER"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "VIEW",
-                    "Fr": "VOIR",
-                    "De": "ANSEHEN",
-                    "Es": "VER"
+                    "text": {
+                      "En": "VIEW",
+                      "Fr": "VOIR",
+                      "De": "ANSEHEN",
+                      "Es": "VER"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -335,12 +415,12 @@
       },
       "Trace 3": {
         "type": "OcaBlock",
-        "show_label": true,
         "description": {
           "En": "Settings for Trace 3 Mode",
           "Fr": "Paramètres for Trace 3 Mode",
           "De": "Einstellungen for Trace 3 Mode",
-          "Es": "Ajustes for Trace 3 Mode"
+          "Es": "Ajustes for Trace 3 Mode",
+          "show_label": true
         },
         "layout": {
           "weight": 1
@@ -368,16 +448,24 @@
               "WRITE": {
                 "label": {
                   "active": {
-                    "En": "LIVE REALTIME",
-                    "Fr": "LIVE REALTIME",
-                    "De": "LIVE REALTIME",
-                    "Es": "LIVE REALTIME"
+                    "text": {
+                      "En": "LIVE REALTIME",
+                      "Fr": "LIVE REALTIME",
+                      "De": "LIVE REALTIME",
+                      "Es": "LIVE REALTIME"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "LIVE REALTIME",
-                    "Fr": "LIVE REALTIME",
-                    "De": "LIVE REALTIME",
-                    "Es": "LIVE REALTIME"
+                    "text": {
+                      "En": "LIVE REALTIME",
+                      "Fr": "LIVE REALTIME",
+                      "De": "LIVE REALTIME",
+                      "Es": "LIVE REALTIME"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -393,16 +481,24 @@
               "MAXHOLD": {
                 "label": {
                   "active": {
-                    "En": "MAX HOLD",
-                    "Fr": "MAX HOLD",
-                    "De": "MAX HOLD",
-                    "Es": "MAX HOLD"
+                    "text": {
+                      "En": "MAX HOLD",
+                      "Fr": "MAX HOLD",
+                      "De": "MAX HOLD",
+                      "Es": "MAX HOLD"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "MAX HOLD",
-                    "Fr": "MAX HOLD",
-                    "De": "MAX HOLD",
-                    "Es": "MAX HOLD"
+                    "text": {
+                      "En": "MAX HOLD",
+                      "Fr": "MAX HOLD",
+                      "De": "MAX HOLD",
+                      "Es": "MAX HOLD"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -418,16 +514,24 @@
               "MINHOLD": {
                 "label": {
                   "active": {
-                    "En": "MIN HOLD",
-                    "Fr": "MIN HOLD",
-                    "De": "MIN HOLD",
-                    "Es": "MIN HOLD"
+                    "text": {
+                      "En": "MIN HOLD",
+                      "Fr": "MIN HOLD",
+                      "De": "MIN HOLD",
+                      "Es": "MIN HOLD"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "MIN HOLD",
-                    "Fr": "MIN HOLD",
-                    "De": "MIN HOLD",
-                    "Es": "MIN HOLD"
+                    "text": {
+                      "En": "MIN HOLD",
+                      "Fr": "MIN HOLD",
+                      "De": "MIN HOLD",
+                      "Es": "MIN HOLD"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -443,16 +547,24 @@
               "BLANK": {
                 "label": {
                   "active": {
-                    "En": "BLANK",
-                    "Fr": "BLANK",
-                    "De": "BLANK",
-                    "Es": "BLANK"
+                    "text": {
+                      "En": "BLANK",
+                      "Fr": "BLANK",
+                      "De": "BLANK",
+                      "Es": "BLANK"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "BLANK",
-                    "Fr": "BLANK",
-                    "De": "BLANK",
-                    "Es": "BLANK"
+                    "text": {
+                      "En": "BLANK",
+                      "Fr": "BLANK",
+                      "De": "BLANK",
+                      "Es": "BLANK"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -468,16 +580,24 @@
               "VIEW": {
                 "label": {
                   "active": {
-                    "En": "VIEW",
-                    "Fr": "VOIR",
-                    "De": "ANSEHEN",
-                    "Es": "VER"
+                    "text": {
+                      "En": "VIEW",
+                      "Fr": "VOIR",
+                      "De": "ANSEHEN",
+                      "Es": "VER"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "VIEW",
-                    "Fr": "VOIR",
-                    "De": "ANSEHEN",
-                    "Es": "VER"
+                    "text": {
+                      "En": "VIEW",
+                      "Fr": "VOIR",
+                      "De": "ANSEHEN",
+                      "Es": "VER"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -496,12 +616,12 @@
       },
       "Trace 4": {
         "type": "OcaBlock",
-        "show_label": true,
         "description": {
           "En": "Settings for Trace 4 Mode",
           "Fr": "Paramètres for Trace 4 Mode",
           "De": "Einstellungen for Trace 4 Mode",
-          "Es": "Ajustes for Trace 4 Mode"
+          "Es": "Ajustes for Trace 4 Mode",
+          "show_label": true
         },
         "layout": {
           "weight": 1
@@ -529,16 +649,24 @@
               "WRITE": {
                 "label": {
                   "active": {
-                    "En": "LIVE REALTIME",
-                    "Fr": "LIVE REALTIME",
-                    "De": "LIVE REALTIME",
-                    "Es": "LIVE REALTIME"
+                    "text": {
+                      "En": "LIVE REALTIME",
+                      "Fr": "LIVE REALTIME",
+                      "De": "LIVE REALTIME",
+                      "Es": "LIVE REALTIME"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "LIVE REALTIME",
-                    "Fr": "LIVE REALTIME",
-                    "De": "LIVE REALTIME",
-                    "Es": "LIVE REALTIME"
+                    "text": {
+                      "En": "LIVE REALTIME",
+                      "Fr": "LIVE REALTIME",
+                      "De": "LIVE REALTIME",
+                      "Es": "LIVE REALTIME"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -554,16 +682,24 @@
               "MAXHOLD": {
                 "label": {
                   "active": {
-                    "En": "MAX HOLD",
-                    "Fr": "MAX HOLD",
-                    "De": "MAX HOLD",
-                    "Es": "MAX HOLD"
+                    "text": {
+                      "En": "MAX HOLD",
+                      "Fr": "MAX HOLD",
+                      "De": "MAX HOLD",
+                      "Es": "MAX HOLD"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "MAX HOLD",
-                    "Fr": "MAX HOLD",
-                    "De": "MAX HOLD",
-                    "Es": "MAX HOLD"
+                    "text": {
+                      "En": "MAX HOLD",
+                      "Fr": "MAX HOLD",
+                      "De": "MAX HOLD",
+                      "Es": "MAX HOLD"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -579,16 +715,24 @@
               "MINHOLD": {
                 "label": {
                   "active": {
-                    "En": "MIN HOLD",
-                    "Fr": "MIN HOLD",
-                    "De": "MIN HOLD",
-                    "Es": "MIN HOLD"
+                    "text": {
+                      "En": "MIN HOLD",
+                      "Fr": "MIN HOLD",
+                      "De": "MIN HOLD",
+                      "Es": "MIN HOLD"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "MIN HOLD",
-                    "Fr": "MIN HOLD",
-                    "De": "MIN HOLD",
-                    "Es": "MIN HOLD"
+                    "text": {
+                      "En": "MIN HOLD",
+                      "Fr": "MIN HOLD",
+                      "De": "MIN HOLD",
+                      "Es": "MIN HOLD"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -604,16 +748,24 @@
               "BLANK": {
                 "label": {
                   "active": {
-                    "En": "BLANK",
-                    "Fr": "BLANK",
-                    "De": "BLANK",
-                    "Es": "BLANK"
+                    "text": {
+                      "En": "BLANK",
+                      "Fr": "BLANK",
+                      "De": "BLANK",
+                      "Es": "BLANK"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "BLANK",
-                    "Fr": "BLANK",
-                    "De": "BLANK",
-                    "Es": "BLANK"
+                    "text": {
+                      "En": "BLANK",
+                      "Fr": "BLANK",
+                      "De": "BLANK",
+                      "Es": "BLANK"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -629,16 +781,24 @@
               "VIEW": {
                 "label": {
                   "active": {
-                    "En": "VIEW",
-                    "Fr": "VOIR",
-                    "De": "ANSEHEN",
-                    "Es": "VER"
+                    "text": {
+                      "En": "VIEW",
+                      "Fr": "VOIR",
+                      "De": "ANSEHEN",
+                      "Es": "VER"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "VIEW",
-                    "Fr": "VOIR",
-                    "De": "ANSEHEN",
-                    "Es": "VER"
+                    "text": {
+                      "En": "VIEW",
+                      "Fr": "VOIR",
+                      "De": "ANSEHEN",
+                      "Es": "VER"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -709,16 +869,24 @@
               "ON": {
                 "label": {
                   "active": {
-                    "En": "CONTINUOUS ON",
-                    "Fr": "CONTINUOUS ON",
-                    "De": "CONTINUOUS ON",
-                    "Es": "CONTINUOUS ON"
+                    "text": {
+                      "En": "CONTINUOUS ON",
+                      "Fr": "CONTINUOUS ON",
+                      "De": "CONTINUOUS ON",
+                      "Es": "CONTINUOUS ON"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "CONTINUOUS ON",
-                    "Fr": "CONTINUOUS ON",
-                    "De": "CONTINUOUS ON",
-                    "Es": "CONTINUOUS ON"
+                    "text": {
+                      "En": "CONTINUOUS ON",
+                      "Fr": "CONTINUOUS ON",
+                      "De": "CONTINUOUS ON",
+                      "Es": "CONTINUOUS ON"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -732,16 +900,24 @@
               "OFF": {
                 "label": {
                   "active": {
-                    "En": "CONTINUOUS OFF",
-                    "Fr": "CONTINUOUS OFF",
-                    "De": "CONTINUOUS OFF",
-                    "Es": "CONTINUOUS OFF"
+                    "text": {
+                      "En": "CONTINUOUS OFF",
+                      "Fr": "CONTINUOUS OFF",
+                      "De": "CONTINUOUS OFF",
+                      "Es": "CONTINUOUS OFF"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "CONTINUOUS OFF",
-                    "Fr": "CONTINUOUS OFF",
-                    "De": "CONTINUOUS OFF",
-                    "Es": "CONTINUOUS OFF"
+                    "text": {
+                      "En": "CONTINUOUS OFF",
+                      "Fr": "CONTINUOUS OFF",
+                      "De": "CONTINUOUS OFF",
+                      "Es": "CONTINUOUS OFF"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -766,16 +942,24 @@
             "type": "_GuiActuator",
             "label": {
               "active": {
-                "En": "CONTINUOUS INITIATED",
-                "Fr": "CONTINU INITIÉ",
-                "De": "KONTINUIERLICH GESTARTET",
-                "Es": "CONTINUO INICIADO"
+                "text": {
+                  "En": "CONTINUOUS INITIATED",
+                  "Fr": "CONTINU INITIÉ",
+                  "De": "KONTINUIERLICH GESTARTET",
+                  "Es": "CONTINUO INICIADO"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               },
               "inactive": {
-                "En": "CONTINUOUS INITIATE",
-                "Fr": "CONTINUOUS INITIATE",
-                "De": "CONTINUOUS INITIATE",
-                "Es": "CONTINUOUS INITIATE"
+                "text": {
+                  "En": "CONTINUOUS INITIATE",
+                  "Fr": "CONTINUOUS INITIATE",
+                  "De": "CONTINUOUS INITIATE",
+                  "Es": "CONTINUOUS INITIATE"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "AES70": "OcaBooleanActuator",
@@ -873,16 +1057,24 @@
               "0": {
                 "label": {
                   "active": {
-                    "En": "Off",
-                    "Fr": "Désactivé",
-                    "De": "Aus",
-                    "Es": "Desactivado"
+                    "text": {
+                      "En": "Off",
+                      "Fr": "Désactivé",
+                      "De": "Aus",
+                      "Es": "Desactivado"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Off",
-                    "Fr": "Désactivé",
-                    "De": "Aus",
-                    "Es": "Desactivado"
+                    "text": {
+                      "En": "Off",
+                      "Fr": "Désactivé",
+                      "De": "Aus",
+                      "Es": "Desactivado"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -898,16 +1090,24 @@
               "5": {
                 "label": {
                   "active": {
-                    "En": "Light Filter",
-                    "Fr": "Filtre léger",
-                    "De": "Leichter Filter",
-                    "Es": "Filtro ligero"
+                    "text": {
+                      "En": "Light Filter",
+                      "Fr": "Filtre léger",
+                      "De": "Leichter Filter",
+                      "Es": "Filtro ligero"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Light Filter",
-                    "Fr": "Filtre léger",
-                    "De": "Leichter Filter",
-                    "Es": "Filtro ligero"
+                    "text": {
+                      "En": "Light Filter",
+                      "Fr": "Filtre léger",
+                      "De": "Leichter Filter",
+                      "Es": "Filtro ligero"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -923,16 +1123,24 @@
               "10": {
                 "label": {
                   "active": {
-                    "En": "Getting Clear",
-                    "Fr": "Getting Effacer",
-                    "De": "Getting Löschen",
-                    "Es": "Getting Borrar"
+                    "text": {
+                      "En": "Getting Clear",
+                      "Fr": "Getting Effacer",
+                      "De": "Getting Löschen",
+                      "Es": "Getting Borrar"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Getting Clear",
-                    "Fr": "Getting Effacer",
-                    "De": "Getting Löschen",
-                    "Es": "Getting Borrar"
+                    "text": {
+                      "En": "Getting Clear",
+                      "Fr": "Getting Effacer",
+                      "De": "Getting Löschen",
+                      "Es": "Getting Borrar"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -948,16 +1156,24 @@
               "25": {
                 "label": {
                   "active": {
-                    "En": "The Sweet Spot",
-                    "Fr": "The Sweet Spot",
-                    "De": "The Sweet Spot",
-                    "Es": "The Sweet Spot"
+                    "text": {
+                      "En": "The Sweet Spot",
+                      "Fr": "The Sweet Spot",
+                      "De": "The Sweet Spot",
+                      "Es": "The Sweet Spot"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "The Sweet Spot",
-                    "Fr": "The Sweet Spot",
-                    "De": "The Sweet Spot",
-                    "Es": "The Sweet Spot"
+                    "text": {
+                      "En": "The Sweet Spot",
+                      "Fr": "The Sweet Spot",
+                      "De": "The Sweet Spot",
+                      "Es": "The Sweet Spot"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -973,16 +1189,24 @@
               "50": {
                 "label": {
                   "active": {
-                    "En": "Steady Hands",
-                    "Fr": "Mains stables",
-                    "De": "Ruhige Hände",
-                    "Es": "Manos firmes"
+                    "text": {
+                      "En": "Steady Hands",
+                      "Fr": "Mains stables",
+                      "De": "Ruhige Hände",
+                      "Es": "Manos firmes"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Steady Hands",
-                    "Fr": "Mains stables",
-                    "De": "Ruhige Hände",
-                    "Es": "Manos firmes"
+                    "text": {
+                      "En": "Steady Hands",
+                      "Fr": "Mains stables",
+                      "De": "Ruhige Hände",
+                      "Es": "Manos firmes"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -998,16 +1222,24 @@
               "75": {
                 "label": {
                   "active": {
-                    "En": "Deep Dive",
-                    "Fr": "Deep Dive",
-                    "De": "Deep Dive",
-                    "Es": "Deep Dive"
+                    "text": {
+                      "En": "Deep Dive",
+                      "Fr": "Deep Dive",
+                      "De": "Deep Dive",
+                      "Es": "Deep Dive"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Deep Dive",
-                    "Fr": "Deep Dive",
-                    "De": "Deep Dive",
-                    "Es": "Deep Dive"
+                    "text": {
+                      "En": "Deep Dive",
+                      "Fr": "Deep Dive",
+                      "De": "Deep Dive",
+                      "Es": "Deep Dive"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -1023,16 +1255,24 @@
               "100": {
                 "label": {
                   "active": {
-                    "En": "Scientific Grade",
-                    "Fr": "Qualité scientifique",
-                    "De": "Wissenschaftliche Qualität",
-                    "Es": "Grado científico"
+                    "text": {
+                      "En": "Scientific Grade",
+                      "Fr": "Qualité scientifique",
+                      "De": "Wissenschaftliche Qualität",
+                      "Es": "Grado científico"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Scientific Grade",
-                    "Fr": "Qualité scientifique",
-                    "De": "Wissenschaftliche Qualität",
-                    "Es": "Grado científico"
+                    "text": {
+                      "En": "Scientific Grade",
+                      "Fr": "Qualité scientifique",
+                      "De": "Wissenschaftliche Qualität",
+                      "Es": "Grado científico"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -1048,16 +1288,24 @@
               "200": {
                 "label": {
                   "active": {
-                    "En": "Crystal Clear",
-                    "Fr": "Cristallin",
-                    "De": "Glasklar",
-                    "Es": "Cristalino"
+                    "text": {
+                      "En": "Crystal Clear",
+                      "Fr": "Cristallin",
+                      "De": "Glasklar",
+                      "Es": "Cristalino"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Crystal Clear",
-                    "Fr": "Cristallin",
-                    "De": "Glasklar",
-                    "Es": "Cristalino"
+                    "text": {
+                      "En": "Crystal Clear",
+                      "Fr": "Cristallin",
+                      "De": "Glasklar",
+                      "Es": "Cristalino"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -1073,16 +1321,24 @@
               "500": {
                 "label": {
                   "active": {
-                    "En": "The Observer",
-                    "Fr": "The Observer",
-                    "De": "The Observer",
-                    "Es": "The Observer"
+                    "text": {
+                      "En": "The Observer",
+                      "Fr": "The Observer",
+                      "De": "The Observer",
+                      "Es": "The Observer"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "The Observer",
-                    "Fr": "The Observer",
-                    "De": "The Observer",
-                    "Es": "The Observer"
+                    "text": {
+                      "En": "The Observer",
+                      "Fr": "The Observer",
+                      "De": "The Observer",
+                      "Es": "The Observer"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -1098,16 +1354,24 @@
               "1000": {
                 "label": {
                   "active": {
-                    "En": "Meditative Mode",
-                    "Fr": "Meditative Mode",
-                    "De": "Meditative Modus",
-                    "Es": "Meditative Modo"
+                    "text": {
+                      "En": "Meditative Mode",
+                      "Fr": "Meditative Mode",
+                      "De": "Meditative Modus",
+                      "Es": "Meditative Modo"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Meditative Mode",
-                    "Fr": "Meditative Mode",
-                    "De": "Meditative Modus",
-                    "Es": "Meditative Modo"
+                    "text": {
+                      "En": "Meditative Mode",
+                      "Fr": "Meditative Mode",
+                      "De": "Meditative Modus",
+                      "Es": "Meditative Modo"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -1124,16 +1388,24 @@
                 "value": "NONE",
                 "label": {
                   "active": {
-                    "En": "None Selected",
-                    "Fr": "Aucun sélectionné",
-                    "De": "Keine ausgewählt",
-                    "Es": "Ninguno seleccionado"
+                    "text": {
+                      "En": "None Selected",
+                      "Fr": "Aucun sélectionné",
+                      "De": "Keine ausgewählt",
+                      "Es": "Ninguno seleccionado"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "None Selected",
-                    "Fr": "Aucun sélectionné",
-                    "De": "Keine ausgewählt",
-                    "Es": "Ninguno seleccionado"
+                    "text": {
+                      "En": "None Selected",
+                      "Fr": "Aucun sélectionné",
+                      "De": "Keine ausgewählt",
+                      "Es": "Ninguno seleccionado"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {

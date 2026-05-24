@@ -49,7 +49,7 @@ const IncDecButtons = ({ value, onChange, config, topic, nodeJson }) => {
     };
 
     return (
-        <div style={{ display: 'flex', alignItems: 'center', backgroundColor: '#222', padding: '10px', borderRadius: '5px', border: '1px solid #444', gap: '10px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', backgroundColor: (window.OaTransparency ? window.OaTransparency.bg(config, '#222') : '#222'), padding: '10px', borderRadius: '5px', border: '1px solid #444', gap: '10px' }}>
             {label && (
                 <div style={{ fontSize: '12px', color: 'white', fontWeight: 'bold' }}>
                     {label}

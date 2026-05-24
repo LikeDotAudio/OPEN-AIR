@@ -306,7 +306,7 @@ const GCA = ({ config, value, onChange }) => {
 
     return (
         <div className="gca-wrapper" style={{ 
-            backgroundColor: '#3c3f41', 
+            backgroundColor: (window.OaTransparency ? window.OaTransparency.bg(config, '#3c3f41') : '#3c3f41'), 
             border: '1px solid #555', 
             borderTop: `3px solid ${config?.active_color || '#f4902c'}`, 
             padding: '10px', 

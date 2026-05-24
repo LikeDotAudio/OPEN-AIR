@@ -36,10 +36,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "Time/Div (s)",
-                    "Fr": "Temps/Div (s)",
-                    "De": "Zeit/Div (s)",
-                    "Es": "Tiempo/Div (s)"
+                    "text": {
+                      "En": "Time/Div (s)",
+                      "Fr": "Temps/Div (s)",
+                      "De": "Zeit/Div (s)",
+                      "Es": "Tiempo/Div (s)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -88,10 +92,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "Volts/Div (V)",
-                    "Fr": "Volts/Div (V)",
-                    "De": "Volts/Div (V)",
-                    "Es": "Volts/Div (V)"
+                    "text": {
+                      "En": "Volts/Div (V)",
+                      "Fr": "Volts/Div (V)",
+                      "De": "Volts/Div (V)",
+                      "Es": "Volts/Div (V)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -126,10 +134,14 @@
                 "type": "_GuiDropDownOption",
                 "label": {
                   "active": {
-                    "En": "Coupling",
-                    "Fr": "Couplage",
-                    "De": "Kopplung",
-                    "Es": "Acoplamiento"
+                    "text": {
+                      "En": "Coupling",
+                      "Fr": "Couplage",
+                      "De": "Kopplung",
+                      "Es": "Acoplamiento"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "options": [
@@ -181,10 +193,14 @@
                 "type": "_GuiDropDownOption",
                 "label": {
                   "active": {
-                    "En": "Mode",
-                    "Fr": "Mode",
-                    "De": "Modus",
-                    "Es": "Modo"
+                    "text": {
+                      "En": "Mode",
+                      "Fr": "Mode",
+                      "De": "Modus",
+                      "Es": "Modo"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "options": [
@@ -228,10 +244,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "Level (V)",
-                    "Fr": "Niveau (V)",
-                    "De": "Pegel (V)",
-                    "Es": "Nivel (V)"
+                    "text": {
+                      "En": "Level (V)",
+                      "Fr": "Niveau (V)",
+                      "De": "Pegel (V)",
+                      "Es": "Nivel (V)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -277,16 +297,24 @@
                 "type": "_GuiButtonToggle",
                 "label": {
                   "active": {
-                    "En": "RUN",
-                    "Fr": "EXEC",
-                    "De": "AUSFÜHREN",
-                    "Es": "EJEC"
+                    "text": {
+                      "En": "RUN",
+                      "Fr": "EXEC",
+                      "De": "AUSFÜHREN",
+                      "Es": "EJEC"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "STOP",
-                    "Fr": "STOP",
-                    "De": "STOP",
-                    "Es": "STOP"
+                    "text": {
+                      "En": "STOP",
+                      "Fr": "STOP",
+                      "De": "STOP",
+                      "Es": "STOP"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "style": {

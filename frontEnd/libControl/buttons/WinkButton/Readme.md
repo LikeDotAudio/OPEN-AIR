@@ -22,7 +22,11 @@ in the property editor.
   "button_wink_Example": {
     "type": "_WinkButton",
     "label": {
-      "active": "01"
+      "active": {
+        "text": "01",
+        "text_size": 12,
+        "text_color": "#cccccc"
+      }
     },
     "path": "audio/wink/target_demo_001",
     "width": 60,

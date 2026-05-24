@@ -26,11 +26,16 @@
             "transparent": true,
             "label": {
               "active": {
-                "En": "High Speed Scan",
-                "Fr": "Haut Speed Scan",
-                "De": "Hoch Speed Scan",
-                "Es": "Alto Speed Scan"
-              }
+                "text": {
+                  "En": "High Speed Scan",
+                  "Fr": "Haut Speed Scan",
+                  "De": "Hoch Speed Scan",
+                  "Es": "Alto Speed Scan"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
             },
             "app_settings": {
               "title": "Fast Scan v3.0",
@@ -81,7 +86,6 @@
               "mqtt_topic": "sensor/radar_eye/03",
               "log_to_file": true
             },
-            "show_label": true,
             "notes": ""
           }
         }

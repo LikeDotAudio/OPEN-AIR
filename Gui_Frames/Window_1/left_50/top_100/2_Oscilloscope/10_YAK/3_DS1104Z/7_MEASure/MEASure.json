@@ -85,10 +85,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "Clear All",
-                    "Fr": "Effacer All",
-                    "De": "Löschen All",
-                    "Es": "Borrar All"
+                    "text": {
+                      "En": "Clear All",
+                      "Fr": "Effacer All",
+                      "De": "Löschen All",
+                      "Es": "Borrar All"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",

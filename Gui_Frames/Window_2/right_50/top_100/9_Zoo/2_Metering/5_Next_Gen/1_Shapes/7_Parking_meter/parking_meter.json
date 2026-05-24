@@ -46,10 +46,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Large Classic",
-                "Fr": "Large Classique",
-                "De": "Large Klassisch",
-                "Es": "Large Clásico"
+                "text": {
+                  "En": "Large Classic",
+                  "Fr": "Large Classique",
+                  "De": "Large Klassisch",
+                  "Es": "Large Clásico"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -136,10 +140,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Medium Night",
-                "Fr": "Moyen Night",
-                "De": "Mittel Night",
-                "Es": "Medio Night"
+                "text": {
+                  "En": "Medium Night",
+                  "Fr": "Moyen Night",
+                  "De": "Mittel Night",
+                  "Es": "Medio Night"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -220,10 +228,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Small Cyber",
-                "Fr": "Small Cyber",
-                "De": "Small Cyber",
-                "Es": "Small Cyber"
+                "text": {
+                  "En": "Small Cyber",
+                  "Fr": "Small Cyber",
+                  "De": "Small Cyber",
+                  "Es": "Small Cyber"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -311,10 +323,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Tiny Vintage",
-                "Fr": "Tiny Vintage",
-                "De": "Tiny Vintage",
-                "Es": "Tiny Vintage"
+                "text": {
+                  "En": "Tiny Vintage",
+                  "Fr": "Tiny Vintage",
+                  "De": "Tiny Vintage",
+                  "Es": "Tiny Vintage"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -399,10 +415,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Tall Danger",
-                "Fr": "Tall Danger",
-                "De": "Tall Danger",
-                "Es": "Tall Danger"
+                "text": {
+                  "En": "Tall Danger",
+                  "Fr": "Tall Danger",
+                  "De": "Tall Danger",
+                  "Es": "Tall Danger"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -484,10 +504,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Wide Royal",
-                "Fr": "Wide Royal",
-                "De": "Wide Royal",
-                "Es": "Wide Royal"
+                "text": {
+                  "En": "Wide Royal",
+                  "Fr": "Wide Royal",
+                  "De": "Wide Royal",
+                  "Es": "Wide Royal"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -569,10 +593,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Blueprint Tech",
-                "Fr": "Blueprint Tech",
-                "De": "Blueprint Tech",
-                "Es": "Blueprint Tech"
+                "text": {
+                  "En": "Blueprint Tech",
+                  "Fr": "Blueprint Tech",
+                  "De": "Blueprint Tech",
+                  "Es": "Blueprint Tech"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -651,10 +679,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Emerald Sea",
-                "Fr": "Emerald Sea",
-                "De": "Emerald Sea",
-                "Es": "Emerald Sea"
+                "text": {
+                  "En": "Emerald Sea",
+                  "Fr": "Emerald Sea",
+                  "De": "Emerald Sea",
+                  "Es": "Emerald Sea"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -731,10 +763,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Carbon Fiber",
-                "Fr": "Carbon Fiber",
-                "De": "Carbon Fiber",
-                "Es": "Carbon Fiber"
+                "text": {
+                  "En": "Carbon Fiber",
+                  "Fr": "Carbon Fiber",
+                  "De": "Carbon Fiber",
+                  "Es": "Carbon Fiber"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -813,10 +849,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Fireball",
-                "Fr": "Fireball",
-                "De": "Fireball",
-                "Es": "Fireball"
+                "text": {
+                  "En": "Fireball",
+                  "Fr": "Fireball",
+                  "De": "Fireball",
+                  "Es": "Fireball"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {

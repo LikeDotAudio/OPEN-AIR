@@ -36,10 +36,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "Frequency (Hz)",
-                    "Fr": "Fréquence (Hz)",
-                    "De": "Frequenz (Hz)",
-                    "Es": "Frecuencia (Hz)"
+                    "text": {
+                      "En": "Frequency (Hz)",
+                      "Fr": "Fréquence (Hz)",
+                      "De": "Frequenz (Hz)",
+                      "Es": "Frecuencia (Hz)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -88,10 +92,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "Amplitude (dBm)",
-                    "Fr": "Amplitude (dBm)",
-                    "De": "Amplitude (dBm)",
-                    "Es": "Amplitud (dBm)"
+                    "text": {
+                      "En": "Amplitude (dBm)",
+                      "Fr": "Amplitude (dBm)",
+                      "De": "Amplitude (dBm)",
+                      "Es": "Amplitud (dBm)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -137,16 +145,24 @@
                 "type": "_GuiButtonToggle",
                 "label": {
                   "active": {
-                    "En": "ON",
-                    "Fr": "ON",
-                    "De": "EIN",
-                    "Es": "ENC"
+                    "text": {
+                      "En": "ON",
+                      "Fr": "ON",
+                      "De": "EIN",
+                      "Es": "ENC"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "OFF",
-                    "Fr": "OFF",
-                    "De": "AUS",
-                    "Es": "DES"
+                    "text": {
+                      "En": "OFF",
+                      "Fr": "OFF",
+                      "De": "AUS",
+                      "Es": "DES"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "style": {

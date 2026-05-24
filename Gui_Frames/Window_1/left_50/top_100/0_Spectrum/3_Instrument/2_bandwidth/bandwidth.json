@@ -17,12 +17,12 @@
           "En": "Resolution Bandwidth (RBW) settings.",
           "Fr": "Résolution Bandwidth (RBW) settings.",
           "De": "Auflösung Bandwidth (RBW) settings.",
-          "Es": "Resolución Bandwidth (RBW) settings."
+          "Es": "Resolución Bandwidth (RBW) settings.",
+          "show_label": false
         },
         "layout": {
           "weight": 0
         },
-        "show_label": false,
         "fields": {
           "RBW": {
             "type": "_Horizontal_with_dial_Value",
@@ -31,7 +31,9 @@
               "max": "10",
               "units": "MHz",
               "step_coarse": "1",
-              "step_fine": "0.001"
+              "step_fine": "0.001",
+              "locked": false,
+              "precision": ".001"
             },
             "value": {
               "default_value": "0.5"
@@ -42,21 +44,26 @@
               "sticky": "ewn",
               "font": 20,
               "padx": 10,
-              "pady": 10
+              "pady": 10,
+              "column_spacing": [
+                60,
+                10,
+                10
+              ]
             },
             "label": {
               "active": {
-                "En": "Resolution Bandwidth",
-                "Fr": "Résolution Bandwidth",
-                "De": "Auflösung Bandwidth",
-                "Es": "Resolución Bandwidth"
-              }
+                "text": {
+                  "En": "Resolution Bandwidth",
+                  "Fr": "Résolution Bandwidth",
+                  "De": "Auflösung Bandwidth",
+                  "Es": "Resolución Bandwidth"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
             },
-            "column_spacing": [
-              10,
-              10,
-              10
-            ],
             "handler": "set_rbw",
             "yak_handler": {
               "enable": true,
@@ -66,7 +73,6 @@
               "input_name": "hz_value",
               "converter": "mhz_to_hz"
             },
-            "show_label": true,
             "value_config": {
               "height": 30,
               "colour": "#ffffff",
@@ -76,17 +82,29 @@
             },
             "fader_config": {
               "type": "_GuiFaderHorizontal",
-              "tick_interval": 1,
-              "show_ticks": true,
+              "cosmetics": {
+                "scale": {
+                  "interval": 1,
+                  "show": true
+                },
+                "styling": {
+                  "glow_intensity": 1.5
+                }
+              },
               "bar_color": "#333333",
-              "active_color": "#FF9900",
-              "glow_intensity": 1.5
+              "active_color": "#FF9900"
             },
             "dial_config": {
               "type": "_GuiKnob",
-              "knob_style": "dial",
-              "active_color": "#00ffff",
-              "bg_color": "#2b2b2b"
+              "cosmetics": {
+                "style_overrides": {
+                  "knob_style": "dial"
+                },
+                "colors": {
+                  "active": "#00ffff",
+                  "background": "#2b2b2b"
+                }
+              }
             },
             "cosmetics": {
               "colors": {
@@ -114,11 +132,11 @@
               "active": {
                 "font_style": "bold",
                 "font_size": null,
-                "text_color": "#1a1a1a",
+                "text_color": "#FF9900",
                 "bg_color": "#000000",
                 "border_color": "#FF9900",
                 "border_thickness": 2,
-                "glow_intensity": 1.944
+                "glow_intensity": 100
               },
               "inactive": {
                 "font_style": "normal",
@@ -135,16 +153,24 @@
                 "value": "1",
                 "label": {
                   "active": {
-                    "En": "Fast",
-                    "Fr": "Rapide",
-                    "De": "Schnell",
-                    "Es": "Rápido"
+                    "text": {
+                      "En": "Fast",
+                      "Fr": "Rapide",
+                      "De": "Schnell",
+                      "Es": "Rápido"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Fast",
-                    "Fr": "Rapide",
-                    "De": "Schnell",
-                    "Es": "Rápido"
+                    "text": {
+                      "En": "Fast",
+                      "Fr": "Rapide",
+                      "De": "Schnell",
+                      "Es": "Rápido"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -160,16 +186,24 @@
                 "value": "0.3",
                 "label": {
                   "active": {
-                    "En": "Brisk",
-                    "Fr": "Vif",
-                    "De": "Flott",
-                    "Es": "Enérgico"
+                    "text": {
+                      "En": "Brisk",
+                      "Fr": "Vif",
+                      "De": "Flott",
+                      "Es": "Enérgico"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Brisk",
-                    "Fr": "Vif",
-                    "De": "Flott",
-                    "Es": "Enérgico"
+                    "text": {
+                      "En": "Brisk",
+                      "Fr": "Vif",
+                      "De": "Flott",
+                      "Es": "Enérgico"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -185,16 +219,24 @@
                 "value": "0.1",
                 "label": {
                   "active": {
-                    "En": "Deliberate",
-                    "Fr": "Délibéré",
-                    "De": "Bedächtig",
-                    "Es": "Deliberado"
+                    "text": {
+                      "En": "Deliberate",
+                      "Fr": "Délibéré",
+                      "De": "Bedächtig",
+                      "Es": "Deliberado"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Deliberate",
-                    "Fr": "Délibéré",
-                    "De": "Bedächtig",
-                    "Es": "Deliberado"
+                    "text": {
+                      "En": "Deliberate",
+                      "Fr": "Délibéré",
+                      "De": "Bedächtig",
+                      "Es": "Deliberado"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -210,16 +252,24 @@
                 "value": "0.03",
                 "label": {
                   "active": {
-                    "En": "Steady",
-                    "Fr": "Stable",
-                    "De": "Stabil",
-                    "Es": "Estable"
+                    "text": {
+                      "En": "Steady",
+                      "Fr": "Stable",
+                      "De": "Stabil",
+                      "Es": "Estable"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Steady",
-                    "Fr": "Stable",
-                    "De": "Stabil",
-                    "Es": "Estable"
+                    "text": {
+                      "En": "Steady",
+                      "Fr": "Stable",
+                      "De": "Stabil",
+                      "Es": "Estable"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -235,16 +285,24 @@
                 "value": "0.01",
                 "label": {
                   "active": {
-                    "En": "Leisurely",
-                    "Fr": "Leisurely",
-                    "De": "Leisurely",
-                    "Es": "Leisurely"
+                    "text": {
+                      "En": "Leisurely",
+                      "Fr": "Leisurely",
+                      "De": "Leisurely",
+                      "Es": "Leisurely"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Leisurely",
-                    "Fr": "Leisurely",
-                    "De": "Leisurely",
-                    "Es": "Leisurely"
+                    "text": {
+                      "En": "Leisurely",
+                      "Fr": "Leisurely",
+                      "De": "Leisurely",
+                      "Es": "Leisurely"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -260,16 +318,24 @@
                 "value": "0.003",
                 "label": {
                   "active": {
-                    "En": "Unhurried",
-                    "Fr": "Unhurried",
-                    "De": "Unhurried",
-                    "Es": "Unhurried"
+                    "text": {
+                      "En": "Unhurried",
+                      "Fr": "Unhurried",
+                      "De": "Unhurried",
+                      "Es": "Unhurried"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Unhurried",
-                    "Fr": "Unhurried",
-                    "De": "Unhurried",
-                    "Es": "Unhurried"
+                    "text": {
+                      "En": "Unhurried",
+                      "Fr": "Unhurried",
+                      "De": "Unhurried",
+                      "Es": "Unhurried"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -285,16 +351,24 @@
                 "value": "0.001",
                 "label": {
                   "active": {
-                    "En": "Slothlike",
-                    "Fr": "Slothlike",
-                    "De": "Slothlike",
-                    "Es": "Slothlike"
+                    "text": {
+                      "En": "Slothlike",
+                      "Fr": "Slothlike",
+                      "De": "Slothlike",
+                      "Es": "Slothlike"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Slothlike",
-                    "Fr": "Slothlike",
-                    "De": "Slothlike",
-                    "Es": "Slothlike"
+                    "text": {
+                      "En": "Slothlike",
+                      "Fr": "Slothlike",
+                      "De": "Slothlike",
+                      "Es": "Slothlike"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -310,16 +384,24 @@
                 "value": "0.0003",
                 "label": {
                   "active": {
-                    "En": "Slothlike",
-                    "Fr": "Slothlike",
-                    "De": "Slothlike",
-                    "Es": "Slothlike"
+                    "text": {
+                      "En": "Slothlike",
+                      "Fr": "Slothlike",
+                      "De": "Slothlike",
+                      "Es": "Slothlike"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Slothlike",
-                    "Fr": "Slothlike",
-                    "De": "Slothlike",
-                    "Es": "Slothlike"
+                    "text": {
+                      "En": "Slothlike",
+                      "Fr": "Slothlike",
+                      "De": "Slothlike",
+                      "Es": "Slothlike"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -335,16 +417,24 @@
                 "value": "NONE",
                 "label": {
                   "active": {
-                    "En": "None Selected",
-                    "Fr": "Aucun sélectionné",
-                    "De": "Keine ausgewählt",
-                    "Es": "Ninguno seleccionado"
+                    "text": {
+                      "En": "None Selected",
+                      "Fr": "Aucun sélectionné",
+                      "De": "Keine ausgewählt",
+                      "Es": "Ninguno seleccionado"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "None Selected",
-                    "Fr": "Aucun sélectionné",
-                    "De": "Keine ausgewählt",
-                    "Es": "Ninguno seleccionado"
+                    "text": {
+                      "En": "None Selected",
+                      "Fr": "Aucun sélectionné",
+                      "De": "Keine ausgewählt",
+                      "Es": "Ninguno seleccionado"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -385,9 +475,9 @@
           "En": "Video Bandwidth (VBW) settings.",
           "Fr": "Video Largeur de bande (VBW) settings.",
           "De": "Video Bandbreite (VBW) settings.",
-          "Es": "Video Ancho de banda (VBW) settings."
+          "Es": "Video Ancho de banda (VBW) settings.",
+          "show_label": false
         },
-        "show_label": false,
         "layout": {
           "weight": 0
         },
@@ -410,21 +500,26 @@
               "sticky": "ewn",
               "font": 20,
               "padx": 10,
-              "pady": 10
+              "pady": 10,
+              "column_spacing": [
+                60,
+                10,
+                10
+              ]
             },
             "label": {
               "active": {
-                "En": "Video Bandwidth",
-                "Fr": "Largeur de bande vidéo",
-                "De": "Videobandbreite",
-                "Es": "Ancho de banda de video"
-              }
+                "text": {
+                  "En": "Video Bandwidth",
+                  "Fr": "Largeur de bande vidéo",
+                  "De": "Videobandbreite",
+                  "Es": "Ancho de banda de video"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
             },
-            "column_spacing": [
-              10,
-              10,
-              10
-            ],
             "handler": "set_vbw",
             "yak_handler": {
               "enable": true,
@@ -435,7 +530,6 @@
               "converter": "mhz_to_hz"
             },
             "default_locked": false,
-            "show_label": true,
             "value_config": {
               "height": 30,
               "colour": "#ffffff",
@@ -445,21 +539,33 @@
             },
             "fader_config": {
               "type": "_GuiFaderHorizontal",
-              "tick_interval": 10,
-              "show_ticks": true,
+              "cosmetics": {
+                "scale": {
+                  "interval": 10,
+                  "show": true
+                },
+                "styling": {
+                  "glow_intensity": 1.5
+                }
+              },
               "bar_color": "#333333",
               "active_color": "#FF9900",
-              "glow_intensity": 1.5,
               "width": 300,
               "height": 65
             },
             "dial_config": {
               "type": "_GuiKnob",
-              "knob_style": "dial",
+              "cosmetics": {
+                "style_overrides": {
+                  "knob_style": "dial"
+                },
+                "colors": {
+                  "active": "#00ffff",
+                  "background": "#2b2b2b"
+                }
+              },
               "width": 70,
-              "height": 70,
-              "active_color": "#00ffff",
-              "bg_color": "#2b2b2b"
+              "height": 70
             },
             "cosmetics": {
               "colors": {
@@ -474,7 +580,7 @@
             "AES70": "OcaSwitch",
             "handler": "set_video_bandwidth",
             "layout": {
-              "height": 50,
+              "height": 43,
               "alpha": 0.9,
               "max_cols": 3,
               "width": "100%",
@@ -487,11 +593,11 @@
               "active": {
                 "font_style": "bold",
                 "font_size": null,
-                "text_color": "#1a1a1a",
+                "text_color": "#FF9900",
                 "bg_color": "#000000",
                 "border_color": "#FF9900",
                 "border_thickness": 2,
-                "glow_intensity": 1.944
+                "glow_intensity": 100
               },
               "inactive": {
                 "font_style": "normal",
@@ -508,16 +614,24 @@
                 "value": "1000",
                 "label": {
                   "active": {
-                    "En": "Ultra Fast",
-                    "Fr": "Ultra Rapide",
-                    "De": "Ultra Schnell",
-                    "Es": "Ultra Rápido"
+                    "text": {
+                      "En": "Ultra Fast",
+                      "Fr": "Ultra Rapide",
+                      "De": "Ultra Schnell",
+                      "Es": "Ultra Rápido"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Ultra Fast",
-                    "Fr": "Ultra Rapide",
-                    "De": "Ultra Schnell",
-                    "Es": "Ultra Rápido"
+                    "text": {
+                      "En": "Ultra Fast",
+                      "Fr": "Ultra Rapide",
+                      "De": "Ultra Schnell",
+                      "Es": "Ultra Rápido"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -533,16 +647,24 @@
                 "value": "300",
                 "label": {
                   "active": {
-                    "En": "Very Fast",
-                    "Fr": "Very Rapide",
-                    "De": "Very Schnell",
-                    "Es": "Very Rápido"
+                    "text": {
+                      "En": "Very Fast",
+                      "Fr": "Very Rapide",
+                      "De": "Very Schnell",
+                      "Es": "Very Rápido"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Very Fast",
-                    "Fr": "Very Rapide",
-                    "De": "Very Schnell",
-                    "Es": "Very Rápido"
+                    "text": {
+                      "En": "Very Fast",
+                      "Fr": "Very Rapide",
+                      "De": "Very Schnell",
+                      "Es": "Very Rápido"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -558,16 +680,24 @@
                 "value": "100",
                 "label": {
                   "active": {
-                    "En": "Fast",
-                    "Fr": "Rapide",
-                    "De": "Schnell",
-                    "Es": "Rápido"
+                    "text": {
+                      "En": "Fast",
+                      "Fr": "Rapide",
+                      "De": "Schnell",
+                      "Es": "Rápido"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Fast",
-                    "Fr": "Rapide",
-                    "De": "Schnell",
-                    "Es": "Rápido"
+                    "text": {
+                      "En": "Fast",
+                      "Fr": "Rapide",
+                      "De": "Schnell",
+                      "Es": "Rápido"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -583,16 +713,24 @@
                 "value": "30",
                 "label": {
                   "active": {
-                    "En": "Normal",
-                    "Fr": "Normal",
-                    "De": "Normal",
-                    "Es": "Normal"
+                    "text": {
+                      "En": "Normal",
+                      "Fr": "Normal",
+                      "De": "Normal",
+                      "Es": "Normal"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Normal",
-                    "Fr": "Normal",
-                    "De": "Normal",
-                    "Es": "Normal"
+                    "text": {
+                      "En": "Normal",
+                      "Fr": "Normal",
+                      "De": "Normal",
+                      "Es": "Normal"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -608,16 +746,24 @@
                 "value": "10",
                 "label": {
                   "active": {
-                    "En": "Slow",
-                    "Fr": "Lent",
-                    "De": "Langsam",
-                    "Es": "Lento"
+                    "text": {
+                      "En": "Slow",
+                      "Fr": "Lent",
+                      "De": "Langsam",
+                      "Es": "Lento"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Slow",
-                    "Fr": "Lent",
-                    "De": "Langsam",
-                    "Es": "Lento"
+                    "text": {
+                      "En": "Slow",
+                      "Fr": "Lent",
+                      "De": "Langsam",
+                      "Es": "Lento"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -633,16 +779,24 @@
                 "value": "3",
                 "label": {
                   "active": {
-                    "En": "Very Slow",
-                    "Fr": "Very Lent",
-                    "De": "Very Langsam",
-                    "Es": "Very Lento"
+                    "text": {
+                      "En": "Very Slow",
+                      "Fr": "Very Lent",
+                      "De": "Very Langsam",
+                      "Es": "Very Lento"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Very Slow",
-                    "Fr": "Very Lent",
-                    "De": "Very Langsam",
-                    "Es": "Very Lento"
+                    "text": {
+                      "En": "Very Slow",
+                      "Fr": "Very Lent",
+                      "De": "Very Langsam",
+                      "Es": "Very Lento"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -658,16 +812,24 @@
                 "value": "1",
                 "label": {
                   "active": {
-                    "En": "Ultra Slow",
-                    "Fr": "Ultra Lent",
-                    "De": "Ultra Langsam",
-                    "Es": "Ultra Lento"
+                    "text": {
+                      "En": "Ultra Slow",
+                      "Fr": "Ultra Lent",
+                      "De": "Ultra Langsam",
+                      "Es": "Ultra Lento"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Ultra Slow",
-                    "Fr": "Ultra Lent",
-                    "De": "Ultra Langsam",
-                    "Es": "Ultra Lento"
+                    "text": {
+                      "En": "Ultra Slow",
+                      "Fr": "Ultra Lent",
+                      "De": "Ultra Langsam",
+                      "Es": "Ultra Lento"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -683,16 +845,24 @@
                 "value": "0.3",
                 "label": {
                   "active": {
-                    "En": "Glacial",
-                    "Fr": "Glacial",
-                    "De": "Glazial",
-                    "Es": "Glacial"
+                    "text": {
+                      "En": "Glacial",
+                      "Fr": "Glacial",
+                      "De": "Glazial",
+                      "Es": "Glacial"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Glacial",
-                    "Fr": "Glacial",
-                    "De": "Glazial",
-                    "Es": "Glacial"
+                    "text": {
+                      "En": "Glacial",
+                      "Fr": "Glacial",
+                      "De": "Glazial",
+                      "Es": "Glacial"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -708,16 +878,24 @@
                 "value": "0.1",
                 "label": {
                   "active": {
-                    "En": "Glacial",
-                    "Fr": "Glacial",
-                    "De": "Glazial",
-                    "Es": "Glacial"
+                    "text": {
+                      "En": "Glacial",
+                      "Fr": "Glacial",
+                      "De": "Glazial",
+                      "Es": "Glacial"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Glacial",
-                    "Fr": "Glacial",
-                    "De": "Glazial",
-                    "Es": "Glacial"
+                    "text": {
+                      "En": "Glacial",
+                      "Fr": "Glacial",
+                      "De": "Glazial",
+                      "Es": "Glacial"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -733,16 +911,24 @@
                 "value": "0.03",
                 "label": {
                   "active": {
-                    "En": "Sub-Glacial",
-                    "Fr": "Sub-Glacial",
-                    "De": "Sub-Glazial",
-                    "Es": "Sub-Glacial"
+                    "text": {
+                      "En": "Sub-Glacial",
+                      "Fr": "Sub-Glacial",
+                      "De": "Sub-Glazial",
+                      "Es": "Sub-Glacial"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Sub-Glacial",
-                    "Fr": "Sub-Glacial",
-                    "De": "Sub-Glazial",
-                    "Es": "Sub-Glacial"
+                    "text": {
+                      "En": "Sub-Glacial",
+                      "Fr": "Sub-Glacial",
+                      "De": "Sub-Glazial",
+                      "Es": "Sub-Glacial"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -758,16 +944,24 @@
                 "value": "0.01",
                 "label": {
                   "active": {
-                    "En": "Sub-Glacial",
-                    "Fr": "Sub-Glacial",
-                    "De": "Sub-Glazial",
-                    "Es": "Sub-Glacial"
+                    "text": {
+                      "En": "Sub-Glacial",
+                      "Fr": "Sub-Glacial",
+                      "De": "Sub-Glazial",
+                      "Es": "Sub-Glacial"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Sub-Glacial",
-                    "Fr": "Sub-Glacial",
-                    "De": "Sub-Glazial",
-                    "Es": "Sub-Glacial"
+                    "text": {
+                      "En": "Sub-Glacial",
+                      "Fr": "Sub-Glacial",
+                      "De": "Sub-Glazial",
+                      "Es": "Sub-Glacial"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -783,16 +977,24 @@
                 "value": "0.003",
                 "label": {
                   "active": {
-                    "En": "Crazy Slow",
-                    "Fr": "Extrêmement lent",
-                    "De": "Wahnsinnig langsam",
-                    "Es": "Locamente lento"
+                    "text": {
+                      "En": "Crazy Slow",
+                      "Fr": "Extrêmement lent",
+                      "De": "Wahnsinnig langsam",
+                      "Es": "Locamente lento"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Crazy Slow",
-                    "Fr": "Extrêmement lent",
-                    "De": "Wahnsinnig langsam",
-                    "Es": "Locamente lento"
+                    "text": {
+                      "En": "Crazy Slow",
+                      "Fr": "Extrêmement lent",
+                      "De": "Wahnsinnig langsam",
+                      "Es": "Locamente lento"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -808,16 +1010,24 @@
                 "value": "0.001",
                 "label": {
                   "active": {
-                    "En": "Crazy Slow",
-                    "Fr": "Extrêmement lent",
-                    "De": "Wahnsinnig langsam",
-                    "Es": "Locamente lento"
+                    "text": {
+                      "En": "Crazy Slow",
+                      "Fr": "Extrêmement lent",
+                      "De": "Wahnsinnig langsam",
+                      "Es": "Locamente lento"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Crazy Slow",
-                    "Fr": "Extrêmement lent",
-                    "De": "Wahnsinnig langsam",
-                    "Es": "Locamente lento"
+                    "text": {
+                      "En": "Crazy Slow",
+                      "Fr": "Extrêmement lent",
+                      "De": "Wahnsinnig langsam",
+                      "Es": "Locamente lento"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -833,16 +1043,24 @@
                 "value": "NONE",
                 "label": {
                   "active": {
-                    "En": "None Selected",
-                    "Fr": "Aucun sélectionné",
-                    "De": "Keine ausgewählt",
-                    "Es": "Ninguno seleccionado"
+                    "text": {
+                      "En": "None Selected",
+                      "Fr": "Aucun sélectionné",
+                      "De": "Keine ausgewählt",
+                      "Es": "Ninguno seleccionado"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "None Selected",
-                    "Fr": "Aucun sélectionné",
-                    "De": "Keine ausgewählt",
-                    "Es": "Ninguno seleccionado"
+                    "text": {
+                      "En": "None Selected",
+                      "Fr": "Aucun sélectionné",
+                      "De": "Keine ausgewählt",
+                      "Es": "Ninguno seleccionado"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -872,22 +1090,30 @@
             "type": "_GuiButtonToggle",
             "label": {
               "active": {
-                "En": "VBW Auto On",
-                "Fr": "VBW Auto On",
-                "De": "VBW Auto On",
-                "Es": "VBW Auto On"
+                "text": {
+                  "En": "VBW Auto On",
+                  "Fr": "VBW Auto On",
+                  "De": "VBW Auto On",
+                  "Es": "VBW Auto On"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               },
               "inactive": {
-                "En": "VBW Auto On",
-                "Fr": "VBW Auto On",
-                "De": "VBW Auto On",
-                "Es": "VBW Auto On"
+                "text": {
+                  "En": "VBW Auto On",
+                  "Fr": "VBW Auto On",
+                  "De": "VBW Auto On",
+                  "Es": "VBW Auto On"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "AES70": "OcaBooleanActuator",
             "handler": "toggle_vbw_auto",
             "layout": {
-              "height": 50,
+              "height": 34,
               "width": "100%",
               "stretch": "width",
               "font": 15
@@ -896,11 +1122,11 @@
               "active": {
                 "font_style": "bold",
                 "font_size": null,
-                "text_color": "#FF902C",
+                "text_color": "#FF9900",
                 "bg_color": "#000000",
                 "border_color": "#FF9900",
                 "border_thickness": 2,
-                "glow_intensity": 1.944
+                "glow_intensity": 100
               },
               "inactive": {
                 "font_style": "normal",
@@ -916,16 +1142,24 @@
               "ON": {
                 "label": {
                   "active": {
-                    "En": "Auto ON",
-                    "Fr": "Auto ACTIVÉ",
-                    "De": "Auto AN",
-                    "Es": "Auto ACTIVADO"
+                    "text": {
+                      "En": "Auto ON",
+                      "Fr": "Auto ACTIVÉ",
+                      "De": "Auto AN",
+                      "Es": "Auto ACTIVADO"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Auto ON",
-                    "Fr": "Auto ACTIVÉ",
-                    "De": "Auto AN",
-                    "Es": "Auto ACTIVADO"
+                    "text": {
+                      "En": "Auto ON",
+                      "Fr": "Auto ACTIVÉ",
+                      "De": "Auto AN",
+                      "Es": "Auto ACTIVADO"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "selected": true
@@ -933,16 +1167,24 @@
               "OFF": {
                 "label": {
                   "active": {
-                    "En": "Auto OFF",
-                    "Fr": "Auto OFF",
-                    "De": "Auto AUS",
-                    "Es": "Auto DES"
+                    "text": {
+                      "En": "Auto OFF",
+                      "Fr": "Auto OFF",
+                      "De": "Auto AUS",
+                      "Es": "Auto DES"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Auto OFF",
-                    "Fr": "Auto OFF",
-                    "De": "Auto AUS",
-                    "Es": "Auto DES"
+                    "text": {
+                      "En": "Auto OFF",
+                      "Fr": "Auto OFF",
+                      "De": "Auto AUS",
+                      "Es": "Auto DES"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "selected": false
@@ -972,9 +1214,9 @@
           "En": "Sweep Time settings.",
           "Fr": "Temps de balayage settings.",
           "De": "Wobbelzeit settings.",
-          "Es": "Tiempo de barrido settings."
+          "Es": "Tiempo de barrido settings.",
+          "show_label": false
         },
-        "show_label": false,
         "layout": {
           "weight": 0
         },
@@ -997,26 +1239,35 @@
               "sticky": "ewn",
               "font": 20,
               "padx": 10,
-              "pady": 10
+              "pady": 10,
+              "column_spacing": [
+                80,
+                10,
+                10
+              ]
             },
-            "column_spacing": [
-              80,
-              10,
-              10
-            ],
             "label": {
               "active": {
-                "En": "Sweep Time",
-                "Fr": "Temps de balayage",
-                "De": "Wobbelzeit",
-                "Es": "Tiempo de barrido"
+                "text": {
+                  "En": "Sweep Time",
+                  "Fr": "Temps de balayage",
+                  "De": "Wobbelzeit",
+                  "Es": "Tiempo de barrido"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               },
               "inactive": {
-                "En": "Sweep Time",
-                "Fr": "Temps de balayage",
-                "De": "Wobbelzeit",
-                "Es": "Tiempo de barrido"
-              }
+                "text": {
+                  "En": "Sweep Time",
+                  "Fr": "Temps de balayage",
+                  "De": "Wobbelzeit",
+                  "Es": "Tiempo de barrido"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
             },
             "handler": "set_sweep_time",
             "yak_handler": {
@@ -1027,7 +1278,6 @@
               "input_name": "s_value",
               "converter": "float"
             },
-            "show_label": true,
             "value_config": {
               "height": 30,
               "colour": "#ffffff",
@@ -1037,17 +1287,29 @@
             },
             "fader_config": {
               "type": "_GuiFaderHorizontal",
-              "tick_interval": 1,
-              "show_ticks": true,
+              "cosmetics": {
+                "scale": {
+                  "interval": 1,
+                  "show": true
+                },
+                "styling": {
+                  "glow_intensity": 1.5
+                }
+              },
               "bar_color": "#333333",
-              "active_color": "#FF9900",
-              "glow_intensity": 1.5
+              "active_color": "#FF9900"
             },
             "dial_config": {
               "type": "_GuiKnob",
-              "knob_style": "dial",
-              "active_color": "#00ffff",
-              "bg_color": "#2b2b2b"
+              "cosmetics": {
+                "style_overrides": {
+                  "knob_style": "dial"
+                },
+                "colors": {
+                  "active": "#00ffff",
+                  "background": "#2b2b2b"
+                }
+              }
             },
             "cosmetics": {
               "colors": {

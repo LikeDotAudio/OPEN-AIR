@@ -16,10 +16,14 @@
             "type": "_GuiActuator",
             "label": {
               "inactive": {
-                "En": "1 kHz",
-                "Fr": "1 kHz",
-                "De": "1 kHz",
-                "Es": "1 kHz"
+                "text": {
+                  "En": "1 kHz",
+                  "Fr": "1 kHz",
+                  "De": "1 kHz",
+                  "Es": "1 kHz"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "message": ":FREQ 1KHZ",
@@ -33,10 +37,14 @@
             "type": "_GuiActuator",
             "label": {
               "inactive": {
-                "En": "1V Level",
-                "Fr": "1V Niveau",
-                "De": "1V Pegel",
-                "Es": "1V Nivel"
+                "text": {
+                  "En": "1V Level",
+                  "Fr": "1V Niveau",
+                  "De": "1V Pegel",
+                  "Es": "1V Nivel"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "message": ":VOLT 1V",
@@ -50,10 +58,14 @@
             "type": "_GuiActuator",
             "label": {
               "inactive": {
-                "En": "Fast (Short)",
-                "Fr": "Rapide (Court)",
-                "De": "Schnell (Kurz)",
-                "Es": "Rápido (Corto)"
+                "text": {
+                  "En": "Fast (Short)",
+                  "Fr": "Rapide (Court)",
+                  "De": "Schnell (Kurz)",
+                  "Es": "Rápido (Corto)"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "message": ":APER SHOR",
@@ -67,10 +79,14 @@
             "type": "_GuiActuator",
             "label": {
               "inactive": {
-                "En": "Bias ON",
-                "Fr": "Biais ACTIVÉ",
-                "De": "Bias AN",
-                "Es": "Polarización ACTIVADA"
+                "text": {
+                  "En": "Bias ON",
+                  "Fr": "Biais ACTIVÉ",
+                  "De": "Bias AN",
+                  "Es": "Polarización ACTIVADA"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "message": ":BIAS:STAT ON",

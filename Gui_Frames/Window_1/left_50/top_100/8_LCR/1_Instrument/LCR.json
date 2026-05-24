@@ -33,16 +33,24 @@
                 "type": "_TrapezoidButton",
                 "label": {
                   "active": {
-                    "En": "🔥 LOAD ACTIVE (SINKING) 🔥",
-                    "Fr": "🔥 LOAD ACTIVE (SINKING) 🔥",
-                    "De": "🔥 LOAD ACTIVE (SINKING) 🔥",
-                    "Es": "🔥 LOAD ACTIVE (SINKING) 🔥"
+                    "text": {
+                      "En": "🔥 LOAD ACTIVE (SINKING) 🔥",
+                      "Fr": "🔥 LOAD ACTIVE (SINKING) 🔥",
+                      "De": "🔥 LOAD ACTIVE (SINKING) 🔥",
+                      "Es": "🔥 LOAD ACTIVE (SINKING) 🔥"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "LOAD DISENGAGED",
-                    "Fr": "CHARGE DÉSENGAGÉE",
-                    "De": "LAST GETRENNT",
-                    "Es": "CARGA DESENGANCHADA"
+                    "text": {
+                      "En": "LOAD DISENGAGED",
+                      "Fr": "CHARGE DÉSENGAGÉE",
+                      "De": "LAST GETRENNT",
+                      "Es": "CARGA DESENGANCHADA"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "state_default": false,
@@ -94,10 +102,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "INPUT VOLTS",
-                    "Fr": "VOLTS D'ENTRÉE",
-                    "De": "EINGANGSSPANNUNG",
-                    "Es": "VOLTIOS DE ENTRADA"
+                    "text": {
+                      "En": "INPUT VOLTS",
+                      "Fr": "VOLTS D'ENTRÉE",
+                      "De": "EINGANGSSPANNUNG",
+                      "Es": "VOLTIOS DE ENTRADA"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -137,10 +149,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "SINK CURRENT",
-                    "Fr": "SINK CURRENT",
-                    "De": "SINK CURRENT",
-                    "Es": "SINK CURRENT"
+                    "text": {
+                      "En": "SINK CURRENT",
+                      "Fr": "SINK CURRENT",
+                      "De": "SINK CURRENT",
+                      "Es": "SINK CURRENT"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -180,10 +196,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "DISSIPATION",
-                    "Fr": "DISSIPATION",
-                    "De": "DISSIPATION",
-                    "Es": "DISSIPATION"
+                    "text": {
+                      "En": "DISSIPATION",
+                      "Fr": "DISSIPATION",
+                      "De": "DISSIPATION",
+                      "Es": "DISSIPATION"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -229,10 +249,14 @@
                 "type": "_GuiGraph",
                 "label": {
                   "active": {
-                    "En": "Drain Timeline",
-                    "Fr": "Chronologie de consommation",
-                    "De": "Entladungs-Zeitachse",
-                    "Es": "Línea de tiempo de drenaje"
+                    "text": {
+                      "En": "Drain Timeline",
+                      "Fr": "Chronologie de consommation",
+                      "De": "Entladungs-Zeitachse",
+                      "Es": "Línea de tiempo de drenaje"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -285,10 +309,14 @@
                 "type": "_GuiDropDownOption",
                 "label": {
                   "active": {
-                    "En": "Operating Mode",
-                    "Fr": "Operating Mode",
-                    "De": "Operating Modus",
-                    "Es": "Operating Modo"
+                    "text": {
+                      "En": "Operating Mode",
+                      "Fr": "Operating Mode",
+                      "De": "Operating Modus",
+                      "Es": "Operating Modo"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "options": [
@@ -358,10 +386,14 @@
                     },
                     "label": {
                       "active": {
-                        "En": "Current Set",
-                        "Fr": "Réglage de courant",
-                        "De": "Stromeinstellung",
-                        "Es": "Ajuste de corriente"
+                        "text": {
+                          "En": "Current Set",
+                          "Fr": "Réglage de courant",
+                          "De": "Stromeinstellung",
+                          "Es": "Ajuste de corriente"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "message_details": {
@@ -404,10 +436,14 @@
                     },
                     "label": {
                       "active": {
-                        "En": "Slew Rate",
-                        "Fr": "Slew Rate",
-                        "De": "Slew Rate",
-                        "Es": "Slew Rate"
+                        "text": {
+                          "En": "Slew Rate",
+                          "Fr": "Slew Rate",
+                          "De": "Slew Rate",
+                          "Es": "Slew Rate"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "message_details": {
@@ -461,10 +497,14 @@
                     },
                     "label": {
                       "active": {
-                        "En": "Voltage Set",
-                        "Fr": "Réglage de tension",
-                        "De": "Spannungseinstellung",
-                        "Es": "Ajuste de voltaje"
+                        "text": {
+                          "En": "Voltage Set",
+                          "Fr": "Réglage de tension",
+                          "De": "Spannungseinstellung",
+                          "Es": "Ajuste de voltaje"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "message_details": {
@@ -507,10 +547,14 @@
                     },
                     "label": {
                       "active": {
-                        "En": "Resistance Set",
-                        "Fr": "Résistance Set",
-                        "De": "Breitrstand Set",
-                        "Es": "Resistencia Set"
+                        "text": {
+                          "En": "Resistance Set",
+                          "Fr": "Résistance Set",
+                          "De": "Breitrstand Set",
+                          "Es": "Resistencia Set"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "message_details": {
@@ -558,16 +602,24 @@
                 "type": "_GuiButtonToggle",
                 "label": {
                   "active": {
-                    "En": "PULSE MODE ON",
-                    "Fr": "PULSE MODE ON",
-                    "De": "PULSE MODE ON",
-                    "Es": "PULSE MODE ON"
+                    "text": {
+                      "En": "PULSE MODE ON",
+                      "Fr": "PULSE MODE ON",
+                      "De": "PULSE MODE ON",
+                      "Es": "PULSE MODE ON"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "PULSE MODE OFF",
-                    "Fr": "MODE PULSÉ DÉSACTIVÉ",
-                    "De": "IMPULSMODUS AUS",
-                    "Es": "MODO PULSO DESACTIVADO"
+                    "text": {
+                      "En": "PULSE MODE OFF",
+                      "Fr": "MODE PULSÉ DÉSACTIVÉ",
+                      "De": "IMPULSMODUS AUS",
+                      "Es": "MODO PULSO DESACTIVADO"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "style": {
@@ -629,10 +681,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "Level A (Base)",
-                    "Fr": "Niveau A (Base)",
-                    "De": "Pegel A (Base)",
-                    "Es": "Nivel A (Base)"
+                    "text": {
+                      "En": "Level A (Base)",
+                      "Fr": "Niveau A (Base)",
+                      "De": "Pegel A (Base)",
+                      "Es": "Nivel A (Base)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -673,10 +729,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "Level B (Peak)",
-                    "Fr": "Niveau B (Peak)",
-                    "De": "Pegel B (Peak)",
-                    "Es": "Nivel B (Peak)"
+                    "text": {
+                      "En": "Level B (Peak)",
+                      "Fr": "Niveau B (Peak)",
+                      "De": "Pegel B (Peak)",
+                      "Es": "Nivel B (Peak)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -719,10 +779,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "Frequency",
-                    "Fr": "Fréquence",
-                    "De": "Frequenz",
-                    "Es": "Frecuencia"
+                    "text": {
+                      "En": "Frequency",
+                      "Fr": "Fréquence",
+                      "De": "Frequenz",
+                      "Es": "Frecuencia"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -765,10 +829,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "Duty Cycle",
-                    "Fr": "Duty Cycle",
-                    "De": "Duty Cycle",
-                    "Es": "Duty Cycle"
+                    "text": {
+                      "En": "Duty Cycle",
+                      "Fr": "Duty Cycle",
+                      "De": "Duty Cycle",
+                      "Es": "Duty Cycle"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {

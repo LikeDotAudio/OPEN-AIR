@@ -27,10 +27,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "ON",
-                    "Fr": "ON",
-                    "De": "EIN",
-                    "Es": "ENC"
+                    "text": {
+                      "En": "ON",
+                      "Fr": "ON",
+                      "De": "EIN",
+                      "Es": "ENC"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -62,10 +66,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "OFF",
-                    "Fr": "OFF",
-                    "De": "AUS",
-                    "Es": "DES"
+                    "text": {
+                      "En": "OFF",
+                      "Fr": "OFF",
+                      "De": "AUS",
+                      "Es": "DES"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",

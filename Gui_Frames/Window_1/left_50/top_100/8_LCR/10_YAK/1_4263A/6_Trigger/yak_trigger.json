@@ -19,10 +19,14 @@
             "type": "_GuiActuator",
             "label": {
               "active": {
-                "En": "Trigger",
-                "Fr": "Déclencher",
-                "De": "Auslösen",
-                "Es": "Disparar"
+                "text": {
+                  "En": "Trigger",
+                  "Fr": "Déclencher",
+                  "De": "Auslösen",
+                  "Es": "Disparar"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "message": ":TRIGger",
@@ -36,10 +40,14 @@
             "type": "_GuiActuator",
             "label": {
               "active": {
-                "En": "Set Source",
-                "Fr": "Définir la source",
-                "De": "Quelle einstellen",
-                "Es": "Establecer fuente"
+                "text": {
+                  "En": "Set Source",
+                  "Fr": "Définir la source",
+                  "De": "Quelle einstellen",
+                  "Es": "Establecer fuente"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "message": ":TRIGger:SOURce {value}",
@@ -59,10 +67,14 @@
             "type": "_GuiActuator",
             "label": {
               "active": {
-                "En": "Set Delay",
-                "Fr": "Définir le délai",
-                "De": "Verzögerung einstellen",
-                "Es": "Establecer retraso"
+                "text": {
+                  "En": "Set Delay",
+                  "Fr": "Définir le délai",
+                  "De": "Verzögerung einstellen",
+                  "Es": "Establecer retraso"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "message": ":TRIGger:DELay {value}",
@@ -76,10 +88,14 @@
             "type": "_GuiActuator",
             "label": {
               "active": {
-                "En": "Lower Limit",
-                "Fr": "Limite inférieure",
-                "De": "Untere Grenze",
-                "Es": "Límite inferior"
+                "text": {
+                  "En": "Lower Limit",
+                  "Fr": "Limite inférieure",
+                  "De": "Untere Grenze",
+                  "Es": "Límite inferior"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "message": ":CALCulate:LIMit:LOWer {value}",
@@ -93,10 +109,14 @@
             "type": "_GuiActuator",
             "label": {
               "active": {
-                "En": "Upper Limit",
-                "Fr": "Limite supérieure",
-                "De": "Obere Grenze",
-                "Es": "Límite superior"
+                "text": {
+                  "En": "Upper Limit",
+                  "Fr": "Limite supérieure",
+                  "De": "Obere Grenze",
+                  "Es": "Límite superior"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "message": ":CALCulate:LIMit:UPPer {value}",
@@ -110,10 +130,14 @@
             "type": "_GuiActuator",
             "label": {
               "active": {
-                "En": "Comparator",
-                "Fr": "Comparateur",
-                "De": "Komparator",
-                "Es": "Comparador"
+                "text": {
+                  "En": "Comparator",
+                  "Fr": "Comparateur",
+                  "De": "Komparator",
+                  "Es": "Comparador"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "message": ":CALCulate:LIMit:STATe {value}",

@@ -36,10 +36,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "Voltage (V)",
-                    "Fr": "Tension (V)",
-                    "De": "Spannenung (V)",
-                    "Es": "Voltaje (V)"
+                    "text": {
+                      "En": "Voltage (V)",
+                      "Fr": "Tension (V)",
+                      "De": "Spannenung (V)",
+                      "Es": "Voltaje (V)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -88,10 +92,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "Current (A)",
-                    "Fr": "Courant (A)",
-                    "De": "Strom (A)",
-                    "Es": "Corriente (A)"
+                    "text": {
+                      "En": "Current (A)",
+                      "Fr": "Courant (A)",
+                      "De": "Strom (A)",
+                      "Es": "Corriente (A)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -137,16 +145,24 @@
                 "type": "_GuiButtonToggle",
                 "label": {
                   "active": {
-                    "En": "ON",
-                    "Fr": "ON",
-                    "De": "EIN",
-                    "Es": "ENC"
+                    "text": {
+                      "En": "ON",
+                      "Fr": "ON",
+                      "De": "EIN",
+                      "Es": "ENC"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "OFF",
-                    "Fr": "OFF",
-                    "De": "AUS",
-                    "Es": "DES"
+                    "text": {
+                      "En": "OFF",
+                      "Fr": "OFF",
+                      "De": "AUS",
+                      "Es": "DES"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "style": {

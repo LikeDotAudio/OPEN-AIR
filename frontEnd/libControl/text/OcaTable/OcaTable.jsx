@@ -19,7 +19,7 @@ const OcaTable = ({ value, config }) => {
     const rows = Array.isArray(data) ? data : Object.values(data);
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', width: '100%', height: '100%', backgroundColor: '#1e1e1e', border: '1px solid #333', borderRadius: '4px', overflow: 'hidden' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', width: '100%', height: '100%', backgroundColor: (window.OaTransparency ? window.OaTransparency.bg(config, '#1e1e1e') : '#1e1e1e'), border: '1px solid #333', borderRadius: '4px', overflow: 'hidden' }}>
             <div style={{ backgroundColor: '#2b2b2b', padding: '10px 15px', borderBottom: '1px solid #111', color: '#fff', fontSize: '12px', fontWeight: 'bold' }}>
                 {title.toUpperCase()}
             </div>

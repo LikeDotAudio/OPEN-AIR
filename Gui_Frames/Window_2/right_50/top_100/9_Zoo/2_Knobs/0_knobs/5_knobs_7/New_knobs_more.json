@@ -47,7 +47,8 @@
               "En": "Num Std",
               "Fr": "Num Std",
               "De": "Num Std",
-              "Es": "Num Std"
+              "Es": "Num Std",
+              "show_label": true
             },
             "notes": "Standard Numeric",
             "geometry": {
@@ -68,8 +69,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "visualization": "circle",
               "pointer": {
@@ -106,7 +106,8 @@
               "En": "Long Ticks",
               "Fr": "Long Ticks",
               "De": "Long Ticks",
-              "Es": "Long Ticks"
+              "Es": "Long Ticks",
+              "show_label": true
             },
             "notes": "Long Simple Lines",
             "geometry": {
@@ -127,8 +128,7 @@
                 "primary": "#FF5722"
               },
               "style_flags": {
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "visualization": "circle",
               "pointer": {
@@ -165,7 +165,8 @@
               "En": "Dot Arc",
               "Fr": "Dot Arc",
               "De": "Dot Arc",
-              "Es": "Dot Arc"
+              "Es": "Dot Arc",
+              "show_label": true
             },
             "notes": "Dot Ticks",
             "geometry": {
@@ -186,8 +187,7 @@
                 "primary": "#4CAF50"
               },
               "style_flags": {
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "visualization": "circle",
               "pointer": {
@@ -224,7 +224,8 @@
               "En": "Gear Num",
               "Fr": "Gear Num",
               "De": "Gear Num",
-              "Es": "Gear Num"
+              "Es": "Gear Num",
+              "show_label": true
             },
             "notes": "Rotating Gear + Numbers",
             "geometry": {
@@ -245,8 +246,7 @@
                 "primary": "#FFC107"
               },
               "style_flags": {
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "visualization": "gear",
               "pointer": {
@@ -283,7 +283,8 @@
               "En": "Oct Dot",
               "Fr": "Oct Dot",
               "De": "Oct Dot",
-              "Es": "Oct Dot"
+              "Es": "Oct Dot",
+              "show_label": true
             },
             "notes": "Rotating Oct + Dots",
             "geometry": {
@@ -304,8 +305,7 @@
                 "primary": "#9C27B0"
               },
               "style_flags": {
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "visualization": "octagon",
               "pointer": {
@@ -342,7 +342,8 @@
               "En": "Tri Ptr Num",
               "Fr": "Tri Ptr Num",
               "De": "Tri Ptr Num",
-              "Es": "Tri Ptr Num"
+              "Es": "Tri Ptr Num",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -363,8 +364,7 @@
                 "primary": "#00BCD4"
               },
               "style_flags": {
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "visualization": "circle",
               "pointer": {
@@ -401,7 +401,8 @@
               "En": "Notch Line",
               "Fr": "Notch Line",
               "De": "Notch Line",
-              "Es": "Notch Line"
+              "Es": "Notch Line",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -422,8 +423,7 @@
                 "primary": "#E91E63"
               },
               "style_flags": {
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "visualization": "circle",
               "pointer": {
@@ -460,7 +460,8 @@
               "En": "Fine Num",
               "Fr": "Fine Num",
               "De": "Fine Num",
-              "Es": "Fine Num"
+              "Es": "Fine Num",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -481,8 +482,7 @@
                 "primary": "#795548"
               },
               "style_flags": {
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "visualization": "circle",
               "pointer": {
@@ -519,7 +519,8 @@
               "En": "Inf Dots",
               "Fr": "Inf Dots",
               "De": "Inf Dots",
-              "Es": "Inf Dots"
+              "Es": "Inf Dots",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -540,8 +541,7 @@
                 "primary": "#607D8B"
               },
               "style_flags": {
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "visualization": "circle",
               "pointer": {
@@ -578,7 +578,8 @@
               "En": "Fat Arc",
               "Fr": "Fat Arc",
               "De": "Fat Arc",
-              "Es": "Fat Arc"
+              "Es": "Fat Arc",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -599,8 +600,7 @@
                 "primary": "#3F51B5"
               },
               "style_flags": {
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "visualization": "circle",
               "pointer": {
@@ -637,7 +637,8 @@
               "En": "Mix 1",
               "Fr": "Mix 1",
               "De": "Mix 1",
-              "Es": "Mezcla 1"
+              "Es": "Mezcla 1",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -658,8 +659,7 @@
                 "primary": "#F44336"
               },
               "style_flags": {
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "visualization": "gear",
               "pointer": {
@@ -696,7 +696,8 @@
               "En": "Mix 2",
               "Fr": "Mix 2",
               "De": "Mix 2",
-              "Es": "Mezcla 2"
+              "Es": "Mezcla 2",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -717,8 +718,7 @@
                 "primary": "#8BC34A"
               },
               "style_flags": {
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "visualization": "octagon",
               "pointer": {
@@ -755,7 +755,8 @@
               "En": "Mix 3",
               "Fr": "Mix 3",
               "De": "Mix 3",
-              "Es": "Mezcla 3"
+              "Es": "Mezcla 3",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -776,8 +777,7 @@
                 "primary": "#FF9800"
               },
               "style_flags": {
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "visualization": "circle",
               "pointer": {
@@ -814,7 +814,8 @@
               "En": "Mix 4",
               "Fr": "Mix 4",
               "De": "Mix 4",
-              "Es": "Mezcla 4"
+              "Es": "Mezcla 4",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -835,8 +836,7 @@
                 "primary": "#009688"
               },
               "style_flags": {
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "visualization": "gear",
               "pointer": {
@@ -873,7 +873,8 @@
               "En": "Mix 5",
               "Fr": "Mix 5",
               "De": "Mix 5",
-              "Es": "Mezcla 5"
+              "Es": "Mezcla 5",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -894,8 +895,7 @@
                 "primary": "#673AB7"
               },
               "style_flags": {
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "visualization": "circle",
               "pointer": {
@@ -932,7 +932,8 @@
               "En": "Big Num",
               "Fr": "Big Num",
               "De": "Big Num",
-              "Es": "Big Num"
+              "Es": "Big Num",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -953,8 +954,7 @@
                 "primary": "#FF4081"
               },
               "style_flags": {
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "visualization": "circle",
               "pointer": {
@@ -991,7 +991,8 @@
               "En": "Short Num",
               "Fr": "Short Num",
               "De": "Short Num",
-              "Es": "Short Num"
+              "Es": "Short Num",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1012,8 +1013,7 @@
                 "primary": "#CDDC39"
               },
               "style_flags": {
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "visualization": "circle",
               "pointer": {
@@ -1050,7 +1050,8 @@
               "En": "Deep Gear",
               "Fr": "Deep Gear",
               "De": "Deep Gear",
-              "Es": "Deep Gear"
+              "Es": "Deep Gear",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1071,8 +1072,7 @@
                 "primary": "#2196F3"
               },
               "style_flags": {
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "visualization": "gear",
               "pointer": {
@@ -1109,7 +1109,8 @@
               "En": "Deep Oct",
               "Fr": "Deep Oct",
               "De": "Deep Oct",
-              "Es": "Deep Oct"
+              "Es": "Deep Oct",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1130,8 +1131,7 @@
                 "primary": "#9C27B0"
               },
               "style_flags": {
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "visualization": "octagon",
               "pointer": {
@@ -1168,7 +1168,8 @@
               "En": "The End",
               "Fr": "The End",
               "De": "The End",
-              "Es": "The End"
+              "Es": "The End",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1189,8 +1190,7 @@
                 "primary": "#FFFFFF"
               },
               "style_flags": {
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "visualization": "gear",
               "pointer": {
@@ -1227,7 +1227,8 @@
               "En": "Thin (1)",
               "Fr": "Thin (1)",
               "De": "Thin (1)",
-              "Es": "Thin (1)"
+              "Es": "Thin (1)",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1248,8 +1249,7 @@
                 "primary": "#FFD700"
               },
               "style_flags": {
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "visualization": "circle",
               "pointer": {
@@ -1286,7 +1286,8 @@
               "En": "Med (3)",
               "Fr": "Med (3)",
               "De": "Med (3)",
-              "Es": "Med (3)"
+              "Es": "Med (3)",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1307,8 +1308,7 @@
                 "primary": "#FF6347"
               },
               "style_flags": {
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "visualization": "circle",
               "pointer": {
@@ -1345,7 +1345,8 @@
               "En": "Std (5)",
               "Fr": "Std (5)",
               "De": "Std (5)",
-              "Es": "Std (5)"
+              "Es": "Std (5)",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1366,8 +1367,7 @@
                 "primary": "#40E0D0"
               },
               "style_flags": {
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "visualization": "circle",
               "pointer": {
@@ -1404,7 +1404,8 @@
               "En": "Thick (8)",
               "Fr": "Thick (8)",
               "De": "Thick (8)",
-              "Es": "Thick (8)"
+              "Es": "Thick (8)",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1425,8 +1426,7 @@
                 "primary": "#EE82EE"
               },
               "style_flags": {
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "visualization": "circle",
               "pointer": {
@@ -1463,7 +1463,8 @@
               "En": "Chunky (12)",
               "Fr": "Chunky (12)",
               "De": "Chunky (12)",
-              "Es": "Chunky (12)"
+              "Es": "Chunky (12)",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1484,8 +1485,7 @@
                 "primary": "#8A2BE2"
               },
               "style_flags": {
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "visualization": "circle",
               "pointer": {
@@ -1522,7 +1522,8 @@
               "En": "Massive (16)",
               "Fr": "Massive (16)",
               "De": "Massive (16)",
-              "Es": "Massive (16)"
+              "Es": "Massive (16)",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1543,8 +1544,7 @@
                 "primary": "#DC143C"
               },
               "style_flags": {
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "visualization": "octagon",
               "pointer": {
@@ -1581,7 +1581,8 @@
               "En": "Donut (20)",
               "Fr": "Donut (20)",
               "De": "Donut (20)",
-              "Es": "Donut (20)"
+              "Es": "Donut (20)",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1602,8 +1603,7 @@
                 "primary": "#00FA9A"
               },
               "style_flags": {
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "visualization": "circle",
               "pointer": {
@@ -1640,7 +1640,8 @@
               "En": "Gear Thick",
               "Fr": "Gear Thick",
               "De": "Gear Thick",
-              "Es": "Gear Thick"
+              "Es": "Gear Thick",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1661,8 +1662,7 @@
                 "primary": "#FF00FF"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -1699,7 +1699,8 @@
               "En": "Fine Arc",
               "Fr": "Fine Arc",
               "De": "Fine Arc",
-              "Es": "Fine Arc"
+              "Es": "Fine Arc",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1720,8 +1721,7 @@
                 "primary": "#F0E68C"
               },
               "style_flags": {
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "visualization": "circle",
               "pointer": {
@@ -1758,7 +1758,8 @@
               "En": "Max Thick",
               "Fr": "Max Thick",
               "De": "Max Thick",
-              "Es": "Máx Thick"
+              "Es": "Máx Thick",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1779,8 +1780,7 @@
                 "primary": "#1E90FF"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {

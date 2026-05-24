@@ -274,7 +274,7 @@ const MDP = ({ config, value, onChange }) => {
 
     return (
         <div ref={containerRef} className="mdp-container" style={{ 
-            background: '#111', border: '1px solid #333', borderRadius: '4px',
+            background: (window.OaTransparency ? window.OaTransparency.bg(config, '#111') : '#111'), border: '1px solid #333', borderRadius: '4px',
             padding: '10px', boxShadow: 'inset 0 2px 10px rgba(0,0,0,0.5)'
         }}>
             <div style={{ color: '#aaa', fontSize: '11px', fontWeight: 'bold', marginBottom: '10px', textAlign: 'center' }}>

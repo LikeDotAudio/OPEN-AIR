@@ -28,10 +28,14 @@
             },
             "label": {
               "active": {
-                "En": "Multimeter Mode",
-                "Fr": "Multimeter Mode",
-                "De": "Multimeter Mode",
-                "Es": "Multimeter Mode"
+                "text": {
+                  "En": "Multimeter Mode",
+                  "Fr": "Multimeter Mode",
+                  "De": "Multimeter Mode",
+                  "Es": "Multimeter Mode"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "positions": [
@@ -53,10 +57,14 @@
             },
             "label": {
               "active": {
-                "En": "Basic 4-Way",
-                "Fr": "Basic 4-Way",
-                "De": "Basic 4-Way",
-                "Es": "Basic 4-Way"
+                "text": {
+                  "En": "Basic 4-Way",
+                  "Fr": "Basic 4-Way",
+                  "De": "Basic 4-Way",
+                  "Es": "Basic 4-Way"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "positions": [
@@ -76,10 +84,14 @@
             },
             "label": {
               "active": {
-                "En": "Microwave Select",
-                "Fr": "Microwave Select",
-                "De": "Microwave Select",
-                "Es": "Microwave Select"
+                "text": {
+                  "En": "Microwave Select",
+                  "Fr": "Microwave Select",
+                  "De": "Microwave Select",
+                  "Es": "Microwave Select"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "positions": [
@@ -98,10 +110,14 @@
             "type": "SelectorSwitch",
             "label": {
               "active": {
-                "En": "Audio Source",
-                "Fr": "Audio Source",
-                "De": "Audio Source",
-                "Es": "Audio Source"
+                "text": {
+                  "En": "Audio Source",
+                  "Fr": "Audio Source",
+                  "De": "Audio Source",
+                  "Es": "Audio Source"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "positions": [
@@ -120,10 +136,14 @@
             "type": "SelectorSwitch",
             "label": {
               "active": {
-                "En": "Large Power Selector",
-                "Fr": "Large Power Selector",
-                "De": "Large Power Selector",
-                "Es": "Large Power Selector"
+                "text": {
+                  "En": "Large Power Selector",
+                  "Fr": "Large Power Selector",
+                  "De": "Large Power Selector",
+                  "Es": "Large Power Selector"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "positions": [
@@ -143,10 +163,14 @@
             "type": "SelectorSwitch",
             "label": {
               "active": {
-                "En": "Time/Div",
-                "Fr": "Time/Div",
-                "De": "Time/Div",
-                "Es": "Time/Div"
+                "text": {
+                  "En": "Time/Div",
+                  "Fr": "Time/Div",
+                  "De": "Time/Div",
+                  "Es": "Time/Div"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "positions": [
@@ -169,10 +193,14 @@
             "type": "SelectorSwitch",
             "label": {
               "active": {
-                "En": "Pickup Select",
-                "Fr": "Pickup Select",
-                "De": "Pickup Select",
-                "Es": "Pickup Select"
+                "text": {
+                  "En": "Pickup Select",
+                  "Fr": "Pickup Select",
+                  "De": "Pickup Select",
+                  "Es": "Pickup Select"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "positions": [
@@ -190,10 +218,14 @@
             "type": "SelectorSwitch",
             "label": {
               "active": {
-                "En": "20-Position Encoder",
-                "Fr": "20-Position Encoder",
-                "De": "20-Position Encoder",
-                "Es": "20-Position Encoder"
+                "text": {
+                  "En": "20-Position Encoder",
+                  "Fr": "20-Position Encoder",
+                  "De": "20-Position Encoder",
+                  "Es": "20-Position Encoder"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "positions": [
@@ -228,10 +260,14 @@
             "type": "SelectorSwitch",
             "label": {
               "active": {
-                "En": "Cycle",
-                "Fr": "Cycle",
-                "De": "Cycle",
-                "Es": "Cycle"
+                "text": {
+                  "En": "Cycle",
+                  "Fr": "Cycle",
+                  "De": "Cycle",
+                  "Es": "Cycle"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "positions": [
@@ -250,10 +286,14 @@
             "type": "SelectorSwitch",
             "label": {
               "active": {
-                "En": "Temp Range",
-                "Fr": "Temp Range",
-                "De": "Temp Range",
-                "Es": "Temp Range"
+                "text": {
+                  "En": "Temp Range",
+                  "Fr": "Temp Range",
+                  "De": "Temp Range",
+                  "Es": "Temp Range"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "positions": [
@@ -272,10 +312,14 @@
             "type": "SelectorSwitch",
             "label": {
               "active": {
-                "En": "Time Mode",
-                "Fr": "Heure Mode",
-                "De": "Zeit Mode",
-                "Es": "Hora Mode"
+                "text": {
+                  "En": "Time Mode",
+                  "Fr": "Heure Mode",
+                  "De": "Zeit Mode",
+                  "Es": "Hora Mode"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "positions": [
@@ -292,10 +336,14 @@
             "type": "SelectorSwitch",
             "label": {
               "active": {
-                "En": "Filter Type",
-                "Fr": "Type de Filtre",
-                "De": "Filtertyp",
-                "Es": "Tipo de Filtro"
+                "text": {
+                  "En": "Filter Type",
+                  "Fr": "Type de Filtre",
+                  "De": "Filtertyp",
+                  "Es": "Tipo de Filtro"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "positions": [

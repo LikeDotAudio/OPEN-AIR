@@ -49,10 +49,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Large Classic",
-                "Fr": "Large Classique",
-                "De": "Large Klassisch",
-                "Es": "Large Clásico"
+                "text": {
+                  "En": "Large Classic",
+                  "Fr": "Large Classique",
+                  "De": "Large Klassisch",
+                  "Es": "Large Clásico"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -136,10 +140,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Medium Blue",
-                "Fr": "Moyen Blue",
-                "De": "Mittel Blue",
-                "Es": "Medio Blue"
+                "text": {
+                  "En": "Medium Blue",
+                  "Fr": "Moyen Blue",
+                  "De": "Mittel Blue",
+                  "Es": "Medio Blue"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -216,10 +224,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Small Gold",
-                "Fr": "Small Gold",
-                "De": "Small Gold",
-                "Es": "Small Gold"
+                "text": {
+                  "En": "Small Gold",
+                  "Fr": "Small Gold",
+                  "De": "Small Gold",
+                  "Es": "Small Gold"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -293,10 +305,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Ruby Red",
-                "Fr": "Ruby Red",
-                "De": "Ruby Red",
-                "Es": "Ruby Red"
+                "text": {
+                  "En": "Ruby Red",
+                  "Fr": "Ruby Red",
+                  "De": "Ruby Red",
+                  "Es": "Ruby Red"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -373,10 +389,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Emerald Flat",
-                "Fr": "Emerald Flat",
-                "De": "Emerald Flat",
-                "Es": "Emerald Flat"
+                "text": {
+                  "En": "Emerald Flat",
+                  "Fr": "Emerald Flat",
+                  "De": "Emerald Flat",
+                  "Es": "Emerald Flat"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -453,10 +473,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Sapphire Deep",
-                "Fr": "Sapphire Deep",
-                "De": "Sapphire Deep",
-                "Es": "Sapphire Deep"
+                "text": {
+                  "En": "Sapphire Deep",
+                  "Fr": "Sapphire Deep",
+                  "De": "Sapphire Deep",
+                  "Es": "Sapphire Deep"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -533,10 +557,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Onyx Stealth",
-                "Fr": "Onyx Stealth",
-                "De": "Onyx Stealth",
-                "Es": "Onyx Stealth"
+                "text": {
+                  "En": "Onyx Stealth",
+                  "Fr": "Onyx Stealth",
+                  "De": "Onyx Stealth",
+                  "Es": "Onyx Stealth"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -613,10 +641,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Pearl White",
-                "Fr": "Pearl White",
-                "De": "Pearl White",
-                "Es": "Pearl White"
+                "text": {
+                  "En": "Pearl White",
+                  "Fr": "Pearl White",
+                  "De": "Pearl White",
+                  "Es": "Pearl White"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -693,10 +725,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Amethyst",
-                "Fr": "Amethyst",
-                "De": "Amethyst",
-                "Es": "Amethyst"
+                "text": {
+                  "En": "Amethyst",
+                  "Fr": "Amethyst",
+                  "De": "Amethyst",
+                  "Es": "Amethyst"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {

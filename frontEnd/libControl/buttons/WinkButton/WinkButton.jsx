@@ -104,7 +104,7 @@ const OcaWinkButton = ({ label, value, onChange, config }) => {
                 height: h,
                 borderRadius: shapeType === 'round' ? '50%' : `${radius}px`,
                 overflow: 'hidden',
-                backgroundColor: bgColor,
+                backgroundColor: (window.OaTransparency ? window.OaTransparency.bg(config, bgColor) : bgColor),
                 border: useGlassLens ? 'none' : `${borderThickness}px solid ${borderColor}`,
                 boxShadow: useGlassLens ? `inset 0 0 15px rgba(0,0,0,0.9)` : 'none'
             }}>

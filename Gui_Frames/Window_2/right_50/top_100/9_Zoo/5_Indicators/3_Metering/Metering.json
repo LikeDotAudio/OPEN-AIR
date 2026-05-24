@@ -15,10 +15,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Download Progress",
-            "Fr": "Download Progress",
-            "De": "Download Progress",
-            "Es": "Download Progress"
+            "text": {
+              "En": "Download Progress",
+              "Fr": "Download Progress",
+              "De": "Download Progress",
+              "Es": "Download Progress"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {

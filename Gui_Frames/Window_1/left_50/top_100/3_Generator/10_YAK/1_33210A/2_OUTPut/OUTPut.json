@@ -96,10 +96,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "Output ON",
-                    "Fr": "Sortie ON",
-                    "De": "Ausgang ON",
-                    "Es": "Salida ON"
+                    "text": {
+                      "En": "Output ON",
+                      "Fr": "Sortie ON",
+                      "De": "Ausgang ON",
+                      "Es": "Salida ON"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -132,10 +136,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "Output OFF",
-                    "Fr": "Sortie DÉSACTIVÉE",
-                    "De": "Ausgang AUS",
-                    "Es": "Salida DESACTIVADA"
+                    "text": {
+                      "En": "Output OFF",
+                      "Fr": "Sortie DÉSACTIVÉE",
+                      "De": "Ausgang AUS",
+                      "Es": "Salida DESACTIVADA"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -168,10 +176,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "Sync ON",
-                    "Fr": "Sync ON",
-                    "De": "Sync ON",
-                    "Es": "Sync ON"
+                    "text": {
+                      "En": "Sync ON",
+                      "Fr": "Sync ON",
+                      "De": "Sync ON",
+                      "Es": "Sync ON"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -204,10 +216,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "Sync OFF",
-                    "Fr": "Sync OFF",
-                    "De": "Sync OFF",
-                    "Es": "Sync OFF"
+                    "text": {
+                      "En": "Sync OFF",
+                      "Fr": "Sync OFF",
+                      "De": "Sync OFF",
+                      "Es": "Sync OFF"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",

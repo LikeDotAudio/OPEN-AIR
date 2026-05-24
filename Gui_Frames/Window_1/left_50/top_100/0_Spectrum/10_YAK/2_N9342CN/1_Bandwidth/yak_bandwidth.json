@@ -17,9 +17,9 @@
           "En": "NAB Bandwidth Monitoring",
           "Fr": "NAB Largeur de bande Monitoring",
           "De": "NAB Bandbreite Monitoring",
-          "Es": "NAB Ancho de banda Monitoring"
+          "Es": "NAB Ancho de banda Monitoring",
+          "show_label": false
         },
-        "show_label": false,
         "fields": {
           "bandwidth_settings": {
             "type": "OcaBlock",
@@ -34,16 +34,24 @@
                 "type": "_GuiActuator",
                 "label": {
                   "active": {
-                    "En": "Get Bandwidth Settings",
-                    "Fr": "Get Largeur de bande Paramètres",
-                    "De": "Get Bandbreite Einstellungen",
-                    "Es": "Get Ancho de banda Ajustes"
+                    "text": {
+                      "En": "Get Bandwidth Settings",
+                      "Fr": "Get Largeur de bande Paramètres",
+                      "De": "Get Bandbreite Einstellungen",
+                      "Es": "Get Ancho de banda Ajustes"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Get Bandwidth Settings",
-                    "Fr": "Get Largeur de bande Paramètres",
-                    "De": "Get Bandbreite Einstellungen",
-                    "Es": "Get Ancho de banda Ajustes"
+                    "text": {
+                      "En": "Get Bandwidth Settings",
+                      "Fr": "Get Largeur de bande Paramètres",
+                      "De": "Get Bandbreite Einstellungen",
+                      "Es": "Get Ancho de banda Ajustes"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -166,16 +174,24 @@
                 "type": "_GuiActuator",
                 "label": {
                   "active": {
-                    "En": "Set RBW and VBW",
-                    "Fr": "Set RBW and VBW",
-                    "De": "Set RBW and VBW",
-                    "Es": "Set RBW and VBW"
+                    "text": {
+                      "En": "Set RBW and VBW",
+                      "Fr": "Set RBW and VBW",
+                      "De": "Set RBW and VBW",
+                      "Es": "Set RBW and VBW"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Set RBW and VBW",
-                    "Fr": "Set RBW and VBW",
-                    "De": "Set RBW and VBW",
-                    "Es": "Set RBW and VBW"
+                    "text": {
+                      "En": "Set RBW and VBW",
+                      "Fr": "Set RBW and VBW",
+                      "De": "Set RBW and VBW",
+                      "Es": "Set RBW and VBW"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -257,16 +273,24 @@
                 "type": "_GuiActuator",
                 "label": {
                   "active": {
-                    "En": "Set Sweep Time",
-                    "Fr": "Régler le temps de balayage",
-                    "De": "Sweep-Zeit einstellen",
-                    "Es": "Ajustar tiempo de barrido"
+                    "text": {
+                      "En": "Set Sweep Time",
+                      "Fr": "Régler le temps de balayage",
+                      "De": "Sweep-Zeit einstellen",
+                      "Es": "Ajustar tiempo de barrido"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Set Sweep Time",
-                    "Fr": "Régler le temps de balayage",
-                    "De": "Sweep-Zeit einstellen",
-                    "Es": "Ajustar tiempo de barrido"
+                    "text": {
+                      "En": "Set Sweep Time",
+                      "Fr": "Régler le temps de balayage",
+                      "De": "Sweep-Zeit einstellen",
+                      "Es": "Ajustar tiempo de barrido"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -324,16 +348,24 @@
                 "type": "_GuiActuator",
                 "label": {
                   "active": {
-                    "En": "Set Video Bandwidth",
-                    "Fr": "Régler la bande passante vidéo",
-                    "De": "Videobandbreite einstellen",
-                    "Es": "Ajustar ancho de banda de video"
+                    "text": {
+                      "En": "Set Video Bandwidth",
+                      "Fr": "Régler la bande passante vidéo",
+                      "De": "Videobandbreite einstellen",
+                      "Es": "Ajustar ancho de banda de video"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Set Video Bandwidth",
-                    "Fr": "Régler la bande passante vidéo",
-                    "De": "Videobandbreite einstellen",
-                    "Es": "Ajustar ancho de banda de video"
+                    "text": {
+                      "En": "Set Video Bandwidth",
+                      "Fr": "Régler la bande passante vidéo",
+                      "De": "Videobandbreite einstellen",
+                      "Es": "Ajustar ancho de banda de video"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -391,16 +423,24 @@
                 "type": "_GuiActuator",
                 "label": {
                   "active": {
-                    "En": "Set Resolution Bandwidth",
-                    "Fr": "Régler la bande passante de résolution",
-                    "De": "Auflösungsbandbreite einstellen",
-                    "Es": "Ajustar ancho de banda de resolución"
+                    "text": {
+                      "En": "Set Resolution Bandwidth",
+                      "Fr": "Régler la bande passante de résolution",
+                      "De": "Auflösungsbandbreite einstellen",
+                      "Es": "Ajustar ancho de banda de resolución"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Set Resolution Bandwidth",
-                    "Fr": "Régler la bande passante de résolution",
-                    "De": "Auflösungsbandbreite einstellen",
-                    "Es": "Ajustar ancho de banda de resolución"
+                    "text": {
+                      "En": "Set Resolution Bandwidth",
+                      "Fr": "Régler la bande passante de résolution",
+                      "De": "Auflösungsbandbreite einstellen",
+                      "Es": "Ajustar ancho de banda de resolución"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -464,16 +504,24 @@
                 "type": "_GuiActuator",
                 "label": {
                   "active": {
-                    "En": "Sweep Auto ON",
-                    "Fr": "Sweep Auto ON",
-                    "De": "Sweep Auto EIN",
-                    "Es": "Sweep Auto ENC"
+                    "text": {
+                      "En": "Sweep Auto ON",
+                      "Fr": "Sweep Auto ON",
+                      "De": "Sweep Auto EIN",
+                      "Es": "Sweep Auto ENC"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Sweep Auto ON",
-                    "Fr": "Sweep Auto ON",
-                    "De": "Sweep Auto EIN",
-                    "Es": "Sweep Auto ENC"
+                    "text": {
+                      "En": "Sweep Auto ON",
+                      "Fr": "Sweep Auto ON",
+                      "De": "Sweep Auto EIN",
+                      "Es": "Sweep Auto ENC"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -508,16 +556,24 @@
                 "type": "_GuiActuator",
                 "label": {
                   "active": {
-                    "En": "Sweep Auto OFF",
-                    "Fr": "Sweep Auto OFF",
-                    "De": "Sweep Auto AUS",
-                    "Es": "Sweep Auto DES"
+                    "text": {
+                      "En": "Sweep Auto OFF",
+                      "Fr": "Sweep Auto OFF",
+                      "De": "Sweep Auto AUS",
+                      "Es": "Sweep Auto DES"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Sweep Auto OFF",
-                    "Fr": "Sweep Auto OFF",
-                    "De": "Sweep Auto AUS",
-                    "Es": "Sweep Auto DES"
+                    "text": {
+                      "En": "Sweep Auto OFF",
+                      "Fr": "Sweep Auto OFF",
+                      "De": "Sweep Auto AUS",
+                      "Es": "Sweep Auto DES"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -563,16 +619,24 @@
                 "type": "_GuiActuator",
                 "label": {
                   "active": {
-                    "En": "VBW Auto ON",
-                    "Fr": "Auto VBW ACTIVÉ",
-                    "De": "VBW Auto AN",
-                    "Es": "Auto VBW ACTIVADO"
+                    "text": {
+                      "En": "VBW Auto ON",
+                      "Fr": "Auto VBW ACTIVÉ",
+                      "De": "VBW Auto AN",
+                      "Es": "Auto VBW ACTIVADO"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "VBW Auto ON",
-                    "Fr": "Auto VBW ACTIVÉ",
-                    "De": "VBW Auto AN",
-                    "Es": "Auto VBW ACTIVADO"
+                    "text": {
+                      "En": "VBW Auto ON",
+                      "Fr": "Auto VBW ACTIVÉ",
+                      "De": "VBW Auto AN",
+                      "Es": "Auto VBW ACTIVADO"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -607,16 +671,24 @@
                 "type": "_GuiActuator",
                 "label": {
                   "active": {
-                    "En": "VBW Auto OFF",
-                    "Fr": "VBW Auto OFF",
-                    "De": "VBW Auto AUS",
-                    "Es": "VBW Auto DES"
+                    "text": {
+                      "En": "VBW Auto OFF",
+                      "Fr": "VBW Auto OFF",
+                      "De": "VBW Auto AUS",
+                      "Es": "VBW Auto DES"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "VBW Auto OFF",
-                    "Fr": "VBW Auto OFF",
-                    "De": "VBW Auto AUS",
-                    "Es": "VBW Auto DES"
+                    "text": {
+                      "En": "VBW Auto OFF",
+                      "Fr": "VBW Auto OFF",
+                      "De": "VBW Auto AUS",
+                      "Es": "VBW Auto DES"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -662,16 +734,24 @@
                 "type": "_GuiActuator",
                 "label": {
                   "active": {
-                    "En": "RBW Auto ON",
-                    "Fr": "RBW Auto ON",
-                    "De": "RBW Auto EIN",
-                    "Es": "RBW Auto ENC"
+                    "text": {
+                      "En": "RBW Auto ON",
+                      "Fr": "RBW Auto ON",
+                      "De": "RBW Auto EIN",
+                      "Es": "RBW Auto ENC"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "RBW Auto ON",
-                    "Fr": "RBW Auto ON",
-                    "De": "RBW Auto EIN",
-                    "Es": "RBW Auto ENC"
+                    "text": {
+                      "En": "RBW Auto ON",
+                      "Fr": "RBW Auto ON",
+                      "De": "RBW Auto EIN",
+                      "Es": "RBW Auto ENC"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -706,16 +786,24 @@
                 "type": "_GuiActuator",
                 "label": {
                   "active": {
-                    "En": "RBW Auto OFF",
-                    "Fr": "RBW Auto OFF",
-                    "De": "RBW Auto AUS",
-                    "Es": "RBW Auto DES"
+                    "text": {
+                      "En": "RBW Auto OFF",
+                      "Fr": "RBW Auto OFF",
+                      "De": "RBW Auto AUS",
+                      "Es": "RBW Auto DES"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "RBW Auto OFF",
-                    "Fr": "RBW Auto OFF",
-                    "De": "RBW Auto AUS",
-                    "Es": "RBW Auto DES"
+                    "text": {
+                      "En": "RBW Auto OFF",
+                      "Fr": "RBW Auto OFF",
+                      "De": "RBW Auto AUS",
+                      "Es": "RBW Auto DES"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",

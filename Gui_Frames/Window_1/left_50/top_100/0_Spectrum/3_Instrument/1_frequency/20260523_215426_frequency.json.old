@@ -1,0 +1,520 @@
+{
+  "Spectrum_Instrument_frequency": {
+    "type": "OcaBin",
+    "id": "50.100.0.3.1",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": false
+    },
+    "blocks": {
+      "Frequency": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "A block for managing center and span frequency settings.",
+          "Fr": "Un bloc pour gérer les paramètres de fréquence centrale et d'intervalle.",
+          "De": "Ein Block zur Verwaltung der Mittenfrequenz- und Spanneneinstellungen.",
+          "Es": "Un bloque para gestionar los ajustes de frecuencia central e intervalo.",
+          "show_label": false
+        },
+        "fields": {
+          "center_freq_MHz": {
+            "label": {
+              "active": {
+                "En": "Center Frequency",
+                "Fr": "Fréquence centrale",
+                "De": "Mittenfrequenz",
+                "Es": "Frecuencia central"
+              }
+            },
+            "type": "_Horizontal_with_dial_Value",
+            "layout": {
+              "stretch": "width",
+              "font": 10,
+              "padx": 20,
+              "width": "100%",
+              "height": 140,
+              "column_spacing": [
+                60,
+                10,
+                15
+              ]
+            },
+            "handler": "set_center_frequency",
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Frequency",
+              "command": "Set_Center_Freq_MHz",
+              "input_name": "hz_value",
+              "converter": "mhz_to_hz"
+            },
+            "domain": {
+              "locked": false,
+              "min": "0",
+              "max": "6000",
+              "units": "MHz",
+              "step_coarse": "1",
+              "step_fine": "0.001",
+              "precision": ".001"
+            },
+            "value": {
+              "default_value": "500"
+            }
+          },
+          "span_freq_MHz": {
+            "label": {
+              "active": {
+                "En": "Frequency Span",
+                "Fr": "Fréquence Span",
+                "De": "Frequenz Span",
+                "Es": "Frecuencia Span"
+              },
+              "inactive": {
+                "En": "Frequency Span",
+                "Fr": "Fréquence Span",
+                "De": "Frequenz Span",
+                "Es": "Frecuencia Span"
+              }
+            },
+            "type": "_Horizontal_with_dial_Value",
+            "layout": {
+              "stretch": "width",
+              "font": 20,
+              "padx": 20,
+              "width": "100%",
+              "height": 140,
+              "column_spacing": [
+                60,
+                10,
+                15
+              ]
+            },
+            "handler": "set_span_frequency",
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Frequency",
+              "command": "Set_Span_Frequency",
+              "input_name": "hz_value",
+              "converter": "mhz_to_hz"
+            },
+            "domain": {
+              "locked": false,
+              "min": "0",
+              "max": "1000",
+              "units": "MHz",
+              "step_coarse": "1",
+              "step_fine": "0.001",
+              "precision": ".001"
+            },
+            "value": {
+              "default_value": "200"
+            }
+          }
+        }
+      },
+      "Fold_Start_Stop": {
+        "type": "OcaFold",
+        "layout": {
+          "pady": 5,
+          "stretch": "width"
+        }
+      },
+      "Start Stop": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "A block for managing start and stop frequency settings.",
+          "Fr": "Un bloc pour gérer les paramètres de fréquence de début et de fin.",
+          "De": "Ein Block zur Verwaltung der Start- und Stoppfrequenzeinstellungen.",
+          "Es": "Un bloque para gestionar los ajustes de frecuencia de inicio y fin.",
+          "show_label": false
+        },
+        "layout": {
+          "weight": 0,
+          "width": "100%"
+        },
+        "fields": {
+          "start_freq_MHz": {
+            "label": {
+              "active": {
+                "En": "Start Frequency",
+                "Fr": "Fréquence de début",
+                "De": "Startfrequenz",
+                "Es": "Frecuencia de inicio"
+              },
+              "inactive": {
+                "En": "Start Frequency",
+                "Fr": "Fréquence de début",
+                "De": "Startfrequenz",
+                "Es": "Frecuencia de inicio"
+              }
+            },
+            "type": "_Horizontal_with_dial_Value",
+            "layout": {
+              "stretch": "width",
+              "font": 20,
+              "padx": 20,
+              "width": "100%",
+              "height": 140,
+              "column_spacing": [
+                60,
+                10,
+                15
+              ]
+            },
+            "handler": "set_start_frequency",
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Frequency",
+              "command": "Set_Start_Freq_MHz",
+              "input_name": "hz_value",
+              "converter": "mhz_to_hz"
+            },
+            "domain": {
+              "locked": false,
+              "min": "0",
+              "max": "5999",
+              "units": "MHz",
+              "step_coarse": "1",
+              "step_fine": "0.001",
+              "precision": ".001"
+            },
+            "value": {
+              "default_value": "400"
+            }
+          },
+          "stop_freq_MHz": {
+            "label": {
+              "active": {
+                "En": "Stop Frequency",
+                "Fr": "Fréquence de fin",
+                "De": "Stoppfrequenz",
+                "Es": "Frecuencia de parada"
+              },
+              "inactive": {
+                "En": "Stop Frequency",
+                "Fr": "Fréquence de fin",
+                "De": "Stoppfrequenz",
+                "Es": "Frecuencia de parada"
+              }
+            },
+            "type": "_Horizontal_with_dial_Value",
+            "layout": {
+              "stretch": "width",
+              "font": 20,
+              "padx": 20,
+              "width": "100%",
+              "height": 140,
+              "column_spacing": [
+                60,
+                10,
+                15
+              ]
+            },
+            "handler": "set_stop_frequency",
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Frequency",
+              "command": "Set_Stop_Freq_MHz",
+              "input_name": "hz_value",
+              "converter": "mhz_to_hz"
+            },
+            "domain": {
+              "locked": false,
+              "min": "1",
+              "max": "6000",
+              "units": "MHz",
+              "step_coarse": "1",
+              "step_fine": "0.001",
+              "precision": ".001"
+            },
+            "value": {
+              "default_value": "600"
+            }
+          }
+        }
+      },
+      "Fold_Presets": {
+        "type": "OcaFold",
+        "layout": {
+          "pady": 5,
+          "stretch": "width"
+        }
+      },
+      "Quick Span": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "A block for managing all frequency-related presets.",
+          "Fr": "Un bloc pour gérer tous les préréglages liés à la fréquence.",
+          "De": "Ein Block zur Verwaltung aller frequenzbezogenen Voreinstellungen.",
+          "Es": "Un bloque para gestionar todos los preajustes relacionados con la frecuencia.",
+          "show_label": false
+        },
+        "layout": {
+          "weight": 0,
+          "width": "100%"
+        },
+        "fields": {
+          "Span": {
+            "type": "_GuiButtonToggler",
+            "label": {
+              "active": {
+                "En": "Span",
+                "Fr": "Étendue",
+                "De": "Spanne",
+                "Es": "Intervalo"
+              }
+            },
+            "AES70": "OcaSwitch",
+            "handler": "set_span_frequency",
+            "layout": {
+              "max_cols": 4,
+              "width": "100%",
+              "stretch": "width",
+              "font": 11,
+              "alpha": 0.9,
+              "padx": 2,
+              "pady": 2
+            },
+            "style": {
+              "active": {
+                "font_style": "bold",
+                "font_size": null,
+                "text_color": "#FF9900",
+                "bg_color": "#000000",
+                "border_color": "#FF9900",
+                "border_thickness": 2,
+                "glow_intensity": 100
+              },
+              "inactive": {
+                "font_style": "normal",
+                "font_size": null,
+                "text_color": "#888888",
+                "bg_color": "#2b2b2b",
+                "border_color": "#555555",
+                "border_thickness": 2,
+                "glow_intensity": 0
+              }
+            },
+            "options": {
+              "1": {
+                "value": "0.01",
+                "label": {
+                  "active": {
+                    "En": "Microscope",
+                    "Fr": "Microscope",
+                    "De": "Mikroskop",
+                    "Es": "Microscopio"
+                  },
+                  "inactive": {
+                    "En": "Microscope",
+                    "Fr": "Microscope",
+                    "De": "Mikroskop",
+                    "Es": "Microscopio"
+                  }
+                },
+                "description": {
+                  "En": "So tight you'll feel like a cellular biologist examining a single-cell waveform.",
+                  "Fr": "So tight you'll feel like a cellular biologist examining a single-cell waveform.",
+                  "De": "So tight you'll feel like a cellular biologist examining a single-cell waveform.",
+                  "Es": "So tight you'll feel like a cellular biologist examining a single-cell waveform."
+                },
+                "units": "MHz",
+                "selected": false
+              },
+              "2": {
+                "value": "0.1",
+                "label": {
+                  "active": {
+                    "En": "Tight",
+                    "Fr": "Tight",
+                    "De": "Tight",
+                    "Es": "Tight"
+                  },
+                  "inactive": {
+                    "En": "Tight",
+                    "Fr": "Tight",
+                    "De": "Tight",
+                    "Es": "Tight"
+                  }
+                },
+                "description": {
+                  "En": "A narrow, focused view for getting up close and personal with signals.",
+                  "Fr": "Une vue étroite et ciblée pour se rapprocher au plus près des signaux.",
+                  "De": "Eine enge, fokussierte Ansicht, um Signalen ganz nahe zu kommen.",
+                  "Es": "Una vista estrecha y enfocada para acercarse a las señales."
+                },
+                "units": "MHz",
+                "selected": false
+              },
+              "3": {
+                "value": "1",
+                "label": {
+                  "active": {
+                    "En": "Normal",
+                    "Fr": "Normal",
+                    "De": "Normal",
+                    "Es": "Normal"
+                  },
+                  "inactive": {
+                    "En": "Normal",
+                    "Fr": "Normal",
+                    "De": "Normal",
+                    "Es": "Normal"
+                  }
+                },
+                "description": {
+                  "En": "The standard span, a balanced diet for most common analysis.",
+                  "Fr": "The standard span, a balanced diet for most common analysis.",
+                  "De": "The standard span, a balanced diet for most common analysis.",
+                  "Es": "The standard span, a balanced diet for most common analysis."
+                },
+                "units": "MHz",
+                "selected": false
+              },
+              "4": {
+                "value": "10",
+                "label": {
+                  "active": {
+                    "En": "Wide",
+                    "Fr": "Large",
+                    "De": "Breit",
+                    "Es": "Ancho"
+                  },
+                  "inactive": {
+                    "En": "Wide",
+                    "Fr": "Large",
+                    "De": "Breit",
+                    "Es": "Ancho"
+                  }
+                },
+                "description": {
+                  "En": "A broad, digestible view of the spectrum, great for general reconnaissance.",
+                  "Fr": "A broad, digestible view of the spectrum, great for general reconnaissance.",
+                  "De": "A broad, digestible view of the spectrum, great for general reconnaissance.",
+                  "Es": "A broad, digestible view of the spectrum, great for general reconnaissance."
+                },
+                "units": "MHz",
+                "selected": false
+              },
+              "5": {
+                "value": "100",
+                "label": {
+                  "active": {
+                    "En": "Ultra Wide",
+                    "Fr": "Ultra Large",
+                    "De": "Ultra Breit",
+                    "Es": "Ultra Ancho"
+                  },
+                  "inactive": {
+                    "En": "Ultra Wide",
+                    "Fr": "Ultra Large",
+                    "De": "Ultra Breit",
+                    "Es": "Ultra Ancho"
+                  }
+                },
+                "description": {
+                  "En": "A very broad span for finding signals over a large frequency range. It's like scanning with a wide-angle lens.",
+                  "Fr": "Une portée très large pour trouver des signaux sur une large gamme de fréquences. It's like scanning with a wide-angle lens.",
+                  "De": "Eine sehr breite Spanne zum Finden von Signalen über einen großen Frequenzbereich. It's like scanning with a wide-angle lens.",
+                  "Es": "Un intervalo muy amplio para encontrar señales en un rango de frecuencias grande. It's like scanning with a wide-angle lens."
+                },
+                "units": "MHz",
+                "selected": false
+              },
+              "6": {
+                "value": "500",
+                "label": {
+                  "active": {
+                    "En": "From Space",
+                    "Fr": "From Space",
+                    "De": "From Space",
+                    "Es": "From Space"
+                  },
+                  "inactive": {
+                    "En": "From Space",
+                    "Fr": "From Space",
+                    "De": "From Space",
+                    "Es": "From Space"
+                  }
+                },
+                "description": {
+                  "En": "A very broad span for finding signals over a large frequency range.",
+                  "Fr": "Une portée très large pour trouver des signaux sur une large gamme de fréquences.",
+                  "De": "Eine sehr breite Spanne zum Finden von Signalen über einen großen Frequenzbereich.",
+                  "Es": "Un intervalo muy amplio para encontrar señales en un rango de frecuencias grande."
+                },
+                "units": "MHz",
+                "selected": false
+              },
+              "7": {
+                "value": "1000",
+                "label": {
+                  "active": {
+                    "En": "From The Moon",
+                    "Fr": "From The Moon",
+                    "De": "From The Moon",
+                    "Es": "From The Moon"
+                  },
+                  "inactive": {
+                    "En": "From The Moon",
+                    "Fr": "From The Moon",
+                    "De": "From The Moon",
+                    "Es": "From The Moon"
+                  }
+                },
+                "description": {
+                  "En": "A very broad span for finding signals over a large frequency range. It's like scanning with a wide-angle lens.",
+                  "Fr": "Une portée très large pour trouver des signaux sur une large gamme de fréquences. It's like scanning with a wide-angle lens.",
+                  "De": "Eine sehr breite Spanne zum Finden von Signalen über einen großen Frequenzbereich. It's like scanning with a wide-angle lens.",
+                  "Es": "Un intervalo muy amplio para encontrar señales en un rango de frecuencias grande. It's like scanning with a wide-angle lens."
+                },
+                "units": "MHz",
+                "selected": false
+              },
+              "UNSELECTED": {
+                "value": "NONE",
+                "label": {
+                  "active": {
+                    "En": "None Selected",
+                    "Fr": "Aucun sélectionné",
+                    "De": "Keine ausgewählt",
+                    "Es": "Ninguno seleccionado"
+                  },
+                  "inactive": {
+                    "En": "None Selected",
+                    "Fr": "Aucun sélectionné",
+                    "De": "Keine ausgewählt",
+                    "Es": "Ninguno seleccionado"
+                  }
+                },
+                "description": {
+                  "En": "No span option is currently selected.",
+                  "Fr": "Non span option is currently selected.",
+                  "De": "Nein span option is currently selected.",
+                  "Es": "No span option is currently selected."
+                },
+                "units": "",
+                "selected": true
+              }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Frequency",
+              "command": "Set_Span_Frequency",
+              "input_name": "hz_value",
+              "converter": "mhz_to_hz"
+            }
+          }
+        }
+      }
+    }
+  }
+}

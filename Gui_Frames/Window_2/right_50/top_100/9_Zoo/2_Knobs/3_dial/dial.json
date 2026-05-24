@@ -53,7 +53,8 @@
               "En": "Std Combo",
               "Fr": "Std Combo",
               "De": "Std Combo",
-              "Es": "Std Combo"
+              "Es": "Std Combo",
+              "show_label": true
             },
             "notes": "Standard combo",
             "geometry": {
@@ -75,8 +76,7 @@
               },
               "style_flags": {
                 "show_grid": false,
-                "fill_shape": true,
-                "show_label": true
+                "fill_shape": true
               },
               "visualization": "circle",
               "pointer": {
@@ -114,7 +114,8 @@
               "En": "Pie Only",
               "Fr": "Pie Only",
               "De": "Pie Only",
-              "Es": "Pie Only"
+              "Es": "Pie Only",
+              "show_label": true
             },
             "notes": "Piechart only, red",
             "geometry": {
@@ -136,8 +137,7 @@
               },
               "style_flags": {
                 "show_grid": false,
-                "fill_shape": true,
-                "show_label": true
+                "fill_shape": true
               },
               "visualization": "circle",
               "pointer": {
@@ -175,7 +175,8 @@
               "En": "Ptr Only",
               "Fr": "Ptr Only",
               "De": "Ptr Only",
-              "Es": "Ptr Only"
+              "Es": "Ptr Only",
+              "show_label": true
             },
             "notes": "Pointer only, blue",
             "geometry": {
@@ -197,8 +198,7 @@
               },
               "style_flags": {
                 "show_grid": false,
-                "fill_shape": false,
-                "show_label": true
+                "fill_shape": false
               },
               "visualization": "circle",
               "pointer": {
@@ -236,7 +236,8 @@
               "En": "Lg Pie",
               "Fr": "Lg Pie",
               "De": "Lg Pie",
-              "Es": "Lg Pie"
+              "Es": "Lg Pie",
+              "show_label": true
             },
             "notes": "Large pie, green",
             "geometry": {
@@ -258,8 +259,7 @@
               },
               "style_flags": {
                 "show_grid": false,
-                "fill_shape": true,
-                "show_label": true
+                "fill_shape": true
               },
               "visualization": "circle",
               "pointer": {
@@ -297,7 +297,8 @@
               "En": "Sm Ptr",
               "Fr": "Sm Ptr",
               "De": "Sm Ptr",
-              "Es": "Sm Ptr"
+              "Es": "Sm Ptr",
+              "show_label": true
             },
             "notes": "Small pointer, yellow",
             "geometry": {
@@ -319,8 +320,7 @@
               },
               "style_flags": {
                 "show_grid": false,
-                "fill_shape": false,
-                "show_label": true
+                "fill_shape": false
               },
               "visualization": "circle",
               "pointer": {
@@ -358,7 +358,8 @@
               "En": "Giant Mix",
               "Fr": "Giant Mix",
               "De": "Giant Mix",
-              "Es": "Giant Mezcla"
+              "Es": "Giant Mezcla",
+              "show_label": true
             },
             "notes": "Giant combo, cyan",
             "geometry": {
@@ -380,8 +381,7 @@
               },
               "style_flags": {
                 "show_grid": false,
-                "fill_shape": true,
-                "show_label": true
+                "fill_shape": true
               },
               "visualization": "circle",
               "pointer": {
@@ -419,7 +419,8 @@
               "En": "Purple",
               "Fr": "Purple",
               "De": "Purple",
-              "Es": "Purple"
+              "Es": "Purple",
+              "show_label": true
             },
             "notes": "Medium purple",
             "geometry": {
@@ -441,8 +442,7 @@
               },
               "style_flags": {
                 "show_grid": false,
-                "fill_shape": true,
-                "show_label": true
+                "fill_shape": true
               },
               "visualization": "circle",
               "pointer": {
@@ -480,7 +480,8 @@
               "En": "Teal",
               "Fr": "Teal",
               "De": "Teal",
-              "Es": "Teal"
+              "Es": "Teal",
+              "show_label": true
             },
             "notes": "Medium teal pointer",
             "geometry": {
@@ -502,8 +503,7 @@
               },
               "style_flags": {
                 "show_grid": false,
-                "fill_shape": false,
-                "show_label": true
+                "fill_shape": false
               },
               "visualization": "circle",
               "pointer": {
@@ -579,7 +579,8 @@
               "En": "Index 1",
               "Fr": "Index 1",
               "De": "Index 1",
-              "Es": "Index 1"
+              "Es": "Index 1",
+              "show_label": true
             },
             "notes": "Blue Pointer",
             "geometry": {
@@ -601,8 +602,7 @@
               },
               "style_flags": {
                 "show_grid": false,
-                "fill_shape": false,
-                "show_label": true
+                "fill_shape": false
               },
               "visualization": "circle",
               "pointer": {
@@ -640,7 +640,8 @@
               "En": "Index 2",
               "Fr": "Index 2",
               "De": "Index 2",
-              "Es": "Index 2"
+              "Es": "Index 2",
+              "show_label": true
             },
             "notes": "Amber Pie",
             "geometry": {
@@ -662,8 +663,7 @@
               },
               "style_flags": {
                 "show_grid": false,
-                "fill_shape": true,
-                "show_label": true
+                "fill_shape": true
               },
               "visualization": "circle",
               "pointer": {
@@ -701,7 +701,8 @@
               "En": "Index 3",
               "Fr": "Index 3",
               "De": "Index 3",
-              "Es": "Index 3"
+              "Es": "Index 3",
+              "show_label": true
             },
             "notes": "Green Combo",
             "geometry": {
@@ -723,8 +724,7 @@
               },
               "style_flags": {
                 "show_grid": false,
-                "fill_shape": true,
-                "show_label": true
+                "fill_shape": true
               },
               "visualization": "circle",
               "pointer": {
@@ -762,7 +762,8 @@
               "En": "Index 4",
               "Fr": "Index 4",
               "De": "Index 4",
-              "Es": "Index 4"
+              "Es": "Index 4",
+              "show_label": true
             },
             "notes": "Small Pink",
             "geometry": {
@@ -784,8 +785,7 @@
               },
               "style_flags": {
                 "show_grid": false,
-                "fill_shape": false,
-                "show_label": true
+                "fill_shape": false
               },
               "visualization": "circle",
               "pointer": {
@@ -823,7 +823,8 @@
               "En": "Index 5",
               "Fr": "Index 5",
               "De": "Index 5",
-              "Es": "Index 5"
+              "Es": "Index 5",
+              "show_label": true
             },
             "notes": "Large Purple",
             "geometry": {
@@ -845,8 +846,7 @@
               },
               "style_flags": {
                 "show_grid": false,
-                "fill_shape": true,
-                "show_label": true
+                "fill_shape": true
               },
               "visualization": "circle",
               "pointer": {
@@ -884,7 +884,8 @@
               "En": "Index 6",
               "Fr": "Index 6",
               "De": "Index 6",
-              "Es": "Index 6"
+              "Es": "Index 6",
+              "show_label": true
             },
             "notes": "Cyan Combo",
             "geometry": {
@@ -906,8 +907,7 @@
               },
               "style_flags": {
                 "show_grid": false,
-                "fill_shape": true,
-                "show_label": true
+                "fill_shape": true
               },
               "visualization": "circle",
               "pointer": {
@@ -945,7 +945,8 @@
               "En": "Index 7",
               "Fr": "Index 7",
               "De": "Index 7",
-              "Es": "Index 7"
+              "Es": "Index 7",
+              "show_label": true
             },
             "notes": "Deep Orange",
             "geometry": {
@@ -968,8 +969,7 @@
               },
               "style_flags": {
                 "show_grid": false,
-                "fill_shape": false,
-                "show_label": true
+                "fill_shape": false
               },
               "visualization": "circle",
               "pointer": {
@@ -1007,7 +1007,8 @@
               "En": "Index 8",
               "Fr": "Index 8",
               "De": "Index 8",
-              "Es": "Index 8"
+              "Es": "Index 8",
+              "show_label": true
             },
             "notes": "Brown Large",
             "geometry": {
@@ -1029,8 +1030,7 @@
               },
               "style_flags": {
                 "show_grid": false,
-                "fill_shape": true,
-                "show_label": true
+                "fill_shape": true
               },
               "visualization": "circle",
               "pointer": {
@@ -1106,7 +1106,8 @@
               "En": "Seconds",
               "Fr": "Seconds",
               "De": "Seconds",
-              "Es": "Seconds"
+              "Es": "Seconds",
+              "show_label": true
             },
             "notes": "White Clock",
             "geometry": {
@@ -1128,8 +1129,7 @@
               },
               "style_flags": {
                 "show_grid": false,
-                "fill_shape": true,
-                "show_label": true
+                "fill_shape": true
               },
               "visualization": "circle",
               "pointer": {
@@ -1167,7 +1167,8 @@
               "En": "Minutes",
               "Fr": "Minutes",
               "De": "Minutes",
-              "Es": "Minutes"
+              "Es": "Minutes",
+              "show_label": true
             },
             "notes": "Grey Clock",
             "geometry": {
@@ -1189,8 +1190,7 @@
               },
               "style_flags": {
                 "show_grid": false,
-                "fill_shape": false,
-                "show_label": true
+                "fill_shape": false
               },
               "visualization": "circle",
               "pointer": {
@@ -1228,7 +1228,8 @@
               "En": "Millis",
               "Fr": "Millis",
               "De": "Millis",
-              "Es": "Millis"
+              "Es": "Millis",
+              "show_label": true
             },
             "notes": "Fast Red",
             "geometry": {
@@ -1251,8 +1252,7 @@
               },
               "style_flags": {
                 "show_grid": false,
-                "fill_shape": true,
-                "show_label": true
+                "fill_shape": true
               },
               "visualization": "circle",
               "pointer": {
@@ -1290,7 +1290,8 @@
               "En": "Delay",
               "Fr": "Delay",
               "De": "Delay",
-              "Es": "Delay"
+              "Es": "Delay",
+              "show_label": true
             },
             "notes": "Delay Blue",
             "geometry": {
@@ -1312,8 +1313,7 @@
               },
               "style_flags": {
                 "show_grid": false,
-                "fill_shape": true,
-                "show_label": true
+                "fill_shape": true
               },
               "visualization": "circle",
               "pointer": {
@@ -1351,7 +1351,8 @@
               "En": "Attack",
               "Fr": "Attaque",
               "De": "Attack",
-              "Es": "Ataque"
+              "Es": "Ataque",
+              "show_label": true
             },
             "notes": "Fast Attack Green",
             "geometry": {
@@ -1373,8 +1374,7 @@
               },
               "style_flags": {
                 "show_grid": false,
-                "fill_shape": false,
-                "show_label": true
+                "fill_shape": false
               },
               "visualization": "circle",
               "pointer": {
@@ -1412,7 +1412,8 @@
               "En": "Release",
               "Fr": "Relâchement",
               "De": "Release",
-              "Es": "Relajación"
+              "Es": "Relajación",
+              "show_label": true
             },
             "notes": "Slow Release Orange",
             "geometry": {
@@ -1434,8 +1435,7 @@
               },
               "style_flags": {
                 "show_grid": false,
-                "fill_shape": true,
-                "show_label": true
+                "fill_shape": true
               },
               "visualization": "circle",
               "pointer": {
@@ -1473,7 +1473,8 @@
               "En": "Decay",
               "Fr": "Decay",
               "De": "Decay",
-              "Es": "Decay"
+              "Es": "Decay",
+              "show_label": true
             },
             "notes": "Decay Purple",
             "geometry": {
@@ -1495,8 +1496,7 @@
               },
               "style_flags": {
                 "show_grid": false,
-                "fill_shape": true,
-                "show_label": true
+                "fill_shape": true
               },
               "visualization": "circle",
               "pointer": {
@@ -1534,7 +1534,8 @@
               "En": "Hold",
               "Fr": "Hold",
               "De": "Hold",
-              "Es": "Hold"
+              "Es": "Hold",
+              "show_label": true
             },
             "notes": "Dark Hold",
             "geometry": {
@@ -1556,8 +1557,7 @@
               },
               "style_flags": {
                 "show_grid": false,
-                "fill_shape": false,
-                "show_label": true
+                "fill_shape": false
               },
               "visualization": "circle",
               "pointer": {
@@ -1633,7 +1633,8 @@
               "En": "Param A",
               "Fr": "Param A",
               "De": "Param A",
-              "Es": "Param A"
+              "Es": "Param A",
+              "show_label": true
             },
             "notes": "Cyan Electric",
             "geometry": {
@@ -1655,8 +1656,7 @@
               },
               "style_flags": {
                 "show_grid": false,
-                "fill_shape": true,
-                "show_label": true
+                "fill_shape": true
               },
               "visualization": "circle",
               "pointer": {
@@ -1694,7 +1694,8 @@
               "En": "Param B",
               "Fr": "Param B",
               "De": "Param B",
-              "Es": "Param B"
+              "Es": "Param B",
+              "show_label": true
             },
             "notes": "Red Tech",
             "geometry": {
@@ -1716,8 +1717,7 @@
               },
               "style_flags": {
                 "show_grid": false,
-                "fill_shape": false,
-                "show_label": true
+                "fill_shape": false
               },
               "visualization": "circle",
               "pointer": {
@@ -1755,7 +1755,8 @@
               "En": "Param C",
               "Fr": "Param C",
               "De": "Param C",
-              "Es": "Param C"
+              "Es": "Param C",
+              "show_label": true
             },
             "notes": "Lime Tech",
             "geometry": {
@@ -1777,8 +1778,7 @@
               },
               "style_flags": {
                 "show_grid": false,
-                "fill_shape": true,
-                "show_label": true
+                "fill_shape": true
               },
               "visualization": "circle",
               "pointer": {
@@ -1816,7 +1816,8 @@
               "En": "Mix X",
               "Fr": "Mix X",
               "De": "Mix X",
-              "Es": "Mezcla X"
+              "Es": "Mezcla X",
+              "show_label": true
             },
             "notes": "Purple Deep",
             "geometry": {
@@ -1838,8 +1839,7 @@
               },
               "style_flags": {
                 "show_grid": false,
-                "fill_shape": true,
-                "show_label": true
+                "fill_shape": true
               },
               "visualization": "circle",
               "pointer": {
@@ -1877,7 +1877,8 @@
               "En": "Mix Y",
               "Fr": "Mix Y",
               "De": "Mix Y",
-              "Es": "Mezcla Y"
+              "Es": "Mezcla Y",
+              "show_label": true
             },
             "notes": "Orange Blaze",
             "geometry": {
@@ -1899,8 +1900,7 @@
               },
               "style_flags": {
                 "show_grid": false,
-                "fill_shape": false,
-                "show_label": true
+                "fill_shape": false
               },
               "visualization": "circle",
               "pointer": {
@@ -1938,7 +1938,8 @@
               "En": "Mod 1",
               "Fr": "Mod 1",
               "De": "Mod 1",
-              "Es": "Mod 1"
+              "Es": "Mod 1",
+              "show_label": true
             },
             "notes": "Indigo",
             "geometry": {
@@ -1961,8 +1962,7 @@
               },
               "style_flags": {
                 "show_grid": false,
-                "fill_shape": true,
-                "show_label": true
+                "fill_shape": true
               },
               "visualization": "circle",
               "pointer": {
@@ -2000,7 +2000,8 @@
               "En": "Mod 2",
               "Fr": "Mod 2",
               "De": "Mod 2",
-              "Es": "Mod 2"
+              "Es": "Mod 2",
+              "show_label": true
             },
             "notes": "Green Bright",
             "geometry": {
@@ -2022,8 +2023,7 @@
               },
               "style_flags": {
                 "show_grid": false,
-                "fill_shape": true,
-                "show_label": true
+                "fill_shape": true
               },
               "visualization": "circle",
               "pointer": {
@@ -2061,7 +2061,8 @@
               "En": "Master",
               "Fr": "Master",
               "De": "Master",
-              "Es": "Maestro"
+              "Es": "Maestro",
+              "show_label": true
             },
             "notes": "Dark Master",
             "geometry": {
@@ -2083,8 +2084,7 @@
               },
               "style_flags": {
                 "show_grid": false,
-                "fill_shape": true,
-                "show_label": true
+                "fill_shape": true
               },
               "visualization": "circle",
               "pointer": {
@@ -2160,7 +2160,8 @@
               "En": "Loading",
               "Fr": "Loading",
               "De": "Loading",
-              "Es": "Loading"
+              "Es": "Loading",
+              "show_label": true
             },
             "notes": "Start",
             "geometry": {
@@ -2182,8 +2183,7 @@
               },
               "style_flags": {
                 "show_grid": false,
-                "fill_shape": true,
-                "show_label": true
+                "fill_shape": true
               },
               "visualization": "circle",
               "pointer": {
@@ -2221,7 +2221,8 @@
               "En": "Stage 1",
               "Fr": "Stage 1",
               "De": "Stage 1",
-              "Es": "Stage 1"
+              "Es": "Stage 1",
+              "show_label": true
             },
             "notes": "Blue Light",
             "geometry": {
@@ -2243,8 +2244,7 @@
               },
               "style_flags": {
                 "show_grid": false,
-                "fill_shape": true,
-                "show_label": true
+                "fill_shape": true
               },
               "visualization": "circle",
               "pointer": {
@@ -2282,7 +2282,8 @@
               "En": "Stage 2",
               "Fr": "Stage 2",
               "De": "Stage 2",
-              "Es": "Stage 2"
+              "Es": "Stage 2",
+              "show_label": true
             },
             "notes": "Blue Med",
             "geometry": {
@@ -2304,8 +2305,7 @@
               },
               "style_flags": {
                 "show_grid": false,
-                "fill_shape": true,
-                "show_label": true
+                "fill_shape": true
               },
               "visualization": "circle",
               "pointer": {
@@ -2343,7 +2343,8 @@
               "En": "Stage 3",
               "Fr": "Stage 3",
               "De": "Stage 3",
-              "Es": "Stage 3"
+              "Es": "Stage 3",
+              "show_label": true
             },
             "notes": "Blue Dark",
             "geometry": {
@@ -2365,8 +2366,7 @@
               },
               "style_flags": {
                 "show_grid": false,
-                "fill_shape": true,
-                "show_label": true
+                "fill_shape": true
               },
               "visualization": "circle",
               "pointer": {
@@ -2404,7 +2404,8 @@
               "En": "Complete",
               "Fr": "Complete",
               "De": "Complete",
-              "Es": "Complete"
+              "Es": "Complete",
+              "show_label": true
             },
             "notes": "Green Done",
             "geometry": {
@@ -2426,8 +2427,7 @@
               },
               "style_flags": {
                 "show_grid": false,
-                "fill_shape": true,
-                "show_label": true
+                "fill_shape": true
               },
               "visualization": "circle",
               "pointer": {
@@ -2465,7 +2465,8 @@
               "En": "Error",
               "Fr": "Erreur",
               "De": "Fehler",
-              "Es": "Error"
+              "Es": "Error",
+              "show_label": true
             },
             "notes": "Red Error",
             "geometry": {
@@ -2487,8 +2488,7 @@
               },
               "style_flags": {
                 "show_grid": false,
-                "fill_shape": true,
-                "show_label": true
+                "fill_shape": true
               },
               "visualization": "circle",
               "pointer": {
@@ -2526,7 +2526,8 @@
               "En": "Warning",
               "Fr": "Avertissement",
               "De": "Warnung",
-              "Es": "Advertencia"
+              "Es": "Advertencia",
+              "show_label": true
             },
             "notes": "Amber Warn",
             "geometry": {
@@ -2548,8 +2549,7 @@
               },
               "style_flags": {
                 "show_grid": false,
-                "fill_shape": true,
-                "show_label": true
+                "fill_shape": true
               },
               "visualization": "circle",
               "pointer": {
@@ -2587,7 +2587,8 @@
               "En": "Unknown",
               "Fr": "Unknown",
               "De": "Unknown",
-              "Es": "Unknown"
+              "Es": "Unknown",
+              "show_label": true
             },
             "notes": "Grey Unknown",
             "geometry": {
@@ -2609,8 +2610,7 @@
               },
               "style_flags": {
                 "show_grid": false,
-                "fill_shape": false,
-                "show_label": true
+                "fill_shape": false
               },
               "visualization": "circle",
               "pointer": {
@@ -2686,7 +2686,8 @@
               "En": "Infinite",
               "Fr": "Infinite",
               "De": "Infinite",
-              "Es": "Infinite"
+              "Es": "Infinite",
+              "show_label": true
             },
             "notes": "Wraps around 0-100",
             "geometry": {
@@ -2707,8 +2708,7 @@
                 "primary": "#00BCD4"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -2745,7 +2745,8 @@
               "En": "Fine Tune",
               "Fr": "Fine Tune",
               "De": "Fine Tune",
-              "Es": "Fine Tune"
+              "Es": "Fine Tune",
+              "show_label": true
             },
             "notes": "10 turns for full range",
             "geometry": {
@@ -2766,8 +2767,7 @@
                 "primary": "#FFC107"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -2804,7 +2804,8 @@
               "En": "Thick Crust",
               "Fr": "Thick Crust",
               "De": "Thick Crust",
-              "Es": "Thick Crust"
+              "Es": "Thick Crust",
+              "show_label": true
             },
             "notes": "10px Crust",
             "geometry": {
@@ -2825,8 +2826,7 @@
                 "primary": "#E91E63"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -2864,7 +2864,8 @@
               "En": "Thin Crust",
               "Fr": "Thin Crust",
               "De": "Thin Crust",
-              "Es": "Thin Crust"
+              "Es": "Thin Crust",
+              "show_label": true
             },
             "notes": "1px Crust",
             "geometry": {
@@ -2885,8 +2886,7 @@
                 "primary": "#8BC34A"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -2924,7 +2924,8 @@
               "En": "Val Top",
               "Fr": "Val Haut",
               "De": "Val Oben",
-              "Es": "Val Arriba"
+              "Es": "Val Arriba",
+              "show_label": true
             },
             "notes": "Val Top, Text Bot",
             "geometry": {
@@ -2946,8 +2947,7 @@
                 "primary": "#9C27B0"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -2984,7 +2984,8 @@
               "En": "Val Left",
               "Fr": "Val Gauche",
               "De": "Val Links",
-              "Es": "Val Izquierda"
+              "Es": "Val Izquierda",
+              "show_label": true
             },
             "notes": "Value on Left",
             "geometry": {
@@ -3006,8 +3007,7 @@
                 "primary": "#FF5722"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -3044,7 +3044,8 @@
               "En": "Val Right",
               "Fr": "Val Droite",
               "De": "Val Rechts",
-              "Es": "Val Derecha"
+              "Es": "Val Derecha",
+              "show_label": true
             },
             "notes": "Value on Right",
             "geometry": {
@@ -3066,8 +3067,7 @@
                 "primary": "#3F51B5"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -3104,7 +3104,8 @@
               "En": "Full Pie",
               "Fr": "Complet Pie",
               "De": "Vollständig Pie",
-              "Es": "Completo Pie"
+              "Es": "Completo Pie",
+              "show_label": true
             },
             "notes": "Super thick crust",
             "geometry": {
@@ -3126,8 +3127,7 @@
               },
               "style_flags": {
                 "show_grid": false,
-                "fill_shape": true,
-                "show_label": true
+                "fill_shape": true
               },
               "visualization": "circle",
               "pointer": {

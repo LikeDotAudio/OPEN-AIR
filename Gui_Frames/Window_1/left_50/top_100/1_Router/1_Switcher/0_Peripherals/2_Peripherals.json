@@ -17,9 +17,9 @@
           "En": "Card 8 - Peripheral Channel Routing",
           "Fr": "Card 8 - Peripheral Canal Routing",
           "De": "Card 8 - Peripheral Kanal Routing",
-          "Es": "Card 8 - Peripheral Canal Routing"
+          "Es": "Card 8 - Peripheral Canal Routing",
+          "show_label": false
         },
-        "show_label": false,
         "layout": {
           "sticky": ""
         },
@@ -62,16 +62,24 @@
                 "value": "801",
                 "label": {
                   "active": {
-                    "En": "Comp DAC L",
-                    "Fr": "Comp DAC L",
-                    "De": "Comp DAC L",
-                    "Es": "Comp DAC L"
+                    "text": {
+                      "En": "Comp DAC L",
+                      "Fr": "Comp DAC L",
+                      "De": "Comp DAC L",
+                      "Es": "Comp DAC L"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Comp DAC L",
-                    "Fr": "Comp DAC L",
-                    "De": "Comp DAC L",
-                    "Es": "Comp DAC L"
+                    "text": {
+                      "En": "Comp DAC L",
+                      "Fr": "Comp DAC L",
+                      "De": "Comp DAC L",
+                      "Es": "Comp DAC L"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -85,16 +93,24 @@
                 "value": "802",
                 "label": {
                   "active": {
-                    "En": "Sig Gen L",
-                    "Fr": "Géné Sig G",
-                    "De": "Sig-Gen L",
-                    "Es": "Gen Señal Izq"
+                    "text": {
+                      "En": "Sig Gen L",
+                      "Fr": "Géné Sig G",
+                      "De": "Sig-Gen L",
+                      "Es": "Gen Señal Izq"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Sig Gen L",
-                    "Fr": "Géné Sig G",
-                    "De": "Sig-Gen L",
-                    "Es": "Gen Señal Izq"
+                    "text": {
+                      "En": "Sig Gen L",
+                      "Fr": "Géné Sig G",
+                      "De": "Sig-Gen L",
+                      "Es": "Gen Señal Izq"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -108,16 +124,24 @@
                 "value": "803",
                 "label": {
                   "active": {
-                    "En": "Distortion L",
-                    "Fr": "Distortion L",
-                    "De": "Distortion L",
-                    "Es": "Distortion L"
+                    "text": {
+                      "En": "Distortion L",
+                      "Fr": "Distortion L",
+                      "De": "Distortion L",
+                      "Es": "Distortion L"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Distortion L",
-                    "Fr": "Distortion L",
-                    "De": "Distortion L",
-                    "Es": "Distortion L"
+                    "text": {
+                      "En": "Distortion L",
+                      "Fr": "Distortion L",
+                      "De": "Distortion L",
+                      "Es": "Distortion L"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -131,16 +155,24 @@
                 "value": "804",
                 "label": {
                   "active": {
-                    "En": "Aux IN L",
-                    "Fr": "Aux IN L",
-                    "De": "Aux IN L",
-                    "Es": "Aux IN L"
+                    "text": {
+                      "En": "Aux IN L",
+                      "Fr": "Aux IN L",
+                      "De": "Aux IN L",
+                      "Es": "Aux IN L"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Aux IN L",
-                    "Fr": "Aux IN L",
-                    "De": "Aux IN L",
-                    "Es": "Aux IN L"
+                    "text": {
+                      "En": "Aux IN L",
+                      "Fr": "Aux IN L",
+                      "De": "Aux IN L",
+                      "Es": "Aux IN L"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -154,16 +186,24 @@
                 "value": "805",
                 "label": {
                   "active": {
-                    "En": "DUT OUT L",
-                    "Fr": "DUT OUT L",
-                    "De": "DUT OUT L",
-                    "Es": "DUT OUT L"
+                    "text": {
+                      "En": "DUT OUT L",
+                      "Fr": "DUT OUT L",
+                      "De": "DUT OUT L",
+                      "Es": "DUT OUT L"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "DUT OUT L",
-                    "Fr": "DUT OUT L",
-                    "De": "DUT OUT L",
-                    "Es": "DUT OUT L"
+                    "text": {
+                      "En": "DUT OUT L",
+                      "Fr": "DUT OUT L",
+                      "De": "DUT OUT L",
+                      "Es": "DUT OUT L"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -226,16 +266,24 @@
                 "value": "821",
                 "label": {
                   "active": {
-                    "En": "Comp DAC R",
-                    "Fr": "Comp DAC R",
-                    "De": "Comp DAC R",
-                    "Es": "Comp DAC R"
+                    "text": {
+                      "En": "Comp DAC R",
+                      "Fr": "Comp DAC R",
+                      "De": "Comp DAC R",
+                      "Es": "Comp DAC R"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Comp DAC R",
-                    "Fr": "Comp DAC R",
-                    "De": "Comp DAC R",
-                    "Es": "Comp DAC R"
+                    "text": {
+                      "En": "Comp DAC R",
+                      "Fr": "Comp DAC R",
+                      "De": "Comp DAC R",
+                      "Es": "Comp DAC R"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -249,16 +297,24 @@
                 "value": "822",
                 "label": {
                   "active": {
-                    "En": "Sig Gen R",
-                    "Fr": "Sig Gen R",
-                    "De": "Sig Gen R",
-                    "Es": "Sig Gen R"
+                    "text": {
+                      "En": "Sig Gen R",
+                      "Fr": "Sig Gen R",
+                      "De": "Sig Gen R",
+                      "Es": "Sig Gen R"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Sig Gen R",
-                    "Fr": "Sig Gen R",
-                    "De": "Sig Gen R",
-                    "Es": "Sig Gen R"
+                    "text": {
+                      "En": "Sig Gen R",
+                      "Fr": "Sig Gen R",
+                      "De": "Sig Gen R",
+                      "Es": "Sig Gen R"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -272,16 +328,24 @@
                 "value": "823",
                 "label": {
                   "active": {
-                    "En": "Distortion R",
-                    "Fr": "Distortion R",
-                    "De": "Distortion R",
-                    "Es": "Distortion R"
+                    "text": {
+                      "En": "Distortion R",
+                      "Fr": "Distortion R",
+                      "De": "Distortion R",
+                      "Es": "Distortion R"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Distortion R",
-                    "Fr": "Distortion R",
-                    "De": "Distortion R",
-                    "Es": "Distortion R"
+                    "text": {
+                      "En": "Distortion R",
+                      "Fr": "Distortion R",
+                      "De": "Distortion R",
+                      "Es": "Distortion R"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -295,16 +359,24 @@
                 "value": "824",
                 "label": {
                   "active": {
-                    "En": "Aux IN R",
-                    "Fr": "Aux IN R",
-                    "De": "Aux IN R",
-                    "Es": "Aux IN R"
+                    "text": {
+                      "En": "Aux IN R",
+                      "Fr": "Aux IN R",
+                      "De": "Aux IN R",
+                      "Es": "Aux IN R"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Aux IN R",
-                    "Fr": "Aux IN R",
-                    "De": "Aux IN R",
-                    "Es": "Aux IN R"
+                    "text": {
+                      "En": "Aux IN R",
+                      "Fr": "Aux IN R",
+                      "De": "Aux IN R",
+                      "Es": "Aux IN R"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -318,16 +390,24 @@
                 "value": "825",
                 "label": {
                   "active": {
-                    "En": "DUT OUT R",
-                    "Fr": "DUT OUT R",
-                    "De": "DUT OUT R",
-                    "Es": "DUT OUT R"
+                    "text": {
+                      "En": "DUT OUT R",
+                      "Fr": "DUT OUT R",
+                      "De": "DUT OUT R",
+                      "Es": "DUT OUT R"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "DUT OUT R",
-                    "Fr": "DUT OUT R",
-                    "De": "DUT OUT R",
-                    "Es": "DUT OUT R"
+                    "text": {
+                      "En": "DUT OUT R",
+                      "Fr": "DUT OUT R",
+                      "De": "DUT OUT R",
+                      "Es": "DUT OUT R"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -390,16 +470,24 @@
                 "value": "811",
                 "label": {
                   "active": {
-                    "En": "DUT In L",
-                    "Fr": "DUT In L",
-                    "De": "DUT In L",
-                    "Es": "DUT In L"
+                    "text": {
+                      "En": "DUT In L",
+                      "Fr": "DUT In L",
+                      "De": "DUT In L",
+                      "Es": "DUT In L"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "DUT In L",
-                    "Fr": "DUT In L",
-                    "De": "DUT In L",
-                    "Es": "DUT In L"
+                    "text": {
+                      "En": "DUT In L",
+                      "Fr": "DUT In L",
+                      "De": "DUT In L",
+                      "Es": "DUT In L"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -413,16 +501,24 @@
                 "value": "812",
                 "label": {
                   "active": {
-                    "En": "DAC IN L",
-                    "Fr": "DAC IN L",
-                    "De": "DAC IN L",
-                    "Es": "DAC IN L"
+                    "text": {
+                      "En": "DAC IN L",
+                      "Fr": "DAC IN L",
+                      "De": "DAC IN L",
+                      "Es": "DAC IN L"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "DAC IN L",
-                    "Fr": "DAC IN L",
-                    "De": "DAC IN L",
-                    "Es": "DAC IN L"
+                    "text": {
+                      "En": "DAC IN L",
+                      "Fr": "DAC IN L",
+                      "De": "DAC IN L",
+                      "Es": "DAC IN L"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -436,16 +532,24 @@
                 "value": "813",
                 "label": {
                   "active": {
-                    "En": "Monitor 1 L",
-                    "Fr": "Monitor 1 L",
-                    "De": "Monitor 1 L",
-                    "Es": "Monitor 1 L"
+                    "text": {
+                      "En": "Monitor 1 L",
+                      "Fr": "Monitor 1 L",
+                      "De": "Monitor 1 L",
+                      "Es": "Monitor 1 L"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Monitor 1 L",
-                    "Fr": "Monitor 1 L",
-                    "De": "Monitor 1 L",
-                    "Es": "Monitor 1 L"
+                    "text": {
+                      "En": "Monitor 1 L",
+                      "Fr": "Monitor 1 L",
+                      "De": "Monitor 1 L",
+                      "Es": "Monitor 1 L"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -459,16 +563,24 @@
                 "value": "814",
                 "label": {
                   "active": {
-                    "En": "Monitor 2 L",
-                    "Fr": "Monitor 2 L",
-                    "De": "Monitor 2 L",
-                    "Es": "Monitor 2 L"
+                    "text": {
+                      "En": "Monitor 2 L",
+                      "Fr": "Monitor 2 L",
+                      "De": "Monitor 2 L",
+                      "Es": "Monitor 2 L"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Monitor 2 L",
-                    "Fr": "Monitor 2 L",
-                    "De": "Monitor 2 L",
-                    "Es": "Monitor 2 L"
+                    "text": {
+                      "En": "Monitor 2 L",
+                      "Fr": "Monitor 2 L",
+                      "De": "Monitor 2 L",
+                      "Es": "Monitor 2 L"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -482,16 +594,24 @@
                 "value": "815",
                 "label": {
                   "active": {
-                    "En": "Monitor 3 L",
-                    "Fr": "Monitor 3 L",
-                    "De": "Monitor 3 L",
-                    "Es": "Monitor 3 L"
+                    "text": {
+                      "En": "Monitor 3 L",
+                      "Fr": "Monitor 3 L",
+                      "De": "Monitor 3 L",
+                      "Es": "Monitor 3 L"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Monitor 3 L",
-                    "Fr": "Monitor 3 L",
-                    "De": "Monitor 3 L",
-                    "Es": "Monitor 3 L"
+                    "text": {
+                      "En": "Monitor 3 L",
+                      "Fr": "Monitor 3 L",
+                      "De": "Monitor 3 L",
+                      "Es": "Monitor 3 L"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -554,16 +674,24 @@
                 "value": "831",
                 "label": {
                   "active": {
-                    "En": "DUT In R",
-                    "Fr": "DUT In R",
-                    "De": "DUT In R",
-                    "Es": "DUT In R"
+                    "text": {
+                      "En": "DUT In R",
+                      "Fr": "DUT In R",
+                      "De": "DUT In R",
+                      "Es": "DUT In R"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "DUT In R",
-                    "Fr": "DUT In R",
-                    "De": "DUT In R",
-                    "Es": "DUT In R"
+                    "text": {
+                      "En": "DUT In R",
+                      "Fr": "DUT In R",
+                      "De": "DUT In R",
+                      "Es": "DUT In R"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -577,16 +705,24 @@
                 "value": "832",
                 "label": {
                   "active": {
-                    "En": "DAC IN R",
-                    "Fr": "ENT DAC D",
-                    "De": "DAC EIN R",
-                    "Es": "ENT DAC Der"
+                    "text": {
+                      "En": "DAC IN R",
+                      "Fr": "ENT DAC D",
+                      "De": "DAC EIN R",
+                      "Es": "ENT DAC Der"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "DAC IN R",
-                    "Fr": "ENT DAC D",
-                    "De": "DAC EIN R",
-                    "Es": "ENT DAC Der"
+                    "text": {
+                      "En": "DAC IN R",
+                      "Fr": "ENT DAC D",
+                      "De": "DAC EIN R",
+                      "Es": "ENT DAC Der"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -600,16 +736,24 @@
                 "value": "833",
                 "label": {
                   "active": {
-                    "En": "Monitor 1 R",
-                    "Fr": "Monitor 1 R",
-                    "De": "Monitor 1 R",
-                    "Es": "Monitor 1 R"
+                    "text": {
+                      "En": "Monitor 1 R",
+                      "Fr": "Monitor 1 R",
+                      "De": "Monitor 1 R",
+                      "Es": "Monitor 1 R"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Monitor 1 R",
-                    "Fr": "Monitor 1 R",
-                    "De": "Monitor 1 R",
-                    "Es": "Monitor 1 R"
+                    "text": {
+                      "En": "Monitor 1 R",
+                      "Fr": "Monitor 1 R",
+                      "De": "Monitor 1 R",
+                      "Es": "Monitor 1 R"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -623,16 +767,24 @@
                 "value": "834",
                 "label": {
                   "active": {
-                    "En": "Monitor 2 R",
-                    "Fr": "Monitor 2 R",
-                    "De": "Monitor 2 R",
-                    "Es": "Monitor 2 R"
+                    "text": {
+                      "En": "Monitor 2 R",
+                      "Fr": "Monitor 2 R",
+                      "De": "Monitor 2 R",
+                      "Es": "Monitor 2 R"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Monitor 2 R",
-                    "Fr": "Monitor 2 R",
-                    "De": "Monitor 2 R",
-                    "Es": "Monitor 2 R"
+                    "text": {
+                      "En": "Monitor 2 R",
+                      "Fr": "Monitor 2 R",
+                      "De": "Monitor 2 R",
+                      "Es": "Monitor 2 R"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -646,16 +798,24 @@
                 "value": "835",
                 "label": {
                   "active": {
-                    "En": "Monitor 3 R",
-                    "Fr": "Monitor 3 R",
-                    "De": "Monitor 3 R",
-                    "Es": "Monitor 3 R"
+                    "text": {
+                      "En": "Monitor 3 R",
+                      "Fr": "Monitor 3 R",
+                      "De": "Monitor 3 R",
+                      "Es": "Monitor 3 R"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Monitor 3 R",
-                    "Fr": "Monitor 3 R",
-                    "De": "Monitor 3 R",
-                    "Es": "Monitor 3 R"
+                    "text": {
+                      "En": "Monitor 3 R",
+                      "Fr": "Monitor 3 R",
+                      "De": "Monitor 3 R",
+                      "Es": "Monitor 3 R"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {

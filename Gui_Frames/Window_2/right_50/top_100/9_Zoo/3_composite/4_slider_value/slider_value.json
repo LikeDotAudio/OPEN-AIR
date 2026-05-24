@@ -15,10 +15,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Volume",
-            "Fr": "Volume",
-            "De": "Lautstärke",
-            "Es": "Volumen"
+            "text": {
+              "En": "Volume",
+              "Fr": "Volume",
+              "De": "Lautstärke",
+              "Es": "Volumen"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -36,14 +40,18 @@
             },
             "label": {
               "active": {
-                "En": "Volume",
-                "Fr": "Volume",
-                "De": "Lautstärke",
-                "Es": "Volumen"
-              }
+                "text": {
+                  "En": "Volume",
+                  "Fr": "Volume",
+                  "De": "Lautstärke",
+                  "Es": "Volumen"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
             },
-            "notes": "A standard horizontal slider with numerical input for volume control.",
-            "show_label": true
+            "notes": "A standard horizontal slider with numerical input for volume control."
           }
         }
       },
@@ -51,10 +59,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Gain",
-            "Fr": "Gain",
-            "De": "Verstärkung",
-            "Es": "Ganancia"
+            "text": {
+              "En": "Gain",
+              "Fr": "Gain",
+              "De": "Verstärkung",
+              "Es": "Ganancia"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -73,14 +85,18 @@
             },
             "label": {
               "active": {
-                "En": "Gain",
-                "Fr": "Gain",
-                "De": "Verstärkung",
-                "Es": "Ganancia"
-              }
+                "text": {
+                  "En": "Gain",
+                  "Fr": "Gain",
+                  "De": "Verstärkung",
+                  "Es": "Ganancia"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
             },
-            "notes": "Slider for fine-tuning gain, bipolar range with dB units.",
-            "show_label": true
+            "notes": "Slider for fine-tuning gain, bipolar range with dB units."
           }
         }
       },
@@ -88,10 +104,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Frequency",
-            "Fr": "Fréquence",
-            "De": "Frequenz",
-            "Es": "Frecuencia"
+            "text": {
+              "En": "Frequency",
+              "Fr": "Fréquence",
+              "De": "Frequenz",
+              "Es": "Frecuencia"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -110,14 +130,18 @@
             },
             "label": {
               "active": {
-                "En": "Frequency",
-                "Fr": "Fréquence",
-                "De": "Frequenz",
-                "Es": "Frecuencia"
-              }
+                "text": {
+                  "En": "Frequency",
+                  "Fr": "Fréquence",
+                  "De": "Frequenz",
+                  "Es": "Frecuencia"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
             },
-            "notes": "Slider for selecting frequency, wide range.",
-            "show_label": true
+            "notes": "Slider for selecting frequency, wide range."
           }
         }
       },
@@ -125,10 +149,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Delay Time",
-            "Fr": "Temps de Delay",
-            "De": "Delay-Zeit",
-            "Es": "Tiempo de Delay"
+            "text": {
+              "En": "Delay Time",
+              "Fr": "Temps de Delay",
+              "De": "Delay-Zeit",
+              "Es": "Tiempo de Delay"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -148,14 +176,18 @@
             },
             "label": {
               "active": {
-                "En": "Delay Time",
-                "Fr": "Temps de Delay",
-                "De": "Delay-Zeit",
-                "Es": "Tiempo de Delay"
-              }
+                "text": {
+                  "En": "Delay Time",
+                  "Fr": "Temps de Delay",
+                  "De": "Delay-Zeit",
+                  "Es": "Tiempo de Delay"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
             },
-            "notes": "Slider for adjusting delay time in seconds.",
-            "show_label": true
+            "notes": "Slider for adjusting delay time in seconds."
           }
         }
       },
@@ -163,10 +195,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Q-Factor",
-            "Fr": "Facteur Q",
-            "De": "Q-Faktor",
-            "Es": "Factor Q"
+            "text": {
+              "En": "Q-Factor",
+              "Fr": "Facteur Q",
+              "De": "Q-Faktor",
+              "Es": "Factor Q"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -185,14 +221,18 @@
             },
             "label": {
               "active": {
-                "En": "Q-Factor",
-                "Fr": "Facteur Q",
-                "De": "Q-Faktor",
-                "Es": "Factor Q"
-              }
+                "text": {
+                  "En": "Q-Factor",
+                  "Fr": "Facteur Q",
+                  "De": "Q-Faktor",
+                  "Es": "Factor Q"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
             },
-            "notes": "Slider for adjusting Q-factor, dimensionless.",
-            "show_label": true
+            "notes": "Slider for adjusting Q-factor, dimensionless."
           }
         }
       }

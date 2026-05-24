@@ -16,6 +16,10 @@ window.WidgetFactory = ({ nodeName, node, path_prefix = '', jsonPath }) => {
   const COMPONENT_REGISTRY = {
     'OcaBin': window.OcaBin,
     'OcaBlock': window.OcaBlock,
+    'OcaArray': window.OcaArray,
+    // Collapsible block renders as a normal block for now (content shows; the
+    // expand/collapse affordance is not yet implemented).
+    'OcaCollapsibleBlock': window.OcaBlock,
     'OcaNotebook': window.TabLayout,
     'OcaSplit': window.SplitLayout,
     'OcaTable': window.OcaTable,
@@ -61,7 +65,9 @@ window.WidgetFactory = ({ nodeName, node, path_prefix = '', jsonPath }) => {
         node.type.toLowerCase().includes('label') ||
         node.type.toLowerCase().includes('graph') ||
         node.type.toLowerCase().includes('plot') ||
-        node.type.toLowerCase().includes('link')
+        node.type.toLowerCase().includes('link') ||
+        node.type.toLowerCase().includes('panel') ||
+        node.type.toLowerCase().includes('screw')
     )) {
         return (
             <div style={gridStyles} className={`widget-wrapper ${node.type}`} data-oca-path={jsonPath}>
@@ -83,7 +89,7 @@ window.WidgetFactory = ({ nodeName, node, path_prefix = '', jsonPath }) => {
 
   // 4. Render the registered component
   let wrapperStyle = FILL_CONTAINERS.includes(node.type)
-    ? { ...gridStyles, height: '100%', minHeight: 0, display: 'flex', flexDirection: 'column' }
+    ? { ...gridStyles, height: '100%', width: '100%', minHeight: 0, display: 'flex', flexDirection: 'column' }
     : gridStyles;
 
   // Explicit width/height (percent string or px number), e.g. set by the WYSIWYG

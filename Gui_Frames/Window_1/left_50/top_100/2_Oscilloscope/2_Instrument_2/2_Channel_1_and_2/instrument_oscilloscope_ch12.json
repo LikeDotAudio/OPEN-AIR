@@ -36,10 +36,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "Device Name",
-                    "Fr": "Device Nom",
-                    "De": "Device Name",
-                    "Es": "Device Nombre"
+                    "text": {
+                      "En": "Device Name",
+                      "Fr": "Device Nom",
+                      "De": "Device Name",
+                      "Es": "Device Nombre"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -74,10 +78,14 @@
                 "type": "_GuiGraph",
                 "label": {
                   "active": {
-                    "En": "Dual Waveform Visualization",
-                    "Fr": "Dual Waveform Visualization",
-                    "De": "Dual Waveform Visualization",
-                    "Es": "Dual Waveform Visualization"
+                    "text": {
+                      "En": "Dual Waveform Visualization",
+                      "Fr": "Dual Waveform Visualization",
+                      "De": "Dual Waveform Visualization",
+                      "Es": "Dual Waveform Visualization"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -140,16 +148,24 @@
                 "type": "_GuiButtonToggle",
                 "label": {
                   "active": {
-                    "En": "CH1 ON",
-                    "Fr": "CH1 ACTIVÉ",
-                    "De": "CH1 AN",
-                    "Es": "CH1 ACTIVADO"
+                    "text": {
+                      "En": "CH1 ON",
+                      "Fr": "CH1 ACTIVÉ",
+                      "De": "CH1 AN",
+                      "Es": "CH1 ACTIVADO"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "CH1 OFF",
-                    "Fr": "CH 1",
-                    "De": "CH 1",
-                    "Es": "CH 1"
+                    "text": {
+                      "En": "CH1 OFF",
+                      "Fr": "CH 1",
+                      "De": "CH 1",
+                      "Es": "CH 1"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "style": {
@@ -213,10 +229,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "Ch1 Scale",
-                    "Fr": "Ch 1",
-                    "De": "Ch 1",
-                    "Es": "Ch 1"
+                    "text": {
+                      "En": "Ch1 Scale",
+                      "Fr": "Ch 1",
+                      "De": "Ch 1",
+                      "Es": "Ch 1"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -257,10 +277,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "Ch1 Offset",
-                    "Fr": "Ch 1",
-                    "De": "Ch 1",
-                    "Es": "Ch 1"
+                    "text": {
+                      "En": "Ch1 Offset",
+                      "Fr": "Ch 1",
+                      "De": "Ch 1",
+                      "Es": "Ch 1"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -295,10 +319,14 @@
                 "type": "_GuiDropDownOption",
                 "label": {
                   "active": {
-                    "En": "Ch1 Coupling",
-                    "Fr": "Ch 1",
-                    "De": "Ch 1",
-                    "Es": "Ch 1"
+                    "text": {
+                      "En": "Ch1 Coupling",
+                      "Fr": "Ch 1",
+                      "De": "Ch 1",
+                      "Es": "Ch 1"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "options": [
@@ -351,16 +379,24 @@
                 "type": "_GuiButtonToggle",
                 "label": {
                   "active": {
-                    "En": "CH2 ON",
-                    "Fr": "CH 2",
-                    "De": "CH 2",
-                    "Es": "CH 2"
+                    "text": {
+                      "En": "CH2 ON",
+                      "Fr": "CH 2",
+                      "De": "CH 2",
+                      "Es": "CH 2"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "CH2 OFF",
-                    "Fr": "CH 2",
-                    "De": "CH 2",
-                    "Es": "CH 2"
+                    "text": {
+                      "En": "CH2 OFF",
+                      "Fr": "CH 2",
+                      "De": "CH 2",
+                      "Es": "CH 2"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "style": {
@@ -424,10 +460,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "Ch2 Scale",
-                    "Fr": "Ch 2",
-                    "De": "Ch 2",
-                    "Es": "Ch 2"
+                    "text": {
+                      "En": "Ch2 Scale",
+                      "Fr": "Ch 2",
+                      "De": "Ch 2",
+                      "Es": "Ch 2"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -468,10 +508,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "Ch2 Offset",
-                    "Fr": "Ch 2",
-                    "De": "Ch 2",
-                    "Es": "Ch 2"
+                    "text": {
+                      "En": "Ch2 Offset",
+                      "Fr": "Ch 2",
+                      "De": "Ch 2",
+                      "Es": "Ch 2"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -506,10 +550,14 @@
                 "type": "_GuiDropDownOption",
                 "label": {
                   "active": {
-                    "En": "Ch2 Coupling",
-                    "Fr": "Couplage Ch2",
-                    "De": "Ch2 Kopplung",
-                    "Es": "Acoplamiento Ch2"
+                    "text": {
+                      "En": "Ch2 Coupling",
+                      "Fr": "Couplage Ch2",
+                      "De": "Ch2 Kopplung",
+                      "Es": "Acoplamiento Ch2"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "options": [
@@ -570,10 +618,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "Time / Div",
-                    "Fr": "Temps / Div",
-                    "De": "Zeit / Div",
-                    "Es": "Tiempo / Div"
+                    "text": {
+                      "En": "Time / Div",
+                      "Fr": "Temps / Div",
+                      "De": "Zeit / Div",
+                      "Es": "Tiempo / Div"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -614,10 +666,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "Delay",
-                    "Fr": "Delay",
-                    "De": "Delay",
-                    "Es": "Delay"
+                    "text": {
+                      "En": "Delay",
+                      "Fr": "Delay",
+                      "De": "Delay",
+                      "Es": "Delay"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -663,10 +719,14 @@
                 "type": "_GuiDropDownOption",
                 "label": {
                   "active": {
-                    "En": "Source",
-                    "Fr": "Source",
-                    "De": "Quelle",
-                    "Es": "Fuente"
+                    "text": {
+                      "En": "Source",
+                      "Fr": "Source",
+                      "De": "Quelle",
+                      "Es": "Fuente"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "options": [
@@ -714,10 +774,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "Trig Level",
-                    "Fr": "Trig Niveau",
-                    "De": "Trig Pegel",
-                    "Es": "Trig Nivel"
+                    "text": {
+                      "En": "Trig Level",
+                      "Fr": "Trig Niveau",
+                      "De": "Trig Pegel",
+                      "Es": "Trig Nivel"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -752,16 +816,24 @@
                 "type": "_GuiButtonToggle",
                 "label": {
                   "active": {
-                    "En": "RISING",
-                    "Fr": "CROISSANT",
-                    "De": "STEIGEND",
-                    "Es": "ASCENDENTE"
+                    "text": {
+                      "En": "RISING",
+                      "Fr": "CROISSANT",
+                      "De": "STEIGEND",
+                      "Es": "ASCENDENTE"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "FALLING",
-                    "Fr": "FALLING",
-                    "De": "FALLING",
-                    "Es": "FALLING"
+                    "text": {
+                      "En": "FALLING",
+                      "Fr": "FALLING",
+                      "De": "FALLING",
+                      "Es": "FALLING"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "style": {
@@ -817,10 +889,14 @@
                 "type": "_TrapezoidButton",
                 "label": {
                   "active": {
-                    "En": "FORCE",
-                    "Fr": "FORCE",
-                    "De": "KRAFT",
-                    "Es": "FUERZA"
+                    "text": {
+                      "En": "FORCE",
+                      "Fr": "FORCE",
+                      "De": "KRAFT",
+                      "Es": "FUERZA"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -866,16 +942,24 @@
                 "type": "_GuiButtonToggle",
                 "label": {
                   "active": {
-                    "En": "RUNNING 🟢",
-                    "Fr": "RUNNING 🟢",
-                    "De": "RUNNING 🟢",
-                    "Es": "RUNNING 🟢"
+                    "text": {
+                      "En": "RUNNING 🟢",
+                      "Fr": "RUNNING 🟢",
+                      "De": "RUNNING 🟢",
+                      "Es": "RUNNING 🟢"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "STOPPED 🔴",
-                    "Fr": "ARRÊTÉ 🔴",
-                    "De": "GESTOPPT 🔴",
-                    "Es": "DETENIDO 🔴"
+                    "text": {
+                      "En": "STOPPED 🔴",
+                      "Fr": "ARRÊTÉ 🔴",
+                      "De": "GESTOPPT 🔴",
+                      "Es": "DETENIDO 🔴"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "style": {
@@ -931,10 +1015,14 @@
                 "type": "_GuiButton",
                 "label": {
                   "active": {
-                    "En": "SINGLE SEQ",
-                    "Fr": "SINGLE SEQ",
-                    "De": "SINGLE SEQ",
-                    "Es": "SINGLE SEQ"
+                    "text": {
+                      "En": "SINGLE SEQ",
+                      "Fr": "SINGLE SEQ",
+                      "De": "SINGLE SEQ",
+                      "Es": "SINGLE SEQ"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -983,10 +1071,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "CH1 Vpp",
-                    "Fr": "CH 1",
-                    "De": "CH 1",
-                    "Es": "CH 1"
+                    "text": {
+                      "En": "CH1 Vpp",
+                      "Fr": "CH 1",
+                      "De": "CH 1",
+                      "Es": "CH 1"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -1024,10 +1116,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "CH1 Freq",
-                    "Fr": "Fréq CH1",
-                    "De": "CH1 Freq",
-                    "Es": "Frec CH1"
+                    "text": {
+                      "En": "CH1 Freq",
+                      "Fr": "Fréq CH1",
+                      "De": "CH1 Freq",
+                      "Es": "Frec CH1"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -1076,10 +1172,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "CH2 Vpp",
-                    "Fr": "CH 2",
-                    "De": "CH 2",
-                    "Es": "CH 2"
+                    "text": {
+                      "En": "CH2 Vpp",
+                      "Fr": "CH 2",
+                      "De": "CH 2",
+                      "Es": "CH 2"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -1117,10 +1217,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "CH2 Freq",
-                    "Fr": "CH 2",
-                    "De": "CH 2",
-                    "Es": "CH 2"
+                    "text": {
+                      "En": "CH2 Freq",
+                      "Fr": "CH 2",
+                      "De": "CH 2",
+                      "Es": "CH 2"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {

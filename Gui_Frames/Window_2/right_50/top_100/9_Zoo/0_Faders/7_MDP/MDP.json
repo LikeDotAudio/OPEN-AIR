@@ -24,10 +24,14 @@
             "type": "_MDP",
             "label": {
               "active": {
-                "En": "MDP 1",
-                "Fr": "MDP 1",
-                "De": "MDP 1",
-                "Es": "MDP 1"
+                "text": {
+                  "En": "MDP 1",
+                  "Fr": "MDP 1",
+                  "De": "MDP 1",
+                  "Es": "MDP 1"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "path": "audio/mdp/1",
@@ -94,10 +98,14 @@
             "ltp": {
               "label": {
                 "active": {
-                  "En": "Level",
-                  "Fr": "Level",
-                  "De": "Level",
-                  "Es": "Level"
+                  "text": {
+                    "En": "Level",
+                    "Fr": "Level",
+                    "De": "Level",
+                    "Es": "Level"
+                  },
+                  "text_size": 12,
+                  "text_color": "#cccccc"
                 }
               },
               "value": {

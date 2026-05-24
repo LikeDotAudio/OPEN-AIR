@@ -17,7 +17,7 @@ const StatusLight = ({ value, config }) => {
         alignItems: 'center',
         gap: '10px',
         padding: '5px 10px',
-        backgroundColor: '#1a1a1a',
+        backgroundColor: (window.OaTransparency ? window.OaTransparency.bg(config, '#1a1a1a') : '#1a1a1a'),
         borderRadius: '20px',
         border: '1px solid #333',
         width: 'fit-content'

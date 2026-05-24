@@ -15,10 +15,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Classic Toggles",
-            "Fr": "Classique Toggles",
-            "De": "Klassisch Toggles",
-            "Es": "Clásico Toggles"
+            "text": {
+              "En": "Classic Toggles",
+              "Fr": "Classique Toggles",
+              "De": "Klassisch Toggles",
+              "Es": "Clásico Toggles"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -40,10 +44,14 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "MUTED",
-                      "Fr": "MUTED",
-                      "De": "MUTED",
-                      "Es": "MUTED"
+                      "text": {
+                        "En": "MUTED",
+                        "Fr": "MUTED",
+                        "De": "MUTED",
+                        "Es": "MUTED"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -51,10 +59,14 @@
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "UNMUTED",
-                      "Fr": "UNMUTED",
-                      "De": "UNMUTED",
-                      "Es": "UNMUTED"
+                      "text": {
+                        "En": "UNMUTED",
+                        "Fr": "UNMUTED",
+                        "De": "UNMUTED",
+                        "Es": "UNMUTED"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -92,20 +104,28 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "ARMING...",
-                      "Fr": "ARMING...",
-                      "De": "ARMING...",
-                      "Es": "ARMING..."
+                      "text": {
+                        "En": "ARMING...",
+                        "Fr": "ARMING...",
+                        "De": "ARMING...",
+                        "Es": "ARMING..."
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "DISARMED",
-                      "Fr": "DISARMED",
-                      "De": "DISARMED",
-                      "Es": "DISARMED"
+                      "text": {
+                        "En": "DISARMED",
+                        "Fr": "DISARMED",
+                        "De": "DISARMED",
+                        "Es": "DISARMED"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -119,10 +139,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "20 Industrial Variants",
-            "Fr": "20 Industriel Variants",
-            "De": "20 Industriell Variants",
-            "Es": "20 Industrial Variants"
+            "text": {
+              "En": "20 Industrial Variants",
+              "Fr": "20 Industriel Variants",
+              "De": "20 Industriell Variants",
+              "Es": "20 Industrial Variants"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -148,10 +172,14 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "PUSH",
-                      "Fr": "PUSH",
-                      "De": "PUSH",
-                      "Es": "PUSH"
+                      "text": {
+                        "En": "PUSH",
+                        "Fr": "PUSH",
+                        "De": "PUSH",
+                        "Es": "PUSH"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -159,10 +187,14 @@
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "PUSH",
-                      "Fr": "PUSH",
-                      "De": "PUSH",
-                      "Es": "PUSH"
+                      "text": {
+                        "En": "PUSH",
+                        "Fr": "PUSH",
+                        "De": "PUSH",
+                        "Es": "PUSH"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -192,10 +224,14 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "PUSH",
-                      "Fr": "PUSH",
-                      "De": "PUSH",
-                      "Es": "PUSH"
+                      "text": {
+                        "En": "PUSH",
+                        "Fr": "PUSH",
+                        "De": "PUSH",
+                        "Es": "PUSH"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -203,10 +239,14 @@
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "PUSH",
-                      "Fr": "PUSH",
-                      "De": "PUSH",
-                      "Es": "PUSH"
+                      "text": {
+                        "En": "PUSH",
+                        "Fr": "PUSH",
+                        "De": "PUSH",
+                        "Es": "PUSH"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -236,10 +276,14 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "PUSH",
-                      "Fr": "PUSH",
-                      "De": "PUSH",
-                      "Es": "PUSH"
+                      "text": {
+                        "En": "PUSH",
+                        "Fr": "PUSH",
+                        "De": "PUSH",
+                        "Es": "PUSH"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -247,10 +291,14 @@
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "PUSH",
-                      "Fr": "PUSH",
-                      "De": "PUSH",
-                      "Es": "PUSH"
+                      "text": {
+                        "En": "PUSH",
+                        "Fr": "PUSH",
+                        "De": "PUSH",
+                        "Es": "PUSH"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -280,10 +328,14 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "PUSH",
-                      "Fr": "PUSH",
-                      "De": "PUSH",
-                      "Es": "PUSH"
+                      "text": {
+                        "En": "PUSH",
+                        "Fr": "PUSH",
+                        "De": "PUSH",
+                        "Es": "PUSH"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -291,10 +343,14 @@
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "PUSH",
-                      "Fr": "PUSH",
-                      "De": "PUSH",
-                      "Es": "PUSH"
+                      "text": {
+                        "En": "PUSH",
+                        "Fr": "PUSH",
+                        "De": "PUSH",
+                        "Es": "PUSH"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -324,10 +380,14 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "PUSH",
-                      "Fr": "PUSH",
-                      "De": "PUSH",
-                      "Es": "PUSH"
+                      "text": {
+                        "En": "PUSH",
+                        "Fr": "PUSH",
+                        "De": "PUSH",
+                        "Es": "PUSH"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -335,10 +395,14 @@
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "PUSH",
-                      "Fr": "PUSH",
-                      "De": "PUSH",
-                      "Es": "PUSH"
+                      "text": {
+                        "En": "PUSH",
+                        "Fr": "PUSH",
+                        "De": "PUSH",
+                        "Es": "PUSH"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -368,10 +432,14 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "PUSH",
-                      "Fr": "PUSH",
-                      "De": "PUSH",
-                      "Es": "PUSH"
+                      "text": {
+                        "En": "PUSH",
+                        "Fr": "PUSH",
+                        "De": "PUSH",
+                        "Es": "PUSH"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -379,10 +447,14 @@
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "PUSH",
-                      "Fr": "PUSH",
-                      "De": "PUSH",
-                      "Es": "PUSH"
+                      "text": {
+                        "En": "PUSH",
+                        "Fr": "PUSH",
+                        "De": "PUSH",
+                        "Es": "PUSH"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -412,10 +484,14 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "PUSH",
-                      "Fr": "PUSH",
-                      "De": "PUSH",
-                      "Es": "PUSH"
+                      "text": {
+                        "En": "PUSH",
+                        "Fr": "PUSH",
+                        "De": "PUSH",
+                        "Es": "PUSH"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -423,10 +499,14 @@
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "PUSH",
-                      "Fr": "PUSH",
-                      "De": "PUSH",
-                      "Es": "PUSH"
+                      "text": {
+                        "En": "PUSH",
+                        "Fr": "PUSH",
+                        "De": "PUSH",
+                        "Es": "PUSH"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -456,10 +536,14 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "PUSH",
-                      "Fr": "PUSH",
-                      "De": "PUSH",
-                      "Es": "PUSH"
+                      "text": {
+                        "En": "PUSH",
+                        "Fr": "PUSH",
+                        "De": "PUSH",
+                        "Es": "PUSH"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -467,10 +551,14 @@
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "PUSH",
-                      "Fr": "PUSH",
-                      "De": "PUSH",
-                      "Es": "PUSH"
+                      "text": {
+                        "En": "PUSH",
+                        "Fr": "PUSH",
+                        "De": "PUSH",
+                        "Es": "PUSH"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -500,10 +588,14 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "PUSH",
-                      "Fr": "PUSH",
-                      "De": "PUSH",
-                      "Es": "PUSH"
+                      "text": {
+                        "En": "PUSH",
+                        "Fr": "PUSH",
+                        "De": "PUSH",
+                        "Es": "PUSH"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -511,10 +603,14 @@
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "PUSH",
-                      "Fr": "PUSH",
-                      "De": "PUSH",
-                      "Es": "PUSH"
+                      "text": {
+                        "En": "PUSH",
+                        "Fr": "PUSH",
+                        "De": "PUSH",
+                        "Es": "PUSH"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -544,10 +640,14 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "PUSH",
-                      "Fr": "PUSH",
-                      "De": "PUSH",
-                      "Es": "PUSH"
+                      "text": {
+                        "En": "PUSH",
+                        "Fr": "PUSH",
+                        "De": "PUSH",
+                        "Es": "PUSH"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -555,10 +655,14 @@
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "PUSH",
-                      "Fr": "PUSH",
-                      "De": "PUSH",
-                      "Es": "PUSH"
+                      "text": {
+                        "En": "PUSH",
+                        "Fr": "PUSH",
+                        "De": "PUSH",
+                        "Es": "PUSH"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -588,10 +692,14 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "PUSH",
-                      "Fr": "PUSH",
-                      "De": "PUSH",
-                      "Es": "PUSH"
+                      "text": {
+                        "En": "PUSH",
+                        "Fr": "PUSH",
+                        "De": "PUSH",
+                        "Es": "PUSH"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -599,10 +707,14 @@
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "PUSH",
-                      "Fr": "PUSH",
-                      "De": "PUSH",
-                      "Es": "PUSH"
+                      "text": {
+                        "En": "PUSH",
+                        "Fr": "PUSH",
+                        "De": "PUSH",
+                        "Es": "PUSH"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -632,10 +744,14 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "PUSH",
-                      "Fr": "PUSH",
-                      "De": "PUSH",
-                      "Es": "PUSH"
+                      "text": {
+                        "En": "PUSH",
+                        "Fr": "PUSH",
+                        "De": "PUSH",
+                        "Es": "PUSH"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -643,10 +759,14 @@
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "PUSH",
-                      "Fr": "PUSH",
-                      "De": "PUSH",
-                      "Es": "PUSH"
+                      "text": {
+                        "En": "PUSH",
+                        "Fr": "PUSH",
+                        "De": "PUSH",
+                        "Es": "PUSH"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -676,10 +796,14 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "PUSH",
-                      "Fr": "PUSH",
-                      "De": "PUSH",
-                      "Es": "PUSH"
+                      "text": {
+                        "En": "PUSH",
+                        "Fr": "PUSH",
+                        "De": "PUSH",
+                        "Es": "PUSH"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -687,10 +811,14 @@
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "PUSH",
-                      "Fr": "PUSH",
-                      "De": "PUSH",
-                      "Es": "PUSH"
+                      "text": {
+                        "En": "PUSH",
+                        "Fr": "PUSH",
+                        "De": "PUSH",
+                        "Es": "PUSH"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -720,10 +848,14 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "PUSH",
-                      "Fr": "PUSH",
-                      "De": "PUSH",
-                      "Es": "PUSH"
+                      "text": {
+                        "En": "PUSH",
+                        "Fr": "PUSH",
+                        "De": "PUSH",
+                        "Es": "PUSH"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -731,10 +863,14 @@
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "PUSH",
-                      "Fr": "PUSH",
-                      "De": "PUSH",
-                      "Es": "PUSH"
+                      "text": {
+                        "En": "PUSH",
+                        "Fr": "PUSH",
+                        "De": "PUSH",
+                        "Es": "PUSH"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -764,10 +900,14 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "PUSH",
-                      "Fr": "PUSH",
-                      "De": "PUSH",
-                      "Es": "PUSH"
+                      "text": {
+                        "En": "PUSH",
+                        "Fr": "PUSH",
+                        "De": "PUSH",
+                        "Es": "PUSH"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -775,10 +915,14 @@
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "PUSH",
-                      "Fr": "PUSH",
-                      "De": "PUSH",
-                      "Es": "PUSH"
+                      "text": {
+                        "En": "PUSH",
+                        "Fr": "PUSH",
+                        "De": "PUSH",
+                        "Es": "PUSH"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -808,10 +952,14 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "PUSH",
-                      "Fr": "PUSH",
-                      "De": "PUSH",
-                      "Es": "PUSH"
+                      "text": {
+                        "En": "PUSH",
+                        "Fr": "PUSH",
+                        "De": "PUSH",
+                        "Es": "PUSH"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -819,10 +967,14 @@
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "PUSH",
-                      "Fr": "PUSH",
-                      "De": "PUSH",
-                      "Es": "PUSH"
+                      "text": {
+                        "En": "PUSH",
+                        "Fr": "PUSH",
+                        "De": "PUSH",
+                        "Es": "PUSH"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -852,10 +1004,14 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "PUSH",
-                      "Fr": "PUSH",
-                      "De": "PUSH",
-                      "Es": "PUSH"
+                      "text": {
+                        "En": "PUSH",
+                        "Fr": "PUSH",
+                        "De": "PUSH",
+                        "Es": "PUSH"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -863,10 +1019,14 @@
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "PUSH",
-                      "Fr": "PUSH",
-                      "De": "PUSH",
-                      "Es": "PUSH"
+                      "text": {
+                        "En": "PUSH",
+                        "Fr": "PUSH",
+                        "De": "PUSH",
+                        "Es": "PUSH"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -896,10 +1056,14 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "PUSH",
-                      "Fr": "PUSH",
-                      "De": "PUSH",
-                      "Es": "PUSH"
+                      "text": {
+                        "En": "PUSH",
+                        "Fr": "PUSH",
+                        "De": "PUSH",
+                        "Es": "PUSH"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -907,10 +1071,14 @@
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "PUSH",
-                      "Fr": "PUSH",
-                      "De": "PUSH",
-                      "Es": "PUSH"
+                      "text": {
+                        "En": "PUSH",
+                        "Fr": "PUSH",
+                        "De": "PUSH",
+                        "Es": "PUSH"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -941,10 +1109,14 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "PUSH",
-                      "Fr": "PUSH",
-                      "De": "PUSH",
-                      "Es": "PUSH"
+                      "text": {
+                        "En": "PUSH",
+                        "Fr": "PUSH",
+                        "De": "PUSH",
+                        "Es": "PUSH"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -952,10 +1124,14 @@
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "PUSH",
-                      "Fr": "PUSH",
-                      "De": "PUSH",
-                      "Es": "PUSH"
+                      "text": {
+                        "En": "PUSH",
+                        "Fr": "PUSH",
+                        "De": "PUSH",
+                        "Es": "PUSH"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -985,10 +1161,14 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "PUSH",
-                      "Fr": "PUSH",
-                      "De": "PUSH",
-                      "Es": "PUSH"
+                      "text": {
+                        "En": "PUSH",
+                        "Fr": "PUSH",
+                        "De": "PUSH",
+                        "Es": "PUSH"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -996,10 +1176,14 @@
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "PUSH",
-                      "Fr": "PUSH",
-                      "De": "PUSH",
-                      "Es": "PUSH"
+                      "text": {
+                        "En": "PUSH",
+                        "Fr": "PUSH",
+                        "De": "PUSH",
+                        "Es": "PUSH"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -1013,10 +1197,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Intensity Demo (Momentary)",
-            "Fr": "Intensity Démo (Momentary)",
-            "De": "Intensity Demo (Momentary)",
-            "Es": "Intensity Demo (Momentary)"
+            "text": {
+              "En": "Intensity Demo (Momentary)",
+              "Fr": "Intensity Démo (Momentary)",
+              "De": "Intensity Demo (Momentary)",
+              "Es": "Intensity Demo (Momentary)"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -1045,20 +1233,28 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "LOW",
-                      "Fr": "LOW",
-                      "De": "LOW",
-                      "Es": "LOW"
+                      "text": {
+                        "En": "LOW",
+                        "Fr": "LOW",
+                        "De": "LOW",
+                        "Es": "LOW"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "OFF",
-                      "Fr": "OFF",
-                      "De": "OFF",
-                      "Es": "OFF"
+                      "text": {
+                        "En": "OFF",
+                        "Fr": "OFF",
+                        "De": "OFF",
+                        "Es": "OFF"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -1091,20 +1287,28 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "MID",
-                      "Fr": "MID",
-                      "De": "MID",
-                      "Es": "MID"
+                      "text": {
+                        "En": "MID",
+                        "Fr": "MID",
+                        "De": "MID",
+                        "Es": "MID"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "OFF",
-                      "Fr": "OFF",
-                      "De": "OFF",
-                      "Es": "OFF"
+                      "text": {
+                        "En": "OFF",
+                        "Fr": "OFF",
+                        "De": "OFF",
+                        "Es": "OFF"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -1137,20 +1341,28 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "HIGH",
-                      "Fr": "HIGH",
-                      "De": "HIGH",
-                      "Es": "HIGH"
+                      "text": {
+                        "En": "HIGH",
+                        "Fr": "HIGH",
+                        "De": "HIGH",
+                        "Es": "HIGH"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "OFF",
-                      "Fr": "OFF",
-                      "De": "OFF",
-                      "Es": "OFF"
+                      "text": {
+                        "En": "OFF",
+                        "Fr": "OFF",
+                        "De": "OFF",
+                        "Es": "OFF"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -1183,20 +1395,28 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "BURNING",
-                      "Fr": "BURNING",
-                      "De": "BURNING",
-                      "Es": "BURNING"
+                      "text": {
+                        "En": "BURNING",
+                        "Fr": "BURNING",
+                        "De": "BURNING",
+                        "Es": "BURNING"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "OFF",
-                      "Fr": "OFF",
-                      "De": "OFF",
-                      "Es": "OFF"
+                      "text": {
+                        "En": "OFF",
+                        "Fr": "OFF",
+                        "De": "OFF",
+                        "Es": "OFF"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -1210,10 +1430,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Industrial Palette (Momentary)",
-            "Fr": "Industriel Palette (Momentary)",
-            "De": "Industriell Palette (Momentary)",
-            "Es": "Industrial Palette (Momentary)"
+            "text": {
+              "En": "Industrial Palette (Momentary)",
+              "Fr": "Industriel Palette (Momentary)",
+              "De": "Industriell Palette (Momentary)",
+              "Es": "Industrial Palette (Momentary)"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -1236,20 +1460,28 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "AMBER",
-                      "Fr": "AMBER",
-                      "De": "AMBER",
-                      "Es": "AMBER"
+                      "text": {
+                        "En": "AMBER",
+                        "Fr": "AMBER",
+                        "De": "AMBER",
+                        "Es": "AMBER"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "OFF",
-                      "Fr": "OFF",
-                      "De": "OFF",
-                      "Es": "OFF"
+                      "text": {
+                        "En": "OFF",
+                        "Fr": "OFF",
+                        "De": "OFF",
+                        "Es": "OFF"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -1276,20 +1508,28 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "CYAN",
-                      "Fr": "CYAN",
-                      "De": "CYAN",
-                      "Es": "CYAN"
+                      "text": {
+                        "En": "CYAN",
+                        "Fr": "CYAN",
+                        "De": "CYAN",
+                        "Es": "CYAN"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "OFF",
-                      "Fr": "OFF",
-                      "De": "OFF",
-                      "Es": "OFF"
+                      "text": {
+                        "En": "OFF",
+                        "Fr": "OFF",
+                        "De": "OFF",
+                        "Es": "OFF"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -1316,20 +1556,28 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "PINK",
-                      "Fr": "PINK",
-                      "De": "PINK",
-                      "Es": "PINK"
+                      "text": {
+                        "En": "PINK",
+                        "Fr": "PINK",
+                        "De": "PINK",
+                        "Es": "PINK"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "OFF",
-                      "Fr": "OFF",
-                      "De": "OFF",
-                      "Es": "OFF"
+                      "text": {
+                        "En": "OFF",
+                        "Fr": "OFF",
+                        "De": "OFF",
+                        "Es": "OFF"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -1356,20 +1604,28 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "WHITE",
-                      "Fr": "WHITE",
-                      "De": "WHITE",
-                      "Es": "WHITE"
+                      "text": {
+                        "En": "WHITE",
+                        "Fr": "WHITE",
+                        "De": "WHITE",
+                        "Es": "WHITE"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "OFF",
-                      "Fr": "OFF",
-                      "De": "OFF",
-                      "Es": "OFF"
+                      "text": {
+                        "En": "OFF",
+                        "Fr": "OFF",
+                        "De": "OFF",
+                        "Es": "OFF"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -1383,10 +1639,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Size Variations (Momentary)",
-            "Fr": "Size Variations (Momentary)",
-            "De": "Size Variationen (Momentary)",
-            "Es": "Size Variaciones (Momentary)"
+            "text": {
+              "En": "Size Variations (Momentary)",
+              "Fr": "Size Variations (Momentary)",
+              "De": "Size Variationen (Momentary)",
+              "Es": "Size Variaciones (Momentary)"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -1402,20 +1662,28 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "ON",
-                      "Fr": "ON",
-                      "De": "ON",
-                      "Es": "ON"
+                      "text": {
+                        "En": "ON",
+                        "Fr": "ON",
+                        "De": "ON",
+                        "Es": "ON"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "OFF",
-                      "Fr": "OFF",
-                      "De": "OFF",
-                      "Es": "OFF"
+                      "text": {
+                        "En": "OFF",
+                        "Fr": "OFF",
+                        "De": "OFF",
+                        "Es": "OFF"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -1435,20 +1703,28 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "WIDE STRIP ACTIVE",
-                      "Fr": "WIDE STRIP ACTIVE",
-                      "De": "WIDE STRIP ACTIVE",
-                      "Es": "WIDE STRIP ACTIVE"
+                      "text": {
+                        "En": "WIDE STRIP ACTIVE",
+                        "Fr": "WIDE STRIP ACTIVE",
+                        "De": "WIDE STRIP ACTIVE",
+                        "Es": "WIDE STRIP ACTIVE"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "IDLE",
-                      "Fr": "IDLE",
-                      "De": "IDLE",
-                      "Es": "IDLE"
+                      "text": {
+                        "En": "IDLE",
+                        "Fr": "IDLE",
+                        "De": "IDLE",
+                        "Es": "IDLE"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -1480,20 +1756,28 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "V\nE\nR\nT",
-                      "Fr": "V\nE\nR\nT",
-                      "De": "V\nE\nR\nT",
-                      "Es": "V\nE\nR\nT"
+                      "text": {
+                        "En": "V\nE\nR\nT",
+                        "Fr": "V\nE\nR\nT",
+                        "De": "V\nE\nR\nT",
+                        "Es": "V\nE\nR\nT"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "O\nF\nF",
-                      "Fr": "O\nF\nF",
-                      "De": "O\nF\nF",
-                      "Es": "O\nF\nF"
+                      "text": {
+                        "En": "O\nF\nF",
+                        "Fr": "O\nF\nF",
+                        "De": "O\nF\nF",
+                        "Es": "O\nF\nF"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -1525,20 +1809,28 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "DANGER",
-                      "Fr": "DANGER",
-                      "De": "DANGER",
-                      "Es": "DANGER"
+                      "text": {
+                        "En": "DANGER",
+                        "Fr": "DANGER",
+                        "De": "DANGER",
+                        "Es": "DANGER"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "SAFE",
-                      "Fr": "SAFE",
-                      "De": "SAFE",
-                      "Es": "SAFE"
+                      "text": {
+                        "En": "SAFE",
+                        "Fr": "SAFE",
+                        "De": "SAFE",
+                        "Es": "SAFE"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -1552,10 +1844,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "State Logic (Momentary)",
-            "Fr": "State Logic (Momentary)",
-            "De": "State Logic (Momentary)",
-            "Es": "State Logic (Momentary)"
+            "text": {
+              "En": "State Logic (Momentary)",
+              "Fr": "State Logic (Momentary)",
+              "De": "State Logic (Momentary)",
+              "Es": "State Logic (Momentary)"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -1579,20 +1875,28 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "OFF",
-                      "Fr": "OFF",
-                      "De": "OFF",
-                      "Es": "OFF"
+                      "text": {
+                        "En": "OFF",
+                        "Fr": "OFF",
+                        "De": "OFF",
+                        "Es": "OFF"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "ACTIVE",
-                      "Fr": "ACTIVE",
-                      "De": "ACTIVE",
-                      "Es": "ACTIVE"
+                      "text": {
+                        "En": "ACTIVE",
+                        "Fr": "ACTIVE",
+                        "De": "ACTIVE",
+                        "Es": "ACTIVE"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -1626,10 +1930,14 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "CRITICAL",
-                      "Fr": "CRITICAL",
-                      "De": "CRITICAL",
-                      "Es": "CRITICAL"
+                      "text": {
+                        "En": "CRITICAL",
+                        "Fr": "CRITICAL",
+                        "De": "CRITICAL",
+                        "Es": "CRITICAL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -1637,10 +1945,14 @@
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "STANDBY",
-                      "Fr": "STANDBY",
-                      "De": "STANDBY",
-                      "Es": "STANDBY"
+                      "text": {
+                        "En": "STANDBY",
+                        "Fr": "STANDBY",
+                        "De": "STANDBY",
+                        "Es": "STANDBY"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -1670,20 +1982,28 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "GHOST",
-                      "Fr": "GHOST",
-                      "De": "GHOST",
-                      "Es": "GHOST"
+                      "text": {
+                        "En": "GHOST",
+                        "Fr": "GHOST",
+                        "De": "GHOST",
+                        "Es": "GHOST"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "VOID",
-                      "Fr": "VOID",
-                      "De": "VOID",
-                      "Es": "VOID"
+                      "text": {
+                        "En": "VOID",
+                        "Fr": "VOID",
+                        "De": "VOID",
+                        "Es": "VOID"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -1711,20 +2031,28 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "RAD",
-                      "Fr": "RAD",
-                      "De": "RAD",
-                      "Es": "RAD"
+                      "text": {
+                        "En": "RAD",
+                        "Fr": "RAD",
+                        "De": "RAD",
+                        "Es": "RAD"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "COLD",
-                      "Fr": "COLD",
-                      "De": "COLD",
-                      "Es": "COLD"
+                      "text": {
+                        "En": "COLD",
+                        "Fr": "COLD",
+                        "De": "COLD",
+                        "Es": "COLD"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -1738,10 +2066,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Aesthetic Mix (Momentary)",
-            "Fr": "Aesthetic Mix (Momentary)",
-            "De": "Aesthetic Mix (Momentary)",
-            "Es": "Aesthetic Mezcla (Momentary)"
+            "text": {
+              "En": "Aesthetic Mix (Momentary)",
+              "Fr": "Aesthetic Mix (Momentary)",
+              "De": "Aesthetic Mix (Momentary)",
+              "Es": "Aesthetic Mezcla (Momentary)"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -1765,20 +2097,28 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "DEEP",
-                      "Fr": "DEEP",
-                      "De": "DEEP",
-                      "Es": "DEEP"
+                      "text": {
+                        "En": "DEEP",
+                        "Fr": "DEEP",
+                        "De": "DEEP",
+                        "Es": "DEEP"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "SURFACE",
-                      "Fr": "SURFACE",
-                      "De": "SURFACE",
-                      "Es": "SURFACE"
+                      "text": {
+                        "En": "SURFACE",
+                        "Fr": "SURFACE",
+                        "De": "SURFACE",
+                        "Es": "SURFACE"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -1805,20 +2145,28 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "PINE",
-                      "Fr": "PINE",
-                      "De": "PINE",
-                      "Es": "PINE"
+                      "text": {
+                        "En": "PINE",
+                        "Fr": "PINE",
+                        "De": "PINE",
+                        "Es": "PINE"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "EARTH",
-                      "Fr": "EARTH",
-                      "De": "EARTH",
-                      "Es": "EARTH"
+                      "text": {
+                        "En": "EARTH",
+                        "Fr": "EARTH",
+                        "De": "EARTH",
+                        "Es": "EARTH"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -1846,20 +2194,28 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "GLOW",
-                      "Fr": "GLOW",
-                      "De": "GLOW",
-                      "Es": "GLOW"
+                      "text": {
+                        "En": "GLOW",
+                        "Fr": "GLOW",
+                        "De": "GLOW",
+                        "Es": "GLOW"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "DUSK",
-                      "Fr": "DUSK",
-                      "De": "DUSK",
-                      "Es": "DUSK"
+                      "text": {
+                        "En": "DUSK",
+                        "Fr": "DUSK",
+                        "De": "DUSK",
+                        "Es": "DUSK"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -1888,20 +2244,28 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "DARK",
-                      "Fr": "DARK",
-                      "De": "DARK",
-                      "Es": "DARK"
+                      "text": {
+                        "En": "DARK",
+                        "Fr": "DARK",
+                        "De": "DARK",
+                        "Es": "DARK"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "LIGHT",
-                      "Fr": "LIGHT",
-                      "De": "LIGHT",
-                      "Es": "LIGHT"
+                      "text": {
+                        "En": "LIGHT",
+                        "Fr": "LIGHT",
+                        "De": "LIGHT",
+                        "Es": "LIGHT"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -1915,10 +2279,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Circular Toggles",
-            "Fr": "Circular Toggles",
-            "De": "Circular Toggles",
-            "Es": "Circular Toggles"
+            "text": {
+              "En": "Circular Toggles",
+              "Fr": "Circular Toggles",
+              "De": "Circular Toggles",
+              "Es": "Circular Toggles"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -1953,10 +2321,14 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "ON",
-                      "Fr": "ON",
-                      "De": "ON",
-                      "Es": "ON"
+                      "text": {
+                        "En": "ON",
+                        "Fr": "ON",
+                        "De": "ON",
+                        "Es": "ON"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -1964,10 +2336,14 @@
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "OFF",
-                      "Fr": "OFF",
-                      "De": "OFF",
-                      "Es": "OFF"
+                      "text": {
+                        "En": "OFF",
+                        "Fr": "OFF",
+                        "De": "OFF",
+                        "Es": "OFF"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -2006,20 +2382,28 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "REC",
-                      "Fr": "REC",
-                      "De": "REC",
-                      "Es": "REC"
+                      "text": {
+                        "En": "REC",
+                        "Fr": "REC",
+                        "De": "REC",
+                        "Es": "REC"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "REC",
-                      "Fr": "REC",
-                      "De": "REC",
-                      "Es": "REC"
+                      "text": {
+                        "En": "REC",
+                        "Fr": "REC",
+                        "De": "REC",
+                        "Es": "REC"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -2058,20 +2442,28 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "TALK",
-                      "Fr": "TALK",
-                      "De": "TALK",
-                      "Es": "TALK"
+                      "text": {
+                        "En": "TALK",
+                        "Fr": "TALK",
+                        "De": "TALK",
+                        "Es": "TALK"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "PTT",
-                      "Fr": "PTT",
-                      "De": "PTT",
-                      "Es": "PTT"
+                      "text": {
+                        "En": "PTT",
+                        "Fr": "PTT",
+                        "De": "PTT",
+                        "Es": "PTT"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -2110,10 +2502,14 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "OK",
-                      "Fr": "OK",
-                      "De": "OK",
-                      "Es": "OK"
+                      "text": {
+                        "En": "OK",
+                        "Fr": "OK",
+                        "De": "OK",
+                        "Es": "OK"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -2121,10 +2517,14 @@
                 "OFF": {
                   "label": {
                     "inactive": {
-                      "En": "FAIL",
-                      "Fr": "FAIL",
-                      "De": "FAIL",
-                      "Es": "FAIL"
+                      "text": {
+                        "En": "FAIL",
+                        "Fr": "FAIL",
+                        "De": "FAIL",
+                        "Es": "FAIL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }

@@ -15,10 +15,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Gui Dynamic Graph",
-            "Fr": "Gui Dynamic Graph",
-            "De": "Gui Dynamic Graph",
-            "Es": "Gui Dynamic Graph"
+            "text": {
+              "En": "Gui Dynamic Graph",
+              "Fr": "Gui Dynamic Graph",
+              "De": "Gui Dynamic Graph",
+              "Es": "Gui Dynamic Graph"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -26,10 +30,14 @@
             "type": "OcaBlock",
             "label": {
               "active": {
-                "En": "Dynamic Graph Examples",
-                "Fr": "Dynamic Graph Exemples",
-                "De": "Dynamic Graph Beispiele",
-                "Es": "Dynamic Graph Ejemplos"
+                "text": {
+                  "En": "Dynamic Graph Examples",
+                  "Fr": "Dynamic Graph Exemples",
+                  "De": "Dynamic Graph Beispiele",
+                  "Es": "Dynamic Graph Ejemplos"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "description": {

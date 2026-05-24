@@ -42,10 +42,14 @@
             "type": "_WinkButton",
             "label": {
               "active": {
-                "En": "01",
-                "Fr": "01",
-                "De": "01",
-                "Es": "01"
+                "text": {
+                  "En": "01",
+                  "Fr": "01",
+                  "De": "01",
+                  "Es": "01"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "shape_type": "round",
@@ -60,10 +64,14 @@
             "type": "_WinkButton",
             "label": {
               "active": {
-                "En": "02",
-                "Fr": "02",
-                "De": "02",
-                "Es": "02"
+                "text": {
+                  "En": "02",
+                  "Fr": "02",
+                  "De": "02",
+                  "Es": "02"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "shape_type": "square",
@@ -80,10 +88,14 @@
             "type": "_WinkButton",
             "label": {
               "active": {
-                "En": "03",
-                "Fr": "03",
-                "De": "03",
-                "Es": "03"
+                "text": {
+                  "En": "03",
+                  "Fr": "03",
+                  "De": "03",
+                  "Es": "03"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "shape_type": "rect",
@@ -100,10 +112,14 @@
             "type": "_WinkButton",
             "label": {
               "active": {
-                "En": "04",
-                "Fr": "04",
-                "De": "04",
-                "Es": "04"
+                "text": {
+                  "En": "04",
+                  "Fr": "04",
+                  "De": "04",
+                  "Es": "04"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "shape_type": "round",
@@ -120,10 +136,14 @@
             "type": "_WinkButton",
             "label": {
               "active": {
-                "En": "05",
-                "Fr": "05",
-                "De": "05",
-                "Es": "05"
+                "text": {
+                  "En": "05",
+                  "Fr": "05",
+                  "De": "05",
+                  "Es": "05"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "shape_type": "rect",
@@ -139,10 +159,14 @@
             "type": "_WinkButton",
             "label": {
               "active": {
-                "En": "06",
-                "Fr": "06",
-                "De": "06",
-                "Es": "06"
+                "text": {
+                  "En": "06",
+                  "Fr": "06",
+                  "De": "06",
+                  "Es": "06"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "shape_type": "round",
@@ -157,10 +181,14 @@
             "type": "_WinkButton",
             "label": {
               "active": {
-                "En": "07",
-                "Fr": "07",
-                "De": "07",
-                "Es": "07"
+                "text": {
+                  "En": "07",
+                  "Fr": "07",
+                  "De": "07",
+                  "Es": "07"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "shape_type": "square",
@@ -179,10 +207,14 @@
             "type": "_WinkButton",
             "label": {
               "active": {
-                "En": "08",
-                "Fr": "08",
-                "De": "08",
-                "Es": "08"
+                "text": {
+                  "En": "08",
+                  "Fr": "08",
+                  "De": "08",
+                  "Es": "08"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "shape_type": "rect",
@@ -199,10 +231,14 @@
             "type": "_WinkButton",
             "label": {
               "active": {
-                "En": "09",
-                "Fr": "09",
-                "De": "09",
-                "Es": "09"
+                "text": {
+                  "En": "09",
+                  "Fr": "09",
+                  "De": "09",
+                  "Es": "09"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "shape_type": "round",
@@ -217,10 +253,14 @@
             "type": "_WinkButton",
             "label": {
               "active": {
-                "En": "10",
-                "Fr": "10",
-                "De": "10",
-                "Es": "10"
+                "text": {
+                  "En": "10",
+                  "Fr": "10",
+                  "De": "10",
+                  "Es": "10"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "shape_type": "rect",
@@ -237,10 +277,14 @@
             "type": "_WinkButton",
             "label": {
               "active": {
-                "En": "11",
-                "Fr": "11",
-                "De": "11",
-                "Es": "11"
+                "text": {
+                  "En": "11",
+                  "Fr": "11",
+                  "De": "11",
+                  "Es": "11"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "shape_type": "square",
@@ -257,10 +301,14 @@
             "type": "_WinkButton",
             "label": {
               "active": {
-                "En": "12",
-                "Fr": "12",
-                "De": "12",
-                "Es": "12"
+                "text": {
+                  "En": "12",
+                  "Fr": "12",
+                  "De": "12",
+                  "Es": "12"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "shape_type": "round",
@@ -275,10 +323,14 @@
             "type": "_WinkButton",
             "label": {
               "active": {
-                "En": "13",
-                "Fr": "13",
-                "De": "13",
-                "Es": "13"
+                "text": {
+                  "En": "13",
+                  "Fr": "13",
+                  "De": "13",
+                  "Es": "13"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "shape_type": "rect",
@@ -298,10 +350,14 @@
             "type": "_WinkButton",
             "label": {
               "active": {
-                "En": "14",
-                "Fr": "14",
-                "De": "14",
-                "Es": "14"
+                "text": {
+                  "En": "14",
+                  "Fr": "14",
+                  "De": "14",
+                  "Es": "14"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "shape_type": "square",
@@ -317,10 +373,14 @@
             "type": "_WinkButton",
             "label": {
               "active": {
-                "En": "15",
-                "Fr": "15",
-                "De": "15",
-                "Es": "15"
+                "text": {
+                  "En": "15",
+                  "Fr": "15",
+                  "De": "15",
+                  "Es": "15"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "shape_type": "round",
@@ -335,10 +395,14 @@
             "type": "_WinkButton",
             "label": {
               "active": {
-                "En": "16",
-                "Fr": "16",
-                "De": "16",
-                "Es": "16"
+                "text": {
+                  "En": "16",
+                  "Fr": "16",
+                  "De": "16",
+                  "Es": "16"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "shape_type": "rect",
@@ -354,10 +418,14 @@
             "type": "_WinkButton",
             "label": {
               "active": {
-                "En": "17",
-                "Fr": "17",
-                "De": "17",
-                "Es": "17"
+                "text": {
+                  "En": "17",
+                  "Fr": "17",
+                  "De": "17",
+                  "Es": "17"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "shape_type": "square",
@@ -375,10 +443,14 @@
             "type": "_WinkButton",
             "label": {
               "active": {
-                "En": "18",
-                "Fr": "18",
-                "De": "18",
-                "Es": "18"
+                "text": {
+                  "En": "18",
+                  "Fr": "18",
+                  "De": "18",
+                  "Es": "18"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "shape_type": "round",
@@ -393,10 +465,14 @@
             "type": "_WinkButton",
             "label": {
               "active": {
-                "En": "19",
-                "Fr": "19",
-                "De": "19",
-                "Es": "19"
+                "text": {
+                  "En": "19",
+                  "Fr": "19",
+                  "De": "19",
+                  "Es": "19"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "shape_type": "rect",
@@ -417,10 +493,14 @@
             "type": "_WinkButton",
             "label": {
               "active": {
-                "En": "20",
-                "Fr": "20",
-                "De": "20",
-                "Es": "20"
+                "text": {
+                  "En": "20",
+                  "Fr": "20",
+                  "De": "20",
+                  "Es": "20"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "shape_type": "square",

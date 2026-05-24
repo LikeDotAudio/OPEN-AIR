@@ -45,7 +45,7 @@ const DirectionalButtons = ({ config, topic, nodeJson }) => {
     };
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: '#222', padding: '10px', borderRadius: '5px', border: '1px solid #444' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: (window.OaTransparency ? window.OaTransparency.bg(config, '#222') : '#222'), padding: '10px', borderRadius: '5px', border: '1px solid #444' }}>
             {label && (
                 <div style={{ fontSize: '12px', color: 'white', fontWeight: 'bold', marginBottom: '10px' }}>
                     {label}

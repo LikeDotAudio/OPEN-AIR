@@ -27,10 +27,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "Trans ON",
-                    "Fr": "Trans ON",
-                    "De": "Trans ON",
-                    "Es": "Trans ON"
+                    "text": {
+                      "En": "Trans ON",
+                      "Fr": "Trans ON",
+                      "De": "Trans ON",
+                      "Es": "Trans ON"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -63,10 +67,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "Trans OFF",
-                    "Fr": "Trans DÉSACTIVÉ",
-                    "De": "Trans AUS",
-                    "Es": "Trans DESACTIVADO"
+                    "text": {
+                      "En": "Trans OFF",
+                      "Fr": "Trans DÉSACTIVÉ",
+                      "De": "Trans AUS",
+                      "Es": "Trans DESACTIVADO"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",

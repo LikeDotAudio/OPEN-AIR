@@ -23,48 +23,78 @@ the palette entry, preview, and property manipulators.
   "Wink_Toggler_Example": {
     "type": "_WinkButtonToggler",
     "label": {
-      "active": "Channel"
+      "active": {
+        "text": "Channel",
+        "text_size": 12,
+        "text_color": "#cccccc"
+      }
     },
     "layout_columns": 3,
     "options": {
       "1": {
         "label": {
-          "active": "1"
+          "active": {
+            "text": "1",
+            "text_size": 12,
+            "text_color": "#cccccc"
+          }
         },
         "color": "#FF0000"
       },
       "2": {
         "label": {
-          "active": "2"
+          "active": {
+            "text": "2",
+            "text_size": 12,
+            "text_color": "#cccccc"
+          }
         },
         "color": "#FF7F00"
       },
       "3": {
         "label": {
-          "active": "3"
+          "active": {
+            "text": "3",
+            "text_size": 12,
+            "text_color": "#cccccc"
+          }
         },
         "color": "#FFFF00"
       },
       "4": {
         "label": {
-          "active": "4"
+          "active": {
+            "text": "4",
+            "text_size": 12,
+            "text_color": "#cccccc"
+          }
         },
         "color": "#00FF00"
       },
       "5": {
         "label": {
-          "active": "5"
+          "active": {
+            "text": "5",
+            "text_size": 12,
+            "text_color": "#cccccc"
+          }
         },
         "color": "#0000FF"
       },
       "6": {
         "label": {
-          "active": "6"
+          "active": {
+            "text": "6",
+            "text_size": 12,
+            "text_color": "#cccccc"
+          }
         },
         "color": "#4B0082"
       }
     },
-    "value_default": "1",
+    "value": {
+      "default_value": "1"
+    },
     "selection_mode": "radio",
     "width": 80,
     "height": 30,

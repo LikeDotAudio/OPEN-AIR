@@ -15,10 +15,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Gui Dropdown 01 Audio Input",
-            "Fr": "Gui Dropdown 01 Audio Entrée",
-            "De": "Gui Dropdown 01 Audio Eingang",
-            "Es": "Gui Dropdown 01 Audio Entrada"
+            "text": {
+              "En": "Gui Dropdown 01 Audio Input",
+              "Fr": "Gui Dropdown 01 Audio Entrée",
+              "De": "Gui Dropdown 01 Audio Eingang",
+              "Es": "Gui Dropdown 01 Audio Entrada"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -34,10 +38,14 @@
               "Mic1": {
                 "label": {
                   "active": {
-                    "En": "Microphone 1",
-                    "Fr": "Microphone 1",
-                    "De": "Microphone 1",
-                    "Es": "Microphone 1"
+                    "text": {
+                      "En": "Microphone 1",
+                      "Fr": "Microphone 1",
+                      "De": "Microphone 1",
+                      "Es": "Microphone 1"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "value": "MIC1_IN",
@@ -46,10 +54,14 @@
               "Mic2": {
                 "label": {
                   "active": {
-                    "En": "Microphone 2",
-                    "Fr": "Microphone 2",
-                    "De": "Microphone 2",
-                    "Es": "Microphone 2"
+                    "text": {
+                      "En": "Microphone 2",
+                      "Fr": "Microphone 2",
+                      "De": "Microphone 2",
+                      "Es": "Microphone 2"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "value": "MIC2_IN"
@@ -57,10 +69,14 @@
               "LineIn": {
                 "label": {
                   "active": {
-                    "En": "Line Input",
-                    "Fr": "Line Entrée",
-                    "De": "Line Eingang",
-                    "Es": "Line Entrada"
+                    "text": {
+                      "En": "Line Input",
+                      "Fr": "Line Entrée",
+                      "De": "Line Eingang",
+                      "Es": "Line Entrada"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "value": "LINE_IN"
@@ -74,10 +90,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Gui Dropdown 02 Sample Rate",
-            "Fr": "Gui Dropdown 02 Sample Rate",
-            "De": "Gui Dropdown 02 Sample Rate",
-            "Es": "Gui Dropdown 02 Sample Rate"
+            "text": {
+              "En": "Gui Dropdown 02 Sample Rate",
+              "Fr": "Gui Dropdown 02 Sample Rate",
+              "De": "Gui Dropdown 02 Sample Rate",
+              "Es": "Gui Dropdown 02 Sample Rate"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -93,10 +113,14 @@
               "44.1kHz": {
                 "label": {
                   "active": {
-                    "En": "44.1 kHz",
-                    "Fr": "44.1 kHz",
-                    "De": "44.1 kHz",
-                    "Es": "44.1 kHz"
+                    "text": {
+                      "En": "44.1 kHz",
+                      "Fr": "44.1 kHz",
+                      "De": "44.1 kHz",
+                      "Es": "44.1 kHz"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "value": 44100
@@ -104,10 +128,14 @@
               "48kHz": {
                 "label": {
                   "active": {
-                    "En": "48 kHz",
-                    "Fr": "48 kHz",
-                    "De": "48 kHz",
-                    "Es": "48 kHz"
+                    "text": {
+                      "En": "48 kHz",
+                      "Fr": "48 kHz",
+                      "De": "48 kHz",
+                      "Es": "48 kHz"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "value": 48000,
@@ -116,10 +144,14 @@
               "96kHz": {
                 "label": {
                   "active": {
-                    "En": "96 kHz",
-                    "Fr": "96 kHz",
-                    "De": "96 kHz",
-                    "Es": "96 kHz"
+                    "text": {
+                      "En": "96 kHz",
+                      "Fr": "96 kHz",
+                      "De": "96 kHz",
+                      "Es": "96 kHz"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "value": 96000
@@ -133,10 +165,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Gui Dropdown 03 Effect Type",
-            "Fr": "Gui Dropdown 03 Effect Type",
-            "De": "Gui Dropdown 03 Effect Type",
-            "Es": "Gui Dropdown 03 Effect Type"
+            "text": {
+              "En": "Gui Dropdown 03 Effect Type",
+              "Fr": "Gui Dropdown 03 Effect Type",
+              "De": "Gui Dropdown 03 Effect Type",
+              "Es": "Gui Dropdown 03 Effect Type"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -152,30 +188,42 @@
               "Reverb": {
                 "label": {
                   "active": {
-                    "En": "Reverb",
-                    "Fr": "Réverbération",
-                    "De": "Reverb",
-                    "Es": "Reverberación"
+                    "text": {
+                      "En": "Reverb",
+                      "Fr": "Réverbération",
+                      "De": "Reverb",
+                      "Es": "Reverberación"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 }
               },
               "Delay": {
                 "label": {
                   "active": {
-                    "En": "Delay",
-                    "Fr": "Delay",
-                    "De": "Delay",
-                    "Es": "Delay"
+                    "text": {
+                      "En": "Delay",
+                      "Fr": "Delay",
+                      "De": "Delay",
+                      "Es": "Delay"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 }
               },
               "Chorus": {
                 "label": {
                   "active": {
-                    "En": "Chorus",
-                    "Fr": "Chorus",
-                    "De": "Chorus",
-                    "Es": "Coro"
+                    "text": {
+                      "En": "Chorus",
+                      "Fr": "Chorus",
+                      "De": "Chorus",
+                      "Es": "Coro"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "selected": true
@@ -189,10 +237,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Gui Dropdown 04 Units",
-            "Fr": "Gui Dropdown 04 Unités",
-            "De": "Gui Dropdown 04 Einheiten",
-            "Es": "Gui Dropdown 04 Unidades"
+            "text": {
+              "En": "Gui Dropdown 04 Units",
+              "Fr": "Gui Dropdown 04 Unités",
+              "De": "Gui Dropdown 04 Einheiten",
+              "Es": "Gui Dropdown 04 Unidades"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -208,10 +260,14 @@
               "Celsius": {
                 "label": {
                   "active": {
-                    "En": "Celsius",
-                    "Fr": "Celsius",
-                    "De": "Celsius",
-                    "Es": "Celsius"
+                    "text": {
+                      "En": "Celsius",
+                      "Fr": "Celsius",
+                      "De": "Celsius",
+                      "Es": "Celsius"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "value": "C"
@@ -219,10 +275,14 @@
               "Fahrenheit": {
                 "label": {
                   "active": {
-                    "En": "Fahrenheit",
-                    "Fr": "Fahrenheit",
-                    "De": "Fahrenheit",
-                    "Es": "Fahrenheit"
+                    "text": {
+                      "En": "Fahrenheit",
+                      "Fr": "Fahrenheit",
+                      "De": "Fahrenheit",
+                      "Es": "Fahrenheit"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "value": "F",
@@ -237,10 +297,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Gui Dropdown 05 Device Mode",
-            "Fr": "Gui Dropdown 05 Device Mode",
-            "De": "Gui Dropdown 05 Device Mode",
-            "Es": "Gui Dropdown 05 Device Mode"
+            "text": {
+              "En": "Gui Dropdown 05 Device Mode",
+              "Fr": "Gui Dropdown 05 Device Mode",
+              "De": "Gui Dropdown 05 Device Mode",
+              "Es": "Gui Dropdown 05 Device Mode"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -256,10 +320,14 @@
               "Standard": {
                 "label": {
                   "active": {
-                    "En": "Standard Mode",
-                    "Fr": "Standard Mode",
-                    "De": "Standard Mode",
-                    "Es": "Estándar Mode"
+                    "text": {
+                      "En": "Standard Mode",
+                      "Fr": "Standard Mode",
+                      "De": "Standard Mode",
+                      "Es": "Estándar Mode"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "value": "STANDARD"
@@ -267,10 +335,14 @@
               "Performance": {
                 "label": {
                   "active": {
-                    "En": "Performance Mode",
-                    "Fr": "Performance Mode",
-                    "De": "Performance Mode",
-                    "Es": "Performance Mode"
+                    "text": {
+                      "En": "Performance Mode",
+                      "Fr": "Performance Mode",
+                      "De": "Performance Mode",
+                      "Es": "Performance Mode"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "value": "PERF_MODE"
@@ -278,10 +350,14 @@
               "Eco": {
                 "label": {
                   "active": {
-                    "En": "Eco Mode",
-                    "Fr": "Eco Mode",
-                    "De": "Eco Mode",
-                    "Es": "Eco Mode"
+                    "text": {
+                      "En": "Eco Mode",
+                      "Fr": "Eco Mode",
+                      "De": "Eco Mode",
+                      "Es": "Eco Mode"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "value": "ECO_MODE",

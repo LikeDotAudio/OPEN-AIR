@@ -41,7 +41,8 @@
               "En": "Gain",
               "Fr": "Gain",
               "De": "Verstärkung",
-              "Es": "Ganancia"
+              "Es": "Ganancia",
+              "show_label": true
             },
             "notes": "Massive Red Gain.",
             "geometry": {
@@ -62,8 +63,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -100,7 +100,8 @@
               "En": "Tone",
               "Fr": "Tone",
               "De": "Tone",
-              "Es": "Tone"
+              "Es": "Tone",
+              "show_label": true
             },
             "notes": "Yellow Tone.",
             "geometry": {
@@ -121,8 +122,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -159,7 +159,8 @@
               "En": "Presence",
               "Fr": "Presence",
               "De": "Presence",
-              "Es": "Presence"
+              "Es": "Presence",
+              "show_label": true
             },
             "notes": "Blue Presence.",
             "geometry": {
@@ -180,8 +181,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -218,7 +218,8 @@
               "En": "Bias",
               "Fr": "Bias",
               "De": "Bias",
-              "Es": "Bias"
+              "Es": "Bias",
+              "show_label": true
             },
             "notes": "Grey Bias.",
             "geometry": {
@@ -239,8 +240,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -277,7 +277,8 @@
               "En": "Fuzz",
               "Fr": "Fuzz",
               "De": "Fuzz",
-              "Es": "Fuzz"
+              "Es": "Fuzz",
+              "show_label": true
             },
             "notes": "Purple Fuzz.",
             "geometry": {
@@ -298,8 +299,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -336,7 +336,8 @@
               "En": "Crunch",
               "Fr": "Crunch",
               "De": "Crunch",
-              "Es": "Crunch"
+              "Es": "Crunch",
+              "show_label": true
             },
             "notes": "Orange Crunch.",
             "geometry": {
@@ -357,8 +358,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -395,7 +395,8 @@
               "En": "Post",
               "Fr": "Post",
               "De": "Post",
-              "Es": "Post"
+              "Es": "Post",
+              "show_label": true
             },
             "notes": "Green Post-Gain.",
             "geometry": {
@@ -416,8 +417,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -454,7 +454,8 @@
               "En": "Mix",
               "Fr": "Mix",
               "De": "Mix",
-              "Es": "Mezcla"
+              "Es": "Mezcla",
+              "show_label": true
             },
             "notes": "White Mix knob.",
             "geometry": {
@@ -475,8 +476,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -551,7 +551,8 @@
               "En": "Infinite",
               "Fr": "Infinite",
               "De": "Infinite",
-              "Es": "Infinite"
+              "Es": "Infinite",
+              "show_label": true
             },
             "notes": "Wraps 0-12",
             "geometry": {
@@ -572,8 +573,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -610,7 +610,8 @@
               "En": "Fine Pitch",
               "Fr": "Fine Pitch",
               "De": "Fine Pitch",
-              "Es": "Fine Pitch"
+              "Es": "Fine Pitch",
+              "show_label": true
             },
             "notes": "Slow turn",
             "geometry": {
@@ -631,8 +632,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -669,7 +669,8 @@
               "En": "Val Top",
               "Fr": "Val Haut",
               "De": "Val Oben",
-              "Es": "Val Arriba"
+              "Es": "Val Arriba",
+              "show_label": true
             },
             "notes": "Value Top",
             "geometry": {
@@ -690,8 +691,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -728,7 +728,8 @@
               "En": "Val Left",
               "Fr": "Val Gauche",
               "De": "Val Links",
-              "Es": "Val Izquierda"
+              "Es": "Val Izquierda",
+              "show_label": true
             },
             "notes": "Value Left",
             "geometry": {
@@ -749,8 +750,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -787,7 +787,8 @@
               "En": "Val Right",
               "Fr": "Val Droite",
               "De": "Val Rechts",
-              "Es": "Val Derecha"
+              "Es": "Val Derecha",
+              "show_label": true
             },
             "notes": "Value Right",
             "geometry": {
@@ -808,8 +809,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -846,7 +846,8 @@
               "En": "Center Val",
               "Fr": "Centre Val",
               "De": "Zentrum Val",
-              "Es": "Centro Val"
+              "Es": "Centro Val",
+              "show_label": true
             },
             "notes": "Value in Center",
             "geometry": {
@@ -867,8 +868,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -905,7 +905,8 @@
               "En": "Txt Left",
               "Fr": "Txt Gauche",
               "De": "Txt Links",
-              "Es": "Txt Izquierda"
+              "Es": "Txt Izquierda",
+              "show_label": true
             },
             "notes": "Label Left",
             "geometry": {
@@ -926,8 +927,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -964,7 +964,8 @@
               "En": "Txt Right",
               "Fr": "Txt Droite",
               "De": "Txt Rechts",
-              "Es": "Txt Derecha"
+              "Es": "Txt Derecha",
+              "show_label": true
             },
             "notes": "Label Right",
             "geometry": {
@@ -985,8 +986,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {

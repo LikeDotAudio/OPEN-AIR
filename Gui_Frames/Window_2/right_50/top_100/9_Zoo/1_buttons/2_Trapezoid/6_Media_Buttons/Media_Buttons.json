@@ -34,10 +34,14 @@
                 "type": "_TrapezoidButton",
                 "label": {
                   "active": {
-                    "En": "MOMENTARY",
-                    "Fr": "MOMENTARY",
-                    "De": "MOMENTARY",
-                    "Es": "MOMENTARY"
+                    "text": {
+                      "En": "MOMENTARY",
+                      "Fr": "MOMENTARY",
+                      "De": "MOMENTARY",
+                      "Es": "MOMENTARY"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "color": "#8B0000",
@@ -51,10 +55,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "LATCHING",
-                    "Fr": "LATCHING",
-                    "De": "LATCHING",
-                    "Es": "LATCHING"
+                    "text": {
+                      "En": "LATCHING",
+                      "Fr": "LATCHING",
+                      "De": "LATCHING",
+                      "Es": "LATCHING"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "color": "#006400",
@@ -65,10 +73,14 @@
                 "type": "_TrapezoidButton",
                 "label": {
                   "active": {
-                    "En": "White/Blue",
-                    "Fr": "White/Blue",
-                    "De": "White/Blue",
-                    "Es": "White/Blue"
+                    "text": {
+                      "En": "White/Blue",
+                      "Fr": "White/Blue",
+                      "De": "White/Blue",
+                      "Es": "White/Blue"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "color": "#E5E4E2",
@@ -79,10 +91,14 @@
                 "type": "_TrapezoidButton",
                 "label": {
                   "active": {
-                    "En": "Large",
-                    "Fr": "Large",
-                    "De": "Large",
-                    "Es": "Large"
+                    "text": {
+                      "En": "Large",
+                      "Fr": "Large",
+                      "De": "Large",
+                      "Es": "Large"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "color": "#4B0082",
@@ -95,10 +111,14 @@
                 "type": "_TrapezoidButton",
                 "label": {
                   "active": {
-                    "En": "Small",
-                    "Fr": "Small",
-                    "De": "Small",
-                    "Es": "Small"
+                    "text": {
+                      "En": "Small",
+                      "Fr": "Small",
+                      "De": "Small",
+                      "Es": "Small"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "color": "#556B2F",
@@ -121,10 +141,14 @@
                     "type": "_TrapezoidButton",
                     "label": {
                       "active": {
-                        "En": "1",
-                        "Fr": "1",
-                        "De": "1",
-                        "Es": "1"
+                        "text": {
+                          "En": "1",
+                          "Fr": "1",
+                          "De": "1",
+                          "Es": "1"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "color": "#1A1A1A",
@@ -137,10 +161,14 @@
                     "type": "_TrapezoidButton",
                     "label": {
                       "active": {
-                        "En": "2",
-                        "Fr": "2",
-                        "De": "2",
-                        "Es": "2"
+                        "text": {
+                          "En": "2",
+                          "Fr": "2",
+                          "De": "2",
+                          "Es": "2"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "color": "#1A1A1A",
@@ -153,10 +181,14 @@
                     "type": "_TrapezoidButton",
                     "label": {
                       "active": {
-                        "En": "3",
-                        "Fr": "3",
-                        "De": "3",
-                        "Es": "3"
+                        "text": {
+                          "En": "3",
+                          "Fr": "3",
+                          "De": "3",
+                          "Es": "3"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "color": "#1A1A1A",
@@ -169,10 +201,14 @@
                     "type": "_TrapezoidButton",
                     "label": {
                       "active": {
-                        "En": "4",
-                        "Fr": "4",
-                        "De": "4",
-                        "Es": "4"
+                        "text": {
+                          "En": "4",
+                          "Fr": "4",
+                          "De": "4",
+                          "Es": "4"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "color": "#1A1A1A",
@@ -185,10 +221,14 @@
                     "type": "_TrapezoidButton",
                     "label": {
                       "active": {
-                        "En": "5",
-                        "Fr": "5",
-                        "De": "5",
-                        "Es": "5"
+                        "text": {
+                          "En": "5",
+                          "Fr": "5",
+                          "De": "5",
+                          "Es": "5"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "color": "#1A1A1A",
@@ -201,10 +241,14 @@
                     "type": "_TrapezoidButton",
                     "label": {
                       "active": {
-                        "En": "6",
-                        "Fr": "6",
-                        "De": "6",
-                        "Es": "6"
+                        "text": {
+                          "En": "6",
+                          "Fr": "6",
+                          "De": "6",
+                          "Es": "6"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "color": "#1A1A1A",
@@ -217,10 +261,14 @@
                     "type": "_TrapezoidButton",
                     "label": {
                       "active": {
-                        "En": "7",
-                        "Fr": "7",
-                        "De": "7",
-                        "Es": "7"
+                        "text": {
+                          "En": "7",
+                          "Fr": "7",
+                          "De": "7",
+                          "Es": "7"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "color": "#1A1A1A",
@@ -233,10 +281,14 @@
                     "type": "_TrapezoidButton",
                     "label": {
                       "active": {
-                        "En": "8",
-                        "Fr": "8",
-                        "De": "8",
-                        "Es": "8"
+                        "text": {
+                          "En": "8",
+                          "Fr": "8",
+                          "De": "8",
+                          "Es": "8"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "color": "#1A1A1A",
@@ -249,10 +301,14 @@
                     "type": "_TrapezoidButton",
                     "label": {
                       "active": {
-                        "En": "9",
-                        "Fr": "9",
-                        "De": "9",
-                        "Es": "9"
+                        "text": {
+                          "En": "9",
+                          "Fr": "9",
+                          "De": "9",
+                          "Es": "9"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "color": "#1A1A1A",
@@ -265,10 +321,14 @@
                     "type": "_TrapezoidButton",
                     "label": {
                       "active": {
-                        "En": "10",
-                        "Fr": "10",
-                        "De": "10",
-                        "Es": "10"
+                        "text": {
+                          "En": "10",
+                          "Fr": "10",
+                          "De": "10",
+                          "Es": "10"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "color": "#1A1A1A",
@@ -281,10 +341,14 @@
                     "type": "_TrapezoidButton",
                     "label": {
                       "active": {
-                        "En": "11",
-                        "Fr": "11",
-                        "De": "11",
-                        "Es": "11"
+                        "text": {
+                          "En": "11",
+                          "Fr": "11",
+                          "De": "11",
+                          "Es": "11"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "color": "#1A1A1A",
@@ -297,10 +361,14 @@
                     "type": "_TrapezoidButton",
                     "label": {
                       "active": {
-                        "En": "12",
-                        "Fr": "12",
-                        "De": "12",
-                        "Es": "12"
+                        "text": {
+                          "En": "12",
+                          "Fr": "12",
+                          "De": "12",
+                          "Es": "12"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "color": "#1A1A1A",
@@ -313,10 +381,14 @@
                     "type": "_TrapezoidButton",
                     "label": {
                       "active": {
-                        "En": "13",
-                        "Fr": "13",
-                        "De": "13",
-                        "Es": "13"
+                        "text": {
+                          "En": "13",
+                          "Fr": "13",
+                          "De": "13",
+                          "Es": "13"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "color": "#1A1A1A",
@@ -329,10 +401,14 @@
                     "type": "_TrapezoidButton",
                     "label": {
                       "active": {
-                        "En": "14",
-                        "Fr": "14",
-                        "De": "14",
-                        "Es": "14"
+                        "text": {
+                          "En": "14",
+                          "Fr": "14",
+                          "De": "14",
+                          "Es": "14"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "color": "#1A1A1A",
@@ -345,10 +421,14 @@
                     "type": "_TrapezoidButton",
                     "label": {
                       "active": {
-                        "En": "15",
-                        "Fr": "15",
-                        "De": "15",
-                        "Es": "15"
+                        "text": {
+                          "En": "15",
+                          "Fr": "15",
+                          "De": "15",
+                          "Es": "15"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "color": "#1A1A1A",
@@ -361,10 +441,14 @@
                     "type": "_TrapezoidButton",
                     "label": {
                       "active": {
-                        "En": "16",
-                        "Fr": "16",
-                        "De": "16",
-                        "Es": "16"
+                        "text": {
+                          "En": "16",
+                          "Fr": "16",
+                          "De": "16",
+                          "Es": "16"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "color": "#1A1A1A",
@@ -389,10 +473,14 @@
                     "type": "_TrapezoidButton",
                     "label": {
                       "active": {
-                        "En": "1",
-                        "Fr": "1",
-                        "De": "1",
-                        "Es": "1"
+                        "text": {
+                          "En": "1",
+                          "Fr": "1",
+                          "De": "1",
+                          "Es": "1"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "color": "#8B0000",
@@ -405,10 +493,14 @@
                     "type": "_TrapezoidButton",
                     "label": {
                       "active": {
-                        "En": "2",
-                        "Fr": "2",
-                        "De": "2",
-                        "Es": "2"
+                        "text": {
+                          "En": "2",
+                          "Fr": "2",
+                          "De": "2",
+                          "Es": "2"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "color": "#8B0000",
@@ -421,10 +513,14 @@
                     "type": "_TrapezoidButton",
                     "label": {
                       "active": {
-                        "En": "3",
-                        "Fr": "3",
-                        "De": "3",
-                        "Es": "3"
+                        "text": {
+                          "En": "3",
+                          "Fr": "3",
+                          "De": "3",
+                          "Es": "3"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "color": "#8B0000",
@@ -437,10 +533,14 @@
                     "type": "_TrapezoidButton",
                     "label": {
                       "active": {
-                        "En": "4",
-                        "Fr": "4",
-                        "De": "4",
-                        "Es": "4"
+                        "text": {
+                          "En": "4",
+                          "Fr": "4",
+                          "De": "4",
+                          "Es": "4"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "color": "#8B0000",
@@ -453,10 +553,14 @@
                     "type": "_TrapezoidButton",
                     "label": {
                       "active": {
-                        "En": "5",
-                        "Fr": "5",
-                        "De": "5",
-                        "Es": "5"
+                        "text": {
+                          "En": "5",
+                          "Fr": "5",
+                          "De": "5",
+                          "Es": "5"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "color": "#8B0000",
@@ -469,10 +573,14 @@
                     "type": "_TrapezoidButton",
                     "label": {
                       "active": {
-                        "En": "6",
-                        "Fr": "6",
-                        "De": "6",
-                        "Es": "6"
+                        "text": {
+                          "En": "6",
+                          "Fr": "6",
+                          "De": "6",
+                          "Es": "6"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "color": "#8B0000",
@@ -485,10 +593,14 @@
                     "type": "_TrapezoidButton",
                     "label": {
                       "active": {
-                        "En": "7",
-                        "Fr": "7",
-                        "De": "7",
-                        "Es": "7"
+                        "text": {
+                          "En": "7",
+                          "Fr": "7",
+                          "De": "7",
+                          "Es": "7"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "color": "#8B0000",
@@ -501,10 +613,14 @@
                     "type": "_TrapezoidButton",
                     "label": {
                       "active": {
-                        "En": "8",
-                        "Fr": "8",
-                        "De": "8",
-                        "Es": "8"
+                        "text": {
+                          "En": "8",
+                          "Fr": "8",
+                          "De": "8",
+                          "Es": "8"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "color": "#8B0000",
@@ -517,10 +633,14 @@
                     "type": "_TrapezoidButton",
                     "label": {
                       "active": {
-                        "En": "9",
-                        "Fr": "9",
-                        "De": "9",
-                        "Es": "9"
+                        "text": {
+                          "En": "9",
+                          "Fr": "9",
+                          "De": "9",
+                          "Es": "9"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "color": "#8B0000",
@@ -533,10 +653,14 @@
                     "type": "_TrapezoidButton",
                     "label": {
                       "active": {
-                        "En": "10",
-                        "Fr": "10",
-                        "De": "10",
-                        "Es": "10"
+                        "text": {
+                          "En": "10",
+                          "Fr": "10",
+                          "De": "10",
+                          "Es": "10"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "color": "#8B0000",
@@ -549,10 +673,14 @@
                     "type": "_TrapezoidButton",
                     "label": {
                       "active": {
-                        "En": "11",
-                        "Fr": "11",
-                        "De": "11",
-                        "Es": "11"
+                        "text": {
+                          "En": "11",
+                          "Fr": "11",
+                          "De": "11",
+                          "Es": "11"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "color": "#8B0000",
@@ -565,10 +693,14 @@
                     "type": "_TrapezoidButton",
                     "label": {
                       "active": {
-                        "En": "12",
-                        "Fr": "12",
-                        "De": "12",
-                        "Es": "12"
+                        "text": {
+                          "En": "12",
+                          "Fr": "12",
+                          "De": "12",
+                          "Es": "12"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "color": "#8B0000",
@@ -581,10 +713,14 @@
                     "type": "_TrapezoidButton",
                     "label": {
                       "active": {
-                        "En": "13",
-                        "Fr": "13",
-                        "De": "13",
-                        "Es": "13"
+                        "text": {
+                          "En": "13",
+                          "Fr": "13",
+                          "De": "13",
+                          "Es": "13"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "color": "#8B0000",
@@ -597,10 +733,14 @@
                     "type": "_TrapezoidButton",
                     "label": {
                       "active": {
-                        "En": "14",
-                        "Fr": "14",
-                        "De": "14",
-                        "Es": "14"
+                        "text": {
+                          "En": "14",
+                          "Fr": "14",
+                          "De": "14",
+                          "Es": "14"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "color": "#8B0000",
@@ -613,10 +753,14 @@
                     "type": "_TrapezoidButton",
                     "label": {
                       "active": {
-                        "En": "15",
-                        "Fr": "15",
-                        "De": "15",
-                        "Es": "15"
+                        "text": {
+                          "En": "15",
+                          "Fr": "15",
+                          "De": "15",
+                          "Es": "15"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "color": "#8B0000",
@@ -629,10 +773,14 @@
                     "type": "_TrapezoidButton",
                     "label": {
                       "active": {
-                        "En": "16",
-                        "Fr": "16",
-                        "De": "16",
-                        "Es": "16"
+                        "text": {
+                          "En": "16",
+                          "Fr": "16",
+                          "De": "16",
+                          "Es": "16"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "color": "#8B0000",
@@ -650,10 +798,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "4x4 Radio Grid",
-                    "Fr": "4x4 Radio Grid",
-                    "De": "4x4 Radio Grid",
-                    "Es": "4x4 Radio Grid"
+                    "text": {
+                      "En": "4x4 Radio Grid",
+                      "Fr": "4x4 Radio Grid",
+                      "De": "4x4 Radio Grid",
+                      "Es": "4x4 Radio Grid"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "layout_columns": 4,
@@ -665,160 +817,224 @@
                   "btn_t_1": {
                     "label": {
                       "active": {
-                        "En": "1",
-                        "Fr": "1",
-                        "De": "1",
-                        "Es": "1"
+                        "text": {
+                          "En": "1",
+                          "Fr": "1",
+                          "De": "1",
+                          "Es": "1"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     }
                   },
                   "btn_t_2": {
                     "label": {
                       "active": {
-                        "En": "2",
-                        "Fr": "2",
-                        "De": "2",
-                        "Es": "2"
+                        "text": {
+                          "En": "2",
+                          "Fr": "2",
+                          "De": "2",
+                          "Es": "2"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     }
                   },
                   "btn_t_3": {
                     "label": {
                       "active": {
-                        "En": "3",
-                        "Fr": "3",
-                        "De": "3",
-                        "Es": "3"
+                        "text": {
+                          "En": "3",
+                          "Fr": "3",
+                          "De": "3",
+                          "Es": "3"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     }
                   },
                   "btn_t_4": {
                     "label": {
                       "active": {
-                        "En": "4",
-                        "Fr": "4",
-                        "De": "4",
-                        "Es": "4"
+                        "text": {
+                          "En": "4",
+                          "Fr": "4",
+                          "De": "4",
+                          "Es": "4"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     }
                   },
                   "btn_t_5": {
                     "label": {
                       "active": {
-                        "En": "5",
-                        "Fr": "5",
-                        "De": "5",
-                        "Es": "5"
+                        "text": {
+                          "En": "5",
+                          "Fr": "5",
+                          "De": "5",
+                          "Es": "5"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     }
                   },
                   "btn_t_6": {
                     "label": {
                       "active": {
-                        "En": "6",
-                        "Fr": "6",
-                        "De": "6",
-                        "Es": "6"
+                        "text": {
+                          "En": "6",
+                          "Fr": "6",
+                          "De": "6",
+                          "Es": "6"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     }
                   },
                   "btn_t_7": {
                     "label": {
                       "active": {
-                        "En": "7",
-                        "Fr": "7",
-                        "De": "7",
-                        "Es": "7"
+                        "text": {
+                          "En": "7",
+                          "Fr": "7",
+                          "De": "7",
+                          "Es": "7"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     }
                   },
                   "btn_t_8": {
                     "label": {
                       "active": {
-                        "En": "8",
-                        "Fr": "8",
-                        "De": "8",
-                        "Es": "8"
+                        "text": {
+                          "En": "8",
+                          "Fr": "8",
+                          "De": "8",
+                          "Es": "8"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     }
                   },
                   "btn_t_9": {
                     "label": {
                       "active": {
-                        "En": "9",
-                        "Fr": "9",
-                        "De": "9",
-                        "Es": "9"
+                        "text": {
+                          "En": "9",
+                          "Fr": "9",
+                          "De": "9",
+                          "Es": "9"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     }
                   },
                   "btn_t_10": {
                     "label": {
                       "active": {
-                        "En": "10",
-                        "Fr": "10",
-                        "De": "10",
-                        "Es": "10"
+                        "text": {
+                          "En": "10",
+                          "Fr": "10",
+                          "De": "10",
+                          "Es": "10"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     }
                   },
                   "btn_t_11": {
                     "label": {
                       "active": {
-                        "En": "11",
-                        "Fr": "11",
-                        "De": "11",
-                        "Es": "11"
+                        "text": {
+                          "En": "11",
+                          "Fr": "11",
+                          "De": "11",
+                          "Es": "11"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     }
                   },
                   "btn_t_12": {
                     "label": {
                       "active": {
-                        "En": "12",
-                        "Fr": "12",
-                        "De": "12",
-                        "Es": "12"
+                        "text": {
+                          "En": "12",
+                          "Fr": "12",
+                          "De": "12",
+                          "Es": "12"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     }
                   },
                   "btn_t_13": {
                     "label": {
                       "active": {
-                        "En": "13",
-                        "Fr": "13",
-                        "De": "13",
-                        "Es": "13"
+                        "text": {
+                          "En": "13",
+                          "Fr": "13",
+                          "De": "13",
+                          "Es": "13"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     }
                   },
                   "btn_t_14": {
                     "label": {
                       "active": {
-                        "En": "14",
-                        "Fr": "14",
-                        "De": "14",
-                        "Es": "14"
+                        "text": {
+                          "En": "14",
+                          "Fr": "14",
+                          "De": "14",
+                          "Es": "14"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     }
                   },
                   "btn_t_15": {
                     "label": {
                       "active": {
-                        "En": "15",
-                        "Fr": "15",
-                        "De": "15",
-                        "Es": "15"
+                        "text": {
+                          "En": "15",
+                          "Fr": "15",
+                          "De": "15",
+                          "Es": "15"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     }
                   },
                   "btn_t_16": {
                     "label": {
                       "active": {
-                        "En": "16",
-                        "Fr": "16",
-                        "De": "16",
-                        "Es": "16"
+                        "text": {
+                          "En": "16",
+                          "Fr": "16",
+                          "De": "16",
+                          "Es": "16"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     }
                   }

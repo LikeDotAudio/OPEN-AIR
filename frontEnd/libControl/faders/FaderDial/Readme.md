@@ -28,7 +28,12 @@ in the property editor.
       10
     ],
     "label": {
-      "active": "Master High-Precision Tuning"
+      "active": {
+        "text": "Master High-Precision Tuning",
+        "text_size": 12,
+        "text_color": "#cccccc"
+      },
+      "show_label": true
     },
     "description": "An exhaustive sample demonstrating every possible sub-configuration for the OcaCompositeFaderKnob.",
     "layout": {
@@ -39,13 +44,18 @@ in the property editor.
       "pady": 10,
       "sticky": "ew"
     },
-    "min": 0.0,
-    "max": 5000.0,
-    "default_value": 1250.0,
-    "step_coarse": 100.0,
-    "step_fine": 0.001,
-    "units": "MHz",
-    "show_label": true,
+    "domain": {
+      "locked": false,
+      "min": 0.0,
+      "max": 5000.0,
+      "units": "MHz",
+      "step_coarse": 100.0,
+      "step_fine": 0.001,
+      "precision": ".001"
+    },
+    "value": {
+      "default_value": 1250.0
+    },
     "value_config": {
       "_README": "Overrides for the numerical entry and unit readout panel (Column 2).",
       "width": 12,
@@ -56,48 +66,74 @@ in the property editor.
     },
     "fader_config": {
       "_README": "Deep overrides for the coarse adjustment horizontal fader (Column 0).",
-      "tick_interval": 500,
-      "show_ticks": true,
+      "cosmetics": {
+        "scale": {
+          "interval": 500,
+          "show": true
+        },
+        "styling": {
+          "glow_intensity": 1.8
+        },
+        "colors": {
+          "cap": "#dcdcdc",
+          "cap_highlight": "#33A1FD",
+          "highlight": "#FF9900",
+          "tick_color": "#888888",
+          "sub_tick_color": "#444444"
+        }
+      },
+      "interaction": {
+        "reff_point": 2500.0
+      },
       "bar_color": "#222222",
       "active_color": "#FF9900",
-      "glow_intensity": 1.8,
-      "cap_color": "#dcdcdc",
-      "cap_highlight_color": "#33A1FD",
       "fader_cap_scale": 1.2,
       "cap_width": 55,
       "cap_height": 40,
-      "value_highlight_color": "#FF9900",
-      "tick_color": "#888888",
-      "sub_tick_color": "#444444",
-      "log_exponent": 1.0,
-      "reff_point": 2500.0
+      "log_exponent": 1.0
     },
     "dial_config": {
       "_README": "Deep overrides for the fine-tuning rotary dial (Column 1).",
-      "knob_style": "vintage",
-      "shape": "gear",
-      "knob_teeth": 12,
+      "cosmetics": {
+        "style_overrides": {
+          "knob_style": "vintage",
+          "shape": "gear"
+        },
+        "styling": {
+          "teeth": 12,
+          "gradient": 3,
+          "fill_color": "#333333",
+          "outline_thickness": 1,
+          "outline_color": "#555555",
+          "arc_width": 6,
+          "no_center": false
+        },
+        "colors": {
+          "active": "#00ffff",
+          "background": "#2b2b2b"
+        },
+        "pointer": {
+          "style": "triangle",
+          "length": 25,
+          "offset": 5
+        },
+        "scale": {
+          "show": true,
+          "style": "dots",
+          "length": 8
+        }
+      },
+      "readout": {
+        "text_inside": false,
+        "label_position": "top"
+      },
+      "interaction": {
+        "infinity": true,
+        "fine_pitch": true
+      },
       "width": 80,
       "height": 80,
-      "active_color": "#00ffff",
-      "bg_color": "#2b2b2b",
-      "indicator_color": "#00ffff",
-      "pointer_style": "triangle",
-      "pointer_length": 25,
-      "pointer_offset": 5,
-      "gradient_level": 3,
-      "knob_fill_color": "#333333",
-      "knob_outline_thickness": 1,
-      "knob_outline_color": "#555555",
-      "show_ticks": true,
-      "tick_style": "dots",
-      "tick_length": 8,
-      "arc_width": 6,
-      "text_inside": false,
-      "no_center": false,
-      "label_Text_position": "top",
-      "infinity": true,
-      "fine_pitch": true
+      "indicator_color": "#00ffff"
     },
     "yak_handler": {
       "_README": "Hardware bridge configuration for MQTT/SCPI communication.",

@@ -15,10 +15,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Header Status Light",
-            "Fr": "Header Statut Light",
-            "De": "Header Status Light",
-            "Es": "Header Estado Light"
+            "text": {
+              "En": "Header Status Light",
+              "Fr": "Header Statut Light",
+              "De": "Header Status Light",
+              "Es": "Header Estado Light"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {

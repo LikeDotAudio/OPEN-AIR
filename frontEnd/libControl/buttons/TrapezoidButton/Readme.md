@@ -22,11 +22,20 @@ in the property editor.
   "button_trapezoid_Example": {
     "type": "_TrapezoidButton",
     "label": {
-      "active": "Play"
+      "active": {
+        "text": "Play",
+        "text_size": 12,
+        "text_color": "#cccccc"
+      }
     },
-    "min": 0.0,
-    "max": 1.0,
-    "value_default": false,
+    "domain": {
+      "locked": false,
+      "min": 0.0,
+      "max": 1.0
+    },
+    "value": {
+      "default_value": false
+    },
     "width": 80,
     "height": 50,
     "color": "#6a9955",

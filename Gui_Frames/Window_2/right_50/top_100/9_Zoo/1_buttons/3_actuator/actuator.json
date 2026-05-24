@@ -15,10 +15,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "SENDING...",
-            "Fr": "SENDING...",
-            "De": "SENDING...",
-            "Es": "SENDING..."
+            "text": {
+              "En": "SENDING...",
+              "Fr": "SENDING...",
+              "De": "SENDING...",
+              "Es": "SENDING..."
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -26,16 +30,24 @@
             "type": "_SmartActuator",
             "label": {
               "active": {
-                "En": "SENDING...",
-                "Fr": "SENDING...",
-                "De": "SENDING...",
-                "Es": "SENDING..."
+                "text": {
+                  "En": "SENDING...",
+                  "Fr": "SENDING...",
+                  "De": "SENDING...",
+                  "Es": "SENDING..."
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               },
               "inactive": {
-                "En": "SEND",
-                "Fr": "SEND",
-                "De": "SEND",
-                "Es": "SEND"
+                "text": {
+                  "En": "SEND",
+                  "Fr": "SEND",
+                  "De": "SEND",
+                  "Es": "SEND"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "notes": "A button to trigger a 'send' command.",
@@ -61,10 +73,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "RUNNING",
-            "Fr": "RUNNING",
-            "De": "RUNNING",
-            "Es": "RUNNING"
+            "text": {
+              "En": "RUNNING",
+              "Fr": "RUNNING",
+              "De": "RUNNING",
+              "Es": "RUNNING"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -72,16 +88,24 @@
             "type": "_SmartActuator",
             "label": {
               "active": {
-                "En": "RUNNING",
-                "Fr": "RUNNING",
-                "De": "RUNNING",
-                "Es": "RUNNING"
+                "text": {
+                  "En": "RUNNING",
+                  "Fr": "RUNNING",
+                  "De": "RUNNING",
+                  "Es": "RUNNING"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               },
               "inactive": {
-                "En": "START",
-                "Fr": "START",
-                "De": "START",
-                "Es": "START"
+                "text": {
+                  "En": "START",
+                  "Fr": "START",
+                  "De": "START",
+                  "Es": "START"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "notes": "Button to initiate a process, showing 'RUNNING' when active.",
@@ -106,10 +130,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "STOPPING!",
-            "Fr": "STOPPING!",
-            "De": "STOPPING!",
-            "Es": "STOPPING!"
+            "text": {
+              "En": "STOPPING!",
+              "Fr": "STOPPING!",
+              "De": "STOPPING!",
+              "Es": "STOPPING!"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -117,16 +145,24 @@
             "type": "_SmartActuator",
             "label": {
               "active": {
-                "En": "STOPPING!",
-                "Fr": "STOPPING!",
-                "De": "STOPPING!",
-                "Es": "STOPPING!"
+                "text": {
+                  "En": "STOPPING!",
+                  "Fr": "STOPPING!",
+                  "De": "STOPPING!",
+                  "Es": "STOPPING!"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               },
               "inactive": {
-                "En": "STOP",
-                "Fr": "STOP",
-                "De": "STOP",
-                "Es": "STOP"
+                "text": {
+                  "En": "STOP",
+                  "Fr": "STOP",
+                  "De": "STOP",
+                  "Es": "STOP"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "notes": "Large emergency stop button.",
@@ -151,10 +187,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "RESETTING...",
-            "Fr": "RESETTING...",
-            "De": "RESETTING...",
-            "Es": "RESETTING..."
+            "text": {
+              "En": "RESETTING...",
+              "Fr": "RESETTING...",
+              "De": "RESETTING...",
+              "Es": "RESETTING..."
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -162,16 +202,24 @@
             "type": "_SmartActuator",
             "label": {
               "active": {
-                "En": "RESETTING...",
-                "Fr": "RESETTING...",
-                "De": "RESETTING...",
-                "Es": "RESETTING..."
+                "text": {
+                  "En": "RESETTING...",
+                  "Fr": "RESETTING...",
+                  "De": "RESETTING...",
+                  "Es": "RESETTING..."
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               },
               "inactive": {
-                "En": "RESET",
-                "Fr": "RESET",
-                "De": "RESET",
-                "Es": "RESET"
+                "text": {
+                  "En": "RESET",
+                  "Fr": "RESET",
+                  "De": "RESET",
+                  "Es": "RESET"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "notes": "Compact button to reset a device.",
@@ -196,10 +244,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "CALIBRATING",
-            "Fr": "CALIBRATING",
-            "De": "CALIBRATING",
-            "Es": "CALIBRATING"
+            "text": {
+              "En": "CALIBRATING",
+              "Fr": "CALIBRATING",
+              "De": "CALIBRATING",
+              "Es": "CALIBRATING"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -207,16 +259,24 @@
             "type": "_SmartActuator",
             "label": {
               "active": {
-                "En": "CALIBRATING",
-                "Fr": "CALIBRATING",
-                "De": "CALIBRATING",
-                "Es": "CALIBRATING"
+                "text": {
+                  "En": "CALIBRATING",
+                  "Fr": "CALIBRATING",
+                  "De": "CALIBRATING",
+                  "Es": "CALIBRATING"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               },
               "inactive": {
-                "En": "CALIBRATE",
-                "Fr": "CALIBRATE",
-                "De": "CALIBRATE",
-                "Es": "CALIBRATE"
+                "text": {
+                  "En": "CALIBRATE",
+                  "Fr": "CALIBRATE",
+                  "De": "CALIBRATE",
+                  "Es": "CALIBRATE"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "notes": "Button to trigger sensor calibration.",
@@ -241,10 +301,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Circular Actuators",
-            "Fr": "Circular Actuators",
-            "De": "Circular Actuators",
-            "Es": "Circular Actuators"
+            "text": {
+              "En": "Circular Actuators",
+              "Fr": "Circular Actuators",
+              "De": "Circular Actuators",
+              "Es": "Circular Actuators"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -258,16 +322,24 @@
                 "Es": "PANIC"
               },
               "active": {
-                "En": "HALT!",
-                "Fr": "HALT!",
-                "De": "HALT!",
-                "Es": "HALT!"
+                "text": {
+                  "En": "HALT!",
+                  "Fr": "HALT!",
+                  "De": "HALT!",
+                  "Es": "HALT!"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               },
               "inactive": {
-                "En": "PANIC",
-                "Fr": "PANIC",
-                "De": "PANIC",
-                "Es": "PANIC"
+                "text": {
+                  "En": "PANIC",
+                  "Fr": "PANIC",
+                  "De": "PANIC",
+                  "Es": "PANIC"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -303,16 +375,24 @@
                 "Es": "START"
               },
               "active": {
-                "En": "GO!",
-                "Fr": "GO!",
-                "De": "GO!",
-                "Es": "GO!"
+                "text": {
+                  "En": "GO!",
+                  "Fr": "GO!",
+                  "De": "GO!",
+                  "Es": "GO!"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               },
               "inactive": {
-                "En": "START",
-                "Fr": "START",
-                "De": "START",
-                "Es": "START"
+                "text": {
+                  "En": "START",
+                  "Fr": "START",
+                  "De": "START",
+                  "Es": "START"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -348,16 +428,24 @@
                 "Es": "TRIG"
               },
               "active": {
-                "En": "FIRING",
-                "Fr": "FIRING",
-                "De": "FIRING",
-                "Es": "FIRING"
+                "text": {
+                  "En": "FIRING",
+                  "Fr": "FIRING",
+                  "De": "FIRING",
+                  "Es": "FIRING"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               },
               "inactive": {
-                "En": "TRIG",
-                "Fr": "TRIG",
-                "De": "TRIG",
-                "Es": "TRIG"
+                "text": {
+                  "En": "TRIG",
+                  "Fr": "TRIG",
+                  "De": "TRIG",
+                  "Es": "TRIG"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -393,16 +481,24 @@
                 "Es": "Poke"
               },
               "active": {
-                "En": "!",
-                "Fr": "!",
-                "De": "!",
-                "Es": "!"
+                "text": {
+                  "En": "!",
+                  "Fr": "!",
+                  "De": "!",
+                  "Es": "!"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               },
               "inactive": {
-                "En": "?",
-                "Fr": "?",
-                "De": "?",
-                "Es": "?"
+                "text": {
+                  "En": "?",
+                  "Fr": "?",
+                  "De": "?",
+                  "Es": "?"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -434,10 +530,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Cream & Color Variants",
-            "Fr": "Cream & Color Variants",
-            "De": "Cream & Color Variants",
-            "Es": "Cream & Color Variants"
+            "text": {
+              "En": "Cream & Color Variants",
+              "Fr": "Cream & Color Variants",
+              "De": "Cream & Color Variants",
+              "Es": "Cream & Color Variants"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -451,16 +551,24 @@
                 "Es": "CREAM DIM"
               },
               "active": {
-                "En": "...",
-                "Fr": "...",
-                "De": "...",
-                "Es": "..."
+                "text": {
+                  "En": "...",
+                  "Fr": "...",
+                  "De": "...",
+                  "Es": "..."
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               },
               "inactive": {
-                "En": "DIM",
-                "Fr": "DIM",
-                "De": "DIM",
-                "Es": "DIM"
+                "text": {
+                  "En": "DIM",
+                  "Fr": "DIM",
+                  "De": "DIM",
+                  "Es": "DIM"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -490,16 +598,24 @@
                 "Es": "CREAM LIT"
               },
               "active": {
-                "En": "LIT",
-                "Fr": "LIT",
-                "De": "LIT",
-                "Es": "LIT"
+                "text": {
+                  "En": "LIT",
+                  "Fr": "LIT",
+                  "De": "LIT",
+                  "Es": "LIT"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               },
               "inactive": {
-                "En": "...",
-                "Fr": "...",
-                "De": "...",
-                "Es": "..."
+                "text": {
+                  "En": "...",
+                  "Fr": "...",
+                  "De": "...",
+                  "Es": "..."
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {

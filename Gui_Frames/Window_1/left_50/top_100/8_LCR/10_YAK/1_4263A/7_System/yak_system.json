@@ -19,10 +19,14 @@
             "type": "_GuiActuator",
             "label": {
               "active": {
-                "En": "*IDN?",
-                "Fr": "*IDN?",
-                "De": "*IDN?",
-                "Es": "*IDN?"
+                "text": {
+                  "En": "*IDN?",
+                  "Fr": "*IDN?",
+                  "De": "*IDN?",
+                  "Es": "*IDN?"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "message": "*IDN?",
@@ -36,10 +40,14 @@
             "type": "_GuiActuator",
             "label": {
               "active": {
-                "En": "Reset",
-                "Fr": "Réinitialiser",
-                "De": "Zurücksetzen",
-                "Es": "Reiniciar"
+                "text": {
+                  "En": "Reset",
+                  "Fr": "Réinitialiser",
+                  "De": "Zurücksetzen",
+                  "Es": "Reiniciar"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "message": "*RST",
@@ -53,10 +61,14 @@
             "type": "_GuiActuator",
             "label": {
               "active": {
-                "En": "Beeper",
-                "Fr": "Avertisseur",
-                "De": "Beeper",
-                "Es": "Beeper"
+                "text": {
+                  "En": "Beeper",
+                  "Fr": "Avertisseur",
+                  "De": "Beeper",
+                  "Es": "Beeper"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "message": ":SYSTem:BEEPer:STATe {value}",
@@ -74,10 +86,14 @@
             "type": "_GuiActuator",
             "label": {
               "active": {
-                "En": "Key Lock",
-                "Fr": "Verrouillage des touches",
-                "De": "Tastensperre",
-                "Es": "Bloqueo de teclas"
+                "text": {
+                  "En": "Key Lock",
+                  "Fr": "Verrouillage des touches",
+                  "De": "Tastensperre",
+                  "Es": "Bloqueo de teclas"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "message": ":SYSTem:KLOCk {value}",
@@ -95,10 +111,14 @@
             "type": "_GuiActuator",
             "label": {
               "active": {
-                "En": "Display",
-                "Fr": "Écran",
-                "De": "Anzeige",
-                "Es": "Pantalla"
+                "text": {
+                  "En": "Display",
+                  "Fr": "Écran",
+                  "De": "Anzeige",
+                  "Es": "Pantalla"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "message": ":DISPlay:STATe {value}",
@@ -116,10 +136,14 @@
             "type": "_GuiActuator",
             "label": {
               "active": {
-                "En": "Query Error",
-                "Fr": "Interroger l'erreur",
-                "De": "Fehler abfragen",
-                "Es": "Consultar error"
+                "text": {
+                  "En": "Query Error",
+                  "Fr": "Interroger l'erreur",
+                  "De": "Fehler abfragen",
+                  "Es": "Consultar error"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "message": ":SYSTem:ERRor?",

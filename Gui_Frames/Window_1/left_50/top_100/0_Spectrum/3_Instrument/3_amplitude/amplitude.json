@@ -17,9 +17,9 @@
           "En": "Settings for Attenuation",
           "Fr": "Paramètres for Attenuation",
           "De": "Einstellungen for Attenuation",
-          "Es": "Ajustes for Attenuation"
+          "Es": "Ajustes for Attenuation",
+          "show_label": false
         },
-        "show_label": false,
         "layout": {
           "weight": 0
         },
@@ -28,16 +28,24 @@
             "type": "_GuiButtonToggle",
             "label": {
               "active": {
-                "En": "Preamp",
-                "Fr": "Preamp",
-                "De": "Preamp",
-                "Es": "Preamp"
+                "text": {
+                  "En": "Preamp",
+                  "Fr": "Preamp",
+                  "De": "Preamp",
+                  "Es": "Preamp"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               },
               "inactive": {
-                "En": "Preamp",
-                "Fr": "Preamp",
-                "De": "Preamp",
-                "Es": "Preamp"
+                "text": {
+                  "En": "Preamp",
+                  "Fr": "Preamp",
+                  "De": "Preamp",
+                  "Es": "Preamp"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "AES70": "OcaBooleanActuator",
@@ -72,16 +80,24 @@
               "ON": {
                 "label": {
                   "active": {
-                    "En": "Preamp ON",
-                    "Fr": "Préampli ON",
-                    "De": "Vorverstärker EIN",
-                    "Es": "Preampli ENC"
+                    "text": {
+                      "En": "Preamp ON",
+                      "Fr": "Préampli ON",
+                      "De": "Vorverstärker EIN",
+                      "Es": "Preampli ENC"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Preamp ON",
-                    "Fr": "Préampli ON",
-                    "De": "Vorverstärker EIN",
-                    "Es": "Preampli ENC"
+                    "text": {
+                      "En": "Preamp ON",
+                      "Fr": "Préampli ON",
+                      "De": "Vorverstärker EIN",
+                      "Es": "Preampli ENC"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "selected": false
@@ -89,16 +105,24 @@
               "OFF": {
                 "label": {
                   "active": {
-                    "En": "Preamp OFF",
-                    "Fr": "Préampli OFF",
-                    "De": "Vorverstärker AUS",
-                    "Es": "Preampli DES"
+                    "text": {
+                      "En": "Preamp OFF",
+                      "Fr": "Préampli OFF",
+                      "De": "Vorverstärker AUS",
+                      "Es": "Preampli DES"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Preamp OFF",
-                    "Fr": "Préampli OFF",
-                    "De": "Vorverstärker AUS",
-                    "Es": "Preampli DES"
+                    "text": {
+                      "En": "Preamp OFF",
+                      "Fr": "Préampli OFF",
+                      "De": "Vorverstärker AUS",
+                      "Es": "Preampli DES"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "selected": true
@@ -147,16 +171,24 @@
               "ON": {
                 "label": {
                   "active": {
-                    "En": "High Sensitivity ON",
-                    "Fr": "High Sensitivity ON",
-                    "De": "High Sensitivity ON",
-                    "Es": "High Sensitivity ON"
+                    "text": {
+                      "En": "High Sensitivity ON",
+                      "Fr": "High Sensitivity ON",
+                      "De": "High Sensitivity ON",
+                      "Es": "High Sensitivity ON"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "High Sensitivity ON",
-                    "Fr": "High Sensitivity ON",
-                    "De": "High Sensitivity ON",
-                    "Es": "High Sensitivity ON"
+                    "text": {
+                      "En": "High Sensitivity ON",
+                      "Fr": "High Sensitivity ON",
+                      "De": "High Sensitivity ON",
+                      "Es": "High Sensitivity ON"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "selected": false
@@ -164,16 +196,24 @@
               "OFF": {
                 "label": {
                   "active": {
-                    "En": "High Sensitivity OFF",
-                    "Fr": "High Sensitivity OFF",
-                    "De": "High Sensitivity OFF",
-                    "Es": "High Sensitivity OFF"
+                    "text": {
+                      "En": "High Sensitivity OFF",
+                      "Fr": "High Sensitivity OFF",
+                      "De": "High Sensitivity OFF",
+                      "Es": "High Sensitivity OFF"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "High Sensitivity OFF",
-                    "Fr": "High Sensitivity OFF",
-                    "De": "High Sensitivity OFF",
-                    "Es": "High Sensitivity OFF"
+                    "text": {
+                      "En": "High Sensitivity OFF",
+                      "Fr": "High Sensitivity OFF",
+                      "De": "High Sensitivity OFF",
+                      "Es": "High Sensitivity OFF"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "selected": true
@@ -203,9 +243,9 @@
           "En": "Reference Level",
           "Fr": "Référence Niveau",
           "De": "Referenz Pegel",
-          "Es": "Referencia Nivel"
+          "Es": "Referencia Nivel",
+          "show_label": false
         },
-        "show_label": false,
         "description": {
           "En": "Settings for Reference Level",
           "Fr": "Paramètres du niveau de référence",
@@ -251,16 +291,24 @@
               "1": {
                 "label": {
                   "active": {
-                    "En": "-125 dB",
-                    "Fr": "-125 dB",
-                    "De": "-125 dB",
-                    "Es": "-125 dB"
+                    "text": {
+                      "En": "-125 dB",
+                      "Fr": "-125 dB",
+                      "De": "-125 dB",
+                      "Es": "-125 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "-125 dB",
-                    "Fr": "-125 dB",
-                    "De": "-125 dB",
-                    "Es": "-125 dB"
+                    "text": {
+                      "En": "-125 dB",
+                      "Fr": "-125 dB",
+                      "De": "-125 dB",
+                      "Es": "-125 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "value": "-125",
@@ -270,16 +318,24 @@
               "2": {
                 "label": {
                   "active": {
-                    "En": "-120 dB",
-                    "Fr": "-120 dB",
-                    "De": "-120 dB",
-                    "Es": "-120 dB"
+                    "text": {
+                      "En": "-120 dB",
+                      "Fr": "-120 dB",
+                      "De": "-120 dB",
+                      "Es": "-120 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "-120 dB",
-                    "Fr": "-120 dB",
-                    "De": "-120 dB",
-                    "Es": "-120 dB"
+                    "text": {
+                      "En": "-120 dB",
+                      "Fr": "-120 dB",
+                      "De": "-120 dB",
+                      "Es": "-120 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "value": "-120",
@@ -289,16 +345,24 @@
               "3": {
                 "label": {
                   "active": {
-                    "En": "-115 dB",
-                    "Fr": "-115 dB",
-                    "De": "-115 dB",
-                    "Es": "-115 dB"
+                    "text": {
+                      "En": "-115 dB",
+                      "Fr": "-115 dB",
+                      "De": "-115 dB",
+                      "Es": "-115 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "-115 dB",
-                    "Fr": "-115 dB",
-                    "De": "-115 dB",
-                    "Es": "-115 dB"
+                    "text": {
+                      "En": "-115 dB",
+                      "Fr": "-115 dB",
+                      "De": "-115 dB",
+                      "Es": "-115 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "value": "-115",
@@ -308,16 +372,24 @@
               "4": {
                 "label": {
                   "active": {
-                    "En": "-110 dB",
-                    "Fr": "-110 dB",
-                    "De": "-110 dB",
-                    "Es": "-110 dB"
+                    "text": {
+                      "En": "-110 dB",
+                      "Fr": "-110 dB",
+                      "De": "-110 dB",
+                      "Es": "-110 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "-110 dB",
-                    "Fr": "-110 dB",
-                    "De": "-110 dB",
-                    "Es": "-110 dB"
+                    "text": {
+                      "En": "-110 dB",
+                      "Fr": "-110 dB",
+                      "De": "-110 dB",
+                      "Es": "-110 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "value": "-110",
@@ -327,16 +399,24 @@
               "5": {
                 "label": {
                   "active": {
-                    "En": "-105 dB",
-                    "Fr": "-105 dB",
-                    "De": "-105 dB",
-                    "Es": "-105 dB"
+                    "text": {
+                      "En": "-105 dB",
+                      "Fr": "-105 dB",
+                      "De": "-105 dB",
+                      "Es": "-105 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "-105 dB",
-                    "Fr": "-105 dB",
-                    "De": "-105 dB",
-                    "Es": "-105 dB"
+                    "text": {
+                      "En": "-105 dB",
+                      "Fr": "-105 dB",
+                      "De": "-105 dB",
+                      "Es": "-105 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "value": "-105",
@@ -346,16 +426,24 @@
               "6": {
                 "label": {
                   "active": {
-                    "En": "-100 dB",
-                    "Fr": "-100 dB",
-                    "De": "-100 dB",
-                    "Es": "-100 dB"
+                    "text": {
+                      "En": "-100 dB",
+                      "Fr": "-100 dB",
+                      "De": "-100 dB",
+                      "Es": "-100 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "-100 dB",
-                    "Fr": "-100 dB",
-                    "De": "-100 dB",
-                    "Es": "-100 dB"
+                    "text": {
+                      "En": "-100 dB",
+                      "Fr": "-100 dB",
+                      "De": "-100 dB",
+                      "Es": "-100 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "value": "-100",
@@ -365,16 +453,24 @@
               "7": {
                 "label": {
                   "active": {
-                    "En": "-95 dB",
-                    "Fr": "-95 dB",
-                    "De": "-95 dB",
-                    "Es": "-95 dB"
+                    "text": {
+                      "En": "-95 dB",
+                      "Fr": "-95 dB",
+                      "De": "-95 dB",
+                      "Es": "-95 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "-95 dB",
-                    "Fr": "-95 dB",
-                    "De": "-95 dB",
-                    "Es": "-95 dB"
+                    "text": {
+                      "En": "-95 dB",
+                      "Fr": "-95 dB",
+                      "De": "-95 dB",
+                      "Es": "-95 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "value": "-95",
@@ -384,16 +480,24 @@
               "8": {
                 "label": {
                   "active": {
-                    "En": "-90 dB",
-                    "Fr": "-90 dB",
-                    "De": "-90 dB",
-                    "Es": "-90 dB"
+                    "text": {
+                      "En": "-90 dB",
+                      "Fr": "-90 dB",
+                      "De": "-90 dB",
+                      "Es": "-90 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "-90 dB",
-                    "Fr": "-90 dB",
-                    "De": "-90 dB",
-                    "Es": "-90 dB"
+                    "text": {
+                      "En": "-90 dB",
+                      "Fr": "-90 dB",
+                      "De": "-90 dB",
+                      "Es": "-90 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "value": "-90",
@@ -403,16 +507,24 @@
               "9": {
                 "label": {
                   "active": {
-                    "En": "-85 dB",
-                    "Fr": "-85 dB",
-                    "De": "-85 dB",
-                    "Es": "-85 dB"
+                    "text": {
+                      "En": "-85 dB",
+                      "Fr": "-85 dB",
+                      "De": "-85 dB",
+                      "Es": "-85 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "-85 dB",
-                    "Fr": "-85 dB",
-                    "De": "-85 dB",
-                    "Es": "-85 dB"
+                    "text": {
+                      "En": "-85 dB",
+                      "Fr": "-85 dB",
+                      "De": "-85 dB",
+                      "Es": "-85 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "value": "-85",
@@ -422,16 +534,24 @@
               "10": {
                 "label": {
                   "active": {
-                    "En": "-80 dB",
-                    "Fr": "-80 dB",
-                    "De": "-80 dB",
-                    "Es": "-80 dB"
+                    "text": {
+                      "En": "-80 dB",
+                      "Fr": "-80 dB",
+                      "De": "-80 dB",
+                      "Es": "-80 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "-80 dB",
-                    "Fr": "-80 dB",
-                    "De": "-80 dB",
-                    "Es": "-80 dB"
+                    "text": {
+                      "En": "-80 dB",
+                      "Fr": "-80 dB",
+                      "De": "-80 dB",
+                      "Es": "-80 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "value": "-80",
@@ -441,16 +561,24 @@
               "11": {
                 "label": {
                   "active": {
-                    "En": "-75 dB",
-                    "Fr": "-75 dB",
-                    "De": "-75 dB",
-                    "Es": "-75 dB"
+                    "text": {
+                      "En": "-75 dB",
+                      "Fr": "-75 dB",
+                      "De": "-75 dB",
+                      "Es": "-75 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "-75 dB",
-                    "Fr": "-75 dB",
-                    "De": "-75 dB",
-                    "Es": "-75 dB"
+                    "text": {
+                      "En": "-75 dB",
+                      "Fr": "-75 dB",
+                      "De": "-75 dB",
+                      "Es": "-75 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "value": "-75",
@@ -460,16 +588,24 @@
               "12": {
                 "label": {
                   "active": {
-                    "En": "-70 dB",
-                    "Fr": "-70 dB",
-                    "De": "-70 dB",
-                    "Es": "-70 dB"
+                    "text": {
+                      "En": "-70 dB",
+                      "Fr": "-70 dB",
+                      "De": "-70 dB",
+                      "Es": "-70 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "-70 dB",
-                    "Fr": "-70 dB",
-                    "De": "-70 dB",
-                    "Es": "-70 dB"
+                    "text": {
+                      "En": "-70 dB",
+                      "Fr": "-70 dB",
+                      "De": "-70 dB",
+                      "Es": "-70 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "value": "-70",
@@ -479,16 +615,24 @@
               "13": {
                 "label": {
                   "active": {
-                    "En": "-65 dB",
-                    "Fr": "-65 dB",
-                    "De": "-65 dB",
-                    "Es": "-65 dB"
+                    "text": {
+                      "En": "-65 dB",
+                      "Fr": "-65 dB",
+                      "De": "-65 dB",
+                      "Es": "-65 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "-65 dB",
-                    "Fr": "-65 dB",
-                    "De": "-65 dB",
-                    "Es": "-65 dB"
+                    "text": {
+                      "En": "-65 dB",
+                      "Fr": "-65 dB",
+                      "De": "-65 dB",
+                      "Es": "-65 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "value": "-65",
@@ -498,16 +642,24 @@
               "14": {
                 "label": {
                   "active": {
-                    "En": "-60 dB",
-                    "Fr": "-60 dB",
-                    "De": "-60 dB",
-                    "Es": "-60 dB"
+                    "text": {
+                      "En": "-60 dB",
+                      "Fr": "-60 dB",
+                      "De": "-60 dB",
+                      "Es": "-60 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "-60 dB",
-                    "Fr": "-60 dB",
-                    "De": "-60 dB",
-                    "Es": "-60 dB"
+                    "text": {
+                      "En": "-60 dB",
+                      "Fr": "-60 dB",
+                      "De": "-60 dB",
+                      "Es": "-60 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "value": "-60",
@@ -517,16 +669,24 @@
               "15": {
                 "label": {
                   "active": {
-                    "En": "-55 dB",
-                    "Fr": "-55 dB",
-                    "De": "-55 dB",
-                    "Es": "-55 dB"
+                    "text": {
+                      "En": "-55 dB",
+                      "Fr": "-55 dB",
+                      "De": "-55 dB",
+                      "Es": "-55 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "-55 dB",
-                    "Fr": "-55 dB",
-                    "De": "-55 dB",
-                    "Es": "-55 dB"
+                    "text": {
+                      "En": "-55 dB",
+                      "Fr": "-55 dB",
+                      "De": "-55 dB",
+                      "Es": "-55 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "value": "-55",
@@ -536,16 +696,24 @@
               "16": {
                 "label": {
                   "active": {
-                    "En": "-50 dB",
-                    "Fr": "-50 dB",
-                    "De": "-50 dB",
-                    "Es": "-50 dB"
+                    "text": {
+                      "En": "-50 dB",
+                      "Fr": "-50 dB",
+                      "De": "-50 dB",
+                      "Es": "-50 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "-50 dB",
-                    "Fr": "-50 dB",
-                    "De": "-50 dB",
-                    "Es": "-50 dB"
+                    "text": {
+                      "En": "-50 dB",
+                      "Fr": "-50 dB",
+                      "De": "-50 dB",
+                      "Es": "-50 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "value": "-50",
@@ -555,16 +723,24 @@
               "17": {
                 "label": {
                   "active": {
-                    "En": "-45 dB",
-                    "Fr": "-45 dB",
-                    "De": "-45 dB",
-                    "Es": "-45 dB"
+                    "text": {
+                      "En": "-45 dB",
+                      "Fr": "-45 dB",
+                      "De": "-45 dB",
+                      "Es": "-45 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "-45 dB",
-                    "Fr": "-45 dB",
-                    "De": "-45 dB",
-                    "Es": "-45 dB"
+                    "text": {
+                      "En": "-45 dB",
+                      "Fr": "-45 dB",
+                      "De": "-45 dB",
+                      "Es": "-45 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "value": "-45",
@@ -574,16 +750,24 @@
               "18": {
                 "label": {
                   "active": {
-                    "En": "-40 dB",
-                    "Fr": "-40 dB",
-                    "De": "-40 dB",
-                    "Es": "-40 dB"
+                    "text": {
+                      "En": "-40 dB",
+                      "Fr": "-40 dB",
+                      "De": "-40 dB",
+                      "Es": "-40 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "-40 dB",
-                    "Fr": "-40 dB",
-                    "De": "-40 dB",
-                    "Es": "-40 dB"
+                    "text": {
+                      "En": "-40 dB",
+                      "Fr": "-40 dB",
+                      "De": "-40 dB",
+                      "Es": "-40 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "value": "-40",
@@ -593,16 +777,24 @@
               "19": {
                 "label": {
                   "active": {
-                    "En": "-35 dB",
-                    "Fr": "-35 dB",
-                    "De": "-35 dB",
-                    "Es": "-35 dB"
+                    "text": {
+                      "En": "-35 dB",
+                      "Fr": "-35 dB",
+                      "De": "-35 dB",
+                      "Es": "-35 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "-35 dB",
-                    "Fr": "-35 dB",
-                    "De": "-35 dB",
-                    "Es": "-35 dB"
+                    "text": {
+                      "En": "-35 dB",
+                      "Fr": "-35 dB",
+                      "De": "-35 dB",
+                      "Es": "-35 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "value": "-35",
@@ -612,16 +804,24 @@
               "20": {
                 "label": {
                   "active": {
-                    "En": "-30 dB",
-                    "Fr": "-30 dB",
-                    "De": "-30 dB",
-                    "Es": "-30 dB"
+                    "text": {
+                      "En": "-30 dB",
+                      "Fr": "-30 dB",
+                      "De": "-30 dB",
+                      "Es": "-30 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "-30 dB",
-                    "Fr": "-30 dB",
-                    "De": "-30 dB",
-                    "Es": "-30 dB"
+                    "text": {
+                      "En": "-30 dB",
+                      "Fr": "-30 dB",
+                      "De": "-30 dB",
+                      "Es": "-30 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "value": "-30",
@@ -631,16 +831,24 @@
               "21": {
                 "label": {
                   "active": {
-                    "En": "-25 dB",
-                    "Fr": "-25 dB",
-                    "De": "-25 dB",
-                    "Es": "-25 dB"
+                    "text": {
+                      "En": "-25 dB",
+                      "Fr": "-25 dB",
+                      "De": "-25 dB",
+                      "Es": "-25 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "-25 dB",
-                    "Fr": "-25 dB",
-                    "De": "-25 dB",
-                    "Es": "-25 dB"
+                    "text": {
+                      "En": "-25 dB",
+                      "Fr": "-25 dB",
+                      "De": "-25 dB",
+                      "Es": "-25 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "value": "-25",
@@ -650,16 +858,24 @@
               "22": {
                 "label": {
                   "active": {
-                    "En": "-20 dB",
-                    "Fr": "-20 dB",
-                    "De": "-20 dB",
-                    "Es": "-20 dB"
+                    "text": {
+                      "En": "-20 dB",
+                      "Fr": "-20 dB",
+                      "De": "-20 dB",
+                      "Es": "-20 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "-20 dB",
-                    "Fr": "-20 dB",
-                    "De": "-20 dB",
-                    "Es": "-20 dB"
+                    "text": {
+                      "En": "-20 dB",
+                      "Fr": "-20 dB",
+                      "De": "-20 dB",
+                      "Es": "-20 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "value": "-20",
@@ -669,16 +885,24 @@
               "23": {
                 "label": {
                   "active": {
-                    "En": "-15 dB",
-                    "Fr": "-15 dB",
-                    "De": "-15 dB",
-                    "Es": "-15 dB"
+                    "text": {
+                      "En": "-15 dB",
+                      "Fr": "-15 dB",
+                      "De": "-15 dB",
+                      "Es": "-15 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "-15 dB",
-                    "Fr": "-15 dB",
-                    "De": "-15 dB",
-                    "Es": "-15 dB"
+                    "text": {
+                      "En": "-15 dB",
+                      "Fr": "-15 dB",
+                      "De": "-15 dB",
+                      "Es": "-15 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "value": "-15",
@@ -688,16 +912,24 @@
               "24": {
                 "label": {
                   "active": {
-                    "En": "-10 dB",
-                    "Fr": "-10 dB",
-                    "De": "-10 dB",
-                    "Es": "-10 dB"
+                    "text": {
+                      "En": "-10 dB",
+                      "Fr": "-10 dB",
+                      "De": "-10 dB",
+                      "Es": "-10 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "-10 dB",
-                    "Fr": "-10 dB",
-                    "De": "-10 dB",
-                    "Es": "-10 dB"
+                    "text": {
+                      "En": "-10 dB",
+                      "Fr": "-10 dB",
+                      "De": "-10 dB",
+                      "Es": "-10 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "value": "-10",
@@ -707,16 +939,24 @@
               "25": {
                 "label": {
                   "active": {
-                    "En": "-5 dB",
-                    "Fr": "-5 dB",
-                    "De": "-5 dB",
-                    "Es": "-5 dB"
+                    "text": {
+                      "En": "-5 dB",
+                      "Fr": "-5 dB",
+                      "De": "-5 dB",
+                      "Es": "-5 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "-5 dB",
-                    "Fr": "-5 dB",
-                    "De": "-5 dB",
-                    "Es": "-5 dB"
+                    "text": {
+                      "En": "-5 dB",
+                      "Fr": "-5 dB",
+                      "De": "-5 dB",
+                      "Es": "-5 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "value": "-5",
@@ -743,19 +983,20 @@
               "sticky": "ew",
               "font": 12,
               "padx": 10,
-              "pady": 10
+              "pady": 10,
+              "column_spacing": [
+                80,
+                10,
+                10
+              ]
             },
             "label": {
               "En": "Reference Level",
               "Fr": "Référence Niveau",
               "De": "Referenz Pegel",
-              "Es": "Referencia Nivel"
+              "Es": "Referencia Nivel",
+              "show_label": true
             },
-            "column_spacing": [
-              80,
-              10,
-              10
-            ],
             "handler": "set_ref_level",
             "yak_handler": {
               "enable": true,
@@ -765,7 +1006,6 @@
               "input_name": "dbm_value",
               "converter": "float"
             },
-            "show_label": true,
             "value_config": {
               "height": 30,
               "colour": "#ffffff",
@@ -775,17 +1015,29 @@
             },
             "fader_config": {
               "type": "_GuiFaderHorizontal",
-              "tick_interval": 10,
-              "show_ticks": true,
+              "cosmetics": {
+                "scale": {
+                  "interval": 10,
+                  "show": true
+                },
+                "styling": {
+                  "glow_intensity": 1.5
+                }
+              },
               "bar_color": "#444444",
-              "active_color": "#FF9900",
-              "glow_intensity": 1.5
+              "active_color": "#FF9900"
             },
             "dial_config": {
               "type": "_GuiKnob",
-              "knob_style": "dial",
-              "active_color": "#00ffff",
-              "bg_color": "#2b2b2b"
+              "cosmetics": {
+                "style_overrides": {
+                  "knob_style": "dial"
+                },
+                "colors": {
+                  "active": "#00ffff",
+                  "background": "#2b2b2b"
+                }
+              }
             },
             "cosmetics": {
               "colors": {
@@ -810,9 +1062,9 @@
           "En": "Settings for Attenuation",
           "Fr": "Paramètres for Attenuation",
           "De": "Einstellungen for Attenuation",
-          "Es": "Ajustes for Attenuation"
+          "Es": "Ajustes for Attenuation",
+          "show_label": false
         },
-        "show_label": false,
         "layout": {
           "weight": 0
         },
@@ -852,16 +1104,24 @@
               "1": {
                 "label": {
                   "active": {
-                    "En": "0 dB",
-                    "Fr": "0 dB",
-                    "De": "0 dB",
-                    "Es": "0 dB"
+                    "text": {
+                      "En": "0 dB",
+                      "Fr": "0 dB",
+                      "De": "0 dB",
+                      "Es": "0 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "0 dB",
-                    "Fr": "0 dB",
-                    "De": "0 dB",
-                    "Es": "0 dB"
+                    "text": {
+                      "En": "0 dB",
+                      "Fr": "0 dB",
+                      "De": "0 dB",
+                      "Es": "0 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "value": "0",
@@ -871,16 +1131,24 @@
               "2": {
                 "label": {
                   "active": {
-                    "En": "10 dB",
-                    "Fr": "10 dB",
-                    "De": "10 dB",
-                    "Es": "10 dB"
+                    "text": {
+                      "En": "10 dB",
+                      "Fr": "10 dB",
+                      "De": "10 dB",
+                      "Es": "10 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "10 dB",
-                    "Fr": "10 dB",
-                    "De": "10 dB",
-                    "Es": "10 dB"
+                    "text": {
+                      "En": "10 dB",
+                      "Fr": "10 dB",
+                      "De": "10 dB",
+                      "Es": "10 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "value": "10",
@@ -890,16 +1158,24 @@
               "3": {
                 "label": {
                   "active": {
-                    "En": "20 dB",
-                    "Fr": "20 dB",
-                    "De": "20 dB",
-                    "Es": "20 dB"
+                    "text": {
+                      "En": "20 dB",
+                      "Fr": "20 dB",
+                      "De": "20 dB",
+                      "Es": "20 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "20 dB",
-                    "Fr": "20 dB",
-                    "De": "20 dB",
-                    "Es": "20 dB"
+                    "text": {
+                      "En": "20 dB",
+                      "Fr": "20 dB",
+                      "De": "20 dB",
+                      "Es": "20 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "value": "20",
@@ -909,16 +1185,24 @@
               "4": {
                 "label": {
                   "active": {
-                    "En": "30 dB",
-                    "Fr": "30 dB",
-                    "De": "30 dB",
-                    "Es": "30 dB"
+                    "text": {
+                      "En": "30 dB",
+                      "Fr": "30 dB",
+                      "De": "30 dB",
+                      "Es": "30 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "30 dB",
-                    "Fr": "30 dB",
-                    "De": "30 dB",
-                    "Es": "30 dB"
+                    "text": {
+                      "En": "30 dB",
+                      "Fr": "30 dB",
+                      "De": "30 dB",
+                      "Es": "30 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "value": "30",
@@ -928,16 +1212,24 @@
               "5": {
                 "label": {
                   "active": {
-                    "En": "40 dB",
-                    "Fr": "40 dB",
-                    "De": "40 dB",
-                    "Es": "40 dB"
+                    "text": {
+                      "En": "40 dB",
+                      "Fr": "40 dB",
+                      "De": "40 dB",
+                      "Es": "40 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "40 dB",
-                    "Fr": "40 dB",
-                    "De": "40 dB",
-                    "Es": "40 dB"
+                    "text": {
+                      "En": "40 dB",
+                      "Fr": "40 dB",
+                      "De": "40 dB",
+                      "Es": "40 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "value": "40",
@@ -947,16 +1239,24 @@
               "6": {
                 "label": {
                   "active": {
-                    "En": "50 dB",
-                    "Fr": "50 dB",
-                    "De": "50 dB",
-                    "Es": "50 dB"
+                    "text": {
+                      "En": "50 dB",
+                      "Fr": "50 dB",
+                      "De": "50 dB",
+                      "Es": "50 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "50 dB",
-                    "Fr": "50 dB",
-                    "De": "50 dB",
-                    "Es": "50 dB"
+                    "text": {
+                      "En": "50 dB",
+                      "Fr": "50 dB",
+                      "De": "50 dB",
+                      "Es": "50 dB"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "value": "50",
@@ -983,20 +1283,25 @@
               "sticky": "ew",
               "font": 12,
               "padx": 10,
-              "pady": 10
+              "pady": 10,
+              "column_spacing": [
+                80,
+                10,
+                10
+              ]
             },
-            "column_spacing": [
-              80,
-              10,
-              10
-            ],
             "label": {
               "active": {
-                "En": "Power Attenuation",
-                "Fr": "Atténuation de puissance",
-                "De": "Leistungsdämpfung",
-                "Es": "Atenuación de potencia"
-              }
+                "text": {
+                  "En": "Power Attenuation",
+                  "Fr": "Atténuation de puissance",
+                  "De": "Leistungsdämpfung",
+                  "Es": "Atenuación de potencia"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
             },
             "handler": "set_power_attenuation",
             "yak_handler": {
@@ -1007,7 +1312,6 @@
               "input_name": "db_value",
               "converter": "float"
             },
-            "show_label": true,
             "value_config": {
               "height": 30,
               "colour": "#ffffff",
@@ -1017,17 +1321,29 @@
             },
             "fader_config": {
               "type": "_GuiFaderHorizontal",
-              "tick_interval": 10,
-              "show_ticks": true,
+              "cosmetics": {
+                "scale": {
+                  "interval": 10,
+                  "show": true
+                },
+                "styling": {
+                  "glow_intensity": 1.5
+                }
+              },
               "bar_color": "#444444",
-              "active_color": "#FF9900",
-              "glow_intensity": 1.5
+              "active_color": "#FF9900"
             },
             "dial_config": {
               "type": "_GuiKnob",
-              "knob_style": "dial",
-              "active_color": "#00ffff",
-              "bg_color": "#2b2b2b"
+              "cosmetics": {
+                "style_overrides": {
+                  "knob_style": "dial"
+                },
+                "colors": {
+                  "active": "#00ffff",
+                  "background": "#2b2b2b"
+                }
+              }
             },
             "cosmetics": {
               "colors": {

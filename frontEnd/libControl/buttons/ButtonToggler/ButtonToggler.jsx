@@ -110,7 +110,7 @@ const ButtonToggler = ({ value, onChange, config, topic, nodeJson }) => {
         display: 'grid',
         gridTemplateColumns: `repeat(${maxCols}, 1fr)`,
         gap: `${gridPadY}px ${gridPadX}px`,
-        backgroundColor: '#222',
+        backgroundColor: (window.OaTransparency ? window.OaTransparency.bg(config, '#222') : '#222'),
         padding: '10px',
         borderRadius: '5px',
         border: '1px solid #444'

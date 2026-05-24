@@ -34,7 +34,23 @@ class WidgetSchemaNormalizer:
 
         # 2. Identity and Label Mapping
         labels = config.get("labels", {})
-        if "label" in config: config["label_active"] = config["label"]
+        # show_label now lives under label{} (migrated from top-level / labels /
+        # style_flags). Hoist it to the flat config so every downstream reader
+        # (config.get("show_label"), readout/labels fallbacks) keeps working.
+        _label = config.get("label")
+        if isinstance(_label, dict) and "show_label" in _label:
+            config["show_label"] = _label["show_label"]
+            config["label_visible"] = _label["show_label"]
+        # Map label -> label_active, but never promote a flag-only {show_label}
+        # dict to the visible title.
+        if "label" in config and not (isinstance(_label, dict) and set(_label.keys()) <= {"show_label"}):
+            config["label_active"] = config["label"]
+        # Containers (OcaBlock/OcaArray/…) title themselves via `description`;
+        # description.show_label toggles whether that title is displayed.
+        _desc = config.get("description")
+        if isinstance(_desc, dict) and "show_label" in _desc:
+            config["show_label"] = _desc["show_label"]
+            config["label_visible"] = _desc["show_label"]
         if "main" in labels: config["label_active"] = labels["main"]
         if "v1" in labels: config["label_v1"] = labels["v1"]
         if "v2" in labels: config["label_v2"] = labels["v2"]

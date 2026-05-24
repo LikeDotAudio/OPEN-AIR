@@ -25,10 +25,14 @@
             "type": "_CustomHorizontalFader",
             "label": {
               "active": {
-                "En": "Ruby H",
-                "Fr": "Ruby H",
-                "De": "Ruby H",
-                "Es": "Ruby H"
+                "text": {
+                  "En": "Ruby H",
+                  "Fr": "Ruby H",
+                  "De": "Ruby H",
+                  "Es": "Ruby H"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "cap_color": "#E0115F",
@@ -39,10 +43,14 @@
             "type": "_CustomHorizontalFader",
             "label": {
               "active": {
-                "En": "Emerald H",
-                "Fr": "Emerald H",
-                "De": "Emerald H",
-                "Es": "Emerald H"
+                "text": {
+                  "En": "Emerald H",
+                  "Fr": "Emerald H",
+                  "De": "Emerald H",
+                  "Es": "Emerald H"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "cap_color": "#50C878",
@@ -53,10 +61,14 @@
             "type": "_CustomHorizontalFader",
             "label": {
               "active": {
-                "En": "Sapphire H",
-                "Fr": "Sapphire H",
-                "De": "Sapphire H",
-                "Es": "Sapphire H"
+                "text": {
+                  "En": "Sapphire H",
+                  "Fr": "Sapphire H",
+                  "De": "Sapphire H",
+                  "Es": "Sapphire H"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "cap_color": "#0F52BA",
@@ -67,10 +79,14 @@
             "type": "_CustomHorizontalFader",
             "label": {
               "active": {
-                "En": "Amber H",
-                "Fr": "Amber H",
-                "De": "Amber H",
-                "Es": "Amber H"
+                "text": {
+                  "En": "Amber H",
+                  "Fr": "Amber H",
+                  "De": "Amber H",
+                  "Es": "Amber H"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "cap_color": "#FFBF00",
@@ -81,10 +97,14 @@
             "type": "_CustomHorizontalFader",
             "label": {
               "active": {
-                "En": "Titan H",
-                "Fr": "Titan H",
-                "De": "Titan H",
-                "Es": "Titan H"
+                "text": {
+                  "En": "Titan H",
+                  "Fr": "Titan H",
+                  "De": "Titan H",
+                  "Es": "Titan H"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "layout": {
@@ -99,10 +119,14 @@
             "type": "_CustomHorizontalFader",
             "label": {
               "active": {
-                "En": "Nano H",
-                "Fr": "Nano H",
-                "De": "Nano H",
-                "Es": "Nano H"
+                "text": {
+                  "En": "Nano H",
+                  "Fr": "Nano H",
+                  "De": "Nano H",
+                  "Es": "Nano H"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "layout": {
@@ -117,10 +141,14 @@
             "type": "_CustomHorizontalFader",
             "label": {
               "active": {
-                "En": "Neon Lime",
-                "Fr": "Neon Lime",
-                "De": "Neon Lime",
-                "Es": "Neon Lime"
+                "text": {
+                  "En": "Neon Lime",
+                  "Fr": "Neon Lime",
+                  "De": "Neon Lime",
+                  "Es": "Neon Lime"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "cap_color": "#32CD32",
@@ -130,10 +158,14 @@
             "type": "_CustomHorizontalFader",
             "label": {
               "active": {
-                "En": "Neon Pink",
-                "Fr": "Neon Pink",
-                "De": "Neon Pink",
-                "Es": "Neon Pink"
+                "text": {
+                  "En": "Neon Pink",
+                  "Fr": "Neon Pink",
+                  "De": "Neon Pink",
+                  "Es": "Neon Pink"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "cap_color": "#FF69B4",
@@ -143,10 +175,14 @@
             "type": "_CustomHorizontalFader",
             "label": {
               "active": {
-                "En": "Wide Cap",
-                "Fr": "Wide Cap",
-                "De": "Wide Cap",
-                "Es": "Wide Cap"
+                "text": {
+                  "En": "Wide Cap",
+                  "Fr": "Wide Cap",
+                  "De": "Wide Cap",
+                  "Es": "Wide Cap"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "cap_width": 80,
@@ -157,10 +193,14 @@
             "type": "_CustomHorizontalFader",
             "label": {
               "active": {
-                "En": "Tall Cap",
-                "Fr": "Tall Cap",
-                "De": "Tall Cap",
-                "Es": "Tall Cap"
+                "text": {
+                  "En": "Tall Cap",
+                  "Fr": "Tall Cap",
+                  "De": "Tall Cap",
+                  "Es": "Tall Cap"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "cap_width": 20,
@@ -171,10 +211,14 @@
             "type": "_CustomHorizontalFader",
             "label": {
               "active": {
-                "En": "Blue Ghost",
-                "Fr": "Blue Ghost",
-                "De": "Blue Ghost",
-                "Es": "Blue Ghost"
+                "text": {
+                  "En": "Blue Ghost",
+                  "Fr": "Blue Ghost",
+                  "De": "Blue Ghost",
+                  "Es": "Blue Ghost"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "cap_color": "#111111",
@@ -184,10 +228,14 @@
             "type": "_CustomHorizontalFader",
             "label": {
               "active": {
-                "En": "Red Ghost",
-                "Fr": "Red Ghost",
-                "De": "Red Ghost",
-                "Es": "Red Ghost"
+                "text": {
+                  "En": "Red Ghost",
+                  "Fr": "Red Ghost",
+                  "De": "Red Ghost",
+                  "Es": "Red Ghost"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "cap_color": "#111111",
@@ -197,10 +245,14 @@
             "type": "_CustomHorizontalFader",
             "label": {
               "active": {
-                "En": "Slim H",
-                "Fr": "Slim H",
-                "De": "Slim H",
-                "Es": "Slim H"
+                "text": {
+                  "En": "Slim H",
+                  "Fr": "Slim H",
+                  "De": "Slim H",
+                  "Es": "Slim H"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "layout": {
@@ -214,10 +266,14 @@
             "type": "_CustomHorizontalFader",
             "label": {
               "active": {
-                "En": "Boxy H",
-                "Fr": "Boxy H",
-                "De": "Boxy H",
-                "Es": "Boxy H"
+                "text": {
+                  "En": "Boxy H",
+                  "Fr": "Boxy H",
+                  "De": "Boxy H",
+                  "Es": "Boxy H"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "layout": {
@@ -232,10 +288,14 @@
             "type": "_CustomHorizontalFader",
             "label": {
               "active": {
-                "En": "Vapor H",
-                "Fr": "Vapor H",
-                "De": "Vapor H",
-                "Es": "Vapor H"
+                "text": {
+                  "En": "Vapor H",
+                  "Fr": "Vapor H",
+                  "De": "Vapor H",
+                  "Es": "Vapor H"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "cap_color": "#FF00FF",
@@ -245,10 +305,14 @@
             "type": "_CustomHorizontalFader",
             "label": {
               "active": {
-                "En": "Forest H",
-                "Fr": "Forest H",
-                "De": "Forest H",
-                "Es": "Forest H"
+                "text": {
+                  "En": "Forest H",
+                  "Fr": "Forest H",
+                  "De": "Forest H",
+                  "Es": "Forest H"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "cap_color": "#006400",
@@ -258,10 +322,14 @@
             "type": "_CustomHorizontalFader",
             "label": {
               "active": {
-                "En": "Fire H",
-                "Fr": "Fire H",
-                "De": "Fire H",
-                "Es": "Fire H"
+                "text": {
+                  "En": "Fire H",
+                  "Fr": "Fire H",
+                  "De": "Fire H",
+                  "Es": "Fire H"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "cap_color": "#B22222",
@@ -271,10 +339,14 @@
             "type": "_CustomHorizontalFader",
             "label": {
               "active": {
-                "En": "Ice H",
-                "Fr": "Ice H",
-                "De": "Ice H",
-                "Es": "Ice H"
+                "text": {
+                  "En": "Ice H",
+                  "Fr": "Ice H",
+                  "De": "Ice H",
+                  "Es": "Ice H"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "cap_color": "#E0FFFF",
@@ -284,10 +356,14 @@
             "type": "_CustomHorizontalFader",
             "label": {
               "active": {
-                "En": "Gold H",
-                "Fr": "Gold H",
-                "De": "Gold H",
-                "Es": "Gold H"
+                "text": {
+                  "En": "Gold H",
+                  "Fr": "Gold H",
+                  "De": "Gold H",
+                  "Es": "Gold H"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "cap_color": "#FFD700",
@@ -297,10 +373,14 @@
             "type": "_CustomHorizontalFader",
             "label": {
               "active": {
-                "En": "Shadow H",
-                "Fr": "Shadow H",
-                "De": "Shadow H",
-                "Es": "Shadow H"
+                "text": {
+                  "En": "Shadow H",
+                  "Fr": "Shadow H",
+                  "De": "Shadow H",
+                  "Es": "Shadow H"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "cap_color": "#333333",

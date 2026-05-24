@@ -239,10 +239,14 @@
             "type": "_GuiActuator",
             "label": {
               "inactive": {
-                "En": "RESET System",
-                "Fr": "RESET Système",
-                "De": "RESET System",
-                "Es": "RESET Sistema"
+                "text": {
+                  "En": "RESET System",
+                  "Fr": "RESET Système",
+                  "De": "RESET System",
+                  "Es": "RESET Sistema"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "AES70": "OcaBooleanActuator",
@@ -278,10 +282,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "Card Reset",
-                    "Fr": "Card Réinitialiser",
-                    "De": "Card Zurücksetzen",
-                    "Es": "Card Reiniciar"
+                    "text": {
+                      "En": "Card Reset",
+                      "Fr": "Card Réinitialiser",
+                      "De": "Card Zurücksetzen",
+                      "Es": "Card Reiniciar"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -341,10 +349,14 @@
             "type": "_GuiActuator",
             "label": {
               "inactive": {
-                "En": "Clear (CLR)",
-                "Fr": "Effacer (CLR)",
-                "De": "Löschen (CLR)",
-                "Es": "Borrar (CLR)"
+                "text": {
+                  "En": "Clear (CLR)",
+                  "Fr": "Effacer (CLR)",
+                  "De": "Löschen (CLR)",
+                  "Es": "Borrar (CLR)"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "AES70": "OcaBooleanActuator",

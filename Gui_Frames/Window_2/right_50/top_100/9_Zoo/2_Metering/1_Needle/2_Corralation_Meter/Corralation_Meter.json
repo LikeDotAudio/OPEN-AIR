@@ -44,7 +44,8 @@
               "En": "Standard",
               "Fr": "Standard",
               "De": "Standard",
-              "Es": "Estándar"
+              "Es": "Estándar",
+              "show_label": true
             },
             "notes": "Standard: Fast rise, fast fall.",
             "geometry": {
@@ -104,8 +105,7 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "show_label": true
+            }
           },
           "corr_slow": {
             "type": "_NeedleVUMeter",
@@ -113,7 +113,8 @@
               "En": "Slow/Damped",
               "Fr": "Slow/Damped",
               "De": "Slow/Damped",
-              "Es": "Slow/Damped"
+              "Es": "Slow/Damped",
+              "show_label": true
             },
             "notes": "Slow: Highly damped movement (500ms).",
             "geometry": {
@@ -171,8 +172,7 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "show_label": true
+            }
           },
           "corr_peak_hold": {
             "type": "_NeedleVUMeter",
@@ -180,7 +180,8 @@
               "En": "Peak Hold",
               "Fr": "Peak Hold",
               "De": "Peak Hold",
-              "Es": "Peak Hold"
+              "Es": "Peak Hold",
+              "show_label": true
             },
             "notes": "Peak Hold: Instant rise, 2s hold, very slow fall.",
             "geometry": {
@@ -240,8 +241,7 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "show_label": true
+            }
           },
           "corr_ballistic": {
             "type": "_NeedleVUMeter",
@@ -249,7 +249,8 @@
               "En": "Fast Ballistic",
               "Fr": "Rapide Ballistic",
               "De": "Schnell Ballistic",
-              "Es": "Rápido Ballistic"
+              "Es": "Rápido Ballistic",
+              "show_label": true
             },
             "notes": "Ballistic: Ultra-fast tracking (20ms).",
             "geometry": {
@@ -307,8 +308,7 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "show_label": true
+            }
           },
           "corr_lazy": {
             "type": "_NeedleVUMeter",
@@ -316,7 +316,8 @@
               "En": "Lazy/Smooth",
               "Fr": "Lazy/Smooth",
               "De": "Lazy/Smooth",
-              "Es": "Lazy/Smooth"
+              "Es": "Lazy/Smooth",
+              "show_label": true
             },
             "notes": "Lazy: Smooth tracking with slight hold.",
             "geometry": {
@@ -376,8 +377,7 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "show_label": true
+            }
           },
           "APK": {
             "type": "_NeedleVUMeter",
@@ -385,7 +385,8 @@
               "En": "Lazy/Smooth",
               "Fr": "Lazy/Smooth",
               "De": "Lazy/Smooth",
-              "Es": "Lazy/Smooth"
+              "Es": "Lazy/Smooth",
+              "show_label": true
             },
             "notes": "Lazy: Smooth tracking with slight hold.",
             "geometry": {
@@ -438,8 +439,7 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "show_label": true
+            }
           }
         }
       }

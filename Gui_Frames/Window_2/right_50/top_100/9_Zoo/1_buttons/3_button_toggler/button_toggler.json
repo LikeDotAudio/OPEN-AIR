@@ -15,10 +15,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Select Channel",
-            "Fr": "Select Canal",
-            "De": "Select Kanal",
-            "Es": "Select Canal"
+            "text": {
+              "En": "Select Channel",
+              "Fr": "Select Canal",
+              "De": "Select Kanal",
+              "Es": "Select Canal"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -41,10 +45,14 @@
                 "CH1": {
                   "label": {
                     "active": {
-                      "En": "CH1",
-                      "Fr": "CH1",
-                      "De": "CH1",
-                      "Es": "CH1"
+                      "text": {
+                        "En": "CH1",
+                        "Fr": "CH1",
+                        "De": "CH1",
+                        "Es": "CH1"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -52,30 +60,42 @@
                 "CH2": {
                   "label": {
                     "active": {
-                      "En": "CH2",
-                      "Fr": "CH2",
-                      "De": "CH2",
-                      "Es": "CH2"
+                      "text": {
+                        "En": "CH2",
+                        "Fr": "CH2",
+                        "De": "CH2",
+                        "Es": "CH2"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "CH3": {
                   "label": {
                     "active": {
-                      "En": "CH3",
-                      "Fr": "CH3",
-                      "De": "CH3",
-                      "Es": "CH3"
+                      "text": {
+                        "En": "CH3",
+                        "Fr": "CH3",
+                        "De": "CH3",
+                        "Es": "CH3"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "CH4": {
                   "label": {
                     "active": {
-                      "En": "CH4",
-                      "Fr": "CH4",
-                      "De": "CH4",
-                      "Es": "CH4"
+                      "text": {
+                        "En": "CH4",
+                        "Fr": "CH4",
+                        "De": "CH4",
+                        "Es": "CH4"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -91,10 +111,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Glow Intensity Demo",
-            "Fr": "Glow Intensity Démo",
-            "De": "Glow Intensity Demo",
-            "Es": "Glow Intensity Demo"
+            "text": {
+              "En": "Glow Intensity Demo",
+              "Fr": "Glow Intensity Démo",
+              "De": "Glow Intensity Demo",
+              "Es": "Glow Intensity Demo"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -117,10 +141,14 @@
                 "A": {
                   "label": {
                     "active": {
-                      "En": "0.1 GLOW",
-                      "Fr": "0.1 GLOW",
-                      "De": "0.1 GLOW",
-                      "Es": "0.1 GLOW"
+                      "text": {
+                        "En": "0.1 GLOW",
+                        "Fr": "0.1 GLOW",
+                        "De": "0.1 GLOW",
+                        "Es": "0.1 GLOW"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -128,10 +156,14 @@
                 "B": {
                   "label": {
                     "active": {
-                      "En": "OFF",
-                      "Fr": "OFF",
-                      "De": "OFF",
-                      "Es": "OFF"
+                      "text": {
+                        "En": "OFF",
+                        "Fr": "OFF",
+                        "De": "OFF",
+                        "Es": "OFF"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -157,10 +189,14 @@
                 "A": {
                   "label": {
                     "active": {
-                      "En": "1.0 GLOW",
-                      "Fr": "1.0 GLOW",
-                      "De": "1.0 GLOW",
-                      "Es": "1.0 GLOW"
+                      "text": {
+                        "En": "1.0 GLOW",
+                        "Fr": "1.0 GLOW",
+                        "De": "1.0 GLOW",
+                        "Es": "1.0 GLOW"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -168,10 +204,14 @@
                 "B": {
                   "label": {
                     "active": {
-                      "En": "OFF",
-                      "Fr": "OFF",
-                      "De": "OFF",
-                      "Es": "OFF"
+                      "text": {
+                        "En": "OFF",
+                        "Fr": "OFF",
+                        "De": "OFF",
+                        "Es": "OFF"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -197,10 +237,14 @@
                 "A": {
                   "label": {
                     "active": {
-                      "En": "2.5 GLOW",
-                      "Fr": "2.5 GLOW",
-                      "De": "2.5 GLOW",
-                      "Es": "2.5 GLOW"
+                      "text": {
+                        "En": "2.5 GLOW",
+                        "Fr": "2.5 GLOW",
+                        "De": "2.5 GLOW",
+                        "Es": "2.5 GLOW"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -208,10 +252,14 @@
                 "B": {
                   "label": {
                     "active": {
-                      "En": "OFF",
-                      "Fr": "OFF",
-                      "De": "OFF",
-                      "Es": "OFF"
+                      "text": {
+                        "En": "OFF",
+                        "Fr": "OFF",
+                        "De": "OFF",
+                        "Es": "OFF"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -237,10 +285,14 @@
                 "A": {
                   "label": {
                     "active": {
-                      "En": "5.0 GLOW",
-                      "Fr": "5.0 GLOW",
-                      "De": "5.0 GLOW",
-                      "Es": "5.0 GLOW"
+                      "text": {
+                        "En": "5.0 GLOW",
+                        "Fr": "5.0 GLOW",
+                        "De": "5.0 GLOW",
+                        "Es": "5.0 GLOW"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -248,10 +300,14 @@
                 "B": {
                   "label": {
                     "active": {
-                      "En": "OFF",
-                      "Fr": "OFF",
-                      "De": "OFF",
-                      "Es": "OFF"
+                      "text": {
+                        "En": "OFF",
+                        "Fr": "OFF",
+                        "De": "OFF",
+                        "Es": "OFF"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -264,10 +320,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Vivid Color Spectrum",
-            "Fr": "Vivid Color Spectrum",
-            "De": "Vivid Color Spectrum",
-            "Es": "Vivid Color Spectrum"
+            "text": {
+              "En": "Vivid Color Spectrum",
+              "Fr": "Vivid Color Spectrum",
+              "De": "Vivid Color Spectrum",
+              "Es": "Vivid Color Spectrum"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -290,10 +350,14 @@
                 "R": {
                   "label": {
                     "active": {
-                      "En": "CRIMSON",
-                      "Fr": "CRIMSON",
-                      "De": "CRIMSON",
-                      "Es": "CRIMSON"
+                      "text": {
+                        "En": "CRIMSON",
+                        "Fr": "CRIMSON",
+                        "De": "CRIMSON",
+                        "Es": "CRIMSON"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -301,10 +365,14 @@
                 "O": {
                   "label": {
                     "active": {
-                      "En": "OFF",
-                      "Fr": "OFF",
-                      "De": "OFF",
-                      "Es": "OFF"
+                      "text": {
+                        "En": "OFF",
+                        "Fr": "OFF",
+                        "De": "OFF",
+                        "Es": "OFF"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -330,10 +398,14 @@
                 "A": {
                   "label": {
                     "active": {
-                      "En": "AMBER",
-                      "Fr": "AMBER",
-                      "De": "AMBER",
-                      "Es": "AMBER"
+                      "text": {
+                        "En": "AMBER",
+                        "Fr": "AMBER",
+                        "De": "AMBER",
+                        "Es": "AMBER"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -341,10 +413,14 @@
                 "O": {
                   "label": {
                     "active": {
-                      "En": "OFF",
-                      "Fr": "OFF",
-                      "De": "OFF",
-                      "Es": "OFF"
+                      "text": {
+                        "En": "OFF",
+                        "Fr": "OFF",
+                        "De": "OFF",
+                        "Es": "OFF"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -370,10 +446,14 @@
                 "G": {
                   "label": {
                     "active": {
-                      "En": "GOLD",
-                      "Fr": "GOLD",
-                      "De": "GOLD",
-                      "Es": "GOLD"
+                      "text": {
+                        "En": "GOLD",
+                        "Fr": "GOLD",
+                        "De": "GOLD",
+                        "Es": "GOLD"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -381,10 +461,14 @@
                 "O": {
                   "label": {
                     "active": {
-                      "En": "OFF",
-                      "Fr": "OFF",
-                      "De": "OFF",
-                      "Es": "OFF"
+                      "text": {
+                        "En": "OFF",
+                        "Fr": "OFF",
+                        "De": "OFF",
+                        "Es": "OFF"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -410,10 +494,14 @@
                 "L": {
                   "label": {
                     "active": {
-                      "En": "LIME",
-                      "Fr": "LIME",
-                      "De": "LIME",
-                      "Es": "LIME"
+                      "text": {
+                        "En": "LIME",
+                        "Fr": "LIME",
+                        "De": "LIME",
+                        "Es": "LIME"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -421,10 +509,14 @@
                 "O": {
                   "label": {
                     "active": {
-                      "En": "OFF",
-                      "Fr": "OFF",
-                      "De": "OFF",
-                      "Es": "OFF"
+                      "text": {
+                        "En": "OFF",
+                        "Fr": "OFF",
+                        "De": "OFF",
+                        "Es": "OFF"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -450,10 +542,14 @@
                 "C": {
                   "label": {
                     "active": {
-                      "En": "CYAN",
-                      "Fr": "CYAN",
-                      "De": "CYAN",
-                      "Es": "CYAN"
+                      "text": {
+                        "En": "CYAN",
+                        "Fr": "CYAN",
+                        "De": "CYAN",
+                        "Es": "CYAN"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -461,10 +557,14 @@
                 "O": {
                   "label": {
                     "active": {
-                      "En": "OFF",
-                      "Fr": "OFF",
-                      "De": "OFF",
-                      "Es": "OFF"
+                      "text": {
+                        "En": "OFF",
+                        "Fr": "OFF",
+                        "De": "OFF",
+                        "Es": "OFF"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -490,10 +590,14 @@
                 "B": {
                   "label": {
                     "active": {
-                      "En": "COBALT",
-                      "Fr": "COBALT",
-                      "De": "COBALT",
-                      "Es": "COBALT"
+                      "text": {
+                        "En": "COBALT",
+                        "Fr": "COBALT",
+                        "De": "COBALT",
+                        "Es": "COBALT"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -501,10 +605,14 @@
                 "O": {
                   "label": {
                     "active": {
-                      "En": "OFF",
-                      "Fr": "OFF",
-                      "De": "OFF",
-                      "Es": "OFF"
+                      "text": {
+                        "En": "OFF",
+                        "Fr": "OFF",
+                        "De": "OFF",
+                        "Es": "OFF"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -530,10 +638,14 @@
                 "V": {
                   "label": {
                     "active": {
-                      "En": "VIOLET",
-                      "Fr": "VIOLET",
-                      "De": "VIOLET",
-                      "Es": "VIOLET"
+                      "text": {
+                        "En": "VIOLET",
+                        "Fr": "VIOLET",
+                        "De": "VIOLET",
+                        "Es": "VIOLET"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -541,10 +653,14 @@
                 "O": {
                   "label": {
                     "active": {
-                      "En": "OFF",
-                      "Fr": "OFF",
-                      "De": "OFF",
-                      "Es": "OFF"
+                      "text": {
+                        "En": "OFF",
+                        "Fr": "OFF",
+                        "De": "OFF",
+                        "Es": "OFF"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -570,10 +686,14 @@
                 "P": {
                   "label": {
                     "active": {
-                      "En": "MAGENTA",
-                      "Fr": "MAGENTA",
-                      "De": "MAGENTA",
-                      "Es": "MAGENTA"
+                      "text": {
+                        "En": "MAGENTA",
+                        "Fr": "MAGENTA",
+                        "De": "MAGENTA",
+                        "Es": "MAGENTA"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -581,10 +701,14 @@
                 "O": {
                   "label": {
                     "active": {
-                      "En": "OFF",
-                      "Fr": "OFF",
-                      "De": "OFF",
-                      "Es": "OFF"
+                      "text": {
+                        "En": "OFF",
+                        "Fr": "OFF",
+                        "De": "OFF",
+                        "Es": "OFF"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -597,10 +721,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Industrial Color Pairs",
-            "Fr": "Industriel Color Pairs",
-            "De": "Industriell Color Pairs",
-            "Es": "Industrial Color Pairs"
+            "text": {
+              "En": "Industrial Color Pairs",
+              "Fr": "Industriel Color Pairs",
+              "De": "Industriell Color Pairs",
+              "Es": "Industrial Color Pairs"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -614,10 +742,14 @@
                 "OFF": {
                   "label": {
                     "active": {
-                      "En": "TAG",
-                      "Fr": "TAG",
-                      "De": "TAG",
-                      "Es": "TAG"
+                      "text": {
+                        "En": "TAG",
+                        "Fr": "TAG",
+                        "De": "TAG",
+                        "Es": "TAG"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true,
@@ -636,10 +768,14 @@
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "TAG",
-                      "Fr": "TAG",
-                      "De": "TAG",
-                      "Es": "TAG"
+                      "text": {
+                        "En": "TAG",
+                        "Fr": "TAG",
+                        "De": "TAG",
+                        "Es": "TAG"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "style": {
@@ -667,10 +803,14 @@
                 "A": {
                   "label": {
                     "active": {
-                      "En": "SEL",
-                      "Fr": "SEL",
-                      "De": "SEL",
-                      "Es": "SEL"
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true,
@@ -687,10 +827,14 @@
                 "B": {
                   "label": {
                     "active": {
-                      "En": "SEL",
-                      "Fr": "SEL",
-                      "De": "SEL",
-                      "Es": "SEL"
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "style": {
@@ -716,10 +860,14 @@
                 "A": {
                   "label": {
                     "active": {
-                      "En": "SEL",
-                      "Fr": "SEL",
-                      "De": "SEL",
-                      "Es": "SEL"
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true,
@@ -736,10 +884,14 @@
                 "B": {
                   "label": {
                     "active": {
-                      "En": "SEL",
-                      "Fr": "SEL",
-                      "De": "SEL",
-                      "Es": "SEL"
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "style": {
@@ -765,10 +917,14 @@
                 "A": {
                   "label": {
                     "active": {
-                      "En": "SEL",
-                      "Fr": "SEL",
-                      "De": "SEL",
-                      "Es": "SEL"
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true,
@@ -785,10 +941,14 @@
                 "B": {
                   "label": {
                     "active": {
-                      "En": "SEL",
-                      "Fr": "SEL",
-                      "De": "SEL",
-                      "Es": "SEL"
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "style": {
@@ -814,10 +974,14 @@
                 "A": {
                   "label": {
                     "active": {
-                      "En": "SEL",
-                      "Fr": "SEL",
-                      "De": "SEL",
-                      "Es": "SEL"
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true,
@@ -834,10 +998,14 @@
                 "B": {
                   "label": {
                     "active": {
-                      "En": "SEL",
-                      "Fr": "SEL",
-                      "De": "SEL",
-                      "Es": "SEL"
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "style": {
@@ -863,10 +1031,14 @@
                 "A": {
                   "label": {
                     "active": {
-                      "En": "SEL",
-                      "Fr": "SEL",
-                      "De": "SEL",
-                      "Es": "SEL"
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true,
@@ -883,10 +1055,14 @@
                 "B": {
                   "label": {
                     "active": {
-                      "En": "SEL",
-                      "Fr": "SEL",
-                      "De": "SEL",
-                      "Es": "SEL"
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "style": {
@@ -912,10 +1088,14 @@
                 "A": {
                   "label": {
                     "active": {
-                      "En": "SEL",
-                      "Fr": "SEL",
-                      "De": "SEL",
-                      "Es": "SEL"
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true,
@@ -932,10 +1112,14 @@
                 "B": {
                   "label": {
                     "active": {
-                      "En": "SEL",
-                      "Fr": "SEL",
-                      "De": "SEL",
-                      "Es": "SEL"
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "style": {
@@ -961,10 +1145,14 @@
                 "A": {
                   "label": {
                     "active": {
-                      "En": "SEL",
-                      "Fr": "SEL",
-                      "De": "SEL",
-                      "Es": "SEL"
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true,
@@ -981,10 +1169,14 @@
                 "B": {
                   "label": {
                     "active": {
-                      "En": "SEL",
-                      "Fr": "SEL",
-                      "De": "SEL",
-                      "Es": "SEL"
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "style": {
@@ -1010,10 +1202,14 @@
                 "A": {
                   "label": {
                     "active": {
-                      "En": "SEL",
-                      "Fr": "SEL",
-                      "De": "SEL",
-                      "Es": "SEL"
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true,
@@ -1030,10 +1226,14 @@
                 "B": {
                   "label": {
                     "active": {
-                      "En": "SEL",
-                      "Fr": "SEL",
-                      "De": "SEL",
-                      "Es": "SEL"
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "style": {
@@ -1059,10 +1259,14 @@
                 "A": {
                   "label": {
                     "active": {
-                      "En": "SEL",
-                      "Fr": "SEL",
-                      "De": "SEL",
-                      "Es": "SEL"
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true,
@@ -1079,10 +1283,14 @@
                 "B": {
                   "label": {
                     "active": {
-                      "En": "SEL",
-                      "Fr": "SEL",
-                      "De": "SEL",
-                      "Es": "SEL"
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "style": {
@@ -1108,10 +1316,14 @@
                 "A": {
                   "label": {
                     "active": {
-                      "En": "SEL",
-                      "Fr": "SEL",
-                      "De": "SEL",
-                      "Es": "SEL"
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true,
@@ -1128,10 +1340,14 @@
                 "B": {
                   "label": {
                     "active": {
-                      "En": "SEL",
-                      "Fr": "SEL",
-                      "De": "SEL",
-                      "Es": "SEL"
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "style": {
@@ -1157,10 +1373,14 @@
                 "A": {
                   "label": {
                     "active": {
-                      "En": "SEL",
-                      "Fr": "SEL",
-                      "De": "SEL",
-                      "Es": "SEL"
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true,
@@ -1177,10 +1397,14 @@
                 "B": {
                   "label": {
                     "active": {
-                      "En": "SEL",
-                      "Fr": "SEL",
-                      "De": "SEL",
-                      "Es": "SEL"
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "style": {
@@ -1206,10 +1430,14 @@
                 "A": {
                   "label": {
                     "active": {
-                      "En": "SEL",
-                      "Fr": "SEL",
-                      "De": "SEL",
-                      "Es": "SEL"
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true,
@@ -1226,10 +1454,14 @@
                 "B": {
                   "label": {
                     "active": {
-                      "En": "SEL",
-                      "Fr": "SEL",
-                      "De": "SEL",
-                      "Es": "SEL"
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "style": {
@@ -1255,10 +1487,14 @@
                 "A": {
                   "label": {
                     "active": {
-                      "En": "SEL",
-                      "Fr": "SEL",
-                      "De": "SEL",
-                      "Es": "SEL"
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true,
@@ -1275,10 +1511,14 @@
                 "B": {
                   "label": {
                     "active": {
-                      "En": "SEL",
-                      "Fr": "SEL",
-                      "De": "SEL",
-                      "Es": "SEL"
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "style": {
@@ -1304,10 +1544,14 @@
                 "A": {
                   "label": {
                     "active": {
-                      "En": "SEL",
-                      "Fr": "SEL",
-                      "De": "SEL",
-                      "Es": "SEL"
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true,
@@ -1324,10 +1568,14 @@
                 "B": {
                   "label": {
                     "active": {
-                      "En": "SEL",
-                      "Fr": "SEL",
-                      "De": "SEL",
-                      "Es": "SEL"
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "style": {
@@ -1353,10 +1601,14 @@
                 "A": {
                   "label": {
                     "active": {
-                      "En": "SEL",
-                      "Fr": "SEL",
-                      "De": "SEL",
-                      "Es": "SEL"
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true,
@@ -1373,10 +1625,14 @@
                 "B": {
                   "label": {
                     "active": {
-                      "En": "SEL",
-                      "Fr": "SEL",
-                      "De": "SEL",
-                      "Es": "SEL"
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "style": {
@@ -1402,10 +1658,14 @@
                 "A": {
                   "label": {
                     "active": {
-                      "En": "SEL",
-                      "Fr": "SEL",
-                      "De": "SEL",
-                      "Es": "SEL"
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true,
@@ -1422,10 +1682,14 @@
                 "B": {
                   "label": {
                     "active": {
-                      "En": "SEL",
-                      "Fr": "SEL",
-                      "De": "SEL",
-                      "Es": "SEL"
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "style": {
@@ -1451,10 +1715,14 @@
                 "A": {
                   "label": {
                     "active": {
-                      "En": "SEL",
-                      "Fr": "SEL",
-                      "De": "SEL",
-                      "Es": "SEL"
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true,
@@ -1471,10 +1739,14 @@
                 "B": {
                   "label": {
                     "active": {
-                      "En": "SEL",
-                      "Fr": "SEL",
-                      "De": "SEL",
-                      "Es": "SEL"
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "style": {
@@ -1500,10 +1772,14 @@
                 "A": {
                   "label": {
                     "active": {
-                      "En": "SEL",
-                      "Fr": "SEL",
-                      "De": "SEL",
-                      "Es": "SEL"
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true,
@@ -1521,10 +1797,14 @@
                 "B": {
                   "label": {
                     "active": {
-                      "En": "SEL",
-                      "Fr": "SEL",
-                      "De": "SEL",
-                      "Es": "SEL"
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "style": {
@@ -1551,10 +1831,14 @@
                 "A": {
                   "label": {
                     "active": {
-                      "En": "SEL",
-                      "Fr": "SEL",
-                      "De": "SEL",
-                      "Es": "SEL"
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true,
@@ -1571,10 +1855,14 @@
                 "B": {
                   "label": {
                     "active": {
-                      "En": "SEL",
-                      "Fr": "SEL",
-                      "De": "SEL",
-                      "Es": "SEL"
+                      "text": {
+                        "En": "SEL",
+                        "Fr": "SEL",
+                        "De": "SEL",
+                        "Es": "SEL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "style": {
@@ -1596,10 +1884,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Size & Geometry Variety",
-            "Fr": "Size & Geometry Variety",
-            "De": "Size & Geometry Variety",
-            "Es": "Size & Geometry Variety"
+            "text": {
+              "En": "Size & Geometry Variety",
+              "Fr": "Size & Geometry Variety",
+              "De": "Size & Geometry Variety",
+              "Es": "Size & Geometry Variety"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -1614,30 +1906,42 @@
                 "1": {
                   "label": {
                     "active": {
-                      "En": "S1",
-                      "Fr": "S1",
-                      "De": "S1",
-                      "Es": "S1"
+                      "text": {
+                        "En": "S1",
+                        "Fr": "S1",
+                        "De": "S1",
+                        "Es": "S1"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "2": {
                   "label": {
                     "active": {
-                      "En": "S2",
-                      "Fr": "S2",
-                      "De": "S2",
-                      "Es": "S2"
+                      "text": {
+                        "En": "S2",
+                        "Fr": "S2",
+                        "De": "S2",
+                        "Es": "S2"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "3": {
                   "label": {
                     "active": {
-                      "En": "S3",
-                      "Fr": "S3",
-                      "De": "S3",
-                      "Es": "S3"
+                      "text": {
+                        "En": "S3",
+                        "Fr": "S3",
+                        "De": "S3",
+                        "Es": "S3"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -1669,10 +1973,14 @@
                 "STOP": {
                   "label": {
                     "active": {
-                      "En": "STOP",
-                      "Fr": "STOP",
-                      "De": "STOP",
-                      "Es": "STOP"
+                      "text": {
+                        "En": "STOP",
+                        "Fr": "STOP",
+                        "De": "STOP",
+                        "Es": "STOP"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -1680,10 +1988,14 @@
                 "GO": {
                   "label": {
                     "active": {
-                      "En": "GO",
-                      "Fr": "GO",
-                      "De": "GO",
-                      "Es": "GO"
+                      "text": {
+                        "En": "GO",
+                        "Fr": "GO",
+                        "De": "GO",
+                        "Es": "GO"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -1703,20 +2015,28 @@
                 "TOP": {
                   "label": {
                     "active": {
-                      "En": "TOP",
-                      "Fr": "TOP",
-                      "De": "TOP",
-                      "Es": "TOP"
+                      "text": {
+                        "En": "TOP",
+                        "Fr": "TOP",
+                        "De": "TOP",
+                        "Es": "TOP"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "MID": {
                   "label": {
                     "active": {
-                      "En": "MID",
-                      "Fr": "MID",
-                      "De": "MID",
-                      "Es": "MID"
+                      "text": {
+                        "En": "MID",
+                        "Fr": "MID",
+                        "De": "MID",
+                        "Es": "MID"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -1724,10 +2044,14 @@
                 "BOT": {
                   "label": {
                     "active": {
-                      "En": "BOT",
-                      "Fr": "BOT",
-                      "De": "BOT",
-                      "Es": "BOT"
+                      "text": {
+                        "En": "BOT",
+                        "Fr": "BOT",
+                        "De": "BOT",
+                        "Es": "BOT"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -1747,80 +2071,112 @@
                 "1": {
                   "label": {
                     "active": {
-                      "En": "1",
-                      "Fr": "1",
-                      "De": "1",
-                      "Es": "1"
+                      "text": {
+                        "En": "1",
+                        "Fr": "1",
+                        "De": "1",
+                        "Es": "1"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "2": {
                   "label": {
                     "active": {
-                      "En": "2",
-                      "Fr": "2",
-                      "De": "2",
-                      "Es": "2"
+                      "text": {
+                        "En": "2",
+                        "Fr": "2",
+                        "De": "2",
+                        "Es": "2"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "3": {
                   "label": {
                     "active": {
-                      "En": "3",
-                      "Fr": "3",
-                      "De": "3",
-                      "Es": "3"
+                      "text": {
+                        "En": "3",
+                        "Fr": "3",
+                        "De": "3",
+                        "Es": "3"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "4": {
                   "label": {
                     "active": {
-                      "En": "4",
-                      "Fr": "4",
-                      "De": "4",
-                      "Es": "4"
+                      "text": {
+                        "En": "4",
+                        "Fr": "4",
+                        "De": "4",
+                        "Es": "4"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "5": {
                   "label": {
                     "active": {
-                      "En": "5",
-                      "Fr": "5",
-                      "De": "5",
-                      "Es": "5"
+                      "text": {
+                        "En": "5",
+                        "Fr": "5",
+                        "De": "5",
+                        "Es": "5"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "6": {
                   "label": {
                     "active": {
-                      "En": "6",
-                      "Fr": "6",
-                      "De": "6",
-                      "Es": "6"
+                      "text": {
+                        "En": "6",
+                        "Fr": "6",
+                        "De": "6",
+                        "Es": "6"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "7": {
                   "label": {
                     "active": {
-                      "En": "7",
-                      "Fr": "7",
-                      "De": "7",
-                      "Es": "7"
+                      "text": {
+                        "En": "7",
+                        "Fr": "7",
+                        "De": "7",
+                        "Es": "7"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "8": {
                   "label": {
                     "active": {
-                      "En": "8",
-                      "Fr": "8",
-                      "De": "8",
-                      "Es": "8"
+                      "text": {
+                        "En": "8",
+                        "Fr": "8",
+                        "De": "8",
+                        "Es": "8"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -1834,10 +2190,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Industrial Styles",
-            "Fr": "Industriel Styles",
-            "De": "Industriell Styles",
-            "Es": "Industrial Styles"
+            "text": {
+              "En": "Industrial Styles",
+              "Fr": "Industriel Styles",
+              "De": "Industriell Styles",
+              "Es": "Industrial Styles"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -1863,20 +2223,28 @@
                 "OFF": {
                   "label": {
                     "active": {
-                      "En": "VOID",
-                      "Fr": "VOID",
-                      "De": "VOID",
-                      "Es": "VOID"
+                      "text": {
+                        "En": "VOID",
+                        "Fr": "VOID",
+                        "De": "VOID",
+                        "Es": "VOID"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "ON": {
                   "label": {
                     "active": {
-                      "En": "ACTIVE",
-                      "Fr": "ACTIVE",
-                      "De": "ACTIVE",
-                      "Es": "ACTIVE"
+                      "text": {
+                        "En": "ACTIVE",
+                        "Fr": "ACTIVE",
+                        "De": "ACTIVE",
+                        "Es": "ACTIVE"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -1904,10 +2272,14 @@
                 "IGNITE": {
                   "label": {
                     "active": {
-                      "En": "IGNITE",
-                      "Fr": "IGNITE",
-                      "De": "IGNITE",
-                      "Es": "IGNITE"
+                      "text": {
+                        "En": "IGNITE",
+                        "Fr": "IGNITE",
+                        "De": "IGNITE",
+                        "Es": "IGNITE"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -1915,10 +2287,14 @@
                 "KILL": {
                   "label": {
                     "active": {
-                      "En": "KILL",
-                      "Fr": "KILL",
-                      "De": "KILL",
-                      "Es": "KILL"
+                      "text": {
+                        "En": "KILL",
+                        "Fr": "KILL",
+                        "De": "KILL",
+                        "Es": "KILL"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -1946,10 +2322,14 @@
                 "DATA": {
                   "label": {
                     "active": {
-                      "En": "STREAMING",
-                      "Fr": "STREAMING",
-                      "De": "STREAMING",
-                      "Es": "STREAMING"
+                      "text": {
+                        "En": "STREAMING",
+                        "Fr": "STREAMING",
+                        "De": "STREAMING",
+                        "Es": "STREAMING"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -1957,10 +2337,14 @@
                 "IDLE": {
                   "label": {
                     "active": {
-                      "En": "IDLE",
-                      "Fr": "IDLE",
-                      "De": "IDLE",
-                      "Es": "IDLE"
+                      "text": {
+                        "En": "IDLE",
+                        "Fr": "IDLE",
+                        "De": "IDLE",
+                        "Es": "IDLE"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -1987,10 +2371,14 @@
                 "FROST": {
                   "label": {
                     "active": {
-                      "En": "FROZEN",
-                      "Fr": "FROZEN",
-                      "De": "FROZEN",
-                      "Es": "FROZEN"
+                      "text": {
+                        "En": "FROZEN",
+                        "Fr": "FROZEN",
+                        "De": "FROZEN",
+                        "Es": "FROZEN"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -1998,10 +2386,14 @@
                 "MELT": {
                   "label": {
                     "active": {
-                      "En": "THAW",
-                      "Fr": "THAW",
-                      "De": "THAW",
-                      "Es": "THAW"
+                      "text": {
+                        "En": "THAW",
+                        "Fr": "THAW",
+                        "De": "THAW",
+                        "Es": "THAW"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -2029,10 +2421,14 @@
                 "OLD": {
                   "label": {
                     "active": {
-                      "En": "ANTIQUE",
-                      "Fr": "ANTIQUE",
-                      "De": "ANTIQUE",
-                      "Es": "ANTIQUE"
+                      "text": {
+                        "En": "ANTIQUE",
+                        "Fr": "ANTIQUE",
+                        "De": "ANTIQUE",
+                        "Es": "ANTIQUE"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -2040,10 +2436,14 @@
                 "NEW": {
                   "label": {
                     "active": {
-                      "En": "MODERN",
-                      "Fr": "MODERN",
-                      "De": "MODERN",
-                      "Es": "MODERN"
+                      "text": {
+                        "En": "MODERN",
+                        "Fr": "MODERN",
+                        "De": "MODERN",
+                        "Es": "MODERN"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -2073,20 +2473,28 @@
                 "VIS": {
                   "label": {
                     "active": {
-                      "En": "VISIBLE",
-                      "Fr": "VISIBLE",
-                      "De": "VISIBLE",
-                      "Es": "VISIBLE"
+                      "text": {
+                        "En": "VISIBLE",
+                        "Fr": "VISIBLE",
+                        "De": "VISIBLE",
+                        "Es": "VISIBLE"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "INV": {
                   "label": {
                     "active": {
-                      "En": "GHOST",
-                      "Fr": "GHOST",
-                      "De": "GHOST",
-                      "Es": "GHOST"
+                      "text": {
+                        "En": "GHOST",
+                        "Fr": "GHOST",
+                        "De": "GHOST",
+                        "Es": "GHOST"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -2100,10 +2508,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Multi-Choice Arrays",
-            "Fr": "Multi-Choice Arrays",
-            "De": "Multi-Choice Arrays",
-            "Es": "Multi-Choice Arrays"
+            "text": {
+              "En": "Multi-Choice Arrays",
+              "Fr": "Multi-Choice Arrays",
+              "De": "Multi-Choice Arrays",
+              "Es": "Multi-Choice Arrays"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -2129,120 +2541,168 @@
                 "1": {
                   "label": {
                     "active": {
-                      "En": "A",
-                      "Fr": "A",
-                      "De": "A",
-                      "Es": "A"
+                      "text": {
+                        "En": "A",
+                        "Fr": "A",
+                        "De": "A",
+                        "Es": "A"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "2": {
                   "label": {
                     "active": {
-                      "En": "B",
-                      "Fr": "B",
-                      "De": "B",
-                      "Es": "B"
+                      "text": {
+                        "En": "B",
+                        "Fr": "B",
+                        "De": "B",
+                        "Es": "B"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "3": {
                   "label": {
                     "active": {
-                      "En": "C",
-                      "Fr": "C",
-                      "De": "C",
-                      "Es": "C"
+                      "text": {
+                        "En": "C",
+                        "Fr": "C",
+                        "De": "C",
+                        "Es": "C"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "4": {
                   "label": {
                     "active": {
-                      "En": "D",
-                      "Fr": "D",
-                      "De": "D",
-                      "Es": "D"
+                      "text": {
+                        "En": "D",
+                        "Fr": "D",
+                        "De": "D",
+                        "Es": "D"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "5": {
                   "label": {
                     "active": {
-                      "En": "E",
-                      "Fr": "E",
-                      "De": "E",
-                      "Es": "E"
+                      "text": {
+                        "En": "E",
+                        "Fr": "E",
+                        "De": "E",
+                        "Es": "E"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "6": {
                   "label": {
                     "active": {
-                      "En": "F",
-                      "Fr": "F",
-                      "De": "F",
-                      "Es": "F"
+                      "text": {
+                        "En": "F",
+                        "Fr": "F",
+                        "De": "F",
+                        "Es": "F"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "7": {
                   "label": {
                     "active": {
-                      "En": "G",
-                      "Fr": "G",
-                      "De": "G",
-                      "Es": "G"
+                      "text": {
+                        "En": "G",
+                        "Fr": "G",
+                        "De": "G",
+                        "Es": "G"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "8": {
                   "label": {
                     "active": {
-                      "En": "H",
-                      "Fr": "H",
-                      "De": "H",
-                      "Es": "H"
+                      "text": {
+                        "En": "H",
+                        "Fr": "H",
+                        "De": "H",
+                        "Es": "H"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "9": {
                   "label": {
                     "active": {
-                      "En": "I",
-                      "Fr": "I",
-                      "De": "I",
-                      "Es": "I"
+                      "text": {
+                        "En": "I",
+                        "Fr": "I",
+                        "De": "I",
+                        "Es": "I"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "10": {
                   "label": {
                     "active": {
-                      "En": "J",
-                      "Fr": "J",
-                      "De": "J",
-                      "Es": "J"
+                      "text": {
+                        "En": "J",
+                        "Fr": "J",
+                        "De": "J",
+                        "Es": "J"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "11": {
                   "label": {
                     "active": {
-                      "En": "K",
-                      "Fr": "K",
-                      "De": "K",
-                      "Es": "K"
+                      "text": {
+                        "En": "K",
+                        "Fr": "K",
+                        "De": "K",
+                        "Es": "K"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "12": {
                   "label": {
                     "active": {
-                      "En": "L",
-                      "Fr": "L",
-                      "De": "L",
-                      "Es": "L"
+                      "text": {
+                        "En": "L",
+                        "Fr": "L",
+                        "De": "L",
+                        "Es": "L"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -2256,10 +2716,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Circular Button Demos",
-            "Fr": "Circular Bouton Demos",
-            "De": "Circular Taste Demos",
-            "Es": "Circular Botón Demos"
+            "text": {
+              "En": "Circular Button Demos",
+              "Fr": "Circular Bouton Demos",
+              "De": "Circular Taste Demos",
+              "Es": "Circular Botón Demos"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -2294,10 +2758,14 @@
                 "1": {
                   "label": {
                     "active": {
-                      "En": "1",
-                      "Fr": "1",
-                      "De": "1",
-                      "Es": "1"
+                      "text": {
+                        "En": "1",
+                        "Fr": "1",
+                        "De": "1",
+                        "Es": "1"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -2305,30 +2773,42 @@
                 "2": {
                   "label": {
                     "active": {
-                      "En": "2",
-                      "Fr": "2",
-                      "De": "2",
-                      "Es": "2"
+                      "text": {
+                        "En": "2",
+                        "Fr": "2",
+                        "De": "2",
+                        "Es": "2"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "3": {
                   "label": {
                     "active": {
-                      "En": "3",
-                      "Fr": "3",
-                      "De": "3",
-                      "Es": "3"
+                      "text": {
+                        "En": "3",
+                        "Fr": "3",
+                        "De": "3",
+                        "Es": "3"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "4": {
                   "label": {
                     "active": {
-                      "En": "4",
-                      "Fr": "4",
-                      "De": "4",
-                      "Es": "4"
+                      "text": {
+                        "En": "4",
+                        "Fr": "4",
+                        "De": "4",
+                        "Es": "4"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -2359,10 +2839,14 @@
                 "RED": {
                   "label": {
                     "active": {
-                      "En": "STOP",
-                      "Fr": "STOP",
-                      "De": "STOP",
-                      "Es": "STOP"
+                      "text": {
+                        "En": "STOP",
+                        "Fr": "STOP",
+                        "De": "STOP",
+                        "Es": "STOP"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "active_color": "#FF0000",
@@ -2372,10 +2856,14 @@
                 "YEL": {
                   "label": {
                     "active": {
-                      "En": "WAIT",
-                      "Fr": "WAIT",
-                      "De": "WAIT",
-                      "Es": "WAIT"
+                      "text": {
+                        "En": "WAIT",
+                        "Fr": "WAIT",
+                        "De": "WAIT",
+                        "Es": "WAIT"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "active_color": "#FFCC00",
@@ -2384,10 +2872,14 @@
                 "GRN": {
                   "label": {
                     "active": {
-                      "En": "GO",
-                      "Fr": "GO",
-                      "De": "GO",
-                      "Es": "GO"
+                      "text": {
+                        "En": "GO",
+                        "Fr": "GO",
+                        "De": "GO",
+                        "Es": "GO"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "active_color": "#00FF00",
@@ -2430,30 +2922,42 @@
                 "A": {
                   "label": {
                     "active": {
-                      "En": "A",
-                      "Fr": "A",
-                      "De": "A",
-                      "Es": "A"
+                      "text": {
+                        "En": "A",
+                        "Fr": "A",
+                        "De": "A",
+                        "Es": "A"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "B": {
                   "label": {
                     "active": {
-                      "En": "B",
-                      "Fr": "B",
-                      "De": "B",
-                      "Es": "B"
+                      "text": {
+                        "En": "B",
+                        "Fr": "B",
+                        "De": "B",
+                        "Es": "B"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 },
                 "C": {
                   "label": {
                     "active": {
-                      "En": "C",
-                      "Fr": "C",
-                      "De": "C",
-                      "Es": "C"
+                      "text": {
+                        "En": "C",
+                        "Fr": "C",
+                        "De": "C",
+                        "Es": "C"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "selected": true
@@ -2461,10 +2965,14 @@
                 "D": {
                   "label": {
                     "active": {
-                      "En": "D",
-                      "Fr": "D",
-                      "De": "D",
-                      "Es": "D"
+                      "text": {
+                        "En": "D",
+                        "Fr": "D",
+                        "De": "D",
+                        "Es": "D"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   }
                 }
@@ -2505,10 +3013,14 @@
                 "POWER": {
                   "label": {
                     "active": {
-                      "En": "PWR",
-                      "Fr": "PWR",
-                      "De": "PWR",
-                      "Es": "PWR"
+                      "text": {
+                        "En": "PWR",
+                        "Fr": "PWR",
+                        "De": "PWR",
+                        "Es": "PWR"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "active_color": "#00AAFF",
@@ -2517,10 +3029,14 @@
                 "FAULT": {
                   "label": {
                     "active": {
-                      "En": "ERR",
-                      "Fr": "ERR",
-                      "De": "ERR",
-                      "Es": "ERR"
+                      "text": {
+                        "En": "ERR",
+                        "Fr": "ERR",
+                        "De": "ERR",
+                        "Es": "ERR"
+                      },
+                      "text_size": 12,
+                      "text_color": "#cccccc"
                     }
                   },
                   "active_color": "#FF3300"

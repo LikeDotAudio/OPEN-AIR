@@ -37,7 +37,7 @@ const OcaSliderValue = ({ value, onChange, config, topic, nodeJson }) => {
     };
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', width: '100%', padding: '10px', backgroundColor: '#222', borderRadius: '5px', border: '1px solid #444', boxSizing: 'border-box' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', width: '100%', padding: '10px', backgroundColor: (window.OaTransparency ? window.OaTransparency.bg(config, '#222') : '#222'), borderRadius: '5px', border: '1px solid #444', boxSizing: 'border-box' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
                 <span style={{ fontSize: '12px', color: '#fff', fontWeight: 'bold' }}>{label}:</span>
                 <div style={{ display: 'flex', alignItems: 'center' }}>

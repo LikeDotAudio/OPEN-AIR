@@ -22,11 +22,20 @@ in the property editor.
   "fader_bar_graph_Example": {
     "type": "_FaderWithBarGraph",
     "label": {
-      "active": "Standard"
+      "active": {
+        "text": "Standard",
+        "text_size": 12,
+        "text_color": "#cccccc"
+      }
     },
-    "value_min": -60.0,
-    "value_max": 10.0,
-    "value_default": -10.0,
+    "domain": {
+      "locked": false,
+      "min": -60.0,
+      "max": 10.0
+    },
+    "value": {
+      "default_value": -10.0
+    },
     "layout": {
       "height": 300,
       "width": 120

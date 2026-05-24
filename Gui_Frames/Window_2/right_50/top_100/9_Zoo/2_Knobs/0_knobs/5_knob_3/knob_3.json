@@ -53,7 +53,8 @@
               "En": "Std Brown",
               "Fr": "Std Brown",
               "De": "Std Brown",
-              "Es": "Std Brown"
+              "Es": "Std Brown",
+              "show_label": true
             },
             "notes": "Standard size, brown",
             "geometry": {
@@ -74,8 +75,7 @@
                 "primary": "#996633"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -112,7 +112,8 @@
               "En": "Sm Red",
               "Fr": "Sm Red",
               "De": "Sm Red",
-              "Es": "Sm Red"
+              "Es": "Sm Red",
+              "show_label": true
             },
             "notes": "Small size, red",
             "geometry": {
@@ -133,8 +134,7 @@
                 "primary": "#FF0000"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -171,7 +171,8 @@
               "En": "Lg Blue",
               "Fr": "Lg Blue",
               "De": "Lg Blue",
-              "Es": "Lg Blue"
+              "Es": "Lg Blue",
+              "show_label": true
             },
             "notes": "Large size, blue",
             "geometry": {
@@ -192,8 +193,7 @@
                 "primary": "#0000FF"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -230,7 +230,8 @@
               "En": "Med Green",
               "Fr": "Med Green",
               "De": "Med Green",
-              "Es": "Med Green"
+              "Es": "Med Green",
+              "show_label": true
             },
             "notes": "Medium size, green",
             "geometry": {
@@ -251,8 +252,7 @@
                 "primary": "#00FF00"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -289,7 +289,8 @@
               "En": "Tiny Yel",
               "Fr": "Tiny Yel",
               "De": "Tiny Yel",
-              "Es": "Tiny Yel"
+              "Es": "Tiny Yel",
+              "show_label": true
             },
             "notes": "Tiny size, yellow",
             "geometry": {
@@ -310,8 +311,7 @@
                 "primary": "#FFFF00"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -348,7 +348,8 @@
               "En": "Giant Cyn",
               "Fr": "Giant Cyn",
               "De": "Giant Cyn",
-              "Es": "Giant Cyn"
+              "Es": "Giant Cyn",
+              "show_label": true
             },
             "notes": "Giant size, cyan",
             "geometry": {
@@ -369,8 +370,7 @@
                 "primary": "#00FFFF"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -407,7 +407,8 @@
               "En": "Med Mag",
               "Fr": "Med Mag",
               "De": "Med Mag",
-              "Es": "Med Mag"
+              "Es": "Med Mag",
+              "show_label": true
             },
             "notes": "Medium size, magenta",
             "geometry": {
@@ -428,8 +429,7 @@
                 "primary": "#FF00FF"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -466,7 +466,8 @@
               "En": "Lg Orange",
               "Fr": "Lg Orange",
               "De": "Lg Orange",
-              "Es": "Lg Orange"
+              "Es": "Lg Orange",
+              "show_label": true
             },
             "notes": "Large size, orange",
             "geometry": {
@@ -487,8 +488,7 @@
                 "primary": "#FFA500"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -525,7 +525,8 @@
               "En": "Fine Tune",
               "Fr": "Fine Tune",
               "De": "Fine Tune",
-              "Es": "Fine Tune"
+              "Es": "Fine Tune",
+              "show_label": true
             },
             "notes": "Green center detent",
             "geometry": {
@@ -546,8 +547,7 @@
                 "primary": "#4CAF50"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -584,7 +584,8 @@
               "En": "Coarse",
               "Fr": "Coarse",
               "De": "Coarse",
-              "Es": "Coarse"
+              "Es": "Coarse",
+              "show_label": true
             },
             "notes": "Large blue",
             "geometry": {
@@ -605,8 +606,7 @@
                 "primary": "#2196F3"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -643,7 +643,8 @@
               "En": "Octave",
               "Fr": "Octave",
               "De": "Octave",
-              "Es": "Octave"
+              "Es": "Octave",
+              "show_label": true
             },
             "notes": "Small amber",
             "geometry": {
@@ -665,8 +666,7 @@
                 "primary": "#FFC107"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -703,7 +703,8 @@
               "En": "Detune",
               "Fr": "Detune",
               "De": "Detune",
-              "Es": "Detune"
+              "Es": "Detune",
+              "show_label": true
             },
             "notes": "Purple detune",
             "geometry": {
@@ -724,8 +725,7 @@
                 "primary": "#9C27B0"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -762,7 +762,8 @@
               "En": "LFO Amt",
               "Fr": "LFO Amt",
               "De": "LFO Amt",
-              "Es": "LFO Amt"
+              "Es": "LFO Amt",
+              "show_label": true
             },
             "notes": "Cyan LFO",
             "geometry": {
@@ -783,8 +784,7 @@
                 "primary": "#00BCD4"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -821,7 +821,8 @@
               "En": "Env Mod",
               "Fr": "Env Mod",
               "De": "Env Mod",
-              "Es": "Env Mod"
+              "Es": "Env Mod",
+              "show_label": true
             },
             "notes": "Deep Orange Bipolar",
             "geometry": {
@@ -842,8 +843,7 @@
                 "primary": "#FF5722"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -880,7 +880,8 @@
               "En": "Key Trk",
               "Fr": "Key Trk",
               "De": "Key Trk",
-              "Es": "Key Trk"
+              "Es": "Key Trk",
+              "show_label": true
             },
             "notes": "Tiny brown",
             "geometry": {
@@ -901,8 +902,7 @@
                 "primary": "#795548"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -939,7 +939,8 @@
               "En": "Glide",
               "Fr": "Glide",
               "De": "Glide",
-              "Es": "Glide"
+              "Es": "Glide",
+              "show_label": true
             },
             "notes": "Large grey",
             "geometry": {
@@ -960,8 +961,7 @@
                 "primary": "#607D8B"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -998,7 +998,8 @@
               "En": "Cutoff",
               "Fr": "Coupure",
               "De": "Cutoff",
-              "Es": "Corte"
+              "Es": "Corte",
+              "show_label": true
             },
             "notes": "Giant Yellow Cutoff",
             "geometry": {
@@ -1019,8 +1020,7 @@
                 "primary": "#FFEB3B"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -1057,7 +1057,8 @@
               "En": "Resonance",
               "Fr": "Résonance",
               "De": "Resonanz",
-              "Es": "Resonancia"
+              "Es": "Resonancia",
+              "show_label": true
             },
             "notes": "Orange Res",
             "geometry": {
@@ -1078,8 +1079,7 @@
                 "primary": "#FF9800"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -1116,7 +1116,8 @@
               "En": "Env Amt",
               "Fr": "Env Amt",
               "De": "Env Amt",
-              "Es": "Env Amt"
+              "Es": "Env Amt",
+              "show_label": true
             },
             "notes": "Red Envelope",
             "geometry": {
@@ -1137,8 +1138,7 @@
                 "primary": "#F44336"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -1175,7 +1175,8 @@
               "En": "Drive",
               "Fr": "Drive",
               "De": "Drive",
-              "Es": "Drive"
+              "Es": "Drive",
+              "show_label": true
             },
             "notes": "Dark Red Drive",
             "geometry": {
@@ -1197,8 +1198,7 @@
                 "primary": "#D32F2F"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -1235,7 +1235,8 @@
               "En": "HPF",
               "Fr": "HPF",
               "De": "HPF",
-              "Es": "HPF"
+              "Es": "HPF",
+              "show_label": true
             },
             "notes": "Light Green HPF",
             "geometry": {
@@ -1256,8 +1257,7 @@
                 "primary": "#8BC34A"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -1294,7 +1294,8 @@
               "En": "LPF",
               "Fr": "LPF",
               "De": "LPF",
-              "Es": "LPF"
+              "Es": "LPF",
+              "show_label": true
             },
             "notes": "Green LPF",
             "geometry": {
@@ -1315,8 +1316,7 @@
                 "primary": "#4CAF50"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -1353,7 +1353,8 @@
               "En": "Key Follow",
               "Fr": "Key Follow",
               "De": "Key Follow",
-              "Es": "Key Follow"
+              "Es": "Key Follow",
+              "show_label": true
             },
             "notes": "Lime Key",
             "geometry": {
@@ -1374,8 +1375,7 @@
                 "primary": "#CDDC39"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -1412,7 +1412,8 @@
               "En": "Vel Sens",
               "Fr": "Vel Sens",
               "De": "Vel Sens",
-              "Es": "Vel Sens"
+              "Es": "Vel Sens",
+              "show_label": true
             },
             "notes": "Teal Vel",
             "geometry": {
@@ -1433,8 +1434,7 @@
                 "primary": "#009688"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {

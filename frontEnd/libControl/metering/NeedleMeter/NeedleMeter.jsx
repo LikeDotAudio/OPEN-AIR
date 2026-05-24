@@ -78,8 +78,16 @@ function useNeedleBallistics(rawValueRef, canvasRef, min, max, width, height, co
                 const arcRadius = meterSize / 2 * (styleOv.arc_radius_factor || 0.8);
                 const bezelShape = (styleOv.bezel_shape || config?.bezel_shape || 'default').toLowerCase();
 
-                ctx.fillStyle = colors.background || config?.bg_color || '#2b2b2b';
-                ctx.fillRect(0, 0, width, height);
+                // Outer backing: transparent by default so the panel behind shows
+                // through; only paints when a background is explicitly set (and the
+                // node hasn't opted into transparency via the manager).
+                let outerBg = colors.background || config?.bg_color || null;
+                if (window.OaTransparency && outerBg) outerBg = window.OaTransparency.bg(config, outerBg);
+                if (config?.cosmetics?.transparent === true) outerBg = null;
+                if (outerBg && outerBg !== 'transparent') {
+                    ctx.fillStyle = outerBg;
+                    ctx.fillRect(0, 0, width, height);
+                }
 
                 ctx.save();
                 getBezelPath(ctx, bezelShape, centerX, centerY, arcRadius);
@@ -98,43 +106,70 @@ function useNeedleBallistics(rawValueRef, canvasRef, min, max, width, height, co
                 }
 
                 const minVal = min; const maxVal = max; const range = maxVal - minVal || 1;
-                const viewAngle = config?.meter_viewable_angle || 90;
-                const centerAngle = config?.meter_center_angle || 90;
-                const sang = centerAngle + viewAngle / 2;
-                
-                const toRad = (deg) => -deg * Math.PI / 180;
-                const boundedVal = Math.max(minVal, Math.min(maxVal, displayValue));
-                const nAng = toRad(sang - ((boundedVal - minVal) / range) * viewAngle);
+                // Tilt: center/viewable angle + direction. These live under
+                // cosmetics.style_overrides (capitalised in the demos); flat
+                // lowercase kept as fallback. start = center + view/2, end =
+                // center - view/2; CW sweeps start->end, CCW sweeps end->start.
+                const pnum = (v, d) => { const n = parseFloat(v); return Number.isNaN(n) ? d : n; };
+                const viewAngle = pnum(styleOv.Meter_viewable_angle ?? styleOv.meter_viewable_angle ?? config?.meter_viewable_angle, 90);
+                const centerAngle = pnum(styleOv.Meter_center_angle ?? styleOv.meter_center_angle ?? config?.meter_center_angle, 90);
+                const ccw = (styleOv.Counter_Clockwise ?? styleOv.counter_clockwise) ? true : false;
+                const startDeg = centerAngle + viewAngle / 2;
+                const endDeg = centerAngle - viewAngle / 2;
 
-                const upperRange = styleOv.upper_range !== undefined ? styleOv.upper_range : (config?.upper_range || 0.0);
-                const uAng = toRad(sang - ((upperRange - minVal) / range) * viewAngle);
-                
+                const toRad = (deg) => -deg * Math.PI / 180;
+                const angRad = (val) => {
+                    const pct = (Math.max(minVal, Math.min(maxVal, val)) - minVal) / range;
+                    return toRad(ccw ? (endDeg + pct * viewAngle) : (startDeg - pct * viewAngle));
+                };
+                const boundedVal = Math.max(minVal, Math.min(maxVal, displayValue));
+                const nAng = angRad(boundedVal);
+
+                const upperRange = styleOv.upper_range !== undefined ? styleOv.upper_range
+                    : (config?.cosmetics?.scale?.upper_range !== undefined ? config.cosmetics.scale.upper_range
+                    : (config?.upper_range !== undefined ? config.upper_range : maxVal));
+                const clampUpper = Math.max(minVal, Math.min(maxVal, upperRange));
+
                 ctx.lineWidth = styleOv.curve_thickness || 3;
                 ctx.strokeStyle = colors.primary || '#E0E0E0';
-                ctx.beginPath(); ctx.arc(centerX, centerY, arcRadius, toRad(sang), uAng, true); ctx.stroke();
-                
-                if (upperRange < maxVal) {
+                ctx.beginPath(); ctx.arc(centerX, centerY, arcRadius, angRad(minVal), angRad(clampUpper), ccw); ctx.stroke();
+
+                if (clampUpper < maxVal) {
                     ctx.strokeStyle = colors.alert || '#CC3333';
-                    ctx.beginPath(); ctx.arc(centerX, centerY, arcRadius, uAng, toRad(sang - viewAngle), true); ctx.stroke();
+                    ctx.beginPath(); ctx.arc(centerX, centerY, arcRadius, angRad(clampUpper), angRad(maxVal), ccw); ctx.stroke();
                 }
 
                 ctx.font = 'bold 9px Arial'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-                const step = config?.domain?.primary?.step || config?.step || 10.0;
-                for (let i = 0; i <= range / step; i++) {
-                    const val = minVal + i * step;
-                    const tRad = toRad(sang - ((val - minVal) / range) * viewAngle);
-                    const isAlert = val >= upperRange;
-                    ctx.strokeStyle = ctx.fillStyle = isAlert ? colors.alert || '#C33' : colors.primary || '#EEE';
-                    
+                const showNumbers = styleOv.Scale_numbers !== false;
+                const subTicks = Math.max(0, parseInt(styleOv.sub_ticks ?? 0, 10) || 0);
+                const step = config?.domain?.primary?.step || config?.step || (range / 5);
+                const drawTick = (val, major) => {
+                    const tRad = angRad(val);
+                    const isAlert = val >= clampUpper;
+                    ctx.strokeStyle = ctx.fillStyle = isAlert ? (colors.alert || '#C33') : (colors.primary || '#EEE');
+                    const inner = major ? 8 : 4;
                     const x1 = centerX + arcRadius * Math.cos(tRad);
                     const y1 = centerY + arcRadius * Math.sin(tRad);
-                    const x2 = centerX + (arcRadius - 8) * Math.cos(tRad);
-                    const y2 = centerY + (arcRadius - 8) * Math.sin(tRad);
+                    const x2 = centerX + (arcRadius - inner) * Math.cos(tRad);
+                    const y2 = centerY + (arcRadius - inner) * Math.sin(tRad);
                     ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
-                    
-                    const tx = centerX + (arcRadius - 20) * Math.cos(tRad);
-                    const ty = centerY + (arcRadius - 20) * Math.sin(tRad);
-                    ctx.fillText(Math.round(val), tx, ty);
+                    if (major && showNumbers) {
+                        const tx = centerX + (arcRadius - 20) * Math.cos(tRad);
+                        const ty = centerY + (arcRadius - 20) * Math.sin(tRad);
+                        ctx.fillText(Math.round(val), tx, ty);
+                    }
+                };
+                const majorCount = Math.max(1, Math.round(range / step));
+                for (let i = 0; i <= majorCount; i++) {
+                    const val = minVal + i * step;
+                    if (val > maxVal + 1e-6) break;
+                    drawTick(val, true);
+                    if (subTicks > 0 && i < majorCount) {
+                        for (let j = 1; j <= subTicks; j++) {
+                            const sv = val + (j * step) / (subTicks + 1);
+                            if (sv <= maxVal + 1e-6) drawTick(sv, false);
+                        }
+                    }
                 }
 
                 const needleLen = arcRadius * 0.95;

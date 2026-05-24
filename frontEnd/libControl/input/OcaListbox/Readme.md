@@ -27,21 +27,33 @@ in the property editor.
       "options": {
         "file1": {
           "label": {
-            "active": "document.pdf"
+            "active": {
+              "text": "document.pdf",
+              "text_size": 12,
+              "text_color": "#cccccc"
+            }
           },
           "value": "/path/to/document.pdf",
           "active": "true"
         },
         "file2": {
           "label": {
-            "active": "report.docx"
+            "active": {
+              "text": "report.docx",
+              "text_size": 12,
+              "text_color": "#cccccc"
+            }
           },
           "value": "/path/to/report.docx",
           "active": "true"
         },
         "file3": {
           "label": {
-            "active": "image.png"
+            "active": {
+              "text": "image.png",
+              "text_size": 12,
+              "text_color": "#cccccc"
+            }
           },
           "value": "/path/to/image.png",
           "active": "true",

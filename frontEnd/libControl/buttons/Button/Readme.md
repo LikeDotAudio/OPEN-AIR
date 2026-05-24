@@ -55,8 +55,16 @@ in the property editor.
     },
     "readout": {
       "label": {
-        "active": "FIRING...",
-        "inactive": "FIRE"
+        "active": {
+          "text": "FIRING...",
+          "text_size": 12,
+          "text_color": "#cccccc"
+        },
+        "inactive": {
+          "text": "FIRE",
+          "text_size": 12,
+          "text_color": "#cccccc"
+        }
       }
     },
     "interaction": {

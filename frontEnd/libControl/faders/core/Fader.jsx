@@ -17,7 +17,8 @@ const Fader = ({ value: externalValue, onChange, config, topic, nodeJson }) => {
     const min = domainCfg.min !== undefined ? domainCfg.min : (config?.value_min !== undefined ? config.value_min : -100.0);
     const max = domainCfg.max !== undefined ? domainCfg.max : (config?.value_max !== undefined ? config.value_max : 0.0);
     const logExponent = domainCfg.log_exponent !== undefined ? domainCfg.log_exponent : (config?.log_exponent !== undefined ? config.log_exponent : 1.0);
-    const reffPoint = config?.reff_point !== undefined ? config.reff_point : (min + max) / 2.0;
+    // reff_point lives under interaction.* (nested) or flat (legacy).
+    const reffPoint = config?.interaction?.reff_point ?? config?.reff_point ?? (min + max) / 2.0;
 
     // 2. MQTT integration
     const useMqtt = !!topic;
@@ -131,10 +132,16 @@ const Fader = ({ value: externalValue, onChange, config, topic, nodeJson }) => {
     // 6. Cosmetics & Style Mapping
     const cosm = config?.cosmetics?.colors || {};
     const styleOverrides = config?.cosmetics?.style_overrides || {};
+    // Scale config (cosmetics.scale.*): show gate, major interval, sub-tick count,
+    // tick size/thickness. "show ticks" now actually gates rendering.
+    const scaleCfg = config?.cosmetics?.scale || {};
+    const showTicks = scaleCfg.show !== undefined ? scaleCfg.show
+        : (config?.show_ticks !== undefined ? config.show_ticks : true);
     
-    // Core Colors
+    // Core Colors. Sub-config keys now nest under cosmetics.colors.* (canonical,
+    // matching the _SmartFader reference); flat keys kept as legacy fallbacks.
     const capColor = cosm.cap || config?.cap_color || '#dcdcdc';
-    const highlightColor = cosm.cap_highlights || config?.cap_highlight_color || null;
+    const highlightColor = cosm.cap_highlight || cosm.cap_highlights || config?.cap_highlight_color || null;
     
     // Fader Base colors matching Python theme defaults
     const bgCol = cosm.bg || config?.bg_color || 'transparent'; // Outer background
@@ -146,15 +153,15 @@ const Fader = ({ value: externalValue, onChange, config, topic, nodeJson }) => {
     const borderWidth = config?.border_width || 0;
     const borderColor = config?.border_color || 'black';
 
-    // Ticks Colors
-    const tickCol = config?.tick_color || cosm.secondary || 'lightgrey';
+    // Ticks Colors (nested cosmetics.colors.* first, then flat, then secondary).
+    const tickCol = cosm.tick_color || config?.tick_color || cosm.secondary || 'lightgrey';
     const tickTextCol = config?.tick_text_color || tickCol;
-    const subTickCol = config?.sub_tick_color || tickCol;
+    const subTickCol = cosm.sub_tick_color || config?.sub_tick_color || tickCol;
     const subTickTextCol = config?.sub_tick_text_color || subTickCol;
 
-    // Display Preferences
-    const showValue = config?.readout?.show !== false && config?.show_value !== false;
-    const showUnits = config?.show_units ?? false;
+    // Display Preferences (readout.* nested first, then flat legacy keys).
+    const showValue = config?.readout?.show_value !== false && config?.readout?.show !== false && config?.show_value !== false;
+    const showUnits = config?.readout?.show_units ?? config?.show_units ?? false;
     const unitText = config?.unit_text ?? "";
     const unitPosition = config?.unit_position ?? "right";
     const movementDisplay = config?.movement_value_display ?? true;
@@ -179,7 +186,7 @@ const Fader = ({ value: externalValue, onChange, config, topic, nodeJson }) => {
             style={{
                 width: fluid ? '100%' : width, height,
                 position: 'relative',
-                backgroundColor: bgCol,
+                backgroundColor: (window.OaTransparency ? window.OaTransparency.bg(config, bgCol) : bgCol),
                 touchAction: 'none',
                 overflow: 'hidden',
                 border: borderWidth ? `${borderWidth}px solid ${borderColor}` : 'none',
@@ -206,24 +213,29 @@ const Fader = ({ value: externalValue, onChange, config, topic, nodeJson }) => {
                 </div>
             )}
 
-            {/* Scale / Ticks */}
-            <FaderScale 
+            {/* Scale / Ticks — gated by show ticks (cosmetics.scale.show) */}
+            {showTicks && (
+            <FaderScale
                 min={min} max={max} logExponent={logExponent}
                 width={width} height={height - botRes}
                 availableLength={orientation === 'vertical' ? travelHeight : travelWidth}
                 paddingStart={topRes + padding}
-                tickSize={config?.tick_size ?? config?.style?.tick_size ?? 0.35}
+                tickSize={scaleCfg.size ?? config?.tick_size ?? config?.style?.tick_size ?? 0.35}
                 slotSize={trackSlotWidth}
                 capWidth={capW} // capW represents the width across the track, regardless of rotation
                 tickColor={tickCol}
                 subTickColor={subTickCol}
                 tickTextColor={tickTextCol}
                 subTickTextColor={subTickTextCol}
-                tickThickness={config?.tick_thickness ?? config?.style?.tick_thickness ?? 1}
-                tickLabelPosition={config?.tick_label_position ?? config?.style?.tick_label_position ?? 'right'}
+                tickThickness={scaleCfg.thickness ?? config?.tick_thickness ?? config?.style?.tick_thickness ?? 1}
                 customTicks={styleOverrides.custom_ticks || config?.custom_ticks || null}
+                interval={scaleCfg.interval ?? config?.tick_interval ?? null}
+                subTicks={scaleCfg.sub_ticks ?? config?.sub_ticks ?? 4}
+                style={scaleCfg.style ?? config?.tick_style ?? 'simple'}
+                sides={scaleCfg.sides ?? scaleCfg.side ?? null}
                 orientation={orientation}
             />
+            )}
 
             {/* 3D Recessed Track Slot */}
             <div style={{

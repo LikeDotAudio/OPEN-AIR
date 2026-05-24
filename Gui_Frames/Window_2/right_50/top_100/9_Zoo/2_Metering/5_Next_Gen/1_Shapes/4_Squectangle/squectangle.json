@@ -52,10 +52,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Large Classic",
-                "Fr": "Large Classique",
-                "De": "Large Klassisch",
-                "Es": "Large Clásico"
+                "text": {
+                  "En": "Large Classic",
+                  "Fr": "Large Classique",
+                  "De": "Large Klassisch",
+                  "Es": "Large Clásico"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -144,10 +148,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Medium Brown",
-                "Fr": "Moyen Brown",
-                "De": "Mittel Brown",
-                "Es": "Medio Brown"
+                "text": {
+                  "En": "Medium Brown",
+                  "Fr": "Moyen Brown",
+                  "De": "Mittel Brown",
+                  "Es": "Medio Brown"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -227,10 +235,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Small Silver",
-                "Fr": "Small Silver",
-                "De": "Small Silver",
-                "Es": "Small Silver"
+                "text": {
+                  "En": "Small Silver",
+                  "Fr": "Small Silver",
+                  "De": "Small Silver",
+                  "Es": "Small Silver"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -295,10 +307,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Midnight Blue",
-                "Fr": "Midnight Blue",
-                "De": "Midnight Blue",
-                "Es": "Midnight Blue"
+                "text": {
+                  "En": "Midnight Blue",
+                  "Fr": "Midnight Blue",
+                  "De": "Midnight Blue",
+                  "Es": "Midnight Blue"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -376,10 +392,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Forest Green",
-                "Fr": "Forest Green",
-                "De": "Forest Green",
-                "Es": "Forest Green"
+                "text": {
+                  "En": "Forest Green",
+                  "Fr": "Forest Green",
+                  "De": "Forest Green",
+                  "Es": "Forest Green"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -457,10 +477,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Slate Grey",
-                "Fr": "Slate Grey",
-                "De": "Slate Grey",
-                "Es": "Slate Grey"
+                "text": {
+                  "En": "Slate Grey",
+                  "Fr": "Slate Grey",
+                  "De": "Slate Grey",
+                  "Es": "Slate Grey"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -538,10 +562,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Neon Pink",
-                "Fr": "Neon Pink",
-                "De": "Neon Pink",
-                "Es": "Neon Pink"
+                "text": {
+                  "En": "Neon Pink",
+                  "Fr": "Neon Pink",
+                  "De": "Neon Pink",
+                  "Es": "Neon Pink"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -619,10 +647,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Cloud White",
-                "Fr": "Cloud White",
-                "De": "Cloud White",
-                "Es": "Cloud White"
+                "text": {
+                  "En": "Cloud White",
+                  "Fr": "Cloud White",
+                  "De": "Cloud White",
+                  "Es": "Cloud White"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -699,10 +731,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Copper",
-                "Fr": "Copper",
-                "De": "Copper",
-                "Es": "Copper"
+                "text": {
+                  "En": "Copper",
+                  "Fr": "Copper",
+                  "De": "Copper",
+                  "Es": "Copper"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {

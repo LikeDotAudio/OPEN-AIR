@@ -27,10 +27,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "RUN",
-                    "Fr": "EXEC",
-                    "De": "AUSFÜHREN",
-                    "Es": "EJEC"
+                    "text": {
+                      "En": "RUN",
+                      "Fr": "EXEC",
+                      "De": "AUSFÜHREN",
+                      "Es": "EJEC"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -62,10 +66,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "STOP",
-                    "Fr": "STOP",
-                    "De": "STOP",
-                    "Es": "STOP"
+                    "text": {
+                      "En": "STOP",
+                      "Fr": "STOP",
+                      "De": "STOP",
+                      "Es": "STOP"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -97,10 +105,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "SINGLE",
-                    "Fr": "SINGLE",
-                    "De": "SINGLE",
-                    "Es": "SINGLE"
+                    "text": {
+                      "En": "SINGLE",
+                      "Fr": "SINGLE",
+                      "De": "SINGLE",
+                      "Es": "SINGLE"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -132,10 +144,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "AUTOSCALE",
-                    "Fr": "ÉCHELLE AUTO",
-                    "De": "AUTOSCALE",
-                    "Es": "ESCALA AUTO"
+                    "text": {
+                      "En": "AUTOSCALE",
+                      "Fr": "ÉCHELLE AUTO",
+                      "De": "AUTOSCALE",
+                      "Es": "ESCALA AUTO"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",

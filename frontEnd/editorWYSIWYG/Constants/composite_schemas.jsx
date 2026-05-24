@@ -18,6 +18,30 @@
   // Top-level groups worth exposing (styling surface the embedded widget reads).
   const KEEP = ['cosmetics', 'style', 'readout', 'interaction', 'dynamics', 'scale', 'styling', 'pointer', 'style_flags'];
 
+  // Canonical "default declaration" for the structural containers. Their library
+  // samples are minimal, so on their own they surface no red params. These unions
+  // declare the full param set so a placed OcaBin/OcaBlock shows everything it can
+  // carry (missing ones in red). Children collections (blocks/fields) are omitted.
+  const STRUCTURAL = {
+    ocabin: {
+      type: 'OcaBin',
+      geometry: { anchor: 'NSEW', x: 0, y: 0, width: '100%', height: '100%' },
+      behavior: { overflow_ns: 'auto', overflow_ew: 'auto', fluid_ew: false, allow_scrolling: true, transparent: false },
+      layout: { weight: 1, width: '100%', height: '100%', padx: 0, pady: 0, stretch: 'both' },
+      description: { En: '', Fr: '', De: '', Es: '' },
+    },
+    ocablock: {
+      type: 'OcaBlock',
+      layout_columns: 1,
+      column_sizing: [],
+      geometry: { anchor: 'NSEW' },
+      behavior: { overflow_ns: 'hidden', overflow_ew: 'hidden' },
+      // A block titles itself via description; show_label lives INSIDE it and
+      // toggles whether that title row is shown.
+      description: { En: '', Fr: '', De: '', Es: '', show_label: true },
+    },
+  };
+
   const countKeys = (o) => {
     let n = 0;
     if (o && typeof o === 'object') for (const k in o) { n++; if (o[k] && typeof o[k] === 'object') n += countKeys(o[k]); }
@@ -46,6 +70,7 @@
       if (this._refs && this._byType && !force) return this._refs;
       const data = await window.OaEdGrabBagLoader.load(force);
       const comps = data.components || [];
+      const legends = data.legends || {};
       const refs = {};
       for (const [subKey, kw] of Object.entries(KEYWORDS)) {
         let best = null, bestN = -1;
@@ -73,6 +98,26 @@
         const n = countKeys(c.schema);
         if (!byType[t] || n > byType[t]._n) byType[t] = { schema: cleanRef(c.schema), _n: n };
       }
+      // Type ALIASES: any _LEGEND array listing widget-type names (e.g.
+      // toggle_types: ["_SmartToggle","_GuiButtonToggle"]) is an equivalence group.
+      // Register the group's richest sample under every alias so legacy type names
+      // (_GuiButtonToggle, _GuiButtonToggler, …) resolve to the canonical sample
+      // and show the same library/red params.
+      for (const lv of Object.values(legends)) {
+        if (!Array.isArray(lv)) continue;
+        const names = lv.filter((x) => typeof x === 'string' && (x.startsWith('_') || x.startsWith('Oca')));
+        if (names.length < 2) continue;
+        let best = null;
+        for (const name of names) {
+          const e = byType[name.toLowerCase()];
+          if (e && (!best || e._n > best._n)) best = e;
+        }
+        if (!best) continue;
+        for (const name of names) {
+          const key = name.toLowerCase();
+          if (!byType[key]) byType[key] = best;
+        }
+      }
       this._byType = byType;
       return refs;
     },
@@ -80,11 +125,17 @@
     isSubWidget(key) { return Object.prototype.hasOwnProperty.call(KEYWORDS, key); },
     referenceFor(key) { return this._refs ? (this._refs[key] || null) : null; },
 
-    /** Full library reference for a widget `type` (null if no library match). */
+    /** Full library reference for a widget `type` (null if no library match).
+     *  For structural containers, unions the minimal sample with the canonical
+     *  STRUCTURAL declaration so the editor surfaces the full default param set. */
     referenceForType(type) {
-      if (!this._byType || !type) return null;
-      const e = this._byType[String(type).toLowerCase()];
-      return e ? e.schema : null;
+      if (!type) return null;
+      const t = String(type).toLowerCase();
+      const e = this._byType ? this._byType[t] : null;
+      const sample = e ? e.schema : null;
+      const struct = STRUCTURAL[t];
+      if (struct && sample) return this.mergeForType(struct, sample); // sample wins; struct adds the rest
+      return sample || (struct ? JSON.parse(JSON.stringify(struct)) : null);
     },
 
     /** Merge for the TOP level: keep the instance's key ORDER (and values), then

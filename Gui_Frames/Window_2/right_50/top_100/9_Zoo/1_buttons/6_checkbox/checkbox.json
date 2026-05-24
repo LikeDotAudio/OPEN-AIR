@@ -15,10 +15,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Feature Enabled",
-            "Fr": "Feature Activé",
-            "De": "Feature Aktiviert",
-            "Es": "Feature Habilitado"
+            "text": {
+              "En": "Feature Enabled",
+              "Fr": "Feature Activé",
+              "De": "Feature Aktiviert",
+              "Es": "Feature Habilitado"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -26,16 +30,24 @@
             "type": "_SmartCheckbox",
             "label": {
               "active": {
-                "En": "Feature Enabled",
-                "Fr": "Feature Activé",
-                "De": "Feature Aktiviert",
-                "Es": "Feature Habilitado"
+                "text": {
+                  "En": "Feature Enabled",
+                  "Fr": "Feature Activé",
+                  "De": "Feature Aktiviert",
+                  "Es": "Feature Habilitado"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               },
               "inactive": {
-                "En": "Feature Disabled",
-                "Fr": "Feature Désactivé",
-                "De": "Feature Deaktiviert",
-                "Es": "Feature Deshabilitado"
+                "text": {
+                  "En": "Feature Disabled",
+                  "Fr": "Feature Désactivé",
+                  "De": "Feature Deaktiviert",
+                  "Es": "Feature Deshabilitado"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "notes": "Checkbox to enable/disable a specific feature.",
@@ -54,10 +66,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Auto-Save ON",
-            "Fr": "Auto-Save ON",
-            "De": "Auto-Save ON",
-            "Es": "Auto-Save ON"
+            "text": {
+              "En": "Auto-Save ON",
+              "Fr": "Auto-Save ON",
+              "De": "Auto-Save ON",
+              "Es": "Auto-Save ON"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -65,16 +81,24 @@
             "type": "_SmartCheckbox",
             "label": {
               "active": {
-                "En": "Auto-Save ON",
-                "Fr": "Auto-Save ON",
-                "De": "Auto-Save ON",
-                "Es": "Auto-Save ON"
+                "text": {
+                  "En": "Auto-Save ON",
+                  "Fr": "Auto-Save ON",
+                  "De": "Auto-Save ON",
+                  "Es": "Auto-Save ON"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               },
               "inactive": {
-                "En": "Auto-Save OFF",
-                "Fr": "Auto-Save OFF",
-                "De": "Auto-Save OFF",
-                "Es": "Auto-Save OFF"
+                "text": {
+                  "En": "Auto-Save OFF",
+                  "Fr": "Auto-Save OFF",
+                  "De": "Auto-Save OFF",
+                  "Es": "Auto-Save OFF"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "notes": "Checkbox for auto-save functionality, enabled by default.",
@@ -93,10 +117,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Show Gridlines",
-            "Fr": "Show Gridlines",
-            "De": "Show Gridlines",
-            "Es": "Show Gridlines"
+            "text": {
+              "En": "Show Gridlines",
+              "Fr": "Show Gridlines",
+              "De": "Show Gridlines",
+              "Es": "Show Gridlines"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -104,16 +132,24 @@
             "type": "_SmartCheckbox",
             "label": {
               "active": {
-                "En": "Show Gridlines",
-                "Fr": "Show Gridlines",
-                "De": "Show Gridlines",
-                "Es": "Show Gridlines"
+                "text": {
+                  "En": "Show Gridlines",
+                  "Fr": "Show Gridlines",
+                  "De": "Show Gridlines",
+                  "Es": "Show Gridlines"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               },
               "inactive": {
-                "En": "Hide Gridlines",
-                "Fr": "Hide Gridlines",
-                "De": "Hide Gridlines",
-                "Es": "Hide Gridlines"
+                "text": {
+                  "En": "Hide Gridlines",
+                  "Fr": "Hide Gridlines",
+                  "De": "Hide Gridlines",
+                  "Es": "Hide Gridlines"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "notes": "Checkbox to toggle visibility of gridlines.",
@@ -132,10 +168,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Gui Checkbox 04 Dark Mode",
-            "Fr": "Gui Checkbox 04 Dark Mode",
-            "De": "Gui Checkbox 04 Dark Mode",
-            "Es": "Gui Checkbox 04 Dark Mode"
+            "text": {
+              "En": "Gui Checkbox 04 Dark Mode",
+              "Fr": "Gui Checkbox 04 Dark Mode",
+              "De": "Gui Checkbox 04 Dark Mode",
+              "Es": "Gui Checkbox 04 Dark Mode"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -163,10 +203,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Notifications ON",
-            "Fr": "Notifications ON",
-            "De": "Notifications ON",
-            "Es": "Notifications ON"
+            "text": {
+              "En": "Notifications ON",
+              "Fr": "Notifications ON",
+              "De": "Notifications ON",
+              "Es": "Notifications ON"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -175,16 +219,24 @@
               "type": "_SmartCheckbox",
               "label": {
                 "active": {
-                  "En": "Notifications ON",
-                  "Fr": "Notifications ON",
-                  "De": "Notifications ON",
-                  "Es": "Notifications ON"
+                  "text": {
+                    "En": "Notifications ON",
+                    "Fr": "Notifications ON",
+                    "De": "Notifications ON",
+                    "Es": "Notifications ON"
+                  },
+                  "text_size": 12,
+                  "text_color": "#cccccc"
                 },
                 "inactive": {
-                  "En": "Notifications OFF",
-                  "Fr": "Notifications OFF",
-                  "De": "Notifications OFF",
-                  "Es": "Notifications OFF"
+                  "text": {
+                    "En": "Notifications OFF",
+                    "Fr": "Notifications OFF",
+                    "De": "Notifications OFF",
+                    "Es": "Notifications OFF"
+                  },
+                  "text_size": 12,
+                  "text_color": "#cccccc"
                 }
               },
               "notes": "Checkbox to control system notifications.",

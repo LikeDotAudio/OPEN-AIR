@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FaderDial — Artistic Designer (standalone)</title>
+  <link rel="icon" href="data:," />
+  <!--
+    Standalone host for the FaderDial bespoke "Artistic Properties" designer.
+    OPEN VIA THE WEB SERVER (so /api/grabbag resolves), e.g.:
+      http://localhost:8000/libControl/faders/FaderDial/Designer.html
+    It reuses the SAME Designer.jsx the WYSIWYG pop-out uses; here it drives a
+    local in-memory node and offers an Export JSON box to paste back.
+  -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    html, body { margin: 0; height: 100%; background: #0d0d0d; color: #eee;
+      font-family: 'Segoe UI', Tahoma, sans-serif; }
+    #root { height: 100%; }
+    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar-track { background: #111; }
+    ::-webkit-scrollbar-thumb { background: #444; border-radius: 5px; }
+  </style>
+</head>
+<body>
+  <div id="root">Loading…</div>
+
+  <!-- widget render deps (paths relative to libControl/faders/FaderDial/) -->
+  <script type="text/babel" src="../core/utils.js"></script>
+  <script type="text/babel" src="../core/Scale.jsx"></script>
+  <script type="text/babel" src="../core/Cap.jsx"></script>
+  <script type="text/babel" src="../core/Fader.jsx"></script>
+  <script type="text/babel" src="../../Knobs/Knob/Knob.jsx"></script>
+  <script type="text/babel" src="./FaderDial.jsx"></script>
+
+  <!-- frame engine (relative to FaderDial/: ../../../ = frontEnd/) -->
+  <script type="text/babel" src="../../../comMQTT/MqttProvider.jsx"></script>
+  <script type="text/babel" src="../../../frameLayout/oaCssLen.js"></script>
+  <script type="text/babel" src="../../../frameLayout/OcaBin.jsx"></script>
+  <script type="text/babel" src="../../../frameLayout/OcaBlock.jsx"></script>
+  <script type="text/babel" src="../../../frameLayout/OcaArray.jsx"></script>
+  <script type="text/babel" src="../../../frameLayout/FieldComponent.jsx"></script>
+  <script type="text/babel" src="../../../frameLayout/WidgetFactory.jsx"></script>
+  <script type="text/babel" src="../../../frameLayout/SplitLayout.jsx"></script>
+  <script type="text/babel" src="../../../frameLayout/TabLayout.jsx"></script>
+  <script type="text/babel" src="../../../frameLayout/LoaderOrchestrator.jsx"></script>
+
+  <!-- artistic framework + enum/reference loaders + this widget's bespoke designer -->
+  <script type="text/babel" src="../../../editorWYSIWYG/FileReaders/grab_bag_loader.jsx"></script>
+  <script type="text/babel" src="../../../editorWYSIWYG/Constants/property_options.jsx"></script>
+  <script type="text/babel" src="../../../editorWYSIWYG/Constants/composite_schemas.jsx"></script>
+  <script type="text/babel" src="../../../editorWYSIWYG/Interface/PropertyEditor/artistic_designer.jsx"></script>
+  <script type="text/babel" src="./Designer.jsx"></script>
+
+  <script type="text/babel">
+    const TYPE = '_Horizontal_with_dial_Value';
+    const { useState, useEffect, useMemo } = React;
+
+    const setAtPath = (root, path, value) => {
+      const parts = String(path).split('.');
+      let n = root;
+      for (let i = 0; i < parts.length - 1; i++) {
+        if (n[parts[i]] == null || typeof n[parts[i]] !== 'object') n[parts[i]] = {};
+        n = n[parts[i]];
+      }
+      n[parts[parts.length - 1]] = value;
+    };
+
+    function ExportBox({ node }) {
+      const [open, setOpen] = useState(false);
+      const json = JSON.stringify(node, null, 2);
+      return (
+        <div style={{ borderTop: '1px solid #333', padding: 8, background: '#111' }}>
+          <button onClick={() => setOpen(!open)}
+            style={{ background: '#2a2a2a', color: '#FF9900', border: '1px solid #444', borderRadius: 4, padding: '4px 10px', cursor: 'pointer', fontSize: 12 }}>
+            {open ? '▾' : '▸'} Export JSON
+          </button>
+          <button onClick={() => navigator.clipboard && navigator.clipboard.writeText(json)}
+            style={{ marginLeft: 6, background: '#2a2a2a', color: '#ddd', border: '1px solid #444', borderRadius: 4, padding: '4px 10px', cursor: 'pointer', fontSize: 12 }}>
+            ⧉ Copy
+          </button>
+          {open && <textarea readOnly value={json}
+            style={{ width: '100%', height: 180, marginTop: 6, background: '#0a0a0a', color: '#bada55',
+              border: '1px solid #333', borderRadius: 4, fontFamily: 'monospace', fontSize: 11, boxSizing: 'border-box' }} />}
+        </div>
+      );
+    }
+
+    function Standalone() {
+      const [node, setNode] = useState({ type: TYPE });
+      const [ready, setReady] = useState(false);
+      useEffect(() => {
+        Promise.all([window.OaEdComposite.load(), window.OaEdEnum.load()])
+          .then(() => {
+            const ref = window.OaEdComposite.referenceForType(TYPE);
+            setNode(ref ? JSON.parse(JSON.stringify(ref)) : { type: TYPE });
+            setReady(true);
+          })
+          .catch(() => setReady(true));
+      }, []);
+
+      const store = useMemo(() => ({
+        setProp: (path, dot, value) => setNode((prev) => {
+          const d = JSON.parse(JSON.stringify(prev));
+          setAtPath(d, path ? `${path}.${dot}` : dot, value);
+          return d;
+        }),
+        getNode: () => node,
+      }), [node]);
+
+      const Bespoke = window.OaDesignerRegistry[TYPE];
+      if (!ready) return <div style={{ padding: 20, color: '#888' }}>Loading library reference…</div>;
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+          <div style={{ padding: '10px 14px', borderBottom: '1px solid #333', display: 'flex', alignItems: 'center', gap: 10 }}>
+            <span style={{ color: '#FF9900', fontWeight: 'bold', letterSpacing: 1 }}>⚡ ARTISTIC DESIGNER</span>
+            <span style={{ fontWeight: 'bold' }}>{TYPE}</span>
+            <span style={{ fontSize: 10, color: '#666' }}>standalone</span>
+          </div>
+          <div style={{ flex: 1, minHeight: 0, display: 'flex' }}>
+            <div style={{ flex: '1 1 55%', minWidth: 0, borderRight: '1px solid #333', background: '#0d0d0d', display: 'flex' }}>
+              <window.OaEdArtisticPreview nodeKey="preview" node={node} />
+            </div>
+            <div style={{ flex: '1 1 45%', minWidth: 320, display: 'flex', flexDirection: 'column' }}>
+              <div style={{ flex: 1, minHeight: 0, overflow: 'auto', padding: '4px 12px 16px' }}>
+                <Bespoke store={store} path="" node={node} type={TYPE} ctl={window.OaEdArtisticCtl} />
+              </div>
+              <ExportBox node={node} />
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<Standalone />);
+  </script>
+</body>
+</html>

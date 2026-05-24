@@ -37,16 +37,24 @@
                 "type": "_TrapezoidButton",
                 "label": {
                   "active": {
-                    "En": "💾 LOGGING ACTIVE 💾",
-                    "Fr": "💾 LOGGING ACTIVE 💾",
-                    "De": "💾 LOGGING ACTIVE 💾",
-                    "Es": "💾 LOGGING ACTIVE 💾"
+                    "text": {
+                      "En": "💾 LOGGING ACTIVE 💾",
+                      "Fr": "💾 LOGGING ACTIVE 💾",
+                      "De": "💾 LOGGING ACTIVE 💾",
+                      "Es": "💾 LOGGING ACTIVE 💾"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "START LOGGING",
-                    "Fr": "START LOGGING",
-                    "De": "START LOGGING",
-                    "Es": "START LOGGING"
+                    "text": {
+                      "En": "START LOGGING",
+                      "Fr": "START LOGGING",
+                      "De": "START LOGGING",
+                      "Es": "START LOGGING"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "state_default": false,
@@ -101,10 +109,14 @@
                     },
                     "label": {
                       "active": {
-                        "En": "V1",
-                        "Fr": "V1",
-                        "De": "V1",
-                        "Es": "V1"
+                        "text": {
+                          "En": "V1",
+                          "Fr": "V1",
+                          "De": "V1",
+                          "Es": "V1"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "message_details": {
@@ -128,10 +140,14 @@
                     },
                     "label": {
                       "active": {
-                        "En": "A1",
-                        "Fr": "A1",
-                        "De": "A1",
-                        "Es": "A1"
+                        "text": {
+                          "En": "A1",
+                          "Fr": "A1",
+                          "De": "A1",
+                          "Es": "A1"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "message_details": {
@@ -155,10 +171,14 @@
                     },
                     "label": {
                       "active": {
-                        "En": "W1",
-                        "Fr": "W1",
-                        "De": "W1",
-                        "Es": "W1"
+                        "text": {
+                          "En": "W1",
+                          "Fr": "W1",
+                          "De": "W1",
+                          "Es": "W1"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "message_details": {
@@ -179,10 +199,14 @@
                 "type": "_GuiGraph",
                 "label": {
                   "active": {
-                    "En": "Stability 1",
-                    "Fr": "Stability 1",
-                    "De": "Stability 1",
-                    "Es": "Stability 1"
+                    "text": {
+                      "En": "Stability 1",
+                      "Fr": "Stability 1",
+                      "De": "Stability 1",
+                      "Es": "Stability 1"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "height": 100,
@@ -221,10 +245,14 @@
                     },
                     "label": {
                       "active": {
-                        "En": "V2",
-                        "Fr": "V2",
-                        "De": "V2",
-                        "Es": "V2"
+                        "text": {
+                          "En": "V2",
+                          "Fr": "V2",
+                          "De": "V2",
+                          "Es": "V2"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "message_details": {
@@ -248,10 +276,14 @@
                     },
                     "label": {
                       "active": {
-                        "En": "A2",
-                        "Fr": "A2",
-                        "De": "A2",
-                        "Es": "A2"
+                        "text": {
+                          "En": "A2",
+                          "Fr": "A2",
+                          "De": "A2",
+                          "Es": "A2"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "message_details": {
@@ -275,10 +307,14 @@
                     },
                     "label": {
                       "active": {
-                        "En": "W2",
-                        "Fr": "W2",
-                        "De": "W2",
-                        "Es": "W2"
+                        "text": {
+                          "En": "W2",
+                          "Fr": "W2",
+                          "De": "W2",
+                          "Es": "W2"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "message_details": {
@@ -299,10 +335,14 @@
                 "type": "_GuiGraph",
                 "label": {
                   "active": {
-                    "En": "Stability 2",
-                    "Fr": "Stability 2",
-                    "De": "Stability 2",
-                    "Es": "Stability 2"
+                    "text": {
+                      "En": "Stability 2",
+                      "Fr": "Stability 2",
+                      "De": "Stability 2",
+                      "Es": "Stability 2"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "height": 100,
@@ -341,10 +381,14 @@
                     },
                     "label": {
                       "active": {
-                        "En": "V3",
-                        "Fr": "V3",
-                        "De": "V3",
-                        "Es": "V3"
+                        "text": {
+                          "En": "V3",
+                          "Fr": "V3",
+                          "De": "V3",
+                          "Es": "V3"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "message_details": {
@@ -368,10 +412,14 @@
                     },
                     "label": {
                       "active": {
-                        "En": "A3",
-                        "Fr": "A3",
-                        "De": "A3",
-                        "Es": "A3"
+                        "text": {
+                          "En": "A3",
+                          "Fr": "A3",
+                          "De": "A3",
+                          "Es": "A3"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "message_details": {
@@ -395,10 +443,14 @@
                     },
                     "label": {
                       "active": {
-                        "En": "W3",
-                        "Fr": "W3",
-                        "De": "W3",
-                        "Es": "W3"
+                        "text": {
+                          "En": "W3",
+                          "Fr": "W3",
+                          "De": "W3",
+                          "Es": "W3"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "message_details": {
@@ -419,10 +471,14 @@
                 "type": "_GuiGraph",
                 "label": {
                   "active": {
-                    "En": "Stability 3",
-                    "Fr": "Stability 3",
-                    "De": "Stability 3",
-                    "Es": "Stability 3"
+                    "text": {
+                      "En": "Stability 3",
+                      "Fr": "Stability 3",
+                      "De": "Stability 3",
+                      "Es": "Stability 3"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "height": 100,
@@ -461,10 +517,14 @@
                     },
                     "label": {
                       "active": {
-                        "En": "V4",
-                        "Fr": "V4",
-                        "De": "V4",
-                        "Es": "V4"
+                        "text": {
+                          "En": "V4",
+                          "Fr": "V4",
+                          "De": "V4",
+                          "Es": "V4"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "message_details": {
@@ -488,10 +548,14 @@
                     },
                     "label": {
                       "active": {
-                        "En": "A4",
-                        "Fr": "A4",
-                        "De": "A4",
-                        "Es": "A4"
+                        "text": {
+                          "En": "A4",
+                          "Fr": "A4",
+                          "De": "A4",
+                          "Es": "A4"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "message_details": {
@@ -515,10 +579,14 @@
                     },
                     "label": {
                       "active": {
-                        "En": "W4",
-                        "Fr": "W4",
-                        "De": "W4",
-                        "Es": "W4"
+                        "text": {
+                          "En": "W4",
+                          "Fr": "W4",
+                          "De": "W4",
+                          "Es": "W4"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "message_details": {
@@ -539,10 +607,14 @@
                 "type": "_GuiGraph",
                 "label": {
                   "active": {
-                    "En": "Stability 4",
-                    "Fr": "Stability 4",
-                    "De": "Stability 4",
-                    "Es": "Stability 4"
+                    "text": {
+                      "En": "Stability 4",
+                      "Fr": "Stability 4",
+                      "De": "Stability 4",
+                      "Es": "Stability 4"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "height": 100,
@@ -581,10 +653,14 @@
                     },
                     "label": {
                       "active": {
-                        "En": "V5",
-                        "Fr": "V5",
-                        "De": "V5",
-                        "Es": "V5"
+                        "text": {
+                          "En": "V5",
+                          "Fr": "V5",
+                          "De": "V5",
+                          "Es": "V5"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "message_details": {
@@ -608,10 +684,14 @@
                     },
                     "label": {
                       "active": {
-                        "En": "A5",
-                        "Fr": "A5",
-                        "De": "A5",
-                        "Es": "A5"
+                        "text": {
+                          "En": "A5",
+                          "Fr": "A5",
+                          "De": "A5",
+                          "Es": "A5"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "message_details": {
@@ -635,10 +715,14 @@
                     },
                     "label": {
                       "active": {
-                        "En": "W5",
-                        "Fr": "W5",
-                        "De": "W5",
-                        "Es": "W5"
+                        "text": {
+                          "En": "W5",
+                          "Fr": "W5",
+                          "De": "W5",
+                          "Es": "W5"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "message_details": {
@@ -659,10 +743,14 @@
                 "type": "_GuiGraph",
                 "label": {
                   "active": {
-                    "En": "Stability 5",
-                    "Fr": "Stability 5",
-                    "De": "Stability 5",
-                    "Es": "Stability 5"
+                    "text": {
+                      "En": "Stability 5",
+                      "Fr": "Stability 5",
+                      "De": "Stability 5",
+                      "Es": "Stability 5"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "height": 100,
@@ -701,10 +789,14 @@
                     },
                     "label": {
                       "active": {
-                        "En": "V6",
-                        "Fr": "V6",
-                        "De": "V6",
-                        "Es": "V6"
+                        "text": {
+                          "En": "V6",
+                          "Fr": "V6",
+                          "De": "V6",
+                          "Es": "V6"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "message_details": {
@@ -728,10 +820,14 @@
                     },
                     "label": {
                       "active": {
-                        "En": "A6",
-                        "Fr": "A6",
-                        "De": "A6",
-                        "Es": "A6"
+                        "text": {
+                          "En": "A6",
+                          "Fr": "A6",
+                          "De": "A6",
+                          "Es": "A6"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "message_details": {
@@ -755,10 +851,14 @@
                     },
                     "label": {
                       "active": {
-                        "En": "W6",
-                        "Fr": "W6",
-                        "De": "W6",
-                        "Es": "W6"
+                        "text": {
+                          "En": "W6",
+                          "Fr": "W6",
+                          "De": "W6",
+                          "Es": "W6"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "message_details": {
@@ -779,10 +879,14 @@
                 "type": "_GuiGraph",
                 "label": {
                   "active": {
-                    "En": "Stability 6",
-                    "Fr": "Stabilité 6",
-                    "De": "Stabilität 6",
-                    "Es": "Estabilidad 6"
+                    "text": {
+                      "En": "Stability 6",
+                      "Fr": "Stabilité 6",
+                      "De": "Stabilität 6",
+                      "Es": "Estabilidad 6"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "height": 100,
@@ -821,10 +925,14 @@
                     },
                     "label": {
                       "active": {
-                        "En": "V7",
-                        "Fr": "V7",
-                        "De": "V7",
-                        "Es": "V7"
+                        "text": {
+                          "En": "V7",
+                          "Fr": "V7",
+                          "De": "V7",
+                          "Es": "V7"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "message_details": {
@@ -848,10 +956,14 @@
                     },
                     "label": {
                       "active": {
-                        "En": "A7",
-                        "Fr": "A7",
-                        "De": "A7",
-                        "Es": "A7"
+                        "text": {
+                          "En": "A7",
+                          "Fr": "A7",
+                          "De": "A7",
+                          "Es": "A7"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "message_details": {
@@ -875,10 +987,14 @@
                     },
                     "label": {
                       "active": {
-                        "En": "W7",
-                        "Fr": "W7",
-                        "De": "W7",
-                        "Es": "W7"
+                        "text": {
+                          "En": "W7",
+                          "Fr": "W7",
+                          "De": "W7",
+                          "Es": "W7"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "message_details": {
@@ -899,10 +1015,14 @@
                 "type": "_GuiGraph",
                 "label": {
                   "active": {
-                    "En": "Stability 7",
-                    "Fr": "Stability 7",
-                    "De": "Stability 7",
-                    "Es": "Stability 7"
+                    "text": {
+                      "En": "Stability 7",
+                      "Fr": "Stability 7",
+                      "De": "Stability 7",
+                      "Es": "Stability 7"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "height": 100,
@@ -941,10 +1061,14 @@
                     },
                     "label": {
                       "active": {
-                        "En": "V8",
-                        "Fr": "V8",
-                        "De": "V8",
-                        "Es": "V8"
+                        "text": {
+                          "En": "V8",
+                          "Fr": "V8",
+                          "De": "V8",
+                          "Es": "V8"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "message_details": {
@@ -968,10 +1092,14 @@
                     },
                     "label": {
                       "active": {
-                        "En": "A8",
-                        "Fr": "A8",
-                        "De": "A8",
-                        "Es": "A8"
+                        "text": {
+                          "En": "A8",
+                          "Fr": "A8",
+                          "De": "A8",
+                          "Es": "A8"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "message_details": {
@@ -995,10 +1123,14 @@
                     },
                     "label": {
                       "active": {
-                        "En": "W8",
-                        "Fr": "W8",
-                        "De": "W8",
-                        "Es": "W8"
+                        "text": {
+                          "En": "W8",
+                          "Fr": "W8",
+                          "De": "W8",
+                          "Es": "W8"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "message_details": {
@@ -1019,10 +1151,14 @@
                 "type": "_GuiGraph",
                 "label": {
                   "active": {
-                    "En": "Stability 8",
-                    "Fr": "Stability 8",
-                    "De": "Stability 8",
-                    "Es": "Stability 8"
+                    "text": {
+                      "En": "Stability 8",
+                      "Fr": "Stability 8",
+                      "De": "Stability 8",
+                      "Es": "Stability 8"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "height": 100,

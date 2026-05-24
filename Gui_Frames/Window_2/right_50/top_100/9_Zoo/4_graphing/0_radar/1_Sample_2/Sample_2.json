@@ -26,11 +26,16 @@
             "transparent": true,
             "label": {
               "active": {
-                "En": "Variant 1",
-                "Fr": "Variant 1",
-                "De": "Variant 1",
-                "Es": "Variant 1"
-              }
+                "text": {
+                  "En": "Variant 1",
+                  "Fr": "Variant 1",
+                  "De": "Variant 1",
+                  "Es": "Variant 1"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
             },
             "app_settings": {
               "title": "Sonar",
@@ -81,7 +86,6 @@
               "mqtt_topic": "sensor/radar_eye/01",
               "log_to_file": false
             },
-            "show_label": true,
             "notes": ""
           },
           "radar_eye_2": {
@@ -89,11 +93,16 @@
             "transparent": true,
             "label": {
               "active": {
-                "En": "Variant 2",
-                "Fr": "Variant 2",
-                "De": "Variant 2",
-                "Es": "Variant 2"
-              }
+                "text": {
+                  "En": "Variant 2",
+                  "Fr": "Variant 2",
+                  "De": "Variant 2",
+                  "Es": "Variant 2"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
             },
             "app_settings": {
               "title": "Sonar",
@@ -144,7 +153,6 @@
               "mqtt_topic": "sensor/radar_eye/02",
               "log_to_file": false
             },
-            "show_label": true,
             "notes": ""
           },
           "radar_eye_3": {
@@ -152,11 +160,16 @@
             "transparent": true,
             "label": {
               "active": {
-                "En": "Variant 3",
-                "Fr": "Variant 3",
-                "De": "Variant 3",
-                "Es": "Variant 3"
-              }
+                "text": {
+                  "En": "Variant 3",
+                  "Fr": "Variant 3",
+                  "De": "Variant 3",
+                  "Es": "Variant 3"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
             },
             "app_settings": {
               "title": "Sonar",
@@ -207,7 +220,6 @@
               "mqtt_topic": "sensor/radar_eye/03",
               "log_to_file": false
             },
-            "show_label": true,
             "notes": ""
           },
           "radar_eye_4": {
@@ -215,11 +227,16 @@
             "transparent": true,
             "label": {
               "active": {
-                "En": "Variant 4",
-                "Fr": "Variant 4",
-                "De": "Variant 4",
-                "Es": "Variant 4"
-              }
+                "text": {
+                  "En": "Variant 4",
+                  "Fr": "Variant 4",
+                  "De": "Variant 4",
+                  "Es": "Variant 4"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
             },
             "app_settings": {
               "title": "Sonar",
@@ -270,7 +287,6 @@
               "mqtt_topic": "sensor/radar_eye/04",
               "log_to_file": false
             },
-            "show_label": true,
             "notes": ""
           },
           "radar_eye_5": {
@@ -278,11 +294,16 @@
             "transparent": true,
             "label": {
               "active": {
-                "En": "Variant 5",
-                "Fr": "Variant 5",
-                "De": "Variant 5",
-                "Es": "Variant 5"
-              }
+                "text": {
+                  "En": "Variant 5",
+                  "Fr": "Variant 5",
+                  "De": "Variant 5",
+                  "Es": "Variant 5"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
             },
             "app_settings": {
               "title": "Sonar",
@@ -333,7 +354,6 @@
               "mqtt_topic": "sensor/radar_eye/05",
               "log_to_file": false
             },
-            "show_label": true,
             "notes": ""
           },
           "radar_eye_6": {
@@ -341,11 +361,16 @@
             "transparent": true,
             "label": {
               "active": {
-                "En": "Variant 6",
-                "Fr": "Variant 6",
-                "De": "Variant 6",
-                "Es": "Variant 6"
-              }
+                "text": {
+                  "En": "Variant 6",
+                  "Fr": "Variant 6",
+                  "De": "Variant 6",
+                  "Es": "Variant 6"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
             },
             "app_settings": {
               "title": "Sonar",
@@ -396,7 +421,6 @@
               "mqtt_topic": "sensor/radar_eye/06",
               "log_to_file": false
             },
-            "show_label": true,
             "notes": ""
           }
         }

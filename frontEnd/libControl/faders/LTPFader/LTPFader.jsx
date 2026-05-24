@@ -194,7 +194,7 @@ const LTPFader = ({ config, value, rotValue, onChange }) => {
 
     return (
         <div className="ltp-wrapper" style={{ 
-            backgroundColor: '#3c3f41', 
+            backgroundColor: (window.OaTransparency ? window.OaTransparency.bg(config, '#3c3f41') : '#3c3f41'), 
             border: '1px solid #555', 
             padding: '10px', 
             borderRadius: '4px',

@@ -15,10 +15,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Instrument Connections",
-            "Fr": "Instrument Connections",
-            "De": "Instrument Connections",
-            "Es": "Instrument Connections"
+            "text": {
+              "En": "Instrument Connections",
+              "Fr": "Instrument Connections",
+              "De": "Instrument Connections",
+              "Es": "Instrument Connections"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -26,10 +30,14 @@
             "type": "GuiTable",
             "label": {
               "active": {
-                "En": "Instrument Connections",
-                "Fr": "Instrument Connections",
-                "De": "Instrument Connections",
-                "Es": "Instrument Connections"
+                "text": {
+                  "En": "Instrument Connections",
+                  "Fr": "Instrument Connections",
+                  "De": "Instrument Connections",
+                  "Es": "Instrument Connections"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "height": 80,
@@ -67,10 +75,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Process Monitoring",
-            "Fr": "Process Monitoring",
-            "De": "Process Monitoring",
-            "Es": "Process Monitoring"
+            "text": {
+              "En": "Process Monitoring",
+              "Fr": "Process Monitoring",
+              "De": "Process Monitoring",
+              "Es": "Process Monitoring"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -78,10 +90,14 @@
             "type": "GuiTable",
             "label": {
               "active": {
-                "En": "Process Monitoring",
-                "Fr": "Process Monitoring",
-                "De": "Process Monitoring",
-                "Es": "Process Monitoring"
+                "text": {
+                  "En": "Process Monitoring",
+                  "Fr": "Process Monitoring",
+                  "De": "Process Monitoring",
+                  "Es": "Process Monitoring"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "height": 100,
@@ -143,10 +159,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Configuration Settings",
-            "Fr": "Configuration Paramètres",
-            "De": "Configuration Einstellungen",
-            "Es": "Configuration Ajustes"
+            "text": {
+              "En": "Configuration Settings",
+              "Fr": "Configuration Paramètres",
+              "De": "Configuration Einstellungen",
+              "Es": "Configuration Ajustes"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -154,10 +174,14 @@
             "type": "GuiTable",
             "label": {
               "active": {
-                "En": "Configuration Settings",
-                "Fr": "Configuration Paramètres",
-                "De": "Configuration Einstellungen",
-                "Es": "Configuration Ajustes"
+                "text": {
+                  "En": "Configuration Settings",
+                  "Fr": "Configuration Paramètres",
+                  "De": "Configuration Einstellungen",
+                  "Es": "Configuration Ajustes"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "height": 100,
@@ -199,10 +223,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "New Log Entries",
-            "Fr": "New Log Entries",
-            "De": "New Log Entries",
-            "Es": "New Log Entries"
+            "text": {
+              "En": "New Log Entries",
+              "Fr": "New Log Entries",
+              "De": "New Log Entries",
+              "Es": "New Log Entries"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -210,10 +238,14 @@
             "type": "GuiTable",
             "label": {
               "active": {
-                "En": "New Log Entries",
-                "Fr": "New Log Entries",
-                "De": "New Log Entries",
-                "Es": "New Log Entries"
+                "text": {
+                  "En": "New Log Entries",
+                  "Fr": "New Log Entries",
+                  "De": "New Log Entries",
+                  "Es": "New Log Entries"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "height": 120,
@@ -238,10 +270,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Resource Allocation",
-            "Fr": "Resource Allocation",
-            "De": "Resource Allocation",
-            "Es": "Resource Allocation"
+            "text": {
+              "En": "Resource Allocation",
+              "Fr": "Resource Allocation",
+              "De": "Resource Allocation",
+              "Es": "Resource Allocation"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -249,10 +285,14 @@
             "type": "GuiTable",
             "label": {
               "active": {
-                "En": "Resource Allocation",
-                "Fr": "Resource Allocation",
-                "De": "Resource Allocation",
-                "Es": "Resource Allocation"
+                "text": {
+                  "En": "Resource Allocation",
+                  "Fr": "Resource Allocation",
+                  "De": "Resource Allocation",
+                  "Es": "Resource Allocation"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "height": 70,

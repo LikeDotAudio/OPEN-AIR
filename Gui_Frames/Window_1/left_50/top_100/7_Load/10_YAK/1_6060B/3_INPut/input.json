@@ -24,10 +24,14 @@
             "type": "_GuiActuator",
             "label": {
               "inactive": {
-                "En": "Input ON",
-                "Fr": "Entrée ON",
-                "De": "Eingang ON",
-                "Es": "Entrada ON"
+                "text": {
+                  "En": "Input ON",
+                  "Fr": "Entrée ON",
+                  "De": "Eingang ON",
+                  "Es": "Entrada ON"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "AES70": "OcaBooleanActuator",
@@ -60,10 +64,14 @@
             "type": "_GuiActuator",
             "label": {
               "inactive": {
-                "En": "Input OFF",
-                "Fr": "Entrée OFF",
-                "De": "Eingang OFF",
-                "Es": "Entrada OFF"
+                "text": {
+                  "En": "Input OFF",
+                  "Fr": "Entrée OFF",
+                  "De": "Eingang OFF",
+                  "Es": "Entrada OFF"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "AES70": "OcaBooleanActuator",
@@ -96,10 +104,14 @@
             "type": "_GuiActuator",
             "label": {
               "inactive": {
-                "En": "Clear Prot",
-                "Fr": "Effacer Prot",
-                "De": "Löschen Prot",
-                "Es": "Borrar Prot"
+                "text": {
+                  "En": "Clear Prot",
+                  "Fr": "Effacer Prot",
+                  "De": "Löschen Prot",
+                  "Es": "Borrar Prot"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "AES70": "OcaBooleanActuator",

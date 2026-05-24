@@ -27,10 +27,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "Trigger (*TRG)",
-                    "Fr": "Déclencheur (*TRG)",
-                    "De": "Trigger (*TRG)",
-                    "Es": "Disparo (*TRG)"
+                    "text": {
+                      "En": "Trigger (*TRG)",
+                      "Fr": "Déclencheur (*TRG)",
+                      "De": "Trigger (*TRG)",
+                      "Es": "Disparo (*TRG)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -62,10 +66,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "Reset (*RST)",
-                    "Fr": "Réinitialiser (*RST)",
-                    "De": "Zurücksetzen (*RST)",
-                    "Es": "Reiniciar (*RST)"
+                    "text": {
+                      "En": "Reset (*RST)",
+                      "Fr": "Réinitialiser (*RST)",
+                      "De": "Zurücksetzen (*RST)",
+                      "Es": "Reiniciar (*RST)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -97,10 +105,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "Clear Display",
-                    "Fr": "Effacer l'affichage",
-                    "De": "Anzeige löschen",
-                    "Es": "Borrar pantalla"
+                    "text": {
+                      "En": "Clear Display",
+                      "Fr": "Effacer l'affichage",
+                      "De": "Anzeige löschen",
+                      "Es": "Borrar pantalla"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",

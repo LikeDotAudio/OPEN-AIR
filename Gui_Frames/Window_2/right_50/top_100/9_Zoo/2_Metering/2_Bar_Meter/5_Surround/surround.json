@@ -25,10 +25,14 @@
             "type": "OcaBlock",
             "label": {
               "active": {
-                "En": "5.1 Surround (Vertical + Scale)",
-                "Fr": "5.1 Surround (Vertical + Scale)",
-                "De": "5.1 Surround (Vertical + Scale)",
-                "Es": "5.1 Surround (Vertical + Scale)"
+                "text": {
+                  "En": "5.1 Surround (Vertical + Scale)",
+                  "Fr": "5.1 Surround (Vertical + Scale)",
+                  "De": "5.1 Surround (Vertical + Scale)",
+                  "Es": "5.1 Surround (Vertical + Scale)"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "layout_columns": 6,
@@ -59,10 +63,10 @@
                   "En": "L",
                   "Fr": "L",
                   "De": "L",
-                  "Es": "L"
+                  "Es": "L",
+                  "show_label": true
                 },
                 "labels": {
-                  "show_label": true,
                   "label_position": "top",
                   "show_scale_labels": true
                 },
@@ -120,10 +124,10 @@
                   "En": "C",
                   "Fr": "C",
                   "De": "C",
-                  "Es": "C"
+                  "Es": "C",
+                  "show_label": true
                 },
                 "labels": {
-                  "show_label": true,
                   "label_position": "top",
                   "show_scale_labels": false
                 },
@@ -180,10 +184,10 @@
                   "En": "R",
                   "Fr": "R",
                   "De": "R",
-                  "Es": "R"
+                  "Es": "R",
+                  "show_label": true
                 },
                 "labels": {
-                  "show_label": true,
                   "label_position": "top",
                   "show_scale_labels": false
                 },
@@ -241,10 +245,10 @@
                   "En": "Ls",
                   "Fr": "Ls",
                   "De": "Ls",
-                  "Es": "Ls"
+                  "Es": "Ls",
+                  "show_label": true
                 },
                 "labels": {
-                  "show_label": true,
                   "label_position": "top",
                   "show_scale_labels": false
                 },
@@ -301,10 +305,10 @@
                   "En": "Rs",
                   "Fr": "Rs",
                   "De": "Rs",
-                  "Es": "Rs"
+                  "Es": "Rs",
+                  "show_label": true
                 },
                 "labels": {
-                  "show_label": true,
                   "label_position": "top",
                   "show_scale_labels": false
                 },
@@ -361,10 +365,10 @@
                   "En": "LFE",
                   "Fr": "LFE",
                   "De": "LFE",
-                  "Es": "LFE"
+                  "Es": "LFE",
+                  "show_label": true
                 },
                 "labels": {
-                  "show_label": true,
                   "label_position": "top",
                   "show_scale_labels": true
                 },
@@ -422,10 +426,14 @@
             "type": "OcaBlock",
             "label": {
               "active": {
-                "En": "5.1 Surround (Horizontal + Start Labels)",
-                "Fr": "5.1 Surround (Horizontal + Start Labels)",
-                "De": "5.1 Surround (Horizontal + Start Labels)",
-                "Es": "5.1 Surround (Horizontal + Start Labels)"
+                "text": {
+                  "En": "5.1 Surround (Horizontal + Start Labels)",
+                  "Fr": "5.1 Surround (Horizontal + Start Labels)",
+                  "De": "5.1 Surround (Horizontal + Start Labels)",
+                  "Es": "5.1 Surround (Horizontal + Start Labels)"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "layout_columns": 1,
@@ -436,10 +444,10 @@
                   "En": "L",
                   "Fr": "L",
                   "De": "L",
-                  "Es": "L"
+                  "Es": "L",
+                  "show_label": true
                 },
                 "labels": {
-                  "show_label": true,
                   "label_position": "left",
                   "label_width": 4,
                   "show_scale_labels": true
@@ -498,10 +506,10 @@
                   "En": "C",
                   "Fr": "C",
                   "De": "C",
-                  "Es": "C"
+                  "Es": "C",
+                  "show_label": true
                 },
                 "labels": {
-                  "show_label": true,
                   "label_position": "left",
                   "label_width": 4,
                   "show_scale_labels": false
@@ -560,10 +568,10 @@
                   "En": "R",
                   "Fr": "R",
                   "De": "R",
-                  "Es": "R"
+                  "Es": "R",
+                  "show_label": true
                 },
                 "labels": {
-                  "show_label": true,
                   "label_position": "left",
                   "label_width": 4,
                   "show_scale_labels": false
@@ -622,10 +630,10 @@
                   "En": "Ls",
                   "Fr": "Ls",
                   "De": "Ls",
-                  "Es": "Ls"
+                  "Es": "Ls",
+                  "show_label": true
                 },
                 "labels": {
-                  "show_label": true,
                   "label_position": "left",
                   "label_width": 4,
                   "show_scale_labels": false
@@ -684,10 +692,10 @@
                   "En": "Rs",
                   "Fr": "Rs",
                   "De": "Rs",
-                  "Es": "Rs"
+                  "Es": "Rs",
+                  "show_label": true
                 },
                 "labels": {
-                  "show_label": true,
                   "label_position": "left",
                   "label_width": 4,
                   "show_scale_labels": false
@@ -746,10 +754,10 @@
                   "En": "LFE",
                   "Fr": "LFE",
                   "De": "LFE",
-                  "Es": "LFE"
+                  "Es": "LFE",
+                  "show_label": true
                 },
                 "labels": {
-                  "show_label": true,
                   "label_position": "left",
                   "label_width": 4,
                   "show_scale_labels": true

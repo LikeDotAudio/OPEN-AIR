@@ -96,7 +96,7 @@ const ButtonToggle = ({ value, onChange, config, topic, nodeJson }) => {
                 style={{
                     width: `${width}px`,
                     height: `${height}px`,
-                    backgroundColor: currentBg,
+                    backgroundColor: (window.OaTransparency ? window.OaTransparency.bg(config, currentBg) : currentBg),
                     border: `${borderW}px solid ${isHovered.current ? (val ? grpActive.border_color : '#888') : currentBorder}`,
                     borderRadius: `${cornerRadius}px`,
                     display: 'flex',

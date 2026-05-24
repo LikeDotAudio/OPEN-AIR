@@ -46,10 +46,14 @@
             },
             "label": {
               "active": {
-                "En": "MUTE",
-                "Fr": "MUTE",
-                "De": "MUTE",
-                "Es": "MUTE"
+                "text": {
+                  "En": "MUTE",
+                  "Fr": "MUTE",
+                  "De": "MUTE",
+                  "Es": "MUTE"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "button_text": "MUT",
@@ -75,10 +79,14 @@
             },
             "label": {
               "active": {
-                "En": "MUTE",
-                "Fr": "MUTE",
-                "De": "MUTE",
-                "Es": "MUTE"
+                "text": {
+                  "En": "MUTE",
+                  "Fr": "MUTE",
+                  "De": "MUTE",
+                  "Es": "MUTE"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "button_text": "HEY",
@@ -104,10 +112,14 @@
             },
             "label": {
               "active": {
-                "En": "SOLO",
-                "Fr": "SOLO",
-                "De": "SOLO",
-                "Es": "SOLO"
+                "text": {
+                  "En": "SOLO",
+                  "Fr": "SOLO",
+                  "De": "SOLO",
+                  "Es": "SOLO"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "button_text": "SOLO",
@@ -133,10 +145,14 @@
             },
             "label": {
               "active": {
-                "En": "BYPASS",
-                "Fr": "BYPASS",
-                "De": "BYPASS",
-                "Es": "BYPASS"
+                "text": {
+                  "En": "BYPASS",
+                  "Fr": "BYPASS",
+                  "De": "BYPASS",
+                  "Es": "BYPASS"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "button_text": "BYP",
@@ -162,10 +178,14 @@
             },
             "label": {
               "active": {
-                "En": "EFFECT",
-                "Fr": "EFFECT",
-                "De": "EFFECT",
-                "Es": "EFFECT"
+                "text": {
+                  "En": "EFFECT",
+                  "Fr": "EFFECT",
+                  "De": "EFFECT",
+                  "Es": "EFFECT"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "button_text": "FX",
@@ -191,10 +211,14 @@
             },
             "label": {
               "active": {
-                "En": "POWER",
-                "Fr": "POWER",
-                "De": "POWER",
-                "Es": "POWER"
+                "text": {
+                  "En": "POWER",
+                  "Fr": "POWER",
+                  "De": "POWER",
+                  "Es": "POWER"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "button_text": "ON",
@@ -289,10 +313,14 @@
             },
             "label": {
               "active": {
-                "En": "SELECT",
-                "Fr": "SELECT",
-                "De": "SELECT",
-                "Es": "SELECT"
+                "text": {
+                  "En": "SELECT",
+                  "Fr": "SELECT",
+                  "De": "SELECT",
+                  "Es": "SELECT"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "width": 100,
@@ -317,10 +345,14 @@
             },
             "label": {
               "active": {
-                "En": "ENTER",
-                "Fr": "ENTER",
-                "De": "ENTER",
-                "Es": "ENTER"
+                "text": {
+                  "En": "ENTER",
+                  "Fr": "ENTER",
+                  "De": "ENTER",
+                  "Es": "ENTER"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "width": 80,
@@ -345,10 +377,14 @@
             },
             "label": {
               "active": {
-                "En": "OK",
-                "Fr": "OK",
-                "De": "OK",
-                "Es": "OK"
+                "text": {
+                  "En": "OK",
+                  "Fr": "OK",
+                  "De": "OK",
+                  "Es": "OK"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "width": 60,
@@ -373,10 +409,14 @@
             },
             "label": {
               "active": {
-                "En": "CANCEL",
-                "Fr": "CANCEL",
-                "De": "CANCEL",
-                "Es": "CANCEL"
+                "text": {
+                  "En": "CANCEL",
+                  "Fr": "CANCEL",
+                  "De": "CANCEL",
+                  "Es": "CANCEL"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "width": 70,
@@ -401,10 +441,14 @@
             },
             "label": {
               "active": {
-                "En": "BACK",
-                "Fr": "BACK",
-                "De": "BACK",
-                "Es": "BACK"
+                "text": {
+                  "En": "BACK",
+                  "Fr": "BACK",
+                  "De": "BACK",
+                  "Es": "BACK"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "width": 50,
@@ -429,10 +473,14 @@
             },
             "label": {
               "active": {
-                "En": "NEXT",
-                "Fr": "NEXT",
-                "De": "NEXT",
-                "Es": "NEXT"
+                "text": {
+                  "En": "NEXT",
+                  "Fr": "NEXT",
+                  "De": "NEXT",
+                  "Es": "NEXT"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "width": 60,
@@ -457,10 +505,14 @@
             },
             "label": {
               "active": {
-                "En": "DONE",
-                "Fr": "DONE",
-                "De": "DONE",
-                "Es": "DONE"
+                "text": {
+                  "En": "DONE",
+                  "Fr": "DONE",
+                  "De": "DONE",
+                  "Es": "DONE"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "width": 70,
@@ -485,10 +537,14 @@
             },
             "label": {
               "active": {
-                "En": "EXECUTE",
-                "Fr": "EXECUTE",
-                "De": "EXECUTE",
-                "Es": "EXECUTE"
+                "text": {
+                  "En": "EXECUTE",
+                  "Fr": "EXECUTE",
+                  "De": "EXECUTE",
+                  "Es": "EXECUTE"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "width": 100,
@@ -509,10 +565,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "BYPASS",
-            "Fr": "BYPASS",
-            "De": "BYPASS",
-            "Es": "BYPASS"
+            "text": {
+              "En": "BYPASS",
+              "Fr": "BYPASS",
+              "De": "BYPASS",
+              "Es": "BYPASS"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -523,10 +583,14 @@
             },
             "label": {
               "active": {
-                "En": "BYPASS",
-                "Fr": "BYPASS",
-                "De": "BYPASS",
-                "Es": "BYPASS"
+                "text": {
+                  "En": "BYPASS",
+                  "Fr": "BYPASS",
+                  "De": "BYPASS",
+                  "Es": "BYPASS"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "width": 75,

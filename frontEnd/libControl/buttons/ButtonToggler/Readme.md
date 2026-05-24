@@ -75,23 +75,47 @@ in the property editor.
       "options": {
         "LPF": {
           "label": {
-            "active": "LOW PASS",
-            "inactive": "LPF"
+            "active": {
+              "text": "LOW PASS",
+              "text_size": 12,
+              "text_color": "#cccccc"
+            },
+            "inactive": {
+              "text": "LPF",
+              "text_size": 12,
+              "text_color": "#cccccc"
+            }
           },
           "selected": true,
           "active_color": "#00FF00"
         },
         "HPF": {
           "label": {
-            "active": "HIGH PASS",
-            "inactive": "HPF"
+            "active": {
+              "text": "HIGH PASS",
+              "text_size": 12,
+              "text_color": "#cccccc"
+            },
+            "inactive": {
+              "text": "HPF",
+              "text_size": 12,
+              "text_color": "#cccccc"
+            }
           },
           "selected": false
         },
         "BPF": {
           "label": {
-            "active": "BAND PASS",
-            "inactive": "BPF"
+            "active": {
+              "text": "BAND PASS",
+              "text_size": 12,
+              "text_color": "#cccccc"
+            },
+            "inactive": {
+              "text": "BPF",
+              "text_size": 12,
+              "text_color": "#cccccc"
+            }
           },
           "selected": false
         }

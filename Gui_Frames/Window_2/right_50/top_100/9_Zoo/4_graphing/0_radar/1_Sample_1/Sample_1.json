@@ -26,11 +26,16 @@
             "transparent": true,
             "label": {
               "active": {
-                "En": "Radar Eye 01",
-                "Fr": "Radar Eye 01",
-                "De": "Radar Eye 01",
-                "Es": "Radar Eye 01"
-              }
+                "text": {
+                  "En": "Radar Eye 01",
+                  "Fr": "Radar Eye 01",
+                  "De": "Radar Eye 01",
+                  "Es": "Radar Eye 01"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
             },
             "app_settings": {
               "title": "Radar Eye v1.0",
@@ -81,7 +86,6 @@
               "mqtt_topic": "",
               "log_to_file": false
             },
-            "show_label": true,
             "notes": ""
           },
           "radar_eye_2": {
@@ -89,11 +93,16 @@
             "transparent": true,
             "label": {
               "active": {
-                "En": "Radar Eye 02",
-                "Fr": "Radar Eye 02",
-                "De": "Radar Eye 02",
-                "Es": "Radar Eye 02"
-              }
+                "text": {
+                  "En": "Radar Eye 02",
+                  "Fr": "Radar Eye 02",
+                  "De": "Radar Eye 02",
+                  "Es": "Radar Eye 02"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
             },
             "app_settings": {
               "title": "Radar Eye v1.0",
@@ -144,7 +153,6 @@
               "mqtt_topic": "",
               "log_to_file": false
             },
-            "show_label": true,
             "notes": ""
           },
           "radar_eye_3": {
@@ -152,11 +160,16 @@
             "transparent": true,
             "label": {
               "active": {
-                "En": "Radar Eye 03",
-                "Fr": "Radar Eye 03",
-                "De": "Radar Eye 03",
-                "Es": "Radar Eye 03"
-              }
+                "text": {
+                  "En": "Radar Eye 03",
+                  "Fr": "Radar Eye 03",
+                  "De": "Radar Eye 03",
+                  "Es": "Radar Eye 03"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
             },
             "app_settings": {
               "title": "Radar Eye v1.0",
@@ -207,7 +220,6 @@
               "mqtt_topic": "",
               "log_to_file": false
             },
-            "show_label": true,
             "notes": ""
           },
           "radar_eye_4": {
@@ -215,11 +227,16 @@
             "transparent": true,
             "label": {
               "active": {
-                "En": "Radar Eye 04",
-                "Fr": "Radar Eye 04",
-                "De": "Radar Eye 04",
-                "Es": "Radar Eye 04"
-              }
+                "text": {
+                  "En": "Radar Eye 04",
+                  "Fr": "Radar Eye 04",
+                  "De": "Radar Eye 04",
+                  "Es": "Radar Eye 04"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
             },
             "app_settings": {
               "title": "Radar Eye v1.0",
@@ -270,7 +287,6 @@
               "mqtt_topic": "",
               "log_to_file": false
             },
-            "show_label": true,
             "notes": ""
           },
           "radar_eye_5": {
@@ -278,11 +294,16 @@
             "transparent": true,
             "label": {
               "active": {
-                "En": "Radar Eye 05",
-                "Fr": "Radar Eye 05",
-                "De": "Radar Eye 05",
-                "Es": "Radar Eye 05"
-              }
+                "text": {
+                  "En": "Radar Eye 05",
+                  "Fr": "Radar Eye 05",
+                  "De": "Radar Eye 05",
+                  "Es": "Radar Eye 05"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
             },
             "app_settings": {
               "title": "Radar Eye v1.0",
@@ -333,7 +354,6 @@
               "mqtt_topic": "",
               "log_to_file": false
             },
-            "show_label": true,
             "notes": ""
           },
           "radar_eye_6": {
@@ -341,11 +361,16 @@
             "transparent": true,
             "label": {
               "active": {
-                "En": "Radar Eye 06",
-                "Fr": "Radar Eye 06",
-                "De": "Radar Eye 06",
-                "Es": "Radar Eye 06"
-              }
+                "text": {
+                  "En": "Radar Eye 06",
+                  "Fr": "Radar Eye 06",
+                  "De": "Radar Eye 06",
+                  "Es": "Radar Eye 06"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
             },
             "app_settings": {
               "title": "Radar Eye v1.0",
@@ -396,7 +421,6 @@
               "mqtt_topic": "",
               "log_to_file": false
             },
-            "show_label": true,
             "notes": ""
           },
           "radar_eye_7": {
@@ -404,11 +428,16 @@
             "transparent": true,
             "label": {
               "active": {
-                "En": "Radar Eye 07",
-                "Fr": "Radar Eye 07",
-                "De": "Radar Eye 07",
-                "Es": "Radar Eye 07"
-              }
+                "text": {
+                  "En": "Radar Eye 07",
+                  "Fr": "Radar Eye 07",
+                  "De": "Radar Eye 07",
+                  "Es": "Radar Eye 07"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
             },
             "app_settings": {
               "title": "Radar Eye v1.0",
@@ -459,7 +488,6 @@
               "mqtt_topic": "",
               "log_to_file": false
             },
-            "show_label": true,
             "notes": ""
           },
           "radar_eye_8": {
@@ -467,11 +495,16 @@
             "transparent": true,
             "label": {
               "active": {
-                "En": "Radar Eye 08",
-                "Fr": "Radar Eye 08",
-                "De": "Radar Eye 08",
-                "Es": "Radar Eye 08"
-              }
+                "text": {
+                  "En": "Radar Eye 08",
+                  "Fr": "Radar Eye 08",
+                  "De": "Radar Eye 08",
+                  "Es": "Radar Eye 08"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
             },
             "app_settings": {
               "title": "Radar Eye v1.0",
@@ -522,7 +555,6 @@
               "mqtt_topic": "",
               "log_to_file": false
             },
-            "show_label": true,
             "notes": ""
           },
           "radar_eye_9": {
@@ -530,11 +562,16 @@
             "transparent": true,
             "label": {
               "active": {
-                "En": "Radar Eye 09",
-                "Fr": "Radar Eye 09",
-                "De": "Radar Eye 09",
-                "Es": "Radar Eye 09"
-              }
+                "text": {
+                  "En": "Radar Eye 09",
+                  "Fr": "Radar Eye 09",
+                  "De": "Radar Eye 09",
+                  "Es": "Radar Eye 09"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
             },
             "app_settings": {
               "title": "Radar Eye v1.0",
@@ -585,7 +622,6 @@
               "mqtt_topic": "",
               "log_to_file": false
             },
-            "show_label": true,
             "notes": ""
           }
         }

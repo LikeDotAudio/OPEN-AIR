@@ -59,7 +59,8 @@
               "En": "Std Circ",
               "Fr": "Std Circ",
               "De": "Std Circ",
-              "Es": "Std Circ"
+              "Es": "Std Circ",
+              "show_label": true
             },
             "notes": "Baseline",
             "geometry": {
@@ -80,8 +81,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -118,7 +118,8 @@
               "En": "Octagon",
               "Fr": "Octagon",
               "De": "Octagon",
-              "Es": "Octagon"
+              "Es": "Octagon",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -139,8 +140,7 @@
                 "primary": "#FF0000"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "octagon",
               "pointer": {
@@ -177,7 +177,8 @@
               "En": "Gear",
               "Fr": "Gear",
               "De": "Gear",
-              "Es": "Gear"
+              "Es": "Gear",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -198,8 +199,7 @@
                 "primary": "#00FF00"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -236,7 +236,8 @@
               "En": "Tri Ptr",
               "Fr": "Tri Ptr",
               "De": "Tri Ptr",
-              "Es": "Tri Ptr"
+              "Es": "Tri Ptr",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -257,8 +258,7 @@
                 "primary": "#0000FF"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -295,7 +295,8 @@
               "En": "Notch",
               "Fr": "Notch",
               "De": "Notch",
-              "Es": "Notch"
+              "Es": "Notch",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -316,8 +317,7 @@
                 "primary": "#FFFF00"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -354,7 +354,8 @@
               "En": "Num Ticks",
               "Fr": "Num Ticks",
               "De": "Num Ticks",
-              "Es": "Num Ticks"
+              "Es": "Num Ticks",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -375,8 +376,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -413,7 +413,8 @@
               "En": "Dot Ticks",
               "Fr": "Dot Ticks",
               "De": "Dot Ticks",
-              "Es": "Dot Ticks"
+              "Es": "Dot Ticks",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -434,8 +435,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -472,7 +472,8 @@
               "En": "Grad 1",
               "Fr": "Grad 1",
               "De": "Grad 1",
-              "Es": "Grad 1"
+              "Es": "Grad 1",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -493,8 +494,7 @@
                 "primary": "#FF00FF"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "octagon",
               "pointer": {
@@ -531,7 +531,8 @@
               "En": "Grad 3",
               "Fr": "Grad 3",
               "De": "Grad 3",
-              "Es": "Grad 3"
+              "Es": "Grad 3",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -552,8 +553,7 @@
                 "primary": "#00FFFF"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -590,7 +590,8 @@
               "En": "Grad 5",
               "Fr": "Grad 5",
               "De": "Grad 5",
-              "Es": "Grad 5"
+              "Es": "Grad 5",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -611,8 +612,7 @@
                 "primary": "#FFFFFF"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -649,7 +649,8 @@
               "En": "Oct Tri",
               "Fr": "Oct Tri",
               "De": "Oct Tri",
-              "Es": "Oct Tri"
+              "Es": "Oct Tri",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -670,8 +671,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "octagon",
               "pointer": {
@@ -708,7 +708,8 @@
               "En": "Gear Notch",
               "Fr": "Gear Notch",
               "De": "Gear Notch",
-              "Es": "Gear Notch"
+              "Es": "Gear Notch",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -729,8 +730,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -767,7 +767,8 @@
               "En": "Big Gear",
               "Fr": "Big Gear",
               "De": "Big Gear",
-              "Es": "Big Gear"
+              "Es": "Big Gear",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -788,8 +789,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -826,7 +826,8 @@
               "En": "Tiny Oct",
               "Fr": "Tiny Oct",
               "De": "Tiny Oct",
-              "Es": "Tiny Oct"
+              "Es": "Tiny Oct",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -848,8 +849,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "octagon",
               "pointer": {
@@ -886,7 +886,8 @@
               "En": "Fat Line",
               "Fr": "Fat Line",
               "De": "Fat Line",
-              "Es": "Fat Line"
+              "Es": "Fat Line",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -907,8 +908,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -945,7 +945,8 @@
               "En": "Thin Arc",
               "Fr": "Thin Arc",
               "De": "Thin Arc",
-              "Es": "Thin Arc"
+              "Es": "Thin Arc",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -966,8 +967,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -1004,7 +1004,8 @@
               "En": "Long Tick",
               "Fr": "Long Tick",
               "De": "Long Tick",
-              "Es": "Long Tick"
+              "Es": "Long Tick",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1025,8 +1026,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -1063,7 +1063,8 @@
               "En": "No Ctr",
               "Fr": "Non Ctr",
               "De": "Nein Ctr",
-              "Es": "No Ctr"
+              "Es": "No Ctr",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1084,8 +1085,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -1122,7 +1122,8 @@
               "En": "Offset Ptr",
               "Fr": "Offset Ptr",
               "De": "Offset Ptr",
-              "Es": "Offset Ptr"
+              "Es": "Offset Ptr",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1143,8 +1144,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -1181,7 +1181,8 @@
               "En": "Short Ptr",
               "Fr": "Short Ptr",
               "De": "Short Ptr",
-              "Es": "Short Ptr"
+              "Es": "Short Ptr",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1202,8 +1203,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "octagon",
               "pointer": {
@@ -1240,7 +1240,8 @@
               "En": "Red Gear",
               "Fr": "Red Gear",
               "De": "Red Gear",
-              "Es": "Red Gear"
+              "Es": "Red Gear",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1261,8 +1262,7 @@
                 "primary": "#FF5733"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -1299,7 +1299,8 @@
               "En": "Blue Oct",
               "Fr": "Blue Oct",
               "De": "Blue Oct",
-              "Es": "Blue Oct"
+              "Es": "Blue Oct",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1320,8 +1321,7 @@
                 "primary": "#33FF57"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "octagon",
               "pointer": {
@@ -1358,7 +1358,8 @@
               "En": "Yell Tri",
               "Fr": "Yell Tri",
               "De": "Yell Tri",
-              "Es": "Yell Tri"
+              "Es": "Yell Tri",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1379,8 +1380,7 @@
                 "primary": "#FFFF33"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -1417,7 +1417,8 @@
               "En": "Purp Dot",
               "Fr": "Purp Dot",
               "De": "Purp Dot",
-              "Es": "Purp Dot"
+              "Es": "Purp Dot",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1438,8 +1439,7 @@
                 "primary": "#A020F0"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -1476,7 +1476,8 @@
               "En": "Cya Num",
               "Fr": "Cya Num",
               "De": "Cya Num",
-              "Es": "Cya Num"
+              "Es": "Cya Num",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1497,8 +1498,7 @@
                 "primary": "#00FFFF"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -1535,7 +1535,8 @@
               "En": "Org Notch",
               "Fr": "Org Notch",
               "De": "Org Notch",
-              "Es": "Org Notch"
+              "Es": "Org Notch",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1556,8 +1557,7 @@
                 "primary": "#FFA500"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -1594,7 +1594,8 @@
               "En": "Lime Cir",
               "Fr": "Lime Cir",
               "De": "Lime Cir",
-              "Es": "Lime Cir"
+              "Es": "Lime Cir",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1615,8 +1616,7 @@
                 "primary": "#32CD32"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -1653,7 +1653,8 @@
               "En": "Pink Oct",
               "Fr": "Pink Oct",
               "De": "Pink Oct",
-              "Es": "Pink Oct"
+              "Es": "Pink Oct",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1674,8 +1675,7 @@
                 "primary": "#FFC0CB"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "octagon",
               "pointer": {
@@ -1712,7 +1712,8 @@
               "En": "Teal Gear",
               "Fr": "Teal Gear",
               "De": "Teal Gear",
-              "Es": "Teal Gear"
+              "Es": "Teal Gear",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1733,8 +1734,7 @@
                 "primary": "#008080"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -1771,7 +1771,8 @@
               "En": "Wht Line",
               "Fr": "Wht Line",
               "De": "Wht Line",
-              "Es": "Wht Line"
+              "Es": "Wht Line",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1792,8 +1793,7 @@
                 "primary": "#FFFFFF"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -1830,7 +1830,8 @@
               "En": "Mix 1",
               "Fr": "Mix 1",
               "De": "Mix 1",
-              "Es": "Mezcla 1"
+              "Es": "Mezcla 1",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1851,8 +1852,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -1889,7 +1889,8 @@
               "En": "Mix 2",
               "Fr": "Mix 2",
               "De": "Mix 2",
-              "Es": "Mezcla 2"
+              "Es": "Mezcla 2",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1910,8 +1911,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "octagon",
               "pointer": {
@@ -1948,7 +1948,8 @@
               "En": "Mix 3",
               "Fr": "Mix 3",
               "De": "Mix 3",
-              "Es": "Mezcla 3"
+              "Es": "Mezcla 3",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1969,8 +1970,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -2007,7 +2007,8 @@
               "En": "Mix 4",
               "Fr": "Mix 4",
               "De": "Mix 4",
-              "Es": "Mezcla 4"
+              "Es": "Mezcla 4",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -2028,8 +2029,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -2066,7 +2066,8 @@
               "En": "Mix 5",
               "Fr": "Mix 5",
               "De": "Mix 5",
-              "Es": "Mezcla 5"
+              "Es": "Mezcla 5",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -2087,8 +2088,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "octagon",
               "pointer": {
@@ -2125,7 +2125,8 @@
               "En": "Mix 6",
               "Fr": "Mix 6",
               "De": "Mix 6",
-              "Es": "Mezcla 6"
+              "Es": "Mezcla 6",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -2146,8 +2147,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -2184,7 +2184,8 @@
               "En": "Mix 7",
               "Fr": "Mix 7",
               "De": "Mix 7",
-              "Es": "Mezcla 7"
+              "Es": "Mezcla 7",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -2205,8 +2206,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -2243,7 +2243,8 @@
               "En": "Mix 8",
               "Fr": "Mix 8",
               "De": "Mix 8",
-              "Es": "Mezcla 8"
+              "Es": "Mezcla 8",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -2264,8 +2265,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "octagon",
               "pointer": {
@@ -2302,7 +2302,8 @@
               "En": "Mix 9",
               "Fr": "Mix 9",
               "De": "Mix 9",
-              "Es": "Mezcla 9"
+              "Es": "Mezcla 9",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -2323,8 +2324,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -2361,7 +2361,8 @@
               "En": "Mix 10",
               "Fr": "Mix 10",
               "De": "Mix 10",
-              "Es": "Mezcla 10"
+              "Es": "Mezcla 10",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -2382,8 +2383,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -2420,7 +2420,8 @@
               "En": "Flat Gear",
               "Fr": "Flat Gear",
               "De": "Flat Gear",
-              "Es": "Flat Gear"
+              "Es": "Flat Gear",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -2441,8 +2442,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -2479,7 +2479,8 @@
               "En": "Flat Oct",
               "Fr": "Flat Oct",
               "De": "Flat Oct",
-              "Es": "Flat Oct"
+              "Es": "Flat Oct",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -2500,8 +2501,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "octagon",
               "pointer": {
@@ -2538,7 +2538,8 @@
               "En": "Deep Gear",
               "Fr": "Deep Gear",
               "De": "Deep Gear",
-              "Es": "Deep Gear"
+              "Es": "Deep Gear",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -2559,8 +2560,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -2597,7 +2597,8 @@
               "En": "Deep Oct",
               "Fr": "Deep Oct",
               "De": "Deep Oct",
-              "Es": "Deep Oct"
+              "Es": "Deep Oct",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -2618,8 +2619,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "octagon",
               "pointer": {
@@ -2656,7 +2656,8 @@
               "En": "Tri Only",
               "Fr": "Tri Only",
               "De": "Tri Only",
-              "Es": "Tri Only"
+              "Es": "Tri Only",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -2677,8 +2678,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -2715,7 +2715,8 @@
               "En": "Notch Only",
               "Fr": "Notch Only",
               "De": "Notch Only",
-              "Es": "Notch Only"
+              "Es": "Notch Only",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -2736,8 +2737,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -2774,7 +2774,8 @@
               "En": "Num Only",
               "Fr": "Num Only",
               "De": "Num Only",
-              "Es": "Num Only"
+              "Es": "Num Only",
+              "show_label": false
             },
             "notes": "",
             "geometry": {
@@ -2795,8 +2796,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": false
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -2833,7 +2833,8 @@
               "En": "Dot Only",
               "Fr": "Dot Only",
               "De": "Dot Only",
-              "Es": "Dot Only"
+              "Es": "Dot Only",
+              "show_label": false
             },
             "notes": "",
             "geometry": {
@@ -2854,8 +2855,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": false
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -2892,7 +2892,8 @@
               "En": "Big Tri",
               "Fr": "Big Tri",
               "De": "Big Tri",
-              "Es": "Big Tri"
+              "Es": "Big Tri",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -2913,8 +2914,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -2951,7 +2951,8 @@
               "En": "Big Notch",
               "Fr": "Big Notch",
               "De": "Big Notch",
-              "Es": "Big Notch"
+              "Es": "Big Notch",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -2972,8 +2973,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -3010,7 +3010,8 @@
               "En": "Fine G",
               "Fr": "Fine G",
               "De": "Fine G",
-              "Es": "Fine G"
+              "Es": "Fine G",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -3031,8 +3032,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -3069,7 +3069,8 @@
               "En": "Inf Oct",
               "Fr": "Inf Oct",
               "De": "Inf Oct",
-              "Es": "Inf Oct"
+              "Es": "Inf Oct",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -3090,8 +3091,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "octagon",
               "pointer": {
@@ -3128,7 +3128,8 @@
               "En": "Inf Gear",
               "Fr": "Inf Gear",
               "De": "Inf Gear",
-              "Es": "Inf Gear"
+              "Es": "Inf Gear",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -3149,8 +3150,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -3187,7 +3187,8 @@
               "En": "Fine Tri",
               "Fr": "Fine Tri",
               "De": "Fine Tri",
-              "Es": "Fine Tri"
+              "Es": "Fine Tri",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -3208,8 +3209,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -3246,7 +3246,8 @@
               "En": "Inf Notch",
               "Fr": "Inf Notch",
               "De": "Inf Notch",
-              "Es": "Inf Notch"
+              "Es": "Inf Notch",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -3267,8 +3268,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -3305,7 +3305,8 @@
               "En": "Center Txt",
               "Fr": "Centre Txt",
               "De": "Zentrum Txt",
-              "Es": "Centro Txt"
+              "Es": "Centro Txt",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -3326,8 +3327,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -3364,7 +3364,8 @@
               "En": "Center Oct",
               "Fr": "Centre Oct",
               "De": "Zentrum Oct",
-              "Es": "Centro Oct"
+              "Es": "Centro Oct",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -3385,8 +3386,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "octagon",
               "pointer": {
@@ -3423,7 +3423,8 @@
               "En": "Center Tri",
               "Fr": "Centre Tri",
               "De": "Zentrum Tri",
-              "Es": "Centro Tri"
+              "Es": "Centro Tri",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -3444,8 +3445,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -3482,7 +3482,8 @@
               "En": "Center Notch",
               "Fr": "Centre Notch",
               "De": "Zentrum Notch",
-              "Es": "Centro Notch"
+              "Es": "Centro Notch",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -3503,8 +3504,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -3541,7 +3541,8 @@
               "En": "Center Num",
               "Fr": "Centre Num",
               "De": "Zentrum Num",
-              "Es": "Centro Num"
+              "Es": "Centro Num",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -3562,8 +3563,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -3600,7 +3600,8 @@
               "En": "Var 61",
               "Fr": "Var 61",
               "De": "Var 61",
-              "Es": "Var 61"
+              "Es": "Var 61",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -3621,8 +3622,7 @@
                 "primary": "#FF4500"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -3659,7 +3659,8 @@
               "En": "Var 62",
               "Fr": "Var 62",
               "De": "Var 62",
-              "Es": "Var 62"
+              "Es": "Var 62",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -3680,8 +3681,7 @@
                 "primary": "#2E8B57"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "octagon",
               "pointer": {
@@ -3718,7 +3718,8 @@
               "En": "Var 63",
               "Fr": "Var 63",
               "De": "Var 63",
-              "Es": "Var 63"
+              "Es": "Var 63",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -3739,8 +3740,7 @@
                 "primary": "#1E90FF"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -3777,7 +3777,8 @@
               "En": "Var 64",
               "Fr": "Var 64",
               "De": "Var 64",
-              "Es": "Var 64"
+              "Es": "Var 64",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -3798,8 +3799,7 @@
                 "primary": "#DA70D6"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -3836,7 +3836,8 @@
               "En": "Var 65",
               "Fr": "Var 65",
               "De": "Var 65",
-              "Es": "Var 65"
+              "Es": "Var 65",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -3857,8 +3858,7 @@
                 "primary": "#FFD700"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "octagon",
               "pointer": {
@@ -3895,7 +3895,8 @@
               "En": "Var 66",
               "Fr": "Var 66",
               "De": "Var 66",
-              "Es": "Var 66"
+              "Es": "Var 66",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -3916,8 +3917,7 @@
                 "primary": "#00CED1"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -3954,7 +3954,8 @@
               "En": "Var 67",
               "Fr": "Var 67",
               "De": "Var 67",
-              "Es": "Var 67"
+              "Es": "Var 67",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -3975,8 +3976,7 @@
                 "primary": "#FF6347"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -4013,7 +4013,8 @@
               "En": "Var 68",
               "Fr": "Var 68",
               "De": "Var 68",
-              "Es": "Var 68"
+              "Es": "Var 68",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -4034,8 +4035,7 @@
                 "primary": "#7B68EE"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "octagon",
               "pointer": {
@@ -4072,7 +4072,8 @@
               "En": "Var 69",
               "Fr": "Var 69",
               "De": "Var 69",
-              "Es": "Var 69"
+              "Es": "Var 69",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -4093,8 +4094,7 @@
                 "primary": "#ADFF2F"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -4131,7 +4131,8 @@
               "En": "Var 70",
               "Fr": "Var 70",
               "De": "Var 70",
-              "Es": "Var 70"
+              "Es": "Var 70",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -4152,8 +4153,7 @@
                 "primary": "#F08080"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -4190,7 +4190,8 @@
               "En": "Var 71",
               "Fr": "Var 71",
               "De": "Var 71",
-              "Es": "Var 71"
+              "Es": "Var 71",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -4211,8 +4212,7 @@
                 "primary": "#20B2AA"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "octagon",
               "pointer": {
@@ -4249,7 +4249,8 @@
               "En": "Var 72",
               "Fr": "Var 72",
               "De": "Var 72",
-              "Es": "Var 72"
+              "Es": "Var 72",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -4270,8 +4271,7 @@
                 "primary": "#9370DB"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -4308,7 +4308,8 @@
               "En": "Var 73",
               "Fr": "Var 73",
               "De": "Var 73",
-              "Es": "Var 73"
+              "Es": "Var 73",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -4329,8 +4330,7 @@
                 "primary": "#3CB371"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -4367,7 +4367,8 @@
               "En": "Var 74",
               "Fr": "Var 74",
               "De": "Var 74",
-              "Es": "Var 74"
+              "Es": "Var 74",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -4388,8 +4389,7 @@
                 "primary": "#FFA07A"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "octagon",
               "pointer": {
@@ -4426,7 +4426,8 @@
               "En": "Var 75",
               "Fr": "Var 75",
               "De": "Var 75",
-              "Es": "Var 75"
+              "Es": "Var 75",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -4447,8 +4448,7 @@
                 "primary": "#87CEFA"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -4485,7 +4485,8 @@
               "En": "Var 76",
               "Fr": "Var 76",
               "De": "Var 76",
-              "Es": "Var 76"
+              "Es": "Var 76",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -4506,8 +4507,7 @@
                 "primary": "#DDA0DD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -4544,7 +4544,8 @@
               "En": "Var 77",
               "Fr": "Var 77",
               "De": "Var 77",
-              "Es": "Var 77"
+              "Es": "Var 77",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -4565,8 +4566,7 @@
                 "primary": "#F4A460"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "octagon",
               "pointer": {
@@ -4603,7 +4603,8 @@
               "En": "Var 78",
               "Fr": "Var 78",
               "De": "Var 78",
-              "Es": "Var 78"
+              "Es": "Var 78",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -4624,8 +4625,7 @@
                 "primary": "#66CDAA"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -4662,7 +4662,8 @@
               "En": "Var 79",
               "Fr": "Var 79",
               "De": "Var 79",
-              "Es": "Var 79"
+              "Es": "Var 79",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -4683,8 +4684,7 @@
                 "primary": "#BA55D3"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -4721,7 +4721,8 @@
               "En": "Var 80",
               "Fr": "Var 80",
               "De": "Var 80",
-              "Es": "Var 80"
+              "Es": "Var 80",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -4742,8 +4743,7 @@
                 "primary": "#4682B4"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "octagon",
               "pointer": {
@@ -4780,7 +4780,8 @@
               "En": "Var 81",
               "Fr": "Var 81",
               "De": "Var 81",
-              "Es": "Var 81"
+              "Es": "Var 81",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -4801,8 +4802,7 @@
                 "primary": "#CD5C5C"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -4839,7 +4839,8 @@
               "En": "Var 82",
               "Fr": "Var 82",
               "De": "Var 82",
-              "Es": "Var 82"
+              "Es": "Var 82",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -4860,8 +4861,7 @@
                 "primary": "#483D8B"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "octagon",
               "pointer": {
@@ -4898,7 +4898,8 @@
               "En": "Var 83",
               "Fr": "Var 83",
               "De": "Var 83",
-              "Es": "Var 83"
+              "Es": "Var 83",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -4919,8 +4920,7 @@
                 "primary": "#2F4F4F"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -4957,7 +4957,8 @@
               "En": "Var 84",
               "Fr": "Var 84",
               "De": "Var 84",
-              "Es": "Var 84"
+              "Es": "Var 84",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -4978,8 +4979,7 @@
                 "primary": "#8B008B"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -5016,7 +5016,8 @@
               "En": "Var 85",
               "Fr": "Var 85",
               "De": "Var 85",
-              "Es": "Var 85"
+              "Es": "Var 85",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -5037,8 +5038,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "octagon",
               "pointer": {
@@ -5075,7 +5075,8 @@
               "En": "Var 86",
               "Fr": "Var 86",
               "De": "Var 86",
-              "Es": "Var 86"
+              "Es": "Var 86",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -5096,8 +5097,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -5134,7 +5134,8 @@
               "En": "Var 87",
               "Fr": "Var 87",
               "De": "Var 87",
-              "Es": "Var 87"
+              "Es": "Var 87",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -5155,8 +5156,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -5193,7 +5193,8 @@
               "En": "Var 88",
               "Fr": "Var 88",
               "De": "Var 88",
-              "Es": "Var 88"
+              "Es": "Var 88",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -5214,8 +5215,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "octagon",
               "pointer": {
@@ -5252,7 +5252,8 @@
               "En": "Var 89",
               "Fr": "Var 89",
               "De": "Var 89",
-              "Es": "Var 89"
+              "Es": "Var 89",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -5273,8 +5274,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -5311,7 +5311,8 @@
               "En": "Var 90",
               "Fr": "Var 90",
               "De": "Var 90",
-              "Es": "Var 90"
+              "Es": "Var 90",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -5332,8 +5333,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -5370,7 +5370,8 @@
               "En": "Final 1",
               "Fr": "Final 1",
               "De": "Final 1",
-              "Es": "Final 1"
+              "Es": "Final 1",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -5391,8 +5392,7 @@
                 "primary": "#FF00FF"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "octagon",
               "pointer": {
@@ -5429,7 +5429,8 @@
               "En": "Final 2",
               "Fr": "Final 2",
               "De": "Final 2",
-              "Es": "Final 2"
+              "Es": "Final 2",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -5450,8 +5451,7 @@
                 "primary": "#00FF00"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -5488,7 +5488,8 @@
               "En": "Final 3",
               "Fr": "Final 3",
               "De": "Final 3",
-              "Es": "Final 3"
+              "Es": "Final 3",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -5509,8 +5510,7 @@
                 "primary": "#0000FF"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -5547,7 +5547,8 @@
               "En": "Final 4",
               "Fr": "Final 4",
               "De": "Final 4",
-              "Es": "Final 4"
+              "Es": "Final 4",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -5568,8 +5569,7 @@
                 "primary": "#FFFF00"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -5606,7 +5606,8 @@
               "En": "Final 5",
               "Fr": "Final 5",
               "De": "Final 5",
-              "Es": "Final 5"
+              "Es": "Final 5",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -5627,8 +5628,7 @@
                 "primary": "#00FFFF"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "octagon",
               "pointer": {
@@ -5665,7 +5665,8 @@
               "En": "Final 6",
               "Fr": "Final 6",
               "De": "Final 6",
-              "Es": "Final 6"
+              "Es": "Final 6",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -5686,8 +5687,7 @@
                 "primary": "#FF0000"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -5724,7 +5724,8 @@
               "En": "Final 7",
               "Fr": "Final 7",
               "De": "Final 7",
-              "Es": "Final 7"
+              "Es": "Final 7",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -5745,8 +5746,7 @@
                 "primary": "#FFFFFF"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -5783,7 +5783,8 @@
               "En": "Final 8",
               "Fr": "Final 8",
               "De": "Final 8",
-              "Es": "Final 8"
+              "Es": "Final 8",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -5804,8 +5805,7 @@
                 "primary": "#FFA500"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "octagon",
               "pointer": {
@@ -5842,7 +5842,8 @@
               "En": "Final 9",
               "Fr": "Final 9",
               "De": "Final 9",
-              "Es": "Final 9"
+              "Es": "Final 9",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -5863,8 +5864,7 @@
                 "primary": "#800080"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -5901,7 +5901,8 @@
               "En": "THE END",
               "Fr": "THE END",
               "De": "THE END",
-              "Es": "THE END"
+              "Es": "THE END",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -5922,8 +5923,7 @@
                 "primary": "#33A1FD"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {

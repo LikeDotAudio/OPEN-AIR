@@ -55,6 +55,8 @@
 
   window.OaEdProperties = ({ store }) => {
     const st = window.useEditorStore(store);
+    // ARTISTIC PROPERTIES: pop-out interactive designer for the selected widget.
+    const [artistic, setArtistic] = React.useState(false);
 
     // Load library data once: enum legends (dropdowns) + composite reference
     // schemas (full knob/fader/value param sets merged into sub-configs).
@@ -103,12 +105,24 @@
             <button style={btn()} onClick={duplicate} disabled={!owner} title="Duplicate">⧉ Dup</button>
             <button style={btn({ borderColor: '#a33', color: '#f88' })} onClick={() => store.deleteNode(path)} title="Delete">✕ Del</button>
           </div>
+          {/* ARTISTIC PROPERTIES toggle — pops out the interactive widget designer. */}
+          <button onClick={() => setArtistic(true)} title="Open the interactive artistic designer for this widget"
+            style={{ marginTop: 8, width: '100%', padding: '7px 10px', cursor: 'pointer', fontSize: 12, fontWeight: 'bold',
+              letterSpacing: 1, color: '#1a1a1a', border: '1px solid #FFB347', borderRadius: 4,
+              background: 'linear-gradient(180deg,#FFC247,#FF9900)', boxShadow: '0 0 10px rgba(255,153,0,0.35)' }}>
+            ⚡ ENABLE ARTISTIC PROPERTIES
+          </button>
         </div>
 
         {/* property tree */}
         <div style={{ flex: 1, minHeight: 0, overflow: 'auto' }}>
           <window.OaEdPropertyTree node={node} basePath={path} store={store} />
         </div>
+
+        {/* pop-out artistic designer (modal overlay) */}
+        {artistic && window.OaEdArtisticDesigner && (
+          <window.OaEdArtisticDesigner store={store} path={path} node={node} type={node.type} onClose={() => setArtistic(false)} />
+        )}
       </div>
     );
   };

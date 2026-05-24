@@ -27,9 +27,9 @@
               "En": "01: Standard (Large Scale)",
               "Fr": "01: Standard (Large Scale)",
               "De": "01: Standard (Large Scale)",
-              "Es": "01: Estándar (Large Scale)"
+              "Es": "01: Estándar (Large Scale)",
+              "show_label": true
             },
-            "show_label": true,
             "scale_position": "bottom",
             "scale": {
               "upper_range": 0.0,
@@ -100,9 +100,9 @@
               "En": "02: Ocean (Small Scale)",
               "Fr": "02: Ocean (Small Scale)",
               "De": "02: Ocean (Small Scale)",
-              "Es": "02: Ocean (Small Scale)"
+              "Es": "02: Ocean (Small Scale)",
+              "show_label": true
             },
-            "show_label": true,
             "scale_position": "top",
             "scale": {
               "upper_range": 0.0,
@@ -173,9 +173,9 @@
               "En": "03: Amber (Large Font)",
               "Fr": "03: Amber (Large Font)",
               "De": "03: Amber (Large Font)",
-              "Es": "03: Amber (Large Font)"
+              "Es": "03: Amber (Large Font)",
+              "show_label": true
             },
-            "show_label": true,
             "scale_position": "bottom",
             "scale": {
               "upper_range": 0.0,
@@ -246,9 +246,9 @@
               "En": "04: Retro (Huge Ticks)",
               "Fr": "04: Retro (Huge Ticks)",
               "De": "04: Retro (Huge Ticks)",
-              "Es": "04: Retro (Huge Ticks)"
+              "Es": "04: Retro (Huge Ticks)",
+              "show_label": true
             },
-            "show_label": true,
             "scale_position": "none",
             "scale": {
               "upper_range": 0.0,
@@ -319,9 +319,9 @@
               "En": "HIDDEN LABEL",
               "Fr": "HIDDEN LABEL",
               "De": "HIDDEN LABEL",
-              "Es": "HIDDEN LABEL"
+              "Es": "HIDDEN LABEL",
+              "show_label": false
             },
-            "show_label": false,
             "scale_position": "bottom",
             "scale": {
               "upper_range": 0.0,
@@ -392,9 +392,9 @@
               "En": "06: Blue (Thick Peak)",
               "Fr": "06: Blue (Thick Peak)",
               "De": "06: Blue (Thick Peak)",
-              "Es": "06: Blue (Thick Peak)"
+              "Es": "06: Blue (Thick Peak)",
+              "show_label": true
             },
-            "show_label": true,
             "scale_position": "top",
             "scale": {
               "upper_range": 0.0,
@@ -465,9 +465,9 @@
               "En": "07: Minimalist (Mono)",
               "Fr": "07: Minimalist (Mono)",
               "De": "07: Minimalist (Mono)",
-              "Es": "07: Minimalist (Mono)"
+              "Es": "07: Minimalist (Mono)",
+              "show_label": true
             },
-            "show_label": true,
             "scale_position": "none",
             "scale": {
               "upper_range": -3.0,
@@ -538,9 +538,9 @@
               "En": "08: Contrast (Tiny Font)",
               "Fr": "08: Contrast (Tiny Font)",
               "De": "08: Contrast (Tiny Font)",
-              "Es": "08: Contrast (Tiny Font)"
+              "Es": "08: Contrast (Tiny Font)",
+              "show_label": true
             },
-            "show_label": true,
             "scale_position": "bottom",
             "scale": {
               "upper_range": -6.0,
@@ -611,9 +611,9 @@
               "En": "09: Mono (Large Peak LED)",
               "Fr": "09: Mono (Large Peak LED)",
               "De": "09: Mono (Large Peak LED)",
-              "Es": "09: Mono (Large Peak LED)"
+              "Es": "09: Mono (Large Peak LED)",
+              "show_label": true
             },
-            "show_label": true,
             "scale_position": "top",
             "scale": {
               "upper_range": 0.0,
@@ -684,9 +684,9 @@
               "En": "10: Transient (No Scale Font)",
               "Fr": "10: Transient (No Scale Font)",
               "De": "10: Transient (No Scale Font)",
-              "Es": "10: Transient (No Scale Font)"
+              "Es": "10: Transient (No Scale Font)",
+              "show_label": true
             },
-            "show_label": true,
             "scale_position": "bottom",
             "scale": {
               "upper_range": 0.0,

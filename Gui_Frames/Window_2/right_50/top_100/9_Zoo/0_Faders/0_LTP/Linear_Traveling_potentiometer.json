@@ -51,13 +51,26 @@
             "type": "_CustomLTP",
             "label": {
               "active": {
-                "En": "Kick",
-                "Fr": "Kick",
-                "De": "Kick",
-                "Es": "Kick"
+                "text": {
+                  "En": "Kick",
+                  "Fr": "Kick",
+                  "De": "Kick",
+                  "Es": "Kick"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "fader_config": {
+              "cosmetics": {
+                "colors": {
+                  "highlight": "#FF3131"
+                }
+              },
+              "readout": {
+                "show_value": true,
+                "show_units": true
+              },
               "domain": {
                 "min": -60.0,
                 "max": 12.0
@@ -65,10 +78,7 @@
               "value": {
                 "default_value": -10.0
               },
-              "value_highlight_color": "#FF3131",
-              "show_value": true,
-              "unit_text": "dB",
-              "show_units": true
+              "unit_text": "dB"
             },
             "knob_config": {
               "cap_radius": 22,
@@ -91,21 +101,29 @@
             "type": "_CustomLTP",
             "label": {
               "active": {
-                "En": "Snare",
-                "Fr": "Snare",
-                "De": "Snare",
-                "Es": "Snare"
+                "text": {
+                  "En": "Snare",
+                  "Fr": "Snare",
+                  "De": "Snare",
+                  "Es": "Snare"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "fader_config": {
+              "cosmetics": {
+                "colors": {
+                  "highlight": "#39FF14"
+                }
+              },
               "domain": {
                 "min": -60.0,
                 "max": 12.0
               },
               "value": {
                 "default_value": -5.0
-              },
-              "value_highlight_color": "#39FF14"
+              }
             },
             "knob_config": {
               "cap_radius": 20,
@@ -129,21 +147,29 @@
             "type": "_CustomLTP",
             "label": {
               "active": {
-                "En": "Hat",
-                "Fr": "Hat",
-                "De": "Hat",
-                "Es": "Hat"
+                "text": {
+                  "En": "Hat",
+                  "Fr": "Hat",
+                  "De": "Hat",
+                  "Es": "Hat"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "fader_config": {
+              "cosmetics": {
+                "colors": {
+                  "highlight": "#33A1FD"
+                }
+              },
               "domain": {
                 "min": -60.0,
                 "max": 12.0
               },
               "value": {
                 "default_value": -15.0
-              },
-              "value_highlight_color": "#33A1FD"
+              }
             },
             "knob_config": {
               "cap_radius": 18,
@@ -166,21 +192,29 @@
             "type": "_CustomLTP",
             "label": {
               "active": {
-                "En": "Toms",
-                "Fr": "Toms",
-                "De": "Toms",
-                "Es": "Toms"
+                "text": {
+                  "En": "Toms",
+                  "Fr": "Toms",
+                  "De": "Toms",
+                  "Es": "Toms"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "fader_config": {
+              "cosmetics": {
+                "colors": {
+                  "highlight": "yellow"
+                }
+              },
               "domain": {
                 "min": -60.0,
                 "max": 12.0
               },
               "value": {
                 "default_value": -20.0
-              },
-              "value_highlight_color": "yellow"
+              }
             },
             "knob_config": {
               "cap_radius": 24,
@@ -203,21 +237,29 @@
             "type": "_CustomLTP",
             "label": {
               "active": {
-                "En": "Bass",
-                "Fr": "Bass",
-                "De": "Bass",
-                "Es": "Bass"
+                "text": {
+                  "En": "Bass",
+                  "Fr": "Bass",
+                  "De": "Bass",
+                  "Es": "Bass"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "fader_config": {
+              "cosmetics": {
+                "colors": {
+                  "highlight": "#FF6B35"
+                }
+              },
               "domain": {
                 "min": -60.0,
                 "max": 12.0
               },
               "value": {
                 "default_value": 0.0
-              },
-              "value_highlight_color": "#FF6B35"
+              }
             },
             "knob_config": {
               "cap_radius": 22,
@@ -238,21 +280,29 @@
             "type": "_CustomLTP",
             "label": {
               "active": {
-                "En": "Gtr L",
-                "Fr": "Gtr L",
-                "De": "Gtr L",
-                "Es": "Gtr L"
+                "text": {
+                  "En": "Gtr L",
+                  "Fr": "Gtr L",
+                  "De": "Gtr L",
+                  "Es": "Gtr L"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "fader_config": {
+              "cosmetics": {
+                "colors": {
+                  "highlight": "#00FFFF"
+                }
+              },
               "domain": {
                 "min": -60.0,
                 "max": 12.0
               },
               "value": {
                 "default_value": -12.0
-              },
-              "value_highlight_color": "#00FFFF"
+              }
             },
             "knob_config": {
               "cap_radius": 20,
@@ -274,21 +324,29 @@
             "type": "_CustomLTP",
             "label": {
               "active": {
-                "En": "Gtr R",
-                "Fr": "Gtr R",
-                "De": "Gtr R",
-                "Es": "Gtr R"
+                "text": {
+                  "En": "Gtr R",
+                  "Fr": "Gtr R",
+                  "De": "Gtr R",
+                  "Es": "Gtr R"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "fader_config": {
+              "cosmetics": {
+                "colors": {
+                  "highlight": "#FFA500"
+                }
+              },
               "domain": {
                 "min": -60.0,
                 "max": 12.0
               },
               "value": {
                 "default_value": -12.0
-              },
-              "value_highlight_color": "#FFA500"
+              }
             },
             "knob_config": {
               "cap_radius": 20,
@@ -309,21 +367,29 @@
             "type": "_CustomLTP",
             "label": {
               "active": {
-                "En": "Vox",
-                "Fr": "Vox",
-                "De": "Vox",
-                "Es": "Vox"
+                "text": {
+                  "En": "Vox",
+                  "Fr": "Vox",
+                  "De": "Vox",
+                  "Es": "Vox"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "fader_config": {
+              "cosmetics": {
+                "colors": {
+                  "highlight": "#FFFFFF"
+                }
+              },
               "domain": {
                 "min": -60.0,
                 "max": 12.0
               },
               "value": {
                 "default_value": 5.0
-              },
-              "value_highlight_color": "#FFFFFF"
+              }
             },
             "knob_config": {
               "cap_radius": 22,
@@ -357,14 +423,22 @@
             "type": "_CustomLTP",
             "label": {
               "active": {
-                "En": "Industrial Gear",
-                "Fr": "Industriel Gear",
-                "De": "Industriell Gear",
-                "Es": "Industrial Gear"
+                "text": {
+                  "En": "Industrial Gear",
+                  "Fr": "Industriel Gear",
+                  "De": "Industriell Gear",
+                  "Es": "Industrial Gear"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "fader_config": {
-              "value_highlight_color": "#f4902c"
+              "cosmetics": {
+                "colors": {
+                  "highlight": "#f4902c"
+                }
+              }
             },
             "knob_config": {
               "cap_radius": 25,
@@ -385,14 +459,22 @@
             "type": "_CustomLTP",
             "label": {
               "active": {
-                "En": "Sleek Octagon",
-                "Fr": "Sleek Octagon",
-                "De": "Sleek Octagon",
-                "Es": "Sleek Octagon"
+                "text": {
+                  "En": "Sleek Octagon",
+                  "Fr": "Sleek Octagon",
+                  "De": "Sleek Octagon",
+                  "Es": "Sleek Octagon"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "fader_config": {
-              "value_highlight_color": "#33A1FD"
+              "cosmetics": {
+                "colors": {
+                  "highlight": "#33A1FD"
+                }
+              }
             },
             "knob_config": {
               "cap_radius": 22,
@@ -412,14 +494,22 @@
             "type": "_CustomLTP",
             "label": {
               "active": {
-                "En": "Ghost Circle",
-                "Fr": "Ghost Circle",
-                "De": "Ghost Circle",
-                "Es": "Ghost Circle"
+                "text": {
+                  "En": "Ghost Circle",
+                  "Fr": "Ghost Circle",
+                  "De": "Ghost Circle",
+                  "Es": "Ghost Circle"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "fader_config": {
-              "value_highlight_color": "#AAAAAA"
+              "cosmetics": {
+                "colors": {
+                  "highlight": "#AAAAAA"
+                }
+              }
             },
             "knob_config": {
               "cap_radius": 20,

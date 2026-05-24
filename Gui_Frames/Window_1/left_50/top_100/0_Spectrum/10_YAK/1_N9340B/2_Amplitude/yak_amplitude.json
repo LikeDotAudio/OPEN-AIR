@@ -506,10 +506,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "Auto Atten ON",
-                    "Fr": "Auto Attén ACTIVÉE",
-                    "De": "Auto Atten AN",
-                    "Es": "Auto Aten ACTIVADA"
+                    "text": {
+                      "En": "Auto Atten ON",
+                      "Fr": "Auto Attén ACTIVÉE",
+                      "De": "Auto Atten AN",
+                      "Es": "Auto Aten ACTIVADA"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -546,10 +550,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "Auto Atten OFF",
-                    "Fr": "Atténuation auto OFF",
-                    "De": "Auto-Dämpfung AUS",
-                    "Es": "Atenuación auto DES"
+                    "text": {
+                      "En": "Auto Atten OFF",
+                      "Fr": "Atténuation auto OFF",
+                      "De": "Auto-Dämpfung AUS",
+                      "Es": "Atenuación auto DES"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -591,10 +599,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "Preamp ON",
-                    "Fr": "Préampli ON",
-                    "De": "Vorverstärker EIN",
-                    "Es": "Preampli ENC"
+                    "text": {
+                      "En": "Preamp ON",
+                      "Fr": "Préampli ON",
+                      "De": "Vorverstärker EIN",
+                      "Es": "Preampli ENC"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -631,10 +643,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "Preamp OFF",
-                    "Fr": "Préampli OFF",
-                    "De": "Vorverstärker AUS",
-                    "Es": "Preampli DES"
+                    "text": {
+                      "En": "Preamp OFF",
+                      "Fr": "Préampli OFF",
+                      "De": "Vorverstärker AUS",
+                      "Es": "Preampli DES"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -683,10 +699,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "High Sensitivity ON",
-                    "Fr": "High Sensitivity ON",
-                    "De": "High Sensitivity ON",
-                    "Es": "High Sensitivity ON"
+                    "text": {
+                      "En": "High Sensitivity ON",
+                      "Fr": "High Sensitivity ON",
+                      "De": "High Sensitivity ON",
+                      "Es": "High Sensitivity ON"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -724,10 +744,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "High Sensitivity ON",
-                    "Fr": "High Sensitivity ON",
-                    "De": "High Sensitivity ON",
-                    "Es": "High Sensitivity ON"
+                    "text": {
+                      "En": "High Sensitivity ON",
+                      "Fr": "High Sensitivity ON",
+                      "De": "High Sensitivity ON",
+                      "Es": "High Sensitivity ON"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -765,10 +789,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "High Sensitivity OFF",
-                    "Fr": "High Sensitivity OFF",
-                    "De": "High Sensitivity OFF",
-                    "Es": "High Sensitivity OFF"
+                    "text": {
+                      "En": "High Sensitivity OFF",
+                      "Fr": "High Sensitivity OFF",
+                      "De": "High Sensitivity OFF",
+                      "Es": "High Sensitivity OFF"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -806,10 +834,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "High Sensitivity OFF",
-                    "Fr": "High Sensitivity OFF",
-                    "De": "High Sensitivity OFF",
-                    "Es": "High Sensitivity OFF"
+                    "text": {
+                      "En": "High Sensitivity OFF",
+                      "Fr": "High Sensitivity OFF",
+                      "De": "High Sensitivity OFF",
+                      "Es": "High Sensitivity OFF"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",

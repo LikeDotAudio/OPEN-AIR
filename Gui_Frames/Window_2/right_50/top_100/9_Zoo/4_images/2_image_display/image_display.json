@@ -15,20 +15,28 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Flux Capacitor (PNG)",
-            "Fr": "Flux Capacitor (PNG)",
-            "De": "Flux Capacitor (PNG)",
-            "Es": "Flux Capacitor (PNG)"
+            "text": {
+              "En": "Flux Capacitor (PNG)",
+              "Fr": "Flux Capacitor (PNG)",
+              "De": "Flux Capacitor (PNG)",
+              "Es": "Flux Capacitor (PNG)"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "examplefields": {
           "type": "_GuiImage",
           "label": {
             "active": {
-              "En": "Flux Capacitor",
-              "Fr": "Flux Capacitor",
-              "De": "Flux Capacitor",
-              "Es": "Flux Capacitor"
+              "text": {
+                "En": "Flux Capacitor",
+                "Fr": "Flux Capacitor",
+                "De": "Flux Capacitor",
+                "Es": "Flux Capacitor"
+              },
+              "text_size": 12,
+              "text_color": "#cccccc"
             }
           },
           "path": "oaDataCache/assets/images/flux_capacitor.png",
@@ -39,20 +47,28 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Time Circuits (GIF)",
-            "Fr": "Heure Circuits (GIF)",
-            "De": "Zeit Circuits (GIF)",
-            "Es": "Hora Circuits (GIF)"
+            "text": {
+              "En": "Time Circuits (GIF)",
+              "Fr": "Heure Circuits (GIF)",
+              "De": "Zeit Circuits (GIF)",
+              "Es": "Hora Circuits (GIF)"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "examplefields": {
           "type": "_GuiImage",
           "label": {
             "active": {
-              "En": "Time Circuits (GIF)",
-              "Fr": "Heure Circuits (GIF)",
-              "De": "Zeit Circuits (GIF)",
-              "Es": "Hora Circuits (GIF)"
+              "text": {
+                "En": "Time Circuits (GIF)",
+                "Fr": "Heure Circuits (GIF)",
+                "De": "Zeit Circuits (GIF)",
+                "Es": "Hora Circuits (GIF)"
+              },
+              "text_size": 12,
+              "text_color": "#cccccc"
             }
           },
           "path": "oaGui/Assets/time_circuits.gif",
@@ -63,20 +79,28 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Unnamed Image (JPG)",
-            "Fr": "Unnamed Image (JPG)",
-            "De": "Unnamed Image (JPG)",
-            "Es": "Unnamed Image (JPG)"
+            "text": {
+              "En": "Unnamed Image (JPG)",
+              "Fr": "Unnamed Image (JPG)",
+              "De": "Unnamed Image (JPG)",
+              "Es": "Unnamed Image (JPG)"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "examplefields": {
           "type": "_GuiImage",
           "label": {
             "active": {
-              "En": "Unnamed Image (JPG)",
-              "Fr": "Unnamed Image (JPG)",
-              "De": "Unnamed Image (JPG)",
-              "Es": "Unnamed Image (JPG)"
+              "text": {
+                "En": "Unnamed Image (JPG)",
+                "Fr": "Unnamed Image (JPG)",
+                "De": "Unnamed Image (JPG)",
+                "Es": "Unnamed Image (JPG)"
+              },
+              "text_size": 12,
+              "text_color": "#cccccc"
             }
           },
           "path": "oaDataCache/assets/images/unnamed_(1).jpg",
@@ -87,20 +111,28 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Another Unnamed Image (JPG)",
-            "Fr": "Another Unnamed Image (JPG)",
-            "De": "Another Unnamed Image (JPG)",
-            "Es": "Another Unnamed Image (JPG)"
+            "text": {
+              "En": "Another Unnamed Image (JPG)",
+              "Fr": "Another Unnamed Image (JPG)",
+              "De": "Another Unnamed Image (JPG)",
+              "Es": "Another Unnamed Image (JPG)"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "examplefields": {
           "type": "_GuiImage",
           "label": {
             "active": {
-              "En": "Another Unnamed Image (JPG)",
-              "Fr": "Another Unnamed Image (JPG)",
-              "De": "Another Unnamed Image (JPG)",
-              "Es": "Another Unnamed Image (JPG)"
+              "text": {
+                "En": "Another Unnamed Image (JPG)",
+                "Fr": "Another Unnamed Image (JPG)",
+                "De": "Another Unnamed Image (JPG)",
+                "Es": "Another Unnamed Image (JPG)"
+              },
+              "text_size": 12,
+              "text_color": "#cccccc"
             }
           },
           "path": "oaDataCache/assets/images/unnamed.jpg",
@@ -111,20 +143,28 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Time Circuits (PNG)",
-            "Fr": "Heure Circuits (PNG)",
-            "De": "Zeit Circuits (PNG)",
-            "Es": "Hora Circuits (PNG)"
+            "text": {
+              "En": "Time Circuits (PNG)",
+              "Fr": "Heure Circuits (PNG)",
+              "De": "Zeit Circuits (PNG)",
+              "Es": "Hora Circuits (PNG)"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "examplefields": {
           "type": "_GuiImage",
           "label": {
             "active": {
-              "En": "Time Circuits (PNG)",
-              "Fr": "Heure Circuits (PNG)",
-              "De": "Zeit Circuits (PNG)",
-              "Es": "Hora Circuits (PNG)"
+              "text": {
+                "En": "Time Circuits (PNG)",
+                "Fr": "Heure Circuits (PNG)",
+                "De": "Zeit Circuits (PNG)",
+                "Es": "Hora Circuits (PNG)"
+              },
+              "text_size": 12,
+              "text_color": "#cccccc"
             }
           },
           "path": "oaGui/Assets/time_circuits.gif.png",

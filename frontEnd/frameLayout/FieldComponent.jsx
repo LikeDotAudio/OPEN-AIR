@@ -28,9 +28,26 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
     // (migration-safe), without disturbing a plain `label` group title.
     const _lab = rawNode && rawNode.label;
     const _labIsPair = _lab && typeof _lab === 'object' && ('active' in _lab || 'inactive' in _lab);
+    // active/inactive may now be { text:<string|{En,…}>, text_size, text_color }.
+    // Unwrap to the wording for label_active/label_inactive (back-compat via
+    // oaLabelText), and hoist the per-state text styling so widgets can honor it.
+    const _txt = window.oaLabelText || ((s) => s);
     if (_labIsPair) {
-        if (node.label_active === undefined) node.label_active = _lab.active;
-        if (node.label_inactive === undefined) node.label_inactive = _lab.inactive !== undefined ? _lab.inactive : _lab.active;
+        if (node.label_active === undefined) node.label_active = _txt(_lab.active);
+        if (node.label_inactive === undefined) node.label_inactive = _txt(_lab.inactive !== undefined ? _lab.inactive : _lab.active);
+        const _as = (_lab.active && typeof _lab.active === 'object') ? _lab.active : null;
+        const _is = (_lab.inactive && typeof _lab.inactive === 'object') ? _lab.inactive : _as;
+        if (_as && node.label_text_size === undefined && _as.text_size !== undefined) node.label_text_size = _as.text_size;
+        if (_as && node.label_text_color === undefined && _as.text_color !== undefined) node.label_text_color = _as.text_color;
+        if (_is && node.label_inactive_text_size === undefined && _is.text_size !== undefined) node.label_inactive_text_size = _is.text_size;
+        if (_is && node.label_inactive_text_color === undefined && _is.text_color !== undefined) node.label_inactive_text_color = _is.text_color;
+    }
+
+    // show_label now lives under label (migrated from top-level / style_flags /
+    // labels). Hoist it to the node level so widgets that read config.show_label
+    // (e.g. MeterBarGraph) keep working without per-widget changes.
+    if (_lab && typeof _lab === 'object' && _lab.show_label !== undefined && node.show_label === undefined) {
+        node.show_label = _lab.show_label;
     }
 
     const topic = `OpenAir/Gui${path_prefix}/${nodeName}`;
@@ -60,7 +77,7 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
     // widgets that render config.label directly (e.g. LTPFader's {config.label})
     // never receive a raw object ("Objects are not valid as a React child").
     if (_labIsPair) {
-        node.label = getLocalizedLabel(_lab.text) || getLocalizedLabel(_lab.active) || getLocalizedLabel(_lab.inactive) || '';
+        node.label = getLocalizedLabel(_txt(_lab.text)) || getLocalizedLabel(_txt(_lab.active)) || getLocalizedLabel(_txt(_lab.inactive)) || '';
     }
 
     const title = getLocalizedLabel(node.label) ||
@@ -95,6 +112,26 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
     // (fader, knob) measure their box and redraw to fit (crisp).
     const fluidConfig = scaling ? { ...node, fluid: true } : node;
     const titleStyle = { fontSize: '12px', color: node.cosmetics?.colors?.text || '#999', marginBottom: '10px' };
+
+    // Procedural Panel cover (WASM). Placed explicitly in a layout as a sized
+    // background tile; the engine auto-places its own screws.
+    if (type === 'panel' || type === 'Panel' || type.toLowerCase() === 'oapanel') {
+        return (
+            <div style={style}>
+                {window.Panel ? <window.Panel node={node} config={node.cosmetics?.panel || node.panel} /> : <div style={{width: '100%', height: '100%', background: '#2a2a2a'}}></div>}
+            </div>
+        );
+    }
+
+    // Standalone procedural screw (WASM). The Panel cover fastens its own; this
+    // is for dropping a single screw on its own.
+    if (type === 'screw' || type === 'Screw') {
+        return (
+            <div style={{ ...style, height: 'auto' }}>
+                {window.Screw ? <window.Screw node={node} config={node.cosmetics?.screw || node.screw} /> : <div style={{width: 24, height: 24, borderRadius: '50%', background: '#888'}}></div>}
+            </div>
+        );
+    }
 
     // _Horizontal_with_dial_Value is the canonical composite. _CompositeFader /
     // _GCA / GCA are deprecated styles that now render as this one too.
@@ -345,7 +382,7 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
         return (
             <div style={style}>
                 {window.OcaDropdown
-                    ? <window.OcaDropdown label={title} value={val} onChange={setVal} options={node.options} />
+                    ? <window.OcaDropdown label={title} value={val} onChange={setVal} options={node.options} config={node} />
                     : <select><option>{title}</option></select>}
             </div>
         );

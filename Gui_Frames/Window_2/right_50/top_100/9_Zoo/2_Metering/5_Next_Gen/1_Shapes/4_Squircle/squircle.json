@@ -49,10 +49,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Standard Squircle",
-                "Fr": "Standard Squircle",
-                "De": "Standard Squircle",
-                "Es": "Estándar Squircle"
+                "text": {
+                  "En": "Standard Squircle",
+                  "Fr": "Standard Squircle",
+                  "De": "Standard Squircle",
+                  "Es": "Estándar Squircle"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -153,10 +157,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Small Blue",
-                "Fr": "Small Blue",
-                "De": "Small Blue",
-                "Es": "Small Blue"
+                "text": {
+                  "En": "Small Blue",
+                  "Fr": "Small Blue",
+                  "De": "Small Blue",
+                  "Es": "Small Blue"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -239,10 +247,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Large Red",
-                "Fr": "Large Red",
-                "De": "Large Red",
-                "Es": "Large Red"
+                "text": {
+                  "En": "Large Red",
+                  "Fr": "Large Red",
+                  "De": "Large Red",
+                  "Es": "Large Red"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -325,10 +337,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Tiny Silver",
-                "Fr": "Tiny Silver",
-                "De": "Tiny Silver",
-                "Es": "Tiny Silver"
+                "text": {
+                  "En": "Tiny Silver",
+                  "Fr": "Tiny Silver",
+                  "De": "Tiny Silver",
+                  "Es": "Tiny Silver"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -395,10 +411,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Neon Pink",
-                "Fr": "Neon Pink",
-                "De": "Neon Pink",
-                "Es": "Neon Pink"
+                "text": {
+                  "En": "Neon Pink",
+                  "Fr": "Neon Pink",
+                  "De": "Neon Pink",
+                  "Es": "Neon Pink"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -483,10 +503,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Vintage Cream",
-                "Fr": "Vintage Cream",
-                "De": "Vintage Cream",
-                "Es": "Vintage Cream"
+                "text": {
+                  "En": "Vintage Cream",
+                  "Fr": "Vintage Cream",
+                  "De": "Vintage Cream",
+                  "Es": "Vintage Cream"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -568,10 +592,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Cyber Cyan",
-                "Fr": "Cyber Cyan",
-                "De": "Cyber Cyan",
-                "Es": "Cyber Cyan"
+                "text": {
+                  "En": "Cyber Cyan",
+                  "Fr": "Cyber Cyan",
+                  "De": "Cyber Cyan",
+                  "Es": "Cyber Cyan"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -656,10 +684,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Blueprint",
-                "Fr": "Blueprint",
-                "De": "Blueprint",
-                "Es": "Blueprint"
+                "text": {
+                  "En": "Blueprint",
+                  "Fr": "Blueprint",
+                  "De": "Blueprint",
+                  "Es": "Blueprint"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -741,10 +773,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Black & Gold",
-                "Fr": "Black & Gold",
-                "De": "Black & Gold",
-                "Es": "Black & Gold"
+                "text": {
+                  "En": "Black & Gold",
+                  "Fr": "Black & Gold",
+                  "De": "Black & Gold",
+                  "Es": "Black & Gold"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {

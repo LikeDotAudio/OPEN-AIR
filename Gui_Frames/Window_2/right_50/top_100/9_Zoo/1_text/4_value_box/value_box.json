@@ -15,10 +15,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Set Point",
-            "Fr": "Set Point",
-            "De": "Set Point",
-            "Es": "Set Point"
+            "text": {
+              "En": "Set Point",
+              "Fr": "Set Point",
+              "De": "Set Point",
+              "Es": "Set Point"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -55,10 +59,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Name",
-            "Fr": "Name",
-            "De": "Name",
-            "Es": "Name"
+            "text": {
+              "En": "Name",
+              "Fr": "Name",
+              "De": "Name",
+              "Es": "Name"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -93,10 +101,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "IP Address",
-            "Fr": "IP Address",
-            "De": "IP Address",
-            "Es": "IP Address"
+            "text": {
+              "En": "IP Address",
+              "Fr": "IP Address",
+              "De": "IP Address",
+              "Es": "IP Address"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -130,10 +142,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Delay",
-            "Fr": "Delay",
-            "De": "Delay",
-            "Es": "Delay"
+            "text": {
+              "En": "Delay",
+              "Fr": "Delay",
+              "De": "Delay",
+              "Es": "Delay"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -168,10 +184,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Password",
-            "Fr": "Password",
-            "De": "Password",
-            "Es": "Password"
+            "text": {
+              "En": "Password",
+              "Fr": "Password",
+              "De": "Password",
+              "Es": "Password"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {

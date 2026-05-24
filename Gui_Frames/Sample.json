@@ -134,7 +134,11 @@
           "knob_rotary_selector_Example": {
             "type": "SelectorSwitch",
             "label": {
-              "active": "Multimeter Mode"
+              "active": {
+                "text": "Multimeter Mode",
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
             },
             "positions": [
               "OFF",
@@ -217,8 +221,16 @@
             },
             "readout": {
               "label": {
-                "active": "FIRING...",
-                "inactive": "FIRE"
+                "active": {
+                  "text": "FIRING...",
+                  "text_size": 12,
+                  "text_color": "#cccccc"
+                },
+                "inactive": {
+                  "text": "FIRE",
+                  "text_size": 12,
+                  "text_color": "#cccccc"
+                }
               }
             },
             "interaction": {
@@ -285,13 +297,21 @@
               "options": {
                 "ON": {
                   "label": {
-                    "active": "MUTED"
+                    "active": {
+                      "text": "MUTED",
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
                   },
                   "selected": false
                 },
                 "OFF": {
                   "label": {
-                    "inactive": "LIVE"
+                    "inactive": {
+                      "text": "LIVE",
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
                   },
                   "selected": true
                 }
@@ -341,23 +361,47 @@
               "options": {
                 "LPF": {
                   "label": {
-                    "active": "LOW PASS",
-                    "inactive": "LPF"
+                    "active": {
+                      "text": "LOW PASS",
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    },
+                    "inactive": {
+                      "text": "LPF",
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
                   },
                   "selected": true,
                   "active_color": "#00FF00"
                 },
                 "HPF": {
                   "label": {
-                    "active": "HIGH PASS",
-                    "inactive": "HPF"
+                    "active": {
+                      "text": "HIGH PASS",
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    },
+                    "inactive": {
+                      "text": "HPF",
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
                   },
                   "selected": false
                 },
                 "BPF": {
                   "label": {
-                    "active": "BAND PASS",
-                    "inactive": "BPF"
+                    "active": {
+                      "text": "BAND PASS",
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    },
+                    "inactive": {
+                      "text": "BPF",
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
                   },
                   "selected": false
                 }
@@ -372,7 +416,11 @@
           "button_trapezoid_Example": {
             "type": "_TrapezoidButton",
             "label": {
-              "active": "Play"
+              "active": {
+                "text": "Play",
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
             },
             "domain": {
               "min": 0.0,
@@ -409,7 +457,11 @@
           "button_wink_Example": {
             "type": "_WinkButton",
             "label": {
-              "active": "01"
+              "active": {
+                "text": "01",
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
             },
             "path": "audio/wink/target_demo_001",
             "width": 60,
@@ -541,7 +593,6 @@
               },
               "style_flags": {
                 "show_grid": true,
-                "show_label": true,
                 "value_follow": true
               },
               "scale": {
@@ -578,17 +629,18 @@
               "padx": 10,
               "pady": 10,
               "weight": 1
-            }
+            },
+            "show_label": true
           },
           "Exhaustive_Composite_Example": {
             "type": "_Horizontal_with_dial_Value",
-            "column_spacing": [
-              80,
-              10,
-              10
-            ],
             "label": {
-              "active": "Master High-Precision Tuning"
+              "active": {
+                "text": "Master High-Precision Tuning",
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
             },
             "description": "An exhaustive sample demonstrating every possible sub-configuration for the OcaCompositeFaderKnob.",
             "layout": {
@@ -597,7 +649,12 @@
               "stretch": "width",
               "padx": 20,
               "pady": 10,
-              "sticky": "ew"
+              "sticky": "ew",
+              "column_spacing": [
+                80,
+                10,
+                10
+              ]
             },
             "domain": {
               "min": 0.0,
@@ -609,7 +666,6 @@
             "value": {
               "default_value": 1250.0
             },
-            "show_label": true,
             "value_config": {
               "_README": "Overrides for the numerical entry and unit readout panel (Column 2).",
               "width": 12,
@@ -620,48 +676,74 @@
             },
             "fader_config": {
               "_README": "Deep overrides for the coarse adjustment horizontal fader (Column 0).",
-              "tick_interval": 500,
-              "show_ticks": true,
+              "cosmetics": {
+                "scale": {
+                  "interval": 500,
+                  "show": true
+                },
+                "styling": {
+                  "glow_intensity": 1.8
+                },
+                "colors": {
+                  "cap": "#dcdcdc",
+                  "cap_highlight": "#33A1FD",
+                  "highlight": "#FF9900",
+                  "tick_color": "#888888",
+                  "sub_tick_color": "#444444"
+                }
+              },
+              "interaction": {
+                "reff_point": 2500.0
+              },
               "bar_color": "#222222",
               "active_color": "#FF9900",
-              "glow_intensity": 1.8,
-              "cap_color": "#dcdcdc",
-              "cap_highlight_color": "#33A1FD",
               "fader_cap_scale": 1.2,
               "cap_width": 55,
               "cap_height": 40,
-              "value_highlight_color": "#FF9900",
-              "tick_color": "#888888",
-              "sub_tick_color": "#444444",
-              "log_exponent": 1.0,
-              "reff_point": 2500.0
+              "log_exponent": 1.0
             },
             "dial_config": {
               "_README": "Deep overrides for the fine-tuning rotary dial (Column 1).",
-              "knob_style": "vintage",
-              "shape": "gear",
-              "knob_teeth": 12,
+              "cosmetics": {
+                "style_overrides": {
+                  "knob_style": "vintage",
+                  "shape": "gear"
+                },
+                "styling": {
+                  "teeth": 12,
+                  "gradient": 3,
+                  "fill_color": "#333333",
+                  "outline_thickness": 1,
+                  "outline_color": "#555555",
+                  "arc_width": 6,
+                  "no_center": false
+                },
+                "colors": {
+                  "active": "#00ffff",
+                  "background": "#2b2b2b"
+                },
+                "pointer": {
+                  "style": "triangle",
+                  "length": 25,
+                  "offset": 5
+                },
+                "scale": {
+                  "show": true,
+                  "style": "dots",
+                  "length": 8
+                }
+              },
+              "readout": {
+                "text_inside": false,
+                "label_position": "top"
+              },
+              "interaction": {
+                "infinity": true,
+                "fine_pitch": true
+              },
               "width": 80,
               "height": 80,
-              "active_color": "#00ffff",
-              "bg_color": "#2b2b2b",
-              "indicator_color": "#00ffff",
-              "pointer_style": "triangle",
-              "pointer_length": 25,
-              "pointer_offset": 5,
-              "gradient_level": 3,
-              "knob_fill_color": "#333333",
-              "knob_outline_thickness": 1,
-              "knob_outline_color": "#555555",
-              "show_ticks": true,
-              "tick_style": "dots",
-              "tick_length": 8,
-              "arc_width": 6,
-              "text_inside": false,
-              "no_center": false,
-              "label_Text_position": "top",
-              "infinity": true,
-              "fine_pitch": true
+              "indicator_color": "#00ffff"
             },
             "yak_handler": {
               "_README": "Hardware bridge configuration for MQTT/SCPI communication.",
@@ -684,7 +766,11 @@
           "fader_bar_graph_Example": {
             "type": "_FaderWithBarGraph",
             "label": {
-              "active": "Standard"
+              "active": {
+                "text": "Standard",
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
             },
             "domain": {
               "min": -60.0,
@@ -713,10 +799,14 @@
             "type": "_Horizontal_with_dial_Value",
             "label": {
               "active": {
-                "En": "Tuning",
-                "Fr": "Accord",
-                "De": "Abstimmung",
-                "Es": "Sintonía"
+                "text": {
+                  "En": "Tuning",
+                  "Fr": "Accord",
+                  "De": "Abstimmung",
+                  "Es": "Sintonía"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "layout": {
@@ -739,16 +829,26 @@
             },
             "fader_config": {
               "type": "_GuiFaderHorizontal",
-              "tick_interval": 100,
-              "show_ticks": true,
+              "cosmetics": {
+                "scale": {
+                  "interval": 100,
+                  "show": true
+                }
+              },
               "bar_color": "#333333",
               "active_color": "#FF9900"
             },
             "dial_config": {
               "type": "_GuiKnob",
-              "knob_style": "dial",
-              "active_color": "#00ffff",
-              "bg_color": "#2b2b2b"
+              "cosmetics": {
+                "style_overrides": {
+                  "knob_style": "dial"
+                },
+                "colors": {
+                  "active": "#00ffff",
+                  "background": "#2b2b2b"
+                }
+              }
             },
             "value_config": {
               "height": 30,
@@ -769,10 +869,26 @@
           "fader_linear_travelling_potentiometer_Example": {
             "type": "_CustomLTP",
             "label": {
-              "active": "Master Gali"
+              "active": {
+                "text": "Master Gali",
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
             },
             "notes": "A fully-featured Linear Travelling Potentiometer (LTP) sample showcasing every parameter.",
             "fader_config": {
+              "cosmetics": {
+                "colors": {
+                  "highlight": "#33A1FD"
+                }
+              },
+              "readout": {
+                "show_value": true,
+                "show_units": true
+              },
+              "interaction": {
+                "reff_point": 0.0
+              },
               "domain": {
                 "min": -100.0,
                 "max": 20.0
@@ -781,10 +897,6 @@
                 "default_value": -10.0
               },
               "log_exponent": 1.0,
-              "reff_point": 0.0,
-              "value_highlight_color": "#33A1FD",
-              "show_value": true,
-              "show_units": true,
               "unit_text": "dB",
               "unit_position": "right"
             },
@@ -833,7 +945,11 @@
           "composite_mdp_Faders_Variant_Example": {
             "type": "_MDP",
             "label": {
-              "active": "MDP 1"
+              "active": {
+                "text": "MDP 1",
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
             },
             "path": "audio/mdp/1",
             "initial_x": 210,
@@ -883,7 +999,11 @@
             },
             "ltp": {
               "label": {
-                "active": "Level"
+                "active": {
+                  "text": "Level",
+                  "text_size": 12,
+                  "text_color": "#cccccc"
+                }
               },
               "value": {
                 "default_value": -10
@@ -1005,7 +1125,11 @@
           "images_image_display_Example": {
             "type": "_GuiImage",
             "label": {
-              "active": "Flux Capacitor"
+              "active": {
+                "text": "Flux Capacitor",
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
             },
             "path": "oaDataCache/assets/images/flux_capacitor.png",
             "notes": "Static display of the Flux Capacitor.",
@@ -1089,20 +1213,32 @@
             "options": {
               "Mic1": {
                 "label": {
-                  "active": "Microphone 1"
+                  "active": {
+                    "text": "Microphone 1",
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
                 },
                 "value": "MIC1_IN",
                 "selected": true
               },
               "Mic2": {
                 "label": {
-                  "active": "Microphone 2"
+                  "active": {
+                    "text": "Microphone 2",
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
                 },
                 "value": "MIC2_IN"
               },
               "LineIn": {
                 "label": {
-                  "active": "Line Input"
+                  "active": {
+                    "text": "Line Input",
+                    "text_size": 12,
+                    "text_color": "#cccccc"
+                  }
                 },
                 "value": "LINE_IN"
               }
@@ -1126,7 +1262,11 @@
           "data_json_tree_Example": {
             "type": "_JsonTree",
             "label": {
-              "active": "AES70 Object Model (data_AES70.json)"
+              "active": {
+                "text": "AES70 Object Model (data_AES70.json)",
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
             },
             "json_source": "display/right_50/bottom_90/10_sets/3_AES70/data_AES70.json",
             "allow_filter": true,
@@ -1148,8 +1288,16 @@
           "checkbox_Example": {
             "type": "_SmartCheckbox",
             "label": {
-              "active": "Feature Enabled",
-              "inactive": "Feature Disabled"
+              "active": {
+                "text": "Feature Enabled",
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "inactive": {
+                "text": "Feature Disabled",
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
             },
             "notes": "Checkbox to enable/disable a specific feature.",
             "domain": {
@@ -1183,21 +1331,33 @@
               "options": {
                 "file1": {
                   "label": {
-                    "active": "document.pdf"
+                    "active": {
+                      "text": "document.pdf",
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
                   },
                   "value": "/path/to/document.pdf",
                   "active": "true"
                 },
                 "file2": {
                   "label": {
-                    "active": "report.docx"
+                    "active": {
+                      "text": "report.docx",
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
                   },
                   "value": "/path/to/report.docx",
                   "active": "true"
                 },
                 "file3": {
                   "label": {
-                    "active": "image.png"
+                    "active": {
+                      "text": "image.png",
+                      "text_size": 12,
+                      "text_color": "#cccccc"
+                    }
                   },
                   "value": "/path/to/image.png",
                   "active": "true",
@@ -1223,7 +1383,12 @@
           "slider_value_Example": {
             "type": "_sliderValue",
             "label": {
-              "active": "Volume"
+              "active": {
+                "text": "Volume",
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
             },
             "layout": {
               "height": 100,
@@ -1237,7 +1402,6 @@
             },
             "value": {},
             "notes": "A standard horizontal slider with numerical input for volume control.",
-            "show_label": true,
             "cosmetics": {
               "colors": {
                 "primary": "#FF9900",
@@ -1378,7 +1542,6 @@
                 "upper": "#FF0000"
               },
               "style_flags": {
-                "show_label": true,
                 "ticks_visible": true,
                 "scale_numbers": true,
                 "peak_flag": true
@@ -1407,7 +1570,8 @@
               "sticky": "center",
               "padx": 10,
               "pady": 10
-            }
+            },
+            "show_label": true
           },
           "images_progress_bar_Example": {
             "type": "_SmartProgress",
@@ -1440,7 +1604,11 @@
           "meter_knob_with_vu_meter_Example": {
             "widget_type": "_VUMeterKnob",
             "label": {
-              "active": "Master L"
+              "active": {
+                "text": "Master L",
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
             },
             "path": "audio/master/left/vu",
             "knob_path": "audio/master/left/gain",
@@ -1484,7 +1652,11 @@
           "circular_motion_displacement_potentiometer_Example": {
             "type": "_CMDP",
             "label": {
-              "active": "CMDP 1"
+              "active": {
+                "text": "CMDP 1",
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
             },
             "path": "audio/cmdp/1",
             "layout": {
@@ -2034,7 +2206,11 @@
           "composite_mdp_Example": {
             "type": "_MDP",
             "label": {
-              "active": "MDP 1"
+              "active": {
+                "text": "MDP 1",
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
             },
             "path": "audio/mdp/1",
             "initial_x": 210,
@@ -2084,7 +2260,11 @@
             },
             "ltp": {
               "label": {
-                "active": "Level"
+                "active": {
+                  "text": "Level",
+                  "text_size": 12,
+                  "text_color": "#cccccc"
+                }
               },
               "value": {
                 "default_value": -10

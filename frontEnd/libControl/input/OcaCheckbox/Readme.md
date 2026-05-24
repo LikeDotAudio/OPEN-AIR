@@ -24,8 +24,16 @@ in the property editor.
   "checkbox_Example": {
     "type": "_SmartCheckbox",
     "label": {
-      "active": "Feature Enabled",
-      "inactive": "Feature Disabled"
+      "active": {
+        "text": "Feature Enabled",
+        "text_size": 12,
+        "text_color": "#cccccc"
+      },
+      "inactive": {
+        "text": "Feature Disabled",
+        "text_size": 12,
+        "text_color": "#cccccc"
+      }
     },
     "notes": "Checkbox to enable/disable a specific feature.",
     "domain": {

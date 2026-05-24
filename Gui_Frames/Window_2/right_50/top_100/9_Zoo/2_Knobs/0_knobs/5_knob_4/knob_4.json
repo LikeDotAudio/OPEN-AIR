@@ -53,7 +53,8 @@
               "En": "Pan L",
               "Fr": "Panoramique L",
               "De": "Panorama L",
-              "Es": "Panorámico L"
+              "Es": "Panorámico L",
+              "show_label": true
             },
             "notes": "Left bias Pink",
             "geometry": {
@@ -74,8 +75,7 @@
                 "primary": "#E91E63"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -112,7 +112,8 @@
               "En": "Pan R",
               "Fr": "Panoramique R",
               "De": "Panorama R",
-              "Es": "Panorámico R"
+              "Es": "Panorámico R",
+              "show_label": true
             },
             "notes": "Right bias Blue",
             "geometry": {
@@ -133,8 +134,7 @@
                 "primary": "#2196F3"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -171,7 +171,8 @@
               "En": "Width",
               "Fr": "Largeur",
               "De": "Breite",
-              "Es": "Ancho"
+              "Es": "Ancho",
+              "show_label": true
             },
             "notes": "Stereo Width",
             "geometry": {
@@ -192,8 +193,7 @@
                 "primary": "#9C27B0"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -230,7 +230,8 @@
               "En": "Balance",
               "Fr": "Balance",
               "De": "Balance",
-              "Es": "Balance"
+              "Es": "Balance",
+              "show_label": true
             },
             "notes": "Deep Purple Bal",
             "geometry": {
@@ -251,8 +252,7 @@
                 "primary": "#673AB7"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -289,7 +289,8 @@
               "En": "Spread",
               "Fr": "Spread",
               "De": "Spread",
-              "Es": "Spread"
+              "Es": "Spread",
+              "show_label": true
             },
             "notes": "Cyan Spread",
             "geometry": {
@@ -310,8 +311,7 @@
                 "primary": "#00BCD4"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -348,7 +348,8 @@
               "En": "Depth",
               "Fr": "Profondeur",
               "De": "Tiefe",
-              "Es": "Profundidad"
+              "Es": "Profundidad",
+              "show_label": true
             },
             "notes": "Teal Depth",
             "geometry": {
@@ -370,8 +371,7 @@
                 "primary": "#009688"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -408,7 +408,8 @@
               "En": "Azimuth",
               "Fr": "Azimuth",
               "De": "Azimuth",
-              "Es": "Azimuth"
+              "Es": "Azimuth",
+              "show_label": true
             },
             "notes": "Amber Angle",
             "geometry": {
@@ -429,8 +430,7 @@
                 "primary": "#FFC107"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -467,7 +467,8 @@
               "En": "Elevation",
               "Fr": "Elevation",
               "De": "Elevation",
-              "Es": "Elevation"
+              "Es": "Elevation",
+              "show_label": true
             },
             "notes": "Orange Elev",
             "geometry": {
@@ -488,8 +489,7 @@
                 "primary": "#FF5722"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -564,7 +564,8 @@
               "En": "Gain",
               "Fr": "Gain",
               "De": "Verstärkung",
-              "Es": "Ganancia"
+              "Es": "Ganancia",
+              "show_label": true
             },
             "notes": "Massive Red Gain",
             "geometry": {
@@ -585,8 +586,7 @@
                 "primary": "#B71C1C"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -623,7 +623,8 @@
               "En": "Tone",
               "Fr": "Tone",
               "De": "Tone",
-              "Es": "Tone"
+              "Es": "Tone",
+              "show_label": true
             },
             "notes": "Yellow Tone",
             "geometry": {
@@ -644,8 +645,7 @@
                 "primary": "#FFEB3B"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -682,7 +682,8 @@
               "En": "Presence",
               "Fr": "Presence",
               "De": "Presence",
-              "Es": "Presence"
+              "Es": "Presence",
+              "show_label": true
             },
             "notes": "Blue Pres",
             "geometry": {
@@ -703,8 +704,7 @@
                 "primary": "#03A9F4"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -741,7 +741,8 @@
               "En": "Bias",
               "Fr": "Bias",
               "De": "Bias",
-              "Es": "Bias"
+              "Es": "Bias",
+              "show_label": true
             },
             "notes": "Grey Bias",
             "geometry": {
@@ -763,8 +764,7 @@
                 "primary": "#607D8B"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -801,7 +801,8 @@
               "En": "Fuzz",
               "Fr": "Fuzz",
               "De": "Fuzz",
-              "Es": "Fuzz"
+              "Es": "Fuzz",
+              "show_label": true
             },
             "notes": "Dark Pink Fuzz",
             "geometry": {
@@ -822,8 +823,7 @@
                 "primary": "#880E4F"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -860,7 +860,8 @@
               "En": "Crunch",
               "Fr": "Crunch",
               "De": "Crunch",
-              "Es": "Crunch"
+              "Es": "Crunch",
+              "show_label": true
             },
             "notes": "Dark Orange",
             "geometry": {
@@ -881,8 +882,7 @@
                 "primary": "#E65100"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -919,7 +919,8 @@
               "En": "Post",
               "Fr": "Post",
               "De": "Post",
-              "Es": "Post"
+              "Es": "Post",
+              "show_label": true
             },
             "notes": "Green Post-Gain",
             "geometry": {
@@ -940,8 +941,7 @@
                 "primary": "#4CAF50"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -978,7 +978,8 @@
               "En": "Mix",
               "Fr": "Mix",
               "De": "Mix",
-              "Es": "Mezcla"
+              "Es": "Mezcla",
+              "show_label": true
             },
             "notes": "White Mix",
             "geometry": {
@@ -999,8 +1000,7 @@
                 "primary": "#FFFFFF"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -1075,7 +1075,8 @@
               "En": "Infinite",
               "Fr": "Infinite",
               "De": "Infinite",
-              "Es": "Infinite"
+              "Es": "Infinite",
+              "show_label": true
             },
             "notes": "Wraps 0-12",
             "geometry": {
@@ -1096,8 +1097,7 @@
                 "primary": "#F44336"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -1134,7 +1134,8 @@
               "En": "Fine Pitch",
               "Fr": "Fine Pitch",
               "De": "Fine Pitch",
-              "Es": "Fine Pitch"
+              "Es": "Fine Pitch",
+              "show_label": true
             },
             "notes": "Slow turn",
             "geometry": {
@@ -1155,8 +1156,7 @@
                 "primary": "#2196F3"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -1193,7 +1193,8 @@
               "En": "Val Top",
               "Fr": "Val Haut",
               "De": "Val Oben",
-              "Es": "Val Arriba"
+              "Es": "Val Arriba",
+              "show_label": true
             },
             "notes": "Value Top",
             "geometry": {
@@ -1215,8 +1216,7 @@
                 "primary": "#4CAF50"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -1253,7 +1253,8 @@
               "En": "Val Left",
               "Fr": "Val Gauche",
               "De": "Val Links",
-              "Es": "Val Izquierda"
+              "Es": "Val Izquierda",
+              "show_label": true
             },
             "notes": "Value Left",
             "geometry": {
@@ -1275,8 +1276,7 @@
                 "primary": "#FF9800"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -1313,7 +1313,8 @@
               "En": "Val Right",
               "Fr": "Val Droite",
               "De": "Val Rechts",
-              "Es": "Val Derecha"
+              "Es": "Val Derecha",
+              "show_label": true
             },
             "notes": "Value Right",
             "geometry": {
@@ -1335,8 +1336,7 @@
                 "primary": "#9C27B0"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -1373,7 +1373,8 @@
               "En": "Center Val",
               "Fr": "Centre Val",
               "De": "Zentrum Val",
-              "Es": "Centro Val"
+              "Es": "Centro Val",
+              "show_label": true
             },
             "notes": "Value in Center",
             "geometry": {
@@ -1395,8 +1396,7 @@
                 "primary": "#795548"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -1433,7 +1433,8 @@
               "En": "Txt Left",
               "Fr": "Txt Gauche",
               "De": "Txt Links",
-              "Es": "Txt Izquierda"
+              "Es": "Txt Izquierda",
+              "show_label": true
             },
             "notes": "Label Left",
             "geometry": {
@@ -1454,8 +1455,7 @@
                 "primary": "#607D8B"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
@@ -1492,7 +1492,8 @@
               "En": "Txt Right",
               "Fr": "Txt Droite",
               "De": "Txt Rechts",
-              "Es": "Txt Derecha"
+              "Es": "Txt Derecha",
+              "show_label": true
             },
             "notes": "Label Right",
             "geometry": {
@@ -1513,8 +1514,7 @@
                 "primary": "#009688"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "circle",
               "pointer": {

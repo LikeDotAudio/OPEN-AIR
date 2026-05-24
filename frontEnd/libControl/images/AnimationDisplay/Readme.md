@@ -22,10 +22,16 @@ the palette entry, preview, and property manipulators.
   "Animation_Display_Example": {
     "type": "AnimationDisplay",
     "label": {
-      "active": "Animated Time Circuits"
+      "active": {
+        "text": "Animated Time Circuits",
+        "text_size": 12,
+        "text_color": "#cccccc"
+      }
     },
     "gif_path": "oaDataCache/assets/images/time_circuits.gif",
-    "value_default": 0,
+    "value": {
+      "default_value": 0
+    },
     "notes": "A standard animation rendered through /api/image.",
     "layout": {
       "sticky": "ew",

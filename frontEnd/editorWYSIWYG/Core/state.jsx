@@ -228,6 +228,36 @@
           api.select(`${destNodePath}.${collKey}.${newKey}`);
         },
 
+        /** Move `srcPath` into container node `destContainerPath`, positioned just
+         *  before sibling `beforeKey` (or appended when beforeKey is null/missing).
+         *  Handles both same-container reorder and cross-container moves; preserves
+         *  the element's key when free. Used by canvas drag-to-reorder. */
+        moveTo(srcPath, destContainerPath, beforeKey) {
+          if (!srcPath || !destContainerPath) return;
+          if (destContainerPath === srcPath || destContainerPath.startsWith(srcPath + '.')) return;
+          const d = deepClone(state.data);
+          const src = getAtPath(d, srcPath);
+          const dest = getAtPath(d, destContainerPath);
+          if (src == null || dest == null) return;
+          const srcVal = deepClone(src);
+          const { container: srcContainer, key: srcKey } = containerOf(d, srcPath);
+          if (srcContainer) delete srcContainer[srcKey];
+          const collKey = childCollectionKey(dest);
+          if (!dest[collKey] || typeof dest[collKey] !== 'object') dest[collKey] = {};
+          const coll = dest[collKey];
+          const newKey = (coll[srcKey] === undefined) ? srcKey : genUniqueKey(coll, srcKey);
+          const out = {};
+          let placed = false;
+          for (const [k, v] of Object.entries(coll)) {
+            if (k === beforeKey && !placed) { out[newKey] = srcVal; placed = true; }
+            out[k] = v;
+          }
+          if (!placed) out[newKey] = srcVal;
+          dest[collKey] = out;
+          commit(d);
+          api.select(`${destContainerPath}.${collKey}.${newKey}`);
+        },
+
         markSaved() { state = { ...state, dirty: false }; notify(); },
         setFilePath(p) { state = { ...state, filePath: p }; notify(); },
       };

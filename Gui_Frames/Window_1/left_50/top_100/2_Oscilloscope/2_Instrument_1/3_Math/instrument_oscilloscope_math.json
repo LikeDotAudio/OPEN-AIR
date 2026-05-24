@@ -36,10 +36,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "Device Name",
-                    "Fr": "Device Nom",
-                    "De": "Device Name",
-                    "Es": "Device Nombre"
+                    "text": {
+                      "En": "Device Name",
+                      "Fr": "Device Nom",
+                      "De": "Device Name",
+                      "Es": "Device Nombre"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -74,10 +78,14 @@
                 "type": "_GuiGraph",
                 "label": {
                   "active": {
-                    "En": "Spectral / Temporal Display",
-                    "Fr": "Spectral / Temporal Display",
-                    "De": "Spectral / Temporal Display",
-                    "Es": "Spectral / Temporal Display"
+                    "text": {
+                      "En": "Spectral / Temporal Display",
+                      "Fr": "Spectral / Temporal Display",
+                      "De": "Spectral / Temporal Display",
+                      "Es": "Spectral / Temporal Display"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -140,16 +148,24 @@
                 "type": "_GuiButtonToggle",
                 "label": {
                   "active": {
-                    "En": "CH1 ON",
-                    "Fr": "CH1 ACTIVÉ",
-                    "De": "CH1 AN",
-                    "Es": "CH1 ACTIVADO"
+                    "text": {
+                      "En": "CH1 ON",
+                      "Fr": "CH1 ACTIVÉ",
+                      "De": "CH1 AN",
+                      "Es": "CH1 ACTIVADO"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "CH1 OFF",
-                    "Fr": "CH 1",
-                    "De": "CH 1",
-                    "Es": "CH 1"
+                    "text": {
+                      "En": "CH1 OFF",
+                      "Fr": "CH 1",
+                      "De": "CH 1",
+                      "Es": "CH 1"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "style": {
@@ -213,10 +229,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "Ch1 Scale",
-                    "Fr": "Ch 1",
-                    "De": "Ch 1",
-                    "Es": "Ch 1"
+                    "text": {
+                      "En": "Ch1 Scale",
+                      "Fr": "Ch 1",
+                      "De": "Ch 1",
+                      "Es": "Ch 1"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -262,16 +282,24 @@
                 "type": "_GuiButtonToggle",
                 "label": {
                   "active": {
-                    "En": "CH2 ON",
-                    "Fr": "CH 2",
-                    "De": "CH 2",
-                    "Es": "CH 2"
+                    "text": {
+                      "En": "CH2 ON",
+                      "Fr": "CH 2",
+                      "De": "CH 2",
+                      "Es": "CH 2"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "CH2 OFF",
-                    "Fr": "CH 2",
-                    "De": "CH 2",
-                    "Es": "CH 2"
+                    "text": {
+                      "En": "CH2 OFF",
+                      "Fr": "CH 2",
+                      "De": "CH 2",
+                      "Es": "CH 2"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "style": {
@@ -335,10 +363,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "Ch2 Scale",
-                    "Fr": "Ch 2",
-                    "De": "Ch 2",
-                    "Es": "Ch 2"
+                    "text": {
+                      "En": "Ch2 Scale",
+                      "Fr": "Ch 2",
+                      "De": "Ch 2",
+                      "Es": "Ch 2"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -384,16 +416,24 @@
                 "type": "_GuiButtonToggle",
                 "label": {
                   "active": {
-                    "En": "MATH ON",
-                    "Fr": "MATH ON",
-                    "De": "MATH ON",
-                    "Es": "MATH ON"
+                    "text": {
+                      "En": "MATH ON",
+                      "Fr": "MATH ON",
+                      "De": "MATH ON",
+                      "Es": "MATH ON"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "MATH OFF",
-                    "Fr": "MATH OFF",
-                    "De": "MATH OFF",
-                    "Es": "MATH OFF"
+                    "text": {
+                      "En": "MATH OFF",
+                      "Fr": "MATH OFF",
+                      "De": "MATH OFF",
+                      "Es": "MATH OFF"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "style": {
@@ -449,10 +489,14 @@
                 "type": "_GuiDropDownOption",
                 "label": {
                   "active": {
-                    "En": "Operation",
-                    "Fr": "Operation",
-                    "De": "Operation",
-                    "Es": "Operation"
+                    "text": {
+                      "En": "Operation",
+                      "Fr": "Operation",
+                      "De": "Operation",
+                      "Es": "Operation"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "options": [
@@ -500,10 +544,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "Math Scale",
-                    "Fr": "Math Échelle",
-                    "De": "Math Skala",
-                    "Es": "Math Escala"
+                    "text": {
+                      "En": "Math Scale",
+                      "Fr": "Math Échelle",
+                      "De": "Math Skala",
+                      "Es": "Math Escala"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -544,10 +592,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "Math Offset",
-                    "Fr": "Math Décalage",
-                    "De": "Math Versatz",
-                    "Es": "Math Compensación"
+                    "text": {
+                      "En": "Math Offset",
+                      "Fr": "Math Décalage",
+                      "De": "Math Versatz",
+                      "Es": "Math Compensación"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -593,10 +645,14 @@
                 "type": "_GuiDropDownOption",
                 "label": {
                   "active": {
-                    "En": "Window",
-                    "Fr": "Window",
-                    "De": "Window",
-                    "Es": "Window"
+                    "text": {
+                      "En": "Window",
+                      "Fr": "Window",
+                      "De": "Window",
+                      "Es": "Window"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "options": [
@@ -646,10 +702,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "Center Freq",
-                    "Fr": "Fréq centrale",
-                    "De": "Mittenfreq",
-                    "Es": "Frec central"
+                    "text": {
+                      "En": "Center Freq",
+                      "Fr": "Fréq centrale",
+                      "De": "Mittenfreq",
+                      "Es": "Frec central"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -692,10 +752,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "Freq Span",
-                    "Fr": "Intervalle de fréq",
-                    "De": "Freq-Spanne",
-                    "Es": "Intervalo de frec"
+                    "text": {
+                      "En": "Freq Span",
+                      "Fr": "Intervalle de fréq",
+                      "De": "Freq-Spanne",
+                      "Es": "Intervalo de frec"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -749,10 +813,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "Time / Div",
-                    "Fr": "Temps / Div",
-                    "De": "Zeit / Div",
-                    "Es": "Tiempo / Div"
+                    "text": {
+                      "En": "Time / Div",
+                      "Fr": "Temps / Div",
+                      "De": "Zeit / Div",
+                      "Es": "Tiempo / Div"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -798,10 +866,14 @@
                 "type": "_GuiDropDownOption",
                 "label": {
                   "active": {
-                    "En": "Source",
-                    "Fr": "Source",
-                    "De": "Quelle",
-                    "Es": "Fuente"
+                    "text": {
+                      "En": "Source",
+                      "Fr": "Source",
+                      "De": "Quelle",
+                      "Es": "Fuente"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "options": [
@@ -849,10 +921,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "Level",
-                    "Fr": "Niveau",
-                    "De": "Pegel",
-                    "Es": "Nivel"
+                    "text": {
+                      "En": "Level",
+                      "Fr": "Niveau",
+                      "De": "Pegel",
+                      "Es": "Nivel"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -898,16 +974,24 @@
                 "type": "_GuiButtonToggle",
                 "label": {
                   "active": {
-                    "En": "RUN",
-                    "Fr": "EXEC",
-                    "De": "AUSFÜHREN",
-                    "Es": "EJEC"
+                    "text": {
+                      "En": "RUN",
+                      "Fr": "EXEC",
+                      "De": "AUSFÜHREN",
+                      "Es": "EJEC"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "STOP",
-                    "Fr": "STOP",
-                    "De": "STOP",
-                    "Es": "STOP"
+                    "text": {
+                      "En": "STOP",
+                      "Fr": "STOP",
+                      "De": "STOP",
+                      "Es": "STOP"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "style": {
@@ -963,10 +1047,14 @@
                 "type": "_GuiButton",
                 "label": {
                   "active": {
-                    "En": "SINGLE",
-                    "Fr": "SINGLE",
-                    "De": "SINGLE",
-                    "Es": "SINGLE"
+                    "text": {
+                      "En": "SINGLE",
+                      "Fr": "SINGLE",
+                      "De": "SINGLE",
+                      "Es": "SINGLE"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {

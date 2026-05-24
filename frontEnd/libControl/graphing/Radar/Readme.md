@@ -25,7 +25,11 @@ the palette entry, preview, and property manipulators.
   "Radar_Scope_Example": {
     "type": "_Radar",
     "label": {
-      "active": "Radar Eye 01"
+      "active": {
+        "text": "Radar Eye 01",
+        "text_size": 12,
+        "text_color": "#cccccc"
+      }
     },
     "data_parameters": {
       "min_value": 0,

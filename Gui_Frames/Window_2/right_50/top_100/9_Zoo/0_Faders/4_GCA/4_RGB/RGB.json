@@ -25,10 +25,14 @@
         },
         "label": {
           "active": {
-            "En": "RGB Color Mixer",
-            "Fr": "RGB Color Mixer",
-            "De": "RGB Color Mixer",
-            "Es": "RGB Color Mixer"
+            "text": {
+              "En": "RGB Color Mixer",
+              "Fr": "RGB Color Mixer",
+              "De": "RGB Color Mixer",
+              "Es": "RGB Color Mixer"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "is_rgb": true,

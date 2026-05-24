@@ -23,12 +23,12 @@
           "En": "Card 7 - Bench & Patch Routing",
           "Fr": "Card 7 - Bench & Patch Routing",
           "De": "Card 7 - Bench & Patch Routing",
-          "Es": "Card 7 - Bench & Patch Routing"
+          "Es": "Card 7 - Bench & Patch Routing",
+          "show_label": false
         },
         "layout": {
           "sticky": ""
         },
-        "show_label": false,
         "fields": {
           "Bus_AB0_Left_Out": {
             "type": "_GuiButtonToggler",
@@ -68,16 +68,24 @@
                 "value": "701",
                 "label": {
                   "active": {
-                    "En": "Test Patch (L)",
-                    "Fr": "Test Patch (L)",
-                    "De": "Test Patch (L)",
-                    "Es": "Test Patch (L)"
+                    "text": {
+                      "En": "Test Patch (L)",
+                      "Fr": "Test Patch (L)",
+                      "De": "Test Patch (L)",
+                      "Es": "Test Patch (L)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Test Patch (L)",
-                    "Fr": "Test Patch (L)",
-                    "De": "Test Patch (L)",
-                    "Es": "Test Patch (L)"
+                    "text": {
+                      "En": "Test Patch (L)",
+                      "Fr": "Test Patch (L)",
+                      "De": "Test Patch (L)",
+                      "Es": "Test Patch (L)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -91,16 +99,24 @@
                 "value": "702",
                 "label": {
                   "active": {
-                    "En": "Bench AP (L)",
-                    "Fr": "Bench AP (L)",
-                    "De": "Bench AP (L)",
-                    "Es": "Bench AP (L)"
+                    "text": {
+                      "En": "Bench AP (L)",
+                      "Fr": "Bench AP (L)",
+                      "De": "Bench AP (L)",
+                      "Es": "Bench AP (L)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Bench AP (L)",
-                    "Fr": "Bench AP (L)",
-                    "De": "Bench AP (L)",
-                    "Es": "Bench AP (L)"
+                    "text": {
+                      "En": "Bench AP (L)",
+                      "Fr": "Bench AP (L)",
+                      "De": "Bench AP (L)",
+                      "Es": "Bench AP (L)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -114,16 +130,24 @@
                 "value": "703",
                 "label": {
                   "active": {
-                    "En": "Bench Neutrik (L)",
-                    "Fr": "Bench Neutrik (L)",
-                    "De": "Bench Neutrik (L)",
-                    "Es": "Bench Neutrik (L)"
+                    "text": {
+                      "En": "Bench Neutrik (L)",
+                      "Fr": "Bench Neutrik (L)",
+                      "De": "Bench Neutrik (L)",
+                      "Es": "Bench Neutrik (L)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Bench Neutrik (L)",
-                    "Fr": "Bench Neutrik (L)",
-                    "De": "Bench Neutrik (L)",
-                    "Es": "Bench Neutrik (L)"
+                    "text": {
+                      "En": "Bench Neutrik (L)",
+                      "Fr": "Bench Neutrik (L)",
+                      "De": "Bench Neutrik (L)",
+                      "Es": "Bench Neutrik (L)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -137,16 +161,24 @@
                 "value": "704",
                 "label": {
                   "active": {
-                    "En": "Music Src (L)",
-                    "Fr": "Music Src (L)",
-                    "De": "Music Src (L)",
-                    "Es": "Music Src (L)"
+                    "text": {
+                      "En": "Music Src (L)",
+                      "Fr": "Music Src (L)",
+                      "De": "Music Src (L)",
+                      "Es": "Music Src (L)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Music Src (L)",
-                    "Fr": "Music Src (L)",
-                    "De": "Music Src (L)",
-                    "Es": "Music Src (L)"
+                    "text": {
+                      "En": "Music Src (L)",
+                      "Fr": "Music Src (L)",
+                      "De": "Music Src (L)",
+                      "Es": "Music Src (L)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -160,16 +192,24 @@
                 "value": "705",
                 "label": {
                   "active": {
-                    "En": "Snk 1 XLR (L)",
-                    "Fr": "Snk 1 XLR (L)",
-                    "De": "Snk 1 XLR (L)",
-                    "Es": "Snk 1 XLR (L)"
+                    "text": {
+                      "En": "Snk 1 XLR (L)",
+                      "Fr": "Snk 1 XLR (L)",
+                      "De": "Snk 1 XLR (L)",
+                      "Es": "Snk 1 XLR (L)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Snk 1 XLR (L)",
-                    "Fr": "Snk 1 XLR (L)",
-                    "De": "Snk 1 XLR (L)",
-                    "Es": "Snk 1 XLR (L)"
+                    "text": {
+                      "En": "Snk 1 XLR (L)",
+                      "Fr": "Snk 1 XLR (L)",
+                      "De": "Snk 1 XLR (L)",
+                      "Es": "Snk 1 XLR (L)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -183,16 +223,24 @@
                 "value": "706",
                 "label": {
                   "active": {
-                    "En": "Snk 3 XLR (L)",
-                    "Fr": "Snk 3 XLR (G)",
-                    "De": "Snk 3 XLR (L)",
-                    "Es": "Snk 3 XLR (Izq)"
+                    "text": {
+                      "En": "Snk 3 XLR (L)",
+                      "Fr": "Snk 3 XLR (G)",
+                      "De": "Snk 3 XLR (L)",
+                      "Es": "Snk 3 XLR (Izq)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Snk 3 XLR (L)",
-                    "Fr": "Snk 3 XLR (G)",
-                    "De": "Snk 3 XLR (L)",
-                    "Es": "Snk 3 XLR (Izq)"
+                    "text": {
+                      "En": "Snk 3 XLR (L)",
+                      "Fr": "Snk 3 XLR (G)",
+                      "De": "Snk 3 XLR (L)",
+                      "Es": "Snk 3 XLR (Izq)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -206,16 +254,24 @@
                 "value": "707",
                 "label": {
                   "active": {
-                    "En": "Snk 5 XLR (L)",
-                    "Fr": "Snk 5 XLR (L)",
-                    "De": "Snk 5 XLR (L)",
-                    "Es": "Snk 5 XLR (L)"
+                    "text": {
+                      "En": "Snk 5 XLR (L)",
+                      "Fr": "Snk 5 XLR (L)",
+                      "De": "Snk 5 XLR (L)",
+                      "Es": "Snk 5 XLR (L)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Snk 5 XLR (L)",
-                    "Fr": "Snk 5 XLR (L)",
-                    "De": "Snk 5 XLR (L)",
-                    "Es": "Snk 5 XLR (L)"
+                    "text": {
+                      "En": "Snk 5 XLR (L)",
+                      "Fr": "Snk 5 XLR (L)",
+                      "De": "Snk 5 XLR (L)",
+                      "Es": "Snk 5 XLR (L)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -229,16 +285,24 @@
                 "value": "708",
                 "label": {
                   "active": {
-                    "En": "Snk 7 XLR (L)",
-                    "Fr": "Snk 7 XLR (L)",
-                    "De": "Snk 7 XLR (L)",
-                    "Es": "Snk 7 XLR (L)"
+                    "text": {
+                      "En": "Snk 7 XLR (L)",
+                      "Fr": "Snk 7 XLR (L)",
+                      "De": "Snk 7 XLR (L)",
+                      "Es": "Snk 7 XLR (L)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Snk 7 XLR (L)",
-                    "Fr": "Snk 7 XLR (L)",
-                    "De": "Snk 7 XLR (L)",
-                    "Es": "Snk 7 XLR (L)"
+                    "text": {
+                      "En": "Snk 7 XLR (L)",
+                      "Fr": "Snk 7 XLR (L)",
+                      "De": "Snk 7 XLR (L)",
+                      "Es": "Snk 7 XLR (L)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -304,16 +368,24 @@
                 "value": "721",
                 "label": {
                   "active": {
-                    "En": "Test Patch (R)",
-                    "Fr": "Test Patch (R)",
-                    "De": "Test Patch (R)",
-                    "Es": "Test Patch (R)"
+                    "text": {
+                      "En": "Test Patch (R)",
+                      "Fr": "Test Patch (R)",
+                      "De": "Test Patch (R)",
+                      "Es": "Test Patch (R)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Test Patch (R)",
-                    "Fr": "Test Patch (R)",
-                    "De": "Test Patch (R)",
-                    "Es": "Test Patch (R)"
+                    "text": {
+                      "En": "Test Patch (R)",
+                      "Fr": "Test Patch (R)",
+                      "De": "Test Patch (R)",
+                      "Es": "Test Patch (R)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -327,16 +399,24 @@
                 "value": "722",
                 "label": {
                   "active": {
-                    "En": "Bench AP (R)",
-                    "Fr": "Bench AP (R)",
-                    "De": "Bench AP (R)",
-                    "Es": "Bench AP (R)"
+                    "text": {
+                      "En": "Bench AP (R)",
+                      "Fr": "Bench AP (R)",
+                      "De": "Bench AP (R)",
+                      "Es": "Bench AP (R)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Bench AP (R)",
-                    "Fr": "Bench AP (R)",
-                    "De": "Bench AP (R)",
-                    "Es": "Bench AP (R)"
+                    "text": {
+                      "En": "Bench AP (R)",
+                      "Fr": "Bench AP (R)",
+                      "De": "Bench AP (R)",
+                      "Es": "Bench AP (R)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -350,16 +430,24 @@
                 "value": "723",
                 "label": {
                   "active": {
-                    "En": "Bench Neutrik (R)",
-                    "Fr": "Bench Neutrik (R)",
-                    "De": "Bench Neutrik (R)",
-                    "Es": "Bench Neutrik (R)"
+                    "text": {
+                      "En": "Bench Neutrik (R)",
+                      "Fr": "Bench Neutrik (R)",
+                      "De": "Bench Neutrik (R)",
+                      "Es": "Bench Neutrik (R)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Bench Neutrik (R)",
-                    "Fr": "Bench Neutrik (R)",
-                    "De": "Bench Neutrik (R)",
-                    "Es": "Bench Neutrik (R)"
+                    "text": {
+                      "En": "Bench Neutrik (R)",
+                      "Fr": "Bench Neutrik (R)",
+                      "De": "Bench Neutrik (R)",
+                      "Es": "Bench Neutrik (R)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -373,16 +461,24 @@
                 "value": "724",
                 "label": {
                   "active": {
-                    "En": "Music Src (R)",
-                    "Fr": "Music Src (R)",
-                    "De": "Music Src (R)",
-                    "Es": "Music Src (R)"
+                    "text": {
+                      "En": "Music Src (R)",
+                      "Fr": "Music Src (R)",
+                      "De": "Music Src (R)",
+                      "Es": "Music Src (R)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Music Src (R)",
-                    "Fr": "Music Src (R)",
-                    "De": "Music Src (R)",
-                    "Es": "Music Src (R)"
+                    "text": {
+                      "En": "Music Src (R)",
+                      "Fr": "Music Src (R)",
+                      "De": "Music Src (R)",
+                      "Es": "Music Src (R)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -396,16 +492,24 @@
                 "value": "725",
                 "label": {
                   "active": {
-                    "En": "Snk 2 XLR (R)",
-                    "Fr": "Snk 2 XLR (R)",
-                    "De": "Snk 2 XLR (R)",
-                    "Es": "Snk 2 XLR (R)"
+                    "text": {
+                      "En": "Snk 2 XLR (R)",
+                      "Fr": "Snk 2 XLR (R)",
+                      "De": "Snk 2 XLR (R)",
+                      "Es": "Snk 2 XLR (R)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Snk 2 XLR (R)",
-                    "Fr": "Snk 2 XLR (R)",
-                    "De": "Snk 2 XLR (R)",
-                    "Es": "Snk 2 XLR (R)"
+                    "text": {
+                      "En": "Snk 2 XLR (R)",
+                      "Fr": "Snk 2 XLR (R)",
+                      "De": "Snk 2 XLR (R)",
+                      "Es": "Snk 2 XLR (R)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -419,16 +523,24 @@
                 "value": "726",
                 "label": {
                   "active": {
-                    "En": "Snk 4 XLR (R)",
-                    "Fr": "Snk 4 XLR (R)",
-                    "De": "Snk 4 XLR (R)",
-                    "Es": "Snk 4 XLR (R)"
+                    "text": {
+                      "En": "Snk 4 XLR (R)",
+                      "Fr": "Snk 4 XLR (R)",
+                      "De": "Snk 4 XLR (R)",
+                      "Es": "Snk 4 XLR (R)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Snk 4 XLR (R)",
-                    "Fr": "Snk 4 XLR (R)",
-                    "De": "Snk 4 XLR (R)",
-                    "Es": "Snk 4 XLR (R)"
+                    "text": {
+                      "En": "Snk 4 XLR (R)",
+                      "Fr": "Snk 4 XLR (R)",
+                      "De": "Snk 4 XLR (R)",
+                      "Es": "Snk 4 XLR (R)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -442,16 +554,24 @@
                 "value": "727",
                 "label": {
                   "active": {
-                    "En": "Snk 6 XLR (R)",
-                    "Fr": "Snk 6 XLR (R)",
-                    "De": "Snk 6 XLR (R)",
-                    "Es": "Snk 6 XLR (R)"
+                    "text": {
+                      "En": "Snk 6 XLR (R)",
+                      "Fr": "Snk 6 XLR (R)",
+                      "De": "Snk 6 XLR (R)",
+                      "Es": "Snk 6 XLR (R)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Snk 6 XLR (R)",
-                    "Fr": "Snk 6 XLR (R)",
-                    "De": "Snk 6 XLR (R)",
-                    "Es": "Snk 6 XLR (R)"
+                    "text": {
+                      "En": "Snk 6 XLR (R)",
+                      "Fr": "Snk 6 XLR (R)",
+                      "De": "Snk 6 XLR (R)",
+                      "Es": "Snk 6 XLR (R)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -465,16 +585,24 @@
                 "value": "728",
                 "label": {
                   "active": {
-                    "En": "Snk 8 XLR (R)",
-                    "Fr": "Snk 8 XLR (R)",
-                    "De": "Snk 8 XLR (R)",
-                    "Es": "Snk 8 XLR (R)"
+                    "text": {
+                      "En": "Snk 8 XLR (R)",
+                      "Fr": "Snk 8 XLR (R)",
+                      "De": "Snk 8 XLR (R)",
+                      "Es": "Snk 8 XLR (R)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Snk 8 XLR (R)",
-                    "Fr": "Snk 8 XLR (R)",
-                    "De": "Snk 8 XLR (R)",
-                    "Es": "Snk 8 XLR (R)"
+                    "text": {
+                      "En": "Snk 8 XLR (R)",
+                      "Fr": "Snk 8 XLR (R)",
+                      "De": "Snk 8 XLR (R)",
+                      "Es": "Snk 8 XLR (R)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -540,16 +668,24 @@
                 "value": "711",
                 "label": {
                   "active": {
-                    "En": "Test Patch (L)",
-                    "Fr": "Test Patch (L)",
-                    "De": "Test Patch (L)",
-                    "Es": "Test Patch (L)"
+                    "text": {
+                      "En": "Test Patch (L)",
+                      "Fr": "Test Patch (L)",
+                      "De": "Test Patch (L)",
+                      "Es": "Test Patch (L)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Test Patch (L)",
-                    "Fr": "Test Patch (L)",
-                    "De": "Test Patch (L)",
-                    "Es": "Test Patch (L)"
+                    "text": {
+                      "En": "Test Patch (L)",
+                      "Fr": "Test Patch (L)",
+                      "De": "Test Patch (L)",
+                      "Es": "Test Patch (L)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -563,16 +699,24 @@
                 "value": "712",
                 "label": {
                   "active": {
-                    "En": "Bench AP (L)",
-                    "Fr": "Bench AP (L)",
-                    "De": "Bench AP (L)",
-                    "Es": "Bench AP (L)"
+                    "text": {
+                      "En": "Bench AP (L)",
+                      "Fr": "Bench AP (L)",
+                      "De": "Bench AP (L)",
+                      "Es": "Bench AP (L)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Bench AP (L)",
-                    "Fr": "Bench AP (L)",
-                    "De": "Bench AP (L)",
-                    "Es": "Bench AP (L)"
+                    "text": {
+                      "En": "Bench AP (L)",
+                      "Fr": "Bench AP (L)",
+                      "De": "Bench AP (L)",
+                      "Es": "Bench AP (L)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -586,16 +730,24 @@
                 "value": "713",
                 "label": {
                   "active": {
-                    "En": "Bench Neutrik (L)",
-                    "Fr": "Bench Neutrik (L)",
-                    "De": "Bench Neutrik (L)",
-                    "Es": "Bench Neutrik (L)"
+                    "text": {
+                      "En": "Bench Neutrik (L)",
+                      "Fr": "Bench Neutrik (L)",
+                      "De": "Bench Neutrik (L)",
+                      "Es": "Bench Neutrik (L)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Bench Neutrik (L)",
-                    "Fr": "Bench Neutrik (L)",
-                    "De": "Bench Neutrik (L)",
-                    "Es": "Bench Neutrik (L)"
+                    "text": {
+                      "En": "Bench Neutrik (L)",
+                      "Fr": "Bench Neutrik (L)",
+                      "De": "Bench Neutrik (L)",
+                      "Es": "Bench Neutrik (L)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -609,16 +761,24 @@
                 "value": "714",
                 "label": {
                   "active": {
-                    "En": "Speakers (L)",
-                    "Fr": "Speakers (L)",
-                    "De": "Speakers (L)",
-                    "Es": "Speakers (L)"
+                    "text": {
+                      "En": "Speakers (L)",
+                      "Fr": "Speakers (L)",
+                      "De": "Speakers (L)",
+                      "Es": "Speakers (L)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Speakers (L)",
-                    "Fr": "Speakers (L)",
-                    "De": "Speakers (L)",
-                    "Es": "Speakers (L)"
+                    "text": {
+                      "En": "Speakers (L)",
+                      "Fr": "Speakers (L)",
+                      "De": "Speakers (L)",
+                      "Es": "Speakers (L)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -632,16 +792,24 @@
                 "value": "715",
                 "label": {
                   "active": {
-                    "En": "Snk 1 XLR (L)",
-                    "Fr": "Snk 1 XLR (L)",
-                    "De": "Snk 1 XLR (L)",
-                    "Es": "Snk 1 XLR (L)"
+                    "text": {
+                      "En": "Snk 1 XLR (L)",
+                      "Fr": "Snk 1 XLR (L)",
+                      "De": "Snk 1 XLR (L)",
+                      "Es": "Snk 1 XLR (L)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Snk 1 XLR (L)",
-                    "Fr": "Snk 1 XLR (L)",
-                    "De": "Snk 1 XLR (L)",
-                    "Es": "Snk 1 XLR (L)"
+                    "text": {
+                      "En": "Snk 1 XLR (L)",
+                      "Fr": "Snk 1 XLR (L)",
+                      "De": "Snk 1 XLR (L)",
+                      "Es": "Snk 1 XLR (L)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -655,16 +823,24 @@
                 "value": "716",
                 "label": {
                   "active": {
-                    "En": "Snk 3 XLR (L)",
-                    "Fr": "Snk 3 XLR (G)",
-                    "De": "Snk 3 XLR (L)",
-                    "Es": "Snk 3 XLR (Izq)"
+                    "text": {
+                      "En": "Snk 3 XLR (L)",
+                      "Fr": "Snk 3 XLR (G)",
+                      "De": "Snk 3 XLR (L)",
+                      "Es": "Snk 3 XLR (Izq)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Snk 3 XLR (L)",
-                    "Fr": "Snk 3 XLR (G)",
-                    "De": "Snk 3 XLR (L)",
-                    "Es": "Snk 3 XLR (Izq)"
+                    "text": {
+                      "En": "Snk 3 XLR (L)",
+                      "Fr": "Snk 3 XLR (G)",
+                      "De": "Snk 3 XLR (L)",
+                      "Es": "Snk 3 XLR (Izq)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -678,16 +854,24 @@
                 "value": "717",
                 "label": {
                   "active": {
-                    "En": "Snk 5 XLR (L)",
-                    "Fr": "Snk 5 XLR (L)",
-                    "De": "Snk 5 XLR (L)",
-                    "Es": "Snk 5 XLR (L)"
+                    "text": {
+                      "En": "Snk 5 XLR (L)",
+                      "Fr": "Snk 5 XLR (L)",
+                      "De": "Snk 5 XLR (L)",
+                      "Es": "Snk 5 XLR (L)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Snk 5 XLR (L)",
-                    "Fr": "Snk 5 XLR (L)",
-                    "De": "Snk 5 XLR (L)",
-                    "Es": "Snk 5 XLR (L)"
+                    "text": {
+                      "En": "Snk 5 XLR (L)",
+                      "Fr": "Snk 5 XLR (L)",
+                      "De": "Snk 5 XLR (L)",
+                      "Es": "Snk 5 XLR (L)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -701,16 +885,24 @@
                 "value": "718",
                 "label": {
                   "active": {
-                    "En": "Snk 7 XLR (L)",
-                    "Fr": "Snk 7 XLR (L)",
-                    "De": "Snk 7 XLR (L)",
-                    "Es": "Snk 7 XLR (L)"
+                    "text": {
+                      "En": "Snk 7 XLR (L)",
+                      "Fr": "Snk 7 XLR (L)",
+                      "De": "Snk 7 XLR (L)",
+                      "Es": "Snk 7 XLR (L)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Snk 7 XLR (L)",
-                    "Fr": "Snk 7 XLR (L)",
-                    "De": "Snk 7 XLR (L)",
-                    "Es": "Snk 7 XLR (L)"
+                    "text": {
+                      "En": "Snk 7 XLR (L)",
+                      "Fr": "Snk 7 XLR (L)",
+                      "De": "Snk 7 XLR (L)",
+                      "Es": "Snk 7 XLR (L)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -776,16 +968,24 @@
                 "value": "731",
                 "label": {
                   "active": {
-                    "En": "Test Patch (R)",
-                    "Fr": "Test Patch (R)",
-                    "De": "Test Patch (R)",
-                    "Es": "Test Patch (R)"
+                    "text": {
+                      "En": "Test Patch (R)",
+                      "Fr": "Test Patch (R)",
+                      "De": "Test Patch (R)",
+                      "Es": "Test Patch (R)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Test Patch (R)",
-                    "Fr": "Test Patch (R)",
-                    "De": "Test Patch (R)",
-                    "Es": "Test Patch (R)"
+                    "text": {
+                      "En": "Test Patch (R)",
+                      "Fr": "Test Patch (R)",
+                      "De": "Test Patch (R)",
+                      "Es": "Test Patch (R)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -799,16 +999,24 @@
                 "value": "732",
                 "label": {
                   "active": {
-                    "En": "Bench AP (R)",
-                    "Fr": "Bench AP (R)",
-                    "De": "Bench AP (R)",
-                    "Es": "Bench AP (R)"
+                    "text": {
+                      "En": "Bench AP (R)",
+                      "Fr": "Bench AP (R)",
+                      "De": "Bench AP (R)",
+                      "Es": "Bench AP (R)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Bench AP (R)",
-                    "Fr": "Bench AP (R)",
-                    "De": "Bench AP (R)",
-                    "Es": "Bench AP (R)"
+                    "text": {
+                      "En": "Bench AP (R)",
+                      "Fr": "Bench AP (R)",
+                      "De": "Bench AP (R)",
+                      "Es": "Bench AP (R)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -822,16 +1030,24 @@
                 "value": "733",
                 "label": {
                   "active": {
-                    "En": "Bench Neutrik (R)",
-                    "Fr": "Bench Neutrik (R)",
-                    "De": "Bench Neutrik (R)",
-                    "Es": "Bench Neutrik (R)"
+                    "text": {
+                      "En": "Bench Neutrik (R)",
+                      "Fr": "Bench Neutrik (R)",
+                      "De": "Bench Neutrik (R)",
+                      "Es": "Bench Neutrik (R)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Bench Neutrik (R)",
-                    "Fr": "Bench Neutrik (R)",
-                    "De": "Bench Neutrik (R)",
-                    "Es": "Bench Neutrik (R)"
+                    "text": {
+                      "En": "Bench Neutrik (R)",
+                      "Fr": "Bench Neutrik (R)",
+                      "De": "Bench Neutrik (R)",
+                      "Es": "Bench Neutrik (R)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -845,16 +1061,24 @@
                 "value": "734",
                 "label": {
                   "active": {
-                    "En": "Speakers (R)",
-                    "Fr": "Speakers (R)",
-                    "De": "Speakers (R)",
-                    "Es": "Speakers (R)"
+                    "text": {
+                      "En": "Speakers (R)",
+                      "Fr": "Speakers (R)",
+                      "De": "Speakers (R)",
+                      "Es": "Speakers (R)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Speakers (R)",
-                    "Fr": "Speakers (R)",
-                    "De": "Speakers (R)",
-                    "Es": "Speakers (R)"
+                    "text": {
+                      "En": "Speakers (R)",
+                      "Fr": "Speakers (R)",
+                      "De": "Speakers (R)",
+                      "Es": "Speakers (R)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -868,16 +1092,24 @@
                 "value": "735",
                 "label": {
                   "active": {
-                    "En": "Snk 2 XLR (R)",
-                    "Fr": "Snk 2 XLR (R)",
-                    "De": "Snk 2 XLR (R)",
-                    "Es": "Snk 2 XLR (R)"
+                    "text": {
+                      "En": "Snk 2 XLR (R)",
+                      "Fr": "Snk 2 XLR (R)",
+                      "De": "Snk 2 XLR (R)",
+                      "Es": "Snk 2 XLR (R)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Snk 2 XLR (R)",
-                    "Fr": "Snk 2 XLR (R)",
-                    "De": "Snk 2 XLR (R)",
-                    "Es": "Snk 2 XLR (R)"
+                    "text": {
+                      "En": "Snk 2 XLR (R)",
+                      "Fr": "Snk 2 XLR (R)",
+                      "De": "Snk 2 XLR (R)",
+                      "Es": "Snk 2 XLR (R)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -891,16 +1123,24 @@
                 "value": "736",
                 "label": {
                   "active": {
-                    "En": "Snk 4 XLR (R)",
-                    "Fr": "Snk 4 XLR (R)",
-                    "De": "Snk 4 XLR (R)",
-                    "Es": "Snk 4 XLR (R)"
+                    "text": {
+                      "En": "Snk 4 XLR (R)",
+                      "Fr": "Snk 4 XLR (R)",
+                      "De": "Snk 4 XLR (R)",
+                      "Es": "Snk 4 XLR (R)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Snk 4 XLR (R)",
-                    "Fr": "Snk 4 XLR (R)",
-                    "De": "Snk 4 XLR (R)",
-                    "Es": "Snk 4 XLR (R)"
+                    "text": {
+                      "En": "Snk 4 XLR (R)",
+                      "Fr": "Snk 4 XLR (R)",
+                      "De": "Snk 4 XLR (R)",
+                      "Es": "Snk 4 XLR (R)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -914,16 +1154,24 @@
                 "value": "737",
                 "label": {
                   "active": {
-                    "En": "Snk 6 XLR (R)",
-                    "Fr": "Snk 6 XLR (R)",
-                    "De": "Snk 6 XLR (R)",
-                    "Es": "Snk 6 XLR (R)"
+                    "text": {
+                      "En": "Snk 6 XLR (R)",
+                      "Fr": "Snk 6 XLR (R)",
+                      "De": "Snk 6 XLR (R)",
+                      "Es": "Snk 6 XLR (R)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Snk 6 XLR (R)",
-                    "Fr": "Snk 6 XLR (R)",
-                    "De": "Snk 6 XLR (R)",
-                    "Es": "Snk 6 XLR (R)"
+                    "text": {
+                      "En": "Snk 6 XLR (R)",
+                      "Fr": "Snk 6 XLR (R)",
+                      "De": "Snk 6 XLR (R)",
+                      "Es": "Snk 6 XLR (R)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -937,16 +1185,24 @@
                 "value": "738",
                 "label": {
                   "active": {
-                    "En": "Snk 8 XLR (R)",
-                    "Fr": "Snk 8 XLR (R)",
-                    "De": "Snk 8 XLR (R)",
-                    "Es": "Snk 8 XLR (R)"
+                    "text": {
+                      "En": "Snk 8 XLR (R)",
+                      "Fr": "Snk 8 XLR (R)",
+                      "De": "Snk 8 XLR (R)",
+                      "Es": "Snk 8 XLR (R)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Snk 8 XLR (R)",
-                    "Fr": "Snk 8 XLR (R)",
-                    "De": "Snk 8 XLR (R)",
-                    "Es": "Snk 8 XLR (R)"
+                    "text": {
+                      "En": "Snk 8 XLR (R)",
+                      "Fr": "Snk 8 XLR (R)",
+                      "De": "Snk 8 XLR (R)",
+                      "Es": "Snk 8 XLR (R)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {

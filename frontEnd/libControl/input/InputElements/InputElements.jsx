@@ -42,7 +42,7 @@ const OcaIncDecButtons = ({ label, value, onChange, step = 1, min = -100, max = 
     );
 };
 
-const OcaDropdown = ({ label, value, onChange, options = [] }) => {
+const OcaDropdown = ({ label, value, onChange, options = [], config }) => {
     let currentLang = 'En';
     let setLang = () => {};
     try {
@@ -87,7 +87,7 @@ const OcaDropdown = ({ label, value, onChange, options = [] }) => {
                 value={value} 
                 onChange={(e) => onChange(e.target.value)}
                 style={{
-                    backgroundColor: '#222',
+                    backgroundColor: (window.OaTransparency ? window.OaTransparency.bg(config, '#222') : '#222'),
                     color: '#fff',
                     border: '1px solid #555',
                     padding: '8px',

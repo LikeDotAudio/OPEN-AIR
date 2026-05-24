@@ -33,10 +33,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "OUTPUT ON",
-                    "Fr": "OUTPUT ON",
-                    "De": "OUTPUT ON",
-                    "Es": "OUTPUT ON"
+                    "text": {
+                      "En": "OUTPUT ON",
+                      "Fr": "OUTPUT ON",
+                      "De": "OUTPUT ON",
+                      "Es": "OUTPUT ON"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -69,10 +73,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "OUTPUT OFF",
-                    "Fr": "OUTPUT OFF",
-                    "De": "OUTPUT OFF",
-                    "Es": "OUTPUT OFF"
+                    "text": {
+                      "En": "OUTPUT OFF",
+                      "Fr": "OUTPUT OFF",
+                      "De": "OUTPUT OFF",
+                      "Es": "OUTPUT OFF"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -116,10 +124,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "RESET (*RST)",
-                    "Fr": "RESET (*RST)",
-                    "De": "RESET (*RST)",
-                    "Es": "RESET (*RST)"
+                    "text": {
+                      "En": "RESET (*RST)",
+                      "Fr": "RESET (*RST)",
+                      "De": "RESET (*RST)",
+                      "Es": "RESET (*RST)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -152,10 +164,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "CLS (*CLS)",
-                    "Fr": "CLS (*CLS)",
-                    "De": "CLS (*CLS)",
-                    "Es": "CLS (*CLS)"
+                    "text": {
+                      "En": "CLS (*CLS)",
+                      "Fr": "CLS (*CLS)",
+                      "De": "CLS (*CLS)",
+                      "Es": "CLS (*CLS)"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -188,10 +204,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "Display Panel",
-                    "Fr": "Affichage Panel",
-                    "De": "Anzeige Panel",
-                    "Es": "Pantalla Panel"
+                    "text": {
+                      "En": "Display Panel",
+                      "Fr": "Affichage Panel",
+                      "De": "Anzeige Panel",
+                      "Es": "Pantalla Panel"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",

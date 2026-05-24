@@ -40,7 +40,7 @@ const FaderWithMeter = ({ value, onChange, config }) => {
                 display: 'flex', 
                 flexDirection: 'row', 
                 alignItems: 'center', 
-                backgroundColor: '#2b2b2b', 
+                backgroundColor: (window.OaTransparency ? window.OaTransparency.bg(config, '#2b2b2b') : '#2b2b2b'), 
                 padding: '10px', 
                 borderRadius: '4px',
                 border: '1px solid #111',

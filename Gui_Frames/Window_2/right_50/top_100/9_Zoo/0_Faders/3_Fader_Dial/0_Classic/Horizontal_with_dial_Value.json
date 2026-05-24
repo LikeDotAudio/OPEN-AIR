@@ -15,10 +15,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Frequency",
-            "Fr": "Fréquence",
-            "De": "Frequenz",
-            "Es": "Frecuencia"
+            "text": {
+              "En": "Frequency",
+              "Fr": "Fréquence",
+              "De": "Frequenz",
+              "Es": "Frecuencia"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -35,36 +39,50 @@
               "width": 600,
               "height": 80,
               "sticky": "ew",
-              "font": 12
+              "font": 12,
+              "column_spacing": [
+                80,
+                10,
+                10
+              ]
             },
-            "column_spacing": [
-              80,
-              10,
-              10
-            ],
             "label": {
               "active": {
-                "En": "Frequency",
-                "Fr": "Fréquence",
-                "De": "Frequenz",
-                "Es": "Frecuencia"
-              }
+                "text": {
+                  "En": "Frequency",
+                  "Fr": "Fréquence",
+                  "De": "Frequenz",
+                  "Es": "Frecuencia"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
             },
-            "show_label": true,
             "value_config": {
               "height": 25,
               "text_color": "#00ff00",
               "bg_color": "#000000"
             },
             "fader_config": {
-              "tick_interval": 100,
+              "cosmetics": {
+                "scale": {
+                  "interval": 100
+                }
+              },
               "bar_color": "#333333"
             },
             "dial_config": {
-              "knob_style": "vintage",
+              "cosmetics": {
+                "style_overrides": {
+                  "knob_style": "vintage"
+                },
+                "colors": {
+                  "active": "#ffaa00"
+                }
+              },
               "width": 45,
-              "height": 45,
-              "active_color": "#ffaa00"
+              "height": 45
             }
           }
         }
@@ -73,10 +91,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Master Vol",
-            "Fr": "Vol Master",
-            "De": "Master Vol",
-            "Es": "Vol Maestro"
+            "text": {
+              "En": "Master Vol",
+              "Fr": "Vol Master",
+              "De": "Master Vol",
+              "Es": "Vol Maestro"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -93,25 +115,33 @@
               "width": 600,
               "height": 100,
               "sticky": "ew",
-              "font": 18
+              "font": 18,
+              "column_spacing": [
+                80,
+                10,
+                10
+              ]
             },
-            "column_spacing": [
-              80,
-              10,
-              10
-            ],
             "label": {
               "active": {
-                "En": "Master Vol",
-                "Fr": "Vol Master",
-                "De": "Master Vol",
-                "Es": "Vol Maestro"
-              }
+                "text": {
+                  "En": "Master Vol",
+                  "Fr": "Vol Master",
+                  "De": "Master Vol",
+                  "Es": "Vol Maestro"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
             },
-            "show_label": true,
             "fader_config": {
-              "active_color": "#ff0000",
-              "glow_intensity": 2.0
+              "cosmetics": {
+                "styling": {
+                  "glow_intensity": 2.0
+                }
+              },
+              "active_color": "#ff0000"
             },
             "value_config": {
               "font_size": 16,
@@ -124,10 +154,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Delay",
-            "Fr": "Delay",
-            "De": "Delay",
-            "Es": "Delay"
+            "text": {
+              "En": "Delay",
+              "Fr": "Delay",
+              "De": "Delay",
+              "Es": "Delay"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -143,30 +177,44 @@
             "layout": {
               "width": 600,
               "height": 120,
-              "font": 20
+              "font": 20,
+              "column_spacing": [
+                80,
+                10,
+                10
+              ]
             },
-            "column_spacing": [
-              80,
-              10,
-              10
-            ],
             "label": {
               "active": {
-                "En": "Delay",
-                "Fr": "Delay",
-                "De": "Delay",
-                "Es": "Delay"
-              }
+                "text": {
+                  "En": "Delay",
+                  "Fr": "Delay",
+                  "De": "Delay",
+                  "Es": "Delay"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
             },
-            "show_label": true,
             "dial_config": {
-              "knob_style": "dial",
+              "cosmetics": {
+                "style_overrides": {
+                  "knob_style": "dial"
+                },
+                "colors": {
+                  "active": "#00ffff"
+                }
+              },
               "width": 70,
-              "height": 70,
-              "active_color": "#00ffff"
+              "height": 70
             },
             "fader_config": {
-              "tick_interval": 1.0
+              "cosmetics": {
+                "scale": {
+                  "interval": 1.0
+                }
+              }
             }
           }
         }
@@ -175,10 +223,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Decay",
-            "Fr": "Decay",
-            "De": "Decay",
-            "Es": "Decay"
+            "text": {
+              "En": "Decay",
+              "Fr": "Decay",
+              "De": "Decay",
+              "Es": "Decay"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -194,22 +246,26 @@
             "layout": {
               "width": 600,
               "height": 70,
-              "font": 12
+              "font": 12,
+              "column_spacing": [
+                80,
+                10,
+                10
+              ]
             },
-            "column_spacing": [
-              80,
-              10,
-              10
-            ],
             "label": {
               "active": {
-                "En": "Decay",
-                "Fr": "Decay",
-                "De": "Decay",
-                "Es": "Decay"
-              }
+                "text": {
+                  "En": "Decay",
+                  "Fr": "Decay",
+                  "De": "Decay",
+                  "Es": "Decay"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
             },
-            "show_label": true,
             "fader_config": {
               "bar_color": "#222222",
               "active_color": "#888888"
@@ -221,10 +277,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Pitch Shift",
-            "Fr": "Pitch Shift",
-            "De": "Pitch Shift",
-            "Es": "Pitch Shift"
+            "text": {
+              "En": "Pitch Shift",
+              "Fr": "Pitch Shift",
+              "De": "Pitch Shift",
+              "Es": "Pitch Shift"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -240,22 +300,26 @@
             "layout": {
               "width": 600,
               "height": 90,
-              "font": 12
+              "font": 12,
+              "column_spacing": [
+                80,
+                10,
+                10
+              ]
             },
-            "column_spacing": [
-              80,
-              10,
-              10
-            ],
             "label": {
               "active": {
-                "En": "Pitch Shift",
-                "Fr": "Pitch Shift",
-                "De": "Pitch Shift",
-                "Es": "Pitch Shift"
-              }
+                "text": {
+                  "En": "Pitch Shift",
+                  "Fr": "Pitch Shift",
+                  "De": "Pitch Shift",
+                  "Es": "Pitch Shift"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              },
+              "show_label": true
             },
-            "show_label": true,
             "value_config": {
               "bg_color": "#1a1a1a",
               "text_color": "#33A1FD"

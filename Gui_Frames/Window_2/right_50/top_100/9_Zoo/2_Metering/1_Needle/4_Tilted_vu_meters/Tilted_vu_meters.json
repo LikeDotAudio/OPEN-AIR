@@ -35,7 +35,8 @@
               "En": "Left Meter (180-90)",
               "Fr": "Gauche Meter (180-90)",
               "De": "Links Meter (180-90)",
-              "Es": "Izquierda Meter (180-90)"
+              "Es": "Izquierda Meter (180-90)",
+              "show_label": true
             },
             "notes": "Classic Left Tilted.",
             "geometry": {
@@ -88,8 +89,7 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "show_label": true
+            }
           },
           "right_meter": {
             "type": "_NeedleVUMeter",
@@ -97,7 +97,8 @@
               "En": "Right Meter (0-90)",
               "Fr": "Droite Meter (0-90)",
               "De": "Rechts Meter (0-90)",
-              "Es": "Derecha Meter (0-90)"
+              "Es": "Derecha Meter (0-90)",
+              "show_label": true
             },
             "notes": "Classic Right Tilted (CCW).",
             "geometry": {
@@ -150,8 +151,7 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "show_label": true
+            }
           },
           "rev_meter": {
             "type": "_NeedleVUMeter",
@@ -159,7 +159,8 @@
               "En": "Standard Reverse",
               "Fr": "Standard Reverse",
               "De": "Standard Reverse",
-              "Es": "Estándar Reverse"
+              "Es": "Estándar Reverse",
+              "show_label": true
             },
             "notes": "Standard orientation, Counter-Clockwise motion.",
             "geometry": {
@@ -212,8 +213,7 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "show_label": true
+            }
           },
           "ceiling_meter": {
             "type": "_NeedleVUMeter",
@@ -221,7 +221,8 @@
               "En": "Ceiling Mount",
               "Fr": "Ceiling Mount",
               "De": "Ceiling Mount",
-              "Es": "Ceiling Mount"
+              "Es": "Ceiling Mount",
+              "show_label": true
             },
             "notes": "Upside down (270 deg).",
             "geometry": {
@@ -274,8 +275,7 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "show_label": true
+            }
           },
           "floor_meter": {
             "type": "_NeedleVUMeter",
@@ -283,7 +283,8 @@
               "En": "Floor Mount",
               "Fr": "Floor Mount",
               "De": "Floor Mount",
-              "Es": "Floor Mount"
+              "Es": "Floor Mount",
+              "show_label": true
             },
             "notes": "Full 180 degree floor arc.",
             "geometry": {
@@ -336,8 +337,7 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "show_label": true
+            }
           },
           "sideways_L": {
             "type": "_NeedleVUMeter",
@@ -345,7 +345,8 @@
               "En": "Sideways Left",
               "Fr": "Sideways Gauche",
               "De": "Sideways Links",
-              "Es": "Sideways Izquierda"
+              "Es": "Sideways Izquierda",
+              "show_label": true
             },
             "notes": "Facing Left (180 deg).",
             "geometry": {
@@ -398,8 +399,7 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "show_label": true
+            }
           },
           "sideways_R": {
             "type": "_NeedleVUMeter",
@@ -407,7 +407,8 @@
               "En": "Sideways Right",
               "Fr": "Sideways Droite",
               "De": "Sideways Rechts",
-              "Es": "Sideways Derecha"
+              "Es": "Sideways Derecha",
+              "show_label": true
             },
             "notes": "Facing Right (0 deg).",
             "geometry": {
@@ -460,8 +461,7 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "show_label": true
+            }
           },
           "compass_N": {
             "type": "_NeedleVUMeter",
@@ -469,7 +469,8 @@
               "En": "Compass North",
               "Fr": "Compass North",
               "De": "Compass North",
-              "Es": "Compass North"
+              "Es": "Compass North",
+              "show_label": true
             },
             "notes": "Extremely wide compass style.",
             "geometry": {
@@ -522,8 +523,7 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "show_label": true
+            }
           },
           "tilted_stereo": {
             "type": "_NeedleVUMeter",
@@ -531,7 +531,8 @@
               "En": "Stereo Tilted",
               "Fr": "Stereo Tilted",
               "De": "Stereo Tilted",
-              "Es": "Stereo Tilted"
+              "Es": "Stereo Tilted",
+              "show_label": true
             },
             "notes": "Stereo pointers on a tilted meter.",
             "geometry": {
@@ -584,8 +585,7 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "show_label": true
+            }
           },
           "radar_sweep": {
             "type": "_NeedleVUMeter",
@@ -593,7 +593,8 @@
               "En": "Radar Sweep",
               "Fr": "Radar Sweep",
               "De": "Radar Sweep",
-              "Es": "Radar Sweep"
+              "Es": "Radar Sweep",
+              "show_label": true
             },
             "notes": "Near-full circle sweep.",
             "geometry": {
@@ -646,8 +647,7 @@
             },
             "interaction": {
               "is_read_only": false
-            },
-            "show_label": true
+            }
           }
         }
       }

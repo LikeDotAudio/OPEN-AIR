@@ -19,10 +19,14 @@
             "type": "_GuiActuator",
             "label": {
               "active": {
-                "En": "Set Mode",
-                "Fr": "Définir le mode",
-                "De": "Modus einstellen",
-                "Es": "Establecer modo"
+                "text": {
+                  "En": "Set Mode",
+                  "Fr": "Définir le mode",
+                  "De": "Modus einstellen",
+                  "Es": "Establecer modo"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "AES70": "OcaBooleanActuator",
@@ -45,10 +49,14 @@
             "type": "_GuiActuator",
             "label": {
               "active": {
-                "En": "Set Frequency",
-                "Fr": "Définir la fréquence",
-                "De": "Frequenz einstellen",
-                "Es": "Establecer frecuencia"
+                "text": {
+                  "En": "Set Frequency",
+                  "Fr": "Définir la fréquence",
+                  "De": "Frequenz einstellen",
+                  "Es": "Establecer frecuencia"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "message": ":SENSe:FREQuency:CW {value}",
@@ -69,10 +77,14 @@
             "type": "_GuiActuator",
             "label": {
               "active": {
-                "En": "Set Average",
-                "Fr": "Définir la moyenne",
-                "De": "Mittelwert einstellen",
-                "Es": "Establecer promedio"
+                "text": {
+                  "En": "Set Average",
+                  "Fr": "Définir la moyenne",
+                  "De": "Mittelwert einstellen",
+                  "Es": "Establecer promedio"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "message": ":SENSe:AVERage:COUNt {value}",

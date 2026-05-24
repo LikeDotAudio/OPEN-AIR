@@ -17,9 +17,9 @@
           "En": "NAB Frequency Monitoring",
           "Fr": "Surveillance de fréquence NAB",
           "De": "NAB Frequenzüberwachung",
-          "Es": "Monitoreo de frecuencia NAB"
+          "Es": "Monitoreo de frecuencia NAB",
+          "show_label": false
         },
-        "show_label": false,
         "fields": {
           "Frequency_settings": {
             "type": "OcaBlock",
@@ -34,16 +34,24 @@
                 "type": "_GuiActuator",
                 "label": {
                   "active": {
-                    "En": "Get Frequency Settings",
-                    "Fr": "Get Fréquence Paramètres",
-                    "De": "Get Frequenz Einstellungen",
-                    "Es": "Get Frecuencia Ajustes"
+                    "text": {
+                      "En": "Get Frequency Settings",
+                      "Fr": "Get Fréquence Paramètres",
+                      "De": "Get Frequenz Einstellungen",
+                      "Es": "Get Frecuencia Ajustes"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Get Frequency Settings",
-                    "Fr": "Get Fréquence Paramètres",
-                    "De": "Get Frequenz Einstellungen",
-                    "Es": "Get Frecuencia Ajustes"
+                    "text": {
+                      "En": "Get Frequency Settings",
+                      "Fr": "Get Fréquence Paramètres",
+                      "De": "Get Frequenz Einstellungen",
+                      "Es": "Get Frecuencia Ajustes"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -155,16 +163,24 @@
                 "type": "_GuiActuator",
                 "label": {
                   "active": {
-                    "En": "Set Start and Stop Frequency",
-                    "Fr": "Set Démarrer and Arrêter Fréquence",
-                    "De": "Set Start and Stopp Frequenz",
-                    "Es": "Set Inicio and Parar Frecuencia"
+                    "text": {
+                      "En": "Set Start and Stop Frequency",
+                      "Fr": "Set Démarrer and Arrêter Fréquence",
+                      "De": "Set Start and Stopp Frequenz",
+                      "Es": "Set Inicio and Parar Frecuencia"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Set Start and Stop Frequency",
-                    "Fr": "Set Démarrer and Arrêter Fréquence",
-                    "De": "Set Start and Stopp Frequenz",
-                    "Es": "Set Inicio and Parar Frecuencia"
+                    "text": {
+                      "En": "Set Start and Stop Frequency",
+                      "Fr": "Set Démarrer and Arrêter Fréquence",
+                      "De": "Set Start and Stopp Frequenz",
+                      "Es": "Set Inicio and Parar Frecuencia"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -346,16 +362,24 @@
                 "type": "_GuiActuator",
                 "label": {
                   "active": {
-                    "En": "Set Stop Frequency",
-                    "Fr": "Set Arrêter Fréquence",
-                    "De": "Set Stopp Frequenz",
-                    "Es": "Set Parar Frecuencia"
+                    "text": {
+                      "En": "Set Stop Frequency",
+                      "Fr": "Set Arrêter Fréquence",
+                      "De": "Set Stopp Frequenz",
+                      "Es": "Set Parar Frecuencia"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Set Stop Frequency",
-                    "Fr": "Set Arrêter Fréquence",
-                    "De": "Set Stopp Frequenz",
-                    "Es": "Set Parar Frecuencia"
+                    "text": {
+                      "En": "Set Stop Frequency",
+                      "Fr": "Set Arrêter Fréquence",
+                      "De": "Set Stopp Frequenz",
+                      "Es": "Set Parar Frecuencia"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",

@@ -42,10 +42,14 @@
             },
             "label": {
               "active": {
-                "En": "Input",
-                "Fr": "Entrée",
-                "De": "Eingang",
-                "Es": "Entrada"
+                "text": {
+                  "En": "Input",
+                  "Fr": "Entrée",
+                  "De": "Eingang",
+                  "Es": "Entrada"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "options": [
@@ -71,10 +75,14 @@
             },
             "label": {
               "active": {
-                "En": "Mode",
-                "Fr": "Mode",
-                "De": "Mode",
-                "Es": "Mode"
+                "text": {
+                  "En": "Mode",
+                  "Fr": "Mode",
+                  "De": "Mode",
+                  "Es": "Mode"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "options": [
@@ -100,10 +108,14 @@
             },
             "label": {
               "active": {
-                "En": "EQ Band",
-                "Fr": "Bande EQ",
-                "De": "EQ-Band",
-                "Es": "Banda EQ"
+                "text": {
+                  "En": "EQ Band",
+                  "Fr": "Bande EQ",
+                  "De": "EQ-Band",
+                  "Es": "Banda EQ"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "options": [
@@ -130,10 +142,14 @@
             },
             "label": {
               "active": {
-                "En": "Preamp",
-                "Fr": "Preamp",
-                "De": "Preamp",
-                "Es": "Preamp"
+                "text": {
+                  "En": "Preamp",
+                  "Fr": "Preamp",
+                  "De": "Preamp",
+                  "Es": "Preamp"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "options": [
@@ -159,10 +175,14 @@
             },
             "label": {
               "active": {
-                "En": "Group",
-                "Fr": "Group",
-                "De": "Group",
-                "Es": "Group"
+                "text": {
+                  "En": "Group",
+                  "Fr": "Group",
+                  "De": "Group",
+                  "Es": "Group"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "options": [
@@ -189,10 +209,14 @@
             },
             "label": {
               "active": {
-                "En": "Effect",
-                "Fr": "Effect",
-                "De": "Effect",
-                "Es": "Effect"
+                "text": {
+                  "En": "Effect",
+                  "Fr": "Effect",
+                  "De": "Effect",
+                  "Es": "Effect"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "options": [
@@ -218,10 +242,14 @@
             },
             "label": {
               "active": {
-                "En": "Output",
-                "Fr": "Sortie",
-                "De": "Ausgang",
-                "Es": "Salida"
+                "text": {
+                  "En": "Output",
+                  "Fr": "Sortie",
+                  "De": "Ausgang",
+                  "Es": "Salida"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "options": [
@@ -247,10 +275,14 @@
             },
             "label": {
               "active": {
-                "En": "Source",
-                "Fr": "Source",
-                "De": "Source",
-                "Es": "Source"
+                "text": {
+                  "En": "Source",
+                  "Fr": "Source",
+                  "De": "Source",
+                  "Es": "Source"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "options": [
@@ -280,10 +312,14 @@
             },
             "label": {
               "active": {
-                "En": "Gate",
-                "Fr": "Porte",
-                "De": "Gate",
-                "Es": "Puerta"
+                "text": {
+                  "En": "Gate",
+                  "Fr": "Porte",
+                  "De": "Gate",
+                  "Es": "Puerta"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "options": [
@@ -309,10 +345,14 @@
             },
             "label": {
               "active": {
-                "En": "Phase",
-                "Fr": "Phase",
-                "De": "Phase",
-                "Es": "Fase"
+                "text": {
+                  "En": "Phase",
+                  "Fr": "Phase",
+                  "De": "Phase",
+                  "Es": "Fase"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "options": [
@@ -363,10 +403,14 @@
             },
             "label": {
               "active": {
-                "En": "Mode",
-                "Fr": "Mode",
-                "De": "Mode",
-                "Es": "Mode"
+                "text": {
+                  "En": "Mode",
+                  "Fr": "Mode",
+                  "De": "Mode",
+                  "Es": "Mode"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "options": [
@@ -392,10 +436,14 @@
             },
             "label": {
               "active": {
-                "En": "Type",
-                "Fr": "Type",
-                "De": "Type",
-                "Es": "Type"
+                "text": {
+                  "En": "Type",
+                  "Fr": "Type",
+                  "De": "Type",
+                  "Es": "Type"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "options": [
@@ -421,10 +469,14 @@
             },
             "label": {
               "active": {
-                "En": "Input",
-                "Fr": "Entrée",
-                "De": "Eingang",
-                "Es": "Entrada"
+                "text": {
+                  "En": "Input",
+                  "Fr": "Entrée",
+                  "De": "Eingang",
+                  "Es": "Entrada"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "options": [
@@ -450,10 +502,14 @@
             },
             "label": {
               "active": {
-                "En": "EQ",
-                "Fr": "EQ",
-                "De": "EQ",
-                "Es": "EQ"
+                "text": {
+                  "En": "EQ",
+                  "Fr": "EQ",
+                  "De": "EQ",
+                  "Es": "EQ"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "options": [
@@ -479,10 +535,14 @@
             },
             "label": {
               "active": {
-                "En": "Preamp",
-                "Fr": "Preamp",
-                "De": "Preamp",
-                "Es": "Preamp"
+                "text": {
+                  "En": "Preamp",
+                  "Fr": "Preamp",
+                  "De": "Preamp",
+                  "Es": "Preamp"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "options": [
@@ -508,10 +568,14 @@
             },
             "label": {
               "active": {
-                "En": "Channel",
-                "Fr": "Canal",
-                "De": "Kanal",
-                "Es": "Canal"
+                "text": {
+                  "En": "Channel",
+                  "Fr": "Canal",
+                  "De": "Kanal",
+                  "Es": "Canal"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "options": [
@@ -537,10 +601,14 @@
             },
             "label": {
               "active": {
-                "En": "Effect",
-                "Fr": "Effect",
-                "De": "Effect",
-                "Es": "Effect"
+                "text": {
+                  "En": "Effect",
+                  "Fr": "Effect",
+                  "De": "Effect",
+                  "Es": "Effect"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "options": [
@@ -566,10 +634,14 @@
             },
             "label": {
               "active": {
-                "En": "Output",
-                "Fr": "Sortie",
-                "De": "Ausgang",
-                "Es": "Salida"
+                "text": {
+                  "En": "Output",
+                  "Fr": "Sortie",
+                  "De": "Ausgang",
+                  "Es": "Salida"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "options": [
@@ -595,10 +667,14 @@
             },
             "label": {
               "active": {
-                "En": "Gate",
-                "Fr": "Porte",
-                "De": "Gate",
-                "Es": "Puerta"
+                "text": {
+                  "En": "Gate",
+                  "Fr": "Porte",
+                  "De": "Gate",
+                  "Es": "Puerta"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "options": [
@@ -624,10 +700,14 @@
             },
             "label": {
               "active": {
-                "En": "Phase",
-                "Fr": "Phase",
-                "De": "Phase",
-                "Es": "Fase"
+                "text": {
+                  "En": "Phase",
+                  "Fr": "Phase",
+                  "De": "Phase",
+                  "Es": "Fase"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "options": [
@@ -678,10 +758,14 @@
             },
             "label": {
               "active": {
-                "En": "LF Band",
-                "Fr": "Bande LF",
-                "De": "LF-Band",
-                "Es": "Banda LF"
+                "text": {
+                  "En": "LF Band",
+                  "Fr": "Bande LF",
+                  "De": "LF-Band",
+                  "Es": "Banda LF"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "options": [
@@ -707,10 +791,14 @@
             },
             "label": {
               "active": {
-                "En": "MF Band",
-                "Fr": "Bande MF",
-                "De": "MF-Band",
-                "Es": "Banda MF"
+                "text": {
+                  "En": "MF Band",
+                  "Fr": "Bande MF",
+                  "De": "MF-Band",
+                  "Es": "Banda MF"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "options": [
@@ -736,10 +824,14 @@
             },
             "label": {
               "active": {
-                "En": "HF Band",
-                "Fr": "Bande HF",
-                "De": "HF-Band",
-                "Es": "Banda HF"
+                "text": {
+                  "En": "HF Band",
+                  "Fr": "Bande HF",
+                  "De": "HF-Band",
+                  "Es": "Banda HF"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "options": [
@@ -765,10 +857,14 @@
             },
             "label": {
               "active": {
-                "En": "HPF",
-                "Fr": "HPF",
-                "De": "HPF",
-                "Es": "HPF"
+                "text": {
+                  "En": "HPF",
+                  "Fr": "HPF",
+                  "De": "HPF",
+                  "Es": "HPF"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "options": [
@@ -793,10 +889,14 @@
             },
             "label": {
               "active": {
-                "En": "LPF",
-                "Fr": "LPF",
-                "De": "LPF",
-                "Es": "LPF"
+                "text": {
+                  "En": "LPF",
+                  "Fr": "LPF",
+                  "De": "LPF",
+                  "Es": "LPF"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "options": [
@@ -821,10 +921,14 @@
             },
             "label": {
               "active": {
-                "En": "BPF",
-                "Fr": "BPF",
-                "De": "BPF",
-                "Es": "BPF"
+                "text": {
+                  "En": "BPF",
+                  "Fr": "BPF",
+                  "De": "BPF",
+                  "Es": "BPF"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "options": [
@@ -849,10 +953,14 @@
             },
             "label": {
               "active": {
-                "En": "Slope",
-                "Fr": "Slope",
-                "De": "Slope",
-                "Es": "Slope"
+                "text": {
+                  "En": "Slope",
+                  "Fr": "Slope",
+                  "De": "Slope",
+                  "Es": "Slope"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "options": [
@@ -878,10 +986,14 @@
             },
             "label": {
               "active": {
-                "En": "Q",
-                "Fr": "Q",
-                "De": "Q",
-                "Es": "Q"
+                "text": {
+                  "En": "Q",
+                  "Fr": "Q",
+                  "De": "Q",
+                  "Es": "Q"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "options": [
@@ -906,10 +1018,14 @@
             },
             "label": {
               "active": {
-                "En": "Res",
-                "Fr": "Res",
-                "De": "Res",
-                "Es": "Res"
+                "text": {
+                  "En": "Res",
+                  "Fr": "Res",
+                  "De": "Res",
+                  "Es": "Res"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "options": [
@@ -935,10 +1051,14 @@
             },
             "label": {
               "active": {
-                "En": "Gain",
-                "Fr": "Gain",
-                "De": "Verstärkung",
-                "Es": "Ganancia"
+                "text": {
+                  "En": "Gain",
+                  "Fr": "Gain",
+                  "De": "Verstärkung",
+                  "Es": "Ganancia"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "options": [
@@ -990,10 +1110,14 @@
             },
             "label": {
               "active": {
-                "En": "Tube",
-                "Fr": "Tube",
-                "De": "Tube",
-                "Es": "Tube"
+                "text": {
+                  "En": "Tube",
+                  "Fr": "Tube",
+                  "De": "Tube",
+                  "Es": "Tube"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "options": [
@@ -1019,10 +1143,14 @@
             },
             "label": {
               "active": {
-                "En": "SS",
-                "Fr": "SS",
-                "De": "SS",
-                "Es": "SS"
+                "text": {
+                  "En": "SS",
+                  "Fr": "SS",
+                  "De": "SS",
+                  "Es": "SS"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "options": [
@@ -1048,10 +1176,14 @@
             },
             "label": {
               "active": {
-                "En": "FET",
-                "Fr": "FET",
-                "De": "FET",
-                "Es": "FET"
+                "text": {
+                  "En": "FET",
+                  "Fr": "FET",
+                  "De": "FET",
+                  "Es": "FET"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "options": [
@@ -1077,10 +1209,14 @@
             },
             "label": {
               "active": {
-                "En": "OpAmp",
-                "Fr": "OpAmp",
-                "De": "OpAmp",
-                "Es": "OpAmp"
+                "text": {
+                  "En": "OpAmp",
+                  "Fr": "OpAmp",
+                  "De": "OpAmp",
+                  "Es": "OpAmp"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "options": [
@@ -1105,10 +1241,14 @@
             },
             "label": {
               "active": {
-                "En": "Discrete",
-                "Fr": "Discrete",
-                "De": "Discrete",
-                "Es": "Discrete"
+                "text": {
+                  "En": "Discrete",
+                  "Fr": "Discrete",
+                  "De": "Discrete",
+                  "Es": "Discrete"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "options": [
@@ -1133,10 +1273,14 @@
             },
             "label": {
               "active": {
-                "En": "Vintage",
-                "Fr": "Vintage",
-                "De": "Vintage",
-                "Es": "Vintage"
+                "text": {
+                  "En": "Vintage",
+                  "Fr": "Vintage",
+                  "De": "Vintage",
+                  "Es": "Vintage"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "options": [
@@ -1161,10 +1305,14 @@
             },
             "label": {
               "active": {
-                "En": "Modern",
-                "Fr": "Moderne",
-                "De": "Modern",
-                "Es": "Moderno"
+                "text": {
+                  "En": "Modern",
+                  "Fr": "Moderne",
+                  "De": "Modern",
+                  "Es": "Moderno"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "options": [
@@ -1189,10 +1337,14 @@
             },
             "label": {
               "active": {
-                "En": "Clean",
-                "Fr": "Clean",
-                "De": "Clean",
-                "Es": "Clean"
+                "text": {
+                  "En": "Clean",
+                  "Fr": "Clean",
+                  "De": "Clean",
+                  "Es": "Clean"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "options": [
@@ -1217,10 +1369,14 @@
             },
             "label": {
               "active": {
-                "En": "Boost",
-                "Fr": "Boost",
-                "De": "Boost",
-                "Es": "Boost"
+                "text": {
+                  "En": "Boost",
+                  "Fr": "Boost",
+                  "De": "Boost",
+                  "Es": "Boost"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "options": [
@@ -1245,10 +1401,14 @@
             },
             "label": {
               "active": {
-                "En": "Cut",
-                "Fr": "Cut",
-                "De": "Cut",
-                "Es": "Cut"
+                "text": {
+                  "En": "Cut",
+                  "Fr": "Cut",
+                  "De": "Cut",
+                  "Es": "Cut"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "options": [
@@ -1297,10 +1457,14 @@
               "type": "_TrapezoidButtonToggler",
               "label": {
                 "active": {
-                  "En": "Group A",
-                  "Fr": "Group A",
-                  "De": "Group A",
-                  "Es": "Group A"
+                  "text": {
+                    "En": "Group A",
+                    "Fr": "Group A",
+                    "De": "Group A",
+                    "Es": "Group A"
+                  },
+                  "text_size": 12,
+                  "text_color": "#cccccc"
                 }
               },
               "options": [
@@ -1326,10 +1490,14 @@
               "type": "_TrapezoidButtonToggler",
               "label": {
                 "active": {
-                  "En": "Group B",
-                  "Fr": "Group B",
-                  "De": "Group B",
-                  "Es": "Group B"
+                  "text": {
+                    "En": "Group B",
+                    "Fr": "Group B",
+                    "De": "Group B",
+                    "Es": "Group B"
+                  },
+                  "text_size": 12,
+                  "text_color": "#cccccc"
                 }
               },
               "options": [
@@ -1355,10 +1523,14 @@
               "type": "_TrapezoidButtonToggler",
               "label": {
                 "active": {
-                  "En": "Group C",
-                  "Fr": "Group C",
-                  "De": "Group C",
-                  "Es": "Group C"
+                  "text": {
+                    "En": "Group C",
+                    "Fr": "Group C",
+                    "De": "Group C",
+                    "Es": "Group C"
+                  },
+                  "text_size": 12,
+                  "text_color": "#cccccc"
                 }
               },
               "options": [
@@ -1384,10 +1556,14 @@
               "type": "_TrapezoidButtonToggler",
               "label": {
                 "active": {
-                  "En": "All",
-                  "Fr": "All",
-                  "De": "All",
-                  "Es": "All"
+                  "text": {
+                    "En": "All",
+                    "Fr": "All",
+                    "De": "All",
+                    "Es": "All"
+                  },
+                  "text_size": 12,
+                  "text_color": "#cccccc"
                 }
               },
               "options": [
@@ -1412,10 +1588,14 @@
               "type": "_TrapezoidButtonToggler",
               "label": {
                 "active": {
-                  "En": "None",
-                  "Fr": "None",
-                  "De": "None",
-                  "Es": "None"
+                  "text": {
+                    "En": "None",
+                    "Fr": "None",
+                    "De": "None",
+                    "Es": "None"
+                  },
+                  "text_size": 12,
+                  "text_color": "#cccccc"
                 }
               },
               "options": [
@@ -1440,10 +1620,14 @@
               "type": "_TrapezoidButtonToggler",
               "label": {
                 "active": {
-                  "En": "Sub Mix",
-                  "Fr": "Sub Mix",
-                  "De": "Sub Mix",
-                  "Es": "Sub Mezcla"
+                  "text": {
+                    "En": "Sub Mix",
+                    "Fr": "Sub Mix",
+                    "De": "Sub Mix",
+                    "Es": "Sub Mezcla"
+                  },
+                  "text_size": 12,
+                  "text_color": "#cccccc"
                 }
               },
               "options": [
@@ -1468,10 +1652,14 @@
               "type": "_TrapezoidButtonToggler",
               "label": {
                 "active": {
-                  "En": "Main",
-                  "Fr": "Main",
-                  "De": "Main",
-                  "Es": "Main"
+                  "text": {
+                    "En": "Main",
+                    "Fr": "Main",
+                    "De": "Main",
+                    "Es": "Main"
+                  },
+                  "text_size": 12,
+                  "text_color": "#cccccc"
                 }
               },
               "options": [
@@ -1496,10 +1684,14 @@
               "type": "_TrapezoidButtonToggler",
               "label": {
                 "active": {
-                  "En": "Bus 1",
-                  "Fr": "Bus 1",
-                  "De": "Bus 1",
-                  "Es": "Bús 1"
+                  "text": {
+                    "En": "Bus 1",
+                    "Fr": "Bus 1",
+                    "De": "Bus 1",
+                    "Es": "Bús 1"
+                  },
+                  "text_size": 12,
+                  "text_color": "#cccccc"
                 }
               },
               "options": [
@@ -1524,10 +1716,14 @@
               "type": "_TrapezoidButtonToggler",
               "label": {
                 "active": {
-                  "En": "Bus 2",
-                  "Fr": "Bus 2",
-                  "De": "Bus 2",
-                  "Es": "Bús 2"
+                  "text": {
+                    "En": "Bus 2",
+                    "Fr": "Bus 2",
+                    "De": "Bus 2",
+                    "Es": "Bús 2"
+                  },
+                  "text_size": 12,
+                  "text_color": "#cccccc"
                 }
               },
               "options": [
@@ -1552,10 +1748,14 @@
               "type": "_TrapezoidButtonToggler",
               "label": {
                 "active": {
-                  "En": "Bus 3",
-                  "Fr": "Bus 3",
-                  "De": "Bus 3",
-                  "Es": "Bús 3"
+                  "text": {
+                    "En": "Bus 3",
+                    "Fr": "Bus 3",
+                    "De": "Bus 3",
+                    "Es": "Bús 3"
+                  },
+                  "text_size": 12,
+                  "text_color": "#cccccc"
                 }
               },
               "options": [

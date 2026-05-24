@@ -12,7 +12,7 @@ const ImageDisplay = ({ value, config }) => {
             <div style={{ 
                 border: '1px solid #333', 
                 padding: '5px', 
-                backgroundColor: '#111', 
+                backgroundColor: (window.OaTransparency ? window.OaTransparency.bg(config, '#111') : '#111'), 
                 borderRadius: '4px',
                 width: w,
                 height: h,

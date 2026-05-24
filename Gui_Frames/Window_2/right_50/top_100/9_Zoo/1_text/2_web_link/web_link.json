@@ -15,10 +15,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Visit Project Homepage",
-            "Fr": "Visit Project Homepage",
-            "De": "Visit Project Homepage",
-            "Es": "Visit Project Homepage"
+            "text": {
+              "En": "Visit Project Homepage",
+              "Fr": "Visit Project Homepage",
+              "De": "Visit Project Homepage",
+              "Es": "Visit Project Homepage"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -47,10 +51,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Read Documentation",
-            "Fr": "Read Documentation",
-            "De": "Read Documentation",
-            "Es": "Read Documentation"
+            "text": {
+              "En": "Read Documentation",
+              "Fr": "Read Documentation",
+              "De": "Read Documentation",
+              "Es": "Read Documentation"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -73,10 +81,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Contact Support",
-            "Fr": "Contact Support",
-            "De": "Contact Support",
-            "Es": "Contact Support"
+            "text": {
+              "En": "Contact Support",
+              "Fr": "Contact Support",
+              "De": "Contact Support",
+              "Es": "Contact Support"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -99,10 +111,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "View Source Code",
-            "Fr": "View Source Code",
-            "De": "View Source Code",
-            "Es": "View Source Code"
+            "text": {
+              "En": "View Source Code",
+              "Fr": "View Source Code",
+              "De": "View Source Code",
+              "Es": "View Source Code"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -131,10 +147,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Latest Blog Post",
-            "Fr": "Latest Blog Post",
-            "De": "Latest Blog Post",
-            "Es": "Latest Blog Post"
+            "text": {
+              "En": "Latest Blog Post",
+              "Fr": "Latest Blog Post",
+              "De": "Latest Blog Post",
+              "Es": "Latest Blog Post"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {

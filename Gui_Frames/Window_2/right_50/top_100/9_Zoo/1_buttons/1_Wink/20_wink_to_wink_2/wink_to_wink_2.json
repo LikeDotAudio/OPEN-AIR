@@ -39,10 +39,14 @@
             "type": "_WinkButton",
             "label": {
               "active": {
-                "En": "STD",
-                "Fr": "STD",
-                "De": "STD",
-                "Es": "STD"
+                "text": {
+                  "En": "STD",
+                  "Fr": "STD",
+                  "De": "STD",
+                  "Es": "STD"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "shape_type": "rect",
@@ -59,10 +63,14 @@
             "type": "_WinkButton",
             "label": {
               "active": {
-                "En": "B->Y",
-                "Fr": "B->Y",
-                "De": "B->Y",
-                "Es": "B->Y"
+                "text": {
+                  "En": "B->Y",
+                  "Fr": "B->Y",
+                  "De": "B->Y",
+                  "Es": "B->Y"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "shape_type": "square",
@@ -77,10 +85,14 @@
             "type": "_WinkButton",
             "label": {
               "active": {
-                "En": "TXT",
-                "Fr": "TXT",
-                "De": "TXT",
-                "Es": "TXT"
+                "text": {
+                  "En": "TXT",
+                  "Fr": "TXT",
+                  "De": "TXT",
+                  "Es": "TXT"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "shape_type": "round",
@@ -99,10 +111,14 @@
             "type": "_WinkButton",
             "label": {
               "active": {
-                "En": "SAME",
-                "Fr": "SAME",
-                "De": "SAME",
-                "Es": "SAME"
+                "text": {
+                  "En": "SAME",
+                  "Fr": "SAME",
+                  "De": "SAME",
+                  "Es": "SAME"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "shape_type": "rect",
@@ -120,10 +136,14 @@
             "type": "_WinkButton",
             "label": {
               "active": {
-                "En": "INV",
-                "Fr": "INV",
-                "De": "INV",
-                "Es": "INV"
+                "text": {
+                  "En": "INV",
+                  "Fr": "INV",
+                  "De": "INV",
+                  "Es": "INV"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "shape_type": "square",
@@ -141,10 +161,14 @@
             "type": "_WinkButton",
             "label": {
               "active": {
-                "En": "WARN",
-                "Fr": "WARN",
-                "De": "WARN",
-                "Es": "WARN"
+                "text": {
+                  "En": "WARN",
+                  "Fr": "WARN",
+                  "De": "WARN",
+                  "Es": "WARN"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "shape_type": "rect",
@@ -164,10 +188,14 @@
             "type": "_WinkButton",
             "label": {
               "active": {
-                "En": "STLTH",
-                "Fr": "STLTH",
-                "De": "STLTH",
-                "Es": "STLTH"
+                "text": {
+                  "En": "STLTH",
+                  "Fr": "STLTH",
+                  "De": "STLTH",
+                  "Es": "STLTH"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "shape_type": "round",
@@ -183,10 +211,14 @@
             "type": "_WinkButton",
             "label": {
               "active": {
-                "En": "PARTY",
-                "Fr": "PARTY",
-                "De": "PARTY",
-                "Es": "PARTY"
+                "text": {
+                  "En": "PARTY",
+                  "Fr": "PARTY",
+                  "De": "PARTY",
+                  "Es": "PARTY"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "shape_type": "square",

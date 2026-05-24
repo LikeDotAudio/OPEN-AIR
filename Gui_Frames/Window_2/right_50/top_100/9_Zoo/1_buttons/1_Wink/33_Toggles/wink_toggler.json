@@ -28,10 +28,14 @@
             },
             "label": {
               "active": {
-                "En": "Vertical Rects (Slow)",
-                "Fr": "Vertical Rects (Slow)",
-                "De": "Vertikal Rects (Slow)",
-                "Es": "Vertical Rects (Slow)"
+                "text": {
+                  "En": "Vertical Rects (Slow)",
+                  "Fr": "Vertical Rects (Slow)",
+                  "De": "Vertikal Rects (Slow)",
+                  "Es": "Vertical Rects (Slow)"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "layout_columns": 1,
@@ -39,10 +43,14 @@
               "1": {
                 "label": {
                   "active": {
-                    "En": "1",
-                    "Fr": "1",
-                    "De": "1",
-                    "Es": "1"
+                    "text": {
+                      "En": "1",
+                      "Fr": "1",
+                      "De": "1",
+                      "Es": "1"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "color": "#FF0000"
@@ -50,10 +58,14 @@
               "2": {
                 "label": {
                   "active": {
-                    "En": "2",
-                    "Fr": "2",
-                    "De": "2",
-                    "Es": "2"
+                    "text": {
+                      "En": "2",
+                      "Fr": "2",
+                      "De": "2",
+                      "Es": "2"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "color": "#FF7F00"
@@ -61,10 +73,14 @@
               "3": {
                 "label": {
                   "active": {
-                    "En": "3",
-                    "Fr": "3",
-                    "De": "3",
-                    "Es": "3"
+                    "text": {
+                      "En": "3",
+                      "Fr": "3",
+                      "De": "3",
+                      "Es": "3"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "color": "#FFFF00"
@@ -72,10 +88,14 @@
               "4": {
                 "label": {
                   "active": {
-                    "En": "4",
-                    "Fr": "4",
-                    "De": "4",
-                    "Es": "4"
+                    "text": {
+                      "En": "4",
+                      "Fr": "4",
+                      "De": "4",
+                      "Es": "4"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "color": "#00FF00"
@@ -83,10 +103,14 @@
               "5": {
                 "label": {
                   "active": {
-                    "En": "5",
-                    "Fr": "5",
-                    "De": "5",
-                    "Es": "5"
+                    "text": {
+                      "En": "5",
+                      "Fr": "5",
+                      "De": "5",
+                      "Es": "5"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "color": "#0000FF"
@@ -94,10 +118,14 @@
               "6": {
                 "label": {
                   "active": {
-                    "En": "6",
-                    "Fr": "6",
-                    "De": "6",
-                    "Es": "6"
+                    "text": {
+                      "En": "6",
+                      "Fr": "6",
+                      "De": "6",
+                      "Es": "6"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "color": "#4B0082"
@@ -121,10 +149,14 @@
             },
             "label": {
               "active": {
-                "En": "Vertical Rounds (Medium)",
-                "Fr": "Vertical Rounds (Medium)",
-                "De": "Vertikal Rounds (Medium)",
-                "Es": "Vertical Rounds (Medium)"
+                "text": {
+                  "En": "Vertical Rounds (Medium)",
+                  "Fr": "Vertical Rounds (Medium)",
+                  "De": "Vertikal Rounds (Medium)",
+                  "Es": "Vertical Rounds (Medium)"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "layout_columns": 1,
@@ -156,10 +188,14 @@
             },
             "label": {
               "active": {
-                "En": "Tall Rects (Normal)",
-                "Fr": "Tall Rects (Normal)",
-                "De": "Tall Rects (Normal)",
-                "Es": "Tall Rects (Normal)"
+                "text": {
+                  "En": "Tall Rects (Normal)",
+                  "Fr": "Tall Rects (Normal)",
+                  "De": "Tall Rects (Normal)",
+                  "Es": "Tall Rects (Normal)"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "layout_columns": 1,
@@ -167,10 +203,14 @@
               "1": {
                 "label": {
                   "active": {
-                    "En": "1",
-                    "Fr": "1",
-                    "De": "1",
-                    "Es": "1"
+                    "text": {
+                      "En": "1",
+                      "Fr": "1",
+                      "De": "1",
+                      "Es": "1"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "color": "#FFFFFF"
@@ -178,10 +218,14 @@
               "2": {
                 "label": {
                   "active": {
-                    "En": "2",
-                    "Fr": "2",
-                    "De": "2",
-                    "Es": "2"
+                    "text": {
+                      "En": "2",
+                      "Fr": "2",
+                      "De": "2",
+                      "Es": "2"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "color": "#FFFFFF"
@@ -189,10 +233,14 @@
               "3": {
                 "label": {
                   "active": {
-                    "En": "3",
-                    "Fr": "3",
-                    "De": "3",
-                    "Es": "3"
+                    "text": {
+                      "En": "3",
+                      "Fr": "3",
+                      "De": "3",
+                      "Es": "3"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "color": "#FFFFFF"
@@ -200,10 +248,14 @@
               "4": {
                 "label": {
                   "active": {
-                    "En": "4",
-                    "Fr": "4",
-                    "De": "4",
-                    "Es": "4"
+                    "text": {
+                      "En": "4",
+                      "Fr": "4",
+                      "De": "4",
+                      "Es": "4"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "color": "#FFFFFF"
@@ -211,10 +263,14 @@
               "5": {
                 "label": {
                   "active": {
-                    "En": "5",
-                    "Fr": "5",
-                    "De": "5",
-                    "Es": "5"
+                    "text": {
+                      "En": "5",
+                      "Fr": "5",
+                      "De": "5",
+                      "Es": "5"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "color": "#FF0000"
@@ -222,10 +278,14 @@
               "6": {
                 "label": {
                   "active": {
-                    "En": "6",
-                    "Fr": "6",
-                    "De": "6",
-                    "Es": "6"
+                    "text": {
+                      "En": "6",
+                      "Fr": "6",
+                      "De": "6",
+                      "Es": "6"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "color": "#00FF00"
@@ -249,10 +309,14 @@
             },
             "label": {
               "active": {
-                "En": "Squares (Fast)",
-                "Fr": "Squares (Fast)",
-                "De": "Squares (Fast)",
-                "Es": "Squares (Fast)"
+                "text": {
+                  "En": "Squares (Fast)",
+                  "Fr": "Squares (Fast)",
+                  "De": "Squares (Fast)",
+                  "Es": "Squares (Fast)"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "layout_columns": 1,
@@ -288,10 +352,14 @@
             },
             "label": {
               "active": {
-                "En": "Horizontal Red",
-                "Fr": "Horizontal Red",
-                "De": "Horizontal Red",
-                "Es": "Horizontal Red"
+                "text": {
+                  "En": "Horizontal Red",
+                  "Fr": "Horizontal Red",
+                  "De": "Horizontal Red",
+                  "Es": "Horizontal Red"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "layout_columns": 8,
@@ -323,10 +391,14 @@
             },
             "label": {
               "active": {
-                "En": "White to Orange",
-                "Fr": "White to Orange",
-                "De": "White to Orange",
-                "Es": "White to Orange"
+                "text": {
+                  "En": "White to Orange",
+                  "Fr": "White to Orange",
+                  "De": "White to Orange",
+                  "Es": "White to Orange"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "layout_columns": 8,
@@ -334,10 +406,14 @@
               "G1": {
                 "label": {
                   "active": {
-                    "En": "G1",
-                    "Fr": "G1",
-                    "De": "G1",
-                    "Es": "G1"
+                    "text": {
+                      "En": "G1",
+                      "Fr": "G1",
+                      "De": "G1",
+                      "Es": "G1"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "color": "#FFFFFF"
@@ -345,10 +421,14 @@
               "G2": {
                 "label": {
                   "active": {
-                    "En": "G2",
-                    "Fr": "G2",
-                    "De": "G2",
-                    "Es": "G2"
+                    "text": {
+                      "En": "G2",
+                      "Fr": "G2",
+                      "De": "G2",
+                      "Es": "G2"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "color": "#FFF2E0"
@@ -356,10 +436,14 @@
               "G3": {
                 "label": {
                   "active": {
-                    "En": "G3",
-                    "Fr": "G3",
-                    "De": "G3",
-                    "Es": "G3"
+                    "text": {
+                      "En": "G3",
+                      "Fr": "G3",
+                      "De": "G3",
+                      "Es": "G3"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "color": "#FFE5C1"
@@ -367,10 +451,14 @@
               "G4": {
                 "label": {
                   "active": {
-                    "En": "G4",
-                    "Fr": "G4",
-                    "De": "G4",
-                    "Es": "G4"
+                    "text": {
+                      "En": "G4",
+                      "Fr": "G4",
+                      "De": "G4",
+                      "Es": "G4"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "color": "#FFD8A2"
@@ -378,10 +466,14 @@
               "G5": {
                 "label": {
                   "active": {
-                    "En": "G5",
-                    "Fr": "G5",
-                    "De": "G5",
-                    "Es": "G5"
+                    "text": {
+                      "En": "G5",
+                      "Fr": "G5",
+                      "De": "G5",
+                      "Es": "G5"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "color": "#FFCB83"
@@ -389,10 +481,14 @@
               "G6": {
                 "label": {
                   "active": {
-                    "En": "G6",
-                    "Fr": "G6",
-                    "De": "G6",
-                    "Es": "G6"
+                    "text": {
+                      "En": "G6",
+                      "Fr": "G6",
+                      "De": "G6",
+                      "Es": "G6"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "color": "#FFBE64"
@@ -400,10 +496,14 @@
               "G7": {
                 "label": {
                   "active": {
-                    "En": "G7",
-                    "Fr": "G7",
-                    "De": "G7",
-                    "Es": "G7"
+                    "text": {
+                      "En": "G7",
+                      "Fr": "G7",
+                      "De": "G7",
+                      "Es": "G7"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "color": "#FFB145"
@@ -411,10 +511,14 @@
               "G8": {
                 "label": {
                   "active": {
-                    "En": "G8",
-                    "Fr": "G8",
-                    "De": "G8",
-                    "Es": "G8"
+                    "text": {
+                      "En": "G8",
+                      "Fr": "G8",
+                      "De": "G8",
+                      "Es": "G8"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "color": "#FFA500"

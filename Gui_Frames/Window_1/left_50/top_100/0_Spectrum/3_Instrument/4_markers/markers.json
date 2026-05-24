@@ -28,16 +28,24 @@
             "type": "_GuiButtonToggle",
             "label": {
               "active": {
-                "En": "All Markers ON",
-                "Fr": "Tous les marqueurs ON",
-                "De": "Alle Marker EIN",
-                "Es": "Todos los marcadores ENC"
+                "text": {
+                  "En": "All Markers ON",
+                  "Fr": "Tous les marqueurs ON",
+                  "De": "Alle Marker EIN",
+                  "Es": "Todos los marcadores ENC"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               },
               "inactive": {
-                "En": "All Markers ON",
-                "Fr": "Tous les marqueurs ON",
-                "De": "Alle Marker EIN",
-                "Es": "Todos los marcadores ENC"
+                "text": {
+                  "En": "All Markers ON",
+                  "Fr": "Tous les marqueurs ON",
+                  "De": "Alle Marker EIN",
+                  "Es": "Todos los marcadores ENC"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "AES70": "OcaBooleanActuator",
@@ -71,16 +79,24 @@
               "ON": {
                 "label": {
                   "active": {
-                    "En": "All Markers ON",
-                    "Fr": "Tous les marqueurs ON",
-                    "De": "Alle Marker EIN",
-                    "Es": "Todos los marcadores ENC"
+                    "text": {
+                      "En": "All Markers ON",
+                      "Fr": "Tous les marqueurs ON",
+                      "De": "Alle Marker EIN",
+                      "Es": "Todos los marcadores ENC"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "All Markers ON",
-                    "Fr": "Tous les marqueurs ON",
-                    "De": "Alle Marker EIN",
-                    "Es": "Todos los marcadores ENC"
+                    "text": {
+                      "En": "All Markers ON",
+                      "Fr": "Tous les marqueurs ON",
+                      "De": "Alle Marker EIN",
+                      "Es": "Todos los marcadores ENC"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "selected": true
@@ -88,16 +104,24 @@
               "OFF": {
                 "label": {
                   "active": {
-                    "En": "All Markers OFF",
-                    "Fr": "Tous les marqueurs OFF",
-                    "De": "Alle Marker AUS",
-                    "Es": "Todos los marcadores DES"
+                    "text": {
+                      "En": "All Markers OFF",
+                      "Fr": "Tous les marqueurs OFF",
+                      "De": "Alle Marker AUS",
+                      "Es": "Todos los marcadores DES"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "All Markers OFF",
-                    "Fr": "Tous les marqueurs OFF",
-                    "De": "Alle Marker AUS",
-                    "Es": "Todos los marcadores DES"
+                    "text": {
+                      "En": "All Markers OFF",
+                      "Fr": "Tous les marqueurs OFF",
+                      "De": "Alle Marker AUS",
+                      "Es": "Todos los marcadores DES"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "selected": false
@@ -140,16 +164,24 @@
             },
             "label": {
               "active": {
-                "En": "Active",
-                "Fr": "Actif",
-                "De": "Aktiv",
-                "Es": "Activo"
+                "text": {
+                  "En": "Active",
+                  "Fr": "Actif",
+                  "De": "Aktiv",
+                  "Es": "Activo"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               },
               "inactive": {
-                "En": "Active",
-                "Fr": "Actif",
-                "De": "Aktiv",
-                "Es": "Activo"
+                "text": {
+                  "En": "Active",
+                  "Fr": "Actif",
+                  "De": "Aktiv",
+                  "Es": "Activo"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "AES70": "OcaSwitch",
@@ -176,16 +208,24 @@
             },
             "label": {
               "active": {
-                "En": "X",
-                "Fr": "X",
-                "De": "X",
-                "Es": "X"
+                "text": {
+                  "En": "X",
+                  "Fr": "X",
+                  "De": "X",
+                  "Es": "X"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               },
               "inactive": {
-                "En": "X",
-                "Fr": "X",
-                "De": "X",
-                "Es": "X"
+                "text": {
+                  "En": "X",
+                  "Fr": "X",
+                  "De": "X",
+                  "Es": "X"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "AES70": "OcaFrequencyActuator",
@@ -207,16 +247,24 @@
             },
             "label": {
               "active": {
-                "En": "Y",
-                "Fr": "Y",
-                "De": "Y",
-                "Es": "Y"
+                "text": {
+                  "En": "Y",
+                  "Fr": "Y",
+                  "De": "Y",
+                  "Es": "Y"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               },
               "inactive": {
-                "En": "Y",
-                "Fr": "Y",
-                "De": "Y",
-                "Es": "Y"
+                "text": {
+                  "En": "Y",
+                  "Fr": "Y",
+                  "De": "Y",
+                  "Es": "Y"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "AES70": "OcaLevelSensor"
@@ -249,16 +297,24 @@
             },
             "label": {
               "active": {
-                "En": "Active",
-                "Fr": "Actif",
-                "De": "Aktiv",
-                "Es": "Activo"
+                "text": {
+                  "En": "Active",
+                  "Fr": "Actif",
+                  "De": "Aktiv",
+                  "Es": "Activo"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               },
               "inactive": {
-                "En": "Active",
-                "Fr": "Actif",
-                "De": "Aktiv",
-                "Es": "Activo"
+                "text": {
+                  "En": "Active",
+                  "Fr": "Actif",
+                  "De": "Aktiv",
+                  "Es": "Activo"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "AES70": "OcaSwitch",
@@ -280,16 +336,24 @@
             },
             "label": {
               "active": {
-                "En": "X",
-                "Fr": "X",
-                "De": "X",
-                "Es": "X"
+                "text": {
+                  "En": "X",
+                  "Fr": "X",
+                  "De": "X",
+                  "Es": "X"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               },
               "inactive": {
-                "En": "X",
-                "Fr": "X",
-                "De": "X",
-                "Es": "X"
+                "text": {
+                  "En": "X",
+                  "Fr": "X",
+                  "De": "X",
+                  "Es": "X"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "AES70": "OcaFrequencyActuator",
@@ -311,16 +375,24 @@
             },
             "label": {
               "active": {
-                "En": "Y",
-                "Fr": "Y",
-                "De": "Y",
-                "Es": "Y"
+                "text": {
+                  "En": "Y",
+                  "Fr": "Y",
+                  "De": "Y",
+                  "Es": "Y"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               },
               "inactive": {
-                "En": "Y",
-                "Fr": "Y",
-                "De": "Y",
-                "Es": "Y"
+                "text": {
+                  "En": "Y",
+                  "Fr": "Y",
+                  "De": "Y",
+                  "Es": "Y"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "AES70": "OcaLevelSensor"
@@ -353,16 +425,24 @@
             },
             "label": {
               "active": {
-                "En": "Active",
-                "Fr": "Actif",
-                "De": "Aktiv",
-                "Es": "Activo"
+                "text": {
+                  "En": "Active",
+                  "Fr": "Actif",
+                  "De": "Aktiv",
+                  "Es": "Activo"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               },
               "inactive": {
-                "En": "Active",
-                "Fr": "Actif",
-                "De": "Aktiv",
-                "Es": "Activo"
+                "text": {
+                  "En": "Active",
+                  "Fr": "Actif",
+                  "De": "Aktiv",
+                  "Es": "Activo"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "AES70": "OcaSwitch",
@@ -384,16 +464,24 @@
             },
             "label": {
               "active": {
-                "En": "X",
-                "Fr": "X",
-                "De": "X",
-                "Es": "X"
+                "text": {
+                  "En": "X",
+                  "Fr": "X",
+                  "De": "X",
+                  "Es": "X"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               },
               "inactive": {
-                "En": "X",
-                "Fr": "X",
-                "De": "X",
-                "Es": "X"
+                "text": {
+                  "En": "X",
+                  "Fr": "X",
+                  "De": "X",
+                  "Es": "X"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "AES70": "OcaFrequencyActuator",
@@ -415,16 +503,24 @@
             },
             "label": {
               "active": {
-                "En": "Y",
-                "Fr": "Y",
-                "De": "Y",
-                "Es": "Y"
+                "text": {
+                  "En": "Y",
+                  "Fr": "Y",
+                  "De": "Y",
+                  "Es": "Y"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               },
               "inactive": {
-                "En": "Y",
-                "Fr": "Y",
-                "De": "Y",
-                "Es": "Y"
+                "text": {
+                  "En": "Y",
+                  "Fr": "Y",
+                  "De": "Y",
+                  "Es": "Y"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "AES70": "OcaLevelSensor"
@@ -457,16 +553,24 @@
             },
             "label": {
               "active": {
-                "En": "Active",
-                "Fr": "Actif",
-                "De": "Aktiv",
-                "Es": "Activo"
+                "text": {
+                  "En": "Active",
+                  "Fr": "Actif",
+                  "De": "Aktiv",
+                  "Es": "Activo"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               },
               "inactive": {
-                "En": "Active",
-                "Fr": "Actif",
-                "De": "Aktiv",
-                "Es": "Activo"
+                "text": {
+                  "En": "Active",
+                  "Fr": "Actif",
+                  "De": "Aktiv",
+                  "Es": "Activo"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "AES70": "OcaSwitch",
@@ -488,16 +592,24 @@
             },
             "label": {
               "active": {
-                "En": "X",
-                "Fr": "X",
-                "De": "X",
-                "Es": "X"
+                "text": {
+                  "En": "X",
+                  "Fr": "X",
+                  "De": "X",
+                  "Es": "X"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               },
               "inactive": {
-                "En": "X",
-                "Fr": "X",
-                "De": "X",
-                "Es": "X"
+                "text": {
+                  "En": "X",
+                  "Fr": "X",
+                  "De": "X",
+                  "Es": "X"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "AES70": "OcaFrequencyActuator",
@@ -519,16 +631,24 @@
             },
             "label": {
               "active": {
-                "En": "Y",
-                "Fr": "Y",
-                "De": "Y",
-                "Es": "Y"
+                "text": {
+                  "En": "Y",
+                  "Fr": "Y",
+                  "De": "Y",
+                  "Es": "Y"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               },
               "inactive": {
-                "En": "Y",
-                "Fr": "Y",
-                "De": "Y",
-                "Es": "Y"
+                "text": {
+                  "En": "Y",
+                  "Fr": "Y",
+                  "De": "Y",
+                  "Es": "Y"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "AES70": "OcaLevelSensor"
@@ -561,16 +681,24 @@
             },
             "label": {
               "active": {
-                "En": "Active",
-                "Fr": "Actif",
-                "De": "Aktiv",
-                "Es": "Activo"
+                "text": {
+                  "En": "Active",
+                  "Fr": "Actif",
+                  "De": "Aktiv",
+                  "Es": "Activo"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               },
               "inactive": {
-                "En": "Active",
-                "Fr": "Actif",
-                "De": "Aktiv",
-                "Es": "Activo"
+                "text": {
+                  "En": "Active",
+                  "Fr": "Actif",
+                  "De": "Aktiv",
+                  "Es": "Activo"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "AES70": "OcaSwitch",
@@ -592,16 +720,24 @@
             },
             "label": {
               "active": {
-                "En": "X",
-                "Fr": "X",
-                "De": "X",
-                "Es": "X"
+                "text": {
+                  "En": "X",
+                  "Fr": "X",
+                  "De": "X",
+                  "Es": "X"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               },
               "inactive": {
-                "En": "X",
-                "Fr": "X",
-                "De": "X",
-                "Es": "X"
+                "text": {
+                  "En": "X",
+                  "Fr": "X",
+                  "De": "X",
+                  "Es": "X"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "AES70": "OcaFrequencyActuator",
@@ -623,16 +759,24 @@
             },
             "label": {
               "active": {
-                "En": "Y",
-                "Fr": "Y",
-                "De": "Y",
-                "Es": "Y"
+                "text": {
+                  "En": "Y",
+                  "Fr": "Y",
+                  "De": "Y",
+                  "Es": "Y"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               },
               "inactive": {
-                "En": "Y",
-                "Fr": "Y",
-                "De": "Y",
-                "Es": "Y"
+                "text": {
+                  "En": "Y",
+                  "Fr": "Y",
+                  "De": "Y",
+                  "Es": "Y"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "AES70": "OcaLevelSensor"
@@ -665,16 +809,24 @@
             },
             "label": {
               "active": {
-                "En": "Active",
-                "Fr": "Actif",
-                "De": "Aktiv",
-                "Es": "Activo"
+                "text": {
+                  "En": "Active",
+                  "Fr": "Actif",
+                  "De": "Aktiv",
+                  "Es": "Activo"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               },
               "inactive": {
-                "En": "Active",
-                "Fr": "Actif",
-                "De": "Aktiv",
-                "Es": "Activo"
+                "text": {
+                  "En": "Active",
+                  "Fr": "Actif",
+                  "De": "Aktiv",
+                  "Es": "Activo"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "AES70": "OcaSwitch",
@@ -696,16 +848,24 @@
             },
             "label": {
               "active": {
-                "En": "X",
-                "Fr": "X",
-                "De": "X",
-                "Es": "X"
+                "text": {
+                  "En": "X",
+                  "Fr": "X",
+                  "De": "X",
+                  "Es": "X"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               },
               "inactive": {
-                "En": "X",
-                "Fr": "X",
-                "De": "X",
-                "Es": "X"
+                "text": {
+                  "En": "X",
+                  "Fr": "X",
+                  "De": "X",
+                  "Es": "X"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "AES70": "OcaFrequencyActuator",
@@ -727,16 +887,24 @@
             },
             "label": {
               "active": {
-                "En": "Y",
-                "Fr": "Y",
-                "De": "Y",
-                "Es": "Y"
+                "text": {
+                  "En": "Y",
+                  "Fr": "Y",
+                  "De": "Y",
+                  "Es": "Y"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               },
               "inactive": {
-                "En": "Y",
-                "Fr": "Y",
-                "De": "Y",
-                "Es": "Y"
+                "text": {
+                  "En": "Y",
+                  "Fr": "Y",
+                  "De": "Y",
+                  "Es": "Y"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "AES70": "OcaLevelSensor"

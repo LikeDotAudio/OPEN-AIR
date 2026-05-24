@@ -41,7 +41,8 @@
               "En": "Standard VU",
               "Fr": "Standard VU",
               "De": "Standard VU",
-              "Es": "Estándar VU"
+              "Es": "Estándar VU",
+              "show_label": true
             },
             "notes": "Classic VU response (300ms integration).",
             "geometry": {
@@ -70,8 +71,7 @@
               },
               "style_flags": {
                 "visualization": "needle",
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "pointer": {
                 "style": "teardrop",
@@ -108,7 +108,8 @@
               "En": "Fast PPM",
               "Fr": "Rapide PPM",
               "De": "Schnell PPM",
-              "Es": "Rápido PPM"
+              "Es": "Rápido PPM",
+              "show_label": true
             },
             "notes": "Peak Program Meter: Instant attack, slow decay.",
             "geometry": {
@@ -137,8 +138,7 @@
               },
               "style_flags": {
                 "visualization": "needle",
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "pointer": {
                 "style": "taper",
@@ -175,7 +175,8 @@
               "En": "Broadcast Avg",
               "Fr": "Broadcast Avg",
               "De": "Broadcast Avg",
-              "Es": "Broadcast Avg"
+              "Es": "Broadcast Avg",
+              "show_label": true
             },
             "notes": "Slow averaging for loudness consistency.",
             "geometry": {
@@ -204,8 +205,7 @@
               },
               "style_flags": {
                 "visualization": "needle",
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "pointer": {
                 "style": "line",
@@ -240,7 +240,8 @@
               "En": "Vintage Damped",
               "Fr": "Vintage Damped",
               "De": "Vintage Damped",
-              "Es": "Vintage Damped"
+              "Es": "Vintage Damped",
+              "show_label": true
             },
             "notes": "Heavy physical needle damping.",
             "geometry": {
@@ -269,8 +270,7 @@
               },
               "style_flags": {
                 "visualization": "needle",
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "pointer": {
                 "style": "line",
@@ -305,7 +305,8 @@
               "En": "Hyper Sensitive",
               "Fr": "Hyper Sensitive",
               "De": "Hyper Sensitive",
-              "Es": "Hyper Sensitive"
+              "Es": "Hyper Sensitive",
+              "show_label": true
             },
             "notes": "Tracks transients perfectly (no smoothing).",
             "geometry": {
@@ -334,8 +335,7 @@
               },
               "style_flags": {
                 "visualization": "needle",
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "pointer": {
                 "style": "line",
@@ -370,7 +370,8 @@
               "En": "Lazy Peak",
               "Fr": "Lazy Peak",
               "De": "Lazy Peak",
-              "Es": "Lazy Peak"
+              "Es": "Lazy Peak",
+              "show_label": true
             },
             "notes": "Moderate attack, very long hold & decay.",
             "geometry": {
@@ -399,8 +400,7 @@
               },
               "style_flags": {
                 "visualization": "needle",
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "pointer": {
                 "style": "line",
@@ -435,7 +435,8 @@
               "En": "Stereo Comp",
               "Fr": "Stereo Comp",
               "De": "Stereo Comp",
-              "Es": "Stereo Comp"
+              "Es": "Stereo Comp",
+              "show_label": true
             },
             "notes": "Compressor-style gain reduction ballistics.",
             "geometry": {
@@ -464,8 +465,7 @@
               },
               "style_flags": {
                 "visualization": "needle",
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "pointer": {
                 "style": "line",
@@ -500,7 +500,8 @@
               "En": "Mastering",
               "Fr": "Mastering",
               "De": "Mastering",
-              "Es": "Mastering"
+              "Es": "Mastering",
+              "show_label": true
             },
             "notes": "Tight range, highly damped precision.",
             "geometry": {
@@ -529,8 +530,7 @@
               },
               "style_flags": {
                 "visualization": "needle",
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "pointer": {
                 "style": "line",

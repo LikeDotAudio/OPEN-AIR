@@ -22,7 +22,11 @@ in the property editor.
   "knob_rotary_selector_Example": {
     "type": "SelectorSwitch",
     "label": {
-      "active": "Multimeter Mode"
+      "active": {
+        "text": "Multimeter Mode",
+        "text_size": 12,
+        "text_color": "#cccccc"
+      }
     },
     "positions": [
       "OFF",
@@ -32,7 +36,9 @@ in the property editor.
       "AMP"
     ],
     "continuous": false,
-    "value_default": "OFF",
+    "value": {
+      "default_value": "OFF"
+    },
     "indicator_color": "#FFFF00",
     "shape": "circle",
     "pointer_style": "line",

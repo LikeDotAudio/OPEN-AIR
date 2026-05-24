@@ -23,10 +23,14 @@ in the property editor.
     "type": "_Horizontal_with_dial_Value",
     "label": {
       "active": {
-        "En": "Tuning",
-        "Fr": "Accord",
-        "De": "Abstimmung",
-        "Es": "Sintonía"
+        "text": {
+          "En": "Tuning",
+          "Fr": "Accord",
+          "De": "Abstimmung",
+          "Es": "Sintonía"
+        },
+        "text_size": 12,
+        "text_color": "#cccccc"
       }
     },
     "layout": {
@@ -36,25 +40,40 @@ in the property editor.
       "font": 14,
       "padx": 10
     },
-    "default_value": "0",
-    "min": "0",
-    "max": "1000",
-    "units": "MHz",
-    "step_coarse": "1",
-    "step_fine": "0.001",
-    "step": "0.001",
+    "domain": {
+      "locked": false,
+      "min": "0",
+      "max": "1000",
+      "units": "MHz",
+      "step_coarse": "1",
+      "step_fine": "0.001",
+      "precision": "0.001"
+    },
+    "value": {
+      "default_value": "0"
+    },
     "fader_config": {
       "type": "_GuiFaderHorizontal",
-      "tick_interval": 100,
-      "show_ticks": true,
+      "cosmetics": {
+        "scale": {
+          "interval": 100,
+          "show": true
+        }
+      },
       "bar_color": "#333333",
       "active_color": "#FF9900"
     },
     "dial_config": {
       "type": "_GuiKnob",
-      "knob_style": "dial",
-      "active_color": "#00ffff",
-      "bg_color": "#2b2b2b"
+      "cosmetics": {
+        "style_overrides": {
+          "knob_style": "dial"
+        },
+        "colors": {
+          "active": "#00ffff",
+          "background": "#2b2b2b"
+        }
+      }
     },
     "value_config": {
       "height": 30,

@@ -15,10 +15,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Count:",
-            "Fr": "Count:",
-            "De": "Count:",
-            "Es": "Count:"
+            "text": {
+              "En": "Count:",
+              "Fr": "Count:",
+              "De": "Count:",
+              "Es": "Count:"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -47,10 +51,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Volume:",
-            "Fr": "Volume:",
-            "De": "Lautstärke:",
-            "Es": "Volumen:"
+            "text": {
+              "En": "Volume:",
+              "Fr": "Volume:",
+              "De": "Lautstärke:",
+              "Es": "Volumen:"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -79,10 +87,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Fine Tune:",
-            "Fr": "Fine Tune:",
-            "De": "Fine Tune:",
-            "Es": "Fine Tune:"
+            "text": {
+              "En": "Fine Tune:",
+              "Fr": "Fine Tune:",
+              "De": "Fine Tune:",
+              "Es": "Fine Tune:"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -111,10 +123,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Channel:",
-            "Fr": "Canal:",
-            "De": "Kanal:",
-            "Es": "Canal:"
+            "text": {
+              "En": "Channel:",
+              "Fr": "Canal:",
+              "De": "Kanal:",
+              "Es": "Canal:"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {
@@ -143,10 +159,14 @@
         "type": "OcaBlock",
         "label": {
           "active": {
-            "En": "Brightness:",
-            "Fr": "Brightness:",
-            "De": "Brightness:",
-            "Es": "Brightness:"
+            "text": {
+              "En": "Brightness:",
+              "Fr": "Brightness:",
+              "De": "Brightness:",
+              "Es": "Brightness:"
+            },
+            "text_size": 12,
+            "text_color": "#cccccc"
           }
         },
         "fields": {

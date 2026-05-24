@@ -27,14 +27,55 @@
     const [scroll, setScroll] = React.useState({ x: 0, y: 0 });
     const [showGrid, setShowGrid] = React.useState(true);
     const [dragOver, setDragOver] = React.useState(false);
+    const [caret, setCaret] = React.useState(null);   // insertion cursor rect (move drag)
+    const dragSrcRef = React.useRef(null);            // path of element being moved
+    const dropTargetRef = React.useRef(null);         // last computed {destContainerPath, beforeKey}
 
     const selectAt = (clientX, clientY) => {
       const path = window.OaEdFocus.resolvePathAt(clientX, clientY);
       store.select(path || Object.keys(store.getData())[0]);
     };
 
+    // Begin moving an existing canvas element (HTML5 drag from the capture layer).
+    const onDragStart = (e) => {
+      const p = window.OaEdFocus.resolvePathAt(e.clientX, e.clientY);
+      const rootKey = Object.keys(store.getData())[0];
+      if (!p || p === rootKey) { e.preventDefault(); return; } // don't drag the root frame
+      dragSrcRef.current = p;
+      store.select(p);
+      try {
+        e.dataTransfer.setData('application/x-oca-move', p);
+        e.dataTransfer.effectAllowed = 'move';
+        const el = window.OaEdFocus.elementForPath(innerRef.current, p);
+        if (el) e.dataTransfer.setDragImage(el, 10, 10); // ghost = the widget itself
+      } catch (_) { /* noop */ }
+    };
+
+    const onDragOver = (e) => {
+      e.preventDefault();
+      if (dragSrcRef.current && window.OaEdDragMove) {
+        e.dataTransfer.dropEffect = 'move';
+        const res = window.OaEdDragMove.compute(innerRef.current, store, e.clientX, e.clientY, dragSrcRef.current);
+        dropTargetRef.current = res;
+        setCaret(res ? res.caret : null);
+      } else {
+        setDragOver(true); // palette (library) drag
+      }
+    };
+
+    const clearDrag = () => { dragSrcRef.current = null; dropTargetRef.current = null; setCaret(null); setDragOver(false); };
+
     const onDrop = (e) => {
       e.preventDefault();
+      // Case A — moving an existing element.
+      if (dragSrcRef.current) {
+        const src = dragSrcRef.current;
+        const res = dropTargetRef.current || window.OaEdDragMove.compute(innerRef.current, store, e.clientX, e.clientY, src);
+        if (res) store.moveTo(src, res.destContainerPath, res.beforeKey);
+        clearDrag();
+        return;
+      }
+      // Case B — dropping a new widget from the Library palette.
       setDragOver(false);
       let comp = null;
       try { comp = JSON.parse(e.dataTransfer.getData('application/json')); } catch (_) { return; }
@@ -76,18 +117,29 @@
             }}>
               <window.OaEdPreview data={st.data} />
 
-              {/* transparent capture + dropzone */}
+              {/* transparent capture + dropzone (also the drag source for moves) */}
               <div
+                draggable
                 onClick={(e) => selectAt(e.clientX, e.clientY)}
-                onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
-                onDragLeave={() => setDragOver(false)}
+                onDragStart={onDragStart}
+                onDragOver={onDragOver}
+                onDragLeave={() => { if (!dragSrcRef.current) setDragOver(false); }}
                 onDrop={onDrop}
+                onDragEnd={clearDrag}
                 style={{
                   position: 'absolute', inset: 0, zIndex: 10,
                   background: dragOver ? 'rgba(255,153,0,0.08)' : 'transparent',
                   outline: dragOver ? '2px dashed #FF9900' : 'none',
                 }}
               />
+
+              {/* insertion caret while dragging an element */}
+              {caret && (
+                <div style={{
+                  position: 'absolute', left: caret.left, top: caret.top, width: caret.width, height: caret.height,
+                  background: '#FF9900', boxShadow: '0 0 6px #FF9900', borderRadius: 2, zIndex: 20, pointerEvents: 'none',
+                }} />
+              )}
 
               <window.OaEdSelectionOverlay containerRef={innerRef} path={st.selectedPath} rev={st.rev} />
               {window.OaEdResizeHandles &&

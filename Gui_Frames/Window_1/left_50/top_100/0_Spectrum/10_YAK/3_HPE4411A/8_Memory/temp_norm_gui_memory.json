@@ -105,16 +105,24 @@
             "Do_Load_Preset": {
               "label": {
                 "active": {
-                  "En": "Load Preset",
-                  "Fr": "Charger Preset",
-                  "De": "Laden Preset",
-                  "Es": "Cargar Preset"
+                  "text": {
+                    "En": "Load Preset",
+                    "Fr": "Charger Preset",
+                    "De": "Laden Preset",
+                    "Es": "Cargar Preset"
+                  },
+                  "text_size": 12,
+                  "text_color": "#cccccc"
                 },
                 "inactive": {
-                  "En": "Load Preset",
-                  "Fr": "Charger Preset",
-                  "De": "Laden Preset",
-                  "Es": "Cargar Preset"
+                  "text": {
+                    "En": "Load Preset",
+                    "Fr": "Charger Preset",
+                    "De": "Laden Preset",
+                    "Es": "Cargar Preset"
+                  },
+                  "text_size": 12,
+                  "text_color": "#cccccc"
                 }
               },
               "message_details": {

@@ -14,16 +14,24 @@
           "type": "_GuiButtonToggle",
           "label": {
             "active": {
-              "En": "Report Active",
-              "Fr": "Report Actif",
-              "De": "Report Aktiv",
-              "Es": "Report Activo"
+              "text": {
+                "En": "Report Active",
+                "Fr": "Report Actif",
+                "De": "Report Aktiv",
+                "Es": "Report Activo"
+              },
+              "text_size": 12,
+              "text_color": "#cccccc"
             },
             "inactive": {
-              "En": "Report Active",
-              "Fr": "Report Actif",
-              "De": "Report Aktiv",
-              "Es": "Report Activo"
+              "text": {
+                "En": "Report Active",
+                "Fr": "Report Actif",
+                "De": "Report Aktiv",
+                "Es": "Report Activo"
+              },
+              "text_size": 12,
+              "text_color": "#cccccc"
             }
           },
           "AES70": "OcaBooleanActuator",
@@ -52,16 +60,24 @@
             "ON": {
               "label": {
                 "active": {
-                  "En": "Active",
-                  "Fr": "Actif",
-                  "De": "Aktiv",
-                  "Es": "Activo"
+                  "text": {
+                    "En": "Active",
+                    "Fr": "Actif",
+                    "De": "Aktiv",
+                    "Es": "Activo"
+                  },
+                  "text_size": 12,
+                  "text_color": "#cccccc"
                 },
                 "inactive": {
-                  "En": "Active",
-                  "Fr": "Actif",
-                  "De": "Aktiv",
-                  "Es": "Activo"
+                  "text": {
+                    "En": "Active",
+                    "Fr": "Actif",
+                    "De": "Aktiv",
+                    "Es": "Activo"
+                  },
+                  "text_size": 12,
+                  "text_color": "#cccccc"
                 }
               },
               "selected": true
@@ -69,16 +85,24 @@
             "OFF": {
               "label": {
                 "active": {
-                  "En": "Inactive",
-                  "Fr": "Inactif",
-                  "De": "Inaktiv",
-                  "Es": "Inactivo"
+                  "text": {
+                    "En": "Inactive",
+                    "Fr": "Inactif",
+                    "De": "Inaktiv",
+                    "Es": "Inactivo"
+                  },
+                  "text_size": 12,
+                  "text_color": "#cccccc"
                 },
                 "inactive": {
-                  "En": "Inactive",
-                  "Fr": "Inactif",
-                  "De": "Inaktiv",
-                  "Es": "Inactivo"
+                  "text": {
+                    "En": "Inactive",
+                    "Fr": "Inactif",
+                    "De": "Inaktiv",
+                    "Es": "Inactivo"
+                  },
+                  "text_size": 12,
+                  "text_color": "#cccccc"
                 }
               },
               "selected": false
@@ -88,16 +112,24 @@
         "operator_name": {
           "label": {
             "active": {
-              "En": "Operator Name",
-              "Fr": "Operator Nom",
-              "De": "Operator Name",
-              "Es": "Operator Nombre"
+              "text": {
+                "En": "Operator Name",
+                "Fr": "Operator Nom",
+                "De": "Operator Name",
+                "Es": "Operator Nombre"
+              },
+              "text_size": 12,
+              "text_color": "#cccccc"
             },
             "inactive": {
-              "En": "Operator Name",
-              "Fr": "Operator Nom",
-              "De": "Operator Name",
-              "Es": "Operator Nombre"
+              "text": {
+                "En": "Operator Name",
+                "Fr": "Operator Nom",
+                "De": "Operator Name",
+                "Es": "Operator Nombre"
+              },
+              "text_size": 12,
+              "text_color": "#cccccc"
             }
           },
           "type": "_Value",
@@ -110,16 +142,24 @@
         "operator_contact": {
           "label": {
             "active": {
-              "En": "Operator Contact",
-              "Fr": "Operator Contact",
-              "De": "Operator Contact",
-              "Es": "Operator Contact"
+              "text": {
+                "En": "Operator Contact",
+                "Fr": "Operator Contact",
+                "De": "Operator Contact",
+                "Es": "Operator Contact"
+              },
+              "text_size": 12,
+              "text_color": "#cccccc"
             },
             "inactive": {
-              "En": "Operator Contact",
-              "Fr": "Operator Contact",
-              "De": "Operator Contact",
-              "Es": "Operator Contact"
+              "text": {
+                "En": "Operator Contact",
+                "Fr": "Operator Contact",
+                "De": "Operator Contact",
+                "Es": "Operator Contact"
+              },
+              "text_size": 12,
+              "text_color": "#cccccc"
             }
           },
           "type": "_Value",
@@ -132,16 +172,24 @@
         "venue_name": {
           "label": {
             "active": {
-              "En": "Venue Name",
-              "Fr": "Venue Nom",
-              "De": "Venue Name",
-              "Es": "Venue Nombre"
+              "text": {
+                "En": "Venue Name",
+                "Fr": "Venue Nom",
+                "De": "Venue Name",
+                "Es": "Venue Nombre"
+              },
+              "text_size": 12,
+              "text_color": "#cccccc"
             },
             "inactive": {
-              "En": "Venue Name",
-              "Fr": "Venue Nom",
-              "De": "Venue Name",
-              "Es": "Venue Nombre"
+              "text": {
+                "En": "Venue Name",
+                "Fr": "Venue Nom",
+                "De": "Venue Name",
+                "Es": "Venue Nombre"
+              },
+              "text_size": 12,
+              "text_color": "#cccccc"
             }
           },
           "type": "_Value",
@@ -154,16 +202,24 @@
         "venue_address": {
           "label": {
             "active": {
-              "En": "Venue Address",
-              "Fr": "Venue Address",
-              "De": "Venue Address",
-              "Es": "Venue Address"
+              "text": {
+                "En": "Venue Address",
+                "Fr": "Venue Address",
+                "De": "Venue Address",
+                "Es": "Venue Address"
+              },
+              "text_size": 12,
+              "text_color": "#cccccc"
             },
             "inactive": {
-              "En": "Venue Address",
-              "Fr": "Venue Address",
-              "De": "Venue Address",
-              "Es": "Venue Address"
+              "text": {
+                "En": "Venue Address",
+                "Fr": "Venue Address",
+                "De": "Venue Address",
+                "Es": "Venue Address"
+              },
+              "text_size": 12,
+              "text_color": "#cccccc"
             }
           },
           "type": "_Value",
@@ -176,16 +232,24 @@
         "venue_city": {
           "label": {
             "active": {
-              "En": "Venue City",
-              "Fr": "Venue City",
-              "De": "Venue City",
-              "Es": "Venue City"
+              "text": {
+                "En": "Venue City",
+                "Fr": "Venue City",
+                "De": "Venue City",
+                "Es": "Venue City"
+              },
+              "text_size": 12,
+              "text_color": "#cccccc"
             },
             "inactive": {
-              "En": "Venue City",
-              "Fr": "Venue City",
-              "De": "Venue City",
-              "Es": "Venue City"
+              "text": {
+                "En": "Venue City",
+                "Fr": "Venue City",
+                "De": "Venue City",
+                "Es": "Venue City"
+              },
+              "text_size": 12,
+              "text_color": "#cccccc"
             }
           },
           "type": "_Value",
@@ -198,16 +262,24 @@
         "venue_province": {
           "label": {
             "active": {
-              "En": "Venue Province",
-              "Fr": "Venue Province",
-              "De": "Venue Province",
-              "Es": "Venue Province"
+              "text": {
+                "En": "Venue Province",
+                "Fr": "Venue Province",
+                "De": "Venue Province",
+                "Es": "Venue Province"
+              },
+              "text_size": 12,
+              "text_color": "#cccccc"
             },
             "inactive": {
-              "En": "Venue Province",
-              "Fr": "Venue Province",
-              "De": "Venue Province",
-              "Es": "Venue Province"
+              "text": {
+                "En": "Venue Province",
+                "Fr": "Venue Province",
+                "De": "Venue Province",
+                "Es": "Venue Province"
+              },
+              "text_size": 12,
+              "text_color": "#cccccc"
             }
           },
           "type": "_Value",
@@ -220,16 +292,24 @@
         "venue_postal_code": {
           "label": {
             "active": {
-              "En": "Venue Postal Code",
-              "Fr": "Venue Postal Code",
-              "De": "Venue Postal Code",
-              "Es": "Venue Postal Code"
+              "text": {
+                "En": "Venue Postal Code",
+                "Fr": "Venue Postal Code",
+                "De": "Venue Postal Code",
+                "Es": "Venue Postal Code"
+              },
+              "text_size": 12,
+              "text_color": "#cccccc"
             },
             "inactive": {
-              "En": "Venue Postal Code",
-              "Fr": "Venue Postal Code",
-              "De": "Venue Postal Code",
-              "Es": "Venue Postal Code"
+              "text": {
+                "En": "Venue Postal Code",
+                "Fr": "Venue Postal Code",
+                "De": "Venue Postal Code",
+                "Es": "Venue Postal Code"
+              },
+              "text_size": 12,
+              "text_color": "#cccccc"
             }
           },
           "type": "_Value",
@@ -242,16 +322,24 @@
         "notes": {
           "label": {
             "active": {
-              "En": "Notes",
-              "Fr": "Notes",
-              "De": "Notizen",
-              "Es": "Notas"
+              "text": {
+                "En": "Notes",
+                "Fr": "Notes",
+                "De": "Notizen",
+                "Es": "Notas"
+              },
+              "text_size": 12,
+              "text_color": "#cccccc"
             },
             "inactive": {
-              "En": "Notes",
-              "Fr": "Notes",
-              "De": "Notizen",
-              "Es": "Notas"
+              "text": {
+                "En": "Notes",
+                "Fr": "Notes",
+                "De": "Notizen",
+                "Es": "Notas"
+              },
+              "text_size": 12,
+              "text_color": "#cccccc"
             }
           },
           "type": "_Value",
@@ -264,16 +352,24 @@
         "scanner_type": {
           "label": {
             "active": {
-              "En": "Scanner Type",
-              "Fr": "Type de scanner",
-              "De": "Scannertyp",
-              "Es": "Tipo de escáner"
+              "text": {
+                "En": "Scanner Type",
+                "Fr": "Type de scanner",
+                "De": "Scannertyp",
+                "Es": "Tipo de escáner"
+              },
+              "text_size": 12,
+              "text_color": "#cccccc"
             },
             "inactive": {
-              "En": "Scanner Type",
-              "Fr": "Type de scanner",
-              "De": "Scannertyp",
-              "Es": "Tipo de escáner"
+              "text": {
+                "En": "Scanner Type",
+                "Fr": "Type de scanner",
+                "De": "Scannertyp",
+                "Es": "Tipo de escáner"
+              },
+              "text_size": 12,
+              "text_color": "#cccccc"
             }
           },
           "type": "_Value",
@@ -298,16 +394,24 @@
         "Amplifier_type_switch": {
           "label": {
             "active": {
-              "En": "Amplifier Type",
-              "Fr": "Amplificateur Type",
-              "De": "Verstärker Typ",
-              "Es": "Amplificador Tipo"
+              "text": {
+                "En": "Amplifier Type",
+                "Fr": "Amplificateur Type",
+                "De": "Verstärker Typ",
+                "Es": "Amplificador Tipo"
+              },
+              "text_size": 12,
+              "text_color": "#cccccc"
             },
             "inactive": {
-              "En": "Amplifier Type",
-              "Fr": "Amplificateur Type",
-              "De": "Verstärker Typ",
-              "Es": "Amplificador Tipo"
+              "text": {
+                "En": "Amplifier Type",
+                "Fr": "Amplificateur Type",
+                "De": "Verstärker Typ",
+                "Es": "Amplificador Tipo"
+              },
+              "text_size": 12,
+              "text_color": "#cccccc"
             }
           },
           "type": "_GuiDropDownOption",
@@ -316,16 +420,24 @@
             "Broadband": {
               "label": {
                 "active": {
-                  "En": "Broadband",
-                  "Fr": "Large bande",
-                  "De": "Breitband",
-                  "Es": "Banda ancha"
+                  "text": {
+                    "En": "Broadband",
+                    "Fr": "Large bande",
+                    "De": "Breitband",
+                    "Es": "Banda ancha"
+                  },
+                  "text_size": 12,
+                  "text_color": "#cccccc"
                 },
                 "inactive": {
-                  "En": "Broadband",
-                  "Fr": "Large bande",
-                  "De": "Breitband",
-                  "Es": "Banda ancha"
+                  "text": {
+                    "En": "Broadband",
+                    "Fr": "Large bande",
+                    "De": "Breitband",
+                    "Es": "Banda ancha"
+                  },
+                  "text_size": 12,
+                  "text_color": "#cccccc"
                 }
               },
               "value": "Broadband",
@@ -341,16 +453,24 @@
             "Low_Noise_LNA": {
               "label": {
                 "active": {
-                  "En": "Low Noise (LNA)",
-                  "Fr": "Faible bruit (LNA)",
-                  "De": "Rauscharm (LNA)",
-                  "Es": "Bajo ruido (LNA)"
+                  "text": {
+                    "En": "Low Noise (LNA)",
+                    "Fr": "Faible bruit (LNA)",
+                    "De": "Rauscharm (LNA)",
+                    "Es": "Bajo ruido (LNA)"
+                  },
+                  "text_size": 12,
+                  "text_color": "#cccccc"
                 },
                 "inactive": {
-                  "En": "Low Noise (LNA)",
-                  "Fr": "Faible bruit (LNA)",
-                  "De": "Rauscharm (LNA)",
-                  "Es": "Bajo ruido (LNA)"
+                  "text": {
+                    "En": "Low Noise (LNA)",
+                    "Fr": "Faible bruit (LNA)",
+                    "De": "Rauscharm (LNA)",
+                    "Es": "Bajo ruido (LNA)"
+                  },
+                  "text_size": 12,
+                  "text_color": "#cccccc"
                 }
               },
               "value": "Low_Noise_LNA",
@@ -366,16 +486,24 @@
             "High_Power_HPAs": {
               "label": {
                 "active": {
-                  "En": "High Power (HPAs)",
-                  "Fr": "Haute puissance (HPAs)",
-                  "De": "Hochleistung (HPAs)",
-                  "Es": "Alta potencia (HPAs)"
+                  "text": {
+                    "En": "High Power (HPAs)",
+                    "Fr": "Haute puissance (HPAs)",
+                    "De": "Hochleistung (HPAs)",
+                    "Es": "Alta potencia (HPAs)"
+                  },
+                  "text_size": 12,
+                  "text_color": "#cccccc"
                 },
                 "inactive": {
-                  "En": "High Power (HPAs)",
-                  "Fr": "Haute puissance (HPAs)",
-                  "De": "Hochleistung (HPAs)",
-                  "Es": "Alta potencia (HPAs)"
+                  "text": {
+                    "En": "High Power (HPAs)",
+                    "Fr": "Haute puissance (HPAs)",
+                    "De": "Hochleistung (HPAs)",
+                    "Es": "Alta potencia (HPAs)"
+                  },
+                  "text_size": 12,
+                  "text_color": "#cccccc"
                 }
               },
               "value": "High_Power_HPAs",
@@ -391,16 +519,24 @@
             "Band_Specific": {
               "label": {
                 "active": {
-                  "En": "Band-Specific",
-                  "Fr": "Band-Specific",
-                  "De": "Band-Specific",
-                  "Es": "Band-Specific"
+                  "text": {
+                    "En": "Band-Specific",
+                    "Fr": "Band-Specific",
+                    "De": "Band-Specific",
+                    "Es": "Band-Specific"
+                  },
+                  "text_size": 12,
+                  "text_color": "#cccccc"
                 },
                 "inactive": {
-                  "En": "Band-Specific",
-                  "Fr": "Band-Specific",
-                  "De": "Band-Specific",
-                  "Es": "Band-Specific"
+                  "text": {
+                    "En": "Band-Specific",
+                    "Fr": "Band-Specific",
+                    "De": "Band-Specific",
+                    "Es": "Band-Specific"
+                  },
+                  "text_size": 12,
+                  "text_color": "#cccccc"
                 }
               },
               "value": "Band_Specific",
@@ -416,16 +552,24 @@
             "Logarithmic": {
               "label": {
                 "active": {
-                  "En": "Logarithmic",
-                  "Fr": "Logarithmic",
-                  "De": "Logarithmic",
-                  "Es": "Logarithmic"
+                  "text": {
+                    "En": "Logarithmic",
+                    "Fr": "Logarithmic",
+                    "De": "Logarithmic",
+                    "Es": "Logarithmic"
+                  },
+                  "text_size": 12,
+                  "text_color": "#cccccc"
                 },
                 "inactive": {
-                  "En": "Logarithmic",
-                  "Fr": "Logarithmic",
-                  "De": "Logarithmic",
-                  "Es": "Logarithmic"
+                  "text": {
+                    "En": "Logarithmic",
+                    "Fr": "Logarithmic",
+                    "De": "Logarithmic",
+                    "Es": "Logarithmic"
+                  },
+                  "text_size": 12,
+                  "text_color": "#cccccc"
                 }
               },
               "value": "Logarithmic",
@@ -455,16 +599,24 @@
         "Antenna_type_switch": {
           "label": {
             "active": {
-              "En": "Antenna Type",
-              "Fr": "Antenne Type",
-              "De": "Antenne Typ",
-              "Es": "Antena Tipo"
+              "text": {
+                "En": "Antenna Type",
+                "Fr": "Antenne Type",
+                "De": "Antenne Typ",
+                "Es": "Antena Tipo"
+              },
+              "text_size": 12,
+              "text_color": "#cccccc"
             },
             "inactive": {
-              "En": "Antenna Type",
-              "Fr": "Antenne Type",
-              "De": "Antenne Typ",
-              "Es": "Antena Tipo"
+              "text": {
+                "En": "Antenna Type",
+                "Fr": "Antenne Type",
+                "De": "Antenne Typ",
+                "Es": "Antena Tipo"
+              },
+              "text_size": 12,
+              "text_color": "#cccccc"
             }
           },
           "type": "_GuiDropDownOption",
@@ -473,16 +625,24 @@
             "Omnidirectional_Dipole": {
               "label": {
                 "active": {
-                  "En": "Omnidirectional (Dipole)",
-                  "Fr": "Omnidirectional (Dipole)",
-                  "De": "Omnidirectional (Dipole)",
-                  "Es": "Omnidirectional (Dipole)"
+                  "text": {
+                    "En": "Omnidirectional (Dipole)",
+                    "Fr": "Omnidirectional (Dipole)",
+                    "De": "Omnidirectional (Dipole)",
+                    "Es": "Omnidirectional (Dipole)"
+                  },
+                  "text_size": 12,
+                  "text_color": "#cccccc"
                 },
                 "inactive": {
-                  "En": "Omnidirectional (Dipole)",
-                  "Fr": "Omnidirectional (Dipole)",
-                  "De": "Omnidirectional (Dipole)",
-                  "Es": "Omnidirectional (Dipole)"
+                  "text": {
+                    "En": "Omnidirectional (Dipole)",
+                    "Fr": "Omnidirectional (Dipole)",
+                    "De": "Omnidirectional (Dipole)",
+                    "Es": "Omnidirectional (Dipole)"
+                  },
+                  "text_size": 12,
+                  "text_color": "#cccccc"
                 }
               },
               "value": "Omnidirectional_Dipole",
@@ -498,16 +658,24 @@
             "Omnidirectional_Ground_Plane": {
               "label": {
                 "active": {
-                  "En": "Omnidirectional (Ground Plane)",
-                  "Fr": "Omnidirectional (Ground Plane)",
-                  "De": "Omnidirectional (Ground Plane)",
-                  "Es": "Omnidirectional (Ground Plane)"
+                  "text": {
+                    "En": "Omnidirectional (Ground Plane)",
+                    "Fr": "Omnidirectional (Ground Plane)",
+                    "De": "Omnidirectional (Ground Plane)",
+                    "Es": "Omnidirectional (Ground Plane)"
+                  },
+                  "text_size": 12,
+                  "text_color": "#cccccc"
                 },
                 "inactive": {
-                  "En": "Omnidirectional (Ground Plane)",
-                  "Fr": "Omnidirectional (Ground Plane)",
-                  "De": "Omnidirectional (Ground Plane)",
-                  "Es": "Omnidirectional (Ground Plane)"
+                  "text": {
+                    "En": "Omnidirectional (Ground Plane)",
+                    "Fr": "Omnidirectional (Ground Plane)",
+                    "De": "Omnidirectional (Ground Plane)",
+                    "Es": "Omnidirectional (Ground Plane)"
+                  },
+                  "text_size": 12,
+                  "text_color": "#cccccc"
                 }
               },
               "value": "Omnidirectional_Ground_Plane",
@@ -523,16 +691,24 @@
             "Directional_Yagi_Uda": {
               "label": {
                 "active": {
-                  "En": "Directional (Yagi-Uda)",
-                  "Fr": "Directional (Yagi-Uda)",
-                  "De": "Directional (Yagi-Uda)",
-                  "Es": "Directional (Yagi-Uda)"
+                  "text": {
+                    "En": "Directional (Yagi-Uda)",
+                    "Fr": "Directional (Yagi-Uda)",
+                    "De": "Directional (Yagi-Uda)",
+                    "Es": "Directional (Yagi-Uda)"
+                  },
+                  "text_size": 12,
+                  "text_color": "#cccccc"
                 },
                 "inactive": {
-                  "En": "Directional (Yagi-Uda)",
-                  "Fr": "Directional (Yagi-Uda)",
-                  "De": "Directional (Yagi-Uda)",
-                  "Es": "Directional (Yagi-Uda)"
+                  "text": {
+                    "En": "Directional (Yagi-Uda)",
+                    "Fr": "Directional (Yagi-Uda)",
+                    "De": "Directional (Yagi-Uda)",
+                    "Es": "Directional (Yagi-Uda)"
+                  },
+                  "text_size": 12,
+                  "text_color": "#cccccc"
                 }
               },
               "value": "Directional_Yagi_Uda",
@@ -548,16 +724,24 @@
             "Directional_Parabolic_Dish": {
               "label": {
                 "active": {
-                  "En": "Directional (Parabolic Dish)",
-                  "Fr": "Directional (Parabolic Dish)",
-                  "De": "Directional (Parabolic Dish)",
-                  "Es": "Directional (Parabolic Dish)"
+                  "text": {
+                    "En": "Directional (Parabolic Dish)",
+                    "Fr": "Directional (Parabolic Dish)",
+                    "De": "Directional (Parabolic Dish)",
+                    "Es": "Directional (Parabolic Dish)"
+                  },
+                  "text_size": 12,
+                  "text_color": "#cccccc"
                 },
                 "inactive": {
-                  "En": "Directional (Parabolic Dish)",
-                  "Fr": "Directional (Parabolic Dish)",
-                  "De": "Directional (Parabolic Dish)",
-                  "Es": "Directional (Parabolic Dish)"
+                  "text": {
+                    "En": "Directional (Parabolic Dish)",
+                    "Fr": "Directional (Parabolic Dish)",
+                    "De": "Directional (Parabolic Dish)",
+                    "Es": "Directional (Parabolic Dish)"
+                  },
+                  "text_size": 12,
+                  "text_color": "#cccccc"
                 }
               },
               "value": "Directional_Parabolic_Dish",
@@ -573,16 +757,24 @@
             "Loop_Antenna": {
               "label": {
                 "active": {
-                  "En": "Loop Antenna",
-                  "Fr": "Loop Antenne",
-                  "De": "Loop Antenne",
-                  "Es": "Loop Antena"
+                  "text": {
+                    "En": "Loop Antenna",
+                    "Fr": "Loop Antenne",
+                    "De": "Loop Antenne",
+                    "Es": "Loop Antena"
+                  },
+                  "text_size": 12,
+                  "text_color": "#cccccc"
                 },
                 "inactive": {
-                  "En": "Loop Antenna",
-                  "Fr": "Loop Antenne",
-                  "De": "Loop Antenne",
-                  "Es": "Loop Antena"
+                  "text": {
+                    "En": "Loop Antenna",
+                    "Fr": "Loop Antenne",
+                    "De": "Loop Antenne",
+                    "Es": "Loop Antena"
+                  },
+                  "text_size": 12,
+                  "text_color": "#cccccc"
                 }
               },
               "value": "Loop_Antenna",
@@ -598,16 +790,24 @@
             "Patch_Antenna": {
               "label": {
                 "active": {
-                  "En": "Patch Antenna",
-                  "Fr": "Patch Antenne",
-                  "De": "Patch Antenne",
-                  "Es": "Patch Antena"
+                  "text": {
+                    "En": "Patch Antenna",
+                    "Fr": "Patch Antenne",
+                    "De": "Patch Antenne",
+                    "Es": "Patch Antena"
+                  },
+                  "text_size": 12,
+                  "text_color": "#cccccc"
                 },
                 "inactive": {
-                  "En": "Patch Antenna",
-                  "Fr": "Patch Antenne",
-                  "De": "Patch Antenne",
-                  "Es": "Patch Antena"
+                  "text": {
+                    "En": "Patch Antenna",
+                    "Fr": "Patch Antenne",
+                    "De": "Patch Antenne",
+                    "Es": "Patch Antena"
+                  },
+                  "text_size": 12,
+                  "text_color": "#cccccc"
                 }
               },
               "value": "Patch_Antenna",
@@ -623,16 +823,24 @@
             "Horn_Antenna": {
               "label": {
                 "active": {
-                  "En": "Horn Antenna",
-                  "Fr": "Horn Antenne",
-                  "De": "Horn Antenne",
-                  "Es": "Horn Antena"
+                  "text": {
+                    "En": "Horn Antenna",
+                    "Fr": "Horn Antenne",
+                    "De": "Horn Antenne",
+                    "Es": "Horn Antena"
+                  },
+                  "text_size": 12,
+                  "text_color": "#cccccc"
                 },
                 "inactive": {
-                  "En": "Horn Antenna",
-                  "Fr": "Horn Antenne",
-                  "De": "Horn Antenne",
-                  "Es": "Horn Antena"
+                  "text": {
+                    "En": "Horn Antenna",
+                    "Fr": "Horn Antenne",
+                    "De": "Horn Antenne",
+                    "Es": "Horn Antena"
+                  },
+                  "text_size": 12,
+                  "text_color": "#cccccc"
                 }
               },
               "value": "Horn_Antenna",

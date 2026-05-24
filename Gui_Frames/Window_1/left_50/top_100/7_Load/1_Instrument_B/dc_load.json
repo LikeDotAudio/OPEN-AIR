@@ -33,16 +33,24 @@
                 "type": "_TrapezoidButton",
                 "label": {
                   "active": {
-                    "En": "☢️ DUAL SIPHON ACTIVE ☢️",
-                    "Fr": "☢️ DUAL SIPHON ACTIVE ☢️",
-                    "De": "☢️ DUAL SIPHON ACTIVE ☢️",
-                    "Es": "☢️ DUAL SIPHON ACTIVE ☢️"
+                    "text": {
+                      "En": "☢️ DUAL SIPHON ACTIVE ☢️",
+                      "Fr": "☢️ DUAL SIPHON ACTIVE ☢️",
+                      "De": "☢️ DUAL SIPHON ACTIVE ☢️",
+                      "Es": "☢️ DUAL SIPHON ACTIVE ☢️"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "ENGAGE TWIN LOADS",
-                    "Fr": "ENGAGE TWIN LOADS",
-                    "De": "ENGAGE TWIN LOADS",
-                    "Es": "ENGAGE TWIN LOADS"
+                    "text": {
+                      "En": "ENGAGE TWIN LOADS",
+                      "Fr": "ENGAGE TWIN LOADS",
+                      "De": "ENGAGE TWIN LOADS",
+                      "Es": "ENGAGE TWIN LOADS"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "state_default": false,
@@ -95,10 +103,14 @@
                     },
                     "label": {
                       "active": {
-                        "En": "DUT 1 ID",
-                        "Fr": "DUT 1 ID",
-                        "De": "DUT 1 ID",
-                        "Es": "DUT 1 ID"
+                        "text": {
+                          "En": "DUT 1 ID",
+                          "Fr": "DUT 1 ID",
+                          "De": "DUT 1 ID",
+                          "Es": "DUT 1 ID"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "message_details": {
@@ -133,16 +145,24 @@
                     "type": "_GuiButtonToggle",
                     "label": {
                       "active": {
-                        "En": "A: SINKING 🔥",
-                        "Fr": "A: SINKING 🔥",
-                        "De": "A: SINKING 🔥",
-                        "Es": "A: SINKING 🔥"
+                        "text": {
+                          "En": "A: SINKING 🔥",
+                          "Fr": "A: SINKING 🔥",
+                          "De": "A: SINKING 🔥",
+                          "Es": "A: SINKING 🔥"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       },
                       "inactive": {
-                        "En": "A: STANDBY",
-                        "Fr": "A: STANDBY",
-                        "De": "A: STANDBY",
-                        "Es": "A: STANDBY"
+                        "text": {
+                          "En": "A: STANDBY",
+                          "Fr": "A: STANDBY",
+                          "De": "A: STANDBY",
+                          "Es": "A: STANDBY"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "style": {
@@ -214,10 +234,14 @@
                     },
                     "label": {
                       "active": {
-                        "En": "BASE (A)",
-                        "Fr": "BASE (A)",
-                        "De": "BASE (A)",
-                        "Es": "BASE (A)"
+                        "text": {
+                          "En": "BASE (A)",
+                          "Fr": "BASE (A)",
+                          "De": "BASE (A)",
+                          "Es": "BASE (A)"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "message_details": {
@@ -257,10 +281,14 @@
                     },
                     "label": {
                       "active": {
-                        "En": "PEAK (A)",
-                        "Fr": "PEAK (A)",
-                        "De": "PEAK (A)",
-                        "Es": "PEAK (A)"
+                        "text": {
+                          "En": "PEAK (A)",
+                          "Fr": "PEAK (A)",
+                          "De": "PEAK (A)",
+                          "Es": "PEAK (A)"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "message_details": {
@@ -306,16 +334,24 @@
                     "type": "_GuiButtonToggle",
                     "label": {
                       "active": {
-                        "En": "PULSE ON",
-                        "Fr": "PULSE ON",
-                        "De": "PULSE ON",
-                        "Es": "PULSE ON"
+                        "text": {
+                          "En": "PULSE ON",
+                          "Fr": "PULSE ON",
+                          "De": "PULSE ON",
+                          "Es": "PULSE ON"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       },
                       "inactive": {
-                        "En": "PULSE OFF",
-                        "Fr": "PULSE OFF",
-                        "De": "PULSE OFF",
-                        "Es": "PULSE OFF"
+                        "text": {
+                          "En": "PULSE OFF",
+                          "Fr": "PULSE OFF",
+                          "De": "PULSE OFF",
+                          "Es": "PULSE OFF"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "style": {
@@ -379,10 +415,14 @@
                     },
                     "label": {
                       "active": {
-                        "En": "Stop Volts",
-                        "Fr": "Arrêter Volts",
-                        "De": "Stopp Volts",
-                        "Es": "Parar Volts"
+                        "text": {
+                          "En": "Stop Volts",
+                          "Fr": "Arrêter Volts",
+                          "De": "Stopp Volts",
+                          "Es": "Parar Volts"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "message_details": {
@@ -431,10 +471,14 @@
                     },
                     "label": {
                       "active": {
-                        "En": "Ah Drained",
-                        "Fr": "Ah Drained",
-                        "De": "Ah Drained",
-                        "Es": "Ah Drained"
+                        "text": {
+                          "En": "Ah Drained",
+                          "Fr": "Ah Drained",
+                          "De": "Ah Drained",
+                          "Es": "Ah Drained"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "message_details": {
@@ -469,10 +513,14 @@
                     "type": "_GuiGraph",
                     "label": {
                       "active": {
-                        "En": "Discharge A",
-                        "Fr": "Discharge A",
-                        "De": "Discharge A",
-                        "Es": "Discharge A"
+                        "text": {
+                          "En": "Discharge A",
+                          "Fr": "Discharge A",
+                          "De": "Discharge A",
+                          "Es": "Discharge A"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "height": 120,
@@ -536,10 +584,14 @@
                     },
                     "label": {
                       "active": {
-                        "En": "DUT 2 ID",
-                        "Fr": "DUT 2 ID",
-                        "De": "DUT 2 ID",
-                        "Es": "DUT 2 ID"
+                        "text": {
+                          "En": "DUT 2 ID",
+                          "Fr": "DUT 2 ID",
+                          "De": "DUT 2 ID",
+                          "Es": "DUT 2 ID"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "message_details": {
@@ -574,16 +626,24 @@
                     "type": "_GuiButtonToggle",
                     "label": {
                       "active": {
-                        "En": "B: SINKING 🔥",
-                        "Fr": "B: SINKING 🔥",
-                        "De": "B: SINKING 🔥",
-                        "Es": "B: SINKING 🔥"
+                        "text": {
+                          "En": "B: SINKING 🔥",
+                          "Fr": "B: SINKING 🔥",
+                          "De": "B: SINKING 🔥",
+                          "Es": "B: SINKING 🔥"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       },
                       "inactive": {
-                        "En": "B: STANDBY",
-                        "Fr": "B: STANDBY",
-                        "De": "B: STANDBY",
-                        "Es": "B: STANDBY"
+                        "text": {
+                          "En": "B: STANDBY",
+                          "Fr": "B: STANDBY",
+                          "De": "B: STANDBY",
+                          "Es": "B: STANDBY"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "style": {
@@ -655,10 +715,14 @@
                     },
                     "label": {
                       "active": {
-                        "En": "BASE (A)",
-                        "Fr": "BASE (A)",
-                        "De": "BASE (A)",
-                        "Es": "BASE (A)"
+                        "text": {
+                          "En": "BASE (A)",
+                          "Fr": "BASE (A)",
+                          "De": "BASE (A)",
+                          "Es": "BASE (A)"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "message_details": {
@@ -698,10 +762,14 @@
                     },
                     "label": {
                       "active": {
-                        "En": "PEAK (A)",
-                        "Fr": "PEAK (A)",
-                        "De": "PEAK (A)",
-                        "Es": "PEAK (A)"
+                        "text": {
+                          "En": "PEAK (A)",
+                          "Fr": "PEAK (A)",
+                          "De": "PEAK (A)",
+                          "Es": "PEAK (A)"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "message_details": {
@@ -747,16 +815,24 @@
                     "type": "_GuiButtonToggle",
                     "label": {
                       "active": {
-                        "En": "PULSE ON",
-                        "Fr": "PULSE ON",
-                        "De": "PULSE ON",
-                        "Es": "PULSE ON"
+                        "text": {
+                          "En": "PULSE ON",
+                          "Fr": "PULSE ON",
+                          "De": "PULSE ON",
+                          "Es": "PULSE ON"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       },
                       "inactive": {
-                        "En": "PULSE OFF",
-                        "Fr": "PULSE OFF",
-                        "De": "PULSE OFF",
-                        "Es": "PULSE OFF"
+                        "text": {
+                          "En": "PULSE OFF",
+                          "Fr": "PULSE OFF",
+                          "De": "PULSE OFF",
+                          "Es": "PULSE OFF"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "style": {
@@ -820,10 +896,14 @@
                     },
                     "label": {
                       "active": {
-                        "En": "Stop Volts",
-                        "Fr": "Arrêter Volts",
-                        "De": "Stopp Volts",
-                        "Es": "Parar Volts"
+                        "text": {
+                          "En": "Stop Volts",
+                          "Fr": "Arrêter Volts",
+                          "De": "Stopp Volts",
+                          "Es": "Parar Volts"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "message_details": {
@@ -872,10 +952,14 @@
                     },
                     "label": {
                       "active": {
-                        "En": "Ah Drained",
-                        "Fr": "Ah Drained",
-                        "De": "Ah Drained",
-                        "Es": "Ah Drained"
+                        "text": {
+                          "En": "Ah Drained",
+                          "Fr": "Ah Drained",
+                          "De": "Ah Drained",
+                          "Es": "Ah Drained"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "message_details": {
@@ -910,10 +994,14 @@
                     "type": "_GuiGraph",
                     "label": {
                       "active": {
-                        "En": "Discharge B",
-                        "Fr": "Discharge B",
-                        "De": "Discharge B",
-                        "Es": "Discharge B"
+                        "text": {
+                          "En": "Discharge B",
+                          "Fr": "Discharge B",
+                          "De": "Discharge B",
+                          "Es": "Discharge B"
+                        },
+                        "text_size": 12,
+                        "text_color": "#cccccc"
                       }
                     },
                     "height": 120,

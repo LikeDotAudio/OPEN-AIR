@@ -43,7 +43,7 @@ const OcaTextInput = ({ value, onChange, config, topic, nodeJson }) => {
                 onChange={handleChange}
                 style={{
                     flexGrow: 1,
-                    backgroundColor: '#1a1a1a',
+                    backgroundColor: (window.OaTransparency ? window.OaTransparency.bg(config, '#1a1a1a') : '#1a1a1a'),
                     color: color,
                     border: '1px solid #444',
                     borderRadius: '3px',

@@ -19,10 +19,14 @@
             "type": "_GuiActuator",
             "label": {
               "active": {
-                "En": "Set Mode",
-                "Fr": "Définir le mode",
-                "De": "Modus einstellen",
-                "Es": "Establecer modo"
+                "text": {
+                  "En": "Set Mode",
+                  "Fr": "Définir le mode",
+                  "De": "Modus einstellen",
+                  "Es": "Establecer modo"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "AES70": "OcaBooleanActuator",
@@ -43,10 +47,14 @@
             "type": "_GuiActuator",
             "label": {
               "active": {
-                "En": "Set Frequency",
-                "Fr": "Définir la fréquence",
-                "De": "Frequenz einstellen",
-                "Es": "Establecer frecuencia"
+                "text": {
+                  "En": "Set Frequency",
+                  "Fr": "Définir la fréquence",
+                  "De": "Frequenz einstellen",
+                  "Es": "Establecer frecuencia"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "message": ":SENSe:FREQuency:CW {value}",
@@ -67,10 +75,14 @@
             "type": "_GuiActuator",
             "label": {
               "active": {
-                "En": "Auto Voltage",
-                "Fr": "Tension automatique",
-                "De": "Auto-Spannung",
-                "Es": "Voltaje automático"
+                "text": {
+                  "En": "Auto Voltage",
+                  "Fr": "Tension automatique",
+                  "De": "Auto-Spannung",
+                  "Es": "Voltaje automático"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "message": ":SENSe:VOLTage:RANGe:AUTO {value}",

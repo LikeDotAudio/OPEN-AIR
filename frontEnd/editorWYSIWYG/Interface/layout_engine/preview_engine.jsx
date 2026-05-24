@@ -25,6 +25,10 @@
     if (!window.LoaderOrchestrator) {
       return <div style={{ color: '#f55', padding: 20 }}>Renderer (LoaderOrchestrator) not loaded.</div>;
     }
-    return <window.LoaderOrchestrator layoutJson={renderData} />;
+    // Flag editor context so data-driven containers (OcaArray) render a SINGLE
+    // template instance instead of all N runtime copies.
+    const Ctx = window.OaEdPreviewCtx;
+    const tree = <window.LoaderOrchestrator layoutJson={renderData} />;
+    return Ctx ? <Ctx.Provider value={true}>{tree}</Ctx.Provider> : tree;
   };
 })();

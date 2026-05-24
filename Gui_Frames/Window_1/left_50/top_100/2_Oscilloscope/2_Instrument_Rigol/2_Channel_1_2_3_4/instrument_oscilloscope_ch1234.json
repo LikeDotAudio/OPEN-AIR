@@ -36,10 +36,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "Device Name",
-                    "Fr": "Device Nom",
-                    "De": "Device Name",
-                    "Es": "Device Nombre"
+                    "text": {
+                      "En": "Device Name",
+                      "Fr": "Device Nom",
+                      "De": "Device Name",
+                      "Es": "Device Nombre"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -74,10 +78,14 @@
                 "type": "_GuiGraph",
                 "label": {
                   "active": {
-                    "En": "4-Channel Visualization",
-                    "Fr": "4-Canal Visualization",
-                    "De": "4-Kanal Visualization",
-                    "Es": "4-Canal Visualization"
+                    "text": {
+                      "En": "4-Channel Visualization",
+                      "Fr": "4-Canal Visualization",
+                      "De": "4-Kanal Visualization",
+                      "Es": "4-Canal Visualization"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -145,10 +153,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "CH1 Scale",
-                    "Fr": "CH 1",
-                    "De": "CH 1",
-                    "Es": "CH 1"
+                    "text": {
+                      "En": "CH1 Scale",
+                      "Fr": "CH 1",
+                      "De": "CH 1",
+                      "Es": "CH 1"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -189,10 +201,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "CH1 Offs",
-                    "Fr": "CH 1",
-                    "De": "CH 1",
-                    "Es": "CH 1"
+                    "text": {
+                      "En": "CH1 Offs",
+                      "Fr": "CH 1",
+                      "De": "CH 1",
+                      "Es": "CH 1"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -233,10 +249,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "CH2 Scale",
-                    "Fr": "CH 2",
-                    "De": "CH 2",
-                    "Es": "CH 2"
+                    "text": {
+                      "En": "CH2 Scale",
+                      "Fr": "CH 2",
+                      "De": "CH 2",
+                      "Es": "CH 2"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -277,10 +297,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "CH2 Offs",
-                    "Fr": "CH 2",
-                    "De": "CH 2",
-                    "Es": "CH 2"
+                    "text": {
+                      "En": "CH2 Offs",
+                      "Fr": "CH 2",
+                      "De": "CH 2",
+                      "Es": "CH 2"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -332,10 +356,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "CH3 Scale",
-                    "Fr": "CH 3",
-                    "De": "CH 3",
-                    "Es": "CH 3"
+                    "text": {
+                      "En": "CH3 Scale",
+                      "Fr": "CH 3",
+                      "De": "CH 3",
+                      "Es": "CH 3"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -376,10 +404,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "CH3 Offs",
-                    "Fr": "CH 3",
-                    "De": "CH 3",
-                    "Es": "CH 3"
+                    "text": {
+                      "En": "CH3 Offs",
+                      "Fr": "CH 3",
+                      "De": "CH 3",
+                      "Es": "CH 3"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -420,10 +452,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "CH4 Scale",
-                    "Fr": "Échelle CH4",
-                    "De": "CH4 Skala",
-                    "Es": "Escala CH4"
+                    "text": {
+                      "En": "CH4 Scale",
+                      "Fr": "Échelle CH4",
+                      "De": "CH4 Skala",
+                      "Es": "Escala CH4"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -464,10 +500,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "CH4 Offs",
-                    "Fr": "CH 4",
-                    "De": "CH 4",
-                    "Es": "CH 4"
+                    "text": {
+                      "En": "CH4 Offs",
+                      "Fr": "CH 4",
+                      "De": "CH 4",
+                      "Es": "CH 4"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -513,16 +553,24 @@
                 "type": "_GuiButtonToggle",
                 "label": {
                   "active": {
-                    "En": "CH1 ON",
-                    "Fr": "CH1 ACTIVÉ",
-                    "De": "CH1 AN",
-                    "Es": "CH1 ACTIVADO"
+                    "text": {
+                      "En": "CH1 ON",
+                      "Fr": "CH1 ACTIVÉ",
+                      "De": "CH1 AN",
+                      "Es": "CH1 ACTIVADO"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "CH1 OFF",
-                    "Fr": "CH 1",
-                    "De": "CH 1",
-                    "Es": "CH 1"
+                    "text": {
+                      "En": "CH1 OFF",
+                      "Fr": "CH 1",
+                      "De": "CH 1",
+                      "Es": "CH 1"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "style": {
@@ -578,16 +626,24 @@
                 "type": "_GuiButtonToggle",
                 "label": {
                   "active": {
-                    "En": "CH2 ON",
-                    "Fr": "CH 2",
-                    "De": "CH 2",
-                    "Es": "CH 2"
+                    "text": {
+                      "En": "CH2 ON",
+                      "Fr": "CH 2",
+                      "De": "CH 2",
+                      "Es": "CH 2"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "CH2 OFF",
-                    "Fr": "CH 2",
-                    "De": "CH 2",
-                    "Es": "CH 2"
+                    "text": {
+                      "En": "CH2 OFF",
+                      "Fr": "CH 2",
+                      "De": "CH 2",
+                      "Es": "CH 2"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "style": {
@@ -643,16 +699,24 @@
                 "type": "_GuiButtonToggle",
                 "label": {
                   "active": {
-                    "En": "CH3 ON",
-                    "Fr": "CH 3",
-                    "De": "CH 3",
-                    "Es": "CH 3"
+                    "text": {
+                      "En": "CH3 ON",
+                      "Fr": "CH 3",
+                      "De": "CH 3",
+                      "Es": "CH 3"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "CH3 OFF",
-                    "Fr": "CH 3",
-                    "De": "CH 3",
-                    "Es": "CH 3"
+                    "text": {
+                      "En": "CH3 OFF",
+                      "Fr": "CH 3",
+                      "De": "CH 3",
+                      "Es": "CH 3"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "style": {
@@ -708,16 +772,24 @@
                 "type": "_GuiButtonToggle",
                 "label": {
                   "active": {
-                    "En": "CH4 ON",
-                    "Fr": "CH 4",
-                    "De": "CH 4",
-                    "Es": "CH 4"
+                    "text": {
+                      "En": "CH4 ON",
+                      "Fr": "CH 4",
+                      "De": "CH 4",
+                      "Es": "CH 4"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "CH4 OFF",
-                    "Fr": "CH 4",
-                    "De": "CH 4",
-                    "Es": "CH 4"
+                    "text": {
+                      "En": "CH4 OFF",
+                      "Fr": "CH 4",
+                      "De": "CH 4",
+                      "Es": "CH 4"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "style": {
@@ -792,10 +864,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "Time / Div",
-                    "Fr": "Temps / Div",
-                    "De": "Zeit / Div",
-                    "Es": "Tiempo / Div"
+                    "text": {
+                      "En": "Time / Div",
+                      "Fr": "Temps / Div",
+                      "De": "Zeit / Div",
+                      "Es": "Tiempo / Div"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -836,10 +912,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "Delay",
-                    "Fr": "Delay",
-                    "De": "Delay",
-                    "Es": "Delay"
+                    "text": {
+                      "En": "Delay",
+                      "Fr": "Delay",
+                      "De": "Delay",
+                      "Es": "Delay"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -885,10 +965,14 @@
                 "type": "_GuiDropDownOption",
                 "label": {
                   "active": {
-                    "En": "Source",
-                    "Fr": "Source",
-                    "De": "Quelle",
-                    "Es": "Fuente"
+                    "text": {
+                      "En": "Source",
+                      "Fr": "Source",
+                      "De": "Quelle",
+                      "Es": "Fuente"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "options": [
@@ -938,10 +1022,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "Level",
-                    "Fr": "Niveau",
-                    "De": "Pegel",
-                    "Es": "Nivel"
+                    "text": {
+                      "En": "Level",
+                      "Fr": "Niveau",
+                      "De": "Pegel",
+                      "Es": "Nivel"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -976,16 +1064,24 @@
                 "type": "_GuiButtonToggle",
                 "label": {
                   "active": {
-                    "En": "RUN",
-                    "Fr": "EXEC",
-                    "De": "AUSFÜHREN",
-                    "Es": "EJEC"
+                    "text": {
+                      "En": "RUN",
+                      "Fr": "EXEC",
+                      "De": "AUSFÜHREN",
+                      "Es": "EJEC"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "STOP",
-                    "Fr": "STOP",
-                    "De": "STOP",
-                    "Es": "STOP"
+                    "text": {
+                      "En": "STOP",
+                      "Fr": "STOP",
+                      "De": "STOP",
+                      "Es": "STOP"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "style": {
@@ -1052,10 +1148,14 @@
                 "type": "_GuiDropDownOption",
                 "label": {
                   "active": {
-                    "En": "Math",
-                    "Fr": "Math",
-                    "De": "Math",
-                    "Es": "Matem"
+                    "text": {
+                      "En": "Math",
+                      "Fr": "Math",
+                      "De": "Math",
+                      "Es": "Matem"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "options": [
@@ -1097,10 +1197,14 @@
                 "type": "_GuiDropDownOption",
                 "label": {
                   "active": {
-                    "En": "Src A",
-                    "Fr": "Src A",
-                    "De": "Src A",
-                    "Es": "Src A"
+                    "text": {
+                      "En": "Src A",
+                      "Fr": "Src A",
+                      "De": "Src A",
+                      "Es": "Src A"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "options": [
@@ -1142,10 +1246,14 @@
                 "type": "_GuiDropDownOption",
                 "label": {
                   "active": {
-                    "En": "Src B",
-                    "Fr": "Src B",
-                    "De": "Src B",
-                    "Es": "Src B"
+                    "text": {
+                      "En": "Src B",
+                      "Fr": "Src B",
+                      "De": "Src B",
+                      "Es": "Src B"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "options": [
@@ -1201,10 +1309,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "CH1 Vpp",
-                    "Fr": "CH 1",
-                    "De": "CH 1",
-                    "Es": "CH 1"
+                    "text": {
+                      "En": "CH1 Vpp",
+                      "Fr": "CH 1",
+                      "De": "CH 1",
+                      "Es": "CH 1"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -1242,10 +1354,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "CH2 Vpp",
-                    "Fr": "CH 2",
-                    "De": "CH 2",
-                    "Es": "CH 2"
+                    "text": {
+                      "En": "CH2 Vpp",
+                      "Fr": "CH 2",
+                      "De": "CH 2",
+                      "Es": "CH 2"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -1283,10 +1399,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "CH3 Vpp",
-                    "Fr": "CH 3",
-                    "De": "CH 3",
-                    "Es": "CH 3"
+                    "text": {
+                      "En": "CH3 Vpp",
+                      "Fr": "CH 3",
+                      "De": "CH 3",
+                      "Es": "CH 3"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {
@@ -1324,10 +1444,14 @@
                 },
                 "label": {
                   "active": {
-                    "En": "CH4 Vpp",
-                    "Fr": "CH 4",
-                    "De": "CH 4",
-                    "Es": "CH 4"
+                    "text": {
+                      "En": "CH4 Vpp",
+                      "Fr": "CH 4",
+                      "De": "CH 4",
+                      "Es": "CH 4"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "message_details": {

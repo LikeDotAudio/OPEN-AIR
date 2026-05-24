@@ -17,12 +17,12 @@
           "En": "Card 5 - Snake Channel Routing",
           "Fr": "Card 5 - Snake Canal Routing",
           "De": "Card 5 - Snake Kanal Routing",
-          "Es": "Card 5 - Snake Canal Routing"
+          "Es": "Card 5 - Snake Canal Routing",
+          "show_label": false
         },
         "layout": {
           "sticky": ""
         },
-        "show_label": false,
         "fields": {
           "Bus_AB0_Left_Out": {
             "type": "_GuiButtonToggler",
@@ -62,16 +62,24 @@
                 "value": "601",
                 "label": {
                   "active": {
-                    "En": "Ch 1 (L)",
-                    "Fr": "Ch 1",
-                    "De": "Ch 1",
-                    "Es": "Ch 1"
+                    "text": {
+                      "En": "Ch 1 (L)",
+                      "Fr": "Ch 1",
+                      "De": "Ch 1",
+                      "Es": "Ch 1"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Ch 1 (L)",
-                    "Fr": "Ch 1",
-                    "De": "Ch 1",
-                    "Es": "Ch 1"
+                    "text": {
+                      "En": "Ch 1 (L)",
+                      "Fr": "Ch 1",
+                      "De": "Ch 1",
+                      "Es": "Ch 1"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -85,16 +93,24 @@
                 "value": "602",
                 "label": {
                   "active": {
-                    "En": "Ch 3 (L)",
-                    "Fr": "Ch 3",
-                    "De": "Ch 3",
-                    "Es": "Ch 3"
+                    "text": {
+                      "En": "Ch 3 (L)",
+                      "Fr": "Ch 3",
+                      "De": "Ch 3",
+                      "Es": "Ch 3"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Ch 3 (L)",
-                    "Fr": "Ch 3",
-                    "De": "Ch 3",
-                    "Es": "Ch 3"
+                    "text": {
+                      "En": "Ch 3 (L)",
+                      "Fr": "Ch 3",
+                      "De": "Ch 3",
+                      "Es": "Ch 3"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -108,16 +124,24 @@
                 "value": "603",
                 "label": {
                   "active": {
-                    "En": "Ch 5 (L)",
-                    "Fr": "Ch 5",
-                    "De": "Ch 5",
-                    "Es": "Ch 5"
+                    "text": {
+                      "En": "Ch 5 (L)",
+                      "Fr": "Ch 5",
+                      "De": "Ch 5",
+                      "Es": "Ch 5"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Ch 5 (L)",
-                    "Fr": "Ch 5",
-                    "De": "Ch 5",
-                    "Es": "Ch 5"
+                    "text": {
+                      "En": "Ch 5 (L)",
+                      "Fr": "Ch 5",
+                      "De": "Ch 5",
+                      "Es": "Ch 5"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -131,16 +155,24 @@
                 "value": "604",
                 "label": {
                   "active": {
-                    "En": "Ch 7 (L)",
-                    "Fr": "Ch 7",
-                    "De": "Ch 7",
-                    "Es": "Ch 7"
+                    "text": {
+                      "En": "Ch 7 (L)",
+                      "Fr": "Ch 7",
+                      "De": "Ch 7",
+                      "Es": "Ch 7"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Ch 7 (L)",
-                    "Fr": "Ch 7",
-                    "De": "Ch 7",
-                    "Es": "Ch 7"
+                    "text": {
+                      "En": "Ch 7 (L)",
+                      "Fr": "Ch 7",
+                      "De": "Ch 7",
+                      "Es": "Ch 7"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -154,16 +186,24 @@
                 "value": "605",
                 "label": {
                   "active": {
-                    "En": "Ch 9 (L)",
-                    "Fr": "Ch 9",
-                    "De": "Ch 9",
-                    "Es": "Ch 9"
+                    "text": {
+                      "En": "Ch 9 (L)",
+                      "Fr": "Ch 9",
+                      "De": "Ch 9",
+                      "Es": "Ch 9"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Ch 9 (L)",
-                    "Fr": "Ch 9",
-                    "De": "Ch 9",
-                    "Es": "Ch 9"
+                    "text": {
+                      "En": "Ch 9 (L)",
+                      "Fr": "Ch 9",
+                      "De": "Ch 9",
+                      "Es": "Ch 9"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -177,16 +217,24 @@
                 "value": "606",
                 "label": {
                   "active": {
-                    "En": "Ch 11 (L)",
-                    "Fr": "Ch 11",
-                    "De": "Ch 11",
-                    "Es": "Ch 11"
+                    "text": {
+                      "En": "Ch 11 (L)",
+                      "Fr": "Ch 11",
+                      "De": "Ch 11",
+                      "Es": "Ch 11"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Ch 11 (L)",
-                    "Fr": "Ch 11",
-                    "De": "Ch 11",
-                    "Es": "Ch 11"
+                    "text": {
+                      "En": "Ch 11 (L)",
+                      "Fr": "Ch 11",
+                      "De": "Ch 11",
+                      "Es": "Ch 11"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -249,16 +297,24 @@
                 "value": "621",
                 "label": {
                   "active": {
-                    "En": "Ch 2 (R)",
-                    "Fr": "Ch 2",
-                    "De": "Ch 2",
-                    "Es": "Ch 2"
+                    "text": {
+                      "En": "Ch 2 (R)",
+                      "Fr": "Ch 2",
+                      "De": "Ch 2",
+                      "Es": "Ch 2"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Ch 2 (R)",
-                    "Fr": "Ch 2",
-                    "De": "Ch 2",
-                    "Es": "Ch 2"
+                    "text": {
+                      "En": "Ch 2 (R)",
+                      "Fr": "Ch 2",
+                      "De": "Ch 2",
+                      "Es": "Ch 2"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -272,16 +328,24 @@
                 "value": "622",
                 "label": {
                   "active": {
-                    "En": "Ch 4 (R)",
-                    "Fr": "Ch 4",
-                    "De": "Ch 4",
-                    "Es": "Ch 4"
+                    "text": {
+                      "En": "Ch 4 (R)",
+                      "Fr": "Ch 4",
+                      "De": "Ch 4",
+                      "Es": "Ch 4"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Ch 4 (R)",
-                    "Fr": "Ch 4",
-                    "De": "Ch 4",
-                    "Es": "Ch 4"
+                    "text": {
+                      "En": "Ch 4 (R)",
+                      "Fr": "Ch 4",
+                      "De": "Ch 4",
+                      "Es": "Ch 4"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -295,16 +359,24 @@
                 "value": "623",
                 "label": {
                   "active": {
-                    "En": "Ch 6 (R)",
-                    "Fr": "Ch 6",
-                    "De": "Ch 6",
-                    "Es": "Ch 6"
+                    "text": {
+                      "En": "Ch 6 (R)",
+                      "Fr": "Ch 6",
+                      "De": "Ch 6",
+                      "Es": "Ch 6"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Ch 6 (R)",
-                    "Fr": "Ch 6",
-                    "De": "Ch 6",
-                    "Es": "Ch 6"
+                    "text": {
+                      "En": "Ch 6 (R)",
+                      "Fr": "Ch 6",
+                      "De": "Ch 6",
+                      "Es": "Ch 6"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -318,16 +390,24 @@
                 "value": "624",
                 "label": {
                   "active": {
-                    "En": "Ch 8 (R)",
-                    "Fr": "Ch 8",
-                    "De": "Ch 8",
-                    "Es": "Ch 8"
+                    "text": {
+                      "En": "Ch 8 (R)",
+                      "Fr": "Ch 8",
+                      "De": "Ch 8",
+                      "Es": "Ch 8"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Ch 8 (R)",
-                    "Fr": "Ch 8",
-                    "De": "Ch 8",
-                    "Es": "Ch 8"
+                    "text": {
+                      "En": "Ch 8 (R)",
+                      "Fr": "Ch 8",
+                      "De": "Ch 8",
+                      "Es": "Ch 8"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -341,16 +421,24 @@
                 "value": "625",
                 "label": {
                   "active": {
-                    "En": "Ch 10 (R)",
-                    "Fr": "Ch 10",
-                    "De": "Ch 10",
-                    "Es": "Ch 10"
+                    "text": {
+                      "En": "Ch 10 (R)",
+                      "Fr": "Ch 10",
+                      "De": "Ch 10",
+                      "Es": "Ch 10"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Ch 10 (R)",
-                    "Fr": "Ch 10",
-                    "De": "Ch 10",
-                    "Es": "Ch 10"
+                    "text": {
+                      "En": "Ch 10 (R)",
+                      "Fr": "Ch 10",
+                      "De": "Ch 10",
+                      "Es": "Ch 10"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -364,16 +452,24 @@
                 "value": "626",
                 "label": {
                   "active": {
-                    "En": "Ch 12 (R)",
-                    "Fr": "Ch 12",
-                    "De": "Ch 12",
-                    "Es": "Ch 12"
+                    "text": {
+                      "En": "Ch 12 (R)",
+                      "Fr": "Ch 12",
+                      "De": "Ch 12",
+                      "Es": "Ch 12"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Ch 12 (R)",
-                    "Fr": "Ch 12",
-                    "De": "Ch 12",
-                    "Es": "Ch 12"
+                    "text": {
+                      "En": "Ch 12 (R)",
+                      "Fr": "Ch 12",
+                      "De": "Ch 12",
+                      "Es": "Ch 12"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -436,16 +532,24 @@
                 "value": "611",
                 "label": {
                   "active": {
-                    "En": "Ch 13 (L)",
-                    "Fr": "Ch 13",
-                    "De": "Ch 13",
-                    "Es": "Ch 13"
+                    "text": {
+                      "En": "Ch 13 (L)",
+                      "Fr": "Ch 13",
+                      "De": "Ch 13",
+                      "Es": "Ch 13"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Ch 13 (L)",
-                    "Fr": "Ch 13",
-                    "De": "Ch 13",
-                    "Es": "Ch 13"
+                    "text": {
+                      "En": "Ch 13 (L)",
+                      "Fr": "Ch 13",
+                      "De": "Ch 13",
+                      "Es": "Ch 13"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -459,16 +563,24 @@
                 "value": "612",
                 "label": {
                   "active": {
-                    "En": "Ch 15 (L)",
-                    "Fr": "Ch 15",
-                    "De": "Ch 15",
-                    "Es": "Ch 15"
+                    "text": {
+                      "En": "Ch 15 (L)",
+                      "Fr": "Ch 15",
+                      "De": "Ch 15",
+                      "Es": "Ch 15"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Ch 15 (L)",
-                    "Fr": "Ch 15",
-                    "De": "Ch 15",
-                    "Es": "Ch 15"
+                    "text": {
+                      "En": "Ch 15 (L)",
+                      "Fr": "Ch 15",
+                      "De": "Ch 15",
+                      "Es": "Ch 15"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -482,16 +594,24 @@
                 "value": "613",
                 "label": {
                   "active": {
-                    "En": "Ch 17 (L)",
-                    "Fr": "Ch 17",
-                    "De": "Ch 17",
-                    "Es": "Ch 17"
+                    "text": {
+                      "En": "Ch 17 (L)",
+                      "Fr": "Ch 17",
+                      "De": "Ch 17",
+                      "Es": "Ch 17"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Ch 17 (L)",
-                    "Fr": "Ch 17",
-                    "De": "Ch 17",
-                    "Es": "Ch 17"
+                    "text": {
+                      "En": "Ch 17 (L)",
+                      "Fr": "Ch 17",
+                      "De": "Ch 17",
+                      "Es": "Ch 17"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -505,16 +625,24 @@
                 "value": "614",
                 "label": {
                   "active": {
-                    "En": "Ch 19 (L)",
-                    "Fr": "Ch 19",
-                    "De": "Ch 19",
-                    "Es": "Ch 19"
+                    "text": {
+                      "En": "Ch 19 (L)",
+                      "Fr": "Ch 19",
+                      "De": "Ch 19",
+                      "Es": "Ch 19"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Ch 19 (L)",
-                    "Fr": "Ch 19",
-                    "De": "Ch 19",
-                    "Es": "Ch 19"
+                    "text": {
+                      "En": "Ch 19 (L)",
+                      "Fr": "Ch 19",
+                      "De": "Ch 19",
+                      "Es": "Ch 19"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -528,16 +656,24 @@
                 "value": "615",
                 "label": {
                   "active": {
-                    "En": "Ch 21 (L)",
-                    "Fr": "Ch 21",
-                    "De": "Ch 21",
-                    "Es": "Ch 21"
+                    "text": {
+                      "En": "Ch 21 (L)",
+                      "Fr": "Ch 21",
+                      "De": "Ch 21",
+                      "Es": "Ch 21"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Ch 21 (L)",
-                    "Fr": "Ch 21",
-                    "De": "Ch 21",
-                    "Es": "Ch 21"
+                    "text": {
+                      "En": "Ch 21 (L)",
+                      "Fr": "Ch 21",
+                      "De": "Ch 21",
+                      "Es": "Ch 21"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -551,16 +687,24 @@
                 "value": "616",
                 "label": {
                   "active": {
-                    "En": "Ch 23 (L)",
-                    "Fr": "Ch 23",
-                    "De": "Ch 23",
-                    "Es": "Ch 23"
+                    "text": {
+                      "En": "Ch 23 (L)",
+                      "Fr": "Ch 23",
+                      "De": "Ch 23",
+                      "Es": "Ch 23"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Ch 23 (L)",
-                    "Fr": "Ch 23",
-                    "De": "Ch 23",
-                    "Es": "Ch 23"
+                    "text": {
+                      "En": "Ch 23 (L)",
+                      "Fr": "Ch 23",
+                      "De": "Ch 23",
+                      "Es": "Ch 23"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -623,16 +767,24 @@
                 "value": "631",
                 "label": {
                   "active": {
-                    "En": "Ch 14 (R)",
-                    "Fr": "Ch 14",
-                    "De": "Ch 14",
-                    "Es": "Ch 14"
+                    "text": {
+                      "En": "Ch 14 (R)",
+                      "Fr": "Ch 14",
+                      "De": "Ch 14",
+                      "Es": "Ch 14"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Ch 14 (R)",
-                    "Fr": "Ch 14",
-                    "De": "Ch 14",
-                    "Es": "Ch 14"
+                    "text": {
+                      "En": "Ch 14 (R)",
+                      "Fr": "Ch 14",
+                      "De": "Ch 14",
+                      "Es": "Ch 14"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -646,16 +798,24 @@
                 "value": "632",
                 "label": {
                   "active": {
-                    "En": "Ch 16 (R)",
-                    "Fr": "Ch 16",
-                    "De": "Ch 16",
-                    "Es": "Ch 16"
+                    "text": {
+                      "En": "Ch 16 (R)",
+                      "Fr": "Ch 16",
+                      "De": "Ch 16",
+                      "Es": "Ch 16"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Ch 16 (R)",
-                    "Fr": "Ch 16",
-                    "De": "Ch 16",
-                    "Es": "Ch 16"
+                    "text": {
+                      "En": "Ch 16 (R)",
+                      "Fr": "Ch 16",
+                      "De": "Ch 16",
+                      "Es": "Ch 16"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -669,16 +829,24 @@
                 "value": "633",
                 "label": {
                   "active": {
-                    "En": "Ch 18 (R)",
-                    "Fr": "Ch 18",
-                    "De": "Ch 18",
-                    "Es": "Ch 18"
+                    "text": {
+                      "En": "Ch 18 (R)",
+                      "Fr": "Ch 18",
+                      "De": "Ch 18",
+                      "Es": "Ch 18"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Ch 18 (R)",
-                    "Fr": "Ch 18",
-                    "De": "Ch 18",
-                    "Es": "Ch 18"
+                    "text": {
+                      "En": "Ch 18 (R)",
+                      "Fr": "Ch 18",
+                      "De": "Ch 18",
+                      "Es": "Ch 18"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -692,16 +860,24 @@
                 "value": "634",
                 "label": {
                   "active": {
-                    "En": "Ch 20 (R)",
-                    "Fr": "Ch 20",
-                    "De": "Ch 20",
-                    "Es": "Ch 20"
+                    "text": {
+                      "En": "Ch 20 (R)",
+                      "Fr": "Ch 20",
+                      "De": "Ch 20",
+                      "Es": "Ch 20"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Ch 20 (R)",
-                    "Fr": "Ch 20",
-                    "De": "Ch 20",
-                    "Es": "Ch 20"
+                    "text": {
+                      "En": "Ch 20 (R)",
+                      "Fr": "Ch 20",
+                      "De": "Ch 20",
+                      "Es": "Ch 20"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -715,16 +891,24 @@
                 "value": "635",
                 "label": {
                   "active": {
-                    "En": "Ch 22 (R)",
-                    "Fr": "Ch 22",
-                    "De": "Ch 22",
-                    "Es": "Ch 22"
+                    "text": {
+                      "En": "Ch 22 (R)",
+                      "Fr": "Ch 22",
+                      "De": "Ch 22",
+                      "Es": "Ch 22"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Ch 22 (R)",
-                    "Fr": "Ch 22",
-                    "De": "Ch 22",
-                    "Es": "Ch 22"
+                    "text": {
+                      "En": "Ch 22 (R)",
+                      "Fr": "Ch 22",
+                      "De": "Ch 22",
+                      "Es": "Ch 22"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {
@@ -738,16 +922,24 @@
                 "value": "636",
                 "label": {
                   "active": {
-                    "En": "Ch 24 (R)",
-                    "Fr": "Ch 24",
-                    "De": "Ch 24",
-                    "Es": "Ch 24"
+                    "text": {
+                      "En": "Ch 24 (R)",
+                      "Fr": "Ch 24",
+                      "De": "Ch 24",
+                      "Es": "Ch 24"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   },
                   "inactive": {
-                    "En": "Ch 24 (R)",
-                    "Fr": "Ch 24",
-                    "De": "Ch 24",
-                    "Es": "Ch 24"
+                    "text": {
+                      "En": "Ch 24 (R)",
+                      "Fr": "Ch 24",
+                      "De": "Ch 24",
+                      "Es": "Ch 24"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "description": {

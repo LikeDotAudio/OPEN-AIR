@@ -159,7 +159,7 @@ const DynamicGraph = ({ value: mqttData, config }) => {
         <div style={{ width: width, height: height, display: 'flex', flexDirection: 'column' }}>
             <div 
                 ref={chartRef} 
-                style={{ flexGrow: 1, width: '100%', minHeight: '100px', border: '1px solid #333', borderRadius: '4px', backgroundColor: '#111' }} 
+                style={{ flexGrow: 1, width: '100%', minHeight: '100px', border: '1px solid #333', borderRadius: '4px', backgroundColor: (window.OaTransparency ? window.OaTransparency.bg(config, '#111') : '#111') }} 
             />
         </div>
     );

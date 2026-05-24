@@ -90,7 +90,7 @@ const MidiKeyboard = ({ value, onChange, config }) => {
     }
 
     return (
-        <div style={{ padding: '10px', backgroundColor: '#1a1a1a', borderRadius: '4px', border: '1px solid #333' }}>
+        <div style={{ padding: '10px', backgroundColor: (window.OaTransparency ? window.OaTransparency.bg(config, '#1a1a1a') : '#1a1a1a'), borderRadius: '4px', border: '1px solid #333' }}>
             <svg width={w} height={h} style={{ cursor: 'pointer', touchAction: 'none' }}>
                 {whiteKeys}
                 {blackKeys}

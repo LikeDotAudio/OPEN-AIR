@@ -9,7 +9,18 @@
  * so it never feeds back into itself (no jiggle).
  */
 const FaderDial = ({ value, onChange, config }) => {
-    const title = config?.label?.En || config?.label_active?.En || "Composite";
+    const title = config?.label?.En || config?.label_active?.En || (typeof config?.label === 'string' ? config.label : "Composite");
+    // show_label (hoisted from label.show_label by FieldComponent) toggles the
+    // composite's title. Default: shown when the key is absent.
+    const showLabel = config?.show_label !== false;
+    // Container background is TRANSPARENT by default so the composite sits cleanly
+    // on whatever panel/canvas is behind it (it's a control group, not a card).
+    // OaTransparency still lets a node opt into a tint via cosmetics.bg_opacity, or
+    // a solid fill via cosmetics.background. Border is dropped when transparent so
+    // no orphan box outline remains.
+    const _bgFill = config?.cosmetics?.background ?? config?.background ?? 'transparent';
+    const rootBg = window.OaTransparency ? window.OaTransparency.bg(config, _bgFill) : _bgFill;
+    const rootBorder = (rootBg && rootBg !== 'transparent') ? '1px solid #111' : 'none';
     // min/max may live under domain.primary OR at the top level (the
     // _Horizontal_with_dial_Value schema stores them top-level, as strings).
     const _num = (v, d) => { const n = parseFloat(v); return Number.isNaN(n) ? d : n; };
@@ -76,11 +87,31 @@ const FaderDial = ({ value, onChange, config }) => {
     const faderH = Math.max(14, H - pad * 2 - labelFont - 4); // leave room for the label above
     const gap = Math.max(6, Math.min(18, Math.round(H * 0.18)));
 
-    // column_spacing [fader, knob, value] = left spacing of each sub-element.
-    // Scales with the composite height when fluid; falls back to the uniform gap.
-    const cs = Array.isArray(config?.column_spacing) ? config.column_spacing : null;
-    const csScale = fluid ? (H / 80) : 1;
-    const csM = (i) => cs ? `${Math.max(0, Math.round((cs[i] || 0) * csScale))}px` : undefined;
+    // Value readout config (value_config.*): text colour, background, font px,
+    // width in ch, height px. Falls back to the auto/scaled defaults.
+    const vc = config?.value_config || {};
+    const vColor = vc.colour || vc.color || '#fff';
+    const vBgRaw = vc.bg_color || vc.background || '#111';
+    const vBg = window.OaTransparency ? window.OaTransparency.bg(config, vBgRaw) : vBgRaw;
+    const vFont = (vc.font != null) ? vc.font : valueFont;
+    const vWidthCh = (vc.width != null) ? vc.width : valueChars;
+    const vHeight = (vc.height != null) ? vc.height : null;
+
+    // column_spacing [fader, knob, value] = the SHARE OF WIDTH each sub-element
+    // column consumes. The three numbers are relative weights normalised to
+    // percentages (so [122,30,10] => fader 75% / knob 19% / value 6%, and any
+    // set that already sums to 100 maps 1:1). Each column's flex-basis is set to
+    // its percentage; the uniform `gap` is dropped so the percentages add up to
+    // the full row. Falls back to the auto layout (fader fills, knob/value to
+    // content) when no column_spacing is present.
+    const cs = Array.isArray(config?.layout?.column_spacing) ? config.layout.column_spacing
+             : (Array.isArray(config?.column_spacing) ? config.column_spacing : null);
+    const csTotal = cs ? cs.reduce((a, b) => a + (Math.max(0, parseFloat(b)) || 0), 0) : 0;
+    const csPct = (i) => `${((Math.max(0, parseFloat(cs[i])) || 0) / csTotal) * 100}%`;
+    // Per-column flex style: explicit % basis when column_spacing is set,
+    // otherwise the supplied fallback (auto sizing).
+    const colFlex = (i, fallback) =>
+        (cs && csTotal > 0) ? { flex: `0 1 ${csPct(i)}`, minWidth: 0 } : fallback;
 
     const faderConfig = {
         ...config,
@@ -90,7 +121,11 @@ const FaderDial = ({ value, onChange, config }) => {
         domain: { primary: { min, max } },
         geometry: { ...config?.geometry, orientation: 'horizontal', width: fluid ? '100%' : 250, height: fluid ? faderH : 40 },
         show_value: false,
-        show_label: false
+        show_label: false,
+        // The composite renders its OWN title; never let the embedded fader draw a
+        // duplicate label of its own.
+        label: undefined,
+        label_active: undefined
     };
 
     const knobConfig = {
@@ -118,36 +153,39 @@ const FaderDial = ({ value, onChange, config }) => {
     return (
         <div ref={rootRef} style={{
             display: 'flex', flexDirection: 'row', alignItems: 'center',
-            backgroundColor: '#2b2b2b', padding: `${pad}px`, borderRadius: '4px',
-            border: '1px solid #111', gap: cs ? 0 : `${gap}px`,
+            backgroundColor: rootBg, padding: `${pad}px`, borderRadius: '4px',
+            border: rootBorder, gap: cs ? 0 : `${gap}px`,
             width: fluid ? '100%' : 'fit-content',
             height: (fluid && heightConstrained) ? '100%' : 'auto',
             overflow: 'hidden', boxSizing: 'border-box',
         }}>
             {/* Left: Label & Fader (fills the width when fluid) */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: `${Math.round(gap / 3)}px`, marginLeft: csM(0), ...(fluid ? { flex: 1, minWidth: 0 } : {}) }}>
-                <div style={{ fontSize: `${labelFont}px`, color: '#888', fontWeight: 'bold', textTransform: 'uppercase', paddingLeft: 5 }}>
-                    {title}
-                </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: `${Math.round(gap / 3)}px`, ...colFlex(0, fluid ? { flex: 1, minWidth: 0 } : {}) }}>
+                {showLabel && (
+                    <div style={{ fontSize: `${config?.label_text_size ?? labelFont}px`, color: config?.label_text_color || '#888', fontWeight: 'bold', textTransform: 'uppercase', paddingLeft: 5 }}>
+                        {title}
+                    </div>
+                )}
                 {window.Fader && <window.Fader value={value0} onChange={handleFaderChange} config={faderConfig} />}
             </div>
 
             {/* Middle: Dial Knob (square => round) */}
-            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', flexShrink: 0, marginLeft: csM(1) }}>
+            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', ...colFlex(1, { flexShrink: 0 }) }}>
                 {window.Knob && <window.Knob value={knobVal} onChange={handleKnobChange} config={knobConfig} />}
             </div>
 
             {/* Right: Value & Units */}
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2, flexShrink: 0, marginLeft: csM(2) }}>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2, ...colFlex(2, { flexShrink: 0 }) }}>
                 <input type="text" value={inputValue}
                     onChange={handleTextChange} onBlur={handleTextBlur} onKeyDown={handleTextKeyDown}
                     style={{
-                        width: `calc(${valueChars}ch + 4px)`, boxSizing: 'content-box',
-                        backgroundColor: '#111', color: '#fff', border: '1px inset #222',
+                        width: `calc(${vWidthCh}ch + 4px)`, boxSizing: 'content-box',
+                        ...(vHeight ? { height: `${vHeight}px` } : {}),
+                        backgroundColor: vBg, color: vColor, border: '1px inset #222',
                         padding: '2px 4px', textAlign: 'center', fontFamily: 'monospace',
-                        fontSize: `${valueFont}px`, borderRadius: '3px', outline: 'none',
+                        fontSize: `${vFont}px`, borderRadius: '3px', outline: 'none',
                     }} />
-                <div style={{ fontSize: `${labelFont}px`, color: '#888' }}>{units}</div>
+                <div style={{ fontSize: `${labelFont}px`, color: vColor }}>{units}</div>
             </div>
         </div>
     );

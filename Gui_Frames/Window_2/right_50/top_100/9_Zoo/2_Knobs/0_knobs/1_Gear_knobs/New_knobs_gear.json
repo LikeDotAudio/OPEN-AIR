@@ -44,7 +44,8 @@
               "En": "Mono 8T",
               "Fr": "Mono 8T",
               "De": "Mono 8T",
-              "Es": "Mono 8T"
+              "Es": "Mono 8T",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -65,8 +66,7 @@
                 "primary": "white"
               },
               "style_flags": {
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "visualization": "gear",
               "pointer": {
@@ -103,7 +103,8 @@
               "En": "Mono 12T",
               "Fr": "Mono 12T",
               "De": "Mono 12T",
-              "Es": "Mono 12T"
+              "Es": "Mono 12T",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -124,8 +125,7 @@
                 "primary": "white"
               },
               "style_flags": {
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "visualization": "gear",
               "pointer": {
@@ -162,7 +162,8 @@
               "En": "Mono 24T",
               "Fr": "Mono 24T",
               "De": "Mono 24T",
-              "Es": "Mono 24T"
+              "Es": "Mono 24T",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -183,8 +184,7 @@
                 "primary": "white"
               },
               "style_flags": {
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "visualization": "gear",
               "pointer": {
@@ -221,7 +221,8 @@
               "En": "Mono 6T",
               "Fr": "Mono 6T",
               "De": "Mono 6T",
-              "Es": "Mono 6T"
+              "Es": "Mono 6T",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -242,8 +243,7 @@
                 "primary": "white"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -280,7 +280,8 @@
               "En": "Mono Text",
               "Fr": "Mono Text",
               "De": "Mono Text",
-              "Es": "Mono Text"
+              "Es": "Mono Text",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -301,8 +302,7 @@
                 "primary": "white"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -339,7 +339,8 @@
               "En": "Grey 10T",
               "Fr": "Grey 10T",
               "De": "Grey 10T",
-              "Es": "Grey 10T"
+              "Es": "Grey 10T",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -360,8 +361,7 @@
                 "primary": "black"
               },
               "style_flags": {
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "visualization": "gear",
               "pointer": {
@@ -398,7 +398,8 @@
               "En": "Red 20T",
               "Fr": "Red 20T",
               "De": "Red 20T",
-              "Es": "Red 20T"
+              "Es": "Red 20T",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -419,8 +420,7 @@
                 "primary": "white"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -457,7 +457,8 @@
               "En": "Blue 4T",
               "Fr": "Blue 4T",
               "De": "Blue 4T",
-              "Es": "Blue 4T"
+              "Es": "Blue 4T",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -478,8 +479,7 @@
                 "primary": "white"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -516,7 +516,8 @@
               "En": "Grn 32T",
               "Fr": "Grn 32T",
               "De": "Grn 32T",
-              "Es": "Grn 32T"
+              "Es": "Grn 32T",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -537,8 +538,7 @@
                 "primary": "black"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -575,7 +575,8 @@
               "En": "Yel 5T",
               "Fr": "Yel 5T",
               "De": "Yel 5T",
-              "Es": "Yel 5T"
+              "Es": "Yel 5T",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -596,8 +597,7 @@
                 "primary": "black"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -634,7 +634,8 @@
               "En": "White 8T",
               "Fr": "White 8T",
               "De": "White 8T",
-              "Es": "White 8T"
+              "Es": "White 8T",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -655,8 +656,7 @@
                 "primary": "black"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -693,7 +693,8 @@
               "En": "Orange 12T",
               "Fr": "Orange 12T",
               "De": "Orange 12T",
-              "Es": "Orange 12T"
+              "Es": "Orange 12T",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -714,8 +715,7 @@
                 "primary": "black"
               },
               "style_flags": {
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "visualization": "gear",
               "pointer": {
@@ -752,7 +752,8 @@
               "En": "Purp 18T",
               "Fr": "Purp 18T",
               "De": "Purp 18T",
-              "Es": "Purp 18T"
+              "Es": "Purp 18T",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -773,8 +774,7 @@
                 "primary": "white"
               },
               "style_flags": {
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "visualization": "gear",
               "pointer": {
@@ -811,7 +811,8 @@
               "En": "Cyan 9T",
               "Fr": "Cyan 9T",
               "De": "Cyan 9T",
-              "Es": "Cyan 9T"
+              "Es": "Cyan 9T",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -832,8 +833,7 @@
                 "primary": "black"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -870,7 +870,8 @@
               "En": "Pink 7T",
               "Fr": "Pink 7T",
               "De": "Pink 7T",
-              "Es": "Pink 7T"
+              "Es": "Pink 7T",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -891,8 +892,7 @@
                 "primary": "black"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -929,7 +929,8 @@
               "En": "M_Line_8",
               "Fr": "M_Line_8",
               "De": "M_Line_8",
-              "Es": "M_Line_8"
+              "Es": "M_Line_8",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -950,8 +951,7 @@
                 "primary": "white"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -988,7 +988,8 @@
               "En": "M_Tri_12",
               "Fr": "M_Tri_12",
               "De": "M_Tri_12",
-              "Es": "M_Tri_12"
+              "Es": "M_Tri_12",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1009,8 +1010,7 @@
                 "primary": "white"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -1047,7 +1047,8 @@
               "En": "M_Notch_16",
               "Fr": "M_Notch_16",
               "De": "M_Notch_16",
-              "Es": "M_Notch_16"
+              "Es": "M_Notch_16",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1068,8 +1069,7 @@
                 "primary": "white"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -1106,7 +1106,8 @@
               "En": "M_Dot_20",
               "Fr": "M_Dot_20",
               "De": "M_Dot_20",
-              "Es": "M_Dot_20"
+              "Es": "M_Dot_20",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1127,8 +1128,7 @@
                 "primary": "white"
               },
               "style_flags": {
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "visualization": "gear",
               "pointer": {
@@ -1165,7 +1165,8 @@
               "En": "M_Num_24",
               "Fr": "M_Num_24",
               "De": "M_Num_24",
-              "Es": "M_Num_24"
+              "Es": "M_Num_24",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1186,8 +1187,7 @@
                 "primary": "white"
               },
               "style_flags": {
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "visualization": "gear",
               "pointer": {
@@ -1224,7 +1224,8 @@
               "En": "Tomato 8",
               "Fr": "Tomato 8",
               "De": "Tomato 8",
-              "Es": "Tomato 8"
+              "Es": "Tomato 8",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1245,8 +1246,7 @@
                 "primary": "white"
               },
               "style_flags": {
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "visualization": "gear",
               "pointer": {
@@ -1283,7 +1283,8 @@
               "En": "Olive 12",
               "Fr": "Olive 12",
               "De": "Olive 12",
-              "Es": "Olive 12"
+              "Es": "Olive 12",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1304,8 +1305,7 @@
                 "primary": "black"
               },
               "style_flags": {
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "visualization": "gear",
               "pointer": {
@@ -1342,7 +1342,8 @@
               "En": "Teal 16",
               "Fr": "Teal 16",
               "De": "Teal 16",
-              "Es": "Teal 16"
+              "Es": "Teal 16",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1363,8 +1364,7 @@
                 "primary": "white"
               },
               "style_flags": {
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "visualization": "gear",
               "pointer": {
@@ -1401,7 +1401,8 @@
               "En": "Navy 24",
               "Fr": "Navy 24",
               "De": "Navy 24",
-              "Es": "Navy 24"
+              "Es": "Navy 24",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1422,8 +1423,7 @@
                 "primary": "white"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -1460,7 +1460,8 @@
               "En": "Maroon 6",
               "Fr": "Maroon 6",
               "De": "Maroon 6",
-              "Es": "Maroon 6"
+              "Es": "Maroon 6",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1481,8 +1482,7 @@
                 "primary": "white"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -1519,7 +1519,8 @@
               "En": "Orchid 14",
               "Fr": "Orchid 14",
               "De": "Orchid 14",
-              "Es": "Orchid 14"
+              "Es": "Orchid 14",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1540,8 +1541,7 @@
                 "primary": "white"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -1578,7 +1578,8 @@
               "En": "Pink2 22",
               "Fr": "Pink2 22",
               "De": "Pink2 22",
-              "Es": "Pink2 22"
+              "Es": "Pink2 22",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1599,8 +1600,7 @@
                 "primary": "black"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -1637,7 +1637,8 @@
               "En": "SpgG 10",
               "Fr": "SpgG 10",
               "De": "SpgG 10",
-              "Es": "SpgG 10"
+              "Es": "SpgG 10",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1658,8 +1659,7 @@
                 "primary": "black"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -1696,7 +1696,8 @@
               "En": "FireB 30",
               "Fr": "FireB 30",
               "De": "FireB 30",
-              "Es": "FireB 30"
+              "Es": "FireB 30",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1717,8 +1718,7 @@
                 "primary": "white"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -1755,7 +1755,8 @@
               "En": "Dodg2 18",
               "Fr": "Dodg2 18",
               "De": "Dodg2 18",
-              "Es": "Dodg2 18"
+              "Es": "Dodg2 18",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1776,8 +1777,7 @@
                 "primary": "white"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -1814,7 +1814,8 @@
               "En": "Mono Inv 8",
               "Fr": "Mono Inv 8",
               "De": "Mono Inv 8",
-              "Es": "Mono Inv 8"
+              "Es": "Mono Inv 8",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1835,8 +1836,7 @@
                 "primary": "black"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -1873,7 +1873,8 @@
               "En": "Mono Inv 12",
               "Fr": "Mono Inv 12",
               "De": "Mono Inv 12",
-              "Es": "Mono Inv 12"
+              "Es": "Mono Inv 12",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1894,8 +1895,7 @@
                 "primary": "black"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -1932,7 +1932,8 @@
               "En": "Mono Inv 24",
               "Fr": "Mono Inv 24",
               "De": "Mono Inv 24",
-              "Es": "Mono Inv 24"
+              "Es": "Mono Inv 24",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -1953,8 +1954,7 @@
                 "primary": "black"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -1991,7 +1991,8 @@
               "En": "Khaki 7",
               "Fr": "Khaki 7",
               "De": "Khaki 7",
-              "Es": "Khaki 7"
+              "Es": "Khaki 7",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -2012,8 +2013,7 @@
                 "primary": "black"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -2050,7 +2050,8 @@
               "En": "PalT 11",
               "Fr": "PalT 11",
               "De": "PalT 11",
-              "Es": "PalT 11"
+              "Es": "PalT 11",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -2071,8 +2072,7 @@
                 "primary": "black"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -2109,7 +2109,8 @@
               "En": "Plum 9",
               "Fr": "Plum 9",
               "De": "Plum 9",
-              "Es": "Plum 9"
+              "Es": "Plum 9",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -2130,8 +2131,7 @@
                 "primary": "white"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -2168,7 +2168,8 @@
               "En": "PalV 13",
               "Fr": "PalV 13",
               "De": "PalV 13",
-              "Es": "PalV 13"
+              "Es": "PalV 13",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -2189,8 +2190,7 @@
                 "primary": "white"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -2227,7 +2227,8 @@
               "En": "MedS 15",
               "Fr": "MedS 15",
               "De": "MedS 15",
-              "Es": "MedS 15"
+              "Es": "MedS 15",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -2248,8 +2249,7 @@
                 "primary": "white"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -2286,7 +2286,8 @@
               "En": "DkR 17",
               "Fr": "DkR 17",
               "De": "DkR 17",
-              "Es": "DkR 17"
+              "Es": "DkR 17",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -2307,8 +2308,7 @@
                 "primary": "white"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -2345,7 +2345,8 @@
               "En": "StlB 19",
               "Fr": "StlB 19",
               "De": "StlB 19",
-              "Es": "StlB 19"
+              "Es": "StlB 19",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -2366,8 +2367,7 @@
                 "primary": "white"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -2404,7 +2404,8 @@
               "En": "Sal 21",
               "Fr": "Sal 21",
               "De": "Sal 21",
-              "Es": "Sal 21"
+              "Es": "Sal 21",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -2425,8 +2426,7 @@
                 "primary": "black"
               },
               "style_flags": {
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "visualization": "gear",
               "pointer": {
@@ -2463,7 +2463,8 @@
               "En": "YelG 23",
               "Fr": "YelG 23",
               "De": "YelG 23",
-              "Es": "YelG 23"
+              "Es": "YelG 23",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -2484,8 +2485,7 @@
                 "primary": "black"
               },
               "style_flags": {
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "visualization": "gear",
               "pointer": {
@@ -2522,7 +2522,8 @@
               "En": "MedB 25",
               "Fr": "MedB 25",
               "De": "MedB 25",
-              "Es": "MedB 25"
+              "Es": "MedB 25",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -2543,8 +2544,7 @@
                 "primary": "white"
               },
               "style_flags": {
-                "show_grid": true,
-                "show_label": true
+                "show_grid": true
               },
               "visualization": "gear",
               "pointer": {
@@ -2581,7 +2581,8 @@
               "En": "Lem 27",
               "Fr": "Lem 27",
               "De": "Lem 27",
-              "Es": "Lem 27"
+              "Es": "Lem 27",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -2602,8 +2603,7 @@
                 "primary": "black"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -2640,7 +2640,8 @@
               "En": "LtS 29",
               "Fr": "LtS 29",
               "De": "LtS 29",
-              "Es": "LtS 29"
+              "Es": "LtS 29",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -2661,8 +2662,7 @@
                 "primary": "black"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -2699,7 +2699,8 @@
               "En": "DkO 31",
               "Fr": "DkO 31",
               "De": "DkO 31",
-              "Es": "DkO 31"
+              "Es": "DkO 31",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -2720,8 +2721,7 @@
                 "primary": "white"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -2758,7 +2758,8 @@
               "En": "MedV 33",
               "Fr": "MedV 33",
               "De": "MedV 33",
-              "Es": "MedV 33"
+              "Es": "MedV 33",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -2779,8 +2780,7 @@
                 "primary": "white"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -2817,7 +2817,8 @@
               "En": "For 35",
               "Fr": "For 35",
               "De": "For 35",
-              "Es": "For 35"
+              "Es": "For 35",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -2838,8 +2839,7 @@
                 "primary": "white"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -2876,7 +2876,8 @@
               "En": "Sie 40",
               "Fr": "Sie 40",
               "De": "Sie 40",
-              "Es": "Sie 40"
+              "Es": "Sie 40",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -2897,8 +2898,7 @@
                 "primary": "white"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
@@ -2935,7 +2935,8 @@
               "En": "SB2 50",
               "Fr": "SB2 50",
               "De": "SB2 50",
-              "Es": "SB2 50"
+              "Es": "SB2 50",
+              "show_label": true
             },
             "notes": "",
             "geometry": {
@@ -2956,8 +2957,7 @@
                 "primary": "black"
               },
               "style_flags": {
-                "show_grid": false,
-                "show_label": true
+                "show_grid": false
               },
               "visualization": "gear",
               "pointer": {

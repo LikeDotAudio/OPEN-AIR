@@ -20,7 +20,7 @@ const AnimationDisplay = ({ value, config }) => {
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px' }}>
             {title && <div style={{ color: '#aaa', fontSize: '10px' }}>{title}</div>}
             <div style={{
-                border: '1px solid #333', padding: '5px', backgroundColor: '#111', borderRadius: '4px',
+                border: '1px solid #333', padding: '5px', backgroundColor: (window.OaTransparency ? window.OaTransparency.bg(config, '#111') : '#111'), borderRadius: '4px',
                 width: px(w), height: px(h), display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden'
             }}>
                 {src ? (

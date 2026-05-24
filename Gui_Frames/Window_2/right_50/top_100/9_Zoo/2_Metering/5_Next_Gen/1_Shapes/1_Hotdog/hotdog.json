@@ -52,10 +52,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Large Classic",
-                "Fr": "Large Classique",
-                "De": "Large Klassisch",
-                "Es": "Large Clásico"
+                "text": {
+                  "En": "Large Classic",
+                  "Fr": "Large Classique",
+                  "De": "Large Klassisch",
+                  "Es": "Large Clásico"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -144,10 +148,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Medium Gold",
-                "Fr": "Moyen Gold",
-                "De": "Mittel Gold",
-                "Es": "Medio Gold"
+                "text": {
+                  "En": "Medium Gold",
+                  "Fr": "Moyen Gold",
+                  "De": "Mittel Gold",
+                  "Es": "Medio Gold"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -227,10 +235,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Small Silver",
-                "Fr": "Small Silver",
-                "De": "Small Silver",
-                "Es": "Small Silver"
+                "text": {
+                  "En": "Small Silver",
+                  "Fr": "Small Silver",
+                  "De": "Small Silver",
+                  "Es": "Small Silver"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -308,10 +320,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Night Mode",
-                "Fr": "Night Mode",
-                "De": "Night Mode",
-                "Es": "Night Mode"
+                "text": {
+                  "En": "Night Mode",
+                  "Fr": "Night Mode",
+                  "De": "Night Mode",
+                  "Es": "Night Mode"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -388,10 +404,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Flat Blue",
-                "Fr": "Flat Blue",
-                "De": "Flat Blue",
-                "Es": "Flat Blue"
+                "text": {
+                  "En": "Flat Blue",
+                  "Fr": "Flat Blue",
+                  "De": "Flat Blue",
+                  "Es": "Flat Blue"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -468,10 +488,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Luxury Gold",
-                "Fr": "Luxury Gold",
-                "De": "Luxury Gold",
-                "Es": "Luxury Gold"
+                "text": {
+                  "En": "Luxury Gold",
+                  "Fr": "Luxury Gold",
+                  "De": "Luxury Gold",
+                  "Es": "Luxury Gold"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -548,10 +572,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Cyber Neon",
-                "Fr": "Cyber Neon",
-                "De": "Cyber Neon",
-                "Es": "Cyber Neon"
+                "text": {
+                  "En": "Cyber Neon",
+                  "Fr": "Cyber Neon",
+                  "De": "Cyber Neon",
+                  "Es": "Cyber Neon"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -629,10 +657,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Vintage Cream",
-                "Fr": "Vintage Cream",
-                "De": "Vintage Cream",
-                "Es": "Vintage Cream"
+                "text": {
+                  "En": "Vintage Cream",
+                  "Fr": "Vintage Cream",
+                  "De": "Vintage Cream",
+                  "Es": "Vintage Cream"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {
@@ -709,10 +741,14 @@
             "layout": {},
             "label": {
               "active": {
-                "En": "Blueprint",
-                "Fr": "Blueprint",
-                "De": "Blueprint",
-                "Es": "Blueprint"
+                "text": {
+                  "En": "Blueprint",
+                  "Fr": "Blueprint",
+                  "De": "Blueprint",
+                  "Es": "Blueprint"
+                },
+                "text_size": 12,
+                "text_color": "#cccccc"
               }
             },
             "geometry": {

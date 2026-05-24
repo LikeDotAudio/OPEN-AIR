@@ -23,7 +23,10 @@ class GridManager:
     @staticmethod
     def configure(container, config_data, w_req):
         """Sets up the 3-column, 2-row grid structure and calculates safe pixel limits."""
-        spacing = config_data.get("column_spacing", DEFAULT_COLUMN_SPACING)
+        # column_spacing now lives under layout{} (migrated); fall back to the
+        # legacy top-level key for safety.
+        layout_cfg = config_data.get("layout") if isinstance(config_data.get("layout"), dict) else {}
+        spacing = layout_cfg.get("column_spacing", config_data.get("column_spacing", DEFAULT_COLUMN_SPACING))
         if not isinstance(spacing, list) or len(spacing) < 3:
             spacing = DEFAULT_COLUMN_SPACING
 

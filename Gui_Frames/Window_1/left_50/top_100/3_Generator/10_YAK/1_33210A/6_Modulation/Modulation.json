@@ -132,10 +132,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "AM ON",
-                    "Fr": "AM ON",
-                    "De": "AM EIN",
-                    "Es": "AM ENC"
+                    "text": {
+                      "En": "AM ON",
+                      "Fr": "AM ON",
+                      "De": "AM EIN",
+                      "Es": "AM ENC"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -167,10 +171,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "AM OFF",
-                    "Fr": "AM OFF",
-                    "De": "AM AUS",
-                    "Es": "AM DES"
+                    "text": {
+                      "En": "AM OFF",
+                      "Fr": "AM OFF",
+                      "De": "AM AUS",
+                      "Es": "AM DES"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -202,10 +210,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "FM ON",
-                    "Fr": "FM ACTIVÉE",
-                    "De": "FM AN",
-                    "Es": "FM ACTIVADO"
+                    "text": {
+                      "En": "FM ON",
+                      "Fr": "FM ACTIVÉE",
+                      "De": "FM AN",
+                      "Es": "FM ACTIVADO"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",
@@ -237,10 +249,14 @@
                 "type": "_GuiActuator",
                 "label": {
                   "inactive": {
-                    "En": "FM OFF",
-                    "Fr": "FM OFF",
-                    "De": "FM OFF",
-                    "Es": "FM OFF"
+                    "text": {
+                      "En": "FM OFF",
+                      "Fr": "FM OFF",
+                      "De": "FM OFF",
+                      "Es": "FM OFF"
+                    },
+                    "text_size": 12,
+                    "text_color": "#cccccc"
                   }
                 },
                 "AES70": "OcaBooleanActuator",

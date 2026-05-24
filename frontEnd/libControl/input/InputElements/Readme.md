@@ -29,20 +29,32 @@ in the property editor.
     "options": {
       "Mic1": {
         "label": {
-          "active": "Microphone 1"
+          "active": {
+            "text": "Microphone 1",
+            "text_size": 12,
+            "text_color": "#cccccc"
+          }
         },
         "value": "MIC1_IN",
         "selected": true
       },
       "Mic2": {
         "label": {
-          "active": "Microphone 2"
+          "active": {
+            "text": "Microphone 2",
+            "text_size": 12,
+            "text_color": "#cccccc"
+          }
         },
         "value": "MIC2_IN"
       },
       "LineIn": {
         "label": {
-          "active": "Line Input"
+          "active": {
+            "text": "Line Input",
+            "text_size": 12,
+            "text_color": "#cccccc"
+          }
         },
         "value": "LINE_IN"
       }

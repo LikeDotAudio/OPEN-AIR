@@ -93,7 +93,10 @@ const KnobCap = ({ center, radius, angle, config, filterId, indicatorColor }) =>
     const knobStyle = (overrides.knob_style || styling.knob_style || cosmetics.visualization || c.knob_style || 'standard').toLowerCase();
     const defaultShape = knobStyle === 'gear' ? 'gear' : 'circle';
     const knobShape = (overrides.shape || styling.shape || c.shape || defaultShape).toLowerCase();
-    
+    const isChicken = knobStyle === 'chicken' || knobShape === 'chicken';
+    const isMarconi = knobStyle === 'marconi' || knobShape === 'marconi';
+    const colors = cosmetics.colors || {};
+
     const gearTeeth = styling.teeth || c.knob_teeth || 8;
     const outlineColor = styling.outline_color || c.knob_outline_color || '#444';
     const outlineThickness = styling.outline_thickness !== undefined ? styling.outline_thickness : (c.knob_outline_thickness || 0);
@@ -189,6 +192,92 @@ const KnobCap = ({ center, radius, angle, config, filterId, indicatorColor }) =>
         return <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={indicatorColor} strokeWidth="2" strokeLinecap="round" />;
     };
 
+    // --- CHICKEN-HEAD cap: round body + tapered "beak" pointer on a skirt. The
+    // beak IS the indicator (no separate pointer). Colour-aware glossy gradient. ---
+    if (isChicken) {
+        const body = styling.fill_color || colors.primary || indicatorColor || '#cccccc';
+        const gTop = shadeHex(body, 0.32), gBot = shadeHex(body, -0.45), ridge = shadeHex(body, -0.5);
+        // Chicken-head: long tapered BEAK forward + short blunt "bum" tail back,
+        // widest at the centre hub (per the Q-parts top view).
+        const bodyR = radius * 0.40, skirtR = radius * 0.52;
+        const rad = angle * Math.PI / 180;
+        const P = (d, cc) => `${center + d * Math.cos(rad) - cc * Math.sin(rad)},${center - d * Math.sin(rad) - cc * Math.cos(rad)}`;
+        const tipLen = radius * 1.02, bumLen = radius * 0.46;
+        const hw = bodyR * 1.05, hwBum = hw * 0.5;
+        const beak = [P(tipLen, 0), P(0, hw), P(-bumLen, hwBum), P(-bumLen, -hwBum), P(0, -hw)].join(' ');
+        const tx = center + tipLen * Math.cos(rad), ty = center - tipLen * Math.sin(rad);
+        return (
+            <g className="knob-cap-system chicken">
+                <defs>
+                    <linearGradient id={`chgrad-${filterId}`} x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stopColor={gTop} /><stop offset="55%" stopColor={body} /><stop offset="100%" stopColor={gBot} />
+                    </linearGradient>
+                </defs>
+                <circle cx={center} cy={center} r={skirtR} fill={shadeHex(body, -0.55)} stroke="#000" strokeWidth="1" filter={`url(#sh-${filterId})`} opacity="0.95" />
+                <g transform={`translate(${DEPTH_OFFSET}, ${DEPTH_OFFSET})`}>
+                    <polygon points={beak} fill="#0b0b0b" strokeLinejoin="round" />
+                    <circle cx={center} cy={center} r={bodyR} fill="#0b0b0b" />
+                </g>
+                <g transform={`translate(${-DEPTH_OFFSET}, -${DEPTH_OFFSET})`} filter={`url(#sh-${filterId})`}>
+                    <polygon points={beak} fill={`url(#chgrad-${filterId})`} stroke={outlineColor} strokeWidth={outlineThickness} strokeLinejoin="round" />
+                    <circle cx={center} cy={center} r={bodyR} fill={`url(#chgrad-${filterId})`} stroke={outlineColor} strokeWidth={outlineThickness} />
+                    <clipPath id={`capclip-${filterId}`}><polygon points={beak} /><circle cx={center} cy={center} r={bodyR} /></clipPath>
+                    <g pointerEvents="none" clipPath={`url(#capclip-${filterId})`}>
+                        <ellipse cx={center - bodyR * 0.32} cy={center - bodyR * 0.4} rx={bodyR * 0.55} ry={bodyR * 0.28} fill="white" opacity="0.16" filter={`url(#blur-${filterId})`} />
+                        <circle cx={center + bodyR * 0.1} cy={center + bodyR * 0.15} r={bodyR * 0.85} fill="black" opacity="0.12" filter={`url(#blur-${filterId})`} />
+                    </g>
+                    <line x1={center} y1={center} x2={tx} y2={ty} stroke={ridge} strokeWidth="1.5" strokeLinecap="round" opacity="0.6" />
+                </g>
+            </g>
+        );
+    }
+
+    // --- MARCONI ("Elma" British wing) cap: cylinder body + blunt wing fin with a
+    // white indicator line, on a metallic skirt. ---
+    if (isMarconi) {
+        const body = styling.fill_color || colors.primary || indicatorColor || '#9aa3ad';
+        const gTop = shadeHex(body, 0.30), gBot = shadeHex(body, -0.42);
+        // Prominent RECTANGULAR wing (parallel sides) with a notched two-ear outer
+        // edge — the characteristic Marconi tab — on a full round body.
+        const bodyR = radius * 0.62, skirtR = radius * 0.93;
+        const rad = angle * Math.PI / 180;
+        const P = (d, cc) => `${center + d * Math.cos(rad) - cc * Math.sin(rad)},${center - d * Math.sin(rad) - cc * Math.cos(rad)}`;
+        const d0 = bodyR * 0.20, wingLen = radius * 1.02;
+        const wH = bodyR * 0.52, earDepth = radius * 0.12, notchHalf = wH * 0.32;
+        const nb = wingLen - earDepth;
+        const wing = [P(d0, wH), P(wingLen, wH), P(wingLen, notchHalf), P(nb, notchHalf), P(nb, -notchHalf), P(wingLen, -notchHalf), P(wingLen, -wH), P(d0, -wH)].join(' ');
+        const lx1 = center + bodyR * 0.50 * Math.cos(rad), ly1 = center - bodyR * 0.50 * Math.sin(rad);
+        const lx2 = center + (nb - 1) * Math.cos(rad), ly2 = center - (nb - 1) * Math.sin(rad);
+        return (
+            <g className="knob-cap-system marconi">
+                <defs>
+                    <linearGradient id={`mcgrad-${filterId}`} x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stopColor={gTop} /><stop offset="55%" stopColor={body} /><stop offset="100%" stopColor={gBot} />
+                    </linearGradient>
+                    <radialGradient id={`mcskirt-${filterId}`} cx="40%" cy="35%" r="75%">
+                        <stop offset="0%" stopColor="#f2f2f2" /><stop offset="55%" stopColor="#b8bcc0" /><stop offset="100%" stopColor="#6e7378" />
+                    </radialGradient>
+                </defs>
+                <circle cx={center} cy={center} r={skirtR} fill={`url(#mcskirt-${filterId})`} stroke="#5a5e63" strokeWidth="1" filter={`url(#sh-${filterId})`} />
+                <circle cx={center} cy={center} r={skirtR} fill="none" stroke="#ffffff" strokeWidth="1" opacity="0.35" />
+                <g transform={`translate(${DEPTH_OFFSET}, ${DEPTH_OFFSET})`}>
+                    <polygon points={wing} fill="#0b0b0b" strokeLinejoin="round" />
+                    <circle cx={center} cy={center} r={bodyR} fill="#0b0b0b" />
+                </g>
+                <g transform={`translate(${-DEPTH_OFFSET}, -${DEPTH_OFFSET})`} filter={`url(#sh-${filterId})`}>
+                    <polygon points={wing} fill={`url(#mcgrad-${filterId})`} stroke={outlineColor} strokeWidth={outlineThickness} strokeLinejoin="round" />
+                    <circle cx={center} cy={center} r={bodyR} fill={`url(#mcgrad-${filterId})`} stroke={outlineColor} strokeWidth={outlineThickness} />
+                    <clipPath id={`capclip-${filterId}`}><polygon points={wing} /><circle cx={center} cy={center} r={bodyR} /></clipPath>
+                    <g pointerEvents="none" clipPath={`url(#capclip-${filterId})`}>
+                        <ellipse cx={center - bodyR * 0.3} cy={center - bodyR * 0.4} rx={bodyR * 0.55} ry={bodyR * 0.3} fill="white" opacity="0.16" filter={`url(#blur-${filterId})`} />
+                        <circle cx={center + bodyR * 0.1} cy={center + bodyR * 0.15} r={bodyR * 0.85} fill="black" opacity="0.12" filter={`url(#blur-${filterId})`} />
+                    </g>
+                    <line x1={lx1} y1={ly1} x2={lx2} y2={ly2} stroke="#ffffff" strokeWidth="2.5" strokeLinecap="round" />
+                </g>
+            </g>
+        );
+    }
+
     return (
         <g className="knob-cap-system">
             {/* 3D Body (Offset Base) */}
@@ -199,14 +288,19 @@ const KnobCap = ({ center, radius, angle, config, filterId, indicatorColor }) =>
             {/* Top Cap (Offset NW) */}
             <g transform={`translate(${-DEPTH_OFFSET}, -${DEPTH_OFFSET})`} filter={`url(#sh-${filterId})`}>
                 {renderGeometry(capR, `url(#grad-${filterId})`, outlineColor, outlineThickness, angle)}
-                
-                {/* 3D Effects: Glint & Inner Rim */}
-                <g pointerEvents="none">
-                    <circle cx={center + capR * 0.1} cy={center + capR * 0.1} r={capR * 0.9} fill="black" opacity="0.2" filter={`url(#blur-${filterId})`} />
-                    <ellipse cx={center - capR * 0.4} cy={center - capR * 0.5} rx={capR * 0.6} ry={capR * 0.3} fill="white" opacity="0.3" filter={`url(#blur-${filterId})`} />
-                    <path 
-                        d={describeArc(center, center, capR - 3, 180, 270)} 
-                        fill="none" stroke="white" strokeWidth="2" strokeOpacity="0.4" filter={`url(#blur-${filterId})`}
+
+                {/* Clip the 3D glint/shadow to the cap SHAPE so the reflection (and
+                    its blur halo) never spills outside the cap edge — matters most
+                    for gear/octagon caps where a round glint would poke past. */}
+                <clipPath id={`capclip-${filterId}`}>
+                    {renderGeometry(capR, "#fff", "none", 0, angle)}
+                </clipPath>
+                <g pointerEvents="none" clipPath={`url(#capclip-${filterId})`}>
+                    <circle cx={center + capR * 0.1} cy={center + capR * 0.1} r={capR * 0.9} fill="black" opacity="0.15" filter={`url(#blur-${filterId})`} />
+                    <ellipse cx={center - capR * 0.4} cy={center - capR * 0.5} rx={capR * 0.55} ry={capR * 0.28} fill="white" opacity="0.13" filter={`url(#blur-${filterId})`} />
+                    <path
+                        d={describeArc(center, center, capR - 3, 180, 270)}
+                        fill="none" stroke="white" strokeWidth="2" strokeOpacity="0.22" filter={`url(#blur-${filterId})`}
                     />
                 </g>
 
@@ -241,6 +335,7 @@ const Knob = ({ value, onChange, config, size: defaultSize = 80 }) => {
     const indicatorColor = c.indicator_color || colors.active || colors.primary || '#33A1FD';
     const secondaryColor = colors.secondary || '#444444';
     const baseColor = styling.fill_color || c.knob_fill_color || '#333';
+    const isFender = ((cosmetics.style_overrides?.knob_style || styling.knob_style || cosmetics.visualization || c.knob_style || '').toLowerCase()) === 'fender';
 
     const padding = (arcWidth / 2) + 12;
     const radius = ((size - (padding * 2)) / 2) * 0.8;
@@ -282,13 +377,115 @@ const Knob = ({ value, onChange, config, size: defaultSize = 80 }) => {
         e.target.releasePointerCapture(e.pointerId);
     };
 
+    // Mouse wheel: nudge the value. One notch steps by the configured step
+    // (domain.primary.step) or 2% of the range. Scroll up = increase.
+    // NOTE: must be a NON-PASSIVE native listener so e.preventDefault() can stop
+    // a scrollable ancestor (OcaBin overflow:auto) from eating the wheel — React's
+    // onWheel is passive, so it fires but the panel scrolls away and the knob
+    // looks unresponsive. The handler is stored in a ref so the once-attached
+    // listener always sees the latest value/min/max/onChange.
+    const svgRef = React.useRef(null);
+    const wheelRef = React.useRef(null);
+    wheelRef.current = (e) => {
+        const range = max - min;
+        if (!range) return;
+        const sc = parseFloat(c.domain?.primary?.step ?? c.step);
+        const step = (Number.isFinite(sc) && sc > 0) ? sc : range / 50;
+        const dir = e.deltaY < 0 ? 1 : -1;
+        const cur = Number((value !== undefined && value !== null) ? value : min);
+        let next = Math.max(min, Math.min(max, cur + dir * step));
+        // Snap to the step grid and clean float error to the step's precision, so a
+        // sub-0.01 step (e.g. a fine dial) isn't rounded to "no change".
+        next = Math.round(next / step) * step;
+        const dec = (String(step).split('.')[1] || '').length;
+        onChange(parseFloat(next.toFixed(Math.min(10, dec))));
+    };
+    React.useEffect(() => {
+        const el = svgRef.current;
+        if (!el) return;
+        const onWheel = (e) => { e.preventDefault(); wheelRef.current && wheelRef.current(e); };
+        el.addEventListener('wheel', onWheel, { passive: false });
+        return () => el.removeEventListener('wheel', onWheel);
+    }, []);
+
     // 3. Coordinate Sync
     const { startAngle, extent, pointerAngleDeg, norm } = getKnobAngles(c, value, min, max);
     const filterId = `knob-${c.id || Math.random().toString(36).substr(2, 9)}`;
 
+    // --- FENDER (Strat) cap: only the NUMBERS + knurl rotate with the value; the
+    // 3D lighting (skirt/dome GRADIENTS and the drop SHADOW) stays STATIC (fixed
+    // light source). A FIXED pointer marks the current number. The face is
+    // pointer-transparent + svg userSelect:none so the knob grabs/drags cleanly. ---
+    if (isFender) {
+        const sweep = (cosmetics.scale?.sweep ?? c.sweep ?? 300);
+        const ptrPos = (cosmetics.pointer?.position || c.pointer_position || c.fender_pointer || 'top').toLowerCase();
+        const sigP = ptrPos === 'right' ? 90 : ptrPos === 'bottom' ? 180 : ptrPos === 'left' ? 270 : 0;
+        const N = Math.max(2, Math.round(cosmetics.scale?.count ?? 11));
+        const body = styling.fill_color || colors.primary || '#eeeeee';
+        const numColor = colors.text || styling.tick_color || '#caa44a';
+        const gTop = shadeHex(body, 0.24), gBot = shadeHex(body, -0.34);
+        const skirtR = radius * 0.97, ringR = radius * 0.66, bodyR = radius * 0.54, rNum = radius * 0.82;
+        const faceRot = -norm * sweep;
+        const sxp = (sig, r) => center + r * Math.sin(sig * Math.PI / 180);
+        const syp = (sig, r) => center - r * Math.cos(sig * Math.PI / 180);
+        // Numbers + short ticks (rotate with the knob; flat colour, no gradient).
+        const marks = [];
+        for (let k = 0; k < N; k++) {
+            const nk = (N > 1) ? k / (N - 1) : 0;
+            const vk = min + nk * (max - min), sig = sigP + nk * sweep;
+            marks.push(<line key={'t' + k} x1={sxp(sig, skirtR * 0.88)} y1={syp(sig, skirtR * 0.88)} x2={sxp(sig, skirtR * 0.96)} y2={syp(sig, skirtR * 0.96)} stroke={numColor} strokeWidth={1.5} strokeLinecap="round" />);
+            marks.push(<text key={'n' + k} x={sxp(sig, rNum)} y={syp(sig, rNum)} fill={numColor} fontSize={Math.max(7, radius * 0.13)} fontFamily="Arial" fontWeight="bold" textAnchor="middle" dominantBaseline="central">{Math.round(vk)}</text>);
+        }
+        const ribs = [], M = 48;
+        for (let j = 0; j < M; j++) {
+            const sig = j * 360 / M;
+            ribs.push(<line key={'r' + j} x1={sxp(sig, bodyR)} y1={syp(sig, bodyR)} x2={sxp(sig, ringR)} y2={syp(sig, ringR)} stroke={shadeHex(body, -0.5)} strokeWidth={1} opacity="0.5" />);
+        }
+        const pr0 = skirtR + 2, pr1 = skirtR - radius * 0.16, pw = radius * 0.07, sr = sigP * Math.PI / 180;
+        const ptr = `${sxp(sigP, pr1)},${syp(sigP, pr1)} `
+            + `${center + pr0 * Math.sin(sr) + pw * Math.cos(sr)},${center - pr0 * Math.cos(sr) + pw * Math.sin(sr)} `
+            + `${center + pr0 * Math.sin(sr) - pw * Math.cos(sr)},${center - pr0 * Math.cos(sr) - pw * Math.sin(sr)}`;
+        return (
+            <div ref={wrapRef} style={{ width: fluid ? '100%' : size, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <svg ref={svgRef} width={size} height={size} viewBox={`0 0 ${size} ${size}`}
+                style={{ touchAction: 'none', cursor: 'ns-resize', overflow: 'visible', userSelect: 'none' }}
+                onPointerDown={handlePointerDown} onPointerMove={handlePointerMove}
+                onPointerUp={handlePointerUp} onPointerCancel={handlePointerUp}>
+                <defs>
+                    <radialGradient id={`fskirt-${filterId}`} cx="42%" cy="38%" r="72%">
+                        <stop offset="0%" stopColor={shadeHex(body, 0.16)} /><stop offset="72%" stopColor={body} /><stop offset="100%" stopColor={shadeHex(body, -0.30)} />
+                    </radialGradient>
+                    <radialGradient id={`fbody-${filterId}`} cx="40%" cy="35%" r="75%">
+                        <stop offset="0%" stopColor={gTop} /><stop offset="60%" stopColor={body} /><stop offset="100%" stopColor={gBot} />
+                    </radialGradient>
+                    <filter id={`sh-${filterId}`} x="-50%" y="-50%" width="200%" height="200%">
+                        <feDropShadow dx="2" dy="2" stdDeviation="3" floodColor="#000" floodOpacity="0.5"/>
+                    </filter>
+                    <filter id={`blur-${filterId}`}><feGaussianBlur stdDeviation="2" /></filter>
+                </defs>
+                {/* STATIC lit skirt — gradient + drop shadow do NOT rotate */}
+                <circle cx={center} cy={center} r={skirtR} fill={`url(#fskirt-${filterId})`} stroke="#222" strokeWidth="1" filter={`url(#sh-${filterId})`} pointerEvents="none" />
+                {/* ROTATING printed face: knurl + ticks + numbers (flat colour) */}
+                <g transform={`rotate(${faceRot} ${center} ${center})`} pointerEvents="none">
+                    {ribs}
+                    {marks}
+                </g>
+                {/* STATIC lit dome — gradient + glint do NOT rotate */}
+                <g pointerEvents="none">
+                    <circle cx={center} cy={center} r={bodyR} fill={`url(#fbody-${filterId})`} stroke={shadeHex(body, -0.4)} strokeWidth="1" />
+                    <ellipse cx={center - bodyR * 0.32} cy={center - bodyR * 0.4} rx={bodyR * 0.5} ry={bodyR * 0.26} fill="white" opacity="0.16" filter={`url(#blur-${filterId})`} />
+                </g>
+                {/* FIXED reference pointer (does NOT rotate) */}
+                <polygon points={ptr} fill={indicatorColor} stroke="#000" strokeWidth="0.5" pointerEvents="none" />
+            </svg>
+            </div>
+        );
+    }
+
     return (
         <div ref={wrapRef} style={{ width: fluid ? '100%' : size, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <svg
+            ref={svgRef}
             width={size} height={size}
             viewBox={`0 0 ${size} ${size}`}
             style={{ touchAction: 'none', cursor: 'ns-resize', overflow: 'visible' }}
@@ -299,9 +496,11 @@ const Knob = ({ value, onChange, config, size: defaultSize = 80 }) => {
         >
             <defs>
                 <linearGradient id={`grad-${filterId}`} x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stopColor="#555" />
-                    <stop offset="30%" stopColor={baseColor} />
-                    <stop offset="100%" stopColor="#111" />
+                    {/* Softer top-to-bottom shading: gentler top highlight, base held
+                        through the middle, lifted (less black) bottom. */}
+                    <stop offset="0%" stopColor="#484848" />
+                    <stop offset="50%" stopColor={baseColor} />
+                    <stop offset="100%" stopColor="#1e1e1e" />
                 </linearGradient>
                 <filter id={`sh-${filterId}`} x="-50%" y="-50%" width="200%" height="200%">
                     <feDropShadow dx="2" dy="2" stdDeviation="3" floodColor="#000" floodOpacity="0.6"/>
@@ -339,6 +538,20 @@ const Knob = ({ value, onChange, config, size: defaultSize = 80 }) => {
 };
 
 // --- HELPERS ---
+// Lighten (amt>0) or darken (amt<0) a #rgb/#rrggbb colour. Named colours pass
+// through unchanged (chicken/marconi gradients then read as a flat colour).
+function shadeHex(col, amt) {
+    if (typeof col !== 'string') return col;
+    let c = col.trim();
+    if (/^#([0-9a-fA-F]{3})$/.test(c)) c = '#' + c.slice(1).split('').map(x => x + x).join('');
+    const m = /^#([0-9a-fA-F]{6})$/.exec(c);
+    if (!m) return col;
+    const n = parseInt(m[1], 16);
+    const f = (v) => Math.max(0, Math.min(255, Math.round(v + amt * 255)));
+    const r = f((n >> 16) & 255), g = f((n >> 8) & 255), b = f(n & 255);
+    return '#' + [r, g, b].map(v => v.toString(16).padStart(2, '0')).join('');
+}
+
 function describeArc(x, y, radius, startAngle, endAngle) {
     const start = polarToCartesian(x, y, radius, endAngle);
     const end = polarToCartesian(x, y, radius, startAngle);

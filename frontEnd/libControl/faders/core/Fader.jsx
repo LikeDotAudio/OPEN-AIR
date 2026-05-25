@@ -38,13 +38,25 @@ const Fader = ({ value: externalValue, onChange, config, topic, nodeJson }) => {
     // 3. Layout configuration. Fluid faders measure their rendered box and use
     //    that pixel width for geometry, so they REDRAW to fit (crisp) rather
     //    than being scaled/zoomed. Non-fluid faders keep their fixed geometry.
-    const fluid = !!config?.fluid;
+    // Orientation is authoritative from style.orientation OR the type name
+    // (e.g. "_CustomHorizontalFader" / "_GuiFaderHorizontal"); only when neither
+    // says so do we infer from the box aspect. Resolve it BEFORE picking default
+    // geometry so a horizontal fader with no explicit size gets a WIDE default
+    // (else it'd default to 100x250 and render as a stubby vertical-ish bar).
+    const _typeStr = (config?.type || '').toLowerCase();
+    const _explicitOrient = config?.style?.orientation
+        || (_typeStr.includes('horizontal') ? 'horizontal'
+            : _typeStr.includes('vertical') ? 'vertical' : null);
+    const _hasExplicitW = (config?.geometry?.width ?? config?.layout?.width) != null;
+    // Horizontal faders with no explicit width fluid-fill their cell (so a grid of
+    // them fits cleanly) rather than overflowing at a fixed default width.
+    const fluid = !!config?.fluid || (_explicitOrient === 'horizontal' && !_hasExplicitW);
     const [measured, setMeasured] = React.useState(null);
-    const _cfgW = config?.geometry?.width ?? config?.layout?.width ?? 100;
-    const _cfgH = config?.geometry?.height ?? config?.layout?.height ?? 250;
+    const _cfgW = config?.geometry?.width ?? config?.layout?.width ?? (_explicitOrient === 'horizontal' ? 250 : 100);
+    const _cfgH = config?.geometry?.height ?? config?.layout?.height ?? (_explicitOrient === 'horizontal' ? 80 : 250);
     const width = (fluid && measured && measured.w) ? measured.w : (typeof _cfgW === 'number' ? _cfgW : 100);
     const height = (typeof _cfgH === 'number' ? _cfgH : 250);
-    const orientation = config?.style?.orientation || (width > height ? 'horizontal' : 'vertical');
+    const orientation = _explicitOrient || (width > height ? 'horizontal' : 'vertical');
 
     const topRes = 25;
     const botRes = 20;

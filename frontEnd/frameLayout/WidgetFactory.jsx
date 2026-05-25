@@ -27,6 +27,18 @@ window.WidgetFactory = ({ nodeName, node, path_prefix = '', jsonPath }) => {
 
   const ComponentToRender = COMPONENT_REGISTRY[node.type];
 
+  // For toggler / multi-option button GROUPS, layout.width & layout.height are the
+  // PER-BUTTON dimensions (consumed inside ButtonToggler), NOT the container size.
+  // If we pin the wrapper to layout.height (e.g. 50px) the multi-row button grid
+  // overflows it and overlaps the next block ("smooshed together"). So skip the
+  // wrapper width/height for these and let FieldComponent's toggler branch size
+  // the grid (height:auto). [[web-frontend-layout-quirks]]
+  const _t = (node.type || '').toLowerCase();
+  const _isButtonGroup = _t.includes('toggler')
+    || ((_t.includes('button') || _t.includes('toggle') || _t.includes('actuator'))
+        && node.options && typeof node.options === 'object'
+        && Object.keys(node.options).length > 1);
+
   // Map JSON layout constraints to CSS Grid attributes for reactive container sizing
   const gridStyles = {
     gridColumnStart: node.layout?.column !== undefined ? node.layout.column : 'auto',
@@ -45,8 +57,8 @@ window.WidgetFactory = ({ nodeName, node, path_prefix = '', jsonPath }) => {
     // keyword-routed ones (fader/meter/plot/graph/...), not just registered
     // containers. Without this a plot with layout.height:"100%" collapsed to its
     // min-height because the wrapper had no height for the % chain to resolve.
-    ...(node.layout?.width != null ? { width: window.oaCssLen(node.layout.width) } : {}),
-    ...(node.layout?.height != null ? { height: window.oaCssLen(node.layout.height), minHeight: 0 } : {}),
+    ...((node.layout?.width != null && !_isButtonGroup) ? { width: window.oaCssLen(node.layout.width) } : {}),
+    ...((node.layout?.height != null && !_isButtonGroup) ? { height: window.oaCssLen(node.layout.height), minHeight: 0 } : {}),
     // Tk grid padx/pady -> external spacing around the element within its cell.
     // box-sizing keeps the padding from overflowing fill containers.
     ...((node.layout?.padx != null || node.layout?.pady != null)
@@ -62,9 +74,13 @@ window.WidgetFactory = ({ nodeName, node, path_prefix = '', jsonPath }) => {
 
   if (!ComponentToRender) {
     if (node.type && (
-        node.type.startsWith('_') || 
-        node.type.toLowerCase().includes('fader') || 
-        node.type.toLowerCase().includes('meter') || 
+        node.type.startsWith('_') ||
+        node.type.toLowerCase().includes('fader') ||
+        node.type.toLowerCase().includes('meter') ||
+        node.type.toLowerCase().includes('knob') ||
+        node.type.toLowerCase().includes('selector') ||
+        node.type.toLowerCase().includes('cmdp') ||
+        node.type.toLowerCase().includes('mdp') ||
         node.type.toLowerCase().includes('button') ||
         node.type.toLowerCase().includes('actuator') ||
         node.type.toLowerCase().includes('checkbox') ||

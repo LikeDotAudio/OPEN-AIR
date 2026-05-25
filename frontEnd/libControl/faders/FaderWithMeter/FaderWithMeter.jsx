@@ -47,16 +47,16 @@ const FaderWithMeter = ({ value, onChange, config }) => {
                 gap: '8px'
             }}>
                 {/* Left Meter */}
-                {barEnable && window.Meter && (
-                    <window.Meter value={value} config={config?.left_meter_style ? {...meterConfig, cosmetics: {colors: {primary: config.left_meter_style.lower_range_colour || '#0f0'}}} : meterConfig} />
+                {barEnable && window.MeterBarGraph && (
+                    <window.MeterBarGraph value={value} config={config?.left_meter_style ? {...meterConfig, cosmetics: {colors: {primary: config.left_meter_style.lower_range_colour || '#0f0'}}} : meterConfig} />
                 )}
 
                 {/* Central Fader */}
                 {window.Fader && <window.Fader value={value} onChange={onChange} config={faderConfig} />}
 
                 {/* Right Meter */}
-                {barEnable && window.Meter && (
-                    <window.Meter value={value} config={config?.right_meter_style ? {...meterConfig, cosmetics: {colors: {primary: config.right_meter_style.lower_range_colour || '#0f0'}}} : meterConfig} />
+                {barEnable && window.MeterBarGraph && (
+                    <window.MeterBarGraph value={value} config={config?.right_meter_style ? {...meterConfig, cosmetics: {colors: {primary: config.right_meter_style.lower_range_colour || '#0f0'}}} : meterConfig} />
                 )}
             </div>
         </div>

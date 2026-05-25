@@ -101,6 +101,27 @@ const SelectorSwitch = ({ value, onChange, config }) => {
         updateFromPoint(e.clientX, e.clientY);
     };
 
+    // Mouse wheel steps to the next/previous position. Continuous selectors wrap
+    // around; discrete ones clamp at the ends. Scroll up = next position.
+    // Uses a NON-PASSIVE native listener (see Knob.jsx) so preventDefault() stops
+    // a scrollable ancestor from eating the wheel; the latest handler is held in
+    // a ref so the once-attached listener sees the current index/positions.
+    const wheelRef = React.useRef(null);
+    wheelRef.current = (e) => {
+        const dir = e.deltaY < 0 ? 1 : -1;
+        let next = currentIndex + dir;
+        if (isContinuous) next = (next + totalPos) % totalPos;
+        else next = Math.max(0, Math.min(totalPos - 1, next));
+        onChange(typeof positions[next] === 'string' ? positions[next] : next);
+    };
+    React.useEffect(() => {
+        const el = eRef.current;
+        if (!el) return;
+        const onWheel = (e) => { e.preventDefault(); wheelRef.current && wheelRef.current(e); };
+        el.addEventListener('wheel', onWheel, { passive: false });
+        return () => el.removeEventListener('wheel', onWheel);
+    }, []);
+
     const renderShape = (r, fill, stroke, sWidth, rotation = 0) => {
         if (knobShape === 'gear') {
             const innerR = r * 0.85; 
@@ -195,9 +216,10 @@ const SelectorSwitch = ({ value, onChange, config }) => {
             >
                 <defs>
                     <linearGradient id={`grad-${filterId}`} x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stopColor="#666" />
-                        <stop offset="30%" stopColor={baseColor} />
-                        <stop offset="100%" stopColor="#111" />
+                        {/* Softer shading (matches Knob): gentle top highlight, lifted bottom. */}
+                        <stop offset="0%" stopColor="#484848" />
+                        <stop offset="50%" stopColor={baseColor} />
+                        <stop offset="100%" stopColor="#1e1e1e" />
                     </linearGradient>
                     <filter id={`sh-${filterId}`} x="-50%" y="-50%" width="200%" height="200%">
                         <feDropShadow dx="2" dy="2" stdDeviation="3" floodColor="#000" floodOpacity="0.6"/>
@@ -238,13 +260,18 @@ const SelectorSwitch = ({ value, onChange, config }) => {
                     <g transform={`translate(${-DEPTH_OFFSET}, ${-DEPTH_OFFSET})`} filter={`url(#sh-${filterId})`}>
                         {renderShape(radius - 5, `url(#grad-${filterId})`, outlineColor, 1, pointerAngleDeg)}
                         
-                        {/* 3D Effects: Glint & Inner Rim */}
-                        <g pointerEvents="none">
-                            <circle cx={(radius-5) * 0.1} cy={(radius-5) * 0.1} r={Math.max(0, (radius-5) * 0.9)} fill="black" opacity="0.2" filter={`url(#blur-${filterId})`} />
-                            <ellipse cx={-(radius-5) * 0.4} cy={-(radius-5) * 0.5} rx={Math.max(0, (radius-5) * 0.6)} ry={Math.max(0, (radius-5) * 0.3)} fill="white" opacity="0.3" filter={`url(#blur-${filterId})`} />
-                            <path 
-                                d={describeArc(0, 0, (radius-5) - 3, 180, 270)} 
-                                fill="none" stroke="white" strokeWidth="2" strokeOpacity="0.4" filter={`url(#blur-${filterId})`}
+                        {/* 3D Effects: Glint & Inner Rim — clipped to the cap shape so
+                            the reflection/blur never spills past the cap edge, and
+                            toned down (softer, less intense) to match the Knob. */}
+                        <clipPath id={`capclip-${filterId}`}>
+                            {renderShape(radius - 5, "#fff", "none", 0, pointerAngleDeg)}
+                        </clipPath>
+                        <g pointerEvents="none" clipPath={`url(#capclip-${filterId})`}>
+                            <circle cx={(radius-5) * 0.1} cy={(radius-5) * 0.1} r={Math.max(0, (radius-5) * 0.9)} fill="black" opacity="0.15" filter={`url(#blur-${filterId})`} />
+                            <ellipse cx={-(radius-5) * 0.4} cy={-(radius-5) * 0.5} rx={Math.max(0, (radius-5) * 0.55)} ry={Math.max(0, (radius-5) * 0.28)} fill="white" opacity="0.13" filter={`url(#blur-${filterId})`} />
+                            <path
+                                d={describeArc(0, 0, (radius-5) - 3, 180, 270)}
+                                fill="none" stroke="white" strokeWidth="2" strokeOpacity="0.22" filter={`url(#blur-${filterId})`}
                             />
                         </g>
 

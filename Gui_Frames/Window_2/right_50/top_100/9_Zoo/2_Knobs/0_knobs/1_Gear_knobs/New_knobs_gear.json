@@ -63,7 +63,8 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "white"
+                "primary": "white",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": true
@@ -75,8 +76,11 @@
                 "offset": 0
               },
               "scale": {
+                "show": true,
                 "style": "simple",
-                "length": 10
+                "count": 10,
+                "length": 10,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -122,7 +126,8 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "white"
+                "primary": "white",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": true
@@ -134,8 +139,11 @@
                 "offset": 0
               },
               "scale": {
+                "show": true,
                 "style": "dots",
-                "length": 10
+                "count": 12,
+                "length": 8,
+                "thickness": 2
               },
               "styling": {
                 "gradient": 0,
@@ -181,20 +189,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "white"
+                "primary": "white",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": true
               },
               "visualization": "gear",
               "pointer": {
-                "style": "notch",
+                "style": "dot",
                 "length": null,
                 "offset": 0
               },
               "scale": {
+                "show": true,
                 "style": "numeric",
-                "length": 10
+                "count": 5,
+                "length": 8,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -240,20 +252,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "white"
+                "primary": "white",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
-                "style": "line",
+                "style": "notch",
                 "length": null,
                 "offset": 0
               },
               "scale": {
+                "show": true,
                 "style": "simple",
-                "length": 10
+                "count": 10,
+                "length": 10,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -299,20 +315,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "white"
+                "primary": "white",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
-                "style": "line",
+                "style": "thin",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "simple",
-                "length": 10
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
               },
               "styling": {
                 "gradient": 0,
@@ -358,20 +378,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "black"
+                "primary": "black",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": true
               },
               "visualization": "gear",
               "pointer": {
-                "style": "line",
+                "style": "block",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "dots",
-                "length": 10
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -417,20 +441,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "white"
+                "primary": "white",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
-                "style": "triangle",
+                "style": "tapered",
                 "length": null,
                 "offset": 0
               },
               "scale": {
+                "show": true,
                 "style": "simple",
-                "length": 10
+                "count": 10,
+                "length": 10,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -476,20 +504,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "white"
+                "primary": "white",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
-                "style": "line",
+                "style": "vintage",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "simple",
-                "length": 10
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
               },
               "styling": {
                 "gradient": 0,
@@ -535,20 +567,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "black"
+                "primary": "black",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
-                "style": "notch",
+                "style": "line",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "simple",
-                "length": 10
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -594,20 +630,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "black"
+                "primary": "black",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
-                "style": "line",
+                "style": "triangle",
                 "length": null,
                 "offset": 0
               },
               "scale": {
+                "show": true,
                 "style": "simple",
-                "length": 10
+                "count": 10,
+                "length": 10,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -653,20 +693,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "black"
+                "primary": "black",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
-                "style": "line",
+                "style": "dot",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "simple",
-                "length": 10
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
               },
               "styling": {
                 "gradient": 0,
@@ -712,20 +756,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "black"
+                "primary": "black",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": true
               },
               "visualization": "gear",
               "pointer": {
-                "style": "line",
+                "style": "notch",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "simple",
-                "length": 10
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -771,20 +819,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "white"
+                "primary": "white",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": true
               },
               "visualization": "gear",
               "pointer": {
-                "style": "line",
+                "style": "thin",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "numeric",
-                "length": 10
+                "show": true,
+                "style": "simple",
+                "count": 10,
+                "length": 10,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -830,20 +882,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "black"
+                "primary": "black",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
-                "style": "triangle",
+                "style": "block",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "simple",
-                "length": 10
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
               },
               "styling": {
                 "gradient": 0,
@@ -889,20 +945,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "black"
+                "primary": "black",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
-                "style": "line",
+                "style": "tapered",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "simple",
-                "length": 10
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -948,20 +1008,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "white"
+                "primary": "white",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
-                "style": "line",
+                "style": "vintage",
                 "length": null,
                 "offset": 0
               },
               "scale": {
+                "show": true,
                 "style": "simple",
-                "length": 10
+                "count": 10,
+                "length": 10,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -1007,20 +1071,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "white"
+                "primary": "white",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
-                "style": "triangle",
+                "style": "line",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "simple",
-                "length": 10
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
               },
               "styling": {
                 "gradient": 0,
@@ -1066,20 +1134,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "white"
+                "primary": "white",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
-                "style": "notch",
+                "style": "triangle",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "simple",
-                "length": 10
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -1125,20 +1197,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "white"
+                "primary": "white",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": true
               },
               "visualization": "gear",
               "pointer": {
-                "style": "line",
+                "style": "dot",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "dots",
-                "length": 10
+                "show": true,
+                "style": "simple",
+                "count": 10,
+                "length": 10,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -1184,20 +1260,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "white"
+                "primary": "white",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": true
               },
               "visualization": "gear",
               "pointer": {
-                "style": "line",
+                "style": "notch",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "numeric",
-                "length": 10
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
               },
               "styling": {
                 "gradient": 0,
@@ -1243,20 +1323,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "white"
+                "primary": "white",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": true
               },
               "visualization": "gear",
               "pointer": {
-                "style": "line",
+                "style": "thin",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "simple",
-                "length": 10
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -1302,20 +1386,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "black"
+                "primary": "black",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": true
               },
               "visualization": "gear",
               "pointer": {
-                "style": "line",
+                "style": "block",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "dots",
-                "length": 10
+                "show": true,
+                "style": "simple",
+                "count": 10,
+                "length": 10,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -1361,20 +1449,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "white"
+                "primary": "white",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": true
               },
               "visualization": "gear",
               "pointer": {
-                "style": "line",
+                "style": "tapered",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "numeric",
-                "length": 10
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
               },
               "styling": {
                 "gradient": 0,
@@ -1420,20 +1512,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "white"
+                "primary": "white",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
-                "style": "notch",
+                "style": "vintage",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "simple",
-                "length": 10
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -1479,20 +1575,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "white"
+                "primary": "white",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
-                "style": "triangle",
+                "style": "line",
                 "length": null,
                 "offset": 0
               },
               "scale": {
+                "show": true,
                 "style": "simple",
-                "length": 10
+                "count": 10,
+                "length": 10,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -1538,20 +1638,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "white"
+                "primary": "white",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
-                "style": "line",
+                "style": "triangle",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "simple",
-                "length": 10
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
               },
               "styling": {
                 "gradient": 0,
@@ -1597,20 +1701,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "black"
+                "primary": "black",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
-                "style": "notch",
+                "style": "dot",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "simple",
-                "length": 10
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -1656,20 +1764,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "black"
+                "primary": "black",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
-                "style": "line",
+                "style": "notch",
                 "length": null,
                 "offset": 0
               },
               "scale": {
+                "show": true,
                 "style": "simple",
-                "length": 10
+                "count": 10,
+                "length": 10,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -1715,20 +1827,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "white"
+                "primary": "white",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
-                "style": "line",
+                "style": "thin",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "simple",
-                "length": 10
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
               },
               "styling": {
                 "gradient": 0,
@@ -1774,20 +1890,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "white"
+                "primary": "white",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
-                "style": "line",
+                "style": "block",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "simple",
-                "length": 10
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -1833,20 +1953,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "black"
+                "primary": "black",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
-                "style": "line",
+                "style": "tapered",
                 "length": null,
                 "offset": 0
               },
               "scale": {
+                "show": true,
                 "style": "simple",
-                "length": 10
+                "count": 10,
+                "length": 10,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -1892,20 +2016,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "black"
+                "primary": "black",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
-                "style": "triangle",
+                "style": "vintage",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "simple",
-                "length": 10
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
               },
               "styling": {
                 "gradient": 0,
@@ -1951,20 +2079,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "black"
+                "primary": "black",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
-                "style": "notch",
+                "style": "line",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "simple",
-                "length": 10
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -2010,20 +2142,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "black"
+                "primary": "black",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
-                "style": "line",
+                "style": "triangle",
                 "length": null,
                 "offset": 0
               },
               "scale": {
+                "show": true,
                 "style": "simple",
-                "length": 10
+                "count": 10,
+                "length": 10,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -2069,20 +2205,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "black"
+                "primary": "black",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
-                "style": "line",
+                "style": "dot",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "simple",
-                "length": 10
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
               },
               "styling": {
                 "gradient": 0,
@@ -2128,20 +2268,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "white"
+                "primary": "white",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
-                "style": "triangle",
+                "style": "notch",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "simple",
-                "length": 10
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -2187,20 +2331,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "white"
+                "primary": "white",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
-                "style": "notch",
+                "style": "thin",
                 "length": null,
                 "offset": 0
               },
               "scale": {
+                "show": true,
                 "style": "simple",
-                "length": 10
+                "count": 10,
+                "length": 10,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -2246,20 +2394,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "white"
+                "primary": "white",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
-                "style": "line",
+                "style": "block",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "simple",
-                "length": 10
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
               },
               "styling": {
                 "gradient": 0,
@@ -2305,20 +2457,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "white"
+                "primary": "white",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
-                "style": "line",
+                "style": "tapered",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "simple",
-                "length": 10
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -2364,20 +2520,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "white"
+                "primary": "white",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
-                "style": "line",
+                "style": "vintage",
                 "length": null,
                 "offset": 0
               },
               "scale": {
+                "show": true,
                 "style": "simple",
-                "length": 10
+                "count": 10,
+                "length": 10,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -2423,7 +2583,8 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "black"
+                "primary": "black",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": true
@@ -2435,8 +2596,11 @@
                 "offset": 0
               },
               "scale": {
-                "style": "numeric",
-                "length": 10
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
               },
               "styling": {
                 "gradient": 0,
@@ -2482,20 +2646,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "black"
+                "primary": "black",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": true
               },
               "visualization": "gear",
               "pointer": {
-                "style": "line",
+                "style": "triangle",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "dots",
-                "length": 10
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -2541,20 +2709,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "white"
+                "primary": "white",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": true
               },
               "visualization": "gear",
               "pointer": {
-                "style": "line",
+                "style": "dot",
                 "length": null,
                 "offset": 0
               },
               "scale": {
+                "show": true,
                 "style": "simple",
-                "length": 10
+                "count": 10,
+                "length": 10,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -2600,20 +2772,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "black"
+                "primary": "black",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
-                "style": "line",
+                "style": "notch",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "simple",
-                "length": 10
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
               },
               "styling": {
                 "gradient": 0,
@@ -2659,20 +2835,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "black"
+                "primary": "black",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
-                "style": "line",
+                "style": "thin",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "simple",
-                "length": 10
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -2718,20 +2898,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "white"
+                "primary": "white",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
-                "style": "triangle",
+                "style": "block",
                 "length": null,
                 "offset": 0
               },
               "scale": {
+                "show": true,
                 "style": "simple",
-                "length": 10
+                "count": 10,
+                "length": 10,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -2777,20 +2961,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "white"
+                "primary": "white",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
-                "style": "notch",
+                "style": "tapered",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "simple",
-                "length": 10
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
               },
               "styling": {
                 "gradient": 0,
@@ -2836,20 +3024,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "white"
+                "primary": "white",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
-                "style": "line",
+                "style": "vintage",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "simple",
-                "length": 10
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -2895,7 +3087,8 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "white"
+                "primary": "white",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
@@ -2907,8 +3100,11 @@
                 "offset": 0
               },
               "scale": {
+                "show": true,
                 "style": "simple",
-                "length": 10
+                "count": 10,
+                "length": 10,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -2954,20 +3150,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "black"
+                "primary": "black",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "gear",
               "pointer": {
-                "style": "line",
+                "style": "triangle",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "simple",
-                "length": 10
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
               },
               "styling": {
                 "gradient": 0,

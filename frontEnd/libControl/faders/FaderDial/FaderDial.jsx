@@ -136,7 +136,13 @@ const FaderDial = ({ value, onChange, config }) => {
         geometry: { width: fluid ? knobSize : 60, height: fluid ? knobSize : 60 }, // square => always round
         style: { ...config?.style, knob_style: 'dial' },
         readout: { show_label: false, text_inside: false },
-        domain: { primary: { min: 0, max: Math.max(1, knobSteps - 1) } }
+        // The knob operates in INTEGER fine-step INDICES (0..knobSteps-1), not value
+        // units — so its step/wheel must be index-based. Strip the parent's leaked
+        // value-unit `step` (e.g. precision ".001", which would round the wheel to
+        // "no change") and give it an index step big enough that one notch visibly
+        // turns the dial.
+        step: undefined,
+        domain: { primary: { min: 0, max: Math.max(1, knobSteps - 1), step: Math.max(1, Math.round(knobSteps / 50)) } }
     };
 
     // Decompose: fader = coarse part (multiples of step_coarse), knob = fine part

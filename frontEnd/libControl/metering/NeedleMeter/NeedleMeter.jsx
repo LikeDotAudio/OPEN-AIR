@@ -186,16 +186,26 @@ function drawNeedle(ctx, style, cx, cy, ang, len, thick, color) {
 }
 
 function useNeedleBallistics(rawValueRef, canvasRef, min, max, width, height, config) {
+  // Persist the animated needle position across re-renders, and read the latest
+  // config via a ref. FieldComponent/VUMeterKnob hand NeedleMeter a fresh config
+  // object on every render; if `config` were an effect dep (or displayValue a
+  // plain local), each unrelated re-render would tear down the loop and reset
+  // the needle to `min` — that snap-to-floor-and-spring-back is the "bounce"
+  // seen whenever any other widget changes value.
+  const displayRef = React.useRef(min);
+  const configRef = React.useRef(config);
+  configRef.current = config;
   React.useEffect(() => {
-    let displayValue = min;
     let animationFrameId;
 
     const render = () => {
+      const config = configRef.current;
       const raw = typeof rawValueRef.current === 'number' ? rawValueRef.current : parseFloat(rawValueRef.current || min);
       const attack = config?.dynamics?.attack_ms ? (100 / config.dynamics.attack_ms) * 0.5 : 0.3;
       const release = config?.dynamics?.release_ms ? (100 / config.dynamics.release_ms) * 0.5 : 0.1;
-      if (raw > displayValue) displayValue += (raw - displayValue) * attack;
-      else displayValue -= (displayValue - raw) * release;
+      if (raw > displayRef.current) displayRef.current += (raw - displayRef.current) * attack;
+      else displayRef.current -= (displayRef.current - raw) * release;
+      const displayValue = displayRef.current;
 
       if (!canvasRef.current) { animationFrameId = requestAnimationFrame(render); return; }
       const ctx = canvasRef.current.getContext('2d');
@@ -367,7 +377,7 @@ function useNeedleBallistics(rawValueRef, canvasRef, min, max, width, height, co
     };
     render();
     return () => cancelAnimationFrame(animationFrameId);
-  }, [min, max, width, height, config]);
+  }, [min, max, width, height]);
 }
 
 const NeedleMeter = ({ value, config }) => {

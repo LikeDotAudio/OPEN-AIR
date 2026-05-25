@@ -1,0 +1,508 @@
+{
+  "Zoo_Knobs_knobs_Fender": {
+    "type": "OcaBin",
+    "id": "50.90.9.2.0.10.1",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Fender_Strat_Showcase": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Fender Strat knobs — face spins with value, fixed pointer (varies top/bottom/left/right).",
+          "Fr": "Fender Strat knobs — face spins with value, fixed pointer (varies top/bottom/left/right).",
+          "De": "Fender Strat knobs — face spins with value, fixed pointer (varies top/bottom/left/right).",
+          "Es": "Fender Strat knobs — face spins with value, fixed pointer (varies top/bottom/left/right)."
+        },
+        "layout_columns": 4,
+        "fields": {
+          "fen_01": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Volume (top)",
+              "Fr": "Volume (top)",
+              "De": "Volume (top)",
+              "Es": "Volume (top)",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 130,
+              "height": 130
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "fender",
+              "center_text": "VOLUME",
+              "colors": {
+                "primary": "#f0f0f0",
+                "text": "#caa44a",
+                "active": "#caa44a"
+              },
+              "pointer": {
+                "position": "top"
+              },
+              "scale": {
+                "count": 10
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 1,
+                "max": 10,
+                "value_default": 1
+              }
+            }
+          },
+          "fen_02": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Tone (top)",
+              "Fr": "Tone (top)",
+              "De": "Tone (top)",
+              "Es": "Tone (top)",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "fender",
+              "center_text": "TONE",
+              "colors": {
+                "primary": "#f0f0f0",
+                "text": "#caa44a",
+                "active": "#caa44a"
+              },
+              "pointer": {
+                "position": "top"
+              },
+              "scale": {
+                "count": 10
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 1,
+                "max": 10,
+                "value_default": 2
+              }
+            }
+          },
+          "fen_03": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Volume (top)",
+              "Fr": "Volume (top)",
+              "De": "Volume (top)",
+              "Es": "Volume (top)",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 140,
+              "height": 140
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "fender",
+              "center_text": "VOLUME",
+              "colors": {
+                "primary": "#1c1c1c",
+                "text": "#ffffff",
+                "active": "#ffffff"
+              },
+              "pointer": {
+                "position": "top"
+              },
+              "scale": {
+                "count": 10
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 1,
+                "max": 10,
+                "value_default": 3
+              }
+            }
+          },
+          "fen_04": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Tone (bottom)",
+              "Fr": "Tone (bottom)",
+              "De": "Tone (bottom)",
+              "Es": "Tone (bottom)",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 100,
+              "height": 100
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "fender",
+              "center_text": "TONE",
+              "colors": {
+                "primary": "#1c1c1c",
+                "text": "#ffffff",
+                "active": "#ffffff"
+              },
+              "pointer": {
+                "position": "bottom"
+              },
+              "scale": {
+                "count": 10
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 1,
+                "max": 10,
+                "value_default": 4
+              }
+            }
+          },
+          "fen_05": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Volume (top)",
+              "Fr": "Volume (top)",
+              "De": "Volume (top)",
+              "Es": "Volume (top)",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 160,
+              "height": 160
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "fender",
+              "center_text": "VOLUME",
+              "colors": {
+                "primary": "#efe4c8",
+                "text": "#8a6d1f",
+                "active": "#8a6d1f"
+              },
+              "pointer": {
+                "position": "top"
+              },
+              "scale": {
+                "count": 10
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 1,
+                "max": 10,
+                "value_default": 5
+              }
+            }
+          },
+          "fen_06": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Tone (left)",
+              "Fr": "Tone (left)",
+              "De": "Tone (left)",
+              "Es": "Tone (left)",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 120,
+              "height": 120
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "fender",
+              "center_text": "TONE",
+              "colors": {
+                "primary": "#efe4c8",
+                "text": "#8a6d1f",
+                "active": "#8a6d1f"
+              },
+              "pointer": {
+                "position": "left"
+              },
+              "scale": {
+                "count": 10
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 1,
+                "max": 10,
+                "value_default": 6
+              }
+            }
+          },
+          "fen_07": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Gain (right)",
+              "Fr": "Gain (right)",
+              "De": "Gain (right)",
+              "Es": "Gain (right)",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 130,
+              "height": 130
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "fender",
+              "center_text": "GAIN",
+              "colors": {
+                "primary": "#C62828",
+                "text": "#ffffff",
+                "active": "#ffffff"
+              },
+              "pointer": {
+                "position": "right"
+              },
+              "scale": {
+                "count": 10
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 1,
+                "max": 10,
+                "value_default": 7
+              }
+            }
+          },
+          "fen_08": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Bass (top)",
+              "Fr": "Bass (top)",
+              "De": "Bass (top)",
+              "Es": "Bass (top)",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 130,
+              "height": 130
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "fender",
+              "center_text": "BASS",
+              "colors": {
+                "primary": "#1E88E5",
+                "text": "#ffffff",
+                "active": "#ffffff"
+              },
+              "pointer": {
+                "position": "top"
+              },
+              "scale": {
+                "count": 10
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 1,
+                "max": 10,
+                "value_default": 8
+              }
+            }
+          },
+          "fen_09": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Mid (bottom)",
+              "Fr": "Mid (bottom)",
+              "De": "Mid (bottom)",
+              "Es": "Mid (bottom)",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 130,
+              "height": 130
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "fender",
+              "center_text": "MID",
+              "colors": {
+                "primary": "#2E7D32",
+                "text": "#ffffff",
+                "active": "#ffffff"
+              },
+              "pointer": {
+                "position": "bottom"
+              },
+              "scale": {
+                "count": 10
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 1,
+                "max": 10,
+                "value_default": 9
+              }
+            }
+          },
+          "fen_10": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Treble (top)",
+              "Fr": "Treble (top)",
+              "De": "Treble (top)",
+              "Es": "Treble (top)",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "fender",
+              "center_text": "TREBLE",
+              "colors": {
+                "primary": "#FB8C00",
+                "text": "#1c1c1c",
+                "active": "#1c1c1c"
+              },
+              "pointer": {
+                "position": "top"
+              },
+              "scale": {
+                "count": 10
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 1,
+                "max": 10,
+                "value_default": 10
+              }
+            }
+          },
+          "fen_11": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Drive (left)",
+              "Fr": "Drive (left)",
+              "De": "Drive (left)",
+              "Es": "Drive (left)",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 140,
+              "height": 140
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "fender",
+              "center_text": "DRIVE",
+              "colors": {
+                "primary": "#283593",
+                "text": "#ffffff",
+                "active": "#ffffff"
+              },
+              "pointer": {
+                "position": "left"
+              },
+              "scale": {
+                "count": 10
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 1,
+                "max": 10,
+                "value_default": 1
+              }
+            }
+          },
+          "fen_12": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Level (right)",
+              "Fr": "Level (right)",
+              "De": "Level (right)",
+              "Es": "Level (right)",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 100,
+              "height": 100
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "fender",
+              "center_text": "LEVEL",
+              "colors": {
+                "primary": "#546E7A",
+                "text": "#ffffff",
+                "active": "#ffffff"
+              },
+              "pointer": {
+                "position": "right"
+              },
+              "scale": {
+                "count": 10
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 1,
+                "max": 10,
+                "value_default": 2
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

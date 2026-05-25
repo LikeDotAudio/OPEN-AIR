@@ -72,7 +72,8 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "#996633"
+                "primary": "#996633",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
@@ -84,8 +85,11 @@
                 "offset": 0
               },
               "scale": {
+                "show": true,
                 "style": "simple",
-                "length": 10
+                "count": 10,
+                "length": 10,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -94,7 +98,11 @@
                 "outline_color": "#444444",
                 "fill_color": "",
                 "arc_width": 5,
-                "no_center": false
+                "no_center": false,
+                "cap_scale": 0.85
+              },
+              "style_overrides": {
+                "shape": "circle"
               }
             },
             "domain": {
@@ -131,20 +139,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "#FF0000"
+                "primary": "#FF0000",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
-                "style": "line",
+                "style": "triangle",
                 "length": null,
                 "offset": 0
               },
               "scale": {
+                "show": true,
                 "style": "simple",
-                "length": 10
+                "count": 10,
+                "length": 10,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -153,7 +165,11 @@
                 "outline_color": "#444444",
                 "fill_color": "",
                 "arc_width": 5,
-                "no_center": false
+                "no_center": false,
+                "cap_scale": 0.72
+              },
+              "style_overrides": {
+                "shape": "octagon"
               }
             },
             "domain": {
@@ -190,29 +206,38 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "#0000FF"
+                "primary": "#0000FF",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
-                "style": "line",
+                "style": "dot",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "simple",
-                "length": 10
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
               },
               "styling": {
                 "gradient": 0,
-                "teeth": 8,
+                "teeth": 10,
                 "outline_thickness": 0,
                 "outline_color": "#444444",
                 "fill_color": "",
                 "arc_width": 5,
-                "no_center": false
+                "no_center": false,
+                "cap_scale": 0.6
+              },
+              "style_overrides": {
+                "shape": "gear",
+                "knob_style": "gear"
               }
             },
             "domain": {
@@ -249,20 +274,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "#00FF00"
+                "primary": "#00FF00",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
-                "style": "line",
+                "style": "notch",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "simple",
-                "length": 10
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
               },
               "styling": {
                 "gradient": 0,
@@ -271,7 +300,11 @@
                 "outline_color": "#444444",
                 "fill_color": "",
                 "arc_width": 5,
-                "no_center": false
+                "no_center": false,
+                "cap_scale": 0.85
+              },
+              "style_overrides": {
+                "shape": "circle"
               }
             },
             "domain": {
@@ -308,20 +341,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "#FFFF00"
+                "primary": "#FFFF00",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
-                "style": "line",
+                "style": "thin",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "simple",
-                "length": 10
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -330,7 +367,11 @@
                 "outline_color": "#444444",
                 "fill_color": "",
                 "arc_width": 5,
-                "no_center": false
+                "no_center": false,
+                "cap_scale": 0.72
+              },
+              "style_overrides": {
+                "shape": "octagon"
               }
             },
             "domain": {
@@ -367,20 +408,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "#00FFFF"
+                "primary": "#00FFFF",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
-                "style": "line",
+                "style": "block",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "simple",
-                "length": 10
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -389,7 +434,12 @@
                 "outline_color": "#444444",
                 "fill_color": "",
                 "arc_width": 5,
-                "no_center": false
+                "no_center": false,
+                "cap_scale": 0.6
+              },
+              "style_overrides": {
+                "shape": "gear",
+                "knob_style": "gear"
               }
             },
             "domain": {
@@ -426,20 +476,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "#FF00FF"
+                "primary": "#FF00FF",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
-                "style": "line",
+                "style": "tapered",
                 "length": null,
                 "offset": 0
               },
               "scale": {
+                "show": true,
                 "style": "simple",
-                "length": 10
+                "count": 10,
+                "length": 10,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -448,7 +502,11 @@
                 "outline_color": "#444444",
                 "fill_color": "",
                 "arc_width": 5,
-                "no_center": false
+                "no_center": false,
+                "cap_scale": 0.85
+              },
+              "style_overrides": {
+                "shape": "circle"
               }
             },
             "domain": {
@@ -485,20 +543,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "#FFA500"
+                "primary": "#FFA500",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
-                "style": "line",
+                "style": "vintage",
                 "length": null,
                 "offset": 0
               },
               "scale": {
+                "show": true,
                 "style": "simple",
-                "length": 10
+                "count": 10,
+                "length": 10,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -507,7 +569,11 @@
                 "outline_color": "#444444",
                 "fill_color": "",
                 "arc_width": 5,
-                "no_center": false
+                "no_center": false,
+                "cap_scale": 0.72
+              },
+              "style_overrides": {
+                "shape": "octagon"
               }
             },
             "domain": {
@@ -544,7 +610,8 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "#4CAF50"
+                "primary": "#4CAF50",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
@@ -556,17 +623,25 @@
                 "offset": 0
               },
               "scale": {
-                "style": "simple",
-                "length": 10
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
               },
               "styling": {
                 "gradient": 0,
-                "teeth": 8,
+                "teeth": 6,
                 "outline_thickness": 0,
                 "outline_color": "#444444",
                 "fill_color": "",
                 "arc_width": 5,
-                "no_center": false
+                "no_center": false,
+                "cap_scale": 0.6
+              },
+              "style_overrides": {
+                "shape": "gear",
+                "knob_style": "gear"
               }
             },
             "domain": {
@@ -603,20 +678,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "#2196F3"
+                "primary": "#2196F3",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
-                "style": "line",
+                "style": "triangle",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "simple",
-                "length": 10
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
               },
               "styling": {
                 "gradient": 0,
@@ -625,7 +704,11 @@
                 "outline_color": "#444444",
                 "fill_color": "",
                 "arc_width": 5,
-                "no_center": false
+                "no_center": false,
+                "cap_scale": 0.85
+              },
+              "style_overrides": {
+                "shape": "circle"
               }
             },
             "domain": {
@@ -663,20 +746,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "#FFC107"
+                "primary": "#FFC107",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
-                "style": "line",
+                "style": "dot",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "simple",
-                "length": 10
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -685,7 +772,11 @@
                 "outline_color": "#444444",
                 "fill_color": "",
                 "arc_width": 5,
-                "no_center": false
+                "no_center": false,
+                "cap_scale": 0.72
+              },
+              "style_overrides": {
+                "shape": "octagon"
               }
             },
             "domain": {
@@ -722,29 +813,38 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "#9C27B0"
+                "primary": "#9C27B0",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
-                "style": "line",
+                "style": "notch",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "simple",
-                "length": 10
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
-                "teeth": 8,
+                "teeth": 12,
                 "outline_thickness": 0,
                 "outline_color": "#444444",
                 "fill_color": "",
                 "arc_width": 5,
-                "no_center": false
+                "no_center": false,
+                "cap_scale": 0.6
+              },
+              "style_overrides": {
+                "shape": "gear",
+                "knob_style": "gear"
               }
             },
             "domain": {
@@ -781,20 +881,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "#00BCD4"
+                "primary": "#00BCD4",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
-                "style": "line",
+                "style": "thin",
                 "length": null,
                 "offset": 0
               },
               "scale": {
+                "show": true,
                 "style": "simple",
-                "length": 10
+                "count": 10,
+                "length": 10,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -803,7 +907,11 @@
                 "outline_color": "#444444",
                 "fill_color": "",
                 "arc_width": 5,
-                "no_center": false
+                "no_center": false,
+                "cap_scale": 0.85
+              },
+              "style_overrides": {
+                "shape": "circle"
               }
             },
             "domain": {
@@ -840,20 +948,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "#FF5722"
+                "primary": "#FF5722",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
-                "style": "line",
+                "style": "block",
                 "length": null,
                 "offset": 0
               },
               "scale": {
+                "show": true,
                 "style": "simple",
-                "length": 10
+                "count": 10,
+                "length": 10,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -862,7 +974,11 @@
                 "outline_color": "#444444",
                 "fill_color": "",
                 "arc_width": 5,
-                "no_center": false
+                "no_center": false,
+                "cap_scale": 0.72
+              },
+              "style_overrides": {
+                "shape": "octagon"
               }
             },
             "domain": {
@@ -899,29 +1015,38 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "#795548"
+                "primary": "#795548",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
-                "style": "line",
+                "style": "tapered",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "simple",
-                "length": 10
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
               },
               "styling": {
                 "gradient": 0,
-                "teeth": 8,
+                "teeth": 10,
                 "outline_thickness": 0,
                 "outline_color": "#444444",
                 "fill_color": "",
                 "arc_width": 5,
-                "no_center": false
+                "no_center": false,
+                "cap_scale": 0.6
+              },
+              "style_overrides": {
+                "shape": "gear",
+                "knob_style": "gear"
               }
             },
             "domain": {
@@ -958,20 +1083,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "#607D8B"
+                "primary": "#607D8B",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
-                "style": "line",
+                "style": "vintage",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "simple",
-                "length": 10
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
               },
               "styling": {
                 "gradient": 0,
@@ -980,7 +1109,11 @@
                 "outline_color": "#444444",
                 "fill_color": "",
                 "arc_width": 5,
-                "no_center": false
+                "no_center": false,
+                "cap_scale": 0.85
+              },
+              "style_overrides": {
+                "shape": "circle"
               }
             },
             "domain": {
@@ -1017,7 +1150,8 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "#FFEB3B"
+                "primary": "#FFEB3B",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
@@ -1029,8 +1163,11 @@
                 "offset": 0
               },
               "scale": {
-                "style": "simple",
-                "length": 10
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -1039,7 +1176,11 @@
                 "outline_color": "#444444",
                 "fill_color": "",
                 "arc_width": 5,
-                "no_center": false
+                "no_center": false,
+                "cap_scale": 0.72
+              },
+              "style_overrides": {
+                "shape": "octagon"
               }
             },
             "domain": {
@@ -1076,20 +1217,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "#FF9800"
+                "primary": "#FF9800",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
-                "style": "line",
+                "style": "triangle",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "simple",
-                "length": 10
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -1098,7 +1243,12 @@
                 "outline_color": "#444444",
                 "fill_color": "",
                 "arc_width": 5,
-                "no_center": false
+                "no_center": false,
+                "cap_scale": 0.6
+              },
+              "style_overrides": {
+                "shape": "gear",
+                "knob_style": "gear"
               }
             },
             "domain": {
@@ -1135,20 +1285,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "#F44336"
+                "primary": "#F44336",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
-                "style": "line",
+                "style": "dot",
                 "length": null,
                 "offset": 0
               },
               "scale": {
+                "show": true,
                 "style": "simple",
-                "length": 10
+                "count": 10,
+                "length": 10,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -1157,7 +1311,11 @@
                 "outline_color": "#444444",
                 "fill_color": "",
                 "arc_width": 5,
-                "no_center": false
+                "no_center": false,
+                "cap_scale": 0.85
+              },
+              "style_overrides": {
+                "shape": "circle"
               }
             },
             "domain": {
@@ -1195,20 +1353,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "#D32F2F"
+                "primary": "#D32F2F",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
-                "style": "line",
+                "style": "notch",
                 "length": null,
                 "offset": 0
               },
               "scale": {
+                "show": true,
                 "style": "simple",
-                "length": 10
+                "count": 10,
+                "length": 10,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -1217,7 +1379,11 @@
                 "outline_color": "#444444",
                 "fill_color": "",
                 "arc_width": 5,
-                "no_center": false
+                "no_center": false,
+                "cap_scale": 0.72
+              },
+              "style_overrides": {
+                "shape": "octagon"
               }
             },
             "domain": {
@@ -1254,29 +1420,38 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "#8BC34A"
+                "primary": "#8BC34A",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
-                "style": "line",
+                "style": "thin",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "simple",
-                "length": 10
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
               },
               "styling": {
                 "gradient": 0,
-                "teeth": 8,
+                "teeth": 6,
                 "outline_thickness": 0,
                 "outline_color": "#444444",
                 "fill_color": "",
                 "arc_width": 5,
-                "no_center": false
+                "no_center": false,
+                "cap_scale": 0.6
+              },
+              "style_overrides": {
+                "shape": "gear",
+                "knob_style": "gear"
               }
             },
             "domain": {
@@ -1313,20 +1488,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "#4CAF50"
+                "primary": "#4CAF50",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
-                "style": "line",
+                "style": "block",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "simple",
-                "length": 10
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
               },
               "styling": {
                 "gradient": 0,
@@ -1335,7 +1514,11 @@
                 "outline_color": "#444444",
                 "fill_color": "",
                 "arc_width": 5,
-                "no_center": false
+                "no_center": false,
+                "cap_scale": 0.85
+              },
+              "style_overrides": {
+                "shape": "circle"
               }
             },
             "domain": {
@@ -1372,20 +1555,24 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "#CDDC39"
+                "primary": "#CDDC39",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
-                "style": "line",
+                "style": "tapered",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "simple",
-                "length": 10
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
@@ -1394,7 +1581,11 @@
                 "outline_color": "#444444",
                 "fill_color": "",
                 "arc_width": 5,
-                "no_center": false
+                "no_center": false,
+                "cap_scale": 0.72
+              },
+              "style_overrides": {
+                "shape": "octagon"
               }
             },
             "domain": {
@@ -1431,29 +1622,38 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "#009688"
+                "primary": "#009688",
+                "tick": "#aaaaaa"
               },
               "style_flags": {
                 "show_grid": false
               },
               "visualization": "circle",
               "pointer": {
-                "style": "line",
+                "style": "vintage",
                 "length": null,
                 "offset": 0
               },
               "scale": {
-                "style": "simple",
-                "length": 10
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
               },
               "styling": {
                 "gradient": 0,
-                "teeth": 8,
+                "teeth": 12,
                 "outline_thickness": 0,
                 "outline_color": "#444444",
                 "fill_color": "",
                 "arc_width": 5,
-                "no_center": false
+                "no_center": false,
+                "cap_scale": 0.6
+              },
+              "style_overrides": {
+                "shape": "gear",
+                "knob_style": "gear"
               }
             },
             "domain": {

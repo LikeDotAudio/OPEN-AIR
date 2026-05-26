@@ -368,6 +368,10 @@ const GCA = ({ config, value, onChange }) => {
             const newVal = Math.max(min, Math.min(max, interactionState.startVal + deltaVal));
             const nextVals = [...childVals];
             nextVals[dragging.child] = newVal;
+            // Single child moved → user has re-expressed the relationship, so
+            // refresh master = avg(children) AND recompute offsets. (Same as
+            // reference's updateMasterFromChildren + recalculateOffsets.)
+            refreshOffsets(nextVals);
             onChange(nextVals);
         }
     };
@@ -377,15 +381,8 @@ const GCA = ({ config, value, onChange }) => {
         if (canvasRef.current) canvasRef.current.releasePointerCapture(e.pointerId);
     };
 
-    const handleWheel = (e) => {
-        e.preventDefault();
-        const delta = Math.sign(e.deltaY) * -1; // Scroll up -> positive
-        const step = (max - min) * 0.05;
-        const nextMaster = Math.max(min, Math.min(max, masterVal + (delta * step)));
-        const diff = nextMaster - masterVal;
-        const nextVals = childVals.map(v => Math.max(min, Math.min(max, v + diff)));
-        onChange(nextVals);
-    };
+    // (Native non-passive wheel listener is registered in the useEffect above;
+    // React's onWheel is passive so preventDefault() would no-op here.)
 
     const handleDoubleClick = () => {
         setMode(m => m === 'macro' ? 'micro' : 'macro');

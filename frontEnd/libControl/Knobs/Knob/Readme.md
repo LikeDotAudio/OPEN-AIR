@@ -24,7 +24,29 @@ and the 3D cap body.
 `marconi` (cylinder body + rectangular wing through the body, white indicator
 line on the pointer side only) ·
 `fender` (INVERTED rotation: face spins under a FIXED pointer; pointer side
-configured via `cosmetics.pointer.position`).
+configured via `cosmetics.pointer.position`) ·
+`api` (4-lobed rounded-square shell with a bright LED-style centre disc and a
+corner pointer-notch that protrudes at the value angle; outer shell defaults to
+dark unless `styling.fill_color` overrides) ·
+`1176` (UA-1176 compressor knob: fluted body + polished metallic top cap, with
+**optional flange skirt** (white indicator line on it) and **optional
+chicken-foot pointer tab** — all variants config-driven via `cosmetics.flange.{show,color,size}`,
+`cosmetics.foot.{show,color,length}`, `cosmetics.styling.cap_color`) ·
+`pedal` (guitar-pedal style knob: round colored body + bold white indicator
+line + two small side ears at ±90° from the pointer; configurable via
+`cosmetics.line.{color,width}`, `cosmetics.ears.{show,size}`) ·
+`british` (classic UK / OmterElec fluted cylinder with three optional
+variants: **knob** (plain fluted body), **knob with cap** (`cosmetics.cap.show`
+— polished metal disc on top), **knob with ring** (`cosmetics.ring.show` —
+knurled chrome base ring), **knob with window** (`cosmetics.window.{show,pos,color}`
+— small FIXED tick marker on the ring). Number of flutes via `cosmetics.flutes`) ·
+`moog` (Minimoog/Voyager-style: polished metal cap with **concentric ring
+grooves** (lathe-turned finish — `cosmetics.cap.{show,color,rings}`) on a
+cylindrical body that is **fluted** by default (`cosmetics.flutes.{show,count}`)
+or smooth. Optional flange (`cosmetics.flange.{show,color,size}`), optional
+chicken-foot pointer tab (`cosmetics.foot.{show,color}`), indicator is a
+classic Moog DOT on the body edge by default or a LINE
+(`cosmetics.indicator.{style,color}`)).
 
 <!-- wysiwyg:sample (auto-generated from oaGuiElements; edit here to drive the library) -->
 ## Sample (WYSIWYG library source)
@@ -114,7 +136,12 @@ specific visualization are tagged in comments.
       "panner",
       "chicken",
       "marconi",
-      "fender"
+      "fender",
+      "api",
+      "1176",
+      "pedal",
+      "british",
+      "moog"
     ],
     "pointer_styles": [
       "line",

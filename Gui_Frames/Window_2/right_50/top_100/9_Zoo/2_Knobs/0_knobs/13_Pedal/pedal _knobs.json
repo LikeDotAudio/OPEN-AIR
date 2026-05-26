@@ -1,0 +1,1084 @@
+{
+  "Zoo_Knobs_knobs_Pedal": {
+    "type": "OcaBin",
+    "id": "50.90.9.2.0.13.1",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Pedal_Knob_Showcase": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Guitar-pedal style knobs — round colored body + bold white pointer line + two side ears (variant-driven).",
+          "Fr": "Guitar-pedal style knobs — round colored body + bold white pointer line + two side ears (variant-driven).",
+          "De": "Guitar-pedal style knobs — round colored body + bold white pointer line + two side ears (variant-driven).",
+          "Es": "Guitar-pedal style knobs — round colored body + bold white pointer line + two side ears (variant-driven)."
+        },
+        "layout_columns": 6,
+        "fields": {
+          "pedal_01": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Cream",
+              "Fr": "Cream",
+              "De": "Cream",
+              "Es": "Cream",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "pedal",
+              "colors": {
+                "primary": "#E9DDA3",
+                "active": "#E9DDA3"
+              },
+              "styling": {
+                "fill_color": "#E9DDA3",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "line": {
+                "color": "#ffffff"
+              },
+              "ears": {
+                "show": true,
+                "size": 0.14
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 0
+              }
+            }
+          },
+          "pedal_02": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Navy",
+              "Fr": "Navy",
+              "De": "Navy",
+              "Es": "Navy",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "pedal",
+              "colors": {
+                "primary": "#1F2A6A",
+                "active": "#1F2A6A"
+              },
+              "styling": {
+                "fill_color": "#1F2A6A",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "line": {
+                "color": "#ffffff"
+              },
+              "ears": {
+                "show": true,
+                "size": 0.14
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 13
+              }
+            }
+          },
+          "pedal_03": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Purple",
+              "Fr": "Purple",
+              "De": "Purple",
+              "Es": "Purple",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "pedal",
+              "colors": {
+                "primary": "#4D4FB8",
+                "active": "#4D4FB8"
+              },
+              "styling": {
+                "fill_color": "#4D4FB8",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "line": {
+                "color": "#ffffff"
+              },
+              "ears": {
+                "show": true,
+                "size": 0.14
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 26
+              }
+            }
+          },
+          "pedal_04": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Salmon",
+              "Fr": "Salmon",
+              "De": "Salmon",
+              "Es": "Salmon",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "pedal",
+              "colors": {
+                "primary": "#F2A09A",
+                "active": "#F2A09A"
+              },
+              "styling": {
+                "fill_color": "#F2A09A",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "line": {
+                "color": "#ffffff"
+              },
+              "ears": {
+                "show": true,
+                "size": 0.14
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 39
+              }
+            }
+          },
+          "pedal_05": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Black",
+              "Fr": "Black",
+              "De": "Black",
+              "Es": "Black",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 100,
+              "height": 100
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "pedal",
+              "colors": {
+                "primary": "#1c1c1c",
+                "active": "#1c1c1c"
+              },
+              "styling": {
+                "fill_color": "#1c1c1c",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "line": {
+                "color": "#ffffff"
+              },
+              "ears": {
+                "show": true,
+                "size": 0.14
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 52
+              }
+            }
+          },
+          "pedal_06": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Brown",
+              "Fr": "Brown",
+              "De": "Brown",
+              "Es": "Brown",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 100,
+              "height": 100
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "pedal",
+              "colors": {
+                "primary": "#5C3A1F",
+                "active": "#5C3A1F"
+              },
+              "styling": {
+                "fill_color": "#5C3A1F",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "line": {
+                "color": "#ffffff"
+              },
+              "ears": {
+                "show": true,
+                "size": 0.14
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 65
+              }
+            }
+          },
+          "pedal_07": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Grey",
+              "Fr": "Grey",
+              "De": "Grey",
+              "Es": "Grey",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 100,
+              "height": 100
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "pedal",
+              "colors": {
+                "primary": "#9aa0a4",
+                "active": "#9aa0a4"
+              },
+              "styling": {
+                "fill_color": "#9aa0a4",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "line": {
+                "color": "#ffffff"
+              },
+              "ears": {
+                "show": true,
+                "size": 0.14
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 78
+              }
+            }
+          },
+          "pedal_08": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "White",
+              "Fr": "White",
+              "De": "White",
+              "Es": "White",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 100,
+              "height": 100
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "pedal",
+              "colors": {
+                "primary": "#f0f0f0",
+                "active": "#f0f0f0"
+              },
+              "styling": {
+                "fill_color": "#f0f0f0",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "line": {
+                "color": "#ffffff"
+              },
+              "ears": {
+                "show": true,
+                "size": 0.14
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 91
+              }
+            }
+          },
+          "pedal_09": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Ivory",
+              "Fr": "Ivory",
+              "De": "Ivory",
+              "Es": "Ivory",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 90,
+              "height": 90
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "pedal",
+              "colors": {
+                "primary": "#e6dac6",
+                "active": "#e6dac6"
+              },
+              "styling": {
+                "fill_color": "#e6dac6",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "line": {
+                "color": "#ffffff"
+              },
+              "ears": {
+                "show": true,
+                "size": 0.14
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 4
+              }
+            }
+          },
+          "pedal_10": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Yellow",
+              "Fr": "Yellow",
+              "De": "Yellow",
+              "Es": "Yellow",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 100,
+              "height": 100
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "pedal",
+              "colors": {
+                "primary": "#FFE94A",
+                "active": "#FFE94A"
+              },
+              "styling": {
+                "fill_color": "#FFE94A",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "line": {
+                "color": "#ffffff"
+              },
+              "ears": {
+                "show": true,
+                "size": 0.14
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 17
+              }
+            }
+          },
+          "pedal_11": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Ochre",
+              "Fr": "Ochre",
+              "De": "Ochre",
+              "Es": "Ochre",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 100,
+              "height": 100
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "pedal",
+              "colors": {
+                "primary": "#E0B23A",
+                "active": "#E0B23A"
+              },
+              "styling": {
+                "fill_color": "#E0B23A",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "line": {
+                "color": "#ffffff"
+              },
+              "ears": {
+                "show": true,
+                "size": 0.14
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 30
+              }
+            }
+          },
+          "pedal_12": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Silver",
+              "Fr": "Silver",
+              "De": "Silver",
+              "Es": "Silver",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 90,
+              "height": 90
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "pedal",
+              "colors": {
+                "primary": "#c0c4c8",
+                "active": "#c0c4c8"
+              },
+              "styling": {
+                "fill_color": "#c0c4c8",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "line": {
+                "color": "#ffffff"
+              },
+              "ears": {
+                "show": true,
+                "size": 0.14
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 43
+              }
+            }
+          },
+          "pedal_13": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Gold",
+              "Fr": "Gold",
+              "De": "Gold",
+              "Es": "Gold",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 100,
+              "height": 100
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "pedal",
+              "colors": {
+                "primary": "#C9A227",
+                "active": "#C9A227"
+              },
+              "styling": {
+                "fill_color": "#C9A227",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "line": {
+                "color": "#ffffff"
+              },
+              "ears": {
+                "show": true,
+                "size": 0.14
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 56
+              }
+            }
+          },
+          "pedal_14": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Orange",
+              "Fr": "Orange",
+              "De": "Orange",
+              "Es": "Orange",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "pedal",
+              "colors": {
+                "primary": "#FB8C00",
+                "active": "#FB8C00"
+              },
+              "styling": {
+                "fill_color": "#FB8C00",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "line": {
+                "color": "#ffffff"
+              },
+              "ears": {
+                "show": true,
+                "size": 0.14
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 69
+              }
+            }
+          },
+          "pedal_15": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Royal",
+              "Fr": "Royal",
+              "De": "Royal",
+              "Es": "Royal",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 100,
+              "height": 100
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "pedal",
+              "colors": {
+                "primary": "#4A39C8",
+                "active": "#4A39C8"
+              },
+              "styling": {
+                "fill_color": "#4A39C8",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "line": {
+                "color": "#ffffff"
+              },
+              "ears": {
+                "show": true,
+                "size": 0.14
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 82
+              }
+            }
+          },
+          "pedal_16": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Blue",
+              "Fr": "Blue",
+              "De": "Blue",
+              "Es": "Blue",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 100,
+              "height": 100
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "pedal",
+              "colors": {
+                "primary": "#2A52E0",
+                "active": "#2A52E0"
+              },
+              "styling": {
+                "fill_color": "#2A52E0",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "line": {
+                "color": "#ffffff"
+              },
+              "ears": {
+                "show": true,
+                "size": 0.14
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 95
+              }
+            }
+          },
+          "pedal_17": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Green",
+              "Fr": "Green",
+              "De": "Green",
+              "Es": "Green",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 100,
+              "height": 100
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "pedal",
+              "colors": {
+                "primary": "#3FA34D",
+                "active": "#3FA34D"
+              },
+              "styling": {
+                "fill_color": "#3FA34D",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "line": {
+                "color": "#ffffff"
+              },
+              "ears": {
+                "show": true,
+                "size": 0.14
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 8
+              }
+            }
+          },
+          "pedal_18": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Copper",
+              "Fr": "Copper",
+              "De": "Copper",
+              "Es": "Copper",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "pedal",
+              "colors": {
+                "primary": "#A0653A",
+                "active": "#A0653A"
+              },
+              "styling": {
+                "fill_color": "#A0653A",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "line": {
+                "color": "#ffffff"
+              },
+              "ears": {
+                "show": true,
+                "size": 0.14
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 21
+              }
+            }
+          },
+          "pedal_19": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Indigo",
+              "Fr": "Indigo",
+              "De": "Indigo",
+              "Es": "Indigo",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 100,
+              "height": 100
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "pedal",
+              "colors": {
+                "primary": "#1F3573",
+                "active": "#1F3573"
+              },
+              "styling": {
+                "fill_color": "#1F3573",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "line": {
+                "color": "#ffffff"
+              },
+              "ears": {
+                "show": true,
+                "size": 0.14
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 34
+              }
+            }
+          },
+          "pedal_20": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Red",
+              "Fr": "Red",
+              "De": "Red",
+              "Es": "Red",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 100,
+              "height": 100
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "pedal",
+              "colors": {
+                "primary": "#D6362A",
+                "active": "#D6362A"
+              },
+              "styling": {
+                "fill_color": "#D6362A",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "line": {
+                "color": "#ffffff"
+              },
+              "ears": {
+                "show": true,
+                "size": 0.14
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 47
+              }
+            }
+          },
+          "pedal_21": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Hot Pink",
+              "Fr": "Hot Pink",
+              "De": "Hot Pink",
+              "Es": "Hot Pink",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 100,
+              "height": 100
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "pedal",
+              "colors": {
+                "primary": "#EC407A",
+                "active": "#EC407A"
+              },
+              "styling": {
+                "fill_color": "#EC407A",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "line": {
+                "color": "#ffffff"
+              },
+              "ears": {
+                "show": true,
+                "size": 0.14
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 60
+              }
+            }
+          },
+          "pedal_22": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Mint",
+              "Fr": "Mint",
+              "De": "Mint",
+              "Es": "Mint",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 100,
+              "height": 100
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "pedal",
+              "colors": {
+                "primary": "#5FCFB0",
+                "active": "#5FCFB0"
+              },
+              "styling": {
+                "fill_color": "#5FCFB0",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "line": {
+                "color": "#ffffff"
+              },
+              "ears": {
+                "show": true,
+                "size": 0.14
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 73
+              }
+            }
+          },
+          "pedal_23": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Black Mini",
+              "Fr": "Black Mini",
+              "De": "Black Mini",
+              "Es": "Black Mini",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 70,
+              "height": 70
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "pedal",
+              "colors": {
+                "primary": "#1c1c1c",
+                "active": "#1c1c1c"
+              },
+              "styling": {
+                "fill_color": "#1c1c1c",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "line": {
+                "color": "#ffffff"
+              },
+              "ears": {
+                "show": false,
+                "size": 0.14
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 86
+              }
+            }
+          },
+          "pedal_24": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "White Mini",
+              "Fr": "White Mini",
+              "De": "White Mini",
+              "Es": "White Mini",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 70,
+              "height": 70
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "pedal",
+              "colors": {
+                "primary": "#f0f0f0",
+                "active": "#f0f0f0"
+              },
+              "styling": {
+                "fill_color": "#f0f0f0",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "line": {
+                "color": "#ffffff"
+              },
+              "ears": {
+                "show": false,
+                "size": 0.14
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 99
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

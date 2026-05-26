@@ -1,0 +1,1328 @@
+{
+  "Zoo_Knobs_knobs_British": {
+    "type": "OcaBin",
+    "id": "50.90.9.2.0.14.1",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "British_Knob_Showcase": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "British / OmterElec fluted knobs — plain, with cap, with ring, ring+cap, ring+window, plus British-Chicken (V-foot pointer tab) variants.",
+          "Fr": "British / OmterElec fluted knobs — plain, with cap, with ring, ring+cap, ring+window, plus British-Chicken (V-foot pointer tab) variants.",
+          "De": "British / OmterElec fluted knobs — plain, with cap, with ring, ring+cap, ring+window, plus British-Chicken (V-foot pointer tab) variants.",
+          "Es": "British / OmterElec fluted knobs — plain, with cap, with ring, ring+cap, ring+window, plus British-Chicken (V-foot pointer tab) variants."
+        },
+        "layout_columns": 4,
+        "fields": {
+          "br_01": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Navy Plain",
+              "Fr": "Navy Plain",
+              "De": "Navy Plain",
+              "Es": "Navy Plain",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "british",
+              "colors": {
+                "primary": "#1a2240"
+              },
+              "styling": {
+                "fill_color": "#1a2240",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "cap": {
+                "show": false
+              },
+              "ring": {
+                "show": false
+              },
+              "window": {
+                "show": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 0
+              }
+            }
+          },
+          "br_02": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Maroon Plain",
+              "Fr": "Maroon Plain",
+              "De": "Maroon Plain",
+              "Es": "Maroon Plain",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "british",
+              "colors": {
+                "primary": "#5a1a1a"
+              },
+              "styling": {
+                "fill_color": "#5a1a1a",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "cap": {
+                "show": false
+              },
+              "ring": {
+                "show": false
+              },
+              "window": {
+                "show": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 9
+              }
+            }
+          },
+          "br_03": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Black Plain",
+              "Fr": "Black Plain",
+              "De": "Black Plain",
+              "Es": "Black Plain",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "british",
+              "colors": {
+                "primary": "#1c1c1c"
+              },
+              "styling": {
+                "fill_color": "#1c1c1c",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "cap": {
+                "show": false
+              },
+              "ring": {
+                "show": false
+              },
+              "window": {
+                "show": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 18
+              }
+            }
+          },
+          "br_04": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Slate Plain",
+              "Fr": "Slate Plain",
+              "De": "Slate Plain",
+              "Es": "Slate Plain",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "british",
+              "colors": {
+                "primary": "#7a7d80"
+              },
+              "styling": {
+                "fill_color": "#7a7d80",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "cap": {
+                "show": false
+              },
+              "ring": {
+                "show": false
+              },
+              "window": {
+                "show": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 27
+              }
+            }
+          },
+          "br_05": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Navy Cap",
+              "Fr": "Navy Cap",
+              "De": "Navy Cap",
+              "Es": "Navy Cap",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "british",
+              "colors": {
+                "primary": "#1a2240"
+              },
+              "styling": {
+                "fill_color": "#1a2240",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "cap": {
+                "show": true,
+                "color": "#cfd2d6"
+              },
+              "ring": {
+                "show": false
+              },
+              "window": {
+                "show": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 36
+              }
+            }
+          },
+          "br_06": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Maroon Cap",
+              "Fr": "Maroon Cap",
+              "De": "Maroon Cap",
+              "Es": "Maroon Cap",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "british",
+              "colors": {
+                "primary": "#5a1a1a"
+              },
+              "styling": {
+                "fill_color": "#5a1a1a",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "cap": {
+                "show": true,
+                "color": "#cfd2d6"
+              },
+              "ring": {
+                "show": false
+              },
+              "window": {
+                "show": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 45
+              }
+            }
+          },
+          "br_07": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Black Cap",
+              "Fr": "Black Cap",
+              "De": "Black Cap",
+              "Es": "Black Cap",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "british",
+              "colors": {
+                "primary": "#1c1c1c"
+              },
+              "styling": {
+                "fill_color": "#1c1c1c",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "cap": {
+                "show": true,
+                "color": "#cfd2d6"
+              },
+              "ring": {
+                "show": false
+              },
+              "window": {
+                "show": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 54
+              }
+            }
+          },
+          "br_08": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Slate Cap",
+              "Fr": "Slate Cap",
+              "De": "Slate Cap",
+              "Es": "Slate Cap",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "british",
+              "colors": {
+                "primary": "#7a7d80"
+              },
+              "styling": {
+                "fill_color": "#7a7d80",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "cap": {
+                "show": true,
+                "color": "#cfd2d6"
+              },
+              "ring": {
+                "show": false
+              },
+              "window": {
+                "show": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 63
+              }
+            }
+          },
+          "br_09": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Navy Ring",
+              "Fr": "Navy Ring",
+              "De": "Navy Ring",
+              "Es": "Navy Ring",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 130,
+              "height": 130
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "british",
+              "colors": {
+                "primary": "#1a2240"
+              },
+              "styling": {
+                "fill_color": "#1a2240",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "cap": {
+                "show": false
+              },
+              "ring": {
+                "show": true,
+                "color": "#cfd2d6"
+              },
+              "window": {
+                "show": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 72
+              }
+            }
+          },
+          "br_10": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Maroon Ring",
+              "Fr": "Maroon Ring",
+              "De": "Maroon Ring",
+              "Es": "Maroon Ring",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 130,
+              "height": 130
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "british",
+              "colors": {
+                "primary": "#5a1a1a"
+              },
+              "styling": {
+                "fill_color": "#5a1a1a",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "cap": {
+                "show": false
+              },
+              "ring": {
+                "show": true,
+                "color": "#cfd2d6"
+              },
+              "window": {
+                "show": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 81
+              }
+            }
+          },
+          "br_11": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Black Ring",
+              "Fr": "Black Ring",
+              "De": "Black Ring",
+              "Es": "Black Ring",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 130,
+              "height": 130
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "british",
+              "colors": {
+                "primary": "#1c1c1c"
+              },
+              "styling": {
+                "fill_color": "#1c1c1c",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "cap": {
+                "show": false
+              },
+              "ring": {
+                "show": true,
+                "color": "#cfd2d6"
+              },
+              "window": {
+                "show": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 90
+              }
+            }
+          },
+          "br_12": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Slate Ring",
+              "Fr": "Slate Ring",
+              "De": "Slate Ring",
+              "Es": "Slate Ring",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 130,
+              "height": 130
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "british",
+              "colors": {
+                "primary": "#7a7d80"
+              },
+              "styling": {
+                "fill_color": "#7a7d80",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "cap": {
+                "show": false
+              },
+              "ring": {
+                "show": true,
+                "color": "#cfd2d6"
+              },
+              "window": {
+                "show": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 99
+              }
+            }
+          },
+          "br_13": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Navy R+Cap",
+              "Fr": "Navy R+Cap",
+              "De": "Navy R+Cap",
+              "Es": "Navy R+Cap",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 130,
+              "height": 130
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "british",
+              "colors": {
+                "primary": "#1a2240"
+              },
+              "styling": {
+                "fill_color": "#1a2240",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "cap": {
+                "show": true,
+                "color": "#cfd2d6"
+              },
+              "ring": {
+                "show": true,
+                "color": "#cfd2d6"
+              },
+              "window": {
+                "show": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 8
+              }
+            }
+          },
+          "br_14": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Maroon R+Cap",
+              "Fr": "Maroon R+Cap",
+              "De": "Maroon R+Cap",
+              "Es": "Maroon R+Cap",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 130,
+              "height": 130
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "british",
+              "colors": {
+                "primary": "#5a1a1a"
+              },
+              "styling": {
+                "fill_color": "#5a1a1a",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "cap": {
+                "show": true,
+                "color": "#cfd2d6"
+              },
+              "ring": {
+                "show": true,
+                "color": "#cfd2d6"
+              },
+              "window": {
+                "show": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 17
+              }
+            }
+          },
+          "br_15": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Black R+Cap",
+              "Fr": "Black R+Cap",
+              "De": "Black R+Cap",
+              "Es": "Black R+Cap",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 130,
+              "height": 130
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "british",
+              "colors": {
+                "primary": "#1c1c1c"
+              },
+              "styling": {
+                "fill_color": "#1c1c1c",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "cap": {
+                "show": true,
+                "color": "#cfd2d6"
+              },
+              "ring": {
+                "show": true,
+                "color": "#cfd2d6"
+              },
+              "window": {
+                "show": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 26
+              }
+            }
+          },
+          "br_16": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Slate R+Cap",
+              "Fr": "Slate R+Cap",
+              "De": "Slate R+Cap",
+              "Es": "Slate R+Cap",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 130,
+              "height": 130
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "british",
+              "colors": {
+                "primary": "#7a7d80"
+              },
+              "styling": {
+                "fill_color": "#7a7d80",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "cap": {
+                "show": true,
+                "color": "#cfd2d6"
+              },
+              "ring": {
+                "show": true,
+                "color": "#cfd2d6"
+              },
+              "window": {
+                "show": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 35
+              }
+            }
+          },
+          "br_17": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Navy Window",
+              "Fr": "Navy Window",
+              "De": "Navy Window",
+              "Es": "Navy Window",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 130,
+              "height": 130
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "british",
+              "colors": {
+                "primary": "#1a2240"
+              },
+              "styling": {
+                "fill_color": "#1a2240",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "cap": {
+                "show": false
+              },
+              "ring": {
+                "show": true,
+                "color": "#cfd2d6"
+              },
+              "window": {
+                "show": true,
+                "pos": 0,
+                "color": "#1c1c1c"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 44
+              }
+            }
+          },
+          "br_18": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Maroon Window",
+              "Fr": "Maroon Window",
+              "De": "Maroon Window",
+              "Es": "Maroon Window",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 130,
+              "height": 130
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "british",
+              "colors": {
+                "primary": "#5a1a1a"
+              },
+              "styling": {
+                "fill_color": "#5a1a1a",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "cap": {
+                "show": false
+              },
+              "ring": {
+                "show": true,
+                "color": "#cfd2d6"
+              },
+              "window": {
+                "show": true,
+                "pos": 0,
+                "color": "#1c1c1c"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 53
+              }
+            }
+          },
+          "br_19": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Black Window",
+              "Fr": "Black Window",
+              "De": "Black Window",
+              "Es": "Black Window",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 130,
+              "height": 130
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "british",
+              "colors": {
+                "primary": "#1c1c1c"
+              },
+              "styling": {
+                "fill_color": "#1c1c1c",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "cap": {
+                "show": false
+              },
+              "ring": {
+                "show": true,
+                "color": "#cfd2d6"
+              },
+              "window": {
+                "show": true,
+                "pos": 0,
+                "color": "#1c1c1c"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 62
+              }
+            }
+          },
+          "br_20": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Slate Window",
+              "Fr": "Slate Window",
+              "De": "Slate Window",
+              "Es": "Slate Window",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 130,
+              "height": 130
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "british",
+              "colors": {
+                "primary": "#7a7d80"
+              },
+              "styling": {
+                "fill_color": "#7a7d80",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "cap": {
+                "show": false
+              },
+              "ring": {
+                "show": true,
+                "color": "#cfd2d6"
+              },
+              "window": {
+                "show": true,
+                "pos": 0,
+                "color": "#1c1c1c"
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 71
+              }
+            }
+          },
+          "br_21": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Charcoal Mini",
+              "Fr": "Charcoal Mini",
+              "De": "Charcoal Mini",
+              "Es": "Charcoal Mini",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 80,
+              "height": 80
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "british",
+              "colors": {
+                "primary": "#2a2d30"
+              },
+              "styling": {
+                "fill_color": "#2a2d30",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "cap": {
+                "show": false
+              },
+              "ring": {
+                "show": false
+              },
+              "window": {
+                "show": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 80
+              }
+            }
+          },
+          "br_22": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Wine Mini",
+              "Fr": "Wine Mini",
+              "De": "Wine Mini",
+              "Es": "Wine Mini",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 80,
+              "height": 80
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "british",
+              "colors": {
+                "primary": "#3a1414"
+              },
+              "styling": {
+                "fill_color": "#3a1414",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "cap": {
+                "show": false
+              },
+              "ring": {
+                "show": false
+              },
+              "window": {
+                "show": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 89
+              }
+            }
+          },
+          "brc_01": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Slate Chicken",
+              "Fr": "Slate Chicken",
+              "De": "Slate Chicken",
+              "Es": "Slate Chicken",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 120,
+              "height": 120
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "british",
+              "colors": {
+                "primary": "#5a6168"
+              },
+              "styling": {
+                "fill_color": "#5a6168",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "cap": {
+                "show": true,
+                "color": "#cfd2d6"
+              },
+              "ring": {
+                "show": false
+              },
+              "window": {
+                "show": false
+              },
+              "foot": {
+                "show": true,
+                "color": "#5a6168",
+                "length": 0.32
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 0
+              }
+            }
+          },
+          "brc_02": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Charcoal Chicken",
+              "Fr": "Charcoal Chicken",
+              "De": "Charcoal Chicken",
+              "Es": "Charcoal Chicken",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 120,
+              "height": 120
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "british",
+              "colors": {
+                "primary": "#2a2d30"
+              },
+              "styling": {
+                "fill_color": "#2a2d30",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "cap": {
+                "show": true,
+                "color": "#cfd2d6"
+              },
+              "ring": {
+                "show": false
+              },
+              "window": {
+                "show": false
+              },
+              "foot": {
+                "show": true,
+                "color": "#2a2d30",
+                "length": 0.32
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 17
+              }
+            }
+          },
+          "brc_03": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Maroon Chicken",
+              "Fr": "Maroon Chicken",
+              "De": "Maroon Chicken",
+              "Es": "Maroon Chicken",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 120,
+              "height": 120
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "british",
+              "colors": {
+                "primary": "#5a1a1a"
+              },
+              "styling": {
+                "fill_color": "#5a1a1a",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "cap": {
+                "show": true,
+                "color": "#cfd2d6"
+              },
+              "ring": {
+                "show": false
+              },
+              "window": {
+                "show": false
+              },
+              "foot": {
+                "show": true,
+                "color": "#5a1a1a",
+                "length": 0.32
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 34
+              }
+            }
+          },
+          "brc_04": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Navy Chicken",
+              "Fr": "Navy Chicken",
+              "De": "Navy Chicken",
+              "Es": "Navy Chicken",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 120,
+              "height": 120
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "british",
+              "colors": {
+                "primary": "#1a2240"
+              },
+              "styling": {
+                "fill_color": "#1a2240",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "cap": {
+                "show": true,
+                "color": "#cfd2d6"
+              },
+              "ring": {
+                "show": false
+              },
+              "window": {
+                "show": false
+              },
+              "foot": {
+                "show": true,
+                "color": "#1a2240",
+                "length": 0.32
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 51
+              }
+            }
+          },
+          "brc_05": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Black Chicken",
+              "Fr": "Black Chicken",
+              "De": "Black Chicken",
+              "Es": "Black Chicken",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 120,
+              "height": 120
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "british",
+              "colors": {
+                "primary": "#1c1c1c"
+              },
+              "styling": {
+                "fill_color": "#1c1c1c",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "cap": {
+                "show": true,
+                "color": "#cfd2d6"
+              },
+              "ring": {
+                "show": false
+              },
+              "window": {
+                "show": false
+              },
+              "foot": {
+                "show": true,
+                "color": "#1c1c1c",
+                "length": 0.32
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 68
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

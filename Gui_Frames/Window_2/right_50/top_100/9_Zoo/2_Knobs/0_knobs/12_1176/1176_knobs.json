@@ -1,0 +1,710 @@
+{
+  "Zoo_Knobs_knobs_1176": {
+    "type": "OcaBin",
+    "id": "50.90.9.2.0.12.1",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "K1176_Showcase": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "UA-1176 style knobs — fluted body + polished metallic cap, with optional flange skirt and optional chicken-foot pointer (all variant-driven).",
+          "Fr": "UA-1176 style knobs — fluted body + polished metallic cap, with optional flange skirt and optional chicken-foot pointer (all variant-driven).",
+          "De": "UA-1176 style knobs — fluted body + polished metallic cap, with optional flange skirt and optional chicken-foot pointer (all variant-driven).",
+          "Es": "UA-1176 style knobs — fluted body + polished metallic cap, with optional flange skirt and optional chicken-foot pointer (all variant-driven)."
+        },
+        "layout_columns": 5,
+        "fields": {
+          "k1176_01": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Big Flange Black",
+              "Fr": "Big Flange Black",
+              "De": "Big Flange Black",
+              "Es": "Big Flange Black",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 150,
+              "height": 150
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "1176",
+              "colors": {
+                "primary": "#1a1a1a",
+                "cap": "#cfd2d6"
+              },
+              "styling": {
+                "fill_color": "#1a1a1a",
+                "cap_color": "#cfd2d6",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flange": {
+                "show": true,
+                "size": 1.0,
+                "color": "#1a1a1a"
+              },
+              "foot": {
+                "show": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 0
+              }
+            }
+          },
+          "k1176_02": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Big Flange Silver",
+              "Fr": "Big Flange Silver",
+              "De": "Big Flange Silver",
+              "Es": "Big Flange Silver",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 150,
+              "height": 150
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "1176",
+              "colors": {
+                "primary": "#1a1a1a",
+                "cap": "#dcdfe2"
+              },
+              "styling": {
+                "fill_color": "#1a1a1a",
+                "cap_color": "#dcdfe2",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flange": {
+                "show": true,
+                "size": 1.0,
+                "color": "#bfc3c8"
+              },
+              "foot": {
+                "show": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 11
+              }
+            }
+          },
+          "k1176_03": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Wide Flange Dark",
+              "Fr": "Wide Flange Dark",
+              "De": "Wide Flange Dark",
+              "Es": "Wide Flange Dark",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 150,
+              "height": 150
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "1176",
+              "colors": {
+                "primary": "#1a1a1a",
+                "cap": "#cfd2d6"
+              },
+              "styling": {
+                "fill_color": "#1a1a1a",
+                "cap_color": "#cfd2d6",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flange": {
+                "show": true,
+                "size": 0.98,
+                "color": "#101010"
+              },
+              "foot": {
+                "show": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 22
+              }
+            }
+          },
+          "k1176_04": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Wide Flange Chrome",
+              "Fr": "Wide Flange Chrome",
+              "De": "Wide Flange Chrome",
+              "Es": "Wide Flange Chrome",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 150,
+              "height": 150
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "1176",
+              "colors": {
+                "primary": "#1a1a1a",
+                "cap": "#dcdfe2"
+              },
+              "styling": {
+                "fill_color": "#1a1a1a",
+                "cap_color": "#dcdfe2",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flange": {
+                "show": true,
+                "size": 0.98,
+                "color": "#c8ccd0"
+              },
+              "foot": {
+                "show": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 33
+              }
+            }
+          },
+          "k1176_05": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Foot White",
+              "Fr": "Foot White",
+              "De": "Foot White",
+              "Es": "Foot White",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 115,
+              "height": 115
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "1176",
+              "colors": {
+                "primary": "#1a1a1a",
+                "cap": "#cfd2d6"
+              },
+              "styling": {
+                "fill_color": "#1a1a1a",
+                "cap_color": "#cfd2d6",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flange": {
+                "show": false
+              },
+              "foot": {
+                "show": true,
+                "color": "#ffffff",
+                "length": 0.22
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 44
+              }
+            }
+          },
+          "k1176_06": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Foot Orange",
+              "Fr": "Foot Orange",
+              "De": "Foot Orange",
+              "Es": "Foot Orange",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 115,
+              "height": 115
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "1176",
+              "colors": {
+                "primary": "#1a1a1a",
+                "cap": "#cfd2d6"
+              },
+              "styling": {
+                "fill_color": "#1a1a1a",
+                "cap_color": "#cfd2d6",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flange": {
+                "show": false
+              },
+              "foot": {
+                "show": true,
+                "color": "#FB8C00",
+                "length": 0.22
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 55
+              }
+            }
+          },
+          "k1176_07": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Foot Red",
+              "Fr": "Foot Red",
+              "De": "Foot Red",
+              "Es": "Foot Red",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 115,
+              "height": 115
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "1176",
+              "colors": {
+                "primary": "#1a1a1a",
+                "cap": "#cfd2d6"
+              },
+              "styling": {
+                "fill_color": "#1a1a1a",
+                "cap_color": "#cfd2d6",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flange": {
+                "show": false
+              },
+              "foot": {
+                "show": true,
+                "color": "#E53935",
+                "length": 0.22
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 66
+              }
+            }
+          },
+          "k1176_08": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Foot Blue",
+              "Fr": "Foot Blue",
+              "De": "Foot Blue",
+              "Es": "Foot Blue",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 115,
+              "height": 115
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "1176",
+              "colors": {
+                "primary": "#1a1a1a",
+                "cap": "#cfd2d6"
+              },
+              "styling": {
+                "fill_color": "#1a1a1a",
+                "cap_color": "#cfd2d6",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flange": {
+                "show": false
+              },
+              "foot": {
+                "show": true,
+                "color": "#1E88E5",
+                "length": 0.22
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 77
+              }
+            }
+          },
+          "k1176_09": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "No Foot No Flange",
+              "Fr": "No Foot No Flange",
+              "De": "No Foot No Flange",
+              "Es": "No Foot No Flange",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 115,
+              "height": 115
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "1176",
+              "colors": {
+                "primary": "#1a1a1a",
+                "cap": "#cfd2d6"
+              },
+              "styling": {
+                "fill_color": "#1a1a1a",
+                "cap_color": "#cfd2d6",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flange": {
+                "show": false
+              },
+              "foot": {
+                "show": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 88
+              }
+            }
+          },
+          "k1176_10": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Small Foot White",
+              "Fr": "Small Foot White",
+              "De": "Small Foot White",
+              "Es": "Small Foot White",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 90,
+              "height": 90
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "1176",
+              "colors": {
+                "primary": "#1a1a1a",
+                "cap": "#cfd2d6"
+              },
+              "styling": {
+                "fill_color": "#1a1a1a",
+                "cap_color": "#cfd2d6",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flange": {
+                "show": false
+              },
+              "foot": {
+                "show": true,
+                "color": "#ffffff",
+                "length": 0.2
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 99
+              }
+            }
+          },
+          "k1176_11": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Small Foot White 2",
+              "Fr": "Small Foot White 2",
+              "De": "Small Foot White 2",
+              "Es": "Small Foot White 2",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 90,
+              "height": 90
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "1176",
+              "colors": {
+                "primary": "#1a1a1a",
+                "cap": "#dcdfe2"
+              },
+              "styling": {
+                "fill_color": "#1a1a1a",
+                "cap_color": "#dcdfe2",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flange": {
+                "show": false
+              },
+              "foot": {
+                "show": true,
+                "color": "#ffffff",
+                "length": 0.2
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 10
+              }
+            }
+          },
+          "k1176_12": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Small Foot Orange",
+              "Fr": "Small Foot Orange",
+              "De": "Small Foot Orange",
+              "Es": "Small Foot Orange",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 90,
+              "height": 90
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "1176",
+              "colors": {
+                "primary": "#1a1a1a",
+                "cap": "#cfd2d6"
+              },
+              "styling": {
+                "fill_color": "#1a1a1a",
+                "cap_color": "#cfd2d6",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flange": {
+                "show": false
+              },
+              "foot": {
+                "show": true,
+                "color": "#FB8C00",
+                "length": 0.2
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 21
+              }
+            }
+          },
+          "k1176_13": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Tiny Plain",
+              "Fr": "Tiny Plain",
+              "De": "Tiny Plain",
+              "Es": "Tiny Plain",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 70,
+              "height": 70
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "1176",
+              "colors": {
+                "primary": "#1a1a1a",
+                "cap": "#cfd2d6"
+              },
+              "styling": {
+                "fill_color": "#1a1a1a",
+                "cap_color": "#cfd2d6",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flange": {
+                "show": false
+              },
+              "foot": {
+                "show": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 32
+              }
+            }
+          },
+          "k1176_14": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Tiny Chrome",
+              "Fr": "Tiny Chrome",
+              "De": "Tiny Chrome",
+              "Es": "Tiny Chrome",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 70,
+              "height": 70
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "1176",
+              "colors": {
+                "primary": "#1a1a1a",
+                "cap": "#dcdfe2"
+              },
+              "styling": {
+                "fill_color": "#1a1a1a",
+                "cap_color": "#dcdfe2",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flange": {
+                "show": false
+              },
+              "foot": {
+                "show": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 43
+              }
+            }
+          },
+          "k1176_15": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Tiny Plain 2",
+              "Fr": "Tiny Plain 2",
+              "De": "Tiny Plain 2",
+              "Es": "Tiny Plain 2",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 60,
+              "height": 60
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "1176",
+              "colors": {
+                "primary": "#1a1a1a",
+                "cap": "#cfd2d6"
+              },
+              "styling": {
+                "fill_color": "#1a1a1a",
+                "cap_color": "#cfd2d6",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flange": {
+                "show": false
+              },
+              "foot": {
+                "show": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 54
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

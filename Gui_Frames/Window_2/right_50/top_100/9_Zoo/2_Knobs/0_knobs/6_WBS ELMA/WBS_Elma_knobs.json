@@ -1,0 +1,1096 @@
+{
+  "Zoo_Knobs_knobs_WBS_Elma": {
+    "type": "OcaBin",
+    "id": "50.90.9.2.0.6.1",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "WBSElma_Showcase": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "WBS-ELMA Swiss-style instrumentation knobs — fluted body with three variants: regular (colored cap inset), wing (pointer-side tab), wing-both (symmetric tabs), and pointer (triangular tip).",
+          "Fr": "WBS-ELMA Swiss-style instrumentation knobs — fluted body with three variants: regular (colored cap inset), wing (pointer-side tab), wing-both (symmetric tabs), and pointer (triangular tip).",
+          "De": "WBS-ELMA Swiss-style instrumentation knobs — fluted body with three variants: regular (colored cap inset), wing (pointer-side tab), wing-both (symmetric tabs), and pointer (triangular tip).",
+          "Es": "WBS-ELMA Swiss-style instrumentation knobs — fluted body with three variants: regular (colored cap inset), wing (pointer-side tab), wing-both (symmetric tabs), and pointer (triangular tip)."
+        },
+        "layout_columns": 4,
+        "fields": {
+          "we_01": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Reg Sapphire",
+              "Fr": "Reg Sapphire",
+              "De": "Reg Sapphire",
+              "Es": "Reg Sapphire",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "wbs-elma",
+              "colors": {
+                "primary": "#1c1c1c",
+                "cap": "#2A52E0"
+              },
+              "styling": {
+                "fill_color": "#1c1c1c",
+                "cap_color": "#2A52E0",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "line": {
+                "color": "#ffffff"
+              },
+              "cap": {
+                "show": true,
+                "color": "#2A52E0"
+              },
+              "wing": {
+                "show": false
+              },
+              "pointer_tip": {
+                "show": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 0
+              }
+            }
+          },
+          "we_02": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Reg Crimson",
+              "Fr": "Reg Crimson",
+              "De": "Reg Crimson",
+              "Es": "Reg Crimson",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "wbs-elma",
+              "colors": {
+                "primary": "#1c1c1c",
+                "cap": "#D32F2F"
+              },
+              "styling": {
+                "fill_color": "#1c1c1c",
+                "cap_color": "#D32F2F",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "line": {
+                "color": "#ffffff"
+              },
+              "cap": {
+                "show": true,
+                "color": "#D32F2F"
+              },
+              "wing": {
+                "show": false
+              },
+              "pointer_tip": {
+                "show": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 9
+              }
+            }
+          },
+          "we_03": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Reg Emerald",
+              "Fr": "Reg Emerald",
+              "De": "Reg Emerald",
+              "Es": "Reg Emerald",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "wbs-elma",
+              "colors": {
+                "primary": "#1c1c1c",
+                "cap": "#2E7D32"
+              },
+              "styling": {
+                "fill_color": "#1c1c1c",
+                "cap_color": "#2E7D32",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "line": {
+                "color": "#ffffff"
+              },
+              "cap": {
+                "show": true,
+                "color": "#2E7D32"
+              },
+              "wing": {
+                "show": false
+              },
+              "pointer_tip": {
+                "show": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 18
+              }
+            }
+          },
+          "we_04": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Reg Amber",
+              "Fr": "Reg Amber",
+              "De": "Reg Amber",
+              "Es": "Reg Amber",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "wbs-elma",
+              "colors": {
+                "primary": "#1c1c1c",
+                "cap": "#FB8C00"
+              },
+              "styling": {
+                "fill_color": "#1c1c1c",
+                "cap_color": "#FB8C00",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "line": {
+                "color": "#ffffff"
+              },
+              "cap": {
+                "show": true,
+                "color": "#FB8C00"
+              },
+              "wing": {
+                "show": false
+              },
+              "pointer_tip": {
+                "show": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 27
+              }
+            }
+          },
+          "we_05": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Reg White",
+              "Fr": "Reg White",
+              "De": "Reg White",
+              "Es": "Reg White",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "wbs-elma",
+              "colors": {
+                "primary": "#1c1c1c",
+                "cap": "#f0f0f0"
+              },
+              "styling": {
+                "fill_color": "#1c1c1c",
+                "cap_color": "#f0f0f0",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "line": {
+                "color": "#ffffff"
+              },
+              "cap": {
+                "show": true,
+                "color": "#f0f0f0"
+              },
+              "wing": {
+                "show": false
+              },
+              "pointer_tip": {
+                "show": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 36
+              }
+            }
+          },
+          "we_06": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Reg Cream",
+              "Fr": "Reg Cream",
+              "De": "Reg Cream",
+              "Es": "Reg Cream",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "wbs-elma",
+              "colors": {
+                "primary": "#1c1c1c",
+                "cap": "#efe4c8"
+              },
+              "styling": {
+                "fill_color": "#1c1c1c",
+                "cap_color": "#efe4c8",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "line": {
+                "color": "#ffffff"
+              },
+              "cap": {
+                "show": true,
+                "color": "#efe4c8"
+              },
+              "wing": {
+                "show": false
+              },
+              "pointer_tip": {
+                "show": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 45
+              }
+            }
+          },
+          "we_07": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Reg Violet",
+              "Fr": "Reg Violet",
+              "De": "Reg Violet",
+              "Es": "Reg Violet",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "wbs-elma",
+              "colors": {
+                "primary": "#1c1c1c",
+                "cap": "#7E3FB8"
+              },
+              "styling": {
+                "fill_color": "#1c1c1c",
+                "cap_color": "#7E3FB8",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "line": {
+                "color": "#ffffff"
+              },
+              "cap": {
+                "show": true,
+                "color": "#7E3FB8"
+              },
+              "wing": {
+                "show": false
+              },
+              "pointer_tip": {
+                "show": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 54
+              }
+            }
+          },
+          "we_08": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Reg Cyan",
+              "Fr": "Reg Cyan",
+              "De": "Reg Cyan",
+              "Es": "Reg Cyan",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "wbs-elma",
+              "colors": {
+                "primary": "#1c1c1c",
+                "cap": "#00ACC1"
+              },
+              "styling": {
+                "fill_color": "#1c1c1c",
+                "cap_color": "#00ACC1",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "line": {
+                "color": "#ffffff"
+              },
+              "cap": {
+                "show": true,
+                "color": "#00ACC1"
+              },
+              "wing": {
+                "show": false
+              },
+              "pointer_tip": {
+                "show": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 63
+              }
+            }
+          },
+          "we_09": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Wing Black",
+              "Fr": "Wing Black",
+              "De": "Wing Black",
+              "Es": "Wing Black",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "wbs-elma",
+              "colors": {
+                "primary": "#1c1c1c",
+                "cap": "#2A52E0"
+              },
+              "styling": {
+                "fill_color": "#1c1c1c",
+                "cap_color": "#2A52E0",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "line": {
+                "color": "#ffffff"
+              },
+              "cap": {
+                "show": false
+              },
+              "wing": {
+                "show": true,
+                "color": "#1c1c1c",
+                "length": 0.2,
+                "both": false
+              },
+              "pointer_tip": {
+                "show": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 72
+              }
+            }
+          },
+          "we_10": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Wing Charcoal",
+              "Fr": "Wing Charcoal",
+              "De": "Wing Charcoal",
+              "Es": "Wing Charcoal",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "wbs-elma",
+              "colors": {
+                "primary": "#2a2d30",
+                "cap": "#D32F2F"
+              },
+              "styling": {
+                "fill_color": "#2a2d30",
+                "cap_color": "#D32F2F",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "line": {
+                "color": "#ffffff"
+              },
+              "cap": {
+                "show": false
+              },
+              "wing": {
+                "show": true,
+                "color": "#2a2d30",
+                "length": 0.2,
+                "both": false
+              },
+              "pointer_tip": {
+                "show": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 81
+              }
+            }
+          },
+          "we_11": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Wing Maroon",
+              "Fr": "Wing Maroon",
+              "De": "Wing Maroon",
+              "Es": "Wing Maroon",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "wbs-elma",
+              "colors": {
+                "primary": "#5a1a1a",
+                "cap": "#FB8C00"
+              },
+              "styling": {
+                "fill_color": "#5a1a1a",
+                "cap_color": "#FB8C00",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "line": {
+                "color": "#ffffff"
+              },
+              "cap": {
+                "show": false
+              },
+              "wing": {
+                "show": true,
+                "color": "#5a1a1a",
+                "length": 0.2,
+                "both": false
+              },
+              "pointer_tip": {
+                "show": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 90
+              }
+            }
+          },
+          "we_12": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Wing Navy",
+              "Fr": "Wing Navy",
+              "De": "Wing Navy",
+              "Es": "Wing Navy",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "wbs-elma",
+              "colors": {
+                "primary": "#1a2240",
+                "cap": "#43A047"
+              },
+              "styling": {
+                "fill_color": "#1a2240",
+                "cap_color": "#43A047",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "line": {
+                "color": "#ffffff"
+              },
+              "cap": {
+                "show": false
+              },
+              "wing": {
+                "show": true,
+                "color": "#1a2240",
+                "length": 0.2,
+                "both": false
+              },
+              "pointer_tip": {
+                "show": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 99
+              }
+            }
+          },
+          "we_13": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Wing2 Black",
+              "Fr": "Wing2 Black",
+              "De": "Wing2 Black",
+              "Es": "Wing2 Black",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "wbs-elma",
+              "colors": {
+                "primary": "#1c1c1c",
+                "cap": "#2A52E0"
+              },
+              "styling": {
+                "fill_color": "#1c1c1c",
+                "cap_color": "#2A52E0",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "line": {
+                "color": "#ffffff"
+              },
+              "cap": {
+                "show": true,
+                "color": "#2A52E0"
+              },
+              "wing": {
+                "show": true,
+                "color": "#1c1c1c",
+                "length": 0.18,
+                "both": true
+              },
+              "pointer_tip": {
+                "show": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 8
+              }
+            }
+          },
+          "we_14": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Wing2 Slate",
+              "Fr": "Wing2 Slate",
+              "De": "Wing2 Slate",
+              "Es": "Wing2 Slate",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "wbs-elma",
+              "colors": {
+                "primary": "#5a6168",
+                "cap": "#FB8C00"
+              },
+              "styling": {
+                "fill_color": "#5a6168",
+                "cap_color": "#FB8C00",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "line": {
+                "color": "#ffffff"
+              },
+              "cap": {
+                "show": true,
+                "color": "#FB8C00"
+              },
+              "wing": {
+                "show": true,
+                "color": "#5a6168",
+                "length": 0.18,
+                "both": true
+              },
+              "pointer_tip": {
+                "show": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 17
+              }
+            }
+          },
+          "we_15": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Wing2 Brown",
+              "Fr": "Wing2 Brown",
+              "De": "Wing2 Brown",
+              "Es": "Wing2 Brown",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "wbs-elma",
+              "colors": {
+                "primary": "#3a2a1c",
+                "cap": "#FDD835"
+              },
+              "styling": {
+                "fill_color": "#3a2a1c",
+                "cap_color": "#FDD835",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "line": {
+                "color": "#ffffff"
+              },
+              "cap": {
+                "show": true,
+                "color": "#FDD835"
+              },
+              "wing": {
+                "show": true,
+                "color": "#3a2a1c",
+                "length": 0.18,
+                "both": true
+              },
+              "pointer_tip": {
+                "show": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 26
+              }
+            }
+          },
+          "we_16": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Wing2 Forest",
+              "Fr": "Wing2 Forest",
+              "De": "Wing2 Forest",
+              "Es": "Wing2 Forest",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "wbs-elma",
+              "colors": {
+                "primary": "#0e2a1a",
+                "cap": "#EC407A"
+              },
+              "styling": {
+                "fill_color": "#0e2a1a",
+                "cap_color": "#EC407A",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "line": {
+                "color": "#ffffff"
+              },
+              "cap": {
+                "show": true,
+                "color": "#EC407A"
+              },
+              "wing": {
+                "show": true,
+                "color": "#0e2a1a",
+                "length": 0.18,
+                "both": true
+              },
+              "pointer_tip": {
+                "show": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 35
+              }
+            }
+          },
+          "we_17": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Tip Black",
+              "Fr": "Tip Black",
+              "De": "Tip Black",
+              "Es": "Tip Black",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "wbs-elma",
+              "colors": {
+                "primary": "#1c1c1c",
+                "cap": "#2A52E0"
+              },
+              "styling": {
+                "fill_color": "#1c1c1c",
+                "cap_color": "#2A52E0",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "line": {
+                "color": "#ffffff"
+              },
+              "cap": {
+                "show": true,
+                "color": "#2A52E0"
+              },
+              "wing": {
+                "show": false
+              },
+              "pointer_tip": {
+                "show": true,
+                "color": "#1c1c1c",
+                "length": 0.2
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 44
+              }
+            }
+          },
+          "we_18": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Tip Charcoal",
+              "Fr": "Tip Charcoal",
+              "De": "Tip Charcoal",
+              "Es": "Tip Charcoal",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "wbs-elma",
+              "colors": {
+                "primary": "#2a2d30",
+                "cap": "#FFD835"
+              },
+              "styling": {
+                "fill_color": "#2a2d30",
+                "cap_color": "#FFD835",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "line": {
+                "color": "#ffffff"
+              },
+              "cap": {
+                "show": true,
+                "color": "#FFD835"
+              },
+              "wing": {
+                "show": false
+              },
+              "pointer_tip": {
+                "show": true,
+                "color": "#2a2d30",
+                "length": 0.2
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 53
+              }
+            }
+          },
+          "we_19": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Tip Maroon",
+              "Fr": "Tip Maroon",
+              "De": "Tip Maroon",
+              "Es": "Tip Maroon",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "wbs-elma",
+              "colors": {
+                "primary": "#5a1a1a",
+                "cap": "#43A047"
+              },
+              "styling": {
+                "fill_color": "#5a1a1a",
+                "cap_color": "#43A047",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "line": {
+                "color": "#ffffff"
+              },
+              "cap": {
+                "show": true,
+                "color": "#43A047"
+              },
+              "wing": {
+                "show": false
+              },
+              "pointer_tip": {
+                "show": true,
+                "color": "#5a1a1a",
+                "length": 0.2
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 62
+              }
+            }
+          },
+          "we_20": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Tip Slate",
+              "Fr": "Tip Slate",
+              "De": "Tip Slate",
+              "Es": "Tip Slate",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "wbs-elma",
+              "colors": {
+                "primary": "#5a6168",
+                "cap": "#D32F2F"
+              },
+              "styling": {
+                "fill_color": "#5a6168",
+                "cap_color": "#D32F2F",
+                "outline_color": "#000000",
+                "outline_thickness": 1
+              },
+              "flutes": 18,
+              "line": {
+                "color": "#ffffff"
+              },
+              "cap": {
+                "show": true,
+                "color": "#D32F2F"
+              },
+              "wing": {
+                "show": false
+              },
+              "pointer_tip": {
+                "show": true,
+                "color": "#5a6168",
+                "length": 0.2
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 71
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

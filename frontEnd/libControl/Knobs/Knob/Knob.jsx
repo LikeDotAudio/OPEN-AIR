@@ -91,7 +91,11 @@ const KnobCap = ({ center, radius, angle, config, filterId, indicatorColor }) =>
     const pointer = cosmetics.pointer || {};
 
     const knobStyle = (overrides.knob_style || styling.knob_style || cosmetics.visualization || c.knob_style || 'standard').toLowerCase();
-    const defaultShape = knobStyle === 'gear' ? 'gear' : 'circle';
+    // If the style name IS a shape (gear/octagon/circle), use it as the default
+    // cap shape so `visualization:"octagon"` actually renders as an octagon
+    // without needing an explicit style_overrides.shape.
+    const defaultShape = (knobStyle === 'gear' || knobStyle === 'octagon' || knobStyle === 'circle')
+        ? knobStyle : 'circle';
     const knobShape = (overrides.shape || styling.shape || c.shape || defaultShape).toLowerCase();
     const isChicken = knobStyle === 'chicken' || knobShape === 'chicken';
     const isMarconi = knobStyle === 'marconi' || knobShape === 'marconi';
@@ -202,7 +206,7 @@ const KnobCap = ({ center, radius, angle, config, filterId, indicatorColor }) =>
         const bodyR = radius * 0.40, skirtR = radius * 0.52;
         const rad = angle * Math.PI / 180;
         const P = (d, cc) => `${center + d * Math.cos(rad) - cc * Math.sin(rad)},${center - d * Math.sin(rad) - cc * Math.cos(rad)}`;
-        const tipLen = radius * 1.02, bumLen = radius * 0.46;
+        const tipLen = radius * 1.02, bumLen = radius * 0.70;
         const hw = bodyR * 1.05, hwBum = hw * 0.5;
         const beak = [P(tipLen, 0), P(0, hw), P(-bumLen, hwBum), P(-bumLen, -hwBum), P(0, -hw)].join(' ');
         const tx = center + tipLen * Math.cos(rad), ty = center - tipLen * Math.sin(rad);
@@ -237,17 +241,18 @@ const KnobCap = ({ center, radius, angle, config, filterId, indicatorColor }) =>
     if (isMarconi) {
         const body = styling.fill_color || colors.primary || indicatorColor || '#9aa3ad';
         const gTop = shadeHex(body, 0.30), gBot = shadeHex(body, -0.42);
-        // Prominent RECTANGULAR wing (parallel sides) with a notched two-ear outer
-        // edge — the characteristic Marconi tab — on a full round body.
+        // ONE solid rectangular wing that passes THROUGH the body: protrudes the
+        // same distance on BOTH sides (pointer side and opposite side). Only the
+        // pointer side gets the white indicator line; the opposite side is bare.
         const bodyR = radius * 0.62, skirtR = radius * 0.93;
         const rad = angle * Math.PI / 180;
         const P = (d, cc) => `${center + d * Math.cos(rad) - cc * Math.sin(rad)},${center - d * Math.sin(rad) - cc * Math.cos(rad)}`;
-        const d0 = bodyR * 0.20, wingLen = radius * 1.02;
-        const wH = bodyR * 0.52, earDepth = radius * 0.12, notchHalf = wH * 0.32;
-        const nb = wingLen - earDepth;
-        const wing = [P(d0, wH), P(wingLen, wH), P(wingLen, notchHalf), P(nb, notchHalf), P(nb, -notchHalf), P(wingLen, -notchHalf), P(wingLen, -wH), P(d0, -wH)].join(' ');
-        const lx1 = center + bodyR * 0.50 * Math.cos(rad), ly1 = center - bodyR * 0.50 * Math.sin(rad);
-        const lx2 = center + (nb - 1) * Math.cos(rad), ly2 = center - (nb - 1) * Math.sin(rad);
+        const wingLen = radius * 1.02;
+        const wH = bodyR * 0.50;
+        const wing = [P(-wingLen, wH), P(wingLen, wH), P(wingLen, -wH), P(-wingLen, -wH)].join(' ');
+        const lx1 = center + bodyR * 0.40 * Math.cos(rad), ly1 = center - bodyR * 0.40 * Math.sin(rad);
+        const lx2 = center + (wingLen - 1) * Math.cos(rad), ly2 = center - (wingLen - 1) * Math.sin(rad);
+        const lineW = Math.max(2, radius * 0.045);
         return (
             <g className="knob-cap-system marconi">
                 <defs>
@@ -272,7 +277,8 @@ const KnobCap = ({ center, radius, angle, config, filterId, indicatorColor }) =>
                         <ellipse cx={center - bodyR * 0.3} cy={center - bodyR * 0.4} rx={bodyR * 0.55} ry={bodyR * 0.3} fill="white" opacity="0.16" filter={`url(#blur-${filterId})`} />
                         <circle cx={center + bodyR * 0.1} cy={center + bodyR * 0.15} r={bodyR * 0.85} fill="black" opacity="0.12" filter={`url(#blur-${filterId})`} />
                     </g>
-                    <line x1={lx1} y1={ly1} x2={lx2} y2={ly2} stroke="#ffffff" strokeWidth="2.5" strokeLinecap="round" />
+                    {/* white indicator line down the centre of the wing */}
+                    <line x1={lx1} y1={ly1} x2={lx2} y2={ly2} stroke="#ffffff" strokeWidth={lineW} strokeLinecap="round" />
                 </g>
             </g>
         );
@@ -336,6 +342,28 @@ const Knob = ({ value, onChange, config, size: defaultSize = 80 }) => {
     const secondaryColor = colors.secondary || '#444444';
     const baseColor = styling.fill_color || c.knob_fill_color || '#333';
     const isFender = ((cosmetics.style_overrides?.knob_style || styling.knob_style || cosmetics.visualization || c.knob_style || '').toLowerCase()) === 'fender';
+    // Endless / infinite dial: drag and wheel WRAP modulo (max-min) instead of clamp.
+    const isInfinity = !!(c.interaction?.infinity || c.infinity);
+    const _wrapOrClamp = (v) => {
+        const range = max - min;
+        if (isInfinity && range > 0) return min + ((v - min) % range + range) % range;
+        return Math.max(min, Math.min(max, v));
+    };
+    // Panner: knob outputs TWO values [leftPct, rightPct] (each 0-100). Middle
+    // position = [50, 50]. Linear pan: position 0 -> [100,0], pos max -> [0,100].
+    // `value` may arrive as the [L,R] array or as a single position number.
+    const isPanner = ((cosmetics.style_overrides?.knob_style || styling.knob_style || cosmetics.visualization || c.knob_style || '').toLowerCase()) === 'panner';
+    const _mid = (min + max) / 2;
+    const _posOf = (v) => Array.isArray(v) ? Number(v[1] ?? _mid) : Number(v ?? _mid);
+    const displayValue = isPanner ? _posOf(value) : value;
+    const fireChange = (newPos) => {
+        if (isPanner) {
+            const r = (max - min) || 1;
+            const norm = (newPos - min) / r;
+            const left = (1 - norm) * 100, right = norm * 100;
+            onChange([Math.round(left * 10) / 10, Math.round(right * 10) / 10]);
+        } else onChange(newPos);
+    };
 
     const padding = (arcWidth / 2) + 12;
     const radius = ((size - (padding * 2)) / 2) * 0.8;
@@ -358,9 +386,17 @@ const Knob = ({ value, onChange, config, size: defaultSize = 80 }) => {
     const startValRef = React.useRef(0);
 
     const handlePointerDown = (e) => {
+        // Alt-click snaps the knob to its default value (no drag).
+        if (e.altKey) {
+            const dv = c.domain?.primary?.value_default ?? c.value?.default_value ?? c.value_default;
+            const def = (dv !== undefined && dv !== null) ? Number(dv) : (isPanner ? _mid : min);
+            fireChange(_wrapOrClamp(Number.isFinite(def) ? def : _mid));
+            return;
+        }
         setIsDragging(true);
         startYRef.current = e.clientY;
-        startValRef.current = value !== undefined && value !== null ? value : min;
+        startValRef.current = isPanner ? _posOf(value)
+            : (value !== undefined && value !== null ? value : min);
         e.target.setPointerCapture(e.pointerId);
     };
 
@@ -368,8 +404,9 @@ const Knob = ({ value, onChange, config, size: defaultSize = 80 }) => {
         if (!isDragging) return;
         const deltaY = startYRef.current - e.clientY;
         const range = max - min;
-        const deltaVal = (deltaY / 150) * range; 
-        onChange(Math.max(min, Math.min(max, Math.round((startValRef.current + deltaVal) * 100) / 100)));
+        const deltaVal = (deltaY / 150) * range;
+        const next = _wrapOrClamp(Math.round((startValRef.current + deltaVal) * 100) / 100);
+        fireChange(next);
     };
 
     const handlePointerUp = (e) => {
@@ -392,13 +429,13 @@ const Knob = ({ value, onChange, config, size: defaultSize = 80 }) => {
         const sc = parseFloat(c.domain?.primary?.step ?? c.step);
         const step = (Number.isFinite(sc) && sc > 0) ? sc : range / 50;
         const dir = e.deltaY < 0 ? 1 : -1;
-        const cur = Number((value !== undefined && value !== null) ? value : min);
-        let next = Math.max(min, Math.min(max, cur + dir * step));
-        // Snap to the step grid and clean float error to the step's precision, so a
-        // sub-0.01 step (e.g. a fine dial) isn't rounded to "no change".
+        const cur = Number(isPanner ? _posOf(value)
+            : ((value !== undefined && value !== null) ? value : min));
+        let next = _wrapOrClamp(cur + dir * step);
+        // Snap to the step grid so a sub-0.01 step (e.g. a fine dial) isn't rounded to "no change".
         next = Math.round(next / step) * step;
         const dec = (String(step).split('.')[1] || '').length;
-        onChange(parseFloat(next.toFixed(Math.min(10, dec))));
+        fireChange(parseFloat(next.toFixed(Math.min(10, dec))));
     };
     React.useEffect(() => {
         const el = svgRef.current;
@@ -409,7 +446,7 @@ const Knob = ({ value, onChange, config, size: defaultSize = 80 }) => {
     }, []);
 
     // 3. Coordinate Sync
-    const { startAngle, extent, pointerAngleDeg, norm } = getKnobAngles(c, value, min, max);
+    const { startAngle, extent, pointerAngleDeg, norm } = getKnobAngles(c, displayValue, min, max);
     const filterId = `knob-${c.id || Math.random().toString(36).substr(2, 9)}`;
 
     // --- FENDER (Strat) cap: only the NUMBERS + knurl rotate with the value; the
@@ -425,6 +462,10 @@ const Knob = ({ value, onChange, config, size: defaultSize = 80 }) => {
         const numColor = colors.text || styling.tick_color || '#caa44a';
         const gTop = shadeHex(body, 0.24), gBot = shadeHex(body, -0.34);
         const skirtR = radius * 0.97, ringR = radius * 0.66, bodyR = radius * 0.54, rNum = radius * 0.82;
+        // Number font size: configurable via cosmetics.scale.text_size (or .font_size,
+        // or top-level number_size). Default is 25% smaller than the previous 2x size.
+        const _numFontCfg = cosmetics.scale?.text_size ?? cosmetics.scale?.font_size ?? c.number_size ?? null;
+        const numFont = (_numFontCfg != null) ? parseFloat(_numFontCfg) : Math.max(11, radius * 0.195);
         const faceRot = -norm * sweep;
         const sxp = (sig, r) => center + r * Math.sin(sig * Math.PI / 180);
         const syp = (sig, r) => center - r * Math.cos(sig * Math.PI / 180);
@@ -434,7 +475,7 @@ const Knob = ({ value, onChange, config, size: defaultSize = 80 }) => {
             const nk = (N > 1) ? k / (N - 1) : 0;
             const vk = min + nk * (max - min), sig = sigP + nk * sweep;
             marks.push(<line key={'t' + k} x1={sxp(sig, skirtR * 0.88)} y1={syp(sig, skirtR * 0.88)} x2={sxp(sig, skirtR * 0.96)} y2={syp(sig, skirtR * 0.96)} stroke={numColor} strokeWidth={1.5} strokeLinecap="round" />);
-            marks.push(<text key={'n' + k} x={sxp(sig, rNum)} y={syp(sig, rNum)} fill={numColor} fontSize={Math.max(7, radius * 0.13)} fontFamily="Arial" fontWeight="bold" textAnchor="middle" dominantBaseline="central">{Math.round(vk)}</text>);
+            marks.push(<text key={'n' + k} x={sxp(sig, rNum)} y={syp(sig, rNum)} fill={numColor} fontSize={numFont} fontFamily="Arial" fontWeight="bold" textAnchor="middle" dominantBaseline="central">{Math.round(vk)}</text>);
         }
         const ribs = [], M = 48;
         for (let j = 0; j < M; j++) {
@@ -470,8 +511,10 @@ const Knob = ({ value, onChange, config, size: defaultSize = 80 }) => {
                     {ribs}
                     {marks}
                 </g>
-                {/* STATIC lit dome — gradient + glint do NOT rotate */}
-                <g pointerEvents="none">
+                {/* STATIC lit dome — gradient + glint do NOT rotate. Shifted slightly
+                    upward to suggest height (cylinder side peeking below the dome). */}
+                <ellipse cx={center} cy={center + radius * 0.02} rx={bodyR * 1.0} ry={bodyR * 0.18} fill="#000" opacity="0.35" filter={`url(#blur-${filterId})`} pointerEvents="none" />
+                <g pointerEvents="none" transform={`translate(0 ${-radius * 0.07})`}>
                     <circle cx={center} cy={center} r={bodyR} fill={`url(#fbody-${filterId})`} stroke={shadeHex(body, -0.4)} strokeWidth="1" />
                     <ellipse cx={center - bodyR * 0.32} cy={center - bodyR * 0.4} rx={bodyR * 0.5} ry={bodyR * 0.26} fill="white" opacity="0.16" filter={`url(#blur-${filterId})`} />
                 </g>

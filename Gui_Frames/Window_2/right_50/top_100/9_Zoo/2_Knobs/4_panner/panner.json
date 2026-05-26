@@ -75,7 +75,8 @@
                   0,
                   50,
                   100
-                ]
+                ],
+                "knob_style": "panner"
               },
               "visualization": "circle",
               "pointer": {
@@ -99,9 +100,9 @@
             },
             "domain": {
               "primary": {
-                "min": -100.0,
-                "max": 100.0,
-                "value_default": 0.0,
+                "min": 0,
+                "max": 100,
+                "value_default": 50,
                 "reff_point": 50.0
               }
             },
@@ -109,7 +110,10 @@
             "tick_size": 0.2,
             "value_text_inside": true,
             "show_units": true,
-            "unit_text": "%"
+            "unit_text": "%",
+            "value": {
+              "default_value": 50
+            }
           },
           "pan_left_latching": {
             "type": "_SmartKnob",
@@ -151,7 +155,8 @@
                   -50,
                   -25,
                   0
-                ]
+                ],
+                "knob_style": "panner"
               },
               "visualization": "circle",
               "pointer": {
@@ -175,9 +180,9 @@
             },
             "domain": {
               "primary": {
-                "min": -100.0,
-                "max": 0.0,
-                "value_default": -50.0,
+                "min": 0,
+                "max": 100,
+                "value_default": 50,
                 "reff_point": 50.0
               }
             },
@@ -186,7 +191,10 @@
             "value_text_inside": true,
             "show_units": true,
             "unit_text": "%",
-            "latching": true
+            "latching": true,
+            "value": {
+              "default_value": 50
+            }
           },
           "pan_right_momentary": {
             "type": "_SmartKnob",
@@ -228,7 +236,8 @@
                   50,
                   75,
                   100
-                ]
+                ],
+                "knob_style": "panner"
               },
               "visualization": "circle",
               "pointer": {
@@ -252,9 +261,9 @@
             },
             "domain": {
               "primary": {
-                "min": 0.0,
-                "max": 100.0,
-                "value_default": 50.0,
+                "min": 0,
+                "max": 100,
+                "value_default": 50,
                 "reff_point": 50.0
               }
             },
@@ -263,7 +272,10 @@
             "value_text_inside": true,
             "show_units": true,
             "unit_text": "%",
-            "latching": false
+            "latching": false,
+            "value": {
+              "default_value": 50
+            }
           },
           "width_latching": {
             "type": "_SmartKnob",
@@ -305,7 +317,8 @@
                   100,
                   150,
                   200
-                ]
+                ],
+                "knob_style": "panner"
               },
               "visualization": "circle",
               "pointer": {
@@ -329,9 +342,9 @@
             },
             "domain": {
               "primary": {
-                "min": 0.0,
-                "max": 200.0,
-                "value_default": 100.0,
+                "min": 0,
+                "max": 100,
+                "value_default": 50,
                 "reff_point": 50.0
               }
             },
@@ -340,7 +353,10 @@
             "value_text_inside": true,
             "show_units": true,
             "unit_text": "%",
-            "latching": true
+            "latching": true,
+            "value": {
+              "default_value": 50
+            }
           },
           "balance_momentary": {
             "type": "_SmartKnob",
@@ -382,7 +398,8 @@
                   0,
                   50,
                   100
-                ]
+                ],
+                "knob_style": "panner"
               },
               "visualization": "circle",
               "pointer": {
@@ -406,9 +423,9 @@
             },
             "domain": {
               "primary": {
-                "min": -100.0,
-                "max": 100.0,
-                "value_default": 0.0,
+                "min": 0,
+                "max": 100,
+                "value_default": 50,
                 "reff_point": 50.0
               }
             },
@@ -416,7 +433,10 @@
             "tick_size": 0.2,
             "value_text_inside": true,
             "show_units": false,
-            "latching": false
+            "latching": false,
+            "value": {
+              "default_value": 50
+            }
           },
           "spread_latching": {
             "type": "_SmartKnob",
@@ -458,7 +478,8 @@
                   50,
                   75,
                   100
-                ]
+                ],
+                "knob_style": "panner"
               },
               "visualization": "circle",
               "pointer": {
@@ -482,9 +503,9 @@
             },
             "domain": {
               "primary": {
-                "min": 0.0,
-                "max": 100.0,
-                "value_default": 75.0,
+                "min": 0,
+                "max": 100,
+                "value_default": 50,
                 "reff_point": 50.0
               }
             },
@@ -492,7 +513,10 @@
             "tick_size": 0.2,
             "value_text_inside": true,
             "show_units": false,
-            "latching": true
+            "latching": true,
+            "value": {
+              "default_value": 50
+            }
           },
           "azimuth_momentary": {
             "type": "_SmartKnob",
@@ -534,7 +558,8 @@
                   180,
                   270,
                   360
-                ]
+                ],
+                "knob_style": "panner"
               },
               "visualization": "circle",
               "pointer": {
@@ -558,9 +583,9 @@
             },
             "domain": {
               "primary": {
-                "min": 0.0,
-                "max": 360.0,
-                "value_default": 45.0,
+                "min": 0,
+                "max": 100,
+                "value_default": 50,
                 "reff_point": 50.0
               }
             },
@@ -569,7 +594,10 @@
             "value_text_inside": true,
             "show_units": true,
             "unit_text": "°",
-            "latching": false
+            "latching": false,
+            "value": {
+              "default_value": 50
+            }
           },
           "elevation_latching": {
             "type": "_SmartKnob",
@@ -611,7 +639,8 @@
                   0,
                   45,
                   90
-                ]
+                ],
+                "knob_style": "panner"
               },
               "visualization": "circle",
               "pointer": {
@@ -635,9 +664,9 @@
             },
             "domain": {
               "primary": {
-                "min": -90.0,
-                "max": 90.0,
-                "value_default": 10.0,
+                "min": 0,
+                "max": 100,
+                "value_default": 50,
                 "reff_point": 50.0
               }
             },
@@ -646,7 +675,10 @@
             "value_text_inside": true,
             "show_units": true,
             "unit_text": "°",
-            "latching": true
+            "latching": true,
+            "value": {
+              "default_value": 50
+            }
           }
         }
       },
@@ -713,7 +745,8 @@
                   0,
                   50,
                   100
-                ]
+                ],
+                "knob_style": "panner"
               },
               "visualization": "circle",
               "pointer": {
@@ -737,9 +770,9 @@
             },
             "domain": {
               "primary": {
-                "min": -100.0,
-                "max": 100.0,
-                "value_default": 0.0,
+                "min": 0,
+                "max": 100,
+                "value_default": 50,
                 "reff_point": 50.0
               }
             },
@@ -747,7 +780,10 @@
             "tick_size": 0.2,
             "value_text_inside": true,
             "show_units": true,
-            "unit_text": "%"
+            "unit_text": "%",
+            "value": {
+              "default_value": 50
+            }
           },
           "aux1_pan_left": {
             "type": "_SmartKnob",
@@ -788,7 +824,8 @@
                   -50,
                   -25,
                   0
-                ]
+                ],
+                "knob_style": "panner"
               },
               "visualization": "circle",
               "pointer": {
@@ -812,9 +849,9 @@
             },
             "domain": {
               "primary": {
-                "min": -100.0,
-                "max": 0.0,
-                "value_default": -50.0,
+                "min": 0,
+                "max": 100,
+                "value_default": 50,
                 "reff_point": 50.0
               }
             },
@@ -822,7 +859,10 @@
             "tick_size": 0.25,
             "value_text_inside": true,
             "show_units": true,
-            "unit_text": "%"
+            "unit_text": "%",
+            "value": {
+              "default_value": 50
+            }
           },
           "aux1_pan_right": {
             "type": "_SmartKnob",
@@ -863,7 +903,8 @@
                   50,
                   75,
                   100
-                ]
+                ],
+                "knob_style": "panner"
               },
               "visualization": "circle",
               "pointer": {
@@ -887,9 +928,9 @@
             },
             "domain": {
               "primary": {
-                "min": 0.0,
-                "max": 100.0,
-                "value_default": 50.0,
+                "min": 0,
+                "max": 100,
+                "value_default": 50,
                 "reff_point": 50.0
               }
             },
@@ -897,7 +938,10 @@
             "tick_size": 0.2,
             "value_text_inside": true,
             "show_units": true,
-            "unit_text": "%"
+            "unit_text": "%",
+            "value": {
+              "default_value": 50
+            }
           },
           "aux1_width_latching": {
             "type": "_SmartKnob",
@@ -938,7 +982,8 @@
                   50,
                   75,
                   100
-                ]
+                ],
+                "knob_style": "panner"
               },
               "visualization": "circle",
               "pointer": {
@@ -962,9 +1007,9 @@
             },
             "domain": {
               "primary": {
-                "min": 0.0,
-                "max": 100.0,
-                "value_default": 100.0,
+                "min": 0,
+                "max": 100,
+                "value_default": 50,
                 "reff_point": 50.0
               }
             },
@@ -973,7 +1018,10 @@
             "value_text_inside": true,
             "show_units": true,
             "unit_text": "%",
-            "latching": true
+            "latching": true,
+            "value": {
+              "default_value": 50
+            }
           },
           "aux1_balance_momentary": {
             "type": "_SmartKnob",
@@ -1014,7 +1062,8 @@
                   0,
                   50,
                   100
-                ]
+                ],
+                "knob_style": "panner"
               },
               "visualization": "circle",
               "pointer": {
@@ -1038,9 +1087,9 @@
             },
             "domain": {
               "primary": {
-                "min": -100.0,
-                "max": 100.0,
-                "value_default": 0.0,
+                "min": 0,
+                "max": 100,
+                "value_default": 50,
                 "reff_point": 50.0
               }
             },
@@ -1048,7 +1097,10 @@
             "tick_size": 0.2,
             "value_text_inside": true,
             "show_units": false,
-            "latching": false
+            "latching": false,
+            "value": {
+              "default_value": 50
+            }
           },
           "aux1_spread_latching": {
             "type": "_SmartKnob",
@@ -1089,7 +1141,8 @@
                   50,
                   75,
                   100
-                ]
+                ],
+                "knob_style": "panner"
               },
               "visualization": "circle",
               "pointer": {
@@ -1113,9 +1166,9 @@
             },
             "domain": {
               "primary": {
-                "min": 0.0,
-                "max": 100.0,
-                "value_default": 75.0,
+                "min": 0,
+                "max": 100,
+                "value_default": 50,
                 "reff_point": 50.0
               }
             },
@@ -1123,7 +1176,10 @@
             "tick_size": 0.2,
             "value_text_inside": true,
             "show_units": false,
-            "latching": true
+            "latching": true,
+            "value": {
+              "default_value": 50
+            }
           },
           "aux1_azimuth_momentary": {
             "type": "_SmartKnob",
@@ -1164,7 +1220,8 @@
                   180,
                   270,
                   360
-                ]
+                ],
+                "knob_style": "panner"
               },
               "visualization": "circle",
               "pointer": {
@@ -1188,9 +1245,9 @@
             },
             "domain": {
               "primary": {
-                "min": 0.0,
-                "max": 360.0,
-                "value_default": 45.0,
+                "min": 0,
+                "max": 100,
+                "value_default": 50,
                 "reff_point": 50.0
               }
             },
@@ -1199,7 +1256,10 @@
             "value_text_inside": true,
             "show_units": true,
             "unit_text": "°",
-            "latching": false
+            "latching": false,
+            "value": {
+              "default_value": 50
+            }
           },
           "aux1_elevation_latching": {
             "type": "_SmartKnob",
@@ -1240,7 +1300,8 @@
                   0,
                   45,
                   90
-                ]
+                ],
+                "knob_style": "panner"
               },
               "visualization": "circle",
               "pointer": {
@@ -1264,9 +1325,9 @@
             },
             "domain": {
               "primary": {
-                "min": -90.0,
-                "max": 90.0,
-                "value_default": 10.0,
+                "min": 0,
+                "max": 100,
+                "value_default": 50,
                 "reff_point": 50.0
               }
             },
@@ -1275,7 +1336,10 @@
             "value_text_inside": true,
             "show_units": true,
             "unit_text": "°",
-            "latching": true
+            "latching": true,
+            "value": {
+              "default_value": 50
+            }
           }
         }
       },
@@ -1342,15 +1406,21 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "panner"
               }
             },
             "domain": {
               "primary": {
-                "min": -64.0,
-                "max": 64.0,
-                "value_default": 32.0,
+                "min": 0,
+                "max": 100,
+                "value_default": 50,
                 "reff_point": 50.0
               }
+            },
+            "value": {
+              "default_value": 50
             }
           }
         }
@@ -1418,7 +1488,8 @@
                   50,
                   75,
                   100
-                ]
+                ],
+                "knob_style": "panner"
               },
               "visualization": "circle",
               "pointer": {
@@ -1442,9 +1513,9 @@
             },
             "domain": {
               "primary": {
-                "min": 0.0,
-                "max": 100.0,
-                "value_default": 100.0,
+                "min": 0,
+                "max": 100,
+                "value_default": 50,
                 "reff_point": 50.0
               }
             },
@@ -1452,7 +1523,10 @@
             "tick_size": 0.2,
             "value_text_inside": true,
             "show_units": true,
-            "unit_text": "%"
+            "unit_text": "%",
+            "value": {
+              "default_value": 50
+            }
           },
           "ambience_narrow_momentary": {
             "type": "_SmartKnob",
@@ -1494,7 +1568,8 @@
                   30,
                   40,
                   50
-                ]
+                ],
+                "knob_style": "panner"
               },
               "visualization": "circle",
               "pointer": {
@@ -1518,9 +1593,9 @@
             },
             "domain": {
               "primary": {
-                "min": 0.0,
-                "max": 50.0,
-                "value_default": 25.0,
+                "min": 0,
+                "max": 100,
+                "value_default": 50,
                 "reff_point": 50.0
               }
             },
@@ -1528,7 +1603,10 @@
             "tick_size": 0.25,
             "value_text_inside": true,
             "show_units": true,
-            "unit_text": "%"
+            "unit_text": "%",
+            "value": {
+              "default_value": 50
+            }
           },
           "ambience_wide_latching": {
             "type": "_SmartKnob",
@@ -1569,7 +1647,8 @@
                   100,
                   125,
                   150
-                ]
+                ],
+                "knob_style": "panner"
               },
               "visualization": "circle",
               "pointer": {
@@ -1593,9 +1672,9 @@
             },
             "domain": {
               "primary": {
-                "min": 50.0,
-                "max": 150.0,
-                "value_default": 100.0,
+                "min": 0,
+                "max": 100,
+                "value_default": 50,
                 "reff_point": 50.0
               }
             },
@@ -1604,7 +1683,10 @@
             "value_text_inside": true,
             "show_units": true,
             "unit_text": "%",
-            "latching": true
+            "latching": true,
+            "value": {
+              "default_value": 50
+            }
           },
           "ambience_full_momentary": {
             "type": "_SmartKnob",
@@ -1645,7 +1727,8 @@
                   0,
                   50,
                   100
-                ]
+                ],
+                "knob_style": "panner"
               },
               "visualization": "circle",
               "pointer": {
@@ -1669,9 +1752,9 @@
             },
             "domain": {
               "primary": {
-                "min": -100.0,
-                "max": 100.0,
-                "value_default": 0.0,
+                "min": 0,
+                "max": 100,
+                "value_default": 50,
                 "reff_point": 50.0
               }
             },
@@ -1680,7 +1763,10 @@
             "value_text_inside": true,
             "show_units": true,
             "unit_text": "%",
-            "latching": false
+            "latching": false,
+            "value": {
+              "default_value": 50
+            }
           },
           "balance_latching": {
             "type": "_SmartKnob",
@@ -1721,7 +1807,8 @@
                   0,
                   50,
                   100
-                ]
+                ],
+                "knob_style": "panner"
               },
               "visualization": "circle",
               "pointer": {
@@ -1745,9 +1832,9 @@
             },
             "domain": {
               "primary": {
-                "min": -100.0,
-                "max": 100.0,
-                "value_default": 0.0,
+                "min": 0,
+                "max": 100,
+                "value_default": 50,
                 "reff_point": 50.0
               }
             },
@@ -1755,7 +1842,10 @@
             "tick_size": 0.2,
             "value_text_inside": true,
             "show_units": false,
-            "latching": true
+            "latching": true,
+            "value": {
+              "default_value": 50
+            }
           },
           "depth_momentary": {
             "type": "_SmartKnob",
@@ -1796,7 +1886,8 @@
                   50,
                   75,
                   100
-                ]
+                ],
+                "knob_style": "panner"
               },
               "visualization": "circle",
               "pointer": {
@@ -1820,9 +1911,9 @@
             },
             "domain": {
               "primary": {
-                "min": 0.0,
-                "max": 100.0,
-                "value_default": 75.0,
+                "min": 0,
+                "max": 100,
+                "value_default": 50,
                 "reff_point": 50.0
               }
             },
@@ -1831,7 +1922,10 @@
             "value_text_inside": true,
             "show_units": true,
             "unit_text": "%",
-            "latching": false
+            "latching": false,
+            "value": {
+              "default_value": 50
+            }
           },
           "azimuth_latching": {
             "type": "_SmartKnob",
@@ -1872,7 +1966,8 @@
                   180,
                   270,
                   360
-                ]
+                ],
+                "knob_style": "panner"
               },
               "visualization": "circle",
               "pointer": {
@@ -1896,9 +1991,9 @@
             },
             "domain": {
               "primary": {
-                "min": 0.0,
-                "max": 360.0,
-                "value_default": 45.0,
+                "min": 0,
+                "max": 100,
+                "value_default": 50,
                 "reff_point": 50.0
               }
             },
@@ -1907,7 +2002,10 @@
             "value_text_inside": true,
             "show_units": true,
             "unit_text": "°",
-            "latching": true
+            "latching": true,
+            "value": {
+              "default_value": 50
+            }
           },
           "elevation_momentary": {
             "type": "_SmartKnob",
@@ -1948,7 +2046,8 @@
                   0,
                   45,
                   90
-                ]
+                ],
+                "knob_style": "panner"
               },
               "visualization": "circle",
               "pointer": {
@@ -1972,9 +2071,9 @@
             },
             "domain": {
               "primary": {
-                "min": -90.0,
-                "max": 90.0,
-                "value_default": 10.0,
+                "min": 0,
+                "max": 100,
+                "value_default": 50,
                 "reff_point": 50.0
               }
             },
@@ -1983,7 +2082,10 @@
             "value_text_inside": true,
             "show_units": true,
             "unit_text": "°",
-            "latching": false
+            "latching": false,
+            "value": {
+              "default_value": 50
+            }
           }
         }
       },
@@ -2051,15 +2153,21 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "panner"
               }
             },
             "domain": {
               "primary": {
-                "min": -50.0,
-                "max": 50.0,
-                "value_default": -50.0,
+                "min": 0,
+                "max": 100,
+                "value_default": 50,
                 "reff_point": 50.0
               }
+            },
+            "value": {
+              "default_value": 50
             }
           }
         }

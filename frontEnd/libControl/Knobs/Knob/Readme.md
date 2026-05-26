@@ -4,179 +4,143 @@ Rotary control built with separated concerns: motion/angle logic, tick scale,
 and the 3D cap body.
 
 - **Defines (globals):** `Knob` (orchestrator), `KnobCap`, `KnobTicks`,
-  `getKnobAngles`, `describeArc`, `polarToCartesian`
+  `getKnobAngles`, `describeArc`, `polarToCartesian`, `shadeHex`
 - **Props:** `value`, `onChange`, `config` (domain + cosmetics)
 - **Loaded by:** the live app via `frontEnd/Core/Launch/index.html`.
 - **Demo:** open `../index.html`.
+
+## Interactions (all visualizations)
+
+- **Drag up/down** → adjust value (clamped, or wrapped if `interaction.infinity`).
+- **Mouse wheel** → step by `domain.primary.step` (or 2% of range). Non-passive,
+  so it doesn't steal scroll from a containing panel.
+- **Alt-click** → snap to `domain.primary.value_default`.
+
+## Visualizations (`cosmetics.visualization`)
+
+`circle` · `octagon` · `gear` (with `styling.teeth`) · `dial` (full 360° sweep) ·
+`panner` (centred sweep; outputs `[leftPct, rightPct]` as a 2-element array) ·
+`chicken` (round hub + tapered beak + short blunt bum tail) ·
+`marconi` (cylinder body + rectangular wing through the body, white indicator
+line on the pointer side only) ·
+`fender` (INVERTED rotation: face spins under a FIXED pointer; pointer side
+configured via `cosmetics.pointer.position`).
 
 <!-- wysiwyg:sample (auto-generated from oaGuiElements; edit here to drive the library) -->
 ## Sample (WYSIWYG library source)
 
 The WYSIWYG editor builds this widget's **palette entry, live preview, and
 property manipulators** from the JSON block below. The web server
-(`frontEnd/Core/Launch/LauchWebserver.py` → `get_grab_bag()`) scans these
-READMEs, extracts this block, and serves it at `/api/grabbag`. `_README`
-documents the widget; every `_LEGEND` array becomes a dropdown of allowed values
-in the property editor.
+(`frontEnd/Entry.py` → `get_grab_bag()`) scans these READMEs, extracts this
+block, and serves it at `/api/grabbag`. `_README` documents the widget; every
+`_LEGEND` array becomes a dropdown of allowed values in the property editor.
+
+Every key below is actually read by `Knob.jsx`. Keys that only apply to a
+specific visualization are tagged in comments.
 
 ```json
 {
   "Exhaustive_Knob_Example": {
     "type": "_SmartKnob",
-    "identity": {
-      "label": "Master Tuning",
-      "id": "tuning_knob_01",
-      "notes": "A ultra-complete example of the photorealistic rotary control."
+    "label": {
+      "En": "Master Tuning",
+      "show_label": true
     },
     "geometry": {
-      "width": 200,
-      "height": 250,
-      "padding": 10,
-      "stretch": "none",
-      "anchor": "center",
-      "align": "center"
+      "width": 160,
+      "height": 160
     },
     "domain": {
       "primary": {
-        "min": 0.0,
-        "max": 1000.0,
-        "value_default": 500.0,
-        "unit": "MHz",
-        "zero_point": 0.0,
-        "step": 0.1,
-        "law": "linear"
-      },
-      "rotation": {
-        "value": 500.0
+        "min": 0,
+        "max": 100,
+        "value_default": 50,
+        "step": 1
       }
     },
-    "dynamics": {
-      "fps_limit": 60,
-      "smoothing": 0.1,
-      "retention": 500,
-      "attack_ms": 50,
-      "release_ms": 300,
-      "ballistics": "vu",
-      "path": "System/DSP/Oscillator/Freq"
-    },
     "cosmetics": {
-      "visualization": "dial",
+      "visualization": "circle",
       "colors": {
         "primary": "#33A1FD",
         "secondary": "#444444",
-        "alert": "#FF0000",
-        "warning": "#FFA500",
-        "background": "#2b2b2b",
-        "highlight": "#FFFFFF",
-        "active": "#00FF00"
-      },
-      "style_flags": {
-        "show_grid": true,
-        "fill_shape": true
+        "active": "#33A1FD",
+        "tick": "#aaaaaa",
+        "text": "#caa44a"
       },
       "pointer": {
-        "show": true,
-        "style": "triangle",
-        "length": 30,
-        "offset": 5,
-        "thickness": 2,
-        "primary_color": "#33A1FD",
-        "secondary_color": "#0055AA",
-        "pivot_size": 8,
-        "pivot_color": "#222222",
-        "pivot_crop": true
+        "style": "line",
+        "length": null,
+        "offset": 0,
+        "position": "top"
       },
       "scale": {
         "show": true,
-        "style": "dots",
-        "length": 12,
+        "style": "simple",
+        "length": 10,
+        "count": 10,
         "thickness": 1,
-        "size": 10,
-        "upper_range": 800.0
+        "sweep": 300,
+        "text_size": null
       },
       "styling": {
-        "gradient": 3,
-        "teeth": 12,
-        "outline_thickness": 1,
-        "outline_color": "#555555",
-        "fill_color": "#1a1a1a",
-        "arc_width": 6,
+        "fill_color": "#333333",
+        "outline_color": "#444444",
+        "outline_thickness": 0,
+        "arc_width": 5,
+        "cap_scale": 0.7,
         "no_center": false,
-        "cap_radius": 40,
-        "cap_color": "#333333"
+        "teeth": 8
       },
       "style_overrides": {
-        "knob_style": "vintage",
-        "shape": "gear"
+        "shape": "circle"
       }
     },
-    "readout": {
-      "show_value": true,
-      "location": "bottom",
-      "units": "MHz",
-      "decimal_places": 2,
-      "text_inside": false,
-      "font_size": 10,
-      "label_position": "top"
-    },
     "interaction": {
-      "sensitivity": 1.0,
-      "scroll_enabled": true,
-      "infinity": true,
-      "fine_pitch": true,
-      "delta_absolute": false,
-      "freestyle": false,
-      "is_read_only": false
+      "infinity": false
     },
     "layout": {
-      "sticky": "nsew",
-      "padx": 10,
-      "pady": 10,
-      "weight": 1
+      "weight": 1,
+      "padx": 5,
+      "pady": 5
     }
   },
-  "_README": "This sample is REALLY REALLY COMPLETE. It follows the 5-pillar 'Universal Rhyme' schema (Identity, Geometry, Domain, Dynamics, Cosmetics) plus Readout, Interaction, and Layout. Every supported sub-parameter is outlined here for use in the WYSIWYG editor or manual JSON construction.",
+  "_README": "Every key here is actually read by Knob.jsx. cosmetics.visualization picks the cap renderer (circle/octagon/gear/dial/panner/chicken/marconi/fender). chicken+marconi use a beak/wing cap (the beak/wing IS the indicator). fender is the inverted Strat: the FACE rotates (numbers + ribbed skirt) under a FIXED pointer whose side is set by pointer.position. scale.count/sweep/text_size only apply to fender. pointer.position only applies to fender. interaction.infinity true = endless dial (wheel/drag wrap modulo (max-min)). Alt-click any knob snaps to value_default. Panner outputs are an array [leftPct, rightPct]; mid position = [50, 50]. style_overrides.shape can force a cap shape (circle|octagon|gear) independent of visualization. styling.teeth only applies when the cap is rendered as a gear.",
   "_LEGEND": {
     "visualization_types": [
       "circle",
       "octagon",
       "gear",
       "dial",
-      "panner"
-    ],
-    "knob_styles": [
-      "standard",
       "panner",
-      "dial",
-      "vintage",
-      "industrial",
-      "modern"
+      "chicken",
+      "marconi",
+      "fender"
     ],
     "pointer_styles": [
       "line",
       "triangle",
-      "notch"
+      "dot",
+      "notch",
+      "thin",
+      "block",
+      "tapered",
+      "vintage"
+    ],
+    "pointer_positions": [
+      "top",
+      "bottom",
+      "left",
+      "right"
     ],
     "tick_styles": [
       "simple",
       "dots",
       "numeric"
     ],
-    "laws": [
-      "linear",
-      "log"
-    ],
-    "ballistics": [
-      "vu",
-      "ppm",
-      "fast",
-      "slow"
-    ],
-    "label_positions": [
-      "top",
-      "bottom",
-      "left",
-      "right"
+    "shapes": [
+      "circle",
+      "octagon",
+      "gear"
     ]
   }
 }

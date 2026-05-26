@@ -63,7 +63,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -97,6 +97,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -104,7 +107,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 250.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           },
@@ -124,7 +128,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -158,6 +162,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -165,7 +172,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 500.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           },
@@ -185,7 +193,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -219,6 +227,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -226,7 +237,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 750.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           },
@@ -246,7 +258,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -280,6 +292,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -287,7 +302,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 300.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           },
@@ -307,7 +323,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -341,6 +357,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -348,7 +367,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 100.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           },
@@ -368,7 +388,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -402,6 +422,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -409,7 +432,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 600.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           },
@@ -429,7 +453,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -463,6 +487,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -470,7 +497,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 800.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           },
@@ -490,7 +518,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -524,6 +552,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -531,7 +562,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 400.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           }
@@ -589,7 +621,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -623,6 +655,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -630,7 +665,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 10.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           },
@@ -650,7 +686,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -684,6 +720,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -691,7 +730,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 20.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           },
@@ -711,7 +751,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -745,6 +785,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -752,7 +795,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 30.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           },
@@ -772,7 +816,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -806,6 +850,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -813,7 +860,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 40.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           },
@@ -833,7 +881,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -867,6 +915,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -874,7 +925,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 50.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           },
@@ -894,7 +946,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -928,6 +980,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -935,7 +990,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 60.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           },
@@ -956,7 +1012,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -990,6 +1046,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -997,7 +1056,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 70.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           },
@@ -1017,7 +1077,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -1051,6 +1111,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -1058,7 +1121,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 80.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           }
@@ -1116,7 +1180,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -1150,6 +1214,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -1157,7 +1224,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 15.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           },
@@ -1177,7 +1245,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -1211,6 +1279,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -1218,7 +1289,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 45.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           },
@@ -1239,7 +1311,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -1273,6 +1345,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -1280,7 +1355,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 500.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           },
@@ -1300,7 +1376,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -1334,6 +1410,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -1341,7 +1420,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 250.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           },
@@ -1361,7 +1441,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -1395,6 +1475,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -1402,7 +1485,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 5.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           },
@@ -1422,7 +1506,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -1456,6 +1540,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -1463,7 +1550,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 300.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           },
@@ -1483,7 +1571,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -1517,6 +1605,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -1524,7 +1615,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 100.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           },
@@ -1544,7 +1636,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -1578,6 +1670,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -1585,7 +1680,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 50.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           }
@@ -1643,7 +1739,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -1677,6 +1773,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -1684,7 +1783,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 50.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           },
@@ -1704,7 +1804,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -1738,6 +1838,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -1745,7 +1848,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 25.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           },
@@ -1765,7 +1869,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -1799,6 +1903,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -1806,7 +1913,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 75.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           },
@@ -1826,7 +1934,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -1860,6 +1968,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -1867,7 +1978,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 10.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           },
@@ -1887,7 +1999,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -1921,6 +2033,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -1928,7 +2043,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 90.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           },
@@ -1949,7 +2065,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -1983,6 +2099,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -1990,7 +2109,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 33.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           },
@@ -2010,7 +2130,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -2044,6 +2164,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -2051,7 +2174,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 66.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           },
@@ -2071,7 +2195,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -2105,6 +2229,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -2112,7 +2239,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 100.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           }
@@ -2170,7 +2298,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -2204,6 +2332,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -2211,7 +2342,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 10.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           },
@@ -2231,7 +2363,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -2265,6 +2397,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -2272,7 +2407,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 25.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           },
@@ -2292,7 +2428,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -2326,6 +2462,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -2333,7 +2472,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 50.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           },
@@ -2353,7 +2493,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -2387,6 +2527,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -2394,7 +2537,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 75.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           },
@@ -2414,7 +2558,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -2448,6 +2592,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -2455,7 +2602,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 100.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           },
@@ -2475,7 +2623,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -2509,6 +2657,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -2516,7 +2667,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 88.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           },
@@ -2536,7 +2688,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -2570,6 +2722,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -2577,7 +2732,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 60.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           },
@@ -2597,7 +2753,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -2631,6 +2787,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -2638,7 +2797,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 0.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           }
@@ -2728,6 +2888,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -2735,7 +2898,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 0.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           },
@@ -2755,7 +2919,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": true
             },
             "readout": {
@@ -2787,6 +2951,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -2794,7 +2961,8 @@
                 "min": 0.0,
                 "max": 1000.0,
                 "value_default": 500.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           },
@@ -2814,7 +2982,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -2846,6 +3014,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -2853,7 +3024,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 75.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             },
             "pie_crust_thickness": 10
@@ -2874,7 +3046,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -2906,6 +3078,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -2913,7 +3088,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 25.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             },
             "pie_crust_thickness": 1
@@ -2934,7 +3110,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -2967,6 +3143,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -2974,7 +3153,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 50.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           },
@@ -2994,7 +3174,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -3027,6 +3207,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -3034,7 +3217,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 60.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           },
@@ -3054,7 +3238,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -3087,6 +3271,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -3094,7 +3281,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 40.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             }
           },
@@ -3114,7 +3302,7 @@
             },
             "interaction": {
               "is_read_only": false,
-              "infinity": false,
+              "infinity": true,
               "fine_pitch": false
             },
             "readout": {
@@ -3147,6 +3335,9 @@
                 "fill_color": "",
                 "arc_width": 5,
                 "no_center": false
+              },
+              "style_overrides": {
+                "knob_style": "dial"
               }
             },
             "domain": {
@@ -3154,7 +3345,8 @@
                 "min": 0.0,
                 "max": 100.0,
                 "value_default": 100.0,
-                "reff_point": 50.0
+                "reff_point": 50.0,
+                "step": 1
               }
             },
             "pie_crust_thickness": 25

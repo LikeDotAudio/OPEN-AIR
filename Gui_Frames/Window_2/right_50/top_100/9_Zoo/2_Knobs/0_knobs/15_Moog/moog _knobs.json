@@ -11,28 +11,28 @@
       "fluid_ew": true
     },
     "blocks": {
-      "Moog_Knob_Showcase": {
+      "Normal": {
         "type": "OcaBlock",
         "description": {
-          "En": "Moog Minimoog/Voyager-style knobs — polished cap with concentric ring grooves, fluted or smooth body, with optional flange and chicken-foot tab.",
-          "Fr": "Moog Minimoog/Voyager-style knobs — polished cap with concentric ring grooves, fluted or smooth body, with optional flange and chicken-foot tab.",
-          "De": "Moog Minimoog/Voyager-style knobs — polished cap with concentric ring grooves, fluted or smooth body, with optional flange and chicken-foot tab.",
-          "Es": "Moog Minimoog/Voyager-style knobs — polished cap with concentric ring grooves, fluted or smooth body, with optional flange and chicken-foot tab."
+          "En": "Conservative Moog — fluted body, polished cap, dot indicator.",
+          "Fr": "Conservative Moog — fluted body, polished cap, dot indicator.",
+          "De": "Conservative Moog — fluted body, polished cap, dot indicator.",
+          "Es": "Conservative Moog — fluted body, polished cap, dot indicator."
         },
-        "layout_columns": 4,
+        "layout_columns": 5,
         "fields": {
-          "mg_01": {
+          "con_01": {
             "type": "_SmartKnob",
             "label": {
-              "En": "White Fluted",
-              "Fr": "White Fluted",
-              "De": "White Fluted",
-              "Es": "White Fluted",
+              "En": "Black Fluted",
+              "Fr": "Black Fluted",
+              "De": "Black Fluted",
+              "Es": "Black Fluted",
               "show_label": true
             },
             "geometry": {
-              "width": 110,
-              "height": 110
+              "width": 120,
+              "height": 120
             },
             "readout": {
               "text_inside": false,
@@ -41,13 +41,14 @@
             "cosmetics": {
               "visualization": "moog",
               "colors": {
-                "primary": "#f0f0f0",
-                "cap": "#cfd2d6"
+                "primary": "#1c1c1c",
+                "cap": "#cfd2d6",
+                "tick": "#aaaaaa"
               },
               "styling": {
-                "fill_color": "#f0f0f0",
+                "fill_color": "#1c1c1c",
                 "cap_color": "#cfd2d6",
-                "outline_color": "#000000",
+                "outline_color": "#000",
                 "outline_thickness": 1
               },
               "cap": {
@@ -61,11 +62,11 @@
               },
               "flange": {
                 "show": false,
-                "color": "#f0f0f0"
+                "color": "#1c1c1c"
               },
               "foot": {
                 "show": false,
-                "color": "#f0f0f0"
+                "color": "#1c1c1c"
               },
               "indicator": {
                 "style": "dot",
@@ -80,18 +81,18 @@
               }
             }
           },
-          "mg_02": {
+          "con_02": {
             "type": "_SmartKnob",
             "label": {
-              "En": "Cream Fluted",
-              "Fr": "Cream Fluted",
-              "De": "Cream Fluted",
-              "Es": "Cream Fluted",
+              "En": "Charcoal Fluted",
+              "Fr": "Charcoal Fluted",
+              "De": "Charcoal Fluted",
+              "Es": "Charcoal Fluted",
               "show_label": true
             },
             "geometry": {
-              "width": 110,
-              "height": 110
+              "width": 120,
+              "height": 120
             },
             "readout": {
               "text_inside": false,
@@ -100,13 +101,14 @@
             "cosmetics": {
               "visualization": "moog",
               "colors": {
-                "primary": "#efe4c8",
-                "cap": "#cfd2d6"
+                "primary": "#2a2d30",
+                "cap": "#cfd2d6",
+                "tick": "#aaaaaa"
               },
               "styling": {
-                "fill_color": "#efe4c8",
+                "fill_color": "#2a2d30",
                 "cap_color": "#cfd2d6",
-                "outline_color": "#000000",
+                "outline_color": "#000",
                 "outline_thickness": 1
               },
               "cap": {
@@ -120,11 +122,11 @@
               },
               "flange": {
                 "show": false,
-                "color": "#efe4c8"
+                "color": "#2a2d30"
               },
               "foot": {
                 "show": false,
-                "color": "#efe4c8"
+                "color": "#2a2d30"
               },
               "indicator": {
                 "style": "dot",
@@ -135,22 +137,22 @@
               "primary": {
                 "min": 0,
                 "max": 100,
-                "value_default": 11
+                "value_default": 7
               }
             }
           },
-          "mg_03": {
+          "con_03": {
             "type": "_SmartKnob",
             "label": {
-              "En": "Black Fluted",
-              "Fr": "Black Fluted",
-              "De": "Black Fluted",
-              "Es": "Black Fluted",
+              "En": "Slate Fluted",
+              "Fr": "Slate Fluted",
+              "De": "Slate Fluted",
+              "Es": "Slate Fluted",
               "show_label": true
             },
             "geometry": {
-              "width": 110,
-              "height": 110
+              "width": 120,
+              "height": 120
             },
             "readout": {
               "text_inside": false,
@@ -159,13 +161,14 @@
             "cosmetics": {
               "visualization": "moog",
               "colors": {
-                "primary": "#1c1c1c",
-                "cap": "#cfd2d6"
+                "primary": "#546E7A",
+                "cap": "#cfd2d6",
+                "tick": "#aaaaaa"
               },
               "styling": {
-                "fill_color": "#1c1c1c",
+                "fill_color": "#546E7A",
                 "cap_color": "#cfd2d6",
-                "outline_color": "#000000",
+                "outline_color": "#000",
                 "outline_thickness": 1
               },
               "cap": {
@@ -179,11 +182,11 @@
               },
               "flange": {
                 "show": false,
-                "color": "#1c1c1c"
+                "color": "#546E7A"
               },
               "foot": {
                 "show": false,
-                "color": "#1c1c1c"
+                "color": "#546E7A"
               },
               "indicator": {
                 "style": "dot",
@@ -194,22 +197,22 @@
               "primary": {
                 "min": 0,
                 "max": 100,
-                "value_default": 22
+                "value_default": 14
               }
             }
           },
-          "mg_04": {
+          "con_04": {
             "type": "_SmartKnob",
             "label": {
-              "En": "Red Fluted",
-              "Fr": "Red Fluted",
-              "De": "Red Fluted",
-              "Es": "Red Fluted",
+              "En": "White Fluted",
+              "Fr": "White Fluted",
+              "De": "White Fluted",
+              "Es": "White Fluted",
               "show_label": true
             },
             "geometry": {
-              "width": 110,
-              "height": 110
+              "width": 120,
+              "height": 120
             },
             "readout": {
               "text_inside": false,
@@ -218,13 +221,14 @@
             "cosmetics": {
               "visualization": "moog",
               "colors": {
-                "primary": "#D32F2F",
-                "cap": "#cfd2d6"
+                "primary": "#f0f0f0",
+                "cap": "#cfd2d6",
+                "tick": "#aaaaaa"
               },
               "styling": {
-                "fill_color": "#D32F2F",
+                "fill_color": "#f0f0f0",
                 "cap_color": "#cfd2d6",
-                "outline_color": "#000000",
+                "outline_color": "#000",
                 "outline_thickness": 1
               },
               "cap": {
@@ -238,483 +242,11 @@
               },
               "flange": {
                 "show": false,
-                "color": "#D32F2F"
+                "color": "#f0f0f0"
               },
               "foot": {
                 "show": false,
-                "color": "#D32F2F"
-              },
-              "indicator": {
-                "style": "dot",
-                "color": "#ffffff"
-              }
-            },
-            "domain": {
-              "primary": {
-                "min": 0,
-                "max": 100,
-                "value_default": 33
-              }
-            }
-          },
-          "mg_05": {
-            "type": "_SmartKnob",
-            "label": {
-              "En": "Mini 19",
-              "Fr": "Mini 19",
-              "De": "Mini 19",
-              "Es": "Mini 19",
-              "show_label": true
-            },
-            "geometry": {
-              "width": 80,
-              "height": 80
-            },
-            "readout": {
-              "text_inside": false,
-              "label_position": "top"
-            },
-            "cosmetics": {
-              "visualization": "moog",
-              "colors": {
-                "primary": "#1c1c1c",
-                "cap": "#cfd2d6"
-              },
-              "styling": {
-                "fill_color": "#1c1c1c",
-                "cap_color": "#cfd2d6",
-                "outline_color": "#000000",
-                "outline_thickness": 1
-              },
-              "cap": {
-                "show": true,
-                "color": "#cfd2d6",
-                "rings": 8
-              },
-              "flutes": {
-                "show": true,
-                "count": 36
-              },
-              "flange": {
-                "show": false,
-                "color": "#1c1c1c"
-              },
-              "foot": {
-                "show": false,
-                "color": "#1c1c1c"
-              },
-              "indicator": {
-                "style": "dot",
-                "color": "#ffffff"
-              }
-            },
-            "domain": {
-              "primary": {
-                "min": 0,
-                "max": 100,
-                "value_default": 44
-              }
-            }
-          },
-          "mg_06": {
-            "type": "_SmartKnob",
-            "label": {
-              "En": "Small 21",
-              "Fr": "Small 21",
-              "De": "Small 21",
-              "Es": "Small 21",
-              "show_label": true
-            },
-            "geometry": {
-              "width": 95,
-              "height": 95
-            },
-            "readout": {
-              "text_inside": false,
-              "label_position": "top"
-            },
-            "cosmetics": {
-              "visualization": "moog",
-              "colors": {
-                "primary": "#1c1c1c",
-                "cap": "#cfd2d6"
-              },
-              "styling": {
-                "fill_color": "#1c1c1c",
-                "cap_color": "#cfd2d6",
-                "outline_color": "#000000",
-                "outline_thickness": 1
-              },
-              "cap": {
-                "show": true,
-                "color": "#cfd2d6",
-                "rings": 8
-              },
-              "flutes": {
-                "show": true,
-                "count": 36
-              },
-              "flange": {
-                "show": false,
-                "color": "#1c1c1c"
-              },
-              "foot": {
-                "show": false,
-                "color": "#1c1c1c"
-              },
-              "indicator": {
-                "style": "dot",
-                "color": "#ffffff"
-              }
-            },
-            "domain": {
-              "primary": {
-                "min": 0,
-                "max": 100,
-                "value_default": 55
-              }
-            }
-          },
-          "mg_07": {
-            "type": "_SmartKnob",
-            "label": {
-              "En": "Medium 25",
-              "Fr": "Medium 25",
-              "De": "Medium 25",
-              "Es": "Medium 25",
-              "show_label": true
-            },
-            "geometry": {
-              "width": 115,
-              "height": 115
-            },
-            "readout": {
-              "text_inside": false,
-              "label_position": "top"
-            },
-            "cosmetics": {
-              "visualization": "moog",
-              "colors": {
-                "primary": "#1c1c1c",
-                "cap": "#cfd2d6"
-              },
-              "styling": {
-                "fill_color": "#1c1c1c",
-                "cap_color": "#cfd2d6",
-                "outline_color": "#000000",
-                "outline_thickness": 1
-              },
-              "cap": {
-                "show": true,
-                "color": "#cfd2d6",
-                "rings": 8
-              },
-              "flutes": {
-                "show": true,
-                "count": 36
-              },
-              "flange": {
-                "show": false,
-                "color": "#1c1c1c"
-              },
-              "foot": {
-                "show": false,
-                "color": "#1c1c1c"
-              },
-              "indicator": {
-                "style": "dot",
-                "color": "#ffffff"
-              }
-            },
-            "domain": {
-              "primary": {
-                "min": 0,
-                "max": 100,
-                "value_default": 66
-              }
-            }
-          },
-          "mg_08": {
-            "type": "_SmartKnob",
-            "label": {
-              "En": "Large 29",
-              "Fr": "Large 29",
-              "De": "Large 29",
-              "Es": "Large 29",
-              "show_label": true
-            },
-            "geometry": {
-              "width": 135,
-              "height": 135
-            },
-            "readout": {
-              "text_inside": false,
-              "label_position": "top"
-            },
-            "cosmetics": {
-              "visualization": "moog",
-              "colors": {
-                "primary": "#1c1c1c",
-                "cap": "#cfd2d6"
-              },
-              "styling": {
-                "fill_color": "#1c1c1c",
-                "cap_color": "#cfd2d6",
-                "outline_color": "#000000",
-                "outline_thickness": 1
-              },
-              "cap": {
-                "show": true,
-                "color": "#cfd2d6",
-                "rings": 8
-              },
-              "flutes": {
-                "show": true,
-                "count": 36
-              },
-              "flange": {
-                "show": true,
-                "color": "#1c1c1c"
-              },
-              "foot": {
-                "show": false,
-                "color": "#1c1c1c"
-              },
-              "indicator": {
-                "style": "line",
-                "color": "#ffffff"
-              }
-            },
-            "domain": {
-              "primary": {
-                "min": 0,
-                "max": 100,
-                "value_default": 77
-              }
-            }
-          },
-          "mg_09": {
-            "type": "_SmartKnob",
-            "label": {
-              "En": "Black Smooth",
-              "Fr": "Black Smooth",
-              "De": "Black Smooth",
-              "Es": "Black Smooth",
-              "show_label": true
-            },
-            "geometry": {
-              "width": 110,
-              "height": 110
-            },
-            "readout": {
-              "text_inside": false,
-              "label_position": "top"
-            },
-            "cosmetics": {
-              "visualization": "moog",
-              "colors": {
-                "primary": "#1c1c1c",
-                "cap": "#cfd2d6"
-              },
-              "styling": {
-                "fill_color": "#1c1c1c",
-                "cap_color": "#cfd2d6",
-                "outline_color": "#000000",
-                "outline_thickness": 1
-              },
-              "cap": {
-                "show": true,
-                "color": "#cfd2d6",
-                "rings": 8
-              },
-              "flutes": {
-                "show": false,
-                "count": 36
-              },
-              "flange": {
-                "show": false,
-                "color": "#1c1c1c"
-              },
-              "foot": {
-                "show": false,
-                "color": "#1c1c1c"
-              },
-              "indicator": {
-                "style": "dot",
-                "color": "#ffffff"
-              }
-            },
-            "domain": {
-              "primary": {
-                "min": 0,
-                "max": 100,
-                "value_default": 88
-              }
-            }
-          },
-          "mg_10": {
-            "type": "_SmartKnob",
-            "label": {
-              "En": "Blue Smooth",
-              "Fr": "Blue Smooth",
-              "De": "Blue Smooth",
-              "Es": "Blue Smooth",
-              "show_label": true
-            },
-            "geometry": {
-              "width": 110,
-              "height": 110
-            },
-            "readout": {
-              "text_inside": false,
-              "label_position": "top"
-            },
-            "cosmetics": {
-              "visualization": "moog",
-              "colors": {
-                "primary": "#1E3A8A",
-                "cap": "#cfd2d6"
-              },
-              "styling": {
-                "fill_color": "#1E3A8A",
-                "cap_color": "#cfd2d6",
-                "outline_color": "#000000",
-                "outline_thickness": 1
-              },
-              "cap": {
-                "show": true,
-                "color": "#cfd2d6",
-                "rings": 8
-              },
-              "flutes": {
-                "show": false,
-                "count": 36
-              },
-              "flange": {
-                "show": false,
-                "color": "#1E3A8A"
-              },
-              "foot": {
-                "show": false,
-                "color": "#1E3A8A"
-              },
-              "indicator": {
-                "style": "dot",
-                "color": "#ffffff"
-              }
-            },
-            "domain": {
-              "primary": {
-                "min": 0,
-                "max": 100,
-                "value_default": 99
-              }
-            }
-          },
-          "mg_11": {
-            "type": "_SmartKnob",
-            "label": {
-              "En": "Brown Smooth",
-              "Fr": "Brown Smooth",
-              "De": "Brown Smooth",
-              "Es": "Brown Smooth",
-              "show_label": true
-            },
-            "geometry": {
-              "width": 110,
-              "height": 110
-            },
-            "readout": {
-              "text_inside": false,
-              "label_position": "top"
-            },
-            "cosmetics": {
-              "visualization": "moog",
-              "colors": {
-                "primary": "#6D4C41",
-                "cap": "#cfd2d6"
-              },
-              "styling": {
-                "fill_color": "#6D4C41",
-                "cap_color": "#cfd2d6",
-                "outline_color": "#000000",
-                "outline_thickness": 1
-              },
-              "cap": {
-                "show": true,
-                "color": "#cfd2d6",
-                "rings": 8
-              },
-              "flutes": {
-                "show": false,
-                "count": 36
-              },
-              "flange": {
-                "show": false,
-                "color": "#6D4C41"
-              },
-              "foot": {
-                "show": false,
-                "color": "#6D4C41"
-              },
-              "indicator": {
-                "style": "dot",
-                "color": "#ffffff"
-              }
-            },
-            "domain": {
-              "primary": {
-                "min": 0,
-                "max": 100,
-                "value_default": 10
-              }
-            }
-          },
-          "mg_12": {
-            "type": "_SmartKnob",
-            "label": {
-              "En": "Olive Smooth",
-              "Fr": "Olive Smooth",
-              "De": "Olive Smooth",
-              "Es": "Olive Smooth",
-              "show_label": true
-            },
-            "geometry": {
-              "width": 110,
-              "height": 110
-            },
-            "readout": {
-              "text_inside": false,
-              "label_position": "top"
-            },
-            "cosmetics": {
-              "visualization": "moog",
-              "colors": {
-                "primary": "#5a6f3a",
-                "cap": "#cfd2d6"
-              },
-              "styling": {
-                "fill_color": "#5a6f3a",
-                "cap_color": "#cfd2d6",
-                "outline_color": "#000000",
-                "outline_thickness": 1
-              },
-              "cap": {
-                "show": true,
-                "color": "#cfd2d6",
-                "rings": 8
-              },
-              "flutes": {
-                "show": false,
-                "count": 36
-              },
-              "flange": {
-                "show": false,
-                "color": "#5a6f3a"
-              },
-              "foot": {
-                "show": false,
-                "color": "#5a6f3a"
+                "color": "#f0f0f0"
               },
               "indicator": {
                 "style": "dot",
@@ -729,254 +261,18 @@
               }
             }
           },
-          "mg_13": {
+          "con_05": {
             "type": "_SmartKnob",
             "label": {
-              "En": "Foot Black",
-              "Fr": "Foot Black",
-              "De": "Foot Black",
-              "Es": "Foot Black",
+              "En": "Cream Fluted",
+              "Fr": "Cream Fluted",
+              "De": "Cream Fluted",
+              "Es": "Cream Fluted",
               "show_label": true
             },
             "geometry": {
-              "width": 110,
-              "height": 110
-            },
-            "readout": {
-              "text_inside": false,
-              "label_position": "top"
-            },
-            "cosmetics": {
-              "visualization": "moog",
-              "colors": {
-                "primary": "#1c1c1c",
-                "cap": "#cfd2d6"
-              },
-              "styling": {
-                "fill_color": "#1c1c1c",
-                "cap_color": "#cfd2d6",
-                "outline_color": "#000000",
-                "outline_thickness": 1
-              },
-              "cap": {
-                "show": true,
-                "color": "#cfd2d6",
-                "rings": 8
-              },
-              "flutes": {
-                "show": true,
-                "count": 36
-              },
-              "flange": {
-                "show": false,
-                "color": "#1c1c1c"
-              },
-              "foot": {
-                "show": true,
-                "color": "#1c1c1c"
-              },
-              "indicator": {
-                "style": "dot",
-                "color": "#ffffff"
-              }
-            },
-            "domain": {
-              "primary": {
-                "min": 0,
-                "max": 100,
-                "value_default": 32
-              }
-            }
-          },
-          "mg_14": {
-            "type": "_SmartKnob",
-            "label": {
-              "En": "Foot Red",
-              "Fr": "Foot Red",
-              "De": "Foot Red",
-              "Es": "Foot Red",
-              "show_label": true
-            },
-            "geometry": {
-              "width": 110,
-              "height": 110
-            },
-            "readout": {
-              "text_inside": false,
-              "label_position": "top"
-            },
-            "cosmetics": {
-              "visualization": "moog",
-              "colors": {
-                "primary": "#C62828",
-                "cap": "#cfd2d6"
-              },
-              "styling": {
-                "fill_color": "#C62828",
-                "cap_color": "#cfd2d6",
-                "outline_color": "#000000",
-                "outline_thickness": 1
-              },
-              "cap": {
-                "show": true,
-                "color": "#cfd2d6",
-                "rings": 8
-              },
-              "flutes": {
-                "show": true,
-                "count": 36
-              },
-              "flange": {
-                "show": false,
-                "color": "#C62828"
-              },
-              "foot": {
-                "show": true,
-                "color": "#C62828"
-              },
-              "indicator": {
-                "style": "dot",
-                "color": "#ffffff"
-              }
-            },
-            "domain": {
-              "primary": {
-                "min": 0,
-                "max": 100,
-                "value_default": 43
-              }
-            }
-          },
-          "mg_15": {
-            "type": "_SmartKnob",
-            "label": {
-              "En": "Foot Green",
-              "Fr": "Foot Green",
-              "De": "Foot Green",
-              "Es": "Foot Green",
-              "show_label": true
-            },
-            "geometry": {
-              "width": 110,
-              "height": 110
-            },
-            "readout": {
-              "text_inside": false,
-              "label_position": "top"
-            },
-            "cosmetics": {
-              "visualization": "moog",
-              "colors": {
-                "primary": "#43A047",
-                "cap": "#cfd2d6"
-              },
-              "styling": {
-                "fill_color": "#43A047",
-                "cap_color": "#cfd2d6",
-                "outline_color": "#000000",
-                "outline_thickness": 1
-              },
-              "cap": {
-                "show": true,
-                "color": "#cfd2d6",
-                "rings": 8
-              },
-              "flutes": {
-                "show": true,
-                "count": 36
-              },
-              "flange": {
-                "show": false,
-                "color": "#43A047"
-              },
-              "foot": {
-                "show": true,
-                "color": "#43A047"
-              },
-              "indicator": {
-                "style": "dot",
-                "color": "#ffffff"
-              }
-            },
-            "domain": {
-              "primary": {
-                "min": 0,
-                "max": 100,
-                "value_default": 54
-              }
-            }
-          },
-          "mg_16": {
-            "type": "_SmartKnob",
-            "label": {
-              "En": "Foot Yellow",
-              "Fr": "Foot Yellow",
-              "De": "Foot Yellow",
-              "Es": "Foot Yellow",
-              "show_label": true
-            },
-            "geometry": {
-              "width": 110,
-              "height": 110
-            },
-            "readout": {
-              "text_inside": false,
-              "label_position": "top"
-            },
-            "cosmetics": {
-              "visualization": "moog",
-              "colors": {
-                "primary": "#FDD835",
-                "cap": "#cfd2d6"
-              },
-              "styling": {
-                "fill_color": "#FDD835",
-                "cap_color": "#cfd2d6",
-                "outline_color": "#000000",
-                "outline_thickness": 1
-              },
-              "cap": {
-                "show": true,
-                "color": "#cfd2d6",
-                "rings": 8
-              },
-              "flutes": {
-                "show": true,
-                "count": 36
-              },
-              "flange": {
-                "show": false,
-                "color": "#FDD835"
-              },
-              "foot": {
-                "show": true,
-                "color": "#FDD835"
-              },
-              "indicator": {
-                "style": "dot",
-                "color": "#ffffff"
-              }
-            },
-            "domain": {
-              "primary": {
-                "min": 0,
-                "max": 100,
-                "value_default": 65
-              }
-            }
-          },
-          "mg_17": {
-            "type": "_SmartKnob",
-            "label": {
-              "En": "Flange Cream",
-              "Fr": "Flange Cream",
-              "De": "Flange Cream",
-              "Es": "Flange Cream",
-              "show_label": true
-            },
-            "geometry": {
-              "width": 130,
-              "height": 130
+              "width": 120,
+              "height": 120
             },
             "readout": {
               "text_inside": false,
@@ -986,12 +282,13 @@
               "visualization": "moog",
               "colors": {
                 "primary": "#efe4c8",
-                "cap": "#cfd2d6"
+                "cap": "#cfd2d6",
+                "tick": "#aaaaaa"
               },
               "styling": {
                 "fill_color": "#efe4c8",
                 "cap_color": "#cfd2d6",
-                "outline_color": "#000000",
+                "outline_color": "#000",
                 "outline_thickness": 1
               },
               "cap": {
@@ -1004,248 +301,12 @@
                 "count": 36
               },
               "flange": {
-                "show": true,
-                "color": "#efe4c8"
-              },
-              "foot": {
                 "show": false,
                 "color": "#efe4c8"
               },
-              "indicator": {
-                "style": "line",
-                "color": "#ffffff"
-              }
-            },
-            "domain": {
-              "primary": {
-                "min": 0,
-                "max": 100,
-                "value_default": 76
-              }
-            }
-          },
-          "mg_18": {
-            "type": "_SmartKnob",
-            "label": {
-              "En": "Flange Black",
-              "Fr": "Flange Black",
-              "De": "Flange Black",
-              "Es": "Flange Black",
-              "show_label": true
-            },
-            "geometry": {
-              "width": 130,
-              "height": 130
-            },
-            "readout": {
-              "text_inside": false,
-              "label_position": "top"
-            },
-            "cosmetics": {
-              "visualization": "moog",
-              "colors": {
-                "primary": "#1c1c1c",
-                "cap": "#cfd2d6"
-              },
-              "styling": {
-                "fill_color": "#1c1c1c",
-                "cap_color": "#cfd2d6",
-                "outline_color": "#000000",
-                "outline_thickness": 1
-              },
-              "cap": {
-                "show": true,
-                "color": "#cfd2d6",
-                "rings": 8
-              },
-              "flutes": {
-                "show": true,
-                "count": 36
-              },
-              "flange": {
-                "show": true,
-                "color": "#1c1c1c"
-              },
               "foot": {
                 "show": false,
-                "color": "#1c1c1c"
-              },
-              "indicator": {
-                "style": "line",
-                "color": "#ffffff"
-              }
-            },
-            "domain": {
-              "primary": {
-                "min": 0,
-                "max": 100,
-                "value_default": 87
-              }
-            }
-          },
-          "mg_19": {
-            "type": "_SmartKnob",
-            "label": {
-              "En": "Flange Blue",
-              "Fr": "Flange Blue",
-              "De": "Flange Blue",
-              "Es": "Flange Blue",
-              "show_label": true
-            },
-            "geometry": {
-              "width": 130,
-              "height": 130
-            },
-            "readout": {
-              "text_inside": false,
-              "label_position": "top"
-            },
-            "cosmetics": {
-              "visualization": "moog",
-              "colors": {
-                "primary": "#1E88E5",
-                "cap": "#cfd2d6"
-              },
-              "styling": {
-                "fill_color": "#1E88E5",
-                "cap_color": "#cfd2d6",
-                "outline_color": "#000000",
-                "outline_thickness": 1
-              },
-              "cap": {
-                "show": true,
-                "color": "#cfd2d6",
-                "rings": 8
-              },
-              "flutes": {
-                "show": true,
-                "count": 36
-              },
-              "flange": {
-                "show": true,
-                "color": "#1E88E5"
-              },
-              "foot": {
-                "show": false,
-                "color": "#1E88E5"
-              },
-              "indicator": {
-                "style": "line",
-                "color": "#ffffff"
-              }
-            },
-            "domain": {
-              "primary": {
-                "min": 0,
-                "max": 100,
-                "value_default": 98
-              }
-            }
-          },
-          "mg_20": {
-            "type": "_SmartKnob",
-            "label": {
-              "En": "Flange Red",
-              "Fr": "Flange Red",
-              "De": "Flange Red",
-              "Es": "Flange Red",
-              "show_label": true
-            },
-            "geometry": {
-              "width": 130,
-              "height": 130
-            },
-            "readout": {
-              "text_inside": false,
-              "label_position": "top"
-            },
-            "cosmetics": {
-              "visualization": "moog",
-              "colors": {
-                "primary": "#D32F2F",
-                "cap": "#cfd2d6"
-              },
-              "styling": {
-                "fill_color": "#D32F2F",
-                "cap_color": "#cfd2d6",
-                "outline_color": "#000000",
-                "outline_thickness": 1
-              },
-              "cap": {
-                "show": true,
-                "color": "#cfd2d6",
-                "rings": 8
-              },
-              "flutes": {
-                "show": true,
-                "count": 36
-              },
-              "flange": {
-                "show": true,
-                "color": "#D32F2F"
-              },
-              "foot": {
-                "show": false,
-                "color": "#D32F2F"
-              },
-              "indicator": {
-                "style": "line",
-                "color": "#ffffff"
-              }
-            },
-            "domain": {
-              "primary": {
-                "min": 0,
-                "max": 100,
-                "value_default": 9
-              }
-            }
-          },
-          "mg_21": {
-            "type": "_SmartKnob",
-            "label": {
-              "En": "Big Foot Black",
-              "Fr": "Big Foot Black",
-              "De": "Big Foot Black",
-              "Es": "Big Foot Black",
-              "show_label": true
-            },
-            "geometry": {
-              "width": 140,
-              "height": 140
-            },
-            "readout": {
-              "text_inside": false,
-              "label_position": "top"
-            },
-            "cosmetics": {
-              "visualization": "moog",
-              "colors": {
-                "primary": "#1c1c1c",
-                "cap": "#cfd2d6"
-              },
-              "styling": {
-                "fill_color": "#1c1c1c",
-                "cap_color": "#cfd2d6",
-                "outline_color": "#000000",
-                "outline_thickness": 1
-              },
-              "cap": {
-                "show": true,
-                "color": "#cfd2d6",
-                "rings": 8
-              },
-              "flutes": {
-                "show": true,
-                "count": 36
-              },
-              "flange": {
-                "show": true,
-                "color": "#1c1c1c"
-              },
-              "foot": {
-                "show": true,
-                "color": "#1c1c1c"
+                "color": "#efe4c8"
               },
               "indicator": {
                 "style": "dot",
@@ -1256,22 +317,34 @@
               "primary": {
                 "min": 0,
                 "max": 100,
-                "value_default": 20
+                "value_default": 28
               }
             }
-          },
-          "mg_22": {
+          }
+        }
+      },
+      "Variety": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Fluted vs smooth in full colour, rotating scales.",
+          "Fr": "Fluted vs smooth in full colour, rotating scales.",
+          "De": "Fluted vs smooth in full colour, rotating scales.",
+          "Es": "Fluted vs smooth in full colour, rotating scales."
+        },
+        "layout_columns": 6,
+        "fields": {
+          "var_01": {
             "type": "_SmartKnob",
             "label": {
-              "En": "Big Foot Red",
-              "Fr": "Big Foot Red",
-              "De": "Big Foot Red",
-              "Es": "Big Foot Red",
+              "En": "Cherry Fluted",
+              "Fr": "Cherry Fluted",
+              "De": "Cherry Fluted",
+              "Es": "Cherry Fluted",
               "show_label": true
             },
             "geometry": {
-              "width": 140,
-              "height": 140
+              "width": 120,
+              "height": 120
             },
             "readout": {
               "text_inside": false,
@@ -1281,12 +354,13 @@
               "visualization": "moog",
               "colors": {
                 "primary": "#C62828",
-                "cap": "#cfd2d6"
+                "cap": "#cfd2d6",
+                "tick": "#aaaaaa"
               },
               "styling": {
                 "fill_color": "#C62828",
                 "cap_color": "#cfd2d6",
-                "outline_color": "#000000",
+                "outline_color": "#000",
                 "outline_thickness": 1
               },
               "cap": {
@@ -1299,38 +373,45 @@
                 "count": 36
               },
               "flange": {
-                "show": true,
+                "show": false,
                 "color": "#C62828"
               },
               "foot": {
-                "show": true,
+                "show": false,
                 "color": "#C62828"
               },
               "indicator": {
                 "style": "dot",
                 "color": "#ffffff"
+              },
+              "scale": {
+                "show": true,
+                "style": "simple",
+                "count": 10,
+                "length": 10,
+                "thickness": 1
               }
             },
             "domain": {
               "primary": {
                 "min": 0,
                 "max": 100,
-                "value_default": 31
+                "value_default": 0
               }
             }
           },
-          "mg_23": {
+          "var_02": {
             "type": "_SmartKnob",
             "label": {
-              "En": "Big Foot Green",
-              "Fr": "Big Foot Green",
-              "De": "Big Foot Green",
-              "Es": "Big Foot Green",
+              "En": "Crimson Smooth",
+              "Fr": "Crimson Smooth",
+              "De": "Crimson Smooth",
+              "Es": "Crimson Smooth",
               "show_label": true
             },
             "geometry": {
-              "width": 140,
-              "height": 140
+              "width": 120,
+              "height": 120
             },
             "readout": {
               "text_inside": false,
@@ -1339,13 +420,81 @@
             "cosmetics": {
               "visualization": "moog",
               "colors": {
-                "primary": "#2E7D32",
-                "cap": "#cfd2d6"
+                "primary": "#E53935",
+                "cap": "#cfd2d6",
+                "tick": "#aaaaaa"
               },
               "styling": {
-                "fill_color": "#2E7D32",
+                "fill_color": "#E53935",
                 "cap_color": "#cfd2d6",
-                "outline_color": "#000000",
+                "outline_color": "#000",
+                "outline_thickness": 1
+              },
+              "cap": {
+                "show": true,
+                "color": "#cfd2d6",
+                "rings": 8
+              },
+              "flutes": {
+                "show": false,
+                "count": 36
+              },
+              "flange": {
+                "show": false,
+                "color": "#E53935"
+              },
+              "foot": {
+                "show": false,
+                "color": "#E53935"
+              },
+              "indicator": {
+                "style": "dot",
+                "color": "#ffffff"
+              },
+              "scale": {
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 7
+              }
+            }
+          },
+          "var_03": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Orange Fluted",
+              "Fr": "Orange Fluted",
+              "De": "Orange Fluted",
+              "Es": "Orange Fluted",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 120,
+              "height": 120
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "moog",
+              "colors": {
+                "primary": "#FB8C00",
+                "cap": "#cfd2d6",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#FB8C00",
+                "cap_color": "#cfd2d6",
+                "outline_color": "#000",
                 "outline_thickness": 1
               },
               "cap": {
@@ -1358,16 +507,291 @@
                 "count": 36
               },
               "flange": {
-                "show": true,
-                "color": "#2E7D32"
+                "show": false,
+                "color": "#FB8C00"
               },
               "foot": {
-                "show": true,
-                "color": "#2E7D32"
+                "show": false,
+                "color": "#FB8C00"
               },
               "indicator": {
                 "style": "dot",
                 "color": "#ffffff"
+              },
+              "scale": {
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 14
+              }
+            }
+          },
+          "var_04": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Amber Smooth",
+              "Fr": "Amber Smooth",
+              "De": "Amber Smooth",
+              "Es": "Amber Smooth",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 120,
+              "height": 120
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "moog",
+              "colors": {
+                "primary": "#FFB300",
+                "cap": "#cfd2d6",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#FFB300",
+                "cap_color": "#cfd2d6",
+                "outline_color": "#000",
+                "outline_thickness": 1
+              },
+              "cap": {
+                "show": true,
+                "color": "#cfd2d6",
+                "rings": 8
+              },
+              "flutes": {
+                "show": false,
+                "count": 36
+              },
+              "flange": {
+                "show": false,
+                "color": "#FFB300"
+              },
+              "foot": {
+                "show": false,
+                "color": "#FFB300"
+              },
+              "indicator": {
+                "style": "dot",
+                "color": "#ffffff"
+              },
+              "scale": {
+                "show": true,
+                "style": "simple",
+                "count": 10,
+                "length": 10,
+                "thickness": 1
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 21
+              }
+            }
+          },
+          "var_05": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Yellow Fluted",
+              "Fr": "Yellow Fluted",
+              "De": "Yellow Fluted",
+              "Es": "Yellow Fluted",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 120,
+              "height": 120
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "moog",
+              "colors": {
+                "primary": "#FDD835",
+                "cap": "#cfd2d6",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#FDD835",
+                "cap_color": "#cfd2d6",
+                "outline_color": "#000",
+                "outline_thickness": 1
+              },
+              "cap": {
+                "show": true,
+                "color": "#cfd2d6",
+                "rings": 8
+              },
+              "flutes": {
+                "show": true,
+                "count": 36
+              },
+              "flange": {
+                "show": false,
+                "color": "#FDD835"
+              },
+              "foot": {
+                "show": false,
+                "color": "#FDD835"
+              },
+              "indicator": {
+                "style": "dot",
+                "color": "#ffffff"
+              },
+              "scale": {
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 28
+              }
+            }
+          },
+          "var_06": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Lime Smooth",
+              "Fr": "Lime Smooth",
+              "De": "Lime Smooth",
+              "Es": "Lime Smooth",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 120,
+              "height": 120
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "moog",
+              "colors": {
+                "primary": "#7CB342",
+                "cap": "#cfd2d6",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#7CB342",
+                "cap_color": "#cfd2d6",
+                "outline_color": "#000",
+                "outline_thickness": 1
+              },
+              "cap": {
+                "show": true,
+                "color": "#cfd2d6",
+                "rings": 8
+              },
+              "flutes": {
+                "show": false,
+                "count": 36
+              },
+              "flange": {
+                "show": false,
+                "color": "#7CB342"
+              },
+              "foot": {
+                "show": false,
+                "color": "#7CB342"
+              },
+              "indicator": {
+                "style": "dot",
+                "color": "#ffffff"
+              },
+              "scale": {
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 35
+              }
+            }
+          },
+          "var_07": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Green Fluted",
+              "Fr": "Green Fluted",
+              "De": "Green Fluted",
+              "Es": "Green Fluted",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 120,
+              "height": 120
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "moog",
+              "colors": {
+                "primary": "#43A047",
+                "cap": "#cfd2d6",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#43A047",
+                "cap_color": "#cfd2d6",
+                "outline_color": "#000",
+                "outline_thickness": 1
+              },
+              "cap": {
+                "show": true,
+                "color": "#cfd2d6",
+                "rings": 8
+              },
+              "flutes": {
+                "show": true,
+                "count": 36
+              },
+              "flange": {
+                "show": false,
+                "color": "#43A047"
+              },
+              "foot": {
+                "show": false,
+                "color": "#43A047"
+              },
+              "indicator": {
+                "style": "dot",
+                "color": "#ffffff"
+              },
+              "scale": {
+                "show": true,
+                "style": "simple",
+                "count": 10,
+                "length": 10,
+                "thickness": 1
               }
             },
             "domain": {
@@ -1378,18 +802,554 @@
               }
             }
           },
-          "mg_24": {
+          "var_08": {
             "type": "_SmartKnob",
             "label": {
-              "En": "Big Foot Purple",
-              "Fr": "Big Foot Purple",
-              "De": "Big Foot Purple",
-              "Es": "Big Foot Purple",
+              "En": "Emerald Smooth",
+              "Fr": "Emerald Smooth",
+              "De": "Emerald Smooth",
+              "Es": "Emerald Smooth",
               "show_label": true
             },
             "geometry": {
-              "width": 140,
-              "height": 140
+              "width": 120,
+              "height": 120
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "moog",
+              "colors": {
+                "primary": "#2E7D32",
+                "cap": "#cfd2d6",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#2E7D32",
+                "cap_color": "#cfd2d6",
+                "outline_color": "#000",
+                "outline_thickness": 1
+              },
+              "cap": {
+                "show": true,
+                "color": "#cfd2d6",
+                "rings": 8
+              },
+              "flutes": {
+                "show": false,
+                "count": 36
+              },
+              "flange": {
+                "show": false,
+                "color": "#2E7D32"
+              },
+              "foot": {
+                "show": false,
+                "color": "#2E7D32"
+              },
+              "indicator": {
+                "style": "dot",
+                "color": "#ffffff"
+              },
+              "scale": {
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 49
+              }
+            }
+          },
+          "var_09": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Teal Fluted",
+              "Fr": "Teal Fluted",
+              "De": "Teal Fluted",
+              "Es": "Teal Fluted",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 120,
+              "height": 120
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "moog",
+              "colors": {
+                "primary": "#00897B",
+                "cap": "#cfd2d6",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#00897B",
+                "cap_color": "#cfd2d6",
+                "outline_color": "#000",
+                "outline_thickness": 1
+              },
+              "cap": {
+                "show": true,
+                "color": "#cfd2d6",
+                "rings": 8
+              },
+              "flutes": {
+                "show": true,
+                "count": 36
+              },
+              "flange": {
+                "show": false,
+                "color": "#00897B"
+              },
+              "foot": {
+                "show": false,
+                "color": "#00897B"
+              },
+              "indicator": {
+                "style": "dot",
+                "color": "#ffffff"
+              },
+              "scale": {
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 56
+              }
+            }
+          },
+          "var_10": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Cyan Smooth",
+              "Fr": "Cyan Smooth",
+              "De": "Cyan Smooth",
+              "Es": "Cyan Smooth",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 120,
+              "height": 120
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "moog",
+              "colors": {
+                "primary": "#00ACC1",
+                "cap": "#cfd2d6",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#00ACC1",
+                "cap_color": "#cfd2d6",
+                "outline_color": "#000",
+                "outline_thickness": 1
+              },
+              "cap": {
+                "show": true,
+                "color": "#cfd2d6",
+                "rings": 8
+              },
+              "flutes": {
+                "show": false,
+                "count": 36
+              },
+              "flange": {
+                "show": false,
+                "color": "#00ACC1"
+              },
+              "foot": {
+                "show": false,
+                "color": "#00ACC1"
+              },
+              "indicator": {
+                "style": "dot",
+                "color": "#ffffff"
+              },
+              "scale": {
+                "show": true,
+                "style": "simple",
+                "count": 10,
+                "length": 10,
+                "thickness": 1
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 63
+              }
+            }
+          },
+          "var_11": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Sky Fluted",
+              "Fr": "Sky Fluted",
+              "De": "Sky Fluted",
+              "Es": "Sky Fluted",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 120,
+              "height": 120
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "moog",
+              "colors": {
+                "primary": "#039BE5",
+                "cap": "#cfd2d6",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#039BE5",
+                "cap_color": "#cfd2d6",
+                "outline_color": "#000",
+                "outline_thickness": 1
+              },
+              "cap": {
+                "show": true,
+                "color": "#cfd2d6",
+                "rings": 8
+              },
+              "flutes": {
+                "show": true,
+                "count": 36
+              },
+              "flange": {
+                "show": false,
+                "color": "#039BE5"
+              },
+              "foot": {
+                "show": false,
+                "color": "#039BE5"
+              },
+              "indicator": {
+                "style": "dot",
+                "color": "#ffffff"
+              },
+              "scale": {
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 70
+              }
+            }
+          },
+          "var_12": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Blue Smooth",
+              "Fr": "Blue Smooth",
+              "De": "Blue Smooth",
+              "Es": "Blue Smooth",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 120,
+              "height": 120
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "moog",
+              "colors": {
+                "primary": "#1E88E5",
+                "cap": "#cfd2d6",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#1E88E5",
+                "cap_color": "#cfd2d6",
+                "outline_color": "#000",
+                "outline_thickness": 1
+              },
+              "cap": {
+                "show": true,
+                "color": "#cfd2d6",
+                "rings": 8
+              },
+              "flutes": {
+                "show": false,
+                "count": 36
+              },
+              "flange": {
+                "show": false,
+                "color": "#1E88E5"
+              },
+              "foot": {
+                "show": false,
+                "color": "#1E88E5"
+              },
+              "indicator": {
+                "style": "dot",
+                "color": "#ffffff"
+              },
+              "scale": {
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 77
+              }
+            }
+          },
+          "var_13": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Indigo Fluted",
+              "Fr": "Indigo Fluted",
+              "De": "Indigo Fluted",
+              "Es": "Indigo Fluted",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 120,
+              "height": 120
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "moog",
+              "colors": {
+                "primary": "#3949AB",
+                "cap": "#cfd2d6",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#3949AB",
+                "cap_color": "#cfd2d6",
+                "outline_color": "#000",
+                "outline_thickness": 1
+              },
+              "cap": {
+                "show": true,
+                "color": "#cfd2d6",
+                "rings": 8
+              },
+              "flutes": {
+                "show": true,
+                "count": 36
+              },
+              "flange": {
+                "show": false,
+                "color": "#3949AB"
+              },
+              "foot": {
+                "show": false,
+                "color": "#3949AB"
+              },
+              "indicator": {
+                "style": "dot",
+                "color": "#ffffff"
+              },
+              "scale": {
+                "show": true,
+                "style": "simple",
+                "count": 10,
+                "length": 10,
+                "thickness": 1
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 84
+              }
+            }
+          },
+          "var_14": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Navy Smooth",
+              "Fr": "Navy Smooth",
+              "De": "Navy Smooth",
+              "Es": "Navy Smooth",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 120,
+              "height": 120
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "moog",
+              "colors": {
+                "primary": "#283593",
+                "cap": "#cfd2d6",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#283593",
+                "cap_color": "#cfd2d6",
+                "outline_color": "#000",
+                "outline_thickness": 1
+              },
+              "cap": {
+                "show": true,
+                "color": "#cfd2d6",
+                "rings": 8
+              },
+              "flutes": {
+                "show": false,
+                "count": 36
+              },
+              "flange": {
+                "show": false,
+                "color": "#283593"
+              },
+              "foot": {
+                "show": false,
+                "color": "#283593"
+              },
+              "indicator": {
+                "style": "dot",
+                "color": "#ffffff"
+              },
+              "scale": {
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 91
+              }
+            }
+          },
+          "var_15": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Violet Fluted",
+              "Fr": "Violet Fluted",
+              "De": "Violet Fluted",
+              "Es": "Violet Fluted",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 120,
+              "height": 120
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "moog",
+              "colors": {
+                "primary": "#5E35B1",
+                "cap": "#cfd2d6",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#5E35B1",
+                "cap_color": "#cfd2d6",
+                "outline_color": "#000",
+                "outline_thickness": 1
+              },
+              "cap": {
+                "show": true,
+                "color": "#cfd2d6",
+                "rings": 8
+              },
+              "flutes": {
+                "show": true,
+                "count": 36
+              },
+              "flange": {
+                "show": false,
+                "color": "#5E35B1"
+              },
+              "foot": {
+                "show": false,
+                "color": "#5E35B1"
+              },
+              "indicator": {
+                "style": "dot",
+                "color": "#ffffff"
+              },
+              "scale": {
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 98
+              }
+            }
+          },
+          "var_16": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Purple Smooth",
+              "Fr": "Purple Smooth",
+              "De": "Purple Smooth",
+              "Es": "Purple Smooth",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 120,
+              "height": 120
             },
             "readout": {
               "text_inside": false,
@@ -1399,12 +1359,628 @@
               "visualization": "moog",
               "colors": {
                 "primary": "#8E24AA",
-                "cap": "#cfd2d6"
+                "cap": "#cfd2d6",
+                "tick": "#aaaaaa"
               },
               "styling": {
                 "fill_color": "#8E24AA",
                 "cap_color": "#cfd2d6",
-                "outline_color": "#000000",
+                "outline_color": "#000",
+                "outline_thickness": 1
+              },
+              "cap": {
+                "show": true,
+                "color": "#cfd2d6",
+                "rings": 8
+              },
+              "flutes": {
+                "show": false,
+                "count": 36
+              },
+              "flange": {
+                "show": false,
+                "color": "#8E24AA"
+              },
+              "foot": {
+                "show": false,
+                "color": "#8E24AA"
+              },
+              "indicator": {
+                "style": "dot",
+                "color": "#ffffff"
+              },
+              "scale": {
+                "show": true,
+                "style": "simple",
+                "count": 10,
+                "length": 10,
+                "thickness": 1
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 5
+              }
+            }
+          },
+          "var_17": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Magenta Fluted",
+              "Fr": "Magenta Fluted",
+              "De": "Magenta Fluted",
+              "Es": "Magenta Fluted",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 120,
+              "height": 120
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "moog",
+              "colors": {
+                "primary": "#D81B60",
+                "cap": "#cfd2d6",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#D81B60",
+                "cap_color": "#cfd2d6",
+                "outline_color": "#000",
+                "outline_thickness": 1
+              },
+              "cap": {
+                "show": true,
+                "color": "#cfd2d6",
+                "rings": 8
+              },
+              "flutes": {
+                "show": true,
+                "count": 36
+              },
+              "flange": {
+                "show": false,
+                "color": "#D81B60"
+              },
+              "foot": {
+                "show": false,
+                "color": "#D81B60"
+              },
+              "indicator": {
+                "style": "dot",
+                "color": "#ffffff"
+              },
+              "scale": {
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 12
+              }
+            }
+          },
+          "var_18": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Pink Smooth",
+              "Fr": "Pink Smooth",
+              "De": "Pink Smooth",
+              "Es": "Pink Smooth",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 120,
+              "height": 120
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "moog",
+              "colors": {
+                "primary": "#EC407A",
+                "cap": "#cfd2d6",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#EC407A",
+                "cap_color": "#cfd2d6",
+                "outline_color": "#000",
+                "outline_thickness": 1
+              },
+              "cap": {
+                "show": true,
+                "color": "#cfd2d6",
+                "rings": 8
+              },
+              "flutes": {
+                "show": false,
+                "count": 36
+              },
+              "flange": {
+                "show": false,
+                "color": "#EC407A"
+              },
+              "foot": {
+                "show": false,
+                "color": "#EC407A"
+              },
+              "indicator": {
+                "style": "dot",
+                "color": "#ffffff"
+              },
+              "scale": {
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 19
+              }
+            }
+          }
+        }
+      },
+      "Wild": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Big / mini, flange + foot + smooth + fluted combos.",
+          "Fr": "Big / mini, flange + foot + smooth + fluted combos.",
+          "De": "Big / mini, flange + foot + smooth + fluted combos.",
+          "Es": "Big / mini, flange + foot + smooth + fluted combos."
+        },
+        "layout_columns": 5,
+        "fields": {
+          "wild_01": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Big Flange Black",
+              "Fr": "Big Flange Black",
+              "De": "Big Flange Black",
+              "Es": "Big Flange Black",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 170,
+              "height": 170
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "moog",
+              "colors": {
+                "primary": "#1c1c1c",
+                "cap": "#cfd2d6",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#1c1c1c",
+                "cap_color": "#cfd2d6",
+                "outline_color": "#000",
+                "outline_thickness": 1
+              },
+              "cap": {
+                "show": true,
+                "color": "#cfd2d6",
+                "rings": 8
+              },
+              "flutes": {
+                "show": true,
+                "count": 36
+              },
+              "flange": {
+                "show": true,
+                "color": "#1c1c1c"
+              },
+              "foot": {
+                "show": false,
+                "color": "#1c1c1c"
+              },
+              "indicator": {
+                "style": "line",
+                "color": "#ffffff"
+              },
+              "scale": {
+                "show": true,
+                "style": "simple",
+                "count": 10,
+                "length": 10,
+                "thickness": 1
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 0
+              }
+            }
+          },
+          "wild_02": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Big Foot Red",
+              "Fr": "Big Foot Red",
+              "De": "Big Foot Red",
+              "Es": "Big Foot Red",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 170,
+              "height": 170
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "moog",
+              "colors": {
+                "primary": "#C62828",
+                "cap": "#cfd2d6",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#C62828",
+                "cap_color": "#cfd2d6",
+                "outline_color": "#000",
+                "outline_thickness": 1
+              },
+              "cap": {
+                "show": true,
+                "color": "#cfd2d6",
+                "rings": 8
+              },
+              "flutes": {
+                "show": true,
+                "count": 36
+              },
+              "flange": {
+                "show": false,
+                "color": "#C62828"
+              },
+              "foot": {
+                "show": true,
+                "color": "#C62828"
+              },
+              "indicator": {
+                "style": "dot",
+                "color": "#ffffff"
+              },
+              "scale": {
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 9
+              }
+            }
+          },
+          "wild_03": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Big Smooth Sapphire",
+              "Fr": "Big Smooth Sapphire",
+              "De": "Big Smooth Sapphire",
+              "Es": "Big Smooth Sapphire",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 170,
+              "height": 170
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "moog",
+              "colors": {
+                "primary": "#1E88E5",
+                "cap": "#cfd2d6",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#1E88E5",
+                "cap_color": "#cfd2d6",
+                "outline_color": "#000",
+                "outline_thickness": 1
+              },
+              "cap": {
+                "show": true,
+                "color": "#cfd2d6",
+                "rings": 8
+              },
+              "flutes": {
+                "show": false,
+                "count": 36
+              },
+              "flange": {
+                "show": false,
+                "color": "#1E88E5"
+              },
+              "foot": {
+                "show": false,
+                "color": "#1E88E5"
+              },
+              "indicator": {
+                "style": "line",
+                "color": "#ffffff"
+              },
+              "scale": {
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 18
+              }
+            }
+          },
+          "wild_04": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Mini Cherry",
+              "Fr": "Mini Cherry",
+              "De": "Mini Cherry",
+              "Es": "Mini Cherry",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 75,
+              "height": 75
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "moog",
+              "colors": {
+                "primary": "#C62828",
+                "cap": "#cfd2d6",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#C62828",
+                "cap_color": "#cfd2d6",
+                "outline_color": "#000",
+                "outline_thickness": 1
+              },
+              "cap": {
+                "show": true,
+                "color": "#cfd2d6",
+                "rings": 8
+              },
+              "flutes": {
+                "show": true,
+                "count": 36
+              },
+              "flange": {
+                "show": false,
+                "color": "#C62828"
+              },
+              "foot": {
+                "show": false,
+                "color": "#C62828"
+              },
+              "indicator": {
+                "style": "dot",
+                "color": "#ffffff"
+              },
+              "scale": {
+                "show": true,
+                "style": "simple",
+                "count": 10,
+                "length": 10,
+                "thickness": 1
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 27
+              }
+            }
+          },
+          "wild_05": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Mini Gold",
+              "Fr": "Mini Gold",
+              "De": "Mini Gold",
+              "Es": "Mini Gold",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 75,
+              "height": 75
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "moog",
+              "colors": {
+                "primary": "#C9A227",
+                "cap": "#cfd2d6",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#C9A227",
+                "cap_color": "#cfd2d6",
+                "outline_color": "#000",
+                "outline_thickness": 1
+              },
+              "cap": {
+                "show": true,
+                "color": "#cfd2d6",
+                "rings": 8
+              },
+              "flutes": {
+                "show": true,
+                "count": 36
+              },
+              "flange": {
+                "show": false,
+                "color": "#C9A227"
+              },
+              "foot": {
+                "show": false,
+                "color": "#C9A227"
+              },
+              "indicator": {
+                "style": "dot",
+                "color": "#ffffff"
+              },
+              "scale": {
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 36
+              }
+            }
+          },
+          "wild_06": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Mini Slate",
+              "Fr": "Mini Slate",
+              "De": "Mini Slate",
+              "Es": "Mini Slate",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 75,
+              "height": 75
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "moog",
+              "colors": {
+                "primary": "#546E7A",
+                "cap": "#cfd2d6",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#546E7A",
+                "cap_color": "#cfd2d6",
+                "outline_color": "#000",
+                "outline_thickness": 1
+              },
+              "cap": {
+                "show": true,
+                "color": "#cfd2d6",
+                "rings": 8
+              },
+              "flutes": {
+                "show": true,
+                "count": 36
+              },
+              "flange": {
+                "show": false,
+                "color": "#546E7A"
+              },
+              "foot": {
+                "show": false,
+                "color": "#546E7A"
+              },
+              "indicator": {
+                "style": "dot",
+                "color": "#ffffff"
+              },
+              "scale": {
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 45
+              }
+            }
+          },
+          "wild_07": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Big F+F Purple",
+              "Fr": "Big F+F Purple",
+              "De": "Big F+F Purple",
+              "Es": "Big F+F Purple",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 150,
+              "height": 150
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "moog",
+              "colors": {
+                "primary": "#8E24AA",
+                "cap": "#cfd2d6",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#8E24AA",
+                "cap_color": "#cfd2d6",
+                "outline_color": "#000",
                 "outline_thickness": 1
               },
               "cap": {
@@ -1427,13 +2003,221 @@
               "indicator": {
                 "style": "dot",
                 "color": "#ffffff"
+              },
+              "scale": {
+                "show": true,
+                "style": "simple",
+                "count": 10,
+                "length": 10,
+                "thickness": 1
               }
             },
             "domain": {
               "primary": {
                 "min": 0,
                 "max": 100,
-                "value_default": 53
+                "value_default": 54
+              }
+            }
+          },
+          "wild_08": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Big F+F Teal",
+              "Fr": "Big F+F Teal",
+              "De": "Big F+F Teal",
+              "Es": "Big F+F Teal",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 150,
+              "height": 150
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "moog",
+              "colors": {
+                "primary": "#00897B",
+                "cap": "#cfd2d6",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#00897B",
+                "cap_color": "#cfd2d6",
+                "outline_color": "#000",
+                "outline_thickness": 1
+              },
+              "cap": {
+                "show": true,
+                "color": "#cfd2d6",
+                "rings": 8
+              },
+              "flutes": {
+                "show": true,
+                "count": 36
+              },
+              "flange": {
+                "show": true,
+                "color": "#00897B"
+              },
+              "foot": {
+                "show": true,
+                "color": "#00897B"
+              },
+              "indicator": {
+                "style": "dot",
+                "color": "#ffffff"
+              },
+              "scale": {
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 63
+              }
+            }
+          },
+          "wild_09": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Smooth+Flange Orange",
+              "Fr": "Smooth+Flange Orange",
+              "De": "Smooth+Flange Orange",
+              "Es": "Smooth+Flange Orange",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 140,
+              "height": 140
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "moog",
+              "colors": {
+                "primary": "#FB8C00",
+                "cap": "#cfd2d6",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#FB8C00",
+                "cap_color": "#cfd2d6",
+                "outline_color": "#000",
+                "outline_thickness": 1
+              },
+              "cap": {
+                "show": true,
+                "color": "#cfd2d6",
+                "rings": 8
+              },
+              "flutes": {
+                "show": false,
+                "count": 36
+              },
+              "flange": {
+                "show": true,
+                "color": "#FB8C00"
+              },
+              "foot": {
+                "show": false,
+                "color": "#FB8C00"
+              },
+              "indicator": {
+                "style": "line",
+                "color": "#ffffff"
+              },
+              "scale": {
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 72
+              }
+            }
+          },
+          "wild_10": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Smooth+Foot Indigo",
+              "Fr": "Smooth+Foot Indigo",
+              "De": "Smooth+Foot Indigo",
+              "Es": "Smooth+Foot Indigo",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 140,
+              "height": 140
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "moog",
+              "colors": {
+                "primary": "#3949AB",
+                "cap": "#cfd2d6",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#3949AB",
+                "cap_color": "#cfd2d6",
+                "outline_color": "#000",
+                "outline_thickness": 1
+              },
+              "cap": {
+                "show": true,
+                "color": "#cfd2d6",
+                "rings": 8
+              },
+              "flutes": {
+                "show": false,
+                "count": 36
+              },
+              "flange": {
+                "show": false,
+                "color": "#3949AB"
+              },
+              "foot": {
+                "show": true,
+                "color": "#3949AB"
+              },
+              "indicator": {
+                "style": "dot",
+                "color": "#ffffff"
+              },
+              "scale": {
+                "show": true,
+                "style": "simple",
+                "count": 10,
+                "length": 10,
+                "thickness": 1
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 81
               }
             }
           }

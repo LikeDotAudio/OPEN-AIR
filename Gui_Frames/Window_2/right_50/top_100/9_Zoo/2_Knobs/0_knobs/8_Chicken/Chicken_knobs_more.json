@@ -11,28 +11,28 @@
       "fluid_ew": true
     },
     "blocks": {
-      "Chicken_Head_Showcase": {
+      "Normal": {
         "type": "OcaBlock",
         "description": {
-          "En": "Chicken-head pointer knobs — various sizes and colours.",
-          "Fr": "Chicken-head pointer knobs — various sizes and colours.",
-          "De": "Chicken-head pointer knobs — various sizes and colours.",
-          "Es": "Chicken-head pointer knobs — various sizes and colours."
+          "En": "Conservative chicken-head knobs.",
+          "Fr": "Conservative chicken-head knobs.",
+          "De": "Conservative chicken-head knobs.",
+          "Es": "Conservative chicken-head knobs."
         },
-        "layout_columns": 6,
+        "layout_columns": 5,
         "fields": {
-          "chk_01": {
+          "con_01": {
             "type": "_SmartKnob",
             "label": {
-              "En": "Cherry",
-              "Fr": "Cherry",
-              "De": "Cherry",
-              "Es": "Cherry",
+              "En": "Black",
+              "Fr": "Black",
+              "De": "Black",
+              "Es": "Black",
               "show_label": true
             },
             "geometry": {
-              "width": 80,
-              "height": 80
+              "width": 110,
+              "height": 110
             },
             "readout": {
               "text_inside": false,
@@ -41,11 +41,12 @@
             "cosmetics": {
               "visualization": "chicken",
               "colors": {
-                "primary": "#C62828"
+                "primary": "#1c1c1c",
+                "tick": "#aaaaaa"
               },
               "styling": {
-                "fill_color": "#C62828",
-                "outline_color": "#222222",
+                "fill_color": "#1c1c1c",
+                "outline_color": "#222",
                 "outline_thickness": 1
               }
             },
@@ -57,13 +58,13 @@
               }
             }
           },
-          "chk_02": {
+          "con_02": {
             "type": "_SmartKnob",
             "label": {
-              "En": "Crimson",
-              "Fr": "Crimson",
-              "De": "Crimson",
-              "Es": "Crimson",
+              "En": "Charcoal",
+              "Fr": "Charcoal",
+              "De": "Charcoal",
+              "Es": "Charcoal",
               "show_label": true
             },
             "geometry": {
@@ -77,11 +78,12 @@
             "cosmetics": {
               "visualization": "chicken",
               "colors": {
-                "primary": "#E53935"
+                "primary": "#2a2d30",
+                "tick": "#aaaaaa"
               },
               "styling": {
-                "fill_color": "#E53935",
-                "outline_color": "#222222",
+                "fill_color": "#2a2d30",
+                "outline_color": "#222",
                 "outline_thickness": 1
               }
             },
@@ -89,269 +91,17 @@
               "primary": {
                 "min": 0,
                 "max": 100,
-                "value_default": 7
+                "value_default": 13
               }
             }
           },
-          "chk_03": {
+          "con_03": {
             "type": "_SmartKnob",
             "label": {
-              "En": "Orange",
-              "Fr": "Orange",
-              "De": "Orange",
-              "Es": "Orange",
-              "show_label": true
-            },
-            "geometry": {
-              "width": 140,
-              "height": 140
-            },
-            "readout": {
-              "text_inside": false,
-              "label_position": "top"
-            },
-            "cosmetics": {
-              "visualization": "chicken",
-              "colors": {
-                "primary": "#FB8C00"
-              },
-              "styling": {
-                "fill_color": "#FB8C00",
-                "outline_color": "#222222",
-                "outline_thickness": 1
-              }
-            },
-            "domain": {
-              "primary": {
-                "min": 0,
-                "max": 100,
-                "value_default": 14
-              }
-            }
-          },
-          "chk_04": {
-            "type": "_SmartKnob",
-            "label": {
-              "En": "Amber",
-              "Fr": "Amber",
-              "De": "Amber",
-              "Es": "Amber",
-              "show_label": true
-            },
-            "geometry": {
-              "width": 100,
-              "height": 100
-            },
-            "readout": {
-              "text_inside": false,
-              "label_position": "top"
-            },
-            "cosmetics": {
-              "visualization": "chicken",
-              "colors": {
-                "primary": "#FFB300"
-              },
-              "styling": {
-                "fill_color": "#FFB300",
-                "outline_color": "#222222",
-                "outline_thickness": 1
-              }
-            },
-            "domain": {
-              "primary": {
-                "min": 0,
-                "max": 100,
-                "value_default": 21
-              }
-            }
-          },
-          "chk_05": {
-            "type": "_SmartKnob",
-            "label": {
-              "En": "Yellow",
-              "Fr": "Yellow",
-              "De": "Yellow",
-              "Es": "Yellow",
-              "show_label": true
-            },
-            "geometry": {
-              "width": 160,
-              "height": 160
-            },
-            "readout": {
-              "text_inside": false,
-              "label_position": "top"
-            },
-            "cosmetics": {
-              "visualization": "chicken",
-              "colors": {
-                "primary": "#FDD835"
-              },
-              "styling": {
-                "fill_color": "#FDD835",
-                "outline_color": "#222222",
-                "outline_thickness": 1
-              }
-            },
-            "domain": {
-              "primary": {
-                "min": 0,
-                "max": 100,
-                "value_default": 28
-              }
-            }
-          },
-          "chk_06": {
-            "type": "_SmartKnob",
-            "label": {
-              "En": "Lime",
-              "Fr": "Lime",
-              "De": "Lime",
-              "Es": "Lime",
-              "show_label": true
-            },
-            "geometry": {
-              "width": 120,
-              "height": 120
-            },
-            "readout": {
-              "text_inside": false,
-              "label_position": "top"
-            },
-            "cosmetics": {
-              "visualization": "chicken",
-              "colors": {
-                "primary": "#7CB342"
-              },
-              "styling": {
-                "fill_color": "#7CB342",
-                "outline_color": "#222222",
-                "outline_thickness": 1
-              }
-            },
-            "domain": {
-              "primary": {
-                "min": 0,
-                "max": 100,
-                "value_default": 35
-              }
-            }
-          },
-          "chk_07": {
-            "type": "_SmartKnob",
-            "label": {
-              "En": "Green",
-              "Fr": "Green",
-              "De": "Green",
-              "Es": "Green",
-              "show_label": true
-            },
-            "geometry": {
-              "width": 90,
-              "height": 90
-            },
-            "readout": {
-              "text_inside": false,
-              "label_position": "top"
-            },
-            "cosmetics": {
-              "visualization": "chicken",
-              "colors": {
-                "primary": "#43A047"
-              },
-              "styling": {
-                "fill_color": "#43A047",
-                "outline_color": "#222222",
-                "outline_thickness": 1
-              }
-            },
-            "domain": {
-              "primary": {
-                "min": 0,
-                "max": 100,
-                "value_default": 42
-              }
-            }
-          },
-          "chk_08": {
-            "type": "_SmartKnob",
-            "label": {
-              "En": "Emerald",
-              "Fr": "Emerald",
-              "De": "Emerald",
-              "Es": "Emerald",
-              "show_label": true
-            },
-            "geometry": {
-              "width": 130,
-              "height": 130
-            },
-            "readout": {
-              "text_inside": false,
-              "label_position": "top"
-            },
-            "cosmetics": {
-              "visualization": "chicken",
-              "colors": {
-                "primary": "#2E7D32"
-              },
-              "styling": {
-                "fill_color": "#2E7D32",
-                "outline_color": "#222222",
-                "outline_thickness": 1
-              }
-            },
-            "domain": {
-              "primary": {
-                "min": 0,
-                "max": 100,
-                "value_default": 49
-              }
-            }
-          },
-          "chk_09": {
-            "type": "_SmartKnob",
-            "label": {
-              "En": "Teal",
-              "Fr": "Teal",
-              "De": "Teal",
-              "Es": "Teal",
-              "show_label": true
-            },
-            "geometry": {
-              "width": 80,
-              "height": 80
-            },
-            "readout": {
-              "text_inside": false,
-              "label_position": "top"
-            },
-            "cosmetics": {
-              "visualization": "chicken",
-              "colors": {
-                "primary": "#00897B"
-              },
-              "styling": {
-                "fill_color": "#00897B",
-                "outline_color": "#222222",
-                "outline_thickness": 1
-              }
-            },
-            "domain": {
-              "primary": {
-                "min": 0,
-                "max": 100,
-                "value_default": 56
-              }
-            }
-          },
-          "chk_10": {
-            "type": "_SmartKnob",
-            "label": {
-              "En": "Cyan",
-              "Fr": "Cyan",
-              "De": "Cyan",
-              "Es": "Cyan",
+              "En": "Slate",
+              "Fr": "Slate",
+              "De": "Slate",
+              "Es": "Slate",
               "show_label": true
             },
             "geometry": {
@@ -365,335 +115,12 @@
             "cosmetics": {
               "visualization": "chicken",
               "colors": {
-                "primary": "#00ACC1"
+                "primary": "#546E7A",
+                "tick": "#aaaaaa"
               },
               "styling": {
-                "fill_color": "#00ACC1",
-                "outline_color": "#222222",
-                "outline_thickness": 1
-              }
-            },
-            "domain": {
-              "primary": {
-                "min": 0,
-                "max": 100,
-                "value_default": 63
-              }
-            }
-          },
-          "chk_11": {
-            "type": "_SmartKnob",
-            "label": {
-              "En": "Sky",
-              "Fr": "Sky",
-              "De": "Sky",
-              "Es": "Sky",
-              "show_label": true
-            },
-            "geometry": {
-              "width": 140,
-              "height": 140
-            },
-            "readout": {
-              "text_inside": false,
-              "label_position": "top"
-            },
-            "cosmetics": {
-              "visualization": "chicken",
-              "colors": {
-                "primary": "#039BE5"
-              },
-              "styling": {
-                "fill_color": "#039BE5",
-                "outline_color": "#222222",
-                "outline_thickness": 1
-              }
-            },
-            "domain": {
-              "primary": {
-                "min": 0,
-                "max": 100,
-                "value_default": 70
-              }
-            }
-          },
-          "chk_12": {
-            "type": "_SmartKnob",
-            "label": {
-              "En": "Blue",
-              "Fr": "Blue",
-              "De": "Blue",
-              "Es": "Blue",
-              "show_label": true
-            },
-            "geometry": {
-              "width": 100,
-              "height": 100
-            },
-            "readout": {
-              "text_inside": false,
-              "label_position": "top"
-            },
-            "cosmetics": {
-              "visualization": "chicken",
-              "colors": {
-                "primary": "#1E88E5"
-              },
-              "styling": {
-                "fill_color": "#1E88E5",
-                "outline_color": "#222222",
-                "outline_thickness": 1
-              }
-            },
-            "domain": {
-              "primary": {
-                "min": 0,
-                "max": 100,
-                "value_default": 77
-              }
-            }
-          },
-          "chk_13": {
-            "type": "_SmartKnob",
-            "label": {
-              "En": "Indigo",
-              "Fr": "Indigo",
-              "De": "Indigo",
-              "Es": "Indigo",
-              "show_label": true
-            },
-            "geometry": {
-              "width": 160,
-              "height": 160
-            },
-            "readout": {
-              "text_inside": false,
-              "label_position": "top"
-            },
-            "cosmetics": {
-              "visualization": "chicken",
-              "colors": {
-                "primary": "#3949AB"
-              },
-              "styling": {
-                "fill_color": "#3949AB",
-                "outline_color": "#222222",
-                "outline_thickness": 1
-              }
-            },
-            "domain": {
-              "primary": {
-                "min": 0,
-                "max": 100,
-                "value_default": 84
-              }
-            }
-          },
-          "chk_14": {
-            "type": "_SmartKnob",
-            "label": {
-              "En": "Navy",
-              "Fr": "Navy",
-              "De": "Navy",
-              "Es": "Navy",
-              "show_label": true
-            },
-            "geometry": {
-              "width": 120,
-              "height": 120
-            },
-            "readout": {
-              "text_inside": false,
-              "label_position": "top"
-            },
-            "cosmetics": {
-              "visualization": "chicken",
-              "colors": {
-                "primary": "#283593"
-              },
-              "styling": {
-                "fill_color": "#283593",
-                "outline_color": "#222222",
-                "outline_thickness": 1
-              }
-            },
-            "domain": {
-              "primary": {
-                "min": 0,
-                "max": 100,
-                "value_default": 91
-              }
-            }
-          },
-          "chk_15": {
-            "type": "_SmartKnob",
-            "label": {
-              "En": "Violet",
-              "Fr": "Violet",
-              "De": "Violet",
-              "Es": "Violet",
-              "show_label": true
-            },
-            "geometry": {
-              "width": 90,
-              "height": 90
-            },
-            "readout": {
-              "text_inside": false,
-              "label_position": "top"
-            },
-            "cosmetics": {
-              "visualization": "chicken",
-              "colors": {
-                "primary": "#5E35B1"
-              },
-              "styling": {
-                "fill_color": "#5E35B1",
-                "outline_color": "#222222",
-                "outline_thickness": 1
-              }
-            },
-            "domain": {
-              "primary": {
-                "min": 0,
-                "max": 100,
-                "value_default": 98
-              }
-            }
-          },
-          "chk_16": {
-            "type": "_SmartKnob",
-            "label": {
-              "En": "Purple",
-              "Fr": "Purple",
-              "De": "Purple",
-              "Es": "Purple",
-              "show_label": true
-            },
-            "geometry": {
-              "width": 130,
-              "height": 130
-            },
-            "readout": {
-              "text_inside": false,
-              "label_position": "top"
-            },
-            "cosmetics": {
-              "visualization": "chicken",
-              "colors": {
-                "primary": "#8E24AA"
-              },
-              "styling": {
-                "fill_color": "#8E24AA",
-                "outline_color": "#222222",
-                "outline_thickness": 1
-              }
-            },
-            "domain": {
-              "primary": {
-                "min": 0,
-                "max": 100,
-                "value_default": 5
-              }
-            }
-          },
-          "chk_17": {
-            "type": "_SmartKnob",
-            "label": {
-              "En": "Magenta",
-              "Fr": "Magenta",
-              "De": "Magenta",
-              "Es": "Magenta",
-              "show_label": true
-            },
-            "geometry": {
-              "width": 80,
-              "height": 80
-            },
-            "readout": {
-              "text_inside": false,
-              "label_position": "top"
-            },
-            "cosmetics": {
-              "visualization": "chicken",
-              "colors": {
-                "primary": "#D81B60"
-              },
-              "styling": {
-                "fill_color": "#D81B60",
-                "outline_color": "#222222",
-                "outline_thickness": 1
-              }
-            },
-            "domain": {
-              "primary": {
-                "min": 0,
-                "max": 100,
-                "value_default": 12
-              }
-            }
-          },
-          "chk_18": {
-            "type": "_SmartKnob",
-            "label": {
-              "En": "Pink",
-              "Fr": "Pink",
-              "De": "Pink",
-              "Es": "Pink",
-              "show_label": true
-            },
-            "geometry": {
-              "width": 110,
-              "height": 110
-            },
-            "readout": {
-              "text_inside": false,
-              "label_position": "top"
-            },
-            "cosmetics": {
-              "visualization": "chicken",
-              "colors": {
-                "primary": "#EC407A"
-              },
-              "styling": {
-                "fill_color": "#EC407A",
-                "outline_color": "#222222",
-                "outline_thickness": 1
-              }
-            },
-            "domain": {
-              "primary": {
-                "min": 0,
-                "max": 100,
-                "value_default": 19
-              }
-            }
-          },
-          "chk_19": {
-            "type": "_SmartKnob",
-            "label": {
-              "En": "Brown",
-              "Fr": "Brown",
-              "De": "Brown",
-              "Es": "Brown",
-              "show_label": true
-            },
-            "geometry": {
-              "width": 140,
-              "height": 140
-            },
-            "readout": {
-              "text_inside": false,
-              "label_position": "top"
-            },
-            "cosmetics": {
-              "visualization": "chicken",
-              "colors": {
-                "primary": "#6D4C41"
-              },
-              "styling": {
-                "fill_color": "#6D4C41",
-                "outline_color": "#222222",
+                "fill_color": "#546E7A",
+                "outline_color": "#222",
                 "outline_thickness": 1
               }
             },
@@ -705,18 +132,18 @@
               }
             }
           },
-          "chk_20": {
+          "con_04": {
             "type": "_SmartKnob",
             "label": {
-              "En": "Slate",
-              "Fr": "Slate",
-              "De": "Slate",
-              "Es": "Slate",
+              "En": "White",
+              "Fr": "White",
+              "De": "White",
+              "Es": "White",
               "show_label": true
             },
             "geometry": {
-              "width": 100,
-              "height": 100
+              "width": 110,
+              "height": 110
             },
             "readout": {
               "text_inside": false,
@@ -725,12 +152,942 @@
             "cosmetics": {
               "visualization": "chicken",
               "colors": {
-                "primary": "#546E7A"
+                "primary": "#f0f0f0",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#f0f0f0",
+                "outline_color": "#222",
+                "outline_thickness": 1
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 39
+              }
+            }
+          },
+          "con_05": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Cream",
+              "Fr": "Cream",
+              "De": "Cream",
+              "Es": "Cream",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "chicken",
+              "colors": {
+                "primary": "#efe4c8",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#efe4c8",
+                "outline_color": "#222",
+                "outline_thickness": 1
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 52
+              }
+            }
+          }
+        }
+      },
+      "Variety": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Full colour palette with rotating tick / dots / numeric scales.",
+          "Fr": "Full colour palette with rotating tick / dots / numeric scales.",
+          "De": "Full colour palette with rotating tick / dots / numeric scales.",
+          "Es": "Full colour palette with rotating tick / dots / numeric scales."
+        },
+        "layout_columns": 6,
+        "fields": {
+          "var_01": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Cherry (simple)",
+              "Fr": "Cherry (simple)",
+              "De": "Cherry (simple)",
+              "Es": "Cherry (simple)",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "chicken",
+              "colors": {
+                "primary": "#C62828",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#C62828",
+                "outline_color": "#222",
+                "outline_thickness": 1
+              },
+              "scale": {
+                "show": true,
+                "style": "simple",
+                "count": 10,
+                "length": 10,
+                "thickness": 1
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 0
+              }
+            }
+          },
+          "var_02": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Crimson (dots)",
+              "Fr": "Crimson (dots)",
+              "De": "Crimson (dots)",
+              "Es": "Crimson (dots)",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "chicken",
+              "colors": {
+                "primary": "#E53935",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#E53935",
+                "outline_color": "#222",
+                "outline_thickness": 1
+              },
+              "scale": {
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 7
+              }
+            }
+          },
+          "var_03": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Orange (numeric)",
+              "Fr": "Orange (numeric)",
+              "De": "Orange (numeric)",
+              "Es": "Orange (numeric)",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "chicken",
+              "colors": {
+                "primary": "#FB8C00",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#FB8C00",
+                "outline_color": "#222",
+                "outline_thickness": 1
+              },
+              "scale": {
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 14
+              }
+            }
+          },
+          "var_04": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Amber (simple)",
+              "Fr": "Amber (simple)",
+              "De": "Amber (simple)",
+              "Es": "Amber (simple)",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "chicken",
+              "colors": {
+                "primary": "#FFB300",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#FFB300",
+                "outline_color": "#222",
+                "outline_thickness": 1
+              },
+              "scale": {
+                "show": true,
+                "style": "simple",
+                "count": 10,
+                "length": 10,
+                "thickness": 1
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 21
+              }
+            }
+          },
+          "var_05": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Yellow (dots)",
+              "Fr": "Yellow (dots)",
+              "De": "Yellow (dots)",
+              "Es": "Yellow (dots)",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "chicken",
+              "colors": {
+                "primary": "#FDD835",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#FDD835",
+                "outline_color": "#222",
+                "outline_thickness": 1
+              },
+              "scale": {
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 28
+              }
+            }
+          },
+          "var_06": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Lime (numeric)",
+              "Fr": "Lime (numeric)",
+              "De": "Lime (numeric)",
+              "Es": "Lime (numeric)",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "chicken",
+              "colors": {
+                "primary": "#7CB342",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#7CB342",
+                "outline_color": "#222",
+                "outline_thickness": 1
+              },
+              "scale": {
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 35
+              }
+            }
+          },
+          "var_07": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Green (simple)",
+              "Fr": "Green (simple)",
+              "De": "Green (simple)",
+              "Es": "Green (simple)",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "chicken",
+              "colors": {
+                "primary": "#43A047",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#43A047",
+                "outline_color": "#222",
+                "outline_thickness": 1
+              },
+              "scale": {
+                "show": true,
+                "style": "simple",
+                "count": 10,
+                "length": 10,
+                "thickness": 1
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 42
+              }
+            }
+          },
+          "var_08": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Emerald (dots)",
+              "Fr": "Emerald (dots)",
+              "De": "Emerald (dots)",
+              "Es": "Emerald (dots)",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "chicken",
+              "colors": {
+                "primary": "#2E7D32",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#2E7D32",
+                "outline_color": "#222",
+                "outline_thickness": 1
+              },
+              "scale": {
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 49
+              }
+            }
+          },
+          "var_09": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Teal (numeric)",
+              "Fr": "Teal (numeric)",
+              "De": "Teal (numeric)",
+              "Es": "Teal (numeric)",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "chicken",
+              "colors": {
+                "primary": "#00897B",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#00897B",
+                "outline_color": "#222",
+                "outline_thickness": 1
+              },
+              "scale": {
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 56
+              }
+            }
+          },
+          "var_10": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Cyan (simple)",
+              "Fr": "Cyan (simple)",
+              "De": "Cyan (simple)",
+              "Es": "Cyan (simple)",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "chicken",
+              "colors": {
+                "primary": "#00ACC1",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#00ACC1",
+                "outline_color": "#222",
+                "outline_thickness": 1
+              },
+              "scale": {
+                "show": true,
+                "style": "simple",
+                "count": 10,
+                "length": 10,
+                "thickness": 1
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 63
+              }
+            }
+          },
+          "var_11": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Sky (dots)",
+              "Fr": "Sky (dots)",
+              "De": "Sky (dots)",
+              "Es": "Sky (dots)",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "chicken",
+              "colors": {
+                "primary": "#039BE5",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#039BE5",
+                "outline_color": "#222",
+                "outline_thickness": 1
+              },
+              "scale": {
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 70
+              }
+            }
+          },
+          "var_12": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Blue (numeric)",
+              "Fr": "Blue (numeric)",
+              "De": "Blue (numeric)",
+              "Es": "Blue (numeric)",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "chicken",
+              "colors": {
+                "primary": "#1E88E5",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#1E88E5",
+                "outline_color": "#222",
+                "outline_thickness": 1
+              },
+              "scale": {
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 77
+              }
+            }
+          },
+          "var_13": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Indigo (simple)",
+              "Fr": "Indigo (simple)",
+              "De": "Indigo (simple)",
+              "Es": "Indigo (simple)",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "chicken",
+              "colors": {
+                "primary": "#3949AB",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#3949AB",
+                "outline_color": "#222",
+                "outline_thickness": 1
+              },
+              "scale": {
+                "show": true,
+                "style": "simple",
+                "count": 10,
+                "length": 10,
+                "thickness": 1
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 84
+              }
+            }
+          },
+          "var_14": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Navy (dots)",
+              "Fr": "Navy (dots)",
+              "De": "Navy (dots)",
+              "Es": "Navy (dots)",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "chicken",
+              "colors": {
+                "primary": "#283593",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#283593",
+                "outline_color": "#222",
+                "outline_thickness": 1
+              },
+              "scale": {
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 91
+              }
+            }
+          },
+          "var_15": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Violet (numeric)",
+              "Fr": "Violet (numeric)",
+              "De": "Violet (numeric)",
+              "Es": "Violet (numeric)",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "chicken",
+              "colors": {
+                "primary": "#5E35B1",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#5E35B1",
+                "outline_color": "#222",
+                "outline_thickness": 1
+              },
+              "scale": {
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 98
+              }
+            }
+          },
+          "var_16": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Purple (simple)",
+              "Fr": "Purple (simple)",
+              "De": "Purple (simple)",
+              "Es": "Purple (simple)",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "chicken",
+              "colors": {
+                "primary": "#8E24AA",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#8E24AA",
+                "outline_color": "#222",
+                "outline_thickness": 1
+              },
+              "scale": {
+                "show": true,
+                "style": "simple",
+                "count": 10,
+                "length": 10,
+                "thickness": 1
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 5
+              }
+            }
+          },
+          "var_17": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Magenta (dots)",
+              "Fr": "Magenta (dots)",
+              "De": "Magenta (dots)",
+              "Es": "Magenta (dots)",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "chicken",
+              "colors": {
+                "primary": "#D81B60",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#D81B60",
+                "outline_color": "#222",
+                "outline_thickness": 1
+              },
+              "scale": {
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 12
+              }
+            }
+          },
+          "var_18": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Pink (numeric)",
+              "Fr": "Pink (numeric)",
+              "De": "Pink (numeric)",
+              "Es": "Pink (numeric)",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "chicken",
+              "colors": {
+                "primary": "#EC407A",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#EC407A",
+                "outline_color": "#222",
+                "outline_thickness": 1
+              },
+              "scale": {
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 19
+              }
+            }
+          },
+          "var_19": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Brown (simple)",
+              "Fr": "Brown (simple)",
+              "De": "Brown (simple)",
+              "Es": "Brown (simple)",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "chicken",
+              "colors": {
+                "primary": "#6D4C41",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#6D4C41",
+                "outline_color": "#222",
+                "outline_thickness": 1
+              },
+              "scale": {
+                "show": true,
+                "style": "simple",
+                "count": 10,
+                "length": 10,
+                "thickness": 1
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 26
+              }
+            }
+          },
+          "var_20": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Slate (dots)",
+              "Fr": "Slate (dots)",
+              "De": "Slate (dots)",
+              "Es": "Slate (dots)",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 110,
+              "height": 110
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "chicken",
+              "colors": {
+                "primary": "#546E7A",
+                "tick": "#aaaaaa"
               },
               "styling": {
                 "fill_color": "#546E7A",
-                "outline_color": "#222222",
+                "outline_color": "#222",
                 "outline_thickness": 1
+              },
+              "scale": {
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
               }
             },
             "domain": {
@@ -741,18 +1098,18 @@
               }
             }
           },
-          "chk_21": {
+          "var_21": {
             "type": "_SmartKnob",
             "label": {
-              "En": "Black",
-              "Fr": "Black",
-              "De": "Black",
-              "Es": "Black",
+              "En": "Black (numeric)",
+              "Fr": "Black (numeric)",
+              "De": "Black (numeric)",
+              "Es": "Black (numeric)",
               "show_label": true
             },
             "geometry": {
-              "width": 160,
-              "height": 160
+              "width": 110,
+              "height": 110
             },
             "readout": {
               "text_inside": false,
@@ -761,12 +1118,20 @@
             "cosmetics": {
               "visualization": "chicken",
               "colors": {
-                "primary": "#1c1c1c"
+                "primary": "#1c1c1c",
+                "tick": "#aaaaaa"
               },
               "styling": {
                 "fill_color": "#1c1c1c",
-                "outline_color": "#222222",
+                "outline_color": "#222",
                 "outline_thickness": 1
+              },
+              "scale": {
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
               }
             },
             "domain": {
@@ -777,18 +1142,18 @@
               }
             }
           },
-          "chk_22": {
+          "var_22": {
             "type": "_SmartKnob",
             "label": {
-              "En": "White",
-              "Fr": "White",
-              "De": "White",
-              "Es": "White",
+              "En": "White (simple)",
+              "Fr": "White (simple)",
+              "De": "White (simple)",
+              "Es": "White (simple)",
               "show_label": true
             },
             "geometry": {
-              "width": 120,
-              "height": 120
+              "width": 110,
+              "height": 110
             },
             "readout": {
               "text_inside": false,
@@ -797,12 +1162,20 @@
             "cosmetics": {
               "visualization": "chicken",
               "colors": {
-                "primary": "#f0f0f0"
+                "primary": "#f0f0f0",
+                "tick": "#aaaaaa"
               },
               "styling": {
                 "fill_color": "#f0f0f0",
-                "outline_color": "#222222",
+                "outline_color": "#222",
                 "outline_thickness": 1
+              },
+              "scale": {
+                "show": true,
+                "style": "simple",
+                "count": 10,
+                "length": 10,
+                "thickness": 1
               }
             },
             "domain": {
@@ -813,18 +1186,18 @@
               }
             }
           },
-          "chk_23": {
+          "var_23": {
             "type": "_SmartKnob",
             "label": {
-              "En": "Cream",
-              "Fr": "Cream",
-              "De": "Cream",
-              "Es": "Cream",
+              "En": "Cream (dots)",
+              "Fr": "Cream (dots)",
+              "De": "Cream (dots)",
+              "Es": "Cream (dots)",
               "show_label": true
             },
             "geometry": {
-              "width": 90,
-              "height": 90
+              "width": 110,
+              "height": 110
             },
             "readout": {
               "text_inside": false,
@@ -833,12 +1206,20 @@
             "cosmetics": {
               "visualization": "chicken",
               "colors": {
-                "primary": "#efe4c8"
+                "primary": "#efe4c8",
+                "tick": "#aaaaaa"
               },
               "styling": {
                 "fill_color": "#efe4c8",
-                "outline_color": "#222222",
+                "outline_color": "#222",
                 "outline_thickness": 1
+              },
+              "scale": {
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
               }
             },
             "domain": {
@@ -849,18 +1230,18 @@
               }
             }
           },
-          "chk_24": {
+          "var_24": {
             "type": "_SmartKnob",
             "label": {
-              "En": "Gold",
-              "Fr": "Gold",
-              "De": "Gold",
-              "Es": "Gold",
+              "En": "Gold (numeric)",
+              "Fr": "Gold (numeric)",
+              "De": "Gold (numeric)",
+              "Es": "Gold (numeric)",
               "show_label": true
             },
             "geometry": {
-              "width": 130,
-              "height": 130
+              "width": 110,
+              "height": 110
             },
             "readout": {
               "text_inside": false,
@@ -869,12 +1250,20 @@
             "cosmetics": {
               "visualization": "chicken",
               "colors": {
-                "primary": "#C9A227"
+                "primary": "#C9A227",
+                "tick": "#aaaaaa"
               },
               "styling": {
                 "fill_color": "#C9A227",
-                "outline_color": "#222222",
+                "outline_color": "#222",
                 "outline_thickness": 1
+              },
+              "scale": {
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
               }
             },
             "domain": {
@@ -882,6 +1271,546 @@
                 "min": 0,
                 "max": 100,
                 "value_default": 61
+              }
+            }
+          }
+        }
+      },
+      "Wild": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Bold sizes and colours, all scale styles in the mix.",
+          "Fr": "Bold sizes and colours, all scale styles in the mix.",
+          "De": "Bold sizes and colours, all scale styles in the mix.",
+          "Es": "Bold sizes and colours, all scale styles in the mix."
+        },
+        "layout_columns": 6,
+        "fields": {
+          "wild_01": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Huge Magenta",
+              "Fr": "Huge Magenta",
+              "De": "Huge Magenta",
+              "Es": "Huge Magenta",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 170,
+              "height": 170
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "chicken",
+              "colors": {
+                "primary": "#D81B60",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#D81B60",
+                "outline_color": "#222",
+                "outline_thickness": 1
+              },
+              "scale": {
+                "show": true,
+                "style": "simple",
+                "count": 10,
+                "length": 10,
+                "thickness": 1
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 0
+              }
+            }
+          },
+          "wild_02": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Huge Lime",
+              "Fr": "Huge Lime",
+              "De": "Huge Lime",
+              "Es": "Huge Lime",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 170,
+              "height": 170
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "chicken",
+              "colors": {
+                "primary": "#7CB342",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#7CB342",
+                "outline_color": "#222",
+                "outline_thickness": 1
+              },
+              "scale": {
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 9
+              }
+            }
+          },
+          "wild_03": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Huge Cyan",
+              "Fr": "Huge Cyan",
+              "De": "Huge Cyan",
+              "Es": "Huge Cyan",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 170,
+              "height": 170
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "chicken",
+              "colors": {
+                "primary": "#00ACC1",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#00ACC1",
+                "outline_color": "#222",
+                "outline_thickness": 1
+              },
+              "scale": {
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 18
+              }
+            }
+          },
+          "wild_04": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Tiny Cherry",
+              "Fr": "Tiny Cherry",
+              "De": "Tiny Cherry",
+              "Es": "Tiny Cherry",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 70,
+              "height": 70
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "chicken",
+              "colors": {
+                "primary": "#C62828",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#C62828",
+                "outline_color": "#222",
+                "outline_thickness": 1
+              },
+              "scale": {
+                "show": true,
+                "style": "simple",
+                "count": 10,
+                "length": 10,
+                "thickness": 1
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 27
+              }
+            }
+          },
+          "wild_05": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Tiny Gold",
+              "Fr": "Tiny Gold",
+              "De": "Tiny Gold",
+              "Es": "Tiny Gold",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 70,
+              "height": 70
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "chicken",
+              "colors": {
+                "primary": "#C9A227",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#C9A227",
+                "outline_color": "#222",
+                "outline_thickness": 1
+              },
+              "scale": {
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 36
+              }
+            }
+          },
+          "wild_06": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Tiny White",
+              "Fr": "Tiny White",
+              "De": "Tiny White",
+              "Es": "Tiny White",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 70,
+              "height": 70
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "chicken",
+              "colors": {
+                "primary": "#f0f0f0",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#f0f0f0",
+                "outline_color": "#222",
+                "outline_thickness": 1
+              },
+              "scale": {
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 45
+              }
+            }
+          },
+          "wild_07": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Wide Indigo",
+              "Fr": "Wide Indigo",
+              "De": "Wide Indigo",
+              "Es": "Wide Indigo",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 150,
+              "height": 150
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "chicken",
+              "colors": {
+                "primary": "#3949AB",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#3949AB",
+                "outline_color": "#222",
+                "outline_thickness": 1
+              },
+              "scale": {
+                "show": true,
+                "style": "simple",
+                "count": 10,
+                "length": 10,
+                "thickness": 1
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 54
+              }
+            }
+          },
+          "wild_08": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Wide Pink",
+              "Fr": "Wide Pink",
+              "De": "Wide Pink",
+              "Es": "Wide Pink",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 150,
+              "height": 150
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "chicken",
+              "colors": {
+                "primary": "#EC407A",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#EC407A",
+                "outline_color": "#222",
+                "outline_thickness": 1
+              },
+              "scale": {
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 63
+              }
+            }
+          },
+          "wild_09": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Bold Orange",
+              "Fr": "Bold Orange",
+              "De": "Bold Orange",
+              "Es": "Bold Orange",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 140,
+              "height": 140
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "chicken",
+              "colors": {
+                "primary": "#FB8C00",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#FB8C00",
+                "outline_color": "#222",
+                "outline_thickness": 1
+              },
+              "scale": {
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 72
+              }
+            }
+          },
+          "wild_10": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Bold Teal",
+              "Fr": "Bold Teal",
+              "De": "Bold Teal",
+              "Es": "Bold Teal",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 140,
+              "height": 140
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "chicken",
+              "colors": {
+                "primary": "#00897B",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#00897B",
+                "outline_color": "#222",
+                "outline_thickness": 1
+              },
+              "scale": {
+                "show": true,
+                "style": "simple",
+                "count": 10,
+                "length": 10,
+                "thickness": 1
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 81
+              }
+            }
+          },
+          "wild_11": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Bold Brown",
+              "Fr": "Bold Brown",
+              "De": "Bold Brown",
+              "Es": "Bold Brown",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 140,
+              "height": 140
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "chicken",
+              "colors": {
+                "primary": "#6D4C41",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#6D4C41",
+                "outline_color": "#222",
+                "outline_thickness": 1
+              },
+              "scale": {
+                "show": true,
+                "style": "dots",
+                "count": 12,
+                "length": 8,
+                "thickness": 2
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 90
+              }
+            }
+          },
+          "wild_12": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Bold Violet",
+              "Fr": "Bold Violet",
+              "De": "Bold Violet",
+              "Es": "Bold Violet",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 140,
+              "height": 140
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "chicken",
+              "colors": {
+                "primary": "#5E35B1",
+                "tick": "#aaaaaa"
+              },
+              "styling": {
+                "fill_color": "#5E35B1",
+                "outline_color": "#222",
+                "outline_thickness": 1
+              },
+              "scale": {
+                "show": true,
+                "style": "numeric",
+                "count": 5,
+                "length": 8,
+                "thickness": 1
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0,
+                "max": 100,
+                "value_default": 99
               }
             }
           }

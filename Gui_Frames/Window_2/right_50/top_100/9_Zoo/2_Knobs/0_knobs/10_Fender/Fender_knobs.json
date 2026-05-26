@@ -11,23 +11,23 @@
       "fluid_ew": true
     },
     "blocks": {
-      "Fender_Strat_Showcase": {
+      "Normal": {
         "type": "OcaBlock",
         "description": {
-          "En": "Fender Strat knobs — face spins with value, fixed pointer (varies top/bottom/left/right).",
-          "Fr": "Fender Strat knobs — face spins with value, fixed pointer (varies top/bottom/left/right).",
-          "De": "Fender Strat knobs — face spins with value, fixed pointer (varies top/bottom/left/right).",
-          "Es": "Fender Strat knobs — face spins with value, fixed pointer (varies top/bottom/left/right)."
+          "En": "Conservative Strat-style knobs (white/cream/black) all top-pointer.",
+          "Fr": "Conservative Strat-style knobs (white/cream/black) all top-pointer.",
+          "De": "Conservative Strat-style knobs (white/cream/black) all top-pointer.",
+          "Es": "Conservative Strat-style knobs (white/cream/black) all top-pointer."
         },
         "layout_columns": 4,
         "fields": {
-          "fen_01": {
+          "con_01": {
             "type": "_SmartKnob",
             "label": {
-              "En": "Volume (top)",
-              "Fr": "Volume (top)",
-              "De": "Volume (top)",
-              "Es": "Volume (top)",
+              "En": "Standard White",
+              "Fr": "Standard White",
+              "De": "Standard White",
+              "Es": "Standard White",
               "show_label": true
             },
             "geometry": {
@@ -40,11 +40,11 @@
             },
             "cosmetics": {
               "visualization": "fender",
-              "center_text": "VOLUME",
+              "center_text": "VOL",
               "colors": {
                 "primary": "#f0f0f0",
-                "text": "#caa44a",
-                "active": "#caa44a"
+                "text": "#1c1c1c",
+                "active": "#1c1c1c"
               },
               "pointer": {
                 "position": "top"
@@ -61,18 +61,18 @@
               }
             }
           },
-          "fen_02": {
+          "con_02": {
             "type": "_SmartKnob",
             "label": {
-              "En": "Tone (top)",
-              "Fr": "Tone (top)",
-              "De": "Tone (top)",
-              "Es": "Tone (top)",
+              "En": "Standard Cream",
+              "Fr": "Standard Cream",
+              "De": "Standard Cream",
+              "Es": "Standard Cream",
               "show_label": true
             },
             "geometry": {
-              "width": 110,
-              "height": 110
+              "width": 130,
+              "height": 130
             },
             "readout": {
               "text_inside": false,
@@ -80,11 +80,11 @@
             },
             "cosmetics": {
               "visualization": "fender",
-              "center_text": "TONE",
+              "center_text": "VOL",
               "colors": {
-                "primary": "#f0f0f0",
-                "text": "#caa44a",
-                "active": "#caa44a"
+                "primary": "#efe4c8",
+                "text": "#1c1c1c",
+                "active": "#1c1c1c"
               },
               "pointer": {
                 "position": "top"
@@ -97,22 +97,22 @@
               "primary": {
                 "min": 1,
                 "max": 10,
-                "value_default": 2
+                "value_default": 4
               }
             }
           },
-          "fen_03": {
+          "con_03": {
             "type": "_SmartKnob",
             "label": {
-              "En": "Volume (top)",
-              "Fr": "Volume (top)",
-              "De": "Volume (top)",
-              "Es": "Volume (top)",
+              "En": "Standard Black",
+              "Fr": "Standard Black",
+              "De": "Standard Black",
+              "Es": "Standard Black",
               "show_label": true
             },
             "geometry": {
-              "width": 140,
-              "height": 140
+              "width": 130,
+              "height": 130
             },
             "readout": {
               "text_inside": false,
@@ -120,7 +120,7 @@
             },
             "cosmetics": {
               "visualization": "fender",
-              "center_text": "VOLUME",
+              "center_text": "VOL",
               "colors": {
                 "primary": "#1c1c1c",
                 "text": "#ffffff",
@@ -137,22 +137,114 @@
               "primary": {
                 "min": 1,
                 "max": 10,
-                "value_default": 3
+                "value_default": 7
               }
             }
           },
-          "fen_04": {
+          "con_04": {
             "type": "_SmartKnob",
             "label": {
-              "En": "Tone (bottom)",
-              "Fr": "Tone (bottom)",
-              "De": "Tone (bottom)",
-              "Es": "Tone (bottom)",
+              "En": "Standard Charcoal",
+              "Fr": "Standard Charcoal",
+              "De": "Standard Charcoal",
+              "Es": "Standard Charcoal",
               "show_label": true
             },
             "geometry": {
-              "width": 100,
-              "height": 100
+              "width": 130,
+              "height": 130
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "fender",
+              "center_text": "VOL",
+              "colors": {
+                "primary": "#2a2d30",
+                "text": "#ffffff",
+                "active": "#ffffff"
+              },
+              "pointer": {
+                "position": "top"
+              },
+              "scale": {
+                "count": 10
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 1,
+                "max": 10,
+                "value_default": 10
+              }
+            }
+          }
+        }
+      },
+      "Variety": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "12 colours, pointer-position cycles top/bottom/left/right, varied labels.",
+          "Fr": "12 colours, pointer-position cycles top/bottom/left/right, varied labels.",
+          "De": "12 colours, pointer-position cycles top/bottom/left/right, varied labels.",
+          "Es": "12 colours, pointer-position cycles top/bottom/left/right, varied labels."
+        },
+        "layout_columns": 6,
+        "fields": {
+          "var_01": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Cherry VOLUME",
+              "Fr": "Cherry VOLUME",
+              "De": "Cherry VOLUME",
+              "Es": "Cherry VOLUME",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 130,
+              "height": 130
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "fender",
+              "center_text": "VOLUME",
+              "colors": {
+                "primary": "#C62828",
+                "text": "#ffffff",
+                "active": "#ffffff"
+              },
+              "pointer": {
+                "position": "top"
+              },
+              "scale": {
+                "count": 10
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 1,
+                "max": 10,
+                "value_default": 1
+              }
+            }
+          },
+          "var_02": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Crimson TONE",
+              "Fr": "Crimson TONE",
+              "De": "Crimson TONE",
+              "Es": "Crimson TONE",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 130,
+              "height": 130
             },
             "readout": {
               "text_inside": false,
@@ -162,7 +254,7 @@
               "visualization": "fender",
               "center_text": "TONE",
               "colors": {
-                "primary": "#1c1c1c",
+                "primary": "#E53935",
                 "text": "#ffffff",
                 "active": "#ffffff"
               },
@@ -177,22 +269,22 @@
               "primary": {
                 "min": 1,
                 "max": 10,
-                "value_default": 4
+                "value_default": 2
               }
             }
           },
-          "fen_05": {
+          "var_03": {
             "type": "_SmartKnob",
             "label": {
-              "En": "Volume (top)",
-              "Fr": "Volume (top)",
-              "De": "Volume (top)",
-              "Es": "Volume (top)",
+              "En": "Orange GAIN",
+              "Fr": "Orange GAIN",
+              "De": "Orange GAIN",
+              "Es": "Orange GAIN",
               "show_label": true
             },
             "geometry": {
-              "width": 160,
-              "height": 160
+              "width": 130,
+              "height": 130
             },
             "readout": {
               "text_inside": false,
@@ -200,11 +292,91 @@
             },
             "cosmetics": {
               "visualization": "fender",
-              "center_text": "VOLUME",
+              "center_text": "GAIN",
               "colors": {
-                "primary": "#efe4c8",
-                "text": "#8a6d1f",
-                "active": "#8a6d1f"
+                "primary": "#FB8C00",
+                "text": "#ffffff",
+                "active": "#ffffff"
+              },
+              "pointer": {
+                "position": "left"
+              },
+              "scale": {
+                "count": 10
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 1,
+                "max": 10,
+                "value_default": 3
+              }
+            }
+          },
+          "var_04": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Amber BASS",
+              "Fr": "Amber BASS",
+              "De": "Amber BASS",
+              "Es": "Amber BASS",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 130,
+              "height": 130
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "fender",
+              "center_text": "BASS",
+              "colors": {
+                "primary": "#FFB300",
+                "text": "#ffffff",
+                "active": "#ffffff"
+              },
+              "pointer": {
+                "position": "right"
+              },
+              "scale": {
+                "count": 10
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 1,
+                "max": 10,
+                "value_default": 4
+              }
+            }
+          },
+          "var_05": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Yellow MID",
+              "Fr": "Yellow MID",
+              "De": "Yellow MID",
+              "Es": "Yellow MID",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 130,
+              "height": 130
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "fender",
+              "center_text": "MID",
+              "colors": {
+                "primary": "#FDD835",
+                "text": "#ffffff",
+                "active": "#ffffff"
               },
               "pointer": {
                 "position": "top"
@@ -221,53 +393,13 @@
               }
             }
           },
-          "fen_06": {
+          "var_06": {
             "type": "_SmartKnob",
             "label": {
-              "En": "Tone (left)",
-              "Fr": "Tone (left)",
-              "De": "Tone (left)",
-              "Es": "Tone (left)",
-              "show_label": true
-            },
-            "geometry": {
-              "width": 120,
-              "height": 120
-            },
-            "readout": {
-              "text_inside": false,
-              "label_position": "top"
-            },
-            "cosmetics": {
-              "visualization": "fender",
-              "center_text": "TONE",
-              "colors": {
-                "primary": "#efe4c8",
-                "text": "#8a6d1f",
-                "active": "#8a6d1f"
-              },
-              "pointer": {
-                "position": "left"
-              },
-              "scale": {
-                "count": 10
-              }
-            },
-            "domain": {
-              "primary": {
-                "min": 1,
-                "max": 10,
-                "value_default": 6
-              }
-            }
-          },
-          "fen_07": {
-            "type": "_SmartKnob",
-            "label": {
-              "En": "Gain (right)",
-              "Fr": "Gain (right)",
-              "De": "Gain (right)",
-              "Es": "Gain (right)",
+              "En": "Lime TREBLE",
+              "Fr": "Lime TREBLE",
+              "De": "Lime TREBLE",
+              "Es": "Lime TREBLE",
               "show_label": true
             },
             "geometry": {
@@ -280,89 +412,9 @@
             },
             "cosmetics": {
               "visualization": "fender",
-              "center_text": "GAIN",
+              "center_text": "TREBLE",
               "colors": {
-                "primary": "#C62828",
-                "text": "#ffffff",
-                "active": "#ffffff"
-              },
-              "pointer": {
-                "position": "right"
-              },
-              "scale": {
-                "count": 10
-              }
-            },
-            "domain": {
-              "primary": {
-                "min": 1,
-                "max": 10,
-                "value_default": 7
-              }
-            }
-          },
-          "fen_08": {
-            "type": "_SmartKnob",
-            "label": {
-              "En": "Bass (top)",
-              "Fr": "Bass (top)",
-              "De": "Bass (top)",
-              "Es": "Bass (top)",
-              "show_label": true
-            },
-            "geometry": {
-              "width": 130,
-              "height": 130
-            },
-            "readout": {
-              "text_inside": false,
-              "label_position": "top"
-            },
-            "cosmetics": {
-              "visualization": "fender",
-              "center_text": "BASS",
-              "colors": {
-                "primary": "#1E88E5",
-                "text": "#ffffff",
-                "active": "#ffffff"
-              },
-              "pointer": {
-                "position": "top"
-              },
-              "scale": {
-                "count": 10
-              }
-            },
-            "domain": {
-              "primary": {
-                "min": 1,
-                "max": 10,
-                "value_default": 8
-              }
-            }
-          },
-          "fen_09": {
-            "type": "_SmartKnob",
-            "label": {
-              "En": "Mid (bottom)",
-              "Fr": "Mid (bottom)",
-              "De": "Mid (bottom)",
-              "Es": "Mid (bottom)",
-              "show_label": true
-            },
-            "geometry": {
-              "width": 130,
-              "height": 130
-            },
-            "readout": {
-              "text_inside": false,
-              "label_position": "top"
-            },
-            "cosmetics": {
-              "visualization": "fender",
-              "center_text": "MID",
-              "colors": {
-                "primary": "#2E7D32",
+                "primary": "#7CB342",
                 "text": "#ffffff",
                 "active": "#ffffff"
               },
@@ -377,22 +429,22 @@
               "primary": {
                 "min": 1,
                 "max": 10,
-                "value_default": 9
+                "value_default": 6
               }
             }
           },
-          "fen_10": {
+          "var_07": {
             "type": "_SmartKnob",
             "label": {
-              "En": "Treble (top)",
-              "Fr": "Treble (top)",
-              "De": "Treble (top)",
-              "Es": "Treble (top)",
+              "En": "Green DRIVE",
+              "Fr": "Green DRIVE",
+              "De": "Green DRIVE",
+              "Es": "Green DRIVE",
               "show_label": true
             },
             "geometry": {
-              "width": 110,
-              "height": 110
+              "width": 130,
+              "height": 130
             },
             "readout": {
               "text_inside": false,
@@ -400,14 +452,134 @@
             },
             "cosmetics": {
               "visualization": "fender",
-              "center_text": "TREBLE",
+              "center_text": "DRIVE",
               "colors": {
-                "primary": "#FB8C00",
-                "text": "#1c1c1c",
-                "active": "#1c1c1c"
+                "primary": "#43A047",
+                "text": "#ffffff",
+                "active": "#ffffff"
+              },
+              "pointer": {
+                "position": "left"
+              },
+              "scale": {
+                "count": 10
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 1,
+                "max": 10,
+                "value_default": 7
+              }
+            }
+          },
+          "var_08": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Emerald LEVEL",
+              "Fr": "Emerald LEVEL",
+              "De": "Emerald LEVEL",
+              "Es": "Emerald LEVEL",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 130,
+              "height": 130
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "fender",
+              "center_text": "LEVEL",
+              "colors": {
+                "primary": "#2E7D32",
+                "text": "#ffffff",
+                "active": "#ffffff"
+              },
+              "pointer": {
+                "position": "right"
+              },
+              "scale": {
+                "count": 10
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 1,
+                "max": 10,
+                "value_default": 8
+              }
+            }
+          },
+          "var_09": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Teal REVERB",
+              "Fr": "Teal REVERB",
+              "De": "Teal REVERB",
+              "Es": "Teal REVERB",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 130,
+              "height": 130
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "fender",
+              "center_text": "REVERB",
+              "colors": {
+                "primary": "#00897B",
+                "text": "#ffffff",
+                "active": "#ffffff"
               },
               "pointer": {
                 "position": "top"
+              },
+              "scale": {
+                "count": 10
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 1,
+                "max": 10,
+                "value_default": 9
+              }
+            }
+          },
+          "var_10": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Cyan DELAY",
+              "Fr": "Cyan DELAY",
+              "De": "Cyan DELAY",
+              "Es": "Cyan DELAY",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 130,
+              "height": 130
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "fender",
+              "center_text": "DELAY",
+              "colors": {
+                "primary": "#00ACC1",
+                "text": "#ffffff",
+                "active": "#ffffff"
+              },
+              "pointer": {
+                "position": "bottom"
               },
               "scale": {
                 "count": 10
@@ -421,18 +593,18 @@
               }
             }
           },
-          "fen_11": {
+          "var_11": {
             "type": "_SmartKnob",
             "label": {
-              "En": "Drive (left)",
-              "Fr": "Drive (left)",
-              "De": "Drive (left)",
-              "Es": "Drive (left)",
+              "En": "Sky CHORUS",
+              "Fr": "Sky CHORUS",
+              "De": "Sky CHORUS",
+              "Es": "Sky CHORUS",
               "show_label": true
             },
             "geometry": {
-              "width": 140,
-              "height": 140
+              "width": 130,
+              "height": 130
             },
             "readout": {
               "text_inside": false,
@@ -440,9 +612,9 @@
             },
             "cosmetics": {
               "visualization": "fender",
-              "center_text": "DRIVE",
+              "center_text": "CHORUS",
               "colors": {
-                "primary": "#283593",
+                "primary": "#039BE5",
                 "text": "#ffffff",
                 "active": "#ffffff"
               },
@@ -461,18 +633,18 @@
               }
             }
           },
-          "fen_12": {
+          "var_12": {
             "type": "_SmartKnob",
             "label": {
-              "En": "Level (right)",
-              "Fr": "Level (right)",
-              "De": "Level (right)",
-              "Es": "Level (right)",
+              "En": "Blue FILTER",
+              "Fr": "Blue FILTER",
+              "De": "Blue FILTER",
+              "Es": "Blue FILTER",
               "show_label": true
             },
             "geometry": {
-              "width": 100,
-              "height": 100
+              "width": 130,
+              "height": 130
             },
             "readout": {
               "text_inside": false,
@@ -480,9 +652,9 @@
             },
             "cosmetics": {
               "visualization": "fender",
-              "center_text": "LEVEL",
+              "center_text": "FILTER",
               "colors": {
-                "primary": "#546E7A",
+                "primary": "#1E88E5",
                 "text": "#ffffff",
                 "active": "#ffffff"
               },
@@ -498,6 +670,338 @@
                 "min": 1,
                 "max": 10,
                 "value_default": 2
+              }
+            }
+          }
+        }
+      },
+      "Wild": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "Big and mini Fender knobs with varied labels and pointer positions.",
+          "Fr": "Big and mini Fender knobs with varied labels and pointer positions.",
+          "De": "Big and mini Fender knobs with varied labels and pointer positions.",
+          "Es": "Big and mini Fender knobs with varied labels and pointer positions."
+        },
+        "layout_columns": 4,
+        "fields": {
+          "wild_01": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Sapphire FREQ (top)",
+              "Fr": "Sapphire FREQ (top)",
+              "De": "Sapphire FREQ (top)",
+              "Es": "Sapphire FREQ (top)",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 170,
+              "height": 170
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "fender",
+              "center_text": "FREQ",
+              "colors": {
+                "primary": "#1E88E5",
+                "text": "#ffffff",
+                "active": "#ffffff"
+              },
+              "pointer": {
+                "position": "top"
+              },
+              "scale": {
+                "count": 10
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 1,
+                "max": 10,
+                "value_default": 1
+              }
+            }
+          },
+          "wild_02": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Crimson GAIN (bottom)",
+              "Fr": "Crimson GAIN (bottom)",
+              "De": "Crimson GAIN (bottom)",
+              "Es": "Crimson GAIN (bottom)",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 170,
+              "height": 170
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "fender",
+              "center_text": "GAIN",
+              "colors": {
+                "primary": "#E53935",
+                "text": "#ffffff",
+                "active": "#ffffff"
+              },
+              "pointer": {
+                "position": "bottom"
+              },
+              "scale": {
+                "count": 10
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 1,
+                "max": 10,
+                "value_default": 2
+              }
+            }
+          },
+          "wild_03": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Emerald MIX (left)",
+              "Fr": "Emerald MIX (left)",
+              "De": "Emerald MIX (left)",
+              "Es": "Emerald MIX (left)",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 170,
+              "height": 170
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "fender",
+              "center_text": "MIX",
+              "colors": {
+                "primary": "#2E7D32",
+                "text": "#ffffff",
+                "active": "#ffffff"
+              },
+              "pointer": {
+                "position": "left"
+              },
+              "scale": {
+                "count": 10
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 1,
+                "max": 10,
+                "value_default": 3
+              }
+            }
+          },
+          "wild_04": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Amber Q (right)",
+              "Fr": "Amber Q (right)",
+              "De": "Amber Q (right)",
+              "Es": "Amber Q (right)",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 170,
+              "height": 170
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "fender",
+              "center_text": "Q",
+              "colors": {
+                "primary": "#FFB300",
+                "text": "#ffffff",
+                "active": "#ffffff"
+              },
+              "pointer": {
+                "position": "right"
+              },
+              "scale": {
+                "count": 10
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 1,
+                "max": 10,
+                "value_default": 4
+              }
+            }
+          },
+          "wild_05": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Pink LFO (top)",
+              "Fr": "Pink LFO (top)",
+              "De": "Pink LFO (top)",
+              "Es": "Pink LFO (top)",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 90,
+              "height": 90
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "fender",
+              "center_text": "LFO",
+              "colors": {
+                "primary": "#EC407A",
+                "text": "#ffffff",
+                "active": "#ffffff"
+              },
+              "pointer": {
+                "position": "top"
+              },
+              "scale": {
+                "count": 10
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 1,
+                "max": 10,
+                "value_default": 5
+              }
+            }
+          },
+          "wild_06": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Violet ENV (bottom)",
+              "Fr": "Violet ENV (bottom)",
+              "De": "Violet ENV (bottom)",
+              "Es": "Violet ENV (bottom)",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 90,
+              "height": 90
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "fender",
+              "center_text": "ENV",
+              "colors": {
+                "primary": "#5E35B1",
+                "text": "#ffffff",
+                "active": "#ffffff"
+              },
+              "pointer": {
+                "position": "bottom"
+              },
+              "scale": {
+                "count": 10
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 1,
+                "max": 10,
+                "value_default": 6
+              }
+            }
+          },
+          "wild_07": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Cream CUT (left)",
+              "Fr": "Cream CUT (left)",
+              "De": "Cream CUT (left)",
+              "Es": "Cream CUT (left)",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 90,
+              "height": 90
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "fender",
+              "center_text": "CUT",
+              "colors": {
+                "primary": "#efe4c8",
+                "text": "#1c1c1c",
+                "active": "#1c1c1c"
+              },
+              "pointer": {
+                "position": "left"
+              },
+              "scale": {
+                "count": 10
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 1,
+                "max": 10,
+                "value_default": 7
+              }
+            }
+          },
+          "wild_08": {
+            "type": "_SmartKnob",
+            "label": {
+              "En": "Gold RES (right)",
+              "Fr": "Gold RES (right)",
+              "De": "Gold RES (right)",
+              "Es": "Gold RES (right)",
+              "show_label": true
+            },
+            "geometry": {
+              "width": 90,
+              "height": 90
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "visualization": "fender",
+              "center_text": "RES",
+              "colors": {
+                "primary": "#C9A227",
+                "text": "#ffffff",
+                "active": "#ffffff"
+              },
+              "pointer": {
+                "position": "right"
+              },
+              "scale": {
+                "count": 10
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 1,
+                "max": 10,
+                "value_default": 8
               }
             }
           }

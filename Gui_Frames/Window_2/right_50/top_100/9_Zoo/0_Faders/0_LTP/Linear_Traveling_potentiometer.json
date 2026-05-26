@@ -2,528 +2,205 @@
   "Zoo_Faders_LTP": {
     "type": "OcaBin",
     "id": "50.90.9.0.0",
-    "geometry": {
-      "anchor": "NSEW"
-    },
-    "behavior": {
-      "overflow_ns": "auto",
-      "overflow_ew": "auto",
-      "fluid_ew": true
-    },
+    "geometry": { "anchor": "NSEW" },
+    "behavior": { "overflow_ns": "auto", "overflow_ew": "auto", "fluid_ew": true },
     "blocks": {
-      "LTP_Freestyle_Console": {
+      "LTP_Knob_Buffet": {
         "type": "OcaBlock",
         "description": {
-          "En": "8-Channel Freestyle LTP Console with Advanced Scale and Tick Parameters",
-          "Fr": "8-Channel Freestyle LTP Console with Avancé Scale and Tick Paramètres",
-          "De": "8-Channel Freestyle LTP Console with Erweitert Scale and Tick Parameter",
-          "Es": "8-Channel Freestyle LTP Console with Avanzado Scale and Tick Parámetros"
+          "En": "9-channel LTP buffet — one knob style per channel (standard, chicken, marconi, british, pedal, 1176, API, Fender, Moog, WBS-ELMA)",
+          "Fr": "9-channel LTP buffet — one knob style per channel",
+          "De": "9-channel LTP buffet — one knob style per channel",
+          "Es": "9-channel LTP buffet — one knob style per channel"
         },
-        "layout_columns": 8,
+        "layout_columns": 10,
         "column_sizing": [
-          {
-            "weight": 1
-          },
-          {
-            "weight": 1
-          },
-          {
-            "weight": 1
-          },
-          {
-            "weight": 1
-          },
-          {
-            "weight": 1
-          },
-          {
-            "weight": 1
-          },
-          {
-            "weight": 1
-          },
-          {
-            "weight": 1
-          }
+          { "weight": 1 }, { "weight": 1 }, { "weight": 1 }, { "weight": 1 }, { "weight": 1 },
+          { "weight": 1 }, { "weight": 1 }, { "weight": 1 }, { "weight": 1 }, { "weight": 1 }
         ],
         "fields": {
-          "CH1": {
+          "CH1_Standard": {
             "type": "_CustomLTP",
-            "label": {
-              "active": {
-                "text": {
-                  "En": "Kick",
-                  "Fr": "Kick",
-                  "De": "Kick",
-                  "Es": "Kick"
-                },
-                "text_size": 12,
-                "text_color": "#cccccc"
-              }
-            },
+            "label": { "active": { "text": { "En": "Kick", "Fr": "Kick", "De": "Kick", "Es": "Kick" }, "text_size": 12, "text_color": "#cccccc" } },
             "fader_config": {
-              "cosmetics": {
-                "colors": {
-                  "highlight": "#FF3131"
-                }
-              },
-              "readout": {
-                "show_value": true,
-                "show_units": true
-              },
-              "domain": {
-                "min": -60.0,
-                "max": 12.0
-              },
-              "value": {
-                "default_value": -10.0
-              },
+              "cosmetics": { "colors": { "highlight": "#FF3131" } },
+              "readout": { "show_value": true, "show_units": true },
+              "domain": { "min": -60.0, "max": 12.0 },
+              "value": { "default_value": -10.0 },
               "unit_text": "dB"
             },
-            "knob_config": {
-              "cap_radius": 22,
-              "cap_color": "#1a1a1a",
-              "cap_outline_color": "#FF3131",
-              "knob_style": "standard"
-            },
-            "style": {
-              "knob_shape": "octagon",
-              "pointer_style": "line",
-              "tick_color": "#FF3131",
-              "tick_label_position": "right"
-            },
-            "layout": {
-              "width": 100,
-              "height": 400
-            }
+            "knob_config": { "cap_radius": 22, "cap_color": "#1a1a1a", "cap_outline_color": "#FF3131", "knob_style": "standard" },
+            "style":       { "knob_shape": "circle",  "pointer_style": "line",     "arc_width": 5, "tick_color": "#FF3131" },
+            "layout":      { "width": 120, "height": 420 }
           },
-          "CH2": {
+          "CH2_Chicken": {
             "type": "_CustomLTP",
-            "label": {
-              "active": {
-                "text": {
-                  "En": "Snare",
-                  "Fr": "Snare",
-                  "De": "Snare",
-                  "Es": "Snare"
-                },
-                "text_size": 12,
-                "text_color": "#cccccc"
-              }
-            },
+            "label": { "active": { "text": { "En": "Snare", "Fr": "Snare", "De": "Snare", "Es": "Snare" }, "text_size": 12, "text_color": "#cccccc" } },
             "fader_config": {
-              "cosmetics": {
-                "colors": {
-                  "highlight": "#39FF14"
-                }
-              },
-              "domain": {
-                "min": -60.0,
-                "max": 12.0
-              },
-              "value": {
-                "default_value": -5.0
-              }
+              "cosmetics": { "colors": { "highlight": "#39FF14" } },
+              "domain": { "min": -60.0, "max": 12.0 },
+              "value": { "default_value": -5.0 },
+              "unit_text": "dB"
             },
-            "knob_config": {
-              "cap_radius": 20,
-              "cap_color": "#2b2b2b",
-              "cap_outline_color": "#39FF14",
-              "knob_style": "dial"
-            },
-            "style": {
-              "knob_shape": "gear",
-              "knob_teeth": 16,
-              "pointer_style": "triangle",
-              "tick_color": "#39FF14",
-              "tick_label_position": "left"
-            },
-            "layout": {
-              "width": 100,
-              "height": 400
-            }
+            "knob_config": { "cap_radius": 24, "cap_color": "#2b2b2b", "cap_outline_color": "#39FF14", "knob_style": "chicken" },
+            "style":       { "pointer_style": "line", "arc_width": 4 },
+            "layout":      { "width": 120, "height": 420 }
           },
-          "CH3": {
+          "CH3_Marconi": {
             "type": "_CustomLTP",
-            "label": {
-              "active": {
-                "text": {
-                  "En": "Hat",
-                  "Fr": "Hat",
-                  "De": "Hat",
-                  "Es": "Hat"
-                },
-                "text_size": 12,
-                "text_color": "#cccccc"
-              }
-            },
+            "label": { "active": { "text": { "En": "Hat", "Fr": "Hat", "De": "Hat", "Es": "Hat" }, "text_size": 12, "text_color": "#cccccc" } },
             "fader_config": {
-              "cosmetics": {
-                "colors": {
-                  "highlight": "#33A1FD"
-                }
-              },
-              "domain": {
-                "min": -60.0,
-                "max": 12.0
-              },
-              "value": {
-                "default_value": -15.0
-              }
+              "cosmetics": { "colors": { "highlight": "#33A1FD" } },
+              "domain": { "min": -60.0, "max": 12.0 },
+              "value": { "default_value": -15.0 },
+              "unit_text": "dB"
             },
-            "knob_config": {
-              "cap_radius": 18,
-              "cap_color": "#050505",
-              "cap_outline_color": "#33A1FD",
-              "knob_style": "panner"
-            },
-            "style": {
-              "knob_shape": "circle",
-              "pointer_style": "dot",
-              "tick_color": "#33A1FD",
-              "tick_label_position": "both"
-            },
-            "layout": {
-              "width": 100,
-              "height": 400
-            }
+            "knob_config": { "cap_radius": 26, "cap_color": "#050505", "cap_outline_color": "#33A1FD", "knob_style": "marconi" },
+            "style":       { "arc_width": 4 },
+            "layout":      { "width": 120, "height": 420 }
           },
-          "CH4": {
+          "CH4_British": {
             "type": "_CustomLTP",
-            "label": {
-              "active": {
-                "text": {
-                  "En": "Toms",
-                  "Fr": "Toms",
-                  "De": "Toms",
-                  "Es": "Toms"
-                },
-                "text_size": 12,
-                "text_color": "#cccccc"
-              }
-            },
+            "label": { "active": { "text": { "En": "Toms", "Fr": "Toms", "De": "Toms", "Es": "Toms" }, "text_size": 12, "text_color": "#cccccc" } },
             "fader_config": {
-              "cosmetics": {
-                "colors": {
-                  "highlight": "yellow"
-                }
-              },
-              "domain": {
-                "min": -60.0,
-                "max": 12.0
-              },
-              "value": {
-                "default_value": -20.0
-              }
+              "cosmetics": { "colors": { "highlight": "#FFD700" } },
+              "domain": { "min": -60.0, "max": 12.0 },
+              "value": { "default_value": -20.0 },
+              "unit_text": "dB"
             },
-            "knob_config": {
-              "cap_radius": 24,
-              "cap_color": "#1a1a1a",
-              "cap_outline_color": "yellow",
-              "freestyle": true
-            },
-            "style": {
-              "knob_shape": "octagon",
-              "pointer_style": "line",
-              "arc_width": 5,
-              "tick_color": "#aaaaaa"
-            },
-            "layout": {
-              "width": 100,
-              "height": 400
-            }
+            "knob_config": { "cap_radius": 25, "cap_color": "#1a1a1a", "cap_outline_color": "#FFD700", "knob_style": "british" },
+            "style":       { "arc_width": 5 },
+            "layout":      { "width": 120, "height": 420 }
           },
-          "CH5": {
+          "CH5_Pedal": {
             "type": "_CustomLTP",
-            "label": {
-              "active": {
-                "text": {
-                  "En": "Bass",
-                  "Fr": "Bass",
-                  "De": "Bass",
-                  "Es": "Bass"
-                },
-                "text_size": 12,
-                "text_color": "#cccccc"
-              }
-            },
+            "label": { "active": { "text": { "En": "Bass", "Fr": "Bass", "De": "Bass", "Es": "Bass" }, "text_size": 12, "text_color": "#cccccc" } },
             "fader_config": {
-              "cosmetics": {
-                "colors": {
-                  "highlight": "#FF6B35"
-                }
-              },
-              "domain": {
-                "min": -60.0,
-                "max": 12.0
-              },
-              "value": {
-                "default_value": 0.0
-              }
+              "cosmetics": { "colors": { "highlight": "#FF6B35" } },
+              "domain": { "min": -60.0, "max": 12.0 },
+              "value": { "default_value": 0.0 },
+              "unit_text": "dB"
             },
-            "knob_config": {
-              "cap_radius": 22,
-              "cap_color": "#2b2b2b",
-              "cap_outline_color": "#FF6B35"
-            },
-            "style": {
-              "knob_shape": "gear",
-              "knob_teeth": 24,
-              "tick_color": "#FF6B35"
-            },
-            "layout": {
-              "width": 100,
-              "height": 400
-            }
+            "knob_config": { "cap_radius": 26, "cap_color": "#2b2b2b", "cap_outline_color": "#FF6B35", "knob_style": "pedal" },
+            "style":       { "arc_width": 4 },
+            "layout":      { "width": 120, "height": 420 }
           },
-          "CH6": {
+          "CH6_1176": {
             "type": "_CustomLTP",
-            "label": {
-              "active": {
-                "text": {
-                  "En": "Gtr L",
-                  "Fr": "Gtr L",
-                  "De": "Gtr L",
-                  "Es": "Gtr L"
-                },
-                "text_size": 12,
-                "text_color": "#cccccc"
-              }
-            },
+            "label": { "active": { "text": { "En": "Gtr L", "Fr": "Gtr L", "De": "Gtr L", "Es": "Gtr L" }, "text_size": 12, "text_color": "#cccccc" } },
             "fader_config": {
-              "cosmetics": {
-                "colors": {
-                  "highlight": "#00FFFF"
-                }
-              },
-              "domain": {
-                "min": -60.0,
-                "max": 12.0
-              },
-              "value": {
-                "default_value": -12.0
-              }
+              "cosmetics": { "colors": { "highlight": "#00FFFF" } },
+              "domain": { "min": -60.0, "max": 12.0 },
+              "value": { "default_value": -12.0 },
+              "unit_text": "dB"
             },
-            "knob_config": {
-              "cap_radius": 20,
-              "cap_color": "#1a1a1a",
-              "cap_outline_color": "#00FFFF"
-            },
-            "style": {
-              "knob_shape": "circle",
-              "pointer_style": "triangle",
-              "arc_width": 2,
-              "tick_color": "#00FFFF"
-            },
-            "layout": {
-              "width": 100,
-              "height": 400
-            }
+            "knob_config": { "cap_radius": 25, "cap_color": "#1a1a1a", "cap_outline_color": "#00FFFF", "knob_style": "1176" },
+            "style":       { "arc_width": 4 },
+            "layout":      { "width": 120, "height": 420 }
           },
-          "CH7": {
+          "CH7_API": {
             "type": "_CustomLTP",
-            "label": {
-              "active": {
-                "text": {
-                  "En": "Gtr R",
-                  "Fr": "Gtr R",
-                  "De": "Gtr R",
-                  "Es": "Gtr R"
-                },
-                "text_size": 12,
-                "text_color": "#cccccc"
-              }
-            },
+            "label": { "active": { "text": { "En": "Gtr R", "Fr": "Gtr R", "De": "Gtr R", "Es": "Gtr R" }, "text_size": 12, "text_color": "#cccccc" } },
             "fader_config": {
-              "cosmetics": {
-                "colors": {
-                  "highlight": "#FFA500"
-                }
-              },
-              "domain": {
-                "min": -60.0,
-                "max": 12.0
-              },
-              "value": {
-                "default_value": -12.0
-              }
+              "cosmetics": { "colors": { "highlight": "#FFA500" } },
+              "domain": { "min": -60.0, "max": 12.0 },
+              "value": { "default_value": -12.0 },
+              "unit_text": "dB"
             },
-            "knob_config": {
-              "cap_radius": 20,
-              "cap_color": "#2b2b2b",
-              "cap_outline_color": "#FFA500"
-            },
-            "style": {
-              "knob_shape": "octagon",
-              "pointer_style": "dot",
-              "tick_color": "#FFA500"
-            },
-            "layout": {
-              "width": 100,
-              "height": 400
-            }
+            "knob_config": { "cap_radius": 26, "cap_color": "#2b2b2b", "cap_outline_color": "#FFA500", "knob_style": "api" },
+            "style":       { "arc_width": 4 },
+            "layout":      { "width": 120, "height": 420 }
           },
-          "CH8": {
+          "CH8_Moog": {
             "type": "_CustomLTP",
-            "label": {
-              "active": {
-                "text": {
-                  "En": "Vox",
-                  "Fr": "Vox",
-                  "De": "Vox",
-                  "Es": "Vox"
-                },
-                "text_size": 12,
-                "text_color": "#cccccc"
-              }
-            },
+            "label": { "active": { "text": { "En": "Keys", "Fr": "Clavier", "De": "Tasten", "Es": "Teclas" }, "text_size": 12, "text_color": "#cccccc" } },
             "fader_config": {
-              "cosmetics": {
-                "colors": {
-                  "highlight": "#FFFFFF"
-                }
-              },
-              "domain": {
-                "min": -60.0,
-                "max": 12.0
-              },
-              "value": {
-                "default_value": 5.0
-              }
+              "cosmetics": { "colors": { "highlight": "#B0B0B0" } },
+              "domain": { "min": -60.0, "max": 12.0 },
+              "value": { "default_value": -3.0 },
+              "unit_text": "dB"
             },
-            "knob_config": {
-              "cap_radius": 22,
-              "cap_color": "#050505",
-              "cap_outline_color": "#FFFFFF"
+            "knob_config": { "cap_radius": 26, "cap_color": "#1f1f1f", "cap_outline_color": "#B0B0B0", "knob_style": "moog" },
+            "style":       { "arc_width": 4 },
+            "layout":      { "width": 120, "height": 420 }
+          },
+          "CH9_WBSElma": {
+            "type": "_CustomLTP",
+            "label": { "active": { "text": { "En": "Vox", "Fr": "Vox", "De": "Vox", "Es": "Vox" }, "text_size": 12, "text_color": "#cccccc" } },
+            "fader_config": {
+              "cosmetics": { "colors": { "highlight": "#FF9900" } },
+              "domain": { "min": -60.0, "max": 12.0 },
+              "value": { "default_value": 5.0 },
+              "unit_text": "dB"
             },
-            "style": {
-              "knob_shape": "gear",
-              "knob_teeth": 12,
-              "pointer_style": "line",
-              "tick_color": "#ffffff"
+            "knob_config": { "cap_radius": 26, "cap_color": "#0a0a0a", "cap_outline_color": "#FF9900", "knob_style": "wbs-elma" },
+            "style":       { "arc_width": 4 },
+            "layout":      { "width": 120, "height": 420 }
+          },
+          "CH10_Fender": {
+            "type": "_CustomLTP",
+            "label": { "active": { "text": { "En": "Strings", "Fr": "Cordes", "De": "Streicher", "Es": "Cuerdas" }, "text_size": 12, "text_color": "#cccccc" } },
+            "fader_config": {
+              "cosmetics": { "colors": { "highlight": "#F4902C" } },
+              "domain": { "min": -60.0, "max": 12.0 },
+              "value": { "default_value": -8.0 },
+              "unit_text": "dB"
             },
-            "layout": {
-              "width": 100,
-              "height": 400
-            }
+            "knob_config": { "cap_radius": 28, "cap_color": "#3a2a14", "cap_outline_color": "#F4902C", "knob_style": "fender" },
+            "style":       { "arc_width": 4 },
+            "layout":      { "width": 120, "height": 420 }
           }
         }
       },
-      "LTP_Demo_Bottom": {
+      "LTP_Special_Modes": {
         "type": "OcaBlock",
         "description": {
-          "En": "Horizontal LTP Evolution",
-          "Fr": "Horizontal LTP Evolution",
-          "De": "Horizontal LTP Evolution",
-          "Es": "Horizontal LTP Evolution"
+          "En": "Special LTP modes — panner cap, dial cap (∞ rotation), gear shape",
+          "Fr": "Special LTP modes",
+          "De": "Special LTP modes",
+          "Es": "Special LTP modes"
         },
         "layout_columns": 3,
         "fields": {
-          "H1": {
+          "Panner_Cap": {
             "type": "_CustomLTP",
-            "label": {
-              "active": {
-                "text": {
-                  "En": "Industrial Gear",
-                  "Fr": "Industriel Gear",
-                  "De": "Industriell Gear",
-                  "Es": "Industrial Gear"
-                },
-                "text_size": 12,
-                "text_color": "#cccccc"
-              }
-            },
+            "label": { "active": { "text": { "En": "Panner Cap", "Fr": "Panoramique", "De": "Panner", "Es": "Panorama" }, "text_size": 12, "text_color": "#cccccc" } },
             "fader_config": {
-              "cosmetics": {
-                "colors": {
-                  "highlight": "#f4902c"
-                }
-              }
+              "cosmetics": { "colors": { "highlight": "#33A1FD" } },
+              "domain": { "min": -60.0, "max": 12.0 },
+              "value": { "default_value": -6.0 },
+              "unit_text": "dB"
             },
-            "knob_config": {
-              "cap_radius": 25,
-              "cap_color": "#1a1a1a",
-              "cap_outline_color": "#f4902c"
-            },
-            "style": {
-              "knob_shape": "gear",
-              "knob_teeth": 10,
-              "pointer_style": "triangle"
-            },
-            "layout": {
-              "width": 300,
-              "height": 80
-            }
+            "knob_config": { "cap_radius": 28, "cap_color": "#1a1a1a", "cap_outline_color": "#33A1FD", "knob_style": "panner" },
+            "style":       { "knob_shape": "circle", "arc_width": 5 },
+            "layout":      { "width": 320, "height": 110 }
           },
-          "H2": {
+          "Dial_Cap": {
             "type": "_CustomLTP",
-            "label": {
-              "active": {
-                "text": {
-                  "En": "Sleek Octagon",
-                  "Fr": "Sleek Octagon",
-                  "De": "Sleek Octagon",
-                  "Es": "Sleek Octagon"
-                },
-                "text_size": 12,
-                "text_color": "#cccccc"
-              }
-            },
+            "label": { "active": { "text": { "En": "Dial Cap (∞)", "Fr": "Cadran (∞)", "De": "Dial (∞)", "Es": "Dial (∞)" }, "text_size": 12, "text_color": "#cccccc" } },
             "fader_config": {
-              "cosmetics": {
-                "colors": {
-                  "highlight": "#33A1FD"
-                }
-              }
+              "cosmetics": { "colors": { "highlight": "#39FF14" } },
+              "domain": { "min": -60.0, "max": 12.0 },
+              "value": { "default_value": -3.0 },
+              "unit_text": "dB"
             },
-            "knob_config": {
-              "cap_radius": 22,
-              "cap_color": "#2b2b2b",
-              "cap_outline_color": "#33A1FD"
-            },
-            "style": {
-              "knob_shape": "octagon",
-              "pointer_style": "line"
-            },
-            "layout": {
-              "width": 300,
-              "height": 80
-            }
+            "knob_config": { "cap_radius": 26, "cap_color": "#2b2b2b", "cap_outline_color": "#39FF14", "knob_style": "dial" },
+            "style":       { "knob_shape": "circle", "arc_width": 4 },
+            "interaction": { "infinity": true },
+            "layout":      { "width": 320, "height": 110 }
           },
-          "H3": {
+          "Gear_Cap": {
             "type": "_CustomLTP",
-            "label": {
-              "active": {
-                "text": {
-                  "En": "Ghost Circle",
-                  "Fr": "Ghost Circle",
-                  "De": "Ghost Circle",
-                  "Es": "Ghost Circle"
-                },
-                "text_size": 12,
-                "text_color": "#cccccc"
-              }
-            },
+            "label": { "active": { "text": { "En": "Gear Cap", "Fr": "Pignon", "De": "Zahnrad", "Es": "Engranaje" }, "text_size": 12, "text_color": "#cccccc" } },
             "fader_config": {
-              "cosmetics": {
-                "colors": {
-                  "highlight": "#AAAAAA"
-                }
-              }
+              "cosmetics": { "colors": { "highlight": "#F4902C" } },
+              "domain": { "min": -60.0, "max": 12.0 },
+              "value": { "default_value": 0.0 },
+              "unit_text": "dB"
             },
-            "knob_config": {
-              "cap_radius": 20,
-              "cap_color": "#050505",
-              "cap_outline_color": "#AAAAAA"
-            },
-            "style": {
-              "knob_shape": "circle",
-              "pointer_style": "dot"
-            },
-            "layout": {
-              "width": 300,
-              "height": 80
-            }
+            "knob_config": { "cap_radius": 30, "cap_color": "#1a1a1a", "cap_outline_color": "#F4902C", "knob_style": "standard", "knob_teeth": 14 },
+            "style":       { "knob_shape": "gear", "arc_width": 5 },
+            "layout":      { "width": 320, "height": 110 }
           }
         }
       }

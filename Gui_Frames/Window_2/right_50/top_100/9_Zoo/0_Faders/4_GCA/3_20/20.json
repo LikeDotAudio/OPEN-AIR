@@ -2,272 +2,58 @@
   "Zoo_Faders_GCA_20": {
     "type": "OcaBin",
     "id": "50.90.9.0.4.3.20",
-    "geometry": {
-      "anchor": "NSEW"
-    },
-    "behavior": {
-      "overflow_ns": "auto",
-      "overflow_ew": "auto",
-      "fluid_ew": true
-    },
+    "geometry": { "anchor": "NSEW" },
+    "behavior": { "overflow_ns": "auto", "overflow_ew": "auto", "fluid_ew": true },
     "blocks": {
-      "20 point": {
+      "Twenty": {
         "type": "OcaBlock",
         "description": {
-          "En": "Composite Smart-Fader Demos",
-          "Fr": "Composite Smart-Fader Demos",
-          "De": "Composite Smart-Fader Demos",
-          "Es": "Composite Smart-Fader Demos"
+          "En": "GCA — 20-channel bus (one master cap spans all twenty tracks)",
+          "Fr": "GCA — 20-channel bus (one master cap spans all twenty tracks)",
+          "De": "GCA — 20-channel bus (one master cap spans all twenty tracks)",
+          "Es": "GCA — 20-channel bus (one master cap spans all twenty tracks)"
         },
         "fields": {
-          "composite_drums": {
-            "type": "_Horizontal_with_dial_Value",
-            "domain": {
-              "min": -60.0,
-              "max": 6.0
-            },
-            "layout": {
-              "width": 200,
-              "height": 650,
-              "alpha": 0.9
-            },
+          "twenty_gca": {
+            "type": "_GCA",
+            "domain": { "min": -60.0, "max": 10.0 },
+            "layout": { "width": 640, "height": 440, "alpha": 0.9 },
             "label": {
               "active": {
-                "text": {
-                  "En": "Drum Group",
-                  "Fr": "Drum Group",
-                  "De": "Drum Group",
-                  "Es": "Drum Group"
-                },
+                "text": { "En": "20-Channel Bus", "Fr": "Bus 20 voies", "De": "20-Kanal-Bus", "Es": "Bus de 20 canales" },
                 "text_size": 12,
                 "text_color": "#cccccc"
               }
             },
             "num_channels": 20,
             "channels": [
-              {
-                "default": -12.0,
-                "label": {
-                  "En": "lSUR",
-                  "Fr": "lSUR",
-                  "De": "lSUR",
-                  "Es": "lSUR"
-                }
-              },
-              {
-                "default": -5.0,
-                "label": {
-                  "En": "LEFT",
-                  "Fr": "LEFT",
-                  "De": "LEFT",
-                  "Es": "LEFT"
-                }
-              },
-              {
-                "default": -10.0,
-                "label": {
-                  "En": "CENTER",
-                  "Fr": "CENTER",
-                  "De": "CENTER",
-                  "Es": "CENTER"
-                }
-              },
-              {
-                "default": -15.0,
-                "label": {
-                  "En": "RIGHT",
-                  "Fr": "RIGHT",
-                  "De": "RIGHT",
-                  "Es": "RIGHT"
-                }
-              },
-              {
-                "default": -12.0,
-                "label": {
-                  "En": "rSUR",
-                  "Fr": "rSUR",
-                  "De": "rSUR",
-                  "Es": "rSUR"
-                }
-              },
-              {
-                "default": -12.0,
-                "label": {
-                  "En": "lSUR",
-                  "Fr": "lSUR",
-                  "De": "lSUR",
-                  "Es": "lSUR"
-                }
-              },
-              {
-                "default": -5.0,
-                "label": {
-                  "En": "LEFT",
-                  "Fr": "LEFT",
-                  "De": "LEFT",
-                  "Es": "LEFT"
-                }
-              },
-              {
-                "default": -10.0,
-                "label": {
-                  "En": "CENTER",
-                  "Fr": "CENTER",
-                  "De": "CENTER",
-                  "Es": "CENTER"
-                }
-              },
-              {
-                "default": -15.0,
-                "label": {
-                  "En": "RIGHT",
-                  "Fr": "RIGHT",
-                  "De": "RIGHT",
-                  "Es": "RIGHT"
-                }
-              },
-              {
-                "default": -12.0,
-                "label": {
-                  "En": "rSUR",
-                  "Fr": "rSUR",
-                  "De": "rSUR",
-                  "Es": "rSUR"
-                }
-              },
-              {
-                "default": -12.0,
-                "label": {
-                  "En": "lSUR",
-                  "Fr": "lSUR",
-                  "De": "lSUR",
-                  "Es": "lSUR"
-                }
-              },
-              {
-                "default": -5.0,
-                "label": {
-                  "En": "LEFT",
-                  "Fr": "LEFT",
-                  "De": "LEFT",
-                  "Es": "LEFT"
-                }
-              },
-              {
-                "default": -10.0,
-                "label": {
-                  "En": "CENTER",
-                  "Fr": "CENTER",
-                  "De": "CENTER",
-                  "Es": "CENTER"
-                }
-              },
-              {
-                "default": -15.0,
-                "label": {
-                  "En": "RIGHT",
-                  "Fr": "RIGHT",
-                  "De": "RIGHT",
-                  "Es": "RIGHT"
-                }
-              },
-              {
-                "default": -12.0,
-                "label": {
-                  "En": "rSUR",
-                  "Fr": "rSUR",
-                  "De": "rSUR",
-                  "Es": "rSUR"
-                }
-              },
-              {
-                "default": -12.0,
-                "label": {
-                  "En": "lSUR",
-                  "Fr": "lSUR",
-                  "De": "lSUR",
-                  "Es": "lSUR"
-                }
-              },
-              {
-                "default": -5.0,
-                "label": {
-                  "En": "LEFT",
-                  "Fr": "LEFT",
-                  "De": "LEFT",
-                  "Es": "LEFT"
-                }
-              },
-              {
-                "default": -10.0,
-                "label": {
-                  "En": "CENTER",
-                  "Fr": "CENTER",
-                  "De": "CENTER",
-                  "Es": "CENTER"
-                }
-              },
-              {
-                "default": -15.0,
-                "label": {
-                  "En": "RIGHT",
-                  "Fr": "RIGHT",
-                  "De": "RIGHT",
-                  "Es": "RIGHT"
-                }
-              },
-              {
-                "default": -12.0,
-                "label": {
-                  "En": "rSUR",
-                  "Fr": "rSUR",
-                  "De": "rSUR",
-                  "Es": "rSUR"
-                }
-              }
+              { "default":  -8, "label": { "En": "K1"  } },
+              { "default":  -6, "label": { "En": "K2"  } },
+              { "default": -10, "label": { "En": "Sn"  } },
+              { "default": -14, "label": { "En": "Hat" } },
+              { "default": -18, "label": { "En": "T1"  } },
+              { "default": -20, "label": { "En": "T2"  } },
+              { "default": -22, "label": { "En": "Flr" } },
+              { "default": -16, "label": { "En": "OHL" } },
+              { "default": -16, "label": { "En": "OHR" } },
+              { "default": -12, "label": { "En": "Rm"  } },
+              { "default":  -4, "label": { "En": "Bs"  } },
+              { "default":  -2, "label": { "En": "Gtr" } },
+              { "default":  -5, "label": { "En": "Kbd" } },
+              { "default":  -3, "label": { "En": "Vox" } },
+              { "default":  -9, "label": { "En": "Bv1" } },
+              { "default":  -9, "label": { "En": "Bv2" } },
+              { "default": -14, "label": { "En": "Fx1" } },
+              { "default": -14, "label": { "En": "Fx2" } },
+              { "default": -18, "label": { "En": "Rv"  } },
+              { "default": -18, "label": { "En": "Dly" } }
             ],
-            "width": 200,
-            "height": 50,
-            "Orientation": "vertical",
-            "path": "20 point/composite_drums",
-            "style": {
-              "active": {
-                "text_color": "#1a1a1a",
-                "bg_color": "#000000",
-                "border_color": "#FF9900",
-                "glow_intensity": 1.0,
-                "font_style": "bold",
-                "font_size": null
-              },
-              "inactive": {
-                "text_color": "#888888",
-                "bg_color": "#2b2b2b",
-                "font_style": "normal",
-                "font_size": null,
-                "glow_intensity": 0
-              }
-            }
+            "active_color": "#f4902c",
+            "path": "Twenty/twenty_gca"
           }
         },
         "Orientation": "vertical",
-        "layout": {},
-        "style": {
-          "active": {
-            "text_color": "#1a1a1a",
-            "bg_color": "#000000",
-            "border_color": "#FF9900",
-            "glow_intensity": 1.0,
-            "font_style": "bold",
-            "font_size": null
-          },
-          "inactive": {
-            "text_color": "#888888",
-            "bg_color": "#2b2b2b",
-            "font_style": "normal",
-            "font_size": null,
-            "glow_intensity": 0
-          }
-        }
+        "layout": {}
       }
     }
   }

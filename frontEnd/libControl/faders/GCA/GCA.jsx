@@ -11,20 +11,33 @@ const GCA = ({ config, value, onChange }) => {
     const [dragging, setDragging] = React.useState({ master: false, child: -1 });
     const [interactionState, setInteractionState] = React.useState({ startY: 0, startVal: 0 });
 
-    const min = config?.value_min !== undefined ? config.value_min : 0;
-    const max = config?.value_max !== undefined ? config.value_max : 100;
-    const numChannels = config?.num_channels || 1;
+    // Schema pillars (canonical) win, with legacy flat keys as a fallback.
+    const min = config?.domain?.min !== undefined ? config.domain.min
+              : (config?.value_min !== undefined ? config.value_min : 0);
+    const max = config?.domain?.max !== undefined ? config.domain.max
+              : (config?.value_max !== undefined ? config.value_max : 100);
+    const numChannels = config?.num_channels || (config?.channels?.length) || 1;
     const width = config?.layout?.width || 120;
     const height = config?.layout?.height || 400;
     const isRGB = config?.is_rgb === true;
 
+    // Hook MUST be called in the component body, not inside draw() (which runs
+    // from a useEffect). Calling it in draw() raises "Invalid hook call".
+    const [lang] = window.useMqttLang ? window.useMqttLang() : ['En'];
+
     // --- State Initialization & Sync ---
-    // childVals are the individual fader positions
-    let childVals = Array(numChannels).fill(min);
+    // childVals are the individual fader positions. When no live value has been
+    // supplied yet, seed from `config.channels[i].default` so the demo opens at
+    // its authored starting point rather than at min on every channel.
+    const seedDefaults = () => Array(numChannels).fill(0).map((_, i) => {
+        const d = config?.channels?.[i]?.default;
+        return (typeof d === 'number') ? d : min;
+    });
+    let childVals = seedDefaults();
     if (Array.isArray(value)) {
         childVals = value;
     } else if (typeof value === 'object' && value !== null) {
-        if (value.channels) childVals = value.channels;
+        if (Array.isArray(value.channels)) childVals = value.channels;
         else if (value.value !== undefined) childVals = Array(numChannels).fill(value.value);
     } else if (typeof value === 'number') {
         childVals = Array(numChannels).fill(value);
@@ -37,8 +50,55 @@ const GCA = ({ config, value, onChange }) => {
         childVals = next;
     }
 
-    const masterVal = childVals.reduce((a, b) => a + b, 0) / (numChannels || 1);
-    const childOffsets = childVals.map(v => v - masterVal);
+    // --- Stateful master + frozen offsets (faithful to the reference) -------
+    // The reference (oaGuiElements/.../fader_ganged_controlled_array/index.htm)
+    // keeps `masterVal` and `childOffsets` as instance state. During a master
+    // drag, `childVals = clamp(masterVal + childOffsets)` — so the relative
+    // offsets between channels stay FIXED. Critically, masterVal does NOT get
+    // recomputed from the (possibly clamped) children, so the cap remembers
+    // where it was dragged to and a return trip exactly restores the cluster.
+    //
+    // Offsets are only refreshed when ONE child is moved alone (which is when
+    // the user has expressed a new relationship), via `refreshOffsets()`.
+    const masterRef = React.useRef(null);
+    const offsetsRef = React.useRef(null);
+    const lastSeenChildren = React.useRef(null);
+
+    // Detect external value changes (MQTT, parent re-seed, etc.). If our cached
+    // children no longer match the prop AND it wasn't a master-drag clamp, we
+    // refresh the snapshot from the new values.
+    const childrenSignature = (a) => a.join('|');
+    const refreshOffsets = (vals) => {
+        const m = vals.reduce((s, v) => s + v, 0) / (vals.length || 1);
+        masterRef.current = m;
+        offsetsRef.current = vals.map(v => v - m);
+        lastSeenChildren.current = childrenSignature(vals);
+    };
+    const ensureSnapshot = () => {
+        if (masterRef.current === null || offsetsRef.current === null) {
+            refreshOffsets(childVals);
+        }
+    };
+    // If childVals arrived externally (not from our last onChange), re-snapshot.
+    const sig = childrenSignature(childVals);
+    if (lastSeenChildren.current !== null && lastSeenChildren.current !== sig
+        && !(window.__gca_in_master_move)) {
+        refreshOffsets(childVals);
+    } else if (masterRef.current === null) {
+        refreshOffsets(childVals);
+    }
+
+    const masterVal = masterRef.current;
+    const childOffsets = offsetsRef.current;
+
+    // Apply a new master value: children = clamp(master + offsets). Returns
+    // the new childVals array AND updates masterRef in lock-step.
+    const applyMaster = (newMaster) => {
+        masterRef.current = newMaster;
+        const next = (offsetsRef.current || []).map(o => Math.max(min, Math.min(max, newMaster + o)));
+        lastSeenChildren.current = childrenSignature(next);
+        return next;
+    };
 
     // --- Coordinate Mapping ---
     const getY = (val) => {
@@ -201,9 +261,8 @@ const GCA = ({ config, value, onChange }) => {
                 ctx.fillStyle = getColor(norm, i);
                 ctx.fillRect(mx + 1, sy + sh - fillH, microW - 2, fillH);
                 
-                // Channel Labels/Numbers
+                // Channel Labels/Numbers (lang resolved in component body above)
                 const chanCfg = config.channels?.[i] || {};
-                const [lang] = window.useMqttLang ? window.useMqttLang() : ['En'];
                 const chanLabel = chanCfg.label?.[lang] || chanCfg.label?.En || (i + 1);
 
                 ctx.fillStyle = "white";
@@ -220,6 +279,27 @@ const GCA = ({ config, value, onChange }) => {
             draw(ctx);
         }
     }, [childVals, masterVal, mode]);
+
+    // React onWheel is PASSIVE — preventDefault is a no-op. To stop the page
+    // from scrolling while the wheel fine-tunes the master, attach a native
+    // non-passive listener. (Same trick used by Knob/FaderDial.)
+    React.useEffect(() => {
+        const c = canvasRef.current;
+        if (!c) return undefined;
+        const onWheelNative = (e) => {
+            e.preventDefault();
+            ensureSnapshot();
+            const delta = Math.sign(e.deltaY) * -1;
+            const step = (max - min) * 0.05;
+            const nextMaster = Math.max(min, Math.min(max, masterRef.current + (delta * step)));
+            window.__gca_in_master_move = true;
+            const nextVals = applyMaster(nextMaster);
+            onChange(nextVals);
+            window.__gca_in_master_move = false;
+        };
+        c.addEventListener('wheel', onWheelNative, { passive: false });
+        return () => c.removeEventListener('wheel', onWheelNative);
+    }, [masterVal, min, max, childVals, onChange]);
 
     // --- Interaction Handlers ---
     const handlePointerDown = (e) => {
@@ -254,11 +334,13 @@ const GCA = ({ config, value, onChange }) => {
             setInteractionState({ startY: e.clientY, startVal: masterVal });
             canvasRef.current.setPointerCapture(e.pointerId);
         } else {
-            // Clicked on track -> Jump master
+            // Clicked on track -> Jump master (children follow by offset)
+            ensureSnapshot();
             const val = Math.max(min, Math.min(max, getVal(y)));
-            const diff = val - masterVal;
-            const nextVals = childVals.map(v => Math.max(min, Math.min(max, v + diff)));
+            window.__gca_in_master_move = true;
+            const nextVals = applyMaster(val);
             onChange(nextVals);
+            window.__gca_in_master_move = false;
             setDragging({ master: true, child: -1 });
             setInteractionState({ startY: e.clientY, startVal: val });
             canvasRef.current.setPointerCapture(e.pointerId);
@@ -270,9 +352,14 @@ const GCA = ({ config, value, onChange }) => {
             const rect = canvasRef.current.getBoundingClientRect();
             const y = e.clientY - rect.top;
             const currentVal = Math.max(min, Math.min(max, getVal(y)));
-            const diff = currentVal - masterVal;
-            const nextVals = childVals.map(v => Math.max(min, Math.min(max, v + diff)));
+            // Reference behaviour: master is independent state, children =
+            // clamp(master + offsets). Offsets stay frozen during the drag —
+            // a channel that clamps at max/min un-clamps perfectly when the
+            // master returns to its earlier position.
+            window.__gca_in_master_move = true;
+            const nextVals = applyMaster(currentVal);
             onChange(nextVals);
+            window.__gca_in_master_move = false;
         } else if (dragging.child >= 0) {
             const dy = interactionState.startY - e.clientY;
             const pixelRange = height - 40;
@@ -317,7 +404,13 @@ const GCA = ({ config, value, onChange }) => {
             boxShadow: '0 4px 15px rgba(0,0,0,0.3)'
         }}>
             <div className="widget-label" style={{ marginBottom: '10px', fontWeight: 'bold', color: '#dcdcdc', fontSize: '11px' }}>
-                {(config?.label_active?.En || config?.label?.En || "GCA").toUpperCase()}
+                {String(
+                    (config?.label?.active?.text?.En)
+                    || (config?.label_active?.En)
+                    || (config?.label?.En)
+                    || (typeof config?.label === 'string' ? config.label : null)
+                    || "GCA"
+                ).toUpperCase()}
             </div>
             <canvas
                 ref={canvasRef}
@@ -326,7 +419,6 @@ const GCA = ({ config, value, onChange }) => {
                 onPointerDown={handlePointerDown}
                 onPointerMove={handlePointerMove}
                 onPointerUp={handlePointerUp}
-                onWheel={handleWheel}
                 onDoubleClick={handleDoubleClick}
                 style={{ cursor: 'pointer', backgroundColor: '#222', borderRadius: '4px', touchAction: 'none' }}
             />

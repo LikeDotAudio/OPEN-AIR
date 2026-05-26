@@ -58,9 +58,9 @@
   );
   const numBox = { width: 56, background: '#111', color: '#eee', border: '1px solid #333', borderRadius: 3, fontSize: 11, padding: '2px 4px', textAlign: 'right' };
 
-  const Color = ({ label, value, onChange }) => (
+  const Color = ({ label, value, onChange, onLabelClick }) => (
     <div style={row}>
-      <span style={lab} title={label}>{label}</span>
+      <Lab label={label} value={value} onLabelClick={onLabelClick} />
       <input type="color" value={(value || '#000000').slice(0, 7)}
         onChange={(e) => onChange(e.target.value)}
         style={{ width: 30, height: 24, padding: 0, border: '1px solid #333', background: '#111', cursor: 'pointer', borderRadius: 3 }} />
@@ -69,7 +69,7 @@
     </div>
   );
 
-  const Slider = ({ label, value, min, max, step, onChange }) => {
+  const Slider = ({ label, value, min, max, step, onChange, onLabelClick }) => {
     const v = Number(value);
     const safe = Number.isFinite(v) ? v : 0;
     // Heuristic range when none provided.
@@ -81,7 +81,7 @@
     const st = step != null ? step : ((hi - lo) / 100 || 1);
     return (
       <div style={row}>
-        <span style={lab} title={label}>{label}</span>
+        <Lab label={label} value={safe} onLabelClick={onLabelClick} />
         <input type="range" min={lo} max={hi} step={st} value={safe}
           onChange={(e) => onChange(parseFloat(e.target.value))}
           style={{ flex: 1, minWidth: 0, accentColor: A }} />
@@ -92,9 +92,9 @@
     );
   };
 
-  const Toggle = ({ label, value, onChange }) => (
+  const Toggle = ({ label, value, onChange, onLabelClick }) => (
     <div style={row}>
-      <span style={lab} title={label}>{label}</span>
+      <Lab label={label} value={value} onLabelClick={onLabelClick} />
       <button onClick={() => onChange(!value)}
         style={{ width: 42, height: 22, borderRadius: 11, border: '1px solid #444', cursor: 'pointer',
           background: value ? A : '#333', position: 'relative', transition: 'background .15s' }}>
@@ -104,11 +104,11 @@
     </div>
   );
 
-  const Enum = ({ label, value, options, onChange }) => {
+  const Enum = ({ label, value, options, onChange, onLabelClick }) => {
     const list = options.includes(value) ? options : [value, ...options];
     return (
       <div style={row}>
-        <span style={lab} title={label}>{label}</span>
+        <Lab label={label} value={value} onLabelClick={onLabelClick} />
         <select value={value == null ? '' : value} onChange={(e) => onChange(e.target.value)}
           style={{ flex: 1, minWidth: 0, background: '#111', color: '#eee', border: '1px solid #333', borderRadius: 3, fontSize: 11, padding: '3px 4px', cursor: 'pointer' }}>
           {list.map((o) => <option key={String(o)} value={o}>{String(o)}</option>)}
@@ -117,9 +117,9 @@
     );
   };
 
-  const Text = ({ label, value, onChange }) => (
+  const Text = ({ label, value, onChange, onLabelClick }) => (
     <div style={row}>
-      <span style={lab} title={label}>{label}</span>
+      <Lab label={label} value={value} onLabelClick={onLabelClick} />
       <input type="text" value={value == null ? '' : value} onChange={(e) => onChange(e.target.value)}
         style={{ flex: 1, minWidth: 0, background: '#111', color: '#eee', border: '1px solid #333', borderRadius: 3, fontSize: 11, padding: '2px 4px' }} />
     </div>
@@ -140,16 +140,16 @@
   };
 
   // One control, dispatched by value type + key name. `onChange` receives the value.
-  const Auto = ({ label, keyPath, value, onChange }) => {
+  const Auto = ({ label, keyPath, value, onChange, onLabelClick }) => {
     const opts = window.OaEdEnum ? window.OaEdEnum.optionsFor(keyPath) : null;
-    if (typeof value === 'boolean') return <Toggle label={label} value={value} onChange={onChange} />;
-    if (opts && opts.length && typeof value !== 'number') return <Enum label={label} value={value} options={opts} onChange={onChange} />;
-    if (isHex(value) || /colou?r$/i.test(label)) return <Color label={label} value={value} onChange={onChange} />;
-    if (typeof value === 'number') return <Slider label={label} value={value} onChange={onChange} />;
-    return <Text label={label} value={value} onChange={onChange} />;
+    if (typeof value === 'boolean') return <Toggle label={label} value={value} onChange={onChange} onLabelClick={onLabelClick} />;
+    if (opts && opts.length && typeof value !== 'number') return <Enum label={label} value={value} options={opts} onChange={onChange} onLabelClick={onLabelClick} />;
+    if (isHex(value) || /colou?r$/i.test(label)) return <Color label={label} value={value} onChange={onChange} onLabelClick={onLabelClick} />;
+    if (typeof value === 'number') return <Slider label={label} value={value} onChange={onChange} onLabelClick={onLabelClick} />;
+    return <Text label={label} value={value} onChange={onChange} onLabelClick={onLabelClick} />;
   };
 
-  window.OaEdArtisticCtl = { Color, Slider, Toggle, Enum, Text, Section, Auto, isHex, ACCENT: A };
+  window.OaEdArtisticCtl = { Color, Slider, Toggle, Enum, Text, Section, Auto, Lab, isHex, classifyParam, ACCENT: A };
 
   // ---- live preview --------------------------------------------------------
   // Renders the actual widget from its (live-edited) node, like the palette does.
@@ -172,7 +172,7 @@
   const SKIP = new Set(['type', 'id', '_README', '_LEGEND', 'blocks', 'fields', 'options',
     'handler', 'yak_handler', 'AES70', 'identity', 'label', 'description', 'notes', 'column_spacing']);
 
-  const Group = ({ obj, basePath, setProp, depth }) => {
+  const Group = ({ obj, basePath, setProp, depth, onLabelClick }) => {
     const leaves = [], groups = [];
     for (const k of Object.keys(obj || {})) {
       if (SKIP.has(k)) continue;
@@ -184,47 +184,143 @@
     return (
       <>
         {leaves.map(([k, v, path]) => (
-          <Auto key={path} label={k} keyPath={path} value={v} onChange={(nv) => setProp(path, nv)} />
+          <Auto key={path} label={k} keyPath={path} value={v}
+            onChange={(nv) => setProp(path, nv)}
+            onLabelClick={onLabelClick ? (lbl, val) => onLabelClick(lbl, val, path) : undefined} />
         ))}
         {groups.map(([k, v, path]) => (
           <Section key={path} title={k} defaultOpen={depth < 1}>
-            <Group obj={v} basePath={path} setProp={setProp} depth={depth + 1} />
+            <Group obj={v} basePath={path} setProp={setProp} depth={depth + 1} onLabelClick={onLabelClick} />
           </Section>
         ))}
       </>
     );
   };
 
-  window.OaEdArtisticGeneric = ({ store, path, node, type }) => {
+  window.OaEdArtisticGeneric = ({ store, path, node, type, onLabelClick }) => {
     // Full param set: library reference for this type, merged UNDER the instance
     // (instance values win, reference adds the rest) so every supported knob is
     // editable — pre-filled with the library default.
     const ref = (window.OaEdComposite && type) ? window.OaEdComposite.referenceForType(type) : null;
     const merged = ref ? window.OaEdComposite.merge(ref, node) : node;
     const setProp = (dotKey, value) => store.setProp(path, dotKey, value);
-    return <Group obj={merged} basePath="" setProp={setProp} depth={0} />;
+    return <Group obj={merged} basePath="" setProp={setProp} depth={0} onLabelClick={onLabelClick} />;
   };
 
   // Universal transparency control shown for EVERY element (bespoke or generic),
   // so any widget can be made see-through over the panel. Writes the keys the
   // transparency manager (window.OaTransparency) reads.
-  window.OaEdTransparencyControls = ({ store, path, node }) => {
+  window.OaEdTransparencyControls = ({ store, path, node, onLabelClick }) => {
     const ctl = window.OaEdArtisticCtl || {};
     const { Section, Toggle, Slider } = ctl;
     if (!Section || !Toggle || !Slider) return null;
     const getAt = (o, dot) => { let n = o; for (const k of String(dot).split('.')) { if (n == null) return undefined; n = n[k]; } return n; };
     const set = (dot, v) => store.setProp(path, dot, v);
     const op = getAt(node, 'cosmetics.bg_opacity');
+    const lc = (dot) => onLabelClick ? (lbl, val) => onLabelClick(lbl, val, dot) : undefined;
     return (
       <Section title="🫥 Transparency" defaultOpen={false}>
-        <Toggle label="transparent" value={!!getAt(node, 'cosmetics.transparent')} onChange={(v) => set('cosmetics.transparent', v)} />
-        <Slider label="bg opacity" min={0} max={1} step={0.05} value={op != null ? op : 1} onChange={(v) => set('cosmetics.bg_opacity', v)} />
+        <Toggle label="transparent" value={!!getAt(node, 'cosmetics.transparent')} onChange={(v) => set('cosmetics.transparent', v)} onLabelClick={lc('cosmetics.transparent')} />
+        <Slider label="bg opacity" min={0} max={1} step={0.05} value={op != null ? op : 1} onChange={(v) => set('cosmetics.bg_opacity', v)} onLabelClick={lc('cosmetics.bg_opacity')} />
       </Section>
+    );
+  };
+
+  // ---- highlight overlay (click a property label → flash/ruler/colour) -----
+  // Renders absolutely over the preview pane. `kind` decides the shape:
+  //   'color' → big colour bloom + label badge
+  //   'ruler' → top-edge ruler with the value tick called out
+  //   'flash' → pulsing accent border + value badge
+  const HighlightOverlay = ({ highlight }) => {
+    if (!highlight) return null;
+    const { kind, label, value, path, nonce } = highlight;
+    const colour = kind === 'color' && typeof value === 'string' ? value : A;
+    const valTxt = value == null ? '' : (typeof value === 'number' ? Math.round(value * 1000) / 1000 : String(value));
+    const badge = (
+      <div key={`badge-${nonce}`} style={{
+        position: 'absolute', top: 12, left: 12, padding: '6px 10px', borderRadius: 6,
+        background: 'rgba(0,0,0,0.78)', border: `2px solid ${colour}`, color: '#fff',
+        fontSize: 11, fontFamily: 'monospace', letterSpacing: 0.5, pointerEvents: 'none',
+        boxShadow: `0 0 24px ${colour}`, animation: 'oa-hl-pop 0.4s ease-out',
+      }}>
+        <div style={{ color: colour, fontWeight: 'bold', textTransform: 'uppercase', fontSize: 10 }}>
+          {kind === 'color' ? '🎨 colour' : kind === 'ruler' ? '📏 length' : '⚡ property'}
+        </div>
+        <div>{path || label}</div>
+        <div style={{ color: '#aaa' }}>= {valTxt}</div>
+      </div>
+    );
+
+    if (kind === 'color') {
+      return (
+        <div key={`hl-${nonce}`} style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 10 }}>
+          <div style={{ position: 'absolute', inset: 0, border: `4px solid ${colour}`,
+            boxShadow: `inset 0 0 80px ${colour}`, animation: 'oa-hl-flash 1.4s ease-in-out 2' }} />
+          <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
+            width: 96, height: 96, borderRadius: '50%', background: colour, border: '3px solid #fff',
+            boxShadow: '0 8px 32px rgba(0,0,0,0.6)', animation: 'oa-hl-flash 1.4s ease-in-out 2' }} />
+          {badge}
+        </div>
+      );
+    }
+    if (kind === 'ruler') {
+      // Map value visually onto the ruler: if 0-1 use that, else fit value within a 0..max range.
+      const v = Number(value) || 0;
+      const max = v <= 1 ? 1 : (v <= 100 ? 100 : v * 1.2);
+      const pct = Math.max(0, Math.min(1, v / max)) * 100;
+      const ticks = [];
+      for (let i = 0; i <= 10; i++) ticks.push(i * 10);
+      return (
+        <div key={`hl-${nonce}`} style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 10 }}>
+          {/* Top ruler */}
+          <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 28,
+            background: 'rgba(20,20,20,0.92)', borderBottom: `2px solid ${colour}`,
+            animation: 'oa-hl-slide-down 0.3s ease-out' }}>
+            {ticks.map((t) => (
+              <div key={t} style={{ position: 'absolute', left: `${t}%`, top: 0, bottom: 0,
+                borderLeft: '1px solid #666', width: 1 }}>
+                <span style={{ position: 'absolute', top: 2, left: 3, fontSize: 9, color: '#999', fontFamily: 'monospace' }}>{t}</span>
+              </div>
+            ))}
+            {/* The value tick */}
+            <div style={{ position: 'absolute', left: `${pct}%`, top: 0, bottom: -8, width: 2,
+              background: colour, boxShadow: `0 0 8px ${colour}` }} />
+            <div style={{ position: 'absolute', left: `${pct}%`, bottom: -28, transform: 'translateX(-50%)',
+              padding: '2px 6px', background: colour, color: '#000', fontSize: 10, fontWeight: 'bold',
+              fontFamily: 'monospace', borderRadius: 2 }}>{valTxt}</div>
+          </div>
+          {/* Pulsing target ring centred on preview */}
+          <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
+            width: 220, height: 220, border: `3px dashed ${colour}`, borderRadius: '50%',
+            animation: 'oa-hl-pulse 1.2s ease-in-out 2' }} />
+          {badge}
+        </div>
+      );
+    }
+    // 'flash' — generic blink
+    return (
+      <div key={`hl-${nonce}`} style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 10 }}>
+        <div style={{ position: 'absolute', inset: 8, border: `3px solid ${colour}`, borderRadius: 6,
+          animation: 'oa-hl-flash 0.7s ease-in-out 3' }} />
+        <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
+          fontSize: 56, animation: 'oa-hl-pulse 0.8s ease-in-out 2' }}>👇</div>
+        {badge}
+      </div>
     );
   };
 
   // ---- pop-out host (modal) ------------------------------------------------
   const hdrBtn = (extra) => ({ border: '1px solid #444', borderRadius: 4, fontSize: 12, padding: '5px 12px', cursor: 'pointer', fontWeight: 'bold', ...extra });
+
+  // Inject CSS keyframes once.
+  const KEYFRAMES = `
+    @keyframes oa-hl-flash { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+    @keyframes oa-hl-pulse { 0% { transform: translate(-50%, -50%) scale(0.85); opacity: 0; }
+                             40% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+                             100% { transform: translate(-50%, -50%) scale(1.25); opacity: 0; } }
+    @keyframes oa-hl-pop { 0% { transform: translateY(-8px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
+    @keyframes oa-hl-slide-down { from { transform: translateY(-100%); } to { transform: translateY(0); } }
+  `;
 
   window.OaEdArtisticDesigner = ({ store, path, node, type, onClose }) => {
     const Bespoke = (type && window.OaDesignerRegistry[type]) || null;
@@ -232,6 +328,19 @@
     // Snapshot the node ONCE on open so "Abort changes" can revert the session.
     const [original] = React.useState(() => { try { return JSON.parse(JSON.stringify(node)); } catch (e) { return node; } });
     const [msg, setMsg] = React.useState(null);
+
+    // ---- click-to-highlight state ------------------------------------------
+    // A label click sets this; the overlay watches it and auto-clears after 2.5s.
+    const [highlight, setHighlight] = React.useState(null);
+    const hlTimerRef = React.useRef(null);
+    const triggerHighlight = (label, value, pathDot) => {
+      const kind = classifyParam(label, value);
+      if (hlTimerRef.current) clearTimeout(hlTimerRef.current);
+      // Bump a nonce so identical-payload re-clicks still restart the animation.
+      setHighlight({ kind, label, value, path: pathDot, nonce: Date.now() });
+      hlTimerRef.current = setTimeout(() => setHighlight(null), 2500);
+    };
+    React.useEffect(() => () => { if (hlTimerRef.current) clearTimeout(hlTimerRef.current); }, []);
 
     const abort = () => { store.setNode(path, original); onClose && onClose(); };
 
@@ -253,6 +362,7 @@
 
     return (
       <div style={{ position: 'fixed', inset: 0, zIndex: 4000, background: 'rgba(0,0,0,0.78)', display: 'flex', boxSizing: 'border-box' }}>
+        <style>{KEYFRAMES}</style>
         <div style={{ width: '100%', height: '100%', background: '#161616',
           borderTop: `3px solid ${A}`, display: 'flex', flexDirection: 'column', overflow: 'hidden', boxShadow: '0 0 48px #000' }}>
           {/* header */}
@@ -261,6 +371,7 @@
             <span style={{ fontSize: 13, color: '#fff', fontWeight: 'bold' }}>{type}</span>
             <span style={{ fontSize: 10, color: '#666' }}>{Bespoke ? 'bespoke designer' : 'auto-generated from README'}</span>
             <span style={{ flex: 1 }} />
+            <span style={{ fontSize: 10, color: '#888', fontStyle: 'italic' }}>💡 click any property name to flash it in the preview</span>
             {msg && <span style={{ fontSize: 11, color: msg.ok ? '#6c6' : '#f66' }}>{msg.ok ? '✓ ' : '⚠ '}{msg.text}</span>}
             <button onClick={abort} title="Discard all changes made in this session and close"
               style={hdrBtn({ background: '#2a1414', color: '#f88', borderColor: '#a33' })}>⟲ Abort changes</button>
@@ -271,14 +382,15 @@
           </div>
           {/* body: preview | controls */}
           <div style={{ flex: 1, minHeight: 0, display: 'flex' }}>
-            <div style={{ flex: '1 1 55%', minWidth: 0, borderRight: '1px solid #333', background: '#0d0d0d', display: 'flex' }}>
+            <div style={{ flex: '1 1 55%', minWidth: 0, borderRight: '1px solid #333', background: '#0d0d0d', display: 'flex', position: 'relative' }}>
               <Preview nodeKey={nodeKey} node={node} />
+              <HighlightOverlay highlight={highlight} />
             </div>
             <div style={{ flex: '1 1 45%', minWidth: 320, overflow: 'auto', padding: '4px 12px 16px' }}>
-              <window.OaEdTransparencyControls store={store} path={path} node={node} />
+              <window.OaEdTransparencyControls store={store} path={path} node={node} onLabelClick={triggerHighlight} />
               {Bespoke
-                ? <Bespoke store={store} path={path} node={node} type={type} ctl={window.OaEdArtisticCtl} />
-                : <window.OaEdArtisticGeneric store={store} path={path} node={node} type={type} />}
+                ? <Bespoke store={store} path={path} node={node} type={type} ctl={window.OaEdArtisticCtl} onLabelClick={triggerHighlight} />
+                : <window.OaEdArtisticGeneric store={store} path={path} node={node} type={type} onLabelClick={triggerHighlight} />}
             </div>
           </div>
         </div>

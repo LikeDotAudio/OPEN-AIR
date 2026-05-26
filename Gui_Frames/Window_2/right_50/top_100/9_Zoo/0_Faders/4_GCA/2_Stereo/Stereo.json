@@ -2,110 +2,40 @@
   "Zoo_Faders_GCA_Stereo": {
     "type": "OcaBin",
     "id": "50.90.9.0.4.2",
-    "geometry": {
-      "anchor": "NSEW"
-    },
-    "behavior": {
-      "overflow_ns": "auto",
-      "overflow_ew": "auto",
-      "fluid_ew": true
-    },
+    "geometry": { "anchor": "NSEW" },
+    "behavior": { "overflow_ns": "auto", "overflow_ew": "auto", "fluid_ew": true },
     "blocks": {
       "Stereo": {
         "type": "OcaBlock",
         "description": {
-          "En": "Composite Smart-Fader Demos",
-          "Fr": "Composite Smart-Fader Demos",
-          "De": "Composite Smart-Fader Demos",
-          "Es": "Composite Smart-Fader Demos"
+          "En": "GCA — 2-channel Stereo Mix (drag cap to gang both; double-click for micro)",
+          "Fr": "GCA — 2-channel Stereo Mix (drag cap to gang both; double-click for micro)",
+          "De": "GCA — 2-channel Stereo Mix (drag cap to gang both; double-click for micro)",
+          "Es": "GCA — 2-channel Stereo Mix (drag cap to gang both; double-click for micro)"
         },
         "fields": {
-          "composite_stereo": {
-            "type": "_Horizontal_with_dial_Value",
-            "domain": {
-              "min": 0.0,
-              "max": 100.0
-            },
-            "layout": {
-              "width": 60,
-              "height": 550,
-              "alpha": 0.9
-            },
+          "stereo_gca": {
+            "type": "_GCA",
+            "domain": { "min": 0, "max": 100 },
+            "layout": { "width": 100, "height": 420, "alpha": 0.9 },
             "label": {
               "active": {
-                "text": {
-                  "En": "Stereo Mix",
-                  "Fr": "Stereo Mix",
-                  "De": "Stereo Mix",
-                  "Es": "Stereo Mezcla"
-                },
+                "text": { "En": "Stereo Mix", "Fr": "Mix Stéréo", "De": "Stereo-Mix", "Es": "Mezcla Estéreo" },
                 "text_size": 12,
                 "text_color": "#cccccc"
               }
             },
             "num_channels": 2,
             "channels": [
-              {
-                "default": 75.0,
-                "label": {
-                  "En": "Left",
-                  "Fr": "Gauche",
-                  "De": "Links",
-                  "Es": "Izquierda"
-                }
-              },
-              {
-                "default": 75.0,
-                "label": {
-                  "En": "Right",
-                  "Fr": "Droite",
-                  "De": "Rechts",
-                  "Es": "Derecha"
-                }
-              }
+              { "default": 75.0, "label": { "En": "L", "Fr": "G", "De": "L", "Es": "I" } },
+              { "default": 75.0, "label": { "En": "R", "Fr": "D", "De": "R", "Es": "D" } }
             ],
-            "width": 60,
-            "height": 50,
-            "Orientation": "vertical",
-            "path": "Stereo/composite_stereo",
-            "style": {
-              "active": {
-                "text_color": "#1a1a1a",
-                "bg_color": "#000000",
-                "border_color": "#FF9900",
-                "glow_intensity": 1.0,
-                "font_style": "bold",
-                "font_size": null
-              },
-              "inactive": {
-                "text_color": "#888888",
-                "bg_color": "#2b2b2b",
-                "font_style": "normal",
-                "font_size": null,
-                "glow_intensity": 0
-              }
-            }
+            "active_color": "#f4902c",
+            "path": "Stereo/stereo_gca"
           }
         },
         "Orientation": "vertical",
-        "layout": {},
-        "style": {
-          "active": {
-            "text_color": "#1a1a1a",
-            "bg_color": "#000000",
-            "border_color": "#FF9900",
-            "glow_intensity": 1.0,
-            "font_style": "bold",
-            "font_size": null
-          },
-          "inactive": {
-            "text_color": "#888888",
-            "bg_color": "#2b2b2b",
-            "font_style": "normal",
-            "font_size": null,
-            "glow_intensity": 0
-          }
-        }
+        "layout": {}
       }
     }
   }

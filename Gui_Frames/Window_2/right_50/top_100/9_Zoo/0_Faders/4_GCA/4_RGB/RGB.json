@@ -2,73 +2,43 @@
   "Zoo_Faders_GCA_RGB": {
     "type": "OcaBin",
     "id": "50.90.9.0.4.4",
-    "geometry": {
-      "anchor": "NSEW"
-    },
-    "behavior": {
-      "overflow_ns": "auto",
-      "overflow_ew": "auto",
-      "fluid_ew": true
-    },
+    "geometry": { "anchor": "NSEW" },
+    "behavior": { "overflow_ns": "auto", "overflow_ew": "auto", "fluid_ew": true },
     "blocks": {
-      "RGB_Mixer_Demo": {
-        "type": "_Horizontal_with_dial_Value",
-        "domain": {
-          "min": 0,
-          "max": 100
+      "RGB_Mixer": {
+        "type": "OcaBlock",
+        "description": {
+          "En": "GCA — 3-channel RGB Mixer. Master cap shows the mixed colour; double-click to drill into R/G/B individually.",
+          "Fr": "GCA — 3-channel RGB Mixer. Master cap shows the mixed colour; double-click to drill into R/G/B individually.",
+          "De": "GCA — 3-channel RGB Mixer. Master cap shows the mixed colour; double-click to drill into R/G/B individually.",
+          "Es": "GCA — 3-channel RGB Mixer. Master cap shows the mixed colour; double-click to drill into R/G/B individually."
         },
-        "layout": {
-          "width": 120,
-          "height": 650,
-          "alpha": 0.9,
-          "sticky": "nsew"
-        },
-        "label": {
-          "active": {
-            "text": {
-              "En": "RGB Color Mixer",
-              "Fr": "RGB Color Mixer",
-              "De": "RGB Color Mixer",
-              "Es": "RGB Color Mixer"
+        "fields": {
+          "rgb_gca": {
+            "type": "_GCA",
+            "domain": { "min": 0, "max": 100 },
+            "layout": { "width": 140, "height": 380, "alpha": 0.9 },
+            "label": {
+              "active": {
+                "text": { "En": "RGB Mixer", "Fr": "Mélangeur RVB", "De": "RGB-Mixer", "Es": "Mezclador RGB" },
+                "text_size": 12,
+                "text_color": "#cccccc"
+              }
             },
-            "text_size": 12,
-            "text_color": "#cccccc"
+            "is_rgb": true,
+            "num_channels": 3,
+            "channels": [
+              { "default": 80, "label": { "En": "R" } },
+              { "default": 45, "label": { "En": "G" } },
+              { "default": 20, "label": { "En": "B" } }
+            ],
+            "active_color": "#f4902c",
+            "sub_label": "COLOR",
+            "path": "RGB_Mixer/rgb_gca"
           }
         },
-        "is_rgb": true,
-        "num_channels": 3,
-        "channels": [
-          {
-            "default": 100
-          },
-          {
-            "default": 50
-          },
-          {
-            "default": 25
-          }
-        ],
-        "width": 120,
-        "height": 50,
         "Orientation": "vertical",
-        "path": "RGB_Mixer_Demo",
-        "style": {
-          "active": {
-            "text_color": "#1a1a1a",
-            "bg_color": "#000000",
-            "border_color": "#FF9900",
-            "glow_intensity": 1.0,
-            "font_style": "bold",
-            "font_size": null
-          },
-          "inactive": {
-            "text_color": "#888888",
-            "bg_color": "#2b2b2b",
-            "font_style": "normal",
-            "font_size": null,
-            "glow_intensity": 0
-          }
-        }
+        "layout": {}
       }
     }
   }

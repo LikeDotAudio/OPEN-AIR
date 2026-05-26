@@ -137,9 +137,19 @@ window.FieldComponent = ({ nodeName, node: rawNode, path_prefix }) => {
         );
     }
 
-    // _Horizontal_with_dial_Value is the canonical composite. _CompositeFader /
-    // _GCA / GCA are deprecated styles that now render as this one too.
-    if (type.toLowerCase().includes('composite') || type.toLowerCase().includes('dial_value') || type === '_Horizontal_with_dial_Value' || type === '_GCA' || type === 'GCA') {
+    // GCA — Ganged Controlled Array: N parallel channel tracks + master cap.
+    // The reference is oaGuiElements/Core/faders/fader_ganged_controlled_array/index.htm.
+    if (type === '_GCA' || type === 'GCA' || type.toLowerCase().includes('ganged')) {
+        return (
+            <div style={style}>
+                {window.GCA ? <window.GCA value={val} onChange={setVal} config={node} /> : <div style={{width: '200px', height: '400px', background: '#222'}}></div>}
+            </div>
+        );
+    }
+
+    // _Horizontal_with_dial_Value is the canonical horizontal fader with the
+    // value displayed in a dial. Composite/dial-value labels still route here.
+    if (type.toLowerCase().includes('composite') || type.toLowerCase().includes('dial_value') || type === '_Horizontal_with_dial_Value') {
         return (
             <div style={style}>
                 {window.FaderDial ? <window.FaderDial value={val} onChange={setVal} config={node} /> : <div style={{width: '200px', height: '60px', background: '#333'}}></div>}

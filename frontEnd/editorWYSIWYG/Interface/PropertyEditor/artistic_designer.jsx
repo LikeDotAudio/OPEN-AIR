@@ -28,9 +28,34 @@
   const A = '#FF9900';                      // accent
   const isHex = (v) => typeof v === 'string' && /^#([0-9a-f]{3,8})$/i.test(v);
 
+  // What KIND of preview-overlay should clicking a property label trigger?
+  //   'color' — flash the preview with the colour swatch
+  //   'ruler' — overlay a px ruler matched to the value
+  //   'flash' — generic pulsing accent border (everything else)
+  const LEN_RE = /^(width|height|length|thickness|size|radius|offset|padx|pady|pad|gap|spacing|count|cap_scale|teeth|arc_width|sweep|outline_thickness)$/i;
+  const classifyParam = (label, value) => {
+    if (isHex(value) || /colou?r$/i.test(label || '')) return 'color';
+    if (typeof value === 'number' && LEN_RE.test(label || '')) return 'ruler';
+    return 'flash';
+  };
+
   // ---- reusable artistic inputs -------------------------------------------
   const row = { display: 'flex', alignItems: 'center', gap: 8, margin: '5px 0' };
   const lab = { flex: '0 0 38%', fontSize: 11, color: '#bbb', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' };
+
+  // Clickable label wrapper — invokes onLabelClick so the preview pane can
+  // highlight, ruler, or flash the corresponding element.
+  const Lab = ({ label, value, onLabelClick }) => (
+    <span
+      style={{ ...lab, cursor: onLabelClick ? 'pointer' : 'default', userSelect: 'none',
+        textDecoration: onLabelClick ? 'underline dotted transparent' : 'none',
+        textUnderlineOffset: 3, transition: 'color 0.15s, text-decoration-color 0.15s' }}
+      onMouseEnter={(e) => onLabelClick && (e.currentTarget.style.color = A, e.currentTarget.style.textDecorationColor = A)}
+      onMouseLeave={(e) => onLabelClick && (e.currentTarget.style.color = '#bbb', e.currentTarget.style.textDecorationColor = 'transparent')}
+      onClick={onLabelClick ? () => onLabelClick(label, value) : undefined}
+      title={onLabelClick ? `${label} — click to highlight in preview` : label}
+    >{label}</span>
+  );
   const numBox = { width: 56, background: '#111', color: '#eee', border: '1px solid #333', borderRadius: 3, fontSize: 11, padding: '2px 4px', textAlign: 'right' };
 
   const Color = ({ label, value, onChange }) => (

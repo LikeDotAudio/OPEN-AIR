@@ -38,14 +38,21 @@ def calculate_strategy(message):
     topic = message.get("topic")
     source = message["source"]
     logical_source = message.get("logical_source", source)
-    full_id = message.get("full_id")
 
     # --- Loop Prevention: Network Reflection Rejection ---
     # ⚡ V3.1.21 REFLECTION PURGE:
-    # All messages arriving from MQTT that were authored by this instance
+    # All messages arriving from MQTT that were authored by THIS instance
     # must be tagged for IGNORE. They still reach the local Monitor/Firehose
     # via the ingest pipeline but are blocked from re-dispatch.
-    if source == "MQTT" and full_id == app_constants.FULL_INSTANCE_ID:
+    #
+    # IMPORTANT: compare against `src` (the message's claimed source identity,
+    # populated from payload.full_id / payload.origin_source / metadata.src by
+    # the ingest layer) — NOT `full_id`, which is the LOCAL reference and is
+    # always equal to FULL_INSTANCE_ID by construction. Comparing full_id
+    # against itself would (and did) drop every foreign MQTT publish as a
+    # self-reflection, breaking web -> python -> web round-trips.
+    message_src = message.get("src") or message.get("full_id")
+    if source == "MQTT" and message_src == app_constants.FULL_INSTANCE_ID:
         return "IGNORE (REFLECT)"
 
     # --- Dynamic Matrix Routing ---

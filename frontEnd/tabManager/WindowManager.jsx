@@ -151,6 +151,7 @@ const TabContainer = ({ node, path = '' }) => {
 
 const WindowManager = ({ directoryTree }) => {
     const [lang, setLang] = window.useMqttLang();
+    const { connected: mqttConnected, fullId: mqttFullId } = (window.useMqttStatus ? window.useMqttStatus() : { connected: false, fullId: '' });
 
     // WYSIWYG editor open-state. Panels dispatch 'oa-open-wysiwyg' (see Entry.jsx)
     // on right-click; we render the editor overlay inside this tree so it shares
@@ -233,7 +234,33 @@ const WindowManager = ({ directoryTree }) => {
                     </select>
                 </div>
 
-                <div style={{ fontSize: '10px', color: '#0f0', fontWeight: 'bold', letterSpacing: '1px' }}>MQTT ACTIVE</div>
+                {/* Session identity + live MQTT connection state */}
+                <div
+                    title={`Browser session full_id: ${mqttFullId || 'unavailable'}\nClick to copy`}
+                    onClick={() => {
+                        if (mqttFullId && navigator.clipboard) {
+                            navigator.clipboard.writeText(mqttFullId).catch(() => {});
+                        }
+                    }}
+                    style={{
+                        fontSize: '10px',
+                        color: '#888',
+                        fontFamily: 'monospace',
+                        marginRight: '12px',
+                        cursor: 'pointer',
+                        userSelect: 'none',
+                    }}
+                >
+                    ID: {mqttFullId ? mqttFullId.split(':')[0] + ':' + (mqttFullId.split(':')[1] || '') : '—'}
+                </div>
+                <div style={{
+                    fontSize: '10px',
+                    color: mqttConnected ? '#0f0' : '#f55',
+                    fontWeight: 'bold',
+                    letterSpacing: '1px',
+                }}>
+                    {mqttConnected ? 'MQTT ACTIVE' : 'MQTT OFFLINE'}
+                </div>
             </div>
 
             {/* Window Content */}

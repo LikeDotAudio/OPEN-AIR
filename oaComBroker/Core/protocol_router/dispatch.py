@@ -78,9 +78,17 @@ def dispatch_message(message, managers, topic_routing=None, is_active=True):
         return topic
 
     # --- V3.0.0 SELF-FILTER / ECHO REMOVER ---
-    # Acts as a gatekeeper for Output Commands.
-    # It compares the incoming message's 'source' tag against the local module ID.
-    message_source_id = message.get("meta", {}).get("source") or message.get("full_id")
+    # Gatekeeper for Output Commands. Compares the MESSAGE's source identity
+    # (claimed via payload.full_id / src) against the local instance.
+    #
+    # IMPORTANT: do NOT fall back to message["full_id"] for the comparison —
+    # since the V3.1.21 hardening, message["full_id"] is always the local
+    # FULL_INSTANCE_ID by construction (it's the local reference). Use the
+    # 'src' field, which the ingest layer populates from the actual payload.
+    message_source_id = (message.get("src")
+                         or message.get("meta", {}).get("src")
+                         or message.get("meta", {}).get("full_id")
+                         or message.get("meta", {}).get("source"))
 
     if message_source_id == app_constants.FULL_INSTANCE_ID:
         # ⚡ EXCEPTION: MQTT Broadcast (🚀), Cache (💾), and SNMP (Ⓢ) must proceed

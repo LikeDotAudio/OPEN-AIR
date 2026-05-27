@@ -19,6 +19,7 @@ window.MqttProvider = ({ brokerUrl = 'ws://localhost:9001', children }) => {
     const [client, setClient] = React.useState(null);
     const [messages, setMessages] = React.useState({});
     const [lang, setLang] = React.useState('En'); // Default to English
+    const [connected, setConnected] = React.useState(false);
 
     React.useEffect(() => {
         console.log(`📡📥📥 [MQTT] Connecting to broker at ${brokerUrl}`);
@@ -26,7 +27,7 @@ window.MqttProvider = ({ brokerUrl = 'ws://localhost:9001', children }) => {
             console.error("🛑 [ERROR] MQTT.js not loaded.");
             return;
         }
-        
+
         const mqttClient = window.mqtt.connect(brokerUrl, {
             username: 'guest',
             password: 'guest',
@@ -38,13 +39,34 @@ window.MqttProvider = ({ brokerUrl = 'ws://localhost:9001', children }) => {
         mqttClient.on('connect', () => {
             console.log(`📡📥📥 [MQTT] Connected to WebSockets`);
             setClient(mqttClient);
+            setConnected(true);
             mqttClient.subscribe('OpenAir/Gui/#', (err) => {
                 if (!err) console.log(`📡📥📥 [MQTT] Subscribed to OpenAir/Gui/#`);
             });
         });
+        mqttClient.on('reconnect', () => setConnected(false));
+        mqttClient.on('close',     () => setConnected(false));
+        mqttClient.on('offline',   () => setConnected(false));
 
         mqttClient.on('message', (topic, message) => {
             const payload = message.toString();
+            // Debug diagnostic — enable in DevTools console with:
+            //     window.OA_MQTT_DEBUG = true
+            // Logs every incoming MQTT message with src identity so you can
+            // verify Python's broadcasts reach the browser. Set
+            // window.OA_MQTT_FILTER = 'center_freq' (substring) to limit.
+            if (window.OA_MQTT_DEBUG) {
+                const flt = window.OA_MQTT_FILTER;
+                if (!flt || topic.indexOf(flt) >= 0) {
+                    let _src;
+                    try { _src = JSON.parse(payload)?.full_id || JSON.parse(payload)?.origin_source; } catch (e) {}
+                    console.log(`📥 [MQTT-IN] ${topic} | ${payload.slice(0, 120)}${_src ? ` | Src=${_src}` : ''}`);
+                }
+            }
+            // Mirror to window so you can inspect from console:
+            //   window.OA_MQTT_LAST['<topic>']
+            if (!window.OA_MQTT_LAST) window.OA_MQTT_LAST = {};
+            window.OA_MQTT_LAST[topic] = payload;
             setMessages(prev => ({ ...prev, [topic]: payload }));
         });
 
@@ -64,10 +86,18 @@ window.MqttProvider = ({ brokerUrl = 'ws://localhost:9001', children }) => {
     }, [client]);
 
     return (
-        <MqttContext.Provider value={{ client, messages, publish, lang, setLang }}>
+        <MqttContext.Provider value={{ client, messages, publish, lang, setLang, connected, fullId: SESSION_FULL_ID }}>
             {children}
         </MqttContext.Provider>
     );
+};
+
+// Returns { connected, fullId } for the active MQTT session, so UI chrome can
+// show the live connection state and this browser's session identity.
+window.useMqttStatus = () => {
+    const context = React.useContext(MqttContext);
+    if (!context) return { connected: false, fullId: SESSION_FULL_ID };
+    return { connected: context.connected, fullId: context.fullId };
 };
 
 window.useMqttState = (topic, defaultValue, nodeJson) => {
@@ -86,13 +116,24 @@ window.useMqttState = (topic, defaultValue, nodeJson) => {
     // Sync local state when a fresh MQTT message arrives for this topic
     React.useEffect(() => {
         if (messages[topic] !== undefined) {
+            let next;
             try {
                 const parsed = JSON.parse(messages[topic]);
-                setLocalValue(parsed.value !== undefined ? parsed.value : parsed);
+                next = parsed.value !== undefined ? parsed.value : parsed;
             } catch (e) {
                 const num = parseFloat(messages[topic]);
-                setLocalValue(isNaN(num) ? messages[topic] : num);
+                next = isNaN(num) ? messages[topic] : num;
             }
+            // Debug: confirm the effect fires for this widget's topic when
+            // a Python-sourced update arrives. Enable in DevTools console:
+            //     window.OA_MQTT_DEBUG = true
+            if (window.OA_MQTT_DEBUG) {
+                const flt = window.OA_MQTT_FILTER;
+                if (!flt || topic.indexOf(flt) >= 0) {
+                    console.log(`🔄 [useMqttState] ${topic} -> setLocalValue(${JSON.stringify(next)})`);
+                }
+            }
+            setLocalValue(next);
         }
     }, [messages[topic], topic]);
 
